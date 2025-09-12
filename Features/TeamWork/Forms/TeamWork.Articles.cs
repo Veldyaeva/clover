@@ -45,12 +45,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 Task preArchTask = PreArchLoad();
+                Task archTask = ArchLoad();
 
                 // Загружаем основные данные
                 await MyDataArtLoad();
                 await MyDataAnnLoad();
 
-                await preArchTask;
+                await Task.WhenAll(preArchTask, archTask);
 
                 TWGridHelper.sortGridView(normRaszTab);
                 //TWGridHelper.sortGridView(gridViewRaskr);
@@ -172,6 +173,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 bool loadAll = loadAllCheckBox.Checked;
                     //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
                 List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAll);
+
+                // Заполняем текстовый статус для каждой записи
+                if (loadedData != null)
+                {
+                    foreach (var item in loadedData)
+                    {
+                        item.Stat = StatusHelper.GetStatusText(item.Status);
+                    }
+                }
 
                 _myDataAnnList.BulkLoad(loadedData);
             }
@@ -531,6 +541,65 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     MessageBox.Show($"Ошибка загрузки данных предварительного архива: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Загружает данные в архив (gridViewArch) - записи со статусом 3 из artNormNView
+        /// </summary>
+        private async Task ArchLoad()
+        {
+            try
+            {
+                string query = "SELECT * FROM artNormNView WHERE status = 3";
+                List<ArtNormN> archData = await _dbService.GetListAsync<ArtNormN>(query, null);
+
+                if (_archList == null || _archBindingSource == null)
+                {
+                    await _logger.LogErrorAsync(new NullReferenceException("_archList or _archBindingSource is null"), "ArchLoad failed initialization check.");
+                    MessageBox.Show("Ошибка инициализации списка архива.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Заполняем StatusText для каждой записи
+                if (archData != null)
+                {
+                    foreach (var item in archData)
+                    {
+                        item.StatusText = StatusHelper.GetStatusText(item.Status);
+                    }
+                }
+
+                // Загружаем данные в архивный список
+                _archList.BulkLoad(archData ?? new List<ArtNormN>());
+
+                await _logger.LogEventAsync($"Загружено {_archList.Count} записей в архив.", "ArchLoad");
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в архив: {ex.Message}");
+                if (_archList != null && _archBindingSource != null)
+                {
+                    MessageBox.Show($"Ошибка загрузки данных архива: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обновляет данные архива после изменения статусов РТ
+        /// </summary>
+        private async Task RefreshArchData()
+        {
+            try
+            {
+                await ArchLoad();
+                gridControlArch?.RefreshDataSource();
+                await _logger.LogEventAsync("RefreshArchData: Данные архива обновлены", "RefreshData");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при обновлении данных архива");
             }
         }
 

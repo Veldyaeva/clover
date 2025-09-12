@@ -87,9 +87,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             statusLabel = new CustomLabel();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            btnRecalculateNumbers = new CustomSimpleButton();
             customGroupBox2 = new CustomGroupBox();
             buffer = new CustomButton();
             textBoxBuffer = new System.Windows.Forms.RichTextBox();
+            btnValidateNumbers = new CustomSimpleButton();
             customGroupBox1 = new CustomGroupBox();
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             textBoxReco = new System.Windows.Forms.RichTextBox();
@@ -98,13 +100,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             constructorComboBox = new DevExpress.XtraEditors.LookUpEdit();
             customLabel1 = new CustomLabel();
             label5 = new CustomLabel();
-            btnCancel = new CustomSimpleButton();
-            btnSave = new CustomSimpleButton();
-            btnOK = new CustomSimpleButton();
-            btnMoveUp = new CustomSimpleButton();
-            btnMoveDown = new CustomSimpleButton();
-            btnRecalculateNumbers = new CustomSimpleButton();
-            btnValidateNumbers = new CustomSimpleButton();
             customLabel2 = new CustomLabel();
             dateCreate = new CustomDateTimePicker();
             groupTextBox = new CustomTextBox();
@@ -118,7 +113,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             textBoxKomment = new System.Windows.Forms.RichTextBox();
             customLabel5 = new CustomLabel();
             btnOK = new CustomSimpleButton();
+            btnMoveUp = new CustomSimpleButton();
             btnCancel = new CustomSimpleButton();
+            btnMoveDown = new CustomSimpleButton();
             btnSave = new CustomSimpleButton();
             normdopobrBindingSource = new System.Windows.Forms.BindingSource(components);
             constructorBindingSource = new System.Windows.Forms.BindingSource(components);
@@ -277,7 +274,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewKont.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewKont.OptionsBehavior.EditingMode = GridEditingMode.Inplace;
             gridViewKont.OptionsEditForm.PopupEditFormWidth = 933;
-            gridViewKont.OptionsSelection.EnableAppearanceHideSelection = false;
             gridViewKont.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
             gridViewKont.OptionsView.ShowGroupPanel = false;
             gridViewKont.PopupMenuShowing += gridViewKont_PopupMenuShowing;
@@ -406,7 +402,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
-            gridViewRasz.OptionsSelection.EnableAppearanceHideSelection = false;
             gridViewRasz.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
             gridViewRasz.OptionsView.ShowErrorPanel = DevExpress.Utils.DefaultBoolean.True;
@@ -802,357 +797,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             colannId1.ImageOptions.ImageKey = resources.GetString("colannId1.ImageOptions.ImageKey");
             colannId1.MinWidth = 23;
             colannId1.Name = "colannId1";
-            colannId1.Width = 86;
-            // 
-            // btnCancel
-            // 
-            btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnCancel.Appearance.Options.UseBackColor = true;
-            btnCancel.Appearance.Options.UseFont = true;
-            btnCancel.Appearance.Options.UseForeColor = true;
-            btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnCancel.AppearanceDisabled.Options.UseBackColor = true;
-            btnCancel.AppearanceDisabled.Options.UseForeColor = true;
-            btnCancel.Location = new System.Drawing.Point(161, 90);
-            btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(119, 24);
-            btnCancel.TabIndex = 24;
-            btnCancel.Text = "Сброс изменений";
-            btnCancel.Click += btnCancel_Click;
-            // 
-            // btnSave
-            // 
-            btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnSave.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnSave.Appearance.Options.UseBackColor = true;
-            btnSave.Appearance.Options.UseFont = true;
-            btnSave.Appearance.Options.UseForeColor = true;
-            btnSave.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnSave.AppearanceDisabled.Options.UseBackColor = true;
-            btnSave.AppearanceDisabled.Options.UseForeColor = true;
-            btnSave.Location = new System.Drawing.Point(4, 58);
-            btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(85, 26);
-            btnSave.TabIndex = 25;
-            btnSave.Text = "Сохранить";
-            btnSave.Visible = false;
-            btnSave.Click += btnSave_Click;
-            // 
-            // btnOK
-            // 
-            btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnOK.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnOK.Appearance.Options.UseBackColor = true;
-            btnOK.Appearance.Options.UseFont = true;
-            btnOK.Appearance.Options.UseForeColor = true;
-            btnOK.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnOK.AppearanceDisabled.Options.UseBackColor = true;
-            btnOK.AppearanceDisabled.Options.UseForeColor = true;
-            tableLayoutPanel4.SetColumnSpan(btnOK, 2);
-            btnOK.Location = new System.Drawing.Point(4, 90);
-            btnOK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnOK.Name = "btnOK";
-            btnOK.Size = new System.Drawing.Size(149, 24);
-            btnOK.TabIndex = 26;
-            btnOK.Text = "Сохранить+закрыть";
-            btnOK.Click += btnOK_Click;
-            // 
-            // btnMoveUp
-            // 
-            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnMoveUp.Appearance.Font = new System.Drawing.Font("Arial", 15F);
-            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnMoveUp.Appearance.Options.UseBackColor = true;
-            btnMoveUp.Appearance.Options.UseFont = true;
-            btnMoveUp.Appearance.Options.UseForeColor = true;
-            btnMoveUp.Location = new System.Drawing.Point(97, 3);
-            btnMoveUp.Name = "btnMoveUp";
-            btnMoveUp.Size = new System.Drawing.Size(57, 16);
-            btnMoveUp.TabIndex = 101;
-            btnMoveUp.Text = "↑ Вверх";
-            btnMoveUp.Click += btnMoveUp_Click;
-            // 
-            // btnMoveDown
-            // 
-            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnMoveDown.Appearance.Font = new System.Drawing.Font("Arial", 15F);
-            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnMoveDown.Appearance.Options.UseBackColor = true;
-            btnMoveDown.Appearance.Options.UseFont = true;
-            btnMoveDown.Appearance.Options.UseForeColor = true;
-            btnMoveDown.Location = new System.Drawing.Point(97, 30);
-            btnMoveDown.Name = "btnMoveDown";
-            btnMoveDown.Size = new System.Drawing.Size(57, 19);
-            btnMoveDown.TabIndex = 102;
-            btnMoveDown.Text = "↓ Вниз";
-            btnMoveDown.Click += btnMoveDown_Click;
-            // 
-            // btnRecalculateNumbers
-            // 
-            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
-            btnRecalculateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 15F);
-            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
-            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
-            btnRecalculateNumbers.Appearance.Options.UseFont = true;
-            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
-            btnRecalculateNumbers.Location = new System.Drawing.Point(160, 30);
-            btnRecalculateNumbers.Name = "btnRecalculateNumbers";
-            btnRecalculateNumbers.Size = new System.Drawing.Size(121, 22);
-            btnRecalculateNumbers.TabIndex = 103;
-            btnRecalculateNumbers.Text = "Обновить нумерацию";
-            btnRecalculateNumbers.Click += btnRecalculateNumbers_Click;
-            // 
-            // btnValidateNumbers
-            // 
-            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
-            btnValidateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 15F);
-            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
-            btnValidateNumbers.Appearance.Options.UseBackColor = true;
-            btnValidateNumbers.Appearance.Options.UseFont = true;
-            btnValidateNumbers.Appearance.Options.UseForeColor = true;
-            btnValidateNumbers.Location = new System.Drawing.Point(160, 3);
-            btnValidateNumbers.Name = "btnValidateNumbers";
-            btnValidateNumbers.Size = new System.Drawing.Size(121, 21);
-            btnValidateNumbers.TabIndex = 104;
-            btnValidateNumbers.Text = "Проверить нумерацию";
-            btnValidateNumbers.Click += btnValidateNumbers_Click;
-            // 
-            // customLabel2
-            // 
-            customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customLabel2.AutoSize = true;
-            tableLayoutPanel5.SetColumnSpan(customLabel2, 2);
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel2.Location = new System.Drawing.Point(4, 464);
-            customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(87, 16);
-            customLabel2.TabIndex = 15;
-            customLabel2.Text = "конструктор";
-            // 
-            // modelTextBox
-            // 
-            modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(modelTextBox, 3);
-            modelTextBox.Enabled = false;
-            modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            modelTextBox.Location = new System.Drawing.Point(4, 138);
-            modelTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            modelTextBox.Name = "modelTextBox";
-            modelTextBox.Size = new System.Drawing.Size(260, 23);
-            modelTextBox.TabIndex = 4;
-            // 
-            // nameTextBox
-            // 
-            nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(nameTextBox, 3);
-            nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            nameTextBox.Location = new System.Drawing.Point(4, 192);
-            nameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new System.Drawing.Size(235, 23);
-            nameTextBox.TabIndex = 5;
-            // 
-            // label5
-            // 
-            label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            label5.AutoSize = true;
-            tableLayoutPanel5.SetColumnSpan(label5, 2);
-            label5.Font = new System.Drawing.Font("Arial", 10F);
-            label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label5.Location = new System.Drawing.Point(4, 5);
-            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(103, 16);
-            label5.TabIndex = 3;
-            label5.Text = "дата создания";
-            // 
-            // dateCreate
-            // 
-            dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(dateCreate, 3);
-            dateCreate.Font = new System.Drawing.Font("Arial", 10F);
-            dateCreate.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            dateCreate.Location = new System.Drawing.Point(4, 30);
-            dateCreate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dateCreate.Name = "dateCreate";
-            dateCreate.ObjectName = null;
-            dateCreate.Size = new System.Drawing.Size(260, 23);
-            dateCreate.TabIndex = 7;
-            // 
-            // label4
-            // 
-            label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            label4.AutoSize = true;
-            tableLayoutPanel5.SetColumnSpan(label4, 3);
-            label4.Font = new System.Drawing.Font("Arial", 10F);
-            label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label4.Location = new System.Drawing.Point(4, 410);
-            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(178, 16);
-            label4.TabIndex = 2;
-            label4.Text = "итоговые сек. по изделию";
-            // 
-            // secTimeTextBox
-            // 
-            secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            secTimeTextBox.Location = new System.Drawing.Point(4, 435);
-            secTimeTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            secTimeTextBox.Name = "secTimeTextBox";
-            secTimeTextBox.ReadOnly = true;
-            secTimeTextBox.Size = new System.Drawing.Size(68, 23);
-            secTimeTextBox.TabIndex = 6;
-            // 
-            // groupTextBox
-            // 
-            groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(groupTextBox, 3);
-            groupTextBox.Enabled = false;
-            groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            groupTextBox.Location = new System.Drawing.Point(4, 84);
-            groupTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupTextBox.Name = "groupTextBox";
-            groupTextBox.Size = new System.Drawing.Size(260, 23);
-            groupTextBox.TabIndex = 19;
-            // 
-            // customLabel3
-            // 
-            customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customLabel3.AutoSize = true;
-            tableLayoutPanel5.SetColumnSpan(customLabel3, 2);
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel3.Location = new System.Drawing.Point(4, 59);
-            customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(51, 16);
-            customLabel3.TabIndex = 18;
-            customLabel3.Text = "группа";
-            customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // label3
-            // 
-            label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            label3.AutoSize = true;
-            tableLayoutPanel5.SetColumnSpan(label3, 2);
-            label3.Font = new System.Drawing.Font("Arial", 10F);
-            label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label3.Location = new System.Drawing.Point(4, 167);
-            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(59, 16);
-            label3.TabIndex = 1;
-            label3.Text = "артикул";
-            // 
-            // label2
-            // 
-            label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            label2.AutoSize = true;
-            tableLayoutPanel5.SetColumnSpan(label2, 2);
-            label2.Font = new System.Drawing.Font("Arial", 10F);
-            label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label2.Location = new System.Drawing.Point(4, 113);
-            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(57, 16);
-            label2.TabIndex = 0;
-            label2.Text = "модель";
-            // 
-            // customLabel1
-            // 
-            customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customLabel1.AutoSize = true;
-            tableLayoutPanel5.SetColumnSpan(customLabel1, 2);
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel1.Location = new System.Drawing.Point(4, 518);
-            customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(69, 16);
-            customLabel1.TabIndex = 14;
-            customLabel1.Text = "дизайнер";
-            // 
-            // constructorComboBox
-            // 
-            tableLayoutPanel5.SetColumnSpan(constructorComboBox, 3);
-            constructorComboBox.Location = new System.Drawing.Point(4, 489);
-            constructorComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            constructorComboBox.Name = "constructorComboBox";
-            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            constructorComboBox.Size = new System.Drawing.Size(260, 20);
-            constructorComboBox.TabIndex = 21;
-            constructorComboBox.TabIndexChanged += ComboBox_SelectedIndexChanged;
-            // 
-            // designerComboBox
-            // 
-            tableLayoutPanel5.SetColumnSpan(designerComboBox, 3);
-            designerComboBox.Location = new System.Drawing.Point(4, 543);
-            designerComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            designerComboBox.Name = "designerComboBox";
-            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            designerComboBox.Size = new System.Drawing.Size(260, 20);
-            designerComboBox.TabIndex = 22;
-            // 
-            // rasz
-            // 
-            rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            rasz.Font = new System.Drawing.Font("Arial", 10F);
-            rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            rasz.Location = new System.Drawing.Point(0, 0);
-            rasz.Name = "rasz";
-            rasz.Size = new System.Drawing.Size(75, 25);
-            rasz.TabIndex = 0;
-            rasz.UseVisualStyleBackColor = false;
-            // 
-            // customButton2
-            // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButton2.Location = new System.Drawing.Point(0, 0);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(75, 25);
-            customButton2.TabIndex = 0;
-            customButton2.UseVisualStyleBackColor = false;
-            // 
-            // errorProvider1
-            // 
-            errorProvider1.ContainerControl = this;
-            // 
-            // tableLayoutPanel3
-            // 
-            tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 292F));
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 1, 2);
-            tableLayoutPanel3.Controls.Add(statusLabel, 1, 1);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 2);
-            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 3;
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel3.Size = new System.Drawing.Size(1509, 869);
-            tableLayoutPanel3.TabIndex = 4;
             // 
             // statusLabel
             // 
@@ -1165,10 +809,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // tableLayoutPanel4
             // 
-            tableLayoutPanel4.ColumnCount = 3;
-            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
-            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            resources.ApplyResources(tableLayoutPanel4, "tableLayoutPanel4");
             tableLayoutPanel4.Controls.Add(btnRecalculateNumbers, 2, 1);
             tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 5);
             tableLayoutPanel4.Controls.Add(btnValidateNumbers, 2, 0);
@@ -1176,20 +817,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel4.Controls.Add(btnOK, 0, 3);
             tableLayoutPanel4.Controls.Add(btnMoveUp, 1, 0);
             tableLayoutPanel4.Controls.Add(btnCancel, 2, 3);
-            tableLayoutPanel4.Controls.Add(btnSave, 0, 2);
             tableLayoutPanel4.Controls.Add(btnMoveDown, 1, 1);
-            tableLayoutPanel4.Location = new System.Drawing.Point(4, 46);
-            tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            errorProvider1.SetError(tableLayoutPanel4, resources.GetString("tableLayoutPanel4.Error"));
+            errorProvider1.SetIconAlignment(tableLayoutPanel4, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel4.IconAlignment"));
+            errorProvider1.SetIconPadding(tableLayoutPanel4, (int)resources.GetObject("tableLayoutPanel4.IconPadding"));
             tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 6;
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.23104F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.76896F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 342F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(284, 997);
-            tableLayoutPanel4.TabIndex = 4;
+            // 
+            // btnRecalculateNumbers
+            // 
+            resources.ApplyResources(btnRecalculateNumbers, "btnRecalculateNumbers");
+            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
+            btnRecalculateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnRecalculateNumbers.Appearance.Font");
+            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
+            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
+            btnRecalculateNumbers.Appearance.Options.UseFont = true;
+            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetError(btnRecalculateNumbers, resources.GetString("btnRecalculateNumbers.Error"));
+            errorProvider1.SetIconAlignment(btnRecalculateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnRecalculateNumbers.IconAlignment"));
+            errorProvider1.SetIconPadding(btnRecalculateNumbers, (int)resources.GetObject("btnRecalculateNumbers.IconPadding"));
+            btnRecalculateNumbers.ImageOptions.ImageKey = resources.GetString("btnRecalculateNumbers.ImageOptions.ImageKey");
+            btnRecalculateNumbers.Name = "btnRecalculateNumbers";
+            btnRecalculateNumbers.Click += btnRecalculateNumbers_Click;
             // 
             // customGroupBox2
             // 
@@ -1223,6 +871,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1.SetIconAlignment(textBoxBuffer, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("textBoxBuffer.IconAlignment"));
             errorProvider1.SetIconPadding(textBoxBuffer, (int)resources.GetObject("textBoxBuffer.IconPadding"));
             textBoxBuffer.Name = "textBoxBuffer";
+            // 
+            // btnValidateNumbers
+            // 
+            resources.ApplyResources(btnValidateNumbers, "btnValidateNumbers");
+            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
+            btnValidateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnValidateNumbers.Appearance.Font");
+            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
+            btnValidateNumbers.Appearance.Options.UseBackColor = true;
+            btnValidateNumbers.Appearance.Options.UseFont = true;
+            btnValidateNumbers.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetError(btnValidateNumbers, resources.GetString("btnValidateNumbers.Error"));
+            errorProvider1.SetIconAlignment(btnValidateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnValidateNumbers.IconAlignment"));
+            errorProvider1.SetIconPadding(btnValidateNumbers, (int)resources.GetObject("btnValidateNumbers.IconPadding"));
+            btnValidateNumbers.ImageOptions.ImageKey = resources.GetString("btnValidateNumbers.ImageOptions.ImageKey");
+            btnValidateNumbers.Name = "btnValidateNumbers";
+            btnValidateNumbers.Click += btnValidateNumbers_Click;
             // 
             // customGroupBox1
             // 
@@ -1261,32 +925,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1.SetIconAlignment(tableLayoutPanel5, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel5.IconAlignment"));
             errorProvider1.SetIconPadding(tableLayoutPanel5, (int)resources.GetObject("tableLayoutPanel5.IconPadding"));
             tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 21;
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(268, 498);
-            tableLayoutPanel5.TabIndex = 24;
             // 
             // textBoxReco
             // 
@@ -1316,7 +954,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1.SetIconAlignment(designerComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("designerComboBox.IconAlignment"));
             errorProvider1.SetIconPadding(designerComboBox, (int)resources.GetObject("designerComboBox.IconPadding"));
             designerComboBox.Name = "designerComboBox";
-            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons")) });
+            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons1")) });
             // 
             // constructorComboBox
             // 
@@ -1326,7 +964,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
             errorProvider1.SetIconPadding(constructorComboBox, (int)resources.GetObject("constructorComboBox.IconPadding"));
             constructorComboBox.Name = "constructorComboBox";
-            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")) });
+            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons1")) });
             constructorComboBox.TabIndexChanged += ComboBox_SelectedIndexChanged;
             // 
             // customLabel1
@@ -1497,6 +1135,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnOK.Name = "btnOK";
             btnOK.Click += btnOK_Click;
             // 
+            // btnMoveUp
+            // 
+            resources.ApplyResources(btnMoveUp, "btnMoveUp");
+            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveUp.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveUp.Appearance.Font");
+            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveUp.Appearance.Options.UseBackColor = true;
+            btnMoveUp.Appearance.Options.UseFont = true;
+            btnMoveUp.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetError(btnMoveUp, resources.GetString("btnMoveUp.Error"));
+            errorProvider1.SetIconAlignment(btnMoveUp, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveUp.IconAlignment"));
+            errorProvider1.SetIconPadding(btnMoveUp, (int)resources.GetObject("btnMoveUp.IconPadding"));
+            btnMoveUp.ImageOptions.ImageKey = resources.GetString("btnMoveUp.ImageOptions.ImageKey");
+            btnMoveUp.Name = "btnMoveUp";
+            btnMoveUp.Click += btnMoveUp_Click;
+            // 
             // btnCancel
             // 
             resources.ApplyResources(btnCancel, "btnCancel");
@@ -1516,6 +1170,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnCancel.ImageOptions.ImageKey = resources.GetString("btnCancel.ImageOptions.ImageKey");
             btnCancel.Name = "btnCancel";
             btnCancel.Click += btnCancel_Click;
+            // 
+            // btnMoveDown
+            // 
+            resources.ApplyResources(btnMoveDown, "btnMoveDown");
+            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveDown.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveDown.Appearance.Font");
+            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveDown.Appearance.Options.UseBackColor = true;
+            btnMoveDown.Appearance.Options.UseFont = true;
+            btnMoveDown.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetError(btnMoveDown, resources.GetString("btnMoveDown.Error"));
+            errorProvider1.SetIconAlignment(btnMoveDown, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveDown.IconAlignment"));
+            errorProvider1.SetIconPadding(btnMoveDown, (int)resources.GetObject("btnMoveDown.IconPadding"));
+            btnMoveDown.ImageOptions.ImageKey = resources.GetString("btnMoveDown.ImageOptions.ImageKey");
+            btnMoveDown.Name = "btnMoveDown";
+            btnMoveDown.Click += btnMoveDown_Click;
             // 
             // btnSave
             // 

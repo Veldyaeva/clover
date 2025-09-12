@@ -166,7 +166,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 // Проверяем текущий режим работы
-                bool isKitMode = kitModeRadio?.Checked == true;
+                bool isKitMode = toggleSwitchKit.IsOn;
                 
                 int[] selectedRows = ANNgridView.GetSelectedRows();
                 if (selectedRows == null || selectedRows.Length == 0)
@@ -402,6 +402,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обновляем данные в gridView_wdToBind
                 if (wdToBindResults != null && wdToBindResults.Any())
                 {
+                    // Заполняем текстовый статус для каждой записи
+                    foreach (var item in wdToBindResults)
+                    {
+                        item.Stat = StatusHelper.GetStatusText(item.Status);
+                    }
+                    
                     _myDataAnnList.Clear();
                     _myDataAnnList.BulkLoad(wdToBindResults);
                     
@@ -609,15 +615,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 if (!Editing) //если можно редактировать
                 //Проверяем статус "актуальный" и наличие даты обновления
-                //if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
-                //{
-                //    MessageBox.Show(
-                //        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
-                //        "Ограничение редактирования",
-                //        MessageBoxButtons.OK,
-                //        MessageBoxIcon.Information);
-                //    return;
-                //}
+                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                {
+                    MessageBox.Show(
+                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                        "Ограничение редактирования",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
                 var updatedArtNormN = new ArtNormN();
                 
                 // Используем новый метод для открытия формы не в модальном режиме
@@ -959,6 +965,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _myDataAnnList.Clear();
                 if (list != null)
                 {
+                    // Заполняем текстовый статус для каждой записи
+                    foreach (var item in list)
+                    {
+                        item.Stat = StatusHelper.GetStatusText(item.Status);
+                    }
+                    
                     _myDataAnnList.RaiseListChangedEvents = false;
                     foreach (var item in list)
                     {

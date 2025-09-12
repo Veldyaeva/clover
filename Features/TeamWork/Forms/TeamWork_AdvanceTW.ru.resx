@@ -379,4 +379,77 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 355</value>
+  </data>
+  <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 570</value>
+  </data>
+  <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1480, 346</value>
+  </data>
+  <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 355</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1488, 824</value>
+  </data>
+  <data name="btnRecalculateNumbers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 22</value>
+  </data>
+  <data name="btnRecalculateNumbers.Text" xml:space="preserve">
+    <value>Обновить нумерацию</value>
+  </data>
+  <data name="customGroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 484</value>
+  </data>
+  <data name="btnValidateNumbers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="btnValidateNumbers.Text" xml:space="preserve">
+    <value>Проверить нумерацию</value>
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 338</value>
+  </data>
+  <data name="customGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 118</value>
+  </data>
+  <data name="customGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 360</value>
+  </data>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 90</value>
+  </data>
+  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="btnMoveUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 16</value>
+  </data>
+  <data name="btnMoveUp.Text" xml:space="preserve">
+    <value>↑ Вверх</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 90</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 22</value>
+  </data>
+  <data name="btnMoveDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 19</value>
+  </data>
+  <data name="btnMoveDown.Text" xml:space="preserve">
+    <value>↓ Вниз</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 824</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
 </root>

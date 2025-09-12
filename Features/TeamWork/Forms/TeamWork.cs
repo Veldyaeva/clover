@@ -69,6 +69,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         private List<FioModel> fioList;
         private BindingList<MyDataANN> _preArchList;
         private BindingSource _preArchBindingSource;
+        private BindingList<ArtNormN> _archList;
+        private BindingSource _archBindingSource;
         private BindingList<MyDataART> _myDataArtList;
         private BindingSource _myDataArtBindingSource;
         private BindingList<MyDataANN> _myDataAnnList;
@@ -118,6 +120,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             _preArchList = new BindingList<MyDataANN>();
             _preArchBindingSource = new BindingSource { DataSource = _preArchList };
             if (gridControlPreArch != null) gridControlPreArch.DataSource = _preArchBindingSource;
+
+            _archList = new BindingList<ArtNormN>();
+            _archBindingSource = new BindingSource { DataSource = _archList };
+            if (gridControlArch != null) gridControlArch.DataSource = _archBindingSource;
 
             _nzpListArt = new BindingList<NZPByKoddRt>();
             _nzpByKoddRtSourceArt = new BindingSource { DataSource = _nzpListArt };
@@ -363,20 +369,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             GridColumn colDateUpdate = ANNgridView.Columns["dateUpdate"];
             if (colDateUpdate != null)
             {
-            // Устанавливаем формат отображения даты без времени
-            colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
+                // Устанавливаем формат отображения даты без времени
+                colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
 
-            ANNgridView.CustomRowCellEdit += (s, e) =>
-            {
-                if (e.Column == colDateUpdate)
+                ANNgridView.CustomRowCellEdit += (s, e) =>
                 {
-                    var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
-                    if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
-                        e.RepositoryItem = commandsEditDateNull;
-                    else e.RepositoryItem = commandsEditDateText;
-                }
-            };
+                    if (e.Column == colDateUpdate)
+                    {
+                        var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
+                        if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
+                            e.RepositoryItem = commandsEditDateNull;
+                        else e.RepositoryItem = commandsEditDateText;
+                    }
+                };
             }
         }
 
@@ -823,6 +829,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
 
                 case "xtraTabPageArticles":
+                    // Загружаем данные для вкладки артикулов
                     await CurrentWorks_Load();
                     break;
 
@@ -1379,6 +1386,187 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 6:
                     loadAllCheckBox_CheckedChanged_Internal(sender, e);
                     break;
+            }
+        }
+
+        /// <summary>
+        /// Обработчик нажатия кнопок в группе архива (layoutControlGroup19)
+        /// </summary>
+        private async void layoutControlGroup19_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    await RestoreFromArchive_Internal(sender, e); // Вернуть в актуальные
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает выбранные записи из архива в актуальные (изменяет статус с 3 на 2)
+        /// </summary>
+        private async Task RestoreFromArchive_Internal(object sender, EventArgs e)
+        {
+            try
+            {
+                // Находим gridViewArch
+                GridView archiveGridView = null;
+                if (gridControlArch?.MainView is GridView archView)
+                {
+                    archiveGridView = archView;
+                }
+
+                if (archiveGridView == null)
+                {
+                    MessageBox.Show("Грид архива не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Получаем выбранные строки
+                var selectedRowHandles = archiveGridView.GetSelectedRows();
+
+                // Если нет выбранных строк, берем текущую строку
+                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
+                {
+                    if (archiveGridView.FocusedRowHandle < 0)
+                    {
+                        MessageBox.Show("Выберите записи для восстановления из архива.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    selectedRowHandles = new int[] { archiveGridView.FocusedRowHandle };
+                }
+
+                var selectedItems = new List<ArtNormN>();
+
+                // Собираем данные выбранных строк
+                foreach (int rowHandle in selectedRowHandles)
+                {
+                    if (rowHandle >= 0)
+                    {
+                        var item = archiveGridView.GetRow(rowHandle) as ArtNormN;
+                        if (item != null)
+                        {
+                            selectedItems.Add(item);
+                        }
+                    }
+                }
+
+                if (selectedItems.Count == 0)
+                {
+                    MessageBox.Show("Не найдено записей для восстановления из архива.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Подтверждение операции
+                string message = selectedItems.Count == 1
+                    ? $"Восстановить запись из архива:\n{selectedItems[0].Articul} - {selectedItems[0].Mod}?"
+                    : $"Восстановить {selectedItems.Count} записей из архива?";
+
+                var result = MessageBox.Show(
+                    message,
+                    "Подтверждение восстановления из архива",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result != DialogResult.Yes)
+                    return;
+
+                // Обновляем статус для каждой выбранной записи
+                int successCount = 0;
+                var errors = new List<string>();
+
+                archiveGridView.BeginUpdate();
+                try
+                {
+                    foreach (var item in selectedItems)
+                    {
+                        try
+                        {
+                            // Проверяем, что запись можно восстановить
+                            if (item.Status != (int)Status.Archive)
+                            {
+                                await _logger.LogEventAsync($"Запись AnnID: {item.AnnID} не находится в архиве (статус: {item.Status})", "RestoreFromArchive");
+                                continue;
+                            }
+
+                            // Обновляем статус в базе данных с 3 (архив) на 2 (актуальное)
+                            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", (int)Status.Preliminary, TableNames.AnnId, item.AnnID);
+
+                            // Обновляем объект в памяти
+                            item.Status = (int)Status.Preliminary;
+                            item.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
+
+                            // Обновляем строку в гриде
+                            int rowHandle = archiveGridView.LocateByValue("AnnID", item.AnnID);
+                            if (rowHandle >= 0)
+                            {
+                                archiveGridView.RefreshRow(rowHandle);
+                            }
+
+                            successCount++;
+                            await _logger.LogEventAsync($"Статус записи AnnID: {item.AnnID} изменен с 'Архивное' на 'Актуальное'", "RestoreFromArchive");
+                        }
+                        catch (Exception ex)
+                        {
+                            string errorMsg = $"AnnID: {item.AnnID} - {ex.Message}";
+                            errors.Add(errorMsg);
+                            await _logger.LogErrorAsync(ex, $"Ошибка при восстановлении записи из архива AnnID: {item.AnnID}");
+                        }
+                    }
+                }
+                finally
+                {
+                    archiveGridView.EndUpdate();
+                }
+
+                // Обновляем привязку данных и удаляем восстановленные записи из архива
+                if (_archBindingSource != null && _archList != null)
+                {
+                    // Удаляем восстановленные записи из списка архива
+                    foreach (var item in selectedItems.Where(i => i.Status == (int)Status.Preliminary))
+                    {
+                        _archList.Remove(item);
+                    }
+                    _archBindingSource.ResetBindings(false);
+                }
+
+                // Обновляем основной грид с разделениями труда
+                if (_bindingSource != null && _bindingList != null)
+                {
+                    // Добавляем восстановленные записи в основной список
+                    foreach (var item in selectedItems.Where(i => i.Status == (int)Status.Preliminary))
+                    {
+                        if (!_bindingList.Any(b => b.AnnID == item.AnnID))
+                        {
+                            _bindingList.Add(item);
+                        }
+                    }
+                    _bindingSource.ResetBindings(false);
+                    ANNgridControl?.RefreshDataSource();
+                }
+
+                // Показываем результат операции
+                if (errors.Count == 0)
+                {
+                    string successMessage = successCount == 1
+                        ? "Запись успешно восстановлена из архива."
+                        : $"Успешно восстановлено {successCount} записей из архива.";
+
+                    MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    string errorMessage = $"Восстановлено: {successCount} записей.\nОшибки:\n" + string.Join("\n", errors);
+                    MessageBox.Show(errorMessage, "Результат восстановления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при выполнении восстановления записей из архива");
+                MessageBox.Show($"Ошибка при восстановлении из архива: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2457,6 +2645,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var allWorks = await LoadWorksbyArt("");
                     if (allWorks != null)
                     {
+                        // Заполняем текстовый статус для каждой записи
+                        foreach (var item in allWorks)
+                        {
+                            item.Stat = StatusHelper.GetStatusText(item.Status);
+                        }
+
                         _myDataAnnList.Clear();
                         _myDataAnnList.RaiseListChangedEvents = false;
                         foreach (var item in allWorks)
@@ -2476,7 +2670,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 gridView_wdToBind.RefreshData();
                 gridView_unboundArts.RefreshData();
-                
+
                 await _logger.LogEventAsync("RestoreOriginalData: Исходные данные восстановлены", "RestoreOriginalData");
             }
             catch (Exception ex)
@@ -2485,6 +2679,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        private void layoutControlGroup18_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            switch (buttonIndex)
+            {
+                case 0:
+                    {
+                        Arch(sender, e);
+                        break;
+                    }
+            }
+        }
 
         #region Mode Management
 
@@ -2495,11 +2701,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                if (sender == normalModeRadio && normalModeRadio.Checked)
+                if (!toggleSwitchKit.IsOn)
                 {
                     SetNormalMode();
                 }
-                else if (sender == kitModeRadio && kitModeRadio.Checked)
+                else if (toggleSwitchKit.IsOn)
                 {
                     SetKitMode();
                 }

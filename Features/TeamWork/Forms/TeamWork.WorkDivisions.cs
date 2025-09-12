@@ -448,75 +448,72 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ? (int)Mode.Kit
                 : (int)Mode.NewWorkDivision;
 
-            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, modeForNewForm, newId: newId))
+            // Всегда используем немодальный режим для всех типов форм
+            var teamWork_AdvanceTW = OpenAdvanceFormNonModal(bufferId, modeForNewForm, newId: newId);
+            if (teamWork_AdvanceTW == null)
             {
-                await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
+                return;
             }
-			// Открываем форму редактирования новой записи (немодально)
-			var teamWork_AdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.NewWorkDivision, newId: newId);
-			if (teamWork_AdvanceTW == null)
-			{
-				return;
-			}
-			// Обработка результата по закрытию формы
-			teamWork_AdvanceTW.FormClosed += async (s, args) =>
-			{
-				if (teamWork_AdvanceTW.DialogResult == DialogResult.OK)
-				{
-					var createdItem = teamWork_AdvanceTW.CreatedAnn;
-					if (createdItem != null)
-					{
-						newItem.Articul = createdItem.Articul;
-						newItem.Mod = createdItem.Mod;
-						newItem.grup = createdItem.grup;
-						newItem.Komment = createdItem.Komment;
-						newItem.Reco = createdItem.Reco;
-						newItem.Diz = createdItem.Diz;
-						newItem.Constr = createdItem.Constr;
-						newItem.Sek = createdItem.Sek;
-					}
+            
+            // Обработка результата по закрытию формы
+            teamWork_AdvanceTW.FormClosed += async (s, args) =>
+            {
+                if (teamWork_AdvanceTW.DialogResult == DialogResult.OK)
+                {
+                    var createdItem = teamWork_AdvanceTW.CreatedAnn;
+                    if (createdItem != null)
+                    {
+                        newItem.Articul = createdItem.Articul;
+                        newItem.Mod = createdItem.Mod;
+                        newItem.grup = createdItem.grup;
+                        newItem.Komment = createdItem.Komment;
+                        newItem.Reco = createdItem.Reco;
+                        newItem.Diz = createdItem.Diz;
+                        newItem.Constr = createdItem.Constr;
+                        newItem.Sek = createdItem.Sek;
+                    }
 
-					_bindingSource.ResetBindings(false);
-					int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
-					if (newRowHandle >= 0)
-					{
-						ANNgridView.BeginUpdate();
-						try
-						{
-							ANNgridView.FocusedRowHandle = newRowHandle;
-							ANNgridView.MakeRowVisible(newRowHandle);
-							ANNgridView.RefreshRow(newRowHandle);
-						}
-						finally
-						{
-							ANNgridView.EndUpdate();
-						}
-					}
+                    _bindingSource.ResetBindings(false);
+                    int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
+                    if (newRowHandle >= 0)
+                    {
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = newRowHandle;
+                            ANNgridView.MakeRowVisible(newRowHandle);
+                            ANNgridView.RefreshRow(newRowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
+                    }
 
-					_ = Task.Run(async () =>
-					{
-						await _secondsUpdateManager.StartSecondsUpdateAsync(newItem.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-						await Task.Delay(3000);
-						ClearSecondsUpdateStatus();
-					});
-				}
-				else
-				{
-					_bindingList.Remove(newItem);
-					_bindingSource.Remove(newItem);
-					await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
-					if (teamWork_AdvanceTW.IsRaszInserted)
-						await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
-					if (teamWork_AdvanceTW.IsRaskInserted)
-						await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
-					if (teamWork_AdvanceTW.IsKontInserted)
-						await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
+                    _ = Task.Run(async () =>
+                    {
+                        await _secondsUpdateManager.StartSecondsUpdateAsync(newItem.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                        await Task.Delay(3000);
+                        ClearSecondsUpdateStatus();
+                    });
+                }
+                else
+                {
+                    _bindingList.Remove(newItem);
+                    _bindingSource.Remove(newItem);
+                    await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
+                    if (teamWork_AdvanceTW.IsRaszInserted)
+                        await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
+                    if (teamWork_AdvanceTW.IsRaskInserted)
+                        await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
+                    if (teamWork_AdvanceTW.IsKontInserted)
+                        await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
 
-					_bindingSource.ResetBindings(false);
-					ANNgridControl.RefreshDataSource();
-					ANNgridView.RefreshData();
-				}
-			};
+                    _bindingSource.ResetBindings(false);
+                    ANNgridControl.RefreshDataSource();
+                    ANNgridView.RefreshData();
+                }
+            };
         }
 
         private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
@@ -603,6 +600,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             UpdateRowInBindingList(oldRow);
 
             await _dbService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
+            
+            // Обновляем данные архива после перевода из предварительного архива
+            await RefreshArchData();
+            
             await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {oldRow.ParentId}", "Arch");
 
         }
@@ -825,6 +826,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
+            
+            // Обновляем данные архива если был установлен статус архива (3)
+            if (newStatus == (int)Status.Archive)
+            {
+                await RefreshArchData();
+            }
             
             // Запускаем асинхронное обновление секунд для новой записи
             _ = Task.Run(async () =>
