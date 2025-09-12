@@ -154,11 +154,11 @@
             customLabel36 = new SewingProduction.Core.Class.CustomLabel();
             cbTM = new CustomComboBox();
             customGroupBox3 = new CustomGroupBox();
-            cbSeason = new CustomComboBox();
-            cbAssort = new CustomComboBox();
-            cbCountry = new CustomComboBox();
-            cbGrupMen = new CustomComboBox();
             customComboBox1 = new CustomComboBox();
+            cbGrupMen = new CustomComboBox();
+            cbCountry = new CustomComboBox();
+            cbAssort = new CustomComboBox();
+            cbSeason = new CustomComboBox();
             groupBox2 = new CustomGroupBox();
             chkPres = new CustomCheckBox();
             chkStra = new CustomCheckBox();
@@ -209,6 +209,7 @@
             // gcEditKod
             // 
             gcEditKod.Caption = "Код";
+            gcEditKod.FieldName = "Kod";
             gcEditKod.Name = "gcEditKod";
             gcEditKod.Visible = true;
             gcEditKod.VisibleIndex = 0;
@@ -217,6 +218,7 @@
             // gcEditRazm
             // 
             gcEditRazm.Caption = "Размер";
+            gcEditRazm.FieldName = "Razm";
             gcEditRazm.Name = "gcEditRazm";
             gcEditRazm.Visible = true;
             gcEditRazm.VisibleIndex = 1;
@@ -1886,38 +1888,16 @@
             customGroupBox3.TabStop = false;
             customGroupBox3.Text = "Основная информация";
             // 
-            // cbSeason
+            // customComboBox1
             // 
-            cbSeason.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            cbSeason.Font = new System.Drawing.Font("Arial", 10F);
-            cbSeason.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            cbSeason.FormattingEnabled = true;
-            cbSeason.Location = new System.Drawing.Point(100, 143);
-            cbSeason.Name = "cbSeason";
-            cbSeason.Size = new System.Drawing.Size(121, 24);
-            cbSeason.TabIndex = 50;
-            // 
-            // cbAssort
-            // 
-            cbAssort.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            cbAssort.Font = new System.Drawing.Font("Arial", 10F);
-            cbAssort.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            cbAssort.FormattingEnabled = true;
-            cbAssort.Location = new System.Drawing.Point(100, 173);
-            cbAssort.Name = "cbAssort";
-            cbAssort.Size = new System.Drawing.Size(121, 24);
-            cbAssort.TabIndex = 51;
-            // 
-            // cbCountry
-            // 
-            cbCountry.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            cbCountry.Font = new System.Drawing.Font("Arial", 10F);
-            cbCountry.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            cbCountry.FormattingEnabled = true;
-            cbCountry.Location = new System.Drawing.Point(100, 204);
-            cbCountry.Name = "cbCountry";
-            cbCountry.Size = new System.Drawing.Size(121, 24);
-            cbCountry.TabIndex = 52;
+            customComboBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
+            customComboBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            customComboBox1.FormattingEnabled = true;
+            customComboBox1.Location = new System.Drawing.Point(100, 82);
+            customComboBox1.Name = "customComboBox1";
+            customComboBox1.Size = new System.Drawing.Size(121, 24);
+            customComboBox1.TabIndex = 54;
             // 
             // cbGrupMen
             // 
@@ -1930,16 +1910,38 @@
             cbGrupMen.Size = new System.Drawing.Size(269, 24);
             cbGrupMen.TabIndex = 53;
             // 
-            // customComboBox1
+            // cbCountry
             // 
-            customComboBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customComboBox1.FormattingEnabled = true;
-            customComboBox1.Location = new System.Drawing.Point(100, 82);
-            customComboBox1.Name = "customComboBox1";
-            customComboBox1.Size = new System.Drawing.Size(121, 24);
-            customComboBox1.TabIndex = 54;
+            cbCountry.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            cbCountry.Font = new System.Drawing.Font("Arial", 10F);
+            cbCountry.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            cbCountry.FormattingEnabled = true;
+            cbCountry.Location = new System.Drawing.Point(100, 204);
+            cbCountry.Name = "cbCountry";
+            cbCountry.Size = new System.Drawing.Size(121, 24);
+            cbCountry.TabIndex = 52;
+            // 
+            // cbAssort
+            // 
+            cbAssort.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            cbAssort.Font = new System.Drawing.Font("Arial", 10F);
+            cbAssort.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            cbAssort.FormattingEnabled = true;
+            cbAssort.Location = new System.Drawing.Point(100, 173);
+            cbAssort.Name = "cbAssort";
+            cbAssort.Size = new System.Drawing.Size(121, 24);
+            cbAssort.TabIndex = 51;
+            // 
+            // cbSeason
+            // 
+            cbSeason.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            cbSeason.Font = new System.Drawing.Font("Arial", 10F);
+            cbSeason.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            cbSeason.FormattingEnabled = true;
+            cbSeason.Location = new System.Drawing.Point(100, 143);
+            cbSeason.Name = "cbSeason";
+            cbSeason.Size = new System.Drawing.Size(121, 24);
+            cbSeason.TabIndex = 50;
             // 
             // groupBox2
             // 

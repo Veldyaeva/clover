@@ -4,6 +4,7 @@ using DevExpress.Office.Utils;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraWaitForm;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
 using SewingProduction.Extensions;
@@ -13,6 +14,7 @@ using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Help.Form;
@@ -76,7 +78,6 @@ namespace SewingProduction.Features.Articul
             InitializeComponent();
             _user = user;
             ThemeManager.UpdateTheme(this);
-
         }
 
         private async void Articul_Load(object sender, EventArgs e)
@@ -565,7 +566,11 @@ namespace SewingProduction.Features.Articul
             }
             */
         }
-
+        /// <summary>
+        /// удалени кода в справочнике
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void sButtodDeleteKod_Click(object sender, EventArgs e)
         {
             try
@@ -610,63 +615,69 @@ namespace SewingProduction.Features.Articul
         /// <param name="bindingSource"></param>
         /// <returns></returns>
         //private async Task EditArtciul (GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
-        private ArticulEditAdvance EditArtciul(GridView gridView, BindingSource bindingSource)
+        private void EditArtciul(GridView gridView, BindingSource bindingSource)
         {
             if (gridView == null || gridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
+                return ;
             }
-            var selectedArticul = gridView.GetRow(gridView.FocusedRowHandle) as ArticulModel;
+            var kodd = (bsArt.Current as ArticulModel).Kodd;
 
-            // Проверяем, есть ли уже открытые экземпляры
-            if (HasOpenAdvanceForms())
+            if (this.MdiParent is SpMainForm mainForm)
             {
-                // Получаем первый открытый экземпляр
-                ArticulEditAdvance existingForm = null;
-                lock (_lockObject)
-                {
-                    existingForm = _openEditArticulForms.FirstOrDefault(form => form != null && !form.IsDisposed);
-                }
-
-                if (existingForm != null)
-                {
-                    //string articul = existingForm.CurrentArticul;
-                    //string msg = string.IsNullOrWhiteSpace(articul)
-                    //    ? "Открыто разделение труда"
-                    //    : $"Открыто разделение труда для артикула \"{articul}\"";
-
-                    //// Показать сплеш на 3 секунды
-                    //Task.Run(async () =>
-                    //{
-                    //    SplashScreenHelper.ShowSplash(msg, textOnly: true);
-                    //    await Task.Delay(3000);
-                    //    SplashScreenHelper.CloseSplash();
-                    //});
-
-                    existingForm.WindowState = FormWindowState.Normal;
-                    existingForm.BringToFront();
-                    existingForm.Activate();
-                }
-
-                return null;
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd ));
             }
 
-            var editForm = new ArticulEditAdvance();
 
-            // Добавляем в список открытых форм
-            AddOpenAdvanceForm(editForm);
-            // Подписываемся на событие закрытия формы
-            editForm.FormClosed += (sender, e) =>
-            {
-                RemoveOpenAdvanceForm(editForm);
-            };
+            //// Проверяем, есть ли уже открытые экземпляры
+            //if (HasOpenAdvanceForms())
+            //{
+            //    // Получаем первый открытый экземпляр
+            //    ArticulEditAdvance existingForm = null;
+            //    lock (_lockObject)
+            //    {
+            //        existingForm = _openEditArticulForms.FirstOrDefault(form => form != null && !form.IsDisposed);
+            //    }
 
-            // Открываем форму не в модальном режиме
-            //editForm.Show();
-            OpenForm(new Articul(_user), sender);
+            //    if (existingForm != null)
+            //    {
+            //        //string articul = existingForm.CurrentArticul;
+            //        //string msg = string.IsNullOrWhiteSpace(articul)
+            //        //    ? "Открыто разделение труда"
+            //        //    : $"Открыто разделение труда для артикула \"{articul}\"";
 
-            return editForm;
+            //        //// Показать сплеш на 3 секунды
+            //        //Task.Run(async () =>
+            //        //{
+            //        //    SplashScreenHelper.ShowSplash(msg, textOnly: true);
+            //        //    await Task.Delay(3000);
+            //        //    SplashScreenHelper.CloseSplash();
+            //        //});
+
+            //        existingForm.WindowState = FormWindowState.Normal;
+            //        existingForm.BringToFront();
+            //        existingForm.Activate();
+            //    }
+
+            //    return null;
+            //}
+
+            //var editForm = new ArticulEditAdvance();
+
+            //// Добавляем в список открытых форм
+            //AddOpenAdvanceForm(editForm);
+            //// Подписываемся на событие закрытия формы
+            //editForm.FormClosed += (sender, e) =>
+            //{
+            //    RemoveOpenAdvanceForm(editForm);
+            //};
+
+            //// Открываем форму не в модальном режиме
+            ////editForm.Show();
+            //OpenForm(new Articul(_user), sender);
+
+            //return editForm;
 
 
         }
@@ -715,14 +726,8 @@ namespace SewingProduction.Features.Articul
 
         private async void csButtonEdit_Click(object sender, EventArgs e)
         {
-            var editForm = EditArtciul(gridControl1,bsArt);
-            if (editForm == null)
-            {
-                // Форма уже открыта или произошла ошибка
-                return;
-            }
-
-
+            EditArtciul(gridControl1,bsArt);
+            
         }
     }
 }

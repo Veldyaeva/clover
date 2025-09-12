@@ -259,6 +259,7 @@ namespace SewingProduction.Features.Articul
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             customGroupBox1 = new CustomGroupBox();
+            csButtonEdit = new CustomSimpleButton();
             customGroupBox2 = new CustomGroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             customButton1 = new CustomButton();
@@ -283,7 +284,6 @@ namespace SewingProduction.Features.Articul
             customLabel41 = new CustomLabel();
             txbSebz = new CustomTextBox();
             customLabel40 = new CustomLabel();
-            csButtonEdit = new CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -3202,6 +3202,25 @@ namespace SewingProduction.Features.Articul
             customGroupBox1.TabStop = false;
             customGroupBox1.Text = "Затраты на изготовление";
             // 
+            // csButtonEdit
+            // 
+            csButtonEdit.Appearance.BackColor = Color.FromArgb(255, 223, 196);
+            csButtonEdit.Appearance.Font = new Font("Arial", 10F);
+            csButtonEdit.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            csButtonEdit.Appearance.Options.UseBackColor = true;
+            csButtonEdit.Appearance.Options.UseFont = true;
+            csButtonEdit.Appearance.Options.UseForeColor = true;
+            csButtonEdit.AppearanceDisabled.BackColor = Color.Green;
+            csButtonEdit.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            csButtonEdit.AppearanceDisabled.Options.UseBackColor = true;
+            csButtonEdit.AppearanceDisabled.Options.UseForeColor = true;
+            csButtonEdit.Location = new Point(2, 223);
+            csButtonEdit.Name = "csButtonEdit";
+            csButtonEdit.Size = new Size(235, 25);
+            csButtonEdit.TabIndex = 38;
+            csButtonEdit.Text = "Редактировать";
+            csButtonEdit.Click += csButtonEdit_Click;
+            // 
             // customGroupBox2
             // 
             customGroupBox2.BackColor = Color.Transparent;
@@ -3528,25 +3547,6 @@ namespace SewingProduction.Features.Articul
             customLabel40.Size = new Size(56, 14);
             customLabel40.TabIndex = 34;
             customLabel40.Text = "Зарплата";
-            // 
-            // csButtonEdit
-            // 
-            csButtonEdit.Appearance.BackColor = Color.FromArgb(255, 223, 196);
-            csButtonEdit.Appearance.Font = new Font("Arial", 10F);
-            csButtonEdit.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            csButtonEdit.Appearance.Options.UseBackColor = true;
-            csButtonEdit.Appearance.Options.UseFont = true;
-            csButtonEdit.Appearance.Options.UseForeColor = true;
-            csButtonEdit.AppearanceDisabled.BackColor = Color.Green;
-            csButtonEdit.AppearanceDisabled.ForeColor = Color.GreenYellow;
-            csButtonEdit.AppearanceDisabled.Options.UseBackColor = true;
-            csButtonEdit.AppearanceDisabled.Options.UseForeColor = true;
-            csButtonEdit.Location = new Point(2, 223);
-            csButtonEdit.Name = "csButtonEdit";
-            csButtonEdit.Size = new Size(235, 25);
-            csButtonEdit.TabIndex = 38;
-            csButtonEdit.Text = "Редактировать";
-            csButtonEdit.Click += csButtonEdit_Click;
             // 
             // Articul
             // 
