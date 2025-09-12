@@ -19,6 +19,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -44,6 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (data == null || data.Count == 0)
                 {
                     MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await _logger.LogWarningAsync("Нет данных для загрузки в текущие работы", "LoadData");
                     return;
                 }
 
@@ -388,6 +390,79 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             if (ANNgridView == null) return;
 
+            // Проверяем режим работы (комплект или обычный)
+            bool isKitMode = toggleSwitchKit.IsOn;
+            
+            // В режиме комплекта проверяем и копируем выбранные записи в буфер
+            if (isKitMode)
+            {
+                int[] selectedRows = ANNgridView.GetSelectedRows();
+                if (selectedRows == null || selectedRows.Length != 2)
+                {
+                    MessageBox.Show("Для создания комплекта выберите точно две записи.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Попытка создать комплект без выбора двух записей", "ButtonPreliminaryWd_Click");
+                    return;
+                }
+
+                // Копируем выбранные записи в буфер
+                var annIds = new List<int>();
+                var displayBuilder = new System.Text.StringBuilder();
+                ArtNormN firstSelectedItem = null;
+
+                foreach (int rowHandle in selectedRows)
+                {
+                    // Получаем AnnID
+                    var annIdVal = ANNgridView.GetRowCellValue(rowHandle, "AnnID");
+                    if (annIdVal == null || annIdVal == DBNull.Value || !int.TryParse(annIdVal.ToString(), out int annIdTmp))
+                    {
+                        continue;
+                    }
+                    annIds.Add(annIdTmp);
+
+                    // Получаем строку как ArtNormN для передачи в буфер (для первой выбранной строки)
+                    if (firstSelectedItem == null)
+                    {
+                        firstSelectedItem = ANNgridView.GetRow(rowHandle) as ArtNormN;
+                    }
+
+                    // Функция для безопасного получения значений полей
+                    string GetSafeValue(string fieldName)
+                    {
+                        var value = ANNgridView.GetRowCellValue(rowHandle, fieldName);
+                        if (value == null || value == DBNull.Value)
+                            return " ";
+                        string stringValue = value.ToString();
+                        return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                    }
+
+                    var grupVal = GetSafeValue("grup");
+                    var modVal = GetSafeValue("Mod");
+                    var articulVal = GetSafeValue("Articul");
+                    
+                    // Добавляем в текст буфера информацию о каждой записи на новой строке
+                    if (displayBuilder.Length > 0) displayBuilder.AppendLine().AppendLine("----------------------------");
+                    displayBuilder.AppendLine($"группа: {grupVal},");
+                    displayBuilder.AppendLine($"модель: {modVal},");
+                    displayBuilder.Append($"артикул: {articulVal}");
+                }
+
+                if (annIds.Count != 2)
+                {
+                    MessageBox.Show("Не удалось получить идентификаторы выбранных записей.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogWarningAsync("Не удалось получить два валидных AnnID для создания комплекта", "ButtonPreliminaryWd_Click");
+                    return;
+                }
+
+                var combinedDisplayText = displayBuilder.ToString();
+
+                // Копируем в глобальный буфер
+                TeamWorkBuffer.CopyToBuffer(annIds, combinedDisplayText, firstSelectedItem);
+
+                // Обновляем локальный буфер для обратной совместимости
+                bufferId = annIds.First();
+                buffer.Text = combinedDisplayText;
+            }
+
             ArtNormN newItem = new ArtNormN
             {
          //       Kod = "0000000",
@@ -425,6 +500,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (newId <= 0)
             {
                 MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogWarningAsync("Ошибка при вставке новой записи в таблицу Ann", "ButtonPreliminaryWd_Click");
                 return;
             }
 
@@ -496,6 +572,37 @@ namespace SewingProduction.Features.TeamWork.Forms
                         await Task.Delay(3000);
                         ClearSecondsUpdateStatus();
                     });
+
+                    // Показываем сообщение о создании комплекта или обычного РТ
+                    if (modeForNewForm == (int)Mode.Kit)
+                    {
+                        // Показываем статус в statusLabel (если он существует)
+                        if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
+                        {
+                            statusLabel.ForeColor = System.Drawing.Color.Green;
+                            statusLabel.Text = "Комплект успешно создан";
+                            // Автоматически очищаем через 5 секунд
+                            _ = Task.Delay(5000).ContinueWith(t =>
+                            {
+                                if (!this.IsDisposed && statusLabel != null)
+                                {
+                                    this.Invoke((MethodInvoker)(() => 
+                                    {
+                                        statusLabel.Text = "";
+                                        statusLabel.ForeColor = Color.Black;
+                                    }));
+                                }
+                            });
+                        }
+                        else
+                        {
+                           // MessageBox.Show("Комплект успешно создан с операциями из буфера", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           await _logger.LogEventAsync("Комплект успешно создан с операциями из буфера", "ButtonPreliminaryWd_Click");
+                        }
+                        
+                        // Очищаем буфер после успешного создания комплекта
+                        TeamWorkBuffer.ClearBuffer();
+                    }
                 }
                 else
                 {
@@ -620,6 +727,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                await _logger.LogWarningAsync("Попытка архивирования без выбора записи", "ArchAndCopy");
                 return;
             }
 
@@ -642,6 +750,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (newRow == null)
                 {
                     MessageBox.Show("Не удалось создать новую запись.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogWarningAsync("Не удалось создать новую запись при архивировании", "ArchAndCopy");
                     return;
                 }
 
@@ -675,6 +784,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (gridView == null || gridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                await _logger.LogWarningAsync("Попытка архивирования без выбора записи", "ArchAndCopy");
                 return;
             }
 
@@ -713,6 +823,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (newRow == null)
                 {
                     MessageBox.Show("Не удалось создать новую запись.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogWarningAsync("Не удалось создать новую запись при архивировании", "ArchAndCopy");
                     return;
                 }
 
@@ -764,6 +875,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("InsertEntityAsync вернул 0 или отрицательное значение"), "Ошибка при сохранении копии записи");
                     list.Remove(itemToAdd); // удаляем из списка если база не сохранила
                     return null;
                 }
@@ -982,6 +1094,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedRowHandle < 0)
                 {
                     MessageBox.Show("Выберите разделение труда для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Попытка копирования без выбора записи", "CopyRow");
                     return null;
                 }
 
@@ -989,6 +1102,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (sourceRecord == null)
                 {
                     MessageBox.Show("Не удалось получить данные выбранной записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogWarningAsync("Не удалось получить данные выбранной записи для копирования", "CopyRow");
                     return null;
                 }
 
@@ -1007,6 +1121,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("InsertEntityAsync вернул 0 или отрицательное значение"), "Ошибка при сохранении копии записи");
                     return null;
                 }
 

@@ -218,6 +218,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.Appearance.FocusedRow.ForeColor = Color.Black;
             gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            
+            // Настройка мультиселекта с галочками
+            gridViewRasz.OptionsSelection.MultiSelect = true;
+            gridViewRasz.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            gridViewRasz.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
 
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
@@ -478,6 +483,46 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
 
                 var menu = e.Menu;
+                
+                // Получаем количество выбранных строк
+                int[] selectedRows = view.GetSelectedRows();
+                bool hasSelectedRows = selectedRows != null && selectedRows.Length > 0;
+                int totalRows = view.DataRowCount;
+                
+                // Пункты управления выделением
+                var selectAllItem = new DevExpress.Utils.Menu.DXMenuItem("Выделить все", (_, __) =>
+                {
+                    view.SelectAll();
+                });
+                
+                var clearSelectionItem = new DevExpress.Utils.Menu.DXMenuItem("Снять выделение", (_, __) =>
+                {
+                    view.ClearSelection();
+                });
+                
+                // Пункт массового удаления (показываем только если есть выбранные строки)
+                if (hasSelectedRows)
+                {
+                    var deleteSelectedItem = new DevExpress.Utils.Menu.DXMenuItem($"🗑️ Удалить выбранные строки ({selectedRows.Length})", (_, __) =>
+                    {
+                        DeleteSelectedOperations(view, bindingList, getId, deletedIds);
+                    });
+                    menu.Items.Add(deleteSelectedItem);
+                  //  menu.Items.Add(new DevExpress.Utils.Menu.DXMenuSeparator()); // Разделитель
+                }
+                
+                // Добавляем пункты управления выделением
+                menu.Items.Add(selectAllItem);
+                if (hasSelectedRows)
+                {
+                    menu.Items.Add(clearSelectionItem);
+                }
+                
+                if (totalRows > 0)
+                {
+               //     menu.Items.Add(new DevExpress.Utils.Menu.DXMenuSeparator()); // Разделитель
+                }
+
                 var deleteItem = new DevExpress.Utils.Menu.DXMenuItem("Удалить строку", (_, __) =>
                 {
                     int rowHandle = e.HitInfo.RowHandle;
@@ -563,6 +608,108 @@ namespace SewingProduction.Features.TeamWork.Forms
                 menu.Items.Add(addItem);
                 menu.Items.Add(deleteItem);
             };
+        }
+
+        /// <summary>
+        /// Удаляет все выбранные операции с перенумерацией
+        /// </summary>
+        /// <param name="view">GridView с операциями</param>
+        /// <param name="bindingList">Список операций</param>
+        /// <param name="getId">Функция получения ID</param>
+        /// <param name="deletedIds">Список удаленных ID</param>
+        private async void DeleteSelectedOperations(GridView view, BindingList<NormRasz> bindingList, Func<NormRasz, int> getId, List<int> deletedIds)
+        {
+            try
+            {
+                int[] selectedRows = view.GetSelectedRows();
+                if (selectedRows == null || selectedRows.Length == 0)
+                {
+                    MessageBox.Show("Нет выбранных строк для удаления.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Подтверждение удаления
+                var result = MessageBox.Show(
+                    $"Удалить {selectedRows.Length} выбранных операций?\n\nЭто действие нельзя отменить.",
+                    "Подтверждение удаления",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result != DialogResult.Yes)
+                    return;
+
+                // Получаем объекты операций для удаления
+                var operationsToDelete = new List<NormRasz>();
+                foreach (int rowHandle in selectedRows)
+                {
+                    if (view.IsValidRowHandle(rowHandle))
+                    {
+                        var operation = view.GetRow(rowHandle) as NormRasz;
+                        if (operation != null)
+                        {
+                            operationsToDelete.Add(operation);
+                        }
+                    }
+                }
+
+                if (operationsToDelete.Count == 0)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранных операций.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Собираем ID для списка удаленных (для последующего удаления из БД)
+                if (getId != null && deletedIds != null)
+                {
+                    foreach (var operation in operationsToDelete)
+                    {
+                        int id = getId(operation);
+                        if (id > 0)
+                            deletedIds.Add(id);
+                    }
+                }
+
+                // Проверяем, если удаляем последнюю сфокусированную операцию
+                if (_lastFocusedRaszOperation != null && operationsToDelete.Contains(_lastFocusedRaszOperation))
+                {
+                    _lastFocusedRaszOperation = null;
+                }
+
+                // Удаляем операции из списка
+                foreach (var operation in operationsToDelete)
+                {
+                    bindingList.Remove(operation);
+                }
+
+                // Выполняем полную перенумерацию всех оставшихся операций
+                RecalculateAllOperationNumbers();
+
+                // Обновляем отображение
+                view.GridControl.BeginInvoke(new Action(() =>
+                {
+                    view.RefreshData();
+                    view.ClearSelection(); // Очищаем выделение
+                    
+                    // Устанавливаем фокус на первую доступную строку
+                    if (view.DataRowCount > 0)
+                    {
+                        view.FocusedRowHandle = 0;
+                        view.MakeRowVisible(0);
+                    }
+                }));
+
+                await _logger.LogEventAsync($"Массово удалено операций: {operationsToDelete.Count}", "DeleteSelectedOperations");
+                
+                // Показываем результат
+                MessageBox.Show($"Успешно удалено {operationsToDelete.Count} операций.\nНумерация операций пересчитана.", 
+                               "Удаление завершено", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при массовом удалении операций");
+                MessageBox.Show($"Ошибка при удалении операций: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>

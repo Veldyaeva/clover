@@ -671,16 +671,19 @@ namespace SewingProduction.Features.TeamWork.Forms
      MessageBoxButtons.YesNo,
      MessageBoxIcon.Question,
      MessageBoxDefaultButton.Button2);
+                await _logger.LogEventAsync($"User prompted to update data for AnnID: {annId}, user response: {result}", "CommandsEditDateNull_DoubleClick");
                 if (result == DialogResult.Yes)
                 {
                     bool success = await UpdateDateAndStatusAsync(annId, view, rowHandle);
                     if (success)
                     {
-                        MessageBox.Show("Данные успешно обновлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("Данные успешно обновлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await _logger.LogEventAsync("Данные успешно обновлены!", "CommandsEditDateNull_DoubleClick");
                     }
                     else
                     {
                         MessageBox.Show("Ошибка при обновлении данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        await _logger.LogWarningAsync("Ошибка при обновлении данных!", "CommandsEditDateNull_DoubleClick");
                     }
                 }
             }
@@ -1152,6 +1155,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (gridView == null || gridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите Разделение Труда для дублирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                await _logger.LogWarningAsync("Попытка дублирования без выбора строки", "DuplicateWorkDivision_Click_Internal");
                 return;
             }
 
@@ -1169,6 +1173,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (selectedAnnToDuplicate == null)
             {
                 MessageBox.Show("Не удалось получить данные выбранного РТ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogWarningAsync("Не удалось получить данные выбранного РТ", "DuplicateWorkDivision_Click_Internal");
                 return;
             }
 
@@ -1188,6 +1193,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (newAnnId <= 0)
             {
                 MessageBox.Show("Ошибка при создании новой записи РТ в базе данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogWarningAsync("Ошибка при создании новой записи РТ в базе данных", "DuplicateWorkDivision_Click_Internal");
                 return;
             }
 
@@ -1411,6 +1417,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
+               await _logger.LogEventAsync("Начало процесса восстановления записей из архива", "RestoreFromArchive_Internal");
                 // Находим gridViewArch
                 GridView archiveGridView = null;
                 if (gridControlArch?.MainView is GridView archView)
@@ -1421,6 +1428,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (archiveGridView == null)
                 {
                     MessageBox.Show("Грид архива не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("Грид архива не инициализирован"), "RestoreFromArchive_Internal");
                     return;
                 }
 
@@ -1433,6 +1441,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (archiveGridView.FocusedRowHandle < 0)
                     {
                         MessageBox.Show("Выберите записи для восстановления из архива.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        await _logger.LogWarningAsync("Попытка восстановления из архива без выбора строк", "RestoreFromArchive_Internal");
                         return;
                     }
                     selectedRowHandles = new int[] { archiveGridView.FocusedRowHandle };
@@ -1456,6 +1465,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedItems.Count == 0)
                 {
                     MessageBox.Show("Не найдено записей для восстановления из архива.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Не найдено записей для восстановления из архива после сбора выбранных строк", "RestoreFromArchive_Internal");
                     return;
                 }
 
@@ -1556,11 +1566,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                         : $"Успешно восстановлено {successCount} записей из архива.";
 
                     MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await _logger.LogEventAsync(successMessage, "RestoreFromArchive_Internal");
                 }
                 else
                 {
                     string errorMessage = $"Восстановлено: {successCount} записей.\nОшибки:\n" + string.Join("\n", errors);
                     MessageBox.Show(errorMessage, "Результат восстановления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync(errorMessage, "RestoreFromArchive_Internal");
                 }
             }
             catch (Exception ex)
@@ -1626,6 +1638,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ANNgridView == null)
                 {
                     MessageBox.Show("Грид не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("Грид не инициализирован"), "SetArchiveStatus_Internal");
                     return;
                 }
 
@@ -1638,6 +1651,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (ANNgridView.FocusedRowHandle < 0)
                     {
                         MessageBox.Show("Выберите записи для архивирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        await _logger.LogWarningAsync("Попытка архивирования без выбора строк", "SetArchiveStatus_Internal");
                         return;
                     }
                     selectedRowHandles = new int[] { ANNgridView.FocusedRowHandle };
@@ -1661,6 +1675,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedItems.Count == 0)
                 {
                     MessageBox.Show("Не найдено записей для архивирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Не найдено записей для архивирования после сбора выбранных строк", "SetArchiveStatus_Internal");
                     return;
                 }
 
@@ -1675,9 +1690,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2);
-
                 if (result != DialogResult.Yes)
                     return;
+                await _logger.LogEventAsync($"Пользователь подтвердил архивирование {selectedItems.Count} записей", "SetArchiveStatus_Internal");
 
                 // Обновляем статус для каждой выбранной записи
                 int successCount = 0;
@@ -1737,17 +1752,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                         ? "Запись успешно архивирована."
                         : $"Успешно архивировано {successCount} записей.";
 
-                    MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await _logger.LogEventAsync(successMessage, "SetArchiveStatus_Internal");
                 }
                 else
                 {
                     string errorMessage = $"Архивировано: {successCount} записей.\nОшибки:\n" + string.Join("\n", errors);
-                    MessageBox.Show(errorMessage, "Результат архивирования", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //MessageBox.Show(errorMessage, "Результат архивирования", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync(errorMessage, "SetArchiveStatus_Internal");
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при выполнении архивирования записей");
+                await _logger.LogErrorAsync(ex.Message, "Ошибка при выполнении архивирования записей");
                 MessageBox.Show($"Ошибка при архивировании: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -1768,6 +1785,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ANNgridView == null || gridView5 == null)
                 {
                     MessageBox.Show("Грид не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("Грид не инициализирован"), "UpdateSpArticulArch_Internal");
                     return;
                 }
 
@@ -1775,6 +1793,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ANNgridView.FocusedRowHandle < 0)
                 {
                     MessageBox.Show("Выберите запись в основном гриде (ANNgridView).", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Попытка обновления arch без выбора строки в ANNgridView", "UpdateSpArticulArch_Internal");
                     return;
                 }
 
@@ -1782,6 +1801,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedAnn == null)
                 {
                     MessageBox.Show("Не удалось получить данные выбранной записи в основном гриде.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("Не удалось получить данные выбранной записи в ANNgridView"), "UpdateSpArticulArch_Internal");
                     return;
                 }
 
@@ -1790,7 +1810,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Получаем артикул из выбранной строки в gridView5
                 if (gridView5.FocusedRowHandle < 0)
                 {
-                    MessageBox.Show("Выберите запись в гриде НЗП (gridView5).", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Выберите запись в гриде НЗП.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Попытка обновления arch без выбора строки в gridView5", "UpdateSpArticulArch_Internal");
                     return;
                 }
 
@@ -1798,6 +1819,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedNzp == null)
                 {
                     MessageBox.Show("Не удалось получить данные выбранной записи в гриде НЗП.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("Не удалось получить данные выбранной записи в гриде НЗП"), "UpdateSpArticulArch_Internal");
                     return;
                 }
 
@@ -1806,6 +1828,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (string.IsNullOrEmpty(articul))
                 {
                     MessageBox.Show("Артикул в выбранной записи НЗП пустой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("Артикул в выбранной записи НЗП пустой"), "UpdateSpArticulArch_Internal");
                     return;
                 }
 
@@ -1828,7 +1851,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 if (result != DialogResult.Yes)
                     return;
-
+                await _logger.LogEventAsync($"Пользователь подтвердил обновление arch для AnnID: {annId}, Артикул: {articul}", "UpdateSpArticulArch_Internal");
                 // SQL запрос для обновления поля arch
                 //string sqlQuery = @"
                 //    UPDATE sp_articul sa 
@@ -1890,6 +1913,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (gridView_wdToBind == null)
                     {
                         MessageBox.Show("Грид текущих работ не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        await _logger.LogWarningAsync("Грид текущих работ не инициализирован", "SetUpdateDate_Internal");
                         return;
                     }
                     activeGridView = gridView_wdToBind;
@@ -1902,6 +1926,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (ANNgridView == null)
                     {
                         MessageBox.Show("Грид разделений труда не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        await _logger.LogWarningAsync("Грид разделений труда не инициализирован", "SetUpdateDate_Internal");
                         return;
                     }
                     activeGridView = ANNgridView;
@@ -1918,6 +1943,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (activeGridView.FocusedRowHandle < 0)
                     {
                         MessageBox.Show($"Выберите записи для обновления даты на вкладке \"{gridType}\".", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        await _logger.LogWarningAsync($"Попытка обновления даты без выбора строк на вкладке \"{gridType}\"", "SetUpdateDate_Internal");
                         return;
                     }
                     selectedRowHandles = new int[] { activeGridView.FocusedRowHandle };
@@ -1952,6 +1978,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedItems.Count == 0)
                 {
                     MessageBox.Show($"Не найдено записей для обновления даты на вкладке \"{gridType}\".", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync($"Не найдено записей для обновления даты после сбора выбранных строк на вкладке \"{gridType}\"", "SetUpdateDate_Internal");
                     return;
                 }
 
@@ -2041,7 +2068,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         ? $"Данные успешно обновлены для записи. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное"
                         : $"Данные обновлены для {successCount} записей. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное";
 
-                    MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  //  MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  await _logger.LogEventAsync(successMessage, "SetUpdateDate_Internal");
                 }
                 else
                 {
@@ -2050,6 +2078,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         errorMessage += $"\n... и еще {errors.Count - 5} ошибок";
 
                     MessageBox.Show(errorMessage, "Результат обновления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync(errorMessage, "SetUpdateDate_Internal");
                 }
             }
             catch (Exception ex)

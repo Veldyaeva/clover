@@ -144,14 +144,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                     filterString += $"Status = {(int)Status.Preliminary}";
                 }
 
-                // Применяем фильтр к gridView8
+                // Применяем фильтр к gridView_wdToBind
                 gridView_wdToBind.BeginUpdate();
                 gridView_wdToBind.ActiveFilterString = filterString;
                 gridView_wdToBind.EndUpdate();
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при фильтрации gridView8");
+                await _logger.LogErrorAsync(ex, "Ошибка при фильтрации gridView_wdToBind");
                 MessageBox.Show($"Ошибка при применении фильтра: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -161,7 +161,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonCopyWd_Click_Internal(object sender, EventArgs e)
+        private async Task ButtonCopyWd_Click_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -173,6 +173,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     string message = isKitMode ? "Выберите две записи для создания комплекта." : "Выберите запись для копирования.";
                     MessageBox.Show(message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Попытка копирования без выбора записей", "ButtonCopyWd_Click_Internal");
                     return;
                 }
                 
@@ -182,6 +183,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedRows.Length != 2)
                     {
                         MessageBox.Show("Для создания комплекта выберите точно две записи.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        await _logger.LogWarningAsync("Попытка создания комплекта с неверным количеством выбранных записей", "ButtonCopyWd_Click_Internal");
                         return;
                     }
                 }
@@ -191,6 +193,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedRows.Length != 1)
                     {
                         MessageBox.Show("В обычном режиме можно выбрать только одну запись.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        await _logger.LogWarningAsync("Попытка копирования с выбором нескольких записей в обычном режиме", "ButtonCopyWd_Click_Internal");
                         return;
                     }
                 }
@@ -237,6 +240,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (annIds.Count == 0)
                 {
                     MessageBox.Show("Не удалось получить идентификаторы выбранных записей.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogWarningAsync("Не удалось получить AnnID выбранных записей", "ButtonCopyWd_Click_Internal");
                     return;
                 }
 
@@ -290,6 +294,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 else
                 {
                     MessageBox.Show($"Ошибка копирования: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogWarningAsync($"Ошибка копирования: {ex.Message}", "ButtonCopyWd_Click_Internal");
                 }
             }
         }
@@ -502,6 +507,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (_rowNumber < 0)
                 {
                     MessageBox.Show("Выберите запись для редактирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Попытка редактирования без выбора записи", "ButtonEditWd_Click_Internal");
                     return;
                 }
                 var selectedItem = ANNgridView.GetRow(_rowNumber) as ArtNormN;
@@ -564,11 +570,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         });
 
                         // Отображаем сообщение об успешном редактировании
-                        MessageBox.Show(
-                            "Запись успешно отредактирована.",
-                            "Информация",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        //MessageBox.Show("Запись успешно отредактирована.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await _logger.LogEventAsync("Запись успешно отредактирована.", "ButtonEditWD");
                     }
                 };
             }
@@ -588,6 +591,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (rowNumber < 0)
                 {
                     MessageBox.Show("Выберите запись для редактирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Попытка редактирования без выбора записи", "EditWd_Internal2");
                     return;
                 }
 
@@ -622,7 +626,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         "Ограничение редактирования",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-                    return;
+                        await _logger.LogWarningAsync("Попытка редактирования записи со статусом 'Актуальный' и датой обновления", "EditWd_Internal2");
+                        return;
                 }
                 var updatedArtNormN = new ArtNormN();
                 
@@ -786,7 +791,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (newAnnId <= 0)
                 {
                     MessageBox.Show("Не удалось создать новую запись в базе данных.", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    await _logger.LogErrorAsync(null, "Ошибка при вставке новой ArtNormN (AnnID <= 0) simpleButton2_Click_Internal");
+                    await _logger.LogErrorAsync("", "Ошибка при вставке новой ArtNormN (AnnID <= 0) simpleButton2_Click_Internal");
                     return;
                 }
                 newItemShell.AnnID = newAnnId; // Присваиваем полученный ID
@@ -877,8 +882,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 								ClearSecondsUpdateStatus();
 							});
 							
-							MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						}
+							//MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            await _logger.LogEventAsync("Новая предварительная запись успешно создана/обновлена.", "simpleButton2_Click_Internal");
+                        }
 					}
 					else
 					{

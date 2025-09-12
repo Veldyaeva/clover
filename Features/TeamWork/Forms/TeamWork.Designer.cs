@@ -627,7 +627,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             TabPage1.Controls.Add(layoutControl2);
             TabPage1.Margin = new Padding(4, 3, 4, 3);
             TabPage1.Name = "TabPage1";
-            TabPage1.Size = new System.Drawing.Size(1847, 940);
+            TabPage1.Size = new System.Drawing.Size(1847, 939);
             TabPage1.Text = "1. Разделения труда                        ";
             // 
             // layoutControl2
@@ -658,7 +658,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControl2.Name = "layoutControl2";
             layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(690, 338, 650, 400);
             layoutControl2.Root = layoutControlGroup7;
-            layoutControl2.Size = new System.Drawing.Size(1847, 940);
+            layoutControl2.Size = new System.Drawing.Size(1847, 939);
             layoutControl2.TabIndex = 11;
             layoutControl2.Text = "layoutControl2";
             // 
@@ -690,7 +690,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBoxForAdmins.Controls.Add(customSimpleButton2);
             customGroupBoxForAdmins.Controls.Add(customSimpleButton3);
             customGroupBoxForAdmins.Controls.Add(customSimpleButton4);
-            customGroupBoxForAdmins.Location = new System.Drawing.Point(25, 853);
+            customGroupBoxForAdmins.Location = new System.Drawing.Point(25, 852);
             customGroupBoxForAdmins.Name = "customGroupBoxForAdmins";
             customGroupBoxForAdmins.Size = new System.Drawing.Size(216, 62);
             customGroupBoxForAdmins.TabIndex = 11;
@@ -794,7 +794,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // constructorTextBox
             // 
             constructorTextBox.Enabled = false;
-            constructorTextBox.Location = new System.Drawing.Point(19, 642);
+            constructorTextBox.Location = new System.Drawing.Point(19, 641);
             constructorTextBox.Name = "constructorTextBox";
             constructorTextBox.Size = new System.Drawing.Size(228, 26);
             constructorTextBox.TabIndex = 8;
@@ -803,7 +803,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // designerTextBox
             // 
             designerTextBox.Enabled = false;
-            designerTextBox.Location = new System.Drawing.Point(19, 591);
+            designerTextBox.Location = new System.Drawing.Point(19, 590);
             designerTextBox.Name = "designerTextBox";
             designerTextBox.Size = new System.Drawing.Size(228, 26);
             designerTextBox.TabIndex = 7;
@@ -811,7 +811,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new System.Drawing.Point(19, 388);
+            pictureBox1.Location = new System.Drawing.Point(19, 387);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new System.Drawing.Size(228, 77);
@@ -825,7 +825,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             buffer.Enabled = false;
             buffer.Font = new System.Drawing.Font("Arial", 10F);
             buffer.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            buffer.Location = new System.Drawing.Point(19, 506);
+            buffer.Location = new System.Drawing.Point(19, 505);
             buffer.Margin = new Padding(4, 3, 4, 3);
             buffer.Multiline = true;
             buffer.Name = "buffer";
@@ -837,7 +837,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridControlKontTW.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlKontTW.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlKontTW.Location = new System.Drawing.Point(1013, 847);
+            gridControlKontTW.Location = new System.Drawing.Point(1013, 846);
             gridControlKontTW.MainView = gridView4;
             gridControlKontTW.Margin = new Padding(4, 3, 4, 3);
             gridControlKontTW.Name = "gridControlKontTW";
@@ -921,7 +921,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             customGridControl4.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             customGridControl4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            customGridControl4.Location = new System.Drawing.Point(275, 615);
+            customGridControl4.Location = new System.Drawing.Point(275, 614);
             customGridControl4.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             customGridControl4.LookAndFeel.UseDefaultLookAndFeel = false;
             customGridControl4.MainView = gridView5;
@@ -1056,7 +1056,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridControlRaskrTW.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlRaskrTW.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlRaskrTW.Location = new System.Drawing.Point(1013, 620);
+            gridControlRaskrTW.Location = new System.Drawing.Point(1013, 619);
             gridControlRaskrTW.MainView = gridViewRaskrTW;
             gridControlRaskrTW.Margin = new Padding(0);
             gridControlRaskrTW.Name = "gridControlRaskrTW";
@@ -1199,7 +1199,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlRaszTW.Margin = new Padding(4, 3, 4, 3);
             gridControlRaszTW.Name = "gridControlRaszTW";
             gridControlRaszTW.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemLookUpEditProizv, repositoryItemLookUpEditOb, repositoryItemLookUpEditPodr });
-            gridControlRaszTW.Size = new System.Drawing.Size(839, 481);
+            gridControlRaszTW.Size = new System.Drawing.Size(839, 480);
             gridControlRaszTW.TabIndex = 17;
             gridControlRaszTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
@@ -1374,7 +1374,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // RecoRichTextBox
             // 
             RecoRichTextBox.Enabled = false;
-            RecoRichTextBox.Location = new System.Drawing.Point(19, 693);
+            RecoRichTextBox.Location = new System.Drawing.Point(19, 692);
             RecoRichTextBox.Margin = new Padding(4, 3, 4, 3);
             RecoRichTextBox.Name = "RecoRichTextBox";
             RecoRichTextBox.Size = new System.Drawing.Size(228, 63);
@@ -1384,7 +1384,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // commentRichTextBox
             // 
             commentRichTextBox.Enabled = false;
-            commentRichTextBox.Location = new System.Drawing.Point(19, 781);
+            commentRichTextBox.Location = new System.Drawing.Point(19, 780);
             commentRichTextBox.Margin = new Padding(4, 3, 4, 3);
             commentRichTextBox.Name = "commentRichTextBox";
             commentRichTextBox.Size = new System.Drawing.Size(228, 62);
@@ -1404,7 +1404,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridControl.Margin = new Padding(4, 3, 4, 3);
             ANNgridControl.Name = "ANNgridControl";
             ANNgridControl.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemButtonEdit1, repositoryItemCheckEdit2, repositoryItemButtonEdit3, repositoryItemDateEdit1 });
-            ANNgridControl.Size = new System.Drawing.Size(700, 524);
+            ANNgridControl.Size = new System.Drawing.Size(700, 523);
             ANNgridControl.TabIndex = 12;
             ANNgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { ANNgridView });
             // 
@@ -1742,7 +1742,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonCopyWd.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             ButtonCopyWd.Font = new System.Drawing.Font("Arial", 10F);
             ButtonCopyWd.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            ButtonCopyWd.Location = new System.Drawing.Point(19, 469);
+            ButtonCopyWd.Location = new System.Drawing.Point(19, 468);
             ButtonCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonCopyWd.Name = "ButtonCopyWd";
             ButtonCopyWd.Size = new System.Drawing.Size(228, 33);
@@ -1918,7 +1918,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBoxWithButtons.Controls.Add(ButtonArchAndCopyWd);
             customGroupBoxWithButtons.Location = new System.Drawing.Point(19, 171);
             customGroupBoxWithButtons.Name = "customGroupBoxWithButtons";
-            customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 213);
+            customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 212);
             customGroupBoxWithButtons.TabIndex = 4;
             customGroupBoxWithButtons.TabStop = false;
             // 
@@ -2033,7 +2033,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup8, layoutControlGroup9, layoutControlGroup10, splitterItem4, splitterItem5, splitterItem6, layoutControlItem28, layoutControlGroup11, layoutControlGroup12, simpleSeparator6, layoutControlGroup15 });
             layoutControlGroup7.Name = "Root";
             layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(5, 5, 5, 5);
-            layoutControlGroup7.Size = new System.Drawing.Size(1847, 940);
+            layoutControlGroup7.Size = new System.Drawing.Size(1847, 939);
             layoutControlGroup7.TextVisible = false;
             // 
             // layoutControlGroup8
@@ -2049,7 +2049,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26 });
             layoutControlGroup8.Location = new System.Drawing.Point(256, 0);
             layoutControlGroup8.Name = "layoutControlGroup8";
-            layoutControlGroup8.Size = new System.Drawing.Size(728, 574);
+            layoutControlGroup8.Size = new System.Drawing.Size(728, 573);
             layoutControlGroup8.Text = "Разделения труда";
             layoutControlGroup8.CustomButtonClick += layoutControlGroup8_CustomButtonClick;
             // 
@@ -2059,7 +2059,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem26.Location = new System.Drawing.Point(0, 0);
             layoutControlItem26.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem26.Name = "layoutControlItem26";
-            layoutControlItem26.Size = new System.Drawing.Size(704, 528);
+            layoutControlItem26.Size = new System.Drawing.Size(704, 527);
             layoutControlItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem26.TextVisible = false;
             // 
@@ -2154,7 +2154,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlGroup10
             // 
             layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem29 });
-            layoutControlGroup10.Location = new System.Drawing.Point(994, 580);
+            layoutControlGroup10.Location = new System.Drawing.Point(994, 579);
             layoutControlGroup10.Name = "layoutControlGroup10";
             layoutControlGroup10.Size = new System.Drawing.Size(843, 217);
             layoutControlGroup10.Text = "Нормы раскроя";
@@ -2174,17 +2174,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             splitterItem4.Location = new System.Drawing.Point(984, 0);
             splitterItem4.Name = "splitterItem4";
-            splitterItem4.Size = new System.Drawing.Size(10, 930);
+            splitterItem4.Size = new System.Drawing.Size(10, 929);
             // 
             // splitterItem5
             // 
-            splitterItem5.Location = new System.Drawing.Point(994, 570);
+            splitterItem5.Location = new System.Drawing.Point(994, 569);
             splitterItem5.Name = "splitterItem5";
             splitterItem5.Size = new System.Drawing.Size(843, 10);
             // 
             // splitterItem6
             // 
-            splitterItem6.Location = new System.Drawing.Point(994, 797);
+            splitterItem6.Location = new System.Drawing.Point(994, 796);
             splitterItem6.Name = "splitterItem6";
             splitterItem6.Size = new System.Drawing.Size(843, 10);
             // 
@@ -2194,13 +2194,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem28.CustomizationFormText = "norm_rasz";
             layoutControlItem28.Location = new System.Drawing.Point(994, 85);
             layoutControlItem28.Name = "layoutControlItem28";
-            layoutControlItem28.Size = new System.Drawing.Size(843, 485);
+            layoutControlItem28.Size = new System.Drawing.Size(843, 484);
             layoutControlItem28.TextVisible = false;
             // 
             // layoutControlGroup11
             // 
             layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem27 });
-            layoutControlGroup11.Location = new System.Drawing.Point(256, 575);
+            layoutControlGroup11.Location = new System.Drawing.Point(256, 574);
             layoutControlGroup11.Name = "layoutControlGroup11";
             layoutControlGroup11.Size = new System.Drawing.Size(728, 355);
             layoutControlGroup11.Text = "Привязанные артикулы";
@@ -2220,7 +2220,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlGroup12
             // 
             layoutControlGroup12.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem30 });
-            layoutControlGroup12.Location = new System.Drawing.Point(994, 807);
+            layoutControlGroup12.Location = new System.Drawing.Point(994, 806);
             layoutControlGroup12.Name = "layoutControlGroup12";
             layoutControlGroup12.Size = new System.Drawing.Size(843, 123);
             layoutControlGroup12.Text = "Операции комплектовки";
@@ -2238,7 +2238,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // simpleSeparator6
             // 
-            simpleSeparator6.Location = new System.Drawing.Point(256, 574);
+            simpleSeparator6.Location = new System.Drawing.Point(256, 573);
             simpleSeparator6.Name = "simpleSeparator6";
             simpleSeparator6.OptionsTableLayoutItem.ColumnIndex = 1;
             simpleSeparator6.Size = new System.Drawing.Size(728, 1);
@@ -2249,7 +2249,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlGroup15.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem21, layoutControlItem23, layoutControlItem22, layoutControlGroup16, layoutControlItem25, layoutControlItem20, layoutControlItem24, layoutControlItem31, layoutControlItem36, layoutControlItem18, layoutControlItem10, layoutControlItem15 });
             layoutControlGroup15.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup15.Name = "layoutControlGroup15";
-            layoutControlGroup15.Size = new System.Drawing.Size(256, 930);
+            layoutControlGroup15.Size = new System.Drawing.Size(256, 929);
             layoutControlGroup15.TextVisible = false;
             // 
             // layoutControlItem21
@@ -2257,7 +2257,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem21.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem21.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem21.Control = constructorTextBox;
-            layoutControlItem21.Location = new System.Drawing.Point(0, 602);
+            layoutControlItem21.Location = new System.Drawing.Point(0, 601);
             layoutControlItem21.MaxSize = new System.Drawing.Size(232, 51);
             layoutControlItem21.MinSize = new System.Drawing.Size(232, 51);
             layoutControlItem21.Name = "layoutControlItem21";
@@ -2272,7 +2272,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem23.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem23.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem23.Control = RecoRichTextBox;
-            layoutControlItem23.Location = new System.Drawing.Point(0, 653);
+            layoutControlItem23.Location = new System.Drawing.Point(0, 652);
             layoutControlItem23.MaxSize = new System.Drawing.Size(232, 88);
             layoutControlItem23.MinSize = new System.Drawing.Size(232, 88);
             layoutControlItem23.Name = "layoutControlItem23";
@@ -2288,7 +2288,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem22.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem22.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem22.Control = commentRichTextBox;
-            layoutControlItem22.Location = new System.Drawing.Point(0, 741);
+            layoutControlItem22.Location = new System.Drawing.Point(0, 740);
             layoutControlItem22.MaxSize = new System.Drawing.Size(232, 87);
             layoutControlItem22.MinSize = new System.Drawing.Size(232, 87);
             layoutControlItem22.Name = "layoutControlItem22";
@@ -2301,7 +2301,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlGroup16
             // 
             layoutControlGroup16.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem12 });
-            layoutControlGroup16.Location = new System.Drawing.Point(0, 828);
+            layoutControlGroup16.Location = new System.Drawing.Point(0, 827);
             layoutControlGroup16.Name = "layoutControlGroup16";
             layoutControlGroup16.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
             layoutControlGroup16.Size = new System.Drawing.Size(232, 78);
@@ -2320,7 +2320,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             layoutControlItem25.Control = buffer;
             layoutControlItem25.CustomizationFormText = "bufferEdit";
-            layoutControlItem25.Location = new System.Drawing.Point(0, 487);
+            layoutControlItem25.Location = new System.Drawing.Point(0, 486);
             layoutControlItem25.MaxSize = new System.Drawing.Size(232, 64);
             layoutControlItem25.MinSize = new System.Drawing.Size(232, 64);
             layoutControlItem25.Name = "layoutControlItem25";
@@ -2333,7 +2333,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem20.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem20.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem20.Control = designerTextBox;
-            layoutControlItem20.Location = new System.Drawing.Point(0, 551);
+            layoutControlItem20.Location = new System.Drawing.Point(0, 550);
             layoutControlItem20.MaxSize = new System.Drawing.Size(232, 51);
             layoutControlItem20.MinSize = new System.Drawing.Size(232, 51);
             layoutControlItem20.Name = "layoutControlItem20";
@@ -2347,7 +2347,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             layoutControlItem24.Control = ButtonCopyWd;
             layoutControlItem24.CustomizationFormText = "bufferBtn";
-            layoutControlItem24.Location = new System.Drawing.Point(0, 450);
+            layoutControlItem24.Location = new System.Drawing.Point(0, 449);
             layoutControlItem24.MaxSize = new System.Drawing.Size(232, 37);
             layoutControlItem24.MinSize = new System.Drawing.Size(232, 37);
             layoutControlItem24.Name = "layoutControlItem24";
@@ -2359,7 +2359,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             layoutControlItem31.Control = pictureBox1;
             layoutControlItem31.CustomizationFormText = "pictureBox";
-            layoutControlItem31.Location = new System.Drawing.Point(0, 369);
+            layoutControlItem31.Location = new System.Drawing.Point(0, 368);
             layoutControlItem31.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem31.Name = "layoutControlItem31";
             layoutControlItem31.Size = new System.Drawing.Size(232, 81);
@@ -2372,7 +2372,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem36.CustomizationFormText = "editBtns";
             layoutControlItem36.Location = new System.Drawing.Point(0, 152);
             layoutControlItem36.Name = "layoutControlItem36";
-            layoutControlItem36.Size = new System.Drawing.Size(232, 217);
+            layoutControlItem36.Size = new System.Drawing.Size(232, 216);
             layoutControlItem36.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem36.TextVisible = false;
             // 
