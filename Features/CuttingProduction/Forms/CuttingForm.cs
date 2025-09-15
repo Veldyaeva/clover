@@ -25,6 +25,8 @@ using System.Data;
 using DevExpress.XtraRichEdit.Model;
 using System.Diagnostics;
 using DevExpress.XtraGrid;
+using System.IO;
+using System.ServiceModel.Channels;
 
 namespace SewingProduction.Features.CuttingProduction.Forms
 {
@@ -37,19 +39,27 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         private List<raskrZehUpView> _currentRzuData = new List<raskrZehUpView>();
         private BindingList<raskrZehUpView> _rzuBindingList;
         private BindingSource _rzuBindingSource;
+        private Panel overlay;
+        private PictureBox spinnerPb;
         public CuttingForm()
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _cuttingService = new CuttingService(_dbHelper);
+            CreateOverlaySpinner();
 
         }
         private async void CuttingForm_Load(object sender, EventArgs e)
         {
             Task bindingsTask = InitializeBindingsAsync();
             await Task.WhenAll(bindingsTask);
-            await LoadRzuAsync();
+            ShowOverlay();
+            try
+            {
+                await LoadRzuAsync();
+            }
+            finally { HideOverlay(); }
         }
         private async Task InitializeBindingsAsync()
         {
@@ -120,7 +130,6 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 Fio2Label.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.fio2), true, DataSourceUpdateMode.Never);
                 TabOrkTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.tab_ork), true, DataSourceUpdateMode.Never);
                 FioOrkLabel.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.fio_ork), true, DataSourceUpdateMode.Never);
-                tabKTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.tab_k), true, DataSourceUpdateMode.Never);
                 DataPrTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.data_pr), true, DataSourceUpdateMode.Never);
                 DataVTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.data_v), true, DataSourceUpdateMode.Never);
                 VipadTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.vipad), true, DataSourceUpdateMode.Never);
@@ -134,35 +143,11 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 datePlanTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.data_plan), true, DataSourceUpdateMode.Never);
                 nomZadTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.nom_zad), true, DataSourceUpdateMode.Never);
                 rzIdTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.rz_id), true, DataSourceUpdateMode.Never);
+                nZvetTextBox.DataBindings.Add("Text", _rzuBindingSource, nameof(raskrZehUpView.n_zvet), true, DataSourceUpdateMode.Never);
                 YearSearchTextBox.Text = DateTime.Now.Year.ToString();
-                otgrYearForSearchTextBox.Text = DateTime.Now.Year.ToString();
+
                 #endregion
-                #region увязка грида со второй вкладки
-                rzuGridControl.DataSource = _rzuBindingSource;
-                gridColumnNomRzu.FieldName = "nom";
-                gridColumnNomNRzu.FieldName = "nom_n";
-                gridColumnNPachRzu.FieldName = "n_pach";
-                gridColumnDataRRzu.FieldName = "data_r";
-                gridColumnArticulRzu.FieldName = "articul";
-                gridColumnModRzu.FieldName = "mod";
-                gridColumnRazmRzu.FieldName = "razm";
-                gridColumnKolRzu.FieldName = "kol";
-                gridColumnPRzu.FieldName = "HasDatePr";
-                gridColumnTPrintRzu.FieldName = "HadDatePt";
-                gridColumnVRzu.FieldName = "HasDateV";
-                gridColumnVshRzu.FieldName = "vsh";
-                gridColumnDataZehRzu.FieldName = "data_zeh";
-                gridColumnDostZehRzu.FieldName = "dost_zeh";
-                gridColumnDateCdRzu.FieldName = "data_cd";
-                gridColumnVipadRzu.FieldName = "vipad";
-                gridColumnKomplRzu.FieldName = "";
-                gridColumnDatePrPrintRzu.FieldName = "data_rasp";
-                gridColumnDatePrVshRzu.FieldName = "data_rasv";
-                gridColumnPachYearRzu.FieldName = "PachYear";
-                gridColumnPachYearRzu.Visible = false;
-                gridViewRzu2.OptionsView.EnableAppearanceEvenRow = false;
-                gridViewRzu2.OptionsView.EnableAppearanceOddRow = false;
-                #endregion
+
 
             }
             catch (Exception ex)
@@ -222,6 +207,53 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных VyazPlanView");
             }
         }
+        private void CreateOverlaySpinner()
+        {
+            // Панель-оверлей, закрывающая форму (приобр. полупрозрачный фон)
+            overlay = new Panel
+            {
+                Dock = DockStyle.Fill,
+                BackColor = Color.FromArgb(120, Color.Gray), // полупрозрачный серый
+                Visible = false
+            };
+
+            // PictureBox по центру для GIF
+            spinnerPb = new PictureBox
+            {
+                SizeMode = PictureBoxSizeMode.CenterImage,
+                Size = new Size(128, 128),
+                Anchor = AnchorStyles.None
+            };
+
+            // Путь к GIF-файлу; положите файл рядом с .exe или укажите абсолютный путь.
+            string gifPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "loading_dude.gif");
+            if (File.Exists(gifPath))
+            {
+                spinnerPb.Image = Image.FromFile(gifPath); // сохраняет анимацию
+            }
+            else
+            {
+                MessageBox.Show("GIF не найден: " + gifPath);
+            }
+
+            // Центрируем PictureBox внутри оверлея
+            overlay.Controls.Add(spinnerPb);
+            overlay.ControlAdded += (s, e) => CenterSpinner();
+
+            this.Controls.Add(overlay);
+            overlay.BringToFront();
+
+            // при изменении размера формы — заново центрировать
+            this.Resize += (s, e) => CenterSpinner();
+        }
+        private void CenterSpinner()
+        {
+            if (overlay == null || spinnerPb == null) return;
+            spinnerPb.Left = (overlay.ClientSize.Width - spinnerPb.Width) / 2;
+            spinnerPb.Top = (overlay.ClientSize.Height - spinnerPb.Height) / 2;
+        }
+        private void ShowOverlay() => overlay.Visible = true;
+        private void HideOverlay() => overlay.Visible = false;
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -356,7 +388,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                             break;
                         // Добавьте другие поля по необходимости
                         case "data_zeh":
-                            DataTable dt = _cuttingService.getNewDataRzu(record.pach_kod);
+                            DataTable dt = _cuttingService.getNewDataRzu(record.nom);
                             DataRow dr = dt.Rows[0];
                             if (dt != null)
                             {
@@ -367,15 +399,30 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                                 }
                                 if (string.IsNullOrEmpty(dr["data_kk_cd"].ToString()))
                                 {
-                                    MessageBox.Show("Не заполнен табельный комплектовщика!");
+                                    MessageBox.Show("Нет даты готово контролера кроя");
                                     exitForEach = true;
                                 }
-                                if (string.IsNullOrEmpty(dr["n_zeh"].ToString()))
+                                if (int.Parse(dr["n_zeh"].ToString()) != 0)
                                 {
                                     MessageBox.Show("Заполнен номер отгрузки в бригаду!");
                                     exitForEach = true;
                                 }
-
+                                if (!string.IsNullOrEmpty(dr["dost_zeh"].ToString().Trim()))
+                                {
+                                    MessageBox.Show("Заполнена бригада!");
+                                    exitForEach = true;
+                                }
+                                if (record.data_zeh != null)
+                                {
+                                    MessageBox.Show("Дата в цех уже стоит!");
+                                    exitForEach = true;
+                                }
+                                if (!exitForEach)
+                                {
+                                    valueUpd = DateTime.Now.Date;
+                                    tagUpdateData = true;
+                                    record.data_zeh = DateTime.Now;
+                                }
 
 
                             }
@@ -508,35 +555,67 @@ namespace SewingProduction.Features.CuttingProduction.Forms
 
         }
 
-        private void gridViewRzu2_RowStyle(object sender, RowStyleEventArgs e)
+        private void nZvetTextBox_TextChanged(object sender, EventArgs e)
         {
-            var row = gridViewRzu2.GetRow(e.RowHandle) as raskrZehUpView;
-            if (row == null) return;
 
-            decimal? nom = row.nom;
-            int groupIndex = row.groupIndex;
-
-            e.Appearance.BackColor = groupIndex == 0 ? Color.White : Color.LightGray;
         }
 
-        private void otgrButtonSearch_Click(object sender, EventArgs e)
+        private void nZvetTextBox_Validated(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(otgrYearForSearchTextBox.Text) && !string.IsNullOrEmpty(otgrPachForSearchTextBox.Text))
-            {
-                GridColumn column = gridViewRzu2.Columns["PachYear"];
-                int rowHandle = gridViewRzu2.LocateByValue(0, column, $"{otgrPachForSearchTextBox.Text}{otgrYearForSearchTextBox.Text}");
-                if (rowHandle != GridControl.InvalidRowHandle)
-                {
-                    gridViewRzu2.FocusedRowHandle = gridViewRzu.LocateByValue(0, column, $"{otgrPachForSearchTextBox.Text}{otgrYearForSearchTextBox.Text}");
-                    gridViewRzu2.ShowEditor();
-                }
-                else
-                {
-                    MessageBox.Show("Запись не найдена!");
-                }
+            string message = "Вы уверены что хотите сохранить изменения?";
+            DialogResult result = MessageBox.Show(
+           message,
+           "Подтверждение сохранения",
+           MessageBoxButtons.YesNo,
+           MessageBoxIcon.Question,
+           MessageBoxDefaultButton.Button2);
 
+            if (result == DialogResult.Yes)
+            {
+
+                var view = gridViewRzu;
+                int rowHandle = view.FocusedRowHandle;
+
+                TextBox textBox = (TextBox)sender;
+                var rowRzu = view.GetRow(rowHandle) as raskrZehUpView;
+                decimal? clickedNom = rowRzu.nom;
+                var recordsToUpdate = _rzuBindingSource.Cast<raskrZehUpView>().Where(record => record.nom == clickedNom).ToList();
+                foreach (var record in recordsToUpdate)
+                {
+                    record.n_zvet = textBox.Text.ToString();
+                }
+                _cuttingService.setValue("n_zvet", textBox.Text.ToString(), clickedNom);
+                MessageBox.Show("Сохранено!");
+                gridViewRzu.RefreshData();
 
             }
+            else
+            {
+                _rzuBindingSource.ResetBindings(false);
+            }
+        }
+
+        private void customGridRzu_DoubleClick_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridViewRzu_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            
+        }
+
+        private void gridViewRzu_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var view = gridViewRzu;
+            int rowHandle = view.FocusedRowHandle;
+            var rowRzu = view.GetRow(rowHandle) as raskrZehUpView;
+            string? clickedNomZad = rowRzu.nom_zad;
+            decimal? clickedNom = rowRzu.nom;
+            recNomZadTextBox.Text = _cuttingService.getRecForNomZad(clickedNomZad);
+            recNomTextBox.Text = _cuttingService.getRecForNom(clickedNom);
+            recNomZadTextBox.Refresh();
+            recNomTextBox.Refresh();
         }
     }
 }

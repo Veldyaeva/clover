@@ -28,15 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue3 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             gridColumnRzuNom = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnNomRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            cuttingTabControl1 = new CustomTabControl();
-            xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            NomZadSearchTextBox = new CustomTextBox();
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            recNomTextBox = new CustomTextBox();
+            recNomZadTextBox = new CustomTextBox();
+            nZvetTextBox = new CustomTextBox();
+            customButton14 = new Core.Class.CustomButton();
+            YearSearchTextBox = new CustomTextBoxEx();
+            PachSearchTextBox = new CustomTextBoxEx();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             customLabel16 = new CustomLabel();
             rzIdTextBox = new CustomTextBox();
@@ -98,8 +100,6 @@
             DataRTextBox = new CustomTextBox();
             customButton1 = new Core.Class.CustomButton();
             SearchPachСustomButton = new Core.Class.CustomButton();
-            PachSearchTextBox = new CustomTextBox();
-            YearSearchTextBox = new CustomTextBox();
             customGridRzu = new Core.Class.CustomGridControl();
             gridViewRzu = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnRzuChipStatus = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -160,20 +160,12 @@
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem35 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -182,6 +174,17 @@
             layoutControlItem27 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem34 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -195,66 +198,14 @@
             layoutControlItem31 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem32 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem33 = new DevExpress.XtraLayout.LayoutControlItem();
-            simpleSeparator2 = new DevExpress.XtraLayout.SimpleSeparator();
-            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem34 = new DevExpress.XtraLayout.LayoutControlItem();
-            xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            customButton15 = new Core.Class.CustomButton();
-            customButton14 = new Core.Class.CustomButton();
-            otgrButtonSearch = new Core.Class.CustomButton();
-            otgrPachForSearchTextBox = new CustomTextBox();
-            customLabel20 = new CustomLabel();
-            otgrYearForSearchTextBox = new CustomTextBox();
-            customLabel18 = new CustomLabel();
-            rzuGridControl = new Core.Class.CustomGridControl();
-            gridViewRzu2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gridColumnNomNRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnNPachRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDataRRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnArticulRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnModRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnRazmRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnKolRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnPRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit10 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gridColumnTPrintRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit11 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gridColumnVRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit12 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gridColumnVshRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDataZehRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDostZehRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnVipadRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnKomplRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDatePrPrintRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDatePrVshRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDateCdRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnPachYearRzu = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit13 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            repositoryItemCheckEdit14 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            repositoryItemCheckEdit15 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            repositoryItemCheckEdit16 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            repositoryItemCheckEdit17 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            repositoryItemCheckEdit18 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem35 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
-            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem36 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem37 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem36 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem38 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem39 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem40 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem41 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem42 = new DevExpress.XtraLayout.LayoutControlItem();
-            NomZadSearchTextBox = new CustomTextBox();
-            ((System.ComponentModel.ISupportInitialize)cuttingTabControl1).BeginInit();
-            cuttingTabControl1.SuspendLayout();
-            xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
             layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)YearSearchTextBox.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PachSearchTextBox.Properties).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridRzu).BeginInit();
@@ -273,20 +224,12 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
@@ -295,6 +238,17 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem27).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem28).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
@@ -308,35 +262,10 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem31).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem32).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem33).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)simpleSeparator2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).BeginInit();
-            xtraTabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
-            layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)rzuGridControl).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewRzu2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit12).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit14).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit15).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit16).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit17).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit18).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem36).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem37).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem36).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem38).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem39).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem40).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem41).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem42).BeginInit();
             SuspendLayout();
             // 
             // gridColumnRzuNom
@@ -347,38 +276,24 @@
             gridColumnRzuNom.VisibleIndex = 1;
             gridColumnRzuNom.Width = 45;
             // 
-            // gridColumnNomRzu
+            // NomZadSearchTextBox
             // 
-            gridColumnNomRzu.Caption = "№";
-            gridColumnNomRzu.Name = "gridColumnNomRzu";
-            gridColumnNomRzu.Visible = true;
-            gridColumnNomRzu.VisibleIndex = 0;
-            gridColumnNomRzu.Width = 45;
-            // 
-            // cuttingTabControl1
-            // 
-            cuttingTabControl1.Appearance.ForeColor = System.Drawing.Color.Black;
-            cuttingTabControl1.Appearance.Options.UseForeColor = true;
-            cuttingTabControl1.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
-            cuttingTabControl1.HeaderButtons = DevExpress.XtraTab.TabButtons.Prev;
-            cuttingTabControl1.Location = new System.Drawing.Point(0, 0);
-            cuttingTabControl1.Name = "cuttingTabControl1";
-            cuttingTabControl1.ObjectName = null;
-            cuttingTabControl1.SelectedTabPage = xtraTabPage1;
-            cuttingTabControl1.Size = new System.Drawing.Size(1838, 801);
-            cuttingTabControl1.TabIndex = 0;
-            cuttingTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage1, xtraTabPage2 });
-            // 
-            // xtraTabPage1
-            // 
-            xtraTabPage1.Controls.Add(layoutControl2);
-            xtraTabPage1.Name = "xtraTabPage1";
-            xtraTabPage1.Size = new System.Drawing.Size(1836, 776);
-            xtraTabPage1.Text = "РАСКРОЙ";
-            xtraTabPage1.Paint += xtraTabPage1_Paint;
+            NomZadSearchTextBox.BackColor = System.Drawing.Color.White;
+            NomZadSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            NomZadSearchTextBox.ForeColor = System.Drawing.Color.Black;
+            NomZadSearchTextBox.Location = new System.Drawing.Point(819, 36);
+            NomZadSearchTextBox.Name = "NomZadSearchTextBox";
+            NomZadSearchTextBox.Size = new System.Drawing.Size(183, 23);
+            NomZadSearchTextBox.TabIndex = 3;
             // 
             // layoutControl2
             // 
+            layoutControl2.Controls.Add(recNomTextBox);
+            layoutControl2.Controls.Add(recNomZadTextBox);
+            layoutControl2.Controls.Add(nZvetTextBox);
+            layoutControl2.Controls.Add(customButton14);
+            layoutControl2.Controls.Add(YearSearchTextBox);
+            layoutControl2.Controls.Add(PachSearchTextBox);
             layoutControl2.Controls.Add(tableLayoutPanel2);
             layoutControl2.Controls.Add(customButton13);
             layoutControl2.Controls.Add(customButton12);
@@ -410,17 +325,90 @@
             layoutControl2.Controls.Add(DataRTextBox);
             layoutControl2.Controls.Add(customButton1);
             layoutControl2.Controls.Add(SearchPachСustomButton);
-            layoutControl2.Controls.Add(PachSearchTextBox);
-            layoutControl2.Controls.Add(YearSearchTextBox);
             layoutControl2.Controls.Add(customGridRzu);
             layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl2.Location = new System.Drawing.Point(0, 0);
             layoutControl2.Name = "layoutControl2";
             layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(244, 193, 650, 400);
             layoutControl2.Root = layoutControlGroup1;
-            layoutControl2.Size = new System.Drawing.Size(1836, 776);
-            layoutControl2.TabIndex = 3;
+            layoutControl2.Size = new System.Drawing.Size(1841, 813);
+            layoutControl2.TabIndex = 4;
             layoutControl2.Text = "layoutControl2";
+            // 
+            // recNomTextBox
+            // 
+            recNomTextBox.BackColor = System.Drawing.Color.White;
+            recNomTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            recNomTextBox.ForeColor = System.Drawing.Color.Black;
+            recNomTextBox.Location = new System.Drawing.Point(153, 562);
+            recNomTextBox.Name = "recNomTextBox";
+            recNomTextBox.Size = new System.Drawing.Size(973, 20);
+            recNomTextBox.TabIndex = 43;
+            // 
+            // recNomZadTextBox
+            // 
+            recNomZadTextBox.BackColor = System.Drawing.Color.White;
+            recNomZadTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            recNomZadTextBox.ForeColor = System.Drawing.Color.Black;
+            recNomZadTextBox.Location = new System.Drawing.Point(153, 538);
+            recNomZadTextBox.Multiline = true;
+            recNomZadTextBox.Name = "recNomZadTextBox";
+            recNomZadTextBox.Size = new System.Drawing.Size(973, 20);
+            recNomZadTextBox.TabIndex = 42;
+            // 
+            // nZvetTextBox
+            // 
+            nZvetTextBox.BackColor = System.Drawing.Color.White;
+            nZvetTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            nZvetTextBox.ForeColor = System.Drawing.Color.Black;
+            nZvetTextBox.Location = new System.Drawing.Point(153, 514);
+            nZvetTextBox.Name = "nZvetTextBox";
+            nZvetTextBox.Size = new System.Drawing.Size(973, 20);
+            nZvetTextBox.TabIndex = 41;
+            nZvetTextBox.TextChanged += nZvetTextBox_TextChanged;
+            nZvetTextBox.Validated += nZvetTextBox_Validated;
+            // 
+            // customButton14
+            // 
+            customButton14.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButton14.Font = new System.Drawing.Font("Arial", 10F);
+            customButton14.ForeColor = System.Drawing.Color.Black;
+            customButton14.Location = new System.Drawing.Point(1449, 547);
+            customButton14.Name = "customButton14";
+            customButton14.Size = new System.Drawing.Size(85, 57);
+            customButton14.TabIndex = 39;
+            customButton14.Text = "Шк печать доставка";
+            customButton14.UseVisualStyleBackColor = false;
+            // 
+            // YearSearchTextBox
+            // 
+            YearSearchTextBox.Location = new System.Drawing.Point(1492, 53);
+            YearSearchTextBox.Name = "YearSearchTextBox";
+            YearSearchTextBox.ObjectName = null;
+            YearSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            YearSearchTextBox.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            YearSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            YearSearchTextBox.Properties.Appearance.Options.UseBackColor = true;
+            YearSearchTextBox.Properties.Appearance.Options.UseFont = true;
+            YearSearchTextBox.Properties.Appearance.Options.UseForeColor = true;
+            YearSearchTextBox.Size = new System.Drawing.Size(50, 22);
+            YearSearchTextBox.StyleController = layoutControl2;
+            YearSearchTextBox.TabIndex = 38;
+            // 
+            // PachSearchTextBox
+            // 
+            PachSearchTextBox.Location = new System.Drawing.Point(1599, 53);
+            PachSearchTextBox.Name = "PachSearchTextBox";
+            PachSearchTextBox.ObjectName = null;
+            PachSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            PachSearchTextBox.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            PachSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            PachSearchTextBox.Properties.Appearance.Options.UseBackColor = true;
+            PachSearchTextBox.Properties.Appearance.Options.UseFont = true;
+            PachSearchTextBox.Properties.Appearance.Options.UseForeColor = true;
+            PachSearchTextBox.Size = new System.Drawing.Size(96, 22);
+            PachSearchTextBox.StyleController = layoutControl2;
+            PachSearchTextBox.TabIndex = 37;
             // 
             // tableLayoutPanel2
             // 
@@ -433,13 +421,13 @@
             tableLayoutPanel2.Controls.Add(nomZadTextBox, 0, 1);
             tableLayoutPanel2.Controls.Add(datePlanTextBox, 0, 0);
             tableLayoutPanel2.Controls.Add(customLabel12, 1, 0);
-            tableLayoutPanel2.Location = new System.Drawing.Point(1427, 541);
+            tableLayoutPanel2.Location = new System.Drawing.Point(1550, 514);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel2.Size = new System.Drawing.Size(397, 109);
+            tableLayoutPanel2.Size = new System.Drawing.Size(279, 100);
             tableLayoutPanel2.TabIndex = 36;
             // 
             // customLabel16
@@ -447,7 +435,7 @@
             customLabel16.AutoSize = true;
             customLabel16.Font = new System.Drawing.Font("Arial", 10F);
             customLabel16.ForeColor = System.Drawing.Color.Black;
-            customLabel16.Location = new System.Drawing.Point(110, 58);
+            customLabel16.Location = new System.Drawing.Point(78, 58);
             customLabel16.Name = "customLabel16";
             customLabel16.Size = new System.Drawing.Size(107, 16);
             customLabel16.TabIndex = 5;
@@ -460,7 +448,7 @@
             rzIdTextBox.ForeColor = System.Drawing.Color.Black;
             rzIdTextBox.Location = new System.Drawing.Point(3, 61);
             rzIdTextBox.Name = "rzIdTextBox";
-            rzIdTextBox.Size = new System.Drawing.Size(100, 23);
+            rzIdTextBox.Size = new System.Drawing.Size(69, 23);
             rzIdTextBox.TabIndex = 4;
             // 
             // customLabel14
@@ -468,7 +456,7 @@
             customLabel14.AutoSize = true;
             customLabel14.Font = new System.Drawing.Font("Arial", 10F);
             customLabel14.ForeColor = System.Drawing.Color.Black;
-            customLabel14.Location = new System.Drawing.Point(110, 29);
+            customLabel14.Location = new System.Drawing.Point(78, 29);
             customLabel14.Name = "customLabel14";
             customLabel14.Size = new System.Drawing.Size(63, 16);
             customLabel14.TabIndex = 3;
@@ -481,7 +469,7 @@
             nomZadTextBox.ForeColor = System.Drawing.Color.Black;
             nomZadTextBox.Location = new System.Drawing.Point(3, 32);
             nomZadTextBox.Name = "nomZadTextBox";
-            nomZadTextBox.Size = new System.Drawing.Size(100, 23);
+            nomZadTextBox.Size = new System.Drawing.Size(69, 23);
             nomZadTextBox.TabIndex = 2;
             // 
             // datePlanTextBox
@@ -491,16 +479,15 @@
             datePlanTextBox.ForeColor = System.Drawing.Color.Black;
             datePlanTextBox.Location = new System.Drawing.Point(3, 3);
             datePlanTextBox.Name = "datePlanTextBox";
-            datePlanTextBox.Size = new System.Drawing.Size(100, 23);
+            datePlanTextBox.Size = new System.Drawing.Size(69, 23);
             datePlanTextBox.TabIndex = 0;
-            datePlanTextBox.TextChanged += customTextBox1_TextChanged;
             // 
             // customLabel12
             // 
             customLabel12.AutoSize = true;
             customLabel12.Font = new System.Drawing.Font("Arial", 10F);
             customLabel12.ForeColor = System.Drawing.Color.Black;
-            customLabel12.Location = new System.Drawing.Point(110, 0);
+            customLabel12.Location = new System.Drawing.Point(78, 0);
             customLabel12.Name = "customLabel12";
             customLabel12.Size = new System.Drawing.Size(113, 16);
             customLabel12.TabIndex = 1;
@@ -511,9 +498,9 @@
             customButton13.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton13.Font = new System.Drawing.Font("Arial", 10F);
             customButton13.ForeColor = System.Drawing.Color.Black;
-            customButton13.Location = new System.Drawing.Point(329, 574);
+            customButton13.Location = new System.Drawing.Point(1345, 547);
             customButton13.Name = "customButton13";
-            customButton13.Size = new System.Drawing.Size(149, 39);
+            customButton13.Size = new System.Drawing.Size(100, 57);
             customButton13.TabIndex = 35;
             customButton13.Text = "Вшивки";
             customButton13.UseVisualStyleBackColor = false;
@@ -523,9 +510,9 @@
             customButton12.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton12.Font = new System.Drawing.Font("Arial", 10F);
             customButton12.ForeColor = System.Drawing.Color.Black;
-            customButton12.Location = new System.Drawing.Point(329, 715);
+            customButton12.Location = new System.Drawing.Point(1345, 717);
             customButton12.Name = "customButton12";
-            customButton12.Size = new System.Drawing.Size(149, 37);
+            customButton12.Size = new System.Drawing.Size(189, 72);
             customButton12.TabIndex = 34;
             customButton12.Text = "customButton12";
             customButton12.UseVisualStyleBackColor = false;
@@ -535,9 +522,9 @@
             customButton11.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton11.Font = new System.Drawing.Font("Arial", 10F);
             customButton11.ForeColor = System.Drawing.Color.Black;
-            customButton11.Location = new System.Drawing.Point(329, 669);
+            customButton11.Location = new System.Drawing.Point(1345, 663);
             customButton11.Name = "customButton11";
-            customButton11.Size = new System.Drawing.Size(149, 42);
+            customButton11.Size = new System.Drawing.Size(189, 50);
             customButton11.TabIndex = 33;
             customButton11.Text = "МЛ П/В";
             customButton11.UseVisualStyleBackColor = false;
@@ -547,9 +534,9 @@
             customButton10.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton10.Font = new System.Drawing.Font("Arial", 10F);
             customButton10.ForeColor = System.Drawing.Color.Black;
-            customButton10.Location = new System.Drawing.Point(329, 617);
+            customButton10.Location = new System.Drawing.Point(1345, 608);
             customButton10.Name = "customButton10";
-            customButton10.Size = new System.Drawing.Size(149, 48);
+            customButton10.Size = new System.Drawing.Size(189, 51);
             customButton10.TabIndex = 32;
             customButton10.Text = "КонтРТ";
             customButton10.UseVisualStyleBackColor = false;
@@ -559,9 +546,9 @@
             customButton9.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton9.Font = new System.Drawing.Font("Arial", 10F);
             customButton9.ForeColor = System.Drawing.Color.Black;
-            customButton9.Location = new System.Drawing.Point(176, 715);
+            customButton9.Location = new System.Drawing.Point(1266, 717);
             customButton9.Name = "customButton9";
-            customButton9.Size = new System.Drawing.Size(149, 37);
+            customButton9.Size = new System.Drawing.Size(75, 72);
             customButton9.TabIndex = 31;
             customButton9.Text = "МЛ+РТ";
             customButton9.UseVisualStyleBackColor = false;
@@ -571,9 +558,9 @@
             customButton8.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton8.Font = new System.Drawing.Font("Arial", 10F);
             customButton8.ForeColor = System.Drawing.Color.Black;
-            customButton8.Location = new System.Drawing.Point(176, 669);
+            customButton8.Location = new System.Drawing.Point(1266, 663);
             customButton8.Name = "customButton8";
-            customButton8.Size = new System.Drawing.Size(149, 42);
+            customButton8.Size = new System.Drawing.Size(75, 50);
             customButton8.TabIndex = 30;
             customButton8.Text = "Печать ШК";
             customButton8.UseVisualStyleBackColor = false;
@@ -583,9 +570,9 @@
             customButton7.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton7.Font = new System.Drawing.Font("Arial", 10F);
             customButton7.ForeColor = System.Drawing.Color.Black;
-            customButton7.Location = new System.Drawing.Point(176, 615);
+            customButton7.Location = new System.Drawing.Point(1266, 606);
             customButton7.Name = "customButton7";
-            customButton7.Size = new System.Drawing.Size(149, 50);
+            customButton7.Size = new System.Drawing.Size(75, 53);
             customButton7.TabIndex = 29;
             customButton7.Text = "ШК+РТ по заданию";
             customButton7.UseVisualStyleBackColor = false;
@@ -595,9 +582,9 @@
             customButton6.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton6.Font = new System.Drawing.Font("Arial", 10F);
             customButton6.ForeColor = System.Drawing.Color.Black;
-            customButton6.Location = new System.Drawing.Point(176, 574);
+            customButton6.Location = new System.Drawing.Point(1266, 547);
             customButton6.Name = "customButton6";
-            customButton6.Size = new System.Drawing.Size(149, 37);
+            customButton6.Size = new System.Drawing.Size(75, 55);
             customButton6.TabIndex = 28;
             customButton6.Text = "Отчет раскрой";
             customButton6.UseVisualStyleBackColor = false;
@@ -607,9 +594,9 @@
             customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton5.Font = new System.Drawing.Font("Arial", 10F);
             customButton5.ForeColor = System.Drawing.Color.Black;
-            customButton5.Location = new System.Drawing.Point(24, 715);
+            customButton5.Location = new System.Drawing.Point(1142, 717);
             customButton5.Name = "customButton5";
-            customButton5.Size = new System.Drawing.Size(148, 37);
+            customButton5.Size = new System.Drawing.Size(120, 72);
             customButton5.TabIndex = 27;
             customButton5.Text = "Удалить расчет";
             customButton5.UseVisualStyleBackColor = false;
@@ -619,9 +606,9 @@
             customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton4.Font = new System.Drawing.Font("Arial", 10F);
             customButton4.ForeColor = System.Drawing.Color.Black;
-            customButton4.Location = new System.Drawing.Point(24, 669);
+            customButton4.Location = new System.Drawing.Point(1142, 663);
             customButton4.Name = "customButton4";
-            customButton4.Size = new System.Drawing.Size(148, 42);
+            customButton4.Size = new System.Drawing.Size(120, 50);
             customButton4.TabIndex = 26;
             customButton4.Text = "Редактировать";
             customButton4.UseVisualStyleBackColor = false;
@@ -631,9 +618,9 @@
             customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
             customButton3.ForeColor = System.Drawing.Color.Black;
-            customButton3.Location = new System.Drawing.Point(24, 615);
+            customButton3.Location = new System.Drawing.Point(1142, 606);
             customButton3.Name = "customButton3";
-            customButton3.Size = new System.Drawing.Size(148, 50);
+            customButton3.Size = new System.Drawing.Size(120, 53);
             customButton3.TabIndex = 25;
             customButton3.Text = "Формирование \r\nреестров";
             customButton3.UseVisualStyleBackColor = false;
@@ -643,9 +630,9 @@
             customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
             customButton2.ForeColor = System.Drawing.Color.Black;
-            customButton2.Location = new System.Drawing.Point(24, 574);
+            customButton2.Location = new System.Drawing.Point(1142, 547);
             customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(148, 37);
+            customButton2.Size = new System.Drawing.Size(120, 55);
             customButton2.TabIndex = 24;
             customButton2.Text = "Просмотр реестров";
             customButton2.UseVisualStyleBackColor = false;
@@ -680,7 +667,7 @@
             tableLayoutPanel1.Controls.Add(customLabel21, 0, 6);
             tableLayoutPanel1.Controls.Add(customLabel19, 0, 5);
             tableLayoutPanel1.Controls.Add(dateZehTextBox, 1, 7);
-            tableLayoutPanel1.Location = new System.Drawing.Point(1428, 262);
+            tableLayoutPanel1.Location = new System.Drawing.Point(1432, 235);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 9;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
@@ -692,7 +679,7 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(396, 275);
+            tableLayoutPanel1.Size = new System.Drawing.Size(397, 275);
             tableLayoutPanel1.TabIndex = 23;
             // 
             // dostZehTextBox
@@ -725,7 +712,6 @@
             TabKpvTextBox.Name = "TabKpvTextBox";
             TabKpvTextBox.Size = new System.Drawing.Size(55, 23);
             TabKpvTextBox.TabIndex = 15;
-            TabKpvTextBox.TextChanged += TabKpvTextBox_TextChanged;
             // 
             // TabMLabel
             // 
@@ -747,7 +733,6 @@
             TabMTextBox.Name = "TabMTextBox";
             TabMTextBox.Size = new System.Drawing.Size(55, 23);
             TabMTextBox.TabIndex = 27;
-            TabMTextBox.TextChanged += TabMTextBox_TextChanged;
             // 
             // TabPTextBox
             // 
@@ -758,7 +743,6 @@
             TabPTextBox.Name = "TabPTextBox";
             TabPTextBox.Size = new System.Drawing.Size(55, 23);
             TabPTextBox.TabIndex = 7;
-            TabPTextBox.TextChanged += TabPTextBox_TextChanged;
             // 
             // customLabel7
             // 
@@ -791,7 +775,6 @@
             tabKTextBox.ReadOnly = true;
             tabKTextBox.Size = new System.Drawing.Size(55, 23);
             tabKTextBox.TabIndex = 4;
-            tabKTextBox.TextChanged += tabKTextBox_TextChanged;
             // 
             // customLabel13
             // 
@@ -802,7 +785,6 @@
             customLabel13.Size = new System.Drawing.Size(60, 31);
             customLabel13.TabIndex = 1;
             customLabel13.Text = "Таб.№ \r\nопер.РК";
-            customLabel13.Click += customLabel13_Click;
             // 
             // TabOrkTextBox
             // 
@@ -825,7 +807,6 @@
             FioOrkLabel.Size = new System.Drawing.Size(39, 16);
             FioOrkLabel.TabIndex = 2;
             FioOrkLabel.Text = "ФИО";
-            FioOrkLabel.Click += customLabel16_Click;
             // 
             // TabR1TextBox
             // 
@@ -943,7 +924,6 @@
             customLabel19.Size = new System.Drawing.Size(54, 32);
             customLabel19.TabIndex = 6;
             customLabel19.Text = "Таб.№ \r\nмаст";
-            customLabel19.Click += customLabel19_Click;
             // 
             // dateZehTextBox
             // 
@@ -959,7 +939,7 @@
             // 
             customLabel10.Font = new System.Drawing.Font("Arial", 10F);
             customLabel10.ForeColor = System.Drawing.Color.Black;
-            customLabel10.Location = new System.Drawing.Point(1450, 225);
+            customLabel10.Location = new System.Drawing.Point(1454, 199);
             customLabel10.Name = "customLabel10";
             customLabel10.Size = new System.Drawing.Size(112, 20);
             customLabel10.TabIndex = 1;
@@ -969,7 +949,7 @@
             // 
             customLabel9.Font = new System.Drawing.Font("Arial", 10F);
             customLabel9.ForeColor = System.Drawing.Color.Black;
-            customLabel9.Location = new System.Drawing.Point(1450, 201);
+            customLabel9.Location = new System.Drawing.Point(1454, 175);
             customLabel9.Name = "customLabel9";
             customLabel9.Size = new System.Drawing.Size(112, 20);
             customLabel9.TabIndex = 1;
@@ -979,9 +959,9 @@
             // 
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
             customLabel6.ForeColor = System.Drawing.Color.Black;
-            customLabel6.Location = new System.Drawing.Point(1678, 201);
+            customLabel6.Location = new System.Drawing.Point(1682, 175);
             customLabel6.Name = "customLabel6";
-            customLabel6.Size = new System.Drawing.Size(134, 20);
+            customLabel6.Size = new System.Drawing.Size(135, 20);
             customLabel6.TabIndex = 1;
             customLabel6.Text = "Выпада";
             // 
@@ -990,9 +970,9 @@
             ModKTextBox.BackColor = System.Drawing.Color.White;
             ModKTextBox.Font = new System.Drawing.Font("Arial", 10F);
             ModKTextBox.ForeColor = System.Drawing.Color.Black;
-            ModKTextBox.Location = new System.Drawing.Point(1730, 153);
+            ModKTextBox.Location = new System.Drawing.Point(1678, 127);
             ModKTextBox.Name = "ModKTextBox";
-            ModKTextBox.Size = new System.Drawing.Size(82, 20);
+            ModKTextBox.Size = new System.Drawing.Size(139, 20);
             ModKTextBox.TabIndex = 9;
             // 
             // ArticulKTextBox
@@ -1000,18 +980,18 @@
             ArticulKTextBox.BackColor = System.Drawing.Color.White;
             ArticulKTextBox.Font = new System.Drawing.Font("Arial", 10F);
             ArticulKTextBox.ForeColor = System.Drawing.Color.Black;
-            ArticulKTextBox.Location = new System.Drawing.Point(1607, 153);
+            ArticulKTextBox.Location = new System.Drawing.Point(1542, 127);
             ArticulKTextBox.Name = "ArticulKTextBox";
-            ArticulKTextBox.Size = new System.Drawing.Size(119, 20);
+            ArticulKTextBox.Size = new System.Drawing.Size(132, 20);
             ArticulKTextBox.TabIndex = 8;
             // 
             // customLabel5
             // 
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
             customLabel5.ForeColor = System.Drawing.Color.Black;
-            customLabel5.Location = new System.Drawing.Point(1607, 124);
+            customLabel5.Location = new System.Drawing.Point(1454, 127);
             customLabel5.Name = "customLabel5";
-            customLabel5.Size = new System.Drawing.Size(205, 25);
+            customLabel5.Size = new System.Drawing.Size(84, 20);
             customLabel5.TabIndex = 1;
             customLabel5.Text = "Комплект";
             // 
@@ -1019,9 +999,9 @@
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
             customLabel4.ForeColor = System.Drawing.Color.Black;
-            customLabel4.Location = new System.Drawing.Point(1506, 124);
+            customLabel4.Location = new System.Drawing.Point(1594, 103);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(97, 25);
+            customLabel4.Size = new System.Drawing.Size(80, 20);
             customLabel4.TabIndex = 1;
             customLabel4.Text = "Дата";
             // 
@@ -1029,9 +1009,9 @@
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.ForeColor = System.Drawing.Color.Black;
-            customLabel3.Location = new System.Drawing.Point(1450, 124);
+            customLabel3.Location = new System.Drawing.Point(1454, 103);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(52, 25);
+            customLabel3.Size = new System.Drawing.Size(51, 20);
             customLabel3.TabIndex = 1;
             customLabel3.Text = "Пачка";
             // 
@@ -1039,9 +1019,9 @@
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.Black;
-            customLabel2.Location = new System.Drawing.Point(1558, 51);
+            customLabel2.Location = new System.Drawing.Point(1546, 53);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(109, 20);
+            customLabel2.Size = new System.Drawing.Size(49, 22);
             customLabel2.TabIndex = 1;
             customLabel2.Text = "Пачка";
             // 
@@ -1049,9 +1029,9 @@
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.Black;
-            customLabel1.Location = new System.Drawing.Point(1450, 51);
+            customLabel1.Location = new System.Drawing.Point(1454, 53);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(104, 20);
+            customLabel1.Size = new System.Drawing.Size(34, 22);
             customLabel1.TabIndex = 1;
             customLabel1.Text = "Год";
             // 
@@ -1060,9 +1040,9 @@
             VipadTextBox.BackColor = System.Drawing.Color.White;
             VipadTextBox.Font = new System.Drawing.Font("Arial", 10F);
             VipadTextBox.ForeColor = System.Drawing.Color.Black;
-            VipadTextBox.Location = new System.Drawing.Point(1678, 225);
+            VipadTextBox.Location = new System.Drawing.Point(1682, 199);
             VipadTextBox.Name = "VipadTextBox";
-            VipadTextBox.Size = new System.Drawing.Size(134, 20);
+            VipadTextBox.Size = new System.Drawing.Size(135, 20);
             VipadTextBox.TabIndex = 12;
             // 
             // DataVTextBox
@@ -1070,7 +1050,7 @@
             DataVTextBox.BackColor = System.Drawing.Color.White;
             DataVTextBox.Font = new System.Drawing.Font("Arial", 10F);
             DataVTextBox.ForeColor = System.Drawing.Color.Black;
-            DataVTextBox.Location = new System.Drawing.Point(1566, 225);
+            DataVTextBox.Location = new System.Drawing.Point(1570, 199);
             DataVTextBox.Name = "DataVTextBox";
             DataVTextBox.Size = new System.Drawing.Size(108, 20);
             DataVTextBox.TabIndex = 11;
@@ -1080,7 +1060,7 @@
             DataPrTextBox.BackColor = System.Drawing.Color.White;
             DataPrTextBox.Font = new System.Drawing.Font("Arial", 10F);
             DataPrTextBox.ForeColor = System.Drawing.Color.Black;
-            DataPrTextBox.Location = new System.Drawing.Point(1566, 201);
+            DataPrTextBox.Location = new System.Drawing.Point(1570, 175);
             DataPrTextBox.Name = "DataPrTextBox";
             DataPrTextBox.Size = new System.Drawing.Size(108, 20);
             DataPrTextBox.TabIndex = 10;
@@ -1090,9 +1070,9 @@
             pachTextBox.BackColor = System.Drawing.Color.White;
             pachTextBox.Font = new System.Drawing.Font("Arial", 10F);
             pachTextBox.ForeColor = System.Drawing.Color.Black;
-            pachTextBox.Location = new System.Drawing.Point(1450, 153);
+            pachTextBox.Location = new System.Drawing.Point(1509, 103);
             pachTextBox.Name = "pachTextBox";
-            pachTextBox.Size = new System.Drawing.Size(52, 20);
+            pachTextBox.Size = new System.Drawing.Size(81, 20);
             pachTextBox.TabIndex = 6;
             // 
             // DataRTextBox
@@ -1100,9 +1080,9 @@
             DataRTextBox.BackColor = System.Drawing.Color.White;
             DataRTextBox.Font = new System.Drawing.Font("Arial", 10F);
             DataRTextBox.ForeColor = System.Drawing.Color.Black;
-            DataRTextBox.Location = new System.Drawing.Point(1506, 153);
+            DataRTextBox.Location = new System.Drawing.Point(1678, 103);
             DataRTextBox.Name = "DataRTextBox";
-            DataRTextBox.Size = new System.Drawing.Size(97, 20);
+            DataRTextBox.Size = new System.Drawing.Size(139, 20);
             DataRTextBox.TabIndex = 7;
             // 
             // customButton1
@@ -1110,9 +1090,9 @@
             customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
             customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(1438, 12);
+            customButton1.Location = new System.Drawing.Point(1442, 12);
             customButton1.Name = "customButton1";
-            customButton1.Size = new System.Drawing.Size(386, 23);
+            customButton1.Size = new System.Drawing.Size(387, 25);
             customButton1.TabIndex = 2;
             customButton1.Text = "Добавить";
             customButton1.UseVisualStyleBackColor = false;
@@ -1122,34 +1102,13 @@
             SearchPachСustomButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             SearchPachСustomButton.Font = new System.Drawing.Font("Arial", 10F);
             SearchPachСustomButton.ForeColor = System.Drawing.Color.Black;
-            SearchPachСustomButton.Location = new System.Drawing.Point(1671, 51);
+            SearchPachСustomButton.Location = new System.Drawing.Point(1699, 53);
             SearchPachСustomButton.Name = "SearchPachСustomButton";
-            SearchPachСustomButton.Size = new System.Drawing.Size(140, 45);
+            SearchPachСustomButton.Size = new System.Drawing.Size(117, 22);
             SearchPachСustomButton.TabIndex = 3;
             SearchPachСustomButton.Text = "Поиск по пачке";
             SearchPachСustomButton.UseVisualStyleBackColor = false;
             SearchPachСustomButton.Click += SearchPachСustomButton_Click;
-            // 
-            // PachSearchTextBox
-            // 
-            PachSearchTextBox.BackColor = System.Drawing.Color.White;
-            PachSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            PachSearchTextBox.ForeColor = System.Drawing.Color.Black;
-            PachSearchTextBox.Location = new System.Drawing.Point(1558, 75);
-            PachSearchTextBox.Name = "PachSearchTextBox";
-            PachSearchTextBox.Size = new System.Drawing.Size(109, 21);
-            PachSearchTextBox.TabIndex = 5;
-            // 
-            // YearSearchTextBox
-            // 
-            YearSearchTextBox.BackColor = System.Drawing.Color.White;
-            YearSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            YearSearchTextBox.ForeColor = System.Drawing.Color.Black;
-            YearSearchTextBox.Location = new System.Drawing.Point(1450, 75);
-            YearSearchTextBox.Name = "YearSearchTextBox";
-            YearSearchTextBox.Size = new System.Drawing.Size(104, 21);
-            YearSearchTextBox.TabIndex = 4;
-            YearSearchTextBox.TextChanged += YearSearchTextBox_TextChanged;
             // 
             // customGridRzu
             // 
@@ -1158,11 +1117,10 @@
             customGridRzu.MainView = gridViewRzu;
             customGridRzu.Name = "customGridRzu";
             customGridRzu.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit2, repositoryItemCheckEdit1, repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit5, repositoryItemCheckEdit6, repositoryItemCheckEdit7, repositoryItemCheckEdit8, repositoryItemCheckEdit9 });
-            customGridRzu.Size = new System.Drawing.Size(1412, 525);
+            customGridRzu.Size = new System.Drawing.Size(1416, 498);
             customGridRzu.TabIndex = 0;
             customGridRzu.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRzu });
-            customGridRzu.Click += customGridRzu_Click;
-            customGridRzu.DoubleClick += customGridRzu_DoubleClick;
+            customGridRzu.DoubleClick += customGridRzu_DoubleClick_1;
             // 
             // gridViewRzu
             // 
@@ -1173,17 +1131,17 @@
             gridViewRzu.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRzu.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRzu.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnRzuChipStatus, gridColumnRzuNom, gridColumnRzuNomN, gridColumnRzuNPach, gridColumnRzuDataR, gridColumnRzuArticul, gridColumnRzuMod, gridColumnRzuRazm, gridColumnRzuKol, gridColumnRzuDataPr, gridColumnRzuDataPt, gridColumnRzuDataV, gridColumnRzuBus, gridColumnRzuStra, gridColumnRzuGofp, gridColumnRzuPPress, gridColumnRzuDtfPrint, gridColumnRzuBd, gridColumnRzuTabP, gridColumnRzuTabKlad, gridColumnRzuTabBuh, gridColumnRzuTabM, gridColumnRzuTabK, gridColumnRzuTabKpv, gridColumnRzuVsh, gridColumnRzuKle, gridColumnRzuDataZeh, gridColumnRzuDostZeh, gridColumnRzuPomBezKompl, gridColumnRzuHReestr, gridColumnRzuDataDubcd, gridColumnRzuDataSkZp, gridColumnRzuIz, gridColumnRzuDataRst, gridColumnRzuVipad, gridColumnRzuKodK, gridColumnRzuDataRasp, gridColumnRzuDataRasv, gridColumnRzuDataCd, gridColumnRzuMgZakr, gridColumnRzuNomZad, gridColumnRzuDataP, gridColumnRzuDataKlad, gridColumnRzuPachYear, gridColumnRzuDataSozd });
-            gridFormatRule3.ApplyToRow = true;
-            gridFormatRule3.Column = gridColumnRzuNom;
-            gridFormatRule3.Name = "Format0";
-            formatConditionRuleValue3.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            formatConditionRuleValue3.Appearance.ForeColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            formatConditionRuleValue3.Appearance.Options.UseBackColor = true;
-            formatConditionRuleValue3.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue3.Condition = DevExpress.XtraEditors.FormatCondition.Expression;
-            formatConditionRuleValue3.Expression = "[gridColumnRzuNom] %2=0";
-            gridFormatRule3.Rule = formatConditionRuleValue3;
-            gridViewRzu.FormatRules.Add(gridFormatRule3);
+            gridFormatRule1.ApplyToRow = true;
+            gridFormatRule1.Column = gridColumnRzuNom;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Expression;
+            formatConditionRuleValue1.Expression = "[gridColumnRzuNom] %2=0";
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridViewRzu.FormatRules.Add(gridFormatRule1);
             gridViewRzu.GridControl = customGridRzu;
             gridViewRzu.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             gridViewRzu.Name = "gridViewRzu";
@@ -1191,7 +1149,8 @@
             gridViewRzu.OptionsView.EnableAppearanceEvenRow = true;
             gridViewRzu.RowStyle += gridViewRzu_RowStyle;
             gridViewRzu.ShowingEditor += gridViewRzu_ShowingEditor;
-            gridViewRzu.MouseDown += gridViewRzu_MouseDown;
+            gridViewRzu.FocusedRowChanged += gridViewRzu_FocusedRowChanged;
+            gridViewRzu.CellValueChanged += gridViewRzu_CellValueChanged;
             gridViewRzu.DoubleClick += gridViewRzu_DoubleClick;
             // 
             // gridColumnRzuChipStatus
@@ -1631,9 +1590,9 @@
             // 
             layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup1.GroupBordersVisible = false;
-            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem1, splitterItem1, layoutControlGroup2, layoutControlGroup3, layoutControlGroup4, layoutControlItem15, layoutControlGroup5, simpleSeparator2, emptySpaceItem2, emptySpaceItem1, layoutControlItem34 });
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem1, splitterItem1, layoutControlGroup2, layoutControlGroup4, layoutControlItem15, emptySpaceItem2, emptySpaceItem1, layoutControlItem34, layoutControlGroup3, layoutControlGroup5, layoutControlItem37, layoutControlItem36, layoutControlItem38 });
             layoutControlGroup1.Name = "Root";
-            layoutControlGroup1.Size = new System.Drawing.Size(1836, 776);
+            layoutControlGroup1.Size = new System.Drawing.Size(1841, 813);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem2
@@ -1641,161 +1600,93 @@
             layoutControlItem2.Control = customGridRzu;
             layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(1416, 529);
+            layoutControlItem2.Size = new System.Drawing.Size(1420, 502);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = customButton1;
-            layoutControlItem1.Location = new System.Drawing.Point(1426, 0);
+            layoutControlItem1.Location = new System.Drawing.Point(1430, 0);
+            layoutControlItem1.MaxSize = new System.Drawing.Size(391, 29);
+            layoutControlItem1.MinSize = new System.Drawing.Size(391, 29);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(390, 27);
+            layoutControlItem1.Size = new System.Drawing.Size(391, 29);
+            layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem1.TextVisible = false;
             // 
             // splitterItem1
             // 
-            splitterItem1.Location = new System.Drawing.Point(1416, 0);
+            splitterItem1.Location = new System.Drawing.Point(1420, 0);
             splitterItem1.Name = "splitterItem1";
-            splitterItem1.Size = new System.Drawing.Size(10, 249);
+            splitterItem1.Size = new System.Drawing.Size(10, 223);
             // 
             // layoutControlGroup2
             // 
-            layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3, layoutControlItem20, layoutControlItem4, layoutControlItem18, simpleSeparator1, layoutControlItem5 });
-            layoutControlGroup2.Location = new System.Drawing.Point(1426, 27);
+            layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem18, simpleSeparator1, layoutControlItem5, layoutControlItem20, layoutControlItem35, layoutControlItem4 });
+            layoutControlGroup2.Location = new System.Drawing.Point(1430, 29);
             layoutControlGroup2.Name = "layoutControlGroup2";
-            layoutControlGroup2.Size = new System.Drawing.Size(390, 73);
+            layoutControlGroup2.Size = new System.Drawing.Size(391, 50);
             layoutControlGroup2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            layoutControlItem3.Control = YearSearchTextBox;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 24);
-            layoutControlItem3.MinSize = new System.Drawing.Size(24, 24);
-            layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(108, 25);
-            layoutControlItem3.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem3.Text = "Год";
-            layoutControlItem3.TextVisible = false;
-            // 
-            // layoutControlItem20
-            // 
-            layoutControlItem20.Control = customLabel2;
-            layoutControlItem20.Location = new System.Drawing.Point(108, 0);
-            layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new System.Drawing.Size(113, 24);
-            layoutControlItem20.TextVisible = false;
-            // 
-            // layoutControlItem4
-            // 
-            layoutControlItem4.Control = PachSearchTextBox;
-            layoutControlItem4.Location = new System.Drawing.Point(108, 24);
-            layoutControlItem4.MinSize = new System.Drawing.Size(24, 24);
-            layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(113, 25);
-            layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem4.Text = "Пачка";
-            layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem18
             // 
             layoutControlItem18.Control = customLabel1;
             layoutControlItem18.Location = new System.Drawing.Point(0, 0);
             layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new System.Drawing.Size(108, 24);
+            layoutControlItem18.Size = new System.Drawing.Size(38, 26);
             layoutControlItem18.TextVisible = false;
             // 
             // simpleSeparator1
             // 
-            simpleSeparator1.Location = new System.Drawing.Point(365, 0);
+            simpleSeparator1.Location = new System.Drawing.Point(366, 0);
             simpleSeparator1.Name = "simpleSeparator1";
-            simpleSeparator1.Size = new System.Drawing.Size(1, 49);
+            simpleSeparator1.Size = new System.Drawing.Size(1, 26);
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.ContentVertAlignment = DevExpress.Utils.VertAlignment.Top;
             layoutControlItem5.Control = SearchPachСustomButton;
-            layoutControlItem5.Location = new System.Drawing.Point(221, 0);
+            layoutControlItem5.Location = new System.Drawing.Point(245, 0);
             layoutControlItem5.MinSize = new System.Drawing.Size(20, 20);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(144, 49);
+            layoutControlItem5.Size = new System.Drawing.Size(121, 26);
             layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem5.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem5.TextToControlDistance = 0;
             layoutControlItem5.TextVisible = false;
             // 
-            // layoutControlGroup3
+            // layoutControlItem20
             // 
-            layoutControlGroup3.GroupStyle = DevExpress.Utils.GroupStyle.Light;
-            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem21, layoutControlItem22, layoutControlItem8, layoutControlItem7, layoutControlItem6, layoutControlItem9, layoutControlItem23 });
-            layoutControlGroup3.Location = new System.Drawing.Point(1426, 100);
-            layoutControlGroup3.Name = "layoutControlGroup3";
-            layoutControlGroup3.Size = new System.Drawing.Size(390, 77);
-            layoutControlGroup3.TextVisible = false;
+            layoutControlItem20.Control = customLabel2;
+            layoutControlItem20.Location = new System.Drawing.Point(92, 0);
+            layoutControlItem20.Name = "layoutControlItem20";
+            layoutControlItem20.Size = new System.Drawing.Size(53, 26);
+            layoutControlItem20.TextVisible = false;
             // 
-            // layoutControlItem21
+            // layoutControlItem35
             // 
-            layoutControlItem21.Control = customLabel3;
-            layoutControlItem21.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(56, 29);
-            layoutControlItem21.TextVisible = false;
+            layoutControlItem35.Control = PachSearchTextBox;
+            layoutControlItem35.Location = new System.Drawing.Point(145, 0);
+            layoutControlItem35.MinSize = new System.Drawing.Size(54, 26);
+            layoutControlItem35.Name = "layoutControlItem35";
+            layoutControlItem35.Size = new System.Drawing.Size(100, 26);
+            layoutControlItem35.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem35.TextVisible = false;
             // 
-            // layoutControlItem22
+            // layoutControlItem4
             // 
-            layoutControlItem22.Control = customLabel4;
-            layoutControlItem22.Location = new System.Drawing.Point(56, 0);
-            layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(101, 29);
-            layoutControlItem22.TextVisible = false;
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = customLabel5;
-            layoutControlItem8.Location = new System.Drawing.Point(157, 0);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(209, 29);
-            layoutControlItem8.TextVisible = false;
-            // 
-            // layoutControlItem7
-            // 
-            layoutControlItem7.Control = pachTextBox;
-            layoutControlItem7.Location = new System.Drawing.Point(0, 29);
-            layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(56, 24);
-            layoutControlItem7.Text = "Дата";
-            layoutControlItem7.TextVisible = false;
-            // 
-            // layoutControlItem6
-            // 
-            layoutControlItem6.Control = DataRTextBox;
-            layoutControlItem6.Location = new System.Drawing.Point(56, 29);
-            layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(101, 24);
-            layoutControlItem6.Text = "Пачка";
-            layoutControlItem6.TextVisible = false;
-            // 
-            // layoutControlItem9
-            // 
-            layoutControlItem9.Control = ArticulKTextBox;
-            layoutControlItem9.Location = new System.Drawing.Point(157, 29);
-            layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(123, 24);
-            layoutControlItem9.TextVisible = false;
-            // 
-            // layoutControlItem23
-            // 
-            layoutControlItem23.Control = ModKTextBox;
-            layoutControlItem23.Location = new System.Drawing.Point(280, 29);
-            layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new System.Drawing.Size(86, 24);
-            layoutControlItem23.TextVisible = false;
+            layoutControlItem4.Control = YearSearchTextBox;
+            layoutControlItem4.Location = new System.Drawing.Point(38, 0);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new System.Drawing.Size(54, 26);
+            layoutControlItem4.TextVisible = false;
             // 
             // layoutControlGroup4
             // 
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem24, layoutControlItem27, layoutControlItem28 });
-            layoutControlGroup4.Location = new System.Drawing.Point(1426, 177);
+            layoutControlGroup4.Location = new System.Drawing.Point(1430, 151);
             layoutControlGroup4.Name = "layoutControlGroup4";
-            layoutControlGroup4.Size = new System.Drawing.Size(390, 72);
+            layoutControlGroup4.Size = new System.Drawing.Size(391, 72);
             layoutControlGroup4.TextVisible = false;
             // 
             // layoutControlItem10
@@ -1821,7 +1712,7 @@
             layoutControlItem12.Control = VipadTextBox;
             layoutControlItem12.Location = new System.Drawing.Point(228, 24);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(138, 24);
+            layoutControlItem12.Size = new System.Drawing.Size(139, 24);
             layoutControlItem12.Text = "выпада";
             layoutControlItem12.TextVisible = false;
             // 
@@ -1830,7 +1721,7 @@
             layoutControlItem24.Control = customLabel6;
             layoutControlItem24.Location = new System.Drawing.Point(228, 0);
             layoutControlItem24.Name = "layoutControlItem24";
-            layoutControlItem24.Size = new System.Drawing.Size(138, 24);
+            layoutControlItem24.Size = new System.Drawing.Size(139, 24);
             layoutControlItem24.TextVisible = false;
             // 
             // layoutControlItem27
@@ -1852,612 +1743,251 @@
             // layoutControlItem15
             // 
             layoutControlItem15.Control = tableLayoutPanel1;
-            layoutControlItem15.Location = new System.Drawing.Point(1416, 250);
+            layoutControlItem15.Location = new System.Drawing.Point(1420, 223);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(400, 279);
+            layoutControlItem15.Size = new System.Drawing.Size(401, 279);
             layoutControlItem15.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.Location = new System.Drawing.Point(0, 574);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new System.Drawing.Size(1118, 219);
+            // 
+            // emptySpaceItem1
+            // 
+            emptySpaceItem1.Location = new System.Drawing.Point(1538, 606);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new System.Drawing.Size(283, 187);
+            // 
+            // layoutControlItem34
+            // 
+            layoutControlItem34.Control = tableLayoutPanel2;
+            layoutControlItem34.Location = new System.Drawing.Point(1538, 502);
+            layoutControlItem34.Name = "layoutControlItem34";
+            layoutControlItem34.Size = new System.Drawing.Size(283, 104);
+            layoutControlItem34.TextVisible = false;
+            // 
+            // layoutControlGroup3
+            // 
+            layoutControlGroup3.GroupStyle = DevExpress.Utils.GroupStyle.Light;
+            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem21, layoutControlItem22, layoutControlItem8, layoutControlItem9, layoutControlItem23, layoutControlItem7, layoutControlItem6 });
+            layoutControlGroup3.Location = new System.Drawing.Point(1430, 79);
+            layoutControlGroup3.Name = "layoutControlGroup3";
+            layoutControlGroup3.Size = new System.Drawing.Size(391, 72);
+            layoutControlGroup3.TextVisible = false;
+            // 
+            // layoutControlItem21
+            // 
+            layoutControlItem21.Control = customLabel3;
+            layoutControlItem21.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem21.Name = "layoutControlItem21";
+            layoutControlItem21.Size = new System.Drawing.Size(55, 24);
+            layoutControlItem21.TextVisible = false;
+            // 
+            // layoutControlItem22
+            // 
+            layoutControlItem22.Control = customLabel4;
+            layoutControlItem22.Location = new System.Drawing.Point(140, 0);
+            layoutControlItem22.Name = "layoutControlItem22";
+            layoutControlItem22.Size = new System.Drawing.Size(84, 24);
+            layoutControlItem22.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = customLabel5;
+            layoutControlItem8.Location = new System.Drawing.Point(0, 24);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new System.Drawing.Size(88, 24);
+            layoutControlItem8.TextVisible = false;
+            // 
+            // layoutControlItem9
+            // 
+            layoutControlItem9.Control = ArticulKTextBox;
+            layoutControlItem9.Location = new System.Drawing.Point(88, 24);
+            layoutControlItem9.Name = "layoutControlItem9";
+            layoutControlItem9.Size = new System.Drawing.Size(136, 24);
+            layoutControlItem9.TextVisible = false;
+            // 
+            // layoutControlItem23
+            // 
+            layoutControlItem23.Control = ModKTextBox;
+            layoutControlItem23.Location = new System.Drawing.Point(224, 24);
+            layoutControlItem23.Name = "layoutControlItem23";
+            layoutControlItem23.Size = new System.Drawing.Size(143, 24);
+            layoutControlItem23.TextVisible = false;
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = pachTextBox;
+            layoutControlItem7.Location = new System.Drawing.Point(55, 0);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new System.Drawing.Size(85, 24);
+            layoutControlItem7.Text = "Дата";
+            layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.Control = DataRTextBox;
+            layoutControlItem6.Location = new System.Drawing.Point(224, 0);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new System.Drawing.Size(143, 24);
+            layoutControlItem6.Text = "Пачка";
+            layoutControlItem6.TextVisible = false;
             // 
             // layoutControlGroup5
             // 
-            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem13, layoutControlItem14, layoutControlItem16, layoutControlItem17, layoutControlItem19, layoutControlItem25, layoutControlItem26, layoutControlItem29, layoutControlItem30, layoutControlItem31, layoutControlItem32, layoutControlItem33 });
-            layoutControlGroup5.Location = new System.Drawing.Point(0, 529);
+            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem13, layoutControlItem14, layoutControlItem16, layoutControlItem17, layoutControlItem19, layoutControlItem25, layoutControlItem26, layoutControlItem29, layoutControlItem30, layoutControlItem31, layoutControlItem32, layoutControlItem33, layoutControlItem3 });
+            layoutControlGroup5.Location = new System.Drawing.Point(1118, 502);
             layoutControlGroup5.Name = "layoutControlGroup5";
-            layoutControlGroup5.Size = new System.Drawing.Size(482, 227);
+            layoutControlGroup5.Size = new System.Drawing.Size(420, 291);
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = customButton2;
             layoutControlItem13.Location = new System.Drawing.Point(0, 0);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(152, 41);
+            layoutControlItem13.Size = new System.Drawing.Size(124, 59);
             layoutControlItem13.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = customButton3;
-            layoutControlItem14.Location = new System.Drawing.Point(0, 41);
+            layoutControlItem14.Location = new System.Drawing.Point(0, 59);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(152, 54);
+            layoutControlItem14.Size = new System.Drawing.Size(124, 57);
             layoutControlItem14.Text = "Просмотр реестров";
             layoutControlItem14.TextVisible = false;
             // 
             // layoutControlItem16
             // 
             layoutControlItem16.Control = customButton4;
-            layoutControlItem16.Location = new System.Drawing.Point(0, 95);
+            layoutControlItem16.Location = new System.Drawing.Point(0, 116);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(152, 46);
+            layoutControlItem16.Size = new System.Drawing.Size(124, 54);
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = customButton5;
-            layoutControlItem17.Location = new System.Drawing.Point(0, 141);
+            layoutControlItem17.Location = new System.Drawing.Point(0, 170);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(152, 41);
+            layoutControlItem17.Size = new System.Drawing.Size(124, 76);
             layoutControlItem17.TextVisible = false;
             // 
             // layoutControlItem19
             // 
             layoutControlItem19.Control = customButton6;
-            layoutControlItem19.Location = new System.Drawing.Point(152, 0);
+            layoutControlItem19.Location = new System.Drawing.Point(124, 0);
             layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(153, 41);
+            layoutControlItem19.Size = new System.Drawing.Size(79, 59);
             layoutControlItem19.TextVisible = false;
             // 
             // layoutControlItem25
             // 
             layoutControlItem25.Control = customButton7;
-            layoutControlItem25.Location = new System.Drawing.Point(152, 41);
+            layoutControlItem25.Location = new System.Drawing.Point(124, 59);
             layoutControlItem25.Name = "layoutControlItem25";
-            layoutControlItem25.Size = new System.Drawing.Size(153, 54);
+            layoutControlItem25.Size = new System.Drawing.Size(79, 57);
             layoutControlItem25.TextVisible = false;
             // 
             // layoutControlItem26
             // 
             layoutControlItem26.Control = customButton8;
-            layoutControlItem26.Location = new System.Drawing.Point(152, 95);
+            layoutControlItem26.Location = new System.Drawing.Point(124, 116);
             layoutControlItem26.Name = "layoutControlItem26";
-            layoutControlItem26.Size = new System.Drawing.Size(153, 46);
+            layoutControlItem26.Size = new System.Drawing.Size(79, 54);
             layoutControlItem26.TextVisible = false;
             // 
             // layoutControlItem29
             // 
             layoutControlItem29.Control = customButton9;
-            layoutControlItem29.Location = new System.Drawing.Point(152, 141);
+            layoutControlItem29.Location = new System.Drawing.Point(124, 170);
             layoutControlItem29.Name = "layoutControlItem29";
-            layoutControlItem29.Size = new System.Drawing.Size(153, 41);
+            layoutControlItem29.Size = new System.Drawing.Size(79, 76);
             layoutControlItem29.TextVisible = false;
             // 
             // layoutControlItem30
             // 
             layoutControlItem30.Control = customButton10;
-            layoutControlItem30.Location = new System.Drawing.Point(305, 43);
+            layoutControlItem30.Location = new System.Drawing.Point(203, 61);
             layoutControlItem30.Name = "layoutControlItem30";
-            layoutControlItem30.Size = new System.Drawing.Size(153, 52);
+            layoutControlItem30.Size = new System.Drawing.Size(193, 55);
             layoutControlItem30.TextVisible = false;
             // 
             // layoutControlItem31
             // 
             layoutControlItem31.Control = customButton11;
-            layoutControlItem31.Location = new System.Drawing.Point(305, 95);
+            layoutControlItem31.Location = new System.Drawing.Point(203, 116);
             layoutControlItem31.Name = "layoutControlItem31";
-            layoutControlItem31.Size = new System.Drawing.Size(153, 46);
+            layoutControlItem31.Size = new System.Drawing.Size(193, 54);
             layoutControlItem31.TextVisible = false;
             // 
             // layoutControlItem32
             // 
             layoutControlItem32.Control = customButton12;
-            layoutControlItem32.Location = new System.Drawing.Point(305, 141);
+            layoutControlItem32.Location = new System.Drawing.Point(203, 170);
             layoutControlItem32.Name = "layoutControlItem32";
-            layoutControlItem32.Size = new System.Drawing.Size(153, 41);
+            layoutControlItem32.Size = new System.Drawing.Size(193, 76);
             layoutControlItem32.TextVisible = false;
             // 
             // layoutControlItem33
             // 
             layoutControlItem33.Control = customButton13;
-            layoutControlItem33.Location = new System.Drawing.Point(305, 0);
+            layoutControlItem33.Location = new System.Drawing.Point(203, 0);
             layoutControlItem33.Name = "layoutControlItem33";
-            layoutControlItem33.Size = new System.Drawing.Size(153, 43);
+            layoutControlItem33.Size = new System.Drawing.Size(104, 61);
             layoutControlItem33.TextVisible = false;
             // 
-            // simpleSeparator2
-            // 
-            simpleSeparator2.Location = new System.Drawing.Point(1416, 249);
-            simpleSeparator2.Name = "simpleSeparator2";
-            simpleSeparator2.Size = new System.Drawing.Size(400, 1);
-            // 
-            // emptySpaceItem2
-            // 
-            emptySpaceItem2.Location = new System.Drawing.Point(482, 529);
-            emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(933, 227);
-            // 
-            // emptySpaceItem1
-            // 
-            emptySpaceItem1.Location = new System.Drawing.Point(1415, 642);
-            emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(401, 114);
-            // 
-            // layoutControlItem34
-            // 
-            layoutControlItem34.Control = tableLayoutPanel2;
-            layoutControlItem34.Location = new System.Drawing.Point(1415, 529);
-            layoutControlItem34.Name = "layoutControlItem34";
-            layoutControlItem34.Size = new System.Drawing.Size(401, 113);
-            layoutControlItem34.TextVisible = false;
-            // 
-            // xtraTabPage2
-            // 
-            xtraTabPage2.Controls.Add(layoutControl1);
-            xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new System.Drawing.Size(1836, 776);
-            xtraTabPage2.Text = "ОТГРУЗКА";
-            // 
-            // layoutControl1
-            // 
-            layoutControl1.Controls.Add(customButton15);
-            layoutControl1.Controls.Add(customButton14);
-            layoutControl1.Controls.Add(otgrButtonSearch);
-            layoutControl1.Controls.Add(otgrPachForSearchTextBox);
-            layoutControl1.Controls.Add(customLabel20);
-            layoutControl1.Controls.Add(otgrYearForSearchTextBox);
-            layoutControl1.Controls.Add(customLabel18);
-            layoutControl1.Controls.Add(rzuGridControl);
-            layoutControl1.Location = new System.Drawing.Point(13, 15);
-            layoutControl1.Name = "layoutControl1";
-            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-726, 496, 650, 400);
-            layoutControl1.Root = Root;
-            layoutControl1.Size = new System.Drawing.Size(1800, 747);
-            layoutControl1.TabIndex = 0;
-            layoutControl1.Text = "layoutControl1";
-            // 
-            // customButton15
-            // 
-            customButton15.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            customButton15.Font = new System.Drawing.Font("Arial", 10F);
-            customButton15.ForeColor = System.Drawing.Color.Black;
-            customButton15.Location = new System.Drawing.Point(1424, 123);
-            customButton15.Name = "customButton15";
-            customButton15.Size = new System.Drawing.Size(352, 30);
-            customButton15.TabIndex = 10;
-            customButton15.Text = "Шк печать доставка";
-            customButton15.UseVisualStyleBackColor = false;
-            // 
-            // customButton14
-            // 
-            customButton14.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            customButton14.Font = new System.Drawing.Font("Arial", 10F);
-            customButton14.ForeColor = System.Drawing.Color.Black;
-            customButton14.Location = new System.Drawing.Point(1424, 93);
-            customButton14.Name = "customButton14";
-            customButton14.Size = new System.Drawing.Size(352, 26);
-            customButton14.TabIndex = 9;
-            customButton14.Text = "Просмотр/печать";
-            customButton14.UseVisualStyleBackColor = false;
-            // 
-            // otgrButtonSearch
-            // 
-            otgrButtonSearch.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            otgrButtonSearch.Font = new System.Drawing.Font("Arial", 10F);
-            otgrButtonSearch.ForeColor = System.Drawing.Color.Black;
-            otgrButtonSearch.Location = new System.Drawing.Point(1689, 45);
-            otgrButtonSearch.Name = "otgrButtonSearch";
-            otgrButtonSearch.Size = new System.Drawing.Size(87, 44);
-            otgrButtonSearch.TabIndex = 8;
-            otgrButtonSearch.Text = "Поиск по пачке";
-            otgrButtonSearch.UseVisualStyleBackColor = false;
-            otgrButtonSearch.Click += otgrButtonSearch_Click;
-            // 
-            // otgrPachForSearchTextBox
-            // 
-            otgrPachForSearchTextBox.BackColor = System.Drawing.Color.White;
-            otgrPachForSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            otgrPachForSearchTextBox.ForeColor = System.Drawing.Color.Black;
-            otgrPachForSearchTextBox.Location = new System.Drawing.Point(1527, 69);
-            otgrPachForSearchTextBox.Name = "otgrPachForSearchTextBox";
-            otgrPachForSearchTextBox.Size = new System.Drawing.Size(158, 20);
-            otgrPachForSearchTextBox.TabIndex = 7;
-            // 
-            // customLabel20
-            // 
-            customLabel20.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel20.ForeColor = System.Drawing.Color.Black;
-            customLabel20.Location = new System.Drawing.Point(1527, 45);
-            customLabel20.Name = "customLabel20";
-            customLabel20.Size = new System.Drawing.Size(158, 20);
-            customLabel20.TabIndex = 6;
-            customLabel20.Text = "Пачка";
-            // 
-            // otgrYearForSearchTextBox
-            // 
-            otgrYearForSearchTextBox.BackColor = System.Drawing.Color.White;
-            otgrYearForSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            otgrYearForSearchTextBox.ForeColor = System.Drawing.Color.Black;
-            otgrYearForSearchTextBox.Location = new System.Drawing.Point(1424, 69);
-            otgrYearForSearchTextBox.Name = "otgrYearForSearchTextBox";
-            otgrYearForSearchTextBox.Size = new System.Drawing.Size(99, 20);
-            otgrYearForSearchTextBox.TabIndex = 5;
-            // 
-            // customLabel18
-            // 
-            customLabel18.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel18.ForeColor = System.Drawing.Color.Black;
-            customLabel18.Location = new System.Drawing.Point(1424, 45);
-            customLabel18.Name = "customLabel18";
-            customLabel18.Size = new System.Drawing.Size(99, 20);
-            customLabel18.TabIndex = 4;
-            customLabel18.Text = "Год";
-            // 
-            // rzuGridControl
-            // 
-            rzuGridControl.Font = new System.Drawing.Font("Arial", 10F);
-            rzuGridControl.Location = new System.Drawing.Point(12, 12);
-            rzuGridControl.MainView = gridViewRzu2;
-            rzuGridControl.Name = "rzuGridControl";
-            rzuGridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit10, repositoryItemCheckEdit11, repositoryItemCheckEdit12, repositoryItemCheckEdit13, repositoryItemCheckEdit14, repositoryItemCheckEdit15, repositoryItemCheckEdit16, repositoryItemCheckEdit17, repositoryItemCheckEdit18 });
-            rzuGridControl.Size = new System.Drawing.Size(1396, 723);
-            rzuGridControl.TabIndex = 1;
-            rzuGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRzu2 });
-            // 
-            // gridViewRzu2
-            // 
-            gridViewRzu2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            gridViewRzu2.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewRzu2.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            gridViewRzu2.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridViewRzu2.Appearance.FocusedRow.Options.UseBackColor = true;
-            gridViewRzu2.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewRzu2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnNomRzu, gridColumnNomNRzu, gridColumnNPachRzu, gridColumnDataRRzu, gridColumnArticulRzu, gridColumnModRzu, gridColumnRazmRzu, gridColumnKolRzu, gridColumnPRzu, gridColumnTPrintRzu, gridColumnVRzu, gridColumnVshRzu, gridColumnDataZehRzu, gridColumnDostZehRzu, gridColumnVipadRzu, gridColumnKomplRzu, gridColumnDatePrPrintRzu, gridColumnDatePrVshRzu, gridColumnDateCdRzu, gridColumnPachYearRzu });
-            gridFormatRule1.ApplyToRow = true;
-            gridFormatRule1.Column = gridColumnNomRzu;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Expression;
-            formatConditionRuleValue1.Expression = "[gridColumnRzuNom] %2=0";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridViewRzu2.FormatRules.Add(gridFormatRule1);
-            gridViewRzu2.GridControl = rzuGridControl;
-            gridViewRzu2.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
-            gridViewRzu2.Name = "gridViewRzu2";
-            gridViewRzu2.OptionsView.ColumnAutoWidth = false;
-            gridViewRzu2.OptionsView.EnableAppearanceEvenRow = true;
-            gridViewRzu2.RowStyle += gridViewRzu2_RowStyle;
-            // 
-            // gridColumnNomNRzu
-            // 
-            gridColumnNomNRzu.Caption = "п/п";
-            gridColumnNomNRzu.Name = "gridColumnNomNRzu";
-            gridColumnNomNRzu.OptionsFilter.AllowFilter = false;
-            gridColumnNomNRzu.Visible = true;
-            gridColumnNomNRzu.VisibleIndex = 1;
-            gridColumnNomNRzu.Width = 36;
-            // 
-            // gridColumnNPachRzu
-            // 
-            gridColumnNPachRzu.Caption = "Пачка";
-            gridColumnNPachRzu.Name = "gridColumnNPachRzu";
-            gridColumnNPachRzu.Visible = true;
-            gridColumnNPachRzu.VisibleIndex = 2;
-            gridColumnNPachRzu.Width = 40;
-            // 
-            // gridColumnDataRRzu
-            // 
-            gridColumnDataRRzu.Caption = "Дата";
-            gridColumnDataRRzu.Name = "gridColumnDataRRzu";
-            gridColumnDataRRzu.Visible = true;
-            gridColumnDataRRzu.VisibleIndex = 3;
-            gridColumnDataRRzu.Width = 59;
-            // 
-            // gridColumnArticulRzu
-            // 
-            gridColumnArticulRzu.Caption = "Артикул";
-            gridColumnArticulRzu.Name = "gridColumnArticulRzu";
-            gridColumnArticulRzu.Visible = true;
-            gridColumnArticulRzu.VisibleIndex = 4;
-            gridColumnArticulRzu.Width = 67;
-            // 
-            // gridColumnModRzu
-            // 
-            gridColumnModRzu.Caption = "Мод";
-            gridColumnModRzu.Name = "gridColumnModRzu";
-            gridColumnModRzu.Visible = true;
-            gridColumnModRzu.VisibleIndex = 5;
-            gridColumnModRzu.Width = 65;
-            // 
-            // gridColumnRazmRzu
-            // 
-            gridColumnRazmRzu.Caption = "Размер";
-            gridColumnRazmRzu.Name = "gridColumnRazmRzu";
-            gridColumnRazmRzu.Visible = true;
-            gridColumnRazmRzu.VisibleIndex = 6;
-            gridColumnRazmRzu.Width = 68;
-            // 
-            // gridColumnKolRzu
-            // 
-            gridColumnKolRzu.Caption = "Кол-во";
-            gridColumnKolRzu.Name = "gridColumnKolRzu";
-            gridColumnKolRzu.Visible = true;
-            gridColumnKolRzu.VisibleIndex = 7;
-            gridColumnKolRzu.Width = 48;
-            // 
-            // gridColumnPRzu
-            // 
-            gridColumnPRzu.Caption = "Принт";
-            gridColumnPRzu.ColumnEdit = repositoryItemCheckEdit10;
-            gridColumnPRzu.MinWidth = 15;
-            gridColumnPRzu.Name = "gridColumnPRzu";
-            gridColumnPRzu.OptionsFilter.AllowFilter = false;
-            gridColumnPRzu.Visible = true;
-            gridColumnPRzu.VisibleIndex = 8;
-            gridColumnPRzu.Width = 43;
-            // 
-            // repositoryItemCheckEdit10
-            // 
-            repositoryItemCheckEdit10.AutoHeight = false;
-            repositoryItemCheckEdit10.Name = "repositoryItemCheckEdit10";
-            repositoryItemCheckEdit10.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            // 
-            // gridColumnTPrintRzu
-            // 
-            gridColumnTPrintRzu.Caption = "Тпринт";
-            gridColumnTPrintRzu.ColumnEdit = repositoryItemCheckEdit11;
-            gridColumnTPrintRzu.Name = "gridColumnTPrintRzu";
-            gridColumnTPrintRzu.OptionsFilter.AllowFilter = false;
-            gridColumnTPrintRzu.Visible = true;
-            gridColumnTPrintRzu.VisibleIndex = 9;
-            gridColumnTPrintRzu.Width = 45;
-            // 
-            // repositoryItemCheckEdit11
-            // 
-            repositoryItemCheckEdit11.AutoHeight = false;
-            repositoryItemCheckEdit11.Name = "repositoryItemCheckEdit11";
-            repositoryItemCheckEdit11.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            // 
-            // gridColumnVRzu
-            // 
-            gridColumnVRzu.Caption = "Вышив";
-            gridColumnVRzu.ColumnEdit = repositoryItemCheckEdit12;
-            gridColumnVRzu.Name = "gridColumnVRzu";
-            gridColumnVRzu.OptionsFilter.AllowFilter = false;
-            gridColumnVRzu.Visible = true;
-            gridColumnVRzu.VisibleIndex = 10;
-            gridColumnVRzu.Width = 42;
-            // 
-            // repositoryItemCheckEdit12
-            // 
-            repositoryItemCheckEdit12.AutoHeight = false;
-            repositoryItemCheckEdit12.Name = "repositoryItemCheckEdit12";
-            repositoryItemCheckEdit12.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            // 
-            // gridColumnVshRzu
-            // 
-            gridColumnVshRzu.Caption = "V";
-            gridColumnVshRzu.Name = "gridColumnVshRzu";
-            gridColumnVshRzu.Visible = true;
-            gridColumnVshRzu.VisibleIndex = 11;
-            gridColumnVshRzu.Width = 23;
-            // 
-            // gridColumnDataZehRzu
-            // 
-            gridColumnDataZehRzu.Caption = "Дата в цех";
-            gridColumnDataZehRzu.Name = "gridColumnDataZehRzu";
-            gridColumnDataZehRzu.Visible = true;
-            gridColumnDataZehRzu.VisibleIndex = 12;
-            gridColumnDataZehRzu.Width = 67;
-            // 
-            // gridColumnDostZehRzu
-            // 
-            gridColumnDostZehRzu.Caption = "Бригада";
-            gridColumnDostZehRzu.Name = "gridColumnDostZehRzu";
-            gridColumnDostZehRzu.Visible = true;
-            gridColumnDostZehRzu.VisibleIndex = 13;
-            gridColumnDostZehRzu.Width = 52;
-            // 
-            // gridColumnVipadRzu
-            // 
-            gridColumnVipadRzu.Caption = "Выпад";
-            gridColumnVipadRzu.Name = "gridColumnVipadRzu";
-            gridColumnVipadRzu.Visible = true;
-            gridColumnVipadRzu.VisibleIndex = 15;
-            // 
-            // gridColumnKomplRzu
-            // 
-            gridColumnKomplRzu.Caption = "Компл";
-            gridColumnKomplRzu.Name = "gridColumnKomplRzu";
-            gridColumnKomplRzu.Visible = true;
-            gridColumnKomplRzu.VisibleIndex = 16;
-            // 
-            // gridColumnDatePrPrintRzu
-            // 
-            gridColumnDatePrPrintRzu.Caption = "Дата на пр";
-            gridColumnDatePrPrintRzu.Name = "gridColumnDatePrPrintRzu";
-            gridColumnDatePrPrintRzu.Visible = true;
-            gridColumnDatePrPrintRzu.VisibleIndex = 17;
-            // 
-            // gridColumnDatePrVshRzu
-            // 
-            gridColumnDatePrVshRzu.Caption = "Дата на выш";
-            gridColumnDatePrVshRzu.Name = "gridColumnDatePrVshRzu";
-            gridColumnDatePrVshRzu.Visible = true;
-            gridColumnDatePrVshRzu.VisibleIndex = 18;
-            // 
-            // gridColumnDateCdRzu
-            // 
-            gridColumnDateCdRzu.Caption = "Дата сд";
-            gridColumnDateCdRzu.Name = "gridColumnDateCdRzu";
-            gridColumnDateCdRzu.Visible = true;
-            gridColumnDateCdRzu.VisibleIndex = 14;
-            // 
-            // gridColumnPachYearRzu
-            // 
-            gridColumnPachYearRzu.Caption = "gridColumn1";
-            gridColumnPachYearRzu.Name = "gridColumnPachYearRzu";
-            gridColumnPachYearRzu.Visible = true;
-            gridColumnPachYearRzu.VisibleIndex = 19;
-            // 
-            // repositoryItemCheckEdit13
-            // 
-            repositoryItemCheckEdit13.AutoHeight = false;
-            repositoryItemCheckEdit13.Name = "repositoryItemCheckEdit13";
-            repositoryItemCheckEdit13.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit13.ValueChecked = new decimal(new int[] { 1, 0, 0, 0 });
-            repositoryItemCheckEdit13.ValueUnchecked = new decimal(new int[] { 0, 0, 0, 0 });
-            // 
-            // repositoryItemCheckEdit14
-            // 
-            repositoryItemCheckEdit14.AutoHeight = false;
-            repositoryItemCheckEdit14.Name = "repositoryItemCheckEdit14";
-            repositoryItemCheckEdit14.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit14.ValueChecked = new decimal(new int[] { 1, 0, 0, 0 });
-            repositoryItemCheckEdit14.ValueUnchecked = new decimal(new int[] { 0, 0, 0, 0 });
-            // 
-            // repositoryItemCheckEdit15
-            // 
-            repositoryItemCheckEdit15.AutoHeight = false;
-            repositoryItemCheckEdit15.Name = "repositoryItemCheckEdit15";
-            repositoryItemCheckEdit15.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit15.ValueChecked = new decimal(new int[] { 1, 0, 0, 0 });
-            repositoryItemCheckEdit15.ValueUnchecked = new decimal(new int[] { 0, 0, 0, 0 });
-            // 
-            // repositoryItemCheckEdit16
-            // 
-            repositoryItemCheckEdit16.AutoHeight = false;
-            repositoryItemCheckEdit16.Name = "repositoryItemCheckEdit16";
-            repositoryItemCheckEdit16.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit16.ValueChecked = new decimal(new int[] { 1, 0, 0, 0 });
-            repositoryItemCheckEdit16.ValueUnchecked = new decimal(new int[] { 0, 0, 0, 0 });
-            // 
-            // repositoryItemCheckEdit17
-            // 
-            repositoryItemCheckEdit17.AutoHeight = false;
-            repositoryItemCheckEdit17.Name = "repositoryItemCheckEdit17";
-            repositoryItemCheckEdit17.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit17.ValueChecked = new decimal(new int[] { 1, 0, 0, 0 });
-            repositoryItemCheckEdit17.ValueUnchecked = new decimal(new int[] { 0, 0, 0, 0 });
-            // 
-            // repositoryItemCheckEdit18
-            // 
-            repositoryItemCheckEdit18.AutoHeight = false;
-            repositoryItemCheckEdit18.Name = "repositoryItemCheckEdit18";
-            repositoryItemCheckEdit18.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit18.ValueChecked = new decimal(new int[] { 1, 0, 0, 0 });
-            repositoryItemCheckEdit18.ValueUnchecked = new decimal(new int[] { 0, 0, 0, 0 });
-            // 
-            // Root
-            // 
-            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem35, layoutControlGroup6 });
-            Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(1800, 747);
-            Root.TextVisible = false;
-            // 
-            // layoutControlItem35
-            // 
-            layoutControlItem35.Control = rzuGridControl;
-            layoutControlItem35.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem35.Name = "layoutControlItem35";
-            layoutControlItem35.Size = new System.Drawing.Size(1400, 727);
-            layoutControlItem35.TextVisible = false;
-            // 
-            // layoutControlGroup6
-            // 
-            layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem3, layoutControlItem36, layoutControlItem37, layoutControlItem38, layoutControlItem39, layoutControlItem40, layoutControlItem41, layoutControlItem42 });
-            layoutControlGroup6.Location = new System.Drawing.Point(1400, 0);
-            layoutControlGroup6.Name = "layoutControlGroup6";
-            layoutControlGroup6.Size = new System.Drawing.Size(380, 727);
-            // 
-            // emptySpaceItem3
-            // 
-            emptySpaceItem3.Location = new System.Drawing.Point(0, 112);
-            emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new System.Drawing.Size(356, 570);
-            // 
-            // layoutControlItem36
-            // 
-            layoutControlItem36.Control = customLabel18;
-            layoutControlItem36.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem36.Name = "layoutControlItem36";
-            layoutControlItem36.Size = new System.Drawing.Size(103, 24);
-            layoutControlItem36.TextVisible = false;
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = customButton14;
+            layoutControlItem3.Location = new System.Drawing.Point(307, 0);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(89, 61);
+            layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem37
             // 
-            layoutControlItem37.Control = otgrYearForSearchTextBox;
-            layoutControlItem37.Location = new System.Drawing.Point(0, 24);
+            layoutControlItem37.Control = nZvetTextBox;
+            layoutControlItem37.CustomizationFormText = "layoutControlItem37";
+            layoutControlItem37.Location = new System.Drawing.Point(0, 502);
             layoutControlItem37.Name = "layoutControlItem37";
-            layoutControlItem37.Size = new System.Drawing.Size(103, 24);
-            layoutControlItem37.TextVisible = false;
+            layoutControlItem37.Size = new System.Drawing.Size(1118, 24);
+            layoutControlItem37.Text = "Цвет";
+            layoutControlItem37.TextSize = new System.Drawing.Size(129, 13);
+            // 
+            // layoutControlItem36
+            // 
+            layoutControlItem36.Control = recNomZadTextBox;
+            layoutControlItem36.Location = new System.Drawing.Point(0, 526);
+            layoutControlItem36.Name = "layoutControlItem36";
+            layoutControlItem36.Size = new System.Drawing.Size(1118, 24);
+            layoutControlItem36.Text = "Рекомендации технолога";
+            layoutControlItem36.TextSize = new System.Drawing.Size(129, 13);
             // 
             // layoutControlItem38
             // 
-            layoutControlItem38.Control = customLabel20;
-            layoutControlItem38.Location = new System.Drawing.Point(103, 0);
+            layoutControlItem38.Control = recNomTextBox;
+            layoutControlItem38.Location = new System.Drawing.Point(0, 550);
             layoutControlItem38.Name = "layoutControlItem38";
-            layoutControlItem38.Size = new System.Drawing.Size(162, 24);
-            layoutControlItem38.TextVisible = false;
-            // 
-            // layoutControlItem39
-            // 
-            layoutControlItem39.Control = otgrPachForSearchTextBox;
-            layoutControlItem39.Location = new System.Drawing.Point(103, 24);
-            layoutControlItem39.Name = "layoutControlItem39";
-            layoutControlItem39.Size = new System.Drawing.Size(162, 24);
-            layoutControlItem39.TextVisible = false;
-            // 
-            // layoutControlItem40
-            // 
-            layoutControlItem40.Control = otgrButtonSearch;
-            layoutControlItem40.Location = new System.Drawing.Point(265, 0);
-            layoutControlItem40.Name = "layoutControlItem40";
-            layoutControlItem40.Size = new System.Drawing.Size(91, 48);
-            layoutControlItem40.TextVisible = false;
-            // 
-            // layoutControlItem41
-            // 
-            layoutControlItem41.Control = customButton14;
-            layoutControlItem41.Location = new System.Drawing.Point(0, 48);
-            layoutControlItem41.Name = "layoutControlItem41";
-            layoutControlItem41.Size = new System.Drawing.Size(356, 30);
-            layoutControlItem41.TextVisible = false;
-            // 
-            // layoutControlItem42
-            // 
-            layoutControlItem42.Control = customButton15;
-            layoutControlItem42.Location = new System.Drawing.Point(0, 78);
-            layoutControlItem42.Name = "layoutControlItem42";
-            layoutControlItem42.Size = new System.Drawing.Size(356, 34);
-            layoutControlItem42.TextVisible = false;
-            // 
-            // NomZadSearchTextBox
-            // 
-            NomZadSearchTextBox.BackColor = System.Drawing.Color.White;
-            NomZadSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            NomZadSearchTextBox.ForeColor = System.Drawing.Color.Black;
-            NomZadSearchTextBox.Location = new System.Drawing.Point(819, 36);
-            NomZadSearchTextBox.Name = "NomZadSearchTextBox";
-            NomZadSearchTextBox.Size = new System.Drawing.Size(183, 23);
-            NomZadSearchTextBox.TabIndex = 3;
+            layoutControlItem38.Size = new System.Drawing.Size(1118, 24);
+            layoutControlItem38.Text = "Рекомендации технолога";
+            layoutControlItem38.TextSize = new System.Drawing.Size(129, 13);
             // 
             // CuttingForm
             // 
-            AcceptButton = SearchPachСustomButton;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1841, 813);
-            Controls.Add(cuttingTabControl1);
+            Controls.Add(layoutControl2);
             Name = "CuttingForm";
             Text = "Раскройный цех";
             Load += CuttingForm_Load;
-            ((System.ComponentModel.ISupportInitialize)cuttingTabControl1).EndInit();
-            cuttingTabControl1.ResumeLayout(false);
-            xtraTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
             layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)YearSearchTextBox.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PachSearchTextBox.Properties).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
@@ -2478,20 +2008,12 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
@@ -2500,6 +2022,17 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem27).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem28).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
@@ -2513,111 +2046,81 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem31).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem32).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem33).EndInit();
-            ((System.ComponentModel.ISupportInitialize)simpleSeparator2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).EndInit();
-            xtraTabPage2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
-            layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)rzuGridControl).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewRzu2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit12).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit14).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit15).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit16).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit17).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit18).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem36).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem37).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem36).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem38).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem39).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem40).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem41).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem42).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private CustomTabControl cuttingTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
-        private CustomTextBox YearSearchTextBox;
-        private CustomTextBox PachSearchTextBox;
-        private Core.Class.CustomButton customButton1;
         private CustomTextBox NomZadSearchTextBox;
-        private Core.Class.CustomButton SearchPachСustomButton;
         private DevExpress.XtraLayout.LayoutControl layoutControl2;
-        private Core.Class.CustomGridControl customGridRzu;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRzu;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
-        private DevExpress.XtraLayout.SplitterItem splitterItem1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private CustomTextBox DataRTextBox;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private CustomTextBox pachTextBox;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private CustomLabel customLabel16;
+        private CustomTextBox rzIdTextBox;
+        private CustomLabel customLabel14;
+        private CustomTextBox nomZadTextBox;
+        private CustomTextBox datePlanTextBox;
+        private CustomLabel customLabel12;
+        private Core.Class.CustomButton customButton13;
+        private Core.Class.CustomButton customButton12;
+        private Core.Class.CustomButton customButton11;
+        private Core.Class.CustomButton customButton10;
+        private Core.Class.CustomButton customButton9;
+        private Core.Class.CustomButton customButton8;
+        private Core.Class.CustomButton customButton7;
+        private Core.Class.CustomButton customButton6;
+        private Core.Class.CustomButton customButton5;
+        private Core.Class.CustomButton customButton4;
+        private Core.Class.CustomButton customButton3;
+        private Core.Class.CustomButton customButton2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private CustomTextBox dostZehTextBox;
+        private CustomLabel customLabel8;
+        private CustomTextBox TabKpvTextBox;
+        private CustomLabel TabMLabel;
+        private CustomTextBox TabMTextBox;
+        private CustomTextBox TabPTextBox;
+        private CustomLabel customLabel7;
+        private CustomLabel TabPLabel;
+        private CustomTextBox tabKTextBox;
+        private CustomLabel customLabel13;
+        private CustomTextBox TabOrkTextBox;
+        private CustomLabel FioOrkLabel;
         private CustomTextBox TabR1TextBox;
+        private CustomLabel customLabel11;
+        private CustomTextBox TabR2TextBox;
+        private CustomLabel Fio2Label;
+        private CustomLabel TabKpvLabel;
+        private CustomLabel Fio1Label;
+        private CustomLabel FioKLabel;
+        private CustomLabel customLabel15;
+        private CustomLabel customLabel17;
+        private CustomLabel customLabel21;
+        private CustomLabel customLabel19;
+        private CustomTextBox dateZehTextBox;
+        private CustomLabel customLabel10;
+        private CustomLabel customLabel9;
+        private CustomLabel customLabel6;
+        private CustomTextBox ModKTextBox;
+        private CustomTextBox ArticulKTextBox;
+        private CustomLabel customLabel5;
+        private CustomLabel customLabel4;
+        private CustomLabel customLabel3;
+        private CustomLabel customLabel2;
+        private CustomLabel customLabel1;
         private CustomTextBox VipadTextBox;
         private CustomTextBox DataVTextBox;
         private CustomTextBox DataPrTextBox;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
-        private CustomLabel customLabel2;
-        private CustomLabel customLabel1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
-        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
-        private CustomLabel customLabel4;
-        private CustomLabel customLabel3;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
-        private CustomTextBox ArticulKTextBox;
-        private CustomLabel customLabel5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
-        private CustomTextBox ModKTextBox;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
-        private CustomLabel customLabel6;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
-        private CustomLabel customLabel9;
-        private CustomLabel Fio1Label;
-        private CustomLabel customLabel7;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem27;
-        private CustomLabel customLabel10;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem28;
-        private CustomLabel customLabel13;
-        private CustomTextBox TabKpvTextBox;
-        private CustomLabel TabKpvLabel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private CustomLabel customLabel15;
-        private CustomTextBox TabOrkTextBox;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
-        private CustomLabel FioOrkLabel;
-        private CustomLabel TabMLabel;
-        private CustomLabel customLabel21;
-        private CustomLabel TabPLabel;
-        private CustomTextBox TabPTextBox;
-        private CustomLabel customLabel19;
-        private CustomLabel FioKLabel;
-        private CustomTextBox tabKTextBox;
-        private CustomLabel customLabel17;
+        private CustomTextBox pachTextBox;
+        private CustomTextBox DataRTextBox;
+        private Core.Class.CustomButton customButton1;
+        private Core.Class.CustomButton SearchPachСustomButton;
+        //private CustomTextBox PachSearchTextBox1;
+        //private CustomTextBox YearSearchTextBox;
+        private Core.Class.CustomGridControl customGridRzu;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRzu;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuChipStatus;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuNom;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuNomN;
@@ -2628,14 +2131,23 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuRazm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuKol;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDataPr;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDataPt;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDataV;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuBus;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuStra;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuGofp;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuPPress;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDtfPrint;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuBd;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuTabP;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuTabKlad;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuTabBuh;
@@ -2661,109 +2173,60 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuNomZad;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDataP;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDataKlad;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDataSozd;
-        private CustomLabel customLabel11;
-        private CustomTextBox TabR2TextBox;
-        private CustomLabel Fio2Label;
-        private CustomTextBox TabMTextBox;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit3;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit4;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit6;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit7;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit8;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuPachYear;
-        private CustomTextBox dostZehTextBox;
-        private CustomLabel customLabel8;
-        private CustomTextBox dateZehTextBox;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzuDataSozd;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.SplitterItem splitterItem1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
+        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem27;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem28;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
-        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator2;
-        private Core.Class.CustomButton customButton5;
-        private Core.Class.CustomButton customButton4;
-        private Core.Class.CustomButton customButton3;
-        private Core.Class.CustomButton customButton2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
-        private Core.Class.CustomButton customButton10;
-        private Core.Class.CustomButton customButton9;
-        private Core.Class.CustomButton customButton8;
-        private Core.Class.CustomButton customButton7;
-        private Core.Class.CustomButton customButton6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem26;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem29;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem30;
-        private Core.Class.CustomButton customButton13;
-        private Core.Class.CustomButton customButton12;
-        private Core.Class.CustomButton customButton11;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem31;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem32;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem33;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem34;
-        private CustomLabel customLabel14;
-        private CustomTextBox nomZadTextBox;
-        private CustomTextBox datePlanTextBox;
-        private CustomLabel customLabel12;
-        private CustomLabel customLabel16;
-        private CustomTextBox rzIdTextBox;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
-        private Core.Class.CustomGridControl rzuGridControl;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRzu2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnNomRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnNomNRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnNPachRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDataRRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnArticulRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnModRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnRazmRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKolRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPRzu;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnTPrintRzu;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit11;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVRzu;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit12;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit13;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit14;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit15;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit16;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit17;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit18;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVshRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDataZehRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDostZehRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVipadRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKomplRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDatePrPrintRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDatePrVshRzu;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDateCdRzu;
+        private CustomTextBoxEx PachSearchTextBox;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem35;
-        private CustomLabel customLabel18;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem36;
-        private Core.Class.CustomButton otgrButtonSearch;
-        private CustomTextBox otgrPachForSearchTextBox;
-        private CustomLabel customLabel20;
-        private CustomTextBox otgrYearForSearchTextBox;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem37;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem38;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem39;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem40;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPachYearRzu;
-        private Core.Class.CustomButton customButton15;
+        private CustomTextBoxEx YearSearchTextBox;
         private Core.Class.CustomButton customButton14;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem41;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem42;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private CustomTextBox nZvetTextBox;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem37;
+        private CustomTextBox recNomZadTextBox;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem36;
+        private CustomTextBox recNomTextBox;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem38;
     }
 }

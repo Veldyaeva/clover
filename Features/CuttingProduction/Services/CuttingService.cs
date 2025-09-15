@@ -61,42 +61,54 @@ namespace SewingProduction.Features.CuttingProduction.Services
         }
         public void setValue(string fieldName, object value, decimal? nom)
         {
-            string stringValue = value?.ToString() ?? "NULL";
+            
             using (var connection = _dbHelper.GetConnection())
             {
 
-                string query = $"update raskr_zeh_up set  {fieldName} = {stringValue} where nom = {nom}";
-                _dbHelper.ExecuteNonQuery(query);
+                string query = $"update raskr_zeh_up set  {fieldName} = @value where nom = {nom}";
+                _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@value", value ?? DBNull.Value } });
 
             }
         }
-        public DataTable getNewDataRzu(string pach_kod)
+        public DataTable getNewDataRzu(decimal? nom)
         {
             using (var connection = _dbHelper.GetConnection())
             {
 
-                string query = $"select max(tab_k) as tab_k,max(data_kk_cd) as data_kk_cd, max(n_zeh) as n_zeh, max(dost_zeh) from raskrZehUpView where nom = {pach_kod}";
+                string query = $"select max(tab_k) as tab_k,max(data_kk_cd) as data_kk_cd, max(n_zeh) as n_zeh, max(dost_zeh) as dost_zeh from raskrZehUpView where nom = {nom}";
                 DataTable dt = _dbHelper.ExecuteQuery(query);
                 return dt;
             }
             
 
         }
-        public bool checkTabKDataKkCd(decimal? nom)
+        
+        public string getRecForNomZad(string nomZad)
         {
-            using (var connection = _dbHelper.GetConnection())
+            string recom = "";
+            string query = $"select kodz,recomend,rzu_recom,rzu_nom FROM plan_sezon_zad_recom where nom= {nomZad}";
+            DataTable dt = _dbHelper.ExecuteQuery(query);
+            foreach (DataRow dr in dt.Rows)
             {
-                string query = $"select * from raskrZehUpView where nom = {nom} and (tab_k = 0 or data_kk_cd is null or n_zeh <>0 or (dost_zeh <>' ' or dost_zeh <> 'раскройный'))";
-                DataTable dt = _dbHelper.ExecuteQuery(query);
-                if (dt.Rows.Count == 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                recom = recom + "Тк. " + dr["kodz"].ToString() + "-" + dr["recomend"];
             }
+            return recom;
+        }
+        public string getRecForNom(decimal? nom)
+        {
+            string recom = "";
+            string query = $"SELECT pszr.id, pszr.nom, pszr.kodz, pszr.recomend, " +
+                " pszrr.id_pszr, pszrr.rzu_nom, pszrr.rzu_recom " +
+                " FROM [ACE].[dbo].[plan_sezon_zad_recom] pszr " +
+                " LEFT JOIN [ACE].[dbo].[plan_sezon_zad_recom_rzu] pszrr ON pszr.id = pszrr.id_pszr " +
+                $" where pszrr.rzu_nom= {nom}" +
+                " AND ISNULL(TRIM(pszrr.rzu_recom), '') <> '' ";
+            DataTable dt = _dbHelper.ExecuteQuery(query);
+            foreach (DataRow dr in dt.Rows)
+            {
+                recom = recom + "Тк. " + dr["kodz"].ToString() + "-" + dr["recomend"];
+            }
+            return recom;
         }
     }
 }
