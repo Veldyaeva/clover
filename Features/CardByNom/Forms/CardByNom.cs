@@ -756,6 +756,11 @@ namespace SewingProduction
         private async void CardByNom_Load(object sender, EventArgs e)
         {
             //ThemeManager.UpdateTheme(this);
+            //gridControlPartNaklList.Visible = false;
+            //gridControlNaklList.Visible = true;
+            layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+            layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+            layoutControlItem110.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
             customRadioGroup2.SelectedIndex = 0;
@@ -1324,6 +1329,10 @@ namespace SewingProduction
 
             if (e.KeyCode == Keys.Enter)
             {
+                //gridControlPartNaklList.Visible = false;
+                //gridControlNaklList.Visible = true;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
                 xtraTabControl1.Enabled = true;
                 xtraTabControl1.Refresh();
                 //WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
@@ -1595,15 +1604,19 @@ namespace SewingProduction
 
                 this.gridControlPartNaklList.Location = this.gridControlNaklList.Location;
                 this.gridControlPartNaklList.Size = this.gridControlNaklList.Size;
-                this.gridControlPartNaklList.BringToFront();
-                this.gridControlPartNaklList.Visible = true;
+                //this.gridControlPartNaklList.BringToFront();
+                //this.gridControlPartNaklList.Visible = true;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;  // накладные
             }
             else
             {
                 simpleButtonNaklPart.Text = "Показать информацию по делению накладной";
                 simpleButtonPrintNaklXtraReport.Enabled = true;
-                this.gridControlNaklList.BringToFront();
-                this.gridControlPartNaklList.Visible = false;
+                //this.gridControlNaklList.BringToFront();
+                //this.gridControlPartNaklList.Visible = false;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
             }
             gridControlNaklList.Refresh();
         }
@@ -1846,6 +1859,11 @@ namespace SewingProduction
         {
             if (e.KeyCode == Keys.Enter)
             {
+                //gridControlPartNaklList.Visible = false;
+                //gridControlNaklList.Visible = true;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+
                 RasInfo.PageVisible = true;
                 FurnInfo.PageVisible = false;
                 WorkInfo.PageVisible = false;
@@ -1962,6 +1980,7 @@ namespace SewingProduction
                     break;
             }
         }
+
 
 
 
