@@ -134,7 +134,7 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 xAutoRazm = false;
                 customCheckBoxAutoRazm.Checked = false;
-                return; 
+                return;
             }
 
             // Сброс значений
@@ -460,7 +460,7 @@ namespace SewingProduction.Features.Articul.Forms
             view.RefreshData();
 
             // Если на вкладке раньше была другая пара — её нужно уменьшить
-            
+
             if (_tabSelection.TryGetValue(tabIndex, out var prev))
             {
                 if (prev.kod != Convert.ToInt32(selected.Kod) || prev.razm != selected.Razm)
@@ -473,7 +473,7 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                 }
             }
-            
+
 
             // Учесть новую пару
             var curAgg = _selectedKomplItems.FirstOrDefault(x => x.Kod == selected.Kod && x.Razm == selected.Razm);
@@ -1165,7 +1165,7 @@ namespace SewingProduction.Features.Articul.Forms
                     return;
                 }
             }
-            else 
+            else
             {
                 var selectedAuto = razmList.Where(x => x.Pr_po).ToList();
                 if (selectedAuto.Count == 0)
@@ -1256,7 +1256,7 @@ namespace SewingProduction.Features.Articul.Forms
                     Sost_k = mainItem.Sost,
                     CompName = Environment.MachineName
                 };
-                
+
                 FillKodSlots(kompl, flatCodes);
 
                 if (await komplService.ExistsExactAsync(kompl))
@@ -1296,7 +1296,7 @@ namespace SewingProduction.Features.Articul.Forms
                 await loadKomplByArticul(kompl.Articul_k);
                 customNumericUpDownValueTab.Value = 0;
                 return;
-            
+
             }
 
             // =========================
@@ -1569,6 +1569,11 @@ namespace SewingProduction.Features.Articul.Forms
 
             toolTip.SetToolTip(customButtonDelKomplSelected, "Очистить список предварительной комплектовки");
             toolTip.SetToolTip(customButtonDelKompl, "Удалить комплект");
+        }
+
+        private void customLabelGrup_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

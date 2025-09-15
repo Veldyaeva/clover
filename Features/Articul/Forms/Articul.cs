@@ -528,7 +528,7 @@ namespace SewingProduction.Features.Articul
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as ArticulModel).Kod;
 
-            EditAricul f = new EditAricul(kodObj.ToString());
+            EditArticul f = new EditArticul(kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -551,7 +551,7 @@ namespace SewingProduction.Features.Articul
 
         private void csButtonNew_Click(object sender, EventArgs e)
         {
-            EditAricul f = new EditAricul();
+            EditArticul f = new EditArticul();
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);

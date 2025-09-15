@@ -34,7 +34,7 @@
     <Compile Update="Features\Articul\Forms\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\EditAricul.cs">
+    <Compile Update="Features\Articul\Forms\EditArticul.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">

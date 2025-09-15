@@ -25,11 +25,11 @@ namespace SewingProduction.Features.Articul
     /// <summary>
     /// Добавление артикула
     /// </summary>
-    public partial class EditAricul : CustomForm // FoxPro: art_new2024
+    public partial class EditArticul : CustomForm // FoxPro: art_new2024
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public EditAricul(string kodArtSQL = null)
+        public EditArticul(string kodArtSQL = null)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
@@ -170,14 +170,24 @@ namespace SewingProduction.Features.Articul
         }
 
         // Кнопка сохранить
-        private void customOkButton1_Click(object sender, EventArgs e)
+        private async void customOkButton1_Click(object sender, EventArgs e)
         {
             ArticulModel articulModel = new ArticulModel
-            { 
-                Articul = customTextBoxArt.Text 
-
+            {
+                Kod = customTextBoxKod1.Text,
+                Gost = searchLookUpEditGost.Text,
+                Grup = searchLookUpEditGroup.Text,
+                Kle = searchLookUpEditTm1.Text,
+                Articul = customTextBoxArt.Text,
+                Razm = searchLookUpEditRazm.Text,
+                Mod = customTextBoxModel.Text,
+                Komp_name = Environment.MachineName
             };
-            //articulModel.Articul = customTextBoxArt.Text;
+            if (radioGroup1.SelectedIndex == 1) // Новый артикул СП (шнуры,резинка)
+            {
+               // articulModel. = ;
+            }
+            await _artNewDataService.SaveAsync(articulModel);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

@@ -65,7 +65,7 @@
             ArticulSelected = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             ModSelected = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             RazmSelected = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            count = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            countStr = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             RazmAllSelected = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             pictureBoxArticul = new System.Windows.Forms.PictureBox();
@@ -90,11 +90,11 @@
             kod_v = new DevExpress.XtraGrid.Columns.GridColumn();
             kodArt = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            customLabelGrup = new Core.Class.CustomHeaderLabel();
             customLabelArt = new Core.Class.CustomLabel();
             customLabelMod = new Core.Class.CustomLabel();
             customLabelArtText = new Core.Class.CustomLabel();
             customLabelModText = new Core.Class.CustomLabel();
+            customLabelGrup = new Core.Class.CustomHeaderLabel();
             tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             customGridControlKomplRazm = new Core.Class.CustomGridControl();
             gridViewKomplRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -288,7 +288,7 @@
             // bandedGridViewSelected
             // 
             bandedGridViewSelected.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { Razm_All1 });
-            bandedGridViewSelected.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { RazmAllSelected, po_mn, po, grupSelected, ArticulSelected, ModSelected, RazmSelected, count });
+            bandedGridViewSelected.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { RazmAllSelected, po_mn, po, grupSelected, ArticulSelected, ModSelected, RazmSelected, countStr });
             bandedGridViewSelected.GridControl = customGridControlKomplSelected;
             bandedGridViewSelected.Name = "bandedGridViewSelected";
             bandedGridViewSelected.OptionsBehavior.AutoExpandAllGroups = true;
@@ -303,7 +303,7 @@
             Razm_All1.Columns.Add(ArticulSelected);
             Razm_All1.Columns.Add(ModSelected);
             Razm_All1.Columns.Add(RazmSelected);
-            Razm_All1.Columns.Add(count);
+            Razm_All1.Columns.Add(countStr);
             Razm_All1.Columns.Add(RazmAllSelected);
             Razm_All1.Name = "Razm_All1";
             Razm_All1.VisibleIndex = 0;
@@ -370,13 +370,13 @@
             RazmSelected.Visible = true;
             RazmSelected.Width = 99;
             // 
-            // count
+            // countStr
             // 
-            count.Caption = "Кол-во";
-            count.FieldName = "CountStr";
-            count.Name = "count";
-            count.OptionsColumn.AllowEdit = false;
-            count.Visible = true;
+            countStr.Caption = "Кол-во";
+            countStr.FieldName = "countStr";
+            countStr.Name = "countStr";
+            countStr.OptionsColumn.AllowEdit = false;
+            countStr.Visible = true;
             // 
             // RazmAllSelected
             // 
@@ -667,11 +667,11 @@
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.86744452F));
-            tableLayoutPanel6.Controls.Add(customLabelGrup, 0, 0);
             tableLayoutPanel6.Controls.Add(customLabelArt, 0, 1);
             tableLayoutPanel6.Controls.Add(customLabelMod, 0, 2);
             tableLayoutPanel6.Controls.Add(customLabelArtText, 2, 1);
             tableLayoutPanel6.Controls.Add(customLabelModText, 2, 2);
+            tableLayoutPanel6.Controls.Add(customLabelGrup, 0, 0);
             tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel6.Location = new System.Drawing.Point(3, 203);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -684,20 +684,6 @@
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel6.Size = new System.Drawing.Size(303, 80);
             tableLayoutPanel6.TabIndex = 10;
-            // 
-            // customLabelGrup
-            // 
-            customLabelGrup.AutoSize = true;
-            tableLayoutPanel6.SetColumnSpan(customLabelGrup, 5);
-            customLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelGrup.Font = new System.Drawing.Font("Arial", 37F, System.Drawing.FontStyle.Bold);
-            customLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelGrup.Location = new System.Drawing.Point(3, 0);
-            customLabelGrup.Name = "customLabelGrup";
-            customLabelGrup.Size = new System.Drawing.Size(297, 26);
-            customLabelGrup.TabIndex = 3;
-            customLabelGrup.Text = "Группа";
-            customLabelGrup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelArt
             // 
@@ -754,6 +740,19 @@
             customLabelModText.TabIndex = 1;
             customLabelModText.Text = "Модель_Текст";
             customLabelModText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelGrup
+            // 
+            customLabelGrup.AutoSize = true;
+            tableLayoutPanel6.SetColumnSpan(customLabelGrup, 5);
+            customLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelGrup.Location = new System.Drawing.Point(3, 0);
+            customLabelGrup.Name = "customLabelGrup";
+            customLabelGrup.Size = new System.Drawing.Size(297, 26);
+            customLabelGrup.TabIndex = 2;
+            customLabelGrup.Text = "Группа";
+            customLabelGrup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel8
             // 
@@ -1054,7 +1053,6 @@
         private Core.Class.CustomLabel customLabelModText;
         private Core.Class.CustomLabel customLabelGrupKompl;
         private Core.Class.CustomLabel customLabelKolTab;
-        private Core.Class.CustomHeaderLabel customLabelGrup;
         private CustomNumericUpDown customNumericUpDownValueTab;
         private DevExpress.XtraGrid.Columns.GridColumn Grup;
         private DevExpress.XtraGrid.Columns.GridColumn Articul;
@@ -1104,8 +1102,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnMod;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRazm;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand Razm_All1;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn count;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn countStr;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCount;
         private DevExpress.XtraGrid.Columns.GridColumn kodArt;
+        private Core.Class.CustomHeaderLabel customLabelGrup;
     }
 }
