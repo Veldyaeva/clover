@@ -17,6 +17,7 @@ using System.Collections;
 using SewingProduction.Services;
 using DevExpress.Xpo.DB.Helpers;
 using System.Linq;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -231,7 +232,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 List<MyDataANN> relatedData = new List<MyDataANN>();
-                bool loadAll = loadAllCheckBox.Checked;
+                bool loadAll = string.IsNullOrEmpty(articul);//loadAllCheckBox.Checked;
                 ////loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
 
                 // Если включен чекбокс "Загрузить все"
@@ -1041,6 +1042,179 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при очистке связанных данных для РТ увязки");
             }
         }
+
+        /// <summary>
+        /// Возвращает выбранные записи из архива в актуальные (изменяет статус с 3 на 2)
+        /// </summary>
+        private async Task RestoreFromArchive_Internal(object sender, EventArgs e)
+        {
+            try
+            {
+                await _logger.LogEventAsync("Начало процесса восстановления записей из архива", "RestoreFromArchive_Internal");
+                // Находим gridViewArch
+                GridView archiveGridView = null;
+                if (gridControlArch?.MainView is GridView archView)
+                {
+                    archiveGridView = archView;
+                }
+
+                if (archiveGridView == null)
+                {
+                    MessageBox.Show("Грид архива не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await _logger.LogErrorAsync(new Exception("Грид архива не инициализирован"), "RestoreFromArchive_Internal");
+                    return;
+                }
+
+                // Получаем выбранные строки
+                var selectedRowHandles = archiveGridView.GetSelectedRows();
+
+                // Если нет выбранных строк, берем текущую строку
+                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
+                {
+                    if (archiveGridView.FocusedRowHandle < 0)
+                    {
+                        MessageBox.Show("Выберите записи для восстановления из архива.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        await _logger.LogWarningAsync("Попытка восстановления из архива без выбора строк", "RestoreFromArchive_Internal");
+                        return;
+                    }
+                    selectedRowHandles = new int[] { archiveGridView.FocusedRowHandle };
+                }
+
+                var selectedItems = new List<ArtNormN>();
+
+                // Собираем данные выбранных строк
+                foreach (int rowHandle in selectedRowHandles)
+                {
+                    if (rowHandle >= 0)
+                    {
+                        var item = archiveGridView.GetRow(rowHandle) as ArtNormN;
+                        if (item != null)
+                        {
+                            selectedItems.Add(item);
+                        }
+                    }
+                }
+
+                if (selectedItems.Count == 0)
+                {
+                    MessageBox.Show("Не найдено записей для восстановления из архива.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("Не найдено записей для восстановления из архива после сбора выбранных строк", "RestoreFromArchive_Internal");
+                    return;
+                }
+
+                // Подтверждение операции
+                string message = selectedItems.Count == 1
+                    ? $"Восстановить запись из архива:\n{selectedItems[0].Articul} - {selectedItems[0].Mod}?"
+                    : $"Восстановить {selectedItems.Count} записей из архива?";
+
+                var result = MessageBox.Show(
+                    message,
+                    "Подтверждение восстановления из архива",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result != DialogResult.Yes)
+                    return;
+
+                // Обновляем статус для каждой выбранной записи
+                int successCount = 0;
+                var errors = new List<string>();
+
+                archiveGridView.BeginUpdate();
+                try
+                {
+                    foreach (var item in selectedItems)
+                    {
+                        try
+                        {
+                            // Проверяем, что запись можно восстановить
+                            if (item.Status != (int)Status.Archive)
+                            {
+                                await _logger.LogEventAsync($"Запись AnnID: {item.AnnID} не находится в архиве (статус: {item.Status})", "RestoreFromArchive");
+                                continue;
+                            }
+
+                            // Обновляем статус в базе данных с 3 (архив) на 2 (актуальное)
+                            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", (int)Status.Preliminary, TableNames.AnnId, item.AnnID);
+
+                            // Обновляем объект в памяти
+                            item.Status = (int)Status.Preliminary;
+                            item.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
+
+                            // Обновляем строку в гриде
+                            int rowHandle = archiveGridView.LocateByValue("AnnID", item.AnnID);
+                            if (rowHandle >= 0)
+                            {
+                                archiveGridView.RefreshRow(rowHandle);
+                            }
+
+                            successCount++;
+                            await _logger.LogEventAsync($"Статус записи AnnID: {item.AnnID} изменен с 'Архивное' на 'Актуальное'", "RestoreFromArchive");
+                        }
+                        catch (Exception ex)
+                        {
+                            string errorMsg = $"AnnID: {item.AnnID} - {ex.Message}";
+                            errors.Add(errorMsg);
+                            await _logger.LogErrorAsync(ex, $"Ошибка при восстановлении записи из архива AnnID: {item.AnnID}");
+                        }
+                    }
+                }
+                finally
+                {
+                    archiveGridView.EndUpdate();
+                }
+
+                // Обновляем привязку данных и удаляем восстановленные записи из архива
+                if (_archBindingSource != null && _archList != null)
+                {
+                    // Удаляем восстановленные записи из списка архива
+                    foreach (var item in selectedItems.Where(i => i.Status == (int)Status.Preliminary))
+                    {
+                        _archList.Remove(item);
+                    }
+                    _archBindingSource.ResetBindings(false);
+                }
+
+                // Обновляем основной грид с разделениями труда
+                if (_bindingSource != null && _bindingList != null)
+                {
+                    // Добавляем восстановленные записи в основной список
+                    foreach (var item in selectedItems.Where(i => i.Status == (int)Status.Preliminary))
+                    {
+                        if (!_bindingList.Any(b => b.AnnID == item.AnnID))
+                        {
+                            _bindingList.Add(item);
+                        }
+                    }
+                    _bindingSource.ResetBindings(false);
+                    ANNgridControl?.RefreshDataSource();
+                }
+
+                // Показываем результат операции
+                if (errors.Count == 0)
+                {
+                    string successMessage = successCount == 1
+                        ? "Запись успешно восстановлена из архива."
+                        : $"Успешно восстановлено {successCount} записей из архива.";
+
+                    MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await _logger.LogEventAsync(successMessage, "RestoreFromArchive_Internal");
+                }
+                else
+                {
+                    string errorMessage = $"Восстановлено: {successCount} записей.\nОшибки:\n" + string.Join("\n", errors);
+                    MessageBox.Show(errorMessage, "Результат восстановления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync(errorMessage, "RestoreFromArchive_Internal");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при выполнении восстановления записей из архива");
+                MessageBox.Show($"Ошибка при восстановлении из архива: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
     }
 }
 

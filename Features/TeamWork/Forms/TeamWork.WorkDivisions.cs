@@ -1,7 +1,9 @@
 ﻿using Dapper;
 using DevExpress.DataAccess.Native.Excel;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.Design;
 using DevExpress.XtraTab;
@@ -9,17 +11,17 @@ using SewingProduction.Extensions;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.form;
 using SewingProduction.Helpers;
-using SewingProduction.Services; // for TeamWorkBuffer
 using SewingProduction.Models;
+using SewingProduction.Services; // for TeamWorkBuffer
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -112,6 +114,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        /// <summary>
+        /// Привязываем текстовые поля к источникам данных
+        /// </summary>
         private void BindTextFields()
         {
             designerTextBox.DataBindings.Clear();
@@ -146,6 +151,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditCreate.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
+        /// <summary>
+        /// Устанавливаем источники данных для связанных гридов
+        /// </summary>
+        /// <returns></returns>
         private async Task InitializeBindingsAsync()
         {
             try
@@ -180,7 +189,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
         /// <summary>
-        /// Загружает связанные данные для указанного AnnID с использованием сервисной архитектуры
+        /// Загружаем связанные данные для указанного AnnID с использованием сервисной архитектуры
         /// </summary>
         /// <param name="annId">ID разделения труда</param>
         /// <param name="cancellationToken">Токен отмены операции</param>
@@ -237,7 +246,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         /// <summary>
-        /// Загружает связанные данные из normraszview (без CancellationToken, но с возможностью отмены через внешний токен)
+        /// Загружаем связанные данные из normraszview (без CancellationToken, но с возможностью отмены через внешний токен)
         /// </summary>
         private async Task LoadRelatedDataFromView(int annId, CancellationToken ct)
         {
@@ -305,6 +314,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
             }
         }
+        /// <summary>
+        /// Обновляем статус кнопки "Отвязать" в зависимости от НЗП
+        /// </summary>
+        /// <returns></returns>
         private async Task UpdateUnboundButtonStatusBasedOnNZP()
         {
             try
@@ -348,7 +361,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ButtonUnboundWd.Enabled = false; 
             }
         }
-
+        /// <summary>
+        /// Загружаем и привязывает списки ФИО для дизайнеров и конструкторов
+        /// </summary>
+        /// <returns></returns>
         private async Task LoadAndBindFioListsAsync()
         {
             try
@@ -378,6 +394,158 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+
+
+
+        #region SetupDateUpdateColumn
+        /// <summary>
+        /// Настраивает колонку dateUpdate с кнопкой для проставления даты
+        /// </summary>
+        private void SetupDateUpdateColumn()
+        {
+            var commandsEditDateNull = new RepositoryItemButtonEdit { TextEditStyle = TextEditStyles.HideTextEditor };
+            commandsEditDateNull.Buttons.Clear();
+            commandsEditDateNull.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, DemoHelper.GetEditImage()));
+            commandsEditDateNull.DoubleClick -= CommandsEditDateNull_DoubleClick;
+            commandsEditDateNull.DoubleClick += CommandsEditDateNull_DoubleClick;
+
+            // Репозиторий для отображения только текста
+            var commandsEditDateText = new RepositoryItemTextEdit();
+            commandsEditDateText.ReadOnly = true;
+
+            GridColumn colDateUpdate = ANNgridView.Columns["dateUpdate"];
+            if (colDateUpdate != null)
+            {
+                // Устанавливаем формат отображения даты без времени
+                colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
+
+                ANNgridView.CustomRowCellEdit += (s, e) =>
+                {
+                    if (e.Column == colDateUpdate)
+                    {
+                        var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
+                        if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
+                            e.RepositoryItem = commandsEditDateNull;
+                        else e.RepositoryItem = commandsEditDateText;
+                    }
+                };
+            }
+        }
+
+        /// <summary>
+        /// Восстанавливает настройки колонки dateUpdate
+        /// </summary>
+        private void RestoreDateUpdateColumnSettings(GridView gridView)
+        {
+            try
+            {
+                GridColumn colDateUpdate = gridView.Columns["dateUpdate"];
+                if (colDateUpdate != null)
+                {
+                    // Устанавливаем формат отображения даты без времени
+                    colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                    colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, "Ошибка при восстановлении настроек колонки dateUpdate");
+            }
+        }
+        /// <summary>
+        /// Обрабатываем двойной клик по колонке DateUpdate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void CommandsEditDateNull_DoubleClick(object sender, EventArgs e)
+        {
+            var view = ANNgridView;
+            var rowHandle = view.FocusedRowHandle;
+            var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
+            int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
+
+            // Действие только если дата не задана
+            if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
+            {
+                var result = MessageBox.Show("Обновить данные во всех справочниках?",
+     "Пересчёт себ.",
+     MessageBoxButtons.YesNo,
+     MessageBoxIcon.Question,
+     MessageBoxDefaultButton.Button2);
+                await _logger.LogEventAsync($"User prompted to update data for AnnID: {annId}, user response: {result}", "CommandsEditDateNull_DoubleClick");
+                if (result == DialogResult.Yes)
+                {
+                    bool success = await UpdateDateAndStatusAsync(annId, view, rowHandle);
+                    if (success)
+                    {
+                        //MessageBox.Show("Данные успешно обновлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await _logger.LogEventAsync("Данные успешно обновлены!", "CommandsEditDateNull_DoubleClick");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при обновлении данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        await _logger.LogWarningAsync("Ошибка при обновлении данных!", "CommandsEditDateNull_DoubleClick");
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Общий метод для утверждения РТ, обновления даты и статуса записи
+        /// </summary>
+        /// <param name="annId">ID записи для обновления</param>
+        /// <param name="gridView">Грид для обновления UI</param>
+        /// <param name="rowHandle">Номер строки в гриде</param>
+        /// <returns>true если обновление прошло успешно</returns>
+        private async Task<bool> UpdateDateAndStatusAsync(int annId, GridView gridView, int rowHandle)
+        {
+            try
+            {
+                // Вызываем процедуру updateSebZArticulPsz для обновления данных во всех справочниках
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@xAnnID", annId }
+                };
+                await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @xAnnID", parameters);
+
+                // Обновляем дату обновления в базе данных
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
+
+                // Обновляем статус на "Актуальное"
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
+
+                // Обновляем UI в гриде
+                if (gridView != null && rowHandle >= 0)
+                {
+                    gridView.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
+                    gridView.SetRowCellValue(rowHandle, "status", (int)Status.Actual);
+                    gridView.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
+                    gridView.RefreshRow(rowHandle);
+                }
+
+                await _logger.LogEventAsync($"Данные обновлены для записи AnnID: {annId}, дата: {DateTime.Now:dd.MM.yyyy}, статус: Актуальное", "UpdateDateAndStatus");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Обрабатываем клик по кнопке утверждения РТ на вкладке Текущие Работы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void updateButton_Click(object sender, EventArgs e)
+        {
+            await SetUpdateDate_Internal(sender, e);
+        }
+
+
+        #endregion
 
 
         #region Добавить предварительное
