@@ -58,7 +58,7 @@ namespace SewingProduction
             DevExpress.XtraGrid.GridFormatRule gridFormatRule11 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue11 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CardByNom));
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             gridColumn40 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnNaklChipInUT = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn44 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -69,54 +69,7 @@ namespace SewingProduction
             gridColumnNaklChipOtgr = new DevExpress.XtraGrid.Columns.GridColumn();
             tbYearPach = new CustomTextBox();
             tbNomPach = new CustomTextBox();
-            tbPsaKombIzd = new CustomTextBox();
-            tbPsaKombOsn = new CustomTextBox();
-            tbPsaPsaIDOsn = new CustomTextBox();
-            tbPsaPsaID = new CustomTextBox();
-            label66 = new CustomLabel();
-            label67 = new CustomLabel();
-            label65 = new CustomLabel();
-            label62 = new CustomLabel();
-            pbEskiz = new PictureBox();
             label4 = new CustomLabel();
-            tbRzuKol = new CustomTextBox();
-            tbPsaNomZad = new CustomTextBox();
-            tbRzuDostZeh = new CustomTextBox();
-            tbRzuPach = new CustomTextBox();
-            tbRzuNom = new CustomTextBox();
-            tbPsaKodZv2 = new CustomTextBox();
-            tbPsaKodZv1 = new CustomTextBox();
-            tbRzuMod = new CustomTextBox();
-            tbRzuArticul = new CustomTextBox();
-            tbPsaPrn = new CustomTextBox();
-            tbArtGrup = new CustomTextBox();
-            tbArtTradeMark = new CustomTextBox();
-            tbPsaMenName = new CustomTextBox();
-            tbPsaNameSbit = new CustomTextBox();
-            tbPsaTbID = new CustomTextBox();
-            cbIsChip = new CustomCheckBox();
-            psaSezName = new CustomTextBox();
-            tbPsaYear = new CustomTextBox();
-            tbPsaNN = new CustomTextBox();
-            label68 = new CustomLabel();
-            label16 = new CustomLabel();
-            label17 = new CustomLabel();
-            label22 = new CustomLabel();
-            label53 = new CustomLabel();
-            label23 = new CustomLabel();
-            label20 = new CustomLabel();
-            label13 = new CustomLabel();
-            label11 = new CustomLabel();
-            label15 = new CustomLabel();
-            label12 = new CustomLabel();
-            label10 = new CustomLabel();
-            label19 = new CustomLabel();
-            label9 = new CustomLabel();
-            label8 = new CustomLabel();
-            label7 = new CustomLabel();
-            label6 = new CustomLabel();
-            label5 = new CustomLabel();
-            label21 = new CustomLabel();
             bsProizvCombIzdSP = new BindingSource(components);
             bsProizvCombIzdVZP = new BindingSource(components);
             gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -461,10 +414,80 @@ namespace SewingProduction
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             gridColumn57 = new DevExpress.XtraGrid.Columns.GridColumn();
-            RasCard = new CustomGroupBox();
+            customLabel2 = new CustomLabel();
+            customLabel1 = new CustomLabel();
+            tbNomZad = new CustomTextBox();
+            customLabel4 = new CustomLabel();
+            customRadioGroup3 = new CustomRadioGroup();
+            layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            customRadioGroup2 = new CustomRadioGroup();
+            layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            pbEskiz = new PictureBox();
             tbSostPoln = new CustomTextBox();
+            tbRzuMod = new CustomTextBox();
+            label13 = new CustomLabel();
+            tbArtGrup = new CustomTextBox();
+            tbPsaKombOsn = new CustomTextBox();
+            label10 = new CustomLabel();
+            tbPsaPrn = new CustomTextBox();
+            label67 = new CustomLabel();
+            tbPsaKodZv2 = new CustomTextBox();
+            label15 = new CustomLabel();
+            tbPsaPsaIDOsn = new CustomTextBox();
+            tbPsaKodZv1 = new CustomTextBox();
+            label22 = new CustomLabel();
+            tbPsaKombIzd = new CustomTextBox();
+            label23 = new CustomLabel();
+            label66 = new CustomLabel();
+            label8 = new CustomLabel();
+            label65 = new CustomLabel();
+            label9 = new CustomLabel();
+            tbPsaPsaID = new CustomTextBox();
+            label5 = new CustomLabel();
+            label62 = new CustomLabel();
+            tbArtTradeMark = new CustomTextBox();
+            tbPsaNameSbit = new CustomTextBox();
+            tbRzuNom = new CustomTextBox();
+            label68 = new CustomLabel();
+            cbIsChip = new CustomCheckBox();
+            tbRzuArticul = new CustomTextBox();
+            label19 = new CustomLabel();
+            label11 = new CustomLabel();
+            tbPsaMenName = new CustomTextBox();
+            tbPsaTbID = new CustomTextBox();
+            psaSezName = new CustomTextBox();
+            tbPsaYear = new CustomTextBox();
+            label20 = new CustomLabel();
+            label16 = new CustomLabel();
+            label7 = new CustomLabel();
+            tbRzuKol = new CustomTextBox();
+            label17 = new CustomLabel();
+            label53 = new CustomLabel();
+            tbPsaNomZad = new CustomTextBox();
+            label21 = new CustomLabel();
+            label12 = new CustomLabel();
+            tbPsaNN = new CustomTextBox();
+            tbRzuDostZeh = new CustomTextBox();
+            label6 = new CustomLabel();
+            tbRzuPach = new CustomTextBox();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlGroup12 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlGroup9 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -474,24 +497,7 @@ namespace SewingProduction
             layoutControlItem50 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem51 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem52 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup10 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem47 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem48 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem74 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem75 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem23 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem76 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem77 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem78 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem79 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem80 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem81 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem82 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem83 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem84 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem85 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem24 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlGroup11 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem53 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem54 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -525,36 +531,27 @@ namespace SewingProduction
             layoutControlItem60 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem61 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
-            customLabel2 = new CustomLabel();
-            customLabel1 = new CustomLabel();
-            tbNomZad = new CustomTextBox();
-            customLabel4 = new CustomLabel();
-            customRadioGroup3 = new CustomRadioGroup();
-            layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
-            customRadioGroup2 = new CustomRadioGroup();
-            layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            emptySpaceItem24 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlGroup10 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem47 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem48 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem74 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem75 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem23 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem76 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem77 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem78 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem79 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem80 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem81 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem82 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem83 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem84 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem85 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem25 = new DevExpress.XtraLayout.EmptySpaceItem();
             emptySpaceItem26 = new DevExpress.XtraLayout.EmptySpaceItem();
             emptySpaceItem27 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControl4 = new DevExpress.XtraLayout.LayoutControl();
-            layoutControlGroup12 = new DevExpress.XtraLayout.LayoutControlGroup();
-            ((System.ComponentModel.ISupportInitialize)pbEskiz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdSP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdVZP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridSplitContainer1).BeginInit();
@@ -673,10 +670,31 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem2).BeginInit();
-            RasCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
+            layoutControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbEskiz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
@@ -686,24 +704,7 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem50).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem51).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem52).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem47).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem48).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem18).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem75).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem23).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem76).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem77).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem78).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem81).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem24).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem53).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem54).BeginInit();
@@ -737,32 +738,27 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem60).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem61).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
-            layoutControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem24).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem47).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem48).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem18).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem75).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem23).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem76).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem77).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem78).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem81).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem25).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem26).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem27).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).BeginInit();
             SuspendLayout();
             // 
             // gridColumn40
@@ -874,108 +870,6 @@ namespace SewingProduction
             tbNomPach.TabIndex = 3;
             tbNomPach.KeyDown += tbNomPach_KeyDown;
             // 
-            // tbPsaKombIzd
-            // 
-            tbPsaKombIzd.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaKombIzd.Font = new Font("Arial", 10F);
-            tbPsaKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKombIzd.Location = new Point(1362, 83);
-            tbPsaKombIzd.Margin = new Padding(0);
-            tbPsaKombIzd.Name = "tbPsaKombIzd";
-            tbPsaKombIzd.Size = new Size(66, 20);
-            tbPsaKombIzd.TabIndex = 18;
-            // 
-            // tbPsaKombOsn
-            // 
-            tbPsaKombOsn.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaKombOsn.Font = new Font("Arial", 10F);
-            tbPsaKombOsn.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKombOsn.Location = new Point(1528, 83);
-            tbPsaKombOsn.Margin = new Padding(0);
-            tbPsaKombOsn.Name = "tbPsaKombOsn";
-            tbPsaKombOsn.Size = new Size(137, 20);
-            tbPsaKombOsn.TabIndex = 19;
-            // 
-            // tbPsaPsaIDOsn
-            // 
-            tbPsaPsaIDOsn.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaPsaIDOsn.Font = new Font("Arial", 10F);
-            tbPsaPsaIDOsn.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaPsaIDOsn.Location = new Point(1528, 59);
-            tbPsaPsaIDOsn.Margin = new Padding(0);
-            tbPsaPsaIDOsn.Name = "tbPsaPsaIDOsn";
-            tbPsaPsaIDOsn.Size = new Size(137, 20);
-            tbPsaPsaIDOsn.TabIndex = 16;
-            // 
-            // tbPsaPsaID
-            // 
-            tbPsaPsaID.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaPsaID.Font = new Font("Arial", 10F);
-            tbPsaPsaID.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaPsaID.Location = new Point(1345, 59);
-            tbPsaPsaID.Margin = new Padding(0);
-            tbPsaPsaID.Name = "tbPsaPsaID";
-            tbPsaPsaID.Size = new Size(82, 20);
-            tbPsaPsaID.TabIndex = 15;
-            // 
-            // label66
-            // 
-            label66.BackColor = Color.Transparent;
-            label66.Font = new Font("Arial", 10F);
-            label66.ForeColor = Color.FromArgb(0, 0, 0);
-            label66.Location = new Point(1288, 83);
-            label66.Margin = new Padding(4, 0, 4, 0);
-            label66.Name = "label66";
-            label66.Size = new Size(70, 20);
-            label66.TabIndex = 1;
-            label66.Text = "komb_izd";
-            // 
-            // label67
-            // 
-            label67.BackColor = Color.Transparent;
-            label67.Font = new Font("Arial", 10F);
-            label67.ForeColor = Color.FromArgb(0, 0, 0);
-            label67.Location = new Point(1442, 83);
-            label67.Margin = new Padding(4, 0, 4, 0);
-            label67.Name = "label67";
-            label67.Size = new Size(82, 20);
-            label67.TabIndex = 37;
-            label67.Text = "komb_osn";
-            // 
-            // label65
-            // 
-            label65.BackColor = Color.Transparent;
-            label65.Font = new Font("Arial", 10F);
-            label65.ForeColor = Color.FromArgb(0, 0, 0);
-            label65.Location = new Point(1441, 59);
-            label65.Margin = new Padding(4, 0, 4, 0);
-            label65.Name = "label65";
-            label65.Size = new Size(83, 20);
-            label65.TabIndex = 1;
-            label65.Text = "psa_id_osn";
-            // 
-            // label62
-            // 
-            label62.BackColor = Color.Transparent;
-            label62.Font = new Font("Arial", 10F);
-            label62.ForeColor = Color.FromArgb(0, 0, 0);
-            label62.Location = new Point(1288, 59);
-            label62.Margin = new Padding(4, 0, 4, 0);
-            label62.Name = "label62";
-            label62.Size = new Size(53, 20);
-            label62.TabIndex = 1;
-            label62.Text = "psa_id";
-            // 
-            // pbEskiz
-            // 
-            pbEskiz.Location = new Point(1681, 2);
-            pbEskiz.Margin = new Padding(4, 3, 4, 3);
-            pbEskiz.Name = "pbEskiz";
-            pbEskiz.Size = new Size(172, 137);
-            pbEskiz.SizeMode = PictureBoxSizeMode.Zoom;
-            pbEskiz.TabIndex = 1;
-            pbEskiz.TabStop = false;
-            // 
             // label4
             // 
             label4.BackColor = Color.Transparent;
@@ -988,447 +882,6 @@ namespace SewingProduction
             label4.TabIndex = 1;
             label4.Text = "год";
             label4.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // tbRzuKol
-            // 
-            tbRzuKol.BackColor = Color.FromArgb(248, 248, 255);
-            tbRzuKol.Font = new Font("Arial", 10F);
-            tbRzuKol.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuKol.Location = new Point(209, 35);
-            tbRzuKol.Margin = new Padding(0);
-            tbRzuKol.Name = "tbRzuKol";
-            tbRzuKol.Size = new Size(49, 20);
-            tbRzuKol.TabIndex = 2;
-            // 
-            // tbPsaNomZad
-            // 
-            tbPsaNomZad.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaNomZad.Font = new Font("Arial", 10F);
-            tbPsaNomZad.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaNomZad.Location = new Point(313, 35);
-            tbPsaNomZad.Margin = new Padding(0);
-            tbPsaNomZad.Name = "tbPsaNomZad";
-            tbPsaNomZad.Size = new Size(80, 20);
-            tbPsaNomZad.TabIndex = 5;
-            // 
-            // tbRzuDostZeh
-            // 
-            tbRzuDostZeh.BackColor = Color.FromArgb(248, 248, 255);
-            tbRzuDostZeh.Font = new Font("Arial", 10F);
-            tbRzuDostZeh.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuDostZeh.Location = new Point(106, 59);
-            tbRzuDostZeh.Margin = new Padding(0);
-            tbRzuDostZeh.Name = "tbRzuDostZeh";
-            tbRzuDostZeh.Size = new Size(152, 20);
-            tbRzuDostZeh.TabIndex = 3;
-            // 
-            // tbRzuPach
-            // 
-            tbRzuPach.BackColor = Color.FromArgb(248, 248, 255);
-            tbRzuPach.Font = new Font("Arial", 10F);
-            tbRzuPach.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuPach.Location = new Point(106, 83);
-            tbRzuPach.Margin = new Padding(0);
-            tbRzuPach.Name = "tbRzuPach";
-            tbRzuPach.Size = new Size(152, 20);
-            tbRzuPach.TabIndex = 4;
-            // 
-            // tbRzuNom
-            // 
-            tbRzuNom.BackColor = Color.FromArgb(248, 248, 255);
-            tbRzuNom.Font = new Font("Arial", 10F);
-            tbRzuNom.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuNom.Location = new Point(53, 35);
-            tbRzuNom.Margin = new Padding(0);
-            tbRzuNom.Name = "tbRzuNom";
-            tbRzuNom.Size = new Size(85, 20);
-            tbRzuNom.TabIndex = 0;
-            // 
-            // tbPsaKodZv2
-            // 
-            tbPsaKodZv2.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaKodZv2.Font = new Font("Arial", 10F);
-            tbPsaKodZv2.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKodZv2.Location = new Point(638, 59);
-            tbPsaKodZv2.Margin = new Padding(0);
-            tbPsaKodZv2.Name = "tbPsaKodZv2";
-            tbPsaKodZv2.Size = new Size(68, 20);
-            tbPsaKodZv2.TabIndex = 8;
-            // 
-            // tbPsaKodZv1
-            // 
-            tbPsaKodZv1.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaKodZv1.Font = new Font("Arial", 10F);
-            tbPsaKodZv1.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKodZv1.Location = new Point(476, 59);
-            tbPsaKodZv1.Margin = new Padding(0);
-            tbPsaKodZv1.Name = "tbPsaKodZv1";
-            tbPsaKodZv1.Size = new Size(65, 20);
-            tbPsaKodZv1.TabIndex = 7;
-            // 
-            // tbRzuMod
-            // 
-            tbRzuMod.BackColor = Color.FromArgb(248, 248, 255);
-            tbRzuMod.Font = new Font("Arial", 10F);
-            tbRzuMod.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuMod.Location = new Point(838, 98);
-            tbRzuMod.Margin = new Padding(0);
-            tbRzuMod.Name = "tbRzuMod";
-            tbRzuMod.Size = new Size(204, 29);
-            tbRzuMod.TabIndex = 19;
-            // 
-            // tbRzuArticul
-            // 
-            tbRzuArticul.BackColor = Color.FromArgb(248, 248, 255);
-            tbRzuArticul.Font = new Font("Arial", 10F);
-            tbRzuArticul.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuArticul.Location = new Point(397, 83);
-            tbRzuArticul.Margin = new Padding(0);
-            tbRzuArticul.Name = "tbRzuArticul";
-            tbRzuArticul.Size = new Size(309, 20);
-            tbRzuArticul.TabIndex = 9;
-            // 
-            // tbPsaPrn
-            // 
-            tbPsaPrn.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaPrn.Font = new Font("Arial", 10F);
-            tbPsaPrn.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaPrn.Location = new Point(454, 35);
-            tbPsaPrn.Margin = new Padding(0);
-            tbPsaPrn.Multiline = true;
-            tbPsaPrn.Name = "tbPsaPrn";
-            tbPsaPrn.Size = new Size(252, 20);
-            tbPsaPrn.TabIndex = 6;
-            // 
-            // tbArtGrup
-            // 
-            tbArtGrup.BackColor = Color.FromArgb(248, 248, 255);
-            tbArtGrup.Font = new Font("Arial", 10F);
-            tbArtGrup.ForeColor = Color.FromArgb(72, 61, 139);
-            tbArtGrup.Location = new Point(476, 107);
-            tbArtGrup.Margin = new Padding(0);
-            tbArtGrup.Name = "tbArtGrup";
-            tbArtGrup.Size = new Size(230, 20);
-            tbArtGrup.TabIndex = 21;
-            // 
-            // tbArtTradeMark
-            // 
-            tbArtTradeMark.BackColor = Color.FromArgb(248, 248, 255);
-            tbArtTradeMark.Font = new Font("Arial", 10F);
-            tbArtTradeMark.ForeColor = Color.FromArgb(72, 61, 139);
-            tbArtTradeMark.Location = new Point(1188, 107);
-            tbArtTradeMark.Margin = new Padding(0);
-            tbArtTradeMark.Name = "tbArtTradeMark";
-            tbArtTradeMark.Size = new Size(86, 20);
-            tbArtTradeMark.TabIndex = 20;
-            // 
-            // tbPsaMenName
-            // 
-            tbPsaMenName.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaMenName.Font = new Font("Arial", 10F);
-            tbPsaMenName.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaMenName.Location = new Point(1456, 107);
-            tbPsaMenName.Margin = new Padding(0);
-            tbPsaMenName.Multiline = true;
-            tbPsaMenName.Name = "tbPsaMenName";
-            tbPsaMenName.Size = new Size(209, 20);
-            tbPsaMenName.TabIndex = 21;
-            // 
-            // tbPsaNameSbit
-            // 
-            tbPsaNameSbit.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaNameSbit.Font = new Font("Arial", 10F);
-            tbPsaNameSbit.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaNameSbit.Location = new Point(1171, 83);
-            tbPsaNameSbit.Margin = new Padding(0);
-            tbPsaNameSbit.Name = "tbPsaNameSbit";
-            tbPsaNameSbit.Size = new Size(103, 20);
-            tbPsaNameSbit.TabIndex = 17;
-            // 
-            // tbPsaTbID
-            // 
-            tbPsaTbID.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaTbID.Font = new Font("Arial", 10F);
-            tbPsaTbID.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaTbID.Location = new Point(1118, 59);
-            tbPsaTbID.Margin = new Padding(0);
-            tbPsaTbID.Name = "tbPsaTbID";
-            tbPsaTbID.Size = new Size(156, 20);
-            tbPsaTbID.TabIndex = 14;
-            // 
-            // cbIsChip
-            // 
-            cbIsChip.Enabled = false;
-            cbIsChip.Font = new Font("Arial", 10F);
-            cbIsChip.ForeColor = Color.FromArgb(120, 60, 30);
-            cbIsChip.Location = new Point(1516, 35);
-            cbIsChip.Margin = new Padding(4, 3, 4, 3);
-            cbIsChip.Name = "cbIsChip";
-            cbIsChip.Size = new Size(149, 20);
-            cbIsChip.TabIndex = 13;
-            cbIsChip.Text = "Чип";
-            cbIsChip.UseVisualStyleBackColor = true;
-            // 
-            // psaSezName
-            // 
-            psaSezName.BackColor = Color.FromArgb(248, 248, 255);
-            psaSezName.Font = new Font("Arial", 10F);
-            psaSezName.ForeColor = Color.FromArgb(72, 61, 139);
-            psaSezName.Location = new Point(1432, 35);
-            psaSezName.Margin = new Padding(0);
-            psaSezName.Name = "psaSezName";
-            psaSezName.Size = new Size(70, 20);
-            psaSezName.TabIndex = 12;
-            // 
-            // tbPsaYear
-            // 
-            tbPsaYear.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaYear.Font = new Font("Arial", 10F);
-            tbPsaYear.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaYear.Location = new Point(1325, 35);
-            tbPsaYear.Margin = new Padding(0);
-            tbPsaYear.Name = "tbPsaYear";
-            tbPsaYear.Size = new Size(39, 20);
-            tbPsaYear.TabIndex = 11;
-            // 
-            // tbPsaNN
-            // 
-            tbPsaNN.BackColor = Color.FromArgb(248, 248, 255);
-            tbPsaNN.Font = new Font("Arial", 10F);
-            tbPsaNN.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaNN.Location = new Point(1118, 35);
-            tbPsaNN.Margin = new Padding(0);
-            tbPsaNN.Name = "tbPsaNN";
-            tbPsaNN.Size = new Size(156, 20);
-            tbPsaNN.TabIndex = 10;
-            // 
-            // label68
-            // 
-            label68.BackColor = Color.Transparent;
-            label68.Font = new Font("Arial", 10F);
-            label68.ForeColor = Color.FromArgb(0, 0, 0);
-            label68.Location = new Point(1070, 107);
-            label68.Margin = new Padding(4, 0, 4, 0);
-            label68.Name = "label68";
-            label68.Size = new Size(114, 20);
-            label68.TabIndex = 1;
-            label68.Text = "Торговая марка";
-            // 
-            // label16
-            // 
-            label16.BackColor = Color.Transparent;
-            label16.Font = new Font("Arial", 10F);
-            label16.ForeColor = Color.FromArgb(0, 0, 0);
-            label16.Location = new Point(1378, 35);
-            label16.Margin = new Padding(4, 0, 4, 0);
-            label16.Name = "label16";
-            label16.Size = new Size(50, 20);
-            label16.TabIndex = 1;
-            label16.Text = "Сезон";
-            // 
-            // label17
-            // 
-            label17.BackColor = Color.Transparent;
-            label17.Font = new Font("Arial", 10F);
-            label17.ForeColor = Color.FromArgb(0, 0, 0);
-            label17.Location = new Point(1288, 35);
-            label17.Margin = new Padding(4, 0, 4, 0);
-            label17.Name = "label17";
-            label17.Size = new Size(33, 20);
-            label17.TabIndex = 1;
-            label17.Text = "Год";
-            // 
-            // label22
-            // 
-            label22.BackColor = Color.Transparent;
-            label22.Font = new Font("Arial", 10F);
-            label22.ForeColor = Color.FromArgb(0, 0, 0);
-            label22.Location = new Point(565, 59);
-            label22.Margin = new Padding(4, 0, 4, 0);
-            label22.Name = "label22";
-            label22.Size = new Size(69, 20);
-            label22.TabIndex = 1;
-            label22.Text = "Код цв.2";
-            // 
-            // label53
-            // 
-            label53.BackColor = Color.Transparent;
-            label53.Font = new Font("Arial", 10F);
-            label53.ForeColor = Color.FromArgb(0, 0, 0);
-            label53.Location = new Point(286, 35);
-            label53.Margin = new Padding(4, 0, 4, 0);
-            label53.Name = "label53";
-            label53.Size = new Size(23, 20);
-            label53.TabIndex = 1;
-            label53.Text = "№";
-            // 
-            // label23
-            // 
-            label23.BackColor = Color.Transparent;
-            label23.Font = new Font("Arial", 10F);
-            label23.ForeColor = Color.FromArgb(0, 0, 0);
-            label23.Location = new Point(407, 59);
-            label23.Margin = new Padding(4, 0, 4, 0);
-            label23.Name = "label23";
-            label23.Size = new Size(65, 20);
-            label23.TabIndex = 1;
-            label23.Text = "Код цв.1";
-            // 
-            // label20
-            // 
-            label20.BackColor = Color.Transparent;
-            label20.Font = new Font("Arial", 10F);
-            label20.ForeColor = Color.FromArgb(0, 0, 0);
-            label20.Location = new Point(1288, 107);
-            label20.Margin = new Padding(4, 0, 4, 0);
-            label20.Name = "label20";
-            label20.Size = new Size(164, 20);
-            label20.TabIndex = 1;
-            label20.Text = "Категория (менеджер)";
-            // 
-            // label13
-            // 
-            label13.BackColor = Color.Transparent;
-            label13.Font = new Font("Arial", 10F);
-            label13.ForeColor = Color.FromArgb(0, 0, 0);
-            label13.Location = new Point(720, 35);
-            label13.Margin = new Padding(4, 0, 4, 0);
-            label13.Name = "label13";
-            label13.Size = new Size(114, 59);
-            label13.TabIndex = 24;
-            label13.Text = "Состав\r\n(из справ.)";
-            // 
-            // label11
-            // 
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Arial", 10F);
-            label11.ForeColor = Color.FromArgb(0, 0, 0);
-            label11.Location = new Point(1070, 83);
-            label11.Margin = new Padding(4, 0, 4, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(97, 20);
-            label11.TabIndex = 1;
-            label11.Text = "Канал сбыта";
-            // 
-            // label15
-            // 
-            label15.BackColor = Color.Transparent;
-            label15.Font = new Font("Arial", 10F);
-            label15.ForeColor = Color.FromArgb(0, 0, 0);
-            label15.Location = new Point(286, 107);
-            label15.Margin = new Padding(4, 0, 4, 0);
-            label15.Name = "label15";
-            label15.Size = new Size(186, 20);
-            label15.TabIndex = 22;
-            label15.Text = "Наименование (из справ.)";
-            // 
-            // label12
-            // 
-            label12.BackColor = Color.Transparent;
-            label12.Font = new Font("Arial", 10F);
-            label12.ForeColor = Color.FromArgb(0, 0, 0);
-            label12.Location = new Point(14, 59);
-            label12.Margin = new Padding(4, 0, 4, 0);
-            label12.Name = "label12";
-            label12.Size = new Size(88, 20);
-            label12.TabIndex = 1;
-            label12.Text = "Бригада №";
-            // 
-            // label10
-            // 
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Arial", 10F);
-            label10.ForeColor = Color.FromArgb(0, 0, 0);
-            label10.Location = new Point(720, 98);
-            label10.Margin = new Padding(4, 0, 4, 0);
-            label10.Name = "label10";
-            label10.Size = new Size(114, 29);
-            label10.TabIndex = 20;
-            label10.Text = "Модель (торг.)";
-            // 
-            // label19
-            // 
-            label19.BackColor = Color.Transparent;
-            label19.Font = new Font("Arial", 10F);
-            label19.ForeColor = Color.FromArgb(0, 0, 0);
-            label19.Location = new Point(1070, 59);
-            label19.Margin = new Padding(4, 0, 4, 0);
-            label19.Name = "label19";
-            label19.Size = new Size(44, 20);
-            label19.TabIndex = 1;
-            label19.Text = "Блок";
-            // 
-            // label9
-            // 
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Arial", 10F);
-            label9.ForeColor = Color.FromArgb(0, 0, 0);
-            label9.Location = new Point(286, 83);
-            label9.Margin = new Padding(4, 0, 4, 0);
-            label9.Name = "label9";
-            label9.Size = new Size(107, 20);
-            label9.TabIndex = 1;
-            label9.Text = "Артикул (шв.)";
-            // 
-            // label8
-            // 
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Arial", 10F);
-            label8.ForeColor = Color.FromArgb(0, 0, 0);
-            label8.Location = new Point(407, 35);
-            label8.Margin = new Padding(4, 0, 4, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(43, 20);
-            label8.TabIndex = 1;
-            label8.Text = "Цвет";
-            // 
-            // label7
-            // 
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Arial", 10F);
-            label7.ForeColor = Color.FromArgb(0, 0, 0);
-            label7.Location = new Point(152, 35);
-            label7.Margin = new Padding(4, 0, 4, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(53, 20);
-            label7.TabIndex = 1;
-            label7.Text = "Кол-во";
-            // 
-            // label6
-            // 
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Arial", 10F);
-            label6.ForeColor = Color.FromArgb(0, 0, 0);
-            label6.Location = new Point(14, 83);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(88, 44);
-            label6.TabIndex = 1;
-            label6.Text = "№ пачек";
-            // 
-            // label5
-            // 
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Arial", 10F);
-            label5.ForeColor = Color.FromArgb(0, 0, 0);
-            label5.Location = new Point(14, 35);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(35, 20);
-            label5.TabIndex = 1;
-            label5.Text = "№";
-            // 
-            // label21
-            // 
-            label21.BackColor = Color.Transparent;
-            label21.Font = new Font("Arial", 10F);
-            label21.ForeColor = Color.FromArgb(0, 0, 0);
-            label21.Location = new Point(1070, 35);
-            label21.Margin = new Padding(4, 0, 4, 0);
-            label21.Name = "label21";
-            label21.Size = new Size(44, 20);
-            label21.TabIndex = 1;
-            label21.Text = "Код";
             // 
             // gridColumn41
             // 
@@ -5286,8 +4739,8 @@ namespace SewingProduction
             // 
             // layoutControlGroup6
             // 
-            buttonImageOptions3.Image = (Image)resources.GetObject("buttonImageOptions3.Image");
-            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            buttonImageOptions1.Image = (Image)resources.GetObject("buttonImageOptions1.Image");
+            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup6.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26, layoutControlItem27, layoutControlItem29, layoutControlItem30, layoutControlItem31, emptySpaceItem8, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, emptySpaceItem9, layoutControlItem36, layoutControlItem37, emptySpaceItem4, layoutControlItem12, layoutControlItem28, layoutControlItem41, layoutControlItem42, emptySpaceItem6, layoutControlItem38, layoutControlItem40, emptySpaceItem7, layoutControlItem43, layoutControlItem44, layoutControlItem45, emptySpaceItem13, emptySpaceItem14, simpleSeparator2, simpleSeparator4, simpleSeparator5, simpleSeparator6, layoutControlItem24, layoutControlItem19, layoutControlItem25, layoutControlItem39, emptySpaceItem11, splitterItem1, layoutControlItem13, layoutControlItem14, emptySpaceItem12, emptySpaceItem10, emptySpaceItem5 });
             layoutControlGroup6.Location = new Point(0, 0);
@@ -5687,566 +5140,6 @@ namespace SewingProduction
             gridColumn57.Visible = true;
             gridColumn57.VisibleIndex = 8;
             // 
-            // RasCard
-            // 
-            RasCard.BackColor = Color.Transparent;
-            RasCard.Controls.Add(layoutControl1);
-            RasCard.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            RasCard.Location = new Point(0, 71);
-            RasCard.Margin = new Padding(4, 3, 4, 3);
-            RasCard.Name = "RasCard";
-            RasCard.Padding = new Padding(0);
-            RasCard.Size = new Size(1855, 160);
-            RasCard.TabIndex = 4;
-            RasCard.TabStop = false;
-            RasCard.Text = "КАРТОЧКА РАСЧЕТА";
-            // 
-            // layoutControl1
-            // 
-            layoutControl1.Controls.Add(tbSostPoln);
-            layoutControl1.Controls.Add(tbRzuMod);
-            layoutControl1.Controls.Add(label13);
-            layoutControl1.Controls.Add(tbArtGrup);
-            layoutControl1.Controls.Add(tbPsaKombOsn);
-            layoutControl1.Controls.Add(label10);
-            layoutControl1.Controls.Add(tbPsaPrn);
-            layoutControl1.Controls.Add(label67);
-            layoutControl1.Controls.Add(tbPsaKodZv2);
-            layoutControl1.Controls.Add(label15);
-            layoutControl1.Controls.Add(tbPsaPsaIDOsn);
-            layoutControl1.Controls.Add(tbPsaKodZv1);
-            layoutControl1.Controls.Add(label22);
-            layoutControl1.Controls.Add(tbPsaKombIzd);
-            layoutControl1.Controls.Add(pbEskiz);
-            layoutControl1.Controls.Add(label23);
-            layoutControl1.Controls.Add(label66);
-            layoutControl1.Controls.Add(label8);
-            layoutControl1.Controls.Add(label65);
-            layoutControl1.Controls.Add(label9);
-            layoutControl1.Controls.Add(tbPsaPsaID);
-            layoutControl1.Controls.Add(label5);
-            layoutControl1.Controls.Add(label62);
-            layoutControl1.Controls.Add(tbArtTradeMark);
-            layoutControl1.Controls.Add(tbPsaNameSbit);
-            layoutControl1.Controls.Add(tbRzuNom);
-            layoutControl1.Controls.Add(label68);
-            layoutControl1.Controls.Add(cbIsChip);
-            layoutControl1.Controls.Add(tbRzuArticul);
-            layoutControl1.Controls.Add(label19);
-            layoutControl1.Controls.Add(label11);
-            layoutControl1.Controls.Add(tbPsaMenName);
-            layoutControl1.Controls.Add(tbPsaTbID);
-            layoutControl1.Controls.Add(psaSezName);
-            layoutControl1.Controls.Add(tbPsaYear);
-            layoutControl1.Controls.Add(label20);
-            layoutControl1.Controls.Add(label16);
-            layoutControl1.Controls.Add(label7);
-            layoutControl1.Controls.Add(tbRzuKol);
-            layoutControl1.Controls.Add(label17);
-            layoutControl1.Controls.Add(label53);
-            layoutControl1.Controls.Add(tbPsaNomZad);
-            layoutControl1.Controls.Add(label21);
-            layoutControl1.Controls.Add(label12);
-            layoutControl1.Controls.Add(tbPsaNN);
-            layoutControl1.Controls.Add(tbRzuDostZeh);
-            layoutControl1.Controls.Add(label6);
-            layoutControl1.Controls.Add(tbRzuPach);
-            layoutControl1.Dock = DockStyle.Fill;
-            layoutControl1.Location = new Point(0, 19);
-            layoutControl1.Name = "layoutControl1";
-            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(920, 102, 650, 400);
-            layoutControl1.Root = Root;
-            layoutControl1.Size = new Size(1855, 141);
-            layoutControl1.TabIndex = 14;
-            layoutControl1.Text = "layoutControl1";
-            // 
-            // tbSostPoln
-            // 
-            tbSostPoln.BackColor = Color.FromArgb(230, 245, 255);
-            tbSostPoln.Font = new Font("Arial", 10F);
-            tbSostPoln.ForeColor = Color.FromArgb(50, 90, 160);
-            tbSostPoln.Location = new Point(838, 35);
-            tbSostPoln.Multiline = true;
-            tbSostPoln.Name = "tbSostPoln";
-            tbSostPoln.Size = new Size(204, 59);
-            tbSostPoln.TabIndex = 38;
-            // 
-            // Root
-            // 
-            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup9, layoutControlGroup10, layoutControlGroup11, layoutControlItem22 });
-            Root.Name = "Root";
-            Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            Root.Size = new Size(1855, 141);
-            Root.TextVisible = false;
-            // 
-            // layoutControlGroup9
-            // 
-            layoutControlGroup9.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem15, layoutControlItem17, layoutControlItem23, layoutControlItem46, layoutControlItem49, layoutControlItem50, layoutControlItem51, layoutControlItem52, emptySpaceItem24 });
-            layoutControlGroup9.Location = new Point(0, 0);
-            layoutControlGroup9.Name = "layoutControlGroup9";
-            layoutControlGroup9.Size = new Size(272, 141);
-            layoutControlGroup9.Text = "Расчет";
-            // 
-            // layoutControlItem15
-            // 
-            layoutControlItem15.Control = label5;
-            layoutControlItem15.Location = new Point(0, 0);
-            layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new Size(39, 24);
-            layoutControlItem15.TextVisible = false;
-            // 
-            // layoutControlItem17
-            // 
-            layoutControlItem17.Control = tbRzuNom;
-            layoutControlItem17.Location = new Point(39, 0);
-            layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new Size(89, 24);
-            layoutControlItem17.TextVisible = false;
-            // 
-            // layoutControlItem23
-            // 
-            layoutControlItem23.Control = label7;
-            layoutControlItem23.Location = new Point(138, 0);
-            layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new Size(57, 24);
-            layoutControlItem23.TextVisible = false;
-            // 
-            // layoutControlItem46
-            // 
-            layoutControlItem46.Control = tbRzuKol;
-            layoutControlItem46.Location = new Point(195, 0);
-            layoutControlItem46.Name = "layoutControlItem46";
-            layoutControlItem46.Size = new Size(53, 24);
-            layoutControlItem46.TextVisible = false;
-            // 
-            // layoutControlItem49
-            // 
-            layoutControlItem49.Control = label12;
-            layoutControlItem49.Location = new Point(0, 24);
-            layoutControlItem49.Name = "layoutControlItem49";
-            layoutControlItem49.Size = new Size(92, 24);
-            layoutControlItem49.TextVisible = false;
-            // 
-            // layoutControlItem50
-            // 
-            layoutControlItem50.Control = tbRzuDostZeh;
-            layoutControlItem50.Location = new Point(92, 24);
-            layoutControlItem50.Name = "layoutControlItem50";
-            layoutControlItem50.Size = new Size(156, 24);
-            layoutControlItem50.TextVisible = false;
-            // 
-            // layoutControlItem51
-            // 
-            layoutControlItem51.Control = label6;
-            layoutControlItem51.Location = new Point(0, 48);
-            layoutControlItem51.Name = "layoutControlItem51";
-            layoutControlItem51.Size = new Size(92, 48);
-            layoutControlItem51.TextVisible = false;
-            // 
-            // layoutControlItem52
-            // 
-            layoutControlItem52.Control = tbRzuPach;
-            layoutControlItem52.Location = new Point(92, 48);
-            layoutControlItem52.Name = "layoutControlItem52";
-            layoutControlItem52.Size = new Size(156, 48);
-            layoutControlItem52.TextVisible = false;
-            // 
-            // layoutControlGroup10
-            // 
-            layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem47, layoutControlItem48, layoutControlItem16, layoutControlItem18, layoutControlItem74, layoutControlItem75, emptySpaceItem23, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81, layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, emptySpaceItem25, emptySpaceItem26, emptySpaceItem27 });
-            layoutControlGroup10.Location = new Point(272, 0);
-            layoutControlGroup10.Name = "layoutControlGroup10";
-            layoutControlGroup10.Size = new Size(784, 141);
-            layoutControlGroup10.Text = "Задание";
-            // 
-            // layoutControlItem47
-            // 
-            layoutControlItem47.Control = label53;
-            layoutControlItem47.Location = new Point(0, 0);
-            layoutControlItem47.Name = "layoutControlItem47";
-            layoutControlItem47.Size = new Size(27, 24);
-            layoutControlItem47.TextVisible = false;
-            // 
-            // layoutControlItem48
-            // 
-            layoutControlItem48.Control = tbPsaNomZad;
-            layoutControlItem48.Location = new Point(27, 0);
-            layoutControlItem48.Name = "layoutControlItem48";
-            layoutControlItem48.Size = new Size(84, 24);
-            layoutControlItem48.TextVisible = false;
-            // 
-            // layoutControlItem16
-            // 
-            layoutControlItem16.Control = label9;
-            layoutControlItem16.Location = new Point(0, 48);
-            layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new Size(111, 24);
-            layoutControlItem16.TextVisible = false;
-            // 
-            // layoutControlItem18
-            // 
-            layoutControlItem18.Control = tbRzuArticul;
-            layoutControlItem18.Location = new Point(111, 48);
-            layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new Size(313, 24);
-            layoutControlItem18.TextVisible = false;
-            // 
-            // layoutControlItem74
-            // 
-            layoutControlItem74.Control = label8;
-            layoutControlItem74.Location = new Point(121, 0);
-            layoutControlItem74.Name = "layoutControlItem74";
-            layoutControlItem74.Size = new Size(47, 24);
-            layoutControlItem74.TextVisible = false;
-            // 
-            // layoutControlItem75
-            // 
-            layoutControlItem75.Control = tbPsaPrn;
-            layoutControlItem75.Location = new Point(168, 0);
-            layoutControlItem75.Name = "layoutControlItem75";
-            layoutControlItem75.Size = new Size(256, 24);
-            layoutControlItem75.TextVisible = false;
-            // 
-            // emptySpaceItem23
-            // 
-            emptySpaceItem23.Location = new Point(0, 24);
-            emptySpaceItem23.Name = "emptySpaceItem23";
-            emptySpaceItem23.Size = new Size(121, 24);
-            // 
-            // layoutControlItem76
-            // 
-            layoutControlItem76.Control = label23;
-            layoutControlItem76.Location = new Point(121, 24);
-            layoutControlItem76.Name = "layoutControlItem76";
-            layoutControlItem76.Size = new Size(69, 24);
-            layoutControlItem76.TextVisible = false;
-            // 
-            // layoutControlItem77
-            // 
-            layoutControlItem77.Control = tbPsaKodZv1;
-            layoutControlItem77.Location = new Point(190, 24);
-            layoutControlItem77.Name = "layoutControlItem77";
-            layoutControlItem77.Size = new Size(69, 24);
-            layoutControlItem77.TextVisible = false;
-            // 
-            // layoutControlItem78
-            // 
-            layoutControlItem78.Control = label22;
-            layoutControlItem78.Location = new Point(279, 24);
-            layoutControlItem78.Name = "layoutControlItem78";
-            layoutControlItem78.Size = new Size(73, 24);
-            layoutControlItem78.TextVisible = false;
-            // 
-            // layoutControlItem79
-            // 
-            layoutControlItem79.Control = tbPsaKodZv2;
-            layoutControlItem79.Location = new Point(352, 24);
-            layoutControlItem79.Name = "layoutControlItem79";
-            layoutControlItem79.Size = new Size(72, 24);
-            layoutControlItem79.TextVisible = false;
-            // 
-            // layoutControlItem80
-            // 
-            layoutControlItem80.Control = label15;
-            layoutControlItem80.Location = new Point(0, 72);
-            layoutControlItem80.Name = "layoutControlItem80";
-            layoutControlItem80.Size = new Size(190, 24);
-            layoutControlItem80.TextVisible = false;
-            // 
-            // layoutControlItem81
-            // 
-            layoutControlItem81.Control = tbArtGrup;
-            layoutControlItem81.Location = new Point(190, 72);
-            layoutControlItem81.Name = "layoutControlItem81";
-            layoutControlItem81.Size = new Size(234, 24);
-            layoutControlItem81.TextVisible = false;
-            // 
-            // layoutControlItem82
-            // 
-            layoutControlItem82.Control = label10;
-            layoutControlItem82.Location = new Point(434, 63);
-            layoutControlItem82.Name = "layoutControlItem82";
-            layoutControlItem82.Size = new Size(118, 33);
-            layoutControlItem82.TextVisible = false;
-            // 
-            // layoutControlItem83
-            // 
-            layoutControlItem83.Control = tbRzuMod;
-            layoutControlItem83.Location = new Point(552, 63);
-            layoutControlItem83.MinSize = new Size(24, 24);
-            layoutControlItem83.Name = "layoutControlItem83";
-            layoutControlItem83.Size = new Size(208, 33);
-            layoutControlItem83.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem83.TextVisible = false;
-            // 
-            // layoutControlItem84
-            // 
-            layoutControlItem84.Control = label13;
-            layoutControlItem84.Location = new Point(434, 0);
-            layoutControlItem84.Name = "layoutControlItem84";
-            layoutControlItem84.Size = new Size(118, 63);
-            layoutControlItem84.TextVisible = false;
-            // 
-            // layoutControlItem85
-            // 
-            layoutControlItem85.Control = tbSostPoln;
-            layoutControlItem85.Location = new Point(552, 0);
-            layoutControlItem85.MinSize = new Size(24, 24);
-            layoutControlItem85.Name = "layoutControlItem85";
-            layoutControlItem85.Size = new Size(208, 63);
-            layoutControlItem85.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem85.TextVisible = false;
-            // 
-            // layoutControlGroup11
-            // 
-            layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem53, layoutControlItem54, layoutControlItem20, layoutControlItem21, layoutControlItem55, layoutControlItem56, layoutControlItem57, layoutControlItem58, layoutControlItem59, emptySpaceItem15, emptySpaceItem17, emptySpaceItem18, emptySpaceItem19, layoutControlItem62, layoutControlItem63, emptySpaceItem20, layoutControlItem64, layoutControlItem65, emptySpaceItem21, layoutControlItem66, layoutControlItem67, layoutControlItem68, layoutControlItem69, emptySpaceItem16, layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem73, emptySpaceItem22, layoutControlItem60, layoutControlItem61 });
-            layoutControlGroup11.Location = new Point(1056, 0);
-            layoutControlGroup11.Name = "layoutControlGroup11";
-            layoutControlGroup11.Size = new Size(623, 141);
-            layoutControlGroup11.Text = "Матрица";
-            // 
-            // layoutControlItem53
-            // 
-            layoutControlItem53.Control = label21;
-            layoutControlItem53.Location = new Point(0, 0);
-            layoutControlItem53.Name = "layoutControlItem53";
-            layoutControlItem53.Size = new Size(48, 24);
-            layoutControlItem53.TextVisible = false;
-            // 
-            // layoutControlItem54
-            // 
-            layoutControlItem54.Control = tbPsaNN;
-            layoutControlItem54.Location = new Point(48, 0);
-            layoutControlItem54.Name = "layoutControlItem54";
-            layoutControlItem54.Size = new Size(160, 24);
-            layoutControlItem54.TextVisible = false;
-            // 
-            // layoutControlItem20
-            // 
-            layoutControlItem20.Control = label19;
-            layoutControlItem20.Location = new Point(0, 24);
-            layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new Size(48, 24);
-            layoutControlItem20.TextVisible = false;
-            // 
-            // layoutControlItem21
-            // 
-            layoutControlItem21.Control = tbPsaTbID;
-            layoutControlItem21.Location = new Point(48, 24);
-            layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new Size(160, 24);
-            layoutControlItem21.TextVisible = false;
-            // 
-            // layoutControlItem55
-            // 
-            layoutControlItem55.Control = label17;
-            layoutControlItem55.Location = new Point(218, 0);
-            layoutControlItem55.Name = "layoutControlItem55";
-            layoutControlItem55.Size = new Size(37, 24);
-            layoutControlItem55.TextVisible = false;
-            // 
-            // layoutControlItem56
-            // 
-            layoutControlItem56.Control = tbPsaYear;
-            layoutControlItem56.Location = new Point(255, 0);
-            layoutControlItem56.Name = "layoutControlItem56";
-            layoutControlItem56.Size = new Size(43, 24);
-            layoutControlItem56.TextVisible = false;
-            // 
-            // layoutControlItem57
-            // 
-            layoutControlItem57.Control = label16;
-            layoutControlItem57.Location = new Point(308, 0);
-            layoutControlItem57.Name = "layoutControlItem57";
-            layoutControlItem57.Size = new Size(54, 24);
-            layoutControlItem57.TextVisible = false;
-            // 
-            // layoutControlItem58
-            // 
-            layoutControlItem58.Control = psaSezName;
-            layoutControlItem58.Location = new Point(362, 0);
-            layoutControlItem58.Name = "layoutControlItem58";
-            layoutControlItem58.Size = new Size(74, 24);
-            layoutControlItem58.TextVisible = false;
-            // 
-            // layoutControlItem59
-            // 
-            layoutControlItem59.Control = cbIsChip;
-            layoutControlItem59.Location = new Point(446, 0);
-            layoutControlItem59.Name = "layoutControlItem59";
-            layoutControlItem59.Size = new Size(153, 24);
-            layoutControlItem59.TextVisible = false;
-            // 
-            // emptySpaceItem15
-            // 
-            emptySpaceItem15.Location = new Point(208, 24);
-            emptySpaceItem15.Name = "emptySpaceItem15";
-            emptySpaceItem15.Size = new Size(10, 24);
-            // 
-            // emptySpaceItem17
-            // 
-            emptySpaceItem17.Location = new Point(208, 0);
-            emptySpaceItem17.Name = "emptySpaceItem17";
-            emptySpaceItem17.Size = new Size(10, 24);
-            // 
-            // emptySpaceItem18
-            // 
-            emptySpaceItem18.Location = new Point(298, 0);
-            emptySpaceItem18.Name = "emptySpaceItem18";
-            emptySpaceItem18.Size = new Size(10, 24);
-            // 
-            // emptySpaceItem19
-            // 
-            emptySpaceItem19.Location = new Point(436, 0);
-            emptySpaceItem19.Name = "emptySpaceItem19";
-            emptySpaceItem19.Size = new Size(10, 24);
-            // 
-            // layoutControlItem62
-            // 
-            layoutControlItem62.Control = label11;
-            layoutControlItem62.Location = new Point(0, 48);
-            layoutControlItem62.Name = "layoutControlItem62";
-            layoutControlItem62.Size = new Size(101, 24);
-            layoutControlItem62.TextVisible = false;
-            // 
-            // layoutControlItem63
-            // 
-            layoutControlItem63.Control = tbPsaNameSbit;
-            layoutControlItem63.Location = new Point(101, 48);
-            layoutControlItem63.Name = "layoutControlItem63";
-            layoutControlItem63.Size = new Size(107, 24);
-            layoutControlItem63.TextVisible = false;
-            // 
-            // emptySpaceItem20
-            // 
-            emptySpaceItem20.Location = new Point(208, 48);
-            emptySpaceItem20.Name = "emptySpaceItem20";
-            emptySpaceItem20.Size = new Size(10, 24);
-            // 
-            // layoutControlItem64
-            // 
-            layoutControlItem64.Control = label68;
-            layoutControlItem64.Location = new Point(0, 72);
-            layoutControlItem64.Name = "layoutControlItem64";
-            layoutControlItem64.Size = new Size(118, 24);
-            layoutControlItem64.TextVisible = false;
-            // 
-            // layoutControlItem65
-            // 
-            layoutControlItem65.Control = tbArtTradeMark;
-            layoutControlItem65.Location = new Point(118, 72);
-            layoutControlItem65.Name = "layoutControlItem65";
-            layoutControlItem65.Size = new Size(90, 24);
-            layoutControlItem65.TextVisible = false;
-            // 
-            // emptySpaceItem21
-            // 
-            emptySpaceItem21.Location = new Point(208, 72);
-            emptySpaceItem21.Name = "emptySpaceItem21";
-            emptySpaceItem21.Size = new Size(10, 24);
-            // 
-            // layoutControlItem66
-            // 
-            layoutControlItem66.Control = label62;
-            layoutControlItem66.Location = new Point(218, 24);
-            layoutControlItem66.Name = "layoutControlItem66";
-            layoutControlItem66.Size = new Size(57, 24);
-            layoutControlItem66.TextVisible = false;
-            // 
-            // layoutControlItem67
-            // 
-            layoutControlItem67.Control = tbPsaPsaID;
-            layoutControlItem67.Location = new Point(275, 24);
-            layoutControlItem67.Name = "layoutControlItem67";
-            layoutControlItem67.Size = new Size(86, 24);
-            layoutControlItem67.TextVisible = false;
-            // 
-            // layoutControlItem68
-            // 
-            layoutControlItem68.Control = label65;
-            layoutControlItem68.Location = new Point(371, 24);
-            layoutControlItem68.Name = "layoutControlItem68";
-            layoutControlItem68.Size = new Size(87, 24);
-            layoutControlItem68.TextVisible = false;
-            // 
-            // layoutControlItem69
-            // 
-            layoutControlItem69.Control = tbPsaPsaIDOsn;
-            layoutControlItem69.Location = new Point(458, 24);
-            layoutControlItem69.Name = "layoutControlItem69";
-            layoutControlItem69.Size = new Size(141, 24);
-            layoutControlItem69.TextVisible = false;
-            // 
-            // emptySpaceItem16
-            // 
-            emptySpaceItem16.Location = new Point(361, 24);
-            emptySpaceItem16.Name = "emptySpaceItem16";
-            emptySpaceItem16.Size = new Size(10, 24);
-            // 
-            // layoutControlItem70
-            // 
-            layoutControlItem70.Control = label66;
-            layoutControlItem70.Location = new Point(218, 48);
-            layoutControlItem70.Name = "layoutControlItem70";
-            layoutControlItem70.Size = new Size(74, 24);
-            layoutControlItem70.TextVisible = false;
-            // 
-            // layoutControlItem71
-            // 
-            layoutControlItem71.Control = tbPsaKombIzd;
-            layoutControlItem71.Location = new Point(292, 48);
-            layoutControlItem71.Name = "layoutControlItem71";
-            layoutControlItem71.Size = new Size(70, 24);
-            layoutControlItem71.TextVisible = false;
-            // 
-            // layoutControlItem72
-            // 
-            layoutControlItem72.Control = label67;
-            layoutControlItem72.Location = new Point(372, 48);
-            layoutControlItem72.Name = "layoutControlItem72";
-            layoutControlItem72.Size = new Size(86, 24);
-            layoutControlItem72.TextVisible = false;
-            // 
-            // layoutControlItem73
-            // 
-            layoutControlItem73.Control = tbPsaKombOsn;
-            layoutControlItem73.Location = new Point(458, 48);
-            layoutControlItem73.Name = "layoutControlItem73";
-            layoutControlItem73.Size = new Size(141, 24);
-            layoutControlItem73.TextVisible = false;
-            // 
-            // emptySpaceItem22
-            // 
-            emptySpaceItem22.Location = new Point(362, 48);
-            emptySpaceItem22.Name = "emptySpaceItem22";
-            emptySpaceItem22.Size = new Size(10, 24);
-            // 
-            // layoutControlItem60
-            // 
-            layoutControlItem60.Control = label20;
-            layoutControlItem60.Location = new Point(218, 72);
-            layoutControlItem60.Name = "layoutControlItem60";
-            layoutControlItem60.Size = new Size(168, 24);
-            layoutControlItem60.TextVisible = false;
-            // 
-            // layoutControlItem61
-            // 
-            layoutControlItem61.Control = tbPsaMenName;
-            layoutControlItem61.Location = new Point(386, 72);
-            layoutControlItem61.Name = "layoutControlItem61";
-            layoutControlItem61.Size = new Size(213, 24);
-            layoutControlItem61.TextVisible = false;
-            // 
-            // layoutControlItem22
-            // 
-            layoutControlItem22.Control = pbEskiz;
-            layoutControlItem22.Location = new Point(1679, 0);
-            layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new Size(176, 141);
-            layoutControlItem22.TextVisible = false;
-            // 
             // customLabel2
             // 
             customLabel2.BackColor = Color.Transparent;
@@ -6364,14 +5257,6 @@ namespace SewingProduction
             layoutControlGroup8.Size = new Size(1058, 32);
             layoutControlGroup8.TextLocation = DevExpress.Utils.Locations.Left;
             // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = customLabel2;
-            layoutControlItem1.Location = new Point(0, 0);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(113, 32);
-            layoutControlItem1.TextVisible = false;
-            // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = customRadioGroup2;
@@ -6472,67 +5357,1153 @@ namespace SewingProduction
             layoutControlItem9.Size = new Size(126, 26);
             layoutControlItem9.TextVisible = false;
             // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = customLabel2;
+            layoutControlItem1.Location = new Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new Size(113, 32);
+            layoutControlItem1.TextVisible = false;
+            // 
             // layoutControlGroup5
             // 
             layoutControlGroup5.Location = new Point(0, 0);
             layoutControlGroup5.Name = "layoutControlGroup5";
             layoutControlGroup5.Size = new Size(1840, 132);
             // 
+            // layoutControl1
+            // 
+            layoutControl1.Controls.Add(pbEskiz);
+            layoutControl1.Controls.Add(tbSostPoln);
+            layoutControl1.Controls.Add(tbRzuMod);
+            layoutControl1.Controls.Add(label13);
+            layoutControl1.Controls.Add(tbArtGrup);
+            layoutControl1.Controls.Add(tbPsaKombOsn);
+            layoutControl1.Controls.Add(label10);
+            layoutControl1.Controls.Add(tbPsaPrn);
+            layoutControl1.Controls.Add(label67);
+            layoutControl1.Controls.Add(tbPsaKodZv2);
+            layoutControl1.Controls.Add(label15);
+            layoutControl1.Controls.Add(tbPsaPsaIDOsn);
+            layoutControl1.Controls.Add(tbPsaKodZv1);
+            layoutControl1.Controls.Add(label22);
+            layoutControl1.Controls.Add(tbPsaKombIzd);
+            layoutControl1.Controls.Add(label23);
+            layoutControl1.Controls.Add(label66);
+            layoutControl1.Controls.Add(label8);
+            layoutControl1.Controls.Add(label65);
+            layoutControl1.Controls.Add(label9);
+            layoutControl1.Controls.Add(tbPsaPsaID);
+            layoutControl1.Controls.Add(label5);
+            layoutControl1.Controls.Add(label62);
+            layoutControl1.Controls.Add(tbArtTradeMark);
+            layoutControl1.Controls.Add(tbPsaNameSbit);
+            layoutControl1.Controls.Add(tbRzuNom);
+            layoutControl1.Controls.Add(label68);
+            layoutControl1.Controls.Add(cbIsChip);
+            layoutControl1.Controls.Add(tbRzuArticul);
+            layoutControl1.Controls.Add(label19);
+            layoutControl1.Controls.Add(label11);
+            layoutControl1.Controls.Add(tbPsaMenName);
+            layoutControl1.Controls.Add(tbPsaTbID);
+            layoutControl1.Controls.Add(psaSezName);
+            layoutControl1.Controls.Add(tbPsaYear);
+            layoutControl1.Controls.Add(label20);
+            layoutControl1.Controls.Add(label16);
+            layoutControl1.Controls.Add(label7);
+            layoutControl1.Controls.Add(tbRzuKol);
+            layoutControl1.Controls.Add(label17);
+            layoutControl1.Controls.Add(label53);
+            layoutControl1.Controls.Add(tbPsaNomZad);
+            layoutControl1.Controls.Add(label21);
+            layoutControl1.Controls.Add(label12);
+            layoutControl1.Controls.Add(tbPsaNN);
+            layoutControl1.Controls.Add(tbRzuDostZeh);
+            layoutControl1.Controls.Add(label6);
+            layoutControl1.Controls.Add(tbRzuPach);
+            layoutControl1.Location = new Point(2, 37);
+            layoutControl1.Name = "layoutControl1";
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(820, 315, 650, 400);
+            layoutControl1.Root = Root;
+            layoutControl1.Size = new Size(1831, 170);
+            layoutControl1.TabIndex = 15;
+            layoutControl1.Text = "layoutControl1";
+            // 
+            // pbEskiz
+            // 
+            pbEskiz.Location = new Point(1711, 59);
+            pbEskiz.Margin = new Padding(4, 3, 4, 3);
+            pbEskiz.Name = "pbEskiz";
+            pbEskiz.Size = new Size(103, 94);
+            pbEskiz.SizeMode = PictureBoxSizeMode.Zoom;
+            pbEskiz.TabIndex = 1;
+            pbEskiz.TabStop = false;
+            // 
+            // tbSostPoln
+            // 
+            tbSostPoln.BackColor = Color.FromArgb(230, 245, 255);
+            tbSostPoln.Font = new Font("Arial", 10F);
+            tbSostPoln.ForeColor = Color.FromArgb(50, 90, 160);
+            tbSostPoln.Location = new Point(888, 59);
+            tbSostPoln.Multiline = true;
+            tbSostPoln.Name = "tbSostPoln";
+            tbSostPoln.Size = new Size(469, 25);
+            tbSostPoln.TabIndex = 38;
+            // 
+            // tbRzuMod
+            // 
+            tbRzuMod.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuMod.Font = new Font("Arial", 10F);
+            tbRzuMod.ForeColor = Color.FromArgb(72, 61, 139);
+            tbRzuMod.Location = new Point(888, 88);
+            tbRzuMod.Margin = new Padding(0);
+            tbRzuMod.Name = "tbRzuMod";
+            tbRzuMod.Size = new Size(469, 65);
+            tbRzuMod.TabIndex = 19;
+            // 
+            // label13
+            // 
+            label13.BackColor = Color.Transparent;
+            label13.Font = new Font("Arial", 10F);
+            label13.ForeColor = Color.FromArgb(0, 0, 0);
+            label13.Location = new Point(864, 59);
+            label13.Margin = new Padding(4, 0, 4, 0);
+            label13.Name = "label13";
+            label13.Size = new Size(20, 25);
+            label13.TabIndex = 24;
+            label13.Text = "Состав\r\n(из справ.)";
+            // 
+            // tbArtGrup
+            // 
+            tbArtGrup.BackColor = Color.FromArgb(248, 248, 255);
+            tbArtGrup.Font = new Font("Arial", 10F);
+            tbArtGrup.ForeColor = Color.FromArgb(72, 61, 139);
+            tbArtGrup.Location = new Point(440, 131);
+            tbArtGrup.Margin = new Padding(0);
+            tbArtGrup.Name = "tbArtGrup";
+            tbArtGrup.Size = new Size(194, 20);
+            tbArtGrup.TabIndex = 21;
+            // 
+            // tbPsaKombOsn
+            // 
+            tbPsaKombOsn.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKombOsn.Font = new Font("Arial", 10F);
+            tbPsaKombOsn.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaKombOsn.Location = new Point(1686, 107);
+            tbPsaKombOsn.Margin = new Padding(0);
+            tbPsaKombOsn.Name = "tbPsaKombOsn";
+            tbPsaKombOsn.Size = new Size(21, 20);
+            tbPsaKombOsn.TabIndex = 19;
+            // 
+            // label10
+            // 
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Arial", 10F);
+            label10.ForeColor = Color.FromArgb(0, 0, 0);
+            label10.Location = new Point(864, 88);
+            label10.Margin = new Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new Size(20, 65);
+            label10.TabIndex = 20;
+            label10.Text = "Модель (торг.)";
+            // 
+            // tbPsaPrn
+            // 
+            tbPsaPrn.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaPrn.Font = new Font("Arial", 10F);
+            tbPsaPrn.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaPrn.Location = new Point(440, 59);
+            tbPsaPrn.Margin = new Padding(0);
+            tbPsaPrn.Multiline = true;
+            tbPsaPrn.Name = "tbPsaPrn";
+            tbPsaPrn.Size = new Size(194, 20);
+            tbPsaPrn.TabIndex = 6;
+            // 
+            // label67
+            // 
+            label67.BackColor = Color.Transparent;
+            label67.Font = new Font("Arial", 10F);
+            label67.ForeColor = Color.FromArgb(0, 0, 0);
+            label67.Location = new Point(1640, 107);
+            label67.Margin = new Padding(4, 0, 4, 0);
+            label67.Name = "label67";
+            label67.Size = new Size(42, 20);
+            label67.TabIndex = 37;
+            label67.Text = "komb_osn";
+            // 
+            // tbPsaKodZv2
+            // 
+            tbPsaKodZv2.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKodZv2.Font = new Font("Arial", 10F);
+            tbPsaKodZv2.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaKodZv2.Location = new Point(554, 83);
+            tbPsaKodZv2.Margin = new Padding(0);
+            tbPsaKodZv2.Name = "tbPsaKodZv2";
+            tbPsaKodZv2.Size = new Size(80, 20);
+            tbPsaKodZv2.TabIndex = 8;
+            // 
+            // label15
+            // 
+            label15.BackColor = Color.Transparent;
+            label15.Font = new Font("Arial", 10F);
+            label15.ForeColor = Color.FromArgb(0, 0, 0);
+            label15.Location = new Point(253, 131);
+            label15.Margin = new Padding(4, 0, 4, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(183, 22);
+            label15.TabIndex = 22;
+            label15.Text = "Наименование (из справ.)";
+            // 
+            // tbPsaPsaIDOsn
+            // 
+            tbPsaPsaIDOsn.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaPsaIDOsn.Font = new Font("Arial", 10F);
+            tbPsaPsaIDOsn.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaPsaIDOsn.Location = new Point(1687, 83);
+            tbPsaPsaIDOsn.Margin = new Padding(0);
+            tbPsaPsaIDOsn.Name = "tbPsaPsaIDOsn";
+            tbPsaPsaIDOsn.Size = new Size(20, 20);
+            tbPsaPsaIDOsn.TabIndex = 16;
+            // 
+            // tbPsaKodZv1
+            // 
+            tbPsaKodZv1.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKodZv1.Font = new Font("Arial", 10F);
+            tbPsaKodZv1.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaKodZv1.Location = new Point(391, 83);
+            tbPsaKodZv1.Margin = new Padding(0);
+            tbPsaKodZv1.Name = "tbPsaKodZv1";
+            tbPsaKodZv1.Size = new Size(80, 20);
+            tbPsaKodZv1.TabIndex = 7;
+            // 
+            // label22
+            // 
+            label22.BackColor = Color.Transparent;
+            label22.Font = new Font("Arial", 10F);
+            label22.ForeColor = Color.FromArgb(0, 0, 0);
+            label22.Location = new Point(485, 83);
+            label22.Margin = new Padding(4, 0, 4, 0);
+            label22.Name = "label22";
+            label22.Size = new Size(65, 20);
+            label22.TabIndex = 1;
+            label22.Text = "Код цв.2";
+            // 
+            // tbPsaKombIzd
+            // 
+            tbPsaKombIzd.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKombIzd.Font = new Font("Arial", 10F);
+            tbPsaKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaKombIzd.Location = new Point(1562, 107);
+            tbPsaKombIzd.Margin = new Padding(0);
+            tbPsaKombIzd.Name = "tbPsaKombIzd";
+            tbPsaKombIzd.Size = new Size(51, 20);
+            tbPsaKombIzd.TabIndex = 18;
+            // 
+            // label23
+            // 
+            label23.BackColor = Color.Transparent;
+            label23.Font = new Font("Arial", 10F);
+            label23.ForeColor = Color.FromArgb(0, 0, 0);
+            label23.Location = new Point(321, 83);
+            label23.Margin = new Padding(4, 0, 4, 0);
+            label23.Name = "label23";
+            label23.Size = new Size(66, 20);
+            label23.TabIndex = 1;
+            label23.Text = "Код цв.1";
+            // 
+            // label66
+            // 
+            label66.BackColor = Color.Transparent;
+            label66.Font = new Font("Arial", 10F);
+            label66.ForeColor = Color.FromArgb(0, 0, 0);
+            label66.Location = new Point(1506, 107);
+            label66.Margin = new Padding(4, 0, 4, 0);
+            label66.Name = "label66";
+            label66.Size = new Size(52, 20);
+            label66.TabIndex = 1;
+            label66.Text = "komb_izd";
+            // 
+            // label8
+            // 
+            label8.BackColor = Color.Transparent;
+            label8.Font = new Font("Arial", 10F);
+            label8.ForeColor = Color.FromArgb(0, 0, 0);
+            label8.Location = new Point(391, 59);
+            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(45, 20);
+            label8.TabIndex = 1;
+            label8.Text = "Цвет";
+            // 
+            // label65
+            // 
+            label65.BackColor = Color.Transparent;
+            label65.Font = new Font("Arial", 10F);
+            label65.ForeColor = Color.FromArgb(0, 0, 0);
+            label65.Location = new Point(1647, 83);
+            label65.Margin = new Padding(4, 0, 4, 0);
+            label65.Name = "label65";
+            label65.Size = new Size(36, 20);
+            label65.TabIndex = 1;
+            label65.Text = "psa_id_osn";
+            // 
+            // label9
+            // 
+            label9.BackColor = Color.Transparent;
+            label9.Font = new Font("Arial", 10F);
+            label9.ForeColor = Color.FromArgb(0, 0, 0);
+            label9.Location = new Point(253, 107);
+            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(134, 20);
+            label9.TabIndex = 1;
+            label9.Text = "Артикул (шв.)";
+            // 
+            // tbPsaPsaID
+            // 
+            tbPsaPsaID.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaPsaID.Font = new Font("Arial", 10F);
+            tbPsaPsaID.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaPsaID.Location = new Point(1558, 83);
+            tbPsaPsaID.Margin = new Padding(0);
+            tbPsaPsaID.Name = "tbPsaPsaID";
+            tbPsaPsaID.Size = new Size(62, 20);
+            tbPsaPsaID.TabIndex = 15;
+            // 
+            // label5
+            // 
+            label5.BackColor = Color.Transparent;
+            label5.Font = new Font("Arial", 10F);
+            label5.ForeColor = Color.FromArgb(0, 0, 0);
+            label5.Location = new Point(17, 59);
+            label5.Margin = new Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(25, 20);
+            label5.TabIndex = 1;
+            label5.Text = "№";
+            // 
+            // label62
+            // 
+            label62.BackColor = Color.Transparent;
+            label62.Font = new Font("Arial", 10F);
+            label62.ForeColor = Color.FromArgb(0, 0, 0);
+            label62.Location = new Point(1506, 83);
+            label62.Margin = new Padding(4, 0, 4, 0);
+            label62.Name = "label62";
+            label62.Size = new Size(48, 20);
+            label62.TabIndex = 1;
+            label62.Text = "psa_id";
+            // 
+            // tbArtTradeMark
+            // 
+            tbArtTradeMark.BackColor = Color.FromArgb(248, 248, 255);
+            tbArtTradeMark.Font = new Font("Arial", 10F);
+            tbArtTradeMark.ForeColor = Color.FromArgb(72, 61, 139);
+            tbArtTradeMark.Location = new Point(1435, 131);
+            tbArtTradeMark.Margin = new Padding(0);
+            tbArtTradeMark.Name = "tbArtTradeMark";
+            tbArtTradeMark.Size = new Size(46, 20);
+            tbArtTradeMark.TabIndex = 20;
+            // 
+            // tbPsaNameSbit
+            // 
+            tbPsaNameSbit.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaNameSbit.Font = new Font("Arial", 10F);
+            tbPsaNameSbit.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaNameSbit.Location = new Point(1435, 107);
+            tbPsaNameSbit.Margin = new Padding(0);
+            tbPsaNameSbit.Name = "tbPsaNameSbit";
+            tbPsaNameSbit.Size = new Size(46, 20);
+            tbPsaNameSbit.TabIndex = 17;
+            // 
+            // tbRzuNom
+            // 
+            tbRzuNom.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuNom.Font = new Font("Arial", 10F);
+            tbRzuNom.ForeColor = Color.FromArgb(72, 61, 139);
+            tbRzuNom.Location = new Point(46, 59);
+            tbRzuNom.Margin = new Padding(0);
+            tbRzuNom.Name = "tbRzuNom";
+            tbRzuNom.Size = new Size(61, 20);
+            tbRzuNom.TabIndex = 0;
+            // 
+            // label68
+            // 
+            label68.BackColor = Color.Transparent;
+            label68.Font = new Font("Arial", 10F);
+            label68.ForeColor = Color.FromArgb(0, 0, 0);
+            label68.Location = new Point(1385, 131);
+            label68.Margin = new Padding(4, 0, 4, 0);
+            label68.Name = "label68";
+            label68.Size = new Size(46, 22);
+            label68.TabIndex = 1;
+            label68.Text = "Торговая марка";
+            // 
+            // cbIsChip
+            // 
+            cbIsChip.Enabled = false;
+            cbIsChip.Font = new Font("Arial", 10F);
+            cbIsChip.ForeColor = Color.FromArgb(120, 60, 30);
+            cbIsChip.Location = new Point(1686, 59);
+            cbIsChip.Margin = new Padding(4, 3, 4, 3);
+            cbIsChip.Name = "cbIsChip";
+            cbIsChip.Size = new Size(21, 20);
+            cbIsChip.TabIndex = 13;
+            cbIsChip.Text = "Чип";
+            cbIsChip.UseVisualStyleBackColor = true;
+            // 
+            // tbRzuArticul
+            // 
+            tbRzuArticul.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuArticul.Font = new Font("Arial", 10F);
+            tbRzuArticul.ForeColor = Color.FromArgb(72, 61, 139);
+            tbRzuArticul.Location = new Point(391, 107);
+            tbRzuArticul.Margin = new Padding(0);
+            tbRzuArticul.Name = "tbRzuArticul";
+            tbRzuArticul.Size = new Size(243, 20);
+            tbRzuArticul.TabIndex = 9;
+            // 
+            // label19
+            // 
+            label19.BackColor = Color.Transparent;
+            label19.Font = new Font("Arial", 10F);
+            label19.ForeColor = Color.FromArgb(0, 0, 0);
+            label19.Location = new Point(1385, 83);
+            label19.Margin = new Padding(4, 0, 4, 0);
+            label19.Name = "label19";
+            label19.Size = new Size(46, 20);
+            label19.TabIndex = 1;
+            label19.Text = "Блок";
+            // 
+            // label11
+            // 
+            label11.BackColor = Color.Transparent;
+            label11.Font = new Font("Arial", 10F);
+            label11.ForeColor = Color.FromArgb(0, 0, 0);
+            label11.Location = new Point(1385, 107);
+            label11.Margin = new Padding(4, 0, 4, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(46, 20);
+            label11.TabIndex = 1;
+            label11.Text = "Канал сбыта";
+            // 
+            // tbPsaMenName
+            // 
+            tbPsaMenName.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaMenName.Font = new Font("Arial", 10F);
+            tbPsaMenName.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaMenName.Location = new Point(1638, 131);
+            tbPsaMenName.Margin = new Padding(0);
+            tbPsaMenName.Multiline = true;
+            tbPsaMenName.Name = "tbPsaMenName";
+            tbPsaMenName.Size = new Size(69, 20);
+            tbPsaMenName.TabIndex = 21;
+            // 
+            // tbPsaTbID
+            // 
+            tbPsaTbID.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaTbID.Font = new Font("Arial", 10F);
+            tbPsaTbID.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaTbID.Location = new Point(1435, 83);
+            tbPsaTbID.Margin = new Padding(0);
+            tbPsaTbID.Name = "tbPsaTbID";
+            tbPsaTbID.Size = new Size(46, 20);
+            tbPsaTbID.TabIndex = 14;
+            // 
+            // psaSezName
+            // 
+            psaSezName.BackColor = Color.FromArgb(248, 248, 255);
+            psaSezName.Font = new Font("Arial", 10F);
+            psaSezName.ForeColor = Color.FromArgb(72, 61, 139);
+            psaSezName.Location = new Point(1652, 59);
+            psaSezName.Margin = new Padding(0);
+            psaSezName.Name = "psaSezName";
+            psaSezName.Size = new Size(20, 20);
+            psaSezName.TabIndex = 12;
+            // 
+            // tbPsaYear
+            // 
+            tbPsaYear.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaYear.Font = new Font("Arial", 10F);
+            tbPsaYear.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaYear.Location = new Point(1558, 59);
+            tbPsaYear.Margin = new Padding(0);
+            tbPsaYear.Name = "tbPsaYear";
+            tbPsaYear.Size = new Size(46, 20);
+            tbPsaYear.TabIndex = 11;
+            // 
+            // label20
+            // 
+            label20.BackColor = Color.Transparent;
+            label20.Font = new Font("Arial", 10F);
+            label20.ForeColor = Color.FromArgb(0, 0, 0);
+            label20.Location = new Point(1506, 131);
+            label20.Margin = new Padding(4, 0, 4, 0);
+            label20.Name = "label20";
+            label20.Size = new Size(128, 22);
+            label20.TabIndex = 1;
+            label20.Text = "Категория (менеджер)";
+            // 
+            // label16
+            // 
+            label16.BackColor = Color.Transparent;
+            label16.Font = new Font("Arial", 10F);
+            label16.ForeColor = Color.FromArgb(0, 0, 0);
+            label16.Location = new Point(1627, 59);
+            label16.Margin = new Padding(4, 0, 4, 0);
+            label16.Name = "label16";
+            label16.Size = new Size(21, 20);
+            label16.TabIndex = 1;
+            label16.Text = "Сезон";
+            // 
+            // label7
+            // 
+            label7.BackColor = Color.Transparent;
+            label7.Font = new Font("Arial", 10F);
+            label7.ForeColor = Color.FromArgb(0, 0, 0);
+            label7.Location = new Point(121, 59);
+            label7.Margin = new Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(54, 20);
+            label7.TabIndex = 1;
+            label7.Text = "Кол-во";
+            // 
+            // tbRzuKol
+            // 
+            tbRzuKol.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuKol.Font = new Font("Arial", 10F);
+            tbRzuKol.ForeColor = Color.FromArgb(72, 61, 139);
+            tbRzuKol.Location = new Point(179, 59);
+            tbRzuKol.Margin = new Padding(0);
+            tbRzuKol.Name = "tbRzuKol";
+            tbRzuKol.Size = new Size(46, 20);
+            tbRzuKol.TabIndex = 2;
+            // 
+            // label17
+            // 
+            label17.BackColor = Color.Transparent;
+            label17.Font = new Font("Arial", 10F);
+            label17.ForeColor = Color.FromArgb(0, 0, 0);
+            label17.Location = new Point(1506, 59);
+            label17.Margin = new Padding(4, 0, 4, 0);
+            label17.Name = "label17";
+            label17.Size = new Size(48, 20);
+            label17.TabIndex = 1;
+            label17.Text = "Год";
+            // 
+            // label53
+            // 
+            label53.BackColor = Color.Transparent;
+            label53.Font = new Font("Arial", 10F);
+            label53.ForeColor = Color.FromArgb(0, 0, 0);
+            label53.Location = new Point(253, 59);
+            label53.Margin = new Padding(4, 0, 4, 0);
+            label53.Name = "label53";
+            label53.Size = new Size(28, 20);
+            label53.TabIndex = 1;
+            label53.Text = "№";
+            // 
+            // tbPsaNomZad
+            // 
+            tbPsaNomZad.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaNomZad.Font = new Font("Arial", 10F);
+            tbPsaNomZad.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaNomZad.Location = new Point(285, 59);
+            tbPsaNomZad.Margin = new Padding(0);
+            tbPsaNomZad.Name = "tbPsaNomZad";
+            tbPsaNomZad.Size = new Size(92, 20);
+            tbPsaNomZad.TabIndex = 5;
+            // 
+            // label21
+            // 
+            label21.BackColor = Color.Transparent;
+            label21.Font = new Font("Arial", 10F);
+            label21.ForeColor = Color.FromArgb(0, 0, 0);
+            label21.Location = new Point(1385, 59);
+            label21.Margin = new Padding(4, 0, 4, 0);
+            label21.Name = "label21";
+            label21.Size = new Size(46, 20);
+            label21.TabIndex = 1;
+            label21.Text = "Код";
+            // 
+            // label12
+            // 
+            label12.BackColor = Color.Transparent;
+            label12.Font = new Font("Arial", 10F);
+            label12.ForeColor = Color.FromArgb(0, 0, 0);
+            label12.Location = new Point(17, 83);
+            label12.Margin = new Padding(4, 0, 4, 0);
+            label12.Name = "label12";
+            label12.Size = new Size(64, 20);
+            label12.TabIndex = 1;
+            label12.Text = "Бригада №";
+            // 
+            // tbPsaNN
+            // 
+            tbPsaNN.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaNN.Font = new Font("Arial", 10F);
+            tbPsaNN.ForeColor = Color.FromArgb(72, 61, 139);
+            tbPsaNN.Location = new Point(1435, 59);
+            tbPsaNN.Margin = new Padding(0);
+            tbPsaNN.Name = "tbPsaNN";
+            tbPsaNN.Size = new Size(46, 20);
+            tbPsaNN.TabIndex = 10;
+            // 
+            // tbRzuDostZeh
+            // 
+            tbRzuDostZeh.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuDostZeh.Font = new Font("Arial", 10F);
+            tbRzuDostZeh.ForeColor = Color.FromArgb(72, 61, 139);
+            tbRzuDostZeh.Location = new Point(85, 83);
+            tbRzuDostZeh.Margin = new Padding(0);
+            tbRzuDostZeh.Name = "tbRzuDostZeh";
+            tbRzuDostZeh.Size = new Size(140, 20);
+            tbRzuDostZeh.TabIndex = 3;
+            // 
+            // label6
+            // 
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Arial", 10F);
+            label6.ForeColor = Color.FromArgb(0, 0, 0);
+            label6.Location = new Point(17, 107);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(64, 46);
+            label6.TabIndex = 1;
+            label6.Text = "№ пачек";
+            // 
+            // tbRzuPach
+            // 
+            tbRzuPach.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuPach.Font = new Font("Arial", 10F);
+            tbRzuPach.ForeColor = Color.FromArgb(72, 61, 139);
+            tbRzuPach.Location = new Point(85, 107);
+            tbRzuPach.Margin = new Padding(0);
+            tbRzuPach.Name = "tbRzuPach";
+            tbRzuPach.Size = new Size(140, 20);
+            tbRzuPach.TabIndex = 4;
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup12 });
+            Root.Name = "Root";
+            Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            Root.Size = new Size(1831, 170);
+            Root.TextVisible = false;
+            // 
+            // layoutControlGroup12
+            // 
+            layoutControlGroup12.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup9, layoutControlGroup11, layoutControlGroup10 });
+            layoutControlGroup12.Location = new Point(0, 0);
+            layoutControlGroup12.Name = "layoutControlGroup12";
+            layoutControlGroup12.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup12.Size = new Size(1831, 170);
+            layoutControlGroup12.Text = "КАРТОЧКА РАСЧЕТА";
+            // 
+            // layoutControlGroup9
+            // 
+            layoutControlGroup9.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem15, layoutControlItem17, layoutControlItem23, layoutControlItem46, layoutControlItem49, layoutControlItem50, layoutControlItem51, layoutControlItem52, emptySpaceItem24 });
+            layoutControlGroup9.Location = new Point(0, 0);
+            layoutControlGroup9.Name = "layoutControlGroup9";
+            layoutControlGroup9.Size = new Size(236, 143);
+            layoutControlGroup9.Text = "Расчет";
+            // 
+            // layoutControlItem15
+            // 
+            layoutControlItem15.Control = label5;
+            layoutControlItem15.Location = new Point(0, 0);
+            layoutControlItem15.Name = "layoutControlItem15";
+            layoutControlItem15.Size = new Size(29, 24);
+            layoutControlItem15.TextVisible = false;
+            // 
+            // layoutControlItem17
+            // 
+            layoutControlItem17.Control = tbRzuNom;
+            layoutControlItem17.Location = new Point(29, 0);
+            layoutControlItem17.Name = "layoutControlItem17";
+            layoutControlItem17.Size = new Size(65, 24);
+            layoutControlItem17.TextVisible = false;
+            // 
+            // layoutControlItem23
+            // 
+            layoutControlItem23.Control = label7;
+            layoutControlItem23.Location = new Point(104, 0);
+            layoutControlItem23.Name = "layoutControlItem23";
+            layoutControlItem23.Size = new Size(58, 24);
+            layoutControlItem23.TextVisible = false;
+            // 
+            // layoutControlItem46
+            // 
+            layoutControlItem46.Control = tbRzuKol;
+            layoutControlItem46.Location = new Point(162, 0);
+            layoutControlItem46.Name = "layoutControlItem46";
+            layoutControlItem46.Size = new Size(50, 24);
+            layoutControlItem46.TextVisible = false;
+            // 
+            // layoutControlItem49
+            // 
+            layoutControlItem49.Control = label12;
+            layoutControlItem49.Location = new Point(0, 24);
+            layoutControlItem49.Name = "layoutControlItem49";
+            layoutControlItem49.Size = new Size(68, 24);
+            layoutControlItem49.TextVisible = false;
+            // 
+            // layoutControlItem50
+            // 
+            layoutControlItem50.Control = tbRzuDostZeh;
+            layoutControlItem50.Location = new Point(68, 24);
+            layoutControlItem50.Name = "layoutControlItem50";
+            layoutControlItem50.Size = new Size(144, 24);
+            layoutControlItem50.TextVisible = false;
+            // 
+            // layoutControlItem51
+            // 
+            layoutControlItem51.Control = label6;
+            layoutControlItem51.Location = new Point(0, 48);
+            layoutControlItem51.Name = "layoutControlItem51";
+            layoutControlItem51.Size = new Size(68, 50);
+            layoutControlItem51.TextVisible = false;
+            // 
+            // layoutControlItem52
+            // 
+            layoutControlItem52.Control = tbRzuPach;
+            layoutControlItem52.Location = new Point(68, 48);
+            layoutControlItem52.Name = "layoutControlItem52";
+            layoutControlItem52.Size = new Size(144, 50);
+            layoutControlItem52.TextVisible = false;
+            // 
             // emptySpaceItem24
             // 
-            emptySpaceItem24.Location = new Point(128, 0);
+            emptySpaceItem24.Location = new Point(94, 0);
             emptySpaceItem24.Name = "emptySpaceItem24";
             emptySpaceItem24.Size = new Size(10, 24);
             // 
+            // layoutControlGroup11
+            // 
+            layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem53, layoutControlItem54, layoutControlItem20, layoutControlItem21, layoutControlItem55, layoutControlItem56, layoutControlItem57, layoutControlItem58, layoutControlItem59, emptySpaceItem15, emptySpaceItem17, emptySpaceItem18, emptySpaceItem19, layoutControlItem62, layoutControlItem63, emptySpaceItem20, layoutControlItem64, layoutControlItem65, emptySpaceItem21, layoutControlItem66, layoutControlItem67, layoutControlItem68, layoutControlItem69, emptySpaceItem16, layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem73, emptySpaceItem22, layoutControlItem60, layoutControlItem61, layoutControlItem22 });
+            layoutControlGroup11.Location = new Point(1368, 0);
+            layoutControlGroup11.Name = "layoutControlGroup11";
+            layoutControlGroup11.Size = new Size(457, 143);
+            layoutControlGroup11.Text = "Матрица";
+            // 
+            // layoutControlItem53
+            // 
+            layoutControlItem53.Control = label21;
+            layoutControlItem53.Location = new Point(0, 0);
+            layoutControlItem53.Name = "layoutControlItem53";
+            layoutControlItem53.Size = new Size(50, 24);
+            layoutControlItem53.TextVisible = false;
+            // 
+            // layoutControlItem54
+            // 
+            layoutControlItem54.Control = tbPsaNN;
+            layoutControlItem54.Location = new Point(50, 0);
+            layoutControlItem54.Name = "layoutControlItem54";
+            layoutControlItem54.Size = new Size(50, 24);
+            layoutControlItem54.TextVisible = false;
+            // 
+            // layoutControlItem20
+            // 
+            layoutControlItem20.Control = label19;
+            layoutControlItem20.Location = new Point(0, 24);
+            layoutControlItem20.Name = "layoutControlItem20";
+            layoutControlItem20.Size = new Size(50, 24);
+            layoutControlItem20.TextVisible = false;
+            // 
+            // layoutControlItem21
+            // 
+            layoutControlItem21.Control = tbPsaTbID;
+            layoutControlItem21.Location = new Point(50, 24);
+            layoutControlItem21.Name = "layoutControlItem21";
+            layoutControlItem21.Size = new Size(50, 24);
+            layoutControlItem21.TextVisible = false;
+            // 
+            // layoutControlItem55
+            // 
+            layoutControlItem55.Control = label17;
+            layoutControlItem55.Location = new Point(121, 0);
+            layoutControlItem55.Name = "layoutControlItem55";
+            layoutControlItem55.Size = new Size(52, 24);
+            layoutControlItem55.TextVisible = false;
+            // 
+            // layoutControlItem56
+            // 
+            layoutControlItem56.Control = tbPsaYear;
+            layoutControlItem56.Location = new Point(173, 0);
+            layoutControlItem56.Name = "layoutControlItem56";
+            layoutControlItem56.Size = new Size(50, 24);
+            layoutControlItem56.TextVisible = false;
+            // 
+            // layoutControlItem57
+            // 
+            layoutControlItem57.Control = label16;
+            layoutControlItem57.Location = new Point(242, 0);
+            layoutControlItem57.Name = "layoutControlItem57";
+            layoutControlItem57.Size = new Size(25, 24);
+            layoutControlItem57.TextVisible = false;
+            // 
+            // layoutControlItem58
+            // 
+            layoutControlItem58.Control = psaSezName;
+            layoutControlItem58.Location = new Point(267, 0);
+            layoutControlItem58.Name = "layoutControlItem58";
+            layoutControlItem58.Size = new Size(24, 24);
+            layoutControlItem58.TextVisible = false;
+            // 
+            // layoutControlItem59
+            // 
+            layoutControlItem59.Control = cbIsChip;
+            layoutControlItem59.Location = new Point(301, 0);
+            layoutControlItem59.Name = "layoutControlItem59";
+            layoutControlItem59.Size = new Size(25, 24);
+            layoutControlItem59.TextVisible = false;
+            // 
+            // emptySpaceItem15
+            // 
+            emptySpaceItem15.Location = new Point(100, 24);
+            emptySpaceItem15.Name = "emptySpaceItem15";
+            emptySpaceItem15.Size = new Size(21, 24);
+            // 
+            // emptySpaceItem17
+            // 
+            emptySpaceItem17.Location = new Point(100, 0);
+            emptySpaceItem17.Name = "emptySpaceItem17";
+            emptySpaceItem17.Size = new Size(21, 24);
+            // 
+            // emptySpaceItem18
+            // 
+            emptySpaceItem18.Location = new Point(223, 0);
+            emptySpaceItem18.Name = "emptySpaceItem18";
+            emptySpaceItem18.Size = new Size(19, 24);
+            // 
+            // emptySpaceItem19
+            // 
+            emptySpaceItem19.Location = new Point(291, 0);
+            emptySpaceItem19.Name = "emptySpaceItem19";
+            emptySpaceItem19.Size = new Size(10, 24);
+            // 
+            // layoutControlItem62
+            // 
+            layoutControlItem62.Control = label11;
+            layoutControlItem62.Location = new Point(0, 48);
+            layoutControlItem62.Name = "layoutControlItem62";
+            layoutControlItem62.Size = new Size(50, 24);
+            layoutControlItem62.TextVisible = false;
+            // 
+            // layoutControlItem63
+            // 
+            layoutControlItem63.Control = tbPsaNameSbit;
+            layoutControlItem63.Location = new Point(50, 48);
+            layoutControlItem63.Name = "layoutControlItem63";
+            layoutControlItem63.Size = new Size(50, 24);
+            layoutControlItem63.TextVisible = false;
+            // 
+            // emptySpaceItem20
+            // 
+            emptySpaceItem20.Location = new Point(100, 48);
+            emptySpaceItem20.Name = "emptySpaceItem20";
+            emptySpaceItem20.Size = new Size(21, 24);
+            // 
+            // layoutControlItem64
+            // 
+            layoutControlItem64.Control = label68;
+            layoutControlItem64.Location = new Point(0, 72);
+            layoutControlItem64.Name = "layoutControlItem64";
+            layoutControlItem64.Size = new Size(50, 26);
+            layoutControlItem64.TextVisible = false;
+            // 
+            // layoutControlItem65
+            // 
+            layoutControlItem65.Control = tbArtTradeMark;
+            layoutControlItem65.Location = new Point(50, 72);
+            layoutControlItem65.Name = "layoutControlItem65";
+            layoutControlItem65.Size = new Size(50, 26);
+            layoutControlItem65.TextVisible = false;
+            // 
+            // emptySpaceItem21
+            // 
+            emptySpaceItem21.Location = new Point(100, 72);
+            emptySpaceItem21.Name = "emptySpaceItem21";
+            emptySpaceItem21.Size = new Size(21, 26);
+            // 
+            // layoutControlItem66
+            // 
+            layoutControlItem66.Control = label62;
+            layoutControlItem66.Location = new Point(121, 24);
+            layoutControlItem66.Name = "layoutControlItem66";
+            layoutControlItem66.Size = new Size(52, 24);
+            layoutControlItem66.TextVisible = false;
+            // 
+            // layoutControlItem67
+            // 
+            layoutControlItem67.Control = tbPsaPsaID;
+            layoutControlItem67.Location = new Point(173, 24);
+            layoutControlItem67.Name = "layoutControlItem67";
+            layoutControlItem67.Size = new Size(66, 24);
+            layoutControlItem67.TextVisible = false;
+            // 
+            // layoutControlItem68
+            // 
+            layoutControlItem68.Control = label65;
+            layoutControlItem68.Location = new Point(262, 24);
+            layoutControlItem68.Name = "layoutControlItem68";
+            layoutControlItem68.Size = new Size(40, 24);
+            layoutControlItem68.TextVisible = false;
+            // 
+            // layoutControlItem69
+            // 
+            layoutControlItem69.Control = tbPsaPsaIDOsn;
+            layoutControlItem69.Location = new Point(302, 24);
+            layoutControlItem69.Name = "layoutControlItem69";
+            layoutControlItem69.Size = new Size(24, 24);
+            layoutControlItem69.TextVisible = false;
+            // 
+            // emptySpaceItem16
+            // 
+            emptySpaceItem16.Location = new Point(239, 24);
+            emptySpaceItem16.Name = "emptySpaceItem16";
+            emptySpaceItem16.Size = new Size(23, 24);
+            // 
+            // layoutControlItem70
+            // 
+            layoutControlItem70.Control = label66;
+            layoutControlItem70.Location = new Point(121, 48);
+            layoutControlItem70.Name = "layoutControlItem70";
+            layoutControlItem70.Size = new Size(56, 24);
+            layoutControlItem70.TextVisible = false;
+            // 
+            // layoutControlItem71
+            // 
+            layoutControlItem71.Control = tbPsaKombIzd;
+            layoutControlItem71.Location = new Point(177, 48);
+            layoutControlItem71.Name = "layoutControlItem71";
+            layoutControlItem71.Size = new Size(55, 24);
+            layoutControlItem71.TextVisible = false;
+            // 
+            // layoutControlItem72
+            // 
+            layoutControlItem72.Control = label67;
+            layoutControlItem72.Location = new Point(255, 48);
+            layoutControlItem72.Name = "layoutControlItem72";
+            layoutControlItem72.Size = new Size(46, 24);
+            layoutControlItem72.TextVisible = false;
+            // 
+            // layoutControlItem73
+            // 
+            layoutControlItem73.Control = tbPsaKombOsn;
+            layoutControlItem73.Location = new Point(301, 48);
+            layoutControlItem73.Name = "layoutControlItem73";
+            layoutControlItem73.Size = new Size(25, 24);
+            layoutControlItem73.TextVisible = false;
+            // 
+            // emptySpaceItem22
+            // 
+            emptySpaceItem22.Location = new Point(232, 48);
+            emptySpaceItem22.Name = "emptySpaceItem22";
+            emptySpaceItem22.Size = new Size(23, 24);
+            // 
+            // layoutControlItem60
+            // 
+            layoutControlItem60.Control = label20;
+            layoutControlItem60.Location = new Point(121, 72);
+            layoutControlItem60.Name = "layoutControlItem60";
+            layoutControlItem60.Size = new Size(132, 26);
+            layoutControlItem60.TextVisible = false;
+            // 
+            // layoutControlItem61
+            // 
+            layoutControlItem61.Control = tbPsaMenName;
+            layoutControlItem61.Location = new Point(253, 72);
+            layoutControlItem61.Name = "layoutControlItem61";
+            layoutControlItem61.Size = new Size(73, 26);
+            layoutControlItem61.TextVisible = false;
+            // 
+            // layoutControlItem22
+            // 
+            layoutControlItem22.Control = pbEskiz;
+            layoutControlItem22.Location = new Point(326, 0);
+            layoutControlItem22.Name = "layoutControlItem22";
+            layoutControlItem22.Size = new Size(107, 98);
+            layoutControlItem22.TextVisible = false;
+            // 
+            // layoutControlGroup10
+            // 
+            layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem47, layoutControlItem48, layoutControlItem16, layoutControlItem18, layoutControlItem74, layoutControlItem75, emptySpaceItem23, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81, layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, emptySpaceItem25, emptySpaceItem26, emptySpaceItem27 });
+            layoutControlGroup10.Location = new Point(236, 0);
+            layoutControlGroup10.Name = "layoutControlGroup10";
+            layoutControlGroup10.Size = new Size(1132, 143);
+            layoutControlGroup10.Text = "Задание";
+            // 
+            // layoutControlItem47
+            // 
+            layoutControlItem47.Control = label53;
+            layoutControlItem47.Location = new Point(0, 0);
+            layoutControlItem47.Name = "layoutControlItem47";
+            layoutControlItem47.Size = new Size(32, 24);
+            layoutControlItem47.TextVisible = false;
+            // 
+            // layoutControlItem48
+            // 
+            layoutControlItem48.Control = tbPsaNomZad;
+            layoutControlItem48.Location = new Point(32, 0);
+            layoutControlItem48.Name = "layoutControlItem48";
+            layoutControlItem48.Size = new Size(96, 24);
+            layoutControlItem48.TextVisible = false;
+            // 
+            // layoutControlItem16
+            // 
+            layoutControlItem16.Control = label9;
+            layoutControlItem16.Location = new Point(0, 48);
+            layoutControlItem16.Name = "layoutControlItem16";
+            layoutControlItem16.Size = new Size(138, 24);
+            layoutControlItem16.TextVisible = false;
+            // 
+            // layoutControlItem18
+            // 
+            layoutControlItem18.Control = tbRzuArticul;
+            layoutControlItem18.Location = new Point(138, 48);
+            layoutControlItem18.Name = "layoutControlItem18";
+            layoutControlItem18.Size = new Size(247, 24);
+            layoutControlItem18.TextVisible = false;
+            // 
+            // layoutControlItem74
+            // 
+            layoutControlItem74.Control = label8;
+            layoutControlItem74.Location = new Point(138, 0);
+            layoutControlItem74.Name = "layoutControlItem74";
+            layoutControlItem74.Size = new Size(49, 24);
+            layoutControlItem74.TextVisible = false;
+            // 
+            // layoutControlItem75
+            // 
+            layoutControlItem75.Control = tbPsaPrn;
+            layoutControlItem75.Location = new Point(187, 0);
+            layoutControlItem75.Name = "layoutControlItem75";
+            layoutControlItem75.Size = new Size(198, 24);
+            layoutControlItem75.TextVisible = false;
+            // 
+            // emptySpaceItem23
+            // 
+            emptySpaceItem23.Location = new Point(0, 24);
+            emptySpaceItem23.Name = "emptySpaceItem23";
+            emptySpaceItem23.Size = new Size(68, 24);
+            // 
+            // layoutControlItem76
+            // 
+            layoutControlItem76.Control = label23;
+            layoutControlItem76.Location = new Point(68, 24);
+            layoutControlItem76.Name = "layoutControlItem76";
+            layoutControlItem76.Size = new Size(70, 24);
+            layoutControlItem76.TextVisible = false;
+            // 
+            // layoutControlItem77
+            // 
+            layoutControlItem77.Control = tbPsaKodZv1;
+            layoutControlItem77.Location = new Point(138, 24);
+            layoutControlItem77.Name = "layoutControlItem77";
+            layoutControlItem77.Size = new Size(84, 24);
+            layoutControlItem77.TextVisible = false;
+            // 
+            // layoutControlItem78
+            // 
+            layoutControlItem78.Control = label22;
+            layoutControlItem78.Location = new Point(232, 24);
+            layoutControlItem78.Name = "layoutControlItem78";
+            layoutControlItem78.Size = new Size(69, 24);
+            layoutControlItem78.TextVisible = false;
+            // 
+            // layoutControlItem79
+            // 
+            layoutControlItem79.Control = tbPsaKodZv2;
+            layoutControlItem79.Location = new Point(301, 24);
+            layoutControlItem79.Name = "layoutControlItem79";
+            layoutControlItem79.Size = new Size(84, 24);
+            layoutControlItem79.TextVisible = false;
+            // 
+            // layoutControlItem80
+            // 
+            layoutControlItem80.Control = label15;
+            layoutControlItem80.Location = new Point(0, 72);
+            layoutControlItem80.Name = "layoutControlItem80";
+            layoutControlItem80.Size = new Size(187, 26);
+            layoutControlItem80.TextVisible = false;
+            // 
+            // layoutControlItem81
+            // 
+            layoutControlItem81.Control = tbArtGrup;
+            layoutControlItem81.Location = new Point(187, 72);
+            layoutControlItem81.Name = "layoutControlItem81";
+            layoutControlItem81.Size = new Size(198, 26);
+            layoutControlItem81.TextVisible = false;
+            // 
+            // layoutControlItem82
+            // 
+            layoutControlItem82.Control = label10;
+            layoutControlItem82.Location = new Point(611, 29);
+            layoutControlItem82.Name = "layoutControlItem82";
+            layoutControlItem82.Size = new Size(24, 69);
+            layoutControlItem82.TextVisible = false;
+            // 
+            // layoutControlItem83
+            // 
+            layoutControlItem83.Control = tbRzuMod;
+            layoutControlItem83.Location = new Point(635, 29);
+            layoutControlItem83.MinSize = new Size(24, 24);
+            layoutControlItem83.Name = "layoutControlItem83";
+            layoutControlItem83.Size = new Size(473, 69);
+            layoutControlItem83.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem83.TextVisible = false;
+            // 
+            // layoutControlItem84
+            // 
+            layoutControlItem84.Control = label13;
+            layoutControlItem84.Location = new Point(611, 0);
+            layoutControlItem84.Name = "layoutControlItem84";
+            layoutControlItem84.Size = new Size(24, 29);
+            layoutControlItem84.TextVisible = false;
+            // 
+            // layoutControlItem85
+            // 
+            layoutControlItem85.Control = tbSostPoln;
+            layoutControlItem85.Location = new Point(635, 0);
+            layoutControlItem85.MinSize = new Size(24, 24);
+            layoutControlItem85.Name = "layoutControlItem85";
+            layoutControlItem85.Size = new Size(473, 29);
+            layoutControlItem85.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem85.TextVisible = false;
+            // 
             // emptySpaceItem25
             // 
-            emptySpaceItem25.Location = new Point(111, 0);
+            emptySpaceItem25.Location = new Point(128, 0);
             emptySpaceItem25.Name = "emptySpaceItem25";
             emptySpaceItem25.Size = new Size(10, 24);
             // 
             // emptySpaceItem26
             // 
-            emptySpaceItem26.Location = new Point(259, 24);
+            emptySpaceItem26.Location = new Point(222, 24);
             emptySpaceItem26.Name = "emptySpaceItem26";
-            emptySpaceItem26.Size = new Size(20, 24);
+            emptySpaceItem26.Size = new Size(10, 24);
             // 
             // emptySpaceItem27
             // 
-            emptySpaceItem27.Location = new Point(424, 0);
+            emptySpaceItem27.Location = new Point(385, 0);
             emptySpaceItem27.Name = "emptySpaceItem27";
-            emptySpaceItem27.Size = new Size(10, 96);
-            // 
-            // layoutControl4
-            // 
-            layoutControl4.Location = new Point(2, 257);
-            layoutControl4.Name = "layoutControl4";
-            layoutControl4.Root = layoutControlGroup12;
-            layoutControl4.Size = new Size(1855, 225);
-            layoutControl4.TabIndex = 14;
-            layoutControl4.Text = "layoutControl4";
-            // 
-            // layoutControlGroup12
-            // 
-            layoutControlGroup12.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            layoutControlGroup12.GroupBordersVisible = false;
-            layoutControlGroup12.Name = "layoutControlGroup12";
-            layoutControlGroup12.Size = new Size(1855, 225);
-            layoutControlGroup12.TextVisible = false;
+            emptySpaceItem27.Size = new Size(226, 98);
             // 
             // CardByNom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2136, 966);
-            Controls.Add(layoutControl4);
             Controls.Add(layoutControl3);
             Controls.Add(xtraTabControl1);
-            Controls.Add(RasCard);
+            Controls.Add(layoutControl1);
             Margin = new Padding(4, 3, 4, 3);
             Name = "CardByNom";
             Text = "Карточка расчета";
             Load += CardByNom_Load;
-            ((System.ComponentModel.ISupportInitialize)pbEskiz).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdSP).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdVZP).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridSplitContainer1.Panel1).EndInit();
@@ -6654,10 +6625,31 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem2).EndInit();
-            RasCard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
+            layoutControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbEskiz).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
@@ -6667,24 +6659,7 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem50).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem51).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem52).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem47).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem48).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem18).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem75).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem23).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem76).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem77).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem78).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem81).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem24).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem53).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem54).EndInit();
@@ -6718,37 +6693,31 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem60).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem61).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
-            layoutControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem24).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem47).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem48).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem18).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem75).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem23).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem76).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem77).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem78).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem81).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem84).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem85).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem25).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem26).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem27).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox pbEskiz;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
         private System.Windows.Forms.BindingSource bsProizvCombIzdVZP;
         private System.Windows.Forms.BindingSource bsProizvCombIzdSP;
@@ -6842,29 +6811,7 @@ namespace SewingProduction
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn57;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnProizvCombIzdSPKolGI;
         private CustomTextBox tbNomPach;
-        private CustomTextBox tbRzuNom;
         private CustomTextBox tbYearPach;
-        private CustomTextBox tbPsaNameSbit;
-        private CustomTextBox tbRzuDostZeh;
-        private CustomTextBox tbRzuMod;
-        private CustomTextBox tbRzuArticul;
-        private CustomTextBox tbPsaPrn;
-        private CustomTextBox tbRzuPach;
-        private CustomTextBox tbPsaKodZv2;
-        private CustomTextBox tbPsaKodZv1;
-        private CustomTextBox tbArtGrup;
-        private CustomTextBox psaSezName;
-        private CustomTextBox tbPsaYear;
-        private CustomTextBox tbPsaTbID;
-        private CustomTextBox tbPsaMenName;
-        private CustomTextBox tbPsaNN;
-        private CustomTextBox tbPsaNomZad;
-        private CustomTextBox tbRzuKol;
-        private CustomTextBox tbPsaPsaID;
-        private CustomTextBox tbPsaKombIzd;
-        private CustomTextBox tbPsaKombOsn;
-        private CustomTextBox tbPsaPsaIDOsn;
-        private CustomTextBox tbArtTradeMark;
         private CustomTextBox tbDatZayav;
         private CustomTextBox tbData_f_z_u;
         private CustomTextBox tbData_f_o_u;
@@ -6883,30 +6830,7 @@ namespace SewingProduction
         private CustomButton btnNaklAbsent;
         private CustomButton btnNaklPrint;
         private CustomTextBox tbPszRpcNom;
-        private CustomLabel label5;
         private CustomLabel label4;
-        private CustomLabel label11;
-        private CustomLabel label12;
-        private CustomLabel label10;
-        private CustomLabel label9;
-        private CustomLabel label8;
-        private CustomLabel label7;
-        private CustomLabel label6;
-        private CustomLabel label22;
-        private CustomLabel label23;
-        private CustomLabel label13;
-        private CustomLabel label15;
-        private CustomLabel label16;
-        private CustomLabel label17;
-        private CustomLabel label19;
-        private CustomLabel label20;
-        private CustomLabel label21;
-        private CustomLabel label53;
-        private CustomLabel label62;
-        private CustomLabel label66;
-        private CustomLabel label67;
-        private CustomLabel label65;
-        private CustomLabel label68;
         private CustomLabel label61;
         private CustomMaskedTextBox mtbData_cd;
         private CustomMaskedTextBox mtbData_zeh;
@@ -6975,8 +6899,6 @@ namespace SewingProduction
         private CustomCheckBox cbPszVishPlan;
         private CustomCheckBox cbRzuPrintFact;
         private CustomCheckBox cbPszPrintPlan;
-        private CustomGroupBox RasCard;
-        private CustomCheckBox cbIsChip;
         private CustomLabel customLabel2;
         private CustomLabel customLabel1;
         private CustomTabControl xtraTabControl1;
@@ -7175,36 +7097,67 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem12;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup9;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup10;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup11;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem46;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem49;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem50;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem51;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem52;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem47;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem48;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private CustomTextBox tbSostPoln;
+        private CustomTextBox tbRzuMod;
+        private CustomLabel label13;
+        private CustomTextBox tbArtGrup;
+        private CustomTextBox tbPsaKombOsn;
+        private CustomLabel label10;
+        private CustomTextBox tbPsaPrn;
+        private CustomLabel label67;
+        private CustomTextBox tbPsaKodZv2;
+        private CustomLabel label15;
+        private CustomTextBox tbPsaPsaIDOsn;
+        private CustomTextBox tbPsaKodZv1;
+        private CustomLabel label22;
+        private CustomTextBox tbPsaKombIzd;
+        private PictureBox pbEskiz;
+        private CustomLabel label23;
+        private CustomLabel label66;
+        private CustomLabel label8;
+        private CustomLabel label65;
+        private CustomLabel label9;
+        private CustomTextBox tbPsaPsaID;
+        private CustomLabel label5;
+        private CustomLabel label62;
+        private CustomTextBox tbArtTradeMark;
+        private CustomTextBox tbPsaNameSbit;
+        private CustomTextBox tbRzuNom;
+        private CustomLabel label68;
+        private CustomCheckBox cbIsChip;
+        private CustomTextBox tbRzuArticul;
+        private CustomLabel label19;
+        private CustomLabel label11;
+        private CustomTextBox tbPsaMenName;
+        private CustomTextBox tbPsaTbID;
+        private CustomTextBox psaSezName;
+        private CustomTextBox tbPsaYear;
+        private CustomLabel label20;
+        private CustomLabel label16;
+        private CustomLabel label7;
+        private CustomTextBox tbRzuKol;
+        private CustomLabel label17;
+        private CustomLabel label53;
+        private CustomTextBox tbPsaNomZad;
+        private CustomLabel label21;
+        private CustomLabel label12;
+        private CustomTextBox tbPsaNN;
+        private CustomTextBox tbRzuDostZeh;
+        private CustomLabel label6;
+        private CustomTextBox tbRzuPach;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup11;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem53;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem54;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem55;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem56;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem57;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem58;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem59;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem60;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem61;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem15;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem17;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem18;
@@ -7219,31 +7172,46 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem67;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem68;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem69;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem74;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem75;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem76;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem77;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem78;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem16;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem70;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem71;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem72;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem73;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem22;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem60;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem61;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup12;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup9;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem46;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem49;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem50;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem51;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem52;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem24;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem47;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem48;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem74;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem75;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem23;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem76;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem77;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem78;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem79;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem80;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem81;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem82;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem83;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem84;
-        private CustomTextBox tbSostPoln;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem85;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem24;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem25;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem26;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem27;
-        private DevExpress.XtraLayout.LayoutControl layoutControl4;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
     }
 }
