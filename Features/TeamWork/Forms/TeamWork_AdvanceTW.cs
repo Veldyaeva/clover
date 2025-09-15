@@ -503,7 +503,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Пункт массового удаления (показываем только если есть выбранные строки)
                 if (hasSelectedRows)
                 {
-                    var deleteSelectedItem = new DevExpress.Utils.Menu.DXMenuItem($"🗑️ Удалить выбранные строки ({selectedRows.Length})", (_, __) =>
+                    var deleteSelectedItem = new DevExpress.Utils.Menu.DXMenuItem($"🗑 Удалить выбранные строки ({selectedRows.Length})", (_, __) =>
                     {
                         DeleteSelectedOperations(view, bindingList, getId, deletedIds);
                     });

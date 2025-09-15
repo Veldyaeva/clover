@@ -705,6 +705,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (ANNgridView != null)
             {
                 ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
+                ANNgridView.ColumnFilterChanged -= ANNgridView_ActiveFilterChanged;
             }
 
             // Загружаем сохраненные настройки интерфейса
@@ -733,9 +734,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
-
+                    ANNgridView.ColumnFilterChanged += ANNgridView_ActiveFilterChanged;
                     // Фокус и связанные данные при фильтрации/поиске
                     ANNgridView.ColumnFilterChanged += (s, e2) => FocusFirstResultAndLoadRelated();
+                    
+                    // Используем уже существующий обработчик для поддержки комплектных артикулов
 
                     // Подписываемся на событие изменения текста поиска
                     if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
@@ -945,8 +948,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         /// <summary>
-        /// Обрабатывает изменение фильтра поиска в ANNgridView
+        /// Обрабатывает изменение фильтра поиска в ANNgridView с поддержкой комплектных артикулов
         /// Автоматически переходит на первую строку результатов поиска
+        /// В режиме комплекта разбирает артикул типа "1Т1773С1990" на компоненты "1Т1773" и "С1990"
         /// </summary>
         private void ANNgridView_ActiveFilterChanged(object sender, EventArgs e)
         {
@@ -955,12 +959,39 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var gridView = sender as GridView;
                 if (gridView == null) return;
 
-                // Проверяем, есть ли активный фильтр поиска
+                // В режиме комплекта проверяем FindFilterText для комплектного поиска
+                if (toggleSwitchKit.IsOn && !string.IsNullOrEmpty(gridView.FindFilterText))
+                {
+                    string searchText = gridView.FindFilterText.Trim();
+                    var kitComponents = ParseKitArticle(searchText);
+                    
+                    if (kitComponents.HasValidComponents)
+                    {
+                        // Применяем комплектный поиск
+                        string filterExpression = $"[Articul] Like '%{kitComponents.Component1}%' OR [Articul] Like '%{kitComponents.Component2}%'";
+                        
+                        // Временно отключаем FindFilter и применяем кастомный фильтр
+                        gridView.GridControl.BeginInvoke(new Action(() =>
+                        {
+                            try
+                            {
+                                gridView.FindFilterText = "";
+                                gridView.ActiveFilterString = filterExpression;
+                                
+                                _logger?.LogEventAsync($"Комплектный поиск: '{searchText}' разобран на '{kitComponents.Component1}' и '{kitComponents.Component2}'", "ANNgridView_ActiveFilterChanged");
+                            }
+                            catch (Exception ex)
+                            {
+                                _logger?.LogErrorAsync(ex, "Ошибка при применении комплектного поиска");
+                            }
+                        }));
+                        return; // Выходим, чтобы не выполнять стандартную логику
+                    }
+                }
+
+                // Стандартная логика для обычного поиска
                 if (gridView.ActiveFilterCriteria != null)
                 {
-                    // Небольшая задержка для завершения применения фильтра
-                    //gridView.BeginInvoke(new Action(() =>
-                    //{
                     try
                     {
                         // Проверяем, есть ли видимые строки после применения фильтра
@@ -983,7 +1014,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку результатов поиска");
                     }
-                    // }));
                 }
             }
             catch (Exception ex)
@@ -992,52 +1022,86 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        ///// <summary>
-        ///// Обрабатывает изменение текста поиска в ANNgridView
-        ///// Автоматически переходит на первую строку результатов поиска
-        ///// </summary>
-        //private void ANNgridView_FindFilterTextChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        var gridView = sender as GridView;
-        //        if (gridView == null) return;
-
-        //        // Проверяем, есть ли текст поиска
-        //        if (!string.IsNullOrEmpty(gridView.FindFilterText))
-        //        {
-        //            // Небольшая задержка для завершения применения фильтра поиска
-        //            gridView.BeginInvoke(new Action(() =>
-        //            {
-        //                try
-        //                {
-        //                    // Проверяем, есть ли видимые строки после применения поиска
-        //                    if (gridView.DataRowCount > 0)
-        //                    {
-        //                        // Переходим на первую строку результатов поиска
-        //                        int firstVisibleRow = gridView.GetVisibleRowHandle(0);
-        //                        if (gridView.IsValidRowHandle(firstVisibleRow))
-        //                        {
-        //                            gridView.FocusedRowHandle = firstVisibleRow;
-        //                            gridView.MakeRowVisible(firstVisibleRow);
-
-        //                            // Логируем действие
-        //                            _logger?.LogEventAsync($"Автоматический переход на первую строку результатов поиска по тексту '{gridView.FindFilterText}'. Всего строк: {gridView.DataRowCount}", "ANNgridView_FindFilterTextChanged");
-        //                        }
-        //                    }
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку результатов поиска по тексту");
-        //                }
-        //            }));
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger?.LogErrorAsync(ex, "Ошибка в обработчике изменения текста поиска");
-        //    }
-        //}
+        
+        /// <summary>
+        /// Разбирает комплектный артикул на компоненты
+        /// Поддерживает форматы: 1Т1773С1990, 1dТ1773С1990, 1Ф7738Ш1395
+        /// </summary>
+        private (bool HasValidComponents, string Component1, string Component2) ParseKitArticle(string articleText)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(articleText))
+                    return (false, "", "");
+                
+                string cleanText = articleText.Trim().ToUpperInvariant();
+                
+                // Шаблоны для разбора комплектных артикулов
+                var patterns = new[]
+                {
+                    // Паттерн 1: 1Т1773С1990 = 1Т1773 + С1990 (буква в середине)
+                    @"^(\d+[А-ЯЁ]+\d+)([А-ЯЁ]+\d+)$",
+                    // Паттерн 2: 1dТ1773С1990 = 1dТ1773 + С1990 (латинская буква + кириллица)
+                    @"^(\d+[A-Za-z]*[А-ЯЁ]+\d+)([А-ЯЁ]+\d+)$",
+                    // Паттерн 3: более гибкий паттерн для различных комбинаций
+                    @"^(\d+[A-Za-zА-ЯЁ]+\d+)([А-ЯЁ]+\d+)$"
+                };
+                
+                foreach (var pattern in patterns)
+                {
+                    var match = System.Text.RegularExpressions.Regex.Match(cleanText, pattern);
+                    if (match.Success && match.Groups.Count == 3)
+                    {
+                        string component1 = match.Groups[1].Value;
+                        string component2 = match.Groups[2].Value;
+                        
+                        // Проверяем, что обе части имеют разумную длину
+                        if (component1.Length >= 3 && component2.Length >= 2)
+                        {
+                            return (true, component1, component2);
+                        }
+                    }
+                }
+                
+                // Если автоматическое разбиение не сработало, пробуем найти разделитель по последней заглавной букве
+                // Например: 1Т1773С1990 -> ищем последнюю заглавную букву как начало второй части
+                for (int i = cleanText.Length - 1; i > 2; i--)
+                {
+                    char c = cleanText[i];
+                    if (char.IsLetter(c) && char.IsUpper(c))
+                    {
+                        // Проверяем, что после буквы есть цифры
+                        bool hasDigitsAfter = false;
+                        for (int j = i + 1; j < cleanText.Length; j++)
+                        {
+                            if (char.IsDigit(cleanText[j]))
+                            {
+                                hasDigitsAfter = true;
+                                break;
+                            }
+                        }
+                        
+                        if (hasDigitsAfter)
+                        {
+                            string component1 = cleanText.Substring(0, i);
+                            string component2 = cleanText.Substring(i);
+                            
+                            if (component1.Length >= 3 && component2.Length >= 2)
+                            {
+                                return (true, component1, component2);
+                            }
+                        }
+                    }
+                }
+                
+                return (false, "", "");
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, $"Ошибка при разборе комплектного артикула: {articleText}");
+                return (false, "", "");
+            }
+        }
 
         private async void loadAllCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -1051,7 +1115,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
                 ANNgridView.ColumnFilterChanged -= ANNgridView_ActiveFilterChanged;
-                //ANNgridView.FindFilterTextChanged -= ANNgridView_FindFilterTextChanged;
+                // ANNgridView.DataSourceChanged -= ANNgridView_DataSourceChanged;
             }
 
             _secondsUpdateManager?.CancelUpdate();
