@@ -1,23 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.Pdf.Native;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraEditors;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using SewingProduction.Features.UserDistribution.Helpers;
+﻿using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
+using System;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul
 {
@@ -68,7 +52,7 @@ namespace SewingProduction.Features.Articul
                     {
                         visibleSP(false);
                         kodSQL = customTextBoxKod1.Text;
-                        copyArt(); 
+                        copyArt();
                     }
                     break;
             }
@@ -201,5 +185,5 @@ namespace SewingProduction.Features.Articul
             }
         }
     }
-    
+
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SewingProduction
+﻿namespace SewingProduction
 {
     /// <summary>
     /// Статус РТ
@@ -14,19 +8,19 @@ namespace SewingProduction
         /// <summary>
         ///  Предварительный архив
         /// </summary>
-        PreliminaryArchive = 4, 
+        PreliminaryArchive = 4,
         /// <summary>
         /// Архив
         /// </summary>
-        Archive = 3, 
+        Archive = 3,
         /// <summary>
         /// Актуальное
         /// </summary>
-        Actual = 2,       
+        Actual = 2,
         /// <summary>
         /// Предварительное
         /// </summary>
-        Preliminary = 1          
+        Preliminary = 1
     }
 }
 

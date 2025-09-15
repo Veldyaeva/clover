@@ -1,15 +1,7 @@
-﻿using DevExpress.Mvvm.Native;
-using SewingProduction.Services;
-using SewingProduction.Features.UserDistribution.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Z.Dapper.Plus;
+﻿using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.UserDistribution.Models;
+using Z.Dapper.Plus;
 
 namespace SewingProduction.Models
 {

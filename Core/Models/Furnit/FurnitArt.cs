@@ -1,12 +1,4 @@
-﻿using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.DataAccess.Sql;
-using DevExpress.XtraCharts.Native;
-using SewingProduction.form;
-using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Numerics;
+﻿using System;
 
 namespace SewingProduction.Models
 {

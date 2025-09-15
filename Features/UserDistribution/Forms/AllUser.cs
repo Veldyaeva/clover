@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
-using SewingProduction.Models;
 using SewingProduction.Services;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
+using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {

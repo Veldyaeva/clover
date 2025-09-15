@@ -1,8 +1,4 @@
-﻿using SewingProduction.form;
-using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace SewingProduction.Features.CardByNom.Models
 {

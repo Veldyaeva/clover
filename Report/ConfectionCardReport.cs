@@ -1,10 +1,4 @@
-﻿using DevExpress.XtraReports.UI;
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 
 
 namespace SewingProduction.report

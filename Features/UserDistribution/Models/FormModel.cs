@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using SewingProduction.Helpers;
+using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraLayout.Customization;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
-using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
-using DevExpress.Charts.Model;
 
 namespace SewingProduction.Features.UserDistribution.Models
 {

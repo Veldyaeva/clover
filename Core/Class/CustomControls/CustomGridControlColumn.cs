@@ -1,20 +1,19 @@
-﻿using System;
+﻿using DevExpress.XtraGrid;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.UserDistribution.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DevExpress.XtraGrid;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
 
 namespace SewingProduction.Core.Class
 {
-     public class CustomGridControlColumn : GridControl, SewingProduction.IThemeable, IThemeableControl
+    public class CustomGridControlColumn : GridControl, SewingProduction.IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color? AlternateRowColor { get; set; }

@@ -1,8 +1,7 @@
 using System;
 using System.IO;
-using System.Xml;
 using System.Windows.Forms;
-using SewingProduction.Interfaces;
+using System.Xml;
 
 namespace SewingProduction.Helpers
 {
@@ -33,7 +32,7 @@ namespace SewingProduction.Helpers
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("FormLayout");
-                    
+
                     // Сохраняем состояние окна
                     writer.WriteStartElement("WindowState");
                     writer.WriteAttributeString("State", form.WindowState.ToString());
@@ -59,7 +58,7 @@ namespace SewingProduction.Helpers
                         writer.WriteAttributeString("Height", form.RestoreBounds.Height.ToString());
                         writer.WriteEndElement();
                     }
-                    
+
                     writer.WriteEndElement(); // FormLayout
                     writer.WriteEndDocument();
                 }
@@ -117,14 +116,14 @@ namespace SewingProduction.Helpers
                     if (width > 0 && height > 0)
                     {
                         // Проверяем, что координаты находятся в пределах экрана
-                        if (x >= 0 && y >= 0 && 
-                            x < Screen.PrimaryScreen.WorkingArea.Width && 
+                        if (x >= 0 && y >= 0 &&
+                            x < Screen.PrimaryScreen.WorkingArea.Width &&
                             y < Screen.PrimaryScreen.WorkingArea.Height)
                         {
                             form.StartPosition = FormStartPosition.Manual;
                             form.Location = new System.Drawing.Point(x, y);
                         }
-                        
+
                         form.Size = new System.Drawing.Size(width, height);
                     }
 
@@ -138,4 +137,4 @@ namespace SewingProduction.Helpers
             }
         }
     }
-} 
+}

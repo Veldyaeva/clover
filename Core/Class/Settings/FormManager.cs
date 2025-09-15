@@ -1,9 +1,7 @@
-﻿using System;
+﻿using SewingProduction.Features.UserDistribution.Helpers;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using SewingProduction.Features.UserDistribution.Helpers;
 using System.Windows.Forms;
 
 namespace SewingProduction.Core.Class.Settings
