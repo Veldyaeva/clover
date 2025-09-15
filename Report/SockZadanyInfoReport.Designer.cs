@@ -132,6 +132,7 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102506476", null));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102507164", null));
             this._nomZadany.ValueSourceSettings = staticListLookUpSettings1;
+            this._nomZadany.Visible = false;
             // 
             // TopMargin
             // 

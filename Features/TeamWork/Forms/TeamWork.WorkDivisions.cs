@@ -589,10 +589,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             UpdateRowInBindingList(oldRow);
 
             await _dbService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
-            
-            // Обновляем данные архива после перевода из предварительного архива
-            await RefreshArchData();
-            
             await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {oldRow.ParentId}", "Arch");
 
         }
@@ -815,12 +811,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
-            
-            // Обновляем данные архива если был установлен статус архива (3)
-            if (newStatus == (int)Status.Archive)
-            {
-                await RefreshArchData();
-            }
             
             // Запускаем асинхронное обновление секунд для новой записи
             _ = Task.Run(async () =>
