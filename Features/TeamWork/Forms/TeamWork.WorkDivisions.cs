@@ -1,5 +1,13 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+﻿using Dapper;
+using DevExpress.DataAccess.Native.Excel;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.Design;
+using DevExpress.XtraTab;
 using SewingProduction.Extensions;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
@@ -69,9 +77,31 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
                 // Включаем обновление UI
-                ANNgridControl.EndUpdate();
-                if (_bindingList.Count > 0)
-                    await LoadRelatedData(_bindingList[0].AnnID);
+				ANNgridControl.EndUpdate();
+				// Загружаем связанные данные для текущей строки, а не для первой
+				int targetAnnId = 0;
+				try
+				{
+					if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
+					{
+						if (ANNgridView.GetRow(ANNgridView.FocusedRowHandle) is ArtNormN focusedRow)
+							targetAnnId = focusedRow.AnnID;
+					}
+
+					if (targetAnnId == 0 && _bindingSource != null)
+					{
+						int pos = _bindingSource.Position;
+						if (pos >= 0 && pos < _bindingList.Count)
+							targetAnnId = _bindingList[pos].AnnID;
+					}
+
+					if (targetAnnId == 0 && _bindingList.Count > 0)
+						targetAnnId = _bindingList[0].AnnID;
+				}
+				catch { }
+
+				if (targetAnnId > 0)
+					await LoadRelatedData(targetAnnId);
             }
             catch (Exception ex)
             {
@@ -138,7 +168,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
                 gridControlKontTW.DataSource = _normKontBindingSourceTW;
-
+                
             }
             catch (Exception ex)
             {
@@ -146,49 +176,60 @@ namespace SewingProduction.Features.TeamWork.Forms
                 throw;
             }
         }
-
-
-        private async Task LoadRelatedData(int annId)
+        /// <summary>
+        /// Загружает связанные данные для указанного AnnID с использованием сервисной архитектуры
+        /// </summary>
+        /// <param name="annId">ID разделения труда</param>
+        /// <param name="cancellationToken">Токен отмены операции</param>
+        private async Task LoadRelatedData(int annId, CancellationToken cancellationToken = default)
         {
-            // Загружаем данные асинхронно
-            var normRaskResult = await _artNormService.GetRelatedNormRask(annId);
-            var normKontResult = await _artNormService.GetRelatedNormKont(annId);
-            var normRaszResult = await _artNormService.GetRelatedNormRasz(annId);
-
-            // Обновление UI должно происходить в UI потоке
-            if (this.InvokeRequired)
+            try
             {
-                await this.InvokeAsync(() =>
+                if (annId <= 0)
                 {
-                    _normRaskListTW.BulkLoad(normRaskResult);
-                    _normKontListTW.BulkLoad(normKontResult);
-                    _normRaszListTW.BulkLoad(normRaszResult);
-                });
-            }
-            else
-            {
-                _normRaskListTW.BulkLoad(normRaskResult);
-                _normKontListTW.BulkLoad(normKontResult);
-                _normRaszListTW.BulkLoad(normRaszResult);
-            }
+                    await _logger.LogEventAsync("LoadRelatedData: Некорректный AnnID", "LoadRelatedData");
+                    return;
+                }
 
-            await LoadAndBindFioListsAsync();
+                cancellationToken.ThrowIfCancellationRequested();
 
-            // Сортировка детализирующих таблиц после загрузки данных - тоже в UI потоке
-            if (this.InvokeRequired)
-            {
-                await this.InvokeAsync(() =>
+                // Используем TeamWorkService для получения данных
+                var result = await _teamWorkService.RefreshRelatedDataAsync(annId);
+
+                cancellationToken.ThrowIfCancellationRequested();
+
+                if (result.Success)
                 {
-                    if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-                    if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-                    if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-                });
+                    // Используем UIHelper для обновления UI
+                    await _uiHelper.UpdateRelatedDataUIAsync(
+                        result,
+                        _normRaskListTW,
+                        _normKontListTW,
+                        _normRaszListTW,
+                        gridControlRaszTW,
+                        gridControlRaskrTW,
+                        gridControlKontTW,
+                        this);
+
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    // Загружаем и привязываем FIO списки
+                    await LoadAndBindFioListsAsync();
+
+                    await _logger.LogEventAsync($"Связанные данные для AnnID: {annId} успешно загружены", "LoadRelatedData");
+                }
+                else
+                {
+                    await _logger.LogErrorAsync(new Exception(result.Error), $"Ошибка при загрузке связанных данных для AnnID: {annId}");
+                }
             }
-            else
+            catch (OperationCanceledException)
             {
-                if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-                if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-                if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+                await _logger.LogEventAsync($"Загрузка связанных данных для AnnID: {annId} отменена", "LoadRelatedData");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при загрузке связанных данных для AnnID: {annId}");
             }
         }
 
@@ -301,7 +342,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await _logger.LogErrorAsync(ex, "Ошибка при обновлении статуса кнопки отвязки НЗП");
                 }
-                ButtonUnboundWd.Enabled = false;
+                ButtonUnboundWd.Enabled = false; 
             }
         }
 
@@ -335,6 +376,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
 
+
         #region Добавить предварительное
         /// <summary>
         /// Добавить предварительное
@@ -347,7 +389,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             ArtNormN newItem = new ArtNormN
             {
-                //       Kod = "0000000",
+         //       Kod = "0000000",
                 grup = "",
                 Articul = "",
                 Mod = "",
@@ -366,7 +408,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 Komment = "",
                 Reco = "",
                 dateCreate = DateTime.Now,
-                dateAdd = DateTime.Now,
+                //dateAdd = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
                 dateUpdate = null,//DateTime.MinValue,
@@ -396,10 +438,71 @@ namespace SewingProduction.Features.TeamWork.Forms
                 MyDataAnnLoad();
             }
 
-            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.NewWorkDivision, newId: newId))
-            {
-                await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
-            }
+			// Открываем форму редактирования новой записи (немодально)
+			var teamWork_AdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.NewWorkDivision, newId: newId);
+			if (teamWork_AdvanceTW == null)
+			{
+				return;
+			}
+			// Обработка результата по закрытию формы
+			teamWork_AdvanceTW.FormClosed += async (s, args) =>
+			{
+				if (teamWork_AdvanceTW.DialogResult == DialogResult.OK)
+				{
+					var createdItem = teamWork_AdvanceTW.CreatedAnn;
+					if (createdItem != null)
+					{
+						newItem.Articul = createdItem.Articul;
+						newItem.Mod = createdItem.Mod;
+						newItem.grup = createdItem.grup;
+						newItem.Komment = createdItem.Komment;
+						newItem.Reco = createdItem.Reco;
+						newItem.Diz = createdItem.Diz;
+						newItem.Constr = createdItem.Constr;
+						newItem.Sek = createdItem.Sek;
+					}
+
+					_bindingSource.ResetBindings(false);
+					int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
+					if (newRowHandle >= 0)
+					{
+						ANNgridView.BeginUpdate();
+						try
+						{
+							ANNgridView.FocusedRowHandle = newRowHandle;
+							ANNgridView.MakeRowVisible(newRowHandle);
+							ANNgridView.RefreshRow(newRowHandle);
+						}
+						finally
+						{
+							ANNgridView.EndUpdate();
+						}
+					}
+
+					_ = Task.Run(async () =>
+					{
+						await _secondsUpdateManager.StartSecondsUpdateAsync(newItem.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+						await Task.Delay(3000);
+						ClearSecondsUpdateStatus();
+					});
+				}
+				else
+				{
+					_bindingList.Remove(newItem);
+					_bindingSource.Remove(newItem);
+					await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
+					if (teamWork_AdvanceTW.IsRaszInserted)
+						await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
+					if (teamWork_AdvanceTW.IsRaskInserted)
+						await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
+					if (teamWork_AdvanceTW.IsKontInserted)
+						await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
+
+					_bindingSource.ResetBindings(false);
+					ANNgridControl.RefreshDataSource();
+					ANNgridView.RefreshData();
+				}
+			};
         }
 
         private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
@@ -527,17 +630,23 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                using (var editForm = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID))
-                {
-                    if (editForm.ShowDialog() == DialogResult.OK)
-                    {
-                        await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
-                    }
-                    else
-                    {
-                        await HandleCancelledEdit(selectedItem, newRow, oldStatus);
-                    }
-                }
+				// Открываем форму редактирования новой записи (немодально)
+				var editForm = OpenAdvanceFormNonModal(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID);
+				if (editForm == null)
+				{
+					return;
+				}
+				editForm.FormClosed += async (s, args) =>
+				{
+					if (editForm.DialogResult == DialogResult.OK)
+					{
+						await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
+					}
+					else
+					{
+						await HandleCancelledEdit(selectedItem, newRow, oldStatus);
+					}
+				};
             }
             catch (Exception ex)
             {
@@ -592,10 +701,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                // 3. Открываем форму редактирования новой записи
-                using (var editForm = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID))
+                // 3. Открываем форму редактирования новой записи (немодально)
+                var editForm = OpenAdvanceFormNonModal(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID);
+                if (editForm == null)
                 {
-                    if (editForm.ShowDialog() == DialogResult.OK)
+                    return;
+                }
+                editForm.FormClosed += async (s, args) =>
+                {
+                    if (editForm.DialogResult == DialogResult.OK)
                     {
                         await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
                     }
@@ -603,7 +717,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         await HandleCancelledEdit(selectedItem, newRow, oldStatus);
                     }
-                }
+                };
             }
             catch (Exception ex)
             {
@@ -678,7 +792,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             UpdateRowInBindingList(newRow);
             if (!hasNZP)
                 await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
-
+            
             // Фокусируемся на новой строке после успешного редактирования
             int rowHandle = ANNgridView.LocateByValue("AnnID", newRow.AnnID);
             if (rowHandle >= 0)
@@ -695,9 +809,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     ANNgridView.EndUpdate();
                 }
             }
-
+            
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
-
+            
             // Запускаем асинхронное обновление секунд для новой записи
             _ = Task.Run(async () =>
             {
@@ -728,7 +842,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             _bindingSource.ResetBindings(false);
             ANNgridView.RefreshData();
-
+            
             // Фокусируемся на исходной строке после отмены
             if (selectedItem != null)
             {
@@ -750,47 +864,47 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
         private async Task HandleArchAndCopyError(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus, Exception ex)
-        {
-            if (newRow != null && newRow.AnnID > 0)
             {
-                _bindingList.Remove(newRow);
-                _bindingSource.Remove(newRow);
+                if (newRow != null && newRow.AnnID > 0)
+                {
+                    _bindingList.Remove(newRow);
+                    _bindingSource.Remove(newRow);
                 await _artNormService.DeleteByAnnId(TableNames.Ann, newRow.AnnID);
-            }
+                }
 
-            if (oldStatus.HasValue && selectedItem != null)
-            {
+                if (oldStatus.HasValue && selectedItem != null)
+                {
                 await _logger.LogEventAsync($"Ошибка. Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
 
-                selectedItem.Status = oldStatus.Value;
-                selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
+                    selectedItem.Status = oldStatus.Value;
+                    selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
-            }
+                }
 
-            // Фокусируемся на исходной строке после ошибки
-            if (selectedItem != null)
-            {
-                _bindingSource.ResetBindings(false);
-                int rowHandle = ANNgridView.LocateByValue("AnnID", selectedItem.AnnID);
-                if (rowHandle >= 0)
+                // Фокусируемся на исходной строке после ошибки
+                if (selectedItem != null)
                 {
-                    ANNgridView.BeginUpdate();
-                    try
+                    _bindingSource.ResetBindings(false);
+                    int rowHandle = ANNgridView.LocateByValue("AnnID", selectedItem.AnnID);
+                    if (rowHandle >= 0)
                     {
-                        ANNgridView.FocusedRowHandle = rowHandle;
-                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
-                        ANNgridView.RefreshRow(rowHandle);
-                    }
-                    finally
-                    {
-                        ANNgridView.EndUpdate();
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
+                            ANNgridView.RefreshRow(rowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
                     }
                 }
-            }
 
-            await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
-            MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void UpdateRowInBindingList(ArtNormN newRow)
@@ -888,81 +1002,20 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         #region отвязать
         /// <summary>
-        /// Обработчик кнопки "Отвязать артикул от РТ".
-        /// Удаляет связь между выбранным артикулом и разделением труда.
+        /// Обработчик кнопки "Отвязать артикул от РТ" для вкладки артикулов.
+        /// Использует универсальную процедуру UnbindArticulesFromWorkDivision_Internal.
         /// </summary>
         private async Task UnboundWD(object sender, EventArgs e)
         {
-            try
-            {
-                var view = gridControlNZP.MainView as GridView;
-                if (view == null) return;
-
-                var selectedRow = _nzpByKoddRtSourceArt.Current as NZPByKoddRt;
-                if (selectedRow == null)
-                {
-                    MessageBox.Show("Выберите артикул для отвязки!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                int kod = selectedRow.kodd_rt; // код артикула из строки НЗП
-                int annIdNzpRow = selectedRow.annId; // AnnID РТ из строки НЗП
-                await _logger.LogEventAsync($"UnboundWD: Начало. Артикул KOD: {kod}, РТ AnnID из строки НЗП: {annIdNzpRow}", "UnboundWD_Debug");
-
-                // Вызов метода для отвязки артикула в sp_articul
-                await _artNormService.ResetAnnIdinArticul(kod);
-                await _logger.LogEventAsync($"UnboundWD: ResetAnnIdinArticul(kod: {kod}) выполнен.", "UnboundWD_Debug");
-
-                // Обновление статуса РТ
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annIdNzpRow);
-                await _logger.LogEventAsync($"UnboundWD: UpdateFieldAsync для статуса РТ выполнен.", "UnboundWD_Debug");
-
-                // Получаем AnnID текущего выбранного РТ из gridView_wdToBind
-                // Это AnnID, для которого нужно обновить список НЗП.
-                int currentWorkDivisionAnnId = 0;
-                if (gridView_wdToBind != null && gridView_wdToBind.FocusedRowHandle >= 0)
-                {
-                    currentWorkDivisionAnnId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnID", 0);
-                }
-                await _logger.LogEventAsync($"UnboundWD: AnnID текущего РТ из gridView_wdToBind: {currentWorkDivisionAnnId}", "UnboundWD_Debug");
-
-                if (_nzpListArt != null)
-                {
-                    //  _nzpList.Clear(); // Очищаем текущий список НЗП
-                    if (currentWorkDivisionAnnId > 0)
-                    {
-                        // Перезагружаем НЗП для текущего РТ
-                        List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(currentWorkDivisionAnnId);
-                        await _logger.LogEventAsync($"UnboundWD: GetNzpWithPztCounts(annId: {currentWorkDivisionAnnId}) вернул {(nzpData?.Count ?? 0)} записей.", "UnboundWD_Debug");
-                        if (nzpData != null)
-                        {
-                            if (nzpData.Count == 0)
-                            {
-                                await _logger.LogEventAsync($"UnboundWD: Список nzpData ПУСТ после GetNzpWithPztCounts.", "UnboundWD_Debug");
-                            }
-                            _nzpListArt.BulkLoad(nzpData);
-                            //foreach (var item in nzpData)
-                            //{
-                            //    _nzpList.Add(item);
-                            //   // await _logger.LogEventAsync($"UnboundWD: В _nzpList добавлена запись: Kodd_rt={item.kodd_rt}, AnnId={item.annId}, KolNZP={item.kolNZP}", "UnboundWD_Debug");
-                            //}
-                        }
-                    }
-                }
-
-                _nzpByKoddRtSourceArt?.ResetBindings(false);
-                gridControlNZP?.RefreshDataSource();
-                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновляем состояние кнопки отвязки
-                await _logger.LogEventAsync($"UnboundWD: UI обновлен (_nzpByKoddRtSource.ResetBindings, RefreshDataSource, UpdateUnboundButtonStatusBasedOnNZP).", "UnboundWD_Debug");
-
-                MessageBox.Show("Артикул успешно отвязан от РТ.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await _logger.LogEventAsync($"UnboundWD ЗАВЕРШЕН: Артикул {kod} отвязан от РТ {annIdNzpRow}. Список НЗП для РТ {currentWorkDivisionAnnId} обновлен.", "UnboundWD_Debug");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при отвязке артикула от РТ");
-                MessageBox.Show($"Ошибка при отвязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await _logger.LogEventAsync("UnboundWD: Отвязка РТ от артикула на вкладке артикулов");
+            
+            // Используем универсальную процедуру для вкладки артикулов
+            await UnbindArticulesFromWorkDivision_Internal(
+                gridControlNZP.MainView as GridView,  // GridView НЗП
+                _nzpListArt,                          // Источник данных НЗП для вкладки артикулов
+                gridView_wdToBind,                    // GridView с РТ (MyDataANN)
+                useCheckedRows: true                  // Используем отмеченные строки
+            );
         }
         #endregion
 

@@ -1,8 +1,11 @@
-﻿using SewingProduction.Features.Articul.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SewingProduction.Core.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -58,31 +61,56 @@ namespace SewingProduction.Features.Articul.Service
         {
             await _dbService.DeleteEntityAsync("kompl", "kod_k", model);
         }
-        public async Task<bool> ExistsAsync(KomplModel model)
+        public async Task<bool> ExistsByKodKAsync(int kod_k)
+        {
+            string q = "SELECT COUNT(1) FROM kompl WHERE kod_k = @kod_k";
+            int n = await _dbHelper.ExecuteScalarAsync<int>(q, new { kod_k });
+            return n > 0;
+        }
+
+        /// Проверка «точно такой же комплект» по канонизированным kod1..kod10 + sost_k
+        public async Task<bool> ExistsExactAsync(KomplModel model)
         {
             string query = @"
-            SELECT COUNT(1)
-            FROM kompl
-            WHERE kod1 = @kod1 AND kod2 = @kod2 AND kod3 = @kod3 AND kod4 = @kod4 AND kod5 = @kod5
-              AND kod6 = @kod6 AND kod7 = @kod7 AND kod8 = @kod8 AND kod9 = @kod9 AND kod10 = @kod10
-              AND sost_k = @sost_k";
-
-            int count = await _dbHelper.ExecuteScalarAsync<int>(query, new
+                SELECT COUNT(1)
+                FROM kompl
+                WHERE ISNULL(kod1,0)  = ISNULL(@kod1,0)
+                  AND ISNULL(kod2,0)  = ISNULL(@kod2,0)
+                  AND ISNULL(kod3,0)  = ISNULL(@kod3,0)
+                  AND ISNULL(kod4,0)  = ISNULL(@kod4,0)
+                  AND ISNULL(kod5,0)  = ISNULL(@kod5,0)
+                  AND ISNULL(kod6,0)  = ISNULL(@kod6,0)
+                  AND ISNULL(kod7,0)  = ISNULL(@kod7,0)
+                  AND ISNULL(kod8,0)  = ISNULL(@kod8,0)
+                  AND ISNULL(kod9,0)  = ISNULL(@kod9,0)
+                  AND ISNULL(kod10,0) = ISNULL(@kod10,0)
+                  AND ISNULL(sost_k,'') = ISNULL(@sost_k,'')";
+            int cnt = await _dbHelper.ExecuteScalarAsync<int>(query, new
             {
-                model.kod1,
-                model.kod2,
-                model.kod3,
-                model.kod4,
-                model.kod5,
-                model.kod6,
-                model.kod7,
-                model.kod8,
-                model.kod9,
-                model.kod10,
-                model.sost_k
+                model.Kod1,
+                model.Kod2,
+                model.Kod3,
+                model.Kod4,
+                model.Kod5,
+                model.Kod6,
+                model.Kod7,
+                model.Kod8,
+                model.Kod9,
+                model.Kod10,
+                model.Sost_k
             });
+            return cnt > 0;
+        }
 
-            return count > 0;
+        public bool CheckInProizv(string kod)
+        {
+            string query = "SELECT 1 FROM View_rzu_rzv_nom_zad WHERE kod_k_pach  = @kod";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
+        public bool CheckNaklRas(string kod)
+        {
+            string query = "SELECT 1 FROM nakl_ras WHERE kod_k  = @kod";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
         }
     }
 

@@ -1,9 +1,12 @@
+
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Core.Extensions;
 using SewingProduction.Features.UserDistribution.Helpers;
-using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Drawing;
+using System.Diagnostics;
+using System;
 
 namespace SewingProduction
 {
@@ -18,7 +21,7 @@ namespace SewingProduction
         bool VisibleLogic { get; set; }
         void ApplyPermission(UserClass user);
     }
-
+    
 
     public class CustomTextBox : TextBox, IThemeable, IThemeableControl
     {
@@ -716,70 +719,7 @@ namespace SewingProduction
         }
     }
 
-    public class CustomLabel : Label, IThemeable, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        private bool _visiblePermission = true;
-        private bool _visibleLogic = true;
-        public CustomLabel()
-        {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-        }
-
-        public void ApplyTheme()
-        {
-            ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
-            Font = ThemeManager.SharedSettings.DefaultFont;
-        }
-
-        private void OnThemeChanged() => ApplyTheme();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
-            base.Dispose(disposing);
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool VisiblePermission
-        {
-            get => _visiblePermission;
-            set
-            {
-                _visiblePermission = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool VisibleLogic
-        {
-            get => _visibleLogic;
-            set
-            {
-                _visibleLogic = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
-
-        public new bool Visible
-        {
-            get => base.Visible;
-            set
-            {
-                _visibleLogic = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
-    }
+    
 
 
     /// <summary>
@@ -914,9 +854,13 @@ namespace SewingProduction
 
         public CustomForm()
         {
-            ApplyTheme(); // Применяем тему к самой форме (фон)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
+            {
+                _user = new UserClass(); 
+            }
+
+            ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged;
-            // Применяем тему к дочерним контролам после инициализации самой формы
             this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
         }
         public CustomForm(UserClass user)
@@ -934,10 +878,21 @@ namespace SewingProduction
             this.Load += async (s, e) =>
             {
                 await ActionLogger.Log(_user.UserId, "Открытие формы", NameForm: this.GetType().Name);
+                
+                // Включаем автоматическое сохранение настроек для всех CustomGridControl
+                InitializeAutoGridSettings();
+                
                 CustomForm_Load(s, e);
             };
+            
+            // Сохраняем настройки при закрытии формы
+            this.FormClosing += (s, e) =>
+            {
+                this.SaveAllGridSettings();
+            };
         }
-        public void ApplyTheme()
+
+        public void ApplyTheme() 
         {
             if (this.IsDisposed || !this.IsHandleCreated) return;
 
@@ -947,7 +902,7 @@ namespace SewingProduction
             }
             else
             {
-                Invalidate();
+                Invalidate(); 
             }
         }
         protected override void OnPaint(PaintEventArgs e)
@@ -970,6 +925,22 @@ namespace SewingProduction
                 ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Инициализирует автоматическое сохранение настроек для всех CustomGridControl на форме
+        /// </summary>
+        protected virtual void InitializeAutoGridSettings()
+        {
+            try
+            {
+                this.EnableAutoGridSettings(true);
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку, но не прерываем работу формы
+                System.Diagnostics.Debug.WriteLine($"Ошибка при инициализации автоматических настроек гридов: {ex.Message}");
+            }
         }
 
         private void OnThemeChanged() => ApplyTheme();

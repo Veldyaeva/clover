@@ -31,7 +31,7 @@ namespace SewingProduction.form
         {
             this.components = new System.ComponentModel.Container();
             this.tbKodF = new SewingProduction.CustomTextBox();
-            this.label1 = new SewingProduction.CustomLabel();
+            this.label1 = new SewingProduction.Core.Class.CustomLabel();
             this.gridControlReestrFurn = new CustomGridControl();
             this.bsReestrFurn = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewReestrFurn = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -47,8 +47,8 @@ namespace SewingProduction.form
             this.gridColumnReestrFurnRfKomp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnRfDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnRfID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label2 = new SewingProduction.CustomLabel();
-            this.label3 = new SewingProduction.CustomLabel();
+            this.label2 = new SewingProduction.Core.Class.CustomLabel();
+            this.label3 = new SewingProduction.Core.Class.CustomLabel();
             this.gridControlReestrFurnSostView = new CustomGridControl();
             this.bsReestrFurnSost = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewReestrFurnSostView = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -63,7 +63,7 @@ namespace SewingProduction.form
             this.gridColumnReestrFurnSostViewRfsNPp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnSostViewRfsDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnSostViewRfsID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label4 = new SewingProduction.CustomLabel();
+            this.label4 = new SewingProduction.Core.Class.CustomLabel();
             this.gridControlReestrFurnShtr = new CustomGridControl();
             this.bsReestrFurnShtr = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewReestrFurnShtr = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -72,7 +72,7 @@ namespace SewingProduction.form
             this.gridColumnReestrFurnShtrRfshShtr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnShtrRfshSNum = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnShtrRfshID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label5 = new SewingProduction.CustomLabel();
+            this.label5 = new SewingProduction.Core.Class.CustomLabel();
             this.gridControlReestrFurnDeliveryBagView = new CustomGridControl();
             this.bsReestrFurnDeliveryBag = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewReestrFurnDeliveryBagView = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -84,7 +84,7 @@ namespace SewingProduction.form
             this.gridColumnReestrFurnDeliveryBagViewRfdbID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnDeliveryBagViewRfdbDtID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnDeliveryBagViewRfdbDdID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label6 = new SewingProduction.CustomLabel();
+            this.label6 = new SewingProduction.Core.Class.CustomLabel();
             this.gridControlReestrFurnDeliveryBagSost = new CustomGridControl();
             this.bsReestrFurnDeliveryBagSost = new System.Windows.Forms.BindingSource(this.components);
             this.gridViewReestrFurnDeliveryBagSost = new DevExpress.XtraGrid.Views.Grid.GridView();

@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraTabbedMdi;
+﻿using DevExpress.XtraBars;
+using DevExpress.XtraTabbedMdi;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
@@ -11,6 +12,17 @@ using SewingProduction.form;
 using SewingProduction.form.Nadezhda;
 using System;
 using System.Windows.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
+using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.TeamWork;
+using System.Diagnostics;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Articul;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.KnittingProduction.Forms;
 
 namespace SewingProduction
 {
@@ -39,6 +51,7 @@ namespace SewingProduction
 
                 _formManager = new FormManager(this, menuStrip1, _user);
                 await _user.LoadUserData();
+                CurrentUser.SetUser(_user);
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm();
@@ -245,6 +258,10 @@ namespace SewingProduction
         private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm(new CuttingForm(), sender);
+        }
+        private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(), sender);
         }
     }
 }

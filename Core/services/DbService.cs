@@ -127,6 +127,36 @@ namespace SewingProduction.Services
                 throw;
             }
         }
+
+        /// <summary>
+        /// Обновляет одно поле в таблице по заданному условию.
+        /// </summary>
+        /// <param name="tableName">Имя таблицы</param>
+        /// <param name="fieldName">Имя обновляемого поля</param>
+        /// <param name="newValue">Новое значение</param>
+        /// <param name="whereCondition">Поле условия (например, "AnnId")</param>
+        /// <param name="whereParameter">Значение условия</param>
+        public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereCondition, Dictionary<string, object> whereParameter)
+        {
+            try
+            {
+                string query = $@"UPDATE {tableName}
+                        SET {fieldName} = @NewValue
+                        WHERE {whereCondition}";
+                whereParameter.Add("@NewValue", newValue);
+                await _dbHelper.ExecuteNonQueryAsync(query, whereParameter);
+
+                await _logger.LogEventAsync(
+                    $"Таблица {tableName}: поле {fieldName} обновлено на {newValue}, где {whereCondition} = {whereParameter}.",
+                    "UpdateFieldAsync");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении {fieldName} в таблице {tableName} по условию {whereCondition} = {whereParameter}");
+                throw;
+            }
+        }
+
         /// <summary>
         /// Получает первую запись, соответствующую запросу, или значение по умолчанию (null), если ничего не найдено.
         /// </summary>

@@ -16,10 +16,19 @@
     <Compile Update="Core\Class\CustomControls\CustomGridControlColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\SP_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Core\Forms\TextSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
@@ -37,10 +46,28 @@
     <Compile Update="Features\CuttingProduction\Forms\CuttingFormAdding.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Sprav\Forms\EditTarif.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Sprav\Forms\EditFio.cs">
+    <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesUnitLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\editFio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\Fio.cs">
@@ -169,6 +196,9 @@
     <Compile Update="Report\NaklReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\NormRaszForEconomist.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\NormRaszTest.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -178,7 +208,19 @@
     <Compile Update="Report\ReestrListReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\SockZadanyInfoReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\subreport\FurnitFITByKodFD.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitMachineDownTimeByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitMashineServiceByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitZadanyBySmenReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\subreport\PrintGroupNROborudReport.cs">
@@ -196,8 +238,23 @@
     <Compile Update="Report\subreport\secByKodPodrAnnIdReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\SockZadanyInfoReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitZadanyBySmenReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitMachineDownTimeByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Features\UserDistribution\Forms\AboutBox.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1325,6 +1325,7 @@ namespace SewingProduction.form
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel8.Size = new System.Drawing.Size(152, 218);
             tableLayoutPanel8.TabIndex = 1;
+            tableLayoutPanel8.Paint += tableLayoutPanel8_Paint;
             // 
             // customButtonSforming
             // 

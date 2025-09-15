@@ -14,6 +14,7 @@ namespace SewingProduction.Models
         private string _group;
         private string _articul;
         private string _mod;
+        private string _size_label;
         private int _sek;
         private int _diz;
         private int _constr;
@@ -47,6 +48,11 @@ namespace SewingProduction.Models
             set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(Mod)); } }
         }
 
+        public string Size_label
+        {
+            get => _size_label;
+            set { if (_size_label != value) { _size_label = value; OnPropertyChanged(nameof(Size_label)); } }
+        }
         public int Sek
         {
             get => _sek;
@@ -72,21 +78,21 @@ namespace SewingProduction.Models
         [Column("sek_vyaz")]
         public int SekVyaz { get; set; }
         [Column("sek_vyaz14")]
-        public int SekVyaz14 { get; set; }
+        public int SekVyaz14 {get; set;}
         [Column("sek_vyaz70")]
-        public int SekVyaz70 { get; set; }
+        public int SekVyaz70 {get; set;}
         [Column("sek_vyaz71")]
-        public int SekVyaz71 { get; set; }
+        public int SekVyaz71 {get; set;}
         [Column("sek_vyaz72")]
-        public int SekVyaz72 { get; set; }
+        public int SekVyaz72 {get; set;}
         [Column("sek_vyaz62")]
-        public int SekVyaz62 { get; set; }
+        public int SekVyaz62 {get; set;}
         [Column("sek_vyaz57")]
         public int SekVyaz57 { get; set; }
         [Column("sek_vyaz18")]
         public int SekVyaz18 { get; set; }
         [NotMapped]
-        public int SekShv1 { get; set; }
+        public int SekShv1   {get; set;}
         [Column("st")]
         public int st { get; set; } // Стоимость?
 
@@ -121,11 +127,11 @@ namespace SewingProduction.Models
 
         [Column("data_obn")]
         public DateTime? dateUpdate { get; set; }
-
+        
         private bool _upd;
         [NotMapped]
-        public bool Upd
-        {
+        public bool Upd 
+        { 
             get => _upd;
             set
             {
@@ -141,8 +147,10 @@ namespace SewingProduction.Models
         [Column("annCompDel")]
         public string compDel { get; set; }
         [Column("annDateAdd")]
+        [NotMapped]
         public DateTime? dateAdd { get; set; }
         [Column("annCompAdd")]
+        [NotMapped]
         public string compAdd { get; set; }
 
         [Column("sek_kr")]
@@ -156,7 +164,7 @@ namespace SewingProduction.Models
         public bool preArch { get; set; }
         [NotMapped]
         public string StatusText { get; set; }
-        //     [NotMapped]
+   //     [NotMapped]
         public bool Arh { get; set; }
         [Column("parentId")]
         public int ParentId { get; set; }
@@ -224,9 +232,10 @@ namespace SewingProduction.Models
             }
 
             this.Kod = source.Kod;
-            this.grup = source.grup;
+            this.grup = source.grup; 
             this.Articul = source.Articul;
             this.Mod = source.Mod;
+            this.Size_label = source.Size_label;
             this.SekShv = source.SekShv;
             this.SekVyaz3 = source.SekVyaz3;
             this.SekVyaz5 = source.SekVyaz5;
@@ -238,18 +247,18 @@ namespace SewingProduction.Models
             this.SekVyaz = source.SekVyaz;
             this.Sek = source.Sek;
             this.Komment = source.Komment;
-            this.Reco = source.Reco;
-            this.dateCreate = source.dateCreate;
+            this.Reco = source.Reco; 
+            //this.dateCreate = source.dateCreate;
             this.Diz = source.Diz;
             this.Constr = source.Constr;
-            this.dateUpdate = source.dateUpdate;
+            //this.dateUpdate = source.dateUpdate;
             this.SekKr = source.SekKr;
             this.Slogn = source.Slogn;
-            this.Status = source.Status;
-            this.StatusText = source.StatusText;
-            this.Arh = source.Arh;
+            //this.Status = source.Status;
+            //this.StatusText = source.StatusText; 
+            //this.Arh = source.Arh;
             this.Seb = source.Seb;
-            this.ParentId = source.ParentId;
+            //this.ParentId = source.ParentId;
             this.SekVyaz14 = source.SekVyaz14;
             this.SekVyaz70 = source.SekVyaz70;
             this.SekVyaz71 = source.SekVyaz71;
@@ -258,10 +267,10 @@ namespace SewingProduction.Models
             this.SekVyaz57 = source.SekVyaz57;
             this.SekVyaz18 = source.SekVyaz18;
             this.SekShv1 = source.SekShv1;
-            this.dateDel = source.dateDel;
-            this.compDel = source.compDel;
-            this.dateAdd = source.dateAdd;
-            this.compAdd = source.compAdd;
+            //this.dateDel = source.dateDel;
+            //this.compDel = source.compDel;
+            //this.dateAdd = source.dateAdd;
+            //this.compAdd = source.compAdd;
         }
 
         public ArtNormN Clone()

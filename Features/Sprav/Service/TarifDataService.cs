@@ -21,11 +21,7 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task<List<TarifModel>> LoadTarifList()
         {
-            string query = @$"SELECT  TOP 1 with TIES pvc.* , store_name, pcs.name_field_id
-                                FROM proizv_view_constants pvc 
-                                LEFT JOIN proizv_constant_stores pcs ON pvc.pcst_id = pcs.pcst_id
-                            WHERE describe IS NOT NULL 
-                            ORDER BY rank() over(partition by pvc.pc_id order by pvc.pc_id, pvc.begin_dt desc)";
+            string query = @$"SELECT * FROM ViewProizvConstants";
             return await _dbService.GetListAsync<TarifModel>(query, new Dictionary<string, object>());
         }
         public async Task<List<TarifRabotModel>> LoadTarifRabotList()
@@ -40,8 +36,12 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task<List<TypeItemModel>> LoadTypeAsync()
         {
-            string query = "SELECT field_name, pcst_id, name_field_id, store_name FROM proizv_constant_stores";
+            string query = "SELECT * FROM proizv_constant_stores";
             return await _dbService.GetListAsync<TypeItemModel>(query, new Dictionary<string, object>());
+        }
+        public async Task ArhivTarifAsync(int pcID)
+        {
+            await _dbService.UpdateFieldAsync("proizv_constants", "arhiv",1,"pc_id", pcID);
         }
         public async Task<List<TarifModelHistory>> LoadHistoryAsync(int pcid)
         {
@@ -56,8 +56,11 @@ namespace SewingProduction.Features.Sprav
                     CAST(f.constant_value AS VARCHAR),
                     c.constant_value,
                     FORMAT(d.constant_value, 'yyyy-MM-dd')
-                ) AS value
+                ) AS value, 
+                u.userName, 
+                a.userComp
             FROM proizv_constant_apply_time a
+            LEFT JOIN users u ON a.userID = u.userID
             LEFT JOIN proizv_constant_store_numeric n ON a.value_id = n.pcsn_id
             LEFT JOIN proizv_constant_store_integer i ON a.value_id = i.pcsi_id
             LEFT JOIN proizv_constant_store_float f ON a.value_id = f.pcsf_id
@@ -70,7 +73,7 @@ namespace SewingProduction.Features.Sprav
         }
 
 
-        public async Task SaveTarifAsync(TarifModel model, bool isEditMode)
+        public void SaveTarifAsync(TarifModel model, bool isEditMode, int userID)
         {
             // 1. Проверка на дубликат
             string checkQuery = "SELECT COUNT(*) FROM proizv_constants WHERE constant_name = @name";
@@ -79,16 +82,16 @@ namespace SewingProduction.Features.Sprav
                 { "@name", model.constant_name }
             };
 
-            int count = await _dbHelper.ExecuteScalarAsync<int>(checkQuery, checkParams);
+            int count = _dbHelper.ExecuteScalar(checkQuery, checkParams);
             if (count > 0 && !isEditMode)
                 throw new InvalidOperationException("Константа с таким именем уже существует!");
 
             // 2. Формирование XML
             string path = @$"C:\1\ConstNew_xml.txt";
-            CreateXmlFileFromModel(model, path);
+            CreateXmlFileFromModel(model, path, userID);
 
             // 3. Чтение XML из файла
-            string xml = await File.ReadAllTextAsync(path, Encoding.GetEncoding("utf-16"));
+            string xml = File.ReadAllText(path, Encoding.GetEncoding("utf-16"));
 
             // 4. Вызов процедуры
             string sql = "exec ACE_backup_new.dbo.Add_Const @xXml";
@@ -97,10 +100,10 @@ namespace SewingProduction.Features.Sprav
                 { "@xXml", xml }
             };
 
-            await _dbHelper.ExecuteNonQueryAsync(sql, parameters);
+            _dbHelper.ExecuteNonQuery(sql, parameters);
         }
 
-        private void CreateXmlFileFromModel(TarifModel model, string path)
+        private void CreateXmlFileFromModel(TarifModel model, string path, int userID)
         {
             var encoding = Encoding.GetEncoding("utf-16");
 
@@ -145,6 +148,9 @@ namespace SewingProduction.Features.Sprav
                 WriteTag("valch", model.value_character);
                 WriteTag("valdat", model.value_datetime);
                 WriteTag("priznsign", model.priznSign);
+                WriteTag("whereuses", model.whereUses);
+                WriteTag("userid", userID);
+                WriteTag("usercomp", Environment.MachineName);
 
                 stream.WriteLine("  </constnew>");
                 stream.WriteLine("</VFPData>");

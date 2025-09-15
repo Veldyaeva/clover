@@ -30,7 +30,11 @@ namespace SewingProduction
             }
             else if (month >= 9 && month <= 11)
             {
-                imageSlider1.CurrentImageIndex = 3;//fall
+                minValue = 17;
+                maxValue = 38;
+                randomNumber = random.Next(minValue, maxValue + 1);
+                imageSlider1.CurrentImageIndex = randomNumber;//fall
+                //imageSlider1.CurrentImageIndex = 3;
             }
             else
             {

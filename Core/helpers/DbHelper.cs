@@ -359,6 +359,34 @@ namespace SewingProduction.Helpers
             }
             return res;
         }
+        /// <summary>
+        /// Проверяет, возвращает ли запрос хотя бы одну строку.
+        /// </summary>
+        /// <param name="query">SQL-запрос</param>
+        /// <param name="parameters">Параметры</param>
+        /// <returns>true, если есть хотя бы одна строка; иначе false</returns>
+        public bool Exists(string query, Dictionary<string, object> parameters = null)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+
+                    using (var reader = command.ExecuteReader(CommandBehavior.SingleRow))
+                    {
+                        return reader.HasRows;
+                    }
+                }
+            }
+        }
         #endregion
     }
 }

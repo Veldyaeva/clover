@@ -1,15 +1,25 @@
-using DevExpress.XtraGrid.Views.BandedGrid;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraEditors;
+using SewingProduction.Models;
+using SewingProduction.Services;
+using SewingProduction.Helpers;
+using DevExpress.XtraGrid.Views.BandedGrid;
+using DevExpress.XtraGrid.Views.BandedGrid.ViewInfo;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using DevExpress.Utils;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.CodeParser;
 
 namespace SewingProduction.form.TeamWork.Forms
 {
@@ -28,7 +38,7 @@ namespace SewingProduction.form.TeamWork.Forms
         private int _annId;
         public struct BandData
         {
-            public int gr { get; set; }
+            public int gr {  get; set; }
             public string Naimen { get; set; }
             public int Dras { get; set; }
             public int Drez { get; set; }
@@ -186,7 +196,7 @@ namespace SewingProduction.form.TeamWork.Forms
         }
         private void ProcessSelectedComplexity()
         {
-            _bandDataList.Clear();
+            _bandDataList.Clear(); 
 
             foreach (var band in _selectedBands)
             {
@@ -247,18 +257,18 @@ namespace SewingProduction.form.TeamWork.Forms
             string obor = raskroyList.Naimen?.TrimEnd();
             return new List<NormRask>
             {
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "301", Text = "Рассекание на куски диском", Sek = raskroyList.Dras, razryd =  5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "302", Text = "Резка диском", Sek = raskroyList.Drez, razryd = 5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "303", Text = "До проймы диск", Sek = raskroyList.Dpro, razryd =  5, N_ch = kol, Obor =  obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "311", Text = "Рассекание на куски (лента)",Sek = raskroyList.Lras, razryd = 5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "313", Text = "До проймы (лента)", Sek = raskroyList.Lpro, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "320", Text = "Перекладывание деталей", Sek = 455, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "330", Text = "Перекладывание деталей/полоска", Sek = _slogn == 1 ? 2275 : _slogn == 2 ? 3000 : 3600, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "400", Text = "Укладывание шаблона", Sek = 150, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "500", Text = "Вырезание шаблона", Sek = 320, razryd =5,  N_ch = kol, Obor = obor , Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "340", Text = "Разрезание вруч.парных дет/пол", Sek = 300, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" }
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "301", TextRask = "Рассекание на куски диском", Sek = raskroyList.Dras, razryd =  5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "302", TextRask = "Резка диском", Sek = raskroyList.Drez, razryd = 5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "303", TextRask = "До проймы диск", Sek = raskroyList.Dpro, razryd =  5, N_ch = kol, Obor =  obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "311", TextRask = "Рассекание на куски (лента)",Sek = raskroyList.Lras, razryd = 5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "313", TextRask = "До проймы (лента)", Sek = raskroyList.Lpro, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "320", TextRask = "Перекладывание деталей", Sek = 455, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "330", TextRask = "Перекладывание деталей/полоска", Sek = _slogn == 1 ? 2275 : _slogn == 2 ? 3000 : 3600, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "400", TextRask = "Укладывание шаблона", Sek = 150, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "500", TextRask = "Вырезание шаблона", Sek = 320, razryd =5,  N_ch = kol, Obor = obor , Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "340", TextRask = "Разрезание вруч.парных дет/пол", Sek = 300, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" } 
             };
         }
 
     }
-}
+} 

@@ -6,14 +6,17 @@ namespace SewingProduction.Models
     public class MyDataART : Interfaces.ICheckable, INotifyPropertyChanged
     {
         public string Articul { get; set; }
+        public string ArticulForRT { get; set; }
+        public string minSizeAll { get; set; }
+        public string maxSizeAll { get; set; }
         public string kodd_rt { get; set; }
         public string kodd { get; set; }
         [Column("grup")]
         public string grup { get; set; }
         [Column("mod")]
         public string mod { get; set; }
-        [Column("razm")]
-        public string razm { get; set; }
+        [Column("size_label")]
+        public string size_label { get; set; }
         [NotMapped]
         public string BindedArt { get; set; }
 

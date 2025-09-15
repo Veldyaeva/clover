@@ -115,7 +115,7 @@ namespace SewingProduction.Services
         public async Task<List<ArtNormN>> GetArtNormData()
         {
             string query = @" select 
-                   AnnID, kod, grup, articul, mod, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
+                   AnnID, kod, grup, RTRIM(LTRIM(articul)) articul, mod, size_label, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
                     slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId,
                     annDateDel, annCompDel, annDateAdd, annCompAdd, arh
@@ -179,10 +179,10 @@ namespace SewingProduction.Services
         public async Task<ArtNormN> GetArtNormDataById(int annId)
         {
             try
-            {
+            {//            SUBSTRING(kod,1,7) AS kod, 
                 string query = @"
         SELECT 
-            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, seb, sek_vyaz, 
+                annId, grup,  RTRIM(LTRIM(articul)) articul, mod,size_label, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
             data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
@@ -241,40 +241,40 @@ namespace SewingProduction.Services
         {
             string query = @"
                 SELECT  
-                    v.annId, v.grup, v.articul, v.mod, v.sek, v.sek_vyaz,
+                    v.annId, v.grup, v.articul, v.mod, v.size_label, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
-                    v.data_sozd, v.diz, v.constr, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
+                    v.data_sozd, v.diz, v.constr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
                 FROM ArtNormNView v
                 JOIN status_ann sa ON v.status = sa.status_id 
                 WHERE v.status != 3"; // Статус "архивное"
 
-            object parameters = null;
+            object parameters = null; 
 
             if (!includeAll)
             {
                 query += @" 
                   AND EXISTS (SELECT top 1 *
                               FROM View_sp_articul spa
-                              WHERE spa.annId = v.annId)";
-                //         parameters = new { KodParam = kod }; // Параметр для Dapper
+                              WHERE spa.annId = v.annId)"; 
+       //         parameters = new { KodParam = kod }; // Параметр для Dapper
             }
             else
             {
                 // Если all = true, условие по kodd_rt не добавляем
             }
 
-            using (var connection = _dbHelper.GetConnection())
+            using (var connection = _dbHelper.GetConnection()) 
             {
                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
-                return result.ToList();
-            }
+                return result.ToList(); 
+            } 
         }
 
         public async Task<List<MyDataANN>> GetArtNormDataByArticul(string artPrefix)
         {
             string query = @"SELECT 
-                annId, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, 
+                annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
                 status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
                 sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
                 annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
@@ -284,13 +284,13 @@ namespace SewingProduction.Services
             var parameters = new
             {
                 StatusArchive = (int)Status.Archive,
-                ArtPattern = artPrefix + "%"
+                ArtPattern = artPrefix + "%" 
             };
 
             using (var connection = _dbHelper.GetConnection())
             {
-                var result = await connection.QueryAsync<MyDataANN>(query, parameters);
-                return result.ToList();
+                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
+                 return result.ToList();
             }
         }
 
@@ -303,7 +303,7 @@ namespace SewingProduction.Services
         {
             string sql;
             var p = new DynamicParameters();
-
+            
             if (annId != null)        // поиск по AnnID
             {
                 sql = @"SELECT TOP (1) 
@@ -361,7 +361,7 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="annId">идентификатор РТ</param>
         /// <returns></returns>
-        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
+    public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
         {
             return await Task.Run(async () =>
             {
@@ -391,6 +391,18 @@ WHERE nr.annId = @annId";
                     {
                         var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
                         result = queryResult.ToList();
+
+                        // Убедимся, что Obor правильно загрузилось (есичо, берём TextOb из джойна)
+                        if (result != null)
+                        {
+                            foreach (var r in result)
+                            {
+                                if (string.IsNullOrWhiteSpace(r.Obor) && !string.IsNullOrWhiteSpace(r.TextOb))
+                                {
+                                    r.Obor = r.TextOb;
+                                }
+                            }
+                        }
 
                     }
                     catch (Exception ex)
@@ -439,6 +451,18 @@ WHERE nr.annId = @annId";
                     var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
                     result = queryResult.ToList();
 
+                    // Убедимся, что Obor правильно загрузилось (есичо, берём TextOb из вьюхи)
+                    if (result != null)
+                    {
+                        foreach (var r in result)
+                        {
+                            if (string.IsNullOrWhiteSpace(r.Obor) && !string.IsNullOrWhiteSpace(r.TextOb))
+                            {
+                                r.Obor = r.TextOb;
+                            }
+                        }
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -484,13 +508,13 @@ WHERE nr.annId = @annId";
 
                     return list.AsList();
                 }
-            }, ct);
+            }, ct); 
         }
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT id, AnnId, kod_o, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor, spec FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                 //return result.ToList();
                 var list = await connection.QueryAsync<NormRask>(
@@ -576,7 +600,7 @@ WHERE nr.annId = @annId";
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure);
                 pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
-            }
+            } 
 
             // Объединение результатов
             foreach (var row in nzpList)

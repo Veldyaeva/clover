@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction.Features.CardByNom.Models
 {
-    public class ChipInfoByNomZad
+    public class ChipInfo
     {
         public int isChip { get; set; }
     }

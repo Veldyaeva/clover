@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.Features.CuttingProduction.Forms
+﻿using SewingProduction.Core.Class;
+
+namespace SewingProduction.Features.CuttingProduction.Forms
 {
     partial class CuttingForm
     {

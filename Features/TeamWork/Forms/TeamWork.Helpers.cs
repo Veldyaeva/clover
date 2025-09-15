@@ -1,10 +1,20 @@
-﻿using DevExpress.Data.Filtering;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Models;
+﻿using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.Extensions;
+using SewingProduction.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SewingProduction.form;
+using SewingProduction.Interfaces;
+using SewingProduction.Models;
+using SewingProduction.Services;
+using DevExpress.Data.Filtering;
 using System.Windows.Forms;
+using System.Data;
+using DevExpress.XtraGrid;
+using System.ComponentModel;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -17,14 +27,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Загружаем настройки размера и положения формы
                 _formSettingsHelper.LoadFormSettings(this, "TeamWorkFormLayout.xml");
 
-                // Загружаем настройки split container
-                _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+                // Включаем автоматическое сохранение настроек для всех CustomGridControl
+                this.EnableAutoGridSettings(true);
 
-                // Загружаем настройки для всех гридов
+                // Загружаем настройки для обычных GridControl (не CustomGridControl)
                 _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.LoadGridViewSettings(normRaszTab, "gridView6Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
@@ -36,10 +46,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (gridView2 != null)
-                    _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
-                if (gridView3 != null)
-                    _gridHelper.LoadGridViewSettings(gridView3, "gridView3Layout.xml");
+                if (normKontTab != null)
+                    _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
+                if (normRaskArt != null)
+                    _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
                 if (gridView8 != null)
                     _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
             }
@@ -56,13 +66,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _formSettingsHelper.SaveFormSettings(this, "TeamWorkFormLayout.xml");
 
                 // Сохраняем настройки split container
-                _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+        //        _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
 
-                // Сохраняем настройки для всех гридов
+   
+                this.SaveAllGridSettings();
+
+                // Сохраняем настройки для обычных GridControl (не CustomGridControl)
                 _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.SaveGridViewSettings(normRaszTab, "gridView6Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
@@ -74,10 +87,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (gridView2 != null)
-                    _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
-                if (gridView3 != null)
-                    _gridHelper.SaveGridViewSettings(gridView3, "gridView3Layout.xml");
+                if (normKontTab != null)
+                    _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
+                if (normRaskArt != null)
+                    _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
                 if (gridView8 != null)
                     _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
             }
@@ -149,15 +162,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Добавляем фильтр по "Не описанные" если выбран
                 if (SortBox.Checked)
                 {
-                    var updateIsEmpty = new GroupOperator(
+                    // Условие: dateUpdate IS NULL OR дата dateUpdate = сегодня (без времени)
+                    // Необходимо, чтоб пользователь видел записи, с которыми работал сегодня
+                    var updateIsEmpty = new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"));
+                    
+                    // Сравниваем диапазон: от начала дня до конца дня
+                    var todayStart = DateTime.Today; // 00:00:00
+                    var todayEnd = DateTime.Today.AddDays(1).AddTicks(-1); // 23:59:59.9999999
+                    
+                    var updateIsToday = new GroupOperator(
+                        GroupOperatorType.And,
+                        new BinaryOperator("dateUpdate", todayStart, BinaryOperatorType.GreaterOrEqual),
+                        new BinaryOperator("dateUpdate", todayEnd, BinaryOperatorType.LessOrEqual)
+                    );
+                    
+                    var updateCondition = new GroupOperator(
                         GroupOperatorType.Or,
-                        new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
+                        updateIsEmpty,
+                        updateIsToday
                     );
 
                     var excludeArchived = new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual);
                     archiveCheckBox.Checked = false;
                     archiveCheckBox.Enabled = false;
-                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
+                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateCondition, excludeArchived);
 
                     if (statusCriteria != null)
                         statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
@@ -180,6 +208,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _logger.LogErrorAsync(ex, "Ошибка при применении фильтра");
             }
+
         }
 
         private CriteriaOperator GetStatusFilter()
@@ -216,7 +245,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return new GroupOperator(
                     GroupOperatorType.And,
                     new BinaryOperator("sek_shv", 0),
-                    new BinaryOperator("status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
+                    new BinaryOperator("Status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
                 );
             }
 
@@ -261,6 +290,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 view.BeginUpdate();
                 view.ActiveFilterString = filter;
                 view.EndUpdate();
+                
+                // Автоматически переходим на первую строку результатов фильтрации
+                //view.BeginInvoke(new Action(() =>
+                //{
+                    try
+                    {
+                        if (view.DataRowCount > 0)
+                        {
+                            int firstVisibleRow = view.GetVisibleRowHandle(0);
+                            if (view.IsValidRowHandle(firstVisibleRow))
+                            {
+                                view.FocusedRowHandle = firstVisibleRow;
+                                view.MakeRowVisible(firstVisibleRow);
+                                
+                                // Логируем действие
+                                _logger?.LogEventAsync($"Автоматический переход на первую строку после применения фильтра по annId {_annId}. Всего строк: {view.DataRowCount}", "LoadGridControlData");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку после применения фильтра по annId");
+                    }
+              //  }));
             }
             catch (Exception ex)
             {
@@ -275,11 +328,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             return new MyDataANN
             {
                 AnnID = ann.AnnID,
-                Kod = ann.Kod,
+                //Kod = ann.Kod,
                 Articul = ann.Articul,
                 Status = ann.Status,
                 grup = ann.grup,
                 mod = ann.Mod,
+                dateUpdate = ann.dateUpdate,
             };
         }
 

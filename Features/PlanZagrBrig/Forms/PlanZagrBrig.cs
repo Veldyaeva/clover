@@ -49,7 +49,7 @@ namespace SewingProduction.form
                                          nlGrupK = row.Field<string>("nlGrupK"),
                                          nlArticulK = row.Field<string>("nlArticulK"),
                                          nlModK = row.Field<string>("nlModK"),
-                                         nlKoddRt = row.Field<string>("nlKoddRt"),
+                                         nlAnnID = row.Field<int>("nlAnnID"),
                                          nlKodd = row.Field<string>("nlKodd"),
                                          nlKodd7 = row.Field<string>("nlKodd7"),
                                      } into g
@@ -61,7 +61,7 @@ namespace SewingProduction.form
                                          alGrupK = g.Key.nlGrupK,
                                          alArticulK = g.Key.nlArticulK,
                                          alModK = g.Key.nlModK,
-                                         alKoddRt = g.Key.nlKoddRt,
+                                         alAnnID = g.Key.nlAnnID,
                                          alKodd = g.Key.nlKodd,
                                          alKodd7 = g.Key.nlKodd7,
                                          alV = 0,
@@ -100,7 +100,7 @@ namespace SewingProduction.form
                                       nlBrig = nl.Field<string>("nlBrig"),
                                       nlNomZad = nl.Field<string>("nlNomZad"),
                                       nlKodd = nl.Field<string>("nlKodd"),
-                                      nlKoddRt = nl.Field<string>("nlKoddRt"),
+                                      nlAnnID = nl.Field<int>("nlAnnID"),
                                       nlGrup = nl.Field<string>("nlGrup"),
                                       nlArticul = nl.Field<string>("nlArticul"),
                                       nlMod = nl.Field<string>("nlMod"),
@@ -217,15 +217,15 @@ namespace SewingProduction.form
                 DataRow _CurrRow = drNomListFoundRow[0]; // Take the first matching row (if there are multiple matches).
                 string _nlArticul = _CurrRow["nlArticul"].ToString();
                 string _nlMod = _CurrRow["nlMod"].ToString();
-                string _nlKoddRT = _CurrRow["nlKoddRT"].ToString();
+                int _nlAnnID = (int)_CurrRow["nlAnnID"];
                 string _nlArticulK = _CurrRow["nlArticulK"].ToString();
                 string _nlModK = _CurrRow["nlModK"].ToString();
                 dtPzArticulList.PrimaryKey = new DataColumn[] { dtPzArticulList.Columns["alArticul"],
                                                                                         dtPzArticulList.Columns["alMod"],
-                                                                                        dtPzArticulList.Columns["alKoddRT"],
+                                                                                        dtPzArticulList.Columns["alAnnID"],
                                                                                         dtPzArticulList.Columns["alArticulK"],
                                                                                         dtPzArticulList.Columns["alModK"] };
-                object[] compositeKeyValue = { _nlArticul, _nlMod, _nlKoddRT, _nlArticulK, _nlModK };
+                object[] compositeKeyValue = { _nlArticul, _nlMod, _nlAnnID, _nlArticulK, _nlModK };
                 DataRow drPzArticulList = dtPzArticulList.Rows.Find(compositeKeyValue);
 
                 gridViewPzArticulList.FocusedRowHandle = gridViewPzArticulList.LocateByValue("alRowNumber", drPzArticulList["alRowNumber"].ToString());
@@ -872,7 +872,7 @@ namespace SewingProduction.form
                 string[,] DelCriteria = {
                     { "olNom", gridViewPzNomList.GetDataRow(gridViewPzNomList.FocusedRowHandle)["nlNom"].ToString()},
                     { "olNomN", gridViewPzNomList.GetDataRow(gridViewPzNomList.FocusedRowHandle)["nlNomN"].ToString()},
-                    { "olKoddRt", gridViewPzNomList.GetDataRow(gridViewPzNomList.FocusedRowHandle)["nlKoddRt"].ToString()}
+                    { "olAnnID", gridViewPzNomList.GetDataRow(gridViewPzNomList.FocusedRowHandle)["nlAnnID"].ToString()}
                 };
                 DeleteRowsByCriteria(dtPzOperList, DelCriteria);
                 bsPzOperList.DataSource = dtPzOperList;

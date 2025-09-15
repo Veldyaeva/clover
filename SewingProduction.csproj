@@ -13,9 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.WorkDivisions1.cs" />
+    <Compile Remove="Features\TeamWork\Forms\_TeamWork.Designer.cs" />
+    <Compile Remove="Features\TeamWork\Forms\_TeamWork.Helpers.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ANNGridViewHelper.cs" />
     <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
@@ -227,7 +230,7 @@
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="6.0.1" />
-    <PackageReference Include="Z.Dapper.Plus" Version="7.6.1" />
+    <PackageReference Include="Z.Dapper.Plus" Version="8.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -244,6 +247,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Properties\PublishProfiles\anyCPU.pubxml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\PublishProfiles\ClickOnceProfile.pubxml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Properties\PublishProfiles\ver.x32.pubxml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -256,6 +268,8 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
+    <Folder Include="Features\SockProduction\Models\" />
+    <Folder Include="Features\SockProduction\Services\" />
     <Folder Include="Features\Sprav\Helpers\" />
   </ItemGroup>
 
