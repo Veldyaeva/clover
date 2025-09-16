@@ -43,6 +43,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -1582,6 +1583,9 @@ namespace SewingProduction
 
         private void simpleButtonPrintNaklXtraReport_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
             NaklReport report1 = new NaklReport();
             report1.RequestParameters = false;
             //report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
@@ -1589,6 +1593,40 @@ namespace SewingProduction
             report1.Parameters["_naklIz"].Value = selectedRow.Iz;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
+
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //report1 = new NaklReport();
+            //report1.RequestParameters = false;
+            ////report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
+            //selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+            //reportPrintTool1 = new ReportPrintTool(report1);
+            //reportPrintTool1.ShowPreviewDialog();
+
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //report1 = new NaklReport();
+            //report1.RequestParameters = false;
+            ////report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
+            //selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+            //reportPrintTool1 = new ReportPrintTool(report1);
+            //reportPrintTool1.ShowPreviewDialog();
+
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //report1 = new NaklReport();
+            //report1.RequestParameters = false;
+            ////report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
+            //selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+            //reportPrintTool1 = new ReportPrintTool(report1);
+            //reportPrintTool1.ShowPreviewDialog();
+
         }
 
         private async void simpleButtonNaklPart_Click(object sender, EventArgs e)
@@ -1626,19 +1664,22 @@ namespace SewingProduction
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
-            if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
-            {
-                report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
-                report1.Parameters["_isChip"].Value = IsChip;
-                report1.Parameters["_isUpak"].Value = 0;
-                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-                reportPrintTool1.ShowPreviewDialog();
-            }
-            else
-            {
-                MessageBox.Show("Не выбран расчет для печати");
-            }
+            report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+            report1.Parameters["_isChip"].Value = IsChip;
+            report1.Parameters["_isUpak"].Value = 0;
+            //var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
+            //{
+            //    report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+            //    report1.Parameters["_isChip"].Value = IsChip;
+            //    report1.Parameters["_isUpak"].Value = 0;
+            //    ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            //    reportPrintTool1.ShowPreviewDialog();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Не выбран расчет для печати");
+            //}
         }
 
         private void simpleButtonPrintMLRTUpak_Click(object sender, EventArgs e)
