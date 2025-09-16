@@ -96,10 +96,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 else
                 {
                     // Если нет выбранных строк в gridView_wdToBind - очищаем все связанные данные
-                    _normRaszListArticles.Clear();
-                    _normRaszBindingSourceArticles.ResetBindings(false);
-                    _normRaskListArticles.Clear();
-                    _normRaskBindingSourceArticles.ResetBindings(false);
+                    if (_normRaszListArticles is not null)_normRaszListArticles.Clear();
+                    if (_normRaszBindingSourceArticles is not null) _normRaszBindingSourceArticles.ResetBindings(false);
+                    if (_normRaskListArticles is not null) _normRaskListArticles.Clear();
+                    if (_normRaskBindingSourceArticles is not null)_normRaskBindingSourceArticles.ResetBindings(false);
                     await ClearWdToBindRelatedData();
                 }
 
@@ -171,7 +171,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 int kod = GetCurrentKodFromDataSource();
-                bool loadAll = loadAllCheckBox.Checked;
+                bool loadAll = FindButtonByTag(layoutControlGroup14, "bind:show-all").Checked;
                     //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
                 List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAll);
 
@@ -232,7 +232,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 List<MyDataANN> relatedData = new List<MyDataANN>();
-                bool loadAll = string.IsNullOrEmpty(articul);//loadAllCheckBox.Checked;
+                bool loadAll = string.IsNullOrEmpty(articul);//showAllWD;
                 ////loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
 
                 // Если включен чекбокс "Загрузить все"
@@ -768,16 +768,19 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             try
             {
-                // При смене строки очищаем фильтры gridView_wdToBind и снимаем галку loadAllCheckBox
+                // При смене строки очищаем фильтры gridView_wdToBind и снимаем галку showAllWD
                 if (gridView_wdToBind != null)
                 {
                     gridView_wdToBind.ActiveFilter.Clear();
                     gridView_wdToBind.ActiveFilterString = string.Empty;
                 }
 
-                if (loadAllCheckBox != null)
+                // Обновляем состояние кнопки и переменной showAllWD
+                var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
+                if (showAllButton != null)
                 {
-                    loadAllCheckBox.Checked = false;
+                    showAllButton.Checked = false;
+                    showAllWD = false;
                 }
                 if (layoutControlGroup14 != null)
                 {

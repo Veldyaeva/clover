@@ -343,14 +343,14 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 if (selectedRow == null)
                 {
-                    ButtonUnboundWd.Enabled = false;
+                    ButtonUnbindWd.Enabled = false;
                     return;
                 }
 
                 int nzp = selectedRow.kolNZP;
                 int pzt = selectedRow.PZTCount;
 
-                ButtonUnboundWd.Enabled = (nzp <= 0 || pzt <= 0);
+                ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
             }
             catch (Exception ex)
             {
@@ -358,7 +358,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await _logger.LogErrorAsync(ex, "Ошибка при обновлении статуса кнопки отвязки НЗП");
                 }
-                ButtonUnboundWd.Enabled = false; 
+                ButtonUnbindWd.Enabled = false; 
             }
         }
         /// <summary>
@@ -1309,7 +1309,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Обработчик кнопки "Отвязать артикул от РТ" для вкладки артикулов.
         /// Использует универсальную процедуру UnbindArticulesFromWorkDivision_Internal.
         /// </summary>
-        private async Task UnboundWD(object sender, EventArgs e)
+        private async Task UnbindWD(object sender, EventArgs e)
         {
             await _logger.LogEventAsync("UnboundWD: Отвязка РТ от артикула на вкладке артикулов");
             

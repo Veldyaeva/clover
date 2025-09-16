@@ -71,6 +71,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingSource _preArchBindingSource;
         private BindingList<ArtNormN> _archList;
         private BindingSource _archBindingSource;
+        
+        // Глобальная переменная для состояния кнопки "показать все"
+        private bool showAllWD = false;
+        
+        // Объект для управления доступностью кнопки "bind:unlink"
+        private ButtonUnbindWd ButtonUnbindWd;
         private BindingList<MyDataART> _myDataArtList;
         private BindingSource _myDataArtBindingSource;
         private BindingList<MyDataANN> _myDataAnnList;
@@ -131,7 +137,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             _nzpListWd = new BindingList<NZPByKoddRt>();
             _nzpByKoddRtSourceWd = new BindingSource { DataSource = _nzpListWd };
-            if (customGridControl4 != null) customGridControl4.DataSource = _nzpByKoddRtSourceWd;
+            if (GridControlBindedArts != null) GridControlBindedArts.DataSource = _nzpByKoddRtSourceWd;
 
             // Инициализация для вкладки "Работа с артикулами"
             _myDataArtList = new BindingList<MyDataART>();
@@ -393,6 +399,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await RestoreFocusAsync(_lastFocusedAnnId);
                 }
+                InitHeaderButtonTags();
+                
+                // Инициализируем переменную состояния кнопки "показать все"
+                var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
+                if (showAllButton != null)
+                {
+                    showAllWD = showAllButton.Checked;
+                }
+                
+                // Инициализируем объект управления кнопкой "bind:unlink"
+                ButtonUnbindWd = new ButtonUnbindWd(layoutControlGroup14, "bind:unlink");
             }
             catch (Exception ex)
             {
@@ -563,7 +580,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-
+            
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
         }
 
@@ -586,9 +603,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             ButtonCopyWd_Click_Internal(sender, e);
         }
-        private async void gridView5_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridViewNZP_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            gridView5_FocusedRowChanged_Internal(sender, e);
+            gridViewNZP_FocusedRowChanged_Internal(sender, e);
         }
         /// <summary>
         /// Обрабатывает смену строки в неувязанных артикулах
@@ -773,10 +790,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private async void loadAllCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            loadAllCheckBox_CheckedChanged_Internal(sender, e, loadAllCheckBox.Checked);
-        }
 
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -1012,7 +1025,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ButtonUnboundWd_Click(object sender, EventArgs e)
         {
-            UnboundWD(sender, e);
+            UnbindWD(sender, e);
         }
 
         private async void ANNgridView_CellValueChanged(object sender, CellValueChangedEventArgs e)
@@ -1082,7 +1095,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 9:
                     //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
                     if (PrintButton.Enabled && PrintButton.Visible)
-                        // Отчет технологической схемы разделения труда
+                    // Отчет технологической схемы разделения труда
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
                 case 11:
@@ -1118,14 +1131,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await BindButton_Click_Internal(sender, e);// увязать
                     break;
                 case 2:
-                    await UnboundWD(sender, e);
+                    await UnbindWD(sender, e);
                     break;
                 case 4:
                     await SetUpdateDate_Internal(sender, e);
                     break;
-                //case 6:
-                //    loadAllCheckBox_CheckedChanged_Internal(sender, e, );
-                //    break;
             }
         }
 
@@ -1165,7 +1175,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _gridHelper.popUpMenuCopy(sender, e);
         }
 
-        private void gridView1_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        private void gridViewRaszTW_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             _gridHelper.popUpMenuCopy(sender, e);
         }
@@ -1389,7 +1399,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Используем универсальную процедуру для первой вкладки
             await UnbindArticulesFromWorkDivision_Internal(
-                gridView5,           // GridView НЗП (customGridControl4)
+                gridViewBindedArts,           // GridView НЗП (customGridControl4)
                 _nzpListWd,          // Источник данных НЗП для первой вкладки
                 ANNgridView,         // GridView с РТ (ArtNormN)
                 useCheckedRows: false // Используем текущую выбранную строку
@@ -1401,6 +1411,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             await MarkWorkDivisionForDeletion_Internal(sender, e);
         }
 
+
         private void ModeRadio_CheckedChanged(object sender, EventArgs e)
         {
             ModeRadio_CheckedChanged_internal(sender, e);
@@ -1408,12 +1419,22 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void layoutControlGroup14_CustomButtonChecked(object sender, BaseButtonEventArgs e)
         {
-            loadAllCheckBox_CheckedChanged_Internal(sender, e, ((DevExpress.XtraEditors.ButtonPanel.BaseButton)e.Button).Checked);
+            var button = e.Button as DevExpress.XtraEditors.ButtonPanel.BaseButton;
+            if (button != null)
+            {
+                showAllWD = button.Checked;
+                loadAllCheckBox_CheckedChanged_Internal(sender, e, button.Checked);
+            }
         }
 
         private void layoutControlGroup14_CustomButtonUnchecked(object sender, BaseButtonEventArgs e)
         {
-            loadAllCheckBox_CheckedChanged_Internal(sender, e, ((DevExpress.XtraEditors.ButtonPanel.BaseButton)e.Button).Checked);
+            var button = e.Button as DevExpress.XtraEditors.ButtonPanel.BaseButton;
+            if (button != null)
+            {
+                showAllWD = button.Checked;
+                loadAllCheckBox_CheckedChanged_Internal(sender, e, button.Checked);
+            }
         }
     }
 }

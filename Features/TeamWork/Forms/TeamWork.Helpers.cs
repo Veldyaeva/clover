@@ -1,8 +1,10 @@
 ﻿using DevExpress.Data.Filtering;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
 using SewingProduction.Core.Extensions;
 using SewingProduction.form;
 using SewingProduction.Helpers;
@@ -34,28 +36,26 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Включаем автоматическое сохранение настроек для всех CustomGridControl
                 this.EnableAutoGridSettings(true);
 
-                // Загружаем настройки для обычных GridControl (не CustomGridControl)
-                _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-                _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.LoadGridViewSettings(normRaszTab, "gridView6Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
-                _gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
-                _gridHelper.LoadGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
-                _gridHelper.LoadGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
-                _gridHelper.LoadGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
+                //// Загружаем настройки для обычных GridControl (не CustomGridControl)
+                //_gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+                //_gridHelper.LoadGridViewSettings(gridViewRaszTW, "gridView1Layout.xml");
+                //_gridHelper.LoadGridViewSettings(gridViewKontTW, "gridView4Layout.xml");
+                //_gridHelper.LoadGridViewSettings(normRaszTab, "gridView6Layout.xml");
+                //_gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
+                //_gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
+                //_gridHelper.LoadGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
+                //_gridHelper.LoadGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
+                //_gridHelper.LoadGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
 
-                // Добавляем другие гриды, если они есть
-                if (gridViewRaskrTW != null)
-                    _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
-                if (gridView5 != null)
-                    _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (normKontTab != null)
-                    _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
-                if (normRaskArt != null)
-                    _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
-                if (gridView8 != null)
-                    _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
+                //// Добавляем другие гриды, если они есть
+                //if (gridViewRaskrTW != null)
+                //    _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
+                //if (gridViewBindedArts != null)
+                //    _gridHelper.LoadGridViewSettings(gridViewBindedArts, "gridView5Layout.xml");
+                //if (normKontTab != null)
+                //    _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
+                //if (normRaskArt != null)
+                //    _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
             }
             catch (Exception ex)
             {
@@ -75,28 +75,26 @@ namespace SewingProduction.Features.TeamWork.Forms
    
                 this.SaveAllGridSettings();
 
-                // Сохраняем настройки для обычных GridControl (не CustomGridControl)
-                _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-                _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.SaveGridViewSettings(normRaszTab, "gridView6Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
-                _gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
-                _gridHelper.SaveGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
-                _gridHelper.SaveGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
-                _gridHelper.SaveGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
+                //// Сохраняем настройки для обычных GridControl (не CustomGridControl)
+                //_gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+                //_gridHelper.SaveGridViewSettings(gridViewRaszTW, "gridView1Layout.xml");
+                //_gridHelper.SaveGridViewSettings(gridViewKontTW, "gridView4Layout.xml");
+                //_gridHelper.SaveGridViewSettings(normRaszTab, "gridView6Layout.xml");
+                //_gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
+                //_gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
+                //_gridHelper.SaveGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
+                //_gridHelper.SaveGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
+                //_gridHelper.SaveGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
 
-                // Добавляем другие гриды, если они есть
-                if (gridViewRaskrTW != null)
-                    _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
-                if (gridView5 != null)
-                    _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (normKontTab != null)
-                    _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
-                if (normRaskArt != null)
-                    _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
-                if (gridView8 != null)
-                    _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
+                //// Добавляем другие гриды, если они есть
+                //if (gridViewRaskrTW != null)
+                //    _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
+                //if (gridViewBindedArts != null)
+                //    _gridHelper.SaveGridViewSettings(gridViewBindedArts, "gridView5Layout.xml");
+                //if (normKontTab != null)
+                //    _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
+                //if (normRaskArt != null)
+                //    _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
             }
             catch (Exception ex)
             {
@@ -185,6 +183,100 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridView.EndUpdate();
             }
         }
+
+        #endregion
+
+        #region Header Buttons
+
+
+        private void InitHeaderButtonTags()
+        {
+            // layoutControlGroup8 — «Разделения труда»
+            TagByCaption(layoutControlGroup8, new (string caption, string tag)[] {
+                ("Добавить предварительное", "wd:add-prelim"),
+                ("Редактировать РТ",          "wd:edit"),
+                ("Дубль",                     "wd:clone"),
+                ("Архив РТ",                  "wd:archive"),
+                ("Печать",                    "wd:print"),
+                ("Печать+",                   "wd:print-plus"),
+            });
+
+            // layoutControlGroup14 — блок увязки
+            TagByCaption(layoutControlGroup14, new[] {
+                ("Увязать",                   "bind:link"),
+                ("Отвязать",                  "bind:unlink"),
+                ("Проставить утверждение",   "bind:touch-update-date"),
+                (" все РТ",                  "bind:show-all") // это check-button
+            });
+
+            // layoutControlGroup2 — «РТ для увязки»
+            // Две кнопки уже имеют теги в дизайнере: btnArch, btnArt. Добавим недостающие, если будут.
+            TagByCaption(layoutControlGroup2, new[] {
+                ("Архив+копия",              "rt:arch-and-copy"),   // будет проставлен, если Tag ещё пуст
+                ("Создать из артикула",      "rt:create-from-article")
+            });
+
+            // layoutControlGroup19 — Архив
+            TagByCaption(layoutControlGroup19, new[] {
+                ("Вернуть в актуальные",     "arch:restore") // если такая подпись есть
+            });
+
+            // Если есть group6 (создать из артикула) — можно пометить и её
+            if (layoutControlGroup6 != null)
+                AutoTagAllButtons(layoutControlGroup6, "g6");
+        }
+
+        private void TagByCaption(LayoutControlGroup group, IEnumerable<(string caption, string tag)> map)
+        {
+            if (group == null || group.CustomHeaderButtons == null) return;
+
+            foreach (var (caption, tag) in map)
+            {
+                var btn = group.CustomHeaderButtons
+                               .OfType<GroupBoxButton>()
+                               .FirstOrDefault(b => string.Equals(b.Caption, caption, StringComparison.OrdinalIgnoreCase));
+                if (btn != null && (btn.Tag == null || string.IsNullOrWhiteSpace(btn.Tag.ToString())))
+                {
+                    btn.Tag = tag;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Проставляет авто-теги всем кнопкам, у которых Tag ещё пуст (slug из подписи)
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="prefix"></param>
+        private void AutoTagAllButtons(LayoutControlGroup group, string prefix = null)
+        {
+            if (group == null || group.CustomHeaderButtons == null) return;
+            foreach (var btn in group.CustomHeaderButtons.OfType<GroupBoxButton>())
+            {
+                if (btn.Tag != null && !string.IsNullOrWhiteSpace(btn.Tag.ToString())) continue;
+                var slug = MakeSlug(btn.Caption);
+                btn.Tag = string.IsNullOrEmpty(prefix) ? slug : $"{prefix}:{slug}";
+            }
+        }
+        private static string MakeSlug(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return "";
+            var chars = text.Trim()
+                            .ToLowerInvariant()
+                            .Select(ch => char.IsLetterOrDigit(ch) ? ch : '-')
+                            .ToArray();
+            var raw = new string(chars);
+            while (raw.Contains("--")) raw = raw.Replace("--", "-");
+            return raw.Trim('-');
+        }
+        /// <summary>
+        /// Поиск кнопки по тегу
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        private static GroupBoxButton FindButtonByTag(LayoutControlGroup group, string tag) =>
+    group?.CustomHeaderButtons?.OfType<GroupBoxButton>()
+         .FirstOrDefault(b => string.Equals(b.Tag as string, tag, StringComparison.OrdinalIgnoreCase));
 
         #endregion
 
@@ -541,11 +633,17 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
+                bool showAll = showAllWD;
+                //var showAll = ;
+                //if (showAll != null)
+                //{
+                //    showAll.Checked;
+                //}
                 // Восстанавливаем данные для gridView_unboundArts
                 await MyDataArtLoad();
 
-                // Восстанавливаем данные для gridView_wdToBind в зависимости от состояния loadAllCheckBox
-                if (loadAllCheckBox != null && loadAllCheckBox.Checked)
+                // Восстанавливаем данные для gridView_wdToBind в зависимости от состояния showAllWD
+                if (showAll)
                 {
                     var allWorks = await LoadWorksbyArt("");
                     if (allWorks != null)
@@ -568,7 +666,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 else
                 {
-                    // Если loadAllCheckBox не отмечен, очищаем данные
+                    // Если showAllWD не отмечен, очищаем данные
                     _myDataAnnList.Clear();
                     _myDataAnnBindingSource.ResetBindings(false);
                 }

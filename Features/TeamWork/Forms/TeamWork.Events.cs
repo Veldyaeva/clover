@@ -37,14 +37,15 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <summary>
         /// Обработчик смены выбранной строки в customGridControl5
         /// </summary>
-        private async void gridView5_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
+        private async void gridViewNZP_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             try
             {
+                
                 var view = sender as GridView;
                 if (view == null || e.FocusedRowHandle < 0)
                 {
-                    ButtonUnboundWd.Enabled = false; 
+                    ButtonUnbindWd.Enabled = false; 
                     return;
                 }
 
@@ -52,7 +53,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var selectedRow = view.GetRow(e.FocusedRowHandle) as NZPByKoddRt;
                 if (selectedRow == null)
                 {
-                    ButtonUnboundWd.Enabled = false; 
+                    ButtonUnbindWd.Enabled = false; 
                     await _logger.LogWarningAsync($"Не удалось получить объект NZPByKoddRt для строки {e.FocusedRowHandle}", "gridView5_FocusedRowChanged_Internal");
                     return;
                 }
@@ -61,18 +62,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int pzt = selectedRow.PZTCount; 
 
                 // Кнопка активна, если либо нет НЗП, либо нет PZT операций
-                ButtonUnboundWd.Enabled = (nzp <= 0 || pzt <= 0);
+                ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
             }
             catch (Exception ex)
             {
-                ButtonUnboundWd.Enabled = false; 
+                ButtonUnbindWd.Enabled = false; 
                 await _logger.LogErrorAsync(ex, "Ошибка при обработке смены строки в GridView5");
             }
         }
 
         /// <summary>
         /// Гарантирует, что `IsChecked` может быть установлен только у одной строки.
-        /// Работает с `gridView7` и `gridView8`, а также с любым другим `GridView`, где используется `IsChecked`.
+        /// Работает с `gridView7` и `gridView_wdToBind`, а также с любым другим `GridView`, где используется `IsChecked`.
         /// </summary>
         /// <typeparam name="T">Тип данных, реализующий `ICheckable`</typeparam>
         /// <param name="gridControl">GridControl, где произошло изменение</param>
@@ -133,7 +134,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         /// <summary>
         /// Обработчик изменения состояния customCheckBox6.  
-        /// Фильтрует gridView8 по статусу.
+        /// Фильтрует gridView_wdToBind по статусу.
         /// </summary>
         private async void customCheckBox6_CheckedChanged_Internal(object sender, EventArgs e)
         {
@@ -739,8 +740,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             if (selectedRowHandle >= 0)
             {
-                gridView1.FocusedRowHandle = selectedRowHandle;
-                gridView1.SelectRow(selectedRowHandle);
+                gridViewRaszTW.FocusedRowHandle = selectedRowHandle;
+                gridViewRaszTW.SelectRow(selectedRowHandle);
                 selectedRowHandle = -1;
             }
         }
@@ -1330,7 +1331,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 // Проверяем, что gриды инициализированы
-                if (ANNgridView == null || gridView5 == null)
+                if (ANNgridView == null || gridViewBindedArts == null)
                 {
                     MessageBox.Show("Грид не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     await _logger.LogErrorAsync(new Exception("Грид не инициализирован"), "UpdateSpArticulArch_Internal");
@@ -1356,14 +1357,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int annId = selectedAnn.AnnID;
 
                 // Получаем артикул из выбранной строки в gridView5
-                if (gridView5.FocusedRowHandle < 0)
+                if (gridViewBindedArts.FocusedRowHandle < 0)
                 {
                     MessageBox.Show("Выберите запись в гриде НЗП.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     await _logger.LogWarningAsync("Попытка обновления arch без выбора строки в gridView5", "UpdateSpArticulArch_Internal");
                     return;
                 }
 
-                var selectedNzp = gridView5.GetRow(gridView5.FocusedRowHandle) as NZPByKoddRt;
+                var selectedNzp = gridViewBindedArts.GetRow(gridViewBindedArts.FocusedRowHandle) as NZPByKoddRt;
                 if (selectedNzp == null)
                 {
                     MessageBox.Show("Не удалось получить данные выбранной записи в гриде НЗП.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1589,7 +1590,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (_loadAll)
                 {
                     list = await LoadWorksbyArt("");
-                    await _logger.LogEventAsync("loadAllCheckBox: Загружены все РТ", "loadAllCheckBox_CheckedChanged");
+                    await _logger.LogEventAsync("showAllWD: Загружены все РТ", "loadAllCheckBox_CheckedChanged");
                 }
                 else if (!_loadAll)
                 {
@@ -1613,7 +1614,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
 
                     list = await LoadWorksbyArt(articul);
-                    await _logger.LogEventAsync($"loadAllCheckBox: Загружены РТ для артикула '{articul}'", "loadAllCheckBox_CheckedChanged");
+                    await _logger.LogEventAsync($"showAllWD: Загружены РТ для артикула '{articul}'", "loadAllCheckBox_CheckedChanged");
                 }
             // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
             //var bindingList = new BindingList<MyDataANN>(list);
