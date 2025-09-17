@@ -875,9 +875,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonEditOnlyAdv.Visible = true;
             ButtonArchAndCopyWd.Visible = true;
             ButtonDouble.Visible = true;
-            ButtonPreliminaryWd.Visible = true;
+           // ButtonPreliminaryWd.Visible = true;
             ButtonCopyWd.Visible = true;
             KITlabel.Visible = false;
+            KITlabel.VisibleLogic = false;
+            ButtonPreliminaryWd.VisibleLogic = false;
             ButtonPreliminaryWd.Visible = false;
             //var btn0 = layoutControlGroup8.CustomHeaderButtons[0]
             //            as DevExpress.XtraLayout.Custom.CustomConstraintsSimpleButton;// Восстанавливаем обычный текст кнопки
@@ -904,7 +906,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonEditOnlyAdv.Visible = false;
             ButtonArchAndCopyWd.Visible = false;
             ButtonDouble.Visible = false;
+            ButtonPreliminaryWd.VisibleLogic = true;
             ButtonPreliminaryWd.Visible = true;
+            KITlabel.VisibleLogic = true;
             KITlabel.Visible = true;
             KITlabel.ForeColor = Color.Red;
 

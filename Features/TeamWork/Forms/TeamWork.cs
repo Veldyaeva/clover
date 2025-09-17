@@ -74,7 +74,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         
         // Глобальная переменная для состояния кнопки "показать все"
         private bool showAllWD = false;
-        
+
+        //// Глобальная переменная для управления видимостью кнопки customSimpleButtonUnbind
+        //private bool customSimpleButtonUnbindVisible = true;
         // Объект для управления доступностью кнопки "bind:unlink"
         private ButtonUnbindWd ButtonUnbindWd;
         private BindingList<MyDataART> _myDataArtList;
@@ -407,7 +409,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     showAllWD = showAllButton.Checked;
                 }
-                
+
                 // Инициализируем объект управления кнопкой "bind:unlink"
                 ButtonUnbindWd = new ButtonUnbindWd(layoutControlGroup14, "bind:unlink");
             }
@@ -1399,7 +1401,8 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Используем универсальную процедуру для первой вкладки
             await UnbindArticulesFromWorkDivision_Internal(
-                gridViewBindedArts,           // GridView НЗП (customGridControl4)
+                gridViewNZP,           // GridView НЗП (customGridControl4)
+               //gridViewBindedArts,
                 _nzpListWd,          // Источник данных НЗП для первой вкладки
                 ANNgridView,         // GridView с РТ (ArtNormN)
                 useCheckedRows: false // Используем текущую выбранную строку
@@ -1411,6 +1414,43 @@ namespace SewingProduction.Features.TeamWork.Forms
             await MarkWorkDivisionForDeletion_Internal(sender, e);
         }
 
+        ///// <summary>
+        ///// Устанавливает видимость кнопки customSimpleButtonUnbind
+        ///// </summary>
+        ///// <param name="visible">Видимость кнопки</param>
+        //private void SetCustomSimpleButtonUnbindVisible(bool visible)
+        //{
+        //    customSimpleButtonUnbindVisible = visible;
+        //    if (customSimpleButtonUnbind != null)
+        //    {
+        //        customSimpleButtonUnbind.Visible = visible;
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Получает состояние видимости кнопки customSimpleButtonUnbind
+        ///// </summary>
+        ///// <returns>true если кнопка видима</returns>
+        //private bool GetCustomSimpleButtonUnbindVisible()
+        //{
+        //    return customSimpleButtonUnbindVisible;
+        //}
+
+        ///// <summary>
+        ///// Показать кнопку отвязки артикулов
+        ///// </summary>
+        //private void ShowUnbindButton()
+        //{
+        //    SetCustomSimpleButtonUnbindVisible(true);
+        //}
+
+        ///// <summary>
+        ///// Скрыть кнопку отвязки артикулов
+        ///// </summary>
+        //private void HideUnbindButton()
+        //{
+        //    SetCustomSimpleButtonUnbindVisible(false);
+        //}
 
         private void ModeRadio_CheckedChanged(object sender, EventArgs e)
         {
