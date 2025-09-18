@@ -1,18 +1,12 @@
-﻿using SewingProduction.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Z.Dapper;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
+﻿using Dapper;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SewingProduction.Core.Services
 {
@@ -55,7 +49,7 @@ namespace SewingProduction.Core.Services
                     var xPachKod = pachKod + "%";
                     string query = $"select * " +
                                     $"  from View_plan_sezon_otdelka " +
-                                    $"  where nn = (SELECT nn from plan_sezon_zad WHERE nom = (SELECT nom_zad FROM raskr_zeh_up WHERE pach_kod LIKE @pachKod)) " ;
+                                    $"  where nn = (SELECT nn from plan_sezon_zad WHERE nom = (SELECT nom_zad FROM raskr_zeh_up WHERE pach_kod LIKE @pachKod)) ";
 
                     var result = await connection.QueryAsync<PlanSezonOtdelkaView>(query, new Dictionary<string, object> { { "@pachKod", xPachKod } });
                     return result.ToList();

@@ -85,7 +85,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions30 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions31 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions32 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions33 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork));
             repositoryItemCheckEdit1 = new RepositoryItemCheckEdit();
             repositoryItemButtonEdit2 = new RepositoryItemButtonEdit();
@@ -373,7 +372,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView3 = new GridView();
             gridControlArch = new CustomGridControl();
             gridViewArch = new GridView();
-            gridColumn66 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn60 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn61 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn62 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -669,11 +667,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             printButtonPlus.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             printButtonPlus.AppearanceDisabled.Options.UseBackColor = true;
             printButtonPlus.AppearanceDisabled.Options.UseForeColor = true;
-            printButtonPlus.Location = new System.Drawing.Point(135, 145);
+            printButtonPlus.Location = new System.Drawing.Point(19, 145);
             printButtonPlus.Name = "printButtonPlus";
-            printButtonPlus.Size = new System.Drawing.Size(112, 22);
+            printButtonPlus.Size = new System.Drawing.Size(228, 22);
             printButtonPlus.StyleController = layoutControl2;
-            printButtonPlus.TabIndex = 2;
+            printButtonPlus.TabIndex = 8;
             printButtonPlus.Text = "печать +";
             printButtonPlus.Click += printButtonPlus_Click;
             // 
@@ -688,7 +686,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBoxForAdmins.Location = new System.Drawing.Point(25, 805);
             customGroupBoxForAdmins.Name = "customGroupBoxForAdmins";
             customGroupBoxForAdmins.Size = new System.Drawing.Size(216, 110);
-            customGroupBoxForAdmins.TabIndex = 11;
+            customGroupBoxForAdmins.TabIndex = 17;
             customGroupBoxForAdmins.TabStop = false;
             // 
             // customSimpleButton6
@@ -792,7 +790,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             constructorTextBox.Location = new System.Drawing.Point(19, 594);
             constructorTextBox.Name = "constructorTextBox";
             constructorTextBox.Size = new System.Drawing.Size(228, 26);
-            constructorTextBox.TabIndex = 8;
+            constructorTextBox.TabIndex = 14;
             constructorTextBox.Text = "";
             // 
             // designerTextBox
@@ -801,15 +799,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             designerTextBox.Location = new System.Drawing.Point(19, 543);
             designerTextBox.Name = "designerTextBox";
             designerTextBox.Size = new System.Drawing.Size(228, 26);
-            designerTextBox.TabIndex = 7;
+            designerTextBox.TabIndex = 13;
             designerTextBox.Text = "";
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new System.Drawing.Point(19, 293);
+            pictureBox1.Location = new System.Drawing.Point(19, 319);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(228, 124);
+            pictureBox1.Size = new System.Drawing.Size(228, 98);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
@@ -825,7 +823,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             buffer.Multiline = true;
             buffer.Name = "buffer";
             buffer.Size = new System.Drawing.Size(228, 60);
-            buffer.TabIndex = 6;
+            buffer.TabIndex = 12;
             buffer.Visible = false;
             // 
             // gridControlKontTW
@@ -1195,7 +1193,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlRaszTW.Name = "gridControlRaszTW";
             gridControlRaszTW.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemLookUpEditProizv, repositoryItemLookUpEditOb, repositoryItemLookUpEditPodr });
             gridControlRaszTW.Size = new System.Drawing.Size(839, 481);
-            gridControlRaszTW.TabIndex = 17;
+            gridControlRaszTW.TabIndex = 7;
             gridControlRaszTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
@@ -1222,6 +1220,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             DisplayNumber.Caption = "№ оп.";
             DisplayNumber.FieldName = "DisplayNumber";
             DisplayNumber.Name = "DisplayNumber";
+            DisplayNumber.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             DisplayNumber.Visible = true;
             DisplayNumber.VisibleIndex = 0;
             DisplayNumber.Width = 88;
@@ -1248,6 +1247,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colrazryd.FieldName = "razryd";
             colrazryd.MinWidth = 23;
             colrazryd.Name = "colrazryd";
+            colrazryd.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             colrazryd.Visible = true;
             colrazryd.VisibleIndex = 1;
             colrazryd.Width = 66;
@@ -1258,6 +1258,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coltext.FieldName = "Text";
             coltext.MinWidth = 23;
             coltext.Name = "coltext";
+            coltext.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             coltext.Visible = true;
             coltext.VisibleIndex = 2;
             coltext.Width = 311;
@@ -1268,6 +1269,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek1.FieldName = "Sek";
             colsek1.MinWidth = 23;
             colsek1.Name = "colsek1";
+            colsek1.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             colsek1.Visible = true;
             colsek1.VisibleIndex = 3;
             colsek1.Width = 63;
@@ -1278,6 +1280,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn30.FieldName = "Spec";
             gridColumn30.MinWidth = 23;
             gridColumn30.Name = "gridColumn30";
+            gridColumn30.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn30.Visible = true;
             gridColumn30.VisibleIndex = 4;
             gridColumn30.Width = 106;
@@ -1288,6 +1291,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn27.FieldName = "TextProizv";
             gridColumn27.MinWidth = 23;
             gridColumn27.Name = "gridColumn27";
+            gridColumn27.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn27.Visible = true;
             gridColumn27.VisibleIndex = 5;
             gridColumn27.Width = 86;
@@ -1298,6 +1302,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colobor.FieldName = "Obor";
             colobor.MinWidth = 23;
             colobor.Name = "colobor";
+            colobor.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             colobor.Visible = true;
             colobor.VisibleIndex = 7;
             colobor.Width = 137;
@@ -1308,6 +1313,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn26.FieldName = "TextVyaz";
             gridColumn26.MinWidth = 23;
             gridColumn26.Name = "gridColumn26";
+            gridColumn26.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn26.Visible = true;
             gridColumn26.VisibleIndex = 6;
             gridColumn26.Width = 82;
@@ -1365,7 +1371,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             RecoRichTextBox.Margin = new Padding(4, 3, 4, 3);
             RecoRichTextBox.Name = "RecoRichTextBox";
             RecoRichTextBox.Size = new System.Drawing.Size(228, 63);
-            RecoRichTextBox.TabIndex = 9;
+            RecoRichTextBox.TabIndex = 15;
             RecoRichTextBox.Text = "";
             // 
             // commentRichTextBox
@@ -1375,7 +1381,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             commentRichTextBox.Margin = new Padding(4, 3, 4, 3);
             commentRichTextBox.Name = "commentRichTextBox";
             commentRichTextBox.Size = new System.Drawing.Size(228, 62);
-            commentRichTextBox.TabIndex = 10;
+            commentRichTextBox.TabIndex = 16;
             commentRichTextBox.Text = "";
             // 
             // ANNgridControl
@@ -1392,7 +1398,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridControl.Name = "ANNgridControl";
             ANNgridControl.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemButtonEdit1, repositoryItemCheckEdit2, repositoryItemButtonEdit3, repositoryItemDateEdit1 });
             ANNgridControl.Size = new System.Drawing.Size(700, 524);
-            ANNgridControl.TabIndex = 12;
+            ANNgridControl.TabIndex = 2;
             ANNgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { ANNgridView });
             // 
             // ANNgridView
@@ -1733,7 +1739,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonCopyWd.Name = "ButtonCopyWd";
             ButtonCopyWd.Size = new System.Drawing.Size(228, 33);
-            ButtonCopyWd.TabIndex = 5;
+            ButtonCopyWd.TabIndex = 11;
             ButtonCopyWd.Text = "копировать в буфер";
             ButtonCopyWd.UseVisualStyleBackColor = false;
             ButtonCopyWd.Visible = false;
@@ -1751,12 +1757,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             PrintButton.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             PrintButton.AppearanceDisabled.Options.UseBackColor = true;
             PrintButton.AppearanceDisabled.Options.UseForeColor = true;
-            PrintButton.Location = new System.Drawing.Point(19, 145);
+            PrintButton.Location = new System.Drawing.Point(19, 171);
             PrintButton.Margin = new Padding(4, 3, 4, 3);
             PrintButton.Name = "PrintButton";
-            PrintButton.Size = new System.Drawing.Size(112, 22);
+            PrintButton.Size = new System.Drawing.Size(228, 22);
             PrintButton.StyleController = layoutControl2;
-            PrintButton.TabIndex = 3;
+            PrintButton.TabIndex = 9;
             PrintButton.Text = "печать";
             PrintButton.Visible = false;
             PrintButton.Click += PrintWorkDivisionScheme_Click;
@@ -1850,7 +1856,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditMod.Properties.AppearanceDisabled.Options.UseTextOptions = true;
             textEditMod.Size = new System.Drawing.Size(167, 20);
             textEditMod.StyleController = layoutControl2;
-            textEditMod.TabIndex = 13;
+            textEditMod.TabIndex = 3;
             // 
             // textEditArt
             // 
@@ -1865,7 +1871,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditArt.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditArt.Size = new System.Drawing.Size(228, 20);
             textEditArt.StyleController = layoutControl2;
-            textEditArt.TabIndex = 14;
+            textEditArt.TabIndex = 4;
             // 
             // textEditSec
             // 
@@ -1878,7 +1884,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditSec.Properties.Appearance.Options.UseForeColor = true;
             textEditSec.Size = new System.Drawing.Size(72, 20);
             textEditSec.StyleController = layoutControl2;
-            textEditSec.TabIndex = 15;
+            textEditSec.TabIndex = 5;
             // 
             // textEditCreate
             // 
@@ -1891,7 +1897,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditCreate.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditCreate.Size = new System.Drawing.Size(336, 20);
             textEditCreate.StyleController = layoutControl2;
-            textEditCreate.TabIndex = 16;
+            textEditCreate.TabIndex = 6;
             // 
             // customGroupBoxWithButtons
             // 
@@ -1901,10 +1907,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBoxWithButtons.Controls.Add(ButtonPreliminaryWd);
             customGroupBoxWithButtons.Controls.Add(ButtonDouble);
             customGroupBoxWithButtons.Controls.Add(ButtonArchAndCopyWd);
-            customGroupBoxWithButtons.Location = new System.Drawing.Point(19, 171);
+            customGroupBoxWithButtons.Location = new System.Drawing.Point(19, 197);
             customGroupBoxWithButtons.Name = "customGroupBoxWithButtons";
             customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 118);
-            customGroupBoxWithButtons.TabIndex = 4;
+            customGroupBoxWithButtons.TabIndex = 10;
             customGroupBoxWithButtons.TabStop = false;
             // 
             // ButtonEditOnlyAdv
@@ -2318,10 +2324,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             layoutControlItem31.Control = pictureBox1;
             layoutControlItem31.CustomizationFormText = "pictureBox";
-            layoutControlItem31.Location = new System.Drawing.Point(0, 274);
+            layoutControlItem31.Location = new System.Drawing.Point(0, 300);
             layoutControlItem31.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem31.Name = "layoutControlItem31";
-            layoutControlItem31.Size = new System.Drawing.Size(232, 128);
+            layoutControlItem31.Size = new System.Drawing.Size(232, 102);
             layoutControlItem31.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem31.TextVisible = false;
             // 
@@ -2329,7 +2335,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             layoutControlItem36.Control = customGroupBoxWithButtons;
             layoutControlItem36.CustomizationFormText = "editBtns";
-            layoutControlItem36.Location = new System.Drawing.Point(0, 152);
+            layoutControlItem36.Location = new System.Drawing.Point(0, 178);
             layoutControlItem36.Name = "layoutControlItem36";
             layoutControlItem36.Size = new System.Drawing.Size(232, 122);
             layoutControlItem36.TextLocation = DevExpress.Utils.Locations.Top;
@@ -2339,9 +2345,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             layoutControlItem18.Control = PrintButton;
             layoutControlItem18.CustomizationFormText = "printBtn";
-            layoutControlItem18.Location = new System.Drawing.Point(0, 126);
+            layoutControlItem18.Location = new System.Drawing.Point(0, 152);
             layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new System.Drawing.Size(116, 26);
+            layoutControlItem18.Size = new System.Drawing.Size(232, 26);
             layoutControlItem18.TextVisible = false;
             // 
             // layoutControlItem10
@@ -2360,9 +2366,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             layoutControlItem15.Control = printButtonPlus;
             layoutControlItem15.CustomizationFormText = "print+Btn";
-            layoutControlItem15.Location = new System.Drawing.Point(116, 126);
+            layoutControlItem15.Location = new System.Drawing.Point(0, 126);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(116, 26);
+            layoutControlItem15.Size = new System.Drawing.Size(232, 26);
             layoutControlItem15.TextVisible = false;
             // 
             // xtraTabPageArticles
@@ -2749,7 +2755,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // kodd_rt
             // 
-            kodd_rt.Caption = "Код";
             kodd_rt.FieldName = "kodd_rt";
             kodd_rt.MinWidth = 23;
             kodd_rt.Name = "kodd_rt";
@@ -3060,7 +3065,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridColumn59
             // 
-            gridColumn59.FieldName = "size_label";
+            gridColumn59.FieldName = " ";
             gridColumn59.Name = "gridColumn59";
             gridColumn59.Visible = true;
             gridColumn59.VisibleIndex = 2;
@@ -3093,6 +3098,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn8.FieldName = "Status";
             gridColumn8.MinWidth = 23;
             gridColumn8.Name = "gridColumn8";
+            gridColumn8.Visible = true;
+            gridColumn8.VisibleIndex = 5;
             gridColumn8.Width = 87;
             // 
             // gridColumn58
@@ -3105,13 +3112,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // colstatus1
             // 
-            colstatus1.Caption = "Статус";
-            colstatus1.FieldName = "Stat";
+            colstatus1.Caption = "статус";
+            colstatus1.FieldName = "Status";
             colstatus1.MinWidth = 23;
             colstatus1.Name = "colstatus1";
-            colstatus1.Visible = true;
-            colstatus1.VisibleIndex = 5;
-            colstatus1.Width = 120;
             // 
             // gridColumn6
             // 
@@ -3562,7 +3566,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabPage3.Margin = new Padding(4, 3, 4, 3);
             xtraTabPage3.Name = "xtraTabPage3";
             xtraTabPage3.Size = new System.Drawing.Size(1845, 915);
-            xtraTabPage3.Text = "Работа с архивом";
+            xtraTabPage3.Text = "Предварительный архив";
             // 
             // layoutControl3
             // 
@@ -3760,80 +3764,52 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewArch.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewArch.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewArch.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewArch.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn66, gridColumn60, gridColumn61, gridColumn62, gridColumn63, gridColumn64, gridColumn65 });
+            gridViewArch.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn60, gridColumn61, gridColumn62, gridColumn63, gridColumn64, gridColumn65 });
             gridViewArch.GridControl = gridControlArch;
             gridViewArch.Name = "gridViewArch";
-            gridViewArch.OptionsBehavior.Editable = false;
-            gridViewArch.OptionsFind.AlwaysVisible = true;
-            gridViewArch.OptionsFind.Behavior = FindPanelBehavior.Filter;
-            gridViewArch.OptionsFind.FindDelay = 500;
-            gridViewArch.OptionsFind.FindNullPrompt = "Введите значение для поиска...";
-            gridViewArch.OptionsFind.FindPanelLocation = GridFindPanelLocation.Panel;
-            gridViewArch.OptionsSelection.MultiSelect = true;
-            gridViewArch.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridViewArch.OptionsView.EnableAppearanceEvenRow = true;
-            gridViewArch.OptionsView.GroupFooterShowMode = GroupFooterShowMode.Hidden;
-            gridViewArch.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn66
-            // 
-            gridColumn66.Name = "gridColumn66";
-            gridColumn66.Visible = true;
-            gridColumn66.VisibleIndex = 0;
             // 
             // gridColumn60
             // 
             gridColumn60.Caption = "Артикул";
-            gridColumn60.FieldName = "Articul";
             gridColumn60.Name = "gridColumn60";
             gridColumn60.Visible = true;
-            gridColumn60.VisibleIndex = 1;
-            gridColumn60.Width = 150;
+            gridColumn60.VisibleIndex = 0;
             // 
             // gridColumn61
             // 
             gridColumn61.Caption = "Группа";
-            gridColumn61.FieldName = "grup";
             gridColumn61.Name = "gridColumn61";
             gridColumn61.Visible = true;
-            gridColumn61.VisibleIndex = 2;
-            gridColumn61.Width = 100;
+            gridColumn61.VisibleIndex = 1;
             // 
             // gridColumn62
             // 
             gridColumn62.Caption = "Модель";
-            gridColumn62.FieldName = "Mod";
             gridColumn62.Name = "gridColumn62";
             gridColumn62.Visible = true;
-            gridColumn62.VisibleIndex = 3;
-            gridColumn62.Width = 120;
+            gridColumn62.VisibleIndex = 2;
             // 
             // gridColumn63
             // 
-            gridColumn63.Caption = "Размеры";
-            gridColumn63.FieldName = "Size_label";
+            gridColumn63.FieldName = "size_label";
             gridColumn63.Name = "gridColumn63";
             gridColumn63.Visible = true;
-            gridColumn63.VisibleIndex = 4;
-            gridColumn63.Width = 100;
+            gridColumn63.VisibleIndex = 3;
             // 
             // gridColumn64
             // 
             gridColumn64.Caption = "Статус";
-            gridColumn64.FieldName = "StatusText";
             gridColumn64.Name = "gridColumn64";
             gridColumn64.Visible = true;
-            gridColumn64.VisibleIndex = 5;
-            gridColumn64.Width = 120;
+            gridColumn64.VisibleIndex = 4;
             // 
             // gridColumn65
             // 
-            gridColumn65.Caption = "ID";
-            gridColumn65.FieldName = "AnnID";
+            gridColumn65.Caption = "gridColumn65";
             gridColumn65.Name = "gridColumn65";
             gridColumn65.Visible = true;
-            gridColumn65.VisibleIndex = 6;
-            gridColumn65.Width = 80;
+            gridColumn65.VisibleIndex = 5;
             // 
             // layoutControlItem40
             // 
@@ -3863,14 +3839,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // layoutControlGroup18
             // 
-            layoutControlGroup18.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("В архив", true, buttonImageOptions32, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
-            layoutControlGroup18.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup18.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem38 });
             layoutControlGroup18.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup18.Name = "layoutControlGroup18";
             layoutControlGroup18.Size = new System.Drawing.Size(686, 895);
             layoutControlGroup18.Text = "Предварительный архив";
-            layoutControlGroup18.CustomButtonClick += layoutControlGroup18_CustomButtonClick;
             // 
             // layoutControlItem38
             // 
@@ -3883,14 +3856,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // layoutControlGroup19
             // 
-            layoutControlGroup19.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Восстановить из архива", true, buttonImageOptions33, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
-            layoutControlGroup19.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
+            layoutControlGroup19.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Вернуть в актуальные", true, buttonImageOptions32, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup19.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem17 });
             layoutControlGroup19.Location = new System.Drawing.Point(686, 0);
             layoutControlGroup19.Name = "layoutControlGroup19";
             layoutControlGroup19.Size = new System.Drawing.Size(1139, 895);
             layoutControlGroup19.Text = "Архив";
-            layoutControlGroup19.CustomButtonClick += layoutControlGroup19_CustomButtonClick;
             // 
             // layoutControlItem17
             // 
@@ -4592,6 +4563,5 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup19;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn64;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn65;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn66;
     }
 }

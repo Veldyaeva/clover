@@ -364,12 +364,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обновляем данные в gridView_wdToBind
                 if (wdToBindResults != null && wdToBindResults.Any())
                 {
-                    // Заполняем текстовый статус для каждой записи
-                    foreach (var item in wdToBindResults)
-                    {
-                        item.Stat = StatusHelper.GetStatusText(item.Status);
-                    }
-                    
                     _myDataAnnList.Clear();
                     _myDataAnnList.BulkLoad(wdToBindResults);
                     
@@ -927,12 +921,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _myDataAnnList.Clear();
                 if (list != null)
                 {
-                    // Заполняем текстовый статус для каждой записи
-                    foreach (var item in list)
-                    {
-                        item.Stat = StatusHelper.GetStatusText(item.Status);
-                    }
-                    
                     _myDataAnnList.RaiseListChangedEvents = false;
                     foreach (var item in list)
                     {

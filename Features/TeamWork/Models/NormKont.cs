@@ -1,16 +1,12 @@
 ﻿using SewingProduction.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SewingProduction.Models
 {
-   public class NormKont :INewable, INotifyPropertyChanged, IModifiable, ICloneable
+    public class NormKont : INewable, INotifyPropertyChanged, IModifiable, ICloneable
     {
         [NotMapped]
         public bool IsNew { get; set; }
@@ -41,16 +37,16 @@ namespace SewingProduction.Models
         {
             // Не вызываем событие для ID, IsNew, IsModified
             bool isInternalProperty = propertyName == nameof(nkId) ||
-                                     propertyName == nameof(IsNew) || 
+                                     propertyName == nameof(IsNew) ||
                                      propertyName == nameof(IsModified);
 
             if (!isInternalProperty)
             {
-                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                 if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew) && propertyName != nameof(nkId) && !IsNew)
-                 {
-                     IsModified = true;
-                 }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew) && propertyName != nameof(nkId) && !IsNew)
+                {
+                    IsModified = true;
+                }
             }
             // Убираем автоматическую установку IsModified отсюда
             // if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew))

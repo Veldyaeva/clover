@@ -356,7 +356,8 @@
             // xrTableCell19
             // 
             this.xrTableCell19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kzDateEnd]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kzDateEnd]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(!(IsNull([NextKzDateAdd])) And IsNull([kzDateEnd]), \'Red\', \'White\')")});
             this.xrTableCell19.Multiline = true;
             this.xrTableCell19.Name = "xrTableCell19";
             this.xrTableCell19.Text = "Дата/время окончания вязания";
@@ -401,8 +402,10 @@
             // xrTableCell24
             // 
             this.xrTableCell24.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([DaysDiff] > 0, ToStr([DaysDiff]) + \' д. \', \'\') + Iif(ToStr([TimeDiff]) != \'0" +
-                    "0:00:00\', ToStr([TimeDiff]), \'\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TimeDiffNeg] + Iif([DaysDiff] > 0, ToStr([DaysDiff]) + \' д. \', \'\') + Iif(ToStr([" +
+                    "TimeDiff]) != \'00:00:00\', ToStr([TimeDiff]), \'\')"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "Iif([TimeDiffNeg] == \'-\', True, False)\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif([TimeDiffNeg] == \'-\', \'Red\', \'White\')")});
             this.xrTableCell24.Multiline = true;
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.StylePriority.UseTextAlignment = false;

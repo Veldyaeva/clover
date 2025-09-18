@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Helpers;
-using SewingProduction.Features.UserDistribution.Helpers;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SewingProduction.form
 {
@@ -280,7 +273,7 @@ namespace SewingProduction.form
             string query = $@"INSERT INTO spBrig (brig,n_brig,idZeh)
                               VALUES (@brig,@nBrig,
                               (SELECT idZeh FROM ZehList WHERE nameZeh = @zeh))";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@brig", brig } , { "@nBrig", nBrig } , { "@zeh", zeh } });
+            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@brig", brig }, { "@nBrig", nBrig }, { "@zeh", zeh } });
         }
         public void UpdateSpBrig(string brig, string nBrig, string zeh, string kod)
         {

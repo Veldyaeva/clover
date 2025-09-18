@@ -1136,7 +1136,7 @@ namespace SewingProduction.Features.Articul
             layoutControl1.Controls.Add(csButtonNew);
             layoutControl1.Location = new Point(0, 4);
             layoutControl1.Name = "layoutControl1";
-            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-680, 164, 650, 400);
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-1105, 201, 650, 400);
             layoutControl1.Root = layoutControlGroup1;
             layoutControl1.Size = new Size(580, 248);
             layoutControl1.TabIndex = 0;

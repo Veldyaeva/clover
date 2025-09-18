@@ -1,5 +1,13 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraTabbedMdi;
+using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.Articul;
+using SewingProduction.Features.CuttingProduction.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.form.Nadezhda;
 using System;
@@ -116,7 +124,7 @@ namespace SewingProduction
         #endregion
         private void карточкаРасчетаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            OpenForm(new CardByNom(), sender);
+            OpenForm(new CardByNom(_user), sender);
         }
         private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -161,7 +169,7 @@ namespace SewingProduction
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new CardByNom(), sender);
+            OpenForm(new CardByNom(_user), sender);
         }
         #region процедуры
         /// <summary>
@@ -247,6 +255,10 @@ namespace SewingProduction
             helpForm.Show();
         }
 
+        private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new CuttingForm(), sender);
+        }
         private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenForm(new PlanZagrVyaz(), sender);

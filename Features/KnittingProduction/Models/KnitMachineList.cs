@@ -1,8 +1,5 @@
-﻿using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Security.Cryptography;
 
 namespace SewingProduction.Features.KnittingProduction.Models
 {

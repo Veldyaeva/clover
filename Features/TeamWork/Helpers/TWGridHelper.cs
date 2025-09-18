@@ -1,19 +1,16 @@
-﻿using System;
+﻿using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Extensions;
+using SewingProduction.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Interfaces;
-using SewingProduction.Models;
-using System.Xml;
-using DevExpress.XtraGrid.Columns;
 using System.Xml.Linq;
-using SewingProduction.Extensions;
-using DevExpress.ClipboardSource.SpreadsheetML;
 
 namespace SewingProduction.Helpers
 {

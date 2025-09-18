@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using DevExpress.XtraBars.Docking2010.DragEngine;
 using DevExpress.XtraBars.ViewInfo;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.Services;
+using SewingProduction.Core.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
@@ -27,16 +31,34 @@ namespace SewingProduction.Core.Class
         public bool FocusedRowBold { get; set; } = true;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+                
+        /// <summary>
+        /// Включает автоматическое сохранение и загрузку настроек грида
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool EnableAutoSettings { get; set; } = true;
+        
+        /// <summary>
+        /// Пользовательский ключ для настроек грида (если не указан, генерируется автоматически)
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string SettingsKey { get; set; }
+
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         private UserClass _user;
         private List<int> _tableIds;
         private int _formId;
+        private bool _settingsInitialized = false;
         public CustomGridControl()
         {
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged;
             ViewRegistered += OnViewRegistered;
+                        
+            // Подписываемся на события для инициализации настроек
+            this.Load += OnCustomGridLoad;
+            this.HandleCreated += OnHandleCreated;
         }
         public void ApplyTheme()
         {
@@ -64,6 +86,8 @@ namespace SewingProduction.Core.Class
             {
                 ApplyRowColors(gridView);
                 ApplyFocusedRowStyle(gridView);
+                // Инициализируем настройки для нового GridView
+                InitializeGridSettings(gridView);
             }
         }
         private void ApplyRowColors(DevExpress.XtraGrid.Views.Grid.GridView gridView)
@@ -90,12 +114,124 @@ namespace SewingProduction.Core.Class
             }
         }
         private void OnThemeChanged() => ApplyTheme();
+       /// <summary>
+        /// Обработчик события Load для инициализации настроек
+        /// </summary>
+        private void OnCustomGridLoad(object sender, EventArgs e)
+        {
+            InitializeAllGridSettings();
+        }
 
+        /// <summary>
+        /// Обработчик создания handle для инициализации настроек
+        /// </summary>
+        private void OnHandleCreated(object sender, EventArgs e)
+        {
+            InitializeAllGridSettings();
+        }
+
+        /// <summary>
+        /// Инициализирует настройки для всех GridView в контроле
+        /// </summary>
+        private void InitializeAllGridSettings()
+        {
+            if (_settingsInitialized || !EnableAutoSettings) return;
+
+            foreach (var view in ViewCollection)
+            {
+                if (view is GridView gridView)
+                {
+                    InitializeGridSettings(gridView);
+                }
+            }
+
+            _settingsInitialized = true;
+        }
+
+        /// <summary>
+        /// Инициализирует настройки для конкретного GridView
+        /// </summary>
+        private void InitializeGridSettings(GridView gridView)
+        {
+            if (!EnableAutoSettings || gridView == null) return;
+
+            try
+            {
+                var settingsKey = SettingsKey ?? GenerateSettingsKey(gridView);
+                GridSettingsManager.Instance.EnableAutoSettings(gridView, settingsKey);
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку, но не прерываем работу
+                System.Diagnostics.Debug.WriteLine($"Ошибка при инициализации настроек грида: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Генерирует ключ настроек для GridView
+        /// </summary>
+        private string GenerateSettingsKey(GridView gridView)
+        {
+            var formName = this.FindForm()?.GetType().Name ?? "UnknownForm";
+            var gridName = this.Name ?? "UnknownGrid";
+            var viewName = gridView.Name ?? "MainView";
+            return $"{formName}_{gridName}_{viewName}";
+        }
+
+        /// <summary>
+        /// Принудительно сохраняет настройки всех GridView
+        /// </summary>
+        public void SaveGridSettings()
+        {
+            if (!EnableAutoSettings) return;
+
+            foreach (var view in ViewCollection)
+            {
+                if (view is GridView gridView)
+                {
+                    var settingsKey = SettingsKey ?? GenerateSettingsKey(gridView);
+                    GridSettingsManager.Instance.SaveSettings(gridView, settingsKey);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Принудительно загружает настройки всех GridView
+        /// </summary>
+        public void LoadGridSettings()
+        {
+            if (!EnableAutoSettings) return;
+
+            foreach (var view in ViewCollection)
+            {
+                if (view is GridView gridView)
+                {
+                    var settingsKey = SettingsKey ?? GenerateSettingsKey(gridView);
+                    GridSettingsManager.Instance.LoadSettings(gridView, settingsKey);
+                }
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
+                               // Сохраняем настройки перед закрытием
+                if (EnableAutoSettings)
+                {
+                    SaveGridSettings();
+                }
+
+                // Отключаем автоматическое сохранение для всех GridView
+                foreach (var view in ViewCollection)
+                {
+                    if (view is GridView gridView)
+                    {
+                        GridSettingsManager.Instance.DisableAutoSettings(gridView);
+                    }
+                }
                 ThemeManager.ThemeChanged -= OnThemeChanged;
+                                this.Load -= OnCustomGridLoad;
+                this.HandleCreated -= OnHandleCreated;
             }
             base.Dispose(disposing);
         }
