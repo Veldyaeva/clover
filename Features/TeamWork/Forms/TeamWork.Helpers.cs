@@ -870,21 +870,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsSelection.MultiSelect = false;
             ANNgridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
 
-            // Показываем все кнопки в customGroupBoxWithButtons
-            ButtonEditWd.Visible = true;
-            ButtonEditOnlyAdv.Visible = true;
-            ButtonArchAndCopyWd.Visible = true;
-            ButtonDouble.Visible = true;
-           // ButtonPreliminaryWd.Visible = true;
-            ButtonCopyWd.Visible = true;
-            KITlabel.Visible = false;
+            // Используем VisibleLogic для программного управления видимостью
+            ButtonEditWd.VisibleLogic = true;
+            ButtonEditOnlyAdv.VisibleLogic = true;
+            ButtonArchAndCopyWd.VisibleLogic = true;
+            ButtonDouble.VisibleLogic = true;
+            ButtonCopyWd.VisibleLogic = true;
+            
+            // Скрываем элементы режима комплекта
             KITlabel.VisibleLogic = false;
             ButtonPreliminaryWd.VisibleLogic = false;
-            ButtonPreliminaryWd.Visible = false;
-            //var btn0 = layoutControlGroup8.CustomHeaderButtons[0]
-            //            as DevExpress.XtraLayout.Custom.CustomConstraintsSimpleButton;// Восстанавливаем обычный текст кнопки
-            //if (btn0 != null)
-            //    btn0.Caption = "";
+
+            // Управляем видимостью LayoutControlItem для режима комплекта
+            if (layoutControlItem5 != null) // ButtonPreliminaryWd
+                layoutControlItem5.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            if (layoutControlItem6 != null) // KITlabel
+                layoutControlItem6.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            editBtns.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            // Устанавливаем тексты кнопок
             ButtonPreliminaryWd.Text = "добавить предварительное РТ";
             ButtonCopyWd.Text = "копировать РТ в буфер";
 
@@ -901,22 +904,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsSelection.MultiSelect = true;
             ANNgridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect;
 
-            // Скрываем все кнопки кроме ButtonPreliminaryWd
-            ButtonEditWd.Visible = false;
-            ButtonEditOnlyAdv.Visible = false;
-            ButtonArchAndCopyWd.Visible = false;
-            ButtonDouble.Visible = false;
+            // Используем VisibleLogic для программного управления видимостью
+            // Скрываем большинство кнопок
+            ButtonEditWd.VisibleLogic = false;
+            ButtonEditOnlyAdv.VisibleLogic = false;
+            ButtonArchAndCopyWd.VisibleLogic = false;
+            ButtonDouble.VisibleLogic = false;
+            
+            // Показываем элементы режима комплекта
             ButtonPreliminaryWd.VisibleLogic = true;
-            ButtonPreliminaryWd.Visible = true;
+            ButtonCopyWd.VisibleLogic = true;
             KITlabel.VisibleLogic = true;
-            KITlabel.Visible = true;
+
+            // Управляем видимостью LayoutControlItem для режима комплекта
+            if (layoutControlItem5 != null) // ButtonPreliminaryWd
+                layoutControlItem5.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            if (layoutControlItem6 != null) // KITlabel
+                layoutControlItem6.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+            editBtns.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // Настраиваем внешний вид
             KITlabel.ForeColor = Color.Red;
-
-            // Показываем кнопку копирования (нужна для выбора 2 записей)
-            ButtonCopyWd.Visible = true;
             ButtonCopyWd.Text = "копировать комплект в буфер";
-
-            // Изменяем текст кнопки для режима комплекта
             ButtonPreliminaryWd.Text = "создать комплект";
 
             // Очищаем буфер при переключении режима

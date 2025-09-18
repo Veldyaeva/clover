@@ -926,17 +926,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneProperties();
-            CopyedWorkDivisionShell.Status = (int)Status.Preliminary;
-            CopyedWorkDivisionShell.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
-            CopyedWorkDivisionShell.dateCreate = DateTime.Now;
-            CopyedWorkDivisionShell.dateUpdate = null;
-            CopyedWorkDivisionShell.Arh = false;
-            CopyedWorkDivisionShell.ParentId = selectedAnnToDuplicate.AnnID;
-            CopyedWorkDivisionShell.AnnID = 0;
-            CopyedWorkDivisionShell.Mod = "";
-            CopyedWorkDivisionShell.Articul = "";
-            CopyedWorkDivisionShell.grup = "";
+            // Используем специализированный метод для дублирования
+            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneForDuplication();
 
             int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, CopyedWorkDivisionShell);
             if (newAnnId <= 0)

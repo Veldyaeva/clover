@@ -1023,14 +1023,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                ArtNormN newRecord = sourceRecord.CloneProperties();
-                newRecord.dateCreate = DateTime.Now;
-                newRecord.dateUpdate = null;
-                newRecord.Status = nzp ? (int)Status.Preliminary : (int)Status.Actual;
-                newRecord.StatusText = StatusHelper.GetStatusText(newRecord.Status);
-                newRecord.Arh = false;
-                newRecord.ParentId = sourceRecord.AnnID;
-                newRecord.AnnID = 0; // база присвоит новый
+                // Используем специализированный метод для архив+копия
+                ArtNormN newRecord = sourceRecord.CloneForArchiveCopy(nzp);
 
                 int tempIndex = -1;
                 object itemToAdd = forMyDataAnnView ? ToMyDataANN(newRecord) : newRecord;
@@ -1274,14 +1268,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return null;
                 }
 
-                ArtNormN newRecord = sourceRecord.CloneProperties();
-                newRecord.dateCreate = DateTime.Now;
-                newRecord.dateUpdate = null;
-                newRecord.Status = nzp ? (int)Status.Preliminary : (int)Status.Actual;
-                newRecord.StatusText = StatusHelper.GetStatusText(newRecord.Status);
-                newRecord.Arh = false;
-                newRecord.ParentId = sourceRecord.AnnID;
-                newRecord.AnnID = 0; // чтобы при вставке база сама назначила ID
+                // Используем специализированный метод для архив+копия
+                ArtNormN newRecord = sourceRecord.CloneForArchiveCopy(nzp);
 
                 _bindingList.Add(newRecord);
 

@@ -170,6 +170,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
+               await _logger.LogEventAsync("Начало копирования записей в буфер", "ButtonCopyWd_Click_Internal");
                 // Проверяем текущий режим работы
                 bool isKitMode = toggleSwitchKit.IsOn;
                 
@@ -776,7 +777,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     // Основные поля будут заполнены в TeamWork_AdvanceTW из InitialArtData
                     // Здесь устанавливаем только необходимые для вставки и начального отображения значения
-                 //   Kod = "0000000", // Или другой плейсхолдер, если нужно
                     Status = (int)Status.Preliminary, // Новая запись всегда предварительная
                     StatusText = StatusHelper.GetStatusText((int)Status.Preliminary),
                     dateCreate = DateTime.Now,
@@ -796,7 +796,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (newAnnId <= 0)
                 {
                     MessageBox.Show("Не удалось создать новую запись в базе данных.", "Ошибка сохранения", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    await _logger.LogErrorAsync("", "Ошибка при вставке новой ArtNormN (AnnID <= 0) simpleButton2_Click_Internal");
+                    await _logger.LogErrorAsync("", "Ошибка при вставке новой ArtNormN (AnnID <= 0) Кнопка Создать из артикула");
                     return;
                 }
                 newItemShell.AnnID = newAnnId; // Присваиваем полученный ID

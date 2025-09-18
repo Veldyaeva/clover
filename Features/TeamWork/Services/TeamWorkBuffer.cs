@@ -116,7 +116,8 @@ namespace SewingProduction.Services
             _bufferIds.AddRange(ids);
             BufferId = ids.FirstOrDefault();
             BufferText = displayText;
-            BufferData = data;
+            // Создаем клон данных вместо сохранения прямой ссылки для избежания проблем
+            BufferData = data?.Clone();
         }
 
         /// <summary>

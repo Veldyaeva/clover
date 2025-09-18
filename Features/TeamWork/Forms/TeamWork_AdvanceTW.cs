@@ -1393,8 +1393,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 if (_currentAnnData != null && _sourceAnnIdToCopyDetailsFrom.HasValue && _duplicateAnnData != null && _mode == (int)Mode.NewWorkDivision)
                 {
-                    // Копирование данных шапки из _duplicateAnnData в _currentAnn (уже загруженный для newAnnId)
-                    _currentAnnData = _duplicateAnnData.CloneProperties();
+                    // Копирование только технологических данных из _duplicateAnnData в _currentAnn
+                    var operationalData = _duplicateAnnData.CloneOperationalData();
+                    _currentAnnData.CopyPropertiesFrom(operationalData);
                     _currentAnnData.dateUpdate = null;
                     _currentAnnData.dateCreate = DateTime.Now;
 
@@ -2462,7 +2463,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
-            int Nome = 0;
 
             // Используем глобальный буфер если доступен, иначе локальный
             IReadOnlyList<int> bufferIdsToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferIds : (_bufferWorkDivision > 0 ? new List<int> { _bufferWorkDivision } : new List<int>());
@@ -2482,6 +2482,21 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (_normRaszList == null || _normRaskList == null || _normKontList == null)
                         {
                             await InitializeBindingsAsync();
+                        }
+
+                        // Помечаем существующие записи на удаление как при обычном удалении
+                        if (_normRaszList?.Count > 0)
+                        {
+                            var existingIds = _normRaszList.Where(x => !x.IsNew && x.nrID > 0).Select(x => x.nrID).ToList();
+                            if (existingIds.Count > 0)
+                            {
+                                using (var connection = _dbHelper.GetConnection())
+                                {
+                                    string deleteSql = "UPDATE norm_rasz SET nrDateDel = GETDATE(), nrCompDel = HOST_NAME() WHERE nrId IN @ids";
+                                    await connection.ExecuteAsync(deleteSql, new { ids = existingIds });
+                                    await _logger.LogEventAsync($"Помечено на удаление операций NormRasz: {existingIds.Count}", "buffer_Click");
+                                }
+                            }
                         }
 
                         // Очищаем текущие списки
@@ -2509,6 +2524,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (raszList == null) continue;
                         foreach (var item in raszList)
                         {
+                            // Сбрасываем ID операции, чтобы база присвоила новый ID
+                            item.nrID = 0;
+                            
+                            // Привязываем операцию к текущему разделению труда (не копируем annId родительской записи)
+                            item.annId = _currentAnnData?.AnnID ?? 0;
+                            
+                            // Сбрасываем автоматически заполняемые поля, чтобы SQL сам их вставил
+                            item.nrDateAdd = null;
+                            item.nrCompAdd = null;
+                            
                             item.IsNew = true;
                             // Устанавливаем новый порядковый номер, увеличивая счётчик
                             currentMaxN += 1;
@@ -2891,6 +2916,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (raszList == null) continue;
                 foreach (var item in raszList)
                 {
+                    // Сбрасываем ID операции, чтобы база присвоила новый ID
+                    item.nrID = 0;
+                    
+                    // Привязываем операцию к текущему разделению труда (не копируем annId родительской записи)
+                    item.annId = _currentAnnData?.AnnID ?? 0;
+                    
+                    // Сбрасываем автоматически заполняемые поля, чтобы SQL сам их вставил
+                    item.nrDateAdd = null;
+                    item.nrCompAdd = null;
+                    
                     item.IsNew = true;
                     currentMaxN += 1;
                     item.N = currentMaxN;
