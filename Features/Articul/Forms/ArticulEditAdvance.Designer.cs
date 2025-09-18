@@ -167,6 +167,7 @@
             chkP = new CustomCheckBox();
             chbIsFurnit = new CustomCheckBox();
             chbIsUpak = new CustomCheckBox();
+            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
@@ -2060,11 +2061,31 @@
             chbIsUpak.Text = "упаковка";
             chbIsUpak.UseVisualStyleBackColor = true;
             // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customSimpleButton1.Appearance.Options.UseBackColor = true;
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Appearance.Options.UseForeColor = true;
+            customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton1.Location = new System.Drawing.Point(122, 629);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new System.Drawing.Size(75, 25);
+            customSimpleButton1.TabIndex = 45;
+            customSimpleButton1.Text = "customSimpleButton1";
+            customSimpleButton1.Click += customSimpleButton1_Click;
+            // 
             // ArticulEditAdvance
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1609, 846);
+            Controls.Add(customSimpleButton1);
             Controls.Add(groupBox2);
             Controls.Add(customGroupBox3);
             Controls.Add(customButton1);
@@ -2248,5 +2269,6 @@
         private CustomCheckBox chkP;
         private CustomCheckBox chbIsFurnit;
         private CustomCheckBox chbIsUpak;
+        private Core.Class.CustomSimpleButton customSimpleButton1;
     }
 }

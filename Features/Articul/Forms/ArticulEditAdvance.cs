@@ -31,10 +31,10 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
 
-        public  ArticulEditAdvance(UserClass user) : this(user, "")
+        public ArticulEditAdvance(UserClass user) : this(user, "")
         { }
-        
-         public ArticulEditAdvance(UserClass user, string kodd) : base(user)
+
+        public ArticulEditAdvance(UserClass user, string kodd) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
             _dbService = new DbService(_dbHelperAce);
@@ -51,9 +51,7 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceArtKod = new BindingSource { DataSource = _artKodRazm };
             if (gridEditAdRazm != null) gridEditAdRazm.DataSource = _bindingSourceArtKod;
 
-            
         }
-        
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
         {
@@ -67,7 +65,7 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-                
+
                 //загрузка перечня кодов из справочника общая информация
                 _articulCommon = new BindingList<ArticulModel>();
                 _bindingSourceArtCommon = new BindingSource { DataSource = _articulCommon };
@@ -86,11 +84,26 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
-            } 
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            /// <summary>
+            /// Обновляет одно поле в таблице по заданному условию.
+            /// </summary>
+            /// <param name="tableName">Имя таблицы</param>
+            /// <param name="fieldName">Имя обновляемого поля</param>
+            /// <param name="newValue">Новое значение</param>
+            /// <param name="whereField">Поле условия (например, "AnnId")</param>
+            /// <param name="whereValue">Значение условия</param>
+        // public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereField, object whereValue)
+        
 
         }
     }
