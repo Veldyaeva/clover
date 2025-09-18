@@ -1922,7 +1922,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonEditOnlyAdv.Name = "ButtonEditOnlyAdv";
             ButtonEditOnlyAdv.Size = new System.Drawing.Size(218, 32);
             ButtonEditOnlyAdv.TabIndex = 12;
-            ButtonEditOnlyAdv.Text = "редактировать РТ";
+            ButtonEditOnlyAdv.Text = "редактировать РТ+";
             ButtonEditOnlyAdv.UseVisualStyleBackColor = false;
             ButtonEditOnlyAdv.Click += ButtonEditOnlyAdv_Click;
             // 
@@ -1938,7 +1938,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonEditWd.Name = "ButtonEditWd";
             ButtonEditWd.Size = new System.Drawing.Size(214, 32);
             ButtonEditWd.TabIndex = 8;
-            ButtonEditWd.Text = "редактировать РТ";
+            ButtonEditWd.Text = "редактировать РТ_";
             ButtonEditWd.UseVisualStyleBackColor = false;
             ButtonEditWd.Click += ButtonEditWd_Click;
             // 

@@ -6,6 +6,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraScheduler.Commands;
 using DevExpress.XtraScheduler.Reporting;
 using DevExpress.XtraVerticalGrid;
+using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -557,7 +558,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedAnn == null) return;
                     annId = selectedAnn.AnnID;
                     //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
-                    selectedArtNormN = selectedAnn.CloneProperties();
+                    selectedArtNormN = selectedAnn.CloneOperationalData();//.CloneProperties();
                 }
                 else
                 {
