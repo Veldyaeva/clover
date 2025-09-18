@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using DevExpress.XtraReports.UI;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
-using DevExpress.XtraPrinting;
-using DevExpress.XtraReports.UI;
 using System.Drawing;
-using DevExpress.XtraRichEdit.Native;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SewingProduction
 {

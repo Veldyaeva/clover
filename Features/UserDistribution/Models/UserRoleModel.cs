@@ -1,16 +1,12 @@
-﻿using System;
+﻿using SewingProduction.Helpers;
+using SewingProduction.Services;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using SewingProduction.Interfaces;
-using SewingProduction.Services;
-using SewingProduction.Helpers;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
-using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
 using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SewingProduction.Features.UserDistribution.Models
 {

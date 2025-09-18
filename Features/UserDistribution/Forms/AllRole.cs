@@ -1,27 +1,13 @@
-﻿using System;
+﻿using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.CodeParser;
-using DevExpress.DataAccess.Sql;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.Utils;
-using DevExpress.Utils.VisualEffects;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraLayout.Customization;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.Helpers;
-using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -93,7 +79,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                     _allRoleDataService.UpdateRoles("RoleName", RoleName, id);
                     _allRoleDataService.UpdateRoles("Description", Description, id);
                 }
-                else 
+                else
                 {
                     int newId = await _allRoleDataService.InsertRoles(RoleName, Description, _user.UserId);
                     row["RoleID"] = newId;
@@ -251,7 +237,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 case "Редактор":
                     return 2;
                 default:
-                    return 0; 
+                    return 0;
             }
         }
         private void gridViewObject_CellValueChanged()
@@ -572,7 +558,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public async Task AddUserRoles(int userId, int roleId)
         {
             string query = "INSERT INTO UserRoles (UserID, RoleID) VALUES (@UserID, @RoleID)";
-             await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>
+            await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>
             {
                 { "@UserID", userId },
                 { "@RoleID", roleId }
@@ -641,10 +627,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@UserID", userId } });
         }
-       
+
         public async Task CopyRole(int originalRoleId, int userId)
         {
-            int newRoleId = await InsertRoles("","", userId);
+            int newRoleId = await InsertRoles("", "", userId);
             // Копируем привязки к объектам (RoleObject)
             string query = @"
                 INSERT INTO RoleObject (RoleID, ObjectID, ModeID)

@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using SewingProduction.Core.Class.Settings;
+﻿using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Helpers;
+using System;
+using System.Windows.Forms;
 using static SewingProduction.form.SettingsForm;
 
 namespace SewingProduction.form

@@ -1,30 +1,25 @@
-﻿using SewingProduction.Helpers;
-using SewingProduction.Models;
+﻿using Dapper;
+using DevExpress.Mvvm.Native;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using System.Reflection;
-using SewingProduction.Interfaces;
-using System.ComponentModel;
 using System.Diagnostics;
-using Z.Dapper.Plus;
+using System.Linq;
 using System.Text;
-using DevExpress.Xpo.DB.Helpers;
+using System.Threading.Tasks;
+using Z.Dapper.Plus;
 
 namespace SewingProduction.Services
 {
     /// <summary>
-/// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
-/// Использует Dapper для ускоренного доступа к данным.
-/// </summary>
- public class DbService
+    /// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
+    /// Использует Dapper для ускоренного доступа к данным.
+    /// </summary>
+    public class DbService
     {
         private readonly DatabaseHelper _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger(); //убрала пока гибридный логгер, не хочу писать в базу
@@ -262,14 +257,14 @@ namespace SewingProduction.Services
             }
         }
 
-       /// <summary>
-       /// Обновление данных в таблице
-       /// </summary>
-       /// <typeparam name="T">тип объекта</typeparam>
-       /// <param name="tableName">имя таблицы</param>
-       /// <param name="keyFieldName">имя ключевого параметра</param>
-       /// <param name="entity">объект обновления</param>
-       /// <returns></returns>
+        /// <summary>
+        /// Обновление данных в таблице
+        /// </summary>
+        /// <typeparam name="T">тип объекта</typeparam>
+        /// <param name="tableName">имя таблицы</param>
+        /// <param name="keyFieldName">имя ключевого параметра</param>
+        /// <param name="entity">объект обновления</param>
+        /// <returns></returns>
         public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity)
         {
             try
@@ -294,7 +289,7 @@ namespace SewingProduction.Services
                     }
                     string parameterName = "@" + columnName;
                     setClauses.Add($"{columnName} = {parameterName}");
-                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity), updating:true);
+                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity), updating: true);
                 }
 
                 // Ключевое поле
@@ -467,12 +462,12 @@ namespace SewingProduction.Services
         private object NormalizeValue(object value, bool updating)
         {
             if (value == null)
-                return updating? DBNull.Value:null;
+                return updating ? DBNull.Value : null;
 
             if (value is DateTime dt)
             {
                 if (dt == DateTime.MinValue)
-                    return updating? DBNull.Value: null;
+                    return updating ? DBNull.Value : null;
                 return dt;
             }
 

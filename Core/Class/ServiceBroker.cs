@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SewingProduction.Core.Class.Settings;
+//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using SewingProduction.Core.interfaces;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Forms;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraEditors;
-//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
-using SewingProduction.form;
-using DataTable = System.Data.DataTable;
-using System.Threading.Tasks;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Core.Class.Settings;
 
 namespace SewingProduction
 {
@@ -88,7 +81,7 @@ namespace SewingProduction
                 // Остановка предыдущего прослушивания, если оно было активно:
                 StopListening();
                 // SQL-запрос
-                string query= $"SELECT {_fields} FROM dbo.{table}";
+                string query = $"SELECT {_fields} FROM dbo.{table}";
                 // Создание соединения с базой данных
                 _connection = new SqlConnection(_connectionString);
                 // Открытие соединения
@@ -115,8 +108,8 @@ namespace SewingProduction
 
         public bool StopListening()
         {
-            try 
-            { 
+            try
+            {
                 //_flagStartListening = false;
                 // Закрываем подключение
                 if (_dependency != null)

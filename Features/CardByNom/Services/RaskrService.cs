@@ -1,17 +1,8 @@
-﻿using SewingProduction.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Z.Dapper;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using SewingProduction.Features.CardByNom.Models;
+﻿using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace SewingProduction.Features.CardByNom.Services
 {
