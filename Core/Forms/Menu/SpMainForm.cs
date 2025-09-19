@@ -9,7 +9,7 @@ using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
-using SewingProduction.form.Nadezhda;
+//using SewingProduction.form.Nadezhda;
 using System;
 using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;

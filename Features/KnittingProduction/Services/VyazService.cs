@@ -337,6 +337,25 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
         }
 
+        public async Task<List<KnitPlanReportParametersList>> GetKnitPlanReportParametersList(int parameterType)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC getKnitPlanReportParametersList {parameterType}";
+
+                    var result = await connection.QueryAsync<KnitPlanReportParametersList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitPlanReportParametersList");
+                return null;
+            }
+        }
+
         #endregion
 
     }
