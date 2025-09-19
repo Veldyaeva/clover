@@ -124,7 +124,7 @@ namespace SewingProduction
         #endregion
         private void карточкаРасчетаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            OpenForm(new CardByNom(), sender);
+            OpenForm(new CardByNom(_user), sender);
         }
         private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -169,7 +169,7 @@ namespace SewingProduction
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new CardByNom(), sender);
+            OpenForm(new CardByNom(_user), sender);
         }
         #region процедуры
         /// <summary>
