@@ -97,45 +97,49 @@ namespace SewingProduction.Features.TeamWork.Helpers
             clone.Komment = source.Komment;
             clone.Reco = source.Reco;
             clone.Slogn = source.Slogn;
-
-            // НЕ копируем индивидуальную информацию о продукте:
-            // Kod, grup, Articul, Mod, Size_label, Diz, Constr
-
-            // НЕ копируем ID и аудит поля:
-            // AnnID, dateCreate, dateUpdate, ParentId
-
-            return clone;
-        }
-
-        /// <summary>
-        /// Клонирует ArtNormN для сценария "Дубль" (дублирование)
-        /// </summary>
-        /// <param name="source">Исходный объект</param>
-        /// <returns>Клон для дублирования</returns>
-        public static ArtNormN CloneForDuplication(this ArtNormN source)
-        {
-            if (source == null) return null;
-
-            var clone = source.CloneOperationalData();
-
-            // Устанавливаем значения для дублирования
-            clone.AnnID = 0; // База присвоит новый ID
-            clone.ParentId = source.AnnID; // Ссылка на родительскую запись
-            clone.dateCreate = DateTime.Now;
-            clone.dateUpdate = null;
-            clone.Status = (int)Status.Preliminary; // Предварительный статус
-            clone.Arh = false;
-
-            clone.Kod = null;
+            clone.Kod = source.Kod;
             clone.grup = source.grup;
             clone.Articul = source.Articul;
             clone.Mod = source.Mod;
-            clone.Size_label = null;
             clone.Diz = source.Diz;
             clone.Constr = source.Constr;
 
+            // НЕ копируем ID и аудит поля:
+            // AnnID, dateCreate, dateUpdate,
+            clone.ParentId = source.AnnID;
+
             return clone;
         }
+
+        ///// <summary>
+        ///// Клонирует ArtNormN для сценария "Дубль" (дублирование)
+        ///// </summary>
+        ///// <param name="source">Исходный объект</param>
+        ///// <returns>Клон для дублирования</returns>
+        //public static ArtNormN CloneForDuplication(this ArtNormN source)
+        //{
+        //    if (source == null) return null;
+
+        //    var clone = source.CloneOperationalData();
+
+        //    // Устанавливаем значения для дублирования
+        //    clone.AnnID = 0; // База присвоит новый ID
+        //    clone.ParentId = source.AnnID; // Ссылка на родительскую запись
+        //    clone.dateCreate = DateTime.Now;
+        //    clone.dateUpdate = null;
+        //    clone.Status = (int)Status.Preliminary; // Предварительный статус
+        //    clone.Arh = false;
+
+        //    clone.Kod = null;
+        //    clone.grup = source.grup;
+        //    clone.Articul = source.Articul;
+        //    clone.Mod = source.Mod;
+        //    clone.Size_label = null;
+        //    clone.Diz = source.Diz;
+        //    clone.Constr = source.Constr;
+
+        //    return clone;
+        //}
 
         /// <summary>
         /// Клонирует ArtNormN для сценария "Архив+Копия"

@@ -635,7 +635,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (gridView != null && rowHandle >= 0)
                 {
                     gridView.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
-                    gridView.SetRowCellValue(rowHandle, "status", (int)Status.Actual);
+                    gridView.SetRowCellValue(rowHandle, "Status", (int)Status.Actual);
                     gridView.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
                     gridView.RefreshRow(rowHandle);
                 }
@@ -1163,7 +1163,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneProperties();
+            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneOperationalData();//selectedAnnToDuplicate.CloneProperties();
             CopyedWorkDivisionShell.Status = (int)Status.Preliminary;
             CopyedWorkDivisionShell.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
             CopyedWorkDivisionShell.dateCreate = DateTime.Now;
