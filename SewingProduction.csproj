@@ -80,6 +80,7 @@
     <None Remove="Help\Features\UserDistribution\Forms\UserHierarchy.html" />
     <None Remove="Help\Features\UserDistribution\Forms\UserProfile.html" />
     <None Remove="Help\Help.html" />
+    <None Remove="Resources\loading_dude.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -213,6 +214,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIcons\favicon.ico" />
+    <Content Include="Resources\loading_dude.gif" />
   </ItemGroup>
 
 
