@@ -133,18 +133,22 @@ namespace SewingProduction.Features.CardByNom.Models
         [NotMapped]
         public int DaysDiff { get; set; }
         [NotMapped]
+        public string DaysDiffNeg { get; set; }
+        [NotMapped]
         public TimeSpan TimeDiff { get; set; }
+        [NotMapped]
+        public string TimeDiffNeg { get; set; }
         public string DiffPeriod
         {
             get
             {
                 if (DaysDiff > 0)
                 {
-                    return $"{DaysDiff} дн. {TimeDiff}";
+                    return $"{DaysDiffNeg}{DaysDiff} дн. {TimeDiff}";
                 }
                 else
                 {
-                    return $"{TimeDiff}"; // или return $"0 дн. {TimeDiff}"; если нужно всегда показывать 0
+                    return $"{TimeDiffNeg}{TimeDiff}"; // или return $"0 дн. {TimeDiff}"; если нужно всегда показывать 0
                 }
             }
         }

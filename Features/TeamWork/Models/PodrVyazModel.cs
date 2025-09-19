@@ -7,6 +7,6 @@ namespace SewingProduction.Models
     {
         public int kod_vyaz { get; set; }
         public string text_vyaz { get; set; }
-        public int kod_proizv {  get; set; }
+        public int kod_proizv { get; set; }
     }
-} 
+}

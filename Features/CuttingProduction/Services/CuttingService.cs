@@ -26,7 +26,7 @@ namespace SewingProduction.Features.CuttingProduction.Services
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
         }
-        public async Task<List<raskrZehUpView>> GetRaskrZehUpView()
+        public async Task<List<raskrZehUpView>> GetRaskrZehUpViewAsync()
         {
             try
             {
@@ -45,7 +45,7 @@ namespace SewingProduction.Features.CuttingProduction.Services
                 return null;
             }
         }
-        public string getFio(int? tab)
+        public string GetFio(int? tab)
         {
             string fio = "";
             using (var connection = _dbHelper.GetConnection())
@@ -59,7 +59,7 @@ namespace SewingProduction.Features.CuttingProduction.Services
 
             return fio;
         }
-        public void setValue(string fieldName, object value, decimal? nom)
+        public void SetValue(string fieldName, object value, decimal? nom)
         {
             
             using (var connection = _dbHelper.GetConnection())
@@ -70,7 +70,7 @@ namespace SewingProduction.Features.CuttingProduction.Services
 
             }
         }
-        public DataTable getNewDataRzu(decimal? nom)
+        public DataTable GetNewDataRzu(decimal? nom)
         {
             using (var connection = _dbHelper.GetConnection())
             {
@@ -110,5 +110,25 @@ namespace SewingProduction.Features.CuttingProduction.Services
             }
             return recom;
         }
-    }
+        public async Task<List<appeZakrNewView>> GetAppeZakrViewAsync()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = "select * from dbo.appeZakrNZvet() ";
+
+                    var result = await connection.QueryAsync<appeZakrNewView>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных raskrZehUp");
+                return null;
+            }
+
+        }
+    }   
 }

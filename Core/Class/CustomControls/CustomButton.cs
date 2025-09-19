@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DevExpress.XtraEditors;
+using SewingProduction.Features.UserDistribution.Helpers;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraBars.ViewInfo;
-using System.Windows.Forms;
-using SewingProduction.Features.UserDistribution.Helpers;
-using static DevExpress.LookAndFeel.DXSkinColors;
-using DevExpress.XtraEditors;
 using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Core.Class
 {

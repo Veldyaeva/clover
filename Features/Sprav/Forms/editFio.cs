@@ -1,32 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.CodeParser;
-using DevExpress.DataAccess.Native.Json;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.Internal.WinApi;
-using DevExpress.Pdf.Native;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraBars;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraLayout.Customization;
-using DevExpress.XtraRichEdit.Import.Html;
+﻿using SewingProduction.Features.Sprav;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
-using SewingProduction.Features.Sprav;
+using System;
+using System.Globalization;
+using System.Windows.Forms;
 
 namespace SewingProduction.form
 {
@@ -86,20 +63,20 @@ namespace SewingProduction.form
                 this.Close();
             }
             //если данные загрузились
-            else 
+            else
             {
                 GetDataPerson();
             }
         }
         /* ЗАГРУЗКА ДАННЫХ СОТРУДНИКА в поля текстбоксов и комбобоксов*/
         public void GetDataPerson()
-        {   
+        {
             //Становимся редакторами:
             _person.UpdateEditor();
 
             customTextBoxTab.Text = _person.tab.ToString();
 
-            dateRozd.Text = _person.bday ;
+            dateRozd.Text = _person.bday;
             customTextBoxFIO.Text = _person.fio;
             customMaskedTextBoxTelSot.Text = _person.tel_s;
 
@@ -173,9 +150,9 @@ namespace SewingProduction.form
                 SetDataPerson();
                 if (this.Text == "Редактирование сотрудника")
                 {
-                    _person.UpdatePerson(_person); 
+                    _person.UpdatePerson(_person);
                 }
-                else 
+                else
                 {
                     _person.InsertPerson(_person, dbHelper);
                 }
@@ -439,6 +416,6 @@ namespace SewingProduction.form
         }
 
     }
-   
-    
+
+
 }

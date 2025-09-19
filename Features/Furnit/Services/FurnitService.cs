@@ -1,18 +1,11 @@
-﻿using SewingProduction.Helpers;
+﻿using Dapper;
+using SewingProduction.Helpers;
 using SewingProduction.Models;
+using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Z.Dapper;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using DevExpress.Pdf.Native;
-using SewingProduction.Services;
 
 namespace SewingProduction.Features.Furnit.Services
 {
@@ -62,7 +55,7 @@ namespace SewingProduction.Features.Furnit.Services
                                 $"  from furnitNView " +
                                 $"  where kod_f = @kodF ";
                 }
-                
+
                 return await _dbService.GetEntityAsync<FurnitNView>(query, new { kodF });
             }
             catch (Exception ex)
@@ -141,7 +134,7 @@ namespace SewingProduction.Features.Furnit.Services
                 return result.ToList();
             }
         }
-        
+
         /// <summary>
         /// Получает данные из furnit_f по kod_f_d
         /// </summary>
@@ -166,7 +159,7 @@ namespace SewingProduction.Features.Furnit.Services
                             $"  where kod_f_d = @kodFD " +
                             $"  order by n_pp ";
                 }
-                
+
 
                 var result = await connection.QueryAsync<FurnitF>(query, new Dictionary<string, object> { { "@kodFD", kodFD } });
                 return result.ToList();
@@ -313,11 +306,11 @@ namespace SewingProduction.Features.Furnit.Services
                 else
                 {
                     query = $"select top 0 rfs.*, cast(ltrim(rtrim(gr)) as nvarchar) + ' / ' + cast(ltrim(rtrim(name)) as nvarchar) as fn " +
-                            $" from ReestrFurnSost rfs "+
+                            $" from ReestrFurnSost rfs " +
                             $"  left join dop_ras_mat drm on drm.kod = rfs.rfsKodO and drm.kod_art = rfs.rfsKodArt ";
                 }
 
-                var result = await connection.QueryAsync<ReestrFurnSostView>(query, new Dictionary<string, object> { { "@rfID", rfID} });
+                var result = await connection.QueryAsync<ReestrFurnSostView>(query, new Dictionary<string, object> { { "@rfID", rfID } });
                 return result.ToList();
             }
         }

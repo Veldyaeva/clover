@@ -1,11 +1,11 @@
-﻿using System;
+﻿using SewingProduction.Features.UserDistribution.Forms;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SewingProduction.Features.UserDistribution.Forms;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
 {
@@ -72,29 +72,38 @@ namespace SewingProduction.Features.UserDistribution.Helpers
 
             switch (objectType)
             {
-                case "CustomButton": case "Button":
+                case "CustomButton":
+                case "Button":
                     prefix = "Кнопка";
                     break;
-                case "CustomLabel": case "Label":
+                case "CustomLabel":
+                case "Label":
                     prefix = "Метка";
                     break;
-                case "CustomTextBox": case "TextBox": 
-                case "CustomMaskedTextBox": case "MaskedTextBox":
+                case "CustomTextBox":
+                case "TextBox":
+                case "CustomMaskedTextBox":
+                case "MaskedTextBox":
                     prefix = "Поле";
                     break;
-                case "CustomComboBox": case "ComboBox":
+                case "CustomComboBox":
+                case "ComboBox":
                     prefix = "Раскрывающийся список";
                     break;
-                case "CustomCheckBox": case "CheckBox":
+                case "CustomCheckBox":
+                case "CheckBox":
                     prefix = "Галочка";
                     break;
-                case "CustomGridControl": case "GridControl":
+                case "CustomGridControl":
+                case "GridControl":
                     prefix = "Таблица";
                     break;
-                case "CustomGroupBox":  case "GroupBox":
+                case "CustomGroupBox":
+                case "GroupBox":
                     prefix = "Группа";
                     break;
-                case "CustomToolStripMenuItem":  case "ToolStripMenuItem":
+                case "CustomToolStripMenuItem":
+                case "ToolStripMenuItem":
                     prefix = "Элемент меню";
                     break;
                 default:

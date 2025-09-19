@@ -1,16 +1,9 @@
-﻿using System;
+﻿using SewingProduction.Helpers;
+using SewingProduction.Services;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
-using DevExpress.XtraLayout.Customization;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.Features.UserDistribution.Models
 {
@@ -222,7 +215,7 @@ namespace SewingProduction.Features.UserDistribution.Models
                 DELETE FROM RoleColumn 
                 WHERE RoleID = @RoleID AND ColumnID = @ColumnID AND ObjectID = @ObjectID";
 
-                    await _dbHelper.ExecuteQueryAsync(deleteQuery, new Dictionary<string, object>
+            await _dbHelper.ExecuteQueryAsync(deleteQuery, new Dictionary<string, object>
             {
                 { "@RoleID", roleId },
                 { "@ColumnID", columnId },
