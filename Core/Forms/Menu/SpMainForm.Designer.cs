@@ -339,8 +339,8 @@ namespace SewingProduction
             // TeamWorktoolStripMenuItem
             // 
             TeamWorktoolStripMenuItem.Name = "TeamWorktoolStripMenuItem";
-            TeamWorktoolStripMenuItem.Size = new Size(84, 20);
-            TeamWorktoolStripMenuItem.Text = "&Технологии";
+            TeamWorktoolStripMenuItem.Size = new Size(150, 20);
+            TeamWorktoolStripMenuItem.Text = "&Технологическая схема";
             TeamWorktoolStripMenuItem.Click += TeamWorktoolStripMenuItem_Click;
             // 
             // артикулToolStripMenuItem

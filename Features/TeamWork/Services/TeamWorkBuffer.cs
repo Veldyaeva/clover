@@ -77,7 +77,7 @@ namespace SewingProduction.Services
         {
             BufferId = annId;
             BufferText = displayText;
-            BufferData = data;
+            BufferData = data?.Clone();
         }
 
         /// <summary>

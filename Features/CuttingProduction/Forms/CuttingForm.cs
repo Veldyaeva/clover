@@ -27,6 +27,7 @@ using System.Diagnostics;
 using DevExpress.XtraGrid;
 using System.IO;
 using System.ServiceModel.Channels;
+using SewingProduction.Features.KnittingProduction.Forms;
 
 namespace SewingProduction.Features.CuttingProduction.Forms
 {
@@ -65,12 +66,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         {
             try
             {
-                var vyazPlanViewTask = Task.Run(() =>
+                var rzuViewTask = Task.Run(() =>
                 {
                     _rzuBindingList = new BindingList<raskrZehUpView>();
                     _rzuBindingSource = new BindingSource { DataSource = _rzuBindingList };
                 });
-                await Task.WhenAll(vyazPlanViewTask);
+                await Task.WhenAll(rzuViewTask);
                 #region увязка customGridRzu с данными модели
 
                 customGridRzu.DataSource = _rzuBindingSource;
@@ -164,7 +165,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 _rzuBindingSource.ResetBindings(false);
                 //List<VyazPlanView> vyazPlanViewData = await _vyazService.GetVyazPlanView();
                 //var vyazPlanViewData = await _vyazService.GetVyazPlanView();
-                var RzuData = await _cuttingService.GetRaskrZehUpView();
+                var RzuData = await _cuttingService.GetRaskrZehUpViewAsync();
                 //_vyazPlanViewBindingList = vyazPlanViewData;
                 //_vyazPlanViewBindingList = await _vyazService.GetVyazPlanView();
                 if (RzuData != null)
@@ -388,7 +389,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                             break;
                         // Добавьте другие поля по необходимости
                         case "data_zeh":
-                            DataTable dt = _cuttingService.getNewDataRzu(record.nom);
+                            DataTable dt = _cuttingService.GetNewDataRzu(record.nom);
                             DataRow dr = dt.Rows[0];
                             if (dt != null)
                             {
@@ -433,7 +434,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 }
                 if ((!exitForEach && tagUpdateData))
                 {
-                    _cuttingService.setValue(fieldName, valueUpd, clickedNom);
+                    _cuttingService.SetValue(fieldName, valueUpd, clickedNom);
                 }
                 _rzuBindingSource.ResetBindings(false);
                 gridViewRzu.RefreshData();
@@ -512,7 +513,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         {
             if (!string.IsNullOrEmpty(TabPTextBox.Text))
             {
-                TabPLabel.Text = _cuttingService.getFio(int.Parse(TabPTextBox.Text));
+                TabPLabel.Text = _cuttingService.GetFio(int.Parse(TabPTextBox.Text));
                 TabPLabel.Refresh();
             }
             else
@@ -526,7 +527,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         {
             if (!string.IsNullOrEmpty(TabMTextBox.Text))
             {
-                TabMLabel.Text = _cuttingService.getFio(int.Parse(TabMTextBox.Text));
+                TabMLabel.Text = _cuttingService.GetFio(int.Parse(TabMTextBox.Text));
                 TabMLabel.Refresh();
             }
             else
@@ -540,7 +541,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         {
             if (!string.IsNullOrEmpty(TabKpvTextBox.Text))
             {
-                TabKpvLabel.Text = _cuttingService.getFio(int.Parse(TabKpvTextBox.Text));
+                TabKpvLabel.Text = _cuttingService.GetFio(int.Parse(TabKpvTextBox.Text));
                 TabKpvLabel.Refresh();
             }
             else
@@ -584,7 +585,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 {
                     record.n_zvet = textBox.Text.ToString();
                 }
-                _cuttingService.setValue("n_zvet", textBox.Text.ToString(), clickedNom);
+                _cuttingService.SetValue("n_zvet", textBox.Text.ToString(), clickedNom);
                 MessageBox.Show("Сохранено!");
                 gridViewRzu.RefreshData();
 
@@ -602,7 +603,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
 
         private void gridViewRzu_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            
+
         }
 
         private void gridViewRzu_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -616,6 +617,13 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             recNomTextBox.Text = _cuttingService.getRecForNom(clickedNom);
             recNomZadTextBox.Refresh();
             recNomTextBox.Refresh();
+        }
+
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            CuttingFormAdding FDI = new CuttingFormAdding();
+
+            DialogResult result = FDI.ShowDialog();
         }
     }
 }

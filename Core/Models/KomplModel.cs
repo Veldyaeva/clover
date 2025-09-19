@@ -9,7 +9,7 @@ namespace SewingProduction.Core.Models
 {    
     public class KomplModel : INotifyPropertyChanged
     {
-        public int? Kod_k { get; set; }
+        public string Kod_k { get; set; }
         public string Grup_k { get; set; }
         public string Articul_k { get; set; }
         public string Mod_k { get; set; }

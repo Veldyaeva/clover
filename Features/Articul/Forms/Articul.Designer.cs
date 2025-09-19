@@ -3566,6 +3566,7 @@ namespace SewingProduction.Features.Articul
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Articul";
             Text = "Справочник изделий";
+            FormClosing += Articul_FormClosing;
             Load += Articul_Load;
             ((System.ComponentModel.ISupportInitialize)gridArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();

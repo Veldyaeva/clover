@@ -67,7 +67,7 @@ namespace SewingProduction.Features.Articul
         //private BindingSource _articulBindingSource;
         //private BindingSource _komplSostBindingSource;
 
-        
+
 
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -535,7 +535,7 @@ namespace SewingProduction.Features.Articul
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as ArticulModel).Kod;
 
-            EditAricul f = new EditAricul(kodObj.ToString());
+            EditArticul f = new EditArticul(kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -548,23 +548,21 @@ namespace SewingProduction.Features.Articul
         /// <param name="e"></param>
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
-            /*//var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
+            //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as ArticulModel).Kod;
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AddNewKopml(CurrentUser.User, _articuls, kodObj.ToString()));
+                mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
             }
-            */
         }
 
         private void csButtonNew_Click(object sender, EventArgs e)
         {
-            /*EditAricul f = new EditAricul(_user);
+            EditArticul f = new EditArticul();
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
             }
-            */
         }
         /// <summary>
         /// удалени кода в справочнике
@@ -620,13 +618,13 @@ namespace SewingProduction.Features.Articul
             if (gridView == null || gridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return ;
+                return;
             }
             var kodd = (bsArt.Current as ArticulModel).Kodd;
 
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd ));
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd));
             }
 
 
@@ -726,8 +724,14 @@ namespace SewingProduction.Features.Articul
 
         private async void csButtonEdit_Click(object sender, EventArgs e)
         {
-            EditArtciul(gridControl1,bsArt);
-            
+            EditArtciul(gridControl1, bsArt);
+
+        }
+
+        private void Articul_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _artPreview.Clear();
+            _artPreview = null;
         }
     }
 }

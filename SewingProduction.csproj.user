@@ -19,6 +19,9 @@
     <Compile Update="Core\Class\CustomControls\CustomLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomLookUpEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -40,7 +43,7 @@
     <Compile Update="Features\Articul\Forms\ArticulEditAdvance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\EditAricul.cs">
+    <Compile Update="Features\Articul\Forms\EditArticul.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\CuttingProduction\Forms\CuttingForm.cs">
@@ -49,7 +52,7 @@
     <Compile Update="Features\CuttingProduction\Forms\CuttingFormAdding.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\Form1.cs">
+    <Compile Update="Features\KnittingProduction\Forms\KnittingProductionPlanningReportParameters.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\Form2.cs">
@@ -191,6 +194,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\GetItogVibKartSokrReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\KnittingProductionPlanningReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\MlRtReport.cs">

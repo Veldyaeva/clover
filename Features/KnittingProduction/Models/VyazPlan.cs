@@ -337,4 +337,23 @@ namespace SewingProduction.Features.KnittingProduction.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+    public class KnitPlanReportParametersList
+    {
+        [NotMapped]
+        public int kmlIdVyazClass { get; set; }
+        [NotMapped]
+        public string name_class { get; set; }
+        [NotMapped]
+        public int pszkmKmlID { get; set; }
+        [NotMapped]
+        public string kmlInvNumber { get; set; }
+        [NotMapped]
+        public int yearMonthZapInt { get; set; }
+        [NotMapped]
+        public string yearMonthDateZap { get; set; }
+        [NotMapped]
+        public string articulKod { get; set; }
+        [NotMapped]
+        public string articul { get; set; }
+    }
 }
