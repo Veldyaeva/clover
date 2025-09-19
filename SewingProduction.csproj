@@ -80,6 +80,8 @@
     <None Remove="Help\Features\UserDistribution\Forms\UserHierarchy.html" />
     <None Remove="Help\Features\UserDistribution\Forms\UserProfile.html" />
     <None Remove="Help\Help.html" />
+    <None Remove="Resources\gray_spinner.gif" />
+    <None Remove="Resources\loading_dude.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -213,6 +215,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIcons\favicon.ico" />
+    <Content Include="Resources\loading_dude.gif" />
   </ItemGroup>
 
 
@@ -266,7 +269,18 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
+    <Folder Include="Features\SockProduction\Models\" />
+    <Folder Include="Features\SockProduction\Services\" />
     <Folder Include="Features\Sprav\Helpers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\gray_spinner.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\loading_dude.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

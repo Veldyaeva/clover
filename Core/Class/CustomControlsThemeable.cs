@@ -1,26 +1,12 @@
-using DevExpress.Utils.Menu;
-using DevExpress.XtraGrid;
-using DevExpress.XtraReports.Native;
-using SewingProduction.form.TeamWork.Interfaces;
-using SewingProduction.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static DevExpress.LookAndFeel.DXSkinColors;
-using SewingProduction;
-using DevExpress.XtraLayout;
-using System.ComponentModel;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.Services;
-using System.Diagnostics;
-using System.Linq;
-using SewingProduction.Core.Class;
+
 using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Core.Extensions;
+using SewingProduction.Features.UserDistribution.Helpers;
+using System.Windows.Forms;
+using System.ComponentModel;
+using System.Drawing;
+using System.Diagnostics;
+using System;
 
 namespace SewingProduction
 {
@@ -892,7 +878,17 @@ namespace SewingProduction
             this.Load += async (s, e) =>
             {
                 await ActionLogger.Log(_user.UserId, "Открытие формы", NameForm: this.GetType().Name);
+                
+                // Включаем автоматическое сохранение настроек для всех CustomGridControl
+                InitializeAutoGridSettings();
+                
                 CustomForm_Load(s, e);
+            };
+            
+            // Сохраняем настройки при закрытии формы
+            this.FormClosing += (s, e) =>
+            {
+                this.SaveAllGridSettings();
             };
         }
 
@@ -929,6 +925,22 @@ namespace SewingProduction
                 ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Инициализирует автоматическое сохранение настроек для всех CustomGridControl на форме
+        /// </summary>
+        protected virtual void InitializeAutoGridSettings()
+        {
+            try
+            {
+                this.EnableAutoGridSettings(true);
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку, но не прерываем работу формы
+                System.Diagnostics.Debug.WriteLine($"Ошибка при инициализации автоматических настроек гридов: {ex.Message}");
+            }
         }
 
         private void OnThemeChanged() => ApplyTheme();

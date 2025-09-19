@@ -1,11 +1,9 @@
-﻿using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SewingProduction.Features.CardByNom.Models
 {
-    public class RasInfoByPachKod
+    public class RasInfo
     {
         public int RzuNom { get; set; }
         public DateTime? RzuDataR { get; set; }

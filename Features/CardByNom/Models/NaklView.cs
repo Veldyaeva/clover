@@ -1,12 +1,8 @@
-﻿using SewingProduction.form;
-using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace SewingProduction.Features.CardByNom.Models
 {
-    public class NaklViewByPachKod
+    public class NaklView
     {
         public int Nom { get; set; }
         public string Iz { get; set; }
@@ -31,6 +27,7 @@ namespace SewingProduction.Features.CardByNom.Models
         public string ChipScanForeColor { get; set; }
         public string ChipOtgr { get; set; }
         public string ChipOtgrForeColor { get; set; }
+        public string nom_zad { get; set; }
 
     }
 }

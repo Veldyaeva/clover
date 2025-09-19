@@ -138,7 +138,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 //    "FROM sp_articul sa " +
                 //    "   left join kompl k on sa.kod = k.kod_k " +
                 //    "WHERE sa.annID IS NULL and k.kod_k is null";//
-                                                                 "SELECT * FROM articulListUnboundRTBySizeLabel";
+                                                                 "SELECT * FROM articulListGroupBySizeLabel where annId is null or annId = 0";
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
                 _myDataArtList.BulkLoad(loadedData);
@@ -631,14 +631,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (confirmDialog.ShowDialog() != DialogResult.OK) return;
                 
                 // Заполняем группу и модель в зависимости от выбора пользователя
-                if (fillGroupCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.grup))
+                if (fillGroupCheckBox.Checked)// && string.IsNullOrEmpty(selectedAnnRow.grup))
                 {
                     selectedAnnRow.grup = selectedArtRow.grup;
                 }
-                if (fillModelCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.mod))
+                if (fillModelCheckBox.Checked)// && string.IsNullOrEmpty(selectedAnnRow.mod))
                 {
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }
+                selectedAnnRow.size_label = selectedArtRow.size_label;
                 // Обновляем annId в базе данных
                 _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt,selectedArtRow.Articul);
                 selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
@@ -814,6 +815,56 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // В случае ошибки очищаем данные
                 await ClearUnboundArtsRelatedData();
             }
+        }
+
+        /// <summary>
+        /// Безопасно получает данные из строки gridView_unboundArts
+        /// </summary>
+        /// <param name="gridView">GridView для получения данных</param>
+        /// <param name="rowHandle">Индекс строки</param>
+        /// <returns>Объект MyDataART или null если данные недоступны</returns>
+        private MyDataART GetSafeUnboundArtData(GridView gridView, int rowHandle)
+        {
+            try
+            {
+                if (gridView == null)
+                {
+                    _logger?.LogWarningAsync("GridView is null в GetSafeUnboundArtData", "GetSafeUnboundArtData");
+                    return null;
+                }
+
+                if (rowHandle < 0 || rowHandle >= gridView.DataRowCount)
+                {
+                    _logger?.LogWarningAsync($"Invalid rowHandle {rowHandle} в GetSafeUnboundArtData. DataRowCount: {gridView.DataRowCount}", "GetSafeUnboundArtData");
+                    return null;
+                }
+
+                var data = gridView.GetRow(rowHandle) as MyDataART;
+                if (data == null)
+                {
+                    _logger?.LogWarningAsync($"Не удалось получить MyDataART для строки {rowHandle}", "GetSafeUnboundArtData");
+                    return null;
+                }
+
+                return data;
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, $"Ошибка при получении данных для строки {rowHandle} в GetSafeUnboundArtData");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Проверяет валидность данных gridView_unboundArts
+        /// </summary>
+        /// <returns>True если gridView содержит валидные данные</returns>
+        private bool IsUnboundArtsGridValid()
+        {
+            return gridView_unboundArts != null && 
+                   gridView_unboundArts.DataRowCount > 0 && 
+                   gridView_unboundArts.FocusedRowHandle >= 0 &&
+                   gridView_unboundArts.FocusedRowHandle < gridView_unboundArts.DataRowCount;
         }
 
         /// <summary>

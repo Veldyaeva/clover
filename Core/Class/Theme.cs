@@ -1,12 +1,8 @@
-﻿using DevExpress.XtraGrid.Views.WinExplorer.ViewInfo;
-using SewingProduction.form.TeamWork.Interfaces;
+﻿using SewingProduction.Core.Class.Settings;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using System.IO;
-using SewingProduction.Core.Class.Settings;
 
 namespace SewingProduction
 {
@@ -397,7 +393,7 @@ namespace SewingProduction
             SettingsManager.LoadTheme();
         }
 
-        
+
         public static void UpdateTheme(Control control)
         {
             foreach (Control child in control.Controls)

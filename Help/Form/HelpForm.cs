@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using SewingProduction.Core.Class.Settings;
+using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Utils.Html;
-using DevExpress.XtraEditors;
-using SewingProduction.Core.Class.Settings;
-using SewingProduction.Features.UserDistribution.Forms;
 
 
 namespace SewingProduction.Features.UserDistribution.Forms

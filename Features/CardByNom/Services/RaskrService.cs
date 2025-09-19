@@ -1,17 +1,8 @@
-﻿using SewingProduction.Helpers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Z.Dapper;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using SewingProduction.Features.CardByNom.Models;
+﻿using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace SewingProduction.Features.CardByNom.Services
 {
@@ -44,12 +35,12 @@ namespace SewingProduction.Features.CardByNom.Services
         /// </summary>
         /// <param name="_pachKod">pach_kod</param>
         /// <returns></returns>
-        public async Task<RasInfoByPachKod> GetRasInfoByPachKod(string pachKod)
+        public async Task<RasInfo> GetRasInfoByPachKod(string pachKod)
         {
             try
             {
-                string query = @"exec GetRasInfoView @pachKod";
-                return await _dbService.GetEntityAsync<RasInfoByPachKod>(query, new { pachKod });
+                string query = @"exec GetRasInfoView @xPachKod = @pachKod";
+                return await _dbService.GetEntityAsync<RasInfo>(query, new { pachKod });
             }
             catch (Exception ex)
             {
@@ -57,6 +48,20 @@ namespace SewingProduction.Features.CardByNom.Services
                 return null;
             }
         }
+        public async Task<RasInfo> GetRasInfoByNomZad(string nomZad)
+        {
+            try
+            {
+                string query = $"exec GetRasInfoView @xNomZadany = '{nomZad}'";
+                return await _dbService.GetEntityAsync<RasInfo>(query, new {  });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetRasInfoView для NomZad {nomZad}");
+                return null;
+            }
+        }
+
         #endregion
 
     }

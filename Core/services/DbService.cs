@@ -1,30 +1,25 @@
-﻿using SewingProduction.Helpers;
-using SewingProduction.Models;
+﻿using Dapper;
+using DevExpress.Mvvm.Native;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using System.Reflection;
-using SewingProduction.Interfaces;
-using System.ComponentModel;
 using System.Diagnostics;
-using Z.Dapper.Plus;
+using System.Linq;
 using System.Text;
-using DevExpress.Xpo.DB.Helpers;
+using System.Threading.Tasks;
+using Z.Dapper.Plus;
 
 namespace SewingProduction.Services
 {
     /// <summary>
-/// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
-/// Использует Dapper для ускоренного доступа к данным.
-/// </summary>
- public class DbService
+    /// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
+    /// Использует Dapper для ускоренного доступа к данным.
+    /// </summary>
+    public class DbService
     {
         private readonly DatabaseHelper _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger(); //убрала пока гибридный логгер, не хочу писать в базу
@@ -132,6 +127,36 @@ namespace SewingProduction.Services
                 throw;
             }
         }
+
+        /// <summary>
+        /// Обновляет одно поле в таблице по заданному условию.
+        /// </summary>
+        /// <param name="tableName">Имя таблицы</param>
+        /// <param name="fieldName">Имя обновляемого поля</param>
+        /// <param name="newValue">Новое значение</param>
+        /// <param name="whereCondition">Поле условия (например, "AnnId")</param>
+        /// <param name="whereParameter">Значение условия</param>
+        public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereCondition, Dictionary<string, object> whereParameter)
+        {
+            try
+            {
+                string query = $@"UPDATE {tableName}
+                        SET {fieldName} = @NewValue
+                        WHERE {whereCondition}";
+                whereParameter.Add("@NewValue", newValue);
+                await _dbHelper.ExecuteNonQueryAsync(query, whereParameter);
+
+                await _logger.LogEventAsync(
+                    $"Таблица {tableName}: поле {fieldName} обновлено на {newValue}, где {whereCondition} = {whereParameter}.",
+                    "UpdateFieldAsync");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении {fieldName} в таблице {tableName} по условию {whereCondition} = {whereParameter}");
+                throw;
+            }
+        }
+
         /// <summary>
         /// Получает первую запись, соответствующую запросу, или значение по умолчанию (null), если ничего не найдено.
         /// </summary>
@@ -232,14 +257,14 @@ namespace SewingProduction.Services
             }
         }
 
-       /// <summary>
-       /// Обновление данных в таблице
-       /// </summary>
-       /// <typeparam name="T">тип объекта</typeparam>
-       /// <param name="tableName">имя таблицы</param>
-       /// <param name="keyFieldName">имя ключевого параметра</param>
-       /// <param name="entity">объект обновления</param>
-       /// <returns></returns>
+        /// <summary>
+        /// Обновление данных в таблице
+        /// </summary>
+        /// <typeparam name="T">тип объекта</typeparam>
+        /// <param name="tableName">имя таблицы</param>
+        /// <param name="keyFieldName">имя ключевого параметра</param>
+        /// <param name="entity">объект обновления</param>
+        /// <returns></returns>
         public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity)
         {
             try
@@ -264,7 +289,7 @@ namespace SewingProduction.Services
                     }
                     string parameterName = "@" + columnName;
                     setClauses.Add($"{columnName} = {parameterName}");
-                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity), updating:true);
+                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity), updating: true);
                 }
 
                 // Ключевое поле
@@ -437,12 +462,12 @@ namespace SewingProduction.Services
         private object NormalizeValue(object value, bool updating)
         {
             if (value == null)
-                return updating? DBNull.Value:null;
+                return updating ? DBNull.Value : null;
 
             if (value is DateTime dt)
             {
                 if (dt == DateTime.MinValue)
-                    return updating? DBNull.Value: null;
+                    return updating ? DBNull.Value : null;
                 return dt;
             }
 

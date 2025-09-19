@@ -1,18 +1,13 @@
 ﻿
-using System;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraEditors.Controls;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using SewingProduction.Core.interfaces;
-using System.Collections.Generic;
-using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
-using SewingProduction.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms;
 
 
 namespace SewingProduction.form
@@ -91,7 +86,7 @@ namespace SewingProduction.form
             _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
         }
 
-        
+
 
         private bool GetCheckBoxValue(string columnName, GridView gridViewGet)
         {
@@ -209,7 +204,7 @@ namespace SewingProduction.form
             if (proverka == "OK")
             {
                 currentRowIndex = gridView1.FocusedRowHandle;
-                _spravOborudDataService.UpdateSpOborudShv(textBoxRedName.Text, textBoxRedSokrName.Text, comboBoxRedClass.Text, 
+                _spravOborudDataService.UpdateSpOborudShv(textBoxRedName.Text, textBoxRedSokrName.Text, comboBoxRedClass.Text,
                     comboBoxRedShp.SelectedIndex, comboBoxRedVzp.SelectedIndex, comboBoxRedNp.SelectedIndex, comboBoxRedRz.SelectedIndex,
                     comboBoxRedNastav.SelectedIndex, checkBoxRedShow.Checked, checkBoxRedSpec.Checked, checkBoxRedArhiv.Checked,
                     textBoxRedKod.Text, comboBoxRedGrup.Text, comboBoxRedVidm.Text);

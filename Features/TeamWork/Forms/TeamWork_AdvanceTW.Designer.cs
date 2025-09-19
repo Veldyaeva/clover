@@ -421,6 +421,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn2.Name = "gridColumn2";
             gridColumn2.OptionsEditForm.Caption = resources.GetString("gridColumn2.OptionsEditForm.Caption");
             gridColumn2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn2.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
             // 
             // gridColumn34
             // 
@@ -471,6 +472,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn32.ImageOptions.ImageKey = resources.GetString("gridColumn32.ImageOptions.ImageKey");
             gridColumn32.MinWidth = 23;
             gridColumn32.Name = "gridColumn32";
+            gridColumn32.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn32.OptionsEditForm.Caption = resources.GetString("gridColumn32.OptionsEditForm.Caption");
             gridColumn32.OptionsEditForm.ColumnSpan = 5;
             gridColumn32.OptionsEditForm.RowSpan = 2;
@@ -485,6 +487,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn33.ImageOptions.ImageKey = resources.GetString("gridColumn33.ImageOptions.ImageKey");
             gridColumn33.MinWidth = 23;
             gridColumn33.Name = "gridColumn33";
+            gridColumn33.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn33.OptionsEditForm.Caption = resources.GetString("gridColumn33.OptionsEditForm.Caption");
             gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn33.OptionsEditForm.VisibleIndex = 5;
@@ -496,6 +499,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn37.ImageOptions.ImageKey = resources.GetString("gridColumn37.ImageOptions.ImageKey");
             gridColumn37.MinWidth = 23;
             gridColumn37.Name = "gridColumn37";
+            gridColumn37.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn37.OptionsEditForm.Caption = resources.GetString("gridColumn37.OptionsEditForm.Caption");
             gridColumn37.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn37.OptionsEditForm.VisibleIndex = 4;
@@ -507,6 +511,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colspec2.ImageOptions.ImageKey = resources.GetString("colspec2.ImageOptions.ImageKey");
             colspec2.MinWidth = 23;
             colspec2.Name = "colspec2";
+            colspec2.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             colspec2.OptionsEditForm.Caption = resources.GetString("colspec2.OptionsEditForm.Caption");
             colspec2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             colspec2.OptionsEditForm.VisibleIndex = 6;
@@ -530,6 +535,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn4.ImageOptions.ImageKey = resources.GetString("gridColumn4.ImageOptions.ImageKey");
             gridColumn4.MinWidth = 23;
             gridColumn4.Name = "gridColumn4";
+            gridColumn4.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn4.OptionsEditForm.Caption = resources.GetString("gridColumn4.OptionsEditForm.Caption");
             gridColumn4.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn4.OptionsEditForm.VisibleIndex = 7;
@@ -551,6 +557,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             Kod_podr.ImageOptions.ImageKey = resources.GetString("Kod_podr.ImageOptions.ImageKey");
             Kod_podr.MinWidth = 23;
             Kod_podr.Name = "Kod_podr";
+            Kod_podr.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             Kod_podr.OptionsEditForm.Caption = resources.GetString("Kod_podr.OptionsEditForm.Caption");
             Kod_podr.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             Kod_podr.OptionsEditForm.VisibleIndex = 8;
@@ -571,6 +578,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             KodOb.ImageOptions.ImageKey = resources.GetString("KodOb.ImageOptions.ImageKey");
             KodOb.MinWidth = 23;
             KodOb.Name = "KodOb";
+            KodOb.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             KodOb.OptionsEditForm.Caption = resources.GetString("KodOb.OptionsEditForm.Caption");
             KodOb.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             KodOb.OptionsEditForm.VisibleIndex = 9;
@@ -590,6 +598,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn31.ImageOptions.ImageKey = resources.GetString("gridColumn31.ImageOptions.ImageKey");
             gridColumn31.MinWidth = 23;
             gridColumn31.Name = "gridColumn31";
+            gridColumn31.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn31.OptionsEditForm.Caption = resources.GetString("gridColumn31.OptionsEditForm.Caption");
             gridColumn31.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn31.OptionsEditForm.VisibleIndex = 5;
@@ -601,6 +610,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn30.ImageOptions.ImageKey = resources.GetString("gridColumn30.ImageOptions.ImageKey");
             gridColumn30.MinWidth = 23;
             gridColumn30.Name = "gridColumn30";
+            gridColumn30.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumn30.OptionsEditForm.Caption = resources.GetString("gridColumn30.OptionsEditForm.Caption");
             gridColumn30.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn30.OptionsEditForm.VisibleIndex = 2;

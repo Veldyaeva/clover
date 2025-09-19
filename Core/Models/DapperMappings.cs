@@ -1,15 +1,7 @@
-﻿using DevExpress.Mvvm.Native;
-using SewingProduction.Services;
-using SewingProduction.Features.UserDistribution.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Z.Dapper.Plus;
+﻿using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.UserDistribution.Models;
+using Z.Dapper.Plus;
 
 namespace SewingProduction.Models
 {
@@ -24,10 +16,10 @@ namespace SewingProduction.Models
             DapperPlusManager.Entity<NormRask>().Table(TableNames.Rask).Key(x => x.id);
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Key(x => x.nkId);
-            DapperPlusManager.Entity<NaklViewByPachKod>();
-            DapperPlusManager.Entity<RasInfoByPachKod>();
+            DapperPlusManager.Entity<NaklView>();
+            DapperPlusManager.Entity<RasInfo>();
             DapperPlusManager.Entity<HistoryRazdelNaklViewByIz>();
-            DapperPlusManager.Entity<ChipInfoByNomZad>();
+            DapperPlusManager.Entity<ChipInfo>();
             DapperPlusManager.Entity<ProizvCombIzd>();
             DapperPlusManager.Entity<VyazPlanView>();
             DapperPlusManager.Entity<ArtPrFioProgr>();

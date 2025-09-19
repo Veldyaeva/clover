@@ -1,35 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.Utils;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Base;
-using System.Diagnostics;
-using DevExpress.ChartRangeControlClient.Core;
+﻿using DevExpress.XtraGrid.Views.Grid;
 //using DevExpress.XtraGrid.Localization;
-using DevExpress.DataAccess.Native.Data;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.CodeParser;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
-using System.Reflection;
-using DevExpress.Mvvm.Native;
 using SewingProduction.Core.interfaces;
-using static SewingProduction.ThemeManager;
-using SewingProduction.Helpers;
-using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
-using DevExpress.XtraReports.Native;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
+using SewingProduction.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SewingProduction.form
 {
@@ -52,7 +31,7 @@ namespace SewingProduction.form
         bool flagAddDown = false; //если добавили поле в таблицу
         bool flagStartListening = false; //вкл прослушки
         private System.Windows.Forms.Label[] labels;
-        private TextBox[] textBoxs; 
+        private TextBox[] textBoxs;
         UserClass _user = new UserClass();
         //словари для рус названий столбцов:
         Dictionary<string, string> eng_rus = new Dictionary<string, string>();
@@ -63,7 +42,7 @@ namespace SewingProduction.form
         //Таймер для уведомления о сохранении:
         private Timer timer;
         bool _servBrok = false;
-        
+
         public SpravForAll(
             string tableSQL,
             string columnsSQL = "*",
@@ -136,7 +115,7 @@ namespace SewingProduction.form
         }
         private void SpravForAll_V()
         {
-            var vButtonAcc= _spravAllDataService.LoadButton(_user.UserId);
+            var vButtonAcc = _spravAllDataService.LoadButton(_user.UserId);
 
             simpleButtonDel.Visible = simpleButtonDel.Enabled = GetMode(vButtonAcc, "simpleButtonDel") > 0;
             simpleButtonAdd.Visible = simpleButtonAdd.Enabled = GetMode(vButtonAcc, "simpleButtonAdd") > 0;
@@ -189,7 +168,7 @@ namespace SewingProduction.form
         private void LoadData()
         {
             //gridControlSprav.InitializeAccess(_user, this.Name);
-            System.Data.DataTable tableList = _spravAllDataService.GetRecord(columns,whereSQL);
+            System.Data.DataTable tableList = _spravAllDataService.GetRecord(columns, whereSQL);
             spravList.DataSource = tableList;
             fieldsQueryListSQL.Clear();
             // Получаем имена столбцов и добавляем их в список:
@@ -244,7 +223,7 @@ namespace SewingProduction.form
                     {
                         // Скрываем метки, если нет данных
                         labels[i].Visible = false;
-                        textBoxs[i].Visible = false; 
+                        textBoxs[i].Visible = false;
                     }
                 }
             }
@@ -307,7 +286,7 @@ namespace SewingProduction.form
         //Кнопки вверх/вниз:
         private void gridControlSprav_KeyUp(object sender, KeyEventArgs e)
         {
-            gridControlSprav_Click(sender,e);
+            gridControlSprav_Click(sender, e);
         }
         //Клик на грид:
         private void gridControlSprav_Click(object sender, EventArgs e)

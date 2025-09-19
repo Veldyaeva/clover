@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SewingProduction.Helpers;
+using System;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SewingProduction.form;
-using SewingProduction.Helpers;
 using System.Windows.Forms;
 
 namespace SewingProduction.Features.Sprav

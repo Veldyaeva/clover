@@ -1,17 +1,11 @@
-﻿using SewingProduction.Helpers;
+﻿using Dapper;
+using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Z.Dapper;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Services;
 
 namespace SewingProduction.Features.KnittingProduction.Services
 {
@@ -47,7 +41,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 {
                     string query = $"select * from VyazPlanView where men not in (10, 30, 33) ";
 
-                    var result = await connection.QueryAsync<VyazPlanView>(query, new Dictionary<string, object> {  });
+                    var result = await connection.QueryAsync<VyazPlanView>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
             }
@@ -265,6 +259,103 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 return null;
             }
         }
+
+        public async Task<List<PlanTotalHoursByKnitMachine>> GetPlanTotalHoursByKnitMachine()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"exec GetPlanTotalHoursByKnitMachine ";
+
+                    var result = await connection.QueryAsync<PlanTotalHoursByKnitMachine>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPlanTotalHoursByKnitMachine");
+                return null;
+            }
+        }
+
+        public async Task<List<ZadanyListByMachine>> GetZadanyListByMachine(int kmlID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"exec GetZadanyListByMachine {kmlID}";
+
+                    var result = await connection.QueryAsync<ZadanyListByMachine>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetZadanyListByMachine");
+                return null;
+            }
+        }
+        public async Task<List<RzvPachListByNom>> GetRzvPachListByNom(int nom, string nomZad)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.nom_n, rzv.n_pach, rzv.pach_kod, rzv.kod, rzv.razm, rzv.kol, 0 AS grad " +
+                        $"FROM raskr_zeh_vyaz rzv" +
+                        $" WHERE rzv.nom = {nom} and zad_pl = {nomZad}";
+
+                    var result = await connection.QueryAsync<RzvPachListByNom>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetRzvPachListByNom");
+                return null;
+            }
+        }
+
+        public async Task<List<PZVOperList>> GetPZVOperListByPachList(string pachList, int podrID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = '{pachList}', @xVyazPodrKod = {podrID}";
+
+                    var result = await connection.QueryAsync<PZVOperList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPlanZagrVyazByPachList");
+                return null;
+            }
+        }
+
+        public async Task<List<KnitPlanReportParametersList>> GetKnitPlanReportParametersList(int parameterType)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC getKnitPlanReportParametersList {parameterType}";
+
+                    var result = await connection.QueryAsync<KnitPlanReportParametersList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitPlanReportParametersList");
+                return null;
+            }
+        }
+
         #endregion
 
     }

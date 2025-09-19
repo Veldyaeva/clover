@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using SewingProduction.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using SewingProduction.Helpers;
 
 namespace SewingProduction
 {
@@ -148,7 +147,7 @@ namespace SewingProduction
             var logEntry = new LogEntry
             {
                 Timestamp = DateTime.UtcNow.ToString("o"),
-                Message = "WARNING!!!: "+ eventMessage,
+                Message = "WARNING!!!: " + eventMessage,
                 StackTrace = "",
                 Context = context
             };

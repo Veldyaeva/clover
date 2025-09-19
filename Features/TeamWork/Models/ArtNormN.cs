@@ -14,6 +14,7 @@ namespace SewingProduction.Models
         private string _group;
         private string _articul;
         private string _mod;
+        private string _size_label;
         private int _sek;
         private int _diz;
         private int _constr;
@@ -47,6 +48,11 @@ namespace SewingProduction.Models
             set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(Mod)); } }
         }
 
+        public string Size_label
+        {
+            get => _size_label;
+            set { if (_size_label != value) { _size_label = value; OnPropertyChanged(nameof(Size_label)); } }
+        }
         public int Sek
         {
             get => _sek;
@@ -141,8 +147,10 @@ namespace SewingProduction.Models
         [Column("annCompDel")]
         public string compDel { get; set; }
         [Column("annDateAdd")]
+        [NotMapped]
         public DateTime? dateAdd { get; set; }
         [Column("annCompAdd")]
+        [NotMapped]
         public string compAdd { get; set; }
 
         [Column("sek_kr")]
@@ -227,6 +235,7 @@ namespace SewingProduction.Models
             this.grup = source.grup; 
             this.Articul = source.Articul;
             this.Mod = source.Mod;
+            this.Size_label = source.Size_label;
             this.SekShv = source.SekShv;
             this.SekVyaz3 = source.SekVyaz3;
             this.SekVyaz5 = source.SekVyaz5;
@@ -282,6 +291,15 @@ namespace SewingProduction.Models
             //    cloned.FioConstr = this.FioConstr.Clone();
             //}
             return cloned;
+        }
+
+        /// <summary>
+        /// Создает полную копию объекта ArtNormN (алиас для Clone для обратной совместимости)
+        /// </summary>
+        /// <returns>Копия объекта</returns>
+        public ArtNormN CloneProperties()
+        {
+            return this.Clone();
         }
     }
 }

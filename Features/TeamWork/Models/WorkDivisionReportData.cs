@@ -1,7 +1,6 @@
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SewingProduction.Features.TeamWork.Models
 {
@@ -19,21 +18,21 @@ namespace SewingProduction.Features.TeamWork.Models
         public string Designer { get; set; }
         public string Constructor { get; set; }
         public string Reco { get; set; }
-        
+
         // Затраты времени (секунды)
         public int Sek { get; set; }
         public decimal StrSum => Sek / 60.0m; // Затраты времени в минутах + " сек / " + "+ allTrim(str(Sek)) + " сек"
         public string AllTrimStr => $"str({Sek}) + \"+allTrim({Sek})\"";
-        
+
         // Количество рабочих
         public int KolRab { get; set; }
-        
+
         // Такт потока
         public decimal TaktPotoka { get; set; }
-        
+
         // Расчетный выпуск в смену
         public int RaschetVypusk { get; set; }
-        
+
         // Итоговые секунды по видам оборудования (будут рассчитываться из NormRasz)
         public int SekShv { get; set; }      // Швейные операции
         public int SekVyaz { get; set; }     // Вязальные операции всего
@@ -51,13 +50,13 @@ namespace SewingProduction.Features.TeamWork.Models
         public int SekVyaz57 { get; set; }   // 57-кл
         public int SekVyaz18 { get; set; }   // 18-кл
         public int SekKr { get; set; }       // Краеобметочные операции
-        
+
         // Списки операций для отображения в отчете
         public List<NormRasz> Operations { get; set; } = new List<NormRasz>();
         public List<NormRask> RaskroyOperations { get; set; } = new List<NormRask>();
         public List<NormKont> KontrolOperations { get; set; } = new List<NormKont>();
     }
-    
+
     /// <summary>
     /// Дополнительный класс для группировки секунд по оборудованию в отчете
     /// </summary>
@@ -67,4 +66,4 @@ namespace SewingProduction.Features.TeamWork.Models
         public int Seconds { get; set; }
         public string DisplayText => $"sd({Seconds})";
     }
-} 
+}
