@@ -38,7 +38,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             recNomTextBox = new CustomTextBox();
             recNomZadTextBox = new CustomTextBox();
             nZvetTextBox = new CustomTextBox();
-            customButton14 = new Core.Class.CustomButton();
+            customButton14 = new CustomButton();
             YearSearchTextBox = new CustomTextBoxEx();
             PachSearchTextBox = new CustomTextBoxEx();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,18 +48,18 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             nomZadTextBox = new CustomTextBox();
             datePlanTextBox = new CustomTextBox();
             customLabel12 = new CustomLabel();
-            customButton13 = new Core.Class.CustomButton();
-            customButton12 = new Core.Class.CustomButton();
-            customButton11 = new Core.Class.CustomButton();
-            customButton10 = new Core.Class.CustomButton();
-            customButton9 = new Core.Class.CustomButton();
-            customButton8 = new Core.Class.CustomButton();
-            customButton7 = new Core.Class.CustomButton();
-            customButton6 = new Core.Class.CustomButton();
-            customButton5 = new Core.Class.CustomButton();
-            customButton4 = new Core.Class.CustomButton();
-            customButton3 = new Core.Class.CustomButton();
-            customButton2 = new Core.Class.CustomButton();
+            customButton13 = new CustomButton();
+            customButton12 = new CustomButton();
+            customButton11 = new CustomButton();
+            customButton10 = new CustomButton();
+            customButton9 = new CustomButton();
+            customButton8 = new CustomButton();
+            customButton7 = new CustomButton();
+            customButton6 = new CustomButton();
+            customButton5 = new CustomButton();
+            customButton4 = new CustomButton();
+            customButton3 = new CustomButton();
+            customButton2 = new CustomButton();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             dostZehTextBox = new CustomTextBox();
             customLabel8 = new CustomLabel();
@@ -100,9 +100,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             DataPrTextBox = new CustomTextBox();
             pachTextBox = new CustomTextBox();
             DataRTextBox = new CustomTextBox();
-            customButton1 = new Core.Class.CustomButton();
-            SearchPachСustomButton = new Core.Class.CustomButton();
-            customGridRzu = new Core.Class.CustomGridControl();
+            customButton1 = new CustomButton();
+            SearchPachСustomButton = new CustomButton();
+            customGridRzu = new CustomGridControl();
             gridViewRzu = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnRzuChipStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnRzuNomN = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -1098,6 +1098,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             customButton1.TabIndex = 2;
             customButton1.Text = "Добавить";
             customButton1.UseVisualStyleBackColor = false;
+            customButton1.Click += customButton1_Click;
             // 
             // SearchPachСustomButton
             // 

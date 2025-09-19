@@ -19,6 +19,9 @@
     <Compile Update="Core\Class\CustomControls\CustomLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomLookUpEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
       <SubType>Component</SubType>
     </Compile>
