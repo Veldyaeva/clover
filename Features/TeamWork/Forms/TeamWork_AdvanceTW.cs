@@ -567,8 +567,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Удаляем строку
                     bindingList.Remove(rowObj);
 
-                    // Перенумеровываем операции с номерами больше удаленной
-                    RenumberOperationsAfterDeletion(bindingList, deletedOperationN, deletedOperationN1);
+                    // Перенумеровываем через единый сервис
+                    OperationNumberingService.RenumberAfterDeletion(bindingList, deletedOperationN, deletedOperationN1);
 
                     // Переносим фокус на новую строку
                     view.GridControl.BeginInvoke(new Action(() =>
@@ -695,8 +695,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     bindingList.Remove(operation);
                 }
 
-                // Выполняем полную перенумерацию всех оставшихся операций
-                RecalculateAllOperationNumbers();
+                        // Выполняем полную перенумерацию всех оставшихся операций
+                        OperationNumberingService.RecalculateAllOperationNumbers(bindingList);
 
                 // Обновляем отображение
                 view.GridControl.BeginInvoke(new Action(() =>
@@ -910,42 +910,33 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = selectionForm.SelectedRowData;
                         selectedData.IsNew = true;
                         
-                        // Проверяем и исправляем дублирующиеся номера ПЕРЕД добавлением
+                        // Если позиция занята — подвинем через сервис
                         if (HasDuplicateNumbers(insertOperationN, insertOperationN1))
                         {
-                            // Если такой номер уже существует, пересчитываем нумерацию
                             await _logger.LogEventAsync($"Обнаружен дублирующий номер {insertOperationN}.{insertOperationN1}, выполняется пересчет", "AddNewRaszOperation");
-                            
-                            // Выполняем перенумерацию в зависимости от типа операции
                             if (isSuboperation)
-                            {
-                                if (choice.ConvertMainToSuboperation)
-                                {
-                                    // Преобразуем основную операцию в подоперацию и добавляем новую подоперацию
-                                    ConvertMainOperationToSuboperation(insertOperationN);
-                                }
-                                else
-                                {
-                                    // Для обычной подоперации - перенумеровываем только подоперации в рамках той же основной операции
-                                    RenumberSuboperationsForInsertion(insertOperationN, insertOperationN1);
-                                }
-                            }
+                                OperationNumberingService.InsertSuboperation(_normRaszList, insertOperationN, insertOperationN1, choice.ConvertMainToSuboperation, selectedData);
                             else
-                            {
-                                // Для основной операции - перенумеровываем все операции начиная с указанной позиции
-                                int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
-                                if (insertOperationN <= maxN)
-                                {
-                                    RenumberOperationsForInsertion(insertOperationN);
-                                }
-                            }
+                                OperationNumberingService.InsertMainAfter(_normRaszList, insertOperationN - 1, selectedData);
+                        }
+                        else
+                        {
+                            selectedData.N = insertOperationN;
+                            selectedData.N1 = insertOperationN1;
                         }
 
-                        // Присваиваем новой операции нужные номера
-                        selectedData.N = insertOperationN;
-                        selectedData.N1 = insertOperationN1;
+                        // Массовое обновление UI во избежание мерцаний
+                        gridViewRasz.BeginDataUpdate();
+                        try
+                        {
+                            _normRaszList.Add(selectedData);
+                            OperationNumberingService.RecalculateAllOperationNumbers(_normRaszList);
+                        }
+                        finally
+                        {
+                            gridViewRasz.EndDataUpdate();
+                        }
 
-                        _normRaszList.Add(selectedData);
                         _normRaszBindingSource.ResetBindings(false);
                         gridControlRasz.RefreshDataSource();
 
@@ -1015,163 +1006,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
 
 
-        /// <summary>
-        /// Преобразует основную операцию в подоперацию при добавлении первой подоперации
-        /// </summary>
-        /// <param name="operationN">Номер основной операции для преобразования</param>
-        private void ConvertMainOperationToSuboperation(int operationN)
-        {
-            // Находим основную операцию (N.0) и преобразуем её в подоперацию (N.1)
-            var mainOperation = _normRaszList?.FirstOrDefault(r => r.N == operationN && r.N1 == 0);
-
-            if (mainOperation != null)
-            {
-                int oldN1 = mainOperation.N1;
-                mainOperation.N1 = 1; // Основная операция становится первой подоперацией
-
-                // Помечаем как измененную, если это не новая запись
-                if (!mainOperation.IsNew)
-                {
-                    mainOperation.IsModified = true;
-                }
-
-                _logger.LogEventAsync($"Основная операция преобразована: {operationN}.{oldN1} -> {operationN}.{mainOperation.N1}", "ConvertMainOperationToSuboperation");
-            }
-        }
-
-        /// <summary>
-        /// Перенумеровывает подоперации для освобождения места под новую подоперацию
-        /// </summary>
-        /// <param name="operationN">Номер основной операции</param>
-        /// <param name="insertSuboperationN1">Номер подоперации, начиная с которого нужно сдвинуть нумерацию</param>
-        private void RenumberSuboperationsForInsertion(int operationN, int insertSuboperationN1)
-        {
-            // Находим все подоперации с тем же N и N1 >= insertSuboperationN1 и увеличиваем их N1 на 1
-            var suboperationsToRenumber = _normRaszList
-                .Where(r => r.N == operationN && r.N1 >= insertSuboperationN1)
-                .OrderByDescending(r => r.N1) // Обрабатываем в обратном порядке, чтобы избежать конфликтов
-                .ToList();
-
-            if (suboperationsToRenumber.Any())
-            {
-                _logger.LogEventAsync($"Перенумерация подопераций: сдвиг {suboperationsToRenumber.Count} подопераций операции №{operationN} начиная с {insertSuboperationN1}", "RenumberSuboperationsForInsertion");
-
-                foreach (var operation in suboperationsToRenumber)
-                {
-                    int oldN1 = operation.N1;
-                    operation.N1 += 1;
-
-                    // Помечаем как измененную, если это не новая запись
-                    if (!operation.IsNew)
-                    {
-                        operation.IsModified = true;
-                    }
-
-                    _logger.LogEventAsync($"Подоперация перенумерована: {operation.N}.{oldN1} -> {operation.N}.{operation.N1}", "RenumberSuboperationsForInsertion");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Перенумеровывает операции для освобождения места под новую операцию
-        /// </summary>
-        /// <param name="insertOperationN">Номер операции, начиная с которого нужно сдвинуть нумерацию</param>
-        private void RenumberOperationsForInsertion(int insertOperationN)
-        {
-            // Находим все операции с номерами >= insertOperationN и увеличиваем их номера на 1
-            var operationsToRenumber = _normRaszList
-                .Where(r => r.N >= insertOperationN)
-                .OrderByDescending(r => r.N) // Обрабатываем в обратном порядке, чтобы избежать конфликтов
-                .ToList();
-
-            if (operationsToRenumber.Any())
-            {
-                _logger.LogEventAsync($"Перенумерация операций: сдвиг {operationsToRenumber.Count} операций начиная с номера {insertOperationN}", "RenumberOperationsForInsertion");
-
-                foreach (var operation in operationsToRenumber)
-                {
-                    int oldN = operation.N;
-                    operation.N += 1;
-
-                    // Помечаем как измененную, если это не новая запись
-                    if (!operation.IsNew)
-                    {
-                        operation.IsModified = true;
-                    }
-
-                    _logger.LogEventAsync($"Операция перенумерована: {oldN}.{operation.N1} -> {operation.N}.{operation.N1}", "RenumberOperationsForInsertion");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Перенумеровывает операции после удаления строки
-        /// </summary>
-        /// <param name="normRaszList">Список операций</param>
-        /// <param name="deletedOperationN">Номер удаленной операции</param>
-        /// <param name="deletedOperationN1">Номер удаленной подоперации</param>
-        private static void RenumberOperationsAfterDeletion(BindingList<NormRasz> normRaszList, int deletedOperationN, int deletedOperationN1)
-        {
-            if (deletedOperationN1 == 0)
-            {
-                // Удаляется основная операция (например, 3.0)
-                // Нужно перенумеровать все операции с N > deletedOperationN
-                var operationsToRenumber = normRaszList
-                    .Where(r => r.N > deletedOperationN)
-                    .ToList();
-
-                foreach (var operation in operationsToRenumber)
-                {
-                    operation.N -= 1;
-                    // Помечаем как измененную, если это не новая запись
-                    if (!operation.IsNew)
-                    {
-                        operation.IsModified = true;
-                    }
-                }
-            }
-            else
-            {
-                // Удаляется подоперация (например, 2.3)
-                // Нужно перенумеровать только подоперации с тем же N и N1 > deletedOperationN1
-                var suboperationsToRenumber = normRaszList
-                    .Where(r => r.N == deletedOperationN && r.N1 > deletedOperationN1)
-                    .ToList();
-
-                foreach (var operation in suboperationsToRenumber)
-                {
-                    operation.N1 -= 1;
-                    // Помечаем как измененную, если это не новая запись
-                    if (!operation.IsNew)
-                    {
-                        operation.IsModified = true;
-                    }
-                }
-
-                // Проверяем, осталась ли только одна подоперация с данным номером
-                var remainingSuboperationsWithSameN = normRaszList
-                    .Where(r => r.N == deletedOperationN && r.N1 > 0)
-                    .ToList();
-
-                if (remainingSuboperationsWithSameN.Count == 1)
-                {
-                    // Если осталась только одна подоперация, делаем её основной (N1 = 0)
-                    var lastSuboperation = remainingSuboperationsWithSameN.First();
-                    lastSuboperation.N1 = 0;
-                    // Помечаем как измененную, если это не новая запись
-                    if (!lastSuboperation.IsNew)
-                    {
-                        lastSuboperation.IsModified = true;
-                    }
-                }
-                else if (remainingSuboperationsWithSameN.Count == 0)
-                {
-                    // Если не осталось ни одной подоперации, проверяем есть ли основная операция
-                    var mainOperation = normRaszList.FirstOrDefault(r => r.N == deletedOperationN && r.N1 == 0);
-                    // Основная операция остается без изменений (это нормально)
-                }
-            }
-        }
+        // Удалены локальные Renumber*/Convert — используется OperationNumberingService
 
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
@@ -2231,7 +2066,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 // Финал: общий пересчёт, сортировка и рефреш
-                RecalculateAllOperationNumbers(); // стабилизирует 1 / 1.1, 1.2, 2 / 3.1 ... по текущему расположению
+                OperationNumberingService.RecalculateAllOperationNumbers(_normRaszList); // стабилизирует 1 / 1.1, 1.2, 2 / 3.1 ... по текущему расположению
                 _normRaszBindingSource.ResetBindings(false);
                 TWGridHelper.sortGridView(gridViewRasz);
                 // Сброс выделения после группового перемещения
@@ -2256,36 +2091,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         // Вставка блока после target внутри одной и той же главы (N совпадают)
         private void MoveBlockWithinSameGroup(List<NormRasz> block, NormRasz target)
         {
-            int groupN = target.N;
-
-            // Текущий порядок внутри группы
-            var group = _normRaszList
-                .Where(x => x.N == groupN)
-                .OrderBy(x => x.N1)
-                .ToList();
-
-            // Убираем переносимый блок из списка
-            var set = new HashSet<NormRasz>(block);
-            group = group.Where(x => !set.Contains(x)).ToList();
-
-            // Вставляем блок сразу после target
-            int insertIndex = Math.Max(0, group.IndexOf(target) + 1);
-            group.InsertRange(insertIndex, block);
-
-            // Перенумеруем N1 внутри группы
-            if (group.Count == 1)
-            {
-                group[0].N1 = 0;
-                if (!group[0].IsNew) group[0].IsModified = true;
-            }
-            else
-            {
-                for (int i = 0; i < group.Count; i++)
-                {
-                    group[i].N1 = i + 1;
-                    if (!group[i].IsNew) group[i].IsModified = true;
-                }
-            }
+            OperationNumberingService.MoveBlockWithinSameGroup(_normRaszList, block, target);
         }
 
         private void gridControlRasz_DragLeave(object sender, EventArgs e)
@@ -2337,33 +2143,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         // Перенос операции в указанную группу с размещением в конце подгруппы (или после указанного N1)
         private void MoveRaszIntoGroup(NormRasz dragged, int targetGroupN, int? desiredAfterN1)
         {
-            if (dragged == null) return;
-            try
-            {
-                if (dragged.N != targetGroupN)
-                {
-                    dragged.N = targetGroupN;
-                }
-
-                var groupItems = _normRaszList.Where(x => x.N == targetGroupN && !ReferenceEquals(x, dragged)).ToList();
-                if (groupItems.Count == 0)
-                {
-                    dragged.N1 = 0;
-                }
-                else if (desiredAfterN1.HasValue)
-                {
-                    // Простейшая логика вставки "после" — ставим N1 больше целевого,
-                    // точное позиционирование обеспечит последующий пересчет
-                    dragged.N1 = desiredAfterN1.Value + 1;
-                }
-                else
-                {
-                    dragged.N1 = groupItems.Max(x => x.N1) + 1;
-                }
-
-                if (!dragged.IsNew) dragged.IsModified = true;
-            }
-            catch { }
+            OperationNumberingService.MoveRaszIntoGroup(dragged, targetGroupN, desiredAfterN1, _normRaszList);
         }
 
         // Визуализация перетаскиваемой строки (адорнер)
@@ -3630,51 +3410,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                if (_normRaszList == null || _normRaszList.Count == 0)
-                    return;
-
-                // Группируем операции по основным номерам (N), сортируем по текущему порядку
-                var operationGroups = _normRaszList
-                    .GroupBy(r => r.N)
-                    .OrderBy(g => g.Key)
-                    .ToList();
-
-                int currentMainNumber = 1;
-
-                foreach (var group in operationGroups)
-                {
-                    var operations = group.OrderBy(r => r.N1).ToList();
-                    
-                    for (int i = 0; i < operations.Count; i++)
-                    {
-                        var operation = operations[i];
-                        operation.N = currentMainNumber;
-                        
-                        // Если это единственная операция в группе, то N1 = 0
-                        if (operations.Count == 1)
-                        {
-                            operation.N1 = 0;
-                        }
-                        else
-                        {
-                            // Если есть несколько операций, нумеруем подоперации с 1
-                            operation.N1 = i + 1;
-                        }
-
-                        // Помечаем как измененную, если это не новая запись
-                        if (!operation.IsNew)
-                        {
-                            operation.IsModified = true;
-                        }
-                    }
-
-                    currentMainNumber++;
-                }
-
-                // Обновляем UI
+                if (_normRaszList == null || _normRaszList.Count == 0) return;
+                OperationNumberingService.RecalculateAllOperationNumbers(_normRaszList);
                 _normRaszBindingSource.ResetBindings(false);
                 TWGridHelper.sortGridView(gridViewRasz);
-
                 _logger.LogEventAsync($"Выполнен полный пересчет нумерации для {_normRaszList.Count} операций", "RecalculateAllOperationNumbers");
             }
             catch (Exception ex)
