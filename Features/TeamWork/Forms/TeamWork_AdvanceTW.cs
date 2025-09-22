@@ -3344,17 +3344,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            // Определяем стартовый номер N для новых операций
-            int currentMaxN = 0;
-            if (_normRaszList != null && _normRaszList.Count > 0)
-            {
-                currentMaxN = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
-            }
+            // Определяем стартовый номер N для новых операций (для смещения второй части)
+            int currentMaxN = (_normRaszList != null && _normRaszList.Count > 0)
+                ? _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max()
+                : 0;
 
+            bool isFirstPart = _normRaszList.Count == 0; // если список пуст — это первая вставляемая часть
             foreach (var id in bufferIdsToUse)
             {
                 var raszList = await _artNormService.GetRelatedNormRasz(id);
                 if (raszList == null) continue;
+                // Определяем смещение для данной части: для первой части смещение 0, для второй — currentMaxN
+                int partMaxN = raszList.Select(x => x.N).DefaultIfEmpty(0).Max();
+                int offset = isFirstPart ? 0 : currentMaxN;
                 foreach (var item in raszList)
                 {
                     // Сбрасываем ID операции, чтобы база присвоила новый ID
@@ -3368,10 +3370,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                     item.nrCompAdd = null;
                     
                     item.IsNew = true;
-                    currentMaxN += 1;
-                    item.N = currentMaxN;
+                    // Сохраняем группировку: первая часть — исходные N/N1, вторая часть — N сдвигаем на offset, N1 оставляем
+                    item.N = item.N + offset;
                     _normRaszList.Add(item);
                 }
+                // Обновляем текущий максимум для следующей части: старая граница + максимум вставленной части
+                currentMaxN = currentMaxN + partMaxN;
+                isFirstPart = false;
             }
             // После добавления сортируем таблицу, чтобы новые элементы встали
             // в порядке возрастания N
