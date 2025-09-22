@@ -819,6 +819,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        // дубликат метода удалён
+
         private async void XtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             if (e.Page == null) return;
