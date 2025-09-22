@@ -229,6 +229,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridControlRasz.DragDrop += gridControlRasz_DragDrop;
                 gridControlRasz.DragLeave += gridControlRasz_DragLeave;
                 gridControlRasz.QueryContinueDrag += gridControlRasz_QueryContinueDrag;
+
+                // Поддержка перетаскивания остаётся через DoDragDrop (настройки DevExpress зависят от версии)
             }
 
             // Группировка по основному номеру операции (N)
@@ -1321,8 +1323,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 this.FormClosed += (s, args) =>
                 {
                     try { TeamWorkBuffer.BufferChanged -= OnBufferChanged; } catch { }
-                    try { HideRaszAdorner(); } catch { }
-                    try { StopRaszAutoScroll(); } catch { }
                 };
             }
         }
@@ -1816,9 +1816,6 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     _raszDragging = true;
 
-                    // Адорнер показываем по первой строке (достаточно для подсказки)
-                    ShowRaszAdorner(draggedList[0], Control.MousePosition);
-
                     // Готовим DataObject: и список, и одиночную — для обратной совместимости
                     var data = new DataObject();
                     data.SetData(typeof(List<NormRasz>), draggedList);
@@ -1846,23 +1843,29 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (hit.InRow && hit.RowHandle >= 0 && !gridViewRasz.IsNewItemRow(hit.RowHandle))
                 {
                     e.Effect = DragDropEffects.Move;
-                    UpdateRaszAdornerPosition(new Point(e.X, e.Y));
                 }
                 else if (gridViewRasz.IsGroupRow(hit.RowHandle))
                 {
                     // Разрешаем дроп на заголовок группы (перенос в группу)
                     e.Effect = DragDropEffects.Move;
-                    UpdateRaszAdornerPosition(new Point(e.X, e.Y));
                 }
                 else
                 {
                     // Разрешаем дроп в пустую область грида — вынести в отдельную операцию
                     e.Effect = DragDropEffects.Move;
-                    UpdateRaszAdornerPosition(new Point(e.X, e.Y));
                 }
 
-                // Автопрокрутка при наведении к краю
-                HandleRaszAutoScroll((Control)sender, clientPoint);
+                // Явная автопрокрутка у верхней/нижней кромки
+                const int margin = 24;
+                var bounds = gridControlRasz.ClientRectangle;
+                if (clientPoint.Y <= bounds.Top + margin)
+                {
+                    gridViewRasz.TopRowIndex = Math.Max(0, gridViewRasz.TopRowIndex - 1);
+                }
+                else if (clientPoint.Y >= bounds.Bottom - margin)
+                {
+                    gridViewRasz.TopRowIndex = gridViewRasz.TopRowIndex + 1;
+                }
             }
             catch { e.Effect = DragDropEffects.None; }
         }
@@ -2074,7 +2077,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     try { gridViewRasz.ClearSelection(); } catch { }
                 }
-                HideRaszAdorner();
+                // Встроенная визуализация DevExpress — свой адорнер не используем
             }
             catch
             {
@@ -2094,20 +2097,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             OperationNumberingService.MoveBlockWithinSameGroup(_normRaszList, block, target);
         }
 
-        private void gridControlRasz_DragLeave(object sender, EventArgs e)
-        {
-            HideRaszAdorner();
-            StopRaszAutoScroll();
-        }
+        private void gridControlRasz_DragLeave(object sender, EventArgs e) { }
 
-        private void gridControlRasz_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
-        {
-            if (e.Action == DragAction.Cancel || e.Action == DragAction.Drop)
-            {
-                HideRaszAdorner();
-                StopRaszAutoScroll();
-            }
-        }
+        private void gridControlRasz_QueryContinueDrag(object sender, QueryContinueDragEventArgs e) { }
 
         private void ConfigureRaszGrouping()
         {
@@ -2146,11 +2138,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             OperationNumberingService.MoveRaszIntoGroup(dragged, targetGroupN, desiredAfterN1, _normRaszList);
         }
 
-        // Визуализация перетаскиваемой строки (адорнер)
-        private Form _raszDragAdornerForm;
-        private Bitmap _raszDragAdornerBitmap;
-        private const int _raszAdornerOffsetX = 16;
-        private const int _raszAdornerOffsetY = 16;
+        // Визуализация перетаскивания — используем встроенную DevExpress (адорнер удалён)
 
         // Собираем выделенные строки (или текущую), упорядочиваем как на экране
         private List<NormRasz> GetSelectedRaszRowsOrCurrent(GridView view)
@@ -2182,168 +2170,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 .ToList();
         }
 
-        private void ShowRaszAdorner(NormRasz row, Point screenPos)
-        {
-            try
-            {
-                HideRaszAdorner();
-                _raszDragAdornerBitmap = CreateRaszRowPreview(row);
-                _raszDragAdornerForm = new Form
-                {
-                    FormBorderStyle = FormBorderStyle.None,
-                    ShowInTaskbar = false,
-                    TopMost = true,
-                    StartPosition = FormStartPosition.Manual,
-                    BackColor = Color.Lime,
-                    Opacity = 0.85,
-                    Size = _raszDragAdornerBitmap.Size
-                };
-                _raszDragAdornerForm.TransparencyKey = Color.Lime;
-                _raszDragAdornerForm.BackgroundImage = _raszDragAdornerBitmap;
-                _raszDragAdornerForm.Location = new Point(screenPos.X + _raszAdornerOffsetX, screenPos.Y + _raszAdornerOffsetY);
-                _raszDragAdornerForm.Show();
-            }
-            catch { }
-        }
-
-        private void UpdateRaszAdornerPosition(Point screenPos)
-        {
-            try
-            {
-                if (_raszDragAdornerForm != null && !_raszDragAdornerForm.IsDisposed)
-                {
-                    _raszDragAdornerForm.Location = new Point(screenPos.X + _raszAdornerOffsetX, screenPos.Y + _raszAdornerOffsetY);
-                }
-            }
-            catch { }
-        }
-
-        private void HideRaszAdorner()
-        {
-            try
-            {
-                if (_raszDragAdornerForm != null)
-                {
-                    if (!_raszDragAdornerForm.IsDisposed)
-                    {
-                        _raszDragAdornerForm.Close();
-                    }
-                    _raszDragAdornerForm.Dispose();
-                    _raszDragAdornerForm = null;
-                }
-                if (_raszDragAdornerBitmap != null)
-                {
-                    _raszDragAdornerBitmap.Dispose();
-                    _raszDragAdornerBitmap = null;
-                }
-            }
-            catch { }
-        }
-
-        private Bitmap CreateRaszRowPreview(NormRasz row)
-        {
-            try
-            {
-                int width = 420;
-                int height = 28;
-                var bmp = new Bitmap(width, height);
-                using (var g = Graphics.FromImage(bmp))
-                {
-                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-                    g.Clear(Color.Transparent);
-
-                    using (var bg = new SolidBrush(Color.FromArgb(250, 250, 250)))
-                        g.FillRectangle(bg, 0, 0, width - 1, height - 1);
-                    using (var pen = new Pen(Color.FromArgb(205, 205, 205)))
-                        g.DrawRectangle(pen, 0, 0, width - 1, height - 1);
-
-                    string title = $"{row.N}.{row.N1}";
-                    string text = row.Text ?? string.Empty;
-
-                    using (var fontBold = new Font("Arial", 9f, FontStyle.Bold))
-                    using (var font = new Font("Arial", 9f, FontStyle.Regular))
-                    using (var brush = new SolidBrush(Color.Black))
-                    {
-                        g.DrawString(title, fontBold, brush, new RectangleF(6, 4, 60, height - 8));
-                        g.DrawString(text, font, brush, new RectangleF(72, 4, width - 78, height - 8));
-                    }
-                }
-                return bmp;
-            }
-            catch
-            {
-                return new Bitmap(1, 1);
-            }
-        }
-
-        // Автопрокрутка при перетаскивании
-        private Timer _raszAutoScrollTimer;
-        private int _raszAutoScrollDirection = 0; // -1 вверх, 1 вниз, 0 нет
-        private const int _raszAutoScrollMargin = 28;
-        private const int _raszAutoScrollRowsPerTick = 1;
-
-        private void EnsureRaszAutoScrollTimer()
-        {
-            if (_raszAutoScrollTimer != null) return;
-            _raszAutoScrollTimer = new Timer { Interval = 60 };
-            _raszAutoScrollTimer.Tick += (s, e) =>
-            {
-                try
-                {
-                    if (_raszAutoScrollDirection == 0 || gridViewRasz == null) return;
-                    int top = gridViewRasz.TopRowIndex;
-                    if (_raszAutoScrollDirection < 0)
-                    {
-                        if (top > 0)
-                            gridViewRasz.TopRowIndex = Math.Max(0, top - _raszAutoScrollRowsPerTick);
-                    }
-                    else
-                    {
-                        // Приблизительная граница вниз (RowCount может быть больше видимых строк)
-                        gridViewRasz.TopRowIndex = top + _raszAutoScrollRowsPerTick;
-                    }
-                }
-                catch { }
-            };
-        }
-
-        private void HandleRaszAutoScroll(Control sender, Point clientPoint)
-        {
-            try
-            {
-                EnsureRaszAutoScrollTimer();
-                var rect = sender.ClientRectangle;
-                int newDirection = 0;
-                if (clientPoint.Y <= rect.Top + _raszAutoScrollMargin)
-                    newDirection = -1;
-                else if (clientPoint.Y >= rect.Bottom - _raszAutoScrollMargin)
-                    newDirection = 1;
-
-                if (newDirection == 0)
-                {
-                    StopRaszAutoScroll();
-                }
-                else
-                {
-                    _raszAutoScrollDirection = newDirection;
-                    if (!_raszAutoScrollTimer.Enabled)
-                        _raszAutoScrollTimer.Start();
-                }
-            }
-            catch { }
-        }
-
-        private void StopRaszAutoScroll()
-        {
-            try
-            {
-                _raszAutoScrollDirection = 0;
-                if (_raszAutoScrollTimer != null && _raszAutoScrollTimer.Enabled)
-                    _raszAutoScrollTimer.Stop();
-            }
-            catch { }
-        }
+        // Автопрокрутка — используем встроенную в DevExpress (удалён самописный таймер)
 
         private async void gridViewRasz_EditFormHidden(object sender, EditFormHiddenEventArgs e)
         {
