@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using DevExpress.Data;
 using DevExpress.Data.Filtering;
+using DevExpress.DataAccess.ConnectionParameters;
 using DevExpress.Utils;
 using DevExpress.Xpo.DB;
 using DevExpress.Xpo.Helpers;
@@ -13,6 +14,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraToolbox;
+using Newtonsoft.Json;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
 using SewingProduction.Features.Articul;
@@ -34,7 +36,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -543,7 +544,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     await _logger.LogEventAsync($"Данные PZVOperListByPachList успешно загружены", "LoadPZVOperListByPachListNewDataAsync");
                     //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
                     _pZVOperListByPachListNewBindingList.Add(pZVOperListByPachListNewData[0]);
+                    //_pZVOperListByPachListNewBindingSource.Sort = "olPzvArticul, olNPach, olNo, olNpo, olPzvIDParent, olPzvID";
                     _pZVOperListByPachListNewBindingSource.ResetBindings(false);
+
                 }
                 else
                 {
@@ -660,6 +663,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //MessageBox.Show(jsonString);
 
                 await LoadPZVOperListByPachListNewDataAsync(jsonString, vyazPodrKod);
+                gridViewPZVOperList.BeginSort();
+                gridViewPZVOperList.ClearSorting();
+                // Сначала сортируем по артикулу, далее пачка, номер операции/подоперации, ID родительской записи, ID записи
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvArticul"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNPach"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNo"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNpo"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvIDParent"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvID"], ColumnSortOrder.Ascending));
+
+                gridViewPZVOperList.EndSort();
 
                 // Безопасное получение списков
                 var oldList = _pZVOperListByPachListBindingSource.List?.Cast<dynamic>().Where(x => x != null).ToList() ?? new List<dynamic>();

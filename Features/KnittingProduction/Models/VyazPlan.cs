@@ -242,6 +242,8 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public int nom_n { get; set; }
         [NotMapped]
+        public int annID { get; set; }
+        [NotMapped]
         public int n_pach { get; set; }
         [NotMapped]
         public string pach_kod { get; set; }
