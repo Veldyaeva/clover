@@ -1482,8 +1482,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _isInitialLoading = false; // Сбрасываем флаг начальной загрузки
 
-                // Отписываемся от событий при выходе из формы
-                this.FormClosed += (s, args) => TeamWorkBuffer.BufferChanged -= OnBufferChanged;
+                // Отписываемся от событий при выходе из формы и очищаем ресурсы DnD
+                this.FormClosed += (s, args) =>
+                {
+                    try { TeamWorkBuffer.BufferChanged -= OnBufferChanged; } catch { }
+                    try { HideRaszAdorner(); } catch { }
+                    try { StopRaszAutoScroll(); } catch { }
+                };
             }
         }
         private async void LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
@@ -1675,31 +1680,63 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                var rasz = _normRaszList?.Where(r => r.N1 < 100 && (r.KodProizv == 1 || r.KodProizv == 3)).ToList() ?? new List<NormRasz>();
+				// Один проход по данным без лишних Where/ToList
+				int sekVyazo = 0, sekVyaz5 = 0, sekVyaz12 = 0, sekVyaz7 = 0, sekVyaz10 = 0, sekVyaz6 = 0, sekVyaz3 = 0;
+				int sekVyaz14 = 0, sekVyaz70 = 0, sekVyaz71 = 0, sekVyaz72 = 0, sekVyaz62 = 0, sekVyaz57 = 0, sekVyaz18 = 0;
+				int sekVyazAll = 0, sekShv = 0, sekKr = 0, sekTotal = 0, sebTotal = 0;
 
-                int Sum(Func<NormRasz, bool> condition) => rasz.Where(condition).Sum(r => r.Sek);
-                //      int Sum1(Func<NormRask, bool> condition)=>rask
-                _currentAnnData.SekVyazo = Sum(r => r.KodOb == 28);
-                _currentAnnData.SekVyaz5 = Sum(r => r.KodOb == 25);
-                _currentAnnData.SekVyaz12 = Sum(r => r.KodOb == 35);
-                _currentAnnData.SekVyaz7 = Sum(r => r.KodOb == 26);
-                _currentAnnData.SekVyaz10 = Sum(r => r.KodOb == 37);
-                _currentAnnData.SekVyaz6 = Sum(r => r.KodOb == 38);
-                _currentAnnData.SekVyaz3 = Sum(r => r.KodOb == 29);
-                _currentAnnData.SekShv = Sum(r => r.KodPodr != 1 && r.KodPodr != 6);
-                _currentAnnData.SekKr = _normRaszList.Where(r => r.KodPodr == 7).Sum(r => r.Sek);
-                _currentAnnData.Sek = _normRaszList.Where(r => r.N1 < 100).Sum(r => r.Sek);
-                _currentAnnData.Seb = (int)_normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
-                _currentAnnData.SekVyaz14 = Sum(r => r.KodOb == 62);
-                _currentAnnData.SekVyaz70 = Sum(r => r.KodOb == 55);
-                _currentAnnData.SekVyaz71 = Sum(r => r.KodOb == 59);
-                _currentAnnData.SekVyaz72 = Sum(r => r.KodOb == 73);
-                _currentAnnData.SekVyaz62 = Sum(r => r.KodOb == 60);
-                _currentAnnData.SekVyaz57 = Sum(r => r.KodOb == 114);
-                _currentAnnData.SekVyaz18 = Sum(r => r.KodOb == 115);
-                _currentAnnData.SekVyaz = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+				if (_normRaszList != null)
+				{
+					foreach (var r in _normRaszList)
+					{
+						if (r.N1 >= 100) continue;
+						sekTotal += r.Sek;
+						sebTotal += (int)r.Seb;
 
-                _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
+						if (r.KodPodr == 7) sekKr += r.Sek;
+						if (r.KodPodr == 1 || r.KodPodr == 6) sekVyazAll += r.Sek; else sekShv += r.Sek;
+
+						switch (r.KodOb)
+						{
+							case 28: sekVyazo += r.Sek; break;
+							case 25: sekVyaz5 += r.Sek; break;
+							case 35: sekVyaz12 += r.Sek; break;
+							case 26: sekVyaz7 += r.Sek; break;
+							case 37: sekVyaz10 += r.Sek; break;
+							case 38: sekVyaz6 += r.Sek; break;
+							case 29: sekVyaz3 += r.Sek; break;
+							case 62: sekVyaz14 += r.Sek; break;
+							case 55: sekVyaz70 += r.Sek; break;
+							case 59: sekVyaz71 += r.Sek; break;
+							case 73: sekVyaz72 += r.Sek; break;
+							case 60: sekVyaz62 += r.Sek; break;
+							case 114: sekVyaz57 += r.Sek; break;
+							case 115: sekVyaz18 += r.Sek; break;
+						}
+					}
+				}
+
+				_currentAnnData.SekVyazo = sekVyazo;
+				_currentAnnData.SekVyaz5 = sekVyaz5;
+				_currentAnnData.SekVyaz12 = sekVyaz12;
+				_currentAnnData.SekVyaz7 = sekVyaz7;
+				_currentAnnData.SekVyaz10 = sekVyaz10;
+				_currentAnnData.SekVyaz6 = sekVyaz6;
+				_currentAnnData.SekVyaz3 = sekVyaz3;
+				_currentAnnData.SekKr = sekKr;
+				_currentAnnData.Sek = sekTotal;
+				_currentAnnData.Seb = sebTotal;
+				_currentAnnData.SekVyaz14 = sekVyaz14;
+				_currentAnnData.SekVyaz70 = sekVyaz70;
+				_currentAnnData.SekVyaz71 = sekVyaz71;
+				_currentAnnData.SekVyaz72 = sekVyaz72;
+				_currentAnnData.SekVyaz62 = sekVyaz62;
+				_currentAnnData.SekVyaz57 = sekVyaz57;
+				_currentAnnData.SekVyaz18 = sekVyaz18;
+				_currentAnnData.SekVyaz = sekVyazAll;
+
+				// Если секции вязания = 0, то швейку приравниваем к общим сек
+				_currentAnnData.SekShv = _currentAnnData.SekVyaz == 0 ? _currentAnnData.Sek : sekShv;
 
                 if (!this.IsDisposed && this.IsHandleCreated)
                 {
@@ -3608,8 +3645,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     var operations = group.OrderBy(r => r.N1).ToList();
                     
-                    foreach (var operation in operations)
+                    for (int i = 0; i < operations.Count; i++)
                     {
+                        var operation = operations[i];
                         operation.N = currentMainNumber;
                         
                         // Если это единственная операция в группе, то N1 = 0
@@ -3620,7 +3658,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         else
                         {
                             // Если есть несколько операций, нумеруем подоперации с 1
-                            operation.N1 = operations.IndexOf(operation) + 1;
+                            operation.N1 = i + 1;
                         }
 
                         // Помечаем как измененную, если это не новая запись
