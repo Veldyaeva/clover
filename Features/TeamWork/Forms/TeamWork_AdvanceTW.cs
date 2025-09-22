@@ -1,11 +1,7 @@
 using Dapper;
-using DevExpress.XtraBars.Customization;
-using DevExpress.XtraDiagram.Bars;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using NLog.Filters;
 using SewingProduction.form.TeamWork.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -20,10 +16,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
@@ -2250,40 +2244,40 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                 {
-                          RecalculateSek();
-                  //  var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
-                  ////  Thread.Sleep(5000);
+                    RecalculateSek();
+                    //  var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
+                    ////  Thread.Sleep(5000);
 
-                  //  // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
-                  //  if (calculatedData != null)
-                  //  {
-                  //      _currentAnnData.SekVyaz = calculatedData.sek_sh1;
-                  //      _currentAnnData.SekVyazo = calculatedData.sek_O;
-                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3;
-                  //      _currentAnnData.SekVyaz5 = calculatedData.sek_5;
-                  //      _currentAnnData.SekVyaz12 = calculatedData.sek_12;
-                  //      _currentAnnData.SekVyaz7 = calculatedData.sek_7;
-                  //      _currentAnnData.SekVyaz10 = calculatedData.sek_10;
-                  //      _currentAnnData.SekVyaz6 = calculatedData.sek_6;
-                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3; 
-                  //      _currentAnnData.SekVyaz70 = calculatedData.sek_70;
-                  //      _currentAnnData.SekVyaz71 = calculatedData.sek_71;
-                  //      _currentAnnData.SekVyaz72 = calculatedData.sek_72;
-                  //      _currentAnnData.SekVyaz62 = calculatedData.sek_62;
-                  //      _currentAnnData.SekVyaz14 = calculatedData.sek_14;
-                  //      _currentAnnData.SekVyaz57 = calculatedData.sek_57;
-                  //      _currentAnnData.SekVyaz18 = calculatedData.sek_18;
-                  //      _currentAnnData.SekShv = calculatedData.sek_shv;
-                  //      //_currentAnnData.SekShv1 = calculatedData.sek_sh1;
-                  //      _currentAnnData.SekKr = calculatedData.sek_kr;
-                  //      _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
-                  //      _currentAnnData.Seb = (int)calculatedData.sb; // 'sb' из view - это себестоимость 
-                  //  }
-                  //  else
-                  //  {
-                  //      // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
-                  //       //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
-                  //  }
+                    //  // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
+                    //  if (calculatedData != null)
+                    //  {
+                    //      _currentAnnData.SekVyaz = calculatedData.sek_sh1;
+                    //      _currentAnnData.SekVyazo = calculatedData.sek_O;
+                    //      _currentAnnData.SekVyaz3 = calculatedData.sek_3;
+                    //      _currentAnnData.SekVyaz5 = calculatedData.sek_5;
+                    //      _currentAnnData.SekVyaz12 = calculatedData.sek_12;
+                    //      _currentAnnData.SekVyaz7 = calculatedData.sek_7;
+                    //      _currentAnnData.SekVyaz10 = calculatedData.sek_10;
+                    //      _currentAnnData.SekVyaz6 = calculatedData.sek_6;
+                    //      _currentAnnData.SekVyaz3 = calculatedData.sek_3; 
+                    //      _currentAnnData.SekVyaz70 = calculatedData.sek_70;
+                    //      _currentAnnData.SekVyaz71 = calculatedData.sek_71;
+                    //      _currentAnnData.SekVyaz72 = calculatedData.sek_72;
+                    //      _currentAnnData.SekVyaz62 = calculatedData.sek_62;
+                    //      _currentAnnData.SekVyaz14 = calculatedData.sek_14;
+                    //      _currentAnnData.SekVyaz57 = calculatedData.sek_57;
+                    //      _currentAnnData.SekVyaz18 = calculatedData.sek_18;
+                    //      _currentAnnData.SekShv = calculatedData.sek_shv;
+                    //      //_currentAnnData.SekShv1 = calculatedData.sek_sh1;
+                    //      _currentAnnData.SekKr = calculatedData.sek_kr;
+                    //      _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
+                    //      _currentAnnData.Seb = (int)calculatedData.sb; // 'sb' из view - это себестоимость 
+                    //  }
+                    //  else
+                    //  {
+                    //      // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
+                    //       //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
+                    //  }
 
                 }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
@@ -2463,7 +2457,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
-
             // Используем глобальный буфер если доступен, иначе локальный
             IReadOnlyList<int> bufferIdsToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferIds : (_bufferWorkDivision > 0 ? new List<int> { _bufferWorkDivision } : new List<int>());
 
@@ -2501,13 +2494,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                         // Очищаем текущие списки
                         _normRaszList?.Clear();
-                        _normRaskList?.Clear();
-                        _normKontList?.Clear();
                         _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
 
                         _normRaszBindingSource?.ResetBindings(false);
-                        _normRaskBindingSource?.ResetBindings(false);
-                        _normKontBindingSource?.ResetBindings(false);
                     }
 
                     // Определяем стартовый номер N для новых операций

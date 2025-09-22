@@ -1,13 +1,12 @@
-﻿using System;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using SewingProduction.Models;
-using SewingProduction.Helpers;
 
-namespace SewingProduction.Helpers
+namespace SewingProduction.Features.TeamWork.Helpers
 {
     public static class CloneHelper
     {
@@ -64,6 +63,8 @@ namespace SewingProduction.Helpers
         /// Клонирует только технологические данные ArtNormN (времена, себестоимость, комментарии)
         /// Не копирует индивидуальную информацию изделия (артикул, группа, модель, ответственные)
         /// </summary>
+        /// <param name="source">Исходный объект</param>
+        /// <returns>Клон с только технологическими данными</returns>
         public static ArtNormN CloneOperationalData(this ArtNormN source)
         {
             if (source == null)
@@ -95,52 +96,61 @@ namespace SewingProduction.Helpers
             clone.Komment = source.Komment;
             clone.Reco = source.Reco;
             clone.Slogn = source.Slogn;
+            clone.Kod = source.Kod;
+            clone.grup = source.grup;
+            clone.Articul = source.Articul;
+            clone.Mod = source.Mod;
+            clone.Diz = source.Diz;
+            clone.Constr = source.Constr;
 
-            // НЕ копируем индивидуальную информацию:
-            // Kod, grup, Articul, Mod, Size_label, Diz, Constr
-            // dateCreate, dateUpdate, Status, StatusText, Arh, ParentId, AnnID
-            // dateAdd, compAdd, dateDel, compDel
-
-            return clone;
-        }
-
-        /// <summary>
-        /// Клонирует для процедуры "Дубль" - только технологические данные
-        /// Устанавливает корректные значения для нового разделения труда
-        /// </summary>
-        public static ArtNormN CloneForDuplication(this ArtNormN source)
-        {
-            var clone = source.CloneOperationalData();
-            
-            // Устанавливаем значения для дублирования
-            clone.AnnID = 0; // База присвоит новый ID
-            clone.ParentId = source.AnnID; // Ссылка на родительскую запись
-            clone.dateCreate = DateTime.Now;
-            clone.dateUpdate = null;
-            clone.Status = (int)Status.Preliminary;
-            clone.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
-            clone.Arh = false;
-            
-            // Очищаем индивидуальную информацию
-            clone.Kod = "";
-            clone.grup = "";
-            clone.Articul = "";
-            clone.Mod = "";
-            clone.Size_label = "";
-            clone.Diz = 0;
-            clone.Constr = 0;
+            // НЕ копируем ID и аудит поля:
+            // AnnID, dateCreate, dateUpdate,
+            clone.ParentId = source.AnnID;
 
             return clone;
         }
 
+        ///// <summary>
+        ///// Клонирует ArtNormN для сценария "Дубль" (дублирование)
+        ///// </summary>
+        ///// <param name="source">Исходный объект</param>
+        ///// <returns>Клон для дублирования</returns>
+        //public static ArtNormN CloneForDuplication(this ArtNormN source)
+        //{
+        //    if (source == null) return null;
+
+        //    var clone = source.CloneOperationalData();
+
+        //    // Устанавливаем значения для дублирования
+        //    clone.AnnID = 0; // База присвоит новый ID
+        //    clone.ParentId = source.AnnID; // Ссылка на родительскую запись
+        //    clone.dateCreate = DateTime.Now;
+        //    clone.dateUpdate = null;
+        //    clone.Status = (int)Status.Preliminary; // Предварительный статус
+        //    clone.Arh = false;
+
+        //    clone.Kod = null;
+        //    clone.grup = source.grup;
+        //    clone.Articul = source.Articul;
+        //    clone.Mod = source.Mod;
+        //    clone.Size_label = null;
+        //    clone.Diz = source.Diz;
+        //    clone.Constr = source.Constr;
+
+        //    return clone;
+        //}
+
         /// <summary>
-        /// Клонирует для Архив+Копия - технологические данные + сохраняет продуктовую информацию
+        /// Клонирует ArtNormN для сценария "Архив+Копия"
         /// </summary>
+        /// <param name="source">Исходный объект</param>
+        /// <param name="isNzp">Является ли НЗП</param>
+        /// <returns>Клон для архив+копия</returns>
         public static ArtNormN CloneForArchiveCopy(this ArtNormN source, bool isNzp = false)
         {
             var clone = source.CloneOperationalData();
-            
-            // Копируем продуктовую информацию для архив+копия
+
+            // Копируем информацию для архив+копия
             clone.Kod = source.Kod;
             clone.grup = source.grup;
             clone.Articul = source.Articul;
@@ -148,7 +158,7 @@ namespace SewingProduction.Helpers
             clone.Size_label = source.Size_label;
             clone.Diz = source.Diz;
             clone.Constr = source.Constr;
-            
+
             // Устанавливаем значения для копии
             clone.AnnID = 0; // База присвоит новый ID
             clone.ParentId = source.AnnID; // Ссылка на родительскую запись

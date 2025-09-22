@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraTab;
+﻿using DevExpress.XtraTab;
 using SewingProduction.Features.UserDistribution.Helpers;
+using System.ComponentModel;
 
 namespace SewingProduction.Core.Class
 {

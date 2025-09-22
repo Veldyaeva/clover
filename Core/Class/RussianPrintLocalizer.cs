@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraPrinting.Localization;
+﻿using DevExpress.XtraPrinting.Localization;
+using System;
 
 public class RussianPrintLocalizer : PreviewLocalizer
 {

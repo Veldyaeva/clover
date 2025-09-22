@@ -1,22 +1,12 @@
-﻿using System;
+﻿using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Utils.VisualEffects;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid.Views.Grid;
-using System.Diagnostics;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.CodeParser;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Helpers;
-using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.form
 {
@@ -99,7 +89,7 @@ namespace SewingProduction.form
         private void gridBrig_Load(object sender, EventArgs e)
         {
             if (gridViewZeh != null && gridViewZeh.RowCount > 0 && gridViewZeh.Columns != null && gridViewZeh.Columns.Count > 0)
-            { 
+            {
                 string nameZeh = gridViewZeh.GetFocusedRowCellValue(gridViewZeh.Columns["Цех"]).ToString();
                 int countVievZeh = gridViewZeh.Columns.Count;
                 bindingBrig.DataSource = _oborudBrigDataService.GetSpBrigFromOborudBrig(nameZeh, countVievZeh);
@@ -130,7 +120,7 @@ namespace SewingProduction.form
                 int getCount = gridViewZeh.Columns.Count;
                 bindingOborud.DataSource = _oborudBrigDataService.GetSpOborudShv(getVid, getCount, getZeh);
                 gridView.BestFitColumns();
-                
+
                 int rowHandle = gridView.LocateByValue("Оборудование", currentOb);
                 if (rowHandle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
                 {

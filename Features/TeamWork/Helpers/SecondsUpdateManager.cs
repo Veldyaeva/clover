@@ -1,11 +1,11 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Models;
 using SewingProduction.Services;
+using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Helpers
 {
@@ -38,7 +38,7 @@ namespace SewingProduction.Helpers
             try
             {
                 statusCallback?.Invoke("⏳ Пересчёт секунд...");
-                
+
                 // Сначала получаем текущие данные для немедленного обновления UI
                 var currentAnn = await _artNormService.GetArtNormDataById(annId);
                 if (currentAnn != null)
@@ -49,7 +49,7 @@ namespace SewingProduction.Helpers
 
                 // Запускаем SQL процедуру пересчёта (если она ещё не запущена)
                 await _artNormService.ExecutePztOperUpdateAsync();
-                
+
                 // Периодически проверяем обновления с увеличивающимся интервалом
                 var delays = new[] { 1000, 2000, 3000, 5000, 10000, 15000 }; // мс
                 int attemptCount = 0;
@@ -60,10 +60,10 @@ namespace SewingProduction.Helpers
                 foreach (var delay in delays)
                 {
                     if (token.IsCancellationRequested) return;
-                    
+
                     await Task.Delay(delay, token);
                     attemptCount++;
-                    
+
                     try
                     {
                         var updatedAnn = await _artNormService.GetArtNormDataById(annId);
@@ -71,7 +71,7 @@ namespace SewingProduction.Helpers
                         {
                             // Проверяем, обновились ли данные
                             bool dataChanged = HasDataChanged(currentAnn, updatedAnn);
-                            
+
                             if (dataChanged)
                             {
                                 currentAnn = updatedAnn;
@@ -80,7 +80,7 @@ namespace SewingProduction.Helpers
                                 await _logger.LogEventAsync($"Секунды успешно обновлены для AnnID: {annId} за {attemptCount} попыток", "SecondsUpdateManager");
                                 return;
                             }
-                            
+
                             statusCallback?.Invoke($"⏳ Проверка {attemptCount}/{delays.Length}...");
                         }
                     }
@@ -123,7 +123,7 @@ namespace SewingProduction.Helpers
                 if (existingItem != null)
                 {
                     existingItem.CopyPropertiesFrom(updatedAnn);
-                    
+
                     // Обновить конкретную строку в GridView
                     int rowHandle = gridView.LocateByValue("AnnID", updatedAnn.AnnID);
                     if (rowHandle >= 0)
@@ -180,4 +180,4 @@ namespace SewingProduction.Helpers
             _updateCts?.Dispose();
         }
     }
-} 
+}

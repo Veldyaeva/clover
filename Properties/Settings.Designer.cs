@@ -106,7 +106,7 @@ namespace SewingProduction.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ace;Persist Security Info=True;User ID=" +
-            "sa;Password=kf,bhbyn;Encrypt=False")]
+            "sa;Password=kf,bhbyn;Encrypt=false;")]
         public string ACEConnectionString {
             get {
                 return ((string)(this["ACEConnectionString"]));

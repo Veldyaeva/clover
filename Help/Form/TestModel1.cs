@@ -1,12 +1,9 @@
-﻿using System;
+﻿using SewingProduction.Services;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
 
 namespace SewingProduction.Help.Form
 {

@@ -1,12 +1,4 @@
-﻿using DevExpress.Data.Linq.Helpers;
-using DevExpress.DataAccess.Sql;
-using DevExpress.XtraScheduler.Native;
-using SewingProduction.form;
-using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Numerics;
+﻿using System;
 
 namespace SewingProduction.Models
 {

@@ -26,6 +26,7 @@ using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.CardByNom.Services;
 using SewingProduction.Features.Furnit.Services;
 using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.form.TeamWork.Interfaces;
 using SewingProduction.Helpers;
@@ -42,6 +43,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -121,7 +123,7 @@ namespace SewingProduction
         private List<SockDefectList> sockDefectListData = new List<SockDefectList>();
         private BindingList<SockDefectList> _sockDefectListBindingList;
         private BindingSource _sockDefectListBindingSource;
-        public CardByNom()
+        public CardByNom(UserClass user) : base(user)
         {
 
             InitializeComponent();
@@ -755,6 +757,11 @@ namespace SewingProduction
         private async void CardByNom_Load(object sender, EventArgs e)
         {
             //ThemeManager.UpdateTheme(this);
+            //gridControlPartNaklList.Visible = false;
+            //gridControlNaklList.Visible = true;
+            layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+            layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+            layoutControlItem110.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
             customRadioGroup2.SelectedIndex = 0;
@@ -1323,6 +1330,10 @@ namespace SewingProduction
 
             if (e.KeyCode == Keys.Enter)
             {
+                //gridControlPartNaklList.Visible = false;
+                //gridControlNaklList.Visible = true;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
                 xtraTabControl1.Enabled = true;
                 xtraTabControl1.Refresh();
                 //WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
@@ -1572,6 +1583,9 @@ namespace SewingProduction
 
         private void simpleButtonPrintNaklXtraReport_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
             NaklReport report1 = new NaklReport();
             report1.RequestParameters = false;
             //report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
@@ -1579,6 +1593,40 @@ namespace SewingProduction
             report1.Parameters["_naklIz"].Value = selectedRow.Iz;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
+
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //report1 = new NaklReport();
+            //report1.RequestParameters = false;
+            ////report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
+            //selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+            //reportPrintTool1 = new ReportPrintTool(report1);
+            //reportPrintTool1.ShowPreviewDialog();
+
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //report1 = new NaklReport();
+            //report1.RequestParameters = false;
+            ////report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
+            //selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+            //reportPrintTool1 = new ReportPrintTool(report1);
+            //reportPrintTool1.ShowPreviewDialog();
+
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
+            //MessageBox.Show($"{ServicePointManager.SecurityProtocol}");
+            //report1 = new NaklReport();
+            //report1.RequestParameters = false;
+            ////report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
+            //selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+            //reportPrintTool1 = new ReportPrintTool(report1);
+            //reportPrintTool1.ShowPreviewDialog();
+
         }
 
         private async void simpleButtonNaklPart_Click(object sender, EventArgs e)
@@ -1594,15 +1642,19 @@ namespace SewingProduction
 
                 this.gridControlPartNaklList.Location = this.gridControlNaklList.Location;
                 this.gridControlPartNaklList.Size = this.gridControlNaklList.Size;
-                this.gridControlPartNaklList.BringToFront();
-                this.gridControlPartNaklList.Visible = true;
+                //this.gridControlPartNaklList.BringToFront();
+                //this.gridControlPartNaklList.Visible = true;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;  // накладные
             }
             else
             {
                 simpleButtonNaklPart.Text = "Показать информацию по делению накладной";
                 simpleButtonPrintNaklXtraReport.Enabled = true;
-                this.gridControlNaklList.BringToFront();
-                this.gridControlPartNaklList.Visible = false;
+                //this.gridControlNaklList.BringToFront();
+                //this.gridControlPartNaklList.Visible = false;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
             }
             gridControlNaklList.Refresh();
         }
@@ -1612,19 +1664,22 @@ namespace SewingProduction
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
-            if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
-            {
-                report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
-                report1.Parameters["_isChip"].Value = IsChip;
-                report1.Parameters["_isUpak"].Value = 0;
-                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-                reportPrintTool1.ShowPreviewDialog();
-            }
-            else
-            {
-                MessageBox.Show("Не выбран расчет для печати");
-            }
+            report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+            report1.Parameters["_isChip"].Value = IsChip;
+            report1.Parameters["_isUpak"].Value = 0;
+            //var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
+            //{
+            //    report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+            //    report1.Parameters["_isChip"].Value = IsChip;
+            //    report1.Parameters["_isUpak"].Value = 0;
+            //    ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            //    reportPrintTool1.ShowPreviewDialog();
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Не выбран расчет для печати");
+            //}
         }
 
         private void simpleButtonPrintMLRTUpak_Click(object sender, EventArgs e)
@@ -1845,6 +1900,11 @@ namespace SewingProduction
         {
             if (e.KeyCode == Keys.Enter)
             {
+                //gridControlPartNaklList.Visible = false;
+                //gridControlNaklList.Visible = true;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+
                 RasInfo.PageVisible = true;
                 FurnInfo.PageVisible = false;
                 WorkInfo.PageVisible = false;
@@ -1961,6 +2021,7 @@ namespace SewingProduction
                     break;
             }
         }
+
 
 
 

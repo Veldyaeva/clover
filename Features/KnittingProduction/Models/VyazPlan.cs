@@ -57,9 +57,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public bool SyncSelection { get; set; } = false;
         [NotMapped]
-        public bool IsModified { get; set; } = false ;
+        public bool IsModified { get; set; } = false;
         [NotMapped]
-        public bool IsNew { get; set; } = false ;
+        public bool IsNew { get; set; } = false;
         [NotMapped]
         public bool IsDeleted { get; set; } = false;
 
@@ -73,9 +73,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
     [Table("plan_sezon_zad_knitMachine")]
     public class PlanSezonZadKnitMachineList : INewable, IModifiable, IDeletable
     {
-        public int pszkmID {  set; get; }
-        public string pszkmPszNom {  set; get; }
-        public int pszkmKnitClass {  set; get; }
+        public int pszkmID { set; get; }
+        public string pszkmPszNom { set; get; }
+        public int pszkmKnitClass { set; get; }
         public int pszkmKmlID { get; set; }
         public int pszkmlSeconds { set; get; }
         public DateTime? pszkmPlanDateFrom { get; set; }
@@ -95,7 +95,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    
+
     public class ArtPrKnitMachineView
     {
         public int kmlid { get; set; }
@@ -336,5 +336,24 @@ namespace SewingProduction.Features.KnittingProduction.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+    }
+    public class KnitPlanReportParametersList
+    {
+        [NotMapped]
+        public int kmlIdVyazClass { get; set; }
+        [NotMapped]
+        public string name_class { get; set; }
+        [NotMapped]
+        public int pszkmKmlID { get; set; }
+        [NotMapped]
+        public string kmlInvNumber { get; set; }
+        [NotMapped]
+        public int yearMonthZapInt { get; set; }
+        [NotMapped]
+        public string yearMonthDateZap { get; set; }
+        [NotMapped]
+        public string articulKod { get; set; }
+        [NotMapped]
+        public string articul { get; set; }
     }
 }

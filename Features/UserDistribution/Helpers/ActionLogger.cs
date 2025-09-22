@@ -1,10 +1,7 @@
-﻿using System;
+﻿using SewingProduction.Helpers;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DevExpress.XtraBars.Ribbon;
-using SewingProduction.Helpers;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
 {

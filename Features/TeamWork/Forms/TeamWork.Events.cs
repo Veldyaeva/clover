@@ -8,6 +8,7 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraScheduler.Commands;
 using DevExpress.XtraScheduler.Reporting;
 using DevExpress.XtraVerticalGrid;
+using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -611,7 +612,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedAnn == null) return;
                     annId = selectedAnn.AnnID;
                     //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
-                    selectedArtNormN = selectedAnn.CloneProperties();
+                    selectedArtNormN = selectedAnn.CloneProperties();//.CloneOperationalData();//
                 }
                 else
                 {
@@ -623,7 +624,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedArtNormN == null) return;
                 }
 
-                if (!Editing) //если можно редактировать
+                if (!Editing) //если нельзя редактировать без проверки
                 //Проверяем статус "актуальный" и наличие даты обновления
                 if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
                 {

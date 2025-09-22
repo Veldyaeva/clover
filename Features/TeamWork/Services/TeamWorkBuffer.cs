@@ -24,8 +24,8 @@ namespace SewingProduction.Services
         /// <summary>
         /// ID буферизованного элемента
         /// </summary>
-        public static int BufferId 
-        { 
+        public static int BufferId
+        {
             get => _bufferId;
             private set
             {
@@ -48,8 +48,8 @@ namespace SewingProduction.Services
         /// <summary>
         /// Текстовое описание буферизованного элемента
         /// </summary>
-        public static string BufferText 
-        { 
+        public static string BufferText
+        {
             get => _bufferText;
             private set
             {
@@ -64,8 +64,8 @@ namespace SewingProduction.Services
         /// <summary>
         /// Данные буферизованного элемента
         /// </summary>
-        public static ArtNormN BufferData 
-        { 
+        public static ArtNormN BufferData
+        {
             get => _bufferData;
             private set
             {
@@ -136,9 +136,9 @@ namespace SewingProduction.Services
         /// </summary>
         private static void OnBufferChanged()
         {
-            BufferChanged?.Invoke(null, new BufferChangedEventArgs 
-            { 
-                BufferId = _bufferId, 
+            BufferChanged?.Invoke(null, new BufferChangedEventArgs
+            {
+                BufferId = _bufferId,
                 BufferText = _bufferText,
                 HasData = HasData,
                 BufferIds = BufferIds.ToList()
@@ -168,4 +168,4 @@ namespace SewingProduction.Services
         /// </summary>
         public bool IsKit => BufferIds != null && BufferIds.Count > 1;
     }
-} 
+}

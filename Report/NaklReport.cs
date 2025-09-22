@@ -1,9 +1,5 @@
-﻿using DevExpress.Pdf.Native;
-using DevExpress.XtraReports.UI;
-using System;
-using System.Collections;
+﻿using DevExpress.XtraReports.UI;
 using System.ComponentModel;
-using System.Drawing;
 
 namespace SewingProduction
 {
@@ -28,8 +24,8 @@ namespace SewingProduction
 
         private void xrSubreport1_ParentChanged(object sender, ChangeEventArgs e)
         {
-            
-            
+
+
         }
 
         private void xrSubreport1_BeforePrint(object sender, CancelEventArgs e)

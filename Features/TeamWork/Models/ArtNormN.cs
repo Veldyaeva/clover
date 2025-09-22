@@ -292,5 +292,14 @@ namespace SewingProduction.Models
             //}
             return cloned;
         }
+
+        /// <summary>
+        /// Создает полную копию объекта ArtNormN (алиас для Clone для обратной совместимости)
+        /// </summary>
+        /// <returns>Копия объекта</returns>
+        public ArtNormN CloneProperties()
+        {
+            return this.Clone();
+        }
     }
 }

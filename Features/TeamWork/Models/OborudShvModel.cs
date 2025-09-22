@@ -8,4 +8,4 @@ namespace SewingProduction.Models
         public int kod_ob { get; set; }
         public string text_ob { get; set; }
     }
-} 
+}

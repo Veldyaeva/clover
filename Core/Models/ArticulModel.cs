@@ -201,7 +201,7 @@ namespace SewingProduction.Core.Models
         public decimal? Brak_percent5 { get; set; }
         public decimal? Brak_percent6 { get; set; }
         public decimal? Brak_percent7 { get; set; }
-        
+
 
 
 

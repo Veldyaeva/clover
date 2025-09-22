@@ -402,6 +402,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1 = new ErrorProvider(components);
             desBindingSource = new BindingSource(components);
             constrBindingSource = new BindingSource(components);
+            gridColumn66 = new DevExpress.XtraGrid.Columns.GridColumn();
             layoutControlItem49 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
@@ -1526,7 +1527,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             ANNgridView.Appearance.SelectedRow.Options.UseFont = true;
             ANNgridView.Appearance.SelectedRow.Options.UseTextOptions = true;
-            ANNgridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colgroup, colarticul, colmod, colsek, coldateUpdate, colsek_vyaz, coldateCreate, gridColumn19, colsek_shv, gridColumn5, colsek_vyazo, gridColumn35, coldateAdd, colsek_vyaz5, colsek_vyaz7, colsek_vyaz12, colsek_vyaz10, colsek_vyaz6, colsek_kr, colslogn, colkomment, colReco, coldiz, colconstr, colannID });
+            ANNgridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colgroup, colarticul, colmod, colsek, coldateUpdate, colsek_vyaz, coldateCreate, gridColumn19, colsek_shv, gridColumn5, colsek_vyazo, gridColumn35, coldateAdd, colsek_vyaz5, colsek_vyaz7, colsek_vyaz12, colsek_vyaz10, colsek_vyaz6, colsek_kr, colslogn, colkomment, colReco, coldiz, colconstr, colannID, gridColumn66 });
             ANNgridView.CustomizationFormBounds = new System.Drawing.Rectangle(688, 388, 308, 314);
             ANNgridView.DetailHeight = 404;
             ANNgridView.FocusRectStyle = DrawFocusRectStyle.RowFocus;
@@ -1570,8 +1571,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             colgroup.MinWidth = 23;
             colgroup.Name = "colgroup";
             colgroup.OptionsColumn.AllowEdit = false;
-            colgroup.Visible = true;
-            colgroup.VisibleIndex = 1;
             colgroup.Width = 64;
             // 
             // colarticul
@@ -1582,7 +1581,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colarticul.Name = "colarticul";
             colarticul.OptionsColumn.AllowEdit = false;
             colarticul.Visible = true;
-            colarticul.VisibleIndex = 2;
+            colarticul.VisibleIndex = 1;
             colarticul.Width = 86;
             // 
             // colmod
@@ -1593,7 +1592,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colmod.Name = "colmod";
             colmod.OptionsColumn.AllowEdit = false;
             colmod.Visible = true;
-            colmod.VisibleIndex = 3;
+            colmod.VisibleIndex = 2;
             colmod.Width = 63;
             // 
             // colsek
@@ -1604,7 +1603,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek.Name = "colsek";
             colsek.OptionsColumn.AllowEdit = false;
             colsek.Visible = true;
-            colsek.VisibleIndex = 4;
+            colsek.VisibleIndex = 3;
             colsek.Width = 56;
             // 
             // coldateUpdate
@@ -1617,7 +1616,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coldateUpdate.MinWidth = 23;
             coldateUpdate.Name = "coldateUpdate";
             coldateUpdate.Visible = true;
-            coldateUpdate.VisibleIndex = 5;
+            coldateUpdate.VisibleIndex = 4;
             coldateUpdate.Width = 69;
             // 
             // repositoryItemDateEdit1
@@ -1635,7 +1634,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_vyaz.Name = "colsek_vyaz";
             colsek_vyaz.OptionsColumn.AllowEdit = false;
             colsek_vyaz.Visible = true;
-            colsek_vyaz.VisibleIndex = 6;
+            colsek_vyaz.VisibleIndex = 5;
             colsek_vyaz.Width = 64;
             // 
             // coldateCreate
@@ -1661,7 +1660,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_shv.Name = "colsek_shv";
             colsek_shv.OptionsColumn.AllowEdit = false;
             colsek_shv.Visible = true;
-            colsek_shv.VisibleIndex = 7;
+            colsek_shv.VisibleIndex = 6;
             colsek_shv.Width = 62;
             // 
             // gridColumn5
@@ -1672,7 +1671,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn5.Name = "gridColumn5";
             gridColumn5.OptionsColumn.AllowEdit = false;
             gridColumn5.Visible = true;
-            gridColumn5.VisibleIndex = 8;
+            gridColumn5.VisibleIndex = 7;
             gridColumn5.Width = 63;
             // 
             // colsek_vyazo
@@ -1683,7 +1682,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_vyazo.Name = "colsek_vyazo";
             colsek_vyazo.OptionsColumn.AllowEdit = false;
             colsek_vyazo.Visible = true;
-            colsek_vyazo.VisibleIndex = 9;
+            colsek_vyazo.VisibleIndex = 8;
             colsek_vyazo.Width = 87;
             // 
             // gridColumn35
@@ -1695,7 +1694,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn35.Name = "gridColumn35";
             gridColumn35.OptionsColumn.AllowEdit = false;
             gridColumn35.Visible = true;
-            gridColumn35.VisibleIndex = 10;
+            gridColumn35.VisibleIndex = 9;
             gridColumn35.Width = 62;
             // 
             // repositoryItemCheckEdit2
@@ -1709,7 +1708,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coldateAdd.FieldName = "dateAdd";
             coldateAdd.Name = "coldateAdd";
             coldateAdd.Visible = true;
-            coldateAdd.VisibleIndex = 11;
+            coldateAdd.VisibleIndex = 10;
             // 
             // colsek_vyaz5
             // 
@@ -1719,7 +1718,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_vyaz5.Name = "colsek_vyaz5";
             colsek_vyaz5.OptionsColumn.AllowEdit = false;
             colsek_vyaz5.Visible = true;
-            colsek_vyaz5.VisibleIndex = 12;
+            colsek_vyaz5.VisibleIndex = 11;
             colsek_vyaz5.Width = 87;
             // 
             // colsek_vyaz7
@@ -1730,7 +1729,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_vyaz7.Name = "colsek_vyaz7";
             colsek_vyaz7.OptionsColumn.AllowEdit = false;
             colsek_vyaz7.Visible = true;
-            colsek_vyaz7.VisibleIndex = 13;
+            colsek_vyaz7.VisibleIndex = 12;
             colsek_vyaz7.Width = 87;
             // 
             // colsek_vyaz12
@@ -1741,7 +1740,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_vyaz12.Name = "colsek_vyaz12";
             colsek_vyaz12.OptionsColumn.AllowEdit = false;
             colsek_vyaz12.Visible = true;
-            colsek_vyaz12.VisibleIndex = 14;
+            colsek_vyaz12.VisibleIndex = 13;
             colsek_vyaz12.Width = 87;
             // 
             // colsek_vyaz10
@@ -1752,7 +1751,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_vyaz10.Name = "colsek_vyaz10";
             colsek_vyaz10.OptionsColumn.AllowEdit = false;
             colsek_vyaz10.Visible = true;
-            colsek_vyaz10.VisibleIndex = 15;
+            colsek_vyaz10.VisibleIndex = 14;
             colsek_vyaz10.Width = 87;
             // 
             // colsek_vyaz6
@@ -1763,7 +1762,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_vyaz6.Name = "colsek_vyaz6";
             colsek_vyaz6.OptionsColumn.AllowEdit = false;
             colsek_vyaz6.Visible = true;
-            colsek_vyaz6.VisibleIndex = 16;
+            colsek_vyaz6.VisibleIndex = 15;
             colsek_vyaz6.Width = 87;
             // 
             // colsek_kr
@@ -1774,7 +1773,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colsek_kr.Name = "colsek_kr";
             colsek_kr.OptionsColumn.AllowEdit = false;
             colsek_kr.Visible = true;
-            colsek_kr.VisibleIndex = 17;
+            colsek_kr.VisibleIndex = 16;
             colsek_kr.Width = 87;
             // 
             // colslogn
@@ -1785,7 +1784,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colslogn.Name = "colslogn";
             colslogn.OptionsColumn.AllowEdit = false;
             colslogn.Visible = true;
-            colslogn.VisibleIndex = 18;
+            colslogn.VisibleIndex = 17;
             colslogn.Width = 87;
             // 
             // colkomment
@@ -1805,7 +1804,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colReco.Name = "colReco";
             colReco.OptionsColumn.AllowEdit = false;
             colReco.Visible = true;
-            colReco.VisibleIndex = 19;
+            colReco.VisibleIndex = 18;
             colReco.Width = 87;
             // 
             // coldiz
@@ -1833,7 +1832,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colannID.Name = "colannID";
             colannID.OptionsColumn.AllowEdit = false;
             colannID.Visible = true;
-            colannID.VisibleIndex = 20;
+            colannID.VisibleIndex = 19;
             colannID.Width = 87;
             // 
             // repositoryItemButtonEdit1
@@ -2013,7 +2012,99 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditCreate.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditCreate.Size = new System.Drawing.Size(98, 20);
             textEditCreate.StyleController = layoutControl2;
-            textEditCreate.TabIndex = 21;
+            textEditCreate.TabIndex = 6;
+            // 
+            // customGroupBoxWithButtons
+            // 
+            customGroupBoxWithButtons.BackColor = System.Drawing.Color.Transparent;
+            customGroupBoxWithButtons.Controls.Add(ButtonEditOnlyAdv);
+            customGroupBoxWithButtons.Controls.Add(ButtonEditWd);
+            customGroupBoxWithButtons.Controls.Add(ButtonPreliminaryWd);
+            customGroupBoxWithButtons.Controls.Add(ButtonDouble);
+            customGroupBoxWithButtons.Controls.Add(ButtonArchAndCopyWd);
+            customGroupBoxWithButtons.Location = new System.Drawing.Point(19, 197);
+            customGroupBoxWithButtons.Name = "customGroupBoxWithButtons";
+            customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 118);
+            customGroupBoxWithButtons.TabIndex = 10;
+            customGroupBoxWithButtons.TabStop = false;
+            // 
+            // ButtonEditOnlyAdv
+            // 
+            ButtonEditOnlyAdv.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+            ButtonEditOnlyAdv.Font = new System.Drawing.Font("Arial", 10F);
+            ButtonEditOnlyAdv.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            ButtonEditOnlyAdv.Location = new System.Drawing.Point(4, 14);
+            ButtonEditOnlyAdv.Name = "ButtonEditOnlyAdv";
+            ButtonEditOnlyAdv.Size = new System.Drawing.Size(218, 32);
+            ButtonEditOnlyAdv.TabIndex = 12;
+            ButtonEditOnlyAdv.Text = "редактировать РТ+";
+            ButtonEditOnlyAdv.UseVisualStyleBackColor = false;
+            ButtonEditOnlyAdv.Click += ButtonEditOnlyAdv_Click;
+            // 
+            // ButtonEditWd
+            // 
+            ButtonEditWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            ButtonEditWd.FlatAppearance.BorderSize = 0;
+            ButtonEditWd.FlatStyle = FlatStyle.Flat;
+            ButtonEditWd.Font = new System.Drawing.Font("Arial", 12F);
+            ButtonEditWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            ButtonEditWd.Location = new System.Drawing.Point(4, 14);
+            ButtonEditWd.Margin = new Padding(4, 3, 4, 3);
+            ButtonEditWd.Name = "ButtonEditWd";
+            ButtonEditWd.Size = new System.Drawing.Size(214, 32);
+            ButtonEditWd.TabIndex = 8;
+            ButtonEditWd.Text = "редактировать РТ_";
+            ButtonEditWd.UseVisualStyleBackColor = false;
+            ButtonEditWd.Click += ButtonEditWd_Click;
+            // 
+            // ButtonPreliminaryWd
+            // 
+            ButtonPreliminaryWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            ButtonPreliminaryWd.FlatAppearance.BorderSize = 0;
+            ButtonPreliminaryWd.FlatStyle = FlatStyle.Flat;
+            ButtonPreliminaryWd.Font = new System.Drawing.Font("Arial", 10F);
+            ButtonPreliminaryWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            ButtonPreliminaryWd.Location = new System.Drawing.Point(4, 123);
+            ButtonPreliminaryWd.Margin = new Padding(4, 3, 4, 3);
+            ButtonPreliminaryWd.Name = "ButtonPreliminaryWd";
+            ButtonPreliminaryWd.Size = new System.Drawing.Size(218, 25);
+            ButtonPreliminaryWd.TabIndex = 11;
+            ButtonPreliminaryWd.Text = "добавить предв";
+            ButtonPreliminaryWd.UseVisualStyleBackColor = false;
+            ButtonPreliminaryWd.Visible = false;
+            ButtonPreliminaryWd.Click += ButtonPreliminaryWd_Click;
+            // 
+            // ButtonDouble
+            // 
+            ButtonDouble.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            ButtonDouble.FlatAppearance.BorderSize = 0;
+            ButtonDouble.FlatStyle = FlatStyle.Flat;
+            ButtonDouble.Font = new System.Drawing.Font("Arial", 10F);
+            ButtonDouble.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            ButtonDouble.Location = new System.Drawing.Point(4, 52);
+            ButtonDouble.Margin = new Padding(4, 3, 4, 3);
+            ButtonDouble.Name = "ButtonDouble";
+            ButtonDouble.Size = new System.Drawing.Size(218, 31);
+            ButtonDouble.TabIndex = 10;
+            ButtonDouble.Text = "дубль";
+            ButtonDouble.UseVisualStyleBackColor = false;
+            ButtonDouble.Click += customSimpleButton1_Click;
+            // 
+            // ButtonArchAndCopyWd
+            // 
+            ButtonArchAndCopyWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            ButtonArchAndCopyWd.FlatAppearance.BorderSize = 0;
+            ButtonArchAndCopyWd.FlatStyle = FlatStyle.Flat;
+            ButtonArchAndCopyWd.Font = new System.Drawing.Font("Arial", 12F);
+            ButtonArchAndCopyWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            ButtonArchAndCopyWd.Location = new System.Drawing.Point(4, 89);
+            ButtonArchAndCopyWd.Margin = new Padding(4, 3, 4, 3);
+            ButtonArchAndCopyWd.Name = "ButtonArchAndCopyWd";
+            ButtonArchAndCopyWd.Size = new System.Drawing.Size(218, 28);
+            ButtonArchAndCopyWd.TabIndex = 9;
+            ButtonArchAndCopyWd.Text = "архив+копия";
+            ButtonArchAndCopyWd.UseVisualStyleBackColor = false;
+            ButtonArchAndCopyWd.Click += ButtonArchAndCopyWd_Click;
             // 
             // layoutControlGroup7
             // 
@@ -3949,6 +4040,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem49.Name = "layoutControlItem49";
             layoutControlItem49.Size = new System.Drawing.Size(113, 24);
             layoutControlItem49.TextVisible = false;
+			//
+            // gridColumn66
+            // 
+            gridColumn66.Caption = "статус";
+            gridColumn66.FieldName = "Status";
+            gridColumn66.Name = "gridColumn66";
             // 
             // TeamWork
             // 

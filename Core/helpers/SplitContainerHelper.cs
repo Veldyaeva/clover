@@ -1,8 +1,7 @@
+using DevExpress.XtraEditors;
 using System;
 using System.IO;
 using System.Xml;
-using DevExpress.XtraEditors;
-using SewingProduction.Interfaces;
 
 namespace SewingProduction.Helpers
 {
@@ -28,11 +27,11 @@ namespace SewingProduction.Helpers
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("SplitContainerLayout");
-                    
+
                     writer.WriteStartElement("Splitter");
                     writer.WriteAttributeString("Position", splitContainer.SplitterPosition.ToString());
                     writer.WriteEndElement(); // Splitter
-                    
+
                     writer.WriteEndElement(); // SplitContainerLayout
                     writer.WriteEndDocument();
                 }
@@ -76,4 +75,4 @@ namespace SewingProduction.Helpers
             }
         }
     }
-} 
+}

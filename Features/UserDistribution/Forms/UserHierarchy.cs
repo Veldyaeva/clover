@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
-using DevExpress.XtraGrid.Views.Grid;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNet.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
-using SewingProduction.Models;
 using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -110,7 +103,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         private async void gridViewUsers_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            try {
+            try
+            {
                 var user = e.Row as UserModel;
                 if (user == null) return;
 
