@@ -42,6 +42,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         public MyDataART InitialArtData { get; set; }
         private readonly Debouncer _sekDebouncer = new Debouncer();
         private NormRasz _originalNormRaszDataBeforeEdit;
+        private bool _bindingsInitialized = false;
+        private bool _listChangedHandlersAttached = false;
 
 
         private BindingList<NormRasz> _normRaszList;
@@ -336,6 +338,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
+                if (_bindingsInitialized) return;
                 _normRaszList = new BindingList<NormRasz>();
                 _normRaszBindingSource = new BindingSource { DataSource = _normRaszList };
                 _normRaskList = new BindingList<NormRask>();
@@ -372,15 +375,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             finally
             {
-                _normRaszList.ListChanged -= OnNormRaszListChanged; // защитная отписка
-                _normRaszList.ListChanged += OnNormRaszListChanged;
-
-                _normRaszList.ListChanged -= OnDataChanged;
-                _normRaskList.ListChanged -= OnDataChanged;
-                _normKontList.ListChanged -= OnDataChanged;
-                _normRaszList.ListChanged += OnDataChanged;
-                _normRaskList.ListChanged += OnDataChanged;
-                _normKontList.ListChanged += OnDataChanged;
+                if (!_listChangedHandlersAttached)
+                {
+                    _normRaszList.ListChanged += OnNormRaszListChanged;
+                    _normRaszList.ListChanged += OnDataChanged;
+                    _normRaskList.ListChanged += OnDataChanged;
+                    _normKontList.ListChanged += OnDataChanged;
+                    _listChangedHandlersAttached = true;
+                }
                 //_normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 //_normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
@@ -397,7 +399,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridViewRasz.PopupMenuShowing -= ShowPopUpForRasz(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
                     gridViewKont.PopupMenuShowing -= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
-
+                _bindingsInitialized = true;
             }
         }
         private void AttachDeleteContextMenu<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId = null, List<int> deletedIds = null)
@@ -572,25 +574,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Перенумеровываем через единый сервис
                     OperationNumberingService.RenumberAfterDeletion(bindingList, deletedOperationN, deletedOperationN1);
 
-                    // Переносим фокус на новую строку
-                    view.GridControl.BeginInvoke(new Action(() =>
+                    // Централизованная пост‑обработка UI
+                    NormRasz focusOp = null;
+                    if (view.DataRowCount > 0)
                     {
-                        if (view.DataRowCount == 0) return;
-
-                        // Если удалили не последнюю строку — фокус остаётся на том же индексе
-                        // Если удалили последнюю — фокус на новую последнюю строку
                         int newRowHandle = Math.Min(rowHandle, view.RowCount - 1);
                         newRowHandle = view.GetVisibleRowHandle(newRowHandle);
-
-                        if (view.IsValidRowHandle(newRowHandle))
-                        {
-                            view.FocusedRowHandle = newRowHandle;
-                            view.MakeRowVisible(newRowHandle);
-                        }
-
-                        // Обновляем отображение после перенумерации
-                        view.RefreshData();
-                    }));
+                        focusOp = view.IsValidRowHandle(newRowHandle) ? view.GetRow(newRowHandle) as NormRasz : null;
+                    }
+                    ApplyPostStructureUi(focusOp, false);
                 });
 
                 // Добавляем пункт "Добавить строку"
@@ -700,19 +692,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Выполняем полную перенумерацию всех оставшихся операций
                         OperationNumberingService.RecalculateAllOperationNumbers(bindingList);
 
-                // Обновляем отображение
-                view.GridControl.BeginInvoke(new Action(() =>
+                // Централизованная пост‑обработка UI: очистка выделения и фокус на первой строке
+                NormRasz first = null;
+                if (view.DataRowCount > 0)
                 {
-                    view.RefreshData();
-                    view.ClearSelection(); // Очищаем выделение
-                    
-                    // Устанавливаем фокус на первую доступную строку
-                    if (view.DataRowCount > 0)
-                    {
-                        view.FocusedRowHandle = 0;
-                        view.MakeRowVisible(0);
-                    }
-                }));
+                    int hr = view.GetVisibleRowHandle(0);
+                    if (view.IsValidRowHandle(hr)) first = view.GetRow(hr) as NormRasz;
+                }
+                ApplyPostStructureUi(first, true);
 
                 await _logger.LogEventAsync($"Массово удалено операций: {operationsToDelete.Count}", "DeleteSelectedOperations");
                 
@@ -942,28 +929,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszBindingSource.ResetBindings(false);
                         gridControlRasz.RefreshDataSource();
 
-                        // Обновляем сортировку после добавления
+                        // Обновляем сортировку и применяем единую пост‑обработку (фокус на добавленной)
                         TWGridHelper.sortGridView(gridViewRasz);
+                        ApplyPostStructureUi(selectedData, false);
 
-                        // Автоматически открываем форму редактирования для новой операции
-                        int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
-                        if (newRowDataSourceIndex >= 0)
+                        // Открываем форму редактирования через небольшую задержку
+                        gridViewRasz.GridControl.BeginInvoke(new Action(() =>
                         {
-                            int newRowHandle = gridViewRasz.GetRowHandle(newRowDataSourceIndex);
-                            if (gridViewRasz.IsValidRowHandle(newRowHandle))
-                            {
-                                // Устанавливаем фокус и открываем форму редактирования
-                                gridViewRasz.FocusedRowHandle = newRowHandle;
-                                gridViewRasz.MakeRowVisible(newRowHandle);
-
-                                // Открываем форму редактирования через небольшую задержку
-                                gridViewRasz.GridControl.BeginInvoke(new Action(() =>
-                                {
-                                    _isCustomEditFormOpen = true;
-                                    gridViewRasz.ShowEditForm();
-                                }));
-                            }
-                        }
+                            _isCustomEditFormOpen = true;
+                            gridViewRasz.ShowEditForm();
+                        }));
 
                         await _logger.LogEventAsync($"Добавлена новая операция №{selectedData.N}.{selectedData.N1} через контекстное меню", "AddNewRaszOperation");
                     }
@@ -2072,11 +2047,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 OperationNumberingService.RecalculateAllOperationNumbers(_normRaszList); // стабилизирует 1 / 1.1, 1.2, 2 / 3.1 ... по текущему расположению
                 _normRaszBindingSource.ResetBindings(false);
                 TWGridHelper.sortGridView(gridViewRasz);
-                // Сброс выделения после группового перемещения
-                if (draggedList.Count > 1)
-                {
-                    try { gridViewRasz.ClearSelection(); } catch { }
-                }
+                // Единая точка фокуса/выделений
+                ApplyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
                 // Встроенная визуализация DevExpress — свой адорнер не используем
             }
             catch
@@ -2264,10 +2236,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _normRaskList.Add(normRask);
                         }
 
-                        // Обновляем привязку данных и интерфейс
-                        _normRaskBindingSource.ResetBindings(false);
-                        gridControlRaskr.RefreshDataSource();
-                        gridViewRaskr.RefreshData();
+                // Обновляем привязку данных и интерфейс
+                _normRaskBindingSource.ResetBindings(false);
+                gridControlRaskr.RefreshDataSource();
+                gridViewRaskr.RefreshData();
+                ApplyPostStructureUi(null, true);
                     }
                 }
             }
@@ -3280,8 +3253,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Пересчитываем нумерацию
                 RecalculateAllOperationNumbers();
 
-                // Устанавливаем фокус на перемещенную операцию
-                SetFocusToOperation(selectedOperation);
+                // Единая пост‑обработка
+                ApplyPostStructureUi(selectedOperation, false);
 
                 _logger.LogEventAsync($"Операция {selectedOperation.N}.{selectedOperation.N1} перемещена вверх", "MoveOperationUp");
             }
@@ -3322,8 +3295,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Пересчитываем нумерацию
                 RecalculateAllOperationNumbers();
 
-                // Устанавливаем фокус на перемещенную операцию
-                SetFocusToOperation(selectedOperation);
+                // Единая пост‑обработка
+                ApplyPostStructureUi(selectedOperation, false);
 
                 _logger.LogEventAsync($"Операция {selectedOperation.N}.{selectedOperation.N1} перемещена вниз", "MoveOperationDown");
             }
@@ -3391,6 +3364,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _logger.LogErrorAsync(ex, "Ошибка при установке фокуса на операцию");
             }
+        }
+
+        // Единая точка применения UI после структурных изменений (DnD/вставка/удаление)
+        private void ApplyPostStructureUi(NormRasz focusOperation = null, bool clearSelection = false)
+        {
+            try
+            {
+                if (clearSelection)
+                {
+                    gridViewRasz.ClearSelection();
+                }
+                if (focusOperation != null)
+                {
+                    SetFocusToOperation(focusOperation);
+                }
+                gridViewRasz.RefreshData();
+            }
+            catch { }
         }
 
         /// <summary>
