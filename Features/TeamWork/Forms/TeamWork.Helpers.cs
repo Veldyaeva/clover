@@ -772,39 +772,83 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <returns>Созданная форма или существующая форма если уже есть открытые экземпляры</returns>
         public TeamWork_AdvanceTW OpenAdvanceFormNonModal(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
         {
-            // Проверяем, есть ли уже открытые экземпляры
-            if (HasOpenAdvanceForms())
+            try
             {
-                // Получаем первый открытый экземпляр
-                TeamWork_AdvanceTW existingForm = null;
-                lock (_lockObject)
+                // Проверяем, есть ли уже открытые экземпляры
+                if (HasOpenAdvanceForms())
                 {
-                    existingForm = _openAdvanceForms.FirstOrDefault(form => form != null && !form.IsDisposed);
-                }
-
-                if (existingForm != null)
-                {
-                    string articul = existingForm.CurrentArticul;
-                    string msg = string.IsNullOrWhiteSpace(articul)
-                        ? "Открыто разделение труда"
-                        : $"Открыто разделение труда для артикула \"{articul}\"";
-
-                    // Показать сплеш на 3 секунды
-                    Task.Run(async () =>
+                    // Получаем первый открытый экземпляр
+                    TeamWork_AdvanceTW existingForm = null;
+                    lock (_lockObject)
                     {
-                        SplashScreenHelper.ShowSplash(msg, textOnly: true);
-                        await Task.Delay(3000);
+                        existingForm = _openAdvanceForms.FirstOrDefault(form => form != null && !form.IsDisposed);
+                    }
+
+                    if (existingForm != null)
+                    {
+                        string articul = existingForm.CurrentArticul;
+                        if (!string.IsNullOrEmpty(articul))
+                        {
+                            string msg = string.IsNullOrWhiteSpace(articul) ? "Открыто разделение труда"
+                            : $"Открыто разделение труда для артикула \"{articul}\"";
+
+                            // Показать сплеш на 2 секунды
+                            Task.Run(() =>
+                            {
+                                try
+                                {
+                                    SplashScreenHelper.ShowSplash(msg, textOnly: true);
+                                    try
+                                    {
+                                        System.Threading.Thread.Sleep(2000);
+                                    }
+                                    catch
+                                    {
+                                        SplashScreenHelper.CloseSplash();
+                                    }
+                                }
+                                catch (Exception splashEx)
+                                {
+                                    _ = _logger?.LogErrorAsync(splashEx, "OpenAdvanceFormNonModal: ошибка показа сплеша");
+                                    SplashScreenHelper.CloseSplash();
+                                }
+                                finally
+                                {
+                                    SplashScreenHelper.CloseSplash();
+                                }
+                            });
+                        }
                         SplashScreenHelper.CloseSplash();
-                    });
+                        existingForm.WindowState = FormWindowState.Normal;
+                        existingForm.BringToFront();
+                        existingForm.Activate();
+                    }
 
-                    existingForm.WindowState = FormWindowState.Normal;
-                    existingForm.BringToFront();
-                    existingForm.Activate();
+                    return null;
                 }
-
-                return null;
             }
-
+            catch (ObjectDisposedException ode)
+            {
+                try
+                {
+                    _ = _logger?.LogErrorAsync(ode, "OpenAdvanceFormNonModal: обнаружены освобождённые формы, очищаю список и продолжаю");
+                    lock (_lockObject)
+                    {
+                        _openAdvanceForms.RemoveAll(form => form == null || form.IsDisposed);
+                    }
+                }
+                catch { }
+            }
+            catch (InvalidOperationException ioe)
+            {
+                _ = _logger?.LogErrorAsync(ioe, "OpenAdvanceFormNonModal: ошибка при проверке открытых форм");
+            }
+            catch (Exception ex)
+            {
+                _ = _logger?.LogErrorAsync(ex, "OpenAdvanceFormNonModal: непредвиденная ошибка при проверке открытых форм");
+            } 
+            
+        
             var advanceForm = new TeamWork_AdvanceTW(bufferWorkDivision, mode, newId, oldId, sourceAnnIdToCopyDetailsFrom, initialArtData, duplicateAnnData);
 
             // Добавляем в список открытых форм

@@ -399,6 +399,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
             gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
+            gridViewRasz.OptionsClipboard.PasteMode = DevExpress.Export.PasteMode.Append;
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
@@ -676,6 +677,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridViewRaskr
             // 
             resources.ApplyResources(gridViewRaskr, "gridViewRaskr");
+            gridViewRaskr.Appearance.ColumnFilterButtonActive.BackColor = System.Drawing.Color.Navy;
+            gridViewRaskr.Appearance.ColumnFilterButtonActive.Options.UseBackColor = true;
             gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
             gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
@@ -691,11 +694,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
             gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
             gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
             gridViewRaskr.OptionsSelection.EnableAppearanceHideSelection = false;
             gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
             gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
+            gridViewRaskr.OptionsView.HeaderFilterButtonShowMode = DevExpress.XtraEditors.Controls.FilterButtonShowMode.Button;
             gridViewRaskr.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
-            gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
             gridViewRaskr.OptionsView.ShowGroupPanel = false;
             gridViewRaskr.PopupMenuShowing += gridViewRaskr_PopupMenuShowing;
             gridViewRaskr.ShowingEditor += gridViewRaskr_ShowingEditor;
@@ -709,6 +713,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn9.ImageOptions.ImageKey = resources.GetString("gridColumn9.ImageOptions.ImageKey");
             gridColumn9.MinWidth = 23;
             gridColumn9.Name = "gridColumn9";
+            gridColumn9.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
             // 
             // gridColumn10
             // 

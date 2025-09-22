@@ -2,6 +2,7 @@ using Dapper;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.form.TeamWork.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -218,6 +219,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             gridViewRasz.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
 
+            // Перетаскивание строк в gridViewRasz
+            if (gridControlRasz != null)
+            {
+                gridControlRasz.AllowDrop = true;
+                gridViewRasz.MouseDown += gridViewRasz_MouseDown;
+                gridViewRasz.MouseMove += gridViewRasz_MouseMove;
+                gridControlRasz.DragOver += gridControlRasz_DragOver;
+                gridControlRasz.DragDrop += gridControlRasz_DragDrop;
+                gridControlRasz.DragLeave += gridControlRasz_DragLeave;
+                gridControlRasz.QueryContinueDrag += gridControlRasz_QueryContinueDrag;
+            }
+
+            // Группировка по основному номеру операции (N)
+            ConfigureRaszGrouping();
+
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
@@ -342,6 +358,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 TWGridHelper.sortGridView(gridViewRasz);
                 TWGridHelper.sortGridView(gridViewRaskr);
                 TWGridHelper.sortGridView(gridViewKont);
+
+                // Убедиться, что группировка по операциям применяется
+                ConfigureRaszGrouping();
 
             }
             catch (Exception ex)
@@ -1876,6 +1895,283 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+
+        // Drag & Drop для gridViewRasz
+        private Point _raszDragStartPoint;
+        private int _raszDragSourceHandle = -1;
+        private bool _raszDragging = false;
+
+        private void gridViewRasz_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                _raszDragStartPoint = e.Location;
+                var hit = ((GridView)sender).CalcHitInfo(e.Location);
+                _raszDragSourceHandle = hit.RowHandle;
+                _raszDragging = false;
+            }
+            catch { }
+        }
+
+        private void gridViewRasz_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if ((e.Button & MouseButtons.Left) != MouseButtons.Left) return;
+                if (_raszDragSourceHandle < 0) return;
+
+                Size dragSize = SystemInformation.DragSize;
+                Rectangle dragRect = new Rectangle(
+                    new Point(_raszDragStartPoint.X - dragSize.Width / 2, _raszDragStartPoint.Y - dragSize.Height / 2),
+                    dragSize);
+
+                if (!dragRect.Contains(e.Location))
+                {
+                    var view = (GridView)sender;
+                    var row = view.GetRow(_raszDragSourceHandle) as NormRasz;
+                    if (row == null) return;
+                    _raszDragging = true;
+                    // Показ превью перетаскиваемой строки
+                    ShowRaszAdorner(row, Control.MousePosition);
+                    view.GridControl.DoDragDrop(row, DragDropEffects.Move);
+                }
+            }
+            catch { }
+        }
+
+        private void gridControlRasz_DragOver(object sender, DragEventArgs e)
+        {
+            try
+            {
+                if (!e.Data.GetDataPresent(typeof(NormRasz)))
+                {
+                    e.Effect = DragDropEffects.None;
+                    return;
+                }
+
+                Point clientPoint = ((Control)sender).PointToClient(new Point(e.X, e.Y));
+                var hit = gridViewRasz.CalcHitInfo(clientPoint);
+                if (hit.InRow && hit.RowHandle >= 0 && !gridViewRasz.IsNewItemRow(hit.RowHandle))
+                {
+                    e.Effect = DragDropEffects.Move;
+                    UpdateRaszAdornerPosition(new Point(e.X, e.Y));
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+            }
+            catch { e.Effect = DragDropEffects.None; }
+        }
+
+        private void gridControlRasz_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                if (!_raszDragging) return;
+                _raszDragging = false;
+
+                var dragged = e.Data.GetData(typeof(NormRasz)) as NormRasz;
+                if (dragged == null) return;
+
+                Point clientPoint = ((Control)sender).PointToClient(new Point(e.X, e.Y));
+                var hit = gridViewRasz.CalcHitInfo(clientPoint);
+                if (!(hit.InRow && hit.RowHandle >= 0) || gridViewRasz.IsNewItemRow(hit.RowHandle)) return;
+
+                var target = gridViewRasz.GetRow(hit.RowHandle) as NormRasz;
+                if (target == null || ReferenceEquals(target, dragged)) return;
+
+                // Позиции в текущем логическом порядке (по N, N1)
+                var ordered = _normRaszList.OrderBy(r => r.N).ThenBy(r => r.N1).ToList();
+                int sourceIndex = ordered.IndexOf(dragged);
+                int targetIndex = ordered.IndexOf(target);
+                if (sourceIndex < 0 || targetIndex < 0 || sourceIndex == targetIndex) return;
+
+                // Пошагово меняем местами, чтобы вставить на нужную позицию
+                if (sourceIndex < targetIndex)
+                {
+                    for (int i = sourceIndex; i < targetIndex; i++)
+                    {
+                        // Меняем номера у соседних операций
+                        SwapOperationPositions(ordered[i], ordered[i + 1]);
+                        // И переставляем ссылки в списке, чтобы перетаскиваемая операция шла дальше
+                        var tmp = ordered[i];
+                        ordered[i] = ordered[i + 1];
+                        ordered[i + 1] = tmp;
+                    }
+                }
+                else
+                {
+                    for (int i = sourceIndex; i > targetIndex; i--)
+                    {
+                        // Меняем номера у соседних операций
+                        SwapOperationPositions(ordered[i], ordered[i - 1]);
+                        // И переставляем ссылки в списке, чтобы перетаскиваемая операция шла дальше
+                        var tmp = ordered[i];
+                        ordered[i] = ordered[i - 1];
+                        ordered[i - 1] = tmp;
+                    }
+                }
+
+                // Пересчитываем нумерацию и обновляем UI
+                RecalculateAllOperationNumbers();
+                SetFocusToOperation(dragged);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при перетаскивании строки в gridViewRasz");
+            }
+            finally
+            {
+                _raszDragSourceHandle = -1;
+                HideRaszAdorner();
+            }
+        }
+
+        private void gridControlRasz_DragLeave(object sender, EventArgs e)
+        {
+            HideRaszAdorner();
+        }
+
+        private void gridControlRasz_QueryContinueDrag(object sender, QueryContinueDragEventArgs e)
+        {
+            if (e.Action == DragAction.Cancel || e.Action == DragAction.Drop)
+            {
+                HideRaszAdorner();
+            }
+        }
+
+        private void ConfigureRaszGrouping()
+        {
+            try
+            {
+                if (gridViewRasz == null) return;
+                var colN = gridViewRasz.Columns.ColumnByFieldName("N");
+                var colN1 = gridViewRasz.Columns.ColumnByFieldName("N1");
+
+                gridViewRasz.BeginUpdate();
+                try
+                {
+                    if (colN != null)
+                    {
+                        colN.GroupIndex = 0;
+                        colN.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                    }
+                    if (colN1 != null)
+                    {
+                        colN1.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                        colN1.SortIndex = 1;
+                    }
+                    gridViewRasz.OptionsBehavior.AutoExpandAllGroups = true;
+                }
+                finally
+                {
+                    gridViewRasz.EndUpdate();
+                }
+            }
+            catch { }
+        }
+
+        // Визуализация перетаскиваемой строки (адорнер)
+        private Form _raszDragAdornerForm;
+        private Bitmap _raszDragAdornerBitmap;
+        private const int _raszAdornerOffsetX = 16;
+        private const int _raszAdornerOffsetY = 16;
+
+        private void ShowRaszAdorner(NormRasz row, Point screenPos)
+        {
+            try
+            {
+                HideRaszAdorner();
+                _raszDragAdornerBitmap = CreateRaszRowPreview(row);
+                _raszDragAdornerForm = new Form
+                {
+                    FormBorderStyle = FormBorderStyle.None,
+                    ShowInTaskbar = false,
+                    TopMost = true,
+                    StartPosition = FormStartPosition.Manual,
+                    BackColor = Color.Lime,
+                    Opacity = 0.85,
+                    Size = _raszDragAdornerBitmap.Size
+                };
+                _raszDragAdornerForm.TransparencyKey = Color.Lime;
+                _raszDragAdornerForm.BackgroundImage = _raszDragAdornerBitmap;
+                _raszDragAdornerForm.Location = new Point(screenPos.X + _raszAdornerOffsetX, screenPos.Y + _raszAdornerOffsetY);
+                _raszDragAdornerForm.Show();
+            }
+            catch { }
+        }
+
+        private void UpdateRaszAdornerPosition(Point screenPos)
+        {
+            try
+            {
+                if (_raszDragAdornerForm != null && !_raszDragAdornerForm.IsDisposed)
+                {
+                    _raszDragAdornerForm.Location = new Point(screenPos.X + _raszAdornerOffsetX, screenPos.Y + _raszAdornerOffsetY);
+                }
+            }
+            catch { }
+        }
+
+        private void HideRaszAdorner()
+        {
+            try
+            {
+                if (_raszDragAdornerForm != null)
+                {
+                    if (!_raszDragAdornerForm.IsDisposed)
+                    {
+                        _raszDragAdornerForm.Close();
+                    }
+                    _raszDragAdornerForm.Dispose();
+                    _raszDragAdornerForm = null;
+                }
+                if (_raszDragAdornerBitmap != null)
+                {
+                    _raszDragAdornerBitmap.Dispose();
+                    _raszDragAdornerBitmap = null;
+                }
+            }
+            catch { }
+        }
+
+        private Bitmap CreateRaszRowPreview(NormRasz row)
+        {
+            try
+            {
+                int width = 420;
+                int height = 28;
+                var bmp = new Bitmap(width, height);
+                using (var g = Graphics.FromImage(bmp))
+                {
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+                    g.Clear(Color.Transparent);
+
+                    using (var bg = new SolidBrush(Color.FromArgb(250, 250, 250)))
+                        g.FillRectangle(bg, 0, 0, width - 1, height - 1);
+                    using (var pen = new Pen(Color.FromArgb(205, 205, 205)))
+                        g.DrawRectangle(pen, 0, 0, width - 1, height - 1);
+
+                    string title = $"{row.N}.{row.N1}";
+                    string text = row.Text ?? string.Empty;
+
+                    using (var fontBold = new Font("Arial", 9f, FontStyle.Bold))
+                    using (var font = new Font("Arial", 9f, FontStyle.Regular))
+                    using (var brush = new SolidBrush(Color.Black))
+                    {
+                        g.DrawString(title, fontBold, brush, new RectangleF(6, 4, 60, height - 8));
+                        g.DrawString(text, font, brush, new RectangleF(72, 4, width - 78, height - 8));
+                    }
+                }
+                return bmp;
+            }
+            catch
+            {
+                return new Bitmap(1, 1);
+            }
+        }
 
         private async void gridViewRasz_EditFormHidden(object sender, EditFormHiddenEventArgs e)
         {

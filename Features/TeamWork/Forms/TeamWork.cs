@@ -191,27 +191,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         /// <summary>
-        /// Настраивает базовые параметры гридов
-        /// </summary>
-        private void InitializeGridSettings()
-        {
-            // Настройка гридов (общие настройки, не связанные с данными DataSource)
-            if (gridControl_unboundArts?.MainView is GridView unboundArtsView)
-            {
-                ConfigureGridSelection(unboundArtsView, "unboundArts");
-                unboundArtsView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
-                unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
-            }
-
-            if (gridControl_wdToBind?.MainView is GridView wdToBindView)
-            {
-                ConfigureGridSelection(wdToBindView, "wdToBind");
-                wdToBindView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
-            }
-
-           // ANNgridView.CalcPreviewText += CalcPreviewText;
-        }
-        /// <summary>
         /// Принудительно обновляет данные в normRaskArt гриде
         /// </summary>
         public async Task ForceRefreshNormRaskArt()
@@ -384,79 +363,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             catch (Exception ex)
             {
                 _logger?.LogErrorAsync(ex, "Ошибка при отображении статусного сообщения");
-            }
-        }
-
-        /// <summary>
-        /// Общий метод для обновления даты и статуса записи
-        /// </summary>
-        /// <param name="annId">ID записи для обновления</param>
-        /// <param name="gridView">Грид для обновления UI</param>
-        /// <param name="rowHandle">Номер строки в гриде</param>
-        /// <returns>true если обновление прошло успешно</returns>
-        private async Task<bool> UpdateDateAndStatusAsync(int annId, GridView gridView, int rowHandle)
-        {
-            try
-            {
-                // Вызываем процедуру updateSebZArticulPsz для обновления данных во всех справочниках
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@xAnnID", annId }
-                };
-                await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @xAnnID", parameters);
-
-                // Обновляем дату обновления в базе данных
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
-
-                // Обновляем статус на "Актуальное"
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
-
-                // Обновляем UI в гриде
-                if (gridView != null && rowHandle >= 0)
-                {
-                    gridView.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
-                    gridView.SetRowCellValue(rowHandle, "Status", (int)Status.Actual);
-                    gridView.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
-                    gridView.RefreshRow(rowHandle);
-                }
-
-                await _logger.LogEventAsync($"Данные обновлены для записи AnnID: {annId}, дата: {DateTime.Now:dd.MM.yyyy}, статус: Актуальное", "UpdateDateAndStatus");
-                return true;
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
-                return false;
-            }
-        }
-
-        private async void CommandsEditDateNull_DoubleClick(object sender, EventArgs e)
-        {
-            var view = ANNgridView;
-            var rowHandle = view.FocusedRowHandle;
-            var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
-            int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
-
-            // Действие только если дата не задана
-            if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
-            {
-                var result = MessageBox.Show("Обновить данные во всех справочниках?",
-     "Пересчёт себ.",
-     MessageBoxButtons.YesNo,
-     MessageBoxIcon.Question,
-     MessageBoxDefaultButton.Button2);
-                if (result == DialogResult.Yes)
-                {
-                    bool success = await UpdateDateAndStatusAsync(annId, view, rowHandle);
-                    if (success)
-                    {
-                        MessageBox.Show("Данные успешно обновлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка при обновлении данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
             }
         }
 
@@ -805,7 +711,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception ex) { }
                 }
 
                 if (!IsHandleCreated) return;
@@ -1032,8 +938,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            // Используем специализированный метод для дублирования
-            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneForDuplication();
+            
+            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneOperationalData();
 
             int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, CopyedWorkDivisionShell);
             if (newAnnId <= 0)

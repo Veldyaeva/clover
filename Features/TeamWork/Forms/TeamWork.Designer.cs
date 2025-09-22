@@ -2014,20 +2014,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditCreate.StyleController = layoutControl2;
             textEditCreate.TabIndex = 6;
             // 
-            // customGroupBoxWithButtons
-            // 
-            customGroupBoxWithButtons.BackColor = System.Drawing.Color.Transparent;
-            customGroupBoxWithButtons.Controls.Add(ButtonEditOnlyAdv);
-            customGroupBoxWithButtons.Controls.Add(ButtonEditWd);
-            customGroupBoxWithButtons.Controls.Add(ButtonPreliminaryWd);
-            customGroupBoxWithButtons.Controls.Add(ButtonDouble);
-            customGroupBoxWithButtons.Controls.Add(ButtonArchAndCopyWd);
-            customGroupBoxWithButtons.Location = new System.Drawing.Point(19, 197);
-            customGroupBoxWithButtons.Name = "customGroupBoxWithButtons";
-            customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 118);
-            customGroupBoxWithButtons.TabIndex = 10;
-            customGroupBoxWithButtons.TabStop = false;
-            // 
             // ButtonEditOnlyAdv
             // 
             ButtonEditOnlyAdv.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
