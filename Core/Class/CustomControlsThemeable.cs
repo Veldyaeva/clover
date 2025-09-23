@@ -889,6 +889,7 @@ namespace SewingProduction
             this.FormClosing += (s, e) =>
             {
                 this.SaveAllGridSettings();
+                this.Dispose();
             };
         }
 
