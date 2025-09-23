@@ -1,8 +1,9 @@
 ﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 
 namespace SewingProduction.Features.Articul
 {
-    partial class EditAricul
+    partial class EditArticul
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +31,7 @@ namespace SewingProduction.Features.Articul
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditAricul));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditArticul));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customLabelModel = new CustomLabel();
             customLabelRazm = new CustomLabel();
@@ -40,8 +41,8 @@ namespace SewingProduction.Features.Articul
             customLabelGOST = new CustomLabel();
             radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
             customLabelKod = new CustomLabel();
-            customTextBoxKod1 = new CustomTextBox();
-            customTextBoxKod2 = new CustomTextBox();
+            customTextBoxKod = new CustomTextBox();
+            customTextBoxPo = new CustomTextBox();
             customTextBoxArt = new CustomTextBox();
             customTextBoxModel = new CustomTextBox();
             customTextBoxKodFurn = new CustomTextBox();
@@ -58,34 +59,43 @@ namespace SewingProduction.Features.Articul
             customLabelM = new CustomLabel();
             customLabelM1 = new CustomLabel();
             customLabelM2 = new CustomLabel();
-            customCancelButton1 = new CustomCancelButton();
-            customOkButton1 = new CustomOkButton();
-            searchLookUpEditPrizn = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditPrizn = new CustomSearchLookUpEdit();
             gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditGost = new DevExpress.XtraEditors.SearchLookUpEdit();
-            searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditGroup = new DevExpress.XtraEditors.SearchLookUpEdit();
-            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditTm1 = new DevExpress.XtraEditors.SearchLookUpEdit();
-            gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditRazm = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditGost = new CustomSearchLookUpEdit();
+            gridViewGost = new DevExpress.XtraGrid.Views.Grid.GridView();
+            Ид = new DevExpress.XtraGrid.Columns.GridColumn();
+            Гост = new DevExpress.XtraGrid.Columns.GridColumn();
+            Описание = new DevExpress.XtraGrid.Columns.GridColumn();
+            searchLookUpEditGroup = new CustomSearchLookUpEdit();
+            gridViewGroup = new DevExpress.XtraGrid.Views.Grid.GridView();
+            Наименование = new DevExpress.XtraGrid.Columns.GridColumn();
+            Ag_id = new DevExpress.XtraGrid.Columns.GridColumn();
+            Id_art = new DevExpress.XtraGrid.Columns.GridColumn();
+            Ag_tnved = new DevExpress.XtraGrid.Columns.GridColumn();
+            searchLookUpEditTm1 = new CustomSearchLookUpEdit();
+            gridViewTm = new DevExpress.XtraGrid.Views.Grid.GridView();
+            searchLookUpEditRazm = new CustomSearchLookUpEdit();
             gridViewRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditTm2 = new DevExpress.XtraEditors.SearchLookUpEdit();
-            gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            searchLookUpEditTm2 = new CustomSearchLookUpEdit();
+            gridViewTm2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            men_id = new DevExpress.XtraGrid.Columns.GridColumn();
+            Наименование1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            customButtonSave = new CustomButton();
+            customButtonCancel = new CustomButton();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditPrizn.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditGost.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewGost).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditGroup.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewGroup).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditRazm.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTm2).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -106,8 +116,8 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.Controls.Add(customLabelGOST, 0, 3);
             tableLayoutPanel1.Controls.Add(radioGroup1, 1, 0);
             tableLayoutPanel1.Controls.Add(customLabelKod, 0, 2);
-            tableLayoutPanel1.Controls.Add(customTextBoxKod1, 2, 2);
-            tableLayoutPanel1.Controls.Add(customTextBoxKod2, 4, 2);
+            tableLayoutPanel1.Controls.Add(customTextBoxKod, 2, 2);
+            tableLayoutPanel1.Controls.Add(customTextBoxPo, 4, 2);
             tableLayoutPanel1.Controls.Add(customTextBoxArt, 2, 6);
             tableLayoutPanel1.Controls.Add(customTextBoxModel, 2, 8);
             tableLayoutPanel1.Controls.Add(customTextBoxKodFurn, 2, 9);
@@ -124,14 +134,14 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.Controls.Add(customLabelM, 4, 11);
             tableLayoutPanel1.Controls.Add(customLabelM1, 4, 12);
             tableLayoutPanel1.Controls.Add(customLabelM2, 4, 13);
-            tableLayoutPanel1.Controls.Add(customCancelButton1, 4, 15);
-            tableLayoutPanel1.Controls.Add(customOkButton1, 1, 15);
             tableLayoutPanel1.Controls.Add(searchLookUpEditPrizn, 2, 14);
             tableLayoutPanel1.Controls.Add(searchLookUpEditGost, 2, 3);
             tableLayoutPanel1.Controls.Add(searchLookUpEditGroup, 2, 4);
             tableLayoutPanel1.Controls.Add(searchLookUpEditTm1, 2, 5);
             tableLayoutPanel1.Controls.Add(searchLookUpEditRazm, 2, 7);
             tableLayoutPanel1.Controls.Add(searchLookUpEditTm2, 3, 5);
+            tableLayoutPanel1.Controls.Add(customButtonSave, 1, 15);
+            tableLayoutPanel1.Controls.Add(customButtonCancel, 4, 15);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -286,30 +296,32 @@ namespace SewingProduction.Features.Articul
             customLabelKod.Text = "Код";
             customLabelKod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // customTextBoxKod1
+            // customTextBoxKod
             // 
-            customTextBoxKod1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            tableLayoutPanel1.SetColumnSpan(customTextBoxKod1, 2);
-            customTextBoxKod1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customTextBoxKod1.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxKod1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customTextBoxKod1.Location = new System.Drawing.Point(240, 71);
-            customTextBoxKod1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customTextBoxKod1.Name = "customTextBoxKod1";
-            customTextBoxKod1.Size = new System.Drawing.Size(228, 23);
-            customTextBoxKod1.TabIndex = 2;
+            customTextBoxKod.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxKod, 2);
+            customTextBoxKod.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxKod.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxKod.Location = new System.Drawing.Point(240, 71);
+            customTextBoxKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxKod.MaxLength = 8;
+            customTextBoxKod.Name = "customTextBoxKod";
+            customTextBoxKod.Size = new System.Drawing.Size(228, 23);
+            customTextBoxKod.TabIndex = 2;
             // 
-            // customTextBoxKod2
+            // customTextBoxPo
             // 
-            customTextBoxKod2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            customTextBoxKod2.Dock = System.Windows.Forms.DockStyle.Fill;
-            customTextBoxKod2.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxKod2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customTextBoxKod2.Location = new System.Drawing.Point(476, 71);
-            customTextBoxKod2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customTextBoxKod2.Name = "customTextBoxKod2";
-            customTextBoxKod2.Size = new System.Drawing.Size(110, 23);
-            customTextBoxKod2.TabIndex = 3;
+            customTextBoxPo.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxPo.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxPo.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxPo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxPo.Location = new System.Drawing.Point(476, 71);
+            customTextBoxPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxPo.MaxLength = 1;
+            customTextBoxPo.Name = "customTextBoxPo";
+            customTextBoxPo.Size = new System.Drawing.Size(110, 23);
+            customTextBoxPo.TabIndex = 3;
             // 
             // customTextBoxArt
             // 
@@ -502,13 +514,13 @@ namespace SewingProduction.Features.Articul
             // 
             customLabelM.AutoSize = true;
             customLabelM.BackColor = System.Drawing.Color.Transparent;
-            customLabelM.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelM.Font = new System.Drawing.Font("Arial", 10F);
             customLabelM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelM.Location = new System.Drawing.Point(476, 392);
+            customLabelM.Location = new System.Drawing.Point(476, 374);
             customLabelM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM.Name = "customLabelM";
-            customLabelM.Size = new System.Drawing.Size(110, 16);
+            customLabelM.Size = new System.Drawing.Size(110, 34);
             customLabelM.TabIndex = 32;
             customLabelM.Text = "м.";
             customLabelM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -517,13 +529,13 @@ namespace SewingProduction.Features.Articul
             // 
             customLabelM1.AutoSize = true;
             customLabelM1.BackColor = System.Drawing.Color.Transparent;
-            customLabelM1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM1.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelM1.Font = new System.Drawing.Font("Arial", 10F);
             customLabelM1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelM1.Location = new System.Drawing.Point(476, 426);
+            customLabelM1.Location = new System.Drawing.Point(476, 408);
             customLabelM1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM1.Name = "customLabelM1";
-            customLabelM1.Size = new System.Drawing.Size(110, 16);
+            customLabelM1.Size = new System.Drawing.Size(110, 34);
             customLabelM1.TabIndex = 31;
             customLabelM1.Text = "на 1 метр";
             customLabelM1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -532,48 +544,16 @@ namespace SewingProduction.Features.Articul
             // 
             customLabelM2.AutoSize = true;
             customLabelM2.BackColor = System.Drawing.Color.Transparent;
-            customLabelM2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM2.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelM2.Font = new System.Drawing.Font("Arial", 10F);
             customLabelM2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelM2.Location = new System.Drawing.Point(476, 460);
+            customLabelM2.Location = new System.Drawing.Point(476, 442);
             customLabelM2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM2.Name = "customLabelM2";
-            customLabelM2.Size = new System.Drawing.Size(110, 16);
+            customLabelM2.Size = new System.Drawing.Size(110, 34);
             customLabelM2.TabIndex = 30;
             customLabelM2.Text = "на 1 метр";
             customLabelM2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customCancelButton1
-            // 
-            customCancelButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            customCancelButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            customCancelButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customCancelButton1.ForeColor = System.Drawing.Color.Black;
-            customCancelButton1.Location = new System.Drawing.Point(476, 513);
-            customCancelButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCancelButton1.Name = "customCancelButton1";
-            customCancelButton1.Size = new System.Drawing.Size(110, 39);
-            customCancelButton1.TabIndex = 34;
-            customCancelButton1.Text = "Отмена";
-            customCancelButton1.UseVisualStyleBackColor = false;
-            customCancelButton1.Click += customCancelButton1_Click;
-            // 
-            // customOkButton1
-            // 
-            customOkButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            customOkButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            customOkButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customOkButton1.ForeColor = System.Drawing.Color.Black;
-            customOkButton1.Location = new System.Drawing.Point(122, 513);
-            customOkButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customOkButton1.Name = "customOkButton1";
-            customOkButton1.Size = new System.Drawing.Size(110, 39);
-            customOkButton1.TabIndex = 33;
-            customOkButton1.Text = "Сохранить";
-            customOkButton1.UseVisualStyleBackColor = false;
-            customOkButton1.Click += customOkButton1_Click;
             // 
             // searchLookUpEditPrizn
             // 
@@ -604,19 +584,42 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             searchLookUpEditGost.Name = "searchLookUpEditGost";
             searchLookUpEditGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            searchLookUpEditGost.Properties.PopupView = searchLookUpEdit1View;
+            searchLookUpEditGost.Properties.PopupView = gridViewGost;
             searchLookUpEditGost.Size = new System.Drawing.Size(346, 20);
             searchLookUpEditGost.TabIndex = 41;
             searchLookUpEditGost.EditValueChanged += lookUpEditGost_EditValueChanged;
             // 
-            // searchLookUpEdit1View
+            // gridViewGost
             // 
-            searchLookUpEdit1View.DetailHeight = 404;
-            searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            searchLookUpEdit1View.OptionsEditForm.PopupEditFormWidth = 933;
-            searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            gridViewGost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Ид, Гост, Описание });
+            gridViewGost.DetailHeight = 404;
+            gridViewGost.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridViewGost.Name = "gridViewGost";
+            gridViewGost.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewGost.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridViewGost.OptionsView.ShowGroupPanel = false;
+            // 
+            // Ид
+            // 
+            Ид.Caption = "Ид";
+            Ид.FieldName = "Ид";
+            Ид.Name = "Ид";
+            // 
+            // Гост
+            // 
+            Гост.Caption = "Гост";
+            Гост.FieldName = "Гост";
+            Гост.Name = "Гост";
+            Гост.Visible = true;
+            Гост.VisibleIndex = 0;
+            // 
+            // Описание
+            // 
+            Описание.Caption = "Описание";
+            Описание.FieldName = "Описание";
+            Описание.Name = "Описание";
+            Описание.Visible = true;
+            Описание.VisibleIndex = 1;
             // 
             // searchLookUpEditGroup
             // 
@@ -626,18 +629,45 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditGroup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             searchLookUpEditGroup.Name = "searchLookUpEditGroup";
             searchLookUpEditGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            searchLookUpEditGroup.Properties.PopupView = gridView1;
+            searchLookUpEditGroup.Properties.PopupView = gridViewGroup;
             searchLookUpEditGroup.Size = new System.Drawing.Size(346, 20);
             searchLookUpEditGroup.TabIndex = 42;
             // 
-            // gridView1
+            // gridViewGroup
             // 
-            gridView1.DetailHeight = 404;
-            gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsEditForm.PopupEditFormWidth = 933;
-            gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            gridView1.OptionsView.ShowGroupPanel = false;
+            gridViewGroup.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Наименование, Ag_id, Id_art, Ag_tnved });
+            gridViewGroup.DetailHeight = 404;
+            gridViewGroup.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridViewGroup.Name = "gridViewGroup";
+            gridViewGroup.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewGroup.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridViewGroup.OptionsView.ShowGroupPanel = false;
+            // 
+            // Наименование
+            // 
+            Наименование.Caption = "Наименование";
+            Наименование.FieldName = "Наименование";
+            Наименование.Name = "Наименование";
+            Наименование.Visible = true;
+            Наименование.VisibleIndex = 0;
+            // 
+            // Ag_id
+            // 
+            Ag_id.Caption = "Ag_id";
+            Ag_id.FieldName = "Ag_id";
+            Ag_id.Name = "Ag_id";
+            // 
+            // Id_art
+            // 
+            Id_art.Caption = "Id_art";
+            Id_art.FieldName = "Id_art";
+            Id_art.Name = "Id_art";
+            // 
+            // Ag_tnved
+            // 
+            Ag_tnved.Caption = "Ag_tnved";
+            Ag_tnved.FieldName = "Ag_tnved";
+            Ag_tnved.Name = "Ag_tnved";
             // 
             // searchLookUpEditTm1
             // 
@@ -646,18 +676,18 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditTm1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             searchLookUpEditTm1.Name = "searchLookUpEditTm1";
             searchLookUpEditTm1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            searchLookUpEditTm1.Properties.PopupView = gridView2;
+            searchLookUpEditTm1.Properties.PopupView = gridViewTm;
             searchLookUpEditTm1.Size = new System.Drawing.Size(110, 20);
             searchLookUpEditTm1.TabIndex = 43;
             // 
-            // gridView2
+            // gridViewTm
             // 
-            gridView2.DetailHeight = 404;
-            gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            gridView2.Name = "gridView2";
-            gridView2.OptionsEditForm.PopupEditFormWidth = 933;
-            gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            gridView2.OptionsView.ShowGroupPanel = false;
+            gridViewTm.DetailHeight = 404;
+            gridViewTm.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridViewTm.Name = "gridViewTm";
+            gridViewTm.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewTm.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridViewTm.OptionsView.ShowGroupPanel = false;
             // 
             // searchLookUpEditRazm
             // 
@@ -689,20 +719,63 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditTm2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             searchLookUpEditTm2.Name = "searchLookUpEditTm2";
             searchLookUpEditTm2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            searchLookUpEditTm2.Properties.PopupView = gridView3;
+            searchLookUpEditTm2.Properties.PopupView = gridViewTm2;
             searchLookUpEditTm2.Size = new System.Drawing.Size(228, 20);
             searchLookUpEditTm2.TabIndex = 47;
             // 
-            // gridView3
+            // gridViewTm2
             // 
-            gridView3.DetailHeight = 404;
-            gridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            gridView3.Name = "gridView3";
-            gridView3.OptionsEditForm.PopupEditFormWidth = 933;
-            gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
-            gridView3.OptionsView.ShowGroupPanel = false;
+            gridViewTm2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { men_id, Наименование1 });
+            gridViewTm2.DetailHeight = 404;
+            gridViewTm2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridViewTm2.Name = "gridViewTm2";
+            gridViewTm2.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewTm2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridViewTm2.OptionsView.ShowGroupPanel = false;
             // 
-            // EditAricul
+            // men_id
+            // 
+            men_id.Caption = "men_id";
+            men_id.FieldName = "men_id";
+            men_id.Name = "men_id";
+            // 
+            // Наименование1
+            // 
+            Наименование1.Caption = "Наименование";
+            Наименование1.FieldName = "Наименование";
+            Наименование1.Name = "Наименование1";
+            Наименование1.Visible = true;
+            Наименование1.VisibleIndex = 0;
+            // 
+            // customButtonSave
+            // 
+            customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonSave.Location = new System.Drawing.Point(121, 513);
+            customButtonSave.Name = "customButtonSave";
+            customButtonSave.Size = new System.Drawing.Size(112, 39);
+            customButtonSave.TabIndex = 48;
+            customButtonSave.Text = "Сохранить";
+            customButtonSave.UseVisualStyleBackColor = false;
+            customButtonSave.Click += customOkButtonSave_Click;
+            // 
+            // customButtonCancel
+            // 
+            customButtonCancel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonCancel.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonCancel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonCancel.Location = new System.Drawing.Point(475, 513);
+            customButtonCancel.Name = "customButtonCancel";
+            customButtonCancel.Size = new System.Drawing.Size(112, 39);
+            customButtonCancel.TabIndex = 49;
+            customButtonCancel.Text = "Отменить";
+            customButtonCancel.UseVisualStyleBackColor = false;
+            customButtonCancel.Click += customButtonCancel_Click;
+            // 
+            // EditArticul
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -710,7 +783,7 @@ namespace SewingProduction.Features.Articul
             Controls.Add(tableLayoutPanel1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "EditAricul";
+            Name = "EditArticul";
             Text = "Добавление артикула";
             FormClosing += editFio_FormClosing;
             Load += art_new2024_Load;
@@ -720,15 +793,15 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditPrizn.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView5).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditGost.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewGost).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditGroup.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewGroup).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTm).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditRazm.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRazm).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTm2).EndInit();
             ResumeLayout(false);
         }
 
@@ -737,8 +810,8 @@ namespace SewingProduction.Features.Articul
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private DevExpress.XtraEditors.RadioGroup radioGroup1;
         private CustomLabel customLabelKod;
-        private CustomTextBox customTextBoxKod1;
-        private CustomTextBox customTextBoxKod2;
+        private CustomTextBox customTextBoxKod;
+        private CustomTextBox customTextBoxPo;
         private CustomTextBox customTextBoxArt;
         private CustomTextBox customTextBoxModel;
         private CustomTextBox customTextBoxKodFurn;
@@ -761,19 +834,31 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabelM;
         private CustomLabel customLabelM1;
         private CustomLabel customLabelM2;
-        private CustomOkButton customOkButton1;
-        private CustomCancelButton customCancelButton1;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditGost;
+        private CustomSearchLookUpEdit searchLookUpEditGost;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditGroup;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditTm1;
+        private CustomSearchLookUpEdit searchLookUpEditGroup;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewGroup;
+        private CustomSearchLookUpEdit searchLookUpEditTm1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditRazm;
+        private CustomSearchLookUpEdit searchLookUpEditRazm;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewRazm;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditPrizn;
+        private CustomSearchLookUpEdit searchLookUpEditPrizn;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditTm2;
+        private CustomSearchLookUpEdit searchLookUpEditTm2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private CustomButton customButtonSave;
+        private CustomButton customButtonCancel;
+        private DevExpress.XtraGrid.Columns.GridColumn Наименование;
+        private DevExpress.XtraGrid.Columns.GridColumn Ag_id;
+        private DevExpress.XtraGrid.Columns.GridColumn Id_art;
+        private DevExpress.XtraGrid.Columns.GridColumn Ag_tnved;
+        private DevExpress.XtraGrid.Columns.GridColumn Ид;
+        private DevExpress.XtraGrid.Columns.GridColumn Гост;
+        private DevExpress.XtraGrid.Columns.GridColumn Описание;
+        private DevExpress.XtraGrid.Columns.GridColumn men_id;
+        private DevExpress.XtraGrid.Columns.GridColumn Наименование1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewGost;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTm;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTm2;
     }
 }

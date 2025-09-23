@@ -55,18 +55,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ANNgridView.OptionsView.ShowPreview = false;
 
 
-                // Применяем фильтры
-                filterTable();
                 // Сохраняем текущую позицию
                 int currentPosition = _bindingSource.Position;
 
                 // Назначаем новые данные
-                //_bindingList = new BindingList<ArtNormN>(data);
-                //_bindingSource.DataSource = _bindingList;
                 _bindingList.BulkLoad(data);
                 _bindingSource.DataSource = _bindingList; // если ещё не привязано
 
                 ANNgridControl.DataSource = _bindingSource;
+
+                // Применяем фильтры после привязки источника данных
+                filterTable();
 
                 // Устанавливаем позицию сразу после DataSource
                 _bindingSource.Position = currentPosition < _bindingSource.Count ? currentPosition : 0;

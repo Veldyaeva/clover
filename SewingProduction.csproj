@@ -215,6 +215,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIcons\favicon.ico" />
+    <Content Include="Resources\loading_dude.gif" />
   </ItemGroup>
 
 

@@ -25,6 +25,7 @@ namespace SewingProduction.Core.Models
         //    set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(grup)); } }
         //}
         public string Kod { get; set; }
+        [NotMapped]
         public string Kodd { get; set; }
         public string Grup { get; set; }
         public string Articul { get; set; }
@@ -194,14 +195,7 @@ namespace SewingProduction.Core.Models
         public decimal? Sek_vyaz57 { get; set; }
         public decimal? Sek_vyaz18 { get; set; }
         public int? Annid { get; set; }
-        public decimal? Brak_percent1 { get; set; }
-        public decimal? Brak_percent2 { get; set; }
-        public decimal? Brak_percent3 { get; set; }
-        public decimal? Brak_percent4 { get; set; }
-        public decimal? Brak_percent5 { get; set; }
-        public decimal? Brak_percent6 { get; set; }
-        public decimal? Brak_percent7 { get; set; }
-        
+
 
 
 

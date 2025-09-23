@@ -2263,8 +2263,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
-            int Nome = 0;
-
             // Используем глобальный буфер если доступен, иначе локальный
             int bufferIdToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferId : _bufferWorkDivision;
 
@@ -2285,29 +2283,48 @@ namespace SewingProduction.Features.TeamWork.Forms
                             await InitializeBindingsAsync();
                         }
 
+                        // Помечаем существующие записи на удаление как при обычном удалении
+                        if (_normRaszList?.Any() == true)
+                        {
+                            string updateSql = @"
+                                UPDATE norm_rasz 
+                                SET nrDateDel = @DateDel, nrCompDel = @CompDel 
+                                WHERE annId = @AnnId AND nrDateDel IS NULL";
+
+                            await _dbHelper.ExecuteNonQueryAsync(updateSql, new Dictionary<string, object>
+                            {
+                                { "@DateDel", DateTime.Now },
+                                { "@CompDel", Environment.MachineName },
+                                { "@AnnId", _currentAnnData?.AnnID ?? 0 }
+                            });
+                        }
+
                         // Очищаем текущие списки
                         _normRaszList?.Clear();
-                        _normRaskList?.Clear();
-                        _normKontList?.Clear();
                         _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
 
                         _normRaszBindingSource?.ResetBindings(false);
-                        _normRaskBindingSource?.ResetBindings(false);
-                        _normKontBindingSource?.ResetBindings(false);
                     }
 
-                    if (_normRaszList != null && _normRaszList.Count > 0)
-                    {
-                        Nome = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
-                    }
+                    int currentMaxN = _normRaszList?.Any() == true ? _normRaszList.Max(x => x.N) : 0;
+                    
                     List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(bufferIdToUse);
                     if (raszList == null) raszList = new List<NormRasz>();
 
-                    int nextN = Nome;
                     foreach (var item in raszList)
                     {
+                        // Сбрасываем ID для получения нового от БД
+                        item.nrID = 0;
+                        // Привязываем к текущему разделению труда
+                        item.annId = _currentAnnData?.AnnID ?? 0;
+                        // Очищаем поля для автоматической вставки SQL
+                        item.nrDateAdd = null;
+                        item.nrCompAdd = null;
+                        // Помечаем как новую запись
                         item.IsNew = true;
-                        item.N = item.N + Nome;
+                        
+                        currentMaxN++;
+                        item.N = currentMaxN;
                         _normRaszList.Add(item);
                     }
 

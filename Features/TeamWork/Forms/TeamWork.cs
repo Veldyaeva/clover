@@ -99,9 +99,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
 
 
-            ANNgridView.OptionsView.ShowPreview = true;
-            ANNgridView.PreviewLineCount = 1;
-            //  ANNgridView.CalcPreviewText += CalcPreviewText;
+            ANNgridView.OptionsView.ShowPreview = false;
+            ANNgridView.PreviewLineCount = 0;
             DapperMappings.Configure();
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
@@ -197,7 +196,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 wdToBindView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
             }
 
-            ANNgridView.CalcPreviewText += CalcPreviewText;
+           // ANNgridView.CalcPreviewText += CalcPreviewText;
         }
         /// <summary>
         /// Принудительно обновляет данные в normRaskArt гриде
@@ -635,7 +634,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (gridView != null && rowHandle >= 0)
                 {
                     gridView.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
-                    gridView.SetRowCellValue(rowHandle, "status", (int)Status.Actual);
+                    gridView.SetRowCellValue(rowHandle, "Status", (int)Status.Actual);
                     gridView.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
                     gridView.RefreshRow(rowHandle);
                 }
@@ -696,6 +695,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (ANNgridView != null)
             {
                 ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
+                ANNgridView.ColumnFilterChanged -= ANNgridView_ActiveFilterChanged;
             }
 
             // Загружаем сохраненные настройки интерфейса
@@ -725,14 +725,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
 
-                    // Фокус и связанные данные при фильтрации/поиске
-                    ANNgridView.ColumnFilterChanged += (s, e2) => FocusFirstResultAndLoadRelated();
+                    // Фокус и связанные данные при фильтрации/поиске — после применения фильтра в колонках/панели поиска
+                    ANNgridView.ColumnFilterChanged -= ANNgridView_ActiveFilterChanged;
+                    ANNgridView.ColumnFilterChanged += ANNgridView_ActiveFilterChanged;
 
-                    // Подписываемся на событие изменения текста поиска
-                    if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
-                    {
-                        ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
-                    }
+                    //// Подписываемся на событие изменения текста поиска
+                    //if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
+                    //{
+                    //    ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
+                    //}
 
                     // Включаем подсветку строк
                     ApplyAnnGridRowStyling();
@@ -778,36 +779,47 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var gv = ANNgridView;
                 if (gv == null) return;
 
+                // Не трогаем фокус, если пользователь вводит текст в строке автoфильтра или любой активной ячейке
+                if (gv.ActiveEditor != null)
+                {
+                    return;
+                }
+
                 if (gv.DataRowCount <= 0)
                 {
                     // опционально: очистить связанные таблицы, если нужен пустой показ
                     return;
                 }
 
+                // Если текущая фокусная строка видима после фильтра, ничего не делаем
+                int currentHandle = gv.FocusedRowHandle;
+                if (gv.IsValidRowHandle(currentHandle) && gv.GetVisibleIndex(currentHandle) >= 0)
+                {
+                    return;
+                }
+
+                // Иначе переходим на первую видимую строку результата
                 int firstHandle = gv.GetVisibleRowHandle(0);
                 if (!gv.IsValidRowHandle(firstHandle)) return;
-
-                int prev = gv.FocusedRowHandle;
 
                 gv.BeginUpdate();
                 try
                 {
                     gv.FocusedRowHandle = firstHandle;
                     gv.MakeRowVisible(firstHandle);
-                    gv.RefreshRow(firstHandle);
                 }
                 finally
                 {
                     gv.EndUpdate();
                 }
-
-                ANNgridView_FocusedRowChanged_Internal(gv, new FocusedRowChangedEventArgs(prev, firstHandle));
             }
             catch (Exception ex)
             {
                 _logger?.LogErrorAsync(ex, "Ошибка в FocusFirstResultAndLoadRelated");
             }
         }
+
+        // дубликат метода удалён
 
         private async void XtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
@@ -940,39 +952,17 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                var gridView = sender as GridView;
-                if (gridView == null) return;
+                var gv = sender as GridView;
+                if (gv == null) return;
 
-                // Проверяем, есть ли активный фильтр поиска
-                if (gridView.ActiveFilterCriteria != null)
+                // Если пользователь набирает в строке автoфильтра — не сбрасываем фокус
+                if (gv.ActiveEditor != null)
                 {
-                    // Небольшая задержка для завершения применения фильтра
-                    //gridView.BeginInvoke(new Action(() =>
-                    //{
-                    try
-                    {
-                        // Проверяем, есть ли видимые строки после применения фильтра
-                        if (gridView.DataRowCount > 0)
-                        {
-                            // Переходим на первую строку результатов поиска
-                            int firstVisibleRow = gridView.GetVisibleRowHandle(0);
-                            if (gridView.IsValidRowHandle(firstVisibleRow))
-                            {
-                                gridView.FocusedRowHandle = firstVisibleRow;
-                                gridView.MakeRowVisible(firstVisibleRow);
-
-                                // Логируем действие
-                                _logger?.LogEventAsync($"Автоматический переход на первую строку результатов поиска. Всего строк: {gridView.DataRowCount}", "ANNgridView_ActiveFilterChanged");
-                                ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку результатов поиска");
-                    }
-                    // }));
+                    return;
                 }
+
+                if (!IsHandleCreated) return;
+                BeginInvoke((MethodInvoker)(() => FocusFirstResultAndLoadRelated()));
             }
             catch (Exception ex)
             {
@@ -1163,7 +1153,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneProperties();
+            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneOperationalData();//selectedAnnToDuplicate.CloneProperties();
             CopyedWorkDivisionShell.Status = (int)Status.Preliminary;
             CopyedWorkDivisionShell.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
             CopyedWorkDivisionShell.dateCreate = DateTime.Now;

@@ -1,4 +1,4 @@
-﻿
+
 using DevExpress.Xpo;
 using DevExpress.XtraEditors;
 using SewingProduction.Core.Class;
