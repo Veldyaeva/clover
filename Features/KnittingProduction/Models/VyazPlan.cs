@@ -55,7 +55,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public string PictPath { get; set; }
         [NotMapped]
-        public int SyncSelection { get; set; } = 0;
+        public bool SyncSelection { get; set; } = false;
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]
