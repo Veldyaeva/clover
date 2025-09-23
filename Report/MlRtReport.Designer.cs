@@ -66,8 +66,6 @@
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression12 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.MasterDetailInfo masterDetailInfo1 = new DevExpress.DataAccess.Sql.MasterDetailInfo();
             DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo2 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
-            DevExpress.DataAccess.Sql.MasterDetailInfo masterDetailInfo2 = new DevExpress.DataAccess.Sql.MasterDetailInfo();
-            DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo3 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MlRtReport));
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraPrinting.BarCode.EAN13Generator eaN13Generator1 = new DevExpress.XtraPrinting.BarCode.EAN13Generator();
@@ -337,7 +335,7 @@
             selectQuery2.FilterString = "([normRaszView.kod_ob] = 99 And ?_isUpak = 1 Or ?_isUpak = 0) And [MlRtView.RzuNo" +
     "m] = ?_rzuNom";
             selectQuery2.GroupFilterString = "";
-            selectQuery2.MetaSerializable = "<Meta X=\"400\" Y=\"20\" Width=\"106\" Height=\"181\" />";
+            selectQuery2.MetaSerializable = "<Meta X=\"400\" Y=\"20\" Width=\"106\" Height=\"221\" />";
             selectQuery2.Name = "NormRaszView";
             queryParameter2.Name = "_isUpak";
             queryParameter2.Type = typeof(global::DevExpress.DataAccess.Expression);
@@ -375,18 +373,12 @@
             selectQuery1,
             selectQuery2});
             masterDetailInfo1.DetailQueryName = "NormRaszView";
-            relationColumnInfo2.NestedKeyColumn = "kod";
-            relationColumnInfo2.ParentKeyColumn = "AAnnID";
+            relationColumnInfo2.NestedKeyColumn = "annId";
+            relationColumnInfo2.ParentKeyColumn = "annId";
             masterDetailInfo1.KeyColumns.Add(relationColumnInfo2);
             masterDetailInfo1.MasterQueryName = "MlRtPrintSelect";
-            masterDetailInfo2.DetailQueryName = "NormRaszViewGroup";
-            relationColumnInfo3.NestedKeyColumn = "kod";
-            relationColumnInfo3.ParentKeyColumn = "AAnnID";
-            masterDetailInfo2.KeyColumns.Add(relationColumnInfo3);
-            masterDetailInfo2.MasterQueryName = "MlRtPrintSelect";
             this.sqlDataSource1.Relations.AddRange(new DevExpress.DataAccess.Sql.MasterDetailInfo[] {
-            masterDetailInfo1,
-            masterDetailInfo2});
+            masterDetailInfo1});
             this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
             // 
             // _rzuNom
@@ -399,6 +391,7 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(415155, "бр45 комплект бельевой дев 163457-466"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(414745, "бр50 трусы дев.(набор) 161488-502"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(412569, "бр19 брюки женские раскомпл компл 151940-943"));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(467125, null));
             this._rzuNom.ValueSourceSettings = staticListLookUpSettings1;
             // 
             // TopMargin

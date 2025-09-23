@@ -1664,22 +1664,24 @@ namespace SewingProduction
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
             report1.RequestParameters = false;
-            report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
-            report1.Parameters["_isChip"].Value = IsChip;
-            report1.Parameters["_isUpak"].Value = 0;
+            //report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+            //report1.Parameters["_isChip"].Value = IsChip;
+            //report1.Parameters["_isUpak"].Value = 0;
+
             //var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
-            //{
-            //    report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
-            //    report1.Parameters["_isChip"].Value = IsChip;
-            //    report1.Parameters["_isUpak"].Value = 0;
-            //    ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            //    reportPrintTool1.ShowPreviewDialog();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Не выбран расчет для печати");
-            //}
+            if (Convert.ToInt32(tbRzuNom.Text) != 0)
+                {
+                report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+                report1.Parameters["_isChip"].Value = IsChip;
+                report1.Parameters["_isUpak"].Value = 0;
+                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                reportPrintTool1.ShowPreviewDialog();
+            }
+            else
+            {
+                MessageBox.Show("Не выбран расчет для печати");
+            }
         }
 
         private void simpleButtonPrintMLRTUpak_Click(object sender, EventArgs e)
