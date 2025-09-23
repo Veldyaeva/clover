@@ -1141,9 +1141,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 4:
                     await SetUpdateDate_Internal(sender, e);
                     break;
+                case 6:
+                    loadAllCheckBox_CheckedChanged_Internal(sender, e);
+                    break;
             }
         }
-
         /// <summary>
         /// Обработчик нажатия кнопок в группе архива (layoutControlGroup19)
         /// </summary>
@@ -1158,8 +1160,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
             }
         }
-
-
         private void gridView_unboundArts_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             _gridHelper.popUpMenuCopy(sender, e);
@@ -1185,6 +1185,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             _gridHelper.popUpMenuCopy(sender, e);
         }
 
+        /// <summary>
+        /// Печать технологической схемы разделения труда
+        /// </summary>
+        private async void PrintWorkDivisionScheme_Click(object sender, EventArgs e)
+        {
+            int rowNumber = ANNgridView.FocusedRowHandle;
+
+            NormRaszTest report1 = new NormRaszTest();
+            //report1.RequestParameters = false;
+            var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+
+            report1.Parameters["_annId"].Value = selectedAnn.AnnID;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+        }
+
         private async void customSimpleButtonArch_Click(object sender, EventArgs e)
         {
             await SetArchiveStatus_Internal(sender, e);
@@ -1196,6 +1212,449 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void customSimpleButtonUpd_Click(object sender, EventArgs e)
         {
             await SetUpdateDate_Internal(sender, e);
+        }
+
+        /// <summary>
+        /// Устанавливает архивный статус для выбранных строк в ANNgridView
+        /// </summary>
+        private async Task SetArchiveStatus_Internal(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ANNgridView == null)
+                {
+                    MessageBox.Show("Грид не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Получаем выбранные строки
+                var selectedRowHandles = ANNgridView.GetSelectedRows();
+
+                // Если нет выбранных строк, берем текущую строку
+                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
+                {
+                    if (ANNgridView.FocusedRowHandle < 0)
+                    {
+                        MessageBox.Show("Выберите записи для архивирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    selectedRowHandles = new int[] { ANNgridView.FocusedRowHandle };
+                }
+
+                var selectedItems = new List<ArtNormN>();
+
+                // Собираем данные выбранных строк
+                foreach (int rowHandle in selectedRowHandles)
+                {
+                    if (rowHandle >= 0)
+                    {
+                        var item = ANNgridView.GetRow(rowHandle) as ArtNormN;
+                        if (item != null)
+                        {
+                            selectedItems.Add(item);
+                        }
+                    }
+                }
+
+                if (selectedItems.Count == 0)
+                {
+                    MessageBox.Show("Не найдено записей для архивирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Подтверждение операции
+                string message = selectedItems.Count == 1
+                    ? $"Установить архивный статус для записи:\n{selectedItems[0].Articul} - {selectedItems[0].Mod}?"
+                    : $"Установить архивный статус для {selectedItems.Count} записей?";
+
+                var result = MessageBox.Show(
+                    message,
+                    "Подтверждение архивирования",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result != DialogResult.Yes)
+                    return;
+
+                // Обновляем статус для каждой выбранной записи
+                int successCount = 0;
+                var errors = new List<string>();
+
+                ANNgridView.BeginUpdate();
+                try
+                {
+                    foreach (var item in selectedItems)
+                    {
+                        try
+                        {
+                            // Проверяем, что запись можно архивировать
+                            if (item.Status == (int)Status.Archive)
+                            {
+                                await _logger.LogEventAsync($"Запись AnnID: {item.AnnID} уже имеет архивный статус", "SetArchiveStatus");
+                                continue;
+                            }
+
+                            // Обновляем статус в базе данных
+                            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", (int)Status.Archive, TableNames.AnnId, item.AnnID);
+
+                            // Обновляем объект в памяти
+                            item.Status = (int)Status.Archive;
+                            item.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
+
+                            // Обновляем строку в гриде
+                            int rowHandle = ANNgridView.LocateByValue("AnnID", item.AnnID);
+                            if (rowHandle >= 0)
+                            {
+                                ANNgridView.RefreshRow(rowHandle);
+                            }
+
+                            successCount++;
+                            await _logger.LogEventAsync($"Статус записи AnnID: {item.AnnID} изменен на 'Архивное'", "SetArchiveStatus");
+                        }
+                        catch (Exception ex)
+                        {
+                            string errorMsg = $"AnnID: {item.AnnID} - {ex.Message}";
+                            errors.Add(errorMsg);
+                            await _logger.LogErrorAsync(ex, $"Ошибка при архивировании записи AnnID: {item.AnnID}");
+                        }
+                    }
+                }
+                finally
+                {
+                    ANNgridView.EndUpdate();
+                }
+
+                // Обновляем привязку данных
+                _bindingSource.ResetBindings(false);
+
+                // Показываем результат операции
+                if (errors.Count == 0)
+                {
+                    string successMessage = successCount == 1
+                        ? "Запись успешно архивирована."
+                        : $"Успешно архивировано {successCount} записей.";
+
+                    MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    string errorMessage = $"Архивировано: {successCount} записей.\nОшибки:\n" + string.Join("\n", errors);
+                    MessageBox.Show(errorMessage, "Результат архивирования", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при выполнении архивирования записей");
+                MessageBox.Show($"Ошибка при архивировании: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void customSimpleButton3_Click(object sender, EventArgs e)
+        {
+            await UpdateSpArticulArch_Internal(sender, e);
+        }
+
+        /// <summary>
+        /// Обновляет поле arch в таблице sp_articul для записей, соответствующих условиям
+        /// </summary>
+        private async Task UpdateSpArticulArch_Internal(object sender, EventArgs e)
+        {
+            try
+            {
+                // Проверяем, что gриды инициализированы
+                if (ANNgridView == null || gridView5 == null)
+                {
+                    MessageBox.Show("Грид не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Получаем AnnID из выбранной строки в ANNgridView
+                if (ANNgridView.FocusedRowHandle < 0)
+                {
+                    MessageBox.Show("Выберите запись в основном гриде (ANNgridView).", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var selectedAnn = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+                if (selectedAnn == null)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранной записи в основном гриде.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int annId = selectedAnn.AnnID;
+
+                // Получаем артикул из выбранной строки в gridView5
+                if (gridView5.FocusedRowHandle < 0)
+                {
+                    MessageBox.Show("Выберите запись в гриде НЗП (gridView5).", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var selectedNzp = gridView5.GetRow(gridView5.FocusedRowHandle) as NZPByKoddRt;
+                if (selectedNzp == null)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранной записи в гриде НЗП.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string articul = selectedNzp.articul.TrimEnd(' ');
+                int kod = selectedNzp.kodd;
+                if (string.IsNullOrEmpty(articul))
+                {
+                    MessageBox.Show("Артикул в выбранной записи НЗП пустой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Подтверждение операции
+                string message = $"Обновить поле 'arch' в таблице sp_articul для:\n" +
+                                $"AnnID: {annId}\n" +
+                                $"Артикул: {articul}\n\n" +
+                                $"Это затронет записи, где:\n" +
+                                $"- sa.annid = ann.annID\n" +
+                                $"- left(sa.kod, 7) = {kod}\n" +
+                                $"- sa.articul = '{articul}'\n" +
+                                $"- ann.annID = {annId}";
+
+                var result = MessageBox.Show(
+                    message,
+                    "Подтверждение обновления arch",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result != DialogResult.Yes)
+                    return;
+
+                // SQL запрос для обновления поля arch
+                //string sqlQuery = @"
+                //    UPDATE sp_articul sa 
+                //    SET sa.arh = 1
+                //    WHERE left(sa.kod, 7) = @kod 
+                //    AND ann.articul = @art  
+                //    AND ann.annID = @annId";
+                string sqlQuery = @"UPDATE sa
+                    SET sa.arh = 1
+                    FROM dbo.sp_articul AS sa
+                    JOIN dbo.art_norm_n AS ann ON ann.AnnID = sa.AnnID
+                    WHERE left(sa.kod, 7) = @kod 
+                    AND sa.articul = @art  
+                    AND ann.annID = @annId";
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@annId", annId },
+                    { "@art", articul },
+                    { "@kod", kod }
+                };
+
+                // Выполняем обновление
+                await _dbHelper.ExecuteQueryAsync(sqlQuery, parameters);
+
+                // Логируем операцию
+                await _logger.LogEventAsync($"Обновлено поле arch для записей AnnID: {annId}, Артикул: {articul}", "UpdateSpArticulArch");
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при обновлении поля arch в sp_articul");
+                MessageBox.Show($"Ошибка при обновлении: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void customSimpleButton4_Click(object sender, EventArgs e)
+        {
+            await SetUpdateDate_Internal(sender, e);
+        }
+
+        /// <summary>
+        /// Устанавливает дату обновления (data_obn) сегодняшним числом для выбранных строк
+        /// Работает с двумя вкладками: "Разделения труда" (ANNgridView) и "Текущие работы" (gridView_wdToBind)
+        /// Использует процедуру updateSebZArticulPsz для обновления данных во всех справочниках
+        /// </summary>
+        private async Task SetUpdateDate_Internal(object sender, EventArgs e)
+        {
+            try
+            {
+                // Определяем, какая вкладка активна и какой грид использовать
+                GridView activeGridView = null;
+                string gridType = "";
+                BindingSource activeBindingSource = null;
+
+                // Проверяем, какая вкладка активна
+                if (xtraTabControl1.SelectedTabPage?.Name == "xtraTabPageArticles")
+                {
+                    // Вкладка "Текущие работы" - используем gridView_wdToBind
+                    if (gridView_wdToBind == null)
+                    {
+                        MessageBox.Show("Грид текущих работ не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    activeGridView = gridView_wdToBind;
+                    gridType = "текущих работ";
+                    activeBindingSource = _myDataAnnBindingSource;
+                }
+                else
+                {
+                    // Вкладка "Разделения труда" - используем ANNgridView
+                    if (ANNgridView == null)
+                    {
+                        MessageBox.Show("Грид разделений труда не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    activeGridView = ANNgridView;
+                    gridType = "разделений труда";
+                    activeBindingSource = _bindingSource;
+                }
+
+                // Получаем выбранные строки
+                var selectedRowHandles = activeGridView.GetSelectedRows();
+
+                // Если нет выбранных строк, берем текущую строку
+                if (selectedRowHandles == null || selectedRowHandles.Length == 0)
+                {
+                    if (activeGridView.FocusedRowHandle < 0)
+                    {
+                        MessageBox.Show($"Выберите записи для обновления даты на вкладке \"{gridType}\".", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    selectedRowHandles = new int[] { activeGridView.FocusedRowHandle };
+                }
+
+                var selectedItems = new List<object>();
+                var selectedAnnIds = new List<int>();
+
+                // Собираем данные выбранных строк в зависимости от типа грида
+                foreach (int rowHandle in selectedRowHandles)
+                {
+                    if (rowHandle >= 0)
+                    {
+                        var item = activeGridView.GetRow(rowHandle);
+                        if (item != null)
+                        {
+                            selectedItems.Add(item);
+
+                            // Получаем AnnID в зависимости от типа объекта
+                            if (item is ArtNormN artNorm)
+                            {
+                                selectedAnnIds.Add(artNorm.AnnID);
+                            }
+                            else if (item is MyDataANN myDataAnn)
+                            {
+                                selectedAnnIds.Add(myDataAnn.AnnID);
+                            }
+                        }
+                    }
+                }
+
+                if (selectedItems.Count == 0)
+                {
+                    MessageBox.Show($"Не найдено записей для обновления даты на вкладке \"{gridType}\".", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Подтверждение операции
+                string message = selectedItems.Count == 1
+                    ? $"Обновить данные во всех справочниках для записи на вкладке \"{gridType}\"?"
+                    : $"Обновить данные во всех справочниках для {selectedItems.Count} записей на вкладке \"{gridType}\"?";
+
+                var result = MessageBox.Show(
+                    message,
+                    "Пересчёт себ.",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                if (result != DialogResult.Yes)
+                    return;
+
+                // Текущая дата для установки
+                DateTime currentDate = DateTime.Now;
+
+                // Обновляем дату для каждой выбранной записи
+                int successCount = 0;
+                var errors = new List<string>();
+
+                activeGridView.BeginUpdate();
+                try
+                {
+                    foreach (int annId in selectedAnnIds)
+                    {
+                        try
+                        {
+                            // Используем общий метод для обновления даты и статуса
+                            int rowHandle = activeGridView.LocateByValue("AnnID", annId);
+                            bool success = await UpdateDateAndStatusAsync(annId, activeGridView, rowHandle);
+
+                            if (success)
+                            {
+                                // Обновляем объект в памяти в зависимости от типа
+                                foreach (var item in selectedItems)
+                                {
+                                    if (item is ArtNormN artNorm && artNorm.AnnID == annId)
+                                    {
+                                        artNorm.dateUpdate = currentDate;
+                                        artNorm.Status = (int)Status.Actual;
+                                        artNorm.StatusText = "Актуальное";
+                                        break;
+                                    }
+                                    else if (item is MyDataANN myDataAnn && myDataAnn.AnnID == annId)
+                                    {
+                                        // MyDataANN может не иметь поля dateUpdate, но мы обновляем в БД
+                                        break;
+                                    }
+                                }
+
+                                successCount++;
+                            }
+                            else
+                            {
+                                string errorMsg = $"AnnID: {annId} - не удалось обновить данные";
+                                errors.Add(errorMsg);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            string errorMsg = $"AnnID: {annId} - {ex.Message}";
+                            errors.Add(errorMsg);
+                            await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
+                        }
+                    }
+                }
+                finally
+                {
+                    activeGridView.EndUpdate();
+                }
+
+                // Обновляем привязку данных
+                if (activeBindingSource != null)
+                {
+                    activeBindingSource.ResetBindings(false);
+                }
+
+                // Показываем результат операции
+                if (errors.Count == 0)
+                {
+                    string successMessage = successCount == 1
+                        ? $"Данные успешно обновлены для записи. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное"
+                        : $"Данные обновлены для {successCount} записей. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное";
+
+                    MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    string errorMessage = $"Обновлено: {successCount} записей.\nОшибок: {errors.Count}\n\nОшибки:\n" + string.Join("\n", errors.Take(5));
+                    if (errors.Count > 5)
+                        errorMessage += $"\n... и еще {errors.Count - 5} ошибок";
+
+                    MessageBox.Show(errorMessage, "Результат обновления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при выполнении обновления данных");
+                MessageBox.Show($"Ошибка при обновлении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private async void customSimpleButton5_Click(object sender, EventArgs e)

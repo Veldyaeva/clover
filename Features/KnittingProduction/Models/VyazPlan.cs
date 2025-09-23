@@ -242,6 +242,8 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public int nom_n { get; set; }
         [NotMapped]
+        public int annID { get; set; }
+        [NotMapped]
         public int n_pach { get; set; }
         [NotMapped]
         public string pach_kod { get; set; }
@@ -323,6 +325,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public DateTime? olPzvDateMast { get; set; }
         [NotMapped]
         public DateTime? olPzvUpdDate { get; set; }
+        [NotMapped]
         public int SyncSelection { get; set; } = 0;
         [NotMapped]
         public bool IsModified { get; set; } = false;

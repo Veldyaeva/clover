@@ -1,4 +1,5 @@
 ﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 
 namespace SewingProduction.Features.Articul
 {
@@ -58,24 +59,24 @@ namespace SewingProduction.Features.Articul
             customLabelM = new CustomLabel();
             customLabelM1 = new CustomLabel();
             customLabelM2 = new CustomLabel();
-            searchLookUpEditPrizn = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditPrizn = new CustomSearchLookUpEdit();
             gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditGost = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditGost = new CustomSearchLookUpEdit();
             gridViewGost = new DevExpress.XtraGrid.Views.Grid.GridView();
             Ид = new DevExpress.XtraGrid.Columns.GridColumn();
             Гост = new DevExpress.XtraGrid.Columns.GridColumn();
             Описание = new DevExpress.XtraGrid.Columns.GridColumn();
-            searchLookUpEditGroup = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditGroup = new CustomSearchLookUpEdit();
             gridViewGroup = new DevExpress.XtraGrid.Views.Grid.GridView();
             Наименование = new DevExpress.XtraGrid.Columns.GridColumn();
             Ag_id = new DevExpress.XtraGrid.Columns.GridColumn();
             Id_art = new DevExpress.XtraGrid.Columns.GridColumn();
             Ag_tnved = new DevExpress.XtraGrid.Columns.GridColumn();
-            searchLookUpEditTm1 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditTm1 = new CustomSearchLookUpEdit();
             gridViewTm = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditRazm = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditRazm = new CustomSearchLookUpEdit();
             gridViewRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
-            searchLookUpEditTm2 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEditTm2 = new CustomSearchLookUpEdit();
             gridViewTm2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             men_id = new DevExpress.XtraGrid.Columns.GridColumn();
             Наименование1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -304,6 +305,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxKod.Location = new System.Drawing.Point(240, 71);
             customTextBoxKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxKod.MaxLength = 8;
             customTextBoxKod.Name = "customTextBoxKod";
             customTextBoxKod.Size = new System.Drawing.Size(228, 23);
             customTextBoxKod.TabIndex = 2;
@@ -316,6 +318,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxPo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPo.Location = new System.Drawing.Point(476, 71);
             customTextBoxPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxPo.MaxLength = 1;
             customTextBoxPo.Name = "customTextBoxPo";
             customTextBoxPo.Size = new System.Drawing.Size(110, 23);
             customTextBoxPo.TabIndex = 3;
@@ -831,17 +834,17 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabelM;
         private CustomLabel customLabelM1;
         private CustomLabel customLabelM2;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditGost;
+        private CustomSearchLookUpEdit searchLookUpEditGost;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditGroup;
+        private CustomSearchLookUpEdit searchLookUpEditGroup;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewGroup;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditTm1;
+        private CustomSearchLookUpEdit searchLookUpEditTm1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditRazm;
+        private CustomSearchLookUpEdit searchLookUpEditRazm;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewRazm;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditPrizn;
+        private CustomSearchLookUpEdit searchLookUpEditPrizn;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditTm2;
+        private CustomSearchLookUpEdit searchLookUpEditTm2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
         private CustomButton customButtonSave;
         private CustomButton customButtonCancel;

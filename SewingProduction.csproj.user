@@ -7,6 +7,9 @@
     <Compile Update="Core\Class\CustomControls\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomGridControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -20,6 +23,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomSearchLookUpEdit.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
