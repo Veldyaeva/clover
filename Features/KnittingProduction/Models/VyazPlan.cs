@@ -55,7 +55,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public string PictPath { get; set; }
         [NotMapped]
-        public bool SyncSelection { get; set; } = false;
+        public int SyncSelection { get; set; } = 0;
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]
@@ -325,6 +325,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public DateTime? olPzvDateMast { get; set; }
         [NotMapped]
         public DateTime? olPzvUpdDate { get; set; }
+        [NotMapped]
         public int SyncSelection { get; set; } = 0;
         [NotMapped]
         public bool IsModified { get; set; } = false;

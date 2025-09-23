@@ -909,7 +909,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     selectedItem.KmlID = selectedMachine.kmlID;
                     selectedItem.KmlNumber = selectedMachine.kmlNumber;
-                    selectedItem.SyncSelection = false;
+                    selectedItem.SyncSelection = 0;
                     gridViewVyazPlan.UnselectRow(rowHandle);
                     KnitMachineStatusUpdate(rowHandle);
                 }
@@ -939,7 +939,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 selectedItem.KmlNumber = "0";
                 selectedItem.DateZapPlanFrom = null;
                 selectedItem.DateZapPlanTo = null;
-                selectedItem.SyncSelection = false;
+                selectedItem.SyncSelection = 0;
                 gridViewVyazPlan.UnselectRow(rowHandle);
                 KnitMachineStatusUpdate(rowHandle);
             }

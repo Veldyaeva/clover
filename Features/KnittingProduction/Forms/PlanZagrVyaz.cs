@@ -1,51 +1,37 @@
-﻿using Dapper;
-using DevExpress.Data;
-using DevExpress.Data.Filtering;
-using DevExpress.DataAccess.ConnectionParameters;
+﻿using DevExpress.Data;
+using DevExpress.Mvvm.POCO;
 using DevExpress.Utils;
-using DevExpress.Xpo.DB;
-using DevExpress.Xpo.Helpers;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid;
+using DevExpress.XtraGauges.Core.Styles;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraToolbox;
 using Newtonsoft.Json;
-using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
-using SewingProduction.Features.Articul;
-using SewingProduction.Features.CardByNom.Models;
-using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
-using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class PlanZagrVyaz : CustomForm, IThemeable
     {
         int vyazPodrKod = 0;
-        
+
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
+        private static GridHelper _gridHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
         private List<PlanTotalHoursByKnitMachine> _currentPlanTotalHoursByKnitMachineData = new List<PlanTotalHoursByKnitMachine>();
@@ -89,6 +75,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
             _bulkHelper = new BulkHelper();
+            _gridHelper = new GridHelper();
             _vyazService = new VyazService(_dbHelper);
             ThemeManager.UpdateTheme(this);
             //нужно будет определять, мастер вяз цеха или отпарки заходит в форму и
@@ -384,8 +371,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnPZVOperListOlPzvDateEnd.FieldName = "olPzvDateEnd";
                 gridColumnPZVOperListOlPzvDateML.FieldName = "olPzvDateML";
                 gridColumnPZVOperListOlPzvDateMast.FieldName = "olPzvDateMast";
-                gridColumnPZVOperListSyncSelection.FieldName = "olSyncSelection";
-
+                gridColumnPZVOperListSyncSelection.FieldName = "SyncSelection";
+                // Сначала сортируем по артикулу, далее пачка, номер операции/подоперации, ID родительской записи, ID записи
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvArticul"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNPach"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNo"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNpo"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvIDParent"], ColumnSortOrder.Ascending));
+                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvID"], ColumnSortOrder.Ascending));
+                _gridHelper.AutoRowFilterConfig(gridViewPZVOperList as GridView);
                 #endregion
 
                 #region описание блока Информация по операции
@@ -596,19 +590,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     LoadPlanZagrVyazByZadanySelection();
                     break;
                 case 8:
-                    ClearSelectedPachKist();
+                    ClearSelectedPachList();
                     break;
                     //case 9:
-                //    //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
-                //    //if (PrintButton.Enabled && PrintButton.Visible)
-                //    //    // Отчет технологической схемы разделения труда
-                //    //    PrintWorkDivisionScheme_Click(null, null);
-                //    break;
-                //case 11:
-                //    if (printButtonPlus.Enabled && printButtonPlus.Visible)
-                //        // Отчет технологической схемы разделения труда
-                //        //printButtonPlus_Click(null, null);
-                //    break;
+                    //    //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
+                    //    //if (PrintButton.Enabled && PrintButton.Visible)
+                    //    //    // Отчет технологической схемы разделения труда
+                    //    //    PrintWorkDivisionScheme_Click(null, null);
+                    //    break;
+                    //case 11:
+                    //    if (printButtonPlus.Enabled && printButtonPlus.Visible)
+                    //        // Отчет технологической схемы разделения труда
+                    //        //printButtonPlus_Click(null, null);
+                    //    break;
 
             }
         }
@@ -665,13 +659,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await LoadPZVOperListByPachListNewDataAsync(jsonString, vyazPodrKod);
                 gridViewPZVOperList.BeginSort();
                 gridViewPZVOperList.ClearSorting();
-                // Сначала сортируем по артикулу, далее пачка, номер операции/подоперации, ID родительской записи, ID записи
-                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvArticul"], ColumnSortOrder.Ascending));
-                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNPach"], ColumnSortOrder.Ascending));
-                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNo"], ColumnSortOrder.Ascending));
-                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNpo"], ColumnSortOrder.Ascending));
-                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvIDParent"], ColumnSortOrder.Ascending));
-                gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvID"], ColumnSortOrder.Ascending));
+                //// Сначала сортируем по артикулу, далее пачка, номер операции/подоперации, ID родительской записи, ID записи
+                //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvArticul"], ColumnSortOrder.Ascending));
+                //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNPach"], ColumnSortOrder.Ascending));
+                //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNo"], ColumnSortOrder.Ascending));
+                //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNpo"], ColumnSortOrder.Ascending));
+                //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvIDParent"], ColumnSortOrder.Ascending));
+                //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvID"], ColumnSortOrder.Ascending));
 
                 gridViewPZVOperList.EndSort();
 
@@ -725,6 +719,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await Task.WhenAll(bindingsTask);
             await LoadPlanTotalHoursByKnitMachineDataAsync();
             gridViewPlanTotalHoursByKnitMachine.ExpandAllGroups();
+            //ConfigureTableViewAdvanced(gridViewPZVOperList as TableView);
+            //ConfigureGridView(gridViewPZVOperList);
+            //ConfigureTextColumnForPartialSearch(gridColumnPZVOperListOlOperName);
         }
 
         private async void gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
@@ -755,7 +752,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void gridViewRzvPachListByNom_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            
+
         }
 
         private async void gridViewZadanyListByMachine_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
@@ -783,6 +780,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _rzvPachListByNomBindingSource.Add(record);
             }
             gridViewRzvPachListByNom.ActiveFilterString = $" nomZad == '{selectedRow.pszNom}' and nom == {selectedRow.nom}";
+
+
         }
 
         private void repositoryItemCheckEdit1_CheckedChanged(object sender, EventArgs e)
@@ -816,7 +815,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private void ClearSelectedPachKist()
+        private void ClearSelectedPachList()
         {
             try
             {
