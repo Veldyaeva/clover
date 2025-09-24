@@ -55,6 +55,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions21 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions22 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customSimpleButton8 = new CustomSimpleButton();
             customLabel5 = new CustomLabel();
             textBoxOlNpo = new CustomTextBoxEx();
             customSimpleButton7 = new CustomSimpleButton();
@@ -220,13 +221,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem36 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem38 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             customGridControl7 = new CustomGridControl();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(components);
-            customSimpleButton8 = new CustomSimpleButton();
-            layoutControlItem38 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)textBoxOlNpo.Properties).BeginInit();
@@ -318,11 +318,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem36).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem38).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)behaviorManager1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem38).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
@@ -372,6 +372,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl1.Size = new System.Drawing.Size(1855, 896);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // customSimpleButton8
+            // 
+            customSimpleButton8.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            customSimpleButton8.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton8.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customSimpleButton8.Appearance.Options.UseBackColor = true;
+            customSimpleButton8.Appearance.Options.UseFont = true;
+            customSimpleButton8.Appearance.Options.UseForeColor = true;
+            customSimpleButton8.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            customSimpleButton8.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            customSimpleButton8.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton8.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton8.Location = new System.Drawing.Point(253, 664);
+            customSimpleButton8.Name = "customSimpleButton8";
+            customSimpleButton8.Size = new System.Drawing.Size(135, 22);
+            customSimpleButton8.StyleController = layoutControl1;
+            customSimpleButton8.TabIndex = 27;
+            customSimpleButton8.Text = "customSimpleButton8";
+            customSimpleButton8.Click += customSimpleButton8_Click;
             // 
             // customLabel5
             // 
@@ -931,11 +951,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList.GridControl = gridControlPZVOperList;
             gridViewPZVOperList.GroupCount = 2;
             gridViewPZVOperList.Name = "gridViewPZVOperList";
-            gridViewPZVOperList.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
             gridViewPZVOperList.OptionsView.ColumnAutoWidth = false;
             gridViewPZVOperList.OptionsView.EnableAppearanceEvenRow = true;
-            gridViewPZVOperList.OptionsView.HeaderFilterButtonShowMode = DevExpress.XtraEditors.Controls.FilterButtonShowMode.SmartTag;
-            gridViewPZVOperList.OptionsView.ShowAutoFilterRow = true;
             gridViewPZVOperList.OptionsView.ShowGroupPanel = false;
             gridViewPZVOperList.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumnPZVOperListOlPzvArticul, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumnPZVOperListOlNom, DevExpress.Data.ColumnSortOrder.Ascending) });
             // 
@@ -2029,6 +2046,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem19.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem19.TextVisible = false;
             // 
+            // layoutControlItem38
+            // 
+            layoutControlItem38.Control = customSimpleButton8;
+            layoutControlItem38.Location = new System.Drawing.Point(233, 0);
+            layoutControlItem38.Name = "layoutControlItem38";
+            layoutControlItem38.Size = new System.Drawing.Size(139, 26);
+            layoutControlItem38.TextVisible = false;
+            // 
             // simpleSeparator1
             // 
             simpleSeparator1.Location = new System.Drawing.Point(378, 404);
@@ -2062,34 +2087,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridView6.GridControl = customGridControl7;
             gridView6.Name = "gridView6";
             gridView6.OptionsView.EnableAppearanceEvenRow = true;
-            // 
-            // customSimpleButton8
-            // 
-            customSimpleButton8.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
-            customSimpleButton8.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton8.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton8.Appearance.Options.UseBackColor = true;
-            customSimpleButton8.Appearance.Options.UseFont = true;
-            customSimpleButton8.Appearance.Options.UseForeColor = true;
-            customSimpleButton8.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            customSimpleButton8.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            customSimpleButton8.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton8.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton8.Location = new System.Drawing.Point(253, 664);
-            customSimpleButton8.Name = "customSimpleButton8";
-            customSimpleButton8.Size = new System.Drawing.Size(135, 22);
-            customSimpleButton8.StyleController = layoutControl1;
-            customSimpleButton8.TabIndex = 27;
-            customSimpleButton8.Text = "customSimpleButton8";
-            customSimpleButton8.Click += customSimpleButton8_Click;
-            // 
-            // layoutControlItem38
-            // 
-            layoutControlItem38.Control = customSimpleButton8;
-            layoutControlItem38.Location = new System.Drawing.Point(233, 0);
-            layoutControlItem38.Name = "layoutControlItem38";
-            layoutControlItem38.Size = new System.Drawing.Size(139, 26);
-            layoutControlItem38.TextVisible = false;
             // 
             // PlanZagrVyaz
             // 
@@ -2191,11 +2188,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem36).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem38).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl7).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).EndInit();
             ((System.ComponentModel.ISupportInitialize)behaviorManager1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem38).EndInit();
             ResumeLayout(false);
         }
 

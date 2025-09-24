@@ -379,8 +379,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNpo"], ColumnSortOrder.Ascending));
                 gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvIDParent"], ColumnSortOrder.Ascending));
                 gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvID"], ColumnSortOrder.Ascending));
-                //_gridHelper.AutoRowFilterConfig(gridViewPZVOperList as GridView);
-                AutoRowFilterConfigForm(gridViewPZVOperList);
+                _gridHelper.AutoRowFilterConfig(gridViewPZVOperList as GridView);
+                //AutoRowFilterConfigForm(gridViewPZVOperList as GridView);
                 #endregion
 
                 #region описание блока Информация по операции
@@ -897,70 +897,70 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             MessageBox.Show($"gridViewPZVOperList.OptionsFilter.AllowFilterEditor = {gridViewPZVOperList.OptionsFilter.AllowFilterEditor}");
         }
 
-        public void AutoRowFilterConfigForm(GridView gridView)
-        {
-            if (gridView == null) return;
+        //public void AutoRowFilterConfigForm(GridView _gridView)
+        //{
+        //    if (_gridView == null) return;
 
-            try
-            {
-                // Основные настройки GridView
-                gridView.OptionsView.ShowAutoFilterRow = true;
-                gridView.OptionsCustomization.AllowFilter = true;
-                //gridView.OptionsFilter.AllowColumnFilter = true;
-                gridView.OptionsFilter.AllowFilterEditor = true;
+        //    try
+        //    {
+        //        // Основные настройки GridView
+        //        _gridView.OptionsView.ShowAutoFilterRow = true;
+        //        _gridView.OptionsCustomization.AllowFilter = true;
+        //        //gridView.OptionsFilter.AllowColumnFilter = true;
+        //        _gridView.OptionsFilter.AllowFilterEditor = true;
 
-                //// Улучшенные настройки фильтрации
-                //gridView.OptionsFilter.ImmediateUpdateAutoFilter = false; // Отложенное обновление
-                //gridView.OptionsFilter.AllowFilterEditorMenu = true; // Меню в редакторе фильтров
+        //        //// Улучшенные настройки фильтрации
+        //        //gridView.OptionsFilter.ImmediateUpdateAutoFilter = false; // Отложенное обновление
+        //        //gridView.OptionsFilter.AllowFilterEditorMenu = true; // Меню в редакторе фильтров
 
-                // Настройка каждого столбца
-                foreach (GridColumn column in gridView.Columns)
-                {
-                    if (!column.Visible) continue; // Пропускаем скрытые колонки
+        //        // Настройка каждого столбца
+        //        foreach (GridColumn _column in _gridView.Columns)
+        //        {
+        //            if (!_column.Visible) continue; // Пропускаем скрытые колонки
 
-                    //column.OptionsFilter.AllowAutoFilter = true;
-                    //column.OptionsFilter.AllowFilter = true;
-                    column.OptionsFilter.AllowAutoFilter = false;
-                    column.OptionsFilter.AllowFilter = false;
-                    column.OptionsColumn.AllowSort = DefaultBoolean.False;
-                    // Умная настройка условий фильтрации
-                    SetColumnFilterConditionForm(column);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка настройки GridView: {ex.Message}");
-            }
-        }
-        private static void SetColumnFilterConditionForm(GridColumn column)
-        {
-            if (column.ColumnType == typeof(string))
-            {
-                column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Contains;
-            }
-            else if (column.ColumnType == typeof(DateTime))
-            {
-                column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Equals;
-                column.OptionsFilter.FilterPopupMode = FilterPopupMode.Date;
-            }
-            else if (column.ColumnType == typeof(bool))
-            {
-                column.OptionsFilter.FilterPopupMode = FilterPopupMode.CheckedList;
-            }
-            else if (IsNumericTypeForm(column.ColumnType))
-            {
-                column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Equals;
-            }
-        }
-        /// <summary>
-        /// Вспомогательный метод для проверки числовых типов
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        private static bool IsNumericTypeForm(Type type)
-        {
-            return type == typeof(int) || type == typeof(double) || type == typeof(decimal)
-                   || type == typeof(float) || type == typeof(long) || type == typeof(short);
-        }
+        //            //column.OptionsFilter.AllowAutoFilter = true;
+        //            //column.OptionsFilter.AllowFilter = true;
+        //            _column.OptionsFilter.AllowAutoFilter = false;
+        //            _column.OptionsFilter.AllowFilter = false;
+        //            _column.OptionsColumn.AllowSort = DefaultBoolean.False;
+        //            // Умная настройка условий фильтрации
+        //            SetColumnFilterConditionForm(_column);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка настройки GridView: {ex.Message}");
+        //    }
+        //}
+        //private static void SetColumnFilterConditionForm(GridColumn _column)
+        //{
+        //    if (_column.ColumnType == typeof(string))
+        //    {
+        //        _column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Contains;
+        //    }
+        //    else if (_column.ColumnType == typeof(DateTime))
+        //    {
+        //        _column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Equals;
+        //        _column.OptionsFilter.FilterPopupMode = FilterPopupMode.Date;
+        //    }
+        //    else if (_column.ColumnType == typeof(bool))
+        //    {
+        //        _column.OptionsFilter.FilterPopupMode = FilterPopupMode.CheckedList;
+        //    }
+        //    else if (IsNumericTypeForm(_column.ColumnType))
+        //    {
+        //        _column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Equals;
+        //    }
+        //}
+        ///// <summary>
+        ///// Вспомогательный метод для проверки числовых типов
+        ///// </summary>
+        ///// <param name="type"></param>
+        ///// <returns></returns>
+        //private static bool IsNumericTypeForm(Type type)
+        //{
+        //    return type == typeof(int) || type == typeof(double) || type == typeof(decimal)
+        //           || type == typeof(float) || type == typeof(long) || type == typeof(short);
+        //}
     }
 }

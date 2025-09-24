@@ -138,7 +138,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewKnitMachineLoadLayoutView.OptionsView.ShowCardExpandButton = false;
             gridViewKnitMachineLoadLayoutView.OptionsView.ShowCardFieldBorders = true;
             gridViewKnitMachineLoadLayoutView.OptionsView.ViewMode = DevExpress.XtraGrid.Views.Layout.LayoutViewMode.MultiColumn;
-            gridViewKnitMachineLoadLayoutView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(layoutViewColumnKmlID, DevExpress.Data.ColumnSortOrder.Ascending) });
+            gridViewKnitMachineLoadLayoutView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(layoutViewColumnKmlID, DevExpress.Data.ColumnSortOrder.Descending) });
             gridViewKnitMachineLoadLayoutView.TemplateCard = layoutViewCard1;
             // 
             // layoutViewColumnKmlNumber
