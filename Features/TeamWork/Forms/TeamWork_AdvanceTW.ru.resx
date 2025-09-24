@@ -380,16 +380,25 @@
 </value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 355</value>
+    <value>3, 488</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 333</value>
   </data>
   <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 570</value>
+    <value>264, 728</value>
+  </data>
+  <data name="gridControlKont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1220, 93</value>
   </data>
   <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1480, 346</value>
+    <value>1480, 479</value>
   </data>
   <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 355</value>
+    <value>264, 488</value>
+  </data>
+  <data name="gridControlRaskr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1220, 234</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1488, 824</value>

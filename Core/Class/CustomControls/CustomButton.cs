@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using SewingProduction; // for VisibilityExtensions.ApplyVisibility
 using SewingProduction.Features.UserDistribution.Helpers;
 using System;
 using System.ComponentModel;
@@ -117,7 +118,8 @@ namespace SewingProduction.Core.Class
 
         private void UpdateVisibility()
         {
-            base.Visible = _visiblePermission && _visibleLogic;
+            //Применяем и к контролу, и к лейауту. DevExpress LayoutControl
+            this.ApplyVisibility(_visiblePermission, _visibleLogic);
         }
 
         public new bool Visible

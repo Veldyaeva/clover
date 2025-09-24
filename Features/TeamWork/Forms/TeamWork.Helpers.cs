@@ -936,6 +936,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Очищаем буфер при переключении режима
             TeamWorkBuffer.ClearBuffer();
+
+            // Взаимоисключаем кнопки редактирования: если доступна расширенная, скрываем обычную
+            EnforceEditButtonsExclusivity();
         }
 
         /// <summary>
@@ -972,9 +975,34 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Очищаем буфер при переключении режима
             TeamWorkBuffer.ClearBuffer();
+
+            // На всякий случай поддержим консистентность взаимной видимости
+            EnforceEditButtonsExclusivity();
         }
 
         #endregion
+
+        /// <summary>
+        /// Делает кнопки редактирования взаимоисключающимися:
+        /// если видна расширенная (ButtonEditOnlyAdv), скрывает обычную (ButtonEditWd);
+        /// иначе показывает обычную при наличии прав.
+        /// </summary>
+        private void EnforceEditButtonsExclusivity()
+        {
+            try
+            {
+                if (ButtonEditOnlyAdv == null || ButtonEditWd == null) return;
+
+                // Итоговая видимость учитывает и права, и логику
+                bool advancedVisible = ButtonEditOnlyAdv.Visible;
+                if (advancedVisible)
+                {
+                    ButtonEditWd.VisibleLogic = false;
+                }
+                // Если расширенная скрыта — не трогаем состояние обычной, оно может управляться режимом
+            }
+            catch { }
+        }
 
     }
     public static class DemoHelper
