@@ -703,8 +703,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRaskr.OptionsView.ShowGroupPanel = false;
             gridViewRaskr.PopupMenuShowing += gridViewRaskr_PopupMenuShowing;
             gridViewRaskr.ShowingEditor += gridViewRaskr_ShowingEditor;
-            gridViewRaskr.ValidateRow += GridView2_ValidateRow;
-            gridViewRaskr.RowUpdated += GridView2_RowUpdated;
+            gridViewRaskr.ValidateRow += GridViewRaskr_ValidateRow;
+            gridViewRaskr.RowUpdated += GridViewRaskr_RowUpdated;
             // 
             // gridColumn9
             // 
@@ -742,10 +742,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn11
             // 
             resources.ApplyResources(gridColumn11, "gridColumn11");
-            gridColumn11.FieldName = "Text";
+            gridColumn11.FieldName = "TextRask";
             gridColumn11.ImageOptions.ImageKey = resources.GetString("gridColumn11.ImageOptions.ImageKey");
             gridColumn11.MinWidth = 23;
             gridColumn11.Name = "gridColumn11";
+            gridColumn11.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
             // 
             // gridColumn15
             // 

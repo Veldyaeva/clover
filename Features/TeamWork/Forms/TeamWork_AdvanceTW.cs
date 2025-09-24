@@ -2188,7 +2188,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         #endregion
 
         #region Rask
-        // private async void GridView2_InitNewRow(object sender, InitNewRowEventArgs e)
         private async void OpenSelectionForm()
         {
             if (_isSelectionFormOpen)
@@ -2233,7 +2232,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка в методе GridView2_InitNewRow");
+                await _logger.LogErrorAsync(ex, "Ошибка в методе GridViewRaskr_InitNewRow");
                 await this.InvokeAsync(() =>
                 {
                     MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -2262,7 +2261,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void GridView2_RowUpdated(object sender, RowObjectEventArgs e)
+        private void GridViewRaskr_RowUpdated(object sender, RowObjectEventArgs e)
         {
             if (e.Row is NormRask normRask && !_isInitialLoading)
             {
@@ -2276,7 +2275,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private async void GridView2_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        private async void GridViewRaskr_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             if (e.Row is NormRask normRask)
             {

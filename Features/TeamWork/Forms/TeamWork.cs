@@ -71,7 +71,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingSource _preArchBindingSource;
         private BindingList<ArtNormN> _archList;
         private BindingSource _archBindingSource;
-        
+
         // Глобальная переменная для состояния кнопки "показать все"
         private bool showAllWD = false;
 
@@ -366,15 +366,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void CalcPreviewText(object sender,
-                                       CalcPreviewTextEventArgs e)
-        {
-            if (e.RowHandle >= 0 && ANNgridView.GetRow(e.RowHandle) is ArtNormN row)
-            {
-                e.PreviewText = $"Дизайнер: {row.Diz}, Конструктор: {row.Constr}, Особенности: {row.Komment}, Рекомендации: {row.Reco}";
-            }
-        }
-
         private int _lastFocusedAnnId = 0;
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
@@ -401,7 +392,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await RestoreFocusAsync(_lastFocusedAnnId);
                 }
                 InitHeaderButtonTags();
-                
+
                 // Инициализируем переменную состояния кнопки "показать все"
                 var showAllButton = FindButtonByTag(layoutControlGroup14, "bind:show-all");
                 if (showAllButton != null)
@@ -591,7 +582,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-            
+
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
         }
 
@@ -938,7 +929,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            
+
             ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneOperationalData();
 
             int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, CopyedWorkDivisionShell);
@@ -1100,7 +1091,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 9:
                     //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
                     if (PrintButton.Enabled && PrintButton.Visible)
-                    // Отчет технологической схемы разделения труда
+                        // Отчет технологической схемы разделения труда
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
                 case 11:
@@ -1141,9 +1132,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 4:
                     await SetUpdateDate_Internal(sender, e);
                     break;
-                case 6:
-                    loadAllCheckBox_CheckedChanged_Internal(sender, e);
-                    break;
+                    //case 6: удалила, потому что это теперь не кнопка а check и обрабатывается в другом месте
+                    //    loadAllCheckBox_CheckedChanged_Internal(sender, e);
+                    //    break;
             }
         }
         /// <summary>
@@ -1864,7 +1855,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Используем универсальную процедуру для первой вкладки
             await UnbindArticulesFromWorkDivision_Internal(
                 gridViewNZP,           // GridView НЗП (customGridControl4)
-               //gridViewBindedArts,
+                                       //gridViewBindedArts,
                 _nzpListWd,          // Источник данных НЗП для первой вкладки
                 ANNgridView,         // GridView с РТ (ArtNormN)
                 useCheckedRows: false // Используем текущую выбранную строку
@@ -1937,6 +1928,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 showAllWD = button.Checked;
                 loadAllCheckBox_CheckedChanged_Internal(sender, e, button.Checked);
             }
+        }
+
+        private void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        {
+
         }
     }
 }

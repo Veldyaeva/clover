@@ -52,6 +52,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             EditorButtonImageOptions editorButtonImageOptions2 = new EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            EditorButtonImageOptions editorButtonImageOptions3 = new EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            EditorButtonImageOptions editorButtonImageOptions4 = new EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            EditorButtonImageOptions editorButtonImageOptions5 = new EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            EditorButtonImageOptions editorButtonImageOptions6 = new EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            EditorButtonImageOptions editorButtonImageOptions7 = new EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
@@ -599,7 +609,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseForeColor = true;
             editorButtonImageOptions1.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             editorButtonImageOptions1.Image = (System.Drawing.Image)resources.GetObject("editorButtonImageOptions1.Image");
-            xtraTabControl1.CustomHeaderButtons.AddRange(new DevExpress.XtraTab.Buttons.CustomHeaderButton[] { new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Glyph, "", -1, true, true, editorButtonImageOptions1, serializableAppearanceObject1, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Ellipsis, "34534534", -1, true, true, editorButtonImageOptions2, serializableAppearanceObject2, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Redo), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.OK), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Plus), new DevExpress.XtraTab.Buttons.CustomHeaderButton(), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Delete) });
+            xtraTabControl1.CustomHeaderButtons.AddRange(new DevExpress.XtraTab.Buttons.CustomHeaderButton[] { new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Glyph, "", -1, true, true, editorButtonImageOptions1, serializableAppearanceObject1, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Ellipsis, "34534534", -1, true, false, editorButtonImageOptions2, serializableAppearanceObject2, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Redo, "", -1, true, false, editorButtonImageOptions3, serializableAppearanceObject3, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.OK, "", -1, true, false, editorButtonImageOptions4, serializableAppearanceObject4, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Plus, "", -1, true, false, editorButtonImageOptions5, serializableAppearanceObject5, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Ellipsis, "", -1, true, false, editorButtonImageOptions6, serializableAppearanceObject6, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Delete, "", -1, true, false, editorButtonImageOptions7, serializableAppearanceObject7, "", null, null) });
             xtraTabControl1.Dock = DockStyle.Fill;
             xtraTabControl1.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
             xtraTabControl1.HeaderButtons = DevExpress.XtraTab.TabButtons.Prev | DevExpress.XtraTab.TabButtons.Next | DevExpress.XtraTab.TabButtons.Default;
@@ -614,6 +624,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabControl1.TabIndex = 0;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { TabPage1, xtraTabPageArticles });
             xtraTabControl1.SelectedPageChanged += XtraTabControl1_SelectedPageChanged;
+            xtraTabControl1.CustomHeaderButtonClick += xtraTabControl1_CustomHeaderButtonClick;
             // 
             // TabPage1
             // 
@@ -1834,6 +1845,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             colannID.Visible = true;
             colannID.VisibleIndex = 19;
             colannID.Width = 87;
+            // 
+            // gridColumn66
+            // 
+            gridColumn66.Caption = "статус";
+            gridColumn66.FieldName = "Status";
+            gridColumn66.Name = "gridColumn66";
+            gridColumn66.Visible = true;
+            gridColumn66.VisibleIndex = 2;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -3889,7 +3908,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn60.FieldName = "Articul";
             gridColumn60.Name = "gridColumn60";
             gridColumn60.Visible = true;
-            gridColumn60.VisibleIndex = 1;
+            gridColumn60.VisibleIndex = 0;
             gridColumn60.Width = 150;
             // 
             // gridColumn61

@@ -120,7 +120,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 wdToBindView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
             }
 
-            ANNgridView.CalcPreviewText += CalcPreviewText;
         }
         /// <summary>
         /// Применяет базовые настройки к гриду (сброс фильтров, сортировки и восстановление стандартных настроек)
