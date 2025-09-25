@@ -39,7 +39,7 @@ namespace SewingProduction.Features.Articul
             customLabelTM = new CustomLabel();
             customLabelGroup = new CustomLabel();
             customLabelGOST = new CustomLabel();
-            radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
+            radioGroup1 = new CustomRadioGroup();
             customLabelKod = new CustomLabel();
             customTextBoxKod = new CustomTextBox();
             customTextBoxPo = new CustomTextBox();
@@ -114,7 +114,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.Controls.Add(customLabelTM, 0, 5);
             tableLayoutPanel1.Controls.Add(customLabelGroup, 0, 4);
             tableLayoutPanel1.Controls.Add(customLabelGOST, 0, 3);
-            tableLayoutPanel1.Controls.Add(radioGroup1, 1, 0);
+            tableLayoutPanel1.Controls.Add(radioGroup1, 0, 0);
             tableLayoutPanel1.Controls.Add(customLabelKod, 0, 2);
             tableLayoutPanel1.Controls.Add(customTextBoxKod, 2, 2);
             tableLayoutPanel1.Controls.Add(customTextBoxPo, 4, 2);
@@ -265,18 +265,19 @@ namespace SewingProduction.Features.Articul
             // radioGroup1
             // 
             radioGroup1.AutoSizeInLayoutControl = true;
-            tableLayoutPanel1.SetColumnSpan(radioGroup1, 5);
+            tableLayoutPanel1.SetColumnSpan(radioGroup1, 6);
             radioGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
-            radioGroup1.Location = new System.Drawing.Point(122, 3);
+            radioGroup1.Location = new System.Drawing.Point(4, 3);
             radioGroup1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             radioGroup1.Name = "radioGroup1";
+            radioGroup1.ObjectName = null;
             radioGroup1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             radioGroup1.Properties.Appearance.Options.UseBackColor = true;
             radioGroup1.Properties.Columns = 2;
             radioGroup1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Новый артикул", true, null, "Новый артикул"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Новый артикул СП (шнуры,резинка)", true, null, "Новый артикул СП (шнуры,резинка)"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Копия артикула", true, null, "Копия артикула") });
             tableLayoutPanel1.SetRowSpan(radioGroup1, 2);
-            radioGroup1.Size = new System.Drawing.Size(584, 62);
+            radioGroup1.Size = new System.Drawing.Size(702, 62);
             radioGroup1.TabIndex = 0;
             radioGroup1.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
             // 
@@ -808,7 +809,7 @@ namespace SewingProduction.Features.Articul
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private DevExpress.XtraEditors.RadioGroup radioGroup1;
+        private CustomRadioGroup radioGroup1;
         private CustomLabel customLabelKod;
         private CustomTextBox customTextBoxKod;
         private CustomTextBox customTextBoxPo;

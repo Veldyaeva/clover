@@ -58,7 +58,7 @@ namespace SewingProduction.Features.Articul.Service
         }
         public async Task<string> GetAllRazmByRazmAsync(string razm)
         {
-            string query = "SELECT Razm_all FROM Razm WHERE Razm = @razm";
+            string query = "SELECT Razm_all FROM Razm WHERE Razm = @razm ORDER BY razm DESC";
             return await _dbService.GetEntityAsync<string>(query, new { razm });
         }
         public async Task<string> GetFileEskizForKod(string kod)

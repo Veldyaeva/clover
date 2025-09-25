@@ -121,11 +121,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customHeaderLabel1
             // 
             customHeaderLabel1.AutoSize = true;
-            customHeaderLabel1.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
             customHeaderLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customHeaderLabel1.Location = new System.Drawing.Point(15, 32);
             customHeaderLabel1.Name = "customHeaderLabel1";
-            customHeaderLabel1.Size = new System.Drawing.Size(103, 21);
+            customHeaderLabel1.Size = new System.Drawing.Size(131, 27);
             customHeaderLabel1.TabIndex = 6;
             customHeaderLabel1.Text = "Заголовок";
             // 
@@ -213,7 +212,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(590, 508);
+            ClientSize = new System.Drawing.Size(689, 508);
             Controls.Add(customLabel2);
             Controls.Add(customButton2);
             Controls.Add(customButton1);
