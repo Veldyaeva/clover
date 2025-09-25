@@ -43,7 +43,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             //Application.Restart();
             string exePath = Application.ExecutablePath;
             Process.Start(exePath, "--restart");
-            Application.Exit();
+            // Завершаем процесс без перебора коллекции окон, чтобы избежать исключения
+            Environment.Exit(0);
         }
 
         private void customButtonAllRpofile_Click(object sender, EventArgs e)

@@ -379,4 +379,113 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 488</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 333</value>
+  </data>
+  <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 728</value>
+  </data>
+  <data name="gridControlKont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1220, 93</value>
+  </data>
+  <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1480, 479</value>
+  </data>
+  <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>264, 488</value>
+  </data>
+  <data name="gridControlRaskr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1220, 234</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1488, 824</value>
+  </data>
+  <data name="customGroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 484</value>
+  </data>
+  <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>260, 23</value>
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 338</value>
+  </data>
+  <data name="customGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 118</value>
+  </data>
+  <data name="customGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>276, 360</value>
+  </data>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 90</value>
+  </data>
+  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>161, 90</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 22</value>
+  </data>
+  <data name="btnMoveUp.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="btnMoveUp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="btnMoveUp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 21</value>
+  </data>
+  <data name="btnMoveUp.Text" xml:space="preserve">
+    <value>↑ Вверх</value>
+  </data>
+  <data name="btnMoveDown.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="btnMoveDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 30</value>
+  </data>
+  <data name="btnMoveDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 22</value>
+  </data>
+  <data name="btnMoveDown.Text" xml:space="preserve">
+    <value>↓ Вниз</value>
+  </data>
+  <data name="btnValidateNumbers.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="btnValidateNumbers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 3</value>
+  </data>
+  <data name="btnValidateNumbers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 21</value>
+  </data>
+  <data name="btnValidateNumbers.Text" xml:space="preserve">
+    <value>Проверить нумерацию</value>
+  </data>
+  <data name="btnRecalculateNumbers.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="btnRecalculateNumbers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 30</value>
+  </data>
+  <data name="btnRecalculateNumbers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="btnRecalculateNumbers.Text" xml:space="preserve">
+    <value>Обновить нумерацию</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>284, 824</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
 </root>

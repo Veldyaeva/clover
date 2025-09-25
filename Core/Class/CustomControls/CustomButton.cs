@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using SewingProduction; // for VisibilityExtensions.ApplyVisibility
 using SewingProduction.Features.UserDistribution.Helpers;
 using System;
 using System.ComponentModel;
@@ -14,7 +15,13 @@ namespace SewingProduction.Core.Class
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
         private UserClass _lastUser;
+        /// <summary>
+        ///Контролирует видимость элемента на основе прав пользователя в системе
+        /// </summary>
         private bool _visiblePermission = true;
+        /// <summary>
+        ///Контролирует видимость элемента на основе бизнес-логики приложения
+        /// </summary>
         private bool _visibleLogic = true;
 
         public CustomButton()
@@ -83,6 +90,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("Видимость по правам")]
+        [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
             get => _visiblePermission;
@@ -94,6 +103,9 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Category("Видимость")]
+        [DisplayName("Видимость по логике")]
+        [Description("Контролирует видимость кнопки на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;
@@ -106,7 +118,8 @@ namespace SewingProduction.Core.Class
 
         private void UpdateVisibility()
         {
-            base.Visible = _visiblePermission && _visibleLogic;
+            //Применяем и к контролу, и к лейауту. DevExpress LayoutControl
+            this.ApplyVisibility(_visiblePermission, _visibleLogic);
         }
 
         public new bool Visible
