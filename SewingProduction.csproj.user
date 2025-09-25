@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\SharpProj\sewingproduction-9.0.net\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\ClickOnceProfile1.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -199,6 +199,9 @@
     <Compile Update="Report\GetItogVibKartSokrReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\KnittingProductionPlanningReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\MlRtReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -217,19 +220,10 @@
     <Compile Update="Report\ReestrListReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
-    <Compile Update="Report\SockZadanyInfoReport.cs">
-      <SubType>XtraReport</SubType>
-    </Compile>
     <Compile Update="Report\subreport\FurnitFITByKodFD.cs">
       <SubType>XtraReport</SubType>
     </Compile>
-    <Compile Update="Report\subreport\KnitMachineDownTimeByNomZadReport.cs">
-      <SubType>XtraReport</SubType>
-    </Compile>
     <Compile Update="Report\subreport\KnitMashineServiceByNomZadReport.cs">
-      <SubType>XtraReport</SubType>
-    </Compile>
-    <Compile Update="Report\subreport\KnitZadanyBySmenReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\subreport\PrintGroupNROborudReport.cs">
@@ -257,9 +251,6 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
-      <SubType>XtraReport</SubType>
-    </Compile>
-    <Compile Update="Report\KnittingProductionPlanningReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>
