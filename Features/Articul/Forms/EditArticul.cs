@@ -181,12 +181,12 @@ namespace SewingProduction.Features.Articul
 
                 customTextBoxModel.Text = row["mod"].ToString();
             }
-            //searchLookUpEditGost.Enabled = false;
-            //searchLookUpEditGroup.Enabled = false;
+            searchLookUpEditGost.Enabled = false;
+            searchLookUpEditGroup.Enabled = false;
         }
 
         // Кнопка сохранить
-        private void customOkButtonSave_Click(object sender, EventArgs e)
+        private async void customOkButtonSave_Click(object sender, EventArgs e)
         {
             var error = checkRule();
             if (error != null)
@@ -194,26 +194,25 @@ namespace SewingProduction.Features.Articul
                 MessageBox.Show(error);
                 return;
             }
+            var gostRow = searchLookUpEditGost.Properties.GetRowByKeyValue(searchLookUpEditGost.EditValue) as DataRowView;
+            var groupRow = searchLookUpEditGroup.Properties.GetRowByKeyValue(searchLookUpEditGroup.EditValue) as DataRowView;
+
             ArticulModel articulModel = new ArticulModel
             {
                 Kod = customTextBoxKod.Text,
                 Po = customTextBoxPo.Text,
                 Id_gost = Convert.ToInt32(searchLookUpEditGost.EditValue),
-                Gost = searchLookUpEditGost.Text,
+                Gost = gostRow?["Гост"]?.ToString(),
                 Grup = searchLookUpEditGroup.Text,
-                Kle = searchLookUpEditTm1.Text,
+                Kle = searchLookUpEditTm1.EditValue.ToString(),
                 Articul = customTextBoxArt.Text,
                 Razm = searchLookUpEditRazm.Text,
                 Mod = customTextBoxModel.Text,
                 Komp_name = Environment.MachineName,
                 Sql_pr_add = 1,
                 Date_add = DateTime.Now,
-                Ag_id = Convert.ToInt32((searchLookUpEditGroup.Properties.View
-                .GetFocusedRowCellValue("Ag_id") ?? 0)),
-
-                Kod_tnved = searchLookUpEditGroup.Properties.View
-                    .GetFocusedRowCellValue("Ag_tnved")?.ToString(),
-
+                Ag_id = groupRow?["Ag_id"] != null ? Convert.ToInt32(groupRow["Ag_id"]) : 0,
+                Kod_tnved = groupRow?["Ag_tnved"]?.ToString(),
                 Grupp = Convert.ToInt32(searchLookUpEditTm2.EditValue)
             };
             if (radioGroup1.SelectedIndex == 1) // Новый артикул СП (шнуры,резинка)
@@ -244,7 +243,7 @@ namespace SewingProduction.Features.Articul
                 if (p.GetValue(articulModel) != null)
                     Debug.WriteLine($"{p.Name} = {p.GetValue(articulModel)}");
             }
-            //await _artNewDataService.SaveAsync(articulModel);
+            await _artNewDataService.SaveAsync(articulModel);
 
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -252,14 +251,14 @@ namespace SewingProduction.Features.Articul
         }
         string checkRule()
         {
+            if (string.IsNullOrWhiteSpace(customTextBoxKod.Text))
+            {
+                return ("Укажите код!");
+            }
             int kod = _artNewDataService.GetArticulByKod(customTextBoxKod.Text);
             if (kod > 0)
             {
                 return ("Такой код артикула уже есть!");
-            }
-            if (string.IsNullOrWhiteSpace(customTextBoxKod.Text))
-            {
-                return ("Укажите код!");
             }
             if (string.IsNullOrWhiteSpace(searchLookUpEditGost.Text) || searchLookUpEditGost.EditValue == null)
             {

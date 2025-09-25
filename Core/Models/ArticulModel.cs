@@ -195,8 +195,7 @@ namespace SewingProduction.Core.Models
         public decimal? Sek_vyaz57 { get; set; }
         public decimal? Sek_vyaz18 { get; set; }
         public int? Annid { get; set; }
-        
-        
+
 
 
 
