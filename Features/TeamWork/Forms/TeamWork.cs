@@ -956,6 +956,13 @@ namespace SewingProduction.Features.TeamWork.Forms
 
 
             ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneOperationalData();
+            // Инициализируем корректный начальный статус для дубля
+            CopyedWorkDivisionShell.Status = (int)Status.Preliminary;
+            CopyedWorkDivisionShell.StatusText = StatusHelper.GetStatusText(CopyedWorkDivisionShell.Status);
+            CopyedWorkDivisionShell.AnnID = 0;
+            CopyedWorkDivisionShell.Arh = false;
+            CopyedWorkDivisionShell.dateCreate = DateTime.Now;
+            CopyedWorkDivisionShell.dateUpdate = null;
 
             int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, CopyedWorkDivisionShell);
             if (newAnnId <= 0)
