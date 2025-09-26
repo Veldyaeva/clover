@@ -86,7 +86,6 @@ namespace SewingProduction.Features.Articul.Forms
             await FillRazmAllAsync(resultList);
             customGridControlKomplArt.DataSource = resultList;
 
-
             var resulRazm = from a in articuls
                             where a.Kod.ToString().PadLeft(7, '0').Substring(0, 7) == xkod.Substring(0, 7)
                             join g in grups on a.Grup equals g.Men into gj
@@ -1511,18 +1510,6 @@ namespace SewingProduction.Features.Articul.Forms
                 VerifiedCheckedFalse();
                 //customCheckBoxVerified.Checked = false;
 
-                // Снимаем галочки и чистим вкладки
-                foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
-                {
-                    if (tab.Controls.Count == 0 || tab.Controls[0] is not TableLayoutPanel layout) continue;
-                    var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
-                    if (grid?.DataSource is BindingList<SpArticulGrupMenViewModel> list)
-                    {
-                        foreach (var row in list) row.Pr_po = false;
-                        //list.Clear();
-                        grid.RefreshDataSource();
-                    }
-                }
                 foreach (var r in razmList) r.Pr_po = false;
                 gridViewKomplRazm.RefreshData();
 
@@ -1600,6 +1587,19 @@ namespace SewingProduction.Features.Articul.Forms
             customGridControlKomplSelected.RefreshDataSource();
             VerifiedCheckedFalse();
             //customCheckBoxVerified.Checked = false;
+
+            // Снимаем галочки и чистим вкладки
+            foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
+            {
+                if (tab.Controls.Count == 0 || tab.Controls[0] is not TableLayoutPanel layout) continue;
+                var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                if (grid?.DataSource is BindingList<SpArticulGrupMenViewModel> list)
+                {
+                    foreach (var row in list) row.Pr_po = false;
+                    //list.Clear();
+                    grid.RefreshDataSource();
+                }
+            }
 
             foreach (var r in razmList) r.Pr_po = false;
             gridViewKomplRazm.RefreshData();
