@@ -380,6 +380,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvIDParent"], ColumnSortOrder.Ascending));
                 gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvID"], ColumnSortOrder.Ascending));
                 _gridHelper.AutoRowFilterConfig(gridViewPZVOperList as GridView);
+                //AutoRowFilterConfigForm(gridViewPZVOperList as GridView);
                 #endregion
 
                 #region описание блока Информация по операции
@@ -866,5 +867,100 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             LoadPlanZagrVyazByZadanySelection();
 
         }
+
+        private void customSimpleButton8_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"gridViewPZVOperList.OptionsView.ShowAutoFilterRow = {gridViewPZVOperList.OptionsView.ShowAutoFilterRow}");
+            MessageBox.Show($"gridViewPZVOperList.OptionsCustomization.AllowFilter = {gridViewPZVOperList.OptionsCustomization.AllowFilter}");
+
+            MessageBox.Show($"gridViewPZVOperList.OptionsFilter.AllowFilterEditor = {gridViewPZVOperList.OptionsFilter.AllowFilterEditor}");
+
+
+            //foreach (GridColumn column in gridViewPZVOperList.Columns)
+            //{
+            //    if (!column.Visible) continue; // Пропускаем скрытые колонки
+
+            //    //column.OptionsFilter.AllowAutoFilter = true;
+            //    //column.OptionsFilter.AllowFilter = true;
+            //    MessageBox.Show($"{column.Name}.OptionsFilter.AllowAutoFilter = {column.OptionsFilter.AllowAutoFilter}");
+            //    MessageBox.Show($"{column.Name}.OptionsFilter.AllowFilter = {column.OptionsFilter.AllowFilter}");
+            //    MessageBox.Show($"{column.Name}.OptionsColumn.AllowSort = {column.OptionsColumn.AllowSort}");
+            //    MessageBox.Show($"{column.Name}.OptionsFilter.AutoFilterCondition = {column.OptionsFilter.AutoFilterCondition}");
+            //    MessageBox.Show($"{column.Name}.OptionsFilter.FilterPopupMode = {column.OptionsFilter.FilterPopupMode}");
+            //}
+
+            //AutoRowFilterConfigForm(gridViewPZVOperList);
+
+            MessageBox.Show($"gridViewPZVOperList.OptionsView.ShowAutoFilterRow = {gridViewPZVOperList.OptionsView.ShowAutoFilterRow}");
+            MessageBox.Show($"gridViewPZVOperList.OptionsCustomization.AllowFilter = {gridViewPZVOperList.OptionsCustomization.AllowFilter}");
+
+            MessageBox.Show($"gridViewPZVOperList.OptionsFilter.AllowFilterEditor = {gridViewPZVOperList.OptionsFilter.AllowFilterEditor}");
+        }
+
+        //public void AutoRowFilterConfigForm(GridView _gridView)
+        //{
+        //    if (_gridView == null) return;
+
+        //    try
+        //    {
+        //        // Основные настройки GridView
+        //        _gridView.OptionsView.ShowAutoFilterRow = true;
+        //        _gridView.OptionsCustomization.AllowFilter = true;
+        //        //gridView.OptionsFilter.AllowColumnFilter = true;
+        //        _gridView.OptionsFilter.AllowFilterEditor = true;
+
+        //        //// Улучшенные настройки фильтрации
+        //        //gridView.OptionsFilter.ImmediateUpdateAutoFilter = false; // Отложенное обновление
+        //        //gridView.OptionsFilter.AllowFilterEditorMenu = true; // Меню в редакторе фильтров
+
+        //        // Настройка каждого столбца
+        //        foreach (GridColumn _column in _gridView.Columns)
+        //        {
+        //            if (!_column.Visible) continue; // Пропускаем скрытые колонки
+
+        //            //column.OptionsFilter.AllowAutoFilter = true;
+        //            //column.OptionsFilter.AllowFilter = true;
+        //            _column.OptionsFilter.AllowAutoFilter = false;
+        //            _column.OptionsFilter.AllowFilter = false;
+        //            _column.OptionsColumn.AllowSort = DefaultBoolean.False;
+        //            // Умная настройка условий фильтрации
+        //            SetColumnFilterConditionForm(_column);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка настройки GridView: {ex.Message}");
+        //    }
+        //}
+        //private static void SetColumnFilterConditionForm(GridColumn _column)
+        //{
+        //    if (_column.ColumnType == typeof(string))
+        //    {
+        //        _column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Contains;
+        //    }
+        //    else if (_column.ColumnType == typeof(DateTime))
+        //    {
+        //        _column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Equals;
+        //        _column.OptionsFilter.FilterPopupMode = FilterPopupMode.Date;
+        //    }
+        //    else if (_column.ColumnType == typeof(bool))
+        //    {
+        //        _column.OptionsFilter.FilterPopupMode = FilterPopupMode.CheckedList;
+        //    }
+        //    else if (IsNumericTypeForm(_column.ColumnType))
+        //    {
+        //        _column.OptionsFilter.AutoFilterCondition = AutoFilterCondition.Equals;
+        //    }
+        //}
+        ///// <summary>
+        ///// Вспомогательный метод для проверки числовых типов
+        ///// </summary>
+        ///// <param name="type"></param>
+        ///// <returns></returns>
+        //private static bool IsNumericTypeForm(Type type)
+        //{
+        //    return type == typeof(int) || type == typeof(double) || type == typeof(decimal)
+        //           || type == typeof(float) || type == typeof(long) || type == typeof(short);
+        //}
     }
 }

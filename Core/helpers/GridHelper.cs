@@ -520,7 +520,7 @@ namespace SewingProduction.Helpers
 
                     //column.OptionsFilter.AllowAutoFilter = true;
                     //column.OptionsFilter.AllowFilter = true;
-                    column.OptionsFilter.AllowAutoFilter = false;
+                    column.OptionsFilter.AllowAutoFilter = true;
                     column.OptionsFilter.AllowFilter = false;
                     column.OptionsColumn.AllowSort = DefaultBoolean.False;
                     // Умная настройка условий фильтрации
