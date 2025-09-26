@@ -66,6 +66,8 @@ namespace SewingProduction.Features.CardByNom.Models
         public decimal kgDefects { get; set; }
         [NotMapped]
         public int kolDefects { get; set; }
+        [NotMapped]
+        public string ko { get; set; }
 
     }
 

@@ -4,13 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace SewingProduction.Features.TeamWork.Helpers
 {
-    /// <summary>
-    /// Вспомогательные методы для клонирования объектов ArtNormN с различными сценариями
-    /// </summary>
-    public static class CopyHelper
+    public static class CloneHelper
     {
         /// <summary>
         /// Клонирует объект и присваивает новый AnnId. Ключевое поле (ID) обнуляется.
@@ -60,19 +58,20 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
             return clone;
         }
+
         /// <summary>
-        /// Клонирует только технологические данные ArtNormN (без индивидуальной информации о продукте)
+        /// Клонирует только технологические данные ArtNormN (времена, себестоимость, комментарии)
+        /// Не копирует индивидуальную информацию изделия (артикул, группа, модель, ответственные)
         /// </summary>
         /// <param name="source">Исходный объект</param>
         /// <returns>Клон с только технологическими данными</returns>
         public static ArtNormN CloneOperationalData(this ArtNormN source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-
-            if (source == null) return null;
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
             var clone = new ArtNormN();
-
+            
             // Копируем только технологические данные
             clone.SekShv = source.SekShv;
             clone.SekVyaz3 = source.SekVyaz3;

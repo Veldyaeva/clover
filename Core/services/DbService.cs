@@ -217,6 +217,16 @@ namespace SewingProduction.Services
 
                     var value = prop.GetValue(entity);
 
+                    // Подстраховка: для таблицы Ann не допускаем Status = 0
+                    if (string.Equals(tableName, TableNames.Ann, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(columnName, nameof(Models.ArtNormN.Status), StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (value is int intStatus && intStatus == 0)
+                        {
+                            value = 1; // Предварительный
+                        }
+                    }
+
                     if (prop.Name == keyFieldName && (value == null || value.ToString() == "0" || string.IsNullOrWhiteSpace(value.ToString())))
                         continue;
 

@@ -112,6 +112,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel5 = new CustomLabel();
             btnOK = new CustomSimpleButton();
             btnCancel = new CustomSimpleButton();
+            btnMoveUp = new CustomSimpleButton();
+            btnMoveDown = new CustomSimpleButton();
+            btnValidateNumbers = new CustomSimpleButton();
+            btnRecalculateNumbers = new CustomSimpleButton();
             btnSave = new CustomSimpleButton();
             normdopobrBindingSource = new System.Windows.Forms.BindingSource(components);
             constructorBindingSource = new System.Windows.Forms.BindingSource(components);
@@ -395,6 +399,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
             gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
+            gridViewRasz.OptionsClipboard.PasteMode = DevExpress.Export.PasteMode.Append;
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
@@ -672,6 +677,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridViewRaskr
             // 
             resources.ApplyResources(gridViewRaskr, "gridViewRaskr");
+            gridViewRaskr.Appearance.ColumnFilterButtonActive.BackColor = System.Drawing.Color.Navy;
+            gridViewRaskr.Appearance.ColumnFilterButtonActive.Options.UseBackColor = true;
             gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
             gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
@@ -687,15 +694,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
             gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
             gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
+            gridViewRaskr.OptionsSelection.EnableAppearanceHideSelection = false;
             gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
             gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
+            gridViewRaskr.OptionsView.HeaderFilterButtonShowMode = DevExpress.XtraEditors.Controls.FilterButtonShowMode.Button;
             gridViewRaskr.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
-            gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
             gridViewRaskr.OptionsView.ShowGroupPanel = false;
             gridViewRaskr.PopupMenuShowing += gridViewRaskr_PopupMenuShowing;
             gridViewRaskr.ShowingEditor += gridViewRaskr_ShowingEditor;
-            gridViewRaskr.ValidateRow += GridView2_ValidateRow;
-            gridViewRaskr.RowUpdated += GridView2_RowUpdated;
+            gridViewRaskr.ValidateRow += GridViewRaskr_ValidateRow;
+            gridViewRaskr.RowUpdated += GridViewRaskr_RowUpdated;
             // 
             // gridColumn9
             // 
@@ -704,6 +713,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn9.ImageOptions.ImageKey = resources.GetString("gridColumn9.ImageOptions.ImageKey");
             gridColumn9.MinWidth = 23;
             gridColumn9.Name = "gridColumn9";
+            gridColumn9.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
             // 
             // gridColumn10
             // 
@@ -732,10 +742,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn11
             // 
             resources.ApplyResources(gridColumn11, "gridColumn11");
-            gridColumn11.FieldName = "Text";
+            gridColumn11.FieldName = "TextRask";
             gridColumn11.ImageOptions.ImageKey = resources.GetString("gridColumn11.ImageOptions.ImageKey");
             gridColumn11.MinWidth = 23;
             gridColumn11.Name = "gridColumn11";
+            gridColumn11.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
             // 
             // gridColumn15
             // 
@@ -805,10 +816,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             // tableLayoutPanel4
             // 
             resources.ApplyResources(tableLayoutPanel4, "tableLayoutPanel4");
-            tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 2);
-            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 1);
-            tableLayoutPanel4.Controls.Add(btnOK, 0, 0);
-            tableLayoutPanel4.Controls.Add(btnCancel, 2, 0);
+            tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 5);
+            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 4);
+            tableLayoutPanel4.Controls.Add(btnOK, 0, 3);
+            tableLayoutPanel4.Controls.Add(btnCancel, 2, 3);
+            tableLayoutPanel4.Controls.Add(btnMoveUp, 0, 0);
+            tableLayoutPanel4.Controls.Add(btnMoveDown, 0, 1);
+            tableLayoutPanel4.Controls.Add(btnValidateNumbers, 1, 0);
+            tableLayoutPanel4.Controls.Add(btnRecalculateNumbers, 1, 1);
             errorProvider1.SetError(tableLayoutPanel4, resources.GetString("tableLayoutPanel4.Error"));
             errorProvider1.SetIconAlignment(tableLayoutPanel4, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel4.IconAlignment"));
             errorProvider1.SetIconPadding(tableLayoutPanel4, (int)resources.GetObject("tableLayoutPanel4.IconPadding"));
@@ -913,7 +928,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1.SetIconAlignment(designerComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("designerComboBox.IconAlignment"));
             errorProvider1.SetIconPadding(designerComboBox, (int)resources.GetObject("designerComboBox.IconPadding"));
             designerComboBox.Name = "designerComboBox";
-            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons")) });
+            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons1")) });
             // 
             // constructorComboBox
             // 
@@ -923,7 +938,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
             errorProvider1.SetIconPadding(constructorComboBox, (int)resources.GetObject("constructorComboBox.IconPadding"));
             constructorComboBox.Name = "constructorComboBox";
-            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")) });
+            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons1")) });
             constructorComboBox.TabIndexChanged += ComboBox_SelectedIndexChanged;
             // 
             // customLabel1
@@ -1113,6 +1128,72 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnCancel.ImageOptions.ImageKey = resources.GetString("btnCancel.ImageOptions.ImageKey");
             btnCancel.Name = "btnCancel";
             btnCancel.Click += btnCancel_Click;
+            // 
+            // btnMoveUp
+            // 
+            resources.ApplyResources(btnMoveUp, "btnMoveUp");
+            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveUp.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveUp.Appearance.Font");
+            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveUp.Appearance.Options.UseBackColor = true;
+            btnMoveUp.Appearance.Options.UseFont = true;
+            btnMoveUp.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetError(btnMoveUp, resources.GetString("btnMoveUp.Error"));
+            errorProvider1.SetIconAlignment(btnMoveUp, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveUp.IconAlignment"));
+            errorProvider1.SetIconPadding(btnMoveUp, (int)resources.GetObject("btnMoveUp.IconPadding"));
+            btnMoveUp.ImageOptions.ImageKey = resources.GetString("btnMoveUp.ImageOptions.ImageKey");
+            btnMoveUp.Name = "btnMoveUp";
+            btnMoveUp.Click += btnMoveUp_Click;
+            // 
+            // btnMoveDown
+            // 
+            resources.ApplyResources(btnMoveDown, "btnMoveDown");
+            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveDown.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveDown.Appearance.Font");
+            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveDown.Appearance.Options.UseBackColor = true;
+            btnMoveDown.Appearance.Options.UseFont = true;
+            btnMoveDown.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetError(btnMoveDown, resources.GetString("btnMoveDown.Error"));
+            errorProvider1.SetIconAlignment(btnMoveDown, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveDown.IconAlignment"));
+            errorProvider1.SetIconPadding(btnMoveDown, (int)resources.GetObject("btnMoveDown.IconPadding"));
+            btnMoveDown.ImageOptions.ImageKey = resources.GetString("btnMoveDown.ImageOptions.ImageKey");
+            btnMoveDown.Name = "btnMoveDown";
+            btnMoveDown.Click += btnMoveDown_Click;
+            // 
+            // btnValidateNumbers
+            // 
+            resources.ApplyResources(btnValidateNumbers, "btnValidateNumbers");
+            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
+            btnValidateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnValidateNumbers.Appearance.Font");
+            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
+            btnValidateNumbers.Appearance.Options.UseBackColor = true;
+            btnValidateNumbers.Appearance.Options.UseFont = true;
+            btnValidateNumbers.Appearance.Options.UseForeColor = true;
+            tableLayoutPanel4.SetColumnSpan(btnValidateNumbers, 2);
+            errorProvider1.SetError(btnValidateNumbers, resources.GetString("btnValidateNumbers.Error"));
+            errorProvider1.SetIconAlignment(btnValidateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnValidateNumbers.IconAlignment"));
+            errorProvider1.SetIconPadding(btnValidateNumbers, (int)resources.GetObject("btnValidateNumbers.IconPadding"));
+            btnValidateNumbers.ImageOptions.ImageKey = resources.GetString("btnValidateNumbers.ImageOptions.ImageKey");
+            btnValidateNumbers.Name = "btnValidateNumbers";
+            btnValidateNumbers.Click += btnValidateNumbers_Click;
+            // 
+            // btnRecalculateNumbers
+            // 
+            resources.ApplyResources(btnRecalculateNumbers, "btnRecalculateNumbers");
+            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
+            btnRecalculateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnRecalculateNumbers.Appearance.Font");
+            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
+            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
+            btnRecalculateNumbers.Appearance.Options.UseFont = true;
+            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
+            tableLayoutPanel4.SetColumnSpan(btnRecalculateNumbers, 2);
+            errorProvider1.SetError(btnRecalculateNumbers, resources.GetString("btnRecalculateNumbers.Error"));
+            errorProvider1.SetIconAlignment(btnRecalculateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnRecalculateNumbers.IconAlignment"));
+            errorProvider1.SetIconPadding(btnRecalculateNumbers, (int)resources.GetObject("btnRecalculateNumbers.IconPadding"));
+            btnRecalculateNumbers.ImageOptions.ImageKey = resources.GetString("btnRecalculateNumbers.ImageOptions.ImageKey");
+            btnRecalculateNumbers.Name = "btnRecalculateNumbers";
+            btnRecalculateNumbers.Click += btnRecalculateNumbers_Click;
             // 
             // btnSave
             // 
@@ -1332,5 +1413,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         private CustomLabel customLabel5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private System.Windows.Forms.PictureBox pictureBox1;
+        
+        // Кнопки управления нумерацией операций
+        private CustomSimpleButton btnMoveUp;
+        private CustomSimpleButton btnMoveDown;
+        private CustomSimpleButton btnRecalculateNumbers;
+        private CustomSimpleButton btnValidateNumbers;
     }
 }
