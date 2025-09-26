@@ -9,6 +9,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Card.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Layout;
 using DevExpress.XtraGrid.Views.Layout.Events;
 using DevExpress.XtraLayout;
@@ -31,6 +32,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
@@ -60,9 +62,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         // --- Поля формы ---
         private PopupContainerControl _popup;
         private WebBrowser _browser; // можно заменить на WebView2
+        private PopupContainerEdit _popupHost;         // скрытый хост для показа попапа
         private RepositoryItemPopupContainerEdit _repoPopup;
+        private RepositoryItemMemoEdit _repoPreview;   // МНОГОСТРОЧНОЕ превью
+        //private RepositoryItemHyperTextEdit _repoPreviewHyper;
+        //private RepositoryItemLabelControl _repoPreviewLabel;
         private bool _configureOnce;
         private readonly string _htmlColumnName = "combinedPszNom"; // <--- ИМЯ КОЛОНКИ С HTML
+        private bool _previewWired;
         private const int PREVIEW_HEIGHT = 120;   // высота зоны превью внутри карточки
         private int MIN_CARD_HEIGHT = 180;  // минимальная высота карточки (страховка)
 
@@ -136,6 +143,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridKnitMachineLoadInfoColumnKmlNumberCard.FieldName = "kmlNumber";
                 gridKnitMachineLoadInfoColumnCombinedPszNom.FieldName = "combinedPszNom";
                 gridKnitMachineLoadInfoColumnCombinedPszNomCard.FieldName = "combinedPszNom";
+                //gridViewKnitMachineLoadLayoutView.CustomDrawCardFieldValue += View_CustomDrawCardFieldValue;
                 ConfigureLayoutView();
                 //SetupHtmlPopupForLayoutView("combinedPszNom", previewHeight: 140, cardHeight: 220);
                 //var lcol = gridViewKnitMachineLoadLayoutView.Columns["gridKnitMachineLoadInfoColumnCombinedPszNomCard"] as LayoutViewColumn;
@@ -264,8 +272,28 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 throw;
             }
         }
+        // === КАСТОМНАЯ ОТРИСОВКА ПРЕВЬЮ ===
+        private void View_CustomDrawCardFieldValue(object sender, RowCellCustomDrawEventArgs e)
+        {
+            if (e.Column == null || e.Column.FieldName != _htmlColumnName) return;
 
-        
+            // стандартный фон/рамку нарисовать
+            e.DefaultDraw();
+
+            string html = Convert.ToString(e.CellValue) ?? string.Empty;
+            var segs = ParseHtmlSegments(html);
+
+            var baseFont = e.Appearance.Font ?? Control.DefaultFont;
+            using var bold = new Font(baseFont, FontStyle.Bold);
+
+            var bounds = e.Bounds;
+            bounds.Inflate(-4, -4); // внутренние отступы
+
+            DrawSegmentsWrapped(e.Graphics, segs, baseFont, bold, e.Appearance.ForeColor, bounds);
+
+            e.Handled = true;
+        }
+
 
         //private void SetupHtmlPopupForLayoutView()
         //{
@@ -328,7 +356,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 Task bindingsTask = InitializeBindingsAsync();
                 await Task.WhenAll(bindingsTask);
-
+                //MessageBox.Show("1");
                 //await LoadKnitMachineAreaListDataAsync();
                 await LoadKnitMachineClassListDataAsync();
             }
@@ -698,7 +726,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //        {
         //            gridViewKnitMachineLoadLayoutView.CardMinSize = new System.Drawing.Size(gridViewKnitMachineLoadLayoutView.CardMinSize.Width, gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count + 1));
         //        }
-
+        //        //RecalcCardHeight();
 
         //        //---------------------------------------------
         //        gridViewKnitMachineLoadLayoutView.BeginSort();
@@ -720,73 +748,505 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //        gridViewKnitMachineLoadLayoutView.EndUpdate();
         //    }
         //}
+
+        //private void ConfigureLayoutView()
+        //{
+        //    var view = gridViewKnitMachineLoadLayoutView; // это LayoutView
+        //    view.BeginUpdate();
+        //    try
+        //    {
+        //        // 0) Репозиторий попапа с браузером (один раз)
+        //        EnsureHtmlPopup(view);
+
+        //        // 1) Назначаем попап-редактор на целевую колонку и фиксируем высоту её layout-поля
+        //        var lcol = view.Columns[_htmlColumnName] as LayoutViewColumn
+        //                   ?? throw new InvalidOperationException($"Колонка '{_htmlColumnName}' не найдена или это не LayoutViewColumn.");
+        //        lcol.OptionsColumn.AllowEdit = true;
+        //        lcol.OptionsColumn.ReadOnly = false;
+        //        lcol.ColumnEdit = _repoPopup;
+
+        //        var field = lcol.LayoutViewField;
+        //        field.SizeConstraintsType = SizeConstraintsType.Custom;
+        //        field.MinSize = new Size(field.MinSize.Width, PREVIEW_HEIGHT);
+        //        field.MaxSize = new Size(int.MaxValue, PREVIEW_HEIGHT);
+
+        //        // 2) Отключаем авто-рост редакторов, чтобы карточки не «распирало»
+        //        FixEditorsAutoHeight(view);
+
+        //        // 3) Высота карточек: расчёт от ваших данных (или fallback)
+        //        RecalcCardHeight();
+
+        //        // 4) Сортировка и прочее — как у вас
+        //        view.BeginSort();
+        //        view.ClearSorting();
+        //        view.SortInfo.AddRange(new[] {
+        //                new GridColumnSortInfo(view.Columns["kmlNumber"],  DevExpress.Data.ColumnSortOrder.Ascending),
+        //                new GridColumnSortInfo(view.Columns["yearNumber"], DevExpress.Data.ColumnSortOrder.Ascending),
+        //                new GridColumnSortInfo(view.Columns["monthNumber"],DevExpress.Data.ColumnSortOrder.Ascending)
+        //            });
+        //        view.EndSort();
+
+        //        view.FocusedRowHandle = 0;
+
+        //        // 5) Единоразовая подписка на события
+        //        if (!_configureOnce)
+        //        {
+        //            // обновлять высоту при ресайзе грида
+        //            gridControlKnitMachineLoadInfo.SizeChanged += (s, e) => RecalcCardHeight();
+
+        //            // красивое превью (чистим HTML для отображения в ячейке)
+        //            view.CustomColumnDisplayText += (s, e) =>
+        //            {
+        //                if (e.Column == lcol && e.Value is string html)
+        //                    e.DisplayText = StripHtml(html, 200);
+        //            };
+
+        //            // открывать редактор/попап по клику
+        //            view.OptionsBehavior.EditorShowMode = EditorShowMode.Click;
+
+        //            _configureOnce = true;
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        view.EndUpdate();
+        //    }
+        //}
+        //private void View_CustomDrawCardFieldValue_RenderHtmlPreview(object sender, LayoutViewCustomDrawCardFieldValueEventArgs e)
+        //{
+        //    if (e.Column == null || e.Column.FieldName != _htmlColumnName) return;
+
+        //    // фон/рамку — стандартом
+        //    e.DefaultDraw();
+
+        //    // текст HTML
+        //    string html = Convert.ToString(e.CellValue) ?? string.Empty;
+        //    var segments = ParseHtmlSegments(html); // разбиваем на стилизованные куски
+
+        //    // базовый шрифт/кисть
+        //    var baseFont = e.Appearance.Font ?? Control.DefaultFont;
+        //    var normalFont = baseFont;
+        //    var boldFont = new Font(baseFont, FontStyle.Bold);
+
+        //    Rectangle bounds = e.Bounds;
+        //    bounds.Inflate(-4, -4); // небольшие отступы
+
+        //    // раскладка по строкам с переносами
+        //    using (var g = e.Cache.GetGraphics())
+        //    {
+        //        DrawSegmentsWrapped(g, segments, normalFont, boldFont, e.Appearance.ForeColor, bounds);
+        //    }
+
+        //    e.Handled = true;
+        //}
+
+        //// --- HTML -> сегменты (текст + стиль) ---
+        //private sealed class Seg
+        //{
+        //    public string Text;
+        //    public bool Bold;
+        //    public Color? Color;
+        //    public bool NewLine;
+        //}
+
+        //private static List<Seg> ParseHtmlSegments(string html)
+        //{
+        //    var s = html ?? string.Empty;
+
+        //    // переносы
+        //    s = Regex.Replace(s, @"<\s*br\s*/?>", "\n", RegexOptions.IgnoreCase);
+        //    s = Regex.Replace(s, @"</?(p|div)[^>]*>", "\n", RegexOptions.IgnoreCase);
+
+        //    // жирный
+        //    s = Regex.Replace(s, @"<\s*(strong|b)\s*>", "[b]", RegexOptions.IgnoreCase);
+        //    s = Regex.Replace(s, @"<\s*/\s*(strong|b)\s*>", "[/b]", RegexOptions.IgnoreCase);
+
+        //    // цвет через <font color=...>
+        //    s = Regex.Replace(s, @"<\s*font[^>]*color\s*=\s*['""]?([#0-9a-zA-Z]+)['""]?[^>]*>", "[color=$1]", RegexOptions.IgnoreCase);
+        //    s = Regex.Replace(s, @"<\s*/\s*font\s*>", "[/color]", RegexOptions.IgnoreCase);
+
+        //    // цвет через <span style="color:...">
+        //    s = Regex.Replace(s, @"<\s*span[^>]*style\s*=\s*['""][^'""]*color\s*:\s*([#0-9a-zA-Z]+)[^'""]*['""][^>]*>", "[color=$1]", RegexOptions.IgnoreCase);
+        //    s = Regex.Replace(s, @"<\s*/\s*span\s*>", "[/color]", RegexOptions.IgnoreCase);
+
+        //    // убрать прочие теги
+        //    s = Regex.Replace(s, "<.*?>", string.Empty);
+
+        //    // декодировать сущности и нормализовать переносы
+        //    s = WebUtility.HtmlDecode(s).Replace("\r\n", "\n");
+
+        //    var list = new List<Seg>();
+        //    var sb = new StringBuilder();
+        //    bool bold = false;
+        //    Color? color = null;
+
+        //    for (int i = 0; i < s.Length;)
+        //    {
+        //        if (s[i] == '[')
+        //        {
+        //            // попытка распознать маркер
+        //            int end = s.IndexOf(']', i + 1);
+        //            if (end > i)
+        //            {
+        //                string tag = s.Substring(i + 1, end - i - 1);
+        //                Flush();
+        //                if (tag.Equals("b", StringComparison.OrdinalIgnoreCase)) bold = true;
+        //                else if (tag.Equals("/b", StringComparison.OrdinalIgnoreCase)) bold = false;
+        //                else if (tag.StartsWith("color=", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    color = ParseColor(tag.Substring(6));
+        //                }
+        //                else if (tag.Equals("/color", StringComparison.OrdinalIgnoreCase))
+        //                {
+        //                    color = null;
+        //                }
+        //                i = end + 1;
+        //                continue;
+        //            }
+        //        }
+
+        //        char ch = s[i++];
+        //        if (ch == '\n')
+        //        {
+        //            Flush();
+        //            list.Add(new Seg { NewLine = true });
+        //        }
+        //        else
+        //        {
+        //            sb.Append(ch);
+        //        }
+
+        //        void Flush()
+        //        {
+        //            if (sb.Length == 0) return;
+        //            list.Add(new Seg { Text = sb.ToString(), Bold = bold, Color = color });
+        //            sb.Clear();
+        //        }
+        //    }
+        //    if (sb.Length > 0) list.Add(new Seg { Text = sb.ToString(), Bold = bold, Color = color });
+
+        //    return list;
+        //}
+
+        //private static Color? ParseColor(string raw)
+        //{
+        //    raw = raw?.Trim().Trim('\'', '"');
+        //    if (string.IsNullOrEmpty(raw)) return null;
+        //    // имена цветов
+        //    try
+        //    {
+        //        if (!raw.StartsWith("#"))
+        //            return Color.FromName(raw);
+        //        // #RRGGBB
+        //        if (raw.Length == 7)
+        //            return ColorTranslator.FromHtml(raw);
+        //    }
+        //    catch { }
+        //    return null;
+        //}
+
+        //// --- рисуем с переносами ---
+        //private static void DrawSegmentsWrapped(Graphics g, List<Seg> segs, Font normal, Font bold, Color defaultColor, Rectangle bounds)
+        //{
+        //    int x = bounds.X;
+        //    int y = bounds.Y;
+        //    int maxX = bounds.Right;
+        //    int lineHeight = 0;
+
+        //    void NewLine()
+        //    {
+        //        y += Math.Max(lineHeight, normal.Height);
+        //        x = bounds.X;
+        //        lineHeight = 0;
+        //    }
+
+        //    foreach (var seg in segs)
+        //    {
+        //        if (seg.NewLine)
+        //        {
+        //            NewLine();
+        //            if (y >= bounds.Bottom) break;
+        //            continue;
+        //        }
+
+        //        string text = seg.Text;
+        //        if (string.IsNullOrEmpty(text)) continue;
+
+        //        var font = seg.Bold ? bold : normal;
+        //        var brush = new SolidBrush(seg.Color ?? defaultColor);
+
+        //        // Разбиваем по словам, чтобы переносить
+        //        foreach (var word in Regex.Split(text, @"(\s+)"))
+        //        {
+        //            if (string.IsNullOrEmpty(word)) continue;
+
+        //            var sz = TextRenderer.MeasureText(g, word, font, new Size(int.MaxValue, int.MaxValue),
+        //                TextFormatFlags.NoPadding | TextFormatFlags.NoClipping);
+
+        //            bool overflow = x + sz.Width > maxX;
+
+        //            if (overflow && x > bounds.X && !IsWhitespace(word))
+        //            {
+        //                // перенос на новую строку
+        //                NewLine();
+        //                if (y >= bounds.Bottom) { brush.Dispose(); return; }
+        //            }
+
+        //            // обрезка, если по высоте не влезаем
+        //            if (y + Math.Max(lineHeight, sz.Height) > bounds.Bottom)
+        //            {
+        //                // поставим многоточие в конце строки
+        //                TextRenderer.DrawText(g, "…", font, new Point(Math.Min(x, maxX - sz.Width), y),
+        //                    seg.Color ?? defaultColor,
+        //                    TextFormatFlags.NoPadding | TextFormatFlags.NoClipping);
+        //                brush.Dispose();
+        //                return;
+        //            }
+
+        //            TextRenderer.DrawText(g, word, font, new Point(x, y),
+        //                seg.Color ?? defaultColor,
+        //                TextFormatFlags.NoPadding | TextFormatFlags.NoClipping);
+
+        //            x += sz.Width;
+        //            lineHeight = Math.Max(lineHeight, sz.Height);
+        //        }
+
+        //        brush.Dispose();
+        //    }
+        //}
+
+        // === HTML -> сегменты (жирный/цвет/переносы) ===
+        private sealed class Seg { public string Text; public bool Bold; public Color? Color; public bool NewLine; }
+
+        private static List<Seg> ParseHtmlSegments(string html)
+        {
+            var s = html ?? "";
+            s = Regex.Replace(s, @"<\s*br\s*/?>", "\n", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"</?(p|div)[^>]*>", "\n", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<\s*(strong|b)\s*>", "[b]", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<\s*/\s*(strong|b)\s*>", "[/b]", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<\s*font[^>]*color\s*=\s*['""]?([#0-9a-zA-Z]+)['""]?[^>]*>", "[color=$1]", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<\s*/\s*font\s*>", "[/color]", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<\s*span[^>]*style\s*=\s*['""][^'""]*color\s*:\s*([#0-9a-zA-Z]+)[^'""]*['""][^>]*>", "[color=$1]", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"<\s*/\s*span\s*>", "[/color]", RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, "<.*?>", "");
+            s = WebUtility.HtmlDecode(s).Replace("\r\n", "\n");
+
+            var list = new List<Seg>();
+            var sb = new StringBuilder();
+            bool bold = false; Color? col = null;
+
+            for (int i = 0; i < s.Length;)
+            {
+                if (s[i] == '[')
+                {
+                    int j = s.IndexOf(']', i + 1);
+                    if (j > i)
+                    {
+                        Flush();
+                        var tag = s.Substring(i + 1, j - i - 1);
+                        if (tag.Equals("b", StringComparison.OrdinalIgnoreCase)) bold = true;
+                        else if (tag.Equals("/b", StringComparison.OrdinalIgnoreCase)) bold = false;
+                        else if (tag.StartsWith("color=", StringComparison.OrdinalIgnoreCase)) col = ParseColor(tag.Substring(6));
+                        else if (tag.Equals("/color", StringComparison.OrdinalIgnoreCase)) col = null;
+                        i = j + 1; continue;
+                    }
+                }
+                char ch = s[i++];
+                if (ch == '\n') { Flush(); list.Add(new Seg { NewLine = true }); }
+                else sb.Append(ch);
+                void Flush() { if (sb.Length > 0) { list.Add(new Seg { Text = sb.ToString(), Bold = bold, Color = col }); sb.Clear(); } }
+            }
+            if (sb.Length > 0) list.Add(new Seg { Text = sb.ToString(), Bold = bold, Color = col });
+            return list;
+        }
+
+        private static Color? ParseColor(string raw)
+        {
+            raw = raw?.Trim().Trim('"', '\''); if (string.IsNullOrEmpty(raw)) return null;
+            try { return raw.StartsWith("#") ? ColorTranslator.FromHtml(raw) : Color.FromName(raw); } catch { return null; }
+        }
+
+        // === Разбор на строки с переносами + отрисовка ===
+        private static void DrawSegmentsWrapped(Graphics g, List<Seg> segs, Font normal, Font bold, Color defColor, Rectangle bounds)
+        {
+            int x = bounds.X, y = bounds.Y, maxX = bounds.Right, lineH = 0;
+
+            void NewLine() { y += Math.Max(lineH, normal.Height); x = bounds.X; lineH = 0; }
+
+            foreach (var seg in segs)
+            {
+                if (seg.NewLine) { NewLine(); if (y >= bounds.Bottom) break; continue; }
+                if (string.IsNullOrEmpty(seg.Text)) continue;
+
+                var font = seg.Bold ? bold : normal;
+                var color = seg.Color ?? defColor;
+
+                foreach (var token in Regex.Split(seg.Text, @"(\s+)"))
+                {
+                    if (token.Length == 0) continue;
+
+                    var sz = TextRenderer.MeasureText(g, token, font, new Size(int.MaxValue, int.MaxValue),
+                        TextFormatFlags.NoPadding | TextFormatFlags.NoClipping);
+
+                    bool overflow = x + sz.Width > maxX;
+                    if (overflow && x > bounds.X && !string.IsNullOrWhiteSpace(token))
+                    {
+                        NewLine(); if (y >= bounds.Bottom) return;
+                    }
+                    if (y + Math.Max(lineH, sz.Height) > bounds.Bottom)
+                    {
+                        TextRenderer.DrawText(g, "…", font, new Point(Math.Min(x, maxX - sz.Width), y), color,
+                            TextFormatFlags.NoPadding | TextFormatFlags.NoClipping);
+                        return;
+                    }
+
+                    TextRenderer.DrawText(g, token, font, new Point(x, y), color,
+                        TextFormatFlags.NoPadding | TextFormatFlags.NoClipping);
+
+                    x += sz.Width;
+                    lineH = Math.Max(lineH, sz.Height);
+                }
+            }
+        }
+        private static bool IsWhitespace(string s) => string.IsNullOrWhiteSpace(s);
+
+        private void View_CustomColumnDisplayText_NoLongerUsed(object s, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e) { }
+
         private void ConfigureLayoutView()
         {
-            var view = gridViewKnitMachineLoadLayoutView; // это LayoutView
+            var view = gridViewKnitMachineLoadLayoutView;
             view.BeginUpdate();
             try
             {
-                // 0) Репозиторий попапа с браузером (один раз)
-                EnsureHtmlPopup(view);
+                //// фиксируем «окошко» превью (высоту поля в карточке):
+                var lcol = (LayoutViewColumn)view.Columns[_htmlColumnName];
+                //var field = lcol.LayoutViewField;
+                //field.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+                //field.MinSize = new Size(field.MinSize.Width, 120);
+                //field.MaxSize = new Size(int.MaxValue, 120);
 
-                // 1) Назначаем попап-редактор на целевую колонку и фиксируем высоту её layout-поля
-                var lcol = view.Columns[_htmlColumnName] as LayoutViewColumn
-                           ?? throw new InvalidOperationException($"Колонка '{_htmlColumnName}' не найдена или это не LayoutViewColumn.");
-                lcol.OptionsColumn.AllowEdit = true;
-                lcol.OptionsColumn.ReadOnly = false;
-                lcol.ColumnEdit = _repoPopup;
+                //// включим перенос (на всякий случай)
+                //lcol.AppearanceCell.Options.UseTextOptions = true;
+                //lcol.AppearanceCell.TextOptions.WordWrap = WordWrap.Wrap;
 
+                //// убираем прошлые преобразования текста (если делали)
+                //view.CustomColumnDisplayText -= View_CustomColumnDisplayText_NoLongerUsed;
+
+                ////вешаем кастомный рендер превью
+                //if (!_previewWired)
+                //{
+                //    view.CustomDrawCardFieldValue += View_CustomDrawCardFieldValue_RenderHtmlPreview;
+                //    // попап уже есть у вас — только обёртку для цветов добавьте (ниже)
+                //    _previewWired = true;
+                //}
+                EnsureHtmlPopup(); // создаём _popup/_browser/_popupHost/_repoPopup (см. ниже)
+
+                //// целевая колонка
+                //var lcol = view.Columns[_htmlColumnName] as LayoutViewColumn
+                //           ?? throw new InvalidOperationException($"Колонка '{_htmlColumnName}' не найдена.");
+
+                // --- МНОГОСТРОЧНОЕ ПРЕВЬЮ В ЯЧЕЙКЕ ---
+                if (_repoPreview == null)
+                {
+                    _repoPreview = new RepositoryItemMemoEdit
+                    {
+                        AutoHeight = false,
+                        WordWrap = true,
+                        ScrollBars = ScrollBars.Vertical
+                    };
+                    gridControlKnitMachineLoadInfo.RepositoryItems.Add(_repoPreview);
+                }
+                lcol.ColumnEdit = _repoPreview;                         // <— заменили PopupContainerEdit на MemoEdit
+                lcol.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+
+                //if (_repoPreviewHyper == null)
+                //{
+                //    _repoPreviewHyper = new RepositoryItemHyperTextEdit
+                //    {
+                //        ReadOnly = true,
+                //        AutoHeight = false
+                //        // Если есть свойство WordWrap/AllowHtmlDraw — оставьте по умолчанию, HyperText сам переносит строки.
+                //    };
+                //    gridControlKnitMachineLoadInfo.RepositoryItems.Add(_repoPreviewHyper);
+                //}
+
+                //var lcol = (LayoutViewColumn)gridViewKnitMachineLoadLayoutView.Columns[_htmlColumnName];
+                //lcol.ColumnEdit = _repoPreviewHyper;                         // <-- теперь рендерится форматированный текст
+                //lcol.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+
+                // фиксируем высоту layout-поля под превью
                 var field = lcol.LayoutViewField;
-                field.SizeConstraintsType = SizeConstraintsType.Custom;
-                field.MinSize = new Size(field.MinSize.Width, PREVIEW_HEIGHT);
-                field.MaxSize = new Size(int.MaxValue, PREVIEW_HEIGHT);
+                field.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+                field.MinSize = new Size(field.MinSize.Width, 120);
+                field.MaxSize = new Size(int.MaxValue, 120);
 
-                // 2) Отключаем авто-рост редакторов, чтобы карточки не «распирало»
-                FixEditorsAutoHeight(view);
-
-                // 3) Высота карточек: расчёт от ваших данных (или fallback)
-                RecalcCardHeight();
-
-                // 4) Сортировка и прочее — как у вас
+                // — остальной твой код сортировок/фокуса/пересчёта высоты карточек —
+                RecalcCardHeight(); // твой расчёт; оставь как есть
                 view.BeginSort();
                 view.ClearSorting();
                 view.SortInfo.AddRange(new[] {
-            new GridColumnSortInfo(view.Columns["kmlNumber"],  DevExpress.Data.ColumnSortOrder.Ascending),
-            new GridColumnSortInfo(view.Columns["yearNumber"], DevExpress.Data.ColumnSortOrder.Ascending),
-            new GridColumnSortInfo(view.Columns["monthNumber"],DevExpress.Data.ColumnSortOrder.Ascending)
-        });
+                    new GridColumnSortInfo(view.Columns["kmlNumber"],  DevExpress.Data.ColumnSortOrder.Ascending),
+                    new GridColumnSortInfo(view.Columns["yearNumber"], DevExpress.Data.ColumnSortOrder.Ascending),
+                    new GridColumnSortInfo(view.Columns["monthNumber"],DevExpress.Data.ColumnSortOrder.Ascending)
+                });
                 view.EndSort();
-
                 view.FocusedRowHandle = 0;
 
-                // 5) Единоразовая подписка на события
                 if (!_configureOnce)
                 {
-                    // обновлять высоту при ресайзе грида
                     gridControlKnitMachineLoadInfo.SizeChanged += (s, e) => RecalcCardHeight();
 
-                    // красивое превью (чистим HTML для отображения в ячейке)
-                    view.CustomColumnDisplayText += (s, e) =>
+                    ////превью без HTML - тегов
+                    //view.CustomColumnDisplayText += (s, e) =>
+                    //{
+                    //    if (e.Column == lcol && e.Value is string html)
+                    //        e.DisplayText = StripHtml(html, 200);
+                    //};
+                    gridViewKnitMachineLoadLayoutView.CustomColumnDisplayText += (s, e) =>
                     {
-                        if (e.Column == lcol && e.Value is string html)
-                            e.DisplayText = StripHtml(html, 200);
+                        if (e.Column.FieldName == _htmlColumnName && e.Value is string html)
+                            e.DisplayText = HtmlToDxMarkup(html);
                     };
 
-                    // открывать редактор/попап по клику
-                    view.OptionsBehavior.EditorShowMode = EditorShowMode.Click;
+                    // открываем ПОПАП с HTML по клику на ячейку этой колонки
+                    view.MouseDown += View_MouseDownOpenHtml;
 
                     _configureOnce = true;
                 }
             }
-            finally
-            {
-                view.EndUpdate();
-            }
+            finally { view.EndUpdate(); }
         }
+
 
         // --- ВСПОМОГАТЕЛЬНОЕ ---
 
-        private void EnsureHtmlPopup(LayoutView view)
+        //private void EnsureHtmlPopup(LayoutView view)
+        //{
+        //    if (_popup != null) return;
+
+        //    _popup = new PopupContainerControl { Parent = this, Size = new Size(700, 500) };
+        //    _browser = new WebBrowser { Dock = DockStyle.Fill };
+        //    _popup.Controls.Add(_browser);
+
+        //    _repoPopup = new RepositoryItemPopupContainerEdit
+        //    {
+        //        AutoHeight = false,
+        //        PopupControl = _popup,
+        //        ShowPopupCloseButton = true,
+        //        TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor,
+        //        NullText = "Открыть…"
+        //    };
+        //    gridControlKnitMachineLoadInfo.RepositoryItems.Add(_repoPopup);
+
+        //    _repoPopup.QueryPopUp += (s, e) =>
+        //    {
+        //        var html = Convert.ToString(gridViewKnitMachineLoadLayoutView.GetFocusedRowCellValue(_htmlColumnName));
+        //        _browser.DocumentText = html ?? string.Empty;
+        //    };
+        //}
+
+        private void EnsureHtmlPopup()
         {
             if (_popup != null) return;
 
@@ -797,19 +1257,37 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _repoPopup = new RepositoryItemPopupContainerEdit
             {
                 AutoHeight = false,
-                PopupControl = _popup,
+                PopupControl = _popup, // у репозитория свойство есть напрямую
                 ShowPopupCloseButton = true,
-                TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor,
-                NullText = "Открыть…"
+                TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor
             };
             gridControlKnitMachineLoadInfo.RepositoryItems.Add(_repoPopup);
 
-            _repoPopup.QueryPopUp += (s, e) =>
+            // скрытый хост для программного показа попапа
+            _popupHost = new PopupContainerEdit
             {
-                var html = Convert.ToString(gridViewKnitMachineLoadLayoutView.GetFocusedRowCellValue(_htmlColumnName));
-                _browser.DocumentText = html ?? string.Empty;
+                Parent = this,
+                Visible = false
             };
+            _popupHost.Properties.PopupControl = _popup; // <-- ключевая строка
         }
+
+        private void View_MouseDownOpenHtml(object sender, MouseEventArgs e)
+        {
+            var view = (LayoutView)sender;
+            var hit = view.CalcHitInfo(e.Location);
+            if (!hit.InField || hit.Column == null || hit.Column.FieldName != _htmlColumnName) return;
+
+            // берём HTML и показываем попап рядом с курсором
+            var html = Convert.ToString(view.GetRowCellValue(hit.RowHandle, hit.Column)) ?? string.Empty;
+            _browser.DocumentText = html;
+
+            // позиционируем хост в точку клика и открываем попап
+            var screenPt = gridControlKnitMachineLoadInfo.PointToScreen(e.Location);
+            _popupHost.Location = this.PointToClient(screenPt);
+            _popupHost.ShowPopup();
+        }
+
 
         private void FixEditorsAutoHeight(LayoutView view)
         {
@@ -845,23 +1323,91 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // запасной вариант: делим видимую высоту на 3 «строки» карточек
                 h = gridControlKnitMachineLoadInfo.ClientSize.Height / 3;
-                h = gridControlKnitMachineLoadInfo.ClientSize.Height / _knitMachineLoadInfoBindingSource.Count;
+                //h = gridControlKnitMachineLoadInfo.ClientSize.Height / (_knitMachineLoadInfoBindingSource.Count != 0? _knitMachineLoadInfoBindingSource.Count:1);
             }
             
-            MIN_CARD_HEIGHT = gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count + 1);
+            //MIN_CARD_HEIGHT = gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / (_knitMachineLoadInfoBindingSource.Count != 0 ? _knitMachineLoadInfoBindingSource.Count : 1) + 1);
             h = Math.Max(MIN_CARD_HEIGHT, h);
             view.CardMinSize = new Size(view.CardMinSize.Width, h);
         }
 
+        //private static string StripHtml(string html, int maxLen)
+        //{
+        //    if (string.IsNullOrEmpty(html)) return string.Empty;
+        //    string text = Regex.Replace(html, "<.*?>", " ");
+        //    text = WebUtility.HtmlDecode(text);
+        //    text = Regex.Replace(text, "\\s+", " ").Trim();
+        //    return text.Length <= maxLen ? text : text.Substring(0, maxLen) + "…";
+        //}
         private static string StripHtml(string html, int maxLen)
         {
             if (string.IsNullOrEmpty(html)) return string.Empty;
-            string text = Regex.Replace(html, "<.*?>", " ");
-            text = WebUtility.HtmlDecode(text);
-            text = Regex.Replace(text, "\\s+", " ").Trim();
+            string text = System.Text.RegularExpressions.Regex.Replace(html, "<.*?>", " ");
+            text = System.Net.WebUtility.HtmlDecode(text);
+            text = System.Text.RegularExpressions.Regex.Replace(text, "\\s+", " ").Trim();
             return text.Length <= maxLen ? text : text.Substring(0, maxLen) + "…";
         }
-        private void customLabel1_Click(object sender, EventArgs e)
+        private static string HtmlToDxMarkup(string html)
+        {
+            if (string.IsNullOrEmpty(html)) return string.Empty;
+            // грубый, но быстрый маппинг самых частых тегов
+            string s = html;
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\/?(p|div|br)\s*\/?>", "\n", RegexOptions.IgnoreCase);  // абзацы -> переносы
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*strong\s*>", "<b>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*\/\s*strong\s*>", "</b>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*em\s*>", "<i>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*\/\s*em\s*>", "</i>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*b\s*>", "<b>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*\/\s*b\s*>", "</b>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*i\s*>", "<i>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*\/\s*i\s*>", "</i>", RegexOptions.IgnoreCase);
+            // <font color="#RRGGBB">...</font>  -> <color=#RRGGBB>...</color>
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*font[^>]*color\s*=\s*['""]?(#[0-9a-fA-F]{6}|[a-zA-Z]+)['""]?[^>]*>", "<color=$1>", RegexOptions.IgnoreCase);
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"<\s*/\s*font\s*>", "</color>", RegexOptions.IgnoreCase);
+            // убираем оставшиеся теги
+            s = System.Text.RegularExpressions.Regex.Replace(s, "<.*?>", string.Empty);
+            // нормализуем переносы
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"(\r?\n)\s*(\r?\n)+", "\n");
+            return s.Trim();
+        }
+        //private string WrapHtml(string bodyHtml)
+        //{
+        //    return @"<!DOCTYPE html>
+        //    <html>
+        //    <head>
+        //        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+        //        <meta charset='utf-8' />
+        //        <style>
+        //            html,body{margin:0;padding:12px;font-family:Segoe UI,Arial,sans-serif;font-size:12px;line-height:1.4;}
+        //            /* Пример: если в тексте есть классы/теги без инлайна */
+        //            b,strong{font-weight:600;}
+        //        </style>
+        //    </head>
+        //    <body>" + (bodyHtml ?? "") + @"</body></html>";
+        //}
+        private string WrapHtml(string bodyHtml)
+        {
+            return @"<!DOCTYPE html>
+                <html>
+                <head>
+                  <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+                  <meta charset='utf-8' />
+                  <style>
+                    html,body{margin:0;padding:12px;font-family:Segoe UI,Arial,sans-serif;font-size:12px;line-height:1.4;}
+                    b,strong{font-weight:600;}
+                  </style>
+                </head>
+                <body>" + (bodyHtml ?? "") + @"</body></html>";
+        }
+
+        // там, где вы подаёте HTML в попап:
+//        _repoPopup.QueryPopUp += (s, e) =>
+//{
+//    var html = Convert.ToString(gridViewKnitMachineLoadLayoutView.GetFocusedRowCellValue(_htmlColumnName));
+//        _browser.DocumentText = WrapHtml(html);
+//    };
+
+    private void customLabel1_Click(object sender, EventArgs e)
         {
 
         }

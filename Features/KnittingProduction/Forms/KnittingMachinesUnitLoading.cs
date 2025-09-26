@@ -103,7 +103,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             || rowData.pszkmPlanDateFrom.Value.Month != rowData.monthNumberDateZap) ||
                         (rowData.pszkmPlanDateTo.Value.Year != rowData.yearNumberDateZap
                             || rowData.pszkmPlanDateTo.Value.Month != rowData.monthNumberDateZap);
-
+                    
                     if (shouldHighlight)
                     {
                         // Красный цвет текста
