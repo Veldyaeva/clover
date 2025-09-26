@@ -13,6 +13,8 @@ namespace SewingProduction.Models
         [NotMapped]
         public bool IsNew { get; set; }
         [NotMapped]
+        public bool IsBeingAdded { get; set; } = false;
+        [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]
         public string DisplayNumber => N1 > 0 ? $"{N}.{N1}" : $"{N}";
@@ -142,6 +144,7 @@ namespace SewingProduction.Models
             // nrDateAdd и nrCompAdd устанавливаются автоматически при INSERT (DEFAULT)
             // nrDateDel и nrCompDel устанавливаются только при пометке на удаление
             IsNew = source.IsNew;
+            IsBeingAdded = source.IsBeingAdded;
             IsModified = source.IsModified;
         }
 

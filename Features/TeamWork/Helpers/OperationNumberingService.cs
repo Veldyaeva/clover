@@ -93,7 +93,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
 			}
 			newItem.N = afterN + 1;
 			newItem.N1 = 0;
-			RecalculateAllOperationNumbers(items);
+			//RecalculateAllOperationNumbers(items);
 		}
 
 		// Вставка подоперации (с возможным преобразованием основной в первую подоперацию)
