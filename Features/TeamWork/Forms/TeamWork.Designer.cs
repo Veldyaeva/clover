@@ -2412,7 +2412,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem7.Name = "layoutControlItem7";
             layoutControlItem7.Size = new System.Drawing.Size(226, 24);
             layoutControlItem7.TextVisible = false;
-            layoutControlItem7.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem6
             // 
