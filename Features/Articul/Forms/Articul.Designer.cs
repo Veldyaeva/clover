@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 
 namespace SewingProduction.Features.Articul
 {

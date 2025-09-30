@@ -41,6 +41,16 @@ namespace SewingProduction.Features.Articul
             customTextBoxKod.Text = kodSQL;
             visibleSP(false);
             radioGroup1.SelectedIndex = kodArtSQL == null ? 0 : 2; // новый арт / копия
+
+            if (kodArtSQL == null) // режим добавления
+            {
+                radioGroup1.Properties.Items.RemoveAt(2);
+            }
+            else // режим копирования
+            {
+                radioGroup1.Visible = false;
+                this.Text = "Копирование артикула";
+            }
         }
 
         private void art_new2024_Load(object sender, EventArgs e) => comboAllTableItems();
@@ -84,7 +94,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxArt.Text = "";
             customTextBoxModel.Text = "";
             customTextBoxKodFurn.Text = "";
-            customTextBox1.Text = "";
+            customTextBoxNameFurn.Text = "";
             customTextBoxDlin.Text = "";
             customTextBoxTimePlet.Text = "";
             customTextBoxNormP.Text = "";
@@ -95,7 +105,7 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditRazm.EditValue = "";
             searchLookUpEditPrizn.EditValue = "";
             searchLookUpEditGost.Enabled = true;
-            searchLookUpEditGroup.Enabled = true;
+            searchLookUpEditGroup.Enabled = false;
         }
         // Видимость элиментов для "Новый артикул СП (шнуры,резинка)"
         private void visibleSP(bool boolShow)
@@ -110,7 +120,7 @@ namespace SewingProduction.Features.Articul
             customLabelM1.Visible = boolShow;
             customLabelM2.Visible = boolShow;
             customTextBoxKodFurn.Visible = boolShow;
-            customTextBox1.Visible = boolShow;
+            customTextBoxNameFurn.Visible = boolShow;
             customTextBoxDlin.Visible = boolShow;
             customTextBoxTimePlet.Visible = boolShow;
             customTextBoxNormP.Visible = boolShow;
@@ -120,12 +130,6 @@ namespace SewingProduction.Features.Articul
         // Загрузка комбобоксов
         private void comboAllTableItems()
         {
-            searchLookUpEditGost.Properties.DataSource = _artNewDataService.GetGostUst();
-            searchLookUpEditGost.Properties.DisplayMember = "Описание";
-
-            searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrup();
-            searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
-
             searchLookUpEditTm1.Properties.DataSource = _artNewDataService.GetViewTovarMarka();
             searchLookUpEditTm1.Properties.DisplayMember = "Наименование";
             searchLookUpEditTm1.Properties.ValueMember = "kle";
@@ -134,8 +138,14 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditTm2.Properties.DisplayMember = "Наименование";
             searchLookUpEditTm2.Properties.ValueMember = "men_id";
 
-            searchLookUpEditRazm.Properties.DataSource = _artNewDataService.GetGostSvRazmerAndGostRazmer();
-            searchLookUpEditRazm.Properties.DisplayMember = "Размер";
+            searchLookUpEditGost.Properties.DataSource = _artNewDataService.GetGostUst();
+            searchLookUpEditGost.Properties.DisplayMember = "Описание";
+
+            //searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrup();
+            //searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
+
+            //searchLookUpEditRazm.Properties.DataSource = _artNewDataService.GetGostSvRazmerAndGostRazmer();
+            //searchLookUpEditRazm.Properties.DisplayMember = "Размер";
 
             searchLookUpEditPrizn.Properties.DataSource = _artNewDataService.GetTovarCatDynsign();
             searchLookUpEditPrizn.Properties.DisplayMember = "Признак";
@@ -144,6 +154,8 @@ namespace SewingProduction.Features.Articul
         {
             searchLookUpEditGost.Properties.ValueMember = "Ид";
             var idGost = searchLookUpEditGost.EditValue?.ToString();
+            searchLookUpEditGroup.Enabled = true;
+            searchLookUpEditRazm.Enabled = true;
             // группы
             searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrup(idGost);
             searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
@@ -253,6 +265,7 @@ namespace SewingProduction.Features.Articul
         {
             if (string.IsNullOrWhiteSpace(customTextBoxKod.Text))
             {
+                customTextBoxKod.ShowErrorIcon = true;
                 return ("Укажите код!");
             }
             int kod = _artNewDataService.GetArticulByKod(customTextBoxKod.Text);
@@ -319,6 +332,75 @@ namespace SewingProduction.Features.Articul
                 }
             }
         }
+
+        private void customTextBoxKod_TextChanged(object sender, EventArgs e)
+        {
+            if (customTextBoxKod.Text.Length != 8)
+            {
+                customTextBoxKod.ErrorMessage = "Код должен состоять ровно из 8 символов";
+                customTextBoxKod.ShowErrorIcon = true;
+            }
+            else
+            {
+                customTextBoxKod.ShowErrorIcon = false;
+            }
+        }
+
+        private async void customTextBoxKodFurn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)Keys.Enter) return;
+
+            string lkod = customTextBoxKodFurn.Text.Trim();
+            if (string.IsNullOrEmpty(lkod)) return;
+
+            try
+            {
+                var nameCord = await _artNewDataService.GetCordNameAsync(lkod);
+                if (nameCord == null)
+                {
+                    MessageBox.Show("Не найдено");
+                    return;
+                }
+
+                customTextBoxNameFurn.Text = nameCord.name_k;
+
+                string prefix = lkod.Substring(0, 2);
+                if (prefix == "02") // резинка
+                {
+                    customTextBoxDlin.Text = "1";
+                    searchLookUpEditPrizn.EditValue = 895; // резинка
+                }
+                else if (prefix == "03") // шнур
+                {
+                    var curLength = await _artNewDataService.GetCordLengthAsync(lkod);
+
+                    double cordLength = 1;
+                    if (curLength != null)
+                    {
+                        double likoef = 1;
+                        int cntId = curLength.cnt_id;
+                        if (cntId == 2) likoef = 100;   // см
+                        if (cntId == 3) likoef = 1000;  // мм
+
+                        if (double.TryParse(Convert.ToString(curLength.cfl_name), out double len) && len > 0)
+                            cordLength = len / likoef;
+                    }
+
+                    customTextBoxDlin.Text = cordLength.ToString("0.###");
+                    searchLookUpEditPrizn.EditValue = 886; // шнуры
+                }
+                else
+                {
+                    customTextBoxKodFurn.Text = "";
+                    MessageBox.Show("Введён неверный код! Код должен быть от резинки или шнура!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при обработке: " + ex.Message);
+            }
+        }
+
     }
 
 }

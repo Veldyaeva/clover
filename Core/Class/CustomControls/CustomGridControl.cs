@@ -229,6 +229,8 @@ namespace SewingProduction.Core.Class
                         GridSettingsManager.Instance.DisableAutoSettings(gridView);
                     }
                 }
+                this.DataSource = null;
+                this.ViewCollection.Clear();
                 ThemeManager.ThemeChanged -= OnThemeChanged;
                                 this.Load -= OnCustomGridLoad;
                 this.HandleCreated -= OnHandleCreated;

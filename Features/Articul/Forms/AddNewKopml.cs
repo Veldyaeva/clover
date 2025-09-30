@@ -319,11 +319,11 @@ namespace SewingProduction.Features.Articul.Forms
             var labelModText = new CustomLabel { Name = "customLabelModText", Dock = DockStyle.Fill, Text = "Модель_Текст" };
             layout.Controls.Add(labelModText, 1, 3);
 
-            // PictureBox снизу
+            // PictureBox
             var pictureBox = new PictureBox
             {
                 Dock = DockStyle.Fill,
-                SizeMode = PictureBoxSizeMode.StretchImage,
+                SizeMode = PictureBoxSizeMode.Zoom,
                 BorderStyle = BorderStyle.FixedSingle
             };
             layout.Controls.Add(pictureBox, 2, 1);
@@ -664,10 +664,10 @@ namespace SewingProduction.Features.Articul.Forms
                     // создаем фиктивный sender — CheckEdit
                     var fakeSender = new DevExpress.XtraEditors.CheckEdit { Checked = desired };
 
-                    // Выставляем фокус на строку (иначе твой обработчик берёт GetFocusedRow)
+                    // Выставляем фокус на строку
                     view.FocusedRowHandle = i;
 
-                    // Вызываем твой обработчик для строки
+                    // Вызываем обработчик для строки
                     repositoryItemCheckEditViborRazm_CheckedChanged(fakeSender, EventArgs.Empty);
                 }
             }
@@ -699,6 +699,17 @@ namespace SewingProduction.Features.Articul.Forms
             if ((mykompl_razm.Kod_v == 2 || mykompl_razm.Kod_v == 3) && (kompl_art.Kod_v == 2 || kompl_art.Kod_v == 3) && mykompl_razm.GrupMen.Frm_s != kompl_art.GrupMen.Frm_s)
             {
                 MessageBox.Show("Комлектовать модели нельзя - разные производители", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (komplService.CheckKompl(kompl_art.Kod.ToString()))
+            {
+                MessageBox.Show("Комлектовать КОМПЛЕКТЫ нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (komplService.CheckNabor(kompl_art.Kod.ToString()))
+            {
+                MessageBox.Show("Комлектовать НАБОРЫ нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

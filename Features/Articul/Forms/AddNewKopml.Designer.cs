@@ -1046,7 +1046,7 @@
             pictureBoxArticulVib.Name = "pictureBoxArticulVib";
             tableLayoutPanel7.SetRowSpan(pictureBoxArticulVib, 3);
             pictureBoxArticulVib.Size = new System.Drawing.Size(129, 126);
-            pictureBoxArticulVib.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBoxArticulVib.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxArticulVib.TabIndex = 13;
             pictureBoxArticulVib.TabStop = false;
             // 
@@ -1146,7 +1146,7 @@
             pictureBoxArticul.Name = "pictureBoxArticul";
             tableLayoutPanel6.SetRowSpan(pictureBoxArticul, 3);
             pictureBoxArticul.Size = new System.Drawing.Size(129, 125);
-            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxArticul.TabIndex = 13;
             pictureBoxArticul.TabStop = false;
             // 

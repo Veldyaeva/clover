@@ -3,6 +3,7 @@ using DevExpress.Data.Internal;
 using DevExpress.Office.Utils;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
 using SewingProduction.Extensions;

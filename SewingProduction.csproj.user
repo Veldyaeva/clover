@@ -34,6 +34,9 @@
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\SP_form.cs">
       <SubType>Form</SubType>
     </Compile>

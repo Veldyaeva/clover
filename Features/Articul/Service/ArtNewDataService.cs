@@ -64,5 +64,28 @@ namespace SewingProduction.Features.Articul
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
         }
+        public async Task<dynamic?> GetCordNameAsync(string kod)
+        {
+            string sql = @"SELECT RTRIM(gr)+' '+NAME AS name_k
+                   FROM dop_ras_gr 
+                   WHERE kod=@kod AND k1=LEFT(@kod,2)";
+            return await _dbService.GetEntityAsync<dynamic>(sql, new { kod });
+        }
+
+        public async Task<dynamic?> GetCordLengthAsync(string kod)
+        {
+            string sql = @"
+                SELECT pv.idvalue, pv.cfp_name, pv.cfl_name,
+                       valpar.nameunit, valpar.cnt_id
+                FROM cfn.confection_view_parameteresWithValue pv
+                LEFT JOIN cfn.confection_view_parameteres valpar 
+                       ON pv.cfp_id = valpar.cfp_id 
+                      AND LEFT(pv.kod,4) = LEFT(valpar.kod_confection,4)
+                WHERE pv.cfp_id=37 AND LEFT(pv.kod,7)=@kod";
+
+            return await _dbService.GetEntityAsync<dynamic>(sql, new { kod });
+        }
+
+
     }
 }

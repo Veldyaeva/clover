@@ -132,7 +132,16 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT top 1 1 FROM nakl_ras WHERE kod_k  = @kod";
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
         }
-
+        public bool CheckNabor(string kod)
+        {
+            string query = "SELECT top 1 1 FROM articulNaborSostav WHERE kod  = @kod";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
+        public bool CheckKompl(string kod)
+        {
+            string query = "SELECT top 1 1 FROM Kompl WHERE kod_k  = @kod";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
         public int GetCountByRazmAll(string razmAll)
         {
             string query = "SELECT COUNT(*) FROM Razm WHERE Razm_all = @razmAll";
