@@ -118,6 +118,9 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
     </Compile>
