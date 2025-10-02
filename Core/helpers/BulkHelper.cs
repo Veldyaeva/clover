@@ -203,7 +203,7 @@ WHEN MATCHED THEN
         foreach (var prop in props)
         {
             if (excluded.Contains(prop.Name)) continue;
-            if (prop.GetCustomAttribute(typeof(NotMappedAttribute)) != null) continue;
+             if (prop.GetCustomAttribute(typeof(NotMappedAttribute)) != null) continue;
 
             var type = Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType;
             var columnName = (columnMappings != null && columnMappings.ContainsKey(prop.Name)) ? columnMappings[prop.Name] : prop.Name;

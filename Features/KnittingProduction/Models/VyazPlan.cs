@@ -1,4 +1,5 @@
 ﻿using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Crypto.Utilities;
 using SewingProduction.Features.Articul;
 using SewingProduction.Interfaces;
 using System;
@@ -258,7 +259,69 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public int SyncSelection { get; set; } = 0;
     }
-
+    public class PZV : INewable, IModifiable, IDeletable
+    {
+        public int pzvID { get; set; }
+        [NotMapped]
+        public int pzvIDParent { get; set; }
+        [NotMapped]
+        public int pzvDivision { get; set; }
+        [NotMapped]
+        public int pzvIDMlOp { get; set; }
+        [NotMapped]
+        public int pzvAnnID { get; set; }
+        [NotMapped]
+        public int pzvNrID { get; set; }
+        [NotMapped]
+        public string pzvNomZad { get; set; }
+        [NotMapped]
+        public int pzvNom { get; set; }
+        [NotMapped]
+        public int pzvNomN { get; set; }
+        [NotMapped]
+        public string pzvArticul { get; set; }
+        [NotMapped]
+        public string pzvMod { get; set; }
+        [NotMapped]
+        public int pzvIdBrig { get; set; }
+        [NotMapped]
+        public int pzvSek { get; set; }
+        [NotMapped]
+        public int pzvKol { get; set; }
+        [NotMapped]
+        public decimal pzvNChasi { get; set; }
+        public int pzvKmlID { get; set; }
+        public DateTime? pzvDateNaznKm { get; set; }
+        public int pzvTab { get; set; }
+        public DateTime? pzvDateNaznTab { get; set; }
+        public DateTime? pzvDateStart { get; set; }
+        public DateTime? pzvDateEnd { get; set; }
+        public DateTime? pzvDateML { get; set; }
+        public DateTime? pzvDateMLUt { get; set; }
+        public DateTime? pzvDateMast { get; set; }
+        [NotMapped]
+        public int pzvRKol { get; set; }
+        [NotMapped]
+        public int pzvRKmlID { get;set; }
+        [NotMapped]
+        public decimal pzvChasNazn { get; set; }
+        [NotMapped]
+        public int pzvKolNazn { get; set; }
+        [NotMapped]
+        public string pzvVidPr { get; set; }
+        [NotMapped]
+        public string pzvCompAdd { get; set; }
+        [NotMapped]
+        public DateTime? pzvDateAdd { get; set; }
+        [NotMapped]
+        public DateTime? pzvUpdDate { get; set; }
+        [NotMapped]
+        public bool IsModified { get; set; } = false;
+        [NotMapped]
+        public bool IsNew { get; set; } = false;
+        [NotMapped]
+        public bool IsDeleted { get; set; } = false;
+    }
     public class PZVOperList : INewable, IModifiable, IDeletable
     {
         [NotMapped]
@@ -279,7 +342,6 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int olPzvNrID { get; set; }
         [NotMapped]
         public int olPzvIdBrig { get; set; }
-        [NotMapped]
         public int olPzvKmlID { get; set; }
         [NotMapped]
         public string olPzvArticul { get; set; }
@@ -309,22 +371,17 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int olSekAll { get; set; }
         [NotMapped]
         public string olKmlNumber { get; set; }
-        [NotMapped]
         public DateTime? olPzvDateNaznKm { get; set; }
-        [NotMapped]
         public int olPzvTab { get; set; }
-        [NotMapped]
         public DateTime? olPzvDateNaznTab { get; set; }
-        [NotMapped]
         public DateTime? olPzvDateStart { get; set; }
-        [NotMapped]
         public DateTime? olPzvDateEnd { get; set; }
         [NotMapped]
         public DateTime? olPzvDateML { get; set; }
-        [NotMapped]
         public DateTime? olPzvDateMast { get; set; }
         [NotMapped]
         public DateTime? olPzvUpdDate { get; set; }
+        public string olNomOper => $"{olNo}/{olNpo}";
         [NotMapped]
         public int SyncSelection { get; set; } = 0;
         [NotMapped]
@@ -340,6 +397,35 @@ namespace SewingProduction.Features.KnittingProduction.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+    public static class PZVOperListMappingExtensions
+    {
+        public static PZV ToPZV(this PZVOperList x) => new PZV
+        {
+            pzvID = x.olPzvID,
+            pzvIDParent = x.olPzvIDParent,
+            pzvIDMlOp = x.olPzvIDMlOp,
+            pzvNom = x.olNom,
+            pzvNomN = x.olNomN,
+            pzvNomZad = x.olNomZad,
+            pzvArticul = x.olPzvArticul,
+            pzvAnnID = x.olPzvAnnID,
+            pzvNrID = x.olPzvNrID,
+            pzvIdBrig = x.olPzvIdBrig,
+            pzvKmlID = x.olPzvKmlID,
+            pzvDateNaznKm = x.olPzvDateNaznKm,
+            pzvTab = x.olPzvTab,
+            pzvDateNaznTab = x.olPzvDateNaznTab,
+            pzvDateStart = x.olPzvDateStart,
+            pzvDateEnd = x.olPzvDateEnd,
+            pzvDateML = x.olPzvDateML,
+            pzvDateMast = x.olPzvDateMast,
+            IsModified = x.IsModified,
+            IsNew = x.IsNew,
+            IsDeleted = x.IsDeleted,
+            pzvUpdDate = x.olPzvUpdDate
+        };
+    }
+
     public class KnitPlanReportParametersList
     {
         [NotMapped]
@@ -358,5 +444,34 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public string articulKod { get; set; }
         [NotMapped]
         public string articul { get; set; }
+    }
+    public class SmenZadanyVyazMachine
+    {
+        [NotMapped]
+        public int kmlKmaID { get; set; }
+        [NotMapped]
+        public string kmaNumber { get; set; }
+        [NotMapped]
+        public int kmlID { get; set; }
+        [NotMapped]
+        public string kmlNumber { get; set; }
+        [NotMapped]
+        public string kmlInvNum { get; set; }
+        [NotMapped]
+        public int kmlIdVyazClass { get; set; }
+        [NotMapped]
+        public int name_class { get; set; }
+        [NotMapped]
+        public decimal taskToDo { get; set; }
+        [NotMapped]
+        public decimal taskAtWork { get; set; }
+        [NotMapped]
+        public decimal taskDone { get; set; }
+        [NotMapped]
+        public decimal taskNotConfirmed { get; set; }
+        [NotMapped]
+        public decimal taskConfirmed { get; set; }
+        [NotMapped]
+        public decimal taskNotPlanned { get; set; }
     }
 }
