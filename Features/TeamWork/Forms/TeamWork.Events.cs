@@ -14,9 +14,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Report;
-using SewingProduction.Services;
 using SewingProduction.Services; // for TeamWorkBuffer
-using SewingProduction.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;

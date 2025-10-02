@@ -1,5 +1,6 @@
 using Dapper;
 using DevExpress.XtraEditors;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.TeamWork.Helpers;
@@ -282,6 +283,120 @@ namespace SewingProduction.Features.TeamWork.Forms
             _mode = mode;
             _sourceAnnIdToCopyDetailsFrom = sourceAnnIdToCopyDetailsFrom;
             _duplicateAnnData = duplicateAnnData;
+
+            // Проставляем теги для customHeaderButtons (используются в общих обработчиках кликов)
+            InitHeaderButtonTags();
+
+            // Подписка на клики по кнопкам заголовков
+            try
+            {
+                if (layoutControlGroup1 != null)
+                    layoutControlGroup1.CustomButtonClick += LayoutControlGroup1_CustomButtonClick;
+                if (layoutControlGroup10 != null)
+                    layoutControlGroup10.CustomButtonClick += LayoutControlGroup10_CustomButtonClick;
+            }
+            catch { }
+        }
+
+        // Устанавливает Tag для кастомных кнопок заголовков групп лейаута
+        private void InitHeaderButtonTags()
+        {
+            try
+            {
+                // layoutControlGroup1: предположительно Undo / Save / SaveAs
+                if (layoutControlGroup1 != null && layoutControlGroup1.CustomHeaderButtons != null)
+                {
+                    if (layoutControlGroup1.CustomHeaderButtons.Count > 0)
+                    {
+                        var b0 = layoutControlGroup1.CustomHeaderButtons[0] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b0 != null) b0.Tag = "tw:undo";
+                    }
+                    if (layoutControlGroup1.CustomHeaderButtons.Count > 1)
+                    {
+                        var b1 = layoutControlGroup1.CustomHeaderButtons[1] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b1 != null) b1.Tag = "tw:save";
+                    }
+                    if (layoutControlGroup1.CustomHeaderButtons.Count > 2)
+                    {
+                        var b2 = layoutControlGroup1.CustomHeaderButtons[2] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b2 != null) b2.Tag = "tw:save-as";
+                    }
+                }
+
+                // layoutControlGroup10: управление нумерацией и преобразованием
+                if (layoutControlGroup10 != null && layoutControlGroup10.CustomHeaderButtons != null)
+                {
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 0)
+                    {
+                        var b0 = layoutControlGroup10.CustomHeaderButtons[0] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b0 != null) b0.Tag = "op:move-up";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 1)
+                    {
+                        var b1 = layoutControlGroup10.CustomHeaderButtons[1] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b1 != null) b1.Tag = "op:move-down";
+                    }
+                    if (layoutControlGroup10.CustomHeaderButtons.Count > 2)
+                    {
+                        var b2 = layoutControlGroup10.CustomHeaderButtons[2] as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+                        if (b2 != null) b2.Tag = "op:convert";
+                    }
+                }
+            }
+            catch { }
+        }
+
+        // Обработчик кликов по header-buttons: блок общих действий (undo/save/save-as)
+        private void LayoutControlGroup1_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            var gb = e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+            var tag = gb?.Tag as string;
+            try
+            {
+                switch (tag)
+                {
+                    case "tw:undo":
+                        btnCancel_Click(sender, EventArgs.Empty);
+                        break;
+                    case "tw:save":
+                        btnSave_Click(sender, EventArgs.Empty);
+                        break;
+                    case "tw:save-as":
+                        btnOK_Click(sender, EventArgs.Empty);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка обработки нажатия header-button layoutControlGroup1: {tag}");
+            }
+        }
+
+        // Обработчик кликов по header-buttons: блок управления операциями (вверх/вниз/валидация нумерации)
+        private void LayoutControlGroup10_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            var gb = e.Button as DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton;
+            var tag = gb?.Tag as string;
+            try
+            {
+                switch (tag)
+                {
+                    case "op:move-up":
+                        MoveOperationUp();
+                        break;
+                    case "op:move-down":
+                        MoveOperationDown();
+                        break;
+                    case "op:convert":
+                        //ValidateAndFixOperationNumbers();
+                        RecalculateNumbers();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка обработки нажатия header-button layoutControlGroup10: {tag}");
+            }
         }
 
         private void AttachChangeHandlers()
@@ -3546,8 +3661,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             MoveOperationDown();
         }
-
         private void btnRecalculateNumbers_Click(object sender, EventArgs e)
+        {
+            RecalculateNumbers();
+        }
+
+        private void RecalculateNumbers()
         {
             var result = MessageBox.Show(
                 "Выполнить полный пересчет нумерации всех операций?\n\n" +
