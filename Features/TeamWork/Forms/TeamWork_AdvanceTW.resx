@@ -1029,13 +1029,13 @@
     <value>TopLeft</value>
   </data>
   <data name="textBoxReco.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 364</value>
+    <value>7, 354</value>
   </data>
   <data name="textBoxReco.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxReco.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 59</value>
+    <value>248, 69</value>
   </data>
   <data name="textBoxReco.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1191,7 +1191,7 @@
     <value>TopLeft</value>
   </data>
   <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 221</value>
+    <value>7, 207</value>
   </data>
   <data name="nameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1218,13 +1218,13 @@
     <value>TopLeft</value>
   </data>
   <data name="textBoxKomment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 266</value>
+    <value>7, 252</value>
   </data>
   <data name="textBoxKomment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxKomment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 73</value>
+    <value>248, 77</value>
   </data>
   <data name="textBoxKomment.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1293,7 +1293,7 @@
     <value>TopLeft</value>
   </data>
   <data name="modelTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 176</value>
+    <value>7, 162</value>
   </data>
   <data name="modelTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1320,10 +1320,10 @@
     <value>TopLeft</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 605</value>
+    <value>275, 600</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>481, 284</value>
+    <value>481, 289</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -1449,7 +1449,7 @@
     <value>TopLeft</value>
   </data>
   <data name="groupTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 131</value>
+    <value>7, 117</value>
   </data>
   <data name="groupTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1479,7 +1479,7 @@
     <value>TopLeft</value>
   </data>
   <data name="dateCreate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 86</value>
+    <value>7, 72</value>
   </data>
   <data name="dateCreate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1529,7 +1529,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>770, 805</value>
+    <value>770, 803</value>
   </data>
   <data name="gridColumn19.Caption" xml:space="preserve">
     <value>№ оп</value>
@@ -1628,7 +1628,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlKont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>734, 84</value>
+    <value>734, 86</value>
   </data>
   <data name="gridControlKont.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1670,7 +1670,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlRasz.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 65</value>
+    <value>275, 51</value>
   </data>
   <data name="gridViewRasz.Appearance.FocusedRow.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt, style=Bold</value>
@@ -1973,7 +1973,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1229, 526</value>
+    <value>1229, 535</value>
   </data>
   <data name="gridControlRasz.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2015,7 +2015,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>770, 605</value>
+    <value>770, 600</value>
   </data>
   <data name="gridColumn9.ImageOptions.ImageKey" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -2168,7 +2168,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlRaskr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>734, 186</value>
+    <value>734, 189</value>
   </data>
   <data name="gridControlRaskr.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2375,7 +2375,7 @@
     <value />
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons" xml:space="preserve">
-    <value>    </value>
+    <value>Сбросить</value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons1" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2411,7 +2411,7 @@
     <value>-1</value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons12" xml:space="preserve">
-    <value>    </value>
+    <value>Сохранить</value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons13" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2447,7 +2447,7 @@
     <value>-1</value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons24" xml:space="preserve">
-    <value>    </value>
+    <value> </value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons25" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2579,7 +2579,7 @@
     <value />
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons" xml:space="preserve">
-    <value />
+    <value>Вверх</value>
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons1" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2627,7 +2627,7 @@
     <value>-1</value>
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons12" xml:space="preserve">
-    <value />
+    <value>Вниз</value>
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons13" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2663,7 +2663,7 @@
     <value>-1</value>
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons24" xml:space="preserve">
-    <value />
+    <value>Обновить нумерацию</value>
   </data>
   <data name="layoutControlGroup10.CustomHeaderButtons25" type="System.Boolean, mscorlib">
     <value>True</value>
