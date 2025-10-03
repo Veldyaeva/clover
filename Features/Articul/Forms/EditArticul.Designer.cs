@@ -827,6 +827,7 @@ namespace SewingProduction.Features.Articul
             customButtonKod.TabIndex = 50;
             customButtonKod.Text = "Подобрать код";
             customButtonKod.UseVisualStyleBackColor = false;
+            customButtonKod.Click += customButtonKod_Click;
             // 
             // EditArticul
             // 

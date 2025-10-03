@@ -1,26 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Pdf.Native;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.Xpo.Logger.Transport;
-using DevExpress.XtraEditors;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using Org.BouncyCastle.Crypto;
+using DevExpress.Diagram.Core.Shapes;
 using SewingProduction.Core.Models;
-using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
 namespace SewingProduction.Features.Articul
 {
@@ -270,21 +254,19 @@ namespace SewingProduction.Features.Articul
             }
             int kod = _artNewDataService.GetArticulByKod(customTextBoxKod.Text);
             if (kod > 0)
-            {
                 return ("Такой код артикула уже есть!");
-            }
-            if (string.IsNullOrWhiteSpace(searchLookUpEditGost.Text) || searchLookUpEditGost.EditValue == null)
-            {
-                return ("Выберите гост!");
-            }
-            if (string.IsNullOrWhiteSpace(searchLookUpEditGroup.Text))
-            {
-                return ("Выберите группу!");
-            }
             if (string.IsNullOrWhiteSpace(customTextBoxArt.Text))
-            {
                 return ("Введите артикул!");
-            }
+            if (string.IsNullOrWhiteSpace(customTextBoxModel.Text))
+                return ("Введите модель!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditTm1.Text) || string.IsNullOrWhiteSpace(searchLookUpEditTm2.Text))
+                return ("Выберите ТМ!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditGost.Text) || searchLookUpEditGost.EditValue == null)
+                return ("Выберите гост!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditGroup.Text))
+                return ("Выберите группу!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditRazm.Text))
+                return ("Выберите размер!");
             return null;
         }
         string checkRuleRezinka()
@@ -398,6 +380,34 @@ namespace SewingProduction.Features.Articul
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при обработке: " + ex.Message);
+            }
+        }
+
+        private void customButtonKod_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int nextKod = 0;
+                kodSQL = customTextBoxKod.Text;
+                if (string.IsNullOrWhiteSpace(kodSQL) ||
+                    !int.TryParse(kodSQL, out nextKod) ||
+                    customTextBoxKod.ShowErrorIcon == true)
+                {
+                    nextKod = 10000000;
+                    customTextBoxKod.Text = _artNewDataService.GetFreeKod(nextKod).ToString("D8");
+                }
+                else
+                { 
+                    nextKod = Convert.ToInt32(customTextBoxKod.Text);
+                    do
+                        nextKod++;
+                    while (_artNewDataService.GetArticulByKod(nextKod.ToString("D8")) > 0);
+                    customTextBoxKod.Text = nextKod.ToString("D8");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при подборе кода: " + ex.Message);
             }
         }
 

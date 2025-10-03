@@ -60,6 +60,22 @@ namespace SewingProduction.Features.Articul
             string query = "SELECT kod FROM sp_articul WHERE kod = @kod";
             return _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { { "@kod", kod } });
         }
+        public int GetFreeKod(int kod)
+        {
+            string query = @" SELECT TOP 1 candidate AS FreeHundred
+                FROM (
+                    SELECT number * 100 + 10000000 AS candidate 
+                    FROM master..spt_values   
+                    WHERE type = 'P'
+                    ) c
+                    WHERE NOT EXISTS 
+                        (    
+                        SELECT 1 FROM sp_articul a
+                        WHERE TRY_CAST(a.kod AS INT) BETWEEN c.candidate AND c.candidate + 99
+                        )
+                ORDER BY candidate";
+            return _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
         public async Task SaveAsync(ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
