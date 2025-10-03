@@ -265,7 +265,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSekVyazAll.MinWidth = 23;
             gridColumnVyazPlanSekVyazAll.Name = "gridColumnVyazPlanSekVyazAll";
             gridColumnVyazPlanSekVyazAll.OptionsColumn.ReadOnly = true;
-            gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Итого: {0:0.##})") });
+            gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Выбрано: {0:0.##})"), new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SekVyazAll", "(Итого: {0:0.##})") });
             gridColumnVyazPlanSekVyazAll.Visible = true;
             gridColumnVyazPlanSekVyazAll.VisibleIndex = 13;
             gridColumnVyazPlanSekVyazAll.Width = 137;

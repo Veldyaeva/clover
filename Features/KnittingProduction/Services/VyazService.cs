@@ -375,6 +375,25 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
         }
 
+        public async Task<List<SmenZadanyVyazEmp>> GetSmenZadanyVyazEmp()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC getSmenZadanyVyazEmp ";
+
+                    var result = await connection.QueryAsync<SmenZadanyVyazEmp>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyazMachine");
+                return null;
+            }
+        }
+
         #endregion
 
     }

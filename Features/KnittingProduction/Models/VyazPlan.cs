@@ -474,4 +474,28 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public decimal taskNotPlanned { get; set; }
     }
+    public class SmenZadanyVyazEmp
+    {
+        [NotMapped]
+        public int kmaID { get; set; }
+        [NotMapped]
+        public string kmaNumber { get; set; }
+        [NotMapped]
+        public int empTab { get; set; }
+        [NotMapped]
+        public string empFioSokr { get; set; }
+        [NotMapped]
+        public decimal taskToDo { get; set; }
+        [NotMapped]
+        public decimal taskAtWork { get; set; }
+        [NotMapped]
+        public decimal taskDone { get; set; }
+        [NotMapped]
+        public decimal taskNotConfirmed { get; set; }
+        [NotMapped]
+        public decimal taskConfirmed { get; set; }
+        [NotMapped]
+        public int kmaIDNazn { get; set; }
+    }
+
 }
