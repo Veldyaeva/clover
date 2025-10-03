@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.Features.Sprav
+﻿
+using SewingProduction.Core.Class;
+namespace SewingProduction.Features.Sprav
 {
     partial class EditTarif
     {
