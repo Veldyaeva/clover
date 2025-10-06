@@ -1131,7 +1131,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlGroup1.Location = new System.Drawing.Point(0, 25);
             layoutControlGroup1.Name = "layoutControlGroup1";
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup1.Size = new System.Drawing.Size(258, 538);
+            layoutControlGroup1.Size = new System.Drawing.Size(315, 538);
             resources.ApplyResources(layoutControlGroup1, "layoutControlGroup1");
             // 
             // layoutControlItem14
@@ -1142,7 +1142,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem14.ImageOptions.ImageKey = resources.GetString("layoutControlItem14.ImageOptions.ImageKey");
             layoutControlItem14.Location = new System.Drawing.Point(0, 282);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(252, 94);
+            layoutControlItem14.Size = new System.Drawing.Size(309, 94);
             resources.ApplyResources(layoutControlItem14, "layoutControlItem14");
             layoutControlItem14.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem14.TextSize = new System.Drawing.Size(228, 18);
@@ -1155,7 +1155,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem13.ImageOptions.ImageKey = resources.GetString("layoutControlItem13.ImageOptions.ImageKey");
             layoutControlItem13.Location = new System.Drawing.Point(0, 180);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(252, 102);
+            layoutControlItem13.Size = new System.Drawing.Size(309, 102);
             resources.ApplyResources(layoutControlItem13, "layoutControlItem13");
             layoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem13.TextSize = new System.Drawing.Size(228, 18);
@@ -1168,7 +1168,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem12.ImageOptions.ImageKey = resources.GetString("layoutControlItem12.ImageOptions.ImageKey");
             layoutControlItem12.Location = new System.Drawing.Point(0, 135);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(252, 45);
+            layoutControlItem12.Size = new System.Drawing.Size(309, 45);
             resources.ApplyResources(layoutControlItem12, "layoutControlItem12");
             layoutControlItem12.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem12.TextSize = new System.Drawing.Size(228, 18);
@@ -1181,7 +1181,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem11.ImageOptions.ImageKey = resources.GetString("layoutControlItem11.ImageOptions.ImageKey");
             layoutControlItem11.Location = new System.Drawing.Point(0, 90);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(252, 45);
+            layoutControlItem11.Size = new System.Drawing.Size(309, 45);
             resources.ApplyResources(layoutControlItem11, "layoutControlItem11");
             layoutControlItem11.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem11.TextSize = new System.Drawing.Size(228, 18);
@@ -1194,7 +1194,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem17.ImageOptions.ImageKey = resources.GetString("layoutControlItem17.ImageOptions.ImageKey");
             layoutControlItem17.Location = new System.Drawing.Point(0, 466);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(252, 45);
+            layoutControlItem17.Size = new System.Drawing.Size(309, 45);
             resources.ApplyResources(layoutControlItem17, "layoutControlItem17");
             layoutControlItem17.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem17.TextSize = new System.Drawing.Size(228, 18);
@@ -1207,7 +1207,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem15.ImageOptions.ImageKey = resources.GetString("layoutControlItem15.ImageOptions.ImageKey");
             layoutControlItem15.Location = new System.Drawing.Point(0, 376);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(235, 45);
+            layoutControlItem15.Size = new System.Drawing.Size(288, 45);
             resources.ApplyResources(layoutControlItem15, "layoutControlItem15");
             layoutControlItem15.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem15.TextSize = new System.Drawing.Size(228, 18);
@@ -1220,7 +1220,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem9.ImageOptions.ImageKey = resources.GetString("layoutControlItem9.ImageOptions.ImageKey");
             layoutControlItem9.Location = new System.Drawing.Point(0, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(252, 45);
+            layoutControlItem9.Size = new System.Drawing.Size(309, 45);
             resources.ApplyResources(layoutControlItem9, "layoutControlItem9");
             layoutControlItem9.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem9.TextSize = new System.Drawing.Size(228, 18);
@@ -1233,7 +1233,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem10.ImageOptions.ImageKey = resources.GetString("layoutControlItem10.ImageOptions.ImageKey");
             layoutControlItem10.Location = new System.Drawing.Point(0, 45);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(252, 45);
+            layoutControlItem10.Size = new System.Drawing.Size(309, 45);
             resources.ApplyResources(layoutControlItem10, "layoutControlItem10");
             layoutControlItem10.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem10.TextSize = new System.Drawing.Size(228, 18);
@@ -1246,16 +1246,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem16.ImageOptions.ImageKey = resources.GetString("layoutControlItem16.ImageOptions.ImageKey");
             layoutControlItem16.Location = new System.Drawing.Point(0, 421);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(252, 45);
+            layoutControlItem16.Size = new System.Drawing.Size(309, 45);
             resources.ApplyResources(layoutControlItem16, "layoutControlItem16");
             layoutControlItem16.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem16.TextSize = new System.Drawing.Size(228, 18);
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(235, 376);
+            emptySpaceItem1.Location = new System.Drawing.Point(288, 376);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(17, 45);
+            emptySpaceItem1.Size = new System.Drawing.Size(21, 45);
             // 
             // statusLabelitem
             // 
@@ -1276,10 +1276,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             buttonImageOptions6.Image = Properties.Resources.refresh_16x16;
             layoutControlGroup10.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup10.CustomHeaderButtons"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons1"), buttonImageOptions4, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup10.CustomHeaderButtons2"), resources.GetString("layoutControlGroup10.CustomHeaderButtons3"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons4"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons5"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup10.CustomHeaderButtons6"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons7"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons8"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons9"), resources.GetObject("layoutControlGroup10.CustomHeaderButtons10"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons11")), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup10.CustomHeaderButtons12"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons13"), buttonImageOptions5, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup10.CustomHeaderButtons14"), resources.GetString("layoutControlGroup10.CustomHeaderButtons15"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons16"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons17"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup10.CustomHeaderButtons18"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons19"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons20"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons21"), resources.GetObject("layoutControlGroup10.CustomHeaderButtons22"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons23")), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup10.CustomHeaderButtons24"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons25"), buttonImageOptions6, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup10.CustomHeaderButtons26"), resources.GetString("layoutControlGroup10.CustomHeaderButtons27"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons28"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons29"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup10.CustomHeaderButtons30"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons31"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons32"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons33"), resources.GetObject("layoutControlGroup10.CustomHeaderButtons34"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons35")) });
             layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { gridControlRaszitem, pictureBox1item, gridControlRaskritem, gridControlKontitem, splitterItem3, splitterItem4, splitterItem5 });
-            layoutControlGroup10.Location = new System.Drawing.Point(268, 25);
+            layoutControlGroup10.Location = new System.Drawing.Point(325, 25);
             layoutControlGroup10.Name = "layoutControlGroup10";
             layoutControlGroup10.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup10.Size = new System.Drawing.Size(1239, 869);
+            layoutControlGroup10.Size = new System.Drawing.Size(1182, 869);
             resources.ApplyResources(layoutControlGroup10, "layoutControlGroup10");
             // 
             // gridControlRaszitem
@@ -1289,7 +1289,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlRaszitem.Location = new System.Drawing.Point(0, 0);
             gridControlRaszitem.Name = "gridControlRaszitem";
             gridControlRaszitem.OptionsTableLayoutItem.ColumnSpan = 2;
-            gridControlRaszitem.Size = new System.Drawing.Size(1233, 539);
+            gridControlRaszitem.Size = new System.Drawing.Size(1176, 539);
             gridControlRaszitem.TextVisible = false;
             // 
             // pictureBox1item
@@ -1300,48 +1300,48 @@ namespace SewingProduction.Features.TeamWork.Forms
             pictureBox1item.Name = "pictureBox1item";
             pictureBox1item.OptionsTableLayoutItem.RowIndex = 1;
             pictureBox1item.OptionsTableLayoutItem.RowSpan = 2;
-            pictureBox1item.Size = new System.Drawing.Size(485, 293);
+            pictureBox1item.Size = new System.Drawing.Size(463, 293);
             pictureBox1item.TextVisible = false;
             // 
             // gridControlRaskritem
             // 
             gridControlRaskritem.Control = gridControlRaskr;
             gridControlRaskritem.ImageOptions.ImageKey = resources.GetString("gridControlRaskritem.ImageOptions.ImageKey");
-            gridControlRaskritem.Location = new System.Drawing.Point(495, 549);
+            gridControlRaskritem.Location = new System.Drawing.Point(473, 549);
             gridControlRaskritem.Name = "gridControlRaskritem";
             gridControlRaskritem.OptionsTableLayoutItem.ColumnIndex = 1;
             gridControlRaskritem.OptionsTableLayoutItem.RowIndex = 1;
-            gridControlRaskritem.Size = new System.Drawing.Size(738, 193);
+            gridControlRaskritem.Size = new System.Drawing.Size(703, 193);
             gridControlRaskritem.TextVisible = false;
             // 
             // gridControlKontitem
             // 
             gridControlKontitem.Control = gridControlKont;
             gridControlKontitem.ImageOptions.ImageKey = resources.GetString("gridControlKontitem.ImageOptions.ImageKey");
-            gridControlKontitem.Location = new System.Drawing.Point(495, 752);
+            gridControlKontitem.Location = new System.Drawing.Point(473, 752);
             gridControlKontitem.Name = "gridControlKontitem";
             gridControlKontitem.OptionsTableLayoutItem.ColumnIndex = 1;
             gridControlKontitem.OptionsTableLayoutItem.RowIndex = 2;
-            gridControlKontitem.Size = new System.Drawing.Size(738, 90);
+            gridControlKontitem.Size = new System.Drawing.Size(703, 90);
             gridControlKontitem.TextVisible = false;
             // 
             // splitterItem3
             // 
             splitterItem3.Location = new System.Drawing.Point(0, 539);
             splitterItem3.Name = "splitterItem3";
-            splitterItem3.Size = new System.Drawing.Size(1233, 10);
+            splitterItem3.Size = new System.Drawing.Size(1176, 10);
             // 
             // splitterItem4
             // 
-            splitterItem4.Location = new System.Drawing.Point(485, 549);
+            splitterItem4.Location = new System.Drawing.Point(463, 549);
             splitterItem4.Name = "splitterItem4";
             splitterItem4.Size = new System.Drawing.Size(10, 293);
             // 
             // splitterItem5
             // 
-            splitterItem5.Location = new System.Drawing.Point(495, 742);
+            splitterItem5.Location = new System.Drawing.Point(473, 742);
             splitterItem5.Name = "splitterItem5";
-            splitterItem5.Size = new System.Drawing.Size(738, 10);
+            splitterItem5.Size = new System.Drawing.Size(703, 10);
             // 
             // layoutControlGroup4
             // 
@@ -1352,7 +1352,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlGroup4.Location = new System.Drawing.Point(0, 573);
             layoutControlGroup4.Name = "layoutControlGroup4";
             layoutControlGroup4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup4.Size = new System.Drawing.Size(258, 321);
+            layoutControlGroup4.Size = new System.Drawing.Size(315, 321);
             layoutControlGroup4.TextVisible = false;
             // 
             // bufferitem
@@ -1361,7 +1361,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             bufferitem.ImageOptions.ImageKey = resources.GetString("bufferitem.ImageOptions.ImageKey");
             bufferitem.Location = new System.Drawing.Point(0, 0);
             bufferitem.Name = "bufferitem";
-            bufferitem.Size = new System.Drawing.Size(252, 34);
+            bufferitem.Size = new System.Drawing.Size(309, 34);
             bufferitem.TextVisible = false;
             // 
             // textBoxBufferitem
@@ -1370,12 +1370,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             textBoxBufferitem.ImageOptions.ImageKey = resources.GetString("textBoxBufferitem.ImageOptions.ImageKey");
             textBoxBufferitem.Location = new System.Drawing.Point(0, 34);
             textBoxBufferitem.Name = "textBoxBufferitem";
-            textBoxBufferitem.Size = new System.Drawing.Size(252, 281);
+            textBoxBufferitem.Size = new System.Drawing.Size(309, 281);
             textBoxBufferitem.TextVisible = false;
             // 
             // splitterItem1
             // 
-            splitterItem1.Location = new System.Drawing.Point(258, 25);
+            splitterItem1.Location = new System.Drawing.Point(315, 25);
             splitterItem1.Name = "splitterItem1";
             splitterItem1.Size = new System.Drawing.Size(10, 869);
             // 
@@ -1383,7 +1383,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             splitterItem2.Location = new System.Drawing.Point(0, 563);
             splitterItem2.Name = "splitterItem2";
-            splitterItem2.Size = new System.Drawing.Size(258, 10);
+            splitterItem2.Size = new System.Drawing.Size(315, 10);
             // 
             // rasz
             // 
