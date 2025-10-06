@@ -1,4 +1,5 @@
 ﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.form
 {
     partial class FurnUpakDeliveryInfo
@@ -30,7 +31,7 @@ namespace SewingProduction.form
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tbKodF = new SewingProduction.CustomTextBox();
+            this.tbKodF = new SewingProduction.Core.Class.CustomTextBox();
             this.label1 = new SewingProduction.Core.Class.CustomLabel();
             this.gridControlReestrFurn = new CustomGridControl();
             this.bsReestrFurn = new System.Windows.Forms.BindingSource(this.components);

@@ -230,73 +230,7 @@ namespace SewingProduction
     }
 
 
-    public class CustomTextBox : TextBox, IThemeable, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        private bool _visiblePermission = true;
-        private bool _visibleLogic = true;
-        public CustomTextBox()
-        {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-        }
-
-        public void ApplyTheme()
-        {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-            Font = ThemeManager.SharedSettings.DefaultFont;
-        }
-
-        private void OnThemeChanged() => ApplyTheme();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
-            base.Dispose(disposing);
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool VisiblePermission
-        {
-            get => _visiblePermission;
-            set
-            {
-                _visiblePermission = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool VisibleLogic
-        {
-            get => _visibleLogic;
-            set
-            {
-                _visibleLogic = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
-
-        public new bool Visible
-        {
-            get => base.Visible;
-            set
-            {
-                _visibleLogic = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
-
-    }
+   
 
     public class CustomCheckBox : CheckBox, IThemeable, IThemeableControl
     {
@@ -1012,7 +946,6 @@ namespace SewingProduction
         }
         public CustomForm(UserClass user)
         {
-            Debug.WriteLine("кастом форма");
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
 
@@ -1071,10 +1004,42 @@ namespace SewingProduction
             if (disposing)
             {
                 ThemeManager.ThemeChanged -= OnThemeChanged;
+
+                // рекурсивно освобождаем все контролы
+                DisposeControls(this);
+
+                if (this.Container != null)
+                {
+                    foreach (var comp in this.Container.Components)
+                    {
+                        if (comp is IDisposable d)
+                            d.Dispose();
+                    }
+                }
             }
             base.Dispose(disposing);
         }
+        private void DisposeControls(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is DevExpress.XtraGrid.GridControl grid)
+                {
+                    grid.DataSource = null;
+                    grid.Dispose();
+                }
+                else if (ctrl is DataGridView dgv)
+                {
+                    dgv.DataSource = null;
+                    dgv.Dispose();
+                }
 
+                if (ctrl.HasChildren)
+                    DisposeControls(ctrl);
+
+                ctrl.Dispose();
+            }
+        }
         /// <summary>
         /// Инициализирует автоматическое сохранение настроек для всех CustomGridControl на форме
         /// </summary>

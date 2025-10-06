@@ -1927,11 +1927,13 @@ namespace SewingProduction
                 var selectedRow = _sockKnitZadanyInfoBindingSource.Current as SockZadanyInfo;
                 if (selectedRow != null)
                 {
-                    xtraTabControl1.Enabled = true;
+                    //xtraTabControl1.Enabled = true;
+                    SockZadanyInfo.PageVisible = true;
                 }
                 else
                 {
-                    xtraTabControl1.Enabled = false;
+                    //xtraTabControl1.Enabled = false;
+                    SockZadanyInfo.PageVisible = false;
                 }
                 //_sockKnitZadanyInfoBindingSource.ResetBindings(false);
                 //MessageBox.Show(TextBoxNomZad.Text);

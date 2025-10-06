@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraBars;
-using DevExpress.XtraTabbedMdi;
+﻿using DevExpress.XtraTabbedMdi;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
@@ -9,18 +8,8 @@ using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
-//using SewingProduction.form.Nadezhda;
 using System;
 using System.Windows.Forms;
-using SewingProduction.Features.UserDistribution.Helpers;
-using Microsoft.AspNet.Identity;
-using SewingProduction.Core.Class.Settings;
-using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Features.TeamWork;
-using System.Diagnostics;
-using SewingProduction.Features.TeamWork.Forms;
-using SewingProduction.Features.Sprav;
-using SewingProduction.Features.Articul;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.KnittingProduction.Forms;
 

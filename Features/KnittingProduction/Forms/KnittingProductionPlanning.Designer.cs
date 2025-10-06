@@ -1,4 +1,5 @@
 ﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class KnittingProductionPlanning
@@ -366,7 +367,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNomZad.MinWidth = 23;
             gridColumnVyazPlanNomZad.Name = "gridColumnVyazPlanNomZad";
             gridColumnVyazPlanNomZad.OptionsColumn.ReadOnly = true;
-            gridColumnVyazPlanNomZad.OptionsFilter.AllowFilter = false;
             gridColumnVyazPlanNomZad.Visible = true;
             gridColumnVyazPlanNomZad.VisibleIndex = 3;
             gridColumnVyazPlanNomZad.Width = 81;
