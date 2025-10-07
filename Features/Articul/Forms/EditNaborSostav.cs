@@ -23,7 +23,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (_ANSDataService.CheckOpis(kod)) 
             { 
                 MessageBox.Show("Нельзя редактировать набор!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                //this.Close();
             }
             InitializeComponent();
             xKod = kod;
@@ -36,8 +36,10 @@ namespace SewingProduction.Features.Articul.Forms
             gostModelBindingSource.DataSource = await _ANSDataService.GetGostAsync();
             spArticulNaborSostavBindingSource.DataSource = await _ANSDataService.GetByKodAsync(xKod);
             currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
-            gostGrupIzdViewModelBindingSource.DataSource = await _ANSDataService.GetGostGrupIzdAsync(currentItem.Id_gost, currentItem.Tk_id);
+            if (currentItem != null)
+                gostGrupIzdViewModelBindingSource.DataSource = await _ANSDataService.GetGostGrupIzdAsync(currentItem.Id_gost, currentItem.Tk_id);
             customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(xKod);
+            HideTechnicalColumns();
         }
 
         private async void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -71,6 +73,16 @@ namespace SewingProduction.Features.Articul.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        private void HideTechnicalColumns()
+        {
+            gridViewNabor.Columns["Ans_id"].Visible = false;
+            gridViewNabor.Columns["Ta_id"].Visible = false;
+            gridViewNabor.Columns["Tk_id"].Visible = false;
+            gridViewNabor.Columns["Ag_id"].Visible = false;
+            gridViewNabor.Columns["Id_razm_nab"].Visible = false;
+            gridViewNabor.Columns["Kod"].Visible = false;
         }
     }
 }
