@@ -1,16 +1,14 @@
-﻿using DevExpress.XtraGrid;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Extensions;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Helpers
 {

@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Features.CuttingProduction.Models
 {
@@ -129,7 +123,7 @@ namespace SewingProduction.Features.CuttingProduction.Models
         public int? Dtf_print { get; set; }
 
         public int? Bd { get; set; }
-        public string DisplayText => $"{Nom.PadRight(12).Substring(0,12)}|{Articul.PadRight(25).Substring(0, 25)}|  {Data_za} | {Grup} | {Mod} | {Kodd}";
-        public string nZvet {  get; set; }
+        public string DisplayText => $"{Nom.PadRight(12).Substring(0, 12)}|{Articul.PadRight(25).Substring(0, 25)}|  {Data_za} | {Grup} | {Mod} | {Kodd}";
+        public string nZvet { get; set; }
     }
 }

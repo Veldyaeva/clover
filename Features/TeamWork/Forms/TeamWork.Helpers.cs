@@ -1,4 +1,11 @@
-﻿using DevExpress.Data.Filtering;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.Data.Filtering;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid;
@@ -6,20 +13,9 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using SewingProduction.Core.Extensions;
-using SewingProduction.form;
 using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -70,9 +66,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _formSettingsHelper.SaveFormSettings(this, "TeamWorkFormLayout.xml");
 
                 // Сохраняем настройки split container
-        //        _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+                //        _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
 
-   
+
                 this.SaveAllGridSettings();
 
                 //// Сохраняем настройки для обычных GridControl (не CustomGridControl)
@@ -346,17 +342,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Условие: dateUpdate IS NULL OR дата dateUpdate = сегодня (без времени)
                     // Необходимо, чтоб пользователь видел записи, с которыми работал сегодня
                     var updateIsEmpty = new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"));
-                    
+
                     // Сравниваем диапазон: от начала дня до конца дня
                     var todayStart = DateTime.Today; // 00:00:00
                     var todayEnd = DateTime.Today.AddDays(1).AddTicks(-1); // 23:59:59.9999999
-                    
+
                     var updateIsToday = new GroupOperator(
                         GroupOperatorType.And,
                         new BinaryOperator("dateUpdate", todayStart, BinaryOperatorType.GreaterOrEqual),
                         new BinaryOperator("dateUpdate", todayEnd, BinaryOperatorType.LessOrEqual)
                     );
-                    
+
                     var updateCondition = new GroupOperator(
                         GroupOperatorType.Or,
                         updateIsEmpty,
@@ -556,30 +552,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 view.BeginUpdate();
                 view.ActiveFilterString = filter;
                 view.EndUpdate();
-                
+
                 // Автоматически переходим на первую строку результатов фильтрации
                 //view.BeginInvoke(new Action(() =>
                 //{
-                    try
+                try
+                {
+                    if (view.DataRowCount > 0)
                     {
-                        if (view.DataRowCount > 0)
+                        int firstVisibleRow = view.GetVisibleRowHandle(0);
+                        if (view.IsValidRowHandle(firstVisibleRow))
                         {
-                            int firstVisibleRow = view.GetVisibleRowHandle(0);
-                            if (view.IsValidRowHandle(firstVisibleRow))
-                            {
-                                view.FocusedRowHandle = firstVisibleRow;
-                                view.MakeRowVisible(firstVisibleRow);
-                                
-                                // Логируем действие
-                                _logger?.LogEventAsync($"Автоматический переход на первую строку после применения фильтра по annId {_annId}. Всего строк: {view.DataRowCount}", "LoadGridControlData");
-                            }
+                            view.FocusedRowHandle = firstVisibleRow;
+                            view.MakeRowVisible(firstVisibleRow);
+
+                            // Логируем действие
+                            _logger?.LogEventAsync($"Автоматический переход на первую строку после применения фильтра по annId {_annId}. Всего строк: {view.DataRowCount}", "LoadGridControlData");
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку после применения фильтра по annId");
-                    }
-              //  }));
+                }
+                catch (Exception ex)
+                {
+                    _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку после применения фильтра по annId");
+                }
+                //  }));
             }
             catch (Exception ex)
             {
@@ -845,9 +841,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             catch (Exception ex)
             {
                 _ = _logger?.LogErrorAsync(ex, "OpenAdvanceFormNonModal: непредвиденная ошибка при проверке открытых форм");
-            } 
-            
-        
+            }
+
+
             var advanceForm = new TeamWork_AdvanceTW(bufferWorkDivision, mode, newId, oldId, sourceAnnIdToCopyDetailsFrom, initialArtData, duplicateAnnData);
 
             // Добавляем в список открытых форм
@@ -919,7 +915,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonArchAndCopyWd.VisibleLogic = true;
             ButtonDouble.VisibleLogic = true;
             ButtonCopyWd.VisibleLogic = true;
-            
+
             // Скрываем элементы режима комплекта
             KITlabel.VisibleLogic = false;
             ButtonPreliminaryWd.VisibleLogic = false;
@@ -956,7 +952,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonEditOnlyAdv.VisibleLogic = false;
             ButtonArchAndCopyWd.VisibleLogic = false;
             ButtonDouble.VisibleLogic = false;
-            
+
             // Показываем элементы режима комплекта
             ButtonPreliminaryWd.VisibleLogic = true;
             ButtonCopyWd.VisibleLogic = true;

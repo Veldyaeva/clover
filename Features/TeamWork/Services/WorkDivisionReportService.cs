@@ -1,10 +1,5 @@
-using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
-using SewingProduction.Models;
 using SewingProduction.Services;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Features.TeamWork.Services
 {
@@ -23,4 +18,4 @@ namespace SewingProduction.Features.TeamWork.Services
             _dbHelper = dbHelper;
         }
     }
-} 
+}

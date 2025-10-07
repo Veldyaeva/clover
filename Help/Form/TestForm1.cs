@@ -1,12 +1,12 @@
-﻿using SewingProduction.Core.interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using SewingProduction.Core.interfaces;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Help.Form;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {

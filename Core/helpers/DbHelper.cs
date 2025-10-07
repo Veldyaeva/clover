@@ -1,12 +1,11 @@
-﻿using Dapper;
-using SewingProduction.Core.Class.Settings;
-
-//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+﻿//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Dapper;
+using SewingProduction.Core.Class.Settings;
 
 namespace SewingProduction.Helpers
 {

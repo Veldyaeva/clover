@@ -1,40 +1,23 @@
-﻿using DevExpress.ChartRangeControlClient.Core;
-using DevExpress.CodeParser.VB;
-using DevExpress.Data.Filtering;
-using DevExpress.Xpo;
-using DevExpress.XtraBars.Docking;
-using DevExpress.XtraBars.Docking2010;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.ButtonPanel;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraReports.UI;
-using DevExpress.XtraSpreadsheet.Import.Xls;
-using SewingProduction.Features.CardByNom.Models;
-using SewingProduction.Features.TeamWork;
-using SewingProduction.Features.TeamWork.Helpers;
-using SewingProduction.Features.TeamWork.Services;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using SewingProduction.Report;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
+using SewingProduction.Services;
 using BindingSource = System.Windows.Forms.BindingSource;
-using PopupMenuShowingEventHandler = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -1517,4 +1500,3 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
     }
 }
-   

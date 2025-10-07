@@ -1,10 +1,10 @@
-using SewingProduction.Features.TeamWork.Interfaces;
-using SewingProduction.Features.TeamWork.Forms;
-using SewingProduction.Services;
-using SewingProduction.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.TeamWork.Interfaces;
+using SewingProduction.Models;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.TeamWork.Services
 {

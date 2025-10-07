@@ -1,8 +1,8 @@
-﻿using SewingProduction.Features.CardByNom.Models;
+﻿using System;
+using System.Threading.Tasks;
+using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Features.CardByNom.Services
 {
@@ -53,7 +53,7 @@ namespace SewingProduction.Features.CardByNom.Services
             try
             {
                 string query = $"exec GetRasInfoView @xNomZadany = '{nomZad}'";
-                return await _dbService.GetEntityAsync<RasInfo>(query, new {  });
+                return await _dbService.GetEntityAsync<RasInfo>(query, new { });
             }
             catch (Exception ex)
             {

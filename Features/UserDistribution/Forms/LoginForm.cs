@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SewingProduction.Helpers;
-using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
-using System.Diagnostics;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {

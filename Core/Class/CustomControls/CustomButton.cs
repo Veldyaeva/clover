@@ -1,12 +1,11 @@
-﻿using DevExpress.XtraEditors;
-using SewingProduction; // for VisibilityExtensions.ApplyVisibility
-using SewingProduction.Features.UserDistribution.Helpers;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {

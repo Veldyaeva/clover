@@ -1,19 +1,7 @@
-using Dapper;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Features.TeamWork.Helpers;
-using SewingProduction.form.TeamWork.Forms;
-using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
-using SewingProduction.Models;
-using SewingProduction.Services;
-using SewingProduction.Features.TeamWork.Interfaces;
-using SewingProduction.Features.TeamWork.Services;
-using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -22,6 +10,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dapper;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Interfaces;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.form.TeamWork.Forms;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
+using SewingProduction.Models;
+using SewingProduction.Services;
 using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
@@ -147,59 +147,59 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         public static class CloneUtils
         {
-                    public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
-                where T : ICloneable
-        {
-            var list = new List<T>();
-            foreach (var item in source)
+            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
+        where T : ICloneable
             {
-                var clone = (T)item.Clone();
-                
-                // Принудительно сбрасываем ID в 0
-                var idProperty = typeof(T).GetProperty(idFieldName);
-                if (idProperty != null)
+                var list = new List<T>();
+                foreach (var item in source)
                 {
-                    idProperty.SetValue(clone, 0);
-                }
-                else
-                {
-                    // Если свойство не найдено через рефлексию, пробуем альтернативные имена
-                    var alternativeNames = new[] { "nrID", "id", "nkId", "NrID", "Id", "NkId" };
-                    foreach (var altName in alternativeNames)
+                    var clone = (T)item.Clone();
+
+                    // Принудительно сбрасываем ID в 0
+                    var idProperty = typeof(T).GetProperty(idFieldName);
+                    if (idProperty != null)
                     {
-                        var altProperty = typeof(T).GetProperty(altName);
-                        if (altProperty != null)
+                        idProperty.SetValue(clone, 0);
+                    }
+                    else
+                    {
+                        // Если свойство не найдено через рефлексию, пробуем альтернативные имена
+                        var alternativeNames = new[] { "nrID", "id", "nkId", "NrID", "Id", "NkId" };
+                        foreach (var altName in alternativeNames)
                         {
-                            altProperty.SetValue(clone, 0);
-                            break;
+                            var altProperty = typeof(T).GetProperty(altName);
+                            if (altProperty != null)
+                            {
+                                altProperty.SetValue(clone, 0);
+                                break;
+                            }
                         }
                     }
+
+                    // Устанавливаем новый AnnId
+                    var annIdProperty = typeof(T).GetProperty("AnnId") ?? typeof(T).GetProperty("annId");
+                    if (annIdProperty != null)
+                    {
+                        annIdProperty.SetValue(clone, newAnnId);
+                    }
+
+                    // Устанавливаем флаги
+                    var isNewProperty = typeof(T).GetProperty("IsNew");
+                    if (isNewProperty != null)
+                    {
+                        isNewProperty.SetValue(clone, markAsNew);
+                    }
+
+                    var isModifiedProperty = typeof(T).GetProperty("IsModified");
+                    if (isModifiedProperty != null)
+                    {
+                        isModifiedProperty.SetValue(clone, markAsNew);
+                    }
+
+                    list.Add(clone);
                 }
-                
-                // Устанавливаем новый AnnId
-                var annIdProperty = typeof(T).GetProperty("AnnId") ?? typeof(T).GetProperty("annId");
-                if (annIdProperty != null)
-                {
-                    annIdProperty.SetValue(clone, newAnnId);
-                }
-                
-                // Устанавливаем флаги
-                var isNewProperty = typeof(T).GetProperty("IsNew");
-                if (isNewProperty != null)
-                {
-                    isNewProperty.SetValue(clone, markAsNew);
-                }
-                
-                var isModifiedProperty = typeof(T).GetProperty("IsModified");
-                if (isModifiedProperty != null)
-                {
-                    isModifiedProperty.SetValue(clone, markAsNew);
-                }
-                
-                list.Add(clone);
+                return list;
             }
-            return list;
-        }
 
             public static BindingList<T> DeepCloneBindingList<T>(IEnumerable<T> sourceList) where T : class, ICloneable
             {
@@ -237,7 +237,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.Appearance.FocusedRow.ForeColor = Color.Black;
             gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            
+
             // Настройка мультиселекта с галочками
             gridViewRasz.OptionsSelection.MultiSelect = true;
             gridViewRasz.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
@@ -631,9 +631,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 await _logger.LogEventAsync($"Массово удалено операций: {operationsToDelete.Count}", "DeleteSelectedOperations");
-                
+
                 // Показываем результат
-                MessageBox.Show($"Успешно удалено {operationsToDelete.Count} операций.", 
+                MessageBox.Show($"Успешно удалено {operationsToDelete.Count} операций.",
                                "Удаление завершено", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -828,7 +828,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = selectionForm.SelectedRowData;
                         selectedData.IsNew = true;
                         selectedData.IsBeingAdded = true; // помечаем как добавляемую в текущей сессии
-                        
+
                         // Вставка основной операции после текущей главы: всегда создаём новую главу (N+1.0) и сдвигаем последующие
                         if (!isSuboperation && insertOperationN1 == 0)
                         {
@@ -1171,7 +1171,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Используем CloneUtils.CloneList для автоматического сброса ID
                     var raszToCopy = await _artNormService.GetRelatedNormRasz(sourceAnnId);
                     var clonedRasz = CloneUtils.CloneList(raszToCopy, _currentAnnData.AnnID, "nrId", false);
-                    
+
                     // Дополнительная проверка - убеждаемся, что все ID сброшены
                     foreach (var item in clonedRasz)
                     {
@@ -1180,7 +1180,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             item.nrID = 0; // Принудительно сбрасываем ID
                         }
                     }
-                    
+
                     UIHelper.SafeUpdate(gridViewRasz, () => { });
                     UIHelper.SafeUpdate(gridViewRaskr, () => { });
                     gridViewKont.BeginDataUpdate();
@@ -1189,33 +1189,33 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList.Clear();
                         _normRaszList.BulkLoad(clonedRasz);
 
-                    var raskToCopy = await _artNormService.GetRelatedNormRask(sourceAnnId);
-                    var clonedRask = CloneUtils.CloneList(raskToCopy, _currentAnnData.AnnID, "id", false);
-                    
-                    // Дополнительная проверка для NormRask
-                    foreach (var item in clonedRask)
-                    {
-                        if (item.id != 0)
+                        var raskToCopy = await _artNormService.GetRelatedNormRask(sourceAnnId);
+                        var clonedRask = CloneUtils.CloneList(raskToCopy, _currentAnnData.AnnID, "id", false);
+
+                        // Дополнительная проверка для NormRask
+                        foreach (var item in clonedRask)
                         {
-                            item.id = 0; // Принудительно сбрасываем ID
+                            if (item.id != 0)
+                            {
+                                item.id = 0; // Принудительно сбрасываем ID
+                            }
                         }
-                    }
-                    
+
                         _normRaskList.Clear();
                         _normRaskList.BulkLoad(clonedRask);
 
-                    var kontToCopy = await _artNormService.GetRelatedNormKont(sourceAnnId);
-                    var clonedKont = CloneUtils.CloneList(kontToCopy, _currentAnnData.AnnID, "nkId", false);
-                    
-                    // Дополнительная проверка для NormKont
-                    foreach (var item in clonedKont)
-                    {
-                        if (item.nkId != 0)
+                        var kontToCopy = await _artNormService.GetRelatedNormKont(sourceAnnId);
+                        var clonedKont = CloneUtils.CloneList(kontToCopy, _currentAnnData.AnnID, "nkId", false);
+
+                        // Дополнительная проверка для NormKont
+                        foreach (var item in clonedKont)
                         {
-                            item.nkId = 0; // Принудительно сбрасываем ID
+                            if (item.nkId != 0)
+                            {
+                                item.nkId = 0; // Принудительно сбрасываем ID
+                            }
                         }
-                    }
-                    
+
                         _normKontList.Clear();
                         _normKontList.BulkLoad(clonedKont);
 
@@ -1477,63 +1477,63 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-				// Один проход по данным без лишних Where/ToList
-				int sekVyazo = 0, sekVyaz5 = 0, sekVyaz12 = 0, sekVyaz7 = 0, sekVyaz10 = 0, sekVyaz6 = 0, sekVyaz3 = 0;
-				int sekVyaz14 = 0, sekVyaz70 = 0, sekVyaz71 = 0, sekVyaz72 = 0, sekVyaz62 = 0, sekVyaz57 = 0, sekVyaz18 = 0;
-				int sekVyazAll = 0, sekShv = 0, sekKr = 0, sekTotal = 0, sebTotal = 0;
+                // Один проход по данным без лишних Where/ToList
+                int sekVyazo = 0, sekVyaz5 = 0, sekVyaz12 = 0, sekVyaz7 = 0, sekVyaz10 = 0, sekVyaz6 = 0, sekVyaz3 = 0;
+                int sekVyaz14 = 0, sekVyaz70 = 0, sekVyaz71 = 0, sekVyaz72 = 0, sekVyaz62 = 0, sekVyaz57 = 0, sekVyaz18 = 0;
+                int sekVyazAll = 0, sekShv = 0, sekKr = 0, sekTotal = 0, sebTotal = 0;
 
-				if (_normRaszList != null)
-				{
-					foreach (var r in _normRaszList)
-					{
-						if (r.N1 >= 100) continue;
-						sekTotal += r.Sek;
-						sebTotal += (int)r.Seb;
+                if (_normRaszList != null)
+                {
+                    foreach (var r in _normRaszList)
+                    {
+                        if (r.N1 >= 100) continue;
+                        sekTotal += r.Sek;
+                        sebTotal += (int)r.Seb;
 
-						if (r.KodPodr == 7) sekKr += r.Sek;
-						if (r.KodPodr == 1 || r.KodPodr == 6) sekVyazAll += r.Sek; else sekShv += r.Sek;
+                        if (r.KodPodr == 7) sekKr += r.Sek;
+                        if (r.KodPodr == 1 || r.KodPodr == 6) sekVyazAll += r.Sek; else sekShv += r.Sek;
 
-						switch (r.KodOb)
-						{
-							case 28: sekVyazo += r.Sek; break;
-							case 25: sekVyaz5 += r.Sek; break;
-							case 35: sekVyaz12 += r.Sek; break;
-							case 26: sekVyaz7 += r.Sek; break;
-							case 37: sekVyaz10 += r.Sek; break;
-							case 38: sekVyaz6 += r.Sek; break;
-							case 29: sekVyaz3 += r.Sek; break;
-							case 62: sekVyaz14 += r.Sek; break;
-							case 55: sekVyaz70 += r.Sek; break;
-							case 59: sekVyaz71 += r.Sek; break;
-							case 73: sekVyaz72 += r.Sek; break;
-							case 60: sekVyaz62 += r.Sek; break;
-							case 114: sekVyaz57 += r.Sek; break;
-							case 115: sekVyaz18 += r.Sek; break;
-						}
-					}
-				}
+                        switch (r.KodOb)
+                        {
+                            case 28: sekVyazo += r.Sek; break;
+                            case 25: sekVyaz5 += r.Sek; break;
+                            case 35: sekVyaz12 += r.Sek; break;
+                            case 26: sekVyaz7 += r.Sek; break;
+                            case 37: sekVyaz10 += r.Sek; break;
+                            case 38: sekVyaz6 += r.Sek; break;
+                            case 29: sekVyaz3 += r.Sek; break;
+                            case 62: sekVyaz14 += r.Sek; break;
+                            case 55: sekVyaz70 += r.Sek; break;
+                            case 59: sekVyaz71 += r.Sek; break;
+                            case 73: sekVyaz72 += r.Sek; break;
+                            case 60: sekVyaz62 += r.Sek; break;
+                            case 114: sekVyaz57 += r.Sek; break;
+                            case 115: sekVyaz18 += r.Sek; break;
+                        }
+                    }
+                }
 
-				_currentAnnData.SekVyazo = sekVyazo;
-				_currentAnnData.SekVyaz5 = sekVyaz5;
-				_currentAnnData.SekVyaz12 = sekVyaz12;
-				_currentAnnData.SekVyaz7 = sekVyaz7;
-				_currentAnnData.SekVyaz10 = sekVyaz10;
-				_currentAnnData.SekVyaz6 = sekVyaz6;
-				_currentAnnData.SekVyaz3 = sekVyaz3;
-				_currentAnnData.SekKr = sekKr;
-				_currentAnnData.Sek = sekTotal;
-				_currentAnnData.Seb = sebTotal;
-				_currentAnnData.SekVyaz14 = sekVyaz14;
-				_currentAnnData.SekVyaz70 = sekVyaz70;
-				_currentAnnData.SekVyaz71 = sekVyaz71;
-				_currentAnnData.SekVyaz72 = sekVyaz72;
-				_currentAnnData.SekVyaz62 = sekVyaz62;
-				_currentAnnData.SekVyaz57 = sekVyaz57;
-				_currentAnnData.SekVyaz18 = sekVyaz18;
-				_currentAnnData.SekVyaz = sekVyazAll;
+                _currentAnnData.SekVyazo = sekVyazo;
+                _currentAnnData.SekVyaz5 = sekVyaz5;
+                _currentAnnData.SekVyaz12 = sekVyaz12;
+                _currentAnnData.SekVyaz7 = sekVyaz7;
+                _currentAnnData.SekVyaz10 = sekVyaz10;
+                _currentAnnData.SekVyaz6 = sekVyaz6;
+                _currentAnnData.SekVyaz3 = sekVyaz3;
+                _currentAnnData.SekKr = sekKr;
+                _currentAnnData.Sek = sekTotal;
+                _currentAnnData.Seb = sebTotal;
+                _currentAnnData.SekVyaz14 = sekVyaz14;
+                _currentAnnData.SekVyaz70 = sekVyaz70;
+                _currentAnnData.SekVyaz71 = sekVyaz71;
+                _currentAnnData.SekVyaz72 = sekVyaz72;
+                _currentAnnData.SekVyaz62 = sekVyaz62;
+                _currentAnnData.SekVyaz57 = sekVyaz57;
+                _currentAnnData.SekVyaz18 = sekVyaz18;
+                _currentAnnData.SekVyaz = sekVyazAll;
 
-				// Если секции вязания = 0, то швейку приравниваем к общим сек
-				_currentAnnData.SekShv = _currentAnnData.SekVyaz == 0 ? _currentAnnData.Sek : sekShv;
+                // Если секции вязания = 0, то швейку приравниваем к общим сек
+                _currentAnnData.SekShv = _currentAnnData.SekVyaz == 0 ? _currentAnnData.Sek : sekShv;
 
                 if (!this.IsDisposed && this.IsHandleCreated)
                 {
@@ -2318,11 +2318,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _normRaskList.Add(normRask);
                         }
 
-                // Обновляем привязку данных и интерфейс
-                _normRaskBindingSource.ResetBindings(false);
-                gridControlRaskr.RefreshDataSource();
-                gridViewRaskr.RefreshData();
-                ApplyPostStructureUi(null, true);
+                        // Обновляем привязку данных и интерфейс
+                        _normRaskBindingSource.ResetBindings(false);
+                        gridControlRaskr.RefreshDataSource();
+                        gridViewRaskr.RefreshData();
+                        ApplyPostStructureUi(null, true);
                     }
                 }
             }
@@ -2681,7 +2681,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await SaveListAsync(_normKontList, TableNames.Kont, TableNames.KontId, _newAnnId, _deletedNormKontIds);
 
                 // Обновляем UI после сохранения
-                 _uiService?.RefreshAllGrids();
+                _uiService?.RefreshAllGrids();
             }
             catch (Exception ex)
             {
@@ -3008,20 +3008,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             // Разделяем части комплекта по разделителю
                             var parts = bufferText.Split(new string[] { "----------------------------" }, StringSplitOptions.RemoveEmptyEntries);
-                            
+
                             if (parts.Length >= 2)
                             {
                                 var formattedText = new System.Text.StringBuilder();
                                 formattedText.AppendLine("📦 КОМПЛЕКТ (2 части):");
                                 formattedText.AppendLine();
-                                
+
                                 formattedText.AppendLine("🔸 Часть 1:");
                                 formattedText.AppendLine(parts[0].Trim());
                                 formattedText.AppendLine();
-                                
+
                                 formattedText.AppendLine("🔸 Часть 2:");
                                 formattedText.Append(parts[1].Trim());
-                                
+
                                 textBoxBuffer.Text = formattedText.ToString();
                             }
                             else
@@ -3034,7 +3034,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             textBoxBuffer.Text = "📦 КОМПЛЕКТ (2 части)";
                         }
-                        
+
                         // Обновляем текст кнопки для комплекта
                         buffer.Text = "Вставить комплект из буфера:";
                     }
@@ -3251,7 +3251,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
             }
         }
-    
+
 
         /// <summary>
         /// Вставляет операции из глобального буфера в текущий список NormRasz.
@@ -3284,14 +3284,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     // Сбрасываем ID операции, чтобы база присвоила новый ID
                     item.nrID = 0;
-                    
+
                     // Привязываем операцию к текущему разделению труда (не копируем annId родительской записи)
                     item.annId = _currentAnnData?.AnnID ?? 0;
-                    
+
                     // Сбрасываем автоматически заполняемые поля, чтобы SQL сам их вставил
                     item.nrDateAdd = null;
                     item.nrCompAdd = null;
-                    
+
                     item.IsNew = true;
                     // Сдвигаем только N на offset, N1 сохраняется
                     item.N = item.N + offset;
@@ -3306,7 +3306,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _normRaszBindingSource?.ResetBindings(false);
             await ShowStatusMessage("Операции из буфера добавлены для комплекта");
         }
-                #region Управление порядком и нумерацией операций
+        #region Управление порядком и нумерацией операций
 
         /// <summary>
         /// Полный пересчет нумерации всех операций
@@ -3507,7 +3507,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (duplicates.Any())
                 {
                     string duplicatesList = string.Join(", ", duplicates.Select(d => $"{d.Key.N}.{d.Key.N1}"));
-                    
+
                     var result = MessageBox.Show(
                         $"Обнаружены дублирующиеся номера операций: {duplicatesList}\n\n" +
                         "Выполнить автоматический пересчет нумерации?",
@@ -3609,5 +3609,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 menu.Items.Add(addItem);
             };
         }
-    } }
+    }
+}
 
