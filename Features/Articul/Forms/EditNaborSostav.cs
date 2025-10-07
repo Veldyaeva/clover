@@ -23,7 +23,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (_ANSDataService.CheckOpis(kod)) 
             { 
                 MessageBox.Show("Нельзя редактировать набор!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //this.Close();
+                this.Close();
             }
             InitializeComponent();
             xKod = kod;
