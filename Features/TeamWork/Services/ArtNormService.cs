@@ -480,7 +480,36 @@ WHERE nr.annId = @annId";
                 return result ?? new List<NormRasz>();
             }
         }
+        public async Task<NormRasz> GetRelatedNormRaszByID(int _nrID)
+        {
+            try
+            {
+                string query = @"SELECT 
+                            nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,
+                            nr.Sek, nr.Seb, nr.Kod, 
+                            nr.kod_o AS Kod_o,       
+                            nr.kod_ob AS KodOb,   
+                            nr.kod_podr AS KodPodr,  
+                            nr.kod_proizv AS KodProizv,
+                            nr.Spec, nr.nrId,
+                            nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
+                            kp.text_proizv as TextProizv,
+                            pv.text_vyaz as TextVyaz,
+                            ob.text_ob as TextOb
+                        FROM dbo.normraszview nr
+                        LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
+                        LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
+                        LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
+                        WHERE nr.nrID = @_nrID";
 
+                return await _dbService.GetEntityAsync<NormRasz>(query, new { _nrID });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных NormRasz для ID {_nrID}");
+                return null;
+            }
+        }
         public async Task<string> GetSpecByOborudKod(int kodOb)
         {
             string query = "SELECT no_spec FROM oborud_shv WHERE kod_ob = @kodOb";
