@@ -419,7 +419,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridArtNormNColumnDataObn.FieldName = "dateUpdate";
                 gridArtNormNColumnAnnDateDel.FieldName = "dateDel";
                 gridArtNormNColumnAnnCompDel.FieldName = "compDel";
-                gridArtNormNColumnStatus.FieldName = "statusText";
+                gridArtNormNColumnStatus.FieldName = "StatusText";
                 //_gridHelper.AutoRowFilterConfig(gridViewArtNormN);
                 #endregion
 
@@ -431,7 +431,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridNormRaszColumnRazryd.FieldName = "razryd";
                 gridNormRaszColumnSek.FieldName = "Sek";
                 gridNormRaszColumnKodOb.FieldName = "KodOb";
-                gridNormRaszColumnObor.FieldName = "Obor";
+                gridNormRaszColumnObor.FieldName = "TextOb";
                 gridNormRaszColumnKodPodr.FieldName = "TextVyaz";
                 gridNormRaszColumnKodProizv.FieldName = "TextProizv";
                 gridNormRaszColumnNrDateDel.FieldName = "nrDateDel";
