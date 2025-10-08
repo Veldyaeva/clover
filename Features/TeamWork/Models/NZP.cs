@@ -20,7 +20,7 @@ namespace SewingProduction.Models
         [NotMapped]
         public string maxSize { get; set; }
         [Column("articulForRT")]
-        public string articulForRT {  get; set; }
+        public string articulForRT { get; set; }
         [Column("articul")]
         public string articul { get; set; }
         [Column("mod")]
@@ -35,7 +35,7 @@ namespace SewingProduction.Models
         public int PZTCount { get; set; }
         [Column("data_r")]
         public DateTime? data_r { get; set; }
-        
+
         [NotMapped]
         public bool IsChecked { get; set; }
     }

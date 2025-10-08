@@ -1,12 +1,10 @@
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Core.Interfaces;
-using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.Interfaces;
 
 namespace SewingProduction.Core.Services
 {
@@ -85,13 +83,13 @@ namespace SewingProduction.Core.Services
                 if (_registeredGrids.ContainsKey(gridView))
                 {
                     var settingsKey = _registeredGrids[gridView];
-                    
+
                     // Сохраняем последние настройки перед отключением
                     SaveSettings(gridView, settingsKey);
-                    
+
                     // Отписываемся от событий
                     UnsubscribeFromEvents(gridView);
-                    
+
                     // Удаляем из регистрации
                     _registeredGrids.Remove(gridView);
 
@@ -123,7 +121,7 @@ namespace SewingProduction.Core.Services
                 string fileName = $"{settingsKey}.xml";
                 string appPath = Application.StartupPath;
                 string settingsPath = Path.Combine(appPath, "Settings", "Grids");
-                
+
                 if (!Directory.Exists(settingsPath))
                     Directory.CreateDirectory(settingsPath);
 
@@ -280,13 +278,13 @@ namespace SewingProduction.Core.Services
         {
             // Сохраняем при изменении ширины колонок
             gridView.ColumnWidthChanged += OnGridSettingsChanged;
-            
+
             // Сохраняем при изменении видимости колонок
             gridView.ColumnPositionChanged += OnGridSettingsChanged;
-            
+
             // Сохраняем при изменении сортировки
             //gridView.SortInfoChanged += OnGridSettingsChanged;
-            
+
             // Сохраняем при закрытии формы
             var form = gridView.GridControl?.FindForm();
             if (form != null)
@@ -303,7 +301,7 @@ namespace SewingProduction.Core.Services
             gridView.ColumnWidthChanged -= OnGridSettingsChanged;
             gridView.ColumnPositionChanged -= OnGridSettingsChanged;
             //gridView.sort -= OnGridSettingsChanged;
-            
+
             var form = gridView.GridControl?.FindForm();
             if (form != null)
             {
@@ -343,7 +341,7 @@ namespace SewingProduction.Core.Services
             {
                 // Сохраняем настройки всех гридов на форме
                 var gridsToSave = new List<KeyValuePair<GridView, string>>();
-                
+
                 lock (_lockObject)
                 {
                     foreach (var kvp in _registeredGrids)

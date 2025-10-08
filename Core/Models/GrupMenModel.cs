@@ -26,11 +26,11 @@ namespace SewingProduction.Core.Models
             get => _men;
             set { if (_men != value) { _men = value; OnPropertyChanged(nameof(Men)); } }
         }
-        
-        
+
+
 
         public List<ArticulModel> Articuls { get; set; } = new List<ArticulModel>();
-        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

@@ -1,7 +1,6 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraTab;
+﻿using System.ComponentModel;
+using DevExpress.XtraEditors;
 using SewingProduction.Features.UserDistribution.Helpers;
-using System.ComponentModel;
 
 namespace SewingProduction.Core.Class
 {

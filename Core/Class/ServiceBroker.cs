@@ -1,11 +1,11 @@
-﻿using SewingProduction.Core.Class.Settings;
-//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
-using SewingProduction.Core.interfaces;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Windows.Forms;
+using SewingProduction.Core.Class.Settings;
+//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using SewingProduction.Core.interfaces;
 
 namespace SewingProduction
 {

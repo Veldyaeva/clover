@@ -1,15 +1,15 @@
-﻿using DevExpress.XtraGrid;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
+using DevExpress.XtraGrid;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.UserDistribution.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Core.Class
 {

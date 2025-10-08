@@ -1,39 +1,22 @@
-﻿using DevExpress.Charts.Native;
-using DevExpress.Spreadsheet.Charts;
-using DevExpress.Utils;
-using DevExpress.XtraBars;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Card;
-using DevExpress.XtraGrid.Views.Card.ViewInfo;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Layout;
-using DevExpress.XtraGrid.Views.Layout.Events;
-using DevExpress.XtraLayout;
-using DevExpress.XtraRichEdit;
-using DevExpress.XtraRichEdit.Design; // тут лежит RepositoryItemRichEditControl
-using SewingProduction.Core.Services;
-using SewingProduction.Extensions;
-using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Features.KnittingProduction.Services;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DevExpress.XtraPrinting.Native.ExportOptionsPropertiesNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Layout;
+using SewingProduction.Extensions;
+using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.KnittingProduction.Services;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -458,11 +441,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         _knitMachineLoadInfoBindingSource.Sort = "kmlNumber, yearMonth";
                     });
 
-                    
+
 
                     await _logger.LogEventAsync($"Данные KnitMachineLoadInfo успешно загружены", "LoadKnitMachineLoadInfoByClassIDDataAsync");
                     _knitMachineLoadInfoBindingSource.ResetBindings(false);
-                    
+
                 }
                 else
                 {
@@ -1325,7 +1308,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 h = gridControlKnitMachineLoadInfo.ClientSize.Height / 3;
                 //h = gridControlKnitMachineLoadInfo.ClientSize.Height / (_knitMachineLoadInfoBindingSource.Count != 0? _knitMachineLoadInfoBindingSource.Count:1);
             }
-            
+
             //MIN_CARD_HEIGHT = gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / (_knitMachineLoadInfoBindingSource.Count != 0 ? _knitMachineLoadInfoBindingSource.Count : 1) + 1);
             h = Math.Max(MIN_CARD_HEIGHT, h);
             view.CardMinSize = new Size(view.CardMinSize.Width, h);
@@ -1401,13 +1384,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         // там, где вы подаёте HTML в попап:
-//        _repoPopup.QueryPopUp += (s, e) =>
-//{
-//    var html = Convert.ToString(gridViewKnitMachineLoadLayoutView.GetFocusedRowCellValue(_htmlColumnName));
-//        _browser.DocumentText = WrapHtml(html);
-//    };
+        //        _repoPopup.QueryPopUp += (s, e) =>
+        //{
+        //    var html = Convert.ToString(gridViewKnitMachineLoadLayoutView.GetFocusedRowCellValue(_htmlColumnName));
+        //        _browser.DocumentText = WrapHtml(html);
+        //    };
 
-    private void customLabel1_Click(object sender, EventArgs e)
+        private void customLabel1_Click(object sender, EventArgs e)
         {
 
         }

@@ -1,16 +1,12 @@
-﻿using SewingProduction.Features.CardByNom.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.SockProduction.Forms
 {
@@ -97,7 +93,7 @@ namespace SewingProduction.Features.SockProduction.Forms
                 //gridViewRzvPachListByNom.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
                 //gridViewRzvPachListByNom.OptionsFilter.AllowFilterEditor = false;
 
- 
+
                 //#endregion
 
                 //#region описание gridControlRzvPachListByNom "пачки по расчету вяз"

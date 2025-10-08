@@ -1,17 +1,9 @@
 ﻿using SewingProduction.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Models
 {
     public class SpArticulGrupMenViewModel : ArticulModel
-        //, INotifyPropertyChanged
+    //, INotifyPropertyChanged
     {
 
         public GrupMenModel GrupMen { get; set; } = new GrupMenModel();

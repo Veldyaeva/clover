@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using DevExpress.XtraEditors;
-using DevExpress.XtraTab;
 using SewingProduction.Features.UserDistribution.Helpers;
-using static DevExpress.LookAndFeel.DXSkinColors;
 
 namespace SewingProduction.Core.Class
 {
