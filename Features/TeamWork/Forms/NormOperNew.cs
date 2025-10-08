@@ -1,4 +1,4 @@
-﻿using DevExpress.CodeParser;
+using DevExpress.CodeParser;
 using DevExpress.DirectX.Common.Direct2D;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -332,12 +332,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Объединяем источник: проставляем и код, и текст из одной строки norm_oper
             var textOb = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');
             normRasz.Obor = textOb;
-            normRasz.razryd = GetIntFromView(view, rowHandle, "razryd"); 
-            normRasz.N1 = GetIntFromView(view, rowHandle, "n1"); 
-            normRasz.Sek = GetIntFromView(view, rowHandle, "sek"); 
-            normRasz.KodOb = GetIntFromView(view, rowHandle, "kod_ob"); 
-            normRasz.KodPodr = GetIntFromView(view, rowHandle, "kod_podr"); 
-            normRasz.KodProizv = GetIntFromView(view, rowHandle, "kod_proizv"); 
+            normRasz.razryd = GetIntFromView(view, rowHandle, "razryd");
+            normRasz.N1 = GetIntFromView(view, rowHandle, "n1");
+            normRasz.Sek = GetIntFromView(view, rowHandle, "sek");
+            normRasz.KodOb = GetIntFromView(view, rowHandle, "kod_ob");
+            normRasz.KodPodr = GetIntFromView(view, rowHandle, "kod_podr");
+            normRasz.KodProizv = GetIntFromView(view, rowHandle, "kod_proizv");
             normRasz.TextProizv = Convert.ToString(view.GetRowCellValue(rowHandle, "text_proizv"))?.TrimEnd(' ');
             normRasz.TextVyaz = Convert.ToString(view.GetRowCellValue(rowHandle, "text_vyaz"))?.TrimEnd(' ');
             normRasz.TextOb = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');

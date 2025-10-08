@@ -1,12 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using SewingProduction.Interfaces;
 
 
 namespace SewingProduction.Core.Models
 {
-    public class ArticulModel :  INewable, IModifiable, IDeletable, INotifyPropertyChanged
+    public class ArticulModel : INewable, IModifiable, IDeletable, INotifyPropertyChanged
     {
         //private int _kod;
         //private string _grup;
@@ -202,7 +202,7 @@ namespace SewingProduction.Core.Models
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        
+
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]

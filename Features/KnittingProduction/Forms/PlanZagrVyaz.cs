@@ -1,10 +1,13 @@
-﻿using DevExpress.Data;
-using DevExpress.Mvvm.POCO;
-using DevExpress.Utils;
-using DevExpress.XtraGauges.Core.Styles;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.Data;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Grid;
 using Newtonsoft.Json;
 using SewingProduction.Extensions;
@@ -12,14 +15,6 @@ using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 namespace SewingProduction.Features.KnittingProduction.Forms

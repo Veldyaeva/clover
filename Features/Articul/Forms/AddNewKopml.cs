@@ -2,31 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using DevExpress.DataAccess.DataFederation;
-using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form;
-using SewingProduction.Features.Articul;
-using DevExpress.XtraGrid;
-using DevExpress.XtraVerticalGrid;
-using DevExpress.XtraGrid.Columns;
-using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ToolTip = System.Windows.Forms.ToolTip;
-using SewingProduction.Features.Articul.Models;
-using NLog.Layouts;
 
 namespace SewingProduction.Features.Articul.Forms
 {

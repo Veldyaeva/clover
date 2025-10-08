@@ -1,5 +1,4 @@
-﻿using DevExpress.Mvvm.Native;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 

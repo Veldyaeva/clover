@@ -1,13 +1,13 @@
-﻿using Dapper;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Dapper;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
 using DataTable = System.Data.DataTable;
 
 namespace SewingProduction.Services
@@ -249,26 +249,26 @@ namespace SewingProduction.Services
                 JOIN status_ann sa ON v.status = sa.status_id 
                 WHERE v.status != 3"; // Статус "архивное"
 
-            object parameters = null; 
+            object parameters = null;
 
             if (!includeAll)
             {
                 query += @" 
                   AND EXISTS (SELECT top 1 *
                               FROM View_sp_articul spa
-                              WHERE spa.annId = v.annId)"; 
-       //         parameters = new { KodParam = kod }; // Параметр для Dapper
+                              WHERE spa.annId = v.annId)";
+                //         parameters = new { KodParam = kod }; // Параметр для Dapper
             }
             else
             {
                 // Если all = true, условие по kodd_rt не добавляем
             }
 
-            using (var connection = _dbHelper.GetConnection()) 
+            using (var connection = _dbHelper.GetConnection())
             {
                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
-                return result.ToList(); 
-            } 
+                return result.ToList();
+            }
         }
 
         public async Task<List<MyDataANN>> GetArtNormDataByArticul(string artPrefix)
@@ -284,13 +284,13 @@ namespace SewingProduction.Services
             var parameters = new
             {
                 StatusArchive = (int)Status.Archive,
-                ArtPattern = artPrefix + "%" 
+                ArtPattern = artPrefix + "%"
             };
 
             using (var connection = _dbHelper.GetConnection())
             {
-                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
-                 return result.ToList();
+                var result = await connection.QueryAsync<MyDataANN>(query, parameters);
+                return result.ToList();
             }
         }
 
@@ -303,7 +303,7 @@ namespace SewingProduction.Services
         {
             string sql;
             var p = new DynamicParameters();
-            
+
             if (annId != null)        // поиск по AnnID
             {
                 sql = @"SELECT TOP (1) 
@@ -361,7 +361,7 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="annId">идентификатор РТ</param>
         /// <returns></returns>
-    public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
+        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
         {
             return await Task.Run(async () =>
             {
@@ -508,7 +508,7 @@ WHERE nr.annId = @annId";
 
                     return list.AsList();
                 }
-            }, ct); 
+            }, ct);
         }
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
@@ -600,7 +600,7 @@ WHERE nr.annId = @annId";
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure);
                 pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
-            } 
+            }
 
             // Объединение результатов
             foreach (var row in nzpList)

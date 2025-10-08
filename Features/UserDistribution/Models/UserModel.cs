@@ -1,12 +1,12 @@
-﻿using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Threading.Tasks;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.UserDistribution.Models
 {

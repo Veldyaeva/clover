@@ -1,5 +1,5 @@
-﻿using DevExpress.XtraReports.UI;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using DevExpress.XtraReports.UI;
 
 namespace SewingProduction.Report
 {

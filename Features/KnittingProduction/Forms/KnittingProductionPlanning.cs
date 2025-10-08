@@ -1,36 +1,21 @@
-﻿using Dapper;
-using DevExpress.Data;
-using DevExpress.Data.Filtering;
-using DevExpress.Utils;
-using DevExpress.Xpo.DB;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Core.Class.Settings;
-using SewingProduction.Core.Services;
-using SewingProduction.Extensions;
-using SewingProduction.Features.CuttingProduction.Forms;
-using SewingProduction.Features.KnittingProduction.Forms;
-using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Features.KnittingProduction.Services;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dapper;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Columns;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.Services;
+using SewingProduction.Extensions;
+using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.KnittingProduction.Services;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -88,11 +73,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _bulkHelper = new BulkHelper();
             _prorabotkiService = new ProrabotkiService(_dbHelper);
             _matrixService = new MatrixService(_dbHelper);
-            
+
             Form mainForm = Application.OpenForms["SpMainForm"];
             MenuStrip mainMenu = mainForm.MainMenuStrip;
             _formManager = new FormManager(mainForm, mainMenu, _user);
-            
+
             ThemeManager.UpdateTheme(this);
         }
 

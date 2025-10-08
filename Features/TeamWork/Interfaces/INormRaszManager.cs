@@ -1,7 +1,7 @@
-﻿using SewingProduction.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using SewingProduction.Models;
 
 namespace SewingProduction.Interfaces
 {

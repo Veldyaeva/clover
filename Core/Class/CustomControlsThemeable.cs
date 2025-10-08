@@ -1,29 +1,13 @@
-
-using DevExpress.Utils.Menu;
-using DevExpress.XtraGrid;
-using DevExpress.XtraLayout;
-using DevExpress.XtraLayout.Utils;
-using DevExpress.XtraReports.Native;
-using SewingProduction;
-using SewingProduction.Core.Class;
-using SewingProduction.Core.Extensions;
-using SewingProduction.Features.UserDistribution.Class;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.form.TeamWork.Interfaces;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DevExpress.LookAndFeel.DXSkinColors;
+using DevExpress.XtraLayout;
+using DevExpress.XtraLayout.Utils;
+using SewingProduction.Core.Extensions;
+using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction
 {
@@ -230,7 +214,7 @@ namespace SewingProduction
     }
 
 
-   
+
 
     public class CustomCheckBox : CheckBox, IThemeable, IThemeableControl
     {
@@ -540,7 +524,7 @@ namespace SewingProduction
             }
         }
     }
-    
+
     public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
