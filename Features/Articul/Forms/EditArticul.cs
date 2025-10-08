@@ -2,7 +2,6 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
-using DevExpress.Diagram.Core.Shapes;
 using SewingProduction.Core.Models;
 using SewingProduction.Helpers;
 
@@ -397,7 +396,7 @@ namespace SewingProduction.Features.Articul
                     customTextBoxKod.Text = _artNewDataService.GetFreeKod(nextKod).ToString("D8");
                 }
                 else
-                { 
+                {
                     nextKod = Convert.ToInt32(customTextBoxKod.Text);
                     do
                         nextKod++;

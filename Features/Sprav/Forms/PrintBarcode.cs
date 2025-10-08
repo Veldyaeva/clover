@@ -1,10 +1,10 @@
-﻿using DevExpress.XtraReports.UI;
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
+using DevExpress.XtraReports.UI;
 using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
-using System;
-using System.Data;
-using System.Windows.Forms;
 
 namespace SewingProduction.form
 {

@@ -1,32 +1,24 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
-using DevExpress.Data.Internal;
-using DevExpress.Office.Utils;
-using DevExpress.XtraGrid.Views.Grid;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
 using SewingProduction.Extensions;
-using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Forms;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
-using SewingProduction.Features.Sprav;
-using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Help.Form;
 using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
 
@@ -43,7 +35,7 @@ namespace SewingProduction.Features.Articul
         private readonly ILogger _logger = new FileLogger();
         //все поля таблицы Артикул
         private SpArticulPreviewModel _articulByKod;
-        
+
 
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
@@ -57,7 +49,7 @@ namespace SewingProduction.Features.Articul
 
 
         private List<SpArticulKomplSostModel> _articulKomplSostList;
-        private List<spArticulNaborSostav> _articulNaborSostList;
+        private List<SpArticulNaborSostav> _articulNaborSostList;
 
         //private BindingSource _articulBindingSource;
         //private BindingSource _komplSostBindingSource;
@@ -559,7 +551,7 @@ namespace SewingProduction.Features.Articul
             }
         }
 
-        private async void  sButtodDeleteKod_Click(object sender, EventArgs e)
+        private async void sButtodDeleteKod_Click(object sender, EventArgs e)
         {
             try
             {
@@ -578,7 +570,7 @@ namespace SewingProduction.Features.Articul
                         return;
                     }
                     //удаление кода 
-                    
+
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
                     _artPreview.Remove(cuRow);
@@ -594,7 +586,16 @@ namespace SewingProduction.Features.Articul
 
                 await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
             }
-            
+
+        }
+
+        private void customButton3_Click(object sender, EventArgs e)
+        {
+            var kodObj = (bsArt.Current as ArticulModel).Kod;
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new EditNaborSostav(User, kodObj.ToString()));
+            }
         }
     }
 }

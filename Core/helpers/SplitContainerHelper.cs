@@ -1,7 +1,7 @@
-using DevExpress.XtraEditors;
 using System;
 using System.IO;
 using System.Xml;
+using DevExpress.XtraEditors;
 
 namespace SewingProduction.Helpers
 {

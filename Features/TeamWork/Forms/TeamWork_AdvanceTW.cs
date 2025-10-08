@@ -1,20 +1,7 @@
-using Dapper;
-using DevExpress.XtraEditors;
-using DevExpress.XtraBars.Docking2010;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Features.TeamWork.Helpers;
-using SewingProduction.form.TeamWork.Forms;
-using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
-using SewingProduction.Models;
-using SewingProduction.Services;
-using SewingProduction.Features.TeamWork.Interfaces;
-using SewingProduction.Features.TeamWork.Services;
-using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -23,12 +10,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dapper;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Interfaces;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.form.TeamWork.Forms;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
+using SewingProduction.Models;
+using SewingProduction.Services;
 using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 using SewingProduction.Features.TeamWork.Operations;
 using System.Collections.Concurrent;
 using System.Reflection;
+using DevExpress.XtraBars.Docking2010;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -205,16 +205,57 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                     }
 
-                    // AnnId
+                   // Устанавливаем новый AnnId
                     cache.AnnId = type.GetProperty("AnnId", flags) ?? type.GetProperty("annId", flags);
 
-                    // Flags
+                   // Устанавливаем флаги
                     cache.IsNew = type.GetProperty("IsNew", flags);
                     cache.IsModified = type.GetProperty("IsModified", flags);
 
                     return cache;
                 });
             }
+
+//            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
+//        where T : ICloneable
+//            {
+//                var list = new List<T>();
+//                foreach (var item in source)
+//                {
+//                    var clone = (T)item.Clone();
+
+//                    // Принудительно сбрасываем ID в 0
+//                    var idProperty = typeof(T).GetProperty(idFieldName);
+//                    if (idProperty != null)
+//                    {
+//                        idProperty.SetValue(clone, 0);
+//                    }
+//                    else
+//                    {
+//                        // Если свойство не найдено через рефлексию, пробуем альтернативные имена
+//                        var alternativeNames = new[] { "nrID", "id", "nkId", "NrID", "Id", "NkId" };
+//                        foreach (var altName in alternativeNames)
+//                        {
+//                            var altProperty = typeof(T).GetProperty(altName);
+//                            if (altProperty != null)
+//                            {
+//                                altProperty.SetValue(clone, 0);
+//                                break;
+//                            }
+//                        }
+//                    }
+
+//<<<<<<< HEAD
+//                    // AnnId
+//                    cache.AnnId = type.GetProperty("AnnId", flags) ?? type.GetProperty("annId", flags);
+
+//                    // Flags
+//                    cache.IsNew = type.GetProperty("IsNew", flags);
+//                    cache.IsModified = type.GetProperty("IsModified", flags);
+
+//                    return cache;
+//                });
+//            }
 
             public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
         where T : ICloneable
@@ -1971,6 +2012,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var rowErr = errors.FirstOrDefault(msg => msg.Contains($" {row.N}.{row.N1} ") || msg.EndsWith($" {row.N}.{row.N1}") || msg.Contains($"{row.N}.{row.N1}"));
                     e.Valid = false;
                     e.ErrorText = rowErr ?? string.Join("; ", errors);
+                    _uiService?.ShowStatus(e.ErrorText);
+
                 }
             }
         }

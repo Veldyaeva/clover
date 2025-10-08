@@ -1,19 +1,11 @@
-﻿using Dapper;
-using DevExpress.CodeParser;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.Mvvm.Native;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Dapper;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Z.Dapper;
-using DataTable = System.Data.DataTable;
 
 namespace SewingProduction.Features.CardByNom.Services
 {
@@ -41,7 +33,7 @@ namespace SewingProduction.Features.CardByNom.Services
         #endregion
 
         #region
-        
+
         public async Task<List<SockZadanyInfo>> GetSockKnitZadanyInfo(string nomZad)
         {
             try
@@ -69,7 +61,7 @@ namespace SewingProduction.Features.CardByNom.Services
                 using (var connection = _dbHelper.GetConnection())
                 {
                     string query = $"exec GetKnitZadanyBySmen_view @xNomZad = '{nomZad}'";
-                    var result = await connection.QueryAsync<SockZadanySmenList>(query, new Dictionary<string, object> {  });
+                    var result = await connection.QueryAsync<SockZadanySmenList>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
             }
@@ -86,7 +78,7 @@ namespace SewingProduction.Features.CardByNom.Services
                 using (var connection = _dbHelper.GetConnection())
                 {
                     string query = $"select * from KnitMashineServiceByNomZad where kzPszNom = '{nomZad}'";
-                    var result = await connection.QueryAsync<SockServiceList>(query, new Dictionary<string, object> {  });
+                    var result = await connection.QueryAsync<SockServiceList>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
             }

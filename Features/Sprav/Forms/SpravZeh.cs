@@ -1,12 +1,12 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {

@@ -1,11 +1,11 @@
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Models;
-using SewingProduction.Services;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Models;
+using SewingProduction.Services;
 
 namespace SewingProduction.Helpers
 {

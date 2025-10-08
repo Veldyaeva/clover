@@ -1,11 +1,11 @@
-﻿using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.Sprav
 {
@@ -41,7 +41,7 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task ArhivTarifAsync(int pcID)
         {
-            await _dbService.UpdateFieldAsync("proizv_constants", "arhiv",1,"pc_id", pcID);
+            await _dbService.UpdateFieldAsync("proizv_constants", "arhiv", 1, "pc_id", pcID);
         }
         public async Task<List<TarifModelHistory>> LoadHistoryAsync(int pcid)
         {

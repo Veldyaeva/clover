@@ -1,5 +1,5 @@
-using DevExpress.XtraLayout;
 using System;
+using DevExpress.XtraLayout;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -21,7 +21,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             _layoutGroup = layoutGroup ?? throw new ArgumentNullException(nameof(layoutGroup));
             _buttonTag = buttonTag ?? throw new ArgumentNullException(nameof(buttonTag));
-            
+
             InitializeButton();
         }
 
@@ -45,7 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 foreach (var button in layoutGroup.CustomHeaderButtons)
                 {
-                    if (button is DevExpress.XtraEditors.ButtonPanel.BaseButton baseButton && 
+                    if (button is DevExpress.XtraEditors.ButtonPanel.BaseButton baseButton &&
                         baseButton.Tag?.ToString() == tag)
                     {
                         return baseButton;
@@ -61,8 +61,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         public bool Enabled
         {
             get { return _button?.Enabled ?? false; }
-            set 
-            { 
+            set
+            {
                 if (_button != null)
                 {
                     _button.Enabled = value;
@@ -76,8 +76,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         public bool Visible
         {
             get { return _button?.Visible ?? false; }
-            set 
-            { 
+            set
+            {
                 if (_button != null)
                 {
                     _button.Visible = value;
@@ -128,8 +128,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         public string Text
         {
             get { return _button?.Caption ?? string.Empty; }
-            set 
-            { 
+            set
+            {
                 if (_button != null)
                 {
                     _button.Caption = value;
