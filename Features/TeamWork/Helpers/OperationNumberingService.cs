@@ -8,26 +8,29 @@ namespace SewingProduction.Features.TeamWork.Helpers
 	{
 		public static void RecalculateAllOperationNumbers(IList<NormRasz> items)
 		{
-			if (items == null || items.Count == 0) return;
-			var grouped = items
-				.GroupBy(r => r.N)
-				.OrderBy(g => g.Key)
-				.ToList();
-			int currentN = 1;
-			foreach (var group in grouped)
-			{
-				var operations = group.OrderBy(r => r.N1).ToList();
-				for (int i = 0; i < operations.Count; i++)
+				if (items == null || items.Count == 0) return;
+				// Не трогаем технические/служебные операции с N1 >= 100
+				var normal = items.Where(r => r.N1 < 100).ToList();
+				if (normal.Count == 0) return;
+				var grouped = normal
+					.GroupBy(r => r.N)
+					.OrderBy(g => g.Key)
+					.ToList();
+				int currentN = 1;
+				foreach (var group in grouped)
 				{
-					var op = operations[i];
-					int oldN = op.N;
-					int oldN1 = op.N1;
-					op.N = currentN;
-					op.N1 = operations.Count == 1 ? 0 : i + 1;
-					if (!op.IsNew && (op.N != oldN || op.N1 != oldN1)) op.IsModified = true;
+					var operations = group.OrderBy(r => r.N1).ToList();
+					for (int i = 0; i < operations.Count; i++)
+					{
+						var op = operations[i];
+						int oldN = op.N;
+						int oldN1 = op.N1;
+						op.N = currentN;
+						op.N1 = operations.Count == 1 ? 0 : i + 1;
+						if (!op.IsNew && (op.N != oldN || op.N1 != oldN1)) op.IsModified = true;
+					}
+					currentN++;
 				}
-				currentN++;
-			}
 		}
 
 		public static void MoveBlockWithinSameGroup(IList<NormRasz> items, IList<NormRasz> block, NormRasz target)

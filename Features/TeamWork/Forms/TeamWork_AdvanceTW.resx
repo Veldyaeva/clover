@@ -418,6 +418,12 @@
   <data name="&gt;&gt;gridViewKont.Type" xml:space="preserve">
     <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
+  <data name="&gt;&gt;gridColumn20.Name" xml:space="preserve">
+    <value>gridColumn20</value>
+  </data>
+  <data name="&gt;&gt;gridColumn20.Type" xml:space="preserve">
+    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
   <data name="&gt;&gt;gridColumn19.Name" xml:space="preserve">
     <value>gridColumn19</value>
   </data>
@@ -428,12 +434,6 @@
     <value>gridColumn23</value>
   </data>
   <data name="&gt;&gt;gridColumn23.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;gridColumn20.Name" xml:space="preserve">
-    <value>gridColumn20</value>
-  </data>
-  <data name="&gt;&gt;gridColumn20.Type" xml:space="preserve">
     <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;gridColumn21.Name" xml:space="preserve">
@@ -1008,7 +1008,7 @@
     <value>Combo</value>
   </data>
   <data name="designerComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 20</value>
+    <value>322, 20</value>
   </data>
   <data name="designerComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1035,7 +1035,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxReco.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 69</value>
+    <value>322, 69</value>
   </data>
   <data name="textBoxReco.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1071,7 +1071,7 @@
     <value>Combo</value>
   </data>
   <data name="constructorComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 20</value>
+    <value>322, 20</value>
   </data>
   <data name="constructorComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1101,7 +1101,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="secTimeTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 20</value>
+    <value>300, 20</value>
   </data>
   <data name="secTimeTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1110,7 +1110,7 @@
     <value>secTimeTextBox</value>
   </data>
   <data name="&gt;&gt;secTimeTextBox.Type" xml:space="preserve">
-    <value>SewingProduction.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
+    <value>SewingProduction.Core.Class.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;secTimeTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel3layoutControl1ConvertedLayout</value>
@@ -1197,7 +1197,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 20</value>
+    <value>322, 20</value>
   </data>
   <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1206,7 +1206,7 @@
     <value>nameTextBox</value>
   </data>
   <data name="&gt;&gt;nameTextBox.Type" xml:space="preserve">
-    <value>SewingProduction.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
+    <value>SewingProduction.Core.Class.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;nameTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel3layoutControl1ConvertedLayout</value>
@@ -1224,7 +1224,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxKomment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 77</value>
+    <value>322, 77</value>
   </data>
   <data name="textBoxKomment.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1299,7 +1299,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="modelTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 20</value>
+    <value>322, 20</value>
   </data>
   <data name="modelTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1308,7 +1308,7 @@
     <value>modelTextBox</value>
   </data>
   <data name="&gt;&gt;modelTextBox.Type" xml:space="preserve">
-    <value>SewingProduction.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
+    <value>SewingProduction.Core.Class.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;modelTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel3layoutControl1ConvertedLayout</value>
@@ -1320,10 +1320,10 @@
     <value>TopLeft</value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 600</value>
+    <value>349, 600</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>459, 289</value>
+    <value>452, 289</value>
   </data>
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>Zoom</value>
@@ -1455,7 +1455,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="groupTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 20</value>
+    <value>322, 20</value>
   </data>
   <data name="groupTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1464,7 +1464,7 @@
     <value>groupTextBox</value>
   </data>
   <data name="&gt;&gt;groupTextBox.Type" xml:space="preserve">
-    <value>SewingProduction.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
+    <value>SewingProduction.Core.Class.CustomTextBox, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;groupTextBox.Parent" xml:space="preserve">
     <value>tableLayoutPanel3layoutControl1ConvertedLayout</value>
@@ -1485,7 +1485,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="dateCreate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 23</value>
+    <value>322, 23</value>
   </data>
   <data name="dateCreate.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1529,7 +1529,22 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>805, 803</value>
+    <value>815, 803</value>
+  </data>
+  <data name="gridColumn20.Caption" xml:space="preserve">
+    <value>наименование операции комплектовки</value>
+  </data>
+  <data name="gridColumn20.ImageOptions.ImageKey" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="gridColumn20.Visible" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="gridColumn20.VisibleIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="gridColumn20.Width" type="System.Int32, mscorlib">
+    <value>462</value>
   </data>
   <data name="gridColumn19.Caption" xml:space="preserve">
     <value>№ оп</value>
@@ -1560,21 +1575,6 @@
   </data>
   <data name="gridColumn23.Width" type="System.Int32, mscorlib">
     <value>57</value>
-  </data>
-  <data name="gridColumn20.Caption" xml:space="preserve">
-    <value>наименование операции комплектовки</value>
-  </data>
-  <data name="gridColumn20.ImageOptions.ImageKey" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="gridColumn20.Visible" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="gridColumn20.VisibleIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="gridColumn20.Width" type="System.Int32, mscorlib">
-    <value>462</value>
   </data>
   <data name="gridColumn21.Caption" xml:space="preserve">
     <value>сек</value>
@@ -1628,7 +1628,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlKont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 86</value>
+    <value>689, 86</value>
   </data>
   <data name="gridControlKont.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1670,7 +1670,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlRasz.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 51</value>
+    <value>349, 51</value>
   </data>
   <data name="gridViewRasz.Appearance.FocusedRow.Font" type="System.Drawing.Font, System.Drawing">
     <value>Tahoma, 8.25pt, style=Bold</value>
@@ -1973,7 +1973,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1172, 535</value>
+    <value>1155, 535</value>
   </data>
   <data name="gridControlRasz.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2015,7 +2015,7 @@
     <value>TopLeft</value>
   </data>
   <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>805, 600</value>
+    <value>815, 600</value>
   </data>
   <data name="gridColumn9.ImageOptions.ImageKey" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -2168,7 +2168,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="gridControlRaskr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>699, 189</value>
+    <value>689, 189</value>
   </data>
   <data name="gridControlRaskr.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2228,7 +2228,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="textBoxBuffer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 277</value>
+    <value>322, 277</value>
   </data>
   <data name="textBoxBuffer.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -2261,7 +2261,7 @@
     <value>4, 3, 4, 3</value>
   </data>
   <data name="buffer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 30</value>
+    <value>322, 30</value>
   </data>
   <data name="buffer.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2375,7 +2375,7 @@
     <value />
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons" xml:space="preserve">
-    <value>Сбросить</value>
+    <value>Отменить</value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons1" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2447,7 +2447,7 @@
     <value>-1</value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons24" xml:space="preserve">
-    <value> </value>
+    <value> Сохранить и закрыть</value>
   </data>
   <data name="layoutControlGroup1.CustomHeaderButtons25" type="System.Boolean, mscorlib">
     <value>True</value>

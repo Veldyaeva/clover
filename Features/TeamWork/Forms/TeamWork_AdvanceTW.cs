@@ -471,9 +471,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Пробуем взять PropertyInfo напрямую из словаря Control->PropertyInfo
             if (!_controlToArtNormProperty.TryGetValue(control, out var propInfo) || propInfo == null)
             {
-            string propertyName = GetPropertyNameFromControl(control);
-            if (string.IsNullOrEmpty(propertyName))
-                return;
+                string propertyName = GetPropertyNameFromControl(control);
+                if (string.IsNullOrEmpty(propertyName))
+                    return;
                 var type = typeof(ArtNormN);
                 propInfo = _artNormNPropCache.GetOrAdd(propertyName, name => type.GetProperty(name));
                 if (propInfo == null) return;
@@ -1201,10 +1201,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await this.InvokeAsync(() =>
                 {
-                if (gridViewKont != null && gridViewKont.Columns["Text"] != null)
-                {
-                    gridViewKont.Columns["Text"].OptionsColumn.AllowEdit = false;
-                }
+                    if (gridViewKont != null && gridViewKont.Columns["Text"] != null)
+                    {
+                        gridViewKont.Columns["Text"].OptionsColumn.AllowEdit = false;
+                    }
                 });
 
                 //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
@@ -1323,11 +1323,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // 1) Проставляем код оборудования
                         gridViewRasz.SetFocusedRowCellValue("KodOb", newKodOb);
 
-                        // 2) Проставляем текст оборудования в Obor
+                        // 2) Проставляем текст оборудования в Obor и TextOb
                         var obItem = oborudShvList?.FirstOrDefault(x => x.kod_ob == newKodOb);
                         if (obItem != null)
                         {
                             gridViewRasz.SetFocusedRowCellValue("Obor", obItem.text_ob);
+                            gridViewRasz.SetFocusedRowCellValue("TextOb", obItem.text_ob);
                         }
 
                         // 3) Подтягиваем spec
@@ -1351,6 +1352,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             // теперь безопасно использовать kodProizv
                             UpdateFilteredPodrVyaz(kodProizv);
+
+                            // Проставим текст производства
+                            var prodItem = kodProizvList?.FirstOrDefault(x => x.kod_proizv == kodProizv);
+                            if (prodItem != null)
+                            {
+                                gridViewRasz.SetFocusedRowCellValue("TextProizv", prodItem.text_proizv);
+                            }
                         }
                     }
                 };
@@ -1377,6 +1385,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                             editor.Properties.PopulateColumns();
 
                             Console.WriteLine($"Фильтрация выполнена: kod_proizv={kodProizv}, filtered={filtered.Count}");
+                        }
+                    }
+                };
+
+                // Устанавливаем текст вязального подразделения при выборе
+                repositoryItemLookUpEdit_podrVyaz.EditValueChanged += (s, e) =>
+                {
+                    if (gridViewRasz.FocusedRowHandle < 0)
+                        return;
+
+                    if (s is LookUpEdit editor && editor.EditValue != null && int.TryParse(editor.EditValue.ToString(), out int kodVyaz))
+                    {
+                        var vyazItem = podrVyazList?.FirstOrDefault(x => x.kod_vyaz == kodVyaz);
+                        if (vyazItem != null)
+                        {
+                            gridViewRasz.SetFocusedRowCellValue("TextVyaz", vyazItem.text_vyaz);
                         }
                     }
                 };
@@ -1534,7 +1558,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                     catch { }
                     try { _raszOpsController?.Detach(); } catch { }
-                    try { _presenter?.Detach(); } catch { }
+                    try { _presenter?.Detach(); }
+                    catch { }
                     finally
                     {
                         // Сброс внутренних флагов и состояния DnD/последнего выбора
@@ -2107,7 +2132,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (target == null || (draggedList != null && draggedList.Contains(target)))
                             e.Effect = DragDropEffects.None;
                         else
-                    e.Effect = DragDropEffects.Move;
+                            e.Effect = DragDropEffects.Move;
                     }
                 }
                 else if (gridViewRasz.IsGroupRow(hit.RowHandle))
@@ -2124,7 +2149,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (groupValue == null || !int.TryParse(groupValue.ToString(), out _))
                             e.Effect = DragDropEffects.None;
                         else
-                    e.Effect = DragDropEffects.Move;
+                            e.Effect = DragDropEffects.Move;
                     }
                 }
                 else
@@ -2755,7 +2780,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (_normKontList.Count >= 2)
                 {
                     e.Cancel = true;
-                    MessageBox.Show("На одно РТ можно добавить максимум 2 строки контроля.", "Ограничение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("На одно РТ можно добавить максимум 2 строки комплектовки", "Ограничение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -3065,8 +3090,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (itemsToInsert.Any())
             {
                 // Установим annId через кэш отражений (ускорение массовых вставок)
-                    var annIdProp = typeof(T).GetProperty("annId");
-                    if (annIdProp != null)
+                var annIdProp = typeof(T).GetProperty("annId");
+                if (annIdProp != null)
                 {
                     foreach (var item in itemsToInsert)
                     {
@@ -3178,10 +3203,10 @@ namespace SewingProduction.Features.TeamWork.Forms
      MessageBoxIcon.Question);
 
                     bool clearExisting = result == DialogResult.Yes;
-                        if (_normRaszList == null || _normRaskList == null || _normKontList == null)
-                        {
-                            await InitializeBindingsAsync();
-                        }
+                    if (_normRaszList == null || _normRaskList == null || _normKontList == null)
+                    {
+                        await InitializeBindingsAsync();
+                    }
 
                     var report = await _bufferImportService.ImportAsync(
                         bufferIdsToUse,
@@ -3505,6 +3530,74 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             _gridHelper.popUpMenuCopy(sender, e);
         }
+        // Поле для хранения делегата, чтобы корректно отписываться
+        private EventHandler _kontEditorValueChanged;
+
+        // 1) Редактор показан — подписываемся на изменения значения
+        private void gridViewKont_ShownEditor(object sender, EventArgs e)
+        {
+            var view = (GridView)sender;
+            var editor = view.ActiveEditor;
+            if (editor == null) return;
+
+            _kontEditorValueChanged = (s, e2) =>
+            {
+                // Коммитим значение из редактора в GridView немедленно
+                view.PostEditor();
+
+                // Если нужно сразу запушить в BindingList и вызвать ValidateRow:
+                // view.UpdateCurrentRow();
+            };
+            editor.EditValueChanged += _kontEditorValueChanged;
+        }
+        // 2) Редактор скрыт — обязательно отписываемся
+        private void GridViewKont_HiddenEditor(object sender, EventArgs e)
+        {
+            var view = (GridView)sender;
+            var editor = view.ActiveEditor;
+            if (editor != null && _kontEditorValueChanged != null)
+            {
+                editor.EditValueChanged -= _kontEditorValueChanged;
+                _kontEditorValueChanged = null;
+            }
+        }
+
+        // 3) Значение в ячейке изменено (уже после PostEditor)
+        private void GridViewKont_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (_isInitialLoading) return; // не реагировать при начальной загрузке
+            var view = (GridView)sender;
+
+            // Берём модель строки
+            var kont = view.GetRow(e.RowHandle) as NormKont;
+            if (kont == null) return;
+
+            // Привязываем AnnId на всякий случай к текущему РТ
+            kont.AnnId = _newAnnId;
+
+            // Флаг изменения: если строка не новая — помечаем изменённой
+            if (!kont.IsNew)
+                kont.IsModified = true;   // или Updated = true, если используется отдельный флаг
+
+            // При необходимости — явное присваивание в свойство, если биндинг особый:
+            // if (e.Column.FieldName == nameof(NormKont.SomeField)) kont.SomeField = (тип)e.Value;
+
+            // Точечное обновление источника (без полного ResetBindings)
+            if (_normKontBindingSource != null)
+            {
+                int position = _normKontBindingSource.IndexOf(kont);
+                if (position >= 0)
+                    _normKontBindingSource.ResetItem(position);
+            }
+            else
+            {
+                view.RefreshRow(e.RowHandle);
+            }
+
+            // Если есть завязки на пересчёты/подсветку — можно обновить строку стиля
+            // view.UpdateCurrentRow(); // только если нужен немедленный ValidateRow/DataSource push
+        }
+
 
         /// <summary>
         /// Автоматически добавляет две стандартные строки в norm_kont для новых РТ
@@ -3514,12 +3607,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
+                if (_normKontList == null) return;
+
                 string choice1 = "Пронумеровать деталь";
                 string choice2 = "Комплектация пачки";
 
-                // Проверяем, что строки еще не добавлены
-                bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
-                bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
+                // Проверяем, что строки еще не добавлены (нормализуем текст)
+                bool hasChoice1 = _normKontList.Any(nk => string.Equals((nk.text ?? string.Empty).Trim(), choice1, StringComparison.OrdinalIgnoreCase));
+                bool hasChoice2 = _normKontList.Any(nk => string.Equals((nk.text ?? string.Empty).Trim(), choice2, StringComparison.OrdinalIgnoreCase));
 
                 if (!hasChoice1)
                 {
