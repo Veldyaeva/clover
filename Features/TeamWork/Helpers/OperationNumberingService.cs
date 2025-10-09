@@ -6,32 +6,51 @@ namespace SewingProduction.Features.TeamWork.Helpers
 {
 	public static class OperationNumberingService
 	{
-		public static void RecalculateAllOperationNumbers(IList<NormRasz> items)
-		{
-				if (items == null || items.Count == 0) return;
-				// Не трогаем технические/служебные операции с N1 >= 100
-				var normal = items.Where(r => r.N1 < 100).ToList();
-				if (normal.Count == 0) return;
-				var grouped = normal
-					.GroupBy(r => r.N)
-					.OrderBy(g => g.Key)
-					.ToList();
-				int currentN = 1;
-				foreach (var group in grouped)
-				{
-					var operations = group.OrderBy(r => r.N1).ToList();
-					for (int i = 0; i < operations.Count; i++)
-					{
-						var op = operations[i];
-						int oldN = op.N;
-						int oldN1 = op.N1;
-						op.N = currentN;
-						op.N1 = operations.Count == 1 ? 0 : i + 1;
-						if (!op.IsNew && (op.N != oldN || op.N1 != oldN1)) op.IsModified = true;
-					}
-					currentN++;
-				}
-		}
+        public static void RecalculateAllOperationNumbers(IList<NormRasz> items)
+        {
+            if (items == null || items.Count == 0) return;
+
+            // Группируем по текущему N, учитывая ВСЕ элементы (включая N1 >= 100),
+            // чтобы пересчитать N для всей главы;
+            // при этом для элементов с N1 >= 100 не меняем N1, только N.
+            var groupedAll = items
+                .GroupBy(r => r.N)
+                .OrderBy(g => g.Key)
+                .ToList();
+
+            int currentN = 1;
+            foreach (var group in groupedAll)
+            {
+                // Обычные операции (N1 < 100) — перенумеровываем внутри главы
+                var normal = group.Where(r => r.N1 < 100).OrderBy(r => r.N1).ToList();
+                // Специальные операции (N1 >= 100) — только обновляем N, N1 оставляем как есть
+                var special = group.Where(r => r.N1 >= 100).ToList();
+
+                // 1) Проставляем N и N1 для обычных операций
+                for (int i = 0; i < normal.Count; i++)
+                {
+                    var op = normal[i];
+                    int oldN = op.N;
+                    int oldN1 = op.N1;
+                    op.N = currentN;
+                    op.N1 = normal.Count == 1 ? 0 : i + 1;
+                    if (!op.IsNew && (op.N != oldN || op.N1 != oldN1)) op.IsModified = true;
+                }
+
+                // 2) Для специальных — меняем только N
+                foreach (var op in special)
+                {
+                    int oldN = op.N;
+                    if (op.N != currentN)
+                    {
+                        op.N = currentN;
+                        if (!op.IsNew && op.N != oldN) op.IsModified = true;
+                    }
+                }
+
+                currentN++;
+            }
+        }
 
         public static void MoveBlockWithinSameGroup(IList<NormRasz> items, IList<NormRasz> block, NormRasz target)
         {

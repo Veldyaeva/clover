@@ -44,10 +44,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             _annId = annId;
             ThemeManager.UpdateTheme(this);
 
-            // Режим редактирования через EditForm и подписки
-            gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-            gridView1.EditFormShowing += gridView1_EditFormShowing;
-            gridView1.KeyDown += gridView1_KeyDown;
+            //// Режим редактирования через EditForm и подписки
+            //gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+            //gridView1.EditFormShowing += gridView1_EditFormShowing;
         }
 
         private async void NormOperNew_Load(object sender, EventArgs e)
@@ -217,74 +216,74 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void gridView1_EditFormShowing(object sender, EditFormShowingEventArgs e)
-        {
-            var view = sender as GridView;
-            if (view == null) return;
+        //private void gridView1_EditFormShowing(object sender, EditFormShowingEventArgs e)
+        //{
+        //    var view = sender as GridView;
+        //    if (view == null) return;
 
-            // Перехватываем попытку добавления через NewItemRow и открываем EditForm на новой строке
-            if (view.IsNewItemRow(e.RowHandle))
-            {
-                e.Allow = false;
-                try { AddNewRowToGrid(); } catch { }
-            }
-        }
+        //    // Перехватываем попытку добавления через NewItemRow и открываем EditForm на новой строке
+        //    if (view.IsNewItemRow(e.RowHandle))
+        //    {
+        //        e.Allow = false;
+        //        try { AddNewRowToGrid(); } catch { }
+        //    }
+        //}
 
-        private void gridView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            try
-            {
-                if (e.KeyCode == Keys.Add || e.KeyCode == Keys.Oemplus)
-                {
-                    AddNewRowToGrid();
-                    e.Handled = true;
-                }
-            }
-            catch { }
-        }
-        private void customAddButton_Click(object sender, EventArgs e)
-        {
-            try { AddNewRowToGrid(); }
-            catch { }
-        }
-        private void AddNewRowToGrid()
-        {
-            try
-            {
-                var dt = customGridControl1?.DataSource as DataTable;
-                if (dt == null) return;
+        //private void gridView1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.KeyCode == Keys.Add || e.KeyCode == Keys.Oemplus)
+        //        {
+        //            AddNewRowToGrid();
+        //            e.Handled = true;
+        //        }
+        //    }
+        //    catch { }
+        //}
+        //private void customAddButton_Click(object sender, EventArgs e)
+        //{
+        //    try { AddNewRowToGrid(); }
+        //    catch { }
+        //}
+        //private void AddNewRowToGrid()
+        //{
+        //    try
+        //    {
+        //        var dt = customGridControl1?.DataSource as DataTable;
+        //        if (dt == null) return;
 
-                gridView1.BeginDataUpdate();
-                try
-                {
-                    var newRow = dt.NewRow();
-                    // Базовые значения по умолчанию
-                    if (dt.Columns.Contains("n1")) newRow["n1"] = 0;
-                    if (dt.Columns.Contains("sek")) newRow["sek"] = 0;
-                    if (dt.Columns.Contains("razryd")) newRow["razryd"] = 0;
+        //        gridView1.BeginDataUpdate();
+        //        try
+        //        {
+        //            var newRow = dt.NewRow();
+        //            Базовые значения по умолчанию
+        //            if (dt.Columns.Contains("n1")) newRow["n1"] = 0;
+        //            if (dt.Columns.Contains("sek")) newRow["sek"] = 0;
+        //            if (dt.Columns.Contains("razryd")) newRow["razryd"] = 0;
 
-                    dt.Rows.Add(newRow);
-                }
-                finally
-                {
-                    gridView1.EndDataUpdate();
-                }
+        //            dt.Rows.Add(newRow);
+        //        }
+        //        finally
+        //        {
+        //            gridView1.EndDataUpdate();
+        //        }
 
-                // Фокус на новой строке и открытие EditForm
-                int newIndex = dt.Rows.Count - 1;
-                int handle = gridView1.GetRowHandle(newIndex);
-                if (gridView1.IsValidRowHandle(handle))
-                {
-                    gridView1.FocusedRowHandle = handle;
-                    gridView1.MakeRowVisible(handle);
-                    gridView1.ShowEditForm();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в NormOperNew");
-            }
-        }
+        //        Фокус на новой строке и открытие EditForm
+        //        int newIndex = dt.Rows.Count - 1;
+        //        int handle = gridView1.GetRowHandle(newIndex);
+        //        if (gridView1.IsValidRowHandle(handle))
+        //        {
+        //            gridView1.FocusedRowHandle = handle;
+        //            gridView1.MakeRowVisible(handle);
+        //            gridView1.ShowEditForm();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в NormOperNew");
+        //    }
+        //}
 
         private async void customOkButton1_Click(object sender, EventArgs e)
         {

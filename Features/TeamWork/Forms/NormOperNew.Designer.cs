@@ -332,7 +332,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customAddButton.TabIndex = 5;
             customAddButton.Text = "+";
             customAddButton.UseVisualStyleBackColor = false;
-            customAddButton.Click += customAddButton_Click;
+            // customAddButton.Click += customAddButton_Click;
             // 
             // searchControl1
             // 

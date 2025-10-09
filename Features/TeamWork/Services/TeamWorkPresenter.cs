@@ -36,6 +36,11 @@ namespace SewingProduction.Features.TeamWork.Services
         private SavePipeline _savePipeline;
         private SecondsAggregator _secondsAggregator;
 
+        //Делегаты для повторного использования логики формы без дублирования бизнес-кода здесь (тонкий presenter)
+        private readonly Func<bool, Task<bool>> _processSaveFunc;
+        private readonly Func<Task> _importFromBufferFunc;
+        private readonly Func<Task> _addOperationFunc;
+
         public TeamWorkPresenter(
             ITeamWorkView view,
             ILogger logger,
@@ -48,7 +53,10 @@ namespace SewingProduction.Features.TeamWork.Services
             BindingList<NormRask> rask,
             BindingList<NormKont> kont,
             BindingSource raszSource,
-            BindingSource annSource)
+            BindingSource annSource,
+            Func<bool, Task<bool>> processSave,
+            Func<Task> importFromBuffer,
+            Func<Task> addOperation)
         {
             _view = view;
             _logger = logger;
@@ -62,6 +70,9 @@ namespace SewingProduction.Features.TeamWork.Services
             _kont = kont;
             _raszSource = raszSource;
             _annSource = annSource;
+            _processSaveFunc = processSave;
+            _importFromBufferFunc = importFromBuffer;
+            _addOperationFunc = addOperation;
         }
 
         public async Task InitializeAsync()
@@ -110,24 +121,24 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public async Task SaveAsync(bool closeAfterSave)
         {
-            // Numbering should be recalculated before save to ensure consistency
-            try
+            if (_processSaveFunc != null)
             {
-                _view.AsControl.BeginInvoke((System.Windows.Forms.MethodInvoker)(() =>
-                {
-                    // The view (form) should expose a public method to recalc; if not, sorting refresh is a minimal safe op
-                    TWGridHelper.sortGridView(_raszView);
-                }));
+                await _processSaveFunc(closeAfterSave);
+                return;
             }
-            catch { }
-
-            // Actual save pipeline should be invoked from the form context where lists and deleted IDs are managed.
+            // Fallback: Убедиться, что данные в таблицах согласованы
+            // TODO: добавить логику сохранения данных остальных таблиц
+            try { TWGridHelper.sortGridView(_raszView); } catch { }
             await Task.CompletedTask;
         }
 
         public async Task ImportFromBufferAsync()
         {
-            // Delegate to BufferImportService; actual parameters (ids) are controlled by the view/state
+            if (_importFromBufferFunc != null)
+            {
+                await _importFromBufferFunc();
+                return;
+            }
             await Task.CompletedTask;
         }
 
@@ -160,7 +171,11 @@ namespace SewingProduction.Features.TeamWork.Services
 
         public async Task AddOperationAsync()
         {
-            // Placeholder: actual add flow requires selection dialog from the view
+            if (_addOperationFunc != null)
+            {
+                await _addOperationFunc();
+                return;
+            }
             await Task.CompletedTask;
         }
     }
