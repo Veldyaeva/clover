@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Dapper;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
@@ -24,6 +25,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
+        private static GridHelper _gridHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
         private readonly ProrabotkiService _prorabotkiService;
@@ -71,6 +73,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbService = new DbService(_dbHelper);
             _vyazService = new VyazService(_dbHelper);
             _bulkHelper = new BulkHelper();
+            _gridHelper = new GridHelper();
             _prorabotkiService = new ProrabotkiService(_dbHelper);
             _matrixService = new MatrixService(_dbHelper);
 
@@ -154,6 +157,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnVyazPlanKmlNumber.FieldName = "KmlNumber";
                 gridColumnVyazPlanPszkmPlanDateFrom.FieldName = "DateZapPlanFrom";
                 gridColumnVyazPlanPszkmPlanDateTo.FieldName = "DateZapPlanTo";
+
+                _gridHelper.AutoRowFilterConfig(gridViewVyazPlan as GridView, 1);
 
                 // 1. Настраиваем стандартный MultiSelect
                 gridViewVyazPlan.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор

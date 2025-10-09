@@ -1992,6 +1992,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var rowErr = errors.FirstOrDefault(msg => msg.Contains($" {row.N}.{row.N1} ") || msg.EndsWith($" {row.N}.{row.N1}") || msg.Contains($"{row.N}.{row.N1}"));
                     e.Valid = false;
                     e.ErrorText = rowErr ?? string.Join("; ", errors);
+                    _uiService?.ShowStatus(e.ErrorText);
+
                 }
             }
         }
