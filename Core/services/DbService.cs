@@ -1,8 +1,4 @@
-﻿using Dapper;
-using DevExpress.Mvvm.Native;
-using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +7,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using DevExpress.Mvvm.Native;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
 using Z.Dapper.Plus;
 
 namespace SewingProduction.Services

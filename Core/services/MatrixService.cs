@@ -1,12 +1,12 @@
-﻿using Dapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Dapper;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Core.Services
 {

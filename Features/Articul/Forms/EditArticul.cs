@@ -1,26 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Pdf.Native;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.Xpo.Logger.Transport;
-using DevExpress.XtraEditors;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using Org.BouncyCastle.Crypto;
 using SewingProduction.Core.Models;
-using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
 namespace SewingProduction.Features.Articul
 {
@@ -41,6 +24,16 @@ namespace SewingProduction.Features.Articul
             customTextBoxKod.Text = kodSQL;
             visibleSP(false);
             radioGroup1.SelectedIndex = kodArtSQL == null ? 0 : 2; // новый арт / копия
+
+            if (kodArtSQL == null) // режим добавления
+            {
+                radioGroup1.Properties.Items.RemoveAt(2);
+            }
+            else // режим копирования
+            {
+                radioGroup1.Visible = false;
+                this.Text = "Копирование артикула";
+            }
         }
 
         private void art_new2024_Load(object sender, EventArgs e) => comboAllTableItems();
@@ -84,7 +77,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxArt.Text = "";
             customTextBoxModel.Text = "";
             customTextBoxKodFurn.Text = "";
-            customTextBox1.Text = "";
+            customTextBoxNameFurn.Text = "";
             customTextBoxDlin.Text = "";
             customTextBoxTimePlet.Text = "";
             customTextBoxNormP.Text = "";
@@ -95,7 +88,7 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditRazm.EditValue = "";
             searchLookUpEditPrizn.EditValue = "";
             searchLookUpEditGost.Enabled = true;
-            searchLookUpEditGroup.Enabled = true;
+            searchLookUpEditGroup.Enabled = false;
         }
         // Видимость элиментов для "Новый артикул СП (шнуры,резинка)"
         private void visibleSP(bool boolShow)
@@ -110,7 +103,7 @@ namespace SewingProduction.Features.Articul
             customLabelM1.Visible = boolShow;
             customLabelM2.Visible = boolShow;
             customTextBoxKodFurn.Visible = boolShow;
-            customTextBox1.Visible = boolShow;
+            customTextBoxNameFurn.Visible = boolShow;
             customTextBoxDlin.Visible = boolShow;
             customTextBoxTimePlet.Visible = boolShow;
             customTextBoxNormP.Visible = boolShow;
@@ -120,12 +113,6 @@ namespace SewingProduction.Features.Articul
         // Загрузка комбобоксов
         private void comboAllTableItems()
         {
-            searchLookUpEditGost.Properties.DataSource = _artNewDataService.GetGostUst();
-            searchLookUpEditGost.Properties.DisplayMember = "Описание";
-
-            searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrup();
-            searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
-
             searchLookUpEditTm1.Properties.DataSource = _artNewDataService.GetViewTovarMarka();
             searchLookUpEditTm1.Properties.DisplayMember = "Наименование";
             searchLookUpEditTm1.Properties.ValueMember = "kle";
@@ -134,8 +121,14 @@ namespace SewingProduction.Features.Articul
             searchLookUpEditTm2.Properties.DisplayMember = "Наименование";
             searchLookUpEditTm2.Properties.ValueMember = "men_id";
 
-            searchLookUpEditRazm.Properties.DataSource = _artNewDataService.GetGostSvRazmerAndGostRazmer();
-            searchLookUpEditRazm.Properties.DisplayMember = "Размер";
+            searchLookUpEditGost.Properties.DataSource = _artNewDataService.GetGostUst();
+            searchLookUpEditGost.Properties.DisplayMember = "Описание";
+
+            //searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrup();
+            //searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
+
+            //searchLookUpEditRazm.Properties.DataSource = _artNewDataService.GetGostSvRazmerAndGostRazmer();
+            //searchLookUpEditRazm.Properties.DisplayMember = "Размер";
 
             searchLookUpEditPrizn.Properties.DataSource = _artNewDataService.GetTovarCatDynsign();
             searchLookUpEditPrizn.Properties.DisplayMember = "Признак";
@@ -144,6 +137,8 @@ namespace SewingProduction.Features.Articul
         {
             searchLookUpEditGost.Properties.ValueMember = "Ид";
             var idGost = searchLookUpEditGost.EditValue?.ToString();
+            searchLookUpEditGroup.Enabled = true;
+            searchLookUpEditRazm.Enabled = true;
             // группы
             searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrup(idGost);
             searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
@@ -253,25 +248,24 @@ namespace SewingProduction.Features.Articul
         {
             if (string.IsNullOrWhiteSpace(customTextBoxKod.Text))
             {
+                customTextBoxKod.ShowErrorIcon = true;
                 return ("Укажите код!");
             }
             int kod = _artNewDataService.GetArticulByKod(customTextBoxKod.Text);
             if (kod > 0)
-            {
                 return ("Такой код артикула уже есть!");
-            }
-            if (string.IsNullOrWhiteSpace(searchLookUpEditGost.Text) || searchLookUpEditGost.EditValue == null)
-            {
-                return ("Выберите гост!");
-            }
-            if (string.IsNullOrWhiteSpace(searchLookUpEditGroup.Text))
-            {
-                return ("Выберите группу!");
-            }
             if (string.IsNullOrWhiteSpace(customTextBoxArt.Text))
-            {
                 return ("Введите артикул!");
-            }
+            if (string.IsNullOrWhiteSpace(customTextBoxModel.Text))
+                return ("Введите модель!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditTm1.Text) || string.IsNullOrWhiteSpace(searchLookUpEditTm2.Text))
+                return ("Выберите ТМ!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditGost.Text) || searchLookUpEditGost.EditValue == null)
+                return ("Выберите гост!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditGroup.Text))
+                return ("Выберите группу!");
+            if (string.IsNullOrWhiteSpace(searchLookUpEditRazm.Text))
+                return ("Выберите размер!");
             return null;
         }
         string checkRuleRezinka()
@@ -319,6 +313,103 @@ namespace SewingProduction.Features.Articul
                 }
             }
         }
+
+        private void customTextBoxKod_TextChanged(object sender, EventArgs e)
+        {
+            if (customTextBoxKod.Text.Length != 8)
+            {
+                customTextBoxKod.ErrorMessage = "Код должен состоять ровно из 8 символов";
+                customTextBoxKod.ShowErrorIcon = true;
+            }
+            else
+            {
+                customTextBoxKod.ShowErrorIcon = false;
+            }
+        }
+
+        private async void customTextBoxKodFurn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)Keys.Enter) return;
+
+            string lkod = customTextBoxKodFurn.Text.Trim();
+            if (string.IsNullOrEmpty(lkod)) return;
+
+            try
+            {
+                var nameCord = await _artNewDataService.GetCordNameAsync(lkod);
+                if (nameCord == null)
+                {
+                    MessageBox.Show("Не найдено");
+                    return;
+                }
+
+                customTextBoxNameFurn.Text = nameCord.name_k;
+
+                string prefix = lkod.Substring(0, 2);
+                if (prefix == "02") // резинка
+                {
+                    customTextBoxDlin.Text = "1";
+                    searchLookUpEditPrizn.EditValue = 895; // резинка
+                }
+                else if (prefix == "03") // шнур
+                {
+                    var curLength = await _artNewDataService.GetCordLengthAsync(lkod);
+
+                    double cordLength = 1;
+                    if (curLength != null)
+                    {
+                        double likoef = 1;
+                        int cntId = curLength.cnt_id;
+                        if (cntId == 2) likoef = 100;   // см
+                        if (cntId == 3) likoef = 1000;  // мм
+
+                        if (double.TryParse(Convert.ToString(curLength.cfl_name), out double len) && len > 0)
+                            cordLength = len / likoef;
+                    }
+
+                    customTextBoxDlin.Text = cordLength.ToString("0.###");
+                    searchLookUpEditPrizn.EditValue = 886; // шнуры
+                }
+                else
+                {
+                    customTextBoxKodFurn.Text = "";
+                    MessageBox.Show("Введён неверный код! Код должен быть от резинки или шнура!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при обработке: " + ex.Message);
+            }
+        }
+
+        private void customButtonKod_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int nextKod = 0;
+                kodSQL = customTextBoxKod.Text;
+                if (string.IsNullOrWhiteSpace(kodSQL) ||
+                    !int.TryParse(kodSQL, out nextKod) ||
+                    customTextBoxKod.ShowErrorIcon == true)
+                {
+                    nextKod = 10000000;
+                    customTextBoxKod.Text = _artNewDataService.GetFreeKod(nextKod).ToString("D8");
+                }
+                else
+                {
+                    nextKod = Convert.ToInt32(customTextBoxKod.Text);
+                    do
+                        nextKod++;
+                    while (_artNewDataService.GetArticulByKod(nextKod.ToString("D8")) > 0);
+                    customTextBoxKod.Text = nextKod.ToString("D8");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при подборе кода: " + ex.Message);
+            }
+        }
+
     }
 
 }

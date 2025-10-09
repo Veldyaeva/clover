@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using DevExpress.CodeParser;
 using DevExpress.Data;
 using DevExpress.DataAccess.Sql;

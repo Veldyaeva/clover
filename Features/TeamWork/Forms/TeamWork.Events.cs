@@ -1,5 +1,14 @@
-﻿using DevExpress.Data.Filtering;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using DevExpress.Data.Filtering;
 using DevExpress.XtraBars.Customization;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
@@ -15,24 +24,10 @@ using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Report;
 using SewingProduction.Services;
-using SewingProduction.Services; // for TeamWorkBuffer
-using SewingProduction.Services;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
-    public partial class TeamWork 
+    public partial class TeamWork
     {
 
         /// <summary>
@@ -42,11 +37,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                
+
                 var view = sender as GridView;
                 if (view == null || e.FocusedRowHandle < 0)
                 {
-                    ButtonUnbindWd.Enabled = false; 
+                    ButtonUnbindWd.Enabled = false;
                     return;
                 }
 
@@ -54,20 +49,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var selectedRow = view.GetRow(e.FocusedRowHandle) as NZPByKoddRt;
                 if (selectedRow == null)
                 {
-                    ButtonUnbindWd.Enabled = false; 
+                    ButtonUnbindWd.Enabled = false;
                     await _logger.LogWarningAsync($"Не удалось получить объект NZPByKoddRt для строки {e.FocusedRowHandle}", "gridView5_FocusedRowChanged_Internal");
                     return;
                 }
 
                 int nzp = selectedRow.kolNZP;
-                int pzt = selectedRow.PZTCount; 
+                int pzt = selectedRow.PZTCount;
 
                 // Кнопка активна, если либо нет НЗП, либо нет PZT операций
                 ButtonUnbindWd.Enabled = (nzp <= 0 || pzt <= 0);
             }
             catch (Exception ex)
             {
-                ButtonUnbindWd.Enabled = false; 
+                ButtonUnbindWd.Enabled = false;
                 await _logger.LogErrorAsync(ex, "Ошибка при обработке смены строки в GridView5");
             }
         }
@@ -100,7 +95,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _isUnchecking = true;
                 try
                 {
-                    var dataSource = view.DataSource as IList<T>; 
+                    var dataSource = view.DataSource as IList<T>;
                     if (dataSource == null)
                     {
                         if (view.DataSource is BindingSource bs && bs.DataSource is IList<T> list)
@@ -128,7 +123,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 finally
                 {
                     // Сбрасываем флаг в любом случае
-                     _isUnchecking = false;
+                    _isUnchecking = false;
                 }
             }
             _hasUnsavedChanges = true;
@@ -171,10 +166,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-               await _logger.LogEventAsync("Начало копирования записей в буфер", "ButtonCopyWd_Click_Internal");
+                await _logger.LogEventAsync("Начало копирования записей в буфер", "ButtonCopyWd_Click_Internal");
                 // Проверяем текущий режим работы
                 bool isKitMode = toggleSwitchKit.IsOn;
-                
+
                 int[] selectedRows = ANNgridView.GetSelectedRows();
                 if (selectedRows == null || selectedRows.Length == 0)
                 {
@@ -183,7 +178,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogWarningAsync("Попытка копирования без выбора записей", "ButtonCopyWd_Click_Internal");
                     return;
                 }
-                
+
                 if (isKitMode)
                 {
                     // В режиме комплекта должно быть выбрано точно 2 записи
@@ -279,18 +274,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 bufferId = 0;
                 TeamWorkBuffer.ClearBuffer();
-                
+
                 // Показываем ошибку в statusLabel (если он существует)
                 if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
                 {
                     statusLabel.Text = $"Ошибка копирования: {ex.Message}";
                     statusLabel.ForeColor = Color.Red;
                     // Автоматически очищаем через 5 секунд
-                    _ = Task.Delay(5000).ContinueWith(t => 
+                    _ = Task.Delay(5000).ContinueWith(t =>
                     {
                         if (!this.IsDisposed && statusLabel != null)
                         {
-                            this.Invoke((MethodInvoker)(() => 
+                            this.Invoke((MethodInvoker)(() =>
                             {
                                 statusLabel.Text = "";
                                 statusLabel.ForeColor = Color.Black;
@@ -329,10 +324,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                
+
                 // Добавляем небольшую задержку для предотвращения частых вызовов при быстром поиске
                 await Task.Delay(200, token);
-                
+
                 var tRelated = LoadRelatedDataFromView(annId, token);
                 var tNzp = LoadNZP(annId, token);
                 await Task.WhenAll(tRelated, tNzp);
@@ -419,10 +414,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         item.Stat = StatusHelper.GetStatusText(item.Status);
                     }
-                    
+
                     _myDataAnnList.Clear();
                     _myDataAnnList.BulkLoad(wdToBindResults);
-                    
+
                     // Устанавливаем фокус на первую строку в gridView_wdToBind
                     if (gridView_wdToBind.DataRowCount > 0)
                     {
@@ -521,10 +516,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedItem == null) return;
 
                 int selectedAnnId = selectedItem.AnnID;
-                
+
                 // Используем новый метод для открытия формы не в модальном режиме
                 var teamWorkAdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.Edit, oldId: selectedAnnId);
-                
+
                 if (teamWorkAdvanceTW == null)
                 {
                     // Форма уже открыта или произошла ошибка
@@ -625,22 +620,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 if (!Editing) //если нельзя редактировать без проверки
-                //Проверяем статус "актуальный" и наличие даты обновления
-                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
-                {
-                    MessageBox.Show(
-                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
-                        "Ограничение редактирования",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                              //Проверяем статус "актуальный" и наличие даты обновления
+                    if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                    {
+                        MessageBox.Show(
+                            "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                            "Ограничение редактирования",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                         await _logger.LogWarningAsync("Попытка редактирования записи со статусом 'Актуальный' и датой обновления", "EditWd_Internal2");
                         return;
-                }
+                    }
                 var updatedArtNormN = new ArtNormN();
-                
+
                 // Используем новый метод для открытия формы не в модальном режиме
                 var teamWorkAdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.Edit, oldId: annId);
-                
+
                 if (teamWorkAdvanceTW == null)
                 {
                     // Форма уже открыта или произошла ошибка
@@ -703,7 +698,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
                             await RefreshNormRaskForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
-                            
+
                         }
                         else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
                         {
@@ -822,95 +817,95 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogWarningAsync("_bindingList is null, cannot add newItemShell to UI.", "simpleButton2_Click_Internal");
                 }
 
-				// 4. Открываем форму TeamWork_AdvanceTW (немодально)
-				var teamWorkAdvanceTW = OpenAdvanceFormNonModal(
-					0,
-					(int)Mode.NewWorkDivision,
-					newId: newAnnId);
-				if (teamWorkAdvanceTW == null)
-				{
-					return;
-				}
-				teamWorkAdvanceTW.InitialArtData = selectedArtData; // Передаем данные из MyDataART
+                // 4. Открываем форму TeamWork_AdvanceTW (немодально)
+                var teamWorkAdvanceTW = OpenAdvanceFormNonModal(
+                    0,
+                    (int)Mode.NewWorkDivision,
+                    newId: newAnnId);
+                if (teamWorkAdvanceTW == null)
+                {
+                    return;
+                }
+                teamWorkAdvanceTW.InitialArtData = selectedArtData; // Передаем данные из MyDataART
 
-				// Подписываемся на событие закрытия формы для обработки результата
-				teamWorkAdvanceTW.FormClosed += async (s, args) =>
-				{
-					// 5. Обрабатываем результат диалога
-					if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
-					{
-						var createdOrUpdatedAnn = teamWorkAdvanceTW.CreatedAnn;
-						if (createdOrUpdatedAnn != null)
-						{
-							// Находим и обновляем элемент в _bindingList
-							var itemInList = _bindingList?.FirstOrDefault(ann => ann.AnnID == newAnnId);
-							if (itemInList != null)
-							{
-								// Копируем свойства из возвращенного объекта в объект в списке
-								itemInList.CopyPropertiesFrom(createdOrUpdatedAnn);
-								itemInList.StatusText = StatusHelper.GetStatusText(itemInList.Status);
-							}
+                // Подписываемся на событие закрытия формы для обработки результата
+                teamWorkAdvanceTW.FormClosed += async (s, args) =>
+                {
+                    // 5. Обрабатываем результат диалога
+                    if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
+                    {
+                        var createdOrUpdatedAnn = teamWorkAdvanceTW.CreatedAnn;
+                        if (createdOrUpdatedAnn != null)
+                        {
+                            // Находим и обновляем элемент в _bindingList
+                            var itemInList = _bindingList?.FirstOrDefault(ann => ann.AnnID == newAnnId);
+                            if (itemInList != null)
+                            {
+                                // Копируем свойства из возвращенного объекта в объект в списке
+                                itemInList.CopyPropertiesFrom(createdOrUpdatedAnn);
+                                itemInList.StatusText = StatusHelper.GetStatusText(itemInList.Status);
+                            }
 
-							_myDataAnnBindingSource.ResetBindings(false);
-							int finalRowHandle = gridView_wdToBind.LocateByValue("AnnID", newAnnId);
-							if (finalRowHandle != GridControl.InvalidRowHandle) 
-							{
-								gridView_wdToBind.RefreshRow(finalRowHandle);
-								gridView_wdToBind.FocusedRowHandle = finalRowHandle;
-								gridView_wdToBind.MakeRowVisible(finalRowHandle);
-							}
-							gridView_wdToBind.RefreshData();
-							
-							// Также фокусируемся на записи в основном ANNgridView
-							_bindingSource.ResetBindings(false);
-							int annRowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
-							if (annRowHandle >= 0)
-							{
-								ANNgridView.BeginUpdate();
-								try
-								{
-									ANNgridView.FocusedRowHandle = annRowHandle;
-									ANNgridView.MakeRowVisible(annRowHandle);
-									ANNgridView.RefreshRow(annRowHandle);
-								}
-								finally
-								{
-									ANNgridView.EndUpdate();
-								}
-							}
+                            _myDataAnnBindingSource.ResetBindings(false);
+                            int finalRowHandle = gridView_wdToBind.LocateByValue("AnnID", newAnnId);
+                            if (finalRowHandle != GridControl.InvalidRowHandle)
+                            {
+                                gridView_wdToBind.RefreshRow(finalRowHandle);
+                                gridView_wdToBind.FocusedRowHandle = finalRowHandle;
+                                gridView_wdToBind.MakeRowVisible(finalRowHandle);
+                            }
+                            gridView_wdToBind.RefreshData();
 
-							await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
-							
-							_ = Task.Run(async () =>
-							{
-								await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-								await Task.Delay(3000);
-								ClearSecondsUpdateStatus();
-							});
-							
-							//MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Также фокусируемся на записи в основном ANNgridView
+                            _bindingSource.ResetBindings(false);
+                            int annRowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
+                            if (annRowHandle >= 0)
+                            {
+                                ANNgridView.BeginUpdate();
+                                try
+                                {
+                                    ANNgridView.FocusedRowHandle = annRowHandle;
+                                    ANNgridView.MakeRowVisible(annRowHandle);
+                                    ANNgridView.RefreshRow(annRowHandle);
+                                }
+                                finally
+                                {
+                                    ANNgridView.EndUpdate();
+                                }
+                            }
+
+                            await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
+
+                            _ = Task.Run(async () =>
+                            {
+                                await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                                await Task.Delay(3000);
+                                ClearSecondsUpdateStatus();
+                            });
+
+                            //MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             await _logger.LogEventAsync("Новая предварительная запись успешно создана/обновлена.", "simpleButton2_Click_Internal");
                         }
-					}
-					else
-					{
-						await _logger.LogEventAsync($"Создание записи ANN (ID: {newAnnId}) отменено пользователем в TeamWork_AdvanceTW.", "simpleButton2_Click_Internal");
-						if (newItemShell != null && _bindingList != null && _bindingList.Contains(newItemShell))
-						{
-							_bindingList.Remove(newItemShell);
-						}
-						_bindingSource?.ResetBindings(false);
-						ANNgridControl?.RefreshDataSource();
+                    }
+                    else
+                    {
+                        await _logger.LogEventAsync($"Создание записи ANN (ID: {newAnnId}) отменено пользователем в TeamWork_AdvanceTW.", "simpleButton2_Click_Internal");
+                        if (newItemShell != null && _bindingList != null && _bindingList.Contains(newItemShell))
+                        {
+                            _bindingList.Remove(newItemShell);
+                        }
+                        _bindingSource?.ResetBindings(false);
+                        ANNgridControl?.RefreshDataSource();
 
-						await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
-						if (teamWorkAdvanceTW.IsRaszInserted)
-							await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);
-						if (teamWorkAdvanceTW.IsRaskInserted)
-							await _artNormService.DeleteByAnnId(TableNames.Rask, newAnnId);
-						if (teamWorkAdvanceTW.IsKontInserted)
-							await _artNormService.DeleteByAnnId(TableNames.Kont, newAnnId);
-					}
-				};
+                        await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
+                        if (teamWorkAdvanceTW.IsRaszInserted)
+                            await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);
+                        if (teamWorkAdvanceTW.IsRaskInserted)
+                            await _artNormService.DeleteByAnnId(TableNames.Rask, newAnnId);
+                        if (teamWorkAdvanceTW.IsKontInserted)
+                            await _artNormService.DeleteByAnnId(TableNames.Kont, newAnnId);
+                    }
+                };
             }
             catch (Exception ex)
             {
@@ -1617,10 +1612,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     list = await LoadWorksbyArt(articul);
                     await _logger.LogEventAsync($"showAllWD: Загружены РТ для артикула '{articul}'", "loadAllCheckBox_CheckedChanged");
                 }
-            // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
-            //var bindingList = new BindingList<MyDataANN>(list);
-            //_myDataAnnBindingSource = new BindingSource(bindingList, null);
-            //gridControl_wdToBind.DataSource = _myDataAnnBindingSource;
+                // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
+                //var bindingList = new BindingList<MyDataANN>(list);
+                //_myDataAnnBindingSource = new BindingSource(bindingList, null);
+                //gridControl_wdToBind.DataSource = _myDataAnnBindingSource;
                 // Обновляем данные в UI
                 _myDataAnnList.Clear();
                 if (list != null)
@@ -1630,7 +1625,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         item.Stat = StatusHelper.GetStatusText(item.Status);
                     }
-                    
+
                     _myDataAnnList.RaiseListChangedEvents = false;
                     foreach (var item in list)
                     {

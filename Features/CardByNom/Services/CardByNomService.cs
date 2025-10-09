@@ -1,16 +1,10 @@
-﻿using SewingProduction.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Z.Dapper;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
 using Dapper;
-using DevExpress.Mvvm.Native;
 using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Helpers;
 using SewingProduction.Services;
 
 namespace SewingProduction.Features.CardByNom.Services
@@ -118,7 +112,7 @@ namespace SewingProduction.Features.CardByNom.Services
                 return null;
             }
         }
-        
+
         public async Task<List<ProizvCombIzd>> GetProizvCombIzdByPachKod(string pachKod, int vidPr)
         {
             using (var connection = _dbHelper.GetConnection())

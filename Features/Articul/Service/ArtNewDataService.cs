@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using SewingProduction.Core.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.Features.Articul
 {
@@ -60,9 +58,48 @@ namespace SewingProduction.Features.Articul
             string query = "SELECT kod FROM sp_articul WHERE kod = @kod";
             return _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { { "@kod", kod } });
         }
+        public int GetFreeKod(int kod)
+        {
+            string query = @" SELECT TOP 1 candidate AS FreeHundred
+                FROM (
+                    SELECT number * 100 + 10000000 AS candidate 
+                    FROM master..spt_values   
+                    WHERE type = 'P'
+                    ) c
+                    WHERE NOT EXISTS 
+                        (    
+                        SELECT 1 FROM sp_articul a
+                        WHERE TRY_CAST(a.kod AS INT) BETWEEN c.candidate AND c.candidate + 99
+                        )
+                ORDER BY candidate";
+            return _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
         public async Task SaveAsync(ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
         }
+        public async Task<dynamic?> GetCordNameAsync(string kod)
+        {
+            string sql = @"SELECT RTRIM(gr)+' '+NAME AS name_k
+                   FROM dop_ras_gr 
+                   WHERE kod=@kod AND k1=LEFT(@kod,2)";
+            return await _dbService.GetEntityAsync<dynamic>(sql, new { kod });
+        }
+
+        public async Task<dynamic?> GetCordLengthAsync(string kod)
+        {
+            string sql = @"
+                SELECT pv.idvalue, pv.cfp_name, pv.cfl_name,
+                       valpar.nameunit, valpar.cnt_id
+                FROM cfn.confection_view_parameteresWithValue pv
+                LEFT JOIN cfn.confection_view_parameteres valpar 
+                       ON pv.cfp_id = valpar.cfp_id 
+                      AND LEFT(pv.kod,4) = LEFT(valpar.kod_confection,4)
+                WHERE pv.cfp_id=37 AND LEFT(pv.kod,7)=@kod";
+
+            return await _dbService.GetEntityAsync<dynamic>(sql, new { kod });
+        }
+
+
     }
 }

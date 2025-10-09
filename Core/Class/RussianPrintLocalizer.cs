@@ -1,5 +1,5 @@
-﻿using DevExpress.XtraPrinting.Localization;
-using System;
+﻿using System;
+using DevExpress.XtraPrinting.Localization;
 
 public class RussianPrintLocalizer : PreviewLocalizer
 {

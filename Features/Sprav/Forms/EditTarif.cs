@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using Microsoft.IdentityModel.Tokens;
-using SewingProduction.Core.Class;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -175,7 +164,7 @@ namespace SewingProduction.Features.Sprav
 
             LoadPriznSignCombo(editMode);
         }
-        private void LoadPriznSignCombo(bool editMode) 
+        private void LoadPriznSignCombo(bool editMode)
         {
             UpdatePriznSignCombo();
             if (editMode)
@@ -196,7 +185,7 @@ namespace SewingProduction.Features.Sprav
             else
             {
                 customComboBoxPriznSign.SelectedIndex = 0;
-            } 
+            }
         }
         private void UpdatePriznSignCombo()
         {

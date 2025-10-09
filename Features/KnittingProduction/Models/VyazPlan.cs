@@ -1,4 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto.Utilities;
 using SewingProduction.Features.Articul;
 using SewingProduction.Interfaces;
@@ -210,7 +210,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
     }
 
     public class ZadanyListByMachine
-    { 
+    {
         [NotMapped]
         public string pszNom { get; set; }
         [NotMapped]
@@ -237,7 +237,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
     public class RzvPachListByNom
     {
         [NotMapped]
-        public string nomZad {  get; set; }
+        public string nomZad { get; set; }
         [NotMapped]
         public int nom { get; set; }
         [NotMapped]
@@ -325,7 +325,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
     public class PZVOperList : INewable, IModifiable, IDeletable
     {
         [NotMapped]
-        public int olPzvID {  get; set; }
+        public int olPzvID { get; set; }
         [NotMapped]
         public int olPzvIDParent { get; set; }
         [NotMapped]

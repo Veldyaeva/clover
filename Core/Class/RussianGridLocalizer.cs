@@ -1,5 +1,5 @@
-﻿using DevExpress.XtraGrid.Localization;
-using System;
+﻿using System;
+using DevExpress.XtraGrid.Localization;
 
 public class RussianGridLocalizer : GridLocalizer
 {

@@ -17,6 +17,8 @@
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
     <Compile Remove="Features\TeamWork\DbContext\ArtNormN.cs" />
+    <Compile Remove="Features\TeamWork\Forms\HistoryLog.cs" />
+    <Compile Remove="Features\TeamWork\Forms\HistoryLog.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\NormRaskrNew_old.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.Designer_.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.Events_old.cs" />
@@ -48,6 +50,7 @@
 
   <ItemGroup>
     <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
+    <EmbeddedResource Remove="Features\TeamWork\Forms\HistoryLog.resx" />
     <EmbeddedResource Remove="Report\PostReportFio.resx" />
   </ItemGroup>
 

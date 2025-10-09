@@ -1,12 +1,12 @@
-﻿using DevExpress.XtraGrid.Localization;
-using DevExpress.XtraReports.Design;
-using Microsoft.Win32;
-using SewingProduction.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Localization;
+using DevExpress.XtraReports.Design;
+using Microsoft.Win32;
+using SewingProduction.Models;
 
 
 namespace SewingProduction.Core

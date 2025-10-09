@@ -1,4 +1,5 @@
 ﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class KnittingProductionPlanning

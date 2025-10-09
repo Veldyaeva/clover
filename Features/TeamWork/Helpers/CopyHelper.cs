@@ -1,10 +1,8 @@
-using SewingProduction.Helpers;
-using SewingProduction.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Helpers
 {
@@ -71,7 +69,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 throw new ArgumentNullException(nameof(source));
 
             var clone = new ArtNormN();
-            
+
             // Копируем только технологические данные
             clone.SekShv = source.SekShv;
             clone.SekVyaz3 = source.SekVyaz3;

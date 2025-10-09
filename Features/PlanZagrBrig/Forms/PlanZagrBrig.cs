@@ -1,6 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,6 +6,8 @@ using System.Reflection;
 using System.Windows.Forms;
 //using System.Windows.Media;
 using System.Xml.Linq;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Helpers;
 using DataColumn = System.Data.DataColumn;
 using DataTable = System.Data.DataTable;
 //using XmlElement = System.Xls.XmlElement;

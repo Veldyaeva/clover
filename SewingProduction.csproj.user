@@ -25,6 +25,9 @@
     <Compile Update="Core\Class\CustomControls\CustomLookUpEdit.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -32,6 +35,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\SP_form.cs">
@@ -47,6 +53,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\EditArticul.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\EditNaborSostav.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\CuttingProduction\Forms\CuttingForm.cs">
@@ -117,6 +126,9 @@
     </Compile>
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>

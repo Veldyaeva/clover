@@ -1,57 +1,22 @@
-﻿using DevExpress.ChartRangeControlClient.Core;
-using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.DataAccess.Native.Sql;
-using DevExpress.Office.Utils;
-using DevExpress.Utils.Gesture;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGauges.Core.Styles;
-using DevExpress.XtraGrid.Views.Card;
-using DevExpress.XtraGrid.Views.Card.ViewInfo;
-using DevExpress.XtraLayout;
-using DevExpress.XtraPrinting;
-using DevExpress.XtraPrinting.Native;
-using DevExpress.XtraReports;
-using DevExpress.XtraReports.Native;
-using DevExpress.XtraReports.Parameters;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraReports.UserDesigner;
 using DevExpress.XtraTab;
-using Org.BouncyCastle.Asn1.Ocsp;
-using Org.BouncyCastle.Asn1.X509;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
-using SewingProduction.Features.Articul;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.CardByNom.Services;
 using SewingProduction.Features.Furnit.Services;
-using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
-using SewingProduction.form.TeamWork.Interfaces;
 using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.report;
 using SewingProduction.Report;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Z.Dapper.Plus;
-using static DevExpress.Xpo.DB.DataStoreLongrunnersWatch;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction
@@ -1671,7 +1636,7 @@ namespace SewingProduction
             //var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
             if (Convert.ToInt32(tbRzuNom.Text) != 0)
-                {
+            {
                 report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
                 report1.Parameters["_isChip"].Value = IsChip;
                 report1.Parameters["_isUpak"].Value = 0;

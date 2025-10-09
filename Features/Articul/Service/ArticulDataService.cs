@@ -1,14 +1,9 @@
-﻿using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.Xpo.DB.Helpers;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -58,14 +53,13 @@ namespace SewingProduction.Features.Articul.Service
         }
         public async Task<string> GetAllRazmByRazmAsync(string razm)
         {
-            string query = "SELECT Razm_all FROM Razm WHERE Razm = @razm";
+            string query = "SELECT Razm_all FROM Razm WHERE Razm = @razm ORDER BY razm DESC";
             return await _dbService.GetEntityAsync<string>(query, new { razm });
         }
         public async Task<string> GetFileEskizForKod(string kod)
         {
             string query = "SELECT dbo.getFileEskizForKodd(@kod) AS pathpict";
             return await _dbService.GetEntityAsync<string>(query, new { kod });
-
         }
         public async Task<List<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
         {
@@ -74,11 +68,11 @@ namespace SewingProduction.Features.Articul.Service
 
         }
 
-        public async Task<List<spArticulNaborSostav>> GetSostavNaborForKod(string kod)
+        public async Task<List<SpArticulNaborSostav>> GetSostavNaborForKod(string kod)
         {
             string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_naimen, sostav, razm" +
                 " FROM view_articulNaborSostav where kod  = @kod";
-            return await _dbService.GetListAsync<spArticulNaborSostav>(query, new { kod });
+            return await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
         }
 
     }
