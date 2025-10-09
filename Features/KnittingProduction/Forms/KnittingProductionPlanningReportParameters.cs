@@ -107,9 +107,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 #region описание comboBox "Артикулы"
                 comboBoxArticul.DataSource = _articulListBindingSource;
-                comboBoxArticul.SelectedIndex = -1;
                 comboBoxArticul.ValueMember = "articulKod";
                 comboBoxArticul.DisplayMember = "articul";
+                comboBoxArticul.SelectedIndex = -1;
                 #endregion
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 comboBoxKnitClass.SelectedIndex = -1;
                 comboBoxKmlInvNumber.SelectedIndex = -1;
                 comboBoxExecMonth.SelectedIndex = -1;
-                comboBoxArticul.Sorted = true;
+                //comboBoxArticul.Sorted = true;
                 comboBoxArticul.SelectedIndex = -1;
             }
             catch (Exception ex)

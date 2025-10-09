@@ -175,9 +175,10 @@
             textBoxExecMonth.Properties.Appearance.Options.UseBackColor = true;
             textBoxExecMonth.Properties.Appearance.Options.UseFont = true;
             textBoxExecMonth.Properties.Appearance.Options.UseForeColor = true;
-            textBoxExecMonth.Size = new System.Drawing.Size(129, 22);
+            textBoxExecMonth.Size = new System.Drawing.Size(131, 22);
             textBoxExecMonth.StyleController = layoutControl1;
             textBoxExecMonth.TabIndex = 125;
+            textBoxExecMonth.ToolTip = "месяц запуска в формате ггггмм";
             textBoxExecMonth.EditValueChanged += textBoxExecMonth_EditValueChanged;
             // 
             // customSimpleButton2
@@ -193,9 +194,9 @@
             customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
             customSimpleButton2.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButton2.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton2.ImageOptions.Image");
-            customSimpleButton2.Location = new System.Drawing.Point(382, 50);
+            customSimpleButton2.Location = new System.Drawing.Point(385, 50);
             customSimpleButton2.Name = "customSimpleButton2";
-            customSimpleButton2.Size = new System.Drawing.Size(25, 22);
+            customSimpleButton2.Size = new System.Drawing.Size(22, 22);
             customSimpleButton2.StyleController = layoutControl1;
             customSimpleButton2.TabIndex = 114;
             customSimpleButton2.Click += customSimpleButton2_Click;
@@ -213,9 +214,9 @@
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
             customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButton1.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton1.ImageOptions.Image");
-            customSimpleButton1.Location = new System.Drawing.Point(382, 24);
+            customSimpleButton1.Location = new System.Drawing.Point(385, 24);
             customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(25, 22);
+            customSimpleButton1.Size = new System.Drawing.Size(22, 22);
             customSimpleButton1.StyleController = layoutControl1;
             customSimpleButton1.TabIndex = 124;
             customSimpleButton1.Click += customSimpleButton1_Click;
@@ -227,7 +228,7 @@
             dateEditPeriodTo.Name = "dateEditPeriodTo";
             dateEditPeriodTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEditPeriodTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEditPeriodTo.Size = new System.Drawing.Size(135, 20);
+            dateEditPeriodTo.Size = new System.Drawing.Size(138, 20);
             dateEditPeriodTo.StyleController = layoutControl1;
             dateEditPeriodTo.TabIndex = 123;
             // 
@@ -258,7 +259,7 @@
             dateEditPeriodFrom.Name = "dateEditPeriodFrom";
             dateEditPeriodFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEditPeriodFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEditPeriodFrom.Size = new System.Drawing.Size(135, 20);
+            dateEditPeriodFrom.Size = new System.Drawing.Size(138, 20);
             dateEditPeriodFrom.StyleController = layoutControl1;
             dateEditPeriodFrom.TabIndex = 120;
             // 
@@ -298,9 +299,9 @@
             buttonArticulClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonArticulClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonArticulClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonArticulClear.ImageOptions.Image");
-            buttonArticulClear.Location = new System.Drawing.Point(382, 154);
+            buttonArticulClear.Location = new System.Drawing.Point(385, 154);
             buttonArticulClear.Name = "buttonArticulClear";
-            buttonArticulClear.Size = new System.Drawing.Size(25, 22);
+            buttonArticulClear.Size = new System.Drawing.Size(22, 22);
             buttonArticulClear.StyleController = layoutControl1;
             buttonArticulClear.TabIndex = 116;
             buttonArticulClear.Click += buttonArticulClear_Click;
@@ -318,9 +319,9 @@
             buttonExecMonthClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonExecMonthClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonExecMonthClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonExecMonthClear.ImageOptions.Image");
-            buttonExecMonthClear.Location = new System.Drawing.Point(382, 128);
+            buttonExecMonthClear.Location = new System.Drawing.Point(385, 128);
             buttonExecMonthClear.Name = "buttonExecMonthClear";
-            buttonExecMonthClear.Size = new System.Drawing.Size(25, 22);
+            buttonExecMonthClear.Size = new System.Drawing.Size(22, 22);
             buttonExecMonthClear.StyleController = layoutControl1;
             buttonExecMonthClear.TabIndex = 115;
             buttonExecMonthClear.Click += buttonExecMonthClear_Click;
@@ -338,9 +339,9 @@
             buttonKmlInvNumberClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonKmlInvNumberClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonKmlInvNumberClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonKmlInvNumberClear.ImageOptions.Image");
-            buttonKmlInvNumberClear.Location = new System.Drawing.Point(382, 102);
+            buttonKmlInvNumberClear.Location = new System.Drawing.Point(385, 102);
             buttonKmlInvNumberClear.Name = "buttonKmlInvNumberClear";
-            buttonKmlInvNumberClear.Size = new System.Drawing.Size(25, 22);
+            buttonKmlInvNumberClear.Size = new System.Drawing.Size(22, 22);
             buttonKmlInvNumberClear.StyleController = layoutControl1;
             buttonKmlInvNumberClear.TabIndex = 114;
             buttonKmlInvNumberClear.Click += buttonKmlInvNumberClear_Click;
@@ -358,9 +359,9 @@
             buttonKnitClassClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonKnitClassClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonKnitClassClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonKnitClassClear.ImageOptions.Image");
-            buttonKnitClassClear.Location = new System.Drawing.Point(382, 76);
+            buttonKnitClassClear.Location = new System.Drawing.Point(385, 76);
             buttonKnitClassClear.Name = "buttonKnitClassClear";
-            buttonKnitClassClear.Size = new System.Drawing.Size(25, 22);
+            buttonKnitClassClear.Size = new System.Drawing.Size(22, 22);
             buttonKnitClassClear.StyleController = layoutControl1;
             buttonKnitClassClear.TabIndex = 113;
             buttonKnitClassClear.Click += buttonKnitClassClear_Click;
@@ -395,7 +396,7 @@
             comboBoxArticul.FormattingEnabled = true;
             comboBoxArticul.Location = new System.Drawing.Point(209, 154);
             comboBoxArticul.Name = "comboBoxArticul";
-            comboBoxArticul.Size = new System.Drawing.Size(169, 24);
+            comboBoxArticul.Size = new System.Drawing.Size(172, 24);
             comboBoxArticul.TabIndex = 8;
             comboBoxArticul.SelectedValueChanged += comboBoxArticul_SelectedValueChanged;
             // 
@@ -460,9 +461,9 @@
             comboBoxExecMonth.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxExecMonth.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxExecMonth.FormattingEnabled = true;
-            comboBoxExecMonth.Location = new System.Drawing.Point(342, 128);
+            comboBoxExecMonth.Location = new System.Drawing.Point(344, 128);
             comboBoxExecMonth.Name = "comboBoxExecMonth";
-            comboBoxExecMonth.Size = new System.Drawing.Size(36, 24);
+            comboBoxExecMonth.Size = new System.Drawing.Size(37, 24);
             comboBoxExecMonth.TabIndex = 6;
             comboBoxExecMonth.SelectedValueChanged += comboBoxExecMonth_SelectedValueChanged;
             // 
@@ -495,7 +496,7 @@
             comboBoxKmlInvNumber.FormattingEnabled = true;
             comboBoxKmlInvNumber.Location = new System.Drawing.Point(209, 102);
             comboBoxKmlInvNumber.Name = "comboBoxKmlInvNumber";
-            comboBoxKmlInvNumber.Size = new System.Drawing.Size(169, 24);
+            comboBoxKmlInvNumber.Size = new System.Drawing.Size(172, 24);
             comboBoxKmlInvNumber.TabIndex = 4;
             comboBoxKmlInvNumber.SelectedValueChanged += comboBoxKmlInvNumber_SelectedValueChanged;
             // 
@@ -518,7 +519,7 @@
             comboBoxKnitClass.FormattingEnabled = true;
             comboBoxKnitClass.Location = new System.Drawing.Point(209, 76);
             comboBoxKnitClass.Name = "comboBoxKnitClass";
-            comboBoxKnitClass.Size = new System.Drawing.Size(169, 24);
+            comboBoxKnitClass.Size = new System.Drawing.Size(172, 24);
             comboBoxKnitClass.TabIndex = 2;
             comboBoxKnitClass.SelectedValueChanged += comboBoxKnitClass_SelectedValueChanged;
             // 
@@ -552,7 +553,7 @@
             layoutControlItem1.Location = new System.Drawing.Point(185, 52);
             layoutControlItem1.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(173, 26);
+            layoutControlItem1.Size = new System.Drawing.Size(176, 26);
             layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem1.TextVisible = false;
             // 
@@ -604,7 +605,7 @@
             layoutControlItem4.Location = new System.Drawing.Point(185, 78);
             layoutControlItem4.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(173, 26);
+            layoutControlItem4.Size = new System.Drawing.Size(176, 26);
             layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem4.TextVisible = false;
             // 
@@ -632,10 +633,10 @@
             // layoutControlItem6
             // 
             layoutControlItem6.Control = comboBoxExecMonth;
-            layoutControlItem6.Location = new System.Drawing.Point(318, 104);
+            layoutControlItem6.Location = new System.Drawing.Point(320, 104);
             layoutControlItem6.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(40, 26);
+            layoutControlItem6.Size = new System.Drawing.Size(41, 26);
             layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem6.TextVisible = false;
             layoutControlItem6.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
@@ -667,42 +668,42 @@
             layoutControlItem8.Location = new System.Drawing.Point(185, 130);
             layoutControlItem8.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(173, 26);
+            layoutControlItem8.Size = new System.Drawing.Size(176, 26);
             layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = buttonKnitClassClear;
-            layoutControlItem14.Location = new System.Drawing.Point(358, 52);
+            layoutControlItem14.Location = new System.Drawing.Point(361, 52);
             layoutControlItem14.MinSize = new System.Drawing.Size(26, 26);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem14.Size = new System.Drawing.Size(26, 26);
             layoutControlItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem14.TextVisible = false;
             // 
             // layoutControlItem15
             // 
             layoutControlItem15.Control = buttonKmlInvNumberClear;
-            layoutControlItem15.Location = new System.Drawing.Point(358, 78);
+            layoutControlItem15.Location = new System.Drawing.Point(361, 78);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem15.Size = new System.Drawing.Size(26, 26);
             layoutControlItem15.TextVisible = false;
             // 
             // layoutControlItem16
             // 
             layoutControlItem16.Control = buttonExecMonthClear;
-            layoutControlItem16.Location = new System.Drawing.Point(358, 104);
+            layoutControlItem16.Location = new System.Drawing.Point(361, 104);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem16.Size = new System.Drawing.Size(26, 26);
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = buttonArticulClear;
-            layoutControlItem17.Location = new System.Drawing.Point(358, 130);
+            layoutControlItem17.Location = new System.Drawing.Point(361, 130);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem17.Size = new System.Drawing.Size(26, 26);
             layoutControlItem17.TextVisible = false;
             // 
             // layoutControlItem18
@@ -735,7 +736,7 @@
             layoutControlItem21.Location = new System.Drawing.Point(219, 0);
             layoutControlItem21.MinSize = new System.Drawing.Size(54, 24);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(139, 26);
+            layoutControlItem21.Size = new System.Drawing.Size(142, 26);
             layoutControlItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem21.TextVisible = false;
             // 
@@ -759,24 +760,24 @@
             layoutControlItem23.Location = new System.Drawing.Point(219, 26);
             layoutControlItem23.MinSize = new System.Drawing.Size(54, 24);
             layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new System.Drawing.Size(139, 26);
+            layoutControlItem23.Size = new System.Drawing.Size(142, 26);
             layoutControlItem23.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem23.TextVisible = false;
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = customSimpleButton1;
-            layoutControlItem24.Location = new System.Drawing.Point(358, 0);
+            layoutControlItem24.Location = new System.Drawing.Point(361, 0);
             layoutControlItem24.Name = "layoutControlItem24";
-            layoutControlItem24.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem24.Size = new System.Drawing.Size(26, 26);
             layoutControlItem24.TextVisible = false;
             // 
             // layoutControlItem25
             // 
             layoutControlItem25.Control = customSimpleButton2;
-            layoutControlItem25.Location = new System.Drawing.Point(358, 26);
+            layoutControlItem25.Location = new System.Drawing.Point(361, 26);
             layoutControlItem25.Name = "layoutControlItem25";
-            layoutControlItem25.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem25.Size = new System.Drawing.Size(26, 26);
             layoutControlItem25.TextVisible = false;
             // 
             // layoutControlItem26
@@ -784,7 +785,7 @@
             layoutControlItem26.Control = textBoxExecMonth;
             layoutControlItem26.Location = new System.Drawing.Point(185, 104);
             layoutControlItem26.Name = "layoutControlItem26";
-            layoutControlItem26.Size = new System.Drawing.Size(133, 26);
+            layoutControlItem26.Size = new System.Drawing.Size(135, 26);
             layoutControlItem26.TextVisible = false;
             // 
             // layoutControlItem13

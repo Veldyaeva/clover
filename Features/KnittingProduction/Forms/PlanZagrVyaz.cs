@@ -228,7 +228,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnZadanyListByMachineDopr_name.FieldName = "dopr_name";
                 gridColumnZadanyListByMachineKmlID.FieldName = "kmlID";
                 gridColumnZadanyListByMachineSyncSelection.FieldName = "SyncSelection";
-                _gridHelper.AutoRowFilterConfig(gridViewZadanyListByMachine as GridView);
+                _gridHelper.AutoRowFilterConfig(gridViewZadanyListByMachine as GridView, 0);
                 gridViewZadanyListByMachine.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
                 //gridViewRzvPachListByNom.OptionsView.ShowAutoFilterRow = false;
                 //gridViewRzvPachListByNom.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
@@ -392,7 +392,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridSmenZadanyVyazMachineColumnTaskNotConfirmed.FieldName = "taskNotConfirmed";
                 gridSmenZadanyVyazMachineColumnTaskConfirmed.FieldName = "taskConfirmed";
                 gridSmenZadanyVyazMachineColumnTaskNotPlanned.FieldName = "taskNotPlanned";
-                _gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazMachine);
+                _gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazMachine, 0);
                 #endregion
 
                 #region описание gridControlSmenZadanyVyazEmp "сменное задание по работникам"
@@ -407,7 +407,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridSmenZadanyVyazEmpColumnTaskNotConfirmed.FieldName = "taskNotConfirmed";
                 gridSmenZadanyVyazEmpColumnTaskConfirmed.FieldName = "taskConfirmed";
                 gridSmenZadanyVyazEmpColumnKmaIDNazn.FieldName = "kmaIDNazn";
-                _gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazEmp);
+                _gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazEmp, 0);
                 #endregion
 
                 #region описание gridControlArtNormN "заголовок РТ"
@@ -509,7 +509,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnPZVOperListOlPzvDateStart.OptionsColumn.AllowEdit = false;
                 gridColumnPZVOperListOlPzvDateEnd.OptionsColumn.AllowEdit = false;
                 gridColumnPZVOperListOlPzvDateMast.OptionsColumn.AllowEdit = false;
-                _gridHelper.AutoRowFilterConfig(gridViewPZVOperList as GridView);
+                _gridHelper.AutoRowFilterConfig(gridViewPZVOperList as GridView, 0);
                 gridColumnPZVOperListOlNPach.OptionsColumn.AllowSort = DefaultBoolean.False;
                 //AutoRowFilterConfigForm(gridViewPZVOperList as GridView);
                 #endregion
