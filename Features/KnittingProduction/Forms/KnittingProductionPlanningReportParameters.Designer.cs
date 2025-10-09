@@ -30,6 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnittingProductionPlanningReportParameters));
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            textBoxExecMonth = new CustomTextBoxEx();
+            customSimpleButton2 = new SewingProduction.Core.Class.CustomSimpleButton();
+            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
+            dateEditPeriodTo = new DevExpress.XtraEditors.DateEdit();
+            customLabel7 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel6 = new SewingProduction.Core.Class.CustomLabel();
+            dateEditPeriodFrom = new DevExpress.XtraEditors.DateEdit();
+            customLabel5 = new SewingProduction.Core.Class.CustomLabel();
+            checkBoxKnitPeriod = new CustomCheckBox();
             buttonArticulClear = new SewingProduction.Core.Class.CustomSimpleButton();
             buttonExecMonthClear = new SewingProduction.Core.Class.CustomSimpleButton();
             buttonKmlInvNumberClear = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -66,10 +75,25 @@
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem26 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)textBoxExecMonth.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodTo.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodTo.Properties.CalendarTimeProperties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodFrom.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodFrom.Properties.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
@@ -89,12 +113,31 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem18).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem24).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem26).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(textBoxExecMonth);
+            layoutControl1.Controls.Add(customSimpleButton2);
+            layoutControl1.Controls.Add(customSimpleButton1);
+            layoutControl1.Controls.Add(dateEditPeriodTo);
+            layoutControl1.Controls.Add(customLabel7);
+            layoutControl1.Controls.Add(customLabel6);
+            layoutControl1.Controls.Add(dateEditPeriodFrom);
+            layoutControl1.Controls.Add(customLabel5);
+            layoutControl1.Controls.Add(checkBoxKnitPeriod);
             layoutControl1.Controls.Add(buttonArticulClear);
             layoutControl1.Controls.Add(buttonExecMonthClear);
             layoutControl1.Controls.Add(buttonKmlInvNumberClear);
@@ -115,11 +158,132 @@
             layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl1.Location = new System.Drawing.Point(0, 0);
             layoutControl1.Name = "layoutControl1";
-            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(422, 0, 650, 400);
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(2675, 223, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new System.Drawing.Size(431, 275);
+            layoutControl1.Size = new System.Drawing.Size(443, 275);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // textBoxExecMonth
+            // 
+            textBoxExecMonth.Location = new System.Drawing.Point(209, 128);
+            textBoxExecMonth.Name = "textBoxExecMonth";
+            textBoxExecMonth.ObjectName = null;
+            textBoxExecMonth.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            textBoxExecMonth.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            textBoxExecMonth.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            textBoxExecMonth.Properties.Appearance.Options.UseBackColor = true;
+            textBoxExecMonth.Properties.Appearance.Options.UseFont = true;
+            textBoxExecMonth.Properties.Appearance.Options.UseForeColor = true;
+            textBoxExecMonth.Size = new System.Drawing.Size(129, 22);
+            textBoxExecMonth.StyleController = layoutControl1;
+            textBoxExecMonth.TabIndex = 125;
+            textBoxExecMonth.EditValueChanged += textBoxExecMonth_EditValueChanged;
+            // 
+            // customSimpleButton2
+            // 
+            customSimpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            customSimpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton2.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customSimpleButton2.Appearance.Options.UseBackColor = true;
+            customSimpleButton2.Appearance.Options.UseFont = true;
+            customSimpleButton2.Appearance.Options.UseForeColor = true;
+            customSimpleButton2.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            customSimpleButton2.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton2.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton2.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton2.ImageOptions.Image");
+            customSimpleButton2.Location = new System.Drawing.Point(382, 50);
+            customSimpleButton2.Name = "customSimpleButton2";
+            customSimpleButton2.Size = new System.Drawing.Size(25, 22);
+            customSimpleButton2.StyleController = layoutControl1;
+            customSimpleButton2.TabIndex = 114;
+            customSimpleButton2.Click += customSimpleButton2_Click;
+            // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customSimpleButton1.Appearance.Options.UseBackColor = true;
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Appearance.Options.UseForeColor = true;
+            customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton1.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton1.ImageOptions.Image");
+            customSimpleButton1.Location = new System.Drawing.Point(382, 24);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new System.Drawing.Size(25, 22);
+            customSimpleButton1.StyleController = layoutControl1;
+            customSimpleButton1.TabIndex = 124;
+            customSimpleButton1.Click += customSimpleButton1_Click;
+            // 
+            // dateEditPeriodTo
+            // 
+            dateEditPeriodTo.EditValue = null;
+            dateEditPeriodTo.Location = new System.Drawing.Point(243, 50);
+            dateEditPeriodTo.Name = "dateEditPeriodTo";
+            dateEditPeriodTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            dateEditPeriodTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            dateEditPeriodTo.Size = new System.Drawing.Size(135, 20);
+            dateEditPeriodTo.StyleController = layoutControl1;
+            dateEditPeriodTo.TabIndex = 123;
+            // 
+            // customLabel7
+            // 
+            customLabel7.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel7.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customLabel7.Location = new System.Drawing.Point(209, 50);
+            customLabel7.Name = "customLabel7";
+            customLabel7.Size = new System.Drawing.Size(30, 22);
+            customLabel7.TabIndex = 122;
+            customLabel7.Text = "ПО";
+            // 
+            // customLabel6
+            // 
+            customLabel6.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel6.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customLabel6.Location = new System.Drawing.Point(209, 24);
+            customLabel6.Name = "customLabel6";
+            customLabel6.Size = new System.Drawing.Size(30, 22);
+            customLabel6.TabIndex = 121;
+            customLabel6.Text = "С";
+            // 
+            // dateEditPeriodFrom
+            // 
+            dateEditPeriodFrom.EditValue = null;
+            dateEditPeriodFrom.Location = new System.Drawing.Point(243, 24);
+            dateEditPeriodFrom.Name = "dateEditPeriodFrom";
+            dateEditPeriodFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            dateEditPeriodFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            dateEditPeriodFrom.Size = new System.Drawing.Size(135, 20);
+            dateEditPeriodFrom.StyleController = layoutControl1;
+            dateEditPeriodFrom.TabIndex = 120;
+            // 
+            // customLabel5
+            // 
+            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel5.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customLabel5.Location = new System.Drawing.Point(48, 24);
+            customLabel5.Name = "customLabel5";
+            customLabel5.Size = new System.Drawing.Size(157, 22);
+            customLabel5.TabIndex = 118;
+            customLabel5.Text = "Период";
+            // 
+            // checkBoxKnitPeriod
+            // 
+            checkBoxKnitPeriod.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            checkBoxKnitPeriod.Checked = true;
+            checkBoxKnitPeriod.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxKnitPeriod.Font = new System.Drawing.Font("Arial", 10F);
+            checkBoxKnitPeriod.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            checkBoxKnitPeriod.Location = new System.Drawing.Point(24, 24);
+            checkBoxKnitPeriod.Name = "checkBoxKnitPeriod";
+            checkBoxKnitPeriod.Size = new System.Drawing.Size(20, 20);
+            checkBoxKnitPeriod.TabIndex = 117;
+            checkBoxKnitPeriod.UseVisualStyleBackColor = true;
             // 
             // buttonArticulClear
             // 
@@ -134,9 +298,9 @@
             buttonArticulClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonArticulClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonArticulClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonArticulClear.ImageOptions.Image");
-            buttonArticulClear.Location = new System.Drawing.Point(372, 102);
+            buttonArticulClear.Location = new System.Drawing.Point(382, 154);
             buttonArticulClear.Name = "buttonArticulClear";
-            buttonArticulClear.Size = new System.Drawing.Size(22, 22);
+            buttonArticulClear.Size = new System.Drawing.Size(25, 22);
             buttonArticulClear.StyleController = layoutControl1;
             buttonArticulClear.TabIndex = 116;
             buttonArticulClear.Click += buttonArticulClear_Click;
@@ -154,9 +318,9 @@
             buttonExecMonthClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonExecMonthClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonExecMonthClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonExecMonthClear.ImageOptions.Image");
-            buttonExecMonthClear.Location = new System.Drawing.Point(372, 76);
+            buttonExecMonthClear.Location = new System.Drawing.Point(382, 128);
             buttonExecMonthClear.Name = "buttonExecMonthClear";
-            buttonExecMonthClear.Size = new System.Drawing.Size(22, 22);
+            buttonExecMonthClear.Size = new System.Drawing.Size(25, 22);
             buttonExecMonthClear.StyleController = layoutControl1;
             buttonExecMonthClear.TabIndex = 115;
             buttonExecMonthClear.Click += buttonExecMonthClear_Click;
@@ -174,9 +338,9 @@
             buttonKmlInvNumberClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonKmlInvNumberClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonKmlInvNumberClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonKmlInvNumberClear.ImageOptions.Image");
-            buttonKmlInvNumberClear.Location = new System.Drawing.Point(372, 50);
+            buttonKmlInvNumberClear.Location = new System.Drawing.Point(382, 102);
             buttonKmlInvNumberClear.Name = "buttonKmlInvNumberClear";
-            buttonKmlInvNumberClear.Size = new System.Drawing.Size(22, 22);
+            buttonKmlInvNumberClear.Size = new System.Drawing.Size(25, 22);
             buttonKmlInvNumberClear.StyleController = layoutControl1;
             buttonKmlInvNumberClear.TabIndex = 114;
             buttonKmlInvNumberClear.Click += buttonKmlInvNumberClear_Click;
@@ -194,9 +358,9 @@
             buttonKnitClassClear.AppearanceDisabled.Options.UseBackColor = true;
             buttonKnitClassClear.AppearanceDisabled.Options.UseForeColor = true;
             buttonKnitClassClear.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonKnitClassClear.ImageOptions.Image");
-            buttonKnitClassClear.Location = new System.Drawing.Point(372, 24);
+            buttonKnitClassClear.Location = new System.Drawing.Point(382, 76);
             buttonKnitClassClear.Name = "buttonKnitClassClear";
-            buttonKnitClassClear.Size = new System.Drawing.Size(22, 22);
+            buttonKnitClassClear.Size = new System.Drawing.Size(25, 22);
             buttonKnitClassClear.StyleController = layoutControl1;
             buttonKnitClassClear.TabIndex = 113;
             buttonKnitClassClear.Click += buttonKnitClassClear_Click;
@@ -213,14 +377,14 @@
             buttonPrintReport.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonPrintReport.AppearanceDisabled.Options.UseBackColor = true;
             buttonPrintReport.AppearanceDisabled.Options.UseForeColor = true;
-            buttonPrintReport.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton1.ImageOptions.Image");
-            buttonPrintReport.Location = new System.Drawing.Point(12, 140);
+            buttonPrintReport.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonPrintReport.ImageOptions.Image");
+            buttonPrintReport.Location = new System.Drawing.Point(12, 192);
             buttonPrintReport.Name = "buttonPrintReport";
-            buttonPrintReport.Size = new System.Drawing.Size(394, 22);
+            buttonPrintReport.Size = new System.Drawing.Size(407, 22);
             buttonPrintReport.StyleController = layoutControl1;
             buttonPrintReport.TabIndex = 112;
             buttonPrintReport.Text = "Печать";
-            buttonPrintReport.Click += this.buttonPrintReport_Click;
+            buttonPrintReport.Click += buttonPrintReport_Click;
             // 
             // comboBoxArticul
             // 
@@ -229,9 +393,9 @@
             comboBoxArticul.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxArticul.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxArticul.FormattingEnabled = true;
-            comboBoxArticul.Location = new System.Drawing.Point(209, 102);
+            comboBoxArticul.Location = new System.Drawing.Point(209, 154);
             comboBoxArticul.Name = "comboBoxArticul";
-            comboBoxArticul.Size = new System.Drawing.Size(159, 24);
+            comboBoxArticul.Size = new System.Drawing.Size(169, 24);
             comboBoxArticul.TabIndex = 8;
             comboBoxArticul.SelectedValueChanged += comboBoxArticul_SelectedValueChanged;
             // 
@@ -240,7 +404,7 @@
             checkBoxArticul.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxArticul.Font = new System.Drawing.Font("Arial", 10F);
             checkBoxArticul.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            checkBoxArticul.Location = new System.Drawing.Point(24, 102);
+            checkBoxArticul.Location = new System.Drawing.Point(24, 154);
             checkBoxArticul.Name = "checkBoxArticul";
             checkBoxArticul.Size = new System.Drawing.Size(20, 22);
             checkBoxArticul.TabIndex = 7;
@@ -251,7 +415,7 @@
             checkBoxExecMonth.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxExecMonth.Font = new System.Drawing.Font("Arial", 10F);
             checkBoxExecMonth.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            checkBoxExecMonth.Location = new System.Drawing.Point(24, 76);
+            checkBoxExecMonth.Location = new System.Drawing.Point(24, 128);
             checkBoxExecMonth.Name = "checkBoxExecMonth";
             checkBoxExecMonth.Size = new System.Drawing.Size(20, 22);
             checkBoxExecMonth.TabIndex = 5;
@@ -262,7 +426,7 @@
             checkBoxKmlInvNumber.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxKmlInvNumber.Font = new System.Drawing.Font("Arial", 10F);
             checkBoxKmlInvNumber.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            checkBoxKmlInvNumber.Location = new System.Drawing.Point(24, 50);
+            checkBoxKmlInvNumber.Location = new System.Drawing.Point(24, 102);
             checkBoxKmlInvNumber.Name = "checkBoxKmlInvNumber";
             checkBoxKmlInvNumber.Size = new System.Drawing.Size(20, 22);
             checkBoxKmlInvNumber.TabIndex = 3;
@@ -273,7 +437,7 @@
             checkBoxKnitClass.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxKnitClass.Font = new System.Drawing.Font("Arial", 10F);
             checkBoxKnitClass.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            checkBoxKnitClass.Location = new System.Drawing.Point(24, 24);
+            checkBoxKnitClass.Location = new System.Drawing.Point(24, 76);
             checkBoxKnitClass.Name = "checkBoxKnitClass";
             checkBoxKnitClass.Size = new System.Drawing.Size(20, 22);
             checkBoxKnitClass.TabIndex = 0;
@@ -283,7 +447,7 @@
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
             customLabel4.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customLabel4.Location = new System.Drawing.Point(48, 102);
+            customLabel4.Location = new System.Drawing.Point(48, 154);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(157, 21);
             customLabel4.TabIndex = 111;
@@ -296,9 +460,9 @@
             comboBoxExecMonth.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxExecMonth.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxExecMonth.FormattingEnabled = true;
-            comboBoxExecMonth.Location = new System.Drawing.Point(209, 76);
+            comboBoxExecMonth.Location = new System.Drawing.Point(342, 128);
             comboBoxExecMonth.Name = "comboBoxExecMonth";
-            comboBoxExecMonth.Size = new System.Drawing.Size(159, 24);
+            comboBoxExecMonth.Size = new System.Drawing.Size(36, 24);
             comboBoxExecMonth.TabIndex = 6;
             comboBoxExecMonth.SelectedValueChanged += comboBoxExecMonth_SelectedValueChanged;
             // 
@@ -306,7 +470,7 @@
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customLabel3.Location = new System.Drawing.Point(48, 76);
+            customLabel3.Location = new System.Drawing.Point(48, 128);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(157, 21);
             customLabel3.TabIndex = 1;
@@ -316,7 +480,7 @@
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customLabel2.Location = new System.Drawing.Point(48, 50);
+            customLabel2.Location = new System.Drawing.Point(48, 102);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(157, 21);
             customLabel2.TabIndex = 1;
@@ -329,9 +493,9 @@
             comboBoxKmlInvNumber.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxKmlInvNumber.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxKmlInvNumber.FormattingEnabled = true;
-            comboBoxKmlInvNumber.Location = new System.Drawing.Point(209, 50);
+            comboBoxKmlInvNumber.Location = new System.Drawing.Point(209, 102);
             comboBoxKmlInvNumber.Name = "comboBoxKmlInvNumber";
-            comboBoxKmlInvNumber.Size = new System.Drawing.Size(159, 24);
+            comboBoxKmlInvNumber.Size = new System.Drawing.Size(169, 24);
             comboBoxKmlInvNumber.TabIndex = 4;
             comboBoxKmlInvNumber.SelectedValueChanged += comboBoxKmlInvNumber_SelectedValueChanged;
             // 
@@ -339,7 +503,7 @@
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customLabel1.Location = new System.Drawing.Point(48, 24);
+            customLabel1.Location = new System.Drawing.Point(48, 76);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(157, 21);
             customLabel1.TabIndex = 1;
@@ -352,9 +516,9 @@
             comboBoxKnitClass.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxKnitClass.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxKnitClass.FormattingEnabled = true;
-            comboBoxKnitClass.Location = new System.Drawing.Point(209, 24);
+            comboBoxKnitClass.Location = new System.Drawing.Point(209, 76);
             comboBoxKnitClass.Name = "comboBoxKnitClass";
-            comboBoxKnitClass.Size = new System.Drawing.Size(159, 24);
+            comboBoxKnitClass.Size = new System.Drawing.Size(169, 24);
             comboBoxKnitClass.TabIndex = 2;
             comboBoxKnitClass.SelectedValueChanged += comboBoxKnitClass_SelectedValueChanged;
             // 
@@ -362,41 +526,40 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem1, layoutControlGroup1, layoutControlItem13, emptySpaceItem5 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem1, layoutControlGroup1, layoutControlItem13, emptySpaceItem3 });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(431, 275);
+            Root.Size = new System.Drawing.Size(443, 275);
             Root.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(0, 154);
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 206);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(398, 101);
+            emptySpaceItem1.Size = new System.Drawing.Size(411, 49);
             // 
             // layoutControlGroup1
             // 
-            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem9, layoutControlItem10, layoutControlItem5, layoutControlItem4, layoutControlItem11, layoutControlItem3, layoutControlItem6, layoutControlItem12, layoutControlItem7, layoutControlItem8, layoutControlItem14, layoutControlItem15, layoutControlItem16, layoutControlItem17 });
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem9, layoutControlItem10, layoutControlItem5, layoutControlItem4, layoutControlItem11, layoutControlItem3, layoutControlItem6, layoutControlItem12, layoutControlItem7, layoutControlItem8, layoutControlItem14, layoutControlItem15, layoutControlItem16, layoutControlItem17, layoutControlItem18, layoutControlItem19, layoutControlItem20, layoutControlItem21, layoutControlItem22, emptySpaceItem2, layoutControlItem23, layoutControlItem24, layoutControlItem25, layoutControlItem26 });
             layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new System.Drawing.Size(398, 128);
+            layoutControlGroup1.Size = new System.Drawing.Size(411, 180);
             layoutControlGroup1.Text = "Класс вязания";
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = comboBoxKnitClass;
-            layoutControlItem1.Location = new System.Drawing.Point(185, 0);
-            layoutControlItem1.MaxSize = new System.Drawing.Size(163, 25);
-            layoutControlItem1.MinSize = new System.Drawing.Size(163, 25);
+            layoutControlItem1.Location = new System.Drawing.Point(185, 52);
+            layoutControlItem1.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(163, 26);
+            layoutControlItem1.Size = new System.Drawing.Size(173, 26);
             layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = customLabel1;
-            layoutControlItem2.Location = new System.Drawing.Point(24, 0);
+            layoutControlItem2.Location = new System.Drawing.Point(24, 52);
             layoutControlItem2.MaxSize = new System.Drawing.Size(161, 25);
             layoutControlItem2.MinSize = new System.Drawing.Size(161, 25);
             layoutControlItem2.Name = "layoutControlItem2";
@@ -407,7 +570,7 @@
             // layoutControlItem9
             // 
             layoutControlItem9.Control = checkBoxKnitClass;
-            layoutControlItem9.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem9.Location = new System.Drawing.Point(0, 52);
             layoutControlItem9.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem9.Name = "layoutControlItem9";
             layoutControlItem9.Size = new System.Drawing.Size(24, 26);
@@ -417,7 +580,7 @@
             // layoutControlItem10
             // 
             layoutControlItem10.Control = checkBoxKmlInvNumber;
-            layoutControlItem10.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem10.Location = new System.Drawing.Point(0, 78);
             layoutControlItem10.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem10.Name = "layoutControlItem10";
             layoutControlItem10.Size = new System.Drawing.Size(24, 26);
@@ -427,7 +590,7 @@
             // layoutControlItem5
             // 
             layoutControlItem5.Control = customLabel2;
-            layoutControlItem5.Location = new System.Drawing.Point(24, 26);
+            layoutControlItem5.Location = new System.Drawing.Point(24, 78);
             layoutControlItem5.MaxSize = new System.Drawing.Size(161, 25);
             layoutControlItem5.MinSize = new System.Drawing.Size(161, 25);
             layoutControlItem5.Name = "layoutControlItem5";
@@ -438,18 +601,17 @@
             // layoutControlItem4
             // 
             layoutControlItem4.Control = comboBoxKmlInvNumber;
-            layoutControlItem4.Location = new System.Drawing.Point(185, 26);
-            layoutControlItem4.MaxSize = new System.Drawing.Size(163, 25);
-            layoutControlItem4.MinSize = new System.Drawing.Size(163, 25);
+            layoutControlItem4.Location = new System.Drawing.Point(185, 78);
+            layoutControlItem4.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(163, 26);
+            layoutControlItem4.Size = new System.Drawing.Size(173, 26);
             layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             layoutControlItem11.Control = checkBoxExecMonth;
-            layoutControlItem11.Location = new System.Drawing.Point(0, 52);
+            layoutControlItem11.Location = new System.Drawing.Point(0, 104);
             layoutControlItem11.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem11.Name = "layoutControlItem11";
             layoutControlItem11.Size = new System.Drawing.Size(24, 26);
@@ -459,7 +621,7 @@
             // layoutControlItem3
             // 
             layoutControlItem3.Control = customLabel3;
-            layoutControlItem3.Location = new System.Drawing.Point(24, 52);
+            layoutControlItem3.Location = new System.Drawing.Point(24, 104);
             layoutControlItem3.MaxSize = new System.Drawing.Size(161, 25);
             layoutControlItem3.MinSize = new System.Drawing.Size(161, 25);
             layoutControlItem3.Name = "layoutControlItem3";
@@ -470,18 +632,18 @@
             // layoutControlItem6
             // 
             layoutControlItem6.Control = comboBoxExecMonth;
-            layoutControlItem6.Location = new System.Drawing.Point(185, 52);
-            layoutControlItem6.MaxSize = new System.Drawing.Size(163, 25);
-            layoutControlItem6.MinSize = new System.Drawing.Size(163, 25);
+            layoutControlItem6.Location = new System.Drawing.Point(318, 104);
+            layoutControlItem6.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(163, 26);
+            layoutControlItem6.Size = new System.Drawing.Size(40, 26);
             layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem6.TextVisible = false;
+            layoutControlItem6.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
             // layoutControlItem12
             // 
             layoutControlItem12.Control = checkBoxArticul;
-            layoutControlItem12.Location = new System.Drawing.Point(0, 78);
+            layoutControlItem12.Location = new System.Drawing.Point(0, 130);
             layoutControlItem12.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem12.Name = "layoutControlItem12";
             layoutControlItem12.Size = new System.Drawing.Size(24, 26);
@@ -491,7 +653,7 @@
             // layoutControlItem7
             // 
             layoutControlItem7.Control = customLabel4;
-            layoutControlItem7.Location = new System.Drawing.Point(24, 78);
+            layoutControlItem7.Location = new System.Drawing.Point(24, 130);
             layoutControlItem7.MaxSize = new System.Drawing.Size(161, 25);
             layoutControlItem7.MinSize = new System.Drawing.Size(161, 25);
             layoutControlItem7.Name = "layoutControlItem7";
@@ -502,74 +664,162 @@
             // layoutControlItem8
             // 
             layoutControlItem8.Control = comboBoxArticul;
-            layoutControlItem8.Location = new System.Drawing.Point(185, 78);
-            layoutControlItem8.MaxSize = new System.Drawing.Size(163, 25);
-            layoutControlItem8.MinSize = new System.Drawing.Size(163, 25);
+            layoutControlItem8.Location = new System.Drawing.Point(185, 130);
+            layoutControlItem8.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(163, 26);
+            layoutControlItem8.Size = new System.Drawing.Size(173, 26);
             layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = buttonKnitClassClear;
-            layoutControlItem14.Location = new System.Drawing.Point(348, 0);
+            layoutControlItem14.Location = new System.Drawing.Point(358, 52);
+            layoutControlItem14.MinSize = new System.Drawing.Size(26, 26);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(26, 26);
+            layoutControlItem14.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem14.TextVisible = false;
             // 
             // layoutControlItem15
             // 
             layoutControlItem15.Control = buttonKmlInvNumberClear;
-            layoutControlItem15.Location = new System.Drawing.Point(348, 26);
+            layoutControlItem15.Location = new System.Drawing.Point(358, 78);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(26, 26);
+            layoutControlItem15.Size = new System.Drawing.Size(29, 26);
             layoutControlItem15.TextVisible = false;
             // 
             // layoutControlItem16
             // 
             layoutControlItem16.Control = buttonExecMonthClear;
-            layoutControlItem16.Location = new System.Drawing.Point(348, 52);
+            layoutControlItem16.Location = new System.Drawing.Point(358, 104);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(26, 26);
+            layoutControlItem16.Size = new System.Drawing.Size(29, 26);
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = buttonArticulClear;
-            layoutControlItem17.Location = new System.Drawing.Point(348, 78);
+            layoutControlItem17.Location = new System.Drawing.Point(358, 130);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(26, 26);
+            layoutControlItem17.Size = new System.Drawing.Size(29, 26);
             layoutControlItem17.TextVisible = false;
+            // 
+            // layoutControlItem18
+            // 
+            layoutControlItem18.Control = checkBoxKnitPeriod;
+            layoutControlItem18.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem18.Name = "layoutControlItem18";
+            layoutControlItem18.Size = new System.Drawing.Size(24, 26);
+            layoutControlItem18.TextVisible = false;
+            // 
+            // layoutControlItem19
+            // 
+            layoutControlItem19.Control = customLabel5;
+            layoutControlItem19.Location = new System.Drawing.Point(24, 0);
+            layoutControlItem19.Name = "layoutControlItem19";
+            layoutControlItem19.Size = new System.Drawing.Size(161, 26);
+            layoutControlItem19.TextVisible = false;
+            // 
+            // layoutControlItem20
+            // 
+            layoutControlItem20.Control = customLabel6;
+            layoutControlItem20.Location = new System.Drawing.Point(185, 0);
+            layoutControlItem20.Name = "layoutControlItem20";
+            layoutControlItem20.Size = new System.Drawing.Size(34, 26);
+            layoutControlItem20.TextVisible = false;
+            // 
+            // layoutControlItem21
+            // 
+            layoutControlItem21.Control = dateEditPeriodFrom;
+            layoutControlItem21.Location = new System.Drawing.Point(219, 0);
+            layoutControlItem21.MinSize = new System.Drawing.Size(54, 24);
+            layoutControlItem21.Name = "layoutControlItem21";
+            layoutControlItem21.Size = new System.Drawing.Size(139, 26);
+            layoutControlItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem21.TextVisible = false;
+            // 
+            // layoutControlItem22
+            // 
+            layoutControlItem22.Control = customLabel7;
+            layoutControlItem22.Location = new System.Drawing.Point(185, 26);
+            layoutControlItem22.Name = "layoutControlItem22";
+            layoutControlItem22.Size = new System.Drawing.Size(34, 26);
+            layoutControlItem22.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.Location = new System.Drawing.Point(0, 26);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new System.Drawing.Size(185, 26);
+            // 
+            // layoutControlItem23
+            // 
+            layoutControlItem23.Control = dateEditPeriodTo;
+            layoutControlItem23.Location = new System.Drawing.Point(219, 26);
+            layoutControlItem23.MinSize = new System.Drawing.Size(54, 24);
+            layoutControlItem23.Name = "layoutControlItem23";
+            layoutControlItem23.Size = new System.Drawing.Size(139, 26);
+            layoutControlItem23.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem23.TextVisible = false;
+            // 
+            // layoutControlItem24
+            // 
+            layoutControlItem24.Control = customSimpleButton1;
+            layoutControlItem24.Location = new System.Drawing.Point(358, 0);
+            layoutControlItem24.Name = "layoutControlItem24";
+            layoutControlItem24.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem24.TextVisible = false;
+            // 
+            // layoutControlItem25
+            // 
+            layoutControlItem25.Control = customSimpleButton2;
+            layoutControlItem25.Location = new System.Drawing.Point(358, 26);
+            layoutControlItem25.Name = "layoutControlItem25";
+            layoutControlItem25.Size = new System.Drawing.Size(29, 26);
+            layoutControlItem25.TextVisible = false;
+            // 
+            // layoutControlItem26
+            // 
+            layoutControlItem26.Control = textBoxExecMonth;
+            layoutControlItem26.Location = new System.Drawing.Point(185, 104);
+            layoutControlItem26.Name = "layoutControlItem26";
+            layoutControlItem26.Size = new System.Drawing.Size(133, 26);
+            layoutControlItem26.TextVisible = false;
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = buttonPrintReport;
-            layoutControlItem13.Location = new System.Drawing.Point(0, 128);
-            layoutControlItem13.MaxSize = new System.Drawing.Size(398, 26);
-            layoutControlItem13.MinSize = new System.Drawing.Size(398, 26);
+            layoutControlItem13.Location = new System.Drawing.Point(0, 180);
+            layoutControlItem13.MaxSize = new System.Drawing.Size(411, 26);
+            layoutControlItem13.MinSize = new System.Drawing.Size(411, 26);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(398, 26);
+            layoutControlItem13.Size = new System.Drawing.Size(411, 26);
             layoutControlItem13.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem13.TextVisible = false;
             // 
-            // emptySpaceItem5
+            // emptySpaceItem3
             // 
-            emptySpaceItem5.Location = new System.Drawing.Point(398, 0);
-            emptySpaceItem5.Name = "emptySpaceItem5";
-            emptySpaceItem5.Size = new System.Drawing.Size(13, 255);
+            emptySpaceItem3.Location = new System.Drawing.Point(411, 0);
+            emptySpaceItem3.Name = "emptySpaceItem3";
+            emptySpaceItem3.Size = new System.Drawing.Size(12, 255);
             // 
             // KnittingProductionPlanningReportParameters
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(431, 275);
+            ClientSize = new System.Drawing.Size(443, 275);
             Controls.Add(layoutControl1);
             Name = "KnittingProductionPlanningReportParameters";
             Text = "Отчеты по планированию загруза вязального производства";
             Load += KnittingProductionPlanningReport_Load;
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)textBoxExecMonth.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodTo.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodTo.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodFrom.Properties.CalendarTimeProperties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dateEditPeriodFrom.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
@@ -589,8 +839,18 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem18).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem24).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem26).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
             ResumeLayout(false);
         }
 
@@ -634,6 +894,25 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
+        private DevExpress.XtraEditors.DateEdit dateEditPeriodFrom;
+        private Core.Class.CustomLabel customLabel5;
+        private CustomCheckBox checkBoxKnitPeriod;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
+        private Core.Class.CustomLabel customLabel6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
+        private DevExpress.XtraEditors.DateEdit dateEditPeriodTo;
+        private Core.Class.CustomLabel customLabel7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem23;
+        private Core.Class.CustomSimpleButton customSimpleButton2;
+        private Core.Class.CustomSimpleButton customSimpleButton1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem25;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private CustomTextBoxEx textBoxExecMonth;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem26;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DevExpress.Office.Utils;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.KnittingProduction.Models;
@@ -27,6 +28,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static BulkHelper _bulkHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
+        //private LoadingScreen _loadingScreen;
 
         private List<KnitPlanReportParametersList> _currentKnitClassListData = new List<KnitPlanReportParametersList>();
         private BindingList<KnitPlanReportParametersList> _knitClassListBindingList;
@@ -52,6 +54,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbService = new DbService(_dbHelper);
             _vyazService = new VyazService(_dbHelper);
             _bulkHelper = new BulkHelper();
+            //_loadingScreen = new LoadingScreen();
             ThemeManager.UpdateTheme(this);
         }
 
@@ -118,6 +121,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void KnittingProductionPlanningReport_Load(object sender, EventArgs e)
         {
+            dateEditPeriodFrom.EditValue = DateTime.Now;
+
             try
             {
                 Task bindingsTask = InitializeBindingsAsync();
@@ -128,10 +133,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Task ParametersList2Task = LoadKnitPlanReportParametersListDataAsync(2, _kmlInvNumberListBindingSource, _currentKmlInvNumberListData);
                 Task ParametersList3Task = LoadKnitPlanReportParametersListDataAsync(3, _monthZapListBindingSource, _currentMonthZapListData);
                 Task ParametersList4Task = LoadKnitPlanReportParametersListDataAsync(4, _articulListBindingSource, _currentArticulListData);
+                //_loadingScreen.CreateOverlaySpinner(this);
+                //_loadingScreen.ShowOverlay();
+                //try
+                //{
                 await Task.WhenAll(ParametersList1Task, ParametersList2Task, ParametersList3Task, ParametersList4Task);
+                //}
+                //finally { _loadingScreen.HideOverlay(); }
+
                 comboBoxKnitClass.SelectedIndex = -1;
                 comboBoxKmlInvNumber.SelectedIndex = -1;
                 comboBoxExecMonth.SelectedIndex = -1;
+                comboBoxArticul.Sorted = true;
                 comboBoxArticul.SelectedIndex = -1;
             }
             catch (Exception ex)
@@ -223,6 +236,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void buttonExecMonthClear_Click(object sender, EventArgs e)
         {
             comboBoxExecMonth.SelectedIndex = -1;
+            textBoxExecMonth.Text = "";
         }
 
         private void comboBoxArticul_SelectedValueChanged(object sender, EventArgs e)
@@ -271,12 +285,41 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             report1.RequestParameters = false;
             //report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
             //var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
-            report1.Parameters["_IdVyazClass"].Value = checkBoxKnitClass.Checked == true? comboBoxKnitClass.SelectedValue : 0;
-            report1.Parameters["_kmlID"].Value = checkBoxKmlInvNumber.Checked == true? comboBoxKmlInvNumber.SelectedValue : 0;
-            report1.Parameters["_yearMonthZapInt"].Value = checkBoxExecMonth.Checked == true? comboBoxExecMonth.SelectedValue : 0;
-            report1.Parameters["_articulKod"].Value = checkBoxArticul.Checked == true? comboBoxArticul.SelectedValue : " ";
+            report1.Parameters["_IdVyazClass"].Value = checkBoxKnitClass.Checked == true ? comboBoxKnitClass.SelectedValue : 0;
+            report1.Parameters["_kmlID"].Value = checkBoxKmlInvNumber.Checked == true ? comboBoxKmlInvNumber.SelectedValue : 0;
+            //report1.Parameters["_yearMonthZapInt"].Value = checkBoxExecMonth.Checked == true ? comboBoxExecMonth.SelectedValue : 0;
+            report1.Parameters["_yearMonthZapInt"].Value = checkBoxExecMonth.Checked == true ? Convert.ToInt32(textBoxExecMonth.Text) : 0;
+            report1.Parameters["_articulKod"].Value = checkBoxArticul.Checked == true ? comboBoxArticul.SelectedValue : " ";
+
+            dateEditPeriodFrom.EditValue = (dateEditPeriodFrom.EditValue is DateTime f && f != DateTime.MinValue) ? f : null;
+            dateEditPeriodTo.EditValue = (dateEditPeriodTo.EditValue is DateTime t && t != DateTime.MinValue) ? t : null;
+
+            report1.Parameters["_dateFrom"].Value = checkBoxKnitPeriod.Checked == true ? dateEditPeriodFrom.EditValue : null;
+            report1.Parameters["_dateTo"].Value = checkBoxKnitPeriod.Checked == true ? dateEditPeriodTo.EditValue : null;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
+        }
+
+        private void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            dateEditPeriodFrom.EditValue = null;
+        }
+
+        private void customSimpleButton2_Click(object sender, EventArgs e)
+        {
+            dateEditPeriodTo.EditValue = null;
+        }
+
+        private void textBoxExecMonth_EditValueChanged(object sender, EventArgs e)
+        {
+            if (textBoxExecMonth.Text.Length > 0)
+            {
+                checkBoxExecMonth.Checked = true;
+            }
+            else
+            {
+                checkBoxExecMonth.Checked = false;
+            }
         }
     }
 }

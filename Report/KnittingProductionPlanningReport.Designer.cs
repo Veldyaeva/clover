@@ -97,11 +97,15 @@
             DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter3 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter5 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter6 = new DevExpress.DataAccess.Sql.QueryParameter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnittingProductionPlanningReport));
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings2 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings3 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings4 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+            DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings5 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+            DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings6 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
@@ -183,6 +187,8 @@
             this._kmlID = new DevExpress.XtraReports.Parameters.Parameter();
             this._yearMonthZapInt = new DevExpress.XtraReports.Parameters.Parameter();
             this._articulKod = new DevExpress.XtraReports.Parameters.Parameter();
+            this._dateFrom = new DevExpress.XtraReports.Parameters.Parameter();
+            this._dateTo = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
@@ -889,7 +895,7 @@
             this.sqlDataSource1.ConnectionParameters = msSqlConnectionParameters1;
             this.sqlDataSource1.Name = "sqlDataSource1";
             columnExpression1.ColumnName = "pszkmID";
-            table2.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"623\" />";
+            table2.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"643\" />";
             table2.Name = "planSezonZadKnitMachine";
             columnExpression1.Table = table2;
             column1.Expression = columnExpression1;
@@ -1017,11 +1023,19 @@
             queryParameter4.Name = "@xArticulKod";
             queryParameter4.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter4.Value = new DevExpress.DataAccess.Expression("?_articulKod", typeof(string));
+            queryParameter5.Name = "@xDateFrom";
+            queryParameter5.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter5.Value = new DevExpress.DataAccess.Expression("?_dateFrom", typeof(System.DateTime));
+            queryParameter6.Name = "@xDateTo";
+            queryParameter6.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter6.Value = new DevExpress.DataAccess.Expression("?_dateTo", typeof(System.DateTime));
             storedProcQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1,
             queryParameter2,
             queryParameter3,
-            queryParameter4});
+            queryParameter4,
+            queryParameter5,
+            queryParameter6});
             storedProcQuery1.StoredProcName = "GetPlanSezonZadKnitMachine";
             this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
             selectQuery1,
@@ -1212,6 +1226,26 @@
             this._articulKod.ValueSourceSettings = staticListLookUpSettings4;
             this._articulKod.Visible = false;
             // 
+            // _dateFrom
+            // 
+            this._dateFrom.AllowNull = true;
+            this._dateFrom.Description = "DateFrom";
+            this._dateFrom.Name = "_dateFrom";
+            this._dateFrom.Type = typeof(global::System.DateTime);
+            this._dateFrom.ValueInfo = "2025-10-08";
+            this._dateFrom.ValueSourceSettings = staticListLookUpSettings5;
+            this._dateFrom.Visible = false;
+            // 
+            // _dateTo
+            // 
+            this._dateTo.AllowNull = true;
+            this._dateTo.Description = "DateTo";
+            this._dateTo.Name = "_dateTo";
+            this._dateTo.Type = typeof(global::System.DateTime);
+            this._dateTo.ValueInfo = "2025-10-08";
+            this._dateTo.ValueSourceSettings = staticListLookUpSettings6;
+            this._dateTo.Visible = false;
+            // 
             // KnittingProductionPlanningReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1237,12 +1271,16 @@
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._IdVyazClass, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._kmlID, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._yearMonthZapInt, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._articulKod, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._articulKod, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._dateFrom, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._dateTo, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this._IdVyazClass,
             this._kmlID,
             this._yearMonthZapInt,
-            this._articulKod});
+            this._articulKod,
+            this._dateFrom,
+            this._dateTo});
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.Pixels;
             this.SnapGridSize = 12.5F;
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
@@ -1354,5 +1392,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell30;
+        private DevExpress.XtraReports.Parameters.Parameter _dateFrom;
+        private DevExpress.XtraReports.Parameters.Parameter _dateTo;
     }
 }
