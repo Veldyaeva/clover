@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Dapper;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
