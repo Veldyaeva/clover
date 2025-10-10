@@ -3,6 +3,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 
 namespace SewingProduction.Features.Articul
@@ -14,7 +15,7 @@ namespace SewingProduction.Features.Articul
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public EditArticul(string kodArtSQL = null)
+        public EditArticul(UserClass user, string kodArtSQL = null) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
@@ -34,6 +35,10 @@ namespace SewingProduction.Features.Articul
                 radioGroup1.Visible = false;
                 this.Text = "Копирование артикула";
             }
+        }
+        public EditArticul()
+        {
+            InitializeComponent();
         }
 
         private void art_new2024_Load(object sender, EventArgs e) => comboAllTableItems();
