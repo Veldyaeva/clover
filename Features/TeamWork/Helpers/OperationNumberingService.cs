@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DevExpress.Mvvm.Native;
 using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Helpers
@@ -56,24 +57,27 @@ namespace SewingProduction.Features.TeamWork.Helpers
         {
             if (items == null || block == null || block.Count == 0 || target == null) return;
             int groupN = target.N;
-            var group = items.Where(x => x.N == groupN).OrderBy(x => x.N1).ToList();
+            var group = items.Where(x => x.N == groupN && x.N1 < 100) // исключаем спецоперации)
+                                                                       .OrderBy(x => x.N1).ToList();
             var exclude = new HashSet<NormRasz>(block);
             group = group.Where(x => !exclude.Contains(x)).ToList();
             int insertIndex = System.Math.Max(0, group.IndexOf(target) + 1);
             group.InsertRange(insertIndex, block);
-            if (group.Count == 1)
+            // Перенумеровываем только обычные операции (N1 < 100)
+            var normal = group.Where(g => g.N1 < 100).ToList();
+            if (normal.Count == 1)
             {
-                int oldN1 = group[0].N1;
-                group[0].N1 = 0;
-                if (!group[0].IsNew && group[0].N1 != oldN1) group[0].IsModified = true;
+                int oldN1 = normal[0].N1;
+                normal[0].N1 = 0;
+                if (!normal[0].IsNew && normal[0].N1 != oldN1) normal[0].IsModified = true;
             }
             else
             {
-                for (int i = 0; i < group.Count; i++)
+                for (int i = 0; i < normal.Count; i++)
                 {
-                    int oldN1 = group[i].N1;
-                    group[i].N1 = i + 1;
-                    if (!group[i].IsNew && group[i].N1 != oldN1) group[i].IsModified = true;
+                    int oldN1 = normal[i].N1;
+                    normal[i].N1 = i + 1;
+                    if (!normal[i].IsNew && normal[i].N1 != oldN1) normal[i].IsModified = true;
                 }
             }
         }
@@ -85,7 +89,15 @@ namespace SewingProduction.Features.TeamWork.Helpers
             int oldN1Item = item.N1;
             if (item.N != targetGroupN) item.N = targetGroupN;
             var groupItems = scope.Where(x => x.N == targetGroupN && !object.ReferenceEquals(x, item)).ToList();
-            if (groupItems.Count == 0)
+            var normalMaxN1 = scope.Where(x => x.N == targetGroupN && !object.ReferenceEquals(x, item) && x.N1 < 100)
+                                    .Select(x => (int?)x.N1)
+                                    .DefaultIfEmpty(null)
+                                    .Max();
+            if (item.N1 >= 100)
+            {
+                // Спецоперации сохраняют свой N1 при перемещении
+            }
+            else if (groupItems.Count == 0)
             {
                 item.N1 = 0;
             }
@@ -95,7 +107,15 @@ namespace SewingProduction.Features.TeamWork.Helpers
             }
             else
             {
-                item.N1 = groupItems.Max(x => x.N1) + 1;
+                if (!normalMaxN1.HasValue)
+                {
+                    // В целевой главе нет обычных операций — вставляем как главу (N1=0)
+                    item.N1 = 0;
+                }
+                else
+                {
+                    item.N1 = normalMaxN1.Value + 1;
+                }
             }
             if (!item.IsNew && (item.N != oldN || item.N1 != oldN1Item)) item.IsModified = true;
         }
@@ -114,8 +134,40 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 }
             }
             newItem.N = afterN + 1;
-            newItem.N1 = 0;
+            if (newItem.N1 < 100)
+            {
+                newItem.N1 = 0;
+            }
             //RecalculateAllOperationNumbers(items);
+        }
+
+        // Вставка основной операции как новой главы №1: смещение всех существующих глав вниз на 1.
+        // Для специальных операций (N1 >= 100) меняется только N (N1 сохраняется).
+        public static void InsertMainAtStart(IList<NormRasz> items, NormRasz newItem)
+        {
+            if (items == null || newItem == null) return;
+            var chapterGroups = items
+                .GroupBy(r => r.N)
+                .OrderByDescending(g => g.Key)
+                .ToList();
+            foreach (var g in chapterGroups)
+            {
+                int newN = g.Key + 1;
+                foreach (var op in g)
+                {
+                    int oldN = op.N;
+                    if (op.N != newN)
+                    {
+                        op.N = newN;
+                        if (!op.IsNew && op.N != oldN) op.IsModified = true;
+                    }
+                }
+            }
+            newItem.N = 1;
+            if (newItem.N1 < 100)
+            {
+                newItem.N1 = 0;
+            }
         }
 
         // Вставка подоперации (с возможным преобразованием основной в первую подоперацию)
@@ -133,47 +185,24 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 }
             }
             // Сдвигаем подоперации начиная с insertN1
-            foreach (var op in items.Where(r => r.N == operationN && r.N1 >= insertN1).OrderByDescending(r => r.N1))
+            foreach (var op in items.Where(r => r.N == operationN && !object.ReferenceEquals(r, newItem) && r.N1 < 100 && r.N1 >= insertN1).OrderBy(r => r.N1))
             {
                 int oldN1 = op.N1;
                 op.N1 += 1;
                 if (!op.IsNew && op.N1 != oldN1) op.IsModified = true;
             }
             newItem.N = operationN;
-            newItem.N1 = insertN1;
+            if (newItem.N1 < 100)
+            {
+                newItem.N1 = insertN1;
+            }
+            if (!items.Contains(newItem))
+            {
+                items.Add(newItem);
+            }
             RecalculateAllOperationNumbers(items);
         }
 
-        // Перенумерация после удаления
-        public static void RenumberAfterDeletion(IList<NormRasz> items, int deletedN, int deletedN1)
-        {
-            if (items == null) return;
-            if (deletedN1 == 0)
-            {
-                foreach (var op in items.Where(r => r.N > deletedN))
-                {
-                    int oldN = op.N;
-                    op.N -= 1;
-                    if (!op.IsNew && op.N != oldN) op.IsModified = true;
-                }
-            }
-            else
-            {
-                foreach (var op in items.Where(r => r.N == deletedN && r.N1 > deletedN1))
-                {
-                    int oldN1 = op.N1;
-                    op.N1 -= 1;
-                    if (!op.IsNew && op.N1 != oldN1) op.IsModified = true;
-                }
-                var remaining = items.Where(r => r.N == deletedN && r.N1 > 0).ToList();
-                if (remaining.Count == 1)
-                {
-                    int oldN1 = remaining[0].N1;
-                    remaining[0].N1 = 0;
-                    if (!remaining[0].IsNew && remaining[0].N1 != oldN1) remaining[0].IsModified = true;
-                }
-            }
-        }
     }
 }
 

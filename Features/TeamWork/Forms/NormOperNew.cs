@@ -1,4 +1,4 @@
-using DevExpress.CodeParser;
+﻿using DevExpress.CodeParser;
 using DevExpress.DirectX.Common.Direct2D;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
@@ -28,7 +28,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private System.Collections.Generic.List<KodProizvModel> kodProizvList;
         private System.Collections.Generic.List<PodrVyazModel> podrVyazList;
         private System.Collections.Generic.List<OborudShvModel> oborudShvList;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public NormRasz SelectedRowData { get; private set; }
         public NormOperNew()
         {
@@ -62,6 +62,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
 
                 ConfigureLookups();
+
+                // Разрешаем редактирование через EditForm и сохраняем изменения
+                gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+                gridView1.RowUpdated += gridView1_RowUpdated;
+                gridView1.EditFormPrepared += gridView1_EditFormPrepared;
+                gridView1.ValidateRow += gridView1_ValidateRow;
             }
             catch (ConstraintException ex)
             {
@@ -111,6 +117,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                         }
                     };
+                    repoKodProizv.ImmediatePopup = true;
+                    repoKodProizv.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSuggest;
+                    repoKodProizv.AutoSearchColumnIndex = 0;
                     colKodProizv.ColumnEdit = repoKodProizv;
                 }
 
@@ -156,6 +165,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                         }
                     };
+                    repoPodrVyaz.ImmediatePopup = true;
+                    repoPodrVyaz.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSuggest;
+                    repoPodrVyaz.AutoSearchColumnIndex = 0;
                     colPodrVyaz.ColumnEdit = repoPodrVyaz;
                 }
 
@@ -182,6 +194,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                         }
                     };
+                    repoOborud.ImmediatePopup = true;
+                    repoOborud.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSuggest;
+                    repoOborud.AutoSearchColumnIndex = 0;
                     colOborudShv.ColumnEdit = repoOborud;
                 }
             }
@@ -206,7 +221,25 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Нет данных для отображения.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Если данных нет — создаем пустую таблицу с ожидаемыми колонками, чтобы позволить добавление
+                    var table = new DataTable();
+                    table.Columns.Add("Id", typeof(int));
+                    table.Columns.Add("kod_o", typeof(string));
+                    table.Columns.Add("text", typeof(string));
+                    table.Columns.Add("po", typeof(string));
+                    table.Columns.Add("n", typeof(int));
+                    table.Columns.Add("n1", typeof(int));
+                    table.Columns.Add("sek", typeof(int));
+                    table.Columns.Add("new", typeof(string));
+                    table.Columns.Add("razryd", typeof(int));
+                    table.Columns.Add("spec", typeof(string));
+                    table.Columns.Add("obor", typeof(string));
+                    table.Columns.Add("kod_ob", typeof(int));
+                    table.Columns.Add("kod_proizv", typeof(int));
+                    table.Columns.Add("text_proizv", typeof(string));
+                    table.Columns.Add("text_vyaz", typeof(string));
+                    table.Columns.Add("text_ob", typeof(string));
+                    customGridControl1.DataSource = table;
                 }
             }
             catch (Exception ex)
@@ -291,6 +324,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 GridView view = gridView1;
                 if (view == null || view.FocusedRowHandle < 0) return;
+
+                // Требуем выбрать значения из справочников
+                var kodProizvVal = view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv");
+                var kodPodrVal = view.GetRowCellValue(view.FocusedRowHandle, "kod_podr");
+                var kodObVal = view.GetRowCellValue(view.FocusedRowHandle, "kod_ob");
+                if (kodProizvVal == null || kodProizvVal == DBNull.Value
+                    || kodPodrVal == null || kodPodrVal == DBNull.Value
+                    || kodObVal == null || kodObVal == DBNull.Value)
+                {
+                    MessageBox.Show("Пожалуйста, выберите производство, подразделение и оборудование из выпадающих списков.", "Требуется выбор", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 SelectedRowData = NormalizeDataFromView(view, view.FocusedRowHandle);
                 SelectedRowData.annId = _annId; // AnnId устанавливается здесь
@@ -379,6 +424,205 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при фильтрации данных");
                 MessageBox.Show($"Ошибка при фильтрации данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void customAddButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dt = customGridControl1?.DataSource as DataTable;
+                if (dt == null) return;
+
+                gridView1.BeginDataUpdate();
+                try
+                {
+                    var newRow = dt.NewRow();
+                    if (dt.Columns.Contains("kod_o")) newRow["kod_o"] = string.Empty;
+                    if (dt.Columns.Contains("text")) newRow["text"] = string.Empty;
+                    if (dt.Columns.Contains("po")) newRow["po"] = DBNull.Value;
+                    if (dt.Columns.Contains("n")) newRow["n"] = DBNull.Value;
+                    if (dt.Columns.Contains("n1")) newRow["n1"] = 0;
+                    if (dt.Columns.Contains("sek")) newRow["sek"] = 0;
+                    if (dt.Columns.Contains("new")) newRow["new"] = DBNull.Value;
+                    if (dt.Columns.Contains("razryd")) newRow["razryd"] = 0;
+                    if (dt.Columns.Contains("spec")) newRow["spec"] = string.Empty;
+                    if (dt.Columns.Contains("obor")) newRow["obor"] = string.Empty;
+                    if (dt.Columns.Contains("kod_ob")) newRow["kod_ob"] = DBNull.Value;
+                    if (dt.Columns.Contains("kod_proizv")) newRow["kod_proizv"] = DBNull.Value;
+                    if (dt.Columns.Contains("text_proizv")) newRow["text_proizv"] = string.Empty;
+                    if (dt.Columns.Contains("text_vyaz")) newRow["text_vyaz"] = string.Empty;
+                    if (dt.Columns.Contains("text_ob")) newRow["text_ob"] = string.Empty;
+
+                    dt.Rows.Add(newRow);
+                }
+                finally
+                {
+                    gridView1.EndDataUpdate();
+                }
+
+                int newIndex = dt.Rows.Count - 1;
+                int handle = gridView1.GetRowHandle(newIndex);
+                if (gridView1.IsValidRowHandle(handle))
+                {
+                    gridView1.FocusedRowHandle = handle;
+                    gridView1.MakeRowVisible(handle);
+                    gridView1.ShowEditForm();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в NormOperNew");
+            }
+        }
+
+        private async void gridView1_RowUpdated(object sender, RowObjectEventArgs e)
+        {
+            try
+            {
+                var view = sender as GridView;
+                if (view == null) return;
+                var rowHandle = e.RowHandle;
+                var row = view.GetDataRow(rowHandle);
+                if (row == null) return;
+
+                // Подготовка значений
+                string kod_o = row.Table.Columns.Contains("kod_o") ? Convert.ToString(row["kod_o"]) : null;
+                string text = row.Table.Columns.Contains("text") ? Convert.ToString(row["text"]) : null;
+                string po = row.Table.Columns.Contains("po") ? Convert.ToString(row["po"]) : null;
+                int? n = TryToNullableInt(row, "n");
+                int? n1 = TryToNullableInt(row, "n1");
+                int? sek = TryToNullableInt(row, "sek");
+                string @new = row.Table.Columns.Contains("new") ? Convert.ToString(row["new"]) : null;
+                int? razryd = TryToNullableInt(row, "razryd");
+                string spec = row.Table.Columns.Contains("spec") ? Convert.ToString(row["spec"]) : null;
+                string obor = row.Table.Columns.Contains("obor") ? Convert.ToString(row["obor"]) : null;
+                int? kod_ob = TryToNullableInt(row, "kod_ob");
+                int? kod_proizv = TryToNullableInt(row, "kod_proizv");
+
+                // Вставка/обновление
+                if (!row.Table.Columns.Contains("Id"))
+                {
+                    // Если в выборке нет столбца Id — добавить для отслеживания
+                    row.Table.Columns.Add("Id", typeof(int));
+                }
+
+                int id = row["Id"] == DBNull.Value ? 0 : Convert.ToInt32(row["Id"]);
+                if (id == 0)
+                {
+                    string insertSql = @"INSERT INTO dbo.norm_oper (kod_o, [text], po, n, n1, sek, [new], razryd, spec, obor, kod_ob, kod_proizv)
+                                        VALUES (@kod_o, @text, @po, @n, @n1, @sek, @new, @razryd, @spec, @obor, @kod_ob, @kod_proizv);
+                                        SELECT CAST(SCOPE_IDENTITY() as int);";
+                    var newId = await _dbHelper.ExecuteScalarAsync<int>(insertSql, new System.Collections.Generic.Dictionary<string, object>
+                    {
+                        {"@kod_o", (object)kod_o ?? DBNull.Value},
+                        {"@text", (object)text ?? DBNull.Value},
+                        {"@po", (object)po ?? DBNull.Value},
+                        {"@n", (object)n ?? DBNull.Value},
+                        {"@n1", (object)n1 ?? DBNull.Value},
+                        {"@sek", (object)sek ?? DBNull.Value},
+                        {"@new", (object)@new ?? DBNull.Value},
+                        {"@razryd", (object)razryd ?? DBNull.Value},
+                        {"@spec", (object)spec ?? DBNull.Value},
+                        {"@obor", (object)obor ?? DBNull.Value},
+                        {"@kod_ob", (object)kod_ob ?? DBNull.Value},
+                        {"@kod_proizv", (object)kod_proizv ?? DBNull.Value},
+                    });
+                    row["Id"] = newId;
+                }
+                else
+                {
+                    string updateSql = @"UPDATE dbo.norm_oper SET
+                                            kod_o = @kod_o,
+                                            [text] = @text,
+                                            po = @po,
+                                            n = @n,
+                                            n1 = @n1,
+                                            sek = @sek,
+                                            [new] = @new,
+                                            razryd = @razryd,
+                                            spec = @spec,
+                                            obor = @obor,
+                                            kod_ob = @kod_ob,
+                                            kod_proizv = @kod_proizv
+                                          WHERE Id = @Id";
+                    await _dbHelper.ExecuteNonQueryAsync(updateSql, new System.Collections.Generic.Dictionary<string, object>
+                    {
+                        {"@Id", id},
+                        {"@kod_o", (object)kod_o ?? DBNull.Value},
+                        {"@text", (object)text ?? DBNull.Value},
+                        {"@po", (object)po ?? DBNull.Value},
+                        {"@n", (object)n ?? DBNull.Value},
+                        {"@n1", (object)n1 ?? DBNull.Value},
+                        {"@sek", (object)sek ?? DBNull.Value},
+                        {"@new", (object)@new ?? DBNull.Value},
+                        {"@razryd", (object)razryd ?? DBNull.Value},
+                        {"@spec", (object)spec ?? DBNull.Value},
+                        {"@obor", (object)obor ?? DBNull.Value},
+                        {"@kod_ob", (object)kod_ob ?? DBNull.Value},
+                        {"@kod_proizv", (object)kod_proizv ?? DBNull.Value},
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка сохранения записи norm_oper");
+                MessageBox.Show($"Ошибка при сохранении записи: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int? TryToNullableInt(DataRow row, string column)
+        {
+            if (!row.Table.Columns.Contains(column)) return null;
+            var v = row[column];
+            if (v == null || v == DBNull.Value) return null;
+            if (int.TryParse(v.ToString(), out int parsed)) return parsed;
+            return null;
+        }
+
+        private void gridView1_EditFormPrepared(object sender, EditFormPreparedEventArgs e)
+        {
+            // Когда открывается форма редактирования новой строки — автоматически раскрываем выпадающие списки
+            try
+            {
+                var view = sender as GridView;
+                if (view == null) return;
+                if (view.IsNewItemRow(view.FocusedRowHandle))
+                {
+                    // Попробуем сразу сфокусировать на kod_proizv и открыть popup
+                    var col = view.Columns["kod_proizv"];
+                    if (col != null)
+                    {
+                        view.FocusedColumn = col;
+                        view.ShowEditor();
+                        if (view.ActiveEditor is LookUpEdit le)
+                        {
+                            le.ShowPopup();
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private void gridView1_ValidateRow(object sender, ValidateRowEventArgs e)
+        {
+            try
+            {
+                var view = sender as GridView;
+                if (view == null) return;
+                var handle = e.RowHandle;
+                var kodProizvVal = view.GetRowCellValue(handle, "kod_proizv");
+                var kodPodrVal = view.GetRowCellValue(handle, "kod_podr");
+                var kodObVal = view.GetRowCellValue(handle, "kod_ob");
+                if (kodProizvVal == null || kodProizvVal == DBNull.Value
+                    || kodPodrVal == null || kodPodrVal == DBNull.Value
+                    || kodObVal == null || kodObVal == DBNull.Value)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Выберите производство, подразделение и оборудование";
+                }
+            }
+            catch { }
         }
     }
 

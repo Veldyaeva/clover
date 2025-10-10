@@ -40,10 +40,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             coltext = new DevExpress.XtraGrid.Columns.GridColumn();
+            coltext_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             colspec = new DevExpress.XtraGrid.Columns.GridColumn();
             colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             colobor = new DevExpress.XtraGrid.Columns.GridColumn();
-            coltext_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             colkod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,6 +55,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coltext_vyaz = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemResourcesComboBox1 = new DevExpress.XtraScheduler.UI.RepositoryItemResourcesComboBox();
+            repositoryItemLookUpEdit_kodProizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             normoperBindingSource = new System.Windows.Forms.BindingSource(components);
             radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
             customOkButton1 = new CustomOkButton();
@@ -62,11 +63,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             customAddButton = new CustomActionButton();
             searchControl1 = new DevExpress.XtraEditors.SearchControl();
-            repositoryItemLookUpEdit_kodProizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemResourcesComboBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normoperBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel1).BeginInit();
@@ -74,7 +75,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)tablePanel2).BeginInit();
             tablePanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)searchControl1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).BeginInit();
             SuspendLayout();
             // 
             // gridColumn1
@@ -130,7 +130,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView1
             // 
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colkod_o, coltext, colspec, colrazryd, colobor, coltext_ob, gridColumn8, gridColumn7, colkod_ob, colsek, proizv, colkod_proizv, coltext_proizv, coltext_vyaz, gridColumn6 });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colkod_o, coltext, coltext_ob, colspec, colrazryd, colobor, gridColumn8, gridColumn7, colkod_ob, colsek, proizv, colkod_proizv, coltext_proizv, coltext_vyaz, gridColumn6 });
             gridView1.GridControl = customGridControl1;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
@@ -146,6 +146,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colkod_o.Name = "colkod_o";
             colkod_o.Visible = true;
             colkod_o.VisibleIndex = 0;
+            colkod_o.Width = 94;
             // 
             // coltext
             // 
@@ -155,32 +156,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coltext.SortMode = DevExpress.XtraGrid.ColumnSortMode.DisplayText;
             coltext.Visible = true;
             coltext.VisibleIndex = 1;
-            coltext.Width = 278;
-            // 
-            // colspec
-            // 
-            colspec.Caption = "Специальность";
-            colspec.FieldName = "spec";
-            colspec.Name = "colspec";
-            colspec.Visible = true;
-            colspec.VisibleIndex = 2;
-            colspec.Width = 117;
-            // 
-            // colrazryd
-            // 
-            colrazryd.Caption = "Разряд";
-            colrazryd.FieldName = "razryd";
-            colrazryd.Name = "colrazryd";
-            colrazryd.Visible = true;
-            colrazryd.VisibleIndex = 3;
-            colrazryd.Width = 48;
-            // 
-            // colobor
-            // 
-            colobor.Caption = "Оборуд";
-            colobor.FieldName = "obor";
-            colobor.Name = "colobor";
-            colobor.Width = 48;
+            coltext.Width = 351;
             // 
             // coltext_ob
             // 
@@ -188,8 +164,33 @@ namespace SewingProduction.Features.TeamWork.Forms
             coltext_ob.FieldName = "text_ob";
             coltext_ob.Name = "coltext_ob";
             coltext_ob.Visible = true;
-            coltext_ob.VisibleIndex = 4;
-            coltext_ob.Width = 48;
+            coltext_ob.VisibleIndex = 2;
+            coltext_ob.Width = 200;
+            // 
+            // colspec
+            // 
+            colspec.Caption = "Специальность";
+            colspec.FieldName = "spec";
+            colspec.Name = "colspec";
+            colspec.Visible = true;
+            colspec.VisibleIndex = 3;
+            colspec.Width = 50;
+            // 
+            // colrazryd
+            // 
+            colrazryd.Caption = "Разряд";
+            colrazryd.FieldName = "razryd";
+            colrazryd.Name = "colrazryd";
+            colrazryd.Visible = true;
+            colrazryd.VisibleIndex = 4;
+            colrazryd.Width = 49;
+            // 
+            // colobor
+            // 
+            colobor.Caption = "Оборуд";
+            colobor.FieldName = "obor";
+            colobor.Name = "colobor";
+            colobor.Width = 48;
             // 
             // gridColumn8
             // 
@@ -241,6 +242,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coltext_proizv.Name = "coltext_proizv";
             coltext_proizv.Visible = true;
             coltext_proizv.VisibleIndex = 6;
+            coltext_proizv.Width = 84;
             // 
             // coltext_vyaz
             // 
@@ -249,6 +251,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coltext_vyaz.Name = "coltext_vyaz";
             coltext_vyaz.Visible = true;
             coltext_vyaz.VisibleIndex = 5;
+            coltext_vyaz.Width = 77;
             // 
             // gridColumn6
             // 
@@ -261,6 +264,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             repositoryItemResourcesComboBox1.AutoHeight = false;
             repositoryItemResourcesComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemResourcesComboBox1.Name = "repositoryItemResourcesComboBox1";
+            // 
+            // repositoryItemLookUpEdit_kodProizv
+            // 
+            repositoryItemLookUpEdit_kodProizv.AutoHeight = false;
+            repositoryItemLookUpEdit_kodProizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEdit_kodProizv.DisplayMember = "text_proizv";
+            repositoryItemLookUpEdit_kodProizv.Name = "repositoryItemLookUpEdit_kodProizv";
+            repositoryItemLookUpEdit_kodProizv.ValueMember = "kod_proizv";
             // 
             // radioGroup1
             // 
@@ -332,7 +343,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customAddButton.TabIndex = 5;
             customAddButton.Text = "+";
             customAddButton.UseVisualStyleBackColor = false;
-            // customAddButton.Click += customAddButton_Click;
+            customAddButton.Click += customAddButton_Click;
             // 
             // searchControl1
             // 
@@ -346,14 +357,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             searchControl1.Size = new System.Drawing.Size(204, 20);
             searchControl1.TabIndex = 4;
             // 
-            // repositoryItemLookUpEdit_kodProizv
-            // 
-            repositoryItemLookUpEdit_kodProizv.AutoHeight = false;
-            repositoryItemLookUpEdit_kodProizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemLookUpEdit_kodProizv.DisplayMember = "text_proizv";
-            repositoryItemLookUpEdit_kodProizv.Name = "repositoryItemLookUpEdit_kodProizv";
-            repositoryItemLookUpEdit_kodProizv.ValueMember = "kod_proizv";
-            // 
             // NormOperNew
             // 
             ClientSize = new System.Drawing.Size(948, 441);
@@ -365,6 +368,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemResourcesComboBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).EndInit();
             ((System.ComponentModel.ISupportInitialize)normoperBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
@@ -372,7 +376,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)tablePanel2).EndInit();
             tablePanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)searchControl1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).EndInit();
             ResumeLayout(false);
 
         }
