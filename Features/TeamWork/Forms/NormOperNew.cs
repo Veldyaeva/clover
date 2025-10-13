@@ -66,8 +66,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Разрешаем редактирование через EditForm и сохраняем изменения
                 gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
                 gridView1.RowUpdated += gridView1_RowUpdated;
-                gridView1.EditFormPrepared += gridView1_EditFormPrepared;
-                gridView1.ValidateRow += gridView1_ValidateRow;
             }
             catch (ConstraintException ex)
             {
@@ -117,9 +115,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                         }
                     };
-                    repoKodProizv.ImmediatePopup = true;
-                    repoKodProizv.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSuggest;
-                    repoKodProizv.AutoSearchColumnIndex = 0;
                     colKodProizv.ColumnEdit = repoKodProizv;
                 }
 
@@ -165,9 +160,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                         }
                     };
-                    repoPodrVyaz.ImmediatePopup = true;
-                    repoPodrVyaz.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSuggest;
-                    repoPodrVyaz.AutoSearchColumnIndex = 0;
                     colPodrVyaz.ColumnEdit = repoPodrVyaz;
                 }
 
@@ -194,9 +186,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                             }
                         }
                     };
-                    repoOborud.ImmediatePopup = true;
-                    repoOborud.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoSuggest;
-                    repoOborud.AutoSearchColumnIndex = 0;
                     colOborudShv.ColumnEdit = repoOborud;
                 }
             }
@@ -221,25 +210,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 else
                 {
-                    // Если данных нет — создаем пустую таблицу с ожидаемыми колонками, чтобы позволить добавление
-                    var table = new DataTable();
-                    table.Columns.Add("Id", typeof(int));
-                    table.Columns.Add("kod_o", typeof(string));
-                    table.Columns.Add("text", typeof(string));
-                    table.Columns.Add("po", typeof(string));
-                    table.Columns.Add("n", typeof(int));
-                    table.Columns.Add("n1", typeof(int));
-                    table.Columns.Add("sek", typeof(int));
-                    table.Columns.Add("new", typeof(string));
-                    table.Columns.Add("razryd", typeof(int));
-                    table.Columns.Add("spec", typeof(string));
-                    table.Columns.Add("obor", typeof(string));
-                    table.Columns.Add("kod_ob", typeof(int));
-                    table.Columns.Add("kod_proizv", typeof(int));
-                    table.Columns.Add("text_proizv", typeof(string));
-                    table.Columns.Add("text_vyaz", typeof(string));
-                    table.Columns.Add("text_ob", typeof(string));
-                    customGridControl1.DataSource = table;
+                    MessageBox.Show("Нет данных для отображения.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -324,18 +295,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 GridView view = gridView1;
                 if (view == null || view.FocusedRowHandle < 0) return;
-
-                // Требуем выбрать значения из справочников
-                var kodProizvVal = view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv");
-                var kodPodrVal = view.GetRowCellValue(view.FocusedRowHandle, "kod_podr");
-                var kodObVal = view.GetRowCellValue(view.FocusedRowHandle, "kod_ob");
-                if (kodProizvVal == null || kodProizvVal == DBNull.Value
-                    || kodPodrVal == null || kodPodrVal == DBNull.Value
-                    || kodObVal == null || kodObVal == DBNull.Value)
-                {
-                    MessageBox.Show("Пожалуйста, выберите производство, подразделение и оборудование из выпадающих списков.", "Требуется выбор", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
 
                 SelectedRowData = NormalizeDataFromView(view, view.FocusedRowHandle);
                 SelectedRowData.annId = _annId; // AnnId устанавливается здесь
@@ -577,52 +536,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (v == null || v == DBNull.Value) return null;
             if (int.TryParse(v.ToString(), out int parsed)) return parsed;
             return null;
-        }
-
-        private void gridView1_EditFormPrepared(object sender, EditFormPreparedEventArgs e)
-        {
-            // Когда открывается форма редактирования новой строки — автоматически раскрываем выпадающие списки
-            try
-            {
-                var view = sender as GridView;
-                if (view == null) return;
-                if (view.IsNewItemRow(view.FocusedRowHandle))
-                {
-                    // Попробуем сразу сфокусировать на kod_proizv и открыть popup
-                    var col = view.Columns["kod_proizv"];
-                    if (col != null)
-                    {
-                        view.FocusedColumn = col;
-                        view.ShowEditor();
-                        if (view.ActiveEditor is LookUpEdit le)
-                        {
-                            le.ShowPopup();
-                        }
-                    }
-                }
-            }
-            catch { }
-        }
-
-        private void gridView1_ValidateRow(object sender, ValidateRowEventArgs e)
-        {
-            try
-            {
-                var view = sender as GridView;
-                if (view == null) return;
-                var handle = e.RowHandle;
-                var kodProizvVal = view.GetRowCellValue(handle, "kod_proizv");
-                var kodPodrVal = view.GetRowCellValue(handle, "kod_podr");
-                var kodObVal = view.GetRowCellValue(handle, "kod_ob");
-                if (kodProizvVal == null || kodProizvVal == DBNull.Value
-                    || kodPodrVal == null || kodPodrVal == DBNull.Value
-                    || kodObVal == null || kodObVal == DBNull.Value)
-                {
-                    e.Valid = false;
-                    e.ErrorText = "Выберите производство, подразделение и оборудование";
-                }
-            }
-            catch { }
         }
     }
 

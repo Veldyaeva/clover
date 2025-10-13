@@ -1016,7 +1016,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = selectionForm.SelectedRowData;
                         selectedData.IsNew = true;
                         selectedData.IsBeingAdded = true; // помечаем как добавляемую в текущей сессии
-                        
+
                         // Детеминированные сценарии без вопросов:
                         // 1) Если targetOperation == null (клик по NewItemRow) — добавить как главу №1, остальные сместить вниз
                         // 2) Если targetOperation.N1 == 0 — добавить как новую главу сразу после targetOperation
@@ -1962,7 +1962,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             e.Allow = false;
 
             // ВСЕГДА: клик по NewItemRow добавляет новую главу
-            AddNewRaszOperation(null, true);
+                AddNewRaszOperation(null, true);
         }
 
         private void gridViewRasz_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
@@ -3830,7 +3830,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             // Выделить в отдельную главу между главами: вставить как новую главу перед текущей
                             OperationNumberingService.InsertMainAfter(_normRaszList, previousOperation.N, selectedOperation);
                         }
-                        RecalculateAllOperationNumbers();
+                RecalculateAllOperationNumbers();
                     }
                     finally
                     {
@@ -3900,7 +3900,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             // Выделить в отдельную главу между главами: вставить как новую главу после текущей
                             OperationNumberingService.InsertMainAfter(_normRaszList, selectedOperation.N, selectedOperation);
                         }
-                        RecalculateAllOperationNumbers();
+                RecalculateAllOperationNumbers();
                     }
                     finally
                     {

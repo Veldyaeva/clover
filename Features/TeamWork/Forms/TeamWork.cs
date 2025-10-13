@@ -1086,11 +1086,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
                 case 2:
                     //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
-                    if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
-                        if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
-                            await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
-                        else
-                            await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
+                    if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
+                        await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
+                    else if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
+                        await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
                     break;
                 case 4:
                     //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
