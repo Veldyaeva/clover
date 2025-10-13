@@ -310,9 +310,8 @@ namespace SewingProduction.Features.Sprav
                 customGroupBoxAdd.Visible = false;
 
                 tarifLoad(model.pc_id);
+                Application.DoEvents(); //задержка
                 int rowHandle = gridViewZp.LocateByValue("constant_name", model.constant_name);
-                Debug.WriteLine(model.constant_name);
-                Debug.WriteLine(rowHandle);
                 gridViewZp.FocusedRowHandle = rowHandle;
             }
             catch (Exception ex)
