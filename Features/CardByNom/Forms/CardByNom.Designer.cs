@@ -524,6 +524,14 @@ namespace SewingProduction
             customLabel4 = new CustomLabel();
             customRadioGroup3 = new CustomRadioGroup();
             layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            customSimpleButton1 = new CustomSimpleButton();
+            searchLookUpEditArticul = new CustomSearchLookUpEdit();
+            customSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            columnKo = new DevExpress.XtraGrid.Columns.GridColumn();
+            columnGrup = new DevExpress.XtraGrid.Columns.GridColumn();
+            columnArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            columnMod = new DevExpress.XtraGrid.Columns.GridColumn();
+            customLabel6 = new CustomLabel();
             customRadioGroup2 = new CustomRadioGroup();
             layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -540,6 +548,13 @@ namespace SewingProduction
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem64 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlGroup24 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem147 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem152 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem154 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem63 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem65 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             pbEskiz = new PictureBox();
@@ -909,6 +924,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
             layoutControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditArticul.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
@@ -925,6 +942,13 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem64).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup24).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem147).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem152).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem154).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem63).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem65).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
@@ -1086,23 +1110,29 @@ namespace SewingProduction
             // tbYearPach
             // 
             tbYearPach.BackColor = Color.FromArgb(248, 248, 255);
+            tbYearPach.BorderStyle = BorderStyle.FixedSingle;
+            tbYearPach.ErrorColor = Color.Red;
+            tbYearPach.ErrorMessage = null;
             tbYearPach.Font = new Font("Arial", 10F);
             tbYearPach.ForeColor = Color.FromArgb(72, 61, 139);
-            tbYearPach.Location = new Point(739, 5);
+            tbYearPach.Location = new Point(856, 5);
             tbYearPach.Margin = new Padding(0);
             tbYearPach.Name = "tbYearPach";
-            tbYearPach.Size = new Size(46, 20);
-            tbYearPach.TabIndex = 0;
+            tbYearPach.Size = new Size(48, 22);
+            tbYearPach.TabIndex = 4;
             // 
             // tbNomPach
             // 
             tbNomPach.BackColor = Color.FromArgb(248, 248, 255);
+            tbNomPach.BorderStyle = BorderStyle.FixedSingle;
+            tbNomPach.ErrorColor = Color.Red;
+            tbNomPach.ErrorMessage = null;
             tbNomPach.Font = new Font("Arial", 10F);
             tbNomPach.ForeColor = Color.FromArgb(72, 61, 139);
-            tbNomPach.Location = new Point(610, 5);
+            tbNomPach.Location = new Point(729, 5);
             tbNomPach.Margin = new Padding(0);
             tbNomPach.Name = "tbNomPach";
-            tbNomPach.Size = new Size(81, 20);
+            tbNomPach.Size = new Size(77, 22);
             tbNomPach.TabIndex = 3;
             tbNomPach.KeyDown += tbNomPach_KeyDown;
             // 
@@ -1111,10 +1141,10 @@ namespace SewingProduction
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Arial", 10F);
             label4.ForeColor = Color.FromArgb(0, 0, 0);
-            label4.Location = new Point(706, 5);
+            label4.Location = new Point(820, 5);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(29, 22);
+            label4.Size = new Size(32, 24);
             label4.TabIndex = 1;
             label4.Text = "год";
             label4.TextAlign = ContentAlignment.MiddleRight;
@@ -2314,8 +2344,11 @@ namespace SewingProduction
             // tbDatZayav
             // 
             tbDatZayav.BackColor = Color.FromArgb(248, 248, 255);
+            tbDatZayav.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbDatZayav, 1);
             tablePanel7.SetColumnSpan(tbDatZayav, 5);
+            tbDatZayav.ErrorColor = Color.Red;
+            tbDatZayav.ErrorMessage = null;
             tbDatZayav.Font = new Font("Arial", 10F);
             tbDatZayav.ForeColor = Color.FromArgb(72, 61, 139);
             tbDatZayav.Location = new Point(83, 574);
@@ -2328,7 +2361,10 @@ namespace SewingProduction
             // tbOtgrStat
             // 
             tbOtgrStat.BackColor = Color.FromArgb(248, 248, 255);
+            tbOtgrStat.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbOtgrStat, 5);
+            tbOtgrStat.ErrorColor = Color.Red;
+            tbOtgrStat.ErrorMessage = null;
             tbOtgrStat.Font = new Font("Arial", 10F);
             tbOtgrStat.ForeColor = Color.FromArgb(72, 61, 139);
             tbOtgrStat.Location = new Point(188, 436);
@@ -2405,7 +2441,10 @@ namespace SewingProduction
             // tbIs_got
             // 
             tbIs_got.BackColor = Color.FromArgb(248, 248, 255);
+            tbIs_got.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbIs_got, 5);
+            tbIs_got.ErrorColor = Color.Red;
+            tbIs_got.ErrorMessage = null;
             tbIs_got.Font = new Font("Arial", 10F);
             tbIs_got.ForeColor = Color.FromArgb(72, 61, 139);
             tbIs_got.Location = new Point(188, 411);
@@ -2419,8 +2458,11 @@ namespace SewingProduction
             // tbData_f_z_u
             // 
             tbData_f_z_u.BackColor = Color.FromArgb(248, 248, 255);
+            tbData_f_z_u.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbData_f_z_u, 1);
             tablePanel7.SetColumnSpan(tbData_f_z_u, 3);
+            tbData_f_z_u.ErrorColor = Color.Red;
+            tbData_f_z_u.ErrorMessage = null;
             tbData_f_z_u.Font = new Font("Arial", 10F);
             tbData_f_z_u.ForeColor = Color.FromArgb(72, 61, 139);
             tbData_f_z_u.Location = new Point(83, 327);
@@ -2433,7 +2475,10 @@ namespace SewingProduction
             // tbFurnKKStat
             // 
             tbFurnKKStat.BackColor = Color.FromArgb(248, 248, 255);
+            tbFurnKKStat.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbFurnKKStat, 5);
+            tbFurnKKStat.ErrorColor = Color.Red;
+            tbFurnKKStat.ErrorMessage = null;
             tbFurnKKStat.Font = new Font("Arial", 10F);
             tbFurnKKStat.ForeColor = Color.FromArgb(72, 61, 139);
             tbFurnKKStat.Location = new Point(188, 70);
@@ -2447,8 +2492,11 @@ namespace SewingProduction
             // tbData_f_o_u
             // 
             tbData_f_o_u.BackColor = Color.FromArgb(248, 248, 255);
+            tbData_f_o_u.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbData_f_o_u, 1);
             tablePanel7.SetColumnSpan(tbData_f_o_u, 3);
+            tbData_f_o_u.ErrorColor = Color.Red;
+            tbData_f_o_u.ErrorMessage = null;
             tbData_f_o_u.Font = new Font("Arial", 10F);
             tbData_f_o_u.ForeColor = Color.FromArgb(72, 61, 139);
             tbData_f_o_u.Location = new Point(83, 305);
@@ -2476,8 +2524,11 @@ namespace SewingProduction
             // tbData_f_z
             // 
             tbData_f_z.BackColor = Color.FromArgb(248, 248, 255);
+            tbData_f_z.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbData_f_z, 1);
             tablePanel7.SetColumnSpan(tbData_f_z, 3);
+            tbData_f_z.ErrorColor = Color.Red;
+            tbData_f_z.ErrorMessage = null;
             tbData_f_z.Font = new Font("Arial", 10F);
             tbData_f_z.ForeColor = Color.FromArgb(72, 61, 139);
             tbData_f_z.Location = new Point(83, 146);
@@ -2490,7 +2541,10 @@ namespace SewingProduction
             // tbUpakKKStat
             // 
             tbUpakKKStat.BackColor = Color.FromArgb(248, 248, 255);
+            tbUpakKKStat.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbUpakKKStat, 5);
+            tbUpakKKStat.ErrorColor = Color.Red;
+            tbUpakKKStat.ErrorMessage = null;
             tbUpakKKStat.Font = new Font("Arial", 10F);
             tbUpakKKStat.ForeColor = Color.FromArgb(72, 61, 139);
             tbUpakKKStat.Location = new Point(188, 251);
@@ -2504,7 +2558,10 @@ namespace SewingProduction
             // tbUZSobrStat
             // 
             tbUZSobrStat.BackColor = Color.FromArgb(248, 248, 255);
+            tbUZSobrStat.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbUZSobrStat, 5);
+            tbUZSobrStat.ErrorColor = Color.Red;
+            tbUZSobrStat.ErrorMessage = null;
             tbUZSobrStat.Font = new Font("Arial", 10F);
             tbUZSobrStat.ForeColor = Color.FromArgb(72, 61, 139);
             tbUZSobrStat.Location = new Point(188, 327);
@@ -2518,8 +2575,11 @@ namespace SewingProduction
             // tbData_f_o
             // 
             tbData_f_o.BackColor = Color.FromArgb(248, 248, 255);
+            tbData_f_o.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbData_f_o, 1);
             tablePanel7.SetColumnSpan(tbData_f_o, 3);
+            tbData_f_o.ErrorColor = Color.Red;
+            tbData_f_o.ErrorMessage = null;
             tbData_f_o.Font = new Font("Arial", 10F);
             tbData_f_o.ForeColor = Color.FromArgb(72, 61, 139);
             tbData_f_o.Location = new Point(83, 124);
@@ -2563,8 +2623,11 @@ namespace SewingProduction
             // tbFurnZayav
             // 
             tbFurnZayav.BackColor = Color.FromArgb(248, 248, 255);
+            tbFurnZayav.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbFurnZayav, 3);
             tablePanel7.SetColumnSpan(tbFurnZayav, 3);
+            tbFurnZayav.ErrorColor = Color.Red;
+            tbFurnZayav.ErrorMessage = null;
             tbFurnZayav.Font = new Font("Arial", 10F);
             tbFurnZayav.ForeColor = Color.FromArgb(72, 61, 139);
             tbFurnZayav.Location = new Point(166, 102);
@@ -2577,7 +2640,10 @@ namespace SewingProduction
             // tbUZSozdStat
             // 
             tbUZSozdStat.BackColor = Color.FromArgb(248, 248, 255);
+            tbUZSozdStat.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbUZSozdStat, 5);
+            tbUZSozdStat.ErrorColor = Color.Red;
+            tbUZSozdStat.ErrorMessage = null;
             tbUZSozdStat.Font = new Font("Arial", 10F);
             tbUZSozdStat.ForeColor = Color.FromArgb(72, 61, 139);
             tbUZSozdStat.Location = new Point(188, 305);
@@ -2606,7 +2672,10 @@ namespace SewingProduction
             // tbFZSozdStat
             // 
             tbFZSozdStat.BackColor = Color.FromArgb(248, 248, 255);
+            tbFZSozdStat.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbFZSozdStat, 5);
+            tbFZSozdStat.ErrorColor = Color.Red;
+            tbFZSozdStat.ErrorMessage = null;
             tbFZSozdStat.Font = new Font("Arial", 10F);
             tbFZSozdStat.ForeColor = Color.FromArgb(72, 61, 139);
             tbFZSozdStat.Location = new Point(188, 124);
@@ -2650,7 +2719,10 @@ namespace SewingProduction
             // tbFZSobrStat
             // 
             tbFZSobrStat.BackColor = Color.FromArgb(248, 248, 255);
+            tbFZSobrStat.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbFZSobrStat, 5);
+            tbFZSobrStat.ErrorColor = Color.Red;
+            tbFZSobrStat.ErrorMessage = null;
             tbFZSobrStat.Font = new Font("Arial", 10F);
             tbFZSobrStat.ForeColor = Color.FromArgb(72, 61, 139);
             tbFZSobrStat.Location = new Point(188, 146);
@@ -2664,8 +2736,11 @@ namespace SewingProduction
             // tbUpakZayav
             // 
             tbUpakZayav.BackColor = Color.FromArgb(248, 248, 255);
+            tbUpakZayav.BorderStyle = BorderStyle.FixedSingle;
             tablePanel7.SetColumn(tbUpakZayav, 3);
             tablePanel7.SetColumnSpan(tbUpakZayav, 3);
+            tbUpakZayav.ErrorColor = Color.Red;
+            tbUpakZayav.ErrorMessage = null;
             tbUpakZayav.Font = new Font("Arial", 10F);
             tbUpakZayav.ForeColor = Color.FromArgb(72, 61, 139);
             tbUpakZayav.Location = new Point(166, 283);
@@ -5010,6 +5085,9 @@ namespace SewingProduction
             // TextBoxKnitTotalTime
             // 
             TextBoxKnitTotalTime.BackColor = Color.FromArgb(230, 245, 255);
+            TextBoxKnitTotalTime.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxKnitTotalTime.ErrorColor = Color.Red;
+            TextBoxKnitTotalTime.ErrorMessage = null;
             TextBoxKnitTotalTime.Font = new Font("Arial", 10F);
             TextBoxKnitTotalTime.ForeColor = Color.FromArgb(50, 90, 160);
             TextBoxKnitTotalTime.Location = new Point(663, 133);
@@ -5524,6 +5602,9 @@ namespace SewingProduction
             // TextBoxKnitEndDate
             // 
             TextBoxKnitEndDate.BackColor = Color.FromArgb(245, 245, 250);
+            TextBoxKnitEndDate.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxKnitEndDate.ErrorColor = Color.Red;
+            TextBoxKnitEndDate.ErrorMessage = null;
             TextBoxKnitEndDate.Font = new Font("Arial", 10F);
             TextBoxKnitEndDate.ForeColor = Color.FromArgb(85, 45, 115);
             TextBoxKnitEndDate.Location = new Point(386, 133);
@@ -5535,6 +5616,9 @@ namespace SewingProduction
             // TextBoxKnitStartDate
             // 
             TextBoxKnitStartDate.BackColor = Color.FromArgb(245, 245, 250);
+            TextBoxKnitStartDate.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxKnitStartDate.ErrorColor = Color.Red;
+            TextBoxKnitStartDate.ErrorMessage = null;
             TextBoxKnitStartDate.Font = new Font("Arial", 10F);
             TextBoxKnitStartDate.ForeColor = Color.FromArgb(85, 45, 115);
             TextBoxKnitStartDate.Location = new Point(138, 133);
@@ -5546,6 +5630,9 @@ namespace SewingProduction
             // TextBoxAreaNumber
             // 
             TextBoxAreaNumber.BackColor = Color.FromArgb(245, 245, 250);
+            TextBoxAreaNumber.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxAreaNumber.ErrorColor = Color.Red;
+            TextBoxAreaNumber.ErrorMessage = null;
             TextBoxAreaNumber.Font = new Font("Arial", 10F);
             TextBoxAreaNumber.ForeColor = Color.FromArgb(85, 45, 115);
             TextBoxAreaNumber.Location = new Point(138, 108);
@@ -5557,6 +5644,9 @@ namespace SewingProduction
             // TextBoxMachineNumber
             // 
             TextBoxMachineNumber.BackColor = Color.FromArgb(245, 245, 250);
+            TextBoxMachineNumber.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxMachineNumber.ErrorColor = Color.Red;
+            TextBoxMachineNumber.ErrorMessage = null;
             TextBoxMachineNumber.Font = new Font("Arial", 10F);
             TextBoxMachineNumber.ForeColor = Color.FromArgb(85, 45, 115);
             TextBoxMachineNumber.Location = new Point(386, 108);
@@ -5568,6 +5658,9 @@ namespace SewingProduction
             // TextBoxTabFio
             // 
             TextBoxTabFio.BackColor = Color.FromArgb(245, 245, 250);
+            TextBoxTabFio.BorderStyle = BorderStyle.FixedSingle;
+            TextBoxTabFio.ErrorColor = Color.Red;
+            TextBoxTabFio.ErrorMessage = null;
             TextBoxTabFio.Font = new Font("Arial", 10F);
             TextBoxTabFio.ForeColor = Color.FromArgb(85, 45, 115);
             TextBoxTabFio.Location = new Point(138, 45);
@@ -5697,7 +5790,6 @@ namespace SewingProduction
             // 
             // layoutControlGroup6
             // 
-            buttonImageOptions1.Image = (Image)resources.GetObject("buttonImageOptions1.Image");
             layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup6.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26, layoutControlItem27, layoutControlItem29, layoutControlItem30, layoutControlItem31, emptySpaceItem8, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, emptySpaceItem9, layoutControlItem36, layoutControlItem37, emptySpaceItem4, layoutControlItem12, layoutControlItem28, layoutControlItem41, layoutControlItem42, emptySpaceItem6, layoutControlItem38, layoutControlItem40, emptySpaceItem7, layoutControlItem43, layoutControlItem44, layoutControlItem45, emptySpaceItem13, emptySpaceItem14, simpleSeparator2, simpleSeparator4, simpleSeparator5, simpleSeparator6, layoutControlItem24, layoutControlItem19, layoutControlItem25, layoutControlItem39, emptySpaceItem11, splitterItem1, layoutControlItem13, layoutControlItem14, emptySpaceItem12, emptySpaceItem10, emptySpaceItem5 });
@@ -6107,7 +6199,7 @@ namespace SewingProduction
             customLabel2.Margin = new Padding(0);
             customLabel2.Name = "customLabel2";
             customLabel2.Padding = new Padding(9, 0, 0, 0);
-            customLabel2.Size = new Size(109, 28);
+            customLabel2.Size = new Size(90, 30);
             customLabel2.TabIndex = 1;
             customLabel2.Text = "ПОИСК";
             customLabel2.TextAlign = ContentAlignment.MiddleLeft;
@@ -6117,10 +6209,10 @@ namespace SewingProduction
             customLabel1.BackColor = Color.Transparent;
             customLabel1.Font = new Font("Arial", 10F);
             customLabel1.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel1.Location = new Point(540, 5);
+            customLabel1.Location = new Point(649, 5);
             customLabel1.Margin = new Padding(0);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new Size(66, 22);
+            customLabel1.Size = new Size(76, 24);
             customLabel1.TabIndex = 1;
             customLabel1.Text = "№ пачки";
             customLabel1.TextAlign = ContentAlignment.MiddleRight;
@@ -6128,13 +6220,16 @@ namespace SewingProduction
             // tbNomZad
             // 
             tbNomZad.BackColor = Color.FromArgb(248, 248, 255);
+            tbNomZad.BorderStyle = BorderStyle.FixedSingle;
+            tbNomZad.ErrorColor = Color.Red;
+            tbNomZad.ErrorMessage = null;
             tbNomZad.Font = new Font("Arial", 10F);
             tbNomZad.ForeColor = Color.FromArgb(72, 61, 139);
-            tbNomZad.Location = new Point(931, 5);
+            tbNomZad.Location = new Point(1020, 5);
             tbNomZad.Margin = new Padding(0);
             tbNomZad.Name = "tbNomZad";
-            tbNomZad.Size = new Size(122, 20);
-            tbNomZad.TabIndex = 2;
+            tbNomZad.Size = new Size(104, 22);
+            tbNomZad.TabIndex = 5;
             tbNomZad.KeyDown += tbNomZad_KeyDown;
             // 
             // customLabel4
@@ -6142,28 +6237,28 @@ namespace SewingProduction
             customLabel4.BackColor = Color.Transparent;
             customLabel4.Font = new Font("Arial", 10F);
             customLabel4.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel4.Location = new Point(840, 5);
+            customLabel4.Location = new Point(924, 5);
             customLabel4.Margin = new Padding(0);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new Size(87, 22);
+            customLabel4.Size = new Size(92, 24);
             customLabel4.TabIndex = 1;
             customLabel4.Text = "№ задания";
             customLabel4.TextAlign = ContentAlignment.MiddleRight;
             // 
             // customRadioGroup3
             // 
-            customRadioGroup3.Location = new Point(341, 2);
+            customRadioGroup3.Location = new Point(350, 2);
             customRadioGroup3.Name = "customRadioGroup3";
             customRadioGroup3.ObjectName = null;
             customRadioGroup3.Properties.Appearance.Font = new Font("Arial", 10F);
             customRadioGroup3.Properties.Appearance.ForeColor = Color.FromArgb(85, 45, 115);
             customRadioGroup3.Properties.Appearance.Options.UseFont = true;
             customRadioGroup3.Properties.Appearance.Options.UseForeColor = true;
-            customRadioGroup3.Properties.Columns = 2;
-            customRadioGroup3.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ задания", true, null, "ProcessingByTaskNumber"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ пачки", true, null, "ProcessingByPachNumber") });
+            customRadioGroup3.Properties.Columns = 3;
+            customRadioGroup3.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ задания", true, null, "ProcessingByTaskNumber"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ пачки", true, null, "ProcessingByPachNumber"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Артикул") });
             customRadioGroup3.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
             customRadioGroup3.Properties.Padding = new Padding(1, 0, 0, 0);
-            customRadioGroup3.Size = new Size(175, 28);
+            customRadioGroup3.Size = new Size(282, 30);
             customRadioGroup3.StyleController = layoutControl3;
             customRadioGroup3.TabIndex = 2;
             customRadioGroup3.SelectedIndexChanged += customRadioGroup3_SelectedIndexChanged;
@@ -6171,6 +6266,9 @@ namespace SewingProduction
             // 
             // layoutControl3
             // 
+            layoutControl3.Controls.Add(customSimpleButton1);
+            layoutControl3.Controls.Add(searchLookUpEditArticul);
+            layoutControl3.Controls.Add(customLabel6);
             layoutControl3.Controls.Add(tbNomZad);
             layoutControl3.Controls.Add(customLabel2);
             layoutControl3.Controls.Add(customLabel4);
@@ -6184,13 +6282,99 @@ namespace SewingProduction
             layoutControl3.Name = "layoutControl3";
             layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(824, 283, 650, 400);
             layoutControl3.Root = layoutControlGroup8;
-            layoutControl3.Size = new Size(1058, 32);
+            layoutControl3.Size = new Size(1821, 34);
             layoutControl3.TabIndex = 13;
             layoutControl3.Text = "layoutControl3";
             // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.BackColor = Color.FromArgb(200, 225, 255);
+            customSimpleButton1.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton1.Appearance.ForeColor = Color.FromArgb(30, 70, 140);
+            customSimpleButton1.Appearance.Options.UseBackColor = true;
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Appearance.Options.UseForeColor = true;
+            customSimpleButton1.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton1.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton1.Location = new Point(1360, 6);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new Size(169, 22);
+            customSimpleButton1.StyleController = layoutControl3;
+            customSimpleButton1.TabIndex = 8;
+            customSimpleButton1.Text = "customSimpleButton1";
+            customSimpleButton1.Visible = false;
+            customSimpleButton1.Click += customSimpleButton1_Click;
+            // 
+            // searchLookUpEditArticul
+            // 
+            searchLookUpEditArticul.Location = new Point(1169, 6);
+            searchLookUpEditArticul.Name = "searchLookUpEditArticul";
+            searchLookUpEditArticul.Properties.Appearance.BackColor = Color.FromArgb(230, 245, 255);
+            searchLookUpEditArticul.Properties.Appearance.Font = new Font("Arial", 10F);
+            searchLookUpEditArticul.Properties.Appearance.ForeColor = Color.FromArgb(50, 90, 160);
+            searchLookUpEditArticul.Properties.Appearance.Options.UseBackColor = true;
+            searchLookUpEditArticul.Properties.Appearance.Options.UseFont = true;
+            searchLookUpEditArticul.Properties.Appearance.Options.UseForeColor = true;
+            searchLookUpEditArticul.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search) });
+            searchLookUpEditArticul.Properties.PopupView = customSearchLookUpEdit1View;
+            searchLookUpEditArticul.Size = new Size(187, 22);
+            searchLookUpEditArticul.StyleController = layoutControl3;
+            searchLookUpEditArticul.TabIndex = 6;
+            searchLookUpEditArticul.ButtonClick += searchLookUpEditArticul_ButtonClick;
+            searchLookUpEditArticul.EditValueChanged += searchLookUpEditArticul_EditValueChanged;
+            // 
+            // customSearchLookUpEdit1View
+            // 
+            customSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { columnKo, columnGrup, columnArticul, columnMod });
+            customSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            customSearchLookUpEdit1View.Name = "customSearchLookUpEdit1View";
+            customSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            customSearchLookUpEdit1View.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
+            customSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // columnKo
+            // 
+            columnKo.Caption = "Код";
+            columnKo.Name = "columnKo";
+            columnKo.Visible = true;
+            columnKo.VisibleIndex = 0;
+            // 
+            // columnGrup
+            // 
+            columnGrup.Caption = "Группа";
+            columnGrup.Name = "columnGrup";
+            columnGrup.Visible = true;
+            columnGrup.VisibleIndex = 1;
+            // 
+            // columnArticul
+            // 
+            columnArticul.Caption = "Артикул";
+            columnArticul.Name = "columnArticul";
+            columnArticul.Visible = true;
+            columnArticul.VisibleIndex = 2;
+            // 
+            // columnMod
+            // 
+            columnMod.Caption = "Модель";
+            columnMod.Name = "columnMod";
+            columnMod.Visible = true;
+            columnMod.VisibleIndex = 3;
+            // 
+            // customLabel6
+            // 
+            customLabel6.Font = new Font("Arial", 10F);
+            customLabel6.ForeColor = Color.FromArgb(30, 70, 140);
+            customLabel6.Location = new Point(1145, 6);
+            customLabel6.Name = "customLabel6";
+            customLabel6.Size = new Size(20, 22);
+            customLabel6.TabIndex = 4;
+            customLabel6.Text = "Артикул";
+            // 
             // customRadioGroup2
             // 
-            customRadioGroup2.Location = new Point(115, 2);
+            customRadioGroup2.Location = new Point(96, 2);
             customRadioGroup2.Name = "customRadioGroup2";
             customRadioGroup2.ObjectName = null;
             customRadioGroup2.Properties.Appearance.Font = new Font("Arial", 10F);
@@ -6201,7 +6385,7 @@ namespace SewingProduction
             customRadioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ШП"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ВЗП"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Носки"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ШПМ") });
             customRadioGroup2.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
             customRadioGroup2.Properties.Padding = new Padding(1, 0, 0, 0);
-            customRadioGroup2.Size = new Size(222, 28);
+            customRadioGroup2.Size = new Size(240, 30);
             customRadioGroup2.StyleController = layoutControl3;
             customRadioGroup2.TabIndex = 0;
             customRadioGroup2.SelectedIndexChanged += customRadioGroup2_SelectedIndexChanged;
@@ -6210,47 +6394,47 @@ namespace SewingProduction
             // 
             layoutControlGroup8.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup8.GroupBordersVisible = false;
-            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, emptySpaceItem1, emptySpaceItem3, layoutControlGroup1, layoutControlGroup2, layoutControlItem1 });
+            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, emptySpaceItem1, emptySpaceItem3, layoutControlGroup1, layoutControlGroup2, layoutControlItem1, emptySpaceItem64, layoutControlGroup24, emptySpaceItem63, emptySpaceItem65 });
             layoutControlGroup8.Name = "Root";
             layoutControlGroup8.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup8.Size = new Size(1058, 32);
+            layoutControlGroup8.Size = new Size(1821, 34);
             layoutControlGroup8.TextLocation = DevExpress.Utils.Locations.Left;
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = customRadioGroup2;
-            layoutControlItem2.Location = new Point(113, 0);
+            layoutControlItem2.Location = new Point(94, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(226, 32);
+            layoutControlItem2.Size = new Size(244, 34);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             layoutControlItem3.Control = customRadioGroup3;
-            layoutControlItem3.Location = new Point(339, 0);
+            layoutControlItem3.Location = new Point(348, 0);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(179, 32);
+            layoutControlItem3.Size = new Size(286, 34);
             layoutControlItem3.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new Point(518, 0);
+            emptySpaceItem1.Location = new Point(634, 0);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new Size(17, 32);
+            emptySpaceItem1.Size = new Size(10, 34);
             // 
             // emptySpaceItem3
             // 
-            emptySpaceItem3.Location = new Point(790, 0);
+            emptySpaceItem3.Location = new Point(909, 0);
             emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new Size(45, 32);
+            emptySpaceItem3.Size = new Size(10, 34);
             // 
             // layoutControlGroup1
             // 
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, emptySpaceItem2, layoutControlItem6, layoutControlItem7 });
-            layoutControlGroup1.Location = new Point(535, 0);
+            layoutControlGroup1.Location = new Point(644, 0);
             layoutControlGroup1.Name = "layoutControlGroup1";
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup1.Size = new Size(255, 32);
+            layoutControlGroup1.Size = new Size(265, 34);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem4
@@ -6258,46 +6442,52 @@ namespace SewingProduction
             layoutControlItem4.Control = customLabel1;
             layoutControlItem4.Location = new Point(0, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new Size(70, 26);
+            layoutControlItem4.Size = new Size(80, 28);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = tbNomPach;
-            layoutControlItem5.Location = new Point(70, 0);
+            layoutControlItem5.Location = new Point(80, 0);
+            layoutControlItem5.MaxSize = new Size(81, 26);
+            layoutControlItem5.MinSize = new Size(81, 26);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(85, 26);
+            layoutControlItem5.Size = new Size(81, 28);
+            layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem5.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new Point(155, 0);
+            emptySpaceItem2.Location = new Point(161, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new Size(11, 26);
+            emptySpaceItem2.Size = new Size(10, 28);
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = label4;
-            layoutControlItem6.Location = new Point(166, 0);
+            layoutControlItem6.Location = new Point(171, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(33, 26);
+            layoutControlItem6.Size = new Size(36, 28);
             layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem7
             // 
             layoutControlItem7.Control = tbYearPach;
-            layoutControlItem7.Location = new Point(199, 0);
+            layoutControlItem7.Location = new Point(207, 0);
+            layoutControlItem7.MaxSize = new Size(52, 26);
+            layoutControlItem7.MinSize = new Size(52, 26);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new Size(50, 26);
+            layoutControlItem7.Size = new Size(52, 28);
+            layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem7.TextVisible = false;
             // 
             // layoutControlGroup2
             // 
             layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8, layoutControlItem9 });
-            layoutControlGroup2.Location = new Point(835, 0);
+            layoutControlGroup2.Location = new Point(919, 0);
             layoutControlGroup2.Name = "layoutControlGroup2";
             layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup2.Size = new Size(223, 32);
+            layoutControlGroup2.Size = new Size(210, 34);
             layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem8
@@ -6305,15 +6495,18 @@ namespace SewingProduction
             layoutControlItem8.Control = customLabel4;
             layoutControlItem8.Location = new Point(0, 0);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new Size(91, 26);
+            layoutControlItem8.Size = new Size(96, 28);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = tbNomZad;
-            layoutControlItem9.Location = new Point(91, 0);
+            layoutControlItem9.Location = new Point(96, 0);
+            layoutControlItem9.MaxSize = new Size(108, 26);
+            layoutControlItem9.MinSize = new Size(108, 26);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new Size(126, 26);
+            layoutControlItem9.Size = new Size(108, 28);
+            layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem1
@@ -6321,8 +6514,62 @@ namespace SewingProduction
             layoutControlItem1.Control = customLabel2;
             layoutControlItem1.Location = new Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(113, 32);
+            layoutControlItem1.Size = new Size(94, 34);
             layoutControlItem1.TextVisible = false;
+            // 
+            // emptySpaceItem64
+            // 
+            emptySpaceItem64.Location = new Point(338, 0);
+            emptySpaceItem64.Name = "emptySpaceItem64";
+            emptySpaceItem64.Size = new Size(10, 34);
+            // 
+            // layoutControlGroup24
+            // 
+            layoutControlGroup24.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem147, layoutControlItem152, layoutControlItem154 });
+            layoutControlGroup24.Location = new Point(1139, 0);
+            layoutControlGroup24.Name = "layoutControlGroup24";
+            layoutControlGroup24.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
+            layoutControlGroup24.Size = new Size(396, 34);
+            layoutControlGroup24.TextVisible = false;
+            // 
+            // layoutControlItem147
+            // 
+            layoutControlItem147.Control = customLabel6;
+            layoutControlItem147.Location = new Point(0, 0);
+            layoutControlItem147.Name = "layoutControlItem147";
+            layoutControlItem147.Size = new Size(24, 26);
+            layoutControlItem147.TextVisible = false;
+            // 
+            // layoutControlItem152
+            // 
+            layoutControlItem152.Control = searchLookUpEditArticul;
+            layoutControlItem152.Location = new Point(24, 0);
+            layoutControlItem152.MaxSize = new Size(191, 26);
+            layoutControlItem152.MinSize = new Size(191, 26);
+            layoutControlItem152.Name = "layoutControlItem152";
+            layoutControlItem152.Size = new Size(191, 26);
+            layoutControlItem152.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem152.TextVisible = false;
+            // 
+            // layoutControlItem154
+            // 
+            layoutControlItem154.Control = customSimpleButton1;
+            layoutControlItem154.Location = new Point(215, 0);
+            layoutControlItem154.Name = "layoutControlItem154";
+            layoutControlItem154.Size = new Size(173, 26);
+            layoutControlItem154.TextVisible = false;
+            // 
+            // emptySpaceItem63
+            // 
+            emptySpaceItem63.Location = new Point(1129, 0);
+            emptySpaceItem63.Name = "emptySpaceItem63";
+            emptySpaceItem63.Size = new Size(10, 34);
+            // 
+            // emptySpaceItem65
+            // 
+            emptySpaceItem65.Location = new Point(1535, 0);
+            emptySpaceItem65.Name = "emptySpaceItem65";
+            emptySpaceItem65.Size = new Size(286, 34);
             // 
             // layoutControlGroup5
             // 
@@ -6401,6 +6648,9 @@ namespace SewingProduction
             // tbSostPoln
             // 
             tbSostPoln.BackColor = Color.FromArgb(230, 245, 255);
+            tbSostPoln.BorderStyle = BorderStyle.FixedSingle;
+            tbSostPoln.ErrorColor = Color.Red;
+            tbSostPoln.ErrorMessage = null;
             tbSostPoln.Font = new Font("Arial", 10F);
             tbSostPoln.ForeColor = Color.FromArgb(50, 90, 160);
             tbSostPoln.Location = new Point(779, 59);
@@ -6412,13 +6662,16 @@ namespace SewingProduction
             // tbRzuMod
             // 
             tbRzuMod.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuMod.BorderStyle = BorderStyle.FixedSingle;
+            tbRzuMod.ErrorColor = Color.Red;
+            tbRzuMod.ErrorMessage = null;
             tbRzuMod.Font = new Font("Arial", 10F);
             tbRzuMod.ForeColor = Color.FromArgb(72, 61, 139);
             tbRzuMod.Location = new Point(779, 107);
             tbRzuMod.Margin = new Padding(0);
             tbRzuMod.Name = "tbRzuMod";
             tbRzuMod.Size = new Size(242, 44);
-            tbRzuMod.TabIndex = 10;
+            tbRzuMod.TabIndex = 11;
             // 
             // label13
             // 
@@ -6435,6 +6688,9 @@ namespace SewingProduction
             // tbArtGrup
             // 
             tbArtGrup.BackColor = Color.FromArgb(248, 248, 255);
+            tbArtGrup.BorderStyle = BorderStyle.FixedSingle;
+            tbArtGrup.ErrorColor = Color.Red;
+            tbArtGrup.ErrorMessage = null;
             tbArtGrup.Font = new Font("Arial", 10F);
             tbArtGrup.ForeColor = Color.FromArgb(72, 61, 139);
             tbArtGrup.Location = new Point(455, 131);
@@ -6446,6 +6702,9 @@ namespace SewingProduction
             // tbPsaKombOsn
             // 
             tbPsaKombOsn.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKombOsn.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaKombOsn.ErrorColor = Color.Red;
+            tbPsaKombOsn.ErrorMessage = null;
             tbPsaKombOsn.Font = new Font("Arial", 10F);
             tbPsaKombOsn.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaKombOsn.Location = new Point(1536, 107);
@@ -6469,6 +6728,9 @@ namespace SewingProduction
             // tbPsaPrn
             // 
             tbPsaPrn.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaPrn.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaPrn.ErrorColor = Color.Red;
+            tbPsaPrn.ErrorMessage = null;
             tbPsaPrn.Font = new Font("Arial", 10F);
             tbPsaPrn.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaPrn.Location = new Point(467, 59);
@@ -6493,6 +6755,9 @@ namespace SewingProduction
             // tbPsaKodZv2
             // 
             tbPsaKodZv2.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKodZv2.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaKodZv2.ErrorColor = Color.Red;
+            tbPsaKodZv2.ErrorMessage = null;
             tbPsaKodZv2.Font = new Font("Arial", 10F);
             tbPsaKodZv2.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaKodZv2.Location = new Point(568, 83);
@@ -6510,12 +6775,15 @@ namespace SewingProduction
             label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
             label15.Size = new Size(182, 20);
-            label15.TabIndex = 22;
+            label15.TabIndex = 1;
             label15.Text = "Наименование (из справ.)";
             // 
             // tbPsaPsaIDOsn
             // 
             tbPsaPsaIDOsn.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaPsaIDOsn.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaPsaIDOsn.ErrorColor = Color.Red;
+            tbPsaPsaIDOsn.ErrorMessage = null;
             tbPsaPsaIDOsn.Font = new Font("Arial", 10F);
             tbPsaPsaIDOsn.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaPsaIDOsn.Location = new Point(1536, 83);
@@ -6527,13 +6795,16 @@ namespace SewingProduction
             // tbPsaKodZv1
             // 
             tbPsaKodZv1.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKodZv1.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaKodZv1.ErrorColor = Color.Red;
+            tbPsaKodZv1.ErrorMessage = null;
             tbPsaKodZv1.Font = new Font("Arial", 10F);
             tbPsaKodZv1.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaKodZv1.Location = new Point(406, 83);
             tbPsaKodZv1.Margin = new Padding(0);
             tbPsaKodZv1.Name = "tbPsaKodZv1";
             tbPsaKodZv1.Size = new Size(79, 20);
-            tbPsaKodZv1.TabIndex = 7;
+            tbPsaKodZv1.TabIndex = 8;
             // 
             // label22
             // 
@@ -6550,6 +6821,9 @@ namespace SewingProduction
             // tbPsaKombIzd
             // 
             tbPsaKombIzd.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaKombIzd.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaKombIzd.ErrorColor = Color.Red;
+            tbPsaKombIzd.ErrorMessage = null;
             tbPsaKombIzd.Font = new Font("Arial", 10F);
             tbPsaKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaKombIzd.Location = new Point(1368, 107);
@@ -6621,6 +6895,9 @@ namespace SewingProduction
             // tbPsaPsaID
             // 
             tbPsaPsaID.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaPsaID.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaPsaID.ErrorColor = Color.Red;
+            tbPsaPsaID.ErrorMessage = null;
             tbPsaPsaID.Font = new Font("Arial", 10F);
             tbPsaPsaID.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaPsaID.Location = new Point(1368, 83);
@@ -6656,6 +6933,9 @@ namespace SewingProduction
             // tbArtTradeMark
             // 
             tbArtTradeMark.BackColor = Color.FromArgb(248, 248, 255);
+            tbArtTradeMark.BorderStyle = BorderStyle.FixedSingle;
+            tbArtTradeMark.ErrorColor = Color.Red;
+            tbArtTradeMark.ErrorMessage = null;
             tbArtTradeMark.Font = new Font("Arial", 10F);
             tbArtTradeMark.ForeColor = Color.FromArgb(72, 61, 139);
             tbArtTradeMark.Location = new Point(1166, 131);
@@ -6667,6 +6947,9 @@ namespace SewingProduction
             // tbPsaNameSbit
             // 
             tbPsaNameSbit.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaNameSbit.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaNameSbit.ErrorColor = Color.Red;
+            tbPsaNameSbit.ErrorMessage = null;
             tbPsaNameSbit.Font = new Font("Arial", 10F);
             tbPsaNameSbit.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaNameSbit.Location = new Point(1150, 107);
@@ -6678,6 +6961,9 @@ namespace SewingProduction
             // tbRzuNom
             // 
             tbRzuNom.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuNom.BorderStyle = BorderStyle.FixedSingle;
+            tbRzuNom.ErrorColor = Color.Red;
+            tbRzuNom.ErrorMessage = null;
             tbRzuNom.Font = new Font("Arial", 10F);
             tbRzuNom.ForeColor = Color.FromArgb(72, 61, 139);
             tbRzuNom.Location = new Point(46, 59);
@@ -6714,13 +7000,16 @@ namespace SewingProduction
             // tbRzuArticul
             // 
             tbRzuArticul.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuArticul.BorderStyle = BorderStyle.FixedSingle;
+            tbRzuArticul.ErrorColor = Color.Red;
+            tbRzuArticul.ErrorMessage = null;
             tbRzuArticul.Font = new Font("Arial", 10F);
             tbRzuArticul.ForeColor = Color.FromArgb(72, 61, 139);
             tbRzuArticul.Location = new Point(406, 107);
             tbRzuArticul.Margin = new Padding(0);
             tbRzuArticul.Name = "tbRzuArticul";
             tbRzuArticul.Size = new Size(261, 20);
-            tbRzuArticul.TabIndex = 11;
+            tbRzuArticul.TabIndex = 10;
             // 
             // label19
             // 
@@ -6749,6 +7038,9 @@ namespace SewingProduction
             // tbPsaMenName
             // 
             tbPsaMenName.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaMenName.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaMenName.ErrorColor = Color.Red;
+            tbPsaMenName.ErrorMessage = null;
             tbPsaMenName.Font = new Font("Arial", 10F);
             tbPsaMenName.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaMenName.Location = new Point(1416, 131);
@@ -6761,6 +7053,9 @@ namespace SewingProduction
             // tbPsaTbID
             // 
             tbPsaTbID.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaTbID.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaTbID.ErrorColor = Color.Red;
+            tbPsaTbID.ErrorMessage = null;
             tbPsaTbID.Font = new Font("Arial", 10F);
             tbPsaTbID.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaTbID.Location = new Point(1092, 83);
@@ -6772,6 +7067,9 @@ namespace SewingProduction
             // psaSezName
             // 
             psaSezName.BackColor = Color.FromArgb(248, 248, 255);
+            psaSezName.BorderStyle = BorderStyle.FixedSingle;
+            psaSezName.ErrorColor = Color.Red;
+            psaSezName.ErrorMessage = null;
             psaSezName.Font = new Font("Arial", 10F);
             psaSezName.ForeColor = Color.FromArgb(72, 61, 139);
             psaSezName.Location = new Point(1416, 59);
@@ -6783,6 +7081,9 @@ namespace SewingProduction
             // tbPsaYear
             // 
             tbPsaYear.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaYear.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaYear.ErrorColor = Color.Red;
+            tbPsaYear.ErrorMessage = null;
             tbPsaYear.Font = new Font("Arial", 10F);
             tbPsaYear.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaYear.Location = new Point(1296, 59);
@@ -6830,6 +7131,9 @@ namespace SewingProduction
             // tbRzuKol
             // 
             tbRzuKol.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuKol.BorderStyle = BorderStyle.FixedSingle;
+            tbRzuKol.ErrorColor = Color.Red;
+            tbRzuKol.ErrorMessage = null;
             tbRzuKol.Font = new Font("Arial", 10F);
             tbRzuKol.ForeColor = Color.FromArgb(72, 61, 139);
             tbRzuKol.Location = new Point(186, 59);
@@ -6865,6 +7169,9 @@ namespace SewingProduction
             // tbPsaNomZad
             // 
             tbPsaNomZad.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaNomZad.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaNomZad.ErrorColor = Color.Red;
+            tbPsaNomZad.ErrorMessage = null;
             tbPsaNomZad.Font = new Font("Arial", 10F);
             tbPsaNomZad.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaNomZad.Location = new Point(305, 59);
@@ -6900,6 +7207,9 @@ namespace SewingProduction
             // tbPsaNN
             // 
             tbPsaNN.BackColor = Color.FromArgb(248, 248, 255);
+            tbPsaNN.BorderStyle = BorderStyle.FixedSingle;
+            tbPsaNN.ErrorColor = Color.Red;
+            tbPsaNN.ErrorMessage = null;
             tbPsaNN.Font = new Font("Arial", 10F);
             tbPsaNN.ForeColor = Color.FromArgb(72, 61, 139);
             tbPsaNN.Location = new Point(1092, 59);
@@ -6911,6 +7221,9 @@ namespace SewingProduction
             // tbRzuDostZeh
             // 
             tbRzuDostZeh.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuDostZeh.BorderStyle = BorderStyle.FixedSingle;
+            tbRzuDostZeh.ErrorColor = Color.Red;
+            tbRzuDostZeh.ErrorMessage = null;
             tbRzuDostZeh.Font = new Font("Arial", 10F);
             tbRzuDostZeh.ForeColor = Color.FromArgb(72, 61, 139);
             tbRzuDostZeh.Location = new Point(84, 83);
@@ -6934,6 +7247,9 @@ namespace SewingProduction
             // tbRzuPach
             // 
             tbRzuPach.BackColor = Color.FromArgb(248, 248, 255);
+            tbRzuPach.BorderStyle = BorderStyle.FixedSingle;
+            tbRzuPach.ErrorColor = Color.Red;
+            tbRzuPach.ErrorMessage = null;
             tbRzuPach.Font = new Font("Arial", 10F);
             tbRzuPach.ForeColor = Color.FromArgb(72, 61, 139);
             tbRzuPach.Location = new Point(84, 107);
@@ -7717,6 +8033,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
             layoutControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditArticul.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
@@ -7733,6 +8051,13 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem64).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup24).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem147).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem152).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem154).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem63).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem65).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
@@ -8406,5 +8731,20 @@ namespace SewingProduction
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem62;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator8;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem39;
+        private CustomLabel customLabel6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem147;
+        private CustomSearchLookUpEdit searchLookUpEditArticul;
+        private DevExpress.XtraGrid.Views.Grid.GridView customSearchLookUpEdit1View;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup24;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem152;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem64;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem63;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem65;
+        private DevExpress.XtraGrid.Columns.GridColumn columnArticul;
+        private DevExpress.XtraGrid.Columns.GridColumn columnGrup;
+        private DevExpress.XtraGrid.Columns.GridColumn columnMod;
+        private DevExpress.XtraGrid.Columns.GridColumn columnKo;
+        private CustomSimpleButton customSimpleButton1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem154;
     }
 }

@@ -24,6 +24,7 @@ namespace SewingProduction.Core.Models
         //    get => _grup;
         //    set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(grup)); } }
         //}
+        public string Ko { get; set; }
         public string Kod { get; set; }
         [NotMapped]
         public string Kodd { get; set; }

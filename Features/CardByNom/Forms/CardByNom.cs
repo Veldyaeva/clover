@@ -1,22 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using DevExpress.CodeParser;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraTab;
+using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.Models;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
+using SewingProduction.Features.Articul;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.CardByNom.Services;
 using SewingProduction.Features.Furnit.Services;
+using SewingProduction.Features.KnittingProduction.Forms;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.report;
 using SewingProduction.Report;
+using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction
@@ -32,6 +40,8 @@ namespace SewingProduction
         private readonly MatrixService _matrixService;
         private readonly RaskrService _raskrService;
         private readonly SockService _sockService;
+        private readonly DbService _dbService;
+        public FormManager _formManager;
         private readonly ILogger _logger = new FileLogger();
         private RasInfo _currentRasInfoData = new RasInfo();
         private ChipInfo _currentChipInfoData = new ChipInfo();
@@ -58,7 +68,11 @@ namespace SewingProduction
         private BindingSource _proizvCombIzdSPByPachKodBindingSource;
         private BindingList<ProizvCombIzd> _proizvCombIzdVZPByPachKodBindingList;
         private BindingSource _proizvCombIzdVZPByPachKodBindingSource;
-
+        // список артикулов для выбора
+        private List<ArticulModel> _currentArticulData = new List<ArticulModel>();
+        private List<ArticulModel> articulData = new List<ArticulModel>();
+        private BindingList<ArticulModel> _articulBindingList;
+        private BindingSource _articulBindingSource;
         // список смен по заданию. Носки
         private List<SockZadanySmenList> _currentSockZadanySmenListData = new List<SockZadanySmenList>();
         private List<SockZadanySmenList> sockZadanySmenListData = new List<SockZadanySmenList>();
@@ -98,6 +112,10 @@ namespace SewingProduction
             _matrixService = new MatrixService(_dbHelper);
             _raskrService = new RaskrService(_dbHelper);
             _sockService = new SockService(_dbHelper);
+            _dbService = new DbService(_dbHelper);
+            Form mainForm = Application.OpenForms["SpMainForm"];
+            MenuStrip mainMenu = mainForm.MainMenuStrip;
+            _formManager = new FormManager(mainForm, mainMenu, _user);
             //ApplyTheme();
             ThemeManager.UpdateTheme(this);
             //// Инициализация привязок данных
@@ -179,11 +197,17 @@ namespace SewingProduction
                     _sockDefectListBindingList = new BindingList<SockDefectList>();
                     _sockDefectListBindingSource = new BindingSource { DataSource = _sockDefectListBindingList };
                 });
+                var articulTask = Task.Run(() =>
+                {
+                    _articulBindingList = new BindingList<ArticulModel>();
+                    _articulBindingSource = new BindingSource { DataSource = _articulBindingList };
+                });
                 await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, chipInfoByNomZadTask, historyRazdelNaklViewByIzTask
                         , furnitZayavCheckByPachKodTask, planSezonOtdelkaViewByPachKodTask, proizvCombIzdSPByPachKodTask
                         , proizvCombIzdVZPByPachKodTask
                         , sockZadanySmenListTask, sockKnitZadanyInfoTask, sockServiceListTask
-                        , sockMachiheDownTimeListTask, sockDefectListTask);
+                        , sockMachiheDownTimeListTask, sockDefectListTask
+                        , articulTask);
                 //await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, historyRazdelNaklViewByIzTask);
 
                 //_currentRasInfoData = new RasInfoByPachKod();
@@ -208,6 +232,16 @@ namespace SewingProduction
 
 
                 //this.xtraTabControl1.Enabled = true;
+                #region заполнение searchLookUpEditArticul в блоке Поиск
+                searchLookUpEditArticul.Properties.DataSource = _articulBindingSource;
+                columnKo.FieldName = "Ko";
+                columnGrup.FieldName = "Grup";
+                columnArticul.FieldName = "Articul";
+                columnMod.FieldName = "Mod";
+                searchLookUpEditArticul.Properties.DisplayMember = "Articul";
+                searchLookUpEditArticul.Properties.ValueMember = "Ko";
+                #endregion
+
                 #region заполнение блока "карточка расчета"
                 tbRzuNom.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.RzuNom), true, DataSourceUpdateMode.Never);
                 tbPsaNomZad.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.PsaNomZad), true, DataSourceUpdateMode.Never);
@@ -721,6 +755,18 @@ namespace SewingProduction
         }
         private async void CardByNom_Load(object sender, EventArgs e)
         {
+            try
+            {
+                Task bindingsTask = InitializeBindingsAsync();
+
+                await Task.WhenAll(bindingsTask);
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы CardByNom");
+            }
+            await LoadArticulListDataAsync();
             //ThemeManager.UpdateTheme(this);
             //gridControlPartNaklList.Visible = false;
             //gridControlNaklList.Visible = true;
@@ -735,23 +781,45 @@ namespace SewingProduction
 
             //tbNomPach.Select();
 
-            try
-            {
-                Task bindingsTask = InitializeBindingsAsync();
 
-                await Task.WhenAll(bindingsTask);
-
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы CardByNom");
-            }
 
         }
 
-        /// <summary>
-        /// Загрузка данных ANN по ID с групповым обновлением UI.
-        /// </summary>
+        private async Task LoadArticulListDataAsync()
+        {
+            try
+            {
+                _articulBindingSource.Clear();
+                _articulBindingSource.ResetBindings(false);
+                var articulData = await _dbService.GetListAsync<ArticulModel>("select ko, grup, articul, mod from view_sp_articul group by ko, grup, articul, mod order by articul", new { });
+                if (articulData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные Articul", "LoadArticulListDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        //_currentRasInfoData = rasInfoData;                // Обновляем текущую модель
+                        //_rasInfoByPachKodBindingSource.DataSource = _currentRasInfoData; // Привязываем данные к форме
+                        _currentArticulData = articulData;                // Обновляем текущую модель
+                        _articulBindingSource.DataSource = _currentArticulData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные Articul успешно загружены", "LoadArticulListDataAsync");
+                    //RasCard.Enabled = true ;
+                    _articulBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные Articul", "LoadArticulListDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных Articul");
+            }
+        }
+
+
         private async Task LoadRasInfoByPachKodDataAsync(string pachKod)
         {
             try
@@ -1844,16 +1912,25 @@ namespace SewingProduction
                 case 0: //  по № задания
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     tbNomZad.Select();
                     break;
                 case 1: //  по № пачки
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     tbNomPach.Select();
+                    break;
+                case 2: //  по артикулу
+                    layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    searchLookUpEditArticul.Select();
                     break;
                 default:
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     break;
             }
         }
@@ -1900,69 +1977,6 @@ namespace SewingProduction
                     //xtraTabControl1.Enabled = false;
                     SockZadanyInfo.PageVisible = false;
                 }
-                //_sockKnitZadanyInfoBindingSource.ResetBindings(false);
-                //MessageBox.Show(TextBoxNomZad.Text);
-
-                //xtraTabControl1.Enabled = true;
-                //xtraTabControl1.Refresh();
-                ////WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
-                ////Task wDLoadTask = WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
-                //Task rasInfoLoadTask = LoadRasInfoDataAsync(GetPachKod());
-                //Task naklViewLoadTask = LoadNaklViewDataAsync(GetPachKod());
-                //Task chipInfoLoadTask = LoadChipInfoDataAsync(GetPachKod());
-                //Task planSezonOtdelkaLoadTask = LoadPlanSezonOtdelkaViewDataAsync(GetPachKod());
-                ////await Task.WhenAll(wDLoadTask, rasInfoLoadTask, naklViewLoadTask);
-                //await Task.WhenAll(rasInfoLoadTask, naklViewLoadTask, chipInfoLoadTask, planSezonOtdelkaLoadTask);
-
-                //if (_currentRasInfoData.RzuNom == 0)
-                //{
-                //    xtraTabControl1.Enabled = false;
-                //    MessageBox.Show("Поиск не дал результатов. Измените параметры и повторите попытку");
-                //}
-                //else
-                //{
-                //    var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfoByPachKod;
-                //    int _psaPsaIDOsn = selectedRow.PsaPsaIDOsn;
-                //    string _psaKombIzd = selectedRow.PsaKombIzd;
-                //    int _psaTkIdSet = selectedRow.PsaTkIdSet;
-
-                //    if (_psaPsaIDOsn != 0
-                //        && (("V;F").IndexOf(_psaKombIzd) >= 0 || _psaTkIdSet == 1)
-                //        && (_psaTkIdSet == 0))
-                //    {
-                //        OtdelkaInfo.PageVisible = true;
-                //    }
-                //    else
-                //    {
-                //        OtdelkaInfo.PageVisible = false;
-                //    }
-
-                //    ////string nomZad = _currentRasInfoData.PsaNomZad;
-
-                //    ////string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
-                //    //var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfoByPachKod;
-                //    //string queryIsChip = $"SELECT dbo.checkChipNakl('', '{selectedRow.PsaNomZad}') AS isChip ";
-                //    //var dtIsChip = _dbHelper.ExecuteQuery(queryIsChip);
-                //    //bsIsChip.DataSource = dtIsChip;
-                //    //this.cbIsChip.DataBindings.Clear();
-                //    //this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
-
-                //    //string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
-                //    //queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
-                //    //queryOtdelkaList += $" WHERE vpso.nn = '{_currentRasInfoData.PsaNN}' ";
-                //    //var dtOtdelkaList = _dbHelper.ExecuteQuery(queryOtdelkaList);
-                //    //bsOtdelkaList.DataSource = dtOtdelkaList;
-
-                //    if (xtraTabControl1.SelectedTabPageIndex == 1)
-                //    {
-                //        UpdateFurnitUpak();
-                //    }
-                //    if (xtraTabControl1.SelectedTabPageIndex == 3)
-                //    {
-                //        UpdateProizvCombIzd();
-                //    }
-                //}
-
             }
         }
 
@@ -1991,6 +2005,41 @@ namespace SewingProduction
             }
         }
 
+        private void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+        }
+        public void OpenForm(Form form, object sender = null)
+        {
+            _formManager.OpenForm(form, sender);
+        }
+
+        private void searchLookUpEditArticul_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void searchLookUpEditArticul_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            switch (e.Button.Index)
+            {
+                case 1:
+                    string xKo = searchLookUpEditArticul.EditValue.ToString();
+                    string xArticul = searchLookUpEditArticul.Text.Trim();
+                    string xNomZadany = "";
+
+                    //ArticulModel selectedRow = _articulBindingSource.Current as ArticulModel;
+                    if (xKo != null && xKo.Length != 0 && xArticul != null && xArticul.Length != 0)
+                    {
+                        OpenForm(new NomLookUp(xNomZadany, xKo, xArticul), sender);
+                    }
+                    else
+                    {
+                        xKo = "";
+                        MessageBox.Show("Не выбран артикул");
+                    }
+                    break;
+            }
+        }
 
 
 
