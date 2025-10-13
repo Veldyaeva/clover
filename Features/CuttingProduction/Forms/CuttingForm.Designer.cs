@@ -1123,6 +1123,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             customGridRzu.Size = new System.Drawing.Size(1416, 498);
             customGridRzu.TabIndex = 0;
             customGridRzu.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRzu });
+            customGridRzu.Click += customGridRzu_Click_1;
             customGridRzu.DoubleClick += customGridRzu_DoubleClick_1;
             // 
             // gridViewRzu

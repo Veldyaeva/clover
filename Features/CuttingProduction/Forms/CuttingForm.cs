@@ -28,6 +28,7 @@ using DevExpress.XtraGrid;
 using System.IO;
 using System.ServiceModel.Channels;
 using SewingProduction.Features.KnittingProduction.Forms;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction.Features.CuttingProduction.Forms
 {
@@ -40,27 +41,27 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         private List<raskrZehUpView> _currentRzuData = new List<raskrZehUpView>();
         private BindingList<raskrZehUpView> _rzuBindingList;
         private BindingSource _rzuBindingSource;
-        private Panel overlay;
-        private PictureBox spinnerPb;
+        private LoadingScreen _loadingScreen;
         public CuttingForm()
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _cuttingService = new CuttingService(_dbHelper);
-            CreateOverlaySpinner();
+            _loadingScreen = new LoadingScreen();
 
         }
         private async void CuttingForm_Load(object sender, EventArgs e)
         {
             Task bindingsTask = InitializeBindingsAsync();
             await Task.WhenAll(bindingsTask);
-            ShowOverlay();
+            _loadingScreen.CreateOverlaySpinner(this);
+            _loadingScreen.ShowOverlay();
             try
             {
                 await LoadRzuAsync();
             }
-            finally { HideOverlay(); }
+            finally { _loadingScreen.HideOverlay(); }
         }
         private async Task InitializeBindingsAsync()
         {
@@ -208,53 +209,8 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных VyazPlanView");
             }
         }
-        private void CreateOverlaySpinner()
-        {
-            // Панель-оверлей, закрывающая форму (приобр. полупрозрачный фон)
-            overlay = new Panel
-            {
-                Dock = DockStyle.Fill,
-                BackColor = Color.FromArgb(120, Color.Gray), // полупрозрачный серый
-                Visible = false
-            };
 
-            // PictureBox по центру для GIF
-            spinnerPb = new PictureBox
-            {
-                SizeMode = PictureBoxSizeMode.CenterImage,
-                Size = new Size(128, 128),
-                Anchor = AnchorStyles.None
-            };
 
-            // Путь к GIF-файлу; положите файл рядом с .exe или укажите абсолютный путь.
-            string gifPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "loading_dude.gif");
-            if (File.Exists(gifPath))
-            {
-                spinnerPb.Image = Image.FromFile(gifPath); // сохраняет анимацию
-            }
-            else
-            {
-                MessageBox.Show("GIF не найден: " + gifPath);
-            }
-
-            // Центрируем PictureBox внутри оверлея
-            overlay.Controls.Add(spinnerPb);
-            overlay.ControlAdded += (s, e) => CenterSpinner();
-
-            this.Controls.Add(overlay);
-            overlay.BringToFront();
-
-            // при изменении размера формы — заново центрировать
-            this.Resize += (s, e) => CenterSpinner();
-        }
-        private void CenterSpinner()
-        {
-            if (overlay == null || spinnerPb == null) return;
-            spinnerPb.Left = (overlay.ClientSize.Width - spinnerPb.Width) / 2;
-            spinnerPb.Top = (overlay.ClientSize.Height - spinnerPb.Height) / 2;
-        }
-        private void ShowOverlay() => overlay.Visible = true;
-        private void HideOverlay() => overlay.Visible = false;
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -624,6 +580,11 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             CuttingFormAdding FDI = new CuttingFormAdding();
 
             DialogResult result = FDI.ShowDialog();
+        }
+
+        private void customGridRzu_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

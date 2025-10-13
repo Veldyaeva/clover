@@ -257,7 +257,7 @@ namespace SewingProduction
 
         private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new CuttingForm(), sender);
+                OpenForm(new CuttingForm(), sender);
         }
         private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
         {

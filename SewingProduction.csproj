@@ -277,9 +277,9 @@
     <EmbeddedResource Include="Resources\gray_spinner.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\loading_dude.gif">
+    <Content Include="Resources\loading_dude.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

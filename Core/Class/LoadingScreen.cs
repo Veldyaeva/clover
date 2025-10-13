@@ -17,7 +17,7 @@ namespace SewingProduction.Core.Class
             BackColor = Color.FromArgb(160, Color.White), // полупрозрачный серый
             Visible = false
         };
-        private PictureBox spinnerPb = new PictureBox
+        public PictureBox spinnerPb = new PictureBox
         {
             SizeMode = PictureBoxSizeMode.CenterImage,
             Size = new Size(64, 64),
