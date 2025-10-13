@@ -205,10 +205,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                     }
 
-                   // Устанавливаем новый AnnId
+                    // Устанавливаем новый AnnId
                     cache.AnnId = type.GetProperty("AnnId", flags) ?? type.GetProperty("annId", flags);
 
-                   // Устанавливаем флаги
+                    // Устанавливаем флаги
                     cache.IsNew = type.GetProperty("IsNew", flags);
                     cache.IsModified = type.GetProperty("IsModified", flags);
 
@@ -512,9 +512,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Пробуем взять PropertyInfo напрямую из словаря Control->PropertyInfo
             if (!_controlToArtNormProperty.TryGetValue(control, out var propInfo) || propInfo == null)
             {
-                string propertyName = GetPropertyNameFromControl(control);
-                if (string.IsNullOrEmpty(propertyName))
-                    return;
+            string propertyName = GetPropertyNameFromControl(control);
+            if (string.IsNullOrEmpty(propertyName))
+                return;
                 var type = typeof(ArtNormN);
                 propInfo = _artNormNPropCache.GetOrAdd(propertyName, name => type.GetProperty(name));
                 if (propInfo == null) return;
@@ -1000,36 +1000,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         /// <param name="insertAfterOperation">Операция, после которой нужно вставить новую (null = в конец)</param>
         /// <param name="forceAppendToEnd">Принудительно добавить в конец без диалога выбора</param>
-        private async void AddNewRaszOperation(NormRasz insertAfterOperation = null, bool forceAppendToEnd = false)
+        private async void AddNewRaszOperation(NormRasz targetOperation = null, bool forceAppendToEnd = false)
         {
             try
             {
-                int insertOperationN;
-                int insertOperationN1 = 0;
-                bool isSuboperation = false;
-                OperationInsertChoice choice = new OperationInsertChoice(); // Объявляем в более широкой области видимости
                 GridView view = gridControlRasz.MainView as GridView;
-                if (forceAppendToEnd || insertAfterOperation == null)
-                {
-                    // Добавляем в конец списка как основную операцию
-                    int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
-                    insertOperationN = maxN + 1;
-                    insertOperationN1 = 0;
-                }
-                else
-                {
-                    // Предлагаем пользователю выбрать тип операции и позицию
-                    choice = ShowOperationInsertDialog(insertAfterOperation);
-
-                    if (choice.Cancel)
-                    {
-                        return; // Отмена
-                    }
-
-                    insertOperationN = choice.OperationN;
-                    insertOperationN1 = choice.OperationN1;
-                    isSuboperation = choice.IsSuboperation;
-                }
 
                 using (var selectionForm = new NormOperNew(_selectedAnnId))
                 {
@@ -1040,23 +1015,37 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = selectionForm.SelectedRowData;
                         selectedData.IsNew = true;
                         selectedData.IsBeingAdded = true; // помечаем как добавляемую в текущей сессии
+                        
+                        // Детеминированные сценарии без вопросов:
+                        // 1) Если targetOperation == null (клик по NewItemRow) — добавить как главу №1, остальные сместить вниз
+                        // 2) Если targetOperation.N1 == 0 — добавить как новую главу сразу после targetOperation
+                        // 3) Если targetOperation подоперация — добавить подоперацию сразу после targetOperation в той же главе
 
-                        // Вставка основной операции после текущей главы: всегда создаём новую главу (N+1.0) и сдвигаем последующие
-                        if (!isSuboperation && insertOperationN1 == 0)
+                        if (targetOperation == null)
                         {
-                            await _logger.LogEventAsync($"Вставка основной операции после главы {insertOperationN - 1}: создаётся {insertOperationN}.0", "AddNewRaszOperation");
-                            OperationNumberingService.InsertMainAfter(_normRaszList, insertOperationN - 1, selectedData);
+                            // Смещаем именно главы: для каждого N (<100) сдвигаем всю группу N -> N+1 (обрабатываем от больших к меньшим)
+                            var chapterGroups = _normRaszList
+                                .Where(r => r.N < 100)
+                                .GroupBy(r => r.N)
+                                .OrderByDescending(g => g.Key)
+                                .ToList();
+                            foreach (var g in chapterGroups)
+                            {
+                                int newN = g.Key + 1;
+                                foreach (var op in g)
+                                {
+                                    int oldN = op.N;
+                                    op.N = newN;
+                                    if (!op.IsNew && op.N != oldN) op.IsModified = true;
+                                }
+                            }
+                            selectedData.N = 1;
+                            selectedData.N1 = 0;
                         }
-                        else if (isSuboperation)
+                        else if (targetOperation != null)
                         {
-                            // Подоперация: используем сервис с возможным преобразованием основной в подоперацию
-                            OperationNumberingService.InsertSuboperation(_normRaszList, insertOperationN, insertOperationN1, choice.ConvertMainToSuboperation, selectedData);
-                        }
-                        else
-                        {
-                            // Прямая установка (редкий случай)
-                            selectedData.N = insertOperationN;
-                            selectedData.N1 = insertOperationN1;
+                            // Всегда добавляем ГЛАВУ сразу после выбранной (даже если клик был на подоперации)
+                            OperationNumberingService.InsertMainAfter(_normRaszList, targetOperation.N, selectedData);
                         }
 
                         // Массовое обновление UI во избежание мерцаний
@@ -1181,7 +1170,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                         rask: _normRaskList,
                         kont: _normKontList,
                         raszSource: _normRaszBindingSource,
-                        annSource: bindingSource1
+                        annSource: bindingSource1,
+                        processSave: (close) => ProcessSaveData(close),
+                        importFromBuffer: () => ImportFromBufferPresenterAsync(),
+                        addOperation: () => AddOperationPresenterAsync()
                     );
                 }
                 if (_presenter != null)
@@ -1242,10 +1234,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await this.InvokeAsync(() =>
                 {
-                    if (gridViewKont != null && gridViewKont.Columns["Text"] != null)
-                    {
-                        gridViewKont.Columns["Text"].OptionsColumn.AllowEdit = false;
-                    }
+                if (gridViewKont != null && gridViewKont.Columns["Text"] != null)
+                {
+                    gridViewKont.Columns["Text"].OptionsColumn.AllowEdit = false;
+                }
                 });
 
                 //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
@@ -1984,20 +1976,8 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             e.Allow = false;
 
-            // Используем новый метод для добавления операции
-            // Определяем, нужно ли предлагать позицию или добавить в конец
-            bool shouldOfferPosition = _lastFocusedRaszOperation != null && _normRaszList?.Count > 0;
-
-            if (shouldOfferPosition)
-            {
-                // Предлагаем позицию на основе последней сфокусированной операции
-                AddNewRaszOperation(_lastFocusedRaszOperation, false);
-            }
-            else
-            {
-                // Добавляем в конец списка
-                AddNewRaszOperation(null, true);
-            }
+            // ВСЕГДА: клик по NewItemRow добавляет новую главу
+            AddNewRaszOperation(null, true);
         }
 
         private void gridViewRasz_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
@@ -2175,7 +2155,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (target == null || (draggedList != null && draggedList.Contains(target)))
                             e.Effect = DragDropEffects.None;
                         else
-                            e.Effect = DragDropEffects.Move;
+                    e.Effect = DragDropEffects.Move;
                     }
                 }
                 else if (gridViewRasz.IsGroupRow(hit.RowHandle))
@@ -2192,7 +2172,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (groupValue == null || !int.TryParse(groupValue.ToString(), out _))
                             e.Effect = DragDropEffects.None;
                         else
-                            e.Effect = DragDropEffects.Move;
+                    e.Effect = DragDropEffects.Move;
                     }
                 }
                 else
@@ -3029,12 +3009,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         // Сохранение данных без закрытия формы
         private async void btnSave_Click(object sender, EventArgs e)
         {
+            if (_presenter != null) { await _presenter.SaveAsync(false); return; }
             await ProcessSaveData(false);
         }
 
         // Сохранение данных и закрытие формы
         private async void btnOK_Click(object sender, EventArgs e)
         {
+            if (_presenter != null) { await _presenter.SaveAsync(true); return; }
             await ProcessSaveData(true);
         }
 
@@ -3133,8 +3115,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (itemsToInsert.Any())
             {
                 // Установим annId через кэш отражений (ускорение массовых вставок)
-                var annIdProp = typeof(T).GetProperty("annId");
-                if (annIdProp != null)
+                    var annIdProp = typeof(T).GetProperty("annId");
+                    if (annIdProp != null)
                 {
                     foreach (var item in itemsToInsert)
                     {
@@ -3232,7 +3214,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
-            // Используем глобальный буфер если доступен, иначе локальный
+            // Делегируем презентеру (тонкий View)
+            if (_presenter != null) { await _presenter.ImportFromBufferAsync(); return; }
+            // fallback: Используем глобальный буфер если доступен, иначе локальный 
             IReadOnlyList<int> bufferIdsToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferIds : (_bufferWorkDivision > 0 ? new List<int> { _bufferWorkDivision } : new List<int>());
 
             if (bufferIdsToUse != null && bufferIdsToUse.Count > 0)
@@ -3246,10 +3230,10 @@ namespace SewingProduction.Features.TeamWork.Forms
      MessageBoxIcon.Question);
 
                     bool clearExisting = result == DialogResult.Yes;
-                    if (_normRaszList == null || _normRaskList == null || _normKontList == null)
-                    {
-                        await InitializeBindingsAsync();
-                    }
+                        if (_normRaszList == null || _normRaskList == null || _normKontList == null)
+                        {
+                            await InitializeBindingsAsync();
+                        }
 
                     var report = await _bufferImportService.ImportAsync(
                         bufferIdsToUse,
@@ -3275,6 +3259,70 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 await ShowStatusMessage("В буфере пусто", 3000, Color.Orange);
             }
+        }
+        
+        // Тонкая обёртка для презентера: логика вставки из буфера без привязки к обработчику клика
+        private async Task ImportFromBufferPresenterAsync()
+        {
+            IReadOnlyList<int> bufferIdsToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferIds : (_bufferWorkDivision > 0 ? new List<int> { _bufferWorkDivision } : new List<int>());
+
+            if (bufferIdsToUse != null && bufferIdsToUse.Count > 0)
+            {
+                try
+                {
+                    var result = MessageBox.Show(
+                        "Очистить текущие данные перед вставкой из буфера?",
+                        "Вставка из буфера",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+                    bool clearExisting = result == DialogResult.Yes;
+                    if (_normRaszList == null || _normRaskList == null || _normKontList == null)
+                    {
+                        await InitializeBindingsAsync();
+                    }
+
+                    var report = await _bufferImportService.ImportAsync(
+                        bufferIdsToUse,
+                        _currentAnnData?.AnnID ?? _newAnnId,
+                        clearExistingBefore: clearExisting,
+                        markExistingAsDeleted: clearExisting
+                    );
+
+                    await ShowStatusMessage($"Загружено частей: {report.PartsCount}, операций: {report.InsertedCount}");
+                }
+                catch (System.Data.SqlClient.SqlException sqlEx)
+                {
+                    await _logger.LogErrorAsync(sqlEx, "Ошибка при вставке данных из буфера");
+                    await ShowStatusMessage($"Ошибка при вставке данных из буфера: {sqlEx.Message}", 5000, System.Drawing.Color.Red);
+                }
+                catch (Exception ex)
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при вставке данных из буфера");
+                    await ShowStatusMessage($"Ошибка при вставке данных из буфера: {ex.Message}", 5000, System.Drawing.Color.Red);
+                }
+            }
+            else
+            {
+                await ShowStatusMessage("В буфере пусто", 3000, System.Drawing.Color.Orange);
+            }
+        }
+
+        // Тонкая обёртка для презентера: добавление операции с учётом последнего фокуса
+        private async Task AddOperationPresenterAsync()
+        {
+            await this.InvokeAsync(() =>
+            {
+                bool shouldOfferPosition = _lastFocusedRaszOperation != null && _normRaszList?.Count > 0;
+                if (shouldOfferPosition)
+                {
+                    AddNewRaszOperation(_lastFocusedRaszOperation, false);
+                }
+                else
+                {
+                    AddNewRaszOperation(null, true);
+                }
+            });
         }
         #endregion
 
