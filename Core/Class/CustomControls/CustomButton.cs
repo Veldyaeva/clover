@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
+using SewingProduction;
 using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
@@ -271,5 +273,22 @@ namespace SewingProduction.Core.Class
             DialogResult = DialogResult.Cancel;
         }
     }
+    public static class ControlExtensions
+    {
+        public static void ApplyVisibility(this Control control, bool visiblePermission, bool visibleLogic)
+        {
+            bool finalVisible = visiblePermission && visibleLogic;
 
+            control.Visible = finalVisible;
+
+            if (control.Parent is LayoutControl layout)
+            {
+                var item = layout.GetItemByControl(control);
+                if (item != null)
+                    item.Visibility = finalVisible
+                        ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                        : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+        }
+    }
 }
