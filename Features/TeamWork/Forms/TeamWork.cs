@@ -905,7 +905,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
 
-        private async void customSimpleButton1_Click(object sender, EventArgs e)
+        private async void ButtonDouble_Click(object sender, EventArgs e)
         {
             await DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource, false);
         }
@@ -1496,6 +1496,59 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
         {
+
+        }
+
+		// Открыть журнал изменений разделения труда (art_norm_n_updLog) для выбранного AnnID
+		// Источник лога: ANN
+		private void customSimpleButtonAnnLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+				// Получаем AnnID из текущей строки основного грида
+				int annId = 0;
+                if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
+                {
+                    var row = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+                    annId = row?.AnnID ?? 0;
+                }
+
+				// Открываем форму лога, передавая AnnID и тип источника (ANN)
+				var logForm = annId > 0 ? new Log(annId, LogSourceType.Ann) : new Log();
+                logForm.StartPosition = FormStartPosition.CenterParent;
+                logForm.Show(this);
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, "Ошибка при открытии формы AnnLog");
+                MessageBox.Show($"Не удалось открыть журнал: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+		// Открыть журнал изменений норм раскроя (norm_rasz_updLog) для выбранного AnnID
+		// Источник лога: RASZ
+		private void customSimpleButtonRaszLog_Click(object sender, EventArgs e)
+        {
+            try
+            {
+				// Получаем AnnID из текущей строки основного грида
+				int annId = 0;
+                if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
+                {
+                    var row = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+                    annId = row?.AnnID ?? 0;
+                }
+
+				// Открываем форму лога, передавая AnnID и тип источника (RASZ)
+				var logForm = annId > 0 ? new Log(annId, LogSourceType.Rasz) : new Log();
+                logForm.StartPosition = FormStartPosition.CenterParent;
+                logForm.Show(this);
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, "Ошибка при открытии формы AnnLog");
+                MessageBox.Show($"Не удалось открыть журнал: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
     }

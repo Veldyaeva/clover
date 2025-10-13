@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SewingProduction.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -32,5 +34,6 @@ namespace SewingProduction.Helpers
                 list[index] = newItem;
             }
         }
+
     }
 }

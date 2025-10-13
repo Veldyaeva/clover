@@ -497,7 +497,8 @@ namespace SewingProduction.Helpers
             }
             gridView.RefreshData();
         }
-        public void AutoRowFilterConfig(GridView gridView)
+
+        public void AutoRowFilterConfig(GridView gridView, int showColFilter)
         {
             if (gridView == null) return;
 
@@ -521,7 +522,7 @@ namespace SewingProduction.Helpers
                     //column.OptionsFilter.AllowAutoFilter = true;
                     //column.OptionsFilter.AllowFilter = true;
                     column.OptionsFilter.AllowAutoFilter = true;
-                    column.OptionsFilter.AllowFilter = false;
+                    column.OptionsFilter.AllowFilter = showColFilter == 1? true : false;
                     column.OptionsColumn.AllowSort = DefaultBoolean.False;
                     // Умная настройка условий фильтрации
                     SetColumnFilterCondition(column);

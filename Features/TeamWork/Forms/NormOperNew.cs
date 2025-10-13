@@ -1,12 +1,19 @@
-﻿using System;
-using System.ComponentModel;
-using System.Data;
-using System.Windows.Forms;
+using DevExpress.CodeParser;
+using DevExpress.DirectX.Common.Direct2D;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
+using System;
+using System.ComponentModel;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -18,7 +25,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly int _annId;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        private System.Collections.Generic.List<KodProizvModel> kodProizvList;
+        private System.Collections.Generic.List<PodrVyazModel> podrVyazList;
+        private System.Collections.Generic.List<OborudShvModel> oborudShvList;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public NormRasz SelectedRowData { get; private set; }
         public NormOperNew()
         {
@@ -33,6 +43,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             _annId = annId;
             ThemeManager.UpdateTheme(this);
+
+            //// Режим редактирования через EditForm и подписки
+            //gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+            //gridView1.EditFormShowing += gridView1_EditFormShowing;
         }
 
         private async void NormOperNew_Load(object sender, EventArgs e)
@@ -41,6 +55,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _gridHelper.LoadGridViewSettings(gridView1, "NormOperGrid.xml");
                 LoadData();
+
+                // Загрузка справочников для выпадающих списков (как в TeamWork_AdvanceTW)
+                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
+                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
+
+                ConfigureLookups();
             }
             catch (ConstraintException ex)
             {
@@ -61,6 +82,113 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида");
             }
 
+        }
+
+        private void ConfigureLookups()
+        {
+            try
+            {
+                // kod_proizv
+                var colKodProizv = gridView1.Columns["kod_proizv"];
+                if (colKodProizv != null)
+                {
+                    var repoKodProizv = new RepositoryItemLookUpEdit
+                    {
+                        DataSource = kodProizvList,
+                        DisplayMember = "text_proizv",
+                        ValueMember = "kod_proizv",
+                        NullText = "[Выберите производство]"
+                    };
+                    repoKodProizv.EditValueChanged += (s, e) =>
+                    {
+                        if (gridView1.FocusedRowHandle < 0) return;
+                        if (s is LookUpEdit editor && editor.EditValue != null && int.TryParse(editor.EditValue.ToString(), out int kodProizv))
+                        {
+                            var prodItem = kodProizvList?.FirstOrDefault(x => x.kod_proizv == kodProizv);
+                            if (prodItem != null)
+                            {
+                                gridView1.SetFocusedRowCellValue("text_proizv", prodItem.text_proizv);
+                            }
+                        }
+                    };
+                    colKodProizv.ColumnEdit = repoKodProizv;
+                }
+
+                // kod_podr (вязальное подразделение)
+                var colPodrVyaz = gridView1.Columns["kod_podr"];
+                if (colPodrVyaz != null)
+                {
+                    var repoPodrVyaz = new RepositoryItemLookUpEdit
+                    {
+                        DataSource = podrVyazList,
+                        DisplayMember = "text_vyaz",
+                        ValueMember = "kod_vyaz",
+                        NullText = "[Выберите подразделение]"
+                    };
+                    // Фильтруем по текущему kod_proizv при открытии
+                    repoPodrVyaz.QueryPopUp += (s, e) =>
+                    {
+                        if (gridView1.FocusedRowHandle < 0) return;
+                        var kodProizvObj = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "kod_proizv");
+                        if (kodProizvObj != null && int.TryParse(kodProizvObj.ToString(), out int kodProizv))
+                        {
+                            var filtered = podrVyazList
+                                .Where(x => x.kod_proizv == kodProizv || x.kod_proizv == 9)
+                                .ToList();
+                            if (s is LookUpEdit editor)
+                            {
+                                editor.Properties.DataSource = filtered;
+                                editor.Properties.ValueMember = "kod_vyaz";
+                                editor.Properties.DisplayMember = "text_vyaz";
+                                editor.Properties.PopulateColumns();
+                            }
+                        }
+                    };
+                    repoPodrVyaz.EditValueChanged += (s, e) =>
+                    {
+                        if (gridView1.FocusedRowHandle < 0) return;
+                        if (s is LookUpEdit editor && editor.EditValue != null && int.TryParse(editor.EditValue.ToString(), out int kodVyaz))
+                        {
+                            var vyazItem = podrVyazList?.FirstOrDefault(x => x.kod_vyaz == kodVyaz);
+                            if (vyazItem != null)
+                            {
+                                gridView1.SetFocusedRowCellValue("text_vyaz", vyazItem.text_vyaz);
+                            }
+                        }
+                    };
+                    colPodrVyaz.ColumnEdit = repoPodrVyaz;
+                }
+
+                // kod_ob (оборудование)
+                var colOborudShv = gridView1.Columns["kod_ob"];
+                if (colOborudShv != null)
+                {
+                    var repoOborud = new RepositoryItemLookUpEdit
+                    {
+                        DataSource = oborudShvList,
+                        DisplayMember = "text_ob",
+                        ValueMember = "kod_ob",
+                        NullText = "[Выберите оборудование]"
+                    };
+                    repoOborud.EditValueChanged += (s, e) =>
+                    {
+                        if (gridView1.FocusedRowHandle < 0) return;
+                        if (s is LookUpEdit editor && editor.EditValue != null && int.TryParse(editor.EditValue.ToString(), out int kodOb))
+                        {
+                            var obItem = oborudShvList?.FirstOrDefault(x => x.kod_ob == kodOb);
+                            if (obItem != null)
+                            {
+                                gridView1.SetFocusedRowCellValue("text_ob", obItem.text_ob);
+                            }
+                        }
+                    };
+                    colOborudShv.ColumnEdit = repoOborud;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка конфигурации выпадающих списков в NormOperNew");
+            }
         }
 
         /// <summary>
@@ -87,6 +215,75 @@ namespace SewingProduction.Features.TeamWork.Forms
                 MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        //private void gridView1_EditFormShowing(object sender, EditFormShowingEventArgs e)
+        //{
+        //    var view = sender as GridView;
+        //    if (view == null) return;
+
+        //    // Перехватываем попытку добавления через NewItemRow и открываем EditForm на новой строке
+        //    if (view.IsNewItemRow(e.RowHandle))
+        //    {
+        //        e.Allow = false;
+        //        try { AddNewRowToGrid(); } catch { }
+        //    }
+        //}
+
+        //private void gridView1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.KeyCode == Keys.Add || e.KeyCode == Keys.Oemplus)
+        //        {
+        //            AddNewRowToGrid();
+        //            e.Handled = true;
+        //        }
+        //    }
+        //    catch { }
+        //}
+        //private void customAddButton_Click(object sender, EventArgs e)
+        //{
+        //    try { AddNewRowToGrid(); }
+        //    catch { }
+        //}
+        //private void AddNewRowToGrid()
+        //{
+        //    try
+        //    {
+        //        var dt = customGridControl1?.DataSource as DataTable;
+        //        if (dt == null) return;
+
+        //        gridView1.BeginDataUpdate();
+        //        try
+        //        {
+        //            var newRow = dt.NewRow();
+        //            Базовые значения по умолчанию
+        //            if (dt.Columns.Contains("n1")) newRow["n1"] = 0;
+        //            if (dt.Columns.Contains("sek")) newRow["sek"] = 0;
+        //            if (dt.Columns.Contains("razryd")) newRow["razryd"] = 0;
+
+        //            dt.Rows.Add(newRow);
+        //        }
+        //        finally
+        //        {
+        //            gridView1.EndDataUpdate();
+        //        }
+
+        //        Фокус на новой строке и открытие EditForm
+        //        int newIndex = dt.Rows.Count - 1;
+        //        int handle = gridView1.GetRowHandle(newIndex);
+        //        if (gridView1.IsValidRowHandle(handle))
+        //        {
+        //            gridView1.FocusedRowHandle = handle;
+        //            gridView1.MakeRowVisible(handle);
+        //            gridView1.ShowEditForm();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в NormOperNew");
+        //    }
+        //}
 
         private async void customOkButton1_Click(object sender, EventArgs e)
         {
