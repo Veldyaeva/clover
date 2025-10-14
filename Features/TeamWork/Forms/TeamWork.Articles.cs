@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Helpers;
+using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -134,9 +135,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 //    "   left join kompl k on sa.kod = k.kod_k " +
                 //    "WHERE sa.annID IS NULL and k.kod_k is null";//
                                                                  "SELECT * FROM articulListGroupBySizeLabel where annId is null or annId = 0";
-                List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
-
-                _myDataArtList.BulkLoad(loadedData);
+                await GridOverlayLoader.LoadListAsync(
+                    gridControl_unboundArts,
+                    _myDataArtList,
+                    _myDataArtBindingSource,
+                    async _ => await _dbService.GetListAsync<MyDataART>(query, null),
+                    CancellationToken.None);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
             }
@@ -166,18 +170,21 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int kod = GetCurrentKodFromDataSource();
                 bool loadAll = FindButtonByTag(layoutControlGroup14, "bind:show-all").Checked;
                 //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
-                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAll);
-
-                // Заполняем текстовый статус для каждой записи
-                if (loadedData != null)
-                {
-                    foreach (var item in loadedData)
+                await GridOverlayLoader.LoadListAsync(
+                    gridControl_wdToBind,
+                    _myDataAnnList,
+                    _myDataAnnBindingSource,
+                    async _ =>
                     {
-                        item.Stat = StatusHelper.GetStatusText(item.Status);
-                    }
-                }
-
-                _myDataAnnList.BulkLoad(loadedData);
+                        var data = await _artNormService.GetArtNormDataCurrent(loadAll);
+                        if (data != null)
+                        {
+                            foreach (var item in data)
+                                item.Stat = StatusHelper.GetStatusText(item.Status);
+                        }
+                        return data ?? new List<MyDataANN>();
+                    },
+                    CancellationToken.None);
             }
             catch (Exception ex)
             {
@@ -372,25 +379,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(new NullReferenceException("_normRaszListArticles or _normRaszBindingSourceArticles is null"), "RefreshNormRaszForArticlesTab failed initialization check.");
                 return;
             }
-
-            List<NormRasz> raszList = new List<NormRasz>();
-            if (annId > 0)
-            {
-                raszList = await _artNormService.GetRelatedNormRasz(annId);
-                cancellationToken.ThrowIfCancellationRequested();
-            }
-
-            _normRaszListArticles.RaiseListChangedEvents = false;
-            _normRaszListArticles.Clear();
-            if (raszList != null)
-            {
-                foreach (var item in raszList)
-                {
-                    _normRaszListArticles.Add(item);
-                }
-            }
-            _normRaszListArticles.RaiseListChangedEvents = true;
-            _normRaszBindingSourceArticles.ResetBindings(false);
+            await GridOverlayLoader.LoadListAsync(
+                customGridControl3,
+                _normRaszListArticles,
+                _normRaszBindingSourceArticles,
+                async token => annId > 0 ? await _artNormService.GetRelatedNormRasz(annId) : Enumerable.Empty<NormRasz>(),
+                cancellationToken);
         }
 
         private async Task RefreshNormRaskForArticlesTab(int annId, CancellationToken cancellationToken = default)
@@ -403,68 +397,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(new NullReferenceException("_normRaskListArticles or _normRaskBindingSourceArticles is null"), "RefreshNormRaskForArticlesTab failed initialization check.");
                 return;
             }
-
-            List<NormRask> raskList = new List<NormRask>();
-            if (annId > 0)
-            {
-                raskList = await _artNormService.GetRelatedNormRask(annId);
-                cancellationToken.ThrowIfCancellationRequested();
-            }
-
-            await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: annId={annId}, loaded {raskList?.Count ?? 0} items", "RefreshNormRaskForArticlesTab");
-
-            _normRaskListArticles.RaiseListChangedEvents = false;
-            _normRaskListArticles.Clear();
-            if (raskList != null)
-            {
-                foreach (var item in raskList)
-                {
-                    _normRaskListArticles.Add(item);
-                    await _logger.LogEventAsync($"Added NormRask: kod_o={item.Kod_o}, text={item.TextRask}, razryd={item.razryd}, sek={item.Sek}, spec={item.Spec}, obor={item.Obor}", "RefreshNormRaskForArticlesTab");
-                }
-            }
-            _normRaskListArticles.RaiseListChangedEvents = true;
-            _normRaskBindingSourceArticles.ResetBindings(false);
-
-            // Log the actual data in the binding source
-            if (_normRaskBindingSourceArticles.DataSource is BindingList<NormRask> bindingList)
-            {
-                await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: BindingSource contains {bindingList.Count} items", "RefreshNormRaskForArticlesTab");
-                if (bindingList.Count > 0)
-                {
-                    var firstItem = bindingList[0];
-                    await _logger.LogEventAsync($"First item: kod_o='{firstItem.Kod_o}', text='{firstItem.TextRask}', razryd={firstItem.razryd}, sek={firstItem.Sek}, spec='{firstItem.Spec}', obor='{firstItem.Obor}'", "RefreshNormRaskForArticlesTab");
-                }
-            }
-
-            await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: _normRaskListArticles.Count={_normRaskListArticles.Count}, BindingSource.DataSource={_normRaskBindingSourceArticles.DataSource}", "RefreshNormRaskForArticlesTab");
-
-            // Force refresh the grid to ensure data is displayed
-            if (customGridControl2?.MainView is GridView gridView)
-            {
-                gridView.RefreshData();
-                await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Forced grid refresh for customGridControl2", "RefreshNormRaskForArticlesTab");
-
-                // Additional verification
-                await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Grid row count: {gridView.RowCount}, DataRowCount: {gridView.DataRowCount}", "RefreshNormRaskForArticlesTab");
-
-                // Force the grid to repaint
-                gridView.Invalidate();
-                customGridControl2.Refresh();
-
-                // Ensure the grid is visible and enabled
-                if (!customGridControl2.Visible)
-                {
-                    customGridControl2.Visible = true;
-                    await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Made customGridControl2 visible", "RefreshNormRaskForArticlesTab");
-                }
-
-                if (!customGridControl2.Enabled)
-                {
-                    customGridControl2.Enabled = true;
-                    await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Made customGridControl2 enabled", "RefreshNormRaskForArticlesTab");
-                }
-            }
+            await GridOverlayLoader.LoadListAsync(
+                customGridControl2,
+                _normRaskListArticles,
+                _normRaskBindingSourceArticles,
+                async token => annId > 0 ? await _artNormService.GetRelatedNormRask(annId, token) : Enumerable.Empty<NormRask>(),
+                cancellationToken);
         }
 
         /// <summary>
@@ -482,21 +420,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(new NullReferenceException("_nzpListArt or _nzpByKoddRtSourceArt is null"), "LoadNZPForArticlesTab failed initialization check.");
                 return;
             }
-
-            var nzpData = annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, cancellationToken) : new List<NZPByKoddRt>();
-
-            cancellationToken.ThrowIfCancellationRequested();
-
-            _nzpListArt.RaiseListChangedEvents = false;
-            _nzpListArt.Clear();
-            foreach (var item in nzpData)
-            {
-                _nzpListArt.Add(item);
-            }
-            _nzpListArt.RaiseListChangedEvents = true;
-
-            _nzpByKoddRtSourceArt?.ResetBindings(false);
-            gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
+            await GridOverlayLoader.LoadListAsync(
+                gridControlNZP,
+                _nzpListArt,
+                _nzpByKoddRtSourceArt,
+                async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : Enumerable.Empty<NZPByKoddRt>(),
+                cancellationToken);
+            gridControlNZP?.RefreshDataSource();
             await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
         }
 
@@ -505,25 +435,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 string query = "SELECT * FROM artNormNView WHERE status = 4";
-                List<MyDataANN> preArchData = await _dbService.GetListAsync<MyDataANN>(query, null);
-
                 if (_preArchList == null || _preArchBindingSource == null)
                 {
                     await _logger.LogErrorAsync(new NullReferenceException("_preArchList or _preArchBindingSource is null"), "PreArchLoad failed initialization check.");
                     MessageBox.Show("Ошибка инициализации списка предварительного архива.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                //_preArchList.Clear();
-
-                //if (preArchData != null)
-                //{
-                //    foreach (var item in preArchData)
-                //    {
-                //        _preArchList.Add(item);
-                //    }
-                //}
-                //_preArchBindingSource.ResetBindings(false);
-                _preArchList.BulkLoad(preArchData);
+                await GridOverlayLoader.LoadListAsync(
+                    gridControlPreArch,
+                    _preArchList,
+                    _preArchBindingSource,
+                    async _ => await _dbService.GetListAsync<MyDataANN>(query, null),
+                    CancellationToken.None);
 
                 await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
 
@@ -546,26 +469,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 string query = "SELECT * FROM artNormNView WHERE status = 3";
-                List<ArtNormN> archData = await _dbService.GetListAsync<ArtNormN>(query, null);
-
                 if (_archList == null || _archBindingSource == null)
                 {
                     await _logger.LogErrorAsync(new NullReferenceException("_archList or _archBindingSource is null"), "ArchLoad failed initialization check.");
                     MessageBox.Show("Ошибка инициализации списка архива.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                // Заполняем StatusText для каждой записи
-                if (archData != null)
-                {
-                    foreach (var item in archData)
+                await GridOverlayLoader.LoadListAsync(
+                    gridControlArch,
+                    _archList,
+                    _archBindingSource,
+                    async _ =>
                     {
-                        item.StatusText = StatusHelper.GetStatusText(item.Status);
-                    }
-                }
-
-                // Загружаем данные в архивный список
-                _archList.BulkLoad(archData ?? new List<ArtNormN>());
+                        var data = await _dbService.GetListAsync<ArtNormN>(query, null);
+                        if (data != null)
+                        {
+                            foreach (var item in data)
+                                item.StatusText = StatusHelper.GetStatusText(item.Status);
+                        }
+                        return data ?? new List<ArtNormN>();
+                    },
+                    CancellationToken.None);
 
                 await _logger.LogEventAsync($"Загружено {_archList.Count} записей в архив.", "ArchLoad");
 

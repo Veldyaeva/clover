@@ -727,20 +727,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void gridControl2_Leave_Internal(object sender, EventArgs e)
-        {
-            selectedRowHandle = ANNgridView.FocusedRowHandle;
-        }
-
-        private void gridControl2_GotFocus_Internal(object sender, EventArgs e)
-        {
-            if (selectedRowHandle >= 0)
-            {
-                gridViewRaszTW.FocusedRowHandle = selectedRowHandle;
-                gridViewRaszTW.SelectRow(selectedRowHandle);
-                selectedRowHandle = -1;
-            }
-        }
+        
 
         private async void simpleButton2_Click_Internal(object sender, EventArgs e)
         {

@@ -42,6 +42,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
 
                 bindingSource?.ResetBindings(false);
             }
+            catch { SplashScreenManager.CloseOverlayForm(overlayHandle); }
             finally
             {
                 try
@@ -61,7 +62,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
                         }
                     }
                 }
-                catch { }
+                catch { SplashScreenManager.CloseOverlayForm(overlayHandle); }
             }
         }
     }

@@ -785,70 +785,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             };
         }
 
-        private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
-        {
-            if (teamWorkForm.ShowDialog() == DialogResult.OK)
-            {
-                var createdItem = teamWorkForm.CreatedAnn;
-
-                if (createdItem != null)
-                {
-                    // Обновляем существующий объект
-                    newItem.Articul = createdItem.Articul;
-                    newItem.Mod = createdItem.Mod;
-                    newItem.grup = createdItem.grup;
-                    newItem.Komment = createdItem.Komment;
-                    newItem.Reco = createdItem.Reco;
-                    newItem.Diz = createdItem.Diz;
-                    newItem.Constr = createdItem.Constr;
-                    newItem.Sek = createdItem.Sek;
-                }
-
-                _bindingSource.ResetBindings(false);
-                int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
-                if (newRowHandle >= 0)
-                {
-                    ANNgridView.BeginUpdate();
-                    try
-                    {
-                        ANNgridView.FocusedRowHandle = newRowHandle;
-                        ANNgridView.MakeRowVisible(newRowHandle); // Прокручиваем до строки
-                        ANNgridView.RefreshRow(newRowHandle);
-                    }
-                    finally
-                    {
-                        ANNgridView.EndUpdate();
-                    }
-                }
-
-                // Запускаем асинхронное обновление секунд для созданного/отредактированного РТ
-                _ = Task.Run(async () =>
-                {
-                    await _secondsUpdateManager.StartSecondsUpdateAsync(newItem.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-                    // Очищаем статус через 3 секунды после завершения
-                    await Task.Delay(3000);
-                    ClearSecondsUpdateStatus();
-                });
-            }
-            else
-            {
-                // Удаляем несохранённую строку
-                _bindingList.Remove(newItem);
-                _bindingSource.Remove(newItem);
-
-                await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
-                if (teamWorkForm.IsRaszInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
-                if (teamWorkForm.IsRaskInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
-                if (teamWorkForm.IsKontInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
-
-                _bindingSource.ResetBindings(false);
-                ANNgridControl.RefreshDataSource();
-                ANNgridView.RefreshData();
-            }
-        }
+        
         private async Task Arch(object sender, EventArgs e)
         {
             int rowHandle = gridViewPreArch.FocusedRowHandle;
