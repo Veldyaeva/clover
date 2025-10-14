@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -614,27 +615,29 @@ WHERE nr.annId = @annId";
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId)
         {
             List<NZPByKoddRt> nzpList;
-            Dictionary<string, int> pztCounts;
+            Dictionary<int, int> pztCounts;
 
             using (var connection = _dbHelper.GetConnection())
             {
                 var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
                     "dbo.GetNZPByKoddRT",
                     new { xAnnID = annId },
-                    commandType: CommandType.StoredProcedure);
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 120);
                 nzpList = nzpResult.ToList();
 
-                var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
+                var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
                     "dbo.GetPztCountsByKoddRT",
                     new { xAnnID = annId },
-                    commandType: CommandType.StoredProcedure);
-                pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 120);
+                pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
             }
 
             // Объединение результатов
             foreach (var row in nzpList)
             {
-                if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
+                if (pztCounts.TryGetValue(row.annId, out int count))
                     row.PZTCount = count;
             }
 
@@ -643,33 +646,42 @@ WHERE nr.annId = @annId";
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId, CancellationToken ct)
         {
             List<NZPByKoddRt> nzpList;
-            Dictionary<string, int> pztCounts;
-            return await Task.Run(async () =>
+            Dictionary<int, int> pztCounts;
+            try
             {
+                ct.ThrowIfCancellationRequested();
                 using (var connection = _dbHelper.GetConnection())
                 {
                     var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
                         "dbo.GetNZPByKoddRT",
                         new { xAnnID = annId },
-                        commandType: CommandType.StoredProcedure);
+                        commandType: CommandType.StoredProcedure,
+                        commandTimeout: 120);
                     nzpList = nzpResult.ToList();
 
-                    var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
+                    ct.ThrowIfCancellationRequested();
+
+                    var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
                         "dbo.GetPztCountsByKoddRT",
                         new { xAnnID = annId },
-                        commandType: CommandType.StoredProcedure);
-                    pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
+                        commandType: CommandType.StoredProcedure,
+                        commandTimeout: 120);
+                    pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
                 }
 
                 // Объединение результатов
                 foreach (var row in nzpList)
                 {
-                    if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
+                    if (pztCounts.TryGetValue(row.annId, out int count))
                         row.PZTCount = count;
                 }
 
                 return nzpList;
-            }, ct);
+            }
+            catch (Exception ex) { 
+                Debug.WriteLine(ex.ToString()); 
+                return null; }
+            
         }
 
 

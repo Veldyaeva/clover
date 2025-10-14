@@ -1003,7 +1003,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // buffer
             // 
             buffer.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            buffer.BorderStyle = BorderStyle.FixedSingle;
             buffer.Enabled = false;
+            buffer.ErrorColor = System.Drawing.Color.Red;
+            buffer.ErrorMessage = null;
             buffer.Font = new System.Drawing.Font("Arial", 10F);
             buffer.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             buffer.Location = new System.Drawing.Point(8, 571);
@@ -1189,7 +1192,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn57
             // 
             gridColumn57.Caption = "Мин размер";
-            gridColumn57.FieldName = "minSize";
+            gridColumn57.FieldName = "minSizeAll";
             gridColumn57.Name = "gridColumn57";
             gridColumn57.Visible = true;
             gridColumn57.VisibleIndex = 3;
@@ -1198,7 +1201,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn56
             // 
             gridColumn56.Caption = "Макс размер";
-            gridColumn56.FieldName = "maxSize";
+            gridColumn56.FieldName = "maxSizeAll";
             gridColumn56.Name = "gridColumn56";
             gridColumn56.Visible = true;
             gridColumn56.VisibleIndex = 4;

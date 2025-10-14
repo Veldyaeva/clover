@@ -1317,7 +1317,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обрабатываем каждый элемент для отвязки
                 foreach (var nzpItem in itemsToUnbind)
                 {
-                    int kod = nzpItem.kodd; // код артикула из строки НЗП
+                    string kod = nzpItem.kodd.ToString(); // код артикула из строки НЗП
                     int annIdNzpRow = nzpItem.annId; // AnnID РТ из строки НЗП
                     string articul = nzpItem.articul?.TrimEnd(' ') ?? "";
 

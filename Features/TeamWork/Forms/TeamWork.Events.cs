@@ -484,19 +484,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             return true;
         }
 
+
         private async Task LoadNZP(int annId, CancellationToken ct)
         {
-            ct.ThrowIfCancellationRequested();
-            var list = annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, ct) : new List<NZPByKoddRt>();
-            ct.ThrowIfCancellationRequested();
-            _nzpListWd.RaiseListChangedEvents = false;
-            _nzpListWd.Clear();
-            foreach (var item in list)
-                _nzpListWd.Add(item);
-            _nzpListWd.RaiseListChangedEvents = true;
-
-            _nzpByKoddRtSourceWd.ResetBindings(false);
+            await SewingProduction.Features.TeamWork.Helpers.GridOverlayLoader.LoadListAsync(
+                GridControlBindedArts,
+                _nzpListWd,
+                (System.Windows.Forms.BindingSource)_nzpByKoddRtSourceWd,
+                async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : new List<NZPByKoddRt>(),
+                ct);
         }
+
+        
 
         /// <summary>
         /// Редактировать РТ
@@ -1369,7 +1368,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 string articul = selectedNzp.articul.TrimEnd(' ');
-                int kod = selectedNzp.kodd;
+                string kod = selectedNzp.kodd.ToString();
                 if (string.IsNullOrEmpty(articul))
                 {
                     MessageBox.Show("Артикул в выбранной записи НЗП пустой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
