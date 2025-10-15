@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
+using DevExpress.XtraScheduler.Drawing;
+using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using DataTable = System.Data.DataTable;
@@ -653,19 +656,23 @@ WHERE nr.annId = @annId";
                 using (var connection = _dbHelper.GetConnection())
                 {
                     var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
-                        "dbo.GetNZPByKoddRT",
-                        new { xAnnID = annId },
-                        commandType: CommandType.StoredProcedure,
-                        commandTimeout: 120);
+                        new CommandDefinition(
+                            "dbo.GetNZPByKoddRT",
+                            new { xAnnID = annId },
+                            commandType: CommandType.StoredProcedure,
+                            commandTimeout: 120,
+                            cancellationToken: ct));
                     nzpList = nzpResult.ToList();
 
                     ct.ThrowIfCancellationRequested();
 
                     var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
-                        "dbo.GetPztCountsByKoddRT",
-                        new { xAnnID = annId },
-                        commandType: CommandType.StoredProcedure,
-                        commandTimeout: 120);
+                        new CommandDefinition(
+                            "dbo.GetPztCountsByKoddRT",
+                            new { xAnnID = annId },
+                            commandType: CommandType.StoredProcedure,
+                            commandTimeout: 120,
+                            cancellationToken: ct));
                     pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
                 }
 
@@ -684,7 +691,34 @@ WHERE nr.annId = @annId";
             
         }
 
+        public async Task<List<Brig>> GetWorkingBrigs(int annId, CancellationToken ct = default )
+        {
+            List<Brig> brigs = new List<Brig>();
+            try
+            {
+                ct.ThrowIfCancellationRequested();
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var nzpResult = await connection.QueryAsync<Brig>(
+                        new CommandDefinition(
+                            "dbo.GetNZPByKoddRT",
+                            new { xAnnID = annId, @xRezType = 1 },
+                            commandType: CommandType.StoredProcedure,
+                            commandTimeout: 120,
+                            cancellationToken: ct));
+                    brigs = nzpResult.ToList();
 
+                    ct.ThrowIfCancellationRequested();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return null;
+            }
+            return brigs;
+        }
         public async Task<decimal> getArtNormnSeb(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
@@ -722,4 +756,51 @@ WHERE nr.annId = @annId";
 
 
     }
+    public interface IJabberSender
+    {
+        Task SendToBrigsAsync(IEnumerable<int> brigIds, string message, int idType = 14);
+    }
+
+    public sealed class JabberSender : IJabberSender
+    {
+        private readonly DatabaseHelper _dbHelper;
+        //    private readonly HybridLogger _logger = new HybridLogger();
+        private readonly FileLogger _logger = new FileLogger();
+        private readonly DbService _dbService;
+        public JabberSender(DatabaseHelper dbHelper)
+       => _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
+        public async Task SendToBrigsAsync(IEnumerable<int> brigIds, string message, int idType = 14)
+        {
+            var ids = brigIds?
+                .Where(id => id > 0)
+                .Distinct()
+                .ToArray();
+
+            if (ids is null || ids.Length == 0 || string.IsNullOrWhiteSpace(message))
+                return;
+
+            const string sql = @"
+INSERT INTO [WMSWRITE].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To)
+SELECT DISTINCT @msg, v.icq
+FROM [view_sprav_men] v
+WHERE v.id_type = @idType
+  AND v.id_brig IN @brigIds
+  AND v.icq IS NOT NULL;";
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                await connection.ExecuteAsync(sql, new { msg = message, idType, brigIds = ids });
+                await _logger.LogEventAsync(
+                    $"Jabber: '{message}' отправлено в {ids.Length} бригад(ы).",
+                    "JabberSender");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "JabberSender.SendToBrigsAsync");
+                throw;
+            }
+        }
+    }
+
 }

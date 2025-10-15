@@ -24,6 +24,7 @@ using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Report;
 using SewingProduction.Services;
+using SewingProduction.Features.TeamWork.Models;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -618,9 +619,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedArtNormN == null) return;
                 }
 
-                if (!Editing) //если нельзя редактировать без проверки
-                              //Проверяем статус "актуальный" и наличие даты обновления
-                    if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                //Проверяем статус "актуальный" и наличие даты обновления
+                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                    if (!Editing) //если нельзя редактировать без проверки
                     {
                         MessageBox.Show(
                             "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
@@ -629,6 +630,29 @@ namespace SewingProduction.Features.TeamWork.Forms
                             MessageBoxIcon.Information);
                         await _logger.LogWarningAsync("Попытка редактирования записи со статусом 'Актуальный' и датой обновления", "EditWd_Internal2");
                         return;
+                    }
+                else if (Editing)
+                    {
+                        List<Brig> brigades = await _artNormService.GetWorkingBrigs(annId);
+                        var brigIds = brigades?
+       .Select(b => b.id_brig )
+       .Where(id => id > 0)
+       .Distinct()
+       .ToArray();
+
+                        if (brigIds is { Length: > 0 })
+                        {
+                            await _jabberSender.SendToBrigsAsync(brigIds, "проверьте РТ"); 
+                            await _logger.LogEventAsync(
+                                $"Отправлено '{"проверьте РТ"}' в {brigIds.Length} бригад(ы) для annId={annId}",
+                                "EditWd_Internal2");
+                        }
+                        else
+                        {
+                            await _logger.LogEventAsync(
+                                $"Бригад для рассылки не найдено (annId={annId})",
+                                "EditWd_Internal2");
+                        }
                     }
                 var updatedArtNormN = new ArtNormN();
 

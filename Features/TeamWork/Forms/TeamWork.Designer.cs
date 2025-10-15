@@ -3041,7 +3041,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn54
             // 
             gridColumn54.Caption = "Мин размер";
-            gridColumn54.FieldName = "minSize";
+            gridColumn54.FieldName = "minSizeAll";
             gridColumn54.Name = "gridColumn54";
             gridColumn54.Visible = true;
             gridColumn54.VisibleIndex = 4;
@@ -3049,7 +3049,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn55
             // 
             gridColumn55.Caption = "Макс размер";
-            gridColumn55.FieldName = "maxSize";
+            gridColumn55.FieldName = "maxSizeAll";
             gridColumn55.Name = "gridColumn55";
             gridColumn55.Visible = true;
             gridColumn55.VisibleIndex = 5;

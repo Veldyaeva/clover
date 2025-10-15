@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using DevExpress.Utils.Svg;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -26,6 +29,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormService _artNormService;
+        private readonly JabberSender _jabberSender;
         private int selectedRowHandle = -1;
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
@@ -101,6 +105,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _secondsUpdateManager = new SecondsUpdateManager(_artNormService, _logger);
             _teamWorkService = new TeamWorkService(_artNormService, _dbService, _logger);
             _uiHelper = new UIHelper(_logger);
+            _jabberSender = new JabberSender(_dbHelper);
 
             // Инициализация основных BindingList и BindingSource
             _bindingList = new BindingList<ArtNormN>();
@@ -175,6 +180,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Взаимоисключаем видимость кнопок редактирования по событию изменения видимости
             if (ButtonEditOnlyAdv != null)
                 ButtonEditOnlyAdv.VisibleChanged += ButtonEditOnlyAdv_VisibleChanged;
+        }
+
+        private void CancelAllLoads()
+        {
+            try
+            {
+                var old = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+                old?.Cancel();
+                old?.Dispose();
+            }
+            catch (Exception ex){ Debug.WriteLine(ex.Message); }
         }
 
         /// <summary>
@@ -519,11 +535,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        // дубликат метода удалён
-
         private async void XtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             if (e.Page == null) return;
+
+            // Отменяем все активные загрузки на предыдущей вкладке
+            CancelAllLoads();
 
             switch (e.Page.Name)
             {
@@ -532,8 +549,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
 
                 case "xtraTabPageArticles":
-                    // Загружаем данные для вкладки артикулов
-                    await CurrentWorks_Load();
+                    // Загружаем данные для вкладки артикулов с токеном отмены
+                    await CurrentWorks_Load(_loadCts.Token);
                     break;
 
                 default:
@@ -548,6 +565,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
             if (e.Page == null) return;
+
+            // Отменяем все активные загрузки на предыдущей вложенной вкладке
+            CancelAllLoads();
 
             try
             {
@@ -1475,6 +1495,8 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void layoutControlGroup14_CustomButtonChecked(object sender, BaseButtonEventArgs e)
         {
+            //SvgImage checkIcon = SvgImage.FromResources(Properties.Resources.save_16x16, typeof(Program).Assembly);
+            //SvgImage uncheckIcon = SvgImage.FromResources(Properties.Resources.CheckboxComposite, typeof(Program).Assembly);
             var button = e.Button as DevExpress.XtraEditors.ButtonPanel.BaseButton;
             if (button != null)
             {

@@ -2535,6 +2535,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     gridViewRasz.EndUpdate();
                 }
+                // Гарантируем разворот всех групп после настройки
+                ExpandAllRaszGroups();
+            }
+            catch { }
+        }
+
+        private void ExpandAllRaszGroups()
+        {
+            try
+            {
+                if (gridViewRasz == null) return;
+                gridViewRasz.BeginUpdate();
+                try { gridViewRasz.ExpandAllGroups(); }
+                finally { gridViewRasz.EndUpdate(); }
             }
             catch { }
         }
@@ -3777,6 +3791,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _normRaszBindingSource.ResetBindings(false);
                 TWGridHelper.sortGridView(gridViewRasz);
                 _logger.LogEventAsync($"Выполнен полный пересчет нумерации для {_normRaszList.Count} операций", "RecalculateAllOperationNumbers");
+                ExpandAllRaszGroups();
             }
             catch (Exception ex)
             {
@@ -3995,6 +4010,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     SetFocusToOperation(focusOperation);
                 }
                 gridViewRasz.RefreshData();
+                ExpandAllRaszGroups();
             }
             catch { }
         }

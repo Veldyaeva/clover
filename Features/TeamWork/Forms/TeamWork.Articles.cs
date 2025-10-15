@@ -12,6 +12,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Helpers;
 using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Models;
+using System.Diagnostics;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -24,7 +25,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <summary>
         /// Загрузка вкладки "текущие работы" (MyDataAnn)
         /// </summary>
-        private async Task CurrentWorks_Load()
+        private async Task CurrentWorks_Load(CancellationToken cancellationToken = default)
         {
 
             // Отписываемся от событий ПЕРЕД загрузкой
@@ -39,12 +40,13 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             try
             {
-                Task preArchTask = PreArchLoad();
-                Task archTask = ArchLoad();
+                cancellationToken.ThrowIfCancellationRequested();
+                Task preArchTask = PreArchLoad(cancellationToken);
+                Task archTask = ArchLoad(cancellationToken);
 
                 // Загружаем основные данные
-                await MyDataArtLoad();
-                await MyDataAnnLoad();
+                await MyDataArtLoad(cancellationToken);
+                await MyDataAnnLoad(cancellationToken);
 
                 await Task.WhenAll(preArchTask, archTask);
 
@@ -118,7 +120,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
 
-        private async Task MyDataArtLoad()
+        private async Task MyDataArtLoad(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -140,7 +142,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _myDataArtList,
                     _myDataArtBindingSource,
                     async _ => await _dbService.GetListAsync<MyDataART>(query, null),
-                    CancellationToken.None);
+                    cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
             }
@@ -155,7 +157,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private async Task MyDataAnnLoad()
+        private async Task MyDataAnnLoad(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -163,7 +165,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (_myDataAnnList == null || _myDataAnnBindingSource == null)
                 {
                     await _logger.LogErrorAsync(new NullReferenceException("_myDataAnnList or _myDataAnnBindingSource is null"), "MyDataAnnLoad initialization check failed.");
-                    MessageBox.Show("Ошибка инициализации списка РТ.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  //  MessageBox.Show("Ошибка инициализации списка РТ.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -184,16 +186,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         return data ?? new List<MyDataANN>();
                     },
-                    CancellationToken.None);
+                    cancellationToken);
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных MyDataANN: {ex.Message}");
-                // Отображаем сообщение только если инициализация прошла успешно
-                if (_myDataAnnList != null && _myDataAnnBindingSource != null)
-                {
-                    MessageBox.Show($"Ошибка загрузки данных РТ: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                Debug.WriteLine("1." + ex.Message);
             }
         }
 
@@ -430,7 +428,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
         }
 
-        private async Task PreArchLoad()
+        private async Task PreArchLoad(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -446,7 +444,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _preArchList,
                     _preArchBindingSource,
                     async _ => await _dbService.GetListAsync<MyDataANN>(query, null),
-                    CancellationToken.None);
+                    cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
 
@@ -464,7 +462,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <summary>
         /// Загружает данные в архив (gridViewArch) - записи со статусом 3 из artNormNView
         /// </summary>
-        private async Task ArchLoad()
+        private async Task ArchLoad(CancellationToken cancellationToken = default)
         {
             try
             {
@@ -489,7 +487,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         return data ?? new List<ArtNormN>();
                     },
-                    CancellationToken.None);
+                    cancellationToken);
 
                 await _logger.LogEventAsync($"Загружено {_archList.Count} записей в архив.", "ArchLoad");
 
