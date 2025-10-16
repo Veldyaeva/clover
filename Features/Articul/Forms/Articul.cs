@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -521,7 +522,7 @@ namespace SewingProduction.Features.Articul
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as ArticulModel).Kod;
 
-            EditArticul f = new EditArticul(kodObj.ToString());
+            EditArticul f = new EditArticul(_user, kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -544,7 +545,7 @@ namespace SewingProduction.Features.Articul
 
         private void csButtonNew_Click(object sender, EventArgs e)
         {
-            EditArticul f = new EditArticul();
+            EditArticul f = new EditArticul(_user);
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -591,10 +592,16 @@ namespace SewingProduction.Features.Articul
 
         private void customButton3_Click(object sender, EventArgs e)
         {
-            var kodObj = (bsArt.Current as ArticulModel).Kod;
-            if (this.MdiParent is SpMainForm mainForm)
+            var Obj = bsArt.Current as ArticulModel;
+            Debug.WriteLine(Obj.Gost);
+            ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
+            if (_ANSDataService.CheckOpis(Obj.Kod))
             {
-                mainForm.OpenForm(new EditNaborSostav(User, kodObj.ToString()));
+                MessageBox.Show("Нельзя редактировать набор!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new EditNaborSostav(User, Obj));
             }
         }
     }

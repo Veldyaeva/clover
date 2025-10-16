@@ -137,7 +137,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView1.OptionsMenu.ShowAutoFilterRowItem = false;
             gridView1.OptionsView.ShowGroupPanel = false;
             gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(coltext, DevExpress.Data.ColumnSortOrder.Ascending) });
-            gridView1.DoubleClick += customOkButton1_Click;
             // 
             // colkod_o
             // 
@@ -343,6 +342,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customAddButton.TabIndex = 5;
             customAddButton.Text = "+";
             customAddButton.UseVisualStyleBackColor = false;
+            customAddButton.Visible = false;
             customAddButton.Click += customAddButton_Click;
             // 
             // searchControl1

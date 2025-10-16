@@ -67,19 +67,46 @@ namespace SewingProduction.Features.Sprav
         }
         private async void gridViewZp_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            customGroupBoxAdd.Visible = false;
-
-            currentModel = gridViewZp.GetRow(gridViewZp.FocusedRowHandle) as TarifModel;
-
-            if (currentModel == null)
+            try
             {
-                customGridControlHistory.DataSource = null;
-                return;
-            }
+                customGroupBoxAdd.Visible = false;
 
-            var tableTarifHisory = await _tarifService.LoadHistoryAsync(currentModel.pc_id);
-            customGridControlHistory.DataSource = tableTarifHisory;
-            customGridControlHistory.RefreshDataSource();
+                currentModel = gridViewZp.GetRow(gridViewZp.FocusedRowHandle) as TarifModel;
+
+                if (currentModel == null)
+                {
+                    customButtonEdit.Enabled = false;
+                    customGridControlHistory.DataSource = null;
+                    return;
+                }
+
+                int byh = currentModel.priznSign / 10;
+                int eco = currentModel.priznSign % 10;
+
+                bool isProg = customCheckBoxProg.Checked;
+                bool canEdit =
+                    isProg ||
+                    (customCheckBoxByh.Checked && byh == 2) ||
+                    (customCheckBoxEco.Checked && eco == 2);
+
+                customButtonEdit.Enabled = canEdit;
+
+                if (currentModel.pc_id > 0)
+                {
+                    var tableTarifHistory = await _tarifService.LoadHistoryAsync(currentModel.pc_id);
+                    customGridControlHistory.DataSource = tableTarifHistory;
+                    customGridControlHistory.RefreshDataSource();
+                }
+                else
+                {
+                    customGridControlHistory.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при загрузке истории: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public void Filter(object sender, EventArgs e)
         {
@@ -93,37 +120,38 @@ namespace SewingProduction.Features.Sprav
             else if (customRadioButtonAceKle.Checked)
                 filters.Add("[firm] LIKE 'ace/cle'");
 
-            // Фильтрация по признаку
-            List<string> priznSigns = new List<string>();
-            if (customCheckBoxEco.Checked)
-                priznSigns.Add("1");
-            if (customCheckBoxByh.Checked)
-                priznSigns.Add("2");
-            if (customCheckBoxProg.Checked)
-                priznSigns.Add("3");
-
-            if (priznSigns.Count == 3)
-                priznSigns.Clear();
-            else if (priznSigns.Count > 0)
-                filters.Add($"[priznSign] IN ({string.Join(",", priznSigns)})");
+            if (customCheckBoxByh.Checked && !customCheckBoxEco.Checked && !customCheckBoxProg.Checked)
+            {
+                filters.Add("([priznSign] >= 10 AND [priznSign] < 30)");
+            }
+            else if (customCheckBoxEco.Checked && !customCheckBoxByh.Checked && !customCheckBoxProg.Checked)
+            {
+                filters.Add("([priznSign] % 10 > 0)");
+            }
+            else if (customCheckBoxEco.Checked && customCheckBoxByh.Checked)
+            {
+                filters.Add("[priznSign] > 0");
+            }
             else
+            {
                 filters.Add("([priznSign] IS NULL OR [priznSign] = 0)");
-
+            }
+            if (customCheckBoxProg.Checked)
+                filters.Clear();
             // Применение фильтра
             gridViewZp.ActiveFilterString = string.Join(" AND ", filters);
-            UpdatePriznSignCombo();
             customGroupBoxAdd.Visible = false;
         }
         #endregion
         #region раздел: Редактировать / Сохранить
         private async void customButtonAdd_Click(object sender, EventArgs e)
         {
-            loadGroupBoxAdd(false);
+            await loadGroupBoxAdd(false);
         }
         private async void customButtonEdit_Click(object sender, EventArgs e)
         {
             if (gridViewZp.FocusedRowHandle < 0 || currentModel == null) return;
-            loadGroupBoxAdd(true);
+            await loadGroupBoxAdd(true);
         }
 
         async Task loadGroupBoxAdd(bool editMode)
@@ -159,47 +187,27 @@ namespace SewingProduction.Features.Sprav
             customTextBoxOpis.Enabled = !editMode;
             customComboBoxType.Enabled = !editMode;
             customComboBoxOrg.Enabled = !editMode;
-            customComboBoxPriznSign.Enabled = !editMode;
+            customComboBoxPriznEco.Enabled = !editMode;
+            customComboBoxPriznByh.Enabled = !editMode;
             customTextBoxWhereUses.Enabled = !editMode;
 
             LoadPriznSignCombo(editMode);
         }
         private void LoadPriznSignCombo(bool editMode)
         {
-            UpdatePriznSignCombo();
-            if (editMode)
+            if (editMode && currentModel != null)
             {
-                string itemText =
-                    currentModel.priznSign == 1 ? "1 - Экономист" :
-                    currentModel.priznSign == 2 ? "2 - Бухгалтер" :
-                    currentModel.priznSign == 3 ? "3 - Программист" :
-                    "0 - нет";
-
-                // Добавляем item если вдруг отсутствует
-                if (!customComboBoxPriznSign.Items.Contains(itemText))
-                    customComboBoxPriznSign.Items.Insert(0, itemText);
-
-                // Устанавливаем выбранный элемент
-                customComboBoxPriznSign.SelectedItem = itemText;
+                int byh = currentModel.priznSign / 10;
+                int eco = currentModel.priznSign % 10;
+                customComboBoxPriznByh.SelectedIndex = byh;
+                customComboBoxPriznEco.SelectedIndex = eco;
             }
             else
             {
-                customComboBoxPriznSign.SelectedIndex = 0;
+                customComboBoxPriznByh.SelectedIndex = 0;
+                customComboBoxPriznEco.SelectedIndex = 0;
             }
-        }
-        private void UpdatePriznSignCombo()
-        {
-            customComboBoxPriznSign.Items.Clear();
-            customComboBoxPriznSign.Items.Add("0 - нет");
 
-            if (customCheckBoxEco.Checked)
-                customComboBoxPriznSign.Items.Add("1 - Экономист");
-
-            if (customCheckBoxByh.Checked)
-                customComboBoxPriznSign.Items.Add("2 - Бухгалтер");
-
-            if (customCheckBoxProg.Checked)
-                customComboBoxPriznSign.Items.Add("3 - Программист");
         }
 
         private void customCheckBoxNotRazm_CheckedChanged(object sender, EventArgs e)
@@ -261,7 +269,11 @@ namespace SewingProduction.Features.Sprav
             model.typeConst = selectedType.type_n;
             model.store_name = selectedType.store_name;
             model.name_field_id = selectedType.name_field_id;
-            model.priznSign = int.Parse(customComboBoxPriznSign.SelectedItem.ToString()[0].ToString());
+
+            int eco = int.Parse(customComboBoxPriznEco.SelectedItem.ToString().Substring(0, 1));
+            int byh = int.Parse(customComboBoxPriznByh.SelectedItem.ToString().Substring(0, 1));
+            model.priznSign = byh * 10 + eco;
+
             model.whereUses = customTextBoxWhereUses.Text.Trim();
             // Установка значения в нужное поле
             selectZnach(model);
@@ -298,8 +310,10 @@ namespace SewingProduction.Features.Sprav
                 customGroupBoxAdd.Visible = false;
 
                 tarifLoad(model.pc_id);
-                //int rowHandle = gridViewZp.LocateByValue("pc_id", model.pc_id);
-                //gridViewZp.FocusedRowHandle = rowHandle;
+                int rowHandle = gridViewZp.LocateByValue("constant_name", model.constant_name);
+                Debug.WriteLine(model.constant_name);
+                Debug.WriteLine(rowHandle);
+                gridViewZp.FocusedRowHandle = rowHandle;
             }
             catch (Exception ex)
             {

@@ -8,10 +8,20 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraSplashScreen;
 using WinFormsBindingSource = System.Windows.Forms.BindingSource;
 
-namespace SewingProduction.Features.TeamWork.Helpers
+namespace SewingProduction.Core.helpers
 {
     public static class GridOverlayLoader
     {
+        /// <summary>
+        /// Загружает данные в BindingList с отображением оверлея на GridControl.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="targetGrid"></param>
+        /// <param name="targetList"></param>
+        /// <param name="bindingSource"></param>
+        /// <param name="loadFunc"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task LoadListAsync<T>(
             GridControl targetGrid,
             BindingList<T> targetList,
