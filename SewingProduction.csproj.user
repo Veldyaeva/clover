@@ -4,9 +4,6 @@
     <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Core\Class\CustomControlsThemeable.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
