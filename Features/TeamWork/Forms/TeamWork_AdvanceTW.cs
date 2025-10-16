@@ -2009,7 +2009,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 // В любом случае после успешного обновления строка больше не считается «в процессе добавления»
                 normRasz.IsBeingAdded = false;
-                gridViewRasz.UpdateCurrentRow(); // Обновляем строку, чтобы RowStyle сработал
+                // Точечное обновление без мерцания
+                int index = _normRaszList.IndexOf(normRasz);
+                if (index >= 0)
+                {
+                    _normRaszBindingSource?.ResetItem(index);
+                    var rh = ((GridView)sender).GetRowHandle(index);
+                    if (((GridView)sender).IsValidRowHandle(rh)) ((GridView)sender).RefreshRow(rh);
+                }
+                // Если нужна немедленная валидация/пересчёт — включить UpdateCurrentRow только при необходимости
+                // ((GridView)sender).UpdateCurrentRow();
             }
         }
 

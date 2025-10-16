@@ -1085,7 +1085,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 MessageBox.Show("Ошибка при обновлении данных после вызова процедуры: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
 
-                            view.RefreshRow(e.RowHandle);
+                            // Точечно обновляем изменённую строку без общего ResetBindings
+                            int handle = e.RowHandle;
+                            if (view.IsValidRowHandle(handle))
+                            {
+                                view.RefreshRow(handle);
+                            }
                         }
                     }
                 }

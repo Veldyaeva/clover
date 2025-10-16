@@ -521,6 +521,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {"@kod_proizv", (object)kod_proizv ?? DBNull.Value},
                     });
                 }
+
+                // Точечное обновление строки без полного ResetBindings
+                if (view.IsValidRowHandle(rowHandle))
+                {
+                    view.RefreshRow(rowHandle);
+                    // Включать только если нужно немедленно триггернуть ValidateRow:
+                    // view.UpdateCurrentRow();
+                }
             }
             catch (Exception ex)
             {
