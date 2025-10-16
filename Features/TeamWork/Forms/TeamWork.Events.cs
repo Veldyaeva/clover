@@ -17,7 +17,6 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraScheduler.Commands;
 using DevExpress.XtraScheduler.Reporting;
 using DevExpress.XtraVerticalGrid;
-using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -25,6 +24,7 @@ using SewingProduction.Models;
 using SewingProduction.Report;
 using SewingProduction.Services;
 using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Core.helpers;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -488,12 +488,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async Task LoadNZP(int annId, CancellationToken ct)
         {
-            await SewingProduction.Features.TeamWork.Helpers.GridOverlayLoader.LoadListAsync(
+            await GridOverlayLoader.LoadListAsync(
                 GridControlBindedArts,
                 _nzpListWd,
                 (System.Windows.Forms.BindingSource)_nzpByKoddRtSourceWd,
                 async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : new List<NZPByKoddRt>(),
                 ct);
+            // Обновляем источник данных и представление после асинхронной загрузки
+            GridControlBindedArts?.RefreshDataSource();
+            gridViewBindedArts?.RefreshData();
         }
 
         

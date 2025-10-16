@@ -10,9 +10,9 @@ using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Helpers;
-using SewingProduction.Features.TeamWork.Helpers;
 using SewingProduction.Models;
 using System.Diagnostics;
+using SewingProduction.Core.helpers;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {

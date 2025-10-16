@@ -18,15 +18,14 @@ namespace SewingProduction.Features.Articul.Forms
         {
             InitializeComponent();
         }
-        public EditNaborSostav(UserClass user, string kod) : base(user)
+        public EditNaborSostav(UserClass user, ArticulModel Obj) : base(user)
         {
-            if (_ANSDataService.CheckOpis(kod)) 
-            { 
-                MessageBox.Show("Нельзя редактировать набор!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                this.Close();
-            }
             InitializeComponent();
-            xKod = kod;
+            xKod = Obj.Kod;
+            customTextBoxArtN.Text = Obj.Articul;
+            customTextBoxRazmN.Text = Obj.Razm;
+            customTextBoxGostN.Text = Obj.Gost;
+            customTextBoxGrupN.Text = Obj.Grup;
         }
 
         private async void customGridControl1_Load(object sender, EventArgs e)

@@ -56,16 +56,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _gridHelper.LoadGridViewSettings(gridView1, "NormOperGrid.xml");
                 LoadData();
 
-                // Загрузка справочников для выпадающих списков (как в TeamWork_AdvanceTW)
-                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
-                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
+                //// Загрузка справочников для выпадающих списков (как в TeamWork_AdvanceTW)
+                //kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
+                //podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
+                //oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
 
-                ConfigureLookups();
+                //ConfigureLookups();
 
-                // Разрешаем редактирование через EditForm и сохраняем изменения
-                gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-                gridView1.RowUpdated += gridView1_RowUpdated;
+                //// Разрешаем редактирование через EditForm и сохраняем изменения
+                //gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+                //gridView1.RowUpdated += gridView1_RowUpdated;
             }
             catch (ConstraintException ex)
             {
