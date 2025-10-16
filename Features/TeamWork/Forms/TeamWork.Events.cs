@@ -633,26 +633,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 else if (Editing)
                     {
-                        List<Brig> brigades = await _artNormService.GetWorkingBrigs(annId);
-                        var brigIds = brigades?
-       .Select(b => b.id_brig )
-       .Where(id => id > 0)
-       .Distinct()
-       .ToArray();
-
-                        if (brigIds is { Length: > 0 })
-                        {
-                            await _jabberSender.SendToBrigsAsync(brigIds, "проверьте РТ"); 
-                            await _logger.LogEventAsync(
-                                $"Отправлено '{"проверьте РТ"}' в {brigIds.Length} бригад(ы) для annId={annId}",
-                                "EditWd_Internal2");
-                        }
-                        else
-                        {
-                            await _logger.LogEventAsync(
-                                $"Бригад для рассылки не найдено (annId={annId})",
-                                "EditWd_Internal2");
-                        }
+                        await SendMsgToBrig(annId, $"Внимание! Схема разделения {selectedArtNormN.Articul} на редактировании технологом, приостановите работу!");
                     }
                 var updatedArtNormN = new ArtNormN();
 

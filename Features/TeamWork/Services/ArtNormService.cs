@@ -778,21 +778,22 @@ WHERE nr.annId = @annId";
 
             if (ids is null || ids.Length == 0 || string.IsNullOrWhiteSpace(message))
                 return;
-
+            //INSERT INTO [WMSWRITE].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To)
             const string sql = @"
-INSERT INTO [WMSWRITE].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To)
+
 SELECT DISTINCT @msg, v.icq
 FROM [view_sprav_men] v
 WHERE v.id_type = @idType
   AND v.id_brig IN @brigIds
   AND v.icq IS NOT NULL;";
-
+            await _logger.LogEventAsync(sql);
+            Debug.WriteLine(sql);
             try
             {
                 using var connection = _dbHelper.GetConnection();
                 await connection.ExecuteAsync(sql, new { msg = message, idType, brigIds = ids });
                 await _logger.LogEventAsync(
-                    $"Jabber: '{message}' отправлено в {ids.Length} бригад(ы).",
+                    $"Jabber: '{message}' отправлено в {ids.Length} бригад(ы). {ids}",
                     "JabberSender");
             }
             catch (Exception ex)

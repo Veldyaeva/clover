@@ -457,7 +457,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             var rowHandle = view.FocusedRowHandle;
             var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
             int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
-
+            string articul = view.GetRowCellValue(rowHandle, "Articul").ToString();
             // Действие только если дата не задана
             if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
             {
@@ -469,7 +469,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogEventAsync($"User prompted to update data for AnnID: {annId}, user response: {result}", "CommandsEditDateNull_DoubleClick");
                 if (result == DialogResult.Yes)
                 {
-                    bool success = await UpdateDateAndStatusAsync(annId, view, rowHandle);
+                    bool success = await UpdateDateAndStatusAsync(annId, view, rowHandle, art: articul);
                     if (success)
                     {
                         //MessageBox.Show("Данные успешно обновлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -491,7 +491,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="gridView">Грид для обновления UI</param>
         /// <param name="rowHandle">Номер строки в гриде</param>
         /// <returns>true если обновление прошло успешно</returns>
-        private async Task<bool> UpdateDateAndStatusAsync(int annId, GridView gridView, int rowHandle)
+        private async Task<bool> UpdateDateAndStatusAsync(int annId, GridView gridView, int rowHandle, string art = "")
         {
             try
             {
@@ -507,6 +507,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Обновляем статус на "Актуальное"
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
+
+                // Отправляем сообщение в бригаду
+                await SendMsgToBrig(annId, $"Внимание! Схема разделения {art} была обновлена технологом, проверьте операции, прежде чем начать работу!");
+
 
                 // Обновляем UI в гриде
                 if (gridView != null && rowHandle >= 0)

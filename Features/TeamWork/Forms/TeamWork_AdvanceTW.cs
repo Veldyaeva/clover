@@ -620,29 +620,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
-                    if (_raszPopupHandler == null)
-                    {
-                        _raszPopupHandler = CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
-                        gridViewRasz.PopupMenuShowing += _raszPopupHandler;
-                    }
-                    if (_kontPopupHandler == null)
-                    {
-                        _kontPopupHandler = ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
-                        gridViewKont.PopupMenuShowing += _kontPopupHandler;
-                    }
+                    _raszPopupHandler = _raszPopupHandler ?? CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
+                    _kontPopupHandler = _kontPopupHandler ?? ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
+                    (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.AttachPopupMenus(_raszPopupHandler, _kontPopupHandler, gridViewKont);
                 }
                 else
                 {
-                    if (_raszPopupHandler != null)
-                    {
-                        gridViewRasz.PopupMenuShowing -= _raszPopupHandler;
-                        _raszPopupHandler = null;
-                    }
-                    if (_kontPopupHandler != null)
-                    {
-                        gridViewKont.PopupMenuShowing -= _kontPopupHandler;
-                        _kontPopupHandler = null;
-                    }
+                    (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.DetachPopupMenus();
+                    _raszPopupHandler = null;
+                    _kontPopupHandler = null;
                 }
                 _bindingsInitialized = true;
             }
@@ -3003,14 +2989,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (_presenter != null) { await _presenter.SaveAsync(false); return; }
-            await ProcessSaveData(false);
+            //await ProcessSaveData(false);
         }
 
         // Сохранение данных и закрытие формы
         private async void btnOK_Click(object sender, EventArgs e)
         {
             if (_presenter != null) { await _presenter.SaveAsync(true); return; }
-            await ProcessSaveData(true);
+           // await ProcessSaveData(true);
         }
 
         private async Task SaveAnnDataAsync()

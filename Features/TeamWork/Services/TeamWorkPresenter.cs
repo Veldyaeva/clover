@@ -30,6 +30,11 @@ namespace SewingProduction.Features.TeamWork.Services
         private readonly BindingSource _annSource;
         private readonly GridControl _raszGrid;
         private readonly GridView _raszView;
+        private GridView _kontView;
+
+        // Popup handlers moved from form
+        private DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler _raszPopupHandler;
+        private DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler _kontPopupHandler;
 
         private RaszOperationsController _ops;
         private BufferImportService _bufferService;
@@ -117,6 +122,49 @@ namespace SewingProduction.Features.TeamWork.Services
         public void Detach()
         {
             try { _ops?.Detach(); } catch { }
+            DetachPopupMenus();
+        }
+
+        // Popup menus wiring
+        public void AttachPopupMenus(DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler raszHandler,
+                                     DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler kontHandler,
+                                     GridView kontView)
+        {
+            DetachPopupMenus();
+            _raszPopupHandler = raszHandler;
+            _kontPopupHandler = kontHandler;
+            _kontView = kontView;
+            try
+            {
+                if (_raszPopupHandler != null)
+                    _raszView.PopupMenuShowing += _raszPopupHandler;
+            }
+            catch { }
+            try
+            {
+                if (_kontView != null && _kontPopupHandler != null)
+                    _kontView.PopupMenuShowing += _kontPopupHandler;
+            }
+            catch { }
+        }
+
+        public void DetachPopupMenus()
+        {
+            try
+            {
+                if (_raszPopupHandler != null)
+                    _raszView.PopupMenuShowing -= _raszPopupHandler;
+            }
+            catch { }
+            try
+            {
+                if (_kontView != null && _kontPopupHandler != null)
+                    _kontView.PopupMenuShowing -= _kontPopupHandler;
+            }
+            catch { }
+            _raszPopupHandler = null;
+            _kontPopupHandler = null;
+            _kontView = null;
         }
 
         public async Task SaveAsync(bool closeAfterSave)

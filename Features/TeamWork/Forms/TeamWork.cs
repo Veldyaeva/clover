@@ -1,10 +1,9 @@
-﻿using DevExpress.Utils.Svg;
-using DevExpress.XtraBars.Docking2010;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Core;
 using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Models;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
@@ -190,7 +189,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 old?.Cancel();
                 old?.Dispose();
             }
-            catch (Exception ex){ Debug.WriteLine(ex.Message); }
+            catch (Exception ex) { Debug.WriteLine(ex.Message); }
         }
 
         /// <summary>
@@ -695,7 +694,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             try
                             {
-                                gridView.FindFilterText = "";
+                                gridView.FindFilterText = string.Empty;
                                 gridView.ActiveFilterString = filterExpression;
 
                                 _logger?.LogEventAsync($"Комплектный поиск: '{searchText}' разобран на '{kitComponents.Component1}' и '{kitComponents.Component2}'", "ANNgridView_ActiveFilterChanged");
@@ -752,7 +751,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 if (string.IsNullOrWhiteSpace(articleText))
-                    return (false, "", "");
+                    return (false, string.Empty, string.Empty);
 
                 string cleanText = articleText.Trim().ToUpperInvariant();
 
@@ -814,12 +813,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
 
-                return (false, "", "");
+                return (false, string.Empty, string.Empty);
             }
             catch (Exception ex)
             {
                 _logger?.LogErrorAsync(ex, $"Ошибка при разборе комплектного артикула: {articleText}");
-                return (false, "", "");
+                return (false, string.Empty, string.Empty);
             }
         }
 
@@ -889,11 +888,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     if (statusLabel.InvokeRequired)
                     {
-                        statusLabel.Invoke((MethodInvoker)(() => statusLabel.Text = ""));
+                        statusLabel.Invoke((MethodInvoker)(() => statusLabel.Text = string.Empty));
                     }
                     else
                     {
-                        statusLabel.Text = "";
+                        statusLabel.Text = string.Empty;
                     }
                 }
                 else
@@ -1090,6 +1089,37 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                     }
                 }
+            }
+        }
+
+        private async Task SendMsgToBrig(int annId, string msg)
+        {
+            try
+            {
+                List<Brig> brigades = await _artNormService.GetWorkingBrigs(annId);
+                var brigIds = brigades?
+    .Select(b => b.id_brig)
+    .Where(id => id > 0)
+    .Distinct()
+    .ToArray();
+
+                if (brigIds is { Length: > 0 })
+                {
+                    await _jabberSender.SendToBrigsAsync(brigIds, msg);
+                    await _logger.LogEventAsync(
+                        $"Отправлено '{msg}' в {brigIds.Length} бригад(ы) для annId={annId}",
+                        "EditWd_Internal2");
+                }
+                else
+                {
+                    await _logger.LogEventAsync(
+                        $"Бригад для рассылки не найдено (annId={annId})",
+                        "EditWd_Internal2");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, "Ошибка при отправке сообщения в бригады");
             }
         }
 
@@ -1339,7 +1369,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     string kod = nzpItem.kodd.ToString(); // код артикула из строки НЗП
                     int annIdNzpRow = nzpItem.annId; // AnnID РТ из строки НЗП
-                    string articul = nzpItem.articul?.TrimEnd(' ') ?? "";
+                    string articul = nzpItem.articul?.TrimEnd(' ') ?? string.Empty;
 
                     await _logger.LogEventAsync($"Отвязка артикула KOD: {kod}, articul: {articul}, AnnID: {annIdNzpRow}", "UnbindArticles");
                     var parameters = new Dictionary<string, object>
@@ -1349,7 +1379,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     { "@art", articul}
                 };
                     // Вызов метода для отвязки артикула в sp_articul
-                    await _dbService.UpdateFieldAsync(TableNames.Art, "annId", "", "left(kod, 7) = @kod AND articul = @art AND annID = @annId", parameters);//_artNormService.ResetAnnIdinArticul(kod);
+                    await _dbService.UpdateFieldAsync(TableNames.Art, "annId", string.Empty, "left(kod, 7) = @kod AND articul = @art AND annID = @annId", parameters);//_artNormService.ResetAnnIdinArticul(kod);
                     await _dbService.UpdateFieldAsync(TableNames.Ann, "size_label", null, TableNames.AnnId, annIdNzpRow);
 
                     // Обновление статуса РТ
@@ -1520,22 +1550,22 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         }
 
-		// Открыть журнал изменений разделения труда (art_norm_n_updLog) для выбранного AnnID
-		// Источник лога: ANN
-		private void customSimpleButtonAnnLog_Click(object sender, EventArgs e)
+        // Открыть журнал изменений разделения труда (art_norm_n_updLog) для выбранного AnnID
+        // Источник лога: ANN
+        private void customSimpleButtonAnnLog_Click(object sender, EventArgs e)
         {
             try
             {
-				// Получаем AnnID из текущей строки основного грида
-				int annId = 0;
+                // Получаем AnnID из текущей строки основного грида
+                int annId = 0;
                 if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
                 {
                     var row = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
                     annId = row?.AnnID ?? 0;
                 }
 
-				// Открываем форму лога, передавая AnnID и тип источника (ANN)
-				var logForm = annId > 0 ? new Log(annId, LogSourceType.Ann) : new Log();
+                // Открываем форму лога, передавая AnnID и тип источника (ANN)
+                var logForm = annId > 0 ? new Log(annId, LogSourceType.Ann) : new Log();
                 logForm.StartPosition = FormStartPosition.CenterParent;
                 logForm.Show(this);
             }
@@ -1546,22 +1576,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-		// Открыть журнал изменений норм раскроя (norm_rasz_updLog) для выбранного AnnID
-		// Источник лога: RASZ
-		private void customSimpleButtonRaszLog_Click(object sender, EventArgs e)
+        // Открыть журнал изменений норм раскроя (norm_rasz_updLog) для выбранного AnnID
+        // Источник лога: RASZ
+        private void customSimpleButtonRaszLog_Click(object sender, EventArgs e)
         {
             try
             {
-				// Получаем AnnID из текущей строки основного грида
-				int annId = 0;
+                // Получаем AnnID из текущей строки основного грида
+                int annId = 0;
                 if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
                 {
                     var row = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
                     annId = row?.AnnID ?? 0;
                 }
 
-				// Открываем форму лога, передавая AnnID и тип источника (RASZ)
-				var logForm = annId > 0 ? new Log(annId, LogSourceType.Rasz) : new Log();
+                // Открываем форму лога, передавая AnnID и тип источника (RASZ)
+                var logForm = annId > 0 ? new Log(annId, LogSourceType.Rasz) : new Log();
                 logForm.StartPosition = FormStartPosition.CenterParent;
                 logForm.Show(this);
             }
