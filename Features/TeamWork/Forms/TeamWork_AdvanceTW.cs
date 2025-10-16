@@ -627,8 +627,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 else
                 {
                     (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.DetachPopupMenus();
-                    _raszPopupHandler = null;
-                    _kontPopupHandler = null;
+                        _raszPopupHandler = null;
+                        _kontPopupHandler = null;
                 }
                 _bindingsInitialized = true;
             }
@@ -1003,45 +1003,27 @@ namespace SewingProduction.Features.TeamWork.Forms
                         selectedData.IsNew = true;
                         selectedData.IsBeingAdded = true; // помечаем как добавляемую в текущей сессии
 
-                        // Детеминированные сценарии без вопросов:
-                        // 1) Если targetOperation == null (клик по NewItemRow) — добавить как главу №1, остальные сместить вниз
-                        // 2) Если targetOperation.N1 == 0 — добавить как новую главу сразу после targetOperation
-                        // 3) Если targetOperation подоперация — добавить подоперацию сразу после targetOperation в той же главе
-
-                        if (targetOperation == null)
-                        {
-                            // Централизованное смещение и вставка главы №1
-                            OperationNumberingService.InsertMainAtStart(_normRaszList, selectedData);
-                        }
-                        else
-                        {
-                            // Всегда добавляем ГЛАВУ сразу после выбранной (даже если клик был на подоперации)
-                            OperationNumberingService.InsertMainAfter(_normRaszList, targetOperation.N, selectedData);
-                        }
-
-                        // Массовое обновление UI во избежание мерцаний
+                        // Детерминированные сценарии без вопросов (батч‑обновление UI):
+                        // 1) targetOperation == null → новая глава №1 с глобальным сдвигом вниз
+                        // 2) иначе → новая глава сразу после выбранной (даже если выбрана подоперация)
                         gridViewRasz.BeginDataUpdate();
                         try
                         {
+                            if (targetOperation == null)
+                            {
+                                OperationNumberingService.InsertMainAtStart(_normRaszList, selectedData);
+                        }
+                        else
+                        {
+                                OperationNumberingService.InsertMainAfter(_normRaszList, targetOperation.N, selectedData);
+                        }
                             _normRaszList.Add(selectedData);
+                            FinalizeRaszBatch(selectedData, false);
                         }
                         finally
                         {
-                            gridViewRasz.EndDataUpdate();
+                            try { gridViewRasz.EndDataUpdate(); } catch { }
                         }
-
-                        // Точечное обновление добавленной строки
-                        int addedIndex = _normRaszList.IndexOf(selectedData);
-                        if (addedIndex >= 0)
-                        {
-                            var rowHandle = gridViewRasz.GetRowHandle(addedIndex);
-                            if (gridViewRasz.IsValidRowHandle(rowHandle)) gridViewRasz.RefreshRow(rowHandle);
-                        }
-                        gridControlRasz.RefreshDataSource();
-
-                        // Обновляем сортировку и применяем единую пост‑обработку (фокус на добавленной)
-                        TWGridHelper.sortGridView(gridViewRasz);
-                        ApplyPostStructureUi(selectedData, false);
 
                         // Открываем форму редактирования через небольшую задержку
                         gridViewRasz.GridControl.BeginInvoke(new Action(() =>
@@ -2266,10 +2248,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         if (changed)
                         {
-                            // Пересчёт отключён — выполняется по кнопке/при сохранении
-                            _normRaszBindingSource.ResetBindings(false);
-                            TWGridHelper.sortGridView(gridViewRasz);
-                            ApplyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
+                            FinalizeRaszBatch(draggedList.FirstOrDefault(), draggedList.Count > 1);
                         }
                         return;
                     }
@@ -2282,10 +2261,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         if (changed)
                         {
-                            // Пересчёт отключён — выполняется по кнопке/при сохранении
-                            _normRaszBindingSource.ResetBindings(false);
-                            TWGridHelper.sortGridView(gridViewRasz);
-                            ApplyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
+                            FinalizeRaszBatch(draggedList.FirstOrDefault(), draggedList.Count > 1);
                         }
                         return;
                     }
@@ -2331,10 +2307,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Финал батча — только если реально что‑то изменили
                 if (changed)
                 {
-                    // Пересчёт отключён — выполняется по кнопке/при сохранении
-                    _normRaszBindingSource.ResetBindings(false);
-                    TWGridHelper.sortGridView(gridViewRasz);
-                    ApplyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
+                    FinalizeRaszBatch(draggedList.FirstOrDefault(), draggedList.Count > 1);
                 }
             }
             catch { }
@@ -3729,6 +3702,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             int currentMaxN = (_normRaszList != null && _normRaszList.Count > 0)
                 ? _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max()
                 : 0;
+            gridViewRasz.BeginDataUpdate();
+            try
+            {
             foreach (var id in bufferIdsToUse)
             {
                 var raszList = await _artNormService.GetRelatedNormRasz(id);
@@ -3737,29 +3713,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int offset = currentMaxN; // 0 для первой группы, далее — накопленный максимум
                 foreach (var item in raszList)
                 {
-                    // Сбрасываем ID операции, чтобы база присвоила новый ID
                     item.nrID = 0;
-
-                    // Привязываем операцию к текущему разделению труда (не копируем annId родительской записи)
                     item.annId = _currentAnnData?.AnnID ?? 0;
-
-                    // Сбрасываем автоматически заполняемые поля, чтобы SQL сам их вставил
                     item.nrDateAdd = null;
                     item.nrCompAdd = null;
-
                     item.IsNew = true;
-                    // Сдвигаем только N на offset, N1 сохраняется
                     item.N = item.N + offset;
                     _normRaszList.Add(item);
                 }
-                currentMaxN += partMaxN; // обновляем максимум для следующей группы
+                    currentMaxN += partMaxN;
+                }
+                FinalizeRaszBatch(_normRaszList.FirstOrDefault(), true);
             }
-            // После добавления сортируем таблицу, чтобы новые элементы встали
-            // в порядке возрастания N
-            TWGridHelper.sortGridView(gridViewRasz);
-                // Точечное обновление: обновим только видимые строки хвоста блока
-                var first = gridViewRasz.GetVisibleRowHandle(0);
-                if (gridViewRasz.IsValidRowHandle(first)) gridViewRasz.RefreshRow(first);
+            finally
+            {
+                try { gridViewRasz.EndDataUpdate(); } catch { }
+            }
             await ShowStatusMessage("Операции из буфера добавлены для комплекта");
         }
         #endregion
@@ -4000,6 +3969,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             catch { }
         }
+        private void FinalizeRaszBatch(NormRasz focusOperation = null, bool clearSelection = false)
+        {
+            try
+            {
+                _normRaszBindingSource?.ResetBindings(false);
+                TWGridHelper.sortGridView(gridViewRasz);
+                ApplyPostStructureUi(focusOperation, clearSelection);
+            }
+            catch { }
+        }
 
         /// <summary>
         /// Проверяет и исправляет дублирующиеся номера операций
@@ -4132,31 +4111,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                             int insertN1 = rowObj.N1 == 0 ? 2 : rowObj.N1 + 1;
                             bool convertMainToSub = rowObj.N1 == 0;
 
-                            // Вставка подоперации в текущую главу (метод сам добавит элемент и перенумерует)
+                            // Вставка подоперации в текущую главу (батч‑обновление и единая финализация)
                             gridViewRasz.BeginDataUpdate();
                             try
                             {
                                 OperationNumberingService.InsertSuboperation(_normRaszList, rowObj.N, insertN1, convertMainToSub, selectedData);
+                                FinalizeRaszBatch(selectedData, false);
                             }
                             finally
                             {
-                                gridViewRasz.EndDataUpdate();
+                                try { gridViewRasz.EndDataUpdate(); } catch { }
                             }
-
-                            // Обновим всю главу: номера N1 могли сдвинуться у нескольких строк
-                            var affectedIndexes = _normRaszList
-                                .Select((op, idx) => new { op, idx })
-                                .Where(x => x.op.N == selectedData.N)
-                                .Select(x => x.idx)
-                                .ToList();
-                            foreach (var idx in affectedIndexes)
-                            {
-                                _normRaszBindingSource?.ResetItem(idx);
-                                var rh2 = gridViewRasz.GetRowHandle(idx);
-                                if (gridViewRasz.IsValidRowHandle(rh2)) gridViewRasz.RefreshRow(rh2);
-                            }
-                            TWGridHelper.sortGridView(gridViewRasz);
-                            ApplyPostStructureUi(selectedData, false);
 
                             gridViewRasz.GridControl.BeginInvoke(new Action(() =>
                             {
