@@ -1170,6 +1170,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await _presenter.InitializeAsync();
                     _presenter.Attach();
+                    UpdateContextMenus(); // <-- место подключения меню
                 }
 
                 // Инициализация контроллера операций Rasz после готовности привязок
