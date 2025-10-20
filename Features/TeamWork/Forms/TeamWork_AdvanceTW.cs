@@ -3985,12 +3985,66 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                int rowIndex = _normRaszList.IndexOf(operation);
-                if (rowIndex >= 0)
+                if (operation == null) return;
+
+                // Откладываем установку фокуса до следующего цикла UI, чтобы успел обновиться контроллер данных
+                gridViewRasz.GridControl.BeginInvoke(new Action(() =>
                 {
-                    int rowHandle = gridViewRasz.GetRowHandle(rowIndex);
-                    _uiService?.RestoreFocusRow(gridViewRasz, rowHandle);
-                }
+                    try
+                    {
+                        // Обновляем и раскрываем группы, чтобы строка стала видимой
+                        try { gridViewRasz.RefreshData(); } catch { }
+                        try { ExpandAllRaszGroups(); } catch { }
+
+                        int rowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
+
+                        // 1) Пытаемся найти по первичному ключу, если он уже существует
+                        try
+                        {
+                            if (operation.nrID > 0)
+                            {
+                                rowHandle = gridViewRasz.LocateByValue(nameof(NormRasz.nrID), operation.nrID);
+                            }
+                        }
+                        catch { }
+
+                        // 2) Иначе используем индекс из BindingSource (ListSource для GridView)
+                        if (!gridViewRasz.IsValidRowHandle(rowHandle))
+                        {
+                            int listSourceIndex = -1;
+                            try { listSourceIndex = _normRaszBindingSource != null ? _normRaszBindingSource.IndexOf(operation) : -1; } catch { }
+                            if (listSourceIndex >= 0)
+                            {
+                                try { rowHandle = gridViewRasz.GetRowHandle(listSourceIndex); } catch { }
+                            }
+                        }
+
+                        // 3) В крайнем случае — перебор видимых строк и сравнение по ссылке
+                        if (!gridViewRasz.IsValidRowHandle(rowHandle))
+                        {
+                            try
+                            {
+                                for (int i = 0; i < gridViewRasz.DataRowCount; i++)
+                                {
+                                    int visibleHandle = gridViewRasz.GetVisibleRowHandle(i);
+                                    var rowObj = gridViewRasz.GetRow(visibleHandle) as NormRasz;
+                                    if (ReferenceEquals(rowObj, operation))
+                                    {
+                                        rowHandle = visibleHandle;
+                                        break;
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
+
+                        if (gridViewRasz.IsValidRowHandle(rowHandle))
+                        {
+                            _uiService?.RestoreFocusRow(gridViewRasz, rowHandle);
+                        }
+                    }
+                    catch { }
+                }));
             }
             catch (Exception ex)
             {
@@ -4007,12 +4061,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     gridViewRasz.ClearSelection();
                 }
+                // Сначала обновляем и раскрываем, затем устанавливаем фокус
+                gridViewRasz.RefreshData();
+                ExpandAllRaszGroups();
                 if (focusOperation != null)
                 {
                     SetFocusToOperation(focusOperation);
                 }
-                gridViewRasz.RefreshData();
-                ExpandAllRaszGroups();
             }
             catch { }
         }
