@@ -617,21 +617,58 @@ namespace SewingProduction.Features.TeamWork.Forms
                 //_normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
                 //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
-                if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
+                //bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
+                //if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
+                //{
+                //_raszPopupHandler = _raszPopupHandler ?? CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
+                //_kontPopupHandler = _kontPopupHandler ?? ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
+                //(_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.AttachPopupMenus(_raszPopupHandler, _kontPopupHandler, gridViewKont);
+                //}
+                //else
+                //{
+                //    (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.DetachPopupMenus();
+                //    _raszPopupHandler = null;
+                //    _kontPopupHandler = null;
+                //}
+                bool allowDelete = ComputeCanEdit(); // см. метод ниже
+                if (allowDelete)
                 {
-                    _raszPopupHandler = _raszPopupHandler ?? CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
-                    _kontPopupHandler = _kontPopupHandler ?? ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
-                    (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.AttachPopupMenus(_raszPopupHandler, _kontPopupHandler, gridViewKont);
+                    _raszPopupHandler ??= CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
+                    _kontPopupHandler ??= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
                 else
                 {
-                    (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.DetachPopupMenus();
-                        _raszPopupHandler = null;
-                        _kontPopupHandler = null;
+                    _raszPopupHandler = null;
+                    _kontPopupHandler = null;
+                }
+                if (_presenter != null)
+                {
+                    await _presenter.InitializeAsync();
+                    _presenter.Attach();
+                    UpdateContextMenus(); // <-- место подключения меню
                 }
                 _bindingsInitialized = true;
             }
+        }
+        private bool ComputeCanEdit()
+        {
+            // Гибкое правило: редактируемо, если дата не установлена ИЛИ статус предварительный ИЛИ спец. режимы
+            var dateOk = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
+            var isPrelim = _currentAnnData?.Status == (int)Status.Preliminary;
+            var modeOk = _mode == (int)Mode.NewWorkDivision || _mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.Clone;
+            return dateOk || isPrelim || modeOk;
+        }
+        private void UpdateContextMenus()
+        {
+            // Отвязать, на всякий случай
+            _presenter?.DetachPopupMenus();
+
+            if (!ComputeCanEdit() || _presenter == null) return;
+
+            // Хэндлеры уже построены в InitializeBindingsAsync
+            if (_raszPopupHandler != null || _kontPopupHandler != null)
+                (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)
+                    ?.AttachPopupMenus(_raszPopupHandler, _kontPopupHandler, gridViewKont);
         }
         #endregion
         private void AttachDeleteContextMenu<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId = null, List<int> deletedIds = null)

@@ -67,9 +67,6 @@
     <Compile Update="Features\KnittingProduction\Forms\KnittingProductionPlanningReportParameters.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
       <SubType>Form</SubType>
     </Compile>
