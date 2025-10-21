@@ -1,4 +1,20 @@
+using Dapper;
+using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.Articul;
+using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Interfaces;
+using SewingProduction.Features.TeamWork.Operations;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.form.TeamWork.Forms;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
+using SewingProduction.Models;
+using SewingProduction.Services;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -7,28 +23,13 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dapper;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Features.TeamWork.Helpers;
-using SewingProduction.Features.TeamWork.Interfaces;
-using SewingProduction.Features.TeamWork.Services;
-using SewingProduction.form.TeamWork.Forms;
-using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
-using SewingProduction.Models;
-using SewingProduction.Services;
 using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
-using SewingProduction.Features.TeamWork.Operations;
-using System.Collections.Concurrent;
-using System.Reflection;
-using DevExpress.XtraBars.Docking2010;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -375,7 +376,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                // layoutControlGroup1: предположительно Undo / Save / SaveAs
+                // layoutControlGroup1: Undo / Save / SaveAs
                 if (layoutControlGroup1 != null && layoutControlGroup1.CustomHeaderButtons != null)
                 {
                     if (layoutControlGroup1.CustomHeaderButtons.Count > 0)
@@ -462,7 +463,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         break;
                     case "op:convert":
                         //ValidateAndFixOperationNumbers();
-                        RecalculateNumbers();
+                        RecalculateAllOperationNumbers();
+                        //RecalculateNumbers();
                         break;
                 }
             }
@@ -616,35 +618,58 @@ namespace SewingProduction.Features.TeamWork.Forms
                 //_normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
                 //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
-                if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
+                //bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
+                //if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
+                //{
+                //_raszPopupHandler = _raszPopupHandler ?? CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
+                //_kontPopupHandler = _kontPopupHandler ?? ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
+                //(_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.AttachPopupMenus(_raszPopupHandler, _kontPopupHandler, gridViewKont);
+                //}
+                //else
+                //{
+                //    (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.DetachPopupMenus();
+                //    _raszPopupHandler = null;
+                //    _kontPopupHandler = null;
+                //}
+                bool allowDelete = ComputeCanEdit(); // см. метод ниже
+                if (allowDelete)
                 {
-                    if (_raszPopupHandler == null)
-                    {
-                        _raszPopupHandler = CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
-                        gridViewRasz.PopupMenuShowing += _raszPopupHandler;
-                    }
-                    if (_kontPopupHandler == null)
-                    {
-                        _kontPopupHandler = ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
-                        gridViewKont.PopupMenuShowing += _kontPopupHandler;
-                    }
+                    _raszPopupHandler ??= CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
+                    _kontPopupHandler ??= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
                 else
                 {
-                    if (_raszPopupHandler != null)
-                    {
-                        gridViewRasz.PopupMenuShowing -= _raszPopupHandler;
-                        _raszPopupHandler = null;
-                    }
-                    if (_kontPopupHandler != null)
-                    {
-                        gridViewKont.PopupMenuShowing -= _kontPopupHandler;
-                        _kontPopupHandler = null;
-                    }
+                    _raszPopupHandler = null;
+                    _kontPopupHandler = null;
+                }
+                if (_presenter != null)
+                {
+                    await _presenter.InitializeAsync();
+                    _presenter.Attach();
+                    UpdateContextMenus(); // <-- место подключения меню
                 }
                 _bindingsInitialized = true;
             }
+        }
+        private bool ComputeCanEdit()
+        {
+            // Гибкое правило: редактируемо, если дата не установлена ИЛИ статус предварительный ИЛИ спец. режимы
+            var dateOk = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
+            var isPrelim = _currentAnnData?.Status == (int)Status.Preliminary;
+            var modeOk = _mode == (int)Mode.NewWorkDivision || _mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.Clone;
+            return dateOk || isPrelim || modeOk;
+        }
+        private void UpdateContextMenus()
+        {
+            // Отвязать, на всякий случай
+            _presenter?.DetachPopupMenus();
+
+            if (!ComputeCanEdit() || _presenter == null) return;
+
+            // Хэндлеры уже построены в InitializeBindingsAsync
+            if (_raszPopupHandler != null || _kontPopupHandler != null)
+                (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)
+                    ?.AttachPopupMenus(_raszPopupHandler, _kontPopupHandler, gridViewKont);
         }
         #endregion
         private void AttachDeleteContextMenu<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId = null, List<int> deletedIds = null)
@@ -762,16 +787,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                // Подтверждение удаления
-                var result = MessageBox.Show(
-                    $"Удалить {selectedRows.Length} выбранных операций?\n\nЭто действие нельзя отменить.",
-                    "Подтверждение удаления",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question,
-                    MessageBoxDefaultButton.Button2);
+                //// Подтверждение удаления
+                //var result = MessageBox.Show(
+                //    $"Удалить {selectedRows.Length} выбранных операций?\n\nЭто действие нельзя отменить.",
+                //    "Подтверждение удаления",
+                //    MessageBoxButtons.YesNo,
+                //    MessageBoxIcon.Question,
+                //    MessageBoxDefaultButton.Button2);
 
-                if (result != DialogResult.Yes)
-                    return;
+                //if (result != DialogResult.Yes)
+                //    return;
 
                 // Получаем объекты операций для удаления
                 var operationsToDelete = new List<NormRasz>();
@@ -1015,62 +1040,28 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = selectionForm.SelectedRowData;
                         selectedData.IsNew = true;
                         selectedData.IsBeingAdded = true; // помечаем как добавляемую в текущей сессии
-                        
-                        // Детеминированные сценарии без вопросов:
-                        // 1) Если targetOperation == null (клик по NewItemRow) — добавить как главу №1, остальные сместить вниз
-                        // 2) Если targetOperation.N1 == 0 — добавить как новую главу сразу после targetOperation
-                        // 3) Если targetOperation подоперация — добавить подоперацию сразу после targetOperation в той же главе
 
-                        if (targetOperation == null)
-                        {
-                            // Смещаем именно главы: для каждого N (<100) сдвигаем всю группу N -> N+1 (обрабатываем от больших к меньшим)
-                            var chapterGroups = _normRaszList
-                                .Where(r => r.N < 100)
-                                .GroupBy(r => r.N)
-                                .OrderByDescending(g => g.Key)
-                                .ToList();
-                            foreach (var g in chapterGroups)
-                            {
-                                int newN = g.Key + 1;
-                                foreach (var op in g)
-                                {
-                                    int oldN = op.N;
-                                    op.N = newN;
-                                    if (!op.IsNew && op.N != oldN) op.IsModified = true;
-                                }
-                            }
-                            selectedData.N = 1;
-                            selectedData.N1 = 0;
-                        }
-                        else if (targetOperation != null)
-                        {
-                            // Всегда добавляем ГЛАВУ сразу после выбранной (даже если клик был на подоперации)
-                            OperationNumberingService.InsertMainAfter(_normRaszList, targetOperation.N, selectedData);
-                        }
-
-                        // Массовое обновление UI во избежание мерцаний
+                        // Детерминированные сценарии без вопросов (батч‑обновление UI):
+                        // 1) targetOperation == null → новая глава №1 с глобальным сдвигом вниз
+                        // 2) иначе → новая глава сразу после выбранной (даже если выбрана подоперация)
                         gridViewRasz.BeginDataUpdate();
                         try
                         {
+                            if (targetOperation == null)
+                            {
+                                OperationNumberingService.InsertMainAtStart(_normRaszList, selectedData);
+                        }
+                        else
+                        {
+                                OperationNumberingService.InsertMainAfter(_normRaszList, targetOperation.N, selectedData);
+                        }
                             _normRaszList.Add(selectedData);
+                            FinalizeRaszBatch(selectedData, false);
                         }
                         finally
                         {
-                            gridViewRasz.EndDataUpdate();
+                            try { gridViewRasz.EndDataUpdate(); } catch { }
                         }
-
-                        // Точечное обновление добавленной строки
-                        int addedIndex = _normRaszList.IndexOf(selectedData);
-                        if (addedIndex >= 0)
-                        {
-                            var rowHandle = gridViewRasz.GetRowHandle(addedIndex);
-                            if (gridViewRasz.IsValidRowHandle(rowHandle)) gridViewRasz.RefreshRow(rowHandle);
-                        }
-                        gridControlRasz.RefreshDataSource();
-
-                        // Обновляем сортировку и применяем единую пост‑обработку (фокус на добавленной)
-                        TWGridHelper.sortGridView(gridViewRasz);
-                        ApplyPostStructureUi(selectedData, false);
 
                         // Открываем форму редактирования через небольшую задержку
                         gridViewRasz.GridControl.BeginInvoke(new Action(() =>
@@ -1120,11 +1111,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
             }
         }
-
-
-
-        // Удалены локальные Renumber*/Convert — используется OperationNumberingService
-
         #region Реакция на изменения списков / загрузка формы
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
@@ -1180,6 +1166,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await _presenter.InitializeAsync();
                     _presenter.Attach();
+                    UpdateContextMenus(); // <-- место подключения меню
                 }
 
                 // Инициализация контроллера операций Rasz после готовности привязок
@@ -1627,20 +1614,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
         #endregion
-        private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
-        {
-            var rasz = await _artNormService.GetRelatedNormRasz(sourceAnnId);
-            var rask = await _artNormService.GetRelatedNormRask(sourceAnnId);
-            var kont = await _artNormService.GetRelatedNormKont(sourceAnnId);
-
-            var clonedRasz = CloneUtils.CloneList(rasz, newAnnId, "nrId", false); // markAsNew = false для начальной загрузки
-            var clonedRask = CloneUtils.CloneList(rask, newAnnId, "id", false);
-            var clonedKont = CloneUtils.CloneList(kont, newAnnId, "nkId", false);
-
-            _normRaszList.BulkLoad(clonedRasz);
-            _normRaskList.BulkLoad(clonedRask);
-            _normKontList.BulkLoad(clonedKont);
-        }
 
         private void UpdateFilteredPodrVyaz(int kodProizv)
         {
@@ -1673,41 +1646,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
             }
         }
-
-
-
-        private async Task LoadForEdit(int annId)
-        {
-            var rasz = await _artNormService.GetRelatedNormRasz(annId);
-            var rask = await _artNormService.GetRelatedNormRask(annId);
-            var kont = await _artNormService.GetRelatedNormKont(annId);
-
-            // Убеждаемся, что все элементы помечены как неизмененные
-            foreach (var item in rasz)
-            {
-                item.IsNew = false;
-                item.IsModified = false;
-            }
-            foreach (var item in rask)
-            {
-                item.IsNew = false;
-                item.IsModified = false;
-            }
-            foreach (var item in kont)
-            {
-                item.IsNew = false;
-                item.IsModified = false;
-            }
-
-            _normRaszList.BulkLoad(rasz);
-            _normRaskList.BulkLoad(rask);
-            _normKontList.BulkLoad(kont);
-            // Сохраняем оригинальные списки для отката
-            _originalNormRaszList = CloneUtils.DeepCloneBindingList(_normRaszList);
-            _originalNormRaskList = CloneUtils.DeepCloneBindingList(_normRaskList);
-            _originalNormKontList = CloneUtils.DeepCloneBindingList(_normKontList);
-        }
-
         private async Task LoadAndBindFioListsAsync()
         {
             try
@@ -1977,7 +1915,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             e.Allow = false;
 
             // ВСЕГДА: клик по NewItemRow добавляет новую главу
-            AddNewRaszOperation(null, true);
+                AddNewRaszOperation(null, true);
         }
 
         private void gridViewRasz_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
@@ -1997,8 +1935,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
             }
         }
-
-
 
         private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
         {
@@ -2056,7 +1992,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 // В любом случае после успешного обновления строка больше не считается «в процессе добавления»
                 normRasz.IsBeingAdded = false;
-                gridViewRasz.UpdateCurrentRow(); // Обновляем строку, чтобы RowStyle сработал
+                // Точечное обновление без мерцания
+                int index = _normRaszList.IndexOf(normRasz);
+                if (index >= 0)
+                {
+                    _normRaszBindingSource?.ResetItem(index);
+                    var rh = ((GridView)sender).GetRowHandle(index);
+                    if (((GridView)sender).IsValidRowHandle(rh)) ((GridView)sender).RefreshRow(rh);
+                }
+                // Если нужна немедленная валидация/пересчёт — включить UpdateCurrentRow только при необходимости
+                // ((GridView)sender).UpdateCurrentRow();
             }
         }
 
@@ -2066,466 +2011,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private int _raszDragSourceHandle = -1;
         private bool _raszDragging = false;
 
-        private void gridViewRasz_MouseDown(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                _raszDragStartPoint = e.Location;
-                var hit = ((GridView)sender).CalcHitInfo(e.Location);
-                _raszDragSourceHandle = hit.RowHandle;
-                _raszDragging = false;
-            }
-            catch { }
-        }
-
-        private void gridViewRasz_MouseMove(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if ((e.Button & MouseButtons.Left) != MouseButtons.Left) return;
-                if (_raszDragSourceHandle < 0) return;
-
-                Size dragSize = SystemInformation.DragSize;
-                Rectangle dragRect = new Rectangle(
-                    new Point(_raszDragStartPoint.X - dragSize.Width / 2, _raszDragStartPoint.Y - dragSize.Height / 2),
-                    dragSize);
-
-                //if (!dragRect.Contains(e.Location))
-                //{
-                //    var view = (GridView)sender;
-                //    var row = view.GetRow(_raszDragSourceHandle) as NormRasz;
-                //    if (row == null) return;
-                //    _raszDragging = true;
-                //    // Показ превью перетаскиваемой строки
-                //    ShowRaszAdorner(row, Control.MousePosition);
-                //    view.GridControl.DoDragDrop(row, DragDropEffects.Move);
-                //}
-                if (!dragRect.Contains(e.Location))
-                {
-                    var view = (GridView)sender;
-
-                    var draggedList = GetSelectedRaszRowsOrCurrent(view);
-                    if (draggedList == null || draggedList.Count == 0) return;
-
-                    _raszDragging = true;
-
-                    // Готовим DataObject: и список, и одиночную — для обратной совместимости
-                    var data = new DataObject();
-                    data.SetData(typeof(List<NormRasz>), draggedList);
-                    data.SetData(typeof(NormRasz), draggedList[0]);
-
-                    view.GridControl.DoDragDrop(data, DragDropEffects.Move);
-                }
-
-            }
-            catch { }
-        }
-
-        private void gridControlRasz_DragOver(object sender, DragEventArgs e)
-        {
-            try
-            {
-                if (!e.Data.GetDataPresent(typeof(List<NormRasz>)) && !e.Data.GetDataPresent(typeof(NormRasz)))
-                {
-                    e.Effect = DragDropEffects.None;
-                    return;
-                }
-
-                Point clientPoint = ((Control)sender).PointToClient(new Point(e.X, e.Y));
-                var hit = gridViewRasz.CalcHitInfo(clientPoint);
-                // Получаем перетаскиваемый список/элемент для дополнительных проверок
-                List<NormRasz> draggedList = e.Data.GetData(typeof(List<NormRasz>)) as List<NormRasz>;
-                if (draggedList == null)
-                {
-                    var single = e.Data.GetData(typeof(NormRasz)) as NormRasz;
-                    if (single != null) draggedList = new List<NormRasz> { single };
-                }
-
-                if (hit.InRow && hit.RowHandle >= 0)
-                {
-                    // Игнорируем NewItemRow
-                    if (gridViewRasz.IsNewItemRow(hit.RowHandle))
-                    {
-                        e.Effect = DragDropEffects.None;
-                    }
-                    else
-                    {
-                        var target = gridViewRasz.GetRow(hit.RowHandle) as NormRasz;
-                        // Игнорируем дроп на невалидную строку или на собственный блок
-                        if (target == null || (draggedList != null && draggedList.Contains(target)))
-                            e.Effect = DragDropEffects.None;
-                        else
-                    e.Effect = DragDropEffects.Move;
-                    }
-                }
-                else if (gridViewRasz.IsGroupRow(hit.RowHandle))
-                {
-                    // Разрешаем дроп на заголовок группы только если есть валидное значение N
-                    var colN = gridViewRasz.Columns.ColumnByFieldName("N");
-                    if (colN == null)
-                    {
-                        e.Effect = DragDropEffects.None;
-                    }
-                    else
-                    {
-                        var groupValue = gridViewRasz.GetGroupRowValue(hit.RowHandle, colN);
-                        if (groupValue == null || !int.TryParse(groupValue.ToString(), out _))
-                            e.Effect = DragDropEffects.None;
-                        else
-                    e.Effect = DragDropEffects.Move;
-                    }
-                }
-                else
-                {
-                    // Разрешаем дроп в пустую область грида — вынести в отдельную операцию
-                    e.Effect = DragDropEffects.Move;
-                }
-
-                // Явная автопрокрутка у верхней/нижней кромки
-                const int margin = 24;
-                var bounds = gridControlRasz.ClientRectangle;
-                if (clientPoint.Y <= bounds.Top + margin)
-                {
-                    gridViewRasz.TopRowIndex = Math.Max(0, gridViewRasz.TopRowIndex - 1);
-                }
-                else if (clientPoint.Y >= bounds.Bottom - margin)
-                {
-                    gridViewRasz.TopRowIndex = gridViewRasz.TopRowIndex + 1;
-                }
-            }
-            catch { e.Effect = DragDropEffects.None; }
-        }
-
-        private void gridControlRasz_DragDrop(object sender, DragEventArgs e)
-        {
-            try
-            {
-                gridViewRasz.BeginDataUpdate();
-                if (!_raszDragging) { return; }
-                _raszDragging = false;
-
-                // Достаём список или одиночную
-                var draggedList = e.Data.GetData(typeof(List<NormRasz>)) as List<NormRasz>;
-                if (draggedList == null)
-                {
-                    var single = e.Data.GetData(typeof(NormRasz)) as NormRasz;
-                    if (single != null) draggedList = new List<NormRasz> { single };
-                }
-                if (draggedList == null || draggedList.Count == 0) { return; }
-
-                // Защитимся: список без null и повторов, в «экранном» порядке
-                draggedList = draggedList
-                    .Where(r => r != null)
-                    .Distinct()
-                    .OrderBy(r => r.N)
-                    .ThenBy(r => r.N1)
-                    .ToList();
-
-                Point clientPoint = ((Control)sender).PointToClient(new Point(e.X, e.Y));
-                var hit = gridViewRasz.CalcHitInfo(clientPoint);
-
-                bool ctrl = (Control.ModifierKeys & Keys.Control) == Keys.Control;
-
-                bool changed = false;
-
-                // 1) Бросили на заголовок группы → положим блок в конец этой группы
-                if (gridViewRasz.IsGroupRow(hit.RowHandle))
-                {
-                    var colN = gridViewRasz.Columns.ColumnByFieldName("N");
-                    if (colN != null)
-                    {
-                        var groupValue = gridViewRasz.GetGroupRowValue(hit.RowHandle, colN);
-                        if (groupValue != null && int.TryParse(groupValue.ToString(), out int groupN))
-                        {
-                            // No-op: блок уже в конце этой группы в том же порядке
-                            if (!AreDraggedAtGroupEnd(draggedList, groupN))
-                            {
-                                int afterN1 = GetMaxN1(groupN);
-                                foreach (var r in draggedList)
-                                    MoveRaszIntoGroup(r, groupN, afterN1++);
-                                changed = true;
-                            }
-                        }
-                        else
-                        {
-                            // Группа без валидного значения N — игнорируем дроп
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        // Нет колонки N — игнорируем дроп на группу
-                        return;
-                    }
-                }
-                // 2) Пустая область → превратить блок в отдельные главы в конце (N1=0)
-                else if (!(hit.InRow && hit.RowHandle >= 0))
-                {
-                    // No-op: весь блок уже является последними главами (N1=0) и идёт подряд в конце
-                    if (!AreDraggedAtEndAsTopLevel(draggedList))
-                    {
-                        int newN = _normRaszList.Any() ? _normRaszList.Max(r => r.N) + 1 : 1;
-                        foreach (var r in draggedList)
-                        {
-                            r.N = newN++;
-                            r.N1 = 0;
-                            if (!r.IsNew) r.IsModified = true;
-                        }
-                        changed = true;
-                    }
-                }
-                // 3) Бросили на строку
-                else
-                {
-                    if (gridViewRasz.IsNewItemRow(hit.RowHandle)) { return; }
-
-                    var target = gridViewRasz.GetRow(hit.RowHandle) as NormRasz;
-                    if (target == null) { return; }
-                    if (draggedList.Contains(target)) { return; } // не вкладываем блок сам в себя
-
-                    // Модификаторы: Shift → вынести блок в начало (глава 1), Ctrl + Drop на главу → вынести блок отдельной главой после этой
-                    bool shift = (Control.ModifierKeys & Keys.Shift) == Keys.Shift;
-
-                    if (shift)
-                    {
-                        if (!AreDraggedAtStartAsTopLevel(draggedList))
-                        {
-                            MoveRowsToTopLevelAtStart(draggedList);
-                            changed = true;
-                        }
-                        if (changed)
-                        {
-                            // Пересчёт отключён — выполняется по кнопке/при сохранении
-                            _normRaszBindingSource.ResetBindings(false);
-                            TWGridHelper.sortGridView(gridViewRasz);
-                            ApplyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
-                        }
-                        return;
-                    }
-
-                    if (ctrl && target.N1 == 0)
-                    {
-                        if (MoveRowsToTopLevelInsertAfter(draggedList, target.N))
-                        {
-                            changed = true;
-                        }
-                        if (changed)
-                        {
-                            // Пересчёт отключён — выполняется по кнопке/при сохранении
-                            _normRaszBindingSource.ResetBindings(false);
-                            TWGridHelper.sortGridView(gridViewRasz);
-                            ApplyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
-                        }
-                        return;
-                    }
-
-                    // Ctrl+Drop «обмен одиночных» — работает только для одиночного DnD, как и раньше
-                    if (draggedList.Count == 1 && ctrl && target.N != draggedList[0].N && target.N1 == 0 && draggedList[0].N1 == 0)
-                    {
-                        var dragged = draggedList[0];
-                        int tmpN = dragged.N;
-                        dragged.N = target.N;
-                        target.N = tmpN;
-                        if (!dragged.IsNew) dragged.IsModified = true;
-                        if (!target.IsNew) target.IsModified = true;
-                        changed = true;
-                    }
-                    else
-                    {
-                        // Если переносим между разными главами → кладём блок после target в его главе
-                        if (draggedList.Any(r => r.N != target.N))
-                        {
-                            // No-op: блок уже идёт сразу после target в этой главе
-                            if (!AreDraggedConsecutiveAfterTargetInGroup(draggedList, target))
-                            {
-                                int afterN1 = target.N1;
-                                foreach (var r in draggedList)
-                                    MoveRaszIntoGroup(r, target.N, afterN1++);
-                                changed = true;
-                            }
-                        }
-                        // Внутри одной главы → вставляем блок после target, с сохранением относительного порядка
-                        else
-                        {
-                            // No-op: блок уже расположен сразу после target в этой же главе
-                            if (!AreDraggedConsecutiveAfterTargetInGroup(draggedList, target))
-                            {
-                                MoveBlockWithinSameGroup(draggedList, target);
-                                changed = true;
-                            }
-                        }
-                    }
-                }
-
-                // Финал батча — только если реально что‑то изменили
-                if (changed)
-                {
-                    // Пересчёт отключён — выполняется по кнопке/при сохранении
-                    _normRaszBindingSource.ResetBindings(false);
-                    TWGridHelper.sortGridView(gridViewRasz);
-                    ApplyPostStructureUi(draggedList.FirstOrDefault(), draggedList.Count > 1);
-                }
-            }
-            catch { }
-            finally { try { gridViewRasz.EndDataUpdate(); } catch { } }
-        }
-
-        private int GetMaxN1(int groupN)
-        {
-            var items = _normRaszList.Where(x => x.N == groupN).ToList();
-            return items.Count == 0 ? 0 : items.Max(x => x.N1);
-        }
-
-        // Проверка: все перетаскиваемые операции уже находятся в конце указанной главы groupN, подряд и в том же порядке
-        private bool AreDraggedAtGroupEnd(List<NormRasz> dragged, int groupN)
-        {
-            if (dragged == null || dragged.Count == 0) return true;
-            // Все относятся к этой главе
-            if (dragged.Any(r => r.N != groupN)) return false;
-
-            // Максимальный N1 в группе без учёта перетаскиваемых
-            var othersN1 = _normRaszList.Where(r => r.N == groupN && !dragged.Contains(r)).Select(r => r.N1).ToList();
-            int maxOthers = othersN1.Count == 0 ? 0 : othersN1.Max();
-
-            var byN1 = dragged.OrderBy(r => r.N1).ToList();
-            // Последовательность должна начинаться сразу после maxOthers: maxOthers+1, +2, ...
-            for (int i = 0; i < byN1.Count; i++)
-            {
-                if (byN1[i].N1 != maxOthers + 1 + i) return false;
-            }
-            return true;
-        }
-
-        // Проверка: блок уже является последними главами (N1 == 0) и их N идут подряд от (maxN - k + 1) до maxN
-        private bool AreDraggedAtEndAsTopLevel(List<NormRasz> dragged)
-        {
-            if (dragged == null || dragged.Count == 0) return true;
-            if (dragged.Any(r => r.N1 != 0)) return false;
-
-            int maxN = _normRaszList.Any() ? _normRaszList.Max(r => r.N) : 0;
-            var draggedByN = dragged.OrderBy(r => r.N).ToList();
-            // Проверим, что они занимают хвост и идут подряд
-            int expectedStart = maxN - draggedByN.Count + 1;
-            for (int i = 0; i < draggedByN.Count; i++)
-            {
-                if (draggedByN[i].N != expectedStart + i) return false;
-            }
-            return true;
-        }
-
-        // Проверка: блок уже верхнеуровневый (N1==0) и находится в самом начале (N идут подряд от 1)
-        private bool AreDraggedAtStartAsTopLevel(List<NormRasz> dragged)
-        {
-            if (dragged == null || dragged.Count == 0) return true;
-            if (dragged.Any(r => r.N1 != 0)) return false;
-
-            var draggedByN = dragged.OrderBy(r => r.N).ToList();
-            for (int i = 0; i < draggedByN.Count; i++)
-            {
-                if (draggedByN[i].N != 1 + i) return false;
-            }
-            return true;
-        }
-
-        // Перевод строк в верхний уровень (N1=0 если одиночная, иначе 1..n) и помещение в самое начало (остаток исходной главы становится главой 2)
-        private void MoveRowsToTopLevelAtStart(List<NormRasz> dragged)
-        {
-            if (dragged == null || dragged.Count == 0) return;
-
-            int sourceN = dragged[0].N;
-            var restOfSource = _normRaszList
-                .Where(r => r.N == sourceN && !dragged.Contains(r))
-                .OrderBy(r => r.N1)
-                .ToList();
-
-            // Сдвигаем все главы, кроме исходной, на +1 (освобождаем место для будущей главы 2)
-            foreach (var op in _normRaszList.Where(r => r.N != sourceN && !dragged.Contains(r)))
-            {
-                int oldN = op.N;
-                op.N = oldN + 1;
-                if (!op.IsNew && op.N != oldN) op.IsModified = true;
-            }
-
-            // Переносимый блок становится главой 1, N1 = 0 если одна строка, иначе 1..n
-            var block = dragged.OrderBy(r => r.N1).ToList();
-            for (int i = 0; i < block.Count; i++)
-            {
-                int oldN = block[i].N;
-                int oldN1 = block[i].N1;
-                block[i].N = 1;
-                block[i].N1 = (block.Count == 1) ? 0 : i + 1;
-                if (!block[i].IsNew && (block[i].N != oldN || block[i].N1 != oldN1)) block[i].IsModified = true;
-            }
-
-            // Остаток исходной главы становится главой 2: N1 = 1..n
-            if (restOfSource.Count > 0)
-            {
-                for (int i = 0; i < restOfSource.Count; i++)
-                {
-                    var it = restOfSource[i];
-                    int oldN = it.N;
-                    int oldN1 = it.N1;
-                    it.N = 2;
-                    it.N1 = i + 1;
-                    if (!it.IsNew && (it.N != oldN || it.N1 != oldN1)) it.IsModified = true;
-                }
-            }
-        }
-
-        // Проверка: блок уже расположен сразу после target в группе target.N (в порядке N1 = target.N1+1, +2, ...)
-        private bool AreDraggedConsecutiveAfterTargetInGroup(List<NormRasz> dragged, NormRasz target)
-        {
-            if (target == null || dragged == null || dragged.Count == 0) return false;
-            int groupN = target.N;
-            var byN1 = dragged.OrderBy(r => r.N1).ToList();
-
-            // Все в одной главе
-            if (byN1.Any(r => r.N != groupN)) return false;
-
-            // Должны начинаться именно после target.N1
-            for (int i = 0; i < byN1.Count; i++)
-            {
-                if (byN1[i].N1 != target.N1 + 1 + i) return false;
-            }
-            return true;
-        }
-
-        // Вынести блок в отдельную главу непосредственно после главы afterN (afterN >= 0)
-        private bool MoveRowsToTopLevelInsertAfter(List<NormRasz> dragged, int afterN)
-        {
-            if (dragged == null || dragged.Count == 0) return false;
-
-            // 1) Сдвигаем все главы с N > afterN (кроме переносимых) на +1
-            foreach (var op in _normRaszList.Where(r => r.N > afterN && !dragged.Contains(r)))
-            {
-                int oldN = op.N;
-                op.N = oldN + 1;
-                if (!op.IsNew && op.N != oldN) op.IsModified = true;
-            }
-
-            // 2) Переносимый блок становится новой главой afterN+1. Если в блоке одна строка — N1=0, иначе N1 = 1..
-            var ordered = dragged.OrderBy(r => r.N).ThenBy(r => r.N1).ToList();
-            for (int i = 0; i < ordered.Count; i++)
-            {
-                var it = ordered[i];
-                int oldN = it.N, oldN1 = it.N1;
-                it.N = afterN + 1;
-                it.N1 = (ordered.Count == 1) ? 0 : i + 1;
-                if (!it.IsNew && (it.N != oldN || it.N1 != oldN1)) it.IsModified = true;
-            }
-
-            return true;
-        }
-
-        // Вставка блока после target внутри одной и той же главы (N совпадают)
-        private void MoveBlockWithinSameGroup(List<NormRasz> block, NormRasz target)
-        {
-            OperationNumberingService.MoveBlockWithinSameGroup(_normRaszList, block, target);
-        }
-
-        private void gridControlRasz_DragLeave(object sender, EventArgs e) { }
-
-        private void gridControlRasz_QueryContinueDrag(object sender, QueryContinueDragEventArgs e) { }
 
         private void ConfigureRaszGrouping()
         {
@@ -2554,46 +2039,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     gridViewRasz.EndUpdate();
                 }
+                // Гарантируем разворот всех групп после настройки
+                ExpandAllRaszGroups();
             }
             catch { }
         }
 
-        // Перенос операции в указанную группу с размещением в конце подгруппы (или после указанного N1)
-        private void MoveRaszIntoGroup(NormRasz dragged, int targetGroupN, int? desiredAfterN1)
+        private void ExpandAllRaszGroups()
         {
-            OperationNumberingService.MoveRaszIntoGroup(dragged, targetGroupN, desiredAfterN1, _normRaszList);
-        }
-
-        // Визуализация перетаскивания — используем встроенную DevExpress (адорнер удалён)
-
-        // Собираем выделенные строки (или текущую), упорядочиваем как на экране
-        private List<NormRasz> GetSelectedRaszRowsOrCurrent(GridView view)
-        {
-            var result = new List<NormRasz>();
-
-            var selectedHandles = view.GetSelectedRows()
-                .Where(h => h >= 0 && !view.IsGroupRow(h) && !view.IsNewItemRow(h))
-                .ToArray();
-
-            if (selectedHandles.Length > 0)
+            try
             {
-                foreach (var h in selectedHandles)
-                {
-                    if (view.GetRow(h) is NormRasz r && r != null)
-                        result.Add(r);
-                }
+                if (gridViewRasz == null) return;
+                gridViewRasz.BeginUpdate();
+                try { gridViewRasz.ExpandAllGroups(); }
+                finally { gridViewRasz.EndUpdate(); }
             }
-            else if (_raszDragSourceHandle >= 0)
-            {
-                var r = view.GetRow(_raszDragSourceHandle) as NormRasz;
-                if (r != null) result.Add(r);
-            }
-
-            return result
-                .Distinct()
-                .OrderBy(r => r.N)
-                .ThenBy(r => r.N1)
-                .ToList();
+            catch { }
         }
 
         // Автопрокрутка — используем встроенную в DevExpress (удалён самописный таймер)
@@ -2851,7 +2312,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         selectedText = options[0];
                         kod_o = "100";
-                        MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                      //  MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -3010,14 +2471,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void btnSave_Click(object sender, EventArgs e)
         {
             if (_presenter != null) { await _presenter.SaveAsync(false); return; }
-            await ProcessSaveData(false);
         }
 
         // Сохранение данных и закрытие формы
         private async void btnOK_Click(object sender, EventArgs e)
         {
             if (_presenter != null) { await _presenter.SaveAsync(true); return; }
-            await ProcessSaveData(true);
         }
 
         private async Task SaveAnnDataAsync()
@@ -3027,6 +2486,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Сохраняем данные в таблицу ann
                 _currentAnnData.AnnID = _newAnnId;
                 _currentAnnData.dateUpdate = null;
+                var articul = _currentAnnData?.Articul;
+                var annId = _newAnnId > 0 ? _newAnnId : (int?)null;
+
+                if (!await IsArticulUniqueAsync(articul, annId))
+                {
+                    MessageBox.Show("Разделение с таким артикулом уже существует. Проверьте состав разделени.", "Дублирование", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                // дальше обычное сохранение
                 if (_newAnnId > 0)
                 {
                     RecalculateSek();
@@ -3039,7 +2507,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в БД");
-                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await ShowStatusMessage($"Ошибка при сохранении данных: {ex.Message}",3500 ,Color.Crimson);
+                //MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
                 return;
             }
@@ -3175,6 +2644,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             stopwatch.Stop();
             await _logger.LogEventAsync($"[{itemTypeName}] Finished saving. Total: {stopwatch.ElapsedMilliseconds} ms", "SaveListAsync");
         }
+
+        private async Task<bool> IsArticulUniqueAsync(string articul, int? excludeAnnId = null)
+        {
+            if (string.IsNullOrWhiteSpace(articul)) return false;
+            var sql = @"
+        IF EXISTS (
+            SELECT 1
+            FROM artNormNView WITH (NOLOCK)
+            WHERE UPPER(LTRIM(RTRIM(Articul))) = UPPER(LTRIM(RTRIM(@Articul)))
+             AND (@ExcludeId IS NULL OR AnnId <> @ExcludeId)
+        )
+            SELECT CAST(0 AS bit);
+        ELSE
+            SELECT CAST(1 AS bit);";
+
+            using (var conn = _dbHelper.GetConnection())
+            {
+                return await conn.ExecuteScalarAsync<bool>(sql, new { Articul = articul, ExcludeId = excludeAnnId });
+            }
+        }
+
         #endregion
 
 
@@ -3551,7 +3041,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             _hasUnsavedChanges = false;
 
-            MessageBox.Show("Изменения успешно отменены и восстановлены до исходного состояния.", "Отмена изменений", MessageBoxButtons.OK, MessageBoxIcon.Information);
+           // MessageBox.Show("Изменения успешно отменены и восстановлены до исходного состояния.", "Отмена изменений", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #region GridView: подготовка форм редактирования и валидация
         private void gridViewRasz_EditFormPrepared(object sender, DevExpress.XtraGrid.Views.Grid.EditFormPreparedEventArgs e)
@@ -3590,23 +3080,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
         }
 
-        private void gridViewRasz_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
-        {
-            //if (_mode == (int)Mode.Edit &&
-            //    _currentAnnData?.dateUpdate != null &&
-            //    _currentAnnData.dateUpdate != DateTime.MinValue)
-            //{
-            //    if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
-            //    {
-            //        var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
-            //        if (original != null && newSec > original.Sek)
-            //        {
-            //            e.Valid = false;
-            //            e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
-            //        }
-            //    }
-            //}
-        }
+
         #endregion
 
         private void gridViewKont_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
@@ -3766,6 +3240,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             int currentMaxN = (_normRaszList != null && _normRaszList.Count > 0)
                 ? _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max()
                 : 0;
+            gridViewRasz.BeginDataUpdate();
+            try
+            {
             foreach (var id in bufferIdsToUse)
             {
                 var raszList = await _artNormService.GetRelatedNormRasz(id);
@@ -3774,32 +3251,26 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int offset = currentMaxN; // 0 для первой группы, далее — накопленный максимум
                 foreach (var item in raszList)
                 {
-                    // Сбрасываем ID операции, чтобы база присвоила новый ID
                     item.nrID = 0;
-
-                    // Привязываем операцию к текущему разделению труда (не копируем annId родительской записи)
                     item.annId = _currentAnnData?.AnnID ?? 0;
-
-                    // Сбрасываем автоматически заполняемые поля, чтобы SQL сам их вставил
                     item.nrDateAdd = null;
                     item.nrCompAdd = null;
-
                     item.IsNew = true;
-                    // Сдвигаем только N на offset, N1 сохраняется
                     item.N = item.N + offset;
                     _normRaszList.Add(item);
                 }
-                currentMaxN += partMaxN; // обновляем максимум для следующей группы
+                    currentMaxN += partMaxN;
+                }
+                FinalizeRaszBatch(_normRaszList.FirstOrDefault(), true);
             }
-            // После добавления сортируем таблицу, чтобы новые элементы встали
-            // в порядке возрастания N
-            TWGridHelper.sortGridView(gridViewRasz);
-                // Точечное обновление: обновим только видимые строки хвоста блока
-                var first = gridViewRasz.GetVisibleRowHandle(0);
-                if (gridViewRasz.IsValidRowHandle(first)) gridViewRasz.RefreshRow(first);
+            finally
+            {
+                try { gridViewRasz.EndDataUpdate(); } catch { }
+            }
             await ShowStatusMessage("Операции из буфера добавлены для комплекта");
         }
         #endregion
+
         #region Управление порядком и нумерацией операций
 
         /// <summary>
@@ -3814,6 +3285,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _normRaszBindingSource.ResetBindings(false);
                 TWGridHelper.sortGridView(gridViewRasz);
                 _logger.LogEventAsync($"Выполнен полный пересчет нумерации для {_normRaszList.Count} операций", "RecalculateAllOperationNumbers");
+                ExpandAllRaszGroups();
             }
             catch (Exception ex)
             {
@@ -3845,12 +3317,41 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                // Меняем местами текущую операцию с предыдущей
                 var previousOperation = allOperations[currentIndex - 1];
-                SwapOperationPositions(selectedOperation, previousOperation);
 
-                // Пересчитываем нумерацию
+				// Пограничный случай: предыдущая строка из другой главы или спецоперация (N1 >= 100)
+				if (previousOperation.N != selectedOperation.N || previousOperation.N1 >= 100)
+                {
+                    gridViewRasz.BeginDataUpdate();
+                    try
+                    {
+                        // Если выбранная операция уже отдельная глава (одна в своей главе)
+                        bool isSingleChapter = _normRaszList.Count(r => r.N == selectedOperation.N) == 1 && selectedOperation.N1 == 0;
+                        if (isSingleChapter)
+                        {
+							// Переместить в предыдущую главу (в конец главы)
+							int targetN = previousOperation.N;
+							int? afterN1 = _normRaszList.Where(r => r.N == targetN && r.N1 < 100).Select(r => (int?)r.N1).DefaultIfEmpty(null).Max();
+							OperationNumberingService.MoveRaszIntoGroup(selectedOperation, targetN, afterN1, _normRaszList);
+                        }
+                        else
+                        {
+                            // Выделить в отдельную главу между главами: вставить как новую главу перед текущей
+                            OperationNumberingService.InsertMainAfter(_normRaszList, previousOperation.N, selectedOperation);
+                        }
                 RecalculateAllOperationNumbers();
+                    }
+                    finally
+                    {
+                        gridViewRasz.EndDataUpdate();
+                    }
+                }
+                else
+                {
+                    // Обычное перемещение внутри главы — обмен местами с предыдущей строкой
+                    SwapOperationPositions(selectedOperation, previousOperation);
+                    RecalculateAllOperationNumbers();
+                }
 
                 // Единая пост‑обработка
                 ApplyPostStructureUi(selectedOperation, false);
@@ -3887,12 +3388,40 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                // Меняем местами текущую операцию со следующей
                 var nextOperation = allOperations[currentIndex + 1];
-                SwapOperationPositions(selectedOperation, nextOperation);
 
-                // Пересчитываем нумерацию
+				// Пограничный случай: следующая строка из другой главы или спецоперация (N1 >= 100)
+				if (nextOperation.N != selectedOperation.N || nextOperation.N1 >= 100)
+                {
+                    gridViewRasz.BeginDataUpdate();
+                    try
+                    {
+                        bool isSingleChapter = _normRaszList.Count(r => r.N == selectedOperation.N) == 1 && selectedOperation.N1 == 0;
+                        if (isSingleChapter)
+                        {
+							// Переместить в следующую главу (в начало главы)
+							int targetN = nextOperation.N;
+							int? afterN1 = -1; // вставляем перед первой обычной подоперацией
+							OperationNumberingService.MoveRaszIntoGroup(selectedOperation, targetN, afterN1, _normRaszList);
+                        }
+                        else
+                        {
+                            // Выделить в отдельную главу между главами: вставить как новую главу после текущей
+                            OperationNumberingService.InsertMainAfter(_normRaszList, selectedOperation.N, selectedOperation);
+                        }
                 RecalculateAllOperationNumbers();
+                    }
+                    finally
+                    {
+                        gridViewRasz.EndDataUpdate();
+                    }
+                }
+                else
+                {
+                    // Обычное перемещение внутри главы — обмен местами со следующей строкой
+                    SwapOperationPositions(selectedOperation, nextOperation);
+                    RecalculateAllOperationNumbers();
+                }
 
                 // Единая пост‑обработка
                 ApplyPostStructureUi(selectedOperation, false);
@@ -3948,12 +3477,66 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                int rowIndex = _normRaszList.IndexOf(operation);
-                if (rowIndex >= 0)
+                if (operation == null) return;
+
+                // Откладываем установку фокуса до следующего цикла UI, чтобы успел обновиться контроллер данных
+                gridViewRasz.GridControl.BeginInvoke(new Action(() =>
                 {
-                    int rowHandle = gridViewRasz.GetRowHandle(rowIndex);
-                    _uiService?.RestoreFocusRow(gridViewRasz, rowHandle);
-                }
+                    try
+                    {
+                        // Обновляем и раскрываем группы, чтобы строка стала видимой
+                        try { gridViewRasz.RefreshData(); } catch { }
+                        try { ExpandAllRaszGroups(); } catch { }
+
+                        int rowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
+
+                        // 1) Пытаемся найти по первичному ключу, если он уже существует
+                        try
+                        {
+                            if (operation.nrID > 0)
+                            {
+                                rowHandle = gridViewRasz.LocateByValue(nameof(NormRasz.nrID), operation.nrID);
+                            }
+                        }
+                        catch { }
+
+                        // 2) Иначе используем индекс из BindingSource (ListSource для GridView)
+                        if (!gridViewRasz.IsValidRowHandle(rowHandle))
+                        {
+                            int listSourceIndex = -1;
+                            try { listSourceIndex = _normRaszBindingSource != null ? _normRaszBindingSource.IndexOf(operation) : -1; } catch { }
+                            if (listSourceIndex >= 0)
+                            {
+                                try { rowHandle = gridViewRasz.GetRowHandle(listSourceIndex); } catch { }
+                            }
+                        }
+
+                        // 3) В крайнем случае — перебор видимых строк и сравнение по ссылке
+                        if (!gridViewRasz.IsValidRowHandle(rowHandle))
+                        {
+                            try
+                            {
+                                for (int i = 0; i < gridViewRasz.DataRowCount; i++)
+                                {
+                                    int visibleHandle = gridViewRasz.GetVisibleRowHandle(i);
+                                    var rowObj = gridViewRasz.GetRow(visibleHandle) as NormRasz;
+                                    if (ReferenceEquals(rowObj, operation))
+                                    {
+                                        rowHandle = visibleHandle;
+                                        break;
+                                    }
+                                }
+                            }
+                            catch { }
+                        }
+
+                        if (gridViewRasz.IsValidRowHandle(rowHandle))
+                        {
+                            _uiService?.RestoreFocusRow(gridViewRasz, rowHandle);
+                        }
+                    }
+                    catch { }
+                }));
             }
             catch (Exception ex)
             {
@@ -3970,11 +3553,23 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     gridViewRasz.ClearSelection();
                 }
+                // Сначала обновляем и раскрываем, затем устанавливаем фокус
+                gridViewRasz.RefreshData();
+                ExpandAllRaszGroups();
                 if (focusOperation != null)
                 {
                     SetFocusToOperation(focusOperation);
                 }
-                gridViewRasz.RefreshData();
+            }
+            catch { }
+        }
+        private void FinalizeRaszBatch(NormRasz focusOperation = null, bool clearSelection = false)
+        {
+            try
+            {
+                _normRaszBindingSource?.ResetBindings(false);
+                TWGridHelper.sortGridView(gridViewRasz);
+                ApplyPostStructureUi(focusOperation, clearSelection);
             }
             catch { }
         }
@@ -3998,18 +3593,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     string duplicatesList = string.Join(", ", duplicates.Select(d => $"{d.Key.N}.{d.Key.N1}"));
 
-                    var result = MessageBox.Show(
-                        $"Обнаружены дублирующиеся номера операций: {duplicatesList}\n\n" +
-                        "Выполнить автоматический пересчет нумерации?",
-                        "Проблема с нумерацией",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning);
+                    //var result = MessageBox.Show(
+                    //    $"Обнаружены дублирующиеся номера операций: {duplicatesList}\n\n" +
+                    //    "Выполнить автоматический пересчет нумерации?",
+                    //    "Проблема с нумерацией",
+                    //    MessageBoxButtons.YesNo,
+                    //    MessageBoxIcon.Warning);
 
-                    if (result == DialogResult.Yes)
-                    {
+                    //if (result == DialogResult.Yes)
+                    //{
                         RecalculateAllOperationNumbers();
-                        MessageBox.Show("Нумерация операций исправлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    //    MessageBox.Show("Нумерация операций исправлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //}
                 }
                 else
                 {
@@ -4038,24 +3633,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         private void btnRecalculateNumbers_Click(object sender, EventArgs e)
         {
-            RecalculateNumbers();
+            //RecalculateNumbers();
+            RecalculateAllOperationNumbers();
         }
 
-        private void RecalculateNumbers()
-        {
-            var result = MessageBox.Show(
-                "Выполнить полный пересчет нумерации всех операций?\n\n" +
-                "Это действие изменит номера всех операций в порядке их текущего расположения.",
-                "Подтверждение пересчета",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes)
-            {
-                RecalculateAllOperationNumbers();
-                MessageBox.Show("Нумерация операций обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
 
         private void btnValidateNumbers_Click(object sender, EventArgs e)
         {
@@ -4081,7 +3663,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 generic?.Invoke(s, e);
 
                 // Пункт "Добавить строку"
-                var addItem = new DevExpress.Utils.Menu.DXMenuItem("Добавить строку", (_, __) =>
+                var addItem = new DevExpress.Utils.Menu.DXMenuItem("Добавить операцию", (_, __) =>
                 {
                     int rowHandle = e.HitInfo.RowHandle;
                     if (view.IsNewItemRow(rowHandle))
@@ -4102,6 +3684,50 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 });
                 menu.Items.Add(addItem);
+
+                // Пункт "Добавить подоперацию" — добавляет подоперацию сразу после выбранной строки в той же главе
+                var addSubItem = new DevExpress.Utils.Menu.DXMenuItem("Добавить подоперацию", async (_, __) =>
+                {
+                    int rowHandle = e.HitInfo.RowHandle;
+                    if (!view.IsValidRowHandle(rowHandle)) return;
+                    var rowObj = view.GetRow(rowHandle) as NormRasz;
+                    if (rowObj == null) return;
+
+                    using (var selectionForm = new NormOperNew(_selectedAnnId))
+                    {
+                        var result = selectionForm.ShowDialog();
+                        if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
+                        {
+                            var selectedData = selectionForm.SelectedRowData;
+                            selectedData.IsNew = true;
+                            selectedData.IsBeingAdded = true;
+
+                            int insertN1 = rowObj.N1 == 0 ? 2 : rowObj.N1 + 1;
+                            bool convertMainToSub = rowObj.N1 == 0;
+
+                            // Вставка подоперации в текущую главу (батч‑обновление и единая финализация)
+                            gridViewRasz.BeginDataUpdate();
+                            try
+                            {
+                                OperationNumberingService.InsertSuboperation(_normRaszList, rowObj.N, insertN1, convertMainToSub, selectedData);
+                                FinalizeRaszBatch(selectedData, false);
+                            }
+                            finally
+                            {
+                                try { gridViewRasz.EndDataUpdate(); } catch { }
+                            }
+
+                            gridViewRasz.GridControl.BeginInvoke(new Action(() =>
+                            {
+                                _isCustomEditFormOpen = true;
+                                gridViewRasz.ShowEditForm();
+                            }));
+
+                            await _logger.LogEventAsync($"Добавлена новая подоперация №{selectedData.N}.{selectedData.N1}", "AddSuboperation");
+                        }
+                    }
+                });
+                menu.Items.Add(addSubItem);
             };
         }
         #endregion

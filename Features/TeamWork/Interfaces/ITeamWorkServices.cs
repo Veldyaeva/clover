@@ -48,6 +48,10 @@ namespace SewingProduction.Features.TeamWork.Interfaces
         System.Threading.Tasks.Task ImportFromBufferAsync();
         System.Threading.Tasks.Task DeleteSelectedAsync();
         System.Threading.Tasks.Task AddOperationAsync();
+        void AttachPopupMenus(DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler raszHandler,
+                              DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler kontHandler,
+                              DevExpress.XtraGrid.Views.Grid.GridView kontView);
+        void DetachPopupMenus();
     }
 }
 
