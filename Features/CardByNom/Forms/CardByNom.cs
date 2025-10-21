@@ -576,7 +576,7 @@ namespace SewingProduction
                 #endregion
 
                 #region описание gridcontrol "настилы"
-                gridControlNastilList.DataSource = _historyRazdelNaklViewByIzBindingSource;
+                gridControlNastilList.DataSource = _nastilBindingList;
                 gridColumnNaklPartID.FieldName = "id";
                 gridColumnNaklPartDateIzm.FieldName = "data_izm";
                 gridColumnNaklPartSklOtgrOld.FieldName = "skl_otgr_b";
