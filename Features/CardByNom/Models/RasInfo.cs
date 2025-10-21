@@ -76,5 +76,7 @@ namespace SewingProduction.Features.CardByNom.Models
         public string RzuMgZakr { get; set; }
         public string PszrRecomendNom { get; set; }
         public string PszrRecomendZad { get; set; }
+        public int rz_id { get; set; }
+        public DateTime? data_za { get; set; }
     }
 }
