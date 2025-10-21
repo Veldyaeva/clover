@@ -5,6 +5,7 @@ using DevExpress.XtraTab;
 using Microsoft.IdentityModel.Tokens;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.helpers;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
@@ -27,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
@@ -1482,13 +1484,21 @@ namespace SewingProduction
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SockDefectList для nomZad {nomZad}");
             }
         }
-        private async Task LoadNastilViewDataAsync(string _mgKart)
+        private async Task LoadNastilViewDataAsync(string _mgKart, CancellationToken cancellationToken = default)
         {
             try
             {
                 _nastilBindingSource.Clear();
                 _nastilBindingSource.ResetBindings(false);
-                var nastilData = await _nastilService.GetNastilView(_mgKart);
+                //var nastilData = await _nastilService.GetNastilView(_mgKart);
+
+                await GridOverlayLoader.LoadListAsync(
+                    gridControlNastilList,
+                    _nastilBindingList,
+                    _nastilBindingSource,
+                    async _ => nastilData = await _nastilService.GetNastilView(_mgKart),
+                    cancellationToken);
+
                 if (nastilData != null)
                 {
                     await _logger.LogEventAsync($"Получены данные NastilView: mg_kart = {_mgKart}", "LoadNastilViewDataAsync");
@@ -1512,13 +1522,21 @@ namespace SewingProduction
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных NastilView для mg_kart {_mgKart}");
             }
         }
-        private async Task LoadNastilGroupViewDataAsync(string _mgKart)
+        private async Task LoadNastilGroupViewDataAsync(string _mgKart, CancellationToken cancellationToken = default)
         {
             try
             {
                 _nastilGroupViewBindingSource.Clear();
                 _nastilGroupViewBindingSource.ResetBindings(false);
-                var nastilGroupViewData = await _nastilService.GetNastilGroupView(_mgKart);
+                //var nastilGroupViewData = await _nastilService.GetNastilGroupView(_mgKart);
+
+                await GridOverlayLoader.LoadListAsync(
+                    gridControlNastilGroupView,
+                    _nastilGroupViewBindingList,
+                    _nastilGroupViewBindingSource,
+                    async _ => nastilGroupViewData = await _nastilService.GetNastilGroupView(_mgKart),
+                    cancellationToken);
+
                 if (nastilGroupViewData != null)
                 {
                     await _logger.LogEventAsync($"Получены данные NastilVyb_view: mg_kart = {_mgKart}", "LoadNastilGroupViewDataAsync");
