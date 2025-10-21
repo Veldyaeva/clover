@@ -328,6 +328,8 @@ namespace SewingProduction
 
         private async void FurnitZayavView_Load(object sender, EventArgs e)
         {
+            tbKodF.VisibleLogic = false;
+            tbViewType.VisibleLogic = false;
             tbVidFName.BorderStyle = BorderStyle.None;
             tbNZ.BorderStyle = BorderStyle.None;
             tbDataFO.BorderStyle = BorderStyle.None;

@@ -73,5 +73,8 @@ namespace SewingProduction.Features.CardByNom.Models
         public string PsaKombIzd { get; set; }
         public int PsaTkIdSet { get; set; }
         public string ArtTradeMark { get; set; }
+        public string RzuMgZakr { get; set; }
+        public string PszrRecomendNom { get; set; }
+        public string PszrRecomendZad { get; set; }
     }
 }

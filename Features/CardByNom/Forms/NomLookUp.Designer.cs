@@ -31,13 +31,6 @@
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             gridControlRasNomList = new SewingProduction.Core.Class.CustomGridControl();
             gridViewRasNomList = new DevExpress.XtraGrid.Views.Grid.GridView();
-            customTextBoxEx1 = new CustomTextBoxEx();
-            customLabel1 = new SewingProduction.Core.Class.CustomLabel();
-            Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             gridRasNomListColumnNomZad = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnNomPach = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnMinPach = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,6 +40,18 @@
             gridRasNomListColumnGrupPach = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnArticulPach = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnModPach = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridRasNomListColumnYearPach = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridRasNomListColumnProizvType = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridRasNomListColumnDostZeh = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridRasNomListColumnIDBrig = new DevExpress.XtraGrid.Columns.GridColumn();
+            customTextBoxEx1 = new CustomTextBoxEx();
+            customLabel1 = new SewingProduction.Core.Class.CustomLabel();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            gridRasNomListColumnDataR = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControlRasNomList).BeginInit();
@@ -69,7 +74,7 @@
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(2975, 213, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new System.Drawing.Size(800, 450);
+            layoutControl1.Size = new System.Drawing.Size(936, 645);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -79,9 +84,10 @@
             gridControlRasNomList.Location = new System.Drawing.Point(12, 38);
             gridControlRasNomList.MainView = gridViewRasNomList;
             gridControlRasNomList.Name = "gridControlRasNomList";
-            gridControlRasNomList.Size = new System.Drawing.Size(776, 400);
+            gridControlRasNomList.Size = new System.Drawing.Size(912, 595);
             gridControlRasNomList.TabIndex = 6;
             gridControlRasNomList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRasNomList });
+            gridControlRasNomList.DoubleClick += gridControlRasNomList_DoubleClick;
             // 
             // gridViewRasNomList
             // 
@@ -91,75 +97,11 @@
             gridViewRasNomList.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRasNomList.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRasNomList.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewRasNomList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridRasNomListColumnNomZad, gridRasNomListColumnNomPach, gridRasNomListColumnMinPach, gridRasNomListColumnMaxPach, gridRasNomListColumnMgZakr, gridRasNomListColumnKod7, gridRasNomListColumnGrupPach, gridRasNomListColumnArticulPach, gridRasNomListColumnModPach });
+            gridViewRasNomList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridRasNomListColumnNomZad, gridRasNomListColumnNomPach, gridRasNomListColumnDataR, gridRasNomListColumnMinPach, gridRasNomListColumnMaxPach, gridRasNomListColumnMgZakr, gridRasNomListColumnKod7, gridRasNomListColumnGrupPach, gridRasNomListColumnArticulPach, gridRasNomListColumnModPach, gridRasNomListColumnYearPach, gridRasNomListColumnProizvType, gridRasNomListColumnDostZeh, gridRasNomListColumnIDBrig });
             gridViewRasNomList.GridControl = gridControlRasNomList;
             gridViewRasNomList.Name = "gridViewRasNomList";
             gridViewRasNomList.OptionsView.EnableAppearanceEvenRow = true;
-            // 
-            // customTextBoxEx1
-            // 
-            customTextBoxEx1.Location = new System.Drawing.Point(143, 12);
-            customTextBoxEx1.Name = "customTextBoxEx1";
-            customTextBoxEx1.ObjectName = null;
-            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
-            customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
-            customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
-            customTextBoxEx1.Size = new System.Drawing.Size(140, 22);
-            customTextBoxEx1.StyleController = layoutControl1;
-            customTextBoxEx1.TabIndex = 5;
-            customTextBoxEx1.KeyDown += customTextBoxEx1_KeyDown;
-            // 
-            // customLabel1
-            // 
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customLabel1.Location = new System.Drawing.Point(12, 12);
-            customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(127, 22);
-            customLabel1.TabIndex = 4;
-            customLabel1.Text = "Параметр поиска";
-            // 
-            // Root
-            // 
-            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, emptySpaceItem1, layoutControlItem3 });
-            Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(800, 450);
-            Root.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = customLabel1;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(131, 26);
-            layoutControlItem1.TextVisible = false;
-            // 
-            // layoutControlItem2
-            // 
-            layoutControlItem2.Control = customTextBoxEx1;
-            layoutControlItem2.Location = new System.Drawing.Point(131, 0);
-            layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(144, 26);
-            layoutControlItem2.TextVisible = false;
-            // 
-            // emptySpaceItem1
-            // 
-            emptySpaceItem1.Location = new System.Drawing.Point(275, 0);
-            emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(505, 26);
-            // 
-            // layoutControlItem3
-            // 
-            layoutControlItem3.Control = gridControlRasNomList;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 26);
-            layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(780, 404);
-            layoutControlItem3.TextVisible = false;
+            gridViewRasNomList.DoubleClick += gridViewRasNomList_DoubleClick;
             // 
             // gridRasNomListColumnNomZad
             // 
@@ -173,65 +115,160 @@
             gridRasNomListColumnNomPach.Caption = "№ расчета";
             gridRasNomListColumnNomPach.Name = "gridRasNomListColumnNomPach";
             gridRasNomListColumnNomPach.Visible = true;
-            gridRasNomListColumnNomPach.VisibleIndex = 1;
+            gridRasNomListColumnNomPach.VisibleIndex = 2;
             // 
             // gridRasNomListColumnMinPach
             // 
             gridRasNomListColumnMinPach.Caption = "Пачка С";
             gridRasNomListColumnMinPach.Name = "gridRasNomListColumnMinPach";
             gridRasNomListColumnMinPach.Visible = true;
-            gridRasNomListColumnMinPach.VisibleIndex = 2;
+            gridRasNomListColumnMinPach.VisibleIndex = 4;
             // 
             // gridRasNomListColumnMaxPach
             // 
             gridRasNomListColumnMaxPach.Caption = "Пачка ПО";
             gridRasNomListColumnMaxPach.Name = "gridRasNomListColumnMaxPach";
             gridRasNomListColumnMaxPach.Visible = true;
-            gridRasNomListColumnMaxPach.VisibleIndex = 3;
+            gridRasNomListColumnMaxPach.VisibleIndex = 5;
             // 
             // gridRasNomListColumnMgZakr
             // 
             gridRasNomListColumnMgZakr.Caption = "Карта кроя";
             gridRasNomListColumnMgZakr.Name = "gridRasNomListColumnMgZakr";
             gridRasNomListColumnMgZakr.Visible = true;
-            gridRasNomListColumnMgZakr.VisibleIndex = 4;
+            gridRasNomListColumnMgZakr.VisibleIndex = 6;
             // 
             // gridRasNomListColumnKod7
             // 
             gridRasNomListColumnKod7.Caption = "Код изделия";
             gridRasNomListColumnKod7.Name = "gridRasNomListColumnKod7";
             gridRasNomListColumnKod7.Visible = true;
-            gridRasNomListColumnKod7.VisibleIndex = 5;
+            gridRasNomListColumnKod7.VisibleIndex = 7;
             // 
             // gridRasNomListColumnGrupPach
             // 
             gridRasNomListColumnGrupPach.Caption = "Группа";
             gridRasNomListColumnGrupPach.Name = "gridRasNomListColumnGrupPach";
             gridRasNomListColumnGrupPach.Visible = true;
-            gridRasNomListColumnGrupPach.VisibleIndex = 6;
+            gridRasNomListColumnGrupPach.VisibleIndex = 8;
             // 
             // gridRasNomListColumnArticulPach
             // 
             gridRasNomListColumnArticulPach.Caption = "Артикул";
             gridRasNomListColumnArticulPach.Name = "gridRasNomListColumnArticulPach";
             gridRasNomListColumnArticulPach.Visible = true;
-            gridRasNomListColumnArticulPach.VisibleIndex = 7;
+            gridRasNomListColumnArticulPach.VisibleIndex = 9;
             // 
             // gridRasNomListColumnModPach
             // 
             gridRasNomListColumnModPach.Caption = "Модель";
             gridRasNomListColumnModPach.Name = "gridRasNomListColumnModPach";
             gridRasNomListColumnModPach.Visible = true;
-            gridRasNomListColumnModPach.VisibleIndex = 8;
+            gridRasNomListColumnModPach.VisibleIndex = 10;
+            // 
+            // gridRasNomListColumnYearPach
+            // 
+            gridRasNomListColumnYearPach.Caption = "YearPach";
+            gridRasNomListColumnYearPach.Name = "gridRasNomListColumnYearPach";
+            // 
+            // gridRasNomListColumnProizvType
+            // 
+            gridRasNomListColumnProizvType.Caption = "ProizvType";
+            gridRasNomListColumnProizvType.Name = "gridRasNomListColumnProizvType";
+            // 
+            // gridRasNomListColumnDostZeh
+            // 
+            gridRasNomListColumnDostZeh.Caption = "Бригада";
+            gridRasNomListColumnDostZeh.Name = "gridRasNomListColumnDostZeh";
+            gridRasNomListColumnDostZeh.Visible = true;
+            gridRasNomListColumnDostZeh.VisibleIndex = 1;
+            // 
+            // gridRasNomListColumnIDBrig
+            // 
+            gridRasNomListColumnIDBrig.Caption = "ID_brig";
+            gridRasNomListColumnIDBrig.Name = "gridRasNomListColumnIDBrig";
+            // 
+            // customTextBoxEx1
+            // 
+            customTextBoxEx1.Location = new System.Drawing.Point(166, 12);
+            customTextBoxEx1.Name = "customTextBoxEx1";
+            customTextBoxEx1.ObjectName = null;
+            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx1.Size = new System.Drawing.Size(165, 22);
+            customTextBoxEx1.StyleController = layoutControl1;
+            customTextBoxEx1.TabIndex = 5;
+            customTextBoxEx1.KeyDown += customTextBoxEx1_KeyDown;
+            // 
+            // customLabel1
+            // 
+            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customLabel1.Location = new System.Drawing.Point(12, 12);
+            customLabel1.Name = "customLabel1";
+            customLabel1.Size = new System.Drawing.Size(150, 22);
+            customLabel1.TabIndex = 4;
+            customLabel1.Text = "Параметр поиска";
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, emptySpaceItem1, layoutControlItem3 });
+            Root.Name = "Root";
+            Root.Size = new System.Drawing.Size(936, 645);
+            Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = customLabel1;
+            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(154, 26);
+            layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = customTextBoxEx1;
+            layoutControlItem2.Location = new System.Drawing.Point(154, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new System.Drawing.Size(169, 26);
+            layoutControlItem2.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            emptySpaceItem1.Location = new System.Drawing.Point(323, 0);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new System.Drawing.Size(593, 26);
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = gridControlRasNomList;
+            layoutControlItem3.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(916, 599);
+            layoutControlItem3.TextVisible = false;
+            // 
+            // gridRasNomListColumnDataR
+            // 
+            gridRasNomListColumnDataR.Caption = "Дата расчета";
+            gridRasNomListColumnDataR.Name = "gridRasNomListColumnDataR";
+            gridRasNomListColumnDataR.Visible = true;
+            gridRasNomListColumnDataR.VisibleIndex = 3;
             // 
             // NomLookUp
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(800, 450);
+            ClientSize = new System.Drawing.Size(936, 645);
             Controls.Add(layoutControl1);
             Name = "NomLookUp";
             Text = "Form1";
+            Load += NomLookUp_Load;
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridControlRasNomList).EndInit();
@@ -266,5 +303,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnGrupPach;
         private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnArticulPach;
         private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnModPach;
+        private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnYearPach;
+        private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnProizvType;
+        private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnDostZeh;
+        private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnIDBrig;
+        private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnDataR;
     }
 }
