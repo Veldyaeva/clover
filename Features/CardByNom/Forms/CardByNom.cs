@@ -1574,7 +1574,7 @@ namespace SewingProduction
             WorkInfo.PageVisible = true;
             OtdelkaInfo.PageVisible = true;
             SockZadanyInfo.PageVisible = false;
-            TabPageMgKart.PageVisible = customRadioGroup2.SelectedIndex == 0 ? true : false;
+            TabPageMgKart.PageVisible = false;
             //gridControlPartNaklList.Visible = false;
             //gridControlNaklList.Visible = true;
             layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
@@ -1639,6 +1639,7 @@ namespace SewingProduction
                 }
                 if (xtraTabControl1.SelectedTabPageIndex == 5 && tbRzuMgZakr.Text.Length > 0)
                 {
+                    TabPageMgKart.PageVisible = customRadioGroup2.SelectedIndex == 0 ? true : false;
                     Task nastilTask = LoadNastilViewDataAsync(tbRzuMgZakr.Text);
                     Task nastilGroupTask = LoadNastilGroupViewDataAsync(tbRzuMgZakr.Text);
                     await Task.WhenAll(nastilTask, nastilGroupTask);
