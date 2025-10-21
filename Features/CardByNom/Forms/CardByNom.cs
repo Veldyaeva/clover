@@ -318,6 +318,7 @@ namespace SewingProduction
                 tbPsaKombOsn.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.PsaKombOsn), true, DataSourceUpdateMode.Never);
                 psaSezName.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.PsaSezName), true, DataSourceUpdateMode.Never);
                 pbEskiz.DataBindings.Add("ImageLocation", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.PictPath), true, DataSourceUpdateMode.Never);
+                textBoxRzId.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.rz_id), true, DataSourceUpdateMode.Never);
 
                 cbIsChip.DataBindings.Add("Checked", _chipInfoByPachKodBindingSource, nameof(ChipInfo.isChip), true, DataSourceUpdateMode.Never);
                 #endregion
@@ -333,6 +334,7 @@ namespace SewingProduction
                 mtbRzuDataRab.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.RzuDataRab), true, DataSourceUpdateMode.Never);
                 mtbRzuDataUp.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.RzuDataUp), true, DataSourceUpdateMode.Never);
                 mtbRzuDataCd.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.RzuDataCd), true, DataSourceUpdateMode.Never);
+                textBoxDataZa.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.data_za), true, DataSourceUpdateMode.Never);
                 #endregion
 
                 #region заполнение блока "отделка/доп обработка"
@@ -1637,9 +1639,9 @@ namespace SewingProduction
                 {
                     UpdateProizvCombIzd();
                 }
+                TabPageMgKart.PageVisible = customRadioGroup2.SelectedIndex == 0 ? true : false;
                 if (xtraTabControl1.SelectedTabPageIndex == 5 && tbRzuMgZakr.Text.Length > 0)
                 {
-                    TabPageMgKart.PageVisible = customRadioGroup2.SelectedIndex == 0 ? true : false;
                     Task nastilTask = LoadNastilViewDataAsync(tbRzuMgZakr.Text);
                     Task nastilGroupTask = LoadNastilGroupViewDataAsync(tbRzuMgZakr.Text);
                     await Task.WhenAll(nastilTask, nastilGroupTask);
