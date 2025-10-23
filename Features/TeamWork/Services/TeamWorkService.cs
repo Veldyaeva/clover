@@ -9,7 +9,7 @@ namespace SewingProduction.Features.TeamWork.Services
 {
     /// <summary>
     /// Сервис уровня приложения для TeamWork: orchestration/координация загрузки и обновления связанных данных.
-    /// Не выполняет SQL напрямую (делегирует ArtNormService), не содержит UI.
+    /// Не выполняет SQL напрямую (делегирует ArtNormRepository), не содержит UI.
     /// </summary>
     public class TeamWorkOrchestrator
     {
@@ -31,7 +31,7 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             try
             {
-                await _logger.LogEventAsync($"LoadWorkDivisionsWithFocus: Начало загрузки с сохранением AnnID: {currentAnnId}", "TeamWorkService");
+                await _logger.LogEventAsync($"LoadWorkDivisionsWithFocus: Начало загрузки с сохранением AnnID: {currentAnnId}", "TeamWorkOrchestrator");
 
                 // Загружаем данные
                 var workDivisions = await _artNormService.GetArtNormData();
@@ -69,13 +69,13 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             if (annId <= 0)
             {
-                await _logger.LogEventAsync($"RefreshRelatedData: Некорректный AnnID: {annId}", "TeamWorkService");
+                await _logger.LogEventAsync($"RefreshRelatedData: Некорректный AnnID: {annId}", "TeamWorkOrchestrator");
                 return new RelatedDataResult { Success = false, Error = "Некорректный AnnID" };
             }
 
             try
             {
-                await _logger.LogEventAsync($"RefreshRelatedData: Обновление связанных данных для AnnID: {annId}", "TeamWorkService");
+                await _logger.LogEventAsync($"RefreshRelatedData: Обновление связанных данных для AnnID: {annId}", "TeamWorkOrchestrator");
 
                 // Загружаем связанные данные асинхронно
                 var normRaskTask = _artNormService.GetRelatedNormRask(annId);

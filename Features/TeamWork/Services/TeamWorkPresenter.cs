@@ -85,6 +85,7 @@ namespace SewingProduction.Features.TeamWork.Services
             _savePipeline = _savePipeline ?? new SavePipeline(_dbHelper, _logger, () => { });
             _bufferService = _bufferService ?? new BufferImportService(
                 _artNormService,
+                _view,
                 _dbHelper,
                 _logger,
                 _rasz,

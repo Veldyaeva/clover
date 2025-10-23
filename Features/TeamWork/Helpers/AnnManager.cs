@@ -15,13 +15,13 @@ namespace SewingProduction.Helpers
 {
     public class AnnManager : IAnnManager
     {
-        private readonly ArtNormService _service;
+        private readonly ArtNormRepository _service;
         private readonly ILogger _logger;
         private readonly BindingSource _bindingSource;
         private readonly GridControl _grid;
         private readonly GridView _view;
 
-        public AnnManager(ArtNormService service, ILogger logger,
+        public AnnManager(ArtNormRepository service, ILogger logger,
                           BindingSource bindingSource, GridControl grid, GridView view)
         {
             _service = service;
@@ -81,7 +81,7 @@ namespace SewingProduction.Helpers
             }).ToList());
         }
 
-        public AnnManager(ArtNormService service, BindingSource source)
+        public AnnManager(ArtNormRepository service, BindingSource source)
         {
             _service = service;
             _bindingSource = source;
