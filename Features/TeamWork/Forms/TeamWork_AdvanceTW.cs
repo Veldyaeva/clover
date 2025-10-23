@@ -37,7 +37,7 @@ namespace SewingProduction.Features.TeamWork.Forms
     {
         #region Поля и зависимости
         private readonly DbService _dbService;
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly ITeamWorkDataService _dataService;
         private readonly ITeamWorkUIService _uiService;
         private readonly ITeamWorkValidationService _validationService;
@@ -333,7 +333,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
-            _artNormService = new ArtNormService(_dbHelper);
+            _artNormService = new ArtNormRepository(_dbHelper);
             // Инициализируем сервисы декомпозиции (пока без DI контейнера)
             // Адаптеры для интерфейсов до внедрения DI
             _dataService = new TeamWorkDataServiceAdapter(_artNormService, _dbService);
@@ -3746,9 +3746,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         // Local adapters to satisfy interfaces until real DI services are provided
         private sealed class TeamWorkDataServiceAdapter : ITeamWorkDataService
         {
-            private readonly ArtNormService _art;
+            private readonly ArtNormRepository _art;
             private readonly DbService _db;
-            public TeamWorkDataServiceAdapter(ArtNormService art, DbService db) { _art = art; _db = db; }
+            public TeamWorkDataServiceAdapter(ArtNormRepository art, DbService db) { _art = art; _db = db; }
             public async Task<ArtNormN> LoadAnnDataAsync(int annId)
             {
                 return await _art.GetArtNormDataById(annId);

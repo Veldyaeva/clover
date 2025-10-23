@@ -21,7 +21,7 @@ namespace SewingProduction.Features.TeamWork.Forms
     {
         private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly int _annId;
@@ -39,7 +39,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
-            _artNormService = new ArtNormService(_dbHelper);
+            _artNormService = new ArtNormRepository(_dbHelper);
 
             _annId = annId;
             ThemeManager.UpdateTheme(this);

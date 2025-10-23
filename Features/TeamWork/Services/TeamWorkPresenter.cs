@@ -19,7 +19,7 @@ namespace SewingProduction.Features.TeamWork.Services
     {
         private readonly ITeamWorkView _view;
         private readonly ILogger _logger;
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly DatabaseHelper _dbHelper;
         private readonly TWGridHelper _gridHelper;
 
@@ -49,7 +49,7 @@ namespace SewingProduction.Features.TeamWork.Services
         public TeamWorkPresenter(
             ITeamWorkView view,
             ILogger logger,
-            ArtNormService artNormService,
+            ArtNormRepository artNormService,
             DatabaseHelper dbHelper,
             TWGridHelper gridHelper,
             GridControl raszGrid,

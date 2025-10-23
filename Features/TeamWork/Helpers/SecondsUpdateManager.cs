@@ -11,11 +11,11 @@ namespace SewingProduction.Helpers
 {
     public class SecondsUpdateManager
     {
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly ILogger _logger;
         private CancellationTokenSource _updateCts;
 
-        public SecondsUpdateManager(ArtNormService artNormService, ILogger logger)
+        public SecondsUpdateManager(ArtNormRepository artNormService, ILogger logger)
         {
             _artNormService = artNormService;
             _logger = logger;
