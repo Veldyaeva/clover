@@ -41,7 +41,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private static MlService _mlService;
-        private static ArtNormRepository _anService;
+        private static ArtNormService _anService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
         //        private static BindingSourceHelper _bSHelper;
@@ -111,7 +111,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
-            _anService = new ArtNormRepository(_dbHelper);
+            _anService = new ArtNormService(_dbHelper);
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();
             _vyazService = new VyazService(_dbHelper);
