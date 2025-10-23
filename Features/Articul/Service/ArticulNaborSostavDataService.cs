@@ -19,25 +19,15 @@ namespace SewingProduction.Features.Articul.Service
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
         }
-
-        /// <summary>
-        /// Получить все записи из articulNaborSostav
-        /// </summary>
-        public async Task<List<SpArticulNaborSostav>> GetAllAsync()
-        {
-            string query = @"SELECT ans_id, kod, ta_id, tk_id, id_gost, ag_id, sostav, id_razm_nab, razm 
-                             FROM dbo.articulNaborSostav";
-            return await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { });
-        }
-
         /// <summary>
         /// Получить список записей по коду артикула
         /// </summary>
         public async Task<List<SpArticulNaborSostav>> GetByKodAsync(string kod)
         {
-            string query = @"SELECT  ans.ans_id, ans.kod,    ans.ta_id,    a.Txt_v,
-                                     ans.tk_id,    t.TK_NAME,    ans.id_gost,    ans.ag_id,
-                                      ggi.N_i,    ans.sostav,    ans.id_razm_nab,    ans.razm
+            string query = @"SELECT  ans.ans_id,   ans.kod,          ans.ta_id,    a.Txt_v,
+                                     ans.tk_id,    t.TK_NAME,        ans.id_gost,  ans.ag_id,
+                                     ggi.N_i,      ggi.Ag_name_sokr, ans.sostav,   ans.id_razm_nab,    
+                                     ans.razm,     vsa.razm AS razm_all
                             FROM dbo.articulNaborSostav AS ans
                             LEFT JOIN gtin.assort AS a ON a.Kod_v = ans.ta_id
                             LEFT JOIN t_v_n AS t ON t.TK_ID = ans.tk_id
@@ -45,35 +35,10 @@ namespace SewingProduction.Features.Articul.Service
                                 ON ggi.Ag_id = ans.ag_id 
                                AND ggi.Id_gost = ans.id_gost
                                AND ggi.ag_tk_id = ans.tk_id
-                            WHERE ans.kod = @kod";
-            return await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
-        }
-
-        /// <summary>
-        /// Получить запись по ID
-        /// </summary>
-        public async Task<SpArticulNaborSostav> GetByIdAsync(int ansId)
-        {
-            string query = @"SELECT ans_id, kod, ta_id, tk_id, id_gost, ag_id, sostav, id_razm_nab, razm 
-                             FROM dbo.articulNaborSostav 
-                             WHERE ans_id = @ansId";
-            return await _dbService.GetEntityAsync<SpArticulNaborSostav>(query, new { ansId });
-        }
-
-        /// <summary>
-        /// Сохранить (вставка/обновление)
-        /// </summary>
-        public async Task SaveAsync(SpArticulNaborSostav model)
-        {
-            await _dbService.SaveEntityAsync("dbo.articulNaborSostav", "Ans_id", model);
-        }
-
-        /// <summary>
-        /// Удалить запись
-        /// </summary>
-        public async Task DeleteAsync(SpArticulNaborSostav model)
-        {
-            await _dbService.DeleteEntityAsync("dbo.articulNaborSostav", "Ans_id", model);
+                            LEFT JOIN view_sp_articul vsa ON vsa.kod = ans.kod
+                            WHERE ans.kod LIKE @kod
+                            ORDER BY ans.tk_id;";
+            return await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod = $"{kod.Substring(0, 7)}%" });
         }
         public async Task<List<AssortModel>> GetAssortAsync()
         {
@@ -92,28 +57,40 @@ namespace SewingProduction.Features.Articul.Service
         }
         public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdAsync(int idGost, int idTK)
         {
-            string query = @"SELECT Id_gost, Ag_id,Ag_tnved,N_i,N_g FROM dbo.View_GostGrupIzd WHERE arh = 0 
+            string query = @"SELECT Id_gost, Ag_id,Ag_name_sokr,Ag_tnved,N_i,N_g FROM dbo.View_GostGrupIzd WHERE arh = 0 
                                 AND id_gost = @idGost AND ag_tk_id = @idTK";
             return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new { idGost , idTK });
         }
         public bool CheckOpis(string kod)
         {
             string query = @"SELECT sad.t_id FROM sp_articul_dateopis_gl_1c sad
-                            INNER JOIN  plan_sezon_all psa ON sad.nn = psa.nn
+                            INNER JOIN  plan_sezon_all psa ON left(sad.nn,10) = psa.nn
                             INNER JOIN view_sp_articul vsa ON vsa.kodd = psa.kodd 
-                            WHERE sad.t_id IS NOT NULL AND vsa.kod = @kod";
-            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+                            WHERE vsa.kodd = @kod";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", $"{kod.Substring(0, 7)}" } });
         }
-        public async Task UpdateArtKoplektAsync(string kod)
+        public bool CheckPovt(string kod)
         {
-            string query = @"UPDATE ak
-                            SET ak.ag_id_grupgost = ans.ag_id
-                            FROM art_komplekt ak
-                            INNER JOIN plan_sezon_all psa ON ak.parent_nn = psa.nn AND ak.tk_id = psa.tk_id
-                            INNER JOIN view_sp_articul vsa ON vsa.kodd = psa.kodd
-                            INNER JOIN articulNaborSostav ans ON ans.kod = vsa.kod AND ans.tk_id = psa.tk_id
-                            WHERE vsa.kod = @kod";
-            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object>{ { "@kod", kod }, } );
+            string query = @"
+                SELECT sad.t_id
+                FROM sp_articul_dateopis_gl_1c sad
+                INNER JOIN plan_sezon_all psa ON LEFT(sad.nn,10) = psa.nn
+                WHERE psa.kodd = 2024370
+                GROUP BY sad.t_id
+                HAVING COUNT(DISTINCT sad.t_art_poln) > 1";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", $"{kod.Substring(0, 7)}" } });
+        }
+        public async Task UpdateArticulNaborSostavAsync(SpArticulNaborSostav model, int oldAgId)
+        {
+            string query = @"EXEC UpdateArticulNaborSostavTransaction @kod, @TkId, @IdGost, @oldAgId, @newAgId, @sostav";
+            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> {
+                { "@Kod", $"{model.Kod.Substring(0, 7)}%" }, //kodd
+                { "@TkId", model.Tk_id },
+                { "@IdGost", model.Id_gost },
+                { "@oldAgId", oldAgId },
+                { "@newAgId", model.Ag_id },
+                { "@sostav", model.Sostav}
+            });
         }
     }
 }

@@ -593,13 +593,14 @@ namespace SewingProduction.Features.Articul
         private void customButton3_Click(object sender, EventArgs e)
         {
             var Obj = bsArt.Current as ArticulModel;
+            //нужно добавить проверку на признак НАБОРА, чтобы можно было открыть только набор.
             Debug.WriteLine(Obj.Gost);
             ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
             if (_ANSDataService.CheckOpis(Obj.Kod))
             {
-                MessageBox.Show("Нельзя редактировать набор!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Набор уже описан, изменения применятся на весь размерный ряд!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (this.MdiParent is SpMainForm mainForm)
+            if (this.MdiParent is SpMainForm mainForm)
             {
                 mainForm.OpenForm(new EditNaborSostav(User, Obj));
             }

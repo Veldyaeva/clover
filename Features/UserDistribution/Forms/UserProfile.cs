@@ -132,6 +132,11 @@ namespace SewingProduction.Features.UserDistribution.Forms
             MessageBox.Show("Логин успешно изменен!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
+
+        private void customButtonAllDistribution_Click(object sender, EventArgs e)
+        {
+            OpenForm(new AllDistribution(_user));
+        }
     }
     public class UserProfileDataService
     {

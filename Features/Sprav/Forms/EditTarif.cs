@@ -119,7 +119,15 @@ namespace SewingProduction.Features.Sprav
                 filters.Add("[firm] LIKE 'exp'");
             else if (customRadioButtonAceKle.Checked)
                 filters.Add("[firm] LIKE 'ace/cle'");
-
+            /*
+            * Доступ для бухгалтеров - десятки
+            * Для экономистов - еденицы
+            * Администратору доступно все
+            priznSign:
+            0 - нет доступа
+            1 - просмотр
+            2 - редактор
+            */
             if (customCheckBoxByh.Checked && !customCheckBoxEco.Checked && !customCheckBoxProg.Checked)
             {
                 filters.Add("([priznSign] >= 10 AND [priznSign] < 30)");
@@ -204,8 +212,14 @@ namespace SewingProduction.Features.Sprav
             }
             else
             {
-                customComboBoxPriznByh.SelectedIndex = 0;
-                customComboBoxPriznEco.SelectedIndex = 0;
+                if (customCheckBoxByh.Checked)
+                    customComboBoxPriznByh.SelectedIndex = 2;
+                else
+                    customComboBoxPriznByh.SelectedIndex = 0;
+                if (customCheckBoxEco.Checked)
+                    customComboBoxPriznEco.SelectedIndex = 2;
+                else
+                    customComboBoxPriznEco.SelectedIndex = 0;
             }
 
         }

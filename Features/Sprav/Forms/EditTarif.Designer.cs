@@ -743,7 +743,7 @@ namespace SewingProduction.Features.Sprav
             Value.Name = "Value";
             Value.OptionsColumn.ReadOnly = true;
             Value.Visible = true;
-            Value.VisibleIndex = 2;
+            Value.VisibleIndex = 1;
             // 
             // begin_dt_h
             // 
@@ -752,7 +752,7 @@ namespace SewingProduction.Features.Sprav
             begin_dt_h.Name = "begin_dt_h";
             begin_dt_h.OptionsColumn.ReadOnly = true;
             begin_dt_h.Visible = true;
-            begin_dt_h.VisibleIndex = 1;
+            begin_dt_h.VisibleIndex = 2;
             // 
             // event_dt
             // 
