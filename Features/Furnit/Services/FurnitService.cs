@@ -247,16 +247,16 @@ namespace SewingProduction.Features.Furnit.Services
         /// </summary>
         /// <param name="_pachKod">pach_kod</param>
         /// <returns></returns>
-        public async Task<FurnitZayavCheckByPachKod> GetFurnitZayavCheckByPachKod(string pachKod)
+        public async Task<FurnitZayavCheckByPachKod> GetFurnitZayavCheckByPachKod(string _pachKod, int _yearPach, int _proizvType)
         {
             try
             {
-                string query = @"exec furnitZayavCheck @pachKod, 1";
-                return await _dbService.GetEntityAsync<FurnitZayavCheckByPachKod>(query, new { pachKod });
+                string query = $"exec furnitZayavCheck @xPachKod = '{_pachKod}', @xProizvType = {_proizvType}";
+                return await _dbService.GetEntityAsync<FurnitZayavCheckByPachKod>(query, new {  });
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных FurnitZayavCheck для PachKod {pachKod}");
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных FurnitZayavCheck для PachKod {_pachKod}, ProizvType {_proizvType}");
                 return null;
             }
         }

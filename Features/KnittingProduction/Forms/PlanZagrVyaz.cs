@@ -1380,7 +1380,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             string _xColumn = view.FocusedColumn.ToString();
             if (hit.InRowCell && (hit.Column == gridColumnPZVOperListOlKmlNumber || hit.Column == gridColumnPZVOperListOlPvDateNaznKm) && hit.RowHandle >= 0)
             {
-
+                int tab = Convert.ToInt32(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvTab));
+                if (tab != 0)
+                {
+                    MessageBox.Show("Операция уже назначена работнику, нельзя иизменить В/М!");
+                    return;
+                }
                 SmenZadanyVyazMachine curr = _smenZadanyVyazMachineBindingSource.Current as SmenZadanyVyazMachine;
                 if (curr == null || curr.kmlID == null || curr.kmlID == 0)
                 {
