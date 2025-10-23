@@ -1209,6 +1209,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     _bufferImportService = new BufferImportService(
                         _artNormService,
+                        this,
                         _dbHelper,
                         _logger,
                         _normRaszList,
@@ -2401,6 +2402,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 else
                 {
                     _uiService?.ShowStatus("Данные успешно сохранены!");
+                }
+
+                // После первого успешного сохранения в режимах Clone/ArchAndCopy/NewWorkDivision
+                // переходим в обычный режим редактирования, чтобы дальнейшие сохранения
+                // выполняли insert/update по флагам IsNew/IsModified, а не массовую вставку
+                if (_mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision)
+                {
+                    _selectedAnnId = _newAnnId;
+                    _mode = (int)Mode.Edit;
                 }
 
                 // Для режима дублирования, убедимся, что ParentId сохраняется

@@ -17,8 +17,8 @@ using DataTable = System.Data.DataTable;
 namespace SewingProduction.Services
 {
     /// <summary>
-    /// Репозиторий/сервис доступа к данным арт.норм и связанным сущностям (norm_rasz, norm_rask, norm_kont и др.).
-    /// Содержит SQL/Dapper-запросы и минимальную обработку результатов.
+    /// Репозиторий работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
+    /// Использует Dapper для ускоренного доступа к данным.
     /// </summary>
     public class ArtNormRepository
     {
@@ -85,7 +85,7 @@ namespace SewingProduction.Services
 
             SqlMapper.SetTypeMap(typeof(ArtNormN), map);
         }
-        #region CRUD и утилиты
+        #region мои методы
         /// <summary>
         /// Удалять можно ТОЛЬКО при отмене создания новой строки. Никакие существующие строки нельзя удалять!
         /// </summary>
@@ -107,9 +107,7 @@ namespace SewingProduction.Services
                 throw;
             }
         }
-        /// <summary>
-        /// Возвращает агрегированные секунды из представления NormRaszSek_view.
-        /// </summary>
+        // ArtNormService.cs
         public async Task<NormRaszSekView> GetCalculatedSekFromViewAsync(int annId)
         {
             string query = "SELECT * FROM dbo.NormRaszSek_view WHERE annId = @annId";
@@ -118,9 +116,6 @@ namespace SewingProduction.Services
             return await _dbService.GetFirstOrDefaultAsync<NormRaszSekView>(query, parameters);
         }
 
-        /// <summary>
-        /// Возвращает список всех РТ из представления ArtNormNView.
-        /// </summary>
         public async Task<List<ArtNormN>> GetArtNormData()
         {
             string query = @" select 
@@ -137,9 +132,6 @@ namespace SewingProduction.Services
             }
         }
 
-        /// <summary>
-        /// Обновляет annId для артикула в view_sp_articul.
-        /// </summary>
         public void UpdateAnnIdinArticul(int annId, string kodd, string kodd_rt, string art)
         {
             string query = "UPDATE view_sp_articul SET annId = @annId WHERE ko = @kodd and articul = @art and kodd_rt = @kodd_rt";
@@ -151,9 +143,6 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="kodd"></param>
         /// <returns></returns>
-        /// <summary>
-        /// Сбрасывает annId для всех артикулов с указанным left(kod,7).
-        /// </summary>
         public async Task ResetAnnIdinArticul(int kod)
         {
             string query = "UPDATE sp_articul SET annId = NULL WHERE left(kod,7) = @kod";
@@ -335,9 +324,6 @@ namespace SewingProduction.Services
 
             return await _dbHelper.ExecuteScalarAsync<string>(sql, p);
         }
-        /// <summary>
-        /// Возвращает справочник операций с наименованиями (kod_proizv/podr_vyaz/oborud_shv).
-        /// </summary>
         internal Task<DataTable> GetNormOper()
         {
             string query = @"SELECT no.*, 
@@ -372,8 +358,7 @@ namespace SewingProduction.Services
 
         #endregion
 
-
-        #region Связанные данные по AnnID
+        #region работа со связанными данными
         // Получение связанных данных
         /// <summary>
         /// Получает данные из таблицы Norm_rasz (dataTable) 
