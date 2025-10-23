@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,7 +36,19 @@ namespace SewingProduction.Core.helpers
             {
                 if (targetGrid != null && targetGrid.Visible)
                 {
-                    overlayHandle = SplashScreenManager.ShowOverlayForm(targetGrid);
+                int diameter = (int)(Math.Min(targetGrid.ClientSize.Width, targetGrid.ClientSize.Height) * 0.15);
+
+                var options = new OverlayWindowOptions
+                    {
+                        // Размер спиннера/индикатора
+                        ImageSize = new Size(diameter, diameter),
+                        // BackColor = Color.FromArgb(…),
+                        // Opacity = 0.8,
+                         FadeIn = true, FadeOut = true,
+                    };
+
+                    overlayHandle = SplashScreenManager.ShowOverlayForm(targetGrid, options);
+                    
                 }
 
                 var data = await loadFunc(cancellationToken) ?? Enumerable.Empty<T>();

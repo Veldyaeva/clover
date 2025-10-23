@@ -7,13 +7,17 @@ using SewingProduction.Services;
 
 namespace SewingProduction.Features.TeamWork.Services
 {
-    public class TeamWorkService
+    /// <summary>
+    /// Сервис уровня приложения для TeamWork: orchestration/координация загрузки и обновления связанных данных.
+    /// Не выполняет SQL напрямую (делегирует ArtNormService), не содержит UI.
+    /// </summary>
+    public class TeamWorkOrchestrator
     {
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly DbService _dbService;
         private readonly ILogger _logger;
 
-        public TeamWorkService(ArtNormService artNormService, DbService dbService, ILogger logger)
+        public TeamWorkOrchestrator(ArtNormRepository artNormService, DbService dbService, ILogger logger)
         {
             _artNormService = artNormService;
             _dbService = dbService;
@@ -21,7 +25,7 @@ namespace SewingProduction.Features.TeamWork.Services
         }
 
         /// <summary>
-        /// Загружает все данные разделений труда с сохранением информации о фокусе. Для кнопки перезагрузить
+        /// Загружает все РТ и пытается восстановить фокус (для кнопки перезагрузки данных).
         /// </summary>
         public async Task<TeamWorkReloadResult> LoadWorkDivisionsWithFocusAsync(int? currentAnnId = null)
         {
@@ -59,7 +63,7 @@ namespace SewingProduction.Features.TeamWork.Services
         }
 
         /// <summary>
-        /// Обновляет только связанные данные для указанного AnnID. Для кнопки "Обновить связанные данные"
+        /// Обновляет связанные таблицы (NormRask/Kont/Rasz) для указанного AnnID.
         /// </summary>
         public async Task<RelatedDataResult> RefreshRelatedDataAsync(int annId)
         {

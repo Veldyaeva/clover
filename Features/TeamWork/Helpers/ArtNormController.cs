@@ -13,10 +13,10 @@ namespace SewingProduction.Helpers
 {
     public class ArtNormController : IArtNormController
     {
-        private readonly ArtNormService _service;
+        private readonly ArtNormRepository _service;
         private readonly ILogger _logger;
 
-        public ArtNormController(ArtNormService service, ILogger logger)
+        public ArtNormController(ArtNormRepository service, ILogger logger)
         {
             _service = service;
             _logger = logger;

@@ -24,7 +24,7 @@ namespace SewingProduction.Features.TeamWork.Operations
             public int InsertedCount { get; set; }
         }
 
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly DatabaseHelper _dbHelper;
         private readonly ILogger _logger;
 
@@ -35,7 +35,7 @@ namespace SewingProduction.Features.TeamWork.Operations
         private readonly Action<NormRasz, bool> _applyPostStructureUi;
 
         public BufferImportService(
-            ArtNormService artNormService,
+            ArtNormRepository artNormService,
             DatabaseHelper dbHelper,
             ILogger logger,
             BindingList<NormRasz> normRaszList,

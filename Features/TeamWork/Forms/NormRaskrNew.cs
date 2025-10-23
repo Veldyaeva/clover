@@ -17,7 +17,7 @@ namespace SewingProduction.form.TeamWork.Forms
     {
         private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly ILogger _logger = new FileLogger();
         private BindingSource _raskroyNormBindingSource;
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
@@ -45,7 +45,7 @@ namespace SewingProduction.form.TeamWork.Forms
             _annId = annId;
 
             _dbService = new DbService(new DatabaseHelper());
-            _artNormService = new ArtNormService(new DatabaseHelper());
+            _artNormService = new ArtNormRepository(new DatabaseHelper());
             ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();
