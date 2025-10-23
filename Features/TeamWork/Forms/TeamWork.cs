@@ -206,7 +206,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         await _logger.LogEventAsync($"ForceRefreshNormRaskArt: Refreshing data for annId={annId}", "ForceRefreshNormRaskArt");
 
-                        // Call the method from TeamWork.Articles.cs
+                        // вызываем метод из TeamWork.Articles.cs
                         var articlesForm = this as dynamic;
                         if (articlesForm != null)
                         {
