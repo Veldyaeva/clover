@@ -268,6 +268,7 @@ namespace SewingProduction.Features.Sprav
             valueSign.Caption = "Значение";
             valueSign.FieldName = "value";
             valueSign.Name = "valueSign";
+            valueSign.OptionsColumn.ReadOnly = true;
             valueSign.Visible = true;
             valueSign.VisibleIndex = 3;
             valueSign.Width = 96;
@@ -291,6 +292,7 @@ namespace SewingProduction.Features.Sprav
             whereUses.Caption = "Где используется";
             whereUses.FieldName = "whereUses";
             whereUses.Name = "whereUses";
+            whereUses.OptionsColumn.ReadOnly = true;
             whereUses.Visible = true;
             whereUses.VisibleIndex = 5;
             whereUses.Width = 148;
@@ -300,6 +302,7 @@ namespace SewingProduction.Features.Sprav
             pcId.Caption = "pcId";
             pcId.FieldName = "pc_id";
             pcId.Name = "pcId";
+            pcId.OptionsColumn.ReadOnly = true;
             pcId.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             // 
             // priznSign
@@ -307,6 +310,9 @@ namespace SewingProduction.Features.Sprav
             priznSign.Caption = "priznSign";
             priznSign.FieldName = "priznSign";
             priznSign.Name = "priznSign";
+            priznSign.OptionsColumn.ReadOnly = true;
+            priznSign.Visible = true;
+            priznSign.VisibleIndex = 7;
             priznSign.Width = 47;
             // 
             // constant_name
@@ -314,6 +320,7 @@ namespace SewingProduction.Features.Sprav
             constant_name.Caption = "Имя константы";
             constant_name.FieldName = "constant_name";
             constant_name.Name = "constant_name";
+            constant_name.OptionsColumn.ReadOnly = true;
             constant_name.Visible = true;
             constant_name.VisibleIndex = 1;
             constant_name.Width = 96;
@@ -323,6 +330,7 @@ namespace SewingProduction.Features.Sprav
             arhiv.Caption = "архив";
             arhiv.FieldName = "arhiv";
             arhiv.Name = "arhiv";
+            arhiv.OptionsColumn.ReadOnly = true;
             arhiv.Visible = true;
             arhiv.VisibleIndex = 6;
             arhiv.Width = 46;

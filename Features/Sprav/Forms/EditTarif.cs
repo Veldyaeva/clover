@@ -182,22 +182,27 @@ namespace SewingProduction.Features.Sprav
 
             customTextBoxZnach.Text =
                 !editMode ? string.Empty :
-                currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
-                currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
-                currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
-                currentModel.pcstId == 4 ? currentModel.value_character :
-                currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
-                string.Empty;
+                currentModel.value;
+                //currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
+                //currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
+                //currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
+                //currentModel.pcstId == 4 ? currentModel.value_character :
+                //currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
+                //string.Empty;
 
-            customTextBoxName.Enabled = !editMode;
+            if (customCheckBoxProg.Checked)
+                customTextBoxName.Enabled = true;
+            else
+                customTextBoxName.Enabled = false;
+
             customTextBoxRazm.Enabled = !editMode;
             customCheckBoxNotRazm.Enabled = !editMode;
-            customTextBoxOpis.Enabled = !editMode;
+            //customTextBoxOpis.Enabled = !editMode;
             customComboBoxType.Enabled = !editMode;
             customComboBoxOrg.Enabled = !editMode;
             customComboBoxPriznEco.Enabled = !editMode;
             customComboBoxPriznByh.Enabled = !editMode;
-            customTextBoxWhereUses.Enabled = !editMode;
+            //customTextBoxWhereUses.Enabled = !editMode;
 
             LoadPriznSignCombo(editMode);
         }
@@ -337,7 +342,7 @@ namespace SewingProduction.Features.Sprav
         {
             var requiredFields = new Dictionary<string, (Func<bool> condition, string message)>
             {
-                ["Имя константы"] = (() => string.IsNullOrWhiteSpace(customTextBoxName.Text), "Не заполнено поле Имя константы!"),
+                //["Имя константы"] = (() => string.IsNullOrWhiteSpace(customTextBoxName.Text), "Не заполнено поле Имя константы!"),
                 ["Размерность"] = (() => string.IsNullOrWhiteSpace(customTextBoxRazm.Text), "Не заполнена размерность! Если неизвестна, поставьте галочку 'Нет размерности'"),
                 ["Описание"] = (() => string.IsNullOrWhiteSpace(customTextBoxOpis.Text), "Не заполнено поле Описание!"),
                 ["Тип данных"] = (() => string.IsNullOrWhiteSpace(customComboBoxType.Text), "Не выбран тип данных!"),
