@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using SewingProduction.Features.TeamWork.Interfaces;
 using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Services

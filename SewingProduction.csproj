@@ -13,6 +13,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\KnittingProduction\Forms\Form2.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\Form2.Designer.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.cs" />
     <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
@@ -44,6 +47,8 @@
 
   <ItemGroup>
     <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
+    <EmbeddedResource Remove="Features\KnittingProduction\Forms\Form2.resx" />
+    <EmbeddedResource Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.resx" />
     <EmbeddedResource Remove="Features\TeamWork\Forms\HistoryLog.resx" />
     <EmbeddedResource Remove="Report\PostReportFio.resx" />
   </ItemGroup>
