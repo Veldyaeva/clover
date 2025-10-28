@@ -152,6 +152,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             master.OptionsDetail.EnableMasterViewMode = true;
             master.OptionsDetail.AllowOnlyOneMasterRowExpanded = false; // Разрешаем раскрытие нескольких строк
+                                                                        //для бОльшей производительности лучше запрещать
         }
         
         private void Master_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)

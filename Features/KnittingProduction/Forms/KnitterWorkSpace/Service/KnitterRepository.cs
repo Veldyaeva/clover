@@ -27,7 +27,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
             // Выбираем из основной таблицы, чтобы получить pzvAnnID
-            const string query = "SELECT * FROM dbo.vwPlanZagrVyazNorm_ByTab WHERE pzvTab = @tab";
+            const string query = "SELECT pzvID, pzvDivision, pzvMod, pzvArticul, pzvNomZad, pzvAnnID, pzvNom, pzvKol, pzvDateStart, pzvDateEnd, N, N1, nrText FROM dbo.vwPlanZagrVyazNorm_ByTab WHERE pzvTab = @tab";
             return await _dbService.GetListAsync<KnitterPZVModel>(query, new { tab });
         }
 
