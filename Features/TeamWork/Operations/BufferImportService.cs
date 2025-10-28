@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DevExpress.XtraGrid.Views.Grid;
 using Dapper;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.TeamWork.Interfaces;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -24,7 +26,8 @@ namespace SewingProduction.Features.TeamWork.Operations
             public int InsertedCount { get; set; }
         }
 
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
+        private readonly ITeamWorkView _form;
         private readonly DatabaseHelper _dbHelper;
         private readonly ILogger _logger;
 
@@ -35,7 +38,8 @@ namespace SewingProduction.Features.TeamWork.Operations
         private readonly Action<NormRasz, bool> _applyPostStructureUi;
 
         public BufferImportService(
-            ArtNormService artNormService,
+            ArtNormRepository artNormService,
+            ITeamWorkView form,
             DatabaseHelper dbHelper,
             ILogger logger,
             BindingList<NormRasz> normRaszList,
@@ -45,6 +49,7 @@ namespace SewingProduction.Features.TeamWork.Operations
             Action<NormRasz, bool> applyPostStructureUi)
         {
             _artNormService = artNormService;
+            _form = form;
             _dbHelper = dbHelper;
             _logger = logger;
             _normRaszList = normRaszList;
@@ -137,6 +142,20 @@ namespace SewingProduction.Features.TeamWork.Operations
                 await _logger.LogErrorAsync(ex, "Ошибка при вставке данных из буфера");
                 throw;
             }
+        }
+
+        public async Task LoadForBufferAsync(int annId,
+            BindingList<NormRasz> raszList,
+            BindingList<NormRask> raskList,
+            BindingList<NormKont> kontList)
+        {
+            var rasz = await _artNormService.GetRelatedNormRasz(annId);
+            var rask = await _artNormService.GetRelatedNormRask(annId);
+            var kont = await _artNormService.GetRelatedNormKont(annId);
+
+            raszList.BulkLoad(rasz);
+            raskList.BulkLoad(rask);
+            kontList.BulkLoad(kont);
         }
     }
 }

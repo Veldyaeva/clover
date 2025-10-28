@@ -17,10 +17,10 @@ using DataTable = System.Data.DataTable;
 namespace SewingProduction.Services
 {
     /// <summary>
-    /// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
+    /// Репозиторий работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
     /// Использует Dapper для ускоренного доступа к данным.
     /// </summary>
-    public class ArtNormService
+    public class ArtNormRepository
     {
         private readonly DatabaseHelper _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
@@ -32,7 +32,7 @@ namespace SewingProduction.Services
         /// Инициализирует новый экземпляр сервиса
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public ArtNormService(DatabaseHelper dbHelper)
+        public ArtNormRepository(DatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);

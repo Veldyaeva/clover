@@ -36,17 +36,19 @@ namespace SewingProduction.Core.helpers
             {
                 if (targetGrid != null && targetGrid.Visible)
                 {
-                    int diameter = (int)(Math.Min(targetGrid.ClientSize.Width, targetGrid.ClientSize.Height) * 0.15);
+                int diameter = (int)(Math.Min(targetGrid.ClientSize.Width, targetGrid.ClientSize.Height) * 0.15);
 
-                    var options = new OverlayWindowOptions
+                var options = new OverlayWindowOptions
                     {
                         // Размер спиннера/индикатора
                         ImageSize = new Size(diameter, diameter),
+                        // BackColor = Color.FromArgb(…),
+                        // Opacity = 0.8,
+                         FadeIn = true, FadeOut = true,
                     };
 
                     overlayHandle = SplashScreenManager.ShowOverlayForm(targetGrid, options);
-
-                    //overlayHandle = SplashScreenManager.ShowOverlayForm(targetGrid);
+                    
                 }
 
                 var data = await loadFunc(cancellationToken) ?? Enumerable.Empty<T>();
