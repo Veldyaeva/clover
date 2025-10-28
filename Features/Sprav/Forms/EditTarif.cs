@@ -36,6 +36,7 @@ namespace SewingProduction.Features.Sprav
             customCheckBoxEco.Checked = customCheckBoxEco.Visible;
             customCheckBoxByh.Checked = customCheckBoxByh.Visible;
             customCheckBoxProg.Checked = customCheckBoxProg.Visible;
+            customButtonEdit.Enabled = false;
         }
         private void customGridControlZp_Load(object sender, EventArgs e)
         {
@@ -128,20 +129,26 @@ namespace SewingProduction.Features.Sprav
             1 - просмотр
             2 - редактор
             */
-            if (customCheckBoxByh.Checked && !customCheckBoxEco.Checked && !customCheckBoxProg.Checked)
+            bool isByh = customCheckBoxByh.Checked;
+            bool isEco = customCheckBoxEco.Checked;
+            if (isByh && !isEco)
             {
-                filters.Add("([priznSign] >= 10 AND [priznSign] < 30)");
+                // Только бухгалтер
+                filters.Add("(([priznSign] / 10) % 10 > 0)");
             }
-            else if (customCheckBoxEco.Checked && !customCheckBoxByh.Checked && !customCheckBoxProg.Checked)
+            else if (isEco && !isByh)
             {
+                // Только экономист
                 filters.Add("([priznSign] % 10 > 0)");
             }
-            else if (customCheckBoxEco.Checked && customCheckBoxByh.Checked)
+            else if (isByh && isEco)
             {
-                filters.Add("[priznSign] > 0");
+                // И бухгалтер, и экономист
+                filters.Add("([priznSign] > 0)");
             }
             else
             {
+                // Ни один чекбокс не выбран → ничего не показываем
                 filters.Add("([priznSign] IS NULL OR [priznSign] = 0)");
             }
             if (customCheckBoxProg.Checked)
@@ -166,6 +173,7 @@ namespace SewingProduction.Features.Sprav
         {
             customGroupBoxAdd.Visible = true;
             customGroupBoxAdd.Text = editMode ? "Редактирование" : "Добавление";
+
             var typeList = await _tarifService.LoadTypeAsync();
             customComboBoxType.DisplayMember = "field_name";
             customComboBoxType.ValueMember = "pcst_id";
@@ -183,18 +191,25 @@ namespace SewingProduction.Features.Sprav
             customTextBoxZnach.Text =
                 !editMode ? string.Empty :
                 currentModel.value;
-                //currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
-                //currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
-                //currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
-                //currentModel.pcstId == 4 ? currentModel.value_character :
-                //currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
-                //string.Empty;
+            //currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
+            //currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
+            //currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
+            //currentModel.pcstId == 4 ? currentModel.value_character :
+            //currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
+            //string.Empty;
+            customCheckBoxArhiv.Checked =
+                !editMode ? false :
+                currentModel.arhiv ;
 
             if (customCheckBoxProg.Checked)
+            {
+                editMode = false;
                 customTextBoxName.Enabled = true;
+            }
             else
                 customTextBoxName.Enabled = false;
 
+            customCheckBoxNotRazm.Checked = false;
             customTextBoxRazm.Enabled = !editMode;
             customCheckBoxNotRazm.Enabled = !editMode;
             //customTextBoxOpis.Enabled = !editMode;
@@ -294,6 +309,8 @@ namespace SewingProduction.Features.Sprav
             model.priznSign = byh * 10 + eco;
 
             model.whereUses = customTextBoxWhereUses.Text.Trim();
+            model.arhiv = customCheckBoxArhiv.Checked;
+
             // Установка значения в нужное поле
             selectZnach(model);
             saveModel(model, isEditMode);
@@ -311,7 +328,26 @@ namespace SewingProduction.Features.Sprav
                         MessageBox.Show("Тип 'float' не поддерживается");
                         return;
                     case 4: model.value_character = znach; break;
-                    case 5: model.value_datetime = DateTime.Parse(znach); break;
+                    case 5: 
+                        {
+                            var formats = new[] { "dd.MM.yyyy", "dd/MM/yyyy" };
+                            model.value_datetime = DateTime.Parse(znach);
+                            if (DateTime.TryParseExact(
+                            znach,
+                            formats,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out DateTime dt))
+                            {
+                                model.value_datetime = dt.Date;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неверный формат даты. Введите: dd.MM.yyyy");
+                                return;
+                            }
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -324,7 +360,8 @@ namespace SewingProduction.Features.Sprav
         {
             try
             {
-                _tarifService.SaveTarifAsync(model, isEditMode, _user.UserId);
+                // _tarifService.SaveTarif(model, isEditMode, _user.UserId);
+                _tarifService.SaveTarifJson(model, isEditMode, _user.UserId);
                 MessageBox.Show("Сохранено успешно.");
                 customGroupBoxAdd.Visible = false;
 
