@@ -104,7 +104,7 @@ namespace SewingProduction.Features.SockProduction.Forms
                 //gridColumnRzvPachListByNomN_pach.FieldName = "n_pach";
                 //gridColumnRzvPachListByNomRazm.FieldName = "razm";
                 //gridColumnRzvPachListByNomKol.FieldName = "kol";
-                //gridColumnRzvPachListByNomGrad.FieldName = "grad";
+                //gridColumnRzvPachListByNomGrad.FieldName = "gradacia";
                 //gridColumnRzvPachListByNomSyncSelection.FieldName = "SyncSelection";
                 //#endregion
 

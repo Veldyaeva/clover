@@ -206,6 +206,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnPZVOperListOlPzvID = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlPzvIDParent = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnPZVOperListOlPzvDivision = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlPzvIDMlOp = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlNom = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlNomN = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -215,8 +216,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvIdBrig = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlPzvKmlID = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlPzvArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnPZVOperListOlPzvMod = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlNPach = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnPZVOperListolNomOper = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnPZVOperListOlNomOper = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlNo = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlNpo = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlOperName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -225,7 +227,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlRazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlSekEd = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlKol = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnPZVOperListOlSekAll = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnPZVOperListOlNChasi = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlKmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlPvDateNaznKm = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPZVOperListOlPzvTab = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -244,7 +246,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnRzvPachListByNomN_pach = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnRzvPachListByNomRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnRzvPachListByNomKol = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnRzvPachListByNomGrad = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnRzvPachListByNomGradacia = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnRzvPachListByNomSyncSelection = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridControlZadanyListByMachine = new CustomGridControl();
@@ -296,6 +298,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customGridControl7 = new CustomGridControl();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             layoutControlGroup13 = new DevExpress.XtraLayout.LayoutControlGroup();
+            repositoryItemCheckEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customTabControl2).BeginInit();
@@ -405,6 +408,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)customGridControl7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
@@ -1873,7 +1877,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewPZVOperList.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPZVOperList.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewPZVOperList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnPZVOperListOlPzvID, gridColumnPZVOperListOlPzvIDParent, gridColumnPZVOperListOlPzvIDMlOp, gridColumnPZVOperListOlNom, gridColumnPZVOperListOlNomN, gridColumnPZVOperListOlNomZad, gridColumnPZVOperListOlPzvAnnID, gridColumnPZVOperListOlPzvNrID, gridColumnPZVOperListOlPzvIdBrig, gridColumnPZVOperListOlPzvKmlID, gridColumnPZVOperListOlPzvArticul, gridColumnPZVOperListOlNPach, gridColumnPZVOperListolNomOper, gridColumnPZVOperListOlNo, gridColumnPZVOperListOlNpo, gridColumnPZVOperListOlOperName, gridColumnPZVOperListOlKodOb, gridColumnPZVOperListOlOborudClass, gridColumnPZVOperListOlRazryd, gridColumnPZVOperListOlSekEd, gridColumnPZVOperListOlKol, gridColumnPZVOperListOlSekAll, gridColumnPZVOperListOlKmlNumber, gridColumnPZVOperListOlPvDateNaznKm, gridColumnPZVOperListOlPzvTab, gridColumnPZVOperListOlPzvDateNaznTab, gridColumnPZVOperListOlPzvDateStart, gridColumnPZVOperListOlPzvDateEnd, gridColumnPZVOperListOlPzvDateML, gridColumnPZVOperListOlPzvDateMast, gridColumnPZVOperListSyncSelection });
+            gridViewPZVOperList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnPZVOperListOlPzvID, gridColumnPZVOperListOlPzvIDParent, gridColumnPZVOperListOlPzvDivision, gridColumnPZVOperListOlPzvIDMlOp, gridColumnPZVOperListOlNom, gridColumnPZVOperListOlNomN, gridColumnPZVOperListOlNomZad, gridColumnPZVOperListOlPzvAnnID, gridColumnPZVOperListOlPzvNrID, gridColumnPZVOperListOlPzvIdBrig, gridColumnPZVOperListOlPzvKmlID, gridColumnPZVOperListOlPzvArticul, gridColumnPZVOperListOlPzvMod, gridColumnPZVOperListOlNPach, gridColumnPZVOperListOlNomOper, gridColumnPZVOperListOlNo, gridColumnPZVOperListOlNpo, gridColumnPZVOperListOlOperName, gridColumnPZVOperListOlKodOb, gridColumnPZVOperListOlOborudClass, gridColumnPZVOperListOlRazryd, gridColumnPZVOperListOlSekEd, gridColumnPZVOperListOlKol, gridColumnPZVOperListOlNChasi, gridColumnPZVOperListOlKmlNumber, gridColumnPZVOperListOlPvDateNaznKm, gridColumnPZVOperListOlPzvTab, gridColumnPZVOperListOlPzvDateNaznTab, gridColumnPZVOperListOlPzvDateStart, gridColumnPZVOperListOlPzvDateEnd, gridColumnPZVOperListOlPzvDateML, gridColumnPZVOperListOlPzvDateMast, gridColumnPZVOperListSyncSelection });
             gridViewPZVOperList.GridControl = gridControlPZVOperList;
             gridViewPZVOperList.GroupCount = 2;
             gridViewPZVOperList.Name = "gridViewPZVOperList";
@@ -1883,6 +1887,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumnPZVOperListOlPzvArticul, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumnPZVOperListOlNom, DevExpress.Data.ColumnSortOrder.Ascending) });
             gridViewPZVOperList.RowCellClick += gridViewPZVOperList_RowCellClick;
             gridViewPZVOperList.FocusedRowChanged += gridViewPZVOperList_FocusedRowChanged;
+            gridViewPZVOperList.CellValueChanged += gridViewPZVOperList_CellValueChanged;
             gridViewPZVOperList.DoubleClick += gridViewPZVOperList_DoubleClick;
             // 
             // gridColumnPZVOperListOlPzvID
@@ -1894,6 +1899,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             gridColumnPZVOperListOlPzvIDParent.Caption = "olPzvIDParent";
             gridColumnPZVOperListOlPzvIDParent.Name = "gridColumnPZVOperListOlPzvIDParent";
+            // 
+            // gridColumnPZVOperListOlPzvDivision
+            // 
+            gridColumnPZVOperListOlPzvDivision.Caption = "olPzvDivision";
+            gridColumnPZVOperListOlPzvDivision.Name = "gridColumnPZVOperListOlPzvDivision";
             // 
             // gridColumnPZVOperListOlPzvIDMlOp
             // 
@@ -1951,6 +1961,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvArticul.Visible = true;
             gridColumnPZVOperListOlPzvArticul.VisibleIndex = 1;
             // 
+            // gridColumnPZVOperListOlPzvMod
+            // 
+            gridColumnPZVOperListOlPzvMod.Caption = "olPzvMod";
+            gridColumnPZVOperListOlPzvMod.Name = "gridColumnPZVOperListOlPzvMod";
+            // 
             // gridColumnPZVOperListOlNPach
             // 
             gridColumnPZVOperListOlNPach.Caption = "№ пачки";
@@ -1964,13 +1979,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlNPach.VisibleIndex = 0;
             gridColumnPZVOperListOlNPach.Width = 65;
             // 
-            // gridColumnPZVOperListolNomOper
+            // gridColumnPZVOperListOlNomOper
             // 
-            gridColumnPZVOperListolNomOper.Caption = "№ О";
-            gridColumnPZVOperListolNomOper.Name = "gridColumnPZVOperListolNomOper";
-            gridColumnPZVOperListolNomOper.Visible = true;
-            gridColumnPZVOperListolNomOper.VisibleIndex = 1;
-            gridColumnPZVOperListolNomOper.Width = 44;
+            gridColumnPZVOperListOlNomOper.Caption = "№ О";
+            gridColumnPZVOperListOlNomOper.Name = "gridColumnPZVOperListOlNomOper";
+            gridColumnPZVOperListOlNomOper.Visible = true;
+            gridColumnPZVOperListOlNomOper.VisibleIndex = 2;
+            gridColumnPZVOperListOlNomOper.Width = 44;
             // 
             // gridColumnPZVOperListOlNo
             // 
@@ -2004,7 +2019,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlOperName.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlOperName.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlOperName.Visible = true;
-            gridColumnPZVOperListOlOperName.VisibleIndex = 2;
+            gridColumnPZVOperListOlOperName.VisibleIndex = 3;
             gridColumnPZVOperListOlOperName.Width = 161;
             // 
             // gridColumnPZVOperListOlKodOb
@@ -2022,7 +2037,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlOborudClass.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlOborudClass.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlOborudClass.Visible = true;
-            gridColumnPZVOperListOlOborudClass.VisibleIndex = 3;
+            gridColumnPZVOperListOlOborudClass.VisibleIndex = 4;
             gridColumnPZVOperListOlOborudClass.Width = 60;
             // 
             // gridColumnPZVOperListOlRazryd
@@ -2035,7 +2050,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlRazryd.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlRazryd.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlRazryd.Visible = true;
-            gridColumnPZVOperListOlRazryd.VisibleIndex = 4;
+            gridColumnPZVOperListOlRazryd.VisibleIndex = 5;
             gridColumnPZVOperListOlRazryd.Width = 35;
             // 
             // gridColumnPZVOperListOlSekEd
@@ -2048,7 +2063,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlSekEd.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlSekEd.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlSekEd.Visible = true;
-            gridColumnPZVOperListOlSekEd.VisibleIndex = 5;
+            gridColumnPZVOperListOlSekEd.VisibleIndex = 6;
             gridColumnPZVOperListOlSekEd.Width = 50;
             // 
             // gridColumnPZVOperListOlKol
@@ -2060,21 +2075,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlKol.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlKol.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlKol.Visible = true;
-            gridColumnPZVOperListOlKol.VisibleIndex = 6;
+            gridColumnPZVOperListOlKol.VisibleIndex = 7;
             gridColumnPZVOperListOlKol.Width = 50;
             // 
-            // gridColumnPZVOperListOlSekAll
+            // gridColumnPZVOperListOlNChasi
             // 
-            gridColumnPZVOperListOlSekAll.Caption = "Н. вр. итого, час";
-            gridColumnPZVOperListOlSekAll.Name = "gridColumnPZVOperListOlSekAll";
-            gridColumnPZVOperListOlSekAll.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
-            gridColumnPZVOperListOlSekAll.OptionsColumn.FixedWidth = true;
-            gridColumnPZVOperListOlSekAll.OptionsColumn.ReadOnly = true;
-            gridColumnPZVOperListOlSekAll.OptionsFilter.AllowAutoFilter = false;
-            gridColumnPZVOperListOlSekAll.OptionsFilter.AllowFilter = false;
-            gridColumnPZVOperListOlSekAll.Visible = true;
-            gridColumnPZVOperListOlSekAll.VisibleIndex = 7;
-            gridColumnPZVOperListOlSekAll.Width = 50;
+            gridColumnPZVOperListOlNChasi.Caption = "Н. вр. итого, час";
+            gridColumnPZVOperListOlNChasi.Name = "gridColumnPZVOperListOlNChasi";
+            gridColumnPZVOperListOlNChasi.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            gridColumnPZVOperListOlNChasi.OptionsColumn.FixedWidth = true;
+            gridColumnPZVOperListOlNChasi.OptionsColumn.ReadOnly = true;
+            gridColumnPZVOperListOlNChasi.OptionsFilter.AllowAutoFilter = false;
+            gridColumnPZVOperListOlNChasi.OptionsFilter.AllowFilter = false;
+            gridColumnPZVOperListOlNChasi.Visible = true;
+            gridColumnPZVOperListOlNChasi.VisibleIndex = 8;
+            gridColumnPZVOperListOlNChasi.Width = 50;
             // 
             // gridColumnPZVOperListOlKmlNumber
             // 
@@ -2085,7 +2100,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlKmlNumber.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlKmlNumber.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlKmlNumber.Visible = true;
-            gridColumnPZVOperListOlKmlNumber.VisibleIndex = 8;
+            gridColumnPZVOperListOlKmlNumber.VisibleIndex = 9;
             gridColumnPZVOperListOlKmlNumber.Width = 40;
             // 
             // gridColumnPZVOperListOlPvDateNaznKm
@@ -2097,7 +2112,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPvDateNaznKm.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlPvDateNaznKm.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlPvDateNaznKm.Visible = true;
-            gridColumnPZVOperListOlPvDateNaznKm.VisibleIndex = 9;
+            gridColumnPZVOperListOlPvDateNaznKm.VisibleIndex = 10;
             gridColumnPZVOperListOlPvDateNaznKm.Width = 69;
             // 
             // gridColumnPZVOperListOlPzvTab
@@ -2109,7 +2124,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvTab.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlPzvTab.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlPzvTab.Visible = true;
-            gridColumnPZVOperListOlPzvTab.VisibleIndex = 10;
+            gridColumnPZVOperListOlPzvTab.VisibleIndex = 11;
             gridColumnPZVOperListOlPzvTab.Width = 40;
             // 
             // gridColumnPZVOperListOlPzvDateNaznTab
@@ -2121,7 +2136,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvDateNaznTab.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlPzvDateNaznTab.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlPzvDateNaznTab.Visible = true;
-            gridColumnPZVOperListOlPzvDateNaznTab.VisibleIndex = 11;
+            gridColumnPZVOperListOlPzvDateNaznTab.VisibleIndex = 12;
             gridColumnPZVOperListOlPzvDateNaznTab.Width = 69;
             // 
             // gridColumnPZVOperListOlPzvDateStart
@@ -2133,7 +2148,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvDateStart.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlPzvDateStart.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlPzvDateStart.Visible = true;
-            gridColumnPZVOperListOlPzvDateStart.VisibleIndex = 12;
+            gridColumnPZVOperListOlPzvDateStart.VisibleIndex = 13;
             gridColumnPZVOperListOlPzvDateStart.Width = 69;
             // 
             // gridColumnPZVOperListOlPzvDateEnd
@@ -2145,7 +2160,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvDateEnd.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlPzvDateEnd.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlPzvDateEnd.Visible = true;
-            gridColumnPZVOperListOlPzvDateEnd.VisibleIndex = 13;
+            gridColumnPZVOperListOlPzvDateEnd.VisibleIndex = 14;
             gridColumnPZVOperListOlPzvDateEnd.Width = 69;
             // 
             // gridColumnPZVOperListOlPzvDateML
@@ -2158,7 +2173,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvDateML.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlPzvDateML.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlPzvDateML.Visible = true;
-            gridColumnPZVOperListOlPzvDateML.VisibleIndex = 14;
+            gridColumnPZVOperListOlPzvDateML.VisibleIndex = 15;
             gridColumnPZVOperListOlPzvDateML.Width = 69;
             // 
             // gridColumnPZVOperListOlPzvDateMast
@@ -2170,19 +2185,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnPZVOperListOlPzvDateMast.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListOlPzvDateMast.OptionsFilter.AllowFilter = false;
             gridColumnPZVOperListOlPzvDateMast.Visible = true;
-            gridColumnPZVOperListOlPzvDateMast.VisibleIndex = 15;
+            gridColumnPZVOperListOlPzvDateMast.VisibleIndex = 16;
             gridColumnPZVOperListOlPzvDateMast.Width = 69;
             // 
             // gridColumnPZVOperListSyncSelection
             // 
             gridColumnPZVOperListSyncSelection.Caption = "V";
             gridColumnPZVOperListSyncSelection.ColumnEdit = repositoryItemCheckEdit4;
+            gridColumnPZVOperListSyncSelection.FieldName = "gridColumnPZVOperListSyncSelection";
             gridColumnPZVOperListSyncSelection.Name = "gridColumnPZVOperListSyncSelection";
             gridColumnPZVOperListSyncSelection.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumnPZVOperListSyncSelection.OptionsFilter.AllowAutoFilter = false;
             gridColumnPZVOperListSyncSelection.OptionsFilter.AllowFilter = false;
+            gridColumnPZVOperListSyncSelection.UnboundDataType = typeof(bool);
             gridColumnPZVOperListSyncSelection.Visible = true;
-            gridColumnPZVOperListSyncSelection.VisibleIndex = 16;
+            gridColumnPZVOperListSyncSelection.VisibleIndex = 1;
             gridColumnPZVOperListSyncSelection.Width = 20;
             // 
             // repositoryItemCheckEdit4
@@ -2199,7 +2216,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridControlRzvPachListByNom.Location = new System.Drawing.Point(809, 38);
             gridControlRzvPachListByNom.MainView = gridViewRzvPachListByNom;
             gridControlRzvPachListByNom.Name = "gridControlRzvPachListByNom";
-            gridControlRzvPachListByNom.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit2 });
+            gridControlRzvPachListByNom.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit2, repositoryItemCheckEdit5 });
             gridControlRzvPachListByNom.Size = new System.Drawing.Size(287, 167);
             gridControlRzvPachListByNom.TabIndex = 3;
             gridControlRzvPachListByNom.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRzvPachListByNom });
@@ -2212,7 +2229,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewRzvPachListByNom.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRzvPachListByNom.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRzvPachListByNom.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewRzvPachListByNom.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnRzvPachListByNomNomZad, gridColumnRzvPachListByNomNom, gridColumnRzvPachListByNomNom_n, gridColumnRzvPachListByNomN_pach, gridColumnRzvPachListByNomRazm, gridColumnRzvPachListByNomKol, gridColumnRzvPachListByNomGrad, gridColumnRzvPachListByNomSyncSelection });
+            gridViewRzvPachListByNom.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnRzvPachListByNomNomZad, gridColumnRzvPachListByNomNom, gridColumnRzvPachListByNomNom_n, gridColumnRzvPachListByNomN_pach, gridColumnRzvPachListByNomRazm, gridColumnRzvPachListByNomKol, gridColumnRzvPachListByNomGradacia, gridColumnRzvPachListByNomSyncSelection });
             gridViewRzvPachListByNom.GridControl = gridControlRzvPachListByNom;
             gridViewRzvPachListByNom.Name = "gridViewRzvPachListByNom";
             gridViewRzvPachListByNom.OptionsView.ColumnAutoWidth = false;
@@ -2263,14 +2280,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnRzvPachListByNomKol.VisibleIndex = 2;
             gridColumnRzvPachListByNomKol.Width = 55;
             // 
-            // gridColumnRzvPachListByNomGrad
+            // gridColumnRzvPachListByNomGradacia
             // 
-            gridColumnRzvPachListByNomGrad.Caption = "ГР";
-            gridColumnRzvPachListByNomGrad.Name = "gridColumnRzvPachListByNomGrad";
-            gridColumnRzvPachListByNomGrad.OptionsFilter.AllowFilter = false;
-            gridColumnRzvPachListByNomGrad.Visible = true;
-            gridColumnRzvPachListByNomGrad.VisibleIndex = 3;
-            gridColumnRzvPachListByNomGrad.Width = 34;
+            gridColumnRzvPachListByNomGradacia.Caption = "ГР";
+            gridColumnRzvPachListByNomGradacia.ColumnEdit = repositoryItemCheckEdit5;
+            gridColumnRzvPachListByNomGradacia.Name = "gridColumnRzvPachListByNomGradacia";
+            gridColumnRzvPachListByNomGradacia.OptionsFilter.AllowFilter = false;
+            gridColumnRzvPachListByNomGradacia.Visible = true;
+            gridColumnRzvPachListByNomGradacia.VisibleIndex = 3;
+            gridColumnRzvPachListByNomGradacia.Width = 34;
             // 
             // gridColumnRzvPachListByNomSyncSelection
             // 
@@ -2546,6 +2564,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
             layoutControlGroup1.Size = new System.Drawing.Size(1093, 202);
             layoutControlGroup1.Text = "НЕЗАВЕРШЕННОЕ ПРОИЗВОДСТВО";
+            layoutControlGroup1.CustomButtonChecked += layoutControlGroup1_CustomButtonChecked;
             // 
             // layoutControlItem3
             // 
@@ -2719,6 +2738,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup13.Name = "layoutControlGroup13";
             layoutControlGroup13.Size = new System.Drawing.Size(678, 127);
             // 
+            // repositoryItemCheckEdit5
+            // 
+            repositoryItemCheckEdit5.AutoHeight = false;
+            repositoryItemCheckEdit5.Name = "repositoryItemCheckEdit5";
+            repositoryItemCheckEdit5.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit5.ValueChecked = 1;
+            repositoryItemCheckEdit5.ValueUnchecked = 0;
+            // 
             // PlanZagrVyaz
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2837,6 +2864,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)customGridControl7).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
             ResumeLayout(false);
         }
 
@@ -2929,7 +2957,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzvPachListByNomN_pach;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzvPachListByNomRazm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzvPachListByNomKol;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzvPachListByNomGrad;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzvPachListByNomGradacia;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRzvPachListByNomSyncSelection;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit3;
@@ -2957,7 +2985,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlRazryd;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlSekEd;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlKol;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlSekAll;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlNChasi;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlKmlNumber;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlPvDateNaznKm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlPzvTab;
@@ -3032,7 +3060,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem35;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem41;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListolNomOper;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlNomOper;
         private DevExpress.XtraGrid.Columns.GridColumn gridSmenZadanyVyazEmpColumnKmaID;
         private DevExpress.XtraGrid.Columns.GridColumn gridSmenZadanyVyazEmpColumnKmaNumber;
         private DevExpress.XtraGrid.Columns.GridColumn gridSmenZadanyVyazEmpColumnEmpFioSokr;
@@ -3083,5 +3111,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridMlOpColumnTab;
         private DevExpress.XtraGrid.Columns.GridColumn gridMlOpColumnFio;
         private DevExpress.XtraGrid.Columns.GridColumn gridMlOpColumnDataR;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlPzvDivision;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlPzvMod;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
+        //        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlSekAll;
     }
 }
