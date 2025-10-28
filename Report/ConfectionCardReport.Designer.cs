@@ -39,6 +39,7 @@
             DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter5 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter6 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter7 = new DevExpress.DataAccess.Sql.QueryParameter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfectionCardReport));
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings2 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
@@ -133,7 +134,7 @@
             // 
             this.sqlDataSource1.ConnectionName = "SewingProduction.Properties.Settings.ACEConnectionString";
             this.sqlDataSource1.Name = "sqlDataSource1";
-            table1.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"383\" />";
+            table1.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"503\" />";
             table1.Name = "FurnitArtView";
             allColumns1.Table = table1;
             selectQuery1.Columns.Add(allColumns1);
@@ -142,34 +143,37 @@
             selectQuery1.MetaSerializable = "<Meta X=\"20\" Y=\"20\" Width=\"100\" Height=\"361\" />";
             selectQuery1.Name = "FurnitArtView";
             queryParameter1.Name = "_kodFD";
-            queryParameter1.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter1.Value = new DevExpress.DataAccess.Expression("?_kodFD", typeof(string));
             selectQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1});
             selectQuery1.Tables.Add(table1);
-            storedProcQuery1.MetaSerializable = "<Meta X=\"140\" Y=\"20\" Width=\"188\" Height=\"781\" />";
             storedProcQuery1.Name = "getConfectionCardByNomZad";
             queryParameter2.Name = "@xNom";
-            queryParameter2.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter2.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter2.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
             queryParameter3.Name = "@xVidF";
-            queryParameter3.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter3.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter3.Value = new DevExpress.DataAccess.Expression("?_vidF", typeof(int));
             queryParameter4.Name = "@xReturnType";
-            queryParameter4.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter4.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter4.Value = new DevExpress.DataAccess.Expression("2", typeof(int));
             queryParameter5.Name = "@xTypeConf";
-            queryParameter5.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter5.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter5.Value = new DevExpress.DataAccess.Expression("2", typeof(int));
             queryParameter6.Name = "@xSpRez";
-            queryParameter6.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter6.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter6.Value = new DevExpress.DataAccess.Expression("TOINT(?_specRez)", typeof(int));
+            queryParameter7.Name = "@xIdSbit";
+            queryParameter7.Type = typeof(int);
+            queryParameter7.ValueInfo = "0";
             storedProcQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter2,
             queryParameter3,
             queryParameter4,
             queryParameter5,
-            queryParameter6});
+            queryParameter6,
+            queryParameter7});
             storedProcQuery1.StoredProcName = "getConfectionCardByNomZad";
             this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
             selectQuery1,
@@ -1002,7 +1006,7 @@
             this.Detail1.HeightF = 25F;
             this.Detail1.Name = "Detail1";
             // 
-            // PrintKKReport
+            // ConfectionCardReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.TopMargin,
@@ -1037,7 +1041,7 @@
             this.GroupFooterBackground3,
             this.DetailData3_Odd,
             this.PageInfo});
-            this.Version = "22.2";
+            this.Version = "24.2";
             this.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.PrintKKReport_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
