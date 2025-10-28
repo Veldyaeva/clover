@@ -20,9 +20,35 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             _logger = logger;
         }
 
+        /// <summary>
+        /// Возвращает список сотрудников для выбора в UI.
+        /// </summary>
         public Task<List<FioModel>> GetFioListAsync() => _repo.GetFioListAsync();
+
+        /// <summary>
+        /// Возвращает укороченный план по табельному номеру.
+        /// </summary>
         public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab) => _repo.GetPlanByTabAsync(tab);
+
+        /// <summary>
+        /// Возвращает ФИО по табельному номеру (для авто-подмешивания в список).
+        /// </summary>
         public Task<string> GetFioByTabAsync(int tab) => _repo.GetFioByTabAsync(tab);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tab"></param>
+        /// <returns></returns>
+        public Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab) => _repo.GetPlanTreeByTabAsync(tab);
+
+
+        /// <summary>
+        /// Получает операции плана по списку партий через хранимую процедуру.
+        /// </summary>
+        /// <param name="nomListJson">JSON-массив номеров задания/номенклатуры.</param>
+        /// <param name="vyazPodrKod">Код вязального подразделения.</param>
+        /// <returns>Список операций плана.</returns>
+        public Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod) => _repo.GetPlanZagrVyazByPachListAsync(nomListJson, vyazPodrKod);
     }
 }
 

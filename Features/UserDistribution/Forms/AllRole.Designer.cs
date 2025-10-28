@@ -57,13 +57,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             ObjectID = new DevExpress.XtraGrid.Columns.GridColumn();
             ObjectName = new DevExpress.XtraGrid.Columns.GridColumn();
             HasAccessObject = new DevExpress.XtraGrid.Columns.GridColumn();
+            ObjectNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEditForms = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             repositoryItemCheckEditObject = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             customButtonAddRole = new CustomButton();
             customButtonDeleteRole = new CustomButton();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customButtonCopyRole = new CustomButton();
-            ObjectNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)gridViewForms).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxForms).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlRoles).BeginInit();
@@ -351,6 +351,15 @@ namespace SewingProduction.Features.UserDistribution.Forms
             HasAccessObject.VisibleIndex = 2;
             HasAccessObject.Width = 328;
             // 
+            // ObjectNameRus
+            // 
+            ObjectNameRus.Caption = "Имя объекта (рус)";
+            ObjectNameRus.FieldName = "ObjectNameRus";
+            ObjectNameRus.Name = "ObjectNameRus";
+            ObjectNameRus.Visible = true;
+            ObjectNameRus.VisibleIndex = 1;
+            ObjectNameRus.Width = 361;
+            // 
             // repositoryItemCheckEditForms
             // 
             repositoryItemCheckEditForms.AutoHeight = false;
@@ -437,15 +446,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonCopyRole.Text = "Копировать роль";
             customButtonCopyRole.UseVisualStyleBackColor = false;
             customButtonCopyRole.Click += customButtonCopyRole_Click;
-            // 
-            // ObjectNameRus
-            // 
-            ObjectNameRus.Caption = "Имя объекта (рус)";
-            ObjectNameRus.FieldName = "ObjectNameRus";
-            ObjectNameRus.Name = "ObjectNameRus";
-            ObjectNameRus.Visible = true;
-            ObjectNameRus.VisibleIndex = 1;
-            ObjectNameRus.Width = 361;
             // 
             // AllRole
             // 

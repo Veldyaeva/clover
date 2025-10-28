@@ -14,9 +14,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvDivision { get; set; }
         public string pzvMod { get; set; }
         public string pzvArticul { get; set; }
+        
+        [Display(Name = "Номер задания")]//, Order = 12, GroupName = "Номенклатура")]
+        [StringLength(10)]
+        public string pzvNomZad { get; set;}
+        
+        [Display(Name = "annID", Order = 11, GroupName = "Номенклатура")]
+        public int? pzvAnnID { get; set; }
+        
+        [Display(Name = "Номер рассчёта")]//, Order = 13, GroupName = "Номенклатура")]
+        public int? pzvNom { get; set; }
+
         public int? pzvKol { get; set; }
         public DateTime? pzvDateStart { get; set; }
         public DateTime? pzvDateEnd { get; set; }
+        
+        // Поля для детального грида (из vwPlanZagrVyazNorm_ByTab)
+        public int N { get; set; }
+        public int N1 { get; set; }
+        public string nrText { get; set; }
     }
 
 public class PlanZagrVyaz
@@ -80,7 +96,7 @@ public class PlanZagrVyaz
         [Display(Name = "Машина (KmlID)", Order = 30, GroupName = "Назначения")]
         public int? pzvKmlID { get; set; }
 
-        [Display(Name = "Назначено (КМЛ)", Order = 31, GroupName = "Назначения")]
+        [Display(Name = "Назначено (МЛ)", Order = 31, GroupName = "Назначения")]
         [DataType(DataType.DateTime)]
         public DateTime? pzvDateNaznKm { get; set; }
 
@@ -148,8 +164,9 @@ public class PlanZagrVyaz
     public class PlanZagrVyazOper
     {
         public int? olPzvID { get; set; }
-        public string olNomZad { get; set; }
-        public int? olNom { get; set; }
+        public string pzvArticul { get; set; }
+        public string pzvNomZad { get; set; }
+        public int? pzvNom { get; set; }
         public int? olNomN { get; set; }
         public string olPachKod { get; set; }
         public string olKod { get; set; }
@@ -158,11 +175,62 @@ public class PlanZagrVyaz
         public decimal? olSekAll { get; set; }
         public DateTime? olPzvDateStart { get; set; }
         public DateTime? olPzvDateEnd { get; set; }
+        public string pzvMod { get; set; }
+        public int pzvIdBrig { get; set; }
+        public int pzvSek  {get; set;}
+        public int pzvKol {get; set;}
+        public decimal pzvNChasi {get; set;}
+        public int pzvKmlID {get; set;}
+        public DateTime? pzvDateNaznKm {get; set;}
+        public int pzvTab {get; set;}
+        public DateTime? pzvDateNaznTab {get; set;}
+        public DateTime? pzvDateStart {get; set;}
+        public DateTime? pzvDateEnd {get; set;}
+        public DateTime? pzvDateML {get; set;}
+        public DateTime? pzvDateMLUt {get; set;}
+        public DateTime? pzvDateMast {get; set;}
+        public int pzvRKol {get; set;}
+        public int pzvSekNazn {get; set;}
+        public decimal pzvChasNazn {get; set;}
+        public int pzvKolNazn {get; set;}
+        public string pzvVidPr {get; set;}
+        public string pzvCompAdd {get; set;}
+        public DateTime? pzvDateAdd {get; set;}
+        public DateTime? pzvUpdDate { get; set; }
+
+        public int nrID {get; set;}
+        public int kod {get; set;}
+        public int kod_o {get; set;}
+        public int kod_podr {get; set;}
+        public int kod_proizv {get; set;}
+        public string nrText {get; set;}
+        public int sek  {get; set;}
+        public decimal seb  {get; set;}
+        public int n {get; set;}
+        public int n_ch  {get; set;}
+        public int n1 {get; set;}
+        public decimal seb_s  {get; set;}
+        public int razryd {get; set;}
+        public string spec {get; set;}
+        public string obor {get; set;}
+        public int sek12  {get; set;}
+        public int sek7 {get; set;}
+        public int sek5 {get; set;}
+        public int kod_ob  {get; set;}
+        public int sql_pr_add {get; set;}
+        public DateTime? date_add {get; set;}
+        public int komp_name {get; set;}
+        public DateTime? nrDateDel {get; set;}
+        public int nrCompDel {get; set;}
+        public DateTime? nrDateAdd {get; set;}
+        public int nrCompAdd { get; set; }
+        public int annId { get; set; }
+
     }
 
 
 
-public class PzvOperRow
+    public class PzvOperRow
     {
         // === Идентификаторы / связи ===
         [Display(Name = "ID операции", Order = 0, GroupName = "Операция")]

@@ -252,5 +252,10 @@ namespace SewingProduction
         {
             OpenForm(new PlanZagrVyaz(), sender);
         }
+
+        private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new KnitterWorkSpace(), sender);
+        }
     }
 }

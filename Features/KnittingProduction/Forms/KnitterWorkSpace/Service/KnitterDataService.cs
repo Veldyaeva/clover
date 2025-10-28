@@ -43,18 +43,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
             return await _dbService.GetListAsync<FioModel>(query, new { });
         }
-        //public async Task<IEnumerable<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod)
-        //{
-        //    var parameters = new dynamicparameters();
-        //    parameters.add("@xnomzadnomlistjson", nomlistjson, dbtype.string);
-        //    parameters.add("@xvyazpodrkod", vyazpodrkod, dbtype.int32);
 
-        //    return await _connection.queryasync<planzagrvyazoper>(
-        //        "dbo.getplanzagrvyazbypachlist",
-        //        parameters,
-        //        commandtype: commandtype.storedprocedure
-        //    );
-        //}
+        internal async Task <IEnumerable<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod)
+        {
+            var parameters = new dynamicparameters();
+            parameters.add("@xnomzadnomlistjson", nomlistjson, dbtype.string);
+            parameters.add("@xvyazpodrkod", vyazpodrkod, dbtype.int32);
+
+            return await _connection.queryasync<planzagrvyazoper>(
+                "dbo.getplanzagrvyazbypachlist",
+                parameters,
+                commandtype: commandtype.storedprocedure
+            );
+        }
 
 
     }
