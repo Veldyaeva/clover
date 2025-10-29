@@ -1,4 +1,5 @@
-﻿using DevExpress.CodeParser;
+﻿using DevExpress.Charts.Native;
+using DevExpress.CodeParser;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraTab;
@@ -2392,6 +2393,34 @@ namespace SewingProduction
         private void gridControlNastilList_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonVshivkiPrint_Click(object sender, EventArgs e)
+        {
+            VshivkiReport report1 = new VshivkiReport();
+            report1.RequestParameters = false;
+            //report1.Parameters["_rzuNom"].Value = tbRzuNom.Text;
+            //report1.Parameters["_isChip"].Value = IsChip;
+            //report1.Parameters["_isUpak"].Value = 0;
+
+            var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
+            //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
+            
+            if (selectedRow != null && selectedRow.RzuNom != 0 && Convert.ToInt32(selectedRow.PsaNomZad) != 0)
+            {
+                report1.Parameters["_nomZad"].Value = selectedRow.PsaNomZad;
+                report1.Parameters["_nomZad"].Visible = false;
+                report1.Parameters["_nom"].Value = selectedRow.RzuNom;
+                report1.Parameters["_nom"].Visible = false;
+                report1.Parameters["_proizvType"].Value = customRadioGroup2.SelectedIndex;
+                report1.Parameters["_proizvType"].Visible = false;
+                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                reportPrintTool1.ShowPreviewDialog();
+            }
+            else
+            {
+                MessageBox.Show("Не выбран расчет для печати");
+            }
         }
     }
 }

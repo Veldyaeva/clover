@@ -5,6 +5,7 @@ using DevExpress.DataAccess.Sql;
 using DevExpress.Mvvm.Native;
 using DevExpress.Mvvm.POCO;
 using DevExpress.Utils;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGauges.Core.Styles;
@@ -15,6 +16,7 @@ using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraLayout;
+using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Org.BouncyCastle.Tls;
@@ -504,7 +506,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //_pZVOperListByPachListBindingSource.CurrentItemChanged += (_, __) => RecalcFromModel();
                 //_pZVOperListByPachListBindingSource.PositionChanged += (_, __) => RecalcFromModel();
                 //RecalcFromModel();
-                
+
                 gridColumnPZVOperListOlKmlNumber.OptionsColumn.AllowEdit = false;
                 gridColumnPZVOperListOlPvDateNaznKm.OptionsColumn.AllowEdit = false;
                 gridColumnPZVOperListOlPzvTab.OptionsColumn.AllowEdit = false;
@@ -523,11 +525,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // gridViewPZVOperList.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.AllowEdit = true;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.ReadOnly = false;
-                repositoryItemCheckEdit4.EditValueChanged += (s, e) =>
-                {
-                    gridViewPZVOperList.PostEditor();        // применить новое значение из редактора
-                    gridViewPZVOperList.UpdateCurrentRow();  // сохранить в источник данных
-                };
+
 
                 //AutoRowFilterConfigForm(gridViewPZVOperList as GridView);
                 #endregion
@@ -2102,11 +2100,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // 3) добавить биндинги
                 _pZVOperListByPachListBindingSource.Add(newItemPos);
             }
-            else if (currentItem.olPzvDateNaznKm == null 
-                    && currentItem.olPzvDateNaznTab == null 
-                    && currentItem.olPzvDateStart == null 
-                    && currentItem.olPzvDateEnd == null 
-                    && currentItem.olPzvDateMast == null)   
+            else if (currentItem.olPzvDateNaznKm == null
+                    && currentItem.olPzvDateNaznTab == null
+                    && currentItem.olPzvDateStart == null
+                    && currentItem.olPzvDateEnd == null
+                    && currentItem.olPzvDateMast == null)
             {
                 // деление, если операция еще не назначена
                 // 1) пометить исходную строку
@@ -2180,7 +2178,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //    view.MakeRowVisible(newHandle);
             //    view.SelectRow(newHandle);
             //}
-            
+
             GoToPzvID(xPzvID, _xColumn);
 
         }
@@ -2189,6 +2187,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             GridView view = sender as GridView;
             var editor = view?.ActiveEditor as TextEdit;
             editor?.SelectAll();
+        }
+
+        private async void repositoryItemCheckEdit5_EditValueChanged(object sender, EventArgs e)
+        {
+            gridViewRzvPachListByNom.PostEditor();        // применить новое значение из редактора
+            gridViewRzvPachListByNom.UpdateCurrentRow();  // сохранить в источник данных
+            var selectedRow = _rzvPachListByNomBindingSource.Current as RzvPachListByNom;
+            try
+            {
+                string query = $"update raskr_zeh_vyaz set gradacia = {selectedRow.gradacia} where pach_kod = '{selectedRow.pach_kod}'";
+                Task updateRZV = _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+                await Task.WhenAll(updateRZV);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка обновления: {ex.Message}");
+            }
+
+            // деление операций на градацию - жду Катю Бабинцеву
+
         }
     }
 }

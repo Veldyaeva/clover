@@ -303,7 +303,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.nom_n, rzv.n_pach, rzv.pach_kod, rzv.kod, rzv.razm, rzv.kol, 0 AS grad " +
+                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.nom_n, rzv.n_pach, rzv.pach_kod, rzv.kod, rzv.razm, rzv.kol, gradacia " +
                         $"  , dbo.getAnnIDByKod(rzv.kod) as annID " +
                         $"FROM raskr_zeh_vyaz rzv" +
                         $" WHERE rzv.nom = {nom} and zad_pl = {nomZad}";

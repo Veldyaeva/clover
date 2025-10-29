@@ -35,40 +35,40 @@ namespace SewingProduction
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue3 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue4 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue5 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule6 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue6 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule7 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue7 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule8 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue8 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule9 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue9 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule10 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue10 = new DevExpress.XtraEditors.FormatConditionRuleValue();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule11 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue11 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule12 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue12 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule13 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue13 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule14 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue14 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule15 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue15 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule16 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue16 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule17 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue17 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule18 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue18 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule19 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue19 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule20 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue20 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule21 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue21 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule22 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue22 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CardByNom));
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions23 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions24 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions25 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions26 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions27 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions28 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions29 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions30 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions31 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions32 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions33 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions12 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions13 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions14 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions15 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions16 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions17 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions18 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions19 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions20 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions21 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions22 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             gridColumn40 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnNaklChipInUT = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn44 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -223,7 +223,6 @@ namespace SewingProduction
             layoutControlItem183 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem70 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem184 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem185 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem186 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem71 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem187 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -234,6 +233,8 @@ namespace SewingProduction
             layoutControlItem190 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem191 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem74 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem185 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem60 = new DevExpress.XtraLayout.EmptySpaceItem();
             RasInfo = new DevExpress.XtraTab.XtraTabPage();
             layoutControl7 = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup22 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -775,7 +776,8 @@ namespace SewingProduction
             emptySpaceItem27 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             customTextBoxEx1 = new CustomTextBoxEx();
-            emptySpaceItem60 = new DevExpress.XtraLayout.EmptySpaceItem();
+            buttonVshivkiPrint = new CustomSimpleButton();
+            layoutControlItem194 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdSP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdVZP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridSplitContainer1).BeginInit();
@@ -840,7 +842,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem183).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem70).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem184).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem186).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem71).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem187).BeginInit();
@@ -851,6 +852,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem190).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem191).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem74).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).BeginInit();
             RasInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControl7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup22).BeginInit();
@@ -1181,7 +1184,7 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem27).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customTextBoxEx1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem194).BeginInit();
             SuspendLayout();
             // 
             // gridColumn40
@@ -1848,127 +1851,127 @@ namespace SewingProduction
             gridViewNaklList.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             gridViewNaklList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnNaklCountBefore, gridColumnNaklPrich, gridColumnNaklSklNaimen, gridColumnNaklGlNomer, gridColumnNaklDatePrint, gridColumnNaklDostN, gridColumnNaklDostData, gridColumnNaklDateIzm, gridColumnNaklIzDate, gridColumnNaklIzNakl, gridColumnNaklCountAfter, gridColumnNaklChipOtgr, gridColumnNaklChipScan, gridColumnNaklChipPech, gridColumnNaklChipInUT, gridColumnNaklMod, gridColumnNaklArticul, gridColumn40, gridColumn44, gridColumn45, gridColumn46 });
             gridViewNaklList.DetailHeight = 404;
-            gridFormatRule1.Column = gridColumn40;
-            gridFormatRule1.ColumnApplyTo = gridColumnNaklChipInUT;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue1.Appearance.ForeColor = Color.Red;
-            formatConditionRuleValue1.Appearance.Options.UseFont = true;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue1.Value1 = "red";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridFormatRule2.Column = gridColumn40;
-            gridFormatRule2.ColumnApplyTo = gridColumnNaklChipInUT;
-            gridFormatRule2.Name = "Format1";
-            formatConditionRuleValue2.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue2.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
-            formatConditionRuleValue2.Appearance.Options.UseFont = true;
-            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue2.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue2.Value1 = "green";
-            gridFormatRule2.Rule = formatConditionRuleValue2;
-            gridFormatRule3.Column = gridColumn44;
-            gridFormatRule3.ColumnApplyTo = gridColumnNaklChipPech;
-            gridFormatRule3.Name = "Format2";
-            formatConditionRuleValue3.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue3.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
-            formatConditionRuleValue3.Appearance.Options.UseFont = true;
-            formatConditionRuleValue3.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue3.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue3.Value1 = "green";
-            gridFormatRule3.Rule = formatConditionRuleValue3;
-            gridFormatRule4.Column = gridColumn44;
-            gridFormatRule4.ColumnApplyTo = gridColumnNaklChipPech;
-            gridFormatRule4.Name = "Format3";
-            formatConditionRuleValue4.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue4.Appearance.ForeColor = Color.Red;
-            formatConditionRuleValue4.Appearance.Options.UseFont = true;
-            formatConditionRuleValue4.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue4.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue4.Value1 = "red";
-            gridFormatRule4.Rule = formatConditionRuleValue4;
-            gridFormatRule5.Column = gridColumn44;
-            gridFormatRule5.ColumnApplyTo = gridColumnNaklChipPech;
-            gridFormatRule5.Name = "Format4";
-            formatConditionRuleValue5.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue5.Appearance.ForeColor = Color.Gray;
-            formatConditionRuleValue5.Appearance.Options.UseFont = true;
-            formatConditionRuleValue5.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue5.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue5.Value1 = "gray";
-            gridFormatRule5.Rule = formatConditionRuleValue5;
-            gridFormatRule6.Column = gridColumn45;
-            gridFormatRule6.ColumnApplyTo = gridColumnNaklChipScan;
-            gridFormatRule6.Name = "Format5";
-            formatConditionRuleValue6.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue6.Appearance.ForeColor = Color.Red;
-            formatConditionRuleValue6.Appearance.Options.UseFont = true;
-            formatConditionRuleValue6.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue6.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue6.Value1 = "red";
-            gridFormatRule6.Rule = formatConditionRuleValue6;
-            gridFormatRule7.Column = gridColumn45;
-            gridFormatRule7.ColumnApplyTo = gridColumnNaklChipScan;
-            gridFormatRule7.Name = "Format6";
-            formatConditionRuleValue7.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue7.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
-            formatConditionRuleValue7.Appearance.Options.UseFont = true;
-            formatConditionRuleValue7.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue7.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue7.Value1 = "green";
-            gridFormatRule7.Rule = formatConditionRuleValue7;
-            gridFormatRule8.Column = gridColumn45;
-            gridFormatRule8.ColumnApplyTo = gridColumnNaklChipScan;
-            gridFormatRule8.Name = "Format7";
-            formatConditionRuleValue8.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue8.Appearance.ForeColor = Color.Gray;
-            formatConditionRuleValue8.Appearance.Options.UseFont = true;
-            formatConditionRuleValue8.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue8.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue8.Value1 = "gray";
-            gridFormatRule8.Rule = formatConditionRuleValue8;
-            gridFormatRule9.Column = gridColumn46;
-            gridFormatRule9.ColumnApplyTo = gridColumnNaklChipOtgr;
-            gridFormatRule9.Name = "Format8";
-            formatConditionRuleValue9.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue9.Appearance.ForeColor = Color.Red;
-            formatConditionRuleValue9.Appearance.Options.UseFont = true;
-            formatConditionRuleValue9.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue9.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue9.Value1 = "red";
-            gridFormatRule9.Rule = formatConditionRuleValue9;
-            gridFormatRule10.Column = gridColumn46;
-            gridFormatRule10.ColumnApplyTo = gridColumnNaklChipOtgr;
-            gridFormatRule10.Name = "Format9";
-            formatConditionRuleValue10.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue10.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
-            formatConditionRuleValue10.Appearance.Options.UseFont = true;
-            formatConditionRuleValue10.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue10.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue10.Value1 = "green";
-            gridFormatRule10.Rule = formatConditionRuleValue10;
-            gridFormatRule11.Column = gridColumn46;
-            gridFormatRule11.ColumnApplyTo = gridColumnNaklChipOtgr;
-            gridFormatRule11.Name = "Format10";
-            formatConditionRuleValue11.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            formatConditionRuleValue11.Appearance.ForeColor = Color.Gray;
-            formatConditionRuleValue11.Appearance.Options.UseFont = true;
-            formatConditionRuleValue11.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue11.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue11.Value1 = "gray";
-            gridFormatRule11.Rule = formatConditionRuleValue11;
-            gridViewNaklList.FormatRules.Add(gridFormatRule1);
-            gridViewNaklList.FormatRules.Add(gridFormatRule2);
-            gridViewNaklList.FormatRules.Add(gridFormatRule3);
-            gridViewNaklList.FormatRules.Add(gridFormatRule4);
-            gridViewNaklList.FormatRules.Add(gridFormatRule5);
-            gridViewNaklList.FormatRules.Add(gridFormatRule6);
-            gridViewNaklList.FormatRules.Add(gridFormatRule7);
-            gridViewNaklList.FormatRules.Add(gridFormatRule8);
-            gridViewNaklList.FormatRules.Add(gridFormatRule9);
-            gridViewNaklList.FormatRules.Add(gridFormatRule10);
-            gridViewNaklList.FormatRules.Add(gridFormatRule11);
+            gridFormatRule12.Column = gridColumn40;
+            gridFormatRule12.ColumnApplyTo = gridColumnNaklChipInUT;
+            gridFormatRule12.Name = "Format0";
+            formatConditionRuleValue12.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue12.Appearance.ForeColor = Color.Red;
+            formatConditionRuleValue12.Appearance.Options.UseFont = true;
+            formatConditionRuleValue12.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue12.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue12.Value1 = "red";
+            gridFormatRule12.Rule = formatConditionRuleValue12;
+            gridFormatRule13.Column = gridColumn40;
+            gridFormatRule13.ColumnApplyTo = gridColumnNaklChipInUT;
+            gridFormatRule13.Name = "Format1";
+            formatConditionRuleValue13.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue13.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
+            formatConditionRuleValue13.Appearance.Options.UseFont = true;
+            formatConditionRuleValue13.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue13.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue13.Value1 = "green";
+            gridFormatRule13.Rule = formatConditionRuleValue13;
+            gridFormatRule14.Column = gridColumn44;
+            gridFormatRule14.ColumnApplyTo = gridColumnNaklChipPech;
+            gridFormatRule14.Name = "Format2";
+            formatConditionRuleValue14.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue14.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
+            formatConditionRuleValue14.Appearance.Options.UseFont = true;
+            formatConditionRuleValue14.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue14.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue14.Value1 = "green";
+            gridFormatRule14.Rule = formatConditionRuleValue14;
+            gridFormatRule15.Column = gridColumn44;
+            gridFormatRule15.ColumnApplyTo = gridColumnNaklChipPech;
+            gridFormatRule15.Name = "Format3";
+            formatConditionRuleValue15.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue15.Appearance.ForeColor = Color.Red;
+            formatConditionRuleValue15.Appearance.Options.UseFont = true;
+            formatConditionRuleValue15.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue15.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue15.Value1 = "red";
+            gridFormatRule15.Rule = formatConditionRuleValue15;
+            gridFormatRule16.Column = gridColumn44;
+            gridFormatRule16.ColumnApplyTo = gridColumnNaklChipPech;
+            gridFormatRule16.Name = "Format4";
+            formatConditionRuleValue16.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue16.Appearance.ForeColor = Color.Gray;
+            formatConditionRuleValue16.Appearance.Options.UseFont = true;
+            formatConditionRuleValue16.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue16.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue16.Value1 = "gray";
+            gridFormatRule16.Rule = formatConditionRuleValue16;
+            gridFormatRule17.Column = gridColumn45;
+            gridFormatRule17.ColumnApplyTo = gridColumnNaklChipScan;
+            gridFormatRule17.Name = "Format5";
+            formatConditionRuleValue17.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue17.Appearance.ForeColor = Color.Red;
+            formatConditionRuleValue17.Appearance.Options.UseFont = true;
+            formatConditionRuleValue17.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue17.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue17.Value1 = "red";
+            gridFormatRule17.Rule = formatConditionRuleValue17;
+            gridFormatRule18.Column = gridColumn45;
+            gridFormatRule18.ColumnApplyTo = gridColumnNaklChipScan;
+            gridFormatRule18.Name = "Format6";
+            formatConditionRuleValue18.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue18.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
+            formatConditionRuleValue18.Appearance.Options.UseFont = true;
+            formatConditionRuleValue18.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue18.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue18.Value1 = "green";
+            gridFormatRule18.Rule = formatConditionRuleValue18;
+            gridFormatRule19.Column = gridColumn45;
+            gridFormatRule19.ColumnApplyTo = gridColumnNaklChipScan;
+            gridFormatRule19.Name = "Format7";
+            formatConditionRuleValue19.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue19.Appearance.ForeColor = Color.Gray;
+            formatConditionRuleValue19.Appearance.Options.UseFont = true;
+            formatConditionRuleValue19.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue19.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue19.Value1 = "gray";
+            gridFormatRule19.Rule = formatConditionRuleValue19;
+            gridFormatRule20.Column = gridColumn46;
+            gridFormatRule20.ColumnApplyTo = gridColumnNaklChipOtgr;
+            gridFormatRule20.Name = "Format8";
+            formatConditionRuleValue20.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue20.Appearance.ForeColor = Color.Red;
+            formatConditionRuleValue20.Appearance.Options.UseFont = true;
+            formatConditionRuleValue20.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue20.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue20.Value1 = "red";
+            gridFormatRule20.Rule = formatConditionRuleValue20;
+            gridFormatRule21.Column = gridColumn46;
+            gridFormatRule21.ColumnApplyTo = gridColumnNaklChipOtgr;
+            gridFormatRule21.Name = "Format9";
+            formatConditionRuleValue21.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue21.Appearance.ForeColor = Color.FromArgb(0, 192, 0);
+            formatConditionRuleValue21.Appearance.Options.UseFont = true;
+            formatConditionRuleValue21.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue21.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue21.Value1 = "green";
+            gridFormatRule21.Rule = formatConditionRuleValue21;
+            gridFormatRule22.Column = gridColumn46;
+            gridFormatRule22.ColumnApplyTo = gridColumnNaklChipOtgr;
+            gridFormatRule22.Name = "Format10";
+            formatConditionRuleValue22.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            formatConditionRuleValue22.Appearance.ForeColor = Color.Gray;
+            formatConditionRuleValue22.Appearance.Options.UseFont = true;
+            formatConditionRuleValue22.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue22.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue22.Value1 = "gray";
+            gridFormatRule22.Rule = formatConditionRuleValue22;
+            gridViewNaklList.FormatRules.Add(gridFormatRule12);
+            gridViewNaklList.FormatRules.Add(gridFormatRule13);
+            gridViewNaklList.FormatRules.Add(gridFormatRule14);
+            gridViewNaklList.FormatRules.Add(gridFormatRule15);
+            gridViewNaklList.FormatRules.Add(gridFormatRule16);
+            gridViewNaklList.FormatRules.Add(gridFormatRule17);
+            gridViewNaklList.FormatRules.Add(gridFormatRule18);
+            gridViewNaklList.FormatRules.Add(gridFormatRule19);
+            gridViewNaklList.FormatRules.Add(gridFormatRule20);
+            gridViewNaklList.FormatRules.Add(gridFormatRule21);
+            gridViewNaklList.FormatRules.Add(gridFormatRule22);
             gridViewNaklList.GridControl = gridControlNaklList;
             gridViewNaklList.Name = "gridViewNaklList";
             gridViewNaklList.OptionsBehavior.Editable = false;
@@ -3134,16 +3137,6 @@ namespace SewingProduction
             layoutControlItem184.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem184.TextVisible = false;
             // 
-            // layoutControlItem185
-            // 
-            layoutControlItem185.Control = mtbData_zeh;
-            layoutControlItem185.Location = new Point(92, 486);
-            layoutControlItem185.MinSize = new Size(104, 24);
-            layoutControlItem185.Name = "layoutControlItem185";
-            layoutControlItem185.Size = new Size(165, 24);
-            layoutControlItem185.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem185.TextVisible = false;
-            // 
             // layoutControlItem186
             // 
             layoutControlItem186.Control = tbIs_got;
@@ -3229,6 +3222,22 @@ namespace SewingProduction
             emptySpaceItem74.Name = "emptySpaceItem74";
             emptySpaceItem74.Size = new Size(128, 24);
             // 
+            // layoutControlItem185
+            // 
+            layoutControlItem185.Control = mtbData_zeh;
+            layoutControlItem185.Location = new Point(92, 486);
+            layoutControlItem185.MinSize = new Size(104, 24);
+            layoutControlItem185.Name = "layoutControlItem185";
+            layoutControlItem185.Size = new Size(165, 24);
+            layoutControlItem185.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem185.TextVisible = false;
+            // 
+            // emptySpaceItem60
+            // 
+            emptySpaceItem60.Location = new Point(0, 486);
+            emptySpaceItem60.Name = "emptySpaceItem60";
+            emptySpaceItem60.Size = new Size(92, 24);
+            // 
             // RasInfo
             // 
             RasInfo.Appearance.Header.Font = new Font("Tahoma", 10F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -3268,10 +3277,10 @@ namespace SewingProduction
             // 
             // layoutControlGroup23
             // 
-            buttonImageOptions23.Image = (Image)resources.GetObject("buttonImageOptions23.Image");
-            buttonImageOptions25.Image = (Image)resources.GetObject("buttonImageOptions25.Image");
-            buttonImageOptions27.Image = (Image)resources.GetObject("buttonImageOptions27.Image");
-            layoutControlGroup23.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание общ.", true, buttonImageOptions23, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions24, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание упак.", true, buttonImageOptions25, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions26, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Сопроводительные реестры", true, buttonImageOptions27, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            buttonImageOptions12.Image = (Image)resources.GetObject("buttonImageOptions12.Image");
+            buttonImageOptions14.Image = (Image)resources.GetObject("buttonImageOptions14.Image");
+            buttonImageOptions16.Image = (Image)resources.GetObject("buttonImageOptions16.Image");
+            layoutControlGroup23.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание общ.", true, buttonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание упак.", true, buttonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Сопроводительные реестры", true, buttonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup23.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup23.Location = new Point(0, 0);
             layoutControlGroup23.Name = "layoutControlGroup23";
@@ -3536,9 +3545,9 @@ namespace SewingProduction
             // 
             // layoutControlGroup16
             // 
-            buttonImageOptions28.Image = (Image)resources.GetObject("buttonImageOptions28.Image");
-            buttonImageOptions30.Image = (Image)resources.GetObject("buttonImageOptions30.Image");
-            layoutControlGroup16.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать информацию по делению накладной", true, buttonImageOptions28, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions29, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать накладной", true, buttonImageOptions30, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions31, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Накладная не создана. Причина", true, buttonImageOptions32, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1) });
+            buttonImageOptions17.Image = (Image)resources.GetObject("buttonImageOptions17.Image");
+            buttonImageOptions19.Image = (Image)resources.GetObject("buttonImageOptions19.Image");
+            layoutControlGroup16.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать информацию по делению накладной", true, buttonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать накладной", true, buttonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Накладная не создана. Причина", true, buttonImageOptions21, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1) });
             layoutControlGroup16.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup16.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem105, layoutControlItem107 });
             layoutControlGroup16.Location = new Point(0, 0);
@@ -6207,7 +6216,7 @@ namespace SewingProduction
             // 
             // layoutControlGroup6
             // 
-            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions33, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions22, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup6.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26, layoutControlItem27, layoutControlItem29, layoutControlItem30, layoutControlItem31, emptySpaceItem8, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, emptySpaceItem9, layoutControlItem36, layoutControlItem37, emptySpaceItem4, layoutControlItem12, layoutControlItem28, layoutControlItem41, layoutControlItem42, emptySpaceItem6, layoutControlItem38, layoutControlItem40, emptySpaceItem7, layoutControlItem43, layoutControlItem44, layoutControlItem45, emptySpaceItem13, emptySpaceItem14, simpleSeparator2, simpleSeparator4, simpleSeparator5, simpleSeparator6, layoutControlItem24, layoutControlItem19, layoutControlItem25, layoutControlItem39, emptySpaceItem11, splitterItem1, layoutControlItem13, layoutControlItem14, emptySpaceItem12, emptySpaceItem10, emptySpaceItem5 });
             layoutControlGroup6.Location = new Point(0, 0);
@@ -7358,6 +7367,7 @@ namespace SewingProduction
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(buttonVshivkiPrint);
             layoutControl1.Controls.Add(textBoxRzId);
             layoutControl1.Controls.Add(customLabel22);
             layoutControl1.Controls.Add(TextBoxRecomendZad);
@@ -7538,10 +7548,10 @@ namespace SewingProduction
             tbSostPoln.ErrorMessage = null;
             tbSostPoln.Font = new Font("Arial", 10F);
             tbSostPoln.ForeColor = Color.FromArgb(50, 90, 160);
-            tbSostPoln.Location = new Point(838, 78);
+            tbSostPoln.Location = new Point(850, 78);
             tbSostPoln.Multiline = true;
             tbSostPoln.Name = "tbSostPoln";
-            tbSostPoln.Size = new Size(191, 59);
+            tbSostPoln.Size = new Size(179, 59);
             tbSostPoln.TabIndex = 7;
             // 
             // tbRzuMod
@@ -7552,10 +7562,10 @@ namespace SewingProduction
             tbRzuMod.ErrorMessage = null;
             tbRzuMod.Font = new Font("Arial", 10F);
             tbRzuMod.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuMod.Location = new Point(838, 141);
+            tbRzuMod.Location = new Point(850, 141);
             tbRzuMod.Margin = new Padding(0);
             tbRzuMod.Name = "tbRzuMod";
-            tbRzuMod.Size = new Size(191, 55);
+            tbRzuMod.Size = new Size(179, 55);
             tbRzuMod.TabIndex = 11;
             // 
             // label13
@@ -7566,7 +7576,7 @@ namespace SewingProduction
             label13.Location = new Point(742, 78);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
-            label13.Size = new Size(92, 59);
+            label13.Size = new Size(104, 33);
             label13.TabIndex = 1;
             label13.Text = "Состав\r\n(из справ.)";
             // 
@@ -7606,7 +7616,7 @@ namespace SewingProduction
             label10.Location = new Point(742, 141);
             label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
-            label10.Size = new Size(92, 55);
+            label10.Size = new Size(104, 55);
             label10.TabIndex = 1;
             label10.Text = "Модель (торг.)";
             // 
@@ -8519,7 +8529,7 @@ namespace SewingProduction
             // 
             // layoutControlGroup10
             // 
-            layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem48, layoutControlItem16, layoutControlItem18, layoutControlItem74, layoutControlItem75, emptySpaceItem23, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81, layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, emptySpaceItem25, emptySpaceItem26, layoutControlItem47, layoutControlItem109, layoutControlItem135, layoutControlItem157, layoutControlItem158, emptySpaceItem27 });
+            layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem48, layoutControlItem16, layoutControlItem18, layoutControlItem74, layoutControlItem75, emptySpaceItem23, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81, layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, emptySpaceItem25, emptySpaceItem26, layoutControlItem47, layoutControlItem109, layoutControlItem135, layoutControlItem157, layoutControlItem158, emptySpaceItem27, layoutControlItem194 });
             layoutControlGroup10.Location = new Point(344, 0);
             layoutControlGroup10.Name = "layoutControlGroup10";
             layoutControlGroup10.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
@@ -8625,16 +8635,16 @@ namespace SewingProduction
             layoutControlItem82.Control = label10;
             layoutControlItem82.Location = new Point(388, 89);
             layoutControlItem82.Name = "layoutControlItem82";
-            layoutControlItem82.Size = new Size(96, 59);
+            layoutControlItem82.Size = new Size(108, 59);
             layoutControlItem82.TextVisible = false;
             // 
             // layoutControlItem83
             // 
             layoutControlItem83.Control = tbRzuMod;
-            layoutControlItem83.Location = new Point(484, 89);
+            layoutControlItem83.Location = new Point(496, 89);
             layoutControlItem83.MinSize = new Size(24, 24);
             layoutControlItem83.Name = "layoutControlItem83";
-            layoutControlItem83.Size = new Size(195, 59);
+            layoutControlItem83.Size = new Size(183, 59);
             layoutControlItem83.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem83.TextVisible = false;
             // 
@@ -8643,16 +8653,16 @@ namespace SewingProduction
             layoutControlItem84.Control = label13;
             layoutControlItem84.Location = new Point(388, 26);
             layoutControlItem84.Name = "layoutControlItem84";
-            layoutControlItem84.Size = new Size(96, 63);
+            layoutControlItem84.Size = new Size(108, 37);
             layoutControlItem84.TextVisible = false;
             // 
             // layoutControlItem85
             // 
             layoutControlItem85.Control = tbSostPoln;
-            layoutControlItem85.Location = new Point(484, 26);
+            layoutControlItem85.Location = new Point(496, 26);
             layoutControlItem85.MinSize = new Size(24, 24);
             layoutControlItem85.Name = "layoutControlItem85";
-            layoutControlItem85.Size = new Size(195, 63);
+            layoutControlItem85.Size = new Size(183, 63);
             layoutControlItem85.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem85.TextVisible = false;
             // 
@@ -8739,11 +8749,34 @@ namespace SewingProduction
             customTextBoxEx1.StyleController = layoutControl4;
             customTextBoxEx1.TabIndex = 17;
             // 
-            // emptySpaceItem60
+            // buttonVshivkiPrint
             // 
-            emptySpaceItem60.Location = new Point(0, 486);
-            emptySpaceItem60.Name = "emptySpaceItem60";
-            emptySpaceItem60.Size = new Size(92, 24);
+            buttonVshivkiPrint.Appearance.BackColor = Color.FromArgb(200, 225, 255);
+            buttonVshivkiPrint.Appearance.Font = new Font("Arial", 10F);
+            buttonVshivkiPrint.Appearance.ForeColor = Color.FromArgb(30, 70, 140);
+            buttonVshivkiPrint.Appearance.Options.UseBackColor = true;
+            buttonVshivkiPrint.Appearance.Options.UseFont = true;
+            buttonVshivkiPrint.Appearance.Options.UseForeColor = true;
+            buttonVshivkiPrint.AppearanceDisabled.BackColor = Color.Green;
+            buttonVshivkiPrint.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            buttonVshivkiPrint.AppearanceDisabled.Options.UseBackColor = true;
+            buttonVshivkiPrint.AppearanceDisabled.Options.UseForeColor = true;
+            buttonVshivkiPrint.ImageOptions.Image = (Image)resources.GetObject("customSimpleButton1.ImageOptions.Image");
+            buttonVshivkiPrint.Location = new Point(742, 115);
+            buttonVshivkiPrint.Name = "buttonVshivkiPrint";
+            buttonVshivkiPrint.Size = new Size(104, 22);
+            buttonVshivkiPrint.StyleController = layoutControl1;
+            buttonVshivkiPrint.TabIndex = 33;
+            buttonVshivkiPrint.Text = "Вшивки";
+            buttonVshivkiPrint.Click += buttonVshivkiPrint_Click;
+            // 
+            // layoutControlItem194
+            // 
+            layoutControlItem194.Control = buttonVshivkiPrint;
+            layoutControlItem194.Location = new Point(388, 63);
+            layoutControlItem194.Name = "layoutControlItem194";
+            layoutControlItem194.Size = new Size(108, 26);
+            layoutControlItem194.TextVisible = false;
             // 
             // CardByNom
             // 
@@ -8821,7 +8854,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem183).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem70).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem184).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem186).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem71).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem187).EndInit();
@@ -8832,6 +8864,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem190).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem191).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem74).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).EndInit();
             RasInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControl7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup22).EndInit();
@@ -9162,7 +9196,7 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem27).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
             ((System.ComponentModel.ISupportInitialize)customTextBoxEx1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem194).EndInit();
             ResumeLayout(false);
         }
 
@@ -9876,5 +9910,7 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem193;
         private DevExpress.XtraLayout.SplitterItem splitterItem4;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem60;
+        private CustomSimpleButton buttonVshivkiPrint;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem194;
     }
 }

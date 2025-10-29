@@ -271,6 +271,9 @@
     <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\VshivkiReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.resx">
