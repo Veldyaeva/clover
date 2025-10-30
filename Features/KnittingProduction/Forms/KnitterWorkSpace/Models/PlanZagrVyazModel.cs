@@ -14,7 +14,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvDivision { get; set; }
         public string pzvMod { get; set; }
         public string pzvArticul { get; set; }
-        
+        [Display(Name ="Id вязальной машины")]
+        public int pzvKmlID { get; set; }
+        [Display(Name ="Номер вязальной машины")]
+        public string kmlNumber { get; set; }
+
         [Display(Name = "Номер задания")]//, Order = 12, GroupName = "Номенклатура")]
         [StringLength(10)]
         public string pzvNomZad { get; set;}
@@ -26,140 +30,147 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvNom { get; set; }
 
         public int? pzvKol { get; set; }
+        public int pzvSek { get; set; }
         public DateTime? pzvDateStart { get; set; }
         public DateTime? pzvDateEnd { get; set; }
-        
+        public int pzvKolNazn { get; set; }
+
         // Поля для детального грида (из vwPlanZagrVyazNorm_ByTab)
-        public int N { get; set; }
-        public int N1 { get; set; }
+        public int nrN { get; set; }
+        public int nrN1 { get; set; }
         public string nrText { get; set; }
+        public int nrRazryd { get; set; }
+        public string nrObor { get; set; }
+        [Display(Name ="Номер пачки")]
+        public int n_pach { get; set; }
+
     }
 
-//public class PlanZagrVyaz
-//    {
-//        // === Основное ===
-//        [Key]
-//        [Display(Name = "ID", Order = 0, GroupName = "Основное")]
-//        [ReadOnly(true)]
-//        public int pzvID { get; set; }
+    //public class PlanZagrVyaz
+    //    {
+    //        // === Основное ===
+    //        [Key]
+    //        [Display(Name = "ID", Order = 0, GroupName = "Основное")]
+    //        [ReadOnly(true)]
+    //        public int pzvID { get; set; }
 
-//        [Display(Name = "ID родителя", Order = 1, GroupName = "Основное")]
-//        public int? pzvIDParent { get; set; }
+    //        [Display(Name = "ID родителя", Order = 1, GroupName = "Основное")]
+    //        public int? pzvIDParent { get; set; }
 
-//        [Display(Name = "Подразделение", Order = 2, GroupName = "Основное")]
-//        [Range(1, int.MaxValue, ErrorMessage = "Укажите код подразделения")]
-//        public int? pzvDivision { get; set; }
+    //        [Display(Name = "Подразделение", Order = 2, GroupName = "Основное")]
+    //        [Range(1, int.MaxValue, ErrorMessage = "Укажите код подразделения")]
+    //        public int? pzvDivision { get; set; }
 
-//        [Display(Name = "ID м/оп", Order = 3, GroupName = "Основное")]
-//        public int? pzvIDMlOp { get; set; }
+    //        [Display(Name = "ID м/оп", Order = 3, GroupName = "Основное")]
+    //        public int? pzvIDMlOp { get; set; }
 
-//        // === Номенклатура ===
-//        [Display(Name = "annID", Order = 10, GroupName = "Номенклатура")]
-//        public int? pzvAnnID { get; set; }
+    //        // === Номенклатура ===
+    //        [Display(Name = "annID", Order = 10, GroupName = "Номенклатура")]
+    //        public int? pzvAnnID { get; set; }
 
-//        [Display(Name = "nrID (норма)", Order = 11, GroupName = "Номенклатура")]
-//        public int? pzvNrID { get; set; }
+    //        [Display(Name = "nrID (норма)", Order = 11, GroupName = "Номенклатура")]
+    //        public int? pzvNrID { get; set; }
 
-//        [Display(Name = "Номер задания", Order = 12, GroupName = "Номенклатура")]
-//        [StringLength(10)]
-//        public string? pzvNomZad { get; set; }
+    //        [Display(Name = "Номер задания", Order = 12, GroupName = "Номенклатура")]
+    //        [StringLength(10)]
+    //        public string? pzvNomZad { get; set; }
 
-//        [Display(Name = "Номенклатура (Nom)", Order = 13, GroupName = "Номенклатура")]
-//        public int? pzvNom { get; set; }
+    //        [Display(Name = "Номенклатура (Nom)", Order = 13, GroupName = "Номенклатура")]
+    //        public int? pzvNom { get; set; }
 
-//        [Display(Name = "Номенклатура (NomN)", Order = 14, GroupName = "Номенклатура")]
-//        public int? pzvNomN { get; set; }
+    //        [Display(Name = "Номенклатура (NomN)", Order = 14, GroupName = "Номенклатура")]
+    //        public int? pzvNomN { get; set; }
 
-//        [Display(Name = "Артикул", Order = 15, GroupName = "Номенклатура")]
-//        [StringLength(25)]
-//        public string? pzvArticul { get; set; }
+    //        [Display(Name = "Артикул", Order = 15, GroupName = "Номенклатура")]
+    //        [StringLength(25)]
+    //        public string? pzvArticul { get; set; }
 
-//        [Display(Name = "Модель", Order = 16, GroupName = "Номенклатура")]
-//        [StringLength(25)]
-//        public string? pzvMod { get; set; }
+    //        [Display(Name = "Модель", Order = 16, GroupName = "Номенклатура")]
+    //        [StringLength(25)]
+    //        public string? pzvMod { get; set; }
 
-//        [Display(Name = "Бригада", Order = 17, GroupName = "Номенклатура")]
-//        public int? pzvIdBrig { get; set; }
+    //        [Display(Name = "Бригада", Order = 17, GroupName = "Номенклатура")]
+    //        public int? pzvIdBrig { get; set; }
 
-//        // === Нормы и объём ===
-//        [Display(Name = "Секунд на изделие", Order = 20, GroupName = "Нормы и объём")]
-//        public int? pzvSek { get; set; }
+    //        // === Нормы и объём ===
+    //        [Display(Name = "Секунд на изделие", Order = 20, GroupName = "Нормы и объём")]
+    //        public int? pzvSek { get; set; }
 
-//        [Display(Name = "Количество", Order = 21, GroupName = "Нормы и объём")]
-//        public int? pzvKol { get; set; }
+    //        [Display(Name = "Количество", Order = 21, GroupName = "Нормы и объём")]
+    //        public int? pzvKol { get; set; }
 
-//        [Display(Name = "Часы (итого)", Order = 22, GroupName = "Нормы и объём")]
-//        [DataType(DataType.Currency)]
-//        public decimal? pzvNChasi { get; set; }
+    //        [Display(Name = "Часы (итого)", Order = 22, GroupName = "Нормы и объём")]
+    //        [DataType(DataType.Currency)]
+    //        public decimal? pzvNChasi { get; set; }
 
-//        // === Машина и назначения ===
-//        [Display(Name = "Машина (KmlID)", Order = 30, GroupName = "Назначения")]
-//        public int? pzvKmlID { get; set; }
+    //        // === Машина и назначения ===
+    //        [Display(Name = "Машина (KmlID)", Order = 30, GroupName = "Назначения")]
+    //        public int? pzvKmlID { get; set; }
 
-//        [Display(Name = "Назначено (МЛ)", Order = 31, GroupName = "Назначения")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvDateNaznKm { get; set; }
+    //        [Display(Name = "Назначено (МЛ)", Order = 31, GroupName = "Назначения")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvDateNaznKm { get; set; }
 
-//        [Display(Name = "Таб. №", Order = 32, GroupName = "Назначения")]
-//        public int? pzvTab { get; set; }
+    //        [Display(Name = "Таб. №", Order = 32, GroupName = "Назначения")]
+    //        public int? pzvTab { get; set; }
 
-//        [Display(Name = "Назначено (табель)", Order = 33, GroupName = "Назначения")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvDateNaznTab { get; set; }
+    //        [Display(Name = "Назначено (табель)", Order = 33, GroupName = "Назначения")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvDateNaznTab { get; set; }
 
-//        [Display(Name = "Дата начала", Order = 34, GroupName = "Назначения")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvDateStart { get; set; }
+    //        [Display(Name = "Дата начала", Order = 34, GroupName = "Назначения")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvDateStart { get; set; }
 
-//        [Display(Name = "Дата окончания", Order = 35, GroupName = "Назначения")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvDateEnd { get; set; }
+    //        [Display(Name = "Дата окончания", Order = 35, GroupName = "Назначения")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvDateEnd { get; set; }
 
-//        [Display(Name = "Дата МЛ", Order = 36, GroupName = "Назначения")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvDateML { get; set; }
+    //        [Display(Name = "Дата МЛ", Order = 36, GroupName = "Назначения")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvDateML { get; set; }
 
-//        [Display(Name = "Дата МЛ (Уточн.)", Order = 37, GroupName = "Назначения")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvDateMLUt { get; set; }
+    //        [Display(Name = "Дата МЛ (Уточн.)", Order = 37, GroupName = "Назначения")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvDateMLUt { get; set; }
 
-//        [Display(Name = "Дата мастера", Order = 38, GroupName = "Назначения")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvDateMast { get; set; }
+    //        [Display(Name = "Дата мастера", Order = 38, GroupName = "Назначения")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvDateMast { get; set; }
 
-//        // === План и факт ===
-//        [Display(Name = "Количество (факт)", Order = 40, GroupName = "План и факт")]
-//        public int? pzvRKol { get; set; }
+    //        // === План и факт ===
+    //        [Display(Name = "Количество (факт)", Order = 40, GroupName = "План и факт")]
+    //        public int? pzvRKol { get; set; }
 
-//        [Display(Name = "Секунд назначено", Order = 41, GroupName = "План и факт")]
-//        public int? pzvSekNazn { get; set; }
+    //        [Display(Name = "Секунд назначено", Order = 41, GroupName = "План и факт")]
+    //        public int? pzvSekNazn { get; set; }
 
-//        [Display(Name = "Часов назначено", Order = 42, GroupName = "План и факт")]
-//        [DataType(DataType.Currency)]
-//        public decimal? pzvChasNazn { get; set; }
+    //        [Display(Name = "Часов назначено", Order = 42, GroupName = "План и факт")]
+    //        [DataType(DataType.Currency)]
+    //        public decimal? pzvChasNazn { get; set; }
 
-//        [Display(Name = "Кол-во назначено", Order = 43, GroupName = "План и факт")]
-//        public int? pzvKolNazn { get; set; }
+    //        [Display(Name = "Кол-во назначено", Order = 43, GroupName = "План и факт")]
+    //        public int? pzvKolNazn { get; set; }
 
-//        [Display(Name = "Вид производства", Order = 44, GroupName = "План и факт")]
-//        [StringLength(2)]
-//        public string? pzvVidPr { get; set; }
+    //        [Display(Name = "Вид производства", Order = 44, GroupName = "План и факт")]
+    //        [StringLength(2)]
+    //        public string? pzvVidPr { get; set; }
 
-//        // === Служебное ===
-//        [Display(Name = "Компьютер добавления", Order = 50, GroupName = "Служебное")]
-//        [ReadOnly(true)]
-//        [StringLength(50)]
-//        public string? pzvCompAdd { get; set; }
+    //        // === Служебное ===
+    //        [Display(Name = "Компьютер добавления", Order = 50, GroupName = "Служебное")]
+    //        [ReadOnly(true)]
+    //        [StringLength(50)]
+    //        public string? pzvCompAdd { get; set; }
 
-//        [Display(Name = "Дата добавления", Order = 51, GroupName = "Служебное")]
-//        [DataType(DataType.DateTime)]
-//        [ReadOnly(true)]
-//        public DateTime? pzvDateAdd { get; set; }
+    //        [Display(Name = "Дата добавления", Order = 51, GroupName = "Служебное")]
+    //        [DataType(DataType.DateTime)]
+    //        [ReadOnly(true)]
+    //        public DateTime? pzvDateAdd { get; set; }
 
-//        [Display(Name = "Дата обновления", Order = 52, GroupName = "Служебное")]
-//        [DataType(DataType.DateTime)]
-//        public DateTime? pzvUpdDate { get; set; }
-//    }
+    //        [Display(Name = "Дата обновления", Order = 52, GroupName = "Служебное")]
+    //        [DataType(DataType.DateTime)]
+    //        public DateTime? pzvUpdDate { get; set; }
+    //    }
 
     public class PlanZagrVyazOper
     {

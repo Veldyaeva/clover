@@ -58,17 +58,17 @@ namespace SewingProduction
             DevExpress.XtraGrid.GridFormatRule gridFormatRule11 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue11 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CardByNom));
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions23 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions24 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions25 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions26 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions27 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions28 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions29 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions30 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions31 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions32 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions33 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions4 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions5 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions6 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions7 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions8 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions9 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions10 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions11 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             gridColumn40 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnNaklChipInUT = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn44 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -223,7 +223,6 @@ namespace SewingProduction
             layoutControlItem183 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem70 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem184 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem185 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem186 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem71 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem187 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -234,6 +233,8 @@ namespace SewingProduction
             layoutControlItem190 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem191 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem74 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem185 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem60 = new DevExpress.XtraLayout.EmptySpaceItem();
             RasInfo = new DevExpress.XtraTab.XtraTabPage();
             layoutControl7 = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup22 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -775,7 +776,6 @@ namespace SewingProduction
             emptySpaceItem27 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             customTextBoxEx1 = new CustomTextBoxEx();
-            emptySpaceItem60 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdSP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdVZP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridSplitContainer1).BeginInit();
@@ -840,7 +840,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem183).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem70).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem184).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem186).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem71).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem187).BeginInit();
@@ -851,6 +850,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem190).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem191).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem74).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).BeginInit();
             RasInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControl7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup22).BeginInit();
@@ -1181,7 +1182,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem27).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customTextBoxEx1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).BeginInit();
             SuspendLayout();
             // 
             // gridColumn40
@@ -3134,16 +3134,6 @@ namespace SewingProduction
             layoutControlItem184.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem184.TextVisible = false;
             // 
-            // layoutControlItem185
-            // 
-            layoutControlItem185.Control = mtbData_zeh;
-            layoutControlItem185.Location = new Point(92, 486);
-            layoutControlItem185.MinSize = new Size(104, 24);
-            layoutControlItem185.Name = "layoutControlItem185";
-            layoutControlItem185.Size = new Size(165, 24);
-            layoutControlItem185.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem185.TextVisible = false;
-            // 
             // layoutControlItem186
             // 
             layoutControlItem186.Control = tbIs_got;
@@ -3229,6 +3219,22 @@ namespace SewingProduction
             emptySpaceItem74.Name = "emptySpaceItem74";
             emptySpaceItem74.Size = new Size(128, 24);
             // 
+            // layoutControlItem185
+            // 
+            layoutControlItem185.Control = mtbData_zeh;
+            layoutControlItem185.Location = new Point(92, 486);
+            layoutControlItem185.MinSize = new Size(104, 24);
+            layoutControlItem185.Name = "layoutControlItem185";
+            layoutControlItem185.Size = new Size(165, 24);
+            layoutControlItem185.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem185.TextVisible = false;
+            // 
+            // emptySpaceItem60
+            // 
+            emptySpaceItem60.Location = new Point(0, 486);
+            emptySpaceItem60.Name = "emptySpaceItem60";
+            emptySpaceItem60.Size = new Size(92, 24);
+            // 
             // RasInfo
             // 
             RasInfo.Appearance.Header.Font = new Font("Tahoma", 10F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -3268,10 +3274,10 @@ namespace SewingProduction
             // 
             // layoutControlGroup23
             // 
-            buttonImageOptions23.Image = (Image)resources.GetObject("buttonImageOptions23.Image");
-            buttonImageOptions25.Image = (Image)resources.GetObject("buttonImageOptions25.Image");
-            buttonImageOptions27.Image = (Image)resources.GetObject("buttonImageOptions27.Image");
-            layoutControlGroup23.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание общ.", true, buttonImageOptions23, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions24, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание упак.", true, buttonImageOptions25, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions26, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Сопроводительные реестры", true, buttonImageOptions27, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            buttonImageOptions1.Image = (Image)resources.GetObject("buttonImageOptions1.Image");
+            buttonImageOptions3.Image = (Image)resources.GetObject("buttonImageOptions3.Image");
+            buttonImageOptions5.Image = (Image)resources.GetObject("buttonImageOptions5.Image");
+            layoutControlGroup23.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание общ.", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Задание упак.", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Сопроводительные реестры", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup23.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup23.Location = new Point(0, 0);
             layoutControlGroup23.Name = "layoutControlGroup23";
@@ -3536,9 +3542,9 @@ namespace SewingProduction
             // 
             // layoutControlGroup16
             // 
-            buttonImageOptions28.Image = (Image)resources.GetObject("buttonImageOptions28.Image");
-            buttonImageOptions30.Image = (Image)resources.GetObject("buttonImageOptions30.Image");
-            layoutControlGroup16.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать информацию по делению накладной", true, buttonImageOptions28, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions29, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать накладной", true, buttonImageOptions30, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions31, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Накладная не создана. Причина", true, buttonImageOptions32, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1) });
+            buttonImageOptions6.Image = (Image)resources.GetObject("buttonImageOptions6.Image");
+            buttonImageOptions8.Image = (Image)resources.GetObject("buttonImageOptions8.Image");
+            layoutControlGroup16.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать информацию по делению накладной", true, buttonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать накладной", true, buttonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Накладная не создана. Причина", true, buttonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1) });
             layoutControlGroup16.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup16.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem105, layoutControlItem107 });
             layoutControlGroup16.Location = new Point(0, 0);
@@ -6207,7 +6213,7 @@ namespace SewingProduction
             // 
             // layoutControlGroup6
             // 
-            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions33, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup6.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26, layoutControlItem27, layoutControlItem29, layoutControlItem30, layoutControlItem31, emptySpaceItem8, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, emptySpaceItem9, layoutControlItem36, layoutControlItem37, emptySpaceItem4, layoutControlItem12, layoutControlItem28, layoutControlItem41, layoutControlItem42, emptySpaceItem6, layoutControlItem38, layoutControlItem40, emptySpaceItem7, layoutControlItem43, layoutControlItem44, layoutControlItem45, emptySpaceItem13, emptySpaceItem14, simpleSeparator2, simpleSeparator4, simpleSeparator5, simpleSeparator6, layoutControlItem24, layoutControlItem19, layoutControlItem25, layoutControlItem39, emptySpaceItem11, splitterItem1, layoutControlItem13, layoutControlItem14, emptySpaceItem12, emptySpaceItem10, emptySpaceItem5 });
             layoutControlGroup6.Location = new Point(0, 0);
@@ -8739,12 +8745,6 @@ namespace SewingProduction
             customTextBoxEx1.StyleController = layoutControl4;
             customTextBoxEx1.TabIndex = 17;
             // 
-            // emptySpaceItem60
-            // 
-            emptySpaceItem60.Location = new Point(0, 486);
-            emptySpaceItem60.Name = "emptySpaceItem60";
-            emptySpaceItem60.Size = new Size(92, 24);
-            // 
             // CardByNom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -8821,7 +8821,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem183).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem70).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem184).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem186).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem71).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem187).EndInit();
@@ -8832,6 +8831,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem190).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem191).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem74).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem185).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).EndInit();
             RasInfo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControl7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup22).EndInit();
@@ -9162,7 +9163,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem27).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
             ((System.ComponentModel.ISupportInitialize)customTextBoxEx1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem60).EndInit();
             ResumeLayout(false);
         }
 

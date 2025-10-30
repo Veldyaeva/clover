@@ -57,6 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Features\CardByNom\Forms\CardByNom.cs~RF1e89fe20.TMP" />
     <None Remove="Features\Features.zip" />
     <None Remove="Features\TeamWork.zip" />
     <None Remove="Features\TeamWork1.zip" />
