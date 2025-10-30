@@ -276,5 +276,8 @@
     <EmbeddedResource Update="Features\UserDistribution\Forms\AboutBox.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Update="Features\UserDistribution\Forms\AllRole.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

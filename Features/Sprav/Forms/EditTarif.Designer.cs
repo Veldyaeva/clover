@@ -324,8 +324,6 @@ namespace SewingProduction.Features.Sprav
             priznSign.FieldName = "priznSign";
             priznSign.Name = "priznSign";
             priznSign.OptionsColumn.ReadOnly = true;
-            priznSign.Visible = true;
-            priznSign.VisibleIndex = 8;
             priznSign.Width = 47;
             // 
             // constant_name
@@ -1031,11 +1029,12 @@ namespace SewingProduction.Features.Sprav
             gridViewTR.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_kod_o, prizn_podr, tarif, ed_izm, koef_chas, razr, text_name });
             gridViewTR.GridControl = customGridControlTR;
             gridViewTR.Name = "gridViewTR";
+            gridViewTR.NewItemRowText = "Добавить";
             gridViewTR.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             gridViewTR.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             gridViewTR.OptionsEditForm.EditFormColumnCount = 1;
             gridViewTR.OptionsView.EnableAppearanceEvenRow = true;
-            gridViewTR.CellValueChanged += gridViewTR_CellValueChanged;
+            gridViewTR.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             // 
             // id_kod_o
             // 

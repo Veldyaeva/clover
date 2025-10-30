@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Xpo.DB.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -405,10 +406,69 @@ namespace SewingProduction.Features.Sprav
         }
         private async void gridViewTR_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            if (e.RowHandle >= 0 && gridViewTR.GetRow(e.RowHandle) is TarifRabotModel model)
+            if (e.RowHandle < 0) return;
+
+            var model = gridViewTR.GetRow(e.RowHandle) as TarifRabotModel;
+            if (model == null) return;
+
+            // Если строка ещё новая (ID не появился) — выходим, Insert сделает ValidateRow
+            if (model.id_kod_o <= 0) return;
+
+            // Обычная логика точечного апдейта для существующей записи
+            await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+        }
+        private void gridViewTR_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        {
+            var v = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.Text), "");
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.prizn_podr), 0);
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.tarif), 0m);
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.ed_izm), "");
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.koef_chas), 1m);
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.razr), 0);
+        }
+        private async void gridViewTR_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            var model = view.GetRow(e.RowHandle) as TarifRabotModel;
+            if (model == null)
             {
-                await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+                e.Valid = false;
+                e.ErrorText = "Не удалось получить данные строки.";
+                return;
             }
+            try
+            {
+                // Если это новая строка (ID ещё не присвоен) — делаем INSERT
+                if (model.id_kod_o <= 0)
+                {
+                    // ВАЖНО: InsertEntityAsync вернёт новый ID (SCOPE_IDENTITY)
+                    int newId = await _dbService.InsertEntityAsync<TarifRabotModel>("sp_ras_rabot", "id_kod_o", model);
+                    model.id_kod_o = newId;   // Проставляем ID в модель, чтобы строка стала «обычной»
+                }
+                else
+                {
+                   // await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+                }
+
+                e.Valid = true;
+            }
+            catch (Exception ex)
+            {
+                e.Valid = false;
+                e.ErrorText = $"Ошибка сохранения: {ex.Message}";
+            }
+        }
+        private async void gridViewTR_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+                view.CloseEditor();
+                view.UpdateCurrentRow(); // триггерит ValidateRow -> Insert
+                e.Handled = true;
+            }
+           // await _dbService.SaveEntityAsync<TarifRabotModel>(tableName, keyFieldName, entity)
         }
         #endregion
     }

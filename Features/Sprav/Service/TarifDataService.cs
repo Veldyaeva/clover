@@ -46,29 +46,7 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task<List<TarifModelHistory>> LoadHistoryAsync(int pcid)
         {
-            string query = @"
-            SELECT 
-                a.pc_id,
-                a.begin_dt,
-                a.event_dt,
-                COALESCE(
-                    CAST(n.constant_value AS VARCHAR),
-                    CAST(i.constant_value AS VARCHAR),
-                    CAST(f.constant_value AS VARCHAR),
-                    c.constant_value,
-                    FORMAT(d.constant_value, 'dd.MM.yyyy')
-                ) AS value, 
-                u.userName, 
-                a.userComp
-            FROM proizv_constant_apply_time a
-            LEFT JOIN users u ON a.userID = u.userID
-            LEFT JOIN proizv_constant_store_numeric n ON a.value_id = n.pcsn_id
-            LEFT JOIN proizv_constant_store_integer i ON a.value_id = i.pcsi_id
-            LEFT JOIN proizv_constant_store_float f ON a.value_id = f.pcsf_id
-            LEFT JOIN proizv_constant_store_character c ON a.value_id = c.pcsc_id
-            LEFT JOIN proizv_constant_store_datetime d ON a.value_id = d.pcsdt_id
-            WHERE a.pc_id = @pcid
-            ORDER BY a.begin_dt DESC";
+            string query = @"EXEC dbo.ProizvConstantStores @pcid";
 
             return await _dbService.GetListAsync<TarifModelHistory>(query, new { pcid = pcid });
         }
@@ -161,15 +139,15 @@ namespace SewingProduction.Features.Sprav
 
         public void SaveTarifJson(TarifModel model, bool isEditMode, int userID)
         {
-            // 1. Проверка только для непустых имён
+            // 1. Проверка только имён
             if (!string.IsNullOrWhiteSpace(model.constant_name))
             {
                 string checkQuery = "SELECT COUNT(*) FROM proizv_constants WHERE constant_name = @name AND pc_id <> @id";
                 var checkParams = new Dictionary<string, object>
-        {
-            { "@name", model.constant_name.Trim() },
-            { "@id", model.pc_id }
-        };
+                {
+                    { "@name", model.constant_name.Trim() },
+                    { "@id", model.pc_id }
+                };
 
                 int count = _dbHelper.ExecuteScalar(checkQuery, checkParams);
                 if (count > 0 && !isEditMode)
