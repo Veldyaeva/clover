@@ -26,6 +26,12 @@ namespace SewingProduction.form
             customTextBoxTab.Text = idFIO;
             toolTipButton();
         }
+        public EditFio(UserClass user) : base(user)
+        {
+            InitializeComponent();
+            _editFioDataService = new EditFioDataService(dbHelper);
+            _person = new Person();
+        }
         public EditFio()
         {
             InitializeComponent();

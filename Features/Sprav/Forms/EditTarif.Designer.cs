@@ -41,12 +41,14 @@ namespace SewingProduction.Features.Sprav
             describe = new DevExpress.XtraGrid.Columns.GridColumn();
             begin_dt = new DevExpress.XtraGrid.Columns.GridColumn();
             valueSign = new DevExpress.XtraGrid.Columns.GridColumn();
+            dimension = new DevExpress.XtraGrid.Columns.GridColumn();
             firm = new DevExpress.XtraGrid.Columns.GridColumn();
             whereUses = new DevExpress.XtraGrid.Columns.GridColumn();
             pcId = new DevExpress.XtraGrid.Columns.GridColumn();
             priznSign = new DevExpress.XtraGrid.Columns.GridColumn();
             constant_name = new DevExpress.XtraGrid.Columns.GridColumn();
             arhiv = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             customGroupBoxAdd = new CustomGroupBox();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             customComboBoxPriznByh = new CustomComboBox();
@@ -73,6 +75,7 @@ namespace SewingProduction.Features.Sprav
             customButtonOtm = new CustomButton();
             customTextBoxWhereUses = new CustomTextBox();
             customLabelWhereUses = new CustomLabel();
+            customCheckBoxArhiv = new CustomCheckBox();
             customGridControlHistory = new CustomGridControl();
             gridViewHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
             Value = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -106,6 +109,7 @@ namespace SewingProduction.Features.Sprav
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlZp).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewZp).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             customGroupBoxAdd.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlHistory).BeginInit();
@@ -202,6 +206,7 @@ namespace SewingProduction.Features.Sprav
             customGridControlZp.Location = new System.Drawing.Point(3, 35);
             customGridControlZp.MainView = gridViewZp;
             customGridControlZp.Name = "customGridControlZp";
+            customGridControlZp.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1 });
             tableLayoutPanel1.SetRowSpan(customGridControlZp, 3);
             customGridControlZp.Size = new System.Drawing.Size(830, 431);
             customGridControlZp.TabIndex = 2;
@@ -220,7 +225,7 @@ namespace SewingProduction.Features.Sprav
             gridViewZp.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridViewZp.Appearance.HeaderPanel.Options.UseTextOptions = true;
             gridViewZp.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            gridViewZp.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { describe, begin_dt, valueSign, firm, whereUses, pcId, priznSign, constant_name, arhiv });
+            gridViewZp.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { describe, begin_dt, valueSign, dimension, firm, whereUses, pcId, priznSign, constant_name, arhiv });
             gridViewZp.GridControl = customGridControlZp;
             gridViewZp.Name = "gridViewZp";
             gridViewZp.OptionsBehavior.Editable = false;
@@ -260,7 +265,7 @@ namespace SewingProduction.Features.Sprav
             begin_dt.Name = "begin_dt";
             begin_dt.OptionsColumn.ReadOnly = true;
             begin_dt.Visible = true;
-            begin_dt.VisibleIndex = 4;
+            begin_dt.VisibleIndex = 5;
             begin_dt.Width = 101;
             // 
             // valueSign
@@ -268,9 +273,18 @@ namespace SewingProduction.Features.Sprav
             valueSign.Caption = "Значение";
             valueSign.FieldName = "value";
             valueSign.Name = "valueSign";
+            valueSign.OptionsColumn.ReadOnly = true;
             valueSign.Visible = true;
             valueSign.VisibleIndex = 3;
             valueSign.Width = 96;
+            // 
+            // dimension
+            // 
+            dimension.Caption = "Ед. Изм.";
+            dimension.FieldName = "dimension";
+            dimension.Name = "dimension";
+            dimension.Visible = true;
+            dimension.VisibleIndex = 4;
             // 
             // firm
             // 
@@ -291,8 +305,9 @@ namespace SewingProduction.Features.Sprav
             whereUses.Caption = "Где используется";
             whereUses.FieldName = "whereUses";
             whereUses.Name = "whereUses";
+            whereUses.OptionsColumn.ReadOnly = true;
             whereUses.Visible = true;
-            whereUses.VisibleIndex = 5;
+            whereUses.VisibleIndex = 6;
             whereUses.Width = 148;
             // 
             // pcId
@@ -300,6 +315,7 @@ namespace SewingProduction.Features.Sprav
             pcId.Caption = "pcId";
             pcId.FieldName = "pc_id";
             pcId.Name = "pcId";
+            pcId.OptionsColumn.ReadOnly = true;
             pcId.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             // 
             // priznSign
@@ -307,6 +323,7 @@ namespace SewingProduction.Features.Sprav
             priznSign.Caption = "priznSign";
             priznSign.FieldName = "priznSign";
             priznSign.Name = "priznSign";
+            priznSign.OptionsColumn.ReadOnly = true;
             priznSign.Width = 47;
             // 
             // constant_name
@@ -314,6 +331,7 @@ namespace SewingProduction.Features.Sprav
             constant_name.Caption = "Имя константы";
             constant_name.FieldName = "constant_name";
             constant_name.Name = "constant_name";
+            constant_name.OptionsColumn.ReadOnly = true;
             constant_name.Visible = true;
             constant_name.VisibleIndex = 1;
             constant_name.Width = 96;
@@ -321,11 +339,20 @@ namespace SewingProduction.Features.Sprav
             // arhiv
             // 
             arhiv.Caption = "архив";
+            arhiv.ColumnEdit = repositoryItemCheckEdit1;
             arhiv.FieldName = "arhiv";
             arhiv.Name = "arhiv";
+            arhiv.OptionsColumn.ReadOnly = true;
             arhiv.Visible = true;
-            arhiv.VisibleIndex = 6;
+            arhiv.VisibleIndex = 7;
             arhiv.Width = 46;
+            // 
+            // repositoryItemCheckEdit1
+            // 
+            repositoryItemCheckEdit1.AutoHeight = false;
+            repositoryItemCheckEdit1.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.CheckBox;
+            repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            repositoryItemCheckEdit1.ValueGrayed = false;
             // 
             // customGroupBoxAdd
             // 
@@ -372,10 +399,11 @@ namespace SewingProduction.Features.Sprav
             tableLayoutPanel2.Controls.Add(customButtonOtm, 0, 11);
             tableLayoutPanel2.Controls.Add(customTextBoxWhereUses, 1, 10);
             tableLayoutPanel2.Controls.Add(customLabelWhereUses, 0, 10);
+            tableLayoutPanel2.Controls.Add(customCheckBoxArhiv, 0, 12);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 12;
+            tableLayoutPanel2.RowCount = 13;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -388,6 +416,7 @@ namespace SewingProduction.Features.Sprav
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel2.Size = new System.Drawing.Size(271, 539);
             tableLayoutPanel2.TabIndex = 3;
             // 
@@ -399,7 +428,7 @@ namespace SewingProduction.Features.Sprav
             customComboBoxPriznByh.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxPriznByh.FormattingEnabled = true;
             customComboBoxPriznByh.Items.AddRange(new object[] { "0 - Нет доступа", "1 - Просмотр", "2 - Редактор" });
-            customComboBoxPriznByh.Location = new System.Drawing.Point(84, 318);
+            customComboBoxPriznByh.Location = new System.Drawing.Point(84, 315);
             customComboBoxPriznByh.Name = "customComboBoxPriznByh";
             customComboBoxPriznByh.Size = new System.Drawing.Size(184, 24);
             customComboBoxPriznByh.TabIndex = 50;
@@ -410,7 +439,7 @@ namespace SewingProduction.Features.Sprav
             customLabelPriznByh.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelPriznByh.Font = new System.Drawing.Font("Arial", 10F);
             customLabelPriznByh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelPriznByh.Location = new System.Drawing.Point(3, 315);
+            customLabelPriznByh.Location = new System.Drawing.Point(3, 312);
             customLabelPriznByh.Name = "customLabelPriznByh";
             customLabelPriznByh.Size = new System.Drawing.Size(73, 32);
             customLabelPriznByh.TabIndex = 49;
@@ -425,7 +454,7 @@ namespace SewingProduction.Features.Sprav
             customComboBoxPriznEco.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxPriznEco.FormattingEnabled = true;
             customComboBoxPriznEco.Items.AddRange(new object[] { "0 - Нет доступа", "1 - Просмотр", "2 - Редактор" });
-            customComboBoxPriznEco.Location = new System.Drawing.Point(84, 286);
+            customComboBoxPriznEco.Location = new System.Drawing.Point(84, 283);
             customComboBoxPriznEco.Name = "customComboBoxPriznEco";
             customComboBoxPriznEco.Size = new System.Drawing.Size(184, 24);
             customComboBoxPriznEco.TabIndex = 46;
@@ -436,7 +465,7 @@ namespace SewingProduction.Features.Sprav
             customLabelPriznEco.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelPriznEco.Font = new System.Drawing.Font("Arial", 10F);
             customLabelPriznEco.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelPriznEco.Location = new System.Drawing.Point(3, 283);
+            customLabelPriznEco.Location = new System.Drawing.Point(3, 280);
             customLabelPriznEco.Name = "customLabelPriznEco";
             customLabelPriznEco.Size = new System.Drawing.Size(72, 32);
             customLabelPriznEco.TabIndex = 45;
@@ -450,7 +479,7 @@ namespace SewingProduction.Features.Sprav
             customComboBoxOrg.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxOrg.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxOrg.FormattingEnabled = true;
-            customComboBoxOrg.Location = new System.Drawing.Point(84, 254);
+            customComboBoxOrg.Location = new System.Drawing.Point(84, 251);
             customComboBoxOrg.Name = "customComboBoxOrg";
             customComboBoxOrg.Size = new System.Drawing.Size(184, 24);
             customComboBoxOrg.TabIndex = 43;
@@ -464,7 +493,7 @@ namespace SewingProduction.Features.Sprav
             customTextBoxOpis.ErrorMessage = null;
             customTextBoxOpis.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxOpis.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxOpis.Location = new System.Drawing.Point(84, 90);
+            customTextBoxOpis.Location = new System.Drawing.Point(84, 87);
             customTextBoxOpis.Multiline = true;
             customTextBoxOpis.Name = "customTextBoxOpis";
             customTextBoxOpis.Size = new System.Drawing.Size(184, 51);
@@ -476,7 +505,7 @@ namespace SewingProduction.Features.Sprav
             customLabelNull.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelNull.Font = new System.Drawing.Font("Arial", 10F);
             customLabelNull.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelNull.Location = new System.Drawing.Point(3, 61);
+            customLabelNull.Location = new System.Drawing.Point(3, 58);
             customLabelNull.Name = "customLabelNull";
             customLabelNull.Size = new System.Drawing.Size(0, 26);
             customLabelNull.TabIndex = 40;
@@ -488,7 +517,7 @@ namespace SewingProduction.Features.Sprav
             customLabelOrg.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelOrg.Font = new System.Drawing.Font("Arial", 10F);
             customLabelOrg.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelOrg.Location = new System.Drawing.Point(3, 251);
+            customLabelOrg.Location = new System.Drawing.Point(3, 248);
             customLabelOrg.Name = "customLabelOrg";
             customLabelOrg.Size = new System.Drawing.Size(69, 32);
             customLabelOrg.TabIndex = 39;
@@ -501,7 +530,7 @@ namespace SewingProduction.Features.Sprav
             customLabelZnach.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelZnach.Font = new System.Drawing.Font("Arial", 10F);
             customLabelZnach.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelZnach.Location = new System.Drawing.Point(3, 222);
+            customLabelZnach.Location = new System.Drawing.Point(3, 219);
             customLabelZnach.Name = "customLabelZnach";
             customLabelZnach.Size = new System.Drawing.Size(70, 29);
             customLabelZnach.TabIndex = 38;
@@ -514,7 +543,7 @@ namespace SewingProduction.Features.Sprav
             customLabelDate.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelDate.Font = new System.Drawing.Font("Arial", 10F);
             customLabelDate.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelDate.Location = new System.Drawing.Point(3, 174);
+            customLabelDate.Location = new System.Drawing.Point(3, 171);
             customLabelDate.Name = "customLabelDate";
             customLabelDate.Size = new System.Drawing.Size(68, 48);
             customLabelDate.TabIndex = 37;
@@ -526,7 +555,7 @@ namespace SewingProduction.Features.Sprav
             customLabelType.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelType.Font = new System.Drawing.Font("Arial", 10F);
             customLabelType.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelType.Location = new System.Drawing.Point(3, 144);
+            customLabelType.Location = new System.Drawing.Point(3, 141);
             customLabelType.Name = "customLabelType";
             customLabelType.Size = new System.Drawing.Size(31, 30);
             customLabelType.TabIndex = 36;
@@ -539,11 +568,11 @@ namespace SewingProduction.Features.Sprav
             customLabelOpis.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelOpis.Font = new System.Drawing.Font("Arial", 10F);
             customLabelOpis.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelOpis.Location = new System.Drawing.Point(3, 87);
+            customLabelOpis.Location = new System.Drawing.Point(3, 84);
             customLabelOpis.Name = "customLabelOpis";
             customLabelOpis.Size = new System.Drawing.Size(73, 57);
             customLabelOpis.TabIndex = 34;
-            customLabelOpis.Text = "Описание";
+            customLabelOpis.Text = "Наименование";
             customLabelOpis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelRazm
@@ -554,9 +583,9 @@ namespace SewingProduction.Features.Sprav
             customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelRazm.Location = new System.Drawing.Point(3, 29);
             customLabelRazm.Name = "customLabelRazm";
-            customLabelRazm.Size = new System.Drawing.Size(72, 32);
+            customLabelRazm.Size = new System.Drawing.Size(62, 29);
             customLabelRazm.TabIndex = 31;
-            customLabelRazm.Text = "Размерность";
+            customLabelRazm.Text = "Ед. Изм.";
             customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customTextBoxName
@@ -595,7 +624,7 @@ namespace SewingProduction.Features.Sprav
             customTextBoxZnach.ErrorMessage = null;
             customTextBoxZnach.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxZnach.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxZnach.Location = new System.Drawing.Point(84, 225);
+            customTextBoxZnach.Location = new System.Drawing.Point(84, 222);
             customTextBoxZnach.Name = "customTextBoxZnach";
             customTextBoxZnach.Size = new System.Drawing.Size(184, 23);
             customTextBoxZnach.TabIndex = 21;
@@ -619,11 +648,11 @@ namespace SewingProduction.Features.Sprav
             customCheckBoxNotRazm.AutoSize = true;
             customCheckBoxNotRazm.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxNotRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customCheckBoxNotRazm.Location = new System.Drawing.Point(84, 64);
+            customCheckBoxNotRazm.Location = new System.Drawing.Point(84, 61);
             customCheckBoxNotRazm.Name = "customCheckBoxNotRazm";
-            customCheckBoxNotRazm.Size = new System.Drawing.Size(139, 20);
+            customCheckBoxNotRazm.Size = new System.Drawing.Size(140, 20);
             customCheckBoxNotRazm.TabIndex = 33;
-            customCheckBoxNotRazm.Text = "нет размерности";
+            customCheckBoxNotRazm.Text = "Нет размерности";
             customCheckBoxNotRazm.UseVisualStyleBackColor = true;
             customCheckBoxNotRazm.CheckedChanged += customCheckBoxNotRazm_CheckedChanged;
             // 
@@ -634,7 +663,7 @@ namespace SewingProduction.Features.Sprav
             customComboBoxType.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxType.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxType.FormattingEnabled = true;
-            customComboBoxType.Location = new System.Drawing.Point(84, 147);
+            customComboBoxType.Location = new System.Drawing.Point(84, 144);
             customComboBoxType.Name = "customComboBoxType";
             customComboBoxType.Size = new System.Drawing.Size(184, 24);
             customComboBoxType.TabIndex = 42;
@@ -644,7 +673,7 @@ namespace SewingProduction.Features.Sprav
             customDateTimePickerBegin.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customDateTimePickerBegin.Font = new System.Drawing.Font("Arial", 10F);
             customDateTimePickerBegin.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customDateTimePickerBegin.Location = new System.Drawing.Point(84, 177);
+            customDateTimePickerBegin.Location = new System.Drawing.Point(84, 174);
             customDateTimePickerBegin.Name = "customDateTimePickerBegin";
             customDateTimePickerBegin.ObjectName = null;
             customDateTimePickerBegin.Size = new System.Drawing.Size(183, 23);
@@ -656,10 +685,11 @@ namespace SewingProduction.Features.Sprav
             customButtonSave.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonSave.Location = new System.Drawing.Point(84, 413);
-            customButtonSave.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonSave.Location = new System.Drawing.Point(84, 410);
+            customButtonSave.MaximumSize = new System.Drawing.Size(0, 50);
+            customButtonSave.MinimumSize = new System.Drawing.Size(0, 40);
             customButtonSave.Name = "customButtonSave";
-            customButtonSave.Size = new System.Drawing.Size(184, 40);
+            customButtonSave.Size = new System.Drawing.Size(184, 50);
             customButtonSave.TabIndex = 24;
             customButtonSave.Text = "Сохранить";
             customButtonSave.UseVisualStyleBackColor = false;
@@ -671,10 +701,11 @@ namespace SewingProduction.Features.Sprav
             customButtonOtm.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonOtm.Font = new System.Drawing.Font("Arial", 10F);
             customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonOtm.Location = new System.Drawing.Point(3, 413);
-            customButtonOtm.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonOtm.Location = new System.Drawing.Point(3, 410);
+            customButtonOtm.MaximumSize = new System.Drawing.Size(0, 50);
+            customButtonOtm.MinimumSize = new System.Drawing.Size(0, 40);
             customButtonOtm.Name = "customButtonOtm";
-            customButtonOtm.Size = new System.Drawing.Size(75, 40);
+            customButtonOtm.Size = new System.Drawing.Size(75, 50);
             customButtonOtm.TabIndex = 25;
             customButtonOtm.Text = "Отмена";
             customButtonOtm.UseVisualStyleBackColor = false;
@@ -689,7 +720,7 @@ namespace SewingProduction.Features.Sprav
             customTextBoxWhereUses.ErrorMessage = null;
             customTextBoxWhereUses.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxWhereUses.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxWhereUses.Location = new System.Drawing.Point(84, 350);
+            customTextBoxWhereUses.Location = new System.Drawing.Point(84, 347);
             customTextBoxWhereUses.MaximumSize = new System.Drawing.Size(0, 80);
             customTextBoxWhereUses.Multiline = true;
             customTextBoxWhereUses.Name = "customTextBoxWhereUses";
@@ -702,12 +733,24 @@ namespace SewingProduction.Features.Sprav
             customLabelWhereUses.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelWhereUses.Font = new System.Drawing.Font("Arial", 10F);
             customLabelWhereUses.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelWhereUses.Location = new System.Drawing.Point(3, 347);
+            customLabelWhereUses.Location = new System.Drawing.Point(3, 344);
             customLabelWhereUses.Name = "customLabelWhereUses";
             customLabelWhereUses.Size = new System.Drawing.Size(75, 63);
             customLabelWhereUses.TabIndex = 48;
             customLabelWhereUses.Text = "Где используется";
             customLabelWhereUses.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customCheckBoxArhiv
+            // 
+            customCheckBoxArhiv.AutoSize = true;
+            customCheckBoxArhiv.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxArhiv.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customCheckBoxArhiv.Location = new System.Drawing.Point(3, 466);
+            customCheckBoxArhiv.Name = "customCheckBoxArhiv";
+            customCheckBoxArhiv.Size = new System.Drawing.Size(64, 20);
+            customCheckBoxArhiv.TabIndex = 51;
+            customCheckBoxArhiv.Text = "Архив";
+            customCheckBoxArhiv.UseVisualStyleBackColor = true;
             // 
             // customGridControlHistory
             // 
@@ -743,7 +786,7 @@ namespace SewingProduction.Features.Sprav
             Value.Name = "Value";
             Value.OptionsColumn.ReadOnly = true;
             Value.Visible = true;
-            Value.VisibleIndex = 2;
+            Value.VisibleIndex = 1;
             // 
             // begin_dt_h
             // 
@@ -752,7 +795,7 @@ namespace SewingProduction.Features.Sprav
             begin_dt_h.Name = "begin_dt_h";
             begin_dt_h.OptionsColumn.ReadOnly = true;
             begin_dt_h.Visible = true;
-            begin_dt_h.VisibleIndex = 1;
+            begin_dt_h.VisibleIndex = 2;
             // 
             // event_dt
             // 
@@ -986,11 +1029,12 @@ namespace SewingProduction.Features.Sprav
             gridViewTR.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_kod_o, prizn_podr, tarif, ed_izm, koef_chas, razr, text_name });
             gridViewTR.GridControl = customGridControlTR;
             gridViewTR.Name = "gridViewTR";
+            gridViewTR.NewItemRowText = "Добавить";
             gridViewTR.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             gridViewTR.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             gridViewTR.OptionsEditForm.EditFormColumnCount = 1;
             gridViewTR.OptionsView.EnableAppearanceEvenRow = true;
-            gridViewTR.CellValueChanged += gridViewTR_CellValueChanged;
+            gridViewTR.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             // 
             // id_kod_o
             // 
@@ -1070,6 +1114,7 @@ namespace SewingProduction.Features.Sprav
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)customGridControlZp).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewZp).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
             customGroupBoxAdd.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
@@ -1159,5 +1204,8 @@ namespace SewingProduction.Features.Sprav
         private DevExpress.XtraGrid.Columns.GridColumn arhiv;
         private CustomComboBox customComboBoxPriznByh;
         private CustomLabel customLabelPriznByh;
+        private DevExpress.XtraGrid.Columns.GridColumn dimension;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private CustomCheckBox customCheckBoxArhiv;
     }
 }

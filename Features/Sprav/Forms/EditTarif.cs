@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Xpo.DB.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -36,6 +37,7 @@ namespace SewingProduction.Features.Sprav
             customCheckBoxEco.Checked = customCheckBoxEco.Visible;
             customCheckBoxByh.Checked = customCheckBoxByh.Visible;
             customCheckBoxProg.Checked = customCheckBoxProg.Visible;
+            customButtonEdit.Enabled = false;
         }
         private void customGridControlZp_Load(object sender, EventArgs e)
         {
@@ -119,21 +121,35 @@ namespace SewingProduction.Features.Sprav
                 filters.Add("[firm] LIKE 'exp'");
             else if (customRadioButtonAceKle.Checked)
                 filters.Add("[firm] LIKE 'ace/cle'");
-
-            if (customCheckBoxByh.Checked && !customCheckBoxEco.Checked && !customCheckBoxProg.Checked)
+            /*
+            * Доступ для бухгалтеров - десятки
+            * Для экономистов - еденицы
+            * Администратору доступно все
+            priznSign:
+            0 - нет доступа
+            1 - просмотр
+            2 - редактор
+            */
+            bool isByh = customCheckBoxByh.Checked;
+            bool isEco = customCheckBoxEco.Checked;
+            if (isByh && !isEco)
             {
-                filters.Add("([priznSign] >= 10 AND [priznSign] < 30)");
+                // Только бухгалтер
+                filters.Add("(([priznSign] / 10) % 10 > 0)");
             }
-            else if (customCheckBoxEco.Checked && !customCheckBoxByh.Checked && !customCheckBoxProg.Checked)
+            else if (isEco && !isByh)
             {
+                // Только экономист
                 filters.Add("([priznSign] % 10 > 0)");
             }
-            else if (customCheckBoxEco.Checked && customCheckBoxByh.Checked)
+            else if (isByh && isEco)
             {
-                filters.Add("[priznSign] > 0");
+                // И бухгалтер, и экономист
+                filters.Add("([priznSign] > 0)");
             }
             else
             {
+                // Ни один чекбокс не выбран → ничего не показываем
                 filters.Add("([priznSign] IS NULL OR [priznSign] = 0)");
             }
             if (customCheckBoxProg.Checked)
@@ -158,6 +174,7 @@ namespace SewingProduction.Features.Sprav
         {
             customGroupBoxAdd.Visible = true;
             customGroupBoxAdd.Text = editMode ? "Редактирование" : "Добавление";
+
             var typeList = await _tarifService.LoadTypeAsync();
             customComboBoxType.DisplayMember = "field_name";
             customComboBoxType.ValueMember = "pcst_id";
@@ -174,22 +191,34 @@ namespace SewingProduction.Features.Sprav
 
             customTextBoxZnach.Text =
                 !editMode ? string.Empty :
-                currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
-                currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
-                currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
-                currentModel.pcstId == 4 ? currentModel.value_character :
-                currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
-                string.Empty;
+                currentModel.value;
+            //currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
+            //currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
+            //currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
+            //currentModel.pcstId == 4 ? currentModel.value_character :
+            //currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
+            //string.Empty;
+            customCheckBoxArhiv.Checked =
+                !editMode ? false :
+                currentModel.arhiv ;
 
-            customTextBoxName.Enabled = !editMode;
+            if (customCheckBoxProg.Checked)
+            {
+                editMode = false;
+                customTextBoxName.Enabled = true;
+            }
+            else
+                customTextBoxName.Enabled = false;
+
+            customCheckBoxNotRazm.Checked = false;
             customTextBoxRazm.Enabled = !editMode;
             customCheckBoxNotRazm.Enabled = !editMode;
-            customTextBoxOpis.Enabled = !editMode;
+            //customTextBoxOpis.Enabled = !editMode;
             customComboBoxType.Enabled = !editMode;
             customComboBoxOrg.Enabled = !editMode;
             customComboBoxPriznEco.Enabled = !editMode;
             customComboBoxPriznByh.Enabled = !editMode;
-            customTextBoxWhereUses.Enabled = !editMode;
+            //customTextBoxWhereUses.Enabled = !editMode;
 
             LoadPriznSignCombo(editMode);
         }
@@ -204,8 +233,14 @@ namespace SewingProduction.Features.Sprav
             }
             else
             {
-                customComboBoxPriznByh.SelectedIndex = 0;
-                customComboBoxPriznEco.SelectedIndex = 0;
+                if (customCheckBoxByh.Checked)
+                    customComboBoxPriznByh.SelectedIndex = 2;
+                else
+                    customComboBoxPriznByh.SelectedIndex = 0;
+                if (customCheckBoxEco.Checked)
+                    customComboBoxPriznEco.SelectedIndex = 2;
+                else
+                    customComboBoxPriznEco.SelectedIndex = 0;
             }
 
         }
@@ -275,6 +310,8 @@ namespace SewingProduction.Features.Sprav
             model.priznSign = byh * 10 + eco;
 
             model.whereUses = customTextBoxWhereUses.Text.Trim();
+            model.arhiv = customCheckBoxArhiv.Checked;
+
             // Установка значения в нужное поле
             selectZnach(model);
             saveModel(model, isEditMode);
@@ -292,7 +329,26 @@ namespace SewingProduction.Features.Sprav
                         MessageBox.Show("Тип 'float' не поддерживается");
                         return;
                     case 4: model.value_character = znach; break;
-                    case 5: model.value_datetime = DateTime.Parse(znach); break;
+                    case 5: 
+                        {
+                            var formats = new[] { "dd.MM.yyyy", "dd/MM/yyyy" };
+                            model.value_datetime = DateTime.Parse(znach);
+                            if (DateTime.TryParseExact(
+                            znach,
+                            formats,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out DateTime dt))
+                            {
+                                model.value_datetime = dt.Date;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неверный формат даты. Введите: dd.MM.yyyy");
+                                return;
+                            }
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -305,14 +361,14 @@ namespace SewingProduction.Features.Sprav
         {
             try
             {
-                _tarifService.SaveTarifAsync(model, isEditMode, _user.UserId);
+                // _tarifService.SaveTarif(model, isEditMode, _user.UserId);
+                _tarifService.SaveTarifJson(model, isEditMode, _user.UserId);
                 MessageBox.Show("Сохранено успешно.");
                 customGroupBoxAdd.Visible = false;
 
                 tarifLoad(model.pc_id);
+                Application.DoEvents(); //задержка
                 int rowHandle = gridViewZp.LocateByValue("constant_name", model.constant_name);
-                Debug.WriteLine(model.constant_name);
-                Debug.WriteLine(rowHandle);
                 gridViewZp.FocusedRowHandle = rowHandle;
             }
             catch (Exception ex)
@@ -324,7 +380,7 @@ namespace SewingProduction.Features.Sprav
         {
             var requiredFields = new Dictionary<string, (Func<bool> condition, string message)>
             {
-                ["Имя константы"] = (() => string.IsNullOrWhiteSpace(customTextBoxName.Text), "Не заполнено поле Имя константы!"),
+                //["Имя константы"] = (() => string.IsNullOrWhiteSpace(customTextBoxName.Text), "Не заполнено поле Имя константы!"),
                 ["Размерность"] = (() => string.IsNullOrWhiteSpace(customTextBoxRazm.Text), "Не заполнена размерность! Если неизвестна, поставьте галочку 'Нет размерности'"),
                 ["Описание"] = (() => string.IsNullOrWhiteSpace(customTextBoxOpis.Text), "Не заполнено поле Описание!"),
                 ["Тип данных"] = (() => string.IsNullOrWhiteSpace(customComboBoxType.Text), "Не выбран тип данных!"),
@@ -350,10 +406,69 @@ namespace SewingProduction.Features.Sprav
         }
         private async void gridViewTR_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            if (e.RowHandle >= 0 && gridViewTR.GetRow(e.RowHandle) is TarifRabotModel model)
+            if (e.RowHandle < 0) return;
+
+            var model = gridViewTR.GetRow(e.RowHandle) as TarifRabotModel;
+            if (model == null) return;
+
+            // Если строка ещё новая (ID не появился) — выходим, Insert сделает ValidateRow
+            if (model.id_kod_o <= 0) return;
+
+            // Обычная логика точечного апдейта для существующей записи
+            await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+        }
+        private void gridViewTR_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        {
+            var v = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.Text), "");
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.prizn_podr), 0);
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.tarif), 0m);
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.ed_izm), "");
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.koef_chas), 1m);
+            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.razr), 0);
+        }
+        private async void gridViewTR_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            var model = view.GetRow(e.RowHandle) as TarifRabotModel;
+            if (model == null)
             {
-                await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+                e.Valid = false;
+                e.ErrorText = "Не удалось получить данные строки.";
+                return;
             }
+            try
+            {
+                // Если это новая строка (ID ещё не присвоен) — делаем INSERT
+                if (model.id_kod_o <= 0)
+                {
+                    // ВАЖНО: InsertEntityAsync вернёт новый ID (SCOPE_IDENTITY)
+                    int newId = await _dbService.InsertEntityAsync<TarifRabotModel>("sp_ras_rabot", "id_kod_o", model);
+                    model.id_kod_o = newId;   // Проставляем ID в модель, чтобы строка стала «обычной»
+                }
+                else
+                {
+                   // await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+                }
+
+                e.Valid = true;
+            }
+            catch (Exception ex)
+            {
+                e.Valid = false;
+                e.ErrorText = $"Ошибка сохранения: {ex.Message}";
+            }
+        }
+        private async void gridViewTR_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+                view.CloseEditor();
+                view.UpdateCurrentRow(); // триггерит ValidateRow -> Insert
+                e.Handled = true;
+            }
+           // await _dbService.SaveEntityAsync<TarifRabotModel>(tableName, keyFieldName, entity)
         }
         #endregion
     }

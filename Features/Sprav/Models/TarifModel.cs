@@ -128,9 +128,9 @@ namespace SewingProduction.Features.Sprav
             get => _whereUses;
             set { if (_whereUses != value) { _whereUses = value; OnPropertyChanged(nameof(whereUses)); } }
         }
-        private int _arhiv;
+        private bool _arhiv;
         [Column("arhiv")]
-        public int arhiv
+        public bool arhiv
         {
             get => _arhiv;
             set { if (_arhiv != value) { _arhiv = value; OnPropertyChanged(nameof(arhiv)); } }
@@ -155,6 +155,7 @@ namespace SewingProduction.Features.Sprav
         public DateTime event_dt { get; set; }
         public DateTime begin_dt { get; set; }
         public int userID { get; set; }
+        public string userName { get; set; }
         public string userComp { get; set; }
     }
 }
