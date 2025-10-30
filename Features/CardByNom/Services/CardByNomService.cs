@@ -39,13 +39,17 @@ namespace SewingProduction.Features.CardByNom.Services
         /// </summary>
         /// <param pachKod="_pachKod">pach_kod</param>
         /// <returns></returns>
-        public async Task<List<NaklView>> GetNaklViewByPachKod(string pachKod)
+        public async Task<List<NaklView>> GetNaklViewByPachKod(string pachKod, int proizvType)
         {
             using (var connection = _dbHelper.GetConnection())
             {
                 var xPachKod = pachKod + "%";
-                string query = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like @pachKod )";
-                var result = await connection.QueryAsync<NaklView>(query, new Dictionary<string, object> { { "@pachKod", xPachKod } });
+                //string query = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like @pachKod )";
+                string query = $"select * from NaklView " +
+                                $"  where nom = (select nom_pach from View_rzu_rzv_nom_zad where pach_kod like '{xPachKod}' and proizvType = {proizvType} ) " +
+                                $"       AND yearPach = (select yearPach from View_rzu_rzv_nom_zad where pach_kod like '{xPachKod}' and proizvType = {proizvType} )" +
+                                $"      AND proizvType = {proizvType} ";
+                var result = await connection.QueryAsync<NaklView>(query, new Dictionary<string, object> { });
                 return result.ToList();
             }
         }
@@ -125,6 +129,26 @@ namespace SewingProduction.Features.CardByNom.Services
                 return result.ToList();
             }
         }
+
+        public async Task<List<RasNomList>> GetRasNomListByNomZadany(string _nomZadany)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"exec dbo.GetNomListByKodOrNomZadany @xNomZadany = '{_nomZadany}' ";
+                    //List<RasNomList> result = (List<RasNomList>)await connection.QueryAsync<RasNomList>(query, new Dictionary<string, object> { }, buffered: false);
+                    var result = await connection.QueryAsync<RasNomList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных VyazPlanView");
+                return null;
+            }
+        }
+
         #endregion
 
     }

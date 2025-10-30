@@ -58,7 +58,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
         }
 
         /// <summary>
-        /// Клонирует только технологические данные ArtNormN (времена, себестоимость, комментарии)
+        /// Клонирует только технологические данные ArtNormN (секунды, себестоимость, комментарии)
         /// Не копирует индивидуальную информацию изделия (артикул, группа, модель, ответственные)
         /// </summary>
         /// <param name="source">Исходный объект</param>
@@ -94,12 +94,12 @@ namespace SewingProduction.Features.TeamWork.Helpers
             clone.Komment = source.Komment;
             clone.Reco = source.Reco;
             clone.Slogn = source.Slogn;
-            clone.Kod = source.Kod;
-            clone.grup = source.grup;
-            clone.Articul = source.Articul;
-            clone.Mod = source.Mod;
-            clone.Diz = source.Diz;
-            clone.Constr = source.Constr;
+            //clone.Kod = source.Kod;
+            //clone.grup = source.grup;
+            //clone.Articul = source.Articul;
+            //clone.Mod = source.Mod;
+            //clone.Diz = source.Diz;
+            //clone.Constr = source.Constr;
 
             // НЕ копируем ID и аудит поля:
             // AnnID, dateCreate, dateUpdate,

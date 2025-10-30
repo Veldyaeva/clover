@@ -17,10 +17,10 @@ namespace SewingProduction.Helpers
     // NormRaszManager.cs
     public class NormRaszManager : INormRaszManager
     {
-        private readonly ArtNormService _service;
+        private readonly ArtNormRepository _service;
         private readonly BindingSource _source;
 
-        public NormRaszManager(ArtNormService service, BindingSource source)
+        public NormRaszManager(ArtNormRepository service, BindingSource source)
         {
             _service = service;
             _source = source;

@@ -11,9 +11,9 @@ namespace SewingProduction.Features.TeamWork.Operations
 {
     public sealed class CloneService
     {
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
 
-        public CloneService(ArtNormService artNormService)
+        public CloneService(ArtNormRepository artNormService)
         {
             _artNormService = artNormService;
         }

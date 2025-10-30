@@ -621,7 +621,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.ValidateRow += gridViewRasz_ValidateRow;
             gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;
             gridViewRasz.RowEditCanceled += gridViewRasz_RowEditCanceled;
-            gridViewRasz.ValidatingEditor += gridViewRasz_ValidatingEditor;
             // 
             // gridColumn2
             // 
