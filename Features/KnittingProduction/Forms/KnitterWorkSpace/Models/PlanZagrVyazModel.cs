@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -43,7 +44,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public string nrObor { get; set; }
         [Display(Name ="Номер пачки")]
         public int n_pach { get; set; }
-
+        public string razm { get; set; }
+        public int kol_Effective { get; set; }
+        public int sekEd_Effective { get; set; }
     }
 
     //public class PlanZagrVyaz

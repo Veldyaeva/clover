@@ -177,8 +177,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _planBindingSource.DataSource = masterData;
             PlanZagrVyazGridControl.RefreshDataSource();
 
-            // Настройка событий для мастер-деталь вью
-            var master = gridView1;
+            // Настройка событий для мастер-деталь вью (первый уровень ArtNom на bandedGridView3)
+            var master = bandedGridView3;
 
             // Подписка на события (удаляем старые подписки если есть)
             master.MasterRowGetRelationCount -= Master_MasterRowGetRelationCount;
@@ -212,18 +212,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void Master_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
         {
-            // e.RelationName = "Items";
             e.RelationName = "ArtNom";
         }
 
         private void Master_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
         {
-            var head = (KnitterPZVModel)gridView1.GetRow(e.RowHandle);
+            var head = (KnitterPZVModel)bandedGridView3.GetRow(e.RowHandle);
             if (head != null)
             {
-                var key = ((string?)head.pzvNomZad, (int?)head.pzvAnnID);
-                // Возвращаем все строки группы (включая операции) из исходного набора данных
-                e.ChildList = _byGroup.TryGetValue(key, out var list) ? list : new List<KnitterPZVModel>();
+                // Первый уровень ArtNom: фильтрация по артикулу и номеру расчёта
+                var art = head.pzvArticul;
+                var nom = head.pzvNom;
+                e.ChildList = _allRows?.Where(r => r.pzvArticul == art && r.pzvNom == nom).ToList() ?? new List<KnitterPZVModel>();
             }
         }
 
@@ -235,7 +235,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void Detail_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
         {
-            // e.RelationName = "ArtNom";
             e.RelationName = "Items";
         }
 
@@ -251,11 +250,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
-                // Фильтруем по арт+№рассчёта в пределах всего набора
-                var art = head.pzvArticul;
-                var nom = head.pzvNom;
-                var filtered = _allRows?.Where(r => r.pzvArticul == art && r.pzvNom == nom).ToList() ?? new List<KnitterPZVModel>();
-                e.ChildList = filtered;
+                // Второй уровень Items: строки той же группы (pzvNomZad, pzvAnnID)
+                var key = ((string?)head.pzvNomZad, (int?)head.pzvAnnID);
+                e.ChildList = _byGroup.TryGetValue(key, out var list) ? list : new List<KnitterPZVModel>();
             }
             catch (Exception ex)
             {
