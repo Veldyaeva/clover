@@ -8,3 +8,4 @@
 /Features/TeamWork/Forms/TeamWork.WorkDivisions.resx
 /Properties/_PublishProfiles/anyCPU.pubxml
 /.vscode
+*.csproj.Backup.tmp
