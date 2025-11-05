@@ -256,7 +256,7 @@
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NLog" Version="6.0.4" />
-    <PackageReference Include="Z.Dapper.Plus" Version="8.0.2" />
+    <PackageReference Include="Z.Dapper.Plus" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
