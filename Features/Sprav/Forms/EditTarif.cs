@@ -424,75 +424,13 @@ namespace SewingProduction.Features.Sprav
             customGridControlTR.RefreshDataSource();
         }
 
-        // Когда пользователь открывает форму редактирования
-        private void gridViewTR_EditFormShowing(object sender, DevExpress.XtraGrid.Views.Grid.EditFormShowingEventArgs e)
+        private async void gridViewTR_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (view == null) return;
-
-            _currentTarif = view.GetRow(e.RowHandle) as TarifRabotModel;
-
-            // Если это новая строка — создаём объект вручную
-            if (_currentTarif == null)
+            if (e.RowHandle >= 0 && gridViewTR.GetRow(e.RowHandle) is TarifRabotModel model)
             {
-                _currentTarif = new TarifRabotModel { IsNew = true };
-                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.id_kod_o), 0);
-                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.Text), string.Empty);
-                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.prizn_podr), 0);
-                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.tarif), 0m);
-                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.ed_izm), string.Empty);
-                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.koef_chas), 1m);
-                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.razr), 0);
-            }
-
-            Debug.WriteLine($"EditFormShowing: IsNew = {_currentTarif.IsNew}, id = {_currentTarif.id_kod_o}");
-        }
-
-        // Сохранение
-        private async void gridViewTR_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
-        {
-            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (view == null) return;
-
-            var model = view.GetRow(e.RowHandle) as TarifRabotModel;
-            if (model == null)
-            {
-                e.Valid = false;
-                e.ErrorText = "Не удалось получить данные строки.";
-                return;
-            }
-
-            try
-            {
-                // Новая запись
-                if (model.id_kod_o <= 0)
-                {
-                    int newId = await _dbService.InsertEntityAsync("sp_ras_rabot", "id_kod_o", model);
-                    model.id_kod_o = newId;
-                    model.IsNew = false;
-
-                    MessageBox.Show("Новая запись успешно добавлена.", "Сохранено",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else // Существующая запись
-                {
-                    await _dbService.UpdateEntityAsync("sp_ras_rabot", "id_kod_o", model);
-                    model.IsModified = false;
-
-                    MessageBox.Show("Изменения сохранены.", "Сохранено",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                view.RefreshRow(e.RowHandle);
-                e.Valid = true;
-            }
-            catch (Exception ex)
-            {
-                e.Valid = false;
-                e.ErrorText = $"Ошибка при сохранении: {ex.Message}";
+                await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
             }
         }
-
         private void customButtonAddTrr_Click(object sender, EventArgs e)
         {
             gridViewTR.AddNewRow();

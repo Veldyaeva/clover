@@ -1077,8 +1077,7 @@ namespace SewingProduction.Features.Sprav
             gridViewTR.OptionsEditForm.EditFormColumnCount = 1;
             gridViewTR.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
             gridViewTR.OptionsView.EnableAppearanceEvenRow = true;
-            gridViewTR.EditFormShowing += gridViewTR_EditFormShowing;
-            gridViewTR.ValidateRow += gridViewTR_ValidateRow;
+            gridViewTR.CellValueChanged += gridViewTR_CellValueChanged;
             // 
             // id_kod_o
             // 
