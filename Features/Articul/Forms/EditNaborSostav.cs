@@ -13,6 +13,7 @@ namespace SewingProduction.Features.Articul.Forms
         ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
         ArticulDataService _articulDataService = new ArticulDataService();
         SpArticulNaborSostav currentItem;
+        private readonly BindingSource _bsOld = new BindingSource();
         int oldAgIdBeforeEdit = 0;
         ArticulModel articulNabor;
         public EditNaborSostav()
@@ -52,7 +53,6 @@ namespace SewingProduction.Features.Articul.Forms
                 oldAgIdBeforeEdit = currentItem.Ag_id; 
             }
         }
-
         private async void customButtonSave_Click(object sender, EventArgs e)
         {
             try
@@ -80,7 +80,7 @@ namespace SewingProduction.Features.Articul.Forms
                 }
                 await _ANSDataService.UpdateArticulNaborSostavAsync(currentItem, oldAgIdBeforeEdit);
                 spArticulNaborSostavBindingSource.DataSource = await _ANSDataService.GetByKodAsync(articulNabor.Kod);
-                GridViewNabor.ExpandAllGroups();
+                GridViewNabor_Old.ExpandAllGroups();
                 MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 oldAgIdBeforeEdit = currentItem.Ag_id;
@@ -95,30 +95,35 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void ArticulNaborColumns()
         {
-            customTextBoxArtN.Text = articulNabor.Articul;
+            customTextBoxArtN_Old.Text = articulNabor.Articul;
             //customTextBoxRazmN.Text = articulNabor.Razm;
-            customTextBoxGostN.Text = articulNabor.Gost;
-            customTextBoxGrupN.Text = articulNabor.Grup;
+            customTextBoxGostN_Old.Text = articulNabor.Gost;
+            customTextBoxGrupN_Old.Text = articulNabor.Grup;
         }
         private void HideTechnicalColumns()
         {
-            GridViewNabor.BeginUpdate();
+            GridViewNabor_Old.BeginUpdate();
             try
             {
-                GridViewNabor.Columns["Ans_id"].Visible = false;
-                GridViewNabor.Columns["Ta_id"].Visible = false;
-                GridViewNabor.Columns["Tk_id"].Visible = false;
-                GridViewNabor.Columns["Ag_id"].Visible = false;
-                GridViewNabor.Columns["Id_razm_nab"].Visible = false;
-                GridViewNabor.Columns["Kod"].Visible = false;
+                GridViewNabor_Old.Columns["Ans_id"].Visible = false;
+                GridViewNabor_Old.Columns["Ta_id"].Visible = false;
+                GridViewNabor_Old.Columns["Tk_id"].Visible = false;
+                GridViewNabor_Old.Columns["Ag_id"].Visible = false;
+                GridViewNabor_Old.Columns["Id_razm_nab"].Visible = false;
+                GridViewNabor_Old.Columns["Kod"].Visible = false;
+                GridViewNabor_Old.ClearGrouping();
+                GridViewNabor_Old.Columns["razm_all"].GroupIndex = 0; // группировка по колонке размера
+                GridViewNabor_Old.ExpandAllGroups(); // раскрыть группы при загрузке
+                GridViewNabor_Old.OptionsView.ShowGroupPanel = true; //
+
                 GridViewNabor.ClearGrouping();
-                GridViewNabor.Columns["razm_all"].GroupIndex = 0; // группировка по колонке размера
-                GridViewNabor.ExpandAllGroups(); // раскрыть группы при загрузке
-                GridViewNabor.OptionsView.ShowGroupPanel = true; // отобразить панель группировки
+                GridViewNabor.Columns["razm_all"].GroupIndex = 0;
+                GridViewNabor.ExpandAllGroups(); 
+                GridViewNabor.OptionsView.ShowGroupPanel = true; 
             }
             finally
             {
-                GridViewNabor.EndUpdate();
+                GridViewNabor_Old.EndUpdate();
             }
         }
         

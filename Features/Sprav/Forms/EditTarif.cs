@@ -17,6 +17,7 @@ namespace SewingProduction.Features.Sprav
         private readonly TarifDataService _tarifService;
         private TarifModel? currentModel;
         UserClass _user;
+        bool _addMode; // режим добавления
         public EditTarif(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -71,7 +72,8 @@ namespace SewingProduction.Features.Sprav
         {
             try
             {
-                customGroupBoxAdd.Visible = false;
+                if (!_addMode)
+                    customGroupBoxAdd.Visible = false;
 
                 currentModel = gridViewZp.GetRow(gridViewZp.FocusedRowHandle) as TarifModel;
 
@@ -156,31 +158,40 @@ namespace SewingProduction.Features.Sprav
                 filters.Clear();
             // Применение фильтра
             gridViewZp.ActiveFilterString = string.Join(" AND ", filters);
-            customGroupBoxAdd.Visible = false;
+
+            if (!_addMode)
+                customGroupBoxAdd.Visible = false;
         }
         #endregion
         #region раздел: Редактировать / Сохранить
         private async void customButtonAdd_Click(object sender, EventArgs e)
         {
+            _addMode = true;
             await loadGroupBoxAdd(false);
         }
         private async void customButtonEdit_Click(object sender, EventArgs e)
         {
+            _addMode = false;
             if (gridViewZp.FocusedRowHandle < 0 || currentModel == null) return;
             await loadGroupBoxAdd(true);
         }
-
+        private async void customButtonCopy_Click(object sender, EventArgs e)
+        {
+            _addMode = true;
+            if (gridViewZp.FocusedRowHandle < 0 || currentModel == null) return;
+            await loadGroupBoxAdd(true);
+        }
         async Task loadGroupBoxAdd(bool editMode)
         {
             customGroupBoxAdd.Visible = true;
-            customGroupBoxAdd.Text = editMode ? "Редактирование" : "Добавление";
+            customGroupBoxAdd.Text = _addMode ? "Добавление" : "Редактирование";
 
             var typeList = await _tarifService.LoadTypeAsync();
             customComboBoxType.DisplayMember = "field_name";
             customComboBoxType.ValueMember = "pcst_id";
             customComboBoxType.DataSource = typeList;
 
-            customTextBoxName.Text = editMode ? currentModel.constant_name : string.Empty;
+            customTextBoxName.Text = _addMode ? string.Empty : currentModel.constant_name;
             customTextBoxRazm.Text = editMode ? currentModel.dimension : string.Empty;
             customTextBoxOpis.Text = editMode ? currentModel.describe : string.Empty;
             customComboBoxType.SelectedValue = editMode ? currentModel.pcstId : string.Empty;
@@ -189,18 +200,18 @@ namespace SewingProduction.Features.Sprav
             customComboBoxOrg.SelectedItem = editMode ? currentModel.firm : string.Empty;
             customTextBoxWhereUses.Text = editMode ? currentModel.whereUses : string.Empty;
 
+            customCheckBoxNotRazm.Checked = !editMode ? false : // если yt добавляем
+                currentModel.dimension.ToLower() == customCheckBoxNotRazm.Text ? true : false; // если "нет размерности"
+
             customTextBoxZnach.Text =
                 !editMode ? string.Empty :
                 currentModel.value;
-            //currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
-            //currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
-            //currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
-            //currentModel.pcstId == 4 ? currentModel.value_character :
-            //currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
-            //string.Empty;
+
             customCheckBoxArhiv.Checked =
                 !editMode ? false :
-                currentModel.arhiv ;
+                currentModel.arhiv;
+
+            LoadPriznSignCombo(editMode);
 
             if (customCheckBoxProg.Checked)
             {
@@ -210,7 +221,9 @@ namespace SewingProduction.Features.Sprav
             else
                 customTextBoxName.Enabled = false;
 
-            customCheckBoxNotRazm.Checked = false;
+            if (_addMode)
+                editMode = false;
+
             customTextBoxRazm.Enabled = !editMode;
             customCheckBoxNotRazm.Enabled = !editMode;
             //customTextBoxOpis.Enabled = !editMode;
@@ -219,8 +232,6 @@ namespace SewingProduction.Features.Sprav
             customComboBoxPriznEco.Enabled = !editMode;
             customComboBoxPriznByh.Enabled = !editMode;
             //customTextBoxWhereUses.Enabled = !editMode;
-
-            LoadPriznSignCombo(editMode);
         }
         private void LoadPriznSignCombo(bool editMode)
         {
@@ -253,6 +264,7 @@ namespace SewingProduction.Features.Sprav
         private void customButtonOtm_Click(object sender, EventArgs e)
         {
             customGroupBoxAdd.Visible = false;
+            _addMode = false;
         }
 
         private async void customButtonArhiv_Click(object sender, EventArgs e)
@@ -315,6 +327,7 @@ namespace SewingProduction.Features.Sprav
             // Установка значения в нужное поле
             selectZnach(model);
             saveModel(model, isEditMode);
+
         }
         public void selectZnach(TarifModel model)
         {
@@ -329,7 +342,7 @@ namespace SewingProduction.Features.Sprav
                         MessageBox.Show("Тип 'float' не поддерживается");
                         return;
                     case 4: model.value_character = znach; break;
-                    case 5: 
+                    case 5:
                         {
                             var formats = new[] { "dd.MM.yyyy", "dd/MM/yyyy" };
                             model.value_datetime = DateTime.Parse(znach);
@@ -369,7 +382,10 @@ namespace SewingProduction.Features.Sprav
                 tarifLoad(model.pc_id);
                 Application.DoEvents(); //задержка
                 int rowHandle = gridViewZp.LocateByValue("constant_name", model.constant_name);
+                if (_addMode)
+                    rowHandle = gridViewZp.DataRowCount - 1;
                 gridViewZp.FocusedRowHandle = rowHandle;
+                _addMode = false;
             }
             catch (Exception ex)
             {
@@ -398,38 +414,46 @@ namespace SewingProduction.Features.Sprav
         }
         #endregion
         #region раздел: Тарифы разовых работ
+        private TarifRabotModel _currentTarif = null;
+
+        // Загрузка данных
         private async void customGridControlTR_Load(object sender, EventArgs e)
         {
             var tableTarifRabot = await _tarifService.LoadTarifRabotList();
             customGridControlTR.DataSource = tableTarifRabot;
             customGridControlTR.RefreshDataSource();
         }
-        private async void gridViewTR_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+
+        // Когда пользователь открывает форму редактирования
+        private void gridViewTR_EditFormShowing(object sender, DevExpress.XtraGrid.Views.Grid.EditFormShowingEventArgs e)
         {
-            if (e.RowHandle < 0) return;
+            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view == null) return;
 
-            var model = gridViewTR.GetRow(e.RowHandle) as TarifRabotModel;
-            if (model == null) return;
+            _currentTarif = view.GetRow(e.RowHandle) as TarifRabotModel;
 
-            // Если строка ещё новая (ID не появился) — выходим, Insert сделает ValidateRow
-            if (model.id_kod_o <= 0) return;
+            // Если это новая строка — создаём объект вручную
+            if (_currentTarif == null)
+            {
+                _currentTarif = new TarifRabotModel { IsNew = true };
+                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.id_kod_o), 0);
+                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.Text), string.Empty);
+                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.prizn_podr), 0);
+                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.tarif), 0m);
+                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.ed_izm), string.Empty);
+                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.koef_chas), 1m);
+                view.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.razr), 0);
+            }
 
-            // Обычная логика точечного апдейта для существующей записи
-            await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+            Debug.WriteLine($"EditFormShowing: IsNew = {_currentTarif.IsNew}, id = {_currentTarif.id_kod_o}");
         }
-        private void gridViewTR_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
-        {
-            var v = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.Text), "");
-            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.prizn_podr), 0);
-            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.tarif), 0m);
-            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.ed_izm), "");
-            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.koef_chas), 1m);
-            v.SetRowCellValue(e.RowHandle, nameof(TarifRabotModel.razr), 0);
-        }
+
+        // Сохранение
         private async void gridViewTR_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-            var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view == null) return;
+
             var model = view.GetRow(e.RowHandle) as TarifRabotModel;
             if (model == null)
             {
@@ -437,39 +461,51 @@ namespace SewingProduction.Features.Sprav
                 e.ErrorText = "Не удалось получить данные строки.";
                 return;
             }
+
             try
             {
-                // Если это новая строка (ID ещё не присвоен) — делаем INSERT
+                // Новая запись
                 if (model.id_kod_o <= 0)
                 {
-                    // ВАЖНО: InsertEntityAsync вернёт новый ID (SCOPE_IDENTITY)
-                    int newId = await _dbService.InsertEntityAsync<TarifRabotModel>("sp_ras_rabot", "id_kod_o", model);
-                    model.id_kod_o = newId;   // Проставляем ID в модель, чтобы строка стала «обычной»
+                    int newId = await _dbService.InsertEntityAsync("sp_ras_rabot", "id_kod_o", model);
+                    model.id_kod_o = newId;
+                    model.IsNew = false;
+
+                    MessageBox.Show("Новая запись успешно добавлена.", "Сохранено",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else
+                else // Существующая запись
                 {
-                   // await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
+                    await _dbService.UpdateEntityAsync("sp_ras_rabot", "id_kod_o", model);
+                    model.IsModified = false;
+
+                    MessageBox.Show("Изменения сохранены.", "Сохранено",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
+                view.RefreshRow(e.RowHandle);
                 e.Valid = true;
             }
             catch (Exception ex)
             {
                 e.Valid = false;
-                e.ErrorText = $"Ошибка сохранения: {ex.Message}";
+                e.ErrorText = $"Ошибка при сохранении: {ex.Message}";
             }
         }
-        private async void gridViewTR_KeyDown(object sender, KeyEventArgs e)
+
+        private void customButtonAddTrr_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            gridViewTR.AddNewRow();
+
+            gridViewTR.GridControl.BeginInvoke(new Action(() =>
             {
-                var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
-                view.CloseEditor();
-                view.UpdateCurrentRow(); // триггерит ValidateRow -> Insert
-                e.Handled = true;
-            }
-           // await _dbService.SaveEntityAsync<TarifRabotModel>(tableName, keyFieldName, entity)
+                int rh = gridViewTR.FocusedRowHandle;
+                if (gridViewTR.IsValidRowHandle(rh))
+                    gridViewTR.ShowPopupEditForm();
+            }));
+
         }
         #endregion
+
     }
 }
