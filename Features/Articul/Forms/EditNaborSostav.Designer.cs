@@ -31,11 +31,17 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditNaborSostav));
             dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
+            customSearchLookUpEditGrupN = new Core.Class.CustomSearchLookUpEdit();
+            gostGrupIzdViewModelBindingSource = new System.Windows.Forms.BindingSource(components);
+            customSearchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            customSearchLookUpEditGostN = new Core.Class.CustomSearchLookUpEdit();
+            gostModelBindingSource = new System.Windows.Forms.BindingSource(components);
+            customSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             customLabelIzm = new Core.Class.CustomLabel();
-            spArticulNaborSostavBindingSource = new System.Windows.Forms.BindingSource(components);
             customLabelTxtSave = new Core.Class.CustomLabel();
             customButtonSaveNabor = new Core.Class.CustomButton();
             customGridControlNabor = new Core.Class.CustomGridControl();
+            spArticulNaborSostavBindingSource = new System.Windows.Forms.BindingSource(components);
             GridViewNabor = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             BandRazmAll1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             colAns_id1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -47,18 +53,14 @@
             colTk_name1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colId_gost1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             repositoryItemSearchLookUpEditGost = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-            gostModelBindingSource = new System.Windows.Forms.BindingSource(components);
             repositoryItemSearchLookUpEditGostView = new DevExpress.XtraGrid.Views.Grid.GridView();
             colN_i1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             repositoryItemSearchLookUpEditGrup = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-            gostGrupIzdViewModelBindingSource = new System.Windows.Forms.BindingSource(components);
             repositoryItemSearchLookUpEditGrupView = new DevExpress.XtraGrid.Views.Grid.GridView();
             colSostav1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colId_razm_nab1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colRazm1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colrazm_all1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            repositoryItemComboBoxGrup = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            repositoryItemComboBoxGost = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             customTextBoxArtN = new Core.Class.CustomTextBox();
             customTextBoxGrupN_Old = new Core.Class.CustomTextBox();
             customTextBoxGostN_Old = new Core.Class.CustomTextBox();
@@ -105,6 +107,8 @@
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            ГОСТ = new DevExpress.XtraLayout.LayoutControlItem();
+            Группа = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroupDataNaborOld = new DevExpress.XtraLayout.LayoutControlGroup();
             Артикул_Old = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -133,25 +137,21 @@
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
-            customSearchLookUpEditGostN = new Core.Class.CustomSearchLookUpEdit();
-            ГОСТ = new DevExpress.XtraLayout.LayoutControlItem();
-            customSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            customSearchLookUpEditGrupN = new Core.Class.CustomSearchLookUpEdit();
-            Группа = new DevExpress.XtraLayout.LayoutControlItem();
-            customSearchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).BeginInit();
             dataLayoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)spArticulNaborSostavBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGrupN.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gostGrupIzdViewModelBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit2View).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGostN.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gostModelBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlNabor).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)spArticulNaborSostavBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGost).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gostModelBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGostView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrup).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gostGrupIzdViewModelBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrupView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxGrup).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxGost).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customPictureBoxNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlNabor_Old).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor_Old).BeginInit();
@@ -174,6 +174,8 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ГОСТ).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Группа).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroupDataNaborOld).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Артикул_Old).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
@@ -201,12 +203,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGostN.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ГОСТ).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGrupN.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Группа).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit2View).BeginInit();
             SuspendLayout();
             // 
             // dataLayoutControl1
@@ -244,19 +240,77 @@
             dataLayoutControl1.TabIndex = 0;
             dataLayoutControl1.Text = "dataLayoutControl1";
             // 
+            // customSearchLookUpEditGrupN
+            // 
+            customSearchLookUpEditGrupN.Location = new System.Drawing.Point(619, 96);
+            customSearchLookUpEditGrupN.Name = "customSearchLookUpEditGrupN";
+            customSearchLookUpEditGrupN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customSearchLookUpEditGrupN.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSearchLookUpEditGrupN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customSearchLookUpEditGrupN.Properties.Appearance.Options.UseBackColor = true;
+            customSearchLookUpEditGrupN.Properties.Appearance.Options.UseFont = true;
+            customSearchLookUpEditGrupN.Properties.Appearance.Options.UseForeColor = true;
+            customSearchLookUpEditGrupN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customSearchLookUpEditGrupN.Properties.DataSource = gostGrupIzdViewModelBindingSource;
+            customSearchLookUpEditGrupN.Properties.DisplayMember = "Ag_name_sokr";
+            customSearchLookUpEditGrupN.Properties.NullText = "";
+            customSearchLookUpEditGrupN.Properties.PopupView = customSearchLookUpEdit2View;
+            customSearchLookUpEditGrupN.Properties.ValueMember = "Ag_id";
+            customSearchLookUpEditGrupN.Size = new System.Drawing.Size(334, 22);
+            customSearchLookUpEditGrupN.StyleController = dataLayoutControl1;
+            customSearchLookUpEditGrupN.TabIndex = 14;
+            // 
+            // gostGrupIzdViewModelBindingSource
+            // 
+            gostGrupIzdViewModelBindingSource.DataSource = typeof(Core.Models.GostGrupIzdViewModel);
+            // 
+            // customSearchLookUpEdit2View
+            // 
+            customSearchLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            customSearchLookUpEdit2View.Name = "customSearchLookUpEdit2View";
+            customSearchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            customSearchLookUpEdit2View.OptionsView.ShowGroupPanel = false;
+            // 
+            // customSearchLookUpEditGostN
+            // 
+            customSearchLookUpEditGostN.Location = new System.Drawing.Point(619, 70);
+            customSearchLookUpEditGostN.Name = "customSearchLookUpEditGostN";
+            customSearchLookUpEditGostN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customSearchLookUpEditGostN.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSearchLookUpEditGostN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customSearchLookUpEditGostN.Properties.Appearance.Options.UseBackColor = true;
+            customSearchLookUpEditGostN.Properties.Appearance.Options.UseFont = true;
+            customSearchLookUpEditGostN.Properties.Appearance.Options.UseForeColor = true;
+            customSearchLookUpEditGostN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customSearchLookUpEditGostN.Properties.DataSource = gostModelBindingSource;
+            customSearchLookUpEditGostN.Properties.DisplayMember = "Name_gost";
+            customSearchLookUpEditGostN.Properties.NullText = "";
+            customSearchLookUpEditGostN.Properties.PopupView = customSearchLookUpEdit1View;
+            customSearchLookUpEditGostN.Properties.ValueMember = "Id_gost";
+            customSearchLookUpEditGostN.Size = new System.Drawing.Size(334, 22);
+            customSearchLookUpEditGostN.StyleController = dataLayoutControl1;
+            customSearchLookUpEditGostN.TabIndex = 13;
+            // 
+            // gostModelBindingSource
+            // 
+            gostModelBindingSource.DataSource = typeof(Core.Models.GostModel);
+            // 
+            // customSearchLookUpEdit1View
+            // 
+            customSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            customSearchLookUpEdit1View.Name = "customSearchLookUpEdit1View";
+            customSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            customSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // customLabelIzm
             // 
             customLabelIzm.Font = new System.Drawing.Font("Arial", 10F);
             customLabelIzm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelIzm.Location = new System.Drawing.Point(526, 284);
             customLabelIzm.Name = "customLabelIzm";
-            customLabelIzm.Size = new System.Drawing.Size(426, 24);
+            customLabelIzm.Size = new System.Drawing.Size(427, 25);
             customLabelIzm.TabIndex = 1;
             customLabelIzm.Text = "Проверьте данные";
-            // 
-            // spArticulNaborSostavBindingSource
-            // 
-            spArticulNaborSostavBindingSource.DataSource = typeof(Models.SpArticulNaborSostav);
             // 
             // customLabelTxtSave
             // 
@@ -275,22 +329,27 @@
             customButtonSaveNabor.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonSaveNabor.Location = new System.Drawing.Point(700, 540);
             customButtonSaveNabor.Name = "customButtonSaveNabor";
-            customButtonSaveNabor.Size = new System.Drawing.Size(252, 22);
+            customButtonSaveNabor.Size = new System.Drawing.Size(253, 22);
             customButtonSaveNabor.TabIndex = 16;
             customButtonSaveNabor.Text = "Сохранить";
             customButtonSaveNabor.UseVisualStyleBackColor = false;
+            customButtonSaveNabor.Click += customButtonSaveNabor_Click;
             // 
             // customGridControlNabor
             // 
             customGridControlNabor.DataSource = spArticulNaborSostavBindingSource;
             customGridControlNabor.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlNabor.Location = new System.Drawing.Point(526, 312);
+            customGridControlNabor.Location = new System.Drawing.Point(526, 313);
             customGridControlNabor.MainView = GridViewNabor;
             customGridControlNabor.Name = "customGridControlNabor";
-            customGridControlNabor.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemComboBoxGrup, repositoryItemComboBoxGost, repositoryItemSearchLookUpEditGost, repositoryItemSearchLookUpEditGrup });
-            customGridControlNabor.Size = new System.Drawing.Size(426, 224);
+            customGridControlNabor.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemSearchLookUpEditGost, repositoryItemSearchLookUpEditGrup });
+            customGridControlNabor.Size = new System.Drawing.Size(427, 223);
             customGridControlNabor.TabIndex = 15;
             customGridControlNabor.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { GridViewNabor });
+            // 
+            // spArticulNaborSostavBindingSource
+            // 
+            spArticulNaborSostavBindingSource.DataSource = typeof(Models.SpArticulNaborSostav);
             // 
             // GridViewNabor
             // 
@@ -305,7 +364,9 @@
             GridViewNabor.GridControl = customGridControlNabor;
             GridViewNabor.Name = "GridViewNabor";
             GridViewNabor.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            GridViewNabor.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
             GridViewNabor.OptionsView.EnableAppearanceEvenRow = true;
+            GridViewNabor.OptionsView.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             GridViewNabor.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colrazm_all1, DevExpress.Data.ColumnSortOrder.Ascending) });
             // 
             // BandRazmAll1
@@ -391,10 +452,6 @@
             repositoryItemSearchLookUpEditGost.PopupView = repositoryItemSearchLookUpEditGostView;
             repositoryItemSearchLookUpEditGost.ValueMember = "Id_gost";
             // 
-            // gostModelBindingSource
-            // 
-            gostModelBindingSource.DataSource = typeof(Core.Models.GostModel);
-            // 
             // repositoryItemSearchLookUpEditGostView
             // 
             repositoryItemSearchLookUpEditGostView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
@@ -418,12 +475,9 @@
             repositoryItemSearchLookUpEditGrup.DataSource = gostGrupIzdViewModelBindingSource;
             repositoryItemSearchLookUpEditGrup.DisplayMember = "Ag_id";
             repositoryItemSearchLookUpEditGrup.Name = "repositoryItemSearchLookUpEditGrup";
+            repositoryItemSearchLookUpEditGrup.NullText = "";
             repositoryItemSearchLookUpEditGrup.PopupView = repositoryItemSearchLookUpEditGrupView;
             repositoryItemSearchLookUpEditGrup.ValueMember = "N_i";
-            // 
-            // gostGrupIzdViewModelBindingSource
-            // 
-            gostGrupIzdViewModelBindingSource.DataSource = typeof(Core.Models.GostGrupIzdViewModel);
             // 
             // repositoryItemSearchLookUpEditGrupView
             // 
@@ -460,18 +514,6 @@
             colrazm_all1.Name = "colrazm_all1";
             colrazm_all1.Width = 90;
             // 
-            // repositoryItemComboBoxGrup
-            // 
-            repositoryItemComboBoxGrup.AutoHeight = false;
-            repositoryItemComboBoxGrup.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemComboBoxGrup.Name = "repositoryItemComboBoxGrup";
-            // 
-            // repositoryItemComboBoxGost
-            // 
-            repositoryItemComboBoxGost.AutoHeight = false;
-            repositoryItemComboBoxGost.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemComboBoxGost.Name = "repositoryItemComboBoxGost";
-            // 
             // customTextBoxArtN
             // 
             customTextBoxArtN.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -482,7 +524,7 @@
             customTextBoxArtN.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxArtN.Location = new System.Drawing.Point(619, 46);
             customTextBoxArtN.Name = "customTextBoxArtN";
-            customTextBoxArtN.Size = new System.Drawing.Size(333, 20);
+            customTextBoxArtN.Size = new System.Drawing.Size(334, 20);
             customTextBoxArtN.TabIndex = 12;
             // 
             // customTextBoxGrupN_Old
@@ -531,7 +573,7 @@
             customPictureBoxNabor.ImagePath = null;
             customPictureBoxNabor.Location = new System.Drawing.Point(314, 46);
             customPictureBoxNabor.Name = "customPictureBoxNabor";
-            customPictureBoxNabor.Size = new System.Drawing.Size(184, 214);
+            customPictureBoxNabor.Size = new System.Drawing.Size(184, 213);
             customPictureBoxNabor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             customPictureBoxNabor.TabIndex = 1;
             customPictureBoxNabor.TabStop = false;
@@ -678,9 +720,9 @@
             customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonSave.Location = new System.Drawing.Point(998, 197);
+            customButtonSave.Location = new System.Drawing.Point(999, 197);
             customButtonSave.Name = "customButtonSave";
-            customButtonSave.Size = new System.Drawing.Size(143, 33);
+            customButtonSave.Size = new System.Drawing.Size(142, 33);
             customButtonSave.TabIndex = 7;
             customButtonSave.Text = "Сохранить";
             customButtonSave.UseVisualStyleBackColor = false;
@@ -709,9 +751,9 @@
             customTextBoxSostav.ErrorMessage = null;
             customTextBoxSostav.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxSostav.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxSostav.Location = new System.Drawing.Point(1073, 149);
+            customTextBoxSostav.Location = new System.Drawing.Point(1074, 149);
             customTextBoxSostav.Name = "customTextBoxSostav";
-            customTextBoxSostav.Size = new System.Drawing.Size(68, 20);
+            customTextBoxSostav.Size = new System.Drawing.Size(67, 20);
             customTextBoxSostav.TabIndex = 5;
             // 
             // customTextBoxKod
@@ -731,7 +773,7 @@
             // customLookUpEditAg_id
             // 
             customLookUpEditAg_id.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Ag_id", true));
-            customLookUpEditAg_id.Location = new System.Drawing.Point(1073, 123);
+            customLookUpEditAg_id.Location = new System.Drawing.Point(1074, 123);
             customLookUpEditAg_id.Name = "customLookUpEditAg_id";
             customLookUpEditAg_id.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditAg_id.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -745,14 +787,14 @@
             customLookUpEditAg_id.Properties.DisplayMember = "N_i";
             customLookUpEditAg_id.Properties.NullText = "Пусто";
             customLookUpEditAg_id.Properties.ValueMember = "Ag_id";
-            customLookUpEditAg_id.Size = new System.Drawing.Size(68, 22);
+            customLookUpEditAg_id.Size = new System.Drawing.Size(67, 22);
             customLookUpEditAg_id.StyleController = dataLayoutControl1;
             customLookUpEditAg_id.TabIndex = 4;
             // 
             // customLookUpEditGost
             // 
             customLookUpEditGost.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Id_gost", true));
-            customLookUpEditGost.Location = new System.Drawing.Point(1073, 97);
+            customLookUpEditGost.Location = new System.Drawing.Point(1074, 97);
             customLookUpEditGost.Name = "customLookUpEditGost";
             customLookUpEditGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditGost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -766,14 +808,14 @@
             customLookUpEditGost.Properties.DisplayMember = "Name_gost";
             customLookUpEditGost.Properties.NullText = "Пусто";
             customLookUpEditGost.Properties.ValueMember = "Id_gost";
-            customLookUpEditGost.Size = new System.Drawing.Size(68, 22);
+            customLookUpEditGost.Size = new System.Drawing.Size(67, 22);
             customLookUpEditGost.StyleController = dataLayoutControl1;
             customLookUpEditGost.TabIndex = 3;
             // 
             // customLookUpEditT_v_n
             // 
             customLookUpEditT_v_n.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Tk_id", true));
-            customLookUpEditT_v_n.Location = new System.Drawing.Point(1073, 71);
+            customLookUpEditT_v_n.Location = new System.Drawing.Point(1074, 71);
             customLookUpEditT_v_n.Name = "customLookUpEditT_v_n";
             customLookUpEditT_v_n.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditT_v_n.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -787,7 +829,7 @@
             customLookUpEditT_v_n.Properties.DisplayMember = "TK_NAME";
             customLookUpEditT_v_n.Properties.NullText = "Пусто";
             customLookUpEditT_v_n.Properties.ValueMember = "TK_ID";
-            customLookUpEditT_v_n.Size = new System.Drawing.Size(68, 22);
+            customLookUpEditT_v_n.Size = new System.Drawing.Size(67, 22);
             customLookUpEditT_v_n.StyleController = dataLayoutControl1;
             customLookUpEditT_v_n.TabIndex = 2;
             // 
@@ -798,7 +840,7 @@
             // customLookUpEditAssort
             // 
             customLookUpEditAssort.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Ta_id", true));
-            customLookUpEditAssort.Location = new System.Drawing.Point(1073, 45);
+            customLookUpEditAssort.Location = new System.Drawing.Point(1074, 45);
             customLookUpEditAssort.Name = "customLookUpEditAssort";
             customLookUpEditAssort.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditAssort.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -812,7 +854,7 @@
             customLookUpEditAssort.Properties.DisplayMember = "txt_v";
             customLookUpEditAssort.Properties.NullText = "Пусто";
             customLookUpEditAssort.Properties.ValueMember = "kod_v";
-            customLookUpEditAssort.Size = new System.Drawing.Size(68, 22);
+            customLookUpEditAssort.Size = new System.Drawing.Size(67, 22);
             customLookUpEditAssort.StyleController = dataLayoutControl1;
             customLookUpEditAssort.TabIndex = 0;
             // 
@@ -843,9 +885,9 @@
             customTextBoxRazm.ErrorMessage = null;
             customTextBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxRazm.Location = new System.Drawing.Point(1073, 173);
+            customTextBoxRazm.Location = new System.Drawing.Point(1074, 173);
             customTextBoxRazm.Name = "customTextBoxRazm";
-            customTextBoxRazm.Size = new System.Drawing.Size(68, 20);
+            customTextBoxRazm.Size = new System.Drawing.Size(67, 20);
             customTextBoxRazm.TabIndex = 6;
             // 
             // layoutControlItemKod
@@ -905,7 +947,7 @@
             layoutControlGroupDataNabor.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { Артикул, layoutControlItem8, layoutControlItem9, layoutControlItem10, emptySpaceItem4, layoutControlItem14, ГОСТ, Группа });
             layoutControlGroupDataNabor.Location = new System.Drawing.Point(502, 1);
             layoutControlGroupDataNabor.Name = "layoutControlGroupDataNabor";
-            layoutControlGroupDataNabor.Size = new System.Drawing.Size(454, 565);
+            layoutControlGroupDataNabor.Size = new System.Drawing.Size(455, 565);
             layoutControlGroupDataNabor.Text = "Данные набора для редактирования";
             // 
             // Артикул
@@ -914,15 +956,15 @@
             Артикул.CustomizationFormText = "Артикул";
             Артикул.Location = new System.Drawing.Point(0, 0);
             Артикул.Name = "Артикул";
-            Артикул.Size = new System.Drawing.Size(430, 24);
+            Артикул.Size = new System.Drawing.Size(431, 24);
             Артикул.TextSize = new System.Drawing.Size(81, 13);
             // 
             // layoutControlItem8
             // 
             layoutControlItem8.Control = customGridControlNabor;
-            layoutControlItem8.Location = new System.Drawing.Point(0, 266);
+            layoutControlItem8.Location = new System.Drawing.Point(0, 267);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(430, 228);
+            layoutControlItem8.Size = new System.Drawing.Size(431, 227);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem9
@@ -930,7 +972,7 @@
             layoutControlItem9.Control = customButtonSaveNabor;
             layoutControlItem9.Location = new System.Drawing.Point(174, 494);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(256, 26);
+            layoutControlItem9.Size = new System.Drawing.Size(257, 26);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem10
@@ -945,15 +987,31 @@
             // 
             emptySpaceItem4.Location = new System.Drawing.Point(0, 76);
             emptySpaceItem4.Name = "emptySpaceItem4";
-            emptySpaceItem4.Size = new System.Drawing.Size(430, 162);
+            emptySpaceItem4.Size = new System.Drawing.Size(431, 162);
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = customLabelIzm;
             layoutControlItem14.Location = new System.Drawing.Point(0, 238);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(430, 28);
+            layoutControlItem14.Size = new System.Drawing.Size(431, 29);
             layoutControlItem14.TextVisible = false;
+            // 
+            // ГОСТ
+            // 
+            ГОСТ.Control = customSearchLookUpEditGostN;
+            ГОСТ.Location = new System.Drawing.Point(0, 24);
+            ГОСТ.Name = "ГОСТ";
+            ГОСТ.Size = new System.Drawing.Size(431, 26);
+            ГОСТ.TextSize = new System.Drawing.Size(81, 13);
+            // 
+            // Группа
+            // 
+            Группа.Control = customSearchLookUpEditGrupN;
+            Группа.Location = new System.Drawing.Point(0, 50);
+            Группа.Name = "Группа";
+            Группа.Size = new System.Drawing.Size(431, 26);
+            Группа.TextSize = new System.Drawing.Size(81, 13);
             // 
             // layoutControlGroupDataNaborOld
             // 
@@ -997,7 +1055,7 @@
             layoutControlItemPicture.Control = customPictureBoxNabor;
             layoutControlItemPicture.Location = new System.Drawing.Point(290, 0);
             layoutControlItemPicture.Name = "layoutControlItemPicture";
-            layoutControlItemPicture.Size = new System.Drawing.Size(188, 234);
+            layoutControlItemPicture.Size = new System.Drawing.Size(188, 233);
             layoutControlItemPicture.Text = " ";
             layoutControlItemPicture.TextLocation = DevExpress.Utils.Locations.Bottom;
             layoutControlItemPicture.TextSize = new System.Drawing.Size(81, 13);
@@ -1018,13 +1076,13 @@
             // 
             // emptySpaceItem6
             // 
-            emptySpaceItem6.Location = new System.Drawing.Point(0, 235);
+            emptySpaceItem6.Location = new System.Drawing.Point(0, 234);
             emptySpaceItem6.Name = "emptySpaceItem6";
-            emptySpaceItem6.Size = new System.Drawing.Size(478, 11);
+            emptySpaceItem6.Size = new System.Drawing.Size(478, 12);
             // 
             // simpleSeparator2
             // 
-            simpleSeparator2.Location = new System.Drawing.Point(0, 234);
+            simpleSeparator2.Location = new System.Drawing.Point(0, 233);
             simpleSeparator2.Name = "simpleSeparator2";
             simpleSeparator2.Size = new System.Drawing.Size(478, 1);
             // 
@@ -1032,7 +1090,7 @@
             // 
             emptySpaceItem3.Location = new System.Drawing.Point(0, 72);
             emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new System.Drawing.Size(290, 162);
+            emptySpaceItem3.Size = new System.Drawing.Size(290, 161);
             // 
             // emptySpaceItem7
             // 
@@ -1044,15 +1102,15 @@
             // 
             simpleSeparator1.Location = new System.Drawing.Point(0, 0);
             simpleSeparator1.Name = "simpleSeparator1";
-            simpleSeparator1.Size = new System.Drawing.Size(956, 1);
+            simpleSeparator1.Size = new System.Drawing.Size(957, 1);
             // 
             // layoutControlGroupData
             // 
             layoutControlGroupData.CustomizationFormText = "Данные артикула";
             layoutControlGroupData.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItemRazm, layoutControlItemAssort, layoutControlItemT_v_n, layoutControlItemGost, layoutControlItemAg_id, layoutControlItemSostav, emptySpaceItem1, layoutControlItem11, emptySpaceItem2 });
-            layoutControlGroupData.Location = new System.Drawing.Point(956, 0);
+            layoutControlGroupData.Location = new System.Drawing.Point(957, 0);
             layoutControlGroupData.Name = "layoutControlGroupData";
-            layoutControlGroupData.Size = new System.Drawing.Size(189, 566);
+            layoutControlGroupData.Size = new System.Drawing.Size(188, 566);
             layoutControlGroupData.Text = "Данные";
             layoutControlGroupData.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
@@ -1061,7 +1119,7 @@
             layoutControlItemRazm.Control = customTextBoxRazm;
             layoutControlItemRazm.Location = new System.Drawing.Point(0, 128);
             layoutControlItemRazm.Name = "layoutControlItemRazm";
-            layoutControlItemRazm.Size = new System.Drawing.Size(165, 24);
+            layoutControlItemRazm.Size = new System.Drawing.Size(164, 24);
             layoutControlItemRazm.Text = "Размер";
             layoutControlItemRazm.TextSize = new System.Drawing.Size(81, 13);
             // 
@@ -1070,7 +1128,7 @@
             layoutControlItemAssort.Control = customLookUpEditAssort;
             layoutControlItemAssort.Location = new System.Drawing.Point(0, 0);
             layoutControlItemAssort.Name = "layoutControlItemAssort";
-            layoutControlItemAssort.Size = new System.Drawing.Size(165, 26);
+            layoutControlItemAssort.Size = new System.Drawing.Size(164, 26);
             layoutControlItemAssort.Text = "Ассортимент";
             layoutControlItemAssort.TextSize = new System.Drawing.Size(81, 13);
             // 
@@ -1079,7 +1137,7 @@
             layoutControlItemT_v_n.Control = customLookUpEditT_v_n;
             layoutControlItemT_v_n.Location = new System.Drawing.Point(0, 26);
             layoutControlItemT_v_n.Name = "layoutControlItemT_v_n";
-            layoutControlItemT_v_n.Size = new System.Drawing.Size(165, 26);
+            layoutControlItemT_v_n.Size = new System.Drawing.Size(164, 26);
             layoutControlItemT_v_n.Text = "Часть в наборе";
             layoutControlItemT_v_n.TextSize = new System.Drawing.Size(81, 13);
             // 
@@ -1088,7 +1146,7 @@
             layoutControlItemGost.Control = customLookUpEditGost;
             layoutControlItemGost.Location = new System.Drawing.Point(0, 52);
             layoutControlItemGost.Name = "layoutControlItemGost";
-            layoutControlItemGost.Size = new System.Drawing.Size(165, 26);
+            layoutControlItemGost.Size = new System.Drawing.Size(164, 26);
             layoutControlItemGost.Text = "ГОСТ";
             layoutControlItemGost.TextSize = new System.Drawing.Size(81, 13);
             // 
@@ -1097,7 +1155,7 @@
             layoutControlItemAg_id.Control = customLookUpEditAg_id;
             layoutControlItemAg_id.Location = new System.Drawing.Point(0, 78);
             layoutControlItemAg_id.Name = "layoutControlItemAg_id";
-            layoutControlItemAg_id.Size = new System.Drawing.Size(165, 26);
+            layoutControlItemAg_id.Size = new System.Drawing.Size(164, 26);
             layoutControlItemAg_id.Text = "Группа по ГОСТ";
             layoutControlItemAg_id.TextSize = new System.Drawing.Size(81, 13);
             // 
@@ -1106,7 +1164,7 @@
             layoutControlItemSostav.Control = customTextBoxSostav;
             layoutControlItemSostav.Location = new System.Drawing.Point(0, 104);
             layoutControlItemSostav.Name = "layoutControlItemSostav";
-            layoutControlItemSostav.Size = new System.Drawing.Size(165, 24);
+            layoutControlItemSostav.Size = new System.Drawing.Size(164, 24);
             layoutControlItemSostav.Text = "Состав";
             layoutControlItemSostav.TextSize = new System.Drawing.Size(81, 13);
             // 
@@ -1114,14 +1172,14 @@
             // 
             emptySpaceItem1.Location = new System.Drawing.Point(0, 189);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(165, 332);
+            emptySpaceItem1.Size = new System.Drawing.Size(164, 332);
             // 
             // layoutControlItem11
             // 
             layoutControlItem11.Control = customButtonSave;
             layoutControlItem11.Location = new System.Drawing.Point(18, 152);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(147, 37);
+            layoutControlItem11.Size = new System.Drawing.Size(146, 37);
             layoutControlItem11.TextVisible = false;
             // 
             // emptySpaceItem2
@@ -1169,78 +1227,6 @@
             emptySpaceItem5.Name = "emptySpaceItem2";
             emptySpaceItem5.Size = new System.Drawing.Size(18, 37);
             // 
-            // customSearchLookUpEditGostN
-            // 
-            customSearchLookUpEditGostN.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Id_gost", true));
-            customSearchLookUpEditGostN.Location = new System.Drawing.Point(619, 70);
-            customSearchLookUpEditGostN.Name = "customSearchLookUpEditGostN";
-            customSearchLookUpEditGostN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customSearchLookUpEditGostN.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSearchLookUpEditGostN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customSearchLookUpEditGostN.Properties.Appearance.Options.UseBackColor = true;
-            customSearchLookUpEditGostN.Properties.Appearance.Options.UseFont = true;
-            customSearchLookUpEditGostN.Properties.Appearance.Options.UseForeColor = true;
-            customSearchLookUpEditGostN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            customSearchLookUpEditGostN.Properties.DataSource = gostModelBindingSource;
-            customSearchLookUpEditGostN.Properties.DisplayMember = "Name_gost";
-            customSearchLookUpEditGostN.Properties.NullText = "";
-            customSearchLookUpEditGostN.Properties.PopupView = customSearchLookUpEdit1View;
-            customSearchLookUpEditGostN.Properties.ValueMember = "Id_gost";
-            customSearchLookUpEditGostN.Size = new System.Drawing.Size(333, 22);
-            customSearchLookUpEditGostN.StyleController = dataLayoutControl1;
-            customSearchLookUpEditGostN.TabIndex = 17;
-            // 
-            // ГОСТ
-            // 
-            ГОСТ.Control = customSearchLookUpEditGostN;
-            ГОСТ.Location = new System.Drawing.Point(0, 24);
-            ГОСТ.Name = "ГОСТ";
-            ГОСТ.Size = new System.Drawing.Size(430, 26);
-            ГОСТ.TextSize = new System.Drawing.Size(81, 13);
-            // 
-            // customSearchLookUpEdit1View
-            // 
-            customSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            customSearchLookUpEdit1View.Name = "customSearchLookUpEdit1View";
-            customSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            customSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // customSearchLookUpEditGrupN
-            // 
-            customSearchLookUpEditGrupN.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Ag_id", true));
-            customSearchLookUpEditGrupN.Location = new System.Drawing.Point(619, 96);
-            customSearchLookUpEditGrupN.Name = "customSearchLookUpEditGrupN";
-            customSearchLookUpEditGrupN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customSearchLookUpEditGrupN.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSearchLookUpEditGrupN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customSearchLookUpEditGrupN.Properties.Appearance.Options.UseBackColor = true;
-            customSearchLookUpEditGrupN.Properties.Appearance.Options.UseFont = true;
-            customSearchLookUpEditGrupN.Properties.Appearance.Options.UseForeColor = true;
-            customSearchLookUpEditGrupN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            customSearchLookUpEditGrupN.Properties.DataSource = gostGrupIzdViewModelBindingSource;
-            customSearchLookUpEditGrupN.Properties.DisplayMember = "Ag_name_sokr";
-            customSearchLookUpEditGrupN.Properties.NullText = "";
-            customSearchLookUpEditGrupN.Properties.PopupView = customSearchLookUpEdit2View;
-            customSearchLookUpEditGrupN.Properties.ValueMember = "Ag_id";
-            customSearchLookUpEditGrupN.Size = new System.Drawing.Size(333, 22);
-            customSearchLookUpEditGrupN.StyleController = dataLayoutControl1;
-            customSearchLookUpEditGrupN.TabIndex = 18;
-            // 
-            // Группа
-            // 
-            Группа.Control = customSearchLookUpEditGrupN;
-            Группа.Location = new System.Drawing.Point(0, 50);
-            Группа.Name = "Группа";
-            Группа.Size = new System.Drawing.Size(430, 26);
-            Группа.TextSize = new System.Drawing.Size(81, 13);
-            // 
-            // customSearchLookUpEdit2View
-            // 
-            customSearchLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            customSearchLookUpEdit2View.Name = "customSearchLookUpEdit2View";
-            customSearchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            customSearchLookUpEdit2View.OptionsView.ShowGroupPanel = false;
-            // 
             // EditNaborSostav
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1252,17 +1238,19 @@
             Text = "Редактирование набора";
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).EndInit();
             dataLayoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)spArticulNaborSostavBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGrupN.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gostGrupIzdViewModelBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit2View).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGostN.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gostModelBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlNabor).EndInit();
+            ((System.ComponentModel.ISupportInitialize)spArticulNaborSostavBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGost).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gostModelBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGostView).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrup).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gostGrupIzdViewModelBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrupView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxGrup).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxGost).EndInit();
             ((System.ComponentModel.ISupportInitialize)customPictureBoxNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlNabor_Old).EndInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor_Old).EndInit();
@@ -1285,6 +1273,8 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ГОСТ).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Группа).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroupDataNaborOld).EndInit();
             ((System.ComponentModel.ISupportInitialize)Артикул_Old).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
@@ -1312,12 +1302,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGostN.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ГОСТ).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGrupN.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Группа).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit2View).EndInit();
             ResumeLayout(false);
         }
 
@@ -1419,8 +1403,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand BandRazmAll;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand BandRazmAll1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxGost;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxGrup;
         private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit repositoryItemSearchLookUpEditGost;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEditGostView;
         private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit repositoryItemSearchLookUpEditGrup;

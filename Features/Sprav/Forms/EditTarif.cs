@@ -417,7 +417,6 @@ namespace SewingProduction.Features.Sprav
         #region раздел: Тарифы разовых работ
         private TarifRabotModel _currentTarif = null;
 
-        // Загрузка данных
         private async void customGridControlTR_Load(object sender, EventArgs e)
         {
             var tableTarifRabot = await _tarifService.LoadTarifRabotList();
@@ -436,16 +435,14 @@ namespace SewingProduction.Features.Sprav
         {
             TarifRabotModel model = new TarifRabotModel { Text = "Новый тариф" };
             await _dbService.SaveEntityAsync("sp_ras_rabot", "id_kod_o", model);
-            // 3️⃣ перезагружаем данные
+
             var tableTarifRabot = await _tarifService.LoadTarifRabotList();
             customGridControlTR.DataSource = tableTarifRabot;
             customGridControlTR.RefreshDataSource();
 
-            // 4️⃣ встаём на последнюю строку
             gridViewTR.FocusedRowHandle = gridViewTR.GetRowHandle(gridViewTR.DataRowCount - 1);
             gridViewTR.MakeRowVisible(gridViewTR.FocusedRowHandle);
 
-            // 5️⃣ открываем EditForm для редактирования этой строки
             gridViewTR.GridControl.BeginInvoke(new Action(() =>
             {
                 if (gridViewTR.IsValidRowHandle(gridViewTR.FocusedRowHandle))

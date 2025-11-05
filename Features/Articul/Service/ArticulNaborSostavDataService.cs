@@ -55,11 +55,10 @@ namespace SewingProduction.Features.Articul.Service
             string query = @"SELECT Id_gost, Name_gost, Opi_gost FROM gost";
             return await _dbService.GetListAsync<GostModel>(query, new { });
         }
-        public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdAsync(int idGost, int idTK)
+        public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdAsync()
         {
-            string query = @"SELECT Id_gost, Ag_id,Ag_name_sokr,Ag_tnved,N_i,N_g FROM dbo.View_GostGrupIzd WHERE arh = 0 
-                                AND id_gost = @idGost AND ag_tk_id = @idTK";
-            return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new { idGost , idTK });
+            string query = @"SELECT Id_gost, Ag_id,Ag_name_sokr,Ag_tnved,N_i,N_g FROM dbo.View_GostGrupIzd WHERE arh = 0 ";
+            return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new {});
         }
         public bool CheckOpis(string kod)
         {
