@@ -1146,6 +1146,7 @@ namespace SewingProduction.Features.Sprav
             // customButtonAddTrr
             // 
             customButtonAddTrr.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonAddTrr.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddTrr.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAddTrr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonAddTrr.Location = new System.Drawing.Point(3, 624);

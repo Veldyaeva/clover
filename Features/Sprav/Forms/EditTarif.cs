@@ -115,14 +115,6 @@ namespace SewingProduction.Features.Sprav
         public void Filter(object sender, EventArgs e)
         {
             List<string> filters = new List<string>();
-
-            // Фильтрация по организации
-            if (customRadioButtonMay.Checked)
-                filters.Add("[firm] LIKE 'may'");
-            else if (customRadioButtonExp.Checked)
-                filters.Add("[firm] LIKE 'exp'");
-            else if (customRadioButtonAceKle.Checked)
-                filters.Add("[firm] LIKE 'ace/cle'");
             /*
             * Доступ для бухгалтеров - десятки
             * Для экономистов - еденицы
@@ -156,6 +148,15 @@ namespace SewingProduction.Features.Sprav
             }
             if (customCheckBoxProg.Checked)
                 filters.Clear();
+
+            // Фильтрация по организации
+            if (customRadioButtonMay.Checked)
+                filters.Add("[firm] LIKE 'may'");
+            else if (customRadioButtonExp.Checked)
+                filters.Add("[firm] LIKE 'exp'");
+            else if (customRadioButtonAceKle.Checked)
+                filters.Add("[firm] LIKE 'ace/cle'");
+
             // Применение фильтра
             gridViewZp.ActiveFilterString = string.Join(" AND ", filters);
 
@@ -431,14 +432,23 @@ namespace SewingProduction.Features.Sprav
                 await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
             }
         }
-        private void customButtonAddTrr_Click(object sender, EventArgs e)
+        private async void customButtonAddTrr_Click(object sender, EventArgs e)
         {
-            gridViewTR.AddNewRow();
+            TarifRabotModel model = new TarifRabotModel { Text = "Новый тариф" };
+            await _dbService.SaveEntityAsync("sp_ras_rabot", "id_kod_o", model);
+            // 3️⃣ перезагружаем данные
+            var tableTarifRabot = await _tarifService.LoadTarifRabotList();
+            customGridControlTR.DataSource = tableTarifRabot;
+            customGridControlTR.RefreshDataSource();
 
+            // 4️⃣ встаём на последнюю строку
+            gridViewTR.FocusedRowHandle = gridViewTR.GetRowHandle(gridViewTR.DataRowCount - 1);
+            gridViewTR.MakeRowVisible(gridViewTR.FocusedRowHandle);
+
+            // 5️⃣ открываем EditForm для редактирования этой строки
             gridViewTR.GridControl.BeginInvoke(new Action(() =>
             {
-                int rh = gridViewTR.FocusedRowHandle;
-                if (gridViewTR.IsValidRowHandle(rh))
+                if (gridViewTR.IsValidRowHandle(gridViewTR.FocusedRowHandle))
                     gridViewTR.ShowPopupEditForm();
             }));
 
