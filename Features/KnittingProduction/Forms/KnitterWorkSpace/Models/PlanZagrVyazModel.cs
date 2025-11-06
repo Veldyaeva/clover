@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using SewingProduction.Features.KnittingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,40 +16,114 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvDivision { get; set; }
         public string pzvMod { get; set; }
         public string pzvArticul { get; set; }
-        [Display(Name ="Id вязальной машины")]
         public int pzvKmlID { get; set; }
-        [Display(Name ="Номер вязальной машины")]
         public string kmlNumber { get; set; }
-
-        [Display(Name = "Номер задания")]//, Order = 12, GroupName = "Номенклатура")]
-        [StringLength(10)]
-        public string pzvNomZad { get; set;}
-        
-        [Display(Name = "annID", Order = 11, GroupName = "Номенклатура")]
+        public string pzvNomZad { get; set; }
         public int? pzvAnnID { get; set; }
-        
-        [Display(Name = "Номер рассчёта")]//, Order = 13, GroupName = "Номенклатура")]
         public int? pzvNom { get; set; }
-
         public int? pzvKol { get; set; }
         public int pzvSek { get; set; }
         public DateTime? pzvDateStart { get; set; }
         public DateTime? pzvDateEnd { get; set; }
         public int pzvKolNazn { get; set; }
-
-        // Поля для детального грида (из vwPlanZagrVyazNorm_ByTab)
-        public int nrN { get; set; }
-        public int nrN1 { get; set; }
-        public string nrText { get; set; }
-        public int nrRazryd { get; set; }
-        public string nrObor { get; set; }
-        [Display(Name ="Номер пачки")]
-        public int n_pach { get; set; }
+        public int? pzvTab { get; set; }
+        public int? n_pach { get; set; }
         public string razm { get; set; }
+        public int? nrN { get; set; }
+        public int? nrN1 { get; set; }
+        public string nrText { get; set; }
+        public int? nrRazryd { get; set; }
+        public string nrObor { get; set; }
+        public int? nr_kod_ob { get; set; }
+        public int? nr_kod_proizv { get; set; }
+        public BindingList<nrModel> nrModels { get; set; } = new();
+        public BindingList<rzvModel> rzvModels { get; set; } = new();
         public int kol_Effective { get; set; }
         public int sekEd_Effective { get; set; }
     }
 
+    public class nrModel
+    {
+        // dapper сопоставит благодаря MatchNamesWithUnderscores = true
+        public int nr_kod_proizv { get; set; }  // колонка: nrKodProizv
+        public int nrN { get; set; }            // nrN
+        public int nrN1 { get; set; }           // nrN1
+        public int nrRazryd { get; set; }       // nrRazryd
+        public string nrText { get; set; }      // nrText
+        public string nrObor { get; set; }      // nrObor
+        public int nr_kod_ob { get; set; }      // nrKodOb
+        public string kmlNumber { get; set; }
+    }
+
+    public class rzvModel
+    {
+        public int n_pach { get; set; }     // n_pach
+        public string pach_kod { get; set; }// pach_kod
+        public string razm { get; set; }    // razm
+        public int rzv_kod { get; set; }    // rzv_kod  (алиас в SQL)
+        public int rzv_kol { get; set; }    // rzv_kol  (алиас в SQL)
+    }
+
+    //    public class KnitterPZVModel
+    //    {
+    //        public int pzvID { get; set; }
+    //        public int? pzvDivision { get; set; }
+    //        public string pzvMod { get; set; }
+    //        public string pzvArticul { get; set; }
+    //        [Display(Name = "Id вязальной машины")]
+    //        public int pzvKmlID { get; set; }
+    //        [Display(Name = "Номер вязальной машины")]
+    //        public string kmlNumber { get; set; }
+
+    //        [Display(Name = "Номер задания")]//, Order = 12, GroupName = "Номенклатура")]
+    //        [StringLength(10)]
+    //        public string pzvNomZad { get; set; }
+
+    //        [Display(Name = "annID", Order = 11, GroupName = "Номенклатура")]
+    //        public int? pzvAnnID { get; set; }
+
+    //        [Display(Name = "Номер рассчёта")]//, Order = 13, GroupName = "Номенклатура")]
+    //        public int? pzvNom { get; set; }
+
+    //        public int? pzvKol { get; set; }
+    //        public int pzvSek { get; set; }
+    //        public DateTime? pzvDateStart { get; set; }
+    //        public DateTime? pzvDateEnd { get; set; }
+    //        public int pzvKolNazn { get; set; }
+    //        public BindingList<nrModel> nrModels { get; set; }
+    //        public BindingList<rzvModel> rzvModels { get; set; }
+
+    //        //// Поля для детального грида (из vwPlanZagrVyazNorm_ByTab)
+    //        //public int nrN { get; set; }
+    //        //public int nrN1 { get; set; }
+    //        //public string nrText { get; set; }
+    //        //public int nrRazryd { get; set; }
+    //        //public string nrObor { get; set; }
+    //        //[Display(Name = "Номер пачки")]
+    //        //public int n_pach { get; set; }
+    //        //public string razm { get; set; }
+    //        public int kol_Effective { get; set; }
+    //        public int sekEd_Effective { get; set; }
+    //    }
+
+    //    public class nrModel
+    //    {
+    //        public int nr_kod_proizv {get; set; }
+    //        public int nrN {get; set; }
+    //        public int nrN1 {get; set; }
+    //        public int nrRazryd {get; set; }
+    //        public string nrText {get; set; }
+    //        public string nrObor {get; set; }
+    //        public int nr_kod_ob {get; set; }
+    //    }
+    //    public class rzvModel
+    //    {
+    //        public int n_pach {get; set; }
+    //        public string pach_kod {get; set; }
+    //        public string razm {get; set; }
+    //        public int rzv_kod {get; set; }
+    //        public int rzv_kol { get; set; }    
+    //}
     //public class PlanZagrVyaz
     //    {
     //        // === Основное ===

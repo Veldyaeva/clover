@@ -247,6 +247,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnRzvPachListByNomRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnRzvPachListByNomKol = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnRzvPachListByNomGradacia = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridColumnRzvPachListByNomSyncSelection = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridControlZadanyListByMachine = new CustomGridControl();
@@ -298,7 +299,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customGridControl7 = new CustomGridControl();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             layoutControlGroup13 = new DevExpress.XtraLayout.LayoutControlGroup();
-            repositoryItemCheckEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customTabControl2).BeginInit();
@@ -378,6 +378,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRzvPachListByNom).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRzvPachListByNom).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlZadanyListByMachine).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewZadanyListByMachine).BeginInit();
@@ -408,7 +409,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)customGridControl7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
@@ -2290,6 +2290,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnRzvPachListByNomGradacia.VisibleIndex = 3;
             gridColumnRzvPachListByNomGradacia.Width = 34;
             // 
+            // repositoryItemCheckEdit5
+            // 
+            repositoryItemCheckEdit5.AutoHeight = false;
+            repositoryItemCheckEdit5.Name = "repositoryItemCheckEdit5";
+            repositoryItemCheckEdit5.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit5.ValueChecked = 1;
+            repositoryItemCheckEdit5.ValueUnchecked = 0;
+            // 
             // gridColumnRzvPachListByNomSyncSelection
             // 
             gridColumnRzvPachListByNomSyncSelection.Caption = "V";
@@ -2738,14 +2746,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup13.Name = "layoutControlGroup13";
             layoutControlGroup13.Size = new System.Drawing.Size(678, 127);
             // 
-            // repositoryItemCheckEdit5
-            // 
-            repositoryItemCheckEdit5.AutoHeight = false;
-            repositoryItemCheckEdit5.Name = "repositoryItemCheckEdit5";
-            repositoryItemCheckEdit5.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit5.ValueChecked = 1;
-            repositoryItemCheckEdit5.ValueUnchecked = 0;
-            // 
             // PlanZagrVyaz
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2834,6 +2834,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRzvPachListByNom).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRzvPachListByNom).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlZadanyListByMachine).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewZadanyListByMachine).EndInit();
@@ -2864,7 +2865,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)customGridControl7).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
             ResumeLayout(false);
         }
 
