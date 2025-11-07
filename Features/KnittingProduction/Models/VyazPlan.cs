@@ -360,13 +360,14 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public DateTime? olPzvDateMast { get; set; }
         [NotMapped] public DateTime? olPzvUpdDate { get; set; }
         [NotMapped] public int olPzvSekNazn { get; set; }
-        [NotMapped]  public int olPzvKolNazn { get; set; }
+        [NotMapped] public int olPzvKolNazn { get; set; }
         [NotMapped] public int olPzvChasNazn { get; set; }
         [NotMapped] public string olPzvVidPr { get; set; }
         [NotMapped] public int olPzvGradacia { get; set; }
         [NotMapped] public int olPzvGsID { get; set; }
         [NotMapped] public int olGsName { get; set; }
         [NotMapped] public int SyncSelection { get; set; } = 0;
+        [NotMapped] public int ErrorSelection { get; set; } = 0;
         [NotMapped] public bool IsModified { get; set; } = false;
         [NotMapped] public bool IsNew { get; set; } = false;
         [NotMapped] public bool IsDeleted { get; set; } = false;
