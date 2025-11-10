@@ -2103,22 +2103,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 foreach (var record in checkList)
                 {
-                    if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                    if (!CheckPZVDate("OlPvDateStart", Convert.ToDateTime(record.olPzvDateStart), $"нельзя изменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                     {
                         record.ErrorSelection = 1;
                         record.SyncSelection = 0;
                     }
-                    if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                    if (!CheckPZVDate("OlPvDateEnd", Convert.ToDateTime(record.olPzvDateEnd), $"нельзя изменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                     {
                         record.ErrorSelection = 1;
                         record.SyncSelection = 0;
                     }
-                    if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя отменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                    if (!CheckPZVDate("OlPvDateMast", Convert.ToDateTime(record.olPzvDateMast), $"нельзя изменить назначение работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                     {
                         record.ErrorSelection = 1;
                         record.SyncSelection = 0;
                     }
-                    if (!CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateStart), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
+                    if (!CheckPZVEmptyDate("OlPvDateNaznKm", Convert.ToDateTime(record.olPzvDateNaznKm), $"нельзя назначить работнику (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})"))
                     {
                         record.ErrorSelection = 1;
                         record.SyncSelection = 0;
@@ -2214,14 +2214,31 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void gridViewPZVOperList_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            PZVOperList currPZV = _pZVOperListByPachListBindingSource.Current as PZVOperList;
-            if (currPZV != null)
+            try
             {
-                Task artNormNTask = LoadArtNormNDataAsync(currPZV.olPzvAnnID);
-                Task normRaszTask = LoadNormRaszDataAsync(currPZV.olPzvNrID);
-                await Task.WhenAll(artNormNTask, normRaszTask);
-                gridViewArtNormN.RefreshData();
-                gridViewNormRasz.RefreshData();
+                if (e.FocusedRowHandle < 0)
+                    return;
+                // --- Проверяем BindingSource перед обращением к Current ---
+                if (_pZVOperListByPachListBindingSource == null)
+                    return; // или MessageBox.Show("BindingSource не инициализирован");
+
+                if (_pZVOperListByPachListBindingSource.Count == 0)
+                    return; // список пуст
+
+                if (_pZVOperListByPachListBindingSource.Position < 0)
+                    return; // ничего не выбрано
+                PZVOperList currPZV = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+                if (currPZV != null)
+                {
+                    Task artNormNTask = LoadArtNormNDataAsync(currPZV.olPzvAnnID);
+                    Task normRaszTask = LoadNormRaszDataAsync(currPZV.olPzvNrID);
+                    await Task.WhenAll(artNormNTask, normRaszTask);
+                    gridViewArtNormN.RefreshData();
+                    gridViewNormRasz.RefreshData();
+                }
+            }
+            catch (Exception ex)
+            { //MessageBox.Show(ex.ToString());
             }
         }
 
