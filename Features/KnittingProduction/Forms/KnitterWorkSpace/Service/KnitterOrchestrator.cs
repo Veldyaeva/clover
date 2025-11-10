@@ -1,6 +1,7 @@
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Models;
 using SewingProduction.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -42,7 +43,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab) => _repo.GetPlanTreeByTabAsync(tab);
 
         public Task SetPzvTabAsync(IEnumerable<int> pzvIds, int tab) => _repo.UpdatePzvTabAsync(pzvIds, tab);
-
+        public Task UpdatePzvDateStartAsync(int pzvId, DateTime dateStart) => _repo.UpdatePzvDateStartAsync(pzvId, dateStart);
 
         /// <summary>
         /// Получает операции плана по списку партий через хранимую процедуру.

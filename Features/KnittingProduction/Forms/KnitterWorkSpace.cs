@@ -1,23 +1,24 @@
 ﻿using DevExpress.XtraDataLayout;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.BandedGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
+using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SewingProduction.Features.CardByNom.Services;
-using System.Collections.Concurrent;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using Dapper;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -34,7 +35,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private Dictionary<(string MachineKey, string ArtKey, int? Nom), List<KnitterPZVModel>> _machineArtNomGroups;
         private Dictionary<(string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _machineArtNomPachGroups;
         // Вью для третьего уровня (деталь детальной таблицы)
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView2;
+        private RepositoryItemButtonEdit _pzvDateStartButtonEdit;
+        private RepositoryItemTextEdit _pzvDateStartTextEdit;
 
         /// <summary>
         /// Инициализирует форму рабочего места вязальщика, настраивает источники данных и события.
@@ -59,34 +61,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
-                // === Конфигурация третьего уровня (по art+№рассчёта) ===
-                advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView(PlanZagrVyazGridControl);
-                advBandedGridView1.Name = "advBandedGridView1";
-                advBandedGridView1.GridControl = PlanZagrVyazGridControl;
-                advBandedGridView1.OptionsDetail.EnableMasterViewMode = false;
-
-                var band2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand { Caption = "Операции (Art+Nom)" };
-                var colN = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn { Caption = "n", FieldName = "N", Visible = true };
-                var colN1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn { Caption = "n1", FieldName = "N1", Visible = true };
-                var colText = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn { Caption = "наименование операции", FieldName = "nrText", Visible = true };
-                band2.Columns.Add(colN);
-                band2.Columns.Add(colN1);
-                band2.Columns.Add(colText);
-                advBandedGridView1.Bands.Add(band2);
-
-                PlanZagrVyazGridControl.ViewCollection.Add(advBandedGridView1);
-
                 if (PlanZagrVyazGridControl.LevelTree.Nodes.Count > 0)
                 {
                     var level1 = PlanZagrVyazGridControl.LevelTree.Nodes[0];
                     var level2 = new DevExpress.XtraGrid.GridLevelNode
                     {
-                        RelationName = "ArtNom",
+                        RelationName = "Operations",
                         LevelTemplate = advBandedGridView1
                     };
                     level1.Nodes.Add(level2);
                 }
             this.Load += async (s, e) => await InitializeAsync();
+
+                SetupPzvDateStartColumn();
             }
             catch (Exception ex)
             {
@@ -136,69 +123,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        ///// <summary>
-        ///// Перегружает данные плана для текущего выбранного табеля через LoadPzvAsync и биндинги в грид.
-        ///// </summary>
-        //private async Task ReloadGridForCurrentSelectionAsync(bool onlyActive = true)
-        //{
-        //    try
-        //    {
-        //        if (FioGridLookUpEdit.EditValue == null)
-        //        {
-        //            _planBindingSource.DataSource = null;
-        //            PlanZagrVyazGridControl.RefreshDataSource();
-        //            return;
-        //        }
-
-        //        if (!int.TryParse(FioGridLookUpEdit.EditValue.ToString(), out int tab))
-        //        {
-        //            return;
-        //        }
-
-        //        using (var conn = _dbHelper.GetConnection())
-        //        {
-        //            var plan = await LoadPzvAsync(conn, tab, onlyActive);
-        //            BindGroupDetails(plan ?? new List<KnitterPZVModel>());
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        XtraMessageBox.Show(this, $"Ошибка загрузки плана: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-        /// <summary>
-        /// Конфигурирует соответствие колонок грида полям модели <see cref="KnitterPZVModel"/>.
-        /// </summary>
         private void ConfigureAdvBandedGridColumns()
         {
-            // Map columns to KnitterPZVModel properties
-            //bandedGridColumn1.FieldName = nameof(KnitterPZVModel.pzvID);
-            //bandedGridColumn1.Caption = "ID";
-
-            //bandedGridColumn2.FieldName = nameof(KnitterPZVModel.pzvDivision);
-            //bandedGridColumn2.Caption = "Подразделение";
-
-            //bandedGridColumn3.FieldName = nameof(KnitterPZVModel.pzvMod);
-            //bandedGridColumn3.Caption = "Модель";
-
-            //bandedGridColumn4.FieldName = nameof(KnitterPZVModel.pzvArticul);
-            //bandedGridColumn4.Caption = "Артикул";
-
-            //bandedGridColumn5.FieldName = nameof(KnitterPZVModel.pzvKol);
-            //bandedGridColumn5.Caption = "Кол-во";
-
-            //bandedGridColumn6.FieldName = nameof(KnitterPZVModel.pzvDateStart);
-            //bandedGridColumn6.Caption = "Начало";
-            //bandedGridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            //bandedGridColumn6.DisplayFormat.FormatString = "g";
-
-            //bandedGridColumn7.FieldName = nameof(KnitterPZVModel.pzvDateEnd);
-            //bandedGridColumn7.Caption = "Окончание";
-            //bandedGridColumn7.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            //bandedGridColumn7.DisplayFormat.FormatString = "g";
-
-            //// Hide unused column if present
-            //bandedGridColumn8.Visible = false;
+            // Конфигурация колонок задана в Designer.cs
         }
 
         /// <summary>
@@ -265,7 +192,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             master.OptionsDetail.EnableMasterViewMode = true;
             master.OptionsDetail.AllowOnlyOneMasterRowExpanded = false; // Разрешаем раскрытие нескольких строк
-                                                                        //для бОльшей производительности лучше запрещать
+            master.OptionsDetail.ShowDetailTabs = false; // Скрываем вкладки "ArtNom", "nr Models" и т.д.
 
             // Настройка второго уровня (Items) - bandedGridView1 является мастером для advBandedGridView1
             var bandedGridView1Master = bandedGridView1;
@@ -279,7 +206,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             bandedGridView1Master.OptionsDetail.EnableMasterViewMode = true;
             bandedGridView1Master.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
-            bandedGridView1Master.OptionsDetail.AllowExpandEmptyDetails = true; // Разрешаем раскрытие даже при пустых деталях (для отладки)
+            bandedGridView1Master.OptionsDetail.AllowExpandEmptyDetails = true;
+            bandedGridView1Master.OptionsDetail.ShowDetailTabs = false; // Скрываем вкладки "Items" и т.д.
             }
             finally
             {
@@ -399,34 +327,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _planBindingSource.DataSource = data;
         }
 
-        /// <summary>
-        /// Обработчик смены выбранного сотрудника: подгружает план по табельному номеру и отображает в гриде.
-        /// </summary>
         private async void FioGridLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             try
             {
-                if (FioGridLookUpEdit.EditValue == null)
+                if (FioGridLookUpEdit.EditValue == null || !int.TryParse(FioGridLookUpEdit.EditValue.ToString(), out int tab))
                 {
                     _planBindingSource.DataSource = null;
                     PlanZagrVyazGridControl.RefreshDataSource();
                     return;
                 }
 
-                if (!int.TryParse(FioGridLookUpEdit.EditValue.ToString(), out int tab))
-                {
-                    return;
-                }
-
-                //using (var conn = _dbHelper.GetConnection())
-                //{
-                ////    По умолчанию показываем только активные операции
-                //    var plan = await LoadPzvAsync(conn, tab, onlyActive: true);
-                //    BindGroupDetails(plan ?? new List<KnitterPZVModel>());
-                //}
-                List<KnitterPZVModel> plan = await _orchestrator.GetPlanByTabAsync(tab);
-
-                // Реализуем группировку для мастер-деталь вью
+                var plan = await _orchestrator.GetPlanByTabAsync(tab);
                 BindGroupDetails(plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
@@ -434,47 +346,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 XtraMessageBox.Show(this, $"Ошибка загрузки плана: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        public async Task<List<KnitterPZVModel>> LoadPzvAsync(SqlConnection conn, int? tab, bool onlyActive)
-        {
-            // важная опция для маппинга имён с подчёркиваниями
-            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-
-            var sql = "EXEC dbo.GetPlanZagrVyazNorm_ByTab @tab, @OnlyActive;";
-            var map = new ConcurrentDictionary<int, KnitterPZVModel>();
-
-            // Границы m-mapping: до колонки nrID — KnitterPZVModel, 
-            // затем блок полей nrModel, затем с n_pach — rzvModel.
-            var result = await conn.QueryAsync<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
-                sql,
-                (pzv, nr, rzv) =>
-                {
-                    var parent = map.GetOrAdd(pzv.pzvID, _ =>
-                    {
-                        // списки уже инициализированы в модели
-                        return pzv;
-                    });
-
-                    // nr всегда есть (JOIN), но защитимся от дублей
-                    if (nr != null && !ContainsNr(parent.nrModels, nr))
-                        parent.nrModels.Add(nr);
-
-                    // rzv может отсутствовать (LEFT JOIN) — в этом случае n_pach будет 0
-                    if (rzv != null && HasRzv(rzv) && !ContainsRzv(parent.rzvModels, rzv))
-                        parent.rzvModels.Add(rzv);
-
-                    return parent;
-                },
-                new { tab, OnlyActive = onlyActive ? 1 : 0 },
-                splitOn: "nrID,n_pach",
-                buffered: false // потоково, меньше пиков по памяти
-            );
-
-            // нам важны уникальные родители
-            return map.Values.ToList();
-        }
-
-        // --- помощники для уникальности (чтобы из-за джойнов не плодить дубликаты) ---
 
         private async void simpleButton2_Click(object sender, EventArgs e)
         {
@@ -564,6 +435,94 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             return selectedHandles
                 .Select(view.GetRow)
                 .OfType<KnitterPZVModel>();
+        }
+
+        private void SetupPzvDateStartColumn()
+        {
+            if (bandedGridColumn18 == null)
+                return;
+
+            bandedGridColumn18.AppearanceCell.BackColor = System.Drawing.Color.LightYellow;
+            //bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            //bandedGridColumn18.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm";
+
+            _pzvDateStartButtonEdit = new RepositoryItemButtonEdit { TextEditStyle = TextEditStyles.HideTextEditor };
+            _pzvDateStartButtonEdit.Buttons.Clear();
+            _pzvDateStartButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
+            _pzvDateStartButtonEdit.DoubleClick += PzvDateStartButtonEdit_DoubleClick;
+            //  _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEdit_ButtonClick;
+
+            _pzvDateStartTextEdit = new RepositoryItemTextEdit { ReadOnly = true };
+
+            PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateStartButtonEdit);
+            PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateStartTextEdit);
+            BandedGridColumn dateStart = bandedGridColumn18;
+             //  advBandedGridView1.CustomRowCellEdit += AdvBandedGridView1_CustomRowCellEdit;
+            advBandedGridView1.CustomRowCellEdit += (s, e) =>
+            {
+                if (e.Column.Caption == dateStart.Caption)
+                {
+                    var dateUpdate = advBandedGridView1.GetRowCellValue(e.RowHandle, "dateUpdate");
+                    if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
+                        e.RepositoryItem = _pzvDateStartButtonEdit;
+                    else e.RepositoryItem = _pzvDateStartTextEdit;
+                }
+            };
+
+        }
+
+        private void AdvBandedGridView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+        {
+            if (e.Column != bandedGridColumn18)
+                return;
+
+            bool isEmpty = e.CellValue == null || 
+                          e.CellValue == DBNull.Value || 
+                          (e.CellValue is DateTime dt && dt == DateTime.MinValue);
+
+            e.RepositoryItem = isEmpty ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
+        }
+
+        private async void PzvDateStartButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            GridView view = PlanZagrVyazGridControl.FocusedView as GridView; 
+            await ApplyPzvDateStartAsync(view);
+        }
+
+        private async void PzvDateStartButtonEdit_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = PlanZagrVyazGridControl.FocusedView as GridView;
+            await ApplyPzvDateStartAsync(view);
+        }
+
+        private async Task ApplyPzvDateStartAsync(GridView view)//int rowHandle)
+        {
+            GridView _view = view;
+            int rowHandle = _view.FocusedRowHandle;
+            KnitterPZVModel row = _view.GetRow(rowHandle) as KnitterPZVModel;
+            if (rowHandle < 0 || row.pzvID <= 0) //advBandedGridView1.GetRow(rowHandle) is not KnitterPZVModel row || row.pzvID <= 0)
+                return;
+
+            try
+            {
+                var now = DateTime.Now;
+                row.pzvDateStart = now;
+                //advBandedGridView1.RefreshRow(rowHandle);
+                _view.RefreshRow(rowHandle);
+                // Сохраняем в БД
+                await _orchestrator.UpdatePzvDateStartAsync(row.pzvID, now);
+
+                // Перезапрашиваем все данные, чтобы обновить UI с сохранением состояния развёрнутости
+                if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
+                {
+                    var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
+                    BindGroupDetails(refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(this, $"Ошибка при обновлении даты начала: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private ExpansionState CaptureExpansionState()
@@ -761,9 +720,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            var a = Block14Composer.Format(textEdit2.Text);
+          //  var a = Block14Composer.Format(textEdit2.Text);
 
-            textEdit3.Text = a.ToString();
+          //  textEdit3.Text = a.ToString();
         }
     }
 }

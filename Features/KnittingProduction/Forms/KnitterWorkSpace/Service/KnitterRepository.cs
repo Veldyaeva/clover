@@ -196,6 +196,21 @@ WHERE pzvID IN @ids";
                 await connection.ExecuteAsync(sql, new { tab, ids });
             }
         }
+
+        public async Task UpdatePzvDateStartAsync(int pzvId, DateTime dateStart)
+        {
+            // TODO: раскомментировать обновление в БД, когда понадобится сохранять дату старта
+            using (var connection = _dbHelper.GetConnection())
+            {
+                const string sql = @"UPDATE dbo.planZagrVyaz
+            SET pzvDateStart = @dateStart
+            WHERE pzvID = @pzvId";
+
+                await connection.ExecuteAsync(sql, new { pzvId, dateStart });
+            }
+
+            await Task.CompletedTask;
+        }
  
         private static bool ContainsNr(BindingList<nrModel> list, nrModel candidate)
         {
