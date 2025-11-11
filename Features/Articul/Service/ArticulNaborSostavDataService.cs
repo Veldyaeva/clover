@@ -50,15 +50,29 @@ namespace SewingProduction.Features.Articul.Service
             string query = @"SELECT TK_ID, TK_NAME, Men FROM t_v_n";
             return await _dbService.GetListAsync<TvnModel>(query, new { });
         }
-        public async Task<List<GostModel>> GetGostAsync()
+        public async Task<List<GostModel>> GetGostNaborAsync()
         {
-            string query = @"SELECT Id_gost, Name_gost, Opi_gost FROM gost";
+            string query = @"SELECT Id_gost, Name_gost, Opi_gost FROM gost WHERE pr_nabor = 1";
             return await _dbService.GetListAsync<GostModel>(query, new { });
         }
-        public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdAsync()
+        public async Task<List<GostModel>> GetGostSostavAsync(int? idGost)
         {
-            string query = @"SELECT Id_gost, Ag_id,Ag_name_sokr,Ag_tnved,N_i,N_g FROM dbo.View_GostGrupIzd WHERE arh = 0 ";
-            return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new {});
+            string query = @"SELECT Id_gost_nab AS Id_gost,
+                            Name_gost_nab AS Name_gost,
+                            Opi_gost_nab AS Opi_gost,
+                            tk_id_nab
+                     FROM View_gost_nab
+                     WHERE Id_gost = @id_gost";
+
+            return await _dbService.GetListAsync<GostModel>(query, new { id_gost = idGost});
+        }
+        public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdNaborAsync(int? idGost, int? tkId = null)
+        {
+            string query = @"SELECT Id_gost, Ag_id, Ag_name_sokr, Ag_tnved, N_i, N_g
+                     FROM dbo.View_GostGrupIzd
+                     WHERE arh = 0 AND Id_gost = @id_gost"
+                             + (tkId.HasValue ? " AND ag_tk_id = @tk_id" : "");
+            return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new { id_gost = idGost, tk_id = tkId });
         }
         public bool CheckOpis(string kod)
         {

@@ -22,6 +22,8 @@ namespace SewingProduction.Core.Models
         public int Id_gost { get; set; }
         public string Name_gost { get; set; }
         public string Opi_gost { get; set; }
+        public int pr_nabor { get; set; }
+        public int tk_id_nab { get; set; }
     }
     public class GostGrupIzdViewModel
     {
