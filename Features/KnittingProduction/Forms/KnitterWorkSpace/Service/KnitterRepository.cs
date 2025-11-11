@@ -211,6 +211,20 @@ WHERE pzvID IN @ids";
 
             await Task.CompletedTask;
         }
+
+        public async Task UpdatePzvDateEndAsync(int pzvId, DateTime dateEnd)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                const string sql = @"UPDATE dbo.planZagrVyaz
+            SET pzvDateEnd = @dateEnd
+            WHERE pzvID = @pzvId";
+
+                await connection.ExecuteAsync(sql, new { pzvId, dateEnd });
+            }
+
+            await Task.CompletedTask;
+        }
  
         private static bool ContainsNr(BindingList<nrModel> list, nrModel candidate)
         {

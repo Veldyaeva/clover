@@ -16,6 +16,7 @@ using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,6 +38,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         // Вью для третьего уровня (деталь детальной таблицы)
         private RepositoryItemButtonEdit _pzvDateStartButtonEdit;
         private RepositoryItemTextEdit _pzvDateStartTextEdit;
+        private RepositoryItemButtonEdit _pzvDateEndButtonEdit;
+        private RepositoryItemTextEdit _pzvDateEndTextEdit;
 
         /// <summary>
         /// Инициализирует форму рабочего места вязальщика, настраивает источники данных и события.
@@ -439,18 +442,53 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void SetupPzvDateStartColumn()
         {
-            if (bandedGridColumn18 == null)
-                return;
+//            //if (bandedGridColumn18 == null)
+//            //    return;
+//            _pzvDateStartButtonEdit = new RepositoryItemButtonEdit()
+//            {
+//                TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
+//            };
+//            _pzvDateStartButtonEdit.Buttons.Clear();
+//            _pzvDateStartButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph));
+//            _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEditButtonClick;
+//            _pzvDateStartButtonEdit.DoubleClick += PzvDateStartButtonEditDoubleClick;
+
+//            pzvDateStartTextEdit = new RepositoryItemTextEdit()
+//            {
+//                ReadOnly = true
+//            };
+
+//            PlanZagrVyazGridControl.RepositoryItems.AddRange(new RepositoryItem[] {
+//    pzvDateStartButtonEdit,
+//    pzvDateStartTextEdit
+//});
+
+//            bandedGridColumn18.AppearanceCell.BackColor = Color.LightYellow;
+//            bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+//            bandedGridColumn18.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm";
+
+//            // Используется событие CustomRowCellEdit для выбора редактора:
+//            advBandedGridView1.CustomRowCellEdit += (s, e) =>
+//            {
+//                if (e.Column == bandedGridColumn18)
+//                {
+//                    var dateValue = advBandedGridView1.GetRowCellValue(e.RowHandle, e.Column) as DateTime?;
+//                    if (!dateValue.HasValue)
+//                        e.RepositoryItem = pzvDateStartButtonEdit;
+//                    else
+//                        e.RepositoryItem = pzvDateStartTextEdit;
+//                }
+//            };
 
             bandedGridColumn18.AppearanceCell.BackColor = System.Drawing.Color.LightYellow;
-            //bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            //bandedGridColumn18.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm";
+            bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            bandedGridColumn18.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm";
 
             _pzvDateStartButtonEdit = new RepositoryItemButtonEdit { TextEditStyle = TextEditStyles.HideTextEditor };
             _pzvDateStartButtonEdit.Buttons.Clear();
             _pzvDateStartButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
             _pzvDateStartButtonEdit.DoubleClick += PzvDateStartButtonEdit_DoubleClick;
-            //  _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEdit_ButtonClick;
+            _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEdit_ButtonClick;
 
             _pzvDateStartTextEdit = new RepositoryItemTextEdit { ReadOnly = true };
 
@@ -460,15 +498,39 @@ namespace SewingProduction.Features.KnittingProduction.Forms
              //  advBandedGridView1.CustomRowCellEdit += AdvBandedGridView1_CustomRowCellEdit;
             advBandedGridView1.CustomRowCellEdit += (s, e) =>
             {
-                if (e.Column.Caption == dateStart.Caption)
+                if (e.Column != null && e.Column.FieldName == dateStart.FieldName)
                 {
-                    var dateUpdate = advBandedGridView1.GetRowCellValue(e.RowHandle, "dateUpdate");
-                    if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
-                        e.RepositoryItem = _pzvDateStartButtonEdit;
-                    else e.RepositoryItem = _pzvDateStartTextEdit;
+                    var cellValue = e.CellValue;
+                    bool isEmpty = cellValue == null ||
+                                   cellValue == DBNull.Value ||
+                                   (cellValue is DateTime dt && dt == DateTime.MinValue);
+                    e.RepositoryItem = isEmpty ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
+                }
+                // Закончено
+                if (e.Column != null && e.Column.FieldName == bandedGridColumn19.FieldName)
+                {
+                    var cellValue = e.CellValue;
+                    bool isEmpty = cellValue == null ||
+                                   cellValue == DBNull.Value ||
+                                   (cellValue is DateTime dt && dt == DateTime.MinValue);
+                    e.RepositoryItem = isEmpty ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
                 }
             };
 
+            // Настройка для "Закончено" (pzvDateEnd)
+            bandedGridColumn19.AppearanceCell.BackColor = System.Drawing.Color.LightYellow;
+            bandedGridColumn19.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            bandedGridColumn19.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm";
+
+            _pzvDateEndButtonEdit = new RepositoryItemButtonEdit { TextEditStyle = TextEditStyles.HideTextEditor };
+            _pzvDateEndButtonEdit.Buttons.Clear();
+            _pzvDateEndButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Завершить", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
+            _pzvDateEndButtonEdit.DoubleClick += PzvDateEndButtonEdit_DoubleClick;
+            _pzvDateEndButtonEdit.ButtonClick += PzvDateEndButtonEdit_ButtonClick;
+
+            _pzvDateEndTextEdit = new RepositoryItemTextEdit { ReadOnly = true };
+            PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateEndButtonEdit);
+            PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateEndTextEdit);
         }
 
         private void AdvBandedGridView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
@@ -522,6 +584,45 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка при обновлении даты начала: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void PzvDateEndButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            GridView view = PlanZagrVyazGridControl.FocusedView as GridView;
+            await ApplyPzvDateEndAsync(view);
+        }
+
+        private async void PzvDateEndButtonEdit_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = PlanZagrVyazGridControl.FocusedView as GridView;
+            await ApplyPzvDateEndAsync(view);
+        }
+
+        private async Task ApplyPzvDateEndAsync(GridView view)
+        {
+            GridView _view = view;
+            int rowHandle = _view.FocusedRowHandle;
+            KnitterPZVModel row = _view.GetRow(rowHandle) as KnitterPZVModel;
+            if (rowHandle < 0 || row.pzvID <= 0)
+                return;
+
+            try
+            {
+                var now = DateTime.Now;
+                row.pzvDateEnd = now;
+                _view.RefreshRow(rowHandle);
+                await _orchestrator.UpdatePzvDateEndAsync(row.pzvID, now);
+
+                if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
+                {
+                    var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
+                    BindGroupDetails(refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(this, $"Ошибка при обновлении даты окончания: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

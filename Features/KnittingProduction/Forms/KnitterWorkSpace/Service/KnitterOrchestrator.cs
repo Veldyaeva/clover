@@ -44,6 +44,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public Task SetPzvTabAsync(IEnumerable<int> pzvIds, int tab) => _repo.UpdatePzvTabAsync(pzvIds, tab);
         public Task UpdatePzvDateStartAsync(int pzvId, DateTime dateStart) => _repo.UpdatePzvDateStartAsync(pzvId, dateStart);
+        public Task UpdatePzvDateEndAsync(int pzvId, DateTime dateEnd) => _repo.UpdatePzvDateEndAsync(pzvId, dateEnd);
 
         /// <summary>
         /// Получает операции плана по списку партий через хранимую процедуру.
