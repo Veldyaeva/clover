@@ -28,13 +28,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly KnitterOrchestrator _orchestrator;
         private readonly BindingSource _planBindingSource = new BindingSource();
         private readonly DatabaseHelper _dbHelper;
+        private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
 
-        // Поля для группировки мастер-деталь
-        private List<KnitterPZVModel> _allRows;
-        private Dictionary<string, List<KnitterPZVModel>> _byMachine;
-        private Dictionary<string, List<KnitterPZVModel>> _machineArtNomMaster;
-        private Dictionary<(string MachineKey, string ArtKey, int? Nom), List<KnitterPZVModel>> _machineArtNomGroups;
-        private Dictionary<(string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _machineArtNomPachGroups;
         // Вью для третьего уровня (деталь детальной таблицы)
         private RepositoryItemButtonEdit _pzvDateStartButtonEdit;
         private RepositoryItemTextEdit _pzvDateStartTextEdit;
@@ -131,199 +126,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Конфигурация колонок задана в Designer.cs
         }
 
-        /// <summary>
-        /// Реализует каскадную группировку для мастер-деталь вью:
-        /// 0 уровень — по вязальной машине (kmlNumber),
-        /// 1 уровень — по сочетанию артикула и номера (pzvArticul, pzvNom),
-        /// 2 уровень — по партии (n_pach).
-        /// </summary>
-        private void BindGroupDetails(List<KnitterPZVModel> rows, bool clearTabs = true)
-        {
-            var expansionState = CaptureExpansionState();
+        // Сборка иерархии — вынесено в KnitterPlanPresenter
 
-            _allRows = rows ?? new List<KnitterPZVModel>();
-
-            if (clearTabs && _allRows != null)
-            {
-                foreach (var row in _allRows)
-                {
-                    if (row != null)
-                    {
-                        row.pzvTab = null;
-                    }
-                }
-            }
-            PlanZagrVyazGridControl.BeginUpdate();
-            try
-            {
-            _byMachine = _allRows
-                .GroupBy(r => NormalizeMachineKey(r.kmlNumber))
-                .ToDictionary(g => g.Key, g => g.ToList());
-
-            _machineArtNomGroups = _allRows
-                .GroupBy(r => (NormalizeMachineKey(r.kmlNumber), NormalizeArtKey(r.pzvArticul), r.pzvNom))
-                .ToDictionary(g => g.Key, g => g.ToList());
-
-            _machineArtNomPachGroups = _allRows
-                .GroupBy(r => (NormalizeMachineKey(r.kmlNumber), NormalizeArtKey(r.pzvArticul), r.pzvNom, (int?)r.n_pach))
-                .ToDictionary(g => g.Key, g => g.ToList());
-
-            _machineArtNomMaster = _byMachine.ToDictionary(
-                kv => kv.Key,
-                kv => kv.Value
-                    .GroupBy(r => (NormalizeArtKey(r.pzvArticul), r.pzvNom))
-                    .Select(g => g.First())
-                    .ToList());
-
-            // Уровень 0 — первая запись каждой вязальной машины
-            var masterData = _byMachine.Values.Select(list => list.First()).ToList();
-            _planBindingSource.DataSource = masterData;
-            PlanZagrVyazGridControl.RefreshDataSource();
-
-            // Настройка событий для мастер-деталь вью (первый уровень ArtNom на bandedGridView3)
-            var master = bandedGridView3;
-
-            // Подписка на события (удаляем старые подписки если есть)
-            master.MasterRowGetRelationCount -= Master_MasterRowGetRelationCount;
-            master.MasterRowGetRelationName -= Master_MasterRowGetRelationName;
-            master.MasterRowGetChildList -= Master_MasterRowGetChildList;
-
-            // Подписываемся заново
-            master.MasterRowGetRelationCount += Master_MasterRowGetRelationCount;
-            master.MasterRowGetRelationName += Master_MasterRowGetRelationName;
-            master.MasterRowGetChildList += Master_MasterRowGetChildList;
-
-            master.OptionsDetail.EnableMasterViewMode = true;
-            master.OptionsDetail.AllowOnlyOneMasterRowExpanded = false; // Разрешаем раскрытие нескольких строк
-            master.OptionsDetail.ShowDetailTabs = false; // Скрываем вкладки "ArtNom", "nr Models" и т.д.
-
-            // Настройка второго уровня (Items) - bandedGridView1 является мастером для advBandedGridView1
-            var bandedGridView1Master = bandedGridView1;
-            bandedGridView1Master.MasterRowGetRelationCount -= Detail_MasterRowGetRelationCount;
-            bandedGridView1Master.MasterRowGetRelationName -= Detail_MasterRowGetRelationName;
-            bandedGridView1Master.MasterRowGetChildList -= Detail_MasterRowGetChildList;
-
-            bandedGridView1Master.MasterRowGetRelationCount += Detail_MasterRowGetRelationCount;
-            bandedGridView1Master.MasterRowGetRelationName += Detail_MasterRowGetRelationName;
-            bandedGridView1Master.MasterRowGetChildList += Detail_MasterRowGetChildList;
-
-            bandedGridView1Master.OptionsDetail.EnableMasterViewMode = true;
-            bandedGridView1Master.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
-            bandedGridView1Master.OptionsDetail.AllowExpandEmptyDetails = true;
-            bandedGridView1Master.OptionsDetail.ShowDetailTabs = false; // Скрываем вкладки "Items" и т.д.
-            }
-            finally
-            {
-                PlanZagrVyazGridControl.EndUpdate();
-            }
-
-            RestoreExpansionState(expansionState);
-        }
-
-        private void Master_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
-        {
-            e.RelationCount = 1;
-        }
-
-        private void Master_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
-        {
-            e.RelationName = "ArtNom";
-        }
-
-        private void Master_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
-        {
-            var head = (KnitterPZVModel)bandedGridView3.GetRow(e.RowHandle);
-            if (head == null)
-            {
-                e.ChildList = new List<KnitterPZVModel>();
-                return;
-            }
-
-            var machineKey = NormalizeMachineKey(head.kmlNumber);
-            if (_machineArtNomMaster != null && _machineArtNomMaster.TryGetValue(machineKey, out var childRows))
-            {
-                e.ChildList = childRows;
-            }
-            else
-            {
-                e.ChildList = new List<KnitterPZVModel>();
-            }
-        }
-
-        // === Вложенный уровень: по art + №рассчёта ===
-        private void Detail_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
-        {
-            e.RelationCount = 1;
-        }
-
-        private void Detail_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
-        {
-            e.RelationName = "Items";
-        }
-
-        private void Detail_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
-        {
-            try
-            {
-                // Второй уровень Items: sender - это bandedGridView1 (BandedGridView)
-                var bandedView = sender as DevExpress.XtraGrid.Views.BandedGrid.BandedGridView;
-                if (bandedView == null)
-                {
-                    e.ChildList = new List<KnitterPZVModel>();
-                    return;
-                }
-
-                var head = bandedView.GetRow(e.RowHandle) as KnitterPZVModel;
-                if (head == null)
-                {
-                    e.ChildList = new List<KnitterPZVModel>();
-                    return;
-                }
-
-                var machineKey = NormalizeMachineKey(head.kmlNumber);
-                var artKey = NormalizeArtKey(head.pzvArticul);
-                var nomKey = head.pzvNom;
-
-                var result = new List<KnitterPZVModel>();
-                var seenOperations = new HashSet<string>();
-
-                if (_machineArtNomGroups != null && _machineArtNomGroups.TryGetValue((machineKey, artKey, nomKey), out var groupRows))
-                {
-                    foreach (var groupRow in groupRows)
-                    {
-                        var pachKey = (machineKey, artKey, nomKey, (int?)groupRow.n_pach);
-
-                        if (_machineArtNomPachGroups == null || !_machineArtNomPachGroups.TryGetValue(pachKey, out var pachRows))
-                            continue;
-
-                        foreach (var parentRow in pachRows)
-                        {
-                            if (parentRow?.nrModels == null || parentRow.nrModels.Count == 0)
-                                continue;
-
-                            foreach (var nr in parentRow.nrModels)
-                            {
-                                var signature = $"{parentRow.pzvID}_{groupRow.n_pach}_{nr.nrN}_{nr.nrN1}_{nr.nr_kod_proizv}_{nr.nr_kod_ob}";
-                                if (!seenOperations.Add(signature))
-                                    continue;
-
-                                var operationRow = CreateOperationRow(parentRow, nr);
-                                operationRow.n_pach = groupRow.n_pach;
-                                operationRow.razm = parentRow.razm;
-                                result.Add(operationRow);
-                            }
-                        }
-                    }
-                }
-
-                e.ChildList = result;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Detail_MasterRowGetChildList error: {ex.Message}");
-                e.ChildList = new List<KnitterPZVModel>();
-            }
-        }
+        // master-detail логика перенесена в KnitterPlanPresenter
 
         public void LoadData(PlanZagrVyaz data)
         {
@@ -342,7 +147,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
-                BindGroupDetails(plan ?? new List<KnitterPZVModel>());
+                _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
             {
@@ -360,7 +165,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
-                var rowsForUpdate = GetKnitterRowsForCurrentSelection().ToList();
+                var focusView = PlanZagrVyazGridControl.FocusedView as DevExpress.XtraGrid.Views.BandedGrid.BandedGridView;
+                var rowsForUpdate = _planPresenter.GetRowsForViewSelection(focusView).ToList();
                 if (!rowsForUpdate.Any())
                 {
                     XtraMessageBox.Show(this, "Выберите строки плана для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -382,7 +188,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
 
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(selectedTab);
-                BindGroupDetails(refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
             }
             catch (Exception ex)
             {
@@ -390,55 +196,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private IEnumerable<KnitterPZVModel> GetKnitterRowsForCurrentSelection()
-        {
-            if (_allRows == null || PlanZagrVyazGridControl.FocusedView is not DevExpress.XtraGrid.Views.BandedGrid.BandedGridView view)
-                return Enumerable.Empty<KnitterPZVModel>();
-
-            var baseRows = GetRowsFromView(view).ToList();
-            if (!baseRows.Any())
-                return Enumerable.Empty<KnitterPZVModel>();
-
-            IEnumerable<KnitterPZVModel> expanded;
-
-            if (ReferenceEquals(view, bandedGridView3))
-            {
-                expanded = baseRows.SelectMany(row => _allRows.Where(x => NormalizeMachineKey(x.kmlNumber) == NormalizeMachineKey(row.kmlNumber)));
-            }
-            else if (ReferenceEquals(view, bandedGridView1))
-            {
-                expanded = baseRows.SelectMany(row => _allRows.Where(x =>
-                    NormalizeMachineKey(x.kmlNumber) == NormalizeMachineKey(row.kmlNumber) &&
-                    NormalizeArtKey(x.pzvArticul) == NormalizeArtKey(row.pzvArticul) &&
-                    x.pzvNom == row.pzvNom &&
-                    x.n_pach == row.n_pach));
-            }
-            else
-            {
-                expanded = baseRows;
-            }
-
-            return expanded
-                .Where(r => r != null && r.pzvID > 0)
-                .GroupBy(r => r.pzvID)
-                .Select(g => g.First());
-        }
-
-        private static IEnumerable<KnitterPZVModel> GetRowsFromView(DevExpress.XtraGrid.Views.BandedGrid.BandedGridView view)
-        {
-            int[] selectedHandles = view.GetSelectedRows();
-            if (selectedHandles == null || selectedHandles.Length == 0)
-            {
-                if (view.FocusedRowHandle >= 0)
-                    selectedHandles = new[] { view.FocusedRowHandle };
-                else
-                    return Enumerable.Empty<KnitterPZVModel>();
-            }
-
-            return selectedHandles
-                .Select(view.GetRow)
-                .OfType<KnitterPZVModel>();
-        }
+        // Получение выбранных строк теперь доступно через _planPresenter.GetRowsForViewSelection(...)
 
         private void SetupPzvDateStartColumn()
         {
@@ -578,7 +336,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
                 {
                     var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
-                    BindGroupDetails(refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                    _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 }
             }
             catch (Exception ex)
@@ -617,7 +375,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
                 {
                     var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
-                    BindGroupDetails(refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                    _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 }
             }
             catch (Exception ex)
