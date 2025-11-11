@@ -136,7 +136,7 @@ namespace SewingProduction.Features.CardByNom.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"exec dbo.GetNomListByKodOrNomZadany @xNomZadany = '{_nomZadany}' ";
+                    string query = $"exec dbo.GetNomListByKodNomZadanyIz @xNomZadany = '{_nomZadany}' ";
                     //List<RasNomList> result = (List<RasNomList>)await connection.QueryAsync<RasNomList>(query, new Dictionary<string, object> { }, buffered: false);
                     var result = await connection.QueryAsync<RasNomList>(query, new Dictionary<string, object> { });
                     return result.ToList();

@@ -37,10 +37,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private string locationType;
         private string xNomZadany;
         private string xKo;
+        private string xIz;
         public int SelectedValueNPach { get; private set; }
         public int SelectedValueYearPach { get; private set; }
         public int SelectedValueProizvType { get; private set; }
-        public NomLookUp(string _nomZadany, string _ko, string _articul)
+        public int SelectedValueIz { get; private set; }
+        public NomLookUp(string _nomZadany, string _ko, string _articul, string _iz)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
@@ -51,18 +53,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             xNomZadany = _nomZadany;
             xKo = _ko;
+            xIz = _iz;
 
-            switch (_ko.Trim().Length, _nomZadany.Trim().Length)
+            switch (_ko.Trim().Length, _nomZadany.Trim().Length, _iz.Trim().Length)
             {
-                case ( > 0, 0):
+                case ( > 0, 0, 0):
                     customLabel1.Text = "Артикул";
                     customTextBoxEx1.Text = _articul;
                     locationType = "art";
                     break;
-                case (0, > 0):
+                case (0, > 0, 0):
                     customLabel1.Text = "№ задания";
                     customTextBoxEx1.Text = _nomZadany;
                     locationType = "nomzad";
+                    break;
+                case (0, 0, > 0):
+                    customLabel1.Text = "№ накладной";
+                    customTextBoxEx1.Text = _iz;
+                    locationType = "iz";
                     break;
                 default:
                     customLabel1.Text = "ошибка";
@@ -97,7 +105,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         return Task.CompletedTask;
                     });
 
-                    await _logger.LogEventAsync($"Данные RasNomList успешно загружены", "LoadRasLoadRasNomListByNomZadanyNomListDataAsync");
+                    await _logger.LogEventAsync($"Данные RasNomList успешно загружены", "LoadRasNomListByNomZadany");
                     //RasCard.Enabled = true ;
                     _rasNomListBindingSource.ResetBindings(false);
                 }
@@ -118,7 +126,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 _rasNomListBindingSource.Clear();
                 _rasNomListBindingSource.ResetBindings(false);
-                var rasNomListData = await _dbService.GetListAsync<RasNomList>($"exec dbo.GetNomListByKodOrNomZadany @xKo = '{_ko}'", new { });
+                var rasNomListData = await _dbService.GetListAsync<RasNomList>($"exec dbo.GetNomListByKodNomZadanyIz @xKo = '{_ko}'", new { });
                 if (rasNomListData != null)
                 {
                     await _logger.LogEventAsync($"Получены данные RasNomList", "LoadRasNomListByArticul");
@@ -139,6 +147,45 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 else
                 {
                     await _logger.LogEventAsync($"Не удалось найти данные RasNomList", "LoadRasNomListByArticul");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных RasNomList");
+            }
+        }
+        private async Task LoadRasNomListByIz(string _iz)
+        {
+            try
+            {
+                if (_rasNomListBindingSource.Count > 0)
+                {
+                    _rasNomListBindingSource.Clear();
+                    _rasNomListBindingSource.ResetBindings(false);
+                }
+
+                //var rasNomListData = await _dbService.GetListAsync<RasNomList>($"exec dbo.GetNomListByKodOrNomZadany @xNomZadany = '{_nomZadany}'", new { });
+                var rasNomListData = await _dbService.GetListAsync<RasNomList>($"exec dbo.GetNomListByKodNomZadanyIz @xIz = '{_iz}'", new { });
+                if (rasNomListData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные RasNomList", "LoadRasNomListByIz");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        //_currentRasInfoData = rasInfoData;                // Обновляем текущую модель
+                        //_rasInfoByPachKodBindingSource.DataSource = _currentRasInfoData; // Привязываем данные к форме
+                        _currentRasNomListData = rasNomListData;                // Обновляем текущую модель
+                        _rasNomListBindingSource.DataSource = _currentRasNomListData; // Привязываем данные к форме
+                        return Task.CompletedTask;
+                    });
+
+                    await _logger.LogEventAsync($"Данные RasNomList успешно загружены", "LoadRasNomListByIz");
+                    //RasCard.Enabled = true ;
+                    _rasNomListBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные RasNomList", "LoadRasNomListByIz");
                 }
             }
             catch (Exception ex)
@@ -220,6 +267,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 else if (locationType == "art")
                 {
                     await LoadRasNomListByArticul(xKo);
+                }
+                else if (locationType == "iz")
+                {
+                    await LoadRasNomListByIz(xIz);
                 }
                 if (_rasNomListBindingSource.Count == 1)
                 {

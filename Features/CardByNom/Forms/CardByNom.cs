@@ -149,6 +149,8 @@ namespace SewingProduction
             tbNomZad.Enter += tbNomZad_Enter;
             tbNomPach.Enter += tbNomPach_Enter;
             tbYearPach.Enter += tbYearPach_Enter;
+            textBoxIzNakl.Enter += textBoxIzNakl_Enter;
+            textBoxYearIzNakl.Enter += textBoxYearIzNakl_Enter;
             //// Инициализация привязок данных
             //_naklViewByNomSource.DataSource = _naklView;
             //if (gcNaklList != null)
@@ -167,6 +169,14 @@ namespace SewingProduction
         private void tbYearPach_Enter(object sender, EventArgs e)
         {
             tbYearPach.SelectAll();
+        }
+        private void textBoxIzNakl_Enter(object sender, EventArgs e)
+        {
+            textBoxIzNakl.SelectAll();
+        }
+        private void textBoxYearIzNakl_Enter(object sender, EventArgs e)
+        {
+            textBoxYearIzNakl.SelectAll();
         }
         private async Task InitializeBindingsAsync()
         {
@@ -930,6 +940,7 @@ namespace SewingProduction
             //layoutControlItem110.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
+            this.textBoxYearIzNakl.Text = Convert.ToString(DateTime.Now.Year);
             customRadioGroup2.SelectedIndex = 0;
             customRadioGroup3.SelectedIndex = 0;
             customRadioGroup3_SelectedIndexChanged(sender, e);
@@ -2228,24 +2239,35 @@ namespace SewingProduction
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     tbNomZad.Select();
                     break;
                 case 1: //  по № пачки
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     tbNomPach.Select();
                     break;
                 case 2: //  по артикулу
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     searchLookUpEditArticul.Select();
+                    break;
+                case 3: //  по № накладной
+                    layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    textBoxIzNakl.Select();
                     break;
                 default:
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     break;
             }
         }
@@ -2266,11 +2288,12 @@ namespace SewingProduction
                 string xKo = "";
                 string xArticul = "";
                 string xNomZadany = tbNomZad.Text;
+                string xIz = "";
 
                 //ArticulModel selectedRow = _articulBindingSource.Current as ArticulModel;
                 if (xNomZadany != null && xNomZadany.Length != 0)
                 {
-                    using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul))
+                    using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul, xIz))
                     {
                         if (form2.ShowDialog() == DialogResult.OK)
                         {
@@ -2376,12 +2399,13 @@ namespace SewingProduction
                     string xKo = searchLookUpEditArticul.EditValue.ToString();
                     string xArticul = searchLookUpEditArticul.Text.Trim();
                     string xNomZadany = "";
+                    string xIz = "";
 
                     //ArticulModel selectedRow = _articulBindingSource.Current as ArticulModel;
                     if (xKo != null && xKo.Length != 0 && xArticul != null && xArticul.Length != 0)
                     {
                         //OpenForm(new NomLookUp(xNomZadany, xKo, xArticul), sender);
-                        using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul))
+                        using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul, xIz))
                         {
                             if (form2.ShowDialog() == DialogResult.OK)
                             {
@@ -2463,7 +2487,7 @@ namespace SewingProduction
 
             var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
             //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
-            
+
             if (selectedRow != null && selectedRow.RzuNom != 0 && Convert.ToInt32(selectedRow.PsaNomZad) != 0)
             {
                 report1.Parameters["_nomZad"].Value = selectedRow.PsaNomZad;
@@ -2479,6 +2503,84 @@ namespace SewingProduction
             {
                 MessageBox.Show("Не выбран расчет для печати");
             }
+        }
+
+        private async void textBoxIzNakl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBoxIzNakl.Text.Trim().Length == 0 || textBoxYearIzNakl.Text.Trim().Length == 0) return;
+                //------------------------------
+                string xKo = "";
+                string xArticul = "";
+                string xNomZadany = "";
+                string xIz = GetIz();
+
+                if (xIz != null && xIz.Length != 0)
+                {
+                    using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul, xIz))
+                    {
+                        if (form2.ShowDialog() == DialogResult.OK)
+                        {
+                            int valueNPach = form2.SelectedValueNPach;
+                            int valueYearPach = form2.SelectedValueYearPach;
+                            int valueProizvType = form2.SelectedValueProizvType;
+                            customRadioGroup2.SelectedIndex = valueProizvType;
+                            customRadioGroup3.SelectedIndex = 1;
+                            tbNomPach.Text = valueNPach.ToString();
+                            tbYearPach.Text = valueYearPach.ToString();
+                            GetPachInfo();
+                        }
+                    }
+                }
+                else
+                {
+                    xKo = "";
+                    MessageBox.Show("Не указано задание");
+                }
+                //------------------------------
+
+                //layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                //layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+
+                //RasInfo.PageVisible = true;
+                //FurnInfo.PageVisible = false;
+                //WorkInfo.PageVisible = false;
+                //OtdelkaInfo.PageVisible = false;
+                if (customRadioGroup2.SelectedIndex == 2)
+                {
+                    SockZadanyInfo.PageVisible = true;
+
+                    //Task rasInfoLoadTask = LoadRasInfoByNomZadDataAsync(tbNomZad.Text);
+                    //Task naklViewLoadTask = LoadNaklViewByNomZadDataAsync(tbNomZad.Text);
+                    //Task chipInfoLoadTask = LoadChipInfoByNomZadDataAsync(tbNomZad.Text);
+                    Task sockKnitZadanyInfoLoadTask = LoadSockKnitZadanyInfoDataAsync(tbNomZad.Text);
+                    Task sockZadanySmenListLoadTask = LoadSockZadanySmenListDataAsync(tbNomZad.Text);
+                    Task sockServiceListByNomZadLoadTask = LoadSockServiceListByNomZadDataAsync(tbNomZad.Text);
+                    Task sockDownTimeListByNomZadLoadTask = LoadSockDownTimeListByNomZadDataAsync(tbNomZad.Text);
+                    Task sockDefectListByNomZadLoadTask = LoadSockDefectListByNomZadDataAsync(tbNomZad.Text);
+                    await Task.WhenAll(sockKnitZadanyInfoLoadTask, sockZadanySmenListLoadTask
+                        , sockServiceListByNomZadLoadTask, sockDownTimeListByNomZadLoadTask
+                        , sockDefectListByNomZadLoadTask);
+                    var selectedRow = _sockKnitZadanyInfoBindingSource.Current as SockZadanyInfo;
+                    if (selectedRow != null)
+                    {
+                        //xtraTabControl1.Enabled = true;
+                        SockZadanyInfo.PageVisible = true;
+                    }
+                    else
+                    {
+                        //xtraTabControl1.Enabled = false;
+                        SockZadanyInfo.PageVisible = false;
+                    }
+                }
+
+            }
+        }
+        private string GetIz()
+        {
+            string iz = string.Concat(textBoxYearIzNakl.Text, textBoxIzNakl.Text.PadLeft(5));
+            return iz;
         }
     }
 }
