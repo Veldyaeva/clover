@@ -25,9 +25,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class KnitterWorkSpace : Form
     {
-        private readonly KnitterOrchestrator _orchestrator;
+        private readonly IKnitterOrchestrator _orchestrator;
         private readonly BindingSource _planBindingSource = new BindingSource();
-        private readonly DatabaseHelper _dbHelper;
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
 
         // Вью для третьего уровня (деталь детальной таблицы)
@@ -53,8 +52,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //        DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged
                 //    });
 
-                _dbHelper = new DatabaseHelper();
-                var repo = new KnitterRepository(_dbHelper);
+                var dbHelper = new DatabaseHelper();
+                IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
 
             PlanZagrVyazGridControl.DataSource = _planBindingSource;
@@ -71,6 +70,34 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             this.Load += async (s, e) => await InitializeAsync();
 
+                SetupPzvDateStartColumn();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(this, $"Ошибка инициализации формы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public KnitterWorkSpace(IKnitterOrchestrator orchestrator)
+        {
+            try
+            {
+                InitializeComponent();
+                _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
+                dataLayoutControl1.DataSource = _planBindingSource;
+                ConfigureAdvBandedGridColumns();
+                PlanZagrVyazGridControl.DataSource = _planBindingSource;
+                if (PlanZagrVyazGridControl.LevelTree.Nodes.Count > 0)
+                {
+                    var level1 = PlanZagrVyazGridControl.LevelTree.Nodes[0];
+                    var level2 = new DevExpress.XtraGrid.GridLevelNode
+                    {
+                        RelationName = "Operations",
+                        LevelTemplate = advBandedGridView1
+                    };
+                    level1.Nodes.Add(level2);
+                }
+                this.Load += async (s, e) => await InitializeAsync();
                 SetupPzvDateStartColumn();
             }
             catch (Exception ex)
@@ -200,44 +227,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void SetupPzvDateStartColumn()
         {
-//            //if (bandedGridColumn18 == null)
-//            //    return;
-//            _pzvDateStartButtonEdit = new RepositoryItemButtonEdit()
-//            {
-//                TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor
-//            };
-//            _pzvDateStartButtonEdit.Buttons.Clear();
-//            _pzvDateStartButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph));
-//            _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEditButtonClick;
-//            _pzvDateStartButtonEdit.DoubleClick += PzvDateStartButtonEditDoubleClick;
-
-//            pzvDateStartTextEdit = new RepositoryItemTextEdit()
-//            {
-//                ReadOnly = true
-//            };
-
-//            PlanZagrVyazGridControl.RepositoryItems.AddRange(new RepositoryItem[] {
-//    pzvDateStartButtonEdit,
-//    pzvDateStartTextEdit
-//});
-
-//            bandedGridColumn18.AppearanceCell.BackColor = Color.LightYellow;
-//            bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-//            bandedGridColumn18.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm";
-
-//            // Используется событие CustomRowCellEdit для выбора редактора:
-//            advBandedGridView1.CustomRowCellEdit += (s, e) =>
-//            {
-//                if (e.Column == bandedGridColumn18)
-//                {
-//                    var dateValue = advBandedGridView1.GetRowCellValue(e.RowHandle, e.Column) as DateTime?;
-//                    if (!dateValue.HasValue)
-//                        e.RepositoryItem = pzvDateStartButtonEdit;
-//                    else
-//                        e.RepositoryItem = pzvDateStartTextEdit;
-//                }
-//            };
-
             bandedGridColumn18.AppearanceCell.BackColor = System.Drawing.Color.LightYellow;
             bandedGridColumn18.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             bandedGridColumn18.DisplayFormat.FormatString = "dd.MM.yyyy HH:mm";
@@ -325,19 +314,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             try
             {
-                var now = DateTime.Now;
-                row.pzvDateStart = now;
-                //advBandedGridView1.RefreshRow(rowHandle);
-                _view.RefreshRow(rowHandle);
-                // Сохраняем в БД
-                await _orchestrator.UpdatePzvDateStartAsync(row.pzvID, now);
-
-                // Перезапрашиваем все данные, чтобы обновить UI с сохранением состояния развёрнутости
-                if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
-                {
-                    var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
-                    _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
-                }
+                // Сохраняем в БД и применяем дельту без полной перезагрузки
+                var updated = await _orchestrator.UpdatePzvDateStartAsync(row.pzvID);
+                var newValue = updated?.pzvDateStart ?? row.pzvDateStart;
+                row.pzvDateStart = newValue;
+                // Мгновенно обновляем UI: записываем значение в ячейку и перерисовываем её
+                _view.SetRowCellValue(rowHandle, bandedGridColumn18, newValue);
+                _view.UpdateCurrentRow();
+                _view.RefreshRowCell(rowHandle, bandedGridColumn18);
             }
             catch (Exception ex)
             {
@@ -367,16 +351,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             try
             {
-                var now = DateTime.Now;
-                row.pzvDateEnd = now;
-                _view.RefreshRow(rowHandle);
-                await _orchestrator.UpdatePzvDateEndAsync(row.pzvID, now);
-
-                if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
-                {
-                    var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
-                    _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
-                }
+                var updated = await _orchestrator.UpdatePzvDateEndAsync(row.pzvID);
+                var newValue = updated?.pzvDateEnd ?? row.pzvDateEnd;
+                row.pzvDateEnd = newValue;
+                _view.SetRowCellValue(rowHandle, bandedGridColumn19, newValue);
+                _view.UpdateCurrentRow();
+                _view.RefreshRowCell(rowHandle, bandedGridColumn19);
             }
             catch (Exception ex)
             {

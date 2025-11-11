@@ -16,7 +16,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     /// <summary>
     /// Репозиторий данных для KnitterWorkSpace (минимальный слой доступа к БД).
     /// </summary>
-    public class KnitterRepository
+    public class KnitterRepository : IKnitterRepository
     {
         private readonly DbService _dbService;
         private readonly DatabaseHelper _dbHelper;
@@ -74,13 +74,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                                 parent.nr_kod_proizv = nr.nr_kod_proizv;
 
                             parent.nrModels ??= new BindingList<nrModel>();
-                            if (!ContainsNr(parent.nrModels, nr))
+                            if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
                             {
                                 parent.nrModels.Add(nr);
                             }
                         }
 
-                        if (rzv != null && HasRzv(rzv))
+                        if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
                         {
                             if (rzv.n_pach != 0)
                             {
@@ -93,7 +93,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                             }
 
                             parent.rzvModels ??= new BindingList<rzvModel>();
-                            if (!ContainsRzv(parent.rzvModels, rzv))
+                            if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
                             {
                                 parent.rzvModels.Add(rzv);
                             }
@@ -197,76 +197,35 @@ WHERE pzvID IN @ids";
             }
         }
 
-        public async Task UpdatePzvDateStartAsync(int pzvId, DateTime dateStart)
+        public async Task<KnitterPZVModel> UpdatePzvDateStartAsync(int pzvId)
         {
-            // TODO: раскомментировать обновление в БД, когда понадобится сохранять дату старта
             using (var connection = _dbHelper.GetConnection())
             {
-                const string sql = @"UPDATE dbo.planZagrVyaz
-            SET pzvDateStart = @dateStart
-            WHERE pzvID = @pzvId";
-
-                await connection.ExecuteAsync(sql, new { pzvId, dateStart });
+                const string sql = @"
+UPDATE dbo.planZagrVyaz
+SET pzvDateStart = GETDATE()
+WHERE pzvID = @pzvId;
+SELECT pzvID, pzvDateStart FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
+                var result = await connection.QuerySingleAsync<(int pzvID, DateTime? pzvDateStart)>(sql, new { pzvId });
+                return new KnitterPZVModel { pzvID = result.pzvID, pzvDateStart = result.pzvDateStart };
             }
-
-            await Task.CompletedTask;
         }
 
-        public async Task UpdatePzvDateEndAsync(int pzvId, DateTime dateEnd)
+        public async Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId)
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                const string sql = @"UPDATE dbo.planZagrVyaz
-            SET pzvDateEnd = @dateEnd
-            WHERE pzvID = @pzvId";
-
-                await connection.ExecuteAsync(sql, new { pzvId, dateEnd });
+                const string sql = @"
+UPDATE dbo.planZagrVyaz
+SET pzvDateEnd = GETDATE()
+WHERE pzvID = @pzvId;
+SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
+                var result = await connection.QuerySingleAsync<(int pzvID, DateTime? pzvDateEnd)>(sql, new { pzvId });
+                return new KnitterPZVModel { pzvID = result.pzvID, pzvDateEnd = result.pzvDateEnd };
             }
-
-            await Task.CompletedTask;
         }
  
-        private static bool ContainsNr(BindingList<nrModel> list, nrModel candidate)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                var item = list[i];
-                if (item.nrN == candidate.nrN &&
-                    item.nrN1 == candidate.nrN1 &&
-                    item.nr_kod_proizv == candidate.nr_kod_proizv &&
-                    item.nr_kod_ob == candidate.nr_kod_ob)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        private static bool HasRzv(rzvModel model)
-        {
-            return model.n_pach != 0 ||
-                   model.rzv_kod != 0 ||
-                   model.rzv_kol != 0 ||
-                   !string.IsNullOrEmpty(model.pach_kod) ||
-                   !string.IsNullOrEmpty(model.razm);
-        }
-
-        private static bool ContainsRzv(BindingList<rzvModel> list, rzvModel candidate)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                var item = list[i];
-                if (item.n_pach == candidate.n_pach &&
-                    item.rzv_kod == candidate.rzv_kod &&
-                    string.Equals(item.razm, candidate.razm, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
+        // Трансформационные хелперы перенесены в KnitterPlanUtils
 
     }
 }

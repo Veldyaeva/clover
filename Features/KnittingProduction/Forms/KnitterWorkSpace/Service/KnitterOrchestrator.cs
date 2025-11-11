@@ -10,12 +10,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     /// <summary>
     /// Оркестратор для KnitterWorkSpace: координация загрузки данных без UI/SQL.
     /// </summary>
-    public class KnitterOrchestrator
+    public class KnitterOrchestrator : IKnitterOrchestrator
     {
-        private readonly KnitterRepository _repo;
+        private readonly IKnitterRepository _repo;
         private readonly ILogger _logger;
 
-        public KnitterOrchestrator(KnitterRepository repo, ILogger logger)
+        public KnitterOrchestrator(IKnitterRepository repo, ILogger logger)
         {
             _repo = repo;
             _logger = logger;
@@ -43,8 +43,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab) => _repo.GetPlanTreeByTabAsync(tab);
 
         public Task SetPzvTabAsync(IEnumerable<int> pzvIds, int tab) => _repo.UpdatePzvTabAsync(pzvIds, tab);
-        public Task UpdatePzvDateStartAsync(int pzvId, DateTime dateStart) => _repo.UpdatePzvDateStartAsync(pzvId, dateStart);
-        public Task UpdatePzvDateEndAsync(int pzvId, DateTime dateEnd) => _repo.UpdatePzvDateEndAsync(pzvId, dateEnd);
+
+        /// <summary>
+        /// Устанавливает дату начала на стороне БД и возвращает фактически сохранённое значение.
+        /// </summary>
+        public Task<KnitterPZVModel> UpdatePzvDateStartAsync(int pzvId) => _repo.UpdatePzvDateStartAsync(pzvId);
+
+        /// <summary>
+        /// Устанавливает дату окончания на стороне БД и возвращает фактически сохранённое значение.
+        /// </summary>
+        public Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId) => _repo.UpdatePzvDateEndAsync(pzvId);
 
         /// <summary>
         /// Получает операции плана по списку партий через хранимую процедуру.
