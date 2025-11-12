@@ -166,7 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
-                _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
+                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
             {
@@ -184,7 +184,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
-                var focusView = PlanZagrVyazGridControl.FocusedView as DevExpress.XtraGrid.Views.BandedGrid.BandedGridView;
+                var focusView = PlanZagrVyazGridControl.FocusedView as DevExpress.XtraGrid.Views.Base.ColumnView;
                 var rowsForUpdate = _planPresenter.GetRowsForViewSelection(focusView).ToList();
                 if (!rowsForUpdate.Any())
                 {
@@ -207,7 +207,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
 
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(selectedTab);
-                _planPresenter.BindGroupDetails(bandedGridView3, bandedGridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
             }
             catch (Exception ex)
             {
@@ -248,11 +248,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Закончено
                 if (e.Column != null && e.Column.FieldName == bandedGridColumn19.FieldName)
                 {
-                    var cellValue = e.CellValue;
-                    bool isEmpty = cellValue == null ||
-                                   cellValue == DBNull.Value ||
-                                   (cellValue is DateTime dt && dt == DateTime.MinValue);
-                    e.RepositoryItem = isEmpty ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
+                    // Кнопка "Завершить" показывается ТОЛЬКО если дата начала заполнена и дата окончания пуста
+                    GridView view = (GridView)PlanZagrVyazGridControl.FocusedView;
+                    var startValue = view.GetRowCellValue(e.RowHandle, bandedGridColumn18);//advBandedGridView1.GetRowCellValue(e.RowHandle, bandedGridColumn18);
+                    bool hasStart = !(startValue == null ||
+                                      startValue == DBNull.Value ||
+                                      (startValue is DateTime sdt && sdt == DateTime.MinValue));
+
+                    var endValue = e.CellValue;
+                    bool isEndEmpty = endValue == null ||
+                                      endValue == DBNull.Value ||
+                                      (endValue is DateTime edt && edt == DateTime.MinValue);
+
+                    e.RepositoryItem = (hasStart && isEndEmpty) ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
                 }
             };
 
@@ -270,6 +278,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _pzvDateEndTextEdit = new RepositoryItemTextEdit { ReadOnly = true };
             PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateEndButtonEdit);
             PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateEndTextEdit);
+            // Колонка фактического количества — unbound для отображения введённого значения
+            bandedGridColumn22.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
         }
 
         private void AdvBandedGridView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
@@ -298,31 +308,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async Task ApplyPzvDateStartAsync(GridView view)//int rowHandle)
         {
-            GridView _view = view;
-            int rowHandle = _view.FocusedRowHandle;
-            KnitterPZVModel row = _view.GetRow(rowHandle) as KnitterPZVModel;
-            if (rowHandle < 0 || row.pzvID <= 0) //advBandedGridView1.GetRow(rowHandle) is not KnitterPZVModel row || row.pzvID <= 0)
-                return;
-
-            try
-            {
-                // Сохраняем в БД и применяем дельту без полной перезагрузки
-                var updated = await _orchestrator.UpdatePzvDateStartAsync(row.pzvID);
-                var newValue = updated?.pzvDateStart ?? row.pzvDateStart;
-                row.pzvDateStart = newValue;
-                // Мгновенно обновляем UI: записываем значение в ячейку и перерисовываем её
-                _view.PostEditor();
-                _view.SetRowCellValue(rowHandle, bandedGridColumn18, newValue);
-                _view.PostEditor();
-                _view.CloseEditor();
-                _view.UpdateCurrentRow();
-                _view.RefreshRowCell(rowHandle, bandedGridColumn18);
-                _view.RefreshData();
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(this, $"Ошибка при обновлении даты начала: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await ApplyPzvDateAsync(
+                view,
+                bandedGridColumn18,
+                _orchestrator.UpdatePzvDateStartAsync,
+                m => m.pzvDateStart,
+                (m, v) => m.pzvDateStart = v,
+                "начала");
         }
 
         private async void PzvDateEndButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -340,27 +332,72 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private async Task ApplyPzvDateEndAsync(GridView view)
         {
             GridView _view = view;
+            int rowHandle = _view?.FocusedRowHandle ?? -1;
+            if (_view == null || rowHandle < 0)
+                return;
+
+            // Получим текущую строку для плейсхолдера (кол-во к выполнению)
+            var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
+            var defaultQty = (currentRow?.pzvKolNazn ?? 0).ToString();
+
+            // Диалог ввода количества отвязанных изделий
+            var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
+                "Количество отвязанных изделий",
+                "Завершение операции",
+                defaultQty);
+            if (qtyObj == null)
+                return; // отмена
+            if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0)
+            {
+                XtraMessageBox.Show(this, "Введите целое неотрицательное число.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            // Отобразим введённое значение в столбце факта (unbound)
+            _view.SetRowCellValue(rowHandle, bandedGridColumn22, qty);
+            _view.PostEditor();
+            _view.CloseEditor();
+            _view.UpdateCurrentRow();
+            _view.RefreshRowCell(rowHandle, bandedGridColumn22);
+
+            await ApplyPzvDateAsync(
+                view,
+                bandedGridColumn19,
+                _orchestrator.UpdatePzvDateEndAsync,
+                m => m.pzvDateEnd,
+                (m, v) => m.pzvDateEnd = v,
+                "окончания");
+        }
+
+        private async Task ApplyPzvDateAsync(
+            GridView view,
+            DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn column,
+            Func<int, Task<KnitterPZVModel>> updateFunc,
+            Func<KnitterPZVModel, DateTime?> getDate,
+            Action<KnitterPZVModel, DateTime?> setDate,
+            string errorContext)
+        {
+            GridView _view = view;
             int rowHandle = _view.FocusedRowHandle;
             KnitterPZVModel row = _view.GetRow(rowHandle) as KnitterPZVModel;
-            if (rowHandle < 0 || row.pzvID <= 0)
+            if (rowHandle < 0 || row?.pzvID <= 0)
                 return;
 
             try
             {
-                var updated = await _orchestrator.UpdatePzvDateEndAsync(row.pzvID);
-                var newValue = updated?.pzvDateEnd ?? row.pzvDateEnd;
-                row.pzvDateEnd = newValue;
+                var updated = await updateFunc(row.pzvID);
+                var newValue = getDate(updated) ?? getDate(row);
+                setDate(row, newValue);
                 _view.PostEditor();
-                _view.SetRowCellValue(rowHandle, bandedGridColumn19, newValue);
+                _view.SetRowCellValue(rowHandle, column, newValue);
                 _view.PostEditor();
                 _view.CloseEditor();
                 _view.UpdateCurrentRow();
-                _view.RefreshRowCell(rowHandle, bandedGridColumn19);
+                _view.RefreshRowCell(rowHandle, column);
                 _view.RefreshData();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(this, $"Ошибка при обновлении даты окончания: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(this, $"Ошибка при обновлении даты {errorContext}: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private sealed class ExpansionState

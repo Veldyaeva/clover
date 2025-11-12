@@ -1,4 +1,6 @@
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public void BindGroupDetails(
             BandedGridView masterView3,
-            BandedGridView bandedGridView1,
+           // BandedGridView bandedGridView1,
+           GridView bandedGridView1,
             AdvBandedGridView advBandedGridView1,
             System.Windows.Forms.BindingSource bindingSource,
             List<KnitterPZVModel> rows,
@@ -99,7 +102,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             _expansionService.Restore(masterView3, expansionState);
         }
 
-        public IEnumerable<KnitterPZVModel> GetRowsForViewSelection(BandedGridView view)
+        public IEnumerable<KnitterPZVModel> GetRowsForViewSelection(DevExpress.XtraGrid.Views.Base.ColumnView view)
         {
             if (_allRows == null || view == null)
                 return Enumerable.Empty<KnitterPZVModel>();
@@ -171,14 +174,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         private void Detail_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
         {
-            var bandedView = sender as BandedGridView;
-            if (bandedView == null)
+            var detailView = sender as DevExpress.XtraGrid.Views.Base.ColumnView;
+            if (detailView == null)
             {
                 e.ChildList = new List<KnitterPZVModel>();
                 return;
             }
 
-            var head = bandedView.GetRow(e.RowHandle) as KnitterPZVModel;
+            var head = detailView.GetRow(e.RowHandle) as KnitterPZVModel;
             if (head == null)
             {
                 e.ChildList = new List<KnitterPZVModel>();
@@ -222,7 +225,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
             e.ChildList = result;
         }
-        private static IEnumerable<KnitterPZVModel> GetRowsFromView(BandedGridView view)
+        private static IEnumerable<KnitterPZVModel> GetRowsFromView(DevExpress.XtraGrid.Views.Base.ColumnView view)
         {
             int[] selectedHandles = view.GetSelectedRows();
             if (selectedHandles == null || selectedHandles.Length == 0)
