@@ -115,19 +115,48 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 FioGridLookUpEdit.Properties.DisplayMember = nameof(FioModel.Fio);
                 FioGridLookUpEdit.Properties.ValueMember = nameof(FioModel.Tab);
                 FioGridLookUpEdit.Properties.DataSource = fioList;
+                TabGridLookUpEdit.Properties.DisplayMember = nameof(FioModel.Tab);
+                TabGridLookUpEdit.Properties.ValueMember = nameof(FioModel.Fio);
+                TabGridLookUpEdit.Properties.DataSource = fioList;
 
-                if (fioList.Count > 0)
-                {
-                    FioGridLookUpEdit.EditValue = fioList.Any(f => f.Tab == defaultTab)
-                        ? defaultTab
-                        : fioList[0].Tab;
-                }
-
-                // По умолчанию табельный номер не выбран — требуется явный выбор пользователем
+                PresentFioSelectionSplash(fioList, defaultTab);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка загрузки списка сотрудников: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void PresentFioSelectionSplash(IReadOnlyCollection<FioModel> fioList, int defaultTab)
+        {
+            if (fioList == null || fioList.Count == 0)
+            {
+                XtraMessageBox.Show(this, "Список сотрудников пуст. Обратитесь к администратору.", "Нет данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            int? currentTab = int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int parsedTab)
+                ? parsedTab
+                : (int?)null;
+
+            int? initialTab = currentTab;
+            if (initialTab is null && fioList.Any(f => f.Tab == defaultTab))
+            {
+                initialTab = defaultTab;
+            }
+
+            using (var splash = new FioSelectionSplash(fioList, initialTab))
+            {
+                var result = splash.ShowDialog(this);
+                if (result == DialogResult.OK && splash.SelectedTab.HasValue)
+                {
+                    FioGridLookUpEdit.EditValue = splash.SelectedTab.Value;
+                    TabGridLookUpEdit.EditValue = splash.SelectedTab.Value;
+                }
+                else
+                {
+                    BeginInvoke(new Action(Close));
+                }
             }
         }
 
@@ -282,7 +311,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _pzvDateStartButtonEdit = new RepositoryItemButtonEdit { TextEditStyle = TextEditStyles.HideTextEditor };
             _pzvDateStartButtonEdit.Buttons.Clear();
-            _pzvDateStartButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
+            _pzvDateStartButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Начать", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
             _pzvDateStartButtonEdit.DoubleClick += PzvDateStartButtonEdit_DoubleClick;
       //      _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEdit_ButtonClick;
 
@@ -416,7 +445,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Получим текущую строку для плейсхолдера (кол-во к выполнению)
             var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
-            var defaultQty = (currentRow?.pzvKolNazn ?? 0).ToString();
+            var defaultQty = (currentRow?.pzvKol ?? 0).ToString();
 
             // Диалог ввода количества отвязанных изделий
             var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(

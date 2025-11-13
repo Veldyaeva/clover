@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             gridBand18 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -72,12 +72,13 @@
             FioGridLookUpEditView = new DevExpress.XtraGrid.Views.Grid.GridView();
             dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             textEdit1 = new DevExpress.XtraEditors.TextEdit();
-            comboBoxEdit1 = new DevExpress.XtraEditors.ComboBoxEdit();
             dateEdit1 = new DevExpress.XtraEditors.DateEdit();
             textEdit2 = new DevExpress.XtraEditors.TextEdit();
             simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             textEdit3 = new DevExpress.XtraEditors.TextEdit();
             simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            TabGridLookUpEdit = new DevExpress.XtraEditors.GridLookUpEdit();
+            gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -132,11 +133,12 @@
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).BeginInit();
             dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)textEdit3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TabGridLookUpEdit.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
@@ -175,7 +177,7 @@
             gridBand18.Columns.Add(bandedGridColumn16);
             gridBand18.Name = "gridBand18";
             gridBand18.VisibleIndex = 0;
-            gridBand18.Width = 407;
+            gridBand18.Width = 379;
             // 
             // bandedGridColumn11
             // 
@@ -231,7 +233,7 @@
             // bandedGridColumn15
             // 
             bandedGridColumn15.Caption = "Кол-во к выполнению";
-            bandedGridColumn15.FieldName = "pzvKolNazn";
+            bandedGridColumn15.FieldName = "pzvKol";
             bandedGridColumn15.Name = "bandedGridColumn15";
             bandedGridColumn15.Visible = true;
             bandedGridColumn15.Width = 49;
@@ -307,6 +309,7 @@
             // bandedGridColumn22
             // 
             bandedGridColumn22.Caption = "Кол-во факт (шт)";
+            bandedGridColumn22.FieldName = "pzvRKol";
             bandedGridColumn22.Name = "bandedGridColumn22";
             bandedGridColumn22.Visible = true;
             bandedGridColumn22.Width = 112;
@@ -328,9 +331,9 @@
             // PlanZagrVyazGridControl
             // 
             PlanZagrVyazGridControl.Font = new System.Drawing.Font("Arial", 10F);
-            gridLevelNode1.LevelTemplate = advBandedGridView1;
-            gridLevelNode1.RelationName = "ArtNom";
-            PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
+            gridLevelNode2.LevelTemplate = advBandedGridView1;
+            gridLevelNode2.RelationName = "ArtNom";
+            PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode2 });
             PlanZagrVyazGridControl.Location = new System.Drawing.Point(12, 38);
             PlanZagrVyazGridControl.MainView = bandedGridView3;
             PlanZagrVyazGridControl.Name = "PlanZagrVyazGridControl";
@@ -490,11 +493,11 @@
             // 
             // FioGridLookUpEdit
             // 
-            FioGridLookUpEdit.Location = new System.Drawing.Point(642, 12);
+            FioGridLookUpEdit.Location = new System.Drawing.Point(303, 12);
             FioGridLookUpEdit.Name = "FioGridLookUpEdit";
             FioGridLookUpEdit.Properties.NullText = "[Выберите сотрудника]";
             FioGridLookUpEdit.Properties.PopupView = FioGridLookUpEditView;
-            FioGridLookUpEdit.Size = new System.Drawing.Size(92, 20);
+            FioGridLookUpEdit.Size = new System.Drawing.Size(404, 20);
             FioGridLookUpEdit.StyleController = dataLayoutControl1;
             FioGridLookUpEdit.TabIndex = 3;
             FioGridLookUpEdit.EditValueChanged += FioGridLookUpEdit_EditValueChanged;
@@ -511,12 +514,12 @@
             dataLayoutControl1.Controls.Add(PlanZagrVyazGridControl);
             dataLayoutControl1.Controls.Add(FioGridLookUpEdit);
             dataLayoutControl1.Controls.Add(textEdit1);
-            dataLayoutControl1.Controls.Add(comboBoxEdit1);
             dataLayoutControl1.Controls.Add(dateEdit1);
             dataLayoutControl1.Controls.Add(textEdit2);
             dataLayoutControl1.Controls.Add(simpleButton1);
             dataLayoutControl1.Controls.Add(textEdit3);
             dataLayoutControl1.Controls.Add(simpleButton2);
+            dataLayoutControl1.Controls.Add(TabGridLookUpEdit);
             dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             dataLayoutControl1.Name = "dataLayoutControl1";
@@ -534,23 +537,14 @@
             textEdit1.StyleController = dataLayoutControl1;
             textEdit1.TabIndex = 0;
             // 
-            // comboBoxEdit1
-            // 
-            comboBoxEdit1.Location = new System.Drawing.Point(303, 12);
-            comboBoxEdit1.Name = "comboBoxEdit1";
-            comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit1.Size = new System.Drawing.Size(230, 20);
-            comboBoxEdit1.StyleController = dataLayoutControl1;
-            comboBoxEdit1.TabIndex = 2;
-            // 
             // dateEdit1
             // 
             dateEdit1.EditValue = null;
-            dateEdit1.Location = new System.Drawing.Point(843, 12);
+            dateEdit1.Location = new System.Drawing.Point(975, 12);
             dateEdit1.Name = "dateEdit1";
             dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit1.Size = new System.Drawing.Size(76, 20);
+            dateEdit1.Size = new System.Drawing.Size(50, 20);
             dateEdit1.StyleController = dataLayoutControl1;
             dateEdit1.TabIndex = 4;
             // 
@@ -582,19 +576,39 @@
             // 
             // simpleButton2
             // 
-            simpleButton2.Location = new System.Drawing.Point(923, 12);
+            simpleButton2.Location = new System.Drawing.Point(1029, 12);
             simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new System.Drawing.Size(182, 22);
+            simpleButton2.Size = new System.Drawing.Size(76, 22);
             simpleButton2.StyleController = dataLayoutControl1;
             simpleButton2.TabIndex = 5;
             simpleButton2.Text = "Начать смену";
             simpleButton2.Click += simpleButton2_Click;
             // 
+            // TabGridLookUpEdit
+            // 
+            TabGridLookUpEdit.Location = new System.Drawing.Point(816, 12);
+            TabGridLookUpEdit.Name = "TabGridLookUpEdit";
+            TabGridLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            TabGridLookUpEdit.Properties.Name = "TabGridLookUpEdit";
+            TabGridLookUpEdit.Properties.NullText = "";
+            TabGridLookUpEdit.Properties.PopupSizeable = false;
+            TabGridLookUpEdit.Properties.PopupView = gridLookUpEdit1View;
+            TabGridLookUpEdit.Size = new System.Drawing.Size(50, 20);
+            TabGridLookUpEdit.StyleController = dataLayoutControl1;
+            TabGridLookUpEdit.TabIndex = 2;
+            // 
+            // gridLookUpEdit1View
+            // 
+            gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridLookUpEdit1View.Name = "gridLookUpEdit1View";
+            gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem5, layoutControlItem4, layoutControlItem1, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem1, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem5 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(1117, 617);
             Root.TextVisible = false;
@@ -602,10 +616,11 @@
             // layoutControlItem2
             // 
             layoutControlItem2.Control = FioGridLookUpEdit;
-            layoutControlItem2.Location = new System.Drawing.Point(525, 0);
+            layoutControlItem2.CustomizationFormText = "ФИО оператора - ";
+            layoutControlItem2.Location = new System.Drawing.Point(186, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(201, 26);
-            layoutControlItem2.Text = "таб №  ";
+            layoutControlItem2.Size = new System.Drawing.Size(513, 26);
+            layoutControlItem2.Text = "ФИО оператора -";
             layoutControlItem2.TextSize = new System.Drawing.Size(93, 13);
             // 
             // layoutControlItem3
@@ -620,19 +635,20 @@
             // 
             // layoutControlItem5
             // 
-            layoutControlItem5.Control = comboBoxEdit1;
-            layoutControlItem5.Location = new System.Drawing.Point(186, 0);
+            layoutControlItem5.Control = TabGridLookUpEdit;
+            layoutControlItem5.CustomizationFormText = "таб №  ";
+            layoutControlItem5.Location = new System.Drawing.Point(699, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(339, 26);
-            layoutControlItem5.Text = "ФИО оператора - ";
+            layoutControlItem5.Size = new System.Drawing.Size(159, 26);
+            layoutControlItem5.Text = "таб №  ";
             layoutControlItem5.TextSize = new System.Drawing.Size(93, 13);
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = dateEdit1;
-            layoutControlItem4.Location = new System.Drawing.Point(726, 0);
+            layoutControlItem4.Location = new System.Drawing.Point(858, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(185, 26);
+            layoutControlItem4.Size = new System.Drawing.Size(159, 26);
             layoutControlItem4.Text = "Дата";
             layoutControlItem4.TextSize = new System.Drawing.Size(93, 13);
             // 
@@ -671,9 +687,9 @@
             // layoutControlItem9
             // 
             layoutControlItem9.Control = simpleButton2;
-            layoutControlItem9.Location = new System.Drawing.Point(911, 0);
+            layoutControlItem9.Location = new System.Drawing.Point(1017, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(186, 26);
+            layoutControlItem9.Size = new System.Drawing.Size(80, 26);
             layoutControlItem9.TextVisible = false;
             // 
             // gridBand20
@@ -946,11 +962,12 @@
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).EndInit();
             dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties.CalendarTimeProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)textEdit3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TabGridLookUpEdit.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
@@ -970,7 +987,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView FioGridLookUpEditView;
         private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutControl1;
         private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraEditors.ComboBoxEdit comboBoxEdit1;
         private DevExpress.XtraEditors.DateEdit dateEdit1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
@@ -1060,5 +1076,7 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand28;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand31;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand33;
+        private DevExpress.XtraEditors.GridLookUpEdit TabGridLookUpEdit;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
     }
 }
