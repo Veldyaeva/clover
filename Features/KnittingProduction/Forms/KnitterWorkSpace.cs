@@ -17,8 +17,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class KnitterWorkSpace : Form
     {
+        /// <summary>
+        /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
+        /// </summary>
         private readonly IKnitterOrchestrator _orchestrator;
+        /// <summary>
+        /// Источник данных, к которому привязан GridControl.
+        /// </summary>
         private readonly BindingSource _planBindingSource = new BindingSource();
+        /// <summary>
+        /// Презентер, который собирает иерархию мастер-деталь и настраивает события.
+        /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
 
         // Вью для третьего уровня (деталь детальной таблицы)
@@ -28,7 +37,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private RepositoryItemTextEdit _pzvDateEndTextEdit;
 
         /// <summary>
-        /// Инициализирует форму рабочего места вязальщика, настраивает источники данных и события.
+        /// Инициализирует форму рабочего места вязальщика.
+        /// Настраивает источники данных, колонки гридов, оркестратор и подписки.
         /// </summary>
         public KnitterWorkSpace()
         {
@@ -39,27 +49,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 ConfigureAdvBandedGridColumns();
 
-                //    dataLayoutControl1.RetrieveFields(new RetrieveFieldsParameters
-                //    {
-                //        DataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged
-                //    });
-
                 var dbHelper = new DatabaseHelper();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
 
             PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
-                if (PlanZagrVyazGridControl.LevelTree.Nodes.Count > 0)
-                {
-                    var level1 = PlanZagrVyazGridControl.LevelTree.Nodes[0];
-                    var level2 = new DevExpress.XtraGrid.GridLevelNode
-                    {
-                        RelationName = "Operations",
-                        LevelTemplate = advBandedGridView1
-                    };
-                    level1.Nodes.Add(level2);
-                }
+                // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
             this.Load += async (s, e) => await InitializeAsync();
 
                 SetupPzvDateStartColumn();
@@ -70,6 +66,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        /// <summary>
+        /// Вариант конструктора с внедрением зависимостей (DI).
+        /// </summary>
+        /// <param name="orchestrator">Оркестратор доменной логики.</param>
         public KnitterWorkSpace(IKnitterOrchestrator orchestrator)
         {
             try
@@ -79,16 +79,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
-                if (PlanZagrVyazGridControl.LevelTree.Nodes.Count > 0)
-                {
-                    var level1 = PlanZagrVyazGridControl.LevelTree.Nodes[0];
-                    var level2 = new DevExpress.XtraGrid.GridLevelNode
-                    {
-                        RelationName = "Operations",
-                        LevelTemplate = advBandedGridView1
-                    };
-                    level1.Nodes.Add(level2);
-                }
+                // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
                 this.Load += async (s, e) => await InitializeAsync();
                 SetupPzvDateStartColumn();
             }
@@ -140,20 +131,76 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        /// <summary>
+        /// Дополнительная настройка второго уровня (advBandedGridView1):
+        /// - создаёт скрытую unbound-колонку с готовой строкой заголовка группы
+        /// - группирует по этой колонке и авторазворачивает единственную группу
+        /// В результате под номером В/М сразу отображается шапка "Пачка | Расчёт | Размер | Кол-во" и таблица операций.
+        /// </summary>
         private void ConfigureAdvBandedGridColumns()
         {
             // Конфигурация колонок задана в Designer.cs
+            // Дополнительная настройка: группировка второго уровня (advBandedGridView1)
+            if (advBandedGridView1 == null)
+                return;
+
+            // 1) Единая скрытая колонка с готовым заголовком группы
+            var headerCol = advBandedGridView1.Columns.ColumnByFieldName("__Header");
+            if (headerCol == null)
+            {
+                headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+                {
+                    FieldName = "__Header",
+                    Caption = "Header",
+                    UnboundType = DevExpress.Data.UnboundColumnType.String,
+                    // Строка заголовка: Пачка | Расчёт | Размер | Кол-во
+                    UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Расчёт: ', [pzvNom], ' | Размер: ', [razm], ' | Кол-во: ', [pzvKol])",
+                    Visible = false,
+                    OptionsColumn = { ShowInCustomizationForm = false }
+                };
+                advBandedGridView1.Columns.Add(headerCol);
+            }
+
+            // 2) Сбрасываем прошлую группировку и группируем только по __Header
+            advBandedGridView1.BeginUpdate();
+            try
+            {
+                advBandedGridView1.ClearGrouping();
+
+                headerCol.GroupIndex = 0;
+
+                // 3) Внешний вид группы — показываем только текст, без имён полей
+                advBandedGridView1.GroupFormat = "{1}";
+                advBandedGridView1.OptionsView.ShowGroupedColumns = false;
+                advBandedGridView1.OptionsView.ShowGroupPanel = false;
+                advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
+
+                // На случай прежней подписки — отключаем переотрисовку групп (если была)
+                // (метод больше не используется)
+            }
+            finally
+            {
+                advBandedGridView1.EndUpdate();
+            }
         }
+
+        // Пользовательская отрисовка группы больше не требуется — заголовок формируется колонкой __Header
 
         // Сборка иерархии — вынесено в KnitterPlanPresenter
 
         // master-detail логика перенесена в KnitterPlanPresenter
 
+        /// <summary>
+        /// Загружает данные из модели высокого уровня (не используется в текущей версии, оставлено для совместимости).
+        /// </summary>
         public void LoadData(PlanZagrVyaz data)
         {
             _planBindingSource.DataSource = data;
         }
 
+        /// <summary>
+        /// Обработчик выбора сотрудника: получает план по табелю, собирает иерархию и привязывает к гриду.
+        /// </summary>
         private async void FioGridLookUpEdit_EditValueChanged(object sender, EventArgs e)
         {
             try
@@ -166,6 +213,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
+                // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой.
                 _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
@@ -174,6 +222,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        /// <summary>
+        /// Кнопка "Начать смену": массово назначает табель выбранным строкам и обновляет отображение.
+        /// </summary>
         private async void simpleButton2_Click(object sender, EventArgs e)
         {
             try
@@ -217,6 +268,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         // Получение выбранных строк теперь доступно через _planPresenter.GetRowsForViewSelection(...)
 
+        /// <summary>
+        /// Настройка редакторов ячеек для колонок "Начато" и "Закончено":
+        /// - в "Начато" показывает кнопку, если дата пустая, и текст — если дата заполнена
+        /// - в "Закончено" показывает кнопку "Завершить" только когда дата начала уже заполнена и дата окончания пуста
+        /// - регистрирует репозитории редакторов в GridControl
+        /// </summary>
         private void SetupPzvDateStartColumn()
         {
             bandedGridColumn18.AppearanceCell.BackColor = System.Drawing.Color.LightYellow;
@@ -282,6 +339,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn22.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
         }
 
+        /// <summary>
+        /// Подменяет редактор ячейки "Начато" (кнопка/текст) в зависимости от значения.
+        /// </summary>
         private void AdvBandedGridView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
         {
             if (e.Column != bandedGridColumn18)
@@ -294,18 +354,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             e.RepositoryItem = isEmpty ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
         }
 
+        /// <summary>
+        /// Клик по кнопке в "Начато" — установить дату начала для текущей строки.
+        /// </summary>
         private async void PzvDateStartButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
             GridView view = PlanZagrVyazGridControl.FocusedView as GridView; 
             await ApplyPzvDateStartAsync(view);
         }
 
+        /// <summary>
+        /// Двойной клик по ячейке "Начато" — установить дату начала для текущей строки.
+        /// </summary>
         private async void PzvDateStartButtonEdit_DoubleClick(object sender, EventArgs e)
         {
             GridView view = PlanZagrVyazGridControl.FocusedView as GridView;
             await ApplyPzvDateStartAsync(view);
         }
 
+        /// <summary>
+        /// Устанавливает дату начала: сохраняет на сервере (с использованием серверного времени) и моментально отражает в ячейке.
+        /// </summary>
         private async Task ApplyPzvDateStartAsync(GridView view)//int rowHandle)
         {
             await ApplyPzvDateAsync(
@@ -317,18 +386,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 "начала");
         }
 
+        /// <summary>
+        /// Клик по кнопке "Завершить" — запросить количество и завершить операцию (установить дату окончания).
+        /// </summary>
         private async void PzvDateEndButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
             GridView view = PlanZagrVyazGridControl.FocusedView as GridView;
             await ApplyPzvDateEndAsync(view);
         }
 
+        /// <summary>
+        /// Двойной клик по ячейке "Закончено" — запросить количество и завершить операцию.
+        /// </summary>
         private async void PzvDateEndButtonEdit_DoubleClick(object sender, EventArgs e)
         {
             GridView view = PlanZagrVyazGridControl.FocusedView as GridView;
             await ApplyPzvDateEndAsync(view);
         }
 
+        /// <summary>
+        /// Запрашивает у пользователя фактическое количество, отражает его в колонке "Кол-во факт (шт)" и устанавливает дату окончания.
+        /// </summary>
         private async Task ApplyPzvDateEndAsync(GridView view)
         {
             GridView _view = view;
@@ -368,6 +446,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 "окончания");
         }
 
+        /// <summary>
+        /// Унифицированный метод для установки даты в колонках "Начато"/"Закончено":
+        /// - сохраняет дату на сервере (серверное время)
+        /// - применяет дельту к модели и немедленно отражает значение в ячейке без смены фокуса
+        /// </summary>
         private async Task ApplyPzvDateAsync(
             GridView view,
             DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn column,

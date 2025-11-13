@@ -10,8 +10,9 @@ using System.Linq;
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
     /// <summary>
-    /// Строит иерархию данных и настраивает master-detail связки для гридов.
-    /// Держит состояние группировок и выбранных строк.
+    /// Отвечает за построение и выдачу данных для GridControl в режиме мастер→деталь.
+    /// В текущей версии работает в двух уровнях: 1) машина (bandedGridView3), 2) операции (advBandedGridView1).
+    /// Сама “шапка” второго уровня отрисовывается во вью через группировку по вычисляемой колонке.
     /// </summary>
     public class KnitterPlanPresenter
     {
@@ -24,6 +25,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
         public IReadOnlyList<KnitterPZVModel> AllRows => _allRows as IReadOnlyList<KnitterPZVModel> ?? new List<KnitterPZVModel>();
 
+        /// <summary>
+        /// Привязывает данные и настраивает поведение мастер/деталь.
+        /// </summary>
+        /// <param name="masterView3">Мастер-уровень (машины).</param>
+        /// <param name="bandedGridView1">Резервное представление второго уровня (не используется для событий).</param>
+        /// <param name="advBandedGridView1">Деталь-уровень: операции по машине.</param>
+        /// <param name="bindingSource">Источник данных, привязанный к GridControl.</param>
+        /// <param name="rows">Плоский список строк плана.</param>
+        /// <param name="clearTabs">Если true — очищает временно pzvTab у входных строк.</param>
         public void BindGroupDetails(
             BandedGridView masterView3,
            // BandedGridView bandedGridView1,
@@ -71,7 +81,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 var masterData = _byMachine.Values.Select(list => list.First()).ToList();
                 bindingSource.DataSource = masterData;
 
-                // wire top-level view
+                //
                 masterView3.MasterRowGetRelationCount -= Master_MasterRowGetRelationCount;
                 masterView3.MasterRowGetRelationName -= Master_MasterRowGetRelationName;
                 masterView3.MasterRowGetChildList -= Master_MasterRowGetChildList;
@@ -82,13 +92,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 masterView3.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
                 masterView3.OptionsDetail.ShowDetailTabs = false;
 
-                // wire second-level view (bandedGridView1 -> advBandedGridView1)
-                bandedGridView1.MasterRowGetRelationCount -= Detail_MasterRowGetRelationCount;
-                bandedGridView1.MasterRowGetRelationName -= Detail_MasterRowGetRelationName;
-                bandedGridView1.MasterRowGetChildList -= Detail_MasterRowGetChildList;
-                bandedGridView1.MasterRowGetRelationCount += Detail_MasterRowGetRelationCount;
-                bandedGridView1.MasterRowGetRelationName += Detail_MasterRowGetRelationName;
-                bandedGridView1.MasterRowGetChildList += Detail_MasterRowGetChildList;
                 bandedGridView1.OptionsDetail.EnableMasterViewMode = true;
                 bandedGridView1.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
                 bandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
@@ -102,6 +105,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             _expansionService.Restore(masterView3, expansionState);
         }
 
+        /// <summary>
+        /// Возвращает набор записей, соответствующий текущему выбору пользователя в указанном представлении.
+        /// Для уровня машин разворачивает в набор всех строк этой машины.
+        /// </summary>
         public IEnumerable<KnitterPZVModel> GetRowsForViewSelection(DevExpress.XtraGrid.Views.Base.ColumnView view)
         {
             if (_allRows == null || view == null)
@@ -135,16 +142,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 .Select(g => g.First());
         }
 
+        /// <summary>Единственная деталь у машины.</summary>
         private void Master_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
         {
             e.RelationCount = 1;
         }
 
+        /// <summary>Имя детали для GridControl.</summary>
         private void Master_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
         {
             e.RelationName = "ArtNom";
         }
 
+        /// <summary>
+        /// Возвращает список операций для выбранной машины (второй уровень).
+        /// </summary>
         private void Master_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
         {
             var view = sender as BandedGridView;
@@ -155,69 +167,44 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 return;
             }
 
+            // Двухуровневый режим: возвращаем сразу операции (детали) для выбранной машины
             var machineKey = KnitterPlanUtils.NormalizeMachineKey(head.kmlNumber);
-            if (_machineArtNomMaster != null && _machineArtNomMaster.TryGetValue(machineKey, out var childRows))
-                e.ChildList = childRows;
-            else
-                e.ChildList = new List<KnitterPZVModel>();
-        }
-
-        private void Detail_MasterRowGetRelationCount(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
-        {
-            e.RelationCount = 1;
-        }
-
-        private void Detail_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
-        {
-            e.RelationName = "Items";
-        }
-
-        private void Detail_MasterRowGetChildList(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
-        {
-            var detailView = sender as DevExpress.XtraGrid.Views.Base.ColumnView;
-            if (detailView == null)
-            {
-                e.ChildList = new List<KnitterPZVModel>();
-                return;
-            }
-
-            var head = detailView.GetRow(e.RowHandle) as KnitterPZVModel;
-            if (head == null)
-            {
-                e.ChildList = new List<KnitterPZVModel>();
-                return;
-            }
-
-            var machineKey = KnitterPlanUtils.NormalizeMachineKey(head.kmlNumber);
-            var artKey = KnitterPlanUtils.NormalizeArtKey(head.pzvArticul);
-            var nomKey = head.pzvNom;
 
             var result = new List<KnitterPZVModel>();
             var seenOperations = new HashSet<string>();
 
-            if (_machineArtNomGroups != null && _machineArtNomGroups.TryGetValue((machineKey, artKey, nomKey), out var groupRows))
+            if (_machineArtNomGroups != null)
             {
-                foreach (var groupRow in groupRows)
+                foreach (var kv in _machineArtNomGroups)
                 {
-                    var pachKey = (machineKey, artKey, nomKey, (int?)groupRow.n_pach);
-                    if (_machineArtNomPachGroups == null || !_machineArtNomPachGroups.TryGetValue(pachKey, out var pachRows))
+                    if (!string.Equals(kv.Key.MachineKey, machineKey, StringComparison.OrdinalIgnoreCase))
                         continue;
 
-                    foreach (var parentRow in pachRows)
+                    var groupRows = kv.Value;
+                    foreach (var groupRow in groupRows)
                     {
-                        if (parentRow?.nrModels == null || parentRow.nrModels.Count == 0)
+                        var artKey = KnitterPlanUtils.NormalizeArtKey(groupRow.pzvArticul);
+                        var nomKey = groupRow.pzvNom;
+                        var pachKey = (machineKey, artKey, nomKey, (int?)groupRow.n_pach);
+                        if (_machineArtNomPachGroups == null || !_machineArtNomPachGroups.TryGetValue(pachKey, out var pachRows))
                             continue;
 
-                        foreach (var nr in parentRow.nrModels)
+                        foreach (var parentRow in pachRows)
                         {
-                            var signature = $"{parentRow.pzvID}_{groupRow.n_pach}_{nr.nrN}_{nr.nrN1}_{nr.nr_kod_proizv}_{nr.nr_kod_ob}";
-                            if (!seenOperations.Add(signature))
+                            if (parentRow?.nrModels == null || parentRow.nrModels.Count == 0)
                                 continue;
 
-                            var operationRow = KnitterPlanUtils.CreateOperationRow(parentRow, nr);
-                            operationRow.n_pach = groupRow.n_pach;
-                            operationRow.razm = parentRow.razm;
-                            result.Add(operationRow);
+                            foreach (var nr in parentRow.nrModels)
+                            {
+                                var signature = $"{parentRow.pzvID}_{groupRow.n_pach}_{nr.nrN}_{nr.nrN1}_{nr.nr_kod_proizv}_{nr.nr_kod_ob}";
+                                if (!seenOperations.Add(signature))
+                                    continue;
+
+                                var operationRow = KnitterPlanUtils.CreateOperationRow(parentRow, nr);
+                                operationRow.n_pach = groupRow.n_pach;
+                                operationRow.razm = parentRow.razm;
+                                result.Add(operationRow);
+                            }
                         }
                     }
                 }
@@ -225,6 +212,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
             e.ChildList = result;
         }
+
+        // Второго мастер-уровня больше нет — деталь формируется сразу в Master_* обработчике
         private static IEnumerable<KnitterPZVModel> GetRowsFromView(DevExpress.XtraGrid.Views.Base.ColumnView view)
         {
             int[] selectedHandles = view.GetSelectedRows();

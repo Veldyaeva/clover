@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -500,8 +501,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     { "@xAnnID", annId }
                 };
-                await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @xAnnID", parameters);
-
+                await _dbHelper.ExecuteQueryAsync(
+    "dbo.updateSebZArticulPsz",
+    parameters,
+    CommandType.StoredProcedure
+);
                 // Обновляем дату обновления в базе данных
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
 

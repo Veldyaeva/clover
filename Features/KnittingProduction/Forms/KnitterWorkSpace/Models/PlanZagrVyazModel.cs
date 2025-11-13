@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public string razm { get; set; }
         public int? nrN { get; set; }
         public int? nrN1 { get; set; }
+        [NotMapped]
+        public string DisplayNumber => nrN1 > 0 ? $"{nrN}.{nrN1}" : $"{nrN}";
         public string nrText { get; set; }
         public int? nrRazryd { get; set; }
         public string nrObor { get; set; }

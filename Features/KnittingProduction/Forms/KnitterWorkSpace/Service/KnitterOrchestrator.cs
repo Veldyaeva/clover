@@ -8,13 +8,19 @@ using System.Threading.Tasks;
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
     /// <summary>
-    /// Оркестратор для KnitterWorkSpace: координация загрузки данных без UI/SQL.
+    /// Оркестратор для KnitterWorkSpace: слой координации между UI и репозиторием.
+    /// Не содержит UI-логики и SQL — только вызовы репозитория, агрегация и возврат дельт.
     /// </summary>
     public class KnitterOrchestrator : IKnitterOrchestrator
     {
         private readonly IKnitterRepository _repo;
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Создаёт оркестратор.
+        /// </summary>
+        /// <param name="repo">Репозиторий доступа к данным.</param>
+        /// <param name="logger">Логгер для записи ошибок/событий.</param>
         public KnitterOrchestrator(IKnitterRepository repo, ILogger logger)
         {
             _repo = repo;
@@ -42,15 +48,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns></returns>
         public Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab) => _repo.GetPlanTreeByTabAsync(tab);
 
+        /// <summary>
+        /// Массово назначает табельный номер для указанных записей плана.
+        /// </summary>
         public Task SetPzvTabAsync(IEnumerable<int> pzvIds, int tab) => _repo.UpdatePzvTabAsync(pzvIds, tab);
 
         /// <summary>
-        /// Устанавливает дату начала на стороне БД и возвращает фактически сохранённое значение.
+        /// Устанавливает дату начала на стороне БД и возвращает фактически сохранённое значение (серверное время).
         /// </summary>
         public Task<KnitterPZVModel> UpdatePzvDateStartAsync(int pzvId) => _repo.UpdatePzvDateStartAsync(pzvId);
 
         /// <summary>
-        /// Устанавливает дату окончания на стороне БД и возвращает фактически сохранённое значение.
+        /// Устанавливает дату окончания на стороне БД и возвращает фактически сохранённое значение (серверное время).
         /// </summary>
         public Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId) => _repo.UpdatePzvDateEndAsync(pzvId);
 
