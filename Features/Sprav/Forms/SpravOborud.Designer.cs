@@ -1091,8 +1091,8 @@ namespace SewingProduction.form
             tableLayoutPanel4.Controls.Add(label23, 0, 4);
             tableLayoutPanel4.Controls.Add(label4, 0, 3);
             tableLayoutPanel4.Controls.Add(checkBoxAddSpec, 1, 6);
-            tableLayoutPanel4.Controls.Add(simpleButtonAddSave, 1, 12);
-            tableLayoutPanel4.Controls.Add(simpleButtonAddOtm, 0, 12);
+            tableLayoutPanel4.Controls.Add(simpleButtonAddOtm, 0, 11);
+            tableLayoutPanel4.Controls.Add(simpleButtonAddSave, 1, 11);
             tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1109,8 +1109,8 @@ namespace SewingProduction.form
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 17F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel4.Size = new System.Drawing.Size(587, 958);
@@ -1490,7 +1490,7 @@ namespace SewingProduction.form
             simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
             simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            simpleButtonAddSave.Location = new System.Drawing.Point(317, 865);
+            simpleButtonAddSave.Location = new System.Drawing.Point(317, 825);
             simpleButtonAddSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddSave.MaximumSize = new System.Drawing.Size(203, 46);
             simpleButtonAddSave.MinimumSize = new System.Drawing.Size(203, 46);
@@ -1509,7 +1509,7 @@ namespace SewingProduction.form
             simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
             simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            simpleButtonAddOtm.Location = new System.Drawing.Point(23, 865);
+            simpleButtonAddOtm.Location = new System.Drawing.Point(23, 825);
             simpleButtonAddOtm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddOtm.MaximumSize = new System.Drawing.Size(203, 46);
             simpleButtonAddOtm.MinimumSize = new System.Drawing.Size(203, 46);

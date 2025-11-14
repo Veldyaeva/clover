@@ -61,13 +61,16 @@
             colTk_name1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colId_gost1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             repositoryItemSearchLookUpEditGost = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            _bsGostForSostav = new System.Windows.Forms.BindingSource(components);
             repositoryItemSearchLookUpEditGostView = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             colName_gost = new DevExpress.XtraGrid.Columns.GridColumn();
             colOpi_gost = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             colAg_id1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colN_i1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             repositoryItemSearchLookUpEditGrup = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            _bsGrupForSostav = new System.Windows.Forms.BindingSource(components);
             repositoryItemSearchLookUpEditGrupView = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -75,6 +78,7 @@
             colAg_tnved = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             colN_g = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             colSostav1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colId_razm_nab1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colRazm1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -105,9 +109,7 @@
             customTextBoxSostav = new Core.Class.CustomTextBox();
             customTextBoxKod = new Core.Class.CustomTextBox();
             customLookUpEditAg_id = new Core.Class.CustomLookUpEdit();
-            _bsGrupForSostav = new System.Windows.Forms.BindingSource(components);
             customLookUpEditGost = new Core.Class.CustomLookUpEdit();
-            _bsGostForSostav = new System.Windows.Forms.BindingSource(components);
             customLookUpEditT_v_n = new Core.Class.CustomLookUpEdit();
             tvnModelBindingSource = new System.Windows.Forms.BindingSource(components);
             customLookUpEditAssort = new Core.Class.CustomLookUpEdit();
@@ -156,6 +158,7 @@
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+            behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(components);
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).BeginInit();
             dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGrupN.Properties).BeginInit();
@@ -168,16 +171,16 @@
             ((System.ComponentModel.ISupportInitialize)spArticulNaborSostavBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)_bsGostForSostav).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGostView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrup).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)_bsGrupForSostav).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrupView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customPictureBoxNabor).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlNabor_Old).BeginInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor_Old).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditAg_id.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)_bsGrupForSostav).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditGost.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)_bsGostForSostav).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditT_v_n.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tvnModelBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditAssort.Properties).BeginInit();
@@ -223,6 +226,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)behaviorManager1).BeginInit();
             SuspendLayout();
             // 
             // dataLayoutControl1
@@ -249,7 +253,6 @@
             dataLayoutControl1.Controls.Add(customLookUpEditAssort);
             dataLayoutControl1.Controls.Add(customTextBoxAns_id);
             dataLayoutControl1.Controls.Add(customTextBoxRazm);
-            dataLayoutControl1.DataSource = spArticulNaborSostavBindingSource;
             dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             dataLayoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItemKod, layoutControlItemId_razm_nab, layoutControlItemAns_id, layoutControlGroup2 });
             dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
@@ -444,7 +447,6 @@
             customGridControlNabor.Size = new System.Drawing.Size(427, 225);
             customGridControlNabor.TabIndex = 15;
             customGridControlNabor.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { GridViewNabor });
-            customGridControlNabor.Click += customGridControlNabor_Click;
             // 
             // spArticulNaborSostavBindingSource
             // 
@@ -468,8 +470,7 @@
             GridViewNabor.OptionsView.EnableAppearanceEvenRow = true;
             GridViewNabor.OptionsView.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             GridViewNabor.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colrazm_all1, DevExpress.Data.ColumnSortOrder.Ascending) });
-            GridViewNabor.ShownEditor += GridViewNabor_ShownEditor;
-            GridViewNabor.ValidatingEditor += GridViewNabor_ValidatingEditor;
+            GridViewNabor.CellValueChanged += GridViewNabor_CellValueChanged;
             // 
             // BandRazmAll1
             // 
@@ -489,7 +490,7 @@
             BandRazmAll1.Columns.Add(colrazm_all1);
             BandRazmAll1.Name = "BandRazmAll1";
             BandRazmAll1.VisibleIndex = 0;
-            BandRazmAll1.Width = 599;
+            BandRazmAll1.Width = 601;
             // 
             // colAns_id1
             // 
@@ -545,25 +546,39 @@
             colId_gost1.MinWidth = 50;
             colId_gost1.Name = "colId_gost1";
             colId_gost1.Visible = true;
-            colId_gost1.Width = 50;
+            colId_gost1.Width = 74;
             // 
             // repositoryItemSearchLookUpEditGost
             // 
             repositoryItemSearchLookUpEditGost.AutoHeight = false;
             repositoryItemSearchLookUpEditGost.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemSearchLookUpEditGost.DataSource = _bsGostForSostav;
             repositoryItemSearchLookUpEditGost.DisplayMember = "Id_gost";
             repositoryItemSearchLookUpEditGost.Name = "repositoryItemSearchLookUpEditGost";
             repositoryItemSearchLookUpEditGost.NullText = "";
             repositoryItemSearchLookUpEditGost.PopupView = repositoryItemSearchLookUpEditGostView;
             repositoryItemSearchLookUpEditGost.ValueMember = "Id_gost";
+            repositoryItemSearchLookUpEditGost.CloseUp += repositoryItemSearchLookUpEditGost_CloseUp;
+            repositoryItemSearchLookUpEditGost.Popup += repositoryItemSearchLookUpEditGost_Popup;
+            // 
+            // _bsGostForSostav
+            // 
+            _bsGostForSostav.DataSource = typeof(Core.Models.GostModel);
             // 
             // repositoryItemSearchLookUpEditGostView
             // 
-            repositoryItemSearchLookUpEditGostView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn4, colName_gost, colOpi_gost });
+            repositoryItemSearchLookUpEditGostView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn4, colName_gost, colOpi_gost, gridColumn14 });
             repositoryItemSearchLookUpEditGostView.DetailHeight = 100;
             repositoryItemSearchLookUpEditGostView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             repositoryItemSearchLookUpEditGostView.Name = "repositoryItemSearchLookUpEditGostView";
+            repositoryItemSearchLookUpEditGostView.OptionsCustomization.AllowFilter = false;
+            repositoryItemSearchLookUpEditGostView.OptionsCustomization.AllowGroup = false;
+            repositoryItemSearchLookUpEditGostView.OptionsCustomization.AllowSort = false;
+            repositoryItemSearchLookUpEditGostView.OptionsMenu.EnableColumnMenu = false;
+            repositoryItemSearchLookUpEditGostView.OptionsMenu.EnableFooterMenu = false;
+            repositoryItemSearchLookUpEditGostView.OptionsMenu.EnableGroupPanelMenu = false;
             repositoryItemSearchLookUpEditGostView.OptionsSelection.EnableAppearanceFocusedCell = false;
+            repositoryItemSearchLookUpEditGostView.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             repositoryItemSearchLookUpEditGostView.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn4
@@ -571,6 +586,8 @@
             gridColumn4.Caption = "ГОСТ";
             gridColumn4.FieldName = "Id_gost";
             gridColumn4.Name = "gridColumn4";
+            gridColumn4.OptionsFilter.AllowAutoFilter = false;
+            gridColumn4.OptionsFilter.AllowFilter = false;
             gridColumn4.Visible = true;
             gridColumn4.VisibleIndex = 0;
             gridColumn4.Width = 124;
@@ -580,6 +597,8 @@
             colName_gost.Caption = "Название";
             colName_gost.FieldName = "Name_gost";
             colName_gost.Name = "colName_gost";
+            colName_gost.OptionsFilter.AllowAutoFilter = false;
+            colName_gost.OptionsFilter.AllowFilter = false;
             colName_gost.Visible = true;
             colName_gost.VisibleIndex = 1;
             colName_gost.Width = 277;
@@ -589,9 +608,19 @@
             colOpi_gost.Caption = "Описание";
             colOpi_gost.FieldName = "Opi_gost";
             colOpi_gost.Name = "colOpi_gost";
+            colOpi_gost.OptionsFilter.AllowAutoFilter = false;
+            colOpi_gost.OptionsFilter.AllowFilter = false;
             colOpi_gost.Visible = true;
             colOpi_gost.VisibleIndex = 2;
             colOpi_gost.Width = 550;
+            // 
+            // gridColumn14
+            // 
+            gridColumn14.Caption = "Tk_id";
+            gridColumn14.FieldName = "Tk_id";
+            gridColumn14.Name = "gridColumn14";
+            gridColumn14.OptionsFilter.AllowAutoFilter = false;
+            gridColumn14.OptionsFilter.AllowFilter = false;
             // 
             // colAg_id1
             // 
@@ -601,13 +630,12 @@
             colAg_id1.Name = "colAg_id1";
             colAg_id1.OptionsColumn.ReadOnly = true;
             colAg_id1.Visible = true;
-            colAg_id1.Width = 90;
             // 
             // colN_i1
             // 
             colN_i1.Caption = "Группа по ГОСТ";
             colN_i1.ColumnEdit = repositoryItemSearchLookUpEditGrup;
-            colN_i1.FieldName = "N_i";
+            colN_i1.FieldName = "Ag_id";
             colN_i1.MinWidth = 90;
             colN_i1.Name = "colN_i1";
             colN_i1.Visible = true;
@@ -617,15 +645,22 @@
             // 
             repositoryItemSearchLookUpEditGrup.AutoHeight = false;
             repositoryItemSearchLookUpEditGrup.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemSearchLookUpEditGrup.DataSource = _bsGrupForSostav;
             repositoryItemSearchLookUpEditGrup.DisplayMember = "N_i";
             repositoryItemSearchLookUpEditGrup.Name = "repositoryItemSearchLookUpEditGrup";
             repositoryItemSearchLookUpEditGrup.NullText = "";
             repositoryItemSearchLookUpEditGrup.PopupView = repositoryItemSearchLookUpEditGrupView;
-            repositoryItemSearchLookUpEditGrup.ValueMember = "N_i";
+            repositoryItemSearchLookUpEditGrup.ValueMember = "Ag_id";
+            repositoryItemSearchLookUpEditGrup.CloseUp += repositoryItemSearchLookUpEditGrup_CloseUp;
+            repositoryItemSearchLookUpEditGrup.Popup += repositoryItemSearchLookUpEditGrup_Popup;
+            // 
+            // _bsGrupForSostav
+            // 
+            _bsGrupForSostav.DataSource = typeof(Core.Models.GostGrupIzdViewModel);
             // 
             // repositoryItemSearchLookUpEditGrupView
             // 
-            repositoryItemSearchLookUpEditGrupView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn1, gridColumn2, colAg_name_sokr, colAg_tnved, gridColumn3, colN_g });
+            repositoryItemSearchLookUpEditGrupView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn1, gridColumn2, colAg_name_sokr, colAg_tnved, gridColumn3, colN_g, gridColumn15 });
             repositoryItemSearchLookUpEditGrupView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             repositoryItemSearchLookUpEditGrupView.Name = "repositoryItemSearchLookUpEditGrupView";
             repositoryItemSearchLookUpEditGrupView.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -678,6 +713,12 @@
             colN_g.FieldName = "N_g";
             colN_g.Name = "colN_g";
             // 
+            // gridColumn15
+            // 
+            gridColumn15.Caption = "tk_id";
+            gridColumn15.FieldName = "Tk_id";
+            gridColumn15.Name = "gridColumn15";
+            // 
             // colSostav1
             // 
             colSostav1.Caption = "Состав";
@@ -685,7 +726,7 @@
             colSostav1.MinWidth = 70;
             colSostav1.Name = "colSostav1";
             colSostav1.Visible = true;
-            colSostav1.Width = 72;
+            colSostav1.Width = 70;
             // 
             // colId_razm_nab1
             // 
@@ -701,6 +742,7 @@
             colRazm1.MinWidth = 70;
             colRazm1.Name = "colRazm1";
             colRazm1.Visible = true;
+            colRazm1.Width = 70;
             // 
             // colrazm_all1
             // 
@@ -821,7 +863,7 @@
             BandRazmAll.Columns.Add(colRazm);
             BandRazmAll.Name = "BandRazmAll";
             BandRazmAll.VisibleIndex = 0;
-            BandRazmAll.Width = 565;
+            BandRazmAll.Width = 616;
             // 
             // colAns_id
             // 
@@ -879,7 +921,7 @@
             colId_gost.Name = "colId_gost";
             colId_gost.OptionsColumn.ReadOnly = true;
             colId_gost.Visible = true;
-            colId_gost.Width = 50;
+            colId_gost.Width = 74;
             // 
             // colAg_id
             // 
@@ -898,7 +940,7 @@
             colN_i.Name = "colN_i";
             colN_i.OptionsColumn.ReadOnly = true;
             colN_i.Visible = true;
-            colN_i.Width = 90;
+            colN_i.Width = 117;
             // 
             // colSostav
             // 
@@ -1013,10 +1055,6 @@
             customLookUpEditAg_id.StyleController = dataLayoutControl1;
             customLookUpEditAg_id.TabIndex = 4;
             // 
-            // _bsGrupForSostav
-            // 
-            _bsGrupForSostav.DataSource = typeof(Core.Models.GostGrupIzdViewModel);
-            // 
             // customLookUpEditGost
             // 
             customLookUpEditGost.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Id_gost", true));
@@ -1037,10 +1075,6 @@
             customLookUpEditGost.Size = new System.Drawing.Size(67, 22);
             customLookUpEditGost.StyleController = dataLayoutControl1;
             customLookUpEditGost.TabIndex = 3;
-            // 
-            // _bsGostForSostav
-            // 
-            _bsGostForSostav.DataSource = typeof(Core.Models.GostModel);
             // 
             // customLookUpEditT_v_n
             // 
@@ -1475,16 +1509,16 @@
             ((System.ComponentModel.ISupportInitialize)spArticulNaborSostavBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)_bsGostForSostav).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGostView).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrup).EndInit();
+            ((System.ComponentModel.ISupportInitialize)_bsGrupForSostav).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEditGrupView).EndInit();
             ((System.ComponentModel.ISupportInitialize)customPictureBoxNabor).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlNabor_Old).EndInit();
             ((System.ComponentModel.ISupportInitialize)GridViewNabor_Old).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditAg_id.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)_bsGrupForSostav).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditGost.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)_bsGostForSostav).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditT_v_n.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)tvnModelBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditAssort.Properties).EndInit();
@@ -1530,6 +1564,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)behaviorManager1).EndInit();
             ResumeLayout(false);
         }
 
@@ -1663,5 +1698,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private System.Windows.Forms.BindingSource _bsGostForNabor;
         private System.Windows.Forms.BindingSource _bsGrupForNabor;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }

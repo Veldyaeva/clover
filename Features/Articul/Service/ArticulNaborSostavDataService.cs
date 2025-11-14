@@ -55,24 +55,26 @@ namespace SewingProduction.Features.Articul.Service
             string query = @"SELECT Id_gost, Name_gost, Opi_gost FROM gost WHERE pr_nabor = 1";
             return await _dbService.GetListAsync<GostModel>(query, new { });
         }
-        public async Task<List<GostModel>> GetGostSostavAsync(int? idGost)
+        public async Task<List<GostModel>> GetGostSostavAsync(int? idGost = null)
         {
             string query = @"SELECT Id_gost_nab AS Id_gost,
-                            Name_gost_nab AS Name_gost,
-                            Opi_gost_nab AS Opi_gost,
-                            tk_id_nab
-                     FROM View_gost_nab
-                     WHERE Id_gost = @id_gost";
+                                Name_gost_nab AS Name_gost,
+                                Opi_gost_nab AS Opi_gost,
+                                Tk_id_nab AS Tk_id,
+                                Id_gost AS Id_glav_gost
+                            FROM View_gost_nab"
+                            + (idGost.HasValue ? " WHERE Id_gost = @id_gost" :"");
 
             return await _dbService.GetListAsync<GostModel>(query, new { id_gost = idGost});
         }
-        public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdNaborAsync(int? idGost, int? tkId = null)
+        public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdNaborAsync(int[] Ids = null, int? tkId = null)
         {
-            string query = @"SELECT Id_gost, Ag_id, Ag_name_sokr, Ag_tnved, N_i, N_g
+            string query = @"SELECT Id_gost, Ag_id, Ag_name_sokr, Ag_tnved, N_i, N_g , ag_tk_id AS tk_id
                      FROM dbo.View_GostGrupIzd
-                     WHERE arh = 0 AND Id_gost = @id_gost"
-                             + (tkId.HasValue ? " AND ag_tk_id = @tk_id" : "");
-            return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new { id_gost = idGost, tk_id = tkId });
+                     WHERE arh = 0 "
+                             + ((Ids != null && Ids.Length > 0) ? " AND Id_gost IN @Ids" : "")
+                             + (tkId.HasValue ? " AND ag_tk_id = @tkId" : "");
+            return await _dbService.GetListAsync<GostGrupIzdViewModel>(query, new { Ids, tkId });
         }
         public bool CheckOpis(string kod)
         {
@@ -88,7 +90,7 @@ namespace SewingProduction.Features.Articul.Service
                 SELECT sad.t_id
                 FROM sp_articul_dateopis_gl_1c sad
                 INNER JOIN plan_sezon_all psa ON LEFT(sad.nn,10) = psa.nn
-                WHERE psa.kodd = 2024370
+                WHERE psa.kodd = @kod
                 GROUP BY sad.t_id
                 HAVING COUNT(DISTINCT sad.t_art_poln) > 1";
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", $"{kod.Substring(0, 7)}" } });
