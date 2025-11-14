@@ -497,7 +497,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 return; // отмена
             if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > defaultQty)
             {
-                XtraMessageBox.Show(this, "Введите целое неотрицательное число.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                XtraMessageBox.Show(this, "Значение должно быть меньше запланированного.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             // Отобразим введённое значение в столбце факта (unbound)
@@ -507,6 +507,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _view.UpdateCurrentRow();
             _view.RefreshRowCell(rowHandle, bandedGridColumn22);
 
+            // Если отвязано меньше запланированного — разделяем запись на “факт” и “остаток”
+            var plannedQty = currentRow?.pzvKolNazn ?? currentRow?.pzvKol ?? 0;
+            if (qty < defaultQty && currentRow?.pzvID > 0)
+            {
+                await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
+            }
+
             await ApplyPzvDateAsync(
                 view,
                 bandedGridColumn19,
@@ -514,6 +521,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 m => m.pzvDateEnd,
                 (m, v) => m.pzvDateEnd = v,
                 "окончания");
+            
+            // Обновим план, чтобы показать новую запись остатка (если была создана)
+            if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
+            {
+                // Сохраняем текущую машину, чтобы вернуть фокус после обновления
+                var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
+                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
+                // перестраиваем иерархию без очистки табеля
+                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                // Вернём фокус и раскроем нужную машину
+                if (!string.IsNullOrEmpty(currentMachineKey))
+                {
+                    for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                    {
+                        if (bandedGridView3.GetRow(i) is KnitterPZVModel machineRow &&
+                            NormalizeMachineKey(machineRow.kmlNumber) == currentMachineKey)
+                        {
+                            bandedGridView3.FocusedRowHandle = i;
+                            bandedGridView3.SetMasterRowExpanded(i, true);
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

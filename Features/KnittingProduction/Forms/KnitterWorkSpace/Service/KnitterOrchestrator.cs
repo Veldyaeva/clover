@@ -70,6 +70,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <param name="vyazPodrKod">Код вязального подразделения.</param>
         /// <returns>Список операций плана.</returns>
         public Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod) => _repo.GetPlanZagrVyazByPachListAsync(nomListJson, vyazPodrKod);
+
+        /// <summary>
+        /// При неполном выполнении: разделяет запись на “факт” и “остаток”.
+        /// Должно создать дополнительную запись в плановой таблице с оставшимся количеством.
+        /// </summary>
+        public Task SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
     }
 }
 

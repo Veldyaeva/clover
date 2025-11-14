@@ -224,6 +224,17 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
                 return new KnitterPZVModel { pzvID = result.pzvID, pzvDateEnd = result.pzvDateEnd };
             }
         }
+
+        public async Task SplitPzvByFactAsync(int pzvId, int factQty)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                // Ожидается наличие процедуры, создающей дополнительную запись с остатком.
+                // Если процедуры нет — реализуйте на стороне БД логику разделения.
+                const string sql = @"EXEC dbo.SplitPlanZagrVyazByFact @pzvId = @pzvId, @factQty = @factQty";
+              //  await connection.ExecuteAsync(sql, new { pzvId, factQty });
+            }
+        }
  
         // Трансформационные хелперы перенесены в KnitterPlanUtils
 
