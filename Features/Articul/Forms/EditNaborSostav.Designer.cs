@@ -470,6 +470,7 @@
             GridViewNabor.OptionsView.EnableAppearanceEvenRow = true;
             GridViewNabor.OptionsView.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             GridViewNabor.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colrazm_all1, DevExpress.Data.ColumnSortOrder.Ascending) });
+            GridViewNabor.FocusedRowChanged += gridViewNabor_FocusedRowChanged;
             GridViewNabor.CellValueChanged += GridViewNabor_CellValueChanged;
             // 
             // BandRazmAll1
@@ -490,7 +491,7 @@
             BandRazmAll1.Columns.Add(colrazm_all1);
             BandRazmAll1.Name = "BandRazmAll1";
             BandRazmAll1.VisibleIndex = 0;
-            BandRazmAll1.Width = 601;
+            BandRazmAll1.Width = 612;
             // 
             // colAns_id1
             // 
@@ -532,11 +533,11 @@
             // 
             colTk_name1.Caption = "Часть в наборе";
             colTk_name1.FieldName = "Tk_name";
-            colTk_name1.MinWidth = 110;
+            colTk_name1.MinWidth = 120;
             colTk_name1.Name = "colTk_name1";
             colTk_name1.OptionsColumn.ReadOnly = true;
             colTk_name1.Visible = true;
-            colTk_name1.Width = 110;
+            colTk_name1.Width = 120;
             // 
             // colId_gost1
             // 
@@ -546,7 +547,6 @@
             colId_gost1.MinWidth = 50;
             colId_gost1.Name = "colId_gost1";
             colId_gost1.Visible = true;
-            colId_gost1.Width = 74;
             // 
             // repositoryItemSearchLookUpEditGost
             // 
@@ -1496,7 +1496,6 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "EditNaborSostav";
             Text = "Редактирование набора";
-            Load += EditNaborSostav_Load;
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).EndInit();
             dataLayoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGrupN.Properties).EndInit();

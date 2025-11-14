@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using DevExpress.XtraDiagram.Base;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Filtering;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSpreadsheet.Model;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
@@ -27,7 +29,6 @@ namespace SewingProduction.Features.Articul.Forms
         BindingSource _bsOld = new BindingSource();
         int oldAgIdBeforeEdit = 0;
         ArticulModel articulNabor;
-        private bool _isLoading = false;
         public EditNaborSostav()
         {
             InitializeComponent();
@@ -37,10 +38,8 @@ namespace SewingProduction.Features.Articul.Forms
             InitializeComponent();
             articulNabor = Obj;
         }
-
         private async void customGridControl1_Load(object sender, EventArgs e)
         {
-            _isLoading = true;
             await LoadNabor();
             await LoadSostav();
             await LoadAllGroupsAsync();
@@ -49,8 +48,8 @@ namespace SewingProduction.Features.Articul.Forms
             ArticulNaborColumns();
             ArticulNaborColumnsOld();
             SetupSearchLookUpEditGost();
-            _isLoading = false;
         }
+        #region Загрузка формы
         private async Task LoadNabor()
         {
             articulNabor = await _articulDataService.GetArtByKodAsync(articulNabor.Kod);
@@ -67,7 +66,6 @@ namespace SewingProduction.Features.Articul.Forms
                 oldAgIdBeforeEdit = currentItem.Ag_id;
             }
         }
-
         private async Task LoadSostav()
         {
             // --- основная таблица ---
@@ -99,6 +97,38 @@ namespace SewingProduction.Features.Articul.Forms
 
             _bsGostForSostav.DataSource = await _ANSDataService.GetGostSostavAsync();
             //_bsGrupForSostav.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(articulNabor.Id_gost);
+        }
+        private async Task LoadAllGroupsAsync()
+        {
+            var gostIds = CollectAllGostIds();
+
+            if (gostIds.Length == 0)
+            {
+                _allGroups = new List<GostGrupIzdViewModel>();
+                repositoryItemSearchLookUpEditGrup.DataSource = _allGroups;
+                return;
+            }
+
+            _allGroups = await _ANSDataService.GetGostGrupIzdNaborAsync(gostIds, null);
+
+            repositoryItemSearchLookUpEditGrup.DataSource = _allGroups;
+            repositoryItemSearchLookUpEditGrup.DisplayMember = "N_i";
+            repositoryItemSearchLookUpEditGrup.ValueMember = "Ag_id";
+            repositoryItemSearchLookUpEditGrup.NullText = "";
+        }
+        private int[] CollectAllGostIds()
+        {
+            var view = GridViewNabor;
+            var ids = new HashSet<int>();
+            for (int i = 0; i < view.DataRowCount; i++)
+            {
+                var row = view.GetRow(i) as SpArticulNaborSostav;
+                if (row == null) continue;
+
+                if (row.Id_gost > 0)
+                    ids.Add(row.Id_gost);
+            }
+            return ids.ToArray();
         }
         private async Task SetupPictursBox()
         {
@@ -151,21 +181,403 @@ namespace SewingProduction.Features.Articul.Forms
 
             GridViewNabor.RefreshData();
         }
+        #endregion
 
-        private void customButtonSaveNabor_Click(object sender, EventArgs e)
+        #region Обработка ГОСТ НАБОРА (верхняя часть формы)
+        private async void customSearchLookUpEditGostN_EditValueChanged(object sender, EventArgs e)
         {
-            MessageBox.Show(_isLoading.ToString(), "Внимание",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
+            int idGostNabor = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
+            var grupList = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { idGostNabor }, 3);
+            _bsGrupForNabor.DataSource = grupList;
+            if (grupList != null && grupList.Count == 1)
+            {
+                var only = grupList[0];
+                customSearchLookUpEditGrupN.EditValue = only.Ag_id;
+                customSearchLookUpEditGrupN.DoValidate();
+            }
+            else
+            {
+                customSearchLookUpEditGrupN.EditValue = null;
+            }
+            await AutoApplyIdGostAfterChangingNabor(idGostNabor);
+            //await LoadAllGroupsAsync();
+        }
+        private async Task AutoApplyIdGostAfterChangingNabor(int idGostNabor)
+        {
+            if (idGostNabor == 0) return;
+
+            var allGosts = await _ANSDataService.GetGostSostavAsync(idGostNabor);
+
+            var view = GridViewNabor;
+            WithGridViewUpdate(view =>
+            {
+                for (int i = 0; i < view.DataRowCount; i++)
+                {
+                    var row = view.GetRow(i) as SpArticulNaborSostav;
+                    if (row == null) continue;
+
+                    int tk = row.Tk_id;
+
+                    var filtered = allGosts
+                        .Where(g => g.Tk_id == tk)
+                        .ToList();
+
+                    if (filtered.Count == 1)
+                    {
+                        int autoGost = filtered[0].Id_gost;
+                        view.SetRowCellValue(i, "Id_gost", autoGost);
+                    }
+                    else
+                    {
+                        view.SetRowCellValue(i, "Id_gost", DBNull.Value);
+                    }
+                }
+            });
+        }
+        #endregion
+
+        #region Обработка ГОСТ СОСТАВА (Id_gost в гриде)
+        private int? selectedGostId = null;
+        private List<GostGrupIzdViewModel> _allGroups = new();
+        private void repositoryItemSearchLookUpEditGost_Popup(object sender, EventArgs e)
+        {
+            if (GridViewNabor.FocusedColumn == null || GridViewNabor.FocusedColumn.FieldName != "Id_gost") return;
+
+            var row = GridViewNabor.GetFocusedRow() as SpArticulNaborSostav;
+            if (row == null) return;
+
+            var idGostNabor = customSearchLookUpEditGostN.EditValue.ToIntN();
+            if (idGostNabor == null) return;
+
+            var editor = GridViewNabor.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
+            if (editor == null) return;
+
+            var popupView = editor.Properties.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (popupView != null)
+            {
+                popupView.ActiveFilterString = $"[Tk_id] = {row.Tk_id} AND [Id_glav_gost] = {idGostNabor}";
+            }
+            popupView.FocusedRowChanged -= PopupView_FocusedRowChanged;
+            popupView.FocusedRowChanged += PopupView_FocusedRowChanged;
+        }
+        private void PopupView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var popupView = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (popupView == null) return;
+
+            var rowGost = popupView.GetFocusedRow() as GostModel;
+            if (rowGost == null) return;
+            selectedGostId = rowGost.Id_gost;
+        }
+        private void repositoryItemSearchLookUpEditGost_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
+        {
+            if (selectedGostId == null || selectedGostId == 0) return;
+
+            var view = GridViewNabor;
+            var currentRow = view.GetFocusedRow() as SpArticulNaborSostav;
+            if (currentRow == null) return;
+
+            int tkId = currentRow.Tk_id;
+            int agId = currentRow.Ag_id;
+
+            WithGridViewUpdate(view =>
+            {
+                for (int i = 0; i < view.DataRowCount; i++)
+                {
+                    var row = view.GetRow(i) as SpArticulNaborSostav;
+                    if (row == null) continue;
+
+                    if (row.Tk_id == tkId && row.Ag_id == agId)
+                    {
+                        view.SetRowCellValue(i, "Id_gost", selectedGostId.Value);
+                    }
+                }
+            });
+        }
+        #endregion
+
+        #region Обработка ГРУПП СОСТАВА (Ag_id в гриде)
+        private GostGrupIzdViewModel selectedGrupId = null;
+        private void repositoryItemSearchLookUpEditGrup_Popup(object sender, EventArgs e)
+        {
+            if (GridViewNabor.FocusedColumn == null || GridViewNabor.FocusedColumn.FieldName != "Ag_id")
+                return;
+
+            var row = GridViewNabor.GetFocusedRow() as SpArticulNaborSostav;
+            if (row == null) return;
+
+            int tkId = row.Tk_id;
+
+            selectedGostId = row.Id_gost;
+
+            if (selectedGostId == null || selectedGostId == 0) return;
+
+            var editor = GridViewNabor.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
+            if (editor == null) return;
+
+            var popupView = editor.Properties.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (popupView == null) return;
+
+            popupView.ActiveFilterString = $"[Tk_id] = {tkId} AND [Id_gost] = {selectedGostId}";
+
+            popupView.FocusedRowChanged -= GrupPopupView_FocusedRowChanged;
+            popupView.FocusedRowChanged += GrupPopupView_FocusedRowChanged;
+        }
+        private void GrupPopupView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var popupView = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (popupView == null) return;
+
+            selectedGrupId = popupView.GetFocusedRow() as GostGrupIzdViewModel;
+            if (selectedGrupId == null) return;
+        }
+        private void repositoryItemSearchLookUpEditGrup_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
+        {
+            if (selectedGrupId == null || selectedGrupId.Ag_id == 0) return;
+
+            var view = GridViewNabor;
+            var currentRow = view.GetFocusedRow() as SpArticulNaborSostav;
+            if (currentRow == null) return;
+
+            int tkId = currentRow.Tk_id;
+
+            WithGridViewUpdate(view =>
+            {
+                for (int i = 0; i < view.DataRowCount; i++)
+                {
+                    var row = view.GetRow(i) as SpArticulNaborSostav;
+                    if (row == null) continue;
+
+                    if (row.Tk_id == tkId && row.Id_gost == currentRow.Id_gost)
+                    {
+                        view.SetRowCellValue(i, "Ag_id", selectedGrupId.Ag_id);
+                        row.Ag_id = selectedGrupId.Ag_id;
+                        row.N_i = selectedGrupId.N_i;
+                    }
+                }
+            });
+        }
+        #endregion
+
+        #region Основной обработчик GridView + позиционирование
+        private async void GridViewNabor_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            switch (e.Column.FieldName)
+            {
+                case "Sostav":
+                    ApplySostavToSameTkGost(e.RowHandle);
+                    break;
+                case "Id_gost":
+                    await ApplyGrupsToSameTkGost(e);
+                    break;
+            }
+        }
+        private async Task ApplyGrupsToSameTkGost(DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        { 
+            await LoadAllGroupsAsync();
+
+            var row = GridViewNabor.GetRow(e.RowHandle) as SpArticulNaborSostav;
+            if (row == null) return;
+
+            int gost = row.Id_gost;
+            //if (selectedGostId == gost) return;
+            int tk = row.Tk_id;
+
+            var groups = GetGroupsForRow(row);
+
+            // Старые значения
+            var oldRow = _bsOld.Cast<SpArticulNaborSostav>()
+                               .FirstOrDefault(x => x.Ans_id == row.Ans_id);
+            WithGridViewUpdate(view =>
+            {
+                if (TryAutoSelectGroup(groups, row, e.RowHandle)) return;
+
+                if (TryRestoreGroup(groups, oldRow, row, e.RowHandle)) return;
+
+                ClearGroup(row, e.RowHandle);
+            });
         }
 
+        private void ApplySostavToSameTkGost(int rowHandle)
+        {
+            var view = GridViewNabor;
+            var row = view.GetRow(rowHandle) as SpArticulNaborSostav;
+            if (row == null) return;
+
+            string newSostav = row.Sostav;
+            int tk = row.Tk_id;
+            int gost = row.Id_gost;
+
+            GridViewNabor.CellValueChanged -= GridViewNabor_CellValueChanged;
+            WithGridViewUpdate(v =>
+            {
+                for (int i = 0; i < v.DataRowCount; i++)
+                {
+                    var r = v.GetRow(i) as SpArticulNaborSostav;
+                    if (r == null) continue;
+
+                    if (r.Tk_id == tk && r.Id_gost == gost)
+                    {
+                        v.SetRowCellValue(i, "Sostav", newSostav);
+                        r.Sostav = newSostav;
+                    }
+                }
+            });
+            GridViewNabor.CellValueChanged += GridViewNabor_CellValueChanged;
+        }
         private void gridViewNabor_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
-            if (currentItem == null) return;
+            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view == null) return;
 
-            //_bsGostForSostav.DataSource = await _ANSDataService.GetGostSostavAsync(articulNabor.Id_gost);
-            oldAgIdBeforeEdit = currentItem.Ag_id;
+            if (view == GridViewNabor)
+            {
+                SyncGridSelection(GridViewNabor, GridViewNabor_Old, "Ans_id", e.FocusedRowHandle);
+            }
+            else if (view == GridViewNabor_Old)
+            {
+                SyncGridSelection(GridViewNabor_Old, GridViewNabor, "Ans_id", e.FocusedRowHandle);
+            }
+        }
+
+        public void SyncGridSelection(GridView sourceView, GridView otherView, string fieldName, int focusedRowHandle)
+        {
+            if ((sourceView == null) || (otherView == null) || (focusedRowHandle < 0)) return;
+
+            object value = sourceView.GetRowCellValue(focusedRowHandle, fieldName);
+
+            if (value == null) return;
+
+            sourceView.BeginSelection();
+            sourceView.ClearSelection();
+
+            int srcMatches = 0;
+            for (int i = 0; i < sourceView.DataRowCount; i++)
+            {
+                var v = sourceView.GetRowCellValue(i, fieldName);
+
+                if (v != null && v.Equals(value))
+                {
+                    srcMatches++;
+                    sourceView.SelectRow(i);
+                }
+            }
+            sourceView.EndSelection();
+
+            otherView.BeginSelection();
+            otherView.ClearSelection();
+
+            int otherMatches = 0;
+            int firstMatchRow = -1;
+
+            for (int i = 0; i < otherView.DataRowCount; i++)
+            {
+                var v = otherView.GetRowCellValue(i, fieldName);
+
+                if (v != null && v.Equals(value))
+                {
+                    if (firstMatchRow < 0)
+                        firstMatchRow = i;
+
+                    otherMatches++;
+                    otherView.SelectRow(i);
+                }
+            }
+            otherView.EndSelection();
+
+            if (firstMatchRow >= 0)
+            {
+                otherView.FocusedRowHandle = firstMatchRow;
+                otherView.MakeRowVisible(firstMatchRow);
+            }
+        }
+        #endregion
+
+        #region Вспомогательные методы грида
+        /// <summary>
+        /// Если для строки доступна ровно одна группа — ставим автоматически.
+        /// Возвращает true, если авто-выбор выполнен.
+        /// </summary>
+        private bool TryAutoSelectGroup(List<GostGrupIzdViewModel> groups,
+            SpArticulNaborSostav row, int rowHandle)
+        {
+            if (groups.Count != 1) return false;
+
+            var g = groups[0];
+            row.Ag_id = g.Ag_id;
+            row.N_i = g.N_i;
+
+            GridViewNabor.SetRowCellValue(rowHandle, "Ag_id", g.Ag_id);
+            return true;
+        }
+        /// <summary>
+        /// Пытается восстановить старую группу oldRow, если она есть в текущем списке.
+        /// Возвращает true, если восстановили.
+        /// </summary>
+        private bool TryRestoreGroup(List<GostGrupIzdViewModel> groups,
+            SpArticulNaborSostav oldRow, SpArticulNaborSostav row, int rowHandle)
+        {
+            if (oldRow == null || oldRow.Ag_id <= 0) return false;
+
+            var match = groups.FirstOrDefault(g => g.Ag_id == oldRow.Ag_id);
+            if (match == null) return false;
+
+            row.Ag_id = match.Ag_id;
+            row.N_i = match.N_i;
+
+            GridViewNabor.SetRowCellValue(rowHandle, "Ag_id", match.Ag_id);
+            return true;
+        }
+        /// <summary>
+        /// Полностью очищает Ag_id и N_i в строке.
+        /// </summary>
+        private void ClearGroup(SpArticulNaborSostav row, int rowHandle)
+        {
+            row.Ag_id = 0;
+            row.N_i = null;
+            GridViewNabor.SetRowCellValue(rowHandle, "Ag_id", 0);
+        }
+        /// <summary>
+        /// Возвращает список групп, подходящих для строки (Id_gost + Tk_id).
+        /// </summary>
+        private List<GostGrupIzdViewModel> GetGroupsForRow(SpArticulNaborSostav row)
+        {
+            int gost = row.Id_gost;
+            int tk = row.Tk_id;
+
+            return _allGroups
+                .Where(g => g.Id_gost == gost && g.Tk_id == tk)
+                .ToList();
+        }
+        /// <summary>
+        /// Унифицированное обновление GridViewNabor:
+        /// Внутрь передаём только логику изменения строк.
+        /// </summary>
+        private void WithGridViewUpdate(Action<DevExpress.XtraGrid.Views.BandedGrid.BandedGridView> action)
+        {
+            var view = GridViewNabor;
+            if (view == null || action == null) return;
+
+            view.BeginDataUpdate();
+            try
+            {
+                action(view);
+            }
+            finally
+            {
+                view.EndDataUpdate();
+            }
+
+            view.PostEditor();
+            view.UpdateCurrentRow();
+            spArticulNaborSostavBindingSource.EndEdit();
+            view.RefreshData();
+        }
+
+        #endregion
+        #region Обработчики кнопок
+        private void customButtonSaveNabor_Click(object sender, EventArgs e)
+        {
         }
         private async void customButtonSave_Click(object sender, EventArgs e)
         {
@@ -207,362 +619,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         }
 
-        private async void customSearchLookUpEditGostN_EditValueChanged(object sender, EventArgs e)
-        {
-            int idGostNabor = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
-            // Группа набора по ГОСТу набора
-            var grupList = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { idGostNabor }, 3);
-            _bsGrupForNabor.DataSource = grupList;
-            if (grupList != null && grupList.Count == 1)
-            {
-                var only = grupList[0];
-                customSearchLookUpEditGrupN.EditValue = only.Ag_id;
-                customSearchLookUpEditGrupN.DoValidate();
-            }
-            else
-            {
-                customSearchLookUpEditGrupN.EditValue = null;
-            }
-            // ГОСТы состава по ГОСТу набора
-            await AutoApplyIdGostAfterChangingNabor(idGostNabor);
-            await LoadAllGroupsAsync();
-        }
-
-        private void EditNaborSostav_Load(object sender, EventArgs e)
-        {
-
-        }
-        private async Task AutoApplyIdGostAfterChangingNabor(int idGostNabor)
-        {
-            if (idGostNabor == 0) return;
-
-            // Грузим ВСЕ gost_sostav для набора (и верх, и низ)
-            var allGosts = await _ANSDataService.GetGostSostavAsync(idGostNabor);
-
-            Debug.WriteLine($"[AutoGost] Loaded gost-sostav count={allGosts.Count}");
-
-            // Применяем логику построчно
-            var view = GridViewNabor;
-            view.BeginDataUpdate();
-
-            try
-            {
-                for (int i = 0; i < view.DataRowCount; i++)
-                {
-                    var row = view.GetRow(i) as SpArticulNaborSostav;
-                    if (row == null) continue;
-
-                    int tk = row.Tk_id;
-
-                    // Фильтрация в памяти по Tk_id строки
-                    var filtered = allGosts
-                        .Where(g => g.Tk_id == tk)   // важно: Tk_id_nab из GostModel
-                        .ToList();
-
-                    if (filtered.Count == 1)
-                    {
-                        // 🟢 Автоподстановка
-                        int autoGost = filtered[0].Id_gost;
-                        view.SetRowCellValue(i, "Id_gost", autoGost);
-                        Debug.WriteLine($"[AutoGost] row {i} Autoselected Id_gost={autoGost} (Tk_id={tk})");
-                    }
-                    else
-                    {
-                        // 🔵 Автосброс — ждём выбора пользователя
-                        view.SetRowCellValue(i, "Id_gost", DBNull.Value);
-                        Debug.WriteLine($"[AutoGost] row {i} Cleared Id_gost (filtered={filtered.Count})");
-                    }
-                }
-            }
-            finally
-            {
-                view.EndDataUpdate();
-            }
-
-            view.PostEditor();
-            view.UpdateCurrentRow();
-            spArticulNaborSostavBindingSource.EndEdit();
-            view.RefreshData();
-        }
-
-        private int? selectedGostId = null;
-        private List<GostGrupIzdViewModel> _allGroups = new();
-        private void repositoryItemSearchLookUpEditGost_Popup(object sender, EventArgs e)
-        {
-            if (GridViewNabor.FocusedColumn == null || GridViewNabor.FocusedColumn.FieldName != "Id_gost") return;
-
-            var row = GridViewNabor.GetFocusedRow() as SpArticulNaborSostav;
-            if (row == null) return;
-
-            var idGostNabor = customSearchLookUpEditGostN.EditValue.ToIntN();
-            if (idGostNabor == null) return;
-
-            var editor = GridViewNabor.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
-            if (editor == null) return;
-
-            var popupView = editor.Properties.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (popupView != null)
-            {
-                popupView.ActiveFilterString = $"[Tk_id] = {row.Tk_id} AND [Id_glav_gost] = {idGostNabor}";
-                Debug.WriteLine($"[Popup] Applied filter [Tk_id]={row.Tk_id}, [Id_glav_gost]={idGostNabor}");
-            }
-            popupView.FocusedRowChanged -= PopupView_FocusedRowChanged;
-            popupView.FocusedRowChanged += PopupView_FocusedRowChanged;
-        }
-
-        private void repositoryItemSearchLookUpEditGost_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
-        {
-            Debug.WriteLine($"CloseUp");
-
-            if (selectedGostId == null || selectedGostId == 0)
-            {
-                Debug.WriteLine("[CloseUp] selectedGostId is null or 0 — nothing to apply");
-                return;
-            }
-
-            var view = GridViewNabor;
-            var currentRow = view.GetFocusedRow() as SpArticulNaborSostav;
-            if (currentRow == null) return;
-
-            // tk_id и ag_id текущей строки
-            int tkId = currentRow.Tk_id;
-            int agId = currentRow.Ag_id;
-
-            Debug.WriteLine($"[CloseUp] Apply Id_gost={selectedGostId} to rows with Tk_id={tkId}, Ag_id={agId}");
-
-            // ⚙️ Меняем только те строки, где Tk_id и Ag_id совпадают
-            view.BeginDataUpdate();
-            try
-            {
-                for (int i = 0; i < view.DataRowCount; i++)
-                {
-                    var row = view.GetRow(i) as SpArticulNaborSostav;
-                    if (row == null) continue;
-
-                    if (row.Tk_id == tkId && row.Ag_id == agId)
-                    {
-                        view.SetRowCellValue(i, "Id_gost", selectedGostId.Value);
-                        Debug.WriteLine($"  → Row {i}: Ans_id={row.Ans_id}, Tk_id={row.Tk_id}, Ag_id={row.Ag_id}, set Id_gost={selectedGostId}");
-                    }
-                }
-            }
-            finally
-            {
-                view.EndDataUpdate();
-            }
-
-            // фиксируем изменения и обновляем интерфейс
-            view.PostEditor();
-            view.UpdateCurrentRow();
-            spArticulNaborSostavBindingSource.EndEdit();
-            view.RefreshData();
-        }
-
-        private void PopupView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            var popupView = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (popupView == null) return;
-
-            var rowGost = popupView.GetFocusedRow() as GostModel;
-            if (rowGost == null)
-            {
-                Debug.WriteLine("[PopupView_FocusedRowChanged] rowGost is null — nothing to apply");
-                return;
-            }
-            selectedGostId = rowGost.Id_gost;
-            Debug.WriteLine($"[PopupView_FocusedRowChanged] selectedGostId = {selectedGostId}");
-        }
-        private int[] CollectAllGostIds()
-        {
-            var view = GridViewNabor;
-
-            var ids = new HashSet<int>();
-
-            for (int i = 0; i < view.DataRowCount; i++)
-            {
-                var row = view.GetRow(i) as SpArticulNaborSostav;
-                if (row == null) continue;
-
-                if (row.Id_gost > 0)
-                    ids.Add(row.Id_gost);
-            }
-
-            return ids.ToArray();
-        }
-        private async Task LoadAllGroupsAsync()
-        {
-            var gostIds = CollectAllGostIds();   // ✔ собираем Id_gost из всех строк
-
-            if (gostIds.Length == 0)
-            {
-                _allGroups = new List<GostGrupIzdViewModel>();
-                repositoryItemSearchLookUpEditGrup.DataSource = _allGroups;
-                return;
-            }
-
-            // загружаем всё разом
-            _allGroups = await _ANSDataService.GetGostGrupIzdNaborAsync(gostIds, null);
-
-            // назначаем один общий список репозиторию
-            repositoryItemSearchLookUpEditGrup.DataSource = _allGroups;
-            repositoryItemSearchLookUpEditGrup.DisplayMember = "N_i";
-            repositoryItemSearchLookUpEditGrup.ValueMember = "Ag_id";
-            repositoryItemSearchLookUpEditGrup.NullText = "";
-        }
-        private async void GridViewNabor_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            if (e.Column.FieldName != "Id_gost") return;
-            else await LoadAllGroupsAsync();
-
-            var row = GridViewNabor.GetRow(e.RowHandle) as SpArticulNaborSostav;
-            if (row == null) return;
-
-            int gost = row.Id_gost;
-            int tk = row.Tk_id;
-
-            var groups = _allGroups
-                .Where(g => g.Id_gost == gost && g.Tk_id == tk)
-                .ToList();
-
-            // Старые значения
-            var oldRow = _bsOld.Cast<SpArticulNaborSostav>()
-                               .FirstOrDefault(x => x.Ans_id == row.Ans_id);
-
-            if (groups.Count == 1)
-            {
-                var only = groups[0];
-
-                row.Ag_id = only.Ag_id;
-                row.N_i = only.N_i;
-
-                GridViewNabor.SetRowCellValue(e.RowHandle, "Ag_id", only.Ag_id);
-
-                Debug.WriteLine($"[AUTO] group Ag_id={only.Ag_id}");
-                return;
-            }
-
-            if (oldRow != null)
-            {
-                var match = groups.FirstOrDefault(g => g.Ag_id == oldRow.Ag_id);
-                if (match != null)
-                {
-                    row.Ag_id = match.Ag_id;
-                    row.N_i = match.N_i;
-                    GridViewNabor.SetRowCellValue(e.RowHandle, "Ag_id", match.Ag_id);
-
-                    Debug.WriteLine($"[RESTORE] restored Ag_id={match.Ag_id}");
-                    return;
-                }
-            }
-
-            row.Ag_id = 0;
-            row.N_i = null; 
-            Debug.WriteLine($"[CLEAR] set Ag_id=0 (before) old={row.Ag_id}");
-            GridViewNabor.SetRowCellValue(e.RowHandle, "Ag_id", 0);
-            Debug.WriteLine($"[CLEAR] set Ag_id=0 (after) model={row.Ag_id}");
-
-            GridViewNabor.RefreshData();
-            GridViewNabor.PostEditor();
-            GridViewNabor.UpdateCurrentRow();
-            spArticulNaborSostavBindingSource.EndEdit();
-            GridViewNabor.RefreshRow(e.RowHandle);
-            Debug.WriteLine("[CLEAR] multiple groups");
-
-        }
-
-        private void repositoryItemSearchLookUpEditGrup_Popup(object sender, EventArgs e)
-        {
-            if (GridViewNabor.FocusedColumn == null || GridViewNabor.FocusedColumn.FieldName != "Ag_id")
-                return;
-
-            var row = GridViewNabor.GetFocusedRow() as SpArticulNaborSostav;
-            if (row == null) return;
-
-            // tk_id текущей строки
-            int tkId = row.Tk_id;
-
-            // выбранный гост строки (Id_gost)
-            int? selectedGostId = row.Id_gost;
-
-            if (selectedGostId == null || selectedGostId == 0)
-            {
-                Debug.WriteLine("[Grup_Popup] Id_gost is null — cannot filter");
-                return;
-            }
-
-            var editor = GridViewNabor.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
-            if (editor == null) return;
-
-            var popupView = editor.Properties.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (popupView == null) return;
-
-            // 🔥 фильтруем группы состава по tk_id и id_gost
-            popupView.ActiveFilterString = $"[Tk_id] = {tkId} AND [Id_gost] = {selectedGostId}";
-            Debug.WriteLine($"[Grup_Popup] Apply filter: Tk_id={tkId}, Id_gost={selectedGostId}");
-
-            // подписка на выбор строки
-            popupView.FocusedRowChanged -= GrupPopupView_FocusedRowChanged;
-            popupView.FocusedRowChanged += GrupPopupView_FocusedRowChanged;
-        }
-        private GostGrupIzdViewModel selectedGrupId = null;
-
-        private void GrupPopupView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            var popupView = sender as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (popupView == null) return;
-
-            selectedGrupId = popupView.GetFocusedRow() as GostGrupIzdViewModel;
-            if (selectedGrupId == null)
-            {
-                Debug.WriteLine("[Grup_Focused] rowGr null");
-                return;
-            }
-
-        }
-        private void repositoryItemSearchLookUpEditGrup_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
-        {
-            Debug.WriteLine("[Grup_CloseUp]");
-
-            if (selectedGrupId == null || selectedGrupId.Ag_id == 0)
-            {
-                Debug.WriteLine("[Grup_CloseUp] selectedGrupId null");
-                return;
-            }
-
-            var view = GridViewNabor;
-            var currentRow = view.GetFocusedRow() as SpArticulNaborSostav;
-            if (currentRow == null) return;
-
-            int tkId = currentRow.Tk_id;
-
-            Debug.WriteLine($"[Grup_CloseUp] Apply Ag_id={selectedGrupId.Ag_id} to rows with Tk_id={tkId}");
-
-            view.BeginDataUpdate();
-            try
-            {
-                for (int i = 0; i < view.DataRowCount; i++)
-                {
-                    var row = view.GetRow(i) as SpArticulNaborSostav;
-                    if (row == null) continue;
-
-                    if (row.Tk_id == tkId && row.Id_gost == currentRow.Id_gost)
-                    {
-                        view.SetRowCellValue(i, "Ag_id", selectedGrupId.Ag_id);
-                        row.Ag_id = selectedGrupId.Ag_id;
-                        row.N_i = selectedGrupId.N_i;
-                    }
-                }
-            }
-            finally
-            {
-                view.EndDataUpdate();
-            }
-
-            view.PostEditor();
-            view.UpdateCurrentRow();
-            spArticulNaborSostavBindingSource.EndEdit();
-            view.RefreshData();
-        }
+        #endregion
 
     }
 }
