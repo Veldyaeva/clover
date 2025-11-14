@@ -90,7 +90,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Первичная инициализация: загрузка справочника ФИО, установка дефолтного табеля (999) и автозагрузка плана.
+        /// Первичная инициализация: загрузка справочника ФИО, установка дефолтного табеля (1438) и автозагрузка плана.
         /// </summary>
         private async Task InitializeAsync()
         {
@@ -116,9 +116,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 FioGridLookUpEdit.Properties.ValueMember = nameof(FioModel.Tab);
                 FioGridLookUpEdit.Properties.DataSource = fioList;
                 TabGridLookUpEdit.Properties.DisplayMember = nameof(FioModel.Tab);
-                TabGridLookUpEdit.Properties.ValueMember = nameof(FioModel.Fio);
+                TabGridLookUpEdit.Properties.ValueMember = nameof(FioModel.Tab);
                 TabGridLookUpEdit.Properties.DataSource = fioList;
-
+                dateEdit1.EditValue = DateTime.Now;
                 PresentFioSelectionSplash(fioList, defaultTab);
             }
             catch (Exception ex)
@@ -238,8 +238,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     _planBindingSource.DataSource = null;
                     PlanZagrVyazGridControl.RefreshDataSource();
+                    TabGridLookUpEdit.EditValue = null;
                     return;
                 }
+
+                // Синхронизируем TabGridLookUpEdit с выбранным табельным номером
+                TabGridLookUpEdit.EditValue = tab;
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
                 // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой.
@@ -295,7 +299,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        // Получение выбранных строк теперь доступно через _planPresenter.GetRowsForViewSelection(...)
+        // Получение выбранных строк теперь через _planPresenter.GetRowsForViewSelection(...)
 
         /// <summary>
         /// Настройка редакторов ячеек для колонок "Начато" и "Закончено":
@@ -445,7 +449,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Получим текущую строку для плейсхолдера (кол-во к выполнению)
             var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
-            var defaultQty = (currentRow?.pzvKol ?? 0).ToString();
+            int defaultQty = currentRow?.pzvKol ?? 0;
 
             // Диалог ввода количества отвязанных изделий
             var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
@@ -454,7 +458,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 defaultQty);
             if (qtyObj == null)
                 return; // отмена
-            if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0)
+            if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > defaultQty)
             {
                 XtraMessageBox.Show(this, "Введите целое неотрицательное число.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;

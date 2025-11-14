@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             gridBand18 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -82,13 +82,14 @@
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             gridBand20 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             gridBand21 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             gridBand22 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -142,13 +143,14 @@
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             SuspendLayout();
             // 
             // advBandedGridView1
@@ -165,6 +167,8 @@
             advBandedGridView1.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvKolNazn", null, "(Кол-во к выполнению: SUM={0:0.##})") });
             advBandedGridView1.Name = "advBandedGridView1";
             advBandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
+            advBandedGridView1.OptionsDetail.AllowZoomDetail = false;
+            advBandedGridView1.OptionsView.ColumnAutoWidth = true;
             advBandedGridView1.OptionsView.ShowDetailButtons = false;
             advBandedGridView1.OptionsView.ShowGroupPanel = false;
             // 
@@ -177,7 +181,7 @@
             gridBand18.Columns.Add(bandedGridColumn16);
             gridBand18.Name = "gridBand18";
             gridBand18.VisibleIndex = 0;
-            gridBand18.Width = 379;
+            gridBand18.Width = 297;
             // 
             // bandedGridColumn11
             // 
@@ -185,7 +189,7 @@
             bandedGridColumn11.FieldName = "DisplayNumber";
             bandedGridColumn11.Name = "bandedGridColumn11";
             bandedGridColumn11.Visible = true;
-            bandedGridColumn11.Width = 69;
+            bandedGridColumn11.Width = 53;
             // 
             // bandedGridColumn12
             // 
@@ -200,7 +204,7 @@
             bandedGridColumn13.FieldName = "nrText";
             bandedGridColumn13.Name = "bandedGridColumn13";
             bandedGridColumn13.Visible = true;
-            bandedGridColumn13.Width = 118;
+            bandedGridColumn13.Width = 91;
             // 
             // bandedGridColumn14
             // 
@@ -208,7 +212,7 @@
             bandedGridColumn14.FieldName = "nrRazryd";
             bandedGridColumn14.Name = "bandedGridColumn14";
             bandedGridColumn14.Visible = true;
-            bandedGridColumn14.Width = 47;
+            bandedGridColumn14.Width = 81;
             // 
             // bandedGridColumn16
             // 
@@ -216,7 +220,7 @@
             bandedGridColumn16.FieldName = "nrObor";
             bandedGridColumn16.Name = "bandedGridColumn16";
             bandedGridColumn16.Visible = true;
-            bandedGridColumn16.Width = 145;
+            bandedGridColumn16.Width = 72;
             // 
             // gridBand27
             // 
@@ -228,7 +232,7 @@
             gridBand27.Columns.Add(bandedGridColumn21);
             gridBand27.Name = "gridBand27";
             gridBand27.VisibleIndex = 1;
-            gridBand27.Width = 414;
+            gridBand27.Width = 271;
             // 
             // bandedGridColumn15
             // 
@@ -236,7 +240,7 @@
             bandedGridColumn15.FieldName = "pzvKol";
             bandedGridColumn15.Name = "bandedGridColumn15";
             bandedGridColumn15.Visible = true;
-            bandedGridColumn15.Width = 49;
+            bandedGridColumn15.Width = 64;
             // 
             // bandedGridColumn17
             // 
@@ -244,30 +248,28 @@
             bandedGridColumn17.FieldName = "pzvSek";
             bandedGridColumn17.Name = "bandedGridColumn17";
             bandedGridColumn17.Visible = true;
-            bandedGridColumn17.Width = 105;
+            bandedGridColumn17.Width = 99;
             // 
             // bandedGridColumn29
             // 
             bandedGridColumn29.Caption = "Врем. эффективность";
             bandedGridColumn29.FieldName = "sekEd_Effective";
             bandedGridColumn29.Name = "bandedGridColumn29";
-            bandedGridColumn29.Visible = true;
-            bandedGridColumn29.Width = 65;
+            bandedGridColumn29.Width = 61;
             // 
             // bandedGridColumn30
             // 
             bandedGridColumn30.Caption = "Кол. эффективность";
             bandedGridColumn30.FieldName = "kol_Effective";
             bandedGridColumn30.Name = "bandedGridColumn30";
-            bandedGridColumn30.Visible = true;
-            bandedGridColumn30.Width = 66;
+            bandedGridColumn30.Width = 62;
             // 
             // bandedGridColumn21
             // 
             bandedGridColumn21.Caption = "Н. вр. обслуж. 1шт/сек";
             bandedGridColumn21.Name = "bandedGridColumn21";
             bandedGridColumn21.Visible = true;
-            bandedGridColumn21.Width = 129;
+            bandedGridColumn21.Width = 108;
             // 
             // gridBand29
             // 
@@ -312,32 +314,32 @@
             bandedGridColumn22.FieldName = "pzvRKol";
             bandedGridColumn22.Name = "bandedGridColumn22";
             bandedGridColumn22.Visible = true;
-            bandedGridColumn22.Width = 112;
+            bandedGridColumn22.Width = 104;
             // 
             // bandedGridColumn23
             // 
             bandedGridColumn23.Caption = "Н. вр. обсл. факт в ч/ч";
             bandedGridColumn23.Name = "bandedGridColumn23";
             bandedGridColumn23.Visible = true;
-            bandedGridColumn23.Width = 140;
+            bandedGridColumn23.Width = 84;
             // 
             // bandedGridColumn24
             // 
             bandedGridColumn24.Caption = "Подтв. маст. ";
             bandedGridColumn24.Name = "bandedGridColumn24";
             bandedGridColumn24.Visible = true;
-            bandedGridColumn24.Width = 20;
+            bandedGridColumn24.Width = 84;
             // 
             // PlanZagrVyazGridControl
             // 
             PlanZagrVyazGridControl.Font = new System.Drawing.Font("Arial", 10F);
-            gridLevelNode2.LevelTemplate = advBandedGridView1;
-            gridLevelNode2.RelationName = "ArtNom";
-            PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode2 });
+            gridLevelNode1.LevelTemplate = advBandedGridView1;
+            gridLevelNode1.RelationName = "ArtNom";
+            PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
             PlanZagrVyazGridControl.Location = new System.Drawing.Point(12, 38);
             PlanZagrVyazGridControl.MainView = bandedGridView3;
             PlanZagrVyazGridControl.Name = "PlanZagrVyazGridControl";
-            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1093, 493);
+            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1305, 493);
             PlanZagrVyazGridControl.TabIndex = 6;
             PlanZagrVyazGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridView3, gridView1, advBandedGridView1 });
             // 
@@ -493,13 +495,13 @@
             // 
             // FioGridLookUpEdit
             // 
-            FioGridLookUpEdit.Location = new System.Drawing.Point(303, 12);
+            FioGridLookUpEdit.Location = new System.Drawing.Point(313, 12);
             FioGridLookUpEdit.Name = "FioGridLookUpEdit";
             FioGridLookUpEdit.Properties.NullText = "[Выберите сотрудника]";
             FioGridLookUpEdit.Properties.PopupView = FioGridLookUpEditView;
-            FioGridLookUpEdit.Size = new System.Drawing.Size(404, 20);
+            FioGridLookUpEdit.Size = new System.Drawing.Size(220, 20);
             FioGridLookUpEdit.StyleController = dataLayoutControl1;
-            FioGridLookUpEdit.TabIndex = 3;
+            FioGridLookUpEdit.TabIndex = 2;
             FioGridLookUpEdit.EditValueChanged += FioGridLookUpEdit_EditValueChanged;
             // 
             // FioGridLookUpEditView
@@ -525,34 +527,35 @@
             dataLayoutControl1.Name = "dataLayoutControl1";
             dataLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(962, 395, 650, 400);
             dataLayoutControl1.Root = Root;
-            dataLayoutControl1.Size = new System.Drawing.Size(1117, 617);
+            dataLayoutControl1.Size = new System.Drawing.Size(1329, 617);
             dataLayoutControl1.TabIndex = 2;
             dataLayoutControl1.Text = "dataLayoutControl1";
             // 
             // textEdit1
             // 
-            textEdit1.Location = new System.Drawing.Point(117, 12);
+            textEdit1.Location = new System.Drawing.Point(56, 12);
             textEdit1.Name = "textEdit1";
-            textEdit1.Size = new System.Drawing.Size(77, 20);
+            textEdit1.Size = new System.Drawing.Size(142, 20);
             textEdit1.StyleController = dataLayoutControl1;
             textEdit1.TabIndex = 0;
             // 
             // dateEdit1
             // 
             dateEdit1.EditValue = null;
-            dateEdit1.Location = new System.Drawing.Point(975, 12);
+            dateEdit1.Location = new System.Drawing.Point(690, 12);
             dateEdit1.Name = "dateEdit1";
             dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            dateEdit1.Size = new System.Drawing.Size(50, 20);
+            dateEdit1.Properties.MaskSettings.Set("mask", "D");
+            dateEdit1.Size = new System.Drawing.Size(137, 20);
             dateEdit1.StyleController = dataLayoutControl1;
             dateEdit1.TabIndex = 4;
             // 
             // textEdit2
             // 
-            textEdit2.Location = new System.Drawing.Point(117, 535);
+            textEdit2.Location = new System.Drawing.Point(123, 535);
             textEdit2.Name = "textEdit2";
-            textEdit2.Size = new System.Drawing.Size(988, 20);
+            textEdit2.Size = new System.Drawing.Size(1194, 20);
             textEdit2.StyleController = dataLayoutControl1;
             textEdit2.TabIndex = 7;
             // 
@@ -560,7 +563,7 @@
             // 
             simpleButton1.Location = new System.Drawing.Point(12, 559);
             simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new System.Drawing.Size(1093, 22);
+            simpleButton1.Size = new System.Drawing.Size(1305, 22);
             simpleButton1.StyleController = dataLayoutControl1;
             simpleButton1.TabIndex = 8;
             simpleButton1.Text = "simpleButton1";
@@ -568,17 +571,17 @@
             // 
             // textEdit3
             // 
-            textEdit3.Location = new System.Drawing.Point(117, 585);
+            textEdit3.Location = new System.Drawing.Point(123, 585);
             textEdit3.Name = "textEdit3";
-            textEdit3.Size = new System.Drawing.Size(988, 20);
+            textEdit3.Size = new System.Drawing.Size(1194, 20);
             textEdit3.StyleController = dataLayoutControl1;
             textEdit3.TabIndex = 9;
             // 
             // simpleButton2
             // 
-            simpleButton2.Location = new System.Drawing.Point(1029, 12);
+            simpleButton2.Location = new System.Drawing.Point(831, 12);
             simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new System.Drawing.Size(76, 22);
+            simpleButton2.Size = new System.Drawing.Size(140, 22);
             simpleButton2.StyleController = dataLayoutControl1;
             simpleButton2.TabIndex = 5;
             simpleButton2.Text = "Начать смену";
@@ -586,16 +589,16 @@
             // 
             // TabGridLookUpEdit
             // 
-            TabGridLookUpEdit.Location = new System.Drawing.Point(816, 12);
+            TabGridLookUpEdit.Location = new System.Drawing.Point(586, 12);
             TabGridLookUpEdit.Name = "TabGridLookUpEdit";
             TabGridLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             TabGridLookUpEdit.Properties.Name = "TabGridLookUpEdit";
             TabGridLookUpEdit.Properties.NullText = "";
             TabGridLookUpEdit.Properties.PopupSizeable = false;
             TabGridLookUpEdit.Properties.PopupView = gridLookUpEdit1View;
-            TabGridLookUpEdit.Size = new System.Drawing.Size(50, 20);
+            TabGridLookUpEdit.Size = new System.Drawing.Size(70, 20);
             TabGridLookUpEdit.StyleController = dataLayoutControl1;
-            TabGridLookUpEdit.TabIndex = 2;
+            TabGridLookUpEdit.TabIndex = 3;
             // 
             // gridLookUpEdit1View
             // 
@@ -608,56 +611,57 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem1, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem5 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem1, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem5, emptySpaceItem1 });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(1117, 617);
+            Root.Size = new System.Drawing.Size(1329, 617);
             Root.TextVisible = false;
             // 
             // layoutControlItem2
             // 
+            layoutControlItem2.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            layoutControlItem2.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem2.Control = FioGridLookUpEdit;
             layoutControlItem2.CustomizationFormText = "ФИО оператора - ";
-            layoutControlItem2.Location = new System.Drawing.Point(186, 0);
+            layoutControlItem2.Location = new System.Drawing.Point(190, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(513, 26);
+            layoutControlItem2.Size = new System.Drawing.Size(335, 26);
             layoutControlItem2.Text = "ФИО оператора -";
-            layoutControlItem2.TextSize = new System.Drawing.Size(93, 13);
+            layoutControlItem2.TextSize = new System.Drawing.Size(99, 13);
             // 
             // layoutControlItem3
             // 
+            layoutControlItem3.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            layoutControlItem3.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem3.Control = textEdit1;
             layoutControlItem3.CustomizationFormText = "Зона - ";
             layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(186, 26);
+            layoutControlItem3.Size = new System.Drawing.Size(190, 26);
             layoutControlItem3.Text = "Зона - ";
-            layoutControlItem3.TextSize = new System.Drawing.Size(93, 13);
-            // 
-            // layoutControlItem5
-            // 
-            layoutControlItem5.Control = TabGridLookUpEdit;
-            layoutControlItem5.CustomizationFormText = "таб №  ";
-            layoutControlItem5.Location = new System.Drawing.Point(699, 0);
-            layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(159, 26);
-            layoutControlItem5.Text = "таб №  ";
-            layoutControlItem5.TextSize = new System.Drawing.Size(93, 13);
+            layoutControlItem3.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            layoutControlItem3.TextSize = new System.Drawing.Size(39, 13);
+            layoutControlItem3.TextToControlDistance = 5;
             // 
             // layoutControlItem4
             // 
+            layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem4.Control = dateEdit1;
-            layoutControlItem4.Location = new System.Drawing.Point(858, 0);
+            layoutControlItem4.Location = new System.Drawing.Point(648, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(159, 26);
+            layoutControlItem4.Size = new System.Drawing.Size(171, 26);
             layoutControlItem4.Text = "Дата";
-            layoutControlItem4.TextSize = new System.Drawing.Size(93, 13);
+            layoutControlItem4.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Left;
+            layoutControlItem4.TextSize = new System.Drawing.Size(25, 13);
+            layoutControlItem4.TextToControlDistance = 5;
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = PlanZagrVyazGridControl;
             layoutControlItem1.Location = new System.Drawing.Point(0, 26);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1097, 497);
+            layoutControlItem1.Size = new System.Drawing.Size(1309, 497);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem6
@@ -665,15 +669,15 @@
             layoutControlItem6.Control = textEdit2;
             layoutControlItem6.Location = new System.Drawing.Point(0, 523);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(1097, 24);
-            layoutControlItem6.TextSize = new System.Drawing.Size(93, 13);
+            layoutControlItem6.Size = new System.Drawing.Size(1309, 24);
+            layoutControlItem6.TextSize = new System.Drawing.Size(99, 13);
             // 
             // layoutControlItem7
             // 
             layoutControlItem7.Control = simpleButton1;
             layoutControlItem7.Location = new System.Drawing.Point(0, 547);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(1097, 26);
+            layoutControlItem7.Size = new System.Drawing.Size(1309, 26);
             layoutControlItem7.TextVisible = false;
             // 
             // layoutControlItem8
@@ -681,16 +685,36 @@
             layoutControlItem8.Control = textEdit3;
             layoutControlItem8.Location = new System.Drawing.Point(0, 573);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(1097, 24);
-            layoutControlItem8.TextSize = new System.Drawing.Size(93, 13);
+            layoutControlItem8.Size = new System.Drawing.Size(1309, 24);
+            layoutControlItem8.TextSize = new System.Drawing.Size(99, 13);
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = simpleButton2;
-            layoutControlItem9.Location = new System.Drawing.Point(1017, 0);
+            layoutControlItem9.Location = new System.Drawing.Point(819, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(80, 26);
+            layoutControlItem9.Size = new System.Drawing.Size(144, 26);
             layoutControlItem9.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem5.Control = TabGridLookUpEdit;
+            layoutControlItem5.CustomizationFormText = "таб №  ";
+            layoutControlItem5.Location = new System.Drawing.Point(525, 0);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new System.Drawing.Size(123, 26);
+            layoutControlItem5.Text = "таб №  ";
+            layoutControlItem5.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
+            layoutControlItem5.TextSize = new System.Drawing.Size(44, 13);
+            layoutControlItem5.TextToControlDistance = 5;
+            // 
+            // emptySpaceItem1
+            // 
+            emptySpaceItem1.Location = new System.Drawing.Point(963, 0);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new System.Drawing.Size(346, 26);
             // 
             // gridBand20
             // 
@@ -949,7 +973,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1117, 617);
+            ClientSize = new System.Drawing.Size(1329, 617);
             Controls.Add(dataLayoutControl1);
             Name = "KnitterWorkSpace";
             Text = "Рабочее место вязальщицы";
@@ -971,13 +995,14 @@
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ResumeLayout(false);
         }
 
@@ -1078,5 +1103,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand33;
         private DevExpress.XtraEditors.GridLookUpEdit TabGridLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }
