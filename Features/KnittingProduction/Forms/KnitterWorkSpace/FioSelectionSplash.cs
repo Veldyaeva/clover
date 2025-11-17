@@ -145,6 +145,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _fioLookup.Focus();
         }
 
+        private void InitializeComponent()
+        {
+
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (DialogResult == DialogResult.OK && SelectedTab is null)

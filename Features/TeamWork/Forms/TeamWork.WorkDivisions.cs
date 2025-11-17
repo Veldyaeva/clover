@@ -1,4 +1,14 @@
-﻿using System;
+﻿using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Extensions;
+using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Services;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
+using SewingProduction.Services; // for TeamWorkBuffer
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,15 +18,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Extensions;
-using SewingProduction.Features.TeamWork.Helpers;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using SewingProduction.Services; // for TeamWorkBuffer
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -514,7 +515,14 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Отправляем сообщение в бригаду
                 await SendMsgToBrig(annId, $"Внимание! Схема разделения {art} была обновлена технологом, проверьте операции, прежде чем начать работу!");
+                // 2) Считаем diff ПОСЛЕ всех апдейтов в БД
+                string diffText = await TryBuildApprovalDiffAsync(annId);
 
+                // 3) Формируем сообщение в бригаду (с diff, если он есть)
+                string msg = ComposeApprovalMessage(art, diffText);
+                await SendMsgToBrig(annId, msg);
+
+                // 4) Обновляем UI
 
                 // Обновляем UI в гриде
                 if (gridView != null && rowHandle >= 0)
@@ -535,7 +543,51 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        /// <summary>
+        /// Пытается построить текстовый diff и помечает снимок как использованный.
+        /// Если активного снимка нет — вернёт null.
+        /// </summary>
+        private async Task<string> TryBuildApprovalDiffAsync(int annId)
+        {
+            var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
 
+            // Снимок должен быть снят ранее (при первом сохранении с очищенной датой).
+            if (!await snapSvc.HasPendingAsync(annId))
+                return null;
+
+            // Покажем фактическое время утверждения в заголовке diff
+            var approvedAt = DateTime.Now;
+
+            try
+            {
+                // CompareWithCurrentAsync читает ТЕКУЩЕЕ состояние из БД и «съедает» снимок (Consumed=1)
+                return await snapSvc.CompareWithCurrentAsync(annId, approvedAt);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка построения diff для AnnID: {annId}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Склеивает служебный текст и diff. Ограничивает размер, чтобы не «захлебнуть» мессенджер.
+        /// </summary>
+        private static string ComposeApprovalMessage(string art, string diffText, int maxLen = 3800)
+        {
+            var intro = $"Внимание! Схема разделения {art} утверждена и обновлена технологом. " +
+                        $"Проверьте операции, прежде чем начать работу!";
+
+            var full = string.IsNullOrWhiteSpace(diffText)
+                ? intro
+                : intro + Environment.NewLine + Environment.NewLine + diffText;
+
+            if (full.Length <= maxLen) return full;
+
+            // Если текст слишком длинный — обрезаем «по-человечески»
+            const string tail = "\n…(сообщение обрезано)";
+            return full.Substring(0, Math.Max(0, maxLen - tail.Length)) + tail;
+        }
         /// <summary>
         /// Обрабатываем клик по кнопке утверждения РТ на вкладке Текущие Работы
         /// </summary>

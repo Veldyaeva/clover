@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Z.Dapper.Plus;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
@@ -1303,6 +1304,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                         break;
                 }
                 await LoadAnnDataAsync();
+                // TeamWork_AdvanceTW.cs, после того как _currentAnnData загружен и списки заполнены
+                var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
+                await snapSvc.EnsurePendingSnapshotAsync(_newAnnId);
+                // если открыли уже утверждённую РТ в режиме редактирования — снимаем дату в UI
+                if (_mode == (int)Mode.Edit && _currentAnnData?.dateUpdate != null)
+                {
+                    _currentAnnData.dateUpdate = null;         // только в модели/UI, без немедленного апдейта в БД
+                    bindingSource1.ResetBindings(false);       // обновить поля на форме
+                }
                 _hasUnsavedChanges = false;
 
                 // Если выбран режим комплекта, автоматически подгружаем операции из буфера
@@ -2378,11 +2388,85 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _currentAnnData.ParentId = _selectedAnnId;
                 }
 
+
+                ////// 3) Если дата утверждения только что появилась — считаем diff
+                ////bool isApprovedNow =
+                ////    prev != null &&
+                ////    !prev.dateUpdate.HasValue &&
+                ////    _currentAnnData.dateUpdate.HasValue;
+
+                ////if (isApprovedNow)
+                ////{
+                ////    var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
+
+                ////    // дополнительная защита: работаем только если есть "висящий" снимок
+                ////    if (await snapSvc.HasPendingAsync(_newAnnId))
+                ////    {
+                ////        string diffText = await snapSvc.CompareWithCurrentAsync(
+                ////            _newAnnId, _currentAnnData.dateUpdate.Value);
+
+                ////        if (!string.IsNullOrWhiteSpace(diffText))
+                ////        {
+                ////            MessageBox.Show(
+                ////                diffText,
+                ////                "Изменения к моменту утверждения",
+                ////                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ////        }
+                ////    }
+                ////}
+                //// 1) Зафиксируем предыдущее состояние даты из БД ещё до транзакции
+                //var prevAnn = await _dataService.LoadAnnDataAsync(_newAnnId);
+                //var prevApproved = prevAnn?.dateUpdate;
+                var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
+
+                // 0) Берём состояние из БД ДО транзакции
+                var prevAnn = (_newAnnId > 0) ? await _dataService.LoadAnnDataAsync(_newAnnId) : null;
+                var prevApproved = prevAnn?.dateUpdate;
+
+                bool clearingNow = prevApproved.HasValue && !_currentAnnData.dateUpdate.HasValue;
+                bool approvingNow = !prevApproved.HasValue && _currentAnnData.dateUpdate.HasValue;
+
+                // 1) Если сейчас снимаем дату (первое сохранение после входа в редактирование),
+                //    то перед записью удостоверимся, что есть снимок "до изменений"
+                if (_newAnnId > 0 && clearingNow && !await snapSvc.HasPendingAsync(_newAnnId))
+                {
+                    await snapSvc.EnsurePendingSnapshotAsync(_newAnnId);//, userName);
+                }
+
+
                 await _dbHelper.ExecuteInTransactionAsync(async () =>
                 {
                     await SaveAnnDataAsync();
                     await SaveAllDataAsync();
                 });
+                //// 2) Уже после коммита — проверяем переход NULL→НЕ-NULL и считаем diff
+                //var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
+                //if (!prevApproved.HasValue && _currentAnnData.dateUpdate.HasValue && await snapSvc.HasPendingAsync(_newAnnId))
+                //{
+                //    // На всякий случай перечитаем актуальную дату из БД (или используйте _currentAnnData)
+                //    var curAnn = await _dataService.LoadAnnDataAsync(_newAnnId);
+                //    var approvedAt = curAnn?.dateUpdate ?? _currentAnnData.dateUpdate;
+
+                //    string diffText = await snapSvc.CompareWithCurrentAsync(_newAnnId, approvedAt.Value);
+                //    if (!string.IsNullOrWhiteSpace(diffText))
+                //    {
+                //        MessageBox.Show(diffText, "Изменения к моменту утверждения",
+                //            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    }
+                //}
+                // 3) После коммита — если ставим дату сейчас, считаем diff и "съедаем" снимок
+                if (_newAnnId > 0 && approvingNow && await snapSvc.HasPendingAsync(_newAnnId))
+                {
+                    var curAnn = await _dataService.LoadAnnDataAsync(_newAnnId);
+                    var approvedAt = curAnn?.dateUpdate ?? _currentAnnData.dateUpdate;
+
+                    string diffText = await snapSvc.CompareWithCurrentAsync(_newAnnId, approvedAt.Value);
+                    if (!string.IsNullOrWhiteSpace(diffText))
+                    {
+                        MessageBox.Show(diffText, "Изменения к моменту утверждения",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
 
                 // Эти действия выполняются ПОСЛЕ успешной транзакции
                 IsRaszInserted = true; // Предполагаем, что если сохранение дошло сюда, то все списки были обработаны
@@ -2495,15 +2579,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 // Сохраняем данные в таблицу ann
                 _currentAnnData.AnnID = _newAnnId;
-                _currentAnnData.dateUpdate = null;
+               // _currentAnnData.dateUpdate = null;
                 var articul = _currentAnnData?.Articul;
                 var annId = _newAnnId > 0 ? _newAnnId : (int?)null;
 
                 if (!await IsArticulUniqueAsync(articul, annId))
                 {
-                    MessageBox.Show("Разделение с таким артикулом уже существует. Проверьте состав разделени.", "Дублирование", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Разделение с таким артикулом уже существует. Проверьте состав разделения.", "Дублирование", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-
+                // 1) Берём предыдущее состояние до сохранения
+                var prev = (_newAnnId > 0)
+                    ? await _dataService.LoadAnnDataAsync(_newAnnId)
+                    : null;
                 // дальше обычное сохранение
                 if (_newAnnId > 0)
                 {
