@@ -204,42 +204,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // 3. Обновляем состояние чекбоксов при выделении строк
                 gridViewVyazPlan.SelectionChanged += (s, e) =>
                 {
-                    #region "старый обработчик"
-                    //gridViewVyazPlan.FocusedColumn = gridViewVyazPlan.Columns["kmlNumber"];
-                    //gridViewVyazPlan.FocusedColumn = gridViewVyazPlan.Columns["SyncSelection"];
-                    //gridViewVyazPlan.BeginUpdate();
-                    //try
-                    //{
-                    //    //for (int i = 0; i < gridViewVyazPlan.RowCount; i++)
-                    //    //{
-                    //    //    bool isSelected = gridViewVyazPlan.IsRowSelected(i);
-                    //    //    gridViewVyazPlan.SetRowCellValue(i, gridColumnVyazPlanSyncSelection, isSelected);
-                    //    //}
-                    //    foreach (int rowHandle in gridViewVyazPlan.GetSelectedRows())
-                    //    {
-                    //        gridViewVyazPlan.SetRowCellValue(rowHandle, gridColumnVyazPlanSyncSelection, true);
-                    //        gridViewVyazPlan.PostEditor();
-                    //        //gridViewVyazPlan.UpdateCurrentRow();
-                    //    }
-
-                    //    // Сбрасываем чекбоксы у невыделенных строк
-                    //    for (int i = 0; i < gridViewVyazPlan.RowCount; i++)
-                    //    {
-                    //        if (!gridViewVyazPlan.IsRowSelected(i))
-                    //        {
-                    //            gridViewVyazPlan.SetRowCellValue(i, gridColumnVyazPlanSyncSelection, false);
-                    //            gridViewVyazPlan.PostEditor();
-                    //            //gridViewVyazPlan.UpdateCurrentRow();
-                    //        }
-                    //    }
-                    //}
-                    //finally
-                    //{
-                    //    gridViewVyazPlan.EndUpdate();
-
-                    //}
-                    //gridViewVyazPlan.FocusedColumn = gridViewVyazPlan.Columns["SyncSelection"];
-                    #endregion
                     #region "новый обработчик"
                     // Устанавливаем фокус на нужные колонки
                     gridViewVyazPlan.FocusedColumn = gridViewVyazPlan.Columns["kmlNumber"];
@@ -1145,11 +1109,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             var pp = _vyazPlanViewBindingSource.Current as VyazPlanView;
             MessageBox.Show($"kmlID - {pp.KmlID.ToString()}, kmlIDCopy - {pp.KmlIDCopy.ToString()}, IsKmlIDChanged - {pp.IsKmlIDChanged}");
-        }
-
-        private void repositoryItemCheckEdit1_EditValueChanged(object sender, EventArgs e)
-        {
-            gridViewVyazPlan.PostEditor();
         }
     }
 }
