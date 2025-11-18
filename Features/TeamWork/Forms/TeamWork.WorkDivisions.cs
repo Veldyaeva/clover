@@ -520,7 +520,8 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // 3) Формируем сообщение в бригаду (с diff, если он есть)
                 string msg = ComposeApprovalMessage(art, diffText);
-                await SendMsgToBrig(annId, msg);
+                MessageBox.Show(msg, "message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation);
+                //await SendMsgToBrig(annId, msg);
 
                 // 4) Обновляем UI
 

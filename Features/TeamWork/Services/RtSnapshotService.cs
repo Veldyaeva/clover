@@ -77,13 +77,11 @@ namespace SewingProduction.Features.TeamWork.Services
 
         private async Task<RtSnapshotDto> ReadCurrentStateAsync(int annId)
         {
-            // Загружаем ANN
+            // Загружаем ANN, sek, seb, sek_vyaz, data_obn, sek_shvб status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, , annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId, annRecommendation as Reco,
             var annQuery = @"
                 SELECT 
-                    annId, grup, RTRIM(LTRIM(articul)) articul, mod, size_label, sek, seb, sek_vyaz, 
-                    data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
-                    sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
-                    data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
+                    annId, grup, RTRIM(LTRIM(articul)) articul, mod, size_label, status_ann.name AS statusText, komment,
+                    data_sozd, diz, constr
                 FROM ArtNormNView 
                 JOIN status_ann ON status = status_id
                 WHERE annId = @annId";
@@ -120,7 +118,7 @@ namespace SewingProduction.Features.TeamWork.Services
 
             // Загружаем Kont
             var kontQuery = @"
-                SELECT AnnId, kod_o, text, razryd, sek, nkId, spec, obor, kod, n, n_ch, n1, sebS
+                SELECT AnnId, kod_o, text, razryd, sek, nkId, spec, obor, kod, n, n_ch, n1, seb_s
                 FROM norm_kont
                 WHERE AnnId = @annId";
             var kont = await _db.GetListAsync<NormKont>(kontQuery, new { annId });
@@ -149,39 +147,52 @@ namespace SewingProduction.Features.TeamWork.Services
                     new[] {
                     nameof(ArtNormN.Kod), nameof(ArtNormN.Articul), nameof(ArtNormN.grup),
                     nameof(ArtNormN.Mod), nameof(ArtNormN.Sek), nameof(ArtNormN.Komment),
-                    nameof(ArtNormN.Reco), nameof(ArtNormN.Diz), nameof(ArtNormN.Constr),
-                    nameof(ArtNormN.SekShv), nameof(ArtNormN.SekVyaz), nameof(ArtNormN.SekVyaz5),
-                    nameof(ArtNormN.SekVyaz6), nameof(ArtNormN.SekVyaz7), nameof(ArtNormN.SekVyaz10),
-                    nameof(ArtNormN.SekVyaz12), nameof(ArtNormN.SekVyazo)
+                    nameof(ArtNormN.Reco), nameof(ArtNormN.Diz), nameof(ArtNormN.Constr)//,
+                    //nameof(ArtNormN.SekShv), nameof(ArtNormN.SekVyaz), nameof(ArtNormN.SekVyaz5),
+                    //nameof(ArtNormN.SekVyaz6), nameof(ArtNormN.SekVyaz7), nameof(ArtNormN.SekVyaz10),
+                    //nameof(ArtNormN.SekVyaz12), nameof(ArtNormN.SekVyazo)
                     });
             }
 
-            // 2) Операции Rasz — добавленные/удалённые/изменённые
+            // 2) Операции Rasz — добавленные/удалённые/изменённые |n1:{r.N1} ("N1", r.N1), 
             AppendListDiff(sb, "ОПЕРАЦИИ (Rasz)",
                 oldS.Rasz ?? Enumerable.Empty<NormRasz>(),
                 curS.Rasz ?? Enumerable.Empty<NormRasz>(),
-                key: r => (r.nrID > 0 ? $"id:{r.nrID}" : $"n1:{r.N1}|kod:{r.Kod}|text:{r.Text}"),
-                important: r => new (string name, object value)[] {
-                ("N1", r.N1), ("Text", r.Text), ("Sek", r.Sek),
-                ("Razryd", r.razryd), ("KodProizv", r.KodProizv),
-                ("KodPodr", r.KodPodr), ("KodOb", r.KodOb), ("Spec", r.Spec)
+                 //key: r => (r.nrID > 0 ? $"id:{r.nrID}" : $"N:{r.DisplayNumber}|kod:{r.Kod}|text:{r.Text.TrimEnd()}"),
+                 //important: r => new (string name, object value)[] {
+                 //("N", r.DisplayNumber), ("Text", r.Text.TrimEnd()), ("Sek", r.Sek),
+                 //("Razryd", r.razryd), ("KodProizv", r.KodProizv),
+                 //("KodPodr", r.KodPodr), ("KodOb", r.KodOb), ("Spec", r.Spec)
+                 key: r => (r.nrID > 0
+        ? $"id:{r.nrID}"                                   // группировка по id
+        : $"N:{r.DisplayNumber}|код:{r.Kod}|текст:{r.Text?.TrimEnd()}"), // fallback для новых/без id
+                  headerOld: r => $"№ {r.DisplayNumber}",     // ← СТАРЫЙ номер из снимка
+    headerTitle: r => $"№ {r.DisplayNumber}",              // ← показываем DisplayNumber
+    important: r => new (string name, object value)[] {
+        ("N", r.DisplayNumber), ("текст", r.Text?.TrimEnd()), ("сек", r.Sek),
+        ("разряд ", r.razryd), ("произв. ", r.KodProizv),
+        ("подр. ", r.KodPodr), ("обор. ", r.KodOb), ("спец. ", r.Spec)
                 });
 
             // Раскрой Rask — добавленные/удалённые/изменённые
             AppendListDiff(sb, "РАСКРОЙ (Rask)",
                 oldS.Rask ?? Enumerable.Empty<NormRask>(),
                 curS.Rask ?? Enumerable.Empty<NormRask>(),
-                key: x => (x.id > 0 ? $"id:{x.id}" : $"n:{x.N}|n1:{x.N1}|kod:{x.Kod}|text:{x.TextRask}"),
+                key: x => (x.id > 0 ? $"id:{x.id}" : $"n:{x.N}|n1:{x.N1}|код:{x.Kod}|текст:{x.TextRask}"),
+                headerOld: r => $"№ {r.DisplayNumber}",     // ← СТАРЫЙ номер из снимка
+                headerTitle: x => $"N={x.N}, N1={x.N1}",
                 important: x => new (string name, object value)[] {
-                    ("N", x.N), ("N1", x.N1), ("TextRask", x.TextRask), ("Sek", x.Sek),
-                    ("Razryd", x.razryd), ("Kod", x.Kod), ("Spec", x.Spec), ("Obor", x.Obor)
+                    ("N", x.N), ("N1", x.N1), ("TextRask", x.TextRask), ("сек ", x.Sek),
+                    ("разряд ", x.razryd), ("код ", x.Kod), ("спец ", x.Spec), ("обор ", x.Obor)
                 });
 
             // Контроль Kont — добавленные/удалённые/изменённые
-            AppendListDiff(sb, "КОНТРОЛЬ (Kont)",
+            AppendListDiff(sb, "КОМПЛЕКТОВКА (Kont)",
                 oldS.Kont ?? Enumerable.Empty<NormKont>(),
                 curS.Kont ?? Enumerable.Empty<NormKont>(),
                 key: x => (x.nkId > 0 ? $"id:{x.nkId}" : $"n:{x.n}|n1:{x.n1}|kod:{x.kod}|text:{x.text}"),
+                headerOld: r => $"№ {r.n}",     // ← СТАРЫЙ номер из снимка
+                headerTitle: x => $"n={x.n}, n1={x.n1}",
                 important: x => new (string name, object value)[] {
                     ("n", x.n), ("n1", x.n1), ("text", x.text), ("sek", x.sek),
                     ("razryd", x.razryd), ("kod", x.kod), ("spec", x.spec), ("obor", x.obor)
@@ -219,6 +230,8 @@ namespace SewingProduction.Features.TeamWork.Services
             StringBuilder sb, string title,
             IEnumerable<T> oldList, IEnumerable<T> newList,
             Func<T, string> key,
+            Func<T, string> headerOld,                   // заголовок из СТАРОГО состояния (для ~)
+            Func<T, string> headerTitle,                   // что показываем в ~ заголовке
             Func<T, (string name, object value)[]> important)
         {
             // Используем GroupBy для обработки дубликатов ключей (берем первый элемент)
@@ -235,13 +248,13 @@ namespace SewingProduction.Features.TeamWork.Services
             {
                 has = true;
                 var pairs = string.Join(", ", important(newMap[k]).Select(p => $"{p.name}={p.value}"));
-                sec.AppendLine($"+ {pairs}");
+                sec.AppendLine($"ДОБАВЛЕНО: {pairs}");
             }
             foreach (var k in removed)
             {
                 has = true;
                 var pairs = string.Join(", ", important(oldMap[k]).Select(p => $"{p.name}={p.value}"));
-                sec.AppendLine($"- {pairs}");
+                sec.AppendLine($"УДАЛЕНО: {pairs}");
             }
             foreach (var k in common)
             {
@@ -255,7 +268,10 @@ namespace SewingProduction.Features.TeamWork.Services
                 if (changes.Count > 0)
                 {
                     has = true;
-                    sec.AppendLine($"~ {key(newMap[k])}");
+                    //   sec.AppendLine($"~ {key(newMap[k])}");
+                    //var header = headerTitle(newMap[k]);
+                    var header = headerOld(oldMap[k]);
+                    sec.AppendLine($"ИЗМЕНЕНЫ: {header}");
                     foreach (var c in changes)
                     {
                         sec.AppendLine($"  {c}");
