@@ -1,5 +1,15 @@
-﻿using System.ComponentModel;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Models;
+using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
+using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction
 {
@@ -9,7 +19,6 @@ namespace SewingProduction
         {
             InitializeComponent();
         }
-
         private void PrintNaklReport_BeforePrint(object sender, CancelEventArgs e)
         {
             this.xrSubreport1.FillParameterBindings();

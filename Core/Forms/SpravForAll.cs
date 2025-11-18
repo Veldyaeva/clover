@@ -102,7 +102,7 @@ namespace SewingProduction.form
         #endregion
         private void SpravForAll_Load(object sender, EventArgs e)
         {
-            if (_user == null)
+            if (_user == null || IsPreview)
                 Debug.WriteLine("[SpravForAll] ВНИМАНИЕ: пользователь не передан!");
             else
             {

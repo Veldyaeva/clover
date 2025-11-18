@@ -13,7 +13,9 @@ namespace SewingProduction.Features.Articul.Forms
         ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
         ArticulDataService _articulDataService = new ArticulDataService();
         SpArticulNaborSostav currentItem;
-        string xKod;
+        BindingSource _bsOld = new BindingSource();
+        int oldAgIdBeforeEdit = 0;
+        ArticulModel articulNabor;
         public EditNaborSostav()
         {
             InitializeComponent();
@@ -21,33 +23,41 @@ namespace SewingProduction.Features.Articul.Forms
         public EditNaborSostav(UserClass user, ArticulModel Obj) : base(user)
         {
             InitializeComponent();
-            xKod = Obj.Kod;
-            customTextBoxArtN.Text = Obj.Articul;
-            customTextBoxRazmN.Text = Obj.Razm;
-            customTextBoxGostN.Text = Obj.Gost;
-            customTextBoxGrupN.Text = Obj.Grup;
+            articulNabor = Obj;
         }
 
         private async void customGridControl1_Load(object sender, EventArgs e)
         {
+            articulNabor = await _articulDataService.GetArtByKodAsync(articulNabor.Kod);
             assortModelBindingSource.DataSource = await _ANSDataService.GetAssortAsync();
             tvnModelBindingSource.DataSource = await _ANSDataService.GetTvnAsync();
             gostModelBindingSource.DataSource = await _ANSDataService.GetGostAsync();
-            spArticulNaborSostavBindingSource.DataSource = await _ANSDataService.GetByKodAsync(xKod);
+            spArticulNaborSostavBindingSource.DataSource = await _ANSDataService.GetByKodAsync(articulNabor.Kod);
+
+            repositoryItemSearchLookUpEditGrup.DataSource = gostModelBindingSource.DataSource;
+            repositoryItemSearchLookUpEditGrup.DataSource = spArticulNaborSostavBindingSource.DataSource;
+
             currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
             if (currentItem != null)
-                gostGrupIzdViewModelBindingSource.DataSource = await _ANSDataService.GetGostGrupIzdAsync(currentItem.Id_gost, currentItem.Tk_id);
-            customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(xKod);
+            {
+                oldAgIdBeforeEdit = currentItem.Ag_id;
+                gostGrupIzdViewModelBindingSource.DataSource = await _ANSDataService.GetGostGrupIzdAsync();
+            }
+            customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor.Kod);
             HideTechnicalColumns();
+            ArticulNaborColumns();
+            SetupSearchLookUpEditGost();
         }
 
-        private async void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private async void gridViewNabor_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
             if (currentItem != null)
-                gostGrupIzdViewModelBindingSource.DataSource = await _ANSDataService.GetGostGrupIzdAsync(currentItem.Id_gost, currentItem.Tk_id);
+            {
+                gostGrupIzdViewModelBindingSource.DataSource = await _ANSDataService.GetGostGrupIzdAsync();
+                oldAgIdBeforeEdit = currentItem.Ag_id;
+            }
         }
-
         private async void customButtonSave_Click(object sender, EventArgs e)
         {
             try
@@ -59,12 +69,26 @@ namespace SewingProduction.Features.Articul.Forms
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                if (_ANSDataService.CheckPovt(currentItem.Kod))
+                {
+                    MessageBox.Show("Изменение невозможно! дубликаты в описании! обратитесь к администратору!", "Внимание",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                await _ANSDataService.SaveAsync(currentItem);
-                await _ANSDataService.UpdateArtKoplektAsync(currentItem.Kod);
-
+                if (_ANSDataService.CheckOpis(currentItem.Kod))
+                {
+                    var result = MessageBox.Show($"Набор уже описан, изменения применятся на весь размерный ряд!,Вы уверены что хотите продолжить?", "Подтверждение",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result != DialogResult.Yes)
+                        return;
+                }
+                await _ANSDataService.UpdateArticulNaborSostavAsync(currentItem, oldAgIdBeforeEdit);
+                spArticulNaborSostavBindingSource.DataSource = await _ANSDataService.GetByKodAsync(articulNabor.Kod);
+                GridViewNabor_Old.ExpandAllGroups();
                 MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                oldAgIdBeforeEdit = currentItem.Ag_id;
             }
             catch (Exception ex)
             {
@@ -74,14 +98,50 @@ namespace SewingProduction.Features.Articul.Forms
 
         }
 
+        private void ArticulNaborColumns()
+        {
+            customTextBoxArtN_Old.Text = articulNabor.Articul;
+            customTextBoxGostN_Old.Text = articulNabor.Gost;
+            customTextBoxGrupN_Old.Text = articulNabor.Grup;
+            //customTextBoxRazmN.Text = articulNabor.Razm;
+        }
         private void HideTechnicalColumns()
         {
-            gridViewNabor.Columns["Ans_id"].Visible = false;
-            gridViewNabor.Columns["Ta_id"].Visible = false;
-            gridViewNabor.Columns["Tk_id"].Visible = false;
-            gridViewNabor.Columns["Ag_id"].Visible = false;
-            gridViewNabor.Columns["Id_razm_nab"].Visible = false;
-            gridViewNabor.Columns["Kod"].Visible = false;
+            GridViewNabor_Old.BeginUpdate();
+            try
+            {
+                GridViewNabor_Old.Columns["Ans_id"].Visible = false;
+                GridViewNabor_Old.Columns["Ta_id"].Visible = false;
+                GridViewNabor_Old.Columns["Tk_id"].Visible = false;
+                GridViewNabor_Old.Columns["Ag_id"].Visible = false;
+                GridViewNabor_Old.Columns["Id_razm_nab"].Visible = false;
+                GridViewNabor_Old.Columns["Kod"].Visible = false;
+                GridViewNabor_Old.ClearGrouping();
+                GridViewNabor_Old.Columns["razm_all"].GroupIndex = 0; // группировка по колонке размера
+                GridViewNabor_Old.ExpandAllGroups(); // раскрыть группы при загрузке
+                GridViewNabor_Old.OptionsView.ShowGroupPanel = true; //
+
+                GridViewNabor.ClearGrouping();
+                GridViewNabor.Columns["razm_all"].GroupIndex = 0;
+                GridViewNabor.ExpandAllGroups();
+                GridViewNabor.OptionsView.ShowGroupPanel = true;
+            }
+            finally
+            {
+                GridViewNabor_Old.EndUpdate();
+            }
+        }
+        private void SetupSearchLookUpEditGost()
+        {
+            GridViewNabor.OptionsBehavior.Editable = true;
+            GridViewNabor.OptionsBehavior.ReadOnly = false;
+
+            GridViewNabor.RefreshData();
+        }
+
+        private void customButtonSaveNabor_Click(object sender, EventArgs e)
+        {
+            //GridViewNabor.ShowEditor();
         }
     }
 }

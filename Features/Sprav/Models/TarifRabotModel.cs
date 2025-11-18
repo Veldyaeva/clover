@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using SewingProduction.Interfaces;
 
 namespace SewingProduction.Features.Sprav
 {
-    public class TarifRabotModel : INotifyPropertyChanged
+    public class TarifRabotModel : INotifyPropertyChanged, INewable, IModifiable
     {
         private int _id_kod_o;
         [Column("id_kod_o")]
@@ -64,5 +65,11 @@ namespace SewingProduction.Features.Sprav
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+
+
+        [NotMapped]
+        public bool IsNew { get; set; }
+        [NotMapped]
+        public bool IsModified { get; set; }
     }
 }

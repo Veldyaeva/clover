@@ -1,6 +1,8 @@
-﻿namespace SewingProduction.Features.KnittingProduction.Forms
+﻿using System.Windows.Forms;
+
+namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    partial class KnitterWorkSpace
+    partial class KnitterWorkSpace : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -15,7 +17,7 @@
         {
             if (disposing && (components != null))
             {
-                components.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -151,7 +153,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
-            SuspendLayout();
+            this.SuspendLayout();
             // 
             // advBandedGridView1
             // 
@@ -971,12 +973,12 @@
             // 
             // KnitterWorkSpace
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1329, 617);
-            Controls.Add(dataLayoutControl1);
-            Name = "KnitterWorkSpace";
-            Text = "Рабочее место вязальщицы";
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1329, 617);
+            this.Controls.Add(dataLayoutControl1);
+            this.Name = "KnitterWorkSpace";
+            this.Text = "Рабочее место вязальщицы";
             ((System.ComponentModel.ISupportInitialize)advBandedGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)PlanZagrVyazGridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)bandedGridView3).EndInit();
@@ -1003,7 +1005,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
-            ResumeLayout(false);
+            this.ResumeLayout(false);
         }
 
         #endregion

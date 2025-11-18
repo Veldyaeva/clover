@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Xpo.DB.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -16,6 +17,7 @@ namespace SewingProduction.Features.Sprav
         private readonly TarifDataService _tarifService;
         private TarifModel? currentModel;
         UserClass _user;
+        bool _addMode; // режим добавления
         public EditTarif(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -36,6 +38,7 @@ namespace SewingProduction.Features.Sprav
             customCheckBoxEco.Checked = customCheckBoxEco.Visible;
             customCheckBoxByh.Checked = customCheckBoxByh.Visible;
             customCheckBoxProg.Checked = customCheckBoxProg.Visible;
+            customButtonEdit.Enabled = false;
         }
         private void customGridControlZp_Load(object sender, EventArgs e)
         {
@@ -69,7 +72,8 @@ namespace SewingProduction.Features.Sprav
         {
             try
             {
-                customGroupBoxAdd.Visible = false;
+                if (!_addMode)
+                    customGroupBoxAdd.Visible = false;
 
                 currentModel = gridViewZp.GetRow(gridViewZp.FocusedRowHandle) as TarifModel;
 
@@ -111,6 +115,39 @@ namespace SewingProduction.Features.Sprav
         public void Filter(object sender, EventArgs e)
         {
             List<string> filters = new List<string>();
+            /*
+            * Доступ для бухгалтеров - десятки
+            * Для экономистов - еденицы
+            * Администратору доступно все
+            priznSign:
+            0 - нет доступа
+            1 - просмотр
+            2 - редактор
+            */
+            bool isByh = customCheckBoxByh.Checked;
+            bool isEco = customCheckBoxEco.Checked;
+            if (isByh && !isEco)
+            {
+                // Только бухгалтер
+                filters.Add("(([priznSign] / 10) % 10 > 0)");
+            }
+            else if (isEco && !isByh)
+            {
+                // Только экономист
+                filters.Add("([priznSign] % 10 > 0)");
+            }
+            else if (isByh && isEco)
+            {
+                // И бухгалтер, и экономист
+                filters.Add("([priznSign] > 0)");
+            }
+            else
+            {
+                // Ни один чекбокс не выбран → ничего не показываем
+                filters.Add("([priznSign] IS NULL OR [priznSign] = 0)");
+            }
+            if (customCheckBoxProg.Checked)
+                filters.Clear();
 
             // Фильтрация по организации
             if (customRadioButtonMay.Checked)
@@ -120,50 +157,42 @@ namespace SewingProduction.Features.Sprav
             else if (customRadioButtonAceKle.Checked)
                 filters.Add("[firm] LIKE 'ace/cle'");
 
-            if (customCheckBoxByh.Checked && !customCheckBoxEco.Checked && !customCheckBoxProg.Checked)
-            {
-                filters.Add("([priznSign] >= 10 AND [priznSign] < 30)");
-            }
-            else if (customCheckBoxEco.Checked && !customCheckBoxByh.Checked && !customCheckBoxProg.Checked)
-            {
-                filters.Add("([priznSign] % 10 > 0)");
-            }
-            else if (customCheckBoxEco.Checked && customCheckBoxByh.Checked)
-            {
-                filters.Add("[priznSign] > 0");
-            }
-            else
-            {
-                filters.Add("([priznSign] IS NULL OR [priznSign] = 0)");
-            }
-            if (customCheckBoxProg.Checked)
-                filters.Clear();
             // Применение фильтра
             gridViewZp.ActiveFilterString = string.Join(" AND ", filters);
-            customGroupBoxAdd.Visible = false;
+
+            if (!_addMode)
+                customGroupBoxAdd.Visible = false;
         }
         #endregion
         #region раздел: Редактировать / Сохранить
         private async void customButtonAdd_Click(object sender, EventArgs e)
         {
+            _addMode = true;
             await loadGroupBoxAdd(false);
         }
         private async void customButtonEdit_Click(object sender, EventArgs e)
         {
+            _addMode = false;
             if (gridViewZp.FocusedRowHandle < 0 || currentModel == null) return;
             await loadGroupBoxAdd(true);
         }
-
+        private async void customButtonCopy_Click(object sender, EventArgs e)
+        {
+            _addMode = true;
+            if (gridViewZp.FocusedRowHandle < 0 || currentModel == null) return;
+            await loadGroupBoxAdd(true);
+        }
         async Task loadGroupBoxAdd(bool editMode)
         {
             customGroupBoxAdd.Visible = true;
-            customGroupBoxAdd.Text = editMode ? "Редактирование" : "Добавление";
+            customGroupBoxAdd.Text = _addMode ? "Добавление" : "Редактирование";
+
             var typeList = await _tarifService.LoadTypeAsync();
             customComboBoxType.DisplayMember = "field_name";
             customComboBoxType.ValueMember = "pcst_id";
             customComboBoxType.DataSource = typeList;
 
-            customTextBoxName.Text = editMode ? currentModel.constant_name : string.Empty;
+            customTextBoxName.Text = _addMode ? string.Empty : currentModel.constant_name;
             customTextBoxRazm.Text = editMode ? currentModel.dimension : string.Empty;
             customTextBoxOpis.Text = editMode ? currentModel.describe : string.Empty;
             customComboBoxType.SelectedValue = editMode ? currentModel.pcstId : string.Empty;
@@ -172,26 +201,38 @@ namespace SewingProduction.Features.Sprav
             customComboBoxOrg.SelectedItem = editMode ? currentModel.firm : string.Empty;
             customTextBoxWhereUses.Text = editMode ? currentModel.whereUses : string.Empty;
 
+            customCheckBoxNotRazm.Checked = !editMode ? false : // если yt добавляем
+                currentModel.dimension.ToLower() == customCheckBoxNotRazm.Text ? true : false; // если "нет размерности"
+
             customTextBoxZnach.Text =
                 !editMode ? string.Empty :
-                currentModel.pcstId == 1 ? currentModel.value_numeric?.ToString("0.#####") :
-                currentModel.pcstId == 2 ? currentModel.value_integer?.ToString() :
-                currentModel.pcstId == 3 ? currentModel.value_float?.ToString("0.#####") :
-                currentModel.pcstId == 4 ? currentModel.value_character :
-                currentModel.pcstId == 5 ? currentModel.value_datetime?.ToString("yyyy-MM-dd") :
-                string.Empty;
+                currentModel.value;
 
-            customTextBoxName.Enabled = !editMode;
+            customCheckBoxArhiv.Checked =
+                !editMode ? false :
+                currentModel.arhiv;
+
+            LoadPriznSignCombo(editMode);
+
+            if (customCheckBoxProg.Checked)
+            {
+                editMode = false;
+                customTextBoxName.Enabled = true;
+            }
+            else
+                customTextBoxName.Enabled = false;
+
+            if (_addMode)
+                editMode = false;
+
             customTextBoxRazm.Enabled = !editMode;
             customCheckBoxNotRazm.Enabled = !editMode;
-            customTextBoxOpis.Enabled = !editMode;
+            //customTextBoxOpis.Enabled = !editMode;
             customComboBoxType.Enabled = !editMode;
             customComboBoxOrg.Enabled = !editMode;
             customComboBoxPriznEco.Enabled = !editMode;
             customComboBoxPriznByh.Enabled = !editMode;
-            customTextBoxWhereUses.Enabled = !editMode;
-
-            LoadPriznSignCombo(editMode);
+            //customTextBoxWhereUses.Enabled = !editMode;
         }
         private void LoadPriznSignCombo(bool editMode)
         {
@@ -204,8 +245,14 @@ namespace SewingProduction.Features.Sprav
             }
             else
             {
-                customComboBoxPriznByh.SelectedIndex = 0;
-                customComboBoxPriznEco.SelectedIndex = 0;
+                if (customCheckBoxByh.Checked)
+                    customComboBoxPriznByh.SelectedIndex = 2;
+                else
+                    customComboBoxPriznByh.SelectedIndex = 0;
+                if (customCheckBoxEco.Checked)
+                    customComboBoxPriznEco.SelectedIndex = 2;
+                else
+                    customComboBoxPriznEco.SelectedIndex = 0;
             }
 
         }
@@ -218,6 +265,7 @@ namespace SewingProduction.Features.Sprav
         private void customButtonOtm_Click(object sender, EventArgs e)
         {
             customGroupBoxAdd.Visible = false;
+            _addMode = false;
         }
 
         private async void customButtonArhiv_Click(object sender, EventArgs e)
@@ -275,9 +323,12 @@ namespace SewingProduction.Features.Sprav
             model.priznSign = byh * 10 + eco;
 
             model.whereUses = customTextBoxWhereUses.Text.Trim();
+            model.arhiv = customCheckBoxArhiv.Checked;
+
             // Установка значения в нужное поле
             selectZnach(model);
             saveModel(model, isEditMode);
+
         }
         public void selectZnach(TarifModel model)
         {
@@ -292,7 +343,26 @@ namespace SewingProduction.Features.Sprav
                         MessageBox.Show("Тип 'float' не поддерживается");
                         return;
                     case 4: model.value_character = znach; break;
-                    case 5: model.value_datetime = DateTime.Parse(znach); break;
+                    case 5:
+                        {
+                            var formats = new[] { "dd.MM.yyyy", "dd/MM/yyyy" };
+                            model.value_datetime = DateTime.Parse(znach);
+                            if (DateTime.TryParseExact(
+                            znach,
+                            formats,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out DateTime dt))
+                            {
+                                model.value_datetime = dt.Date;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неверный формат даты. Введите: dd.MM.yyyy");
+                                return;
+                            }
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -305,15 +375,18 @@ namespace SewingProduction.Features.Sprav
         {
             try
             {
-                _tarifService.SaveTarifAsync(model, isEditMode, _user.UserId);
+                // _tarifService.SaveTarif(model, isEditMode, _user.UserId);
+                _tarifService.SaveTarifJson(model, isEditMode, _user.UserId);
                 MessageBox.Show("Сохранено успешно.");
                 customGroupBoxAdd.Visible = false;
 
                 tarifLoad(model.pc_id);
+                Application.DoEvents(); //задержка
                 int rowHandle = gridViewZp.LocateByValue("constant_name", model.constant_name);
-                Debug.WriteLine(model.constant_name);
-                Debug.WriteLine(rowHandle);
+                if (_addMode)
+                    rowHandle = gridViewZp.DataRowCount - 1;
                 gridViewZp.FocusedRowHandle = rowHandle;
+                _addMode = false;
             }
             catch (Exception ex)
             {
@@ -324,7 +397,7 @@ namespace SewingProduction.Features.Sprav
         {
             var requiredFields = new Dictionary<string, (Func<bool> condition, string message)>
             {
-                ["Имя константы"] = (() => string.IsNullOrWhiteSpace(customTextBoxName.Text), "Не заполнено поле Имя константы!"),
+                //["Имя константы"] = (() => string.IsNullOrWhiteSpace(customTextBoxName.Text), "Не заполнено поле Имя константы!"),
                 ["Размерность"] = (() => string.IsNullOrWhiteSpace(customTextBoxRazm.Text), "Не заполнена размерность! Если неизвестна, поставьте галочку 'Нет размерности'"),
                 ["Описание"] = (() => string.IsNullOrWhiteSpace(customTextBoxOpis.Text), "Не заполнено поле Описание!"),
                 ["Тип данных"] = (() => string.IsNullOrWhiteSpace(customComboBoxType.Text), "Не выбран тип данных!"),
@@ -342,12 +415,15 @@ namespace SewingProduction.Features.Sprav
         }
         #endregion
         #region раздел: Тарифы разовых работ
+        private TarifRabotModel _currentTarif = null;
+
         private async void customGridControlTR_Load(object sender, EventArgs e)
         {
             var tableTarifRabot = await _tarifService.LoadTarifRabotList();
             customGridControlTR.DataSource = tableTarifRabot;
             customGridControlTR.RefreshDataSource();
         }
+
         private async void gridViewTR_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (e.RowHandle >= 0 && gridViewTR.GetRow(e.RowHandle) is TarifRabotModel model)
@@ -355,6 +431,26 @@ namespace SewingProduction.Features.Sprav
                 await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
             }
         }
+        private async void customButtonAddTrr_Click(object sender, EventArgs e)
+        {
+            TarifRabotModel model = new TarifRabotModel { Text = "Новый тариф" };
+            await _dbService.SaveEntityAsync("sp_ras_rabot", "id_kod_o", model);
+
+            var tableTarifRabot = await _tarifService.LoadTarifRabotList();
+            customGridControlTR.DataSource = tableTarifRabot;
+            customGridControlTR.RefreshDataSource();
+
+            gridViewTR.FocusedRowHandle = gridViewTR.GetRowHandle(gridViewTR.DataRowCount - 1);
+            gridViewTR.MakeRowVisible(gridViewTR.FocusedRowHandle);
+
+            gridViewTR.GridControl.BeginInvoke(new Action(() =>
+            {
+                if (gridViewTR.IsValidRowHandle(gridViewTR.FocusedRowHandle))
+                    gridViewTR.ShowPopupEditForm();
+            }));
+
+        }
         #endregion
+
     }
 }

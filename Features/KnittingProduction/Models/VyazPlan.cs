@@ -255,7 +255,6 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public string razm { get; set; }
         [NotMapped]
         public int kol { get; set; }
-        [NotMapped]
         public int gradacia { get; set; }
         [NotMapped]
         public int SyncSelection { get; set; } = 0;
@@ -297,6 +296,8 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public DateTime? pzvDateAdd { get; set; }
         [NotMapped]
         public DateTime? pzvUpdDate { get; set; }
+        public int pzvGradacia { get; set; }
+        public int pzvGsID { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]
@@ -359,10 +360,14 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public DateTime? olPzvDateMast { get; set; }
         [NotMapped] public DateTime? olPzvUpdDate { get; set; }
         [NotMapped] public int olPzvSekNazn { get; set; }
-        [NotMapped]  public int olPzvKolNazn { get; set; }
+        [NotMapped] public int olPzvKolNazn { get; set; }
         [NotMapped] public int olPzvChasNazn { get; set; }
         [NotMapped] public string olPzvVidPr { get; set; }
+        [NotMapped] public int olPzvGradacia { get; set; }
+        [NotMapped] public int olPzvGsID { get; set; }
+        [NotMapped] public int olGsName { get; set; }
         [NotMapped] public int SyncSelection { get; set; } = 0;
+        [NotMapped] public int ErrorSelection { get; set; } = 0;
         [NotMapped] public bool IsModified { get; set; } = false;
         [NotMapped] public bool IsNew { get; set; } = false;
         [NotMapped] public bool IsDeleted { get; set; } = false;
@@ -425,6 +430,8 @@ namespace SewingProduction.Features.KnittingProduction.Models
             pzvKolNazn = x.olPzvKolNazn, 
             pzvVidPr = x.olPzvVidPr, 
             pzvUpdDate = x.olPzvUpdDate,
+            pzvGradacia = x.olPzvGradacia,
+            pzvGsID = x.olPzvGsID,
             IsModified = x.IsModified,
             IsNew = x.IsNew,
             IsDeleted = x.IsDeleted
