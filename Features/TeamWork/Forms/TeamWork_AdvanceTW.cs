@@ -218,47 +218,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 });
             }
 
-//            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
-//        where T : ICloneable
-//            {
-//                var list = new List<T>();
-//                foreach (var item in source)
-//                {
-//                    var clone = (T)item.Clone();
-
-//                    // Принудительно сбрасываем ID в 0
-//                    var idProperty = typeof(T).GetProperty(idFieldName);
-//                    if (idProperty != null)
-//                    {
-//                        idProperty.SetValue(clone, 0);
-//                    }
-//                    else
-//                    {
-//                        // Если свойство не найдено через рефлексию, пробуем альтернативные имена
-//                        var alternativeNames = new[] { "nrID", "id", "nkId", "NrID", "Id", "NkId" };
-//                        foreach (var altName in alternativeNames)
-//                        {
-//                            var altProperty = typeof(T).GetProperty(altName);
-//                            if (altProperty != null)
-//                            {
-//                                altProperty.SetValue(clone, 0);
-//                                break;
-//                            }
-//                        }
-//                    }
-
-//<<<<<<< HEAD
-//                    // AnnId
-//                    cache.AnnId = type.GetProperty("AnnId", flags) ?? type.GetProperty("annId", flags);
-
-//                    // Flags
-//                    cache.IsNew = type.GetProperty("IsNew", flags);
-//                    cache.IsModified = type.GetProperty("IsModified", flags);
-
-//                    return cache;
-//                });
-//            }
-
             public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
         where T : ICloneable
             {
@@ -615,23 +574,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _normKontList.ListChanged += OnDataChanged;
                     _listChangedHandlersAttached = true;
                 }
-                //_normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                //_normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
-                //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                //bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
-                //if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
-                //{
-                //_raszPopupHandler = _raszPopupHandler ?? CreateRaszContextMenu(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
-                //_kontPopupHandler = _kontPopupHandler ?? ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
-                //(_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.AttachPopupMenus(_raszPopupHandler, _kontPopupHandler, gridViewKont);
-                //}
-                //else
-                //{
-                //    (_presenter as SewingProduction.Features.TeamWork.Services.TeamWorkPresenter)?.DetachPopupMenus();
-                //    _raszPopupHandler = null;
-                //    _kontPopupHandler = null;
-                //}
                 bool allowDelete = ComputeCanEdit(); // см. метод ниже
                 if (allowDelete)
                 {
@@ -1229,9 +1171,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 });
 
-                //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
-                //await LoadAnnDataAsync();
-
                 // Обновляем текстовое поле буфера из глобального состояния или локального
                 UpdateBufferDisplay();
 
@@ -1534,11 +1473,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // SafeUpdate сам завершил обновление
                         try { gridViewKont.EndDataUpdate(); } catch { }
                     }
-
-
-                    //  _hasUnsavedChanges = true;
-                    //UpdateFormTitle();
-                    //DisplayCurrentAnnData(); // Обновить поля на форме данными из _currentAnn
                 }
                 _hasUnsavedChanges = false;
             }
@@ -2153,6 +2087,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Очищаем список
                         _normRaskList.Clear();
 
+                        // Фиксируем выбранную сложность на текущем ANN
+                        if (selectionForm.SelectedComplexity.HasValue && _currentAnnData != null)
+                        {
+                            _currentAnnData.Slogn = selectionForm.SelectedComplexity.Value;
+                            bindingSource1.ResetBindings(false);
+                            _hasUnsavedChanges = true;
+                        }
+
                         // Вставляем новые данные
                         foreach (var normRask in selectionForm.SelectedData)
                         {
@@ -2160,7 +2102,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             normRask.AnnId = _newAnnId;
                             _normRaskList.Add(normRask);
                         }
-
+                        
                         // Обновляем привязку данных и интерфейс
                         _normRaskBindingSource.ResetBindings(false);
                         gridControlRaskr.RefreshDataSource();

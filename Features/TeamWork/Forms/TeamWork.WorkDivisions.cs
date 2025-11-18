@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors.Controls;
+﻿using DevExpress.CodeParser;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
@@ -460,6 +461,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
             int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
             string articul = view.GetRowCellValue(rowHandle, "Articul").ToString();
+            int slogn = (int)view.GetRowCellValue(rowHandle, "Slogn");
+            if (slogn is 0)
+            { _ = MessageBox.Show("Сложность не может быть равна нулю."); return; }
             // Действие только если дата не задана
             if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
             {
@@ -800,7 +804,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (modeForNewForm == (int)Mode.Kit)
                     {
                         // Показываем статус в statusLabel (если он существует)
-                        if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
+                        if (this.Controls.Find("statusLabel", true).FirstOrDefault() is System.Windows.Forms.Label statusLabel)
                         {
                             statusLabel.ForeColor = System.Drawing.Color.Green;
                             statusLabel.Text = "Комплект успешно создан";

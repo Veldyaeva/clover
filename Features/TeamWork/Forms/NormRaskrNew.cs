@@ -23,6 +23,8 @@ namespace SewingProduction.form.TeamWork.Forms
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<NormRask> SelectedData { get; private set; } = new List<NormRask>();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int? SelectedComplexity { get; private set; }
         private List<GridBand> _selectedBands = new List<GridBand>(); // Список для хранения выбранных бэндов
         private List<BandData> _bandDataList = new List<BandData>(); // Список для хранения данных выбранных бэндов
         private int _annId;
@@ -187,6 +189,8 @@ namespace SewingProduction.form.TeamWork.Forms
         private void ProcessSelectedComplexity()
         {
             _bandDataList.Clear();
+            SelectedComplexity = null;
+            SelectedData = new List<NormRask>();
 
             foreach (var band in _selectedBands)
             {
@@ -199,6 +203,8 @@ namespace SewingProduction.form.TeamWork.Forms
                 {
                     continue; // Пропускаем, если индекс не удалось извлечь
                 }
+
+                SelectedComplexity = complexityIndex;
 
                 var selectedRows = gridView1.GetSelectedRows();
                 foreach (int rowHandle in selectedRows)
@@ -220,7 +226,7 @@ namespace SewingProduction.form.TeamWork.Forms
                         };
 
                         _bandDataList.Add(bandData); // Добавляем данные в список
-                        SelectedData = GenerateNormRaskList(bandData, complexityIndex);
+                        SelectedData.AddRange(GenerateNormRaskList(bandData, complexityIndex));
                     }
                 }
             }

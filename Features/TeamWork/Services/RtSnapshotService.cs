@@ -147,22 +147,14 @@ namespace SewingProduction.Features.TeamWork.Services
                     new[] {
                     nameof(ArtNormN.Kod), nameof(ArtNormN.Articul), nameof(ArtNormN.grup),
                     nameof(ArtNormN.Mod), nameof(ArtNormN.Sek), nameof(ArtNormN.Komment),
-                    nameof(ArtNormN.Reco), nameof(ArtNormN.Diz), nameof(ArtNormN.Constr)//,
-                    //nameof(ArtNormN.SekShv), nameof(ArtNormN.SekVyaz), nameof(ArtNormN.SekVyaz5),
-                    //nameof(ArtNormN.SekVyaz6), nameof(ArtNormN.SekVyaz7), nameof(ArtNormN.SekVyaz10),
-                    //nameof(ArtNormN.SekVyaz12), nameof(ArtNormN.SekVyazo)
+                    nameof(ArtNormN.Reco), nameof(ArtNormN.Diz), nameof(ArtNormN.Constr)
                     });
             }
 
-            // 2) Операции Rasz — добавленные/удалённые/изменённые |n1:{r.N1} ("N1", r.N1), 
+            // 2) Операции Rasz — добавленные/удалённые/изменённые
             AppendListDiff(sb, "ОПЕРАЦИИ (Rasz)",
                 oldS.Rasz ?? Enumerable.Empty<NormRasz>(),
                 curS.Rasz ?? Enumerable.Empty<NormRasz>(),
-                 //key: r => (r.nrID > 0 ? $"id:{r.nrID}" : $"N:{r.DisplayNumber}|kod:{r.Kod}|text:{r.Text.TrimEnd()}"),
-                 //important: r => new (string name, object value)[] {
-                 //("N", r.DisplayNumber), ("Text", r.Text.TrimEnd()), ("Sek", r.Sek),
-                 //("Razryd", r.razryd), ("KodProizv", r.KodProizv),
-                 //("KodPodr", r.KodPodr), ("KodOb", r.KodOb), ("Spec", r.Spec)
                  key: r => (r.nrID > 0
         ? $"id:{r.nrID}"                                   // группировка по id
         : $"N:{r.DisplayNumber}|код:{r.Kod}|текст:{r.Text?.TrimEnd()}"), // fallback для новых/без id
@@ -268,8 +260,6 @@ namespace SewingProduction.Features.TeamWork.Services
                 if (changes.Count > 0)
                 {
                     has = true;
-                    //   sec.AppendLine($"~ {key(newMap[k])}");
-                    //var header = headerTitle(newMap[k]);
                     var header = headerOld(oldMap[k]);
                     sec.AppendLine($"ИЗМЕНЕНЫ: {header}");
                     foreach (var c in changes)
