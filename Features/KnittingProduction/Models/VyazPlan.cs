@@ -12,64 +12,59 @@ namespace SewingProduction.Features.KnittingProduction.Models
 {
     public class VyazPlanView : INewable, IModifiable, IDeletable
     {
-        [NotMapped]
-        public string Nn { get; set; }
-        [NotMapped]
-        public string NomZad { get; set; }
-        [NotMapped]
-        public DateTime? DateZap { get; set; }
-        [NotMapped]
-        public int IDSbit { get; set; }
-        [NotMapped]
-        public string NameSbit { get; set; }
-        [NotMapped]
-        public DateTime? DateCdPlan { get; set; }
-        [NotMapped]
-        public string kod { get; set; }
+        [NotMapped] public string Nn { get; set; }
+        [NotMapped] public string NomZad { get; set; }
+        [NotMapped] public DateTime? DateZap { get; set; }
+        [NotMapped] public int IDSbit { get; set; }
+        [NotMapped] public string NameSbit { get; set; }
+        [NotMapped] public DateTime? DateCdPlan { get; set; }
+        [NotMapped] public string kod { get; set; }
         //[NotMapped]
         //public string KoddRt { get; set; }
-        [NotMapped]
-        public int annID { get; set; }
-        [NotMapped]
-        public string Articul { get; set; }
-        [NotMapped]
-        public string Grup { get; set; }
-        [NotMapped]
-        public int IDVyazClass { get; set; }
-        [NotMapped]
-        public int NameVyazClass { get; set; }
-        [NotMapped]
-        public int SekVyaz { get; set; }
-        [NotMapped]
-        public string ZvetTkan { get; set; }
-        [NotMapped]
-        public int Kol { get; set; }
-        [NotMapped]
-        public decimal SekVyazAll { get; set; }
+        [NotMapped] public int annID { get; set; }
+        [NotMapped] public string Articul { get; set; }
+        [NotMapped] public string Grup { get; set; }
+        [NotMapped] public int IDVyazClass { get; set; }
+        [NotMapped] public int NameVyazClass { get; set; }
+        [NotMapped] public int SekVyaz { get; set; }
+        [NotMapped] public string ZvetTkan { get; set; }
+        [NotMapped] public int Kol { get; set; }
+        [NotMapped] public decimal SekVyazAll { get; set; }
         public int pszkmID { get; set; }
+        [NotMapped] public string KmlNumber { get; set; }
+        [NotMapped] public DateTime? DateZapPlanFrom { get; set; }
+        [NotMapped] public DateTime? DateZapPlanTo { get; set; }
+        [NotMapped] public string PictPath { get; set; }
+
         public int KmlID { get; set; }
-        [NotMapped]
-        public string KmlNumber { get; set; }
-        [NotMapped]
-        public DateTime? DateZapPlanFrom { get; set; }
-        [NotMapped]
-        public DateTime? DateZapPlanTo { get; set; }
-        [NotMapped]
-        public string PictPath { get; set; }
-        [NotMapped]
-        public bool SyncSelection { get; set; } = false;
-        [NotMapped]
-        public bool IsModified { get; set; } = false;
-        [NotMapped]
-        public bool IsNew { get; set; } = false;
-        [NotMapped]
-        public bool IsDeleted { get; set; } = false;
+        [NotMapped] public int Gradacia { get; set; }
+        [NotMapped] public OriginalValues Original { get; private set; } = new OriginalValues();
+        [NotMapped] public int KmlIDCopy => Original.KmlID;
+        [NotMapped] public int GradaciaCopy => Original.Gradacia;
+        [NotMapped] public bool IsKmlIDChanged => KmlID != Original.KmlID;
+        [NotMapped] public bool IsGradaciaChanged => Gradacia != Original.Gradacia;
+
+        [NotMapped] public string ProgrFio { get; set; }
+        [NotMapped] public bool SyncSelection { get; set; } = false;
+        [NotMapped] public bool IsModified { get; set; } = false;
+        [NotMapped] public bool IsNew { get; set; } = false;
+        [NotMapped] public bool IsDeleted { get; set; } = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public void FixOriginalValues()
+        {
+            Original.Gradacia = this.Gradacia;
+            Original.KmlID = this.KmlID;
+        }
+    }
+    public class OriginalValues
+    {
+        public int Gradacia { get; set; }
+        public int KmlID { get; set; }
     }
 
     [Table("plan_sezon_zad_knitMachine")]
@@ -83,12 +78,10 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public DateTime? pszkmPlanDateFrom { get; set; }
         public DateTime? pszkmPlanDateTo { get; set; }
         public DateTime? pszkmDateAdd { get; set; }
-        [NotMapped]
-        public bool IsModified { get; set; } = false;
-        [NotMapped]
-        public bool IsNew { get; set; } = false;
-        [NotMapped]
-        public bool IsDeleted { get; set; } = false;
+        //public int pszkmGradacia { get; set; }
+        [NotMapped] public bool IsModified { get; set; } = false;
+        [NotMapped] public bool IsNew { get; set; } = false;
+        [NotMapped] public bool IsDeleted { get; set; } = false;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -110,154 +103,90 @@ namespace SewingProduction.Features.KnittingProduction.Models
 
     public class KnitMachineLoadAllInfo
     {
-        [NotMapped]
-        public string yearMonth { get; set; }
-        [NotMapped]
-        public string kmlNumber { get; set; }
-        [NotMapped]
-        public int kmlID { get; set; }
-        [NotMapped]
-        public string combinedPszNom { get; set; }
-        [NotMapped]
-        public int monthNumber { get; set; }
-        [NotMapped]
-        public int yearNumber { get; set; }
+        [NotMapped] public string yearMonth { get; set; }
+        [NotMapped] public string kmlNumber { get; set; }
+        [NotMapped] public int kmlID { get; set; }
+        [NotMapped] public string combinedPszNom { get; set; }
+        [NotMapped] public int monthNumber { get; set; }
+        [NotMapped] public int yearNumber { get; set; }
     }
 
     public class PlanSezonZadKnitMachine
     {
-        [NotMapped]
-        public int pszkmID { get; set; }
-        [NotMapped]
-        public string pszkmPszNom { get; set; }
-        [NotMapped]
-        public int pszkmKnitClass { get; set; }
-        [NotMapped]
-        public string kmlNumber { get; set; }
-        [NotMapped]
-        public string pszkmKmlID { get; set; }
-        [NotMapped]
-        public decimal pszkmlSeconds { get; set; }
-        [NotMapped]
-        public DateTime? pszkmPlanDateFrom { get; set; }
-        [NotMapped]
-        public DateTime? pszkmPlanDateTo { get; set; }
-        [NotMapped]
-        public int SecondsWorked { get; set; }
-        [NotMapped]
-        public decimal hoursTotal { get; set; }
-        [NotMapped]
-        public DateTime? pszkmDateAdd { get; set; }
-        [NotMapped]
-        public DateTime? DateZap { get; set; }
-        [NotMapped]
-        public string articul { get; set; }
-        [NotMapped]
-        public string yearMonthDateZap { get; set; }
-        [NotMapped]
-        public int monthNumberDateZap { get; set; }
-        [NotMapped]
-        public int yearNumberDateZap { get; set; }
-        [NotMapped]
-        public string yearMonthPlanDate { get; set; }
-        [NotMapped]
-        public int monthNumberPlanDate { get; set; }
-        [NotMapped]
-        public int yearNumberPlanDate { get; set; }
-        [NotMapped]
-        public int pszkmYearMonthInt { get; set; }
-        [NotMapped]
-        public int kmlKmaID { get; set; }
-        [NotMapped]
-        public string kmaNumber { get; set; }
+        [NotMapped] public int pszkmID { get; set; }
+        [NotMapped] public string pszkmPszNom { get; set; }
+        [NotMapped] public int pszkmKnitClass { get; set; }
+        [NotMapped] public string kmlNumber { get; set; }
+        [NotMapped] public string pszkmKmlID { get; set; }
+        [NotMapped] public decimal pszkmlSeconds { get; set; }
+        [NotMapped] public DateTime? pszkmPlanDateFrom { get; set; }
+        [NotMapped] public DateTime? pszkmPlanDateTo { get; set; }
+        [NotMapped] public int SecondsWorked { get; set; }
+        [NotMapped] public decimal hoursTotal { get; set; }
+        [NotMapped] public DateTime? pszkmDateAdd { get; set; }
+        [NotMapped] public DateTime? DateZap { get; set; }
+        [NotMapped] public string articul { get; set; }
+        [NotMapped] public string yearMonthDateZap { get; set; }
+        [NotMapped] public int monthNumberDateZap { get; set; }
+        [NotMapped] public int yearNumberDateZap { get; set; }
+        [NotMapped] public string yearMonthPlanDate { get; set; }
+        [NotMapped] public int monthNumberPlanDate { get; set; }
+        [NotMapped] public int yearNumberPlanDate { get; set; }
+        [NotMapped] public int pszkmYearMonthInt { get; set; }
+        [NotMapped] public int kmlKmaID { get; set; }
+        [NotMapped] public string kmaNumber { get; set; }
     }
 
     public class PlanSezonZadKnitMachineLoadingSummary
     {
-        [NotMapped]
-        public string period { get; set; }
-        [NotMapped]
-        public int yearNumberDateZap { get; set; }
-        [NotMapped]
-        public int monthNumberDateZap { get; set; }
-        [NotMapped]
-        public decimal hoursTotal { get; set; }
-        [NotMapped]
-        public decimal sortOrder { get; set; }
+        [NotMapped] public string period { get; set; }
+        [NotMapped] public int yearNumberDateZap { get; set; }
+        [NotMapped] public int monthNumberDateZap { get; set; }
+        [NotMapped] public decimal hoursTotal { get; set; }
+        [NotMapped] public decimal sortOrder { get; set; }
     }
 
     public class PlanTotalHoursByKnitMachine
     {
-        [NotMapped]
-        public int kmaID { get; set; }
-        [NotMapped]
-        public string kmaNumber { get; set; }
-        [NotMapped]
-        public int kmlID { get; set; }
-        [NotMapped]
-        public string kmlNumber { get; set; }
-        [NotMapped]
-        public DateTime? DateZap { get; set; }
-        [NotMapped]
-        public string mgZap { get; set; }
-
-        [NotMapped]
-        public int hoursTotal { get; set; }
-
-        [NotMapped]
-        public int idVyazClass { get; set; }
-        [NotMapped]
-        public int knitClass { get; set; }
+        [NotMapped] public int kmaID { get; set; }
+        [NotMapped] public string kmaNumber { get; set; }
+        [NotMapped] public int kmlID { get; set; }
+        [NotMapped] public string kmlNumber { get; set; }
+        [NotMapped] public DateTime? DateZap { get; set; }
+        [NotMapped] public string mgZap { get; set; }
+        [NotMapped] public int hoursTotal { get; set; }
+        [NotMapped] public int idVyazClass { get; set; }
+        [NotMapped] public int knitClass { get; set; }
     }
 
     public class ZadanyListByMachine
     {
-        [NotMapped]
-        public string pszNom { get; set; }
-        [NotMapped]
-        public int nom { get; set; }
-        [NotMapped]
-        public string articul { get; set; }
-        [NotMapped]
-        public string zvet { get; set; }
-        [NotMapped]
-        public int kol { get; set; }
-        [NotMapped]
-        public int pryazZayav { get; set; }
-        [NotMapped]
-        public DateTime? data_plan { get; set; }
-        [NotMapped]
-        public string vid_stir { get; set; }
-        [NotMapped]
-        public string dopr_name { get; set; }
-        [NotMapped]
-        public int kmlID { get; set; }
-        [NotMapped]
-        public int SyncSelection { get; set; } = 0;
+        [NotMapped] public string pszNom { get; set; }
+        [NotMapped] public int nom { get; set; }
+        [NotMapped] public string articul { get; set; }
+        [NotMapped] public string zvet { get; set; }
+        [NotMapped] public int kol { get; set; }
+        [NotMapped] public int pryazZayav { get; set; }
+        [NotMapped] public DateTime? data_plan { get; set; }
+        [NotMapped] public string vid_stir { get; set; }
+        [NotMapped] public string dopr_name { get; set; }
+        [NotMapped] public int kmlID { get; set; }
+        [NotMapped] public int SyncSelection { get; set; } = 0;
+        [NotMapped] public int Gradacia { get; set; }
     }
     public class RzvPachListByNom
     {
-        [NotMapped]
-        public string nomZad { get; set; }
-        [NotMapped]
-        public int nom { get; set; }
-        [NotMapped]
-        public int nom_n { get; set; }
-        [NotMapped]
-        public int annID { get; set; }
-        [NotMapped]
-        public int n_pach { get; set; }
-        [NotMapped]
-        public string pach_kod { get; set; }
-        [NotMapped]
-        public string kod { get; set; }
-        [NotMapped]
-        public string razm { get; set; }
-        [NotMapped]
-        public int kol { get; set; }
+        [NotMapped] public string nomZad { get; set; }
+        [NotMapped] public int nom { get; set; }
+        [NotMapped] public int nom_n { get; set; }
+        [NotMapped] public int annID { get; set; }
+        [NotMapped] public int n_pach { get; set; }
+        [NotMapped] public string pach_kod { get; set; }
+        [NotMapped] public string kod { get; set; }
+        [NotMapped] public string razm { get; set; }
+        [NotMapped] public int kol { get; set; }
         public int gradacia { get; set; }
-        [NotMapped]
-        public int SyncSelection { get; set; } = 0;
+        [NotMapped] public int SyncSelection { get; set; } = 0;
     }
     public class PZV : INewable, IModifiable, IDeletable
     {
@@ -290,20 +219,14 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public decimal pzvChasNazn { get; set; }
         public int pzvKolNazn { get; set; }
         public string pzvVidPr { get; set; }
-        [NotMapped]
-        public string pzvCompAdd { get; set; }
-        [NotMapped]
-        public DateTime? pzvDateAdd { get; set; }
-        [NotMapped]
-        public DateTime? pzvUpdDate { get; set; }
+        [NotMapped] public string pzvCompAdd { get; set; }
+        [NotMapped] public DateTime? pzvDateAdd { get; set; }
+        [NotMapped] public DateTime? pzvUpdDate { get; set; }
         public int pzvGradacia { get; set; }
         public int pzvGsID { get; set; }
-        [NotMapped]
-        public bool IsModified { get; set; } = false;
-        [NotMapped]
-        public bool IsNew { get; set; } = false;
-        [NotMapped]
-        public bool IsDeleted { get; set; } = false;
+        [NotMapped] public bool IsModified { get; set; } = false;
+        [NotMapped] public bool IsNew { get; set; } = false;
+        [NotMapped] public bool IsDeleted { get; set; } = false;
     }
     public class PZVOperList : INewable, IModifiable, IDeletable
     {
@@ -371,8 +294,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public bool IsModified { get; set; } = false;
         [NotMapped] public bool IsNew { get; set; } = false;
         [NotMapped] public bool IsDeleted { get; set; } = false;
+        [NotMapped] public int olKodPodr { get; set; }
+        [NotMapped] public int olKodProizv { get; set; }
 
-        
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
@@ -440,74 +364,43 @@ namespace SewingProduction.Features.KnittingProduction.Models
 
     public class KnitPlanReportParametersList
     {
-        [NotMapped]
-        public int kmlIdVyazClass { get; set; }
-        [NotMapped]
-        public string name_class { get; set; }
-        [NotMapped]
-        public int pszkmKmlID { get; set; }
-        [NotMapped]
-        public string kmlInvNumber { get; set; }
-        [NotMapped]
-        public int yearMonthZapInt { get; set; }
-        [NotMapped]
-        public string yearMonthDateZap { get; set; }
-        [NotMapped]
-        public string articulKod { get; set; }
-        [NotMapped]
-        public string articul { get; set; }
+        [NotMapped] public int kmlIdVyazClass { get; set; }
+        [NotMapped] public string name_class { get; set; }
+        [NotMapped] public int pszkmKmlID { get; set; }
+        [NotMapped] public string kmlInvNumber { get; set; }
+        [NotMapped] public int yearMonthZapInt { get; set; }
+        [NotMapped] public string yearMonthDateZap { get; set; }
+        [NotMapped] public string articulKod { get; set; }
+        [NotMapped] public string articul { get; set; }
     }
     public class SmenZadanyVyazMachine
     {
-        [NotMapped]
-        public int kmlKmaID { get; set; }
-        [NotMapped]
-        public string kmaNumber { get; set; }
-        [NotMapped]
-        public int kmlID { get; set; }
-        [NotMapped]
-        public string kmlNumber { get; set; }
-        [NotMapped]
-        public string kmlInvNum { get; set; }
-        [NotMapped]
-        public int kmlIdVyazClass { get; set; }
-        [NotMapped]
-        public int name_class { get; set; }
-        [NotMapped]
-        public decimal taskToDo { get; set; }
-        [NotMapped]
-        public decimal taskAtWork { get; set; }
-        [NotMapped]
-        public decimal taskDone { get; set; }
-        [NotMapped]
-        public decimal taskNotConfirmed { get; set; }
-        [NotMapped]
-        public decimal taskConfirmed { get; set; }
-        [NotMapped]
-        public decimal taskNotPlanned { get; set; }
+        [NotMapped] public int kmlKmaID { get; set; }
+        [NotMapped] public string kmaNumber { get; set; }
+        [NotMapped] public int kmlID { get; set; }
+        [NotMapped] public string kmlNumber { get; set; }
+        [NotMapped] public string kmlInvNum { get; set; }
+        [NotMapped] public int kmlIdVyazClass { get; set; }
+        [NotMapped] public int name_class { get; set; }
+        [NotMapped] public decimal taskToDo { get; set; }
+        [NotMapped] public decimal taskAtWork { get; set; }
+        [NotMapped] public decimal taskDone { get; set; }
+        [NotMapped] public decimal taskNotConfirmed { get; set; }
+        [NotMapped] public decimal taskConfirmed { get; set; }
+        [NotMapped] public decimal taskNotPlanned { get; set; }
     }
     public class SmenZadanyVyazEmp
     {
-        [NotMapped]
-        public int kmaID { get; set; }
-        [NotMapped]
-        public string kmaNumber { get; set; }
-        [NotMapped]
-        public int empTab { get; set; }
-        [NotMapped]
-        public string empFioSokr { get; set; }
-        [NotMapped]
-        public decimal taskToDo { get; set; }
-        [NotMapped]
-        public decimal taskAtWork { get; set; }
-        [NotMapped]
-        public decimal taskDone { get; set; }
-        [NotMapped]
-        public decimal taskNotConfirmed { get; set; }
-        [NotMapped]
-        public decimal taskConfirmed { get; set; }
-        [NotMapped]
-        public int kmaIDNazn { get; set; }
+        [NotMapped] public int kmaID { get; set; }
+        [NotMapped] public string kmaNumber { get; set; }
+        [NotMapped] public int empTab { get; set; }
+        [NotMapped] public string empFioSokr { get; set; }
+        [NotMapped] public decimal taskToDo { get; set; }
+        [NotMapped] public decimal taskAtWork { get; set; }
+        [NotMapped] public decimal taskDone { get; set; }
+        [NotMapped] public decimal taskNotConfirmed { get; set; }
+        [NotMapped] public decimal taskConfirmed { get; set; }
+        [NotMapped] public int kmaIDNazn { get; set; }
     }
 
 }

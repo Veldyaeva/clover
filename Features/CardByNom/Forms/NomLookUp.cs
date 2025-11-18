@@ -113,6 +113,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     await _logger.LogEventAsync($"Не удалось найти данные RasNomList", "LoadRasNomListByNomZadany");
                 }
+                //---------------------------------------------
+                gridViewRasNomList.BeginSort();
+                gridViewRasNomList.ClearSorting();
+
+                gridViewRasNomList.SortInfo.AddRange(new[] {
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["data_r"], DevExpress.Data.ColumnSortOrder.Descending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["nom_zad"], DevExpress.Data.ColumnSortOrder.Descending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["nom_pach"], DevExpress.Data.ColumnSortOrder.Descending)
+                    });
+                gridViewRasNomList.EndSort();
+                //---------------------------------------------
             }
             catch (Exception ex)
             {
@@ -148,6 +159,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     await _logger.LogEventAsync($"Не удалось найти данные RasNomList", "LoadRasNomListByArticul");
                 }
+                //---------------------------------------------
+                gridViewRasNomList.BeginSort();
+                gridViewRasNomList.ClearSorting();
+
+                gridViewRasNomList.SortInfo.AddRange(new[] {
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["data_r"], DevExpress.Data.ColumnSortOrder.Descending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["nom_zad"], DevExpress.Data.ColumnSortOrder.Descending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["nom_pach"], DevExpress.Data.ColumnSortOrder.Descending)
+                    });
+                gridViewRasNomList.EndSort();
+                //---------------------------------------------
             }
             catch (Exception ex)
             {
@@ -187,6 +209,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     await _logger.LogEventAsync($"Не удалось найти данные RasNomList", "LoadRasNomListByIz");
                 }
+                //---------------------------------------------
+                gridViewRasNomList.BeginSort();
+                gridViewRasNomList.ClearSorting();
+
+                gridViewRasNomList.SortInfo.AddRange(new[] {
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["data_r"], DevExpress.Data.ColumnSortOrder.Descending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["nom_zad"], DevExpress.Data.ColumnSortOrder.Descending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewRasNomList.Columns["nom_pach"], DevExpress.Data.ColumnSortOrder.Descending)
+                    });
+                gridViewRasNomList.EndSort();
+                //---------------------------------------------
             }
             catch (Exception ex)
             {

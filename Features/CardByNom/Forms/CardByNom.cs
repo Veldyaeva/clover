@@ -1675,19 +1675,32 @@ namespace SewingProduction
         private async Task PrintNakl()
         {
             //string iz = GetIzNakl();
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
-            Task sebZList = LoadSebZListDataAsync(selectedRow.Iz);
-            await Task.WhenAll(sebZList);
-            if (_sebZListBindingSource.Count > 0)
+            try
             {
-                MessageBox.Show("В накладной есть артикулы с не просчитанной ЗП! Печать запрещена.");
-                return;
+                if (gridViewNaklList.FocusedRowHandle < 0)
+                {
+                    MessageBox.Show("Не выбрана накладная для печати!");
+                    return;
+                }
+
+                var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+                Task sebZList = LoadSebZListDataAsync(selectedRow.Iz);
+                await Task.WhenAll(sebZList);
+                if (_sebZListBindingSource.Count > 0)
+                {
+                    MessageBox.Show("В накладной есть артикулы с не просчитанной ЗП! Печать запрещена.");
+                    return;
+                }
+                NaklReport report1 = new NaklReport();
+                report1.RequestParameters = false;
+                report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                reportPrintTool1.ShowPreviewDialog();
             }
-            NaklReport report1 = new NaklReport();
-            report1.RequestParameters = false;
-            report1.Parameters["_naklIz"].Value = selectedRow.Iz;
-            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            reportPrintTool1.ShowPreviewDialog();
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка печати накладной");
+            }
         }
 
         private async Task LoadSebZListDataAsync(string _xIz)

@@ -50,11 +50,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridColumnVyazPlanNn = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnVyazPlanPszkmPlanDateTo = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnVyazPlanPszkmGradacia = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            gridColumnVyazPlanProgrFio = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckedComboBoxEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
             repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             pictureBoxEskiz = new System.Windows.Forms.PictureBox();
             customSimpleButton1 = new CustomSimpleButton();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customSimpleButton3 = new CustomSimpleButton();
+            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             customSimpleButton2 = new CustomSimpleButton();
             gridControlArtPrKnitMachineViewRecom2 = new CustomGridControl();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -78,7 +83,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridControlArtPrKnitMachineViewPr1 = new CustomGridControl();
             gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnArtPrKnitMachineViewPr1KmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            customTextBox1 = new CustomTextBox();
+            textBoxProgrFio = new CustomTextBox();
             gridControlPlanSezonZadanyRazmKol = new CustomGridControl();
             gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnPlanSezonZadanyRazmKolKol = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -130,6 +135,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             splitterItem4 = new DevExpress.XtraLayout.SplitterItem();
             splitterItem5 = new DevExpress.XtraLayout.SplitterItem();
             splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
+            layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -139,6 +146,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)gridControlVyazPlan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewVyazPlan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckedComboBoxEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxEskiz).BeginInit();
@@ -197,6 +205,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)splitterItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
@@ -212,7 +222,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridControlVyazPlan.MainView = gridViewVyazPlan;
             gridControlVyazPlan.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlVyazPlan.Name = "gridControlVyazPlan";
-            gridControlVyazPlan.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckedComboBoxEdit1, repositoryItemLookUpEdit1 });
+            gridControlVyazPlan.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckedComboBoxEdit1, repositoryItemLookUpEdit1, repositoryItemCheckEdit2 });
             gridControlVyazPlan.Size = new System.Drawing.Size(1763, 340);
             gridControlVyazPlan.TabIndex = 0;
             gridControlVyazPlan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewVyazPlan });
@@ -221,7 +231,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             gridViewVyazPlan.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridViewVyazPlan.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewVyazPlan.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnVyazPlanPszkmPlanDateFrom, gridColumnVyazPlanKmlNumber, gridColumnVyazPlanSekVyazAll, gridColumnVyazPlanKol, gridColumnVyazPlanZvetTkan, gridColumnVyazPlanSekVyaz, gridColumnVyazPlanNameVyazClass, gridColumnVyazPlanGrup, gridColumnVyazPlanArticul, gridColumnVyazPlanDateCdPlan, gridColumnVyazPlanNameSbit, gridColumnVyazPlanDateZap, gridColumnVyazPlanNomZad, gridColumnVyazPlanSyncSelection, gridColumnVyazPlanNn, gridColumnVyazPlanPszkmPlanDateTo });
+            gridViewVyazPlan.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnVyazPlanPszkmPlanDateFrom, gridColumnVyazPlanKmlNumber, gridColumnVyazPlanSekVyazAll, gridColumnVyazPlanKol, gridColumnVyazPlanZvetTkan, gridColumnVyazPlanSekVyaz, gridColumnVyazPlanNameVyazClass, gridColumnVyazPlanGrup, gridColumnVyazPlanArticul, gridColumnVyazPlanDateCdPlan, gridColumnVyazPlanNameSbit, gridColumnVyazPlanDateZap, gridColumnVyazPlanNomZad, gridColumnVyazPlanSyncSelection, gridColumnVyazPlanNn, gridColumnVyazPlanPszkmPlanDateTo, gridColumnVyazPlanPszkmGradacia, gridColumnVyazPlanProgrFio });
             gridViewVyazPlan.CustomizationFormBounds = new System.Drawing.Rectangle(1597, 675, 308, 314);
             gridViewVyazPlan.DetailHeight = 404;
             gridViewVyazPlan.GridControl = gridControlVyazPlan;
@@ -247,8 +257,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanPszkmPlanDateFrom.Name = "gridColumnVyazPlanPszkmPlanDateFrom";
             gridColumnVyazPlanPszkmPlanDateFrom.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanPszkmPlanDateFrom.Visible = true;
-            gridColumnVyazPlanPszkmPlanDateFrom.VisibleIndex = 15;
-            gridColumnVyazPlanPszkmPlanDateFrom.Width = 159;
+            gridColumnVyazPlanPszkmPlanDateFrom.VisibleIndex = 17;
+            gridColumnVyazPlanPszkmPlanDateFrom.Width = 140;
             // 
             // gridColumnVyazPlanKmlNumber
             // 
@@ -257,8 +267,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanKmlNumber.Name = "gridColumnVyazPlanKmlNumber";
             gridColumnVyazPlanKmlNumber.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanKmlNumber.Visible = true;
-            gridColumnVyazPlanKmlNumber.VisibleIndex = 14;
-            gridColumnVyazPlanKmlNumber.Width = 63;
+            gridColumnVyazPlanKmlNumber.VisibleIndex = 16;
+            gridColumnVyazPlanKmlNumber.Width = 52;
             // 
             // gridColumnVyazPlanSekVyazAll
             // 
@@ -268,8 +278,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSekVyazAll.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Выбрано: {0:0.##})"), new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SekVyazAll", "(Итого: {0:0.##})") });
             gridColumnVyazPlanSekVyazAll.Visible = true;
-            gridColumnVyazPlanSekVyazAll.VisibleIndex = 13;
-            gridColumnVyazPlanSekVyazAll.Width = 137;
+            gridColumnVyazPlanSekVyazAll.VisibleIndex = 14;
+            gridColumnVyazPlanSekVyazAll.Width = 113;
             // 
             // gridColumnVyazPlanKol
             // 
@@ -278,8 +288,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanKol.Name = "gridColumnVyazPlanKol";
             gridColumnVyazPlanKol.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanKol.Visible = true;
-            gridColumnVyazPlanKol.VisibleIndex = 12;
-            gridColumnVyazPlanKol.Width = 64;
+            gridColumnVyazPlanKol.VisibleIndex = 13;
+            gridColumnVyazPlanKol.Width = 52;
             // 
             // gridColumnVyazPlanZvetTkan
             // 
@@ -288,8 +298,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanZvetTkan.Name = "gridColumnVyazPlanZvetTkan";
             gridColumnVyazPlanZvetTkan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanZvetTkan.Visible = true;
-            gridColumnVyazPlanZvetTkan.VisibleIndex = 11;
-            gridColumnVyazPlanZvetTkan.Width = 152;
+            gridColumnVyazPlanZvetTkan.VisibleIndex = 12;
+            gridColumnVyazPlanZvetTkan.Width = 126;
             // 
             // gridColumnVyazPlanSekVyaz
             // 
@@ -298,8 +308,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSekVyaz.Name = "gridColumnVyazPlanSekVyaz";
             gridColumnVyazPlanSekVyaz.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanSekVyaz.Visible = true;
-            gridColumnVyazPlanSekVyaz.VisibleIndex = 10;
-            gridColumnVyazPlanSekVyaz.Width = 71;
+            gridColumnVyazPlanSekVyaz.VisibleIndex = 11;
+            gridColumnVyazPlanSekVyaz.Width = 58;
             // 
             // gridColumnVyazPlanNameVyazClass
             // 
@@ -308,8 +318,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNameVyazClass.Name = "gridColumnVyazPlanNameVyazClass";
             gridColumnVyazPlanNameVyazClass.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameVyazClass.Visible = true;
-            gridColumnVyazPlanNameVyazClass.VisibleIndex = 9;
-            gridColumnVyazPlanNameVyazClass.Width = 81;
+            gridColumnVyazPlanNameVyazClass.VisibleIndex = 10;
+            gridColumnVyazPlanNameVyazClass.Width = 66;
             // 
             // gridColumnVyazPlanGrup
             // 
@@ -318,8 +328,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanGrup.Name = "gridColumnVyazPlanGrup";
             gridColumnVyazPlanGrup.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanGrup.Visible = true;
-            gridColumnVyazPlanGrup.VisibleIndex = 8;
-            gridColumnVyazPlanGrup.Width = 109;
+            gridColumnVyazPlanGrup.VisibleIndex = 9;
+            gridColumnVyazPlanGrup.Width = 127;
             // 
             // gridColumnVyazPlanArticul
             // 
@@ -328,8 +338,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanArticul.Name = "gridColumnVyazPlanArticul";
             gridColumnVyazPlanArticul.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanArticul.Visible = true;
-            gridColumnVyazPlanArticul.VisibleIndex = 7;
-            gridColumnVyazPlanArticul.Width = 109;
+            gridColumnVyazPlanArticul.VisibleIndex = 8;
+            gridColumnVyazPlanArticul.Width = 128;
             // 
             // gridColumnVyazPlanDateCdPlan
             // 
@@ -338,8 +348,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanDateCdPlan.Name = "gridColumnVyazPlanDateCdPlan";
             gridColumnVyazPlanDateCdPlan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanDateCdPlan.Visible = true;
-            gridColumnVyazPlanDateCdPlan.VisibleIndex = 6;
-            gridColumnVyazPlanDateCdPlan.Width = 109;
+            gridColumnVyazPlanDateCdPlan.VisibleIndex = 5;
+            gridColumnVyazPlanDateCdPlan.Width = 100;
             // 
             // gridColumnVyazPlanNameSbit
             // 
@@ -348,8 +358,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNameSbit.Name = "gridColumnVyazPlanNameSbit";
             gridColumnVyazPlanNameSbit.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameSbit.Visible = true;
-            gridColumnVyazPlanNameSbit.VisibleIndex = 5;
-            gridColumnVyazPlanNameSbit.Width = 85;
+            gridColumnVyazPlanNameSbit.VisibleIndex = 4;
+            gridColumnVyazPlanNameSbit.Width = 78;
             // 
             // gridColumnVyazPlanDateZap
             // 
@@ -358,8 +368,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanDateZap.Name = "gridColumnVyazPlanDateZap";
             gridColumnVyazPlanDateZap.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanDateZap.Visible = true;
-            gridColumnVyazPlanDateZap.VisibleIndex = 4;
-            gridColumnVyazPlanDateZap.Width = 108;
+            gridColumnVyazPlanDateZap.VisibleIndex = 3;
+            gridColumnVyazPlanDateZap.Width = 99;
             // 
             // gridColumnVyazPlanNomZad
             // 
@@ -368,8 +378,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNomZad.Name = "gridColumnVyazPlanNomZad";
             gridColumnVyazPlanNomZad.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNomZad.Visible = true;
-            gridColumnVyazPlanNomZad.VisibleIndex = 3;
-            gridColumnVyazPlanNomZad.Width = 81;
+            gridColumnVyazPlanNomZad.VisibleIndex = 2;
+            gridColumnVyazPlanNomZad.Width = 74;
             // 
             // gridColumnVyazPlanSyncSelection
             // 
@@ -380,7 +390,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSyncSelection.Name = "gridColumnVyazPlanSyncSelection";
             gridColumnVyazPlanSyncSelection.UnboundDataType = typeof(bool);
             gridColumnVyazPlanSyncSelection.Visible = true;
-            gridColumnVyazPlanSyncSelection.VisibleIndex = 1;
+            gridColumnVyazPlanSyncSelection.VisibleIndex = 15;
             gridColumnVyazPlanSyncSelection.Width = 23;
             // 
             // repositoryItemCheckEdit1
@@ -388,6 +398,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             repositoryItemCheckEdit1.AutoHeight = false;
             repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
             repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit1.EditValueChanged += repositoryItemCheckEdit1_EditValueChanged;
             // 
             // gridColumnVyazPlanNn
             // 
@@ -396,8 +407,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNn.Name = "gridColumnVyazPlanNn";
             gridColumnVyazPlanNn.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNn.Visible = true;
-            gridColumnVyazPlanNn.VisibleIndex = 2;
-            gridColumnVyazPlanNn.Width = 107;
+            gridColumnVyazPlanNn.VisibleIndex = 1;
+            gridColumnVyazPlanNn.Width = 98;
             // 
             // gridColumnVyazPlanPszkmPlanDateTo
             // 
@@ -406,8 +417,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanPszkmPlanDateTo.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             gridColumnVyazPlanPszkmPlanDateTo.Name = "gridColumnVyazPlanPszkmPlanDateTo";
             gridColumnVyazPlanPszkmPlanDateTo.Visible = true;
-            gridColumnVyazPlanPszkmPlanDateTo.VisibleIndex = 16;
-            gridColumnVyazPlanPszkmPlanDateTo.Width = 222;
+            gridColumnVyazPlanPszkmPlanDateTo.VisibleIndex = 18;
+            gridColumnVyazPlanPszkmPlanDateTo.Width = 177;
+            // 
+            // gridColumnVyazPlanPszkmGradacia
+            // 
+            gridColumnVyazPlanPszkmGradacia.Caption = "Градация";
+            gridColumnVyazPlanPszkmGradacia.ColumnEdit = repositoryItemCheckEdit2;
+            gridColumnVyazPlanPszkmGradacia.FieldName = "gridColumnVyazPlanPszkmGradacia";
+            gridColumnVyazPlanPszkmGradacia.Name = "gridColumnVyazPlanPszkmGradacia";
+            gridColumnVyazPlanPszkmGradacia.UnboundDataType = typeof(int);
+            gridColumnVyazPlanPszkmGradacia.Visible = true;
+            gridColumnVyazPlanPszkmGradacia.VisibleIndex = 7;
+            gridColumnVyazPlanPszkmGradacia.Width = 78;
+            // 
+            // repositoryItemCheckEdit2
+            // 
+            repositoryItemCheckEdit2.AutoHeight = false;
+            repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
+            repositoryItemCheckEdit2.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit2.ValueChecked = 1;
+            repositoryItemCheckEdit2.ValueUnchecked = 0;
+            repositoryItemCheckEdit2.EditValueChanged += repositoryItemCheckEdit2_EditValueChanged;
+            // 
+            // gridColumnVyazPlanProgrFio
+            // 
+            gridColumnVyazPlanProgrFio.Caption = "Программист";
+            gridColumnVyazPlanProgrFio.Name = "gridColumnVyazPlanProgrFio";
+            gridColumnVyazPlanProgrFio.Visible = true;
+            gridColumnVyazPlanProgrFio.VisibleIndex = 6;
+            gridColumnVyazPlanProgrFio.Width = 97;
             // 
             // repositoryItemCheckedComboBoxEdit1
             // 
@@ -454,13 +493,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(customSimpleButton3);
+            layoutControl1.Controls.Add(simpleButton1);
             layoutControl1.Controls.Add(customSimpleButton2);
             layoutControl1.Controls.Add(gridControlArtPrKnitMachineViewRecom2);
             layoutControl1.Controls.Add(gridControlArtPrKnitMachineViewPr2);
             layoutControl1.Controls.Add(gridControlArtPrKnitMachineViewRecom1);
             layoutControl1.Controls.Add(gridControlArtPrFioProgr);
             layoutControl1.Controls.Add(gridControlArtPrKnitMachineViewPr1);
-            layoutControl1.Controls.Add(customTextBox1);
+            layoutControl1.Controls.Add(textBoxProgrFio);
             layoutControl1.Controls.Add(customSimpleButton1);
             layoutControl1.Controls.Add(gridControlPlanSezonZadanyRazmKol);
             layoutControl1.Controls.Add(customLabel1);
@@ -479,6 +520,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl1.Size = new System.Drawing.Size(1787, 966);
             layoutControl1.TabIndex = 28;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // customSimpleButton3
+            // 
+            customSimpleButton3.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            customSimpleButton3.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton3.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customSimpleButton3.Appearance.Options.UseBackColor = true;
+            customSimpleButton3.Appearance.Options.UseFont = true;
+            customSimpleButton3.Appearance.Options.UseForeColor = true;
+            customSimpleButton3.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            customSimpleButton3.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            customSimpleButton3.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton3.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton3.Location = new System.Drawing.Point(1439, 586);
+            customSimpleButton3.Name = "customSimpleButton3";
+            customSimpleButton3.Size = new System.Drawing.Size(336, 22);
+            customSimpleButton3.StyleController = layoutControl1;
+            customSimpleButton3.TabIndex = 16;
+            customSimpleButton3.Text = "customSimpleButton3";
+            customSimpleButton3.Click += customSimpleButton3_Click;
+            // 
+            // simpleButton1
+            // 
+            simpleButton1.Location = new System.Drawing.Point(1439, 560);
+            simpleButton1.Name = "simpleButton1";
+            simpleButton1.Size = new System.Drawing.Size(336, 22);
+            simpleButton1.StyleController = layoutControl1;
+            simpleButton1.TabIndex = 15;
+            simpleButton1.Text = "simpleButton1";
+            simpleButton1.Click += simpleButton1_Click;
             // 
             // customSimpleButton2
             // 
@@ -728,19 +799,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnArtPrKnitMachineViewPr1KmlNumber.VisibleIndex = 0;
             gridColumnArtPrKnitMachineViewPr1KmlNumber.Width = 87;
             // 
-            // customTextBox1
+            // textBoxProgrFio
             // 
-            customTextBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            customTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            customTextBox1.ErrorColor = System.Drawing.Color.Red;
-            customTextBox1.ErrorMessage = null;
-            customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customTextBox1.Location = new System.Drawing.Point(186, 440);
-            customTextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customTextBox1.Name = "customTextBox1";
-            customTextBox1.Size = new System.Drawing.Size(240, 20);
-            customTextBox1.TabIndex = 5;
+            textBoxProgrFio.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            textBoxProgrFio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            textBoxProgrFio.ErrorColor = System.Drawing.Color.Red;
+            textBoxProgrFio.ErrorMessage = null;
+            textBoxProgrFio.Font = new System.Drawing.Font("Arial", 10F);
+            textBoxProgrFio.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            textBoxProgrFio.Location = new System.Drawing.Point(186, 440);
+            textBoxProgrFio.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxProgrFio.Name = "textBoxProgrFio";
+            textBoxProgrFio.Size = new System.Drawing.Size(240, 20);
+            textBoxProgrFio.TabIndex = 5;
             // 
             // gridControlPlanSezonZadanyRazmKol
             // 
@@ -890,7 +961,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem11, splitterItem1, layoutControlGroup9, layoutControlGroup10, splitterItem2 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem11, splitterItem1, layoutControlGroup9, layoutControlGroup10, splitterItem2, layoutControlItem13, layoutControlItem19 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(1787, 966);
             Root.TextVisible = false;
@@ -905,9 +976,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // emptySpaceItem11
             // 
-            emptySpaceItem11.Location = new System.Drawing.Point(1427, 548);
+            emptySpaceItem11.Location = new System.Drawing.Point(1427, 600);
             emptySpaceItem11.Name = "emptySpaceItem11";
-            emptySpaceItem11.Size = new System.Drawing.Size(340, 398);
+            emptySpaceItem11.Size = new System.Drawing.Size(340, 346);
             // 
             // splitterItem1
             // 
@@ -1041,7 +1112,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // layoutControlItem9
             // 
-            layoutControlItem9.Control = customTextBox1;
+            layoutControlItem9.Control = textBoxProgrFio;
             layoutControlItem9.Location = new System.Drawing.Point(150, 0);
             layoutControlItem9.Name = "layoutControlItem9";
             layoutControlItem9.Size = new System.Drawing.Size(244, 24);
@@ -1207,6 +1278,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             splitterItem2.Name = "splitterItem2";
             splitterItem2.Size = new System.Drawing.Size(10, 592);
             // 
+            // layoutControlItem13
+            // 
+            layoutControlItem13.Control = simpleButton1;
+            layoutControlItem13.Location = new System.Drawing.Point(1427, 548);
+            layoutControlItem13.Name = "layoutControlItem13";
+            layoutControlItem13.Size = new System.Drawing.Size(340, 26);
+            layoutControlItem13.TextVisible = false;
+            // 
+            // layoutControlItem19
+            // 
+            layoutControlItem19.Control = customSimpleButton3;
+            layoutControlItem19.Location = new System.Drawing.Point(1427, 574);
+            layoutControlItem19.Name = "layoutControlItem19";
+            layoutControlItem19.Size = new System.Drawing.Size(340, 26);
+            layoutControlItem19.TextVisible = false;
+            // 
             // gridColumn4
             // 
             gridColumn4.Caption = "Артикул";
@@ -1261,6 +1348,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)gridControlVyazPlan).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewVyazPlan).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckedComboBoxEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxEskiz).EndInit();
@@ -1319,6 +1407,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)splitterItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
@@ -1345,7 +1435,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnVyazPlanDateZap;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnVyazPlanNomZad;
         private System.Windows.Forms.PictureBox pictureBoxEskiz;
-        private CustomTextBox customTextBox1;
+        private CustomTextBox textBoxProgrFio;
         private CustomLabel customLabel1;
         private CustomGridControl gridControlArtPrFioProgr;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -1434,5 +1524,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private CustomSimpleButton customSimpleButton2;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVyazPlanPszkmGradacia;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVyazPlanProgrFio;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private CustomSimpleButton customSimpleButton3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
     }
 }

@@ -157,6 +157,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnVyazPlanKmlNumber.FieldName = "KmlNumber";
                 gridColumnVyazPlanPszkmPlanDateFrom.FieldName = "DateZapPlanFrom";
                 gridColumnVyazPlanPszkmPlanDateTo.FieldName = "DateZapPlanTo";
+                gridColumnVyazPlanPszkmGradacia.FieldName = "Gradacia";
+                gridColumnVyazPlanProgrFio.FieldName = "ProgrFio";
+
+                //gridColumnVyazPlanPszkmGradacia.OptionsColumn.AllowEdit = true;
+                //gridColumnVyazPlanPszkmGradacia.OptionsColumn.ReadOnly = false;
+
+                //if (gridViewVyazPlan.OptionsSelection.MultiSelectMode != GridMultiSelectMode.RowSelect)
+                //{
+                //    // В этом случае GetSelectedRows() может не работать
+                //    gridViewVyazPlan.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect;
+                //}
+
+                //if (!gridViewVyazPlan.OptionsSelection.MultiSelect)
+                //{
+                //    // Мультивыбор отключен
+                //    gridViewVyazPlan.OptionsSelection.MultiSelect = true;
+                //}
+                //gridViewVyazPlan.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
 
                 _gridHelper.AutoRowFilterConfig(gridViewVyazPlan as GridView, 1);
 
@@ -321,12 +339,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //// При программном изменении фильтра
                 //gridViewVyazPlan.ActiveFilterCriteria = newCriteria;
                 //gridViewVyazPlan.RefreshData();
+
+                //----------------------------------------
+                gridViewVyazPlan.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
+                gridColumnVyazPlanPszkmGradacia.OptionsColumn.AllowEdit = true;
+                gridColumnVyazPlanPszkmGradacia.OptionsColumn.ReadOnly = false;
+                //----------------------------------------
+
                 #endregion
 
                 #region описание gridControlArtPrFioProgr "проработки"
                 gridControlArtPrFioProgr.DataSource = _artPrFioProgrViewBindingSource;
                 gridColumnArtPrFioProgrArticul.FieldName = "art_pr";
                 gridColumnArtPrFioProgrRazm.FieldName = "razm";
+                #endregion
+
+                #region описание textBoxProgrFio "программист"
+                textBoxProgrFio.DataBindings.Add("Text", _artPrFioProgrViewBindingSource, nameof(Features.KnittingProduction.Models.ArtPrFioProgr.progrFio), true, DataSourceUpdateMode.Never);
                 #endregion
 
                 #region описание gridControlPlanSezonZadanyRazmKol "количество по размерам"
@@ -413,6 +442,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                     await this.InvokeAsync(() =>
                     {
+                        foreach (var row in vyazPlanViewData)
+                        {
+                            row.FixOriginalValues();
+                        }
                         _currentVyazPlanViewData = vyazPlanViewData;                // Обновляем текущую модель
                         _vyazPlanViewBindingSource.DataSource = _currentVyazPlanViewData; // Привязываем данные к форме
                     });
@@ -420,6 +453,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     await _logger.LogEventAsync($"Данные VyazPlanView успешно загружены", "LoadVyazPlanDataAsync");
                     //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
                     _vyazPlanViewBindingList.Add(vyazPlanViewData[0]);
+
                     _vyazPlanViewBindingSource.ResetBindings(false);
                 }
                 else
@@ -662,45 +696,51 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private void KnitMachineStatusUpdate(int rowHandle)
-        {
-            var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
-            switch (selectedItem.pszkmID, selectedItem.KmlID)
-            {
-                case (0, 0):  // Оба ID = 0
-                    selectedItem.IsNew = false;
-                    selectedItem.IsModified = false;
-                    selectedItem.IsDeleted = false;
-                    break;
+        //private void KnitMachineStatusUpdate(int rowHandle)
+        //{
+        //    var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
+        //    switch (selectedItem.pszkmID, selectedItem.KmlID)
+        //    {
+        //        case (0, 0):  // Оба ID = 0
+        //            selectedItem.IsNew = false;
+        //            selectedItem.IsModified = false;
+        //            selectedItem.IsDeleted = false;
+        //            break;
 
-                case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
-                    selectedItem.IsNew = false;
-                    selectedItem.IsModified = false;
-                    selectedItem.IsDeleted = true;
-                    break;
+        //        case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
+        //            selectedItem.IsNew = false;
+        //            selectedItem.IsModified = false;
+        //            selectedItem.IsDeleted = true;
+        //            break;
 
-                case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
-                    selectedItem.IsNew = true;
-                    selectedItem.IsModified = false;
-                    selectedItem.IsDeleted = false;
-                    break;
+        //        case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
+        //            selectedItem.IsNew = true;
+        //            selectedItem.IsModified = false;
+        //            selectedItem.IsDeleted = false;
+        //            break;
 
-                case ( > 0, > 0):  // Оба ID > 0
-                    selectedItem.IsNew = false;
-                    selectedItem.IsModified = true;
-                    selectedItem.IsDeleted = false;
-                    break;
+        //        case ( > 0, > 0):  // Оба ID > 0
+        //            selectedItem.IsNew = false;
+        //            selectedItem.IsModified = true;
+        //            selectedItem.IsDeleted = false;
+        //            break;
 
-                default:  // Все остальные случаи (например, отрицательные значения)
-                    Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
-                    break;
-            }
-        }
+        //        default:  // Все остальные случаи (например, отрицательные значения)
+        //            Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
+        //            break;
+        //    }
+        //}
+        /// <summary>
+        /// Обновление блокировки кнопки Сохранить, если есть изменения данных, требующие сохранения
+        /// </summary>
+        /// <remarks>This method filters the list of knitting plan items to find those that are marked as
+        /// new, modified, or deleted. It then updates the state of the save button based on whether any items meet
+        /// these criteria.</remarks>
         private void SimpleButtonSaveVyazStatusUpdate()
         {
             // Получаем список строк с флагом IsNew = true или IsModified = true
             var filteredListNew = vyazPlanViewData
-                .Where(x => x.IsNew || x.IsModified || x.IsDeleted)
+                .Where(x => x.IsNew || x.IsModified || x.IsDeleted || x.IsGradaciaChanged)
                 .Select(x => new PlanSezonZadKnitMachineList
                 {
                     pszkmPszNom = x.NomZad,
@@ -708,6 +748,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     pszkmID = x.pszkmID,
                     pszkmKnitClass = x.IDVyazClass,
                     pszkmPlanDateFrom = x.DateZapPlanFrom,
+                    //pszkmGradacia = x.Gradacia,
                     IsNew = x.IsNew,
                     IsModified = x.IsModified,
                     IsDeleted = x.IsDeleted
@@ -744,7 +785,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                // Получаем список строк с флагом IsNew = true или IsModified = true
+                // Получаем список строк с флагом IsNew = true, или IsModified = trueб или IsDeleted = true
+                var recordsToUpdate = _vyazPlanViewBindingSource.List
+                    .Cast<VyazPlanView>()
+                    .Where(record => record.IsGradaciaChanged == true)
+                    .ToList();
+                if (recordsToUpdate.Count > 0)
+                {
+                    foreach (var record in recordsToUpdate)
+                    {
+                        try
+                        {
+                            string query = $"update plan_sezon_zad set pszGradacia = {record.Gradacia} where nom = '{record.NomZad.Trim()}'";
+                            Task updatePSZ = _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+                            await Task.WhenAll(updatePSZ);
+                            record.FixOriginalValues();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Ошибка обновления: {ex.Message}");
+                        }
+
+                    }
+                }
+                // Получаем список строк с флагом IsNew = true, или IsModified = trueб или IsDeleted = true
                 var filteredListNew = vyazPlanViewData
                     .Where(x => x.IsNew || x.IsModified || x.IsDeleted)
                     .Select(x => new PlanSezonZadKnitMachineList
@@ -841,7 +905,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Внимание! Нет данных для сохранения!");
+                    //MessageBox.Show("Внимание! Нет данных для сохранения!");
                     return;
                 }
 
@@ -880,7 +944,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void simpleButtonSetKnitMachine_Click(object sender, EventArgs e)
         {
-            if (gridViewVyazPlan.GetSelectedRows().Length == 0)
+            if (!(gridViewVyazPlan.GetSelectedRows().Length > 0))
             {
                 MessageBox.Show("Внимание! Нет выбранных заданий для привязки В/М!");
                 return;
@@ -901,7 +965,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     selectedItem.KmlNumber = selectedMachine.kmlNumber;
                     selectedItem.SyncSelection = false;
                     gridViewVyazPlan.UnselectRow(rowHandle);
-                    KnitMachineStatusUpdate(rowHandle);
+                    //KnitMachineStatusUpdate(rowHandle);
+                    RowStatusUpdate(rowHandle);
                 }
             }
             _vyazPlanViewBindingSource.ResetBindings(false);
@@ -931,7 +996,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 selectedItem.DateZapPlanTo = null;
                 selectedItem.SyncSelection = false;
                 gridViewVyazPlan.UnselectRow(rowHandle);
-                KnitMachineStatusUpdate(rowHandle);
+                //KnitMachineStatusUpdate(rowHandle);
+                RowStatusUpdate(rowHandle);
             }
             _vyazPlanViewBindingSource.ResetBindings(false);
             SimpleButtonSaveVyazStatusUpdate();
@@ -1005,6 +1071,85 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //    //MessageBox.Show("Cancel");
             //}
             OpenForm(new KnittingProductionPlanningReportParameters(), sender);
+        }
+
+        private void repositoryItemCheckEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+            gridViewVyazPlan.PostEditor();        // применить новое значение из редактора
+            //gridViewVyazPlan.UpdateCurrentRow();  // сохранить в источник данных
+            //_vyazPlanViewBindingSource.ResetBindings(false);
+            RowStatusUpdate(gridViewVyazPlan.FocusedRowHandle);
+            SimpleButtonSaveVyazStatusUpdate();
+        }
+
+        /// <summary>
+        /// Проверка статуса строки после изменения значений В/М или градации
+        /// </summary>
+        /// <param name="rowHandle"></param>
+        private void RowStatusUpdate(int rowHandle)
+        {
+            var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
+            // проверяем, что значения изменены по сравнению с копиями
+            //var rowChangedStatus = (selectedItem.KmlID != selectedItem.KmlIDCopy || selectedItem.Gradacia != selectedItem.GradaciaCopy);
+            // проверяем, что значения очищены (установлены в 0) по сравнению с копиями
+            //var rowClearStatus = ((selectedItem.KmlID != selectedItem.KmlIDCopy && selectedItem.KmlID == 0) || (selectedItem.Gradacia != selectedItem.GradaciaCopy && selectedItem.Gradacia == 0));
+
+            switch (selectedItem.pszkmID, selectedItem.IsKmlIDChanged)
+            {
+                case (0, false):  // ID = 0, значение не изменено по сравнению с копией
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
+
+                case (0, true):  // ID = 0, значение изменено по сравнению с копией
+                    selectedItem.IsNew = true;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
+
+                case ( > 0, false):  // ID > 0, значение не изменено по сравнению с копией
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
+
+                case ( > 0, true):  // ID > 0, значение изменено по сравнению с копией
+                    if (selectedItem.KmlID == 0) // значение очищено (установлено в 0) по сравнению с копией
+                    {
+                        selectedItem.IsNew = false;
+                        selectedItem.IsModified = false;
+                        selectedItem.IsDeleted = true;
+                    }
+                    else // значения изменены, но не очищены
+                    {
+                        selectedItem.IsNew = false;
+                        selectedItem.IsModified = true;
+                        selectedItem.IsDeleted = false;
+                    }
+                    break;
+                default:  // Все остальные случаи 
+                    Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
+                    break;
+            }
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+
+            var pp = _vyazPlanViewBindingSource.Current as VyazPlanView;
+            MessageBox.Show($"gradacia - {pp.Gradacia.ToString()}, gradaciaCopy - {pp.GradaciaCopy.ToString()}, IsGradaciaChanged - {pp.IsGradaciaChanged}");
+        }
+
+        private void customSimpleButton3_Click(object sender, EventArgs e)
+        {
+            var pp = _vyazPlanViewBindingSource.Current as VyazPlanView;
+            MessageBox.Show($"kmlID - {pp.KmlID.ToString()}, kmlIDCopy - {pp.KmlIDCopy.ToString()}, IsKmlIDChanged - {pp.IsKmlIDChanged}");
+        }
+
+        private void repositoryItemCheckEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+            gridViewVyazPlan.PostEditor();
         }
     }
 }
