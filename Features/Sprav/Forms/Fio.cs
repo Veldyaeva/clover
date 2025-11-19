@@ -32,6 +32,10 @@ namespace SewingProduction.form
             this.Text = rusNameTableSQL;
             _user = user;
         }
+        public Fio(UserClass user) : base(user)
+        {
+            InitializeComponent();
+        }
         public Fio()
         {
             InitializeComponent();

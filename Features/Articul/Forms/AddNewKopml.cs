@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,10 @@ namespace SewingProduction.Features.Articul.Forms
             this.articuls = articuls;
             toolTipButton();
         }
+        public AddNewKopml(UserClass user) : base(user)
+        {
+            InitializeComponent();
+        }
         public AddNewKopml()
         {
             InitializeComponent();
@@ -46,6 +51,8 @@ namespace SewingProduction.Features.Articul.Forms
         //загрузка данных
         private async void customGridControlKomplArt_Load(object sender, EventArgs e)
         {
+            if (IsPreview)
+                return;
             //var articuls = await _articulDataService.GetAllAsync();
             var grups = await _grupMenDataService.GetAllAsync();
 

@@ -39,9 +39,19 @@ namespace SewingProduction.form
             this.Text = rusNameTableSQL;
 
         }
+        public SpravZeh(UserClass user) : base(user)
+        {
+            InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            _spravZehDataService = new SpravZehDataService(dbHelper);
+            _serviceBroker = new ServiceBroker(this);
+        }
         public SpravZeh()
         {
             InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            _spravZehDataService = new SpravZehDataService(dbHelper);
+            _serviceBroker = new ServiceBroker(this);
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {

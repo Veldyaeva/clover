@@ -836,6 +836,7 @@ namespace SewingProduction
         public int FormID;
         protected UserClass _user;
         public UserClass User => _user;
+        public bool IsPreview { get; set; }
 
         private void ApplyThemeToChildren(Control parentControl)
         {
@@ -854,6 +855,10 @@ namespace SewingProduction
 
         public CustomForm()
         {
+            if (IsPreview)
+            {
+                return;
+            }
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
             {
                 _user = new UserClass();
@@ -865,7 +870,10 @@ namespace SewingProduction
         }
         public CustomForm(UserClass user)
         {
-            Debug.WriteLine("кастом форма");
+            if (IsPreview)
+            {
+                return;
+            }
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
 
@@ -877,6 +885,7 @@ namespace SewingProduction
             // подписка на загрузку формы (для логирования и прав доступа - существующий код)
             this.Load += async (s, e) =>
             {
+                if (IsPreview) return;
                 await ActionLogger.Log(_user.UserId, "Открытие формы", NameForm: this.GetType().Name);
 
                 // Включаем автоматическое сохранение настроек для всех CustomGridControl
@@ -888,6 +897,7 @@ namespace SewingProduction
             // Сохраняем настройки при закрытии формы
             this.FormClosing += (s, e) =>
             {
+                if (IsPreview) return;
                 this.SaveAllGridSettings();
             };
         }
@@ -946,11 +956,13 @@ namespace SewingProduction
         private void OnThemeChanged() => ApplyTheme();
         private async void CustomForm_Load(object sender, EventArgs e)
         {
+            if (IsPreview)
+                return;
+
             string formName = this.GetType().Name;
 
             await _user.LoadObjectForm(formName);
 
-            // нет вообще доступа — закрываем
             if (!_user.HasPermission(formName, "Просмотр") && !_user.HasPermission(formName, "Редактор"))
             {
                 MessageBox.Show(
