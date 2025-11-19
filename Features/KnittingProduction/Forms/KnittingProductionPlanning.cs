@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Dapper;
+﻿using Dapper;
+using DevExpress.Data.Filtering;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class.Settings;
@@ -17,6 +12,14 @@ using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -180,6 +183,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 // 1. Настраиваем стандартный MultiSelect
                 gridViewVyazPlan.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор
+                gridViewVyazPlan.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect; // Режим выбора с чекбоксами
+                //gridViewVyazPlan.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;      // ???
                 gridViewVyazPlan.OptionsBehavior.AutoUpdateTotalSummary = true;
                 gridViewVyazPlan.OptionsView.ShowIndicator = false;   // Скрываем стандартный индикатор
                 //gridViewVyazPlan.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = false;
@@ -304,11 +309,65 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //gridViewVyazPlan.ActiveFilterCriteria = newCriteria;
                 //gridViewVyazPlan.RefreshData();
 
-                //----------------------------------------
-                gridViewVyazPlan.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
+                ////----------------------------------------
+                //gridViewVyazPlan.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
+                //gridColumnVyazPlanPszkmGradacia.OptionsColumn.AllowEdit = true;
+                //gridColumnVyazPlanPszkmGradacia.OptionsColumn.ReadOnly = false;
+
+                // 1. Оставляем дефолтный EditorShowMode (MouseUp)
+                gridViewVyazPlan.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Default;
+
+                // 2. Только колонка Gradacia редактируемая
                 gridColumnVyazPlanPszkmGradacia.OptionsColumn.AllowEdit = true;
                 gridColumnVyazPlanPszkmGradacia.OptionsColumn.ReadOnly = false;
-                //----------------------------------------
+
+                // 3. Создаем репозиторий CheckEdit с переключением по MouseDown
+                //RepositoryItemCheckEdit repoCheck = new RepositoryItemCheckEdit();
+                repositoryItemCheckEdit2.EditValueChangedFiringMode = EditValueChangedFiringMode.Buffered;
+                repositoryItemCheckEdit2.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.CheckBox;
+                repositoryItemCheckEdit2.AllowGrayed = false;
+                repositoryItemCheckEdit2.AutoWidth = true;
+
+                //repositoryItemCheckEdit2.MouseDown += (s, e) =>
+                //{
+                //    var edit = s as CheckEdit;
+                //    edit.Checked = !edit.Checked;
+
+                //    //RowStatusUpdate(gridViewVyazPlan.FocusedRowHandle);
+                //    //SimpleButtonSaveVyazStatusUpdate();
+
+                //    //e.Handled = true;
+                //};
+
+                //repositoryItemCheckEdit2.Click += (s, e) =>
+                //{
+                //    var edit = (CheckEdit)s;
+                //    edit.Checked = !edit.Checked;
+                //};
+
+                gridViewVyazPlan.ShowingEditor += (s, e) =>
+                {
+                    var view = s as DevExpress.XtraGrid.Views.Grid.GridView;
+
+                    // Разрешаем мгновенное открытие редактора только для колонки с чекбоксом
+                    if (view.FocusedColumn == gridColumnVyazPlanPszkmGradacia)
+                    {
+                        view.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
+                    }
+                    else
+                    {
+                        view.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Default;
+                    }
+                };
+
+                //repositoryItemCheckEdit2.Click += (s, e) =>
+                //{
+                //    var edit = s as CheckEdit;
+                //    edit.Checked = !edit.Checked;
+                //    gridViewVyazPlan.PostEditor();      // зафиксировать изменение в datasource
+                //    gridViewVyazPlan.UpdateCurrentRow(); // обновить UI и итоги
+                //};
+                ////----------------------------------------
 
                 #endregion
 
@@ -371,11 +430,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // устанавливаем фильтр: запланированные задания, которые не распределены по В/М
                 //_vyazPlanViewBindingSource.Filter = "DateZapPlanFrom is null";
                 gridViewVyazPlan.ActiveFilter.Clear(); // очищаем старые фильтры
-
-                gridViewVyazPlan.ActiveFilter.Add(
-                    gridViewVyazPlan.Columns["DateZapPlanFrom"],
-                    new ColumnFilterInfo("[DateZapPlanFrom] = null")
+                var dateFrom = DateTime.Now.AddYears(-1);
+                //gridViewVyazPlan.ActiveFilter.Add(
+                //    gridViewVyazPlan.Columns["DateZapPlanFrom"],
+                //    new ColumnFilterInfo("[DateZapPlanFrom] = null")
+                //);
+                gridViewVyazPlan.ActiveFilterCriteria = CriteriaOperator.Parse(
+                    "IsNull([DateZapPlanFrom]) And [DateZap] >= ?",
+                    dateFrom
                 );
+
                 gridViewVyazPlan.SortInfo.Add(
                     new DevExpress.XtraGrid.Columns.GridColumnSortInfo(
                         gridViewVyazPlan.Columns["NomZad"],
@@ -1039,11 +1103,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void repositoryItemCheckEdit2_EditValueChanged(object sender, EventArgs e)
         {
-            gridViewVyazPlan.PostEditor();        // применить новое значение из редактора
-            //gridViewVyazPlan.UpdateCurrentRow();  // сохранить в источник данных
-            //_vyazPlanViewBindingSource.ResetBindings(false);
-            RowStatusUpdate(gridViewVyazPlan.FocusedRowHandle);
-            SimpleButtonSaveVyazStatusUpdate();
+            //gridViewVyazPlan.PostEditor();        // применить новое значение из редактора
+            ////gridViewVyazPlan.UpdateCurrentRow();  // сохранить в источник данных
+            ////_vyazPlanViewBindingSource.ResetBindings(false);
+            //RowStatusUpdate(gridViewVyazPlan.FocusedRowHandle);
+            //SimpleButtonSaveVyazStatusUpdate();
         }
 
         /// <summary>

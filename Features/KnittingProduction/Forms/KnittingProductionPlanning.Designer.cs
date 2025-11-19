@@ -278,7 +278,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSekVyazAll.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Выбрано: {0:0.##})"), new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SekVyazAll", "(Итого: {0:0.##})") });
             gridColumnVyazPlanSekVyazAll.Visible = true;
-            gridColumnVyazPlanSekVyazAll.VisibleIndex = 15;
+            gridColumnVyazPlanSekVyazAll.VisibleIndex = 14;
             gridColumnVyazPlanSekVyazAll.Width = 113;
             // 
             // gridColumnVyazPlanKol
@@ -288,7 +288,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanKol.Name = "gridColumnVyazPlanKol";
             gridColumnVyazPlanKol.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanKol.Visible = true;
-            gridColumnVyazPlanKol.VisibleIndex = 14;
+            gridColumnVyazPlanKol.VisibleIndex = 13;
             gridColumnVyazPlanKol.Width = 52;
             // 
             // gridColumnVyazPlanZvetTkan
@@ -298,7 +298,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanZvetTkan.Name = "gridColumnVyazPlanZvetTkan";
             gridColumnVyazPlanZvetTkan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanZvetTkan.Visible = true;
-            gridColumnVyazPlanZvetTkan.VisibleIndex = 13;
+            gridColumnVyazPlanZvetTkan.VisibleIndex = 12;
             gridColumnVyazPlanZvetTkan.Width = 126;
             // 
             // gridColumnVyazPlanSekVyaz
@@ -308,7 +308,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSekVyaz.Name = "gridColumnVyazPlanSekVyaz";
             gridColumnVyazPlanSekVyaz.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanSekVyaz.Visible = true;
-            gridColumnVyazPlanSekVyaz.VisibleIndex = 12;
+            gridColumnVyazPlanSekVyaz.VisibleIndex = 11;
             gridColumnVyazPlanSekVyaz.Width = 58;
             // 
             // gridColumnVyazPlanNameVyazClass
@@ -318,7 +318,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNameVyazClass.Name = "gridColumnVyazPlanNameVyazClass";
             gridColumnVyazPlanNameVyazClass.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameVyazClass.Visible = true;
-            gridColumnVyazPlanNameVyazClass.VisibleIndex = 11;
+            gridColumnVyazPlanNameVyazClass.VisibleIndex = 10;
             gridColumnVyazPlanNameVyazClass.Width = 66;
             // 
             // gridColumnVyazPlanGrup
@@ -328,7 +328,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanGrup.Name = "gridColumnVyazPlanGrup";
             gridColumnVyazPlanGrup.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanGrup.Visible = true;
-            gridColumnVyazPlanGrup.VisibleIndex = 10;
+            gridColumnVyazPlanGrup.VisibleIndex = 9;
             gridColumnVyazPlanGrup.Width = 127;
             // 
             // gridColumnVyazPlanArticul
@@ -338,7 +338,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanArticul.Name = "gridColumnVyazPlanArticul";
             gridColumnVyazPlanArticul.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanArticul.Visible = true;
-            gridColumnVyazPlanArticul.VisibleIndex = 9;
+            gridColumnVyazPlanArticul.VisibleIndex = 8;
             gridColumnVyazPlanArticul.Width = 128;
             // 
             // gridColumnVyazPlanDateCdPlan
@@ -348,7 +348,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanDateCdPlan.Name = "gridColumnVyazPlanDateCdPlan";
             gridColumnVyazPlanDateCdPlan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanDateCdPlan.Visible = true;
-            gridColumnVyazPlanDateCdPlan.VisibleIndex = 7;
+            gridColumnVyazPlanDateCdPlan.VisibleIndex = 5;
             gridColumnVyazPlanDateCdPlan.Width = 100;
             // 
             // gridColumnVyazPlanNameSbit
@@ -358,7 +358,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNameSbit.Name = "gridColumnVyazPlanNameSbit";
             gridColumnVyazPlanNameSbit.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameSbit.Visible = true;
-            gridColumnVyazPlanNameSbit.VisibleIndex = 6;
+            gridColumnVyazPlanNameSbit.VisibleIndex = 4;
             gridColumnVyazPlanNameSbit.Width = 78;
             // 
             // gridColumnVyazPlanDateZap
@@ -368,7 +368,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanDateZap.Name = "gridColumnVyazPlanDateZap";
             gridColumnVyazPlanDateZap.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanDateZap.Visible = true;
-            gridColumnVyazPlanDateZap.VisibleIndex = 5;
+            gridColumnVyazPlanDateZap.VisibleIndex = 3;
             gridColumnVyazPlanDateZap.Width = 99;
             // 
             // gridColumnVyazPlanNomZad
@@ -378,7 +378,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNomZad.Name = "gridColumnVyazPlanNomZad";
             gridColumnVyazPlanNomZad.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNomZad.Visible = true;
-            gridColumnVyazPlanNomZad.VisibleIndex = 4;
+            gridColumnVyazPlanNomZad.VisibleIndex = 2;
             gridColumnVyazPlanNomZad.Width = 74;
             // 
             // gridColumnVyazPlanSyncSelection
@@ -390,7 +390,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSyncSelection.Name = "gridColumnVyazPlanSyncSelection";
             gridColumnVyazPlanSyncSelection.UnboundDataType = typeof(bool);
             gridColumnVyazPlanSyncSelection.Visible = true;
-            gridColumnVyazPlanSyncSelection.VisibleIndex = 1;
+            gridColumnVyazPlanSyncSelection.VisibleIndex = 15;
             gridColumnVyazPlanSyncSelection.Width = 23;
             // 
             // repositoryItemCheckEdit1
@@ -406,7 +406,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNn.Name = "gridColumnVyazPlanNn";
             gridColumnVyazPlanNn.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNn.Visible = true;
-            gridColumnVyazPlanNn.VisibleIndex = 2;
+            gridColumnVyazPlanNn.VisibleIndex = 1;
             gridColumnVyazPlanNn.Width = 98;
             // 
             // gridColumnVyazPlanPszkmPlanDateTo
@@ -427,7 +427,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanPszkmGradacia.Name = "gridColumnVyazPlanPszkmGradacia";
             gridColumnVyazPlanPszkmGradacia.UnboundDataType = typeof(int);
             gridColumnVyazPlanPszkmGradacia.Visible = true;
-            gridColumnVyazPlanPszkmGradacia.VisibleIndex = 3;
+            gridColumnVyazPlanPszkmGradacia.VisibleIndex = 7;
             gridColumnVyazPlanPszkmGradacia.Width = 78;
             // 
             // repositoryItemCheckEdit2
@@ -444,7 +444,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanProgrFio.Caption = "Программист";
             gridColumnVyazPlanProgrFio.Name = "gridColumnVyazPlanProgrFio";
             gridColumnVyazPlanProgrFio.Visible = true;
-            gridColumnVyazPlanProgrFio.VisibleIndex = 8;
+            gridColumnVyazPlanProgrFio.VisibleIndex = 6;
             gridColumnVyazPlanProgrFio.Width = 97;
             // 
             // repositoryItemCheckedComboBoxEdit1
