@@ -1,4 +1,7 @@
-﻿namespace SewingProduction.Features.Articul.Forms
+﻿using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors;
+
+namespace SewingProduction.Features.Articul.Forms
 {
     partial class EditNaborSostav
     {
@@ -273,7 +276,7 @@
             customSearchLookUpEditGrupN.Properties.Appearance.Options.UseBackColor = true;
             customSearchLookUpEditGrupN.Properties.Appearance.Options.UseFont = true;
             customSearchLookUpEditGrupN.Properties.Appearance.Options.UseForeColor = true;
-            customSearchLookUpEditGrupN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customSearchLookUpEditGrupN.Properties.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
             customSearchLookUpEditGrupN.Properties.DataSource = _bsGrupForNabor;
             customSearchLookUpEditGrupN.Properties.DisplayMember = "Ag_name_sokr";
             customSearchLookUpEditGrupN.Properties.NullText = "";
@@ -353,7 +356,7 @@
             customSearchLookUpEditGostN.Properties.Appearance.Options.UseBackColor = true;
             customSearchLookUpEditGostN.Properties.Appearance.Options.UseFont = true;
             customSearchLookUpEditGostN.Properties.Appearance.Options.UseForeColor = true;
-            customSearchLookUpEditGostN.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customSearchLookUpEditGostN.Properties.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
             customSearchLookUpEditGostN.Properties.DataSource = _bsGostForNabor;
             customSearchLookUpEditGostN.Properties.DisplayMember = "Name_gost";
             customSearchLookUpEditGostN.Properties.NullText = "";
@@ -551,7 +554,7 @@
             // repositoryItemSearchLookUpEditGost
             // 
             repositoryItemSearchLookUpEditGost.AutoHeight = false;
-            repositoryItemSearchLookUpEditGost.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemSearchLookUpEditGost.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEditGost.DataSource = _bsGostForSostav;
             repositoryItemSearchLookUpEditGost.DisplayMember = "Id_gost";
             repositoryItemSearchLookUpEditGost.Name = "repositoryItemSearchLookUpEditGost";
@@ -574,6 +577,17 @@
             repositoryItemSearchLookUpEditGostView.OptionsCustomization.AllowFilter = false;
             repositoryItemSearchLookUpEditGostView.OptionsCustomization.AllowGroup = false;
             repositoryItemSearchLookUpEditGostView.OptionsCustomization.AllowSort = false;
+            repositoryItemSearchLookUpEditGostView.OptionsFilter.AllowFilterEditor = false;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.AllowFindInExpandedDetails = DevExpress.Utils.DefaultBoolean.False;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.AllowFindPanel = false;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.ClearFindOnClose = false;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.FindDelay = 100;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.FindFilterColumns = "";
+            repositoryItemSearchLookUpEditGostView.OptionsFind.FindNullPrompt = "";
+            repositoryItemSearchLookUpEditGostView.OptionsFind.ShowClearButton = false;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.ShowCloseButton = false;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.ShowFindButton = false;
+            repositoryItemSearchLookUpEditGostView.OptionsFind.ShowSearchNavButtons = false;
             repositoryItemSearchLookUpEditGostView.OptionsMenu.EnableColumnMenu = false;
             repositoryItemSearchLookUpEditGostView.OptionsMenu.EnableFooterMenu = false;
             repositoryItemSearchLookUpEditGostView.OptionsMenu.EnableGroupPanelMenu = false;
@@ -644,7 +658,7 @@
             // repositoryItemSearchLookUpEditGrup
             // 
             repositoryItemSearchLookUpEditGrup.AutoHeight = false;
-            repositoryItemSearchLookUpEditGrup.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemSearchLookUpEditGrup.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
             repositoryItemSearchLookUpEditGrup.DataSource = _bsGrupForSostav;
             repositoryItemSearchLookUpEditGrup.DisplayMember = "N_i";
             repositoryItemSearchLookUpEditGrup.Name = "repositoryItemSearchLookUpEditGrup";
@@ -663,7 +677,14 @@
             repositoryItemSearchLookUpEditGrupView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn1, gridColumn2, colAg_name_sokr, colAg_tnved, gridColumn3, colN_g, gridColumn15 });
             repositoryItemSearchLookUpEditGrupView.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             repositoryItemSearchLookUpEditGrupView.Name = "repositoryItemSearchLookUpEditGrupView";
+            repositoryItemSearchLookUpEditGrupView.OptionsCustomization.AllowFilter = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsCustomization.AllowGroup = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsCustomization.AllowSort = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsMenu.EnableColumnMenu = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsMenu.EnableFooterMenu = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsMenu.EnableGroupPanelMenu = false;
             repositoryItemSearchLookUpEditGrupView.OptionsSelection.EnableAppearanceFocusedCell = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             repositoryItemSearchLookUpEditGrupView.OptionsView.ShowGroupPanel = false;
             repositoryItemSearchLookUpEditGrupView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colN_g, DevExpress.Data.ColumnSortOrder.Descending) });
             // 
@@ -741,6 +762,7 @@
             colRazm1.FieldName = "Razm";
             colRazm1.MinWidth = 70;
             colRazm1.Name = "colRazm1";
+            colRazm1.OptionsColumn.ReadOnly = true;
             colRazm1.Visible = true;
             colRazm1.Width = 70;
             // 
@@ -775,6 +797,7 @@
             customTextBoxGrupN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxGrupN_Old.Location = new System.Drawing.Point(117, 94);
             customTextBoxGrupN_Old.Name = "customTextBoxGrupN_Old";
+            customTextBoxGrupN_Old.ReadOnly = true;
             customTextBoxGrupN_Old.Size = new System.Drawing.Size(193, 20);
             customTextBoxGrupN_Old.TabIndex = 10;
             // 
@@ -788,6 +811,7 @@
             customTextBoxGostN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxGostN_Old.Location = new System.Drawing.Point(117, 70);
             customTextBoxGostN_Old.Name = "customTextBoxGostN_Old";
+            customTextBoxGostN_Old.ReadOnly = true;
             customTextBoxGostN_Old.Size = new System.Drawing.Size(193, 20);
             customTextBoxGostN_Old.TabIndex = 9;
             // 
@@ -801,6 +825,7 @@
             customTextBoxArtN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxArtN_Old.Location = new System.Drawing.Point(117, 46);
             customTextBoxArtN_Old.Name = "customTextBoxArtN_Old";
+            customTextBoxArtN_Old.ReadOnly = true;
             customTextBoxArtN_Old.Size = new System.Drawing.Size(193, 20);
             customTextBoxArtN_Old.TabIndex = 8;
             // 
@@ -1045,8 +1070,8 @@
             customLookUpEditAg_id.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditAg_id.Properties.Appearance.Options.UseFont = true;
             customLookUpEditAg_id.Properties.Appearance.Options.UseForeColor = true;
-            customLookUpEditAg_id.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            customLookUpEditAg_id.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id_gost", "Номер", 46, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Ag_id", "Ид", 36, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Ag_tnved", "Тнвед", 25, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("N_i", "Название", 50, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("N_g", "Пол", 25, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
+            customLookUpEditAg_id.Properties.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
+            customLookUpEditAg_id.Properties.Columns.AddRange(new LookUpColumnInfo[] { new LookUpColumnInfo("Id_gost", "Номер", 46, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("Ag_id", "Ид", 36, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("Ag_tnved", "Тнвед", 25, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("N_i", "Название", 50, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("N_g", "Пол", 25, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
             customLookUpEditAg_id.Properties.DataSource = _bsGrupForSostav;
             customLookUpEditAg_id.Properties.DisplayMember = "N_i";
             customLookUpEditAg_id.Properties.NullText = "Пусто";
@@ -1066,8 +1091,8 @@
             customLookUpEditGost.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditGost.Properties.Appearance.Options.UseFont = true;
             customLookUpEditGost.Properties.Appearance.Options.UseForeColor = true;
-            customLookUpEditGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            customLookUpEditGost.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id_gost", "Номер", 46, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name_gost", "Название", 63, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Opi_gost", "Описание", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
+            customLookUpEditGost.Properties.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
+            customLookUpEditGost.Properties.Columns.AddRange(new LookUpColumnInfo[] { new LookUpColumnInfo("Id_gost", "Номер", 46, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("Name_gost", "Название", 63, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("Opi_gost", "Описание", 52, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
             customLookUpEditGost.Properties.DataSource = _bsGostForSostav;
             customLookUpEditGost.Properties.DisplayMember = "Name_gost";
             customLookUpEditGost.Properties.NullText = "Пусто";
@@ -1087,8 +1112,8 @@
             customLookUpEditT_v_n.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditT_v_n.Properties.Appearance.Options.UseFont = true;
             customLookUpEditT_v_n.Properties.Appearance.Options.UseForeColor = true;
-            customLookUpEditT_v_n.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            customLookUpEditT_v_n.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TK_ID", "Ид", 38, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TK_NAME", "Верх/низ", 55, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Men", "Men", 29, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
+            customLookUpEditT_v_n.Properties.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
+            customLookUpEditT_v_n.Properties.Columns.AddRange(new LookUpColumnInfo[] { new LookUpColumnInfo("TK_ID", "Ид", 38, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("TK_NAME", "Верх/низ", 55, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("Men", "Men", 29, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
             customLookUpEditT_v_n.Properties.DataSource = tvnModelBindingSource;
             customLookUpEditT_v_n.Properties.DisplayMember = "TK_NAME";
             customLookUpEditT_v_n.Properties.NullText = "Пусто";
@@ -1112,8 +1137,8 @@
             customLookUpEditAssort.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditAssort.Properties.Appearance.Options.UseFont = true;
             customLookUpEditAssort.Properties.Appearance.Options.UseForeColor = true;
-            customLookUpEditAssort.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            customLookUpEditAssort.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("kod_v", "Код", 38, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("txt_v", "Ассортимент", 35, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
+            customLookUpEditAssort.Properties.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Combo) });
+            customLookUpEditAssort.Properties.Columns.AddRange(new LookUpColumnInfo[] { new LookUpColumnInfo("kod_v", "Код", 38, DevExpress.Utils.FormatType.Numeric, "", false, DevExpress.Utils.HorzAlignment.Far, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new LookUpColumnInfo("txt_v", "Ассортимент", 35, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Near, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default) });
             customLookUpEditAssort.Properties.DataSource = assortModelBindingSource;
             customLookUpEditAssort.Properties.DisplayMember = "txt_v";
             customLookUpEditAssort.Properties.NullText = "Пусто";

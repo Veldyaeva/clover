@@ -35,9 +35,11 @@ namespace SewingProduction.Features.Articul.Forms
         }
         public EditNaborSostav(UserClass user, ArticulModel Obj) : base(user)
         {
-            InitializeComponent();
             articulNabor = Obj;
+            InitializeComponent();
+            DisableSearchForGroupEditor();
         }
+        #region Загрузка формы
         private async void customGridControl1_Load(object sender, EventArgs e)
         {
             await LoadNabor();
@@ -49,14 +51,23 @@ namespace SewingProduction.Features.Articul.Forms
             ArticulNaborColumnsOld();
             SetupSearchLookUpEditGost();
         }
-        #region Загрузка формы
+        private void DisableSearchForGroupEditor()
+        {
+            repositoryItemSearchLookUpEditGrupView.OptionsFind.AlwaysVisible = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsFind.ShowFindButton = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsFind.ClearFindOnClose = true;
+            repositoryItemSearchLookUpEditGrupView.OptionsFind.FindNullPrompt = "";
+            repositoryItemSearchLookUpEditGrupView.OptionsView.ShowAutoFilterRow = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsCustomization.AllowFilter = false;
+            repositoryItemSearchLookUpEditGrupView.OptionsFilter.AllowFilterEditor = false;
+        }
         private async Task LoadNabor()
         {
             articulNabor = await _articulDataService.GetArtByKodAsync(articulNabor.Kod);
             assortModelBindingSource.DataSource = await _ANSDataService.GetAssortAsync();
             tvnModelBindingSource.DataSource = await _ANSDataService.GetTvnAsync();
 
-            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync();
+            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync(articulNabor.Id_gost, articulNabor.Kod);
 
             _bsGrupForNabor.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { articulNabor.Id_gost }, 3);
 
@@ -233,6 +244,7 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                 }
             });
+            await ApplyRazmByGostAsync(idGostNabor);
         }
         #endregion
 
@@ -575,6 +587,52 @@ namespace SewingProduction.Features.Articul.Forms
         }
 
         #endregion
+
+        #region Размеры по ГОСТу
+
+        private async Task ApplyRazmByGostAsync(int idGostNabor)
+        {
+            // Загружаем размерную сетку по новому ГОСТу
+            var razmers = await _ANSDataService.GetGostRazmerSostAsync(idGostNabor);
+            if (razmers == null || razmers.Count == 0) return;
+
+            var view = GridViewNabor;
+
+            WithGridViewUpdate(v =>
+            {
+                for (int i = 0; i < v.DataRowCount; i++)
+                {
+                    var row = v.GetRow(i) as SpArticulNaborSostav;
+                    if (row == null) continue;
+
+                    // новый gost уже проставлен AutoApplyIdGostAfterChangingNabor
+                    int newGost = row.Id_gost;
+                    int id_razm_nab = row.Id_razm_nab;
+
+                    // ищем подходящий размер
+                    var match = razmers.FirstOrDefault(r =>
+                           r.Id_gost == newGost
+                        && r.Id_razmer == id_razm_nab);
+
+                    if (match != null)
+                    {
+                        row.Razm = match.Razm;
+                        v.SetRowCellValue(i, "Razm", match.Razm);
+                    }
+                    else
+                    {
+                        // если подходящего размера нет — очищаем
+                        row.Razm = null;
+                        v.SetRowCellValue(i, "Razm", DBNull.Value);
+                    }
+                }
+            });
+        }
+
+
+        #endregion
+
+
         #region Обработчики кнопок
         private void customButtonSaveNabor_Click(object sender, EventArgs e)
         {

@@ -36,4 +36,11 @@ namespace SewingProduction.Core.Models
         public string N_g { get; set; } //gost_vid_cheloveka.name_vid
         public int Tk_id { get; set; }
     }
+    public class GostRazmerNabViewModel
+    {
+        public int Id_razmer { get; set; }
+        public string Razm { get; set; }
+        public int Id_gost { get; set; }
+        public int Id_gost_parent { get; set; }
+    }
 }
