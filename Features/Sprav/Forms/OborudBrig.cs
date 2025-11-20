@@ -65,6 +65,12 @@ namespace SewingProduction.form
         // Выбор цеха в таблице цехов:
         private void gridZeh_Click(object sender, EventArgs e)
         {
+            gridViewZeh_FocusedRowChanged(sender, null);
+            //gridBrig_Load(sender, e);
+            //gridOborud_Load(sender, e);
+        }
+        private void gridViewZeh_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
             gridBrig_Load(sender, e);
             gridOborud_Load(sender, e);
         }
@@ -81,7 +87,12 @@ namespace SewingProduction.form
             bindingZeh.DataSource = _oborudBrigDataService.GetZehListFromOborudBrig();
             GridView gridView = gridZeh.MainView as GridView;
             gridView.OptionsBehavior.Editable = false;
+            gridView.OptionsBehavior.ReadOnly = true;
             gridView.BestFitColumns();
+
+            gridView.Columns["Цех"].OptionsColumn.ReadOnly = true;
+            gridView.Columns["Вид производства"].OptionsColumn.ReadOnly = true;
+            gridView.Columns["Адрес"].OptionsColumn.ReadOnly = true;
         }
         /// <summary>
         /// Таблица бригад:
@@ -121,6 +132,10 @@ namespace SewingProduction.form
                 bindingOborud.DataSource = _oborudBrigDataService.GetSpOborudShv(getVid, getCount, getZeh);
                 gridView.BestFitColumns();
 
+                gridView.Columns["Оборудование"].OptionsColumn.ReadOnly = true;
+                gridView.Columns["Кол-во"].OptionsColumn.ReadOnly = false;
+                gridView.Columns["Вид"].OptionsColumn.ReadOnly = true;
+
                 int rowHandle = gridView.LocateByValue("Оборудование", currentOb);
                 if (rowHandle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
                 {
@@ -155,17 +170,6 @@ namespace SewingProduction.form
         /// </summary>
         private void labelZeh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //foreach (Form child in this.MdiParent.MdiChildren)
-            //{
-            //    if (child is SpravZeh)
-            //    {
-            //        child.BringToFront();
-            //        return;
-            //    }
-            //}
-            //SpravZeh f = new SpravZeh(_user, "ZehList", "Справочник Цехов");
-            //f.MdiParent = this.MdiParent;
-            //f.Show();
             if (this.MdiParent is SpMainForm mainForm)
             {
                 mainForm.OpenForm(new SpravZeh(_user, "ZehList", "Справочник Цехов"), "цехаToolStripMenuItem");
@@ -177,19 +181,6 @@ namespace SewingProduction.form
         /// </summary>
         private void linkLabelBrig_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //foreach (Form child in this.MdiParent.MdiChildren)
-            //{
-            //    if (child is SpravBrig)
-            //    {
-            //        // Если форма уже открыта, переключаем на нее
-            //        child.BringToFront();
-            //        return;
-            //    }
-            //}
-            //// Если форма не открыта, создаем новую
-            //SpravBrig f = new SpravBrig(_user, "spBrig", "Справочник Бригад");
-            //f.MdiParent = this.MdiParent;
-            //f.Show();
             if (this.MdiParent is SpMainForm mainForm)
             {
                 mainForm.OpenForm(new SpravBrig(_user, "spBrig", "Справочник Бригад"), "бригадыToolStripMenuItem");

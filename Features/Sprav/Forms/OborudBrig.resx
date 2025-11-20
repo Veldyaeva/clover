@@ -129,6 +129,9 @@
     <value>4, 3, 4, 3</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="gridBrig.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
   <data name="gridBrig.Location" type="System.Drawing.Point, System.Drawing">
     <value>407, 22</value>
   </data>
@@ -152,7 +155,7 @@
     <value>gridBrig</value>
   </data>
   <data name="&gt;&gt;gridBrig.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>SewingProduction.Core.Class.CustomGridControl, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gridBrig.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -168,6 +171,9 @@
   </data>
   <data name="gridZeh.EmbeddedNavigator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
+  </data>
+  <data name="gridZeh.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
   </data>
   <data name="gridZeh.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -191,7 +197,7 @@
     <value>gridZeh</value>
   </data>
   <data name="&gt;&gt;gridZeh.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>SewingProduction.Core.Class.CustomGridControl, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gridZeh.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -207,6 +213,9 @@
   </data>
   <data name="gridOborud.EmbeddedNavigator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
+  </data>
+  <data name="gridOborud.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
   </data>
   <data name="gridOborud.Location" type="System.Drawing.Point, System.Drawing">
     <value>675, 22</value>
@@ -230,7 +239,7 @@
     <value>gridOborud</value>
   </data>
   <data name="&gt;&gt;gridOborud.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>SewingProduction.Core.Class.CustomGridControl, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gridOborud.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -254,13 +263,13 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>580, 19</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
-    <value>Кол-во оборудования в цехе:</value>
+    <value>Кол-во оборудования в цехе:                 🖱 Двойной щелчок для редактирования </value>
   </data>
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
