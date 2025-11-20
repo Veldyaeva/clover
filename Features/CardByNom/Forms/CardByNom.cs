@@ -123,6 +123,11 @@ namespace SewingProduction
         private BindingList<NastilGroupView> _nastilGroupViewBindingList;
         private BindingSource _nastilGroupViewBindingSource;
 
+        private List<NaklArticulSebZList> _currentSebZListData = new List<NaklArticulSebZList>();
+        private List<NaklArticulSebZList> sebZListData = new List<NaklArticulSebZList>();
+        private BindingList<NaklArticulSebZList> _sebZListBindingList;
+        private BindingSource _sebZListBindingSource;
+
         public CardByNom(UserClass user) : base(user)
         {
 
@@ -250,13 +255,19 @@ namespace SewingProduction
                     _nastilGroupViewBindingList = new BindingList<NastilGroupView>();
                     _nastilGroupViewBindingSource = new BindingSource { DataSource = _nastilGroupViewBindingList };
                 });
+                var sebZListTask = Task.Run(() =>
+                {
+                    _sebZListBindingList = new BindingList<NaklArticulSebZList>();
+                    _sebZListBindingSource = new BindingSource { DataSource = _sebZListBindingList };
+                });
                 await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, chipInfoByNomZadTask, historyRazdelNaklViewByIzTask
                         , furnitZayavCheckByPachKodTask, planSezonOtdelkaViewByPachKodTask, proizvCombIzdSPByPachKodTask
                         , proizvCombIzdVZPByPachKodTask
                         , sockZadanySmenListTask, sockKnitZadanyInfoTask, sockServiceListTask
                         , sockMachiheDownTimeListTask, sockDefectListTask
                         , articulTask
-                        , nastilTask, nastilGroupViewTask);
+                        , nastilTask, nastilGroupViewTask
+                        , sebZListTask);
                 //await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, historyRazdelNaklViewByIzTask);
 
                 //_currentRasInfoData = new RasInfoByPachKod();
@@ -1650,15 +1661,62 @@ namespace SewingProduction
             }
 
         }
-        private void PrintNakl()
+        private async Task PrintNakl()
         {
             //string iz = GetIzNakl();
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            Task sebZList = LoadSebZListDataAsync(selectedRow.Iz);
+            await Task.WhenAll(sebZList);
+            if (_sebZListBindingSource.Count > 0)
+            {
+                MessageBox.Show("В накладной есть артикулы с не просчитанной ЗП! Печать запрещена.");
+                return;
+            }
             NaklReport report1 = new NaklReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_naklIz"].Value = selectedRow.Iz;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
+        }
+
+        private async Task LoadSebZListDataAsync(string _xIz)
+        {
+            try
+            {
+                _sebZListBindingSource.Clear();
+                _sebZListBindingSource.ResetBindings(false);
+                string xQ = $"SELECT nr.iz, nr.kod, nr.grup, nr.articul, nr.mod, nr.razm, ISNULL(sa.sum_zarpl,0) + ISNULL(sa.sum_dopopl,0) + ISNULL(sa.sum_strvznos,0) AS sumZP " +
+                    $"FROM nakl_ras nr " +
+                    $"  LEFT JOIN sp_articul sa ON nr.kod = sa.kod " +
+                    $"WHERE nr.iz = '{_xIz}' " +
+                    $"  and ISNULL(sa.sum_zarpl,0) + ISNULL(sa.sum_dopopl,0) + ISNULL(sa.sum_strvznos,0) = 0 " +
+                    $"GROUP BY nr.iz, nr.kod, nr.grup, nr.articul, nr.mod, nr.razm, ISNULL(sa.sum_zarpl,0) + ISNULL(sa.sum_dopopl,0) + ISNULL(sa.sum_strvznos,0)";
+                sebZListData = await _dbService.GetListAsync<NaklArticulSebZList>(xQ, new { });
+                if (sebZListData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные SebZList", "LoadSebZListDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        //_currentRasInfoData = rasInfoData;                // Обновляем текущую модель
+                        //_rasInfoByPachKodBindingSource.DataSource = _currentRasInfoData; // Привязываем данные к форме
+                        _currentSebZListData = sebZListData;                // Обновляем текущую модель
+                        _sebZListBindingSource.DataSource = _currentSebZListData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные SebZList успешно загружены", "LoadSebZListDataAsync");
+                    //RasCard.Enabled = true ;
+                    _sebZListBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные SebZList", "LoadSebZListDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ArtSebZListicul");
+            }
         }
         private void btnPrintMLRTAll_Click(object sender, EventArgs e)
         {
