@@ -249,7 +249,10 @@ namespace SewingProduction.form
             // customTextBoxInn
             // 
             customTextBoxInn.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxInn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxInn.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxInn.ErrorColor = System.Drawing.Color.Red;
+            customTextBoxInn.ErrorMessage = null;
             customTextBoxInn.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxInn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxInn.Location = new System.Drawing.Point(4, 73);
@@ -1123,7 +1126,10 @@ namespace SewingProduction.form
             // customTextBoxPechSHK1
             // 
             customTextBoxPechSHK1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxPechSHK1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPechSHK1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxPechSHK1.ErrorColor = System.Drawing.Color.Red;
+            customTextBoxPechSHK1.ErrorMessage = null;
             customTextBoxPechSHK1.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxPechSHK1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPechSHK1.Location = new System.Drawing.Point(4, 103);
@@ -1229,7 +1235,10 @@ namespace SewingProduction.form
             // customTextBoxPechTab
             // 
             customTextBoxPechTab.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxPechTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPechTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxPechTab.ErrorColor = System.Drawing.Color.Red;
+            customTextBoxPechTab.ErrorMessage = null;
             customTextBoxPechTab.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxPechTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPechTab.Location = new System.Drawing.Point(4, 30);
@@ -1241,7 +1250,10 @@ namespace SewingProduction.form
             // customTextBoxPechSHK2
             // 
             customTextBoxPechSHK2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxPechSHK2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPechSHK2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxPechSHK2.ErrorColor = System.Drawing.Color.Red;
+            customTextBoxPechSHK2.ErrorMessage = null;
             customTextBoxPechSHK2.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxPechSHK2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPechSHK2.Location = new System.Drawing.Point(4, 103);

@@ -279,6 +279,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Features\Sprav\Forms\Fio.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
