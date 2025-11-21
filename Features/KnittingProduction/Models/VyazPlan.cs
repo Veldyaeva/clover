@@ -271,7 +271,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
             }
         [NotMapped] public int olKolCopy { get; set; }
         [NotMapped] public int olPzvRKol { get; set; }
-        [NotMapped] public int olPzvNChasi { get; set; }
+        [NotMapped] public decimal olPzvNChasi { get; set; }
         [NotMapped] public string olKmlNumber { get; set; }
         [NotMapped] public DateTime? olPzvDateNaznKm { get; set; }
         [NotMapped] public int olPzvTab { get; set; }

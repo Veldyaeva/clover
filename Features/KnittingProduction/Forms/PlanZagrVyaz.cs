@@ -383,6 +383,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnRzvPachListByNomKol.FieldName = "kol";
                 gridColumnRzvPachListByNomGradacia.FieldName = "gradacia";
                 gridColumnRzvPachListByNomSyncSelection.FieldName = "SyncSelection";
+
+                //gridViewRzvPachListByNom.ShowingEditor += (s, e) =>
+                //{
+                //    var view = (GridView)s;
+                //    // если колонка gridColumnRzvPachListByNomGradacia редактировать запрещена:
+                //    if (view.FocusedColumn == gridColumnRzvPachListByNomGradacia &&
+                //        gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly)
+                //    {
+                //        e.Cancel = true; // запретить редактирование
+                //        MessageBox.Show("Внимание! Технологом не была определена необходимость градации - нельзя проставить признак градации на пачку!");
+                //    }
+                //};
                 #endregion
 
                 #region описание gridControlSmenZadanyVyazMachine "сменное задание по машинам"
@@ -527,16 +539,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewPZVOperList.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
                 gridColumnPZVOperListOlNPach.OptionsColumn.AllowSort = DefaultBoolean.False;
 
-                //gridColumnPZVOperListSyncSelection.OptionsColumn.AllowEdit = true;
-
                 gridViewPZVOperList.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
-                // или
-                // gridViewPZVOperList.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.AllowEdit = true;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.ReadOnly = false;
-
-
-                //AutoRowFilterConfigForm(gridViewPZVOperList as GridView);
                 #endregion
 
                 #region описание блока Информация по операции
@@ -955,38 +960,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async Task LoadPlanZagrVyazByZadanySelection()
         {
-            #region
-            //// Фильтруем записи где syncSelection = 1
-            //var filteredRecords = _rzvPachListByNomBindingSource.Cast<object>()
-            //    .Where(item =>
-            //    {
-            //        var property = item.GetType().GetProperty("SyncSelection");
-            //        return property != null && Convert.ToInt32(property.GetValue(item)) == 1;
-            //    })
-            //    .ToList();
-
-            //// Преобразуем в JSON
-            //string jsonString = JsonConvert.SerializeObject(filteredRecords, Formatting.Indented);
-            ////MessageBox.Show(jsonString);
-
-            //await LoadPZVOperListByPachListNewDataAsync(jsonString, vyazPodrKod);
-
-            //// для добавления выбираем только те записи, которые еще в текущем сеансе работы не загружались в _pZVOperListByPachListBindingSource
-            //var missingRecords = _pZVOperListByPachListNewBindingSource.List.Cast<dynamic>()
-            //    .Where(newRec => newRec != null &&
-            //           !_pZVOperListByPachListBindingSource.List.Cast<dynamic>()
-            //            .Where(oldRec => oldRec != null)
-            //            .Any(oldRec => oldRec.olPzvID == newRec.olPzvID))
-            //    .ToList();
-            //foreach (var record in missingRecords)
-            //{
-            //    //// Добавляем строку данных
-            //    _pZVOperListByPachListBindingSource.Add(record);
-            //}
-            //_pZVOperListByPachListBindingSource.ResetBindings(false);
-            //gridViewPZVOperList.RefreshData();
-            //----------------------------------------------------
-            #endregion
             try
             {
                 // Фильтруем записи где syncSelection = 1
@@ -1180,7 +1153,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void gridViewRzvPachListByNom_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-
+            //var selectedRow = _zadanyListByMachineBindingSource.Current as ZadanyListByMachine;
+            //if (selectedRow != null)
+            //{
+            //    if (selectedRow.Gradacia != 1)
+            //    {
+            //        repositoryItemCheckEdit5.ReadOnly = true;
+            //    }
+            //    else
+            //    {
+            //        repositoryItemCheckEdit5.ReadOnly = false;
+            //    }
+            //}
+            //else
+            //{
+            //    await LoadPZVOperListByPachListNewDataAsync("", vyazPodrKod);
+            //}
         }
 
         private async void gridViewZadanyListByMachine_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
@@ -1191,6 +1179,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //MessageBox.Show(selectedRow.SyncSelection.ToString());
                 //MessageBox.Show(gridViewZadanyListByMachine.IsCellSelect.ToString());
                 await LoadRzvPachListByNomNewDataAsync(selectedRow.nom, selectedRow.pszNom);
+                if (selectedRow.Gradacia != 1)
+                {
+                    gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = true;
+                }
+                else
+                {
+                    gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = false;
+                }
             }
             else
             {
@@ -1985,7 +1981,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             KnittingMachineWorkAssignment();
         }
-        
+
         /// <summary>
         /// Отменить назначение по В/М по V для выбранных операций
         /// </summary>
@@ -2222,7 +2218,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         }
         //private async Task SaveAsync() { await LoadPlanZagrVyazByZadanySelection(); }
-        
+
         /// <summary>
         /// Подтвердить мастером по V для выбранных операций
         /// </summary>
@@ -2376,7 +2372,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
                 }
             }
-  
+
         }
         private void buttonMasterCancelConfirmation_Click(object sender, EventArgs e)
         {
@@ -2889,7 +2885,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         record.ErrorSelection = 1;
                         record.SyncSelection = 0;
                     }
-                    
+
                 }
             }
 
@@ -3142,6 +3138,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void buttonCancelWorkStopExecution_Click(object sender, EventArgs e)
         {
             CancelWorkStopExecution();
+        }
+
+        private void gridViewRzvPachListByNom_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            //GridView view = (GridView)sender;
+            // если колонка gridColumnRzvPachListByNomGradacia редактировать запрещена:
+            if (gridViewRzvPachListByNom.FocusedColumn == gridColumnRzvPachListByNomGradacia &&
+                gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly)
+            {
+                e.Cancel = true; // запретить редактирование
+                MessageBox.Show("Внимание! Технологом не проставлен признак градации - нельзя проставить градацию на пачку!");
+            }
+        }
+
+        private void gridViewRzvPachListByNom_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        {
+            //var view = (GridView)sender;
+            //// если колонка gridColumnRzvPachListByNomGradacia редактировать запрещена:
+            //if (view.FocusedColumn == gridColumnRzvPachListByNomGradacia &&
+            //    gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly)
+            //{
+            //    //a.Cancel = true; // запретить редактирование
+            //    MessageBox.Show("Внимание! Технологом не была определена необходимость градации - нельзя проставить признак градации на пачку!");
+            //}
         }
     }
 }
