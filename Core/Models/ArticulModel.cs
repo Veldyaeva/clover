@@ -107,7 +107,7 @@ namespace SewingProduction.Core.Models
         public decimal? Sek_vyaz10 { get; set; }
         public decimal? Sek_vyazo { get; set; }
         public decimal? Normapryz { get; set; }
-        public int? Id_gost { get; set; }
+        public int Id_gost { get; set; }
         public int? Id_svyaz { get; set; }
         public decimal? Koef_pr { get; set; }
         public decimal? Ob_izd { get; set; }

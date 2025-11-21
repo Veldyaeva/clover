@@ -225,18 +225,42 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
             }
         }
 
-        public async Task SplitPzvByFactAsync(int pzvId, int factQty)
+        public async Task<IReadOnlyList<int>> SplitPzvByFactAsync(int pzvId, int factQty)
         {
+            // Для режима уточнения факта (mode = 1) вызываем универсальную SP PZV_Split.
+            // @qty1 – фактическое количество, @userName можно не передавать (по умолчанию NULL).
             using (var connection = _dbHelper.GetConnection())
             {
-                // Ожидается наличие процедуры, создающей дополнительную запись с остатком.
-                // Если процедуры нет — реализуйте на стороне БД логику разделения.
-                const string sql = @"EXEC dbo.SplitPlanZagrVyazByFact @pzvId = @pzvId, @factQty = @factQty";
-              //  await connection.ExecuteAsync(sql, new { pzvId, factQty });
+                var parameters = new
+                {
+                    pzvId,
+                    mode = 1,
+                    qty1 = factQty,
+                    userName = (string)null
+                };
+                var ids = new List<int>();
+                using (var grid = await connection.QueryMultipleAsync(
+                    "dbo.PZV_Split",
+                    param: parameters,
+                    commandTimeout: 60,
+                    commandType: CommandType.StoredProcedure))
+                {
+                    // Первая выборка может содержать сводную строку ('FinishedWithFact' и т.п.) — читаем и отбрасываем
+                    if (!grid.IsConsumed)
+                    {
+                        try { await grid.ReadAsync(); } catch { /* ignore if no set */ }
+                    }
+                    // Вторая (или единственная) выборка — список новых Id (если были вставки)
+                    if (!grid.IsConsumed)
+                    {
+                        var newIds = await grid.ReadAsync<int>();
+                        ids.AddRange(newIds);
+                    }
+                }
+                return ids;
             }
         }
  
-        // Трансформационные хелперы перенесены в KnitterPlanUtils
 
     }
 }

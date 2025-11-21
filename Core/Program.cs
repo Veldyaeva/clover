@@ -85,7 +85,6 @@ namespace SewingProduction.Core
                 }
             }
         }
-
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<DatabaseHelper>();
