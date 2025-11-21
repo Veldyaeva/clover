@@ -462,7 +462,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
             string articul = view.GetRowCellValue(rowHandle, "Articul").ToString();
             int slogn = (int)view.GetRowCellValue(rowHandle, "Slogn");
-            if (slogn is 0)
+            bool hasKnittingOps = _normRaszListTW?.Any(r => r.annId == annId && r.KodPodr == 1) ?? false;
+            if (!hasKnittingOps && slogn is 0)
             { _ = MessageBox.Show("Сложность не может быть равна нулю."); return; }
             // Действие только если дата не задана
             if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
@@ -518,14 +519,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
 
                 // Отправляем сообщение в бригаду
-                await SendMsgToBrig(annId, $"Внимание! Схема разделения {art} была обновлена технологом, проверьте операции, прежде чем начать работу!");
+                //await SendMsgToBrig(annId, $"Внимание! Схема разделения {art} была обновлена технологом, проверьте операции, прежде чем начать работу!");
                 // 2) Считаем diff ПОСЛЕ всех апдейтов в БД
                 string diffText = await TryBuildApprovalDiffAsync(annId);
 
                 // 3) Формируем сообщение в бригаду (с diff, если он есть)
                 string msg = ComposeApprovalMessage(art, diffText);
-                MessageBox.Show(msg, "message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation);
-                //await SendMsgToBrig(annId, msg);
+              //  MessageBox.Show(msg, "message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation); // messageBox для теста
+                await SendMsgToBrig(annId, msg);
 
                 // 4) Обновляем UI
 

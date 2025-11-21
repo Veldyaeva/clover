@@ -508,10 +508,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _view.RefreshRowCell(rowHandle, bandedGridColumn22);
 
             // Если отвязано меньше запланированного — разделяем запись на “факт” и “остаток”
-            var plannedQty = currentRow?.pzvKolNazn ?? currentRow?.pzvKol ?? 0;
+            IReadOnlyList<int> newIds = Array.Empty<int>();
             if (qty < defaultQty && currentRow?.pzvID > 0)
             {
-                await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
+                newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
             }
 
             await ApplyPzvDateAsync(
@@ -540,6 +540,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         {
                             bandedGridView3.FocusedRowHandle = i;
                             bandedGridView3.SetMasterRowExpanded(i, true);
+                            // Если знаем новый pzvID — найдём строку во втором уровне и выделим её
+                            if (newIds != null && newIds.Count > 0)
+                            {
+                                var detailView = bandedGridView3.GetDetailView(i, 0) as DevExpress.XtraGrid.Views.Base.ColumnView;
+                                if (detailView != null)
+                                {
+                                    var targetId = newIds[0];
+                                    for (int r = 0; r < detailView.DataRowCount; r++)
+                                    {
+                                        if (detailView.GetRow(r) is KnitterPZVModel opRow && opRow.pzvID == targetId)
+                                        {
+                                            detailView.FocusedRowHandle = r;
+                                            if (detailView is GridView gvDetail)
+                                                gvDetail.MakeRowVisible(r, true);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
                             break;
                         }
                     }

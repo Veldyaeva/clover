@@ -16,7 +16,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod);
         Task<KnitterPZVModel> UpdatePzvDateStartAsync(int pzvId);
         Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId);
-        Task SplitPzvByFactAsync(int pzvId, int factQty);
+        Task<IReadOnlyList<int>> SplitPzvByFactAsync(int pzvId, int factQty);
     }
 }
 

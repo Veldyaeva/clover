@@ -1184,9 +1184,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         this.Invoke((MethodInvoker)(() =>
                         {
-                            textBoxBuffer.Text = $"группа: {annData.grup.TrimEnd(' ')}, \r" +
-                                                 $"модель: {annData.Mod.TrimEnd(' ')}, \r" +
-                                                 $"артикул: {annData.Articul.TrimEnd(' ')}";
+                            textBoxBuffer.Text = $"группа: {annData.grup.TrimEnd(' ') ?? ""}, \r" +
+                                                 $"модель: {annData.Mod.TrimEnd(' ') ?? ""}, \r" +
+                                                 $"артикул: {annData.Articul.TrimEnd(' ') ?? ""}";
                         }));
                     }
                 }
