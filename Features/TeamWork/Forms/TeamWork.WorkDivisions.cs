@@ -462,7 +462,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
             string articul = view.GetRowCellValue(rowHandle, "Articul").ToString();
             int slogn = (int)view.GetRowCellValue(rowHandle, "Slogn");
-            bool hasKnittingOps = _normRaszListTW?.Any(r => r.annId == annId && r.KodPodr == 1) ?? false;
+            bool hasKnittingOps = _normRaszListTW?.Any(r => r.annId == annId && (r.KodPodr == 1 || r.KodProizv == 3)) ?? false;
             if (!hasKnittingOps && slogn is 0)
             { _ = MessageBox.Show("Сложность не может быть равна нулю."); return; }
             // Действие только если дата не задана
