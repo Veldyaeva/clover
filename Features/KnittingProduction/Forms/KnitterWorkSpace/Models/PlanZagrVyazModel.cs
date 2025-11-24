@@ -134,5 +134,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
 
     }
 
-
+    public sealed class PzvSplitResult
+    {
+        public string Kind { get; set; }    // "Remainder", "Negative", "FinishedFact" и т.п.
+        public int NewPzvId { get; set; }   // Id новой (или исходной) строки
+    }
 }

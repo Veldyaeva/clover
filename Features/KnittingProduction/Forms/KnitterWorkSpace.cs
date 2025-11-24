@@ -508,7 +508,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _view.RefreshRowCell(rowHandle, bandedGridColumn22);
 
             // Если отвязано меньше запланированного — разделяем запись на “факт” и “остаток”
-            IReadOnlyList<int> newIds = Array.Empty<int>();
+            IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
             if (qty < defaultQty && currentRow?.pzvID > 0)
             {
                 newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
@@ -546,7 +546,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                 var detailView = bandedGridView3.GetDetailView(i, 0) as DevExpress.XtraGrid.Views.Base.ColumnView;
                                 if (detailView != null)
                                 {
-                                    var targetId = newIds[0];
+                                    var targetId = newIds[0].NewPzvId;
                                     for (int r = 0; r < detailView.DataRowCount; r++)
                                     {
                                         if (detailView.GetRow(r) is KnitterPZVModel opRow && opRow.pzvID == targetId)
@@ -638,7 +638,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void SetupIdleTimer()
         {
-            _idleTimer.Interval = 60000; // 1 минута = 60000 миллисекунд
+            _idleTimer.Interval = 600000000; // 1 минута = 60000 миллисекунд
             _idleTimer.Tick += IdleTimer_Tick;
 
             // Подписываемся на события активности для сброса таймера
