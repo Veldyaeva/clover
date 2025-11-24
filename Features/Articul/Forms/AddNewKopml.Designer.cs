@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -68,7 +69,6 @@
             countStr = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             RazmAllSelected = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            pictureBoxArticul = new System.Windows.Forms.PictureBox();
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             customLabelGrupKompl = new SewingProduction.Core.Class.CustomLabel();
             customButtonKompl = new SewingProduction.Core.Class.CustomButton();
@@ -89,12 +89,6 @@
             cle = new DevExpress.XtraGrid.Columns.GridColumn();
             kod_v = new DevExpress.XtraGrid.Columns.GridColumn();
             kodArt = new DevExpress.XtraGrid.Columns.GridColumn();
-            tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            customLabelArt = new SewingProduction.Core.Class.CustomLabel();
-            customLabelMod = new SewingProduction.Core.Class.CustomLabel();
-            customLabelArtText = new SewingProduction.Core.Class.CustomLabel();
-            customLabelModText = new SewingProduction.Core.Class.CustomLabel();
-            customLabelGrup = new SewingProduction.Core.Class.CustomHeaderLabel();
             tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             customGridControlKomplRazm = new SewingProduction.Core.Class.CustomGridControl();
             gridViewKomplRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -106,6 +100,7 @@
             cle1 = new DevExpress.XtraGrid.Columns.GridColumn();
             kod_v1 = new DevExpress.XtraGrid.Columns.GridColumn();
             grup1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            sost1 = new DevExpress.XtraGrid.Columns.GridColumn();
             pr_po = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEditViborRazm = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             RazmAll = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -116,6 +111,24 @@
             customNumericUpDownValueTab = new CustomNumericUpDown();
             customLabelKolTab = new SewingProduction.Core.Class.CustomLabel();
             customCheckBoxOdinak = new CustomCheckBox();
+            checkButtonAll = new DevExpress.XtraEditors.CheckButton();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelArtVib = new SewingProduction.Core.Class.CustomLabel();
+            customHeaderLabelGrupVib = new SewingProduction.Core.Class.CustomHeaderLabel();
+            customLabelModVib = new SewingProduction.Core.Class.CustomLabel();
+            customLabelArtTextVib = new SewingProduction.Core.Class.CustomLabel();
+            customLabelModTextVib = new SewingProduction.Core.Class.CustomLabel();
+            pictureBoxArticulVib = new System.Windows.Forms.PictureBox();
+            tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelArt = new SewingProduction.Core.Class.CustomLabel();
+            customHeaderLabelGrup = new SewingProduction.Core.Class.CustomHeaderLabel();
+            customLabelMod = new SewingProduction.Core.Class.CustomLabel();
+            customLabelArtText = new SewingProduction.Core.Class.CustomLabel();
+            customLabelModText = new SewingProduction.Core.Class.CustomLabel();
+            pictureBoxArticul = new System.Windows.Forms.PictureBox();
+            customRadioGroupVib = new SewingProduction.Core.Class.CustomRadioGroup();
+            behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(components);
             ((System.ComponentModel.ISupportInitialize)gridViewKomplKod).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlKompl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKompl).BeginInit();
@@ -124,20 +137,25 @@
             ((System.ComponentModel.ISupportInitialize)bandedGridViewSelected).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditDelRazm).BeginInit();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
             tableLayoutPanel5.SuspendLayout();
             tableLayoutPanel4.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditAddRazm).BeginInit();
-            tableLayoutPanel6.SuspendLayout();
             tableLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditViborRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customTabControlKomplRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customNumericUpDownValueTab).BeginInit();
+            tableLayoutPanel2.SuspendLayout();
+            tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxArticulVib).BeginInit();
+            tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroupVib.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)behaviorManager1).BeginInit();
             SuspendLayout();
             // 
             // gridViewKomplKod
@@ -204,10 +222,10 @@
             gridLevelNode1.LevelTemplate = gridViewKomplKod;
             gridLevelNode1.RelationName = "Коды";
             customGridControlKompl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
-            customGridControlKompl.Location = new System.Drawing.Point(3, 37);
+            customGridControlKompl.Location = new System.Drawing.Point(3, 34);
             customGridControlKompl.MainView = gridViewKompl;
             customGridControlKompl.Name = "customGridControlKompl";
-            customGridControlKompl.Size = new System.Drawing.Size(440, 347);
+            customGridControlKompl.Size = new System.Drawing.Size(440, 317);
             customGridControlKompl.TabIndex = 2;
             customGridControlKompl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKompl, gridViewKomplKod });
             // 
@@ -281,7 +299,7 @@
             customGridControlKomplSelected.MainView = bandedGridViewSelected;
             customGridControlKomplSelected.Name = "customGridControlKomplSelected";
             customGridControlKomplSelected.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemButtonEditDelRazm });
-            customGridControlKomplSelected.Size = new System.Drawing.Size(440, 245);
+            customGridControlKomplSelected.Size = new System.Drawing.Size(440, 240);
             customGridControlKomplSelected.TabIndex = 2;
             customGridControlKomplSelected.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridViewSelected, gridView1 });
             // 
@@ -387,36 +405,25 @@
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5892849F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.9107151F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.4107132F));
-            tableLayoutPanel1.Controls.Add(pictureBoxArticul, 0, 0);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 2, 2);
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.6139374F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.9374485F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.448616F));
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 2, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 2, 0);
-            tableLayoutPanel1.Controls.Add(customGridControlKomplArt, 0, 2);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel6, 0, 1);
+            tableLayoutPanel1.Controls.Add(customGridControlKomplArt, 0, 1);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel8, 1, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
+            tableLayoutPanel1.Controls.Add(customRadioGroupVib, 0, 3);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 4;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.4550819F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.6656847F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.1899834F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.541973F));
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.8356171F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.5753441F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.666667F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             tableLayoutPanel1.Size = new System.Drawing.Size(1120, 679);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // pictureBoxArticul
-            // 
-            pictureBoxArticul.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBoxArticul.Location = new System.Drawing.Point(4, 3);
-            pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            pictureBoxArticul.Name = "pictureBoxArticul";
-            pictureBoxArticul.Size = new System.Drawing.Size(301, 194);
-            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            pictureBoxArticul.TabIndex = 13;
-            pictureBoxArticul.TabStop = false;
             // 
             // tableLayoutPanel5
             // 
@@ -429,13 +436,13 @@
             tableLayoutPanel5.Controls.Add(customGridControlKompl, 0, 1);
             tableLayoutPanel5.Controls.Add(customButtonDelKompl, 2, 1);
             tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel5.Location = new System.Drawing.Point(647, 289);
+            tableLayoutPanel5.Location = new System.Drawing.Point(647, 284);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 1;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel5, 2);
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(470, 387);
+            tableLayoutPanel5.Size = new System.Drawing.Size(470, 354);
             tableLayoutPanel5.TabIndex = 7;
             // 
             // customLabelGrupKompl
@@ -446,7 +453,7 @@
             customLabelGrupKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelGrupKompl.Location = new System.Drawing.Point(3, 0);
             customLabelGrupKompl.Name = "customLabelGrupKompl";
-            customLabelGrupKompl.Size = new System.Drawing.Size(205, 34);
+            customLabelGrupKompl.Size = new System.Drawing.Size(205, 31);
             customLabelGrupKompl.TabIndex = 5;
             customLabelGrupKompl.Text = "Группа комплекта";
             customLabelGrupKompl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -459,7 +466,7 @@
             customButtonKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonKompl.Location = new System.Drawing.Point(214, 3);
             customButtonKompl.Name = "customButtonKompl";
-            customButtonKompl.Size = new System.Drawing.Size(229, 28);
+            customButtonKompl.Size = new System.Drawing.Size(229, 25);
             customButtonKompl.TabIndex = 3;
             customButtonKompl.Text = "Комплектовать";
             customButtonKompl.UseVisualStyleBackColor = false;
@@ -471,7 +478,7 @@
             customButtonDelKompl.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonDelKompl.Font = new System.Drawing.Font("Arial", 10F);
             customButtonDelKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonDelKompl.Location = new System.Drawing.Point(449, 37);
+            customButtonDelKompl.Location = new System.Drawing.Point(449, 34);
             customButtonDelKompl.MaximumSize = new System.Drawing.Size(25, 25);
             customButtonDelKompl.MinimumSize = new System.Drawing.Size(25, 25);
             customButtonDelKompl.Name = "customButtonDelKompl";
@@ -493,10 +500,9 @@
             tableLayoutPanel4.Location = new System.Drawing.Point(647, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 2;
-            tableLayoutPanel1.SetRowSpan(tableLayoutPanel4, 2);
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.75903F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.2409639F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(470, 280);
+            tableLayoutPanel4.Size = new System.Drawing.Size(470, 275);
             tableLayoutPanel4.TabIndex = 6;
             // 
             // customButtonDelKomplSelected
@@ -522,7 +528,7 @@
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel3.Controls.Add(customCheckBoxVerified, 1, 2);
             tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel3.Location = new System.Drawing.Point(3, 254);
+            tableLayoutPanel3.Location = new System.Drawing.Point(3, 249);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 3;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -549,12 +555,12 @@
             // 
             customGridControlKomplArt.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlKomplArt.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlKomplArt.Location = new System.Drawing.Point(3, 289);
+            customGridControlKomplArt.Location = new System.Drawing.Point(3, 284);
             customGridControlKomplArt.MainView = gridViewKomplArt;
             customGridControlKomplArt.Name = "customGridControlKomplArt";
             customGridControlKomplArt.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemButtonEditAddRazm });
             tableLayoutPanel1.SetRowSpan(customGridControlKomplArt, 2);
-            customGridControlKomplArt.Size = new System.Drawing.Size(303, 387);
+            customGridControlKomplArt.Size = new System.Drawing.Size(303, 354);
             customGridControlKomplArt.TabIndex = 8;
             customGridControlKomplArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplArt });
             customGridControlKomplArt.Load += customGridControlKomplArt_Load;
@@ -659,106 +665,12 @@
             kodArt.FieldName = "Kod";
             kodArt.Name = "kodArt";
             // 
-            // tableLayoutPanel6
-            // 
-            tableLayoutPanel6.ColumnCount = 5;
-            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.03314F));
-            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
-            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
-            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
-            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.86744452F));
-            tableLayoutPanel6.Controls.Add(customLabelArt, 0, 1);
-            tableLayoutPanel6.Controls.Add(customLabelMod, 0, 2);
-            tableLayoutPanel6.Controls.Add(customLabelArtText, 2, 1);
-            tableLayoutPanel6.Controls.Add(customLabelModText, 2, 2);
-            tableLayoutPanel6.Controls.Add(customLabelGrup, 0, 0);
-            tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel6.Location = new System.Drawing.Point(3, 203);
-            tableLayoutPanel6.Name = "tableLayoutPanel6";
-            tableLayoutPanel6.RowCount = 3;
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel6.Size = new System.Drawing.Size(303, 80);
-            tableLayoutPanel6.TabIndex = 10;
-            // 
-            // customLabelArt
-            // 
-            customLabelArt.AutoSize = true;
-            tableLayoutPanel6.SetColumnSpan(customLabelArt, 2);
-            customLabelArt.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelArt.Location = new System.Drawing.Point(3, 26);
-            customLabelArt.Name = "customLabelArt";
-            customLabelArt.Size = new System.Drawing.Size(132, 26);
-            customLabelArt.TabIndex = 0;
-            customLabelArt.Text = "Артикул";
-            customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customLabelMod
-            // 
-            customLabelMod.AutoSize = true;
-            tableLayoutPanel6.SetColumnSpan(customLabelMod, 2);
-            customLabelMod.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelMod.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelMod.Location = new System.Drawing.Point(3, 52);
-            customLabelMod.Name = "customLabelMod";
-            customLabelMod.Size = new System.Drawing.Size(132, 28);
-            customLabelMod.TabIndex = 1;
-            customLabelMod.Text = "Модель";
-            customLabelMod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customLabelArtText
-            // 
-            customLabelArtText.AutoSize = true;
-            tableLayoutPanel6.SetColumnSpan(customLabelArtText, 3);
-            customLabelArtText.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelArtText.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelArtText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelArtText.Location = new System.Drawing.Point(141, 26);
-            customLabelArtText.Name = "customLabelArtText";
-            customLabelArtText.Size = new System.Drawing.Size(159, 26);
-            customLabelArtText.TabIndex = 0;
-            customLabelArtText.Text = "Артикул_Текст";
-            customLabelArtText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customLabelModText
-            // 
-            customLabelModText.AutoSize = true;
-            tableLayoutPanel6.SetColumnSpan(customLabelModText, 3);
-            customLabelModText.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelModText.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelModText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelModText.Location = new System.Drawing.Point(141, 52);
-            customLabelModText.Name = "customLabelModText";
-            customLabelModText.Size = new System.Drawing.Size(159, 28);
-            customLabelModText.TabIndex = 1;
-            customLabelModText.Text = "Модель_Текст";
-            customLabelModText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customLabelGrup
-            // 
-            customLabelGrup.AutoSize = true;
-            tableLayoutPanel6.SetColumnSpan(customLabelGrup, 5);
-            customLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelGrup.Location = new System.Drawing.Point(3, 0);
-            customLabelGrup.Name = "customLabelGrup";
-            customLabelGrup.Size = new System.Drawing.Size(297, 26);
-            customLabelGrup.TabIndex = 2;
-            customLabelGrup.Text = "Группа";
-            customLabelGrup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // tableLayoutPanel8
             // 
-            tableLayoutPanel8.ColumnCount = 2;
+            tableLayoutPanel8.ColumnCount = 3;
             tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
+            tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17F));
             tableLayoutPanel8.Controls.Add(customGridControlKomplRazm, 0, 3);
             tableLayoutPanel8.Controls.Add(customButtonBack, 0, 6);
             tableLayoutPanel8.Controls.Add(customButtonNext, 1, 6);
@@ -767,6 +679,7 @@
             tableLayoutPanel8.Controls.Add(customNumericUpDownValueTab, 1, 2);
             tableLayoutPanel8.Controls.Add(customLabelKolTab, 0, 2);
             tableLayoutPanel8.Controls.Add(customCheckBoxOdinak, 1, 0);
+            tableLayoutPanel8.Controls.Add(checkButtonAll, 2, 2);
             tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel8.Location = new System.Drawing.Point(312, 3);
             tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -779,13 +692,12 @@
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.5578423F));
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel8.Size = new System.Drawing.Size(329, 673);
             tableLayoutPanel8.TabIndex = 12;
             // 
             // customGridControlKomplRazm
             // 
-            tableLayoutPanel8.SetColumnSpan(customGridControlKomplRazm, 2);
+            tableLayoutPanel8.SetColumnSpan(customGridControlKomplRazm, 3);
             customGridControlKomplRazm.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlKomplRazm.Font = new System.Drawing.Font("Arial", 10F);
             customGridControlKomplRazm.Location = new System.Drawing.Point(3, 58);
@@ -804,12 +716,11 @@
             gridViewKomplRazm.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewKomplRazm.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKomplRazm.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewKomplRazm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ArticulRazm, ModRazm, KodKRazm, RazmRazm, frm_s1, cle1, kod_v1, grup1, pr_po, RazmAll });
+            gridViewKomplRazm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ArticulRazm, ModRazm, KodKRazm, RazmRazm, frm_s1, cle1, kod_v1, grup1, sost1, pr_po, RazmAll });
             gridViewKomplRazm.GridControl = customGridControlKomplRazm;
             gridViewKomplRazm.Name = "gridViewKomplRazm";
-            gridViewKomplRazm.OptionsView.EnableAppearanceEvenRow = true;
             gridViewKomplRazm.OptionsView.ShowGroupPanel = false;
-            gridViewKomplRazm.FocusedRowChanged += gridViewKomplArt_FocusedRowChanged;
+            gridViewKomplRazm.FocusedRowChanged += gridViewKomplRazm_FocusedRowChanged;
             // 
             // ArticulRazm
             // 
@@ -819,6 +730,7 @@
             ArticulRazm.OptionsColumn.AllowEdit = false;
             ArticulRazm.Visible = true;
             ArticulRazm.VisibleIndex = 0;
+            ArticulRazm.Width = 49;
             // 
             // ModRazm
             // 
@@ -828,6 +740,7 @@
             ModRazm.OptionsColumn.AllowEdit = false;
             ModRazm.Visible = true;
             ModRazm.VisibleIndex = 1;
+            ModRazm.Width = 49;
             // 
             // KodKRazm
             // 
@@ -837,6 +750,7 @@
             KodKRazm.OptionsColumn.AllowEdit = false;
             KodKRazm.Visible = true;
             KodKRazm.VisibleIndex = 2;
+            KodKRazm.Width = 49;
             // 
             // RazmRazm
             // 
@@ -846,6 +760,7 @@
             RazmRazm.OptionsColumn.AllowEdit = false;
             RazmRazm.Visible = true;
             RazmRazm.VisibleIndex = 3;
+            RazmRazm.Width = 49;
             // 
             // frm_s1
             // 
@@ -871,14 +786,29 @@
             grup1.FieldName = "Grup";
             grup1.Name = "grup1";
             // 
+            // sost1
+            // 
+            sost1.Caption = "sost";
+            sost1.FieldName = "Sost";
+            sost1.Name = "sost1";
+            sost1.Width = 20;
+            // 
             // pr_po
             // 
             pr_po.Caption = "Выбор";
             pr_po.ColumnEdit = repositoryItemCheckEditViborRazm;
             pr_po.FieldName = "Pr_po";
             pr_po.Name = "pr_po";
+            pr_po.OptionsColumn.AllowGroup = DevExpress.Utils.DefaultBoolean.False;
+            pr_po.OptionsColumn.AllowIncrementalSearch = false;
+            pr_po.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+            pr_po.OptionsColumn.AllowMove = false;
+            pr_po.OptionsColumn.AllowSize = false;
+            pr_po.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            pr_po.OptionsFilter.AllowFilter = false;
             pr_po.Visible = true;
             pr_po.VisibleIndex = 5;
+            pr_po.Width = 53;
             // 
             // repositoryItemCheckEditViborRazm
             // 
@@ -894,6 +824,7 @@
             RazmAll.Name = "RazmAll";
             RazmAll.Visible = true;
             RazmAll.VisibleIndex = 4;
+            RazmAll.Width = 49;
             // 
             // customButtonBack
             // 
@@ -912,6 +843,7 @@
             // customButtonNext
             // 
             customButtonNext.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            tableLayoutPanel8.SetColumnSpan(customButtonNext, 2);
             customButtonNext.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonNext.Font = new System.Drawing.Font("Arial", 10F);
             customButtonNext.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
@@ -927,7 +859,7 @@
             // 
             customTabControlKomplRazm.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTabControlKomplRazm.Appearance.Options.UseForeColor = true;
-            tableLayoutPanel8.SetColumnSpan(customTabControlKomplRazm, 2);
+            tableLayoutPanel8.SetColumnSpan(customTabControlKomplRazm, 3);
             customTabControlKomplRazm.Dock = System.Windows.Forms.DockStyle.Fill;
             customTabControlKomplRazm.Location = new System.Drawing.Point(3, 265);
             customTabControlKomplRazm.Name = "customTabControlKomplRazm";
@@ -981,6 +913,7 @@
             // 
             customCheckBoxOdinak.AutoSize = true;
             customCheckBoxOdinak.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            tableLayoutPanel8.SetColumnSpan(customCheckBoxOdinak, 2);
             customCheckBoxOdinak.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxOdinak.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxOdinak.Location = new System.Drawing.Point(167, 3);
@@ -990,6 +923,249 @@
             customCheckBoxOdinak.Text = "Один артикул в составе";
             customCheckBoxOdinak.UseVisualStyleBackColor = true;
             customCheckBoxOdinak.CheckedChanged += customCheckBoxOdinak_CheckedChanged;
+            // 
+            // checkButtonAll
+            // 
+            checkButtonAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            checkButtonAll.Location = new System.Drawing.Point(275, 29);
+            checkButtonAll.Name = "checkButtonAll";
+            checkButtonAll.Size = new System.Drawing.Size(51, 23);
+            checkButtonAll.TabIndex = 9;
+            checkButtonAll.Text = "Выбрать все ↓";
+            checkButtonAll.Visible = false;
+            checkButtonAll.CheckedChanged += checkButtonAll_CheckedChanged;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(tableLayoutPanel7, 0, 1);
+            tableLayoutPanel2.Controls.Add(tableLayoutPanel6, 0, 0);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(303, 275);
+            tableLayoutPanel2.TabIndex = 13;
+            // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.BackColor = System.Drawing.Color.Khaki;
+            tableLayoutPanel7.ColumnCount = 3;
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.9003429F));
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.3535347F));
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.7912445F));
+            tableLayoutPanel7.Controls.Add(customLabelArtVib, 0, 1);
+            tableLayoutPanel7.Controls.Add(customHeaderLabelGrupVib, 0, 0);
+            tableLayoutPanel7.Controls.Add(customLabelModVib, 0, 2);
+            tableLayoutPanel7.Controls.Add(customLabelArtTextVib, 1, 1);
+            tableLayoutPanel7.Controls.Add(customLabelModTextVib, 1, 2);
+            tableLayoutPanel7.Controls.Add(pictureBoxArticulVib, 2, 0);
+            tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel7.Location = new System.Drawing.Point(3, 140);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 3;
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333359F));
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333359F));
+            tableLayoutPanel7.Size = new System.Drawing.Size(297, 132);
+            tableLayoutPanel7.TabIndex = 12;
+            // 
+            // customLabelArtVib
+            // 
+            customLabelArtVib.AutoSize = true;
+            customLabelArtVib.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelArtVib.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelArtVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelArtVib.Location = new System.Drawing.Point(3, 43);
+            customLabelArtVib.Name = "customLabelArtVib";
+            customLabelArtVib.Size = new System.Drawing.Size(50, 44);
+            customLabelArtVib.TabIndex = 0;
+            customLabelArtVib.Text = "Артикул";
+            customLabelArtVib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customHeaderLabelGrupVib
+            // 
+            customHeaderLabelGrupVib.AutoSize = true;
+            tableLayoutPanel7.SetColumnSpan(customHeaderLabelGrupVib, 2);
+            customHeaderLabelGrupVib.Dock = System.Windows.Forms.DockStyle.Fill;
+            customHeaderLabelGrupVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customHeaderLabelGrupVib.Location = new System.Drawing.Point(3, 0);
+            customHeaderLabelGrupVib.Name = "customHeaderLabelGrupVib";
+            customHeaderLabelGrupVib.Size = new System.Drawing.Size(154, 43);
+            customHeaderLabelGrupVib.TabIndex = 2;
+            customHeaderLabelGrupVib.Text = "Группа";
+            customHeaderLabelGrupVib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelModVib
+            // 
+            customLabelModVib.AutoSize = true;
+            customLabelModVib.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelModVib.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelModVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelModVib.Location = new System.Drawing.Point(3, 87);
+            customLabelModVib.Name = "customLabelModVib";
+            customLabelModVib.Size = new System.Drawing.Size(50, 45);
+            customLabelModVib.TabIndex = 1;
+            customLabelModVib.Text = "Модель";
+            customLabelModVib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelArtTextVib
+            // 
+            customLabelArtTextVib.AutoSize = true;
+            customLabelArtTextVib.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelArtTextVib.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelArtTextVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelArtTextVib.Location = new System.Drawing.Point(59, 43);
+            customLabelArtTextVib.Name = "customLabelArtTextVib";
+            customLabelArtTextVib.Size = new System.Drawing.Size(98, 44);
+            customLabelArtTextVib.TabIndex = 0;
+            customLabelArtTextVib.Text = "Артикул_Текст";
+            customLabelArtTextVib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelModTextVib
+            // 
+            customLabelModTextVib.AutoSize = true;
+            customLabelModTextVib.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelModTextVib.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelModTextVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelModTextVib.Location = new System.Drawing.Point(59, 87);
+            customLabelModTextVib.Name = "customLabelModTextVib";
+            customLabelModTextVib.Size = new System.Drawing.Size(98, 45);
+            customLabelModTextVib.TabIndex = 1;
+            customLabelModTextVib.Text = "Модель_Текст";
+            customLabelModTextVib.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBoxArticulVib
+            // 
+            pictureBoxArticulVib.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureBoxArticulVib.Location = new System.Drawing.Point(164, 3);
+            pictureBoxArticulVib.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pictureBoxArticulVib.Name = "pictureBoxArticulVib";
+            tableLayoutPanel7.SetRowSpan(pictureBoxArticulVib, 3);
+            pictureBoxArticulVib.Size = new System.Drawing.Size(129, 126);
+            pictureBoxArticulVib.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pictureBoxArticulVib.TabIndex = 13;
+            pictureBoxArticulVib.TabStop = false;
+            // 
+            // tableLayoutPanel6
+            // 
+            tableLayoutPanel6.BackColor = System.Drawing.Color.LightGreen;
+            tableLayoutPanel6.ColumnCount = 3;
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.9003429F));
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.3535347F));
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.7912445F));
+            tableLayoutPanel6.Controls.Add(customLabelArt, 0, 1);
+            tableLayoutPanel6.Controls.Add(customHeaderLabelGrup, 0, 0);
+            tableLayoutPanel6.Controls.Add(customLabelMod, 0, 2);
+            tableLayoutPanel6.Controls.Add(customLabelArtText, 1, 1);
+            tableLayoutPanel6.Controls.Add(customLabelModText, 1, 2);
+            tableLayoutPanel6.Controls.Add(pictureBoxArticul, 2, 0);
+            tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RowCount = 3;
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333359F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333359F));
+            tableLayoutPanel6.Size = new System.Drawing.Size(297, 131);
+            tableLayoutPanel6.TabIndex = 11;
+            // 
+            // customLabelArt
+            // 
+            customLabelArt.AutoSize = true;
+            customLabelArt.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelArt.Location = new System.Drawing.Point(3, 43);
+            customLabelArt.Name = "customLabelArt";
+            customLabelArt.Size = new System.Drawing.Size(50, 43);
+            customLabelArt.TabIndex = 0;
+            customLabelArt.Text = "Артикул";
+            customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customHeaderLabelGrup
+            // 
+            customHeaderLabelGrup.AutoSize = true;
+            tableLayoutPanel6.SetColumnSpan(customHeaderLabelGrup, 2);
+            customHeaderLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
+            customHeaderLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customHeaderLabelGrup.Location = new System.Drawing.Point(3, 0);
+            customHeaderLabelGrup.Name = "customHeaderLabelGrup";
+            customHeaderLabelGrup.Size = new System.Drawing.Size(154, 43);
+            customHeaderLabelGrup.TabIndex = 2;
+            customHeaderLabelGrup.Text = "Группа";
+            customHeaderLabelGrup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelMod
+            // 
+            customLabelMod.AutoSize = true;
+            customLabelMod.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelMod.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelMod.Location = new System.Drawing.Point(3, 86);
+            customLabelMod.Name = "customLabelMod";
+            customLabelMod.Size = new System.Drawing.Size(50, 45);
+            customLabelMod.TabIndex = 1;
+            customLabelMod.Text = "Модель";
+            customLabelMod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelArtText
+            // 
+            customLabelArtText.AutoSize = true;
+            customLabelArtText.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelArtText.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelArtText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelArtText.Location = new System.Drawing.Point(59, 43);
+            customLabelArtText.Name = "customLabelArtText";
+            customLabelArtText.Size = new System.Drawing.Size(98, 43);
+            customLabelArtText.TabIndex = 0;
+            customLabelArtText.Text = "Артикул_Текст";
+            customLabelArtText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelModText
+            // 
+            customLabelModText.AutoSize = true;
+            customLabelModText.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelModText.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelModText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelModText.Location = new System.Drawing.Point(59, 86);
+            customLabelModText.Name = "customLabelModText";
+            customLabelModText.Size = new System.Drawing.Size(98, 45);
+            customLabelModText.TabIndex = 1;
+            customLabelModText.Text = "Модель_Текст";
+            customLabelModText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBoxArticul
+            // 
+            pictureBoxArticul.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureBoxArticul.Location = new System.Drawing.Point(164, 3);
+            pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            pictureBoxArticul.Name = "pictureBoxArticul";
+            tableLayoutPanel6.SetRowSpan(pictureBoxArticul, 3);
+            pictureBoxArticul.Size = new System.Drawing.Size(129, 125);
+            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pictureBoxArticul.TabIndex = 13;
+            pictureBoxArticul.TabStop = false;
+            // 
+            // customRadioGroupVib
+            // 
+            customRadioGroupVib.Dock = System.Windows.Forms.DockStyle.Fill;
+            customRadioGroupVib.Location = new System.Drawing.Point(3, 644);
+            customRadioGroupVib.Name = "customRadioGroupVib";
+            customRadioGroupVib.ObjectName = null;
+            customRadioGroupVib.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customRadioGroupVib.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customRadioGroupVib.Properties.Appearance.Options.UseFont = true;
+            customRadioGroupVib.Properties.Appearance.Options.UseForeColor = true;
+            customRadioGroupVib.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            customRadioGroupVib.Properties.Columns = 3;
+            customRadioGroupVib.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Все записи", true, null, "allZap"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Разрешенные", true, null, "trueZap"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По артикулу", true, null, "artZap") });
+            customRadioGroupVib.Size = new System.Drawing.Size(303, 32);
+            customRadioGroupVib.TabIndex = 14;
+            customRadioGroupVib.SelectedIndexChanged += customRadioGroupVib_SelectedIndexChanged;
             // 
             // AddNewKopml
             // 
@@ -1008,7 +1184,6 @@
             ((System.ComponentModel.ISupportInitialize)bandedGridViewSelected).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditDelRazm).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel5.PerformLayout();
             tableLayoutPanel4.ResumeLayout(false);
@@ -1016,8 +1191,6 @@
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditAddRazm).EndInit();
-            tableLayoutPanel6.ResumeLayout(false);
-            tableLayoutPanel6.PerformLayout();
             tableLayoutPanel8.ResumeLayout(false);
             tableLayoutPanel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplRazm).EndInit();
@@ -1025,6 +1198,15 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditViborRazm).EndInit();
             ((System.ComponentModel.ISupportInitialize)customTabControlKomplRazm).EndInit();
             ((System.ComponentModel.ISupportInitialize)customNumericUpDownValueTab).EndInit();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel7.ResumeLayout(false);
+            tableLayoutPanel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxArticulVib).EndInit();
+            tableLayoutPanel6.ResumeLayout(false);
+            tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroupVib.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)behaviorManager1).EndInit();
             ResumeLayout(false);
         }
 
@@ -1044,13 +1226,8 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewKomplArt;
         private Core.Class.CustomGridControl customGridControlKomplRazm;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewKomplRazm;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private Core.Class.CustomButton customButtonBack;
         private Core.Class.CustomButton customButtonNext;
-        private Core.Class.CustomLabel customLabelArt;
-        private Core.Class.CustomLabel customLabelMod;
-        private Core.Class.CustomLabel customLabelArtText;
-        private Core.Class.CustomLabel customLabelModText;
         private Core.Class.CustomLabel customLabelGrupKompl;
         private Core.Class.CustomLabel customLabelKolTab;
         private CustomNumericUpDown customNumericUpDownValueTab;
@@ -1081,7 +1258,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn grup1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private CustomCheckBox customCheckBoxOdinak;
-        private System.Windows.Forms.PictureBox pictureBoxArticul;
         private CustomCheckBox customCheckBoxAutoRazm;
         private DevExpress.XtraGrid.Columns.GridColumn pr_po;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditViborRazm;
@@ -1105,6 +1281,24 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn countStr;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCount;
         private DevExpress.XtraGrid.Columns.GridColumn kodArt;
-        private Core.Class.CustomHeaderLabel customLabelGrup;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private Core.Class.CustomLabel customLabelArt;
+        private Core.Class.CustomHeaderLabel customHeaderLabelGrup;
+        private Core.Class.CustomLabel customLabelMod;
+        private Core.Class.CustomLabel customLabelModText;
+        private Core.Class.CustomLabel customLabelArtText;
+        private System.Windows.Forms.PictureBox pictureBoxArticul;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private Core.Class.CustomLabel customLabelArtVib;
+        private Core.Class.CustomHeaderLabel customHeaderLabelGrupVib;
+        private Core.Class.CustomLabel customLabelModVib;
+        private Core.Class.CustomLabel customLabelArtTextVib;
+        private Core.Class.CustomLabel customLabelModTextVib;
+        private System.Windows.Forms.PictureBox pictureBoxArticulVib;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
+        private DevExpress.XtraEditors.CheckButton checkButtonAll;
+        private DevExpress.XtraGrid.Columns.GridColumn sost1;
+        private Core.Class.CustomRadioGroup customRadioGroupVib;
     }
 }

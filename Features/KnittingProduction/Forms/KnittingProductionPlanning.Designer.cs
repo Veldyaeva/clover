@@ -1,4 +1,5 @@
 ﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class KnittingProductionPlanning
@@ -265,7 +266,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanSekVyazAll.MinWidth = 23;
             gridColumnVyazPlanSekVyazAll.Name = "gridColumnVyazPlanSekVyazAll";
             gridColumnVyazPlanSekVyazAll.OptionsColumn.ReadOnly = true;
-            gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Итого: {0:0.##})") });
+            gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Выбрано: {0:0.##})"), new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "SekVyazAll", "(Итого: {0:0.##})") });
             gridColumnVyazPlanSekVyazAll.Visible = true;
             gridColumnVyazPlanSekVyazAll.VisibleIndex = 13;
             gridColumnVyazPlanSekVyazAll.Width = 137;
@@ -366,7 +367,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnVyazPlanNomZad.MinWidth = 23;
             gridColumnVyazPlanNomZad.Name = "gridColumnVyazPlanNomZad";
             gridColumnVyazPlanNomZad.OptionsColumn.ReadOnly = true;
-            gridColumnVyazPlanNomZad.OptionsFilter.AllowFilter = false;
             gridColumnVyazPlanNomZad.Visible = true;
             gridColumnVyazPlanNomZad.VisibleIndex = 3;
             gridColumnVyazPlanNomZad.Width = 81;
@@ -731,6 +731,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // customTextBox1
             // 
             customTextBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox1.ErrorColor = System.Drawing.Color.Red;
+            customTextBox1.ErrorMessage = null;
             customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
             customTextBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBox1.Location = new System.Drawing.Point(186, 440);

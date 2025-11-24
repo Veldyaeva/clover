@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.Features.SockProduction.Forms
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.Features.SockProduction.Forms
 {
     partial class ReportByNomZad
     {

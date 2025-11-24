@@ -1,8 +1,8 @@
-﻿using SewingProduction.Core.Class.Settings;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using SewingProduction.Core.Class.Settings;
 
 
 namespace SewingProduction.Features.UserDistribution.Forms

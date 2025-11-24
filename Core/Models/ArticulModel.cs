@@ -1,12 +1,12 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using SewingProduction.Interfaces;
 
 
 namespace SewingProduction.Core.Models
 {
-    public class ArticulModel :  INewable, IModifiable, IDeletable, INotifyPropertyChanged
+    public class ArticulModel : INewable, IModifiable, IDeletable, INotifyPropertyChanged
     {
         //private int _kod;
         //private string _grup;
@@ -24,6 +24,7 @@ namespace SewingProduction.Core.Models
         //    get => _grup;
         //    set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(grup)); } }
         //}
+        public string Ko { get; set; }
         public string Kod { get; set; }
         [NotMapped]
         public string Kodd { get; set; }
@@ -106,7 +107,7 @@ namespace SewingProduction.Core.Models
         public decimal? Sek_vyaz10 { get; set; }
         public decimal? Sek_vyazo { get; set; }
         public decimal? Normapryz { get; set; }
-        public int? Id_gost { get; set; }
+        public int Id_gost { get; set; }
         public int? Id_svyaz { get; set; }
         public decimal? Koef_pr { get; set; }
         public decimal? Ob_izd { get; set; }
@@ -202,7 +203,7 @@ namespace SewingProduction.Core.Models
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        
+
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]

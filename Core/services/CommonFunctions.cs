@@ -1,5 +1,5 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
-using System;
+﻿using System;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace SewingProduction.Helpers
 {

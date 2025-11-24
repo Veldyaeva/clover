@@ -1,36 +1,22 @@
-﻿using Dapper;
-using DevExpress.Data;
-using DevExpress.Data.Filtering;
-using DevExpress.Utils;
-using DevExpress.Xpo.DB;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Dapper;
 using DevExpress.XtraEditors;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
-using SewingProduction.Features.CuttingProduction.Forms;
-using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
-using SewingProduction.Models;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -39,6 +25,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
+        private static GridHelper _gridHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
         private readonly ProrabotkiService _prorabotkiService;
@@ -86,13 +73,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbService = new DbService(_dbHelper);
             _vyazService = new VyazService(_dbHelper);
             _bulkHelper = new BulkHelper();
+            _gridHelper = new GridHelper();
             _prorabotkiService = new ProrabotkiService(_dbHelper);
             _matrixService = new MatrixService(_dbHelper);
-            
+
             Form mainForm = Application.OpenForms["SpMainForm"];
             MenuStrip mainMenu = mainForm.MainMenuStrip;
             _formManager = new FormManager(mainForm, mainMenu, _user);
-            
+
             ThemeManager.UpdateTheme(this);
         }
 
@@ -169,6 +157,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnVyazPlanKmlNumber.FieldName = "KmlNumber";
                 gridColumnVyazPlanPszkmPlanDateFrom.FieldName = "DateZapPlanFrom";
                 gridColumnVyazPlanPszkmPlanDateTo.FieldName = "DateZapPlanTo";
+
+                _gridHelper.AutoRowFilterConfig(gridViewVyazPlan as GridView, 1);
 
                 // 1. Настраиваем стандартный MultiSelect
                 gridViewVyazPlan.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор

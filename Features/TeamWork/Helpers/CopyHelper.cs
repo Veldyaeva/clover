@@ -1,10 +1,8 @@
-using SewingProduction.Helpers;
-using SewingProduction.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
 
 namespace SewingProduction.Features.TeamWork.Helpers
 {
@@ -60,7 +58,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
         }
 
         /// <summary>
-        /// Клонирует только технологические данные ArtNormN (времена, себестоимость, комментарии)
+        /// Клонирует только технологические данные ArtNormN (секунды, себестоимость, комментарии)
         /// Не копирует индивидуальную информацию изделия (артикул, группа, модель, ответственные)
         /// </summary>
         /// <param name="source">Исходный объект</param>
@@ -71,7 +69,7 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 throw new ArgumentNullException(nameof(source));
 
             var clone = new ArtNormN();
-            
+
             // Копируем только технологические данные
             clone.SekShv = source.SekShv;
             clone.SekVyaz3 = source.SekVyaz3;
@@ -96,12 +94,12 @@ namespace SewingProduction.Features.TeamWork.Helpers
             clone.Komment = source.Komment;
             clone.Reco = source.Reco;
             clone.Slogn = source.Slogn;
-            clone.Kod = source.Kod;
-            clone.grup = source.grup;
-            clone.Articul = source.Articul;
-            clone.Mod = source.Mod;
-            clone.Diz = source.Diz;
-            clone.Constr = source.Constr;
+            //clone.Kod = source.Kod;
+            //clone.grup = source.grup;
+            //clone.Articul = source.Articul;
+            //clone.Mod = source.Mod;
+            //clone.Diz = source.Diz;
+            //clone.Constr = source.Constr;
 
             // НЕ копируем ID и аудит поля:
             // AnnID, dateCreate, dateUpdate,

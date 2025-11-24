@@ -1,11 +1,11 @@
-﻿using Dapper;
-using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
+using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.KnittingProduction.Services
 {
@@ -303,7 +303,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.nom_n, rzv.n_pach, rzv.pach_kod, rzv.kod, rzv.razm, rzv.kol, 0 AS grad " +
+                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.nom_n, rzv.n_pach, rzv.pach_kod, rzv.kod, rzv.razm, rzv.kol, gradacia " +
                         $"  , dbo.getAnnIDByKod(rzv.kod) as annID " +
                         $"FROM raskr_zeh_vyaz rzv" +
                         $" WHERE rzv.nom = {nom} and zad_pl = {nomZad}";
@@ -353,6 +353,43 @@ namespace SewingProduction.Features.KnittingProduction.Services
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitPlanReportParametersList");
+                return null;
+            }
+        }
+        public async Task<List<SmenZadanyVyazMachine>> GetSmenZadanyVyazMachine()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC getSmenZadanyVyazMachine ";
+
+                    var result = await connection.QueryAsync<SmenZadanyVyazMachine>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyazMachine");
+                return null;
+            }
+        }
+
+        public async Task<List<SmenZadanyVyazEmp>> GetSmenZadanyVyazEmp()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC getSmenZadanyVyazEmp ";
+
+                    var result = await connection.QueryAsync<SmenZadanyVyazEmp>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyazMachine");
                 return null;
             }
         }

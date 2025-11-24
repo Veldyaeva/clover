@@ -33,15 +33,35 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork_AdvanceTW));
-            toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions4 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions5 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions6 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            tableLayoutPanel3layoutControl1ConvertedLayout = new DevExpress.XtraLayout.LayoutControl();
+            btnMoveDown = new CustomSimpleButton();
+            designerComboBox = new DevExpress.XtraEditors.LookUpEdit();
+            textBoxReco = new System.Windows.Forms.RichTextBox();
+            constructorComboBox = new DevExpress.XtraEditors.LookUpEdit();
+            secTimeTextBox = new CustomTextBox();
+            btnMoveUp = new CustomSimpleButton();
+            btnOK = new CustomSimpleButton();
+            nameTextBox = new CustomTextBox();
+            textBoxKomment = new System.Windows.Forms.RichTextBox();
+            btnSave = new CustomSimpleButton();
+            modelTextBox = new CustomTextBox();
             pictureBox1 = new System.Windows.Forms.PictureBox();
+            btnRecalculateNumbers = new CustomSimpleButton();
+            btnValidateNumbers = new CustomSimpleButton();
+            btnCancel = new CustomSimpleButton();
+            groupTextBox = new CustomTextBox();
+            dateCreate = new CustomDateTimePicker();
             gridControlKont = new DevExpress.XtraGrid.GridControl();
             gridViewKont = new GridView();
+            gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             colseb = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -86,37 +106,45 @@ namespace SewingProduction.Features.TeamWork.Forms
             coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
             colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             statusLabel = new CustomLabel();
-            tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            customGroupBox2 = new CustomGroupBox();
-            buffer = new CustomButton();
             textBoxBuffer = new System.Windows.Forms.RichTextBox();
-            customGroupBox1 = new CustomGroupBox();
-            tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            textBoxReco = new System.Windows.Forms.RichTextBox();
-            customLabel4 = new CustomLabel();
-            designerComboBox = new DevExpress.XtraEditors.LookUpEdit();
-            constructorComboBox = new DevExpress.XtraEditors.LookUpEdit();
-            customLabel1 = new CustomLabel();
-            label5 = new CustomLabel();
-            customLabel2 = new CustomLabel();
-            dateCreate = new CustomDateTimePicker();
-            groupTextBox = new CustomTextBox();
-            nameTextBox = new CustomTextBox();
-            customLabel3 = new CustomLabel();
-            label3 = new CustomLabel();
-            modelTextBox = new CustomTextBox();
-            label2 = new CustomLabel();
-            label4 = new CustomLabel();
-            secTimeTextBox = new CustomTextBox();
-            textBoxKomment = new System.Windows.Forms.RichTextBox();
-            customLabel5 = new CustomLabel();
-            btnOK = new CustomSimpleButton();
-            btnCancel = new CustomSimpleButton();
-            btnMoveUp = new CustomSimpleButton();
-            btnMoveDown = new CustomSimpleButton();
-            btnValidateNumbers = new CustomSimpleButton();
-            btnRecalculateNumbers = new CustomSimpleButton();
-            btnSave = new CustomSimpleButton();
+            buffer = new CustomButton();
+            tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout = new DevExpress.XtraLayout.LayoutControl();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup7 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            statusLabelitem = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup10 = new DevExpress.XtraLayout.LayoutControlGroup();
+            gridControlRaszitem = new DevExpress.XtraLayout.LayoutControlItem();
+            pictureBox1item = new DevExpress.XtraLayout.LayoutControlItem();
+            gridControlRaskritem = new DevExpress.XtraLayout.LayoutControlItem();
+            gridControlKontitem = new DevExpress.XtraLayout.LayoutControlItem();
+            splitterItem3 = new DevExpress.XtraLayout.SplitterItem();
+            splitterItem4 = new DevExpress.XtraLayout.SplitterItem();
+            splitterItem5 = new DevExpress.XtraLayout.SplitterItem();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            bufferitem = new DevExpress.XtraLayout.LayoutControlItem();
+            textBoxBufferitem = new DevExpress.XtraLayout.LayoutControlItem();
+            splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
+            splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             normdopobrBindingSource = new System.Windows.Forms.BindingSource(components);
             constructorBindingSource = new System.Windows.Forms.BindingSource(components);
             designerBindingSource = new System.Windows.Forms.BindingSource(components);
@@ -128,10 +156,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             normraszBindingSource1 = new System.Windows.Forms.BindingSource(components);
             bindingSource1 = new System.Windows.Forms.BindingSource(components);
             errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
-            toolStripContainer1.ContentPanel.SuspendLayout();
-            toolStripContainer1.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
+            layoutConverter1 = new DevExpress.XtraLayout.Converter.LayoutConverter(components);
+            ((System.ComponentModel.ISupportInitialize)tableLayoutPanel3layoutControl1ConvertedLayout).BeginInit();
+            tableLayoutPanel3layoutControl1ConvertedLayout.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlKont).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKont).BeginInit();
@@ -142,12 +171,43 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRaskr).BeginInit();
-            tableLayoutPanel4.SuspendLayout();
-            customGroupBox2.SuspendLayout();
-            customGroupBox1.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)statusLabelitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaszitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1item).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaskritem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlKontitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bufferitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)textBoxBufferitem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)constructorBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)designerBindingSource).BeginInit();
@@ -159,117 +219,269 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
-            // toolStripContainer1
+            // tableLayoutPanel3layoutControl1ConvertedLayout
             // 
-            resources.ApplyResources(toolStripContainer1, "toolStripContainer1");
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(btnMoveDown);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(designerComboBox);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(textBoxReco);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(constructorComboBox);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(secTimeTextBox);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(btnMoveUp);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(btnOK);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(nameTextBox);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(textBoxKomment);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(btnSave);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(modelTextBox);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(pictureBox1);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(btnRecalculateNumbers);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(btnValidateNumbers);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(btnCancel);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(groupTextBox);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(dateCreate);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(gridControlKont);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(gridControlRasz);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(gridControlRaskr);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(statusLabel);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(textBoxBuffer);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(buffer);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Controls.Add(tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout);
+            resources.ApplyResources(tableLayoutPanel3layoutControl1ConvertedLayout, "tableLayoutPanel3layoutControl1ConvertedLayout");
+            tableLayoutPanel3layoutControl1ConvertedLayout.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem1, layoutControlGroup3, layoutControlGroup2 });
+            errorProvider1.SetIconAlignment(tableLayoutPanel3layoutControl1ConvertedLayout, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel3layoutControl1ConvertedLayout.IconAlignment"));
+            tableLayoutPanel3layoutControl1ConvertedLayout.Name = "tableLayoutPanel3layoutControl1ConvertedLayout";
+            tableLayoutPanel3layoutControl1ConvertedLayout.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1242, 300, 650, 406);
+            tableLayoutPanel3layoutControl1ConvertedLayout.Root = layoutControlGroup7;
             // 
-            // toolStripContainer1.BottomToolStripPanel
+            // btnMoveDown
             // 
-            resources.ApplyResources(toolStripContainer1.BottomToolStripPanel, "toolStripContainer1.BottomToolStripPanel");
-            errorProvider1.SetError(toolStripContainer1.BottomToolStripPanel, resources.GetString("toolStripContainer1.BottomToolStripPanel.Error"));
-            errorProvider1.SetIconAlignment(toolStripContainer1.BottomToolStripPanel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("toolStripContainer1.BottomToolStripPanel.IconAlignment"));
-            errorProvider1.SetIconPadding(toolStripContainer1.BottomToolStripPanel, (int)resources.GetObject("toolStripContainer1.BottomToolStripPanel.IconPadding"));
-            toolStripContainer1.BottomToolStripPanelVisible = false;
+            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveDown.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveDown.Appearance.Font");
+            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveDown.Appearance.Options.UseBackColor = true;
+            btnMoveDown.Appearance.Options.UseFont = true;
+            btnMoveDown.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetIconAlignment(btnMoveDown, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveDown.IconAlignment"));
+            btnMoveDown.ImageOptions.ImageKey = resources.GetString("btnMoveDown.ImageOptions.ImageKey");
+            resources.ApplyResources(btnMoveDown, "btnMoveDown");
+            btnMoveDown.Name = "btnMoveDown";
+            btnMoveDown.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            btnMoveDown.Click += btnMoveDown_Click;
             // 
-            // toolStripContainer1.ContentPanel
+            // designerComboBox
             // 
-            resources.ApplyResources(toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
-            toolStripContainer1.ContentPanel.Controls.Add(tableLayoutPanel3);
-            errorProvider1.SetError(toolStripContainer1.ContentPanel, resources.GetString("toolStripContainer1.ContentPanel.Error"));
-            errorProvider1.SetIconAlignment(toolStripContainer1.ContentPanel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("toolStripContainer1.ContentPanel.IconAlignment"));
-            errorProvider1.SetIconPadding(toolStripContainer1.ContentPanel, (int)resources.GetObject("toolStripContainer1.ContentPanel.IconPadding"));
-            errorProvider1.SetError(toolStripContainer1, resources.GetString("toolStripContainer1.Error"));
-            errorProvider1.SetIconAlignment(toolStripContainer1, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("toolStripContainer1.IconAlignment"));
-            errorProvider1.SetIconPadding(toolStripContainer1, (int)resources.GetObject("toolStripContainer1.IconPadding"));
+            errorProvider1.SetIconAlignment(designerComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("designerComboBox.IconAlignment"));
+            resources.ApplyResources(designerComboBox, "designerComboBox");
+            designerComboBox.Name = "designerComboBox";
+            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons1")) });
+            designerComboBox.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
             // 
-            // toolStripContainer1.LeftToolStripPanel
+            // textBoxReco
             // 
-            resources.ApplyResources(toolStripContainer1.LeftToolStripPanel, "toolStripContainer1.LeftToolStripPanel");
-            errorProvider1.SetError(toolStripContainer1.LeftToolStripPanel, resources.GetString("toolStripContainer1.LeftToolStripPanel.Error"));
-            errorProvider1.SetIconAlignment(toolStripContainer1.LeftToolStripPanel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("toolStripContainer1.LeftToolStripPanel.IconAlignment"));
-            errorProvider1.SetIconPadding(toolStripContainer1.LeftToolStripPanel, (int)resources.GetObject("toolStripContainer1.LeftToolStripPanel.IconPadding"));
-            toolStripContainer1.Name = "toolStripContainer1";
+            errorProvider1.SetIconAlignment(textBoxReco, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("textBoxReco.IconAlignment"));
+            resources.ApplyResources(textBoxReco, "textBoxReco");
+            textBoxReco.Name = "textBoxReco";
             // 
-            // toolStripContainer1.RightToolStripPanel
+            // constructorComboBox
             // 
-            resources.ApplyResources(toolStripContainer1.RightToolStripPanel, "toolStripContainer1.RightToolStripPanel");
-            errorProvider1.SetError(toolStripContainer1.RightToolStripPanel, resources.GetString("toolStripContainer1.RightToolStripPanel.Error"));
-            errorProvider1.SetIconAlignment(toolStripContainer1.RightToolStripPanel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("toolStripContainer1.RightToolStripPanel.IconAlignment"));
-            errorProvider1.SetIconPadding(toolStripContainer1.RightToolStripPanel, (int)resources.GetObject("toolStripContainer1.RightToolStripPanel.IconPadding"));
-            toolStripContainer1.RightToolStripPanelVisible = false;
+            errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
+            resources.ApplyResources(constructorComboBox, "constructorComboBox");
+            constructorComboBox.Name = "constructorComboBox";
+            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons1")) });
+            constructorComboBox.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            constructorComboBox.TabIndexChanged += ComboBox_SelectedIndexChanged;
             // 
-            // toolStripContainer1.TopToolStripPanel
+            // secTimeTextBox
             // 
-            resources.ApplyResources(toolStripContainer1.TopToolStripPanel, "toolStripContainer1.TopToolStripPanel");
-            errorProvider1.SetError(toolStripContainer1.TopToolStripPanel, resources.GetString("toolStripContainer1.TopToolStripPanel.Error"));
-            errorProvider1.SetIconAlignment(toolStripContainer1.TopToolStripPanel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("toolStripContainer1.TopToolStripPanel.IconAlignment"));
-            errorProvider1.SetIconPadding(toolStripContainer1.TopToolStripPanel, (int)resources.GetObject("toolStripContainer1.TopToolStripPanel.IconPadding"));
+            secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            secTimeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            secTimeTextBox.ErrorColor = System.Drawing.Color.Red;
+            secTimeTextBox.ErrorMessage = null;
+            resources.ApplyResources(secTimeTextBox, "secTimeTextBox");
+            secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            errorProvider1.SetIconAlignment(secTimeTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("secTimeTextBox.IconAlignment"));
+            secTimeTextBox.Name = "secTimeTextBox";
+            secTimeTextBox.ReadOnly = true;
             // 
-            // tableLayoutPanel3
+            // btnMoveUp
             // 
-            resources.ApplyResources(tableLayoutPanel3, "tableLayoutPanel3");
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 1, 1);
-            tableLayoutPanel3.Controls.Add(statusLabel, 1, 0);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 1);
-            tableLayoutPanel3.Controls.Add(btnSave, 0, 0);
-            errorProvider1.SetError(tableLayoutPanel3, resources.GetString("tableLayoutPanel3.Error"));
-            errorProvider1.SetIconAlignment(tableLayoutPanel3, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel3.IconAlignment"));
-            errorProvider1.SetIconPadding(tableLayoutPanel3, (int)resources.GetObject("tableLayoutPanel3.IconPadding"));
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveUp.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveUp.Appearance.Font");
+            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveUp.Appearance.Options.UseBackColor = true;
+            btnMoveUp.Appearance.Options.UseFont = true;
+            btnMoveUp.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetIconAlignment(btnMoveUp, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveUp.IconAlignment"));
+            btnMoveUp.ImageOptions.ImageKey = resources.GetString("btnMoveUp.ImageOptions.ImageKey");
+            resources.ApplyResources(btnMoveUp, "btnMoveUp");
+            btnMoveUp.Name = "btnMoveUp";
+            btnMoveUp.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            btnMoveUp.Click += btnMoveUp_Click;
             // 
-            // tableLayoutPanel2
+            // btnOK
             // 
-            resources.ApplyResources(tableLayoutPanel2, "tableLayoutPanel2");
-            tableLayoutPanel2.Controls.Add(pictureBox1, 0, 1);
-            tableLayoutPanel2.Controls.Add(gridControlKont, 1, 2);
-            tableLayoutPanel2.Controls.Add(gridControlRasz, 0, 0);
-            tableLayoutPanel2.Controls.Add(gridControlRaskr, 1, 1);
-            errorProvider1.SetError(tableLayoutPanel2, resources.GetString("tableLayoutPanel2.Error"));
-            errorProvider1.SetIconAlignment(tableLayoutPanel2, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel2.IconAlignment"));
-            errorProvider1.SetIconPadding(tableLayoutPanel2, (int)resources.GetObject("tableLayoutPanel2.IconPadding"));
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnOK.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnOK.Appearance.Font");
+            btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnOK.Appearance.Options.UseBackColor = true;
+            btnOK.Appearance.Options.UseFont = true;
+            btnOK.Appearance.Options.UseForeColor = true;
+            btnOK.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            btnOK.AppearanceDisabled.Options.UseBackColor = true;
+            btnOK.AppearanceDisabled.Options.UseForeColor = true;
+            errorProvider1.SetIconAlignment(btnOK, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnOK.IconAlignment"));
+            btnOK.ImageOptions.ImageKey = resources.GetString("btnOK.ImageOptions.ImageKey");
+            resources.ApplyResources(btnOK, "btnOK");
+            btnOK.Name = "btnOK";
+            btnOK.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            btnOK.Click += btnOK_Click;
+            // 
+            // nameTextBox
+            // 
+            nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            nameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            nameTextBox.ErrorColor = System.Drawing.Color.Red;
+            nameTextBox.ErrorMessage = null;
+            resources.ApplyResources(nameTextBox, "nameTextBox");
+            nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            errorProvider1.SetIconAlignment(nameTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("nameTextBox.IconAlignment"));
+            nameTextBox.Name = "nameTextBox";
+            // 
+            // textBoxKomment
+            // 
+            errorProvider1.SetIconAlignment(textBoxKomment, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("textBoxKomment.IconAlignment"));
+            resources.ApplyResources(textBoxKomment, "textBoxKomment");
+            textBoxKomment.Name = "textBoxKomment";
+            // 
+            // btnSave
+            // 
+            btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnSave.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnSave.Appearance.Font");
+            btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnSave.Appearance.Options.UseBackColor = true;
+            btnSave.Appearance.Options.UseFont = true;
+            btnSave.Appearance.Options.UseForeColor = true;
+            btnSave.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            btnSave.AppearanceDisabled.Options.UseBackColor = true;
+            btnSave.AppearanceDisabled.Options.UseForeColor = true;
+            errorProvider1.SetIconAlignment(btnSave, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnSave.IconAlignment"));
+            btnSave.ImageOptions.ImageKey = resources.GetString("btnSave.ImageOptions.ImageKey");
+            resources.ApplyResources(btnSave, "btnSave");
+            btnSave.Name = "btnSave";
+            btnSave.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            btnSave.Click += btnSave_Click;
+            // 
+            // modelTextBox
+            // 
+            modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            modelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(modelTextBox, "modelTextBox");
+            modelTextBox.ErrorColor = System.Drawing.Color.Red;
+            modelTextBox.ErrorMessage = null;
+            modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            errorProvider1.SetIconAlignment(modelTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("modelTextBox.IconAlignment"));
+            modelTextBox.Name = "modelTextBox";
             // 
             // pictureBox1
             // 
-            resources.ApplyResources(pictureBox1, "pictureBox1");
-            errorProvider1.SetError(pictureBox1, resources.GetString("pictureBox1.Error"));
             errorProvider1.SetIconAlignment(pictureBox1, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("pictureBox1.IconAlignment"));
-            errorProvider1.SetIconPadding(pictureBox1, (int)resources.GetObject("pictureBox1.IconPadding"));
+            resources.ApplyResources(pictureBox1, "pictureBox1");
             pictureBox1.Name = "pictureBox1";
-            tableLayoutPanel2.SetRowSpan(pictureBox1, 2);
             pictureBox1.TabStop = false;
+            // 
+            // btnRecalculateNumbers
+            // 
+            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
+            btnRecalculateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnRecalculateNumbers.Appearance.Font");
+            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
+            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
+            btnRecalculateNumbers.Appearance.Options.UseFont = true;
+            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetIconAlignment(btnRecalculateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnRecalculateNumbers.IconAlignment"));
+            btnRecalculateNumbers.ImageOptions.ImageKey = resources.GetString("btnRecalculateNumbers.ImageOptions.ImageKey");
+            resources.ApplyResources(btnRecalculateNumbers, "btnRecalculateNumbers");
+            btnRecalculateNumbers.Name = "btnRecalculateNumbers";
+            btnRecalculateNumbers.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            btnRecalculateNumbers.Click += btnRecalculateNumbers_Click;
+            // 
+            // btnValidateNumbers
+            // 
+            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
+            btnValidateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnValidateNumbers.Appearance.Font");
+            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
+            btnValidateNumbers.Appearance.Options.UseBackColor = true;
+            btnValidateNumbers.Appearance.Options.UseFont = true;
+            btnValidateNumbers.Appearance.Options.UseForeColor = true;
+            errorProvider1.SetIconAlignment(btnValidateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnValidateNumbers.IconAlignment"));
+            btnValidateNumbers.ImageOptions.ImageKey = resources.GetString("btnValidateNumbers.ImageOptions.ImageKey");
+            resources.ApplyResources(btnValidateNumbers, "btnValidateNumbers");
+            btnValidateNumbers.Name = "btnValidateNumbers";
+            btnValidateNumbers.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            btnValidateNumbers.Click += btnValidateNumbers_Click;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnCancel.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnCancel.Appearance.Font");
+            btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnCancel.Appearance.Options.UseBackColor = true;
+            btnCancel.Appearance.Options.UseFont = true;
+            btnCancel.Appearance.Options.UseForeColor = true;
+            btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            btnCancel.AppearanceDisabled.Options.UseBackColor = true;
+            btnCancel.AppearanceDisabled.Options.UseForeColor = true;
+            errorProvider1.SetIconAlignment(btnCancel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnCancel.IconAlignment"));
+            btnCancel.ImageOptions.ImageKey = resources.GetString("btnCancel.ImageOptions.ImageKey");
+            resources.ApplyResources(btnCancel, "btnCancel");
+            btnCancel.Name = "btnCancel";
+            btnCancel.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
+            btnCancel.Click += btnCancel_Click;
+            // 
+            // groupTextBox
+            // 
+            groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            groupTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(groupTextBox, "groupTextBox");
+            groupTextBox.ErrorColor = System.Drawing.Color.Red;
+            groupTextBox.ErrorMessage = null;
+            groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            errorProvider1.SetIconAlignment(groupTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("groupTextBox.IconAlignment"));
+            groupTextBox.Name = "groupTextBox";
+            // 
+            // dateCreate
+            // 
+            dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            resources.ApplyResources(dateCreate, "dateCreate");
+            dateCreate.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            errorProvider1.SetIconAlignment(dateCreate, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("dateCreate.IconAlignment"));
+            dateCreate.Name = "dateCreate";
+            dateCreate.ObjectName = null;
             // 
             // gridControlKont
             // 
-            resources.ApplyResources(gridControlKont, "gridControlKont");
-            gridControlKont.EmbeddedNavigator.AccessibleDescription = resources.GetString("gridControlKont.EmbeddedNavigator.AccessibleDescription");
-            gridControlKont.EmbeddedNavigator.AccessibleName = resources.GetString("gridControlKont.EmbeddedNavigator.AccessibleName");
             gridControlKont.EmbeddedNavigator.AllowHtmlTextInToolTip = (DevExpress.Utils.DefaultBoolean)resources.GetObject("gridControlKont.EmbeddedNavigator.AllowHtmlTextInToolTip");
             gridControlKont.EmbeddedNavigator.Anchor = (System.Windows.Forms.AnchorStyles)resources.GetObject("gridControlKont.EmbeddedNavigator.Anchor");
-            gridControlKont.EmbeddedNavigator.AutoSize = (bool)resources.GetObject("gridControlKont.EmbeddedNavigator.AutoSize");
-            gridControlKont.EmbeddedNavigator.BackgroundImage = (System.Drawing.Image)resources.GetObject("gridControlKont.EmbeddedNavigator.BackgroundImage");
             gridControlKont.EmbeddedNavigator.BackgroundImageLayout = (System.Windows.Forms.ImageLayout)resources.GetObject("gridControlKont.EmbeddedNavigator.BackgroundImageLayout");
             gridControlKont.EmbeddedNavigator.ImeMode = (System.Windows.Forms.ImeMode)resources.GetObject("gridControlKont.EmbeddedNavigator.ImeMode");
             gridControlKont.EmbeddedNavigator.Margin = (System.Windows.Forms.Padding)resources.GetObject("gridControlKont.EmbeddedNavigator.Margin");
-            gridControlKont.EmbeddedNavigator.MaximumSize = (System.Drawing.Size)resources.GetObject("gridControlKont.EmbeddedNavigator.MaximumSize");
             gridControlKont.EmbeddedNavigator.TextLocation = (DevExpress.XtraEditors.NavigatorButtonsTextLocation)resources.GetObject("gridControlKont.EmbeddedNavigator.TextLocation");
-            gridControlKont.EmbeddedNavigator.ToolTip = resources.GetString("gridControlKont.EmbeddedNavigator.ToolTip");
             gridControlKont.EmbeddedNavigator.ToolTipIconType = (DevExpress.Utils.ToolTipIconType)resources.GetObject("gridControlKont.EmbeddedNavigator.ToolTipIconType");
-            gridControlKont.EmbeddedNavigator.ToolTipTitle = resources.GetString("gridControlKont.EmbeddedNavigator.ToolTipTitle");
-            errorProvider1.SetError(gridControlKont, resources.GetString("gridControlKont.Error"));
             errorProvider1.SetIconAlignment(gridControlKont, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("gridControlKont.IconAlignment"));
-            errorProvider1.SetIconPadding(gridControlKont, (int)resources.GetObject("gridControlKont.IconPadding"));
+            resources.ApplyResources(gridControlKont, "gridControlKont");
             gridControlKont.MainView = gridViewKont;
             gridControlKont.Name = "gridControlKont";
             gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKont });
             // 
             // gridViewKont
             // 
-            resources.ApplyResources(gridViewKont, "gridViewKont");
+            gridViewKont.AutoFillColumn = gridColumn20;
             gridViewKont.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn19, gridColumn23, gridColumn20, gridColumn21, colseb, gridColumn22, coln_ch1, gridColumn17, colannId2 });
             gridViewKont.DetailHeight = 404;
             gridViewKont.GridControl = gridControlKont;
             gridViewKont.Name = "gridViewKont";
+            resources.ApplyResources(gridViewKont, "gridViewKont");
             gridViewKont.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewKont.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewKont.OptionsBehavior.EditingMode = GridEditingMode.Inplace;
@@ -278,8 +490,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewKont.OptionsView.ShowGroupPanel = false;
             gridViewKont.PopupMenuShowing += gridViewKont_PopupMenuShowing;
             gridViewKont.ShowingEditor += gridViewKont_ShowingEditor;
+            gridViewKont.HiddenEditor += GridViewKont_HiddenEditor;
+            gridViewKont.ShownEditor += gridViewKont_ShownEditor;
+            gridViewKont.CellValueChanged += GridViewKont_CellValueChanged;
             gridViewKont.ValidateRow += gridViewKont_ValidateRow;
             gridViewKont.RowUpdated += gridViewKont_RowUpdated;
+            // 
+            // gridColumn20
+            // 
+            resources.ApplyResources(gridColumn20, "gridColumn20");
+            gridColumn20.FieldName = "text";
+            gridColumn20.ImageOptions.ImageKey = resources.GetString("gridColumn20.ImageOptions.ImageKey");
+            gridColumn20.MinWidth = 23;
+            gridColumn20.Name = "gridColumn20";
             // 
             // gridColumn19
             // 
@@ -297,14 +520,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn23.MinWidth = 23;
             gridColumn23.Name = "gridColumn23";
             // 
-            // gridColumn20
-            // 
-            resources.ApplyResources(gridColumn20, "gridColumn20");
-            gridColumn20.FieldName = "text";
-            gridColumn20.ImageOptions.ImageKey = resources.GetString("gridColumn20.ImageOptions.ImageKey");
-            gridColumn20.MinWidth = 23;
-            gridColumn20.Name = "gridColumn20";
-            // 
             // gridColumn21
             // 
             resources.ApplyResources(gridColumn21, "gridColumn21");
@@ -315,65 +530,55 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // colseb
             // 
-            resources.ApplyResources(colseb, "colseb");
             colseb.FieldName = "seb";
             colseb.ImageOptions.ImageKey = resources.GetString("colseb.ImageOptions.ImageKey");
             colseb.MinWidth = 23;
             colseb.Name = "colseb";
+            resources.ApplyResources(colseb, "colseb");
             // 
             // gridColumn22
             // 
-            resources.ApplyResources(gridColumn22, "gridColumn22");
             gridColumn22.FieldName = "n";
             gridColumn22.ImageOptions.ImageKey = resources.GetString("gridColumn22.ImageOptions.ImageKey");
             gridColumn22.MinWidth = 23;
             gridColumn22.Name = "gridColumn22";
+            resources.ApplyResources(gridColumn22, "gridColumn22");
             // 
             // coln_ch1
             // 
-            resources.ApplyResources(coln_ch1, "coln_ch1");
             coln_ch1.FieldName = "nCh";
             coln_ch1.ImageOptions.ImageKey = resources.GetString("coln_ch1.ImageOptions.ImageKey");
             coln_ch1.MinWidth = 23;
             coln_ch1.Name = "coln_ch1";
+            resources.ApplyResources(coln_ch1, "coln_ch1");
             // 
             // gridColumn17
             // 
-            resources.ApplyResources(gridColumn17, "gridColumn17");
             gridColumn17.FieldName = "kod";
             gridColumn17.ImageOptions.ImageKey = resources.GetString("gridColumn17.ImageOptions.ImageKey");
             gridColumn17.MinWidth = 23;
             gridColumn17.Name = "gridColumn17";
+            resources.ApplyResources(gridColumn17, "gridColumn17");
             // 
             // colannId2
             // 
-            resources.ApplyResources(colannId2, "colannId2");
             colannId2.FieldName = "AnnId";
             colannId2.ImageOptions.ImageKey = resources.GetString("colannId2.ImageOptions.ImageKey");
             colannId2.MinWidth = 23;
             colannId2.Name = "colannId2";
+            resources.ApplyResources(colannId2, "colannId2");
             // 
             // gridControlRasz
             // 
-            resources.ApplyResources(gridControlRasz, "gridControlRasz");
-            tableLayoutPanel2.SetColumnSpan(gridControlRasz, 2);
-            gridControlRasz.EmbeddedNavigator.AccessibleDescription = resources.GetString("gridControlRasz.EmbeddedNavigator.AccessibleDescription");
-            gridControlRasz.EmbeddedNavigator.AccessibleName = resources.GetString("gridControlRasz.EmbeddedNavigator.AccessibleName");
             gridControlRasz.EmbeddedNavigator.AllowHtmlTextInToolTip = (DevExpress.Utils.DefaultBoolean)resources.GetObject("gridControlRasz.EmbeddedNavigator.AllowHtmlTextInToolTip");
             gridControlRasz.EmbeddedNavigator.Anchor = (System.Windows.Forms.AnchorStyles)resources.GetObject("gridControlRasz.EmbeddedNavigator.Anchor");
-            gridControlRasz.EmbeddedNavigator.AutoSize = (bool)resources.GetObject("gridControlRasz.EmbeddedNavigator.AutoSize");
-            gridControlRasz.EmbeddedNavigator.BackgroundImage = (System.Drawing.Image)resources.GetObject("gridControlRasz.EmbeddedNavigator.BackgroundImage");
             gridControlRasz.EmbeddedNavigator.BackgroundImageLayout = (System.Windows.Forms.ImageLayout)resources.GetObject("gridControlRasz.EmbeddedNavigator.BackgroundImageLayout");
             gridControlRasz.EmbeddedNavigator.ImeMode = (System.Windows.Forms.ImeMode)resources.GetObject("gridControlRasz.EmbeddedNavigator.ImeMode");
             gridControlRasz.EmbeddedNavigator.Margin = (System.Windows.Forms.Padding)resources.GetObject("gridControlRasz.EmbeddedNavigator.Margin");
-            gridControlRasz.EmbeddedNavigator.MaximumSize = (System.Drawing.Size)resources.GetObject("gridControlRasz.EmbeddedNavigator.MaximumSize");
             gridControlRasz.EmbeddedNavigator.TextLocation = (DevExpress.XtraEditors.NavigatorButtonsTextLocation)resources.GetObject("gridControlRasz.EmbeddedNavigator.TextLocation");
-            gridControlRasz.EmbeddedNavigator.ToolTip = resources.GetString("gridControlRasz.EmbeddedNavigator.ToolTip");
             gridControlRasz.EmbeddedNavigator.ToolTipIconType = (DevExpress.Utils.ToolTipIconType)resources.GetObject("gridControlRasz.EmbeddedNavigator.ToolTipIconType");
-            gridControlRasz.EmbeddedNavigator.ToolTipTitle = resources.GetString("gridControlRasz.EmbeddedNavigator.ToolTipTitle");
-            errorProvider1.SetError(gridControlRasz, resources.GetString("gridControlRasz.Error"));
             errorProvider1.SetIconAlignment(gridControlRasz, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("gridControlRasz.IconAlignment"));
-            errorProvider1.SetIconPadding(gridControlRasz, (int)resources.GetObject("gridControlRasz.IconPadding"));
+            resources.ApplyResources(gridControlRasz, "gridControlRasz");
             gridControlRasz.MainView = gridViewRasz;
             gridControlRasz.Name = "gridControlRasz";
             gridControlRasz.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit_kodProizv, repositoryItemLookUpEdit_podrVyaz, repositoryItemLookUpEdit_oborudShv });
@@ -381,7 +586,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridViewRasz
             // 
-            resources.ApplyResources(gridViewRasz, "gridViewRasz");
             gridViewRasz.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
             gridViewRasz.Appearance.FocusedCell.Options.UseForeColor = true;
             gridViewRasz.Appearance.FocusedRow.Font = (System.Drawing.Font)resources.GetObject("gridViewRasz.Appearance.FocusedRow.Font");
@@ -395,8 +599,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridViewRasz.GridControl = gridControlRasz;
             gridViewRasz.Name = "gridViewRasz";
+            resources.ApplyResources(gridViewRasz, "gridViewRasz");
             gridViewRasz.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRasz.OptionsBehavior.AutoExpandAllGroups = true;
             gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
             gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
             gridViewRasz.OptionsClipboard.PasteMode = DevExpress.Export.PasteMode.Append;
@@ -415,7 +621,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.ValidateRow += gridViewRasz_ValidateRow;
             gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;
             gridViewRasz.RowEditCanceled += gridViewRasz_RowEditCanceled;
-            gridViewRasz.ValidatingEditor += gridViewRasz_ValidatingEditor;
             // 
             // gridColumn2
             // 
@@ -426,7 +631,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn2.Name = "gridColumn2";
             gridColumn2.OptionsEditForm.Caption = resources.GetString("gridColumn2.OptionsEditForm.Caption");
             gridColumn2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
-            gridColumn2.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
             // 
             // gridColumn34
             // 
@@ -652,31 +856,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridControlRaskr
             // 
-            resources.ApplyResources(gridControlRaskr, "gridControlRaskr");
-            gridControlRaskr.EmbeddedNavigator.AccessibleDescription = resources.GetString("gridControlRaskr.EmbeddedNavigator.AccessibleDescription");
-            gridControlRaskr.EmbeddedNavigator.AccessibleName = resources.GetString("gridControlRaskr.EmbeddedNavigator.AccessibleName");
             gridControlRaskr.EmbeddedNavigator.AllowHtmlTextInToolTip = (DevExpress.Utils.DefaultBoolean)resources.GetObject("gridControlRaskr.EmbeddedNavigator.AllowHtmlTextInToolTip");
             gridControlRaskr.EmbeddedNavigator.Anchor = (System.Windows.Forms.AnchorStyles)resources.GetObject("gridControlRaskr.EmbeddedNavigator.Anchor");
-            gridControlRaskr.EmbeddedNavigator.AutoSize = (bool)resources.GetObject("gridControlRaskr.EmbeddedNavigator.AutoSize");
-            gridControlRaskr.EmbeddedNavigator.BackgroundImage = (System.Drawing.Image)resources.GetObject("gridControlRaskr.EmbeddedNavigator.BackgroundImage");
             gridControlRaskr.EmbeddedNavigator.BackgroundImageLayout = (System.Windows.Forms.ImageLayout)resources.GetObject("gridControlRaskr.EmbeddedNavigator.BackgroundImageLayout");
             gridControlRaskr.EmbeddedNavigator.ImeMode = (System.Windows.Forms.ImeMode)resources.GetObject("gridControlRaskr.EmbeddedNavigator.ImeMode");
             gridControlRaskr.EmbeddedNavigator.Margin = (System.Windows.Forms.Padding)resources.GetObject("gridControlRaskr.EmbeddedNavigator.Margin");
-            gridControlRaskr.EmbeddedNavigator.MaximumSize = (System.Drawing.Size)resources.GetObject("gridControlRaskr.EmbeddedNavigator.MaximumSize");
             gridControlRaskr.EmbeddedNavigator.TextLocation = (DevExpress.XtraEditors.NavigatorButtonsTextLocation)resources.GetObject("gridControlRaskr.EmbeddedNavigator.TextLocation");
-            gridControlRaskr.EmbeddedNavigator.ToolTip = resources.GetString("gridControlRaskr.EmbeddedNavigator.ToolTip");
             gridControlRaskr.EmbeddedNavigator.ToolTipIconType = (DevExpress.Utils.ToolTipIconType)resources.GetObject("gridControlRaskr.EmbeddedNavigator.ToolTipIconType");
-            gridControlRaskr.EmbeddedNavigator.ToolTipTitle = resources.GetString("gridControlRaskr.EmbeddedNavigator.ToolTipTitle");
-            errorProvider1.SetError(gridControlRaskr, resources.GetString("gridControlRaskr.Error"));
             errorProvider1.SetIconAlignment(gridControlRaskr, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("gridControlRaskr.IconAlignment"));
-            errorProvider1.SetIconPadding(gridControlRaskr, (int)resources.GetObject("gridControlRaskr.IconPadding"));
+            resources.ApplyResources(gridControlRaskr, "gridControlRaskr");
             gridControlRaskr.MainView = gridViewRaskr;
             gridControlRaskr.Name = "gridControlRaskr";
             gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskr });
             // 
             // gridViewRaskr
             // 
-            resources.ApplyResources(gridViewRaskr, "gridViewRaskr");
             gridViewRaskr.Appearance.ColumnFilterButtonActive.BackColor = System.Drawing.Color.Navy;
             gridViewRaskr.Appearance.ColumnFilterButtonActive.Options.UseBackColor = true;
             gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
@@ -687,6 +881,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRaskr.DetailHeight = 404;
             gridViewRaskr.GridControl = gridControlRaskr;
             gridViewRaskr.Name = "gridViewRaskr";
+            resources.ApplyResources(gridViewRaskr, "gridViewRaskr");
             gridViewRaskr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRaskr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRaskr.OptionsEditForm.PopupEditFormWidth = 933;
@@ -708,12 +903,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridColumn9
             // 
-            resources.ApplyResources(gridColumn9, "gridColumn9");
             gridColumn9.FieldName = "nkId";
             gridColumn9.ImageOptions.ImageKey = resources.GetString("gridColumn9.ImageOptions.ImageKey");
             gridColumn9.MinWidth = 23;
             gridColumn9.Name = "gridColumn9";
-            gridColumn9.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
+            resources.ApplyResources(gridColumn9, "gridColumn9");
             // 
             // gridColumn10
             // 
@@ -746,7 +940,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn11.ImageOptions.ImageKey = resources.GetString("gridColumn11.ImageOptions.ImageKey");
             gridColumn11.MinWidth = 23;
             gridColumn11.Name = "gridColumn11";
-            gridColumn11.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem() });
             // 
             // gridColumn15
             // 
@@ -782,483 +975,469 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridColumn12
             // 
-            resources.ApplyResources(gridColumn12, "gridColumn12");
             gridColumn12.FieldName = "N";
             gridColumn12.ImageOptions.ImageKey = resources.GetString("gridColumn12.ImageOptions.ImageKey");
             gridColumn12.MinWidth = 23;
             gridColumn12.Name = "gridColumn12";
+            resources.ApplyResources(gridColumn12, "gridColumn12");
             // 
             // coln_ch
             // 
-            resources.ApplyResources(coln_ch, "coln_ch");
             coln_ch.FieldName = "N_ch";
             coln_ch.ImageOptions.ImageKey = resources.GetString("coln_ch.ImageOptions.ImageKey");
             coln_ch.MinWidth = 23;
             coln_ch.Name = "coln_ch";
+            resources.ApplyResources(coln_ch, "coln_ch");
             // 
             // colannId1
             // 
-            resources.ApplyResources(colannId1, "colannId1");
             colannId1.FieldName = "AnnId";
             colannId1.ImageOptions.ImageKey = resources.GetString("colannId1.ImageOptions.ImageKey");
             colannId1.MinWidth = 23;
             colannId1.Name = "colannId1";
+            resources.ApplyResources(colannId1, "colannId1");
             // 
             // statusLabel
             // 
             resources.ApplyResources(statusLabel, "statusLabel");
-            errorProvider1.SetError(statusLabel, resources.GetString("statusLabel.Error"));
             statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(statusLabel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("statusLabel.IconAlignment"));
-            errorProvider1.SetIconPadding(statusLabel, (int)resources.GetObject("statusLabel.IconPadding"));
             statusLabel.Name = "statusLabel";
-            // 
-            // tableLayoutPanel4
-            // 
-            resources.ApplyResources(tableLayoutPanel4, "tableLayoutPanel4");
-            tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 5);
-            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 4);
-            tableLayoutPanel4.Controls.Add(btnOK, 0, 3);
-            tableLayoutPanel4.Controls.Add(btnCancel, 2, 3);
-            tableLayoutPanel4.Controls.Add(btnMoveUp, 0, 0);
-            tableLayoutPanel4.Controls.Add(btnMoveDown, 0, 1);
-            tableLayoutPanel4.Controls.Add(btnValidateNumbers, 1, 0);
-            tableLayoutPanel4.Controls.Add(btnRecalculateNumbers, 1, 1);
-            errorProvider1.SetError(tableLayoutPanel4, resources.GetString("tableLayoutPanel4.Error"));
-            errorProvider1.SetIconAlignment(tableLayoutPanel4, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel4.IconAlignment"));
-            errorProvider1.SetIconPadding(tableLayoutPanel4, (int)resources.GetObject("tableLayoutPanel4.IconPadding"));
-            tableLayoutPanel4.Name = "tableLayoutPanel4";
-            // 
-            // customGroupBox2
-            // 
-            resources.ApplyResources(customGroupBox2, "customGroupBox2");
-            customGroupBox2.BackColor = System.Drawing.Color.Transparent;
-            tableLayoutPanel4.SetColumnSpan(customGroupBox2, 3);
-            customGroupBox2.Controls.Add(buffer);
-            customGroupBox2.Controls.Add(textBoxBuffer);
-            errorProvider1.SetError(customGroupBox2, resources.GetString("customGroupBox2.Error"));
-            errorProvider1.SetIconAlignment(customGroupBox2, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customGroupBox2.IconAlignment"));
-            errorProvider1.SetIconPadding(customGroupBox2, (int)resources.GetObject("customGroupBox2.IconPadding"));
-            customGroupBox2.Name = "customGroupBox2";
-            customGroupBox2.TabStop = false;
-            // 
-            // buffer
-            // 
-            resources.ApplyResources(buffer, "buffer");
-            buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            errorProvider1.SetError(buffer, resources.GetString("buffer.Error"));
-            buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(buffer, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("buffer.IconAlignment"));
-            errorProvider1.SetIconPadding(buffer, (int)resources.GetObject("buffer.IconPadding"));
-            buffer.Name = "buffer";
-            buffer.UseVisualStyleBackColor = false;
-            buffer.Click += buffer_Click;
             // 
             // textBoxBuffer
             // 
             resources.ApplyResources(textBoxBuffer, "textBoxBuffer");
-            errorProvider1.SetError(textBoxBuffer, resources.GetString("textBoxBuffer.Error"));
             errorProvider1.SetIconAlignment(textBoxBuffer, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("textBoxBuffer.IconAlignment"));
-            errorProvider1.SetIconPadding(textBoxBuffer, (int)resources.GetObject("textBoxBuffer.IconPadding"));
             textBoxBuffer.Name = "textBoxBuffer";
             // 
-            // customGroupBox1
+            // buffer
             // 
-            resources.ApplyResources(customGroupBox1, "customGroupBox1");
-            customGroupBox1.BackColor = System.Drawing.Color.Transparent;
-            tableLayoutPanel4.SetColumnSpan(customGroupBox1, 3);
-            customGroupBox1.Controls.Add(tableLayoutPanel5);
-            errorProvider1.SetError(customGroupBox1, resources.GetString("customGroupBox1.Error"));
-            errorProvider1.SetIconAlignment(customGroupBox1, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customGroupBox1.IconAlignment"));
-            errorProvider1.SetIconPadding(customGroupBox1, (int)resources.GetObject("customGroupBox1.IconPadding"));
-            customGroupBox1.Name = "customGroupBox1";
-            customGroupBox1.TabStop = false;
+            buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            resources.ApplyResources(buffer, "buffer");
+            buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            errorProvider1.SetIconAlignment(buffer, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("buffer.IconAlignment"));
+            buffer.Name = "buffer";
+            buffer.UseVisualStyleBackColor = false;
+            buffer.Click += buffer_Click;
             // 
-            // tableLayoutPanel5
+            // tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout
             // 
-            resources.ApplyResources(tableLayoutPanel5, "tableLayoutPanel5");
-            tableLayoutPanel5.Controls.Add(textBoxReco, 0, 13);
-            tableLayoutPanel5.Controls.Add(customLabel4, 0, 8);
-            tableLayoutPanel5.Controls.Add(designerComboBox, 0, 20);
-            tableLayoutPanel5.Controls.Add(constructorComboBox, 0, 18);
-            tableLayoutPanel5.Controls.Add(customLabel1, 0, 19);
-            tableLayoutPanel5.Controls.Add(label5, 0, 0);
-            tableLayoutPanel5.Controls.Add(customLabel2, 0, 17);
-            tableLayoutPanel5.Controls.Add(dateCreate, 0, 1);
-            tableLayoutPanel5.Controls.Add(groupTextBox, 0, 3);
-            tableLayoutPanel5.Controls.Add(nameTextBox, 0, 7);
-            tableLayoutPanel5.Controls.Add(customLabel3, 0, 2);
-            tableLayoutPanel5.Controls.Add(label3, 0, 6);
-            tableLayoutPanel5.Controls.Add(modelTextBox, 0, 5);
-            tableLayoutPanel5.Controls.Add(label2, 0, 4);
-            tableLayoutPanel5.Controls.Add(label4, 0, 15);
-            tableLayoutPanel5.Controls.Add(secTimeTextBox, 0, 16);
-            tableLayoutPanel5.Controls.Add(textBoxKomment, 0, 9);
-            tableLayoutPanel5.Controls.Add(customLabel5, 0, 11);
-            errorProvider1.SetError(tableLayoutPanel5, resources.GetString("tableLayoutPanel5.Error"));
-            errorProvider1.SetIconAlignment(tableLayoutPanel5, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel5.IconAlignment"));
-            errorProvider1.SetIconPadding(tableLayoutPanel5, (int)resources.GetObject("tableLayoutPanel5.IconPadding"));
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            errorProvider1.SetIconAlignment(tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.IconAlignment"));
+            resources.ApplyResources(tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout, "tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout");
+            tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.Name = "tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout";
+            tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(890, 454, 650, 400);
+            tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.Root = null;
             // 
-            // textBoxReco
+            // layoutControlItem4
             // 
-            resources.ApplyResources(textBoxReco, "textBoxReco");
-            tableLayoutPanel5.SetColumnSpan(textBoxReco, 3);
-            errorProvider1.SetError(textBoxReco, resources.GetString("textBoxReco.Error"));
-            errorProvider1.SetIconAlignment(textBoxReco, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("textBoxReco.IconAlignment"));
-            errorProvider1.SetIconPadding(textBoxReco, (int)resources.GetObject("textBoxReco.IconPadding"));
-            textBoxReco.Name = "textBoxReco";
-            tableLayoutPanel5.SetRowSpan(textBoxReco, 2);
+            layoutControlItem4.Control = btnValidateNumbers;
+            layoutControlItem4.ImageOptions.ImageKey = resources.GetString("layoutControlItem4.ImageOptions.ImageKey");
+            layoutControlItem4.Location = new System.Drawing.Point(233, 850);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new System.Drawing.Size(233, 24);
+            layoutControlItem4.TextVisible = false;
             // 
-            // customLabel4
+            // layoutControlItem1
             // 
-            resources.ApplyResources(customLabel4, "customLabel4");
-            tableLayoutPanel5.SetColumnSpan(customLabel4, 2);
-            errorProvider1.SetError(customLabel4, resources.GetString("customLabel4.Error"));
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(customLabel4, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customLabel4.IconAlignment"));
-            errorProvider1.SetIconPadding(customLabel4, (int)resources.GetObject("customLabel4.IconPadding"));
-            customLabel4.Name = "customLabel4";
+            layoutControlItem1.Control = tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout;
+            layoutControlItem1.ImageOptions.ImageKey = resources.GetString("layoutControlItem1.ImageOptions.ImageKey");
+            layoutControlItem1.Location = new System.Drawing.Point(744, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(745, 33);
+            layoutControlItem1.TextVisible = false;
             // 
-            // designerComboBox
+            // layoutControlGroup3
             // 
-            resources.ApplyResources(designerComboBox, "designerComboBox");
-            tableLayoutPanel5.SetColumnSpan(designerComboBox, 3);
-            errorProvider1.SetError(designerComboBox, resources.GetString("designerComboBox.Error"));
-            errorProvider1.SetIconAlignment(designerComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("designerComboBox.IconAlignment"));
-            errorProvider1.SetIconPadding(designerComboBox, (int)resources.GetObject("designerComboBox.IconPadding"));
-            designerComboBox.Name = "designerComboBox";
-            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("designerComboBox.Properties.Buttons1")) });
+            layoutControlGroup3.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup3.BackgroundImageOptions.ImageKey");
+            layoutControlGroup3.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup3.CaptionImageOptions.ImageKey");
+            layoutControlGroup3.ContentImageOptions.ImageKey = resources.GetString("layoutControlGroup3.ContentImageOptions.ImageKey");
+            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem5, layoutControlItem8, layoutControlItem6 });
+            layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            layoutControlGroup3.Name = "layoutControlGroup3";
+            layoutControlGroup3.Size = new System.Drawing.Size(295, 72);
+            layoutControlGroup3.TextVisible = false;
             // 
-            // constructorComboBox
+            // layoutControlItem5
             // 
-            resources.ApplyResources(constructorComboBox, "constructorComboBox");
-            tableLayoutPanel5.SetColumnSpan(constructorComboBox, 3);
-            errorProvider1.SetError(constructorComboBox, resources.GetString("constructorComboBox.Error"));
-            errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
-            errorProvider1.SetIconPadding(constructorComboBox, (int)resources.GetObject("constructorComboBox.IconPadding"));
-            constructorComboBox.Name = "constructorComboBox";
-            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons1")) });
-            constructorComboBox.TabIndexChanged += ComboBox_SelectedIndexChanged;
+            layoutControlItem5.Control = btnRecalculateNumbers;
+            layoutControlItem5.ImageOptions.ImageKey = resources.GetString("layoutControlItem5.ImageOptions.ImageKey");
+            layoutControlItem5.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new System.Drawing.Size(271, 24);
+            layoutControlItem5.TextVisible = false;
             // 
-            // customLabel1
+            // layoutControlItem8
             // 
-            resources.ApplyResources(customLabel1, "customLabel1");
-            tableLayoutPanel5.SetColumnSpan(customLabel1, 2);
-            errorProvider1.SetError(customLabel1, resources.GetString("customLabel1.Error"));
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(customLabel1, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customLabel1.IconAlignment"));
-            errorProvider1.SetIconPadding(customLabel1, (int)resources.GetObject("customLabel1.IconPadding"));
-            customLabel1.Name = "customLabel1";
+            layoutControlItem8.Control = btnMoveDown;
+            layoutControlItem8.ImageOptions.ImageKey = resources.GetString("layoutControlItem8.ImageOptions.ImageKey");
+            layoutControlItem8.Location = new System.Drawing.Point(0, 24);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new System.Drawing.Size(132, 24);
+            layoutControlItem8.TextVisible = false;
             // 
-            // label5
+            // layoutControlItem6
             // 
-            resources.ApplyResources(label5, "label5");
-            tableLayoutPanel5.SetColumnSpan(label5, 2);
-            errorProvider1.SetError(label5, resources.GetString("label5.Error"));
-            label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(label5, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("label5.IconAlignment"));
-            errorProvider1.SetIconPadding(label5, (int)resources.GetObject("label5.IconPadding"));
-            label5.Name = "label5";
+            layoutControlItem6.Control = btnMoveUp;
+            layoutControlItem6.ImageOptions.ImageKey = resources.GetString("layoutControlItem6.ImageOptions.ImageKey");
+            layoutControlItem6.Location = new System.Drawing.Point(132, 24);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new System.Drawing.Size(139, 24);
+            layoutControlItem6.TextVisible = false;
             // 
-            // customLabel2
+            // layoutControlGroup2
             // 
-            resources.ApplyResources(customLabel2, "customLabel2");
-            tableLayoutPanel5.SetColumnSpan(customLabel2, 2);
-            errorProvider1.SetError(customLabel2, resources.GetString("customLabel2.Error"));
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(customLabel2, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customLabel2.IconAlignment"));
-            errorProvider1.SetIconPadding(customLabel2, (int)resources.GetObject("customLabel2.IconPadding"));
-            customLabel2.Name = "customLabel2";
+            layoutControlGroup2.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup2.BackgroundImageOptions.ImageKey");
+            layoutControlGroup2.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup2.CaptionImageOptions.ImageKey");
+            layoutControlGroup2.ContentImageOptions.ImageKey = resources.GetString("layoutControlGroup2.ContentImageOptions.ImageKey");
+            layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem7 });
+            layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            layoutControlGroup2.Name = "layoutControlGroup2";
+            layoutControlGroup2.Size = new System.Drawing.Size(744, 50);
+            layoutControlGroup2.TextVisible = false;
             // 
-            // dateCreate
+            // layoutControlItem2
             // 
-            resources.ApplyResources(dateCreate, "dateCreate");
-            dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(dateCreate, 3);
-            errorProvider1.SetError(dateCreate, resources.GetString("dateCreate.Error"));
-            dateCreate.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            errorProvider1.SetIconAlignment(dateCreate, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("dateCreate.IconAlignment"));
-            errorProvider1.SetIconPadding(dateCreate, (int)resources.GetObject("dateCreate.IconPadding"));
-            dateCreate.Name = "dateCreate";
-            dateCreate.ObjectName = null;
+            layoutControlItem2.Control = btnCancel;
+            layoutControlItem2.ImageOptions.ImageKey = resources.GetString("layoutControlItem2.ImageOptions.ImageKey");
+            layoutControlItem2.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new System.Drawing.Size(140, 26);
+            layoutControlItem2.TextVisible = false;
             // 
-            // groupTextBox
+            // layoutControlItem3
             // 
-            resources.ApplyResources(groupTextBox, "groupTextBox");
-            groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(groupTextBox, 3);
-            errorProvider1.SetError(groupTextBox, resources.GetString("groupTextBox.Error"));
-            groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            errorProvider1.SetIconAlignment(groupTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("groupTextBox.IconAlignment"));
-            errorProvider1.SetIconPadding(groupTextBox, (int)resources.GetObject("groupTextBox.IconPadding"));
-            groupTextBox.Name = "groupTextBox";
+            layoutControlItem3.Control = btnOK;
+            layoutControlItem3.ImageOptions.ImageKey = resources.GetString("layoutControlItem3.ImageOptions.ImageKey");
+            layoutControlItem3.Location = new System.Drawing.Point(140, 0);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(146, 26);
+            layoutControlItem3.TextVisible = false;
             // 
-            // nameTextBox
+            // layoutControlItem7
             // 
-            resources.ApplyResources(nameTextBox, "nameTextBox");
-            nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(nameTextBox, 3);
-            errorProvider1.SetError(nameTextBox, resources.GetString("nameTextBox.Error"));
-            nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            errorProvider1.SetIconAlignment(nameTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("nameTextBox.IconAlignment"));
-            errorProvider1.SetIconPadding(nameTextBox, (int)resources.GetObject("nameTextBox.IconPadding"));
-            nameTextBox.Name = "nameTextBox";
+            layoutControlItem7.Control = btnSave;
+            layoutControlItem7.ImageOptions.ImageKey = resources.GetString("layoutControlItem7.ImageOptions.ImageKey");
+            layoutControlItem7.Location = new System.Drawing.Point(286, 0);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new System.Drawing.Size(434, 26);
+            layoutControlItem7.TextVisible = false;
             // 
-            // customLabel3
+            // layoutControlGroup7
             // 
-            resources.ApplyResources(customLabel3, "customLabel3");
-            tableLayoutPanel5.SetColumnSpan(customLabel3, 2);
-            errorProvider1.SetError(customLabel3, resources.GetString("customLabel3.Error"));
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(customLabel3, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customLabel3.IconAlignment"));
-            errorProvider1.SetIconPadding(customLabel3, (int)resources.GetObject("customLabel3.IconPadding"));
-            customLabel3.Name = "customLabel3";
+            layoutControlGroup7.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup7.BackgroundImageOptions.ImageKey");
+            layoutControlGroup7.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup7.CaptionImageOptions.ImageKey");
+            layoutControlGroup7.ContentImageOptions.ImageKey = resources.GetString("layoutControlGroup7.ContentImageOptions.ImageKey");
+            layoutControlGroup7.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup7.GroupBordersVisible = false;
+            layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup1, statusLabelitem, layoutControlGroup10, layoutControlGroup4, splitterItem1, splitterItem2 });
+            layoutControlGroup7.Name = "Root";
+            layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 0, 0, 0);
+            layoutControlGroup7.Size = new System.Drawing.Size(1509, 894);
             // 
-            // label3
+            // layoutControlGroup1
             // 
-            resources.ApplyResources(label3, "label3");
-            tableLayoutPanel5.SetColumnSpan(label3, 2);
-            errorProvider1.SetError(label3, resources.GetString("label3.Error"));
-            label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(label3, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("label3.IconAlignment"));
-            errorProvider1.SetIconPadding(label3, (int)resources.GetObject("label3.IconPadding"));
-            label3.Name = "label3";
+            layoutControlGroup1.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup1.BackgroundImageOptions.ImageKey");
+            layoutControlGroup1.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup1.CaptionImageOptions.ImageKey");
+            layoutControlGroup1.ContentImageOptions.ImageKey = resources.GetString("layoutControlGroup1.ContentImageOptions.ImageKey");
+            buttonImageOptions1.Image = Properties.Resources.reset_16x16;
+            buttonImageOptions2.Image = Properties.Resources.save_16x16;
+            buttonImageOptions3.Image = Properties.Resources.saveto_16x16;
+            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup1.CustomHeaderButtons"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons1"), buttonImageOptions1, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup1.CustomHeaderButtons2"), resources.GetString("layoutControlGroup1.CustomHeaderButtons3"), (int)resources.GetObject("layoutControlGroup1.CustomHeaderButtons4"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons5"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup1.CustomHeaderButtons6"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons7"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons8"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons9"), resources.GetObject("layoutControlGroup1.CustomHeaderButtons10"), (int)resources.GetObject("layoutControlGroup1.CustomHeaderButtons11")), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup1.CustomHeaderButtons12"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons13"), buttonImageOptions2, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup1.CustomHeaderButtons14"), resources.GetString("layoutControlGroup1.CustomHeaderButtons15"), (int)resources.GetObject("layoutControlGroup1.CustomHeaderButtons16"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons17"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup1.CustomHeaderButtons18"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons19"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons20"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons21"), resources.GetObject("layoutControlGroup1.CustomHeaderButtons22"), (int)resources.GetObject("layoutControlGroup1.CustomHeaderButtons23")), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup1.CustomHeaderButtons24"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons25"), buttonImageOptions3, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup1.CustomHeaderButtons26"), resources.GetString("layoutControlGroup1.CustomHeaderButtons27"), (int)resources.GetObject("layoutControlGroup1.CustomHeaderButtons28"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons29"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup1.CustomHeaderButtons30"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons31"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons32"), (bool)resources.GetObject("layoutControlGroup1.CustomHeaderButtons33"), resources.GetObject("layoutControlGroup1.CustomHeaderButtons34"), (int)resources.GetObject("layoutControlGroup1.CustomHeaderButtons35")) });
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem14, layoutControlItem13, layoutControlItem12, layoutControlItem11, layoutControlItem17, layoutControlItem15, layoutControlItem9, layoutControlItem10, layoutControlItem16, emptySpaceItem1 });
+            layoutControlGroup1.Location = new System.Drawing.Point(0, 25);
+            layoutControlGroup1.Name = "layoutControlGroup1";
+            layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup1.Size = new System.Drawing.Size(332, 538);
+            resources.ApplyResources(layoutControlGroup1, "layoutControlGroup1");
             // 
-            // modelTextBox
+            // layoutControlItem14
             // 
-            resources.ApplyResources(modelTextBox, "modelTextBox");
-            modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tableLayoutPanel5.SetColumnSpan(modelTextBox, 3);
-            errorProvider1.SetError(modelTextBox, resources.GetString("modelTextBox.Error"));
-            modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            errorProvider1.SetIconAlignment(modelTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("modelTextBox.IconAlignment"));
-            errorProvider1.SetIconPadding(modelTextBox, (int)resources.GetObject("modelTextBox.IconPadding"));
-            modelTextBox.Name = "modelTextBox";
+            layoutControlItem14.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem14.AppearanceItemCaption.Font");
+            layoutControlItem14.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem14.Control = textBoxReco;
+            layoutControlItem14.ImageOptions.ImageKey = resources.GetString("layoutControlItem14.ImageOptions.ImageKey");
+            layoutControlItem14.Location = new System.Drawing.Point(0, 282);
+            layoutControlItem14.Name = "layoutControlItem14";
+            layoutControlItem14.Size = new System.Drawing.Size(326, 94);
+            resources.ApplyResources(layoutControlItem14, "layoutControlItem14");
+            layoutControlItem14.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem14.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // label2
+            // layoutControlItem13
             // 
-            resources.ApplyResources(label2, "label2");
-            tableLayoutPanel5.SetColumnSpan(label2, 2);
-            errorProvider1.SetError(label2, resources.GetString("label2.Error"));
-            label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(label2, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("label2.IconAlignment"));
-            errorProvider1.SetIconPadding(label2, (int)resources.GetObject("label2.IconPadding"));
-            label2.Name = "label2";
+            layoutControlItem13.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem13.AppearanceItemCaption.Font");
+            layoutControlItem13.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem13.Control = textBoxKomment;
+            layoutControlItem13.ImageOptions.ImageKey = resources.GetString("layoutControlItem13.ImageOptions.ImageKey");
+            layoutControlItem13.Location = new System.Drawing.Point(0, 180);
+            layoutControlItem13.Name = "layoutControlItem13";
+            layoutControlItem13.Size = new System.Drawing.Size(326, 102);
+            resources.ApplyResources(layoutControlItem13, "layoutControlItem13");
+            layoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem13.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // label4
+            // layoutControlItem12
             // 
-            resources.ApplyResources(label4, "label4");
-            tableLayoutPanel5.SetColumnSpan(label4, 3);
-            errorProvider1.SetError(label4, resources.GetString("label4.Error"));
-            label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(label4, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("label4.IconAlignment"));
-            errorProvider1.SetIconPadding(label4, (int)resources.GetObject("label4.IconPadding"));
-            label4.Name = "label4";
+            layoutControlItem12.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem12.AppearanceItemCaption.Font");
+            layoutControlItem12.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem12.Control = nameTextBox;
+            layoutControlItem12.ImageOptions.ImageKey = resources.GetString("layoutControlItem12.ImageOptions.ImageKey");
+            layoutControlItem12.Location = new System.Drawing.Point(0, 135);
+            layoutControlItem12.Name = "layoutControlItem12";
+            layoutControlItem12.Size = new System.Drawing.Size(326, 45);
+            resources.ApplyResources(layoutControlItem12, "layoutControlItem12");
+            layoutControlItem12.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem12.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // secTimeTextBox
+            // layoutControlItem11
             // 
-            resources.ApplyResources(secTimeTextBox, "secTimeTextBox");
-            secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            errorProvider1.SetError(secTimeTextBox, resources.GetString("secTimeTextBox.Error"));
-            secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            errorProvider1.SetIconAlignment(secTimeTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("secTimeTextBox.IconAlignment"));
-            errorProvider1.SetIconPadding(secTimeTextBox, (int)resources.GetObject("secTimeTextBox.IconPadding"));
-            secTimeTextBox.Name = "secTimeTextBox";
-            secTimeTextBox.ReadOnly = true;
+            layoutControlItem11.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem11.AppearanceItemCaption.Font");
+            layoutControlItem11.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem11.Control = modelTextBox;
+            layoutControlItem11.ImageOptions.ImageKey = resources.GetString("layoutControlItem11.ImageOptions.ImageKey");
+            layoutControlItem11.Location = new System.Drawing.Point(0, 90);
+            layoutControlItem11.Name = "layoutControlItem11";
+            layoutControlItem11.Size = new System.Drawing.Size(326, 45);
+            resources.ApplyResources(layoutControlItem11, "layoutControlItem11");
+            layoutControlItem11.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem11.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // textBoxKomment
+            // layoutControlItem17
             // 
-            resources.ApplyResources(textBoxKomment, "textBoxKomment");
-            tableLayoutPanel5.SetColumnSpan(textBoxKomment, 3);
-            errorProvider1.SetError(textBoxKomment, resources.GetString("textBoxKomment.Error"));
-            errorProvider1.SetIconAlignment(textBoxKomment, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("textBoxKomment.IconAlignment"));
-            errorProvider1.SetIconPadding(textBoxKomment, (int)resources.GetObject("textBoxKomment.IconPadding"));
-            textBoxKomment.Name = "textBoxKomment";
-            tableLayoutPanel5.SetRowSpan(textBoxKomment, 2);
+            layoutControlItem17.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem17.AppearanceItemCaption.Font");
+            layoutControlItem17.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem17.Control = designerComboBox;
+            layoutControlItem17.ImageOptions.ImageKey = resources.GetString("layoutControlItem17.ImageOptions.ImageKey");
+            layoutControlItem17.Location = new System.Drawing.Point(0, 466);
+            layoutControlItem17.Name = "layoutControlItem17";
+            layoutControlItem17.Size = new System.Drawing.Size(326, 45);
+            resources.ApplyResources(layoutControlItem17, "layoutControlItem17");
+            layoutControlItem17.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem17.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // customLabel5
+            // layoutControlItem15
             // 
-            resources.ApplyResources(customLabel5, "customLabel5");
-            tableLayoutPanel5.SetColumnSpan(customLabel5, 3);
-            errorProvider1.SetError(customLabel5, resources.GetString("customLabel5.Error"));
-            customLabel5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            errorProvider1.SetIconAlignment(customLabel5, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customLabel5.IconAlignment"));
-            errorProvider1.SetIconPadding(customLabel5, (int)resources.GetObject("customLabel5.IconPadding"));
-            customLabel5.Name = "customLabel5";
-            tableLayoutPanel5.SetRowSpan(customLabel5, 2);
+            layoutControlItem15.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem15.AppearanceItemCaption.Font");
+            layoutControlItem15.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem15.Control = secTimeTextBox;
+            layoutControlItem15.ImageOptions.ImageKey = resources.GetString("layoutControlItem15.ImageOptions.ImageKey");
+            layoutControlItem15.Location = new System.Drawing.Point(0, 376);
+            layoutControlItem15.Name = "layoutControlItem15";
+            layoutControlItem15.Size = new System.Drawing.Size(304, 45);
+            resources.ApplyResources(layoutControlItem15, "layoutControlItem15");
+            layoutControlItem15.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem15.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // btnOK
+            // layoutControlItem9
             // 
-            resources.ApplyResources(btnOK, "btnOK");
-            btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnOK.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnOK.Appearance.Font");
-            btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnOK.Appearance.Options.UseBackColor = true;
-            btnOK.Appearance.Options.UseFont = true;
-            btnOK.Appearance.Options.UseForeColor = true;
-            btnOK.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnOK.AppearanceDisabled.Options.UseBackColor = true;
-            btnOK.AppearanceDisabled.Options.UseForeColor = true;
-            tableLayoutPanel4.SetColumnSpan(btnOK, 2);
-            errorProvider1.SetError(btnOK, resources.GetString("btnOK.Error"));
-            errorProvider1.SetIconAlignment(btnOK, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnOK.IconAlignment"));
-            errorProvider1.SetIconPadding(btnOK, (int)resources.GetObject("btnOK.IconPadding"));
-            btnOK.ImageOptions.ImageKey = resources.GetString("btnOK.ImageOptions.ImageKey");
-            btnOK.Name = "btnOK";
-            btnOK.Click += btnOK_Click;
+            layoutControlItem9.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem9.AppearanceItemCaption.Font");
+            layoutControlItem9.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem9.Control = dateCreate;
+            layoutControlItem9.ImageOptions.ImageKey = resources.GetString("layoutControlItem9.ImageOptions.ImageKey");
+            layoutControlItem9.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem9.Name = "layoutControlItem9";
+            layoutControlItem9.Size = new System.Drawing.Size(326, 45);
+            resources.ApplyResources(layoutControlItem9, "layoutControlItem9");
+            layoutControlItem9.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem9.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // btnCancel
+            // layoutControlItem10
             // 
-            resources.ApplyResources(btnCancel, "btnCancel");
-            btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnCancel.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnCancel.Appearance.Font");
-            btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnCancel.Appearance.Options.UseBackColor = true;
-            btnCancel.Appearance.Options.UseFont = true;
-            btnCancel.Appearance.Options.UseForeColor = true;
-            btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnCancel.AppearanceDisabled.Options.UseBackColor = true;
-            btnCancel.AppearanceDisabled.Options.UseForeColor = true;
-            errorProvider1.SetError(btnCancel, resources.GetString("btnCancel.Error"));
-            errorProvider1.SetIconAlignment(btnCancel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnCancel.IconAlignment"));
-            errorProvider1.SetIconPadding(btnCancel, (int)resources.GetObject("btnCancel.IconPadding"));
-            btnCancel.ImageOptions.ImageKey = resources.GetString("btnCancel.ImageOptions.ImageKey");
-            btnCancel.Name = "btnCancel";
-            btnCancel.Click += btnCancel_Click;
+            layoutControlItem10.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem10.AppearanceItemCaption.Font");
+            layoutControlItem10.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem10.Control = groupTextBox;
+            layoutControlItem10.ImageOptions.ImageKey = resources.GetString("layoutControlItem10.ImageOptions.ImageKey");
+            layoutControlItem10.Location = new System.Drawing.Point(0, 45);
+            layoutControlItem10.Name = "layoutControlItem10";
+            layoutControlItem10.Size = new System.Drawing.Size(326, 45);
+            resources.ApplyResources(layoutControlItem10, "layoutControlItem10");
+            layoutControlItem10.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem10.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // btnMoveUp
+            // layoutControlItem16
             // 
-            resources.ApplyResources(btnMoveUp, "btnMoveUp");
-            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnMoveUp.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveUp.Appearance.Font");
-            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnMoveUp.Appearance.Options.UseBackColor = true;
-            btnMoveUp.Appearance.Options.UseFont = true;
-            btnMoveUp.Appearance.Options.UseForeColor = true;
-            errorProvider1.SetError(btnMoveUp, resources.GetString("btnMoveUp.Error"));
-            errorProvider1.SetIconAlignment(btnMoveUp, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveUp.IconAlignment"));
-            errorProvider1.SetIconPadding(btnMoveUp, (int)resources.GetObject("btnMoveUp.IconPadding"));
-            btnMoveUp.ImageOptions.ImageKey = resources.GetString("btnMoveUp.ImageOptions.ImageKey");
-            btnMoveUp.Name = "btnMoveUp";
-            btnMoveUp.Click += btnMoveUp_Click;
+            layoutControlItem16.AppearanceItemCaption.Font = (System.Drawing.Font)resources.GetObject("layoutControlItem16.AppearanceItemCaption.Font");
+            layoutControlItem16.AppearanceItemCaption.Options.UseFont = true;
+            layoutControlItem16.Control = constructorComboBox;
+            layoutControlItem16.ImageOptions.ImageKey = resources.GetString("layoutControlItem16.ImageOptions.ImageKey");
+            layoutControlItem16.Location = new System.Drawing.Point(0, 421);
+            layoutControlItem16.Name = "layoutControlItem16";
+            layoutControlItem16.Size = new System.Drawing.Size(326, 45);
+            resources.ApplyResources(layoutControlItem16, "layoutControlItem16");
+            layoutControlItem16.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem16.TextSize = new System.Drawing.Size(228, 18);
             // 
-            // btnMoveDown
+            // emptySpaceItem1
             // 
-            resources.ApplyResources(btnMoveDown, "btnMoveDown");
-            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnMoveDown.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveDown.Appearance.Font");
-            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnMoveDown.Appearance.Options.UseBackColor = true;
-            btnMoveDown.Appearance.Options.UseFont = true;
-            btnMoveDown.Appearance.Options.UseForeColor = true;
-            errorProvider1.SetError(btnMoveDown, resources.GetString("btnMoveDown.Error"));
-            errorProvider1.SetIconAlignment(btnMoveDown, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveDown.IconAlignment"));
-            errorProvider1.SetIconPadding(btnMoveDown, (int)resources.GetObject("btnMoveDown.IconPadding"));
-            btnMoveDown.ImageOptions.ImageKey = resources.GetString("btnMoveDown.ImageOptions.ImageKey");
-            btnMoveDown.Name = "btnMoveDown";
-            btnMoveDown.Click += btnMoveDown_Click;
+            emptySpaceItem1.Location = new System.Drawing.Point(304, 376);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new System.Drawing.Size(22, 45);
             // 
-            // btnValidateNumbers
+            // statusLabelitem
             // 
-            resources.ApplyResources(btnValidateNumbers, "btnValidateNumbers");
-            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
-            btnValidateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnValidateNumbers.Appearance.Font");
-            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
-            btnValidateNumbers.Appearance.Options.UseBackColor = true;
-            btnValidateNumbers.Appearance.Options.UseFont = true;
-            btnValidateNumbers.Appearance.Options.UseForeColor = true;
-            tableLayoutPanel4.SetColumnSpan(btnValidateNumbers, 2);
-            errorProvider1.SetError(btnValidateNumbers, resources.GetString("btnValidateNumbers.Error"));
-            errorProvider1.SetIconAlignment(btnValidateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnValidateNumbers.IconAlignment"));
-            errorProvider1.SetIconPadding(btnValidateNumbers, (int)resources.GetObject("btnValidateNumbers.IconPadding"));
-            btnValidateNumbers.ImageOptions.ImageKey = resources.GetString("btnValidateNumbers.ImageOptions.ImageKey");
-            btnValidateNumbers.Name = "btnValidateNumbers";
-            btnValidateNumbers.Click += btnValidateNumbers_Click;
+            statusLabelitem.Control = statusLabel;
+            statusLabelitem.ImageOptions.ImageKey = resources.GetString("statusLabelitem.ImageOptions.ImageKey");
+            statusLabelitem.Location = new System.Drawing.Point(0, 0);
+            statusLabelitem.Name = "statusLabelitem";
+            statusLabelitem.Size = new System.Drawing.Size(1507, 25);
+            statusLabelitem.TextVisible = false;
             // 
-            // btnRecalculateNumbers
+            // layoutControlGroup10
             // 
-            resources.ApplyResources(btnRecalculateNumbers, "btnRecalculateNumbers");
-            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
-            btnRecalculateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnRecalculateNumbers.Appearance.Font");
-            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
-            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
-            btnRecalculateNumbers.Appearance.Options.UseFont = true;
-            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
-            tableLayoutPanel4.SetColumnSpan(btnRecalculateNumbers, 2);
-            errorProvider1.SetError(btnRecalculateNumbers, resources.GetString("btnRecalculateNumbers.Error"));
-            errorProvider1.SetIconAlignment(btnRecalculateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnRecalculateNumbers.IconAlignment"));
-            errorProvider1.SetIconPadding(btnRecalculateNumbers, (int)resources.GetObject("btnRecalculateNumbers.IconPadding"));
-            btnRecalculateNumbers.ImageOptions.ImageKey = resources.GetString("btnRecalculateNumbers.ImageOptions.ImageKey");
-            btnRecalculateNumbers.Name = "btnRecalculateNumbers";
-            btnRecalculateNumbers.Click += btnRecalculateNumbers_Click;
+            layoutControlGroup10.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup10.BackgroundImageOptions.ImageKey");
+            layoutControlGroup10.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup10.CaptionImageOptions.ImageKey");
+            layoutControlGroup10.ContentImageOptions.ImageKey = resources.GetString("layoutControlGroup10.ContentImageOptions.ImageKey");
+            buttonImageOptions4.Image = Properties.Resources.moveup_16x16;
+            buttonImageOptions5.Image = Properties.Resources.movedown_16x16;
+            buttonImageOptions6.Image = Properties.Resources.refresh_16x16;
+            layoutControlGroup10.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup10.CustomHeaderButtons"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons1"), buttonImageOptions4, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup10.CustomHeaderButtons2"), resources.GetString("layoutControlGroup10.CustomHeaderButtons3"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons4"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons5"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup10.CustomHeaderButtons6"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons7"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons8"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons9"), resources.GetObject("layoutControlGroup10.CustomHeaderButtons10"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons11")), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup10.CustomHeaderButtons12"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons13"), buttonImageOptions5, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup10.CustomHeaderButtons14"), resources.GetString("layoutControlGroup10.CustomHeaderButtons15"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons16"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons17"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup10.CustomHeaderButtons18"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons19"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons20"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons21"), resources.GetObject("layoutControlGroup10.CustomHeaderButtons22"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons23")), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(resources.GetString("layoutControlGroup10.CustomHeaderButtons24"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons25"), buttonImageOptions6, (DevExpress.XtraBars.Docking2010.ButtonStyle)resources.GetObject("layoutControlGroup10.CustomHeaderButtons26"), resources.GetString("layoutControlGroup10.CustomHeaderButtons27"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons28"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons29"), (DevExpress.Utils.SuperToolTip)resources.GetObject("layoutControlGroup10.CustomHeaderButtons30"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons31"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons32"), (bool)resources.GetObject("layoutControlGroup10.CustomHeaderButtons33"), resources.GetObject("layoutControlGroup10.CustomHeaderButtons34"), (int)resources.GetObject("layoutControlGroup10.CustomHeaderButtons35")) });
+            layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { gridControlRaszitem, pictureBox1item, gridControlRaskritem, gridControlKontitem, splitterItem3, splitterItem4, splitterItem5 });
+            layoutControlGroup10.Location = new System.Drawing.Point(342, 25);
+            layoutControlGroup10.Name = "layoutControlGroup10";
+            layoutControlGroup10.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup10.Size = new System.Drawing.Size(1165, 869);
+            resources.ApplyResources(layoutControlGroup10, "layoutControlGroup10");
             // 
-            // btnSave
+            // gridControlRaszitem
             // 
-            resources.ApplyResources(btnSave, "btnSave");
-            btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnSave.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnSave.Appearance.Font");
-            btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnSave.Appearance.Options.UseBackColor = true;
-            btnSave.Appearance.Options.UseFont = true;
-            btnSave.Appearance.Options.UseForeColor = true;
-            btnSave.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnSave.AppearanceDisabled.Options.UseBackColor = true;
-            btnSave.AppearanceDisabled.Options.UseForeColor = true;
-            errorProvider1.SetError(btnSave, resources.GetString("btnSave.Error"));
-            errorProvider1.SetIconAlignment(btnSave, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnSave.IconAlignment"));
-            errorProvider1.SetIconPadding(btnSave, (int)resources.GetObject("btnSave.IconPadding"));
-            btnSave.ImageOptions.ImageKey = resources.GetString("btnSave.ImageOptions.ImageKey");
-            btnSave.Name = "btnSave";
-            btnSave.Click += btnSave_Click;
+            gridControlRaszitem.Control = gridControlRasz;
+            gridControlRaszitem.ImageOptions.ImageKey = resources.GetString("gridControlRaszitem.ImageOptions.ImageKey");
+            gridControlRaszitem.Location = new System.Drawing.Point(0, 0);
+            gridControlRaszitem.Name = "gridControlRaszitem";
+            gridControlRaszitem.OptionsTableLayoutItem.ColumnSpan = 2;
+            gridControlRaszitem.Size = new System.Drawing.Size(1159, 539);
+            gridControlRaszitem.TextVisible = false;
+            // 
+            // pictureBox1item
+            // 
+            pictureBox1item.Control = pictureBox1;
+            pictureBox1item.ImageOptions.ImageKey = resources.GetString("pictureBox1item.ImageOptions.ImageKey");
+            pictureBox1item.Location = new System.Drawing.Point(0, 549);
+            pictureBox1item.Name = "pictureBox1item";
+            pictureBox1item.OptionsTableLayoutItem.RowIndex = 1;
+            pictureBox1item.OptionsTableLayoutItem.RowSpan = 2;
+            pictureBox1item.Size = new System.Drawing.Size(456, 293);
+            pictureBox1item.TextVisible = false;
+            // 
+            // gridControlRaskritem
+            // 
+            gridControlRaskritem.Control = gridControlRaskr;
+            gridControlRaskritem.ImageOptions.ImageKey = resources.GetString("gridControlRaskritem.ImageOptions.ImageKey");
+            gridControlRaskritem.Location = new System.Drawing.Point(466, 549);
+            gridControlRaskritem.Name = "gridControlRaskritem";
+            gridControlRaskritem.OptionsTableLayoutItem.ColumnIndex = 1;
+            gridControlRaskritem.OptionsTableLayoutItem.RowIndex = 1;
+            gridControlRaskritem.Size = new System.Drawing.Size(693, 193);
+            gridControlRaskritem.TextVisible = false;
+            // 
+            // gridControlKontitem
+            // 
+            gridControlKontitem.Control = gridControlKont;
+            gridControlKontitem.ImageOptions.ImageKey = resources.GetString("gridControlKontitem.ImageOptions.ImageKey");
+            gridControlKontitem.Location = new System.Drawing.Point(466, 752);
+            gridControlKontitem.Name = "gridControlKontitem";
+            gridControlKontitem.OptionsTableLayoutItem.ColumnIndex = 1;
+            gridControlKontitem.OptionsTableLayoutItem.RowIndex = 2;
+            gridControlKontitem.Size = new System.Drawing.Size(693, 90);
+            gridControlKontitem.TextVisible = false;
+            // 
+            // splitterItem3
+            // 
+            splitterItem3.Location = new System.Drawing.Point(0, 539);
+            splitterItem3.Name = "splitterItem3";
+            splitterItem3.Size = new System.Drawing.Size(1159, 10);
+            // 
+            // splitterItem4
+            // 
+            splitterItem4.Location = new System.Drawing.Point(456, 549);
+            splitterItem4.Name = "splitterItem4";
+            splitterItem4.Size = new System.Drawing.Size(10, 293);
+            // 
+            // splitterItem5
+            // 
+            splitterItem5.Location = new System.Drawing.Point(466, 742);
+            splitterItem5.Name = "splitterItem5";
+            splitterItem5.Size = new System.Drawing.Size(693, 10);
+            // 
+            // layoutControlGroup4
+            // 
+            layoutControlGroup4.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup4.BackgroundImageOptions.ImageKey");
+            layoutControlGroup4.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup4.CaptionImageOptions.ImageKey");
+            layoutControlGroup4.ContentImageOptions.ImageKey = resources.GetString("layoutControlGroup4.ContentImageOptions.ImageKey");
+            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { bufferitem, textBoxBufferitem });
+            layoutControlGroup4.Location = new System.Drawing.Point(0, 573);
+            layoutControlGroup4.Name = "layoutControlGroup4";
+            layoutControlGroup4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup4.Size = new System.Drawing.Size(332, 321);
+            layoutControlGroup4.TextVisible = false;
+            // 
+            // bufferitem
+            // 
+            bufferitem.Control = buffer;
+            bufferitem.ImageOptions.ImageKey = resources.GetString("bufferitem.ImageOptions.ImageKey");
+            bufferitem.Location = new System.Drawing.Point(0, 0);
+            bufferitem.Name = "bufferitem";
+            bufferitem.Size = new System.Drawing.Size(326, 34);
+            bufferitem.TextVisible = false;
+            // 
+            // textBoxBufferitem
+            // 
+            textBoxBufferitem.Control = textBoxBuffer;
+            textBoxBufferitem.ImageOptions.ImageKey = resources.GetString("textBoxBufferitem.ImageOptions.ImageKey");
+            textBoxBufferitem.Location = new System.Drawing.Point(0, 34);
+            textBoxBufferitem.Name = "textBoxBufferitem";
+            textBoxBufferitem.Size = new System.Drawing.Size(326, 281);
+            textBoxBufferitem.TextVisible = false;
+            // 
+            // splitterItem1
+            // 
+            splitterItem1.Location = new System.Drawing.Point(332, 25);
+            splitterItem1.Name = "splitterItem1";
+            splitterItem1.Size = new System.Drawing.Size(10, 869);
+            // 
+            // splitterItem2
+            // 
+            splitterItem2.Location = new System.Drawing.Point(0, 563);
+            splitterItem2.Name = "splitterItem2";
+            splitterItem2.Size = new System.Drawing.Size(332, 10);
             // 
             // rasz
             // 
-            resources.ApplyResources(rasz, "rasz");
             rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            errorProvider1.SetError(rasz, resources.GetString("rasz.Error"));
+            resources.ApplyResources(rasz, "rasz");
             rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(rasz, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("rasz.IconAlignment"));
-            errorProvider1.SetIconPadding(rasz, (int)resources.GetObject("rasz.IconPadding"));
             rasz.Name = "rasz";
             rasz.UseVisualStyleBackColor = false;
             // 
             // customButton2
             // 
-            resources.ApplyResources(customButton2, "customButton2");
             customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            errorProvider1.SetError(customButton2, resources.GetString("customButton2.Error"));
+            resources.ApplyResources(customButton2, "customButton2");
             customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(customButton2, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customButton2.IconAlignment"));
-            errorProvider1.SetIconPadding(customButton2, (int)resources.GetObject("customButton2.IconPadding"));
             customButton2.Name = "customButton2";
             customButton2.UseVisualStyleBackColor = false;
             // 
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
-            resources.ApplyResources(errorProvider1, "errorProvider1");
             // 
             // TeamWork_AdvanceTW
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(toolStripContainer1);
+            Controls.Add(tableLayoutPanel3layoutControl1ConvertedLayout);
             HelpButton = true;
             Name = "TeamWork_AdvanceTW";
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             WindowState = System.Windows.Forms.FormWindowState.Maximized;
             FormClosing += TeamWork_AdvanceTW_FormClosing;
             Load += TeamWork_AdvanceTW_Load;
-            toolStripContainer1.ContentPanel.ResumeLayout(false);
-            toolStripContainer1.ResumeLayout(false);
-            toolStripContainer1.PerformLayout();
-            tableLayoutPanel3.ResumeLayout(false);
-            tableLayoutPanel3.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)tableLayoutPanel3layoutControl1ConvertedLayout).EndInit();
+            tableLayoutPanel3layoutControl1ConvertedLayout.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlKont).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKont).EndInit();
@@ -1269,13 +1448,43 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRaskr).EndInit();
-            tableLayoutPanel4.ResumeLayout(false);
-            customGroupBox2.ResumeLayout(false);
-            customGroupBox1.ResumeLayout(false);
-            tableLayoutPanel5.ResumeLayout(false);
-            tableLayoutPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)statusLabelitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaszitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1item).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaskritem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlKontitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bufferitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)textBoxBufferitem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)constructorBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)designerBindingSource).EndInit();
@@ -1290,15 +1499,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private CustomLabel label2;
         private CustomTextBox modelTextBox;
-        private CustomLabel label3;
         private CustomTextBox nameTextBox;
-        private CustomLabel label4;
         private CustomTextBox secTimeTextBox;
-        private CustomLabel label5;
         private DevExpress.XtraGrid.Columns.GridColumn coln;
         private DevExpress.XtraGrid.Columns.GridColumn coln1;
         private DevExpress.XtraGrid.Columns.GridColumn colrazryd;
@@ -1362,9 +1565,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraGrid.Columns.GridColumn kod_podr;
         private DevExpress.XtraGrid.Columns.GridColumn kod_proizv;
         private DevExpress.XtraGrid.Columns.GridColumn kod_ob;
-        private CustomLabel customLabel1;
-        private CustomLabel customLabel2;
-        private CustomLabel customLabel3;
         private CustomTextBox groupTextBox;
         private System.Windows.Forms.BindingSource designerBindingSource;
         private System.Windows.Forms.BindingSource constructorBindingSource;
@@ -1393,24 +1593,17 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraEditors.LookUpEdit designerComboBox;
         private CustomSimpleButton btnCancel;
         private CustomDateTimePicker dateCreate;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private CustomGroupBox customGroupBox1;
         private CustomLabel statusLabel;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private CustomGroupBox customGroupBox2;
         private CustomButton buffer;
         private System.Windows.Forms.RichTextBox textBoxBuffer;
         private CustomSimpleButton btnSave;
         private CustomSimpleButton btnOK;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        
         private System.Windows.Forms.RichTextBox textBoxReco;
         private System.Windows.Forms.RichTextBox textBoxKomment;
-        private CustomLabel customLabel4;
-        private CustomLabel customLabel5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private System.Windows.Forms.PictureBox pictureBox1;
         
@@ -1419,5 +1612,44 @@ namespace SewingProduction.Features.TeamWork.Forms
         private CustomSimpleButton btnMoveDown;
         private CustomSimpleButton btnRecalculateNumbers;
         private CustomSimpleButton btnValidateNumbers;
+        private DevExpress.XtraLayout.LayoutControlItem bufferitem;
+        private DevExpress.XtraLayout.LayoutControlItem textBoxBufferitem;
+        private DevExpress.XtraLayout.LayoutControl tableLayoutPanel3layoutControl1ConvertedLayout;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup7;
+        private DevExpress.XtraLayout.LayoutControlItem pictureBox1item;
+        private DevExpress.XtraLayout.LayoutControlItem gridControlKontitem;
+        private DevExpress.XtraLayout.LayoutControlItem gridControlRaszitem;
+        private DevExpress.XtraLayout.LayoutControlItem gridControlRaskritem;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup10;
+        private DevExpress.XtraLayout.LayoutControl tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private DevExpress.XtraLayout.LayoutControlItem statusLabelitem;
+        private DevExpress.XtraLayout.Converter.LayoutConverter layoutConverter1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraLayout.SplitterItem splitterItem3;
+        private DevExpress.XtraLayout.SplitterItem splitterItem4;
+        private DevExpress.XtraLayout.SplitterItem splitterItem5;
+        private DevExpress.XtraLayout.SplitterItem splitterItem1;
+        private DevExpress.XtraLayout.SplitterItem splitterItem2;
     }
 }

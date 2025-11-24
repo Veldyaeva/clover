@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraBars.ViewInfo;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
-using static DevExpress.LookAndFeel.DXSkinColors;
-using DevExpress.XtraEditors;
-using System.Drawing;
 
 
 namespace SewingProduction.Core.Class
@@ -55,6 +46,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisiblePermission")]
+        [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
             get => _visiblePermission;
@@ -66,6 +59,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;

@@ -1,28 +1,19 @@
-﻿using DevExpress.XtraBars;
+﻿using System;
+using System.Windows.Forms;
 using DevExpress.XtraTabbedMdi;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.CuttingProduction.Forms;
+using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
-//using SewingProduction.form.Nadezhda;
-using System;
-using System.Windows.Forms;
-using SewingProduction.Features.UserDistribution.Helpers;
-using Microsoft.AspNet.Identity;
-using SewingProduction.Core.Class.Settings;
-using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Features.TeamWork;
-using System.Diagnostics;
-using SewingProduction.Features.TeamWork.Forms;
-using SewingProduction.Features.Sprav;
-using SewingProduction.Features.Articul;
-using SewingProduction.Features.UserDistribution.Class;
-using SewingProduction.Features.KnittingProduction.Forms;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 
 namespace SewingProduction
 {
@@ -262,6 +253,12 @@ namespace SewingProduction
         private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenForm(new PlanZagrVyaz(), sender);
+        }
+
+        private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
+            OpenForm(form, sender);
         }
     }
 }

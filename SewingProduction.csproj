@@ -12,11 +12,19 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Compile Remove="Features\KnittingProduction\Forms\Form2.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\Form2.Designer.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\KnitterDataService.cs" />
     <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
-    <Compile Remove="Features\TeamWork\DbContext\ArtNormN.cs" />
+    <Compile Remove="Features\TeamWork\Forms\HistoryLog.cs" />
+    <Compile Remove="Features\TeamWork\Forms\HistoryLog.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\NormRaskrNew_old.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.Designer_.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.Events_old.cs" />
@@ -28,7 +36,6 @@
     <Compile Remove="Features\TeamWork\Forms\TeamWork_old.cs" />
     <Compile Remove="Features\TeamWork\Forms\_TeamWork.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\_TeamWork.Helpers.cs" />
-    <Compile Remove="Features\TeamWork\Helpers\ANNGridViewHelper.cs" />
     <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
     <Compile Remove="Features\TeamWork\Helpers\CopyHelper_old.cs" />
@@ -48,10 +55,13 @@
 
   <ItemGroup>
     <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
+    <EmbeddedResource Remove="Features\KnittingProduction\Forms\Form2.resx" />
+    <EmbeddedResource Remove="Features\TeamWork\Forms\HistoryLog.resx" />
     <EmbeddedResource Remove="Report\PostReportFio.resx" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Features\CardByNom\Forms\CardByNom.cs~RF1e89fe20.TMP" />
     <None Remove="Features\Features.zip" />
     <None Remove="Features\TeamWork.zip" />
     <None Remove="Features\TeamWork1.zip" />
@@ -243,14 +253,14 @@
     <PackageReference Include="Dapper" Version="2.1.66" />
     <PackageReference Include="DevExpress.Win.Design" Version="24.2.7" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.10" />
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-    <PackageReference Include="NLog" Version="6.0.4" />
-    <PackageReference Include="Z.Dapper.Plus" Version="8.0.2" />
+    <PackageReference Include="NLog" Version="6.0.5" />
+    <PackageReference Include="Z.Dapper.Plus" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -174,7 +174,7 @@ namespace SewingProduction.Features.CuttingProduction.Models
         public bool HasDatePr => data_pr.HasValue;
         public bool HasDatePt => data_pt.HasValue;
         public bool HasDateV => data_v.HasValue;
-        public int groupIndex {  get; set; }
+        public int groupIndex { get; set; }
         public string PachYear => $"{n_pach}{data_r.Value.Year}";
         public int rz_id { get; set; }
     }

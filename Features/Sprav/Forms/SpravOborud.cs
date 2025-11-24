@@ -1,13 +1,13 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Windows.Forms;
 
 
 namespace SewingProduction.form

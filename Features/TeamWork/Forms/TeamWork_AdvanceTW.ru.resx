@@ -118,6 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnMoveDown.Appearance.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 10pt</value>
+  </data>
+  <data name="btnMoveDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 29</value>
+  </data>
+  <data name="btnMoveDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="btnMoveDown.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAMAEBAAAAEAIABoBAAANgAAACAgAAABACAAKBEAAJ4EAAAwMAAAAQAgAGgmAADGFQAAKAAAABAA
@@ -379,122 +392,312 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 488</value>
+  <data name="designerComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 540</value>
   </data>
-  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 333</value>
+  <data name="designerComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
   </data>
-  <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 728</value>
+  <data name="designerComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
   </data>
-  <data name="gridControlKont.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1220, 93</value>
+  <data name="textBoxReco.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 355</value>
   </data>
-  <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1480, 479</value>
+  <data name="textBoxReco.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 85</value>
   </data>
-  <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 488</value>
+  <data name="textBoxReco.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="gridControlRaskr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1220, 234</value>
+  <data name="constructorComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 500</value>
   </data>
-  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1488, 824</value>
+  <data name="constructorComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
   </data>
-  <data name="customGroupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 732</value>
+  <data name="constructorComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
-  <data name="customGroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 89</value>
+  <data name="secTimeTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 460</value>
   </data>
-  <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 23</value>
+  <data name="secTimeTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
   </data>
-  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 568</value>
-  </data>
-  <data name="customGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 136</value>
-  </data>
-  <data name="customGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>276, 590</value>
-  </data>
-  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 90</value>
-  </data>
-  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 90</value>
-  </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 22</value>
+  <data name="secTimeTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
   <data name="btnMoveUp.Appearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 10pt</value>
   </data>
   <data name="btnMoveUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>137, 29</value>
   </data>
   <data name="btnMoveUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 21</value>
+    <value>135, 20</value>
   </data>
-  <data name="btnMoveUp.Text" xml:space="preserve">
-    <value>↑ Вверх</value>
+  <data name="btnMoveUp.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="btnMoveDown.Appearance.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt</value>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 24</value>
   </data>
-  <data name="btnMoveDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 30</value>
+  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 22</value>
   </data>
-  <data name="btnMoveDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 22</value>
+  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="btnMoveDown.Text" xml:space="preserve">
-    <value>↓ Вниз</value>
+  <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 219</value>
   </data>
-  <data name="btnValidateNumbers.Appearance.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 10pt</value>
+  <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
   </data>
-  <data name="btnValidateNumbers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 3</value>
+  <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="btnValidateNumbers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 21</value>
+  <data name="textBoxKomment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 259</value>
   </data>
-  <data name="btnValidateNumbers.Text" xml:space="preserve">
-    <value>Проверить нумерацию</value>
+  <data name="textBoxKomment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 76</value>
+  </data>
+  <data name="textBoxKomment.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>310, 24</value>
+  </data>
+  <data name="btnSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>430, 22</value>
+  </data>
+  <data name="btnSave.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="modelTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 179</value>
+  </data>
+  <data name="modelTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
+  </data>
+  <data name="modelTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="pictureBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 615</value>
+  </data>
+  <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>484, 255</value>
+  </data>
+  <data name="pictureBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="btnRecalculateNumbers.Appearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 10pt</value>
   </data>
   <data name="btnRecalculateNumbers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 30</value>
+    <value>5, 5</value>
   </data>
   <data name="btnRecalculateNumbers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>267, 20</value>
   </data>
-  <data name="btnRecalculateNumbers.Text" xml:space="preserve">
-    <value>Обновить нумерацию</value>
+  <data name="btnRecalculateNumbers.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanel4.RowCount" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="btnValidateNumbers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 862</value>
   </data>
-  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 824</value>
+  <data name="btnValidateNumbers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 20</value>
   </data>
-  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="btnValidateNumbers.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1484, 869</value>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 24</value>
   </data>
-  <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1484, 869</value>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 22</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 139</value>
+  </data>
+  <data name="groupTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
+  </data>
+  <data name="groupTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="dateCreate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 99</value>
+  </data>
+  <data name="dateCreate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 23</value>
+  </data>
+  <data name="dateCreate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="gridControlKont.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="gridControlKont.Location" type="System.Drawing.Point, System.Drawing">
+    <value>899, 615</value>
+  </data>
+  <data name="gridControlKont.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 255</value>
+  </data>
+  <data name="gridControlKont.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="gridControlRasz.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="gridControlRasz.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 83</value>
+  </data>
+  <data name="gridControlRasz.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1203, 528</value>
+  </data>
+  <data name="gridControlRasz.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="gridControlRaskr.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="gridControlRaskr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>770, 615</value>
+  </data>
+  <data name="gridControlRaskr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 255</value>
+  </data>
+  <data name="gridControlRaskr.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="statusLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="statusLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="statusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1485, 20</value>
+  </data>
+  <data name="statusLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxBuffer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 620</value>
+  </data>
+  <data name="textBoxBuffer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 250</value>
+  </data>
+  <data name="textBoxBuffer.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="buffer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 588</value>
+  </data>
+  <data name="buffer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 28</value>
+  </data>
+  <data name="buffer.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.Location" type="System.Drawing.Point, System.Drawing">
+    <value>756, 12</value>
+  </data>
+  <data name="tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>741, 29</value>
+  </data>
+  <data name="tableLayoutPanel4layoutControl1ConvertedLayoutlayoutControl1ConvertedLayout.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel3layoutControl1ConvertedLayout.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="layoutControlGroup3.CustomizationFormText" xml:space="preserve">
+    <value>нумерация</value>
+  </data>
+  <data name="tableLayoutPanel3layoutControl1ConvertedLayout.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tableLayoutPanel3layoutControl1ConvertedLayout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1509, 894</value>
+  </data>
+  <data name="layoutControlGroup1.CustomizationFormText" xml:space="preserve">
+    <value>инфо</value>
+  </data>
+  <data name="layoutControlItem14.Text" xml:space="preserve">
+    <value>рекомендации для планирования</value>
+  </data>
+  <data name="layoutControlItem13.Text" xml:space="preserve">
+    <value>особенности изделия</value>
+  </data>
+  <data name="layoutControlItem12.Text" xml:space="preserve">
+    <value>артикул</value>
+  </data>
+  <data name="layoutControlItem11.Text" xml:space="preserve">
+    <value>модель</value>
+  </data>
+  <data name="layoutControlItem17.Text" xml:space="preserve">
+    <value>дизайнер</value>
+  </data>
+  <data name="layoutControlItem15.Text" xml:space="preserve">
+    <value>итоговые сек. по изделию</value>
+  </data>
+  <data name="layoutControlItem9.Text" xml:space="preserve">
+    <value>дата создания</value>
+  </data>
+  <data name="layoutControlItem10.Text" xml:space="preserve">
+    <value>группа</value>
+  </data>
+  <data name="layoutControlItem16.Text" xml:space="preserve">
+    <value>конструктор</value>
+  </data>
+  <data name="layoutControlGroup1.Text" xml:space="preserve">
+    <value>  </value>
+  </data>
+  <assembly alias="DevExpress.Utils.v24.2" name="DevExpress.Utils.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="layoutControlGroup10.CustomHeaderButtons6" type="DevExpress.Utils.SuperToolTip, DevExpress.Utils.v24.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpEZXZFeHByZXNzLlV0aWxzLnYyNC4yLCBWZXJzaW9uPTI0LjIu
+        Ny4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEMAwAAAFlE
+        ZXZFeHByZXNzLkRhdGEudjI0LjIsIFZlcnNpb249MjQuMi43LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVi
+        bGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURldkV4cHJlc3MuVXRpbHMuU3VwZXJUb29s
+        VGlwBQAAAA1BbGxvd0h0bWxUZXh0EUZpeGVkVG9vbFRpcFdpZHRoCkl0ZW1zQ291bnQJaXRlbVR5cGUw
+        BWl0ZW0wBAAABAQfRGV2RXhwcmVzcy5VdGlscy5EZWZhdWx0Qm9vbGVhbgMAAAABCCVEZXZFeHByZXNz
+        LlV0aWxzLlN1cGVyVG9vbFRpcEl0ZW1UeXBlAgAAACVEZXZFeHByZXNzLlV0aWxzLlRvb2xUaXBTZXBh
+        cmF0b3JJdGVtAgAAAAIAAAAF/P///x9EZXZFeHByZXNzLlV0aWxzLkRlZmF1bHRCb29sZWFuAQAAAAd2
+        YWx1ZV9fAAgDAAAAAgAAAAABAAAABfv///8lRGV2RXhwcmVzcy5VdGlscy5TdXBlclRvb2xUaXBJdGVt
+        VHlwZQEAAAAHdmFsdWVfXwAIAgAAAAIAAAAJBgAAAAUGAAAAJURldkV4cHJlc3MuVXRpbHMuVG9vbFRp
+        cFNlcGFyYXRvckl0ZW0AAAAAAgAAAAs=
+</value>
+  </data>
+  <data name="layoutControlGroup10.CustomizationFormText" xml:space="preserve">
+    <value>таблицы</value>
+  </data>
+  <data name="layoutControlGroup10.Text" xml:space="preserve">
+    <value>   </value>
+  </data>
+  <data name="layoutControlGroup4.BackgroundImageOptions.ImageKey" xml:space="preserve">
+    <value />
+  </data>
+  <data name="layoutControlGroup4.CaptionImageOptions.ImageKey" xml:space="preserve">
+    <value />
+  </data>
+  <data name="layoutControlGroup4.ContentImageOptions.ImageKey" xml:space="preserve">
+    <value />
+  </data>
+  <data name="layoutControlGroup4.CustomizationFormText" xml:space="preserve">
+    <value>буфер</value>
   </data>
 </root>

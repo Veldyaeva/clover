@@ -1,9 +1,19 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using DevExpress.Data.Internal;
 using DevExpress.Office.Utils;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Class;
 using DevExpress.XtraWaitForm;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
@@ -62,7 +72,7 @@ namespace SewingProduction.Features.Articul
 
 
         private List<SpArticulKomplSostModel> _articulKomplSostList;
-        private List<spArticulNaborSostav> _articulNaborSostList;
+        private List<SpArticulNaborSostav> _articulNaborSostList;
 
         //private BindingSource _articulBindingSource;
         //private BindingSource _komplSostBindingSource;
@@ -535,7 +545,7 @@ namespace SewingProduction.Features.Articul
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as ArticulModel).Kod;
 
-            EditArticul f = new EditArticul(kodObj.ToString());
+            EditArticul f = new EditArticul(_user, kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -605,6 +615,22 @@ namespace SewingProduction.Features.Articul
                 await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
             }
 
+        }
+
+ 		private void customButton3_Click(object sender, EventArgs e)
+        {
+            var Obj = bsArt.Current as ArticulModel;
+            //нужно добавить проверку на признак НАБОРА, чтобы можно было открыть только набор.
+            Debug.WriteLine(Obj.Gost);
+            ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
+            if (_ANSDataService.CheckOpis(Obj.Kod))
+            {
+                MessageBox.Show("Набор уже описан, изменения применятся на весь размерный ряд!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new EditNaborSostav(User, Obj));
+            }
         }
         /// <summary>
         /// открывает на редактирование карточку артикула

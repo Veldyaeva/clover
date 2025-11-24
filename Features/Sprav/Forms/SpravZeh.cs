@@ -1,12 +1,12 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
@@ -39,9 +39,19 @@ namespace SewingProduction.form
             this.Text = rusNameTableSQL;
 
         }
+        public SpravZeh(UserClass user) : base(user)
+        {
+            InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            _spravZehDataService = new SpravZehDataService(dbHelper);
+            _serviceBroker = new ServiceBroker(this);
+        }
         public SpravZeh()
         {
             InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            _spravZehDataService = new SpravZehDataService(dbHelper);
+            _serviceBroker = new ServiceBroker(this);
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {

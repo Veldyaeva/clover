@@ -1,17 +1,17 @@
-﻿using DevExpress.Utils;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Extensions;
-using SewingProduction.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using DevExpress.Utils;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Extensions;
+using SewingProduction.Interfaces;
 
 namespace SewingProduction.Helpers
 {
@@ -497,7 +497,8 @@ namespace SewingProduction.Helpers
             }
             gridView.RefreshData();
         }
-        public void AutoRowFilterConfig(GridView gridView)
+
+        public void AutoRowFilterConfig(GridView gridView, int showColFilter)
         {
             if (gridView == null) return;
 
@@ -521,7 +522,7 @@ namespace SewingProduction.Helpers
                     //column.OptionsFilter.AllowAutoFilter = true;
                     //column.OptionsFilter.AllowFilter = true;
                     column.OptionsFilter.AllowAutoFilter = true;
-                    column.OptionsFilter.AllowFilter = false;
+                    column.OptionsFilter.AllowFilter = showColFilter == 1? true : false;
                     column.OptionsColumn.AllowSort = DefaultBoolean.False;
                     // Умная настройка условий фильтрации
                     SetColumnFilterCondition(column);

@@ -1,12 +1,13 @@
-﻿using DevExpress.XtraEditors;
-using SewingProduction; // for VisibilityExtensions.ApplyVisibility
-using SewingProduction.Features.UserDistribution.Helpers;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
+using SewingProduction;
+using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
@@ -90,7 +91,7 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [DisplayName("Видимость по правам")]
+        [DisplayName("VisiblePermission")]
         [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
@@ -104,8 +105,8 @@ namespace SewingProduction.Core.Class
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Category("Видимость")]
-        [DisplayName("Видимость по логике")]
-        [Description("Контролирует видимость кнопки на основе бизнес-логики приложения")]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость элемента на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;
@@ -197,6 +198,8 @@ namespace SewingProduction.Core.Class
             Debug.WriteLine($"[Доступ SimpleButton] {ObjectName}: Просмотр={hasRead}, Редактор={hasWrite}, Visible={this.Visible}, Enabled={this.Enabled}");
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisiblePermission")]
+        [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
             get => _visiblePermission;
@@ -208,6 +211,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость кнопки на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;
@@ -272,5 +277,22 @@ namespace SewingProduction.Core.Class
             DialogResult = DialogResult.Cancel;
         }
     }
+    public static class ControlExtensions
+    {
+        public static void ApplyVisibility(this Control control, bool visiblePermission, bool visibleLogic)
+        {
+            bool finalVisible = visiblePermission && visibleLogic;
 
+            control.Visible = finalVisible;
+
+            if (control.Parent is LayoutControl layout)
+            {
+                var item = layout.GetItemByControl(control);
+                if (item != null)
+                    item.Visibility = finalVisible
+                        ? DevExpress.XtraLayout.Utils.LayoutVisibility.Always
+                        : DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            }
+        }
+    }
 }
