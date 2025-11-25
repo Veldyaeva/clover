@@ -224,7 +224,6 @@ namespace SewingProduction.Features.Articul
             chbIsFurnit = new CustomCheckBox();
             chbIsUpak = new CustomCheckBox();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            customButton3 = new CustomButton();
             customButton7 = new CustomButton();
             customButtonKart = new CustomButton();
             buttonEdit1 = new DevExpress.XtraEditors.ButtonEdit();
@@ -261,6 +260,7 @@ namespace SewingProduction.Features.Articul
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             customGroupBox1 = new CustomGroupBox();
+            customButton3 = new CustomButton();
             csButtonEdit = new CustomSimpleButton();
             customGroupBox2 = new CustomGroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -2848,7 +2848,6 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.Controls.Add(customButton3, 1, 0);
             tableLayoutPanel2.Controls.Add(customButton7, 0, 0);
             tableLayoutPanel2.Location = new Point(590, 963);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -2857,20 +2856,6 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(792, 45);
             tableLayoutPanel2.TabIndex = 28;
-            // 
-            // customButton3
-            // 
-            customButton3.BackColor = Color.FromArgb(173, 216, 230);
-            customButton3.Font = new Font("Arial", 10F);
-            customButton3.ForeColor = Color.FromArgb(25, 25, 112);
-            customButton3.Location = new Point(117, 3);
-            customButton3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton3.Name = "customButton3";
-            customButton3.Size = new Size(105, 29);
-            customButton3.TabIndex = 1;
-            customButton3.Text = "Набор состав";
-            customButton3.UseVisualStyleBackColor = false;
-            customButton3.Click += customButton3_Click;
             // 
             // customButton7
             // 
@@ -2988,6 +2973,7 @@ namespace SewingProduction.Features.Articul
             // groupBox3
             // 
             groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox3.Controls.Add(customButton3);
             groupBox3.Controls.Add(customLabel48);
             groupBox3.Controls.Add(customSimpleButton6);
             groupBox3.Controls.Add(customTextBox1);
@@ -3365,6 +3351,19 @@ namespace SewingProduction.Features.Articul
             customGroupBox1.TabStop = false;
             customGroupBox1.Text = "Затраты на изготовление";
             // 
+            // customButton3
+            // 
+            customButton3.BackColor = Color.FromArgb(255, 223, 196);
+            customButton3.Font = new Font("Arial", 10F);
+            customButton3.ForeColor = Color.FromArgb(139, 69, 19);
+            customButton3.Location = new Point(107, 55);
+            customButton3.Name = "customButton3";
+            customButton3.Size = new Size(206, 52);
+            customButton3.TabIndex = 39;
+            customButton3.Text = "Редактирование состава набора ";
+            customButton3.UseVisualStyleBackColor = false;
+            customButton3.Click += customButton3_Click;
+            // 
             // csButtonEdit
             // 
             csButtonEdit.Appearance.BackColor = Color.FromArgb(255, 223, 196);
@@ -3381,7 +3380,7 @@ namespace SewingProduction.Features.Articul
             csButtonEdit.Name = "csButtonEdit";
             csButtonEdit.Size = new Size(235, 25);
             csButtonEdit.TabIndex = 38;
-            csButtonEdit.Text = "Редактировать";
+            csButtonEdit.Text = "Редактировать изделие";
             csButtonEdit.Click += csButtonEdit_Click;
             // 
             // customGroupBox2
@@ -3482,6 +3481,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSumZarpl.BackColor = Color.FromArgb(248, 248, 255);
             txbSumZarpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumZarpl.ErrorColor = Color.Red;
+            txbSumZarpl.ErrorMessage = null;
             txbSumZarpl.Font = new Font("Arial", 10F);
             txbSumZarpl.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumZarpl.Location = new Point(106, 38);
@@ -3495,6 +3496,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSumKomplNum.BackColor = Color.FromArgb(248, 248, 255);
             txbSumKomplNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumKomplNum.ErrorColor = Color.Red;
+            txbSumKomplNum.ErrorMessage = null;
             txbSumKomplNum.Font = new Font("Arial", 10F);
             txbSumKomplNum.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumKomplNum.Location = new Point(105, 185);
@@ -3508,6 +3511,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSek.BackColor = Color.FromArgb(248, 248, 255);
             txbSek.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSek.ErrorColor = Color.Red;
+            txbSek.ErrorMessage = null;
             txbSek.Font = new Font("Arial", 10F);
             txbSek.ForeColor = Color.FromArgb(72, 61, 139);
             txbSek.Location = new Point(7, 39);
@@ -3533,6 +3538,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSekVyaz.BackColor = Color.Pink;
             txbSekVyaz.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekVyaz.ErrorColor = Color.Red;
+            txbSekVyaz.ErrorMessage = null;
             txbSekVyaz.Font = new Font("Arial", 10F);
             txbSekVyaz.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekVyaz.Location = new Point(32, 74);
@@ -3546,6 +3553,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSumSebRaskr.BackColor = Color.FromArgb(248, 248, 255);
             txbSumSebRaskr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumSebRaskr.ErrorColor = Color.Red;
+            txbSumSebRaskr.ErrorMessage = null;
             txbSumSebRaskr.Font = new Font("Arial", 10F);
             txbSumSebRaskr.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumSebRaskr.Location = new Point(106, 147);
@@ -3559,6 +3568,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSekShv.BackColor = Color.Pink;
             txbSekShv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekShv.ErrorColor = Color.Red;
+            txbSekShv.ErrorMessage = null;
             txbSekShv.Font = new Font("Arial", 10F);
             txbSekShv.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekShv.Location = new Point(32, 104);
@@ -3585,6 +3596,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSekKr.BackColor = Color.Pink;
             txbSekKr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekKr.ErrorColor = Color.Red;
+            txbSekKr.ErrorMessage = null;
             txbSekKr.Font = new Font("Arial", 10F);
             txbSekKr.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekKr.Location = new Point(32, 135);
@@ -3598,6 +3611,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSumStrVznos.BackColor = Color.FromArgb(248, 248, 255);
             txbSumStrVznos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumStrVznos.ErrorColor = Color.Red;
+            txbSumStrVznos.ErrorMessage = null;
             txbSumStrVznos.Font = new Font("Arial", 10F);
             txbSumStrVznos.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumStrVznos.Location = new Point(106, 110);
@@ -3650,6 +3665,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSumDopOpl.BackColor = Color.FromArgb(248, 248, 255);
             txbSumDopOpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumDopOpl.ErrorColor = Color.Red;
+            txbSumDopOpl.ErrorMessage = null;
             txbSumDopOpl.Font = new Font("Arial", 10F);
             txbSumDopOpl.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumDopOpl.Location = new Point(107, 74);
@@ -3689,6 +3706,8 @@ namespace SewingProduction.Features.Articul
             // 
             txbSebz.BackColor = Color.FromArgb(248, 248, 255);
             txbSebz.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSebz.ErrorColor = Color.Red;
+            txbSebz.ErrorMessage = null;
             txbSebz.Font = new Font("Arial", 10F);
             txbSebz.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebz.Location = new Point(104, 220);
@@ -4051,5 +4070,6 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabel40;
         private CustomGroupBox groupBox2;
         private CustomSimpleButton csButtonEdit;
+        private CustomButton customButton3;
     }
 }

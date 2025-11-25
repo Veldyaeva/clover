@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.Features.Articul.Forms
+﻿using SewingProduction.Core.Class;
+
+namespace SewingProduction.Features.Articul.Forms
 {
     partial class ArticulEditAdvance
     {
