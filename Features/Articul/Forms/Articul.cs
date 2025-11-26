@@ -59,6 +59,7 @@ namespace SewingProduction.Features.Articul
         //все поля таблицы Артикул
         private SpArticulPreviewModel _articulByKod;
 
+        private bool _isInitialized;
 
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
@@ -89,6 +90,14 @@ namespace SewingProduction.Features.Articul
             _user = user;
             ThemeManager.UpdateTheme(this);
         }
+        private async Task RefreshArtPreviewAsync()
+        {
+            // Перезагрузка краткого перечня кодов из справочника
+            _artPreview = await _articulDataService.GetArtPreviewAsync();
+            bsArt.DataSource = _artPreview;
+            bsArt.ResetBindings(false);
+        }
+
 
         private async void Articul_Load(object sender, EventArgs e)
         {
@@ -96,26 +105,13 @@ namespace SewingProduction.Features.Articul
             try
             {
                 //загрузка перечня кодов из справочника, часть полей
-                _artPreview = await _articulDataService.GetArtPreviewAsync();
-                bsArt.DataSource = _artPreview;
-                // инициализация привязок данных к элементам
-                InitializeBindingsAsync();
-
-
-                // загрузка комбиков для выбора полотна
-                //bindComboBoxTkanName(); // ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
-
-
-                //customComboBox1.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t1"].ToString();
-
-                //// не нужно. оставила для примера, привязка Combox к полю
-                //query = $"SELECT kodsp,M_Naimen_Sokr FROM view_tovar_marka where tmOwn = 1 ";
-                //dt = ShowRelatedData("ace", query);
-                //bsTM.DataSource = dt;
-                //cbTM.DisplayMember = "M_Naimen_Sokr";
-                //cbTM.ValueMember = "kodsp";
-                //cbTM.DataBindings.Add("SelectedValue", bsArticul, "va_kle", true, DataSourceUpdateMode.OnPropertyChanged);
-
+                await RefreshArtPreviewAsync();
+                if (!_isInitialized)
+                {
+                    await InitializeBindingsAsync();
+                    _isInitialized = true;
+                    
+                }
 
             }
             catch (Exception ex)
@@ -540,15 +536,24 @@ namespace SewingProduction.Features.Articul
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void customButtonCopy_Click(object sender, EventArgs e)
+        private async void customButtonCopy_Click(object sender, EventArgs e)
         {
-            //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
+            var current = bsArt.Current as ArticulModel;
+            if (current == null)
+            {
+                MessageBox.Show("Не выбран артикул для копирования.", "Внимание",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var kodObj = (bsArt.Current as ArticulModel).Kod;
 
-            EditArticul f = new EditArticul(_user, kodObj.ToString());
-            if (f.ShowDialog() == DialogResult.OK)
+            using (EditArticul f = new EditArticul(_user, kodObj.ToString()))
             {
-                Articul_Load(sender, e);
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    await RefreshArtPreviewAsync();
+                }
             }
         }
         /// <summary>
@@ -566,12 +571,14 @@ namespace SewingProduction.Features.Articul
             }
         }
 
-        private void csButtonNew_Click(object sender, EventArgs e)
+        private async void csButtonNew_Click(object sender, EventArgs e)
         {
-            EditArticul f = new EditArticul();
-            if (f.ShowDialog() == DialogResult.OK)
+            using (EditArticul f = new EditArticul())
             {
-                Articul_Load(sender, e);
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    await RefreshArtPreviewAsync();
+                }
             }
         }
         /// <summary>

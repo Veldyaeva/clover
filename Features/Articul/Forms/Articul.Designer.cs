@@ -236,6 +236,7 @@ namespace SewingProduction.Features.Articul
             lCPagesKoplNabor = new DevExpress.XtraLayout.LayoutControlGroup();
             customCheckBox1 = new CustomCheckBox();
             groupBox3 = new System.Windows.Forms.GroupBox();
+            customButton3 = new CustomButton();
             customLabel48 = new CustomLabel();
             customSimpleButton6 = new CustomSimpleButton();
             customTextBox1 = new CustomTextBox();
@@ -260,7 +261,6 @@ namespace SewingProduction.Features.Articul
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             customGroupBox1 = new CustomGroupBox();
-            customButton3 = new CustomButton();
             csButtonEdit = new CustomSimpleButton();
             customGroupBox2 = new CustomGroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -396,6 +396,7 @@ namespace SewingProduction.Features.Articul
             gridControl1.OptionsEditForm.PopupEditFormWidth = 933;
             gridControl1.OptionsFind.AlwaysVisible = true;
             gridControl1.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter;
+            gridControl1.OptionsView.ColumnAutoWidth = false;
             gridControl1.OptionsView.ShowAutoFilterRow = true;
             gridControl1.OptionsView.ShowGroupPanel = false;
             gridControl1.FocusedRowChanged += gridControl1_FocusedRowChanged;
@@ -2646,6 +2647,7 @@ namespace SewingProduction.Features.Articul
             gridView1.GridControl = gridArtDr;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView1.OptionsView.ColumnAutoWidth = false;
             gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // grArtDrEd
@@ -3002,6 +3004,19 @@ namespace SewingProduction.Features.Articul
             groupBox3.TabIndex = 35;
             groupBox3.TabStop = false;
             // 
+            // customButton3
+            // 
+            customButton3.BackColor = Color.FromArgb(255, 223, 196);
+            customButton3.Font = new Font("Arial", 10F);
+            customButton3.ForeColor = Color.FromArgb(139, 69, 19);
+            customButton3.Location = new Point(107, 55);
+            customButton3.Name = "customButton3";
+            customButton3.Size = new Size(206, 52);
+            customButton3.TabIndex = 39;
+            customButton3.Text = "Редактирование состава набора ";
+            customButton3.UseVisualStyleBackColor = false;
+            customButton3.Click += customButton3_Click;
+            // 
             // customLabel48
             // 
             customLabel48.AutoSize = true;
@@ -3350,19 +3365,6 @@ namespace SewingProduction.Features.Articul
             customGroupBox1.TabIndex = 38;
             customGroupBox1.TabStop = false;
             customGroupBox1.Text = "Затраты на изготовление";
-            // 
-            // customButton3
-            // 
-            customButton3.BackColor = Color.FromArgb(255, 223, 196);
-            customButton3.Font = new Font("Arial", 10F);
-            customButton3.ForeColor = Color.FromArgb(139, 69, 19);
-            customButton3.Location = new Point(107, 55);
-            customButton3.Name = "customButton3";
-            customButton3.Size = new Size(206, 52);
-            customButton3.TabIndex = 39;
-            customButton3.Text = "Редактирование состава набора ";
-            customButton3.UseVisualStyleBackColor = false;
-            customButton3.Click += customButton3_Click;
             // 
             // csButtonEdit
             // 

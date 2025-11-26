@@ -216,15 +216,16 @@ namespace SewingProduction.Helpers
 
         public async Task<SqlTransaction> BeginTransactionAsync()
         {
-            _currentConnection = new SqlConnection(_connectionString);
-
-            if (_currentConnection.State != ConnectionState.Open)
+            using (_currentConnection = new SqlConnection(_connectionString))
             {
-                await _currentConnection.OpenAsync();
-            }
+                if (_currentConnection.State != ConnectionState.Open)
+                {
+                    await _currentConnection.OpenAsync();
+                }
 
-            _currentTransaction = _currentConnection.BeginTransaction();
-            return _currentTransaction;
+                _currentTransaction = _currentConnection.BeginTransaction();
+                return _currentTransaction;
+            }
         }
         public async Task CommitTransactionAsync()
         {
