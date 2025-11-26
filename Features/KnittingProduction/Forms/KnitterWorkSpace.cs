@@ -293,7 +293,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Кнопка "Начать смену": массово назначает табель выбранным строкам и обновляет отображение.
+        /// Кнопка "Начать смену": массово назначает табель выбранным строкам, присваивает kolNazn, ChasiNazn, sekNazn и обновляет отображение.
         /// </summary>
         private async void simpleButton2_Click(object sender, EventArgs e)
         {
