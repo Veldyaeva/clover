@@ -582,7 +582,7 @@ namespace SewingProduction.Features.Articul
             }
         }
         /// <summary>
-        /// удалени кода в справочнике
+        /// удаление кода в справочнике
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -611,8 +611,7 @@ namespace SewingProduction.Features.Articul
                     _artPreview.Remove(cuRow);
                     bsArt.ResetBindings(false);
 
-                    //Task delKod = _articulDataService.DeleteAsync((ArticulModel)bsArt.Current);
-                    //await Task.WhenAll(delKod);
+                    
 
                 }
             }
