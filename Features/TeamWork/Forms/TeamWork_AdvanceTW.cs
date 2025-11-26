@@ -27,7 +27,6 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Z.Dapper.Plus;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
@@ -48,6 +47,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private int _newAnnId = -1;
         private int _selectedAnnId = -1;
         private readonly ILogger _logger = new FileLogger();
+        private readonly BulkHelper _bulkHelper = new BulkHelper();
         private int _mode;
         private ArtNormN _currentAnnData;
         private ArtNormN _originalAnnData;
@@ -2631,32 +2631,31 @@ namespace SewingProduction.Features.TeamWork.Forms
                         annIdProp.SetValue(item, newAnnId);
                     }
                 }
-                var logStringBuilder = new StringBuilder();
+
                 using (var connection = _dbHelper.GetConnection())
                 {
                     try
                     {
                         await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {itemsToInsert.Count}", "SaveListAsync");
                         bulkStopwatch.Restart();
-                        //await connection.BulkInsertAsync(itemsToInsert);
-                        await connection.UseBulkOptions(options =>
-                        {
-                            // Включаем логирование и указываем, куда записывать лог
-                            options.Log = (log) => logStringBuilder.AppendLine(log);
-                        })
-                   .BulkInsertAsync(itemsToInsert);
+                        _bulkHelper.BulkInsert(connection, itemsToInsert, tableName, new[] { keyFieldName });
                         bulkStopwatch.Stop();
                     }
                     catch (Exception ex)
                     {
-                        // Если произошла ошибка, сначала записываем перехваченный SQL-запрос
-                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkInsert [{itemTypeName}]. Перехваченный SQL:\n{logStringBuilder.ToString()}");
+                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkInsert [{itemTypeName}].");
                         throw; // Пробрасываем исключение дальше
                     }
                 }
 
                 foreach (var item in itemsToInsert)
+                {
                     item.IsNew = false;
+                    if (item is IModifiable modifiableNew)
+                    {
+                        modifiableNew.IsModified = false;
+                    }
+                }
             }
 
             // 3. Обновление (только если не shouldInsertAllAsNew)
@@ -2664,10 +2663,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {itemsToUpdate.Count}", "SaveListAsync");
-                    bulkStopwatch.Restart();
-                    await connection.BulkUpdateAsync(itemsToUpdate);
-                    bulkStopwatch.Stop();
+                    try
+                    {
+                        await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {itemsToUpdate.Count}", "SaveListAsync");
+                        bulkStopwatch.Restart();
+                        _bulkHelper.BulkUpdate(connection, itemsToUpdate, tableName, new[] { keyFieldName });
+                        bulkStopwatch.Stop();
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkUpdate [{itemTypeName}].");
+                        throw;
+                    }
 
                     // Сброс флага IsModified после успешного обновления
                     foreach (var item in itemsToUpdate)

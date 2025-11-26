@@ -74,7 +74,7 @@ namespace SewingProduction.Helpers
         {
             var connection = new SqlConnection(_connectionString);
 
-            // Важно! Dapper Plus требует, чтобы соединение было открыто
+            // Открываем соединение сразу, чтобы вызывающий код мог выполнять bulk-операции без задержек
             if (connection.State != ConnectionState.Open)
             {
                 connection.Open();

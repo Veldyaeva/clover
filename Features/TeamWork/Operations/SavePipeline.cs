@@ -10,7 +10,6 @@ using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Services;
-using Z.Dapper.Plus;
 
 namespace SewingProduction.Features.TeamWork.Operations
 {
@@ -19,6 +18,7 @@ namespace SewingProduction.Features.TeamWork.Operations
         private readonly DatabaseHelper _dbHelper;
         private readonly ILogger _logger;
         private readonly Action _finalizeRecalculateNumbers;
+        private readonly BulkHelper _bulkHelper = new BulkHelper();
 
         public SavePipeline(DatabaseHelper dbHelper, ILogger logger, Action finalizeRecalculateNumbers)
         {
@@ -100,43 +100,49 @@ namespace SewingProduction.Features.TeamWork.Operations
                     }
                 }
 
-                var logStringBuilder = new StringBuilder();
                 using (var connection = _dbHelper.GetConnection())
                 {
                     try
                     {
                         await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {itemsToInsert.Count}", nameof(SavePipeline));
                         bulkStopwatch.Restart();
-                        await connection.UseBulkOptions(options => { options.Log = (log) => logStringBuilder.AppendLine(log); })
-                                      .BulkInsertAsync(itemsToInsert);
+                        _bulkHelper.BulkInsert(connection, itemsToInsert, tableName, new[] { keyFieldName });
                         bulkStopwatch.Stop();
                     }
                     catch (Exception ex)
                     {
-                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkInsert [{itemTypeName}]. SQL:\n{logStringBuilder.ToString()}");
+                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkInsert [{itemTypeName}].");
                         throw;
                     }
                 }
 
                 foreach (var item in itemsToInsert)
+                {
                     item.IsNew = false;
+                    item.IsModified = false;
+                }
             }
 
             if (itemsToUpdate.Any())
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {itemsToUpdate.Count}", nameof(SavePipeline));
-                    bulkStopwatch.Restart();
-                    await connection.BulkUpdateAsync(itemsToUpdate);
-                    bulkStopwatch.Stop();
+                    try
+                    {
+                        await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {itemsToUpdate.Count}", nameof(SavePipeline));
+                        bulkStopwatch.Restart();
+                        _bulkHelper.BulkUpdate(connection, itemsToUpdate, tableName, new[] { keyFieldName });
+                        bulkStopwatch.Stop();
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkUpdate [{itemTypeName}].");
+                        throw;
+                    }
 
                     foreach (var item in itemsToUpdate)
                     {
-                        if (item is IModifiable modifiableItem)
-                        {
-                            modifiableItem.IsModified = false;
-                        }
+                        item.IsModified = false;
                     }
                 }
             }
