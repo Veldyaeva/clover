@@ -79,8 +79,6 @@ namespace SewingProduction.Features.Articul
         //private BindingSource _komplSostBindingSource;
 
 
-
-
         ArticulDataService _articulDataService = new ArticulDataService();
         public Articul(UserClass user) : base(user)
         {
@@ -610,8 +608,6 @@ namespace SewingProduction.Features.Articul
 
                     _artPreview.Remove(cuRow);
                     bsArt.ResetBindings(false);
-
-                    
 
                 }
             }
