@@ -200,7 +200,6 @@ SET pzvTab = @tab,
     pzvKolNazn = ISNULL(pzvKol, 0),
     pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
-                  END
 WHERE pzvID IN @ids";
 
                 await connection.ExecuteAsync(sql, new { tab, ids });
@@ -270,7 +269,6 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
                 return ids;
             }
         }
- 
 
     }
 }

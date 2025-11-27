@@ -312,7 +312,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // bandedGridColumn22
             // 
             bandedGridColumn22.Caption = "Кол-во факт (шт)";
-            bandedGridColumn22.FieldName = "pzvRKol";
+            bandedGridColumn22.FieldName = "pzvKolNazn";
             bandedGridColumn22.Name = "bandedGridColumn22";
             bandedGridColumn22.Visible = true;
             bandedGridColumn22.Width = 128;

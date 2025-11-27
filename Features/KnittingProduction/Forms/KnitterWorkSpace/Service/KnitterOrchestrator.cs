@@ -76,6 +76,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// Должно создать дополнительную запись в плановой таблице с оставшимся количеством.
         /// </summary>
         public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
+
     }
 }
 
