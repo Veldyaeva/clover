@@ -389,11 +389,29 @@ namespace SewingProduction.Features.KnittingProduction.Services
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyazMachine");
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyazEmp");
                 return null;
             }
         }
 
+        public async Task<List<SmenZadanyVyaz>> GetSmenZadanyVyaz(int _idNazn, int _kodProizv, int _kodPodr)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
+
+                    var result = await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyaz");
+                return null;
+            }
+        }
         #endregion
 
     }

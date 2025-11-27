@@ -2,6 +2,7 @@ using DevExpress.Spreadsheet.Export;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto.Utilities;
 using SewingProduction.Features.Articul;
+using SewingProduction.form;
 using SewingProduction.Interfaces;
 using System;
 using System.ComponentModel;
@@ -402,5 +403,34 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public decimal taskConfirmed { get; set; }
         [NotMapped] public int kmaIDNazn { get; set; }
     }
-
+    
+    public class SmenZadanyVyaz
+    {
+        [NotMapped] public string machNazn { get; set; }
+        [NotMapped] public int kwsTabStart { get; set; }
+        [NotMapped] public string fio { get; set; }
+        [NotMapped] public int kwsKmaID { get; set; }
+        [NotMapped] public string kmaNumber { get; set; }
+        [NotMapped] public int kwsmlKmlID { get; set; }
+        [NotMapped] public string kmlNumber { get; set; }
+        [NotMapped] public int idVyazClass { get; set; }
+        [NotMapped] public int nameVyazClass { get; set; }
+        [NotMapped] public int kmaNumberInt { get; set; }
+        [NotMapped] public int kmlNumberInt { get; set; }
+        [NotMapped] public int typeID { get; set; }
+        [NotMapped] public string typeName { get; set; }
+        [NotMapped] public decimal chasNaznZad { get; set; }
+        [NotMapped] public decimal chasNotConfirmedZad { get; set; }
+        [NotMapped] public decimal chasRemainZad { get; set; }
+        [NotMapped] public decimal shiftsRemainZad { get; set; }
+        [NotMapped] public decimal chasNaznSmen { get; set; }
+        [NotMapped] public decimal chasNaznSmenProc { get; set; }
+        [NotMapped] public decimal chasInWorkSmen { get; set; }
+        [NotMapped] public decimal chasDoneSmen { get; set; }
+        [NotMapped] public decimal chasDoneSmenProc { get; set; }
+        [NotMapped] public decimal chasRemainSmen { get; set; }
+        [NotMapped] public decimal chasConfirmedSmen { get; set; }
+        [NotMapped] public decimal koefObServ { get; set; }
+        [NotMapped] public int smenLength { get; set; }
+    }
 }
