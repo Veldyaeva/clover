@@ -1,0 +1,4058 @@
+[
+  {
+    "Timestamp": "2025-11-06T07:18:41.1263784Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.1464635Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.1617648Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.1628704Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7575927Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7587329Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7664372Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7675356Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7758797Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7769319Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7861953Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.7873135Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.8361582Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.8374951Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.8663581Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:41.8676359Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.7887759Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.7901058Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.8162468Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.8174923Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.8437643Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.8450217Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.8462314Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.8471477Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:43.9496578Z",
+    "Message": "Получены данные PlanTotalHoursByKnitMachine",
+    "StackTrace": "",
+    "Context": "LoadPlanTotalHoursByKnitMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:44.1287947Z",
+    "Message": "Данные PlanTotalHoursByKnitMachine успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadPlanTotalHoursByKnitMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:44.3802105Z",
+    "Message": "Получены данные ZadanyListByMachine",
+    "StackTrace": "",
+    "Context": "LoadZadanyListByMachineNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:44.3821045Z",
+    "Message": "Данные ZadanyListByMachine успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadZadanyListByMachineNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.0390361Z",
+    "Message": "Получены данные SmenZadanyVyazMachine",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.0493742Z",
+    "Message": "Данные SmenZadanyVyazMachine успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.0968896Z",
+    "Message": "Получены данные RzvPachListByNom",
+    "StackTrace": "",
+    "Context": "LoadRzvPachListByNomNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.0987565Z",
+    "Message": "Данные RzvPachListByNom успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadRzvPachListByNomNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.1563773Z",
+    "Message": "Получены данные SmenZadanyVyazEmp",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazEmpDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.1598660Z",
+    "Message": "Данные SmenZadanyVyazEmp успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazEmpDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.2484189Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:45.2502088Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2318483Z",
+    "Message": "VerifyGridConfigurations: normRaskArt has 6 columns",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2335097Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'Kod_o' - FieldName: 'Kod_o', Visible: True, Width: 50",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2347641Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'TextRask' - FieldName: 'TextRask', Visible: True, Width: 300",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2360096Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'razryd' - FieldName: 'razryd', Visible: True, Width: 80",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2372379Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'sek' - FieldName: 'Sek', Visible: True, Width: 60",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2386201Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'spec' - FieldName: 'Spec', Visible: True, Width: 100",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2402578Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'Obor' - FieldName: 'Obor', Visible: True, Width: 150",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2415949Z",
+    "Message": "VerifyGridConfigurations: normRaskArt DataSource: ",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2430610Z",
+    "Message": "VerifyGridConfigurations: customGridControl2.Visible=False, Enabled=True",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.2445721Z",
+    "Message": "VerifyGridConfigurations: customGridControl2.Parent=layoutControl1, Parent.Visible=False",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4099162Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4116010Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4526805Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4544300Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4826057Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4851771Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4904185Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.4922153Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.5283763Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.5310344Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.9107276Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.9127488Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.9145189Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.9163471Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.9807669Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.9936124Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:48.9957509Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.0004639Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.0225694Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.0353083Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.0450262Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.0524782Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.0551959Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.0659901Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2371129Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2392427Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2412148Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2431624Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2454258Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2473711Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2491930Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2510456Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2530861Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2550160Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2569577Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2588731Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2607468Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:49.2626574Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:52.0573704Z",
+    "Message": "Данные загружены успешно",
+    "StackTrace": "",
+    "Context": "LoadData"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:52.4939544Z",
+    "Message": "RefreshRelatedData: Обновление связанных данных для AnnID: 90661",
+    "StackTrace": "",
+    "Context": "TeamWorkOrchestrator"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:52.5042973Z",
+    "Message": "GetRelatedNormRasz: Выполняется SQL-запрос для AnnId=90661: SELECT \r\n nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,\r\n    nr.Sek, nr.Seb, nr.Kod, \r\n    nr.kod_o AS Kod_o,       \r\n    nr.kod_ob AS KodOb,   \r\n    nr.kod_podr AS KodPodr,  \r\n    nr.kod_proizv AS KodProizv,\r\n    nr.Spec, nr.nrId,\r\n    nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,\r\n    kp.text_proizv as TextProizv,\r\n    pv.text_vyaz as TextVyaz,\r\n    ob.text_ob as TextOb\r\nFROM dbo.normraszview nr\r\nLEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv\r\nLEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz\r\nLEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob\r\nWHERE nr.annId = @annId",
+    "StackTrace": "",
+    "Context": "GetRelatedNormRasz"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:52.7138668Z",
+    "Message": "FIO загружено и закешировано",
+    "StackTrace": "",
+    "Context": "LoadAndBindFioListsAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:18:52.7587942Z",
+    "Message": "Связанные данные для AnnID: 90661 успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadRelatedData"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:13.4416662Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:13.4433729Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:15.2209313Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:15.2223808Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4202960Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4232622Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4250419Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4276497Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4306899Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4340105Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4372506Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4402332Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4422789Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4442160Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4458377Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4476484Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4495390Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4515715Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4537670Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4556277Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4573840Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4590881Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4608210Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4626344Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4646445Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4665991Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4689225Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4710523Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4730442Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4752858Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4775993Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4803583Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4823406Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4846408Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4869150Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4894143Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4916429Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4936220Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4957371Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.4977550Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5000971Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5028306Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5054552Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5080948Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5103202Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5125790Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5146573Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5167363Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5189629Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5210530Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5231743Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5252185Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5271761Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5293030Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5320378Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5347147Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5370148Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5393035Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5416204Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5437597Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5460476Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5483260Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5506863Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5529417Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5558044Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5580041Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5604761Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5624357Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5645582Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5676568Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5707035Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5736871Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5768648Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5792828Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5818661Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5853487Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5875376Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5897085Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5921341Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5942463Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5965637Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.5987775Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6015407Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6046171Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6072827Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6094245Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6119532Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6144414Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6164404Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6189484Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6213237Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6234480Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6259215Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6284036Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6306657Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6335842Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6360423Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6384045Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6409999Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6437227Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6462377Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6485982Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6510858Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6537007Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6564110Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6591446Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6615174Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6638833Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6664284Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6697392Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6722624Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6747415Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6769462Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6793130Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6821081Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6844862Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6868629Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6891958Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6915534Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6940833Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6964685Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.6999246Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7024197Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7048270Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7075552Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7101333Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7124377Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7147969Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7171908Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7197530Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7223895Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7255602Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7434225Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7464812Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7496478Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7561327Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7585427Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7611670Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7639381Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7667103Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7694219Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7719091Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7743239Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7767040Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7790004Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7822347Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7846901Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7872765Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7899250Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7917066Z",
+    "Message": "Форма TeamWork закрыта",
+    "StackTrace": "",
+    "Context": "FormClosing"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7942770Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7967443Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.7990078Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8013188Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8041457Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8065411Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8097654Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8122343Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8148244Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8175368Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8201923Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8229744Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8256610Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8283864Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8310258Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8339866Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8373310Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8400880Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8429707Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8455923Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8484574Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8514861Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8543165Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8567492Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:19.8593091Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0481522Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0508698Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0534025Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0587793Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0615154Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0649867Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0681447Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0704930Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0730063Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0747951Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0776470Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0802187Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0837038Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0860121Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0904222Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0926586Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0959963Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.0998264Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1595133Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1622453Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1642639Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1684999Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1715422Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1739761Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1868767Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1910680Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.1965094Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2019376Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2056247Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2083687Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2171611Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2226698Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2276527Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2462877Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2538223Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2579361Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2620559Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2698991Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2766178Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2829516Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2921801Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.2980225Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3095957Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3125847Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3149267Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3198889Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3239675Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3267625Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3333507Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlMlOp_gridViewMlOp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3375376Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3406640Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3435106Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3478807Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3510164Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3554193Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3593934Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3638094Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3671172Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3722246Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3756331Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3777938Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3815935Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3870100Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3893426Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3941459Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3974188Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.3996128Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.4041180Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.4072082Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:19:20.4095689Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:45.8503188Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:45.8775025Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:45.8873339Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:45.8938492Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.1350861Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.1420962Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.1587151Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.1653559Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.1748837Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.1818737Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.1965384Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.2042927Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.2145948Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.2221733Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.2397546Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:46.2485853Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5335422Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5395981Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5471171Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5529518Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5693196Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5757080Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5840735Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.5909073Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.6936401Z",
+    "Message": "Получены данные PlanTotalHoursByKnitMachine",
+    "StackTrace": "",
+    "Context": "LoadPlanTotalHoursByKnitMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:47.7970832Z",
+    "Message": "Данные PlanTotalHoursByKnitMachine успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadPlanTotalHoursByKnitMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3516169Z",
+    "Message": "VerifyGridConfigurations: normRaskArt has 6 columns",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3576660Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'Kod_o' - FieldName: 'Kod_o', Visible: True, Width: 50",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3639241Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'TextRask' - FieldName: 'TextRask', Visible: True, Width: 300",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3701359Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'razryd' - FieldName: 'razryd', Visible: True, Width: 80",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3764984Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'sek' - FieldName: 'Sek', Visible: True, Width: 60",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3831990Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'spec' - FieldName: 'Spec', Visible: True, Width: 100",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3924543Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'Obor' - FieldName: 'Obor', Visible: True, Width: 150",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.3984088Z",
+    "Message": "VerifyGridConfigurations: normRaskArt DataSource: ",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.4052887Z",
+    "Message": "VerifyGridConfigurations: customGridControl2.Visible=False, Enabled=True",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.4119594Z",
+    "Message": "VerifyGridConfigurations: customGridControl2.Parent=layoutControl1, Parent.Visible=False",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.5544211Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.5694921Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.5802347Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.5868164Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.5952682Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.6010759Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.6096741Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.6160040Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.6291992Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:48.6353492Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.0339029Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.0411771Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.0483199Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.0570002Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.1464379Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.1605408Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.1681417Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.1743947Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.1814238Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.1900952Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.1973638Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.2035726Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.2097197Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.2177398Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.4025424Z",
+    "Message": "Получены данные ZadanyListByMachine",
+    "StackTrace": "",
+    "Context": "LoadZadanyListByMachineNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.4118122Z",
+    "Message": "Данные ZadanyListByMachine успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadZadanyListByMachineNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.5612980Z",
+    "Message": "Получены данные SmenZadanyVyazMachine",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.5731845Z",
+    "Message": "Данные SmenZadanyVyazMachine успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazMachineDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.6224771Z",
+    "Message": "Получены данные RzvPachListByNom",
+    "StackTrace": "",
+    "Context": "LoadRzvPachListByNomNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.6296129Z",
+    "Message": "Данные RzvPachListByNom успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadRzvPachListByNomNewDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.6776199Z",
+    "Message": "Получены данные SmenZadanyVyazEmp",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazEmpDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.6890351Z",
+    "Message": "Данные SmenZadanyVyazEmp успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadSmenZadanyVyazEmpDataAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.6999025Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.7151482Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.7251448Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.7341319Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.7440673Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.7537652Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.7721304Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.7815081Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8338066Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8462395Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8543527Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8621654Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8698606Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8805878Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8888613Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:49.8977223Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:52.1219815Z",
+    "Message": "Данные загружены успешно",
+    "StackTrace": "",
+    "Context": "LoadData"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:52.3629467Z",
+    "Message": "RefreshRelatedData: Обновление связанных данных для AnnID: 90661",
+    "StackTrace": "",
+    "Context": "TeamWorkOrchestrator"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:52.3761969Z",
+    "Message": "GetRelatedNormRasz: Выполняется SQL-запрос для AnnId=90661: SELECT \r\n nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,\r\n    nr.Sek, nr.Seb, nr.Kod, \r\n    nr.kod_o AS Kod_o,       \r\n    nr.kod_ob AS KodOb,   \r\n    nr.kod_podr AS KodPodr,  \r\n    nr.kod_proizv AS KodProizv,\r\n    nr.Spec, nr.nrId,\r\n    nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,\r\n    kp.text_proizv as TextProizv,\r\n    pv.text_vyaz as TextVyaz,\r\n    ob.text_ob as TextOb\r\nFROM dbo.normraszview nr\r\nLEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv\r\nLEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz\r\nLEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob\r\nWHERE nr.annId = @annId",
+    "StackTrace": "",
+    "Context": "GetRelatedNormRasz"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:52.5448536Z",
+    "Message": "FIO загружено и закешировано",
+    "StackTrace": "",
+    "Context": "LoadAndBindFioListsAsync"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:52.5859914Z",
+    "Message": "Связанные данные для AnnID: 90661 успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadRelatedData"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.3498291Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.3608458Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.3692146Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.3776323Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.3862865Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.3955163Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4051566Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4135946Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4222416Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4312867Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4410064Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4511619Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4606486Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4720459Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4857996Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.4953729Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5052950Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5171832Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5261275Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5365320Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5450212Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5542218Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5631961Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5720608Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5809611Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5897066Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.5985878Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6075568Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6151168Z",
+    "Message": "Форма TeamWork закрыта",
+    "StackTrace": "",
+    "Context": "FormClosing"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6244075Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6334320Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6419989Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6508593Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6604024Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6693102Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6779309Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6869755Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.6957609Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7050173Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7140076Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7226690Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7312333Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7397594Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7483501Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7572952Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7666331Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7754178Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7839446Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.7929819Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.8016776Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.8106710Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.8203270Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.8292178Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.8380999Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9003149Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9095886Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9191791Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9357780Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9446929Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9529834Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9632119Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9730295Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9813034Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:55.9920523Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0008146Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0101045Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0238134Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0327057Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0411369Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0628588Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0737446Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0830108Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.0931435Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.1029526Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.1130921Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.1232283Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.1421228Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:56.1788698Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:57.8365220Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:57.8440868Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:59.3179920Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:25:59.3210586Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:01.0303294Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:01.0368151Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6718711Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6755024Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6790401Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6838305Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6874895Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6907897Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6941293Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.6978803Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7028271Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7062643Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7098637Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7131345Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7167147Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7205951Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7246143Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7288392Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7334482Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7372262Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7410292Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7448097Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7486054Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7526335Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7584142Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7622424Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7661171Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7698435Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7744960Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7786491Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7824871Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7864947Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7900242Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7938411Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.7975428Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8013005Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8052428Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8098537Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8138584Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8174934Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8213923Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8251050Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8288864Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8327560Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8372551Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8411713Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8450846Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8491227Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8529420Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8578487Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8621427Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8663364Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8707235Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8746269Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8785128Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8825779Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8889349Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8928990Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.8966870Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9006908Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9050445Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9098506Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9138648Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9178524Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9220406Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9267330Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9311126Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9352062Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9400299Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9447704Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9489581Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9530773Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9567705Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9606078Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9647111Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9686558Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9730614Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9771051Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9822809Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9863110Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9905423Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9944951Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:14.9985518Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0025267Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0067304Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0117948Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0159981Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0198542Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0235771Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0277377Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0321338Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0364536Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0404399Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0441874Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0478316Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0519683Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0561736Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0601063Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0646108Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0689423Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0729597Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0771040Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0815240Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0861614Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0901636Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0944848Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.0989353Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1031759Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1071274Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1121009Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1159687Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1198691Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1236244Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1281193Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1323879Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1365875Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1409966Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1454067Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1496041Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1545008Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1586219Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1634510Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1672348Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1712033Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.1755818Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3226184Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3326269Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3407407Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3483396Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3538737Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3588438Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3637996Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3677796Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3734343Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3773418Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView3'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3841223Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3881073Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3926621Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.3962943Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4005786Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4058835Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_bandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4120398Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4167517Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'KnitterWorkSpace_PlanZagrVyazGridControl_advBandedGridView1'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4335007Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4403858Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4460367Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlNormRasz_gridViewNormRasz'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4533033Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4591934Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4637728Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlArtNormN_gridViewArtNormN'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4706149Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlMlOp_gridViewMlOp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4765864Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4819801Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4879362Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazMachine_gridViewSmenZadanyVyazMachine'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4949827Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.4993819Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5037211Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlSmenZadanyVyazEmp_gridViewSmenZadanyVyazEmp'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5106571Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5202935Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5265499Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_customGridControl5_gridView5'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5386318Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5483328Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5541188Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlPZVOperList_gridViewPZVOperList'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5628470Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5714393Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5766167Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlRzvPachListByNom_gridViewRzvPachListByNom'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5839626Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5904999Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.5950399Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlZadanyListByMachine_gridViewZadanyListByMachine'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.6030202Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.6097325Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-11-06T07:26:15.6136836Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'PlanZagrVyaz_gridControlPlanTotalHoursByKnitMachine_gridViewPlanTotalHoursByKnitMachine'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  }
+]

@@ -9,6 +9,11 @@ using DevExpress.XtraGrid.Localization;
 using DevExpress.XtraReports.Design;
 using Microsoft.Win32;
 using SewingProduction.Models;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
+using SewingProduction.Features.KnittingProduction.Forms;
+using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
+using SewingProduction.Helpers;
 
 
 namespace SewingProduction.Core
@@ -59,7 +64,13 @@ namespace SewingProduction.Core
                 Application.SetCompatibleTextRenderingDefault(false);
                 DapperMappings.Configure();
 
-                 using (SplashScreen splashScreen = new SplashScreen())
+                // DI контейнер
+                var services = new ServiceCollection();
+                ConfigureServices(services);
+                var provider = services.BuildServiceProvider();
+                AppServices.Configure(provider);
+
+                using (SplashScreen splashScreen = new SplashScreen())
                 {
                     try
                     {
@@ -80,6 +91,14 @@ namespace SewingProduction.Core
                     }
                 }
             }
+        }
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddSingleton<DatabaseHelper>();
+            services.AddTransient<ILogger, HybridLogger>();
+            services.AddTransient<IKnitterRepository, KnitterRepository>();
+            services.AddTransient<IKnitterOrchestrator, KnitterOrchestrator>();
+            services.AddTransient<KnitterWorkSpace>();
         }
         public class CustomLocalizer : GridLocalizer
         {
