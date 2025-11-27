@@ -1,22 +1,4 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
-using DevExpress.Data.Internal;
-using DevExpress.Office.Utils;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraReports.UI;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Core.Models;
-using SewingProduction.Extensions;
-using SewingProduction.Features.Articul;
-using SewingProduction.Features.Articul.Forms;
-using SewingProduction.Features.Articul.Models;
-using SewingProduction.Features.Articul.Service;
-using SewingProduction.Features.Sprav;
-using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Help.Form;
-using SewingProduction.Helpers;
-using SewingProduction.Report;
-using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +8,40 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Data.Internal;
+using DevExpress.Office.Utils;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Class;
+using DevExpress.XtraWaitForm;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Core.Models;
+using SewingProduction.Extensions;
+using SewingProduction.Features.Articul;
+using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Help.Form;
+using SewingProduction.Helpers;
+using SewingProduction.Report;
+using SewingProduction.Services;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static DevExpress.Office.PInvoke.Win32;
 using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
 
@@ -42,7 +58,8 @@ namespace SewingProduction.Features.Articul
         private readonly ILogger _logger = new FileLogger();
         //все поля таблицы Артикул
         private SpArticulPreviewModel _articulByKod;
-        
+
+        private bool _isInitialized;
 
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
@@ -56,7 +73,7 @@ namespace SewingProduction.Features.Articul
 
 
         private List<SpArticulKomplSostModel> _articulKomplSostList;
-        private List<spArticulNaborSostav> _articulNaborSostList;
+        private List<SpArticulNaborSostav> _articulNaborSostList;
 
         //private BindingSource _articulBindingSource;
         //private BindingSource _komplSostBindingSource;
@@ -70,8 +87,15 @@ namespace SewingProduction.Features.Articul
             InitializeComponent();
             _user = user;
             ThemeManager.UpdateTheme(this);
-
         }
+        private async Task RefreshArtPreviewAsync()
+        {
+            // Перезагрузка краткого перечня кодов из справочника
+            _artPreview = await _articulDataService.GetArtPreviewAsync();
+            bsArt.DataSource = _artPreview;
+            bsArt.ResetBindings(false);
+        }
+
 
         private async void Articul_Load(object sender, EventArgs e)
         {
@@ -79,26 +103,13 @@ namespace SewingProduction.Features.Articul
             try
             {
                 //загрузка перечня кодов из справочника, часть полей
-                _artPreview = await _articulDataService.GetArtPreviewAsync();
-                bsArt.DataSource = _artPreview;
-                // инициализация привязок данных к элементам
-                InitializeBindingsAsync();
-
-
-                // загрузка комбиков для выбора полотна
-                //bindComboBoxTkanName(); // ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
-
-
-                //customComboBox1.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t1"].ToString();
-
-                //// не нужно. оставила для примера, привязка Combox к полю
-                //query = $"SELECT kodsp,M_Naimen_Sokr FROM view_tovar_marka where tmOwn = 1 ";
-                //dt = ShowRelatedData("ace", query);
-                //bsTM.DataSource = dt;
-                //cbTM.DisplayMember = "M_Naimen_Sokr";
-                //cbTM.ValueMember = "kodsp";
-                //cbTM.DataBindings.Add("SelectedValue", bsArticul, "va_kle", true, DataSourceUpdateMode.OnPropertyChanged);
-
+                await RefreshArtPreviewAsync();
+                if (!_isInitialized)
+                {
+                    await InitializeBindingsAsync();
+                    _isInitialized = true;
+                    
+                }
 
             }
             catch (Exception ex)
@@ -523,15 +534,24 @@ namespace SewingProduction.Features.Articul
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void customButtonCopy_Click(object sender, EventArgs e)
+        private async void customButtonCopy_Click(object sender, EventArgs e)
         {
-            //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
+            var current = bsArt.Current as ArticulModel;
+            if (current == null)
+            {
+                MessageBox.Show("Не выбран артикул для копирования.", "Внимание",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var kodObj = (bsArt.Current as ArticulModel).Kod;
 
-            EditAricul f = new EditAricul(kodObj.ToString());
-            if (f.ShowDialog() == DialogResult.OK)
+            using (EditArticul f = new EditArticul(_user, kodObj.ToString()))
             {
-                Articul_Load(sender, e);
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    await RefreshArtPreviewAsync();
+                }
             }
         }
         /// <summary>
@@ -541,26 +561,30 @@ namespace SewingProduction.Features.Articul
         /// <param name="e"></param>
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
-            /*//var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
+            //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as ArticulModel).Kod;
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AddNewKopml(CurrentUser.User, _articuls, kodObj.ToString()));
+                mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
             }
-            */
         }
 
-        private void csButtonNew_Click(object sender, EventArgs e)
+        private async void csButtonNew_Click(object sender, EventArgs e)
         {
-            /*EditAricul f = new EditAricul(_user);
-            if (f.ShowDialog() == DialogResult.OK)
+            using (EditArticul f = new EditArticul())
             {
-                Articul_Load(sender, e);
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    await RefreshArtPreviewAsync();
+                }
             }
-            */
         }
-
-        private async void  sButtodDeleteKod_Click(object sender, EventArgs e)
+        /// <summary>
+        /// удаление кода в справочнике
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void sButtodDeleteKod_Click(object sender, EventArgs e)
         {
             try
             {
@@ -579,14 +603,11 @@ namespace SewingProduction.Features.Articul
                         return;
                     }
                     //удаление кода 
-                    
+
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
                     _artPreview.Remove(cuRow);
                     bsArt.ResetBindings(false);
-
-                    //Task delKod = _articulDataService.DeleteAsync((ArticulModel)bsArt.Current);
-                    //await Task.WhenAll(delKod);
 
                 }
             }
@@ -595,7 +616,150 @@ namespace SewingProduction.Features.Articul
 
                 await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
             }
-            
+
+        }
+
+ 		private void customButton3_Click(object sender, EventArgs e)
+        {
+            var Obj = bsArt.Current as ArticulModel;
+            //нужно добавить проверку на признак НАБОРА, чтобы можно было открыть только набор.
+            Debug.WriteLine(Obj.Gost);
+            ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
+            if (_ANSDataService.CheckOpis(Obj.Kod))
+            {
+                MessageBox.Show("Набор уже описан, изменения применятся на весь размерный ряд!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new EditNaborSostav(User, Obj));
+            }
+        }
+        /// <summary>
+        /// открывает на редактирование карточку артикула
+        /// </summary>
+        /// <param name="gridView"></param>
+        /// <param name="bindingSource"></param>
+        /// <returns></returns>
+        //private async Task EditArtciul (GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
+        private void EditArtciul(GridView gridView, BindingSource bindingSource)
+        {
+            if (gridView == null || gridView.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            var kodd = (bsArt.Current as ArticulModel).Kodd;
+
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd));
+            }
+
+
+            //// Проверяем, есть ли уже открытые экземпляры
+            //if (HasOpenAdvanceForms())
+            //{
+            //    // Получаем первый открытый экземпляр
+            //    ArticulEditAdvance existingForm = null;
+            //    lock (_lockObject)
+            //    {
+            //        existingForm = _openEditArticulForms.FirstOrDefault(form => form != null && !form.IsDisposed);
+            //    }
+
+            //    if (existingForm != null)
+            //    {
+            //        //string articul = existingForm.CurrentArticul;
+            //        //string msg = string.IsNullOrWhiteSpace(articul)
+            //        //    ? "Открыто разделение труда"
+            //        //    : $"Открыто разделение труда для артикула \"{articul}\"";
+
+            //        //// Показать сплеш на 3 секунды
+            //        //Task.Run(async () =>
+            //        //{
+            //        //    SplashScreenHelper.ShowSplash(msg, textOnly: true);
+            //        //    await Task.Delay(3000);
+            //        //    SplashScreenHelper.CloseSplash();
+            //        //});
+
+            //        existingForm.WindowState = FormWindowState.Normal;
+            //        existingForm.BringToFront();
+            //        existingForm.Activate();
+            //    }
+
+            //    return null;
+            //}
+
+            //var editForm = new ArticulEditAdvance();
+
+            //// Добавляем в список открытых форм
+            //AddOpenAdvanceForm(editForm);
+            //// Подписываемся на событие закрытия формы
+            //editForm.FormClosed += (sender, e) =>
+            //{
+            //    RemoveOpenAdvanceForm(editForm);
+            //};
+
+            //// Открываем форму не в модальном режиме
+            ////editForm.Show();
+            //OpenForm(new Articul(_user), sender);
+
+            //return editForm;
+
+
+        }
+
+        #region Управление немодальной формой ArticulEditAdvance
+
+        private static readonly List<ArticulEditAdvance> _openEditArticulForms = new List<ArticulEditAdvance>();
+        private static readonly object _lockObject = new object();
+        private static bool HasOpenAdvanceForms()
+        {
+            lock (_lockObject)
+            {
+                // Очищаем закрытые формы из списка
+                _openEditArticulForms.RemoveAll(form => form == null || form.IsDisposed);
+                return _openEditArticulForms.Count > 0;
+            }
+        }
+
+        /// <summary>
+        /// Добавляет экземпляр ArticulEditAdvance в список открытых форм
+        /// </summary>
+        /// <param name="form">Форма для добавления</param>
+        private static void AddOpenAdvanceForm(ArticulEditAdvance form)
+        {
+            lock (_lockObject)
+            {
+                if (form != null && !form.IsDisposed && !_openEditArticulForms.Contains(form))
+                {
+                    _openEditArticulForms.Add(form);
+                }
+
+            }
+        }
+        /// <summary>
+        /// Удаляет экземпляр ArticulEditAdvance из списка открытых форм
+        /// </summary>
+        /// <param name="form">Форма для удаления</param>
+        private static void RemoveOpenAdvanceForm(ArticulEditAdvance form)
+        {
+            lock (_lockObject)
+            {
+                _openEditArticulForms.Remove(form);
+            }
+        }
+        #endregion
+
+        private async void csButtonEdit_Click(object sender, EventArgs e)
+        {
+            EditArtciul(gridControl1, bsArt);
+
+        }
+
+        private void Articul_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _artPreview.Clear();
+            _artPreview = null;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,6 +6,10 @@ using System.Reflection;
 using System.Windows.Forms;
 //using System.Windows.Media;
 using System.Xml.Linq;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
 using DataColumn = System.Data.DataColumn;
 using DataTable = System.Data.DataTable;
 //using XmlElement = System.Xls.XmlElement;
@@ -32,7 +34,10 @@ namespace SewingProduction.form
             _dbHelperGLOBAL = new DatabaseHelper("global");
             ThemeManager.UpdateTheme(this);
         }
-
+        public PlanZagrBrig(UserClass user) : base(user)
+        {
+            InitializeComponent();
+        }
         private void PlanZagrBrigLoadData()
         {
             string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";

@@ -1,10 +1,10 @@
 ﻿
-using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using SewingProduction.Interfaces;
 
 namespace SewingProduction.Models
 {
@@ -12,6 +12,8 @@ namespace SewingProduction.Models
     {
         [NotMapped]
         public bool IsNew { get; set; }
+        [NotMapped]
+        public bool IsBeingAdded { get; set; } = false;
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]
@@ -142,6 +144,7 @@ namespace SewingProduction.Models
             // nrDateAdd и nrCompAdd устанавливаются автоматически при INSERT (DEFAULT)
             // nrDateDel и nrCompDel устанавливаются только при пометке на удаление
             IsNew = source.IsNew;
+            IsBeingAdded = source.IsBeingAdded;
             IsModified = source.IsModified;
         }
 

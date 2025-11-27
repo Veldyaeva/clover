@@ -1,12 +1,12 @@
-﻿using SewingProduction.Extensions;
-using SewingProduction.Features.Furnit.Services;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SewingProduction.Extensions;
+using SewingProduction.Features.Furnit.Services;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
 
 namespace SewingProduction
 {
@@ -328,6 +328,8 @@ namespace SewingProduction
 
         private async void FurnitZayavView_Load(object sender, EventArgs e)
         {
+            tbKodF.VisibleLogic = false;
+            tbViewType.VisibleLogic = false;
             tbVidFName.BorderStyle = BorderStyle.None;
             tbNZ.BorderStyle = BorderStyle.None;
             tbDataFO.BorderStyle = BorderStyle.None;

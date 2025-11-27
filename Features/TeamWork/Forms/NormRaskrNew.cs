@@ -4,22 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.BandedGrid;
+using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
-using SewingProduction.Helpers;
-using DevExpress.XtraGrid.Views.BandedGrid;
-using DevExpress.XtraGrid.Views.BandedGrid.ViewInfo;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using DevExpress.Utils;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.CodeParser;
 
 namespace SewingProduction.form.TeamWork.Forms
 {
@@ -27,18 +17,20 @@ namespace SewingProduction.form.TeamWork.Forms
     {
         private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly ILogger _logger = new FileLogger();
         private BindingSource _raskroyNormBindingSource;
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<NormRask> SelectedData { get; private set; } = new List<NormRask>();
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int? SelectedComplexity { get; private set; }
         private List<GridBand> _selectedBands = new List<GridBand>(); // Список для хранения выбранных бэндов
         private List<BandData> _bandDataList = new List<BandData>(); // Список для хранения данных выбранных бэндов
         private int _annId;
         public struct BandData
         {
-            public int gr {  get; set; }
+            public int gr { get; set; }
             public string Naimen { get; set; }
             public int Dras { get; set; }
             public int Drez { get; set; }
@@ -55,7 +47,7 @@ namespace SewingProduction.form.TeamWork.Forms
             _annId = annId;
 
             _dbService = new DbService(new DatabaseHelper());
-            _artNormService = new ArtNormService(new DatabaseHelper());
+            _artNormService = new ArtNormRepository(new DatabaseHelper());
             ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();
@@ -196,7 +188,9 @@ namespace SewingProduction.form.TeamWork.Forms
         }
         private void ProcessSelectedComplexity()
         {
-            _bandDataList.Clear(); 
+            _bandDataList.Clear();
+            SelectedComplexity = null;
+            SelectedData = new List<NormRask>();
 
             foreach (var band in _selectedBands)
             {
@@ -209,6 +203,8 @@ namespace SewingProduction.form.TeamWork.Forms
                 {
                     continue; // Пропускаем, если индекс не удалось извлечь
                 }
+
+                SelectedComplexity = complexityIndex;
 
                 var selectedRows = gridView1.GetSelectedRows();
                 foreach (int rowHandle in selectedRows)
@@ -230,7 +226,7 @@ namespace SewingProduction.form.TeamWork.Forms
                         };
 
                         _bandDataList.Add(bandData); // Добавляем данные в список
-                        SelectedData = GenerateNormRaskList(bandData, complexityIndex);
+                        SelectedData.AddRange(GenerateNormRaskList(bandData, complexityIndex));
                     }
                 }
             }
@@ -266,9 +262,9 @@ namespace SewingProduction.form.TeamWork.Forms
                 new NormRask{IsNew = true, AnnId = -1, Kod_o = "330", TextRask = "Перекладывание деталей/полоска", Sek = _slogn == 1 ? 2275 : _slogn == 2 ? 3000 : 3600, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
                 new NormRask{IsNew = true, AnnId = -1, Kod_o = "400", TextRask = "Укладывание шаблона", Sek = 150, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
                 new NormRask{IsNew = true, AnnId = -1, Kod_o = "500", TextRask = "Вырезание шаблона", Sek = 320, razryd =5,  N_ch = kol, Obor = obor , Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{IsNew = true, AnnId = -1, Kod_o = "340", TextRask = "Разрезание вруч.парных дет/пол", Sek = 300, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" } 
+                new NormRask{IsNew = true, AnnId = -1, Kod_o = "340", TextRask = "Разрезание вруч.парных дет/пол", Sek = 300, razryd =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" }
             };
         }
 
     }
-} 
+}

@@ -1,12 +1,11 @@
-﻿using Dapper;
-using SewingProduction.Core.Class.Settings;
-
-//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+﻿//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Dapper;
+using SewingProduction.Core.Class.Settings;
 
 namespace SewingProduction.Helpers
 {
@@ -217,15 +216,16 @@ namespace SewingProduction.Helpers
 
         public async Task<SqlTransaction> BeginTransactionAsync()
         {
-            _currentConnection = new SqlConnection(_connectionString);
-
-            if (_currentConnection.State != ConnectionState.Open)
+            using (_currentConnection = new SqlConnection(_connectionString))
             {
-                await _currentConnection.OpenAsync();
-            }
+                if (_currentConnection.State != ConnectionState.Open)
+                {
+                    await _currentConnection.OpenAsync();
+                }
 
-            _currentTransaction = _currentConnection.BeginTransaction();
-            return _currentTransaction;
+                _currentTransaction = _currentConnection.BeginTransaction();
+                return _currentTransaction;
+            }
         }
         public async Task CommitTransactionAsync()
         {

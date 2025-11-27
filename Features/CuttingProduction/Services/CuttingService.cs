@@ -1,15 +1,12 @@
-﻿using Dapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using Dapper;
 using SewingProduction.Features.CuttingProduction.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Data;
-using SewingProduction.Features.Articul;
-using System.Windows.Forms;
-using SewingProduction.form;
 
 
 namespace SewingProduction.Features.CuttingProduction.Services
@@ -61,7 +58,7 @@ namespace SewingProduction.Features.CuttingProduction.Services
         }
         public void SetValue(string fieldName, object value, decimal? nom)
         {
-            
+
             using (var connection = _dbHelper.GetConnection())
             {
 
@@ -79,10 +76,10 @@ namespace SewingProduction.Features.CuttingProduction.Services
                 DataTable dt = _dbHelper.ExecuteQuery(query);
                 return dt;
             }
-            
+
 
         }
-        
+
         public string getRecForNomZad(string nomZad)
         {
             string recom = "";
@@ -130,5 +127,5 @@ namespace SewingProduction.Features.CuttingProduction.Services
             }
 
         }
-    }   
+    }
 }

@@ -30,26 +30,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            repositoryItemTextEditKmlNumber = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            repositoryItemTextEditYearMonth = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            repositoryItemHypertextLabelCombinedPszNomCard = new DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel();
+            repositoryItemTextEditKmlID = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            repositoryItemRichTextEditCombinedPszNomCard = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
             сomboBoxKnitMachineClassList = new CustomComboBox();
             gridControlKnitMachineLoadInfo = new CustomGridControl();
             gridViewKnitMachineLoadLayoutView = new DevExpress.XtraGrid.Views.Layout.LayoutView();
             layoutViewColumnKmlNumber = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
-            repositoryItemTextEditKmlNumber = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             layoutViewField_layoutViewColumnKmlNumber = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             layoutViewColumnYearMonth = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
-            repositoryItemTextEditYearMonth = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             layoutViewField_layoutViewColumnYearMonth = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             layoutViewColumnCombinedPszNomCard = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
-            repositoryItemHypertextLabelCombinedPszNomCard = new DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel();
             layoutViewField_layoutViewColumnCombinedPszNomCard = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             layoutViewColumnKmlID = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
-            repositoryItemTextEditKmlID = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             layoutViewField_layoutViewColumnKmlID = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
             item1 = new DevExpress.XtraLayout.SimpleSeparator();
             item2 = new DevExpress.XtraLayout.SimpleSeparator();
-            repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
-            repositoryItemRichTextEditCombinedPszNomCard = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
             gridViewKnitMachineLoadInfoCards = new DevExpress.XtraGrid.Views.Card.CardView();
             gridKnitMachineLoadInfoColumnKmlNumberCard = new DevExpress.XtraGrid.Columns.GridColumn();
             gridKnitMachineLoadInfoColumnYearMonthCard = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -66,21 +65,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlNumber).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditYearMonth).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemHypertextLabelCombinedPszNomCard).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlID).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemRichTextEditCombinedPszNomCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlKnitMachineLoadInfo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadLayoutView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlNumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlNumber).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditYearMonth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnYearMonth).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemHypertextLabelCombinedPszNomCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnCombinedPszNomCard).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlID).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlID).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewCard1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)item1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)item2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemRichTextEditCombinedPszNomCard).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadInfoCards).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadInfo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
@@ -93,6 +91,38 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             SuspendLayout();
+            // 
+            // repositoryItemTextEditKmlNumber
+            // 
+            repositoryItemTextEditKmlNumber.AutoHeight = false;
+            repositoryItemTextEditKmlNumber.Name = "repositoryItemTextEditKmlNumber";
+            // 
+            // repositoryItemTextEditYearMonth
+            // 
+            repositoryItemTextEditYearMonth.AutoHeight = false;
+            repositoryItemTextEditYearMonth.Name = "repositoryItemTextEditYearMonth";
+            // 
+            // repositoryItemHypertextLabelCombinedPszNomCard
+            // 
+            repositoryItemHypertextLabelCombinedPszNomCard.Name = "repositoryItemHypertextLabelCombinedPszNomCard";
+            // 
+            // repositoryItemTextEditKmlID
+            // 
+            repositoryItemTextEditKmlID.AutoHeight = false;
+            repositoryItemTextEditKmlID.Name = "repositoryItemTextEditKmlID";
+            // 
+            // repositoryItemRichTextEditCombinedPszNomCard
+            // 
+            repositoryItemRichTextEditCombinedPszNomCard.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
+            repositoryItemRichTextEditCombinedPszNomCard.CustomHeight = 120;
+            repositoryItemRichTextEditCombinedPszNomCard.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            repositoryItemRichTextEditCombinedPszNomCard.Name = "repositoryItemRichTextEditCombinedPszNomCard";
+            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Copy = DevExpress.XtraRichEdit.DocumentCapability.Enabled;
+            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Cut = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
+            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Drag = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
+            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Drop = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
+            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Paste = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
+            repositoryItemRichTextEditCombinedPszNomCard.ShowCaretInReadOnly = false;
             // 
             // сomboBoxKnitMachineClassList
             // 
@@ -114,7 +144,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridControlKnitMachineLoadInfo.Location = new System.Drawing.Point(24, 70);
             gridControlKnitMachineLoadInfo.MainView = gridViewKnitMachineLoadLayoutView;
             gridControlKnitMachineLoadInfo.Name = "gridControlKnitMachineLoadInfo";
-            gridControlKnitMachineLoadInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit1, repositoryItemRichTextEditCombinedPszNomCard, repositoryItemHypertextLabelCombinedPszNomCard, repositoryItemTextEditKmlNumber, repositoryItemTextEditYearMonth, repositoryItemTextEditKmlID });
             gridControlKnitMachineLoadInfo.Size = new System.Drawing.Size(983, 494);
             gridControlKnitMachineLoadInfo.TabIndex = 2;
             gridControlKnitMachineLoadInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKnitMachineLoadLayoutView, gridViewKnitMachineLoadInfoCards, gridViewKnitMachineLoadInfo });
@@ -138,7 +167,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewKnitMachineLoadLayoutView.OptionsView.ShowCardExpandButton = false;
             gridViewKnitMachineLoadLayoutView.OptionsView.ShowCardFieldBorders = true;
             gridViewKnitMachineLoadLayoutView.OptionsView.ViewMode = DevExpress.XtraGrid.Views.Layout.LayoutViewMode.MultiColumn;
-            gridViewKnitMachineLoadLayoutView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(layoutViewColumnKmlID, DevExpress.Data.ColumnSortOrder.Ascending) });
+            gridViewKnitMachineLoadLayoutView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(layoutViewColumnKmlID, DevExpress.Data.ColumnSortOrder.Descending) });
             gridViewKnitMachineLoadLayoutView.TemplateCard = layoutViewCard1;
             // 
             // layoutViewColumnKmlNumber
@@ -149,12 +178,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutViewColumnKmlNumber.FieldName = "kmlNumber";
             layoutViewColumnKmlNumber.LayoutViewField = layoutViewField_layoutViewColumnKmlNumber;
             layoutViewColumnKmlNumber.Name = "layoutViewColumnKmlNumber";
-            // 
-            // repositoryItemTextEditKmlNumber
-            // 
-            repositoryItemTextEditKmlNumber.AutoHeight = false;
-            repositoryItemTextEditKmlNumber.Name = "repositoryItemTextEditKmlNumber";
-            repositoryItemTextEditKmlNumber.DoubleClick += repositoryItemTextEditKmlNumber_DoubleClick;
             // 
             // layoutViewField_layoutViewColumnKmlNumber
             // 
@@ -175,12 +198,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutViewColumnYearMonth.LayoutViewField = layoutViewField_layoutViewColumnYearMonth;
             layoutViewColumnYearMonth.Name = "layoutViewColumnYearMonth";
             // 
-            // repositoryItemTextEditYearMonth
-            // 
-            repositoryItemTextEditYearMonth.AutoHeight = false;
-            repositoryItemTextEditYearMonth.Name = "repositoryItemTextEditYearMonth";
-            repositoryItemTextEditYearMonth.DoubleClick += repositoryItemTextEditYearMonth_DoubleClick;
-            // 
             // layoutViewField_layoutViewColumnYearMonth
             // 
             layoutViewField_layoutViewColumnYearMonth.EditorPreferredWidth = 83;
@@ -199,11 +216,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutViewColumnCombinedPszNomCard.FieldName = "combinedPszNom";
             layoutViewColumnCombinedPszNomCard.LayoutViewField = layoutViewField_layoutViewColumnCombinedPszNomCard;
             layoutViewColumnCombinedPszNomCard.Name = "layoutViewColumnCombinedPszNomCard";
-            // 
-            // repositoryItemHypertextLabelCombinedPszNomCard
-            // 
-            repositoryItemHypertextLabelCombinedPszNomCard.Name = "repositoryItemHypertextLabelCombinedPszNomCard";
-            repositoryItemHypertextLabelCombinedPszNomCard.DoubleClick += repositoryItemHypertextLabelCombinedPszNomCard_DoubleClick;
             // 
             // layoutViewField_layoutViewColumnCombinedPszNomCard
             // 
@@ -230,12 +242,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutViewColumnKmlID.FieldName = "kmlID";
             layoutViewColumnKmlID.LayoutViewField = layoutViewField_layoutViewColumnKmlID;
             layoutViewColumnKmlID.Name = "layoutViewColumnKmlID";
-            // 
-            // repositoryItemTextEditKmlID
-            // 
-            repositoryItemTextEditKmlID.AutoHeight = false;
-            repositoryItemTextEditKmlID.Name = "repositoryItemTextEditKmlID";
-            repositoryItemTextEditKmlID.DoubleClick += repositoryItemTextEditKmlID_DoubleClick;
             // 
             // layoutViewField_layoutViewColumnKmlID
             // 
@@ -270,24 +276,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             item2.Location = new System.Drawing.Point(141, 0);
             item2.Name = "item2";
             item2.Size = new System.Drawing.Size(1, 24);
-            // 
-            // repositoryItemMemoEdit1
-            // 
-            repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
-            // 
-            // repositoryItemRichTextEditCombinedPszNomCard
-            // 
-            repositoryItemRichTextEditCombinedPszNomCard.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
-            repositoryItemRichTextEditCombinedPszNomCard.CustomHeight = 120;
-            repositoryItemRichTextEditCombinedPszNomCard.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            repositoryItemRichTextEditCombinedPszNomCard.Name = "repositoryItemRichTextEditCombinedPszNomCard";
-            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Copy = DevExpress.XtraRichEdit.DocumentCapability.Enabled;
-            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Cut = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
-            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Drag = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
-            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Drop = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
-            repositoryItemRichTextEditCombinedPszNomCard.OptionsBehavior.Paste = DevExpress.XtraRichEdit.DocumentCapability.Disabled;
-            repositoryItemRichTextEditCombinedPszNomCard.ShowCaretInReadOnly = false;
-            repositoryItemRichTextEditCombinedPszNomCard.DoubleClick += repositoryItemRichTextEditCombinedPszNomCard_DoubleClick;
             // 
             // gridViewKnitMachineLoadInfoCards
             // 
@@ -425,21 +413,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             Text = "Текущий загурз В/М";
             WindowState = System.Windows.Forms.FormWindowState.Maximized;
             Load += KnittingMachinesLoading_Load;
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlNumber).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditYearMonth).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemHypertextLabelCombinedPszNomCard).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlID).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemRichTextEditCombinedPszNomCard).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlKnitMachineLoadInfo).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadLayoutView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlNumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlNumber).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditYearMonth).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnYearMonth).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemHypertextLabelCombinedPszNomCard).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnCombinedPszNomCard).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlID).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlID).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewCard1).EndInit();
             ((System.ComponentModel.ISupportInitialize)item1).EndInit();
             ((System.ComponentModel.ISupportInitialize)item2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemMemoEdit1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemRichTextEditCombinedPszNomCard).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadInfoCards).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadInfo).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
@@ -465,13 +452,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnYearMonthCard;
         private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnKmlNumberCard;
         private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnCombinedPszNomCard;
-        private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repositoryItemRichTextEditCombinedPszNomCard;
         private DevExpress.XtraGrid.Views.Layout.LayoutView gridViewKnitMachineLoadLayoutView;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnKmlNumber;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnYearMonth;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnCombinedPszNomCard;
-        private DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel repositoryItemHypertextLabelCombinedPszNomCard;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
@@ -480,10 +464,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlNumber;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditYearMonth;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnKmlID;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlID;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumnKmlNumber;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumnYearMonth;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumnCombinedPszNomCard;
@@ -491,5 +472,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
         private DevExpress.XtraLayout.SimpleSeparator item1;
         private DevExpress.XtraLayout.SimpleSeparator item2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlNumber;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditYearMonth;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel repositoryItemHypertextLabelCombinedPszNomCard;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlID;
+        private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repositoryItemRichTextEditCombinedPszNomCard;
     }
 }

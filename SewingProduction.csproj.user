@@ -10,6 +10,9 @@
     <Compile Update="Core\Class\CustomControls\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomCheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomGridControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -22,10 +25,19 @@
     <Compile Update="Core\Class\CustomControls\CustomLookUpEdit.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomSearchLookUpEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\SP_form.cs">
@@ -40,7 +52,13 @@
     <Compile Update="Features\Articul\Forms\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\EditAricul.cs">
+    <Compile Update="Features\Articul\Forms\ArticulEditAdvance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\EditArticul.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\EditNaborSostav.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\CuttingProduction\Forms\CuttingForm.cs">
@@ -49,10 +67,19 @@
     <Compile Update="Features\CuttingProduction\Forms\CuttingFormAdding.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\Form1.cs">
+    <Compile Update="Features\CardByNom\Forms\NomLookUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\Form2.cs">
+    <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace\FioSelectionSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnittingProductionPlanningReportParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnittingProductionPlanningReportParameters.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
@@ -113,6 +140,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\TeamWork\Forms\NormOperNew.cs">
@@ -194,6 +224,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\GetItogVibKartSokrReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\KnittingProductionPlanningReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\MlRtReport.cs">

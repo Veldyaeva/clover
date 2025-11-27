@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraBars.ViewInfo;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
-using static DevExpress.LookAndFeel.DXSkinColors;
-using DevExpress.XtraEditors;
-using System.Drawing;
 
 
 namespace SewingProduction.Core.Class
@@ -55,6 +46,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisiblePermission")]
+        [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
             get => _visiblePermission;
@@ -66,6 +59,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;
@@ -133,10 +128,11 @@ namespace SewingProduction.Core.Class
     }
     public class CustomHeaderLabel : CustomLabel
     {
+        private const int HeaderFontOffset = 7;
+
         public CustomHeaderLabel()
         {
             ApplyHeaderStyle();
-
             ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
@@ -156,19 +152,24 @@ namespace SewingProduction.Core.Class
 
         private void ApplyHeaderStyle()
         {
-            float baseSize = FontSizePermission ?? Font.Size;
-            base.Font = new Font(Font.FontFamily, baseSize + 5, FontStyle.Bold);
+            float baseSize = FontSizePermission ?? ThemeManager.SharedSettings.DefaultFont.Size;
+            var baseFamily = ThemeManager.SharedSettings.DefaultFont.FontFamily;
+            base.Font = new Font(baseFamily, baseSize + HeaderFontOffset, FontStyle.Bold);
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override Font Font
         {
             get => base.Font;
             set
             {
                 float size = FontSizePermission ?? value.Size;
-                base.Font = new Font(value.FontFamily, size + 5, FontStyle.Bold);
+                var baseFamily = value.FontFamily;
+                base.Font = new Font(baseFamily, size + HeaderFontOffset, FontStyle.Bold);
             }
         }
+
         public new float? FontSizePermission
         {
             get => base.FontSizePermission;
@@ -179,4 +180,5 @@ namespace SewingProduction.Core.Class
             }
         }
     }
+
 }

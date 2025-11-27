@@ -8,19 +8,19 @@ namespace SewingProduction.Models
         [Column("annId")]
         public int annId { get; set; }
         [Column("kodd_rt")]
-        public int kodd_rt { get; set; }
+        public string kodd_rt { get; set; }
         [Column("kodd")]
-        public int kodd { get; set; }
+        public string kodd { get; set; }
         [Column("grup")]
         public string grup { get; set; }
-        [Column("minSize")]
+        [Column("minSizeAll")]
         [NotMapped]
-        public string minSize { get; set; }
-        [Column("maxSize")]
+        public string minSizeAll { get; set; }
+        [Column("maxSizeAll")]
         [NotMapped]
-        public string maxSize { get; set; }
+        public string maxSizeAll { get; set; }
         [Column("articulForRT")]
-        public string articulForRT {  get; set; }
+        public string articulForRT { get; set; }
         [Column("articul")]
         public string articul { get; set; }
         [Column("mod")]
@@ -35,7 +35,7 @@ namespace SewingProduction.Models
         public int PZTCount { get; set; }
         [Column("data_r")]
         public DateTime? data_r { get; set; }
-        
+
         [NotMapped]
         public bool IsChecked { get; set; }
     }

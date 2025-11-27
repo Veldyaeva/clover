@@ -1,11 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace SewingProduction.Core.Extensions
 {
@@ -22,11 +21,11 @@ namespace SewingProduction.Core.Extensions
         public static void EnableAutoGridSettings(this Form form, bool enableAutoSettings = true)
         {
             var customGridControls = GetAllCustomGridControls(form);
-            
+
             foreach (var gridControl in customGridControls)
             {
                 gridControl.EnableAutoSettings = enableAutoSettings;
-                
+
                 if (enableAutoSettings)
                 {
                     gridControl.LoadGridSettings();
@@ -41,7 +40,7 @@ namespace SewingProduction.Core.Extensions
         public static void SaveAllGridSettings(this Form form)
         {
             var customGridControls = GetAllCustomGridControls(form);
-            
+
             foreach (var gridControl in customGridControls)
             {
                 if (gridControl.EnableAutoSettings)
@@ -58,7 +57,7 @@ namespace SewingProduction.Core.Extensions
         public static void LoadAllGridSettings(this Form form)
         {
             var customGridControls = GetAllCustomGridControls(form);
-            
+
             foreach (var gridControl in customGridControls)
             {
                 if (gridControl.EnableAutoSettings)
@@ -76,7 +75,7 @@ namespace SewingProduction.Core.Extensions
         public static void EnableAutoSettingsForAllGrids(this Form form, bool enableAutoSettings = true)
         {
             var allGridControls = GetAllGridControls(form);
-            
+
             foreach (var gridControl in allGridControls)
             {
                 foreach (var view in gridControl.ViewCollection)
@@ -106,7 +105,7 @@ namespace SewingProduction.Core.Extensions
         {
             var customGridControls = GetAllCustomGridControls(form);
             var targetGrid = customGridControls.FirstOrDefault(g => g.Name == gridControlName);
-            
+
             if (targetGrid != null)
             {
                 targetGrid.SettingsKey = settingsKey;

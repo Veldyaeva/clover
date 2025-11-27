@@ -1,4 +1,5 @@
 ﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.form
 {
     partial class EditFio

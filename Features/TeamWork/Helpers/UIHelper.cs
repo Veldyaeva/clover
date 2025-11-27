@@ -1,16 +1,14 @@
-﻿using DevExpress.XtraGrid;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Extensions;
 using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Helpers
 {
@@ -231,6 +229,73 @@ namespace SewingProduction.Features.TeamWork.Helpers
             {
                 _logger?.LogErrorAsync(ex, "Ошибка при отображении статуса операции");
             }
+        }
+
+        // Универсальный безопасный апдейт для GridView
+        public static void SafeUpdate(GridView gridView, Action updateAction)
+        {
+            if (gridView == null || updateAction == null) return;
+            gridView.BeginDataUpdate();
+            try { updateAction(); }
+            finally { try { gridView.EndDataUpdate(); } catch { } }
+        }
+
+        // Обобщённая фабрика контекстного меню (удаление одной/нескольких строк + базовые пункты)
+        public static PopupMenuShowingEventHandler CreateContextMenu<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId, List<int> deletedIds)
+            where T : class
+        {
+            return (s, e) =>
+            {
+                if (e.MenuType != GridMenuType.Row) return;
+                var menu = e.Menu;
+
+                // Удаление одной строки
+                var deleteItem = new DevExpress.Utils.Menu.DXMenuItem("Удалить строку", (_, __) =>
+                {
+                    int rowHandle = e.HitInfo.RowHandle;
+                    if (!view.IsValidRowHandle(rowHandle)) return;
+                    var rowObj = view.GetRow(rowHandle) as T;
+                    if (rowObj == null) return;
+
+                    if (getId != null && deletedIds != null)
+                    {
+                        int id = getId(rowObj);
+                        if (id > 0) deletedIds.Add(id);
+                    }
+
+                    bindingList.Remove(rowObj);
+                });
+                menu.Items.Add(deleteItem);
+
+                // Массовое удаление по выделению
+                var selectedRows = view.GetSelectedRows();
+                if (selectedRows != null && selectedRows.Length > 0)
+                {
+                    var deleteSelectedItem = new DevExpress.Utils.Menu.DXMenuItem($"🗑 Удалить выбранные строки ({selectedRows.Length})", (_, __) =>
+                    {
+                        var toDelete = new List<T>();
+                        foreach (var handle in selectedRows)
+                        {
+                            if (!view.IsValidRowHandle(handle)) continue;
+                            var r = view.GetRow(handle) as T;
+                            if (r != null) toDelete.Add(r);
+                        }
+                        SafeUpdate(view, () =>
+                        {
+                            foreach (var item in toDelete)
+                            {
+                                if (getId != null && deletedIds != null)
+                                {
+                                    int id = getId(item);
+                                    if (id > 0) deletedIds.Add(id);
+                                }
+                                bindingList.Remove(item);
+                            }
+                        });
+                    });
+                    menu.Items.Add(deleteSelectedItem);
+                }
+            };
         }
     }
 }

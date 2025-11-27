@@ -21,75 +21,75 @@ namespace SewingProduction
         bool VisibleLogic { get; set; }
         void ApplyPermission(UserClass user);
     }
-    
 
-    public class CustomTextBox : TextBox, IThemeable, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        private bool _visiblePermission = true;
-        private bool _visibleLogic = true;
-        public CustomTextBox()
-        {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-        }
 
-        public void ApplyTheme()
-        {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-            Font = ThemeManager.SharedSettings.DefaultFont;
-        }
+    //public class CustomTextBox : TextBox, IThemeable, IThemeableControl
+    //{
+    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //    public string ObjectName { get; set; }
+    //    private bool _visiblePermission = true;
+    //    private bool _visibleLogic = true;
+    //    public CustomTextBox()
+    //    {
+    //        ApplyTheme();
+    //        ThemeManager.ThemeChanged += OnThemeChanged;
+    //    }
 
-        private void OnThemeChanged() => ApplyTheme();
+    //    public void ApplyTheme()
+    //    {
+    //        BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+    //        ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+    //        Font = ThemeManager.SharedSettings.DefaultFont;
+    //    }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
-            base.Dispose(disposing);
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
+    //    private void OnThemeChanged() => ApplyTheme();
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool VisiblePermission
-        {
-            get => _visiblePermission;
-            set
-            {
-                _visiblePermission = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
+    //    protected override void Dispose(bool disposing)
+    //    {
+    //        if (disposing)
+    //        {
+    //            ThemeManager.ThemeChanged -= OnThemeChanged;
+    //        }
+    //        base.Dispose(disposing);
+    //    }
+    //    public void ApplyPermission(UserClass user)
+    //    {
+    //        PermissionHelper.ApplyTo(this, ObjectName, user);
+    //    }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool VisibleLogic
-        {
-            get => _visibleLogic;
-            set
-            {
-                _visibleLogic = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
+    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //    public bool VisiblePermission
+    //    {
+    //        get => _visiblePermission;
+    //        set
+    //        {
+    //            _visiblePermission = value;
+    //            VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+    //        }
+    //    }
 
-        public new bool Visible
-        {
-            get => base.Visible;
-            set
-            {
-                _visibleLogic = value;
-                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
-            }
-        }
+    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //    public bool VisibleLogic
+    //    {
+    //        get => _visibleLogic;
+    //        set
+    //        {
+    //            _visibleLogic = value;
+    //            VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+    //        }
+    //    }
 
-    }
+    //    public new bool Visible
+    //    {
+    //        get => base.Visible;
+    //        set
+    //        {
+    //            _visibleLogic = value;
+    //            VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+    //        }
+    //    }
+
+    //}
 
     public class CustomCheckBox : CheckBox, IThemeable, IThemeableControl
     {
@@ -719,7 +719,7 @@ namespace SewingProduction
         }
     }
 
-    
+
 
 
     /// <summary>
@@ -836,6 +836,7 @@ namespace SewingProduction
         public int FormID;
         protected UserClass _user;
         public UserClass User => _user;
+        public bool IsPreview { get; set; }
 
         private void ApplyThemeToChildren(Control parentControl)
         {
@@ -854,9 +855,13 @@ namespace SewingProduction
 
         public CustomForm()
         {
+            if (IsPreview)
+            {
+                return;
+            }
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
             {
-                _user = new UserClass(); 
+                _user = new UserClass();
             }
 
             ApplyTheme();
@@ -865,7 +870,10 @@ namespace SewingProduction
         }
         public CustomForm(UserClass user)
         {
-            Debug.WriteLine("кастом форма");
+            if (IsPreview)
+            {
+                return;
+            }
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
 
@@ -877,22 +885,24 @@ namespace SewingProduction
             // подписка на загрузку формы (для логирования и прав доступа - существующий код)
             this.Load += async (s, e) =>
             {
+                if (IsPreview) return;
                 await ActionLogger.Log(_user.UserId, "Открытие формы", NameForm: this.GetType().Name);
-                
+
                 // Включаем автоматическое сохранение настроек для всех CustomGridControl
                 InitializeAutoGridSettings();
-                
+
                 CustomForm_Load(s, e);
             };
-            
+
             // Сохраняем настройки при закрытии формы
             this.FormClosing += (s, e) =>
             {
+                if (IsPreview) return;
                 this.SaveAllGridSettings();
             };
         }
 
-        public void ApplyTheme() 
+        public void ApplyTheme()
         {
             if (this.IsDisposed || !this.IsHandleCreated) return;
 
@@ -902,7 +912,7 @@ namespace SewingProduction
             }
             else
             {
-                Invalidate(); 
+                Invalidate();
             }
         }
         protected override void OnPaint(PaintEventArgs e)
@@ -946,11 +956,13 @@ namespace SewingProduction
         private void OnThemeChanged() => ApplyTheme();
         private async void CustomForm_Load(object sender, EventArgs e)
         {
+            if (IsPreview)
+                return;
+
             string formName = this.GetType().Name;
 
             await _user.LoadObjectForm(formName);
 
-            // нет вообще доступа — закрываем
             if (!_user.HasPermission(formName, "Просмотр") && !_user.HasPermission(formName, "Редактор"))
             {
                 MessageBox.Show(

@@ -1,9 +1,9 @@
-﻿using SewingProduction.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using SewingProduction.Interfaces;
 
 namespace SewingProduction.Models
 {
@@ -78,21 +78,21 @@ namespace SewingProduction.Models
         [Column("sek_vyaz")]
         public int SekVyaz { get; set; }
         [Column("sek_vyaz14")]
-        public int SekVyaz14 {get; set;}
+        public int SekVyaz14 { get; set; }
         [Column("sek_vyaz70")]
-        public int SekVyaz70 {get; set;}
+        public int SekVyaz70 { get; set; }
         [Column("sek_vyaz71")]
-        public int SekVyaz71 {get; set;}
+        public int SekVyaz71 { get; set; }
         [Column("sek_vyaz72")]
-        public int SekVyaz72 {get; set;}
+        public int SekVyaz72 { get; set; }
         [Column("sek_vyaz62")]
-        public int SekVyaz62 {get; set;}
+        public int SekVyaz62 { get; set; }
         [Column("sek_vyaz57")]
         public int SekVyaz57 { get; set; }
         [Column("sek_vyaz18")]
         public int SekVyaz18 { get; set; }
         [NotMapped]
-        public int SekShv1   {get; set;}
+        public int SekShv1 { get; set; }
         [Column("st")]
         public int st { get; set; } // Стоимость?
 
@@ -127,11 +127,11 @@ namespace SewingProduction.Models
 
         [Column("data_obn")]
         public DateTime? dateUpdate { get; set; }
-        
+
         private bool _upd;
         [NotMapped]
-        public bool Upd 
-        { 
+        public bool Upd
+        {
             get => _upd;
             set
             {
@@ -164,7 +164,7 @@ namespace SewingProduction.Models
         public bool preArch { get; set; }
         [NotMapped]
         public string StatusText { get; set; }
-   //     [NotMapped]
+        //     [NotMapped]
         public bool Arh { get; set; }
         [Column("parentId")]
         public int ParentId { get; set; }
@@ -232,7 +232,7 @@ namespace SewingProduction.Models
             }
 
             this.Kod = source.Kod;
-            this.grup = source.grup; 
+            this.grup = source.grup;
             this.Articul = source.Articul;
             this.Mod = source.Mod;
             this.Size_label = source.Size_label;
@@ -247,7 +247,7 @@ namespace SewingProduction.Models
             this.SekVyaz = source.SekVyaz;
             this.Sek = source.Sek;
             this.Komment = source.Komment;
-            this.Reco = source.Reco; 
+            this.Reco = source.Reco;
             //this.dateCreate = source.dateCreate;
             this.Diz = source.Diz;
             this.Constr = source.Constr;
@@ -291,6 +291,15 @@ namespace SewingProduction.Models
             //    cloned.FioConstr = this.FioConstr.Clone();
             //}
             return cloned;
+        }
+
+        /// <summary>
+        /// Создает полную копию объекта ArtNormN (алиас для Clone для обратной совместимости)
+        /// </summary>
+        /// <returns>Копия объекта</returns>
+        public ArtNormN CloneProperties()
+        {
+            return this.Clone();
         }
     }
 }

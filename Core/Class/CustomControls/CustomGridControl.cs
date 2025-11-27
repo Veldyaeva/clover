@@ -1,23 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraBars.Docking2010.DragEngine;
-using DevExpress.XtraBars.ViewInfo;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Core.Services;
 using SewingProduction.Core.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using static DevExpress.LookAndFeel.DXSkinColors;
 
 namespace SewingProduction.Core.Class
 {
@@ -31,13 +19,13 @@ namespace SewingProduction.Core.Class
         public bool FocusedRowBold { get; set; } = true;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
-                
+
         /// <summary>
         /// Включает автоматическое сохранение и загрузку настроек грида
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool EnableAutoSettings { get; set; } = true;
-        
+
         /// <summary>
         /// Пользовательский ключ для настроек грида (если не указан, генерируется автоматически)
         /// </summary>
@@ -55,7 +43,7 @@ namespace SewingProduction.Core.Class
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged;
             ViewRegistered += OnViewRegistered;
-                        
+
             // Подписываемся на события для инициализации настроек
             this.Load += OnCustomGridLoad;
             this.HandleCreated += OnHandleCreated;
@@ -114,7 +102,7 @@ namespace SewingProduction.Core.Class
             }
         }
         private void OnThemeChanged() => ApplyTheme();
-       /// <summary>
+        /// <summary>
         /// Обработчик события Load для инициализации настроек
         /// </summary>
         private void OnCustomGridLoad(object sender, EventArgs e)
@@ -215,7 +203,7 @@ namespace SewingProduction.Core.Class
         {
             if (disposing)
             {
-                               // Сохраняем настройки перед закрытием
+                // Сохраняем настройки перед закрытием
                 if (EnableAutoSettings)
                 {
                     SaveGridSettings();
@@ -229,8 +217,10 @@ namespace SewingProduction.Core.Class
                         GridSettingsManager.Instance.DisableAutoSettings(gridView);
                     }
                 }
+                this.DataSource = null;
+                this.ViewCollection.Clear();
                 ThemeManager.ThemeChanged -= OnThemeChanged;
-                                this.Load -= OnCustomGridLoad;
+                this.Load -= OnCustomGridLoad;
                 this.HandleCreated -= OnHandleCreated;
             }
             base.Dispose(disposing);

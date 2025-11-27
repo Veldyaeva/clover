@@ -1,22 +1,26 @@
-﻿using Dapper;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Dapper;
+using DevExpress.XtraScheduler.Drawing;
+using SewingProduction.Features.TeamWork.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
 using DataTable = System.Data.DataTable;
 
 namespace SewingProduction.Services
 {
     /// <summary>
-    /// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
+    /// Репозиторий работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
     /// Использует Dapper для ускоренного доступа к данным.
     /// </summary>
-    public class ArtNormService
+    public class ArtNormRepository
     {
         private readonly DatabaseHelper _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
@@ -28,7 +32,7 @@ namespace SewingProduction.Services
         /// Инициализирует новый экземпляр сервиса
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public ArtNormService(DatabaseHelper dbHelper)
+        public ArtNormRepository(DatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
@@ -249,26 +253,26 @@ namespace SewingProduction.Services
                 JOIN status_ann sa ON v.status = sa.status_id 
                 WHERE v.status != 3"; // Статус "архивное"
 
-            object parameters = null; 
+            object parameters = null;
 
             if (!includeAll)
             {
                 query += @" 
                   AND EXISTS (SELECT top 1 *
                               FROM View_sp_articul spa
-                              WHERE spa.annId = v.annId)"; 
-       //         parameters = new { KodParam = kod }; // Параметр для Dapper
+                              WHERE spa.annId = v.annId)";
+                //         parameters = new { KodParam = kod }; // Параметр для Dapper
             }
             else
             {
                 // Если all = true, условие по kodd_rt не добавляем
             }
 
-            using (var connection = _dbHelper.GetConnection()) 
+            using (var connection = _dbHelper.GetConnection())
             {
                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
-                return result.ToList(); 
-            } 
+                return result.ToList();
+            }
         }
 
         public async Task<List<MyDataANN>> GetArtNormDataByArticul(string artPrefix)
@@ -284,13 +288,13 @@ namespace SewingProduction.Services
             var parameters = new
             {
                 StatusArchive = (int)Status.Archive,
-                ArtPattern = artPrefix + "%" 
+                ArtPattern = artPrefix + "%"
             };
 
             using (var connection = _dbHelper.GetConnection())
             {
-                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
-                 return result.ToList();
+                var result = await connection.QueryAsync<MyDataANN>(query, parameters);
+                return result.ToList();
             }
         }
 
@@ -303,7 +307,7 @@ namespace SewingProduction.Services
         {
             string sql;
             var p = new DynamicParameters();
-            
+
             if (annId != null)        // поиск по AnnID
             {
                 sql = @"SELECT TOP (1) 
@@ -361,7 +365,7 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="annId">идентификатор РТ</param>
         /// <returns></returns>
-    public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
+        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
         {
             return await Task.Run(async () =>
             {
@@ -480,7 +484,36 @@ WHERE nr.annId = @annId";
                 return result ?? new List<NormRasz>();
             }
         }
+        public async Task<NormRasz> GetRelatedNormRaszByID(int _nrID)
+        {
+            try
+            {
+                string query = @"SELECT 
+                            nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,
+                            nr.Sek, nr.Seb, nr.Kod, 
+                            nr.kod_o AS Kod_o,       
+                            nr.kod_ob AS KodOb,   
+                            nr.kod_podr AS KodPodr,  
+                            nr.kod_proizv AS KodProizv,
+                            nr.Spec, nr.nrId,
+                            nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
+                            kp.text_proizv as TextProizv,
+                            pv.text_vyaz as TextVyaz,
+                            ob.text_ob as TextOb
+                        FROM dbo.normraszview nr
+                        LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
+                        LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
+                        LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
+                        WHERE nr.nrID = @_nrID";
 
+                return await _dbService.GetEntityAsync<NormRasz>(query, new { _nrID });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных NormRasz для ID {_nrID}");
+                return null;
+            }
+        }
         public async Task<string> GetSpecByOborudKod(int kodOb)
         {
             string query = "SELECT no_spec FROM oborud_shv WHERE kod_ob = @kodOb";
@@ -495,7 +528,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT id, AnnId, kod_o, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                    string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                     //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                     //return result.ToList();
                     var list = await connection.QueryAsync<NormRask>(
@@ -508,7 +541,7 @@ WHERE nr.annId = @annId";
 
                     return list.AsList();
                 }
-            }, ct); 
+            }, ct);
         }
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
@@ -585,27 +618,29 @@ WHERE nr.annId = @annId";
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId)
         {
             List<NZPByKoddRt> nzpList;
-            Dictionary<string, int> pztCounts;
+            Dictionary<int, int> pztCounts;
 
             using (var connection = _dbHelper.GetConnection())
             {
                 var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
                     "dbo.GetNZPByKoddRT",
                     new { xAnnID = annId },
-                    commandType: CommandType.StoredProcedure);
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 120);
                 nzpList = nzpResult.ToList();
 
-                var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
+                var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
                     "dbo.GetPztCountsByKoddRT",
                     new { xAnnID = annId },
-                    commandType: CommandType.StoredProcedure);
-                pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
-            } 
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 120);
+                pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
+            }
 
             // Объединение результатов
             foreach (var row in nzpList)
             {
-                if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
+                if (pztCounts.TryGetValue(row.annId, out int count))
                     row.PZTCount = count;
             }
 
@@ -614,36 +649,76 @@ WHERE nr.annId = @annId";
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId, CancellationToken ct)
         {
             List<NZPByKoddRt> nzpList;
-            Dictionary<string, int> pztCounts;
-            return await Task.Run(async () =>
+            Dictionary<int, int> pztCounts;
+            try
             {
+                ct.ThrowIfCancellationRequested();
                 using (var connection = _dbHelper.GetConnection())
                 {
                     var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
-                        "dbo.GetNZPByKoddRT",
-                        new { xAnnID = annId },
-                        commandType: CommandType.StoredProcedure);
+                        new CommandDefinition(
+                            "dbo.GetNZPByKoddRT",
+                            new { xAnnID = annId },
+                            commandType: CommandType.StoredProcedure,
+                            commandTimeout: 120,
+                            cancellationToken: ct));
                     nzpList = nzpResult.ToList();
 
-                    var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
-                        "dbo.GetPztCountsByKoddRT",
-                        new { xAnnID = annId },
-                        commandType: CommandType.StoredProcedure);
-                    pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
+                    ct.ThrowIfCancellationRequested();
+
+                    var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
+                        new CommandDefinition(
+                            "dbo.GetPztCountsByKoddRT",
+                            new { xAnnID = annId },
+                            commandType: CommandType.StoredProcedure,
+                            commandTimeout: 120,
+                            cancellationToken: ct));
+                    pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
                 }
 
                 // Объединение результатов
                 foreach (var row in nzpList)
                 {
-                    if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
+                    if (pztCounts.TryGetValue(row.annId, out int count))
                         row.PZTCount = count;
                 }
 
                 return nzpList;
-            }, ct);
+            }
+            catch (Exception ex) { 
+                Debug.WriteLine(ex.ToString()); 
+                return null; }
+            
         }
 
+        public async Task<List<Brig>> GetWorkingBrigs(int annId, CancellationToken ct = default )
+        {
+            List<Brig> brigs = new List<Brig>();
+            try
+            {
+                ct.ThrowIfCancellationRequested();
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var nzpResult = await connection.QueryAsync<Brig>(
+                        new CommandDefinition(
+                            "dbo.GetNZPByKoddRT",
+                            new { xAnnID = annId, @xRezType = 1 },
+                            commandType: CommandType.StoredProcedure,
+                            commandTimeout: 120,
+                            cancellationToken: ct));
+                    brigs = nzpResult.ToList();
 
+                    ct.ThrowIfCancellationRequested();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return null;
+            }
+            return brigs;
+        }
         public async Task<decimal> getArtNormnSeb(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
@@ -681,4 +756,52 @@ WHERE nr.annId = @annId";
 
 
     }
+    public interface IJabberSender
+    {
+        Task SendToBrigsAsync(IEnumerable<int> brigIds, string message, int idType = 14, int tester = 63);
+    }
+
+    public sealed class JabberSender : IJabberSender
+    {
+        private readonly DatabaseHelper _dbHelper;
+        //    private readonly HybridLogger _logger = new HybridLogger();
+        private readonly FileLogger _logger = new FileLogger();
+        private readonly DbService _dbService;
+        public JabberSender(DatabaseHelper dbHelper)
+       => _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
+        public async Task SendToBrigsAsync(IEnumerable<int> brigIds, string message, int idType = 14, int tester = 63)
+        {
+            var ids = brigIds?
+                .Where(id => id > 0)
+                .Distinct()
+                .ToArray();
+
+            if (ids is null || ids.Length == 0 || string.IsNullOrWhiteSpace(message))
+                return;
+            //
+            const string sql = @"
+INSERT INTO [WMSWRITE].planeta.dbo.Jabber_Messager (Jabber_Body, Jabber_To)
+SELECT DISTINCT @msg, v.icq
+FROM [view_sprav_men] v
+WHERE (v.id_type = @idType AND v.id_brig IN @brigIds) 
+    OR (v.id_type = @tester)
+  AND v.icq IS NOT NULL;";
+            await _logger.LogEventAsync(sql);
+            Debug.WriteLine(sql);
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                await connection.ExecuteAsync(sql, new { msg = message, idType, brigIds = ids, tester });
+                await _logger.LogEventAsync(
+                    $"Jabber: '{message}' отправлено в {ids.Length} бригад(ы). {ids}",
+                    "JabberSender");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "JabberSender.SendToBrigsAsync");
+                throw;
+            }
+        }
+    }
+
 }

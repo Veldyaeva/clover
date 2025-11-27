@@ -1,20 +1,23 @@
-﻿using SewingProduction.Models;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using SewingProduction.Models;
+using SewingProduction.Services;
 
 namespace SewingProduction.Features.TeamWork.Services
 {
-    public class TeamWorkService
+    /// <summary>
+    /// Сервис уровня приложения для TeamWork: orchestration/координация загрузки и обновления связанных данных.
+    /// Не выполняет SQL напрямую (делегирует ArtNormRepository), не содержит UI.
+    /// </summary>
+    public class TeamWorkOrchestrator
     {
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNormRepository _artNormService;
         private readonly DbService _dbService;
         private readonly ILogger _logger;
 
-        public TeamWorkService(ArtNormService artNormService, DbService dbService, ILogger logger)
+        public TeamWorkOrchestrator(ArtNormRepository artNormService, DbService dbService, ILogger logger)
         {
             _artNormService = artNormService;
             _dbService = dbService;
@@ -22,13 +25,13 @@ namespace SewingProduction.Features.TeamWork.Services
         }
 
         /// <summary>
-        /// Загружает все данные разделений труда с сохранением информации о фокусе. Для кнопки перезагрузить
+        /// Загружает все РТ и пытается восстановить фокус (для кнопки перезагрузки данных).
         /// </summary>
         public async Task<TeamWorkReloadResult> LoadWorkDivisionsWithFocusAsync(int? currentAnnId = null)
         {
             try
             {
-                await _logger.LogEventAsync($"LoadWorkDivisionsWithFocus: Начало загрузки с сохранением AnnID: {currentAnnId}", "TeamWorkService");
+                await _logger.LogEventAsync($"LoadWorkDivisionsWithFocus: Начало загрузки с сохранением AnnID: {currentAnnId}", "TeamWorkOrchestrator");
 
                 // Загружаем данные
                 var workDivisions = await _artNormService.GetArtNormData();
@@ -60,19 +63,19 @@ namespace SewingProduction.Features.TeamWork.Services
         }
 
         /// <summary>
-        /// Обновляет только связанные данные для указанного AnnID. Для кнопки "Обновить связанные данные"
+        /// Обновляет связанные таблицы (NormRask/Kont/Rasz) для указанного AnnID.
         /// </summary>
         public async Task<RelatedDataResult> RefreshRelatedDataAsync(int annId)
         {
             if (annId <= 0)
             {
-                await _logger.LogEventAsync($"RefreshRelatedData: Некорректный AnnID: {annId}", "TeamWorkService");
+                await _logger.LogEventAsync($"RefreshRelatedData: Некорректный AnnID: {annId}", "TeamWorkOrchestrator");
                 return new RelatedDataResult { Success = false, Error = "Некорректный AnnID" };
             }
 
             try
             {
-                await _logger.LogEventAsync($"RefreshRelatedData: Обновление связанных данных для AnnID: {annId}", "TeamWorkService");
+                await _logger.LogEventAsync($"RefreshRelatedData: Обновление связанных данных для AnnID: {annId}", "TeamWorkOrchestrator");
 
                 // Загружаем связанные данные асинхронно
                 var normRaskTask = _artNormService.GetRelatedNormRask(annId);

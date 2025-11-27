@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using SewingProduction.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using SewingProduction.Helpers;
 
 namespace SewingProduction
 {
@@ -101,6 +101,11 @@ namespace SewingProduction
                 await new FileLogger().LogErrorAsync(ex, "Ошибка SQL логирования"); //throw;
             }
         }
+
+        public Task LogErrorAsync(string v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class FileLogger : ILogger
@@ -183,6 +188,11 @@ namespace SewingProduction
                 }
             }
         }
+
+        public Task LogErrorAsync(string v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class HybridLogger : ILogger
@@ -206,6 +216,11 @@ namespace SewingProduction
             {
                 await _fileLogger.LogErrorAsync(ex, context);
             }
+        }
+
+        public Task LogErrorAsync(string v1, string v2)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task LogEventAsync(string eventMessage, string context = "")

@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
-using SewingProduction.Core.Class.Settings;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 
 namespace SewingProduction.Features.UserDistribution.Forms
@@ -43,7 +43,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             //Application.Restart();
             string exePath = Application.ExecutablePath;
             Process.Start(exePath, "--restart");
-            Application.Exit();
+            // Завершаем процесс без перебора коллекции окон, чтобы избежать исключения
+            Environment.Exit(0);
         }
 
         private void customButtonAllRpofile_Click(object sender, EventArgs e)
@@ -130,6 +131,11 @@ namespace SewingProduction.Features.UserDistribution.Forms
             await _userProfileDataService.UpdateLogin(_user.UserId, newLogin);
             MessageBox.Show("Логин успешно изменен!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        }
+
+        private void customButtonAllDistribution_Click(object sender, EventArgs e)
+        {
+            OpenForm(new AllDistribution(_user));
         }
     }
     public class UserProfileDataService

@@ -1,46 +1,36 @@
-﻿using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraEditors;
-using SewingProduction.Extensions;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Xpo.DB;
-using System.Data.SqlClient;
 using Dapper;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.Data.Filtering;
-using DevExpress.Data;
 using DevExpress.XtraEditors;
-using DevExpress.Utils;
 using DevExpress.XtraGrid.Columns;
-using SewingProduction.Features.KnittingProduction.Models;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.Services;
+using SewingProduction.Extensions;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
-using SewingProduction.Features.KnittingProduction.Forms;
-using SewingProduction.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
 
-namespace SewingProduction.form.Nadezhda
+namespace SewingProduction.Features.KnittingProduction.Forms
 {
     public partial class KnittingProductionPlanning : CustomForm
     {
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private static BulkHelper _bulkHelper;
+        private static GridHelper _gridHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
         private readonly ProrabotkiService _prorabotkiService;
         private readonly MatrixService _matrixService;
+        public FormManager _formManager;
         private List<VyazPlanView> _currentVyazPlanViewData = new List<VyazPlanView>();
         private BindingList<VyazPlanView> _vyazPlanViewBindingList;
         private BindingSource _vyazPlanViewBindingSource;
@@ -83,8 +73,14 @@ namespace SewingProduction.form.Nadezhda
             _dbService = new DbService(_dbHelper);
             _vyazService = new VyazService(_dbHelper);
             _bulkHelper = new BulkHelper();
+            _gridHelper = new GridHelper();
             _prorabotkiService = new ProrabotkiService(_dbHelper);
             _matrixService = new MatrixService(_dbHelper);
+
+            Form mainForm = Application.OpenForms["SpMainForm"];
+            MenuStrip mainMenu = mainForm.MainMenuStrip;
+            _formManager = new FormManager(mainForm, mainMenu, _user);
+
             ThemeManager.UpdateTheme(this);
         }
 
@@ -161,6 +157,8 @@ namespace SewingProduction.form.Nadezhda
                 gridColumnVyazPlanKmlNumber.FieldName = "KmlNumber";
                 gridColumnVyazPlanPszkmPlanDateFrom.FieldName = "DateZapPlanFrom";
                 gridColumnVyazPlanPszkmPlanDateTo.FieldName = "DateZapPlanTo";
+
+                _gridHelper.AutoRowFilterConfig(gridViewVyazPlan as GridView, 1);
 
                 // 1. Настраиваем стандартный MultiSelect
                 gridViewVyazPlan.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор
@@ -938,16 +936,44 @@ namespace SewingProduction.form.Nadezhda
             _vyazPlanViewBindingSource.ResetBindings(false);
             SimpleButtonSaveVyazStatusUpdate();
         }
-
+        public void OpenForm(Form form, object sender = null)
+        {
+            _formManager.OpenForm(form, sender);
+        }
         private void customSimpleButton1_Click(object sender, EventArgs e)
         {
-            //KnittingMachinesLoading knittingMachinesLoading = new KnittingMachinesLoading();
-            //knittingMachinesLoading.MdiParent = this;
-            //knittingMachinesLoading.Show();
+            ////KnittingMachinesLoading knittingMachinesLoading = new KnittingMachinesLoading();
+            ////knittingMachinesLoading.MdiParent = this;
+            ////knittingMachinesLoading.Show();
 
 
-            //KnittingMachinesLoading FDI = new KnittingMachinesLoading();
+            ////KnittingMachinesLoading FDI = new KnittingMachinesLoading();
+            ////DialogResult result = FDI.ShowDialog();
+
+            //int xIDVyazClass = 0;
+            //var selectedRow = _vyazPlanViewBindingSource.Current as VyazPlanView;
+            //if (selectedRow != null && selectedRow.IDVyazClass != 0)
+            //{
+            //    xIDVyazClass = selectedRow.IDVyazClass;
+            //}
+            //else
+            //{
+            //    xIDVyazClass = -1;
+            //}
+            //KnittingMachinesLoading FDI = new KnittingMachinesLoading(xIDVyazClass);
+
             //DialogResult result = FDI.ShowDialog();
+            //// Обработка результата, возвращенного модальной формой
+            //if (result == DialogResult.OK)
+            //{
+            //    // Действия при успешном завершении работы модальной формы
+            //    //MessageBox.Show("OK");
+            //}
+            //else
+            //{
+            //    // Действия при отмене или другом результате
+            //    //MessageBox.Show("Cancel");
+            //}
 
             int xIDVyazClass = 0;
             var selectedRow = _vyazPlanViewBindingSource.Current as VyazPlanView;
@@ -959,21 +985,26 @@ namespace SewingProduction.form.Nadezhda
             {
                 xIDVyazClass = -1;
             }
-            KnittingMachinesLoading FDI = new KnittingMachinesLoading(xIDVyazClass);
+            OpenForm(new KnittingMachinesLoading(xIDVyazClass), sender);
+        }
 
-            DialogResult result = FDI.ShowDialog();
-            // Обработка результата, возвращенного модальной формой
-            if (result == DialogResult.OK)
-            {
-                // Действия при успешном завершении работы модальной формы
-                //MessageBox.Show("OK");
-            }
-            else
-            {
-                // Действия при отмене или другом результате
-                //MessageBox.Show("Cancel");
-            }
+        private void customSimpleButton2_Click(object sender, EventArgs e)
+        {
+            //KnittingProductionPlanningReport FDI = new KnittingProductionPlanningReport();
 
+            //DialogResult result = FDI.ShowDialog();
+            //// Обработка результата, возвращенного модальной формой
+            //if (result == DialogResult.OK)
+            //{
+            //    // Действия при успешном завершении работы модальной формы
+            //    //MessageBox.Show("OK");
+            //}
+            //else
+            //{
+            //    // Действия при отмене или другом результате
+            //    //MessageBox.Show("Cancel");
+            //}
+            OpenForm(new KnittingProductionPlanningReportParameters(), sender);
         }
     }
 }

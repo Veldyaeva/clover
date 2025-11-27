@@ -4,26 +4,18 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using DevExpress.DataAccess.DataFederation;
-using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form;
-using SewingProduction.Features.Articul;
-using DevExpress.XtraGrid;
-using DevExpress.XtraVerticalGrid;
-using DevExpress.XtraGrid.Columns;
-using System.IO;
-using SewingProduction.Features.Articul.Models;
+using ToolTip = System.Windows.Forms.ToolTip;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -38,12 +30,18 @@ namespace SewingProduction.Features.Articul.Forms
         bool xFlagKod = false;
         bool xAutoRazm = false; //галочка авторазмер
         bool xAllZap = false; //галочка все записи одинаковые
+        private ToolTip toolTip = new ToolTip();
 
         public AddNewKopml(UserClass user, List<ArticulModel> articuls, string kod) : base(user)
         {
             InitializeComponent();
             xkod = kod;
             this.articuls = articuls;
+            toolTipButton();
+        }
+        public AddNewKopml(UserClass user) : base(user)
+        {
+            InitializeComponent();
         }
         public AddNewKopml()
         {
@@ -53,6 +51,8 @@ namespace SewingProduction.Features.Articul.Forms
         //загрузка данных
         private async void customGridControlKomplArt_Load(object sender, EventArgs e)
         {
+            if (IsPreview)
+                return;
             //var articuls = await _articulDataService.GetAllAsync();
             var grups = await _grupMenDataService.GetAllAsync();
 
@@ -74,13 +74,12 @@ namespace SewingProduction.Features.Articul.Forms
                              Kle = a.Kle,
                              GrupMen = g ?? new GrupMenModel(),
                              Po = " ",
-                             //Pr_po = false
+                             Pr_po = false
                          };
 
             var resultList = result.ToList();
             await FillRazmAllAsync(resultList);
             customGridControlKomplArt.DataSource = resultList;
-
 
             var resulRazm = from a in articuls
                             where a.Kod.ToString().PadLeft(7, '0').Substring(0, 7) == xkod.Substring(0, 7)
@@ -98,7 +97,7 @@ namespace SewingProduction.Features.Articul.Forms
                                 Kle = a.Kle,
                                 GrupMen = g ?? new GrupMenModel(),
                                 Po = " ",
-                                //Pr_po = false
+                                Pr_po = false
                             };
             var resulRazmList = resulRazm.ToList();
             await FillRazmAllAsync(resulRazmList); // 🔹 заполняем razm_all
@@ -107,43 +106,43 @@ namespace SewingProduction.Features.Articul.Forms
             var firstRazm = resulRazm.FirstOrDefault();
             if (firstRazm != null)
             {
-                customLabelGrup.Text = firstRazm.Grup;
+                customHeaderLabelGrup.Text = firstRazm.Grup;
                 customLabelArtText.Text = firstRazm.Articul;
                 customLabelModText.Text = firstRazm.Mod;
             }
 
             await loadKomplByArticul(firstRazm.Articul);
-            int handle = gridViewKomplRazm.LocateByValue("Kod", xkod.Trim());
-            gridViewKomplRazm.MakeRowVisible(handle); BeginInvoke(new Action(() =>
+            int h = gridViewKomplRazm.LocateByValue("Kod", xkod?.Trim());
+            if (h >= 0)
             {
-                if (int.TryParse(xkod, out var val))
-                {
-                    int h = gridViewKomplRazm.LocateByValue("Kod", val);
-                    if (h >= 0)
-                    {
-                        gridViewKomplRazm.FocusedRowHandle = h;
-                        gridViewKomplRazm.MakeRowVisible(h);
-                        xFlagKod = true;
-                    }
-                }
-            }));
+                gridViewKomplRazm.FocusedRowHandle = h;
+                gridViewKomplRazm.MakeRowVisible(h);
+                xFlagKod = true;
+            }
+
+            sost1.Visible = false;
         }
-        // галочка Авторазмер
+        // галочка Автоподбор
         private void customCheckBoxAutoRazm_CheckedChanged(object sender, EventArgs e)
         {
             xAutoRazm = customCheckBoxAutoRazm.Checked;
 
+            if (xAutoRazm && !ValidateRazmAll())
+            {
+                xAutoRazm = false;
+                customCheckBoxAutoRazm.Checked = false;
+                return;
+            }
+
             // Сброс значений
             customNumericUpDownValueTab.Value = 0;
-            customButtonKompl.Enabled = false;
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
 
             if (gridViewKomplRazm?.DataSource is not List<SpArticulGrupMenViewModel> data)
                 return;
 
-            /*foreach (var item in data)
+            foreach (var item in data)
                 item.Pr_po = false;
-            */
 
             gridViewKomplRazm.RefreshData();
 
@@ -153,15 +152,34 @@ namespace SewingProduction.Features.Articul.Forms
                 col.OptionsColumn.AllowEdit = true;
 
             ApplyGroupingByRazmAll(xAutoRazm ? true : false);
-        }
 
+            checkButtonAll.Visible = xAutoRazm;
+        }
+        //проверка на дубли в авторазмере
+        private bool ValidateRazmAll()
+        {
+            return ValidateRazmAllForView(gridViewKomplRazm);
+            //for (int i = 0; i < gridViewKomplRazm.RowCount; i++)
+            //{
+            //    var razmAll = gridViewKomplRazm.GetRowCellValue(i, "Razm_all")?.ToString();
+            //    Debug.WriteLine(razmAll);
+            //    if (string.IsNullOrWhiteSpace(razmAll)) continue;
+            //    int count = komplService.GetCountByRazmAll(razmAll);
+            //    if (count > 1)
+            //    {
+            //        MessageBox.Show($"Ошибка размерного ряда. Общий размер не уникален. Автоподбор невозможен",
+            //                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        return false;
+            //    }
+            //}
+        }
         //галочка все записи одинковые 
         private void customCheckBoxOdinak_CheckedChanged(object sender, EventArgs e)
         {
             xAllZap = customCheckBoxOdinak.Checked;
             customNumericUpDownValueTab.Value = 0;
-            customButtonKompl.Enabled = false;
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
         }
         #endregion
         #region TabPage
@@ -182,8 +200,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             customButtonDelKomplSelected_Click(sender, e);
             // блочим кнопки комплектовки:
-            customCheckBoxVerified.Checked = false;
-            customButtonKompl.Enabled = false;
+            VerifiedCheckedFalse();
         }
         //создание вкладок
         private void CreateKomplRazmTabPage(int index)
@@ -200,11 +217,18 @@ namespace SewingProduction.Features.Articul.Forms
             var layout = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
-                ColumnCount = 2,
-                RowCount = 1
+                ColumnCount = 4,
+                RowCount = 4
             };
-            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 92)); // грид
-            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8)); // кнопка
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20)); // col 0
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30)); // col 1
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 42)); // col 2
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 8));  // col 3 (под кнопку)
+
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 60));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 20));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 10));
 
             // Создаём грид
             var grid = new CustomGridControl
@@ -212,6 +236,7 @@ namespace SewingProduction.Features.Articul.Forms
                 Dock = DockStyle.Fill
             };
             layout.Controls.Add(grid, 0, 0);
+            layout.SetColumnSpan(grid, 3);
 
             // Создаём кнопку Х
             var removeButton = new CustomButton
@@ -221,8 +246,9 @@ namespace SewingProduction.Features.Articul.Forms
                 MaximumSize = new System.Drawing.Size(25, 25),
                 MinimumSize = new System.Drawing.Size(25, 25)
             };
-            layout.Controls.Add(removeButton, 1, 0);
+            layout.Controls.Add(removeButton, 3, 0);
             removeButton.Click += (s, e) => RemoveButtonClick(s, grid);
+            toolTip.SetToolTip(removeButton, "Очистить страницу");
 
             // Создаём GridView
             var view = new DevExpress.XtraGrid.Views.Grid.GridView(grid);
@@ -236,9 +262,11 @@ namespace SewingProduction.Features.Articul.Forms
             view.Columns.AddVisible("Articul", "Артикул");
             view.Columns.AddVisible("Mod", "Модель");
             view.Columns.AddVisible("Kod", "Код");
-            view.Columns.AddVisible("Razm", "Размер");
             view.Columns.AddVisible("Kle", "ТМ");
-            view.Columns.AddVisible("Razm_all", "Основной Размер");
+            view.Columns.AddVisible("Razm", "Размер");
+            var colRazmAll = view.Columns.AddVisible("Razm_all", "Общий \n Размер");
+            colRazmAll.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            view.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
 
             //view.OptionsBehavior.Editable = false; 
             foreach (var col in view.Columns.Cast<DevExpress.XtraGrid.Columns.GridColumn>())
@@ -268,6 +296,35 @@ namespace SewingProduction.Features.Articul.Forms
             checkColumn.ColumnEdit = checkEdit;
             view.Columns.Add(checkColumn);
 
+
+            // === Заголовки и подписи ===
+            var headerGrup = new CustomHeaderLabel { Name = "customLabelGrupText", Text = "Группа", Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter };
+            layout.Controls.Add(headerGrup, 0, 1);
+            layout.SetColumnSpan(headerGrup, 2);
+
+            var headerArt = new CustomLabel { Text = "Артикул", Dock = DockStyle.Fill };
+            layout.Controls.Add(headerArt, 0, 2);
+
+            var labelArtText = new CustomLabel { Name = "customLabelArtText", Dock = DockStyle.Fill, Text = "Артикул_Текст" };
+            layout.Controls.Add(labelArtText, 1, 2);
+
+            var headerMod = new CustomLabel { Text = "Модель", Dock = DockStyle.Fill };
+            layout.Controls.Add(headerMod, 0, 3);
+
+            var labelModText = new CustomLabel { Name = "customLabelModText", Dock = DockStyle.Fill, Text = "Модель_Текст" };
+            layout.Controls.Add(labelModText, 1, 3);
+
+            // PictureBox
+            var pictureBox = new PictureBox
+            {
+                Dock = DockStyle.Fill,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                BorderStyle = BorderStyle.FixedSingle
+            };
+            layout.Controls.Add(pictureBox, 2, 1);
+            layout.SetRowSpan(pictureBox, 3);
+            tabPage.Tag = pictureBox;
+
             // Добавляем layout в вкладку
             tabPage.Controls.Add(layout);
 
@@ -282,7 +339,8 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void CheckEditValueChanged(object sender, CustomGridControl grid)
         {
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
 
             var editor = sender as DevExpress.XtraEditors.CheckEdit; // нужен, чтобы понять — сняли или поставили
             var view = grid?.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
@@ -439,7 +497,7 @@ namespace SewingProduction.Features.Articul.Forms
             view.RefreshData();
 
             // Если на вкладке раньше была другая пара — её нужно уменьшить
-            
+
             if (_tabSelection.TryGetValue(tabIndex, out var prev))
             {
                 if (prev.kod != Convert.ToInt32(selected.Kod) || prev.razm != selected.Razm)
@@ -452,7 +510,7 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                 }
             }
-            
+
 
             // Учесть новую пару
             var curAgg = _selectedKomplItems.FirstOrDefault(x => x.Kod == selected.Kod && x.Razm == selected.Razm);
@@ -501,40 +559,121 @@ namespace SewingProduction.Features.Articul.Forms
         {
             var view = gridViewKomplRazm;
             if (view?.GetFocusedRow() is not SpArticulGrupMenViewModel selected) return;
-            var data = view.DataSource as List<SpArticulGrupMenViewModel>;
-            if (data == null) return;
 
-            if (komplService.CheckInProizv((selected.Kod).ToString()))
+            // Фактическое новое состояние чекбокса (а не текущее значение в модели)
+            bool desired = (sender as DevExpress.XtraEditors.CheckEdit)?.Checked ?? selected.Pr_po;
+
+            // Быстрая валидация — если хотим поставить галочку, но позиция заблокирована
+            if (desired)
             {
-                selected.Pr_po = false;
-                MessageBox.Show("Невозможно комплектовать — запущено в производство ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (komplService.CheckInProizv(selected.Kod.ToString()))
+                {
+                    // Снимаем галочку и выходим
+                    selected.Pr_po = false;
+                    view.RefreshRow(view.FocusedRowHandle);
+                    VerifiedCheckedFalse();
+                    //customCheckBoxVerified.Checked = false;
+                    MessageBox.Show("Невозможно комплектовать — запущено в производство", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (komplService.CheckNaklRas(selected.Kod.ToString()))
+                {
+                    selected.Pr_po = false;
+                    view.RefreshRow(view.FocusedRowHandle);
+                    VerifiedCheckedFalse();
+                    //customCheckBoxVerified.Checked = false;
+                    MessageBox.Show("Невозможно комплектовать — созданы накладные", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
-            if (komplService.CheckNaklRas((selected.Kod).ToString()))
-            {
-                selected.Pr_po = false;
-                MessageBox.Show("Невозможно комплектовать — созданы накладные ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            if (selected.Pr_po)
+            view.BeginDataUpdate();
+            try
             {
                 if (xAutoRazm)
                 {
-                    // переключаем состояние конкретной записи
-                    selected.Pr_po = !selected.Pr_po;
+                    // В авто-режиме не инвертируем, а ставим то, что запросил пользователь
+                    selected.Pr_po = desired;
                     AutoRazmForForming();
                 }
                 else
                 {
-                    // только одна галочка
-                    foreach (var item in data)
-                        item.Pr_po = false;
+                    // Режим «только одна галочка»
+                    var data = view.DataSource as List<SpArticulGrupMenViewModel>;
+                    if (data != null)
+                    {
+                        if (desired)
+                        {
+                            // Снимаем у всех и ставим у выбранной
+                            foreach (var item in data)
+                                item.Pr_po = false;
 
-                    selected.Pr_po = true;
-                } 
+                            selected.Pr_po = true;
+                        }
+                        else
+                        {
+                            // Просто сняли галочку на выбранной
+                            selected.Pr_po = false;
+                        }
+                    }
+                }
             }
-            view.RefreshData();
-            customCheckBoxVerified.Checked = false;
+            finally
+            {
+                view.EndDataUpdate();
+            }
+
+            // Минимальная перерисовка
+            view.RefreshRow(view.FocusedRowHandle);
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
         }
+
+        private void checkButtonAll_CheckedChanged(object sender, EventArgs e)
+        {
+            var btn = sender as DevExpress.XtraEditors.CheckButton;
+            if (btn == null) return;
+
+            bool desired = btn.Checked; // true = включить все, false = снять все
+
+            var view = gridViewKomplRazm;
+            if (view?.DataSource is not List<SpArticulGrupMenViewModel> data) return;
+
+            view.BeginUpdate();
+            try
+            {
+                for (int i = 0; i < view.RowCount; i++)
+                {
+                    var row = view.GetRow(i) as SpArticulGrupMenViewModel;
+                    if (row == null) continue;
+
+                    // Если текущее состояние совпадает с требуемым — пропускаем
+                    if (row.Pr_po == desired) continue;
+
+                    // Устанавливаем «ручное» значение, чтобы при вызове обработчика оно считалось
+                    row.Pr_po = desired;
+
+                    // создаем фиктивный sender — CheckEdit
+                    var fakeSender = new DevExpress.XtraEditors.CheckEdit { Checked = desired };
+
+                    // Выставляем фокус на строку
+                    view.FocusedRowHandle = i;
+
+                    // Вызываем обработчик для строки
+                    repositoryItemCheckEditViborRazm_CheckedChanged(fakeSender, EventArgs.Empty);
+                }
+            }
+            finally
+            {
+                view.EndUpdate();
+            }
+
+            view.RefreshData();
+        }
+
 
         // кнопки "+" для добавления записей на таблицу
         private async void repositoryItemButtonEditAddRazm_Click(object sender, EventArgs e)
@@ -552,9 +691,20 @@ namespace SewingProduction.Features.Articul.Forms
                 return;
             }
 
-            if (mykompl_razm.Kod_v == 2 && kompl_art.Kod_v == 2 && mykompl_razm.GrupMen.Frm_s != kompl_art.GrupMen.Frm_s)
+            if ((mykompl_razm.Kod_v == 2 || mykompl_razm.Kod_v == 3) && (kompl_art.Kod_v == 2 || kompl_art.Kod_v == 3) && mykompl_razm.GrupMen.Frm_s != kompl_art.GrupMen.Frm_s)
             {
                 MessageBox.Show("Комлектовать модели нельзя - разные производители", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (komplService.CheckKompl(kompl_art.Kod.ToString()))
+            {
+                MessageBox.Show("Комлектовать КОМПЛЕКТЫ нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (komplService.CheckNabor(kompl_art.Kod.ToString()))
+            {
+                MessageBox.Show("Комлектовать НАБОРЫ нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -610,12 +760,12 @@ namespace SewingProduction.Features.Articul.Forms
             customTabControlKomplRazm.SelectedTabPageIndex = targetIndex;
 
             // Добавляем строки без дублей по (kod, razm)
-            var kodRazmSet = new HashSet<(int, string)>(targetList.Select(x => (Convert.ToInt32(x.Kod), x.Razm)));
+            var kodRazmSet = new HashSet<(string, string)>(targetList.Select(x => (x.Kod, x.Razm)));
 
-            /*foreach (var row in sameArticulRows)
+            foreach (var row in sameArticulRows)
             {
                 var key = (row.Kod, row.Razm);
-                if (!kodRazmSet.Contains(key)
+                if (!kodRazmSet.Contains(key))
                 {
                     targetList.Add(new SpArticulGrupMenViewModel
                     {
@@ -636,7 +786,38 @@ namespace SewingProduction.Features.Articul.Forms
                     kodRazmSet.Add(key);
                 }
             }
-            */
+
+            var tabVib = customTabControlKomplRazm.TabPages[targetIndex];
+            if (tabVib.Controls[0] is TableLayoutPanel layoutPanel)
+            {
+                // Группа
+                var grupLabel = layoutPanel.Controls.Find("customLabelGrupText", true).FirstOrDefault() as CustomHeaderLabel;
+                if (grupLabel != null)
+                    grupLabel.Text = customHeaderLabelGrupVib.Text;
+
+                // Артикул
+                var artLabel = layoutPanel.Controls.Find("customLabelArtText", true).FirstOrDefault() as CustomLabel;
+                if (artLabel != null)
+                    artLabel.Text = customLabelArtTextVib.Text;
+
+                // Модель
+                var modLabel = layoutPanel.Controls.Find("customLabelModText", true).FirstOrDefault() as CustomLabel;
+                if (modLabel != null)
+                    modLabel.Text = customLabelModTextVib.Text;
+
+                // Картинка
+                if (customTabControlKomplRazm.SelectedTabPage.Tag is PictureBox tabPictureBox)
+                {
+                    if (pictureBoxArticulVib.Image != null)
+                    {
+                        tabPictureBox.Image = (Image)pictureBoxArticulVib.Image.Clone();
+                    }
+                    else
+                    {
+                        tabPictureBox.Image = null;
+                    }
+                }
+            }
 
             // Если авторазмер включён — сразу авторасставим галки в вкладках
             if (xAutoRazm)
@@ -658,7 +839,8 @@ namespace SewingProduction.Features.Articul.Forms
                 customGridControlKomplSelected.RefreshDataSource();
 
                 // 2) сбрасываем чек "проверено"
-                customCheckBoxVerified.Checked = false;
+                VerifiedCheckedFalse();
+                //customCheckBoxVerified.Checked = false;
 
                 // 3) Сбрасываем pr_po и очищаем списки на КАЖДОЙ вкладке
                 foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
@@ -675,9 +857,10 @@ namespace SewingProduction.Features.Articul.Forms
                         pageList.Clear();
                         pageGrid.RefreshDataSource();
                     }
+
                 }
 
-                // 4) дополнительно (если нужно) снять галочки слева в общем списке размеров
+                // 4) дополнительно снять галочки слева в общем списке размеров
                 //    чтобы «авторазмер» тоже сбросился визуально
                 var razmList = customGridControlKomplRazm.DataSource as List<SpArticulGrupMenViewModel>;
                 if (razmList != null)
@@ -711,8 +894,8 @@ namespace SewingProduction.Features.Articul.Forms
             // Обновляем таблицу выбранных
             customGridControlKomplSelected.DataSource = _selectedKomplItems;
             customGridControlKomplSelected.RefreshDataSource();
-
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
 
             // Сбрасываем pr_po
             foreach (var item in list)
@@ -721,6 +904,21 @@ namespace SewingProduction.Features.Articul.Forms
             // Очищаем грид этой вкладки
             list.Clear();
 
+            // === очищаем подписи ===
+            if (parentTab.Controls[0] is TableLayoutPanel parentLayout)
+            {
+                var grupLabel = parentLayout.Controls.Find("customLabelGrupText", true).FirstOrDefault() as CustomHeaderLabel;
+                if (grupLabel != null) grupLabel.Text = "Группа";
+
+                var artLabel = parentLayout.Controls.Find("customLabelArtText", true).FirstOrDefault() as CustomLabel;
+                if (artLabel != null) artLabel.Text = string.Empty;
+
+                var modLabel = parentLayout.Controls.Find("customLabelModText", true).FirstOrDefault() as CustomLabel;
+                if (modLabel != null) modLabel.Text = string.Empty;
+            }
+
+            if (parentTab.Tag is PictureBox tabPictureBox)
+                tabPictureBox.Image = null;
         }
 
         // Button on customGridControlKomplSelected — удаление выбранной строки
@@ -751,8 +949,8 @@ namespace SewingProduction.Features.Articul.Forms
 
                 // перестроить галочки на вкладках и нижний список
                 AutoRazmForForming(); // учтёт новые pr_po в левом гриде и обновит _selectedKomplItems
-
-                customCheckBoxVerified.Checked = false;
+                VerifiedCheckedFalse();
+                //customCheckBoxVerified.Checked = false;
                 return;
             }
 
@@ -776,8 +974,8 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                 }
             }
-
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
         }
 
 
@@ -804,18 +1002,52 @@ namespace SewingProduction.Features.Articul.Forms
             // 3. Обновить грид с выбранными
             customGridControlKomplSelected.DataSource = _selectedKomplItems;
             customGridControlKomplSelected.RefreshDataSource();
-
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
         }
-        private void customButtonDelKompl_Click(object sender, EventArgs e)
+        private async void customButtonDelKompl_Click(object sender, EventArgs e)
         {
-            var list = customGridControlKompl.DataSource as List<object>;
-            if (list == null) return;
+            var view = gridViewKompl;
+            if (view.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Не выбран комплект для удаления.", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            list.Clear();
-            customCheckBoxVerified.Checked = false;
-            customGridControlKompl.DataSource = null;
-            customGridControlKompl.RefreshDataSource();
+            // Берём выбранный комплект
+            var selected = view.GetFocusedRow() as KomplModel;
+            if (selected == null)
+            {
+                MessageBox.Show("Не выбран комплект для удаления.", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Подтверждение
+            var result = MessageBox.Show(
+                $"Удалить комплект:\n\nАртикул: {selected.Articul_k}\nМодель: {selected.Mod_k}\nРазмер: {selected.Razm_k} ?",
+                "Подтверждение удаления",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            try
+            {
+                await komplService.DeleteAsync(selected);
+
+                MessageBox.Show("Комплект успешно удалён.", "Готово",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Обновляем грид
+                await loadKomplByArticul(selected.Articul_k);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при удалении комплекта:\n{ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
         #region LogicForAutomize
@@ -841,7 +1073,8 @@ namespace SewingProduction.Features.Articul.Forms
                 customGridControlKomplSelected.DataSource = _selectedKomplItems;
                 customGridControlKomplSelected.RefreshDataSource();
                 SetupSelectedGroupingByRazmAll();
-                customCheckBoxVerified.Checked = false;
+                VerifiedCheckedFalse();
+                //customCheckBoxVerified.Checked = false;
                 return;
             }
 
@@ -863,7 +1096,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             // 3) Сформировать выбранные с НАКОПЛЕНИЕМ countStr по (kod, razm)
             _selectedKomplItems.Clear();
-            var agg = new Dictionary<(int kod, string razm), SpArticulGrupMenViewModel>();
+            var agg = new Dictionary<(string kod, string razm), SpArticulGrupMenViewModel>();
 
             for (int i = 0; i < customTabControlKomplRazm.TabPages.Count; i++)
             {
@@ -873,7 +1106,7 @@ namespace SewingProduction.Features.Articul.Forms
                 var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
                 if (grid?.DataSource is not BindingList<SpArticulGrupMenViewModel> list) continue;
 
-                /*foreach (var row in list.Where(r => r.Pr_po))
+                foreach (var row in list.Where(r => r.Pr_po))
                 {
                     var key = (row.Kod, row.Razm);
                     if (!agg.TryGetValue(key, out var acc))
@@ -888,7 +1121,6 @@ namespace SewingProduction.Features.Articul.Forms
                         acc.countStr += 1;
                     }
                 }
-                */
             }
 
             foreach (var item in agg.Values)
@@ -901,7 +1133,8 @@ namespace SewingProduction.Features.Articul.Forms
             SetupSelectedGroupingByRazmAll();
 
             // просим перепроверить
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
         }
 
         /// <summary>
@@ -1094,13 +1327,13 @@ namespace SewingProduction.Features.Articul.Forms
                 }
 
                 var mainItem = selectedLeft[0];
-                /*if (mainItem.Kod == 0)
+                if (mainItem.Kod == null)
                 {
                     VerifiedCheckedFalse();
                     MessageBox.Show("Код комплекта не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                */
+
                 var flatCodes = BuildFlatCodesByCountStr(_selectedKomplItems);
                 if (flatCodes.Count == 0)
                 {
@@ -1110,7 +1343,7 @@ namespace SewingProduction.Features.Articul.Forms
                     return;
                 }
             }
-            else 
+            else
             {
                 var selectedAuto = razmList.Where(x => x.Pr_po).ToList();
                 if (selectedAuto.Count == 0)
@@ -1120,12 +1353,62 @@ namespace SewingProduction.Features.Articul.Forms
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                if (!ValidateAllRazmAll())
+                {
+                    VerifiedCheckedFalse();
+                    //customCheckBoxVerified.Checked = false;
+                    return;
+                }
             }
+        }
+        private bool ValidateAllRazmAll()
+        {
+            // проверяем основной gridViewKomplRazm
+            if (!ValidateRazmAllForView(gridViewKomplRazm))
+                return false;
+
+            // проверяем все табы
+            foreach (DevExpress.XtraTab.XtraTabPage tab in customTabControlKomplRazm.TabPages)
+            {
+                foreach (Control ctrl in tab.Controls)
+                {
+                    if (ctrl is CustomGridControl customGrid && customGrid.MainView is DevExpress.XtraGrid.Views.Grid.GridView view)
+                    {
+                        if (!ValidateRazmAllForView(view))
+                            return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        private bool ValidateRazmAllForView(DevExpress.XtraGrid.Views.Grid.GridView view)
+        {
+            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            for (int i = 0; i < view.RowCount; i++)
+            {
+                var value = view.GetRowCellValue(i, "Razm_all")?.ToString()?.Trim();
+                if (string.IsNullOrWhiteSpace(value))
+                    continue;
+
+                if (!seen.Add(value))
+                {
+                    MessageBox.Show(
+                        $"Ошибка в таблице '{view.Name}'. Значение '{value}' встречается более одного раза.",
+                        "Ошибка проверки размеров",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
         }
         private void VerifiedCheckedFalse()
         {
             customCheckBoxVerified.CheckedChanged -= customCheckBoxVerified_CheckedChanged;
             customCheckBoxVerified.Checked = false;
+            customButtonKompl.Enabled = false;
             customCheckBoxVerified.CheckedChanged += customCheckBoxVerified_CheckedChanged;
         }
         private static void ClearKodSlots(KomplModel k)
@@ -1134,8 +1417,9 @@ namespace SewingProduction.Features.Articul.Forms
             k.Kod6 = k.Kod7 = k.Kod8 = k.Kod9 = k.Kod10 = null;
         }
 
-        private static void SetKodByIndex(KomplModel k, int idx, int kod)
+        private static void SetKodByIndex(KomplModel k, int idx, string kodStr)
         {
+            int kod = int.Parse(kodStr);
             switch (idx)
             {
                 case 0: k.Kod1 = kod; break;
@@ -1152,23 +1436,21 @@ namespace SewingProduction.Features.Articul.Forms
         }
 
         /// Разворачиваем список выбранных по countStr в «плоский» список кодов (макс. 10)
-        private static List<int> BuildFlatCodesByCountStr(IEnumerable<SpArticulGrupMenViewModel> items)
+        private static List<string> BuildFlatCodesByCountStr(IEnumerable<SpArticulGrupMenViewModel> items)
         {
-            var flat = new List<int>(10);
-            /*
+            var flat = new List<string>(10);
             foreach (var it in items)
             {
                 int times = it.countStr > 0 ? it.countStr : 1;
                 for (int r = 0; r < times && flat.Count < 10; r++)
-                    if (it.Kod > 0) flat.Add(it.Kod);
+                    if (it.Kod != null) flat.Add(it.Kod);
                 if (flat.Count >= 10) break;
             }
-            */
             return flat;
         }
 
         /// Заполняем kod1..kod10 из списка кодов
-        private static void FillKodSlots(KomplModel k, IList<int> codes)
+        private static void FillKodSlots(KomplModel k, IList<string> codes)
         {
             ClearKodSlots(k);
             int n = Math.Min(10, codes.Count);
@@ -1178,7 +1460,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         private async void customButtonKompl_Click(object sender, EventArgs e)
         {
-            /*if (!customCheckBoxVerified.Checked)
+            if (!customCheckBoxVerified.Checked)
                 return;
 
             var razmList = customGridControlKomplRazm.DataSource as List<SpArticulGrupMenViewModel>;
@@ -1202,12 +1484,21 @@ namespace SewingProduction.Features.Articul.Forms
                     Sost_k = mainItem.Sost,
                     CompName = Environment.MachineName
                 };
-                
+
                 FillKodSlots(kompl, flatCodes);
 
+                // 1) Точный дубль
                 if (await komplService.ExistsExactAsync(kompl))
                 {
-                    var result = MessageBox.Show("Комплект уже существует. Перезаписать?",
+                    MessageBox.Show("Комплект с таким же содержанием уже существует. Повторное сохранение запрещено.",
+                        "Дубликат", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // 2) Есть комплект с таким же Kod_k, но другим содержанием
+                if (int.TryParse(kompl.Kod_k, out int kodInt) && await komplService.ExistsByKodKAsync(kodInt))
+                {
+                    var result = MessageBox.Show("Комплект с таким кодом уже существует, но отличается по составу. Перезаписать?",
                         "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result != DialogResult.Yes) return;
 
@@ -1222,27 +1513,16 @@ namespace SewingProduction.Features.Articul.Forms
                 _selectedKomplItems.Clear();
                 customGridControlKomplSelected.DataSource = _selectedKomplItems;
                 customGridControlKomplSelected.RefreshDataSource();
-                customCheckBoxVerified.Checked = false;
+                VerifiedCheckedFalse();
+                //customCheckBoxVerified.Checked = false;
 
-                // Снимаем галочки и чистим вкладки
-                foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
-                {
-                    if (tab.Controls.Count == 0 || tab.Controls[0] is not TableLayoutPanel layout) continue;
-                    var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
-                    if (grid?.DataSource is BindingList<SpArticulGrupMenViewModel> list)
-                    {
-                        foreach (var row in list) row.Pr_po = false;
-                        list.Clear();
-                        grid.RefreshDataSource();
-                    }
-                }
                 foreach (var r in razmList) r.Pr_po = false;
                 gridViewKomplRazm.RefreshData();
 
                 await loadKomplByArticul(kompl.Articul_k);
-                customNumericUpDownValueTab.Value = 0;
+                //customNumericUpDownValueTab.Value = 0;
                 return;
-            
+
             }
 
             // =========================
@@ -1261,7 +1541,7 @@ namespace SewingProduction.Features.Articul.Forms
                 var flatCodes = BuildFlatCodesByCountStr(
                     _selectedKomplItems.Where(x =>
                         string.Equals((x.Razm_all ?? "").Trim(), keyRazmAll, StringComparison.OrdinalIgnoreCase) &&
-                        x.Pr_po && x.Kod > 0));
+                        x.Pr_po && x.Kod != ""));
 
                 if (flatCodes.Count == 0)
                     continue;
@@ -1280,8 +1560,16 @@ namespace SewingProduction.Features.Articul.Forms
 
                 if (await komplService.ExistsExactAsync(kompl))
                 {
+                    MessageBox.Show(
+                        $"Комплект по razm_all='{keyRazmAll}' с таким же содержанием уже существует. Повторное сохранение запрещено.",
+                        "Дубликат", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    continue;
+                }
+
+                if (int.TryParse(kompl.Kod_k, out int kodInt) && await komplService.ExistsByKodKAsync(kodInt))
+                {
                     var result = MessageBox.Show(
-                        $"Комплект по razm_all='{keyRazmAll}' уже существует. Перезаписать?",
+                        $"Комплект по razm_all='{keyRazmAll}' с таким кодом уже существует, но отличается по составу. Перезаписать?",
                         "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result != DialogResult.Yes) continue;
 
@@ -1292,7 +1580,7 @@ namespace SewingProduction.Features.Articul.Forms
                 saved++;
             }
 
-            await loadKomplByArticul(xkod);
+            await loadKomplByArticul(selectedAuto.First().Articul);
 
             MessageBox.Show(saved > 0
                 ? $"Сохранено комплектов: {saved}."
@@ -1303,12 +1591,24 @@ namespace SewingProduction.Features.Articul.Forms
             _selectedKomplItems.Clear();
             customGridControlKomplSelected.DataSource = _selectedKomplItems;
             customGridControlKomplSelected.RefreshDataSource();
-            customCheckBoxVerified.Checked = false;
+            VerifiedCheckedFalse();
+            //customCheckBoxVerified.Checked = false;
 
+            // Снимаем галочки и чистим вкладки
+            foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
+            {
+                if (tab.Controls.Count == 0 || tab.Controls[0] is not TableLayoutPanel layout) continue;
+                var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                if (grid?.DataSource is BindingList<SpArticulGrupMenViewModel> list)
+                {
+                    foreach (var row in list) row.Pr_po = false;
+                    //list.Clear();
+                    grid.RefreshDataSource();
+                }
+            }
 
             foreach (var r in razmList) r.Pr_po = false;
             gridViewKomplRazm.RefreshData();
-            */
         }
 
         async Task loadKomplByArticul(string articul_k)
@@ -1317,25 +1617,20 @@ namespace SewingProduction.Features.Articul.Forms
             customGridControlKompl.RefreshDataSource();
             loadKodForKompl();
         }
-        private Dictionary<int, ArticulModel> _artByKod;
+        private Dictionary<string, ArticulModel> _artByKod;
         void loadKodForKompl()
         {
-            /*
-             * customGridControlKompl.LevelTree.Nodes[0].RelationName = "Коды";
+            customGridControlKompl.LevelTree.Nodes[0].RelationName = "Коды";
             customGridControlKompl.LevelTree.Nodes[0].LevelTemplate = gridViewKomplKod;
 
             gridViewKomplKod.Columns.Clear();
-            //gridViewKomplKod.OptionsView.ShowViewCaption = false;
-            gridViewKomplKod.OptionsView.ShowColumnHeaders = false;
+            gridViewKomplKod.OptionsView.ShowColumnHeaders = true;
+            gridViewKomplKod.OptionsBehavior.AutoPopulateColumns = false;
 
             var col = gridViewKomplKod.Columns.AddField("Kod");
             col.Caption = "Код";
             col.Visible = true;
             col.UnboundType = DevExpress.Data.UnboundColumnType.String;
-
-            // ===== ДОБАВЛЕНО: дополнительные колонки для информации из артикула =====
-            gridViewKomplKod.OptionsBehavior.AutoPopulateColumns = false;
-            gridViewKomplKod.OptionsView.ShowColumnHeaders = true; // показать заголовки
 
             var colGrup = gridViewKomplKod.Columns.AddField("Grup");
             colGrup.Caption = "Группа";
@@ -1356,22 +1651,23 @@ namespace SewingProduction.Features.Articul.Forms
             colRazm.Caption = "Размер";
             colRazm.Visible = true;
             colRazm.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            // =======================================================================
 
-            // ===== ДОБАВЛЕНО: кэш по коду, чтобы быстро получать ArticulModel =====
+            // Кэш по коду: ключ теперь string
             if (_artByKod == null)
             {
-                // если у тебя есть список articuls — используем его
-                _artByKod = (articuls ?? new List<ArticulModel>()).GroupBy(a => a.Kod)
-                             .ToDictionary(g => g.Key, g => g.First());
+                _artByKod = (articuls ?? new List<ArticulModel>())
+                    .Where(a => !string.IsNullOrWhiteSpace(a.Kod))
+                    .GroupBy(a => a.Kod)
+                    .ToDictionary(g => g.Key, g => g.First());
             }
-            
-            // fallback-поиск по вкладкам, если кода нет в кэше articuls
-            ArticulModel LookupArt(int kod)
+
+            ArticulModel LookupArt(string kod)
             {
+                if (string.IsNullOrWhiteSpace(kod)) return null;
                 if (_artByKod.TryGetValue(kod, out var hit))
                     return hit;
 
+                // fallback — поиск по вкладкам
                 foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
                 {
                     if (tab.Controls.Count == 0) continue;
@@ -1396,10 +1692,8 @@ namespace SewingProduction.Features.Articul.Forms
                         }
                     }
                 }
-            
                 return null;
             }
-            // =======================================================================
 
             gridViewKompl.MasterRowGetChildList += (s, e) =>
             {
@@ -1407,20 +1701,17 @@ namespace SewingProduction.Features.Articul.Forms
                 var row = view.GetRow(e.RowHandle) as KomplModel;
                 if (row == null) return;
 
-                var kodList = new List<object>(); // ← оставляем как у тебя, но теперь с доп. полями
+                var kodList = new List<object>();
 
-                // Локальная функция — добавляет строку с данными артикула по коду
                 void addKod(int? kodNullable)
                 {
                     if (!kodNullable.HasValue) return;
-                    int k = kodNullable.Value;
-
-                    // ДОБАВЛЕНО: тянем информацию артикула
-                    var art = LookupArt(k);
+                    var kodStr = kodNullable.Value.ToString();
+                    var art = LookupArt(kodStr);
 
                     kodList.Add(new
                     {
-                        Kod = k.ToString(),
+                        Kod = kodStr,
                         Grup = art?.Grup ?? "",
                         Articul = art?.Articul ?? "",
                         Mod = art?.Mod ?? "",
@@ -1428,7 +1719,6 @@ namespace SewingProduction.Features.Articul.Forms
                     });
                 }
 
-                // твоя логика заполнения — не трогаю
                 if (row.Kod1.HasValue) addKod(row.Kod1);
                 if (row.Kod2.HasValue) addKod(row.Kod2);
                 if (row.Kod3.HasValue) addKod(row.Kod3);
@@ -1445,60 +1735,75 @@ namespace SewingProduction.Features.Articul.Forms
 
             gridViewKompl.MasterRowGetRelationCount += (s, e) => e.RelationCount = 1;
             gridViewKompl.MasterRowGetRelationName += (s, e) => e.RelationName = "Коды";
-            int handle = gridViewKompl.LocateByValue("kod_k", Convert.ToInt32(xkod));
+
+            // ВАЖНО: поле называется "Kod_k" (string), не конвертируем в int
+            int handle = gridViewKompl.LocateByValue("Kod_k", xkod);
             if (handle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
-            {
                 gridViewKompl.ExpandMasterRow(handle);
-            }
-            */
         }
+
 
         #endregion
         #region image
-        private async void gridViewKomplArt_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+
+        private void gridViewKomplRazm_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var view = sender as DevExpress.XtraGrid.Views.Base.ColumnView;
+            GridView_FocusedRowChanged(sender, e, pictureBoxArticul, view);
+        }
+
+        private void gridViewKomplArt_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var view = sender as DevExpress.XtraGrid.Views.Base.ColumnView;
+            GridView_FocusedRowChanged(sender, e, pictureBoxArticulVib, view);
+            customHeaderLabelGrupVib.Text = view.GetRowCellValue(e.FocusedRowHandle, "Grup")?.ToString().Trim() ?? "";
+            customLabelArtTextVib.Text = view.GetRowCellValue(e.FocusedRowHandle, "Articul")?.ToString().Trim() ?? "";
+            customLabelModTextVib.Text = view.GetRowCellValue(e.FocusedRowHandle, "Mod")?.ToString().Trim() ?? "";
+        }
+        private async void GridView_FocusedRowChanged(object sender,
+            DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e,
+            PictureBox targetBox,
+            DevExpress.XtraGrid.Views.Base.ColumnView view)
         {
             try
             {
-                var view = sender as DevExpress.XtraGrid.Views.Base.ColumnView;
-                // 1) Получаем kod
-
-                var kodObj = view.GetRowCellValue(e.FocusedRowHandle, "Kod");
-                var kod = kodObj?.ToString();
+                var kod = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
 
                 if (string.IsNullOrWhiteSpace(kod))
                 {
-                    SetPicture(null);
+                    SetPicture(null, targetBox);
                     return;
                 }
 
-                // 2) Путь к файлу из БД (скалярно)
                 var path = await _articulDataService.GetFileEskizForKod(kod);
                 if (string.IsNullOrWhiteSpace(path) || !File.Exists(path))
                 {
-                    SetPicture(null);
+                    SetPicture(null, targetBox);
                     return;
                 }
 
-                // 3) Безопасно загружаем и показываем
                 var img = LoadImageNoLock(path);
-                SetPicture(img); // SetPicture сам освободит старое изображение
+                SetPicture(img, targetBox);
             }
             catch
             {
-                // В простом варианте — просто очищаем превью
-                SetPicture(null);
+                SetPicture(null, targetBox);
             }
-
         }
-        private Image _currentImg;
-
-        private void SetPicture(Image img)
+        private Image _currentImgArt;
+        private void SetPicture(Image img, PictureBox targetBox)
         {
-            // Освобождаем предыдущую картинку, чтобы не было утечек
-            var old = _currentImg;
-            _currentImg = img;
-            pictureBoxArticul.Image = img;
-            old?.Dispose();
+            if (targetBox == pictureBoxArticulVib)
+            {
+                var old = _currentImgArt;
+                _currentImgArt = img;
+                pictureBoxArticulVib.Image = img;
+                old?.Dispose();
+            }
+            else if (targetBox == pictureBoxArticul)
+            {
+                pictureBoxArticul.Image = img;
+            }
         }
 
         private static Image LoadImageNoLock(string path)
@@ -1511,5 +1816,88 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
         #endregion
+        #region filter
+        private void customRadioGroupVib_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string filtered = "";
+            switch (customRadioGroupVib.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    var mykompl_razm = gridViewKomplRazm.GetFocusedRow() as SpArticulGrupMenViewModel;
+                    if (mykompl_razm != null)
+                    {
+                        var conditions = new List<string>();
+
+                        // Условие 1: совпадение торговой марки
+                        conditions.Add($"[Kle] = '{mykompl_razm.Kle}'");
+
+                        // Условие 2: совпадение производителя (Frm_s)
+                        if (mykompl_razm.Kod_v == 2 || mykompl_razm.Kod_v == 3)
+                        {
+                            conditions.Add(
+                                $"Iif([Kod_v] = 2 Or [Kod_v] = 3, [GrupMen.Frm_s] = '{mykompl_razm.GrupMen.Frm_s}', True)"
+                            );
+                        }
+
+                        filtered = string.Join(" AND ", conditions);
+                    }
+                    break;
+                case 2:
+                    string text = customLabelArtText.Text?.Trim();
+                    if (!string.IsNullOrEmpty(text))
+                    {
+                        var blocks = new List<string>();
+                        int start = 0;
+                        bool prevDigit = char.IsDigit(text[0]);
+
+                        for (int i = 1; i < text.Length; i++)
+                        {
+                            bool currDigit = char.IsDigit(text[i]);
+                            if (currDigit != prevDigit)
+                            {
+                                blocks.Add(text.Substring(start, i - start));
+                                start = i;
+                                prevDigit = currDigit;
+                            }
+                        }
+                        blocks.Add(text.Substring(start)); // последний блок
+
+                        // Формируем комбинации из соседних блоков
+                        var tokens = new List<string>();
+                        for (int i = 0; i < blocks.Count - 1; i++)
+                        {
+                            tokens.Add(blocks[i] + blocks[i + 1]);
+                        }
+
+                        // генерим фильтр
+                        if (tokens.Any())
+                        {
+                            var conditions = tokens.Select(t => $"[Articul] LIKE '%{t}%'");
+                            filtered = string.Join(" OR ", conditions);
+                        }
+                    }
+                    break;
+            }
+            gridViewKomplArt.ActiveFilter.Clear();
+            gridViewKomplArt.ActiveFilterString = filtered;
+        }
+        #endregion
+        /// <summary>
+        /// Подсказки при наведении на кнопки
+        /// </summary>
+        private void toolTipButton()
+        {
+            toolTip.AutoPopDelay = 5000;     // Подсказка исчезнет через 5 секунд.
+            toolTip.InitialDelay = 500;      // Подсказка появится через 0.5 секунды.
+            toolTip.ReshowDelay = 100;       // Подсказка появится повторно при движении мыши через 0.1 секунду.
+            //toolTip.IsBalloon = true;      // Показывать подсказку в виде воздушного шара.
+            //toolTip.ToolTipIcon = ToolTipIcon.Info; // Показывать иконку информации.
+            //toolTip.ToolTipTitle = "Подсказка";  // Заголовок подсказки.
+
+            toolTip.SetToolTip(customButtonDelKomplSelected, "Очистить список предварительной комплектовки");
+            toolTip.SetToolTip(customButtonDelKompl, "Удалить комплект");
+        }
     }
 }

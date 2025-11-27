@@ -30,13 +30,21 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            data_type11 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            data_type1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            id_atn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            id_acn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            name1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            readonly1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            name_rus1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             customGridControl1 = new CustomGridControlColumn();
             bindingSource1 = new System.Windows.Forms.BindingSource(components);
-            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            TestID = new DevExpress.XtraGrid.Columns.GridColumn();
-            TestName = new DevExpress.XtraGrid.Columns.GridColumn();
-            TestFirst = new DevExpress.XtraGrid.Columns.GridColumn();
-            TestSecond = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridViewTable1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            id_atn = new DevExpress.XtraGrid.Columns.GridColumn();
+            name = new DevExpress.XtraGrid.Columns.GridColumn();
+            name_rus = new DevExpress.XtraGrid.Columns.GridColumn();
             customGroupBox1 = new CustomGroupBox();
             customHeaderLabel1 = new CustomHeaderLabel();
             customLabel4 = new CustomLabel();
@@ -46,63 +54,126 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customTextBox2 = new CustomTextBox();
             customButton2 = new CustomButton();
             customLabel2 = new CustomLabel();
+            ((System.ComponentModel.ISupportInitialize)bandedGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTable1).BeginInit();
             customGroupBox1.SuspendLayout();
             SuspendLayout();
+            // 
+            // bandedGridView1
+            // 
+            bandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { data_type11 });
+            bandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { id_acn1, id_atn1, name1, name_rus1, data_type1, readonly1 });
+            bandedGridView1.GridControl = customGridControl1;
+            bandedGridView1.Name = "bandedGridView1";
+            bandedGridView1.OptionsDetail.SmartDetailHeight = true;
+            bandedGridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // data_type11
+            // 
+            data_type11.Caption = "data_type";
+            data_type11.Columns.Add(data_type1);
+            data_type11.Columns.Add(id_atn1);
+            data_type11.Columns.Add(id_acn1);
+            data_type11.Columns.Add(name1);
+            data_type11.Columns.Add(readonly1);
+            data_type11.Columns.Add(name_rus1);
+            data_type11.Name = "data_type11";
+            data_type11.VisibleIndex = 0;
+            data_type11.Width = 479;
+            // 
+            // data_type1
+            // 
+            data_type1.Caption = "data_type";
+            data_type1.Name = "data_type1";
+            // 
+            // id_atn1
+            // 
+            id_atn1.Caption = "id_atn";
+            id_atn1.Name = "id_atn1";
+            id_atn1.Visible = true;
+            id_atn1.Width = 74;
+            // 
+            // id_acn1
+            // 
+            id_acn1.Caption = "id_acn";
+            id_acn1.Name = "id_acn1";
+            id_acn1.Visible = true;
+            // 
+            // name1
+            // 
+            name1.Caption = "name";
+            name1.Name = "name1";
+            name1.Visible = true;
+            name1.Width = 164;
+            // 
+            // readonly1
+            // 
+            readonly1.Caption = "readonly";
+            readonly1.Name = "readonly1";
+            // 
+            // name_rus1
+            // 
+            name_rus1.Caption = "name_rus";
+            name_rus1.Name = "name_rus1";
+            name_rus1.Visible = true;
+            name_rus1.Width = 166;
             // 
             // customGridControl1
             // 
             customGridControl1.DataSource = bindingSource1;
             customGridControl1.Font = new System.Drawing.Font("Arial", 10F);
+            gridLevelNode1.LevelTemplate = bandedGridView1;
+            gridLevelNode1.RelationName = "Level1";
+            customGridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
             customGridControl1.Location = new System.Drawing.Point(12, 12);
-            customGridControl1.MainView = gridView1;
+            customGridControl1.MainView = gridViewTable1;
             customGridControl1.Name = "customGridControl1";
-            customGridControl1.Size = new System.Drawing.Size(492, 195);
+            customGridControl1.Size = new System.Drawing.Size(639, 474);
             customGridControl1.TabIndex = 0;
-            customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTable1, bandedGridView1 });
             // 
-            // gridView1
+            // gridViewTable1
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            gridView1.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { TestID, TestName, TestFirst, TestSecond });
-            gridView1.GridControl = customGridControl1;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewTable1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            gridViewTable1.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewTable1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_atn, name, name_rus });
+            gridViewTable1.DetailHeight = 4038;
+            gridViewTable1.GridControl = customGridControl1;
+            gridViewTable1.Name = "gridViewTable1";
+            gridViewTable1.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            gridViewTable1.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            gridViewTable1.OptionsDetail.AllowExpandEmptyDetails = true;
+            gridViewTable1.OptionsPrint.EnableAppearanceEvenRow = true;
+            gridViewTable1.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewTable1.OptionsView.EnableAppearanceOddRow = true;
+            gridViewTable1.OptionsView.ShowGroupPanel = false;
+            gridViewTable1.FocusedRowChanged += gridViewTable1_FocusedRowChanged;
             // 
-            // TestID
+            // id_atn
             // 
-            TestID.Caption = "TestID";
-            TestID.FieldName = "TestID";
-            TestID.Name = "TestID";
-            TestID.Visible = true;
-            TestID.VisibleIndex = 0;
+            id_atn.Caption = "id_atn";
+            id_atn.FieldName = "id_atn";
+            id_atn.Name = "id_atn";
+            id_atn.Visible = true;
+            id_atn.VisibleIndex = 0;
             // 
-            // TestName
+            // name
             // 
-            TestName.Caption = "TestName";
-            TestName.FieldName = "TestName";
-            TestName.Name = "TestName";
-            TestName.Visible = true;
-            TestName.VisibleIndex = 1;
+            name.Caption = "name";
+            name.FieldName = "name";
+            name.Name = "name";
+            name.Visible = true;
+            name.VisibleIndex = 1;
             // 
-            // TestFirst
+            // name_rus
             // 
-            TestFirst.Caption = "TestFirst";
-            TestFirst.FieldName = "TestFirst";
-            TestFirst.Name = "TestFirst";
-            TestFirst.Visible = true;
-            TestFirst.VisibleIndex = 2;
-            // 
-            // TestSecond
-            // 
-            TestSecond.Caption = "TestSecond";
-            TestSecond.FieldName = "TestSecond";
-            TestSecond.Name = "TestSecond";
-            TestSecond.Visible = true;
-            TestSecond.VisibleIndex = 3;
+            name_rus.Caption = "name_rus";
+            name_rus.FieldName = "name_rus";
+            name_rus.Name = "name_rus";
+            name_rus.Visible = true;
+            name_rus.VisibleIndex = 2;
             // 
             // customGroupBox1
             // 
@@ -111,7 +182,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGroupBox1.Controls.Add(customLabel4);
             customGroupBox1.Controls.Add(customLabel1);
             customGroupBox1.Controls.Add(customTextBox1);
-            customGroupBox1.Location = new System.Drawing.Point(24, 225);
+            customGroupBox1.Location = new System.Drawing.Point(657, 12);
             customGroupBox1.Name = "customGroupBox1";
             customGroupBox1.Size = new System.Drawing.Size(259, 250);
             customGroupBox1.TabIndex = 1;
@@ -121,11 +192,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customHeaderLabel1
             // 
             customHeaderLabel1.AutoSize = true;
-            customHeaderLabel1.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
             customHeaderLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customHeaderLabel1.Location = new System.Drawing.Point(15, 32);
             customHeaderLabel1.Name = "customHeaderLabel1";
-            customHeaderLabel1.Size = new System.Drawing.Size(103, 21);
+            customHeaderLabel1.Size = new System.Drawing.Size(131, 27);
             customHeaderLabel1.TabIndex = 6;
             customHeaderLabel1.Text = "Заголовок";
             // 
@@ -154,6 +224,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customTextBox1
             // 
             customTextBox1.BackColor = System.Drawing.Color.White;
+            customTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox1.ErrorColor = System.Drawing.Color.Red;
+            customTextBox1.ErrorMessage = null;
             customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
             customTextBox1.ForeColor = System.Drawing.Color.Black;
             customTextBox1.Location = new System.Drawing.Point(15, 204);
@@ -167,7 +240,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
             customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(313, 289);
+            customButton1.Location = new System.Drawing.Point(946, 76);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(187, 51);
             customButton1.TabIndex = 2;
@@ -178,9 +251,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customTextBox2
             // 
             customTextBox2.BackColor = System.Drawing.Color.White;
+            customTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBox2.ErrorColor = System.Drawing.Color.Red;
+            customTextBox2.ErrorMessage = null;
             customTextBox2.Font = new System.Drawing.Font("Arial", 10F);
             customTextBox2.ForeColor = System.Drawing.Color.Black;
-            customTextBox2.Location = new System.Drawing.Point(313, 398);
+            customTextBox2.Location = new System.Drawing.Point(946, 185);
             customTextBox2.Name = "customTextBox2";
             customTextBox2.Size = new System.Drawing.Size(191, 23);
             customTextBox2.TabIndex = 1;
@@ -191,7 +267,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
             customButton2.ForeColor = System.Drawing.Color.Black;
-            customButton2.Location = new System.Drawing.Point(313, 346);
+            customButton2.Location = new System.Drawing.Point(946, 133);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(187, 30);
             customButton2.TabIndex = 2;
@@ -203,7 +279,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.Black;
-            customLabel2.Location = new System.Drawing.Point(313, 270);
+            customLabel2.Location = new System.Drawing.Point(946, 57);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(95, 16);
             customLabel2.TabIndex = 3;
@@ -213,7 +289,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(590, 508);
+            ClientSize = new System.Drawing.Size(1171, 508);
             Controls.Add(customLabel2);
             Controls.Add(customButton2);
             Controls.Add(customButton1);
@@ -224,9 +300,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Text = "TestForm1";
             FormClosing += ProductForm_FormClosing;
             Load += TestForm1_Load;
+            ((System.ComponentModel.ISupportInitialize)bandedGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTable1).EndInit();
             customGroupBox1.ResumeLayout(false);
             customGroupBox1.PerformLayout();
             ResumeLayout(false);
@@ -236,7 +313,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         #endregion
 
         private CustomGridControlColumn customGridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTable1;
         private CustomGroupBox customGroupBox1;
         private CustomLabel customLabel1;
         private CustomTextBox customTextBox1;
@@ -245,12 +322,21 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private CustomButton customButton2;
         private CustomLabel customLabel2;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private DevExpress.XtraGrid.Columns.GridColumn TestID;
-        private DevExpress.XtraGrid.Columns.GridColumn TestName;
-        private DevExpress.XtraGrid.Columns.GridColumn TestFirst;
-        private DevExpress.XtraGrid.Columns.GridColumn TestSecond;
+        private DevExpress.XtraGrid.Columns.GridColumn id_atn;
+        private DevExpress.XtraGrid.Columns.GridColumn name;
+        private DevExpress.XtraGrid.Columns.GridColumn name_rus;
         private CustomLabel customLabel4;
         private CustomHeaderLabel customHeaderLabel3;
         private CustomHeaderLabel customHeaderLabel1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn id_acn;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn id_atn1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn name1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn name_rus1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn data_type1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn readonly1;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand data_type11;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn id_acn1;
     }
 }

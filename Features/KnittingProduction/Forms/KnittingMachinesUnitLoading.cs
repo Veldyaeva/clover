@@ -1,27 +1,19 @@
-﻿using DevExpress.CodeParser;
-using DevExpress.XtraGrid.Views.Grid;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.Data;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Extensions;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.Data;
-using DevExpress.Charts.Native;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -38,7 +30,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private BindingList<PlanSezonZadKnitMachine> _planSezonZadKnitMachineBindingList;
         private BindingSource _planSezonZadKnitMachineBindingSource;
         private List<PlanSezonZadKnitMachine> _planSezonZadKnitMachineData = new List<PlanSezonZadKnitMachine>();
-        
+
         private List<PlanSezonZadKnitMachineLoadingSummary> _currentPlanSezonZadKnitMachineLoadingSummaryData = new List<PlanSezonZadKnitMachineLoadingSummary>();
         private BindingList<PlanSezonZadKnitMachineLoadingSummary> _planSezonZadKnitMachineLoadingSummaryBindingList;
         private BindingSource _planSezonZadKnitMachineLoadingSummaryBindingSource;
@@ -205,7 +197,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         //groupInfo.GroupText = $"Месяц: {formatted}";
                         //groupInfo.GroupText = $"Месяц: {dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
                         groupInfo.GroupText = $"{dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
-                        
+
                     }
 
                     //if (level == 1) // yearNumber
@@ -341,7 +333,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _planSezonZadKnitMachineBindingSource.Sort = "pszkmYearMonthInt, pszkmPlanDateFrom";
                     gridControlPlanSezonZadKnitMachine.DataSource = _planSezonZadKnitMachineBindingSource;
                     //gridViewPlanSezonZadKnitMachine.ExpandAllGroups = true;
-                    
+
                 }
                 else
                 {
@@ -468,6 +460,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы KnittingMachinesUnitLoading");
             }
         }
-        
+
     }
 }

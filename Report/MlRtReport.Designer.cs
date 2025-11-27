@@ -33,6 +33,8 @@
             DevExpress.DataAccess.Sql.AllColumns allColumns1 = new DevExpress.DataAccess.Sql.AllColumns();
             DevExpress.DataAccess.Sql.Table table1 = new DevExpress.DataAccess.Sql.Table();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter3 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.SelectQuery selectQuery2 = new DevExpress.DataAccess.Sql.SelectQuery();
             DevExpress.DataAccess.Sql.Column column1 = new DevExpress.DataAccess.Sql.Column();
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression1 = new DevExpress.DataAccess.Sql.ColumnExpression();
@@ -53,21 +55,33 @@
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression8 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.Column column9 = new DevExpress.DataAccess.Sql.Column();
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression9 = new DevExpress.DataAccess.Sql.ColumnExpression();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
-            DevExpress.DataAccess.Sql.QueryParameter queryParameter3 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.Column column10 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression10 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Table table3 = new DevExpress.DataAccess.Sql.Table();
+            DevExpress.DataAccess.Sql.Column column11 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression11 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column12 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression12 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column13 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression13 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter5 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter6 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter7 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.Join join1 = new DevExpress.DataAccess.Sql.Join();
             DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo1 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
-            DevExpress.DataAccess.Sql.Table table3 = new DevExpress.DataAccess.Sql.Table();
             DevExpress.DataAccess.Sql.Sorting sorting1 = new DevExpress.DataAccess.Sql.Sorting();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression10 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression14 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.Sorting sorting2 = new DevExpress.DataAccess.Sql.Sorting();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression11 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression15 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.Sorting sorting3 = new DevExpress.DataAccess.Sql.Sorting();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression12 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression16 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.MasterDetailInfo masterDetailInfo1 = new DevExpress.DataAccess.Sql.MasterDetailInfo();
             DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo2 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
-            DevExpress.DataAccess.Sql.MasterDetailInfo masterDetailInfo2 = new DevExpress.DataAccess.Sql.MasterDetailInfo();
             DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo3 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
+            DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo4 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
+            DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo5 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
+            DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo6 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MlRtReport));
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraPrinting.BarCode.EAN13Generator eaN13Generator1 = new DevExpress.XtraPrinting.BarCode.EAN13Generator();
@@ -76,6 +90,8 @@
             DevExpress.XtraReports.UI.XRSummary xrSummary3 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings2 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings3 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+            DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings4 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+            DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings5 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
             this._rzuNom = new DevExpress.XtraReports.Parameters.Parameter();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
@@ -263,6 +279,8 @@
             this.xrTableCell93 = new DevExpress.XtraReports.UI.XRTableCell();
             this._isChip = new DevExpress.XtraReports.Parameters.Parameter();
             this._isUpak = new DevExpress.XtraReports.Parameters.Parameter();
+            this._yearPach = new DevExpress.XtraReports.Parameters.Parameter();
+            this._proizvType = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -282,19 +300,28 @@
             // 
             this.sqlDataSource1.ConnectionName = "SewingProduction.Properties.Settings.ACEConnectionString";
             this.sqlDataSource1.Name = "sqlDataSource1";
-            table1.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"843\" />";
+            table1.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"883\" />";
             table1.Name = "MlRtView";
             allColumns1.Table = table1;
             selectQuery1.Columns.Add(allColumns1);
-            selectQuery1.FilterString = "[MlRtView.RzuNom] = ?_rzuNom";
+            selectQuery1.FilterString = "[MlRtView.RzuNom] = ?_rzuNom And [MlRtView.RzuYearPach] = ?_yearPach And [MlRtVie" +
+    "w.proizvType] = ?_proizvType";
             selectQuery1.GroupFilterString = "";
-            selectQuery1.MetaSerializable = "<Meta X=\"269\" Y=\"20\" Width=\"111\" Height=\"821\" />";
+            selectQuery1.MetaSerializable = "<Meta X=\"269\" Y=\"20\" Width=\"111\" Height=\"861\" />";
             selectQuery1.Name = "MlRtPrintSelect";
             queryParameter1.Name = "_rzuNom";
             queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter1.Value = new DevExpress.DataAccess.Expression("?_rzuNom", typeof(int));
+            queryParameter2.Name = "_yearPach";
+            queryParameter2.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter2.Value = new DevExpress.DataAccess.Expression("?_yearPach", typeof(int));
+            queryParameter3.Name = "_proizvType";
+            queryParameter3.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter3.Value = new DevExpress.DataAccess.Expression("?_proizvType", typeof(int));
             selectQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
-            queryParameter1});
+            queryParameter1,
+            queryParameter2,
+            queryParameter3});
             selectQuery1.Tables.Add(table1);
             columnExpression1.ColumnName = "kod";
             table2.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"603\" />";
@@ -325,6 +352,20 @@
             columnExpression9.ColumnName = "annId";
             columnExpression9.Table = table2;
             column9.Expression = columnExpression9;
+            columnExpression10.ColumnName = "RzuNom";
+            table3.MetaSerializable = "<Meta X=\"185\" Y=\"30\" Width=\"125\" Height=\"883\" />";
+            table3.Name = "MlRtView";
+            columnExpression10.Table = table3;
+            column10.Expression = columnExpression10;
+            columnExpression11.ColumnName = "RzuNomN";
+            columnExpression11.Table = table3;
+            column11.Expression = columnExpression11;
+            columnExpression12.ColumnName = "yearPach";
+            columnExpression12.Table = table3;
+            column12.Expression = columnExpression12;
+            columnExpression13.ColumnName = "proizvType";
+            columnExpression13.Table = table3;
+            column13.Expression = columnExpression13;
             selectQuery2.Columns.Add(column1);
             selectQuery2.Columns.Add(column2);
             selectQuery2.Columns.Add(column3);
@@ -334,38 +375,49 @@
             selectQuery2.Columns.Add(column7);
             selectQuery2.Columns.Add(column8);
             selectQuery2.Columns.Add(column9);
+            selectQuery2.Columns.Add(column10);
+            selectQuery2.Columns.Add(column11);
+            selectQuery2.Columns.Add(column12);
+            selectQuery2.Columns.Add(column13);
             selectQuery2.FilterString = "([normRaszView.kod_ob] = 99 And ?_isUpak = 1 Or ?_isUpak = 0) And [MlRtView.RzuNo" +
-    "m] = ?_rzuNom";
+    "m] = ?_rzuNom And [MlRtView.RzuYearPach] = ?_yearPach And [MlRtView.proizvType] " +
+    "= ?_proizvType";
             selectQuery2.GroupFilterString = "";
-            selectQuery2.MetaSerializable = "<Meta X=\"400\" Y=\"20\" Width=\"106\" Height=\"181\" />";
+            selectQuery2.MetaSerializable = "<Meta X=\"480\" Y=\"430\" Width=\"106\" Height=\"301\" />";
             selectQuery2.Name = "NormRaszView";
-            queryParameter2.Name = "_isUpak";
-            queryParameter2.Type = typeof(global::DevExpress.DataAccess.Expression);
-            queryParameter2.Value = new DevExpress.DataAccess.Expression("?_isUpak", typeof(int));
-            queryParameter3.Name = "_rzuNom";
-            queryParameter3.Type = typeof(global::DevExpress.DataAccess.Expression);
-            queryParameter3.Value = new DevExpress.DataAccess.Expression("?_rzuNom", typeof(int));
+            queryParameter4.Name = "_isUpak";
+            queryParameter4.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter4.Value = new DevExpress.DataAccess.Expression("?_isUpak", typeof(int));
+            queryParameter5.Name = "_rzuNom";
+            queryParameter5.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter5.Value = new DevExpress.DataAccess.Expression("?_rzuNom", typeof(int));
+            queryParameter6.Name = "_yearPach";
+            queryParameter6.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter6.Value = new DevExpress.DataAccess.Expression("?_yearPach", typeof(int));
+            queryParameter7.Name = "_proizvType";
+            queryParameter7.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter7.Value = new DevExpress.DataAccess.Expression("?_proizvType", typeof(int));
             selectQuery2.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
-            queryParameter2,
-            queryParameter3});
+            queryParameter4,
+            queryParameter5,
+            queryParameter6,
+            queryParameter7});
             relationColumnInfo1.NestedKeyColumn = "annId";
             relationColumnInfo1.ParentKeyColumn = "annId";
             join1.KeyColumns.Add(relationColumnInfo1);
-            table3.MetaSerializable = "<Meta X=\"185\" Y=\"30\" Width=\"125\" Height=\"843\" />";
-            table3.Name = "MlRtView";
             join1.Nested = table3;
             join1.Parent = table2;
             join1.SqlJoinType = ((DevExpress.DataAccess.Sql.SqlJoinType)(DevExpress.DataAccess.Sql.SqlJoinType.LeftOuter));
             selectQuery2.Relations.Add(join1);
-            columnExpression10.ColumnName = "kod";
-            columnExpression10.Table = table2;
-            sorting1.Expression = columnExpression10;
-            columnExpression11.ColumnName = "n";
-            columnExpression11.Table = table2;
-            sorting2.Expression = columnExpression11;
-            columnExpression12.ColumnName = "n1";
-            columnExpression12.Table = table2;
-            sorting3.Expression = columnExpression12;
+            columnExpression14.ColumnName = "kod";
+            columnExpression14.Table = table2;
+            sorting1.Expression = columnExpression14;
+            columnExpression15.ColumnName = "n";
+            columnExpression15.Table = table2;
+            sorting2.Expression = columnExpression15;
+            columnExpression16.ColumnName = "n1";
+            columnExpression16.Table = table2;
+            sorting3.Expression = columnExpression16;
             selectQuery2.Sorting.Add(sorting1);
             selectQuery2.Sorting.Add(sorting2);
             selectQuery2.Sorting.Add(sorting3);
@@ -375,18 +427,24 @@
             selectQuery1,
             selectQuery2});
             masterDetailInfo1.DetailQueryName = "NormRaszView";
-            relationColumnInfo2.NestedKeyColumn = "kod";
-            relationColumnInfo2.ParentKeyColumn = "AAnnID";
+            relationColumnInfo2.NestedKeyColumn = "annId";
+            relationColumnInfo2.ParentKeyColumn = "annId";
+            relationColumnInfo3.NestedKeyColumn = "RzuNom";
+            relationColumnInfo3.ParentKeyColumn = "RzuNom";
+            relationColumnInfo4.NestedKeyColumn = "RzuNomN";
+            relationColumnInfo4.ParentKeyColumn = "RzuNomN";
+            relationColumnInfo5.NestedKeyColumn = "yearPach";
+            relationColumnInfo5.ParentKeyColumn = "yearPach";
+            relationColumnInfo6.NestedKeyColumn = "proizvType";
+            relationColumnInfo6.ParentKeyColumn = "proizvType";
             masterDetailInfo1.KeyColumns.Add(relationColumnInfo2);
+            masterDetailInfo1.KeyColumns.Add(relationColumnInfo3);
+            masterDetailInfo1.KeyColumns.Add(relationColumnInfo4);
+            masterDetailInfo1.KeyColumns.Add(relationColumnInfo5);
+            masterDetailInfo1.KeyColumns.Add(relationColumnInfo6);
             masterDetailInfo1.MasterQueryName = "MlRtPrintSelect";
-            masterDetailInfo2.DetailQueryName = "NormRaszViewGroup";
-            relationColumnInfo3.NestedKeyColumn = "kod";
-            relationColumnInfo3.ParentKeyColumn = "AAnnID";
-            masterDetailInfo2.KeyColumns.Add(relationColumnInfo3);
-            masterDetailInfo2.MasterQueryName = "MlRtPrintSelect";
             this.sqlDataSource1.Relations.AddRange(new DevExpress.DataAccess.Sql.MasterDetailInfo[] {
-            masterDetailInfo1,
-            masterDetailInfo2});
+            masterDetailInfo1});
             this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
             // 
             // _rzuNom
@@ -399,6 +457,8 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(415155, "бр45 комплект бельевой дев 163457-466"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(414745, "бр50 трусы дев.(набор) 161488-502"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(412569, "бр19 брюки женские раскомпл компл 151940-943"));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(467125, null));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(8991, "носки"));
             this._rzuNom.ValueSourceSettings = staticListLookUpSettings1;
             // 
             // TopMargin
@@ -1640,7 +1700,7 @@
             this.xrTableCell73.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrTableCell73.StylePriority.UseBorders = false;
             this.xrTableCell73.StylePriority.UseFont = false;
-            this.xrTableCell73.Text = "xrTableCell73";
+            this.xrTableCell73.Text = "\r\n";
             this.xrTableCell73.Weight = 160.27498630280334D;
             // 
             // xrBarCode1
@@ -1650,9 +1710,10 @@
             this.xrBarCode1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrBarCode1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[MlRtPrintSelect].[RzuShtrStart] + PadLeft(ToStr([n]), 2, \'0\') + PadLeft(ToStr([n" +
-                    "1]), 3, \'0\')\n")});
+                    "1]), 3, \'0\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([proizvType] = 0, true, false)")});
             this.xrBarCode1.Font = new DevExpress.Drawing.DXFont("Arial", 8.3F);
-            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(3.051758E-05F, 4.000028F);
+            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 3.000005F);
             this.xrBarCode1.Name = "xrBarCode1";
             this.xrBarCode1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.xrBarCode1.SizeF = new System.Drawing.SizeF(110F, 24F);
@@ -2718,6 +2779,27 @@
             staticListLookUpSettings3.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(0, null));
             this._isUpak.ValueSourceSettings = staticListLookUpSettings3;
             // 
+            // _yearPach
+            // 
+            this._yearPach.Description = "yearPach";
+            this._yearPach.Name = "_yearPach";
+            this._yearPach.Type = typeof(int);
+            this._yearPach.ValueInfo = "0";
+            staticListLookUpSettings4.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(2025, null));
+            this._yearPach.ValueSourceSettings = staticListLookUpSettings4;
+            // 
+            // _proizvType
+            // 
+            this._proizvType.Description = "proizvType";
+            this._proizvType.Name = "_proizvType";
+            this._proizvType.Type = typeof(int);
+            this._proizvType.ValueInfo = "0";
+            staticListLookUpSettings5.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(0, null));
+            staticListLookUpSettings5.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(1, null));
+            staticListLookUpSettings5.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(2, null));
+            staticListLookUpSettings5.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(3, null));
+            this._proizvType.ValueSourceSettings = staticListLookUpSettings5;
+            // 
             // MlRtReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -2736,11 +2818,15 @@
             this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._rzuNom, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._isChip, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._isUpak, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._isUpak, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._yearPach, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._proizvType, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this._rzuNom,
             this._isChip,
-            this._isUpak});
+            this._isUpak,
+            this._yearPach,
+            this._proizvType});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.Title,
             this.DetailCaption1,
@@ -2954,5 +3040,7 @@
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport2;
         private DevExpress.XtraReports.Parameters.Parameter _isUpak;
+        private DevExpress.XtraReports.Parameters.Parameter _yearPach;
+        private DevExpress.XtraReports.Parameters.Parameter _proizvType;
     }
 }

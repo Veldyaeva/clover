@@ -1,7 +1,5 @@
-﻿using SewingProduction.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using SewingProduction.Core.Models;
 
 
 namespace SewingProduction.Features.Articul.Models
@@ -9,11 +7,11 @@ namespace SewingProduction.Features.Articul.Models
     public class SpArticulPreviewModel : ArticulModel
     {
         [NotMapped]
-        public string SeasonName { get;set;}
+        public string SeasonName { get; set; }
         [NotMapped]
-        public string TmName { get;set; }
+        public string TmName { get; set; }
         [NotMapped]
-        public string AssortName { get;set; }
+        public string AssortName { get; set; }
         [NotMapped]
         public string CountryName { get; set; }
         [NotMapped]
@@ -38,7 +36,20 @@ namespace SewingProduction.Features.Articul.Models
         public decimal Kf_tkan_kach6 { get; set; }
         [NotMapped]
         public decimal Kf_tkan_kach7 { get; set; }
-
+        [NotMapped]
+        public decimal? Brak_percent1 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent2 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent3 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent4 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent5 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent6 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent7 { get; set; }
 
 
 

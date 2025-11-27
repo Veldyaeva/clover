@@ -1,0 +1,590 @@
+[
+  {
+    "Timestamp": "2025-09-17T10:58:18.4159197Z",
+    "Message": "VerifyGridConfigurations: normRaskArt has 6 columns",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4333549Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'Kod_o' - FieldName: 'Kod_o', Visible: True, Width: 50",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4353357Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'TextRask' - FieldName: 'TextRask', Visible: True, Width: 300",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4358757Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'razryd' - FieldName: 'razryd', Visible: True, Width: 80",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4364488Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'sek' - FieldName: 'Sek', Visible: True, Width: 60",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4369894Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'spec' - FieldName: 'Spec', Visible: True, Width: 100",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4375427Z",
+    "Message": "VerifyGridConfigurations: normRaskArt column 'Obor' - FieldName: 'Obor', Visible: True, Width: 150",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4381570Z",
+    "Message": "VerifyGridConfigurations: normRaskArt DataSource: ",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4388813Z",
+    "Message": "VerifyGridConfigurations: customGridControl2.Visible=False, Enabled=True",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.4396922Z",
+    "Message": "VerifyGridConfigurations: customGridControl2.Parent=layoutControl1, Parent.Visible=False",
+    "StackTrace": "",
+    "Context": "VerifyGridConfigurations"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.5383007Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.5425737Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.5447167Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.5466469Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:18.5528142Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:22.5342651Z",
+    "Message": "Данные загружены успешно",
+    "StackTrace": "",
+    "Context": "LoadData"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:23.6994239Z",
+    "Message": "RefreshRelatedData: Обновление связанных данных для AnnID: 90661",
+    "StackTrace": "",
+    "Context": "TeamWorkService"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:23.7300074Z",
+    "Message": "GetRelatedNormRasz: Выполняется SQL-запрос для AnnId=90661: SELECT \r\n nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,\r\n    nr.Sek, nr.Seb, nr.Kod, \r\n    nr.kod_o AS Kod_o,       \r\n    nr.kod_ob AS KodOb,   \r\n    nr.kod_podr AS KodPodr,  \r\n    nr.kod_proizv AS KodProizv,\r\n    nr.Spec, nr.nrId,\r\n    nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,\r\n    kp.text_proizv as TextProizv,\r\n    pv.text_vyaz as TextVyaz,\r\n    ob.text_ob as TextOb\r\nFROM dbo.normraszview nr\r\nLEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv\r\nLEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz\r\nLEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob\r\nWHERE nr.annId = @annId",
+    "StackTrace": "",
+    "Context": "GetRelatedNormRasz"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:24.0908276Z",
+    "Message": "FIO загружено и закешировано",
+    "StackTrace": "",
+    "Context": "LoadAndBindFioListsAsync"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:24.1556444Z",
+    "Message": "Связанные данные для AnnID: 90661 успешно загружены",
+    "StackTrace": "",
+    "Context": "LoadRelatedData"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7249556Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7269734Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7285259Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7307311Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7420451Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7435399Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7448779Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7463447Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7481729Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7496078Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7510475Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7524896Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7543351Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7558244Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7609202Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7630585Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7647293Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7688843Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7708198Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7726762Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7745081Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7762421Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7779326Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7796546Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7816245Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7837807Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7856830Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7875433Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7888585Z",
+    "Message": "Форма TeamWork закрыта",
+    "StackTrace": "",
+    "Context": "FormClosing"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7915052Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7935520Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7955274Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.7976593Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8004518Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8028034Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8048535Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8073226Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8096487Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8120799Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8141633Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8165489Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8186570Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8210272Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8234025Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8258267Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8281437Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8302884Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8326362Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8350252Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8373473Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8397795Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8425698Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8456519Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:25.8484355Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.3396550Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.3443553Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.3480346Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlKontTW_gridViewKontTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.3853734Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.3896832Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.3934395Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_GridControlBindedArts_gridViewBindedArts'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4252549Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4291189Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4317609Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlRaskrTW_gridViewRaskrTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4409458Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4438516Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4459473Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_gridControlRaszTW_gridViewRaszTW'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4514920Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4544419Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4570227Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'TeamWork_ANNgridControl_ANNgridView'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.4852426Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl2_normRaskArt'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5248576Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl1_normKontTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5289574Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_binded_gridView_binded'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5345762Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlNZP_gridViewNZP'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5394783Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridControl3_normRaszTab'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5461642Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_wdToBind_gridView_wdToBind'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5514456Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControl_unboundArts_gridView_unboundArts'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5597046Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlPreArch_gridViewPreArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-17T10:58:26.5642137Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_gridControlArch_gridViewArch'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  }
+]

@@ -746,9 +746,6 @@
             // 
             this._nomZadany.Description = "NomZadany";
             this._nomZadany.Name = "_nomZadany";
-            this._nomZadany.Type = typeof(int);
-            this._nomZadany.ValueInfo = "0";
-            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(102505474, null));
             this._nomZadany.ValueSourceSettings = staticListLookUpSettings1;
             // 
             // KnitMachineDownTimeByNomZadReport
@@ -774,6 +771,8 @@
             this.Margins = new DevExpress.Drawing.DXMargins(25F, 25F, 0F, 23F);
             this.PageHeight = 850;
             this.PageWidth = 1100;
+            this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nomZadany, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this._nomZadany});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {

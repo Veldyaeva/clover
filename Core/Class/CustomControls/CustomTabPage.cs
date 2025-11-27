@@ -1,6 +1,6 @@
-﻿using DevExpress.XtraTab;
+﻿using System.ComponentModel;
+using DevExpress.XtraTab;
 using SewingProduction.Features.UserDistribution.Helpers;
-using System.ComponentModel;
 
 namespace SewingProduction.Core.Class
 {
@@ -10,6 +10,35 @@ namespace SewingProduction.Core.Class
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
+
+        public CustomTabPage()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+
+        public void ApplyTheme()
+        {
+            // Применяем тему к TabPage
+            // DevExpress XtraTabPage автоматически наследует стили от родительского XtraTabControl
+            // Но можно настроить специфичные для страницы стили
+            if (this.TabControl != null)
+            {
+                // Шрифт наследуется от TabControl, но можем переопределить если нужно
+                // this.Font = ThemeManager.SharedSettings.DefaultFont;
+            }
+        }
+
+        private void OnThemeChanged() => ApplyTheme();
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
 
         public void ApplyPermission(UserClass user)
         {

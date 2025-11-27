@@ -1,25 +1,11 @@
-﻿using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.Data.Linq.Helpers;
-using DevExpress.Xpo.Logger.Transport;
-using DevExpress.XtraBars.Docking2010.Dragging;
-using DevExpress.XtraReports.Templates;
-using DevExpress.XtraRichEdit.Import.EPub;
-using Newtonsoft.Json.Linq;
-using Org.BouncyCastle.Asn1.X509;
-using SewingProduction.Features.Articul;
-using SewingProduction.form;
-using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
-using System.Security.Cryptography;
 
 namespace SewingProduction.Features.CardByNom.Models
 {
     public class SockZadanyInfo
     {
-        
+
         [NotMapped]
         public int kzKmaID { get; set; }
         [NotMapped]
@@ -29,11 +15,11 @@ namespace SewingProduction.Features.CardByNom.Models
         [NotMapped]
         public string kmlNumber { get; set; }
         [NotMapped]
-        public string grup {  get; set; }
+        public string grup { get; set; }
         [NotMapped]
-        public string articul {  get; set; }
+        public string articul { get; set; }
         [NotMapped]
-        public int kol {  get; set; }
+        public int kol { get; set; }
         [NotMapped]
         public int kolFakt { get; set; }
         [NotMapped]
@@ -66,6 +52,8 @@ namespace SewingProduction.Features.CardByNom.Models
         public decimal kgDefects { get; set; }
         [NotMapped]
         public int kolDefects { get; set; }
+        [NotMapped]
+        public string ko { get; set; }
 
     }
 

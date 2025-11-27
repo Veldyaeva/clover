@@ -1,8 +1,4 @@
-﻿using Dapper;
-using DevExpress.Mvvm.Native;
-using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,6 +7,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using DevExpress.Mvvm.Native;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
 using Z.Dapper.Plus;
 
 namespace SewingProduction.Services
@@ -216,6 +216,16 @@ namespace SewingProduction.Services
                     string parameterName = "@" + columnName;
 
                     var value = prop.GetValue(entity);
+
+                    // Подстраховка: для таблицы Ann не допускаем Status = 0
+                    if (string.Equals(tableName, TableNames.Ann, StringComparison.OrdinalIgnoreCase)
+                        && string.Equals(columnName, nameof(Models.ArtNormN.Status), StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (value is int intStatus && intStatus == 0)
+                        {
+                            value = 1; // Предварительный
+                        }
+                    }
 
                     if (prop.Name == keyFieldName && (value == null || value.ToString() == "0" || string.IsNullOrWhiteSpace(value.ToString())))
                         continue;
