@@ -137,10 +137,6 @@ namespace SewingProduction.Features.Articul
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             lContrBoxMainInfo = new DevExpress.XtraLayout.LayoutControl();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            customButton1 = new CustomButton();
-            customButton2 = new CustomButton();
-            customButton6 = new CustomButton();
             cgbTkanPurpose = new System.Windows.Forms.GroupBox();
             txbOpis_t7 = new CustomTextBox();
             txbOpis_t6 = new CustomTextBox();
@@ -209,26 +205,6 @@ namespace SewingProduction.Features.Articul
             customLabel22 = new CustomLabel();
             customLabel21 = new CustomLabel();
             customLabel20 = new CustomLabel();
-            groupBox1 = new System.Windows.Forms.GroupBox();
-            customLabel45 = new CustomLabel();
-            txbSumKomplNum = new CustomTextBox();
-            customLabel44 = new CustomLabel();
-            txbSumSebRaskr = new CustomTextBox();
-            customLabel43 = new CustomLabel();
-            txbSumStrVznos = new CustomTextBox();
-            customLabel42 = new CustomLabel();
-            txbSumDopOpl = new CustomTextBox();
-            customLabel41 = new CustomLabel();
-            txbSumZarpl = new CustomTextBox();
-            customLabel40 = new CustomLabel();
-            txbSebz = new CustomTextBox();
-            customLabel39 = new CustomLabel();
-            customLabel38 = new CustomLabel();
-            customLabel37 = new CustomLabel();
-            txbSekKr = new CustomTextBox();
-            txbSekShv = new CustomTextBox();
-            txbSekVyaz = new CustomTextBox();
-            txbSek = new CustomTextBox();
             gridArtDr = new DevExpress.XtraGrid.GridControl();
             bsArtDr = new System.Windows.Forms.BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -239,7 +215,7 @@ namespace SewingProduction.Features.Articul
             grArtDrKod_fur = new DevExpress.XtraGrid.Columns.GridColumn();
             grArtDrKod_furn_ar = new DevExpress.XtraGrid.Columns.GridColumn();
             grArtDrData_nitki = new DevExpress.XtraGrid.Columns.GridColumn();
-            groupBox2 = new System.Windows.Forms.GroupBox();
+            groupBox2 = new CustomGroupBox();
             chkPres = new CustomCheckBox();
             chkStra = new CustomCheckBox();
             chkBus = new CustomCheckBox();
@@ -248,7 +224,6 @@ namespace SewingProduction.Features.Articul
             chbIsFurnit = new CustomCheckBox();
             chbIsUpak = new CustomCheckBox();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            customButton3 = new CustomButton();
             customButton7 = new CustomButton();
             customButtonKart = new CustomButton();
             buttonEdit1 = new DevExpress.XtraEditors.ButtonEdit();
@@ -261,6 +236,7 @@ namespace SewingProduction.Features.Articul
             lCPagesKoplNabor = new DevExpress.XtraLayout.LayoutControlGroup();
             customCheckBox1 = new CustomCheckBox();
             groupBox3 = new System.Windows.Forms.GroupBox();
+            customButton3 = new CustomButton();
             customLabel48 = new CustomLabel();
             customSimpleButton6 = new CustomSimpleButton();
             customTextBox1 = new CustomTextBox();
@@ -285,6 +261,31 @@ namespace SewingProduction.Features.Articul
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             customGroupBox1 = new CustomGroupBox();
+            csButtonEdit = new CustomSimpleButton();
+            customGroupBox2 = new CustomGroupBox();
+            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            customButton1 = new CustomButton();
+            customButton2 = new CustomButton();
+            customButton6 = new CustomButton();
+            customLabel45 = new CustomLabel();
+            txbSumZarpl = new CustomTextBox();
+            txbSumKomplNum = new CustomTextBox();
+            txbSek = new CustomTextBox();
+            customLabel44 = new CustomLabel();
+            txbSekVyaz = new CustomTextBox();
+            txbSumSebRaskr = new CustomTextBox();
+            txbSekShv = new CustomTextBox();
+            customLabel43 = new CustomLabel();
+            txbSekKr = new CustomTextBox();
+            txbSumStrVznos = new CustomTextBox();
+            customLabel37 = new CustomLabel();
+            customLabel42 = new CustomLabel();
+            customLabel38 = new CustomLabel();
+            txbSumDopOpl = new CustomTextBox();
+            customLabel39 = new CustomLabel();
+            customLabel41 = new CustomLabel();
+            txbSebz = new CustomTextBox();
+            customLabel40 = new CustomLabel();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -313,14 +314,12 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).BeginInit();
             lContrBoxMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
-            flowLayoutPanel1.SuspendLayout();
             cgbTkanPurpose.SuspendLayout();
             cgbKfKach.SuspendLayout();
             cgbBrakPercent.SuspendLayout();
             cgbTkanSeb.SuspendLayout();
             cgbTkanNorm.SuspendLayout();
             cgbTkanBrak.SuspendLayout();
-            groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
@@ -343,6 +342,8 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
             customGroupBox1.SuspendLayout();
+            customGroupBox2.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // grColKomplHasDifference
@@ -395,6 +396,7 @@ namespace SewingProduction.Features.Articul
             gridControl1.OptionsEditForm.PopupEditFormWidth = 933;
             gridControl1.OptionsFind.AlwaysVisible = true;
             gridControl1.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter;
+            gridControl1.OptionsView.ColumnAutoWidth = false;
             gridControl1.OptionsView.ShowAutoFilterRow = true;
             gridControl1.OptionsView.ShowGroupPanel = false;
             gridControl1.FocusedRowChanged += gridControl1_FocusedRowChanged;
@@ -464,6 +466,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbArh.AutoSize = true;
             chbArh.Enabled = false;
+            chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbArh.Font = new Font("Arial", 10F);
             chbArh.ForeColor = Color.FromArgb(72, 61, 139);
             chbArh.Location = new Point(1054, 6);
@@ -478,6 +481,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbKombIzd.AutoSize = true;
             chbKombIzd.Enabled = false;
+            chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombIzd.Font = new Font("Arial", 10F);
             chbKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
             chbKombIzd.Location = new Point(937, 6);
@@ -492,6 +496,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbKombDet.AutoSize = true;
             chbKombDet.Enabled = false;
+            chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombDet.Font = new Font("Arial", 10F);
             chbKombDet.ForeColor = Color.FromArgb(72, 61, 139);
             chbKombDet.Location = new Point(824, 7);
@@ -1176,7 +1181,7 @@ namespace SewingProduction.Features.Articul
             layoutControl1.Controls.Add(csButtonNew);
             layoutControl1.Location = new Point(0, 4);
             layoutControl1.Name = "layoutControl1";
-            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-680, 164, 650, 400);
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-1105, 201, 650, 400);
             layoutControl1.Root = layoutControlGroup1;
             layoutControl1.Size = new Size(580, 248);
             layoutControl1.TabIndex = 0;
@@ -1604,7 +1609,7 @@ namespace SewingProduction.Features.Articul
             lContrBoxMainInfo.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-650, 6, 650, 400);
             lContrBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
             lContrBoxMainInfo.Root = Root;
-            lContrBoxMainInfo.Size = new Size(1141, 249);
+            lContrBoxMainInfo.Size = new Size(1148, 249);
             lContrBoxMainInfo.TabIndex = 31;
             lContrBoxMainInfo.TabStop = false;
             lContrBoxMainInfo.Text = "layoutControl1";
@@ -1614,59 +1619,8 @@ namespace SewingProduction.Features.Articul
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
             Root.Name = "Root";
-            Root.Size = new Size(1141, 249);
+            Root.Size = new Size(1148, 249);
             Root.TextVisible = false;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.BackColor = Color.Transparent;
-            flowLayoutPanel1.Controls.Add(customButton1);
-            flowLayoutPanel1.Controls.Add(customButton2);
-            flowLayoutPanel1.Controls.Add(customButton6);
-            flowLayoutPanel1.Location = new Point(226, 17);
-            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(187, 148);
-            flowLayoutPanel1.TabIndex = 11;
-            // 
-            // customButton1
-            // 
-            customButton1.BackColor = Color.FromArgb(230, 230, 250);
-            customButton1.Font = new Font("Arial", 9F);
-            customButton1.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton1.Location = new Point(4, 3);
-            customButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new Size(180, 35);
-            customButton1.TabIndex = 0;
-            customButton1.Text = "Заполнить сек. и з\\пл";
-            customButton1.UseVisualStyleBackColor = false;
-            // 
-            // customButton2
-            // 
-            customButton2.BackColor = Color.FromArgb(230, 230, 250);
-            customButton2.Font = new Font("Arial", 9F);
-            customButton2.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton2.Location = new Point(4, 44);
-            customButton2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new Size(180, 46);
-            customButton2.TabIndex = 1;
-            customButton2.Text = "Заполнить сек. и з\\пл для комплекта";
-            customButton2.UseVisualStyleBackColor = false;
-            // 
-            // customButton6
-            // 
-            customButton6.BackColor = Color.FromArgb(230, 230, 250);
-            customButton6.Font = new Font("Arial", 9F);
-            customButton6.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton6.Location = new Point(4, 96);
-            customButton6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton6.Name = "customButton6";
-            customButton6.Size = new Size(180, 46);
-            customButton6.TabIndex = 2;
-            customButton6.Text = "Несоответствие спр-ка и разд.труда";
-            customButton6.UseVisualStyleBackColor = false;
             // 
             // cgbTkanPurpose
             // 
@@ -2665,304 +2619,6 @@ namespace SewingProduction.Features.Articul
             customLabel20.TabIndex = 7;
             customLabel20.Text = "руб.";
             // 
-            // groupBox1
-            // 
-            groupBox1.BackColor = Color.Transparent;
-            groupBox1.Controls.Add(customLabel45);
-            groupBox1.Controls.Add(txbSumKomplNum);
-            groupBox1.Controls.Add(customLabel44);
-            groupBox1.Controls.Add(txbSumSebRaskr);
-            groupBox1.Controls.Add(customLabel43);
-            groupBox1.Controls.Add(txbSumStrVznos);
-            groupBox1.Controls.Add(customLabel42);
-            groupBox1.Controls.Add(txbSumDopOpl);
-            groupBox1.Controls.Add(customLabel41);
-            groupBox1.Controls.Add(txbSumZarpl);
-            groupBox1.Controls.Add(customLabel40);
-            groupBox1.Controls.Add(txbSebz);
-            groupBox1.Controls.Add(customLabel39);
-            groupBox1.Controls.Add(customLabel38);
-            groupBox1.Controls.Add(customLabel37);
-            groupBox1.Controls.Add(txbSekKr);
-            groupBox1.Controls.Add(txbSekShv);
-            groupBox1.Controls.Add(flowLayoutPanel1);
-            groupBox1.Controls.Add(txbSekVyaz);
-            groupBox1.Controls.Add(txbSek);
-            groupBox1.Location = new Point(1207, 254);
-            groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox1.Size = new Size(418, 250);
-            groupBox1.TabIndex = 21;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Норма/сек";
-            // 
-            // customLabel45
-            // 
-            customLabel45.AutoSize = true;
-            customLabel45.BackColor = Color.Transparent;
-            customLabel45.Font = new Font("Arial", 8F);
-            customLabel45.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel45.Location = new Point(104, 157);
-            customLabel45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel45.Name = "customLabel45";
-            customLabel45.Size = new Size(78, 14);
-            customLabel45.TabIndex = 46;
-            customLabel45.Text = "Компл. и нум.";
-            // 
-            // txbSumKomplNum
-            // 
-            txbSumKomplNum.BackColor = Color.FromArgb(248, 248, 255);
-            txbSumKomplNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSumKomplNum.ErrorColor = Color.Red;
-            txbSumKomplNum.ErrorMessage = null;
-            txbSumKomplNum.Font = new Font("Arial", 10F);
-            txbSumKomplNum.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSumKomplNum.Location = new Point(105, 174);
-            txbSumKomplNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSumKomplNum.Name = "txbSumKomplNum";
-            txbSumKomplNum.ReadOnly = true;
-            txbSumKomplNum.Size = new Size(90, 16);
-            txbSumKomplNum.TabIndex = 47;
-            // 
-            // customLabel44
-            // 
-            customLabel44.AutoSize = true;
-            customLabel44.BackColor = Color.Transparent;
-            customLabel44.Font = new Font("Arial", 8F);
-            customLabel44.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel44.Location = new Point(105, 119);
-            customLabel44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel44.Name = "customLabel44";
-            customLabel44.Size = new Size(48, 14);
-            customLabel44.TabIndex = 44;
-            customLabel44.Text = "Раскрой";
-            // 
-            // txbSumSebRaskr
-            // 
-            txbSumSebRaskr.BackColor = Color.FromArgb(248, 248, 255);
-            txbSumSebRaskr.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSumSebRaskr.ErrorColor = Color.Red;
-            txbSumSebRaskr.ErrorMessage = null;
-            txbSumSebRaskr.Font = new Font("Arial", 10F);
-            txbSumSebRaskr.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSumSebRaskr.Location = new Point(106, 136);
-            txbSumSebRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSumSebRaskr.Name = "txbSumSebRaskr";
-            txbSumSebRaskr.ReadOnly = true;
-            txbSumSebRaskr.Size = new Size(90, 16);
-            txbSumSebRaskr.TabIndex = 45;
-            // 
-            // customLabel43
-            // 
-            customLabel43.AutoSize = true;
-            customLabel43.BackColor = Color.Transparent;
-            customLabel43.Font = new Font("Arial", 8F);
-            customLabel43.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel43.Location = new Point(105, 82);
-            customLabel43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel43.Name = "customLabel43";
-            customLabel43.Size = new Size(70, 14);
-            customLabel43.TabIndex = 42;
-            customLabel43.Text = "Стр. взносы";
-            // 
-            // txbSumStrVznos
-            // 
-            txbSumStrVznos.BackColor = Color.FromArgb(248, 248, 255);
-            txbSumStrVznos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSumStrVznos.ErrorColor = Color.Red;
-            txbSumStrVznos.ErrorMessage = null;
-            txbSumStrVznos.Font = new Font("Arial", 10F);
-            txbSumStrVznos.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSumStrVznos.Location = new Point(106, 99);
-            txbSumStrVznos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSumStrVznos.Name = "txbSumStrVznos";
-            txbSumStrVznos.ReadOnly = true;
-            txbSumStrVznos.Size = new Size(90, 16);
-            txbSumStrVznos.TabIndex = 43;
-            // 
-            // customLabel42
-            // 
-            customLabel42.AutoSize = true;
-            customLabel42.BackColor = Color.Transparent;
-            customLabel42.Font = new Font("Arial", 8F);
-            customLabel42.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel42.Location = new Point(106, 46);
-            customLabel42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel42.Name = "customLabel42";
-            customLabel42.Size = new Size(69, 14);
-            customLabel42.TabIndex = 40;
-            customLabel42.Text = "Доп. оплата";
-            // 
-            // txbSumDopOpl
-            // 
-            txbSumDopOpl.BackColor = Color.FromArgb(248, 248, 255);
-            txbSumDopOpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSumDopOpl.ErrorColor = Color.Red;
-            txbSumDopOpl.ErrorMessage = null;
-            txbSumDopOpl.Font = new Font("Arial", 10F);
-            txbSumDopOpl.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSumDopOpl.Location = new Point(107, 63);
-            txbSumDopOpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSumDopOpl.Name = "txbSumDopOpl";
-            txbSumDopOpl.ReadOnly = true;
-            txbSumDopOpl.Size = new Size(90, 16);
-            txbSumDopOpl.TabIndex = 41;
-            // 
-            // customLabel41
-            // 
-            customLabel41.AutoSize = true;
-            customLabel41.BackColor = Color.Transparent;
-            customLabel41.Font = new Font("Arial", 8F);
-            customLabel41.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel41.Location = new Point(105, 10);
-            customLabel41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel41.Name = "customLabel41";
-            customLabel41.Size = new Size(71, 14);
-            customLabel41.TabIndex = 38;
-            customLabel41.Text = "Зарплата РТ";
-            // 
-            // txbSumZarpl
-            // 
-            txbSumZarpl.BackColor = Color.FromArgb(248, 248, 255);
-            txbSumZarpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSumZarpl.ErrorColor = Color.Red;
-            txbSumZarpl.ErrorMessage = null;
-            txbSumZarpl.Font = new Font("Arial", 10F);
-            txbSumZarpl.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSumZarpl.Location = new Point(106, 27);
-            txbSumZarpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSumZarpl.Name = "txbSumZarpl";
-            txbSumZarpl.ReadOnly = true;
-            txbSumZarpl.Size = new Size(90, 16);
-            txbSumZarpl.TabIndex = 39;
-            // 
-            // customLabel40
-            // 
-            customLabel40.AutoSize = true;
-            customLabel40.BackColor = Color.Transparent;
-            customLabel40.Font = new Font("Arial", 8F);
-            customLabel40.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel40.Location = new Point(103, 192);
-            customLabel40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel40.Name = "customLabel40";
-            customLabel40.Size = new Size(56, 14);
-            customLabel40.TabIndex = 34;
-            customLabel40.Text = "Зарплата";
-            // 
-            // txbSebz
-            // 
-            txbSebz.BackColor = Color.FromArgb(248, 248, 255);
-            txbSebz.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSebz.ErrorColor = Color.Red;
-            txbSebz.ErrorMessage = null;
-            txbSebz.Font = new Font("Arial", 10F);
-            txbSebz.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSebz.Location = new Point(104, 209);
-            txbSebz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSebz.Name = "txbSebz";
-            txbSebz.ReadOnly = true;
-            txbSebz.Size = new Size(90, 16);
-            txbSebz.TabIndex = 37;
-            // 
-            // customLabel39
-            // 
-            customLabel39.AutoSize = true;
-            customLabel39.BackColor = Color.Transparent;
-            customLabel39.Font = new Font("Arial", 8F);
-            customLabel39.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel39.Location = new Point(4, 124);
-            customLabel39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel39.Name = "customLabel39";
-            customLabel39.Size = new Size(21, 14);
-            customLabel39.TabIndex = 36;
-            customLabel39.Text = "кр.";
-            // 
-            // customLabel38
-            // 
-            customLabel38.AutoSize = true;
-            customLabel38.BackColor = Color.Transparent;
-            customLabel38.Font = new Font("Arial", 8F);
-            customLabel38.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel38.Location = new Point(4, 93);
-            customLabel38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel38.Name = "customLabel38";
-            customLabel38.Size = new Size(25, 14);
-            customLabel38.TabIndex = 35;
-            customLabel38.Text = "шв.";
-            // 
-            // customLabel37
-            // 
-            customLabel37.AutoSize = true;
-            customLabel37.BackColor = Color.Transparent;
-            customLabel37.Font = new Font("Arial", 8F);
-            customLabel37.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel37.Location = new Point(4, 63);
-            customLabel37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel37.Name = "customLabel37";
-            customLabel37.Size = new Size(28, 14);
-            customLabel37.TabIndex = 34;
-            customLabel37.Text = "вяз.";
-            // 
-            // txbSekKr
-            // 
-            txbSekKr.BackColor = Color.Pink;
-            txbSekKr.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSekKr.ErrorColor = Color.Red;
-            txbSekKr.ErrorMessage = null;
-            txbSekKr.Font = new Font("Arial", 10F);
-            txbSekKr.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSekKr.Location = new Point(32, 124);
-            txbSekKr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSekKr.Name = "txbSekKr";
-            txbSekKr.ReadOnly = true;
-            txbSekKr.Size = new Size(61, 16);
-            txbSekKr.TabIndex = 3;
-            // 
-            // txbSekShv
-            // 
-            txbSekShv.BackColor = Color.Pink;
-            txbSekShv.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSekShv.ErrorColor = Color.Red;
-            txbSekShv.ErrorMessage = null;
-            txbSekShv.Font = new Font("Arial", 10F);
-            txbSekShv.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSekShv.Location = new Point(32, 93);
-            txbSekShv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSekShv.Name = "txbSekShv";
-            txbSekShv.ReadOnly = true;
-            txbSekShv.Size = new Size(61, 16);
-            txbSekShv.TabIndex = 2;
-            // 
-            // txbSekVyaz
-            // 
-            txbSekVyaz.BackColor = Color.Pink;
-            txbSekVyaz.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSekVyaz.ErrorColor = Color.Red;
-            txbSekVyaz.ErrorMessage = null;
-            txbSekVyaz.Font = new Font("Arial", 10F);
-            txbSekVyaz.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSekVyaz.Location = new Point(32, 63);
-            txbSekVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSekVyaz.Name = "txbSekVyaz";
-            txbSekVyaz.ReadOnly = true;
-            txbSekVyaz.Size = new Size(61, 16);
-            txbSekVyaz.TabIndex = 1;
-            // 
-            // txbSek
-            // 
-            txbSek.BackColor = Color.FromArgb(248, 248, 255);
-            txbSek.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSek.ErrorColor = Color.Red;
-            txbSek.ErrorMessage = null;
-            txbSek.Font = new Font("Arial", 10F);
-            txbSek.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSek.Location = new Point(7, 28);
-            txbSek.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSek.Name = "txbSek";
-            txbSek.Size = new Size(90, 16);
-            txbSek.TabIndex = 0;
-            // 
             // gridArtDr
             // 
             gridArtDr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
@@ -2991,6 +2647,7 @@ namespace SewingProduction.Features.Articul
             gridView1.GridControl = gridArtDr;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView1.OptionsView.ColumnAutoWidth = false;
             gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // grArtDrEd
@@ -3065,7 +2722,6 @@ namespace SewingProduction.Features.Articul
             // 
             // groupBox2
             // 
-            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             groupBox2.BackColor = Color.Transparent;
             groupBox2.Controls.Add(chkPres);
             groupBox2.Controls.Add(chkStra);
@@ -3074,11 +2730,12 @@ namespace SewingProduction.Features.Articul
             groupBox2.Controls.Add(chkP);
             groupBox2.Controls.Add(chbIsFurnit);
             groupBox2.Controls.Add(chbIsUpak);
-            groupBox2.Location = new Point(1631, 254);
+            groupBox2.Enabled = false;
+            groupBox2.Location = new Point(1610, 246);
             groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox2.Size = new Size(99, 250);
+            groupBox2.Size = new Size(102, 259);
             groupBox2.TabIndex = 27;
             groupBox2.TabStop = false;
             groupBox2.Text = "Отделка";
@@ -3086,12 +2743,13 @@ namespace SewingProduction.Features.Articul
             // chkPres
             // 
             chkPres.AutoSize = true;
+            chkPres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkPres.Font = new Font("Arial", 10F);
             chkPres.ForeColor = Color.FromArgb(0, 0, 139);
             chkPres.Location = new Point(7, 220);
             chkPres.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkPres.Name = "chkPres";
-            chkPres.Size = new Size(64, 20);
+            chkPres.Size = new Size(70, 21);
             chkPres.TabIndex = 6;
             chkPres.Text = "пресс";
             chkPres.UseVisualStyleBackColor = true;
@@ -3099,12 +2757,13 @@ namespace SewingProduction.Features.Articul
             // chkStra
             // 
             chkStra.AutoSize = true;
+            chkStra.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkStra.Font = new Font("Arial", 10F);
             chkStra.ForeColor = Color.FromArgb(0, 0, 139);
             chkStra.Location = new Point(7, 190);
             chkStra.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkStra.Name = "chkStra";
-            chkStra.Size = new Size(72, 20);
+            chkStra.Size = new Size(78, 21);
             chkStra.TabIndex = 5;
             chkStra.Text = "стразы";
             chkStra.UseVisualStyleBackColor = true;
@@ -3112,12 +2771,13 @@ namespace SewingProduction.Features.Articul
             // chkBus
             // 
             chkBus.AutoSize = true;
+            chkBus.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkBus.Font = new Font("Arial", 10F);
             chkBus.ForeColor = Color.FromArgb(0, 0, 139);
             chkBus.Location = new Point(7, 159);
             chkBus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkBus.Name = "chkBus";
-            chkBus.Size = new Size(74, 20);
+            chkBus.Size = new Size(80, 21);
             chkBus.TabIndex = 4;
             chkBus.Text = "бусины";
             chkBus.UseVisualStyleBackColor = true;
@@ -3125,12 +2785,13 @@ namespace SewingProduction.Features.Articul
             // chkV
             // 
             chkV.AutoSize = true;
+            chkV.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkV.Font = new Font("Arial", 10F);
             chkV.ForeColor = Color.FromArgb(0, 0, 139);
             chkV.Location = new Point(7, 132);
             chkV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkV.Name = "chkV";
-            chkV.Size = new Size(83, 20);
+            chkV.Size = new Size(89, 21);
             chkV.TabIndex = 3;
             chkV.Text = "вышивка";
             chkV.UseVisualStyleBackColor = true;
@@ -3138,12 +2799,13 @@ namespace SewingProduction.Features.Articul
             // chkP
             // 
             chkP.AutoSize = true;
+            chkP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkP.Font = new Font("Arial", 10F);
             chkP.ForeColor = Color.FromArgb(0, 0, 139);
             chkP.Location = new Point(7, 104);
             chkP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkP.Name = "chkP";
-            chkP.Size = new Size(65, 20);
+            chkP.Size = new Size(71, 21);
             chkP.TabIndex = 2;
             chkP.Text = "принт";
             chkP.UseVisualStyleBackColor = true;
@@ -3151,12 +2813,13 @@ namespace SewingProduction.Features.Articul
             // chbIsFurnit
             // 
             chbIsFurnit.AutoSize = true;
+            chbIsFurnit.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsFurnit.Font = new Font("Arial", 10F);
             chbIsFurnit.ForeColor = Color.FromArgb(0, 0, 139);
             chbIsFurnit.Location = new Point(7, 43);
             chbIsFurnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsFurnit.Name = "chbIsFurnit";
-            chbIsFurnit.Size = new Size(98, 20);
+            chbIsFurnit.Size = new Size(104, 21);
             chbIsFurnit.TabIndex = 1;
             chbIsFurnit.Text = "фурнитура";
             chbIsFurnit.UseVisualStyleBackColor = true;
@@ -3164,12 +2827,13 @@ namespace SewingProduction.Features.Articul
             // chbIsUpak
             // 
             chbIsUpak.AutoSize = true;
+            chbIsUpak.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsUpak.Font = new Font("Arial", 10F);
             chbIsUpak.ForeColor = Color.FromArgb(0, 0, 139);
             chbIsUpak.Location = new Point(7, 16);
             chbIsUpak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsUpak.Name = "chbIsUpak";
-            chbIsUpak.Size = new Size(84, 20);
+            chbIsUpak.Size = new Size(90, 21);
             chbIsUpak.TabIndex = 0;
             chbIsUpak.Text = "упаковка";
             chbIsUpak.UseVisualStyleBackColor = true;
@@ -3186,7 +2850,6 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.Controls.Add(customButton3, 1, 0);
             tableLayoutPanel2.Controls.Add(customButton7, 0, 0);
             tableLayoutPanel2.Location = new Point(590, 963);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -3195,20 +2858,6 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.Size = new Size(792, 45);
             tableLayoutPanel2.TabIndex = 28;
-            // 
-            // customButton3
-            // 
-            customButton3.BackColor = Color.FromArgb(173, 216, 230);
-            customButton3.Font = new Font("Arial", 10F);
-            customButton3.ForeColor = Color.FromArgb(25, 25, 112);
-            customButton3.Location = new Point(117, 3);
-            customButton3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton3.Name = "customButton3";
-            customButton3.Size = new Size(105, 29);
-            customButton3.TabIndex = 1;
-            customButton3.Text = "Набор состав";
-            customButton3.UseVisualStyleBackColor = false;
-            customButton3.Click += customButton3_Click;
             // 
             // customButton7
             // 
@@ -3313,11 +2962,12 @@ namespace SewingProduction.Features.Articul
             // customCheckBox1
             // 
             customCheckBox1.AutoSize = true;
+            customCheckBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBox1.Font = new Font("Arial", 10F);
             customCheckBox1.ForeColor = Color.FromArgb(105, 75, 45);
             customCheckBox1.Location = new Point(7, 15);
             customCheckBox1.Name = "customCheckBox1";
-            customCheckBox1.Size = new Size(325, 20);
+            customCheckBox1.Size = new Size(331, 21);
             customCheckBox1.TabIndex = 34;
             customCheckBox1.Text = "Старая модель, на пересчете у экономистов";
             customCheckBox1.UseVisualStyleBackColor = true;
@@ -3325,6 +2975,7 @@ namespace SewingProduction.Features.Articul
             // groupBox3
             // 
             groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox3.Controls.Add(customButton3);
             groupBox3.Controls.Add(customLabel48);
             groupBox3.Controls.Add(customSimpleButton6);
             groupBox3.Controls.Add(customTextBox1);
@@ -3352,6 +3003,19 @@ namespace SewingProduction.Features.Articul
             groupBox3.Size = new Size(338, 398);
             groupBox3.TabIndex = 35;
             groupBox3.TabStop = false;
+            // 
+            // customButton3
+            // 
+            customButton3.BackColor = Color.FromArgb(255, 223, 196);
+            customButton3.Font = new Font("Arial", 10F);
+            customButton3.ForeColor = Color.FromArgb(139, 69, 19);
+            customButton3.Location = new Point(107, 55);
+            customButton3.Name = "customButton3";
+            customButton3.Size = new Size(206, 52);
+            customButton3.TabIndex = 39;
+            customButton3.Text = "Редактирование состава набора ";
+            customButton3.UseVisualStyleBackColor = false;
+            customButton3.Click += customButton3_Click;
             // 
             // customLabel48
             // 
@@ -3668,6 +3332,7 @@ namespace SewingProduction.Features.Articul
             // customGroupBox1
             // 
             customGroupBox1.BackColor = Color.Transparent;
+            customGroupBox1.Controls.Add(csButtonEdit);
             customGroupBox1.Controls.Add(txbNormt);
             customGroupBox1.Controls.Add(cgbTkanPurpose);
             customGroupBox1.Controls.Add(customLabel20);
@@ -3701,24 +3366,391 @@ namespace SewingProduction.Features.Articul
             customGroupBox1.TabStop = false;
             customGroupBox1.Text = "Затраты на изготовление";
             // 
+            // csButtonEdit
+            // 
+            csButtonEdit.Appearance.BackColor = Color.FromArgb(255, 223, 196);
+            csButtonEdit.Appearance.Font = new Font("Arial", 10F);
+            csButtonEdit.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            csButtonEdit.Appearance.Options.UseBackColor = true;
+            csButtonEdit.Appearance.Options.UseFont = true;
+            csButtonEdit.Appearance.Options.UseForeColor = true;
+            csButtonEdit.AppearanceDisabled.BackColor = Color.Green;
+            csButtonEdit.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            csButtonEdit.AppearanceDisabled.Options.UseBackColor = true;
+            csButtonEdit.AppearanceDisabled.Options.UseForeColor = true;
+            csButtonEdit.Location = new Point(2, 223);
+            csButtonEdit.Name = "csButtonEdit";
+            csButtonEdit.Size = new Size(235, 25);
+            csButtonEdit.TabIndex = 38;
+            csButtonEdit.Text = "Редактировать изделие";
+            csButtonEdit.Click += csButtonEdit_Click;
+            // 
+            // customGroupBox2
+            // 
+            customGroupBox2.BackColor = Color.Transparent;
+            customGroupBox2.Controls.Add(flowLayoutPanel1);
+            customGroupBox2.Controls.Add(customLabel45);
+            customGroupBox2.Controls.Add(txbSumZarpl);
+            customGroupBox2.Controls.Add(txbSumKomplNum);
+            customGroupBox2.Controls.Add(txbSek);
+            customGroupBox2.Controls.Add(customLabel44);
+            customGroupBox2.Controls.Add(txbSekVyaz);
+            customGroupBox2.Controls.Add(txbSumSebRaskr);
+            customGroupBox2.Controls.Add(txbSekShv);
+            customGroupBox2.Controls.Add(customLabel43);
+            customGroupBox2.Controls.Add(txbSekKr);
+            customGroupBox2.Controls.Add(txbSumStrVznos);
+            customGroupBox2.Controls.Add(customLabel37);
+            customGroupBox2.Controls.Add(customLabel42);
+            customGroupBox2.Controls.Add(customLabel38);
+            customGroupBox2.Controls.Add(txbSumDopOpl);
+            customGroupBox2.Controls.Add(customLabel39);
+            customGroupBox2.Controls.Add(customLabel41);
+            customGroupBox2.Controls.Add(txbSebz);
+            customGroupBox2.Controls.Add(customLabel40);
+            customGroupBox2.Location = new Point(1202, 246);
+            customGroupBox2.Name = "customGroupBox2";
+            customGroupBox2.Size = new Size(403, 258);
+            customGroupBox2.TabIndex = 39;
+            customGroupBox2.TabStop = false;
+            customGroupBox2.Text = "Норма/сек";
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = Color.Transparent;
+            flowLayoutPanel1.Controls.Add(customButton1);
+            flowLayoutPanel1.Controls.Add(customButton2);
+            flowLayoutPanel1.Controls.Add(customButton6);
+            flowLayoutPanel1.Location = new Point(207, 24);
+            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(187, 148);
+            flowLayoutPanel1.TabIndex = 11;
+            // 
+            // customButton1
+            // 
+            customButton1.BackColor = Color.FromArgb(230, 230, 250);
+            customButton1.Font = new Font("Arial", 9F);
+            customButton1.ForeColor = Color.FromArgb(106, 90, 205);
+            customButton1.Location = new Point(4, 3);
+            customButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButton1.Name = "customButton1";
+            customButton1.Size = new Size(180, 35);
+            customButton1.TabIndex = 0;
+            customButton1.Text = "Заполнить сек. и з\\пл";
+            customButton1.UseVisualStyleBackColor = false;
+            // 
+            // customButton2
+            // 
+            customButton2.BackColor = Color.FromArgb(230, 230, 250);
+            customButton2.Font = new Font("Arial", 9F);
+            customButton2.ForeColor = Color.FromArgb(106, 90, 205);
+            customButton2.Location = new Point(4, 44);
+            customButton2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButton2.Name = "customButton2";
+            customButton2.Size = new Size(180, 46);
+            customButton2.TabIndex = 1;
+            customButton2.Text = "Заполнить сек. и з\\пл для комплекта";
+            customButton2.UseVisualStyleBackColor = false;
+            // 
+            // customButton6
+            // 
+            customButton6.BackColor = Color.FromArgb(230, 230, 250);
+            customButton6.Font = new Font("Arial", 9F);
+            customButton6.ForeColor = Color.FromArgb(106, 90, 205);
+            customButton6.Location = new Point(4, 96);
+            customButton6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButton6.Name = "customButton6";
+            customButton6.Size = new Size(180, 46);
+            customButton6.TabIndex = 2;
+            customButton6.Text = "Несоответствие спр-ка и разд.труда";
+            customButton6.UseVisualStyleBackColor = false;
+            // 
+            // customLabel45
+            // 
+            customLabel45.AutoSize = true;
+            customLabel45.BackColor = Color.Transparent;
+            customLabel45.Font = new Font("Arial", 8F);
+            customLabel45.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel45.Location = new Point(104, 168);
+            customLabel45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel45.Name = "customLabel45";
+            customLabel45.Size = new Size(78, 14);
+            customLabel45.TabIndex = 46;
+            customLabel45.Text = "Компл. и нум.";
+            // 
+            // txbSumZarpl
+            // 
+            txbSumZarpl.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumZarpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumZarpl.ErrorColor = Color.Red;
+            txbSumZarpl.ErrorMessage = null;
+            txbSumZarpl.Font = new Font("Arial", 10F);
+            txbSumZarpl.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumZarpl.Location = new Point(106, 38);
+            txbSumZarpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumZarpl.Name = "txbSumZarpl";
+            txbSumZarpl.ReadOnly = true;
+            txbSumZarpl.Size = new Size(90, 16);
+            txbSumZarpl.TabIndex = 39;
+            // 
+            // txbSumKomplNum
+            // 
+            txbSumKomplNum.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumKomplNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumKomplNum.ErrorColor = Color.Red;
+            txbSumKomplNum.ErrorMessage = null;
+            txbSumKomplNum.Font = new Font("Arial", 10F);
+            txbSumKomplNum.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumKomplNum.Location = new Point(105, 185);
+            txbSumKomplNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumKomplNum.Name = "txbSumKomplNum";
+            txbSumKomplNum.ReadOnly = true;
+            txbSumKomplNum.Size = new Size(90, 16);
+            txbSumKomplNum.TabIndex = 47;
+            // 
+            // txbSek
+            // 
+            txbSek.BackColor = Color.FromArgb(248, 248, 255);
+            txbSek.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSek.ErrorColor = Color.Red;
+            txbSek.ErrorMessage = null;
+            txbSek.Font = new Font("Arial", 10F);
+            txbSek.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSek.Location = new Point(7, 39);
+            txbSek.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSek.Name = "txbSek";
+            txbSek.Size = new Size(90, 16);
+            txbSek.TabIndex = 0;
+            // 
+            // customLabel44
+            // 
+            customLabel44.AutoSize = true;
+            customLabel44.BackColor = Color.Transparent;
+            customLabel44.Font = new Font("Arial", 8F);
+            customLabel44.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel44.Location = new Point(105, 130);
+            customLabel44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel44.Name = "customLabel44";
+            customLabel44.Size = new Size(48, 14);
+            customLabel44.TabIndex = 44;
+            customLabel44.Text = "Раскрой";
+            // 
+            // txbSekVyaz
+            // 
+            txbSekVyaz.BackColor = Color.Pink;
+            txbSekVyaz.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekVyaz.ErrorColor = Color.Red;
+            txbSekVyaz.ErrorMessage = null;
+            txbSekVyaz.Font = new Font("Arial", 10F);
+            txbSekVyaz.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSekVyaz.Location = new Point(32, 74);
+            txbSekVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSekVyaz.Name = "txbSekVyaz";
+            txbSekVyaz.ReadOnly = true;
+            txbSekVyaz.Size = new Size(61, 16);
+            txbSekVyaz.TabIndex = 1;
+            // 
+            // txbSumSebRaskr
+            // 
+            txbSumSebRaskr.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumSebRaskr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumSebRaskr.ErrorColor = Color.Red;
+            txbSumSebRaskr.ErrorMessage = null;
+            txbSumSebRaskr.Font = new Font("Arial", 10F);
+            txbSumSebRaskr.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumSebRaskr.Location = new Point(106, 147);
+            txbSumSebRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumSebRaskr.Name = "txbSumSebRaskr";
+            txbSumSebRaskr.ReadOnly = true;
+            txbSumSebRaskr.Size = new Size(90, 16);
+            txbSumSebRaskr.TabIndex = 45;
+            // 
+            // txbSekShv
+            // 
+            txbSekShv.BackColor = Color.Pink;
+            txbSekShv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekShv.ErrorColor = Color.Red;
+            txbSekShv.ErrorMessage = null;
+            txbSekShv.Font = new Font("Arial", 10F);
+            txbSekShv.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSekShv.Location = new Point(32, 104);
+            txbSekShv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSekShv.Name = "txbSekShv";
+            txbSekShv.ReadOnly = true;
+            txbSekShv.Size = new Size(61, 16);
+            txbSekShv.TabIndex = 2;
+            // 
+            // customLabel43
+            // 
+            customLabel43.AutoSize = true;
+            customLabel43.BackColor = Color.Transparent;
+            customLabel43.Font = new Font("Arial", 8F);
+            customLabel43.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel43.Location = new Point(105, 93);
+            customLabel43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel43.Name = "customLabel43";
+            customLabel43.Size = new Size(70, 14);
+            customLabel43.TabIndex = 42;
+            customLabel43.Text = "Стр. взносы";
+            // 
+            // txbSekKr
+            // 
+            txbSekKr.BackColor = Color.Pink;
+            txbSekKr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekKr.ErrorColor = Color.Red;
+            txbSekKr.ErrorMessage = null;
+            txbSekKr.Font = new Font("Arial", 10F);
+            txbSekKr.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSekKr.Location = new Point(32, 135);
+            txbSekKr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSekKr.Name = "txbSekKr";
+            txbSekKr.ReadOnly = true;
+            txbSekKr.Size = new Size(61, 16);
+            txbSekKr.TabIndex = 3;
+            // 
+            // txbSumStrVznos
+            // 
+            txbSumStrVznos.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumStrVznos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumStrVznos.ErrorColor = Color.Red;
+            txbSumStrVznos.ErrorMessage = null;
+            txbSumStrVznos.Font = new Font("Arial", 10F);
+            txbSumStrVznos.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumStrVznos.Location = new Point(106, 110);
+            txbSumStrVznos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumStrVznos.Name = "txbSumStrVznos";
+            txbSumStrVznos.ReadOnly = true;
+            txbSumStrVznos.Size = new Size(90, 16);
+            txbSumStrVznos.TabIndex = 43;
+            // 
+            // customLabel37
+            // 
+            customLabel37.AutoSize = true;
+            customLabel37.BackColor = Color.Transparent;
+            customLabel37.Font = new Font("Arial", 8F);
+            customLabel37.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel37.Location = new Point(4, 74);
+            customLabel37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel37.Name = "customLabel37";
+            customLabel37.Size = new Size(28, 14);
+            customLabel37.TabIndex = 34;
+            customLabel37.Text = "вяз.";
+            // 
+            // customLabel42
+            // 
+            customLabel42.AutoSize = true;
+            customLabel42.BackColor = Color.Transparent;
+            customLabel42.Font = new Font("Arial", 8F);
+            customLabel42.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel42.Location = new Point(106, 57);
+            customLabel42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel42.Name = "customLabel42";
+            customLabel42.Size = new Size(69, 14);
+            customLabel42.TabIndex = 40;
+            customLabel42.Text = "Доп. оплата";
+            // 
+            // customLabel38
+            // 
+            customLabel38.AutoSize = true;
+            customLabel38.BackColor = Color.Transparent;
+            customLabel38.Font = new Font("Arial", 8F);
+            customLabel38.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel38.Location = new Point(4, 104);
+            customLabel38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel38.Name = "customLabel38";
+            customLabel38.Size = new Size(25, 14);
+            customLabel38.TabIndex = 35;
+            customLabel38.Text = "шв.";
+            // 
+            // txbSumDopOpl
+            // 
+            txbSumDopOpl.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumDopOpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumDopOpl.ErrorColor = Color.Red;
+            txbSumDopOpl.ErrorMessage = null;
+            txbSumDopOpl.Font = new Font("Arial", 10F);
+            txbSumDopOpl.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumDopOpl.Location = new Point(107, 74);
+            txbSumDopOpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumDopOpl.Name = "txbSumDopOpl";
+            txbSumDopOpl.ReadOnly = true;
+            txbSumDopOpl.Size = new Size(90, 16);
+            txbSumDopOpl.TabIndex = 41;
+            // 
+            // customLabel39
+            // 
+            customLabel39.AutoSize = true;
+            customLabel39.BackColor = Color.Transparent;
+            customLabel39.Font = new Font("Arial", 8F);
+            customLabel39.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel39.Location = new Point(4, 135);
+            customLabel39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel39.Name = "customLabel39";
+            customLabel39.Size = new Size(21, 14);
+            customLabel39.TabIndex = 36;
+            customLabel39.Text = "кр.";
+            // 
+            // customLabel41
+            // 
+            customLabel41.AutoSize = true;
+            customLabel41.BackColor = Color.Transparent;
+            customLabel41.Font = new Font("Arial", 8F);
+            customLabel41.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel41.Location = new Point(105, 21);
+            customLabel41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel41.Name = "customLabel41";
+            customLabel41.Size = new Size(71, 14);
+            customLabel41.TabIndex = 38;
+            customLabel41.Text = "Зарплата РТ";
+            // 
+            // txbSebz
+            // 
+            txbSebz.BackColor = Color.FromArgb(248, 248, 255);
+            txbSebz.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSebz.ErrorColor = Color.Red;
+            txbSebz.ErrorMessage = null;
+            txbSebz.Font = new Font("Arial", 10F);
+            txbSebz.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSebz.Location = new Point(104, 220);
+            txbSebz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSebz.Name = "txbSebz";
+            txbSebz.ReadOnly = true;
+            txbSebz.Size = new Size(90, 16);
+            txbSebz.TabIndex = 37;
+            // 
+            // customLabel40
+            // 
+            customLabel40.AutoSize = true;
+            customLabel40.BackColor = Color.Transparent;
+            customLabel40.Font = new Font("Arial", 8F);
+            customLabel40.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel40.Location = new Point(103, 203);
+            customLabel40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel40.Name = "customLabel40";
+            customLabel40.Size = new Size(56, 14);
+            customLabel40.TabIndex = 34;
+            customLabel40.Text = "Зарплата";
+            // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new Size(1742, 1010);
+            Controls.Add(customGroupBox2);
             Controls.Add(customGroupBox1);
             Controls.Add(layoutControl2);
             Controls.Add(groupBox3);
             Controls.Add(splitContainerControl1);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
             Controls.Add(lContrBoxMainInfo);
             Controls.Add(gridArtDr);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Articul";
             Text = "Справочник изделий";
+            FormClosing += Articul_FormClosing;
             Load += Articul_Load;
             ((System.ComponentModel.ISupportInitialize)gridArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
@@ -3749,7 +3781,6 @@ namespace SewingProduction.Features.Articul
             lContrBoxMainInfo.ResumeLayout(false);
             lContrBoxMainInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
-            flowLayoutPanel1.ResumeLayout(false);
             cgbTkanPurpose.ResumeLayout(false);
             cgbTkanPurpose.PerformLayout();
             cgbKfKach.ResumeLayout(false);
@@ -3762,8 +3793,6 @@ namespace SewingProduction.Features.Articul
             cgbTkanNorm.PerformLayout();
             cgbTkanBrak.ResumeLayout(false);
             cgbTkanBrak.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArtDr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
@@ -3789,6 +3818,9 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
             customGroupBox1.ResumeLayout(false);
             customGroupBox1.PerformLayout();
+            customGroupBox2.ResumeLayout(false);
+            customGroupBox2.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -3851,8 +3883,6 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chbKombIzd;
         private CustomCheckBox chbKombDet;
         private CustomCheckBox chbArh;
-        //private System.Windows.Forms.GroupBox grBoxMainInfo;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private CustomSimpleButton customButtonCopy;
         private CustomSimpleButton customButtonKompl;
         private CustomTextBox txbNorm_t1;
@@ -3903,19 +3933,6 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabel34;
         private CustomLabel customLabel35;
         private CustomLabel customLabel36;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private CustomTextBox txbSek;
-        private CustomTextBox txbSekVyaz;
-        private CustomTextBox txbSekKr;
-        private CustomTextBox txbSekShv;
-        private CustomLabel customLabel37;
-        private CustomLabel customLabel39;
-        private CustomLabel customLabel38;
-        private CustomButton customButton1;
-        private CustomButton customButton2;
-        private CustomButton customButton6;
-        private CustomLabel customLabel40;
-        private CustomTextBox txbSebz;
         private DevExpress.XtraGrid.GridControl gridArtDr;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.BindingSource bsArtDr;
@@ -3927,7 +3944,6 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraGrid.Columns.GridColumn grArtDrKod_fur;
         private DevExpress.XtraGrid.Columns.GridColumn grArtDrKod_furn_ar;
         private DevExpress.XtraGrid.Columns.GridColumn grArtDrData_nitki;
-        private System.Windows.Forms.GroupBox groupBox2;
         private CustomCheckBox chbIsUpak;
         private CustomCheckBox chkP;
         private CustomCheckBox chbIsFurnit;
@@ -3997,16 +4013,6 @@ namespace SewingProduction.Features.Articul
         private CustomTextBox txbOpis_t2;
         private CustomTextBox txbOpis_t4;
         private CustomTextBox txbOpis_t3;
-        private CustomLabel customLabel41;
-        private CustomTextBox txbSumZarpl;
-        private CustomLabel customLabel44;
-        private CustomTextBox txbSumSebRaskr;
-        private CustomLabel customLabel43;
-        private CustomTextBox txbSumStrVznos;
-        private CustomLabel customLabel42;
-        private CustomTextBox txbSumDopOpl;
-        private CustomLabel customLabel45;
-        private CustomTextBox txbSumKomplNum;
         private CustomCheckBox customCheckBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private CustomTextBox txbSebDop;
@@ -4040,6 +4046,32 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraLayout.LayoutControl layoutControl2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private CustomGroupBox customGroupBox1;
+        private CustomGroupBox customGroupBox2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private CustomButton customButton1;
+        private CustomButton customButton2;
+        private CustomButton customButton6;
+        private CustomLabel customLabel45;
+        private CustomTextBox txbSumZarpl;
+        private CustomTextBox txbSumKomplNum;
+        private CustomTextBox txbSek;
+        private CustomLabel customLabel44;
+        private CustomTextBox txbSekVyaz;
+        private CustomTextBox txbSumSebRaskr;
+        private CustomTextBox txbSekShv;
+        private CustomLabel customLabel43;
+        private CustomTextBox txbSekKr;
+        private CustomTextBox txbSumStrVznos;
+        private CustomLabel customLabel37;
+        private CustomLabel customLabel42;
+        private CustomLabel customLabel38;
+        private CustomTextBox txbSumDopOpl;
+        private CustomLabel customLabel39;
+        private CustomLabel customLabel41;
+        private CustomTextBox txbSebz;
+        private CustomLabel customLabel40;
+        private CustomGroupBox groupBox2;
+        private CustomSimpleButton csButtonEdit;
         private CustomButton customButton3;
     }
 }

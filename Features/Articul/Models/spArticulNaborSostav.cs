@@ -1,7 +1,6 @@
-﻿using System.ComponentModel;
+﻿using SewingProduction.Interfaces;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using SewingProduction.Interfaces;
-using SewingProduction.Core.Models;
 
 namespace SewingProduction.Features.Articul.Models
 {

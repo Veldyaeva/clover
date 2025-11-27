@@ -213,7 +213,11 @@ namespace SewingProduction.Helpers
                 throw;
             }
         }
-
+        /// <summary>
+        /// Транзакцию нельзя использовать через using, потому что using закрывает и уничтожает соединение сразу после выхода из блока,
+        /// и возвращает транзакцию, которая привязана к уже закрытому соединению
+        /// </summary>
+        /// <returns></returns>
         public async Task<SqlTransaction> BeginTransactionAsync()
         {
             _currentConnection = new SqlConnection(_connectionString);

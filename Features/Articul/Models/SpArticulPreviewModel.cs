@@ -36,7 +36,20 @@ namespace SewingProduction.Features.Articul.Models
         public decimal Kf_tkan_kach6 { get; set; }
         [NotMapped]
         public decimal Kf_tkan_kach7 { get; set; }
-
+        [NotMapped]
+        public decimal? Brak_percent1 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent2 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent3 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent4 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent5 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent6 { get; set; }
+        [NotMapped]
+        public decimal? Brak_percent7 { get; set; }
 
 
 
