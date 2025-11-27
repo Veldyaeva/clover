@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.DataAccess.Native.Excel;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
@@ -106,6 +113,81 @@ namespace SewingProduction.Features.Articul.Service
                 { "@sostav", model.Sostav}
             });
         }
+        public async Task UpdateNaborJsonAsync(
+        string kod,
+        int oldGostMain,
+        int newGostMain,
+        int? oldGroupMain,
+        int? newGroupMain,
+        List<SpArticulNaborSostav> newList,
+        List<SpArticulNaborSostav> oldList)
+        {
+            var head = new
+            {
+                kod = kod,
+                id_gost_main_old = oldGostMain,
+                id_gost_main_new = newGostMain,
+                ag_id_main_old = oldGroupMain,
+                ag_id_main_new = newGroupMain
+            };
+            var items = newList
+            .GroupBy(r => r.Tk_id)
+            .Select(g =>
+            {
+                var newRow = g.First();
+                var oldRow = oldList.FirstOrDefault(x => x.Tk_id == g.Key);
+                if (oldRow == null) return null;
+
+                if (oldRow.Id_gost == newRow.Id_gost &&
+                    oldRow.Ag_id == newRow.Ag_id &&
+                    oldRow.Sostav == newRow.Sostav)
+                    return null;
+
+                return new
+                {
+                    kod = kod,
+                    tk_id = g.Key,
+                    id_gost_old = oldRow.Id_gost,
+                    id_gost_new = newRow.Id_gost,
+                    ag_id_old = oldRow.Ag_id,
+                    ag_id_new = newRow.Ag_id,
+                    sostav_old = oldRow.Sostav,
+                    sostav_new = newRow.Sostav,
+                    razm_old = oldRow.Razm,
+                    razm_new = newRow.Razm
+                };
+            })
+            .Where(x => x != null)
+            .ToList();
+
+            var finalJson = new
+            {
+                head = head,
+                items = items
+            };
+
+            //string json = JsonConvert.SerializeObject(payload);
+
+            //var param = new Dictionary<string, object>
+            //    {
+            //        { "@ListJson", json }
+            //    };
+
+            //await _dbHelper.ExecuteNonQueryAsync(
+            //    "EXEC dbo.UpdateNaborFromJson @ListJson",
+            //    param
+            //);
+
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(finalJson, Newtonsoft.Json.Formatting.Indented);
+
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string filePath = Path.Combine(desktopPath, $"NaborUpdate_{DateTime.Now:yyyyMMdd_HHmmss}.json");
+
+            File.WriteAllText(filePath, json, Encoding.UTF8);
+            Process.Start("notepad.exe", filePath);
+            await Task.CompletedTask;
+        }
+
         public async Task<List<GostRazmerNabViewModel>> GetGostRazmerSostAsync(int? idGost = null)
         {
             string query = @"SELECT id_razm_nab as Id_razmer, Razm, id_gost_nab AS Id_gost, id_gost as Id_gost_parent

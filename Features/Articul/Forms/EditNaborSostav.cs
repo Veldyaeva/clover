@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraDiagram.Base;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Filtering;
@@ -28,14 +29,15 @@ namespace SewingProduction.Features.Articul.Forms
         BindingList<SpArticulNaborSostav> _listOld;
         BindingSource _bsOld = new BindingSource();
         int oldAgIdBeforeEdit = 0;
-        ArticulModel articulNabor;
+        ArticulModel articulNabor_old = new ArticulModel();
+        ArticulModel articulNabor_new = new ArticulModel();
         public EditNaborSostav()
         {
             InitializeComponent();
         }
         public EditNaborSostav(UserClass user, ArticulModel Obj) : base(user)
         {
-            articulNabor = Obj;
+            articulNabor_old = Obj;
             InitializeComponent();
             DisableSearchForGroupEditor();
         }
@@ -50,6 +52,7 @@ namespace SewingProduction.Features.Articul.Forms
             ArticulNaborColumns();
             ArticulNaborColumnsOld();
             SetupSearchLookUpEditGost();
+            ValidateGridState();
         }
         private void DisableSearchForGroupEditor()
         {
@@ -63,13 +66,13 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task LoadNabor()
         {
-            articulNabor = await _articulDataService.GetArtByKodAsync(articulNabor.Kod);
+            articulNabor_old = await _articulDataService.GetArtByKodAsync(articulNabor_old.Kod);
             assortModelBindingSource.DataSource = await _ANSDataService.GetAssortAsync();
             tvnModelBindingSource.DataSource = await _ANSDataService.GetTvnAsync();
 
-            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync(articulNabor.Id_gost, articulNabor.Kod);
+            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync(articulNabor_old.Id_gost, articulNabor_old.Kod);
 
-            _bsGrupForNabor.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { articulNabor.Id_gost }, 3);
+            _bsGrupForNabor.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { articulNabor_old.Id_gost }, 3);
 
             currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
             if (currentItem != null)
@@ -79,8 +82,7 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task LoadSostav()
         {
-            // --- основная таблица ---
-            var list = await _ANSDataService.GetByKodAsync(articulNabor.Kod);
+            var list = await _ANSDataService.GetByKodAsync(articulNabor_old.Kod);
             _listCurrent = new BindingList<SpArticulNaborSostav>(list);
             _listOld = new BindingList<SpArticulNaborSostav>(
                 list.Select(x => new SpArticulNaborSostav
@@ -89,11 +91,12 @@ namespace SewingProduction.Features.Articul.Forms
                     Txt_v = x.Txt_v,
                     Kod = x.Kod,
                     Ta_id = x.Ta_id,
+                    Tk_id = x.Tk_id,
                     Tk_name = x.Tk_name.Trim(),
                     Id_gost = x.Id_gost,
                     N_i = x.N_i.Trim(),
                     Ag_id = x.Ag_id,
-                    Sostav = x.Sostav.Trim(),
+                    Sostav = x.Sostav,
                     Id_razm_nab = x.Id_razm_nab,
                     Razm = x.Razm.Trim(),
                     razm_all = x.razm_all
@@ -108,6 +111,8 @@ namespace SewingProduction.Features.Articul.Forms
 
             _bsGostForSostav.DataSource = await _ANSDataService.GetGostSostavAsync();
             //_bsGrupForSostav.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(articulNabor.Id_gost);
+            //GridViewNabor.ExpandAllGroups();
+            //GridViewNabor_Old.ExpandAllGroups();
         }
         private async Task LoadAllGroupsAsync()
         {
@@ -143,19 +148,19 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task SetupPictursBox()
         {
-            customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor.Kod);
+            customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
         }
         private void ArticulNaborColumnsOld()
         {
-            customTextBoxArtN_Old.Text = articulNabor.Articul;
-            customTextBoxGostN_Old.Text = articulNabor.Gost;
-            customTextBoxGrupN_Old.Text = articulNabor.Grup;
+            customTextBoxArtN_Old.Text = articulNabor_old.Articul;
+            customTextBoxGostN_Old.Text = articulNabor_old.Gost;
+            customTextBoxGrupN_Old.Text = articulNabor_old.Grup;
         }
         private void ArticulNaborColumns()
         {
-            customTextBoxArtN.Text = articulNabor.Articul;
-            customSearchLookUpEditGostN.EditValue = articulNabor.Id_gost.ToString();
-            customSearchLookUpEditGrupN.EditValue = articulNabor.Ag_id.ToString();
+            customTextBoxArtN.Text = articulNabor_old.Articul;
+            customSearchLookUpEditGostN.EditValue = articulNabor_old.Id_gost.ToString();
+            customSearchLookUpEditGrupN.EditValue = articulNabor_old.Ag_id.ToString();
         }
         private void HideTechnicalColumns()
         {
@@ -584,6 +589,7 @@ namespace SewingProduction.Features.Articul.Forms
             view.UpdateCurrentRow();
             spArticulNaborSostavBindingSource.EndEdit();
             view.RefreshData();
+            ValidateGridState();
         }
 
         #endregion
@@ -605,7 +611,6 @@ namespace SewingProduction.Features.Articul.Forms
                     var row = v.GetRow(i) as SpArticulNaborSostav;
                     if (row == null) continue;
 
-                    // новый gost уже проставлен AutoApplyIdGostAfterChangingNabor
                     int newGost = row.Id_gost;
                     int id_razm_nab = row.Id_razm_nab;
 
@@ -628,19 +633,101 @@ namespace SewingProduction.Features.Articul.Forms
                 }
             });
         }
+        #endregion
+        #region Проверка полей
+        bool changedRazmer = false;
+        bool changedSostav = false;
+        private async void ValidateGridState()
+        {
+            customCheckBoxVerified.Checked = false;
+            customCheckBoxVerified.Enabled = false;
+            cLabelInfo.ForeColor = System.Drawing.Color.Red;
 
+            var view = GridViewNabor;
+            if (view.DataRowCount == 0)
+            {
+                cLabelInfo.Text = "Нет строк в составе";
+                return;
+            }
+
+            int idGostNabor = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
+            var allGosts = await _ANSDataService.GetGostSostavAsync(idGostNabor);
+
+            bool emptySostav = false;
+            bool emptyGost = false;
+            bool invalidGost = false;
+            bool emptyGroup = false;
+            bool emptyRazmer = false;
+
+            for (int i = 0; i < view.DataRowCount; i++)
+            {
+                var row = view.GetRow(i) as SpArticulNaborSostav;
+                if (row == null) continue;
+
+                if (string.IsNullOrWhiteSpace(row.Sostav))
+                    emptySostav = true;
+
+                if (row.Id_gost <= 0)
+                    emptyGost = true;
+
+                if (row.Id_gost <= 0)
+                {
+                    emptyGost = true;
+                }
+                else
+                {
+                    bool exists = allGosts.Any(g => g.Id_gost == row.Id_gost);
+                    if (!exists)
+                        invalidGost = true;
+                }
+
+                if (row.Ag_id <= 0)
+                    emptyGroup = true;
+
+                if (row.Id_razm_nab <= 0 || string.IsNullOrWhiteSpace(row.Razm))
+                    emptyRazmer = true;
+            }
+
+            if (emptyGost)
+            {
+                cLabelInfo.Text = "Не выбран ГОСТ состава";
+                return;
+            }
+            if (invalidGost)
+            {
+                cLabelInfo.Text = "Выбран недопустимый ГОСТ состава";
+                return;
+            }
+            if (emptyGroup)
+            {
+                cLabelInfo.Text = "Не выбрана группа по ГОСТу состава";
+                return;
+            }
+            if (emptySostav)
+            {
+                cLabelInfo.Text = "Поле Состав не заполнено";
+                return;
+            }
+            if (emptyRazmer)
+            {
+                cLabelInfo.Text = "Поле Размер не заполнено";
+                return;
+            }
+            cLabelInfo.Text = "Готово к изменениям";
+            customCheckBoxVerified.Enabled = true;
+            cLabelInfo.ForeColor = System.Drawing.Color.Green;
+        }
 
         #endregion
 
-
         #region Обработчики кнопок
-        private void customButtonSaveNabor_Click(object sender, EventArgs e)
-        {
-        }
-        private async void customButtonSave_Click(object sender, EventArgs e)
+        private async void customButtonSaveNabor_Click(object sender, EventArgs e)
         {
             try
             {
+                GridViewNabor.PostEditor();
+                GridViewNabor.UpdateCurrentRow();
+                spArticulNaborSostavBindingSource.EndEdit();
                 currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
                 if (currentItem == null)
                 {
@@ -662,12 +749,25 @@ namespace SewingProduction.Features.Articul.Forms
                     if (result != DialogResult.Yes)
                         return;
                 }
-                await _ANSDataService.UpdateArticulNaborSostavAsync(currentItem, oldAgIdBeforeEdit);
-                spArticulNaborSostavBindingSource.DataSource = await _ANSDataService.GetByKodAsync(articulNabor.Kod);
-                GridViewNabor_Old.ExpandAllGroups();
+
+                int newGostMain = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
+                int? newGroupMain = Convert.ToInt32(customSearchLookUpEditGrupN.EditValue);
+
+                await _ANSDataService.UpdateNaborJsonAsync(
+                    currentItem.Kod.Substring(0, 7),
+                    articulNabor_old.Id_gost,
+                    newGostMain,
+                    articulNabor_old.Ag_id,
+                    newGroupMain, 
+                    _listCurrent.ToList(), 
+                    _listOld.ToList());
+                customGridControlNabor_Old.DataSource = await _ANSDataService.GetByKodAsync(articulNabor_old.Kod);
+                GridViewNabor.ExpandAllGroups();
+                //GridViewNabor_Old.ExpandAllGroups();
                 MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 oldAgIdBeforeEdit = currentItem.Ag_id;
+                //await LoadSostav();
             }
             catch (Exception ex)
             {
