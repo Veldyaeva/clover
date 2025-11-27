@@ -165,9 +165,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             if (lookUpEdit.EditValue != null)
             {
                 var item = _appeZakrViewBindingSource.List.OfType<appeZakrNewView>()
-                .FirstOrDefault(x => x.Nom.Equals(lookUpEdit.EditValue));
+                .FirstOrDefault(x => x.Nom.Equals(lookUpEdit.EditValue)) as appeZakrNewView;
                 if (item != null)
                 {
+                    MessageBox.Show($"{item.Nom}");
                     _appeZakrViewBindingSource.Position = _appeZakrViewBindingSource.IndexOf(item);
                 }
             }

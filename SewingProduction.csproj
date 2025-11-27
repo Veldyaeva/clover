@@ -81,6 +81,7 @@
     <None Remove="Help\Features\UserDistribution\Forms\UserProfile.html" />
     <None Remove="Help\Help.html" />
     <None Remove="Resources\gray_spinner.gif" />
+    <None Remove="Resources\icons8-сердце.gif" />
     <None Remove="Resources\loading_dude.gif" />
   </ItemGroup>
 
@@ -215,6 +216,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIcons\favicon.ico" />
+    <Content Include="Resources\icons8-сердце.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 
@@ -260,6 +264,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Update="Resources\free-icon-cursor-6825137.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -271,6 +278,8 @@
     <Folder Include="Features\SockProduction\Models\" />
     <Folder Include="Features\SockProduction\Services\" />
     <Folder Include="Features\Sprav\Helpers\" />
+    <Folder Include="Features\Tabel\Models\" />
+    <Folder Include="Features\Tabel\Services\" />
   </ItemGroup>
 
   <ItemGroup>

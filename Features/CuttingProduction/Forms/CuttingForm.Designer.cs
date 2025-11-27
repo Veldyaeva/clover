@@ -1987,6 +1987,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             Controls.Add(layoutControl2);
             Name = "CuttingForm";
             Text = "Раскройный цех";
+            FormClosed += CuttingForm_FormClosed;
             Load += CuttingForm_Load;
             ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
             layoutControl2.ResumeLayout(false);

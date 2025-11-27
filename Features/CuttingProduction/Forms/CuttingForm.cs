@@ -57,11 +57,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             await Task.WhenAll(bindingsTask);
             _loadingScreen.CreateOverlaySpinner(this);
             _loadingScreen.ShowOverlay();
+            this.Cursor = Cursors.WaitCursor;
             try
             {
                 await LoadRzuAsync();
             }
-            finally { _loadingScreen.HideOverlay(); }
+            finally { _loadingScreen.HideOverlay(); this.Cursor = Cursors.Default; }
         }
         private async Task InitializeBindingsAsync()
         {
@@ -585,6 +586,17 @@ namespace SewingProduction.Features.CuttingProduction.Forms
         private void customGridRzu_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void CuttingForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Load -= CuttingForm_Load;
+            gridViewRzu.FocusedRowChanged -= gridViewRzu_FocusedRowChanged;
+            _rzuBindingList.Clear();
+            _rzuBindingSource.Clear();
+            /*GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();*/
         }
     }
 }
