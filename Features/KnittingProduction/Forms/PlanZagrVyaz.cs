@@ -473,10 +473,55 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridSmenZadanyColumnChasDoneSmenProc.FieldName = "chasDoneSmenProc";
                 bandedGridSmenZadanyColumnChasRemainSmen.FieldName = "chasRemainSmen";
                 bandedGridSmenZadanyColumnChasConfirmedSmen.FieldName = "chasConfirmedSmen";
+                bandedGridSmenZadanyColumnTypeID.FieldName = "typeID";
+                bandedGridSmenZadanyColumnTypeName.FieldName = "typeName";
+                bandedGridSmenZadanyColumnFio.FieldName = "fio";
+                bandedGridSmenZadanyColumnKwsID.FieldName = "kwsID";
 
+                advBandedGridViewSmenZadany.OptionsView.ShowColumnHeaders = false;
+                advBandedGridViewSmenZadany.OptionsView.ShowGroupPanel = false;
+                bandedGridSmenZadanyColumnChasNaznZad.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                //bandedGridSmenZadanyColumnChasNaznZad.DisplayFormat.FormatString = "#,0.00;-#,0.00;";
+                bandedGridSmenZadanyColumnChasNaznZad.DisplayFormat.FormatString = "{ 0:#.##}";
                 //advBandedGridViewSmenZadany.CustomDrawBandHeader += AdvBandedGridView1_CustomDrawBandHeader;
                 //advBandedGridViewSmenZadany.CustomDrawColumnHeader += AdvBandedGridView1_CustomDrawColumnHeader;
-                advBandedGridViewSmenZadany.ColumnPanelRowHeight = 40; // можно больше/меньше
+                //advBandedGridViewSmenZadany.ColumnPanelRowHeight = 40; // можно больше/меньше
+                _gridHelper.AutoRowFilterConfig(advBandedGridViewSmenZadany, 0);
+
+                //advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
+                //{
+                //    GridView view = s as GridView;
+                //    int rowHandle = e.RowHandle;
+
+                //    int level = view.GetRowLevel(rowHandle);
+
+                //    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
+                //    //groupInfo.GroupExpanded = true;
+
+                //    if (level == 0) // зона
+                //    {
+                //        //string mg = view.GetGroupRowValue(e.RowHandle, view.Columns["yearMonthText"]).ToString();
+                //        //groupInfo.GroupText = $"{mg}";
+                //        //int year = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["yearNumberPlanDate"]));
+                //        //int month = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["monthNumberPlanDate"]));
+                //        //DateTime dt = new DateTime(year, month, 1);
+                //        //string formatted = dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"));
+
+                //        //groupInfo.GroupText = $"Месяц: {formatted}";
+                //        //groupInfo.GroupText = $"Месяц: {dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
+                //        //groupInfo.GroupText = $"{dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
+
+                //        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])}";
+                //    }
+                //    if (level == 1) // ФИО
+                //    {
+                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} таб.№ {view.GetGroupRowValue(e.RowHandle, view.Columns["kwsTabstart"])}";
+                //    }
+                //    if (level == 2) // тип данных
+                //    {
+                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["typeName"])}";
+                //    }
+                //};
                 #endregion
 
                 #region описание gridControlArtNormN "заголовок РТ"
@@ -609,6 +654,38 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
+            }
+        }
+        private void SetGroupExpandState()
+        {
+            var view = advBandedGridViewSmenZadany;
+
+            // Обходим ВСЕ группы (а не строки данных)
+            for (int rowHandle = view.RowCount - 1; rowHandle >= 0; rowHandle--)
+            {
+                if (!view.IsGroupRow(rowHandle))
+                    continue;
+
+                int level = view.GetRowLevel(rowHandle);
+
+                // Нас интересует только 3-й уровень (level = 2, если нумерация с 0)
+                if (level != 2)
+                    continue;
+
+                // Получаем значение 3-го уровня группировки — "Тип данных"
+                var groupValue = view.GetGroupRowValue(rowHandle);
+
+                // Здесь groupValue = код типа: 1 или 2
+                int type = Convert.ToInt32(groupValue);
+
+                if (type == 1)  // м/ч
+                {
+                    view.SetRowExpanded(rowHandle, true);
+                }
+                else if (type == 2) // ч/ч
+                {
+                    view.SetRowExpanded(rowHandle, false);
+                }
             }
         }
         //private void AdvBandedGridView1_CustomDrawBandHeader(object sender, BandHeaderCustomDrawEventArgs e)
@@ -1516,6 +1593,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //await LoadSmenZadanyVyazMachineDataAsync();
                 //await LoadSmenZadanyVyazEmpDataAsync();
                 await LoadSmenZadanyVyazDataAsync();
+                SetGroupExpandState();
                 //ConfigureTableViewAdvanced(gridViewPZVOperList as TableView);
                 //ConfigureGridView(gridViewPZVOperList);
                 //ConfigureTextColumnForPartialSearch(gridColumnPZVOperListOlOperName);
@@ -3874,8 +3952,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
                 switch (buttonIndex)
                 {
-                    case 5:
-                        MessageBox.Show("Обновление сменного задания");
+                    case 4:
+                        //MessageBox.Show("Обновление сменного задания");
+                        await LoadSmenZadanyVyazDataAsync();
+                        SetGroupExpandState();
                         break;
                         //switch (customTabControl1.SelectedTabPageIndex)
                         //{

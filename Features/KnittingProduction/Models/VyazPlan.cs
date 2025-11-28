@@ -409,6 +409,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public string machNazn { get; set; }
         [NotMapped] public int kwsTabStart { get; set; }
         [NotMapped] public string fio { get; set; }
+        [NotMapped] public string kwsID { get; set; }
         [NotMapped] public int kwsKmaID { get; set; }
         [NotMapped] public string kmaNumber { get; set; }
         [NotMapped] public int kwsmlKmlID { get; set; }
