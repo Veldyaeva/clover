@@ -217,7 +217,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     Caption = "Header",
                     UnboundType = DevExpress.Data.UnboundColumnType.String,
                     // Строка заголовка: Пачка | Расчёт | Размер | Кол-во
-                    UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Расчёт: ', [pzvNom], ' | Размер: ', [razm], ' | Кол-во: ', [pzvKol])",
+                    UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Расчёт: ', [pzvNom], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
                     Visible = false,
                     OptionsColumn = { ShowInCustomizationForm = false }
                 };
@@ -238,8 +238,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.OptionsView.ShowGroupPanel = false;
                 advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
 
-                // На случай прежней подписки — отключаем переотрисовку групп (если была)
-                // (метод больше не используется)
             }
             finally
             {

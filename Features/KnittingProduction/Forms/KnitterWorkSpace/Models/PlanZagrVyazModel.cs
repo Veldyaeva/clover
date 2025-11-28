@@ -24,6 +24,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvNom { get; set; }
         public int? pzvKol { get; set; }
         public int pzvSek { get; set; }
+        public int pzvRKol { get; set; }
         public DateTime? pzvDateStart { get; set; }
         public DateTime? pzvDateEnd { get; set; }
         public int pzvKolNazn { get; set; }
