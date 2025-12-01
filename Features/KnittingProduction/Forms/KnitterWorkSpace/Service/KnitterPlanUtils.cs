@@ -32,7 +32,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 pzvNom = parent.pzvNom,
                 pzvKol = parent.pzvKol,
                 pzvSek = parent.pzvSek,
-                pzvRKol = parent.pzvRKol,
                 pzvDateStart = parent.pzvDateStart,
                 pzvDateEnd = parent.pzvDateEnd,
                 pzvKolNazn = parent.pzvKolNazn,
