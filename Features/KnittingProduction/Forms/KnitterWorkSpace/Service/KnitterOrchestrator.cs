@@ -76,6 +76,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// Должно создать дополнительную запись в плановой таблице с оставшимся количеством.
         /// </summary>
         public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
+
+        /// <summary>
+        /// Фиксирует начало смены в таблице ACE.dbo.knitWorkingShift и возвращает kwsID.
+        /// </summary>
+        public Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, int? kmsId) => _repo.StartWorkingShiftAsync(tabStart, kmaId, kmsId);
+
+        /// <summary>
+        /// Фиксирует завершение смены (kwsDateEnd/kwsTabEnd) по kwsID.
+        /// </summary>
+        public Task EndWorkingShiftAsync(int shiftId, int tabEnd) => _repo.EndWorkingShiftAsync(shiftId, tabEnd);
     }
 }
 

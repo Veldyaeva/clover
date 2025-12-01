@@ -40,6 +40,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Таймер для отслеживания бездействия пользователя (1 минута).
         /// </summary>
         private readonly System.Windows.Forms.Timer _idleTimer = new System.Windows.Forms.Timer();
+        /// <summary>
+        /// Таймер смены (идёт с момента нажатия 'Начать смену' до 'Закончить смену').
+        /// </summary>
+        private readonly System.Windows.Forms.Timer _shiftTimer = new System.Windows.Forms.Timer();
+        /// <summary>
+        /// Флаг активной смены.
+        /// </summary>
+        private bool _isShiftRunning = false;
+        /// <summary>
+        /// Текущая запись смены (kwsID) для закрытия.
+        /// </summary>
+        private int? _currentShiftId = null;
+        /// <summary>
+        /// Время старта смены.
+        /// </summary>
+        private DateTime? _shiftStartTime = null;
 
         /// <summary>
         /// Список ФИО для повторного показа сплеша при бездействии.
@@ -75,6 +91,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
+                SetupShiftTimer();
             }
             catch (Exception ex)
             {
@@ -99,6 +116,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 this.Load += async (s, e) => await InitializeAsync();
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
+                SetupShiftTimer();
             }
             catch (Exception ex)
             {
@@ -297,6 +315,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
+                if (_isShiftRunning)
+                {
+                    if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
+                    {
+                        XtraMessageBox.Show(this, "Не удалось определить табель при завершении смены.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
+                    {
+                        await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
+                    }
+
+                    _shiftTimer.Stop();
+                    _isShiftRunning = false;
+                    _shiftStartTime = null;
+                    _currentShiftId = null;
+                    simpleButton2.Text = "Начать смену";
+                    simpleLabelItem1.Text = string.Empty;
+                    return;
+                }
+
                 if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int selectedTab) || selectedTab <= 0)
                 {
                     XtraMessageBox.Show(this, "Выберите сотрудника для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -327,6 +366,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(selectedTab);
                 _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+
+                // Успешный старт смены: фиксируем в БД, меняем текст кнопки и запускаем таймер
+                int? kmaId = null; // при необходимости подтянуть из контекста
+                int? kmsId = null;
+                try
+                {
+                    _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, kmaId, kmsId);
+                }
+                catch (Exception exStart)
+                {
+                    XtraMessageBox.Show(this, $"Не удалось записать начало смены: {exStart.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                _isShiftRunning = true;
+                _shiftStartTime = DateTime.Now;
+                simpleButton2.Text = "Закончить смену";
+                simpleLabelItem1.Text = "Смена: 00:00:00";
+                _shiftTimer.Start();
             }
             catch (Exception ex)
             {
@@ -658,6 +714,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 _idleTimer.Stop();
                 _idleTimer.Dispose();
+                _shiftTimer.Stop();
+                _shiftTimer.Dispose();
             };
         }
 
@@ -713,6 +771,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _idleTimer.Stop();
             _idleTimer.Start();
+        }
+
+        /// <summary>
+        /// Настройка таймера смены.
+        /// </summary>
+        private void SetupShiftTimer()
+        {
+            _shiftTimer.Interval = 1000; // 1 секунда
+            _shiftTimer.Tick += (s, e) =>
+            {
+                if (_isShiftRunning && _shiftStartTime.HasValue)
+                {
+                    var elapsed = DateTime.Now - _shiftStartTime.Value;
+                    if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
+                    simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
+                }
+            };
         }
     }
 }

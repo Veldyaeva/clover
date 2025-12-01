@@ -200,7 +200,6 @@ SET pzvTab = @tab,
     pzvKolNazn = ISNULL(pzvKol, 0),
     pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
-                  END
 WHERE pzvID IN @ids";
 
                 await connection.ExecuteAsync(sql, new { tab, ids });
@@ -258,7 +257,11 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
                     // Первая выборка может содержать сводную строку ('FinishedWithFact' и т.п.) — читаем и отбрасываем
                     if (!grid.IsConsumed)
                     {
-                        try { await grid.ReadAsync(); } catch { /* ignore if no set */ }
+                        try {// await grid.ReadAsync();
+                            var newIds = await grid.ReadAsync<PzvSplitResult>();
+                            ids.AddRange(newIds);
+                        }
+                        catch { /* ignore if no set */ }
                     }
                     // Вторая (или единственная) выборка — список новых Id (если были вставки)
                     if (!grid.IsConsumed)
@@ -270,7 +273,32 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
                 return ids;
             }
         }
- 
+
+        public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, int? kmsId)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                const string sql = @"
+INSERT INTO ACE.dbo.knitWorkingShiftNew (kwsTabStart, kwsKmaID, kwsKmsID, kwsDateStart)
+VALUES (@tabStart, @kmaId, @kmsId, GETDATE());
+SELECT CAST(SCOPE_IDENTITY() AS int);";
+                var id = await connection.ExecuteScalarAsync<int>(sql, new { tabStart, kmaId, kmsId });
+                return id;
+            }
+        }
+
+        public async Task EndWorkingShiftAsync(int shiftId, int tabEnd)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                const string sql = @"
+UPDATE ACE.dbo.knitWorkingShiftNew
+SET kwsTabEnd = @tabEnd,
+    kwsDateEnd = GETDATE()
+WHERE kwsID = @shiftId AND (kwsDel = 0 OR kwsDel IS NULL) AND kwsDateEnd IS NULL;";
+                await connection.ExecuteAsync(sql, new { shiftId, tabEnd });
+            }
+        }
 
     }
 }
