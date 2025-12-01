@@ -463,13 +463,33 @@ namespace SewingProduction.Features.Articul
                             break;
                     }
 
-
-                    string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
-                    var dt = _dbHelperAce.ExecuteQuery(query);
-                    if (dt != null)
+                    string imagePath = null;
+                    try
                     {
-                        pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
+                        //imagePath = await _articulDataService.GetImage( kodd);
+                        //customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor.Kod);
+                        imagePath = await _articulDataService.GetFileEskizForKod(kodd);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            pictureBoxArticul.ImageLocation = imagePath;
+                        }
+                        else
+                        {
+                            pictureBoxArticul.Image = null;
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
+                        pictureBoxArticul.Image = null;
+                    }
+                    //string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
+                    //var dt = _dbHelperAce.ExecuteQuery(query);
+                    //if (dt != null)
+                    //{
+                    //    pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
+
+                    //}
                 }
             }
             catch (Exception ex)

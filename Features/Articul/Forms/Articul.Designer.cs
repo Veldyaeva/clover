@@ -1045,7 +1045,7 @@ namespace SewingProduction.Features.Articul
             pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxArticul.Name = "pictureBoxArticul";
             pictureBoxArticul.Size = new Size(261, 239);
-            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxArticul.TabIndex = 8;
             pictureBoxArticul.TabStop = false;
             // 

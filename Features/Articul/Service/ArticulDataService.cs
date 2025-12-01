@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Dapper;
+using DevExpress.CodeParser;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -11,9 +15,12 @@ namespace SewingProduction.Features.Articul.Service
     {
         private readonly DbService _dbService;
 
+        private readonly DatabaseHelper _dbHelper;
+
         public ArticulDataService()
         {
             _dbService = new DbService(new DatabaseHelper());
+            _dbHelper = new DatabaseHelper(); 
         }
 
         public async Task<List<ArticulModel>> GetAllAsync()
@@ -80,13 +87,12 @@ namespace SewingProduction.Features.Articul.Service
             return await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
 
         }
-
         public async Task<List<SpArticulNaborSostav>> GetSostavNaborForKod(string kod)
         {
             string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_naimen, sostav, razm" +
                 " FROM view_articulNaborSostav where kod  = @kod";
             return await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
         }
-
+                
     }
 }
