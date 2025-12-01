@@ -299,7 +299,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 TabGridLookUpEdit.EditValue = tab;
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
-                // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой.
+                // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой
                 _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
@@ -309,7 +309,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Кнопка "Начать смену": массово назначает табель выбранным строкам, присваивает kolNazn, ChasiNazn, sekNazn и обновляет отображение.
+        /// Кнопка "Начать смену": массово назначает табель выбранным строкам, присваивает kolNazn, ChasiNazn, sekNazn и обновляет отображение
         /// </summary>
         private async void simpleButton2_Click(object sender, EventArgs e)
         {

@@ -897,6 +897,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _bindingSource?.ResetBindings(false);
                         ANNgridControl?.RefreshDataSource();
 
+                        //await _artNormService.DeleteRelatedNormTables(newAnnId);
                         await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
                         if (teamWorkAdvanceTW.IsRaszInserted)
                             await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);
