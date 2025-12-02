@@ -29,6 +29,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int pzvKolNazn { get; set; }
         public int? pzvTab { get; set; }
         public int? n_pach { get; set; }
+        //количество в пачке (или в рассчёте, хз)
+        public int? pzvRKol { get; set; }   
         public string razm { get; set; }
         public int? nrN { get; set; }
         public int? nrN1 { get; set; }
