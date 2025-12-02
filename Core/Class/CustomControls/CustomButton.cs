@@ -91,7 +91,7 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [DisplayName("Видимость по правам")]
+        [DisplayName("VisiblePermission")]
         [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
@@ -105,8 +105,8 @@ namespace SewingProduction.Core.Class
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Category("Видимость")]
-        [DisplayName("Видимость по логике")]
-        [Description("Контролирует видимость кнопки на основе бизнес-логики приложения")]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость элемента на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;
@@ -198,6 +198,8 @@ namespace SewingProduction.Core.Class
             Debug.WriteLine($"[Доступ SimpleButton] {ObjectName}: Просмотр={hasRead}, Редактор={hasWrite}, Visible={this.Visible}, Enabled={this.Enabled}");
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisiblePermission")]
+        [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
             get => _visiblePermission;
@@ -209,6 +211,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость кнопки на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;

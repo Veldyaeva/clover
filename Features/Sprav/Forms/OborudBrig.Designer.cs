@@ -72,6 +72,7 @@ namespace SewingProduction.form
             gridViewBrig.DetailHeight = 404;
             gridViewBrig.GridControl = gridBrig;
             gridViewBrig.Name = "gridViewBrig";
+            gridViewBrig.OptionsBehavior.ReadOnly = true;
             gridViewBrig.OptionsEditForm.PopupEditFormWidth = 933;
             gridViewBrig.OptionsView.ShowGroupPanel = false;
             // 
@@ -95,8 +96,11 @@ namespace SewingProduction.form
             gridViewZeh.DetailHeight = 404;
             gridViewZeh.GridControl = gridZeh;
             gridViewZeh.Name = "gridViewZeh";
+            gridViewZeh.OptionsBehavior.Editable = false;
+            gridViewZeh.OptionsBehavior.ReadOnly = true;
             gridViewZeh.OptionsEditForm.PopupEditFormWidth = 933;
             gridViewZeh.OptionsView.ShowGroupPanel = false;
+            gridViewZeh.FocusedRowChanged += gridViewZeh_FocusedRowChanged;
             // 
             // gridOborud
             // 

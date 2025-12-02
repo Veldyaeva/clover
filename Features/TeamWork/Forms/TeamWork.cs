@@ -1029,6 +1029,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Удаляем созданную запись из списка и базы
                     _bindingList.Remove(CopyedWorkDivisionShell);
                     _bindingSource.ResetBindings(false);
+                    await _artNormService.DeleteRelatedNormTables(newAnnId);
                     await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
                 }
             };

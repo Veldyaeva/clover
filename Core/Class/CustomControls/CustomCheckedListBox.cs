@@ -34,6 +34,8 @@ namespace SewingProduction.Core.Class.CustomControls
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisiblePermission")]
+        [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
             get => _visiblePermission;
@@ -45,6 +47,8 @@ namespace SewingProduction.Core.Class.CustomControls
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;

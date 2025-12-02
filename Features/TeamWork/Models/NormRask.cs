@@ -11,6 +11,7 @@ namespace SewingProduction.Models
         public bool IsNew { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
+        [NotMapped]
         public string DisplayNumber => N1 > 0 ? $"{N}.{N1}" : $"{N}";
         private int _id;
         public int id
@@ -22,10 +23,13 @@ namespace SewingProduction.Models
                 OnPropertyChanged(nameof(id));
             }
         }
+        [Column("annId")]
         public int AnnId { get; set; }
+        [Column("kod_o")]
         public string Kod_o { get; set; }
         [Column("text")]
         public string TextRask { get; set; }
+        [Column("spec")]
         public string Spec { get; set; }
         public int razryd { get; set; }
         public string Obor { get; set; }

@@ -29,6 +29,7 @@ namespace SewingProduction.Models
         public int n { get; set; }
         public int n_ch { get; set; }
         public int n1 { get; set; }
+        [Column("seb_s")]
         public decimal sebS { get; set; }
 
         // Добавляем реализацию INotifyPropertyChanged

@@ -12,6 +12,8 @@ using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 
 namespace SewingProduction
 {
@@ -251,6 +253,12 @@ namespace SewingProduction
         private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenForm(new PlanZagrVyaz(), sender);
+        }
+
+        private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
+            OpenForm(form, sender);
         }
     }
 }
