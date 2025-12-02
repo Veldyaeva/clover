@@ -46,6 +46,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisiblePermission")]
+        [Description("Определяет видимость элемента на основе прав пользователя")]
         public bool VisiblePermission
         {
             get => _visiblePermission;
@@ -57,6 +59,8 @@ namespace SewingProduction.Core.Class
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DisplayName("VisibleLogic")]
+        [Description("Контролирует видимость на основе бизнес-логики приложения")]
         public bool VisibleLogic
         {
             get => _visibleLogic;

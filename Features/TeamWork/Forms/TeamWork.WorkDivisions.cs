@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using DevExpress.CodeParser;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Extensions;
 using SewingProduction.Features.TeamWork.Helpers;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services; // for TeamWorkBuffer
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -458,6 +461,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
             int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
             string articul = view.GetRowCellValue(rowHandle, "Articul").ToString();
+            int slogn = (int)view.GetRowCellValue(rowHandle, "Slogn");
+            bool hasKnittingOps = _normRaszListTW?.Any(r => r.annId == annId && (r.KodPodr == 1 || r.KodProizv == 3)) ?? false;
+            if (!hasKnittingOps && slogn is 0)
+            { _ = MessageBox.Show("Сложность не может быть равна нулю."); return; }
             // Действие только если дата не задана
             if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
             {
@@ -500,8 +507,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     { "@xAnnID", annId }
                 };
-                await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @xAnnID", parameters);
-
+                await _dbHelper.ExecuteQueryAsync(
+    "dbo.updateSebZArticulPsz",
+    parameters,
+    CommandType.StoredProcedure
+);
                 // Обновляем дату обновления в базе данных
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
 
@@ -509,8 +519,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
 
                 // Отправляем сообщение в бригаду
-                await SendMsgToBrig(annId, $"Внимание! Схема разделения {art} была обновлена технологом, проверьте операции, прежде чем начать работу!");
+                //await SendMsgToBrig(annId, $"Внимание! Схема разделения {art} была обновлена технологом, проверьте операции, прежде чем начать работу!");
+                // 2) Считаем diff ПОСЛЕ всех апдейтов в БД
+                string diffText = await TryBuildApprovalDiffAsync(annId);
 
+                // 3) Формируем сообщение в бригаду (с diff, если он есть)
+                string msg = ComposeApprovalMessage(art, diffText);
+              //  MessageBox.Show(msg, "message", MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation); // messageBox для теста
+                await SendMsgToBrig(annId, msg);
+
+                // 4) Обновляем UI
 
                 // Обновляем UI в гриде
                 if (gridView != null && rowHandle >= 0)
@@ -531,7 +549,51 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        /// <summary>
+        /// Пытается построить текстовый diff и помечает снимок как использованный.
+        /// Если активного снимка нет — вернёт null.
+        /// </summary>
+        private async Task<string> TryBuildApprovalDiffAsync(int annId)
+        {
+            var snapSvc = new RtSnapshotService(_dbService, _dbHelper, _logger);
 
+            // Снимок должен быть снят ранее (при первом сохранении с очищенной датой).
+            if (!await snapSvc.HasPendingAsync(annId))
+                return null;
+
+            // Покажем фактическое время утверждения в заголовке diff
+            var approvedAt = DateTime.Now;
+
+            try
+            {
+                // CompareWithCurrentAsync читает ТЕКУЩЕЕ состояние из БД и «съедает» снимок (Consumed=1)
+                return await snapSvc.CompareWithCurrentAsync(annId, approvedAt);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка построения diff для AnnID: {annId}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Склеивает служебный текст и diff. Ограничивает размер, чтобы не «захлебнуть» мессенджер.
+        /// </summary>
+        private static string ComposeApprovalMessage(string art, string diffText, int maxLen = 3800)
+        {
+            var intro = $"Внимание! Схема разделения {art} утверждена и обновлена технологом. " +
+                        $"Проверьте операции, прежде чем начать работу!";
+
+            var full = string.IsNullOrWhiteSpace(diffText)
+                ? intro
+                : intro + Environment.NewLine + Environment.NewLine + diffText;
+
+            if (full.Length <= maxLen) return full;
+
+            // Если текст слишком длинный — обрезаем «по-человечески»
+            const string tail = "\n…(сообщение обрезано)";
+            return full.Substring(0, Math.Max(0, maxLen - tail.Length)) + tail;
+        }
         /// <summary>
         /// Обрабатываем клик по кнопке утверждения РТ на вкладке Текущие Работы
         /// </summary>
@@ -743,7 +805,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (modeForNewForm == (int)Mode.Kit)
                     {
                         // Показываем статус в statusLabel (если он существует)
-                        if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
+                        if (this.Controls.Find("statusLabel", true).FirstOrDefault() is System.Windows.Forms.Label statusLabel)
                         {
                             statusLabel.ForeColor = System.Drawing.Color.Green;
                             statusLabel.Text = "Комплект успешно создан";
