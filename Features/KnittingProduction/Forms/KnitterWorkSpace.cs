@@ -56,6 +56,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Время старта смены.
         /// </summary>
         private DateTime? _shiftStartTime = null;
+        /// <summary>
+        /// Текущая зона сотрудника (id и номер).
+        /// </summary>
+        private int? _currentKmaId = null;
+        private string _currentKmaNum = null;
 
         /// <summary>
         /// Список ФИО для повторного показа сплеша при бездействии.
@@ -298,6 +303,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Синхронизируем TabGridLookUpEdit с выбранным табельным номером
                 TabGridLookUpEdit.EditValue = tab;
 
+                // Получаем зону сотрудника и отображаем номер зоны
+                try
+                {
+                    var zone = await _orchestrator.GetZoneByTabAsync(tab);
+                    _currentKmaId = zone.kmaId;
+                    _currentKmaNum = zone.kmaNum;
+                    textEdit1.Text = _currentKmaNum?.ToString() ?? string.Empty;
+                }
+                catch (Exception)
+                {
+                    textEdit1.Text = string.Empty;
+                }
+
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
                 // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой
                 _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
@@ -368,11 +386,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
 
                 // Успешный старт смены: фиксируем в БД, меняем текст кнопки и запускаем таймер
-                int? kmaId = null; // при необходимости подтянуть из контекста
-                int? kmsId = null;
                 try
                 {
-                    _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, kmaId, kmsId);
+                    _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, _currentKmaId, _currentKmaNum);
                 }
                 catch (Exception exStart)
                 {

@@ -80,12 +80,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <summary>
         /// Фиксирует начало смены в таблице ACE.dbo.knitWorkingShift и возвращает kwsID.
         /// </summary>
-        public Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, int? kmsId) => _repo.StartWorkingShiftAsync(tabStart, kmaId, kmsId);
+        public Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum) => _repo.StartWorkingShiftAsync(tabStart, kmaId, kmaNum, kmsId: 0);
 
         /// <summary>
         /// Фиксирует завершение смены (kwsDateEnd/kwsTabEnd) по kwsID.
         /// </summary>
         public Task EndWorkingShiftAsync(int shiftId, int tabEnd) => _repo.EndWorkingShiftAsync(shiftId, tabEnd);
+
+        /// <summary>
+        /// Возвращает id зоны и номер зоны для табельного номера.
+        /// </summary>
+        public Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab) => _repo.GetZoneByTabAsync(tab);
     }
 }
 
