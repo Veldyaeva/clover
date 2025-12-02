@@ -250,6 +250,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnZadanyListByMachineKmlID.FieldName = "kmlID";
                 gridColumnZadanyListByMachineSyncSelection.FieldName = "SyncSelection";
                 gridColumnZadanyListByMachineGradacia.FieldName = "Gradacia";
+
+                gridColumnZadanyListByMachineData_plan.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gridColumnZadanyListByMachineData_plan.DisplayFormat.FormatString = "dd.MM.yy";
                 _gridHelper.AutoRowFilterConfig(gridViewZadanyListByMachine as GridView, 0);
                 gridViewZadanyListByMachine.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
                 //gridViewRzvPachListByNom.OptionsView.ShowAutoFilterRow = false;
@@ -420,38 +423,38 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //};
                 #endregion
 
-                #region описание gridControlSmenZadanyVyazMachine "сменное задание по машинам"
-                gridControlSmenZadanyVyazMachine.DataSource = _smenZadanyVyazMachineBindingSource;
-                gridSmenZadanyVyazMachineColumnKmlKmaID.FieldName = "kmlKmaID";
-                gridSmenZadanyVyazMachineColumnKmaNumber.FieldName = "kmaNumber";
-                gridSmenZadanyVyazMachineColumnKmlID.FieldName = "kmlID";
-                gridSmenZadanyVyazMachineColumnKmlNumber.FieldName = "kmlNumber";
-                gridSmenZadanyVyazMachineColumnKmlInvNum.FieldName = "kmlInvNum";
-                gridSmenZadanyVyazMachineColumnKmlIdVyazClass.FieldName = "kmlIdVyazClass";
-                gridSmenZadanyVyazMachineColumnNameClass.FieldName = "name_class";
-                gridSmenZadanyVyazMachineColumnTaskToDo.FieldName = "taskToDo";
-                gridSmenZadanyVyazMachineColumnTaskAtWork.FieldName = "taskAtWork";
-                gridSmenZadanyVyazMachineColumnTaskDone.FieldName = "taskDone";
-                gridSmenZadanyVyazMachineColumnTaskNotConfirmed.FieldName = "taskNotConfirmed";
-                gridSmenZadanyVyazMachineColumnTaskConfirmed.FieldName = "taskConfirmed";
-                gridSmenZadanyVyazMachineColumnTaskNotPlanned.FieldName = "taskNotPlanned";
-                _gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazMachine, 0);
-                #endregion
+                //#region описание gridControlSmenZadanyVyazMachine "сменное задание по машинам"
+                //gridControlSmenZadanyVyazMachine.DataSource = _smenZadanyVyazMachineBindingSource;
+                //gridSmenZadanyVyazMachineColumnKmlKmaID.FieldName = "kmlKmaID";
+                //gridSmenZadanyVyazMachineColumnKmaNumber.FieldName = "kmaNumber";
+                //gridSmenZadanyVyazMachineColumnKmlID.FieldName = "kmlID";
+                //gridSmenZadanyVyazMachineColumnKmlNumber.FieldName = "kmlNumber";
+                //gridSmenZadanyVyazMachineColumnKmlInvNum.FieldName = "kmlInvNum";
+                //gridSmenZadanyVyazMachineColumnKmlIdVyazClass.FieldName = "kmlIdVyazClass";
+                //gridSmenZadanyVyazMachineColumnNameClass.FieldName = "name_class";
+                //gridSmenZadanyVyazMachineColumnTaskToDo.FieldName = "taskToDo";
+                //gridSmenZadanyVyazMachineColumnTaskAtWork.FieldName = "taskAtWork";
+                //gridSmenZadanyVyazMachineColumnTaskDone.FieldName = "taskDone";
+                //gridSmenZadanyVyazMachineColumnTaskNotConfirmed.FieldName = "taskNotConfirmed";
+                //gridSmenZadanyVyazMachineColumnTaskConfirmed.FieldName = "taskConfirmed";
+                //gridSmenZadanyVyazMachineColumnTaskNotPlanned.FieldName = "taskNotPlanned";
+                //_gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazMachine, 0);
+                //#endregion
 
-                #region описание gridControlSmenZadanyVyazEmp "сменное задание по работникам"
-                gridControlSmenZadanyVyazEmp.DataSource = _smenZadanyVyazEmpBindingSource;
-                gridSmenZadanyVyazEmpColumnKmaID.FieldName = "kmaID";
-                gridSmenZadanyVyazEmpColumnKmaNumber.FieldName = "kmaNumber";
-                gridSmenZadanyVyazEmpColumnEmpTab.FieldName = "empTab";
-                gridSmenZadanyVyazEmpColumnEmpFioSokr.FieldName = "empFioSokr";
-                gridSmenZadanyVyazEmpColumnTaskToDo.FieldName = "taskToDo";
-                gridSmenZadanyVyazEmpColumnTaskAtWork.FieldName = "taskAtWork";
-                gridSmenZadanyVyazEmpColumnTaskDone.FieldName = "taskDone";
-                gridSmenZadanyVyazEmpColumnTaskNotConfirmed.FieldName = "taskNotConfirmed";
-                gridSmenZadanyVyazEmpColumnTaskConfirmed.FieldName = "taskConfirmed";
-                gridSmenZadanyVyazEmpColumnKmaIDNazn.FieldName = "kmaIDNazn";
-                _gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazEmp, 0);
-                #endregion
+                //#region описание gridControlSmenZadanyVyazEmp "сменное задание по работникам"
+                //gridControlSmenZadanyVyazEmp.DataSource = _smenZadanyVyazEmpBindingSource;
+                //gridSmenZadanyVyazEmpColumnKmaID.FieldName = "kmaID";
+                //gridSmenZadanyVyazEmpColumnKmaNumber.FieldName = "kmaNumber";
+                //gridSmenZadanyVyazEmpColumnEmpTab.FieldName = "empTab";
+                //gridSmenZadanyVyazEmpColumnEmpFioSokr.FieldName = "empFioSokr";
+                //gridSmenZadanyVyazEmpColumnTaskToDo.FieldName = "taskToDo";
+                //gridSmenZadanyVyazEmpColumnTaskAtWork.FieldName = "taskAtWork";
+                //gridSmenZadanyVyazEmpColumnTaskDone.FieldName = "taskDone";
+                //gridSmenZadanyVyazEmpColumnTaskNotConfirmed.FieldName = "taskNotConfirmed";
+                //gridSmenZadanyVyazEmpColumnTaskConfirmed.FieldName = "taskConfirmed";
+                //gridSmenZadanyVyazEmpColumnKmaIDNazn.FieldName = "kmaIDNazn";
+                //_gridHelper.AutoRowFilterConfig(gridViewSmenZadanyVyazEmp, 0);
+                //#endregion
 
                 #region gridControlSmenZadany "сменное задание"
                 gridControlSmenZadany.DataSource = _smenZadanyVyazBindingSource;
@@ -503,6 +506,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridSmenZadanyColumnChasRemainSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
                 bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+
                 //advBandedGridViewSmenZadany.CustomDrawBandHeader += AdvBandedGridView1_CustomDrawBandHeader;
                 //advBandedGridViewSmenZadany.CustomDrawColumnHeader += AdvBandedGridView1_CustomDrawColumnHeader;
                 //advBandedGridViewSmenZadany.ColumnPanelRowHeight = 40; // можно больше/меньше
@@ -511,46 +515,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    advBandedGridViewSmenZadany.Appearance.HeaderPanel);
                 advBandedGridViewSmenZadany.OptionsView.GroupFooterShowMode = GroupFooterShowMode.Hidden;
                 _gridHelper.EnableGroupSummariesInGroupRow(advBandedGridViewSmenZadany);
-                //advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
-                //{
-                //    GridView view = s as GridView;
-                //    int rowHandle = e.RowHandle;
+                advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
+                {
+                    GridView view = s as GridView;
+                    int rowHandle = e.RowHandle;
 
-                //    int level = view.GetRowLevel(rowHandle);
+                    int level = view.GetRowLevel(rowHandle);
 
-                //    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
-                //    //groupInfo.GroupExpanded = true;
+                    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
+                    //groupInfo.GroupExpanded = true;
 
-                //    if (level == 0) // зона
-                //    {
-                //        //string mg = view.GetGroupRowValue(e.RowHandle, view.Columns["yearMonthText"]).ToString();
-                //        //groupInfo.GroupText = $"{mg}";
-                //        //int year = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["yearNumberPlanDate"]));
-                //        //int month = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["monthNumberPlanDate"]));
-                //        //DateTime dt = new DateTime(year, month, 1);
-                //        //string formatted = dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"));
-
-                //        //groupInfo.GroupText = $"Месяц: {formatted}";
-                //        //groupInfo.GroupText = $"Месяц: {dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
-                //        //groupInfo.GroupText = $"{dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
-
-                //        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])} " +
-                //        $" Назначено заданий: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznZad"])} м/ч" +
-                //        $" Не подтверждено мастером: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNotConfirmedZad"])} м/ч";
-                //    }
-                //    if (level == 1) // ФИО
-                //    {
-                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ({view.GetGroupRowValue(e.RowHandle, view.Columns["kwsTabstart"])}) " +
-                //        $" Продолж. смены {view.GetGroupRowValue(e.RowHandle, view.Columns["smenLength"])}" +
-                //        $" Назначено заданий: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznZad"])} ч/ч" +
-                //        $" Не подтверждено мастером: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNotConfirmedZad"])} ч/ч" +
-                //        $" Назначено: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznSmen"])} ч/ч / {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznSmenProc"])}%";
-                //    }
-                //    if (level == 2) // тип данных
-                //    {
-                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["typeName"])}";
-                //    }
-                //};
+                    if (level == 0) // зона
+                    {
+                        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])} ";
+                    }
+                    if (level == 1) // ФИО
+                    {
+                        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ";
+                    }
+                    if (level == 2) // тип данных
+                    {
+                        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["typeName"])}";
+                    }
+                };
                 #endregion
 
                 #region описание gridControlArtNormN "заголовок РТ"
@@ -638,6 +625,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnPZVOperListOlPzvDateML.FieldName = "olPzvDateML";
                 gridColumnPZVOperListOlPzvDateMast.FieldName = "olPzvDateMast";
                 gridColumnPZVOperListSyncSelection.FieldName = "SyncSelection";
+
+                gridColumnPZVOperListOlPvDateNaznKm.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gridColumnPZVOperListOlPvDateNaznKm.DisplayFormat.FormatString = "dd.MM.yy";
+                gridColumnPZVOperListOlPzvDateNaznTab.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gridColumnPZVOperListOlPzvDateNaznTab.DisplayFormat.FormatString = "dd.MM.yy";
+                gridColumnPZVOperListOlPzvDateStart.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gridColumnPZVOperListOlPzvDateStart.DisplayFormat.FormatString = "dd.MM.yy";
+                gridColumnPZVOperListOlPzvDateEnd.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gridColumnPZVOperListOlPzvDateEnd.DisplayFormat.FormatString = "dd.MM.yy";
+                gridColumnPZVOperListOlPzvDateML.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gridColumnPZVOperListOlPzvDateML.DisplayFormat.FormatString = "dd.MM.yy";
+                gridColumnPZVOperListOlPzvDateMast.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                gridColumnPZVOperListOlPzvDateMast.DisplayFormat.FormatString = "dd.MM.yy";
+
                 //// Сначала сортируем по артикулу, далее пачка, номер операции/подоперации, ID родительской записи, ID записи
                 //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olPzvArticul"], ColumnSortOrder.Ascending));
                 //gridViewPZVOperList.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["olNPach"], ColumnSortOrder.Ascending));
@@ -1050,7 +1051,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _smenZadanyVyazMachineBindingList.Add(smenZadanyVyazMachineData[0]);
                     //_pZVOperListByPachListNewBindingSource.Sort = "olPzvArticul, olNPach, olNo, olNpo, olPzvIDParent, olPzvID";
                     _pZVOperListByPachListNewBindingSource.ResetBindings(false);
-                    gridViewSmenZadanyVyazMachine.ExpandAllGroups();
+                    //gridViewSmenZadanyVyazMachine.ExpandAllGroups();
                 }
                 else
                 {
@@ -1086,7 +1087,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
                     _smenZadanyVyazEmpBindingList.Add(smenZadanyVyazEmpData[0]);
                     _smenZadanyVyazEmpBindingSource.ResetBindings(false);
-                    gridViewSmenZadanyVyazEmp.ExpandAllGroups();
+                    //gridViewSmenZadanyVyazEmp.ExpandAllGroups();
                 }
                 else
                 {
@@ -1813,38 +1814,38 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void customTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
         {
-            try
-            {
-                int buttonIndex = ((DevExpress.XtraTab.XtraTabControl)sender).CustomHeaderButtons.IndexOf(e.Button);
-                switch (buttonIndex)
-                {
-                    case 0:
-                        //Debug.WriteLine(ButtonPreliminaryWd.Enabled + " " + ButtonPreliminaryWd.Visible);
-                        //if (ButtonPreliminaryWd.Enabled && ButtonPreliminaryWd.Visible)
-                        //    ButtonPreliminaryWd_Click_Internal(sender, e);
-                        switch (customTabControl1.SelectedTabPageIndex)
-                        {
-                            case 0:
-                                //MessageBox.Show("Обновление грида на вкладке xtraTabPage1");
-                                await LoadSmenZadanyVyazMachineDataAsync();
-                                //gridViewSmenZadanyVyazMachine.ExpandAllGroups();
-                                break;
-                            case 1:
-                                //MessageBox.Show("Обновление грида на вкладке xtraTabPage3");
-                                await LoadSmenZadanyVyazEmpDataAsync();
-                                //gridViewSmenZadanyVyazEmp.ExpandAllGroups();
-                                break;
-                            default:
-                                MessageBox.Show("Обновление грида на вкладке ???");
-                                break;
-                        }
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка в customTabControl1_CustomHeaderButtonClick: {ex.Message}");
-            }
+            //try
+            //{
+            //    int buttonIndex = ((DevExpress.XtraTab.XtraTabControl)sender).CustomHeaderButtons.IndexOf(e.Button);
+            //    switch (buttonIndex)
+            //    {
+            //        case 0:
+            //            //Debug.WriteLine(ButtonPreliminaryWd.Enabled + " " + ButtonPreliminaryWd.Visible);
+            //            //if (ButtonPreliminaryWd.Enabled && ButtonPreliminaryWd.Visible)
+            //            //    ButtonPreliminaryWd_Click_Internal(sender, e);
+            //            switch (customTabControl1.SelectedTabPageIndex)
+            //            {
+            //                case 0:
+            //                    //MessageBox.Show("Обновление грида на вкладке xtraTabPage1");
+            //                    await LoadSmenZadanyVyazMachineDataAsync();
+            //                    //gridViewSmenZadanyVyazMachine.ExpandAllGroups();
+            //                    break;
+            //                case 1:
+            //                    //MessageBox.Show("Обновление грида на вкладке xtraTabPage3");
+            //                    await LoadSmenZadanyVyazEmpDataAsync();
+            //                    //gridViewSmenZadanyVyazEmp.ExpandAllGroups();
+            //                    break;
+            //                default:
+            //                    MessageBox.Show("Обновление грида на вкладке ???");
+            //                    break;
+            //            }
+            //            break;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Ошибка в customTabControl1_CustomHeaderButtonClick: {ex.Message}");
+            //}
         }
 
         //private async void customTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
@@ -2703,11 +2704,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //MessageBox.Show($"Двойной клик по операции. В/М {curr.kmlNumber} ({curr.kmlInvNum}) - Зона {curr.kmaNumber}");
             try
             {
-                if (customTabControl1.SelectedTabPageIndex != 1 && _tab != 999 && _tab != 0)
-                {
-                    MessageBox.Show("Перейдите на вкладку 'чел/час' блока Сменное задание и выберите работника!");
-                    return;
-                }
+                //if (customTabControl1.SelectedTabPageIndex != 1 && _tab != 999 && _tab != 0)
+                //{
+                //    MessageBox.Show("Перейдите на вкладку 'чел/час' блока Сменное задание и выберите работника!");
+                //    return;
+                //}
 
                 // получаем список строк (pzvID) для присовения машины (kmlID)
                 var idSet = _pzvId != null ? new HashSet<int>(_pzvId) : new HashSet<int>();
