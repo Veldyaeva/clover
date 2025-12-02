@@ -17,6 +17,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Task<KnitterPZVModel> UpdatePzvDateStartAsync(int pzvId);
         Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId);
         Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty);
+		Task<IReadOnlyList<PzvSplitResult>> SplitPzvAsync(int pzvId, int mode, int qtyFact);
         Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum);
         Task EndWorkingShiftAsync(int shiftId, int tabEnd);
         Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab);

@@ -612,13 +612,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _view.UpdateCurrentRow();
             _view.RefreshRowCell(rowHandle, bandedGridColumn22);
 
-            // Если отвязано меньше запланированного — разделяем запись на “факт” и “остаток”
-            IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
-            if (qty < defaultQty && currentRow?.pzvID > 0)
-            {
-                newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
-            }
-
+            // Сначала устанавливаем дату окончания (SP также ставит её, но нам важно обойти проверки до вызова SP)
             await ApplyPzvDateAsync(
                 view,
                 bandedGridColumn19,
@@ -626,6 +620,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 m => m.pzvDateEnd,
                 (m, v) => m.pzvDateEnd = v,
                 "окончания");
+
+			// Затем — разделение записи в зависимости от введённого количества
+			IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
+			if (currentRow?.pzvID > 0)
+			{
+				if (qty == 0)
+				{
+					// создаём отрицательную строку mode = 2
+					newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
+				}
+				else if (qty < defaultQty)
+				{
+					// Факт меньше запланированного — mode = 1 c qtyFact
+					newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
+				}
+			}
             
             // Обновим план, чтобы показать новую запись остатка (если была создана)
             if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
@@ -743,7 +753,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void SetupIdleTimer()
         {
-            _idleTimer.Interval = 600000000; // 1 минута = 60000 миллисекунд
+            _idleTimer.Interval = 60000; // 1 минута = 60000 миллисекунд
             _idleTimer.Tick += IdleTimer_Tick;
 
             // Подписываемся на события активности для сброса таймера

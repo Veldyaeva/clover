@@ -77,6 +77,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// </summary>
         public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
 
+		/// <summary>
+		/// Универсальный вызов PZV_Split с указанием режима и количества.
+		/// </summary>
+		public Task<IReadOnlyList<PzvSplitResult>> SplitPzvAsync(int pzvId, int mode, int qtyFact) => _repo.SplitPzvByModeAsync(pzvId, mode, qtyFact);
+
         /// <summary>
         /// Фиксирует начало смены в таблице ACE.dbo.knitWorkingShift и возвращает kwsID.
         /// </summary>

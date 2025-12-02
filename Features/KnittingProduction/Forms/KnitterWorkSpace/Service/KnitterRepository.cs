@@ -330,6 +330,50 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
             }
         }
 
+		public async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact)
+		{
+			try
+			{
+				using (var connection = _dbHelper.GetConnection())
+				{
+					var parameters = new
+					{
+						pzvId,
+						mode,
+						qtyFact,
+						userName = (string)null
+					};
+					var ids = new List<PzvSplitResult>();
+					using (var grid = await connection.QueryMultipleAsync(
+						"dbo.PZV_Split",
+						param: parameters,
+						commandTimeout: 60,
+						commandType: CommandType.StoredProcedure))
+					{
+						if (!grid.IsConsumed)
+						{
+							try
+							{
+								var head = await grid.ReadAsync();
+								// ignore head set if present
+							}
+							catch { }
+						}
+						if (!grid.IsConsumed)
+						{
+							var newIds = await grid.ReadAsync<PzvSplitResult>();
+							ids.AddRange(newIds);
+						}
+					}
+					return ids;
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception($"SplitPzvByModeAsync failed (pzvId={pzvId}, mode={mode}, qtyFact={qtyFact})", ex);
+			}
+		}
+
         public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0)
         {
             try
