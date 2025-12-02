@@ -91,6 +91,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// Возвращает id зоны и номер зоны для табельного номера.
         /// </summary>
         public Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab) => _repo.GetZoneByTabAsync(tab);
+
+		/// <summary>
+		/// Возвращает открытую смену по табелю, если есть (ID и дата начала).
+		/// </summary>
+		public Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab) => _repo.GetOpenShiftByTabAsync(tab);
     }
 }
 

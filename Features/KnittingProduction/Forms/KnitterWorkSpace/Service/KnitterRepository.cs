@@ -345,7 +345,7 @@ VALUES (@tabStart, @kmaId, @kmsID, GETDATE());
 SELECT CAST(SCOPE_IDENTITY() AS int);";
                         var kwsId = await connection.ExecuteScalarAsync<int>(sqlMain, new { tabStart, kmaId, kmsId, kmaNum }, transaction: tx);
 
-                        // Сопутствующие записи: список машин зоны в таблицу knitWorkingShiftMachineListNew
+                        // запись машин зоны в таблицу knitWorkingShiftMachineListNew
                         const string sqlList = @"
 INSERT INTO ACE.dbo.knitWorkingShiftMachineListNew (kwsmlKwsID, kwsmlKmlID, kwsmlKodOb, kiwsmlLongRep)
 SELECT @kwsId, mlv.kmlID, mlv.kmlKodOb, mlv.kmlLongRep

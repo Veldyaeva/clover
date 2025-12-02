@@ -306,15 +306,50 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Получаем зону сотрудника и отображаем номер зоны
                 try
                 {
-                    var zone = await _orchestrator.GetZoneByTabAsync(tab);
-                    _currentKmaId = zone.kmaId;
-                    _currentKmaNum = zone.kmaNum;
-                    textEdit1.Text = _currentKmaNum?.ToString() ?? string.Empty;
+					var zone = await _orchestrator.GetZoneByTabAsync(tab);
+					_currentKmaId = zone.kmaId;
+					_currentKmaNum = zone.kmaNum;
+					textEdit1.Text = _currentKmaNum?.ToString() ?? string.Empty;
                 }
                 catch (Exception)
                 {
                     textEdit1.Text = string.Empty;
                 }
+
+				// Проверяем открытую смену у выбранного табеля и отражаем состояние UI
+				try
+				{
+					var open = await _orchestrator.GetOpenShiftByTabAsync(tab);
+					if (open.shiftId.HasValue && open.dateStart.HasValue)
+					{
+						_currentShiftId = open.shiftId.Value;
+						_isShiftRunning = true;
+						_shiftStartTime = open.dateStart.Value;
+						simpleButton2.Text = "Закончить смену";
+						var elapsed = DateTime.Now - _shiftStartTime.Value;
+						if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
+						simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
+						_shiftTimer.Start();
+					}
+					else
+					{
+						_shiftTimer.Stop();
+						_isShiftRunning = false;
+						_shiftStartTime = null;
+						_currentShiftId = null;
+						simpleLabelItem1.Text = string.Empty;
+						simpleButton2.Text = "Начать смену";
+					}
+				}
+				catch (Exception)
+				{
+					_shiftTimer.Stop();
+					_isShiftRunning = false;
+					_shiftStartTime = null;
+					_currentShiftId = null;
+					simpleLabelItem1.Text = string.Empty;
+					simpleButton2.Text = "Начать смену";
+				}
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
                 // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой
