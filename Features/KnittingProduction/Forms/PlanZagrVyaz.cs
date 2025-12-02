@@ -11,8 +11,10 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGauges.Core.Styles;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using DevExpress.XtraGrid.Views.BandedGrid.ViewInfo;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Card;
@@ -44,8 +46,6 @@ using System.ServiceModel.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.BandedGrid;
-using DevExpress.XtraGrid.Views.BandedGrid.ViewInfo;
 
 
 namespace SewingProduction.Features.KnittingProduction.Forms
@@ -482,12 +482,35 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridViewSmenZadany.OptionsView.ShowGroupPanel = false;
                 bandedGridSmenZadanyColumnChasNaznZad.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 //bandedGridSmenZadanyColumnChasNaznZad.DisplayFormat.FormatString = "#,0.00;-#,0.00;";
-                bandedGridSmenZadanyColumnChasNaznZad.DisplayFormat.FormatString = "{ 0:#.##}";
+                bandedGridSmenZadanyColumnChasNaznZad.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasNotConfirmedZad.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasNotConfirmedZad.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasRemainZad.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasRemainZad.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnShiftsRemainZad.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnShiftsRemainZad.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasNaznSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasNaznSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasNaznSmenProc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasNaznSmenProc.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasInWorkSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasInWorkSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasDoneSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasDoneSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasDoneSmenProc.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasDoneSmenProc.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasRemainSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasRemainSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
                 //advBandedGridViewSmenZadany.CustomDrawBandHeader += AdvBandedGridView1_CustomDrawBandHeader;
                 //advBandedGridViewSmenZadany.CustomDrawColumnHeader += AdvBandedGridView1_CustomDrawColumnHeader;
                 //advBandedGridViewSmenZadany.ColumnPanelRowHeight = 40; // можно больше/меньше
                 _gridHelper.AutoRowFilterConfig(advBandedGridViewSmenZadany, 0);
-
+                //advBandedGridViewSmenZadany.Appearance.GroupRow.Assign(
+                //    advBandedGridViewSmenZadany.Appearance.HeaderPanel);
+                advBandedGridViewSmenZadany.OptionsView.GroupFooterShowMode = GroupFooterShowMode.Hidden;
+                _gridHelper.EnableGroupSummariesInGroupRow(advBandedGridViewSmenZadany);
                 //advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
                 //{
                 //    GridView view = s as GridView;
@@ -511,11 +534,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //        //groupInfo.GroupText = $"Месяц: {dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
                 //        //groupInfo.GroupText = $"{dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
 
-                //        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])}";
+                //        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])} " +
+                //        $" Назначено заданий: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznZad"])} м/ч" +
+                //        $" Не подтверждено мастером: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNotConfirmedZad"])} м/ч";
                 //    }
                 //    if (level == 1) // ФИО
                 //    {
-                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} таб.№ {view.GetGroupRowValue(e.RowHandle, view.Columns["kwsTabstart"])}";
+                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ({view.GetGroupRowValue(e.RowHandle, view.Columns["kwsTabstart"])}) " +
+                //        $" Продолж. смены {view.GetGroupRowValue(e.RowHandle, view.Columns["smenLength"])}" +
+                //        $" Назначено заданий: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznZad"])} ч/ч" +
+                //        $" Не подтверждено мастером: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNotConfirmedZad"])} ч/ч" +
+                //        $" Назначено: {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznSmen"])} ч/ч / {view.GetGroupRowValue(e.RowHandle, view.Columns["chasNaznSmenProc"])}%";
                 //    }
                 //    if (level == 2) // тип данных
                 //    {
@@ -656,6 +685,80 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 throw;
             }
         }
+        //private void View_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
+        //{
+        //    var view = (BandedGridView)sender;
+
+        //    // стандартная отрисовка заголовка группы
+        //    e.DefaultDraw();
+
+        //    // Получаем прямоугольник всей строки группы
+        //    Rectangle rowRect = e.Bounds;
+
+        //    // Высота "строки итогов" внутри GroupRow
+        //    int summaryHeight = rowRect.Height - 4;
+
+        //    // Смещение текста от верхней части (чтобы не налезало на знак раскрытия)
+        //    int offsetY = 0;
+
+        //    // Для красоты — рисуем светлый фон строки итогов
+        //    using (var brush = new SolidBrush(Color.FromArgb(245, 245, 245)))
+        //        e.Graphics.FillRectangle(brush, rowRect);
+
+        //    // Перебираем ВСЕ ВИДИМЫЕ КОЛОНКИ
+        //    foreach (GridColumn col in view.VisibleColumns)
+        //    {
+        //        // Координаты колонки
+        //        Rectangle colRect = view.GetColumnBounds(col);
+
+        //        Rectangle summaryRect = new Rectangle(
+        //            colRect.X,
+        //            rowRect.Y + offsetY,
+        //            colRect.Width,
+        //            summaryHeight
+        //        );
+
+        //        // Получаем групповой итог для этой колонки
+        //        var summaryItem = view.GroupSummary
+        //            .OfType<GridSummaryItem>()
+        //            .FirstOrDefault(s => s.FieldName == col.FieldName);
+
+        //        if (summaryItem != null)
+        //        {
+        //            object val = view.GetGroupSummaryValue(e.RowHandle, summaryItem);
+        //            string text = "";
+
+        //            if (val != null && val != DBNull.Value)
+        //                text = Convert.ToDecimal(val).ToString("n2");
+
+        //            // Центрируем текст
+        //            var sf = new StringFormat()
+        //            {
+        //                Alignment = StringAlignment.Center,
+        //                LineAlignment = StringAlignment.Center,
+        //                Trimming = StringTrimming.EllipsisCharacter
+        //            };
+
+        //            // Фон
+        //            e.Graphics.FillRectangle(Brushes.White, summaryRect);
+
+        //            // Текст
+        //            e.Graphics.DrawString(
+        //                text,
+        //                e.Appearance.Font,
+        //                Brushes.Black,
+        //                summaryRect,
+        //                sf
+        //            );
+
+        //            // Рамка
+        //            e.Graphics.DrawRectangle(Pens.Gray, summaryRect);
+        //        }
+        //    }
+
+        //    // Сообщаем DevExpress, что мы всё сделали (не перерисовывать)
+        //    e.Handled = true;
+        //}
         private void SetGroupExpandState()
         {
             var view = advBandedGridViewSmenZadany;
@@ -688,122 +791,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             }
         }
-        //private void AdvBandedGridView1_CustomDrawBandHeader(object sender, BandHeaderCustomDrawEventArgs e)
-        //{
-        //    var view = (AdvBandedGridView)sender;
-        //    var info = view.GetViewInfo() as BandedGridViewInfo;
-        //    if (info == null)
-        //        return;
-
-        //    // Находим колонку ZONA
-        //    var col = view.Columns["Zona"];
-        //    if (col == null)
-        //        return;
-
-        //    // Координаты колонки ЗОНА
-        //    Rectangle colBounds = info.ColumnsInfo[col].Bounds;
-
-        //    // Плитку рисуем ТОЛЬКО один раз, в первом вызове.
-        //    // Перехватываем самый верхний бэнд.
-        //    if (e.Band != view.Bands[0])
-        //        return;
-
-        //    e.Handled = true; // Не даём DevExpress что-либо поверх нарисовать
-
-        //    // Общая высота header area
-        //    int totalHeight =
-        //        info.ViewRects.BandPanel.Height +
-        //        info.ViewRects.ColumnPanel.Height;
-
-        //    Rectangle rect = new Rectangle(
-        //        colBounds.X,
-        //        info.ViewRects.BandPanel.Y,    // с самого верха
-        //        colBounds.Width,
-        //        totalHeight
-        //    );
-
-        //    // Фон
-        //    using (var back = new SolidBrush(Color.White))
-        //        e.Graphics.FillRectangle(back, rect);
-
-        //    // Рамка
-        //    using (var pen = new Pen(Color.Gray))
-        //        e.Graphics.DrawRectangle(pen, rect);
-
-        //    // Текст
-        //    using (var sf = new StringFormat
-        //    {
-        //        Alignment = StringAlignment.Center,
-        //        LineAlignment = StringAlignment.Center
-        //    })
-        //    {
-        //        e.Graphics.DrawString(
-        //            "Зона",
-        //            view.Appearance.HeaderPanel.Font,
-        //            Brushes.Black,
-        //            rect,
-        //            sf
-        //        );
-        //    }
-        //}
-
-        //private void AdvBandedGridView1_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        //{
-        //    // Растягиваем только колонку "Зона"
-        //    if (e.Column == null || e.Column.FieldName != "kmaNumber")
-        //        return;
-
-        //    var view = (AdvBandedGridView)sender;
-
-        //    // Берём ViewInfo, у него уже есть ViewRects
-        //    var viewInfo = view.GetViewInfo() as BandedGridViewInfo;
-        //    if (viewInfo == null)
-        //        return;
-
-        //    // Стандартный заголовок не рисуем
-        //    e.Handled = true;
-
-        //    // Прямоугольники панели бэндов и панели колонок
-        //    Rectangle bandPanelRect = viewInfo.ViewRects.BandPanel;
-        //    Rectangle columnPanelRect = viewInfo.ViewRects.ColumnPanel;
-
-        //    // Общая высота "шапки" (бэнды + заголовки колонок)
-        //    int totalHeaderHeight = bandPanelRect.Height + columnPanelRect.Height;
-
-        //    // Наш растянутый заголовок
-        //    Rectangle rect = new Rectangle(
-        //        e.Info.Bounds.X,
-        //        bandPanelRect.Y,      // с самого верха бэндов
-        //        e.Info.Bounds.Width,
-        //        totalHeaderHeight
-        //    );
-
-        //    // Фон
-        //    using (var back = new SolidBrush(e.Appearance.BackColor))
-        //        e.Graphics.FillRectangle(back, rect);
-
-        //    // Рамка
-        //    using (var pen = new Pen(Color.Gray))
-        //        e.Graphics.DrawRectangle(pen, rect);
-
-        //    // Текст по центру
-        //    using (var sf = new StringFormat
-        //    {
-        //        Alignment = StringAlignment.Center,
-        //        LineAlignment = StringAlignment.Center,
-        //        Trimming = StringTrimming.EllipsisCharacter,
-        //        FormatFlags = StringFormatFlags.NoWrap
-        //    })
-        //    {
-        //        e.Graphics.DrawString(
-        //            e.Info.Caption,              // текст заголовка ("Зона")
-        //            e.Appearance.Font,
-        //            Brushes.Black,
-        //            rect,
-        //            sf
-        //        );
-        //    }
-        //}
         private void SyncSelectionUpdate()
         {
             try
@@ -2350,11 +2337,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //MessageBox.Show($"Двойной клик по операции. В/М {curr.kmlNumber} ({curr.kmlInvNum}) - Зона {curr.kmaNumber}");
             try
             {
-                if (customTabControl1.SelectedTabPageIndex != 0)
-                {
-                    MessageBox.Show("Перейдите на вкладку 'маш/час' блока Сменное задание и выберите В/М!");
-                    return;
-                }
+                //if (customTabControl1.SelectedTabPageIndex != 0)
+                //{
+                //    MessageBox.Show("Перейдите на вкладку 'маш/час' блока Сменное задание и выберите В/М!");
+                //    return;
+                //}
                 // получаем список строк (pzvID) для присовения машины (kmlID)
                 var idSet = _pzvId != null ? new HashSet<int>(_pzvId) : new HashSet<int>();
 
@@ -2495,13 +2482,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     .Where(x => x.SyncSelection == 1)
                     .Select(x => x.olPzvID)   // новый маппер
                     .ToList();
-                SmenZadanyVyazMachine curr = _smenZadanyVyazMachineBindingSource.Current as SmenZadanyVyazMachine;
-                if (curr == null || curr.kmlID == null || curr.kmlID == 0)
+                //SmenZadanyVyazMachine curr = _smenZadanyVyazMachineBindingSource.Current as SmenZadanyVyazMachine;
+                SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                if (curr == null || curr.kwsmlKmlID == null || curr.kwsmlKmlID == 0)
                 {
                     MessageBox.Show("Не выбрана машина для назначения");
                     return;
                 }
-                SetKnitMachineToPzvID(filteredList, curr.kmlID);
+                SetKnitMachineToPzvID(filteredList, curr.kwsmlKmlID);
                 //GoToPzvID(pzvCurrent.olPzvID, _xColumn);
 
                 var errList = _pZVOperListByPachListBindingSource.List
@@ -3105,14 +3093,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     .Where(x => x.SyncSelection == 1)
                     .Select(x => x.olPzvID)   // новый маппер
                     .ToList();
-                SmenZadanyVyazEmp curr = _smenZadanyVyazEmpBindingSource.Current as SmenZadanyVyazEmp;
-                if (curr == null || curr.empTab == null || curr.empTab == 0)
+                //SmenZadanyVyazEmp curr = _smenZadanyVyazEmpBindingSource.Current as SmenZadanyVyazEmp;
+                SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                if (curr == null || curr.kwsTabStart == null || curr.kwsTabStart == 0)
                 {
                     MessageBox.Show("Не выбранн работниик для назначения");
                     return;
                 }
                 //SetTabToPzvID(filteredList, curr.empTab);
-                await SetTabToPzvID(filteredList, curr.empTab);
+                await SetTabToPzvID(filteredList, curr.kwsTabStart);
                 //GoToPzvID(pzvCurrent.olPzvID, _xColumn);
 
                 var errList = _pZVOperListByPachListBindingSource.List

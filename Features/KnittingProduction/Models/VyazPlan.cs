@@ -421,16 +421,27 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int typeID { get; set; }
         [NotMapped] public string typeName { get; set; }
         [NotMapped] public decimal chasNaznZad { get; set; }
+        [NotMapped] public decimal chasNaznZadGroup { get; set; }
         [NotMapped] public decimal chasNotConfirmedZad { get; set; }
+        [NotMapped] public decimal chasNotConfirmedZadGroup { get; set; }
         [NotMapped] public decimal chasRemainZad { get; set; }
+        [NotMapped] public decimal chasRemainZadGroup { get; set; }
         [NotMapped] public decimal shiftsRemainZad { get; set; }
+        [NotMapped] public decimal shiftsRemainZadGroup { get; set; }
         [NotMapped] public decimal chasNaznSmen { get; set; }
+        [NotMapped] public decimal chasNaznSmenGroup { get; set; }
         [NotMapped] public decimal chasNaznSmenProc { get; set; }
+        [NotMapped] public decimal chasNaznSmenProcGroup { get; set; }
         [NotMapped] public decimal chasInWorkSmen { get; set; }
+        [NotMapped] public decimal chasInWorkSmenGroup { get; set; }
         [NotMapped] public decimal chasDoneSmen { get; set; }
+        [NotMapped] public decimal chasDoneSmenGroup { get; set; }
         [NotMapped] public decimal chasDoneSmenProc { get; set; }
+        [NotMapped] public decimal chasDoneSmenProcGroup { get; set; }
         [NotMapped] public decimal chasRemainSmen { get; set; }
+        [NotMapped] public decimal chasRemainSmenGroup { get; set; }
         [NotMapped] public decimal chasConfirmedSmen { get; set; }
+        [NotMapped] public decimal chasConfirmedSmenGroup { get; set; }
         [NotMapped] public decimal koefObServ { get; set; }
         [NotMapped] public int smenLength { get; set; }
     }
