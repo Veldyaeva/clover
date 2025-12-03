@@ -34,109 +34,102 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список укороченной модели <see cref="KnitterPZVModel"/> для отображения.</returns>
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
-            try
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+            var map = new ConcurrentDictionary<int, KnitterPZVModel>();
+
+            using (var connection = _dbHelper.GetConnection())
             {
-                Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-
-                var map = new ConcurrentDictionary<int, KnitterPZVModel>();
-
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    await connection.QueryAsync<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
-                        "EXEC dbo.GetPlanZagrVyazNorm_ByTab @tab, @OnlyActive;",
-                        (pzv, nr, rzv) =>
-                        {
-                            var parent = map.GetOrAdd(pzv.pzvID, _ =>
-                            {
-                                pzv.nrModels ??= new BindingList<nrModel>();
-                                pzv.rzvModels ??= new BindingList<rzvModel>();
-                                return pzv;
-                            });
-
-                            if (nr != null)
-                            {
-                                if (string.IsNullOrWhiteSpace(parent.kmlNumber) && !string.IsNullOrWhiteSpace(nr.kmlNumber))
-                                {
-                                    parent.kmlNumber = nr.kmlNumber;
-                                }
-
-                                if (parent.nrN == null)
-                                    parent.nrN = nr.nrN;
-                                if (parent.nrN1 == null)
-                                    parent.nrN1 = nr.nrN1;
-                                if (string.IsNullOrWhiteSpace(parent.nrText))
-                                    parent.nrText = nr.nrText;
-                                if (parent.nrRazryd == null)
-                                    parent.nrRazryd = nr.nrRazryd;
-                                if (string.IsNullOrWhiteSpace(parent.nrObor))
-                                    parent.nrObor = nr.nrObor;
-                                if (parent.nr_kod_ob == null)
-                                    parent.nr_kod_ob = nr.nr_kod_ob;
-                                if (parent.nr_kod_proizv == null)
-                                    parent.nr_kod_proizv = nr.nr_kod_proizv;
-
-                                parent.nrModels ??= new BindingList<nrModel>();
-                                if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
-                                {
-                                    parent.nrModels.Add(nr);
-                                }
-                            }
-
-                            if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
-                            {
-                                if (rzv.n_pach != 0)
-                                {
-                                    parent.n_pach ??= rzv.n_pach;
-                                }
-
-                                if (string.IsNullOrWhiteSpace(parent.razm) && !string.IsNullOrWhiteSpace(rzv.razm))
-                                {
-                                    parent.razm = rzv.razm;
-                                }
-
-                                parent.rzvModels ??= new BindingList<rzvModel>();
-                                if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
-                                {
-                                    parent.rzvModels.Add(rzv);
-                                }
-                            }
-
-                            return parent;
-                        },
-                        new { tab, OnlyActive = 1 },
-                        splitOn: "nrID,n_pach",
-                        commandType: CommandType.Text,
-                        buffered: true);
-
-                    var parents = map.Values.ToList();
-
-                    var missingKmlIds = parents
-                        .Where(p => p.pzvKmlID > 0 && string.IsNullOrWhiteSpace(p.kmlNumber))
-                        .Select(p => p.pzvKmlID)
-                        .Distinct()
-                        .ToArray();
-
-                    if (missingKmlIds.Length > 0)
+                await connection.QueryAsync<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
+                    "EXEC dbo.GetPlanZagrVyazNorm_ByTab @tab, @OnlyActive;",
+                    (pzv, nr, rzv) =>
                     {
-                        const string kmlQuery = "SELECT kmlID, kmlNumber FROM dbo.view_kml_vyaz WHERE kmlID IN @ids";
-                        var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber)>(kmlQuery, new { ids = missingKmlIds }))
-                            .ToDictionary(x => x.kmlID, x => x.kmlNumber);
-
-                        foreach (var parent in parents)
+                        var parent = map.GetOrAdd(pzv.pzvID, _ =>
                         {
-                            if (string.IsNullOrWhiteSpace(parent.kmlNumber) && lookup.TryGetValue(parent.pzvKmlID, out var number))
+                            pzv.nrModels ??= new BindingList<nrModel>();
+                            pzv.rzvModels ??= new BindingList<rzvModel>();
+                            return pzv;
+                        });
+
+                        if (nr != null)
+                        {
+                            if (string.IsNullOrWhiteSpace(parent.kmlNumber) && !string.IsNullOrWhiteSpace(nr.kmlNumber))
                             {
-                                parent.kmlNumber = number;
+                                parent.kmlNumber = nr.kmlNumber;
+                            }
+
+                            if (parent.nrN == null)
+                                parent.nrN = nr.nrN;
+                            if (parent.nrN1 == null)
+                                parent.nrN1 = nr.nrN1;
+                            if (string.IsNullOrWhiteSpace(parent.nrText))
+                                parent.nrText = nr.nrText;
+                            if (parent.nrRazryd == null)
+                                parent.nrRazryd = nr.nrRazryd;
+                            if (string.IsNullOrWhiteSpace(parent.nrObor))
+                                parent.nrObor = nr.nrObor;
+                            if (parent.nr_kod_ob == null)
+                                parent.nr_kod_ob = nr.nr_kod_ob;
+                            if (parent.nr_kod_proizv == null)
+                                parent.nr_kod_proizv = nr.nr_kod_proizv;
+
+                            parent.nrModels ??= new BindingList<nrModel>();
+                            if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
+                            {
+                                parent.nrModels.Add(nr);
                             }
                         }
-                    }
 
-                    return parents;
+                        if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
+                        {
+                            if (rzv.n_pach != 0)
+                            {
+                                parent.n_pach ??= rzv.n_pach;
+                            }
+
+                            if (string.IsNullOrWhiteSpace(parent.razm) && !string.IsNullOrWhiteSpace(rzv.razm))
+                            {
+                                parent.razm = rzv.razm;
+                            }
+
+                            parent.rzvModels ??= new BindingList<rzvModel>();
+                            if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
+                            {
+                                parent.rzvModels.Add(rzv);
+                            }
+                        }
+
+                        return parent;
+                    },
+                    new { tab, OnlyActive = 1 },
+                    splitOn: "nrID,n_pach",
+                    commandType: CommandType.Text,
+                    buffered: true);
+
+                var parents = map.Values.ToList();
+
+                var missingKmlIds = parents
+                    .Where(p => p.pzvKmlID > 0 && string.IsNullOrWhiteSpace(p.kmlNumber))
+                    .Select(p => p.pzvKmlID)
+                    .Distinct()
+                    .ToArray();
+
+                if (missingKmlIds.Length > 0)
+                {
+                    const string kmlQuery = "SELECT kmlID, kmlNumber FROM dbo.view_kml_vyaz WHERE kmlID IN @ids";
+                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber)>(kmlQuery, new { ids = missingKmlIds }))
+                        .ToDictionary(x => x.kmlID, x => x.kmlNumber);
+
+                    foreach (var parent in parents)
+                    {
+                        if (string.IsNullOrWhiteSpace(parent.kmlNumber) && lookup.TryGetValue(parent.pzvKmlID, out var number))
+                        {
+                            parent.kmlNumber = number;
+                        }
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"GetPlanByTabAsync failed (tab={tab})", ex);
+
+                return parents;
             }
         }
 
@@ -148,15 +141,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список операций плана <see cref="PlanZagrVyazOper"/>.</returns>
         public async Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod)
         {
-            try
-            {
-                const string query = "EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = @nomListJson, @xVyazPodrKod = @vyazPodrKod";
-                return await _dbService.GetListAsync<PlanZagrVyazOper>(query, new { nomListJson, vyazPodrKod });
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("GetPlanZagrVyazByPachListAsync failed", ex);
-            }
+            const string query = "EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = @nomListJson, @xVyazPodrKod = @vyazPodrKod";
+            return await _dbService.GetListAsync<PlanZagrVyazOper>(query, new { nomListJson, vyazPodrKod });
         }
 
         /// <summary>
@@ -166,16 +152,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Строка ФИО или пустая строка, если не найдено.</returns>
         public async Task<string> GetFioByTabAsync(int tab)
         {
-            try
-            {
-                const string query = "SELECT fio FROM dbo.fio WHERE tab = @tab";
-                var fio = await _dbService.GetFirstOrDefaultAsync<string>(query, new { tab });
-                return fio ?? string.Empty;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"GetFioByTabAsync failed (tab={tab})", ex);
-            }
+            const string query = "SELECT fio FROM dbo.fio WHERE tab = @tab";
+            var fio = await _dbService.GetFirstOrDefaultAsync<string>(query, new { tab });
+            return fio ?? string.Empty;
         }
 
         /// <summary>
@@ -184,15 +163,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список сотрудников.</returns>
         public async Task<List<FioModel>> GetFioListAsync()
         {
-            try
-            {
-                const string query = @"SELECT tab AS Tab, fio AS Fio FROM dbo.fio ORDER BY fio";
-                return await _dbService.GetListAsync<FioModel>(query, new { });
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("GetFioListAsync failed", ex);
-            }
+            const string query = @"SELECT tab AS Tab, fio AS Fio FROM dbo.fio ORDER BY fio";
+            return await _dbService.GetListAsync<FioModel>(query, new { });
         }
         /// <summary>
         /// 
@@ -201,30 +173,28 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns></returns>
         public async Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab)
         {
-            try
-            {
-                const string query = "SELECT * FROM dbo.planZagrVyaz WHERE pzvTab = @tab";
-                return await _dbService.GetListAsync<PlanZagrVyaz>(query, new { tab });
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"GetPlanTreeByTabAsync failed (tab={tab})", ex);
-            }
+            const string query = "SELECT * FROM dbo.planZagrVyaz WHERE pzvTab = @tab";
+            return await _dbService.GetListAsync<PlanZagrVyaz>(query, new { tab });
         }
 
         public async Task UpdatePzvTabAsync(IEnumerable<int> pzvIds, int tab)
         {
-            try
-            {
-                if (pzvIds == null)
-                    return;
+            if (pzvIds == null)
+                return;
 
-                var ids = pzvIds.Distinct().ToArray();
-                if (ids.Length == 0)
-                    return;
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    const string sql = @"UPDATE dbo.planZagrVyaz
+            var ids = pzvIds.Distinct().ToArray();
+            if (ids.Length == 0)
+                return;
+//SET pzvTab = @tab,
+//    pzvDateNaznTab = CASE WHEN @tab = 0 THEN NULL ELSE GETDATE() END,
+//    pzvKolNazn = CASE WHEN @tab = 0 THEN pzvKolNazn ELSE ISNULL(pzvKol, 0) END,
+//    pzvSekNazn = CASE WHEN @tab = 0 THEN pzvSekNazn ELSE ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0) END,
+//    pzvChasNazn = CASE 
+//                      WHEN @tab = 0 THEN pzvChasNazn 
+//                      ELSE CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
+            using (var connection = _dbHelper.GetConnection())
+            {
+                const string sql = @"UPDATE dbo.planZagrVyaz
 SET pzvTab = @tab,
     pzvDateNaznTab = GETDATE(),
     pzvKolNazn = ISNULL(pzvKol, 0),
@@ -232,54 +202,35 @@ SET pzvTab = @tab,
     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
 WHERE pzvID IN @ids";
 
-                    await connection.ExecuteAsync(sql, new { tab, ids });
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"UpdatePzvTabAsync failed (tab={tab})", ex);
+                await connection.ExecuteAsync(sql, new { tab, ids });
             }
         }
 
         public async Task<KnitterPZVModel> UpdatePzvDateStartAsync(int pzvId)
         {
-            try
+            using (var connection = _dbHelper.GetConnection())
             {
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    const string sql = @"
+                const string sql = @"
 UPDATE dbo.planZagrVyaz
 SET pzvDateStart = GETDATE()
 WHERE pzvID = @pzvId;
 SELECT pzvID, pzvDateStart FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
-                    var result = await connection.QuerySingleAsync<(int pzvID, DateTime? pzvDateStart)>(sql, new { pzvId });
-                    return new KnitterPZVModel { pzvID = result.pzvID, pzvDateStart = result.pzvDateStart };
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"UpdatePzvDateStartAsync failed (pzvId={pzvId})", ex);
+                var result = await connection.QuerySingleAsync<(int pzvID, DateTime? pzvDateStart)>(sql, new { pzvId });
+                return new KnitterPZVModel { pzvID = result.pzvID, pzvDateStart = result.pzvDateStart };
             }
         }
 
         public async Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId)
         {
-            try
+            using (var connection = _dbHelper.GetConnection())
             {
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    const string sql = @"
+                const string sql = @"
 UPDATE dbo.planZagrVyaz
 SET pzvDateEnd = GETDATE()
 WHERE pzvID = @pzvId;
 SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
-                    var result = await connection.QuerySingleAsync<(int pzvID, DateTime? pzvDateEnd)>(sql, new { pzvId });
-                    return new KnitterPZVModel { pzvID = result.pzvID, pzvDateEnd = result.pzvDateEnd };
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"UpdatePzvDateEndAsync failed (pzvId={pzvId})", ex);
+                var result = await connection.QuerySingleAsync<(int pzvID, DateTime? pzvDateEnd)>(sql, new { pzvId });
+                return new KnitterPZVModel { pzvID = result.pzvID, pzvDateEnd = result.pzvDateEnd };
             }
         }
 
@@ -330,76 +281,18 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
             }
         }
 
-		public async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact)
-		{
-			try
-			{
-				using (var connection = _dbHelper.GetConnection())
-				{
-					var parameters = new
-					{
-						pzvId,
-						mode,
-						qtyFact,
-						userName = (string)null
-					};
-					var ids = new List<PzvSplitResult>();
-					using (var grid = await connection.QueryMultipleAsync(
-						"dbo.PZV_Split",
-						param: parameters,
-						commandTimeout: 60,
-						commandType: CommandType.StoredProcedure))
-					{
-						if (!grid.IsConsumed)
-						{
-							try
-							{
-								var head = await grid.ReadAsync();
-								// ignore head set if present
-							}
-							catch { }
-						}
-						if (!grid.IsConsumed)
-						{
-							var newIds = await grid.ReadAsync<PzvSplitResult>();
-							ids.AddRange(newIds);
-						}
-					}
-					return ids;
-				}
-			}
-			catch (Exception ex)
-			{
-				throw new Exception($"SplitPzvByModeAsync failed (pzvId={pzvId}, mode={mode}, qtyFact={qtyFact})", ex);
-			}
-		}
-
-        public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0)
+        public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, int? kmsId)
         {
             try
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                   // await connection.OpenAsync();
-                    using (var tx = connection.BeginTransaction())
-                    {
-                        const string sqlMain = @"
+                    const string sql = @"
 INSERT INTO ACE.dbo.knitWorkingShiftNew (kwsTabStart, kwsKmaID, kwsKmsID, kwsDateStart)
-VALUES (@tabStart, @kmaId, @kmsID, GETDATE());
+VALUES (@tabStart, @kmaId, @kmsId, GETDATE());
 SELECT CAST(SCOPE_IDENTITY() AS int);";
-                        var kwsId = await connection.ExecuteScalarAsync<int>(sqlMain, new { tabStart, kmaId, kmsId, kmaNum }, transaction: tx);
-
-                        // запись машин зоны в таблицу knitWorkingShiftMachineListNew
-                        const string sqlList = @"
-INSERT INTO ACE.dbo.knitWorkingShiftMachineListNew (kwsmlKwsID, kwsmlKmlID, kwsmlKodOb, kiwsmlLongRep)
-SELECT @kwsId, mlv.kmlID, mlv.kmlKodOb, mlv.kmlLongRep
-FROM ACE.dbo.knitMachineList_view mlv
-WHERE mlv.kmlKmaID = @kmaId;";
-                        await connection.ExecuteAsync(sqlList, new { kwsId, kmaId }, transaction: tx);
-
-                        tx.Commit();
-                        return kwsId;
-                    }
+                    var id = await connection.ExecuteScalarAsync<int>(sql, new { tabStart, kmaId, kmsId });
+                    return id;
                 }
             }
             catch (Exception ex)
@@ -428,7 +321,7 @@ WHERE kwsID = @shiftId AND (kwsDel = 0 OR kwsDel IS NULL) AND kwsDateEnd IS NULL
             }
         }
 
-        public async Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab)
+        public async Task<(int? kmaId, int? kmsId)> GetZoneByTabAsync(int tab)
         {
             try
             {
@@ -436,13 +329,12 @@ WHERE kwsID = @shiftId AND (kwsDel = 0 OR kwsDel IS NULL) AND kwsDateEnd IS NULL
                 {
                     const string sql = @"
 SELECT TOP 1 
-    kmae.kmaeKmaID AS kmaId, 
-    kmae.kmaNumber AS kmaNum
-
+    kmae.kmaeID AS kmaId, 
+    kmae.kmaNumber AS kmsId
 FROM ACE.dbo.knitMachineAreaEmp_view kmae
 WHERE kmaeTab = @tab
 ORDER BY kmaID";
-                    var result = await connection.QueryFirstOrDefaultAsync<(int? kmaId, string kmaNum)>(sql, new { tab });
+                    var result = await connection.QueryFirstOrDefaultAsync<(int? kmaId, int? kmsId)>(sql, new { tab });
                     return result;
                 }
             }
@@ -451,33 +343,6 @@ ORDER BY kmaID";
                 throw new Exception($"GetZoneByTabAsync failed (tab={tab})", ex);
             }
         }
-
-		public async Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab)
-		{
-			try
-			{
-				using (var connection = _dbHelper.GetConnection())
-				{
-					const string sql = @"
-SELECT TOP 1 
-	kwsID AS shiftId,
-	kwsDateStart AS dateStart
-FROM ACE.dbo.knitWorkingShiftNew
-WHERE kwsTabStart = @tab
-  AND (kwsDel = 0 OR kwsDel IS NULL)
-  AND kwsDateEnd IS NULL
-ORDER BY kwsDateStart DESC";
-					var row = await connection.QueryFirstOrDefaultAsync<(int shiftId, DateTime? dateStart)>(sql, new { tab });
-					if (row.shiftId == 0)
-						return (null, null);
-					return (row.shiftId, row.dateStart);
-				}
-			}
-			catch (Exception ex)
-			{
-				throw new Exception($"GetOpenShiftByTabAsync failed (tab={tab})", ex);
-			}
-		}
 
     }
 }

@@ -32,6 +32,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            gridBand18 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -41,9 +42,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn21 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn23 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            gridBand27 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn15 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn29 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn30 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            gridBand29 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn22 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             bandedGridColumn19 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -73,9 +76,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
             textEdit1 = new DevExpress.XtraEditors.TextEdit();
             dateEdit1 = new DevExpress.XtraEditors.DateEdit();
-            textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            textEdit3 = new DevExpress.XtraEditors.TextEdit();
             simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             TabGridLookUpEdit = new DevExpress.XtraEditors.GridLookUpEdit();
             gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -84,9 +84,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -140,8 +137,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties.CalendarTimeProperties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit3.Properties).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)textEdit2.Properties).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)textEdit3.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)TabGridLookUpEdit.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
@@ -149,9 +146,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
@@ -176,6 +173,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             advBandedGridView1.OptionsView.ColumnAutoWidth = true;
             advBandedGridView1.OptionsView.ShowDetailButtons = false;
             advBandedGridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridBand18
+            // 
+            gridBand18.Columns.Add(bandedGridColumn20);
+            gridBand18.Columns.Add(bandedGridColumn11);
+            gridBand18.Columns.Add(bandedGridColumn12);
+            gridBand18.Columns.Add(bandedGridColumn13);
+            gridBand18.Columns.Add(bandedGridColumn14);
+            gridBand18.Columns.Add(bandedGridColumn16);
+            gridBand18.Columns.Add(bandedGridColumn17);
+            gridBand18.Columns.Add(bandedGridColumn21);
+            gridBand18.Columns.Add(bandedGridColumn23);
+            gridBand18.Name = "gridBand18";
+            gridBand18.VisibleIndex = 0;
+            gridBand18.Width = 980;
             // 
             // bandedGridColumn20
             // 
@@ -246,6 +258,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn23.Visible = true;
             bandedGridColumn23.Width = 145;
             // 
+            // gridBand27
+            // 
+            gridBand27.Caption = "План";
+            gridBand27.Columns.Add(bandedGridColumn15);
+            gridBand27.Columns.Add(bandedGridColumn29);
+            gridBand27.Columns.Add(bandedGridColumn30);
+            gridBand27.Name = "gridBand27";
+            gridBand27.VisibleIndex = 1;
+            gridBand27.Width = 143;
+            // 
             // bandedGridColumn15
             // 
             bandedGridColumn15.Caption = "Кол-во к выполнению";
@@ -267,6 +289,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn30.FieldName = "kol_Effective";
             bandedGridColumn30.Name = "bandedGridColumn30";
             bandedGridColumn30.Width = 62;
+            // 
+            // gridBand29
+            // 
+            gridBand29.Caption = "Факт";
+            gridBand29.Columns.Add(bandedGridColumn22);
+            gridBand29.Columns.Add(bandedGridColumn18);
+            gridBand29.Columns.Add(bandedGridColumn19);
+            gridBand29.Columns.Add(bandedGridColumn24);
+            gridBand29.Columns.Add(bandedGridColumn31);
+            gridBand29.Name = "gridBand29";
+            gridBand29.VisibleIndex = 2;
+            gridBand29.Width = 569;
             // 
             // bandedGridColumn22
             // 
@@ -315,7 +349,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             PlanZagrVyazGridControl.Location = new System.Drawing.Point(12, 38);
             PlanZagrVyazGridControl.MainView = bandedGridView3;
             PlanZagrVyazGridControl.Name = "PlanZagrVyazGridControl";
-            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1305, 493);
+            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1305, 567);
             PlanZagrVyazGridControl.TabIndex = 6;
             PlanZagrVyazGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridView3, gridView1, advBandedGridView1 });
             // 
@@ -493,9 +527,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             dataLayoutControl1.Controls.Add(FioGridLookUpEdit);
             dataLayoutControl1.Controls.Add(textEdit1);
             dataLayoutControl1.Controls.Add(dateEdit1);
-            dataLayoutControl1.Controls.Add(textEdit2);
-            dataLayoutControl1.Controls.Add(simpleButton1);
-            dataLayoutControl1.Controls.Add(textEdit3);
             dataLayoutControl1.Controls.Add(simpleButton2);
             dataLayoutControl1.Controls.Add(TabGridLookUpEdit);
             dataLayoutControl1.Dock = DockStyle.Fill;
@@ -526,32 +557,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             dateEdit1.Size = new System.Drawing.Size(137, 20);
             dateEdit1.StyleController = dataLayoutControl1;
             dateEdit1.TabIndex = 4;
-            // 
-            // textEdit2
-            // 
-            textEdit2.Location = new System.Drawing.Point(123, 535);
-            textEdit2.Name = "textEdit2";
-            textEdit2.Size = new System.Drawing.Size(1194, 20);
-            textEdit2.StyleController = dataLayoutControl1;
-            textEdit2.TabIndex = 7;
-            // 
-            // simpleButton1
-            // 
-            simpleButton1.Location = new System.Drawing.Point(12, 559);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new System.Drawing.Size(1305, 22);
-            simpleButton1.StyleController = dataLayoutControl1;
-            simpleButton1.TabIndex = 8;
-            simpleButton1.Text = "simpleButton1";
-            simpleButton1.Click += simpleButton1_Click;
-            // 
-            // textEdit3
-            // 
-            textEdit3.Location = new System.Drawing.Point(123, 585);
-            textEdit3.Name = "textEdit3";
-            textEdit3.Size = new System.Drawing.Size(1194, 20);
-            textEdit3.StyleController = dataLayoutControl1;
-            textEdit3.TabIndex = 9;
             // 
             // simpleButton2
             // 
@@ -587,7 +592,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem1, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem5, emptySpaceItem1, simpleLabelItem1 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem1, layoutControlItem9, layoutControlItem5, emptySpaceItem1, simpleLabelItem1 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(1329, 617);
             Root.TextVisible = false;
@@ -637,32 +642,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem1.Control = PlanZagrVyazGridControl;
             layoutControlItem1.Location = new System.Drawing.Point(0, 26);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1309, 497);
+            layoutControlItem1.Size = new System.Drawing.Size(1309, 571);
             layoutControlItem1.TextVisible = false;
-            // 
-            // layoutControlItem6
-            // 
-            layoutControlItem6.Control = textEdit2;
-            layoutControlItem6.Location = new System.Drawing.Point(0, 523);
-            layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(1309, 24);
-            layoutControlItem6.TextSize = new System.Drawing.Size(99, 13);
-            // 
-            // layoutControlItem7
-            // 
-            layoutControlItem7.Control = simpleButton1;
-            layoutControlItem7.Location = new System.Drawing.Point(0, 547);
-            layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(1309, 26);
-            layoutControlItem7.TextVisible = false;
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = textEdit3;
-            layoutControlItem8.Location = new System.Drawing.Point(0, 573);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(1309, 24);
-            layoutControlItem8.TextSize = new System.Drawing.Size(99, 13);
             // 
             // layoutControlItem9
             // 
@@ -1009,8 +990,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties.CalendarTimeProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)dateEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit3.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)TabGridLookUpEdit.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
@@ -1018,9 +997,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            //((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            //((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            //((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
@@ -1075,12 +1054,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand7;
         private Core.Class.CustomGridControl PlanZagrVyazGridControl;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.TextEdit textEdit3;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand25;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand26;
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridView1;
