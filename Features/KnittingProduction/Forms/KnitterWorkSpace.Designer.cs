@@ -1,6 +1,8 @@
-﻿namespace SewingProduction.Features.KnittingProduction.Forms
+﻿using System.Windows.Forms;
+
+namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    partial class KnitterWorkSpace
+    partial class KnitterWorkSpace : Form
     {
         /// <summary>
         /// Required designer variable.
@@ -15,7 +17,7 @@
         {
             if (disposing && (components != null))
             {
-                components.Dispose();
+                components?.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -181,7 +183,7 @@
             gridBand18.Columns.Add(bandedGridColumn16);
             gridBand18.Name = "gridBand18";
             gridBand18.VisibleIndex = 0;
-            gridBand18.Width = 297;
+            gridBand18.Width = 366;
             // 
             // bandedGridColumn11
             // 
@@ -189,7 +191,7 @@
             bandedGridColumn11.FieldName = "DisplayNumber";
             bandedGridColumn11.Name = "bandedGridColumn11";
             bandedGridColumn11.Visible = true;
-            bandedGridColumn11.Width = 53;
+            bandedGridColumn11.Width = 65;
             // 
             // bandedGridColumn12
             // 
@@ -204,7 +206,7 @@
             bandedGridColumn13.FieldName = "nrText";
             bandedGridColumn13.Name = "bandedGridColumn13";
             bandedGridColumn13.Visible = true;
-            bandedGridColumn13.Width = 91;
+            bandedGridColumn13.Width = 112;
             // 
             // bandedGridColumn14
             // 
@@ -212,7 +214,7 @@
             bandedGridColumn14.FieldName = "nrRazryd";
             bandedGridColumn14.Name = "bandedGridColumn14";
             bandedGridColumn14.Visible = true;
-            bandedGridColumn14.Width = 81;
+            bandedGridColumn14.Width = 99;
             // 
             // bandedGridColumn16
             // 
@@ -220,7 +222,7 @@
             bandedGridColumn16.FieldName = "nrObor";
             bandedGridColumn16.Name = "bandedGridColumn16";
             bandedGridColumn16.Visible = true;
-            bandedGridColumn16.Width = 72;
+            bandedGridColumn16.Width = 90;
             // 
             // gridBand27
             // 
@@ -232,7 +234,7 @@
             gridBand27.Columns.Add(bandedGridColumn21);
             gridBand27.Name = "gridBand27";
             gridBand27.VisibleIndex = 1;
-            gridBand27.Width = 271;
+            gridBand27.Width = 334;
             // 
             // bandedGridColumn15
             // 
@@ -240,7 +242,7 @@
             bandedGridColumn15.FieldName = "pzvKol";
             bandedGridColumn15.Name = "bandedGridColumn15";
             bandedGridColumn15.Visible = true;
-            bandedGridColumn15.Width = 64;
+            bandedGridColumn15.Width = 107;
             // 
             // bandedGridColumn17
             // 
@@ -248,7 +250,7 @@
             bandedGridColumn17.FieldName = "pzvSek";
             bandedGridColumn17.Name = "bandedGridColumn17";
             bandedGridColumn17.Visible = true;
-            bandedGridColumn17.Width = 99;
+            bandedGridColumn17.Width = 122;
             // 
             // bandedGridColumn29
             // 
@@ -269,7 +271,7 @@
             bandedGridColumn21.Caption = "Н. вр. обслуж. 1шт/сек";
             bandedGridColumn21.Name = "bandedGridColumn21";
             bandedGridColumn21.Visible = true;
-            bandedGridColumn21.Width = 108;
+            bandedGridColumn21.Width = 105;
             // 
             // gridBand29
             // 
@@ -282,7 +284,7 @@
             gridBand29.Columns.Add(bandedGridColumn24);
             gridBand29.Name = "gridBand29";
             gridBand29.VisibleIndex = 2;
-            gridBand29.Width = 470;
+            gridBand29.Width = 580;
             // 
             // bandedGridColumn20
             // 
@@ -290,7 +292,6 @@
             bandedGridColumn20.FieldName = "pzvTab";
             bandedGridColumn20.Name = "bandedGridColumn20";
             bandedGridColumn20.Visible = true;
-            bandedGridColumn20.Width = 61;
             // 
             // bandedGridColumn18
             // 
@@ -298,7 +299,7 @@
             bandedGridColumn18.FieldName = "pzvDateStart";
             bandedGridColumn18.Name = "bandedGridColumn18";
             bandedGridColumn18.Visible = true;
-            bandedGridColumn18.Width = 60;
+            bandedGridColumn18.Width = 74;
             // 
             // bandedGridColumn19
             // 
@@ -306,29 +307,29 @@
             bandedGridColumn19.FieldName = "pzvDateEnd";
             bandedGridColumn19.Name = "bandedGridColumn19";
             bandedGridColumn19.Visible = true;
-            bandedGridColumn19.Width = 77;
+            bandedGridColumn19.Width = 95;
             // 
             // bandedGridColumn22
             // 
             bandedGridColumn22.Caption = "Кол-во факт (шт)";
-            bandedGridColumn22.FieldName = "pzvRKol";
+            bandedGridColumn22.FieldName = "pzvKolNazn";
             bandedGridColumn22.Name = "bandedGridColumn22";
             bandedGridColumn22.Visible = true;
-            bandedGridColumn22.Width = 104;
+            bandedGridColumn22.Width = 128;
             // 
             // bandedGridColumn23
             // 
             bandedGridColumn23.Caption = "Н. вр. обсл. факт в ч/ч";
             bandedGridColumn23.Name = "bandedGridColumn23";
             bandedGridColumn23.Visible = true;
-            bandedGridColumn23.Width = 84;
+            bandedGridColumn23.Width = 103;
             // 
             // bandedGridColumn24
             // 
             bandedGridColumn24.Caption = "Подтв. маст. ";
             bandedGridColumn24.Name = "bandedGridColumn24";
             bandedGridColumn24.Visible = true;
-            bandedGridColumn24.Width = 84;
+            bandedGridColumn24.Width = 105;
             // 
             // PlanZagrVyazGridControl
             // 
@@ -522,7 +523,7 @@
             dataLayoutControl1.Controls.Add(textEdit3);
             dataLayoutControl1.Controls.Add(simpleButton2);
             dataLayoutControl1.Controls.Add(TabGridLookUpEdit);
-            dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataLayoutControl1.Dock = DockStyle.Fill;
             dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             dataLayoutControl1.Name = "dataLayoutControl1";
             dataLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(962, 395, 650, 400);
@@ -972,7 +973,7 @@
             // KnitterWorkSpace
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1329, 617);
             Controls.Add(dataLayoutControl1);
             Name = "KnitterWorkSpace";

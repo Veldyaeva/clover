@@ -75,7 +75,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// При неполном выполнении: разделяет запись на “факт” и “остаток”.
         /// Должно создать дополнительную запись в плановой таблице с оставшимся количеством.
         /// </summary>
-        public Task<IReadOnlyList<int>> SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
+        public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
+
     }
 }
 

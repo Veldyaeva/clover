@@ -185,12 +185,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             var ids = pzvIds.Distinct().ToArray();
             if (ids.Length == 0)
                 return;
-
+//SET pzvTab = @tab,
+//    pzvDateNaznTab = CASE WHEN @tab = 0 THEN NULL ELSE GETDATE() END,
+//    pzvKolNazn = CASE WHEN @tab = 0 THEN pzvKolNazn ELSE ISNULL(pzvKol, 0) END,
+//    pzvSekNazn = CASE WHEN @tab = 0 THEN pzvSekNazn ELSE ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0) END,
+//    pzvChasNazn = CASE 
+//                      WHEN @tab = 0 THEN pzvChasNazn 
+//                      ELSE CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
             using (var connection = _dbHelper.GetConnection())
             {
                 const string sql = @"UPDATE dbo.planZagrVyaz
 SET pzvTab = @tab,
-    pzvDateNaznTab = CASE WHEN @tab = 0 THEN NULL ELSE GETDATE() END
+    pzvDateNaznTab = GETDATE(),
+    pzvKolNazn = ISNULL(pzvKol, 0),
+    pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
+    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
 WHERE pzvID IN @ids";
 
                 await connection.ExecuteAsync(sql, new { tab, ids });
@@ -225,20 +234,20 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
             }
         }
 
-        public async Task<IReadOnlyList<int>> SplitPzvByFactAsync(int pzvId, int factQty)
+        public async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty)
         {
             // Для режима уточнения факта (mode = 1) вызываем универсальную SP PZV_Split.
-            // @qty1 – фактическое количество, @userName можно не передавать (по умолчанию NULL).
+            // @qtyFact – фактическое количество, @userName можно не передавать (по умолчанию NULL).
             using (var connection = _dbHelper.GetConnection())
             {
                 var parameters = new
                 {
                     pzvId,
                     mode = 1,
-                    qty1 = factQty,
+                    qtyFact = factQty,
                     userName = (string)null
                 };
-                var ids = new List<int>();
+                var ids = new List<PzvSplitResult>();
                 using (var grid = await connection.QueryMultipleAsync(
                     "dbo.PZV_Split",
                     param: parameters,
@@ -253,14 +262,13 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
                     // Вторая (или единственная) выборка — список новых Id (если были вставки)
                     if (!grid.IsConsumed)
                     {
-                        var newIds = await grid.ReadAsync<int>();
+                        var newIds = await grid.ReadAsync<PzvSplitResult>();
                         ids.AddRange(newIds);
                     }
                 }
                 return ids;
             }
         }
- 
 
     }
 }
