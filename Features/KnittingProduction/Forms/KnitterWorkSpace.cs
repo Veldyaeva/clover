@@ -40,6 +40,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Таймер для отслеживания бездействия пользователя (1 минута).
         /// </summary>
         private readonly System.Windows.Forms.Timer _idleTimer = new System.Windows.Forms.Timer();
+        /// <summary>
+        /// Таймер смены (идёт с момента нажатия 'Начать смену' до 'Закончить смену').
+        /// </summary>
+        private readonly System.Windows.Forms.Timer _shiftTimer = new System.Windows.Forms.Timer();
+        /// <summary>
+        /// Флаг активной смены.
+        /// </summary>
+        private bool _isShiftRunning = false;
+        /// <summary>
+        /// Текущая запись смены (kwsID) для закрытия.
+        /// </summary>
+        private int? _currentShiftId = null;
+        /// <summary>
+        /// Время старта смены.
+        /// </summary>
+        private DateTime? _shiftStartTime = null;
+        /// <summary>
+        /// Текущая зона сотрудника (id и номер).
+        /// </summary>
+        private int? _currentKmaId = null;
+        private string _currentKmaNum = null;
 
         /// <summary>
         /// Список ФИО для повторного показа сплеша при бездействии.
@@ -75,6 +96,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
+                SetupShiftTimer();
             }
             catch (Exception ex)
             {
@@ -99,6 +121,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 this.Load += async (s, e) => await InitializeAsync();
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
+                SetupShiftTimer();
             }
             catch (Exception ex)
             {
@@ -280,8 +303,56 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Синхронизируем TabGridLookUpEdit с выбранным табельным номером
                 TabGridLookUpEdit.EditValue = tab;
 
+                // Получаем зону сотрудника и отображаем номер зоны
+                try
+                {
+					var zone = await _orchestrator.GetZoneByTabAsync(tab);
+					_currentKmaId = zone.kmaId;
+					_currentKmaNum = zone.kmaNum;
+					textEdit1.Text = _currentKmaNum?.ToString() ?? string.Empty;
+                }
+                catch (Exception)
+                {
+                    textEdit1.Text = string.Empty;
+                }
+
+				// Проверяем открытую смену у выбранного табеля и отражаем состояние UI
+				try
+				{
+					var open = await _orchestrator.GetOpenShiftByTabAsync(tab);
+					if (open.shiftId.HasValue && open.dateStart.HasValue)
+					{
+						_currentShiftId = open.shiftId.Value;
+						_isShiftRunning = true;
+						_shiftStartTime = open.dateStart.Value;
+						simpleButton2.Text = "Закончить смену";
+						var elapsed = DateTime.Now - _shiftStartTime.Value;
+						if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
+						simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
+						_shiftTimer.Start();
+					}
+					else
+					{
+						_shiftTimer.Stop();
+						_isShiftRunning = false;
+						_shiftStartTime = null;
+						_currentShiftId = null;
+						simpleLabelItem1.Text = string.Empty;
+						simpleButton2.Text = "Начать смену";
+					}
+				}
+				catch (Exception)
+				{
+					_shiftTimer.Stop();
+					_isShiftRunning = false;
+					_shiftStartTime = null;
+					_currentShiftId = null;
+					simpleLabelItem1.Text = string.Empty;
+					simpleButton2.Text = "Начать смену";
+				}
+
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
-                // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой.
+                // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой
                 _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
@@ -291,12 +362,33 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Кнопка "Начать смену": массово назначает табель выбранным строкам, присваивает kolNazn, ChasiNazn, sekNazn и обновляет отображение.
+        /// Кнопка "Начать смену": массово назначает табель выбранным строкам, присваивает kolNazn, ChasiNazn, sekNazn и обновляет отображение
         /// </summary>
         private async void simpleButton2_Click(object sender, EventArgs e)
         {
             try
             {
+                // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
+                if (_isShiftRunning)
+                {
+                    if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
+                    {
+                        XtraMessageBox.Show(this, "Не удалось определить табель при завершении смены.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
+                    {
+                        await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
+                    }
+
+                    _shiftTimer.Stop();
+                    _isShiftRunning = false;
+                    _shiftStartTime = null;
+                    _currentShiftId = null;
+                    simpleButton2.Text = "Начать смену";
+                    simpleLabelItem1.Text = string.Empty;
+                    return;
+                }
+
                 if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int selectedTab) || selectedTab <= 0)
                 {
                     XtraMessageBox.Show(this, "Выберите сотрудника для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -325,6 +417,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
 
+                // Успешный старт смены: фиксируем в БД, проставляем pzvKwsID для выбранных операций, меняем текст кнопки и запускаем таймер
+                try
+                {
+                    _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, _currentKmaId, _currentKmaNum);
+                    if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
+                    {
+                        await _orchestrator.UpdatePzvKwsIdAsync(pzvIds, _currentShiftId.Value);
+                    }
+                }
+                catch (Exception exStart)
+                {
+                    XtraMessageBox.Show(this, $"Не удалось записать начало смены: {exStart.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                _isShiftRunning = true;
+                _shiftStartTime = DateTime.Now;
+                simpleButton2.Text = "Закончить смену";
+                simpleLabelItem1.Text = "Смена: 00:00:00";
+                _shiftTimer.Start();
+
+                // Обновим план после проставления pzvKwsID
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(selectedTab);
                 _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
             }
@@ -505,13 +617,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _view.UpdateCurrentRow();
             _view.RefreshRowCell(rowHandle, bandedGridColumn22);
 
-            // Если отвязано меньше запланированного — разделяем запись на “факт” и “остаток”
-            IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
-            if (qty < defaultQty && currentRow?.pzvID > 0)
-            {
-                newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
-            }
-
+            // Сначала устанавливаем дату окончания (SP также ставит её, но нам важно обойти проверки до вызова SP)
             await ApplyPzvDateAsync(
                 view,
                 bandedGridColumn19,
@@ -519,6 +625,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 m => m.pzvDateEnd,
                 (m, v) => m.pzvDateEnd = v,
                 "окончания");
+
+			// Затем — разделение записи в зависимости от введённого количества
+			IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
+			if (currentRow?.pzvID > 0)
+			{
+				if (qty == 0)
+				{
+					// создаём отрицательную строку mode = 2
+					newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
+				}
+				else if (qty < defaultQty)
+				{
+					// Факт меньше запланированного — mode = 1 c qtyFact
+					newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
+				}
+			}
             
             // Обновим план, чтобы показать новую запись остатка (если была создана)
             if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
@@ -658,6 +780,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 _idleTimer.Stop();
                 _idleTimer.Dispose();
+                _shiftTimer.Stop();
+                _shiftTimer.Dispose();
             };
         }
 
@@ -713,6 +837,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _idleTimer.Stop();
             _idleTimer.Start();
+        }
+
+        /// <summary>
+        /// Настройка таймера смены.
+        /// </summary>
+        private void SetupShiftTimer()
+        {
+            _shiftTimer.Interval = 1000; // 1 секунда
+            _shiftTimer.Tick += (s, e) =>
+            {
+                if (_isShiftRunning && _shiftStartTime.HasValue)
+                {
+                    var elapsed = DateTime.Now - _shiftStartTime.Value;
+                    if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
+                    simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
+                }
+            };
         }
     }
 }

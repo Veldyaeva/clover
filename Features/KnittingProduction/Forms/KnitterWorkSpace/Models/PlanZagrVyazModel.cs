@@ -41,9 +41,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public string nrObor { get; set; }
         public int? nr_kod_ob { get; set; }
         public int? nr_kod_proizv { get; set; }
+        //id открытой смены
+        public int? pzvKwsID { get; set; }
         public BindingList<nrModel> nrModels { get; set; } = new();
         public BindingList<rzvModel> rzvModels { get; set; } = new();
+        [NotMapped]
         public int kol_Effective { get; set; }
+        [NotMapped]
         public int sekEd_Effective { get; set; }
     }
 
