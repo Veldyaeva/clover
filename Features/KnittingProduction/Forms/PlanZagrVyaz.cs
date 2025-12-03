@@ -515,29 +515,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    advBandedGridViewSmenZadany.Appearance.HeaderPanel);
                 advBandedGridViewSmenZadany.OptionsView.GroupFooterShowMode = GroupFooterShowMode.Hidden;
                 _gridHelper.EnableGroupSummariesInGroupRow(advBandedGridViewSmenZadany);
-                advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
-                {
-                    GridView view = s as GridView;
-                    int rowHandle = e.RowHandle;
+                //advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
+                //{
+                //    GridView view = s as GridView;
+                //    int rowHandle = e.RowHandle;
 
-                    int level = view.GetRowLevel(rowHandle);
+                //    int level = view.GetRowLevel(rowHandle);
 
-                    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
-                    //groupInfo.GroupExpanded = true;
+                //    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
+                //    //groupInfo.GroupExpanded = true;
 
-                    if (level == 0) // зона
-                    {
-                        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])} ";
-                    }
-                    if (level == 1) // ФИО
-                    {
-                        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ";
-                    }
-                    if (level == 2) // тип данных
-                    {
-                        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["typeName"])}";
-                    }
-                };
+                //    if (level == 0) // зона
+                //    {
+                //        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])} ";
+                //    }
+                //    if (level == 1) // ФИО
+                //    {
+                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ";
+                //    }
+                //    if (level == 2) // тип данных
+                //    {
+                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["typeName"])}";
+                //    }
+                //};
                 #endregion
 
                 #region описание gridControlArtNormN "заголовок РТ"
@@ -1313,8 +1313,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         //    default);
                         await GridOverlayLoader.RunTaskWithOverlayAsync(
                             gridControlPZVOperList,
-                            LoadPlanZagrVyazByZadanySelection,
-                            default);
+                            LoadPlanZagrVyazByZadanySelection
+                            , CancellationToken.None
+                            );
                         //gridViewPZVOperList.ExpandAllGroups();
                         break;
                 }

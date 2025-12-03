@@ -74,7 +74,7 @@ namespace SewingProduction.Helpers
         {
             var connection = new SqlConnection(_connectionString);
 
-            // Важно! Dapper Plus требует, чтобы соединение было открыто
+            // Открываем соединение сразу, чтобы вызывающий код мог выполнять bulk-операции без задержек
             if (connection.State != ConnectionState.Open)
             {
                 connection.Open();
@@ -213,7 +213,11 @@ namespace SewingProduction.Helpers
                 throw;
             }
         }
-
+        /// <summary>
+        /// Транзакцию нельзя использовать через using, потому что using закрывает и уничтожает соединение сразу после выхода из блока,
+        /// и возвращает транзакцию, которая привязана к уже закрытому соединению
+        /// </summary>
+        /// <returns></returns>
         public async Task<SqlTransaction> BeginTransactionAsync()
         {
             _currentConnection = new SqlConnection(_connectionString);

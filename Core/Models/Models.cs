@@ -22,6 +22,9 @@ namespace SewingProduction.Core.Models
         public int Id_gost { get; set; }
         public string Name_gost { get; set; }
         public string Opi_gost { get; set; }
+        public int Pr_nabor { get; set; }
+        public int Tk_id { get; set; }
+        public int Id_glav_gost { get; set; }
     }
     public class GostGrupIzdViewModel
     {
@@ -31,5 +34,13 @@ namespace SewingProduction.Core.Models
         public string Ag_tnved { get; set; } //gost_sv_pict.ag_tnved
         public string N_i { get; set; } //articul_grup.ag_naimen
         public string N_g { get; set; } //gost_vid_cheloveka.name_vid
+        public int Tk_id { get; set; }
+    }
+    public class GostRazmerNabViewModel
+    {
+        public int Id_razmer { get; set; }
+        public string Razm { get; set; }
+        public int Id_gost { get; set; }
+        public int Id_gost_parent { get; set; }
     }
 }
