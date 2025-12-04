@@ -419,6 +419,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             desBindingSource = new BindingSource(components);
             constrBindingSource = new BindingSource(components);
             layoutControlItem49 = new DevExpress.XtraLayout.LayoutControlItem();
+            блок = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -1650,7 +1651,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colarticul.Name = "colarticul";
             colarticul.OptionsColumn.AllowEdit = false;
             colarticul.Visible = true;
-            colarticul.VisibleIndex = 1;
+            colarticul.VisibleIndex = 2;
             colarticul.Width = 86;
             // 
             // colmod
@@ -1910,7 +1911,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn66.FieldName = "Status";
             gridColumn66.Name = "gridColumn66";
             gridColumn66.Visible = true;
-            gridColumn66.VisibleIndex = 2;
+            gridColumn66.VisibleIndex = 1;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -3348,7 +3349,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView_unboundArts.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
             gridView_unboundArts.Appearance.SelectedRow.Options.UseBackColor = true;
-            gridView_unboundArts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { код, артикул, gridColumn2, gridColumn7, группа, модель, gridColumn4, gridColumn51, gridColumn52 });
+            gridView_unboundArts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { код, артикул, блок, gridColumn2, gridColumn7, группа, модель, gridColumn4, gridColumn51, gridColumn52 });
             gridView_unboundArts.DetailHeight = 404;
             gridView_unboundArts.GridControl = gridControl_unboundArts;
             gridView_unboundArts.Name = "gridView_unboundArts";
@@ -3405,7 +3406,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn2.OptionsFilter.AllowInHeaderSearch = DevExpress.Utils.DefaultBoolean.False;
             gridColumn2.UnboundDataType = typeof(bool);
             gridColumn2.Visible = true;
-            gridColumn2.VisibleIndex = 2;
+            gridColumn2.VisibleIndex = 3;
             gridColumn2.Width = 31;
             // 
             // gridColumn7
@@ -3425,7 +3426,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             группа.Name = "группа";
             группа.OptionsColumn.AllowEdit = false;
             группа.Visible = true;
-            группа.VisibleIndex = 3;
+            группа.VisibleIndex = 4;
             группа.Width = 95;
             // 
             // модель
@@ -3436,7 +3437,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             модель.Name = "модель";
             модель.OptionsColumn.AllowEdit = false;
             модель.Visible = true;
-            модель.VisibleIndex = 4;
+            модель.VisibleIndex = 5;
             модель.Width = 67;
             // 
             // gridColumn4
@@ -3453,7 +3454,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn51.FieldName = "minSizeAll";
             gridColumn51.Name = "gridColumn51";
             gridColumn51.Visible = true;
-            gridColumn51.VisibleIndex = 5;
+            gridColumn51.VisibleIndex = 6;
             gridColumn51.Width = 56;
             // 
             // gridColumn52
@@ -3462,7 +3463,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn52.FieldName = "maxSizeAll";
             gridColumn52.Name = "gridColumn52";
             gridColumn52.Visible = true;
-            gridColumn52.VisibleIndex = 6;
+            gridColumn52.VisibleIndex = 7;
             gridColumn52.Width = 60;
             // 
             // Root
@@ -4058,6 +4059,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem49.Name = "layoutControlItem49";
             layoutControlItem49.Size = new System.Drawing.Size(113, 24);
             layoutControlItem49.TextVisible = false;
+            // 
+            // блок
+            // 
+            блок.Caption = "Блок";
+            блок.FieldName = "tb_id";
+            блок.Name = "блок";
+            блок.Visible = true;
+            блок.VisibleIndex = 2;
             // 
             // TeamWork
             // 
@@ -4749,5 +4758,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
         private CustomLabel statusLabel;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem47;
+        private DevExpress.XtraGrid.Columns.GridColumn блок;
     }
 }
