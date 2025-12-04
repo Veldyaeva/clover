@@ -63,6 +63,9 @@ namespace SewingProduction.Features.Articul
 
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
+        private BindingList<ArticulModel> _artPreviewBindingList;
+        private BindingSource _artPreviewBindingSource;
+
         //фурнитура на артикул
         private List<ArtDrModel> _artDrForKod;
         //состав комплекта по коду 
@@ -86,14 +89,29 @@ namespace SewingProduction.Features.Articul
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
             _user = user;
+            _artPreviewBindingList = new BindingList<ArticulModel>();
+
             ThemeManager.UpdateTheme(this);
         }
         private async Task RefreshArtPreviewAsync()
         {
             // Перезагрузка краткого перечня кодов из справочника
+            //работает чуть быстре, но память постоянно забирает !!! 
+            //bsArt.Clear();
+            //bsArt.DataSource = null;
+            //_artPreviewBindingList.Clear();
+            //var data = await _articulDataService.GetArtPreviewAsync();
+            //_artPreviewBindingList.BulkLoad(data);
+            //bsArt.DataSource = _artPreviewBindingList;
+            //data = null;
+
             _artPreview = await _articulDataService.GetArtPreviewAsync();
             bsArt.DataSource = _artPreview;
+
             bsArt.ResetBindings(false);
+            
+            
+
         }
 
 
@@ -127,6 +145,7 @@ namespace SewingProduction.Features.Articul
                 //var artPreviewTask = Task.Run(() =>
                 //{
                 //загрузка перечня кодов из справочника, часть полей
+                
                 _articulBindingList = new BindingList<SpArticulPreviewModel>();
                 bsArticul = new BindingSource { DataSource = _articulBindingList };
 
@@ -296,7 +315,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsArtDr.Clear();
-                bsArtDr.ResetBindings(false);
+                //bsArtDr.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetArtDrByKod(kod);
 
@@ -321,7 +340,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsArticul.Clear();
-                bsArticul.ResetBindings(false);
+                //bsArticul.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetByKodAsync(kod);
 
@@ -348,7 +367,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsSostKompl.Clear();
-                bsSostKompl.ResetBindings(false);
+                //bsSostKompl.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetSostavkomplForKod(kod);
 
@@ -375,7 +394,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsSostNabor.Clear();
-                bsSostNabor.ResetBindings(false);
+                //bsSostNabor.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetSostavNaborForKod(kod);
 
@@ -466,8 +485,7 @@ namespace SewingProduction.Features.Articul
                     string imagePath = null;
                     try
                     {
-                        //imagePath = await _articulDataService.GetImage( kodd);
-                        //customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor.Kod);
+                        
                         imagePath = await _articulDataService.GetFileEskizForKod(kodd);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
@@ -475,21 +493,15 @@ namespace SewingProduction.Features.Articul
                         }
                         else
                         {
-                            pictureBoxArticul.Image = null;
+                            pictureBoxArticul.ImageLocation = null;
                         }
                     }
                     catch (Exception ex)
                     {
                         await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
-                        pictureBoxArticul.Image = null;
+                        pictureBoxArticul.ImageLocation = null;
                     }
-                    //string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
-                    //var dt = _dbHelperAce.ExecuteQuery(query);
-                    //if (dt != null)
-                    //{
-                    //    pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
-
-                    //}
+                    
                 }
             }
             catch (Exception ex)
@@ -778,8 +790,19 @@ namespace SewingProduction.Features.Articul
 
         private void Articul_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _artPreview.Clear();
+            gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
+
+            // Отвязать BindingSource
+            bsArt.DataSource = null;
             _artPreview = null;
+            
+            // Dispose DevExpress контролов
+            gridControl1?.Dispose();
+            gridView1?.Dispose();
+
+            // Dispose автогенерируемых объектов
+            components?.Dispose();  
+
         }
     }
 }
