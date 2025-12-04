@@ -153,7 +153,9 @@ namespace SewingProduction.Features.Articul.Forms
         private void ArticulNaborColumnsOld()
         {
             customTextBoxArtN_Old.Text = articulNabor_old.Articul;
+            customTextBoxKodGost_Old.Text = articulNabor_old.Id_gost.ToString();
             customTextBoxGostN_Old.Text = articulNabor_old.Gost;
+            customTextBoxOpiGost_Old.Text = articulNabor_old.Id_gost.ToString(); // Нужно выводить описание а не ИД (описания нет в articulNabor)
             customTextBoxGrupN_Old.Text = articulNabor_old.Grup;
         }
         private void ArticulNaborColumns()
@@ -178,16 +180,19 @@ namespace SewingProduction.Features.Articul.Forms
                 GridViewNabor_Old.ExpandAllGroups(); // раскрыть группы при загрузке
                 GridViewNabor_Old.OptionsView.ShowGroupPanel = true; //
 
-                GridViewNabor.Columns["razm_all"].Visible = false;
                 GridViewNabor.Columns["Ag_id"].Visible = true;
                 GridViewNabor.ClearGrouping();
                 GridViewNabor.Columns["razm_all"].GroupIndex = 0;
+                GridViewNabor.Columns["razm_all"].Visible = false;
                 GridViewNabor.ExpandAllGroups();
                 GridViewNabor.OptionsView.ShowGroupPanel = true;
             }
             finally
             {
                 GridViewNabor_Old.EndUpdate();
+
+                customButtonSaveNabor.Enabled = false;
+                customCheckBoxVerified.Checked = false;
             }
         }
         private void SetupSearchLookUpEditGost()
@@ -390,7 +395,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
         private async Task ApplyGrupsToSameTkGost(DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        { 
+        {
             await LoadAllGroupsAsync();
 
             var row = GridViewNabor.GetRow(e.RowHandle) as SpArticulNaborSostav;
@@ -725,6 +730,7 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
+                if (customCheckBoxVerified.Checked == false) return;
                 GridViewNabor.PostEditor();
                 GridViewNabor.UpdateCurrentRow();
                 spArticulNaborSostavBindingSource.EndEdit();
@@ -758,16 +764,20 @@ namespace SewingProduction.Features.Articul.Forms
                     articulNabor_old.Id_gost,
                     newGostMain,
                     articulNabor_old.Ag_id,
-                    newGroupMain, 
-                    _listCurrent.ToList(), 
+                    newGroupMain,
+                    _listCurrent.ToList(),
                     _listOld.ToList());
+
                 customGridControlNabor_Old.DataSource = await _ANSDataService.GetByKodAsync(articulNabor_old.Kod);
                 GridViewNabor.ExpandAllGroups();
-                //GridViewNabor_Old.ExpandAllGroups();
-                MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                GridViewNabor_Old.ExpandAllGroups();
                 oldAgIdBeforeEdit = currentItem.Ag_id;
-                //await LoadSostav();
+                await Task.Delay(50);
+                await LoadNabor();
+                ArticulNaborColumnsOld();
+                await Task.Delay(50);
+                await LoadSostav();
+                HideTechnicalColumns();
             }
             catch (Exception ex)
             {
@@ -775,6 +785,13 @@ namespace SewingProduction.Features.Articul.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+        private void customCheckBoxVerified_CheckedChanged(object sender, EventArgs e)
+        {
+            if (customCheckBoxVerified.Checked == true)
+                customButtonSaveNabor.Enabled = true;
+            else
+                customButtonSaveNabor.Enabled = false;
         }
 
         #endregion

@@ -285,6 +285,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Features\Articul\Forms\Articul.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Features\Sprav\Forms\Fio.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

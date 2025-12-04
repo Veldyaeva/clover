@@ -52,6 +52,16 @@ namespace SewingProduction.Features.Articul.Service
         public async Task<List<GostModel>> GetGostNaborAsync(int? idGost, string kod)
         {
             return await _dbService.GetListAsync<GostModel>(
+                @"SELECT DISTINCT Id_gost, Name_gost, Opi_gost
+                FROM gost 
+                WHERE pr_nabor = 1
+                ORDER BY Id_gost",
+                new {}
+            );
+        }
+        public async Task<List<GostModel>> GetGostNaborRazmAsync(int? idGost, string kod)
+        {
+            return await _dbService.GetListAsync<GostModel>(
                 "EXEC dbo.GetCompatibleGostByArticul @IdGost, @Kod",
                 new Dictionary<string, object>
                 {
@@ -101,26 +111,14 @@ namespace SewingProduction.Features.Articul.Service
                 HAVING COUNT(DISTINCT sad.t_art_poln) > 1";
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", $"{kod.Substring(0, 7)}" } });
         }
-        public async Task UpdateArticulNaborSostavAsync(SpArticulNaborSostav model, int oldAgId)
-        {
-            string query = @"EXEC UpdateArticulNaborSostavTransaction @kod, @TkId, @IdGost, @oldAgId, @newAgId, @sostav";
-            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> {
-                { "@Kod", $"{model.Kod.Substring(0, 7)}%" }, //kodd
-                { "@TkId", model.Tk_id },
-                { "@IdGost", model.Id_gost },
-                { "@oldAgId", oldAgId },
-                { "@newAgId", model.Ag_id },
-                { "@sostav", model.Sostav}
-            });
-        }
         public async Task UpdateNaborJsonAsync(
-        string kod,
-        int oldGostMain,
-        int newGostMain,
-        int? oldGroupMain,
-        int? newGroupMain,
-        List<SpArticulNaborSostav> newList,
-        List<SpArticulNaborSostav> oldList)
+            string kod,
+            int oldGostMain,
+            int newGostMain,
+            int? oldGroupMain,
+            int? newGroupMain,
+            List<SpArticulNaborSostav> newList,
+            List<SpArticulNaborSostav> oldList)
         {
             var head = new
             {
@@ -131,34 +129,71 @@ namespace SewingProduction.Features.Articul.Service
                 ag_id_main_new = newGroupMain
             };
             var items = newList
-            .GroupBy(r => r.Tk_id)
+            .GroupBy(x => x.Tk_id)
             .Select(g =>
             {
                 var newRow = g.First();
-                var oldRow = oldList.FirstOrDefault(x => x.Tk_id == g.Key);
-                if (oldRow == null) return null;
+                var oldRow = oldList.FirstOrDefault(o => o.Tk_id == g.Key);
+                if (oldRow == null)
+                    return null;
 
-                if (oldRow.Id_gost == newRow.Id_gost &&
-                    oldRow.Ag_id == newRow.Ag_id &&
-                    oldRow.Sostav == newRow.Sostav)
+                bool changedMain =
+                    oldRow.Id_gost != newRow.Id_gost ||
+                    oldRow.Ag_id != newRow.Ag_id ||
+                    !string.Equals(oldRow.Sostav, newRow.Sostav, StringComparison.OrdinalIgnoreCase);
+
+                // --- размеры ---
+                var razmChanges = g
+                    .Select(x =>
+                    {
+                        var oldSize = oldList.FirstOrDefault(o => o.Ans_id == x.Ans_id);
+                        if (oldSize == null) return null;
+
+                        if (oldSize.Razm == x.Razm)
+                            return null;
+
+                        return new
+                        {
+                            Ans_id = oldSize.Ans_id,
+                            razm_old = oldSize.Razm,
+                            razm_new = x.Razm
+                        };
+                    })
+                    .Where(r => r != null)
+                    .ToList();
+
+                if (!changedMain && razmChanges.Count == 0)
                     return null;
 
                 return new
                 {
                     kod = kod,
                     tk_id = g.Key,
+
                     id_gost_old = oldRow.Id_gost,
                     id_gost_new = newRow.Id_gost,
+
                     ag_id_old = oldRow.Ag_id,
                     ag_id_new = newRow.Ag_id,
+
                     sostav_old = oldRow.Sostav,
                     sostav_new = newRow.Sostav,
-                    razm_old = oldRow.Razm,
-                    razm_new = newRow.Razm
+
+                    razm = razmChanges
                 };
             })
             .Where(x => x != null)
             .ToList();
+
+
+            if (items.Count == 0
+                && oldGostMain == newGostMain
+                && oldGroupMain == newGroupMain)
+            { 
+                MessageBox.Show("Изменений не обнаруженно!", "Сохранение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             var finalJson = new
             {
@@ -168,30 +203,52 @@ namespace SewingProduction.Features.Articul.Service
 
             //string json = JsonConvert.SerializeObject(payload);
 
-            //var param = new Dictionary<string, object>
-            //    {
-            //        { "@ListJson", json }
-            //    };
-
-            //await _dbHelper.ExecuteNonQueryAsync(
-            //    "EXEC dbo.UpdateNaborFromJson @ListJson",
-            //    param
-            //);
-
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(finalJson, Newtonsoft.Json.Formatting.Indented);
 
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string filePath = Path.Combine(desktopPath, $"NaborUpdate_{DateTime.Now:yyyyMMdd_HHmmss}.json");
+            var param = new Dictionary<string, object>
+                {
+                    { "@ListJson", json }
+                };
 
-            File.WriteAllText(filePath, json, Encoding.UTF8);
-            Process.Start("notepad.exe", filePath);
-            await Task.CompletedTask;
+            var result = await _dbService.GetListAsync<dynamic>(
+                "EXEC dbo.UpdateNaborFromJson @ListJson",
+                new { ListJson = json }
+            );
+
+            if (result != null && result.Count > 0)
+            {
+                var row = result.First();
+
+                int errorCode = row.error;
+                string errorMessage = row.messageerror;
+
+                if (errorCode != 0)
+                    throw new Exception("Ошибка SQL: " + errorMessage);
+            }
+
+            //string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            //string filePath = Path.Combine(desktopPath, $"NaborUpdate_{DateTime.Now:yyyyMMdd_HHmmss}.json");
+
+            //File.WriteAllText(filePath, json, Encoding.UTF8);
+            //Process.Start("notepad.exe", filePath);
+            //await Task.CompletedTask;
+
+            MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public async Task<List<GostRazmerNabViewModel>> GetGostRazmerSostAsync(int? idGost = null)
         {
-            string query = @"SELECT id_razm_nab as Id_razmer, Razm, id_gost_nab AS Id_gost, id_gost as Id_gost_parent
+            string query = @"SELECT id_razm_nab as Id_razmer, RTRIM (razm) AS Razm, id_gost_nab AS Id_gost, id_gost as Id_gost_parent
                             FROM View_gost_razmer_nab"
+                            + (idGost.HasValue ? " WHERE Id_gost = @id_gost" : "");
+
+            return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });
+        }
+        public async Task<List<GostRazmerNabViewModel>> GetGostRazmerNaborAsync(int? idGost = null)
+        {
+            string query = @"SELECT Id_razmer, id_razm AS Razm, Id_gost
+                            FROM gost_sv_razmer"
                             + (idGost.HasValue ? " WHERE Id_gost = @id_gost" : "");
 
             return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });
