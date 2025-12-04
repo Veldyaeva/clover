@@ -225,6 +225,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public DateTime? pzvUpdDate { get; set; }
         public int pzvGradacia { get; set; }
         public int pzvGsID { get; set; }
+        public int pzvKwsID { get; set; }
         [NotMapped] public bool IsModified { get; set; } = false;
         [NotMapped] public bool IsNew { get; set; } = false;
         [NotMapped] public bool IsDeleted { get; set; } = false;
@@ -297,6 +298,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public bool IsDeleted { get; set; } = false;
         [NotMapped] public int olKodPodr { get; set; }
         [NotMapped] public int olKodProizv { get; set; }
+        [NotMapped] public int olPzvKwsID { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -357,6 +359,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
             pzvUpdDate = x.olPzvUpdDate,
             pzvGradacia = x.olPzvGradacia,
             pzvGsID = x.olPzvGsID,
+            pzvKwsID = x.olPzvKwsID,
             IsModified = x.IsModified,
             IsNew = x.IsNew,
             IsDeleted = x.IsDeleted
@@ -409,7 +412,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public string machNazn { get; set; }
         [NotMapped] public int kwsTabStart { get; set; }
         [NotMapped] public string fio { get; set; }
-        [NotMapped] public string kwsID { get; set; }
+        [NotMapped] public int kwsID { get; set; }
         [NotMapped] public int kwsKmaID { get; set; }
         [NotMapped] public string kmaNumber { get; set; }
         [NotMapped] public int kwsmlKmlID { get; set; }
@@ -444,5 +447,21 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public decimal chasConfirmedSmenGroup { get; set; }
         [NotMapped] public decimal koefObServ { get; set; }
         [NotMapped] public int smenLength { get; set; }
+    }
+    public class KnitWorkingShiftSmen
+    {
+        [NotMapped] public int kmaID { get; set; }
+        [NotMapped] public int kwsID { get; set; }
+        [NotMapped] public string kmaNumber { get; set; }
+        [NotMapped] public DateTime? dateShiftStart { get; set; }
+        [NotMapped] public DateTime? dateShiftEnd { get; set; }
+        [NotMapped] public int tabShiftStart { get; set; }
+        [NotMapped] public string fioShiftStart { get; set; }
+        [NotMapped] public string fioShiftStartFull { get; set; }
+        [NotMapped] public int diffHours { get; set; }
+        [NotMapped] public int diffSeconds { get; set; }
+        [NotMapped] public string shiftStatus { get; set; }
+        [NotMapped] public int shiftStatusID { get; set; }
+        [NotMapped] public int kmaNumberInt { get; set; }
     }
 }
