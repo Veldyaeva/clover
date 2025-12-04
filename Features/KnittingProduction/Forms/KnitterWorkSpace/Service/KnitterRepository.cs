@@ -59,7 +59,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                                 {
                                     parent.kmlNumber = nr.kmlNumber;
                                 }
-
+                                //if (string.IsNullOrWhiteSpace(parent.pzvNomZad) && !string.IsNullOrWhiteSpace(pzv.pzvNomZad))
+                                //{
+                                //    parent.pzvNomZad = pzv.pzvNomZad;
+                                //}
                                 if (parent.nrN == null)
                                     parent.nrN = nr.nrN;
                                 if (parent.nrN1 == null)

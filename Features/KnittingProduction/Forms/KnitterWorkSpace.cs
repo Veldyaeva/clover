@@ -193,35 +193,63 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
 
             _isSplashShowing = true;
-            try
-            {
-                using (var splash = new FioSelectionSplash(fioList, initialTab))
-                {
-                    var result = splash.ShowDialog(this);
-                    if (result == DialogResult.OK && splash.SelectedTab.HasValue)
-                    {
-                        FioGridLookUpEdit.EditValue = splash.SelectedTab.Value;
-                        TabGridLookUpEdit.EditValue = splash.SelectedTab.Value;
-                        // Перезапускаем таймер после успешного выбора
-                        ResetIdleTimer();
-                    }
-                    else
-                    {
-                        BeginInvoke(new Action(Close));
-                    }
-                }
-            }
-            finally
-            {
-                _isSplashShowing = false;
-            }
+			double oldOpacity = this.Opacity;
+			Form overlay = null;
+			try
+			{
+				// Прячем содержимое формы и показываем полноэкранный непрозрачный оверлей
+				this.Opacity = 0;
+				overlay = new Form();
+				overlay.FormBorderStyle = FormBorderStyle.None;
+				overlay.StartPosition = FormStartPosition.Manual;
+				var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+				//var bounds = System.Windows.Forms.Screen.AllScreens
+				//	.Select(s => s.Bounds)
+				//	.Aggregate(System.Drawing.Rectangle.Empty, (acc, r) => System.Drawing.Rectangle.Union(acc, r));
+				if (bounds == System.Drawing.Rectangle.Empty && System.Windows.Forms.Screen.PrimaryScreen != null)
+					bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
+				overlay.Bounds = bounds;
+				overlay.BackColor = System.Drawing.Color.AliceBlue;
+				overlay.TopMost = true;
+				overlay.ShowInTaskbar = false;
+				overlay.Show();
+
+				using (var splash = new FioSelectionSplash(fioList, initialTab))
+				{
+					splash.StartPosition = FormStartPosition.CenterScreen;
+					splash.TopMost = true;
+					var result = splash.ShowDialog(overlay);
+					if (result == DialogResult.OK && splash.SelectedTab.HasValue)
+					{
+						FioGridLookUpEdit.EditValue = splash.SelectedTab.Value;
+						TabGridLookUpEdit.EditValue = splash.SelectedTab.Value;
+						// Перезапускаем таймер после успешного выбора
+						ResetIdleTimer();
+					}
+					else
+					{
+						BeginInvoke(new Action(Close));
+					}
+				}
+			}
+			finally
+			{
+				// Убираем оверлей и возвращаем видимость формы
+				if (overlay != null)
+				{
+					try { overlay.Close(); } catch { }
+					overlay.Dispose();
+				}
+				this.Opacity = oldOpacity;
+				_isSplashShowing = false;
+			}
         }
 
         /// <summary>
         /// Дополнительная настройка второго уровня (advBandedGridView1):
         /// - создаёт скрытую unbound-колонку с готовой строкой заголовка группы
         /// - группирует по этой колонке и авторазворачивает единственную группу
-        /// В результате под номером В/М сразу отображается шапка "Пачка | Расчёт | Размер | Кол-во" и таблица операций.
+        /// В результате под номером В/М сразу отображается шапка "Пачка | Задание | Размер | Кол-во" и таблица операций.
         /// </summary>
         private void ConfigureAdvBandedGridColumns()
         {
@@ -240,7 +268,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     Caption = "Header",
                     UnboundType = DevExpress.Data.UnboundColumnType.String,
                     // Строка заголовка: Пачка | Расчёт | Размер | Кол-во
-                    UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Расчёт: ', [pzvNom], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+                    UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
                     Visible = false,
                     OptionsColumn = { ShowInCustomizationForm = false }
                 };
@@ -385,7 +413,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _shiftStartTime = null;
                     _currentShiftId = null;
                     simpleButton2.Text = "Начать смену";
-                    simpleLabelItem1.Text = string.Empty;
+                    simpleLabelItem1.Text = " ";// string.Empty;
                     return;
                 }
 
@@ -758,7 +786,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void SetupIdleTimer()
         {
-            _idleTimer.Interval = 600000000; // 1 минута = 60000 миллисекунд
+            _idleTimer.Interval = 60000; // 1 минута = 60000 миллисекунд
             _idleTimer.Tick += IdleTimer_Tick;
 
             // Подписываемся на события активности для сброса таймера
