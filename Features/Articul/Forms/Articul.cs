@@ -296,7 +296,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsArtDr.Clear();
-                bsArtDr.ResetBindings(false);
+                //bsArtDr.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetArtDrByKod(kod);
 
@@ -321,7 +321,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsArticul.Clear();
-                bsArticul.ResetBindings(false);
+                //bsArticul.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetByKodAsync(kod);
 
@@ -348,7 +348,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsSostKompl.Clear();
-                bsSostKompl.ResetBindings(false);
+                //bsSostKompl.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetSostavkomplForKod(kod);
 
@@ -375,7 +375,7 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsSostNabor.Clear();
-                bsSostNabor.ResetBindings(false);
+                //bsSostNabor.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetSostavNaborForKod(kod);
 
@@ -466,8 +466,7 @@ namespace SewingProduction.Features.Articul
                     string imagePath = null;
                     try
                     {
-                        //imagePath = await _articulDataService.GetImage( kodd);
-                        //customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor.Kod);
+                        
                         imagePath = await _articulDataService.GetFileEskizForKod(kodd);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
@@ -475,21 +474,15 @@ namespace SewingProduction.Features.Articul
                         }
                         else
                         {
-                            pictureBoxArticul.Image = null;
+                            pictureBoxArticul.ImageLocation = null;
                         }
                     }
                     catch (Exception ex)
                     {
                         await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
-                        pictureBoxArticul.Image = null;
+                        pictureBoxArticul.ImageLocation = null;
                     }
-                    //string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
-                    //var dt = _dbHelperAce.ExecuteQuery(query);
-                    //if (dt != null)
-                    //{
-                    //    pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
-
-                    //}
+                    
                 }
             }
             catch (Exception ex)
