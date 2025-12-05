@@ -79,16 +79,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                     _normRaszBindingSourceArticles.ResetBindings(false);
 
-                    //// Load NormRask data
-                    //_normRaskListArticles.Clear();
-                    //if (raskData != null)
-                    //{
-                    //    foreach (var item in raskData)
-                    //    {
-                    //        _normRaskListArticles.Add(item);
-                    //    }
-                    //}
-                    //_normRaskBindingSourceArticles.ResetBindings(false);
+                    // Load NormRask data
+                    if (_normRaskListArticles != null)
+                    {
+                        _normRaskListArticles.Clear();
+                        if (raskData != null)
+                        {
+                            foreach (var item in raskData)
+                            {
+                                _normRaskListArticles.Add(item);
+                            }
+                        }
+                    }
+                    _normRaskBindingSourceArticles?.ResetBindings(false);
                 }
                 else
                 {
@@ -738,6 +741,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                     return new List<NormRasz>();
                 });
+                var loadRaskTask = Task.Run(async () =>
+                {
+                    if (gridView_wdToBind.FocusedRowHandle >= 0)
+                    {
+                        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
+                        return annId > 0 ? await _artNormService.GetRelatedNormRask(annId) : new List<NormRask>();
+                    }
+                    return new List<NormRask>();
+                });
 
                 // Ждем загрузку данных
                 var list = await loadWorksTask;
@@ -776,15 +788,32 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Обновляем customGridControl3 using _normRaszListArticles and _normRaszBindingSourceArticles
                 var raszList = await loadRaszTask;
-                _normRaszListArticles.Clear();
-                if (raszList != null)
+                if (_normRaszListArticles != null)
                 {
-                    foreach (var item in raszList)
+                    _normRaszListArticles.Clear();
+                    if (raszList != null)
                     {
-                        _normRaszListArticles.Add(item);
+                        foreach (var item in raszList)
+                        {
+                            _normRaszListArticles.Add(item);
+                        }
                     }
                 }
-                _normRaszBindingSourceArticles.ResetBindings(false);
+                _normRaszBindingSourceArticles?.ResetBindings(false);
+
+                var raskList = await loadRaskTask;
+                if (_normRaskListArticles != null)
+                {
+                    _normRaskListArticles.Clear();
+                    if (raskList != null)
+                    {
+                        foreach (var item in raskList)
+                        {
+                            _normRaskListArticles.Add(item);
+                        }
+                    }
+                }
+                _normRaskBindingSourceArticles?.ResetBindings(false);
 
                 // Загружаем или очищаем изображение
                 if (kodInt > 0)

@@ -147,10 +147,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             //// Инициализация для NormRask на вкладке Articles
             //_normRaskListArticles = new BindingList<NormRask>();
             //_normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
-            //if (customGridControl2 != null) 
+            //if (customGridControl2 != null)
             //{
             //    customGridControl2.DataSource = _normRaskBindingSourceArticles;
-            //    _logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
+            //}
+                //_logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
 
             //    // Verify the grid view configuration
             //    if (customGridControl2.MainView is GridView gridView)

@@ -364,8 +364,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             simpleLabelItem1 = new DevExpress.XtraLayout.SimpleLabelItem();
             simpleLabelItem2 = new DevExpress.XtraLayout.SimpleLabelItem();
@@ -385,6 +383,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem9 = new DevExpress.XtraLayout.SplitterItem();
+            splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             splitterItem8 = new DevExpress.XtraLayout.SplitterItem();
             xtraTabPage3 = new CustomTabPage();
             layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
@@ -442,7 +441,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem55 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem56 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem57 = new DevExpress.XtraLayout.LayoutControlItem();
-            splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -568,8 +568,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem2).BeginInit();
@@ -589,6 +587,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem8).BeginInit();
             xtraTabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
@@ -634,7 +633,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem55).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem56).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem57).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)splitterItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             SuspendLayout();
             // 
             // repositoryItemCheckEdit1
@@ -2793,7 +2793,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl2.MainView = normRaskArt;
             customGridControl2.Name = "customGridControl2";
             customGridControl2.Size = new System.Drawing.Size(820, 447);
-            customGridControl2.TabIndex = 1;
+            customGridControl2.TabIndex = 10;
             customGridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { normRaskArt });
             // 
             // normRaskArt
@@ -3136,7 +3136,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl3.Margin = new Padding(4, 3, 4, 3);
             customGridControl3.Name = "customGridControl3";
             customGridControl3.Size = new System.Drawing.Size(820, 447);
-            customGridControl3.TabIndex = 10;
+            customGridControl3.TabIndex = 1;
             customGridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { normRaszTab });
             // 
             // normRaszTab
@@ -3631,9 +3631,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             tabbedControlGroup1.Location = new System.Drawing.Point(0, 24);
             tabbedControlGroup1.Name = "tabbedControlGroup1";
-            tabbedControlGroup1.SelectedTabPage = layoutControlGroup1;
+            tabbedControlGroup1.SelectedTabPage = layoutControlGroup4;
             tabbedControlGroup1.Size = new System.Drawing.Size(848, 498);
-            tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup1, layoutControlGroup5, layoutControlGroup4 });
+            tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup1, layoutControlGroup4, layoutControlGroup5 });
             // 
             // layoutControlGroup1
             // 
@@ -3668,22 +3668,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem1.Name = "layoutControlItem1";
             layoutControlItem1.Size = new System.Drawing.Size(824, 451);
             layoutControlItem1.TextVisible = false;
-            // 
-            // layoutControlGroup4
-            // 
-            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8 });
-            layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
-            layoutControlGroup4.Name = "layoutControlGroup4";
-            layoutControlGroup4.Size = new System.Drawing.Size(824, 451);
-            layoutControlGroup4.Text = "Раскрой";
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = customGridControl2;
-            layoutControlItem8.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(824, 451);
-            layoutControlItem8.TextVisible = false;
             // 
             // splitterItem2
             // 
@@ -3852,6 +3836,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             splitterItem9.Location = new System.Drawing.Point(0, 342);
             splitterItem9.Name = "splitterItem9";
             splitterItem9.Size = new System.Drawing.Size(522, 10);
+            // 
+            // splitterItem1
+            // 
+            splitterItem1.Location = new System.Drawing.Point(0, 552);
+            splitterItem1.Name = "splitterItem1";
+            splitterItem1.Size = new System.Drawing.Size(522, 10);
             // 
             // splitterItem8
             // 
@@ -4411,11 +4401,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem57.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem57.TextSize = new System.Drawing.Size(228, 13);
             // 
-            // splitterItem1
+            // layoutControlGroup4
             // 
-            splitterItem1.Location = new System.Drawing.Point(0, 552);
-            splitterItem1.Name = "splitterItem1";
-            splitterItem1.Size = new System.Drawing.Size(522, 10);
+            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8 });
+            layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
+            layoutControlGroup4.Name = "layoutControlGroup4";
+            layoutControlGroup4.Size = new System.Drawing.Size(824, 451);
+            layoutControlGroup4.Text = "Раскрой";
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = customGridControl2;
+            layoutControlItem8.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new System.Drawing.Size(824, 451);
+            layoutControlItem8.TextVisible = false;
             // 
             // TeamWork
             // 
@@ -4559,8 +4559,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem2).EndInit();
@@ -4580,6 +4578,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem8).EndInit();
             xtraTabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
@@ -4625,7 +4624,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem55).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem56).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem57).EndInit();
-            ((System.ComponentModel.ISupportInitialize)splitterItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ResumeLayout(false);
         }
 
@@ -5142,12 +5142,12 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem1;
         private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem2;
         private DevExpress.XtraLayout.SimpleLabelItem simpleLabelItem3;
         private DevExpress.XtraLayout.SplitterItem splitterItem9;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }
