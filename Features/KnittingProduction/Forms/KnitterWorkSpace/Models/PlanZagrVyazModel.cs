@@ -29,6 +29,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int pzvKolNazn { get; set; }
         public int? pzvTab { get; set; }
         public int? n_pach { get; set; }
+        //количество в пачке (или в рассчёте, хз)
+        public int? pzvRKol { get; set; }   
         public string razm { get; set; }
         public int? nrN { get; set; }
         public int? nrN1 { get; set; }
@@ -39,9 +41,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public string nrObor { get; set; }
         public int? nr_kod_ob { get; set; }
         public int? nr_kod_proizv { get; set; }
+        //id открытой смены
+        public int? pzvKwsID { get; set; }
         public BindingList<nrModel> nrModels { get; set; } = new();
         public BindingList<rzvModel> rzvModels { get; set; } = new();
+        [NotMapped]
         public int kol_Effective { get; set; }
+        [NotMapped]
         public int sekEd_Effective { get; set; }
     }
 

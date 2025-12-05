@@ -11,7 +11,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         {
             return string.IsNullOrWhiteSpace(kmlNumber) ? string.Empty : kmlNumber.Trim();
         }
-
+        public static string NormalizeTaskNum(string taskNum)
+        {
+            return string.IsNullOrWhiteSpace(taskNum) ? string.Empty : taskNum.Trim();
+        }
         public static string NormalizeArtKey(string articul)
         {
             return string.IsNullOrWhiteSpace(articul) ? string.Empty : articul.Trim();
@@ -32,6 +35,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 pzvNom = parent.pzvNom,
                 pzvKol = parent.pzvKol,
                 pzvSek = parent.pzvSek,
+                pzvRKol = parent.pzvRKol,
                 pzvDateStart = parent.pzvDateStart,
                 pzvDateEnd = parent.pzvDateEnd,
                 pzvKolNazn = parent.pzvKolNazn,
