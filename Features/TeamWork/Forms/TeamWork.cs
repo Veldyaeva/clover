@@ -1551,9 +1551,51 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        private async Task ReloadActiveTabAsync()
         {
+            var tabControl = xtraTabControl1;
+            if (tabControl == null)
+            {
+                return;
+            }
 
+            var activePage = tabControl.SelectedTabPage;
+            if (activePage == null)
+            {
+                return;
+            }
+
+            CancelAllLoads();
+
+            switch (activePage.Name)
+            {
+                case "TabPage1":
+                    await LoadWorkDivisions();
+                    break;
+                case "xtraTabPageArticles":
+                    await CurrentWorks_Load(_loadCts.Token);
+                    break;
+            }
+        }
+
+        private async void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        {
+            try
+            {
+                await ReloadActiveTabAsync();
+            }
+            catch (OperationCanceledException)
+            {
+                // проглатываем отмену как ожидаемый сценарий
+            }
+            catch (Exception ex)
+            {
+                if (_logger != null)
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при обновлении данных по кнопке вкладки");
+                }
+                MessageBox.Show($"Не удалось обновить данные: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Открыть журнал изменений разделения труда (art_norm_n_updLog) для выбранного AnnID
