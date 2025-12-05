@@ -545,7 +545,8 @@ WHERE nr.annId = @annId";
         }
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
-            using (var connection = _dbHelper.GetConnection())
+            using (
+                var connection = _dbHelper.GetConnection())
             {
                 string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor, spec FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);

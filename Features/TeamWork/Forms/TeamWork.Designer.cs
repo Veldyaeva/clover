@@ -360,6 +360,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem60 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem58 = new DevExpress.XtraLayout.LayoutControlItem();
             tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -441,8 +443,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem55 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem56 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem57 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -564,6 +564,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem60).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem58).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
@@ -633,8 +635,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem55).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem56).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem57).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             SuspendLayout();
             // 
             // repositoryItemCheckEdit1
@@ -1706,7 +1706,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colmod.Name = "colmod";
             colmod.OptionsColumn.AllowEdit = false;
             colmod.Visible = true;
-            colmod.VisibleIndex = 3;
+            colmod.VisibleIndex = 2;
             colmod.Width = 63;
             // 
             // colsek
@@ -1955,7 +1955,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn66.FieldName = "Status";
             gridColumn66.Name = "gridColumn66";
             gridColumn66.Visible = true;
-            gridColumn66.VisibleIndex = 2;
+            gridColumn66.VisibleIndex = 3;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -3397,7 +3397,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView_unboundArts.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
             gridView_unboundArts.Appearance.SelectedRow.Options.UseBackColor = true;
-            gridView_unboundArts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { код, gridColumn2, артикул, блок, gridColumn7, группа, модель, gridColumn4, gridColumn51, gridColumn52 });
+            gridView_unboundArts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { код, gridColumn2, артикул, группа, модель, блок, gridColumn7, gridColumn4, gridColumn51, gridColumn52 });
             gridView_unboundArts.DetailHeight = 404;
             gridView_unboundArts.GridControl = gridControl_unboundArts;
             gridView_unboundArts.Name = "gridView_unboundArts";
@@ -3463,7 +3463,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             блок.FieldName = "tb_id";
             блок.Name = "блок";
             блок.Visible = true;
-            блок.VisibleIndex = 3;
+            блок.VisibleIndex = 5;
             // 
             // gridColumn7
             // 
@@ -3482,7 +3482,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             группа.Name = "группа";
             группа.OptionsColumn.AllowEdit = false;
             группа.Visible = true;
-            группа.VisibleIndex = 4;
+            группа.VisibleIndex = 3;
             группа.Width = 95;
             // 
             // модель
@@ -3493,7 +3493,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             модель.Name = "модель";
             модель.OptionsColumn.AllowEdit = false;
             модель.Visible = true;
-            модель.VisibleIndex = 5;
+            модель.VisibleIndex = 4;
             модель.Width = 67;
             // 
             // gridColumn4
@@ -3634,6 +3634,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             tabbedControlGroup1.SelectedTabPage = layoutControlGroup4;
             tabbedControlGroup1.Size = new System.Drawing.Size(848, 498);
             tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup1, layoutControlGroup4, layoutControlGroup5 });
+            // 
+            // layoutControlGroup4
+            // 
+            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8 });
+            layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
+            layoutControlGroup4.Name = "layoutControlGroup4";
+            layoutControlGroup4.Size = new System.Drawing.Size(824, 451);
+            layoutControlGroup4.Text = "Раскрой";
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = customGridControl2;
+            layoutControlItem8.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new System.Drawing.Size(824, 451);
+            layoutControlItem8.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
@@ -4401,22 +4417,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem57.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem57.TextSize = new System.Drawing.Size(228, 13);
             // 
-            // layoutControlGroup4
-            // 
-            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8 });
-            layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
-            layoutControlGroup4.Name = "layoutControlGroup4";
-            layoutControlGroup4.Size = new System.Drawing.Size(824, 451);
-            layoutControlGroup4.Text = "Раскрой";
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = customGridControl2;
-            layoutControlItem8.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(824, 451);
-            layoutControlItem8.TextVisible = false;
-            // 
             // TeamWork
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -4555,6 +4555,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem60).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem58).EndInit();
             ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
@@ -4624,8 +4626,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem55).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem56).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem57).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ResumeLayout(false);
         }
 
