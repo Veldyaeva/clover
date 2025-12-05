@@ -1,18 +1,19 @@
-﻿using System;
+﻿using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Helpers;
-using SewingProduction.Models;
-using System.Diagnostics;
-using SewingProduction.Core.helpers;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -324,7 +325,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-
+                var selectedItem = view.GetRow(e.FocusedRowHandle) as MyDataANN;
+                if (selectedItem != null)
+                {
+                    textEdit1.Text = selectedItem.mod?.TrimEnd(' ') ?? string.Empty;
+                    textEdit2.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
+                    textEdit3.Text = selectedItem.grup?.TrimEnd(' ') ?? string.Empty;
+                }
                 // Если строка не выбрана или AnnID невалидный - очищаем данные
                 if (e.FocusedRowHandle < 0 || annId <= 0)
                 {
@@ -593,7 +600,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     Checked = string.IsNullOrEmpty(selectedAnnRow.mod) // Автоматически отмечаем, если модель пустая
                 };
 
-                var okButton = new Button()
+                var okButton = new System.Windows.Forms.Button()
                 {
                     Text = "Да",
                     Location = new Point(270, 150),
@@ -601,7 +608,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     DialogResult = DialogResult.OK
                 };
 
-                var cancelButton = new Button()
+                var cancelButton = new System.Windows.Forms.Button()
                 {
                     Text = "Отмена",
                     Location = new Point(355, 150),
