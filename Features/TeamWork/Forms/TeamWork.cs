@@ -168,10 +168,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             //    _logger?.LogWarningAsync("Constructor: customGridControl2 is null, cannot set DataSource", "TeamWork.Constructor");
             //}
 
-            //// Инициализация для NormKont на вкладке Articles
-            //_normKontListArticles = new BindingList<NormKont>();
-            //_normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
-            //if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
+            // Инициализация для NormKont на вкладке Articles
+            _normKontListArticles = new BindingList<NormKont>();
+            _normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
+            if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
 
             InitializeGridSettings();
             SetupDateUpdateColumn();

@@ -62,10 +62,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     int initialAnnId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
                     List<NormRasz> raszData = new List<NormRasz>();
                     List<NormRask> raskData = new List<NormRask>();
+                    List<NormKont> kontData = new List<NormKont>();
                     if (initialAnnId > 0)
                     {
                         raszData = await _artNormService.GetRelatedNormRasz(initialAnnId);
                         raskData = await _artNormService.GetRelatedNormRask(initialAnnId);
+                        kontData = await _artNormService.GetRelatedNormKont(initialAnnId);
                     }
 
                     // Load NormRasz data
@@ -92,6 +94,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                     }
                     _normRaskBindingSourceArticles?.ResetBindings(false);
+
+                    // Load NormKont data
+                    if (_normKontListArticles != null)
+                    {
+                        _normKontListArticles.Clear();
+                        if (kontData != null)
+                        {
+                            foreach (var item in kontData)
+                            {
+                                _normKontListArticles.Add(item);
+                            }
+                        }
+                    }
+                    _normKontBindingSourceArticles?.ResetBindings(false);
                 }
                 else
                 {
@@ -100,6 +116,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (_normRaszBindingSourceArticles is not null) _normRaszBindingSourceArticles.ResetBindings(false);
                     if (_normRaskListArticles is not null) _normRaskListArticles.Clear();
                     if (_normRaskBindingSourceArticles is not null) _normRaskBindingSourceArticles.ResetBindings(false);
+                    if (_normKontListArticles is not null) _normKontListArticles.Clear();
+                    if (_normKontBindingSourceArticles is not null) _normKontBindingSourceArticles.ResetBindings(false);
                     await ClearWdToBindRelatedData();
                 }
 
@@ -353,6 +371,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Обновляем NormRasz для customGridControl3
                 await RefreshNormRaszForArticlesTab(annId, token);
                 await RefreshNormRaskForArticlesTab(annId, token);
+                await RefreshNormKontForArticlesTab(annId, token);
 
                 await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Finished loading NormRasz and NormRask for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
 
@@ -412,6 +431,24 @@ namespace SewingProduction.Features.TeamWork.Forms
                 async token => annId > 0 ? await _artNormService.GetRelatedNormRask(annId, token) : Enumerable.Empty<NormRask>(),
                 cancellationToken);
         }
+
+    private async Task RefreshNormKontForArticlesTab(int annId, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        // Проверяем инициализацию
+        if (_normKontListArticles == null || _normKontBindingSourceArticles == null)
+        {
+            await _logger.LogErrorAsync(new NullReferenceException("_normKontListArticles or _normKontBindingSourceArticles is null"), "RefreshNormKontForArticlesTab failed initialization check.");
+            return;
+        }
+        await GridOverlayLoader.LoadListAsync(
+            customGridControl1,
+            _normKontListArticles,
+            _normKontBindingSourceArticles,
+            async token => annId > 0 ? await _artNormService.GetRelatedNormKont(annId, token) : Enumerable.Empty<NormKont>(),
+            cancellationToken);
+    }
 
         /// <summary>
         /// Загружает данные НЗП для вкладки "Артикулы".
@@ -750,6 +787,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                     return new List<NormRask>();
                 });
+                var loadKontTask = Task.Run(async () =>
+                {
+                    if (gridView_wdToBind.FocusedRowHandle >= 0)
+                    {
+                        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
+                        return annId > 0 ? await _artNormService.GetRelatedNormKont(annId) : new List<NormKont>();
+                    }
+                    return new List<NormKont>();
+                });
 
                 // Ждем загрузку данных
                 var list = await loadWorksTask;
@@ -814,6 +860,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
                 _normRaskBindingSourceArticles?.ResetBindings(false);
+
+                var kontList = await loadKontTask;
+                if (_normKontListArticles != null)
+                {
+                    _normKontListArticles.Clear();
+                    if (kontList != null)
+                    {
+                        foreach (var item in kontList)
+                        {
+                            _normKontListArticles.Add(item);
+                        }
+                    }
+                }
+                _normKontBindingSourceArticles?.ResetBindings(false);
 
                 // Загружаем или очищаем изображение
                 if (kodInt > 0)
@@ -923,6 +983,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _normRaskBindingSourceArticles.ResetBindings(false);
                 }
 
+                if (_normKontListArticles != null && _normKontBindingSourceArticles != null)
+                {
+                    _normKontListArticles.Clear();
+                    _normKontBindingSourceArticles.ResetBindings(false);
+                }
+
                 // Очищаем картинку
                 if (pictureBox3 != null)
                 {
@@ -978,6 +1044,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _normRaskListArticles.Clear();
                     _normRaskBindingSourceArticles.ResetBindings(false);
                     await _logger.LogEventAsync("ClearWdToBindRelatedData: Cleared _normRaskListArticles", "ClearWdToBindRelatedData");
+                }
+
+                if (_normKontListArticles != null && _normKontBindingSourceArticles != null)
+                {
+                    _normKontListArticles.Clear();
+                    _normKontBindingSourceArticles.ResetBindings(false);
+                    await _logger.LogEventAsync("ClearWdToBindRelatedData: Cleared _normKontListArticles", "ClearWdToBindRelatedData");
                 }
 
                 // Очищаем НЗП
