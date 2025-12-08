@@ -381,7 +381,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
                 // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
+                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
             {
@@ -466,7 +466,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 // Обновим план после проставления pzvKwsID
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(selectedTab);
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
             }
             catch (Exception ex)
             {
@@ -677,7 +677,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
                 // перестраиваем иерархию без очистки табеля
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 // Вернём фокус и раскроем нужную машину
                 if (!string.IsNullOrEmpty(currentMachineKey))
                 {
