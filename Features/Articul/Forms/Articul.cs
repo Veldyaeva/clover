@@ -1,20 +1,13 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.Data.Internal;
 using DevExpress.Office.Utils;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
-using SewingProduction.Core.Class;
+using DevExpress.XtraVerticalGrid;
 using DevExpress.XtraWaitForm;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
 using SewingProduction.Extensions;
@@ -32,14 +25,23 @@ using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel;
 using System.Data;
+using System.Data;
+using System.Diagnostics;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing;
+using System.Linq;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms;
 using static DevExpress.Office.PInvoke.Win32;
 using BindingSource = System.Windows.Forms.BindingSource;
@@ -63,7 +65,7 @@ namespace SewingProduction.Features.Articul
 
         //краткий перечень полей таблицы
         private List<SpArtPreviewModel> _artPreview;
-        private BindingList<ArticulModel> _artPreviewBindingList;
+        private BindingList<SpArtPreviewModel> _artPreviewBindingList;
         private BindingSource _artPreviewBindingSource;
 
         //фурнитура на артикул
@@ -89,7 +91,7 @@ namespace SewingProduction.Features.Articul
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
             _user = user;
-            _artPreviewBindingList = new BindingList<ArticulModel>();
+            _artPreviewBindingList = new BindingList<SpArtPreviewModel>();
 
             ThemeManager.UpdateTheme(this);
         }
@@ -106,9 +108,59 @@ namespace SewingProduction.Features.Articul
             //data = null;
 
             _artPreview = await _articulDataService.GetArtPreviewAsync();
-            bsArt.DataSource = _artPreview;
+            //_artPreviewBindingList.Clear();
+            
 
-            bsArt.ResetBindings(false);
+            #region инициализация привязок списка артикулов SpArtPreviewModel
+            var table = new LightweightTableArtPreview();
+
+            table.Columns.Add(new LightColumn
+            {
+                Name = "Kod",
+                Getter = (art) => art.Kod,
+                Setter = (art, value) => art.Kod = value?.ToString()
+            });
+            table.Columns.Add(new LightColumn
+            {
+                Name = "Grup",
+                Getter = (art) => art.Grup,
+                Setter = (art, value) => art.Grup = value?.ToString()
+            });
+            table.Columns.Add(new LightColumn
+            {
+                Name = "Articul",
+                Getter = (art) => art.Articul,
+                Setter = (art, value) => art.Articul = value?.ToString()
+            });
+            table.Columns.Add(new LightColumn
+            {
+                Name = "Mod",
+                Getter = (art) => art.Mod,
+                Setter = (art, value) => art.Mod = value?.ToString()
+            });
+            table.Columns.Add(new LightColumn
+            {
+                Name = "Razm",
+                Getter = (art) => art.Razm,
+                Setter = (art, value) => art.Razm = value?.ToString()
+            });
+            table.Columns.Add(new LightColumn
+            {
+                Name = "Kle",
+                Getter = (art) => art.Kle,
+                Setter = (art, value) => art.Kle = value?.ToString()
+            });
+            foreach (var model in _artPreview)
+                table.Add(new LightRow { Ref = model });
+
+            //bsArt = table;
+            gridArt.DataSource = table;
+
+            #endregion
+
+
+            //bsArt.DataSource = _artPreview;
+            //bsArt.ResetBindings(false);
         }
 
 
@@ -153,6 +205,7 @@ namespace SewingProduction.Features.Articul
                 //});
 
                 //await Task.WhenAll(artPreviewTask);
+                
 
                 #region заполнение блока основных данных артикула
 

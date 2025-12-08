@@ -373,7 +373,6 @@ namespace SewingProduction.Features.Articul
             // gridArt
             // 
             gridArt.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            gridArt.DataSource = bsArt;
             gridArt.EmbeddedNavigator.Appearance.Font = new Font("Arial", 8.25F);
             gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
             gridArt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);

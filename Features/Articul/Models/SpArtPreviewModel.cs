@@ -19,6 +19,7 @@ namespace SewingProduction.Features.Articul.Models
         public string Mod { get; set; }
         public string Razm { get; set; }
         public string Sost { get; set; }
+        public string Kle { get; set; }
 
     }
 }
