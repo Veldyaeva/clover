@@ -145,12 +145,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (customGridControl3 != null) customGridControl3.DataSource = _normRaszBindingSourceArticles;
 
             //// Инициализация для NormRask на вкладке Articles
-            //_normRaskListArticles = new BindingList<NormRask>();
-            //_normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
-            //if (customGridControl2 != null) 
+            _normRaskListArticles = new BindingList<NormRask>();
+            _normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
+            if (customGridControl2 != null)
             //{
-            //    customGridControl2.DataSource = _normRaskBindingSourceArticles;
-            //    _logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
+                customGridControl2.DataSource = _normRaskBindingSourceArticles;
+            //}
+                //_logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
 
             //    // Verify the grid view configuration
             //    if (customGridControl2.MainView is GridView gridView)
@@ -167,10 +168,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             //    _logger?.LogWarningAsync("Constructor: customGridControl2 is null, cannot set DataSource", "TeamWork.Constructor");
             //}
 
-            //// Инициализация для NormKont на вкладке Articles
-            //_normKontListArticles = new BindingList<NormKont>();
-            //_normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
-            //if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
+            // Инициализация для NormKont на вкладке Articles
+            _normKontListArticles = new BindingList<NormKont>();
+            _normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
+            if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
 
             InitializeGridSettings();
             SetupDateUpdateColumn();
@@ -1551,9 +1552,51 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        private async Task ReloadActiveTabAsync()
         {
+            var tabControl = xtraTabControl1;
+            if (tabControl == null)
+            {
+                return;
+            }
 
+            var activePage = tabControl.SelectedTabPage;
+            if (activePage == null)
+            {
+                return;
+            }
+
+            CancelAllLoads();
+
+            switch (activePage.Name)
+            {
+                case "TabPage1":
+                    await LoadWorkDivisions();
+                    break;
+                case "xtraTabPageArticles":
+                    await CurrentWorks_Load(_loadCts.Token);
+                    break;
+            }
+        }
+
+        private async void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        {
+            try
+            {
+                await ReloadActiveTabAsync();
+            }
+            catch (OperationCanceledException)
+            {
+                // проглатываем отмену как ожидаемый сценарий
+            }
+            catch (Exception ex)
+            {
+                if (_logger != null)
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при обновлении данных по кнопке вкладки");
+                }
+                MessageBox.Show($"Не удалось обновить данные: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Открыть журнал изменений разделения труда (art_norm_n_updLog) для выбранного AnnID
