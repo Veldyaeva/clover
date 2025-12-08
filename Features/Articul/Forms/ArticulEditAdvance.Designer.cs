@@ -31,60 +31,60 @@ namespace SewingProduction.Features.Articul.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ArticulEditAdvance));
-            gridEditAdRazm = new SewingProduction.Core.Class.CustomGridControl();
+            gridEditAdRazm = new CustomGridControl();
             gridViewEditAdvRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
             gcEditKod = new DevExpress.XtraGrid.Columns.GridColumn();
             gcEditRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             pictureBoxArticul = new System.Windows.Forms.PictureBox();
-            customLabel10 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel9 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel8 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel1 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel3 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel13 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel4 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel10 = new CustomLabel();
+            customLabel9 = new CustomLabel();
+            customLabel8 = new CustomLabel();
+            customLabel1 = new CustomLabel();
+            customLabel3 = new CustomLabel();
+            customLabel13 = new CustomLabel();
+            customLabel4 = new CustomLabel();
             txbSost3 = new CustomTextBox();
-            customLabel12 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel5 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel12 = new CustomLabel();
+            customLabel5 = new CustomLabel();
             txbSost2 = new CustomTextBox();
-            customLabel11 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel11 = new CustomLabel();
             txbSost = new CustomTextBox();
             txbIdGost = new CustomTextBox();
-            customLabel7 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel7 = new CustomLabel();
             txbOpiGost = new CustomTextBox();
             txbNameGost = new CustomTextBox();
-            customLabel2 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel2 = new CustomLabel();
             chbArh = new CustomCheckBox();
             chbKombIzd = new CustomCheckBox();
             chbKombDet = new CustomCheckBox();
             txbArticul = new CustomTextBox();
-            label2 = new SewingProduction.Core.Class.CustomLabel();
+            label2 = new CustomLabel();
             txbMod = new CustomTextBox();
-            label3 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel6 = new SewingProduction.Core.Class.CustomLabel();
+            label3 = new CustomLabel();
+            customLabel6 = new CustomLabel();
             customGroupBox2 = new CustomGroupBox();
-            customLabel45 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel45 = new CustomLabel();
             txbSumZarpl = new CustomTextBox();
             txbSumKomplNum = new CustomTextBox();
             txbSek = new CustomTextBox();
-            customLabel44 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel44 = new CustomLabel();
             txbSekVyaz = new CustomTextBox();
             txbSumSebRaskr = new CustomTextBox();
             txbSekShv = new CustomTextBox();
-            customLabel43 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel43 = new CustomLabel();
             txbSekKr = new CustomTextBox();
             txbSumStrVznos = new CustomTextBox();
-            customLabel37 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel42 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel38 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel37 = new CustomLabel();
+            customLabel42 = new CustomLabel();
+            customLabel38 = new CustomLabel();
             txbSumDopOpl = new CustomTextBox();
-            customLabel39 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel41 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel39 = new CustomLabel();
+            customLabel41 = new CustomLabel();
             txbSebz = new CustomTextBox();
-            customLabel40 = new SewingProduction.Core.Class.CustomLabel();
-            customButton1 = new SewingProduction.Core.Class.CustomButton();
-            customButton2 = new SewingProduction.Core.Class.CustomButton();
-            customButton6 = new SewingProduction.Core.Class.CustomButton();
+            customLabel40 = new CustomLabel();
+            customButton1 = new CustomButton();
+            customButton2 = new CustomButton();
+            customButton6 = new CustomButton();
             customGroupBox1 = new CustomGroupBox();
             txbNormt = new CustomTextBox();
             cgbTkanPurpose = new System.Windows.Forms.GroupBox();
@@ -95,7 +95,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbOpis_t2 = new CustomTextBox();
             txbOpis_t4 = new CustomTextBox();
             txbOpis_t3 = new CustomTextBox();
-            customLabel20 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel20 = new CustomLabel();
             cgbKfKach = new System.Windows.Forms.GroupBox();
             txbKfKach7 = new CustomTextBox();
             txbKfKach6 = new CustomTextBox();
@@ -104,7 +104,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbKfKach3 = new CustomTextBox();
             txbKfKach2 = new CustomTextBox();
             txbKfKach1 = new CustomTextBox();
-            customLabel21 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel21 = new CustomLabel();
             cgbBrakPercent = new System.Windows.Forms.GroupBox();
             txtBrakPercent7 = new CustomTextBox();
             txtBrakPercent6 = new CustomTextBox();
@@ -113,7 +113,7 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrakPercent2 = new CustomTextBox();
             txtBrakPercent4 = new CustomTextBox();
             txtBrakPercent3 = new CustomTextBox();
-            customLabel22 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel22 = new CustomLabel();
             cgbTkanSeb = new System.Windows.Forms.GroupBox();
             txbTkanSeb_t7 = new CustomTextBox();
             txbTkanSeb_t6 = new CustomTextBox();
@@ -122,7 +122,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbTkanSeb_t2 = new CustomTextBox();
             txbTkanSeb_t4 = new CustomTextBox();
             txbTkanSeb_t3 = new CustomTextBox();
-            customLabel23 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel23 = new CustomLabel();
             cgbTkanNorm = new System.Windows.Forms.GroupBox();
             txbNorm_t7 = new CustomTextBox();
             txbNorm_t6 = new CustomTextBox();
@@ -131,7 +131,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t2 = new CustomTextBox();
             txbNorm_t4 = new CustomTextBox();
             txbNorm_t3 = new CustomTextBox();
-            customLabel24 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel24 = new CustomLabel();
             cgbTkanBrak = new System.Windows.Forms.GroupBox();
             txbBrak7 = new CustomTextBox();
             txbBrak1 = new CustomTextBox();
@@ -141,19 +141,19 @@ namespace SewingProduction.Features.Articul.Forms
             txbBrak3 = new CustomTextBox();
             txbBrak4 = new CustomTextBox();
             txbSeb = new CustomTextBox();
-            customLabel30 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel25 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel31 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel26 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel32 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel27 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel33 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel28 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel34 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel30 = new CustomLabel();
+            customLabel25 = new CustomLabel();
+            customLabel31 = new CustomLabel();
+            customLabel26 = new CustomLabel();
+            customLabel32 = new CustomLabel();
+            customLabel27 = new CustomLabel();
+            customLabel33 = new CustomLabel();
+            customLabel28 = new CustomLabel();
+            customLabel34 = new CustomLabel();
             txbBrakAll = new CustomTextBox();
-            customLabel35 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel29 = new SewingProduction.Core.Class.CustomLabel();
-            customLabel36 = new SewingProduction.Core.Class.CustomLabel();
+            customLabel35 = new CustomLabel();
+            customLabel29 = new CustomLabel();
+            customLabel36 = new CustomLabel();
             cbTM = new CustomComboBox();
             customGroupBox3 = new CustomGroupBox();
             customComboBox1 = new CustomComboBox();
@@ -169,7 +169,7 @@ namespace SewingProduction.Features.Articul.Forms
             chkP = new CustomCheckBox();
             chbIsFurnit = new CustomCheckBox();
             chbIsUpak = new CustomCheckBox();
-            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
+            customSimpleButton1 = new CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
@@ -332,6 +332,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSost3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbSost3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbSost3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbSost3.ErrorColor = System.Drawing.Color.Red;
+            txbSost3.ErrorMessage = null;
             txbSost3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbSost3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost3.Location = new System.Drawing.Point(365, 200);
@@ -371,6 +374,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSost2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbSost2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbSost2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbSost2.ErrorColor = System.Drawing.Color.Red;
+            txbSost2.ErrorMessage = null;
             txbSost2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbSost2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost2.Location = new System.Drawing.Point(365, 172);
@@ -397,6 +403,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbSost.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbSost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbSost.ErrorColor = System.Drawing.Color.Red;
+            txbSost.ErrorMessage = null;
             txbSost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbSost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost.Location = new System.Drawing.Point(365, 143);
@@ -409,6 +418,9 @@ namespace SewingProduction.Features.Articul.Forms
             // txbIdGost
             // 
             txbIdGost.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbIdGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbIdGost.ErrorColor = System.Drawing.Color.Red;
+            txbIdGost.ErrorMessage = null;
             txbIdGost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbIdGost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbIdGost.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -435,6 +447,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpiGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbOpiGost.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbOpiGost.ErrorColor = System.Drawing.Color.Red;
+            txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbOpiGost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpiGost.Location = new System.Drawing.Point(538, 84);
@@ -448,6 +463,9 @@ namespace SewingProduction.Features.Articul.Forms
             // txbNameGost
             // 
             txbNameGost.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbNameGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbNameGost.ErrorColor = System.Drawing.Color.Red;
+            txbNameGost.ErrorMessage = null;
             txbNameGost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbNameGost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNameGost.Location = new System.Drawing.Point(332, 84);
@@ -519,9 +537,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbArticul.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbArticul.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbArticul.ErrorColor = System.Drawing.Color.Red;
+            txbArticul.ErrorMessage = null;
             txbArticul.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbArticul.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbArticul.Location = new System.Drawing.Point(100, 27);
+            txbArticul.Location = new System.Drawing.Point(101, 26);
             txbArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbArticul.MinimumSize = new System.Drawing.Size(120, 15);
             txbArticul.Name = "txbArticul";
@@ -545,6 +566,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbMod.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbMod.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            txbMod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txbMod.ErrorColor = System.Drawing.Color.Red;
+            txbMod.ErrorMessage = null;
             txbMod.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbMod.Location = new System.Drawing.Point(100, 54);
@@ -627,6 +651,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSumZarpl.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSumZarpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumZarpl.ErrorColor = System.Drawing.Color.Red;
+            txbSumZarpl.ErrorMessage = null;
             txbSumZarpl.Font = new System.Drawing.Font("Arial", 10F);
             txbSumZarpl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSumZarpl.Location = new System.Drawing.Point(106, 38);
@@ -640,6 +666,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSumKomplNum.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSumKomplNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumKomplNum.ErrorColor = System.Drawing.Color.Red;
+            txbSumKomplNum.ErrorMessage = null;
             txbSumKomplNum.Font = new System.Drawing.Font("Arial", 10F);
             txbSumKomplNum.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSumKomplNum.Location = new System.Drawing.Point(105, 185);
@@ -653,6 +681,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSek.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSek.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSek.ErrorColor = System.Drawing.Color.Red;
+            txbSek.ErrorMessage = null;
             txbSek.Font = new System.Drawing.Font("Arial", 10F);
             txbSek.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSek.Location = new System.Drawing.Point(7, 39);
@@ -678,6 +708,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSekVyaz.BackColor = System.Drawing.Color.Pink;
             txbSekVyaz.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekVyaz.ErrorColor = System.Drawing.Color.Red;
+            txbSekVyaz.ErrorMessage = null;
             txbSekVyaz.Font = new System.Drawing.Font("Arial", 10F);
             txbSekVyaz.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSekVyaz.Location = new System.Drawing.Point(32, 74);
@@ -691,6 +723,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSumSebRaskr.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSumSebRaskr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumSebRaskr.ErrorColor = System.Drawing.Color.Red;
+            txbSumSebRaskr.ErrorMessage = null;
             txbSumSebRaskr.Font = new System.Drawing.Font("Arial", 10F);
             txbSumSebRaskr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSumSebRaskr.Location = new System.Drawing.Point(106, 147);
@@ -704,6 +738,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSekShv.BackColor = System.Drawing.Color.Pink;
             txbSekShv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekShv.ErrorColor = System.Drawing.Color.Red;
+            txbSekShv.ErrorMessage = null;
             txbSekShv.Font = new System.Drawing.Font("Arial", 10F);
             txbSekShv.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSekShv.Location = new System.Drawing.Point(32, 104);
@@ -730,6 +766,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSekKr.BackColor = System.Drawing.Color.Pink;
             txbSekKr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSekKr.ErrorColor = System.Drawing.Color.Red;
+            txbSekKr.ErrorMessage = null;
             txbSekKr.Font = new System.Drawing.Font("Arial", 10F);
             txbSekKr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSekKr.Location = new System.Drawing.Point(32, 135);
@@ -743,6 +781,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSumStrVznos.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSumStrVznos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumStrVznos.ErrorColor = System.Drawing.Color.Red;
+            txbSumStrVznos.ErrorMessage = null;
             txbSumStrVznos.Font = new System.Drawing.Font("Arial", 10F);
             txbSumStrVznos.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSumStrVznos.Location = new System.Drawing.Point(106, 110);
@@ -795,6 +835,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSumDopOpl.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSumDopOpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumDopOpl.ErrorColor = System.Drawing.Color.Red;
+            txbSumDopOpl.ErrorMessage = null;
             txbSumDopOpl.Font = new System.Drawing.Font("Arial", 10F);
             txbSumDopOpl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSumDopOpl.Location = new System.Drawing.Point(107, 74);
@@ -834,6 +876,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSebz.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSebz.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSebz.ErrorColor = System.Drawing.Color.Red;
+            txbSebz.ErrorMessage = null;
             txbSebz.Font = new System.Drawing.Font("Arial", 10F);
             txbSebz.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSebz.Location = new System.Drawing.Point(104, 220);
@@ -935,6 +979,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNormt.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNormt.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNormt.ErrorColor = System.Drawing.Color.Red;
+            txbNormt.ErrorMessage = null;
             txbNormt.Font = new System.Drawing.Font("Arial", 10F);
             txbNormt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNormt.Location = new System.Drawing.Point(6, 50);
@@ -965,6 +1011,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpis_t7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpis_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t7.ErrorColor = System.Drawing.Color.Red;
+            txbOpis_t7.ErrorMessage = null;
             txbOpis_t7.Font = new System.Drawing.Font("Arial", 9F);
             txbOpis_t7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpis_t7.Location = new System.Drawing.Point(5, 181);
@@ -978,6 +1026,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpis_t6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpis_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t6.ErrorColor = System.Drawing.Color.Red;
+            txbOpis_t6.ErrorMessage = null;
             txbOpis_t6.Font = new System.Drawing.Font("Arial", 9F);
             txbOpis_t6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpis_t6.Location = new System.Drawing.Point(5, 153);
@@ -991,6 +1041,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpis_t1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpis_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t1.ErrorColor = System.Drawing.Color.Red;
+            txbOpis_t1.ErrorMessage = null;
             txbOpis_t1.Font = new System.Drawing.Font("Arial", 9F);
             txbOpis_t1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpis_t1.Location = new System.Drawing.Point(5, 17);
@@ -1004,6 +1056,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpis_t5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpis_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t5.ErrorColor = System.Drawing.Color.Red;
+            txbOpis_t5.ErrorMessage = null;
             txbOpis_t5.Font = new System.Drawing.Font("Arial", 9F);
             txbOpis_t5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpis_t5.Location = new System.Drawing.Point(5, 127);
@@ -1017,6 +1071,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpis_t2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpis_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t2.ErrorColor = System.Drawing.Color.Red;
+            txbOpis_t2.ErrorMessage = null;
             txbOpis_t2.Font = new System.Drawing.Font("Arial", 9F);
             txbOpis_t2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpis_t2.Location = new System.Drawing.Point(5, 45);
@@ -1030,6 +1086,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpis_t4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpis_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t4.ErrorColor = System.Drawing.Color.Red;
+            txbOpis_t4.ErrorMessage = null;
             txbOpis_t4.Font = new System.Drawing.Font("Arial", 9F);
             txbOpis_t4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpis_t4.Location = new System.Drawing.Point(5, 100);
@@ -1043,6 +1101,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpis_t3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpis_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t3.ErrorColor = System.Drawing.Color.Red;
+            txbOpis_t3.ErrorMessage = null;
             txbOpis_t3.Font = new System.Drawing.Font("Arial", 9F);
             txbOpis_t3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpis_t3.Location = new System.Drawing.Point(5, 73);
@@ -1087,6 +1147,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbKfKach7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbKfKach7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach7.ErrorColor = System.Drawing.Color.Red;
+            txbKfKach7.ErrorMessage = null;
             txbKfKach7.Font = new System.Drawing.Font("Arial", 9F);
             txbKfKach7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbKfKach7.Location = new System.Drawing.Point(5, 180);
@@ -1100,6 +1162,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbKfKach6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbKfKach6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach6.ErrorColor = System.Drawing.Color.Red;
+            txbKfKach6.ErrorMessage = null;
             txbKfKach6.Font = new System.Drawing.Font("Arial", 9F);
             txbKfKach6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbKfKach6.Location = new System.Drawing.Point(5, 152);
@@ -1113,6 +1177,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbKfKach5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbKfKach5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach5.ErrorColor = System.Drawing.Color.Red;
+            txbKfKach5.ErrorMessage = null;
             txbKfKach5.Font = new System.Drawing.Font("Arial", 9F);
             txbKfKach5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbKfKach5.Location = new System.Drawing.Point(5, 126);
@@ -1126,6 +1192,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbKfKach4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbKfKach4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach4.ErrorColor = System.Drawing.Color.Red;
+            txbKfKach4.ErrorMessage = null;
             txbKfKach4.Font = new System.Drawing.Font("Arial", 9F);
             txbKfKach4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbKfKach4.Location = new System.Drawing.Point(5, 99);
@@ -1139,6 +1207,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbKfKach3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbKfKach3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach3.ErrorColor = System.Drawing.Color.Red;
+            txbKfKach3.ErrorMessage = null;
             txbKfKach3.Font = new System.Drawing.Font("Arial", 9F);
             txbKfKach3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbKfKach3.Location = new System.Drawing.Point(5, 72);
@@ -1152,6 +1222,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbKfKach2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbKfKach2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach2.ErrorColor = System.Drawing.Color.Red;
+            txbKfKach2.ErrorMessage = null;
             txbKfKach2.Font = new System.Drawing.Font("Arial", 9F);
             txbKfKach2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbKfKach2.Location = new System.Drawing.Point(5, 44);
@@ -1165,6 +1237,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbKfKach1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbKfKach1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach1.ErrorColor = System.Drawing.Color.Red;
+            txbKfKach1.ErrorMessage = null;
             txbKfKach1.Font = new System.Drawing.Font("Arial", 9F);
             txbKfKach1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbKfKach1.Location = new System.Drawing.Point(5, 16);
@@ -1208,6 +1282,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txtBrakPercent7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txtBrakPercent7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent7.ErrorColor = System.Drawing.Color.Red;
+            txtBrakPercent7.ErrorMessage = null;
             txtBrakPercent7.Font = new System.Drawing.Font("Arial", 9F);
             txtBrakPercent7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txtBrakPercent7.Location = new System.Drawing.Point(3, 182);
@@ -1221,6 +1297,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txtBrakPercent6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txtBrakPercent6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent6.ErrorColor = System.Drawing.Color.Red;
+            txtBrakPercent6.ErrorMessage = null;
             txtBrakPercent6.Font = new System.Drawing.Font("Arial", 9F);
             txtBrakPercent6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txtBrakPercent6.Location = new System.Drawing.Point(3, 154);
@@ -1234,6 +1312,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txtBrakPercent1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txtBrakPercent1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent1.ErrorColor = System.Drawing.Color.Red;
+            txtBrakPercent1.ErrorMessage = null;
             txtBrakPercent1.Font = new System.Drawing.Font("Arial", 9F);
             txtBrakPercent1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txtBrakPercent1.Location = new System.Drawing.Point(4, 18);
@@ -1247,6 +1327,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txtBrakPercent5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txtBrakPercent5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent5.ErrorColor = System.Drawing.Color.Red;
+            txtBrakPercent5.ErrorMessage = null;
             txtBrakPercent5.Font = new System.Drawing.Font("Arial", 9F);
             txtBrakPercent5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txtBrakPercent5.Location = new System.Drawing.Point(3, 128);
@@ -1260,6 +1342,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txtBrakPercent2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txtBrakPercent2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent2.ErrorColor = System.Drawing.Color.Red;
+            txtBrakPercent2.ErrorMessage = null;
             txtBrakPercent2.Font = new System.Drawing.Font("Arial", 9F);
             txtBrakPercent2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txtBrakPercent2.Location = new System.Drawing.Point(4, 46);
@@ -1273,6 +1357,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txtBrakPercent4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txtBrakPercent4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent4.ErrorColor = System.Drawing.Color.Red;
+            txtBrakPercent4.ErrorMessage = null;
             txtBrakPercent4.Font = new System.Drawing.Font("Arial", 9F);
             txtBrakPercent4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txtBrakPercent4.Location = new System.Drawing.Point(2, 101);
@@ -1286,6 +1372,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txtBrakPercent3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txtBrakPercent3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent3.ErrorColor = System.Drawing.Color.Red;
+            txtBrakPercent3.ErrorMessage = null;
             txtBrakPercent3.Font = new System.Drawing.Font("Arial", 9F);
             txtBrakPercent3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txtBrakPercent3.Location = new System.Drawing.Point(3, 74);
@@ -1328,6 +1416,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbTkanSeb_t7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbTkanSeb_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t7.ErrorColor = System.Drawing.Color.Red;
+            txbTkanSeb_t7.ErrorMessage = null;
             txbTkanSeb_t7.Font = new System.Drawing.Font("Arial", 9F);
             txbTkanSeb_t7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbTkanSeb_t7.Location = new System.Drawing.Point(5, 181);
@@ -1341,6 +1431,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbTkanSeb_t6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbTkanSeb_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t6.ErrorColor = System.Drawing.Color.Red;
+            txbTkanSeb_t6.ErrorMessage = null;
             txbTkanSeb_t6.Font = new System.Drawing.Font("Arial", 9F);
             txbTkanSeb_t6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbTkanSeb_t6.Location = new System.Drawing.Point(5, 153);
@@ -1354,6 +1446,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbTkanSeb_t1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbTkanSeb_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t1.ErrorColor = System.Drawing.Color.Red;
+            txbTkanSeb_t1.ErrorMessage = null;
             txbTkanSeb_t1.Font = new System.Drawing.Font("Arial", 9F);
             txbTkanSeb_t1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbTkanSeb_t1.Location = new System.Drawing.Point(5, 17);
@@ -1367,6 +1461,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbTkanSeb_t5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbTkanSeb_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t5.ErrorColor = System.Drawing.Color.Red;
+            txbTkanSeb_t5.ErrorMessage = null;
             txbTkanSeb_t5.Font = new System.Drawing.Font("Arial", 9F);
             txbTkanSeb_t5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbTkanSeb_t5.Location = new System.Drawing.Point(5, 127);
@@ -1380,6 +1476,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbTkanSeb_t2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbTkanSeb_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t2.ErrorColor = System.Drawing.Color.Red;
+            txbTkanSeb_t2.ErrorMessage = null;
             txbTkanSeb_t2.Font = new System.Drawing.Font("Arial", 9F);
             txbTkanSeb_t2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbTkanSeb_t2.Location = new System.Drawing.Point(5, 45);
@@ -1393,6 +1491,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbTkanSeb_t4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbTkanSeb_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t4.ErrorColor = System.Drawing.Color.Red;
+            txbTkanSeb_t4.ErrorMessage = null;
             txbTkanSeb_t4.Font = new System.Drawing.Font("Arial", 9F);
             txbTkanSeb_t4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbTkanSeb_t4.Location = new System.Drawing.Point(5, 100);
@@ -1406,6 +1506,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbTkanSeb_t3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbTkanSeb_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t3.ErrorColor = System.Drawing.Color.Red;
+            txbTkanSeb_t3.ErrorMessage = null;
             txbTkanSeb_t3.Font = new System.Drawing.Font("Arial", 9F);
             txbTkanSeb_t3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbTkanSeb_t3.Location = new System.Drawing.Point(5, 73);
@@ -1448,6 +1550,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNorm_t7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNorm_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t7.ErrorColor = System.Drawing.Color.Red;
+            txbNorm_t7.ErrorMessage = null;
             txbNorm_t7.Font = new System.Drawing.Font("Arial", 9F);
             txbNorm_t7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNorm_t7.Location = new System.Drawing.Point(5, 177);
@@ -1461,6 +1565,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNorm_t6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNorm_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t6.ErrorColor = System.Drawing.Color.Red;
+            txbNorm_t6.ErrorMessage = null;
             txbNorm_t6.Font = new System.Drawing.Font("Arial", 9F);
             txbNorm_t6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNorm_t6.Location = new System.Drawing.Point(5, 149);
@@ -1474,6 +1580,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNorm_t1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNorm_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t1.ErrorColor = System.Drawing.Color.Red;
+            txbNorm_t1.ErrorMessage = null;
             txbNorm_t1.Font = new System.Drawing.Font("Arial", 9F);
             txbNorm_t1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNorm_t1.Location = new System.Drawing.Point(5, 13);
@@ -1487,6 +1595,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNorm_t5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNorm_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t5.ErrorColor = System.Drawing.Color.Red;
+            txbNorm_t5.ErrorMessage = null;
             txbNorm_t5.Font = new System.Drawing.Font("Arial", 9F);
             txbNorm_t5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNorm_t5.Location = new System.Drawing.Point(5, 123);
@@ -1500,6 +1610,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNorm_t2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNorm_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t2.ErrorColor = System.Drawing.Color.Red;
+            txbNorm_t2.ErrorMessage = null;
             txbNorm_t2.Font = new System.Drawing.Font("Arial", 9F);
             txbNorm_t2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNorm_t2.Location = new System.Drawing.Point(5, 41);
@@ -1513,6 +1625,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNorm_t4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNorm_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t4.ErrorColor = System.Drawing.Color.Red;
+            txbNorm_t4.ErrorMessage = null;
             txbNorm_t4.Font = new System.Drawing.Font("Arial", 9F);
             txbNorm_t4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNorm_t4.Location = new System.Drawing.Point(5, 96);
@@ -1526,6 +1640,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbNorm_t3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbNorm_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t3.ErrorColor = System.Drawing.Color.Red;
+            txbNorm_t3.ErrorMessage = null;
             txbNorm_t3.Font = new System.Drawing.Font("Arial", 9F);
             txbNorm_t3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbNorm_t3.Location = new System.Drawing.Point(5, 69);
@@ -1569,6 +1685,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrak7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrak7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak7.ErrorColor = System.Drawing.Color.Red;
+            txbBrak7.ErrorMessage = null;
             txbBrak7.Font = new System.Drawing.Font("Arial", 9F);
             txbBrak7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrak7.Location = new System.Drawing.Point(5, 182);
@@ -1582,6 +1700,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrak1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrak1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak1.ErrorColor = System.Drawing.Color.Red;
+            txbBrak1.ErrorMessage = null;
             txbBrak1.Font = new System.Drawing.Font("Arial", 9F);
             txbBrak1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrak1.Location = new System.Drawing.Point(5, 18);
@@ -1595,6 +1715,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrak6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrak6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak6.ErrorColor = System.Drawing.Color.Red;
+            txbBrak6.ErrorMessage = null;
             txbBrak6.Font = new System.Drawing.Font("Arial", 9F);
             txbBrak6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrak6.Location = new System.Drawing.Point(5, 154);
@@ -1608,6 +1730,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrak2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrak2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak2.ErrorColor = System.Drawing.Color.Red;
+            txbBrak2.ErrorMessage = null;
             txbBrak2.Font = new System.Drawing.Font("Arial", 9F);
             txbBrak2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrak2.Location = new System.Drawing.Point(5, 46);
@@ -1621,6 +1745,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrak5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrak5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak5.ErrorColor = System.Drawing.Color.Red;
+            txbBrak5.ErrorMessage = null;
             txbBrak5.Font = new System.Drawing.Font("Arial", 9F);
             txbBrak5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrak5.Location = new System.Drawing.Point(5, 128);
@@ -1634,6 +1760,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrak3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrak3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak3.ErrorColor = System.Drawing.Color.Red;
+            txbBrak3.ErrorMessage = null;
             txbBrak3.Font = new System.Drawing.Font("Arial", 9F);
             txbBrak3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrak3.Location = new System.Drawing.Point(5, 74);
@@ -1647,6 +1775,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrak4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrak4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak4.ErrorColor = System.Drawing.Color.Red;
+            txbBrak4.ErrorMessage = null;
             txbBrak4.Font = new System.Drawing.Font("Arial", 9F);
             txbBrak4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrak4.Location = new System.Drawing.Point(5, 101);
@@ -1660,6 +1790,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSeb.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSeb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSeb.ErrorColor = System.Drawing.Color.Red;
+            txbSeb.ErrorMessage = null;
             txbSeb.Font = new System.Drawing.Font("Arial", 10F);
             txbSeb.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSeb.Location = new System.Drawing.Point(6, 90);
@@ -1790,6 +1922,8 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbBrakAll.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbBrakAll.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrakAll.ErrorColor = System.Drawing.Color.Red;
+            txbBrakAll.ErrorMessage = null;
             txbBrakAll.Font = new System.Drawing.Font("Arial", 9F);
             txbBrakAll.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbBrakAll.Location = new System.Drawing.Point(461, 235);

@@ -62,7 +62,7 @@ namespace SewingProduction.Features.Articul
         private bool _isInitialized;
 
         //краткий перечень полей таблицы
-        private List<ArticulModel> _artPreview;
+        private List<SpArtPreviewModel> _artPreview;
         private BindingList<ArticulModel> _artPreviewBindingList;
         private BindingSource _artPreviewBindingSource;
 
@@ -109,9 +109,6 @@ namespace SewingProduction.Features.Articul
             bsArt.DataSource = _artPreview;
 
             bsArt.ResetBindings(false);
-            
-            
-
         }
 
 
@@ -158,6 +155,7 @@ namespace SewingProduction.Features.Articul
                 //await Task.WhenAll(artPreviewTask);
 
                 #region заполнение блока основных данных артикула
+
                 txbKod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod), true, DataSourceUpdateMode.Never);
                 txbArticul.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Articul), true, DataSourceUpdateMode.Never);
                 txbMod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Mod), true);
@@ -314,7 +312,7 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                bsArtDr.Clear();
+                bsArtDr?.Clear();
                 //bsArtDr.ResetBindings(false);
 
                 var articulByKodTemp = await _articulDataService.GetArtDrByKod(kod);
@@ -481,11 +479,10 @@ namespace SewingProduction.Features.Articul
                             cTabPage2.PageVisible = false;
                             break;
                     }
-
+                    // получение изображения по пути
                     string imagePath = null;
                     try
                     {
-                        
                         imagePath = await _articulDataService.GetFileEskizForKod(kodd);
                         if (!string.IsNullOrEmpty(imagePath))
                         {
@@ -597,7 +594,7 @@ namespace SewingProduction.Features.Articul
             var kodObj = (bsArt.Current as ArticulModel).Kod;
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
+                //mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
             }
         }
 
@@ -620,11 +617,12 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                var kod = (bsArt.Current as ArticulModel).Kod;
+                var kod = (bsArt.Current as SpArtPreviewModel).Kod;
 
                 string query = "exec dbo.kodArticulisUsed @kod = @kod";
                 DataTable result = await _dbHelperAce.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
-                ArticulModel cuRow = (ArticulModel)bsArt.Current;
+
+                var cuRow = (SpArtPreviewModel)bsArt.Current;
 
                 if (result.Rows.Count > 0)
                 {
@@ -642,6 +640,7 @@ namespace SewingProduction.Features.Articul
                     bsArt.ResetBindings(false);
 
                 }
+                result?.Dispose();
             }
             catch (Exception ex)
             {
@@ -681,12 +680,13 @@ namespace SewingProduction.Features.Articul
                 return;
             }
             var kodd = (bsArt.Current as ArticulModel).Kodd;
+            var articul = (bsArt.Current as ArticulModel).Articul.Trim();
+
 
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd));
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul ));
             }
-
 
             //// Проверяем, есть ли уже открытые экземпляры
             //if (HasOpenAdvanceForms())
@@ -736,7 +736,6 @@ namespace SewingProduction.Features.Articul
             //OpenForm(new Articul(_user), sender);
 
             //return editForm;
-
 
         }
 

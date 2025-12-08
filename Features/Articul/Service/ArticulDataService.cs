@@ -33,10 +33,10 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT * FROM sp_articul WHERE kod = @kod";
             return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
         }
-        public async Task<List<ArticulModel>> GetArtPreviewAsync()
+        public async Task<List<SpArtPreviewModel>> GetArtPreviewAsync()
         {
             string query = "select * from dbo.view_art";
-            return await _dbService.GetListAsync<ArticulModel>(query, new { });
+            return await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
         }
 
         public async Task<List<ArticulModel>> GetArtByKoddAsync( string kodd)
