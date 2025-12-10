@@ -9,7 +9,6 @@ namespace SewingProduction.Features.Articul.Models
 {
     public class SpArtPreviewModel
     {
-
         public string Ko { get; set; }
         public string Kod { get; set; }
         [NotMapped]
@@ -20,6 +19,7 @@ namespace SewingProduction.Features.Articul.Models
         public string Razm { get; set; }
         public string Sost { get; set; }
         public string Kle { get; set; }
+        
 
     }
 }

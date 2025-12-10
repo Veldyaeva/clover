@@ -38,7 +38,12 @@ namespace SewingProduction.Features.Articul.Service
             string query = "select * from dbo.view_art";
             return await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
         }
-
+        /*public async Task<List<SpArtPreviewModel>> GetLightweightTableArtPreviewAsync()
+        {
+            string query = "select * from dbo.view_art";
+            return await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
+        }
+        */
         public async Task<List<ArticulModel>> GetArtByKoddAsync( string kodd)
         {
             string query = "select * from dbo.view_art WHERE kodd = @kodd";

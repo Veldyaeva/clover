@@ -13,6 +13,7 @@ namespace SewingProduction.Features.Articul.Service
     {
         public List<LightColumn> Columns = new();
     }
+    
     public class LightColumn
     {
         public string Name { get; set; }

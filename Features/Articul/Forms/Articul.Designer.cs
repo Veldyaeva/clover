@@ -42,7 +42,6 @@ namespace SewingProduction.Features.Articul
             grColKomplSostSost = new DevExpress.XtraGrid.Columns.GridColumn();
             grArtDrName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridArt = new DevExpress.XtraGrid.GridControl();
-            bsArt = new System.Windows.Forms.BindingSource(components);
             gridControl1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,6 +49,7 @@ namespace SewingProduction.Features.Articul
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            bsArt = new System.Windows.Forms.BindingSource(components);
             chbArh = new CustomCheckBox();
             chbKombIzd = new CustomCheckBox();
             chbKombDet = new CustomCheckBox();
@@ -287,8 +287,8 @@ namespace SewingProduction.Features.Articul
             txbSebz = new CustomTextBox();
             customLabel40 = new CustomLabel();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
@@ -373,6 +373,7 @@ namespace SewingProduction.Features.Articul
             // gridArt
             // 
             gridArt.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            gridArt.DataSource = bsArt;
             gridArt.EmbeddedNavigator.Appearance.Font = new Font("Arial", 8.25F);
             gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
             gridArt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -3752,8 +3753,8 @@ namespace SewingProduction.Features.Articul
             FormClosing += Articul_FormClosing;
             Load += Articul_Load;
             ((System.ComponentModel.ISupportInitialize)gridArt).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
