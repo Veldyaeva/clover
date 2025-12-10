@@ -189,8 +189,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         {
             try
             {
-                const string query = @"SELECT tab AS Tab, fio AS Fio FROM dbo.fio ORDER BY fio";
-                return await _dbService.GetListAsync<FioModel>(query, new { });
+				// Берём данные из knitMachineAreaEmp_view, как в сплеше
+				const string query = @"
+SELECT DISTINCT kmaeTab AS Tab, fio AS Fio
+FROM ACE.dbo.knitMachineAreaEmp_view
+WHERE (kmaeDel = 0 OR kmaeDel IS NULL)
+ORDER BY fio";
+				return await _dbService.GetListAsync<FioModel>(query, new { });
             }
             catch (Exception ex)
             {

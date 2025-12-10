@@ -23,6 +23,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         public FioSelectionSplash(IEnumerable<FioModel> fioList, int? initialTab = null)
         {
+                    // Увеличиваем шрифт сплеша и всех контролов до 12pt
+            this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            this.AutoScaleMode = AutoScaleMode.Font;
+
+            foreach (Control c in this.Controls)
+            {
+                c.Font = this.Font;
+                foreach (Control child in c.Controls)
+                {
+                    child.Font = this.Font;
+                }
+            }
             var fioItems = fioList?.ToList() ?? new List<FioModel>();
 
             // Basic form settings
@@ -33,15 +45,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             MaximizeBox = false;
             ShowIcon = false;
             ShowInTaskbar = false;
-            Size = new Size(420, 180);
+            Size = new Size(630, 270);
             Padding = new Padding(12);
 
             var captionLabel = new LabelControl
             {
                 Dock = DockStyle.Top,
                 Text = "Выберите фамилию и табельный номер:",
-                Appearance = { Font = new Font("Segoe UI", 9F, FontStyle.Regular) },
-                AutoSizeMode = LabelAutoSizeMode.Vertical
+                Appearance = { Font = new Font("Segoe UI", 12F, FontStyle.Regular) },
+                AutoSizeMode = LabelAutoSizeMode.Vertical,
+                Margin = new Padding(0, 0, 0, 20)
             };
 
             _fioLookup = new GridLookUpEdit
@@ -57,7 +70,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     ImmediatePopup = true,
                     PopupFilterMode = PopupFilterMode.Contains,
                     PopupFormMinSize = new Size(350, 200)
-                }
+                },
+                Margin = new Padding(0, 20, 0, 0)
             };
 
             var lookupView = new GridView
@@ -69,7 +83,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             lookupView.Columns.AddVisible(nameof(FioModel.Fio), "ФИО").Width = 200;
             lookupView.Columns.AddVisible(nameof(FioModel.Tab), "Таб. №").Width = 80;
-            //lookupView.BestFitColumns();
+           // lookupView.BestFitColumns();
 
             _fioLookup.Properties.PopupView = lookupView;
             if (initialTab.HasValue && fioItems.Any(f => f.Tab == initialTab.Value))
@@ -88,6 +102,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Text = "Отмена",
                 DialogResult = DialogResult.Cancel
             };
+            // Увеличиваем размер кнопок (x2 от базовых 134x42 → 268x84 условно)
+            _okButton.Size = new Size(_okButton.Width * 2, _okButton.Height * 2);
+            _cancelButton.Size = new Size(_cancelButton.Width * 2, _cancelButton.Height * 2);
 
             AcceptButton = _okButton;
             CancelButton = _cancelButton;
@@ -109,7 +126,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             var buttonsPanel = new PanelControl
             {
                 Dock = DockStyle.Bottom,
-                Height = 48,
+                Height = 96,
                 BorderStyle = BorderStyles.NoBorder,
                 Padding = new Padding(0, 12, 0, 0)
             };
@@ -133,10 +150,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Padding = new Padding(0, 12, 0, 0)
             };
             container.Controls.Add(_fioLookup);
+            // пустая строка между captionLabel и _fioLookup
+            var spacer = new LabelControl { Dock = DockStyle.Top, Height = 25, AutoSizeMode = LabelAutoSizeMode.None };
+            container.Controls.Add(spacer);
             container.Controls.Add(captionLabel);
 
             Controls.Add(container);
             Controls.Add(buttonsPanel);
+
+            ApplyFontRecursive(this, new Font("Tahoma", 12F, FontStyle.Regular, GraphicsUnit.Point, 204));
         }
 
         protected override void OnShown(EventArgs e)
@@ -148,6 +170,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void InitializeComponent()
         {
 
+        }
+
+        private static void ApplyFontRecursive(Control parent, Font font)
+        {
+            if (parent == null || font == null)
+                return;
+            parent.Font = font;
+            foreach (Control child in parent.Controls)
+            {
+                ApplyFontRecursive(child, font);
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
