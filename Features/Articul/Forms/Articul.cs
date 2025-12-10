@@ -719,7 +719,7 @@ namespace SewingProduction.Features.Articul
             }
             if (this.MdiParent is SpMainForm mainForm)
             {
-                 //TODO: нужно изменить тип!!
+                //TODO: нужно изменить тип Obj на SpArtPreviewModel!!
                 //mainForm.OpenForm(new EditNaborSostav(User, Obj));
             }
         }
@@ -737,9 +737,8 @@ namespace SewingProduction.Features.Articul
                 MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var kodd = (bsArt.Current as ArticulModel).Kodd;
-            var articul = (bsArt.Current as ArticulModel).Articul.Trim();
-
+            var kodd = (bsArt.Current as SpArtPreviewModel).Kodd;
+            var articul = (bsArt.Current as SpArtPreviewModel).Articul.Trim();
 
             if (this.MdiParent is SpMainForm mainForm)
             {
