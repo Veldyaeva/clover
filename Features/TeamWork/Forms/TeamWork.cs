@@ -388,7 +388,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     throw new InvalidOperationException("Критические компоненты формы не инициализированы.");
                 }
-                await LoadWorkDivisions();
+                // создаём первый CTS для начальной загрузки,
+                // чтобы его можно было отменить при закрытии формы / смене вкладки
+                var ct = StartNewLoadToken();
+                await LoadWorkDivisions(ct);
                 // После загрузки восстановим фокус, если есть сохранённый AnnID
                 if (_lastFocusedAnnId > 0)
                 {
@@ -541,16 +544,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Отменяем все активные загрузки на предыдущей вкладке
             CancelAllLoads();
-
+            // для новой вкладки создаём НОВЫЙ токен
+            var token = StartNewLoadToken();
             switch (e.Page.Name)
             {
                 case "TabPage1":
-                    await LoadWorkDivisions();
+                    await LoadWorkDivisions(token);
                     break;
 
                 case "xtraTabPageArticles":
                     // Загружаем данные для вкладки артикулов с токеном отмены
-                    await CurrentWorks_Load(_loadCts.Token);
+                    await CurrentWorks_Load(token);//_loadCts.Token);
                     break;
 
                 default:
@@ -826,6 +830,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
+            CancelCurrentLoad();
             // Отписываемся от событий
             if (ANNgridView != null)
             {
@@ -837,7 +842,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             _secondsUpdateManager?.CancelUpdate();
             _secondsUpdateManager?.Dispose();
             SaveGridSettings();
+
             await _logger.LogEventAsync("Форма TeamWork закрыта", "FormClosing");
+            GC.Collect();
         }
 
         /// <summary>
@@ -1568,14 +1575,24 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             CancelAllLoads();
 
-            switch (activePage.Name)
+            // Начинаем НОВУЮ загрузку → старый _loadCts отменится и.dispose-ится,
+            // создастся новый, а мы заберём из него токен
+            var ct = StartNewLoadToken();
+            try
             {
-                case "TabPage1":
-                    await LoadWorkDivisions();
-                    break;
-                case "xtraTabPageArticles":
-                    await CurrentWorks_Load(_loadCts.Token);
-                    break;
+                switch (activePage.Name)
+                {
+                    case "TabPage1":
+                        await LoadWorkDivisions(ct);
+                        break;
+                    case "xtraTabPageArticles":
+                        await CurrentWorks_Load(ct);
+                        break;
+                }
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                // Перезагрузка вкладки была отменена (например, вкладку опять сменили) – это ок
             }
         }
 
@@ -1648,6 +1665,34 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _logger?.LogErrorAsync(ex, "Ошибка при открытии формы AnnLog");
                 MessageBox.Show($"Не удалось открыть журнал: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        /// <summary>Начинаем новую загрузку: отменяем старую, создаём новый CTS и возвращаем токен</summary>
+        private CancellationToken StartNewLoadToken()
+        {
+            var old = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+            if (old != null)
+            {
+                try { old.Cancel(); }
+                catch { /* игнор */ }
+                finally { old.Dispose(); }
+            }
+
+            return _loadCts.Token;
+        }
+
+        
+        /// Вызываем, когда надо просто грохнуть текущую загрузку
+        /// (смена вкладки, закрытие формы и т.п.)
+        private void CancelCurrentLoad()
+        {
+            var old = Interlocked.Exchange(ref _loadCts, null);
+            if (old != null)
+            {
+                try { old.Cancel(); }
+                catch { /* игнор */ }
+                finally { old.Dispose(); }
             }
 
         }

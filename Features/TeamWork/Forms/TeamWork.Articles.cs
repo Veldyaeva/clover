@@ -28,7 +28,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private async Task CurrentWorks_Load(CancellationToken cancellationToken = default)
         {
-
+            cancellationToken.ThrowIfCancellationRequested();
             // Отписываемся от событий ПЕРЕД загрузкой
             if (this.gridView_unboundArts != null)
             {
@@ -337,11 +337,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-            // Отменяем предыдущие операции загрузки для Articles tab
-            var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
-            oldCts?.Cancel();
-            oldCts?.Dispose();
-            var token = _loadCts.Token;
+            //// Отменяем предыдущие операции загрузки для Articles tab
+            //var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+            //oldCts?.Cancel();
+            //oldCts?.Dispose();
+            //var token = _loadCts.Token;
+            var token = StartNewLoadToken();
 
             try
             {
@@ -366,14 +367,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // 2. Затем загружаем основные данные
                 token.ThrowIfCancellationRequested();
 
-                await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Starting to load data for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
+         //       await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Starting to load data for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
 
                 // Обновляем NormRasz для customGridControl3
                 await RefreshNormRaszForArticlesTab(annId, token);
                 await RefreshNormRaskForArticlesTab(annId, token);
                 await RefreshNormKontForArticlesTab(annId, token);
 
-                await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Finished loading NormRasz and NormRask for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
+         //       await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Finished loading NormRasz and NormRask for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
 
                 // 3. Загрузка данных НЗП только для выбранной строки
                 token.ThrowIfCancellationRequested();
@@ -457,6 +458,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="cancellationToken">Токен отмены операции.</param>
         private async Task LoadNZPForArticlesTab(int annId, CancellationToken cancellationToken = default)
         {
+            var sw = Stopwatch.StartNew();
             cancellationToken.ThrowIfCancellationRequested();
 
             // Проверяем инициализацию
@@ -465,13 +467,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(new NullReferenceException("_nzpListArt or _nzpByKoddRtSourceArt is null"), "LoadNZPForArticlesTab failed initialization check.");
                 return;
             }
+            var swDb = Stopwatch.StartNew();
             await GridOverlayLoader.LoadListAsync(
                 gridControlNZP,
                 _nzpListArt,
                 _nzpByKoddRtSourceArt,
                 async token => annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, token) : Enumerable.Empty<NZPByKoddRt>(),
-                cancellationToken);
-            gridControlNZP?.RefreshDataSource();
+                cancellationToken); 
+            Debug.WriteLine($"LoadNZPForArticlesTab DB/load: {swDb.ElapsedMilliseconds} ms");
+
+            gridControlNZP?.RefreshDataSource(); 
+            Debug.WriteLine($"LoadNZPForArticlesTab total: {sw.ElapsedMilliseconds} ms");
+
             await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
         }
 

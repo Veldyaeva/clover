@@ -15,11 +15,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly GridLookUpEdit _fioLookup;
         private readonly SimpleButton _okButton;
         private readonly SimpleButton _cancelButton;
+        private readonly TextEdit _tabEdit;
 
         public int? SelectedTab =>
-            _fioLookup.EditValue != null && int.TryParse(_fioLookup.EditValue.ToString(), out int tab)
-                ? tab
-                : (int?)null;
+            int.TryParse(_tabEdit.Text, out var manualTab) ? manualTab :
+            _fioLookup.EditValue != null && int.TryParse(_fioLookup.EditValue.ToString(), out int tab) ? tab : (int?)null;
 
         public FioSelectionSplash(IEnumerable<FioModel> fioList, int? initialTab = null)
         {
@@ -27,14 +27,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             this.AutoScaleMode = AutoScaleMode.Font;
 
-            foreach (Control c in this.Controls)
-            {
-                c.Font = this.Font;
-                foreach (Control child in c.Controls)
-                {
-                    child.Font = this.Font;
-                }
-            }
+            //foreach (Control c in this.Controls)
+            //{
+            //    c.Font = this.Font;
+            //    foreach (Control child in c.Controls)
+            //    {
+            //        child.Font = this.Font;
+            //    }
+            //}
             var fioItems = fioList?.ToList() ?? new List<FioModel>();
 
             // Basic form settings
@@ -55,6 +55,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Appearance = { Font = new Font("Segoe UI", 12F, FontStyle.Regular) },
                 AutoSizeMode = LabelAutoSizeMode.Vertical,
                 Margin = new Padding(0, 0, 0, 20)
+            };
+
+            _tabEdit = new TextEdit
+            {
+                Dock = DockStyle.Left,
+                Height = 32,
+                Width = 128,
+                Properties =
+                {
+                  //  NullText = "Введите табельный номер и нажмите Enter"
+                }
             };
 
             _fioLookup = new GridLookUpEdit
@@ -102,7 +113,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Text = "Отмена",
                 DialogResult = DialogResult.Cancel
             };
-            // Увеличиваем размер кнопок (x2 от базовых 134x42 → 268x84 условно)
+            // делаем здоровенные кнопки (x2 от базовых 134x42 → 268x84 условно)
             _okButton.Size = new Size(_okButton.Width * 2, _okButton.Height * 2);
             _cancelButton.Size = new Size(_cancelButton.Width * 2, _cancelButton.Height * 2);
 
@@ -112,6 +123,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _fioLookup.EditValueChanged += (s, e) =>
             {
                 _okButton.Enabled = _fioLookup.EditValue != null;
+            };
+
+            _tabEdit.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (int.TryParse(_tabEdit.Text, out var enterTab))
+                    {
+                        // Попробуем выбрать в списке, если есть
+                        var found = fioItems.FirstOrDefault(f => f.Tab == enterTab);
+                        if (found != null)
+                            _fioLookup.EditValue = enterTab;
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                    e.Handled = true;
+                }
             };
 
             lookupView.DoubleClick += (s, e) =>
@@ -132,7 +160,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             };
             buttonsPanel.Controls.Add(_cancelButton);
             buttonsPanel.Controls.Add(_okButton);
-
+            buttonsPanel.Controls.Add(_tabEdit);
             _okButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             _cancelButton.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             _okButton.Location = new Point(buttonsPanel.Width - 2 * _okButton.Width - 16, 12);
@@ -149,6 +177,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 BorderStyle = BorderStyles.NoBorder,
                 Padding = new Padding(0, 12, 0, 0)
             };
+//            container.Controls.Add(_tabEdit);
             container.Controls.Add(_fioLookup);
             // пустая строка между captionLabel и _fioLookup
             var spacer = new LabelControl { Dock = DockStyle.Top, Height = 25, AutoSizeMode = LabelAutoSizeMode.None };
@@ -190,7 +219,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 e.Cancel = true;
                 return;
             }
-
             base.OnFormClosing(e);
         }
     }

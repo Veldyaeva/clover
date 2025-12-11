@@ -30,19 +30,26 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Загрузка вкладки "Список РТ"
         /// </summary>
         /// <returns></returns>
-        private async Task LoadWorkDivisions()
+        private async Task LoadWorkDivisions(CancellationToken ct)
         {
             try
             {
-                ANNgridControl.BeginUpdate();
+                ANNgridControl?.BeginUpdate();
+                ct.ThrowIfCancellationRequested();
                 // Получаем данные
                 var fioList = await _artNormService.GetRelDesigner();
+                ct.ThrowIfCancellationRequested();
+
                 ArtNormN.FioSource = fioList;
 
                 var data = await _artNormService.GetArtNormData();
+                ct.ThrowIfCancellationRequested();
 
                 if (data == null || data.Count == 0)
                 {
+                    _bindingList?.Clear();
+                    if (_bindingSource != null) _bindingSource.DataSource = _bindingList;
+                    _bindingSource?.ResetBindings(false);
                     MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     await _logger.LogWarningAsync("Нет данных для загрузки в текущие работы", "LoadData");
                     return;
@@ -104,9 +111,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (targetAnnId > 0)
                     await LoadRelatedData(targetAnnId);
             }
+            catch (OperationCanceledException)
+            {
+                // просто выходим — загрузку отменили (сменили вкладку / закрыли форму)
+            }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в LoadWorkDivisions: {ex.Message}");
+                _bindingList?.Clear();
+                if (_bindingSource != null) _bindingSource.DataSource = _bindingList;
+                _bindingSource?.ResetBindings(false);
+                MessageBox.Show("Произошла ошибка при загрузке разделений труда.", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                ANNgridControl?.EndUpdate();
             }
         }
 

@@ -654,29 +654,29 @@ WHERE nr.annId = @annId";
             try
             {
                 ct.ThrowIfCancellationRequested();
+
+                var sw = Stopwatch.StartNew();
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
-                        new CommandDefinition(
-                            "dbo.GetNZPByKoddRT",
-                            new { xAnnID = annId },
-                            commandType: CommandType.StoredProcedure,
-                            commandTimeout: 120,
-                            cancellationToken: ct));
+                    var t1 = Stopwatch.StartNew();
+                    var nzpResult = await connection.QueryAsync<NZPByKoddRt>(new CommandDefinition(
+                        "dbo.GetNZPByKoddRT", new { xAnnID = annId }, commandType: CommandType.StoredProcedure,
+                        commandTimeout: 240, cancellationToken: ct));
                     nzpList = nzpResult.ToList();
-
+                //    await _logger.LogEventAsync($"GetNZPByKoddRT: {t1.ElapsedMilliseconds} ms, rows={nzpList.Count}");
+                    Debug.WriteLine($"GetNZPByKoddRT: {t1.ElapsedMilliseconds} ms, rows={nzpList.Count}");
                     ct.ThrowIfCancellationRequested();
 
-                    var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(
-                        new CommandDefinition(
-                            "dbo.GetPztCountsByKoddRT",
-                            new { xAnnID = annId },
-                            commandType: CommandType.StoredProcedure,
-                            commandTimeout: 120,
-                            cancellationToken: ct));
+                    var t2 = Stopwatch.StartNew();
+                    var pztResult = await connection.QueryAsync<(int annId, int PztCount)>(new CommandDefinition(
+                        "dbo.GetPztCountsByKoddRT", new { xAnnID = annId }, commandType: CommandType.StoredProcedure,
+                        commandTimeout: 240, cancellationToken: ct));
                     pztCounts = pztResult.ToDictionary(x => x.annId, x => x.PztCount);
+                //    await _logger.LogEventAsync($"GetPztCountsByKoddRT: {t2.ElapsedMilliseconds} ms, rows={pztCounts.Count}");
+                    Debug.WriteLine($"GetPztCountsByKoddRT: {t2.ElapsedMilliseconds} ms, rows={pztCounts.Count}");
                 }
-
+              //  await _logger.LogEventAsync($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
+                Debug.WriteLine($"GetNzpWithPztCounts total: {sw.ElapsedMilliseconds} ms");
                 // Объединение результатов
                 foreach (var row in nzpList)
                 {
@@ -686,10 +686,11 @@ WHERE nr.annId = @annId";
 
                 return nzpList;
             }
-            catch (Exception ex) { 
-                Debug.WriteLine(ex.ToString()); 
-                return null; }
-            
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return null;
+            }
         }
 
         public async Task<List<Brig>> GetWorkingBrigs(int annId, CancellationToken ct = default )
