@@ -23,6 +23,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public string pzvArticul { get; set; }
         public int pzvKmlID { get; set; }
         public string kmlNumber { get; set; }
+        public decimal? koefObServ { get; set; }
+        public string name_class { get; set; }
         public string pzvNomZad { get; set; }
         public int? pzvAnnID { get; set; }
         public int? pzvNom { get; set; }
@@ -85,22 +87,35 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
 
     public class knitMachineList
     {
-//        kml.*, 
-//            kma.kmaNumber
-//		, cast(ltrim(rtrim(odp.odpDevName)) + ' // ' + ltrim(rtrim(odp.odpCategoryName)) + ' // ' + ltrim(rtrim(odp.odpName)) as nvarchar(250)) as paramName
-//--		, cast(REPLACE(odp.odpCategoryName, 'Вход ', '') as int) inputIndex
-//		, os.text_ob_s
-//		, odp.odpCode
-//    , kma.kmaIDNazn
-//    , kma.nazn AS machNazn
-//    , kma.kmaZdID
-//    , kma.object AS machObject
-//    , 'зона ' + trim(cast(ISNULL(kmaNumber, 0) as nvarchar)) + ' - ' + 'авт.№ ' + trim(cast(ISNULL(kmlNumber, 0) as nvarchar)) + ' - ' + trim(cast(ISNULL(kmlInvNum, '') as nvarchar)) + ' - ' + trim(cast(ISNULL(text_ob_s, '') as nvarchar)) as oborFullNaimen
-//    , os.id_class AS kmlIdVyazClass
-//    ,mc.name_class
-//    , CAST(dbo.getNumbersOnly(kml.kmlNumber) AS INT) AS kmlNumberInt
-//    , CAST(dbo.getNumbersOnly(kma.kmaNumber) AS INT) AS kmaNumberInt
-//    , mc.koefObServ
+        public int kmlId { get; set; }  
+        public int kmlKmAId { get; set; }
+        public string kmlNumber { get; set; }
+        public int kmlOdpId { get; set; }
+        public int kmlOdpIdx { get; set; }
+        public int kmlKodOb { get; set; }
+        public int kmlLongRep { get; set; }
+        public int kmlInvNom { get; set; }
+        public int kmlPkuId { get; set; }
+        public string kmaNumber { get; set; }
+        [Column("kmlIdVyazClass")]
+        public int idKnitClass { get; set; }
+        public string name_class { get; set; }
+        public decimal? koefObServ { get; set; }
+        //            kma.kmaNumber
+        //		, cast(ltrim(rtrim(odp.odpDevName)) + ' // ' + ltrim(rtrim(odp.odpCategoryName)) + ' // ' + ltrim(rtrim(odp.odpName)) as nvarchar(250)) as paramName
+        //--		, cast(REPLACE(odp.odpCategoryName, 'Вход ', '') as int) inputIndex
+        //		, os.text_ob_s
+        //		, odp.odpCode
+        //    , kma.kmaIDNazn
+        //    , kma.nazn AS machNazn
+        //    , kma.kmaZdID
+        //    , kma.object AS machObject
+        //    , 'зона ' + trim(cast(ISNULL(kmaNumber, 0) as nvarchar)) + ' - ' + 'авт.№ ' + trim(cast(ISNULL(kmlNumber, 0) as nvarchar)) + ' - ' + trim(cast(ISNULL(kmlInvNum, '') as nvarchar)) + ' - ' + trim(cast(ISNULL(text_ob_s, '') as nvarchar)) as oborFullNaimen
+        //    , os.id_class AS kmlIdVyazClass
+        //    ,mc.name_class
+        //    , CAST(dbo.getNumbersOnly(kml.kmlNumber) AS INT) AS kmlNumberInt
+        //    , CAST(dbo.getNumbersOnly(kma.kmaNumber) AS INT) AS kmaNumberInt
+        //    , mc.koefObServ
     }
     /*
     public class PlanZagrVyazOper

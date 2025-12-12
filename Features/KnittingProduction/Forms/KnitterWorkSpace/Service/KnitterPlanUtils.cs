@@ -30,6 +30,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 pzvArticul = parent.pzvArticul,
                 pzvKmlID = parent.pzvKmlID,
                 kmlNumber = parent.kmlNumber,
+                koefObServ = parent.koefObServ,
+                name_class = parent.name_class,
                 pzvNomZad = parent.pzvNomZad,
                 pzvAnnID = parent.pzvAnnID,
                 pzvNom = parent.pzvNom,

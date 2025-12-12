@@ -18,7 +18,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly TextEdit _tabEdit;
 
         public int? SelectedTab =>
-            int.TryParse(_tabEdit.Text, out var manualTab) ? manualTab :
+            int.TryParse(_tabEdit.Text, out var scanTab) ? scanTab :
             _fioLookup.EditValue != null && int.TryParse(_fioLookup.EditValue.ToString(), out int tab) ? tab : (int?)null;
 
         public FioSelectionSplash(IEnumerable<FioModel> fioList, int? initialTab = null)
