@@ -45,13 +45,6 @@ namespace SewingProduction.Features.Articul.Service
 
         }
 
-
-        /*public async Task<List<SpArtPreviewModel>> GetLightweightTableArtPreviewAsync()
-        {
-            string query = "select * from dbo.view_art";
-            return await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
-        }
-        */
         public async Task<List<ArticulModel>> GetArtByKoddAsync( string kodd)
         {
             string query = "select * from dbo.view_art WHERE kodd = @kodd";
@@ -66,12 +59,14 @@ namespace SewingProduction.Features.Articul.Service
             return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kod });
 
         }
-        public async Task<List<ArtDrModel>> GetArtDrByKod(string kod)
+        public async Task<BindingList<ArtDrModel>> GetArtDrByKodAsync(string kod)
         {
             string query = $"select * from dbo.view_art_dr where kod = @kod";
+            var bb = await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
+            var ret = new BindingList<ArtDrModel>(bb);
+            bb = null;
 
-            return await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
-
+            return ret;
         }
 
 

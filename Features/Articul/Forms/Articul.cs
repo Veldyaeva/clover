@@ -312,22 +312,17 @@ namespace SewingProduction.Features.Articul
             try
             {
                 bsArtDr?.Clear();
-                //bsArtDr.ResetBindings(false);
 
-                var _artDrForKod = await _articulDataService.GetArtDrByKod(kod);
-                // 1. Переносим данные в BindingList
-                var binding = new BindingList<ArtDrModel>(_artDrForKod);
+                var _artDrForKod = await _articulDataService.GetArtDrByKodAsync(kod);
 
                 if (_artDrForKod != null)
                 {
                     await this.InvokeAsync(() =>
                     {
-                        // 2. Переключаем источник грида
-                        bsArtDr.DataSource = binding; // Привязываем данные к форме
-                        // 3. Теперь можно удалить List
-                        _artDrForKod = null;
+                        
+                        bsArtDr.DataSource = _artDrForKod; // Привязываем данные к форме
+                        
                     });
-                    bsArtDr.ResetBindings(false);
                 }
             }
             catch (Exception ex)
@@ -339,8 +334,7 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                bsArticul.Clear();
-                //bsArticul.ResetBindings(false);
+                bsArticul?.Clear();
 
                 var articulByKodTemp = await _articulDataService.GetByKodAsync(kod);
 
@@ -351,11 +345,8 @@ namespace SewingProduction.Features.Articul
                     {
                         _articulByKod = articulByKodTemp;                // Обновляем текущую модель
                         bsArticul.DataSource = _articulByKod; // Привязываем данные к форме
-
                     });
-                    bsArticul.ResetBindings(false);
                 }
-
             }
             catch (Exception ex)
             {
@@ -366,8 +357,7 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                bsSostKompl.Clear();
-                //bsSostKompl.ResetBindings(false);
+                bsSostKompl?.Clear();
 
                 var articulByKodTemp = await _articulDataService.GetSostavkomplForKod(kod);
 
@@ -416,26 +406,7 @@ namespace SewingProduction.Features.Articul
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostNaborFromSQlAsync для kod {kod}");
             }
         }
-        private void bindComboBoxTkanName()
-        {
-            //string query = "SELECT tkan.tkb,tkan,kod_t, concat(tkb,kod_t) as concat  FROM tkan order by tkb";
-            //DataTable dt = _dbHelperAce.ExecuteQuery(query);
-
-            //foreach (CustomComboBox el in gbTkanName.Controls)
-            //{
-            //    if (el.GetType() == typeof(CustomComboBox))
-            //    {
-            //        char si = el.Name.Last();
-            //        BindingSource bs = new BindingSource();
-            //        bs.DataSource = dt;
-
-            //        el.DataSource = bs;
-            //        el.DisplayMember = "tkb";
-            //        el.ValueMember = "kod_t";
-            //        el.DataBindings.Add("SelectedValue", bsArticul, $"va_kod_t{si}", true, DataSourceUpdateMode.OnPropertyChanged);
-            //    }
-            //}
-        }
+        
 
         /// <summary>
         /// обновлениме данных на форме по коду при перемещении по таблице артикулов
