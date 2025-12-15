@@ -631,7 +631,7 @@ namespace SewingProduction.Features.Articul
             }
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new EditNaborSostav(User, Obj));
+                mainForm.OpenForm(new EditNaborSostav(User, Obj.Kod));
             }
         }
         /// <summary>

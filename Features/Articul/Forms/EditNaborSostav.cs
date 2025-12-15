@@ -23,6 +23,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using System.Drawing;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using Org.BouncyCastle.Crypto;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -43,9 +44,9 @@ namespace SewingProduction.Features.Articul.Forms
         {
             InitializeComponent();
         }
-        public EditNaborSostav(UserClass user, ArticulModel Obj) : base(user)
+        public EditNaborSostav(UserClass user, string Kod) : base(user)
         {
-            articulNabor_old = Obj;
+            articulNabor_old.Kod = Kod;
             InitializeComponent();
             DisableSearchForGroupEditor();
         }
@@ -60,7 +61,7 @@ namespace SewingProduction.Features.Articul.Forms
             ConfigureGridViewNaborColumns(GridViewNabor);
             ConfigureGridViewNaborColumns(GridViewNabor_Old);
             ArticulNaborColumns();
-            ArticulNaborColumnsOld();
+            await ArticulNaborColumnsOld(articulNabor_old.Id_gost);
             SetupSearchLookUpEditGost();
             ValidateGridState();
         }
@@ -76,11 +77,11 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task LoadNabor()
         {
-            articulNabor_old = await _articulDataService.GetArtByKodAsync(articulNabor_old.Kod);
+            articulNabor_old = await _articulDataService.GetArtByKodAsync(articulNabor_old?.Kod);
             assortModelBindingSource.DataSource = await _ANSDataService.GetAssortAsync();
             tvnModelBindingSource.DataSource = await _ANSDataService.GetTvnAsync();
 
-            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync(articulNabor_old.Id_gost, articulNabor_old.Kod);
+            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync();
 
             _bsGrupForNabor.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { articulNabor_old.Id_gost }, 3);
 
@@ -160,12 +161,13 @@ namespace SewingProduction.Features.Articul.Forms
         {
             customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
         }
-        private void ArticulNaborColumnsOld()
+        private async Task ArticulNaborColumnsOld(int? Id_gost)
         {
+            var gostOld = (await _ANSDataService.GetGostNaborAsync(Id_gost)).FirstOrDefault();
             customTextBoxArtN_Old.Text = articulNabor_old.Articul;
-            customTextBoxKodGost_Old.Text = articulNabor_old.Id_gost.ToString();
-            customTextBoxGostN_Old.Text = articulNabor_old.Gost;
-            customTextBoxOpiGost_Old.Text = articulNabor_old.Id_gost.ToString(); // Нужно выводить описание а не ИД (описания нет в articulNabor)
+            customTextBoxKodGost_Old.Text = gostOld.Id_gost.ToString();
+            customTextBoxGostN_Old.Text = gostOld.Name_gost;
+            customTextBoxOpiGost_Old.Text = gostOld.Opi_gost;
             customTextBoxGrupN_Old.Text = articulNabor_old.Grup;
         }
         private void ArticulNaborColumns()
@@ -711,8 +713,6 @@ namespace SewingProduction.Features.Articul.Forms
 
         private async Task ApplyRazmByGostAsync(int idGostNabor)
         {
-            Debug.WriteLine("[ApplyRazmByGostAsync] idGostNabor = " + idGostNabor.ToString());
-
             if (!(await IsSameRazmGrid(idGostNabor)))
             {
                 MessageBox.Show(
@@ -721,12 +721,10 @@ namespace SewingProduction.Features.Articul.Forms
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
-                Debug.WriteLine("[IsSameRazmGrid] Размерная сетка не совпадает.");
                 return;
             }
 
             if (_razmSostavForGost == null || _razmSostavForGost.Count == 0) return;
-            Debug.WriteLine("[ApplyRazmByGostAsync] _razmSostavForGost not null" );
 
             var view = GridViewNabor;
 
@@ -760,7 +758,6 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task<bool> IsSameRazmGrid(int idGostNabor)
         {
-            Debug.WriteLine("[IsSameRazmGrid]");
             var oldList = _razmSostavForGost?.ToList();
             _razmSostavForGost = await _ANSDataService.GetGostRazmerSostAsync(idGostNabor);
 
@@ -945,7 +942,7 @@ namespace SewingProduction.Features.Articul.Forms
                 oldAgIdBeforeEdit = currentItem.Ag_id;
                 await Task.Delay(50);
                 await LoadNabor();
-                ArticulNaborColumnsOld();
+                await ArticulNaborColumnsOld(articulNabor_old.Id_gost);
                 await Task.Delay(50);
                 await LoadSostav();
                 HideTechnicalColumns();
@@ -997,19 +994,16 @@ namespace SewingProduction.Features.Articul.Forms
             var item = customListBoxRazm.SelectedItem as GostRazmerNabViewModel;
             if (_razmSostavForGost == null)
             {
-                Debug.WriteLine("[listRazm] _razmSostavForGost == null → создаём пустой список");
                 _razmSostavForGost = new List<GostRazmerNabViewModel>();
             }
 
             if (item == null)
             {
-                Debug.WriteLine("[listRazm] item == null");
                 return;
             }
 
             if (_clickedGroupHandle == GridControl.InvalidRowHandle)
             {
-                Debug.WriteLine("[listRazm] _clickedGroupHandle invalid");
                 return;
             }
 
@@ -1017,8 +1011,6 @@ namespace SewingProduction.Features.Articul.Forms
 
             if (_clickedGroupHandle == GridControl.InvalidRowHandle)
                 return;
-
-            Debug.WriteLine($"[listRazm] Changing group handle '{_clickedGroupHandle}' → '{item.Razm}'");
 
             GridViewNabor.BeginDataUpdate();
             try
@@ -1071,8 +1063,6 @@ namespace SewingProduction.Features.Articul.Forms
 
             GridViewNabor.RefreshData();
             GridViewNabor.ExpandAllGroups();
-
-            Debug.WriteLine("[listRazm] updated successfully");
         }
         #endregion
     }

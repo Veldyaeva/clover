@@ -49,14 +49,17 @@ namespace SewingProduction.Features.Articul.Service
             string query = @"SELECT TK_ID, TK_NAME, Men FROM t_v_n";
             return await _dbService.GetListAsync<TvnModel>(query, new { });
         }
-        public async Task<List<GostModel>> GetGostNaborAsync(int? idGost, string kod)
+        public async Task<List<GostModel>> GetGostNaborAsync(int? idGost = null)
         {
             return await _dbService.GetListAsync<GostModel>(
                 @"SELECT DISTINCT Id_gost, Name_gost, Opi_gost
                 FROM gost 
-                WHERE pr_nabor = 1
-                ORDER BY Id_gost",
-                new {}
+                WHERE pr_nabor = 1 "
+                + (idGost.HasValue ? " AND Id_gost = @IdGost" : " ORDER BY Id_gost"),
+                new Dictionary<string, object>
+                {
+                    { "@IdGost", idGost }
+                }
             );
         }
         public async Task<List<GostModel>> GetGostNaborRazmAsync(int? idGost, string kod)

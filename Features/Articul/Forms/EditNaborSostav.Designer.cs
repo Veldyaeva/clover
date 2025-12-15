@@ -304,6 +304,7 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxKodGost_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxKodGost_Old.Location = new System.Drawing.Point(121, 70);
             customTextBoxKodGost_Old.Name = "customTextBoxKodGost_Old";
+            customTextBoxKodGost_Old.ReadOnly = true;
             customTextBoxKodGost_Old.Size = new System.Drawing.Size(188, 20);
             customTextBoxKodGost_Old.TabIndex = 9;
             // 
@@ -317,6 +318,7 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxOpiGost_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxOpiGost_Old.Location = new System.Drawing.Point(121, 118);
             customTextBoxOpiGost_Old.Name = "customTextBoxOpiGost_Old";
+            customTextBoxOpiGost_Old.ReadOnly = true;
             customTextBoxOpiGost_Old.Size = new System.Drawing.Size(188, 20);
             customTextBoxOpiGost_Old.TabIndex = 11;
             // 
