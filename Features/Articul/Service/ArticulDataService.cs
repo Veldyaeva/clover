@@ -6,6 +6,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 
@@ -33,11 +34,18 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT * FROM sp_articul WHERE kod = @kod";
             return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
         }
-        public async Task<List<SpArtPreviewModel>> GetArtPreviewAsync()
+        public async Task<BindingList<SpArtPreviewModel>> GetArtPreviewAsync1()
         {
             string query = "select * from dbo.view_art";
-            return await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
+            //return await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
+            var bb = await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
+            var ret = new BindingList<SpArtPreviewModel>(bb);
+            bb = null;
+            return ret;
+
         }
+
+
         /*public async Task<List<SpArtPreviewModel>> GetLightweightTableArtPreviewAsync()
         {
             string query = "select * from dbo.view_art";

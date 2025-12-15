@@ -68,13 +68,13 @@ namespace SewingProduction.Features.Articul
         private bool _isInitialized;
 
         //краткий перечень полей таблицы
-        private List<SpArtPreviewModel> _artPreview;
+        //private List<SpArtPreviewModel> _artPreview;
         //private BindingList<SpArtPreviewModel> _artPreviewBindingList;
 
 
         //фурнитура на артикул
         private List<ArtDrModel> _artDrForKod;
-        
+
         //состав комплекта по коду 
         //private List<SpArticulKomplSostModel> _SpArticulKomplSostKod;
 
@@ -96,74 +96,28 @@ namespace SewingProduction.Features.Articul
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
             _user = user;
-            
+
             //_artPreviewBindingList = new BindingList<SpArtPreviewModel>();
 
             ThemeManager.UpdateTheme(this);
         }
         private async Task RefreshArtPreviewAsync()
         {
-            _artPreview = null;
-            _artPreview = await _articulDataService.GetArtPreviewAsync();
-            var table = new BindingList<SpArtPreviewModel>(_artPreview);
-            bsArt.DataSource = table;
+            //_artPreview = null;
+            //_artPreview = await _articulDataService.GetArtPreviewAsync();
+            //var table = new BindingList<SpArtPreviewModel>(_artPreview);
+            //bsArt.DataSource = table;
 
-            _artPreview = null;
+            //bsArt.DataSource = _artPreview;
 
-            GC.Collect();
-            
+            bsArt.DataSource = await _articulDataService.GetArtPreviewAsync1();
 
-            /*
-             // полностью работает
-            _artPreview = null;
-            _artPreview = await _articulDataService.GetLightweightTableArtPreviewAsync();
-            
-            //инициализация привязок списка артикулов SpArtPreviewModel
-            var table = new LightweightTableArtPreview();
+            //_artPreview = null;
 
-            table.Columns.Add(new LightColumn
-            {
-                Name = "Kod",
-                Getter = (art) => art.Kod,
-                Setter = (art, value) => art.Kod = value?.ToString()
-            });
-            table.Columns.Add(new LightColumn
-            {
-                Name = "Grup",
-                Getter = (art) => art.Grup,
-                Setter = (art, value) => art.Grup = value?.ToString()
-            });
-            table.Columns.Add(new LightColumn
-            {
-                Name = "Articul",
-                Getter = (art) => art.Articul,
-                Setter = (art, value) => art.Articul = value?.ToString()
-            });
-            table.Columns.Add(new LightColumn
-            {
-                Name = "Mod",
-                Getter = (art) => art.Mod,
-                Setter = (art, value) => art.Mod = value?.ToString()
-            });
-            table.Columns.Add(new LightColumn
-            {
-                Name = "Razm",
-                Getter = (art) => art.Razm,
-                Setter = (art, value) => art.Razm = value?.ToString()
-            });
-            table.Columns.Add(new LightColumn
-            {
-                Name = "Kle",
-                Getter = (art) => art.Kle,
-                Setter = (art, value) => art.Kle = value?.ToString()
-            });
+            //GC.Collect();
 
-            foreach (var model in _artPreview)
-                table.Add(new LightRow { Ref = model });
 
             
-            gridArt.DataSource = table;
-            */
         }
 
 
@@ -185,7 +139,7 @@ namespace SewingProduction.Features.Articul
                 //MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы Articul");
             }
-            
+
         }
 
         private async Task InitializeBindingsAsync()
@@ -195,7 +149,7 @@ namespace SewingProduction.Features.Articul
                 //var artPreviewTask = Task.Run(() =>
                 //{
                 //загрузка перечня кодов из справочника, часть полей
-                
+
                 _articulBindingList = new BindingList<SpArticulPreviewModel>();
                 bsArticul = new BindingSource { DataSource = _articulBindingList };
 
@@ -204,9 +158,7 @@ namespace SewingProduction.Features.Articul
                 //bsSostKompl = new BindingSource { DataSource = _articulKomplSostList };
 
                 //});
-
-                //await Task.WhenAll(artPreviewTask);
-                
+                //clearBindings(this);
 
                 #region заполнение блока основных данных артикула
 
@@ -357,7 +309,10 @@ namespace SewingProduction.Features.Articul
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
             }
+
         }
+
+        
         /// <summary>
         /// Получение фурнитуры по коду справочника
         /// </summary>
@@ -557,7 +512,7 @@ namespace SewingProduction.Features.Articul
                         await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
                         pictureBoxArticul.ImageLocation = null;
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -694,8 +649,9 @@ namespace SewingProduction.Features.Articul
 
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
-                    _artPreview.Remove(cuRow);
-                    bsArt.ResetBindings(false);
+                    //_artPreview.Remove(cuRow);
+                    //bsArt.ResetBindings(false);
+                    bsArt.RemoveCurrent();
 
                 }
                 result?.Dispose();
@@ -706,12 +662,12 @@ namespace SewingProduction.Features.Articul
             }
         }
 
- 		private void customButton3_Click(object sender, EventArgs e)
+        private void customButton3_Click(object sender, EventArgs e)
         {
             var Obj = bsArt.Current as SpArtPreviewModel;
             //нужно добавить проверку на признак НАБОРА, чтобы можно было открыть только набор.
             //Debug.WriteLine(Obj.Gost);
-            
+
             ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
             if (_ANSDataService.CheckOpis(Obj.Kod))
             {
@@ -742,7 +698,7 @@ namespace SewingProduction.Features.Articul
 
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul ));
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul));
             }
         }
 
@@ -794,21 +750,21 @@ namespace SewingProduction.Features.Articul
 
         }
 
-        private void Articul_FormClosing(object sender, FormClosingEventArgs e)
+        
+
+        private void Articul_FormClosed(object sender, FormClosedEventArgs e)
         {
             gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
 
             // Отвязать BindingSource
             bsArt.DataSource = null;
-            _artPreview = null;
-            
+           
             // Dispose DevExpress контролов
             gridControl1?.Dispose();
             gridView1?.Dispose();
 
             // Dispose автогенерируемых объектов
-            components?.Dispose();  
-
+            components?.Dispose();
         }
     }
 }
