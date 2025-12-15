@@ -89,17 +89,27 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT dbo.getFileEskizForKodd(@kod) AS pathpict";
             return await _dbService.GetEntityAsync<string>(query, new { kod });
         }
-        public async Task<List<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
+        public async Task<BindingList<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
         {
             string query = "SELECT * from view_KomplSostav where kod_k = @kod";
-            return await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
+            
+            var bb = await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
+            var ret = new BindingList<SpArticulKomplSostModel>(bb);
+            bb = null;
+            return ret;
 
         }
-        public async Task<List<SpArticulNaborSostav>> GetSostavNaborForKod(string kod)
+        public async Task<BindingList<SpArticulNaborSostav>> GetSostavNaborForKod(string kod)
         {
-            string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_naimen, sostav, razm" +
+            string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_name_sokr, sostav, razm" +
                 " FROM view_articulNaborSostav where kod  = @kod";
-            return await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
+            
+
+            var bb = await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
+            var ret = new BindingList<SpArticulNaborSostav>(bb);
+            bb = null;
+            return ret;
+
         }
                 
     }
