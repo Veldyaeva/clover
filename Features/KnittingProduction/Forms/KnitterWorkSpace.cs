@@ -365,7 +365,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 						_isShiftRunning = false;
 						_shiftStartTime = null;
 						_currentShiftId = null;
-						simpleLabelItem1.Text = string.Empty;
+                        simpleLabelItem1.Text = " ";//string.Empty;
 						simpleButton2.Text = "Начать смену";
 					}
 				}
@@ -375,13 +375,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 					_isShiftRunning = false;
 					_shiftStartTime = null;
 					_currentShiftId = null;
-					simpleLabelItem1.Text = string.Empty;
+                    simpleLabelItem1.Text = " ";//string.Empty;
 					simpleButton2.Text = "Начать смену";
 				}
 
                 var plan = await _orchestrator.GetPlanByTabAsync(tab);
                 // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
+                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
             }
             catch (Exception ex)
             {
@@ -423,11 +423,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
-                var focusView = PlanZagrVyazGridControl.FocusedView as DevExpress.XtraGrid.Views.Base.ColumnView;
-                var rowsForUpdate = _planPresenter.GetRowsForViewSelection(focusView).ToList();
+                // Назначаем таб ВСЕМ загруженным строкам 
+                var rowsForUpdate = _planPresenter.AllRows?.ToList() ?? new List<KnitterPZVModel>();
                 if (!rowsForUpdate.Any())
                 {
-                    XtraMessageBox.Show(this, "Выберите строки плана для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    XtraMessageBox.Show(this, "Нет строк для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -439,13 +439,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 if (pzvIds.Count == 0)
                 {
-                    XtraMessageBox.Show(this, "Не удалось определить записи плана для обновления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    XtraMessageBox.Show(this, "Не удалось определить записи для обновления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
 
-                // Успешный старт смены: фиксируем в БД, проставляем pzvKwsID для выбранных операций, меняем текст кнопки и запускаем таймер
+                // Успешный старт смены: фиксируем в БД, проставляем pzvKwsID для всех! операций, меняем текст кнопки и запускаем таймер
                 try
                 {
                     _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, _currentKmaId, _currentKmaNum);
@@ -466,7 +466,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 // Обновим план после проставления pzvKwsID
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(selectedTab);
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
             }
             catch (Exception ex)
             {
@@ -677,7 +677,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
                 // перестраиваем иерархию без очистки табеля
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedG*/gridView1, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 // Вернём фокус и раскроем нужную машину
                 if (!string.IsNullOrEmpty(currentMachineKey))
                 {

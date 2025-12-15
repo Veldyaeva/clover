@@ -1,4 +1,6 @@
-﻿using Microsoft.Identity.Client;
+﻿using DevExpress.CodeParser;
+using DevExpress.XtraCharts;
+using Microsoft.Identity.Client;
 using SewingProduction.Features.KnittingProduction.Models;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +31,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public DateTime? pzvDateStart { get; set; }
         public DateTime? pzvDateEnd { get; set; }
         public int pzvKolNazn { get; set; }
+        public decimal pzvChasNazn { get; set; }
         public int? pzvTab { get; set; }
         public int? n_pach { get; set; }
         //количество в пачке (или в рассчёте, хз)
@@ -72,7 +77,32 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int rzv_kod { get; set; }    // rzv_kod  (алиас в SQL)
         public int rzv_kol { get; set; }    // rzv_kol  (алиас в SQL)
     }
+    public sealed class PzvSplitResult
+    {
+        public string Kind { get; set; }    // "Remainder", "Negative", "FinishedFact" и т.п.
+        public int NewPzvId { get; set; }   // Id новой (или исходной) строки
+    }
 
+    public class knitMachineList
+    {
+//        kml.*, 
+//            kma.kmaNumber
+//		, cast(ltrim(rtrim(odp.odpDevName)) + ' // ' + ltrim(rtrim(odp.odpCategoryName)) + ' // ' + ltrim(rtrim(odp.odpName)) as nvarchar(250)) as paramName
+//--		, cast(REPLACE(odp.odpCategoryName, 'Вход ', '') as int) inputIndex
+//		, os.text_ob_s
+//		, odp.odpCode
+//    , kma.kmaIDNazn
+//    , kma.nazn AS machNazn
+//    , kma.kmaZdID
+//    , kma.object AS machObject
+//    , 'зона ' + trim(cast(ISNULL(kmaNumber, 0) as nvarchar)) + ' - ' + 'авт.№ ' + trim(cast(ISNULL(kmlNumber, 0) as nvarchar)) + ' - ' + trim(cast(ISNULL(kmlInvNum, '') as nvarchar)) + ' - ' + trim(cast(ISNULL(text_ob_s, '') as nvarchar)) as oborFullNaimen
+//    , os.id_class AS kmlIdVyazClass
+//    ,mc.name_class
+//    , CAST(dbo.getNumbersOnly(kml.kmlNumber) AS INT) AS kmlNumberInt
+//    , CAST(dbo.getNumbersOnly(kma.kmaNumber) AS INT) AS kmaNumberInt
+//    , mc.koefObServ
+    }
+    /*
     public class PlanZagrVyazOper
     {
         public int? olPzvID { get; set; }
@@ -139,10 +169,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int annId { get; set; }
 
     }
+    */
 
-    public sealed class PzvSplitResult
-    {
-        public string Kind { get; set; }    // "Remainder", "Negative", "FinishedFact" и т.п.
-        public int NewPzvId { get; set; }   // Id новой (или исходной) строки
-    }
 }

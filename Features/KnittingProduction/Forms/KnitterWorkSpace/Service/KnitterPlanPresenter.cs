@@ -39,7 +39,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public void BindGroupDetails(
             BandedGridView masterView3,
            // BandedGridView bandedGridView1,
-           GridView bandedGridView1,
+       //    GridView bandedGridView1,
             AdvBandedGridView advBandedGridView1,
             System.Windows.Forms.BindingSource bindingSource,
             List<KnitterPZVModel> rows,
@@ -88,7 +88,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 //        .Select(g => g.First())
                 //        .ToList());
 
-                var masterData = _byTaskMachine.Values.Select(list => list.First()).ToList();
+                var masterData = _byTaskMachine.Values.Select(list =>
+                {
+                    var master = list.First();
+                    // Сумма часов факт (pzvKol * pzvSek / 3600) по деталям
+                    var sumHours = list.Sum(r => ((r.pzvKol ?? 0) * (double)r.pzvSek) / 3600d);
+                    master.pzvChasNazn = (decimal)Math.Round(sumHours, 2);
+                    return master;
+                }).ToList();
                 bindingSource.DataSource = masterData;
 
                 //
@@ -102,10 +109,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 masterView3.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
                 masterView3.OptionsDetail.ShowDetailTabs = false;
 
-                bandedGridView1.OptionsDetail.EnableMasterViewMode = true;
-                bandedGridView1.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
-                bandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
-                bandedGridView1.OptionsDetail.ShowDetailTabs = false;
+                //bandedGridView1.OptionsDetail.EnableMasterViewMode = true;
+                //bandedGridView1.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
+                //bandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
+                //bandedGridView1.OptionsDetail.ShowDetailTabs = false;
             }
             finally
             {

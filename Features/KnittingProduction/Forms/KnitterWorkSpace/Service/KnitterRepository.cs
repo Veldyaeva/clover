@@ -149,18 +149,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <param name="nomListJson">JSON массив с элементами номеров задания/номенклатуры (например: [{"nomZad":"123","nom":456}]).</param>
         /// <param name="vyazPodrKod">Код вязального подразделения.</param>
         /// <returns>Список операций плана <see cref="PlanZagrVyazOper"/>.</returns>
-        public async Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod)
-        {
-            try
-            {
-                const string query = "EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = @nomListJson, @xVyazPodrKod = @vyazPodrKod";
-                return await _dbService.GetListAsync<PlanZagrVyazOper>(query, new { nomListJson, vyazPodrKod });
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("GetPlanZagrVyazByPachListAsync failed", ex);
-            }
-        }
+        //public async Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod)
+        //{
+        //    try
+        //    {
+        //        const string query = "EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = @nomListJson, @xVyazPodrKod = @vyazPodrKod";
+        //        return await _dbService.GetListAsync<PlanZagrVyazOper>(query, new { nomListJson, vyazPodrKod });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("GetPlanZagrVyazByPachListAsync failed", ex);
+        //    }
+        //}
 
         /// <summary>
         /// Возвращает ФИО сотрудника по табельному номеру.
@@ -189,8 +189,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         {
             try
             {
-                const string query = @"SELECT tab AS Tab, fio AS Fio FROM dbo.fio ORDER BY fio";
-                return await _dbService.GetListAsync<FioModel>(query, new { });
+				// Берём данные из knitMachineAreaEmp_view, как в сплеше
+				const string query = @"
+SELECT DISTINCT kmaeTab AS Tab, fio AS Fio
+FROM ACE.dbo.knitMachineAreaEmp_view
+WHERE ((kmaeDel = 0 OR kmaeDel IS NULL) and kmaIDNazn = 6)
+ORDER BY fio";
+				return await _dbService.GetListAsync<FioModel>(query, new { });
             }
             catch (Exception ex)
             {

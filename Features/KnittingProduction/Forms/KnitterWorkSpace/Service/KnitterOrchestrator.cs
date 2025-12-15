@@ -69,7 +69,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <param name="nomListJson">JSON-массив номеров задания/номенклатуры.</param>
         /// <param name="vyazPodrKod">Код вязального подразделения.</param>
         /// <returns>Список операций плана.</returns>
-        public Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod) => _repo.GetPlanZagrVyazByPachListAsync(nomListJson, vyazPodrKod);
+        //public Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod) => _repo.GetPlanZagrVyazByPachListAsync(nomListJson, vyazPodrKod);
 
         /// <summary>
         /// При неполном выполнении: разделяет запись на “факт” и “остаток”.
