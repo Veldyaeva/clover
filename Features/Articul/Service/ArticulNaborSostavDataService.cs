@@ -154,9 +154,12 @@ namespace SewingProduction.Features.Articul.Service
 
                         return new
                         {
+                            Kod = oldSize.Kod,
                             Ans_id = oldSize.Ans_id,
                             razm_old = oldSize.Razm,
-                            razm_new = x.Razm
+                            razm_new = x.Razm,
+                            razm_all_old = oldSize.Razm_all,
+                            razm_all_new = x.Razm_all
                         };
                     })
                     .Where(r => r != null)
@@ -167,7 +170,7 @@ namespace SewingProduction.Features.Articul.Service
 
                 return new
                 {
-                    kod = kod,
+                    //kod = kod,
                     tk_id = g.Key,
 
                     id_gost_old = oldRow.Id_gost,
@@ -210,6 +213,13 @@ namespace SewingProduction.Features.Articul.Service
                     { "@ListJson", json }
                 };
 
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string filePath = Path.Combine(desktopPath, $"NaborUpdate_{DateTime.Now:yyyyMMdd_HHmmss}.json");
+
+            File.WriteAllText(filePath, json, Encoding.UTF8);
+            Process.Start("notepad.exe", filePath);
+            await Task.CompletedTask;
+
             var result = await _dbService.GetListAsync<dynamic>(
                 "EXEC dbo.UpdateNaborFromJson @ListJson",
                 new { ListJson = json }
@@ -226,29 +236,24 @@ namespace SewingProduction.Features.Articul.Service
                     throw new Exception("Ошибка SQL: " + errorMessage);
             }
 
-            //string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            //string filePath = Path.Combine(desktopPath, $"NaborUpdate_{DateTime.Now:yyyyMMdd_HHmmss}.json");
-
-            //File.WriteAllText(filePath, json, Encoding.UTF8);
-            //Process.Start("notepad.exe", filePath);
-            //await Task.CompletedTask;
 
             MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        public async Task<List<GostRazmerNabViewModel>> GetGostRazmerSostAsync(int? idGost = null)
+        public async Task<List<GostRazmerNabViewModel>> GetGostRazmerNaborAsync(int? idGost = null)
         {
-            string query = @"SELECT id_razm_nab as Id_razmer, RTRIM (razm) AS Razm, id_gost_nab AS Id_gost, id_gost as Id_gost_parent
-                            FROM View_gost_razmer_nab"
+            string query = @"SELECT id_razm as Id_razmer, RTRIM (gr.razm) AS Razm, Id_gost, id as Id_gost_parent
+                            FROM gost_sv_razmer gsr
+                            LEFT JOIN gost_razmer gr ON gr.id_rost = gsr.id_razmer"
                             + (idGost.HasValue ? " WHERE Id_gost = @id_gost" : "");
 
             return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });
         }
-        public async Task<List<GostRazmerNabViewModel>> GetGostRazmerNaborAsync(int? idGost = null)
+        public async Task<List<GostRazmerNabViewModel>> GetGostRazmerSostAsync(int? idGost = null)
         {
-            string query = @"SELECT Id_razmer, id_razm AS Razm, Id_gost
-                            FROM gost_sv_razmer"
+            string query = @"SELECT id_razm_nab as Id_razmer, RTRIM (razm) AS Razm, id_gost_nab AS Id_gost, id_gost as Id_gost_parent
+                            FROM View_gost_razmer_nab"
                             + (idGost.HasValue ? " WHERE Id_gost = @id_gost" : "");
 
             return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });

@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -38,11 +39,12 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxOpiGost_Old = new Core.Class.CustomTextBox();
             customLabel4 = new Core.Class.CustomLabel();
             cLabelInfo = new Core.Class.CustomLabel();
+            customLabel3 = new Core.Class.CustomLabel();
             customLabel2 = new Core.Class.CustomLabel();
             customLabel1 = new Core.Class.CustomLabel();
             customCheckBoxVerified = new CustomCheckBox();
             customSearchLookUpEditGrupN = new Core.Class.CustomSearchLookUpEdit();
-            _bsGrupForNabor = new System.Windows.Forms.BindingSource(components);
+            _bsGrupForNabor = new BindingSource(components);
             customSearchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -51,14 +53,14 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             customSearchLookUpEditGostN = new Core.Class.CustomSearchLookUpEdit();
-            _bsGostForNabor = new System.Windows.Forms.BindingSource(components);
+            _bsGostForNabor = new BindingSource(components);
             customSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             customButtonSaveNabor = new Core.Class.CustomButton();
             customGridControlNabor = new Core.Class.CustomGridControl();
-            spArticulNaborSostavBindingSource = new System.Windows.Forms.BindingSource(components);
+            spArticulNaborSostavBindingSource = new BindingSource(components);
             GridViewNabor = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             BandRazmAll1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             colAns_id1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -69,7 +71,7 @@ namespace SewingProduction.Features.Articul.Forms
             colTk_name1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colId_gost1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             repositoryItemSearchLookUpEditGost = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-            _bsGostForSostav = new System.Windows.Forms.BindingSource(components);
+            _bsGostForSostav = new BindingSource(components);
             repositoryItemSearchLookUpEditGostView = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             colName_gost = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -78,7 +80,7 @@ namespace SewingProduction.Features.Articul.Forms
             colAg_id1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             colN_i1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             repositoryItemSearchLookUpEditGrup = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-            _bsGrupForSostav = new System.Windows.Forms.BindingSource(components);
+            _bsGrupForSostav = new BindingSource(components);
             repositoryItemSearchLookUpEditGrupView = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -119,9 +121,9 @@ namespace SewingProduction.Features.Articul.Forms
             customLookUpEditAg_id = new Core.Class.CustomLookUpEdit();
             customLookUpEditGost = new Core.Class.CustomLookUpEdit();
             customLookUpEditT_v_n = new Core.Class.CustomLookUpEdit();
-            tvnModelBindingSource = new System.Windows.Forms.BindingSource(components);
+            tvnModelBindingSource = new BindingSource(components);
             customLookUpEditAssort = new Core.Class.CustomLookUpEdit();
-            assortModelBindingSource = new System.Windows.Forms.BindingSource(components);
+            assortModelBindingSource = new BindingSource(components);
             customTextBoxAns_id = new Core.Class.CustomTextBox();
             customTextBoxRazm = new Core.Class.CustomTextBox();
             layoutControlItemKod = new DevExpress.XtraLayout.LayoutControlItem();
@@ -142,6 +144,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroupDataNaborOld = new DevExpress.XtraLayout.LayoutControlGroup();
             Артикул_Old = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -172,6 +175,8 @@ namespace SewingProduction.Features.Articul.Forms
             gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            popupTrigger = new PopupContainerEdit();
+            customListBoxRazm = new Core.Class.CustomListBox();
             ((System.ComponentModel.ISupportInitialize)dataLayoutControl1).BeginInit();
             dataLayoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customSearchLookUpEditGrupN.Properties).BeginInit();
@@ -216,6 +221,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroupDataNaborOld).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Артикул_Old).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
@@ -245,6 +251,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)popupTrigger.Properties).BeginInit();
             SuspendLayout();
             // 
             // dataLayoutControl1
@@ -253,6 +260,7 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutControl1.Controls.Add(customTextBoxOpiGost_Old);
             dataLayoutControl1.Controls.Add(customLabel4);
             dataLayoutControl1.Controls.Add(cLabelInfo);
+            dataLayoutControl1.Controls.Add(customLabel3);
             dataLayoutControl1.Controls.Add(customLabel2);
             dataLayoutControl1.Controls.Add(customLabel1);
             dataLayoutControl1.Controls.Add(customCheckBoxVerified);
@@ -276,7 +284,7 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutControl1.Controls.Add(customLookUpEditAssort);
             dataLayoutControl1.Controls.Add(customTextBoxAns_id);
             dataLayoutControl1.Controls.Add(customTextBoxRazm);
-            dataLayoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataLayoutControl1.Dock = DockStyle.Fill;
             dataLayoutControl1.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItemKod, layoutControlItemId_razm_nab, layoutControlItemAns_id, layoutControlGroup2 });
             dataLayoutControl1.Location = new System.Drawing.Point(0, 0);
             dataLayoutControl1.Name = "dataLayoutControl1";
@@ -289,7 +297,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxKodGost_Old
             // 
             customTextBoxKodGost_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxKodGost_Old.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxKodGost_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxKodGost_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxKodGost_Old.ErrorMessage = null;
             customTextBoxKodGost_Old.Font = new System.Drawing.Font("Arial", 10F);
@@ -302,7 +310,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxOpiGost_Old
             // 
             customTextBoxOpiGost_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxOpiGost_Old.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxOpiGost_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxOpiGost_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxOpiGost_Old.ErrorMessage = null;
             customTextBoxOpiGost_Old.Font = new System.Drawing.Font("Arial", 10F);
@@ -316,21 +324,31 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
             customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabel4.Location = new System.Drawing.Point(499, 285);
+            customLabel4.Location = new System.Drawing.Point(499, 277);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(54, 20);
+            customLabel4.Size = new System.Drawing.Size(73, 20);
             customLabel4.TabIndex = 1;
-            customLabel4.Text = "Инфо:";
+            customLabel4.Text = "Состояние:";
             // 
             // cLabelInfo
             // 
             cLabelInfo.Font = new System.Drawing.Font("Arial", 10F);
             cLabelInfo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            cLabelInfo.Location = new System.Drawing.Point(557, 285);
+            cLabelInfo.Location = new System.Drawing.Point(576, 277);
             cLabelInfo.Name = "cLabelInfo";
-            cLabelInfo.Size = new System.Drawing.Size(395, 20);
+            cLabelInfo.Size = new System.Drawing.Size(376, 20);
             cLabelInfo.TabIndex = 1;
             cLabelInfo.Text = "Нет изменений в составе";
+            // 
+            // customLabel3
+            // 
+            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabel3.Location = new System.Drawing.Point(499, 170);
+            customLabel3.Name = "customLabel3";
+            customLabel3.Size = new System.Drawing.Size(453, 20);
+            customLabel3.TabIndex = 1;
+            customLabel3.Text = "Для изменения размера набора кликните на строку группировки";
             // 
             // customLabel2
             // 
@@ -358,7 +376,7 @@ namespace SewingProduction.Features.Articul.Forms
             customCheckBoxVerified.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxVerified.Location = new System.Drawing.Point(499, 532);
             customCheckBoxVerified.Name = "customCheckBoxVerified";
-            customCheckBoxVerified.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            customCheckBoxVerified.RightToLeft = RightToLeft.No;
             customCheckBoxVerified.Size = new System.Drawing.Size(170, 20);
             customCheckBoxVerified.TabIndex = 18;
             customCheckBoxVerified.Text = "Все проверено, набор корректен";
@@ -523,11 +541,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             customGridControlNabor.DataSource = spArticulNaborSostavBindingSource;
             customGridControlNabor.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlNabor.Location = new System.Drawing.Point(499, 309);
+            customGridControlNabor.Location = new System.Drawing.Point(499, 301);
             customGridControlNabor.MainView = GridViewNabor;
             customGridControlNabor.Name = "customGridControlNabor";
             customGridControlNabor.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemSearchLookUpEditGost, repositoryItemSearchLookUpEditGrup });
-            customGridControlNabor.Size = new System.Drawing.Size(453, 219);
+            customGridControlNabor.Size = new System.Drawing.Size(453, 227);
             customGridControlNabor.TabIndex = 17;
             customGridControlNabor.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { GridViewNabor });
             // 
@@ -552,11 +570,14 @@ namespace SewingProduction.Features.Articul.Forms
             GridViewNabor.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
             GridViewNabor.OptionsFilter.AllowAutoFilterConditionChange = DevExpress.Utils.DefaultBoolean.False;
             GridViewNabor.OptionsFind.AllowFindPanel = false;
+            GridViewNabor.OptionsPrint.PrintBandHeader = false;
+            GridViewNabor.OptionsPrint.PrintFooter = false;
             GridViewNabor.OptionsView.EnableAppearanceEvenRow = true;
             GridViewNabor.OptionsView.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             GridViewNabor.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colrazm_all1, DevExpress.Data.ColumnSortOrder.Ascending) });
             GridViewNabor.FocusedRowChanged += gridViewNabor_FocusedRowChanged;
             GridViewNabor.CellValueChanged += GridViewNabor_CellValueChanged;
+            GridViewNabor.MouseDown += GridViewNabor_MouseDown;
             // 
             // BandRazmAll1
             // 
@@ -854,7 +875,7 @@ namespace SewingProduction.Features.Articul.Forms
             // colrazm_all1
             // 
             colrazm_all1.Caption = "Размер набора";
-            colrazm_all1.FieldName = "razm_all";
+            colrazm_all1.FieldName = "Razm_all";
             colrazm_all1.Name = "colrazm_all1";
             colrazm_all1.OptionsColumn.ReadOnly = true;
             colrazm_all1.Width = 90;
@@ -862,7 +883,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxArtN
             // 
             customTextBoxArtN.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxArtN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxArtN.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxArtN.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArtN.ErrorMessage = null;
             customTextBoxArtN.Font = new System.Drawing.Font("Arial", 10F);
@@ -875,7 +896,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxGrupN_Old
             // 
             customTextBoxGrupN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxGrupN_Old.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxGrupN_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxGrupN_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxGrupN_Old.ErrorMessage = null;
             customTextBoxGrupN_Old.Font = new System.Drawing.Font("Arial", 10F);
@@ -889,7 +910,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxGostN_Old
             // 
             customTextBoxGostN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxGostN_Old.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxGostN_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxGostN_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxGostN_Old.ErrorMessage = null;
             customTextBoxGostN_Old.Font = new System.Drawing.Font("Arial", 10F);
@@ -903,7 +924,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxArtN_Old
             // 
             customTextBoxArtN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxArtN_Old.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            customTextBoxArtN_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxArtN_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArtN_Old.ErrorMessage = null;
             customTextBoxArtN_Old.Font = new System.Drawing.Font("Arial", 10F);
@@ -922,17 +943,17 @@ namespace SewingProduction.Features.Articul.Forms
             customPictureBoxNabor.Location = new System.Drawing.Point(313, 46);
             customPictureBoxNabor.Name = "customPictureBoxNabor";
             customPictureBoxNabor.Size = new System.Drawing.Size(158, 202);
-            customPictureBoxNabor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            customPictureBoxNabor.SizeMode = PictureBoxSizeMode.Zoom;
             customPictureBoxNabor.TabIndex = 1;
             customPictureBoxNabor.TabStop = false;
             // 
             // customGridControlNabor_Old
             // 
             customGridControlNabor_Old.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlNabor_Old.Location = new System.Drawing.Point(24, 293);
+            customGridControlNabor_Old.Location = new System.Drawing.Point(24, 285);
             customGridControlNabor_Old.MainView = GridViewNabor_Old;
             customGridControlNabor_Old.Name = "customGridControlNabor_Old";
-            customGridControlNabor_Old.Size = new System.Drawing.Size(447, 248);
+            customGridControlNabor_Old.Size = new System.Drawing.Size(447, 256);
             customGridControlNabor_Old.TabIndex = 13;
             customGridControlNabor_Old.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { GridViewNabor_Old });
             customGridControlNabor_Old.Load += customGridControl1_Load;
@@ -1083,7 +1104,7 @@ namespace SewingProduction.Features.Articul.Forms
             // colRazm_all
             // 
             colRazm_all.Caption = "Размер набора";
-            colRazm_all.FieldName = "razm_all";
+            colRazm_all.FieldName = "Razm_all";
             colRazm_all.MinWidth = 75;
             colRazm_all.Name = "colRazm_all";
             colRazm_all.OptionsColumn.ReadOnly = true;
@@ -1104,8 +1125,8 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxId_razm_nab
             // 
             customTextBoxId_razm_nab.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxId_razm_nab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            customTextBoxId_razm_nab.DataBindings.Add(new System.Windows.Forms.Binding("Text", spArticulNaborSostavBindingSource, "Id_razm_nab", true));
+            customTextBoxId_razm_nab.BorderStyle = BorderStyle.FixedSingle;
+            customTextBoxId_razm_nab.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Id_razm_nab", true));
             customTextBoxId_razm_nab.ErrorColor = System.Drawing.Color.Red;
             customTextBoxId_razm_nab.ErrorMessage = null;
             customTextBoxId_razm_nab.Font = new System.Drawing.Font("Arial", 10F);
@@ -1118,8 +1139,8 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxSostav
             // 
             customTextBoxSostav.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxSostav.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            customTextBoxSostav.DataBindings.Add(new System.Windows.Forms.Binding("Text", spArticulNaborSostavBindingSource, "Sostav", true));
+            customTextBoxSostav.BorderStyle = BorderStyle.FixedSingle;
+            customTextBoxSostav.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Sostav", true));
             customTextBoxSostav.ErrorColor = System.Drawing.Color.Red;
             customTextBoxSostav.ErrorMessage = null;
             customTextBoxSostav.Font = new System.Drawing.Font("Arial", 10F);
@@ -1132,8 +1153,8 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxKod
             // 
             customTextBoxKod.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxKod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            customTextBoxKod.DataBindings.Add(new System.Windows.Forms.Binding("Text", spArticulNaborSostavBindingSource, "Kod", true));
+            customTextBoxKod.BorderStyle = BorderStyle.FixedSingle;
+            customTextBoxKod.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Kod", true));
             customTextBoxKod.ErrorColor = System.Drawing.Color.Red;
             customTextBoxKod.ErrorMessage = null;
             customTextBoxKod.Font = new System.Drawing.Font("Arial", 10F);
@@ -1145,7 +1166,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLookUpEditAg_id
             // 
-            customLookUpEditAg_id.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Ag_id", true));
+            customLookUpEditAg_id.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Ag_id", true));
             customLookUpEditAg_id.Location = new System.Drawing.Point(1077, 123);
             customLookUpEditAg_id.Name = "customLookUpEditAg_id";
             customLookUpEditAg_id.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -1166,7 +1187,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLookUpEditGost
             // 
-            customLookUpEditGost.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Id_gost", true));
+            customLookUpEditGost.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Id_gost", true));
             customLookUpEditGost.Location = new System.Drawing.Point(1077, 97);
             customLookUpEditGost.Name = "customLookUpEditGost";
             customLookUpEditGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -1187,7 +1208,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLookUpEditT_v_n
             // 
-            customLookUpEditT_v_n.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Tk_id", true));
+            customLookUpEditT_v_n.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Tk_id", true));
             customLookUpEditT_v_n.Location = new System.Drawing.Point(1077, 71);
             customLookUpEditT_v_n.Name = "customLookUpEditT_v_n";
             customLookUpEditT_v_n.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -1212,7 +1233,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLookUpEditAssort
             // 
-            customLookUpEditAssort.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", spArticulNaborSostavBindingSource, "Ta_id", true));
+            customLookUpEditAssort.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Ta_id", true));
             customLookUpEditAssort.Location = new System.Drawing.Point(1077, 45);
             customLookUpEditAssort.Name = "customLookUpEditAssort";
             customLookUpEditAssort.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -1238,8 +1259,8 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxAns_id
             // 
             customTextBoxAns_id.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxAns_id.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            customTextBoxAns_id.DataBindings.Add(new System.Windows.Forms.Binding("Text", spArticulNaborSostavBindingSource, "Ans_id", true));
+            customTextBoxAns_id.BorderStyle = BorderStyle.FixedSingle;
+            customTextBoxAns_id.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Ans_id", true));
             customTextBoxAns_id.ErrorColor = System.Drawing.Color.Red;
             customTextBoxAns_id.ErrorMessage = null;
             customTextBoxAns_id.Font = new System.Drawing.Font("Arial", 10F);
@@ -1252,8 +1273,8 @@ namespace SewingProduction.Features.Articul.Forms
             // customTextBoxRazm
             // 
             customTextBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxRazm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            customTextBoxRazm.DataBindings.Add(new System.Windows.Forms.Binding("Text", spArticulNaborSostavBindingSource, "Razm", true));
+            customTextBoxRazm.BorderStyle = BorderStyle.FixedSingle;
+            customTextBoxRazm.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Razm", true));
             customTextBoxRazm.ErrorColor = System.Drawing.Color.Red;
             customTextBoxRazm.ErrorMessage = null;
             customTextBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
@@ -1284,7 +1305,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItemAns_id
             // 
             layoutControlItemAns_id.Control = customTextBoxAns_id;
-            layoutControlItemAns_id.DataBindings.Add(new System.Windows.Forms.Binding("CustomizationFormText", spArticulNaborSostavBindingSource, "Ans_id", true, System.Windows.Forms.DataSourceUpdateMode.OnValidation, "0"));
+            layoutControlItemAns_id.DataBindings.Add(new Binding("CustomizationFormText", spArticulNaborSostavBindingSource, "Ans_id", true, DataSourceUpdateMode.OnValidation, "0"));
             layoutControlItemAns_id.Location = new System.Drawing.Point(205, 0);
             layoutControlItemAns_id.Name = "layoutControlItemAns_id";
             layoutControlItemAns_id.Size = new System.Drawing.Size(205, 520);
@@ -1317,7 +1338,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlGroupDataNabor
             // 
             layoutControlGroupDataNabor.CustomizationFormText = "Данные набора";
-            layoutControlGroupDataNabor.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { Артикул, layoutControlItem8, layoutControlItem9, ГОСТ, Группа, layoutControlItem3, layoutControlItem4, layoutControlItem7, layoutControlItem12, layoutControlItem15, emptySpaceItem4 });
+            layoutControlGroupDataNabor.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { Артикул, layoutControlItem8, layoutControlItem9, ГОСТ, Группа, layoutControlItem3, layoutControlItem4, layoutControlItem7, layoutControlItem12, layoutControlItem15, emptySpaceItem4, layoutControlItem16 });
             layoutControlGroupDataNabor.Location = new System.Drawing.Point(475, 1);
             layoutControlGroupDataNabor.Name = "layoutControlGroupDataNabor";
             layoutControlGroupDataNabor.Size = new System.Drawing.Size(481, 565);
@@ -1335,9 +1356,9 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem8
             // 
             layoutControlItem8.Control = customGridControlNabor;
-            layoutControlItem8.Location = new System.Drawing.Point(0, 263);
+            layoutControlItem8.Location = new System.Drawing.Point(0, 255);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(457, 223);
+            layoutControlItem8.Size = new System.Drawing.Size(457, 231);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem9
@@ -1391,24 +1412,32 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem12
             // 
             layoutControlItem12.Control = cLabelInfo;
-            layoutControlItem12.Location = new System.Drawing.Point(58, 239);
+            layoutControlItem12.Location = new System.Drawing.Point(77, 231);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(399, 24);
+            layoutControlItem12.Size = new System.Drawing.Size(380, 24);
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem15
             // 
             layoutControlItem15.Control = customLabel4;
-            layoutControlItem15.Location = new System.Drawing.Point(0, 239);
+            layoutControlItem15.Location = new System.Drawing.Point(0, 231);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(58, 24);
+            layoutControlItem15.Size = new System.Drawing.Size(77, 24);
             layoutControlItem15.TextVisible = false;
             // 
             // emptySpaceItem4
             // 
-            emptySpaceItem4.Location = new System.Drawing.Point(0, 124);
+            emptySpaceItem4.Location = new System.Drawing.Point(0, 148);
             emptySpaceItem4.Name = "emptySpaceItem4";
-            emptySpaceItem4.Size = new System.Drawing.Size(457, 115);
+            emptySpaceItem4.Size = new System.Drawing.Size(457, 83);
+            // 
+            // layoutControlItem16
+            // 
+            layoutControlItem16.Control = customLabel3;
+            layoutControlItem16.Location = new System.Drawing.Point(0, 124);
+            layoutControlItem16.Name = "layoutControlItem16";
+            layoutControlItem16.Size = new System.Drawing.Size(457, 24);
+            layoutControlItem16.TextVisible = false;
             // 
             // layoutControlGroupDataNaborOld
             // 
@@ -1466,16 +1495,16 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem1
             // 
             layoutControlItem1.Control = customGridControlNabor_Old;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 247);
+            layoutControlItem1.Location = new System.Drawing.Point(0, 239);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(451, 252);
+            layoutControlItem1.Size = new System.Drawing.Size(451, 260);
             layoutControlItem1.TextVisible = false;
             // 
             // emptySpaceItem6
             // 
             emptySpaceItem6.Location = new System.Drawing.Point(0, 223);
             emptySpaceItem6.Name = "emptySpaceItem6";
-            emptySpaceItem6.Size = new System.Drawing.Size(451, 24);
+            emptySpaceItem6.Size = new System.Drawing.Size(451, 16);
             // 
             // simpleSeparator2
             // 
@@ -1646,11 +1675,35 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem13.Size = new System.Drawing.Size(431, 24);
             layoutControlItem13.TextVisible = false;
             // 
+            // popupTrigger
+            // 
+            popupTrigger.Location = new System.Drawing.Point(0, 0);
+            popupTrigger.Name = "popupTrigger";
+            popupTrigger.Size = new System.Drawing.Size(1, 20);
+            popupTrigger.TabIndex = 0;
+            popupTrigger.Visible = false;
+            // 
+            // customListBoxRazm
+            // 
+            customListBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customListBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
+            customListBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customListBoxRazm.FormattingEnabled = true;
+            customListBoxRazm.Location = new System.Drawing.Point(0, 0);
+            customListBoxRazm.Name = "customListBoxRazm";
+            customListBoxRazm.ObjectName = null;
+            customListBoxRazm.Size = new System.Drawing.Size(120, 84);
+            customListBoxRazm.TabIndex = 1;
+            customListBoxRazm.Visible = false;
+            customListBoxRazm.SelectedIndexChanged += listRazm_SelectedIndexChanged;
+            // 
             // EditNaborSostav
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1165, 586);
+            Controls.Add(customListBoxRazm);
+            Controls.Add(popupTrigger);
             Controls.Add(dataLayoutControl1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "EditNaborSostav";
@@ -1699,6 +1752,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroupDataNaborOld).EndInit();
             ((System.ComponentModel.ISupportInitialize)Артикул_Old).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
@@ -1728,6 +1782,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)popupTrigger.Properties).EndInit();
             ResumeLayout(false);
         }
 
@@ -1874,5 +1929,9 @@ namespace SewingProduction.Features.Articul.Forms
         private Core.Class.CustomTextBox customTextBoxOpiGost_Old;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraEditors.PopupContainerEdit popupTrigger;
+        private Core.Class.CustomListBox customListBoxRazm;
+        private Core.Class.CustomLabel customLabel3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
     }
 }
