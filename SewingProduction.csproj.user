@@ -64,6 +64,12 @@
     <Compile Update="Features\Articul\Forms\EditNaborSostav.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Articul\Forms\EditNaborSostavMatr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\EditNaborSostavPart.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\CuttingProduction\Forms\CuttingForm.cs">
       <SubType>Form</SubType>
     </Compile>

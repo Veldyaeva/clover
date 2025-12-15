@@ -159,7 +159,8 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task SetupPictursBox()
         {
-            customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
+            //customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
+            customPictureBoxNabor.Image = Image.FromFile(await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod));
         }
         private async Task ArticulNaborColumnsOld(int? Id_gost)
         {
