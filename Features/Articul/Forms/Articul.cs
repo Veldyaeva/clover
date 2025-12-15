@@ -103,21 +103,10 @@ namespace SewingProduction.Features.Articul
         }
         private async Task RefreshArtPreviewAsync()
         {
-            //_artPreview = null;
-            //_artPreview = await _articulDataService.GetArtPreviewAsync();
-            //var table = new BindingList<SpArtPreviewModel>(_artPreview);
-            //bsArt.DataSource = table;
 
-            //bsArt.DataSource = _artPreview;
+            bsArt?.Clear();
+            bsArt.DataSource = await _articulDataService.GetArtPreviewAsyncBindingList();
 
-            bsArt.DataSource = await _articulDataService.GetArtPreviewAsync1();
-
-            //_artPreview = null;
-
-            //GC.Collect();
-
-
-            
         }
 
 
@@ -312,7 +301,7 @@ namespace SewingProduction.Features.Articul
 
         }
 
-        
+
         /// <summary>
         /// Получение фурнитуры по коду справочника
         /// </summary>
@@ -661,7 +650,11 @@ namespace SewingProduction.Features.Articul
                 await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
             }
         }
-
+        /// <summary>
+        /// открывает форму редактирования состава набора
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customButton3_Click(object sender, EventArgs e)
         {
             var Obj = bsArt.Current as SpArtPreviewModel;
@@ -701,7 +694,7 @@ namespace SewingProduction.Features.Articul
                 mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul));
             }
         }
-
+        //???
         #region Управление немодальной формой ArticulEditAdvance
 
         private static readonly List<ArticulEditAdvance> _openEditArticulForms = new List<ArticulEditAdvance>();
@@ -750,15 +743,13 @@ namespace SewingProduction.Features.Articul
 
         }
 
-        
-
         private void Articul_FormClosed(object sender, FormClosedEventArgs e)
         {
             gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
 
             // Отвязать BindingSource
             bsArt.DataSource = null;
-           
+
             // Dispose DevExpress контролов
             gridControl1?.Dispose();
             gridView1?.Dispose();
@@ -766,5 +757,7 @@ namespace SewingProduction.Features.Articul
             // Dispose автогенерируемых объектов
             components?.Dispose();
         }
+
+        
     }
 }
