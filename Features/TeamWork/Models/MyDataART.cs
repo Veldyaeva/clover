@@ -7,6 +7,10 @@ namespace SewingProduction.Models
     {
         public string Articul { get; set; }
         public string ArticulForRT { get; set; }
+        /// <summary>
+        /// Блок, в котором запланирована модель
+        /// </summary>
+        public string tb_id { get; set; }
         public string minSizeAll { get; set; }
         public string maxSizeAll { get; set; }
         public string kodd_rt { get; set; }

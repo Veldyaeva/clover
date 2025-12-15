@@ -51,7 +51,7 @@ namespace SewingProduction.Core.helpers
                     
                 }
 
-                var data = await loadFunc(cancellationToken) ?? Enumerable.Empty<T>();
+                var data = await loadFunc(cancellationToken).ConfigureAwait(true) ?? Enumerable.Empty<T>();
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (targetList != null)
@@ -85,10 +85,68 @@ namespace SewingProduction.Core.helpers
                         }
                     }
                 }
-                catch { SplashScreenManager.CloseOverlayForm(overlayHandle); }
+                catch
+                {
+                     SplashScreenManager.CloseOverlayForm(overlayHandle);
+                }
             }
         }
+
+        /// <summary>
+        /// Перегрузка для готового Task<IEnumerable<T>> (если токен не нужен/игнорируется).
+        /// </summary>
+        public static Task LoadListAsync<T>(
+            GridControl targetGrid,
+            BindingList<T> targetList,
+            WinFormsBindingSource bindingSource,
+            Task<IEnumerable<T>> loadTask,
+            CancellationToken ct)
+        {
+            return LoadListAsync(targetGrid, targetList, bindingSource, _ => loadTask, ct);
+        }
+
+        public static async Task RunTaskWithOverlayAsync(
+    GridControl grid,
+    Func<CancellationToken, Task> action,
+    CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+            IOverlaySplashScreenHandle overlay = null;
+            try
+            {
+                if (grid != null && grid.Visible)
+                {
+                    int d = (int)(Math.Min(grid.ClientSize.Width, grid.ClientSize.Height) * 0.15);
+                    var opts = new OverlayWindowOptions { ImageSize = new Size(d, d), FadeIn = true, FadeOut = true };
+                    overlay = SplashScreenManager.ShowOverlayForm(grid, opts);
+                }
+                await action(ct).ConfigureAwait(true);
+            }
+            finally
+            {
+                try
+                {
+                    if (overlay != null)
+                    {
+                        if (grid != null && grid.IsHandleCreated)
+                            grid.BeginInvoke(new Action(() => { try { SplashScreenManager.CloseOverlayForm(overlay); } catch { } }));
+                        else
+                            SplashScreenManager.CloseOverlayForm(overlay);
+                    }
+                }
+                catch { }
+            }
+        }
+
+        //варианты без токена / с готовым Task:
+        public static Task RunTaskWithOverlayAsync(GridControl grid, Func<Task> action)
+            => RunTaskWithOverlayAsync(grid, _ => action(), CancellationToken.None);
+
+        public static Task RunTaskWithOverlayAsync(GridControl grid, Task task, CancellationToken ct)
+            => RunTaskWithOverlayAsync(grid, _ => task, ct);
+
+        public static Task RunTaskWithOverlayAsync(GridControl grid, Task task)
+            => RunTaskWithOverlayAsync(grid, _ => task, CancellationToken.None);
+
     }
 }
-
-

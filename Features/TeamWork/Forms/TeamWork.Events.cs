@@ -311,10 +311,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             var view = sender as GridView;
             if (!await PrepareUiAsync(view, e.FocusedRowHandle)) return;
 
-            var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
-            oldCts?.Cancel();
-            oldCts?.Dispose();
-            var token = _loadCts.Token;
+            //var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+            //oldCts?.Cancel();
+            //oldCts?.Dispose();
+            //var token = _loadCts.Token;
+            var token = StartNewLoadToken();
 
             //bool flowControl = await ButtonsEnabled(e, view);
             //if (!flowControl)
@@ -325,13 +326,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
+                token.ThrowIfCancellationRequested();
 
                 // Добавляем небольшую задержку для предотвращения частых вызовов при быстром поиске
                 await Task.Delay(200, token);
+                token.ThrowIfCancellationRequested();
 
                 var tRelated = LoadRelatedDataFromView(annId, token);
+                token.ThrowIfCancellationRequested();
                 var tNzp = LoadNZP(annId, token);
+                token.ThrowIfCancellationRequested();
                 await Task.WhenAll(tRelated, tNzp);
+                token.ThrowIfCancellationRequested();
             }
             catch (OperationCanceledException)
             {
@@ -897,6 +903,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _bindingSource?.ResetBindings(false);
                         ANNgridControl?.RefreshDataSource();
 
+                        //await _artNormService.DeleteRelatedNormTables(newAnnId);
                         await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
                         if (teamWorkAdvanceTW.IsRaszInserted)
                             await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);

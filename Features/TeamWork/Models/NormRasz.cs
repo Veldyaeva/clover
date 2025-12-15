@@ -20,7 +20,9 @@ namespace SewingProduction.Models
         public string DisplayNumber => N1 > 0 ? $"{N}.{N1}" : $"{N}";
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Указываем, что значение генерируется БД
+        [Column("nrID")]
         public int nrID { get; set; }
+        [Column("annId")]
         public int annId { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? nrDateAdd { get; set; }
@@ -28,6 +30,7 @@ namespace SewingProduction.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string nrCompAdd { get; set; }
         private string _kod;
+        [Column("kod")]
         public string Kod
         {
             get => _kod;
@@ -35,6 +38,7 @@ namespace SewingProduction.Models
         }
 
         private string _kod_o;
+        [Column("kod_o")]
         public string kod_o
         {
             get => _kod_o;
@@ -42,19 +46,25 @@ namespace SewingProduction.Models
         }
 
         private string _text;
+        [Column("text")]
         public string Text
         {
             get => _text;
             set => _text = value?.Length > 200 ? value.Substring(0, 200) : value;
         }
-
+        [Column("razryd")]
         public int razryd { get; set; }
+        [Column("n")]
         public int N { get; set; }
+        [Column("n1")]
         public int N1 { get; set; }
+        [Column("sek")]
         public int Sek { get; set; }
+        [Column("seb")]
         public decimal Seb { get; set; }
 
         private string _obor;
+        [Column("obor")]
         public string Obor
         {
             get => _obor;
@@ -66,6 +76,7 @@ namespace SewingProduction.Models
         }
 
         private string _spec;
+        [Column("spec")]
         public string Spec
         {
             get => _spec;
