@@ -43,7 +43,7 @@ namespace SewingProduction.Features.Articul.Forms
             InitializeComponent();
             _user = user;
             _kodd = kodd;
-            this.Text = articul+" "+kodd;
+            this.Text = articul + " " + kodd;
             ThemeManager.UpdateTheme(this);
 
             //_artKodRazm = new BindingList<ArticulModel>();
@@ -56,6 +56,7 @@ namespace SewingProduction.Features.Articul.Forms
         {
             //загрузка списка размеров 
             _artKodRazm = await _articulDataService.GetArtByKoddAsync(this._kodd);
+
             _bindingSourceArtKod.DataSource = _artKodRazm;
             InitializeBindingsAsync();
 
@@ -86,7 +87,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        
+
         private void customSimpleButton1_Click(object sender, EventArgs e)
         {
             /// <summary>
@@ -97,8 +98,13 @@ namespace SewingProduction.Features.Articul.Forms
             /// <param name="newValue">Новое значение</param>
             /// <param name="whereField">Поле условия (например, "AnnId")</param>
             /// <param name="whereValue">Значение условия</param>
-        // public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereField, object whereValue)
-        
+            // public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereField, object whereValue)
+
+
+        }
+
+        private void chbArh_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
     }
