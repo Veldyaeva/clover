@@ -1,7 +1,9 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.BandedGrid;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
@@ -61,6 +63,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private int? _currentKmaId = null;
         private string _currentKmaNum = null;
+        /// <summary>
+        /// Последний загруженный табельный номер, чтобы не перезагружать план без смены таба.
+        /// </summary>
+        private int? _currentLoadedTab = null;
 
         /// <summary>
         /// Список ФИО для повторного показа сплеша при бездействии.
@@ -325,63 +331,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _planBindingSource.DataSource = null;
                     PlanZagrVyazGridControl.RefreshDataSource();
                     TabGridLookUpEdit.EditValue = null;
+                    _currentLoadedTab = null;
                     return;
                 }
 
-                // Синхронизируем TabGridLookUpEdit с выбранным табельным номером
-                TabGridLookUpEdit.EditValue = tab;
-
-                // Получаем зону сотрудника и отображаем номер зоны
-                try
-                {
-					var zone = await _orchestrator.GetZoneByTabAsync(tab);
-					_currentKmaId = zone.kmaId;
-					_currentKmaNum = zone.kmaNum;
-					textEdit1.Text = _currentKmaNum?.ToString() ?? string.Empty;
-                }
-                catch (Exception)
-                {
-                    textEdit1.Text = string.Empty;
-                }
-
-				// Проверяем открытую смену у выбранного табеля и отражаем состояние UI
-				try
-				{
-					var open = await _orchestrator.GetOpenShiftByTabAsync(tab);
-					if (open.shiftId.HasValue && open.dateStart.HasValue)
-					{
-						_currentShiftId = open.shiftId.Value;
-						_isShiftRunning = true;
-						_shiftStartTime = open.dateStart.Value;
-						simpleButton2.Text = "Закончить смену";
-						var elapsed = DateTime.Now - _shiftStartTime.Value;
-						if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
-						simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
-						_shiftTimer.Start();
-					}
-					else
-					{
-						_shiftTimer.Stop();
-						_isShiftRunning = false;
-						_shiftStartTime = null;
-						_currentShiftId = null;
-                        simpleLabelItem1.Text = " ";//string.Empty;
-						simpleButton2.Text = "Начать смену";
-					}
-				}
-				catch (Exception)
-				{
-					_shiftTimer.Stop();
-					_isShiftRunning = false;
-					_shiftStartTime = null;
-					_currentShiftId = null;
-                    simpleLabelItem1.Text = " ";//string.Empty;
-					simpleButton2.Text = "Начать смену";
-				}
-
-                var plan = await _orchestrator.GetPlanByTabAsync(tab);
-                // Уровень 1 (детали) строится сразу в презентере; второй уровень — advBandedGridView1 с групповой шапкой
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>());
+                await LoadPlanForTabAsync(tab);
             }
             catch (Exception ex)
             {
@@ -408,12 +362,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
                     }
 
-                    _shiftTimer.Stop();
-                    _isShiftRunning = false;
-                    _shiftStartTime = null;
-                    _currentShiftId = null;
-                    simpleButton2.Text = "Начать смену";
-                    simpleLabelItem1.Text = " ";// string.Empty;
+                    ApplyShiftUi(false, null, null);
                     return;
                 }
 
@@ -458,15 +407,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     XtraMessageBox.Show(this, $"Не удалось записать начало смены: {exStart.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                _isShiftRunning = true;
-                _shiftStartTime = DateTime.Now;
-                simpleButton2.Text = "Закончить смену";
-                simpleLabelItem1.Text = "Смена: 00:00:00";
-                _shiftTimer.Start();
+
+                ApplyShiftUi(true, _currentShiftId, DateTime.Now);
 
                 // Обновим план после проставления pzvKwsID
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(selectedTab);
-                _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                await LoadPlanForTabAsync(selectedTab, forceReload: true);
             }
             catch (Exception ex)
             {
@@ -882,6 +827,109 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
                 }
             };
+        }
+
+        /// <summary>
+        /// Централизованно применяет состояние смены к UI и поведению гридов.
+        /// </summary>
+        private void ApplyShiftUi(bool isRunning, int? shiftId, DateTime? shiftStart)
+        {
+            _isShiftRunning = isRunning;
+            _currentShiftId = shiftId;
+            _shiftStartTime = shiftStart;
+
+            if (isRunning && shiftStart.HasValue)
+            {
+                simpleButton2.Text = "Закончить смену";
+                var elapsed = DateTime.Now - shiftStart.Value;
+                if (elapsed < TimeSpan.Zero) elapsed = TimeSpan.Zero;
+                simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
+                _shiftTimer.Start();
+            }
+            else
+            {
+                _shiftTimer.Stop();
+                simpleButton2.Text = "Начать смену";
+                simpleLabelItem1.Text = " ";
+            }
+
+            ApplyShiftEditMode(isRunning);
+        }
+
+        /// <summary>
+        /// Переключает режим редактирования гридов: только просмотр, если смена не начата.
+        /// </summary>
+        private void ApplyShiftEditMode(bool isRunning)
+        {
+            bool editable = isRunning;
+
+            void SetViewState(ColumnView view)
+            {
+                if (view == null)
+                    return;
+
+                view.OptionsBehavior.Editable = editable;
+                view.OptionsBehavior.ReadOnly = !editable;
+
+                foreach (GridColumn col in view.Columns)
+                {
+                    col.OptionsColumn.AllowEdit = editable;
+                    col.OptionsColumn.AllowFocus = editable;
+                }
+            }
+
+            SetViewState(bandedGridView3);
+            SetViewState(advBandedGridView1);
+        }
+
+        private async Task LoadPlanForTabAsync(int tab, bool forceReload = false)
+        {
+            if (!forceReload && _currentLoadedTab.HasValue && _currentLoadedTab.Value == tab)
+                return;
+
+            TabGridLookUpEdit.EditValue = tab;
+
+            await UpdateZoneAsync(tab);
+            await UpdateShiftStateAsync(tab);
+
+            var plan = await _orchestrator.GetPlanByTabAsync(tab);
+            _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
+            _currentLoadedTab = tab;
+        }
+
+        private async Task UpdateZoneAsync(int tab)
+        {
+            try
+            {
+                var zone = await _orchestrator.GetZoneByTabAsync(tab);
+                _currentKmaId = zone.kmaId;
+                _currentKmaNum = zone.kmaNum;
+                textEdit1.Text = _currentKmaNum?.ToString() ?? string.Empty;
+            }
+            catch (Exception)
+            {
+                textEdit1.Text = string.Empty;
+            }
+        }
+
+        private async Task UpdateShiftStateAsync(int tab)
+        {
+            try
+            {
+                var open = await _orchestrator.GetOpenShiftByTabAsync(tab);
+                if (open.shiftId.HasValue && open.dateStart.HasValue)
+                {
+                    ApplyShiftUi(true, open.shiftId.Value, open.dateStart);
+                }
+                else
+                {
+                    ApplyShiftUi(false, null, null);
+                }
+            }
+            catch (Exception)
+            {
+                ApplyShiftUi(false, null, null);
+            }
         }
     }
 }
