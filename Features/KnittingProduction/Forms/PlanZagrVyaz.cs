@@ -23,6 +23,7 @@ using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraLayout;
+using DevExpress.XtraVerticalGrid;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Ocsp;
@@ -1476,11 +1477,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         //MessageBox.Show("Загрузить операции");
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
                         gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
-                        LoadPlanZagrVyazByZadanySelection();
+                        //LoadPlanZagrVyazByZadanySelection();
+                        await GridOverlayLoader.RunTaskWithOverlayAsync(
+                            gridControlPZVOperList,
+                            LoadPlanZagrVyazByZadanySelection
+                            , CancellationToken.None
+                            );
                         //gridViewPZVOperList.ExpandAllGroups();
                         break;
                     case 8:
-                        ClearSelectedPachList();
+                        //ClearSelectedPachList();
+                        await GridOverlayLoader.RunTaskWithOverlayAsync(
+                            gridControlPZVOperList,
+                            ClearSelectedPachList
+                            , CancellationToken.None
+                            );
                         break;
                     //case 9:
                     //    //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
@@ -1666,9 +1677,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 );
                 // удалить отсутствующие
                 //BindingSourceHelper.RemoveMissing(_smenZadanyVyazBindingSource, changes.Removed);
-                BindingSourceHelper.RemoveMissing(
+                //BindingSourceHelper.RemoveMissing(
+                //    _pZVOperListByPachListBindingSource,
+                //    changes.Removed
+                //);
+                BindingSourceHelper.RemoveMissingSmart<PZVOperList>(
                     _pZVOperListByPachListBindingSource,
-                    changes.Removed
+                    changes.Removed,
+                    gridControlPZVOperList
                 );
                 //------------------------------------------------------
 
@@ -2023,7 +2039,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     //record.SyncSelection = (int)gridViewZadanyListByMachine.GetRowCellValue(gridViewZadanyListByMachine.FocusedRowHandle, "SyncSelection");
                     record.SyncSelection = 0;
                 }
-
+                gridViewRzvPachListByNom.PostEditor();
+                gridViewRzvPachListByNom.UpdateCurrentRow();
                 _rzvPachListByNomBindingSource.ResetBindings(false);
                 gridViewRzvPachListByNom.RefreshData();
             }
@@ -2046,7 +2063,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     //record.SyncSelection = (int)gridViewZadanyListByMachine.GetRowCellValue(gridViewZadanyListByMachine.FocusedRowHandle, "SyncSelection");
                     record.SyncSelection = 0;
                 }
-
+                gridViewZadanyListByMachine.PostEditor();
+                gridViewZadanyListByMachine.UpdateCurrentRow();
                 _zadanyListByMachineBindingSource.ResetBindings(false);
                 gridViewZadanyListByMachine.RefreshData();
             }
@@ -2055,7 +2073,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка обновления списка заданий: {ex.Message}");
             }
 
-            LoadPlanZagrVyazByZadanySelection();
+            //LoadPlanZagrVyazByZadanySelection();
+            _pZVOperListByPachListNewBindingSource.Clear();
+            var changes = BindingSourceHelper.GetChanges<PZVOperList>(
+                    _pZVOperListByPachListBindingSource,
+                    _pZVOperListByPachListNewBindingSource,
+                    HashMode.ExcludeOnly,
+                    keyProperties: new[] { "olPzvID" },
+                    hashProperties: new[] { "IsNew", "IsModified", "IsDeleted", "SyncSelection", "ErrorSelection" }
+                );
+            // удалить отсутствующие
+            //BindingSourceHelper.RemoveMissing(
+            //    _pZVOperListByPachListBindingSource,
+            //    changes.Removed
+            //);
+            var metrics = BindingSourceHelper.RemoveMissingSmart<PZVOperList>(
+                _pZVOperListByPachListBindingSource,
+                changes.Removed,
+                gridControlPZVOperList
+            );
+
+            _logger.LogEventAsync(metrics.ToString());
 
         }
 
@@ -4383,7 +4421,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     fields: new[] { "IsNew", "IsModified", "IsDeleted" }
                 );
             // удалить отсутствующие
-            BindingSourceHelper.RemoveMissing(_smenZadanyVyazBindingSource, changes.Removed);
+            //BindingSourceHelper.RemoveMissing(_smenZadanyVyazBindingSource, changes.Removed);
+            var metrics = BindingSourceHelper.RemoveMissingSmart<SmenZadanyVyaz>(
+                _smenZadanyVyazBindingSource,
+                changes.Removed,
+                gridControlSmenZadany
+            );
+
 
             //_smenZadanyVyazBindingSource.ResetBindings(false);
             var col = gridViewSmenZadany.Columns["kwsmlKmlID"];

@@ -475,7 +475,7 @@ namespace SewingProduction.Core.helpers
             finally
             {
                 oldSource.ResumeBinding();
-                oldSource.ResetBindings(false);
+                //oldSource.ResetBindings(false);
             }
 
             oldSource.ResetBindings(false);
@@ -534,26 +534,142 @@ namespace SewingProduction.Core.helpers
             oldSource.ResetBindings(false);
         }
 
-//        var changes = BindingSourceHelper.GetChanges<PZVOperList>(
-//                            _pZVOperListByPachListBindingSource,
-//                            _pZVOperListByPachListNewBindingSource,
-//                            HashMode.ExcludeOnly,
-//                            keyProperties: new[] { "olPzvID" },
-//                            hashProperties: new[] { "IsNew", "IsModified", "IsDeleted", "SyncSelection", "ErrorSelection" }
-//                        );
+        public sealed class RemoveMetrics
+        {
+            public int TotalCount { get; init; }
+            public int RemovedCount { get; init; }
+            public double RemovedPercent { get; init; }
+
+            public string Strategy { get; init; } = "";
+            public TimeSpan TotalTime { get; init; }
+            public TimeSpan RemoveTime { get; init; }
+
+            public override string ToString() =>
+                $"{Strategy}: removed {RemovedCount}/{TotalCount} ({RemovedPercent:F1}%), " +
+                $"remove={RemoveTime.TotalMilliseconds:F0} ms, total={TotalTime.TotalMilliseconds:F0} ms";
+        }
+
+        public static RemoveMetrics RemoveMissingSmart<T>(
+            BindingSource oldSource,
+            IReadOnlyCollection<T> removed,
+            DevExpress.XtraGrid.GridControl grid = null,
+            double rebuildThresholdPercent = 30.0,
+            double removeAtThresholdPercent = 10.0)
+        {
+            if (oldSource == null)
+                throw new ArgumentNullException(nameof(oldSource));
+
+            if (removed == null || removed.Count == 0)
+                return new RemoveMetrics
+                {
+                    TotalCount = oldSource.Count,
+                    RemovedCount = 0,
+                    RemovedPercent = 0,
+                    Strategy = "NothingToRemove",
+                    TotalTime = TimeSpan.Zero,
+                    RemoveTime = TimeSpan.Zero
+                };
+
+            var swTotal = System.Diagnostics.Stopwatch.StartNew();
+
+            int totalCount = oldSource.Count;
+            int removedCount = removed.Count;
+            double percent = totalCount == 0 ? 0 : (removedCount * 100.0 / totalCount);
+
+            string strategy;
+
+            try
+            {
+                grid?.BeginUpdate();
+                oldSource.SuspendBinding();
+
+                var swRemove = System.Diagnostics.Stopwatch.StartNew();
+
+                // --- STRATEGY 1: FULL REBUILD ---
+                if (percent >= rebuildThresholdPercent)
+                {
+                    strategy = "RebuildDataSource";
+
+                    var toRemove = new HashSet<T>(removed);
+                    var newList = oldSource.List.Cast<T>()
+                        .Where(x => !toRemove.Contains(x))
+                        .ToList();
+
+                    oldSource.DataSource = newList;
+                }
+                // --- STRATEGY 2: REMOVE AT (fast for small %) ---
+                else if (percent <= removeAtThresholdPercent &&
+                         oldSource.List is System.Collections.IList list)
+                {
+                    strategy = "RemoveAtDescending";
+
+                    var indices = removed
+                        .Select(r => list.IndexOf(r))
+                        .Where(i => i >= 0)
+                        .OrderByDescending(i => i)
+                        .ToList();
+
+                    foreach (var i in indices)
+                        list.RemoveAt(i);
+                }
+                // --- STRATEGY 3: SIMPLE REMOVE ---
+                else
+                {
+                    strategy = "RemoveByItem";
+
+                    if (oldSource.List is System.Collections.IList ilist)
+                    {
+                        foreach (var r in removed)
+                            ilist.Remove(r);
+                    }
+                    else
+                    {
+                        foreach (var r in removed)
+                            oldSource.Remove(r);
+                    }
+                }
+
+                swRemove.Stop();
+
+                return new RemoveMetrics
+                {
+                    TotalCount = totalCount,
+                    RemovedCount = removedCount,
+                    RemovedPercent = percent,
+                    Strategy = strategy,
+                    RemoveTime = swRemove.Elapsed,
+                    TotalTime = swTotal.Elapsed
+                };
+            }
+            finally
+            {
+                oldSource.ResumeBinding();
+                oldSource.ResetBindings(false);
+                grid?.EndUpdate();
+                swTotal.Stop();
+            }
+        }
+
+        //        var changes = BindingSourceHelper.GetChanges<PZVOperList>(
+        //                            _pZVOperListByPachListBindingSource,
+        //                            _pZVOperListByPachListNewBindingSource,
+        //                            HashMode.ExcludeOnly,
+        //                            keyProperties: new[] { "olPzvID" },
+        //                            hashProperties: new[] { "IsNew", "IsModified", "IsDeleted", "SyncSelection", "ErrorSelection" }
+        //                        );
 
 
-//        BindingSourceHelper.ApplyChanges<PZVOperList>(
-//                    _pZVOperListByPachListBindingSource,
-//                    changes,
-//                    UpdateFieldsMode.ExcludeOnly,
-//                    keyProperties: new[] { "olPzvID" },
-//                    fields: new[] { "IsNew", "IsModified", "IsDeleted", "SyncSelection", "ErrorSelection" }
-//                );
+        //        BindingSourceHelper.ApplyChanges<PZVOperList>(
+        //                    _pZVOperListByPachListBindingSource,
+        //                    changes,
+        //                    UpdateFieldsMode.ExcludeOnly,
+        //                    keyProperties: new[] { "olPzvID" },
+        //                    fields: new[] { "IsNew", "IsModified", "IsDeleted", "SyncSelection", "ErrorSelection" }
+        //                );
 
-//BindingSourceHelper.RemoveMissing(
-//                    _pZVOperListByPachListBindingSource,
-//                    changes.Removed
-//                );
+        //BindingSourceHelper.RemoveMissing(
+        //                    _pZVOperListByPachListBindingSource,
+        //                    changes.Removed
+        //                );
     }
 }
