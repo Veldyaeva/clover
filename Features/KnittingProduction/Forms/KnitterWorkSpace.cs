@@ -921,6 +921,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bool isAdmin = _adminToggle?.Checked == true;
             bool isShiftOpen = _isShiftRunning && _currentShiftId.HasValue;
 
+            // Режимы выборки:
+            // - закрытая смена: только неназначенные, ограничение 14ч
+            // - открытая смена: назначенные на текущую смену, без лимита по часам
+            // - админ: includeFinished=true (видит завершённые)
             int? kwsId = isShiftOpen ? _currentShiftId : null;
             bool onlyUnassigned = !isShiftOpen;
             bool includeFinished = isAdmin;

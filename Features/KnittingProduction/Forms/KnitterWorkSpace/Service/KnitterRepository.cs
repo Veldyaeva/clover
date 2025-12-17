@@ -34,7 +34,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список укороченной модели <see cref="KnitterPZVModel"/> для отображения.</returns>
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
-            return await GetPlanByTabAsync(tab, kwsId: null, onlyUnassigned: true, includeFinished: false, maxHours: 16m);
+            // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
+            return await GetPlanByTabAsync(tab, kwsId: null, onlyUnassigned: true, includeFinished: false, maxHours: 14m);
 #if false
             try
             {
@@ -156,6 +157,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 var map = new ConcurrentDictionary<int, KnitterPZVModel>();
 
+                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня
                 await connection.QueryAsync<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
                     "dbo.GetPlanZagrVyazNorm_ByTab4",
                     (pzv, nr, rzv) =>
