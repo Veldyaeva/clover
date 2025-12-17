@@ -11,6 +11,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,6 +32,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Презентер, который собирает иерархию мастер-деталь и настраивает события.
         /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
+        private CheckBox _adminToggle;
 
         // Вью для третьего уровня (деталь детальной таблицы)
         private RepositoryItemButtonEdit _pzvDateStartButtonEdit;
@@ -103,6 +105,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
+                InitAdminToggle();
             }
             catch (Exception ex)
             {
@@ -128,6 +131,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
+                InitAdminToggle();
             }
             catch (Exception ex)
             {
@@ -829,6 +833,28 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             };
         }
 
+        private void InitAdminToggle()
+        {
+            _adminToggle = new CheckBox
+            {
+                Text = "Админ режим",
+                AutoSize = true,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Location = new Point(this.ClientSize.Width - 130, 5)
+            };
+            Controls.Add(_adminToggle);
+            _adminToggle.BringToFront();
+            _adminToggle.CheckedChanged += async (s, e) => await ReloadCurrentTabAsync();
+        }
+
+        private async Task ReloadCurrentTabAsync()
+        {
+            if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab) && tab > 0)
+            {
+                await LoadPlanForTabAsync(tab, forceReload: true);
+            }
+        }
+
         /// <summary>
         /// Централизованно применяет состояние смены к UI и поведению гридов.
         /// </summary>
@@ -892,7 +918,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await UpdateZoneAsync(tab);
             await UpdateShiftStateAsync(tab);
 
-            var plan = await _orchestrator.GetPlanByTabAsync(tab);
+            bool isAdmin = _adminToggle?.Checked == true;
+            bool isShiftOpen = _isShiftRunning && _currentShiftId.HasValue;
+
+            int? kwsId = isShiftOpen ? _currentShiftId : null;
+            bool onlyUnassigned = !isShiftOpen;
+            bool includeFinished = isAdmin;
+            decimal maxHours = isShiftOpen ? 240m : 14m;
+
+            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
             _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
             _currentLoadedTab = tab;
         }
@@ -931,6 +965,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 ApplyShiftUi(false, null, null);
             }
         }
+
+        // Ранее фильтрация выполнялась на клиенте; теперь фильтрует хранимая процедура.
     }
 }
 

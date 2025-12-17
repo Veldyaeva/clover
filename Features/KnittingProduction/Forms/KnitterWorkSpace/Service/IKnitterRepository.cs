@@ -10,6 +10,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         Task<List<FioModel>> GetFioListAsync();
         Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab);
+        Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool includeFinished, decimal maxHours);
         Task<string> GetFioByTabAsync(int tab);
         Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab);
         Task UpdatePzvTabAsync(IEnumerable<int> pzvIds, int tab);

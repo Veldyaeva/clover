@@ -34,6 +34,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список укороченной модели <see cref="KnitterPZVModel"/> для отображения.</returns>
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
+            return await GetPlanByTabAsync(tab, kwsId: null, onlyUnassigned: true, includeFinished: false, maxHours: 16m);
+#if false
             try
             {
                 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
@@ -140,6 +142,121 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             catch (Exception ex)
             {
                 throw new Exception($"GetPlanByTabAsync failed (tab={tab})", ex);
+            }
+#endif
+        }
+
+        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool includeFinished, decimal maxHours)
+        {
+            try
+            {
+                Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+                using var connection = _dbHelper.GetConnection();
+
+                var map = new ConcurrentDictionary<int, KnitterPZVModel>();
+
+                await connection.QueryAsync<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
+                    "dbo.GetPlanZagrVyazNorm_ByTab4",
+                    (pzv, nr, rzv) =>
+                    {
+                        var parent = map.GetOrAdd(pzv.pzvID, _ =>
+                        {
+                            pzv.nrModels ??= new BindingList<nrModel>();
+                            pzv.rzvModels ??= new BindingList<rzvModel>();
+                            return pzv;
+                        });
+
+                        if (nr != null)
+                        {
+                            if (string.IsNullOrWhiteSpace(parent.kmlNumber) && !string.IsNullOrWhiteSpace(nr.kmlNumber))
+                            {
+                                parent.kmlNumber = nr.kmlNumber;
+                            }
+                            if (parent.nrN == null)
+                                parent.nrN = nr.nrN;
+                            if (parent.nrN1 == null)
+                                parent.nrN1 = nr.nrN1;
+                            if (string.IsNullOrWhiteSpace(parent.nrText))
+                                parent.nrText = nr.nrText;
+                            if (parent.nrRazryd == null)
+                                parent.nrRazryd = nr.nrRazryd;
+                            if (string.IsNullOrWhiteSpace(parent.nrObor))
+                                parent.nrObor = nr.nrObor;
+                            if (parent.nr_kod_ob == null)
+                                parent.nr_kod_ob = nr.nr_kod_ob;
+                            if (parent.nr_kod_proizv == null)
+                                parent.nr_kod_proizv = nr.nr_kod_proizv;
+
+                            parent.nrModels ??= new BindingList<nrModel>();
+                            if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
+                            {
+                                parent.nrModels.Add(nr);
+                            }
+                        }
+
+                        if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
+                        {
+                            if (rzv.n_pach != 0)
+                            {
+                                parent.n_pach ??= rzv.n_pach;
+                            }
+
+                            if (string.IsNullOrWhiteSpace(parent.razm) && !string.IsNullOrWhiteSpace(rzv.razm))
+                            {
+                                parent.razm = rzv.razm;
+                            }
+
+                            parent.rzvModels ??= new BindingList<rzvModel>();
+                            if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
+                            {
+                                parent.rzvModels.Add(rzv);
+                            }
+                        }
+
+                        return parent;
+                    },
+                    new
+                    {
+                        tab,
+                        MaxHours = maxHours,
+                        OnlyActive = 1,
+                        KwsId = kwsId,
+                        OnlyUnassigned = onlyUnassigned ? 1 : 0,
+                        IncludeFinished = includeFinished ? 1 : 0
+                    },
+                    splitOn: "nrID,n_pach",
+                    commandType: CommandType.StoredProcedure,
+                    buffered: true);
+
+                var parents = map.Values.ToList();
+
+                var missingKmlIds = parents
+                    .Where(p => p.pzvKmlID > 0 && string.IsNullOrWhiteSpace(p.kmlNumber))
+                    .Select(p => p.pzvKmlID)
+                    .Distinct()
+                    .ToArray();
+
+                if (missingKmlIds.Length > 0)
+                {
+                    const string kmlQuery = "SELECT kmlID, kmlNumber FROM dbo.view_kml_vyaz WHERE kmlID IN @ids";
+                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber)>(kmlQuery, new { ids = missingKmlIds }))
+                        .ToDictionary(x => x.kmlID, x => x.kmlNumber);
+
+                    foreach (var parent in parents)
+                    {
+                        if (string.IsNullOrWhiteSpace(parent.kmlNumber) && lookup.TryGetValue(parent.pzvKmlID, out var number))
+                        {
+                            parent.kmlNumber = number;
+                        }
+                    }
+                }
+
+                return parents;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, onlyUnassigned={onlyUnassigned}, includeFinished={includeFinished}, maxHours={maxHours})", ex);
             }
         }
 

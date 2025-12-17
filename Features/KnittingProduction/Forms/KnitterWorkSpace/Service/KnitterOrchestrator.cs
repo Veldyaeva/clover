@@ -37,6 +37,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// </summary>
         public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab) => _repo.GetPlanByTabAsync(tab);
 
+        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool includeFinished, decimal maxHours) =>
+            _repo.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
+
         /// <summary>
         /// Возвращает ФИО по табельному номеру (для авто-подмешивания в список).
         /// </summary>
