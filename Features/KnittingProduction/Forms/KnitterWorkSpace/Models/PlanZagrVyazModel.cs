@@ -56,6 +56,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int kol_Effective { get; set; }
         [NotMapped]
         public int sekEd_Effective { get; set; }
+        public DateTime? DataCd { get; set; } // data_cd -> DataCd (MatchNamesWithUnderscores = true)
+        public int? PriorityGroup { get; set; }
     }
 
     public class nrModel

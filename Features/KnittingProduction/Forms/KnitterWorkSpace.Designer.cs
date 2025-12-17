@@ -94,6 +94,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             gridBand33 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             gridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            bandedGridColumn33 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             FioGridLookUpEdit = new DevExpress.XtraEditors.GridLookUpEdit();
             FioGridLookUpEditView = new DevExpress.XtraGrid.Views.Grid.GridView();
             dataLayoutControl1 = new DevExpress.XtraDataLayout.DataLayoutControl();
@@ -147,7 +148,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand25 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             gridBand26 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn32 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            bandedGridColumn33 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             ((System.ComponentModel.ISupportInitialize)advBandedGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)PlanZagrVyazGridControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bandedGridView3).BeginInit();
@@ -387,8 +387,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn26.Caption = "Часы назн";
             bandedGridColumn26.FieldName = "bandedGridColumn26";
             bandedGridColumn26.Name = "bandedGridColumn26";
-            bandedGridColumn26.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn26", "всего часов назначено {0:0.##}") });
-            bandedGridColumn26.UnboundDataType = typeof(long);
+            bandedGridColumn26.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn26", "всего {0:0.##}") });
+            bandedGridColumn26.UnboundDataType = typeof(decimal);
             bandedGridColumn26.UnboundExpression = "[pzvSek] * [pzvKolNazn] / 3600";
             bandedGridColumn26.Visible = true;
             bandedGridColumn26.Width = 77;
@@ -439,7 +439,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn27.FieldName = "bandedGridColumn27";
             bandedGridColumn27.Name = "bandedGridColumn27";
             bandedGridColumn27.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn27", "{0:0.##}") });
-            bandedGridColumn27.UnboundDataType = typeof(long);
+            bandedGridColumn27.UnboundDataType = typeof(decimal);
             bandedGridColumn27.UnboundExpression = "[pzvKol] * [pzvSek] / 3600";
             bandedGridColumn27.Visible = true;
             bandedGridColumn27.Width = 53;
@@ -646,7 +646,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn7.Caption = "назначено в ч/ч";
             gridColumn7.FieldName = "gridColumn7";
             gridColumn7.Name = "gridColumn7";
-            gridColumn7.UnboundDataType = typeof(long);
+            gridColumn7.UnboundDataType = typeof(decimal);
             gridColumn7.UnboundExpression = "[pzvChasNazn] / [koefObServ]";
             gridColumn7.Visible = true;
             gridColumn7.Width = 150;
@@ -716,6 +716,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Visible = true;
             gridColumn9.Width = 146;
+            // 
+            // bandedGridColumn33
+            // 
+            bandedGridColumn33.Caption = "коэф. обсл";
+            bandedGridColumn33.FieldName = "koefObServ";
+            bandedGridColumn33.Name = "bandedGridColumn33";
             // 
             // FioGridLookUpEdit
             // 
@@ -1167,12 +1173,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn32.Name = "bandedGridColumn32";
             bandedGridColumn32.Visible = true;
             bandedGridColumn32.Width = 68;
-            // 
-            // bandedGridColumn33
-            // 
-            bandedGridColumn33.Caption = "коэф. обсл";
-            bandedGridColumn33.FieldName = "koefObServ";
-            bandedGridColumn33.Name = "bandedGridColumn33";
             // 
             // KnitterWorkSpace
             // 

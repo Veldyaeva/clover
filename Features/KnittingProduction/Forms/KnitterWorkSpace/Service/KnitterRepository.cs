@@ -134,36 +134,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         }
                     }
 
-                    // Дополняем данными из knitMachineList (коэффициент обслуживания и класс вязания)
-                    var kmlIds = parents
-                        .Where(p => p.pzvKmlID > 0)
-                        .Select(p => p.pzvKmlID)
-                        .Distinct()
-                        .ToArray();
-                    if (kmlIds.Length > 0)
-                    {
-                        const string machineSql = @"
-SELECT kml.kmlID,
-       mc.koefObServ,
-       mc.name_class
-FROM dbo.knitMachineList kml WITH (NOLOCK)
-LEFT JOIN oborud_shv os WITH (NOLOCK) ON kml.kmlKodOb = os.kod_ob
-LEFT JOIN matrix_class mc ON os.id_class = mc.id_class
-WHERE kml.kmlDel = 0 AND kml.kmlID IN @ids;";
-
-                        var machineLookup = (await connection.QueryAsync<(int kmlID, decimal? koefObServ, string name_class)>(machineSql, new { ids = kmlIds }))
-                            .ToDictionary(x => x.kmlID, x => (x.koefObServ, x.name_class));
-
-                        foreach (var parent in parents)
-                        {
-                            if (machineLookup.TryGetValue(parent.pzvKmlID, out var info))
-                            {
-                                parent.koefObServ = info.koefObServ;
-                                parent.name_class = info.name_class;
-                            }
-                        }
-                    }
-
                     return parents;
                 }
             }
