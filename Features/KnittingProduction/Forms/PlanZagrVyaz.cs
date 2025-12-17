@@ -49,6 +49,8 @@ using System.ServiceModel.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SewingProduction.Core.helpers.BindingSourceHelper;
+using static System.Reflection.Metadata.BlobBuilder;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using PopupMenuShowingEventHandler = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler;
 
@@ -135,9 +137,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private BindingList<SmenZadanyVyaz> _smenZadanyVyazBindingList;
         private BindingSource _smenZadanyVyazBindingSource;
 
+        private List<SmenZadanyVyaz> smenZadanyVyazNewData = new List<SmenZadanyVyaz>();
+        private BindingList<SmenZadanyVyaz> _smenZadanyVyazNewBindingList;
+        private BindingSource _smenZadanyVyazNewBindingSource;
+
         private List<KnitWorkingShiftSmen> KnitWorkingShiftSmenData = new List<KnitWorkingShiftSmen>();
         private BindingList<KnitWorkingShiftSmen> _knitWorkingShiftSmenBindingList;
         private BindingSource _knitWorkingShiftSmenBindingSource;
+
         public PlanZagrVyaz()
         {
             InitializeComponent();
@@ -215,6 +222,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _smenZadanyVyazBindingList = new BindingList<SmenZadanyVyaz>();
                     _smenZadanyVyazBindingSource = new BindingSource { DataSource = _smenZadanyVyazBindingList };
                 });
+                var smenZadanyVyazNewTask = Task.Run(() =>
+                {
+                    _smenZadanyVyazNewBindingList = new BindingList<SmenZadanyVyaz>();
+                    _smenZadanyVyazNewBindingSource = new BindingSource { DataSource = _smenZadanyVyazNewBindingList };
+                });
                 var artNormNTask = Task.Run(() =>
                 {
                     _artNormNBindingList = new BindingList<ArtNormN>();
@@ -238,7 +250,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await Task.WhenAll(planTotalHoursByKnitMachineTask, zadanyListByMachineTask, zadanyListByMachineNewTask
                         , rzvPachListByNomTask, rzvPachListByNomNewTask
                         , pZVOperListByPachListTask, pZVOperListByPachListNewTask
-                        , smenZadanyVyazEmpTask, smenZadanyVyazMachineTask, smenZadanyVyazTask
+                        , smenZadanyVyazEmpTask, smenZadanyVyazMachineTask
+                        , smenZadanyVyazTask, smenZadanyVyazNewTask
                         , artNormNTask, normRaszTask
                         , mlOpTask
                         , knitWorkingShiftTask);
@@ -478,7 +491,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridControlSmenZadany.DataSource = _smenZadanyVyazBindingSource;
                 bandedGridSmenZadanyColumnKmaID.FieldName = "kmaID";
                 bandedGridSmenZadanyColumnKmaNumber.FieldName = "kmaNumber";
-                bandedGridSmenZadanyColumnKmlID.FieldName = "kmlID";
+                //bandedGridSmenZadanyColumnKmlID.FieldName = "kmlID";
+                bandedGridSmenZadanyColumnKmlID.FieldName = "kwsmlKmlID";
                 bandedGridSmenZadanyColumnKmlNumber.FieldName = "kmlNumber";
                 bandedGridSmenZadanyColumnIDVyazClass.FieldName = "idVyazClass";
                 bandedGridSmenZadanyColumnNameVyazClass.FieldName = "nameVyazClass";
@@ -666,6 +680,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnPZVOperListOlPzvDateML.FieldName = "olPzvDateML";
                 gridColumnPZVOperListOlPzvDateMast.FieldName = "olPzvDateMast";
                 gridColumnPZVOperListSyncSelection.FieldName = "SyncSelection";
+                gridColumnPZVOperListOlPzvGradacia.FieldName = "olPzvGradacia";
 
                 gridColumnPZVOperListOlPvDateNaznKm.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 gridColumnPZVOperListOlPvDateNaznKm.DisplayFormat.FormatString = "dd.MM.yy";
@@ -1161,7 +1176,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         _smenZadanyVyazBindingSource.DataSource = smenZadanyVyazData;
                     });
 
-                    await _logger.LogEventAsync($"Данные SmenZadanyVyazEmp успешно загружены", "LoadSmenZadanyVyazDataAsync");
+                    await _logger.LogEventAsync($"Данные SmenZadanyVyaz успешно загружены", "LoadSmenZadanyVyazDataAsync");
                     //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
                     _smenZadanyVyazBindingList.Add(smenZadanyVyazData[0]);
                     _smenZadanyVyazBindingSource.ResetBindings(false);
@@ -1170,6 +1185,54 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 else
                 {
                     await _logger.LogEventAsync($"Не удалось найти данные SmenZadanyVyaz", "LoadSmenZadanyVyazDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SmenZadanyVyaz");
+            }
+        }
+        //private void LoadSmenZadanyVyazNewDataSync()
+        //{
+        //    try
+        //    {
+        //        LoadSmenZadanyVyazNewDataAsync().GetAwaiter().GetResult();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, $"Ошибка загрузки данных LoadSmenZadanyVyazNewDataSync");
+        //    }
+        //}
+        private async Task LoadSmenZadanyVyazNewDataAsync()
+        {
+            try
+            {
+                _smenZadanyVyazNewBindingSource.Clear();
+                _smenZadanyVyazNewBindingSource.ResetBindings(false);
+
+                int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
+                int _xKodProizv = 1; // код производства 1 - вязальное производство
+                int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
+                smenZadanyVyazNewData = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr);
+
+                if (smenZadanyVyazNewData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные SmenZadanyVyazNew", "LoadSmenZadanyVyazNewDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _smenZadanyVyazNewBindingSource.DataSource = smenZadanyVyazNewData;
+                    });
+
+                    await _logger.LogEventAsync($"Данные SmenZadanyVyazNew успешно загружены", "LoadSmenZadanyVyazNewDataAsync");
+                    //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
+                    _smenZadanyVyazNewBindingList.Add(smenZadanyVyazNewData[0]);
+                    _smenZadanyVyazNewBindingSource.ResetBindings(false);
+                    //advBandedGridViewSmenZadany.ExpandAllGroups();
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные SmenZadanyVyazNew", "LoadSmenZadanyVyazNewDataAsync");
                 }
             }
             catch (Exception ex)
@@ -1318,43 +1381,63 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                _knitWorkingShiftSmenBindingSource.Clear();
-                _knitWorkingShiftSmenBindingSource.ResetBindings(false);
+                var sql = @$"
+                            SELECT * 
+                            FROM knitWorkingShiftNewCurrentSmen_view
+                            WHERE kmaID <> {_kmaID}
+                              AND dateShiftStart IS NOT NULL
+                              AND dateShiftEnd IS NULL";
 
-                //artNormNData = await _vyazService.GetZadanyListByMachine(kmlID);
-                KnitWorkingShiftSmenData = await _dbService.GetListAsync<KnitWorkingShiftSmen>($"SELECT * FROM knitWorkingShiftNewCurrentSmen_view " +
-                    $" WHERE kmaID <> {_kmaID} " +
-                    $"  AND dateShiftStart IS NOT NULL " +
-                    $"  AND dateShiftEnd IS NULL ", null);
-                //KnitWorkingShiftSmenData = await _dbService.GetListAsync<KnitWorkingShiftSmen>("SELECT * FROM knitWorkingShiftNewCurrentSmen_view " +
-                //    " WHERE kmaID <> @kmaID " +
-                //    "  AND dateShiftStart IS NOT NULL " +
-                //    "  AND dateShiftEnd IS NULL ", new {_kmaID });
-                if (KnitWorkingShiftSmenData != null)
-                {
-                    await _logger.LogEventAsync($"Получены данные KnitWorkingShiftSmen", "LoadKnitWorkingShiftSmenDataAsync");
+                var data = await _dbService.GetListAsync<KnitWorkingShiftSmen>(sql, null);
 
-                    await this.InvokeAsync(() =>
-                    {
-                        //_currentMlOpData = mlOpData;                // Обновляем текущую модель
-                        //_mlOpBindingSource.DataSource = _currentMlOpData; // Привязываем данные к форме
-                        _knitWorkingShiftSmenBindingSource.DataSource = KnitWorkingShiftSmenData;
-                    });
-
-                    await _logger.LogEventAsync($"Данные KnitWorkingShiftSmen успешно загружены", "LoadKnitWorkingShiftSmenDataAsync");
-                    //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
-                    _knitWorkingShiftSmenBindingList.Add(KnitWorkingShiftSmenData[0]);
-                    _knitWorkingShiftSmenBindingSource.ResetBindings(false);
-                }
-                else
-                {
-                    await _logger.LogEventAsync($"Не удалось найти данные KnitWorkingShiftSmen", "LoadKnitWorkingShiftSmenDataAsync");
-                }
+                _zonesCache = data ?? new List<KnitWorkingShiftSmen>();
+                await _logger.LogEventAsync($"Данные KnitWorkingShiftSmenToMove успешно загружены", "LoadKnitWorkingShiftSmenToMoveDataAsync");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных KnitWorkingShiftSmen");
+                await _logger.LogErrorAsync(ex, "Ошибка загрузки зон");
+                await _logger.LogEventAsync($"Не удалось найти данные KnitWorkingShiftSmenToMove", "LoadKnitWorkingShiftSmenToMoveDataAsync");
+                _zonesCache = new();
             }
+            //try
+            //{
+            //    _knitWorkingShiftSmenBindingSource.Clear();
+            //    _knitWorkingShiftSmenBindingSource.ResetBindings(false);
+
+            //    //artNormNData = await _vyazService.GetZadanyListByMachine(kmlID);
+            //    KnitWorkingShiftSmenData = await _dbService.GetListAsync<KnitWorkingShiftSmen>($"SELECT * FROM knitWorkingShiftNewCurrentSmen_view " +
+            //        $" WHERE kmaID <> {_kmaID} " +
+            //        $"  AND dateShiftStart IS NOT NULL " +
+            //        $"  AND dateShiftEnd IS NULL ", null);
+            //    //KnitWorkingShiftSmenData = await _dbService.GetListAsync<KnitWorkingShiftSmen>("SELECT * FROM knitWorkingShiftNewCurrentSmen_view " +
+            //    //    " WHERE kmaID <> @kmaID " +
+            //    //    "  AND dateShiftStart IS NOT NULL " +
+            //    //    "  AND dateShiftEnd IS NULL ", new {_kmaID });
+            //    if (KnitWorkingShiftSmenData != null)
+            //    {
+            //        await _logger.LogEventAsync($"Получены данные KnitWorkingShiftSmen", "LoadKnitWorkingShiftSmenDataAsync");
+
+            //        await this.InvokeAsync(() =>
+            //        {
+            //            //_currentMlOpData = mlOpData;                // Обновляем текущую модель
+            //            //_mlOpBindingSource.DataSource = _currentMlOpData; // Привязываем данные к форме
+            //            _knitWorkingShiftSmenBindingSource.DataSource = KnitWorkingShiftSmenData;
+            //        });
+
+            //        await _logger.LogEventAsync($"Данные KnitWorkingShiftSmen успешно загружены", "LoadKnitWorkingShiftSmenDataAsync");
+            //        //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
+            //        _knitWorkingShiftSmenBindingList.Add(KnitWorkingShiftSmenData[0]);
+            //        _knitWorkingShiftSmenBindingSource.ResetBindings(false);
+            //    }
+            //    else
+            //    {
+            //        await _logger.LogEventAsync($"Не удалось найти данные KnitWorkingShiftSmen", "LoadKnitWorkingShiftSmenDataAsync");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных KnitWorkingShiftSmen");
+            //}
         }
         private async void layoutControlGroup6_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
@@ -1465,79 +1548,129 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 gridViewPZVOperList.EndSort();
 
-                // Безопасное получение списков
-                var oldList = _pZVOperListByPachListBindingSource.List?.Cast<dynamic>().Where(x => x != null).ToList() ?? new List<dynamic>();
-                var newList = _pZVOperListByPachListNewBindingSource.List?.Cast<dynamic>().Where(x => x != null).ToList() ?? new List<dynamic>();
+                //// Безопасное получение списков
+                //var oldList = _pZVOperListByPachListBindingSource.List?.Cast<dynamic>().Where(x => x != null).ToList() ?? new List<dynamic>();
+                //var newList = _pZVOperListByPachListNewBindingSource.List?.Cast<dynamic>().Where(x => x != null).ToList() ?? new List<dynamic>();
 
-                // Добавляем новые записи
-                _pZVOperListByPachListBindingSource.RaiseListChangedEvents = false;
-                try
-                {
-                    List<PZVOperList> recordsToAdd = newList
-                        .OfType<PZVOperList>()              // вместо Cast<dynamic>()
-                        .Where(newRec => !oldList.Any(oldRec =>
-                            oldRec.olPzvID == newRec.olPzvID))
-                        .ToList();
-                    if (recordsToAdd.Count != 0)
-                    {
-                        ////int i = 0;
-                        ////foreach (var record in recordsToAdd)
-                        ////{
-                        ////    i++;
-                        ////    _pZVOperListByPachListBindingSource.Add(record);
-                        ////}
-                        ////List<PZVOperList> addList = _pZVOperListByPachListBindingSource.List as List<PZVOperList>;
-                        //List<PZVOperList> addList = new List<PZVOperList>();
-                        ////if (_pZVOperListByPachListBindingSource.Count > 0)
-                        ////{
-                        //    addList = _pZVOperListByPachListBindingSource.List.OfType<PZVOperList>().ToList();
-                        ////}
-                        //// добавляем записи пакетно в сам список
-                        //addList.AddRange(recordsToAdd);
+                //// Добавляем новые записи
+                //_pZVOperListByPachListBindingSource.RaiseListChangedEvents = false;
+                //try
+                //{
+                //    List<PZVOperList> recordsToAdd = newList
+                //        .OfType<PZVOperList>()              // вместо Cast<dynamic>()
+                //        .Where(newRec => !oldList.Any(oldRec =>
+                //            oldRec.olPzvID == newRec.olPzvID))
+                //        .ToList();
+                //    if (recordsToAdd.Count != 0)
+                //    {
+                //        ////int i = 0;
+                //        ////foreach (var record in recordsToAdd)
+                //        ////{
+                //        ////    i++;
+                //        ////    _pZVOperListByPachListBindingSource.Add(record);
+                //        ////}
+                //        ////List<PZVOperList> addList = _pZVOperListByPachListBindingSource.List as List<PZVOperList>;
+                //        //List<PZVOperList> addList = new List<PZVOperList>();
+                //        ////if (_pZVOperListByPachListBindingSource.Count > 0)
+                //        ////{
+                //        //    addList = _pZVOperListByPachListBindingSource.List.OfType<PZVOperList>().ToList();
+                //        ////}
+                //        //// добавляем записи пакетно в сам список
+                //        //addList.AddRange(recordsToAdd);
 
-                        //// обновляем биндинг одним вызовом
-                        //_pZVOperListByPachListBindingSource.ResetBindings(false);
-                        var bs = _pZVOperListByPachListBindingSource;
+                //        //// обновляем биндинг одним вызовом
+                //        //_pZVOperListByPachListBindingSource.ResetBindings(false);
+                //        var bs = _pZVOperListByPachListBindingSource;
 
-                        var list = bs.List as List<PZVOperList>;
-                        if (list == null)
-                        {
-                            list = bs.List.Cast<PZVOperList>().ToList();
-                            bs.DataSource = list;              // теперь источник — List<PZVOperList>
-                        }
+                //        var list = bs.List as List<PZVOperList>;
+                //        if (list == null)
+                //        {
+                //            list = bs.List.Cast<PZVOperList>().ToList();
+                //            bs.DataSource = list;              // теперь источник — List<PZVOperList>
+                //        }
 
-                        // теперь можно быстро:
-                        list.AddRange(recordsToAdd);
-                        bs.ResetBindings(false);
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("Ошибка добавления новых записей в план загруза");
-                }
-                finally
-                {
-                    _pZVOperListByPachListBindingSource.RaiseListChangedEvents = true;
-                }
+                //        // теперь можно быстро:
+                //        list.AddRange(recordsToAdd);
+                //        bs.ResetBindings(false);
+                //    }
+                //}
+                //catch
+                //{
+                //    MessageBox.Show("Ошибка добавления новых записей в план загруза");
+                //}
+                //finally
+                //{
+                //    _pZVOperListByPachListBindingSource.RaiseListChangedEvents = true;
+                //}
 
-                // Удаляем отсутствующие записи
-                var recordsToRemove = _pZVOperListByPachListBindingSource.List
-                    .OfType<PZVOperList>()              // вместо Cast<dynamic>()
-                    .Where(oldRec => oldRec != null &&
-                           !newList.Any(newRec => newRec != null &&
-                                newRec.olPzvID == oldRec.olPzvID))
-                    .Select(oldRec =>
-                    {
-                        oldRec.IsDeleted = true;   // или isDeleted, как у тебя называется
-                        return oldRec;
-                    })
-                    .ToList();                          // <- здесь уже List<PzvOperList>
+                //// Удаляем отсутствующие записи
+                //var recordsToRemove = _pZVOperListByPachListBindingSource.List
+                //    .OfType<PZVOperList>()              // вместо Cast<dynamic>()
+                //    .Where(oldRec => oldRec != null &&
+                //           !newList.Any(newRec => newRec != null &&
+                //                newRec.olPzvID == oldRec.olPzvID))
+                //    .Select(oldRec =>
+                //    {
+                //        oldRec.IsDeleted = true;   // или isDeleted, как у тебя называется
+                //        return oldRec;
+                //    })
+                //    .ToList();                          // <- здесь уже List<PzvOperList>
 
-                //// Удаляем через временный список
-                if (recordsToRemove.Count != 0)
-                {
-                    _pZVOperListByPachListBindingSource.RemoveDeleted<PZVOperList>();
-                }
+                ////// Удаляем через временный список
+                //if (recordsToRemove.Count != 0)
+                //{
+                //    _pZVOperListByPachListBindingSource.RemoveDeleted<PZVOperList>();
+                //}
+
+                //------------------------------------------------------
+                //var changes = BindingSourceHelper.GetChanges<PZVOperList, (int, int)>(
+                //_pZVOperListByPachListBindingSource,
+                //_pZVOperListByPachListNewBindingSource,
+                //x => (x.olPzvID, x.olPzvID),     // составной ключ
+                //x => x.olPzvID,
+                //x => x.olPzvIDMlOp,
+                //x => x.olPzvKmlID,
+                //x => x.olPzvArticul,
+                //x => x.olPzvMod,
+                //x => x.olNomOper,
+                //x => x.olOperName,
+                //x => x.olKodOb,
+                //x => x.olOborudClass,
+                //x => x.chasInWorkSmen,
+                //x => x.chasDoneSmen,
+                //x => x.chasRemainSmen,
+                //x => x.chasConfirmedSmen          // поля для хэширования
+                //);
+                var changes = BindingSourceHelper.GetChanges<PZVOperList>(
+                    _pZVOperListByPachListBindingSource,
+                    _pZVOperListByPachListNewBindingSource,
+                    HashMode.ExcludeOnly,
+                    keyProperties: new[] { "olPzvID" },
+                    hashProperties: new[] { "IsNew", "IsModified", "IsDeleted", "SyncSelection" , "ErrorSelection" }
+                );
+                // обновить и добавить
+                //BindingSourceHelper.ApplyChanges(_pZVOperListByPachListBindingSource, changes, x => (x.olPzvID, x.typeID));
+                //BindingSourceHelper.ApplyChanges<PZVOperList>(
+                //    _pZVOperListByPachListBindingSource,
+                //    changes,
+                //    keyProperty: "olPzvID",
+                //    applyMode: HashMode.ExcludeOnly,
+                //    "IsNew", "IsModified", "IsDeleted"
+                //);
+                BindingSourceHelper.ApplyChanges<PZVOperList>(
+                    _pZVOperListByPachListBindingSource,
+                    changes,
+                    UpdateFieldsMode.ExcludeOnly,
+                    keyProperties: new[] { "olPzvID" },
+                    fields: new[] { "IsNew", "IsModified", "IsDeleted", "SyncSelection", "ErrorSelection" }
+                );
+                // удалить отсутствующие
+                //BindingSourceHelper.RemoveMissing(_smenZadanyVyazBindingSource, changes.Removed);
+                BindingSourceHelper.RemoveMissing(
+                    _pZVOperListByPachListBindingSource,
+                    changes.Removed
+                );
+                //------------------------------------------------------
 
                 _pZVOperListByPachListBindingSource.ResetBindings(false);
                 gridViewPZVOperList.ExpandAllGroups();
@@ -1690,7 +1823,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //await LoadSmenZadanyVyazMachineDataAsync();
                 //await LoadSmenZadanyVyazEmpDataAsync();
                 await LoadSmenZadanyVyazDataAsync();
-                SetGroupExpandState();
+                //SetGroupExpandState();
                 //ConfigureTableViewAdvanced(gridViewPZVOperList as TableView);
                 //ConfigureGridView(gridViewPZVOperList);
                 //ConfigureTextColumnForPartialSearch(gridColumnPZVOperListOlOperName);
@@ -1713,17 +1846,37 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //await LoadZadanyListByMachineDataAsync(selectedRow.kmlID);
                 await LoadZadanyListByMachineNewDataAsync(selectedRow.kmlID);
 
-                var missingRecords = _zadanyListByMachineNewBindingSource.List.Cast<dynamic>()
-                    .Where(newRec => newRec != null &&
-                           !_zadanyListByMachineBindingSource.List.Cast<dynamic>()
-                            .Where(oldRec => oldRec != null)
-                            .Any(oldRec => oldRec.pszNom == newRec.pszNom && oldRec.nom == newRec.nom))
-                    .ToList();
-                foreach (var record in missingRecords)
-                {
-                    //// Добавляем строку данных
-                    _zadanyListByMachineBindingSource.Add(record);
-                }
+                //var missingRecords = _zadanyListByMachineNewBindingSource.List.Cast<dynamic>()
+                //    .Where(newRec => newRec != null &&
+                //           !_zadanyListByMachineBindingSource.List.Cast<dynamic>()
+                //            .Where(oldRec => oldRec != null)
+                //            .Any(oldRec => oldRec.pszNom == newRec.pszNom && oldRec.nom == newRec.nom))
+                //    .ToList();
+                //foreach (var record in missingRecords)
+                //{
+                //    //// Добавляем строку данных
+                //    _zadanyListByMachineBindingSource.Add(record);
+                //}
+
+                var changes = BindingSourceHelper.GetChanges<ZadanyListByMachine>(
+                    _zadanyListByMachineBindingSource,
+                    _zadanyListByMachineNewBindingSource,
+                    HashMode.ExcludeOnly,
+                    keyProperties: new[] { "kmlID", "pszNom" },
+                    hashProperties: new[] { "SyncSelection" }
+                );
+                // обновить и добавить
+                //BindingSourceHelper.ApplyChanges(_smenZadanyVyazBindingSource, changes, x => (x.kwsmlKmlID, x.typeID));
+                BindingSourceHelper.ApplyChanges<ZadanyListByMachine>(
+                    _zadanyListByMachineBindingSource,
+                    changes,
+                    UpdateFieldsMode.ExcludeOnly,
+                    keyProperties: new[] { "kmlID", "pszNom" },
+                    fields: new[] { "SyncSelection" }
+                );
+                //// удалить отсутствующие
+                //BindingSourceHelper.RemoveMissing(_zadanyListByMachineBindingSource, changes.Removed);
+
                 gridViewZadanyListByMachine.ActiveFilterString = $" kmlID == {selectedRow.kmlID}";
                 gridControlZadanyListByMachine.ForceInitialize();
                 gridViewZadanyListByMachine.RefreshData();
@@ -1767,6 +1920,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     //MessageBox.Show(selectedRow.SyncSelection.ToString());
                     //MessageBox.Show(gridViewZadanyListByMachine.IsCellSelect.ToString());
                     await LoadRzvPachListByNomNewDataAsync(selectedRow.nom, selectedRow.pszNom);
+                    var changes = BindingSourceHelper.GetChanges<RzvPachListByNom>(
+                        _rzvPachListByNomBindingSource,
+                        _rzvPachListByNomNewBindingSource,
+                        HashMode.ExcludeOnly,
+                        keyProperties: new[] { "nomZad", "nom", "nom_n" },
+                        hashProperties: new[] { "SyncSelection" }
+                    );
+                    // обновить и добавить
+                    //BindingSourceHelper.ApplyChanges(_smenZadanyVyazBindingSource, changes, x => (x.kwsmlKmlID, x.typeID));
+                    BindingSourceHelper.ApplyChanges<RzvPachListByNom>(
+                        _rzvPachListByNomBindingSource,
+                        changes,
+                        UpdateFieldsMode.ExcludeOnly,
+                        keyProperties: new[] { "nomZad", "nom", "nom_n" },
+                        fields: new[] { "SyncSelection" }
+                    );
+                    //// удалить отсутствующие
+                    //BindingSourceHelper.RemoveMissing(_rzvPachListByNomBindingSource, changes.Removed);
+                    
                     if (selectedRow.Gradacia != 1)
                     {
                         gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = true;
@@ -1780,17 +1952,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     await LoadRzvPachListByNomNewDataAsync(0, "");
                 }
-                var missingRecords = _rzvPachListByNomNewBindingSource.List.Cast<dynamic>()
-                    .Where(newRec => newRec != null &&
-                           !_rzvPachListByNomBindingSource.List.Cast<dynamic>()
-                            .Where(oldRec => oldRec != null)
-                            .Any(oldRec => oldRec.nomZad == newRec.nomZad && oldRec.nom == newRec.nom))
-                    .ToList();
-                foreach (var record in missingRecords)
-                {
-                    //// Добавляем строку данных
-                    _rzvPachListByNomBindingSource.Add(record);
-                }
+                //var missingRecords = _rzvPachListByNomNewBindingSource.List.Cast<dynamic>()
+                //    .Where(newRec => newRec != null &&
+                //           !_rzvPachListByNomBindingSource.List.Cast<dynamic>()
+                //            .Where(oldRec => oldRec != null)
+                //            .Any(oldRec => oldRec.nomZad == newRec.nomZad && oldRec.nom == newRec.nom))
+                //    .ToList();
+                //foreach (var record in missingRecords)
+                //{
+                //    //// Добавляем строку данных
+                //    _rzvPachListByNomBindingSource.Add(record);
+                //}
+                
+
                 gridViewRzvPachListByNom.ActiveFilterString = $" nomZad == '{selectedRow.pszNom}' and nom == {selectedRow.nom}";
                 gridControlRzvPachListByNom.ForceInitialize();
                 gridViewRzvPachListByNom.RefreshData();
@@ -3609,9 +3783,28 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewRzvPachListByNom.PostEditor();        // применить новое значение из редактора
                 gridViewRzvPachListByNom.UpdateCurrentRow();  // сохранить в источник данных
                 var selectedRow = _rzvPachListByNomBindingSource.Current as RzvPachListByNom;
-                string query = $"update raskr_zeh_vyaz set gradacia = {selectedRow.gradacia} where pach_kod = '{selectedRow.pach_kod}'";
-                Task updateRZV = _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
-                await Task.WhenAll(updateRZV);
+                //string query = $"update raskr_zeh_vyaz set gradacia = {selectedRow.gradacia} where pach_kod = '{selectedRow.pach_kod}'";
+                //Task updateRZV = _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+                //await Task.WhenAll(updateRZV);
+
+                // градация
+                if (selectedRow != null)
+                {
+                    //int _xTypeAction = 0;
+                    //_xTypeAction = selectedRow.gradacia;
+                    // Преобразуем в JSON
+                    string jsonString = JsonConvert.SerializeObject(selectedRow, Formatting.Indented);
+                    // 1 - вяз подразделение. по другим подразделениям на градацию не отделяем
+                    string query = $"dbo.setGraduationRate @xNomListJson = '{jsonString}', @xGradationValue = {selectedRow.gradacia}, @xPodrKod = 1 ";
+                    Task updateRZV = _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+                    await Task.WhenAll(updateRZV);
+
+                    await GridOverlayLoader.RunTaskWithOverlayAsync(
+                        gridControlPZVOperList,
+                        LoadPlanZagrVyazByZadanySelection
+                        , CancellationToken.None
+                        );
+                }
             }
             catch (Exception ex)
             {
@@ -4055,7 +4248,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     case 4:
                         //MessageBox.Show("Обновление сменного задания");
                         await LoadSmenZadanyVyazDataAsync();
-                        SetGroupExpandState();
+                        //SetGroupExpandState();
                         break;
                         //switch (customTabControl1.SelectedTabPageIndex)
                         //{
@@ -4120,7 +4313,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 var item = new DXMenuItem(zone.kmaNumber, (o, args) =>
                 {
-                    MoveRowToZone(view, rowHandle, zone.kmaID);
+                    MoveRowToZone(view, rowHandle, zone.kmaID, zone.kwsID);
                 });
 
                 moveToZone.Items.Add(item);
@@ -4129,20 +4322,95 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Добавляем подменю в меню DevExpress
             e.Menu.Items.Add(moveToZone);
         }
-        private void MoveRowToZone(AdvBandedGridView view, int rowHandle, int zoneId)
+        private async void MoveRowToZone(AdvBandedGridView _view, int _rowHandle, int _kmaID, int _kwsID)
         {
-            MessageBox.Show("Перенос в зону");
-            //var row = view.GetRow(rowHandle);
-            //if (row == null)
-            //    return;
+            //MessageBox.Show($"Перенос в зону kmaID = ({_kmaID}) kwsID = {_kwsID}");
 
-            //// Например, получить ID записи
-            //int recordId = (row as MyModel).ID;
+            var row = _view.GetRow(_rowHandle);
+            if (row == null)
+                return;
+
+            // Например, получить ID записи
+            //int xKwsID = (row as SmenZadanyVyaz).kwsID;
+            int xKmlID = (row as SmenZadanyVyaz).kwsmlKmlID;
+            int xKodOb = (row as SmenZadanyVyaz).kodOb;
+            int xLongRep = (row as SmenZadanyVyaz).longRep;
+
+            MessageBox.Show($"Перенос kmlID {xKmlID} kodOb | {xKodOb} | в зону kmaID {_kmaID} | kwsID {_kwsID}");
+
+            string query = $"INSERT INTO knitWorkingShiftMachineListNew (kwsmlDateAdd, kwsmlCompAdd, kwsmlKwsID, kwsmlKmlID, kwsmlKodOb, kiwsmlLongRep) " +
+                $"VALUES (DEFAULT, DEFAULT, {_kwsID}, {xKmlID}, {xKodOb}, {xLongRep})";
+            _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+
+            //(row as SmenZadanyVyaz).kwsID = _kwsID;
+            //(row as SmenZadanyVyaz).IsModified = true;
+            //_smenZadanyVyazBindingSource.RemoveModified<SmenZadanyVyaz>();
+            
+            await LoadSmenZadanyVyazNewDataAsync(); ;
+
+            //var changes = BindingSourceHelper.GetChanges<SmenZadanyVyaz, (int, int)>(
+            //    _smenZadanyVyazBindingSource,
+            //    _smenZadanyVyazNewBindingSource,
+            //    x => (x.kwsmlKmlID, x.typeID),     // составной ключ
+            //    x => x.kwsKmaID,
+            //    x => x.kwsmlKmlID,
+            //    x => x.kwsID,
+            //    x => x.chasDoneSmen,
+            //    x => x.chasNaznZad,
+            //    x => x.chasNotConfirmedZad,
+            //    x => x.chasRemainZad,
+            //    x => x.shiftsRemainZad,
+            //    x => x.chasNaznSmen,
+            //    x => x.chasInWorkSmen,
+            //    x => x.chasDoneSmen,
+            //    x => x.chasRemainSmen,
+            //    x => x.chasConfirmedSmen          // поля для хэширования
+            //    );
+            var changes = BindingSourceHelper.GetChanges<SmenZadanyVyaz>(
+                    _smenZadanyVyazBindingSource,
+                    _smenZadanyVyazNewBindingSource,
+                    HashMode.ExcludeOnly,
+                    keyProperties: new[] { "kwsmlKmlID", "typeID" },
+                    hashProperties: new[] { "IsNew", "IsModified", "IsDeleted" }
+                );
+            // обновить и добавить
+            //BindingSourceHelper.ApplyChanges(_smenZadanyVyazBindingSource, changes, x => (x.kwsmlKmlID, x.typeID));
+            BindingSourceHelper.ApplyChanges<SmenZadanyVyaz>(
+                    _smenZadanyVyazBindingSource,
+                    changes,
+                    UpdateFieldsMode.ExcludeOnly,
+                    keyProperties: new[] { "kwsmlKmlID", "typeID" },
+                    fields: new[] { "IsNew", "IsModified", "IsDeleted" }
+                );
+            // удалить отсутствующие
+            BindingSourceHelper.RemoveMissing(_smenZadanyVyazBindingSource, changes.Removed);
+
+            //_smenZadanyVyazBindingSource.ResetBindings(false);
+            var col = gridViewSmenZadany.Columns["kwsmlKmlID"];
+            int handle = gridViewSmenZadany.LocateByValue("kwsmlKmlID", xKmlID);
+            if (handle != DevExpress.XtraGrid.GridControl.InvalidRowHandle && handle >= 0 && handle < gridViewSmenZadany.RowCount)
+            {
+                gridViewSmenZadany.FocusedRowHandle = handle;          // фокус на строку
+                gridViewSmenZadany.MakeRowVisible(handle);            // прокрутить, чтобы строку было видно
+                //gridViewSmenZadany.FocusedColumn = gridViewSmenZadany.VisibleColumns[0]; // опционально — фокус в первую колонку
+                gridViewSmenZadany.FocusedColumn = bandedGridSmenZadanyColumnKmlNumber;
+            }
+
+            //gridViewSmenZadany.BeginSort();
+            //gridViewSmenZadany.ClearSorting();
+            //// Сначала сортируем по зоне, далее № в/м
+            //gridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(gridViewSmenZadany.Columns["kmaNumber"], ColumnSortOrder.Ascending));
+            //gridViewSmenZadany.SortInfo.Add(new GridColumnSortInfo(gridViewSmenZadany.Columns["kmlNumber"], ColumnSortOrder.Ascending));
+
+            //gridViewSmenZadany.EndSort();
+
+            //_smenZadanyVyazBindingSource.ResetBindings(false);
+            //gridViewSmenZadany.RefreshData();
 
             //using (var conn = new SqlConnection(connectionString))
             //using (var cmd = new SqlCommand("UPDATE MyTable SET ZoneID = @Zone WHERE ID = @ID", conn))
             //{
-            //    cmd.Parameters.AddWithValue("@Zone", zoneId);
+            //    cmd.Parameters.AddWithValue("@Zone", _kmaID);
             //    cmd.Parameters.AddWithValue("@ID", recordId);
 
             //    conn.Open();
@@ -4150,15 +4418,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //}
 
             //// Можем обновить грид
-            //view.RefreshRow(rowHandle);
+            //_view.RefreshRow(_rowHandle);
 
-            //// или все данные
-            //// ReloadData();
+            // или все данные
+            //ReloadData();
         }
 
         private async void advBandedGridViewSmenZadany_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             var currentSmenZadanyVyaz = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+            if (currentSmenZadanyVyaz == null)
+                return;
             await LoadKnitWorkingShiftSmenToMoveDataAsync(currentSmenZadanyVyaz.kwsKmaID);
         }
 

@@ -407,7 +407,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int kmaIDNazn { get; set; }
     }
     
-    public class SmenZadanyVyaz
+    public class SmenZadanyVyaz : INewable, IModifiable, IDeletable
     {
         [NotMapped] public string machNazn { get; set; }
         [NotMapped] public int kwsTabStart { get; set; }
@@ -447,6 +447,11 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public decimal chasConfirmedSmenGroup { get; set; }
         [NotMapped] public decimal koefObServ { get; set; }
         [NotMapped] public int smenLength { get; set; }
+        [NotMapped] public int kodOb { get; set; }
+        [NotMapped] public int longRep { get; set; }
+        [NotMapped] public bool IsModified { get; set; } = false;
+        [NotMapped] public bool IsNew { get; set; } = false;
+        [NotMapped] public bool IsDeleted { get; set; } = false;
     }
     public class KnitWorkingShiftSmen
     {
@@ -464,4 +469,5 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int shiftStatusID { get; set; }
         [NotMapped] public int kmaNumberInt { get; set; }
     }
+
 }
