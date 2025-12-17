@@ -49,7 +49,7 @@ namespace SewingProduction.Core.Extensions
                 }
             }
         }
-
+        
         /// <summary>
         /// Загружает настройки всех CustomGridControl на форме
         /// </summary>
