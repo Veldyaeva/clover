@@ -9,7 +9,7 @@ namespace SewingProduction
         public SplashScreen()
         {
             InitializeComponent();
-            Random random = new Random();
+            /*Random random = new Random();
             int minValue = 0;
             int maxValue = 15;
 
@@ -53,6 +53,7 @@ namespace SewingProduction
             { imageSlider1.CurrentImageIndex = 1; }//14.02
             if (today >= DateTime.ParseExact("02-17", "MM-dd", CultureInfo.InvariantCulture) && today <= DateTime.ParseExact("02-25", "MM-dd", CultureInfo.InvariantCulture))
             { imageSlider1.CurrentImageIndex = 2; }//23.02
+            */
         }
     }
 }

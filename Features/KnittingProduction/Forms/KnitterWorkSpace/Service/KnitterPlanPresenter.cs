@@ -18,9 +18,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         private List<KnitterPZVModel> _allRows;
         private Dictionary<string, List<KnitterPZVModel>> _byMachine;
+        private Dictionary<(string TaskNum, string MachineKey), List<KnitterPZVModel>> _byTaskMachine;
         private Dictionary<string, List<KnitterPZVModel>> _machineArtNomMaster;
         private Dictionary<(string MachineKey, string ArtKey, int? Nom), List<KnitterPZVModel>> _machineArtNomGroups;
-        private Dictionary<(string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _machineArtNomPachGroups;
+        //private Dictionary<(string TaskNum, string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _machineArtNomPachGroups;
+        private Dictionary<(string TaskNum, string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _taskMachineArtNomPachGroups;
         private readonly GridExpansionService _expansionService = new GridExpansionService();
 
         public IReadOnlyList<KnitterPZVModel> AllRows => _allRows as IReadOnlyList<KnitterPZVModel> ?? new List<KnitterPZVModel>();
@@ -37,7 +39,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public void BindGroupDetails(
             BandedGridView masterView3,
            // BandedGridView bandedGridView1,
-           GridView bandedGridView1,
+       //    GridView bandedGridView1,
             AdvBandedGridView advBandedGridView1,
             System.Windows.Forms.BindingSource bindingSource,
             List<KnitterPZVModel> rows,
@@ -59,26 +61,41 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             grid?.BeginUpdate();
             try
             {
-                _byMachine = _allRows
-                    .GroupBy(r => KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber))
+                // Группировка: сперва по заданию (taskNum), затем по номеру машины
+                _byTaskMachine = _allRows
+                    .GroupBy(r => (KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber)))
                     .ToDictionary(g => g.Key, g => g.ToList());
 
                 _machineArtNomGroups = _allRows
                     .GroupBy(r => (KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber), KnitterPlanUtils.NormalizeArtKey(r.pzvArticul), r.pzvNom))
                     .ToDictionary(g => g.Key, g => g.ToList());
 
-                _machineArtNomPachGroups = _allRows
-                    .GroupBy(r => (KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber), KnitterPlanUtils.NormalizeArtKey(r.pzvArticul), r.pzvNom, (int?)r.n_pach))
+                _taskMachineArtNomPachGroups = _allRows
+                    .GroupBy(r => (
+                        TaskNum: KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad),
+                        MachineKey: KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber),
+                        ArtKey: KnitterPlanUtils.NormalizeArtKey(r.pzvArticul),
+                        Nom: r.pzvNom,
+                        Pach: (int?)r.n_pach))
                     .ToDictionary(g => g.Key, g => g.ToList());
 
-                _machineArtNomMaster = _byMachine.ToDictionary(
-                    kv => kv.Key,
-                    kv => kv.Value
-                        .GroupBy(r => (KnitterPlanUtils.NormalizeArtKey(r.pzvArticul), r.pzvNom))
-                        .Select(g => g.First())
-                        .ToList());
+                //_machineArtNomMaster = _allRows
+                //    .GroupBy(r => (TaskNum: KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), MachineKey: KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber)))
+                //    .ToDictionary(
+                //        kv => kv.Key.MachineKey,
+                //        kv => kv
+                //        .GroupBy(r => (KnitterPlanUtils.NormalizeArtKey(r.pzvArticul), r.pzvNom))
+                //        .Select(g => g.First())
+                //        .ToList());
 
-                var masterData = _byMachine.Values.Select(list => list.First()).ToList();
+                var masterData = _byTaskMachine.Values.Select(list =>
+                {
+                    var master = list.First();
+                    // Сумма часов факт (pzvKol * pzvSek / 3600) по деталям
+                    var sumHours = list.Sum(r => ((r.pzvKol ?? 0) * (double)r.pzvSek) / 3600d);
+                    master.pzvChasNazn = (decimal)Math.Round(sumHours, 2);
+                    return master;
+                }).ToList();
                 bindingSource.DataSource = masterData;
 
                 //
@@ -92,10 +109,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 masterView3.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
                 masterView3.OptionsDetail.ShowDetailTabs = false;
 
-                bandedGridView1.OptionsDetail.EnableMasterViewMode = true;
-                bandedGridView1.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
-                bandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
-                bandedGridView1.OptionsDetail.ShowDetailTabs = false;
+                //bandedGridView1.OptionsDetail.EnableMasterViewMode = true;
+                //bandedGridView1.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
+                //bandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
+                //bandedGridView1.OptionsDetail.ShowDetailTabs = false;
             }
             finally
             {
@@ -121,11 +138,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             IEnumerable<KnitterPZVModel> expanded;
             if (view.Name == "bandedGridView3")
             {
-                expanded = baseRows.SelectMany(row => _allRows.Where(x => KnitterPlanUtils.NormalizeMachineKey(x.kmlNumber) == KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber)));
+                expanded = baseRows.SelectMany(row => _allRows.Where(x =>
+                    KnitterPlanUtils.NormalizeTaskNum(x.pzvNomZad) == KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad) &&
+                    KnitterPlanUtils.NormalizeMachineKey(x.kmlNumber) == KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber)));
             }
             else if (view.Name == "bandedGridView1")
             {
                 expanded = baseRows.SelectMany(row => _allRows.Where(x =>
+                    KnitterPlanUtils.NormalizeTaskNum(x.pzvNomZad) == KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad) &&
                     KnitterPlanUtils.NormalizeMachineKey(x.kmlNumber) == KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber) &&
                     KnitterPlanUtils.NormalizeArtKey(x.pzvArticul) == KnitterPlanUtils.NormalizeArtKey(row.pzvArticul) &&
                     x.pzvNom == row.pzvNom &&
@@ -167,44 +187,37 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 return;
             }
 
-            // Двухуровневый режим: возвращаем сразу операции (детали) для выбранной машины
+            // Двухуровневый режим: возвращаем операции (детали) для выбранной пары (задание + машина)
             var machineKey = KnitterPlanUtils.NormalizeMachineKey(head.kmlNumber);
-
+            var taskNum = KnitterPlanUtils.NormalizeTaskNum(head.pzvNomZad);
             var result = new List<KnitterPZVModel>();
             var seenOperations = new HashSet<string>();
 
-            if (_machineArtNomGroups != null)
+            if (_taskMachineArtNomPachGroups != null)
             {
-                foreach (var kv in _machineArtNomGroups)
+                foreach (var kv in _taskMachineArtNomPachGroups)
                 {
+                    if (!string.Equals(kv.Key.TaskNum, taskNum, StringComparison.OrdinalIgnoreCase))
+                        continue;
                     if (!string.Equals(kv.Key.MachineKey, machineKey, StringComparison.OrdinalIgnoreCase))
                         continue;
 
-                    var groupRows = kv.Value;
-                    foreach (var groupRow in groupRows)
+                    var pachRows = kv.Value;
+                    foreach (var parentRow in pachRows)
                     {
-                        var artKey = KnitterPlanUtils.NormalizeArtKey(groupRow.pzvArticul);
-                        var nomKey = groupRow.pzvNom;
-                        var pachKey = (machineKey, artKey, nomKey, (int?)groupRow.n_pach);
-                        if (_machineArtNomPachGroups == null || !_machineArtNomPachGroups.TryGetValue(pachKey, out var pachRows))
+                        if (parentRow?.nrModels == null || parentRow.nrModels.Count == 0)
                             continue;
 
-                        foreach (var parentRow in pachRows)
+                        foreach (var nr in parentRow.nrModels)
                         {
-                            if (parentRow?.nrModels == null || parentRow.nrModels.Count == 0)
+                            var signature = $"{parentRow.pzvID}_{parentRow.n_pach}_{nr.nrN}_{nr.nrN1}_{nr.nr_kod_proizv}_{nr.nr_kod_ob}";
+                            if (!seenOperations.Add(signature))
                                 continue;
 
-                            foreach (var nr in parentRow.nrModels)
-                            {
-                                var signature = $"{parentRow.pzvID}_{groupRow.n_pach}_{nr.nrN}_{nr.nrN1}_{nr.nr_kod_proizv}_{nr.nr_kod_ob}";
-                                if (!seenOperations.Add(signature))
-                                    continue;
-
-                                var operationRow = KnitterPlanUtils.CreateOperationRow(parentRow, nr);
-                                operationRow.n_pach = groupRow.n_pach;
-                                operationRow.razm = parentRow.razm;
-                                result.Add(operationRow);
-                            }
+                            var operationRow = KnitterPlanUtils.CreateOperationRow(parentRow, nr);
+                            operationRow.n_pach = parentRow.n_pach;
+                            operationRow.razm = parentRow.razm;
+                            result.Add(operationRow);
                         }
                     }
                 }

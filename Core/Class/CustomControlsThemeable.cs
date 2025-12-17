@@ -900,8 +900,32 @@ namespace SewingProduction
                 if (IsPreview) return;
                 this.SaveAllGridSettings();
             };
-        }
 
+            this.FormClosed += async (s, e) =>
+            {
+                if (IsPreview) return;
+                foreach (Control c in this.Controls)
+                {
+                    ClearBindings(c);
+                }
+                
+            };
+        }
+        /// <summary>
+        /// Отписка от всех биндингов в контроле и его дочерних контролах
+        /// </summary>
+        /// <param name="c"></param>
+        private static void ClearBindings(Control c)
+        {
+            if (c == null) return;
+
+            // 1) Снять биндинги у самого контрола
+            c.DataBindings.Clear();
+
+            // 2) Рекурсивно пройтись по дочерним
+            foreach (Control child in c.Controls)
+                ClearBindings(child);
+        }
         public void ApplyTheme()
         {
             if (this.IsDisposed || !this.IsHandleCreated) return;
