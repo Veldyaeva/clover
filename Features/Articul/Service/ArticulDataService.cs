@@ -1,9 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Dapper;
+using DevExpress.CodeParser;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading.Tasks;
+
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -11,9 +16,12 @@ namespace SewingProduction.Features.Articul.Service
     {
         private readonly DbService _dbService;
 
+        private readonly DatabaseHelper _dbHelper;
+
         public ArticulDataService()
         {
             _dbService = new DbService(new DatabaseHelper());
+            _dbHelper = new DatabaseHelper(); 
         }
 
         public async Task<List<ArticulModel>> GetAllAsync()
@@ -26,10 +34,15 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT * FROM sp_articul WHERE kod = @kod";
             return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
         }
-        public async Task<List<ArticulModel>> GetArtPreviewAsync()
+        public async Task<BindingList<SpArtPreviewModel>> GetArtPreviewAsyncBindingList()
         {
             string query = "select * from dbo.view_art";
-            return await _dbService.GetListAsync<ArticulModel>(query, new { });
+            
+            var bb = await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
+            var ret = new BindingList<SpArtPreviewModel>(bb);
+            bb = null;
+            return ret;
+
         }
 
         public async Task<List<ArticulModel>> GetArtByKoddAsync( string kodd)
@@ -46,12 +59,14 @@ namespace SewingProduction.Features.Articul.Service
             return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kod });
 
         }
-        public async Task<List<ArtDrModel>> GetArtDrByKod(string kod)
+        public async Task<BindingList<ArtDrModel>> GetArtDrByKodAsync(string kod)
         {
             string query = $"select * from dbo.view_art_dr where kod = @kod";
+            var bb = await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
+            var ret = new BindingList<ArtDrModel>(bb);
+            bb = null;
 
-            return await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
-
+            return ret;
         }
 
 
@@ -74,19 +89,28 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT dbo.getFileEskizForKodd(@kod) AS pathpict";
             return await _dbService.GetEntityAsync<string>(query, new { kod });
         }
-        public async Task<List<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
+        public async Task<BindingList<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
         {
             string query = "SELECT * from view_KomplSostav where kod_k = @kod";
-            return await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
+            
+            var bb = await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
+            var ret = new BindingList<SpArticulKomplSostModel>(bb);
+            bb = null;
+            return ret;
 
         }
-
-        public async Task<List<SpArticulNaborSostav>> GetSostavNaborForKod(string kod)
+        public async Task<BindingList<SpArticulNaborSostav>> GetSostavNaborForKod(string kod)
         {
-            string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_naimen, sostav, razm" +
+            string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_name_sokr, sostav, razm" +
                 " FROM view_articulNaborSostav where kod  = @kod";
-            return await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
-        }
+            
 
+            var bb = await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
+            var ret = new BindingList<SpArticulNaborSostav>(bb);
+            bb = null;
+            return ret;
+
+        }
+                
     }
 }

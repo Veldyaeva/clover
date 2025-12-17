@@ -31,10 +31,10 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
 
-        public ArticulEditAdvance(UserClass user) : this(user, "")
+        public ArticulEditAdvance(UserClass user) : this(user, "", "")
         { }
 
-        public ArticulEditAdvance(UserClass user, string kodd) : base(user)
+        public ArticulEditAdvance(UserClass user, string kodd, string articul) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
             _dbService = new DbService(_dbHelperAce);
@@ -43,14 +43,13 @@ namespace SewingProduction.Features.Articul.Forms
             InitializeComponent();
             _user = user;
             _kodd = kodd;
-            this.Text = kodd;
+            this.Text = articul+" "+kodd;
             ThemeManager.UpdateTheme(this);
 
             //_artKodRazm = new BindingList<ArticulModel>();
 
             _bindingSourceArtKod = new BindingSource { DataSource = _artKodRazm };
             if (gridEditAdRazm != null) gridEditAdRazm.DataSource = _bindingSourceArtKod;
-
         }
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
@@ -87,11 +86,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void customSimpleButton1_Click(object sender, EventArgs e)
         {
             /// <summary>
