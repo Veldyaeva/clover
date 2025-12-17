@@ -357,6 +357,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn15.Caption = "Кол-во к выполнению";
             bandedGridColumn15.FieldName = "pzvKolNazn";
             bandedGridColumn15.Name = "bandedGridColumn15";
+            bandedGridColumn15.UnboundDataType = typeof(int);
+            bandedGridColumn15.UnboundExpression = "Iif(IsNull([pzvDateEnd]), [pzvKol], [pzvKolNazn])";
             bandedGridColumn15.Visible = true;
             bandedGridColumn15.Width = 126;
             // 
@@ -415,6 +417,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn22.Caption = "Кол-во факт (шт)";
             bandedGridColumn22.FieldName = "pzvKol";
             bandedGridColumn22.Name = "bandedGridColumn22";
+            bandedGridColumn22.UnboundExpression = "Iif(IsNull([pzvDateEnd]), 0, [pzvKol])";
+            bandedGridColumn22.UnboundType = DevExpress.Data.UnboundColumnType.Integer;
             bandedGridColumn22.Visible = true;
             bandedGridColumn22.Width = 104;
             // 

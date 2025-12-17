@@ -33,6 +33,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
         private CheckBox _adminToggle;
+        private RepositoryItemProgressBar _statusProgressBar;
 
         // Вью для третьего уровня (деталь детальной таблицы)
         private RepositoryItemButtonEdit _pzvDateStartButtonEdit;
@@ -106,6 +107,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupIdleTimer();
                 SetupShiftTimer();
                 InitAdminToggle();
+                SetupStatusColumn();
             }
             catch (Exception ex)
             {
@@ -132,6 +134,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupIdleTimer();
                 SetupShiftTimer();
                 InitAdminToggle();
+                SetupStatusColumn();
             }
             catch (Exception ex)
             {
@@ -624,7 +627,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // Сохраняем текущую машину, чтобы вернуть фокус после обновления
                 var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab);
+                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, 75, false, true, 14);//(tab);
                 // перестраиваем иерархию без очистки табеля
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 // Вернём фокус и раскроем нужную машину
@@ -845,6 +848,49 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             Controls.Add(_adminToggle);
             _adminToggle.BringToFront();
             _adminToggle.CheckedChanged += async (s, e) => await ReloadCurrentTabAsync();
+        }
+
+        private void SetupStatusColumn()
+        {
+            // Индикатор в колонке статуса: часы факт / часы назначено
+            _statusProgressBar = new RepositoryItemProgressBar
+            {
+                Minimum = 0,
+                Maximum = 100,
+                ShowTitle = true,
+                PercentView = true
+            };
+
+            gridColumn8.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            gridColumn8.UnboundExpression = string.Empty;
+            gridColumn8.ColumnEdit = _statusProgressBar;
+
+            bandedGridView3.CustomUnboundColumnData -= BandedGridView3_CustomUnboundColumnData;
+            bandedGridView3.CustomUnboundColumnData += BandedGridView3_CustomUnboundColumnData;
+        }
+
+        private void BandedGridView3_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            if (e.Column != gridColumn8 || !e.IsGetData)
+                return;
+
+            if (e.Row is KnitterPZVModel row)
+            {
+                // часы назначено: pzvSek * pzvKolNazn / 3600
+                decimal assignedHours = (row.pzvSek * (decimal)(row.pzvKolNazn <= 0 ? row.pzvKol : row.pzvKolNazn)) / 3600m;
+                // часы выполнено: pzvSek * pzvKol / 3600
+                decimal doneHours = (row.pzvSek * (decimal)(row.pzvKol ?? 0)) / 3600m;
+
+                decimal percent = 0m;
+                if (assignedHours > 0)
+                {
+                    percent = doneHours / assignedHours * 100m;
+                    if (percent > 100m) percent = 100m;
+                    if (percent < 0m) percent = 0m;
+                }
+
+                e.Value = percent;
+            }
         }
 
         private async Task ReloadCurrentTabAsync()
