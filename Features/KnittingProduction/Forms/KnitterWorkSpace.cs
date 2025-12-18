@@ -362,6 +362,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
                 if (_isShiftRunning)
                 {
+                    // Перед завершением смены: обработать все операции
+                    await ProcessOperationsOnShiftEndAsync();
+
                     if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
                     {
                         XtraMessageBox.Show(this, "Не удалось определить табель при завершении смены.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -369,8 +372,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     else if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
                     {
                         await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
+                        // Перезагрузим план, чтобы обновить статусы/проценты
+                        await LoadPlanForTabAsync(tabEnd, forceReload: true);
                     }
 
+                    await RefreshFioListAsync();
                     ApplyShiftUi(false, null, null);
                     return;
                 }
@@ -416,26 +422,115 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Успешный старт смены: фиксируем в БД, проставляем pzvKwsID для всех! операций, меняем текст кнопки и запускаем таймер
                 try
                 {
-                await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
+                    await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
                     _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, _currentKmaId, _currentKmaNum);
                     if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
                     {
                         await _orchestrator.UpdatePzvKwsIdAsync(pzvIds, _currentShiftId.Value);
                     }
+
+                    // Обновим план после проставления pzvKwsID
+                    await LoadPlanForTabAsync(selectedTab, forceReload: true);
+                    await RefreshFioListAsync();
+
+                    ApplyShiftUi(true, _currentShiftId, DateTime.Now);
                 }
                 catch (Exception exStart)
                 {
                     XtraMessageBox.Show(this, $"Не удалось записать начало смены: {exStart.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                ApplyShiftUi(true, _currentShiftId, DateTime.Now);
-
-                // Обновим план после проставления pzvKwsID
-                await LoadPlanForTabAsync(selectedTab, forceReload: true);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка при назначении табельного номера: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Перезагружает список ФИО с учётом фильтра по открытым сменам, сохраняет текущий выбор, если он есть.
+        /// </summary>
+        private async Task RefreshFioListAsync()
+        {
+            var currentSelection = FioGridLookUpEdit.EditValue?.ToString();
+
+            List<FioModel> fioList = await _orchestrator.GetFioListAsync();
+            fioList = await FilterFioByOpenShiftAsync(fioList);
+            fioList ??= new List<FioModel>();
+
+            FioGridLookUpEdit.Properties.DataSource = fioList;
+            TabGridLookUpEdit.Properties.DataSource = fioList;
+            _cachedFioList = fioList;
+
+            if (int.TryParse(currentSelection, out int tab) && fioList.Any(f => f.Tab == tab))
+            {
+                FioGridLookUpEdit.EditValue = tab;
+                TabGridLookUpEdit.EditValue = tab;
+            }
+            else
+            {
+                FioGridLookUpEdit.EditValue = null;
+                TabGridLookUpEdit.EditValue = null;
+            }
+        }
+
+        /// <summary>
+        /// При завершении смены: для неначатых — split mode=2 с отриц. количеством; для начатых без конца — спросить факт и закрыть.
+        /// </summary>
+        private async Task ProcessOperationsOnShiftEndAsync()
+        {
+            var rows = _planPresenter.AllRows?.Where(r => r != null && r.pzvID > 0).ToList() ?? new List<KnitterPZVModel>();
+            if (!rows.Any())
+                return;
+
+            // Неначатые (нет даты старта и окончания) → split mode=2
+            var notStarted = rows.Where(r => r.pzvDateStart == null && r.pzvDateEnd == null).ToList();
+            foreach (var row in notStarted)
+            {
+                try
+                {
+                    await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
+                }
+                catch
+                {
+                    // Игнорируем сбой split одной операции, продолжаем остальные
+                }
+            }
+
+            // Начатые, но не завершённые → спросить факт, закрыть, при необходимости split по факту
+            var inProgress = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
+            foreach (var row in inProgress)
+            {
+                int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
+                var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
+                    $"Введите фактическое количество для операции {row.pzvNomZad}/{row.pzvArticul}",
+                    "Завершение операции",
+                    plannedQty);
+                if (qtyObj == null)
+                    continue; // пропускаем, если отмена
+                if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > plannedQty)
+                {
+                    XtraMessageBox.Show(this, "Значение должно быть в диапазоне 0..план.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    continue;
+                }
+
+                try
+                {
+                    await _orchestrator.UpdatePzvDateEndAsync(row.pzvID);
+
+                    if (qty == 0)
+                    {
+                        await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
+                    }
+                    else if (qty < plannedQty)
+                    {
+                        await _orchestrator.SplitPzvByFactAsync(row.pzvID, qty);
+                    }
+                    // qty == plannedQty: только дата окончания уже поставлена
+                }
+                catch
+                {
+                    // Игнорируем сбой одной операции, продолжаем остальные
+                }
             }
         }
 
