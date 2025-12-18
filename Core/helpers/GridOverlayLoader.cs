@@ -5,8 +5,10 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using DevExpress.CodeParser;
 using DevExpress.XtraGrid;
 using DevExpress.XtraSplashScreen;
+using SewingProduction.Core.Class;
 using WinFormsBindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction.Core.helpers
@@ -36,22 +38,23 @@ namespace SewingProduction.Core.helpers
             {
                 if (targetGrid != null && targetGrid.Visible)
                 {
-                int diameter = (int)(Math.Min(targetGrid.ClientSize.Width, targetGrid.ClientSize.Height) * 0.15);
+                    int diameter = (int)(Math.Min(targetGrid.ClientSize.Width, targetGrid.ClientSize.Height) * 0.15);
 
-                var options = new OverlayWindowOptions
+                    var options = new OverlayWindowOptions
                     {
                         // Размер спиннера/индикатора
                         ImageSize = new Size(diameter, diameter),
                         // BackColor = Color.FromArgb(…),
                         // Opacity = 0.8,
-                         FadeIn = true, FadeOut = true,
+                        FadeIn = true,
+                        FadeOut = true,
                     };
 
                     overlayHandle = SplashScreenManager.ShowOverlayForm(targetGrid, options);
-                    
+
                 }
 
-                var data = await loadFunc(cancellationToken).ConfigureAwait(true) ?? Enumerable.Empty<T>();
+                var data = await loadFunc(cancellationToken) ?? Enumerable.Empty<T>();
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (targetList != null)
@@ -85,16 +88,9 @@ namespace SewingProduction.Core.helpers
                         }
                     }
                 }
-                catch
-                {
-                     SplashScreenManager.CloseOverlayForm(overlayHandle);
-                }
+                catch { SplashScreenManager.CloseOverlayForm(overlayHandle); }
             }
         }
-
-        /// <summary>
-        /// Перегрузка для готового Task<IEnumerable<T>> (если токен не нужен/игнорируется).
-        /// </summary>
         public static Task LoadListAsync<T>(
             GridControl targetGrid,
             BindingList<T> targetList,
@@ -104,11 +100,22 @@ namespace SewingProduction.Core.helpers
         {
             return LoadListAsync(targetGrid, targetList, bindingSource, _ => loadTask, ct);
         }
-
+        /// <summary>
+        /// Executes a specified asynchronous task while displaying an overlay on a given grid control.
+        /// </summary>
+        /// <remarks>The overlay is displayed on the grid control to indicate that a background operation
+        /// is in progress. The overlay is automatically removed once the task completes or if an exception
+        /// occurs.</remarks>
+        /// <param name="grid">The <see cref="GridControl"/> on which to display the overlay. If the grid is null or not visible, no
+        /// overlay is shown.</param>
+        /// <param name="action">The asynchronous task to execute. This task is awaited and runs concurrently with the overlay display.</param>
+        /// <param name="ct">A <see cref="CancellationToken"/> to observe while waiting for the task to complete. The task is canceled if
+        /// the token is triggered.</param>
+        /// <returns></returns>
         public static async Task RunTaskWithOverlayAsync(
-    GridControl grid,
-    Func<CancellationToken, Task> action,
-    CancellationToken ct)
+            GridControl grid,
+            Func<Task> action,
+            CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
             IOverlaySplashScreenHandle overlay = null;
@@ -120,7 +127,7 @@ namespace SewingProduction.Core.helpers
                     var opts = new OverlayWindowOptions { ImageSize = new Size(d, d), FadeIn = true, FadeOut = true };
                     overlay = SplashScreenManager.ShowOverlayForm(grid, opts);
                 }
-                await action(ct).ConfigureAwait(true);
+                await action().ConfigureAwait(true);
             }
             finally
             {
@@ -134,19 +141,33 @@ namespace SewingProduction.Core.helpers
                             SplashScreenManager.CloseOverlayForm(overlay);
                     }
                 }
-                catch { }
+                catch 
+                {
+                    SplashScreenManager.CloseOverlayForm(overlay);
+                }
             }
         }
+        public static Task RunTaskWithOverlayAsync(
+            GridControl grid,
+            Action action,
+            CancellationToken ct)
+        {
+            if (action == null) throw new ArgumentNullException(nameof(action));
 
-        //варианты без токена / с готовым Task:
-        public static Task RunTaskWithOverlayAsync(GridControl grid, Func<Task> action)
-            => RunTaskWithOverlayAsync(grid, _ => action(), CancellationToken.None);
-
-        public static Task RunTaskWithOverlayAsync(GridControl grid, Task task, CancellationToken ct)
-            => RunTaskWithOverlayAsync(grid, _ => task, ct);
-
-        public static Task RunTaskWithOverlayAsync(GridControl grid, Task task)
-            => RunTaskWithOverlayAsync(grid, _ => task, CancellationToken.None);
-
+            return RunTaskWithOverlayAsync(
+                grid,
+                () =>
+                {
+                    action();                   // вызываем синхронный метод
+                    return Task.CompletedTask;  // возвращаем уже завершённый Task
+                },
+                ct);
+        }
+        //internal static async Task RunTaskWithOverlayAsync(CustomGridControl gridControl, object v, CancellationToken cancellationToken)
+        //{
+        //    RunTaskWithOverlayAsync(gridControl, () => Task.CompletedTask, cancellationToken);
+        //}
     }
 }
+
+

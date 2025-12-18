@@ -1,0 +1,81 @@
+﻿using SewingProduction.Core.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SewingProduction.Features.Articul.Service
+{
+    public class ArticulEditAdvanceService
+    {
+        private readonly DbService _dbService;
+        private readonly FileLogger _logger = new FileLogger();
+
+        public ArticulEditAdvanceService()
+        {
+            _dbService = new DbService(new DatabaseHelper());
+        }
+        public async Task<BindingList<ArticulModel>> GetArtByKoddAsync(string kodd)
+        {
+            try
+            {
+                string query = "select * from dbo.view_art WHERE kodd = @kodd";
+                var bb = await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
+                var ret = new BindingList<ArticulModel>(bb);
+                bb = null;
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtByKoddAsync");
+                return null;
+            }
+        }
+        public async Task<BindingList<ArticulModel>> GetCommonArtByKoddAsync(string kodd)
+        {
+            try
+            {
+                string query = "select top 1 * from dbo.view_sp_articul_all WHERE kodd = @kodd";
+                var bb = await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
+                var ret = new BindingList<ArticulModel>(bb);
+                bb = null;
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtByKoddAsync");
+                return null;
+            }
+        }
+        public async Task<BindingList<GostModel>> GetBLGostNaborAsync()
+        {
+            try
+            {
+                string query = "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 ";
+                var bb = await _dbService.GetListAsync<GostModel>(query, new { });
+                var ret = new BindingList<GostModel>(bb);
+                bb = null;
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetGostNaborAsync");
+                return null;
+            }
+        }
+
+        public async Task<List<GostModel>> GetGostNaborAsync()
+        {
+            return await _dbService.GetListAsync<GostModel>(
+                "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 ", new{ }
+            );
+        }
+
+
+
+    }
+}
