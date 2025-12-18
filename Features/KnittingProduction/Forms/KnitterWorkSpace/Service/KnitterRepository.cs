@@ -125,22 +125,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 var parents = map.Values.ToList();
 
                 var missingKmlIds = parents
-                    .Where(p => p.pzvKmlID > 0 && string.IsNullOrWhiteSpace(p.kmlNumber))
+                    .Where(p =>
+                        p.pzvKmlID > 0 &&
+                        (string.IsNullOrWhiteSpace(p.kmlNumber) || p.koefObServ == null || string.IsNullOrWhiteSpace(p.name_class)))
                     .Select(p => p.pzvKmlID)
                     .Distinct()
                     .ToArray();
 
                 if (missingKmlIds.Length > 0)
                 {
-                    const string kmlQuery = "SELECT kmlID, kmlNumber FROM dbo.view_kml_vyaz WHERE kmlID IN @ids";
-                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber)>(kmlQuery, new { ids = missingKmlIds }))
-                        .ToDictionary(x => x.kmlID, x => x.kmlNumber);
+                    const string kmlQuery = @"SELECT kmlID, kmlNumber, koefObServ, name_class FROM ACE.dbo.knitMachineList_view WHERE kmlID IN @ids";
+                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds }))
+                        .ToDictionary(x => x.kmlID, x => x);
 
                     foreach (var parent in parents)
                     {
-                        if (string.IsNullOrWhiteSpace(parent.kmlNumber) && lookup.TryGetValue(parent.pzvKmlID, out var number))
+                        if (parent.pzvKmlID > 0 && lookup.TryGetValue(parent.pzvKmlID, out var kml))
                         {
-                            parent.kmlNumber = number;
+                            parent.kmlNumber ??= kml.kmlNumber;
+                            parent.koefObServ ??= kml.koefObServ;
+                            parent.name_class ??= kml.name_class;
                         }
                     }
                 }

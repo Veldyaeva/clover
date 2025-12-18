@@ -52,10 +52,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvKwsID { get; set; }
         public BindingList<nrModel> nrModels { get; set; } = new();
         public BindingList<rzvModel> rzvModels { get; set; } = new();
-        [NotMapped]
-        public int kol_Effective { get; set; }
-        [NotMapped]
-        public int sekEd_Effective { get; set; }
         public DateTime? DataCd { get; set; } // data_cd -> DataCd (MatchNamesWithUnderscores = true)
         public int? PriorityGroup { get; set; }
     }

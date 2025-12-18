@@ -45,8 +45,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 pzvTab = parent.pzvTab,
                 n_pach = parent.n_pach,
                 razm = parent.razm,
-                sekEd_Effective = parent.sekEd_Effective,
-                kol_Effective = parent.kol_Effective,
                 nrN = nr?.nrN,
                 nrN1 = nr?.nrN1,
                 nrText = nr?.nrText,

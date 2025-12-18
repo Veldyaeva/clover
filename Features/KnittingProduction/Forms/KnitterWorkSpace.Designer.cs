@@ -372,9 +372,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn26.Caption = "Часы назн";
             bandedGridColumn26.FieldName = "bandedGridColumn26";
             bandedGridColumn26.Name = "bandedGridColumn26";
-            bandedGridColumn26.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn26", "всего {0:0.##}") });
+            bandedGridColumn26.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn26", "наз {0:0.##}") });
             bandedGridColumn26.UnboundDataType = typeof(decimal);
-            bandedGridColumn26.UnboundExpression = "[pzvSek] * [pzvKolNazn] / 3600";
+            bandedGridColumn26.UnboundExpression = "Round([pzvSek] * [pzvKolNazn] / 3600, 2)";
             bandedGridColumn26.Visible = true;
             bandedGridColumn26.Width = 77;
             // 
@@ -425,7 +425,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn27.Name = "bandedGridColumn27";
             bandedGridColumn27.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn27", "{0:0.##}") });
             bandedGridColumn27.UnboundDataType = typeof(decimal);
-            bandedGridColumn27.UnboundExpression = "[pzvKol] * [pzvSek] / 3600";
+            bandedGridColumn27.UnboundExpression = "Round([pzvSek] * [pzvKol] / 3600, 2)";
             bandedGridColumn27.Visible = true;
             bandedGridColumn27.Width = 53;
             // 
@@ -632,7 +632,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn7.FieldName = "gridColumn7";
             gridColumn7.Name = "gridColumn7";
             gridColumn7.UnboundDataType = typeof(decimal);
-            gridColumn7.UnboundExpression = "[pzvChasNazn] / [koefObServ]";
+            gridColumn7.UnboundExpression = "Round([pzvChasNazn] / [koefObServ], 2)";
             gridColumn7.Visible = true;
             gridColumn7.Width = 150;
             // 
