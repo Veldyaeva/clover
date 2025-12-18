@@ -412,6 +412,74 @@ namespace SewingProduction.Core.helpers
             All,           // обновлять ВСЕ поля
             None           // не обновлять никаких полей
         }
+        //public static void ApplyChanges<T, TKey>(
+        //    BindingSource oldSource,
+        //    ChangesResult<T> changes,
+        //    Func<T, TKey> keySelector,
+        //    UpdateFieldsMode mode,
+        //    params string[] fields)
+        //{
+        //    if (oldSource == null) throw new ArgumentNullException(nameof(oldSource));
+        //    if (changes == null) throw new ArgumentNullException(nameof(changes));
+        //    if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+
+        //    fields ??= Array.Empty<string>();
+
+        //    var oldDict = oldSource.List.Cast<T>()
+        //        .ToDictionary(keySelector, x => x);
+
+        //    var propsAll = typeof(T).GetProperties()
+        //        .Where(p => p.CanWrite)
+        //        .ToArray();
+
+        //    var propsToCopy = mode switch
+        //    {
+        //        UpdateFieldsMode.All => propsAll,
+
+        //        UpdateFieldsMode.None => Array.Empty<System.Reflection.PropertyInfo>(),
+
+        //        UpdateFieldsMode.IncludeOnly => propsAll
+        //            .Where(p => fields.Contains(p.Name))
+        //            .ToArray(),
+
+        //        UpdateFieldsMode.ExcludeOnly => propsAll
+        //            .Where(p => !fields.Contains(p.Name))
+        //            .ToArray(),
+
+        //        _ => propsAll
+        //    };
+
+        //    // Modified: копируем только выбранные поля
+        //    foreach (var updated in changes.Modified)
+        //    {
+        //        var key = keySelector(updated);
+        //        if (!oldDict.TryGetValue(key, out var old))
+        //            continue;
+
+        //        foreach (var prop in propsToCopy)
+        //            prop.SetValue(old, prop.GetValue(updated));
+        //    }
+
+        //    // Added: добавляем целиком
+        //    //foreach (var added in changes.Added)
+        //    //    oldSource.Add(added);
+
+        //    oldSource.SuspendBinding();
+        //    try
+        //    {
+        //        var current = oldSource.List.Cast<T>().ToList();
+        //        current.AddRange(changes.Added);
+
+        //        oldSource.DataSource = current;  // один раз
+        //    }
+        //    finally
+        //    {
+        //        oldSource.ResumeBinding();
+        //        //oldSource.ResetBindings(false);
+        //    }
+
+        //    oldSource.ResetBindings(false);
+        //}
         public static void ApplyChanges<T, TKey>(
             BindingSource oldSource,
             ChangesResult<T> changes,
@@ -422,64 +490,264 @@ namespace SewingProduction.Core.helpers
             if (oldSource == null) throw new ArgumentNullException(nameof(oldSource));
             if (changes == null) throw new ArgumentNullException(nameof(changes));
             if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
-
             fields ??= Array.Empty<string>();
-
-            var oldDict = oldSource.List.Cast<T>()
-                .ToDictionary(keySelector, x => x);
-
-            var propsAll = typeof(T).GetProperties()
-                .Where(p => p.CanWrite)
-                .ToArray();
-
+            var oldDict = oldSource.List.Cast<T>().ToDictionary(keySelector, x => x);
+            var propsAll = typeof(T).GetProperties().Where(p => p.CanWrite).ToArray();
             var propsToCopy = mode switch
             {
                 UpdateFieldsMode.All => propsAll,
-
                 UpdateFieldsMode.None => Array.Empty<System.Reflection.PropertyInfo>(),
-
-                UpdateFieldsMode.IncludeOnly => propsAll
-                    .Where(p => fields.Contains(p.Name))
-                    .ToArray(),
-
-                UpdateFieldsMode.ExcludeOnly => propsAll
-                    .Where(p => !fields.Contains(p.Name))
-                    .ToArray(),
-
+                UpdateFieldsMode.IncludeOnly => propsAll.Where(p => fields.Contains(p.Name)).ToArray(),
+                UpdateFieldsMode.ExcludeOnly => propsAll.Where(p => !fields.Contains(p.Name)).ToArray(),
                 _ => propsAll
-            };
-
-            // Modified: копируем только выбранные поля
+            }; // Modified: копируем только выбранные поля
             foreach (var updated in changes.Modified)
             {
                 var key = keySelector(updated);
                 if (!oldDict.TryGetValue(key, out var old))
                     continue;
-
                 foreach (var prop in propsToCopy)
                     prop.SetValue(old, prop.GetValue(updated));
-            }
-
-            // Added: добавляем целиком
-            //foreach (var added in changes.Added)
-            //    oldSource.Add(added);
-
+            } // Added: добавляем целиком 
+              //foreach (var added in changes.Added) 
+              // oldSource.Add(added);
             oldSource.SuspendBinding();
             try
             {
                 var current = oldSource.List.Cast<T>().ToList();
                 current.AddRange(changes.Added);
-
-                oldSource.DataSource = current;  // один раз
+                oldSource.DataSource = current; // один раз
             }
             finally
             {
-                oldSource.ResumeBinding();
-                //oldSource.ResetBindings(false);
+                oldSource.ResumeBinding(); //oldSource.ResetBindings(false);
             }
-
             oldSource.ResetBindings(false);
         }
+
+        //public static void ApplyChanges<T, TKey>(
+        //    BindingSource source,
+        //    ChangesResult<T> changes,
+        //    Func<T, TKey> keySelector,
+        //    UpdateFieldsMode mode,
+        //    params string[] fields)
+        //{
+        //    if (source == null) throw new ArgumentNullException(nameof(source));
+        //    if (changes == null) throw new ArgumentNullException(nameof(changes));
+        //    if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+
+        //    if (source.List is not IList<T> list)
+        //        throw new InvalidOperationException(
+        //            $"BindingSource.List must be IList<{typeof(T).Name}>");
+
+        //    fields ??= Array.Empty<string>();
+
+        //    // 🔹 Список свойств для копирования
+        //    var allProps = typeof(T).GetProperties()
+        //        .Where(p => p.CanWrite)
+        //        .ToArray();
+
+        //    var propsToCopy = mode switch
+        //    {
+        //        UpdateFieldsMode.All => allProps,
+        //        UpdateFieldsMode.None => Array.Empty<PropertyInfo>(),
+        //        UpdateFieldsMode.IncludeOnly => allProps.Where(p => fields.Contains(p.Name)).ToArray(),
+        //        UpdateFieldsMode.ExcludeOnly => allProps.Where(p => !fields.Contains(p.Name)).ToArray(),
+        //        _ => allProps
+        //    };
+
+        //    // 🔹 Словарь существующих элементов
+        //    var dict = list.ToDictionary(keySelector);
+
+        //    source.SuspendBinding();
+        //    try
+        //    {
+        //        // ===== MODIFIED =====
+        //        foreach (var updated in changes.Modified)
+        //        {
+        //            var key = keySelector(updated);
+        //            if (!dict.TryGetValue(key, out var existing))
+        //                continue;
+
+        //            foreach (var prop in propsToCopy)
+        //                prop.SetValue(existing, prop.GetValue(updated));
+        //        }
+
+        //        // ===== ADDED =====
+        //        foreach (var added in changes.Added)
+        //        {
+        //            list.Add(added);
+        //        }
+
+        //        // ===== REMOVED =====
+        //        foreach (var removed in changes.Removed)
+        //        {
+        //            var key = keySelector(removed);
+        //            if (dict.TryGetValue(key, out var existing))
+        //                list.Remove(existing);
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        source.ResumeBinding();
+        //    }
+
+        //    // ⚠️ ВАЖНО:
+        //    // НЕ вызываем ResetBindings()
+        //    // BindingList сам уведомит UI
+        //}
+        //public static void ApplyChanges<T, TKey>(
+        //    BindingSource source,
+        //    ChangesResult<T> changes,
+        //    Func<T, TKey> keySelector,
+        //    UpdateFieldsMode mode,
+        //    params string[] fields)
+        //{
+        //    if (source == null) throw new ArgumentNullException(nameof(source));
+        //    if (changes == null) throw new ArgumentNullException(nameof(changes));
+        //    if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+
+        //    if (source.List is not IList<T> list)
+        //        throw new InvalidOperationException(
+        //            $"BindingSource.List must be IList<{typeof(T).Name}>");
+
+        //    fields ??= Array.Empty<string>();
+
+        //    // 🔹 Список свойств для копирования
+        //    var allProps = typeof(T).GetProperties()
+        //        .Where(p => p.CanWrite)
+        //        .ToArray();
+
+        //    var propsToCopy = mode switch
+        //    {
+        //        UpdateFieldsMode.All => allProps,
+        //        UpdateFieldsMode.None => Array.Empty<PropertyInfo>(),
+        //        UpdateFieldsMode.IncludeOnly => allProps.Where(p => fields.Contains(p.Name)).ToArray(),
+        //        UpdateFieldsMode.ExcludeOnly => allProps.Where(p => !fields.Contains(p.Name)).ToArray(),
+        //        _ => allProps
+        //    };
+
+        //    // 🔹 Словарь существующих элементов
+        //    var dict = list.ToDictionary(keySelector);
+
+        //    source.SuspendBinding();
+        //    try
+        //    {
+        //        // ===== MODIFIED =====
+        //        foreach (var updated in changes.Modified)
+        //        {
+        //            var key = keySelector(updated);
+        //            if (!dict.TryGetValue(key, out var existing))
+        //                continue;
+
+        //            foreach (var prop in propsToCopy)
+        //                prop.SetValue(existing, prop.GetValue(updated));
+        //        }
+
+        //        // ===== ADDED =====
+        //        foreach (var added in changes.Added)
+        //        {
+        //            list.Add(added);
+        //        }
+
+        //        // ===== REMOVED =====
+        //        foreach (var removed in changes.Removed)
+        //        {
+        //            var key = keySelector(removed);
+        //            if (dict.TryGetValue(key, out var existing))
+        //                list.Remove(existing);
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        source.ResumeBinding();
+        //    }
+
+        //    // ⚠️ ВАЖНО:
+        //    // НЕ вызываем ResetBindings()
+        //    // BindingList сам уведомит UI
+        //}
+        //public static void ApplyChanges<T, TKey>(
+        //    BindingSource oldSource,
+        //    ChangesResult<T> changes,
+        //    Func<T, TKey> keySelector,
+        //    UpdateFieldsMode mode,
+        //    params string[] fields)
+        //{
+        //    if (oldSource == null) throw new ArgumentNullException(nameof(oldSource));
+        //    if (changes == null) throw new ArgumentNullException(nameof(changes));
+        //    if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
+
+        //    if (oldSource.List is not IList<T> list)
+        //        throw new InvalidOperationException(
+        //            $"BindingSource.List must be IList<{typeof(T).Name}>");
+
+        //    fields ??= Array.Empty<string>();
+
+        //    // --- все доступные writable-свойства
+        //    var allProps = typeof(T)
+        //        .GetProperties()
+        //        .Where(p => p.CanWrite)
+        //        .ToArray();
+
+        //    // --- какие свойства копируем
+        //    var propsToCopy = mode switch
+        //    {
+        //        UpdateFieldsMode.All =>
+        //            allProps,
+
+        //        UpdateFieldsMode.None =>
+        //            Array.Empty<PropertyInfo>(),
+
+        //        UpdateFieldsMode.IncludeOnly =>
+        //            allProps.Where(p => fields.Contains(p.Name)).ToArray(),
+
+        //        UpdateFieldsMode.ExcludeOnly =>
+        //            allProps.Where(p => !fields.Contains(p.Name)).ToArray(),
+
+        //        _ => allProps
+        //    };
+
+        //    // --- существующие элементы по ключу
+        //    var dict = list.ToDictionary(keySelector);
+
+        //    oldSource.SuspendBinding();
+        //    try
+        //    {
+        //        // ===== MODIFIED =====
+        //        foreach (var updated in changes.Modified)
+        //        {
+        //            var key = keySelector(updated);
+        //            if (!dict.TryGetValue(key, out var existing))
+        //                continue;
+
+        //            foreach (var prop in propsToCopy)
+        //            {
+        //                var newValue = prop.GetValue(updated);
+        //                prop.SetValue(existing, newValue);
+        //            }
+        //        }
+
+        //        // ===== ADDED =====
+        //        foreach (var added in changes.Added)
+        //            list.Add(added);
+
+        //        // ===== REMOVED =====
+        //        foreach (var removed in changes.Removed)
+        //        {
+        //            var key = keySelector(removed);
+        //            if (dict.TryGetValue(key, out var existing))
+        //                list.Remove(existing);
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        oldSource.ResumeBinding();
+        //    }
+
+        //    // ❌ НЕ меняем DataSource
+        //    // ❌ НЕ вызываем ResetBindings
+        //}
 
         public static void ApplyChanges<T>(
             BindingSource oldSource,
@@ -509,6 +777,39 @@ namespace SewingProduction.Core.helpers
 
             ApplyChanges<T, string>(oldSource, changes, keySelector, mode, fields);
         }
+        //    public static void ApplyChanges<T>(
+        //BindingSource oldSource,
+        //ChangesResult<T> changes,
+        //UpdateFieldsMode mode,
+        //string[] keyProperties,
+        //params string[] fields)
+        //    {
+        //        if (keyProperties == null || keyProperties.Length == 0)
+        //            throw new ArgumentException("Key properties must be specified", nameof(keyProperties));
+
+        //        var keyProps = keyProperties
+        //            .Select(p => typeof(T).GetProperty(p)
+        //                ?? throw new ArgumentException($"Property '{p}' not found on {typeof(T).Name}"))
+        //            .ToArray();
+
+        //        // 👇 типобезопасный ключ
+        //        Func<T, object[]> keySelector = obj =>
+        //        {
+        //            var values = new object[keyProps.Length];
+        //            for (int i = 0; i < keyProps.Length; i++)
+        //                values[i] = keyProps[i].GetValue(obj);
+        //            return values;
+        //        };
+
+        //        // 👇 comparer по значениям массива
+        //        ApplyChanges<T, object[]>(
+        //            oldSource,
+        //            changes,
+        //            keySelector,
+        //            mode,
+        //            fields
+        //        );
+        //    }
 
 
 
