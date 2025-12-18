@@ -1,8 +1,11 @@
-﻿using SewingProduction.Core.Models;
+﻿using DevExpress.XtraEditors;
+using SewingProduction.Core.Class;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
+using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
@@ -20,16 +23,19 @@ namespace SewingProduction.Features.Articul.Forms
     {
         private DatabaseHelper _dbHelperAce;
         private DbService _dbService;
-        private ArticulDataService _articulDataService;
+        //private ArticulDataService _articulDataService;
+        private ArticulEditAdvanceService _articulEdAdvDataService;
+
         private readonly ILogger _logger = new FileLogger();
 
         private string _kodd;
 
-        private List<ArticulModel> _artKodRazm;
-        private BindingList<ArticulModel> _articulCommon;
-
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
+
+        
+        private List<GostModel> _gosts;
+        //private BindingSource _bindingSourceGosts;
 
         public ArticulEditAdvance(UserClass user) : this(user, "", "")
         { }
@@ -38,7 +44,7 @@ namespace SewingProduction.Features.Articul.Forms
         {
             _dbHelperAce = new DatabaseHelper();
             _dbService = new DbService(_dbHelperAce);
-            _articulDataService = new ArticulDataService();
+            _articulEdAdvDataService = new ArticulEditAdvanceService();
 
             InitializeComponent();
             _user = user;
@@ -48,16 +54,26 @@ namespace SewingProduction.Features.Articul.Forms
 
             //_artKodRazm = new BindingList<ArticulModel>();
 
-            _bindingSourceArtKod = new BindingSource { DataSource = _artKodRazm };
+            _bindingSourceArtKod = new BindingSource { };
             if (gridEditAdRazm != null) gridEditAdRazm.DataSource = _bindingSourceArtKod;
+
+            _bindingSourceArtCommon = new BindingSource { };
+            //_bindingSourceGosts = new BindingSource {  };
+
         }
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
         {
             //загрузка списка размеров 
-            _artKodRazm = await _articulDataService.GetArtByKoddAsync(this._kodd);
 
-            _bindingSourceArtKod.DataSource = _artKodRazm;
+            _bindingSourceArtKod.DataSource = await _articulEdAdvDataService.GetArtByKoddAsync(this._kodd);
+
+            _gosts = await _articulEdAdvDataService.GetGostNaborAsync();
+            
+            lookUpGost.EditValueChanged += (s, e) => UpdateOpi();
+
+            //_bindingSourceGosts.DataSource = await _articulEdAdvDataService.GetBLGostNaborAsync();
+
             InitializeBindingsAsync();
 
         }
@@ -65,18 +81,43 @@ namespace SewingProduction.Features.Articul.Forms
         {
             try
             {
-
                 //загрузка перечня кодов из справочника общая информация
-                _articulCommon = new BindingList<ArticulModel>();
-                _bindingSourceArtCommon = new BindingSource { DataSource = _articulCommon };
+                
+                _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
+                dataLayoutCommonArticul.DataSource = _bindingSourceArtCommon;
+
 
                 #region заполнение блока основных данных артикула
+
                 txbArticul.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Articul), true);
                 txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Mod), true);
-                txbIdGost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Id_gost), true);
+
+                lookUpGost.Properties.DataSource = _gosts;
+                lookUpGost.Properties.DisplayMember = nameof(GostModel.Name_gost);
+                lookUpGost.Properties.ValueMember = nameof(GostModel.Id_gost);
+                lookUpGost.Properties.NullText = "Не выбрано";
+                lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Id_gost), true, DataSourceUpdateMode.OnPropertyChanged);
+                //инициализация описания госта
+                UpdateOpi();
+
+                chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Arh), true, DataSourceUpdateMode.OnPropertyChanged);
+                //отделка
+                chbIsUpak.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Is_upak), true);
+                chbIsFurnit.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Is_furnit), true);
+
+                chkP.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.P), true);
+                chkV.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.V), true);
+                chkBus.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Bus), true);
+                chkStra.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Stra), true);
+                chkPres.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.P_pres), true);
+
+
+
                 txbSost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Sost), true);
                 txbSost2.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Sost2), true);
                 txbSost3.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Sost3), true);
+
+
 
                 #endregion
             }
@@ -86,7 +127,15 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
+        
 
+        private void UpdateOpi()
+        {
+            if (lookUpGost.EditValue is int id)
+                txbOpiGost.Text = _gosts.FirstOrDefault(x => x.Id_gost == id)?.Opi_gost ?? "";
+            else
+                txbOpiGost.Text = "";
+        }
 
         private void customSimpleButton1_Click(object sender, EventArgs e)
         {

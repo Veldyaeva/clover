@@ -36,7 +36,6 @@ namespace SewingProduction.Features.Articul.Service
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPreviewAsyncBindingList");
                 return null;
             }
-
         }
         public async Task<BindingList<SpArtPreviewModel>> GetArtPreviewAsyncBindingList()
         {
@@ -53,23 +52,6 @@ namespace SewingProduction.Features.Articul.Service
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPreviewAsyncBindingList");
                 return null;
             }
-
-        }
-
-        public async Task<List<ArticulModel>> GetArtByKoddAsync( string kodd)
-        {
-            try
-            {
-                string query = "select * from dbo.view_art WHERE kodd = @kodd";
-                return await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtByKoddAsync");
-                return null;
-            }
-
-
         }
         public async Task<SpArticulPreviewModel> GetByKodAsync(string kod)
         {
@@ -90,7 +72,6 @@ namespace SewingProduction.Features.Articul.Service
         {
             try
             {
-
                 string query = $"select * from dbo.view_art_dr where kod = @kod";
                 var bb = await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
                 var ret = new BindingList<ArtDrModel>(bb);

@@ -29,7 +29,16 @@ namespace SewingProduction.Core.Models
         [NotMapped]
         public string Kodd { get; set; }
         public string Grup { get; set; }
-        public string Articul { get; set; }
+        private string _articul;
+        public string Articul { get=>_articul; set
+            { 
+                if (_articul != value) 
+                { 
+                    _articul = value; 
+                    IsDirty = true;
+                }
+            }
+                 }
         public string Mod { get; set; }
         public string Razm { get; set; }
         public string Sost { get; set; }
@@ -127,7 +136,19 @@ namespace SewingProduction.Core.Models
         public int Upd_razm { get; set; }
         public decimal Gl_rekom { get; set; }
         public int Sek_kr { get; set; }
-        public int Arh { get; set; }
+        
+        private int _arh;
+        public int Arh { get => _arh;
+            set { 
+            if (_arh != value) 
+                { 
+                    _arh = value; 
+                    IsDirty = true;
+                }
+            } 
+        
+        }
+       
         public int Nds { get; set; }
         public string Ed_izm { get; set; }
         public decimal Brak_t1 { get; set; }
@@ -196,6 +217,8 @@ namespace SewingProduction.Core.Models
         public decimal Sek_vyaz57 { get; set; }
         public decimal Sek_vyaz18 { get; set; }
         public int Annid { get; set; }
+
+        public bool IsDirty { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
