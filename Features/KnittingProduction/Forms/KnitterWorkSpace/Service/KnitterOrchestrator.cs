@@ -105,6 +105,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 		/// </summary>
 		public Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab) => _repo.GetOpenShiftByTabAsync(tab);
 
+        /// <summary>
+        /// Возвращает открытую смену по зоне, если есть (ID, табель, дата начала).
+        /// </summary>
+        public Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId) => _repo.GetOpenShiftByZoneAsync(kmaId);
+
 		/// <summary>
 		/// Проставляет pzvKwsID для списка операций плана.
 		/// </summary>

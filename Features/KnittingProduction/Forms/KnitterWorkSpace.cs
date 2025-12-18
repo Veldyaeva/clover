@@ -151,6 +151,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // Заполняем список ФИО
                 List<FioModel> fioList = await _orchestrator.GetFioListAsync();
+                fioList = await FilterFioByOpenShiftAsync(fioList);
                 fioList ??= new List<FioModel>();
 
                 // Жестко выбираем табельный при загрузке формы
@@ -165,6 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
                 }
 
+                // Отображаем ФИО, зона — отдельным столбцом в всплывающем списке
                 FioGridLookUpEdit.Properties.DisplayMember = nameof(FioModel.Fio);
                 FioGridLookUpEdit.Properties.ValueMember = nameof(FioModel.Tab);
                 FioGridLookUpEdit.Properties.DataSource = fioList;
@@ -379,6 +381,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
+                // Проверка: нельзя открыть вторую смену в зоне
+                if (_currentKmaId.HasValue)
+                {
+                    var openByZone = await _orchestrator.GetOpenShiftByZoneAsync(_currentKmaId.Value);
+                    if (openByZone.shiftId.HasValue)
+                    {
+                        XtraMessageBox.Show(this, $"В зоне {_currentKmaNum} уже открыта смена (таб. {openByZone.tabStart}), сначала завершите её.", "Смена уже открыта", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
                 // Назначаем таб ВСЕМ загруженным строкам 
                 var rowsForUpdate = _planPresenter.AllRows?.ToList() ?? new List<KnitterPZVModel>();
                 if (!rowsForUpdate.Any())
@@ -399,11 +412,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     return;
                 }
 
-                await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
 
                 // Успешный старт смены: фиксируем в БД, проставляем pzvKwsID для всех! операций, меняем текст кнопки и запускаем таймер
                 try
                 {
+                await _orchestrator.SetPzvTabAsync(pzvIds, selectedTab);
                     _currentShiftId = await _orchestrator.StartWorkingShiftAsync(selectedTab, _currentKmaId, _currentKmaNum);
                     if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
                     {
@@ -627,7 +640,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // Сохраняем текущую машину, чтобы вернуть фокус после обновления
                 var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, 75, false, true, 14);//(tab);
+                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, false, true, 14);//(tab);
                 // перестраиваем иерархию без очистки табеля
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 // Вернём фокус и раскроем нужную машину
@@ -899,6 +912,44 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 await LoadPlanForTabAsync(tab, forceReload: true);
             }
+        }
+
+        /// <summary>
+        /// Фильтрует список ФИО: если в зоне есть открытая смена, показывает только сотрудника(ов) с этой сменой; иначе — всех в зоне.
+        /// </summary>
+        private async Task<List<FioModel>> FilterFioByOpenShiftAsync(List<FioModel> fioList)
+        {
+            if (fioList == null || fioList.Count == 0)
+                return fioList ?? new List<FioModel>();
+
+            var result = new List<FioModel>();
+
+            // Группируем по зоне; пустая зона считается отдельной группой
+            foreach (var group in fioList.GroupBy(f => f.Zone ?? string.Empty))
+            {
+                var openTabs = new List<FioModel>();
+                foreach (var fio in group)
+                {
+                    var open = await _orchestrator.GetOpenShiftByTabAsync(fio.Tab);
+                    if (open.shiftId.HasValue)
+                    {
+                        openTabs.Add(fio);
+                    }
+                }
+
+                if (openTabs.Any())
+                {
+                    // Если найдены открытые смены, показываем только их в данной зоне
+                    result.AddRange(openTabs);
+                }
+                else
+                {
+                    // Иначе показываем всех сотрудников зоны
+                    result.AddRange(group);
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

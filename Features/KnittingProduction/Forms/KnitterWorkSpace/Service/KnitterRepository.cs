@@ -182,7 +182,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             {
 				// Берём данные из knitMachineAreaEmp_view, как в сплеше
 				const string query = @"
-SELECT DISTINCT kmaeTab AS Tab, fio AS Fio
+SELECT DISTINCT
+    kmaeTab AS Tab,
+    fio    AS Fio,
+    kmaNumber AS Zone
 FROM ACE.dbo.knitMachineAreaEmp_view
 WHERE ((kmaeDel = 0 OR kmaeDel IS NULL) and kmaIDNazn = 6)
 ORDER BY fio";
@@ -475,6 +478,35 @@ ORDER BY kwsDateStart DESC";
 			catch (Exception ex)
 			{
 				throw new Exception($"GetOpenShiftByTabAsync failed (tab={tab})", ex);
+			}
+		}
+
+		public async Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId)
+		{
+			try
+			{
+				using (var connection = _dbHelper.GetConnection())
+				{
+					const string sql = @"
+SELECT TOP 1 
+	kwsID AS shiftId,
+	kwsTabStart AS tabStart,
+	kwsDateStart AS dateStart
+FROM ACE.dbo.knitWorkingShiftNew
+WHERE kwsKmaID = @kmaId
+  AND (kwsDel = 0 OR kwsDel IS NULL)
+  AND kwsDateEnd IS NULL
+ORDER BY kwsDateStart DESC";
+
+					var row = await connection.QueryFirstOrDefaultAsync<(int shiftId, int tabStart, DateTime? dateStart)>(sql, new { kmaId });
+					if (row.shiftId == 0)
+						return (null, null, null);
+					return (row.shiftId, row.tabStart, row.dateStart);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception($"GetOpenShiftByZoneAsync failed (kmaId={kmaId})", ex);
 			}
 		}
 

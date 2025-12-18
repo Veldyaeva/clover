@@ -82,8 +82,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 OptionsView = { ShowGroupPanel = false, ColumnAutoWidth = false }
             };
 
-            lookupView.Columns.AddVisible(nameof(FioModel.Fio), "ФИО").Width = 200;
+            lookupView.Columns.AddVisible(nameof(FioModel.Fio), "ФИО").Width = 220;
             lookupView.Columns.AddVisible(nameof(FioModel.Tab), "Таб. №").Width = 80;
+            lookupView.Columns.AddVisible(nameof(FioModel.Zone), "Зона").Width = 80;
            // lookupView.BestFitColumns();
 
             _fioLookup.Properties.PopupView = lookupView;
