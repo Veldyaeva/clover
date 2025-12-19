@@ -35,10 +35,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
             // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
-            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, includeFinished: false, maxHours: 14m);
+            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, includeFinished: false, expandAssignedByNrId: false, maxHours: 14m);
         }
 
-        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool includeFinished, decimal maxHours)
+        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool includeFinished, bool expandAssignedByNrId, decimal maxHours)
         {
             try
             {
@@ -116,7 +116,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         OnlyActive = 1,
                         KwsId = kwsId,
                         OnlyUnassigned = onlyUnassigned ? 1 : 0,
-                        IncludeFinished = includeFinished ? 1 : 0
+                        IncludeFinished = includeFinished ? 1 : 0,
+                        ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0
                     },
                     splitOn: "nrID,n_pach",
                     commandType: CommandType.StoredProcedure,
@@ -153,7 +154,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             }
             catch (Exception ex)
             {
-                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, onlyUnassigned={onlyUnassigned}, includeFinished={includeFinished}, maxHours={maxHours})", ex);
+                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, onlyUnassigned={onlyUnassigned}, includeFinished={includeFinished}, expandAssignedByNrId={expandAssignedByNrId}, maxHours={maxHours})", ex);
             }
         }
 

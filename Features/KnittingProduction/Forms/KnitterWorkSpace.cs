@@ -33,6 +33,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
         private CheckBox _adminToggle;
+        private CheckBox _expandNrToggle;
         private RepositoryItemProgressBar _statusProgressBar;
 
         // Вью для третьего уровня (деталь детальной таблицы)
@@ -119,6 +120,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupIdleTimer();
                 SetupShiftTimer();
                 InitAdminToggle();
+                InitExpandNrToggle();
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
@@ -148,6 +150,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupIdleTimer();
                 SetupShiftTimer();
                 InitAdminToggle();
+                InitExpandNrToggle();
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
@@ -926,7 +929,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // Сохраняем текущую машину, чтобы вернуть фокус после обновления
                 var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, false, true, 14);//(tab);
+                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, false, true, false, 14);//(tab);
                 // перестраиваем иерархию без очистки табеля
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 // Вернём фокус и раскроем нужную машину
@@ -1157,6 +1160,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _adminToggle.CheckedChanged += async (s, e) => await ReloadCurrentTabAsync();
         }
 
+        private void InitExpandNrToggle()
+        {
+            _expandNrToggle = new CheckBox
+            {
+                Text = "Все операции",
+                AutoSize = true,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Location = new Point(this.ClientSize.Width - 130, 20)
+            };
+            Controls.Add(_expandNrToggle);
+            _expandNrToggle.BringToFront();
+            _expandNrToggle.CheckedChanged += async (s, e) => await ReloadCurrentTabAsync();
+        }
+
         private void InitAdminSettingsButton()
         {
             _adminSettingsButton = new Button
@@ -1342,10 +1359,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             int? kwsId = isShiftOpen ? _currentShiftId : 0;
             //kwsId = isAdmin
             bool onlyUnassigned = !isShiftOpen && !_showAllAssignedWhenClosed;
-            bool includeFinished = true;//isAdmin;
+         //   bool includeFinished = true;//isAdmin;
             decimal maxHours = isShiftOpen ? 240m : _maxHoursClosedShift;
+            bool expandByNr = _expandNrToggle?.Checked == true;
 
-            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
+            //var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
+            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, isAdmin, expandByNr, maxHours);
             _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
             _currentLoadedTab = tab;
         }
