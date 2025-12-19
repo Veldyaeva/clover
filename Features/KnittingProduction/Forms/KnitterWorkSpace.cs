@@ -49,6 +49,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Таймер смены (идёт с момента нажатия 'Начать смену' до 'Закончить смену').
         /// </summary>
         private readonly System.Windows.Forms.Timer _shiftTimer = new System.Windows.Forms.Timer();
+        private readonly System.Windows.Forms.Timer _blinkCheckTimer = new System.Windows.Forms.Timer();
+        private readonly System.Windows.Forms.Timer _blinkTimer = new System.Windows.Forms.Timer();
+        private bool _isBlinking;
+        private string _lastBlinkWindowKey;
+        private DateTime _blinkEndTime;
+        private Color _buttonDefaultBackColor;
+        private TimeSpan _blinkTimeMorning = new TimeSpan(8, 0, 0);
+        private TimeSpan _blinkTimeEvening = new TimeSpan(20, 0, 0);
+        private int _blinkDurationMinutes = 1;
+        private decimal _maxHoursClosedShift = 14m;
+        private bool _showAllAssignedWhenClosed = false;
+        private Button _adminSettingsButton;
         /// <summary>
         /// Флаг активной смены.
         /// </summary>
@@ -107,7 +119,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupIdleTimer();
                 SetupShiftTimer();
                 InitAdminToggle();
+                //InitAdminSettingsButton();
                 SetupStatusColumn();
+                SetupBlinkTimers();
             }
             catch (Exception ex)
             {
@@ -134,7 +148,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupIdleTimer();
                 SetupShiftTimer();
                 InitAdminToggle();
+                //InitAdminSettingsButton();
                 SetupStatusColumn();
+                SetupBlinkTimers();
             }
             catch (Exception ex)
             {
@@ -373,7 +389,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     {
                         await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
                         // Перезагрузим план, чтобы обновить статусы/проценты
-                        await LoadPlanForTabAsync(tabEnd, forceReload: true);
+                     //   await LoadPlanForTabAsync(tabEnd, forceReload: true);
                     }
 
                     await RefreshFioListAsync();
@@ -446,6 +462,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        private void RefreshStatusColumns()
+        {
+            // Форсируем перерасчёт unbound-колонок (процент/статус)
+            bandedGridView3?.RefreshData();
+            advBandedGridView1?.RefreshData();
+        }
+
         /// <summary>
         /// Перезагружает список ФИО с учётом фильтра по открытым сменам, сохраняет текущий выбор, если он есть.
         /// </summary>
@@ -471,6 +494,166 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 FioGridLookUpEdit.EditValue = null;
                 TabGridLookUpEdit.EditValue = null;
             }
+        }
+
+        private void ShowAdminSettingsDialog()
+        {
+            using var form = new Form
+            {
+                Text = "Настройки админки",
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                StartPosition = FormStartPosition.CenterParent,
+                MinimizeBox = false,
+                MaximizeBox = false,
+                ClientSize = new Size(320, 220)
+            };
+
+            var lblBlink1 = new Label { Text = "Время мигания 1:", Location = new Point(10, 20), AutoSize = true };
+            var timeBlink1 = new DateTimePicker
+            {
+                Format = DateTimePickerFormat.Time,
+                ShowUpDown = true,
+                Location = new Point(150, 16),
+                Width = 120,
+                Value = DateTime.Today.Add(_blinkTimeMorning)
+            };
+
+            var lblBlink2 = new Label { Text = "Время мигания 2:", Location = new Point(10, 55), AutoSize = true };
+            var timeBlink2 = new DateTimePicker
+            {
+                Format = DateTimePickerFormat.Time,
+                ShowUpDown = true,
+                Location = new Point(150, 51),
+                Width = 120,
+                Value = DateTime.Today.Add(_blinkTimeEvening)
+            };
+
+            var lblMaxHours = new Label { Text = "MaxHours (закрытая):", Location = new Point(10, 90), AutoSize = true };
+            var numMaxHours = new NumericUpDown
+            {
+                Location = new Point(150, 86),
+                Width = 120,
+                DecimalPlaces = 1,
+                Minimum = 0,
+                Maximum = 500,
+                Value = _maxHoursClosedShift
+            };
+
+            var chkShowAllAssigned = new CheckBox
+            {
+                Text = "Показывать все назначенные (закрытая)",
+                Location = new Point(10, 125),
+                AutoSize = true,
+                Checked = _showAllAssignedWhenClosed
+            };
+
+            var btnOk = new Button { Text = "OK", DialogResult = DialogResult.OK, Location = new Point(70, 170), Width = 80 };
+            var btnCancel = new Button { Text = "Отмена", DialogResult = DialogResult.Cancel, Location = new Point(170, 170), Width = 80 };
+
+            form.Controls.AddRange(new Control[] { lblBlink1, timeBlink1, lblBlink2, timeBlink2, lblMaxHours, numMaxHours, chkShowAllAssigned, btnOk, btnCancel });
+            form.AcceptButton = btnOk;
+            form.CancelButton = btnCancel;
+
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                _blinkTimeMorning = timeBlink1.Value.TimeOfDay;
+                _blinkTimeEvening = timeBlink2.Value.TimeOfDay;
+                _maxHoursClosedShift = numMaxHours.Value;
+                _showAllAssignedWhenClosed = chkShowAllAssigned.Checked;
+
+                // Сбросим ключ окна, чтобы мигание могло сработать с новыми настройками
+                _lastBlinkWindowKey = null;
+            }
+        }
+
+        private void SetupBlinkTimers()
+        {
+            _buttonDefaultBackColor = simpleButton2.BackColor;
+            _blinkCheckTimer.Interval = 15_000; // раз в 15 секунд проверяем окно 8:00/20:00
+            _blinkCheckTimer.Tick += BlinkCheckTimer_Tick;
+            _blinkCheckTimer.Start();
+
+            _blinkTimer.Interval = 500; // мигаем раз в полсекунды
+            _blinkTimer.Tick += BlinkTimer_Tick;
+        }
+
+        private void BlinkCheckTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isBlinking)
+                return;
+
+            var now = DateTime.Now;
+            var windowKey = GetBlinkWindowKey(now);
+            if (windowKey == null)
+                return;
+            if (windowKey == _lastBlinkWindowKey)
+                return; // уже мигали в этом окне
+
+            var windowStart = GetWindowStart(now);
+            if (now >= windowStart && now <= windowStart.AddMinutes(1))
+            {
+                StartBlink(windowKey, windowStart.AddMinutes(1));
+            }
+        }
+
+        private void BlinkTimer_Tick(object sender, EventArgs e)
+        {
+            if (!_isBlinking)
+                return;
+
+            if (DateTime.Now >= _blinkEndTime)
+            {
+                StopBlink();
+                return;
+            }
+
+            // Тоггл цвета между фиолетовым и дефолтным
+            simpleButton2.BackColor = simpleButton2.BackColor == Color.MediumPurple
+                ? _buttonDefaultBackColor
+                : Color.MediumPurple;
+        }
+
+        private void StartBlink(string windowKey, DateTime endTime)
+        {
+            _isBlinking = true;
+            _blinkEndTime = endTime;
+            _lastBlinkWindowKey = windowKey;
+            _blinkTimer.Start();
+        }
+
+        private void StopBlink()
+        {
+            _blinkTimer.Stop();
+            _isBlinking = false;
+            simpleButton2.BackColor = _buttonDefaultBackColor;
+        }
+
+        private static string GetBlinkWindowKey(DateTime now)
+        {
+            if (IsInBlinkWindow(now))
+            {
+                return $"{now:yyyyMMdd}_{now.Hour}";
+            }
+            return null;
+        }
+
+        private static DateTime GetWindowStart(DateTime now)
+        {
+            if (now.Hour >= 15 && now.Hour < 17)
+                return new DateTime(now.Year, now.Month, now.Day, 16, 13, 0);
+            if (now.Hour >= 17)
+                return new DateTime(now.Year, now.Month, now.Day, 20, 0, 0);
+            // до 8 утра: окно предыдущего дня в 20:00 уже прошло, следующее — 8:00 сегодняшнего
+            return new DateTime(now.Year, now.Month, now.Day, 8, 0, 0);
+        }
+
+        private static bool IsInBlinkWindow(DateTime now)
+        {
+            var start8 = new DateTime(now.Year, now.Month, now.Day, 16, 8, 0);
+            var start20 = new DateTime(now.Year, now.Month, now.Day, 16, 7, 0);
+
+            return (now >= start8 && now <= start8.AddMinutes(1)) ||
+                   (now >= start20 && now <= start20.AddMinutes(1));
         }
 
         /// <summary>
@@ -698,6 +881,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 XtraMessageBox.Show(this, "Значение должно быть меньше запланированного.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            // Обновляем факт в текущей строке и в мастер-коллекции, чтобы статус пересчитался без полной перезагрузки
+            if (currentRow != null)
+            {
+                currentRow.pzvKol = qty;
+                var masterRow = _planPresenter.AllRows?.FirstOrDefault(r => r != null && r.pzvID == currentRow.pzvID);
+                if (masterRow != null)
+                    masterRow.pzvKol = qty;
+            }
             // Отобразим введённое значение в столбце факта (unbound)
             _view.SetRowCellValue(rowHandle, bandedGridColumn22, qty);
             _view.PostEditor();
@@ -772,6 +963,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
                 }
             }
+            else
+            {
+                // Нет табеля — просто обновим расчётные колонки
+                RefreshStatusColumns();
+            }
+
+            // Обновляем статус/процент после завершения операции
+            RefreshStatusColumns();
         }
 
         /// <summary>
@@ -958,6 +1157,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _adminToggle.CheckedChanged += async (s, e) => await ReloadCurrentTabAsync();
         }
 
+        private void InitAdminSettingsButton()
+        {
+            _adminSettingsButton = new Button
+            {
+                Text = "Админка",
+                AutoSize = true,
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Location = new Point(this.ClientSize.Width - 220, 5)
+            };
+            Controls.Add(_adminSettingsButton);
+            _adminSettingsButton.BringToFront();
+            _adminSettingsButton.Click += (s, e) => ShowAdminSettingsDialog();
+        }
+
         private void SetupStatusColumn()
         {
             // Индикатор в колонке статуса: часы факт / часы назначено
@@ -984,10 +1197,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             if (e.Row is KnitterPZVModel row)
             {
-                // часы назначено: pzvSek * pzvKolNazn / 3600
-                decimal assignedHours = (row.pzvSek * (decimal)(row.pzvKolNazn <= 0 ? row.pzvKol : row.pzvKolNazn)) / 3600m;
-                // часы выполнено: pzvSek * pzvKol / 3600
-                decimal doneHours = (row.pzvSek * (decimal)(row.pzvKol ?? 0)) / 3600m;
+                // Считаем статус по суммам часов из БД:
+                // bandedGridColumn26 (pzvChasNazn) и bandedGridColumn27 (pzvNChasi)
+                var machineKey = NormalizeMachineKey(row.kmlNumber);
+                var taskKey = KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad);
+                var rows = _planPresenter.AllRows?
+                    .Where(r =>
+                        r != null &&
+                        string.Equals(NormalizeMachineKey(r.kmlNumber), machineKey, StringComparison.OrdinalIgnoreCase) &&
+                        string.Equals(KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), taskKey, StringComparison.OrdinalIgnoreCase))
+                    .ToList() ?? new List<KnitterPZVModel>();
+
+                decimal assignedHours = rows.Sum(r => r.pzvChasNazn);
+                decimal doneHours = rows.Sum(r => r.pzvNChasi ?? 0m);
 
                 decimal percent = 0m;
                 if (assignedHours > 0)
@@ -1117,10 +1339,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // - закрытая смена: только неназначенные, ограничение 14ч
             // - открытая смена: назначенные на текущую смену, без лимита по часам
             // - админ: includeFinished=true (видит завершённые)
-            int? kwsId = isShiftOpen ? _currentShiftId : null;
-            bool onlyUnassigned = !isShiftOpen;
-            bool includeFinished = isAdmin;
-            decimal maxHours = isShiftOpen ? 240m : 14m;
+            int? kwsId = isShiftOpen ? _currentShiftId : 0;
+            //kwsId = isAdmin
+            bool onlyUnassigned = !isShiftOpen && !_showAllAssignedWhenClosed;
+            bool includeFinished = true;//isAdmin;
+            decimal maxHours = isShiftOpen ? 240m : _maxHoursClosedShift;
 
             var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
             _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);

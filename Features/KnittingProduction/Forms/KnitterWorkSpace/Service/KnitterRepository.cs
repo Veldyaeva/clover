@@ -35,7 +35,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
             // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
-            return await GetPlanByTabAsync(tab, kwsId: null, onlyUnassigned: true, includeFinished: false, maxHours: 14m);
+            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, includeFinished: false, maxHours: 14m);
         }
 
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool includeFinished, decimal maxHours)
@@ -235,7 +235,7 @@ SET pzvTab = @tab,
     pzvDateNaznTab = GETDATE(),
     pzvKolNazn = ISNULL(pzvKol, 0),
     pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
-    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
+    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2)) 
 WHERE pzvID IN @ids";
 
                     await connection.ExecuteAsync(sql, new { tab, ids });

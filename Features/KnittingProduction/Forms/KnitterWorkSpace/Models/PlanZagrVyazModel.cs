@@ -34,6 +34,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public DateTime? pzvDateEnd { get; set; }
         public int pzvKolNazn { get; set; }
         public decimal pzvChasNazn { get; set; }
+        public decimal? pzvNChasi { get; set; } // факт. часы из БД
         public int? pzvTab { get; set; }
         public int? n_pach { get; set; }
         //количество в пачке (или в рассчёте, хз)

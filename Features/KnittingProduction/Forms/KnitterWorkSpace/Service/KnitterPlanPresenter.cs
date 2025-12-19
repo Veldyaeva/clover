@@ -88,9 +88,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 var masterData = _byTaskMachine.Values.Select(list =>
                 {
                     var master = list.First();
-                    // Сумма часов факт (pzvKol * pzvSek / 3600) по деталям
-                    var sumHours = list.Sum(r => ((r.pzvKol ?? 0) * (double)r.pzvSek) / 3600d);
-                    master.pzvChasNazn = (decimal)Math.Round(sumHours, 2);
+                    // Часы назначено/факт берём из БД (pzvChasNazn, pzvNChasi), суммируем по операциям
+                    var assigned = list.Sum(r => (double)r.pzvChasNazn);
+                    var done = list.Sum(r => (double)(r.pzvNChasi ?? 0m));
+                    master.pzvChasNazn = (decimal)Math.Round(assigned, 2);
+                    master.pzvNChasi = (decimal)Math.Round(done, 2);
                     return master;
                 }).ToList();
                 bindingSource.DataSource = masterData;
