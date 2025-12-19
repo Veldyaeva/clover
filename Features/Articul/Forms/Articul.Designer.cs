@@ -1045,7 +1045,7 @@ namespace SewingProduction.Features.Articul
             pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxArticul.Name = "pictureBoxArticul";
             pictureBoxArticul.Size = new Size(261, 239);
-            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxArticul.TabIndex = 8;
             pictureBoxArticul.TabStop = false;
             // 
@@ -1286,7 +1286,7 @@ namespace SewingProduction.Features.Articul
             // grColKomplSostKod
             // 
             grColKomplSostKod.Caption = "Код";
-            grColKomplSostKod.FieldName = "Kod_k";
+            grColKomplSostKod.FieldName = "Kod_n";
             grColKomplSostKod.Name = "grColKomplSostKod";
             grColKomplSostKod.Visible = true;
             grColKomplSostKod.VisibleIndex = 0;
@@ -1360,7 +1360,7 @@ namespace SewingProduction.Features.Articul
             // grColNaborSostAg_naimen
             // 
             grColNaborSostAg_naimen.Caption = "Группа по ГОСТ";
-            grColNaborSostAg_naimen.FieldName = "Ag_naimen";
+            grColNaborSostAg_naimen.FieldName = "Ag_name_sokr";
             grColNaborSostAg_naimen.Name = "grColNaborSostAg_naimen";
             grColNaborSostAg_naimen.Visible = true;
             grColNaborSostAg_naimen.VisibleIndex = 0;
@@ -1403,7 +1403,7 @@ namespace SewingProduction.Features.Articul
             // grColNaborSostSostav
             // 
             grColNaborSostSostav.Caption = "Состав";
-            grColNaborSostSostav.FieldName = "SostSostav";
+            grColNaborSostSostav.FieldName = "Sostav";
             grColNaborSostSostav.Name = "grColNaborSostSostav";
             grColNaborSostSostav.Visible = true;
             grColNaborSostSostav.VisibleIndex = 5;
@@ -3750,7 +3750,7 @@ namespace SewingProduction.Features.Articul
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Articul";
             Text = "Справочник изделий";
-            FormClosing += Articul_FormClosing;
+            FormClosed += Articul_FormClosed;
             Load += Articul_Load;
             ((System.ComponentModel.ISupportInitialize)gridArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();

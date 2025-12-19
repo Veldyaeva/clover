@@ -72,23 +72,16 @@ namespace SewingProduction.Core
 
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
-                    try
-                    {
-                        splashScreen.Show();
-                        splashScreen.Update();
-                        Application.DoEvents();
+                    splashScreen.Show();
+                    splashScreen.Update();
+                    Application.DoEvents();
 
-                        SpMainForm mainForm = new SpMainForm();
-                        Thread.Sleep(2000);
-                        ThemeManager.LoadTheme();
-                        splashScreen.Close();
+                    SpMainForm mainForm = new SpMainForm();
+                    Thread.Sleep(2000);
+                    ThemeManager.LoadTheme();
+                    splashScreen.Close();
 
-                        Application.Run(mainForm);
-                    }
-                    catch (Exception ex)
-                    {
-                        try { _ = _logger.LogErrorAsync(ex, "Fatal in Application.Run"); } catch { }
-                    }
+                    Application.Run(mainForm);
                 }
             }
         }

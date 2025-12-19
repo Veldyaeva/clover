@@ -300,6 +300,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Features\Articul\Forms\Articul.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

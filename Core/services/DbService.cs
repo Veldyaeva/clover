@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Diagnostics;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,6 @@ using Dapper;
 using DevExpress.Mvvm.Native;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
-using Z.Dapper.Plus;
 
 namespace SewingProduction.Services
 {
@@ -24,6 +24,7 @@ namespace SewingProduction.Services
         private readonly DatabaseHelper _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger(); //убрала пока гибридный логгер, не хочу писать в базу
         private readonly FileLogger _logger = new FileLogger();
+        private readonly BulkHelper _bulkHelper = new BulkHelper();
 
         /// <summary>
         /// Инициализирует новый экземпляр dbService.
@@ -58,11 +59,16 @@ namespace SewingProduction.Services
         /// <returns>Список объектов типа T</returns>
         public async Task<List<T>> GetListAsync<T>(string query, object parameters)
         {
-            using (var connection = _dbHelper.GetConnection())
+            try
             {
-                var result = await connection.QueryAsync<T>(query, parameters);
-                return result.ToList();
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var result = await connection.QueryAsync<T>(query, parameters);
+                    return result.ToList();
+                }
             }
+            catch (Exception ex)
+            { return null; }
         }
 
         /// <summary>
@@ -375,7 +381,7 @@ namespace SewingProduction.Services
 
 
 
-        public async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, List<int> deletedIds)
+        /*public async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, List<int> deletedIds)
     where T : class, INewable, new()
         {
             var stopwatch = Stopwatch.StartNew();
@@ -405,12 +411,18 @@ namespace SewingProduction.Services
                 {
                     await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {newItems.Count}", "SaveListAsync");
                     bulkStopwatch.Restart();
-                    await connection.BulkInsertAsync(newItems);
+                    _bulkHelper.BulkInsert(connection, newItems, tableName, new[] { keyFieldName });
                     bulkStopwatch.Stop();
                 }
 
                 foreach (var item in newItems)
+                {
                     item.IsNew = false;
+                    if (item is IModifiable modifiableNew)
+                    {
+                        modifiableNew.IsModified = false;
+                    }
+                }
             }
 
             // 3. Обновление
@@ -420,14 +432,19 @@ namespace SewingProduction.Services
                 {
                     await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {existingItems.Count}", "SaveListAsync");
                     bulkStopwatch.Restart();
-                    await connection.BulkUpdateAsync(existingItems);
+                    _bulkHelper.BulkUpdate(connection, existingItems, tableName, new[] { keyFieldName });
                     bulkStopwatch.Stop();
+                }
+
+                foreach (var item in existingItems.OfType<IModifiable>())
+                {
+                    item.IsModified = false;
                 }
             }
 
             stopwatch.Stop();
             await _logger.LogEventAsync($"[{itemTypeName}] Finished saving. Total: {stopwatch.ElapsedMilliseconds} ms", "SaveListAsync");
-        }
+        }*/
 
         /// <summary>
         /// Удаляет сущность из указанной таблицы по идентификатору.

@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
+﻿using DevExpress.Skins;
 using DevExpress.Utils;
+using DevExpress.Utils.Drawing;
+using DevExpress.XtraDialogs.Adapters;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Skins;
+using DevExpress.XtraGrid.Views.BandedGrid;
+using DevExpress.XtraGrid.Views.BandedGrid.ViewInfo;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Extensions;
 using SewingProduction.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SewingProduction.Helpers
 {
@@ -498,6 +506,11 @@ namespace SewingProduction.Helpers
             gridView.RefreshData();
         }
 
+
+
+
+        #endregion
+        #region добавление строки Автофильтр для GridView
         public void AutoRowFilterConfig(GridView gridView, int showColFilter)
         {
             if (gridView == null) return;
@@ -522,7 +535,7 @@ namespace SewingProduction.Helpers
                     //column.OptionsFilter.AllowAutoFilter = true;
                     //column.OptionsFilter.AllowFilter = true;
                     column.OptionsFilter.AllowAutoFilter = true;
-                    column.OptionsFilter.AllowFilter = showColFilter == 1? true : false;
+                    column.OptionsFilter.AllowFilter = showColFilter == 1 ? true : false;
                     column.OptionsColumn.AllowSort = DefaultBoolean.False;
                     // Умная настройка условий фильтрации
                     SetColumnFilterCondition(column);
@@ -563,6 +576,302 @@ namespace SewingProduction.Helpers
             return type == typeof(int) || type == typeof(double) || type == typeof(decimal)
                    || type == typeof(float) || type == typeof(long) || type == typeof(short);
         }
+        #endregion
+        #region прорисовка подытогов в строках группировки BandedGridView
+        public void EnableGroupSummariesInGroupRow(BandedGridView view)
+        {
+            view.CustomDrawGroupRow -= View_CustomDrawGroupRow;
+            view.CustomDrawGroupRow += View_CustomDrawGroupRow;
+        }
+
+        private void View_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
+        {
+            var view = (BandedGridView)sender;
+            var viewInfo = view.GetViewInfo() as BandedGridViewInfo;
+            if (viewInfo == null)
+                return;
+
+            Rectangle rowRect = e.Bounds;
+
+            // ───────────────────────────────────────────────────
+            // ▶▶ 1. РИСУЕМ ФОН СТРОКИ ГРУППЫ КАК ЗАГОЛОВОК, НАТИВНО
+            // ───────────────────────────────────────────────────
+
+            // Берем skin и элемент Column Header
+            Skin skin = GridSkins.GetSkin(view.GridControl.LookAndFeel);
+            // Реальный элемент заголовка колонки
+            SkinElement headerElement = skin[GridSkins.SkinHeader];
+
+            if (headerElement == null)
+                headerElement = skin[GridSkins.SkinHeader];
+
+            if (headerElement != null)
+            {
+                var headerInfo = new SkinElementInfo(headerElement, rowRect);
+                // Используем ObjectPainter + SkinElementPainter.Default
+                using (var cache = new GraphicsCache(e.Graphics))
+                {
+                    ObjectPainter.DrawObject(cache, SkinElementPainter.Default, headerInfo);
+                }
+            }
+
+            // ───────────────────────────────────────────────────
+            // ▶▶ 2. Далее рисуем СТАНДАРТНЫЙ ТЕКСТ ГРУППЫ поверх фона
+            // ───────────────────────────────────────────────────
+
+            e.Appearance.BackColor = Color.Transparent;
+            e.Appearance.Options.UseBackColor = false;
+            e.Painter.DrawObject(e.Info);
+
+            // ───────────────────────────────────────────────────
+            // ▶▶ 3. Теперь рисуем ПОДИТОГИ под каждой колонкой
+            // ───────────────────────────────────────────────────
+
+            //int summaryHeight = rowRect.Height - 4;
+            //int offsetY = rowRect.Y + 2;
+            int top = rowRect.Top;           // верх строки группы
+            int bottom = rowRect.Bottom - 1; // -1, чтобы не вылезти за границу
+
+            foreach (BandedGridColumn col in view.VisibleColumns)
+            {
+                var summaryItem = view.GroupSummary
+                    .OfType<GridGroupSummaryItem>()
+                    .FirstOrDefault(s => s.FieldName == col.FieldName);
+
+                if (summaryItem == null)
+                    continue;
+
+                var colInfo = viewInfo.ColumnsInfo[col];
+                if (colInfo == null)
+                    continue;
+
+                Rectangle colRect = colInfo.Bounds;
+
+                //Rectangle cellRect = new Rectangle(
+                //    colRect.X - 1,
+                //    offsetY,
+                //    colRect.Width,
+                //    summaryHeight
+                //);
+                Rectangle cellRect = new Rectangle(
+                    colRect.X - 1,
+                    top - 1,
+                    colRect.Width,
+                    bottom - top + 1
+                );
+
+                object val = view.GetGroupSummaryValue(e.RowHandle, summaryItem);
+                if (val == null || val == DBNull.Value)
+                    continue;
+
+                string text = !string.IsNullOrEmpty(summaryItem.DisplayFormat)
+                    ? string.Format(summaryItem.DisplayFormat, val)
+                    : Convert.ToDecimal(val).ToString("n2");
+
+                // 1. Рисуем текст подытога
+                using (var sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center,
+                    Trimming = StringTrimming.EllipsisCharacter
+                })
+                {
+                    e.Graphics.DrawString(
+                        text,
+                        e.Appearance.Font,
+                        new SolidBrush(e.Appearance.ForeColor),
+                        cellRect,
+                        sf
+                    );
+                }
+
+                // 2. Тонкая светлая граница в стиле DevExpress
+                //Color borderColor = ControlPaint.LightLight(view.Appearance.HeaderPanel.BackColor);
+                Color borderColor = Color.FromArgb(80, ControlPaint.LightLight(view.Appearance.HeaderPanel.BackColor));
+
+                using (var pen = new Pen(borderColor))
+                {
+                    pen.Width = 1;
+                    e.Graphics.DrawRectangle(pen, cellRect);
+                }
+            }
+
+            e.Handled = true;
+        }
+        //public void EnableGroupSummariesInGroupRow(BandedGridView view)
+        //{
+        //    // 1. Делаем фон строки группы полностью таким же, как фон заголовка грида
+        //    view.Appearance.GroupRow.Assign(view.Appearance.HeaderPanel);
+
+        //    // 2. Подписываем кастомную отрисовку (только для подытогов!)
+        //    view.CustomDrawGroupRow -= View_CustomDrawGroupRowBandedGrid;
+        //    view.CustomDrawGroupRow += View_CustomDrawGroupRowBandedGrid;
+        //}
+        //private void View_CustomDrawGroupRowBandedGrid(object sender, RowObjectCustomDrawEventArgs e)
+        //{
+        //    var view = (BandedGridView)sender;
+        //    var viewInfo = view.GetViewInfo() as BandedGridViewInfo;
+        //    if (viewInfo == null)
+        //        return;
+
+        //    Rectangle rowRect = e.Bounds;
+
+        //    // 1. Рисуем стандартную строку группы (фон + стрелка + caption)
+        //    //    ФОН — уже автоматически как у заголовка!
+        //    e.Painter.DrawObject(e.Info);
+
+        //    // 2. Высота зоны подытогов
+        //    int summaryHeight = rowRect.Height - 4;
+        //    int offsetY = rowRect.Y + 2;
+
+        //    // 3. Рисуем подытоги под каждым столбцом
+        //    foreach (BandedGridColumn col in view.VisibleColumns)
+        //    {
+        //        var summaryItem = view.GroupSummary
+        //            .OfType<GridGroupSummaryItem>()
+        //            .FirstOrDefault(s => s.FieldName == col.FieldName);
+
+        //        if (summaryItem == null)
+        //            continue;
+
+        //        var colInfo = viewInfo.ColumnsInfo[col];
+        //        if (colInfo == null)
+        //            continue;
+
+        //        Rectangle colRect = colInfo.Bounds;
+
+        //        Rectangle cellRect = new Rectangle(
+        //            colRect.X,
+        //            offsetY,
+        //            colRect.Width,
+        //            summaryHeight
+        //        );
+
+        //        object val = view.GetGroupSummaryValue(e.RowHandle, summaryItem);
+        //        if (val == null || val == DBNull.Value)
+        //            continue;
+
+        //        string text = !string.IsNullOrEmpty(summaryItem.DisplayFormat)
+        //            ? string.Format(summaryItem.DisplayFormat, val)
+        //            : Convert.ToDecimal(val).ToString("n2");
+
+        //        // фон НЕ рисуем — он уже как у заголовка
+        //        // рисуем только текст
+
+        //        using (var sf = new StringFormat
+        //        {
+        //            Alignment = StringAlignment.Center,
+        //            LineAlignment = StringAlignment.Center,
+        //            Trimming = StringTrimming.EllipsisCharacter
+        //        })
+        //        {
+        //            e.Graphics.DrawString(
+        //                text,
+        //                e.Appearance.Font,
+        //                new SolidBrush(e.Appearance.ForeColor),
+        //                cellRect,
+        //                sf
+        //            );
+        //        }
+        //    }
+
+        //    e.Handled = true;
+
+        //    //var view = (BandedGridView)sender;
+
+        //    //var viewInfo = view.GetViewInfo() as BandedGridViewInfo;
+        //    //if (viewInfo == null)
+        //    //    return;
+
+        //    //Rectangle rowRect = e.Bounds;
+
+        //    //// Берём оформление заголовка грида
+        //    //var headerAp = view.Appearance.HeaderPanel;
+        //    //Color backColor = e.Appearance.BackColor;
+        //    //Color borderColor = e.Appearance.BorderColor;
+        //    //// 1. Полностью ЗАЛИВАЕМ фон строки группы нужным цветом
+        //    ////    (e.Appearance.BorderColor используется как фон)
+        //    //using (var bg = new SolidBrush(backColor))
+        //    //    e.Graphics.FillRectangle(bg, rowRect);
+        //    ////using (var bg = new SolidBrush(view.Appearance.GroupFooter.BackColor))
+        //    ////    e.Graphics.FillRectangle(bg, rowRect);
+        //    //// просто однотонный фон:
+        //    ////using (var bg = new SolidBrush(headerAp.BackColor))
+        //    ////    e.Graphics.FillRectangle(bg, rowRect);
+
+        //    //// 2. Рисуем стандартный текст группы (стрелочка, caption)
+        //    ////    Но БЕЗ фона, т.к. фон мы уже залили сами
+        //    //e.Appearance.BackColor = Color.Transparent;
+
+        //    //e.Painter.DrawObject(e.Info);
+
+        //    //// 3. Высота "ячейки подытога" внутри group row
+        //    //int summaryHeight = rowRect.Height - 4;
+        //    //int offsetY = rowRect.Y + 2;
+
+        //    //// 4. Перебираем видимые колонки
+        //    //foreach (BandedGridColumn col in view.VisibleColumns)
+        //    //{
+        //    //    var summaryItem = view.GroupSummary
+        //    //        .OfType<GridGroupSummaryItem>()
+        //    //        .FirstOrDefault(s => s.FieldName == col.FieldName);
+
+        //    //    if (summaryItem == null)
+        //    //        continue;
+
+        //    //    var colInfo = viewInfo.ColumnsInfo[col];
+        //    //    if (colInfo == null)
+        //    //        continue;
+
+        //    //    Rectangle colRect = colInfo.Bounds;
+
+        //    //    Rectangle cellRect = new Rectangle(
+        //    //        colRect.X,
+        //    //        offsetY,
+        //    //        colRect.Width,
+        //    //        summaryHeight
+        //    //    );
+
+        //    //    object val = view.GetGroupSummaryValue(e.RowHandle, summaryItem);
+        //    //    if (val == null || val == DBNull.Value)
+        //    //        continue;
+
+        //    //    string text;
+        //    //    if (!string.IsNullOrEmpty(summaryItem.DisplayFormat))
+        //    //        text = string.Format(summaryItem.DisplayFormat, val);
+        //    //    else
+        //    //        text = Convert.ToDecimal(val).ToString("n2");
+
+        //    //    // ✔ Фон ячеек НЕ ЗАЛИВАЕМ — оставляем как фон всей group row
+
+        //    //    // (опционально): тонкая рамка разделения колонок
+        //    //    //using (var pen = new Pen(Color.FromArgb(90, Color.Black)))
+        //    //    //    e.Graphics.DrawRectangle(pen, cellRect);
+        //    //    using (var pen = new Pen(Color.FromArgb(90, borderColor)))
+        //    //        e.Graphics.DrawRectangle(pen, cellRect);
+        //    //    //using (var pen = new Pen(Color.FromArgb(90, headerAp.BackColor)))
+        //    //    //    e.Graphics.DrawRectangle(pen, cellRect);
+
+        //    //    // Текст значения
+        //    //    using (var sf = new StringFormat
+        //    //    {
+        //    //        Alignment = StringAlignment.Center,
+        //    //        LineAlignment = StringAlignment.Center,
+        //    //        Trimming = StringTrimming.EllipsisCharacter
+        //    //    })
+        //    //    {
+        //    //        e.Graphics.DrawString(
+        //    //            text,
+        //    //            e.Appearance.Font,
+        //    //            new SolidBrush(e.Appearance.ForeColor),
+        //    //            cellRect,
+        //    //            sf
+        //    //        );
+        //    //    }
+        //    //}
+
+        //    //e.Handled = true;
+        //}
         #endregion
     }
 }

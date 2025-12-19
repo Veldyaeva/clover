@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Core\helpers\GridOverlayLoader — копия.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\Form2.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\Form2.Designer.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\KnitterDataService.cs" />
@@ -261,7 +262,6 @@
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NLog" Version="6.0.5" />
-    <PackageReference Include="Z.Dapper.Plus" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -318,7 +318,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

@@ -69,13 +69,43 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <param name="nomListJson">JSON-массив номеров задания/номенклатуры.</param>
         /// <param name="vyazPodrKod">Код вязального подразделения.</param>
         /// <returns>Список операций плана.</returns>
-        public Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod) => _repo.GetPlanZagrVyazByPachListAsync(nomListJson, vyazPodrKod);
+        //public Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod) => _repo.GetPlanZagrVyazByPachListAsync(nomListJson, vyazPodrKod);
 
         /// <summary>
         /// При неполном выполнении: разделяет запись на “факт” и “остаток”.
         /// Должно создать дополнительную запись в плановой таблице с оставшимся количеством.
         /// </summary>
-        public Task<IReadOnlyList<int>> SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
+        public Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty) => _repo.SplitPzvByFactAsync(pzvId, factQty);
+
+		/// <summary>
+		/// Универсальный вызов PZV_Split с указанием режима и количества.
+		/// </summary>
+		public Task<IReadOnlyList<PzvSplitResult>> SplitPzvAsync(int pzvId, int mode, int qtyFact) => _repo.SplitPzvByModeAsync(pzvId, mode, qtyFact);
+
+        /// <summary>
+        /// Фиксирует начало смены в таблице ACE.dbo.knitWorkingShift и возвращает kwsID.
+        /// </summary>
+        public Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum) => _repo.StartWorkingShiftAsync(tabStart, kmaId, kmaNum, kmsId: 0);
+
+        /// <summary>
+        /// Фиксирует завершение смены (kwsDateEnd/kwsTabEnd) по kwsID.
+        /// </summary>
+        public Task EndWorkingShiftAsync(int shiftId, int tabEnd) => _repo.EndWorkingShiftAsync(shiftId, tabEnd);
+
+        /// <summary>
+        /// Возвращает id зоны и номер зоны для табельного номера.
+        /// </summary>
+        public Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab) => _repo.GetZoneByTabAsync(tab);
+
+		/// <summary>
+		/// Возвращает открытую смену по табелю, если есть (ID и дата начала).
+		/// </summary>
+		public Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab) => _repo.GetOpenShiftByTabAsync(tab);
+
+		/// <summary>
+		/// Проставляет pzvKwsID для списка операций плана.
+		/// </summary>
+		public Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId) => _repo.UpdatePzvKwsIdAsync(pzvIds, kwsId);
     }
 }
 

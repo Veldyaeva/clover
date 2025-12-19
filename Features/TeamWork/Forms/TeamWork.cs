@@ -145,12 +145,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (customGridControl3 != null) customGridControl3.DataSource = _normRaszBindingSourceArticles;
 
             //// Инициализация для NormRask на вкладке Articles
-            //_normRaskListArticles = new BindingList<NormRask>();
-            //_normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
-            //if (customGridControl2 != null) 
+            _normRaskListArticles = new BindingList<NormRask>();
+            _normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
+            if (customGridControl2 != null)
             //{
-            //    customGridControl2.DataSource = _normRaskBindingSourceArticles;
-            //    _logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
+                customGridControl2.DataSource = _normRaskBindingSourceArticles;
+            //}
+                //_logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
 
             //    // Verify the grid view configuration
             //    if (customGridControl2.MainView is GridView gridView)
@@ -167,10 +168,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             //    _logger?.LogWarningAsync("Constructor: customGridControl2 is null, cannot set DataSource", "TeamWork.Constructor");
             //}
 
-            //// Инициализация для NormKont на вкладке Articles
-            //_normKontListArticles = new BindingList<NormKont>();
-            //_normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
-            //if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
+            // Инициализация для NormKont на вкладке Articles
+            _normKontListArticles = new BindingList<NormKont>();
+            _normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
+            if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
 
             InitializeGridSettings();
             SetupDateUpdateColumn();
@@ -387,7 +388,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     throw new InvalidOperationException("Критические компоненты формы не инициализированы.");
                 }
-                await LoadWorkDivisions();
+                // создаём первый CTS для начальной загрузки,
+                // чтобы его можно было отменить при закрытии формы / смене вкладки
+                var ct = StartNewLoadToken();
+                await LoadWorkDivisions(ct);
                 // После загрузки восстановим фокус, если есть сохранённый AnnID
                 if (_lastFocusedAnnId > 0)
                 {
@@ -540,16 +544,17 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Отменяем все активные загрузки на предыдущей вкладке
             CancelAllLoads();
-
+            // для новой вкладки создаём НОВЫЙ токен
+            var token = StartNewLoadToken();
             switch (e.Page.Name)
             {
                 case "TabPage1":
-                    await LoadWorkDivisions();
+                    await LoadWorkDivisions(token);
                     break;
 
                 case "xtraTabPageArticles":
                     // Загружаем данные для вкладки артикулов с токеном отмены
-                    await CurrentWorks_Load(_loadCts.Token);
+                    await CurrentWorks_Load(token);//_loadCts.Token);
                     break;
 
                 default:
@@ -825,6 +830,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
+            CancelCurrentLoad();
             // Отписываемся от событий
             if (ANNgridView != null)
             {
@@ -836,7 +842,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             _secondsUpdateManager?.CancelUpdate();
             _secondsUpdateManager?.Dispose();
             SaveGridSettings();
+
             await _logger.LogEventAsync("Форма TeamWork закрыта", "FormClosing");
+            GC.Collect();
         }
 
         /// <summary>
@@ -1029,6 +1037,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Удаляем созданную запись из списка и базы
                     _bindingList.Remove(CopyedWorkDivisionShell);
                     _bindingSource.ResetBindings(false);
+                    await _artNormService.DeleteRelatedNormTables(newAnnId);
                     await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
                 }
             };
@@ -1550,9 +1559,61 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        private async Task ReloadActiveTabAsync()
         {
+            var tabControl = xtraTabControl1;
+            if (tabControl == null)
+            {
+                return;
+            }
 
+            var activePage = tabControl.SelectedTabPage;
+            if (activePage == null)
+            {
+                return;
+            }
+
+            CancelAllLoads();
+
+            // Начинаем НОВУЮ загрузку → старый _loadCts отменится и.dispose-ится,
+            // создастся новый, а мы заберём из него токен
+            var ct = StartNewLoadToken();
+            try
+            {
+                switch (activePage.Name)
+                {
+                    case "TabPage1":
+                        await LoadWorkDivisions(ct);
+                        break;
+                    case "xtraTabPageArticles":
+                        await CurrentWorks_Load(ct);
+                        break;
+                }
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                // Перезагрузка вкладки была отменена (например, вкладку опять сменили) – это ок
+            }
+        }
+
+        private async void xtraTabControl1_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        {
+            try
+            {
+                await ReloadActiveTabAsync();
+            }
+            catch (OperationCanceledException)
+            {
+                // проглатываем отмену как ожидаемый сценарий
+            }
+            catch (Exception ex)
+            {
+                if (_logger != null)
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при обновлении данных по кнопке вкладки");
+                }
+                MessageBox.Show($"Не удалось обновить данные: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Открыть журнал изменений разделения труда (art_norm_n_updLog) для выбранного AnnID
@@ -1604,6 +1665,34 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 _logger?.LogErrorAsync(ex, "Ошибка при открытии формы AnnLog");
                 MessageBox.Show($"Не удалось открыть журнал: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        /// <summary>Начинаем новую загрузку: отменяем старую, создаём новый CTS и возвращаем токен</summary>
+        private CancellationToken StartNewLoadToken()
+        {
+            var old = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+            if (old != null)
+            {
+                try { old.Cancel(); }
+                catch { /* игнор */ }
+                finally { old.Dispose(); }
+            }
+
+            return _loadCts.Token;
+        }
+
+        
+        /// Вызываем, когда надо просто грохнуть текущую загрузку
+        /// (смена вкладки, закрытие формы и т.п.)
+        private void CancelCurrentLoad()
+        {
+            var old = Interlocked.Exchange(ref _loadCts, null);
+            if (old != null)
+            {
+                try { old.Cancel(); }
+                catch { /* игнор */ }
+                finally { old.Dispose(); }
             }
 
         }
