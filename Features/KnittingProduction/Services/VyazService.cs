@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
@@ -325,11 +326,16 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = '{pachList}', @xVyazPodrKod = {podrID}";
+                    string query = $"EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = '{pachList}', @xVyazPodrKod = {podrID}, @xResulType = 0";
 
                     var result = await connection.QueryAsync<PZVOperList>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных GetPlanZagrVyazByPachList");
+                return null;
             }
             catch (Exception ex)
             {
