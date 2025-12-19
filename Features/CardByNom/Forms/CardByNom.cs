@@ -2463,7 +2463,7 @@ namespace SewingProduction
 
             var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
             //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
-            
+
             if (selectedRow != null && selectedRow.RzuNom != 0 && Convert.ToInt32(selectedRow.PsaNomZad) != 0)
             {
                 report1.Parameters["_nomZad"].Value = selectedRow.PsaNomZad;
@@ -2479,6 +2479,11 @@ namespace SewingProduction
             {
                 MessageBox.Show("Не выбран расчет для печати");
             }
+        }
+
+        private void tbNomPach_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -12,6 +12,13 @@ using System.IO;
 using System.ServiceModel.Channels;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Core.Class;
+using SewingProduction.Helpers;
+using SewingProduction.Services;
+using SewingProduction.Features.CuttingProduction.Services;
+using SewingProduction.Features.CuttingProduction.Models;
+using SewingProduction.Extensions;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
 
 namespace SewingProduction.Features.CuttingProduction.Forms
 {

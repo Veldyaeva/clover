@@ -14,6 +14,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using Microsoft.Extensions.DependencyInjection;
 using SewingProduction.Core;
+using SewingProduction.Features.Tabel.Forms;
 
 namespace SewingProduction
 {
@@ -248,7 +249,7 @@ namespace SewingProduction
 
         private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                OpenForm(new CuttingForm(), sender);
+            OpenForm(new CuttingForm(), sender);
         }
         private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -259,6 +260,11 @@ namespace SewingProduction
         {
             var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
             OpenForm(form, sender);
+        }
+
+        private void табельToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TabelMain(), sender);
         }
     }
 }

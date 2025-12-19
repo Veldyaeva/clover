@@ -139,6 +139,9 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\SpisokConnect.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\TabelMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +179,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\AllDistribution.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AllRole.cs">
@@ -287,6 +293,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\VshivkiReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>

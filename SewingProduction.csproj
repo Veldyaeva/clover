@@ -305,8 +305,6 @@
     <Folder Include="Features\SockProduction\Models\" />
     <Folder Include="Features\SockProduction\Services\" />
     <Folder Include="Features\Sprav\Helpers\" />
-    <Folder Include="Features\Tabel\Models\" />
-    <Folder Include="Features\Tabel\Services\" />
   </ItemGroup>
 
   <ItemGroup>
