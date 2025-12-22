@@ -169,7 +169,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 if (missingKmlIds.Length > 0)
                 {
-                    const string kmlQuery = @"SELECT kmlID, kmlNumber, koefObServ, name_class FROM ACE.dbo.knitMachineList_view WHERE kmlID IN @ids";
+                    const string kmlQuery = //@"SELECT kmlID, kmlNumber, koefObServ, name_class FROM ACE.dbo.knitMachineList_view WHERE kmlID IN @ids";
+                    @"Select kwsmlKmlId as kmlId, kmlnumber, koefObServ, nameVyazClass as name_class from ace.knitWorkingShiftStatement where kwsmlKmlId in @ids";
                     var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds }))
                         .ToDictionary(x => x.kmlID, x => x);
 

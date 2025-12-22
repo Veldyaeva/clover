@@ -1006,7 +1006,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 					// создаём отрицательную строку mode = 2
 					newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
 				}
-				else if (qty < defaultQty)
+				else if (qty <= defaultQty)
 				{
 					// Факт меньше запланированного — mode = 1 c qtyFact
 					newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
