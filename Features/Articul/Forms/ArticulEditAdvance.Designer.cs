@@ -198,7 +198,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
-            customSimpleButton2 = new CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
@@ -377,7 +376,6 @@ namespace SewingProduction.Features.Articul.Forms
             chbArh.TabIndex = 3;
             chbArh.Text = "Архив";
             chbArh.UseVisualStyleBackColor = true;
-            chbArh.CheckedChanged += chbArh_CheckedChanged;
             // 
             // chbKombIzd
             // 
@@ -2049,6 +2047,7 @@ namespace SewingProduction.Features.Articul.Forms
             lookUpGost.Size = new System.Drawing.Size(530, 22);
             lookUpGost.StyleController = dataLayoutCommonArticul;
             lookUpGost.TabIndex = 47;
+            lookUpGost.EditValueChanged += lookUpGost_EditValueChanged;
             // 
             // customSearchLookUpEdit1View
             // 
@@ -2461,30 +2460,11 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem25.Size = new System.Drawing.Size(153, 24);
             layoutControlItem25.TextVisible = false;
             // 
-            // customSimpleButton2
-            // 
-            customSimpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customSimpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton2.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customSimpleButton2.Appearance.Options.UseBackColor = true;
-            customSimpleButton2.Appearance.Options.UseFont = true;
-            customSimpleButton2.Appearance.Options.UseForeColor = true;
-            customSimpleButton2.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            customSimpleButton2.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton2.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton2.Location = new System.Drawing.Point(1246, 78);
-            customSimpleButton2.Name = "customSimpleButton2";
-            customSimpleButton2.Size = new System.Drawing.Size(75, 25);
-            customSimpleButton2.TabIndex = 47;
-            customSimpleButton2.Text = "customSimpleButton2";
-            // 
             // ArticulEditAdvance
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1609, 846);
-            Controls.Add(customSimpleButton2);
             Controls.Add(dataLayoutCommonArticul);
             Controls.Add(customSimpleButton1);
             Controls.Add(groupBox2);
@@ -2498,6 +2478,7 @@ namespace SewingProduction.Features.Articul.Forms
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "ArticulEditAdvance";
             Text = "ArticulEditAdvance";
+            FormClosing += ArticulEditAdvance_FormClosing;
             Load += ArticulEditAdvance_Load;
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).EndInit();
@@ -2733,6 +2714,5 @@ namespace SewingProduction.Features.Articul.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraEditors.CheckEdit checkEdit1;
-        private CustomSimpleButton customSimpleButton2;
     }
 }

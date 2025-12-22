@@ -6,7 +6,7 @@ using SewingProduction.Interfaces;
 
 namespace SewingProduction.Core.Models
 {
-    public class ArticulModel : INewable, IModifiable, IDeletable, INotifyPropertyChanged
+    public class ArticulModel : INewable, IModifiable, IDeletable, INotifyPropertyChanged, ISupportInitialize
     {
         //private int _kod;
         //private string _grup;
@@ -24,18 +24,20 @@ namespace SewingProduction.Core.Models
         //    get => _grup;
         //    set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(grup)); } }
         //}
-        public string Ko { get; set; }
+        [NotMapped]public string Ko { get; set; }
+        [NotMapped] public string baz { get; set; }
+        [NotMapped] public string Kodd { get; set; }
         public string Kod { get; set; }
-        [NotMapped]
-        public string Kodd { get; set; }
         public string Grup { get; set; }
+        
         private string _articul;
         public string Articul { get=>_articul; set
             { 
                 if (_articul != value) 
                 { 
-                    _articul = value; 
-                    IsDirty = true;
+                    _articul = value;
+                    if (!_isInitializing)
+                        IsModified = true;
                 }
             }
                  }
@@ -129,8 +131,8 @@ namespace SewingProduction.Core.Models
         public int Sposob_up { get; set; }
         public int Id_country { get; set; }
         public int Old_prch { get; set; }
-        public decimal Sek_vyaz70 { get; set; }
-        public decimal Sek_vyaz3 { get; set; }
+        public int Sek_vyaz70 { get; set; }
+        public int Sek_vyaz3 { get; set; }
         public decimal Koef_d { get; set; }
         public int St_nds { get; set; }
         public int Upd_razm { get; set; }
@@ -142,11 +144,10 @@ namespace SewingProduction.Core.Models
             set { 
             if (_arh != value) 
                 { 
-                    _arh = value; 
-                    IsDirty = true;
+                    _arh = value;
+                    IsModified = true;
                 }
             } 
-        
         }
        
         public int Nds { get; set; }
@@ -210,15 +211,13 @@ namespace SewingProduction.Core.Models
         public int Tgm_id_n { get; set; }
         public DateTime? Dateutvkk { get; set; }
         public decimal Sum_zarpl { get; set; }
-        public decimal Sum_dopopl { get; set; }
-        public decimal Sum_strvznos { get; set; }
-        public decimal Sum_sebraskr { get; set; }
-        public decimal Sum_komplnum { get; set; }
+        public decimal? Sum_dopopl { get; set; }
+        public decimal? Sum_strvznos { get; set; }
+        public decimal? Sum_sebraskr { get; set; }
+        public decimal? Sum_komplnum { get; set; }
         public decimal Sek_vyaz57 { get; set; }
         public decimal Sek_vyaz18 { get; set; }
-        public int Annid { get; set; }
-
-        public bool IsDirty { get; private set; }
+        public int? Annid { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -230,5 +229,17 @@ namespace SewingProduction.Core.Models
         public bool IsNew { get; set; } = false;
         [NotMapped]
         public bool IsDeleted { get; set; } = false;
+
+        private bool _isInitializing;
+        // ISupportInitialize
+        public void BeginInit() => _isInitializing = true;
+
+        public void EndInit()
+        {
+            _isInitializing = false;
+            IsModified = false;
+        }
+
+
     }
 }

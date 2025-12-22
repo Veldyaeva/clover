@@ -1,8 +1,10 @@
 ﻿using DevExpress.XtraEditors;
 using SewingProduction.Core.Class;
+using SewingProduction.Core.helpers;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -11,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,8 +24,10 @@ namespace SewingProduction.Features.Articul.Forms
 {
     public partial class ArticulEditAdvance : CustomForm
     {
-        private DatabaseHelper _dbHelperAce;
+        private DatabaseHelper _dbHelper;
         private DbService _dbService;
+        private static BulkHelper _bulkHelper;
+
         //private ArticulDataService _articulDataService;
         private ArticulEditAdvanceService _articulEdAdvDataService;
 
@@ -32,8 +37,10 @@ namespace SewingProduction.Features.Articul.Forms
 
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
+        private BindingSource _bindingSourceArtCommonSave;
 
-        
+
+
         private List<GostModel> _gosts;
         //private BindingSource _bindingSourceGosts;
 
@@ -42,8 +49,10 @@ namespace SewingProduction.Features.Articul.Forms
 
         public ArticulEditAdvance(UserClass user, string kodd, string articul) : base(user)
         {
-            _dbHelperAce = new DatabaseHelper();
-            _dbService = new DbService(_dbHelperAce);
+            _dbHelper = new DatabaseHelper();
+            _dbService = new DbService(_dbHelper);
+            _bulkHelper = new BulkHelper();
+
             _articulEdAdvDataService = new ArticulEditAdvanceService();
 
             InitializeComponent();
@@ -52,13 +61,11 @@ namespace SewingProduction.Features.Articul.Forms
             this.Text = articul + " " + kodd;
             ThemeManager.UpdateTheme(this);
 
-            //_artKodRazm = new BindingList<ArticulModel>();
-
             _bindingSourceArtKod = new BindingSource { };
             if (gridEditAdRazm != null) gridEditAdRazm.DataSource = _bindingSourceArtKod;
 
             _bindingSourceArtCommon = new BindingSource { };
-            //_bindingSourceGosts = new BindingSource {  };
+            _bindingSourceArtCommonSave = new BindingSource { };
 
         }
 
@@ -67,10 +74,9 @@ namespace SewingProduction.Features.Articul.Forms
             //загрузка списка размеров 
 
             _bindingSourceArtKod.DataSource = await _articulEdAdvDataService.GetArtByKoddAsync(this._kodd);
-
             _gosts = await _articulEdAdvDataService.GetGostNaborAsync();
-            
-            lookUpGost.EditValueChanged += (s, e) => UpdateOpi();
+
+            //lookUpGost.EditValueChanged += (s, e) => UpdateOpi();
 
             //_bindingSourceGosts.DataSource = await _articulEdAdvDataService.GetBLGostNaborAsync();
 
@@ -84,39 +90,43 @@ namespace SewingProduction.Features.Articul.Forms
                 //загрузка перечня кодов из справочника общая информация
                 
                 _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
-                dataLayoutCommonArticul.DataSource = _bindingSourceArtCommon;
+
+                //_bindingSourceArtCommonSokr.DataSource = await _articulEdAdvDataService.GetCommonSokrArtByKoddAsync(this._kodd);
+
+                //dataLayoutCommonArticul.DataSource = _bindingSourceArtCommon;
 
 
                 #region заполнение блока основных данных артикула
 
-                txbArticul.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Articul), true);
-                txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Mod), true);
+                txbArticul.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Articul), true);
+                //txbArticul.DataBindings.Add("Text", _bindingSourceArtCommonSokr, nameof(SpArticulSaveAdvance.Articul), true);
+
+                txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Mod), true);
 
                 lookUpGost.Properties.DataSource = _gosts;
                 lookUpGost.Properties.DisplayMember = nameof(GostModel.Name_gost);
                 lookUpGost.Properties.ValueMember = nameof(GostModel.Id_gost);
                 lookUpGost.Properties.NullText = "Не выбрано";
-                lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Id_gost), true, DataSourceUpdateMode.OnPropertyChanged);
+                lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true, DataSourceUpdateMode.OnPropertyChanged);
                 //инициализация описания госта
                 UpdateOpi();
 
-                chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Arh), true, DataSourceUpdateMode.OnPropertyChanged);
+                chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true, DataSourceUpdateMode.OnPropertyChanged);
                 //отделка
-                chbIsUpak.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Is_upak), true);
-                chbIsFurnit.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Is_furnit), true);
+                chbIsUpak.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Is_upak), true);
+                chbIsFurnit.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Is_furnit), true);
 
-                chkP.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.P), true);
-                chkV.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.V), true);
-                chkBus.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Bus), true);
-                chkStra.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Stra), true);
-                chkPres.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.P_pres), true);
+                chkP.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.P), true);
+                chkV.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.V), true);
+                chkBus.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Bus), true);
+                chkStra.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Stra), true);
+                chkPres.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.P_pres), true);
 
 
 
-                txbSost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Sost), true);
-                txbSost2.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Sost2), true);
-                txbSost3.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(SpArticulPreviewModel.Sost3), true);
-
+                txbSost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost), true);
+                txbSost2.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost2), true);
+                txbSost3.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost3), true);
 
 
                 #endregion
@@ -127,7 +137,7 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
-        
+
 
         private void UpdateOpi()
         {
@@ -139,21 +149,76 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void customSimpleButton1_Click(object sender, EventArgs e)
         {
-            /// <summary>
-            /// Обновляет одно поле в таблице по заданному условию.
-            /// </summary>
-            /// <param name="tableName">Имя таблицы</param>
-            /// <param name="fieldName">Имя обновляемого поля</param>
-            /// <param name="newValue">Новое значение</param>
-            /// <param name="whereField">Поле условия (например, "AnnId")</param>
-            /// <param name="whereValue">Значение условия</param>
-            // public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereField, object whereValue)
+            try
+            {
+                _bindingSourceArtCommon.EndEdit();
+
+                List<ArticulModel> filteredList = _bindingSourceArtCommon.List
+                    .OfType<ArticulModel>()
+                    .Where(x => x?.IsModified == true)
+                    .ToList();
+                if (filteredList.Count > 0)
+                {
+                    using (SqlConnection connection = _dbHelper.GetConnection())
+                    {
+                        _bulkHelper.BulkAllDataUpdate<ArticulModel>(connection, filteredList, "sp_articul", new[] { "kod" });
+
+                    }
+                }
+
+                // деление через сторно, когда операция уже выполнена и нужно изменить количество
+                // 1) пометить исходную строку
+                currentItem.IsModified = true;
+                int xKolNew = Convert.ToInt32(e.Value);
+                int xKoldelta = currentItem.olKolCopy - Convert.ToInt32(e.Value);
+                currentItem.olKol = currentItem.olKolCopy;  // обновлённое значение
+                currentItem.olPzvDivision = 1;
+
+                // 2) создать копию с исключениями и проставить нужные поля
+                // строка для отрицательного значения
+                var newItemNeg = ObjectCloneHelper.CloneWithExclusions(currentItem, clone =>
+                {
+                    clone.olPzvIDParent = currentItem.olPzvID;
+                    clone.olPzvDivision = 1;
+                    clone.IsNew = true;
+                    clone.IsModified = false;
+                    // 👇 сбрасываем "копию" перед присвоением нового olKol
+                    clone.ResetOlKolCopy();
+
+                    // присваиваем новое значение
+                    //clone.olKol = Convert.ToInt32(e.Value);
+                    clone.olKol = -1 * xKoldelta;  // новое значение в копии
+                                                   //clone.olSekAll = Math.Round((clone.olKol * clone.olSekEd) / 3600m, 2);
+                    clone.olPzvNChasi = (int)Math.Round((clone.olKol * clone.olSekEd) / 3600m);
+                    // 👇 фиксируем новое значение как "оригинал" для этой строки
+                    clone.RebaselineOlKolCopy();
 
 
+                }, "olPzvID", "olKol", "olKolCopy", "olNChasi", "IsModified", "IsNew", "olPzvDivision", "olPzvIDParent");
+                // 3) добавить биндинги
+                _pZVOperListByPachListBindingSource.Add(newItemNeg);
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при сохранении изменений артикула");
+                XtraMessageBox.Show("Ошибка при сохранении изменений артикула: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            }
+
+
+        private void lookUpGost_EditValueChanged(object sender, EventArgs e)
+        {
+            UpdateOpi();
         }
 
-        private void chbArh_CheckedChanged(object sender, EventArgs e)
+        private void ArticulEditAdvance_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _gosts = null;
 
         }
     }
