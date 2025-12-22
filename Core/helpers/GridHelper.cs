@@ -887,9 +887,9 @@ namespace SewingProduction.Helpers
         public void GoToRowById<T, TKey>(
             GridView view,
             BindingSource bindingSource,
-            Func<T, TKey> idSelector,
-            TKey idValue,
-            string? columnFieldName = null
+            Func<T, TKey> idSelector,       // поле идентификатора для позиционирования
+            TKey idValue,                   // значение идентификатора
+            string? columnFieldName = null  // колонка, на которую нужно перенести фокус
 )
         {
             if (view == null || bindingSource == null)

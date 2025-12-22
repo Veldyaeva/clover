@@ -592,7 +592,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    }
                 //    if (level == 1) // ФИО
                 //    {
-                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ";
+                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ({view.GetGroupRowValue(e.RowHandle, view.Columns["kwsTabStart"])}) ";
                 //    }
                 //    if (level == 2) // тип данных
                 //    {
@@ -4411,7 +4411,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void перенестиВДругуюЗонуToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("111");
+            //MessageBox.Show("111");
         }
 
         private void advBandedGridViewSmenZadany_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
@@ -4471,7 +4471,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             int xKodOb = (row as SmenZadanyVyaz).kodOb;
             int xLongRep = (row as SmenZadanyVyaz).longRep;
 
-            MessageBox.Show($"Перенос kmlID {xKmlID} kodOb | {xKodOb} | в зону kmaID {_kmaID} | kwsID {_kwsID}");
+            //MessageBox.Show($"Перенос kmlID {xKmlID} kodOb | {xKodOb} | в зону kmaID {_kmaID} | kwsID {_kwsID}");
 
             string query = $"INSERT INTO knitWorkingShiftMachineListNew (kwsmlDateAdd, kwsmlCompAdd, kwsmlKwsID, kwsmlKmlID, kwsmlKodOb, kiwsmlLongRep) " +
                 $"VALUES (DEFAULT, DEFAULT, {_kwsID}, {xKmlID}, {xKodOb}, {xLongRep})";
@@ -4508,6 +4508,39 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridControlSmenZadany
             );
 
+            Application.Idle += ExpandGroupsOnIdle;
+
+            ////_gridHelper.GoToRowById<SmenZadanyVyaz, int>(gridViewSmenZadany, _smenZadanyVyazBindingSource, x => x.kwsmlKmlID, xKmlID);
+            //gridViewSmenZadany.RefreshData();
+            //if (_rowHandle >= 0 && gridViewSmenZadany.DataRowCount > 0)
+            //{
+            //    gridViewSmenZadany.FocusedRowHandle = _rowHandle;
+            //}
+
+            gridViewSmenZadany.RefreshData();
+
+            gridViewSmenZadany.GridControl.BeginInvoke(new Action(() =>
+            {
+                
+                if (_rowHandle == 0 && gridViewSmenZadany.DataRowCount == 1)
+                {
+                    gridViewSmenZadany.FocusedRowHandle = _rowHandle;
+                }
+                else if (_rowHandle > 0 && gridViewSmenZadany.DataRowCount > 0)
+                {
+                    gridViewSmenZadany.FocusedRowHandle = _rowHandle - 1;
+                }
+                else if (_rowHandle == 0 && gridViewSmenZadany.DataRowCount > 0)
+                {
+                    gridViewSmenZadany.FocusedRowHandle = _rowHandle + 1;
+                }
+            }));
+
+
+            //else if (_rowHandle == 0 & gridViewSmenZadany.RowCount > 0)
+            //{
+            //    gridViewSmenZadany.FocusedRowHandle = _rowHandle + 1;
+            //}
 
             ////_smenZadanyVyazBindingSource.ResetBindings(false);
             //var col = gridViewSmenZadany.Columns["kwsmlKmlID"];
