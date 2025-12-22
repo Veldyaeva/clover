@@ -35,10 +35,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
             // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
-            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, includeFinished: false, expandAssignedByNrId: false, maxHours: 14m);
+            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
         }
 
-        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool includeFinished, bool expandAssignedByNrId, decimal maxHours)
+        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours)
         {
             try
             {
@@ -48,67 +48,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 var map = new ConcurrentDictionary<int, KnitterPZVModel>();
 
-                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня
-                await connection.QueryAsync<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
+                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
+                // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
+                // Требование: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).
+                using (var grid = await connection.QueryMultipleAsync(
                     "dbo.GetPlanZagrVyazNorm_ByTab4",
-                    (pzv, nr, rzv) =>
-                    {
-                        var parent = map.GetOrAdd(pzv.pzvID, _ =>
-                        {
-                            pzv.nrModels ??= new BindingList<nrModel>();
-                            pzv.rzvModels ??= new BindingList<rzvModel>();
-                            return pzv;
-                        });
-
-                        if (nr != null)
-                        {
-                            if (string.IsNullOrWhiteSpace(parent.kmlNumber) && !string.IsNullOrWhiteSpace(nr.kmlNumber))
-                            {
-                                parent.kmlNumber = nr.kmlNumber;
-                            }
-                            if (parent.nrN == null)
-                                parent.nrN = nr.nrN;
-                            if (parent.nrN1 == null)
-                                parent.nrN1 = nr.nrN1;
-                            if (string.IsNullOrWhiteSpace(parent.nrText))
-                                parent.nrText = nr.nrText;
-                            if (parent.nrRazryd == null)
-                                parent.nrRazryd = nr.nrRazryd;
-                            if (string.IsNullOrWhiteSpace(parent.nrObor))
-                                parent.nrObor = nr.nrObor;
-                            if (parent.nr_kod_ob == null)
-                                parent.nr_kod_ob = nr.nr_kod_ob;
-                            if (parent.nr_kod_proizv == null)
-                                parent.nr_kod_proizv = nr.nr_kod_proizv;
-
-                            parent.nrModels ??= new BindingList<nrModel>();
-                            if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
-                            {
-                                parent.nrModels.Add(nr);
-                            }
-                        }
-
-                        if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
-                        {
-                            if (rzv.n_pach != 0)
-                            {
-                                parent.n_pach ??= rzv.n_pach;
-                            }
-
-                            if (string.IsNullOrWhiteSpace(parent.razm) && !string.IsNullOrWhiteSpace(rzv.razm))
-                            {
-                                parent.razm = rzv.razm;
-                            }
-
-                            parent.rzvModels ??= new BindingList<rzvModel>();
-                            if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
-                            {
-                                parent.rzvModels.Add(rzv);
-                            }
-                        }
-
-                        return parent;
-                    },
                     new
                     {
                         tab,
@@ -116,12 +60,102 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         OnlyActive = 1,
                         KwsId = kwsId,
                         OnlyUnassigned = onlyUnassigned ? 1 : 0,
-                        IncludeFinished = includeFinished ? 1 : 0,
                         ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0
                     },
-                    splitOn: "nrID,n_pach",
-                    commandType: CommandType.StoredProcedure,
-                    buffered: true);
+                    commandType: CommandType.StoredProcedure))
+                {
+                    // Локальный helper для чтения одного result set с multi-mapping
+                    void ReadAndMapSet()
+                    {
+                        var rows = grid.Read<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
+                            (pzv, nr, rzv) =>
+                            {
+                                var parent = map.GetOrAdd(pzv.pzvID, _ =>
+                                {
+                                    pzv.nrModels ??= new BindingList<nrModel>();
+                                    pzv.rzvModels ??= new BindingList<rzvModel>();
+                                    return pzv;
+                                });
+
+                                if (nr != null)
+                                {
+                                    if (string.IsNullOrWhiteSpace(parent.kmlNumber) && !string.IsNullOrWhiteSpace(nr.kmlNumber))
+                                    {
+                                        parent.kmlNumber = nr.kmlNumber;
+                                    }
+                                    if (parent.nrN == null)
+                                        parent.nrN = nr.nrN;
+                                    if (parent.nrN1 == null)
+                                        parent.nrN1 = nr.nrN1;
+                                    if (string.IsNullOrWhiteSpace(parent.nrText))
+                                        parent.nrText = nr.nrText;
+                                    if (parent.nrRazryd == null)
+                                        parent.nrRazryd = nr.nrRazryd;
+                                    if (string.IsNullOrWhiteSpace(parent.nrObor))
+                                        parent.nrObor = nr.nrObor;
+                                    if (parent.nr_kod_ob == null)
+                                        parent.nr_kod_ob = nr.nr_kod_ob;
+                                    if (parent.nr_kod_proizv == null)
+                                        parent.nr_kod_proizv = nr.nr_kod_proizv;
+
+                                    parent.nrModels ??= new BindingList<nrModel>();
+                                    if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
+                                    {
+                                        parent.nrModels.Add(nr);
+                                    }
+                                }
+
+                                if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
+                                {
+                                    if (rzv.n_pach != 0)
+                                    {
+                                        parent.n_pach ??= rzv.n_pach;
+                                    }
+
+                                    if (string.IsNullOrWhiteSpace(parent.razm) && !string.IsNullOrWhiteSpace(rzv.razm))
+                                    {
+                                        parent.razm = rzv.razm;
+                                    }
+
+                                    parent.rzvModels ??= new BindingList<rzvModel>();
+                                    if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
+                                    {
+                                        parent.rzvModels.Add(rzv);
+                                    }
+                                }
+
+                                return parent;
+                            },
+                            splitOn: "nrID,n_pach");
+
+                        // Форсируем выполнение выборки, чтобы маппер отработал и наполнил словарь
+                        foreach (var _ in rows) { }
+                    }
+
+                    bool hasShift = kwsId.HasValue && kwsId.Value != 0;
+
+                    if (hasShift)
+                    {
+                        // Открытая смена: используем первый набор (назначенные) + второй (кандидаты) если он есть
+                        ReadAndMapSet(); // первый result set
+                        if (!grid.IsConsumed)
+                        {
+                            ReadAndMapSet(); // второй result set
+                        }
+                    }
+                    else
+                    {
+                        // Закрытая смена: пропускаем первый набор, используем второй (кандидаты)
+                        if (!grid.IsConsumed)
+                        {
+                            grid.Read(); // просто потребляем первый набор, чтобы перейти ко второму
+                        }
+                        if (!grid.IsConsumed)
+                        {
+                            ReadAndMapSet();
+                        }
+                    }
+                }
 
                 var parents = map.Values.ToList();
 
@@ -154,7 +188,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             }
             catch (Exception ex)
             {
-                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, onlyUnassigned={onlyUnassigned}, includeFinished={includeFinished}, expandAssignedByNrId={expandAssignedByNrId}, maxHours={maxHours})", ex);
+                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, onlyUnassigned={onlyUnassigned}, expandAssignedByNrId={expandAssignedByNrId}, maxHours={maxHours})", ex);
             }
         }
 

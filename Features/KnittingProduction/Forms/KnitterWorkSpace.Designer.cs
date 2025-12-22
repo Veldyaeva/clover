@@ -30,7 +30,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             gridBand39 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -185,6 +185,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             advBandedGridView1.GridControl = PlanZagrVyazGridControl;
             advBandedGridView1.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvKolNazn", null, "(Кол-во к выполнению: SUM={0:0.##})"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn27", null, "(Часы факт: SUM={0:0.##})"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn26", bandedGridColumn26, "(Часы назн: SUM={0:0.##})") });
             advBandedGridView1.Name = "advBandedGridView1";
+            advBandedGridView1.OptionsBehavior.SummariesIgnoreNullValues = true;
             advBandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
             advBandedGridView1.OptionsDetail.AllowZoomDetail = false;
             advBandedGridView1.OptionsView.ColumnAutoWidth = true;
@@ -343,7 +344,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand18.Columns.Add(bandedGridColumn15);
             gridBand18.Name = "gridBand18";
             gridBand18.VisibleIndex = 0;
-            gridBand18.Width = 126;
+            gridBand18.Width = 252;
             // 
             // bandedGridColumn12
             // 
@@ -373,11 +374,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // bandedGridColumn26
             // 
             bandedGridColumn26.Caption = "Часы назн";
-            bandedGridColumn26.DisplayFormat.FormatString = "0.00";
             bandedGridColumn26.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             bandedGridColumn26.FieldName = "pzvChasNazn";
             bandedGridColumn26.Name = "bandedGridColumn26";
-            bandedGridColumn26.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn26", "по опер {0:0.00}") });
             bandedGridColumn26.Visible = true;
             bandedGridColumn26.Width = 77;
             // 
@@ -430,7 +429,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn27.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             bandedGridColumn27.FieldName = "pzvNChasi";
             bandedGridColumn27.Name = "bandedGridColumn27";
-            bandedGridColumn27.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "bandedGridColumn27", "по опер {0:0.00}") });
             bandedGridColumn27.Visible = true;
             bandedGridColumn27.Width = 53;
             // 
@@ -493,9 +491,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // PlanZagrVyazGridControl
             // 
             PlanZagrVyazGridControl.Font = new System.Drawing.Font("Arial", 10F);
-            gridLevelNode1.LevelTemplate = advBandedGridView1;
-            gridLevelNode1.RelationName = "ArtNom";
-            PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
+            gridLevelNode2.LevelTemplate = advBandedGridView1;
+            gridLevelNode2.RelationName = "ArtNom";
+            PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode2 });
             PlanZagrVyazGridControl.Location = new System.Drawing.Point(12, 42);
             PlanZagrVyazGridControl.MainView = bandedGridView3;
             PlanZagrVyazGridControl.Name = "PlanZagrVyazGridControl";

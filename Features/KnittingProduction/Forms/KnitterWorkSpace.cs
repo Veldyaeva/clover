@@ -35,6 +35,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private CheckBox _adminToggle;
         private CheckBox _expandNrToggle;
         private RepositoryItemProgressBar _statusProgressBar;
+        private DevExpress.XtraGrid.GridGroupSummaryItem _pzvChasNaznGroupSumItem;
 
         // Вью для третьего уровня (деталь детальной таблицы)
         private RepositoryItemButtonEdit _pzvDateStartButtonEdit;
@@ -124,6 +125,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
             }
             catch (Exception ex)
             {
@@ -154,6 +156,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
             }
             catch (Exception ex)
             {
@@ -323,6 +326,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.OptionsView.ShowGroupPanel = false;
                 advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
 
+                // Групповой итог по "назначено в м/ч" (pzvChasNazn) в футере группы
+                var assignedCol = gridColumn6 ?? advBandedGridView1.Columns.ColumnByFieldName("pzvChasNazn");
+                if (assignedCol != null)
+                {
+                    _pzvChasNaznGroupSumItem = advBandedGridView1.GroupSummary
+                        .OfType<DevExpress.XtraGrid.GridGroupSummaryItem>()
+                        .FirstOrDefault(gs => gs.FieldName == "pzvChasNazn" && gs.SummaryType == DevExpress.Data.SummaryItemType.Sum);
+
+                    if (_pzvChasNaznGroupSumItem == null)
+                    {
+                        _pzvChasNaznGroupSumItem = new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvChasNazn", assignedCol, "{0:0.00}");
+                        advBandedGridView1.GroupSummary.Add(_pzvChasNaznGroupSumItem);
+                    }
+                }
+
             }
             finally
             {
@@ -392,7 +410,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     {
                         await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
                         // Перезагрузим план, чтобы обновить статусы/проценты
-                     //   await LoadPlanForTabAsync(tabEnd, forceReload: true);
+                        await LoadPlanForTabAsync(tabEnd, forceReload: true);
                     }
 
                     await RefreshFioListAsync();
@@ -684,39 +702,44 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Начатые, но не завершённые → спросить факт, закрыть, при необходимости split по факту
             var inProgress = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
-            foreach (var row in inProgress)
+            if (inProgress.Any())
             {
-                int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
-                var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
-                    $"Введите фактическое количество для операции {row.pzvNomZad}/{row.pzvArticul}",
-                    "Завершение операции",
-                    plannedQty);
-                if (qtyObj == null)
-                    continue; // пропускаем, если отмена
-                if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > plannedQty)
-                {
-                    XtraMessageBox.Show(this, "Значение должно быть в диапазоне 0..план.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    continue;
-                }
+                MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                try
-                {
-                    await _orchestrator.UpdatePzvDateEndAsync(row.pzvID);
+                //foreach (var row in inProgress)
+                //{
+                //    int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
+                //    var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
+                //        $"Введите фактическое количество для операции {row.pzvNomZad}/{row.pzvArticul}",
+                //        "Завершение операции",
+                //        plannedQty);
+                //    if (qtyObj == null)
+                //        continue; // пропускаем, если отмена
+                //    if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > plannedQty)
+                //    {
+                //        XtraMessageBox.Show(this, "Значение должно быть в диапазоне 0..план.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //        continue;
+                //    }
 
-                    if (qty == 0)
-                    {
-                        await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
-                    }
-                    else if (qty < plannedQty)
-                    {
-                        await _orchestrator.SplitPzvByFactAsync(row.pzvID, qty);
-                    }
-                    // qty == plannedQty: только дата окончания уже поставлена
-                }
-                catch
-                {
-                    // Игнорируем сбой одной операции, продолжаем остальные
-                }
+                //    try
+                //    {
+                //        await _orchestrator.UpdatePzvDateEndAsync(row.pzvID);
+
+                //        if (qty == 0)
+                //        {
+                //            await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
+                //        }
+                //        else if (qty < plannedQty)
+                //        {
+                //            await _orchestrator.SplitPzvByFactAsync(row.pzvID, qty);
+                //        }
+                //        // qty == plannedQty: только дата окончания уже поставлена
+                //    }
+                //    catch
+                //    {
+                //        // Игнорируем сбой одной операции, продолжаем остальные
+                //    }
+                //}
             }
         }
 
@@ -774,6 +797,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     e.RepositoryItem = (hasStart && isEndEmpty) ? _pzvDateEndButtonEdit : _pzvDateEndTextEdit;
                 }
             };
+            advBandedGridView1.CustomColumnDisplayText -= AdvBandedGridView1_CustomColumnDisplayText;
+            advBandedGridView1.CustomColumnDisplayText += AdvBandedGridView1_CustomColumnDisplayText;
 
             // Настройка для "Закончено" (pzvDateEnd)
             bandedGridColumn19.AppearanceCell.BackColor = System.Drawing.Color.LightYellow;
@@ -859,6 +884,59 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
+        /// Показываем сумму по группе в ячейке "назначено в м/ч" (pzvChasNazn) в строке группы.
+        /// </summary>
+        private void AdvBandedGridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column == null || e.Column.FieldName != "pzvChasNazn")
+                return;
+
+            if (_pzvChasNaznGroupSumItem == null)
+                return;
+
+            if (sender is DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView view)
+            {
+                int rowHandle = view.GetRowHandle(e.ListSourceRowIndex);
+                if (!view.IsGroupRow(rowHandle))
+                    return;
+
+                var val = view.GetGroupSummaryValue(rowHandle, _pzvChasNaznGroupSumItem);
+                if (val != null && val != DBNull.Value)
+                {
+                    e.DisplayText = string.Format("{0:0.00}", val);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Для верхнего уровня (bandedGridView3): в колонке pzvChasNazn отображаем сумму назначенных часов по всем операциям этой машины/задания.
+        /// </summary>
+        private void BandedGridView3_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
+        {
+            if (e.Column == null || e.Column.FieldName != "pzvChasNazn")
+                return;
+
+            if (sender is BandedGridView view)
+            {
+                int rowHandle = view.GetRowHandle(e.ListSourceRowIndex);
+                var row = view.GetRow(rowHandle) as KnitterPZVModel;
+                if (row == null)
+                    return;
+
+                var taskNum = KnitterPlanUtils.NormalizeTaskNum(row.pzvNomZad);
+                var machineKey = KnitterPlanUtils.NormalizeMachineKey(row.kmlNumber);
+
+                var sum = _planPresenter.AllRows
+                    .Where(r =>
+                        KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad) == taskNum &&
+                        KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber) == machineKey)
+                    .Sum(r => r.pzvChasNazn);
+
+                e.DisplayText = string.Format("{0:0.00}", sum);
+            }
+        }
+
+        /// <summary>
         /// Запрашивает у пользователя фактическое количество, отражает его в колонке "Кол-во факт (шт)" и устанавливает дату окончания.
         /// </summary>
         private async Task ApplyPzvDateEndAsync(GridView view)
@@ -888,9 +966,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (currentRow != null)
             {
                 currentRow.pzvKol = qty;
+                // Мгновенно пересчитываем часы факт для прогресса (секунды на изделие * факт / 3600)
+                decimal factHours = 0m;
+                if (currentRow.pzvSek > 0)
+                {
+                    factHours = Math.Round((currentRow.pzvSek * qty) / 3600m, 2);
+                    currentRow.pzvNChasi = factHours;
+                }
                 var masterRow = _planPresenter.AllRows?.FirstOrDefault(r => r != null && r.pzvID == currentRow.pzvID);
                 if (masterRow != null)
+                {
                     masterRow.pzvKol = qty;
+                    if (factHours > 0)
+                        masterRow.pzvNChasi = factHours;
+                }
             }
             // Отобразим введённое значение в столбце факта (unbound)
             _view.SetRowCellValue(rowHandle, bandedGridColumn22, qty);
@@ -929,7 +1018,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // Сохраняем текущую машину, чтобы вернуть фокус после обновления
                 var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, false, true, false, 14);//(tab);
+                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, false, false, 14);//(tab);
                 // перестраиваем иерархию без очистки табеля
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 // Вернём фокус и раскроем нужную машину
@@ -1146,6 +1235,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             };
         }
 
+        #region adminToggle
         private void InitAdminToggle()
         {
             _adminToggle = new CheckBox
@@ -1187,6 +1277,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _adminSettingsButton.BringToFront();
             _adminSettingsButton.Click += (s, e) => ShowAdminSettingsDialog();
         }
+        #endregion
 
         private void SetupStatusColumn()
         {
@@ -1211,6 +1302,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             if (e.Column != gridColumn8 || !e.IsGetData)
                 return;
+
+            // По умолчанию показываем 0%
+            e.Value = 0m;
 
             if (e.Row is KnitterPZVModel row)
             {
@@ -1364,8 +1458,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bool expandByNr = _expandNrToggle?.Checked == true;
 
             //var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
-            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, isAdmin, expandByNr, maxHours);
-            _planPresenter.BindGroupDetails(bandedGridView3, /*bandedGgridView1,*/ advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
+            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, expandByNr, maxHours);
+            _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
             _currentLoadedTab = tab;
         }
 
@@ -1404,7 +1498,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        // Ранее фильтрация выполнялась на клиенте; теперь фильтрует хранимая процедура.
     }
 }
 
