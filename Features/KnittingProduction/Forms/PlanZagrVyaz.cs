@@ -3686,6 +3686,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         clone.olPzvNChasi = (int)Math.Round((clone.olKol * clone.olSekEd) / 3600m);
                         // 👇 фиксируем новое значение как "оригинал" для этой строки
                         clone.RebaselineOlKolCopy();
+                        
 
                     }, "olPzvID", "olKol", "olKolCopy", "olNChasi", "IsModified", "IsNew", "olPzvDivision", "olPzvIDParent");
                     // 3) добавить биндинги

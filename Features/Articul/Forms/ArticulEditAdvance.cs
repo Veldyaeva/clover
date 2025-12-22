@@ -76,10 +76,6 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceArtKod.DataSource = await _articulEdAdvDataService.GetArtByKoddAsync(this._kodd);
             _gosts = await _articulEdAdvDataService.GetGostNaborAsync();
 
-            //lookUpGost.EditValueChanged += (s, e) => UpdateOpi();
-
-            //_bindingSourceGosts.DataSource = await _articulEdAdvDataService.GetBLGostNaborAsync();
-
             InitializeBindingsAsync();
 
         }
@@ -90,11 +86,6 @@ namespace SewingProduction.Features.Articul.Forms
                 //загрузка перечня кодов из справочника общая информация
                 
                 _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
-
-                //_bindingSourceArtCommonSokr.DataSource = await _articulEdAdvDataService.GetCommonSokrArtByKoddAsync(this._kodd);
-
-                //dataLayoutCommonArticul.DataSource = _bindingSourceArtCommon;
-
 
                 #region заполнение блока основных данных артикула
 
@@ -147,59 +138,45 @@ namespace SewingProduction.Features.Articul.Forms
                 txbOpiGost.Text = "";
         }
 
-        private void customSimpleButton1_Click(object sender, EventArgs e)
+        private void SaveChanges(object sender, EventArgs e)
         {
             try
             {
                 _bindingSourceArtCommon.EndEdit();
+                //копирование всех кодов с измененными общими данными в список для сохранения
+                var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+                if (currentItem.IsModified == false)
+                {
+                    return;
+                }
 
-                List<ArticulModel> filteredList = _bindingSourceArtCommon.List
+                for (int i = 0; i < _bindingSourceArtKod.Count; i++)
+                {
+                    var item = (ArticulModel)_bindingSourceArtKod[i];
+                    //    
+                    var newItem = ObjectCloneHelper.CloneWithExclusions(currentItem, clone =>
+                    {
+                        clone.Kod = item.Kod;
+                        clone.IsModified = true;
+
+                    }, "Kod", "Razm");
+                    _bindingSourceArtCommonSave.Add(newItem);
+                }
+                //формирование списка для сохранения с уникальными кодами
+                List<ArticulModel> filteredList = _bindingSourceArtCommonSave.List
                     .OfType<ArticulModel>()
                     .Where(x => x?.IsModified == true)
                     .ToList();
+
                 if (filteredList.Count > 0)
                 {
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<ArticulModel>(connection, filteredList, "sp_articul", new[] { "kod" });
-
                     }
                 }
-
-                // деление через сторно, когда операция уже выполнена и нужно изменить количество
-                // 1) пометить исходную строку
-                currentItem.IsModified = true;
-                int xKolNew = Convert.ToInt32(e.Value);
-                int xKoldelta = currentItem.olKolCopy - Convert.ToInt32(e.Value);
-                currentItem.olKol = currentItem.olKolCopy;  // обновлённое значение
-                currentItem.olPzvDivision = 1;
-
-                // 2) создать копию с исключениями и проставить нужные поля
-                // строка для отрицательного значения
-                var newItemNeg = ObjectCloneHelper.CloneWithExclusions(currentItem, clone =>
-                {
-                    clone.olPzvIDParent = currentItem.olPzvID;
-                    clone.olPzvDivision = 1;
-                    clone.IsNew = true;
-                    clone.IsModified = false;
-                    // 👇 сбрасываем "копию" перед присвоением нового olKol
-                    clone.ResetOlKolCopy();
-
-                    // присваиваем новое значение
-                    //clone.olKol = Convert.ToInt32(e.Value);
-                    clone.olKol = -1 * xKoldelta;  // новое значение в копии
-                                                   //clone.olSekAll = Math.Round((clone.olKol * clone.olSekEd) / 3600m, 2);
-                    clone.olPzvNChasi = (int)Math.Round((clone.olKol * clone.olSekEd) / 3600m);
-                    // 👇 фиксируем новое значение как "оригинал" для этой строки
-                    clone.RebaselineOlKolCopy();
-
-
-                }, "olPzvID", "olKol", "olKolCopy", "olNChasi", "IsModified", "IsNew", "olPzvDivision", "olPzvIDParent");
-                // 3) добавить биндинги
-                _pZVOperListByPachListBindingSource.Add(newItemNeg);
-
-
-
+                _bindingSourceArtCommonSave.Clear();
+                XtraMessageBox.Show("Изменения успешно сохранены.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)

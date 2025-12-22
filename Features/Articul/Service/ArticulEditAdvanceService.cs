@@ -81,5 +81,6 @@ namespace SewingProduction.Features.Articul.Service
 
 
 
+
     }
 }

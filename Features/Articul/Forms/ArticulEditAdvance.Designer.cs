@@ -1993,7 +1993,7 @@ namespace SewingProduction.Features.Articul.Forms
             customSimpleButton1.Size = new System.Drawing.Size(75, 25);
             customSimpleButton1.TabIndex = 45;
             customSimpleButton1.Text = "customSimpleButton1";
-            customSimpleButton1.Click += customSimpleButton1_Click;
+            customSimpleButton1.Click += SaveChanges;
             // 
             // dataLayoutCommonArticul
             // 
