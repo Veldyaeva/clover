@@ -170,9 +170,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 if (missingKmlIds.Length > 0)
                 {
                     const string kmlQuery = //@"SELECT kmlID, kmlNumber, koefObServ, name_class FROM ACE.dbo.knitMachineList_view WHERE kmlID IN @ids";
-                    @"Select kwsmlKmlId as kmlId, kmlnumber, koefObServ, nameVyazClass as name_class from ace.knitWorkingShiftStatement where kwsmlKmlId in @ids";
+                    @"Select kwsmlKmlId as kmlID, kmlNumber, koefObServ, nameVyazClass as name_class from ace.dbo.knitWorkingShiftStatement where kwsmlKmlId in @ids";
+                    // knitWorkingShiftStatement может вернуть дубли по одной машине на разные интервалы — группируем по kmlID, чтобы не падать на ToDictionary
                     var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds }))
-                        .ToDictionary(x => x.kmlID, x => x);
+                        .GroupBy(x => x.kmlID)
+                        .ToDictionary(g => g.Key, g => g.First());
 
                     foreach (var parent in parents)
                     {

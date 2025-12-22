@@ -937,6 +937,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
+        /// Устанавливает часы факт (pzvNChasi), если они пусты, по формуле pzvSek * факт.кол-во / 3600.
+        /// </summary>
+        private void EnsureFactHours(KnitterPZVModel row)
+        {
+            if (row == null)
+                return;
+
+            if (row.pzvNChasi == null || row.pzvNChasi == 0m)
+            {
+                var factQty = row.pzvKol ?? 0;
+                if (row.pzvSek > 0 && factQty > 0)
+                {
+                    row.pzvNChasi = Math.Round((row.pzvSek * factQty) / 3600m, 2);
+                }
+            }
+        }
+
+        /// <summary>
         /// Запрашивает у пользователя фактическое количество, отражает его в колонке "Кол-во факт (шт)" и устанавливает дату окончания.
         /// </summary>
         private async Task ApplyPzvDateEndAsync(GridView view)
@@ -1459,7 +1477,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             //var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
             var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, expandByNr, maxHours);
-            _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
+            // Если из БД факт часов пуст, считаем его по формуле pzvSek * фактическое количество / 3600
+            if (plan != null)
+            {
+                foreach (var row in plan)
+                {
+                    EnsureFactHours(row);
+                }
+            }
+                _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
             _currentLoadedTab = tab;
         }
 
