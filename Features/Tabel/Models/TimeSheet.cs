@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.CodeParser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,7 @@ namespace SewingProduction.Features.Tabel.Models
         public string dd08 { get; set; }
         public string dd09 { get; set; }
         public string dd10 { get; set; }
+        public string dd11 { get; set; }
         public string dd12 { get; set; }
         public string dd13 { get; set; }
         public string dd14 { get; set; }
@@ -79,6 +81,7 @@ namespace SewingProduction.Features.Tabel.Models
         public double it_ch { get; set; }
         public decimal tsplPart { get; set; }
         public decimal tsplPartOf {  get; set; }
+        public int ts_plan { get; set; }
 
 
 

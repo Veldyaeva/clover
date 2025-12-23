@@ -1,11 +1,16 @@
 ﻿using DevExpress.Charts.Model;
+using DevExpress.DataAccess.Sql;
 using DevExpress.Utils.DPI;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Extensions;
 using SewingProduction.Features.CuttingProduction.Forms;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Features.Tabel.Services;
 using SewingProduction.Helpers;
@@ -20,12 +25,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SewingProduction.Core.helpers.BindingSourceHelper;
 
 namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class TabelMain : Form
     {
-        private string currentMG = "1225";
+        private string currentMG = "0525";
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
@@ -33,7 +39,9 @@ namespace SewingProduction.Features.Tabel.Forms
         public BindingSource _zlPodr;
         public BindingSource _spPodr;
         private BindingSource _timeSheetBindingSource;
+        private BindingSource _timeSheetFreshBindingSource;
         private BindingList<TimeSheet> _TimeSheetBindingList;
+        private BindingList<TimeSheet> _timeSheetFreshBindingList;
         private List<TimeSheet> _currentTimeSheetData = new List<TimeSheet>();
         private readonly string[] allStates = new[]
         {
@@ -84,11 +92,13 @@ namespace SewingProduction.Features.Tabel.Forms
             itogColumnD.FieldName = "it_d";
             itogColumnD.Caption = "Ит(Д)";
             itogColumnD.Visible = true;
+            itogColumnD.OptionsColumn.AllowEdit = false;
             gridView1.Columns.Add(itogColumnD);
             GridColumn itogColumnChas = new GridColumn();
             itogColumnChas.FieldName = "it_ch";
             itogColumnChas.Caption = "Ит(Ч)";
             itogColumnChas.Visible = true;
+            itogColumnChas.OptionsColumn.AllowEdit = false;
             gridView1.Columns.Add(itogColumnChas);
             gridView1.BestFitColumns();
 
@@ -102,6 +112,11 @@ namespace SewingProduction.Features.Tabel.Forms
         }
         private async Task InitializeBindingsAsync()
         {
+            var timeSheetFresh = Task.Run(() =>
+            {
+                _timeSheetFreshBindingList = new BindingList<TimeSheet>();
+                _timeSheetFreshBindingSource = new BindingSource { DataSource = _timeSheetFreshBindingList };
+            });
             var spisokViewTask = Task.Run(() =>
             {
                 _TimeSheetBindingList = new BindingList<TimeSheet>();
@@ -156,9 +171,12 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnFio.FieldName = "fio";
             gridColumnTsplPart.FieldName = "tsplPart";
             gridColumnTsplPartOf.FieldName = "tsplPartOf";
+            gridColumnCheckIncludePlan.FieldName = "ts_plan";
             gridColumnFio.Width = 90;
             gridView1.OptionsView.EnableAppearanceEvenRow = false;
             gridView1.OptionsView.EnableAppearanceOddRow = false;
+
+
             #endregion
         }
         //private void FormatGridBiewBeforeLoad()
@@ -225,7 +243,7 @@ namespace SewingProduction.Features.Tabel.Forms
             var TimeSheetData = await _tabelDataService.GetTabelGrAsync(mg, gr);
             if (TimeSheetData != null)
             {
-                await _logger.LogEventAsync($"Получены данные ListForLinking", "LoadCuttingForm");
+                await _logger.LogEventAsync($"Получены данные TimeSheet", "GetTabelGrAsync");
 
                 await this.InvokeAsync(() =>
                 {
@@ -233,7 +251,7 @@ namespace SewingProduction.Features.Tabel.Forms
                     _timeSheetBindingSource.DataSource = _currentTimeSheetData; // Привязываем данные к форме
                 });
 
-                await _logger.LogEventAsync($"Данные ListForLinking успешно загружены", "LoadVyazPlanDataAsync");
+                await _logger.LogEventAsync($"Данные TimeSheet успешно загружены", "GetTabelGrAsync");
                 //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
                 //_spisokBindingList.Add(spisokData[0]);
                 _timeSheetBindingSource.ResetBindings(false);
@@ -241,7 +259,29 @@ namespace SewingProduction.Features.Tabel.Forms
             }
             else
             {
-                await _logger.LogEventAsync($"Не удалось найти данные spisok", "GetListForLinkingsAsync");
+                await _logger.LogEventAsync($"Не удалось найти данные TimeSheet", "GetTabelGrAsync");
+            }
+        }
+        private async Task GetTimeSheetFresh(string mg, int gr)
+        {
+            _timeSheetFreshBindingSource.Clear();
+            _timeSheetFreshBindingSource.ResetBindings(false);
+            var TimeSheetData = await _tabelDataService.GetTabelGrAsync(mg, gr);
+            if (TimeSheetData != null)
+            {
+                await _logger.LogEventAsync($"Получены данные _timeSheetFreshBindingSource", "GetTimeSheetFresh");
+
+                await this.InvokeAsync(() =>
+                {             
+                    _timeSheetFreshBindingSource.DataSource = _currentTimeSheetData; // Привязываем данные к форме
+                });
+
+                await _logger.LogEventAsync($"Данные _timeSheetFreshBindingSource успешно загружены", "GetTimeSheetFresh");
+
+            }
+            else
+            {
+                await _logger.LogEventAsync($"Не удалось найти данные _timeSheetFreshBindingSource", "GetListForLinkingsAsync");
             }
         }
         private void lookUpEditGr_EditValueChanged(object sender, EventArgs e)
@@ -305,7 +345,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private void NextMonthButton_Click(object sender, EventArgs e)
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
-      
+
             if (!_tabelDataService.CheckRecordsExistsTabel(GetNextMonth(currentMG), grId))
             {
                 MessageBox.Show("В следующем месяце пусто!");
@@ -348,9 +388,18 @@ namespace SewingProduction.Features.Tabel.Forms
                 int dayNumber = int.Parse(column.FieldName.Substring(1));
                 string markColumnName = $"dd{dayNumber.ToString("00")}";
                 string markValue = gridView1.GetRowCellValue(rowHandle, markColumnName).ToString();
-                
+                object includePlan = gridView1.GetRowCellValue(rowHandle, "ts_plan");
                 object koefValue = gridView1.GetRowCellValue(rowHandle, "tsplPartOf");
-                int kol_chas = (int)(int.Parse(markValue) * decimal.Parse(koefValue.ToString()));
+                int kol_chas;
+                if (int.Parse(includePlan.ToString()) == 0)
+                {
+                    kol_chas = (int)(int.Parse(markValue) * 1);
+                }
+                else
+                {
+                    kol_chas = (int)(int.Parse(markValue) * decimal.Parse(koefValue.ToString()));
+                }
+
                 string newValue = kol_chas.ToString().Trim();
                 allStates[1] = newValue;
                 // Получаем текущее значение ячейки
@@ -370,9 +419,9 @@ namespace SewingProduction.Features.Tabel.Forms
                 }
                 else
                 {
-                   
-                        // Переходим к следующему состоянию
-                        currentIndex = (currentIndex + 1) % allStates.Length;
+
+                    // Переходим к следующему состоянию
+                    currentIndex = (currentIndex + 1) % allStates.Length;
                 }
 
                 // Получаем новое состояние
@@ -403,6 +452,194 @@ namespace SewingProduction.Features.Tabel.Forms
                 CycleCellState(hitInfo.RowHandle, hitInfo.Column);
             }
         }
-       
+
+        private void gridView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            GridView view = (GridView)sender;
+
+            if (view.FocusedColumn != null &&
+                view.FocusedColumn.FieldName.StartsWith("d"))
+            {
+                // Если нажата цифра
+                if (char.IsDigit(e.KeyChar))
+                {
+                    HandleDigitInputForInteger(view, e.KeyChar);
+                    e.Handled = true; // Обработали сами
+                }
+                // Если Backspace
+                else if (e.KeyChar == (char)8)
+                {
+                    HandleBackspaceForInteger(view);
+                    e.Handled = true;
+                }
+                // Запрещаем все остальные символы (кроме управляющих)
+                else if (!char.IsControl(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+        private void HandleDigitInputForInteger(GridView view, char digit)
+        {
+            int rowHandle = view.FocusedRowHandle;
+            GridColumn column = view.FocusedColumn;
+
+            // Получаем текущее значение
+            object currentValue = view.GetRowCellValue(rowHandle, column);
+            string currentText = currentValue?.ToString() ?? "";
+
+            // Очищаем, если текущее значение не число
+            if (!int.TryParse(currentText, out _))
+            {
+                currentText = "";
+            }
+
+            // Формируем новое значение
+            string newText;
+            if (currentText.Length == 0)
+            {
+                newText = digit.ToString();
+            }
+            else if (currentText.Length == 1)
+            {
+                // Проверяем, что число не больше 23
+                string testValue = currentText + digit;
+                if (int.TryParse(testValue, out int testInt) && testInt <= 23)
+                {
+                    newText = testValue;
+                }
+                else
+                {
+                    // Если больше 23, заменяем первую цифру
+                    newText = digit.ToString();
+                }
+            }
+            else
+            {
+                // Если уже 2 цифры, заменяем значение
+                newText = digit.ToString();
+            }
+
+            // Проверяем, что число <= 23
+            if (int.TryParse(newText, out int value) && value <= 23)
+            {
+                view.SetRowCellValue(rowHandle, column, newText);
+
+                // Автоматически переходим к следующей ячейке при вводе двух цифр
+                if (newText.Length == 2)
+                {
+                    MoveToNextCell(view);
+                }
+            }
+        }
+        private void HandleBackspaceForInteger(GridView view)
+        {
+            int rowHandle = view.FocusedRowHandle;
+            GridColumn column = view.FocusedColumn;
+
+            object currentValue = view.GetRowCellValue(rowHandle, column);
+            string currentText = currentValue?.ToString() ?? "";
+
+            if (currentText.Length > 0)
+            {
+                // Удаляем последнюю цифру
+                string newText = currentText.Substring(0, currentText.Length - 1);
+                view.SetRowCellValue(rowHandle, column, newText);
+            }
+            else
+            {
+                // Если строка пустая, очищаем ячейку
+                view.SetRowCellValue(rowHandle, column, "");
+            }
+        }
+        private void MoveToNextCell(GridView view)
+        {
+            // Переходим к следующей ячейке справа
+            int currentColIndex = view.Columns.IndexOf(view.FocusedColumn);
+            if (currentColIndex < view.Columns.Count - 1)
+            {
+                GridColumn nextColumn = view.Columns[currentColIndex + 1];
+                if (nextColumn.Visible && nextColumn.OptionsColumn.AllowFocus)
+                {
+                    view.FocusedColumn = nextColumn;
+                    view.ShowEditor();
+                }
+            }
+        }
+
+     
+
+        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+
+            if  (IsDayColumn(e.Column))
+            {
+                int rowHandle = e.RowHandle;
+                int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
+                string columnName = e.Column.FieldName;
+                string value = gridView1.GetRowCellValue(rowHandle, columnName).ToString();
+                UpdateDayTimeSheetInDataBase(columnName, value, recordId);
+
+            }
+            if (e.Column != null && e.Column.ColumnEdit is RepositoryItemCheckEdit)
+            {
+                int rowHandle = e.RowHandle;
+                int valueChecked = Convert.ToInt32(e.Value);
+                string fieldName = e.Column.FieldName;
+                int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
+
+                UpdateCheckBoxInDataBase(recordId, fieldName, valueChecked);
+            }
+        }
+        public void UpdateCheckBoxInDataBase(int id, string fieldName,int value)
+        {
+            //if (value == 1)
+            //{
+            //    string query = $"update tabel_sp set {fieldName} = {value},ts_plan_pr = '',ts_tsp_id = 0, tsPlPart = 1 where id = {id}";
+            //    _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+            //}
+            //else
+            //{
+            //    string query = $"update tabel_sp set {fieldName} = {value},tsPlPart = 0 where id = {id}";
+            //    _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+
+            //}
+        }
+        public async void UpdateDayTimeSheetInDataBase(string fieldName, string value, int id)
+        {
+            try
+            {
+                string query = $"update tabel_sp set {fieldName} = '{value}' where id = {id} ";
+                int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+                await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+                await GetTimeSheetFresh(currentMG,grId);
+                var changes = BindingSourceHelper.GetChanges<TimeSheet>(
+                  _timeSheetBindingSource,
+                  _timeSheetFreshBindingSource,
+                  HashMode.All,
+                  keyProperties: new[] {"id" });
+                BindingSourceHelper.ApplyChanges<TimeSheet>(
+                   _timeSheetBindingSource,
+                   changes,
+                   UpdateFieldsMode.All,
+                   keyProperties: new[] { "id" });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogEventAsync($"Не удалось обновить tabel_sp", "UpdateDayTimeSheetInDataBase");
+            }
+        }
+        private bool IsDayColumn(GridColumn column)
+        {
+            if (column == null) return false;
+
+            // Проверяем формат d01, d02, ..., d31
+            if (column.FieldName.StartsWith("d") && column.FieldName.Length == 3)
+            {
+                string dayPart = column.FieldName.Substring(1);
+                return int.TryParse(dayPart, out int day) && day >= 1 && day <= 31;
+            }
+            return false;
+        }
     }
 }

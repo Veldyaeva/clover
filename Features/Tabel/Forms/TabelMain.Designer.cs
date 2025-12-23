@@ -31,6 +31,8 @@
             gridColumnDd1 = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControlTimeSheet = new SewingProduction.Core.Class.CustomGridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnCheckIncludePlan = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEditPlan = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridColumnPomPech = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnTabno = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnFio = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -88,6 +90,7 @@
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)lookUpEditGr.Properties).BeginInit();
@@ -115,6 +118,7 @@
             customGridControlTimeSheet.Location = new System.Drawing.Point(12, 36);
             customGridControlTimeSheet.MainView = gridView1;
             customGridControlTimeSheet.Name = "customGridControlTimeSheet";
+            customGridControlTimeSheet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
             customGridControlTimeSheet.Size = new System.Drawing.Size(1330, 550);
             customGridControlTimeSheet.TabIndex = 0;
             customGridControlTimeSheet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
@@ -128,46 +132,68 @@
             gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView1.Appearance.FocusedRow.Options.UseFont = true;
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31 });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnCheckIncludePlan, gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31 });
             gridView1.GridControl = customGridControlTimeSheet;
             gridView1.Name = "gridView1";
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
             gridView1.RowCellStyle += gridView1_RowCellStyle;
+            gridView1.CellValueChanged += gridView1_CellValueChanged;
+            gridView1.KeyPress += gridView1_KeyPress;
+            // 
+            // gridColumnCheckIncludePlan
+            // 
+            gridColumnCheckIncludePlan.Caption = "V";
+            gridColumnCheckIncludePlan.ColumnEdit = repositoryItemCheckEditPlan;
+            gridColumnCheckIncludePlan.Name = "gridColumnCheckIncludePlan";
+            gridColumnCheckIncludePlan.Visible = true;
+            gridColumnCheckIncludePlan.VisibleIndex = 0;
+            // 
+            // repositoryItemCheckEditPlan
+            // 
+            repositoryItemCheckEditPlan.AutoHeight = false;
+            repositoryItemCheckEditPlan.Name = "repositoryItemCheckEditPlan";
+            repositoryItemCheckEditPlan.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEditPlan.ValueChecked = 1;
+            repositoryItemCheckEditPlan.ValueUnchecked = 0;
             // 
             // gridColumnPomPech
             // 
             gridColumnPomPech.Caption = "Печ";
             gridColumnPomPech.Name = "gridColumnPomPech";
             gridColumnPomPech.Visible = true;
-            gridColumnPomPech.VisibleIndex = 0;
+            gridColumnPomPech.VisibleIndex = 1;
             // 
             // gridColumnTabno
             // 
             gridColumnTabno.Caption = "Таб№";
             gridColumnTabno.Name = "gridColumnTabno";
+            gridColumnTabno.OptionsColumn.AllowEdit = false;
             gridColumnTabno.Visible = true;
-            gridColumnTabno.VisibleIndex = 1;
+            gridColumnTabno.VisibleIndex = 2;
             // 
             // gridColumnFio
             // 
             gridColumnFio.Caption = "ФИО";
             gridColumnFio.Name = "gridColumnFio";
+            gridColumnFio.OptionsColumn.AllowEdit = false;
             gridColumnFio.Visible = true;
-            gridColumnFio.VisibleIndex = 2;
+            gridColumnFio.VisibleIndex = 3;
             // 
             // gridColumnTsplPart
             // 
             gridColumnTsplPart.Caption = "Ставка д/пл";
             gridColumnTsplPart.Name = "gridColumnTsplPart";
+            gridColumnTsplPart.OptionsColumn.AllowEdit = false;
             gridColumnTsplPart.Visible = true;
-            gridColumnTsplPart.VisibleIndex = 3;
+            gridColumnTsplPart.VisibleIndex = 4;
             // 
             // gridColumnTsplPartOf
             // 
-            gridColumnTsplPartOf.Caption = "Ставка\\n оф";
+            gridColumnTsplPartOf.Caption = "Ставка оф";
             gridColumnTsplPartOf.Name = "gridColumnTsplPartOf";
+            gridColumnTsplPartOf.OptionsColumn.AllowEdit = false;
             gridColumnTsplPartOf.Visible = true;
-            gridColumnTsplPartOf.VisibleIndex = 4;
+            gridColumnTsplPartOf.VisibleIndex = 5;
             // 
             // gridColumnDd2
             // 
@@ -527,6 +553,7 @@
             Load += TabelMain_Load;
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)lookUpEditGr.Properties).EndInit();
@@ -604,5 +631,7 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTsplPart;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTsplPartOf;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCheckIncludePlan;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditPlan;
     }
 }
