@@ -14,6 +14,7 @@ using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -873,6 +874,104 @@ namespace SewingProduction.Helpers
         //    //e.Handled = true;
         //}
         #endregion
+        /// <summary>
+        /// переход к строке gridview по ID в bindingsource
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="view"></param>
+        /// <param name="bindingSource"></param>
+        /// <param name="idSelector"></param>
+        /// <param name="idValue"></param>
+        /// <param name="columnFieldName"></param>
+        public void GoToRowById<T, TKey>(
+            GridView view,
+            BindingSource bindingSource,
+            Func<T, TKey> idSelector,       // поле идентификатора для позиционирования
+            TKey idValue,                   // значение идентификатора
+            string? columnFieldName = null  // колонка, на которую нужно перенести фокус
+)
+        {
+            if (view == null || bindingSource == null)
+                return;
+
+            // 1) Индекс элемента в BindingSource
+            int dataIndex = -1;
+            //for (int i = 0; i < bindingSource.Count; i++)
+            //{
+            //    if (bindingSource[i] is T item &&
+            //        EqualityComparer<TKey>.Default.Equals(idSelector(item), idValue))
+            //    {
+            //        dataIndex = i;
+            //        break;
+            //    }
+            //}
+            for (int i = 0; i < bindingSource.Count; i++)
+            {
+                var obj = bindingSource[i];
+
+                Debug.WriteLine($"[{i}] type = {obj?.GetType().FullName}");
+
+                if (obj is T item)
+                {
+                    var val = idSelector(item);
+                    Debug.WriteLine($"    id = {val}");
+
+                    if (EqualityComparer<TKey>.Default.Equals(val, idValue))
+                    {
+                        dataIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (dataIndex < 0)
+                return;
+
+            // 2) RowHandle с учетом сортировки/фильтра/группировки
+            int rowHandle = view.GetRowHandle(dataIndex);
+            if (rowHandle < 0)
+                return;
+
+            // 3) Раскрываем родительские группы
+            ExpandParentGroups(view, rowHandle);
+
+            // 4) Фокусируем строку (+ колонку, если задана)
+            view.BeginUpdate();
+            try
+            {
+                view.ClearSelection();
+                view.MakeRowVisible(rowHandle);
+                view.FocusedRowHandle = rowHandle;
+
+                if (!string.IsNullOrWhiteSpace(columnFieldName))
+                {
+                    var col = view.Columns.ColumnByFieldName(columnFieldName);
+                    if (col != null)
+                        view.FocusedColumn = col;
+                }
+            }
+            finally
+            {
+                view.EndUpdate();
+            }
+        }
+
+        private void ExpandParentGroups(GridView view, int rowHandle)
+        {
+            int parent = view.GetParentRowHandle(rowHandle);
+            while (parent != GridControl.InvalidRowHandle)
+            {
+                view.SetRowExpanded(parent, true);
+                parent = view.GetParentRowHandle(parent);
+            }
+        }
+        //// только строка
+        //GoToRowById<PZVOperList, int>(gridViewPZVOperList, bsPzv, x => x.olPzvID, _pzvID);
+
+        //// строка + колонка
+        //GoToRowById<PZVOperList, int>(gridViewPZVOperList, bsPzv, x => x.olPzvID, _pzvID, _column);
+
     }
 }
 
