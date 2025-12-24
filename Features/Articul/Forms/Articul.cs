@@ -1,5 +1,4 @@
-﻿//using Microsoft.ReportingServices.DataProcessing;
-using DevExpress.Data.Internal;
+﻿using DevExpress.Data.Internal;
 using DevExpress.Office.Utils;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB.Helpers;
@@ -28,23 +27,11 @@ using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel;
 using System.Data;
-using System.Data;
-using System.Diagnostics;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing;
-using System.Linq;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Windows.Forms;
 using static DevExpress.Office.PInvoke.Win32;
 using static DevExpress.Xpo.DB.DataStoreLongrunnersWatch;
@@ -156,6 +143,9 @@ namespace SewingProduction.Features.Articul
                 #endregion
 
                 #region галки с отделками
+                //chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true);
+                //chbKombDet.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_det), true);
+                //chbKombIzd.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_izd), true);
 
                 //галки вяз отделки
                 chbKombIzd.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_izd), true);
@@ -696,6 +686,9 @@ namespace SewingProduction.Features.Articul
 
         private void Articul_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //освобождение ресурсов загруженных в статических полях для справочников при редактировании артикула
+            //CommonSpravArticulEditAdvance.Clear();
+
             gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
 
             // Отвязать BindingSource

@@ -52,32 +52,24 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
-        
 
+        //public async Task<BindingList<GostModel>> GetBLGostNaborAsync()
+        //{
+        //    try
+        //    {
+        //        string query = "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 ";
+        //        var bb = await _dbService.GetListAsync<GostModel>(query, new { });
+        //        var ret = new BindingList<GostModel>(bb);
+        //        bb = null;
+        //        return ret;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetGostNaborAsync");
+        //        return null;
+        //    }
+        //}
 
-        public async Task<BindingList<GostModel>> GetBLGostNaborAsync()
-        {
-            try
-            {
-                string query = "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 ";
-                var bb = await _dbService.GetListAsync<GostModel>(query, new { });
-                var ret = new BindingList<GostModel>(bb);
-                bb = null;
-                return ret;
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetGostNaborAsync");
-                return null;
-            }
-        }
-
-        public async Task<List<GostModel>> GetGostNaborAsync()
-        {
-            return await _dbService.GetListAsync<GostModel>(
-                "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 ", new{ }
-            );
-        }
 
 
 

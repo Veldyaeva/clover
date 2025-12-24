@@ -38,10 +38,13 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
         private BindingSource _bindingSourceArtCommonSave;
-
-
-
-        private List<GostModel> _gosts;
+        /*
+        private BindingSource _bsTM;
+        private BindingSource _bsSeason;
+        private BindingSource _bsCountry;
+        private BindingSource _bsGrupMen;
+        */
+        //private List<GostModel> _gosts;
         //private BindingSource _bindingSourceGosts;
 
         public ArticulEditAdvance(UserClass user) : this(user, "", "")
@@ -74,7 +77,10 @@ namespace SewingProduction.Features.Articul.Forms
             //загрузка списка размеров 
 
             _bindingSourceArtKod.DataSource = await _articulEdAdvDataService.GetArtByKoddAsync(this._kodd);
-            _gosts = await _articulEdAdvDataService.GetGostNaborAsync();
+            // загрузка кешированных данных из справочников 
+            await CommonSpravArticulEditAdvance.EnsureLoadedAsync(_dbService);
+
+            //_gosts = await _articulEdAdvDataService.GetGostNaborAsync();
 
             InitializeBindingsAsync();
 
@@ -94,15 +100,38 @@ namespace SewingProduction.Features.Articul.Forms
 
                 txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Mod), true);
 
-                lookUpGost.Properties.DataSource = _gosts;
+                lookUpGost.Properties.DataSource = CommonSpravArticulEditAdvance.Gosts;
                 lookUpGost.Properties.DisplayMember = nameof(GostModel.Name_gost);
                 lookUpGost.Properties.ValueMember = nameof(GostModel.Id_gost);
                 lookUpGost.Properties.NullText = "Не выбрано";
-                lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true, DataSourceUpdateMode.OnPropertyChanged);
+                lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true);
                 //инициализация описания госта
                 UpdateOpi();
+                //Страна
+                cbTM.DataSource = CommonSpravArticulEditAdvance.Tms;
+                cbTM.DisplayMember = nameof(TmModel.Kle_naimen);
+                cbTM.ValueMember = nameof(TmModel.M_id_gl);
+                cbTM.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_country), true);
+                //сезон
+                cbSeason.DataSource = CommonSpravArticulEditAdvance.Seasons;
+                cbSeason.DisplayMember = nameof(Szon_newModel.Txt);
+                cbSeason.ValueMember = nameof(Szon_newModel.N);
+                cbSeason.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Baza), true);
+                //группа менеджеров
+                cbGrupMen.DataSource = CommonSpravArticulEditAdvance.GrupMen;
+                cbGrupMen.DisplayMember = nameof(GrupMenModel.Name);
+                cbGrupMen.ValueMember = nameof(GrupMenModel.Men_int);
+                cbGrupMen.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Grupp), true);
 
-                chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true, DataSourceUpdateMode.OnPropertyChanged);
+                cbCountry.DataSource = CommonSpravArticulEditAdvance.Countries;
+                cbCountry.DisplayMember = nameof(CountryModel.frm_country);
+                cbCountry.ValueMember = nameof(CountryModel.frm_id_country);
+                cbCountry.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_country), true);
+
+
+                chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true);
+                chbKombDet.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_det), true);
+                chbKombIzd.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_izd), true);
                 //отделка
                 chbIsUpak.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Is_upak), true);
                 chbIsFurnit.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Is_furnit), true);
@@ -133,11 +162,15 @@ namespace SewingProduction.Features.Articul.Forms
         private void UpdateOpi()
         {
             if (lookUpGost.EditValue is int id)
-                txbOpiGost.Text = _gosts.FirstOrDefault(x => x.Id_gost == id)?.Opi_gost ?? "";
+                txbOpiGost.Text = CommonSpravArticulEditAdvance.Gosts.FirstOrDefault(x => x.Id_gost == id)?.Opi_gost ?? "";
             else
                 txbOpiGost.Text = "";
         }
-
+        /// <summary>
+        /////Сохранение изменений общих данных артикула для всех кодов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveChanges(object sender, EventArgs e)
         {
             try
@@ -195,7 +228,6 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void ArticulEditAdvance_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _gosts = null;
 
         }
     }
