@@ -290,7 +290,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public string olPzvVidPr { get; set; }
         [NotMapped] public int olPzvGradacia { get; set; }
         [NotMapped] public int olPzvGsID { get; set; }
-        [NotMapped] public int olGsName { get; set; }
+        [NotMapped] public string olGsName { get; set; }
         [NotMapped] public int SyncSelection { get; set; } = 0;
         [NotMapped] public int ErrorSelection { get; set; } = 0;
         [NotMapped] public bool IsModified { get; set; } = false;
