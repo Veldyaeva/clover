@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SewingProduction.Models;
 using DevExpress.CodeParser;
+using SewingProduction.Features.Articul.Models;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -34,6 +35,11 @@ namespace SewingProduction.Features.Articul.Service
         = Array.Empty<CountryModel>();
         public static IReadOnlyList<GrupMenModel> GrupMen { get; private set; }
         = Array.Empty<GrupMenModel>();
+        public static IReadOnlyList<AssortModel> Assorts { get; private set; }
+        = Array.Empty<AssortModel>();
+        public static IReadOnlyList<SpArticulTkanSokr> Tkans { get; private set; }
+        = Array.Empty<SpArticulTkanSokr>();
+
         public static Task EnsureLoadedAsync(DbService db)
         {
             // атомарно создаём или берём существующую Task
@@ -55,16 +61,21 @@ namespace SewingProduction.Features.Articul.Service
             var CountryTask = db.GetListAsync<CountryModel>(
                 "select frm_id_country, frm_country, frm_cu_id FROM dbo.frm_country", new { });
             var GrupMenTask = db.GetListAsync<GrupMenModel>(
-                "select men_int,name from dbo.view_grup_men where men_int >0", new { });
-
+                "select men_int,name from dbo.view_grup_men where men_int > 0 order by gm_index ", new { });
+            var AssortTask = db.GetListAsync<AssortModel>(
+                "select kod_v, txt_v from gtin.assort", new { });
+            var TkanTask = db.GetListAsync<SpArticulTkanSokr>(
+                "select Kod_t, Tkan, Tkb, IsDifficult, Difficult_koef from dbo.view_tkan", new { });
             //ожидаем все задачи
-            await Task.WhenAll(seasonsTask, gostTask, tmTask, CountryTask, GrupMenTask);
-
+            await Task.WhenAll(seasonsTask, gostTask, tmTask, CountryTask, GrupMenTask, AssortTask, TkanTask);
+            
             Gosts = (await gostTask).AsReadOnly();
             Tms = (await tmTask).AsReadOnly();
             Seasons = (await seasonsTask).AsReadOnly();
             Countries = (await CountryTask).AsReadOnly();
             GrupMen = (await GrupMenTask).AsReadOnly();
+            Assorts = (await AssortTask).AsReadOnly();
+            Tkans = (await TkanTask).AsReadOnly();
         }
 
         public static async Task ReloadAsync(DbService db)
@@ -82,6 +93,9 @@ namespace SewingProduction.Features.Articul.Service
             Tms = Array.Empty<TmModel>();
             Countries = Array.Empty<CountryModel>();
             GrupMen = Array.Empty<GrupMenModel>();
+            Assorts = Array.Empty<AssortModel>();
+            Tkans = Array.Empty<SpArticulTkanSokr>();
+
         }
 
 

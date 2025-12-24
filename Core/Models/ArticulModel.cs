@@ -62,8 +62,27 @@ namespace SewingProduction.Core.Models
                     if (!_isInitializing) IsModified = true;
                 }
             }}
-        
-        //public string Sost2_old { get; set; }
+
+        private string _sost2;
+        public string Sost2 { get=>_sost2;
+            set {
+                if (_sost2 != value) 
+                { 
+                    _sost2 = value;
+                    if (!_isInitializing) IsModified = true;
+                }
+            }
+        }
+        private string _sost3;
+        public string Sost3 { get=>_sost3;
+            set {
+                if (_sost3 != value) 
+                { 
+                    _sost3 = value;
+                    if (!_isInitializing) IsModified = true;
+                }
+            }
+        }
         private int _id_gost ;
         public int Id_gost { get=>_id_gost;
             set { 
@@ -123,7 +142,16 @@ namespace SewingProduction.Core.Models
         public string Gruppa { get; set; }
         public string P_gruppa { get; set; }
         public string Text_m { get; set; }
-        public string Tkb { get; set; }
+        private string _tkb;
+        public string Tkb { get=>_tkb;
+            set { 
+            if (_tkb != value) 
+                { 
+                    _tkb = value;
+                    if (!_isInitializing) IsModified = true;
+                }
+            }
+        }
         public string Kod_t1 { get; set; }
         public string Tkb1 { get; set; }
         public decimal Norm_t1 { get; set; }
@@ -141,7 +169,16 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t4 { get; set; }
         public string Opis_t4 { get; set; }
         public int Baza { get; set; }
-        public int Kod_v { get; set; }
+        private int _kod_v;
+        public int Kod_v { get=>_kod_v;
+            set { 
+            if (_kod_v != value) 
+                { 
+                    _kod_v = value;
+                    if (!_isInitializing) IsModified = true;
+                }
+            }
+        }
         public string Kod_t5 { get; set; }
         public string Tkb5 { get; set; }
         public decimal Norm_t5 { get; set; }
@@ -241,7 +278,7 @@ namespace SewingProduction.Core.Models
         public decimal K_kg_m5 { get; set; }
         public decimal K_kg_m6 { get; set; }
         public decimal K_kg_m7 { get; set; }
-        public string Sost2 { get; set; }
+        
         public int Is_furnit { get; set; }
         public int Is_upak { get; set; }
         public int Sek_vyaz14 { get; set; }
@@ -271,8 +308,6 @@ namespace SewingProduction.Core.Models
         public int Sek_vyaz62 { get; set; }
         public int Sek_vyaz71 { get; set; }
         public int Sek_vyaz72 { get; set; }
-        public string Sost3 { get; set; }
-        
         public short Kruj { get; set; }
         public string Kod_lv3 { get; set; }
         public int Sek_cord { get; set; }

@@ -38,14 +38,7 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
         private BindingSource _bindingSourceArtCommonSave;
-        /*
-        private BindingSource _bsTM;
-        private BindingSource _bsSeason;
-        private BindingSource _bsCountry;
-        private BindingSource _bsGrupMen;
-        */
-        //private List<GostModel> _gosts;
-        //private BindingSource _bindingSourceGosts;
+        
 
         public ArticulEditAdvance(UserClass user) : this(user, "", "")
         { }
@@ -69,7 +62,6 @@ namespace SewingProduction.Features.Articul.Forms
 
             _bindingSourceArtCommon = new BindingSource { };
             _bindingSourceArtCommonSave = new BindingSource { };
-
         }
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
@@ -80,7 +72,6 @@ namespace SewingProduction.Features.Articul.Forms
             // загрузка кешированных данных из справочников 
             await CommonSpravArticulEditAdvance.EnsureLoadedAsync(_dbService);
 
-            //_gosts = await _articulEdAdvDataService.GetGostNaborAsync();
 
             InitializeBindingsAsync();
 
@@ -90,7 +81,6 @@ namespace SewingProduction.Features.Articul.Forms
             try
             {
                 //загрузка перечня кодов из справочника общая информация
-                
                 _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
 
                 #region заполнение блока основных данных артикула
@@ -100,6 +90,8 @@ namespace SewingProduction.Features.Articul.Forms
 
                 txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Mod), true);
 
+                //госты
+                txbGostId.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true);
                 lookUpGost.Properties.DataSource = CommonSpravArticulEditAdvance.Gosts;
                 lookUpGost.Properties.DisplayMember = nameof(GostModel.Name_gost);
                 lookUpGost.Properties.ValueMember = nameof(GostModel.Id_gost);
@@ -107,6 +99,7 @@ namespace SewingProduction.Features.Articul.Forms
                 lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true);
                 //инициализация описания госта
                 UpdateOpi();
+                
                 //Страна
                 cbTM.DataSource = CommonSpravArticulEditAdvance.Tms;
                 cbTM.DisplayMember = nameof(TmModel.Kle_naimen);
@@ -122,17 +115,35 @@ namespace SewingProduction.Features.Articul.Forms
                 cbGrupMen.DisplayMember = nameof(GrupMenModel.Name);
                 cbGrupMen.ValueMember = nameof(GrupMenModel.Men_int);
                 cbGrupMen.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Grupp), true);
-
+                //страна
                 cbCountry.DataSource = CommonSpravArticulEditAdvance.Countries;
                 cbCountry.DisplayMember = nameof(CountryModel.frm_country);
-                cbCountry.ValueMember = nameof(CountryModel.frm_id_country);
+                cbCountry.ValueMember = nameof(CountryModel.frm_cu_id);
                 cbCountry.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_country), true);
-
+                //ассортимент
+                cbAssort.DataSource = CommonSpravArticulEditAdvance.Assorts;
+                cbAssort.DisplayMember = nameof(AssortModel.txt_v);
+                cbAssort.ValueMember = nameof(AssortModel.kod_v);
+                cbAssort.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Kod_v), true);
+                txbAssort.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Kod_v), true);
+                //ткань
+                cbTkan.DataSource = CommonSpravArticulEditAdvance.Tkans;
+                cbTkan.DisplayMember = nameof(SpArticulTkanSokr.Tkan);
+                cbTkan.ValueMember = nameof(SpArticulTkanSokr.Tkb);
+                cbTkan.DataBindings.Add("SelectedValue", _bindingSourceArtCommon, nameof(ArticulModel.Tkb), true);
 
                 chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true);
                 chbKombDet.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_det), true);
                 chbKombIzd.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_izd), true);
-                //отделка
+
+                //составы
+                txbSost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost), true);
+                txbSost2.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost2), true);
+                txbSost3.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost3), true);
+
+                #endregion
+
+                #region Отделка 
                 chbIsUpak.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Is_upak), true);
                 chbIsFurnit.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Is_furnit), true);
 
@@ -141,14 +152,6 @@ namespace SewingProduction.Features.Articul.Forms
                 chkBus.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Bus), true);
                 chkStra.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Stra), true);
                 chkPres.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.P_pres), true);
-
-
-
-                txbSost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost), true);
-                txbSost2.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost2), true);
-                txbSost3.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost3), true);
-
-
                 #endregion
             }
             catch (Exception ex)
