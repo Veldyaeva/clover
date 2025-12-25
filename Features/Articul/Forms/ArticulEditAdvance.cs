@@ -1,4 +1,7 @@
-﻿using DevExpress.XtraEditors;
+﻿//using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.XtraEditors;
+using DevExpress.XtraLayout;
+using NLog.Layouts;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.Models;
@@ -19,6 +22,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using WinBindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -82,6 +86,7 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 //загрузка перечня кодов из справочника общая информация
                 _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
+
 
                 #region заполнение блока основных данных артикула
 
@@ -153,6 +158,24 @@ namespace SewingProduction.Features.Articul.Forms
                 chkStra.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Stra), true);
                 chkPres.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.P_pres), true);
                 #endregion
+
+                #region Нормы
+
+                BindFieldByName(this.layoutControlGroup4, _bindingSourceArtCommon);
+                BindFieldByName(this.layoutControlGroup7, _bindingSourceArtCommon);
+
+                BindFieldByNameLookUp(this.layoutControlGroup8, _bindingSourceArtCommon, CommonSpravArticulEditAdvance.Tkans);
+
+                /*
+                cbuKod_t1.Properties.DataSource = CommonSpravArticulEditAdvance.Tkans;
+                cbuKod_t1.Properties.DisplayMember = nameof(SpArticulTkanSokr.Tkb);
+                cbuKod_t1.Properties.ValueMember = nameof(SpArticulTkanSokr.Kod_t);
+                cbuKod_t1.Properties.NullText = "Не выбрано";
+                cbuKod_t1.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Kod_t1), true);
+                */
+
+                #endregion
+
             }
             catch (Exception ex)
             {
@@ -160,7 +183,96 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
+        //, String NameField
 
+        public async void BindFieldByNameLookUp(LayoutControlGroup group, BindingSource bs, IReadOnlyList<SpArticulTkanSokr> sprav) {
+            try
+            {
+                foreach (BaseLayoutItem item in group.Items)
+                {
+                    if (item is not LayoutControlItem lci)
+                        continue;
+
+                    if (lci.Control == null)
+                        continue;
+
+                    var props = bs.CurrencyManager?.GetItemProperties();
+                    if (props == null)
+                        throw new InvalidOperationException("BindingSource не инициализирован");
+
+                    if (lci.Control is SearchLookUpEdit sle)
+                    {
+                        string propName = sle.Name[3..]; // sluKod_t1 → Kod_t1
+
+                        // проверка модели
+                        if (props.Find(propName, true) == null)
+                            throw new ArgumentException($"В модели нет свойства '{propName}'");
+
+                        sle.Properties.DataSource = sprav; // общий справочник
+                        sle.Properties.DisplayMember = nameof(SpArticulTkanSokr.Tkb);
+                        sle.Properties.ValueMember = nameof(SpArticulTkanSokr.Kod_t);
+                        sle.Properties.NullText = "Не выбрано";
+
+                        sle.DataBindings.Clear();
+                        sle.DataBindings.Add(
+                            "EditValue",
+                            bs,
+                            propName,
+                            true,
+                            DataSourceUpdateMode.OnPropertyChanged
+                        );
+
+                        continue;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка привязки поля " + ex.Message);
+                throw;
+            }
+        }
+        
+
+        public async void BindFieldByName(LayoutControlGroup group, BindingSource bs)
+        {
+            try
+            {
+                foreach (BaseLayoutItem item in group.Items)
+                {
+                    if (item is not LayoutControlItem lci)
+                        continue;
+                    if (lci.Control is DevExpress.XtraEditors.BaseEdit edit)
+                    {
+                        var props = bs.CurrencyManager?.GetItemProperties();
+                        if (props == null)
+                            throw new InvalidOperationException("BindingSource не инициализирован");
+                        
+                        string propName = edit.Name.Length > 3 ? edit.Name[3..] : edit.Name;
+                        // удаление префикса txt или txb controlName.Substring(3);
+                        var pd = props.Find(propName, true);
+                        if (pd == null)
+                            throw new ArgumentException($"В модели нет свойства '{propName}'");
+
+                        edit.DataBindings.Clear();
+                        edit.DataBindings.Add(
+                            "EditValue",
+                            bs,
+                            propName,
+                            true,
+                            DataSourceUpdateMode.OnPropertyChanged
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка привязки поля " + ex.Message);
+                throw;
+            }
+        }
+
+       
 
         private void UpdateOpi()
         {

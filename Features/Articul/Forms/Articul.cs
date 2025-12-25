@@ -304,8 +304,12 @@ namespace SewingProduction.Features.Articul
         }
         private async Task getArticulFromSQlAsync(string kod)
         {
+
+
             try
             {
+                // отображение панели загрузки
+                gridControl1.ShowLoadingPanel();
                 bsArticul?.Clear();
 
                 _articulByKod = await _articulDataService.GetByKodAsync(kod);
@@ -323,6 +327,11 @@ namespace SewingProduction.Features.Articul
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для kod {kod}");
+            }
+            finally
+            {
+                // скрытие панели загрузки
+                gridControl1.HideLoadingPanel();
             }
         }
         private async Task getSostKomplFromSQlAsync(string kod)
