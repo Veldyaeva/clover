@@ -1088,6 +1088,7 @@ namespace SewingProduction
         {
             try
             {
+                gridViewNaklList.ShowLoadingPanel();
                 _naklViewByPachKodBindingSource.Clear();
                 _naklViewByPachKodBindingSource.ResetBindings(false);
                 var naklViewData = await _cardByNomService.GetNaklViewByPachKod(pachKod, customRadioGroup2.SelectedIndex);
@@ -1112,6 +1113,10 @@ namespace SewingProduction
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных Naklview для pach_kod {pachKod}");
+            }
+            finally
+            {
+                gridViewNaklList.HideLoadingPanel();
             }
         }
         private async Task LoadNaklViewByNomZadDataAsync(string nomZad)
