@@ -236,8 +236,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            customGridControl5 = new CustomGridControl();
-            gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridControlNaryadZadany = new CustomGridControl();
+            gridViewNaryadZadany = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridNaryadZadanyColumnKmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnPzvArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnPzvNomZad = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnPzvNom = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnNPach = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnNomOper = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnText = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnRazryd = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnSekObServ = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnHoursTotalPlan = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnHoursTotalFact = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnPzvKol = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnStatusName = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnStatusDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridNaryadZadanyColumnPzvTab = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControlPZVOperList = new CustomGridControl();
             gridViewPZVOperList = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnPZVOperListOlPzvID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -414,8 +429,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customGridControl5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlNaryadZadany).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewNaryadZadany).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlPZVOperList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewPZVOperList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).BeginInit();
@@ -460,7 +475,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             layoutControl1.Controls.Add(gridControlSmenZadany);
             layoutControl1.Controls.Add(customTabControl2);
-            layoutControl1.Controls.Add(customGridControl5);
+            layoutControl1.Controls.Add(gridControlNaryadZadany);
             layoutControl1.Controls.Add(gridControlPZVOperList);
             layoutControl1.Controls.Add(gridControlRzvPachListByNom);
             layoutControl1.Controls.Add(gridControlZadanyListByMachine);
@@ -497,7 +512,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             advBandedGridViewSmenZadany.GridControl = gridControlSmenZadany;
             advBandedGridViewSmenZadany.GroupCount = 3;
             advBandedGridViewSmenZadany.GroupFormat = "[#image]{1} {2}";
-            advBandedGridViewSmenZadany.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasNaznZad", bandedGridSmenZadanyColumnChasNaznZad, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasNotConfirmedZad", bandedGridSmenZadanyColumnChasNotConfirmedZad, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasRemainZad", bandedGridSmenZadanyColumnChasRemainZad, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "shiftsRemainZad", bandedGridSmenZadanyColumnShiftsRemainZad, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasNaznSmen", bandedGridSmenZadanyColumnChasNaznSmen, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "chasNaznSmenProc", bandedGridSmenZadanyColumnChasNaznSmenProc, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasInWorkSmen", bandedGridSmenZadanyColumnChasInWorkSmen, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasDoneSmen", bandedGridSmenZadanyColumnChasDoneSmen, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "chasDoneSmenProc", bandedGridSmenZadanyColumnChasDoneSmenProc, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasRemainSmen", bandedGridSmenZadanyColumnChasRemainSmen, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasConfirmedSmen", bandedGridSmenZadanyColumnChasConfirmedSmen, "{0:0.00#;0:#;#}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "smenLength", bandedGridSmenZadanyColumnSmenLength, "{0:0#;0:#;#}") });
+            advBandedGridViewSmenZadany.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasNaznZad", bandedGridSmenZadanyColumnChasNaznZad, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasNotConfirmedZad", bandedGridSmenZadanyColumnChasNotConfirmedZad, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasRemainZad", bandedGridSmenZadanyColumnChasRemainZad, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "shiftsRemainZad", bandedGridSmenZadanyColumnShiftsRemainZad, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasNaznSmen", bandedGridSmenZadanyColumnChasNaznSmen, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "chasNaznSmenProc", bandedGridSmenZadanyColumnChasNaznSmenProc, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasInWorkSmen", bandedGridSmenZadanyColumnChasInWorkSmen, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasDoneSmen", bandedGridSmenZadanyColumnChasDoneSmen, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "chasDoneSmenProc", bandedGridSmenZadanyColumnChasDoneSmenProc, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasRemainSmen", bandedGridSmenZadanyColumnChasRemainSmen, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "chasConfirmedSmen", bandedGridSmenZadanyColumnChasConfirmedSmen, ""), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Average, "smenLength", bandedGridSmenZadanyColumnSmenLength, "") });
             advBandedGridViewSmenZadany.Name = "advBandedGridViewSmenZadany";
             advBandedGridViewSmenZadany.OptionsView.EnableAppearanceEvenRow = true;
             advBandedGridViewSmenZadany.OptionsView.ShowFooter = true;
@@ -513,15 +528,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand9.Caption = "№ В/М";
             gridBand9.Columns.Add(bandedGridSmenZadanyColumnKmlNumber);
             gridBand9.Name = "gridBand9";
+            gridBand9.ToolTip = "№ В/М";
             gridBand9.VisibleIndex = 0;
-            gridBand9.Width = 91;
+            gridBand9.Width = 100;
             // 
             // bandedGridSmenZadanyColumnKmlNumber
             // 
             bandedGridSmenZadanyColumnKmlNumber.Caption = "№ В/М";
             bandedGridSmenZadanyColumnKmlNumber.Name = "bandedGridSmenZadanyColumnKmlNumber";
+            bandedGridSmenZadanyColumnKmlNumber.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnKmlNumber.Visible = true;
-            bandedGridSmenZadanyColumnKmlNumber.Width = 91;
+            bandedGridSmenZadanyColumnKmlNumber.Width = 100;
             // 
             // gridBand10
             // 
@@ -531,6 +548,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand10.Caption = "Класс вязания";
             gridBand10.Columns.Add(bandedGridSmenZadanyColumnNameVyazClass);
             gridBand10.Name = "gridBand10";
+            gridBand10.ToolTip = "Класс вязания";
             gridBand10.VisibleIndex = 1;
             gridBand10.Width = 66;
             // 
@@ -549,15 +567,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand11.Caption = "Продолжительность смены";
             gridBand11.Columns.Add(bandedGridSmenZadanyColumnSmenLength);
             gridBand11.Name = "gridBand11";
+            gridBand11.ToolTip = "Продолжительность смены";
             gridBand11.VisibleIndex = 2;
-            gridBand11.Width = 46;
+            gridBand11.Width = 45;
             // 
             // bandedGridSmenZadanyColumnSmenLength
             // 
             bandedGridSmenZadanyColumnSmenLength.Caption = "Продолжительность смены";
             bandedGridSmenZadanyColumnSmenLength.Name = "bandedGridSmenZadanyColumnSmenLength";
+            bandedGridSmenZadanyColumnSmenLength.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnSmenLength.Visible = true;
-            bandedGridSmenZadanyColumnSmenLength.Width = 46;
+            bandedGridSmenZadanyColumnSmenLength.Width = 45;
             // 
             // gridBand2
             // 
@@ -566,8 +586,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand2.Caption = "Состояние машины";
             gridBand2.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand12, gridBand13, gridBand14, gridBand15 });
             gridBand2.Name = "gridBand2";
+            gridBand2.ToolTip = "Состояние машины";
             gridBand2.VisibleIndex = 3;
-            gridBand2.Width = 233;
+            gridBand2.Width = 200;
             // 
             // gridBand12
             // 
@@ -577,15 +598,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand12.Caption = "Назначенные задания";
             gridBand12.Columns.Add(bandedGridSmenZadanyColumnChasNaznZad);
             gridBand12.Name = "gridBand12";
+            gridBand12.ToolTip = "Назначенные задания";
             gridBand12.VisibleIndex = 0;
-            gridBand12.Width = 66;
+            gridBand12.Width = 50;
             // 
             // bandedGridSmenZadanyColumnChasNaznZad
             // 
             bandedGridSmenZadanyColumnChasNaznZad.Caption = "Назначенные задания";
             bandedGridSmenZadanyColumnChasNaznZad.Name = "bandedGridSmenZadanyColumnChasNaznZad";
+            bandedGridSmenZadanyColumnChasNaznZad.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasNaznZad.Visible = true;
-            bandedGridSmenZadanyColumnChasNaznZad.Width = 66;
+            bandedGridSmenZadanyColumnChasNaznZad.Width = 50;
             // 
             // gridBand13
             // 
@@ -595,15 +618,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand13.Caption = "Не подтверждено мастером";
             gridBand13.Columns.Add(bandedGridSmenZadanyColumnChasNotConfirmedZad);
             gridBand13.Name = "gridBand13";
+            gridBand13.ToolTip = "Не подтверждено мастером";
             gridBand13.VisibleIndex = 1;
-            gridBand13.Width = 66;
+            gridBand13.Width = 50;
             // 
             // bandedGridSmenZadanyColumnChasNotConfirmedZad
             // 
             bandedGridSmenZadanyColumnChasNotConfirmedZad.Caption = "Не подтверждено мастером";
             bandedGridSmenZadanyColumnChasNotConfirmedZad.Name = "bandedGridSmenZadanyColumnChasNotConfirmedZad";
+            bandedGridSmenZadanyColumnChasNotConfirmedZad.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasNotConfirmedZad.Visible = true;
-            bandedGridSmenZadanyColumnChasNotConfirmedZad.Width = 66;
+            bandedGridSmenZadanyColumnChasNotConfirmedZad.Width = 50;
             // 
             // gridBand14
             // 
@@ -613,15 +638,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand14.Caption = "Остаток от назначенного задания, час.";
             gridBand14.Columns.Add(bandedGridSmenZadanyColumnChasRemainZad);
             gridBand14.Name = "gridBand14";
+            gridBand14.ToolTip = "Остаток от назначенного задания, час.";
             gridBand14.VisibleIndex = 2;
-            gridBand14.Width = 59;
+            gridBand14.Width = 50;
             // 
             // bandedGridSmenZadanyColumnChasRemainZad
             // 
-            bandedGridSmenZadanyColumnChasRemainZad.Caption = "Остаток от назаначен. задания, час.";
+            bandedGridSmenZadanyColumnChasRemainZad.Caption = "Остаток от назначен. задания, час.";
             bandedGridSmenZadanyColumnChasRemainZad.Name = "bandedGridSmenZadanyColumnChasRemainZad";
+            bandedGridSmenZadanyColumnChasRemainZad.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasRemainZad.Visible = true;
-            bandedGridSmenZadanyColumnChasRemainZad.Width = 59;
+            bandedGridSmenZadanyColumnChasRemainZad.Width = 50;
             // 
             // gridBand15
             // 
@@ -631,15 +658,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand15.Caption = "Остаток от назначенного задания, смен.";
             gridBand15.Columns.Add(bandedGridSmenZadanyColumnShiftsRemainZad);
             gridBand15.Name = "gridBand15";
+            gridBand15.ToolTip = "Остаток от назначенного задания, смен.";
             gridBand15.VisibleIndex = 3;
-            gridBand15.Width = 42;
+            gridBand15.Width = 50;
             // 
             // bandedGridSmenZadanyColumnShiftsRemainZad
             // 
-            bandedGridSmenZadanyColumnShiftsRemainZad.Caption = "Остаток от назаначен. задания, смен.";
+            bandedGridSmenZadanyColumnShiftsRemainZad.Caption = "Остаток от назначен. задания, смен.";
             bandedGridSmenZadanyColumnShiftsRemainZad.Name = "bandedGridSmenZadanyColumnShiftsRemainZad";
+            bandedGridSmenZadanyColumnShiftsRemainZad.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnShiftsRemainZad.Visible = true;
-            bandedGridSmenZadanyColumnShiftsRemainZad.Width = 42;
+            bandedGridSmenZadanyColumnShiftsRemainZad.Width = 50;
             // 
             // gridBand3
             // 
@@ -648,8 +677,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand3.Caption = "Состояние смены";
             gridBand3.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand4, gridBand18, gridBand7, gridBand19, gridBand20 });
             gridBand3.Name = "gridBand3";
+            gridBand3.ToolTip = "Состояние смены";
             gridBand3.VisibleIndex = 4;
-            gridBand3.Width = 427;
+            gridBand3.Width = 335;
             // 
             // gridBand4
             // 
@@ -658,8 +688,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand4.Caption = "Назначено";
             gridBand4.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand16, gridBand17 });
             gridBand4.Name = "gridBand4";
+            gridBand4.ToolTip = "Назначено";
             gridBand4.VisibleIndex = 0;
-            gridBand4.Width = 106;
+            gridBand4.Width = 90;
             // 
             // gridBand16
             // 
@@ -669,15 +700,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand16.Caption = "час.";
             gridBand16.Columns.Add(bandedGridSmenZadanyColumnChasNaznSmen);
             gridBand16.Name = "gridBand16";
+            gridBand16.ToolTip = "час.";
             gridBand16.VisibleIndex = 0;
-            gridBand16.Width = 51;
+            gridBand16.Width = 45;
             // 
             // bandedGridSmenZadanyColumnChasNaznSmen
             // 
             bandedGridSmenZadanyColumnChasNaznSmen.Caption = "Назначено, час.";
             bandedGridSmenZadanyColumnChasNaznSmen.Name = "bandedGridSmenZadanyColumnChasNaznSmen";
+            bandedGridSmenZadanyColumnChasNaznSmen.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasNaznSmen.Visible = true;
-            bandedGridSmenZadanyColumnChasNaznSmen.Width = 51;
+            bandedGridSmenZadanyColumnChasNaznSmen.Width = 45;
             // 
             // gridBand17
             // 
@@ -687,15 +720,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand17.Caption = "%";
             gridBand17.Columns.Add(bandedGridSmenZadanyColumnChasNaznSmenProc);
             gridBand17.Name = "gridBand17";
+            gridBand17.ToolTip = "%";
             gridBand17.VisibleIndex = 1;
-            gridBand17.Width = 55;
+            gridBand17.Width = 45;
             // 
             // bandedGridSmenZadanyColumnChasNaznSmenProc
             // 
             bandedGridSmenZadanyColumnChasNaznSmenProc.Caption = "Назначено, %";
             bandedGridSmenZadanyColumnChasNaznSmenProc.Name = "bandedGridSmenZadanyColumnChasNaznSmenProc";
+            bandedGridSmenZadanyColumnChasNaznSmenProc.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasNaznSmenProc.Visible = true;
-            bandedGridSmenZadanyColumnChasNaznSmenProc.Width = 55;
+            bandedGridSmenZadanyColumnChasNaznSmenProc.Width = 45;
             // 
             // gridBand18
             // 
@@ -705,14 +740,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand18.Caption = "В работе, час.";
             gridBand18.Columns.Add(bandedGridSmenZadanyColumnChasInWorkSmen);
             gridBand18.Name = "gridBand18";
+            gridBand18.ToolTip = "В работе, час.";
             gridBand18.VisibleIndex = 1;
-            gridBand18.Width = 75;
+            gridBand18.Width = 55;
             // 
             // bandedGridSmenZadanyColumnChasInWorkSmen
             // 
             bandedGridSmenZadanyColumnChasInWorkSmen.Caption = "В работе, час.";
             bandedGridSmenZadanyColumnChasInWorkSmen.Name = "bandedGridSmenZadanyColumnChasInWorkSmen";
+            bandedGridSmenZadanyColumnChasInWorkSmen.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasInWorkSmen.Visible = true;
+            bandedGridSmenZadanyColumnChasInWorkSmen.Width = 55;
             // 
             // gridBand7
             // 
@@ -721,8 +759,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand7.Caption = "Выполнено";
             gridBand7.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand21, gridBand22 });
             gridBand7.Name = "gridBand7";
+            gridBand7.ToolTip = "Выполнено";
             gridBand7.VisibleIndex = 2;
-            gridBand7.Width = 96;
+            gridBand7.Width = 90;
             // 
             // gridBand21
             // 
@@ -732,15 +771,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand21.Caption = "час.";
             gridBand21.Columns.Add(bandedGridSmenZadanyColumnChasDoneSmen);
             gridBand21.Name = "gridBand21";
+            gridBand21.ToolTip = "час.";
             gridBand21.VisibleIndex = 0;
-            gridBand21.Width = 46;
+            gridBand21.Width = 45;
             // 
             // bandedGridSmenZadanyColumnChasDoneSmen
             // 
             bandedGridSmenZadanyColumnChasDoneSmen.Caption = "Выполнено, час.";
             bandedGridSmenZadanyColumnChasDoneSmen.Name = "bandedGridSmenZadanyColumnChasDoneSmen";
+            bandedGridSmenZadanyColumnChasDoneSmen.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasDoneSmen.Visible = true;
-            bandedGridSmenZadanyColumnChasDoneSmen.Width = 46;
+            bandedGridSmenZadanyColumnChasDoneSmen.Width = 45;
             // 
             // gridBand22
             // 
@@ -750,15 +791,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand22.Caption = "%";
             gridBand22.Columns.Add(bandedGridSmenZadanyColumnChasDoneSmenProc);
             gridBand22.Name = "gridBand22";
+            gridBand22.ToolTip = "%";
             gridBand22.VisibleIndex = 1;
-            gridBand22.Width = 50;
+            gridBand22.Width = 45;
             // 
             // bandedGridSmenZadanyColumnChasDoneSmenProc
             // 
             bandedGridSmenZadanyColumnChasDoneSmenProc.Caption = "Выполнено, %";
             bandedGridSmenZadanyColumnChasDoneSmenProc.Name = "bandedGridSmenZadanyColumnChasDoneSmenProc";
+            bandedGridSmenZadanyColumnChasDoneSmenProc.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasDoneSmenProc.Visible = true;
-            bandedGridSmenZadanyColumnChasDoneSmenProc.Width = 50;
+            bandedGridSmenZadanyColumnChasDoneSmenProc.Width = 45;
             // 
             // gridBand19
             // 
@@ -768,31 +811,37 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand19.Caption = "Остаток назначено";
             gridBand19.Columns.Add(bandedGridSmenZadanyColumnChasRemainSmen);
             gridBand19.Name = "gridBand19";
+            gridBand19.ToolTip = "Остаток назначено";
             gridBand19.VisibleIndex = 3;
-            gridBand19.Width = 75;
+            gridBand19.Width = 50;
             // 
             // bandedGridSmenZadanyColumnChasRemainSmen
             // 
             bandedGridSmenZadanyColumnChasRemainSmen.Caption = "Остаток назначено, час.";
             bandedGridSmenZadanyColumnChasRemainSmen.Name = "bandedGridSmenZadanyColumnChasRemainSmen";
+            bandedGridSmenZadanyColumnChasRemainSmen.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasRemainSmen.Visible = true;
+            bandedGridSmenZadanyColumnChasRemainSmen.Width = 50;
             // 
             // gridBand20
             // 
             gridBand20.AppearanceHeader.Options.UseTextOptions = true;
             gridBand20.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             gridBand20.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            gridBand20.Caption = "Подтверждено масетром";
+            gridBand20.Caption = "Подтверждено мастером";
             gridBand20.Columns.Add(bandedGridSmenZadanyColumnChasConfirmedSmen);
             gridBand20.Name = "gridBand20";
+            gridBand20.ToolTip = "Подтверждено масетром";
             gridBand20.VisibleIndex = 4;
-            gridBand20.Width = 75;
+            gridBand20.Width = 50;
             // 
             // bandedGridSmenZadanyColumnChasConfirmedSmen
             // 
             bandedGridSmenZadanyColumnChasConfirmedSmen.Caption = "Подтверждено мастером, час.";
             bandedGridSmenZadanyColumnChasConfirmedSmen.Name = "bandedGridSmenZadanyColumnChasConfirmedSmen";
+            bandedGridSmenZadanyColumnChasConfirmedSmen.OptionsColumn.FixedWidth = true;
             bandedGridSmenZadanyColumnChasConfirmedSmen.Visible = true;
+            bandedGridSmenZadanyColumnChasConfirmedSmen.Width = 50;
             // 
             // bandedGridSmenZadanyColumnKmaID
             // 
@@ -2216,29 +2265,167 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem16.Size = new System.Drawing.Size(266, 26);
             layoutControlItem16.TextVisible = false;
             // 
-            // customGridControl5
+            // gridControlNaryadZadany
             // 
-            customGridControl5.Enabled = false;
-            customGridControl5.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControl5.Location = new System.Drawing.Point(1066, 506);
-            customGridControl5.MainView = gridView5;
-            customGridControl5.Name = "customGridControl5";
-            customGridControl5.Size = new System.Drawing.Size(780, 381);
-            customGridControl5.TabIndex = 25;
-            customGridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView5 });
+            gridControlNaryadZadany.Font = new System.Drawing.Font("Arial", 10F);
+            gridControlNaryadZadany.Location = new System.Drawing.Point(1066, 506);
+            gridControlNaryadZadany.MainView = gridViewNaryadZadany;
+            gridControlNaryadZadany.Name = "gridControlNaryadZadany";
+            gridControlNaryadZadany.Size = new System.Drawing.Size(780, 381);
+            gridControlNaryadZadany.TabIndex = 25;
+            gridControlNaryadZadany.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNaryadZadany });
             // 
-            // gridView5
+            // gridViewNaryadZadany
             // 
-            gridView5.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            gridView5.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView5.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            gridView5.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridView5.Appearance.FocusedRow.Options.UseBackColor = true;
-            gridView5.Appearance.FocusedRow.Options.UseFont = true;
-            gridView5.GridControl = customGridControl5;
-            gridView5.Name = "gridView5";
-            gridView5.OptionsView.ColumnAutoWidth = false;
-            gridView5.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewNaryadZadany.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            gridViewNaryadZadany.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewNaryadZadany.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            gridViewNaryadZadany.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridViewNaryadZadany.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewNaryadZadany.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewNaryadZadany.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridNaryadZadanyColumnKmlNumber, gridNaryadZadanyColumnPzvArticul, gridNaryadZadanyColumnPzvNomZad, gridNaryadZadanyColumnPzvNom, gridNaryadZadanyColumnNPach, gridNaryadZadanyColumnNomOper, gridNaryadZadanyColumnText, gridNaryadZadanyColumnRazryd, gridNaryadZadanyColumnSekObServ, gridNaryadZadanyColumnHoursTotalPlan, gridNaryadZadanyColumnHoursTotalFact, gridNaryadZadanyColumnPzvKol, gridNaryadZadanyColumnStatusName, gridNaryadZadanyColumnStatusDate, gridNaryadZadanyColumnPzvTab });
+            gridViewNaryadZadany.GridControl = gridControlNaryadZadany;
+            gridViewNaryadZadany.GroupCount = 2;
+            gridViewNaryadZadany.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "hoursTotalPlan", gridNaryadZadanyColumnHoursTotalPlan, "{0:0.00##}"), new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "hoursTotalFact", gridNaryadZadanyColumnHoursTotalFact, "{0:0.00##}") });
+            gridViewNaryadZadany.Name = "gridViewNaryadZadany";
+            gridViewNaryadZadany.OptionsView.ColumnAutoWidth = false;
+            gridViewNaryadZadany.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewNaryadZadany.OptionsView.ShowFooter = true;
+            gridViewNaryadZadany.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridNaryadZadanyColumnKmlNumber, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridNaryadZadanyColumnPzvArticul, DevExpress.Data.ColumnSortOrder.Ascending) });
+            // 
+            // gridNaryadZadanyColumnKmlNumber
+            // 
+            gridNaryadZadanyColumnKmlNumber.Caption = "№ В/М";
+            gridNaryadZadanyColumnKmlNumber.Name = "gridNaryadZadanyColumnKmlNumber";
+            gridNaryadZadanyColumnKmlNumber.Visible = true;
+            gridNaryadZadanyColumnKmlNumber.VisibleIndex = 0;
+            gridNaryadZadanyColumnKmlNumber.Width = 43;
+            // 
+            // gridNaryadZadanyColumnPzvArticul
+            // 
+            gridNaryadZadanyColumnPzvArticul.Caption = "Артикул";
+            gridNaryadZadanyColumnPzvArticul.Name = "gridNaryadZadanyColumnPzvArticul";
+            gridNaryadZadanyColumnPzvArticul.Visible = true;
+            gridNaryadZadanyColumnPzvArticul.VisibleIndex = 0;
+            gridNaryadZadanyColumnPzvArticul.Width = 53;
+            // 
+            // gridNaryadZadanyColumnPzvNomZad
+            // 
+            gridNaryadZadanyColumnPzvNomZad.Caption = "№ задания";
+            gridNaryadZadanyColumnPzvNomZad.Name = "gridNaryadZadanyColumnPzvNomZad";
+            gridNaryadZadanyColumnPzvNomZad.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnPzvNomZad.Visible = true;
+            gridNaryadZadanyColumnPzvNomZad.VisibleIndex = 0;
+            gridNaryadZadanyColumnPzvNomZad.Width = 95;
+            // 
+            // gridNaryadZadanyColumnPzvNom
+            // 
+            gridNaryadZadanyColumnPzvNom.Caption = "№ расчета";
+            gridNaryadZadanyColumnPzvNom.Name = "gridNaryadZadanyColumnPzvNom";
+            gridNaryadZadanyColumnPzvNom.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnPzvNom.Visible = true;
+            gridNaryadZadanyColumnPzvNom.VisibleIndex = 1;
+            gridNaryadZadanyColumnPzvNom.Width = 50;
+            // 
+            // gridNaryadZadanyColumnNPach
+            // 
+            gridNaryadZadanyColumnNPach.Caption = "№ пачки";
+            gridNaryadZadanyColumnNPach.Name = "gridNaryadZadanyColumnNPach";
+            gridNaryadZadanyColumnNPach.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnNPach.Visible = true;
+            gridNaryadZadanyColumnNPach.VisibleIndex = 2;
+            gridNaryadZadanyColumnNPach.Width = 50;
+            // 
+            // gridNaryadZadanyColumnNomOper
+            // 
+            gridNaryadZadanyColumnNomOper.Caption = "№ ОП";
+            gridNaryadZadanyColumnNomOper.Name = "gridNaryadZadanyColumnNomOper";
+            gridNaryadZadanyColumnNomOper.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnNomOper.Visible = true;
+            gridNaryadZadanyColumnNomOper.VisibleIndex = 3;
+            gridNaryadZadanyColumnNomOper.Width = 40;
+            // 
+            // gridNaryadZadanyColumnText
+            // 
+            gridNaryadZadanyColumnText.Caption = "Операция";
+            gridNaryadZadanyColumnText.Name = "gridNaryadZadanyColumnText";
+            gridNaryadZadanyColumnText.Visible = true;
+            gridNaryadZadanyColumnText.VisibleIndex = 4;
+            gridNaryadZadanyColumnText.Width = 130;
+            // 
+            // gridNaryadZadanyColumnRazryd
+            // 
+            gridNaryadZadanyColumnRazryd.Caption = "Раз ряд работ";
+            gridNaryadZadanyColumnRazryd.Name = "gridNaryadZadanyColumnRazryd";
+            gridNaryadZadanyColumnRazryd.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnRazryd.Visible = true;
+            gridNaryadZadanyColumnRazryd.VisibleIndex = 5;
+            gridNaryadZadanyColumnRazryd.Width = 40;
+            // 
+            // gridNaryadZadanyColumnSekObServ
+            // 
+            gridNaryadZadanyColumnSekObServ.Caption = "Сек. обслу жив.";
+            gridNaryadZadanyColumnSekObServ.Name = "gridNaryadZadanyColumnSekObServ";
+            gridNaryadZadanyColumnSekObServ.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnSekObServ.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", "Итого:") });
+            gridNaryadZadanyColumnSekObServ.Visible = true;
+            gridNaryadZadanyColumnSekObServ.VisibleIndex = 6;
+            gridNaryadZadanyColumnSekObServ.Width = 45;
+            // 
+            // gridNaryadZadanyColumnHoursTotalPlan
+            // 
+            gridNaryadZadanyColumnHoursTotalPlan.Caption = "Итого ч/ч, П";
+            gridNaryadZadanyColumnHoursTotalPlan.Name = "gridNaryadZadanyColumnHoursTotalPlan";
+            gridNaryadZadanyColumnHoursTotalPlan.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnHoursTotalPlan.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "hoursTotalPlan", "{0:0.00##}") });
+            gridNaryadZadanyColumnHoursTotalPlan.Visible = true;
+            gridNaryadZadanyColumnHoursTotalPlan.VisibleIndex = 7;
+            gridNaryadZadanyColumnHoursTotalPlan.Width = 40;
+            // 
+            // gridNaryadZadanyColumnHoursTotalFact
+            // 
+            gridNaryadZadanyColumnHoursTotalFact.Caption = "Итого ч/ч, Ф";
+            gridNaryadZadanyColumnHoursTotalFact.Name = "gridNaryadZadanyColumnHoursTotalFact";
+            gridNaryadZadanyColumnHoursTotalFact.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnHoursTotalFact.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "hoursTotalFact", "{0:0.00##}") });
+            gridNaryadZadanyColumnHoursTotalFact.Visible = true;
+            gridNaryadZadanyColumnHoursTotalFact.VisibleIndex = 8;
+            gridNaryadZadanyColumnHoursTotalFact.Width = 40;
+            // 
+            // gridNaryadZadanyColumnPzvKol
+            // 
+            gridNaryadZadanyColumnPzvKol.Caption = "Кол- во";
+            gridNaryadZadanyColumnPzvKol.Name = "gridNaryadZadanyColumnPzvKol";
+            gridNaryadZadanyColumnPzvKol.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnPzvKol.Visible = true;
+            gridNaryadZadanyColumnPzvKol.VisibleIndex = 9;
+            gridNaryadZadanyColumnPzvKol.Width = 35;
+            // 
+            // gridNaryadZadanyColumnStatusName
+            // 
+            gridNaryadZadanyColumnStatusName.Caption = "Статус";
+            gridNaryadZadanyColumnStatusName.Name = "gridNaryadZadanyColumnStatusName";
+            gridNaryadZadanyColumnStatusName.Visible = true;
+            gridNaryadZadanyColumnStatusName.VisibleIndex = 10;
+            gridNaryadZadanyColumnStatusName.Width = 90;
+            // 
+            // gridNaryadZadanyColumnStatusDate
+            // 
+            gridNaryadZadanyColumnStatusDate.Caption = "Время уст. статуса";
+            gridNaryadZadanyColumnStatusDate.Name = "gridNaryadZadanyColumnStatusDate";
+            gridNaryadZadanyColumnStatusDate.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnStatusDate.Visible = true;
+            gridNaryadZadanyColumnStatusDate.VisibleIndex = 12;
+            gridNaryadZadanyColumnStatusDate.Width = 55;
+            // 
+            // gridNaryadZadanyColumnPzvTab
+            // 
+            gridNaryadZadanyColumnPzvTab.Caption = "Таб №";
+            gridNaryadZadanyColumnPzvTab.Name = "gridNaryadZadanyColumnPzvTab";
+            gridNaryadZadanyColumnPzvTab.OptionsColumn.FixedWidth = true;
+            gridNaryadZadanyColumnPzvTab.Visible = true;
+            gridNaryadZadanyColumnPzvTab.VisibleIndex = 11;
+            gridNaryadZadanyColumnPzvTab.Width = 35;
             // 
             // gridControlPZVOperList
             // 
@@ -2465,7 +2652,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridColumnPZVOperListOlNChasi
             // 
             gridColumnPZVOperListOlNChasi.Caption = "Н. вр. итого, час";
-            gridColumnPZVOperListOlNChasi.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridColumnPZVOperListOlNChasi.Name = "gridColumnPZVOperListOlNChasi";
             gridColumnPZVOperListOlNChasi.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             gridColumnPZVOperListOlNChasi.OptionsColumn.FixedWidth = true;
@@ -3095,7 +3281,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // layoutControlItem8
             // 
-            layoutControlItem8.Control = customGridControl5;
+            layoutControlItem8.Control = gridControlNaryadZadany;
             layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             layoutControlItem8.Name = "layoutControlItem8";
             layoutControlItem8.Size = new System.Drawing.Size(784, 385);
@@ -3270,8 +3456,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customGridControl5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlNaryadZadany).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewNaryadZadany).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlPZVOperList).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewPZVOperList).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).EndInit();
@@ -3330,8 +3516,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private Core.Class.CustomGridControl gridControlPZVOperList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewPZVOperList;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private Core.Class.CustomGridControl customGridControl5;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
+        private Core.Class.CustomGridControl gridControlNaryadZadany;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewNaryadZadany;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private DevExpress.XtraLayout.SplitterItem splitterItem2;
@@ -3573,6 +3759,33 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnFio;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnKwsID;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnKwsTabStart;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNaznZadGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNotConfirmedZadGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasRemainZadGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnShiftsRemainZadGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNaznSmenGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNaznSmenProcGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasInWorkSmenGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasDoneSmenGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasDoneSmenProcGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasRemainSmenGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasConfirmedSmenGroup;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnKodOb;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnKmlNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnPzvArticul;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnPzvNomZad;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnPzvNom;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnNPach;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnNomOper;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnText;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnRazryd;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnSekObServ;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnHoursTotalPlan;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnHoursTotalFact;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnPzvKol;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnStatusName;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnPzvTab;
+        private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnStatusDate;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand9;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand10;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand11;
@@ -3591,18 +3804,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand22;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand19;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand20;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNaznZadGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNotConfirmedZadGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasRemainZadGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnShiftsRemainZadGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNaznSmenGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasNaznSmenProcGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasInWorkSmenGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasDoneSmenGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasDoneSmenProcGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasRemainSmenGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnChasConfirmedSmenGroup;
-        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridSmenZadanyColumnKodOb;
         //        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlSekAll;
     }
 }
