@@ -370,7 +370,6 @@ namespace SewingProduction.Features.Articul.Forms
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(453, 20);
             customLabel1.TabIndex = 1;
-            customLabel1.Text = "В списке ГОСТов набора отображаются только те ГОСТы, которые подходят по размерному ряду текущего ГОСТа.";
             // 
             // customCheckBoxVerified
             // 

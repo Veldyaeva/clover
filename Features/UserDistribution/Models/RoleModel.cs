@@ -53,6 +53,9 @@ namespace SewingProduction.Features.UserDistribution.Models
             set { if (_creatorID != value) { _creatorID = value; OnPropertyChanged(nameof(CreatorID)); } }
         }
 
+        [NotMapped]
+        public bool IsSelected { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
@@ -62,10 +65,10 @@ namespace SewingProduction.Features.UserDistribution.Models
         private readonly DbService _dbService;
         private readonly DatabaseHelper _dbHelper;
 
-        public RoleDataService(DbService dbService, DatabaseHelper dbHelper)
+        public RoleDataService()
         {
-            _dbService = dbService;
-            _dbHelper = dbHelper;
+            _dbHelper = new DatabaseHelper();
+            _dbService = new DbService(_dbHelper);
         }
 
         public async Task<List<RoleModel>> GetListRolesAsync(int userId)

@@ -46,10 +46,10 @@ namespace SewingProduction.Features.UserDistribution.Models
         private readonly DbService _dbService;
         private readonly DatabaseHelper _dbHelper;
 
-        public AllTableNameDataService(DbService dbService, DatabaseHelper dbHelper)
+        public AllTableNameDataService()
         {
-            _dbService = dbService;
-            _dbHelper = dbHelper;
+            _dbHelper = new DatabaseHelper();
+            _dbService = new DbService(_dbHelper);
         }
 
         public async Task<List<AllTableNameModel>> GetListTableAsync()

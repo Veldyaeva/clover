@@ -40,17 +40,19 @@ namespace SewingProduction.Features.UserDistribution.Forms
             gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            customButton3 = new CustomButton();
+            customButtonUserPodr = new CustomButton();
             customButtonChangeUser = new CustomButton();
             customButtonHistory = new CustomButton();
-            customButtonAllRpofile = new CustomButton();
-            customButtonUserHierarchy = new CustomButton();
             customActionButtonNon = new CustomActionButton();
             tableLayoutPanelButton = new System.Windows.Forms.TableLayoutPanel();
-            customButtonAllDistribution = new CustomButton();
-            customButtonAllRole = new CustomButton();
             customButtonAdminSprav = new CustomButton();
             customButtonSpravTable = new CustomButton();
+            customButtonUserHierarchy = new CustomButton();
             customButtonAdminForm = new CustomButton();
+            customButtonAllDistribution = new CustomButton();
+            customButtonAllRole = new CustomButton();
+            customButtonAllRpofile = new CustomButton();
             tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             customLabelProfileName = new CustomLabel();
             customLabelComp = new CustomLabel();
@@ -226,6 +228,38 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanel4.Size = new System.Drawing.Size(197, 459);
             tableLayoutPanel4.TabIndex = 10;
             // 
+            // customButton3
+            // 
+            customButton3.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButton3.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButton3.Font = new System.Drawing.Font("Arial", 10F);
+            customButton3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButton3.Location = new System.Drawing.Point(4, 183);
+            customButton3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButton3.MinimumSize = new System.Drawing.Size(160, 20);
+            customButton3.Name = "customButton3";
+            customButton3.Size = new System.Drawing.Size(191, 39);
+            customButton3.TabIndex = 14;
+            customButton3.Text = "Роли - Подразделения";
+            customButton3.UseVisualStyleBackColor = false;
+            customButton3.Click += customButton3_Click;
+            // 
+            // customButtonUserPodr
+            // 
+            customButtonUserPodr.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonUserPodr.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonUserPodr.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonUserPodr.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonUserPodr.Location = new System.Drawing.Point(4, 228);
+            customButtonUserPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonUserPodr.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonUserPodr.Name = "customButtonUserPodr";
+            customButtonUserPodr.Size = new System.Drawing.Size(191, 39);
+            customButtonUserPodr.TabIndex = 13;
+            customButtonUserPodr.Text = "Администрирование табеля";
+            customButtonUserPodr.UseVisualStyleBackColor = false;
+            customButtonUserPodr.Click += customButtonUserPodr_Click;
+            // 
             // customButtonChangeUser
             // 
             customButtonChangeUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
@@ -258,38 +292,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonHistory.UseVisualStyleBackColor = false;
             customButtonHistory.Click += customButtonHistory_Click;
             // 
-            // customButtonAllRpofile
-            // 
-            customButtonAllRpofile.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButtonAllRpofile.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAllRpofile.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAllRpofile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonAllRpofile.Location = new System.Drawing.Point(4, 48);
-            customButtonAllRpofile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllRpofile.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAllRpofile.Name = "customButtonAllRpofile";
-            customButtonAllRpofile.Size = new System.Drawing.Size(191, 39);
-            customButtonAllRpofile.TabIndex = 0;
-            customButtonAllRpofile.Text = "Список пользователей";
-            customButtonAllRpofile.UseVisualStyleBackColor = false;
-            customButtonAllRpofile.Click += customButtonAllRpofile_Click;
-            // 
-            // customButtonUserHierarchy
-            // 
-            customButtonUserHierarchy.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButtonUserHierarchy.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonUserHierarchy.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonUserHierarchy.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonUserHierarchy.Location = new System.Drawing.Point(4, 3);
-            customButtonUserHierarchy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonUserHierarchy.Name = "customButtonUserHierarchy";
-            customButtonUserHierarchy.Size = new System.Drawing.Size(191, 39);
-            customButtonUserHierarchy.TabIndex = 9;
-            customButtonUserHierarchy.Text = "Иерархия пользователей";
-            customButtonUserHierarchy.UseVisualStyleBackColor = false;
-            customButtonUserHierarchy.Click += customButtonUserHierarchy_Click;
-            // 
             // customActionButtonNon
             // 
             customActionButtonNon.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
@@ -310,8 +312,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             tableLayoutPanelButton.ColumnCount = 1;
             tableLayoutPanelButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanelButton.Controls.Add(customButton3, 0, 4);
             tableLayoutPanelButton.Controls.Add(customButtonAdminSprav, 0, 8);
             tableLayoutPanelButton.Controls.Add(customButtonSpravTable, 0, 7);
+            tableLayoutPanelButton.Controls.Add(customButtonUserPodr, 0, 5);
             tableLayoutPanelButton.Controls.Add(customButtonUserHierarchy, 0, 0);
             tableLayoutPanelButton.Controls.Add(customButtonAdminForm, 0, 6);
             tableLayoutPanelButton.Controls.Add(customButtonAllDistribution, 0, 3);
@@ -335,38 +339,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             tableLayoutPanelButton.Size = new System.Drawing.Size(199, 459);
             tableLayoutPanelButton.TabIndex = 7;
-            // 
-            // customButtonAllDistribution
-            // 
-            customButtonAllDistribution.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButtonAllDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAllDistribution.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAllDistribution.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonAllDistribution.Location = new System.Drawing.Point(4, 138);
-            customButtonAllDistribution.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllDistribution.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAllDistribution.Name = "customButtonAllDistribution";
-            customButtonAllDistribution.Size = new System.Drawing.Size(191, 39);
-            customButtonAllDistribution.TabIndex = 13;
-            customButtonAllDistribution.Text = "Распределение прав";
-            customButtonAllDistribution.UseVisualStyleBackColor = false;
-            customButtonAllDistribution.Click += customButtonAllDistribution_Click;
-            // 
-            // customButtonAllRole
-            // 
-            customButtonAllRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButtonAllRole.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAllRole.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAllRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonAllRole.Location = new System.Drawing.Point(4, 93);
-            customButtonAllRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllRole.MinimumSize = new System.Drawing.Size(160, 20);
-            customButtonAllRole.Name = "customButtonAllRole";
-            customButtonAllRole.Size = new System.Drawing.Size(191, 39);
-            customButtonAllRole.TabIndex = 7;
-            customButtonAllRole.Text = "Список ролей";
-            customButtonAllRole.UseVisualStyleBackColor = false;
-            customButtonAllRole.Click += customButtonAllRole_Click;
             // 
             // customButtonAdminSprav
             // 
@@ -400,6 +372,22 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonSpravTable.UseVisualStyleBackColor = false;
             customButtonSpravTable.Click += customButtonSpravTable_Click;
             // 
+            // customButtonUserHierarchy
+            // 
+            customButtonUserHierarchy.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonUserHierarchy.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonUserHierarchy.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonUserHierarchy.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonUserHierarchy.Location = new System.Drawing.Point(4, 3);
+            customButtonUserHierarchy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonUserHierarchy.Name = "customButtonUserHierarchy";
+            customButtonUserHierarchy.Size = new System.Drawing.Size(191, 39);
+            customButtonUserHierarchy.TabIndex = 9;
+            customButtonUserHierarchy.Text = "Иерархия пользователей";
+            customButtonUserHierarchy.UseVisualStyleBackColor = false;
+            customButtonUserHierarchy.Click += customButtonUserHierarchy_Click;
+            // 
             // customButtonAdminForm
             // 
             customButtonAdminForm.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
@@ -415,6 +403,54 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonAdminForm.Text = "Администрирование форм";
             customButtonAdminForm.UseVisualStyleBackColor = false;
             customButtonAdminForm.Click += customButtonAdminForm_Click;
+            // 
+            // customButtonAllDistribution
+            // 
+            customButtonAllDistribution.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonAllDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAllDistribution.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAllDistribution.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonAllDistribution.Location = new System.Drawing.Point(4, 138);
+            customButtonAllDistribution.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAllDistribution.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAllDistribution.Name = "customButtonAllDistribution";
+            customButtonAllDistribution.Size = new System.Drawing.Size(191, 39);
+            customButtonAllDistribution.TabIndex = 13;
+            customButtonAllDistribution.Text = "Распределение прав";
+            customButtonAllDistribution.UseVisualStyleBackColor = false;
+            customButtonAllDistribution.Click += customButtonAllDistribution_Click;
+            // 
+            // customButtonAllRole
+            // 
+            customButtonAllRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonAllRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAllRole.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAllRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonAllRole.Location = new System.Drawing.Point(4, 93);
+            customButtonAllRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAllRole.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAllRole.Name = "customButtonAllRole";
+            customButtonAllRole.Size = new System.Drawing.Size(191, 39);
+            customButtonAllRole.TabIndex = 7;
+            customButtonAllRole.Text = "Список ролей";
+            customButtonAllRole.UseVisualStyleBackColor = false;
+            customButtonAllRole.Click += customButtonAllRole_Click;
+            // 
+            // customButtonAllRpofile
+            // 
+            customButtonAllRpofile.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonAllRpofile.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAllRpofile.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAllRpofile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonAllRpofile.Location = new System.Drawing.Point(4, 48);
+            customButtonAllRpofile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAllRpofile.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonAllRpofile.Name = "customButtonAllRpofile";
+            customButtonAllRpofile.Size = new System.Drawing.Size(191, 39);
+            customButtonAllRpofile.TabIndex = 0;
+            customButtonAllRpofile.Text = "Список пользователей";
+            customButtonAllRpofile.UseVisualStyleBackColor = false;
+            customButtonAllRpofile.Click += customButtonAllRpofile_Click;
             // 
             // tableLayoutPanel3
             // 
@@ -847,5 +883,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private CustomTextBox customTextBoxNewLogin;
         private CustomActionButton customActionButtonEditLogin;
         private CustomButton customButtonAllDistribution;
+        private CustomButton customButtonUserPodr;
+        private CustomButton customButton3;
     }
 }

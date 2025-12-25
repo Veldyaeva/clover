@@ -196,6 +196,15 @@
     <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\UserDistribution\Forms\RolePodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\ShareUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\UserPodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Help\Form\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>

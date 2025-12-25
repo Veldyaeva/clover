@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
+using SewingProduction.Features.UserDistribution.DataService;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
@@ -31,9 +32,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             dbService = new DbService(dbHelper);
-            _userModelDataService = new UserModelDataService(dbService, dbHelper);
+            _userModelDataService = new UserModelDataService();
             _userRoleDataService = new UserRoleDataService(dbHelper);
-            _roleDataService = new RoleDataService(dbService, dbHelper);
+            _roleDataService = new RoleDataService();
             _allRoleDataService = new AllRoleDataService(dbHelper);
             _allProfileDataService = new AllProfileDataService(dbHelper);
             _user = user;
@@ -233,6 +234,14 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 await _userModelDataService.DeleteAsync(user);
                 Console.WriteLine("удален пользователь, ID " + user.UserID);
                 gridViewUsers.DeleteRow(gridViewUsers.FocusedRowHandle);
+            }
+        }
+
+        private void customButtonUserPodr_Click(object sender, EventArgs e)
+        {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new UserPodr(_user));
             }
         }
     }
