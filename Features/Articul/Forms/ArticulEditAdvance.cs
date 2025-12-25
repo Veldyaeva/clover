@@ -42,7 +42,7 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
         private BindingSource _bindingSourceArtCommonSave;
-        
+        private BindingSource _bindingSourceGostGrup;
 
         public ArticulEditAdvance(UserClass user) : this(user, "", "")
         { }
@@ -66,6 +66,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             _bindingSourceArtCommon = new BindingSource { };
             _bindingSourceArtCommonSave = new BindingSource { };
+            _bindingSourceGostGrup = new BindingSource { };
         }
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
@@ -101,10 +102,45 @@ namespace SewingProduction.Features.Articul.Forms
                 lookUpGost.Properties.DisplayMember = nameof(GostModel.Name_gost);
                 lookUpGost.Properties.ValueMember = nameof(GostModel.Id_gost);
                 lookUpGost.Properties.NullText = "Не выбрано";
+                lookUpGostGrup.DataBindings.Clear();
                 lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true);
                 //инициализация описания госта
                 UpdateOpi();
-                
+
+                #region описание группы госта
+                //группа по гостам
+                lookUpGostGrup.Properties.DataSource = _bindingSourceGostGrup;
+                lookUpGostGrup.Properties.DisplayMember = nameof(GostGrupIzdViewModel.Ag_name_sokr);
+                lookUpGostGrup.Properties.ValueMember = nameof(GostGrupIzdViewModel.Ag_id);
+                lookUpGostGrup.Properties.NullText = "Не выбрано";
+                lookUpGostGrup.DataBindings.Clear();
+                lookUpGostGrup.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Ag_id), true);
+
+                var view = lookUpGostGrup.Properties.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
+                if (view == null)
+                    throw new InvalidOperationException("PopupView не GridView");
+                view.OptionsView.ShowColumnHeaders = true;
+                view.OptionsView.ShowIndicator = false;
+                //view.OptionsView.ShowAutoFilterRow = true; // ⭐ фильтр по колонкам
+
+                view.OptionsBehavior.Editable = false;
+                view.OptionsSelection.EnableAppearanceFocusedCell = false;
+                view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+
+                view.Columns.Clear();
+
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Id_gost), "ГостId");
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.Ag_name_sokr), "Сокращенное название");
+                view.Columns.AddVisible(nameof(GostGrupIzdViewModel.N_i), "Наименование");
+
+                // Скрытые поля (но доступны как ValueMember)
+                //view.Columns[nameof(GostGrupIzdViewModel.Ag_id)].Visible = false;
+                //view.Columns[nameof(GostGrupIzdViewModel.Id_gost)].Visible = false;
+
+                view.BestFitColumns();
+
+                #endregion
+
                 //Страна
                 cbTM.DataSource = CommonSpravArticulEditAdvance.Tms;
                 cbTM.DisplayMember = nameof(TmModel.Kle_naimen);
@@ -166,14 +202,6 @@ namespace SewingProduction.Features.Articul.Forms
 
                 BindFieldByNameLookUp(this.layoutControlGroup8, _bindingSourceArtCommon, CommonSpravArticulEditAdvance.Tkans);
 
-                /*
-                cbuKod_t1.Properties.DataSource = CommonSpravArticulEditAdvance.Tkans;
-                cbuKod_t1.Properties.DisplayMember = nameof(SpArticulTkanSokr.Tkb);
-                cbuKod_t1.Properties.ValueMember = nameof(SpArticulTkanSokr.Kod_t);
-                cbuKod_t1.Properties.NullText = "Не выбрано";
-                cbuKod_t1.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Kod_t1), true);
-                */
-
                 #endregion
 
             }
@@ -183,9 +211,37 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
-        //, String NameField
+        private void ConfigurePopupGridTkan(SearchLookUpEdit sle)
+        {
+            var view = sle.Properties.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view == null)
+                throw new InvalidOperationException("PopupView не GridView");
+            view.OptionsView.ShowColumnHeaders = true;
+            view.OptionsView.ShowIndicator = false;
+            //view.OptionsView.ShowAutoFilterRow = true; // ⭐ фильтр по колонкам
+            view.OptionsBehavior.Editable = false;
+            view.OptionsSelection.EnableAppearanceFocusedCell = false;
+            view.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            view.Columns.Clear();
+            //view.Columns.AddVisible(nameof(SpArticulTkanSokr.Kod_t), "Код ткани");
+            view.Columns.AddVisible(nameof(SpArticulTkanSokr.Tkan), "Ткань");
+            //view.Columns.AddVisible(nameof(SpArticulTkanSokr.Tkb), "Краткое наименование");
+            
+            // Скрытые поля (но доступны как ValueMember)
+            //view.Columns[nameof(SpArticulTkanSokr.IsDifficult)].Visible = false;
+            //view.Columns[nameof(SpArticulTkanSokr.Difficult_koef)].Visible = false;
+            view.BestFitColumns();
+        }
 
-        public async void BindFieldByNameLookUp(LayoutControlGroup group, BindingSource bs, IReadOnlyList<SpArticulTkanSokr> sprav) {
+
+        /// <summary>
+        /// функция привязки полей LookUpEdit по имени контрола
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="bs"></param>
+        /// <param name="sprav"></param>
+        public async void BindFieldByNameLookUp(LayoutControlGroup group, BindingSource bs, IReadOnlyList<SpArticulTkanSokr> sprav)
+        {
             try
             {
                 foreach (BaseLayoutItem item in group.Items)
@@ -202,7 +258,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                     if (lci.Control is SearchLookUpEdit sle)
                     {
-                        string propName = sle.Name[3..]; // sluKod_t1 → Kod_t1
+                        string propName = sle.Name[3..]; // txtKod_t1 → Kod_t1
 
                         // проверка модели
                         if (props.Find(propName, true) == null)
@@ -221,6 +277,7 @@ namespace SewingProduction.Features.Articul.Forms
                             true,
                             DataSourceUpdateMode.OnPropertyChanged
                         );
+                        ConfigurePopupGridTkan(sle);
 
                         continue;
                     }
@@ -232,8 +289,12 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
-        
 
+        /// <summary>
+        /// функция  привязки полей по имени контрола
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="bs"></param>
         public async void BindFieldByName(LayoutControlGroup group, BindingSource bs)
         {
             try
@@ -247,7 +308,7 @@ namespace SewingProduction.Features.Articul.Forms
                         var props = bs.CurrencyManager?.GetItemProperties();
                         if (props == null)
                             throw new InvalidOperationException("BindingSource не инициализирован");
-                        
+
                         string propName = edit.Name.Length > 3 ? edit.Name[3..] : edit.Name;
                         // удаление префикса txt или txb controlName.Substring(3);
                         var pd = props.Find(propName, true);
@@ -272,8 +333,14 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-       
-
+        //private void UpdateGostGrup()
+        //{
+        //    var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+        //    if (lookUpGostGrup.EditValue is int id)
+        //        currentItem.Grup = CommonSpravArticulEditAdvance.GostGroupNames.FirstOrDefault(x => x.Ag_id == id)?.Ag_name_sokr ?? "";
+        //    else
+        //        currentItem.Grup = "";
+        //}
         private void UpdateOpi()
         {
             if (lookUpGost.EditValue is int id)
@@ -291,6 +358,8 @@ namespace SewingProduction.Features.Articul.Forms
             try
             {
                 _bindingSourceArtCommon.EndEdit();
+                _bindingSourceArtCommonSave.Clear();
+
                 //копирование всех кодов с измененными общими данными в список для сохранения
                 var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
                 if (currentItem.IsModified == false)
@@ -323,7 +392,11 @@ namespace SewingProduction.Features.Articul.Forms
                         _bulkHelper.BulkAllDataUpdate<ArticulModel>(connection, filteredList, "sp_articul", new[] { "kod" });
                     }
                 }
+
                 _bindingSourceArtCommonSave.Clear();
+                //принятие изменений в текущей модели
+                currentItem.AcceptChanges();
+
                 XtraMessageBox.Show("Изменения успешно сохранены.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
@@ -333,17 +406,43 @@ namespace SewingProduction.Features.Articul.Forms
                 XtraMessageBox.Show("Ошибка при сохранении изменений артикула: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            }
+        }
 
 
         private void lookUpGost_EditValueChanged(object sender, EventArgs e)
         {
-            UpdateOpi();
+            try
+            {
+                UpdateOpi();
+
+                //oбновление фильтра группы по госту
+                var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+                if (lookUpGost.EditValue is not int idGost)
+                    return;
+                _bindingSourceGostGrup.DataSource = CommonSpravArticulEditAdvance.GostGroupNames
+                    .Where(x => x.Id_gost == idGost)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при изменении госта");
+                throw;
+            }
         }
 
         private void ArticulEditAdvance_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+
+        private void lookUpGostGrup_EditValueChanged(object sender, EventArgs e)
+        {
+            //UpdateGostGrup();
+            var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+            if (lookUpGostGrup.EditValue is int id)
+                currentItem.Grup = CommonSpravArticulEditAdvance.GostGroupNames.FirstOrDefault(x => x.Ag_id == id)?.Ag_name_sokr ?? "";
+            else
+                currentItem.Grup = "";
         }
     }
 }

@@ -1,13 +1,55 @@
-﻿using System;
+﻿using SewingProduction.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using SewingProduction.Interfaces;
 
 
 namespace SewingProduction.Core.Models
 {
     public class ArticulModel : INewable, IModifiable, IDeletable, INotifyPropertyChanged, ISupportInitialize
     {
+        private bool _isInitializing;
+
+        // ISupportInitialize
+        public void BeginInit() => _isInitializing = true;
+
+        public void EndInit()
+        {
+            _isInitializing = false;
+            IsModified = false;
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        [NotMapped]public bool IsModified { get; set; } = false;
+        [NotMapped]public bool IsNew { get; set; } = false;
+        [NotMapped]public bool IsDeleted { get; set; } = false;
+        /// <summary>
+        /// применение параметров для отслеживания  изменений в модели
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="field"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        protected bool SetField<T>(ref T field, T value)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            field = value;
+
+            if (!_isInitializing)
+                IsModified = true;
+
+            return true;
+        }
+        public void AcceptChanges()
+        {
+            IsModified = false;
+        }
+        //основные поля 
         [NotMapped]public string Ko { get; set; }
         [NotMapped] public string baz { get; set; }
         [NotMapped] public string Kodd { get; set; }
@@ -15,92 +57,43 @@ namespace SewingProduction.Core.Models
         
         public string Grup { get; set; }
         private int _ag_id;
+        public int Ag_id{get => _ag_id; set=> SetField(ref _ag_id, value); }
 
-        public int Ag_id{
-            get => _ag_id;
-            set
-            {
-                if (_ag_id != value){_ag_id = value; if (!_isInitializing) IsModified = true; }
-            }
-        }
         private string _articul;
-        public string Articul { get=>_articul; set
-            { 
-                if (_articul != value) 
-                { 
-                    _articul = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }
+        public string Articul { get=>_articul; 
+            set => SetField(ref _articul, value);
         }
         private string _mod;
         public string Mod { get=>_mod;
-            set {
-            if (_mod != value) 
-                { 
-                    _mod = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            } 
+            set => SetField(ref _mod, value);
         }
         private string _razm;
         public string Razm { get=>_razm;
-            set {
-                if (_razm != value) 
-                { 
-                    _razm = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            } 
+            set => SetField(ref _razm, value);
         }
         private string _sost;
-        public string Sost { get=>_sost;
-            set
-            { if (_sost != value) 
-                { 
-                    _sost = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }}
+        public string Sost { get => _sost;
+            set => SetField(ref _sost, value);
+        }
 
         private string _sost2;
-        public string Sost2 { get=>_sost2;
-            set {
-                if (_sost2 != value) 
-                { 
-                    _sost2 = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }
+        public string Sost2 { 
+            get=>_sost2;
+            set => SetField(ref _sost2, value);
         }
         private string _sost3;
         public string Sost3 { get=>_sost3;
-            set {
-                if (_sost3 != value) 
-                { 
-                    _sost3 = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }
+            set =>SetField(ref _sost3, value);
         }
         private int _id_gost ;
         public int Id_gost { get=>_id_gost;
-            set { 
-            if (_id_gost != value) 
-                { 
-                    _id_gost = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            } }
+            set=> SetField(ref _id_gost, value);
+        }
         public string _gost;
-        public string Gost { get=>_gost;
-            set {
-                if (_gost != value) 
-                { 
-                    _gost = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            } }
+        public string Gost { 
+            get=>_gost;
+            set => SetField(ref _gost, value);
+        }
 
         public decimal Norm_t { get; set; }
         public decimal Norm_r { get; set; }
@@ -129,11 +122,11 @@ namespace SewingProduction.Core.Models
         public string Text { get; set; }
         public string _kle;
         public string Kle { get=>_kle;
-            set { if (_kle != value) { _kle = value; if (!_isInitializing) IsModified = true; } }
+            set => SetField(ref _kle, value);
             }
         private int _grupp;
         public int Grupp { get=>_grupp;
-            set { if (_grupp != value){ _grupp = value; if (!_isInitializing) IsModified = true; } }
+            set => SetField(ref _grupp, value);
         }
         public int P { get; set; }
         public int V { get; set; }
@@ -143,31 +136,228 @@ namespace SewingProduction.Core.Models
         public string P_gruppa { get; set; }
         public string Text_m { get; set; }
         private string _tkb;
-        public string Tkb { get=>_tkb;
-            set { 
-            if (_tkb != value) 
-                { 
-                    _tkb = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }
+        public string Tkb { 
+            get=>_tkb;
+            set => SetField(ref _tkb, value);
         }
-        public string Kod_t1 { get; set; }
-        public string Tkb1 { get; set; }
-        public decimal Norm_t1 { get; set; }
-        public string Opis_t1 { get; set; }
-        public string Kod_t2 { get; set; }
-        public string Tkb2 { get; set; }
-        public decimal Norm_t2 { get; set; }
-        public string Opis_t2 { get; set; }
-        public string Kod_t3 { get; set; }
-        public string Tkb3 { get; set; }
-        public decimal Norm_t3 { get; set; }
-        public string Opis_t3 { get; set; }
-        public string Kod_t4 { get; set; }
-        public string Tkb4 { get; set; }
-        public decimal Norm_t4 { get; set; }
-        public string Opis_t4 { get; set; }
+        private string _kod_t1;
+        public string Kod_t1
+        {
+            get => _kod_t1;
+            set => SetField(ref _kod_t1, value);
+        }
+
+        private string _tkb1;
+        public string Tkb1
+        {
+            get => _tkb1;
+            set => SetField(ref _tkb1, value);
+        }
+
+        private decimal _norm_t1;
+        public decimal Norm_t1
+        {
+            get => _norm_t1;
+            set => SetField(ref _norm_t1, value);
+        }
+
+        private string _opis_t1;
+        public string Opis_t1
+        {
+            get => _opis_t1;
+            set => SetField(ref _opis_t1, value);
+        }
+
+        // === t2 ===
+        private string _kod_t2;
+        public string Kod_t2
+        {
+            get => _kod_t2;
+            set => SetField(ref _kod_t2, value);
+        }
+
+        private string _tkb2;
+        public string Tkb2
+        {
+            get => _tkb2;
+            set => SetField(ref _tkb2, value);
+        }
+
+        private decimal _norm_t2;
+        public decimal Norm_t2
+        {
+            get => _norm_t2;
+            set => SetField(ref _norm_t2, value);
+        }
+
+        private string _opis_t2;
+        public string Opis_t2
+        {
+            get => _opis_t2;
+            set => SetField(ref _opis_t2, value);
+        }
+
+        // === t3 ===
+        private string _kod_t3;
+        public string Kod_t3
+        {
+            get => _kod_t3;
+            set => SetField(ref _kod_t3, value);
+        }
+
+        private string _tkb3;
+        public string Tkb3
+        {
+            get => _tkb3;
+            set => SetField(ref _tkb3, value);
+        }
+
+        private decimal _norm_t3;
+        public decimal Norm_t3
+        {
+            get => _norm_t3;
+            set => SetField(ref _norm_t3, value);
+        }
+
+        private string _opis_t3;
+        public string Opis_t3
+        {
+            get => _opis_t3;
+            set => SetField(ref _opis_t3, value);
+        }
+
+        // === t4 ===
+        private string _kod_t4;
+        public string Kod_t4
+        {
+            get => _kod_t4;
+            set => SetField(ref _kod_t4, value);
+        }
+
+        private string _tkb4;
+        public string Tkb4
+        {
+            get => _tkb4;
+            set => SetField(ref _tkb4, value);
+        }
+
+        private decimal _norm_t4;
+        public decimal Norm_t4
+        {
+            get => _norm_t4;
+            set => SetField(ref _norm_t4, value);
+        }
+
+        private string _opis_t4;
+        public string Opis_t4
+        {
+            get => _opis_t4;
+            set => SetField(ref _opis_t4, value);
+        }
+
+        // === t5 ===
+        private string _kod_t5;
+        public string Kod_t5
+        {
+            get => _kod_t5;
+            set => SetField(ref _kod_t5, value);
+        }
+
+        private string _tkb5;
+        public string Tkb5
+        {
+            get => _tkb5;
+            set => SetField(ref _tkb5, value);
+        }
+
+        private decimal _norm_t5;
+        public decimal Norm_t5
+        {
+            get => _norm_t5;
+            set => SetField(ref _norm_t5, value);
+        }
+
+        private string _opis_t5;
+        public string Opis_t5
+        {
+            get => _opis_t5;
+            set => SetField(ref _opis_t5, value);
+        }
+
+        // === t6 ===
+        private string _kod_t6;
+        public string Kod_t6
+        {
+            get => _kod_t6;
+            set => SetField(ref _kod_t6, value);
+        }
+
+        private string _tkb6;
+        public string Tkb6
+        {
+            get => _tkb6;
+            set => SetField(ref _tkb6, value);
+        }
+
+        private decimal _norm_t6;
+        public decimal Norm_t6
+        {
+            get => _norm_t6;
+            set => SetField(ref _norm_t6, value);
+        }
+
+        private string _opis_t6;
+        public string Opis_t6
+        {
+            get => _opis_t6;
+            set => SetField(ref _opis_t6, value);
+        }
+
+        // === t7 ===
+        private string _kod_t7;
+        public string Kod_t7
+        {
+            get => _kod_t7;
+            set => SetField(ref _kod_t7, value);
+        }
+
+        private string _tkb7;
+        public string Tkb7
+        {
+            get => _tkb7;
+            set => SetField(ref _tkb7, value);
+        }
+
+        private decimal _norm_t7;
+        public decimal Norm_t7
+        {
+            get => _norm_t7;
+            set => SetField(ref _norm_t7, value);
+        }
+
+        private decimal _seb_t7;
+        public decimal Seb_t7
+        {
+            get => _seb_t7;
+            set => SetField(ref _seb_t7, value);
+        }
+
+        private string _opis_t7;
+        public string Opis_t7
+        {
+            get => _opis_t7;
+            set => SetField(ref _opis_t7, value);
+        }
+
+
+        public decimal Seb_dop { get; set; }
+        public decimal Seb_t1 { get; set; }
+        public decimal Seb_t3 { get; set; }
+        public decimal Seb_t2 { get; set; }
+        public decimal Seb_t4 { get; set; }
+        public decimal Seb_t5 { get; set; }
+        public decimal Seb_t6 { get; set; }
+
         public int Baza { get; set; }
         private int _kod_v;
         public int Kod_v { get=>_kod_v;
@@ -179,21 +369,7 @@ namespace SewingProduction.Core.Models
                 }
             }
         }
-        public string Kod_t5 { get; set; }
-        public string Tkb5 { get; set; }
-        public decimal Norm_t5 { get; set; }
-        public string Opis_t5 { get; set; }
-        public string Kod_t6 { get; set; }
-        public string Tkb6 { get; set; }
-        public decimal Norm_t6 { get; set; }
-        public string Opis_t6 { get; set; }
-        public decimal Seb_dop { get; set; }
-        public decimal Seb_t1 { get; set; }
-        public decimal Seb_t3 { get; set; }
-        public decimal Seb_t2 { get; set; }
-        public decimal Seb_t4 { get; set; }
-        public decimal Seb_t5 { get; set; }
-        public decimal Seb_t6 { get; set; }
+        
         public int Sek_vyaz6 { get; set; }
         public int Sek_vyaz10 { get; set; }
         public int Sek_vyazo { get; set; }
@@ -203,11 +379,7 @@ namespace SewingProduction.Core.Models
         public decimal Koef_pr { get; set; }
         public decimal Ob_izd { get; set; }
         public int Stavka_nds { get; set; }
-        public string Kod_t7 { get; set; }
-        public string Tkb7 { get; set; }
-        public decimal Norm_t7 { get; set; }
-        public decimal Seb_t7 { get; set; }
-        public string Opis_t7 { get; set; }
+        
         public int Sposob_up { get; set; }
         
         private int _id_country;
@@ -323,26 +495,9 @@ namespace SewingProduction.Core.Models
         public decimal Sek_vyaz18 { get; set; }
         public int? Annid { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        
 
-        [NotMapped]
-        public bool IsModified { get; set; } = false;
-        [NotMapped]
-        public bool IsNew { get; set; } = false;
-        [NotMapped]
-        public bool IsDeleted { get; set; } = false;
-
-        private bool _isInitializing;
-        // ISupportInitialize
-        public void BeginInit() => _isInitializing = true;
-
-        public void EndInit()
-        {
-            _isInitializing = false;
-            IsModified = false;
-        }
+        
 
 
     }

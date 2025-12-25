@@ -39,6 +39,8 @@ namespace SewingProduction.Features.Articul.Service
         = Array.Empty<AssortModel>();
         public static IReadOnlyList<SpArticulTkanSokr> Tkans { get; private set; }
         = Array.Empty<SpArticulTkanSokr>();
+        public static IReadOnlyList<GostGrupIzdViewModel> GostGroupNames { get; private set; }
+        = Array.Empty<GostGrupIzdViewModel>();
 
         public static Task EnsureLoadedAsync(DbService db)
         {
@@ -65,9 +67,12 @@ namespace SewingProduction.Features.Articul.Service
             var AssortTask = db.GetListAsync<AssortModel>(
                 "select kod_v, txt_v from gtin.assort", new { });
             var TkanTask = db.GetListAsync<SpArticulTkanSokr>(
-                "select Kod_t, Tkan, Tkb, IsDifficult, Difficult_koef from dbo.view_tkan", new { });
+                "select Kod_t, Tkan, Tkb, IsDifficult, Difficult_koef from dbo.view_tkan order by tkb", new { });
+            var GostGroupNamesTask = db.GetListAsync<GostGrupIzdViewModel>(
+                "SELECT id_gost, ag_id, ag_name_sokr,n_i FROM View_GostGrupIzd ", new { });
+
             //ожидаем все задачи
-            await Task.WhenAll(seasonsTask, gostTask, tmTask, CountryTask, GrupMenTask, AssortTask, TkanTask);
+            await Task.WhenAll(seasonsTask, gostTask, tmTask, CountryTask, GrupMenTask, AssortTask, TkanTask, GostGroupNamesTask);
             
             Gosts = (await gostTask).AsReadOnly();
             Tms = (await tmTask).AsReadOnly();
@@ -76,6 +81,7 @@ namespace SewingProduction.Features.Articul.Service
             GrupMen = (await GrupMenTask).AsReadOnly();
             Assorts = (await AssortTask).AsReadOnly();
             Tkans = (await TkanTask).AsReadOnly();
+            GostGroupNames = (await GostGroupNamesTask).AsReadOnly();
         }
 
         public static async Task ReloadAsync(DbService db)
