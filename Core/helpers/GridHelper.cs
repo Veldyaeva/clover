@@ -21,6 +21,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static SewingProduction.Helpers.GridHelper;
 
 namespace SewingProduction.Helpers
 {
@@ -579,12 +580,70 @@ namespace SewingProduction.Helpers
         }
         #endregion
         #region прорисовка подытогов в строках группировки BandedGridView
-        public void EnableGroupSummariesInGroupRow(BandedGridView view)
+        public enum GroupSummaryLevelMode
         {
+            IncludeOnly,   // показывать ТОЛЬКО на указанных уровнях
+            ExcludeOnly,   // показывать ВЕЗДЕ, КРОМЕ указанных уровней
+            All,           // показывать на всех уровнях
+            //None           // не обновлять никаких полей
+        }
+        private static bool ShouldDrawGroupSummary(
+            int groupLevel,
+            GroupSummaryLevelMode mode,
+            IReadOnlyCollection<int> levels)
+        {
+            // если список уровней пуст
+            if (levels == null || levels.Count == 0)
+            {
+                return mode switch
+                {
+                    GroupSummaryLevelMode.All => true,
+                    GroupSummaryLevelMode.IncludeOnly => false,
+                    GroupSummaryLevelMode.ExcludeOnly => true,
+                    _ => true
+                };
+            }
+
+            bool contains = levels.Contains(groupLevel);
+
+            return mode switch
+            {
+                GroupSummaryLevelMode.All => true,
+                GroupSummaryLevelMode.IncludeOnly => contains,
+                GroupSummaryLevelMode.ExcludeOnly => !contains,
+                _ => true
+            };
+        }
+        //public void EnableGroupSummariesInGroupRow(BandedGridView view)
+        //{
+        //    view.CustomDrawGroupRow -= View_CustomDrawGroupRow;
+        //    view.CustomDrawGroupRow += View_CustomDrawGroupRow;
+        //}
+        public sealed class GroupSummaryDrawOptions
+        {
+            public GroupSummaryLevelMode LevelMode { get; set; }
+            public HashSet<int> Levels { get; set; } = new HashSet<int>();
+        }
+        public void EnableGroupSummariesInGroupRow(
+            BandedGridView view,
+            GroupSummaryLevelMode levelMode,
+            IEnumerable<int> levels)
+        {
+            var options = new GroupSummaryDrawOptions
+            {
+                LevelMode = levelMode,
+                Levels = levels != null
+            ? new HashSet<int>(levels)
+            : new HashSet<int>()
+            };
+
+            view.Tag = options;
+
             view.CustomDrawGroupRow -= View_CustomDrawGroupRow;
             view.CustomDrawGroupRow += View_CustomDrawGroupRow;
-        }
 
+            view.Invalidate();
+        }
         private void View_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
         {
             var view = (BandedGridView)sender;
@@ -592,10 +651,27 @@ namespace SewingProduction.Helpers
             if (viewInfo == null)
                 return;
 
+            var options = view.Tag as GroupSummaryDrawOptions
+            ?? new GroupSummaryDrawOptions
+            {
+                LevelMode = GroupSummaryLevelMode.All
+            };
+
+            int groupLevel = view.GetRowLevel(e.RowHandle);
+
+            // ─────────────────────────────────────────────
+            // ▶▶ Проверяем: нужно ли рисовать итоги на этом уровне
+            // ─────────────────────────────────────────────
+            bool drawSummary = ShouldDrawGroupSummary(
+                groupLevel,
+                options.LevelMode,
+                options.Levels
+            );
+
             Rectangle rowRect = e.Bounds;
 
             // ───────────────────────────────────────────────────
-            // ▶▶ 1. РИСУЕМ ФОН СТРОКИ ГРУППЫ КАК ЗАГОЛОВОК, НАТИВНО
+            // ▶▶ 1. РИСУЕМ ФОН СТРОКИ ГРУППЫ КАК ЗАГОЛОВОК
             // ───────────────────────────────────────────────────
 
             // Берем skin и элемент Column Header
@@ -624,20 +700,31 @@ namespace SewingProduction.Helpers
             e.Appearance.Options.UseBackColor = false;
             e.Painter.DrawObject(e.Info);
 
-            // ───────────────────────────────────────────────────
-            // ▶▶ 3. Теперь рисуем ПОДИТОГИ под каждой колонкой
-            // ───────────────────────────────────────────────────
+            // ─────────────────────────────────────────────
+            // ▶▶ 3. Если на этом уровне итоги не нужны — выходим
+            // ─────────────────────────────────────────────
+            if (!drawSummary)
+            {
+                e.Handled = true;
+                return;
+            }
 
-            //int summaryHeight = rowRect.Height - 4;
-            //int offsetY = rowRect.Y + 2;
+            // ─────────────────────────────────────────────
+            // ▶▶ 4. Рисуем итоги под колонками
+            // ─────────────────────────────────────────────
             int top = rowRect.Top;           // верх строки группы
             int bottom = rowRect.Bottom - 1; // -1, чтобы не вылезти за границу
 
             foreach (BandedGridColumn col in view.VisibleColumns)
             {
+                //var summaryItem = view.GroupSummary
+                //    .OfType<GridGroupSummaryItem>()
+                //    .FirstOrDefault(s => s.FieldName == col.FieldName);
                 var summaryItem = view.GroupSummary
                     .OfType<GridGroupSummaryItem>()
-                    .FirstOrDefault(s => s.FieldName == col.FieldName);
+                    .FirstOrDefault(s =>
+                        s.ShowInGroupColumnFooter == col
+                    );
 
                 if (summaryItem == null)
                     continue;
@@ -699,192 +786,38 @@ namespace SewingProduction.Helpers
 
             e.Handled = true;
         }
-        //public void EnableGroupSummariesInGroupRow(BandedGridView view)
-        //{
-        //    // 1. Делаем фон строки группы полностью таким же, как фон заголовка грида
-        //    view.Appearance.GroupRow.Assign(view.Appearance.HeaderPanel);
+        //показывать итоги Только на 2-м уровне
+        //EnableGroupSummariesInGroupRow(
+        //    advBandedGridViewSmenZadany,
+        //    GroupSummaryLevelMode.OnlySpecified,
+        //    new[] { 1 }
+        //);
 
-        //    // 2. Подписываем кастомную отрисовку (только для подытогов!)
-        //    view.CustomDrawGroupRow -= View_CustomDrawGroupRowBandedGrid;
-        //    view.CustomDrawGroupRow += View_CustomDrawGroupRowBandedGrid;
-        //}
-        //private void View_CustomDrawGroupRowBandedGrid(object sender, RowObjectCustomDrawEventArgs e)
-        //{
-        //    var view = (BandedGridView)sender;
-        //    var viewInfo = view.GetViewInfo() as BandedGridViewInfo;
-        //    if (viewInfo == null)
-        //        return;
+        //Везде, кроме первого
+        //EnableGroupSummariesInGroupRow(
+        //    advBandedGridViewSmenZadany,
+        //    GroupSummaryLevelMode.ExceptSpecified,
+        //    new[] { 0 }
+        //);
 
-        //    Rectangle rowRect = e.Bounds;
-
-        //    // 1. Рисуем стандартную строку группы (фон + стрелка + caption)
-        //    //    ФОН — уже автоматически как у заголовка!
-        //    e.Painter.DrawObject(e.Info);
-
-        //    // 2. Высота зоны подытогов
-        //    int summaryHeight = rowRect.Height - 4;
-        //    int offsetY = rowRect.Y + 2;
-
-        //    // 3. Рисуем подытоги под каждым столбцом
-        //    foreach (BandedGridColumn col in view.VisibleColumns)
-        //    {
-        //        var summaryItem = view.GroupSummary
-        //            .OfType<GridGroupSummaryItem>()
-        //            .FirstOrDefault(s => s.FieldName == col.FieldName);
-
-        //        if (summaryItem == null)
-        //            continue;
-
-        //        var colInfo = viewInfo.ColumnsInfo[col];
-        //        if (colInfo == null)
-        //            continue;
-
-        //        Rectangle colRect = colInfo.Bounds;
-
-        //        Rectangle cellRect = new Rectangle(
-        //            colRect.X,
-        //            offsetY,
-        //            colRect.Width,
-        //            summaryHeight
-        //        );
-
-        //        object val = view.GetGroupSummaryValue(e.RowHandle, summaryItem);
-        //        if (val == null || val == DBNull.Value)
-        //            continue;
-
-        //        string text = !string.IsNullOrEmpty(summaryItem.DisplayFormat)
-        //            ? string.Format(summaryItem.DisplayFormat, val)
-        //            : Convert.ToDecimal(val).ToString("n2");
-
-        //        // фон НЕ рисуем — он уже как у заголовка
-        //        // рисуем только текст
-
-        //        using (var sf = new StringFormat
-        //        {
-        //            Alignment = StringAlignment.Center,
-        //            LineAlignment = StringAlignment.Center,
-        //            Trimming = StringTrimming.EllipsisCharacter
-        //        })
-        //        {
-        //            e.Graphics.DrawString(
-        //                text,
-        //                e.Appearance.Font,
-        //                new SolidBrush(e.Appearance.ForeColor),
-        //                cellRect,
-        //                sf
-        //            );
-        //        }
-        //    }
-
-        //    e.Handled = true;
-
-        //    //var view = (BandedGridView)sender;
-
-        //    //var viewInfo = view.GetViewInfo() as BandedGridViewInfo;
-        //    //if (viewInfo == null)
-        //    //    return;
-
-        //    //Rectangle rowRect = e.Bounds;
-
-        //    //// Берём оформление заголовка грида
-        //    //var headerAp = view.Appearance.HeaderPanel;
-        //    //Color backColor = e.Appearance.BackColor;
-        //    //Color borderColor = e.Appearance.BorderColor;
-        //    //// 1. Полностью ЗАЛИВАЕМ фон строки группы нужным цветом
-        //    ////    (e.Appearance.BorderColor используется как фон)
-        //    //using (var bg = new SolidBrush(backColor))
-        //    //    e.Graphics.FillRectangle(bg, rowRect);
-        //    ////using (var bg = new SolidBrush(view.Appearance.GroupFooter.BackColor))
-        //    ////    e.Graphics.FillRectangle(bg, rowRect);
-        //    //// просто однотонный фон:
-        //    ////using (var bg = new SolidBrush(headerAp.BackColor))
-        //    ////    e.Graphics.FillRectangle(bg, rowRect);
-
-        //    //// 2. Рисуем стандартный текст группы (стрелочка, caption)
-        //    ////    Но БЕЗ фона, т.к. фон мы уже залили сами
-        //    //e.Appearance.BackColor = Color.Transparent;
-
-        //    //e.Painter.DrawObject(e.Info);
-
-        //    //// 3. Высота "ячейки подытога" внутри group row
-        //    //int summaryHeight = rowRect.Height - 4;
-        //    //int offsetY = rowRect.Y + 2;
-
-        //    //// 4. Перебираем видимые колонки
-        //    //foreach (BandedGridColumn col in view.VisibleColumns)
-        //    //{
-        //    //    var summaryItem = view.GroupSummary
-        //    //        .OfType<GridGroupSummaryItem>()
-        //    //        .FirstOrDefault(s => s.FieldName == col.FieldName);
-
-        //    //    if (summaryItem == null)
-        //    //        continue;
-
-        //    //    var colInfo = viewInfo.ColumnsInfo[col];
-        //    //    if (colInfo == null)
-        //    //        continue;
-
-        //    //    Rectangle colRect = colInfo.Bounds;
-
-        //    //    Rectangle cellRect = new Rectangle(
-        //    //        colRect.X,
-        //    //        offsetY,
-        //    //        colRect.Width,
-        //    //        summaryHeight
-        //    //    );
-
-        //    //    object val = view.GetGroupSummaryValue(e.RowHandle, summaryItem);
-        //    //    if (val == null || val == DBNull.Value)
-        //    //        continue;
-
-        //    //    string text;
-        //    //    if (!string.IsNullOrEmpty(summaryItem.DisplayFormat))
-        //    //        text = string.Format(summaryItem.DisplayFormat, val);
-        //    //    else
-        //    //        text = Convert.ToDecimal(val).ToString("n2");
-
-        //    //    // ✔ Фон ячеек НЕ ЗАЛИВАЕМ — оставляем как фон всей group row
-
-        //    //    // (опционально): тонкая рамка разделения колонок
-        //    //    //using (var pen = new Pen(Color.FromArgb(90, Color.Black)))
-        //    //    //    e.Graphics.DrawRectangle(pen, cellRect);
-        //    //    using (var pen = new Pen(Color.FromArgb(90, borderColor)))
-        //    //        e.Graphics.DrawRectangle(pen, cellRect);
-        //    //    //using (var pen = new Pen(Color.FromArgb(90, headerAp.BackColor)))
-        //    //    //    e.Graphics.DrawRectangle(pen, cellRect);
-
-        //    //    // Текст значения
-        //    //    using (var sf = new StringFormat
-        //    //    {
-        //    //        Alignment = StringAlignment.Center,
-        //    //        LineAlignment = StringAlignment.Center,
-        //    //        Trimming = StringTrimming.EllipsisCharacter
-        //    //    })
-        //    //    {
-        //    //        e.Graphics.DrawString(
-        //    //            text,
-        //    //            e.Appearance.Font,
-        //    //            new SolidBrush(e.Appearance.ForeColor),
-        //    //            cellRect,
-        //    //            sf
-        //    //        );
-        //    //    }
-        //    //}
-
-        //    //e.Handled = true;
-        //}
-        #endregion
-        /// <summary>
-        /// переход к строке gridview по ID в bindingsource
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="view"></param>
-        /// <param name="bindingSource"></param>
-        /// <param name="idSelector"></param>
-        /// <param name="idValue"></param>
-        /// <param name="columnFieldName"></param>
-        public void GoToRowById<T, TKey>(
+        //На всех уровнях
+        //EnableGroupSummariesInGroupRow(
+        //    advBandedGridViewSmenZadany,
+        //    GroupSummaryLevelMode.All,
+        //    null
+        //);
+#endregion
+/// <summary>
+/// переход к строке gridview по ID в bindingsource
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <typeparam name="TKey"></typeparam>
+/// <param name="view"></param>
+/// <param name="bindingSource"></param>
+/// <param name="idSelector"></param>
+/// <param name="idValue"></param>
+/// <param name="columnFieldName"></param>
+public void GoToRowById<T, TKey>(
             GridView view,
             BindingSource bindingSource,
             Func<T, TKey> idSelector,       // поле идентификатора для позиционирования
