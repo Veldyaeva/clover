@@ -1,37 +1,18 @@
-using Dapper;
-using DevExpress.CodeParser;
 using DevExpress.Data;
-using DevExpress.DataAccess.Sql;
 using DevExpress.Mvvm.Native;
-using DevExpress.Mvvm.POCO;
-using DevExpress.Office.Import.OpenXml;
 using DevExpress.Utils;
 using DevExpress.Utils.Menu;
-using DevExpress.Xpo.Helpers;
-using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGauges.Core.Styles;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Menu;
 using DevExpress.XtraGrid.Views.BandedGrid;
-using DevExpress.XtraGrid.Views.BandedGrid.ViewInfo;
 using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
-using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using DevExpress.XtraLayout;
-using DevExpress.XtraVerticalGrid;
-using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
-using Org.BouncyCastle.Asn1.Ocsp;
-using Org.BouncyCastle.Tls;
 using SewingProduction.Core.helpers;
 using SewingProduction.Extensions;
-using SewingProduction.Features.CardByNom.Services;
-using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
@@ -45,15 +26,11 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.ServiceModel.Channels;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
-using static System.Reflection.Metadata.BlobBuilder;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using PopupMenuShowingEventHandler = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler;
+using static SewingProduction.Helpers.GridHelper;
 
 
 namespace SewingProduction.Features.KnittingProduction.Forms
@@ -266,7 +243,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         , artNormNTask, normRaszTask
                         , mlOpTask
                         , knitWorkingShiftTask);
-                
+
                 #region описание gridControlPlanTotalHoursByKnitMachine "общие часы по вяз машинам/зонам"
                 gridControlPlanTotalHoursByKnitMachine.DataSource = _planTotalHoursByKnitMachineBindingSource;
                 gridColumnPlanTotalHoursByKnitMachineKmaNumber.FieldName = "kmaNumber";
@@ -475,17 +452,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridSmenZadanyColumnIDVyazClass.FieldName = "idVyazClass";
                 bandedGridSmenZadanyColumnNameVyazClass.FieldName = "nameVyazClass";
                 bandedGridSmenZadanyColumnSmenLength.FieldName = "smenLength";
-                bandedGridSmenZadanyColumnChasNaznZad.FieldName = "chasNaznZad";
+                //bandedGridSmenZadanyColumnChasNaznZad.FieldName = "chasNaznZad";
+                //bandedGridSmenZadanyColumnChasNaznZadGroup.FieldName = "chasNaznZadGroup";
+                advBandedGridViewSmenZadany.Columns["chasNaznZadGroup"].UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
                 bandedGridSmenZadanyColumnChasNotConfirmedZad.FieldName = "chasNotConfirmedZad";
+                bandedGridSmenZadanyColumnChasNotConfirmedZadGroup.FieldName = "chasNotConfirmedZadGroup";
                 bandedGridSmenZadanyColumnChasRemainZad.FieldName = "chasRemainZad";
+                bandedGridSmenZadanyColumnChasRemainZadGroup.FieldName = "chasRemainZadGroup";
                 bandedGridSmenZadanyColumnShiftsRemainZad.FieldName = "shiftsRemainZad";
+                bandedGridSmenZadanyColumnShiftsRemainZadGroup.FieldName = "shiftsRemainZadGroup";
                 bandedGridSmenZadanyColumnChasNaznSmen.FieldName = "chasNaznSmen";
+                bandedGridSmenZadanyColumnChasNaznSmenGroup.FieldName = "chasNaznSmenGroup";
                 bandedGridSmenZadanyColumnChasNaznSmenProc.FieldName = "chasNaznSmenProc";
+                bandedGridSmenZadanyColumnChasNaznSmenProcGroup.FieldName = "chasNaznSmenProcGroup";
                 bandedGridSmenZadanyColumnChasInWorkSmen.FieldName = "chasInWorkSmen";
+                bandedGridSmenZadanyColumnChasInWorkSmenGroup.FieldName = "chasInWorkSmenGroup";
                 bandedGridSmenZadanyColumnChasDoneSmen.FieldName = "chasDoneSmen";
+                bandedGridSmenZadanyColumnChasDoneSmenGroup.FieldName = "chasDoneSmenGroup";
                 bandedGridSmenZadanyColumnChasDoneSmenProc.FieldName = "chasDoneSmenProc";
+                bandedGridSmenZadanyColumnChasDoneSmenProcGroup.FieldName = "chasDoneSmenProcGroup";
                 bandedGridSmenZadanyColumnChasRemainSmen.FieldName = "chasRemainSmen";
+                bandedGridSmenZadanyColumnChasRemainSmenGroup.FieldName = "chasRemainSmenGroup";
                 bandedGridSmenZadanyColumnChasConfirmedSmen.FieldName = "chasConfirmedSmen";
+                bandedGridSmenZadanyColumnChasConfirmedSmenGroup.FieldName = "chasConfirmedSmenGroup";
                 bandedGridSmenZadanyColumnTypeID.FieldName = "typeID";
                 bandedGridSmenZadanyColumnTypeName.FieldName = "typeName";
                 bandedGridSmenZadanyColumnFio.FieldName = "fio";
@@ -540,15 +529,57 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
 
+
+                //// 2. Создаём GroupSummary 
+                //advBandedGridViewSmenZadany.GroupSummary.Clear();
+
+                //advBandedGridViewSmenZadany.GroupSummary.Add(
+                //    new GridGroupSummaryItem
+                //    {
+                //        SummaryType = DevExpress.Data.SummaryItemType.Average,
+                //        FieldName = "chasNaznZadGroup",
+                //        ShowInGroupColumnFooter = bandedGridSmenZadanyColumnChasNaznZad,
+                //        DisplayFormat = "0.00;-0.00;"
+                //    });
+
+                //advBandedGridViewSmenZadany.GroupSummary.Clear();
+
+                //advBandedGridViewSmenZadany.GroupSummary.Add(
+                //    new GridGroupSummaryItem
+                //    {
+                //        SummaryType = DevExpress.Data.SummaryItemType.Average,
+                //        FieldName = "chasNotConfirmedZadGroup",
+                //        ShowInGroupColumnFooter = bandedGridSmenZadanyColumnChasNotConfirmedZad,
+                //        DisplayFormat = "0.00;-0.00;"
+                //    });
+
                 string _xNumFormat = "{0:0.00;-0.00;}";
+                //string _xNumFormat = "{0:n2}";
                 foreach (GridGroupSummaryItem gsi in advBandedGridViewSmenZadany.GroupSummary)
                 {
                     gsi.DisplayFormat = _xNumFormat;
                 }
+
+                //advBandedGridViewSmenZadany.RefreshData();
+                //advBandedGridViewSmenZadany.UpdateGroupSummary();
+
                 //advBandedGridViewSmenZadany.GroupSummary[0].DisplayFormat = _xNumFormat;
                 //advBandedGridViewSmenZadany.GroupSummary[0].FieldName = "chasNaznZad";
                 //advBandedGridViewSmenZadany.GroupSummary[0].SummaryType = DevExpress.Data.SummaryItemType.Sum;
                 //advBandedGridViewSmenZadany.GroupSummary[0].
+
+                ////var item = new DevExpress.XtraGrid.GridGroupSummaryItem();
+                //var item = advBandedGridViewSmenZadany.GroupSummary[0];
+                //item.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+
+                //// 1) по чему считаем
+                //item.FieldName = "chasNaznZadGroup";
+
+                //// 2) где показываем
+                //item.ShowInGroupColumnFooter = AdvBandedGridView;
+
+                //// (опционально) формат вывода
+                //item.DisplayFormat = "{0:n2}";
 
 
                 //advBandedGridViewSmenZadany.CustomDrawBandHeader += AdvBandedGridView1_CustomDrawBandHeader;
@@ -558,7 +589,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //advBandedGridViewSmenZadany.Appearance.GroupRow.Assign(
                 //    advBandedGridViewSmenZadany.Appearance.HeaderPanel);
                 advBandedGridViewSmenZadany.OptionsView.GroupFooterShowMode = GroupFooterShowMode.Hidden;
-                _gridHelper.EnableGroupSummariesInGroupRow(advBandedGridViewSmenZadany);
+                _gridHelper.EnableGroupSummariesInGroupRow(advBandedGridViewSmenZadany, GroupSummaryLevelMode.IncludeOnly, new[] { 2 });
                 //advBandedGridViewSmenZadany.RowCountChanged += (_, __) => SetGroupExpandState();
                 //advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
                 //{
@@ -585,7 +616,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //};
                 #endregion
 
-                _naryadZadanyVyazBindingSource = new BindingSource { DataSource = new BindingList<NaryadZadanyVyaz>()};
+                _naryadZadanyVyazBindingSource = new BindingSource { DataSource = new BindingList<NaryadZadanyVyaz>() };
                 #region gridControlNaryadZadany "сменное задание"
                 gridControlNaryadZadany.DataSource = _naryadZadanyVyazBindingSource;
                 gridNaryadZadanyColumnKmlNumber.FieldName = "kmlNumber";
@@ -4504,6 +4535,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         await LoadSmenZadanyVyazDataAsync();
                         //SetGroupExpandState();
                         break;
+                    case 6:
+                        advBandedGridViewSmenZadany.CollapseAllGroups();
+                        break;
+                    case 8:
+                        advBandedGridViewSmenZadany.ExpandAllGroups();
+                        break;
                         //switch (customTabControl1.SelectedTabPageIndex)
                         //{
                         //    case 0:
@@ -4676,6 +4713,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void advBandedGridViewSmenZadany_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            //var col = advBandedGridViewSmenZadany.Columns["chasNaznZadGroup"];
+            //MessageBox.Show($"{col.ColumnType}");
             var currentSmenZadanyVyaz = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
             if (currentSmenZadanyVyaz == null)
                 return;
@@ -4727,6 +4766,80 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             Application.Idle -= ExpandGroupsOnIdle;
             _loadCts?.Cancel();
             base.OnFormClosed(e);
+        }
+
+        private void layoutControlGroup7_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            //MessageBox.Show($"Нажата кнопка с индексом {buttonIndex} в layoutControlGroup1");
+
+            //layoutControlGroup7.CustomHeaderButtons[0].Properties.Caption = "Скрыть информацию по делению накладной";
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    gridViewPlanTotalHoursByKnitMachine.CollapseAllGroups();
+                    break;
+                case 2:
+                    gridViewPlanTotalHoursByKnitMachine.ExpandAllGroups();
+                    break;
+            }
+        }
+
+        private void layoutControlGroup9_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            switch (buttonIndex)
+            {
+                case 0:
+                    gridViewZadanyListByMachine.CollapseAllGroups();
+                    break;
+                case 2:
+                    gridViewZadanyListByMachine.ExpandAllGroups();
+                    break;
+            }
+        }
+
+        private void layoutControlGroup10_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            switch (buttonIndex)
+            {
+                case 0:
+                    gridViewRzvPachListByNom.CollapseAllGroups();
+                    break;
+                case 2:
+                    gridViewRzvPachListByNom.ExpandAllGroups();
+                    break;
+            }
+        }
+
+        private void layoutControlGroup15_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            switch (buttonIndex)
+            {
+                case 0:
+                    gridViewPZVOperList.CollapseAllGroups();
+                    break;
+                case 2:
+                    gridViewPZVOperList.ExpandAllGroups();
+                    break;
+            }
+        }
+
+        private void layoutControlGroup3_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            switch (buttonIndex)
+            {
+                case 0:
+                    gridViewNaryadZadany.CollapseAllGroups();
+                    break;
+                case 2:
+                    gridViewNaryadZadany.ExpandAllGroups();
+                    break;
+            }
         }
     }
 }
