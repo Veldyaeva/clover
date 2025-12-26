@@ -8,7 +8,9 @@ namespace SewingProduction.Core.Models
         private string _frm_v;
         private string _frm_s;
         private string _men;
-
+        private string _name;
+        private string _gr;
+        private int _men_int;
         public string Frm_v
         {
             get => _frm_v;
@@ -27,7 +29,22 @@ namespace SewingProduction.Core.Models
             set { if (_men != value) { _men = value; OnPropertyChanged(nameof(Men)); } }
         }
 
-
+        public string Name
+        {
+            get => _name;
+            set { if (_name != value) { _name = value; OnPropertyChanged(nameof(Name)); } }
+        }   
+        public string Gr
+        {
+            get => _gr;
+            set { if (_gr != value) { _gr = value; OnPropertyChanged(nameof(Gr)); } }
+        }
+        public int Men_int
+        {
+            get => _men_int;
+            set
+            { if (_men_int != value) { _men_int = value; OnPropertyChanged(nameof(Men_int)); } }
+        }
 
         public List<ArticulModel> Articuls { get; set; } = new List<ArticulModel>();
 
