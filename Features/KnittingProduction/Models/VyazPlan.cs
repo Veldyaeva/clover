@@ -1,3 +1,4 @@
+using DevExpress.DataAccess.ConnectionParameters;
 using DevExpress.Spreadsheet.Export;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto.Utilities;
@@ -290,7 +291,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public string olPzvVidPr { get; set; }
         [NotMapped] public int olPzvGradacia { get; set; }
         [NotMapped] public int olPzvGsID { get; set; }
-        [NotMapped] public int olGsName { get; set; }
+        [NotMapped] public string olGsName { get; set; }
         [NotMapped] public int SyncSelection { get; set; } = 0;
         [NotMapped] public int ErrorSelection { get; set; } = 0;
         [NotMapped] public bool IsModified { get; set; } = false;
@@ -469,5 +470,29 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int shiftStatusID { get; set; }
         [NotMapped] public int kmaNumberInt { get; set; }
     }
-
+    public class NaryadZadanyVyaz : INewable, IModifiable, IDeletable
+    {
+        [NotMapped] public string kmlNumber { get; set; }
+        [NotMapped] public string pzvArticul { get; set; }
+        [NotMapped] public string pzvNomZad { get; set; }
+        [NotMapped] public int pzvNom { get; set; }
+        [NotMapped] public int n_pach { get; set; }
+        [NotMapped] public int n { get; set; }
+        [NotMapped] public int n1 { get; set; }
+        [NotMapped] public string nomOper => $"{n}/{n1}";
+        [NotMapped] public string text { get; set; }
+        [NotMapped] public int razryd { get; set; }
+        [NotMapped] public decimal sekObServ { get; set; }
+        [NotMapped] public decimal hoursTotalPlan { get; set; }
+        [NotMapped] public decimal hoursTotalFact { get; set; }
+        [NotMapped] public int pzvKol { get; set; }
+        [NotMapped] public int statusID { get; set; }
+        [NotMapped] public string statusName { get; set; }
+        [NotMapped] public DateTime? statusDate { get; set; }
+        [NotMapped] public int pzvTab { get; set; }
+        [NotMapped] public string fioShiftStart { get; set; }
+        [NotMapped] public bool IsModified { get; set; } = false;
+        [NotMapped] public bool IsNew { get; set; } = false;
+        [NotMapped] public bool IsDeleted { get; set; } = false;
+    }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using DevExpress.Xpo.DB.Helpers;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -181,6 +184,8 @@ public class BulkHelper
             var mergeSql = GenerateMergeSql(tableName, tempTableName, dataTable.Columns.Cast<DataColumn>().ToList(), keyColumns);
             if (!string.IsNullOrEmpty(mergeSql))
             {
+                //var ddd = connection.QueryFirstOrDefaultAsync<T>($"select * from {tempTableName} ");
+
                 ExecuteNonQuery(connection, transaction, mergeSql);
             }
         }
@@ -428,7 +433,7 @@ FROM {tempTable} AS source;";
         if (type == typeof(short)) return "SMALLINT";
         if (type == typeof(byte)) return "TINYINT";
         if (type == typeof(DateTime)) return "DATETIME";
-        if (type == typeof(decimal)) return "DECIMAL(18,2)";
+        if (type == typeof(decimal)) return "DECIMAL(18,5)";
         if (type == typeof(double) || type == typeof(float)) return "FLOAT";
         if (type == typeof(bool)) return "BIT";
         if (type == typeof(Guid)) return "UNIQUEIDENTIFIER";
