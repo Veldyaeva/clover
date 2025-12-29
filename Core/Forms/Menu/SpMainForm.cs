@@ -260,5 +260,10 @@ namespace SewingProduction
             var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
             OpenForm(form, sender);
         }
+
+        private void аналитикаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new KnittingProductionAnalytics(), sender);
+        }
     }
 }
