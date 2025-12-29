@@ -30,7 +30,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllUser));
             gridViewRoles = new DevExpress.XtraGrid.Views.Grid.GridView();
             RoleID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -144,9 +144,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGridControlUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlUser.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGridControlUser.Font = new System.Drawing.Font("Arial", 10F);
-            gridLevelNode2.LevelTemplate = gridViewRoles;
-            gridLevelNode2.RelationName = "Роли";
-            customGridControlUser.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode2 });
+            gridLevelNode1.LevelTemplate = gridViewRoles;
+            gridLevelNode1.RelationName = "Роли";
+            customGridControlUser.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
             customGridControlUser.Location = new System.Drawing.Point(4, 3);
             customGridControlUser.MainView = gridViewUsers;
             customGridControlUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
