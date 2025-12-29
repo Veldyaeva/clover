@@ -149,6 +149,8 @@ namespace SewingProduction
             tbNomZad.Enter += tbNomZad_Enter;
             tbNomPach.Enter += tbNomPach_Enter;
             tbYearPach.Enter += tbYearPach_Enter;
+            textBoxIzNakl.Enter += textBoxIzNakl_Enter;
+            textBoxYearIzNakl.Enter += textBoxYearIzNakl_Enter;
             //// Инициализация привязок данных
             //_naklViewByNomSource.DataSource = _naklView;
             //if (gcNaklList != null)
@@ -167,6 +169,14 @@ namespace SewingProduction
         private void tbYearPach_Enter(object sender, EventArgs e)
         {
             tbYearPach.SelectAll();
+        }
+        private void textBoxIzNakl_Enter(object sender, EventArgs e)
+        {
+            textBoxIzNakl.SelectAll();
+        }
+        private void textBoxYearIzNakl_Enter(object sender, EventArgs e)
+        {
+            textBoxYearIzNakl.SelectAll();
         }
         private async Task InitializeBindingsAsync()
         {
@@ -672,156 +682,53 @@ namespace SewingProduction
 
         private void RecalcFromModel()
         {
-            if (_sockKnitZadanyInfoBindingSource.Current is Features.CardByNom.Models.SockZadanyInfo m
-                && m.dateStart != null && m.dateEnd != null)
+            try
             {
-                var ts = m.dateEnd.Value - m.dateStart.Value;
-                var sign = ts < TimeSpan.Zero ? "-" : "";
-                ts = ts.Duration();
-                TextBoxKnitTotalTime.Text = sign + ts.ToString(@"d' д 'hh\:mm\:ss");
+                if (_sockKnitZadanyInfoBindingSource.Current is Features.CardByNom.Models.SockZadanyInfo m
+                    && m.dateStart != null && m.dateEnd != null)
+                {
+                    var ts = m.dateEnd.Value - m.dateStart.Value;
+                    var sign = ts < TimeSpan.Zero ? "-" : "";
+                    ts = ts.Duration();
+                    TextBoxKnitTotalTime.Text = sign + ts.ToString(@"d' д 'hh\:mm\:ss");
+                }
+                else
+                {
+                    TextBoxKnitTotalTime.Clear();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                TextBoxKnitTotalTime.Clear();
-            }
-        }
-
-        private async Task WorkDivisionLoadAsync(string caller, string pachKod)
-        {
-            //if (pachKod == " ")
-            //    return;
-            //try
-            //{
-            //    //_pachKod = GetPachKod();
-            //    // Загружаем все данные параллельно
-            //    var rasInfoTask = _cardByNomService.GetRasInfoByPachKod(pachKod);
-            //    var naklViewTask = _cardByNomService.GetNaklViewByPachKod(pachKod);
-            //    var furnitZayavCheckTask = _furnitService.GetFurnitZayavCheckByPachKod(pachKod);
-
-            //    //var historyRazdelNaklViewTask = _cardByNomService.GetHistoryRazdelNaklViewByIz(iz);
-
-
-            //    await Task.WhenAll(naklViewTask, rasInfoTask, furnitZayavCheckTask);
-            //    //await Task.WhenAll(naklViewTask, rasInfoTask);
-            //    //await Task.WhenAll(naklViewTask);
-
-            //    await this.InvokeAsync(() =>
-            //    {
-            //        // Обновляем списки
-            //        _currentNaklViewData.Clear();
-            //        LoadList(naklViewTask.Result, _naklViewByPachKodList, nameof(NaklViewByPachKod.Iz));
-            //        _naklViewByPachKodBindingSource.ResetBindings(false);
-            //        // _currentRasInfoData.Clear();
-
-
-            //        //  bool isCopyOrBuffer = _mode == (int)Mode.ArchAndCopy || caller == "buffer";
-
-            //        //LoadList(raszTask.Result, _normRaszList, nameof(NormRasz.nrId), isCopyOrBuffer);
-            //        //LoadList(raskTask.Result, _normRaskList, nameof(NormRask.id), isCopyOrBuffer);
-            //        //LoadList(kontList, _normKontList, nameof(NormKont.kontId), isCopyOrBuffer);
-            //        //LoadList(dopObrList, _normDopObrList, nameof(NormDopObr.dopObrId), isCopyOrBuffer);
-
-            //        // Обновляем привязки
-            //        //_normRaszBindingSource.ResetBindings(false);
-
-
-            //        // Обновляем данные RasInfo через биндинг
-            //        var rasInfoData = rasInfoTask.Result;
-            //        if (rasInfoData != null)
-            //        {
-            //            _currentRasInfoData = rasInfoData;
-            //        }
-            //        else
-            //        {
-            //            _currentRasInfoData = new RasInfoByPachKod();
-            //        }
-            //        _rasInfoByPachKodBindingSource.DataSource = _currentRasInfoData;
-
-            //        // Обновляем данные FurnitZayavCheck через биндинг
-            //        var FurnitZayavCheckData = furnitZayavCheckTask.Result;
-            //        if (FurnitZayavCheckData != null)
-            //        {
-            //            _currentFurnitZayavCheckData = FurnitZayavCheckData;
-            //        }
-            //        else
-            //        {
-            //            _currentFurnitZayavCheckData = new FurnitZayavCheckByPachKod();
-            //        }
-            //        _furnitZayavCheckByPachKodBindingSource.DataSource = _currentFurnitZayavCheckData;
-
-            //        // _rasInfoByPachKodBindingSource.ResetBindings(false);
-            //        // Обновляем данные NaklView через биндинг
-            //        //var naklViewData = naklViewTask.Result;
-            //        //if (naklViewData != null)
-            //        //{
-            //        //    _currentNaklViewData = naklViewData;
-            //        //    _naklViewByPachKodBindingSource.DataSource = _currentNaklViewData;
-            //        //}
-            //    });
-
-            //    var selectedRow = new NaklViewByPachKod();
-            //    if (_naklViewByPachKodBindingSource.Current == null && _naklViewByPachKodBindingSource.Count > 0)
-            //    {
-            //        selectedRow = _naklViewByPachKodBindingSource[0] as NaklViewByPachKod;
-            //    }
-            //    else
-            //    {
-            //        selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
-            //    }
-
-
-            //    _currentHistoryRazdelNaklViewData.Clear();
-            //    if (selectedRow != null)
-            //    {
-            //        var historyRazdelNaklViewTask = _cardByNomService.GetHistoryRazdelNaklViewByIz(selectedRow.Iz);
-            //        LoadList(historyRazdelNaklViewTask.Result, _historyRazdelNaklViewByIzList, nameof(HistoryRazdelNaklViewByIz.id));
-            //    }
-            //    _historyRazdelNaklViewByIzBindingSource.ResetBindings(false);
-            //}
-            //catch (Exception ex)
-            //{
-            //    await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных WorkDivisionLoadAsync");
-
-            //    await this.InvokeAsync(() =>
-            //    {
-            //        MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    });
-            //}
-        }
-
-        private void LoadList<T>(List<T> sourceList, BindingList<T> targetList, string idFieldName)
-        {
-            foreach (var item in sourceList)
-            {
-                var idProp = typeof(T).GetProperty(idFieldName);
-                targetList.Add(item);
+                _logger.LogErrorAsync(ex, "Ошибка при перерасчете в RecalcFromModel").Wait();
             }
         }
-
-        //private void gridView4_PrintInitialize(object sender, DevExpress.XtraGrid.Views.Base.PrintInitializeEventArgs e)
-        //{
-        //    PrintingSystemBase pb = e.PrintingSystem as PrintingSystemBase;
-        //    pb.PageSettings.Landscape = true;
-        //}
         private string GetPachKod()
         {
-            string proizvChar = string.Empty;
-            switch (customRadioGroup2.SelectedIndex)
+            try
             {
-                case 0: // ШП
-                    proizvChar = "";
-                    break;
-                case 1: // ВЗП
-                case 2: // Носки
-                case 3: // ШПМ
-                    proizvChar = "v";
-                    break;
-                default:
-                    proizvChar = "";
-                    break;
+                string proizvChar = string.Empty;
+                switch (customRadioGroup2.SelectedIndex)
+                {
+                    case 0: // ШП
+                        proizvChar = "";
+                        break;
+                    case 1: // ВЗП
+                    case 2: // Носки
+                    case 3: // ШПМ
+                        proizvChar = "v";
+                        break;
+                    default:
+                        proizvChar = "";
+                        break;
+                }
+                string pachKod = string.Concat(proizvChar, tbYearPach.Text, tbNomPach.Text.PadLeft(6));
+                return pachKod;
             }
-            string pachKod = string.Concat(proizvChar, tbYearPach.Text, tbNomPach.Text.PadLeft(6));
-            return pachKod;
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при получении кода пачки в GetPachKod").Wait();
+                return string.Empty;
+            }
         }
         private async Task UpdateFurnitUpak()
         {
@@ -904,9 +811,16 @@ namespace SewingProduction
         }
         private async Task UpdateProizvCombIzd()
         {
-            Task proizvCombIzdSPTask = LoadProizvCombIzdSPDataAsync(GetPachKod());
-            Task proizvCombIzdVZPTask = LoadPProizvCombIzdVZPDataAsync(GetPachKod());
-            await Task.WhenAll(proizvCombIzdSPTask, proizvCombIzdVZPTask);
+            try
+            {
+                Task proizvCombIzdSPTask = LoadProizvCombIzdSPDataAsync(GetPachKod());
+                Task proizvCombIzdVZPTask = LoadPProizvCombIzdVZPDataAsync(GetPachKod());
+                await Task.WhenAll(proizvCombIzdSPTask, proizvCombIzdVZPTask);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при обновлении данных в UpdateProizvCombIzd");
+            }
         }
         private async void CardByNom_Load(object sender, EventArgs e)
         {
@@ -930,6 +844,7 @@ namespace SewingProduction
             //layoutControlItem110.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
 
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
+            this.textBoxYearIzNakl.Text = Convert.ToString(DateTime.Now.Year);
             customRadioGroup2.SelectedIndex = 0;
             customRadioGroup3.SelectedIndex = 0;
             customRadioGroup3_SelectedIndexChanged(sender, e);
@@ -1049,10 +964,6 @@ namespace SewingProduction
         {
             try
             {
-                // При архивировании нам нужны данные из _selectedAnnId
-                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-
-                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
                 _chipInfoByPachKodBindingSource.Clear();
                 _chipInfoByPachKodBindingSource.ResetBindings(false);
                 var chipInfoData = await _cardByNomService.GetChipInfoByPachKod(pachKod);
@@ -1117,10 +1028,6 @@ namespace SewingProduction
         {
             try
             {
-                // При архивировании нам нужны данные из _selectedAnnId
-                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-
-                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
                 _planSezonOtdelkaViewByPachKodBindingSource.Clear();
                 _planSezonOtdelkaViewByPachKodBindingSource.ResetBindings(false);
                 var planSezonOtdelkaViewData = await _matrixService.GetPlanSezonOtdelkaViewByPachKod(pachKod);
@@ -1151,10 +1058,6 @@ namespace SewingProduction
         {
             try
             {
-                // При архивировании нам нужны данные из _selectedAnnId
-                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-
-                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
                 _furnitZayavCheckByPachKodBindingSource.Clear();
                 _furnitZayavCheckByPachKodBindingSource.ResetBindings(false);
                 var FurnitZayavCheckData = await _furnitService.GetFurnitZayavCheckByPachKod(pachKod, Convert.ToInt32(tbYearPach.Text), customRadioGroup2.SelectedIndex);
@@ -1185,10 +1088,7 @@ namespace SewingProduction
         {
             try
             {
-                // При архивировании нам нужны данные из _selectedAnnId
-                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-
-                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
+                gridViewNaklList.ShowLoadingPanel();
                 _naklViewByPachKodBindingSource.Clear();
                 _naklViewByPachKodBindingSource.ResetBindings(false);
                 var naklViewData = await _cardByNomService.GetNaklViewByPachKod(pachKod, customRadioGroup2.SelectedIndex);
@@ -1214,15 +1114,15 @@ namespace SewingProduction
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных Naklview для pach_kod {pachKod}");
             }
+            finally
+            {
+                gridViewNaklList.HideLoadingPanel();
+            }
         }
         private async Task LoadNaklViewByNomZadDataAsync(string nomZad)
         {
             try
             {
-                // При архивировании нам нужны данные из _selectedAnnId
-                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-
-                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
                 _naklViewByPachKodBindingSource.Clear();
                 _naklViewByPachKodBindingSource.ResetBindings(false);
                 var naklViewData = await _cardByNomService.GetNaklViewByNomZad(nomZad);
@@ -1280,12 +1180,7 @@ namespace SewingProduction
         {
             try
             {
-                // При архивировании нам нужны данные из _selectedAnnId
-                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-
-                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
                 int vidPr = 1; // 1 - ШП, 2 - ВЗП
-
                 _proizvCombIzdSPByPachKodBindingSource.Clear();
                 _proizvCombIzdSPByPachKodBindingSource.ResetBindings(false);
                 var proizvCombIzdSPData = await _cardByNomService.GetProizvCombIzdByPachKod(pachKod, vidPr);
@@ -1316,12 +1211,7 @@ namespace SewingProduction
         {
             try
             {
-                // При архивировании нам нужны данные из _selectedAnnId
-                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-
-                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
                 int vidPr = 2; // 1 - ШП, 2 - ВЗП
-
                 _proizvCombIzdVZPByPachKodBindingSource.Clear();
                 _proizvCombIzdVZPByPachKodBindingSource.ResetBindings(false);
                 var proizvCombIzdVZPData = await _cardByNomService.GetProizvCombIzdByPachKod(pachKod, vidPr);
@@ -1583,100 +1473,120 @@ namespace SewingProduction
         }
         private async void GetPachInfo()
         {
-            RasInfo.PageVisible = true;
-            FurnInfo.PageVisible = true;
-            WorkInfo.PageVisible = true;
-            OtdelkaInfo.PageVisible = true;
-            SockZadanyInfo.PageVisible = false;
-            TabPageMgKart.PageVisible = false;
-            //gridControlPartNaklList.Visible = false;
-            //gridControlNaklList.Visible = true;
-            layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
-            layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
-            xtraTabControl1.Enabled = true;
-            xtraTabControl1.Refresh();
-            //WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
-            //Task wDLoadTask = WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
-            Task rasInfoLoadTask = LoadRasInfoByPachKodDataAsync(GetPachKod());
-            Task naklViewLoadTask = LoadNaklViewDataAsync(GetPachKod());
-            Task chipInfoLoadTask = LoadChipInfoByPachKodDataAsync(GetPachKod());
-            Task planSezonOtdelkaLoadTask = LoadPlanSezonOtdelkaViewDataAsync(GetPachKod());
-            //await Task.WhenAll(wDLoadTask, rasInfoLoadTask, naklViewLoadTask);
-            await Task.WhenAll(rasInfoLoadTask, naklViewLoadTask, chipInfoLoadTask, planSezonOtdelkaLoadTask);
-
-            if (_currentRasInfoData.RzuNom == 0 || _currentRasInfoData.RzuNom == null)
+            try
             {
-                xtraTabControl1.Enabled = false;
-                MessageBox.Show("Поиск не дал результатов. Измените параметры и повторите попытку");
-            }
-            else
-            {
-                var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
-                int _psaPsaIDOsn = selectedRow.PsaPsaIDOsn;
-                string _psaKombIzd = selectedRow.PsaKombIzd;
-                int _psaTkIdSet = selectedRow.PsaTkIdSet;
+                RasInfo.PageVisible = true;
+                FurnInfo.PageVisible = true;
+                WorkInfo.PageVisible = true;
+                OtdelkaInfo.PageVisible = true;
+                SockZadanyInfo.PageVisible = false;
+                TabPageMgKart.PageVisible = false;
+                //gridControlPartNaklList.Visible = false;
+                //gridControlNaklList.Visible = true;
+                layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+                xtraTabControl1.Enabled = true;
+                xtraTabControl1.Refresh();
+                //WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
+                //Task wDLoadTask = WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
+                Task rasInfoLoadTask = LoadRasInfoByPachKodDataAsync(GetPachKod());
+                Task naklViewLoadTask = LoadNaklViewDataAsync(GetPachKod());
+                Task chipInfoLoadTask = LoadChipInfoByPachKodDataAsync(GetPachKod());
+                Task planSezonOtdelkaLoadTask = LoadPlanSezonOtdelkaViewDataAsync(GetPachKod());
+                //await Task.WhenAll(wDLoadTask, rasInfoLoadTask, naklViewLoadTask);
+                await Task.WhenAll(rasInfoLoadTask, naklViewLoadTask, chipInfoLoadTask, planSezonOtdelkaLoadTask);
 
-                if (_psaPsaIDOsn != 0
-                    && (("V;F").IndexOf(_psaKombIzd) >= 0 || _psaTkIdSet == 1)
-                    && (_psaTkIdSet == 0))
+                if (_currentRasInfoData.RzuNom == 0 || _currentRasInfoData.RzuNom == null)
                 {
-                    OtdelkaInfo.PageVisible = true;
+                    xtraTabControl1.Enabled = false;
+                    MessageBox.Show("Поиск не дал результатов. Измените параметры и повторите попытку");
                 }
                 else
                 {
-                    OtdelkaInfo.PageVisible = false;
-                }
+                    var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
+                    int _psaPsaIDOsn = selectedRow.PsaPsaIDOsn;
+                    string _psaKombIzd = selectedRow.PsaKombIzd;
+                    int _psaTkIdSet = selectedRow.PsaTkIdSet;
 
-                ////string nomZad = _currentRasInfoData.PsaNomZad;
+                    if (_psaPsaIDOsn != 0
+                        && (("V;F").IndexOf(_psaKombIzd) >= 0 || _psaTkIdSet == 1)
+                        && (_psaTkIdSet == 0))
+                    {
+                        OtdelkaInfo.PageVisible = true;
+                    }
+                    else
+                    {
+                        OtdelkaInfo.PageVisible = false;
+                    }
 
-                ////string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
-                //var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfoByPachKod;
-                //string queryIsChip = $"SELECT dbo.checkChipNakl('', '{selectedRow.PsaNomZad}') AS isChip ";
-                //var dtIsChip = _dbHelper.ExecuteQuery(queryIsChip);
-                //bsIsChip.DataSource = dtIsChip;
-                //this.cbIsChip.DataBindings.Clear();
-                //this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
+                    ////string nomZad = _currentRasInfoData.PsaNomZad;
 
-                //string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
-                //queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
-                //queryOtdelkaList += $" WHERE vpso.nn = '{_currentRasInfoData.PsaNN}' ";
-                //var dtOtdelkaList = _dbHelper.ExecuteQuery(queryOtdelkaList);
-                //bsOtdelkaList.DataSource = dtOtdelkaList;
+                    ////string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
+                    //var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfoByPachKod;
+                    //string queryIsChip = $"SELECT dbo.checkChipNakl('', '{selectedRow.PsaNomZad}') AS isChip ";
+                    //var dtIsChip = _dbHelper.ExecuteQuery(queryIsChip);
+                    //bsIsChip.DataSource = dtIsChip;
+                    //this.cbIsChip.DataBindings.Clear();
+                    //this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
 
-                if (xtraTabControl1.SelectedTabPageIndex == 1)
-                {
-                    UpdateFurnitUpak();
+                    //string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
+                    //queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
+                    //queryOtdelkaList += $" WHERE vpso.nn = '{_currentRasInfoData.PsaNN}' ";
+                    //var dtOtdelkaList = _dbHelper.ExecuteQuery(queryOtdelkaList);
+                    //bsOtdelkaList.DataSource = dtOtdelkaList;
+
+                    if (xtraTabControl1.SelectedTabPageIndex == 1)
+                    {
+                        UpdateFurnitUpak();
+                    }
+                    if (xtraTabControl1.SelectedTabPageIndex == 3)
+                    {
+                        UpdateProizvCombIzd();
+                    }
+                    TabPageMgKart.PageVisible = customRadioGroup2.SelectedIndex == 0 ? true : false;
+                    if (xtraTabControl1.SelectedTabPageIndex == 5 && tbRzuMgZakr.Text.Length > 0)
+                    {
+                        Task nastilTask = LoadNastilViewDataAsync(tbRzuMgZakr.Text);
+                        Task nastilGroupTask = LoadNastilGroupViewDataAsync(tbRzuMgZakr.Text);
+                        await Task.WhenAll(nastilTask, nastilGroupTask);
+                    }
                 }
-                if (xtraTabControl1.SelectedTabPageIndex == 3)
-                {
-                    UpdateProizvCombIzd();
-                }
-                TabPageMgKart.PageVisible = customRadioGroup2.SelectedIndex == 0 ? true : false;
-                if (xtraTabControl1.SelectedTabPageIndex == 5 && tbRzuMgZakr.Text.Length > 0)
-                {
-                    Task nastilTask = LoadNastilViewDataAsync(tbRzuMgZakr.Text);
-                    Task nastilGroupTask = LoadNastilGroupViewDataAsync(tbRzuMgZakr.Text);
-                    await Task.WhenAll(nastilTask, nastilGroupTask);
-                }
+                SockZadanyInfoFill();
             }
-
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка получения информации по пачке {tbNomPach.Text} в GetPachInfo");
+            }
         }
         private async Task PrintNakl()
         {
             //string iz = GetIzNakl();
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
-            Task sebZList = LoadSebZListDataAsync(selectedRow.Iz);
-            await Task.WhenAll(sebZList);
-            if (_sebZListBindingSource.Count > 0)
+            try
             {
-                MessageBox.Show("В накладной есть артикулы с не просчитанной ЗП! Печать запрещена.");
-                return;
+                if (gridViewNaklList.FocusedRowHandle < 0)
+                {
+                    MessageBox.Show("Не выбрана накладная для печати!");
+                    return;
+                }
+
+                var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+                Task sebZList = LoadSebZListDataAsync(selectedRow.Iz);
+                await Task.WhenAll(sebZList);
+                if (_sebZListBindingSource.Count > 0)
+                {
+                    MessageBox.Show("В накладной есть артикулы с не просчитанной ЗП! Печать запрещена.");
+                    return;
+                }
+                NaklReport report1 = new NaklReport();
+                report1.RequestParameters = false;
+                report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                reportPrintTool1.ShowPreviewDialog();
             }
-            NaklReport report1 = new NaklReport();
-            report1.RequestParameters = false;
-            report1.Parameters["_naklIz"].Value = selectedRow.Iz;
-            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            reportPrintTool1.ShowPreviewDialog();
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка печати накладной");
+            }
         }
 
         private async Task LoadSebZListDataAsync(string _xIz)
@@ -2228,24 +2138,35 @@ namespace SewingProduction
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     tbNomZad.Select();
                     break;
                 case 1: //  по № пачки
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     tbNomPach.Select();
                     break;
                 case 2: //  по артикулу
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     searchLookUpEditArticul.Select();
+                    break;
+                case 3: //  по № накладной
+                    layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
+                    textBoxIzNakl.Select();
                     break;
                 default:
                     layoutControlGroup1.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     layoutControlGroup24.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                    layoutControlGroup28.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                     break;
             }
         }
@@ -2257,48 +2178,65 @@ namespace SewingProduction
 
         private async void tbNomZad_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                //gridControlPartNaklList.Visible = false;
-                //gridControlNaklList.Visible = true;
-
-                //------------------------------
-                string xKo = "";
-                string xArticul = "";
-                string xNomZadany = tbNomZad.Text;
-
-                //ArticulModel selectedRow = _articulBindingSource.Current as ArticulModel;
-                if (xNomZadany != null && xNomZadany.Length != 0)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul))
+                    //gridControlPartNaklList.Visible = false;
+                    //gridControlNaklList.Visible = true;
+
+                    //------------------------------
+                    string xKo = "";
+                    string xArticul = "";
+                    string xNomZadany = tbNomZad.Text;
+                    string xIz = "";
+
+                    //ArticulModel selectedRow = _articulBindingSource.Current as ArticulModel;
+                    if (xNomZadany != null && xNomZadany.Length != 0)
                     {
-                        if (form2.ShowDialog() == DialogResult.OK)
+                        using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul, xIz))
                         {
-                            int valueNPach = form2.SelectedValueNPach;
-                            int valueYearPach = form2.SelectedValueYearPach;
-                            int valueProizvType = form2.SelectedValueProizvType;
-                            customRadioGroup2.SelectedIndex = valueProizvType;
-                            customRadioGroup3.SelectedIndex = 1;
-                            tbNomPach.Text = valueNPach.ToString();
-                            tbYearPach.Text = valueYearPach.ToString();
-                            GetPachInfo();
+                            if (form2.ShowDialog() == DialogResult.OK)
+                            {
+                                int valueNPach = form2.SelectedValueNPach;
+                                int valueYearPach = form2.SelectedValueYearPach;
+                                int valueProizvType = form2.SelectedValueProizvType;
+                                customRadioGroup2.SelectedIndex = valueProizvType;
+                                customRadioGroup3.SelectedIndex = 1;
+                                tbNomPach.Text = valueNPach.ToString();
+                                tbYearPach.Text = valueYearPach.ToString();
+                                GetPachInfo();
+                            }
                         }
                     }
-                }
-                else
-                {
-                    xKo = "";
-                    MessageBox.Show("Не указано задание");
-                }
-                //------------------------------
+                    else
+                    {
+                        xKo = "";
+                        MessageBox.Show("Не указано задание");
+                    }
+                    //------------------------------
 
-                //layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
-                //layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+                    //layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                    //layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
 
-                //RasInfo.PageVisible = true;
-                //FurnInfo.PageVisible = false;
-                //WorkInfo.PageVisible = false;
-                //OtdelkaInfo.PageVisible = false;
+                    //RasInfo.PageVisible = true;
+                    //FurnInfo.PageVisible = false;
+                    //WorkInfo.PageVisible = false;
+                    //OtdelkaInfo.PageVisible = false;
+                    //SockZadanyInfoFill();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных по заданию в tbNomZad_KeyDown: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void SockZadanyInfoFill()
+        {
+            try
+            {
                 if (customRadioGroup2.SelectedIndex == 2)
                 {
                     SockZadanyInfo.PageVisible = true;
@@ -2306,11 +2244,11 @@ namespace SewingProduction
                     //Task rasInfoLoadTask = LoadRasInfoByNomZadDataAsync(tbNomZad.Text);
                     //Task naklViewLoadTask = LoadNaklViewByNomZadDataAsync(tbNomZad.Text);
                     //Task chipInfoLoadTask = LoadChipInfoByNomZadDataAsync(tbNomZad.Text);
-                    Task sockKnitZadanyInfoLoadTask = LoadSockKnitZadanyInfoDataAsync(tbNomZad.Text);
-                    Task sockZadanySmenListLoadTask = LoadSockZadanySmenListDataAsync(tbNomZad.Text);
-                    Task sockServiceListByNomZadLoadTask = LoadSockServiceListByNomZadDataAsync(tbNomZad.Text);
-                    Task sockDownTimeListByNomZadLoadTask = LoadSockDownTimeListByNomZadDataAsync(tbNomZad.Text);
-                    Task sockDefectListByNomZadLoadTask = LoadSockDefectListByNomZadDataAsync(tbNomZad.Text);
+                    Task sockKnitZadanyInfoLoadTask = LoadSockKnitZadanyInfoDataAsync(tbPsaNomZad.Text);
+                    Task sockZadanySmenListLoadTask = LoadSockZadanySmenListDataAsync(tbPsaNomZad.Text);
+                    Task sockServiceListByNomZadLoadTask = LoadSockServiceListByNomZadDataAsync(tbPsaNomZad.Text);
+                    Task sockDownTimeListByNomZadLoadTask = LoadSockDownTimeListByNomZadDataAsync(tbPsaNomZad.Text);
+                    Task sockDefectListByNomZadLoadTask = LoadSockDefectListByNomZadDataAsync(tbPsaNomZad.Text);
                     await Task.WhenAll(sockKnitZadanyInfoLoadTask, sockZadanySmenListLoadTask
                         , sockServiceListByNomZadLoadTask, sockDownTimeListByNomZadLoadTask
                         , sockDefectListByNomZadLoadTask);
@@ -2326,10 +2264,13 @@ namespace SewingProduction
                         SockZadanyInfo.PageVisible = false;
                     }
                 }
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки данных по заданию носков: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void layoutControlGroup6_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
@@ -2376,12 +2317,13 @@ namespace SewingProduction
                     string xKo = searchLookUpEditArticul.EditValue.ToString();
                     string xArticul = searchLookUpEditArticul.Text.Trim();
                     string xNomZadany = "";
+                    string xIz = "";
 
                     //ArticulModel selectedRow = _articulBindingSource.Current as ArticulModel;
                     if (xKo != null && xKo.Length != 0 && xArticul != null && xArticul.Length != 0)
                     {
                         //OpenForm(new NomLookUp(xNomZadany, xKo, xArticul), sender);
-                        using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul))
+                        using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul, xIz))
                         {
                             if (form2.ShowDialog() == DialogResult.OK)
                             {
@@ -2463,7 +2405,7 @@ namespace SewingProduction
 
             var selectedRow = _rasInfoByPachKodBindingSource.Current as RasInfo;
             //if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
-            
+
             if (selectedRow != null && selectedRow.RzuNom != 0 && Convert.ToInt32(selectedRow.PsaNomZad) != 0)
             {
                 report1.Parameters["_nomZad"].Value = selectedRow.PsaNomZad;
@@ -2479,6 +2421,84 @@ namespace SewingProduction
             {
                 MessageBox.Show("Не выбран расчет для печати");
             }
+        }
+
+        private async void textBoxIzNakl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBoxIzNakl.Text.Trim().Length == 0 || textBoxYearIzNakl.Text.Trim().Length == 0) return;
+                //------------------------------
+                string xKo = "";
+                string xArticul = "";
+                string xNomZadany = "";
+                string xIz = GetIz();
+
+                if (xIz != null && xIz.Length != 0)
+                {
+                    using (var form2 = new NomLookUp(xNomZadany, xKo, xArticul, xIz))
+                    {
+                        if (form2.ShowDialog() == DialogResult.OK)
+                        {
+                            int valueNPach = form2.SelectedValueNPach;
+                            int valueYearPach = form2.SelectedValueYearPach;
+                            int valueProizvType = form2.SelectedValueProizvType;
+                            customRadioGroup2.SelectedIndex = valueProizvType;
+                            customRadioGroup3.SelectedIndex = 1;
+                            tbNomPach.Text = valueNPach.ToString();
+                            tbYearPach.Text = valueYearPach.ToString();
+                            GetPachInfo();
+                        }
+                    }
+                }
+                else
+                {
+                    xKo = "";
+                    MessageBox.Show("Не указано задание");
+                }
+                //------------------------------
+
+                //layoutControlItem107.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;   // деленые накладные
+                //layoutControlItem105.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;  // накладные
+
+                //RasInfo.PageVisible = true;
+                //FurnInfo.PageVisible = false;
+                //WorkInfo.PageVisible = false;
+                //OtdelkaInfo.PageVisible = false;
+                if (customRadioGroup2.SelectedIndex == 2)
+                {
+                    SockZadanyInfo.PageVisible = true;
+
+                    //Task rasInfoLoadTask = LoadRasInfoByNomZadDataAsync(tbNomZad.Text);
+                    //Task naklViewLoadTask = LoadNaklViewByNomZadDataAsync(tbNomZad.Text);
+                    //Task chipInfoLoadTask = LoadChipInfoByNomZadDataAsync(tbNomZad.Text);
+                    Task sockKnitZadanyInfoLoadTask = LoadSockKnitZadanyInfoDataAsync(tbNomZad.Text);
+                    Task sockZadanySmenListLoadTask = LoadSockZadanySmenListDataAsync(tbNomZad.Text);
+                    Task sockServiceListByNomZadLoadTask = LoadSockServiceListByNomZadDataAsync(tbNomZad.Text);
+                    Task sockDownTimeListByNomZadLoadTask = LoadSockDownTimeListByNomZadDataAsync(tbNomZad.Text);
+                    Task sockDefectListByNomZadLoadTask = LoadSockDefectListByNomZadDataAsync(tbNomZad.Text);
+                    await Task.WhenAll(sockKnitZadanyInfoLoadTask, sockZadanySmenListLoadTask
+                        , sockServiceListByNomZadLoadTask, sockDownTimeListByNomZadLoadTask
+                        , sockDefectListByNomZadLoadTask);
+                    var selectedRow = _sockKnitZadanyInfoBindingSource.Current as SockZadanyInfo;
+                    if (selectedRow != null)
+                    {
+                        //xtraTabControl1.Enabled = true;
+                        SockZadanyInfo.PageVisible = true;
+                    }
+                    else
+                    {
+                        //xtraTabControl1.Enabled = false;
+                        SockZadanyInfo.PageVisible = false;
+                    }
+                }
+
+            }
+        }
+        private string GetIz()
+        {
+            string iz = string.Concat(textBoxYearIzNakl.Text, textBoxIzNakl.Text.PadLeft(5));
+            return iz;
         }
     }
 }

@@ -43,4 +43,30 @@ namespace SewingProduction.Core.Models
         public int Id_gost { get; set; }
         public int Id_gost_parent { get; set; }
     }
+
+    public class TmModel
+    {
+        public int M_id_sp { get; set; }
+        public int M_id_gl { get; set; }
+        public string Kle { get; set; }
+        public string Kle_naimen { get; set; }
+    }
+    public class TovarSeasonModel
+    {
+        public int Tsn_GlobalCod { get; set; }
+        public string Tsn_name { get; set; }
+        public string Tsn_shortName { get; set; }
+    }
+    public class CountryModel
+    {
+        public int frm_id_country { get; set; }
+        public string frm_country { get; set; }
+        public int frm_cu_id { get; set; }
+    }
+    public class  Szon_newModel
+    {
+        public int N { get; set; }
+        public string Txt { get; set; }
+    }
+
 }

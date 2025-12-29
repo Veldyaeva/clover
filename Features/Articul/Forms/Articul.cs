@@ -1,20 +1,15 @@
-﻿//using Microsoft.ReportingServices.DataProcessing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.Data.Internal;
+﻿using DevExpress.Data.Internal;
 using DevExpress.Office.Utils;
+using DevExpress.Xpo;
+using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
-using SewingProduction.Core.Class;
+using DevExpress.XtraRichEdit.Model;
+using DevExpress.XtraVerticalGrid;
 using DevExpress.XtraWaitForm;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
 using SewingProduction.Extensions;
@@ -32,16 +27,14 @@ using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.Office.PInvoke.Win32;
+using static DevExpress.Xpo.DB.DataStoreLongrunnersWatch;
 using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
 
@@ -61,23 +54,8 @@ namespace SewingProduction.Features.Articul
 
         private bool _isInitialized;
 
-        //краткий перечень полей таблицы
-        private List<ArticulModel> _artPreview;
-        //фурнитура на артикул
-        private List<ArtDrModel> _artDrForKod;
-        //состав комплекта по коду 
-        //private List<SpArticulKomplSostModel> _SpArticulKomplSostKod;
-
-        ////все поля таблицы Артикул
+        
         private BindingList<SpArticulPreviewModel> _articulBindingList;
-
-
-        private List<SpArticulKomplSostModel> _articulKomplSostList;
-        private List<SpArticulNaborSostav> _articulNaborSostList;
-
-        //private BindingSource _articulBindingSource;
-        //private BindingSource _komplSostBindingSource;
-
 
         ArticulDataService _articulDataService = new ArticulDataService();
         public Articul(UserClass user) : base(user)
@@ -86,14 +64,17 @@ namespace SewingProduction.Features.Articul
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
             _user = user;
+
+            //_artPreviewBindingList = new BindingList<SpArtPreviewModel>();
+
             ThemeManager.UpdateTheme(this);
         }
         private async Task RefreshArtPreviewAsync()
         {
-            // Перезагрузка краткого перечня кодов из справочника
-            _artPreview = await _articulDataService.GetArtPreviewAsync();
-            bsArt.DataSource = _artPreview;
-            bsArt.ResetBindings(false);
+
+            bsArt?.Clear();
+            bsArt.DataSource = await _articulDataService.GetArtPreviewAsyncBindingList();
+
         }
 
 
@@ -108,9 +89,7 @@ namespace SewingProduction.Features.Articul
                 {
                     await InitializeBindingsAsync();
                     _isInitialized = true;
-                    
                 }
-
             }
             catch (Exception ex)
             {
@@ -127,6 +106,7 @@ namespace SewingProduction.Features.Articul
                 //var artPreviewTask = Task.Run(() =>
                 //{
                 //загрузка перечня кодов из справочника, часть полей
+
                 _articulBindingList = new BindingList<SpArticulPreviewModel>();
                 bsArticul = new BindingSource { DataSource = _articulBindingList };
 
@@ -135,10 +115,10 @@ namespace SewingProduction.Features.Articul
                 //bsSostKompl = new BindingSource { DataSource = _articulKomplSostList };
 
                 //});
-
-                //await Task.WhenAll(artPreviewTask);
+               
 
                 #region заполнение блока основных данных артикула
+
                 txbKod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod), true, DataSourceUpdateMode.Never);
                 txbArticul.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Articul), true, DataSourceUpdateMode.Never);
                 txbMod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Mod), true);
@@ -159,13 +139,18 @@ namespace SewingProduction.Features.Articul
                 txbScNomer.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.ScNomer), true);
                 txbKodTnved.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod_tnved), true);
                 txbNDS.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Nds), true);
+
                 #endregion
 
                 #region галки с отделками
+                //chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true);
+                //chbKombDet.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_det), true);
+                //chbKombIzd.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_izd), true);
 
                 //галки вяз отделки
                 chbKombIzd.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_izd), true);
                 chbKombDet.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_det), true);
+                //архив
                 chbArh.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Arh), true);
 
                 //отделка
@@ -270,6 +255,7 @@ namespace SewingProduction.Features.Articul
 
 
                 #endregion
+
                 #region коэфициенты
 
                 txbSebDop.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb_dop), true, DataSourceUpdateMode.Never);
@@ -285,7 +271,9 @@ namespace SewingProduction.Features.Articul
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
             }
+
         }
+
         /// <summary>
         /// Получение фурнитуры по коду справочника
         /// </summary>
@@ -295,60 +283,62 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                bsArtDr.Clear();
-                bsArtDr.ResetBindings(false);
+                bsArtDr?.Clear();
 
-                var articulByKodTemp = await _articulDataService.GetArtDrByKod(kod);
+                var _artDrForKod = await _articulDataService.GetArtDrByKodAsync(kod);
 
-                if (articulByKodTemp != null)
+                if (_artDrForKod != null)
                 {
                     await this.InvokeAsync(() =>
                     {
-                        _artDrForKod = articulByKodTemp;       // Обновляем текущую модель
+                        
                         bsArtDr.DataSource = _artDrForKod; // Привязываем данные к форме
-
+                        
                     });
-                    bsArtDr.ResetBindings(false);
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для kod {kod}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных GetArtDrByKod для kod {kod}");
             }
         }
         private async Task getArticulFromSQlAsync(string kod)
         {
+
+
             try
             {
-                bsArticul.Clear();
-                bsArticul.ResetBindings(false);
+                // отображение панели загрузки
+                gridControl1.ShowLoadingPanel();
+                bsArticul?.Clear();
 
-                var articulByKodTemp = await _articulDataService.GetByKodAsync(kod);
+                _articulByKod = await _articulDataService.GetByKodAsync(kod);
 
-                if (articulByKodTemp != null)
+                if (_articulByKod != null)
                 {
 
                     await this.InvokeAsync(() =>
                     {
-                        _articulByKod = articulByKodTemp;                // Обновляем текущую модель
+
                         bsArticul.DataSource = _articulByKod; // Привязываем данные к форме
-
                     });
-                    bsArticul.ResetBindings(false);
                 }
-
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для kod {kod}");
+            }
+            finally
+            {
+                // скрытие панели загрузки
+                gridControl1.HideLoadingPanel();
             }
         }
         private async Task getSostKomplFromSQlAsync(string kod)
         {
             try
             {
-                bsSostKompl.Clear();
-                bsSostKompl.ResetBindings(false);
+                bsSostKompl?.Clear();
 
                 var articulByKodTemp = await _articulDataService.GetSostavkomplForKod(kod);
 
@@ -357,11 +347,10 @@ namespace SewingProduction.Features.Articul
 
                     await this.InvokeAsync(() =>
                     {
-                        _articulKomplSostList = articulByKodTemp;                // Обновляем текущую модель
-                        bsSostKompl.DataSource = _articulKomplSostList; // Привязываем данные к форме
+                        //_articulKomplSostList = articulByKodTemp;                // Обновляем текущую модель
+                        bsSostKompl.DataSource = articulByKodTemp; // Привязываем данные к форме
 
                     });
-                    bsSostKompl.ResetBindings(false);
                 }
 
             }
@@ -374,8 +363,7 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                bsSostNabor.Clear();
-                bsSostNabor.ResetBindings(false);
+                bsSostNabor?.Clear();
 
                 var articulByKodTemp = await _articulDataService.GetSostavNaborForKod(kod);
 
@@ -384,8 +372,8 @@ namespace SewingProduction.Features.Articul
 
                     await this.InvokeAsync(() =>
                     {
-                        _articulNaborSostList = articulByKodTemp;                // Обновляем текущую модель
-                        bsSostNabor.DataSource = _articulNaborSostList; // Привязываем данные к форме
+                        
+                        bsSostNabor.DataSource = articulByKodTemp; // Привязываем данные к форме
 
                     });
                     bsSostNabor.ResetBindings(false);
@@ -397,26 +385,7 @@ namespace SewingProduction.Features.Articul
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostNaborFromSQlAsync для kod {kod}");
             }
         }
-        private void bindComboBoxTkanName()
-        {
-            //string query = "SELECT tkan.tkb,tkan,kod_t, concat(tkb,kod_t) as concat  FROM tkan order by tkb";
-            //DataTable dt = _dbHelperAce.ExecuteQuery(query);
-
-            //foreach (CustomComboBox el in gbTkanName.Controls)
-            //{
-            //    if (el.GetType() == typeof(CustomComboBox))
-            //    {
-            //        char si = el.Name.Last();
-            //        BindingSource bs = new BindingSource();
-            //        bs.DataSource = dt;
-
-            //        el.DataSource = bs;
-            //        el.DisplayMember = "tkb";
-            //        el.ValueMember = "kod_t";
-            //        el.DataBindings.Add("SelectedValue", bsArticul, $"va_kod_t{si}", true, DataSourceUpdateMode.OnPropertyChanged);
-            //    }
-            //}
-        }
+        
 
         /// <summary>
         /// обновлениме данных на форме по коду при перемещении по таблице артикулов
@@ -430,7 +399,8 @@ namespace SewingProduction.Features.Articul
 
             try
             {
-                var currentRow = bsArt.Current as ArticulModel;
+                var currentRow = bsArt.Current as SpArtPreviewModel;
+
                 if (currentRow != null)
                 {
                     kod = currentRow.Kod;
@@ -462,14 +432,26 @@ namespace SewingProduction.Features.Articul
                             cTabPage2.PageVisible = false;
                             break;
                     }
-
-
-                    string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
-                    var dt = _dbHelperAce.ExecuteQuery(query);
-                    if (dt != null)
+                    // получение изображения по пути
+                    string imagePath = null;
+                    try
                     {
-                        pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
+                        imagePath = await _articulDataService.GetFileEskizForKod(kodd);
+                        if (!string.IsNullOrEmpty(imagePath))
+                        {
+                            pictureBoxArticul.ImageLocation = imagePath;
+                        }
+                        else
+                        {
+                            pictureBoxArticul.ImageLocation = null;
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
+                        pictureBoxArticul.ImageLocation = null;
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -492,7 +474,7 @@ namespace SewingProduction.Features.Articul
                 GetItogVibKartReport report = new GetItogVibKartReport();
                 report.RequestParameters = false;
 
-                var currentRow = bsArt.Current as ArticulModel;
+                var currentRow = bsArt.Current as SpArtPreviewModel;
                 if (currentRow != null)
                 {
                     kod = currentRow.Kod;
@@ -536,15 +518,14 @@ namespace SewingProduction.Features.Articul
         /// <param name="e"></param>
         private async void customButtonCopy_Click(object sender, EventArgs e)
         {
-            var current = bsArt.Current as ArticulModel;
-            if (current == null)
+            //var current = bsArt.Current as SpArtPreviewModel;
+            var kodObj = (bsArt.Current as SpArtPreviewModel).Kod;
+            if (kodObj == null)
             {
                 MessageBox.Show("Не выбран артикул для копирования.", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            var kodObj = (bsArt.Current as ArticulModel).Kod;
 
             using (EditArticul f = new EditArticul(_user, kodObj.ToString()))
             {
@@ -562,10 +543,10 @@ namespace SewingProduction.Features.Articul
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
-            var kodObj = (bsArt.Current as ArticulModel).Kod;
+            var kodObj = (bsArt.Current as SpArtPreviewModel).Kod;
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
+                //mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
             }
         }
 
@@ -588,11 +569,12 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                var kod = (bsArt.Current as ArticulModel).Kod;
+                var kod = (bsArt.Current as SpArtPreviewModel).Kod;
 
                 string query = "exec dbo.kodArticulisUsed @kod = @kod";
                 DataTable result = await _dbHelperAce.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
-                ArticulModel cuRow = (ArticulModel)bsArt.Current;
+
+                var cuRow = (SpArtPreviewModel)bsArt.Current;
 
                 if (result.Rows.Count > 0)
                 {
@@ -606,24 +588,26 @@ namespace SewingProduction.Features.Articul
 
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
-                    _artPreview.Remove(cuRow);
-                    bsArt.ResetBindings(false);
-
+                    bsArt.RemoveCurrent();
                 }
+                result?.Dispose();
             }
             catch (Exception ex)
             {
-
                 await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
             }
-
         }
-
- 		private void customButton3_Click(object sender, EventArgs e)
+        /// <summary>
+        /// открывает форму редактирования состава набора
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void customButton3_Click(object sender, EventArgs e)
         {
-            var Obj = bsArt.Current as ArticulModel;
+            var Obj = bsArt.Current as SpArtPreviewModel;
             //нужно добавить проверку на признак НАБОРА, чтобы можно было открыть только набор.
-            Debug.WriteLine(Obj.Gost);
+            //Debug.WriteLine(Obj.Gost);
+
             ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
             if (_ANSDataService.CheckOpis(Obj.Kod))
             {
@@ -648,66 +632,15 @@ namespace SewingProduction.Features.Articul
                 MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var kodd = (bsArt.Current as ArticulModel).Kodd;
+            var kodd = (bsArt.Current as SpArtPreviewModel).Kodd;
+            var articul = (bsArt.Current as SpArtPreviewModel).Articul.Trim();
 
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd));
+                mainForm.OpenForm(new ArticulEditAdvance(CurrentUser.User, kodd, articul));
             }
-
-
-            //// Проверяем, есть ли уже открытые экземпляры
-            //if (HasOpenAdvanceForms())
-            //{
-            //    // Получаем первый открытый экземпляр
-            //    ArticulEditAdvance existingForm = null;
-            //    lock (_lockObject)
-            //    {
-            //        existingForm = _openEditArticulForms.FirstOrDefault(form => form != null && !form.IsDisposed);
-            //    }
-
-            //    if (existingForm != null)
-            //    {
-            //        //string articul = existingForm.CurrentArticul;
-            //        //string msg = string.IsNullOrWhiteSpace(articul)
-            //        //    ? "Открыто разделение труда"
-            //        //    : $"Открыто разделение труда для артикула \"{articul}\"";
-
-            //        //// Показать сплеш на 3 секунды
-            //        //Task.Run(async () =>
-            //        //{
-            //        //    SplashScreenHelper.ShowSplash(msg, textOnly: true);
-            //        //    await Task.Delay(3000);
-            //        //    SplashScreenHelper.CloseSplash();
-            //        //});
-
-            //        existingForm.WindowState = FormWindowState.Normal;
-            //        existingForm.BringToFront();
-            //        existingForm.Activate();
-            //    }
-
-            //    return null;
-            //}
-
-            //var editForm = new ArticulEditAdvance();
-
-            //// Добавляем в список открытых форм
-            //AddOpenAdvanceForm(editForm);
-            //// Подписываемся на событие закрытия формы
-            //editForm.FormClosed += (sender, e) =>
-            //{
-            //    RemoveOpenAdvanceForm(editForm);
-            //};
-
-            //// Открываем форму не в модальном режиме
-            ////editForm.Show();
-            //OpenForm(new Articul(_user), sender);
-
-            //return editForm;
-
-
         }
-
+        //???
         #region Управление немодальной формой ArticulEditAdvance
 
         private static readonly List<ArticulEditAdvance> _openEditArticulForms = new List<ArticulEditAdvance>();
@@ -756,10 +689,24 @@ namespace SewingProduction.Features.Articul
 
         }
 
-        private void Articul_FormClosing(object sender, FormClosingEventArgs e)
+        private void Articul_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _artPreview.Clear();
-            _artPreview = null;
+            //освобождение ресурсов загруженных в статических полях для справочников при редактировании артикула
+            //CommonSpravArticulEditAdvance.Clear();
+
+            gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
+
+            // Отвязать BindingSource
+            bsArt.DataSource = null;
+
+            // Dispose DevExpress контролов
+            gridControl1?.Dispose();
+            gridView1?.Dispose();
+
+            // Dispose автогенерируемых объектов
+            components?.Dispose();
         }
+
+        
     }
 }

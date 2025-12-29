@@ -29,6 +29,8 @@ namespace SewingProduction.Features.Articul.Models
         [NotMapped]
         public string Ag_name_sokr { get; set; }// Ag_name_sokr
         [NotMapped]
+        public string Tat_name { get; set; }    // ассортимент
+        [NotMapped]
         public string Razm_all { get; set; }    // id_razm_nab
 
         [NotMapped]
