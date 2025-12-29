@@ -165,6 +165,7 @@ namespace SewingProduction.Features.Articul.Forms
         private async Task ArticulNaborColumnsOld(int? Id_gost)
         {
             var gostOld = (await _ANSDataService.GetGostNaborAsync(Id_gost)).FirstOrDefault();
+            if (gostOld == null) return;
             customTextBoxArtN_Old.Text = articulNabor_old.Articul;
             customTextBoxKodGost_Old.Text = gostOld.Id_gost.ToString();
             customTextBoxGostN_Old.Text = gostOld.Name_gost;

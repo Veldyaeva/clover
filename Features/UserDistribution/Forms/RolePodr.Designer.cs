@@ -89,6 +89,14 @@
             // 
             gridViewRole.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewRole.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewRole.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewRole.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewRole.Appearance.GroupRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewRole.Appearance.GroupRow.Options.UseFont = true;
+            gridViewRole.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewRole.Appearance.HeaderPanel.Options.UseFont = true;
+            gridViewRole.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewRole.Appearance.Row.Options.UseFont = true;
             gridViewRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { RoleID, RoleName, Description, IsSelected });
             gridViewRole.GridControl = customGridControlRole;
             gridViewRole.Name = "gridViewRole";
@@ -154,6 +162,16 @@
             // 
             gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewTable.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewTable.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewTable.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewTable.Appearance.GroupRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewTable.Appearance.GroupRow.Options.UseFont = true;
+            gridViewTable.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewTable.Appearance.HeaderPanel.Options.UseFont = true;
+            gridViewTable.Appearance.Preview.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewTable.Appearance.Preview.Options.UseFont = true;
+            gridViewTable.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewTable.Appearance.Row.Options.UseFont = true;
             gridViewTable.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IdAtn, TableName, TableNameRus });
             gridViewTable.GridControl = customGridControlTable;
             gridViewTable.Name = "gridViewTable";

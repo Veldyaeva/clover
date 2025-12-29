@@ -59,12 +59,12 @@ namespace SewingProduction
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox f = new AboutBox();
-            f.Show();
+            f.ShowDialog();
         }
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsForm f = new SettingsForm(_user);
-            f.Show();
+            f.ShowDialog();
         }
         private void профильToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -243,7 +243,7 @@ namespace SewingProduction
         private void showHelpForm(string filePath = null)
         {
             var helpForm = new HelpForm(this._formManager, filePath);
-            helpForm.Show();
+            helpForm.ShowDialog();
         }
 
         private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)

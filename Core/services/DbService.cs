@@ -100,7 +100,7 @@ namespace SewingProduction.Services
             }
         }
         /// <summary>
-        /// Обновляет одно поле в таблице по заданному условию.
+        /// Обновляет поля в таблице по заданному условию.
         /// </summary>
         /// <param name="tableName">Имя таблицы</param>
         /// <param name="fieldName">Имя обновляемого поля</param>
@@ -135,7 +135,7 @@ namespace SewingProduction.Services
         }
 
         /// <summary>
-        /// Обновляет одно поле в таблице по заданному условию.
+        /// Обновляет поля в таблице по заданным условиям.
         /// </summary>
         /// <param name="tableName">Имя таблицы</param>
         /// <param name="fieldName">Имя обновляемого поля</param>

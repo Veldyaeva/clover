@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,6 +20,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public LoginForm(UserClass user)
         {
             InitializeComponent();
+            InitGifBackground();
             LoadLoginHistory();
 
             _user = user ?? throw new ArgumentNullException(nameof(user));
@@ -134,6 +136,15 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             labelGlaz.Text = "👁";
             textEditPassword.Properties.UseSystemPasswordChar = true;
+        }
+
+        private void InitGifBackground()
+        {
+            _gifBackground.Dock = DockStyle.Fill;
+            _gifBackground.Image = this.BackgroundImage;
+            _gifBackground.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.Controls.Add(_gifBackground);
+            _gifBackground.SendToBack();
         }
     }
 
