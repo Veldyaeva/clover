@@ -18,7 +18,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly TextEdit _tabEdit;
 
         public int? SelectedTab =>
-            int.TryParse(_tabEdit.Text, out var manualTab) ? manualTab :
+            int.TryParse(_tabEdit.Text, out var scanTab) ? scanTab :
             _fioLookup.EditValue != null && int.TryParse(_fioLookup.EditValue.ToString(), out int tab) ? tab : (int?)null;
 
         public FioSelectionSplash(IEnumerable<FioModel> fioList, int? initialTab = null)
@@ -57,16 +57,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Margin = new Padding(0, 0, 0, 20)
             };
 
-            _tabEdit = new TextEdit
-            {
-                Dock = DockStyle.Left,
-                Height = 32,
-                Width = 128,
-                Properties =
-                {
-                  //  NullText = "Введите табельный номер и нажмите Enter"
-                }
-            };
 
             _fioLookup = new GridLookUpEdit
             {
@@ -92,8 +82,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 OptionsView = { ShowGroupPanel = false, ColumnAutoWidth = false }
             };
 
-            lookupView.Columns.AddVisible(nameof(FioModel.Fio), "ФИО").Width = 200;
+            lookupView.Columns.AddVisible(nameof(FioModel.Fio), "ФИО").Width = 220;
             lookupView.Columns.AddVisible(nameof(FioModel.Tab), "Таб. №").Width = 80;
+            lookupView.Columns.AddVisible(nameof(FioModel.Zone), "Зона").Width = 80;
            // lookupView.BestFitColumns();
 
             _fioLookup.Properties.PopupView = lookupView;
@@ -101,6 +92,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 _fioLookup.EditValue = initialTab.Value;
             }
+
+
+            _tabEdit = new TextEdit
+            {
+                Dock = DockStyle.Left,
+                Height = 84,
+                Width = 134,
+                TabIndex = 1,
+                Properties =
+                {
+                  //  NullText = "Введите табельный номер и нажмите Enter"
+                }
+            };
 
             _okButton = new SimpleButton
             {
@@ -116,7 +120,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // делаем здоровенные кнопки (x2 от базовых 134x42 → 268x84 условно)
             _okButton.Size = new Size(_okButton.Width * 2, _okButton.Height * 2);
             _cancelButton.Size = new Size(_cancelButton.Width * 2, _cancelButton.Height * 2);
-
+            _tabEdit.Size = new Size(_tabEdit.Width * 2, _tabEdit.Height * 2);
             AcceptButton = _okButton;
             CancelButton = _cancelButton;
 
@@ -193,7 +197,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            _fioLookup.Focus();
+            //_fioLookup.Focus();
+            _tabEdit.Focus();
         }
 
         private void InitializeComponent()
