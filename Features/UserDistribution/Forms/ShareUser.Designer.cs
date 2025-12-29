@@ -280,7 +280,7 @@
             layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup1.Name = "layoutControlGroup1";
             layoutControlGroup1.Size = new System.Drawing.Size(729, 272);
-            layoutControlGroup1.Text = "Выберите пользователя с которым хотете поделиться";
+            layoutControlGroup1.Text = "Выберите пользователя с которым хотите поделиться";
             // 
             // layoutControlItem1
             // 
@@ -296,7 +296,7 @@
             layoutControlGroup2.Location = new System.Drawing.Point(0, 272);
             layoutControlGroup2.Name = "layoutControlGroup2";
             layoutControlGroup2.Size = new System.Drawing.Size(729, 349);
-            layoutControlGroup2.Text = "Выберите пользователей которых хотете передать";
+            layoutControlGroup2.Text = "Выберите пользователей которых хотите передать";
             // 
             // layoutControlItem2
             // 

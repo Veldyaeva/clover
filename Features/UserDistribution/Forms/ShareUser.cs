@@ -23,9 +23,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private List<DistributionModel> _currentUserDistribution;
         private List<DistributionModel> _allDistribution;
         private List<UserModel> _childUsers;
-        public ShareUser(UserClass user) : base(user)
+        public ShareUser(UserClass user, int idUser = 0) : base(user)
         {
             InitializeComponent();
+            _selectedUser = new UserModel { UserID = idUser };
             _userModelDataService = new UserModelDataService();
             _shareUserDataService = new ShareUserDataService();
         }
@@ -36,6 +37,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             base.OnShown(e);
             await InitializeFormAsync();
             HideTechnicalColumns();
+
+            if (_selectedUser.UserID > 0)
+                FocusUserRowById(_selectedUser.UserID);
         }
         private async Task InitializeFormAsync()
         {
@@ -62,7 +66,39 @@ namespace SewingProduction.Features.UserDistribution.Forms
             _allDistribution = await _shareUserDataService.GetDistribution();
 
         }
+        private void FocusUserRowById(int userId)
+        {
+            if (userId <= 0) return;
+            if (gridViewUser.RowCount <= 0) return;
+
+            int rowHandle = gridViewUser.LocateByValue("UserID", userId);
+
+            if (rowHandle < 0)
+            {
+                for (int i = 0; i < gridViewUser.RowCount; i++)
+                {
+                    int rh = gridViewUser.GetVisibleRowHandle(i);
+                    if (rh < 0) continue;
+
+                    var u = gridViewUser.GetRow(rh) as UserModel;
+                    if (u != null && u.UserID == userId)
+                    {
+                        rowHandle = rh;
+                        break;
+                    }
+                }
+            }
+
+            if (rowHandle < 0) return;
+
+            SelectUserRow(rowHandle);
+
+            gridViewUser.FocusedRowHandle = rowHandle;
+            gridViewUser.MakeRowVisible(rowHandle, true);
+        }
         #endregion
+
+        #region CellValueChanging
         private void gridViewUser_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             if (e.Column != IsSelected) return;
@@ -145,7 +181,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
             row.IsSelected = Convert.ToBoolean(e.Value);
         }
+        #endregion
 
+        #region Button_Click
         private async void customButtonOk_Click(object sender, EventArgs e)
         {
             if (_selectedUser == null) return;
@@ -182,6 +220,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Close();
         }
 
+        #endregion
 
         #region Technical
         private void HideTechnicalColumns()

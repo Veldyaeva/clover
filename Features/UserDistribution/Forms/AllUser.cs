@@ -179,7 +179,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private void customButtonShareUser_Click(object sender, EventArgs e)
         {
-            ShareUser f = new ShareUser(_user);
+            ShareUser f = new ShareUser(_user, selectedUserId);
             f.ShowDialog();
         }
         /// <summary>
