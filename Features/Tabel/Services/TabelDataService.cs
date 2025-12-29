@@ -102,7 +102,7 @@ namespace SewingProduction.Features.Tabel.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select *,tItogView/dl_d as tItogD  from TimeSheetUnion where mg = '{mg}' and ttabn = {gr} order by ttabn,ttabnsort,fio asc ";
+                    string query = $"select *,round((tItogViewChas+0.0)/dl_d,2) as tItogD  from TimeSheetUnion where mg = '{mg}' and ttabn = {gr} order by ttabn,ttabnsort,fio asc ";
 
                     var result = await connection.QueryAsync<TimeSheet>(query, new Dictionary<string, object> { });
                     return result.ToList();

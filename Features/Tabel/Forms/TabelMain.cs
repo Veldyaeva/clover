@@ -1,19 +1,24 @@
 ﻿using DevExpress.Charts.Model;
 using DevExpress.DataAccess.Sql;
+using DevExpress.Utils;
 using DevExpress.Utils.DPI;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraReports.UI;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Extensions;
+using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Features.Tabel.Services;
 using SewingProduction.Helpers;
+using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
@@ -31,7 +36,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class TabelMain : Form
     {
-        private string currentMG = "0525";
+        private string currentMG = "1225";
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
@@ -43,6 +48,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private BindingList<TimeSheet> _TimeSheetBindingList;
         private BindingList<TimeSheet> _timeSheetFreshBindingList;
         private List<TimeSheet> _currentTimeSheetData = new List<TimeSheet>();
+        private List<TimeSheet> _TimeSheetDataFresh = new List<TimeSheet>();
         private readonly string[] allStates = new[]
         {
             " ",   // Пусто
@@ -89,15 +95,19 @@ namespace SewingProduction.Features.Tabel.Forms
 
             }
             GridColumn itogColumnD = new GridColumn();
-            itogColumnD.FieldName = "it_d";
+            itogColumnD.FieldName = "tItogD";
             itogColumnD.Caption = "Ит(Д)";
             itogColumnD.Visible = true;
+            itogColumnD.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+            itogColumnD.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             itogColumnD.OptionsColumn.AllowEdit = false;
             gridView1.Columns.Add(itogColumnD);
             GridColumn itogColumnChas = new GridColumn();
-            itogColumnChas.FieldName = "it_ch";
+            itogColumnChas.FieldName = "tItogViewChas";
             itogColumnChas.Caption = "Ит(Ч)";
             itogColumnChas.Visible = true;
+            itogColumnChas.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+            itogColumnChas.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             itogColumnChas.OptionsColumn.AllowEdit = false;
             gridView1.Columns.Add(itogColumnChas);
             gridView1.BestFitColumns();
@@ -172,6 +182,8 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnTsplPart.FieldName = "tsplPart";
             gridColumnTsplPartOf.FieldName = "tsplPartOf";
             gridColumnCheckIncludePlan.FieldName = "ts_plan";
+
+
             gridColumnFio.Width = 90;
             gridView1.OptionsView.EnableAppearanceEvenRow = false;
             gridView1.OptionsView.EnableAppearanceOddRow = false;
@@ -266,14 +278,14 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             _timeSheetFreshBindingSource.Clear();
             _timeSheetFreshBindingSource.ResetBindings(false);
-            var TimeSheetData = await _tabelDataService.GetTabelGrAsync(mg, gr);
-            if (TimeSheetData != null)
+            _TimeSheetDataFresh = await _tabelDataService.GetTabelGrAsync(mg, gr);
+            if (_TimeSheetDataFresh != null)
             {
                 await _logger.LogEventAsync($"Получены данные _timeSheetFreshBindingSource", "GetTimeSheetFresh");
 
                 await this.InvokeAsync(() =>
-                {             
-                    _timeSheetFreshBindingSource.DataSource = _currentTimeSheetData; // Привязываем данные к форме
+                {
+                    _timeSheetFreshBindingSource.DataSource = _TimeSheetDataFresh; // Привязываем данные к форме
                 });
 
                 await _logger.LogEventAsync($"Данные _timeSheetFreshBindingSource успешно загружены", "GetTimeSheetFresh");
@@ -403,7 +415,11 @@ namespace SewingProduction.Features.Tabel.Forms
                 string newValue = kol_chas.ToString().Trim();
                 allStates[1] = newValue;
                 // Получаем текущее значение ячейки
-                object currentValue = gridView1.GetRowCellValue(rowHandle, column);
+                string currentValue = gridView1.GetRowCellValue(rowHandle, column).ToString().Trim();
+                if (currentValue.Length == 0)
+                {
+                    currentValue = " ";
+                }
                 string currentState = currentValue?.ToString() ?? " ";
 
                 // Создаем уникальный ключ для ячейки
@@ -445,12 +461,7 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private void customGridControlTimeSheet_DoubleClick(object sender, EventArgs e)
         {
-            GridHitInfo hitInfo = gridView1.CalcHitInfo(gridView1.GridControl.PointToClient(Control.MousePosition));
 
-            if (hitInfo.InRowCell && hitInfo.Column.FieldName.StartsWith("d"))
-            {
-                CycleCellState(hitInfo.RowHandle, hitInfo.Column);
-            }
         }
 
         private void gridView1_KeyPress(object sender, KeyPressEventArgs e)
@@ -567,12 +578,12 @@ namespace SewingProduction.Features.Tabel.Forms
             }
         }
 
-     
+
 
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
 
-            if  (IsDayColumn(e.Column))
+            if (IsDayColumn(e.Column))
             {
                 int rowHandle = e.RowHandle;
                 int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
@@ -591,7 +602,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 UpdateCheckBoxInDataBase(recordId, fieldName, valueChecked);
             }
         }
-        public void UpdateCheckBoxInDataBase(int id, string fieldName,int value)
+        public void UpdateCheckBoxInDataBase(int id, string fieldName, int value)
         {
             //if (value == 1)
             //{
@@ -612,17 +623,18 @@ namespace SewingProduction.Features.Tabel.Forms
                 string query = $"update tabel_sp set {fieldName} = '{value}' where id = {id} ";
                 int grId = Convert.ToInt32(lookUpEditGr.EditValue);
                 await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
-                await GetTimeSheetFresh(currentMG,grId);
+                await GetTimeSheetFresh(currentMG, grId);
                 var changes = BindingSourceHelper.GetChanges<TimeSheet>(
                   _timeSheetBindingSource,
                   _timeSheetFreshBindingSource,
                   HashMode.All,
-                  keyProperties: new[] {"id" });
+                  keyProperties: new[] { "id" });
                 BindingSourceHelper.ApplyChanges<TimeSheet>(
                    _timeSheetBindingSource,
                    changes,
                    UpdateFieldsMode.All,
-                   keyProperties: new[] { "id" });
+                   keyProperties: new[] { "id" },
+                   gridView1);
             }
             catch (Exception ex)
             {
@@ -640,6 +652,48 @@ namespace SewingProduction.Features.Tabel.Forms
                 return int.TryParse(dayPart, out int day) && day >= 1 && day <= 31;
             }
             return false;
+        }
+
+        private void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            GridHitInfo hitInfo = gridView1.CalcHitInfo(gridView1.GridControl.PointToClient(Control.MousePosition));
+
+            if (hitInfo.InRowCell && hitInfo.Column.FieldName.StartsWith("d"))
+            {
+                CycleCellState(hitInfo.RowHandle, hitInfo.Column);
+            }
+
+        }
+
+        private void customButton1_Click_1(object sender, EventArgs e)
+        {
+            int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            TimeSheetParsecOrionPrint report1 = new TimeSheetParsecOrionPrint();
+            report1.RequestParameters = false;
+            report1.Parameters["grid"].Value = grId;
+            report1.Parameters["grid"].Visible = false;
+            report1.Parameters["Mg"].Value = currentMG;
+            report1.Parameters["Mg"].Visible = false;
+            report1.Parameters["orionAdd"].Value = 0;
+            report1.Parameters["orionAdd"].Visible = false;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+
+        }
+
+        private void customButton2_Click(object sender, EventArgs e)
+        {
+            int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            TimeSheetParsecOrionPrint report1 = new TimeSheetParsecOrionPrint();
+            report1.RequestParameters = false;
+            report1.Parameters["grid"].Value = grId;
+            report1.Parameters["grid"].Visible = false;
+            report1.Parameters["Mg"].Value = currentMG;
+            report1.Parameters["Mg"].Visible = false;
+            report1.Parameters["orionAdd"].Value = 1;
+            report1.Parameters["orionAdd"].Visible = false;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
         }
     }
 }
