@@ -54,7 +54,7 @@ namespace SewingProduction.Core.helpers
 
                 }
 
-                var data = await loadFunc(cancellationToken).ConfigureAwait(true) ?? Enumerable.Empty<T>();
+                var data = await loadFunc(cancellationToken) ?? Enumerable.Empty<T>();
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (targetList != null)
@@ -88,9 +88,9 @@ namespace SewingProduction.Core.helpers
                         }
                     }
                 }
-                catch
-                {
-                     SplashScreenManager.CloseOverlayForm(overlayHandle);
+                catch { SplashScreenManager.CloseOverlayForm(overlayHandle); }
+            }
+        }
                 }
             }
         }
@@ -149,7 +149,7 @@ namespace SewingProduction.Core.helpers
             => RunTaskWithOverlayAsync(grid, _ => task, ct);
 
         public static Task RunTaskWithOverlayAsync(GridControl grid, Task task)
-            => RunTaskWithOverlayAsync(grid, _ => task, CancellationToken.None);
-
     }
 }
+
+
