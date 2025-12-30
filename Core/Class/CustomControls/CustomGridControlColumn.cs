@@ -151,10 +151,10 @@ namespace SewingProduction.Core.Class
         {
             var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
-            var roleService = new RoleDataService(dbService, dbHelper);
+            var roleService = new RoleDataService();
             var columnService = new AllColumnNameDataService(dbService, dbHelper);
-            var tableService = new AllTableNameDataService(dbService, dbHelper);
-            var formService = new FormDataService(dbService, dbHelper);
+            var tableService = new AllTableNameDataService();
+            var formService = new FormDataService();
 
             _user = user;
 

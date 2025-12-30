@@ -33,10 +33,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
             var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
-            _formService = new FormDataService(dbService, dbHelper);
+            _formService = new FormDataService();
             _objectService = new ObjectDataService(dbService, dbHelper);
-            _roleService = new RoleDataService(dbService, dbHelper);
-            _tableService = new AllTableNameDataService(dbService, dbHelper);
+            _roleService = new RoleDataService();
+            _tableService = new AllTableNameDataService();
             _columnService = new AllColumnNameDataService(dbService, dbHelper);
 
             customGridControlForm.DataSource = bindingSourceForm;
