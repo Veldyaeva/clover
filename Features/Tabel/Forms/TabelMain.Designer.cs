@@ -93,6 +93,8 @@
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            customButton3 = new SewingProduction.Core.Class.CustomButton();
+            layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
@@ -113,6 +115,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -393,6 +396,7 @@
             // layoutControl1
             // 
             layoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            layoutControl1.Controls.Add(customButton3);
             layoutControl1.Controls.Add(customButton2);
             layoutControl1.Controls.Add(customButton1);
             layoutControl1.Controls.Add(lookUpEditGr);
@@ -417,9 +421,9 @@
             customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
             customButton2.ForeColor = System.Drawing.Color.Black;
-            customButton2.Location = new System.Drawing.Point(679, 530);
+            customButton2.Location = new System.Drawing.Point(690, 530);
             customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(651, 44);
+            customButton2.Size = new System.Drawing.Size(640, 44);
             customButton2.TabIndex = 11;
             customButton2.Text = "Табель Parsec + Orion";
             customButton2.UseVisualStyleBackColor = false;
@@ -430,9 +434,9 @@
             customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
             customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(24, 530);
+            customButton1.Location = new System.Drawing.Point(265, 530);
             customButton1.Name = "customButton1";
-            customButton1.Size = new System.Drawing.Size(651, 44);
+            customButton1.Size = new System.Drawing.Size(421, 44);
             customButton1.TabIndex = 10;
             customButton1.Text = "Табель Parsec";
             customButton1.UseVisualStyleBackColor = false;
@@ -581,7 +585,7 @@
             // 
             // layoutControlGroup1
             // 
-            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem11 });
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem11, layoutControlItem12 });
             layoutControlGroup1.Location = new System.Drawing.Point(0, 506);
             layoutControlGroup1.Name = "layoutControlGroup1";
             layoutControlGroup1.Size = new System.Drawing.Size(1334, 72);
@@ -590,18 +594,39 @@
             // layoutControlItem10
             // 
             layoutControlItem10.Control = customButton1;
-            layoutControlItem10.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem10.Location = new System.Drawing.Point(241, 0);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(655, 48);
+            layoutControlItem10.Size = new System.Drawing.Size(425, 48);
             layoutControlItem10.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             layoutControlItem11.Control = customButton2;
-            layoutControlItem11.Location = new System.Drawing.Point(655, 0);
+            layoutControlItem11.Location = new System.Drawing.Point(666, 0);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(655, 48);
+            layoutControlItem11.Size = new System.Drawing.Size(644, 48);
             layoutControlItem11.TextVisible = false;
+            // 
+            // customButton3
+            // 
+            customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButton3.Font = new System.Drawing.Font("Arial", 10F);
+            customButton3.ForeColor = System.Drawing.Color.Black;
+            customButton3.Location = new System.Drawing.Point(24, 530);
+            customButton3.Name = "customButton3";
+            customButton3.Size = new System.Drawing.Size(237, 44);
+            customButton3.TabIndex = 12;
+            customButton3.Text = "Печать";
+            customButton3.UseVisualStyleBackColor = false;
+            customButton3.Click += customButton3_Click;
+            // 
+            // layoutControlItem12
+            // 
+            layoutControlItem12.Control = customButton3;
+            layoutControlItem12.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem12.Name = "layoutControlItem12";
+            layoutControlItem12.Size = new System.Drawing.Size(241, 48);
+            layoutControlItem12.TextVisible = false;
             // 
             // TabelMain
             // 
@@ -632,6 +657,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
             ResumeLayout(false);
         }
 
@@ -702,5 +728,7 @@
         private Core.Class.CustomButton customButton2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private Core.Class.CustomButton customButton3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
     }
 }

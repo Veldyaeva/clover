@@ -695,5 +695,18 @@ namespace SewingProduction.Features.Tabel.Forms
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
+
+        private void customButton3_Click(object sender, EventArgs e)
+        {
+            int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            TimeSheetReport report1 = new TimeSheetReport();
+            report1.RequestParameters = false;
+            report1.Parameters["ttabn"].Value = grId;
+            report1.Parameters["ttabn"].Visible = false;
+            report1.Parameters["MG"].Value = currentMG;
+            report1.Parameters["MG"].Visible = false;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+        }
     }
 }
