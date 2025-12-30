@@ -456,6 +456,41 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 };
             }
         }
+
+        public async Task<BindingSource> GetPodrVyaz(CancellationToken cancellationToken)
+        {
+            try
+            {
+                await using var connection = _dbHelper.GetConnection();
+                const string query = @"SELECT kod_vyaz, text_vyaz FROM podr_vyaz WHERE kod_vyaz IN (1,2,3)";
+                var command = new CommandDefinition(query, new { }, cancellationToken: cancellationToken);
+
+                var list = (await connection
+                    .QueryAsync<PodrVyaz>(command))
+                    .AsList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PodrVyaz>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PodrVyaz>()
+                };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных podr_vyaz");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PodrVyaz>()
+                };
+            }
+        }
         #endregion
 
     }

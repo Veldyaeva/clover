@@ -30,10 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanZagrVyazCheck));
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            labelStatus = new SewingProduction.Core.Class.CustomLabel();
+            comboBoxPodrVyazList = new CustomComboBox();
+            simpleButtonNextMonth = new SewingProduction.Core.Class.CustomSimpleButton();
+            simpleButtonPrevMonth = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             spinEditYear = new SewingProduction.Core.Class.CustomSpinEdit();
             comboBoxMonthList = new CustomComboBox();
-            lookUpEditGr = new DevExpress.XtraEditors.LookUpEdit();
             customLabel2 = new SewingProduction.Core.Class.CustomLabel();
             customGridControlTimeSheet = new SewingProduction.Core.Class.CustomGridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -79,20 +82,18 @@
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            simpleButtonPrevMonth = new SewingProduction.Core.Class.CustomSimpleButton();
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            simpleButtonNextMonth = new SewingProduction.Core.Class.CustomSimpleButton();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spinEditYear.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpEditGr.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
@@ -100,7 +101,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
@@ -108,17 +108,20 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
             // 
             layoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            layoutControl1.Controls.Add(labelStatus);
+            layoutControl1.Controls.Add(comboBoxPodrVyazList);
             layoutControl1.Controls.Add(simpleButtonNextMonth);
             layoutControl1.Controls.Add(simpleButtonPrevMonth);
             layoutControl1.Controls.Add(customSimpleButton1);
             layoutControl1.Controls.Add(spinEditYear);
             layoutControl1.Controls.Add(comboBoxMonthList);
-            layoutControl1.Controls.Add(lookUpEditGr);
             layoutControl1.Controls.Add(customLabel2);
             layoutControl1.Controls.Add(customGridControlTimeSheet);
             layoutControl1.Location = new System.Drawing.Point(251, 75);
@@ -128,6 +131,68 @@
             layoutControl1.Size = new System.Drawing.Size(1354, 598);
             layoutControl1.TabIndex = 5;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // labelStatus
+            // 
+            labelStatus.Font = new System.Drawing.Font("Arial", 10F);
+            labelStatus.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            labelStatus.Location = new System.Drawing.Point(12, 566);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new System.Drawing.Size(1330, 20);
+            labelStatus.TabIndex = 11;
+            labelStatus.Text = "customLabel1";
+            // 
+            // comboBoxPodrVyazList
+            // 
+            comboBoxPodrVyazList.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            comboBoxPodrVyazList.Font = new System.Drawing.Font("Arial", 10F);
+            comboBoxPodrVyazList.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            comboBoxPodrVyazList.FormattingEnabled = true;
+            comboBoxPodrVyazList.Location = new System.Drawing.Point(626, 12);
+            comboBoxPodrVyazList.Name = "comboBoxPodrVyazList";
+            comboBoxPodrVyazList.Size = new System.Drawing.Size(162, 24);
+            comboBoxPodrVyazList.TabIndex = 10;
+            // 
+            // simpleButtonNextMonth
+            // 
+            simpleButtonNextMonth.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            simpleButtonNextMonth.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonNextMonth.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            simpleButtonNextMonth.Appearance.Options.UseBackColor = true;
+            simpleButtonNextMonth.Appearance.Options.UseFont = true;
+            simpleButtonNextMonth.Appearance.Options.UseForeColor = true;
+            simpleButtonNextMonth.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            simpleButtonNextMonth.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            simpleButtonNextMonth.AppearanceDisabled.Options.UseBackColor = true;
+            simpleButtonNextMonth.AppearanceDisabled.Options.UseForeColor = true;
+            simpleButtonNextMonth.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonNextMonth.ImageOptions.Image");
+            simpleButtonNextMonth.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            simpleButtonNextMonth.Location = new System.Drawing.Point(293, 12);
+            simpleButtonNextMonth.Name = "simpleButtonNextMonth";
+            simpleButtonNextMonth.Size = new System.Drawing.Size(38, 22);
+            simpleButtonNextMonth.StyleController = layoutControl1;
+            simpleButtonNextMonth.TabIndex = 9;
+            // 
+            // simpleButtonPrevMonth
+            // 
+            simpleButtonPrevMonth.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            simpleButtonPrevMonth.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonPrevMonth.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            simpleButtonPrevMonth.Appearance.Options.UseBackColor = true;
+            simpleButtonPrevMonth.Appearance.Options.UseFont = true;
+            simpleButtonPrevMonth.Appearance.Options.UseForeColor = true;
+            simpleButtonPrevMonth.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            simpleButtonPrevMonth.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            simpleButtonPrevMonth.AppearanceDisabled.Options.UseBackColor = true;
+            simpleButtonPrevMonth.AppearanceDisabled.Options.UseForeColor = true;
+            simpleButtonPrevMonth.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonPrevMonth.ImageOptions.Image");
+            simpleButtonPrevMonth.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            simpleButtonPrevMonth.Location = new System.Drawing.Point(12, 12);
+            simpleButtonPrevMonth.Name = "simpleButtonPrevMonth";
+            simpleButtonPrevMonth.Size = new System.Drawing.Size(38, 22);
+            simpleButtonPrevMonth.StyleController = layoutControl1;
+            simpleButtonPrevMonth.TabIndex = 8;
+            simpleButtonPrevMonth.Click += simpleButtonPrevMonth_Click;
             // 
             // customSimpleButton1
             // 
@@ -141,9 +206,9 @@
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
             customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton1.Location = new System.Drawing.Point(804, 12);
+            customSimpleButton1.Location = new System.Drawing.Point(792, 12);
             customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(263, 22);
+            customSimpleButton1.Size = new System.Drawing.Size(284, 22);
             customSimpleButton1.StyleController = layoutControl1;
             customSimpleButton1.TabIndex = 6;
             customSimpleButton1.Text = "customSimpleButton1";
@@ -176,16 +241,7 @@
             comboBoxMonthList.Name = "comboBoxMonthList";
             comboBoxMonthList.Size = new System.Drawing.Size(147, 24);
             comboBoxMonthList.TabIndex = 2;
-            // 
-            // lookUpEditGr
-            // 
-            lookUpEditGr.Location = new System.Drawing.Point(627, 12);
-            lookUpEditGr.Name = "lookUpEditGr";
-            lookUpEditGr.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            lookUpEditGr.Properties.NullText = "Выберите подразделение";
-            lookUpEditGr.Size = new System.Drawing.Size(173, 20);
-            lookUpEditGr.StyleController = layoutControl1;
-            lookUpEditGr.TabIndex = 5;
+            comboBoxMonthList.SelectedValueChanged += comboBoxMonthList_SelectedValueChanged;
             // 
             // customLabel2
             // 
@@ -193,7 +249,7 @@
             customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(407, 12);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(216, 22);
+            customLabel2.Size = new System.Drawing.Size(215, 22);
             customLabel2.TabIndex = 1;
             customLabel2.Text = "Выберите подразделение";
             // 
@@ -204,7 +260,7 @@
             customGridControlTimeSheet.MainView = gridView1;
             customGridControlTimeSheet.Name = "customGridControlTimeSheet";
             customGridControlTimeSheet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
-            customGridControlTimeSheet.Size = new System.Drawing.Size(1330, 455);
+            customGridControlTimeSheet.Size = new System.Drawing.Size(1330, 436);
             customGridControlTimeSheet.TabIndex = 7;
             customGridControlTimeSheet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
@@ -435,7 +491,7 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem1, layoutControlItem6, layoutControlItem5, layoutControlGroup1, layoutControlItem10, layoutControlItem4, layoutControlItem7, emptySpaceItem2, layoutControlItem8, layoutControlItem3 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem1, layoutControlItem6, layoutControlGroup1, layoutControlItem10, layoutControlItem4, layoutControlItem7, emptySpaceItem2, layoutControlItem8, layoutControlItem3, layoutControlItem2, layoutControlItem5 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(1354, 598);
             Root.TextVisible = false;
@@ -445,7 +501,7 @@
             layoutControlItem1.Control = customGridControlTimeSheet;
             layoutControlItem1.Location = new System.Drawing.Point(0, 26);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1334, 459);
+            layoutControlItem1.Size = new System.Drawing.Size(1334, 440);
             layoutControlItem1.TextVisible = false;
             // 
             // emptySpaceItem1
@@ -459,22 +515,14 @@
             layoutControlItem6.Control = customLabel2;
             layoutControlItem6.Location = new System.Drawing.Point(395, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(220, 26);
+            layoutControlItem6.Size = new System.Drawing.Size(219, 26);
             layoutControlItem6.TextVisible = false;
-            // 
-            // layoutControlItem5
-            // 
-            layoutControlItem5.Control = lookUpEditGr;
-            layoutControlItem5.Location = new System.Drawing.Point(615, 0);
-            layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(177, 26);
-            layoutControlItem5.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
-            layoutControlGroup1.Location = new System.Drawing.Point(0, 485);
+            layoutControlGroup1.Location = new System.Drawing.Point(0, 466);
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new System.Drawing.Size(1334, 93);
+            layoutControlGroup1.Size = new System.Drawing.Size(1334, 88);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem10
@@ -496,36 +544,16 @@
             // layoutControlItem7
             // 
             layoutControlItem7.Control = customSimpleButton1;
-            layoutControlItem7.Location = new System.Drawing.Point(792, 0);
+            layoutControlItem7.Location = new System.Drawing.Point(780, 0);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(267, 26);
+            layoutControlItem7.Size = new System.Drawing.Size(288, 26);
             layoutControlItem7.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(1059, 0);
+            emptySpaceItem2.Location = new System.Drawing.Point(1068, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(275, 26);
-            // 
-            // simpleButtonPrevMonth
-            // 
-            simpleButtonPrevMonth.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
-            simpleButtonPrevMonth.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonPrevMonth.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            simpleButtonPrevMonth.Appearance.Options.UseBackColor = true;
-            simpleButtonPrevMonth.Appearance.Options.UseFont = true;
-            simpleButtonPrevMonth.Appearance.Options.UseForeColor = true;
-            simpleButtonPrevMonth.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            simpleButtonPrevMonth.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            simpleButtonPrevMonth.AppearanceDisabled.Options.UseBackColor = true;
-            simpleButtonPrevMonth.AppearanceDisabled.Options.UseForeColor = true;
-            simpleButtonPrevMonth.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton2.ImageOptions.Image");
-            simpleButtonPrevMonth.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            simpleButtonPrevMonth.Location = new System.Drawing.Point(12, 12);
-            simpleButtonPrevMonth.Name = "simpleButtonPrevMonth";
-            simpleButtonPrevMonth.Size = new System.Drawing.Size(38, 22);
-            simpleButtonPrevMonth.StyleController = layoutControl1;
-            simpleButtonPrevMonth.TabIndex = 8;
+            emptySpaceItem2.Size = new System.Drawing.Size(266, 26);
             // 
             // layoutControlItem8
             // 
@@ -535,26 +563,6 @@
             layoutControlItem8.Size = new System.Drawing.Size(42, 26);
             layoutControlItem8.TextVisible = false;
             // 
-            // simpleButtonNextMonth
-            // 
-            simpleButtonNextMonth.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
-            simpleButtonNextMonth.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonNextMonth.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            simpleButtonNextMonth.Appearance.Options.UseBackColor = true;
-            simpleButtonNextMonth.Appearance.Options.UseFont = true;
-            simpleButtonNextMonth.Appearance.Options.UseForeColor = true;
-            simpleButtonNextMonth.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            simpleButtonNextMonth.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            simpleButtonNextMonth.AppearanceDisabled.Options.UseBackColor = true;
-            simpleButtonNextMonth.AppearanceDisabled.Options.UseForeColor = true;
-            simpleButtonNextMonth.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonNextMonth.ImageOptions.Image");
-            simpleButtonNextMonth.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            simpleButtonNextMonth.Location = new System.Drawing.Point(293, 12);
-            simpleButtonNextMonth.Name = "simpleButtonNextMonth";
-            simpleButtonNextMonth.Size = new System.Drawing.Size(38, 22);
-            simpleButtonNextMonth.StyleController = layoutControl1;
-            simpleButtonNextMonth.TabIndex = 9;
-            // 
             // layoutControlItem3
             // 
             layoutControlItem3.Control = simpleButtonNextMonth;
@@ -562,6 +570,22 @@
             layoutControlItem3.Name = "layoutControlItem3";
             layoutControlItem3.Size = new System.Drawing.Size(42, 26);
             layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = comboBoxPodrVyazList;
+            layoutControlItem2.Location = new System.Drawing.Point(614, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new System.Drawing.Size(166, 26);
+            layoutControlItem2.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.Control = labelStatus;
+            layoutControlItem5.Location = new System.Drawing.Point(0, 554);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new System.Drawing.Size(1334, 24);
+            layoutControlItem5.TextVisible = false;
             // 
             // PlanZagrVyazCheck
             // 
@@ -575,7 +599,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)spinEditYear.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpEditGr.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).EndInit();
@@ -583,7 +606,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
@@ -591,13 +613,14 @@
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditGr;
         private Core.Class.CustomLabel customLabel2;
         private Core.Class.CustomGridControl customGridControlTimeSheet;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -643,7 +666,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private Core.Class.CustomSpinEdit spinEditYear;
         private CustomComboBox comboBoxMonthList;
@@ -656,5 +678,9 @@
         private Core.Class.CustomSimpleButton simpleButtonPrevMonth;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private CustomComboBox comboBoxPodrVyazList;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private Core.Class.CustomLabel labelStatus;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
     }
 }
