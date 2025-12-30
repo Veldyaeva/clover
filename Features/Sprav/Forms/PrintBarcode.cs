@@ -62,7 +62,8 @@ namespace SewingProduction.form
                 WHERE fio.ved = @vedId
                   AND fio.datau IS NULL
                   AND ISNULL(fio.dekret, 0) = 0
-                  AND LOWER(LTRIM(RTRIM(fio.rab))) IN ('швея', 'упаковщица', 'утюжильщица')";
+                  AND (LOWER(LTRIM(RTRIM(fio.rab))) IN ('швея', 'упаковщица', 'утюжильщица', 'отпарщик', 'раскройщик', 'термоотделочник')
+                  OR LOWER(LTRIM(RTRIM(fio.rab))) like 'раскройщик%' OR LOWER(LTRIM(RTRIM(fio.rab))) like 'термоотделочник%')";
 
             var data = await _dbService.GetListAsync<dynamic>(sql, new { vedId });
 

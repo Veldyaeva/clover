@@ -36,8 +36,10 @@
             comboBoxEditLogin = new DevExpress.XtraEditors.ComboBoxEdit();
             customCheckBox1 = new CustomCheckBox();
             labelGlaz = new System.Windows.Forms.Label();
+            _gifBackground = new Core.Class.CustomPictureBox();
             ((System.ComponentModel.ISupportInitialize)textEditPassword.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)comboBoxEditLogin.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)_gifBackground).BeginInit();
             SuspendLayout();
             // 
             // simpleButton
@@ -124,12 +126,26 @@
             labelGlaz.MouseLeave += labelGlaz_MouseLeave;
             labelGlaz.MouseMove += labelGlaz_MouseMove;
             // 
+            // _gifBackground
+            // 
+            _gifBackground.BackColor = System.Drawing.Color.Transparent;
+            _gifBackground.Font = new System.Drawing.Font("Arial", 10F);
+            _gifBackground.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            _gifBackground.ImagePath = null;
+            _gifBackground.Location = new System.Drawing.Point(36, 192);
+            _gifBackground.Name = "_gifBackground";
+            _gifBackground.Size = new System.Drawing.Size(74, 30);
+            _gifBackground.TabIndex = 11;
+            _gifBackground.TabStop = false;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.Menu;
+            BackgroundImage = Properties.Resources.snej;
             ClientSize = new System.Drawing.Size(499, 211);
+            Controls.Add(_gifBackground);
             Controls.Add(labelGlaz);
             Controls.Add(customCheckBox1);
             Controls.Add(comboBoxEditLogin);
@@ -147,6 +163,7 @@
             KeyDown += LoginForm_KeyDown;
             ((System.ComponentModel.ISupportInitialize)textEditPassword.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)comboBoxEditLogin.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)_gifBackground).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -160,5 +177,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditLogin;
         private CustomCheckBox customCheckBox1;
         private System.Windows.Forms.Label labelGlaz;
+        private Core.Class.CustomPictureBox _gifBackground;
     }
 }
