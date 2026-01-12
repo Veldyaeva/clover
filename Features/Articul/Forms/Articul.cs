@@ -546,7 +546,7 @@ namespace SewingProduction.Features.Articul
             var kodObj = (bsArt.Current as SpArtPreviewModel).Kod;
             if (this.MdiParent is SpMainForm mainForm)
             {
-                //mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
+                mainForm.OpenForm(new AddNewKopml(User, kodObj.ToString()));
             }
         }
 

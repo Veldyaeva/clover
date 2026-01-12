@@ -25,18 +25,17 @@ namespace SewingProduction.Features.Articul.Forms
         GrupMenDataService _grupMenDataService = new GrupMenDataService();
         KomplDataService komplService = new KomplDataService();
         //private BindingList<SpArticulGrupMenViewModel> _selectedRazmItems = new();
-        List<ArticulModel> articuls;
+        List<AddNewKopmlModel> articuls;
         string xkod; //код комплекта
         bool xFlagKod = false;
         bool xAutoRazm = false; //галочка авторазмер
         bool xAllZap = false; //галочка все записи одинаковые
         private ToolTip toolTip = new ToolTip();
 
-        public AddNewKopml(UserClass user, List<ArticulModel> articuls, string kod) : base(user)
+        public AddNewKopml(UserClass user, string kod) : base(user)
         {
             InitializeComponent();
             xkod = kod;
-            this.articuls = articuls;
             toolTipButton();
         }
         public AddNewKopml(UserClass user) : base(user)
@@ -51,9 +50,14 @@ namespace SewingProduction.Features.Articul.Forms
         //загрузка данных
         private async void customGridControlKomplArt_Load(object sender, EventArgs e)
         {
+            articuls = await _articulDataService.GetArticulsListAsync();
+
+            if (articuls == null) 
+                return;
+
             if (IsPreview)
                 return;
-            //var articuls = await _articulDataService.GetAllAsync();
+
             var grups = await _grupMenDataService.GetAllAsync();
 
             var result = from a in articuls
@@ -1617,7 +1621,7 @@ namespace SewingProduction.Features.Articul.Forms
             customGridControlKompl.RefreshDataSource();
             loadKodForKompl();
         }
-        private Dictionary<string, ArticulModel> _artByKod;
+        private Dictionary<string, AddNewKopmlModel> _artByKod;
         void loadKodForKompl()
         {
             customGridControlKompl.LevelTree.Nodes[0].RelationName = "Коды";
@@ -1655,13 +1659,13 @@ namespace SewingProduction.Features.Articul.Forms
             // Кэш по коду: ключ теперь string
             if (_artByKod == null)
             {
-                _artByKod = (articuls ?? new List<ArticulModel>())
+                _artByKod = (articuls ?? new List<AddNewKopmlModel>())
                     .Where(a => !string.IsNullOrWhiteSpace(a.Kod))
                     .GroupBy(a => a.Kod)
                     .ToDictionary(g => g.Key, g => g.First());
             }
 
-            ArticulModel LookupArt(string kod)
+            AddNewKopmlModel LookupArt(string kod)
             {
                 if (string.IsNullOrWhiteSpace(kod)) return null;
                 if (_artByKod.TryGetValue(kod, out var hit))
@@ -1678,7 +1682,7 @@ namespace SewingProduction.Features.Articul.Forms
                         var found = list.FirstOrDefault(x => x.Kod == kod);
                         if (found != null)
                         {
-                            var a = new ArticulModel
+                            var a = new AddNewKopmlModel
                             {
                                 Kod = found.Kod,
                                 Grup = found.Grup,

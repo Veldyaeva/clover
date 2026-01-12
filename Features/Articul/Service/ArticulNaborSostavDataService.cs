@@ -261,5 +261,52 @@ namespace SewingProduction.Features.Articul.Service
 
             return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });
         }
+        public async Task<List<PlanSezonAllModel>> GetPlanSezonAllByKod(int? kodd = null)
+        {
+            string query = @"SELECT Psa_id, nn, tb_id, articul, mod
+                            FROM plan_sezon_all"
+                            + (kodd.HasValue ? " WHERE kodd = @kodd" : "");
+
+            return await _dbService.GetListAsync<PlanSezonAllModel>(query, new { kodd });
+        }
+        public async Task<List<ArtKomplektModel>> GetArtKomplektByKod(string? nn = null)
+        {
+            string query = @"SELECT ak.Ak_id, ak.tk_id, ak.Parent_nn, ak.id_gost, ak.ag_id_grupgost, t.tk_name
+                            FROM art_komplekt ak
+                            LEFT JOIN t_v_n AS t ON t.TK_ID = ak.tk_id"
+                            + (nn != null ? " WHERE Parent_nn = @nn" : "");
+
+            return await _dbService.GetListAsync<ArtKomplektModel>(query, new { nn });
+        }
+        public async Task<List<TovarClassModel>> GetTovarClass()
+        {
+            string query = @"select * FROM TOVAR_class ORDER BY TC_CLASSNAME";
+
+            return await _dbService.GetListAsync<TovarClassModel>(query, new { });
+        }
+        public async Task<List<TovarGroupModel>> GetTovarGroup()
+        {
+            string query = @"select * FROM tovar_group ORDER BY TG_GROUPNAME";
+
+            return await _dbService.GetListAsync<TovarGroupModel>(query, new { });
+        }
+        public async Task<List<TovarCategoryModel>> GetTovarCategory()
+        {
+            string query = @"select * from tOVAR_CATEGORY ORDER BY TCAT_CATEGORYNAME";
+
+            return await _dbService.GetListAsync<TovarCategoryModel>(query, new { });
+        }
+        public async Task<List<TovarCatDynsignModel>> GetTovarCatDynsign()
+        {
+            string query = @"select * FROM TOVAR_CAT_DYNSIGN where tcds_name<>' ' ORDER BY TCDS_NAME";
+
+            return await _dbService.GetListAsync<TovarCatDynsignModel>(query, new { });
+        }
+        public async Task<List<SpravNoskiDetalModel>> GetSpravNoskiDetal()
+        {
+            string query = @"select * from [dbo].[SpravNoskiDetal]";
+
+            return await _dbService.GetListAsync<SpravNoskiDetalModel>(query, new { });
+        }
     }
 }
