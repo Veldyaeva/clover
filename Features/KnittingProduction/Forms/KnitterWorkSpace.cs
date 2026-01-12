@@ -229,32 +229,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 initialTab = defaultTab;
             }
 
-            _isSplashShowing = true;
+			_isSplashShowing = true;
 			double oldOpacity = this.Opacity;
 			Form overlay = null;
 			try
 			{
-				// Прячем содержимое формы и показываем полноэкранный непрозрачный оверлей
-				this.Opacity = 0;
+				// Перекрываем только текущую вкладку/форму KnitterWorkSpace, не блокируя остальные вкладки/кнопки
 				overlay = new Form();
 				overlay.FormBorderStyle = FormBorderStyle.None;
 				overlay.StartPosition = FormStartPosition.Manual;
-				var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
-				//var bounds = System.Windows.Forms.Screen.AllScreens
-				//	.Select(s => s.Bounds)
-				//	.Aggregate(System.Drawing.Rectangle.Empty, (acc, r) => System.Drawing.Rectangle.Union(acc, r));
-				if (bounds == System.Drawing.Rectangle.Empty && System.Windows.Forms.Screen.PrimaryScreen != null)
-					bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
-				overlay.Bounds = bounds;
-				overlay.BackColor = System.Drawing.Color.AliceBlue;
-				overlay.TopMost = true;
 				overlay.ShowInTaskbar = false;
+				overlay.BackColor = System.Drawing.Color.AliceBlue;
+				overlay.TopMost = false; // достаточно быть над текущей формой
+				overlay.Owner = this;
+
+				// Берём границы основного layout текущей вкладки; если что-то пойдёт не так — используем всю клиентскую область формы
+				var bounds = dataLayoutControl1?.RectangleToScreen(dataLayoutControl1.ClientRectangle)
+					?? this.RectangleToScreen(this.ClientRectangle);
+				overlay.Bounds = bounds;
 				overlay.Show();
 
 				using (var splash = new FioSelectionSplash(fioList, initialTab))
 				{
 					splash.StartPosition = FormStartPosition.CenterScreen;
-					splash.TopMost = true;
+				//	splash.TopMost = true;
 					var result = splash.ShowDialog(overlay);
 					if (result == DialogResult.OK && splash.SelectedTab.HasValue)
 					{

@@ -148,7 +148,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         // Закрытая смена: пропускаем первый набор, используем второй (кандидаты)
                         if (!grid.IsConsumed)
                         {
-                            grid.Read(); // просто потребляем первый набор, чтобы перейти ко второму
+                            grid.Read(); // просто пропускаем первый набор, чтобы перейти ко второму
                         }
                         if (!grid.IsConsumed)
                         {
