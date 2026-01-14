@@ -38,6 +38,8 @@ namespace SewingProduction.Features.Articul.Forms
 
         private readonly ILogger _logger = new FileLogger();
 
+        private ArticulModel _currentModel;
+
         private string _kodd;
         private decimal _nRub_k;
 
@@ -83,7 +85,7 @@ namespace SewingProduction.Features.Articul.Forms
             var sprTask = CommonSpravArticulEditAdvance.EnsureLoadedAsync(_dbService);
 
             await Task.WhenAll(edAdvTask, nRub_kTask, sprTask);
-            
+
             _nRub_k = await nRub_kTask;
             _bindingSourceArtKod.DataSource = await edAdvTask;
 
@@ -97,6 +99,8 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 //загрузка перечня кодов из справочника общая информация
                 _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
+                //пересчет при смене значений в модели
+                WireModelOnce();
 
                 #region заполнение блока основных данных артикула
 
@@ -219,7 +223,8 @@ namespace SewingProduction.Features.Articul.Forms
                 txtNorm_t.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Norm_t), true);
 
                 #endregion
-                _bindingSourceArtCommon.CurrentItemChanged += BindingSource_CurrentChanged;
+
+                
 
 
             }
@@ -250,7 +255,7 @@ namespace SewingProduction.Features.Articul.Forms
             //view.Columns.AddVisible(nameof(SpArticulTkanSokr.Kod_t), "Код ткани");
             view.Columns.AddVisible(nameof(SpArticulTkanSokr.Tkan), "Ткань");
             //view.Columns.AddVisible(nameof(SpArticulTkanSokr.Tkb), "Краткое наименование");
-            
+
             // Скрытые поля (но доступны как ValueMember)
             //view.Columns[nameof(SpArticulTkanSokr.IsDifficult)].Visible = false;
             //view.Columns[nameof(SpArticulTkanSokr.Difficult_koef)].Visible = false;
@@ -331,9 +336,9 @@ namespace SewingProduction.Features.Articul.Forms
                         var props = bs.CurrencyManager?.GetItemProperties();
                         if (props == null)
                             throw new InvalidOperationException("BindingSource не инициализирован");
-
-                        string propName = edit.Name.Length > 3 ? edit.Name[3..] : edit.Name;
                         // удаление префикса txt или txb controlName.Substring(3);
+                        string propName = edit.Name.Length > 3 ? edit.Name[3..] : edit.Name;
+
                         var pd = props.Find(propName, true);
                         if (pd == null)
                             throw new ArgumentException($"В модели нет свойства '{propName}'");
@@ -369,7 +374,7 @@ namespace SewingProduction.Features.Articul.Forms
             edit.Properties.Mask.UseMaskAsDisplayFormat = true;
 
         }
-        
+
         private void UpdateOpi()
         {
             if (lookUpGost.EditValue is int id)
@@ -384,7 +389,7 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
                 if (currentItem == null)
-                   return;
+                    return;
 
                 var props = TypeDescriptor.GetProperties(currentItem);
 
@@ -426,29 +431,30 @@ namespace SewingProduction.Features.Articul.Forms
 
             }
             catch (Exception ex)
-            { 
+            {
                 _logger.LogErrorAsync(ex, "Ошибка при обновлении норм UpdateNorms");
                 throw;
             }
         }
 
-
-        private void BindingSource_CurrentChanged(object? sender, EventArgs e)
+        private void WireModelOnce()
         {
-            var currentModel = (ArticulModel)_bindingSourceArtCommon.Current;
-            // отписываемся от старого объекта
-            if (currentModel != null)
-                currentModel.PropertyChanged -= Model_PropertyChanged;
+            // отписка на всякий случай (если метод вызовут повторно)
+            if (_currentModel != null)
+                _currentModel.PropertyChanged -= Model_PropertyChanged;
 
-            currentModel = _bindingSourceArtCommon.Current as ArticulModel;
+            _currentModel = _bindingSourceArtCommon.Current as ArticulModel;
 
-            // подписываемся на новый
-            if (currentModel != null)
-                currentModel.PropertyChanged += Model_PropertyChanged;
+            if (_currentModel != null)
+                _currentModel.PropertyChanged += Model_PropertyChanged;
 
-            // при смене строки — пересчёт целиком
-            UpdateNorms();
+            UpdateNorms(); // первый расчёт
         }
+        /// <summary>
+        /// метод пересчета для норм при смене текущей строки 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Model_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(e.PropertyName))
@@ -562,6 +568,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
+
         private void lookUpGostGrup_EditValueChanged(object sender, EventArgs e)
         {
             //UpdateGostGrup();
@@ -570,6 +577,12 @@ namespace SewingProduction.Features.Articul.Forms
                 currentItem.Grup = CommonSpravArticulEditAdvance.GostGroupNames.FirstOrDefault(x => x.Ag_id == id)?.Ag_name_sokr ?? "";
             else
                 currentItem.Grup = "";
+        }
+
+        private void ArticulEditAdvance_FormClosed(object sender, FormClosedEventArgs e)
+        {
+        if (_currentModel != null)
+            _currentModel.PropertyChanged -= Model_PropertyChanged;
         }
     }
 }
