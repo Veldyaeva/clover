@@ -37,8 +37,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// </summary>
         public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab) => _repo.GetPlanByTabAsync(tab);
 
-        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours) =>
-            _repo.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, expandAssignedByNrId, maxHours);
+        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false) =>
+            _repo.GetPlanByTabAsync(tab, kwsId, kmaId, onlyUnassigned, expandAssignedByNrId, maxHours, includeFinished);
 
         /// <summary>
         /// Возвращает ФИО по табельному номеру (для авто-подмешивания в список).
@@ -65,6 +65,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// Устанавливает дату окончания на стороне БД и возвращает фактически сохранённое значение (серверное время).
         /// </summary>
         public Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId) => _repo.UpdatePzvDateEndAsync(pzvId);
+        public Task UpdatePzvFactAsync(int pzvId, int factQty) => _repo.UpdatePzvFactAsync(pzvId, factQty);
 
         /// <summary>
         /// Получает операции плана по списку партий через хранимую процедуру.

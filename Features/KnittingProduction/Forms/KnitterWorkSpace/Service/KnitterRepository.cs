@@ -35,10 +35,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
             // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
-            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
+            return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
         }
 
-        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tab"></param>
+        /// <param name="kwsId"></param>
+        /// <param name="kmaId"></param>
+        /// <param name="onlyUnassigned"></param>
+        /// <param name="expandAssignedByNrId"></param>
+        /// <param name="maxHours"></param>
+        /// <param name="includeFinished"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false)
         {
             try
             {
@@ -50,17 +62,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
                 // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
-                // Требование: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).
+                // ВАЖНО: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты). и переставлять местави часы и кол назн и факт
                 using (var grid = await connection.QueryMultipleAsync(
-                    "dbo.GetPlanZagrVyazNorm_ByTab4",
+                  "dbo.GetPlanZagrVyazNorm_ByTab4",
                     new
                     {
                         tab,
                         MaxHours = maxHours,
                         OnlyActive = 1,
                         KwsId = kwsId,
+                        KmaId = kmaId,
                         OnlyUnassigned = onlyUnassigned ? 1 : 0,
-                        ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0
+                        ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0,
+                        IncludeFinished = includeFinished ? 1 : 0
                     },
                     commandType: CommandType.StoredProcedure))
                 {
@@ -148,7 +162,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         // Закрытая смена: пропускаем первый набор, используем второй (кандидаты)
                         if (!grid.IsConsumed)
                         {
-                            grid.Read(); // просто пропускаем первый набор, чтобы перейти ко второму
+                            grid.Read(); // просто съедаем первый набор, чтобы перейти ко второму
                         }
                         if (!grid.IsConsumed)
                         {
@@ -169,10 +183,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 if (missingKmlIds.Length > 0)
                 {
-                    const string kmlQuery = //@"SELECT kmlID, kmlNumber, koefObServ, name_class FROM ACE.dbo.knitMachineList_view WHERE kmlID IN @ids";
-                    @"Select kwsmlKmlId as kmlID, kmlNumber, koefObServ, nameVyazClass as name_class from ace.dbo.knitWorkingShiftStatement where kwsmlKmlId in @ids";
+                    const string kmlQuery = @"
+Select
+    kwsmlKmlID as kmlID,
+    kmlNumber,
+    koefObServ,
+    nameVyazClass as name_class
+from ace.dbo.knitWorkingShiftStatement
+where kwsmlKmlID in @ids
+  and (@kmaId is null or kwsKmaId = @kmaId)";
                     // knitWorkingShiftStatement может вернуть дубли по одной машине на разные интервалы — группируем по kmlID, чтобы не падать на ToDictionary
-                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds }))
+                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds, kmaId }))
                         .GroupBy(x => x.kmlID)
                         .ToDictionary(g => g.Key, g => g.First());
 
@@ -268,13 +289,17 @@ ORDER BY fio";
                     return;
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    const string sql = @"UPDATE dbo.planZagrVyaz
-SET pzvTab = @tab,
-    pzvDateNaznTab = GETDATE(),
-    pzvKolNazn = ISNULL(pzvKol, 0),
-    pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
-    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2)) 
-WHERE pzvID IN @ids";
+                     const string sql = @"UPDATE dbo.planZagrVyaz
+ SET pzvTab = @tab,
+     pzvDateNaznTab = GETDATE(),
+     -- переносим плановое количество в назначенное
+     pzvKolNazn = ISNULL(pzvKol, 0),
+     pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
+     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2)),
+     pzvKol = 0,
+     pzvNChasi = 0
+ WHERE pzvID IN @ids";
+    // -- после назначения плановое поле обнуляем, чтобы \"кол-во к выполнению\" стало 0
 
                     await connection.ExecuteAsync(sql, new { tab, ids });
                 }
@@ -324,6 +349,27 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
             catch (Exception ex)
             {
                 throw new Exception($"UpdatePzvDateEndAsync failed (pzvId={pzvId})", ex);
+            }
+        }
+
+        public async Task UpdatePzvFactAsync(int pzvId, int factQty)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    const string sql = @"
+UPDATE dbo.planZagrVyaz
+SET pzvKol = @factQty,
+    pzvNChasi = CAST(ROUND(ISNULL(pzvSek,0) * @factQty / 3600.0, 2) AS decimal(16,2))
+WHERE pzvID = @pzvId;
+";
+                    await connection.ExecuteAsync(sql, new { pzvId, factQty });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"UpdatePzvFactAsync failed (pzvId={pzvId}, factQty={factQty})", ex);
             }
         }
 

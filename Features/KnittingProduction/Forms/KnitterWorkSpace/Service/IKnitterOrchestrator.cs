@@ -11,13 +11,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Task<List<FioModel>> GetFioListAsync();
         Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab);
         Task<List<KnitterPZVModel>> GetPlanByTabAsync//(int tab, int? kwsId, bool onlyUnassigned, bool isAdmin, bool expandAssignedByNrId, decimal maxHours);
-                                                       (int tab, int? kwsId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours = 14);
+                                                       (int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours = 14, bool includeFinished = false);
         Task<string> GetFioByTabAsync(int tab);
         Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab);
         Task SetPzvTabAsync(IEnumerable<int> pzvIds, int tab);
  //       Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod);
         Task<KnitterPZVModel> UpdatePzvDateStartAsync(int pzvId);
         Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId);
+        Task UpdatePzvFactAsync(int pzvId, int factQty);
         Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty);
 		Task<IReadOnlyList<PzvSplitResult>> SplitPzvAsync(int pzvId, int mode, int qtyFact);
         Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum);
