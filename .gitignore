@@ -9,3 +9,4 @@
 /Properties/_PublishProfiles/anyCPU.pubxml
 /.vscode
 *.csproj.Backup.tmp
+*.json

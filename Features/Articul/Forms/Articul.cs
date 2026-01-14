@@ -546,7 +546,7 @@ namespace SewingProduction.Features.Articul
             var kodObj = (bsArt.Current as SpArtPreviewModel).Kod;
             if (this.MdiParent is SpMainForm mainForm)
             {
-                //mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
+                mainForm.OpenForm(new AddNewKopml(User, kodObj.ToString()));
             }
         }
 
@@ -588,10 +588,7 @@ namespace SewingProduction.Features.Articul
 
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
-                    //_artPreview.Remove(cuRow);
-                    //bsArt.ResetBindings(false);
                     bsArt.RemoveCurrent();
-
                 }
                 result?.Dispose();
             }
@@ -618,8 +615,7 @@ namespace SewingProduction.Features.Articul
             }
             if (this.MdiParent is SpMainForm mainForm)
             {
-                //TODO: нужно изменить тип Obj на SpArtPreviewModel!!
-                //mainForm.OpenForm(new EditNaborSostav(User, Obj));
+                mainForm.OpenForm(new EditNaborSostav(User, Obj.Kod));
             }
         }
         /// <summary>

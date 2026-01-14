@@ -34,133 +34,166 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список укороченной модели <see cref="KnitterPZVModel"/> для отображения.</returns>
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
+            // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
+            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
+        }
+
+        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours)
+        {
             try
             {
                 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
+                using var connection = _dbHelper.GetConnection();
+
                 var map = new ConcurrentDictionary<int, KnitterPZVModel>();
 
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    await connection.QueryAsync<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
-                        "EXEC dbo.GetPlanZagrVyazNorm_ByTab @tab, @OnlyActive;",
-                        (pzv, nr, rzv) =>
-                        {
-                            var parent = map.GetOrAdd(pzv.pzvID, _ =>
-                            {
-                                pzv.nrModels ??= new BindingList<nrModel>();
-                                pzv.rzvModels ??= new BindingList<rzvModel>();
-                                return pzv;
-                            });
-
-                            if (nr != null)
-                            {
-                                if (string.IsNullOrWhiteSpace(parent.kmlNumber) && !string.IsNullOrWhiteSpace(nr.kmlNumber))
-                                {
-                                    parent.kmlNumber = nr.kmlNumber;
-                                }
-                                //if (string.IsNullOrWhiteSpace(parent.pzvNomZad) && !string.IsNullOrWhiteSpace(pzv.pzvNomZad))
-                                //{
-                                //    parent.pzvNomZad = pzv.pzvNomZad;
-                                //}
-                                if (parent.nrN == null)
-                                    parent.nrN = nr.nrN;
-                                if (parent.nrN1 == null)
-                                    parent.nrN1 = nr.nrN1;
-                                if (string.IsNullOrWhiteSpace(parent.nrText))
-                                    parent.nrText = nr.nrText;
-                                if (parent.nrRazryd == null)
-                                    parent.nrRazryd = nr.nrRazryd;
-                                if (string.IsNullOrWhiteSpace(parent.nrObor))
-                                    parent.nrObor = nr.nrObor;
-                                if (parent.nr_kod_ob == null)
-                                    parent.nr_kod_ob = nr.nr_kod_ob;
-                                if (parent.nr_kod_proizv == null)
-                                    parent.nr_kod_proizv = nr.nr_kod_proizv;
-
-                                parent.nrModels ??= new BindingList<nrModel>();
-                                if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
-                                {
-                                    parent.nrModels.Add(nr);
-                                }
-                            }
-
-                            if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
-                            {
-                                if (rzv.n_pach != 0)
-                                {
-                                    parent.n_pach ??= rzv.n_pach;
-                                }
-
-                                if (string.IsNullOrWhiteSpace(parent.razm) && !string.IsNullOrWhiteSpace(rzv.razm))
-                                {
-                                    parent.razm = rzv.razm;
-                                }
-
-                                parent.rzvModels ??= new BindingList<rzvModel>();
-                                if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
-                                {
-                                    parent.rzvModels.Add(rzv);
-                                }
-                            }
-
-                            return parent;
-                        },
-                        new { tab, OnlyActive = 1 },
-                        splitOn: "nrID,n_pach",
-                        commandType: CommandType.Text,
-                        buffered: true);
-
-                    var parents = map.Values.ToList();
-
-                    var missingKmlIds = parents
-                        .Where(p => p.pzvKmlID > 0 && string.IsNullOrWhiteSpace(p.kmlNumber))
-                        .Select(p => p.pzvKmlID)
-                        .Distinct()
-                        .ToArray();
-
-                    if (missingKmlIds.Length > 0)
+                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
+                // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
+                // Требование: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).
+                using (var grid = await connection.QueryMultipleAsync(
+                    "dbo.GetPlanZagrVyazNorm_ByTab4",
+                    new
                     {
-                        const string kmlQuery = "SELECT kmlID, kmlNumber FROM dbo.view_kml_vyaz WHERE kmlID IN @ids";
-                        var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber)>(kmlQuery, new { ids = missingKmlIds }))
-                            .ToDictionary(x => x.kmlID, x => x.kmlNumber);
-
-                        foreach (var parent in parents)
-                        {
-                            if (string.IsNullOrWhiteSpace(parent.kmlNumber) && lookup.TryGetValue(parent.pzvKmlID, out var number))
+                        tab,
+                        MaxHours = maxHours,
+                        OnlyActive = 1,
+                        KwsId = kwsId,
+                        OnlyUnassigned = onlyUnassigned ? 1 : 0,
+                        ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0
+                    },
+                    commandType: CommandType.StoredProcedure))
+                {
+                    // Локальный helper для чтения одного result set с multi-mapping
+                    void ReadAndMapSet()
+                    {
+                        var rows = grid.Read<KnitterPZVModel, nrModel, rzvModel, KnitterPZVModel>(
+                            (pzv, nr, rzv) =>
                             {
-                                parent.kmlNumber = number;
-                            }
-                        }
+                                var parent = map.GetOrAdd(pzv.pzvID, _ =>
+                                {
+                                    pzv.nrModels ??= new BindingList<nrModel>();
+                                    pzv.rzvModels ??= new BindingList<rzvModel>();
+                                    return pzv;
+                                });
+
+                                if (nr != null)
+                                {
+                                    if (string.IsNullOrWhiteSpace(parent.kmlNumber) && !string.IsNullOrWhiteSpace(nr.kmlNumber))
+                                    {
+                                        parent.kmlNumber = nr.kmlNumber;
+                                    }
+                                    if (parent.nrN == null)
+                                        parent.nrN = nr.nrN;
+                                    if (parent.nrN1 == null)
+                                        parent.nrN1 = nr.nrN1;
+                                    if (string.IsNullOrWhiteSpace(parent.nrText))
+                                        parent.nrText = nr.nrText;
+                                    if (parent.nrRazryd == null)
+                                        parent.nrRazryd = nr.nrRazryd;
+                                    if (string.IsNullOrWhiteSpace(parent.nrObor))
+                                        parent.nrObor = nr.nrObor;
+                                    if (parent.nr_kod_ob == null)
+                                        parent.nr_kod_ob = nr.nr_kod_ob;
+                                    if (parent.nr_kod_proizv == null)
+                                        parent.nr_kod_proizv = nr.nr_kod_proizv;
+
+                                    parent.nrModels ??= new BindingList<nrModel>();
+                                    if (!KnitterPlanUtils.ContainsNr(parent.nrModels, nr))
+                                    {
+                                        parent.nrModels.Add(nr);
+                                    }
+                                }
+
+                                if (rzv != null && KnitterPlanUtils.HasRzv(rzv))
+                                {
+                                    if (rzv.n_pach != 0)
+                                    {
+                                        parent.n_pach ??= rzv.n_pach;
+                                    }
+
+                                    if (string.IsNullOrWhiteSpace(parent.razm) && !string.IsNullOrWhiteSpace(rzv.razm))
+                                    {
+                                        parent.razm = rzv.razm;
+                                    }
+
+                                    parent.rzvModels ??= new BindingList<rzvModel>();
+                                    if (!KnitterPlanUtils.ContainsRzv(parent.rzvModels, rzv))
+                                    {
+                                        parent.rzvModels.Add(rzv);
+                                    }
+                                }
+
+                                return parent;
+                            },
+                            splitOn: "nrID,n_pach");
+
+                        // Форсируем выполнение выборки, чтобы маппер отработал и наполнил словарь
+                        foreach (var _ in rows) { }
                     }
 
-                    return parents;
+                    bool hasShift = kwsId.HasValue && kwsId.Value != 0;
+
+                    if (hasShift)
+                    {
+                        // Открытая смена: используем первый набор (назначенные) + второй (кандидаты) если он есть
+                        ReadAndMapSet(); // первый result set
+                        if (!grid.IsConsumed)
+                        {
+                            ReadAndMapSet(); // второй result set
+                        }
+                    }
+                    else
+                    {
+                        // Закрытая смена: пропускаем первый набор, используем второй (кандидаты)
+                        if (!grid.IsConsumed)
+                        {
+                            grid.Read(); // просто потребляем первый набор, чтобы перейти ко второму
+                        }
+                        if (!grid.IsConsumed)
+                        {
+                            ReadAndMapSet();
+                        }
+                    }
                 }
+
+                var parents = map.Values.ToList();
+
+                var missingKmlIds = parents
+                    .Where(p =>
+                        p.pzvKmlID > 0 &&
+                        (string.IsNullOrWhiteSpace(p.kmlNumber) || p.koefObServ == null || string.IsNullOrWhiteSpace(p.name_class)))
+                    .Select(p => p.pzvKmlID)
+                    .Distinct()
+                    .ToArray();
+
+                if (missingKmlIds.Length > 0)
+                {
+                    const string kmlQuery = //@"SELECT kmlID, kmlNumber, koefObServ, name_class FROM ACE.dbo.knitMachineList_view WHERE kmlID IN @ids";
+                    @"Select kwsmlKmlId as kmlID, kmlNumber, koefObServ, nameVyazClass as name_class from ace.dbo.knitWorkingShiftStatement where kwsmlKmlId in @ids";
+                    // knitWorkingShiftStatement может вернуть дубли по одной машине на разные интервалы — группируем по kmlID, чтобы не падать на ToDictionary
+                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds }))
+                        .GroupBy(x => x.kmlID)
+                        .ToDictionary(g => g.Key, g => g.First());
+
+                    foreach (var parent in parents)
+                    {
+                        if (parent.pzvKmlID > 0 && lookup.TryGetValue(parent.pzvKmlID, out var kml))
+                        {
+                            parent.kmlNumber ??= kml.kmlNumber;
+                            parent.koefObServ ??= kml.koefObServ;
+                            parent.name_class ??= kml.name_class;
+                        }
+                    }
+                }
+
+                return parents;
             }
             catch (Exception ex)
             {
-                throw new Exception($"GetPlanByTabAsync failed (tab={tab})", ex);
+                throw new Exception($"GetPlanByTabAsync failed (tab={tab}, kwsId={kwsId}, onlyUnassigned={onlyUnassigned}, expandAssignedByNrId={expandAssignedByNrId}, maxHours={maxHours})", ex);
             }
         }
-
-        /// <summary>
-        /// Вызывает хранимую процедуру <c>GetPlanZagrVyazByPachList</c> для получения плана по списку партий.
-        /// </summary>
-        /// <param name="nomListJson">JSON массив с элементами номеров задания/номенклатуры (например: [{"nomZad":"123","nom":456}]).</param>
-        /// <param name="vyazPodrKod">Код вязального подразделения.</param>
-        /// <returns>Список операций плана <see cref="PlanZagrVyazOper"/>.</returns>
-        //public async Task<List<PlanZagrVyazOper>> GetPlanZagrVyazByPachListAsync(string nomListJson, int vyazPodrKod)
-        //{
-        //    try
-        //    {
-        //        const string query = "EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = @nomListJson, @xVyazPodrKod = @vyazPodrKod";
-        //        return await _dbService.GetListAsync<PlanZagrVyazOper>(query, new { nomListJson, vyazPodrKod });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("GetPlanZagrVyazByPachListAsync failed", ex);
-        //    }
-        //}
 
         /// <summary>
         /// Возвращает ФИО сотрудника по табельному номеру.
@@ -191,7 +224,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             {
 				// Берём данные из knitMachineAreaEmp_view, как в сплеше
 				const string query = @"
-SELECT DISTINCT kmaeTab AS Tab, fio AS Fio
+SELECT DISTINCT
+    kmaeTab AS Tab,
+    fio    AS Fio,
+    kmaNumber AS Zone
 FROM ACE.dbo.knitMachineAreaEmp_view
 WHERE ((kmaeDel = 0 OR kmaeDel IS NULL) and kmaIDNazn = 6)
 ORDER BY fio";
@@ -237,7 +273,7 @@ SET pzvTab = @tab,
     pzvDateNaznTab = GETDATE(),
     pzvKolNazn = ISNULL(pzvKol, 0),
     pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
-    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(18,2)) 
+    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2)) 
 WHERE pzvID IN @ids";
 
                     await connection.ExecuteAsync(sql, new { tab, ids });
@@ -484,6 +520,35 @@ ORDER BY kwsDateStart DESC";
 			catch (Exception ex)
 			{
 				throw new Exception($"GetOpenShiftByTabAsync failed (tab={tab})", ex);
+			}
+		}
+
+		public async Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId)
+		{
+			try
+			{
+				using (var connection = _dbHelper.GetConnection())
+				{
+					const string sql = @"
+SELECT TOP 1 
+	kwsID AS shiftId,
+	kwsTabStart AS tabStart,
+	kwsDateStart AS dateStart
+FROM ACE.dbo.knitWorkingShiftNew
+WHERE kwsKmaID = @kmaId
+  AND (kwsDel = 0 OR kwsDel IS NULL)
+  AND kwsDateEnd IS NULL
+ORDER BY kwsDateStart DESC";
+
+					var row = await connection.QueryFirstOrDefaultAsync<(int shiftId, int tabStart, DateTime? dateStart)>(sql, new { kmaId });
+					if (row.shiftId == 0)
+						return (null, null, null);
+					return (row.shiftId, row.tabStart, row.dateStart);
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new Exception($"GetOpenShiftByZoneAsync failed (kmaId={kmaId})", ex);
 			}
 		}
 

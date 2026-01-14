@@ -13,6 +13,7 @@ using System.Linq;
 using System.Collections.Generic;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Diagnostics;
+using SewingProduction.Features.UserDistribution.Class;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -30,7 +31,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             InitializeComponent();
             _user = user;
             _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper()));
-            _tableDataService = new AllTableNameDataService(new DbService(new DatabaseHelper()), new DatabaseHelper());
+            _tableDataService = new AllTableNameDataService();
             _columnDataService = new AllColumnNameDataService(new DbService(new DatabaseHelper()), new DatabaseHelper());
             _serviceBrokerForTable1 = new ServiceBroker(this);
             _serviceBrokerForTable2 = new ServiceBroker(this);
@@ -126,6 +127,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             customButton2.Visible = !customButton2.Visible;
         }
+
+        private void customButton3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(CurrentUser.User.UserName);
+        }
+
         private static DataTable ToDataTable<T>(IEnumerable<T> items)
         {
             var table = new DataTable(typeof(T).Name);

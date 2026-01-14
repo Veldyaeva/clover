@@ -31,15 +31,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// Привязывает данные и настраивает поведение мастер/деталь.
         /// </summary>
         /// <param name="masterView3">Мастер-уровень (машины).</param>
-        /// <param name="bandedGridView1">Резервное представление второго уровня (не используется для событий).</param>
         /// <param name="advBandedGridView1">Деталь-уровень: операции по машине.</param>
         /// <param name="bindingSource">Источник данных, привязанный к GridControl.</param>
         /// <param name="rows">Плоский список строк плана.</param>
         /// <param name="clearTabs">Если true — очищает временно pzvTab у входных строк.</param>
         public void BindGroupDetails(
             BandedGridView masterView3,
-           // BandedGridView bandedGridView1,
-       //    GridView bandedGridView1,
             AdvBandedGridView advBandedGridView1,
             System.Windows.Forms.BindingSource bindingSource,
             List<KnitterPZVModel> rows,
@@ -91,9 +88,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 var masterData = _byTaskMachine.Values.Select(list =>
                 {
                     var master = list.First();
-                    // Сумма часов факт (pzvKol * pzvSek / 3600) по деталям
-                    var sumHours = list.Sum(r => ((r.pzvKol ?? 0) * (double)r.pzvSek) / 3600d);
-                    master.pzvChasNazn = (decimal)Math.Round(sumHours, 2);
+                    // Часы назначено/факт берём из БД (pzvChasNazn, pzvNChasi), суммируем по операциям
+                    var assigned = list.Sum(r => (double)r.pzvChasNazn);
+                    var done = list.Sum(r => (double)(r.pzvNChasi ?? 0m));
+                    master.pzvChasNazn = (decimal)Math.Round(assigned, 2);
+                    master.pzvNChasi = (decimal)Math.Round(done, 2);
                     return master;
                 }).ToList();
                 bindingSource.DataSource = masterData;
@@ -220,6 +219,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                             result.Add(operationRow);
                         }
                     }
+                }
+            }
+
+            // Протаскиваем коэф. обслуживания из мастера, если он отсутствует в строках операций
+            if (head.koefObServ.HasValue)
+            {
+                foreach (var row in result)
+                {
+                    if (!row.koefObServ.HasValue)
+                        row.koefObServ = head.koefObServ;
                 }
             }
 

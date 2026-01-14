@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Vs_projects\sewingproduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Vs_projects\sewingproduction\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -20,6 +20,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomListBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomLookUpEdit.cs">
@@ -59,6 +62,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\EditNaborSostav.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\EditNaborSostavMatr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\EditNaborSostavPart.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\CuttingProduction\Forms\CuttingForm.cs">
@@ -187,6 +196,15 @@
     <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\UserDistribution\Forms\RolePodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\ShareUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\UserPodr.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Help\Form\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +304,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Features\Articul\Forms\Articul.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Features\Sprav\Forms\Fio.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.resx">
