@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Org.BouncyCastle.Asn1.Ocsp;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -488,6 +489,55 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 return new BindingSource
                 {
                     DataSource = new BindingList<PodrVyaz>()
+                };
+            }
+        }
+
+        public async Task<BindingSource> GetPzvCheck(int _podrID, int _month, int _year, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await using var connection = _dbHelper.GetConnection();
+                //const string query = @"EXEC dbo.pzv_pivotDayTab @xPodrID = podrID
+                //    , @xMes = mes
+                //    , @xGod = god";
+                //var command = new CommandDefinition(query, new { podrID = _podrID, mes = _month, god = _year }, cancellationToken: cancellationToken);
+                
+                //string query = $"EXEC dbo.pzv_pivotDayTab @xPodrID = {_podrID}, @xMes = {_month}, @xGod = {_year}";
+                //var command = new CommandDefinition(query, new {  }, cancellationToken: cancellationToken);
+                //var list = (await connection
+                //    .QueryAsync<PzvCheck>(command))
+                //    .AsList();
+
+                string query = $"EXEC dbo.pzv_pivotDayTab @xPodrID = {_podrID}, @xMes = {_month}, @xGod = {_year}";
+
+                var list = (await connection.QueryAsync<PzvCheck>(query, new Dictionary<string, object> { })).ToList();
+                //return result.ToList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PzvCheck>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PzvCheck>()
+                };
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных GetPzvCheck");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных GetPzvCheck");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PzvCheck>()
                 };
             }
         }

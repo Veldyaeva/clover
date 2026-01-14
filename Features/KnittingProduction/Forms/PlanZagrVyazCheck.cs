@@ -49,6 +49,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private BindingSource _sprMonthBindingSource;
         private BindingSource _podrVyazBindingSource;
+        private BindingSource _pzvСheckBindingSource;
 
 
         public PlanZagrVyazCheck()
@@ -134,7 +135,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await SetLoadingAsync(false);
         }
 
-
         private async Task LoadPodrVyazDataAsync()
         {
             await _loader.RunAsync(
@@ -147,6 +147,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         comboBoxPodrVyazList.BeginUpdate();
                         _podrVyazBindingSource.DataSource = new BindingList<PodrVyaz>();
                         comboBoxPodrVyazList.EndUpdate();
+                        comboBoxPodrVyazList.SelectedIndex = -1;
                     });
 
                     var bs = await _vyazService.GetPodrVyaz(token);
@@ -156,6 +157,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         comboBoxPodrVyazList.BeginUpdate();
                         _podrVyazBindingSource.DataSource = bs.DataSource;
                         comboBoxPodrVyazList.EndUpdate();
+                        comboBoxPodrVyazList.SelectedIndex = -1;
                     });
 
                     await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
@@ -163,6 +165,52 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 onError: async ex =>
                 {
                     await _logger.LogErrorAsync(ex, "Ошибка загрузки podr_vyaz");
+                    await SetStatusAsync("Ошибка загрузки");
+                    await SetLoadingAsync(false);
+                },
+                onCanceled: async byLifetime =>
+                {
+                    if (!byLifetime)
+                        await SetStatusAsync("Отменено");
+
+                    await SetLoadingAsync(false);
+                }
+            );
+
+            await SetLoadingAsync(false);
+        }
+
+        private async Task LoadPzvCheckDataAsync()
+        {
+            await _loader.RunAsync(
+                async token =>
+                {
+                    await SetLoadingAsync(true);
+
+                    //await this.UI(() =>
+                    //{
+                    //    gridControlPzvCheck.BeginUpdate();
+                    //    _podrVyazBindingSource.DataSource = new BindingList<PodrVyaz>();
+                    //    gridControlPzvCheck.EndUpdate();
+                    //});
+                    //MessageBox.Show($" {comboBoxPodrVyazList.SelectedIndex} ");
+                    int _xPodrID = Convert.ToInt32(comboBoxPodrVyazList.SelectedValue);
+                    int _xMonth = Convert.ToInt32(comboBoxMonthList.SelectedValue);
+                    int _xYear = Convert.ToInt32(spinEditYear.Value);
+                    var bs = await _vyazService.GetPzvCheck(_xPodrID, _xMonth, _xYear, token);
+
+                    await this.UI(() =>
+                    {
+                        gridControlPzvCheck.BeginUpdate();
+                        _pzvСheckBindingSource.DataSource = bs.DataSource;
+                        gridControlPzvCheck.EndUpdate();
+                    });
+
+                    await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                },
+                onError: async ex =>
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка загрузки pzvCheck");
                     await SetStatusAsync("Ошибка загрузки");
                     await SetLoadingAsync(false);
                 },
@@ -187,6 +235,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             spinEditYear.Value = DateTime.Now.Year;
 
             await LoadPodrVyazDataAsync();
+            comboBoxPodrVyazList.SelectedIndex = -1;
         }
 
         private async void comboBoxMonthList_SelectedValueChanged(object sender, EventArgs e)
@@ -204,7 +253,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void simpleButtonPrevMonth_Click(object sender, EventArgs e)
         {
+            DateTime _prevMonth = Convert.ToDateTime($"01.{comboBoxMonthList.SelectedValue}.{spinEditYear.Value}");
+            _prevMonth = _prevMonth.AddMonths(-1);
 
+            comboBoxMonthList.SelectedValue = _prevMonth.Month;
+            spinEditYear.Value = _prevMonth.Year;
+        }
+
+        private void simpleButtonNextMonth_Click(object sender, EventArgs e)
+        {
+            DateTime _nextMonth = Convert.ToDateTime($"01.{comboBoxMonthList.SelectedValue}.{spinEditYear.Value}");
+            _nextMonth = _nextMonth.AddMonths(1);
+
+            comboBoxMonthList.SelectedValue = _nextMonth.Month;
+            spinEditYear.Value = _nextMonth.Year;
+        }
+
+        private void buttonGetPzvCheck_Click(object sender, EventArgs e)
+        {
+            LoadPzvCheckDataAsync();
         }
     }
 }
