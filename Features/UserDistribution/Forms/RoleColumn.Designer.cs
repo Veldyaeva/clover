@@ -162,7 +162,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             id_acn.Name = "id_acn";
             id_acn.Visible = true;
             id_acn.VisibleIndex = 0;
-            id_acn.Width = 57;
+            id_acn.Width = 77;
             // 
             // id_atn
             // 
@@ -171,7 +171,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             id_atn.Name = "id_atn";
             id_atn.Visible = true;
             id_atn.VisibleIndex = 1;
-            id_atn.Width = 59;
+            id_atn.Width = 79;
             // 
             // ordinal_position
             // 
@@ -180,7 +180,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             ordinal_position.Name = "ordinal_position";
             ordinal_position.Visible = true;
             ordinal_position.VisibleIndex = 2;
-            ordinal_position.Width = 41;
+            ordinal_position.Width = 55;
             // 
             // name
             // 
@@ -189,7 +189,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             name.Name = "name";
             name.Visible = true;
             name.VisibleIndex = 3;
-            name.Width = 166;
+            name.Width = 249;
             // 
             // name_rus
             // 
@@ -198,7 +198,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             name_rus.Name = "name_rus";
             name_rus.Visible = true;
             name_rus.VisibleIndex = 4;
-            name_rus.Width = 180;
+            name_rus.Width = 216;
             // 
             // data_type
             // 
@@ -207,7 +207,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             data_type.Name = "data_type";
             data_type.Visible = true;
             data_type.VisibleIndex = 5;
-            data_type.Width = 101;
+            data_type.Width = 141;
             // 
             // Readonly
             // 
@@ -216,7 +216,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Readonly.Name = "Readonly";
             Readonly.Visible = true;
             Readonly.VisibleIndex = 6;
-            Readonly.Width = 106;
+            Readonly.Width = 114;
             // 
             // ModeName
             // 

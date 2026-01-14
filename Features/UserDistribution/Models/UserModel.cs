@@ -88,6 +88,9 @@ namespace SewingProduction.Features.UserDistribution.Models
             set { if (_passwordHash != value) { _passwordHash = value; OnPropertyChanged(nameof(PasswordHash)); } }
         }
 
+        [NotMapped]
+        public bool IsSelected { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -102,81 +105,5 @@ namespace SewingProduction.Features.UserDistribution.Models
         public int FioID { get; set; }
         public string Fio { get; set; }
     }
-    public class UserModelDataService
-    {
-        private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
-
-        public UserModelDataService(DbService dbService, DatabaseHelper dbHelper)
-        {
-            _dbService = dbService;
-            _dbHelper = dbHelper;
-        }
-
-        public async Task<List<UserModel>> GetUsersHierarchyAsync(UserClass user)
-        {
-            string query;
-
-            bool isAdmin = user.Roles.Contains("Администратор");
-
-            if (isAdmin)
-            {
-                // Администратор — получает всех пользователей
-                query = @"
-                    SELECT u.UserID, u.UserName, u.CreatorID, u2.UserName AS CreatorName, 
-                           u.FioID, u.BrigID, u.PasswordHash
-                    FROM Users u
-                    LEFT JOIN Users u2 ON u.CreatorId = u2.UserId";
-
-                return await _dbService.GetListAsync<UserModel>(query, new { });
-            }
-            else
-            {
-                // Обычный пользователь — только себя и потомков
-                query = @"
-                    SELECT u.UserID, u.UserName, u.CreatorID, u2.UserName AS CreatorName, 
-                           u.FioID, u.BrigID, u.PasswordHash
-                    FROM Users u
-                    LEFT JOIN Users u2 ON u.CreatorId = u2.UserId
-                    WHERE u.UserId IN (
-                        SELECT UserId FROM GetDescendants(@UserId)
-                        UNION SELECT @UserId
-                    )";
-
-                return await _dbService.GetListAsync<UserModel>(query, new { UserId = user.UserId });
-            }
-        }
-
-
-        public async Task<int> SaveAsync(UserModel user)
-        {
-            var result = await _dbService.SaveEntityAsync("Users", "UserID", user);
-            Console.WriteLine($"Создан пользователь {user.UserName}, фио ид: {user.FioID}, бриг ид: {user.BrigID},");
-            return result;
-        }
-
-        public async Task DeleteAsync(UserModel user)
-        {
-            await _dbService.DeleteEntityAsync("Users", "UserID", user);
-        }
-        public async Task<List<BrigDto>> LoadBrigList()
-        {
-            string query = "SELECT id_brig AS BrigID, Brig FROM Brig";
-            return await _dbService.GetListAsync<BrigDto>(query, new Dictionary<string, object>());
-        }
-        public async Task<List<FioDto>> LoadFioList()
-        {
-            string query = "SELECT f_id AS FioID, Fio FROM fio";
-            return await _dbService.GetListAsync<FioDto>(query, new Dictionary<string, object>());
-        }
-        public async void SetPravaForAddUser(int newId)
-        {
-            string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
-            DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
-            int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
-            UserRoleDataService userRoleDataService = new UserRoleDataService(_dbHelper);
-            await userRoleDataService.AssignRoleAsync(newId, roleId);
-            Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
-        }
-    }
+    
 }

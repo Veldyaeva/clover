@@ -5,17 +5,26 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraDiagram.Base;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Filtering;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraSpreadsheet.Model;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
+using System.Drawing;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.BandedGrid;
+using Org.BouncyCastle.Crypto;
+using SewingProduction.Features.UserDistribution.Forms;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -28,14 +37,17 @@ namespace SewingProduction.Features.Articul.Forms
         BindingList<SpArticulNaborSostav> _listOld;
         BindingSource _bsOld = new BindingSource();
         int oldAgIdBeforeEdit = 0;
-        ArticulModel articulNabor;
+        ArticulModel articulNabor_old = new ArticulModel();
+        ArticulModel articulNabor_new = new ArticulModel();
+        List<GostRazmerNabViewModel> _razmNaborForGost;
+        List<GostRazmerNabViewModel> _razmSostavForGost;
         public EditNaborSostav()
         {
             InitializeComponent();
         }
-        public EditNaborSostav(UserClass user, ArticulModel Obj) : base(user)
+        public EditNaborSostav(UserClass user, string Kod) : base(user)
         {
-            articulNabor = Obj;
+            articulNabor_old.Kod = Kod;
             InitializeComponent();
             DisableSearchForGroupEditor();
         }
@@ -47,9 +59,12 @@ namespace SewingProduction.Features.Articul.Forms
             await LoadAllGroupsAsync();
             await SetupPictursBox();
             HideTechnicalColumns();
+            ConfigureGridViewNaborColumns(GridViewNabor);
+            ConfigureGridViewNaborColumns(GridViewNabor_Old);
             ArticulNaborColumns();
-            ArticulNaborColumnsOld();
+            await ArticulNaborColumnsOld(articulNabor_old.Id_gost);
             SetupSearchLookUpEditGost();
+            ValidateGridState();
         }
         private void DisableSearchForGroupEditor()
         {
@@ -63,13 +78,13 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task LoadNabor()
         {
-            articulNabor = await _articulDataService.GetArtByKodAsync(articulNabor.Kod);
+            articulNabor_old = await _articulDataService.GetArtByKodAsync(articulNabor_old?.Kod);
             assortModelBindingSource.DataSource = await _ANSDataService.GetAssortAsync();
             tvnModelBindingSource.DataSource = await _ANSDataService.GetTvnAsync();
 
-            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync(articulNabor.Id_gost, articulNabor.Kod);
+            _bsGostForNabor.DataSource = await _ANSDataService.GetGostNaborAsync();
 
-            _bsGrupForNabor.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { articulNabor.Id_gost }, 3);
+            _bsGrupForNabor.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(new int[] { articulNabor_old.Id_gost }, 3);
 
             currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
             if (currentItem != null)
@@ -79,8 +94,7 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task LoadSostav()
         {
-            // --- основная таблица ---
-            var list = await _ANSDataService.GetByKodAsync(articulNabor.Kod);
+            var list = await _ANSDataService.GetByKodAsync(articulNabor_old.Kod);
             _listCurrent = new BindingList<SpArticulNaborSostav>(list);
             _listOld = new BindingList<SpArticulNaborSostav>(
                 list.Select(x => new SpArticulNaborSostav
@@ -89,14 +103,15 @@ namespace SewingProduction.Features.Articul.Forms
                     Txt_v = x.Txt_v,
                     Kod = x.Kod,
                     Ta_id = x.Ta_id,
+                    Tk_id = x.Tk_id,
                     Tk_name = x.Tk_name.Trim(),
                     Id_gost = x.Id_gost,
                     N_i = x.N_i.Trim(),
                     Ag_id = x.Ag_id,
-                    Sostav = x.Sostav.Trim(),
+                    Sostav = x.Sostav,
                     Id_razm_nab = x.Id_razm_nab,
                     Razm = x.Razm.Trim(),
-                    razm_all = x.razm_all
+                    Razm_all = x.Razm_all
                 }).ToList()
             );
 
@@ -108,6 +123,8 @@ namespace SewingProduction.Features.Articul.Forms
 
             _bsGostForSostav.DataSource = await _ANSDataService.GetGostSostavAsync();
             //_bsGrupForSostav.DataSource = await _ANSDataService.GetGostGrupIzdNaborAsync(articulNabor.Id_gost);
+            //GridViewNabor.ExpandAllGroups();
+            //GridViewNabor_Old.ExpandAllGroups();
         }
         private async Task LoadAllGroupsAsync()
         {
@@ -143,19 +160,24 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task SetupPictursBox()
         {
-            customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor.Kod);
+            //customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
+            customPictureBoxNabor.Image = Image.FromFile(await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod));
         }
-        private void ArticulNaborColumnsOld()
+        private async Task ArticulNaborColumnsOld(int? Id_gost)
         {
-            customTextBoxArtN_Old.Text = articulNabor.Articul;
-            customTextBoxGostN_Old.Text = articulNabor.Gost;
-            customTextBoxGrupN_Old.Text = articulNabor.Grup;
+            var gostOld = (await _ANSDataService.GetGostNaborAsync(Id_gost)).FirstOrDefault();
+            if (gostOld == null) return;
+            customTextBoxArtN_Old.Text = articulNabor_old.Articul;
+            customTextBoxKodGost_Old.Text = gostOld.Id_gost.ToString();
+            customTextBoxGostN_Old.Text = gostOld.Name_gost;
+            customTextBoxOpiGost_Old.Text = gostOld.Opi_gost;
+            customTextBoxGrupN_Old.Text = articulNabor_old.Grup;
         }
         private void ArticulNaborColumns()
         {
-            customTextBoxArtN.Text = articulNabor.Articul;
-            customSearchLookUpEditGostN.EditValue = articulNabor.Id_gost.ToString();
-            customSearchLookUpEditGrupN.EditValue = articulNabor.Ag_id.ToString();
+            customTextBoxArtN.Text = articulNabor_old.Articul;
+            customSearchLookUpEditGostN.EditValue = articulNabor_old.Id_gost.ToString();
+            customSearchLookUpEditGrupN.EditValue = articulNabor_old.Ag_id.ToString();
         }
         private void HideTechnicalColumns()
         {
@@ -169,20 +191,66 @@ namespace SewingProduction.Features.Articul.Forms
                 GridViewNabor_Old.Columns["Id_razm_nab"].Visible = false;
                 GridViewNabor_Old.Columns["Kod"].Visible = false;
                 GridViewNabor_Old.ClearGrouping();
-                GridViewNabor_Old.Columns["razm_all"].GroupIndex = 0; // группировка по колонке размера
+                GridViewNabor_Old.Columns["Razm_all"].GroupIndex = 0; // группировка по колонке размера
                 GridViewNabor_Old.ExpandAllGroups(); // раскрыть группы при загрузке
                 GridViewNabor_Old.OptionsView.ShowGroupPanel = true; //
 
-                GridViewNabor.Columns["razm_all"].Visible = false;
                 GridViewNabor.Columns["Ag_id"].Visible = true;
                 GridViewNabor.ClearGrouping();
-                GridViewNabor.Columns["razm_all"].GroupIndex = 0;
+                GridViewNabor.Columns["Razm_all"].GroupIndex = 0;
+                GridViewNabor.Columns["Razm_all"].Visible = false;
                 GridViewNabor.ExpandAllGroups();
                 GridViewNabor.OptionsView.ShowGroupPanel = true;
             }
             finally
             {
                 GridViewNabor_Old.EndUpdate();
+
+                customButtonSaveNabor.Enabled = false;
+                customCheckBoxVerified.Checked = false;
+
+                customListBoxRazm.Visible = false;
+            }
+        }
+
+        private void ConfigureGridViewNaborColumns(BandedGridView bGridView)
+        {
+            // Конфигурация колонок задана в Designer.cs
+            if (bGridView == null)
+                return;
+            // 1) Единая скрытая колонка с готовым заголовком группы
+            var headerCol = bGridView.Columns.ColumnByFieldName("__Header");
+            if (headerCol == null)
+            {
+                headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+                {
+                    FieldName = "__Header",
+                    Caption = "Header",
+                    UnboundType = DevExpress.Data.UnboundColumnType.String,
+                    UnboundExpression = "Concat([Kod], '  |  Размер набора: ', [Razm_all])",
+                    Visible = false,
+                    OptionsColumn = { ShowInCustomizationForm = false }
+                };
+                bGridView.Columns.Add(headerCol);
+            }
+
+            // 2) Сбрасываем прошлую группировку и группируем только по __Header
+            bGridView.BeginUpdate();
+            try
+            {
+                bGridView.ClearGrouping();
+
+                headerCol.GroupIndex = 0;
+
+                // 3) Внешний вид группы — показываем только текст, без имён полей
+                bGridView.GroupFormat = "{1}";
+                bGridView.OptionsView.ShowGroupedColumns = false;
+                bGridView.OptionsView.ShowGroupPanel = false;
+                bGridView.OptionsBehavior.AutoExpandAllGroups = true;
+            }
+            finally
+            {
+                bGridView.EndUpdate();
             }
         }
         private void SetupSearchLookUpEditGost()
@@ -212,6 +280,15 @@ namespace SewingProduction.Features.Articul.Forms
             }
             await AutoApplyIdGostAfterChangingNabor(idGostNabor);
             //await LoadAllGroupsAsync();
+            _razmNaborForGost = await _ANSDataService.GetGostRazmerNaborAsync(idGostNabor);
+
+            customListBoxRazm.DataSource = null;
+            if (_razmNaborForGost != null && _razmNaborForGost.Count > 0)
+            {
+                customListBoxRazm.DataSource = _razmNaborForGost;
+                customListBoxRazm.DisplayMember = "Razm";
+                customListBoxRazm.ValueMember = "Id_razmer";
+            }
         }
         private async Task AutoApplyIdGostAfterChangingNabor(int idGostNabor)
         {
@@ -385,7 +462,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
         private async Task ApplyGrupsToSameTkGost(DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        { 
+        {
             await LoadAllGroupsAsync();
 
             var row = GridViewNabor.GetRow(e.RowHandle) as SpArticulNaborSostav;
@@ -442,14 +519,18 @@ namespace SewingProduction.Features.Articul.Forms
             var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
             if (view == null) return;
 
-            if (view == GridViewNabor)
+            var other = view == GridViewNabor ? GridViewNabor_Old : GridViewNabor;
+
+            if (view.IsGroupRow(e.FocusedRowHandle))
             {
-                SyncGridSelection(GridViewNabor, GridViewNabor_Old, "Ans_id", e.FocusedRowHandle);
+                string header = view.GetGroupRowValue(e.FocusedRowHandle)?.ToString();
+                if (!string.IsNullOrEmpty(header))
+                    FocusGroupInOtherGrid(other, header);
+
+                return;
             }
-            else if (view == GridViewNabor_Old)
-            {
-                SyncGridSelection(GridViewNabor_Old, GridViewNabor, "Ans_id", e.FocusedRowHandle);
-            }
+
+            SyncGridSelection(view, other, "Ans_id", e.FocusedRowHandle);
         }
 
         public void SyncGridSelection(GridView sourceView, GridView otherView, string fieldName, int focusedRowHandle)
@@ -503,6 +584,46 @@ namespace SewingProduction.Features.Articul.Forms
                 otherView.MakeRowVisible(firstMatchRow);
             }
         }
+        private void GridViewNabor_FocusedGroupChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            var view = sender as BandedGridView;
+
+            // Проверяем: мы выделили группу?
+            if (!view.IsGroupRow(e.FocusedRowHandle))
+                return;
+
+            // Получаем текст группы (__Header)
+            string header = view.GetGroupRowValue(e.FocusedRowHandle)?.ToString();
+            if (string.IsNullOrEmpty(header))
+                return;
+
+            // Позиционируем старый грид
+            FocusGroupInOtherGrid(GridViewNabor_Old, header);
+        }
+        private void FocusGroupInOtherGrid(BandedGridView otherView, string headerValue)
+        {
+            if (otherView == null || string.IsNullOrEmpty(headerValue))
+                return;
+
+            for (int handle = -1; handle >= -100; handle--)
+            {
+                if (!otherView.IsValidRowHandle(handle))
+                    break;
+
+                if (otherView.IsGroupRow(handle))
+                {
+                    var groupHeader = otherView.GetGroupRowValue(handle)?.ToString();
+                    if (groupHeader == headerValue)
+                    {
+                        otherView.FocusedRowHandle = handle;
+                        otherView.MakeRowVisible(handle);
+                        return;
+                    }
+                }
+            }
+        }
+
+
         #endregion
 
         #region Вспомогательные методы грида
@@ -584,6 +705,8 @@ namespace SewingProduction.Features.Articul.Forms
             view.UpdateCurrentRow();
             spArticulNaborSostavBindingSource.EndEdit();
             view.RefreshData();
+            ValidateGridState();
+            GridViewNabor.Columns["Razm_all"].Visible = false;
         }
 
         #endregion
@@ -592,9 +715,18 @@ namespace SewingProduction.Features.Articul.Forms
 
         private async Task ApplyRazmByGostAsync(int idGostNabor)
         {
-            // Загружаем размерную сетку по новому ГОСТу
-            var razmers = await _ANSDataService.GetGostRazmerSostAsync(idGostNabor);
-            if (razmers == null || razmers.Count == 0) return;
+            if (!(await IsSameRazmGrid(idGostNabor)))
+            {
+                MessageBox.Show(
+                    "Размерная сетка не совпадает. Выберите размеры вручную.",
+                    "Внимание",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            if (_razmSostavForGost == null || _razmSostavForGost.Count == 0) return;
 
             var view = GridViewNabor;
 
@@ -605,12 +737,11 @@ namespace SewingProduction.Features.Articul.Forms
                     var row = v.GetRow(i) as SpArticulNaborSostav;
                     if (row == null) continue;
 
-                    // новый gost уже проставлен AutoApplyIdGostAfterChangingNabor
                     int newGost = row.Id_gost;
                     int id_razm_nab = row.Id_razm_nab;
 
                     // ищем подходящий размер
-                    var match = razmers.FirstOrDefault(r =>
+                    var match = _razmSostavForGost.FirstOrDefault(r =>
                            r.Id_gost == newGost
                         && r.Id_razmer == id_razm_nab);
 
@@ -621,63 +752,322 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                     else
                     {
-                        // если подходящего размера нет — очищаем
-                        row.Razm = null;
-                        v.SetRowCellValue(i, "Razm", DBNull.Value);
+                        //row.Razm = null;
+                        v.SetRowCellValue(i, "Razm", "Ошибка");
                     }
                 }
             });
         }
+        private async Task<bool> IsSameRazmGrid(int idGostNabor)
+        {
+            var oldList = _razmSostavForGost?.ToList();
+            _razmSostavForGost = await _ANSDataService.GetGostRazmerSostAsync(idGostNabor);
 
+            if (oldList == null)
+                return true;
+            if (_razmSostavForGost == null)
+                return false;
+
+            var oldIds = oldList
+                .Select(x => x.Id_razmer)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+
+            var newIds = _razmSostavForGost
+                .Select(x => x.Id_razmer)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
+
+            if (oldIds.Count != newIds.Count)
+                return false;
+
+            for (int i = 0; i < oldIds.Count; i++)
+                if (oldIds[i] != newIds[i])
+                    return false;
+
+            return true;
+        }
 
         #endregion
 
+        #region Проверка полей
+        bool changedRazmer = false;
+        bool changedSostav = false;
+        private async void ValidateGridState()
+        {
+            customCheckBoxVerified.Checked = false;
+            customCheckBoxVerified.Enabled = false;
+            cLabelInfo.ForeColor = System.Drawing.Color.Red;
+
+            var view = GridViewNabor;
+            if (view.DataRowCount == 0)
+            {
+                cLabelInfo.Text = "Нет строк в составе";
+                return;
+            }
+
+            int idGostNabor = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
+            int idGrupNabor = Convert.ToInt32(customSearchLookUpEditGrupN.EditValue);
+            var allGosts = await _ANSDataService.GetGostSostavAsync(idGostNabor);
+
+            bool invalidRazm = false;
+            bool emptySostav = false;
+            bool emptyGost = false;
+            bool invalidGost = false;
+            bool emptyGroupNab = false;
+            bool emptyGroupSost = false;
+            bool emptyRazmer = false;
+
+            for (int i = 0; i < view.DataRowCount; i++)
+            {
+                var row = view.GetRow(i) as SpArticulNaborSostav;
+                if (row == null) continue;
+
+                if (string.IsNullOrWhiteSpace(row.Sostav))
+                    emptySostav = true;
+
+                if (idGrupNabor <= 0)
+                    emptyGroupNab = true;
+
+                if (row.Id_gost <= 0)
+                {
+                    emptyGost = true;
+                }
+                else
+                {
+                    bool exists = allGosts.Any(g => g.Id_gost == row.Id_gost);
+                    if (!exists)
+                        invalidGost = true;
+                }
+
+                if (row.Ag_id <= 0)
+                    emptyGroupSost = true;
+
+                if (row.Id_razm_nab <= 0 || string.IsNullOrWhiteSpace(row.Razm))
+                    emptyRazmer = true;
+
+                bool mismatch = _razmNaborForGost?.Any(r => r.Razm == row.Razm_all) == false;
+                if (mismatch)
+                    invalidRazm = true;
+            }
+
+            if (invalidRazm)
+            {
+                cLabelInfo.Text = "Размеры не соответсвуют ГОСТу!";
+                return;
+            }
+            if (emptyGost)
+            {
+                cLabelInfo.Text = "Не выбран ГОСТ состава!";
+                return;
+            }
+            if (invalidGost)
+            {
+                cLabelInfo.Text = "Выбран недопустимый ГОСТ состава!";
+                return;
+            }
+            if (emptyGroupNab)
+            {
+                cLabelInfo.Text = "Поле группа набора не заполнено!";
+                return;
+            }
+            if (emptyGroupSost)
+            {
+                cLabelInfo.Text = "Не выбрана группа по ГОСТу состава!";
+                return;
+            }
+            if (emptySostav)
+            {
+                cLabelInfo.Text = "Поле Состав не заполнено!";
+                return;
+            }
+            if (emptyRazmer)
+            {
+                cLabelInfo.Text = "Поле Размер не заполнено!";
+                return;
+            }
+            cLabelInfo.Text = "Готово к изменениям!";
+            customCheckBoxVerified.Enabled = true;
+            cLabelInfo.ForeColor = System.Drawing.Color.Green;
+        }
+
+        #endregion
 
         #region Обработчики кнопок
-        private void customButtonSaveNabor_Click(object sender, EventArgs e)
+        private async void customButtonSaveNabor_Click(object sender, EventArgs e)
         {
-        }
-        private async void customButtonSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
+            //try
+            //{
+            //    if (customCheckBoxVerified.Checked == false) return;
+            //    GridViewNabor.PostEditor();
+            //    GridViewNabor.UpdateCurrentRow();
+            //    spArticulNaborSostavBindingSource.EndEdit();
                 currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
-                if (currentItem == null)
-                {
-                    MessageBox.Show("Нет выбранной записи для сохранения!", "Внимание",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (_ANSDataService.CheckPovt(currentItem.Kod))
-                {
-                    MessageBox.Show("Изменение невозможно! дубликаты в описании! обратитесь к администратору!", "Внимание",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+            //    if (currentItem == null)
+            //    {
+            //        MessageBox.Show("Нет выбранной записи для сохранения!", "Внимание",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        return;
+            //    }
+            //    if (_ANSDataService.CheckPovt(currentItem.Kod))
+            //    {
+            //        MessageBox.Show("Изменение невозможно! дубликаты в описании! обратитесь к администратору!", "Внимание",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //        return;
+            //    }
 
-                if (_ANSDataService.CheckOpis(currentItem.Kod))
-                {
-                    var result = MessageBox.Show($"Набор уже описан, изменения применятся на весь размерный ряд!,Вы уверены что хотите продолжить?", "Подтверждение",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result != DialogResult.Yes)
-                        return;
-                }
-                await _ANSDataService.UpdateArticulNaborSostavAsync(currentItem, oldAgIdBeforeEdit);
-                spArticulNaborSostavBindingSource.DataSource = await _ANSDataService.GetByKodAsync(articulNabor.Kod);
-                GridViewNabor_Old.ExpandAllGroups();
-                MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                oldAgIdBeforeEdit = currentItem.Ag_id;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    if (_ANSDataService.CheckOpis(currentItem.Kod))
+            //    {
+            //        var result = MessageBox.Show($"Набор уже описан, изменения применятся на весь размерный ряд!,Вы уверены что хотите продолжить?", "Подтверждение",
+            //            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //        if (result != DialogResult.Yes)
+            //            return;
+            //    }
 
+            //    int newGostMain = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
+            //    int? newGroupMain = Convert.ToInt32(customSearchLookUpEditGrupN.EditValue);
+
+            //    await _ANSDataService.UpdateNaborJsonAsync(
+            //        currentItem.Kod.Substring(0, 7),
+            //        articulNabor_old.Id_gost,
+            //        newGostMain,
+            //        articulNabor_old.Ag_id,
+            //        newGroupMain,
+            //        _listCurrent.ToList(),
+            //        _listOld.ToList());
+
+            //    customGridControlNabor_Old.DataSource = await _ANSDataService.GetByKodAsync(articulNabor_old.Kod);
+            //    GridViewNabor.ExpandAllGroups();
+            //    GridViewNabor_Old.ExpandAllGroups();
+            //    oldAgIdBeforeEdit = currentItem.Ag_id;
+            //    await Task.Delay(50);
+            //    await LoadNabor();
+            //    await ArticulNaborColumnsOld(articulNabor_old.Id_gost);
+            //    await Task.Delay(50);
+            //    await LoadSostav();
+            //    HideTechnicalColumns();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
+            EditNaborSostavMatr f = new EditNaborSostavMatr(_user, Convert.ToInt32(currentItem.Kod.Substring(0, 7)));
+            f.ShowDialog();
+        }
+        private void customCheckBoxVerified_CheckedChanged(object sender, EventArgs e)
+        {
+            if (customCheckBoxVerified.Checked == true)
+                customButtonSaveNabor.Enabled = true;
+            else
+                customButtonSaveNabor.Enabled = false;
         }
 
         #endregion
 
+        #region Размер для набора (выпадающий список по заголовку)
+        private int _clickedGroupHandle = GridControl.InvalidRowHandle;
+        private void GridViewNabor_MouseDown(object sender, MouseEventArgs e)
+        {
+            var view = sender as BandedGridView;
+            if (view == null) return;
+
+            var hit = view.CalcHitInfo(e.Location);
+            if (hit.InRow && view.IsGroupRow(hit.RowHandle))
+            {
+                _clickedGroupHandle = hit.RowHandle;
+
+                Point screenPoint = view.GridControl.PointToScreen(e.Location);
+                Point clientPoint = this.PointToClient(screenPoint);
+
+                clientPoint.Y += 2;
+
+                customListBoxRazm.Location = clientPoint;
+                customListBoxRazm.BringToFront();
+                customListBoxRazm.Visible = true;
+
+                return;
+            }
+            customListBoxRazm.Visible = false;
+        }
+        private void listRazm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var item = customListBoxRazm.SelectedItem as GostRazmerNabViewModel;
+            if (_razmSostavForGost == null)
+            {
+                _razmSostavForGost = new List<GostRazmerNabViewModel>();
+            }
+
+            if (item == null)
+            {
+                return;
+            }
+
+            if (_clickedGroupHandle == GridControl.InvalidRowHandle)
+            {
+                return;
+            }
+
+            customListBoxRazm.Visible = false;
+
+            if (_clickedGroupHandle == GridControl.InvalidRowHandle)
+                return;
+
+            GridViewNabor.BeginDataUpdate();
+            try
+            {
+                // все строки, входящие в эту группу
+                int childCount = GridViewNabor.GetChildRowCount(_clickedGroupHandle);
+                for (int i = 0; i < childCount; i++)
+                {
+                    int rowHandle = GridViewNabor.GetChildRowHandle(_clickedGroupHandle, i);
+                    if (rowHandle < 0) continue;
+
+                    var row = GridViewNabor.GetRow(rowHandle) as SpArticulNaborSostav;
+                    if (row == null) continue;
+
+                    row.Razm_all = item.Razm;         // для группировки
+                    row.Id_razm_nab = item.Id_razmer; // связь с gost_sv_razmer
+
+                    GridViewNabor.SetRowCellValue(rowHandle, "Razm_all", item.Razm);
+                    GridViewNabor.SetRowCellValue(rowHandle, "Id_razm_nab", item.Id_razmer);
+
+                    if (_razmSostavForGost == null || _razmSostavForGost.Count == 0)
+                    {
+                        Debug.WriteLine("[listRazm] Список размеров состава пуст. match = null");
+                        row.Razm = "Ошибка";
+                        GridViewNabor.SetRowCellValue(rowHandle, "Razm", "Ошибка");
+                        continue;
+                    }
+
+                    var match = _razmSostavForGost
+                        .FirstOrDefault(r =>
+                            r.Id_razmer == item.Id_razmer &&    // связь по Id размера
+                            r.Id_gost == row.Id_gost);          // связь по ГОСТ состава
+                    if (match != null)
+                    {
+                        row.Razm = match.Razm;
+                        GridViewNabor.SetRowCellValue(rowHandle, "Razm", match.Razm);
+                    }
+                    else
+                    {
+                        row.Razm = "Ошибка";
+                        GridViewNabor.SetRowCellValue(rowHandle, "Razm", "Ошибка");
+                    }
+                }
+            }
+            finally
+            {
+                GridViewNabor.EndDataUpdate();
+                ValidateGridState();
+            }
+
+            GridViewNabor.RefreshData();
+            GridViewNabor.ExpandAllGroups();
+        }
+        #endregion
     }
 }

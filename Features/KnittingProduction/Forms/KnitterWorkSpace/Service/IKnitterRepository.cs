@@ -10,6 +10,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
     {
         Task<List<FioModel>> GetFioListAsync();
         Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab);
+        Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours);
         Task<string> GetFioByTabAsync(int tab);
         Task<List<PlanZagrVyaz>> GetPlanTreeByTabAsync(int tab);
         Task UpdatePzvTabAsync(IEnumerable<int> pzvIds, int tab);
@@ -22,6 +23,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         Task EndWorkingShiftAsync(int shiftId, int tabEnd);
         Task<(int? kmaId, string kmaNum)> GetZoneByTabAsync(int tab);
 		Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab);
+        Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId);
 		Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId);
     }
 }

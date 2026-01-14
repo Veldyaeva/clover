@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.Articul;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -136,6 +138,23 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private void customButtonAllDistribution_Click(object sender, EventArgs e)
         {
             OpenForm(new AllDistribution(_user));
+        }
+
+        private void customButtonUserPodr_Click(object sender, EventArgs e)
+        {
+            OpenForm(new UserPodr(_user));
+        }
+
+        private void customButton3_Click(object sender, EventArgs e)
+        {
+            OpenForm(new RolePodr(_user));
+        }
+
+        private void customButtonShareUser_Click(object sender, EventArgs e)
+        {
+            //OpenForm(new ShareUser(_user));
+            ShareUser f = new ShareUser(_user);
+            f.ShowDialog();
         }
     }
     public class UserProfileDataService

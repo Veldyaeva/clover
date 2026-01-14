@@ -51,6 +51,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Password = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonUserPodr = new CustomButton();
             customButtonShareUser = new CustomButton();
             customButtonCopyUser = new CustomButton();
             customButtonAddUser = new CustomButton();
@@ -201,7 +202,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             UserNameUsers.Name = "UserNameUsers";
             UserNameUsers.Visible = true;
             UserNameUsers.VisibleIndex = 0;
-            UserNameUsers.Width = 701;
             // 
             // BrigID
             // 
@@ -286,6 +286,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.Controls.Add(customButtonUserPodr, 1, 3);
             tableLayoutPanel1.Controls.Add(customButtonShareUser, 1, 2);
             tableLayoutPanel1.Controls.Add(customButtonCopyUser, 1, 1);
             tableLayoutPanel1.Controls.Add(customGridControlUser, 0, 0);
@@ -308,6 +309,22 @@ namespace SewingProduction.Features.UserDistribution.Forms
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             tableLayoutPanel1.Size = new System.Drawing.Size(1258, 652);
             tableLayoutPanel1.TabIndex = 3;
+            // 
+            // customButtonUserPodr
+            // 
+            customButtonUserPodr.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonUserPodr.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonUserPodr.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonUserPodr.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonUserPodr.Location = new System.Drawing.Point(1136, 198);
+            customButtonUserPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonUserPodr.MinimumSize = new System.Drawing.Size(160, 20);
+            customButtonUserPodr.Name = "customButtonUserPodr";
+            customButtonUserPodr.Size = new System.Drawing.Size(160, 59);
+            customButtonUserPodr.TabIndex = 14;
+            customButtonUserPodr.Text = "Администрирование табеля";
+            customButtonUserPodr.UseVisualStyleBackColor = false;
+            customButtonUserPodr.Click += customButtonUserPodr_Click;
             // 
             // customButtonShareUser
             // 
@@ -416,5 +433,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditBrig;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditFio;
         private DevExpress.XtraGrid.Columns.GridColumn Password;
+        private CustomButton customButtonUserPodr;
     }
 }

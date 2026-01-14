@@ -23,7 +23,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             gridViewTable.FocusedRowChanged += gridViewTable_FocusedRowChanged;
             var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
-            _tableService = new AllTableNameDataService(dbService, dbHelper);
+            _tableService = new AllTableNameDataService();
             _columnService = new AllColumnNameDataService(dbService, dbHelper);
 
             customGridControlTable.DataSource = bindingSourceTable;

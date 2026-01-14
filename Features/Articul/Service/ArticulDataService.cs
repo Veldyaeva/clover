@@ -15,60 +15,90 @@ namespace SewingProduction.Features.Articul.Service
     public class ArticulDataService
     {
         private readonly DbService _dbService;
-
-        private readonly DatabaseHelper _dbHelper;
+        //private readonly DatabaseHelper _dbHelper;
+        private readonly FileLogger _logger = new FileLogger();
 
         public ArticulDataService()
         {
             _dbService = new DbService(new DatabaseHelper());
-            _dbHelper = new DatabaseHelper(); 
+            //_dbHelper = new DatabaseHelper(); 
         }
 
-        public async Task<List<ArticulModel>> GetAllAsync()
-        {
-            string query = "SELECT * FROM sp_articul";
-            return await _dbService.GetListAsync<ArticulModel>(query, new { });
-        }
         public async Task<ArticulModel> GetArtByKodAsync(string kod)
         {
-            string query = "SELECT * FROM sp_articul WHERE kod = @kod";
-            return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
+            try
+            {
+                string query = "SELECT * FROM sp_articul WHERE kod = @kod";
+                return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPreviewAsyncBindingList");
+                return null;
+            }
+        }
+
+        public async Task<List<AddNewKopmlModel>> GetArticulsListAsync()
+        {
+            try
+            {
+                string query = "SELECT Kod,Grup,Articul,Mod,Razm,Sost,Kle,kod_v FROM sp_articul";
+                return await _dbService.GetListAsync<AddNewKopmlModel>(query, new {});
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPreviewAsyncBindingList");
+                return null;
+            }
         }
         public async Task<BindingList<SpArtPreviewModel>> GetArtPreviewAsyncBindingList()
         {
-            string query = "select * from dbo.view_art";
-            
-            var bb = await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
-            var ret = new BindingList<SpArtPreviewModel>(bb);
-            bb = null;
-            return ret;
-
-        }
-
-        public async Task<List<ArticulModel>> GetArtByKoddAsync( string kodd)
-        {
-            string query = "select * from dbo.view_art WHERE kodd = @kodd";
-
-            return await _dbService.GetListAsync<ArticulModel>(query, new { kodd });
-
+            try
+            {
+                string query = "select * from dbo.view_art";
+                var bb = await _dbService.GetListAsync<SpArtPreviewModel>(query, new { });
+                var ret = new BindingList<SpArtPreviewModel>(bb);
+                bb = null;
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPreviewAsyncBindingList");
+                return null;
+            }
         }
         public async Task<SpArticulPreviewModel> GetByKodAsync(string kod)
         {
-            string query = "SELECT * FROM dbo.viewArticul_preview WHERE kod = @kod";
+            try
+            {
+                string query = "SELECT * FROM dbo.viewArticul_preview WHERE kod = @kod";
 
-            return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kod });
+                return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kod });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetByKodAsync");
+                return null;
+            }
 
         }
         public async Task<BindingList<ArtDrModel>> GetArtDrByKodAsync(string kod)
         {
-            string query = $"select * from dbo.view_art_dr where kod = @kod";
-            var bb = await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
-            var ret = new BindingList<ArtDrModel>(bb);
-            bb = null;
+            try
+            {
+                string query = $"select * from dbo.view_art_dr where kod = @kod";
+                var bb = await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
+                var ret = new BindingList<ArtDrModel>(bb);
+                bb = null;
 
-            return ret;
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtDrByKodAsync");
+                return null;
+            }
         }
-
 
         public async Task SaveAsync(ArticulModel model)
         {
@@ -81,34 +111,70 @@ namespace SewingProduction.Features.Articul.Service
         }
         public async Task<string> GetAllRazmByRazmAsync(string razm)
         {
-            string query = "SELECT Razm_all FROM Razm WHERE Razm = @razm ORDER BY razm DESC";
-            return await _dbService.GetEntityAsync<string>(query, new { razm });
+            try
+            {
+                string query = "SELECT Razm_all FROM Razm WHERE Razm = @razm ORDER BY razm DESC";
+                return await _dbService.GetEntityAsync<string>(query, new { razm });
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetAllRazmByRazmAsync");
+                return null;
+            }
         }
         public async Task<string> GetFileEskizForKod(string kod)
         {
-            string query = "SELECT dbo.getFileEskizForKodd(@kod) AS pathpict";
-            return await _dbService.GetEntityAsync<string>(query, new { kod });
-        }
+            try
+            {
+                string query = "SELECT dbo.getFileEskizForKodd(@kod) AS pathpict";
+                return await _dbService.GetEntityAsync<string>(query, new { kod });
+            }            
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetFileEskizForKod");
+                return null;
+            }
+
+}
         public async Task<BindingList<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
         {
-            string query = "SELECT * from view_KomplSostav where kod_k = @kod";
+            try
+            {
+                string query = "SELECT * from view_KomplSostav where kod_k = @kod";
             
-            var bb = await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
-            var ret = new BindingList<SpArticulKomplSostModel>(bb);
-            bb = null;
-            return ret;
+                var bb = await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
+                var ret = new BindingList<SpArticulKomplSostModel>(bb);
+                bb = null;
+                return ret;
+            }            
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSostavkomplForKod");
+                return null;
+            }
 
-        }
+}
         public async Task<BindingList<SpArticulNaborSostav>> GetSostavNaborForKod(string kod)
         {
-            string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_name_sokr, sostav, razm" +
-                " FROM view_articulNaborSostav where kod  = @kod";
+            try
+            {
+                string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_name_sokr, sostav, razm" +
+                    " FROM view_articulNaborSostav where kod  = @kod";
             
 
-            var bb = await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
-            var ret = new BindingList<SpArticulNaborSostav>(bb);
-            bb = null;
-            return ret;
+                var bb = await _dbService.GetListAsync<SpArticulNaborSostav>(query, new { kod });
+                var ret = new BindingList<SpArticulNaborSostav>(bb);
+                bb = null;
+                return ret;
+            }            
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSostavNaborForKod");
+                return null;
+            }
+
+            
 
         }
                 

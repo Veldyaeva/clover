@@ -54,6 +54,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customTextBox2 = new CustomTextBox();
             customButton2 = new CustomButton();
             customLabel2 = new CustomLabel();
+            customButton3 = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)bandedGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
@@ -285,12 +286,26 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabel2.TabIndex = 3;
             customLabel2.Text = "customLabel2";
             // 
+            // customButton3
+            // 
+            customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButton3.Font = new System.Drawing.Font("Arial", 10F);
+            customButton3.ForeColor = System.Drawing.Color.Black;
+            customButton3.Location = new System.Drawing.Point(686, 289);
+            customButton3.Name = "customButton3";
+            customButton3.Size = new System.Drawing.Size(187, 30);
+            customButton3.TabIndex = 2;
+            customButton3.Text = "Пользователь";
+            customButton3.UseVisualStyleBackColor = false;
+            customButton3.Click += customButton3_Click;
+            // 
             // TestForm1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1171, 508);
             Controls.Add(customLabel2);
+            Controls.Add(customButton3);
             Controls.Add(customButton2);
             Controls.Add(customButton1);
             Controls.Add(customTextBox2);
@@ -338,5 +353,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn readonly1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand data_type11;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn id_acn1;
+        private CustomButton customButton3;
     }
 }
