@@ -1,8 +1,10 @@
-﻿using SewingProduction.Interfaces;
+﻿using DevExpress.Xpo.Logger.Transport;
+using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 
 namespace SewingProduction.Core.Models
@@ -33,7 +35,7 @@ namespace SewingProduction.Core.Models
         /// <param name="field"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        protected bool SetField<T>(ref T field, T value)
+        protected bool SetField<T>(ref T field, T value,[CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value))
                 return false;
@@ -42,6 +44,8 @@ namespace SewingProduction.Core.Models
 
             if (!_isInitializing)
                 IsModified = true;
+
+            OnPropertyChanged(propertyName!);
 
             return true;
         }
@@ -158,7 +162,11 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t1
         {
             get => _norm_t1;
-            set => SetField(ref _norm_t1, value);
+            set {
+                if (!SetField(ref _norm_t1, value)) return;
+                if (_norm_t1 == 0m && _brak_t1 != 0m)
+                    Brak_t1 = 0m;
+            }
         }
 
         private string _opis_t1;
@@ -187,7 +195,12 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t2
         {
             get => _norm_t2;
-            set => SetField(ref _norm_t2, value);
+            set
+            {
+                if (!SetField(ref _norm_t2, value)) return;
+                if (_norm_t2 == 0m && _brak_t2 != 0m)
+                    Brak_t2 = 0m;
+            }
         }
 
         private string _opis_t2;
@@ -216,7 +229,12 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t3
         {
             get => _norm_t3;
-            set => SetField(ref _norm_t3, value);
+            set
+            {
+                if (!SetField(ref _norm_t3, value)) return;
+                if (_norm_t3 == 0m && _brak_t3 != 0m)
+                    Brak_t3 = 0m;
+            }
         }
 
         private string _opis_t3;
@@ -245,7 +263,12 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t4
         {
             get => _norm_t4;
-            set => SetField(ref _norm_t4, value);
+            set
+            {
+                if (!SetField(ref _norm_t4, value)) return;
+                if (_norm_t4 == 0m && _brak_t4 != 0m)
+                    Brak_t4 = 0m;
+            }
         }
 
         private string _opis_t4;
@@ -274,7 +297,12 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t5
         {
             get => _norm_t5;
-            set => SetField(ref _norm_t5, value);
+            set
+            {
+                if (!SetField(ref _norm_t5, value)) return;
+                if (_norm_t5 == 0m && _brak_t5 != 0m)
+                    Brak_t5 = 0m;
+            }
         }
 
         private string _opis_t5;
@@ -303,7 +331,12 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t6
         {
             get => _norm_t6;
-            set => SetField(ref _norm_t6, value);
+            set
+            {
+                if (!SetField(ref _norm_t6, value)) return;
+                if (_norm_t6 == 0m && _brak_t6 != 0m)
+                    Brak_t6 = 0m;
+            }
         }
 
         private string _opis_t6;
@@ -332,7 +365,12 @@ namespace SewingProduction.Core.Models
         public decimal Norm_t7
         {
             get => _norm_t7;
-            set => SetField(ref _norm_t7, value);
+            set
+            {
+                if (!SetField(ref _norm_t7, value)) return;
+                if (_norm_t7 == 0m && _brak_t7 != 0m)
+                    Brak_t7 = 0m;
+            }
         }
 
         private decimal _seb_t7;
@@ -360,16 +398,8 @@ namespace SewingProduction.Core.Models
 
         public int Baza { get; set; }
         private int _kod_v;
-        public int Kod_v { get=>_kod_v;
-            set { 
-            if (_kod_v != value) 
-                { 
-                    _kod_v = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }
-        }
-        
+        public int Kod_v { get => _kod_v; set => SetField(ref _kod_v, value); }
+
         public int Sek_vyaz6 { get; set; }
         public int Sek_vyaz10 { get; set; }
         public int Sek_vyazo { get; set; }
@@ -383,15 +413,7 @@ namespace SewingProduction.Core.Models
         public int Sposob_up { get; set; }
         
         private int _id_country;
-        public int Id_country { get=>_id_country;
-            set { 
-            if (_id_country != value) 
-                { 
-                    _id_country = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }
-        }
+        public int Id_country { get => _id_country; set => SetField(ref _id_country, value); }
         public int Old_prch { get; set; }
         public int Sek_vyaz70 { get; set; }
         public int Sek_vyaz3 { get; set; }
@@ -402,25 +424,30 @@ namespace SewingProduction.Core.Models
         public int Sek_kr { get; set; }
         
         private int _arh;
-        public int Arh { get => _arh;
-            set { 
-            if (_arh != value) 
-                { 
-                    _arh = value;
-                    IsModified = true;
-                }
-            } 
-        }
-       
+        public int Arh { get => _arh; set => SetField(ref _arh, value); }
+
         public int Nds { get; set; }
         public string Ed_izm { get; set; }
-        public decimal Brak_t1 { get; set; }
-        public decimal Brak_t2 { get; set; }
-        public decimal Brak_t3 { get; set; }
-        public decimal Brak_t4 { get; set; }
-        public decimal Brak_t5 { get; set; }
-        public decimal Brak_t6 { get; set; }
-        public decimal Brak_t7 { get; set; }
+        private decimal _brak_t1;
+        public decimal Brak_t1 { get => _brak_t1; set => SetField(ref _brak_t1, value); }
+
+        private decimal _brak_t2;
+        public decimal Brak_t2 { get => _brak_t2; set => SetField(ref _brak_t2, value); }
+
+        private decimal _brak_t3;
+        public decimal Brak_t3 { get => _brak_t3; set => SetField(ref _brak_t3, value); }
+
+        private decimal _brak_t4;
+        public decimal Brak_t4 { get => _brak_t4; set => SetField(ref _brak_t4, value); }
+
+        private decimal _brak_t5;
+        public decimal Brak_t5 { get => _brak_t5; set => SetField(ref _brak_t5, value); }
+
+        private decimal _brak_t6;
+        public decimal Brak_t6 { get => _brak_t6; set => SetField(ref _brak_t6, value); }
+
+        private decimal _brak_t7;
+        public decimal Brak_t7 { get => _brak_t7; set => SetField(ref _brak_t7, value); }
         public decimal Brak_avg { get; set; }
         public decimal Cena_prdc { get; set; }
         private string _komb_det;
@@ -480,7 +507,10 @@ namespace SewingProduction.Core.Models
         public int Sek_vyaz62 { get; set; }
         public int Sek_vyaz71 { get; set; }
         public int Sek_vyaz72 { get; set; }
-        public short Kruj { get; set; }
+
+        private short _kruj;
+        public short Kruj { get => _kruj; set => SetField(ref _kruj, value); }
+
         public string Kod_lv3 { get; set; }
         public int Sek_cord { get; set; }
         public decimal Norm_cord { get; set; }

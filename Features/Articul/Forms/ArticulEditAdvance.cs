@@ -1,4 +1,5 @@
 ﻿//using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.CodeParser;
 using DevExpress.XtraEditors;
 using DevExpress.XtraLayout;
 using NLog.Layouts;
@@ -38,6 +39,7 @@ namespace SewingProduction.Features.Articul.Forms
         private readonly ILogger _logger = new FileLogger();
 
         private string _kodd;
+        private decimal _nRub_k;
 
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
@@ -67,18 +69,26 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceArtCommon = new BindingSource { };
             _bindingSourceArtCommonSave = new BindingSource { };
             _bindingSourceGostGrup = new BindingSource { };
+
         }
 
         private async void ArticulEditAdvance_Load(object sender, EventArgs e)
         {
             //загрузка списка размеров 
 
-            _bindingSourceArtKod.DataSource = await _articulEdAdvDataService.GetArtByKoddAsync(this._kodd);
-            // загрузка кешированных данных из справочников 
-            await CommonSpravArticulEditAdvance.EnsureLoadedAsync(_dbService);
+            var edAdvTask = _articulEdAdvDataService.GetArtByKoddAsync(this._kodd);
+            var nRub_kTask = _dbHelper.ExecuteScalarAsync("SELECT dbo.getConstN('', LEFT(CONVERT(NVARCHAR, GETDATE(), 12), 4))");
 
+            // загрузка кешированных данных из справочников 
+            var sprTask = CommonSpravArticulEditAdvance.EnsureLoadedAsync(_dbService);
+
+            await Task.WhenAll(edAdvTask, nRub_kTask, sprTask);
+            
+            _nRub_k = await nRub_kTask;
+            _bindingSourceArtKod.DataSource = await edAdvTask;
 
             InitializeBindingsAsync();
+            UpdateNorms();
 
         }
         private async Task InitializeBindingsAsync()
@@ -88,11 +98,9 @@ namespace SewingProduction.Features.Articul.Forms
                 //загрузка перечня кодов из справочника общая информация
                 _bindingSourceArtCommon.DataSource = await _articulEdAdvDataService.GetCommonArtByKoddAsync(this._kodd);
 
-
                 #region заполнение блока основных данных артикула
 
                 txbArticul.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Articul), true);
-                //txbArticul.DataBindings.Add("Text", _bindingSourceArtCommonSokr, nameof(SpArticulSaveAdvance.Articul), true);
 
                 txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Mod), true);
 
@@ -102,12 +110,12 @@ namespace SewingProduction.Features.Articul.Forms
                 lookUpGost.Properties.DisplayMember = nameof(GostModel.Name_gost);
                 lookUpGost.Properties.ValueMember = nameof(GostModel.Id_gost);
                 lookUpGost.Properties.NullText = "Не выбрано";
-                lookUpGostGrup.DataBindings.Clear();
+                lookUpGost.DataBindings.Clear();
                 lookUpGost.DataBindings.Add("EditValue", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true);
                 //инициализация описания госта
                 UpdateOpi();
 
-                #region описание группы госта
+                #region описание lookUpGostGrup группы госта 
                 //группа по гостам
                 lookUpGostGrup.Properties.DataSource = _bindingSourceGostGrup;
                 lookUpGostGrup.Properties.DisplayMember = nameof(GostGrupIzdViewModel.Ag_name_sokr);
@@ -176,6 +184,7 @@ namespace SewingProduction.Features.Articul.Forms
                 chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true);
                 chbKombDet.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_det), true);
                 chbKombIzd.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_izd), true);
+                chbKruj.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Kruj), true);
 
                 //составы
                 txbSost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost), true);
@@ -196,13 +205,22 @@ namespace SewingProduction.Features.Articul.Forms
                 #endregion
 
                 #region Нормы
-
+                //привязка полей норм
                 BindFieldByName(this.layoutControlGroup4, _bindingSourceArtCommon);
+                //привязка полей себестоимость 
                 BindFieldByName(this.layoutControlGroup7, _bindingSourceArtCommon);
-
+                //привязка полей Ткань
                 BindFieldByNameLookUp(this.layoutControlGroup8, _bindingSourceArtCommon, CommonSpravArticulEditAdvance.Tkans);
+                //привязка полей брак
+                BindFieldByName(this.layoutControlGroup6, _bindingSourceArtCommon);
+                //описание opis_t 
+                BindFieldByName(this.layoutControlGroup10, _bindingSourceArtCommon);
+
+                txtNorm_t.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Norm_t), true);
 
                 #endregion
+                _bindingSourceArtCommon.CurrentItemChanged += BindingSource_CurrentChanged;
+
 
             }
             catch (Exception ex)
@@ -211,6 +229,12 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
+
+        /// <summary>
+        /// настройка внешнего вида PopupGrid для выбора ткани
+        /// </summary>
+        /// <param name="sle"></param>
+        /// <exception cref="InvalidOperationException"></exception>
         private void ConfigurePopupGridTkan(SearchLookUpEdit sle)
         {
             var view = sle.Properties.PopupView as DevExpress.XtraGrid.Views.Grid.GridView;
@@ -233,14 +257,13 @@ namespace SewingProduction.Features.Articul.Forms
             view.BestFitColumns();
         }
 
-
         /// <summary>
         /// функция привязки полей LookUpEdit по имени контрола
         /// </summary>
         /// <param name="group"></param>
         /// <param name="bs"></param>
         /// <param name="sprav"></param>
-        public async void BindFieldByNameLookUp(LayoutControlGroup group, BindingSource bs, IReadOnlyList<SpArticulTkanSokr> sprav)
+        private async void BindFieldByNameLookUp(LayoutControlGroup group, BindingSource bs, IReadOnlyList<SpArticulTkanSokr> sprav)
         {
             try
             {
@@ -295,7 +318,7 @@ namespace SewingProduction.Features.Articul.Forms
         /// </summary>
         /// <param name="group"></param>
         /// <param name="bs"></param>
-        public async void BindFieldByName(LayoutControlGroup group, BindingSource bs)
+        private async void BindFieldByName(LayoutControlGroup group, BindingSource bs)
         {
             try
             {
@@ -323,6 +346,12 @@ namespace SewingProduction.Features.Articul.Forms
                             true,
                             DataSourceUpdateMode.OnPropertyChanged
                         );
+
+                        //настройка маски для числовых полей
+                        if (pd.PropertyType == typeof(decimal) || pd.PropertyType == typeof(double) || pd.PropertyType == typeof(float))
+                        {
+                            ConfigureNumericMask((DevExpress.XtraEditors.TextEdit)edit);
+                        }
                     }
                 }
             }
@@ -333,14 +362,14 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        //private void UpdateGostGrup()
-        //{
-        //    var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
-        //    if (lookUpGostGrup.EditValue is int id)
-        //        currentItem.Grup = CommonSpravArticulEditAdvance.GostGroupNames.FirstOrDefault(x => x.Ag_id == id)?.Ag_name_sokr ?? "";
-        //    else
-        //        currentItem.Grup = "";
-        //}
+        private void ConfigureNumericMask(DevExpress.XtraEditors.TextEdit edit)
+        {
+            edit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            //edit.Properties.Mask.EditMask = "n2"; // 2 знака после запятой
+            edit.Properties.Mask.UseMaskAsDisplayFormat = true;
+
+        }
+        
         private void UpdateOpi()
         {
             if (lookUpGost.EditValue is int id)
@@ -348,8 +377,94 @@ namespace SewingProduction.Features.Articul.Forms
             else
                 txbOpiGost.Text = "";
         }
+
+        private void UpdateNorms()
+        {
+            try
+            {
+                var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+                if (currentItem == null)
+                   return;
+
+                var props = TypeDescriptor.GetProperties(currentItem);
+
+                decimal sum = 0m;
+                decimal norm_all = 0m;
+
+                // Ищем все norm_tX
+                var normProps = props
+                    .Cast<PropertyDescriptor>()
+                    .Where(p =>
+                        p.PropertyType == typeof(decimal)
+                        && p.Name.StartsWith("Norm_t", StringComparison.OrdinalIgnoreCase));
+
+                foreach (var normProp in normProps)
+                {
+                    // получаем индекс: Norm_t1 -> 1
+                    string index = normProp.Name.Substring("Norm_t".Length);
+
+                    var sebProp = props.Find($"Seb_t{index}", true);
+                    var brakProp = props.Find($"Brak_t{index}", true);
+                    var kgmProp = props.Find($"K_kg_m{index}", true);
+
+                    if (sebProp == null || brakProp == null || kgmProp == null)
+                        continue;
+
+                    decimal norm = (decimal?)normProp.GetValue(currentItem) ?? 0m;
+                    decimal seb = (decimal?)sebProp.GetValue(currentItem) ?? 0m;
+                    // !!!проверка на 0 брак вынесена в поле модели ArticulModel
+                    decimal brak = (decimal?)brakProp.GetValue(currentItem) ?? 0m;
+
+                    decimal kgm = (decimal?)kgmProp.GetValue(currentItem) ?? 0m;
+
+                    sum += (norm * seb) - (brak * _nRub_k * kgm);
+                    norm_all += norm;
+                }
+
+                currentItem.Norm_t = norm_all;
+                txtSeb_all.EditValue = sum;
+
+            }
+            catch (Exception ex)
+            { 
+                _logger.LogErrorAsync(ex, "Ошибка при обновлении норм UpdateNorms");
+                throw;
+            }
+        }
+
+
+        private void BindingSource_CurrentChanged(object? sender, EventArgs e)
+        {
+            var currentModel = (ArticulModel)_bindingSourceArtCommon.Current;
+            // отписываемся от старого объекта
+            if (currentModel != null)
+                currentModel.PropertyChanged -= Model_PropertyChanged;
+
+            currentModel = _bindingSourceArtCommon.Current as ArticulModel;
+
+            // подписываемся на новый
+            if (currentModel != null)
+                currentModel.PropertyChanged += Model_PropertyChanged;
+
+            // при смене строки — пересчёт целиком
+            UpdateNorms();
+        }
+        private void Model_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(e.PropertyName))
+                return;
+
+            // фильтр по нужным полям
+            if (e.PropertyName.StartsWith("Norm_t", StringComparison.OrdinalIgnoreCase) ||
+                e.PropertyName.StartsWith("Seb_t", StringComparison.OrdinalIgnoreCase) ||
+                e.PropertyName.StartsWith("Brak_t", StringComparison.OrdinalIgnoreCase) ||
+                e.PropertyName.StartsWith("K_kg_m", StringComparison.OrdinalIgnoreCase))
+            {
+                UpdateNorms();
+            }
+        }
         /// <summary>
-        /////Сохранение изменений общих данных артикула для всех кодов
+        /// Сохранение изменений общих данных артикула для всех кодов 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -425,14 +540,26 @@ namespace SewingProduction.Features.Articul.Forms
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при изменении госта");
+                _logger.LogErrorAsync(ex, "Ошибка при изменении госта (lookUpGost_EditValueChanged)");
                 throw;
             }
         }
 
         private void ArticulEditAdvance_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+            if (currentItem.IsModified)
+            {
+                var result = XtraMessageBox.Show("Есть несохраненные изменения. Сохранить перед закрытием?", "Подтверждение", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    SaveChanges(sender, e);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true; // Отменяем закрытие формы
+                }
+            }
         }
 
         private void lookUpGostGrup_EditValueChanged(object sender, EventArgs e)

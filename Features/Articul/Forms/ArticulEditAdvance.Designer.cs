@@ -69,68 +69,6 @@ namespace SewingProduction.Features.Articul.Forms
             customButton1 = new CustomButton();
             customButton2 = new CustomButton();
             customButton6 = new CustomButton();
-            customGroupBox1 = new CustomGroupBox();
-            txbNormt = new CustomTextBox();
-            cgbTkanPurpose = new System.Windows.Forms.GroupBox();
-            txbOpis_t7 = new CustomTextBox();
-            txbOpis_t6 = new CustomTextBox();
-            txbOpis_t1 = new CustomTextBox();
-            txbOpis_t5 = new CustomTextBox();
-            txbOpis_t2 = new CustomTextBox();
-            txbOpis_t4 = new CustomTextBox();
-            txbOpis_t3 = new CustomTextBox();
-            customLabel20 = new CustomLabel();
-            cgbKfKach = new System.Windows.Forms.GroupBox();
-            txbKfKach7 = new CustomTextBox();
-            txbKfKach6 = new CustomTextBox();
-            txbKfKach5 = new CustomTextBox();
-            txbKfKach4 = new CustomTextBox();
-            txbKfKach3 = new CustomTextBox();
-            txbKfKach2 = new CustomTextBox();
-            txbKfKach1 = new CustomTextBox();
-            customLabel21 = new CustomLabel();
-            cgbBrakPercent = new System.Windows.Forms.GroupBox();
-            txtBrakPercent7 = new CustomTextBox();
-            txtBrakPercent6 = new CustomTextBox();
-            txtBrakPercent1 = new CustomTextBox();
-            txtBrakPercent5 = new CustomTextBox();
-            txtBrakPercent2 = new CustomTextBox();
-            txtBrakPercent4 = new CustomTextBox();
-            txtBrakPercent3 = new CustomTextBox();
-            customLabel22 = new CustomLabel();
-            cgbTkanSeb = new System.Windows.Forms.GroupBox();
-            customLabel23 = new CustomLabel();
-            cgbTkanNorm = new System.Windows.Forms.GroupBox();
-            customLabel24 = new CustomLabel();
-            cgbTkanBrak = new System.Windows.Forms.GroupBox();
-            txbBrak7 = new CustomTextBox();
-            txbBrak1 = new CustomTextBox();
-            txbBrak6 = new CustomTextBox();
-            txbBrak2 = new CustomTextBox();
-            txbBrak5 = new CustomTextBox();
-            txbBrak3 = new CustomTextBox();
-            txbBrak4 = new CustomTextBox();
-            txbSeb = new CustomTextBox();
-            customLabel30 = new CustomLabel();
-            customLabel25 = new CustomLabel();
-            customLabel31 = new CustomLabel();
-            customLabel26 = new CustomLabel();
-            customLabel32 = new CustomLabel();
-            customLabel27 = new CustomLabel();
-            customLabel33 = new CustomLabel();
-            customLabel28 = new CustomLabel();
-            customLabel34 = new CustomLabel();
-            txbBrakAll = new CustomTextBox();
-            customLabel35 = new CustomLabel();
-            customLabel29 = new CustomLabel();
-            customLabel36 = new CustomLabel();
-            txtSeb_t7 = new CustomTextBox();
-            txtSeb_t6 = new CustomTextBox();
-            txtSeb_t1 = new CustomTextBox();
-            txtSeb_t5 = new CustomTextBox();
-            txtSeb_t2 = new CustomTextBox();
-            txtSeb_t4 = new CustomTextBox();
-            txtSeb_t3 = new CustomTextBox();
             cbTM = new CustomComboBox();
             cbGrupMen = new CustomComboBox();
             cbCountry = new CustomComboBox();
@@ -145,6 +83,37 @@ namespace SewingProduction.Features.Articul.Forms
             chbIsUpak = new CustomCheckBox();
             customSimpleButton1 = new CustomSimpleButton();
             dataLayoutCommonArticul = new DevExpress.XtraDataLayout.DataLayoutControl();
+            txtOpis_t7 = new CustomTextBoxEx();
+            txtOpis_t6 = new CustomTextBoxEx();
+            customTextBoxEx7 = new CustomTextBoxEx();
+            txtOpis_t5 = new CustomTextBoxEx();
+            customTextBoxEx6 = new CustomTextBoxEx();
+            txtOpis_t4 = new CustomTextBoxEx();
+            txtOpis_t3 = new CustomTextBoxEx();
+            customTextBoxEx5 = new CustomTextBoxEx();
+            txtOpis_t2 = new CustomTextBoxEx();
+            txtOpis_t1 = new CustomTextBoxEx();
+            customTextBoxEx4 = new CustomTextBoxEx();
+            customTextBoxEx3 = new CustomTextBoxEx();
+            txtBrak_t7 = new CustomTextBoxEx();
+            customTextBoxEx2 = new CustomTextBoxEx();
+            txtBrak_t6 = new CustomTextBoxEx();
+            customTextBoxEx1 = new CustomTextBoxEx();
+            txtBrak_t5 = new CustomTextBoxEx();
+            txtBrak_t4 = new CustomTextBoxEx();
+            txtBrak_t3 = new CustomTextBoxEx();
+            txtSeb_t7 = new CustomTextBoxEx();
+            txtBrak_t2 = new CustomTextBoxEx();
+            txtSeb_t6 = new CustomTextBoxEx();
+            txtBrak_t1 = new CustomTextBoxEx();
+            txtSeb_t5 = new CustomTextBoxEx();
+            txtSeb_t4 = new CustomTextBoxEx();
+            txtSeb_t3 = new CustomTextBoxEx();
+            customLabel2 = new CustomLabel();
+            txtSeb_t2 = new CustomTextBoxEx();
+            lookUpGostGrup = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            txtSeb_t1 = new CustomTextBoxEx();
             chbKruj = new CustomCheckBox();
             cbuKod_t7 = new CustomSearchLookUpEdit();
             customSearchLookUpEdit7View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -213,6 +182,8 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem58 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem59 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem60 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutSostav = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -238,7 +209,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem49 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem50 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
-            emptySpaceItem8 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem51 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem52 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -247,6 +217,31 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem55 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem56 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem57 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem62 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem63 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem64 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem65 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem66 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem67 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem61 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup10 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem75 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem76 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem77 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem78 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem79 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem80 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem81 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup9 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem68 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem69 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem70 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem71 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem72 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem73 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem74 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -259,25 +254,49 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem34 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem35 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
-            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
             emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
-            lookUpGostGrup = new DevExpress.XtraEditors.SearchLookUpEdit();
-            searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            txtSeb_all = new CustomTextBoxEx();
+            txtNorm_t = new CustomTextBoxEx();
+            layoutControlItem82 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem83 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbRazmGridEditRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
             customGroupBox2.SuspendLayout();
-            customGroupBox1.SuspendLayout();
-            cgbTkanPurpose.SuspendLayout();
-            cgbKfKach.SuspendLayout();
-            cgbBrakPercent.SuspendLayout();
-            cgbTkanBrak.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataLayoutCommonArticul).BeginInit();
             dataLayoutCommonArticul.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t7.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t6.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx7.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t5.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx6.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t4.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx5.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx4.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t7.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t6.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t5.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t4.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t7.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t6.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t5.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t4.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostGrup.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbuKod_t7.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit7View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cbuKod_t6.Properties).BeginInit();
@@ -328,6 +347,8 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem28).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem58).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem59).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem60).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutSostav).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
@@ -353,7 +374,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem49).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem50).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem51).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem52).BeginInit();
@@ -362,6 +382,31 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem55).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem56).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem57).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem62).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem63).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem64).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem65).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem66).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem67).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem61).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem75).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem76).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem77).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem78).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem81).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem68).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem69).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem70).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem71).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem72).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem73).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
@@ -375,13 +420,12 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem34).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem35).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpGostGrup.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_all.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtNorm_t.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).BeginInit();
             SuspendLayout();
             // 
             // gridEditAdRazm
@@ -457,8 +501,8 @@ namespace SewingProduction.Features.Articul.Forms
             txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost3.Name = "txbSost3";
             txbSost3.ReadOnly = true;
-            txbSost3.Size = new System.Drawing.Size(549, 20);
-            txbSost3.TabIndex = 19;
+            txbSost3.Size = new System.Drawing.Size(550, 20);
+            txbSost3.TabIndex = 20;
             // 
             // txbSost2
             // 
@@ -473,8 +517,8 @@ namespace SewingProduction.Features.Articul.Forms
             txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost2.Name = "txbSost2";
             txbSost2.ReadOnly = true;
-            txbSost2.Size = new System.Drawing.Size(549, 20);
-            txbSost2.TabIndex = 18;
+            txbSost2.Size = new System.Drawing.Size(550, 20);
+            txbSost2.TabIndex = 19;
             // 
             // txbSost
             // 
@@ -489,8 +533,8 @@ namespace SewingProduction.Features.Articul.Forms
             txbSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost.Name = "txbSost";
             txbSost.ReadOnly = true;
-            txbSost.Size = new System.Drawing.Size(549, 20);
-            txbSost.TabIndex = 17;
+            txbSost.Size = new System.Drawing.Size(550, 20);
+            txbSost.TabIndex = 18;
             // 
             // txbOpiGost
             // 
@@ -506,8 +550,8 @@ namespace SewingProduction.Features.Articul.Forms
             txbOpiGost.Multiline = true;
             txbOpiGost.Name = "txbOpiGost";
             txbOpiGost.ReadOnly = true;
-            txbOpiGost.Size = new System.Drawing.Size(721, 44);
-            txbOpiGost.TabIndex = 11;
+            txbOpiGost.Size = new System.Drawing.Size(722, 44);
+            txbOpiGost.TabIndex = 12;
             // 
             // chbArh
             // 
@@ -518,8 +562,8 @@ namespace SewingProduction.Features.Articul.Forms
             chbArh.Location = new System.Drawing.Point(520, 36);
             chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbArh.Name = "chbArh";
-            chbArh.Size = new System.Drawing.Size(216, 20);
-            chbArh.TabIndex = 0;
+            chbArh.Size = new System.Drawing.Size(217, 20);
+            chbArh.TabIndex = 4;
             chbArh.Text = "Архив";
             chbArh.UseVisualStyleBackColor = true;
             // 
@@ -533,7 +577,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbKombIzd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombIzd.Name = "chbKombIzd";
             chbKombIzd.Size = new System.Drawing.Size(162, 20);
-            chbKombIzd.TabIndex = 4;
+            chbKombIzd.TabIndex = 2;
             chbKombIzd.Text = "Комб. изд.";
             chbKombIzd.UseVisualStyleBackColor = true;
             // 
@@ -547,7 +591,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbKombDet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombDet.Name = "chbKombDet";
             chbKombDet.Size = new System.Drawing.Size(162, 20);
-            chbKombDet.TabIndex = 2;
+            chbKombDet.TabIndex = 0;
             chbKombDet.Text = "Комб. дет.";
             chbKombDet.UseVisualStyleBackColor = true;
             // 
@@ -576,11 +620,11 @@ namespace SewingProduction.Features.Articul.Forms
             txbMod.ErrorMessage = null;
             txbMod.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbMod.Location = new System.Drawing.Point(457, 60);
+            txbMod.Location = new System.Drawing.Point(459, 60);
             txbMod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbMod.MinimumSize = new System.Drawing.Size(120, 15);
             txbMod.Name = "txbMod";
-            txbMod.Size = new System.Drawing.Size(135, 24);
+            txbMod.Size = new System.Drawing.Size(134, 24);
             txbMod.TabIndex = 7;
             // 
             // customGroupBox2
@@ -917,920 +961,6 @@ namespace SewingProduction.Features.Articul.Forms
             customButton6.Text = "Несоответствие спр-ка и разд.труда";
             customButton6.UseVisualStyleBackColor = false;
             // 
-            // customGroupBox1
-            // 
-            customGroupBox1.BackColor = System.Drawing.Color.Transparent;
-            customGroupBox1.Controls.Add(txbNormt);
-            customGroupBox1.Controls.Add(cgbTkanPurpose);
-            customGroupBox1.Controls.Add(customLabel20);
-            customGroupBox1.Controls.Add(cgbKfKach);
-            customGroupBox1.Controls.Add(customLabel21);
-            customGroupBox1.Controls.Add(cgbBrakPercent);
-            customGroupBox1.Controls.Add(customLabel22);
-            customGroupBox1.Controls.Add(cgbTkanSeb);
-            customGroupBox1.Controls.Add(customLabel23);
-            customGroupBox1.Controls.Add(cgbTkanNorm);
-            customGroupBox1.Controls.Add(customLabel24);
-            customGroupBox1.Controls.Add(cgbTkanBrak);
-            customGroupBox1.Controls.Add(txbSeb);
-            customGroupBox1.Controls.Add(customLabel30);
-            customGroupBox1.Controls.Add(customLabel25);
-            customGroupBox1.Controls.Add(customLabel31);
-            customGroupBox1.Controls.Add(customLabel26);
-            customGroupBox1.Controls.Add(customLabel32);
-            customGroupBox1.Controls.Add(customLabel27);
-            customGroupBox1.Controls.Add(customLabel33);
-            customGroupBox1.Controls.Add(customLabel28);
-            customGroupBox1.Controls.Add(customLabel34);
-            customGroupBox1.Controls.Add(txbBrakAll);
-            customGroupBox1.Controls.Add(customLabel35);
-            customGroupBox1.Controls.Add(customLabel29);
-            customGroupBox1.Controls.Add(customLabel36);
-            customGroupBox1.Location = new System.Drawing.Point(221, 621);
-            customGroupBox1.Name = "customGroupBox1";
-            customGroupBox1.Size = new System.Drawing.Size(624, 249);
-            customGroupBox1.TabIndex = 40;
-            customGroupBox1.TabStop = false;
-            customGroupBox1.Text = "Затраты на изготовление";
-            // 
-            // txbNormt
-            // 
-            txbNormt.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbNormt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbNormt.ErrorColor = System.Drawing.Color.Red;
-            txbNormt.ErrorMessage = null;
-            txbNormt.Font = new System.Drawing.Font("Arial", 10F);
-            txbNormt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbNormt.Location = new System.Drawing.Point(6, 50);
-            txbNormt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNormt.Name = "txbNormt";
-            txbNormt.ReadOnly = true;
-            txbNormt.Size = new System.Drawing.Size(69, 16);
-            txbNormt.TabIndex = 21;
-            // 
-            // cgbTkanPurpose
-            // 
-            cgbTkanPurpose.BackColor = System.Drawing.Color.Transparent;
-            cgbTkanPurpose.Controls.Add(txbOpis_t7);
-            cgbTkanPurpose.Controls.Add(txbOpis_t6);
-            cgbTkanPurpose.Controls.Add(txbOpis_t1);
-            cgbTkanPurpose.Controls.Add(txbOpis_t5);
-            cgbTkanPurpose.Controls.Add(txbOpis_t2);
-            cgbTkanPurpose.Controls.Add(txbOpis_t4);
-            cgbTkanPurpose.Controls.Add(txbOpis_t3);
-            cgbTkanPurpose.Location = new System.Drawing.Point(347, 22);
-            cgbTkanPurpose.Name = "cgbTkanPurpose";
-            cgbTkanPurpose.Size = new System.Drawing.Size(82, 200);
-            cgbTkanPurpose.TabIndex = 37;
-            cgbTkanPurpose.TabStop = false;
-            cgbTkanPurpose.Text = "назнач.";
-            // 
-            // txbOpis_t7
-            // 
-            txbOpis_t7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpis_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpis_t7.ErrorColor = System.Drawing.Color.Red;
-            txbOpis_t7.ErrorMessage = null;
-            txbOpis_t7.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpis_t7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpis_t7.Location = new System.Drawing.Point(5, 181);
-            txbOpis_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpis_t7.Name = "txbOpis_t7";
-            txbOpis_t7.ReadOnly = true;
-            txbOpis_t7.Size = new System.Drawing.Size(65, 14);
-            txbOpis_t7.TabIndex = 6;
-            // 
-            // txbOpis_t6
-            // 
-            txbOpis_t6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpis_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpis_t6.ErrorColor = System.Drawing.Color.Red;
-            txbOpis_t6.ErrorMessage = null;
-            txbOpis_t6.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpis_t6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpis_t6.Location = new System.Drawing.Point(5, 153);
-            txbOpis_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpis_t6.Name = "txbOpis_t6";
-            txbOpis_t6.ReadOnly = true;
-            txbOpis_t6.Size = new System.Drawing.Size(65, 14);
-            txbOpis_t6.TabIndex = 5;
-            // 
-            // txbOpis_t1
-            // 
-            txbOpis_t1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpis_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpis_t1.ErrorColor = System.Drawing.Color.Red;
-            txbOpis_t1.ErrorMessage = null;
-            txbOpis_t1.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpis_t1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpis_t1.Location = new System.Drawing.Point(5, 17);
-            txbOpis_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpis_t1.Name = "txbOpis_t1";
-            txbOpis_t1.ReadOnly = true;
-            txbOpis_t1.Size = new System.Drawing.Size(65, 14);
-            txbOpis_t1.TabIndex = 0;
-            // 
-            // txbOpis_t5
-            // 
-            txbOpis_t5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpis_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpis_t5.ErrorColor = System.Drawing.Color.Red;
-            txbOpis_t5.ErrorMessage = null;
-            txbOpis_t5.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpis_t5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpis_t5.Location = new System.Drawing.Point(5, 127);
-            txbOpis_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpis_t5.Name = "txbOpis_t5";
-            txbOpis_t5.ReadOnly = true;
-            txbOpis_t5.Size = new System.Drawing.Size(65, 14);
-            txbOpis_t5.TabIndex = 4;
-            // 
-            // txbOpis_t2
-            // 
-            txbOpis_t2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpis_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpis_t2.ErrorColor = System.Drawing.Color.Red;
-            txbOpis_t2.ErrorMessage = null;
-            txbOpis_t2.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpis_t2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpis_t2.Location = new System.Drawing.Point(5, 45);
-            txbOpis_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpis_t2.Name = "txbOpis_t2";
-            txbOpis_t2.ReadOnly = true;
-            txbOpis_t2.Size = new System.Drawing.Size(65, 14);
-            txbOpis_t2.TabIndex = 1;
-            // 
-            // txbOpis_t4
-            // 
-            txbOpis_t4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpis_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpis_t4.ErrorColor = System.Drawing.Color.Red;
-            txbOpis_t4.ErrorMessage = null;
-            txbOpis_t4.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpis_t4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpis_t4.Location = new System.Drawing.Point(5, 100);
-            txbOpis_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpis_t4.Name = "txbOpis_t4";
-            txbOpis_t4.ReadOnly = true;
-            txbOpis_t4.Size = new System.Drawing.Size(65, 14);
-            txbOpis_t4.TabIndex = 3;
-            // 
-            // txbOpis_t3
-            // 
-            txbOpis_t3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpis_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpis_t3.ErrorColor = System.Drawing.Color.Red;
-            txbOpis_t3.ErrorMessage = null;
-            txbOpis_t3.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpis_t3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpis_t3.Location = new System.Drawing.Point(5, 73);
-            txbOpis_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpis_t3.Name = "txbOpis_t3";
-            txbOpis_t3.ReadOnly = true;
-            txbOpis_t3.Size = new System.Drawing.Size(65, 14);
-            txbOpis_t3.TabIndex = 2;
-            // 
-            // customLabel20
-            // 
-            customLabel20.AutoSize = true;
-            customLabel20.BackColor = System.Drawing.Color.Transparent;
-            customLabel20.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel20.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel20.Location = new System.Drawing.Point(266, 39);
-            customLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel20.Name = "customLabel20";
-            customLabel20.Size = new System.Drawing.Size(28, 14);
-            customLabel20.TabIndex = 7;
-            customLabel20.Text = "руб.";
-            // 
-            // cgbKfKach
-            // 
-            cgbKfKach.Controls.Add(txbKfKach7);
-            cgbKfKach.Controls.Add(txbKfKach6);
-            cgbKfKach.Controls.Add(txbKfKach5);
-            cgbKfKach.Controls.Add(txbKfKach4);
-            cgbKfKach.Controls.Add(txbKfKach3);
-            cgbKfKach.Controls.Add(txbKfKach2);
-            cgbKfKach.Controls.Add(txbKfKach1);
-            cgbKfKach.Location = new System.Drawing.Point(299, 22);
-            cgbKfKach.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            cgbKfKach.Name = "cgbKfKach";
-            cgbKfKach.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            cgbKfKach.Size = new System.Drawing.Size(43, 200);
-            cgbKfKach.TabIndex = 23;
-            cgbKfKach.TabStop = false;
-            cgbKfKach.Text = "к-т кач";
-            // 
-            // txbKfKach7
-            // 
-            txbKfKach7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbKfKach7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKfKach7.ErrorColor = System.Drawing.Color.Red;
-            txbKfKach7.ErrorMessage = null;
-            txbKfKach7.Font = new System.Drawing.Font("Arial", 9F);
-            txbKfKach7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbKfKach7.Location = new System.Drawing.Point(5, 180);
-            txbKfKach7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKfKach7.Name = "txbKfKach7";
-            txbKfKach7.ReadOnly = true;
-            txbKfKach7.Size = new System.Drawing.Size(33, 14);
-            txbKfKach7.TabIndex = 6;
-            // 
-            // txbKfKach6
-            // 
-            txbKfKach6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbKfKach6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKfKach6.ErrorColor = System.Drawing.Color.Red;
-            txbKfKach6.ErrorMessage = null;
-            txbKfKach6.Font = new System.Drawing.Font("Arial", 9F);
-            txbKfKach6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbKfKach6.Location = new System.Drawing.Point(5, 152);
-            txbKfKach6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKfKach6.Name = "txbKfKach6";
-            txbKfKach6.ReadOnly = true;
-            txbKfKach6.Size = new System.Drawing.Size(33, 14);
-            txbKfKach6.TabIndex = 5;
-            // 
-            // txbKfKach5
-            // 
-            txbKfKach5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbKfKach5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKfKach5.ErrorColor = System.Drawing.Color.Red;
-            txbKfKach5.ErrorMessage = null;
-            txbKfKach5.Font = new System.Drawing.Font("Arial", 9F);
-            txbKfKach5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbKfKach5.Location = new System.Drawing.Point(5, 126);
-            txbKfKach5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKfKach5.Name = "txbKfKach5";
-            txbKfKach5.ReadOnly = true;
-            txbKfKach5.Size = new System.Drawing.Size(33, 14);
-            txbKfKach5.TabIndex = 4;
-            // 
-            // txbKfKach4
-            // 
-            txbKfKach4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbKfKach4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKfKach4.ErrorColor = System.Drawing.Color.Red;
-            txbKfKach4.ErrorMessage = null;
-            txbKfKach4.Font = new System.Drawing.Font("Arial", 9F);
-            txbKfKach4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbKfKach4.Location = new System.Drawing.Point(5, 99);
-            txbKfKach4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKfKach4.Name = "txbKfKach4";
-            txbKfKach4.ReadOnly = true;
-            txbKfKach4.Size = new System.Drawing.Size(33, 14);
-            txbKfKach4.TabIndex = 3;
-            // 
-            // txbKfKach3
-            // 
-            txbKfKach3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbKfKach3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKfKach3.ErrorColor = System.Drawing.Color.Red;
-            txbKfKach3.ErrorMessage = null;
-            txbKfKach3.Font = new System.Drawing.Font("Arial", 9F);
-            txbKfKach3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbKfKach3.Location = new System.Drawing.Point(5, 72);
-            txbKfKach3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKfKach3.Name = "txbKfKach3";
-            txbKfKach3.ReadOnly = true;
-            txbKfKach3.Size = new System.Drawing.Size(33, 14);
-            txbKfKach3.TabIndex = 2;
-            // 
-            // txbKfKach2
-            // 
-            txbKfKach2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbKfKach2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKfKach2.ErrorColor = System.Drawing.Color.Red;
-            txbKfKach2.ErrorMessage = null;
-            txbKfKach2.Font = new System.Drawing.Font("Arial", 9F);
-            txbKfKach2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbKfKach2.Location = new System.Drawing.Point(5, 44);
-            txbKfKach2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKfKach2.Name = "txbKfKach2";
-            txbKfKach2.ReadOnly = true;
-            txbKfKach2.Size = new System.Drawing.Size(33, 14);
-            txbKfKach2.TabIndex = 1;
-            // 
-            // txbKfKach1
-            // 
-            txbKfKach1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbKfKach1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKfKach1.ErrorColor = System.Drawing.Color.Red;
-            txbKfKach1.ErrorMessage = null;
-            txbKfKach1.Font = new System.Drawing.Font("Arial", 9F);
-            txbKfKach1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbKfKach1.Location = new System.Drawing.Point(5, 16);
-            txbKfKach1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKfKach1.Name = "txbKfKach1";
-            txbKfKach1.ReadOnly = true;
-            txbKfKach1.Size = new System.Drawing.Size(33, 14);
-            txbKfKach1.TabIndex = 0;
-            // 
-            // customLabel21
-            // 
-            customLabel21.AutoSize = true;
-            customLabel21.BackColor = System.Drawing.Color.Transparent;
-            customLabel21.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel21.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel21.Location = new System.Drawing.Point(266, 66);
-            customLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel21.Name = "customLabel21";
-            customLabel21.Size = new System.Drawing.Size(28, 14);
-            customLabel21.TabIndex = 8;
-            customLabel21.Text = "руб.";
-            // 
-            // cgbBrakPercent
-            // 
-            cgbBrakPercent.BackColor = System.Drawing.Color.Transparent;
-            cgbBrakPercent.Controls.Add(txtBrakPercent7);
-            cgbBrakPercent.Controls.Add(txtBrakPercent6);
-            cgbBrakPercent.Controls.Add(txtBrakPercent1);
-            cgbBrakPercent.Controls.Add(txtBrakPercent5);
-            cgbBrakPercent.Controls.Add(txtBrakPercent2);
-            cgbBrakPercent.Controls.Add(txtBrakPercent4);
-            cgbBrakPercent.Controls.Add(txtBrakPercent3);
-            cgbBrakPercent.Location = new System.Drawing.Point(525, 22);
-            cgbBrakPercent.Name = "cgbBrakPercent";
-            cgbBrakPercent.Size = new System.Drawing.Size(75, 204);
-            cgbBrakPercent.TabIndex = 37;
-            cgbBrakPercent.TabStop = false;
-            cgbBrakPercent.Text = "%";
-            // 
-            // txtBrakPercent7
-            // 
-            txtBrakPercent7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtBrakPercent7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtBrakPercent7.ErrorColor = System.Drawing.Color.Red;
-            txtBrakPercent7.ErrorMessage = null;
-            txtBrakPercent7.Font = new System.Drawing.Font("Arial", 9F);
-            txtBrakPercent7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtBrakPercent7.Location = new System.Drawing.Point(3, 182);
-            txtBrakPercent7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent7.Name = "txtBrakPercent7";
-            txtBrakPercent7.ReadOnly = true;
-            txtBrakPercent7.Size = new System.Drawing.Size(53, 14);
-            txtBrakPercent7.TabIndex = 6;
-            // 
-            // txtBrakPercent6
-            // 
-            txtBrakPercent6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtBrakPercent6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtBrakPercent6.ErrorColor = System.Drawing.Color.Red;
-            txtBrakPercent6.ErrorMessage = null;
-            txtBrakPercent6.Font = new System.Drawing.Font("Arial", 9F);
-            txtBrakPercent6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtBrakPercent6.Location = new System.Drawing.Point(3, 154);
-            txtBrakPercent6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent6.Name = "txtBrakPercent6";
-            txtBrakPercent6.ReadOnly = true;
-            txtBrakPercent6.Size = new System.Drawing.Size(53, 14);
-            txtBrakPercent6.TabIndex = 5;
-            // 
-            // txtBrakPercent1
-            // 
-            txtBrakPercent1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtBrakPercent1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtBrakPercent1.ErrorColor = System.Drawing.Color.Red;
-            txtBrakPercent1.ErrorMessage = null;
-            txtBrakPercent1.Font = new System.Drawing.Font("Arial", 9F);
-            txtBrakPercent1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtBrakPercent1.Location = new System.Drawing.Point(4, 18);
-            txtBrakPercent1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent1.Name = "txtBrakPercent1";
-            txtBrakPercent1.ReadOnly = true;
-            txtBrakPercent1.Size = new System.Drawing.Size(53, 14);
-            txtBrakPercent1.TabIndex = 0;
-            // 
-            // txtBrakPercent5
-            // 
-            txtBrakPercent5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtBrakPercent5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtBrakPercent5.ErrorColor = System.Drawing.Color.Red;
-            txtBrakPercent5.ErrorMessage = null;
-            txtBrakPercent5.Font = new System.Drawing.Font("Arial", 9F);
-            txtBrakPercent5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtBrakPercent5.Location = new System.Drawing.Point(3, 128);
-            txtBrakPercent5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent5.Name = "txtBrakPercent5";
-            txtBrakPercent5.ReadOnly = true;
-            txtBrakPercent5.Size = new System.Drawing.Size(53, 14);
-            txtBrakPercent5.TabIndex = 4;
-            // 
-            // txtBrakPercent2
-            // 
-            txtBrakPercent2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtBrakPercent2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtBrakPercent2.ErrorColor = System.Drawing.Color.Red;
-            txtBrakPercent2.ErrorMessage = null;
-            txtBrakPercent2.Font = new System.Drawing.Font("Arial", 9F);
-            txtBrakPercent2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtBrakPercent2.Location = new System.Drawing.Point(4, 46);
-            txtBrakPercent2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent2.Name = "txtBrakPercent2";
-            txtBrakPercent2.ReadOnly = true;
-            txtBrakPercent2.Size = new System.Drawing.Size(53, 14);
-            txtBrakPercent2.TabIndex = 1;
-            // 
-            // txtBrakPercent4
-            // 
-            txtBrakPercent4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtBrakPercent4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtBrakPercent4.ErrorColor = System.Drawing.Color.Red;
-            txtBrakPercent4.ErrorMessage = null;
-            txtBrakPercent4.Font = new System.Drawing.Font("Arial", 9F);
-            txtBrakPercent4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtBrakPercent4.Location = new System.Drawing.Point(2, 101);
-            txtBrakPercent4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent4.Name = "txtBrakPercent4";
-            txtBrakPercent4.ReadOnly = true;
-            txtBrakPercent4.Size = new System.Drawing.Size(53, 14);
-            txtBrakPercent4.TabIndex = 3;
-            // 
-            // txtBrakPercent3
-            // 
-            txtBrakPercent3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtBrakPercent3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtBrakPercent3.ErrorColor = System.Drawing.Color.Red;
-            txtBrakPercent3.ErrorMessage = null;
-            txtBrakPercent3.Font = new System.Drawing.Font("Arial", 9F);
-            txtBrakPercent3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtBrakPercent3.Location = new System.Drawing.Point(3, 74);
-            txtBrakPercent3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent3.Name = "txtBrakPercent3";
-            txtBrakPercent3.ReadOnly = true;
-            txtBrakPercent3.Size = new System.Drawing.Size(53, 14);
-            txtBrakPercent3.TabIndex = 2;
-            // 
-            // customLabel22
-            // 
-            customLabel22.AutoSize = true;
-            customLabel22.BackColor = System.Drawing.Color.Transparent;
-            customLabel22.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel22.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel22.Location = new System.Drawing.Point(266, 94);
-            customLabel22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel22.Name = "customLabel22";
-            customLabel22.Size = new System.Drawing.Size(28, 14);
-            customLabel22.TabIndex = 9;
-            customLabel22.Text = "руб.";
-            // 
-            // cgbTkanSeb
-            // 
-            cgbTkanSeb.BackColor = System.Drawing.Color.Transparent;
-            cgbTkanSeb.Location = new System.Drawing.Point(186, 22);
-            cgbTkanSeb.Name = "cgbTkanSeb";
-            cgbTkanSeb.Size = new System.Drawing.Size(74, 203);
-            cgbTkanSeb.TabIndex = 36;
-            cgbTkanSeb.TabStop = false;
-            // 
-            // customLabel23
-            // 
-            customLabel23.AutoSize = true;
-            customLabel23.BackColor = System.Drawing.Color.Transparent;
-            customLabel23.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel23.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel23.Location = new System.Drawing.Point(267, 122);
-            customLabel23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel23.Name = "customLabel23";
-            customLabel23.Size = new System.Drawing.Size(28, 14);
-            customLabel23.TabIndex = 10;
-            customLabel23.Text = "руб.";
-            // 
-            // cgbTkanNorm
-            // 
-            cgbTkanNorm.BackColor = System.Drawing.Color.Transparent;
-            cgbTkanNorm.Location = new System.Drawing.Point(83, 22);
-            cgbTkanNorm.Name = "cgbTkanNorm";
-            cgbTkanNorm.Size = new System.Drawing.Size(71, 199);
-            cgbTkanNorm.TabIndex = 35;
-            cgbTkanNorm.TabStop = false;
-            // 
-            // customLabel24
-            // 
-            customLabel24.AutoSize = true;
-            customLabel24.BackColor = System.Drawing.Color.Transparent;
-            customLabel24.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel24.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel24.Location = new System.Drawing.Point(266, 149);
-            customLabel24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel24.Name = "customLabel24";
-            customLabel24.Size = new System.Drawing.Size(28, 14);
-            customLabel24.TabIndex = 11;
-            customLabel24.Text = "руб.";
-            // 
-            // cgbTkanBrak
-            // 
-            cgbTkanBrak.BackColor = System.Drawing.Color.Transparent;
-            cgbTkanBrak.Controls.Add(txbBrak7);
-            cgbTkanBrak.Controls.Add(txbBrak1);
-            cgbTkanBrak.Controls.Add(txbBrak6);
-            cgbTkanBrak.Controls.Add(txbBrak2);
-            cgbTkanBrak.Controls.Add(txbBrak5);
-            cgbTkanBrak.Controls.Add(txbBrak3);
-            cgbTkanBrak.Controls.Add(txbBrak4);
-            cgbTkanBrak.Location = new System.Drawing.Point(455, 22);
-            cgbTkanBrak.Name = "cgbTkanBrak";
-            cgbTkanBrak.Size = new System.Drawing.Size(64, 206);
-            cgbTkanBrak.TabIndex = 34;
-            cgbTkanBrak.TabStop = false;
-            cgbTkanBrak.Text = "Брак,м";
-            // 
-            // txbBrak7
-            // 
-            txbBrak7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrak7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrak7.ErrorColor = System.Drawing.Color.Red;
-            txbBrak7.ErrorMessage = null;
-            txbBrak7.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrak7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrak7.Location = new System.Drawing.Point(5, 182);
-            txbBrak7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak7.Name = "txbBrak7";
-            txbBrak7.ReadOnly = true;
-            txbBrak7.Size = new System.Drawing.Size(53, 14);
-            txbBrak7.TabIndex = 6;
-            // 
-            // txbBrak1
-            // 
-            txbBrak1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrak1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrak1.ErrorColor = System.Drawing.Color.Red;
-            txbBrak1.ErrorMessage = null;
-            txbBrak1.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrak1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrak1.Location = new System.Drawing.Point(5, 18);
-            txbBrak1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak1.Name = "txbBrak1";
-            txbBrak1.ReadOnly = true;
-            txbBrak1.Size = new System.Drawing.Size(53, 14);
-            txbBrak1.TabIndex = 0;
-            // 
-            // txbBrak6
-            // 
-            txbBrak6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrak6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrak6.ErrorColor = System.Drawing.Color.Red;
-            txbBrak6.ErrorMessage = null;
-            txbBrak6.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrak6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrak6.Location = new System.Drawing.Point(5, 154);
-            txbBrak6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak6.Name = "txbBrak6";
-            txbBrak6.ReadOnly = true;
-            txbBrak6.Size = new System.Drawing.Size(53, 14);
-            txbBrak6.TabIndex = 5;
-            // 
-            // txbBrak2
-            // 
-            txbBrak2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrak2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrak2.ErrorColor = System.Drawing.Color.Red;
-            txbBrak2.ErrorMessage = null;
-            txbBrak2.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrak2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrak2.Location = new System.Drawing.Point(5, 46);
-            txbBrak2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak2.Name = "txbBrak2";
-            txbBrak2.ReadOnly = true;
-            txbBrak2.Size = new System.Drawing.Size(53, 14);
-            txbBrak2.TabIndex = 1;
-            // 
-            // txbBrak5
-            // 
-            txbBrak5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrak5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrak5.ErrorColor = System.Drawing.Color.Red;
-            txbBrak5.ErrorMessage = null;
-            txbBrak5.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrak5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrak5.Location = new System.Drawing.Point(5, 128);
-            txbBrak5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak5.Name = "txbBrak5";
-            txbBrak5.ReadOnly = true;
-            txbBrak5.Size = new System.Drawing.Size(53, 14);
-            txbBrak5.TabIndex = 4;
-            // 
-            // txbBrak3
-            // 
-            txbBrak3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrak3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrak3.ErrorColor = System.Drawing.Color.Red;
-            txbBrak3.ErrorMessage = null;
-            txbBrak3.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrak3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrak3.Location = new System.Drawing.Point(5, 74);
-            txbBrak3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak3.Name = "txbBrak3";
-            txbBrak3.ReadOnly = true;
-            txbBrak3.Size = new System.Drawing.Size(53, 14);
-            txbBrak3.TabIndex = 2;
-            // 
-            // txbBrak4
-            // 
-            txbBrak4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrak4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrak4.ErrorColor = System.Drawing.Color.Red;
-            txbBrak4.ErrorMessage = null;
-            txbBrak4.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrak4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrak4.Location = new System.Drawing.Point(5, 101);
-            txbBrak4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak4.Name = "txbBrak4";
-            txbBrak4.ReadOnly = true;
-            txbBrak4.Size = new System.Drawing.Size(53, 14);
-            txbBrak4.TabIndex = 3;
-            // 
-            // txbSeb
-            // 
-            txbSeb.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbSeb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSeb.ErrorColor = System.Drawing.Color.Red;
-            txbSeb.ErrorMessage = null;
-            txbSeb.Font = new System.Drawing.Font("Arial", 10F);
-            txbSeb.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbSeb.Location = new System.Drawing.Point(6, 90);
-            txbSeb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSeb.Name = "txbSeb";
-            txbSeb.ReadOnly = true;
-            txbSeb.Size = new System.Drawing.Size(69, 16);
-            txbSeb.TabIndex = 22;
-            // 
-            // customLabel30
-            // 
-            customLabel30.AutoSize = true;
-            customLabel30.BackColor = System.Drawing.Color.Transparent;
-            customLabel30.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel30.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel30.Location = new System.Drawing.Point(160, 202);
-            customLabel30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel30.Name = "customLabel30";
-            customLabel30.Size = new System.Drawing.Size(18, 14);
-            customLabel30.TabIndex = 33;
-            customLabel30.Text = "м.";
-            // 
-            // customLabel25
-            // 
-            customLabel25.AutoSize = true;
-            customLabel25.BackColor = System.Drawing.Color.Transparent;
-            customLabel25.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel25.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel25.Location = new System.Drawing.Point(266, 177);
-            customLabel25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel25.Name = "customLabel25";
-            customLabel25.Size = new System.Drawing.Size(28, 14);
-            customLabel25.TabIndex = 12;
-            customLabel25.Text = "руб.";
-            // 
-            // customLabel31
-            // 
-            customLabel31.AutoSize = true;
-            customLabel31.BackColor = System.Drawing.Color.Transparent;
-            customLabel31.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel31.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel31.Location = new System.Drawing.Point(160, 174);
-            customLabel31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel31.Name = "customLabel31";
-            customLabel31.Size = new System.Drawing.Size(18, 14);
-            customLabel31.TabIndex = 32;
-            customLabel31.Text = "м.";
-            // 
-            // customLabel26
-            // 
-            customLabel26.AutoSize = true;
-            customLabel26.BackColor = System.Drawing.Color.Transparent;
-            customLabel26.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel26.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel26.Location = new System.Drawing.Point(266, 205);
-            customLabel26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel26.Name = "customLabel26";
-            customLabel26.Size = new System.Drawing.Size(28, 14);
-            customLabel26.TabIndex = 13;
-            customLabel26.Text = "руб.";
-            // 
-            // customLabel32
-            // 
-            customLabel32.AutoSize = true;
-            customLabel32.BackColor = System.Drawing.Color.Transparent;
-            customLabel32.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel32.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel32.Location = new System.Drawing.Point(160, 145);
-            customLabel32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel32.Name = "customLabel32";
-            customLabel32.Size = new System.Drawing.Size(18, 14);
-            customLabel32.TabIndex = 31;
-            customLabel32.Text = "м.";
-            // 
-            // customLabel27
-            // 
-            customLabel27.AutoSize = true;
-            customLabel27.BackColor = System.Drawing.Color.Transparent;
-            customLabel27.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel27.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel27.Location = new System.Drawing.Point(6, 34);
-            customLabel27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel27.Name = "customLabel27";
-            customLabel27.Size = new System.Drawing.Size(54, 14);
-            customLabel27.TabIndex = 24;
-            customLabel27.Text = "Норма, м";
-            // 
-            // customLabel33
-            // 
-            customLabel33.AutoSize = true;
-            customLabel33.BackColor = System.Drawing.Color.Transparent;
-            customLabel33.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel33.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel33.Location = new System.Drawing.Point(160, 119);
-            customLabel33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel33.Name = "customLabel33";
-            customLabel33.Size = new System.Drawing.Size(18, 14);
-            customLabel33.TabIndex = 30;
-            customLabel33.Text = "м.";
-            // 
-            // customLabel28
-            // 
-            customLabel28.AutoSize = true;
-            customLabel28.BackColor = System.Drawing.Color.Transparent;
-            customLabel28.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel28.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel28.Location = new System.Drawing.Point(6, 72);
-            customLabel28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel28.Name = "customLabel28";
-            customLabel28.Size = new System.Drawing.Size(28, 14);
-            customLabel28.TabIndex = 25;
-            customLabel28.Text = "руб.";
-            // 
-            // customLabel34
-            // 
-            customLabel34.AutoSize = true;
-            customLabel34.BackColor = System.Drawing.Color.Transparent;
-            customLabel34.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel34.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel34.Location = new System.Drawing.Point(160, 91);
-            customLabel34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel34.Name = "customLabel34";
-            customLabel34.Size = new System.Drawing.Size(18, 14);
-            customLabel34.TabIndex = 29;
-            customLabel34.Text = "м.";
-            // 
-            // txbBrakAll
-            // 
-            txbBrakAll.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbBrakAll.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbBrakAll.ErrorColor = System.Drawing.Color.Red;
-            txbBrakAll.ErrorMessage = null;
-            txbBrakAll.Font = new System.Drawing.Font("Arial", 9F);
-            txbBrakAll.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbBrakAll.Location = new System.Drawing.Point(461, 235);
-            txbBrakAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrakAll.Name = "txbBrakAll";
-            txbBrakAll.ReadOnly = true;
-            txbBrakAll.Size = new System.Drawing.Size(53, 14);
-            txbBrakAll.TabIndex = 7;
-            // 
-            // customLabel35
-            // 
-            customLabel35.AutoSize = true;
-            customLabel35.BackColor = System.Drawing.Color.Transparent;
-            customLabel35.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel35.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel35.Location = new System.Drawing.Point(160, 63);
-            customLabel35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel35.Name = "customLabel35";
-            customLabel35.Size = new System.Drawing.Size(18, 14);
-            customLabel35.TabIndex = 28;
-            customLabel35.Text = "м.";
-            // 
-            // customLabel29
-            // 
-            customLabel29.AutoSize = true;
-            customLabel29.BackColor = System.Drawing.Color.Transparent;
-            customLabel29.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel29.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel29.Location = new System.Drawing.Point(520, 235);
-            customLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel29.Name = "customLabel29";
-            customLabel29.Size = new System.Drawing.Size(28, 14);
-            customLabel29.TabIndex = 26;
-            customLabel29.Text = "руб.";
-            // 
-            // customLabel36
-            // 
-            customLabel36.AutoSize = true;
-            customLabel36.BackColor = System.Drawing.Color.Transparent;
-            customLabel36.Font = new System.Drawing.Font("Arial", 8F);
-            customLabel36.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel36.Location = new System.Drawing.Point(160, 36);
-            customLabel36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel36.Name = "customLabel36";
-            customLabel36.Size = new System.Drawing.Size(18, 14);
-            customLabel36.TabIndex = 27;
-            customLabel36.Text = "м.";
-            // 
-            // txtSeb_t7
-            // 
-            txtSeb_t7.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtSeb_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtSeb_t7.ErrorColor = System.Drawing.Color.Red;
-            txtSeb_t7.ErrorMessage = null;
-            txtSeb_t7.Font = new System.Drawing.Font("Arial", 9F);
-            txtSeb_t7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtSeb_t7.Location = new System.Drawing.Point(200, 547);
-            txtSeb_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtSeb_t7.Name = "txtSeb_t7";
-            txtSeb_t7.ReadOnly = true;
-            txtSeb_t7.Size = new System.Drawing.Size(175, 20);
-            txtSeb_t7.TabIndex = 33;
-            // 
-            // txtSeb_t6
-            // 
-            txtSeb_t6.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtSeb_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtSeb_t6.ErrorColor = System.Drawing.Color.Red;
-            txtSeb_t6.ErrorMessage = null;
-            txtSeb_t6.Font = new System.Drawing.Font("Arial", 9F);
-            txtSeb_t6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtSeb_t6.Location = new System.Drawing.Point(200, 523);
-            txtSeb_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtSeb_t6.Name = "txtSeb_t6";
-            txtSeb_t6.ReadOnly = true;
-            txtSeb_t6.Size = new System.Drawing.Size(175, 20);
-            txtSeb_t6.TabIndex = 32;
-            // 
-            // txtSeb_t1
-            // 
-            txtSeb_t1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtSeb_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtSeb_t1.ErrorColor = System.Drawing.Color.Red;
-            txtSeb_t1.ErrorMessage = null;
-            txtSeb_t1.Font = new System.Drawing.Font("Arial", 9F);
-            txtSeb_t1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtSeb_t1.Location = new System.Drawing.Point(200, 403);
-            txtSeb_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtSeb_t1.Name = "txtSeb_t1";
-            txtSeb_t1.ReadOnly = true;
-            txtSeb_t1.Size = new System.Drawing.Size(175, 20);
-            txtSeb_t1.TabIndex = 27;
-            // 
-            // txtSeb_t5
-            // 
-            txtSeb_t5.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtSeb_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtSeb_t5.ErrorColor = System.Drawing.Color.Red;
-            txtSeb_t5.ErrorMessage = null;
-            txtSeb_t5.Font = new System.Drawing.Font("Arial", 9F);
-            txtSeb_t5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtSeb_t5.Location = new System.Drawing.Point(200, 499);
-            txtSeb_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtSeb_t5.Name = "txtSeb_t5";
-            txtSeb_t5.ReadOnly = true;
-            txtSeb_t5.Size = new System.Drawing.Size(175, 20);
-            txtSeb_t5.TabIndex = 31;
-            // 
-            // txtSeb_t2
-            // 
-            txtSeb_t2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtSeb_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtSeb_t2.ErrorColor = System.Drawing.Color.Red;
-            txtSeb_t2.ErrorMessage = null;
-            txtSeb_t2.Font = new System.Drawing.Font("Arial", 9F);
-            txtSeb_t2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtSeb_t2.Location = new System.Drawing.Point(200, 427);
-            txtSeb_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtSeb_t2.Name = "txtSeb_t2";
-            txtSeb_t2.ReadOnly = true;
-            txtSeb_t2.Size = new System.Drawing.Size(175, 20);
-            txtSeb_t2.TabIndex = 28;
-            // 
-            // txtSeb_t4
-            // 
-            txtSeb_t4.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtSeb_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtSeb_t4.ErrorColor = System.Drawing.Color.Red;
-            txtSeb_t4.ErrorMessage = null;
-            txtSeb_t4.Font = new System.Drawing.Font("Arial", 9F);
-            txtSeb_t4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtSeb_t4.Location = new System.Drawing.Point(200, 475);
-            txtSeb_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtSeb_t4.Name = "txtSeb_t4";
-            txtSeb_t4.ReadOnly = true;
-            txtSeb_t4.Size = new System.Drawing.Size(175, 20);
-            txtSeb_t4.TabIndex = 30;
-            // 
-            // txtSeb_t3
-            // 
-            txtSeb_t3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txtSeb_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txtSeb_t3.ErrorColor = System.Drawing.Color.Red;
-            txtSeb_t3.ErrorMessage = null;
-            txtSeb_t3.Font = new System.Drawing.Font("Arial", 9F);
-            txtSeb_t3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txtSeb_t3.Location = new System.Drawing.Point(200, 451);
-            txtSeb_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtSeb_t3.Name = "txtSeb_t3";
-            txtSeb_t3.ReadOnly = true;
-            txtSeb_t3.Size = new System.Drawing.Size(175, 20);
-            txtSeb_t3.TabIndex = 29;
-            // 
             // cbTM
             // 
             cbTM.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
@@ -1839,7 +969,7 @@ namespace SewingProduction.Features.Articul.Forms
             cbTM.FormattingEnabled = true;
             cbTM.Location = new System.Drawing.Point(326, 60);
             cbTM.Name = "cbTM";
-            cbTM.Size = new System.Drawing.Size(58, 24);
+            cbTM.Size = new System.Drawing.Size(60, 24);
             cbTM.TabIndex = 6;
             // 
             // cbGrupMen
@@ -1848,10 +978,10 @@ namespace SewingProduction.Features.Articul.Forms
             cbGrupMen.Font = new System.Drawing.Font("Arial", 10F);
             cbGrupMen.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbGrupMen.FormattingEnabled = true;
-            cbGrupMen.Location = new System.Drawing.Point(148, 162);
+            cbGrupMen.Location = new System.Drawing.Point(130, 162);
             cbGrupMen.Name = "cbGrupMen";
-            cbGrupMen.Size = new System.Drawing.Size(588, 24);
-            cbGrupMen.TabIndex = 12;
+            cbGrupMen.Size = new System.Drawing.Size(607, 24);
+            cbGrupMen.TabIndex = 13;
             // 
             // cbCountry
             // 
@@ -1859,10 +989,10 @@ namespace SewingProduction.Features.Articul.Forms
             cbCountry.Font = new System.Drawing.Font("Arial", 10F);
             cbCountry.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbCountry.FormattingEnabled = true;
-            cbCountry.Location = new System.Drawing.Point(148, 212);
+            cbCountry.Location = new System.Drawing.Point(130, 212);
             cbCountry.Name = "cbCountry";
-            cbCountry.Size = new System.Drawing.Size(588, 24);
-            cbCountry.TabIndex = 16;
+            cbCountry.Size = new System.Drawing.Size(607, 24);
+            cbCountry.TabIndex = 17;
             // 
             // cbAssort
             // 
@@ -1870,10 +1000,10 @@ namespace SewingProduction.Features.Articul.Forms
             cbAssort.Font = new System.Drawing.Font("Arial", 10F);
             cbAssort.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbAssort.FormattingEnabled = true;
-            cbAssort.Location = new System.Drawing.Point(280, 187);
+            cbAssort.Location = new System.Drawing.Point(262, 187);
             cbAssort.Name = "cbAssort";
-            cbAssort.Size = new System.Drawing.Size(129, 24);
-            cbAssort.TabIndex = 14;
+            cbAssort.Size = new System.Drawing.Size(128, 24);
+            cbAssort.TabIndex = 15;
             // 
             // cbSeason
             // 
@@ -1881,7 +1011,7 @@ namespace SewingProduction.Features.Articul.Forms
             cbSeason.Font = new System.Drawing.Font("Arial", 10F);
             cbSeason.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbSeason.FormattingEnabled = true;
-            cbSeason.Location = new System.Drawing.Point(596, 60);
+            cbSeason.Location = new System.Drawing.Point(597, 60);
             cbSeason.Name = "cbSeason";
             cbSeason.Size = new System.Drawing.Size(140, 24);
             cbSeason.TabIndex = 8;
@@ -1999,6 +1129,38 @@ namespace SewingProduction.Features.Articul.Forms
             // dataLayoutCommonArticul
             // 
             dataLayoutCommonArticul.AccessibleRole = System.Windows.Forms.AccessibleRole.Pane;
+            dataLayoutCommonArticul.Controls.Add(txtSeb_all);
+            dataLayoutCommonArticul.Controls.Add(txtNorm_t);
+            dataLayoutCommonArticul.Controls.Add(txtOpis_t7);
+            dataLayoutCommonArticul.Controls.Add(txtOpis_t6);
+            dataLayoutCommonArticul.Controls.Add(customTextBoxEx7);
+            dataLayoutCommonArticul.Controls.Add(txtOpis_t5);
+            dataLayoutCommonArticul.Controls.Add(customTextBoxEx6);
+            dataLayoutCommonArticul.Controls.Add(txtOpis_t4);
+            dataLayoutCommonArticul.Controls.Add(txtOpis_t3);
+            dataLayoutCommonArticul.Controls.Add(customTextBoxEx5);
+            dataLayoutCommonArticul.Controls.Add(txtOpis_t2);
+            dataLayoutCommonArticul.Controls.Add(txtOpis_t1);
+            dataLayoutCommonArticul.Controls.Add(customTextBoxEx4);
+            dataLayoutCommonArticul.Controls.Add(customTextBoxEx3);
+            dataLayoutCommonArticul.Controls.Add(txtBrak_t7);
+            dataLayoutCommonArticul.Controls.Add(customTextBoxEx2);
+            dataLayoutCommonArticul.Controls.Add(txtBrak_t6);
+            dataLayoutCommonArticul.Controls.Add(customTextBoxEx1);
+            dataLayoutCommonArticul.Controls.Add(txtBrak_t5);
+            dataLayoutCommonArticul.Controls.Add(txtBrak_t4);
+            dataLayoutCommonArticul.Controls.Add(txtBrak_t3);
+            dataLayoutCommonArticul.Controls.Add(txtSeb_t7);
+            dataLayoutCommonArticul.Controls.Add(txtBrak_t2);
+            dataLayoutCommonArticul.Controls.Add(txtSeb_t6);
+            dataLayoutCommonArticul.Controls.Add(txtBrak_t1);
+            dataLayoutCommonArticul.Controls.Add(txtSeb_t5);
+            dataLayoutCommonArticul.Controls.Add(txtSeb_t4);
+            dataLayoutCommonArticul.Controls.Add(txtSeb_t3);
+            dataLayoutCommonArticul.Controls.Add(customLabel2);
+            dataLayoutCommonArticul.Controls.Add(txtSeb_t2);
+            dataLayoutCommonArticul.Controls.Add(lookUpGostGrup);
+            dataLayoutCommonArticul.Controls.Add(txtSeb_t1);
             dataLayoutCommonArticul.Controls.Add(chbKruj);
             dataLayoutCommonArticul.Controls.Add(cbuKod_t7);
             dataLayoutCommonArticul.Controls.Add(cbuKod_t6);
@@ -2011,17 +1173,10 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutCommonArticul.Controls.Add(txbNorm_t5);
             dataLayoutCommonArticul.Controls.Add(txbNorm_t4);
             dataLayoutCommonArticul.Controls.Add(txbNorm_t3);
-            dataLayoutCommonArticul.Controls.Add(txtSeb_t7);
             dataLayoutCommonArticul.Controls.Add(txbNorm_t2);
             dataLayoutCommonArticul.Controls.Add(txbNorm_t1);
-            dataLayoutCommonArticul.Controls.Add(txtSeb_t6);
             dataLayoutCommonArticul.Controls.Add(cbTkan);
-            dataLayoutCommonArticul.Controls.Add(txtSeb_t5);
-            dataLayoutCommonArticul.Controls.Add(txtSeb_t1);
-            dataLayoutCommonArticul.Controls.Add(txtSeb_t2);
-            dataLayoutCommonArticul.Controls.Add(txtSeb_t4);
             dataLayoutCommonArticul.Controls.Add(customLabel1);
-            dataLayoutCommonArticul.Controls.Add(txtSeb_t3);
             dataLayoutCommonArticul.Controls.Add(txbAssort);
             dataLayoutCommonArticul.Controls.Add(txbGostId);
             dataLayoutCommonArticul.Controls.Add(lookUpGost);
@@ -2050,13 +1205,475 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutCommonArticul.Controls.Add(txbMod);
             dataLayoutCommonArticul.Controls.Add(cbTM);
             dataLayoutCommonArticul.Controls.Add(cbuKod_t1);
-            dataLayoutCommonArticul.Location = new System.Drawing.Point(329, 9);
+            dataLayoutCommonArticul.Location = new System.Drawing.Point(329, -2);
             dataLayoutCommonArticul.Name = "dataLayoutCommonArticul";
-            dataLayoutCommonArticul.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-745, 355, 650, 636);
+            dataLayoutCommonArticul.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-722, 275, 650, 636);
             dataLayoutCommonArticul.Root = Root;
-            dataLayoutCommonArticul.Size = new System.Drawing.Size(761, 596);
+            dataLayoutCommonArticul.Size = new System.Drawing.Size(762, 660);
             dataLayoutCommonArticul.TabIndex = 46;
             dataLayoutCommonArticul.Text = "dataLayoutControl1";
+            // 
+            // txtOpis_t7
+            // 
+            txtOpis_t7.Location = new System.Drawing.Point(335, 623);
+            txtOpis_t7.Name = "txtOpis_t7";
+            txtOpis_t7.ObjectName = null;
+            txtOpis_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtOpis_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtOpis_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtOpis_t7.Properties.Appearance.Options.UseBackColor = true;
+            txtOpis_t7.Properties.Appearance.Options.UseFont = true;
+            txtOpis_t7.Properties.Appearance.Options.UseForeColor = true;
+            txtOpis_t7.Properties.ReadOnly = true;
+            txtOpis_t7.Size = new System.Drawing.Size(90, 22);
+            txtOpis_t7.StyleController = dataLayoutCommonArticul;
+            txtOpis_t7.TabIndex = 54;
+            // 
+            // txtOpis_t6
+            // 
+            txtOpis_t6.Location = new System.Drawing.Point(335, 597);
+            txtOpis_t6.Name = "txtOpis_t6";
+            txtOpis_t6.ObjectName = null;
+            txtOpis_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtOpis_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtOpis_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtOpis_t6.Properties.Appearance.Options.UseBackColor = true;
+            txtOpis_t6.Properties.Appearance.Options.UseFont = true;
+            txtOpis_t6.Properties.Appearance.Options.UseForeColor = true;
+            txtOpis_t6.Properties.ReadOnly = true;
+            txtOpis_t6.Size = new System.Drawing.Size(90, 22);
+            txtOpis_t6.StyleController = dataLayoutCommonArticul;
+            txtOpis_t6.TabIndex = 53;
+            // 
+            // customTextBoxEx7
+            // 
+            customTextBoxEx7.Location = new System.Drawing.Point(255, 623);
+            customTextBoxEx7.Name = "customTextBoxEx7";
+            customTextBoxEx7.ObjectName = null;
+            customTextBoxEx7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxEx7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxEx7.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx7.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx7.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx7.Size = new System.Drawing.Size(70, 22);
+            customTextBoxEx7.StyleController = dataLayoutCommonArticul;
+            customTextBoxEx7.TabIndex = 56;
+            // 
+            // txtOpis_t5
+            // 
+            txtOpis_t5.Location = new System.Drawing.Point(335, 571);
+            txtOpis_t5.Name = "txtOpis_t5";
+            txtOpis_t5.ObjectName = null;
+            txtOpis_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtOpis_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtOpis_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtOpis_t5.Properties.Appearance.Options.UseBackColor = true;
+            txtOpis_t5.Properties.Appearance.Options.UseFont = true;
+            txtOpis_t5.Properties.Appearance.Options.UseForeColor = true;
+            txtOpis_t5.Properties.ReadOnly = true;
+            txtOpis_t5.Size = new System.Drawing.Size(90, 22);
+            txtOpis_t5.StyleController = dataLayoutCommonArticul;
+            txtOpis_t5.TabIndex = 52;
+            // 
+            // customTextBoxEx6
+            // 
+            customTextBoxEx6.Location = new System.Drawing.Point(255, 597);
+            customTextBoxEx6.Name = "customTextBoxEx6";
+            customTextBoxEx6.ObjectName = null;
+            customTextBoxEx6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxEx6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxEx6.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx6.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx6.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx6.Size = new System.Drawing.Size(70, 22);
+            customTextBoxEx6.StyleController = dataLayoutCommonArticul;
+            customTextBoxEx6.TabIndex = 55;
+            // 
+            // txtOpis_t4
+            // 
+            txtOpis_t4.Location = new System.Drawing.Point(335, 545);
+            txtOpis_t4.Name = "txtOpis_t4";
+            txtOpis_t4.ObjectName = null;
+            txtOpis_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtOpis_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtOpis_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtOpis_t4.Properties.Appearance.Options.UseBackColor = true;
+            txtOpis_t4.Properties.Appearance.Options.UseFont = true;
+            txtOpis_t4.Properties.Appearance.Options.UseForeColor = true;
+            txtOpis_t4.Properties.ReadOnly = true;
+            txtOpis_t4.Size = new System.Drawing.Size(90, 22);
+            txtOpis_t4.StyleController = dataLayoutCommonArticul;
+            txtOpis_t4.TabIndex = 51;
+            // 
+            // txtOpis_t3
+            // 
+            txtOpis_t3.Location = new System.Drawing.Point(335, 519);
+            txtOpis_t3.Name = "txtOpis_t3";
+            txtOpis_t3.ObjectName = null;
+            txtOpis_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtOpis_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtOpis_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtOpis_t3.Properties.Appearance.Options.UseBackColor = true;
+            txtOpis_t3.Properties.Appearance.Options.UseFont = true;
+            txtOpis_t3.Properties.Appearance.Options.UseForeColor = true;
+            txtOpis_t3.Properties.ReadOnly = true;
+            txtOpis_t3.Size = new System.Drawing.Size(90, 22);
+            txtOpis_t3.StyleController = dataLayoutCommonArticul;
+            txtOpis_t3.TabIndex = 50;
+            // 
+            // customTextBoxEx5
+            // 
+            customTextBoxEx5.Location = new System.Drawing.Point(255, 571);
+            customTextBoxEx5.Name = "customTextBoxEx5";
+            customTextBoxEx5.ObjectName = null;
+            customTextBoxEx5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxEx5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxEx5.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx5.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx5.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx5.Size = new System.Drawing.Size(70, 22);
+            customTextBoxEx5.StyleController = dataLayoutCommonArticul;
+            customTextBoxEx5.TabIndex = 54;
+            // 
+            // txtOpis_t2
+            // 
+            txtOpis_t2.Location = new System.Drawing.Point(335, 493);
+            txtOpis_t2.Name = "txtOpis_t2";
+            txtOpis_t2.ObjectName = null;
+            txtOpis_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtOpis_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtOpis_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtOpis_t2.Properties.Appearance.Options.UseBackColor = true;
+            txtOpis_t2.Properties.Appearance.Options.UseFont = true;
+            txtOpis_t2.Properties.Appearance.Options.UseForeColor = true;
+            txtOpis_t2.Properties.ReadOnly = true;
+            txtOpis_t2.Size = new System.Drawing.Size(90, 22);
+            txtOpis_t2.StyleController = dataLayoutCommonArticul;
+            txtOpis_t2.TabIndex = 49;
+            // 
+            // txtOpis_t1
+            // 
+            txtOpis_t1.Location = new System.Drawing.Point(335, 467);
+            txtOpis_t1.Name = "txtOpis_t1";
+            txtOpis_t1.ObjectName = null;
+            txtOpis_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtOpis_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtOpis_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtOpis_t1.Properties.Appearance.Options.UseBackColor = true;
+            txtOpis_t1.Properties.Appearance.Options.UseFont = true;
+            txtOpis_t1.Properties.Appearance.Options.UseForeColor = true;
+            txtOpis_t1.Properties.ReadOnly = true;
+            txtOpis_t1.Size = new System.Drawing.Size(90, 22);
+            txtOpis_t1.StyleController = dataLayoutCommonArticul;
+            txtOpis_t1.TabIndex = 42;
+            // 
+            // customTextBoxEx4
+            // 
+            customTextBoxEx4.Location = new System.Drawing.Point(255, 545);
+            customTextBoxEx4.Name = "customTextBoxEx4";
+            customTextBoxEx4.ObjectName = null;
+            customTextBoxEx4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxEx4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxEx4.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx4.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx4.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx4.Size = new System.Drawing.Size(70, 22);
+            customTextBoxEx4.StyleController = dataLayoutCommonArticul;
+            customTextBoxEx4.TabIndex = 53;
+            // 
+            // customTextBoxEx3
+            // 
+            customTextBoxEx3.Location = new System.Drawing.Point(255, 519);
+            customTextBoxEx3.Name = "customTextBoxEx3";
+            customTextBoxEx3.ObjectName = null;
+            customTextBoxEx3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxEx3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxEx3.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx3.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx3.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx3.Size = new System.Drawing.Size(70, 22);
+            customTextBoxEx3.StyleController = dataLayoutCommonArticul;
+            customTextBoxEx3.TabIndex = 52;
+            // 
+            // txtBrak_t7
+            // 
+            txtBrak_t7.Location = new System.Drawing.Point(435, 623);
+            txtBrak_t7.Name = "txtBrak_t7";
+            txtBrak_t7.ObjectName = null;
+            txtBrak_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtBrak_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtBrak_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtBrak_t7.Properties.Appearance.Options.UseBackColor = true;
+            txtBrak_t7.Properties.Appearance.Options.UseFont = true;
+            txtBrak_t7.Properties.Appearance.Options.UseForeColor = true;
+            txtBrak_t7.Size = new System.Drawing.Size(70, 22);
+            txtBrak_t7.StyleController = dataLayoutCommonArticul;
+            txtBrak_t7.TabIndex = 49;
+            // 
+            // customTextBoxEx2
+            // 
+            customTextBoxEx2.Location = new System.Drawing.Point(255, 493);
+            customTextBoxEx2.Name = "customTextBoxEx2";
+            customTextBoxEx2.ObjectName = null;
+            customTextBoxEx2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxEx2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxEx2.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx2.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx2.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx2.Size = new System.Drawing.Size(70, 22);
+            customTextBoxEx2.StyleController = dataLayoutCommonArticul;
+            customTextBoxEx2.TabIndex = 51;
+            // 
+            // txtBrak_t6
+            // 
+            txtBrak_t6.Location = new System.Drawing.Point(435, 597);
+            txtBrak_t6.Name = "txtBrak_t6";
+            txtBrak_t6.ObjectName = null;
+            txtBrak_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtBrak_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtBrak_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtBrak_t6.Properties.Appearance.Options.UseBackColor = true;
+            txtBrak_t6.Properties.Appearance.Options.UseFont = true;
+            txtBrak_t6.Properties.Appearance.Options.UseForeColor = true;
+            txtBrak_t6.Size = new System.Drawing.Size(70, 22);
+            txtBrak_t6.StyleController = dataLayoutCommonArticul;
+            txtBrak_t6.TabIndex = 48;
+            // 
+            // customTextBoxEx1
+            // 
+            customTextBoxEx1.Location = new System.Drawing.Point(255, 467);
+            customTextBoxEx1.Name = "customTextBoxEx1";
+            customTextBoxEx1.ObjectName = null;
+            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
+            customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
+            customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
+            customTextBoxEx1.Size = new System.Drawing.Size(70, 22);
+            customTextBoxEx1.StyleController = dataLayoutCommonArticul;
+            customTextBoxEx1.TabIndex = 50;
+            // 
+            // txtBrak_t5
+            // 
+            txtBrak_t5.Location = new System.Drawing.Point(435, 571);
+            txtBrak_t5.Name = "txtBrak_t5";
+            txtBrak_t5.ObjectName = null;
+            txtBrak_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtBrak_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtBrak_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtBrak_t5.Properties.Appearance.Options.UseBackColor = true;
+            txtBrak_t5.Properties.Appearance.Options.UseFont = true;
+            txtBrak_t5.Properties.Appearance.Options.UseForeColor = true;
+            txtBrak_t5.Size = new System.Drawing.Size(70, 22);
+            txtBrak_t5.StyleController = dataLayoutCommonArticul;
+            txtBrak_t5.TabIndex = 47;
+            // 
+            // txtBrak_t4
+            // 
+            txtBrak_t4.Location = new System.Drawing.Point(435, 545);
+            txtBrak_t4.Name = "txtBrak_t4";
+            txtBrak_t4.ObjectName = null;
+            txtBrak_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtBrak_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtBrak_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtBrak_t4.Properties.Appearance.Options.UseBackColor = true;
+            txtBrak_t4.Properties.Appearance.Options.UseFont = true;
+            txtBrak_t4.Properties.Appearance.Options.UseForeColor = true;
+            txtBrak_t4.Size = new System.Drawing.Size(70, 22);
+            txtBrak_t4.StyleController = dataLayoutCommonArticul;
+            txtBrak_t4.TabIndex = 46;
+            // 
+            // txtBrak_t3
+            // 
+            txtBrak_t3.Location = new System.Drawing.Point(435, 519);
+            txtBrak_t3.Name = "txtBrak_t3";
+            txtBrak_t3.ObjectName = null;
+            txtBrak_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtBrak_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtBrak_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtBrak_t3.Properties.Appearance.Options.UseBackColor = true;
+            txtBrak_t3.Properties.Appearance.Options.UseFont = true;
+            txtBrak_t3.Properties.Appearance.Options.UseForeColor = true;
+            txtBrak_t3.Size = new System.Drawing.Size(70, 22);
+            txtBrak_t3.StyleController = dataLayoutCommonArticul;
+            txtBrak_t3.TabIndex = 45;
+            // 
+            // txtSeb_t7
+            // 
+            txtSeb_t7.Location = new System.Drawing.Point(175, 623);
+            txtSeb_t7.Name = "txtSeb_t7";
+            txtSeb_t7.ObjectName = null;
+            txtSeb_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_t7.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_t7.Properties.Appearance.Options.UseFont = true;
+            txtSeb_t7.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_t7.Size = new System.Drawing.Size(70, 22);
+            txtSeb_t7.StyleController = dataLayoutCommonArticul;
+            txtSeb_t7.TabIndex = 41;
+            // 
+            // txtBrak_t2
+            // 
+            txtBrak_t2.Location = new System.Drawing.Point(435, 493);
+            txtBrak_t2.Name = "txtBrak_t2";
+            txtBrak_t2.ObjectName = null;
+            txtBrak_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtBrak_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtBrak_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtBrak_t2.Properties.Appearance.Options.UseBackColor = true;
+            txtBrak_t2.Properties.Appearance.Options.UseFont = true;
+            txtBrak_t2.Properties.Appearance.Options.UseForeColor = true;
+            txtBrak_t2.Size = new System.Drawing.Size(70, 22);
+            txtBrak_t2.StyleController = dataLayoutCommonArticul;
+            txtBrak_t2.TabIndex = 44;
+            // 
+            // txtSeb_t6
+            // 
+            txtSeb_t6.Location = new System.Drawing.Point(175, 597);
+            txtSeb_t6.Name = "txtSeb_t6";
+            txtSeb_t6.ObjectName = null;
+            txtSeb_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_t6.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_t6.Properties.Appearance.Options.UseFont = true;
+            txtSeb_t6.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_t6.Size = new System.Drawing.Size(70, 22);
+            txtSeb_t6.StyleController = dataLayoutCommonArticul;
+            txtSeb_t6.TabIndex = 40;
+            // 
+            // txtBrak_t1
+            // 
+            txtBrak_t1.Location = new System.Drawing.Point(435, 467);
+            txtBrak_t1.Name = "txtBrak_t1";
+            txtBrak_t1.ObjectName = null;
+            txtBrak_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtBrak_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtBrak_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtBrak_t1.Properties.Appearance.Options.UseBackColor = true;
+            txtBrak_t1.Properties.Appearance.Options.UseFont = true;
+            txtBrak_t1.Properties.Appearance.Options.UseForeColor = true;
+            txtBrak_t1.Size = new System.Drawing.Size(70, 22);
+            txtBrak_t1.StyleController = dataLayoutCommonArticul;
+            txtBrak_t1.TabIndex = 43;
+            // 
+            // txtSeb_t5
+            // 
+            txtSeb_t5.Location = new System.Drawing.Point(175, 571);
+            txtSeb_t5.Name = "txtSeb_t5";
+            txtSeb_t5.ObjectName = null;
+            txtSeb_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_t5.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_t5.Properties.Appearance.Options.UseFont = true;
+            txtSeb_t5.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_t5.Size = new System.Drawing.Size(70, 22);
+            txtSeb_t5.StyleController = dataLayoutCommonArticul;
+            txtSeb_t5.TabIndex = 39;
+            // 
+            // txtSeb_t4
+            // 
+            txtSeb_t4.Location = new System.Drawing.Point(175, 545);
+            txtSeb_t4.Name = "txtSeb_t4";
+            txtSeb_t4.ObjectName = null;
+            txtSeb_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_t4.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_t4.Properties.Appearance.Options.UseFont = true;
+            txtSeb_t4.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_t4.Size = new System.Drawing.Size(70, 22);
+            txtSeb_t4.StyleController = dataLayoutCommonArticul;
+            txtSeb_t4.TabIndex = 38;
+            // 
+            // txtSeb_t3
+            // 
+            txtSeb_t3.Location = new System.Drawing.Point(175, 519);
+            txtSeb_t3.Name = "txtSeb_t3";
+            txtSeb_t3.ObjectName = null;
+            txtSeb_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_t3.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_t3.Properties.Appearance.Options.UseFont = true;
+            txtSeb_t3.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_t3.Size = new System.Drawing.Size(70, 22);
+            txtSeb_t3.StyleController = dataLayoutCommonArticul;
+            txtSeb_t3.TabIndex = 37;
+            // 
+            // customLabel2
+            // 
+            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabel2.Location = new System.Drawing.Point(15, 88);
+            customLabel2.Name = "customLabel2";
+            customLabel2.Size = new System.Drawing.Size(35, 22);
+            customLabel2.TabIndex = 1;
+            customLabel2.Text = "Гр.";
+            // 
+            // txtSeb_t2
+            // 
+            txtSeb_t2.Location = new System.Drawing.Point(175, 493);
+            txtSeb_t2.Name = "txtSeb_t2";
+            txtSeb_t2.ObjectName = null;
+            txtSeb_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_t2.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_t2.Properties.Appearance.Options.UseFont = true;
+            txtSeb_t2.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_t2.Size = new System.Drawing.Size(70, 22);
+            txtSeb_t2.StyleController = dataLayoutCommonArticul;
+            txtSeb_t2.TabIndex = 36;
+            // 
+            // lookUpGostGrup
+            // 
+            lookUpGostGrup.Enabled = false;
+            lookUpGostGrup.Location = new System.Drawing.Point(54, 88);
+            lookUpGostGrup.Name = "lookUpGostGrup";
+            lookUpGostGrup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            lookUpGostGrup.Properties.Appearance.Options.UseFont = true;
+            lookUpGostGrup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            lookUpGostGrup.Properties.PopupView = searchLookUpEdit1View;
+            lookUpGostGrup.Size = new System.Drawing.Size(171, 22);
+            lookUpGostGrup.StyleController = dataLayoutCommonArticul;
+            lookUpGostGrup.TabIndex = 9;
+            lookUpGostGrup.EditValueChanged += lookUpGostGrup_EditValueChanged;
+            // 
+            // searchLookUpEdit1View
+            // 
+            searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // txtSeb_t1
+            // 
+            txtSeb_t1.Location = new System.Drawing.Point(175, 467);
+            txtSeb_t1.Name = "txtSeb_t1";
+            txtSeb_t1.ObjectName = null;
+            txtSeb_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_t1.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_t1.Properties.Appearance.Options.UseFont = true;
+            txtSeb_t1.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_t1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            txtSeb_t1.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            txtSeb_t1.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            txtSeb_t1.Properties.UseMaskAsDisplayFormat = true;
+            txtSeb_t1.Size = new System.Drawing.Size(70, 22);
+            txtSeb_t1.StyleController = dataLayoutCommonArticul;
+            txtSeb_t1.TabIndex = 35;
             // 
             // chbKruj
             // 
@@ -2072,7 +1689,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t7
             // 
-            cbuKod_t7.Location = new System.Drawing.Point(385, 559);
+            cbuKod_t7.Location = new System.Drawing.Point(15, 623);
             cbuKod_t7.Name = "cbuKod_t7";
             cbuKod_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2082,9 +1699,9 @@ namespace SewingProduction.Features.Articul.Forms
             cbuKod_t7.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t7.Properties.PopupView = customSearchLookUpEdit7View;
-            cbuKod_t7.Size = new System.Drawing.Size(175, 22);
+            cbuKod_t7.Size = new System.Drawing.Size(70, 22);
             cbuKod_t7.StyleController = dataLayoutCommonArticul;
-            cbuKod_t7.TabIndex = 40;
+            cbuKod_t7.TabIndex = 27;
             // 
             // customSearchLookUpEdit7View
             // 
@@ -2095,7 +1712,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t6
             // 
-            cbuKod_t6.Location = new System.Drawing.Point(385, 533);
+            cbuKod_t6.Location = new System.Drawing.Point(15, 597);
             cbuKod_t6.Name = "cbuKod_t6";
             cbuKod_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2105,9 +1722,9 @@ namespace SewingProduction.Features.Articul.Forms
             cbuKod_t6.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t6.Properties.PopupView = customSearchLookUpEdit6View;
-            cbuKod_t6.Size = new System.Drawing.Size(175, 22);
+            cbuKod_t6.Size = new System.Drawing.Size(70, 22);
             cbuKod_t6.StyleController = dataLayoutCommonArticul;
-            cbuKod_t6.TabIndex = 39;
+            cbuKod_t6.TabIndex = 26;
             // 
             // customSearchLookUpEdit6View
             // 
@@ -2118,7 +1735,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t5
             // 
-            cbuKod_t5.Location = new System.Drawing.Point(385, 507);
+            cbuKod_t5.Location = new System.Drawing.Point(15, 571);
             cbuKod_t5.Name = "cbuKod_t5";
             cbuKod_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2128,9 +1745,9 @@ namespace SewingProduction.Features.Articul.Forms
             cbuKod_t5.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t5.Properties.PopupView = customSearchLookUpEdit5View;
-            cbuKod_t5.Size = new System.Drawing.Size(175, 22);
+            cbuKod_t5.Size = new System.Drawing.Size(70, 22);
             cbuKod_t5.StyleController = dataLayoutCommonArticul;
-            cbuKod_t5.TabIndex = 38;
+            cbuKod_t5.TabIndex = 25;
             // 
             // customSearchLookUpEdit5View
             // 
@@ -2141,7 +1758,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t4
             // 
-            cbuKod_t4.Location = new System.Drawing.Point(385, 481);
+            cbuKod_t4.Location = new System.Drawing.Point(15, 545);
             cbuKod_t4.Name = "cbuKod_t4";
             cbuKod_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2151,9 +1768,9 @@ namespace SewingProduction.Features.Articul.Forms
             cbuKod_t4.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t4.Properties.PopupView = customSearchLookUpEdit4View;
-            cbuKod_t4.Size = new System.Drawing.Size(175, 22);
+            cbuKod_t4.Size = new System.Drawing.Size(70, 22);
             cbuKod_t4.StyleController = dataLayoutCommonArticul;
-            cbuKod_t4.TabIndex = 37;
+            cbuKod_t4.TabIndex = 24;
             // 
             // customSearchLookUpEdit4View
             // 
@@ -2164,7 +1781,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t3
             // 
-            cbuKod_t3.Location = new System.Drawing.Point(385, 455);
+            cbuKod_t3.Location = new System.Drawing.Point(15, 519);
             cbuKod_t3.Name = "cbuKod_t3";
             cbuKod_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2174,9 +1791,9 @@ namespace SewingProduction.Features.Articul.Forms
             cbuKod_t3.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t3.Properties.PopupView = customSearchLookUpEdit3View;
-            cbuKod_t3.Size = new System.Drawing.Size(175, 22);
+            cbuKod_t3.Size = new System.Drawing.Size(70, 22);
             cbuKod_t3.StyleController = dataLayoutCommonArticul;
-            cbuKod_t3.TabIndex = 36;
+            cbuKod_t3.TabIndex = 23;
             // 
             // customSearchLookUpEdit3View
             // 
@@ -2187,7 +1804,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t2
             // 
-            cbuKod_t2.Location = new System.Drawing.Point(385, 429);
+            cbuKod_t2.Location = new System.Drawing.Point(15, 493);
             cbuKod_t2.Name = "cbuKod_t2";
             cbuKod_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2197,9 +1814,9 @@ namespace SewingProduction.Features.Articul.Forms
             cbuKod_t2.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t2.Properties.PopupView = customSearchLookUpEdit2View;
-            cbuKod_t2.Size = new System.Drawing.Size(175, 22);
+            cbuKod_t2.Size = new System.Drawing.Size(70, 22);
             cbuKod_t2.StyleController = dataLayoutCommonArticul;
-            cbuKod_t2.TabIndex = 35;
+            cbuKod_t2.TabIndex = 22;
             // 
             // customSearchLookUpEdit2View
             // 
@@ -2210,7 +1827,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txbNorm_t7
             // 
-            txbNorm_t7.Location = new System.Drawing.Point(15, 559);
+            txbNorm_t7.Location = new System.Drawing.Point(95, 623);
             txbNorm_t7.Name = "txbNorm_t7";
             txbNorm_t7.ObjectName = null;
             txbNorm_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -2219,13 +1836,13 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t7.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t7.Properties.Appearance.Options.UseFont = true;
             txbNorm_t7.Properties.Appearance.Options.UseForeColor = true;
-            txbNorm_t7.Size = new System.Drawing.Size(175, 22);
+            txbNorm_t7.Size = new System.Drawing.Size(70, 22);
             txbNorm_t7.StyleController = dataLayoutCommonArticul;
-            txbNorm_t7.TabIndex = 26;
+            txbNorm_t7.TabIndex = 34;
             // 
             // txbNorm_t6
             // 
-            txbNorm_t6.Location = new System.Drawing.Point(15, 533);
+            txbNorm_t6.Location = new System.Drawing.Point(95, 597);
             txbNorm_t6.Name = "txbNorm_t6";
             txbNorm_t6.ObjectName = null;
             txbNorm_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -2234,13 +1851,13 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t6.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t6.Properties.Appearance.Options.UseFont = true;
             txbNorm_t6.Properties.Appearance.Options.UseForeColor = true;
-            txbNorm_t6.Size = new System.Drawing.Size(175, 22);
+            txbNorm_t6.Size = new System.Drawing.Size(70, 22);
             txbNorm_t6.StyleController = dataLayoutCommonArticul;
-            txbNorm_t6.TabIndex = 25;
+            txbNorm_t6.TabIndex = 33;
             // 
             // txbNorm_t5
             // 
-            txbNorm_t5.Location = new System.Drawing.Point(15, 507);
+            txbNorm_t5.Location = new System.Drawing.Point(95, 571);
             txbNorm_t5.Name = "txbNorm_t5";
             txbNorm_t5.ObjectName = null;
             txbNorm_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -2249,13 +1866,13 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t5.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t5.Properties.Appearance.Options.UseFont = true;
             txbNorm_t5.Properties.Appearance.Options.UseForeColor = true;
-            txbNorm_t5.Size = new System.Drawing.Size(175, 22);
+            txbNorm_t5.Size = new System.Drawing.Size(70, 22);
             txbNorm_t5.StyleController = dataLayoutCommonArticul;
-            txbNorm_t5.TabIndex = 24;
+            txbNorm_t5.TabIndex = 32;
             // 
             // txbNorm_t4
             // 
-            txbNorm_t4.Location = new System.Drawing.Point(15, 481);
+            txbNorm_t4.Location = new System.Drawing.Point(95, 545);
             txbNorm_t4.Name = "txbNorm_t4";
             txbNorm_t4.ObjectName = null;
             txbNorm_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -2264,13 +1881,13 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t4.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t4.Properties.Appearance.Options.UseFont = true;
             txbNorm_t4.Properties.Appearance.Options.UseForeColor = true;
-            txbNorm_t4.Size = new System.Drawing.Size(175, 22);
+            txbNorm_t4.Size = new System.Drawing.Size(70, 22);
             txbNorm_t4.StyleController = dataLayoutCommonArticul;
-            txbNorm_t4.TabIndex = 23;
+            txbNorm_t4.TabIndex = 31;
             // 
             // txbNorm_t3
             // 
-            txbNorm_t3.Location = new System.Drawing.Point(15, 455);
+            txbNorm_t3.Location = new System.Drawing.Point(95, 519);
             txbNorm_t3.Name = "txbNorm_t3";
             txbNorm_t3.ObjectName = null;
             txbNorm_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -2279,13 +1896,13 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t3.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t3.Properties.Appearance.Options.UseFont = true;
             txbNorm_t3.Properties.Appearance.Options.UseForeColor = true;
-            txbNorm_t3.Size = new System.Drawing.Size(175, 22);
+            txbNorm_t3.Size = new System.Drawing.Size(70, 22);
             txbNorm_t3.StyleController = dataLayoutCommonArticul;
-            txbNorm_t3.TabIndex = 22;
+            txbNorm_t3.TabIndex = 30;
             // 
             // txbNorm_t2
             // 
-            txbNorm_t2.Location = new System.Drawing.Point(15, 429);
+            txbNorm_t2.Location = new System.Drawing.Point(95, 493);
             txbNorm_t2.Name = "txbNorm_t2";
             txbNorm_t2.ObjectName = null;
             txbNorm_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -2294,13 +1911,13 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t2.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t2.Properties.Appearance.Options.UseFont = true;
             txbNorm_t2.Properties.Appearance.Options.UseForeColor = true;
-            txbNorm_t2.Size = new System.Drawing.Size(175, 22);
+            txbNorm_t2.Size = new System.Drawing.Size(70, 22);
             txbNorm_t2.StyleController = dataLayoutCommonArticul;
-            txbNorm_t2.TabIndex = 21;
+            txbNorm_t2.TabIndex = 29;
             // 
             // txbNorm_t1
             // 
-            txbNorm_t1.Location = new System.Drawing.Point(15, 403);
+            txbNorm_t1.Location = new System.Drawing.Point(95, 467);
             txbNorm_t1.Margin = new System.Windows.Forms.Padding(2);
             txbNorm_t1.Name = "txbNorm_t1";
             txbNorm_t1.ObjectName = null;
@@ -2310,9 +1927,12 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t1.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t1.Properties.Appearance.Options.UseFont = true;
             txbNorm_t1.Properties.Appearance.Options.UseForeColor = true;
-            txbNorm_t1.Size = new System.Drawing.Size(175, 22);
+            txbNorm_t1.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+            txbNorm_t1.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+            txbNorm_t1.Properties.UseMaskAsDisplayFormat = true;
+            txbNorm_t1.Size = new System.Drawing.Size(70, 22);
             txbNorm_t1.StyleController = dataLayoutCommonArticul;
-            txbNorm_t1.TabIndex = 20;
+            txbNorm_t1.TabIndex = 28;
             // 
             // cbTkan
             // 
@@ -2320,18 +1940,18 @@ namespace SewingProduction.Features.Articul.Forms
             cbTkan.Font = new System.Drawing.Font("Arial", 10F);
             cbTkan.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             cbTkan.FormattingEnabled = true;
-            cbTkan.Location = new System.Drawing.Point(545, 187);
+            cbTkan.Location = new System.Drawing.Point(527, 187);
             cbTkan.Name = "cbTkan";
-            cbTkan.Size = new System.Drawing.Size(191, 24);
-            cbTkan.TabIndex = 15;
+            cbTkan.Size = new System.Drawing.Size(210, 24);
+            cbTkan.TabIndex = 16;
             // 
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customLabel1.Location = new System.Drawing.Point(413, 187);
+            customLabel1.Location = new System.Drawing.Point(394, 187);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(128, 21);
+            customLabel1.Size = new System.Drawing.Size(129, 21);
             customLabel1.TabIndex = 1;
             customLabel1.Text = "Ткань";
             // 
@@ -2341,14 +1961,14 @@ namespace SewingProduction.Features.Articul.Forms
             txbAssort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbAssort.ErrorColor = System.Drawing.Color.Red;
             txbAssort.ErrorMessage = null;
-            txbAssort.Font = new System.Drawing.Font("Arial", 9F);
+            txbAssort.Font = new System.Drawing.Font("Arial", 10F);
             txbAssort.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbAssort.Location = new System.Drawing.Point(148, 187);
+            txbAssort.Location = new System.Drawing.Point(130, 187);
             txbAssort.Margin = new System.Windows.Forms.Padding(0);
             txbAssort.Name = "txbAssort";
             txbAssort.ReadOnly = true;
             txbAssort.Size = new System.Drawing.Size(128, 21);
-            txbAssort.TabIndex = 13;
+            txbAssort.TabIndex = 14;
             // 
             // txbGostId
             // 
@@ -2358,16 +1978,17 @@ namespace SewingProduction.Features.Articul.Forms
             txbGostId.ErrorMessage = null;
             txbGostId.Font = new System.Drawing.Font("Arial", 9F);
             txbGostId.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbGostId.Location = new System.Drawing.Point(94, 88);
+            txbGostId.Location = new System.Drawing.Point(308, 88);
             txbGostId.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGostId.Name = "txbGostId";
             txbGostId.ReadOnly = true;
-            txbGostId.Size = new System.Drawing.Size(71, 22);
-            txbGostId.TabIndex = 9;
+            txbGostId.Size = new System.Drawing.Size(57, 22);
+            txbGostId.TabIndex = 10;
             // 
             // lookUpGost
             // 
-            lookUpGost.Location = new System.Drawing.Point(169, 88);
+            lookUpGost.Enabled = false;
+            lookUpGost.Location = new System.Drawing.Point(369, 88);
             lookUpGost.Name = "lookUpGost";
             lookUpGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             lookUpGost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2377,9 +1998,9 @@ namespace SewingProduction.Features.Articul.Forms
             lookUpGost.Properties.Appearance.Options.UseForeColor = true;
             lookUpGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             lookUpGost.Properties.PopupView = customSearchLookUpEdit1View;
-            lookUpGost.Size = new System.Drawing.Size(567, 22);
+            lookUpGost.Size = new System.Drawing.Size(368, 22);
             lookUpGost.StyleController = dataLayoutCommonArticul;
-            lookUpGost.TabIndex = 10;
+            lookUpGost.TabIndex = 11;
             lookUpGost.EditValueChanged += lookUpGost_EditValueChanged;
             // 
             // customSearchLookUpEdit1View
@@ -2450,7 +2071,7 @@ namespace SewingProduction.Features.Articul.Forms
             customLabel47.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel47.Location = new System.Drawing.Point(15, 162);
             customLabel47.Name = "customLabel47";
-            customLabel47.Size = new System.Drawing.Size(129, 21);
+            customLabel47.Size = new System.Drawing.Size(111, 21);
             customLabel47.TabIndex = 1;
             customLabel47.Text = "Менеджер";
             // 
@@ -2470,7 +2091,7 @@ namespace SewingProduction.Features.Articul.Forms
             customLabel46.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel46.Location = new System.Drawing.Point(15, 212);
             customLabel46.Name = "customLabel46";
-            customLabel46.Size = new System.Drawing.Size(129, 21);
+            customLabel46.Size = new System.Drawing.Size(111, 21);
             customLabel46.TabIndex = 1;
             customLabel46.Text = "Страна";
             // 
@@ -2478,7 +2099,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             customLabel15.Font = new System.Drawing.Font("Arial", 10F);
             customLabel15.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel15.Location = new System.Drawing.Point(388, 60);
+            customLabel15.Location = new System.Drawing.Point(390, 60);
             customLabel15.Name = "customLabel15";
             customLabel15.Size = new System.Drawing.Size(65, 24);
             customLabel15.TabIndex = 1;
@@ -2490,7 +2111,7 @@ namespace SewingProduction.Features.Articul.Forms
             customLabel19.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel19.Location = new System.Drawing.Point(15, 187);
             customLabel19.Name = "customLabel19";
-            customLabel19.Size = new System.Drawing.Size(129, 21);
+            customLabel19.Size = new System.Drawing.Size(111, 21);
             customLabel19.TabIndex = 1;
             customLabel19.Text = "Ассортимент";
             // 
@@ -2498,7 +2119,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             customLabel16.Font = new System.Drawing.Font("Arial", 10F);
             customLabel16.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel16.Location = new System.Drawing.Point(15, 88);
+            customLabel16.Location = new System.Drawing.Point(229, 88);
             customLabel16.Name = "customLabel16";
             customLabel16.Size = new System.Drawing.Size(75, 22);
             customLabel16.TabIndex = 1;
@@ -2516,7 +2137,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t1
             // 
-            cbuKod_t1.Location = new System.Drawing.Point(385, 403);
+            cbuKod_t1.Location = new System.Drawing.Point(15, 467);
             cbuKod_t1.Name = "cbuKod_t1";
             cbuKod_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -2526,9 +2147,9 @@ namespace SewingProduction.Features.Articul.Forms
             cbuKod_t1.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t1.Properties.PopupView = gridView1;
-            cbuKod_t1.Size = new System.Drawing.Size(175, 22);
+            cbuKod_t1.Size = new System.Drawing.Size(70, 22);
             cbuKod_t1.StyleController = dataLayoutCommonArticul;
-            cbuKod_t1.TabIndex = 34;
+            cbuKod_t1.TabIndex = 21;
             // 
             // gridView1
             // 
@@ -2542,25 +2163,26 @@ namespace SewingProduction.Features.Articul.Forms
             Root.CustomizationFormText = "Основная информация";
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem1, layoutCommonArticul, layoutSostav, emptySpaceItem4, layoutControlGroup4, layoutControlGroup7, emptySpaceItem7, emptySpaceItem8, layoutControlGroup8 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem1, layoutCommonArticul, layoutSostav, emptySpaceItem4, layoutControlGroup4, layoutControlGroup7, emptySpaceItem7, layoutControlGroup8, layoutControlGroup6, layoutControlGroup10, layoutControlGroup9, emptySpaceItem3, layoutControlItem82, layoutControlItem83 });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(761, 596);
+            Root.Size = new System.Drawing.Size(762, 660);
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(0, 327);
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 379);
             emptySpaceItem1.MinSize = new System.Drawing.Size(104, 24);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(334, 40);
+            emptySpaceItem1.Size = new System.Drawing.Size(334, 52);
             emptySpaceItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             // 
             // layoutCommonArticul
             // 
-            layoutCommonArticul.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem17, layoutControlItem18, layoutControlItem1, layoutControlItem26, layoutControlItem15, layoutControlItem7, layoutControlItem9, layoutControlItem11, layoutControlItem3, layoutControlItem14, layoutControlItem6, layoutControlItem27, layoutControlItem10, layoutControlItem2, layoutControlItem12, layoutControlItem4, layoutControlItem5, layoutControlItem8, layoutControlItem16, layoutControlItem13, layoutControlItem29, layoutControlItem28, layoutControlItem58, layoutControlItem19 });
+            layoutCommonArticul.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutCommonArticul.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem17, layoutControlItem18, layoutControlItem1, layoutControlItem26, layoutControlItem15, layoutControlItem7, layoutControlItem9, layoutControlItem11, layoutControlItem3, layoutControlItem14, layoutControlItem6, layoutControlItem27, layoutControlItem10, layoutControlItem2, layoutControlItem12, layoutControlItem4, layoutControlItem5, layoutControlItem8, layoutControlItem16, layoutControlItem13, layoutControlItem29, layoutControlItem28, layoutControlItem58, layoutControlItem19, layoutControlItem59, layoutControlItem60 });
             layoutCommonArticul.Location = new System.Drawing.Point(0, 0);
             layoutCommonArticul.Name = "layoutCommonArticul";
             layoutCommonArticul.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutCommonArticul.Size = new System.Drawing.Size(731, 228);
+            layoutCommonArticul.Size = new System.Drawing.Size(732, 228);
             layoutCommonArticul.Text = "Основная информация";
             // 
             // layoutControlItem17
@@ -2600,7 +2222,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem26.MaxSize = new System.Drawing.Size(0, 48);
             layoutControlItem26.MinSize = new System.Drawing.Size(24, 48);
             layoutControlItem26.Name = "layoutControlItem26";
-            layoutControlItem26.Size = new System.Drawing.Size(725, 48);
+            layoutControlItem26.Size = new System.Drawing.Size(726, 48);
             layoutControlItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem26.TextVisible = false;
             // 
@@ -2608,16 +2230,19 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutControlItem15.Control = customLabel46;
             layoutControlItem15.Location = new System.Drawing.Point(0, 176);
+            layoutControlItem15.MaxSize = new System.Drawing.Size(115, 25);
+            layoutControlItem15.MinSize = new System.Drawing.Size(115, 25);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(133, 25);
+            layoutControlItem15.Size = new System.Drawing.Size(115, 25);
+            layoutControlItem15.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem15.TextVisible = false;
             // 
             // layoutControlItem7
             // 
             layoutControlItem7.Control = cbCountry;
-            layoutControlItem7.Location = new System.Drawing.Point(133, 176);
+            layoutControlItem7.Location = new System.Drawing.Point(115, 176);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(592, 25);
+            layoutControlItem7.Size = new System.Drawing.Size(611, 25);
             layoutControlItem7.Text = "Страна";
             layoutControlItem7.TextVisible = false;
             // 
@@ -2635,7 +2260,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem11
             // 
             layoutControlItem11.Control = customLabel16;
-            layoutControlItem11.Location = new System.Drawing.Point(0, 52);
+            layoutControlItem11.Location = new System.Drawing.Point(214, 52);
             layoutControlItem11.MaxSize = new System.Drawing.Size(79, 26);
             layoutControlItem11.MinSize = new System.Drawing.Size(79, 26);
             layoutControlItem11.Name = "layoutControlItem11";
@@ -2646,36 +2271,41 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem3
             // 
             layoutControlItem3.Control = lookUpGost;
-            layoutControlItem3.Location = new System.Drawing.Point(154, 52);
+            layoutControlItem3.CustomizationFormText = "Гост";
+            layoutControlItem3.Location = new System.Drawing.Point(354, 52);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(571, 26);
+            layoutControlItem3.Size = new System.Drawing.Size(372, 26);
+            layoutControlItem3.Text = "Гр.";
             layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = customLabel19;
             layoutControlItem14.Location = new System.Drawing.Point(0, 151);
+            layoutControlItem14.MaxSize = new System.Drawing.Size(115, 25);
+            layoutControlItem14.MinSize = new System.Drawing.Size(115, 25);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(133, 25);
+            layoutControlItem14.Size = new System.Drawing.Size(115, 25);
+            layoutControlItem14.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem14.TextVisible = false;
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = cbAssort;
-            layoutControlItem6.Location = new System.Drawing.Point(265, 151);
+            layoutControlItem6.Location = new System.Drawing.Point(247, 151);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(133, 25);
+            layoutControlItem6.Size = new System.Drawing.Size(132, 25);
             layoutControlItem6.Text = "Ассортимент";
             layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem27
             // 
             layoutControlItem27.Control = txbGostId;
-            layoutControlItem27.Location = new System.Drawing.Point(79, 52);
-            layoutControlItem27.MaxSize = new System.Drawing.Size(75, 26);
-            layoutControlItem27.MinSize = new System.Drawing.Size(75, 26);
+            layoutControlItem27.Location = new System.Drawing.Point(293, 52);
+            layoutControlItem27.MaxSize = new System.Drawing.Size(61, 26);
+            layoutControlItem27.MinSize = new System.Drawing.Size(61, 26);
             layoutControlItem27.Name = "layoutControlItem27";
-            layoutControlItem27.Size = new System.Drawing.Size(75, 26);
+            layoutControlItem27.Size = new System.Drawing.Size(61, 26);
             layoutControlItem27.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem27.Text = "Гостid";
             layoutControlItem27.TextVisible = false;
@@ -2683,7 +2313,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem10
             // 
             layoutControlItem10.Control = customLabel15;
-            layoutControlItem10.Location = new System.Drawing.Point(373, 24);
+            layoutControlItem10.Location = new System.Drawing.Point(375, 24);
             layoutControlItem10.MaxSize = new System.Drawing.Size(69, 28);
             layoutControlItem10.MinSize = new System.Drawing.Size(69, 28);
             layoutControlItem10.Name = "layoutControlItem10";
@@ -2695,9 +2325,9 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem2
             // 
             layoutControlItem2.Control = txbMod;
-            layoutControlItem2.Location = new System.Drawing.Point(442, 24);
+            layoutControlItem2.Location = new System.Drawing.Point(444, 24);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(139, 28);
+            layoutControlItem2.Size = new System.Drawing.Size(138, 28);
             layoutControlItem2.Text = "Модель";
             layoutControlItem2.TextVisible = false;
             // 
@@ -2719,7 +2349,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem4.MaxSize = new System.Drawing.Size(0, 25);
             layoutControlItem4.MinSize = new System.Drawing.Size(60, 25);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(62, 28);
+            layoutControlItem4.Size = new System.Drawing.Size(64, 28);
             layoutControlItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem4.Text = "ТМ";
             layoutControlItem4.TextVisible = false;
@@ -2727,7 +2357,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem5
             // 
             layoutControlItem5.Control = cbSeason;
-            layoutControlItem5.Location = new System.Drawing.Point(581, 24);
+            layoutControlItem5.Location = new System.Drawing.Point(582, 24);
             layoutControlItem5.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem5.Name = "layoutControlItem5";
             layoutControlItem5.Size = new System.Drawing.Size(144, 28);
@@ -2738,11 +2368,11 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem8
             // 
             layoutControlItem8.Control = cbGrupMen;
-            layoutControlItem8.Location = new System.Drawing.Point(133, 126);
+            layoutControlItem8.Location = new System.Drawing.Point(115, 126);
             layoutControlItem8.MaxSize = new System.Drawing.Size(0, 25);
             layoutControlItem8.MinSize = new System.Drawing.Size(101, 25);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(592, 25);
+            layoutControlItem8.Size = new System.Drawing.Size(611, 25);
             layoutControlItem8.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem8.Text = "Менеджер";
             layoutControlItem8.TextVisible = false;
@@ -2751,15 +2381,18 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutControlItem16.Control = customLabel47;
             layoutControlItem16.Location = new System.Drawing.Point(0, 126);
+            layoutControlItem16.MaxSize = new System.Drawing.Size(115, 25);
+            layoutControlItem16.MinSize = new System.Drawing.Size(115, 25);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(133, 25);
+            layoutControlItem16.Size = new System.Drawing.Size(115, 25);
+            layoutControlItem16.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = txbAssort;
             layoutControlItem13.CustomizationFormText = "АссортиментId";
-            layoutControlItem13.Location = new System.Drawing.Point(133, 151);
+            layoutControlItem13.Location = new System.Drawing.Point(115, 151);
             layoutControlItem13.MaxSize = new System.Drawing.Size(0, 25);
             layoutControlItem13.MinSize = new System.Drawing.Size(24, 25);
             layoutControlItem13.Name = "layoutControlItem13";
@@ -2771,9 +2404,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutControlItem29.Control = customLabel1;
             layoutControlItem29.CustomizationFormText = "layoutControlItem29";
-            layoutControlItem29.Location = new System.Drawing.Point(398, 151);
+            layoutControlItem29.Location = new System.Drawing.Point(379, 151);
             layoutControlItem29.Name = "layoutControlItem29";
-            layoutControlItem29.Size = new System.Drawing.Size(132, 25);
+            layoutControlItem29.Size = new System.Drawing.Size(133, 25);
             layoutControlItem29.Text = "Ткань";
             layoutControlItem29.TextVisible = false;
             // 
@@ -2781,9 +2414,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutControlItem28.Control = cbTkan;
             layoutControlItem28.CustomizationFormText = "Ткань";
-            layoutControlItem28.Location = new System.Drawing.Point(530, 151);
+            layoutControlItem28.Location = new System.Drawing.Point(512, 151);
             layoutControlItem28.Name = "layoutControlItem28";
-            layoutControlItem28.Size = new System.Drawing.Size(195, 25);
+            layoutControlItem28.Size = new System.Drawing.Size(214, 25);
             layoutControlItem28.TextVisible = false;
             // 
             // layoutControlItem58
@@ -2801,16 +2434,40 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem19.CustomizationFormText = "Архив";
             layoutControlItem19.Location = new System.Drawing.Point(505, 0);
             layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(220, 24);
+            layoutControlItem19.Size = new System.Drawing.Size(221, 24);
             layoutControlItem19.TextVisible = false;
+            // 
+            // layoutControlItem59
+            // 
+            layoutControlItem59.Control = lookUpGostGrup;
+            layoutControlItem59.CustomizationFormText = "Группа госта";
+            layoutControlItem59.Location = new System.Drawing.Point(39, 52);
+            layoutControlItem59.MaxSize = new System.Drawing.Size(175, 26);
+            layoutControlItem59.MinSize = new System.Drawing.Size(175, 26);
+            layoutControlItem59.Name = "layoutControlItem59";
+            layoutControlItem59.Size = new System.Drawing.Size(175, 26);
+            layoutControlItem59.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem59.TextVisible = false;
+            // 
+            // layoutControlItem60
+            // 
+            layoutControlItem60.Control = customLabel2;
+            layoutControlItem60.Location = new System.Drawing.Point(0, 52);
+            layoutControlItem60.MaxSize = new System.Drawing.Size(39, 26);
+            layoutControlItem60.MinSize = new System.Drawing.Size(39, 26);
+            layoutControlItem60.Name = "layoutControlItem60";
+            layoutControlItem60.Size = new System.Drawing.Size(39, 26);
+            layoutControlItem60.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem60.TextVisible = false;
             // 
             // layoutSostav
             // 
+            layoutSostav.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutSostav.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem20, layoutControlItem21, layoutControlItem22, layoutControlItem23, layoutControlItem24, layoutControlItem25 });
             layoutSostav.Location = new System.Drawing.Point(0, 228);
             layoutSostav.Name = "layoutSostav";
             layoutSostav.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutSostav.Size = new System.Drawing.Size(731, 99);
+            layoutSostav.Size = new System.Drawing.Size(732, 99);
             layoutSostav.Text = "Состав";
             // 
             // layoutControlItem20
@@ -2818,7 +2475,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem20.Control = txbSost;
             layoutControlItem20.Location = new System.Drawing.Point(172, 0);
             layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new System.Drawing.Size(553, 24);
+            layoutControlItem20.Size = new System.Drawing.Size(554, 24);
             layoutControlItem20.Text = "Состав основной";
             layoutControlItem20.TextVisible = false;
             // 
@@ -2827,7 +2484,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem21.Control = txbSost2;
             layoutControlItem21.Location = new System.Drawing.Point(172, 24);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(553, 24);
+            layoutControlItem21.Size = new System.Drawing.Size(554, 24);
             layoutControlItem21.Text = "Отделка";
             layoutControlItem21.TextVisible = false;
             // 
@@ -2836,7 +2493,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem22.Control = txbSost3;
             layoutControlItem22.Location = new System.Drawing.Point(172, 48);
             layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(553, 24);
+            layoutControlItem22.Size = new System.Drawing.Size(554, 24);
             layoutControlItem22.Text = "Подклад";
             layoutControlItem22.TextVisible = false;
             // 
@@ -2844,47 +2501,57 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutControlItem23.Control = customLabel48;
             layoutControlItem23.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem23.MaxSize = new System.Drawing.Size(172, 24);
+            layoutControlItem23.MinSize = new System.Drawing.Size(172, 24);
             layoutControlItem23.Name = "layoutControlItem23";
             layoutControlItem23.Size = new System.Drawing.Size(172, 24);
+            layoutControlItem23.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem23.TextVisible = false;
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = customLabel49;
             layoutControlItem24.Location = new System.Drawing.Point(0, 24);
+            layoutControlItem24.MaxSize = new System.Drawing.Size(172, 24);
+            layoutControlItem24.MinSize = new System.Drawing.Size(172, 24);
             layoutControlItem24.Name = "layoutControlItem24";
             layoutControlItem24.Size = new System.Drawing.Size(172, 24);
+            layoutControlItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem24.TextVisible = false;
             // 
             // layoutControlItem25
             // 
             layoutControlItem25.Control = customLabel50;
             layoutControlItem25.Location = new System.Drawing.Point(0, 48);
+            layoutControlItem25.MaxSize = new System.Drawing.Size(172, 24);
+            layoutControlItem25.MinSize = new System.Drawing.Size(172, 24);
             layoutControlItem25.Name = "layoutControlItem25";
             layoutControlItem25.Size = new System.Drawing.Size(172, 24);
+            layoutControlItem25.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem25.TextVisible = false;
             // 
             // emptySpaceItem4
             // 
-            emptySpaceItem4.Location = new System.Drawing.Point(731, 0);
+            emptySpaceItem4.Location = new System.Drawing.Point(732, 0);
             emptySpaceItem4.Name = "emptySpaceItem4";
-            emptySpaceItem4.Size = new System.Drawing.Size(10, 367);
+            emptySpaceItem4.Size = new System.Drawing.Size(10, 431);
             // 
             // layoutControlGroup4
             // 
             layoutControlGroup4.CustomizationFormText = "Норма";
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem36, layoutControlItem38, layoutControlItem39, layoutControlItem40, layoutControlItem41, layoutControlItem42, layoutControlItem43 });
-            layoutControlGroup4.Location = new System.Drawing.Point(0, 367);
+            layoutControlGroup4.Location = new System.Drawing.Point(80, 431);
             layoutControlGroup4.Name = "layoutControlGroup4";
             layoutControlGroup4.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup4.Size = new System.Drawing.Size(185, 209);
+            layoutControlGroup4.Size = new System.Drawing.Size(80, 209);
+            layoutControlGroup4.Text = "Норма";
             // 
             // layoutControlItem36
             // 
             layoutControlItem36.Control = txbNorm_t1;
             layoutControlItem36.Location = new System.Drawing.Point(0, 0);
             layoutControlItem36.Name = "layoutControlItem36";
-            layoutControlItem36.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem36.Size = new System.Drawing.Size(74, 26);
             layoutControlItem36.TextVisible = false;
             // 
             // layoutControlItem38
@@ -2892,7 +2559,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem38.Control = txbNorm_t2;
             layoutControlItem38.Location = new System.Drawing.Point(0, 26);
             layoutControlItem38.Name = "layoutControlItem38";
-            layoutControlItem38.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem38.Size = new System.Drawing.Size(74, 26);
             layoutControlItem38.TextVisible = false;
             // 
             // layoutControlItem39
@@ -2900,7 +2567,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem39.Control = txbNorm_t3;
             layoutControlItem39.Location = new System.Drawing.Point(0, 52);
             layoutControlItem39.Name = "layoutControlItem39";
-            layoutControlItem39.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem39.Size = new System.Drawing.Size(74, 26);
             layoutControlItem39.TextVisible = false;
             // 
             // layoutControlItem40
@@ -2908,7 +2575,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem40.Control = txbNorm_t4;
             layoutControlItem40.Location = new System.Drawing.Point(0, 78);
             layoutControlItem40.Name = "layoutControlItem40";
-            layoutControlItem40.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem40.Size = new System.Drawing.Size(74, 26);
             layoutControlItem40.TextVisible = false;
             // 
             // layoutControlItem41
@@ -2916,7 +2583,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem41.Control = txbNorm_t5;
             layoutControlItem41.Location = new System.Drawing.Point(0, 104);
             layoutControlItem41.Name = "layoutControlItem41";
-            layoutControlItem41.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem41.Size = new System.Drawing.Size(74, 26);
             layoutControlItem41.TextVisible = false;
             // 
             // layoutControlItem42
@@ -2924,7 +2591,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem42.Control = txbNorm_t6;
             layoutControlItem42.Location = new System.Drawing.Point(0, 130);
             layoutControlItem42.Name = "layoutControlItem42";
-            layoutControlItem42.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem42.Size = new System.Drawing.Size(74, 26);
             layoutControlItem42.TextVisible = false;
             // 
             // layoutControlItem43
@@ -2932,101 +2599,101 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem43.Control = txbNorm_t7;
             layoutControlItem43.Location = new System.Drawing.Point(0, 156);
             layoutControlItem43.Name = "layoutControlItem43";
-            layoutControlItem43.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem43.Size = new System.Drawing.Size(74, 26);
             layoutControlItem43.TextVisible = false;
             // 
             // layoutControlGroup7
             // 
             layoutControlGroup7.CustomizationFormText = "Себестоимость ткани";
             layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem44, layoutControlItem45, layoutControlItem46, layoutControlItem47, layoutControlItem48, layoutControlItem49, layoutControlItem50 });
-            layoutControlGroup7.Location = new System.Drawing.Point(185, 367);
+            layoutControlGroup7.Location = new System.Drawing.Point(160, 431);
             layoutControlGroup7.Name = "layoutControlGroup7";
             layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup7.Size = new System.Drawing.Size(185, 209);
+            layoutControlGroup7.Size = new System.Drawing.Size(80, 209);
+            layoutControlGroup7.Text = "Себ. тк.";
             // 
             // layoutControlItem44
             // 
             layoutControlItem44.Control = txtSeb_t1;
             layoutControlItem44.Location = new System.Drawing.Point(0, 0);
             layoutControlItem44.Name = "layoutControlItem44";
-            layoutControlItem44.Size = new System.Drawing.Size(179, 24);
+            layoutControlItem44.Size = new System.Drawing.Size(74, 26);
             layoutControlItem44.TextVisible = false;
             // 
             // layoutControlItem45
             // 
-            layoutControlItem45.Control = txtSeb_t3;
-            layoutControlItem45.Location = new System.Drawing.Point(0, 48);
+            layoutControlItem45.Control = txtSeb_t2;
+            layoutControlItem45.Location = new System.Drawing.Point(0, 26);
             layoutControlItem45.Name = "layoutControlItem45";
-            layoutControlItem45.Size = new System.Drawing.Size(179, 24);
+            layoutControlItem45.Size = new System.Drawing.Size(74, 26);
             layoutControlItem45.TextVisible = false;
             // 
             // layoutControlItem46
             // 
-            layoutControlItem46.Control = txtSeb_t4;
-            layoutControlItem46.Location = new System.Drawing.Point(0, 72);
+            layoutControlItem46.Control = txtSeb_t3;
+            layoutControlItem46.Location = new System.Drawing.Point(0, 52);
             layoutControlItem46.Name = "layoutControlItem46";
-            layoutControlItem46.Size = new System.Drawing.Size(179, 24);
+            layoutControlItem46.Size = new System.Drawing.Size(74, 26);
             layoutControlItem46.TextVisible = false;
             // 
             // layoutControlItem47
             // 
-            layoutControlItem47.Control = txtSeb_t2;
-            layoutControlItem47.Location = new System.Drawing.Point(0, 24);
+            layoutControlItem47.Control = txtSeb_t4;
+            layoutControlItem47.Location = new System.Drawing.Point(0, 78);
             layoutControlItem47.Name = "layoutControlItem47";
-            layoutControlItem47.Size = new System.Drawing.Size(179, 24);
+            layoutControlItem47.Size = new System.Drawing.Size(74, 26);
             layoutControlItem47.TextVisible = false;
             // 
             // layoutControlItem48
             // 
             layoutControlItem48.Control = txtSeb_t5;
-            layoutControlItem48.Location = new System.Drawing.Point(0, 96);
+            layoutControlItem48.Location = new System.Drawing.Point(0, 104);
             layoutControlItem48.Name = "layoutControlItem48";
-            layoutControlItem48.Size = new System.Drawing.Size(179, 24);
+            layoutControlItem48.Size = new System.Drawing.Size(74, 26);
             layoutControlItem48.TextVisible = false;
             // 
             // layoutControlItem49
             // 
             layoutControlItem49.Control = txtSeb_t6;
-            layoutControlItem49.Location = new System.Drawing.Point(0, 120);
+            layoutControlItem49.Location = new System.Drawing.Point(0, 130);
             layoutControlItem49.Name = "layoutControlItem49";
-            layoutControlItem49.Size = new System.Drawing.Size(179, 24);
+            layoutControlItem49.Size = new System.Drawing.Size(74, 26);
             layoutControlItem49.TextVisible = false;
             // 
             // layoutControlItem50
             // 
             layoutControlItem50.Control = txtSeb_t7;
-            layoutControlItem50.Location = new System.Drawing.Point(0, 144);
+            layoutControlItem50.Location = new System.Drawing.Point(0, 156);
+            layoutControlItem50.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem50.Name = "layoutControlItem50";
-            layoutControlItem50.Size = new System.Drawing.Size(179, 38);
+            layoutControlItem50.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem50.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem50.TextVisible = false;
             // 
             // emptySpaceItem7
             // 
             emptySpaceItem7.Location = new System.Drawing.Point(334, 327);
+            emptySpaceItem7.MinSize = new System.Drawing.Size(104, 24);
             emptySpaceItem7.Name = "emptySpaceItem7";
-            emptySpaceItem7.Size = new System.Drawing.Size(397, 40);
-            // 
-            // emptySpaceItem8
-            // 
-            emptySpaceItem8.Location = new System.Drawing.Point(555, 367);
-            emptySpaceItem8.Name = "emptySpaceItem8";
-            emptySpaceItem8.Size = new System.Drawing.Size(186, 209);
+            emptySpaceItem7.Size = new System.Drawing.Size(398, 104);
+            emptySpaceItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             // 
             // layoutControlGroup8
             // 
             layoutControlGroup8.CustomizationFormText = "Ткань";
             layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem51, layoutControlItem52, layoutControlItem53, layoutControlItem54, layoutControlItem55, layoutControlItem56, layoutControlItem57 });
-            layoutControlGroup8.Location = new System.Drawing.Point(370, 367);
+            layoutControlGroup8.Location = new System.Drawing.Point(0, 431);
             layoutControlGroup8.Name = "layoutControlGroup8";
             layoutControlGroup8.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup8.Size = new System.Drawing.Size(185, 209);
+            layoutControlGroup8.Size = new System.Drawing.Size(80, 209);
+            layoutControlGroup8.Text = "Ткань";
             // 
             // layoutControlItem51
             // 
             layoutControlItem51.Control = cbuKod_t1;
             layoutControlItem51.Location = new System.Drawing.Point(0, 0);
             layoutControlItem51.Name = "layoutControlItem51";
-            layoutControlItem51.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem51.Size = new System.Drawing.Size(74, 26);
             layoutControlItem51.TextVisible = false;
             // 
             // layoutControlItem52
@@ -3034,7 +2701,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem52.Control = cbuKod_t2;
             layoutControlItem52.Location = new System.Drawing.Point(0, 26);
             layoutControlItem52.Name = "layoutControlItem52";
-            layoutControlItem52.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem52.Size = new System.Drawing.Size(74, 26);
             layoutControlItem52.TextVisible = false;
             // 
             // layoutControlItem53
@@ -3042,7 +2709,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem53.Control = cbuKod_t3;
             layoutControlItem53.Location = new System.Drawing.Point(0, 52);
             layoutControlItem53.Name = "layoutControlItem53";
-            layoutControlItem53.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem53.Size = new System.Drawing.Size(74, 26);
             layoutControlItem53.TextVisible = false;
             // 
             // layoutControlItem54
@@ -3050,7 +2717,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem54.Control = cbuKod_t4;
             layoutControlItem54.Location = new System.Drawing.Point(0, 78);
             layoutControlItem54.Name = "layoutControlItem54";
-            layoutControlItem54.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem54.Size = new System.Drawing.Size(74, 26);
             layoutControlItem54.TextVisible = false;
             // 
             // layoutControlItem55
@@ -3058,7 +2725,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem55.Control = cbuKod_t5;
             layoutControlItem55.Location = new System.Drawing.Point(0, 104);
             layoutControlItem55.Name = "layoutControlItem55";
-            layoutControlItem55.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem55.Size = new System.Drawing.Size(74, 26);
             layoutControlItem55.TextVisible = false;
             // 
             // layoutControlItem56
@@ -3066,7 +2733,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem56.Control = cbuKod_t6;
             layoutControlItem56.Location = new System.Drawing.Point(0, 130);
             layoutControlItem56.Name = "layoutControlItem56";
-            layoutControlItem56.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem56.Size = new System.Drawing.Size(74, 26);
             layoutControlItem56.TextVisible = false;
             // 
             // layoutControlItem57
@@ -3074,8 +2741,211 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem57.Control = cbuKod_t7;
             layoutControlItem57.Location = new System.Drawing.Point(0, 156);
             layoutControlItem57.Name = "layoutControlItem57";
-            layoutControlItem57.Size = new System.Drawing.Size(179, 26);
+            layoutControlItem57.Size = new System.Drawing.Size(74, 26);
             layoutControlItem57.TextVisible = false;
+            // 
+            // layoutControlGroup6
+            // 
+            layoutControlGroup6.CustomizationFormText = "Брак";
+            layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem62, layoutControlItem63, layoutControlItem64, layoutControlItem65, layoutControlItem66, layoutControlItem67, layoutControlItem61 });
+            layoutControlGroup6.Location = new System.Drawing.Point(420, 431);
+            layoutControlGroup6.Name = "layoutControlGroup6";
+            layoutControlGroup6.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup6.Size = new System.Drawing.Size(80, 209);
+            layoutControlGroup6.Text = "Брак";
+            // 
+            // layoutControlItem62
+            // 
+            layoutControlItem62.Control = txtBrak_t2;
+            layoutControlItem62.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem62.Name = "layoutControlItem62";
+            layoutControlItem62.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem62.TextVisible = false;
+            // 
+            // layoutControlItem63
+            // 
+            layoutControlItem63.Control = txtBrak_t3;
+            layoutControlItem63.Location = new System.Drawing.Point(0, 52);
+            layoutControlItem63.Name = "layoutControlItem63";
+            layoutControlItem63.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem63.TextVisible = false;
+            // 
+            // layoutControlItem64
+            // 
+            layoutControlItem64.Control = txtBrak_t4;
+            layoutControlItem64.Location = new System.Drawing.Point(0, 78);
+            layoutControlItem64.Name = "layoutControlItem64";
+            layoutControlItem64.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem64.TextVisible = false;
+            // 
+            // layoutControlItem65
+            // 
+            layoutControlItem65.Control = txtBrak_t5;
+            layoutControlItem65.Location = new System.Drawing.Point(0, 104);
+            layoutControlItem65.Name = "layoutControlItem65";
+            layoutControlItem65.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem65.TextVisible = false;
+            // 
+            // layoutControlItem66
+            // 
+            layoutControlItem66.Control = txtBrak_t6;
+            layoutControlItem66.Location = new System.Drawing.Point(0, 130);
+            layoutControlItem66.Name = "layoutControlItem66";
+            layoutControlItem66.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem66.TextVisible = false;
+            // 
+            // layoutControlItem67
+            // 
+            layoutControlItem67.Control = txtBrak_t7;
+            layoutControlItem67.Location = new System.Drawing.Point(0, 156);
+            layoutControlItem67.Name = "layoutControlItem67";
+            layoutControlItem67.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem67.TextVisible = false;
+            // 
+            // layoutControlItem61
+            // 
+            layoutControlItem61.Control = txtBrak_t1;
+            layoutControlItem61.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem61.Name = "layoutControlItem61";
+            layoutControlItem61.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem61.TextVisible = false;
+            // 
+            // layoutControlGroup10
+            // 
+            layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem75, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81 });
+            layoutControlGroup10.Location = new System.Drawing.Point(320, 431);
+            layoutControlGroup10.Name = "layoutControlGroup10";
+            layoutControlGroup10.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup10.Size = new System.Drawing.Size(100, 209);
+            layoutControlGroup10.Text = "Описание";
+            // 
+            // layoutControlItem75
+            // 
+            layoutControlItem75.Control = txtOpis_t1;
+            layoutControlItem75.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem75.Name = "layoutControlItem75";
+            layoutControlItem75.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem75.TextVisible = false;
+            // 
+            // layoutControlItem76
+            // 
+            layoutControlItem76.Control = txtOpis_t2;
+            layoutControlItem76.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem76.Name = "layoutControlItem76";
+            layoutControlItem76.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem76.TextVisible = false;
+            // 
+            // layoutControlItem77
+            // 
+            layoutControlItem77.Control = txtOpis_t3;
+            layoutControlItem77.Location = new System.Drawing.Point(0, 52);
+            layoutControlItem77.Name = "layoutControlItem77";
+            layoutControlItem77.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem77.TextVisible = false;
+            // 
+            // layoutControlItem78
+            // 
+            layoutControlItem78.Control = txtOpis_t4;
+            layoutControlItem78.Location = new System.Drawing.Point(0, 78);
+            layoutControlItem78.Name = "layoutControlItem78";
+            layoutControlItem78.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem78.TextVisible = false;
+            // 
+            // layoutControlItem79
+            // 
+            layoutControlItem79.Control = txtOpis_t5;
+            layoutControlItem79.Location = new System.Drawing.Point(0, 104);
+            layoutControlItem79.Name = "layoutControlItem79";
+            layoutControlItem79.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem79.TextVisible = false;
+            // 
+            // layoutControlItem80
+            // 
+            layoutControlItem80.Control = txtOpis_t6;
+            layoutControlItem80.Location = new System.Drawing.Point(0, 130);
+            layoutControlItem80.Name = "layoutControlItem80";
+            layoutControlItem80.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem80.TextVisible = false;
+            // 
+            // layoutControlItem81
+            // 
+            layoutControlItem81.Control = txtOpis_t7;
+            layoutControlItem81.Location = new System.Drawing.Point(0, 156);
+            layoutControlItem81.Name = "layoutControlItem81";
+            layoutControlItem81.Size = new System.Drawing.Size(94, 26);
+            layoutControlItem81.TextVisible = false;
+            // 
+            // layoutControlGroup9
+            // 
+            layoutControlGroup9.CustomizationFormText = "кф качества";
+            layoutControlGroup9.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem68, layoutControlItem69, layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem73, layoutControlItem74 });
+            layoutControlGroup9.Location = new System.Drawing.Point(240, 431);
+            layoutControlGroup9.Name = "layoutControlGroup9";
+            layoutControlGroup9.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup9.Size = new System.Drawing.Size(80, 209);
+            layoutControlGroup9.Text = "Кф кач";
+            // 
+            // layoutControlItem68
+            // 
+            layoutControlItem68.Control = customTextBoxEx1;
+            layoutControlItem68.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem68.Name = "layoutControlItem68";
+            layoutControlItem68.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem68.TextVisible = false;
+            // 
+            // layoutControlItem69
+            // 
+            layoutControlItem69.Control = customTextBoxEx2;
+            layoutControlItem69.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem69.Name = "layoutControlItem69";
+            layoutControlItem69.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem69.TextVisible = false;
+            // 
+            // layoutControlItem70
+            // 
+            layoutControlItem70.Control = customTextBoxEx3;
+            layoutControlItem70.Location = new System.Drawing.Point(0, 52);
+            layoutControlItem70.Name = "layoutControlItem70";
+            layoutControlItem70.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem70.TextVisible = false;
+            // 
+            // layoutControlItem71
+            // 
+            layoutControlItem71.Control = customTextBoxEx4;
+            layoutControlItem71.Location = new System.Drawing.Point(0, 78);
+            layoutControlItem71.Name = "layoutControlItem71";
+            layoutControlItem71.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem71.TextVisible = false;
+            // 
+            // layoutControlItem72
+            // 
+            layoutControlItem72.Control = customTextBoxEx5;
+            layoutControlItem72.Location = new System.Drawing.Point(0, 104);
+            layoutControlItem72.Name = "layoutControlItem72";
+            layoutControlItem72.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem72.TextVisible = false;
+            // 
+            // layoutControlItem73
+            // 
+            layoutControlItem73.Control = customTextBoxEx6;
+            layoutControlItem73.Location = new System.Drawing.Point(0, 130);
+            layoutControlItem73.Name = "layoutControlItem73";
+            layoutControlItem73.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem73.TextVisible = false;
+            // 
+            // layoutControlItem74
+            // 
+            layoutControlItem74.Control = customTextBoxEx7;
+            layoutControlItem74.Location = new System.Drawing.Point(0, 156);
+            layoutControlItem74.Name = "layoutControlItem74";
+            layoutControlItem74.Size = new System.Drawing.Size(74, 26);
+            layoutControlItem74.TextVisible = false;
+            // 
+            // emptySpaceItem3
+            // 
+            emptySpaceItem3.Location = new System.Drawing.Point(500, 431);
+            emptySpaceItem3.Name = "emptySpaceItem3";
+            emptySpaceItem3.Size = new System.Drawing.Size(242, 209);
             // 
             // layoutControl1
             // 
@@ -3181,31 +3051,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlGroup2.Name = "layoutControlGroup2";
             layoutControlGroup2.Size = new System.Drawing.Size(106, 69);
             // 
-            // layoutControl3
-            // 
-            layoutControl3.Location = new System.Drawing.Point(1129, 335);
-            layoutControl3.Name = "layoutControl3";
-            layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(891, 345, 650, 400);
-            layoutControl3.Root = layoutControlGroup5;
-            layoutControl3.Size = new System.Drawing.Size(740, 178);
-            layoutControl3.TabIndex = 4;
-            layoutControl3.Text = "layoutControl3";
-            // 
-            // layoutControlGroup5
-            // 
-            layoutControlGroup5.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            layoutControlGroup5.GroupBordersVisible = false;
-            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem3 });
-            layoutControlGroup5.Name = "Root";
-            layoutControlGroup5.Size = new System.Drawing.Size(740, 178);
-            layoutControlGroup5.TextVisible = false;
-            // 
-            // emptySpaceItem3
-            // 
-            emptySpaceItem3.Location = new System.Drawing.Point(0, 0);
-            emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new System.Drawing.Size(720, 158);
-            // 
             // emptySpaceItem5
             // 
             emptySpaceItem5.Location = new System.Drawing.Point(164, 501);
@@ -3218,30 +3063,61 @@ namespace SewingProduction.Features.Articul.Forms
             emptySpaceItem6.Name = "emptySpaceItem6";
             emptySpaceItem6.Size = new System.Drawing.Size(669, 174);
             // 
-            // lookUpGostGrup
+            // txtSeb_all
             // 
-            lookUpGostGrup.Location = new System.Drawing.Point(1119, 265);
-            lookUpGostGrup.Name = "lookUpGostGrup";
-            lookUpGostGrup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            lookUpGostGrup.Properties.PopupView = searchLookUpEdit1View;
-            lookUpGostGrup.Size = new System.Drawing.Size(100, 20);
-            lookUpGostGrup.TabIndex = 48;
-            lookUpGostGrup.EditValueChanged += lookUpGostGrup_EditValueChanged;
+            txtSeb_all.Location = new System.Drawing.Point(64, 365);
+            txtSeb_all.Name = "txtSeb_all";
+            txtSeb_all.ObjectName = null;
+            txtSeb_all.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtSeb_all.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtSeb_all.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtSeb_all.Properties.Appearance.Options.UseBackColor = true;
+            txtSeb_all.Properties.Appearance.Options.UseFont = true;
+            txtSeb_all.Properties.Appearance.Options.UseForeColor = true;
+            txtSeb_all.Properties.ReadOnly = true;
+            txtSeb_all.Size = new System.Drawing.Size(278, 22);
+            txtSeb_all.StyleController = dataLayoutCommonArticul;
+            txtSeb_all.TabIndex = 48;
             // 
-            // searchLookUpEdit1View
+            // txtNorm_t
             // 
-            searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            txtNorm_t.Location = new System.Drawing.Point(64, 339);
+            txtNorm_t.Name = "txtNorm_t";
+            txtNorm_t.ObjectName = null;
+            txtNorm_t.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            txtNorm_t.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            txtNorm_t.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            txtNorm_t.Properties.Appearance.Options.UseBackColor = true;
+            txtNorm_t.Properties.Appearance.Options.UseFont = true;
+            txtNorm_t.Properties.Appearance.Options.UseForeColor = true;
+            txtNorm_t.Properties.ReadOnly = true;
+            txtNorm_t.Size = new System.Drawing.Size(278, 22);
+            txtNorm_t.StyleController = dataLayoutCommonArticul;
+            txtNorm_t.TabIndex = 49;
+            // 
+            // layoutControlItem82
+            // 
+            layoutControlItem82.Control = txtNorm_t;
+            layoutControlItem82.Location = new System.Drawing.Point(0, 327);
+            layoutControlItem82.Name = "layoutControlItem82";
+            layoutControlItem82.Size = new System.Drawing.Size(334, 26);
+            layoutControlItem82.Text = "норма/м";
+            layoutControlItem82.TextSize = new System.Drawing.Size(40, 13);
+            // 
+            // layoutControlItem83
+            // 
+            layoutControlItem83.Control = txtSeb_all;
+            layoutControlItem83.Location = new System.Drawing.Point(0, 353);
+            layoutControlItem83.Name = "layoutControlItem83";
+            layoutControlItem83.Size = new System.Drawing.Size(334, 26);
+            layoutControlItem83.Text = "руб.";
+            layoutControlItem83.TextSize = new System.Drawing.Size(40, 13);
             // 
             // ArticulEditAdvance
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1339, 846);
-            Controls.Add(lookUpGostGrup);
-            Controls.Add(layoutControl3);
             Controls.Add(layoutControl1);
             Controls.Add(dataLayoutCommonArticul);
             Controls.Add(customSimpleButton1);
@@ -3251,7 +3127,6 @@ namespace SewingProduction.Features.Articul.Forms
             Controls.Add(customButton6);
             Controls.Add(gridEditAdRazm);
             Controls.Add(pictureBoxArticul);
-            Controls.Add(customGroupBox1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "ArticulEditAdvance";
             Text = "ArticulEditAdvance";
@@ -3263,18 +3138,38 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
             customGroupBox2.ResumeLayout(false);
             customGroupBox2.PerformLayout();
-            customGroupBox1.ResumeLayout(false);
-            customGroupBox1.PerformLayout();
-            cgbTkanPurpose.ResumeLayout(false);
-            cgbTkanPurpose.PerformLayout();
-            cgbKfKach.ResumeLayout(false);
-            cgbKfKach.PerformLayout();
-            cgbBrakPercent.ResumeLayout(false);
-            cgbBrakPercent.PerformLayout();
-            cgbTkanBrak.ResumeLayout(false);
-            cgbTkanBrak.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataLayoutCommonArticul).EndInit();
             dataLayoutCommonArticul.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t7.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t6.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx7.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t5.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx6.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t4.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx5.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtOpis_t1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx4.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t7.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t6.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customTextBoxEx1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t5.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t4.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t7.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t6.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBrak_t1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t5.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t4.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lookUpGostGrup.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_t1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)cbuKod_t7.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit7View).EndInit();
             ((System.ComponentModel.ISupportInitialize)cbuKod_t6.Properties).EndInit();
@@ -3325,6 +3220,8 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem28).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem58).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem59).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem60).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutSostav).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
@@ -3350,7 +3247,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem49).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem50).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem51).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem52).EndInit();
@@ -3359,6 +3255,31 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem55).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem56).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem57).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem62).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem63).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem64).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem65).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem66).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem67).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem61).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem75).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem76).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem77).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem78).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem81).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem68).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem69).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem70).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem71).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem72).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem73).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem74).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
@@ -3372,13 +3293,12 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem34).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem35).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpGostGrup.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSeb_all.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtNorm_t.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem82).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem83).EndInit();
             ResumeLayout(false);
         }
 
@@ -3393,7 +3313,6 @@ namespace SewingProduction.Features.Articul.Forms
         private CustomCheckBox chbKombIzd;
         private CustomTextBox txbKod;
         private CustomCheckBox chbKombDet;
-        private Core.Class.CustomLabel label1;
         private CustomTextBox txbTM;
         private CustomTextBox txbPo;
         private CustomTextBox txbArticul;
@@ -3425,69 +3344,6 @@ namespace SewingProduction.Features.Articul.Forms
         private Core.Class.CustomLabel customLabel41;
         private CustomTextBox txbSebz;
         private Core.Class.CustomLabel customLabel40;
-        private CustomGroupBox customGroupBox1;
-        private CustomTextBox txbNormt;
-        private System.Windows.Forms.GroupBox cgbTkanPurpose;
-        private CustomTextBox txbOpis_t7;
-        private CustomTextBox txbOpis_t6;
-        private CustomTextBox txbOpis_t1;
-        private CustomTextBox txbOpis_t5;
-        private CustomTextBox txbOpis_t2;
-        private CustomTextBox txbOpis_t4;
-        private CustomTextBox txbOpis_t3;
-        private Core.Class.CustomLabel customLabel20;
-        private System.Windows.Forms.GroupBox cgbKfKach;
-        private CustomTextBox txbKfKach7;
-        private CustomTextBox txbKfKach6;
-        private CustomTextBox txbKfKach5;
-        private CustomTextBox txbKfKach4;
-        private CustomTextBox txbKfKach3;
-        private CustomTextBox txbKfKach2;
-        private CustomTextBox txbKfKach1;
-        private Core.Class.CustomLabel customLabel21;
-        private System.Windows.Forms.GroupBox cgbBrakPercent;
-        private CustomTextBox txtBrakPercent7;
-        private CustomTextBox txtBrakPercent6;
-        private CustomTextBox txtBrakPercent1;
-        private CustomTextBox txtBrakPercent5;
-        private CustomTextBox txtBrakPercent2;
-        private CustomTextBox txtBrakPercent4;
-        private CustomTextBox txtBrakPercent3;
-        private Core.Class.CustomLabel customLabel22;
-        private System.Windows.Forms.GroupBox cgbTkanSeb;
-        private CustomTextBox txtSeb_t7;
-        private CustomTextBox txtSeb_t6;
-        private CustomTextBox txtSeb_t1;
-        private CustomTextBox txtSeb_t5;
-        private CustomTextBox txtSeb_t2;
-        private CustomTextBox txtSeb_t4;
-        private CustomTextBox txtSeb_t3;
-        private Core.Class.CustomLabel customLabel23;
-        private System.Windows.Forms.GroupBox cgbTkanNorm;
-        
-        private Core.Class.CustomLabel customLabel24;
-        private System.Windows.Forms.GroupBox cgbTkanBrak;
-        private CustomTextBox txbBrak7;
-        private CustomTextBox txbBrak1;
-        private CustomTextBox txbBrak6;
-        private CustomTextBox txbBrak2;
-        private CustomTextBox txbBrak5;
-        private CustomTextBox txbBrak3;
-        private CustomTextBox txbBrak4;
-        private CustomTextBox txbSeb;
-        private Core.Class.CustomLabel customLabel30;
-        private Core.Class.CustomLabel customLabel25;
-        private Core.Class.CustomLabel customLabel31;
-        private Core.Class.CustomLabel customLabel26;
-        private Core.Class.CustomLabel customLabel32;
-        private Core.Class.CustomLabel customLabel27;
-        private Core.Class.CustomLabel customLabel33;
-        private Core.Class.CustomLabel customLabel28;
-        private Core.Class.CustomLabel customLabel34;
-        private CustomTextBox txbBrakAll;
-        private Core.Class.CustomLabel customLabel35;
-        private Core.Class.CustomLabel customLabel29;
-        private Core.Class.CustomLabel customLabel36;
         private CustomComboBox cbTM;
         private CustomComboBox cbGrupMen;
         private CustomComboBox cbCountry;
@@ -3570,22 +3426,11 @@ namespace SewingProduction.Features.Articul.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem30;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbRazmGridEditRazm;
-        private DevExpress.XtraLayout.LayoutControl layoutControl3;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem44;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup7;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem45;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem46;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem47;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem48;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem49;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem50;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem8;
         private CustomSearchLookUpEdit cbuKod_t1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private CustomSearchLookUpEdit cbuKod_t2;
@@ -3627,5 +3472,72 @@ namespace SewingProduction.Features.Articul.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem58;
         private DevExpress.XtraEditors.SearchLookUpEdit lookUpGostGrup;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private CustomLabel customLabel2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem59;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem60;
+        private CustomTextBoxEx txtSeb_t1;
+        private CustomTextBoxEx txtSeb_t2;
+        private CustomTextBoxEx txtSeb_t3;
+        private CustomTextBoxEx txtSeb_t4;
+        private CustomTextBoxEx txtSeb_t5;
+        private CustomTextBoxEx txtSeb_t6;
+        private CustomTextBoxEx txtSeb_t7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem44;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem45;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem46;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem47;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem48;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem49;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem50;
+        private CustomTextBoxEx txtBrak_t7;
+        private CustomTextBoxEx txtBrak_t6;
+        private CustomTextBoxEx txtBrak_t5;
+        private CustomTextBoxEx txtBrak_t4;
+        private CustomTextBoxEx txtBrak_t3;
+        private CustomTextBoxEx txtBrak_t2;
+        private CustomTextBoxEx txtBrak_t1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem61;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem62;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem63;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem64;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem65;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem66;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem67;
+        private CustomTextBoxEx customTextBoxEx7;
+        private CustomTextBoxEx customTextBoxEx6;
+        private CustomTextBoxEx customTextBoxEx5;
+        private CustomTextBoxEx customTextBoxEx4;
+        private CustomTextBoxEx customTextBoxEx3;
+        private CustomTextBoxEx customTextBoxEx2;
+        private CustomTextBoxEx customTextBoxEx1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup9;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem68;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem69;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem70;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem71;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem72;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem73;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem74;
+        private CustomTextBoxEx txtOpis_t7;
+        private CustomTextBoxEx txtOpis_t6;
+        private CustomTextBoxEx txtOpis_t5;
+        private CustomTextBoxEx txtOpis_t4;
+        private CustomTextBoxEx txtOpis_t3;
+        private CustomTextBoxEx txtOpis_t2;
+        private CustomTextBoxEx txtOpis_t1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem75;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem76;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem77;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem78;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem79;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem80;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem81;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private CustomTextBoxEx txtSeb_all;
+        private CustomTextBoxEx txtNorm_t;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem82;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem83;
     }
 }
