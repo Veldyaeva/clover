@@ -39,45 +39,10 @@
             comboBoxMonthList = new CustomComboBox();
             customLabel2 = new SewingProduction.Core.Class.CustomLabel();
             gridControlPzvCheck = new SewingProduction.Core.Class.CustomGridControl();
-            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gridColumnCheckIncludePlan = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridViewPzvCheck = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridPzvCheckColumnTabTab = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridPzvCheckColumnTabFio = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEditPlan = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gridColumnPomPech = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnTabno = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnFio = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnTsplPart = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnTsplPartOf = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd18 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd20 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd21 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd22 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd23 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd24 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd25 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd26 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd27 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd28 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd29 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd30 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnDd31 = new DevExpress.XtraGrid.Columns.GridColumn();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -95,7 +60,7 @@
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spinEditYear.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlPzvCheck).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPzvCheck).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
@@ -145,6 +110,7 @@
             // comboBoxPodrVyazList
             // 
             comboBoxPodrVyazList.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            comboBoxPodrVyazList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxPodrVyazList.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxPodrVyazList.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxPodrVyazList.FormattingEnabled = true;
@@ -232,10 +198,12 @@
             spinEditYear.Size = new System.Drawing.Size(117, 22);
             spinEditYear.StyleController = layoutControl1;
             spinEditYear.TabIndex = 3;
+            spinEditYear.ValueChanged += spinEditYear_ValueChanged;
             // 
             // comboBoxMonthList
             // 
             comboBoxMonthList.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            comboBoxMonthList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxMonthList.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxMonthList.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxMonthList.FormattingEnabled = true;
@@ -243,6 +211,7 @@
             comboBoxMonthList.Name = "comboBoxMonthList";
             comboBoxMonthList.Size = new System.Drawing.Size(204, 24);
             comboBoxMonthList.TabIndex = 2;
+            comboBoxMonthList.SelectedIndexChanged += comboBoxMonthList_SelectedIndexChanged;
             comboBoxMonthList.SelectedValueChanged += comboBoxMonthList_SelectedValueChanged;
             // 
             // customLabel2
@@ -259,33 +228,45 @@
             // 
             gridControlPzvCheck.Font = new System.Drawing.Font("Arial", 10F);
             gridControlPzvCheck.Location = new System.Drawing.Point(12, 38);
-            gridControlPzvCheck.MainView = gridView1;
+            gridControlPzvCheck.MainView = gridViewPzvCheck;
             gridControlPzvCheck.Name = "gridControlPzvCheck";
             gridControlPzvCheck.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
             gridControlPzvCheck.Size = new System.Drawing.Size(1832, 558);
             gridControlPzvCheck.TabIndex = 7;
-            gridControlPzvCheck.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            gridControlPzvCheck.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPzvCheck });
             // 
-            // gridView1
+            // gridViewPzvCheck
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
-            gridView1.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
-            gridView1.Appearance.FocusedRow.Options.UseFont = true;
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnCheckIncludePlan, gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31 });
-            gridView1.GridControl = gridControlPzvCheck;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            gridViewPzvCheck.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            gridViewPzvCheck.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridViewPzvCheck.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewPzvCheck.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewPzvCheck.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPzvCheckColumnTabTab, gridPzvCheckColumnTabFio });
+            gridViewPzvCheck.GridControl = gridControlPzvCheck;
+            gridViewPzvCheck.Name = "gridViewPzvCheck";
+            gridViewPzvCheck.OptionsView.EnableAppearanceEvenRow = true;
             // 
-            // gridColumnCheckIncludePlan
+            // gridPzvCheckColumnTabTab
             // 
-            gridColumnCheckIncludePlan.Caption = "V";
-            gridColumnCheckIncludePlan.ColumnEdit = repositoryItemCheckEditPlan;
-            gridColumnCheckIncludePlan.Name = "gridColumnCheckIncludePlan";
-            gridColumnCheckIncludePlan.Visible = true;
-            gridColumnCheckIncludePlan.VisibleIndex = 0;
+            gridPzvCheckColumnTabTab.Caption = "Таб№";
+            gridPzvCheckColumnTabTab.Name = "gridPzvCheckColumnTabTab";
+            gridPzvCheckColumnTabTab.OptionsColumn.AllowEdit = false;
+            gridPzvCheckColumnTabTab.OptionsColumn.FixedWidth = true;
+            gridPzvCheckColumnTabTab.Visible = true;
+            gridPzvCheckColumnTabTab.VisibleIndex = 0;
+            gridPzvCheckColumnTabTab.Width = 50;
+            // 
+            // gridPzvCheckColumnTabFio
+            // 
+            gridPzvCheckColumnTabFio.Caption = "ФИО";
+            gridPzvCheckColumnTabFio.Name = "gridPzvCheckColumnTabFio";
+            gridPzvCheckColumnTabFio.OptionsColumn.AllowEdit = false;
+            gridPzvCheckColumnTabFio.OptionsColumn.FixedWidth = true;
+            gridPzvCheckColumnTabFio.Visible = true;
+            gridPzvCheckColumnTabFio.VisibleIndex = 1;
+            gridPzvCheckColumnTabFio.Width = 90;
             // 
             // repositoryItemCheckEditPlan
             // 
@@ -294,200 +275,6 @@
             repositoryItemCheckEditPlan.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             repositoryItemCheckEditPlan.ValueChecked = 1;
             repositoryItemCheckEditPlan.ValueUnchecked = 0;
-            // 
-            // gridColumnPomPech
-            // 
-            gridColumnPomPech.Caption = "Печ";
-            gridColumnPomPech.Name = "gridColumnPomPech";
-            gridColumnPomPech.Visible = true;
-            gridColumnPomPech.VisibleIndex = 1;
-            // 
-            // gridColumnTabno
-            // 
-            gridColumnTabno.Caption = "Таб№";
-            gridColumnTabno.Name = "gridColumnTabno";
-            gridColumnTabno.OptionsColumn.AllowEdit = false;
-            gridColumnTabno.Visible = true;
-            gridColumnTabno.VisibleIndex = 2;
-            // 
-            // gridColumnFio
-            // 
-            gridColumnFio.Caption = "ФИО";
-            gridColumnFio.Name = "gridColumnFio";
-            gridColumnFio.OptionsColumn.AllowEdit = false;
-            gridColumnFio.Visible = true;
-            gridColumnFio.VisibleIndex = 3;
-            // 
-            // gridColumnTsplPart
-            // 
-            gridColumnTsplPart.Caption = "Ставка д/пл";
-            gridColumnTsplPart.Name = "gridColumnTsplPart";
-            gridColumnTsplPart.OptionsColumn.AllowEdit = false;
-            gridColumnTsplPart.Visible = true;
-            gridColumnTsplPart.VisibleIndex = 4;
-            // 
-            // gridColumnTsplPartOf
-            // 
-            gridColumnTsplPartOf.Caption = "Ставка оф";
-            gridColumnTsplPartOf.Name = "gridColumnTsplPartOf";
-            gridColumnTsplPartOf.OptionsColumn.AllowEdit = false;
-            gridColumnTsplPartOf.Visible = true;
-            gridColumnTsplPartOf.VisibleIndex = 5;
-            // 
-            // gridColumnDd1
-            // 
-            gridColumnDd1.Caption = "dd1";
-            gridColumnDd1.Name = "gridColumnDd1";
-            // 
-            // gridColumnDd2
-            // 
-            gridColumnDd2.Caption = "dd2";
-            gridColumnDd2.Name = "gridColumnDd2";
-            // 
-            // gridColumnDd3
-            // 
-            gridColumnDd3.Caption = "dd3";
-            gridColumnDd3.Name = "gridColumnDd3";
-            // 
-            // gridColumnDd4
-            // 
-            gridColumnDd4.Caption = "dd4";
-            gridColumnDd4.Name = "gridColumnDd4";
-            // 
-            // gridColumnDd5
-            // 
-            gridColumnDd5.Caption = "dd5";
-            gridColumnDd5.Name = "gridColumnDd5";
-            // 
-            // gridColumnDd6
-            // 
-            gridColumnDd6.Caption = "dd6";
-            gridColumnDd6.Name = "gridColumnDd6";
-            // 
-            // gridColumnDd7
-            // 
-            gridColumnDd7.Caption = "dd7";
-            gridColumnDd7.Name = "gridColumnDd7";
-            // 
-            // gridColumnDd8
-            // 
-            gridColumnDd8.Caption = "dd8";
-            gridColumnDd8.Name = "gridColumnDd8";
-            // 
-            // gridColumnDd9
-            // 
-            gridColumnDd9.Caption = "dd9";
-            gridColumnDd9.Name = "gridColumnDd9";
-            // 
-            // gridColumnDd10
-            // 
-            gridColumnDd10.Caption = "dd10";
-            gridColumnDd10.Name = "gridColumnDd10";
-            // 
-            // gridColumnDd11
-            // 
-            gridColumnDd11.Caption = "dd11";
-            gridColumnDd11.Name = "gridColumnDd11";
-            // 
-            // gridColumnDd12
-            // 
-            gridColumnDd12.Caption = "dd12";
-            gridColumnDd12.Name = "gridColumnDd12";
-            // 
-            // gridColumnDd13
-            // 
-            gridColumnDd13.Caption = "dd13";
-            gridColumnDd13.Name = "gridColumnDd13";
-            // 
-            // gridColumnDd14
-            // 
-            gridColumnDd14.Caption = "dd14";
-            gridColumnDd14.Name = "gridColumnDd14";
-            // 
-            // gridColumnDd15
-            // 
-            gridColumnDd15.Caption = "dd15";
-            gridColumnDd15.Name = "gridColumnDd15";
-            // 
-            // gridColumnDd16
-            // 
-            gridColumnDd16.Caption = "dd16";
-            gridColumnDd16.Name = "gridColumnDd16";
-            // 
-            // gridColumnDd17
-            // 
-            gridColumnDd17.Caption = "dd17";
-            gridColumnDd17.Name = "gridColumnDd17";
-            // 
-            // gridColumnDd18
-            // 
-            gridColumnDd18.Caption = "dd18";
-            gridColumnDd18.Name = "gridColumnDd18";
-            // 
-            // gridColumnDd19
-            // 
-            gridColumnDd19.Caption = "dd19";
-            gridColumnDd19.Name = "gridColumnDd19";
-            // 
-            // gridColumnDd20
-            // 
-            gridColumnDd20.Caption = "dd20";
-            gridColumnDd20.Name = "gridColumnDd20";
-            // 
-            // gridColumnDd21
-            // 
-            gridColumnDd21.Caption = "dd21";
-            gridColumnDd21.Name = "gridColumnDd21";
-            // 
-            // gridColumnDd22
-            // 
-            gridColumnDd22.Caption = "dd22";
-            gridColumnDd22.Name = "gridColumnDd22";
-            // 
-            // gridColumnDd23
-            // 
-            gridColumnDd23.Caption = "dd23";
-            gridColumnDd23.Name = "gridColumnDd23";
-            // 
-            // gridColumnDd24
-            // 
-            gridColumnDd24.Caption = "dd24";
-            gridColumnDd24.Name = "gridColumnDd24";
-            // 
-            // gridColumnDd25
-            // 
-            gridColumnDd25.Caption = "dd25";
-            gridColumnDd25.Name = "gridColumnDd25";
-            // 
-            // gridColumnDd26
-            // 
-            gridColumnDd26.Caption = "dd26";
-            gridColumnDd26.Name = "gridColumnDd26";
-            // 
-            // gridColumnDd27
-            // 
-            gridColumnDd27.Caption = "dd27";
-            gridColumnDd27.Name = "gridColumnDd27";
-            // 
-            // gridColumnDd28
-            // 
-            gridColumnDd28.Caption = "dd28";
-            gridColumnDd28.Name = "gridColumnDd28";
-            // 
-            // gridColumnDd29
-            // 
-            gridColumnDd29.Caption = "dd29";
-            gridColumnDd29.Name = "gridColumnDd29";
-            // 
-            // gridColumnDd30
-            // 
-            gridColumnDd30.Caption = "dd30";
-            gridColumnDd30.Name = "gridColumnDd30";
-            // 
-            // gridColumnDd31
-            // 
-            gridColumnDd31.Caption = "dd31";
-            gridColumnDd31.Name = "gridColumnDd31";
             // 
             // Root
             // 
@@ -602,7 +389,7 @@
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)spinEditYear.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlPzvCheck).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPzvCheck).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
@@ -625,45 +412,15 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private Core.Class.CustomLabel customLabel2;
         private Core.Class.CustomGridControl gridControlPzvCheck;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCheckIncludePlan;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewPzvCheck;
+        private DevExpress.XtraGrid.Columns.GridColumn gridPzvCheckColumn;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditPlan;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPomPech;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTabno;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnFio;
+        private DevExpress.XtraGrid.Columns.GridColumn gridPzvCheckColumnTabFio;
+        private DevExpress.XtraGrid.Columns.GridColumn gridPzvCheckColumnTabTab;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTsplPart;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTsplPartOf;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd11;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd12;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd13;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd14;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd15;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd16;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd17;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd18;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd19;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd20;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd21;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd22;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd23;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd24;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd25;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd26;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd27;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd28;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd29;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd30;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDd31;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;

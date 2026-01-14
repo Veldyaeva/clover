@@ -509,8 +509,8 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public decimal tabChasi { get; set; }
         [NotMapped] public int grafChasi { get; set; }
         [NotMapped] public int itr { get; set; }
-        [NotMapped] public decimal tabOborud { get; set; }
-        [NotMapped] public decimal tabOborudOf { get; set; }
+        [NotMapped] public decimal tabChasiAll { get; set; }
+        [NotMapped] public decimal tabChasiOf { get; set; }
         [NotMapped] public decimal pztChasi { get; set; }
         [NotMapped] public decimal pztChasiOf { get; set; }
         [NotMapped] public int pztSek { get; set; }
@@ -610,37 +610,37 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public string grd29 { get; set; }
         [NotMapped] public string grd30 { get; set; }
         [NotMapped] public string grd31 { get; set; }
-        [NotMapped] public string pzv_tab_01 { get; set; }
-        [NotMapped] public string pzv_tab_02 { get; set; }
-        [NotMapped] public string pzv_tab_03 { get; set; }
-        [NotMapped] public string pzv_tab_04 { get; set; }
-        [NotMapped] public string pzv_tab_05 { get; set; }
-        [NotMapped] public string pzv_tab_06 { get; set; }
-        [NotMapped] public string pzv_tab_07 { get; set; }
-        [NotMapped] public string pzv_tab_08 { get; set; }
-        [NotMapped] public string pzv_tab_09 { get; set; }
-        [NotMapped] public string pzv_tab_10 { get; set; }
-        [NotMapped] public string pzv_tab_11 { get; set; }
-        [NotMapped] public string pzv_tab_12 { get; set; }
-        [NotMapped] public string pzv_tab_13 { get; set; }
-        [NotMapped] public string pzv_tab_14 { get; set; }
-        [NotMapped] public string pzv_tab_15 { get; set; }
-        [NotMapped] public string pzv_tab_16 { get; set; }
-        [NotMapped] public string pzv_tab_17 { get; set; }
-        [NotMapped] public string pzv_tab_18 { get; set; }
-        [NotMapped] public string pzv_tab_19 { get; set; }
-        [NotMapped] public string pzv_tab_20 { get; set; }
-        [NotMapped] public string pzv_tab_21 { get; set; }
-        [NotMapped] public string pzv_tab_22 { get; set; }
-        [NotMapped] public string pzv_tab_23 { get; set; }
-        [NotMapped] public string pzv_tab_24 { get; set; }
-        [NotMapped] public string pzv_tab_25 { get; set; }
-        [NotMapped] public string pzv_tab_26 { get; set; }
-        [NotMapped] public string pzv_tab_27 { get; set; }
-        [NotMapped] public string pzv_tab_28 { get; set; }
-        [NotMapped] public string pzv_tab_29 { get; set; }
-        [NotMapped] public string pzv_tab_30 { get; set; }
-        [NotMapped] public string pzv_tab_31 { get; set; }
+        [NotMapped] public string pzvTab01 { get; set; }
+        [NotMapped] public string pzvTab02 { get; set; }
+        [NotMapped] public string pzvTab03 { get; set; }
+        [NotMapped] public string pzvTab04 { get; set; }
+        [NotMapped] public string pzvTab05 { get; set; }
+        [NotMapped] public string pzvTab06 { get; set; }
+        [NotMapped] public string pzvTab07 { get; set; }
+        [NotMapped] public string pzvTab08 { get; set; }
+        [NotMapped] public string pzvTab09 { get; set; }
+        [NotMapped] public string pzvTab10 { get; set; }
+        [NotMapped] public string pzvTab11 { get; set; }
+        [NotMapped] public string pzvTab12 { get; set; }
+        [NotMapped] public string pzvTab13 { get; set; }
+        [NotMapped] public string pzvTab14 { get; set; }
+        [NotMapped] public string pzvTab15 { get; set; }
+        [NotMapped] public string pzvTab16 { get; set; }
+        [NotMapped] public string pzvTab17 { get; set; }
+        [NotMapped] public string pzvTab18 { get; set; }
+        [NotMapped] public string pzvTab19 { get; set; }
+        [NotMapped] public string pzvTab20 { get; set; }
+        [NotMapped] public string pzvTab21 { get; set; }
+        [NotMapped] public string pzvTab22 { get; set; }
+        [NotMapped] public string pzvTab23 { get; set; }
+        [NotMapped] public string pzvTab24 { get; set; }
+        [NotMapped] public string pzvTab25 { get; set; }
+        [NotMapped] public string pzvTab26 { get; set; }
+        [NotMapped] public string pzvTab27 { get; set; }
+        [NotMapped] public string pzvTab28 { get; set; }
+        [NotMapped] public string pzvTab29 { get; set; }
+        [NotMapped] public string pzvTab30 { get; set; }
+        [NotMapped] public string pzvTab31 { get; set; }
         [NotMapped] public int problChas { get; set; }
         [NotMapped] public string problChasStr { get; set; }
     }

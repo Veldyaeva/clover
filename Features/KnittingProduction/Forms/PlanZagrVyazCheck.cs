@@ -3,6 +3,9 @@ using DevExpress.Mvvm.Native;
 using DevExpress.Utils;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Menu;
@@ -65,9 +68,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             ThemeManager.UpdateTheme(this);
         }
-        private void InitializeBindings()
+        private async Task InitializeBindingsAsync()
         {
-            _sprMonthBindingSource = new BindingSource
+            try
+            {
+                #region comboBoxMonthList
+                _sprMonthBindingSource = new BindingSource
             {
                 DataSource = new BindingList<SprMonth>()
             };
@@ -76,7 +82,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             comboBoxMonthList.SelectedIndex = -1;
             comboBoxMonthList.ValueMember = "kod";
             comboBoxMonthList.DisplayMember = "name_cl";
+            #endregion
 
+            #region comboBoxPodrVyazList
             _podrVyazBindingSource = new BindingSource
             {
                 DataSource = new BindingList<PodrVyaz>()
@@ -86,6 +94,132 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             comboBoxPodrVyazList.SelectedIndex = -1;
             comboBoxPodrVyazList.ValueMember = "kod_vyaz";
             comboBoxPodrVyazList.DisplayMember = "text_vyaz";
+            #endregion
+
+            #region описание gridControlVyazPlan "оперативное планирование"
+            _pzvСheckBindingSource = new BindingSource
+            {
+                DataSource = new BindingList<PzvCheck>()
+            };
+            gridControlPzvCheck.DataSource = _pzvСheckBindingSource;
+            gridPzvCheckColumnTabTab.FieldName = "tabTab";
+            gridPzvCheckColumnTabFio.FieldName = "tabFioSokr";
+            gridPzvCheckColumnTabFio.Width = 90;
+            gridViewPzvCheck.OptionsView.EnableAppearanceEvenRow = false;
+            gridViewPzvCheck.OptionsView.EnableAppearanceOddRow = false;
+
+            gridViewPzvCheck.OptionsView.RowAutoHeight = true;
+
+
+            _gridHelper.AutoRowFilterConfig(gridViewPzvCheck as GridView, 1);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
+                throw;
+            }
+        }
+        private void CreateDayColumns(GridView _gridView)
+        {
+            try
+            {
+                _gridView.BeginUpdate();
+                int _xMonth = Convert.ToInt32(comboBoxMonthList.SelectedValue);
+                int _xYear = Convert.ToInt32(spinEditYear.Value);
+                if (_xMonth == 0 || _xYear == 0)
+                {
+                    _xMonth = DateTime.Now.Month;
+                    _xYear = DateTime.Now.Year;
+                }
+                DateTime currentDate = DateTime.Now;
+                int daysInMonth = DateTime.DaysInMonth(_xYear, _xMonth);
+                for (int day = 1; day <= daysInMonth; day++)
+                {
+                    GridColumn dayColumn = new GridColumn();
+                    string fieldName = $"pzvTab{day.ToString("00")}";
+                    dayColumn.FieldName = fieldName;
+                    dayColumn.Caption = day.ToString();
+                    dayColumn.Visible = true;
+                    dayColumn.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                    dayColumn.OptionsColumn.AllowEdit = false;
+                    _gridView.Columns.Add(dayColumn);
+
+                }
+                GridColumn itogColumnTabChasiOf = new GridColumn();
+                itogColumnTabChasiOf.FieldName = "tabChasiOf";
+                itogColumnTabChasiOf.Caption = "Итого час по таб.";
+                itogColumnTabChasiOf.Visible = true;
+                itogColumnTabChasiOf.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                itogColumnTabChasiOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                itogColumnTabChasiOf.OptionsColumn.AllowEdit = false;
+                _gridView.Columns.Add(itogColumnTabChasiOf);
+
+                GridColumn itogColumnPztChasiOf = new GridColumn();
+                itogColumnPztChasiOf.FieldName = "pztChasiOf";
+                itogColumnPztChasiOf.Caption = "Итого час по МЛ";
+                itogColumnPztChasiOf.Visible = true;
+                itogColumnPztChasiOf.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                itogColumnPztChasiOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                itogColumnPztChasiOf.OptionsColumn.AllowEdit = false;
+                _gridView.Columns.Add(itogColumnPztChasiOf);
+
+                GridColumn itogColumnProcentOf = new GridColumn();
+                itogColumnProcentOf.FieldName = "procentOf";
+                itogColumnProcentOf.Caption = "% выраб.";
+                itogColumnProcentOf.Visible = true;
+                itogColumnProcentOf.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+                itogColumnProcentOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                itogColumnProcentOf.OptionsColumn.AllowEdit = false;
+                _gridView.Columns.Add(itogColumnProcentOf);
+
+                _gridView.BestFitColumns();
+                _gridView.EndUpdate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка CreateDayColumns: {ex.Message}");
+            }
+        }
+        private void RemoveDayColumns(GridView _gridView)
+        {
+            try
+            {
+                _gridView.BeginUpdate();
+
+                if (_gridView == null) return;
+
+                for (int i = _gridView.Columns.Count - 1; i >= 0; i--)
+                {
+                    GridColumn col = _gridView.Columns[i];
+                    string fieldName = col.FieldName;
+
+                    if (string.IsNullOrEmpty(fieldName))
+                        continue;
+
+                    // Дневные колонки pzvTab01..pzvTab31
+                    if (fieldName.StartsWith("pzvTab"))
+                    {
+                        _gridView.Columns.RemoveAt(i);
+                        continue;
+                    }
+
+                    // Итоговые колонки
+                    if (fieldName == "tabChasiOf"
+                        || fieldName == "pztChasiOf"
+                        || fieldName == "procentOf")
+                    {
+                        _gridView.Columns.RemoveAt(i);
+                    }
+                }
+
+                _gridView.EndUpdate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка RemoveDayColumns: {ex.Message}");
+            }
         }
         private Task SetStatusAsync(string text)
             => this.UI(() => labelStatus.Text = text);
@@ -102,20 +236,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await _loader.RunAsync(
                 async token =>
                 {
-                    await SetLoadingAsync(true);
-
-                    // ❌ НЕ очищаем ComboBox здесь
-
-                    var bs = await _sprMonthService.GetSprMonth(token);
-
-                    await this.UI(() =>
+                    try
                     {
-                        comboBoxMonthList.BeginUpdate();
-                        _sprMonthBindingSource.DataSource = bs.DataSource;
-                        comboBoxMonthList.EndUpdate();
-                    });
+                        await SetLoadingAsync(true);
 
-                    await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                        // ❌ НЕ очищаем ComboBox здесь
+
+                        var bs = await _sprMonthService.GetSprMonth(token);
+
+                        await this.UI(() =>
+                        {
+                            comboBoxMonthList.BeginUpdate();
+                            _sprMonthBindingSource.DataSource = bs.DataSource;
+                            comboBoxMonthList.EndUpdate();
+                        });
+
+                        await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка LoadSprMonthDataAsync: {ex.Message}");
+                    }
                 },
                 onError: async ex =>
                 {
@@ -140,27 +281,34 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await _loader.RunAsync(
                 async token =>
                 {
-                    await SetLoadingAsync(true);
-
-                    await this.UI(() =>
+                    try
                     {
-                        comboBoxPodrVyazList.BeginUpdate();
-                        _podrVyazBindingSource.DataSource = new BindingList<PodrVyaz>();
-                        comboBoxPodrVyazList.EndUpdate();
-                        comboBoxPodrVyazList.SelectedIndex = -1;
-                    });
+                        await SetLoadingAsync(true);
 
-                    var bs = await _vyazService.GetPodrVyaz(token);
+                        await this.UI(() =>
+                        {
+                            comboBoxPodrVyazList.BeginUpdate();
+                            _podrVyazBindingSource.DataSource = new BindingList<PodrVyaz>();
+                            comboBoxPodrVyazList.EndUpdate();
+                            comboBoxPodrVyazList.SelectedIndex = -1;
+                        });
 
-                    await this.UI(() =>
+                        var bs = await _vyazService.GetPodrVyaz(token);
+
+                        await this.UI(() =>
+                        {
+                            comboBoxPodrVyazList.BeginUpdate();
+                            _podrVyazBindingSource.DataSource = bs.DataSource;
+                            comboBoxPodrVyazList.EndUpdate();
+                            comboBoxPodrVyazList.SelectedIndex = -1;
+                        });
+
+                        await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                    }
+                    catch (Exception ex)
                     {
-                        comboBoxPodrVyazList.BeginUpdate();
-                        _podrVyazBindingSource.DataSource = bs.DataSource;
-                        comboBoxPodrVyazList.EndUpdate();
-                        comboBoxPodrVyazList.SelectedIndex = -1;
-                    });
-
-                    await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                        MessageBox.Show($"Ошибка LoadPodrVyazDataAsync: {ex.Message}");
+                    }
                 },
                 onError: async ex =>
                 {
@@ -185,28 +333,37 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             await _loader.RunAsync(
                 async token =>
                 {
-                    await SetLoadingAsync(true);
-
-                    //await this.UI(() =>
-                    //{
-                    //    gridControlPzvCheck.BeginUpdate();
-                    //    _podrVyazBindingSource.DataSource = new BindingList<PodrVyaz>();
-                    //    gridControlPzvCheck.EndUpdate();
-                    //});
-                    //MessageBox.Show($" {comboBoxPodrVyazList.SelectedIndex} ");
-                    int _xPodrID = Convert.ToInt32(comboBoxPodrVyazList.SelectedValue);
-                    int _xMonth = Convert.ToInt32(comboBoxMonthList.SelectedValue);
-                    int _xYear = Convert.ToInt32(spinEditYear.Value);
-                    var bs = await _vyazService.GetPzvCheck(_xPodrID, _xMonth, _xYear, token);
-
-                    await this.UI(() =>
+                    try
                     {
-                        gridControlPzvCheck.BeginUpdate();
-                        _pzvСheckBindingSource.DataSource = bs.DataSource;
-                        gridControlPzvCheck.EndUpdate();
-                    });
+                        gridViewPzvCheck.ShowLoadingPanel();
+                        await SetLoadingAsync(true);
 
-                    await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                        //await this.UI(() =>
+                        //{
+                        //    gridControlPzvCheck.BeginUpdate();
+                        //    _podrVyazBindingSource.DataSource = new BindingList<PodrVyaz>();
+                        //    gridControlPzvCheck.EndUpdate();
+                        //});
+                        //MessageBox.Show($" {comboBoxPodrVyazList.SelectedIndex} ");
+                        int _xPodrID = Convert.ToInt32(comboBoxPodrVyazList.SelectedValue);
+                        int _xMonth = Convert.ToInt32(comboBoxMonthList.SelectedValue);
+                        int _xYear = Convert.ToInt32(spinEditYear.Value);
+                        var bs = await _vyazService.GetPzvCheck(_xPodrID, _xMonth, _xYear, token);
+
+                        await this.UI(() =>
+                        {
+                            gridControlPzvCheck.BeginUpdate();
+                            _pzvСheckBindingSource.DataSource = bs.DataSource;
+                            gridControlPzvCheck.EndUpdate();
+                        });
+
+                        await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                        gridViewPzvCheck.HideLoadingPanel();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка LoadPzvCheckDataAsync: {ex.Message}");
+                    }
                 },
                 onError: async ex =>
                 {
@@ -227,51 +384,151 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
         private async void PlanZagrVyazCheck_Load(object sender, EventArgs e)
         {
-            InitializeBindings();
+            //InitializeBindings();
+            try
+            {
+                RemoveDayColumns(gridViewPzvCheck);
+                CreateDayColumns(gridViewPzvCheck);
+                Task bindingsTask = InitializeBindingsAsync();
+                await Task.WhenAll(bindingsTask);
 
-            await LoadSprMonthDataAsync();
 
-            comboBoxMonthList.SelectedValue = DateTime.Now.Month;
-            spinEditYear.Value = DateTime.Now.Year;
+                await LoadSprMonthDataAsync();
 
-            await LoadPodrVyazDataAsync();
-            comboBoxPodrVyazList.SelectedIndex = -1;
+                comboBoxMonthList.SelectedValue = DateTime.Now.Month;
+                spinEditYear.Value = DateTime.Now.Year;
+
+                await LoadPodrVyazDataAsync();
+                comboBoxPodrVyazList.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка PlanZagrVyazCheck_Load: {ex.Message}");
+            }
         }
 
         private async void comboBoxMonthList_SelectedValueChanged(object sender, EventArgs e)
         {
-            _loader.CancelUser();          // ⛔ отменяем предыдущие загрузки
-            await LoadPodrVyazDataAsync();
+            try
+            {
+                _loader.CancelUser();          // ⛔ отменяем предыдущие загрузки
+                RemoveDayColumns(gridViewPzvCheck);
+                if (comboBoxPodrVyazList.SelectedIndex != -1 && spinEditYear.Value != 0)
+                {
+                    LoadPzvCheckDataAsync();
+                }
+                CreateDayColumns(gridViewPzvCheck);
+                //await LoadPodrVyazDataAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка comboBoxMonthList_SelectedValueChanged: {ex.Message}");
+            }
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            _loader.CancelLifetime();
-            _loader.Dispose();
-            base.OnFormClosed(e);
+            try
+            { 
+                _loader.CancelLifetime();
+                _loader.Dispose();
+                base.OnFormClosed(e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка OnFormClosed: {ex.Message}");
+            }
         }
 
         private void simpleButtonPrevMonth_Click(object sender, EventArgs e)
         {
-            DateTime _prevMonth = Convert.ToDateTime($"01.{comboBoxMonthList.SelectedValue}.{spinEditYear.Value}");
-            _prevMonth = _prevMonth.AddMonths(-1);
+            try
+            { 
+                DateTime _prevMonth = Convert.ToDateTime($"01.{comboBoxMonthList.SelectedValue}.{spinEditYear.Value}");
+                _prevMonth = _prevMonth.AddMonths(-1);
 
-            comboBoxMonthList.SelectedValue = _prevMonth.Month;
-            spinEditYear.Value = _prevMonth.Year;
+                comboBoxMonthList.SelectedValue = _prevMonth.Month;
+                spinEditYear.Value = _prevMonth.Year;
+
+                RemoveDayColumns(gridViewPzvCheck);
+                if (comboBoxPodrVyazList.SelectedIndex != -1 && spinEditYear.Value != 0)
+                {
+                    LoadPzvCheckDataAsync();
+                }
+                CreateDayColumns(gridViewPzvCheck);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка simpleButtonPrevMonth_Click: {ex.Message}");
+            }
         }
 
         private void simpleButtonNextMonth_Click(object sender, EventArgs e)
         {
-            DateTime _nextMonth = Convert.ToDateTime($"01.{comboBoxMonthList.SelectedValue}.{spinEditYear.Value}");
-            _nextMonth = _nextMonth.AddMonths(1);
+            try
+            { 
+                DateTime _nextMonth = Convert.ToDateTime($"01.{comboBoxMonthList.SelectedValue}.{spinEditYear.Value}");
+                _nextMonth = _nextMonth.AddMonths(1);
 
-            comboBoxMonthList.SelectedValue = _nextMonth.Month;
-            spinEditYear.Value = _nextMonth.Year;
+                comboBoxMonthList.SelectedValue = _nextMonth.Month;
+                spinEditYear.Value = _nextMonth.Year;
+
+                RemoveDayColumns(gridViewPzvCheck);
+                if (comboBoxPodrVyazList.SelectedIndex != -1 && spinEditYear.Value != 0)
+                {
+                    LoadPzvCheckDataAsync();
+                }
+                CreateDayColumns(gridViewPzvCheck);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка simpleButtonNextMonth_Click: {ex.Message}");
+            }
         }
 
         private void buttonGetPzvCheck_Click(object sender, EventArgs e)
         {
-            LoadPzvCheckDataAsync();
+            try
+            { 
+                if (comboBoxPodrVyazList.SelectedIndex != -1 && spinEditYear.Value != 0)
+                {
+                    LoadPzvCheckDataAsync();
+                }
+                else
+                {
+                    MessageBox.Show("Выберите подразеделение и повторите попытку");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка buttonGetPzvCheck_Click: {ex.Message}");
+            }
         }
+
+        private void comboBoxMonthList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (comboBoxPodrVyazList.SelectedIndex != -1)
+            //{
+            //    LoadPzvCheckDataAsync();
+            //}
+        }
+
+        private void spinEditYear_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                RemoveDayColumns(gridViewPzvCheck);
+                if (comboBoxPodrVyazList.SelectedIndex != -1 && spinEditYear.Value != 0)
+                {
+                    LoadPzvCheckDataAsync();
+                }
+                CreateDayColumns(gridViewPzvCheck);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка spinEditYear_ValueChanged: {ex.Message}");
+            }
+}
     }
 }
