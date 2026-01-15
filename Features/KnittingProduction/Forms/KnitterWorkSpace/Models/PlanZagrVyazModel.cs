@@ -56,6 +56,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public BindingList<rzvModel> rzvModels { get; set; } = new();
         public DateTime? DataCd { get; set; } // data_cd -> DataCd (MatchNamesWithUnderscores = true)
         public int? PriorityGroup { get; set; }
+
+        // Новые поля для плана/факта под UI-колонки
+        public int? PlanKol_UI { get; set; }
+        public decimal? PlanChas_UI { get; set; }
+        public int? FactKol_UI { get; set; }
+        public decimal? FactChas_UI { get; set; }
     }
 
     public class nrModel

@@ -208,6 +208,18 @@ where kwsmlKmlID in @ids
                     }
                 }
 
+                // Заполняем UI-поля плана/факта из базовых значений
+                foreach (var parent in parents)
+                {
+                    // Плановые
+                    parent.PlanKol_UI ??= parent.pzvKolNazn != 0 ? parent.pzvKolNazn : parent.pzvKol;
+                    parent.PlanChas_UI ??= parent.pzvChasNazn != 0 ? parent.pzvChasNazn : parent.pzvNChasi;
+
+                    // Факт
+                    parent.FactKol_UI ??= parent.pzvKol;
+                    parent.FactChas_UI ??= parent.pzvNChasi;
+                }
+
                 return parents;
             }
             catch (Exception ex)
