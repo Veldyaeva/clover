@@ -57,6 +57,11 @@ namespace SewingProduction.Core.Models
         [NotMapped]public string Ko { get; set; }
         [NotMapped] public string baz { get; set; }
         [NotMapped] public string Kodd { get; set; }
+
+        private int _arh;
+        public int Arh { get => _arh; set => SetField(ref _arh, value); }
+        public int? Annid { get; set; }
+
         public string Kod { get; set; }
         
         public string Grup { get; set; }
@@ -99,9 +104,34 @@ namespace SewingProduction.Core.Models
             set => SetField(ref _gost, value);
         }
 
-        public decimal Norm_t { get; set; }
+        private decimal _norm_t;
+        public decimal Norm_t {
+            get=>_norm_t;
+            set=>SetField(ref _norm_t, value);
+        }
+
         public decimal Norm_r { get; set; }
-        public int Sek_shv { get; set; }
+        //public int Sek { get; set; }
+        private int _sek;
+        public int Sek {
+            get=>_sek;
+            set => SetField(ref _sek, value);
+        }
+        private decimal _sek_shv;
+        public decimal Sek_shv {
+            get=>_sek_shv;
+            set => SetField(ref _sek_shv, value);
+        }
+        private int _sek_vyaz;
+        public int Sek_vyaz {
+            get=>_sek_vyaz;
+            set => SetField(ref _sek_vyaz, value);
+        }
+        private int _sek_kr;
+        public int Sek_kr {
+            get=>_sek_kr;
+            set => SetField(ref _sek_kr, value);
+        }
         public decimal Sh_r { get; set; }
         public double Seb_r { get; set; }
         public decimal Norm_n { get; set; }
@@ -113,11 +143,9 @@ namespace SewingProduction.Core.Models
         public decimal Seb_proizv { get; set; }
         public string Po { get; set; }
         public decimal Seb_z_s { get; set; }
-        public int Sek { get; set; }
         public int Sek_vyaz5 { get; set; }
         public int Sek_vyaz7 { get; set; }
         public int Sek_vyaz12 { get; set; }
-        public int Sek_vyaz { get; set; }
         public string Pict { get; set; }
         public string Kod_shtr { get; set; }
         public string Kod_shtr_k { get; set; }
@@ -175,6 +203,12 @@ namespace SewingProduction.Core.Models
             get => _opis_t1;
             set => SetField(ref _opis_t1, value);
         }
+        private decimal _seb_t1;
+        public decimal Seb_t1
+        {
+            get => _seb_t1;
+            set => SetField(ref _seb_t1, value);
+        }
 
         // === t2 ===
         private string _kod_t2;
@@ -208,6 +242,12 @@ namespace SewingProduction.Core.Models
         {
             get => _opis_t2;
             set => SetField(ref _opis_t2, value);
+        }
+        private decimal _seb_t2;
+        public decimal Seb_t2
+        {
+            get => _seb_t2;
+            set => SetField(ref _seb_t2, value);
         }
 
         // === t3 ===
@@ -243,6 +283,12 @@ namespace SewingProduction.Core.Models
             get => _opis_t3;
             set => SetField(ref _opis_t3, value);
         }
+        private decimal _seb_t3;
+        public decimal Seb_t3
+        {
+            get => _seb_t3;
+            set => SetField(ref _seb_t3, value);
+        }
 
         // === t4 ===
         private string _kod_t4;
@@ -276,6 +322,12 @@ namespace SewingProduction.Core.Models
         {
             get => _opis_t4;
             set => SetField(ref _opis_t4, value);
+        }
+        private decimal _seb_t4;
+        public decimal Seb_t4
+        {
+            get => _seb_t4;
+            set => SetField(ref _seb_t4, value);
         }
 
         // === t5 ===
@@ -311,6 +363,12 @@ namespace SewingProduction.Core.Models
             get => _opis_t5;
             set => SetField(ref _opis_t5, value);
         }
+        private decimal _seb_t5;
+        public decimal Seb_t5
+        {
+            get => _seb_t5;
+            set => SetField(ref _seb_t5, value);
+        }
 
         // === t6 ===
         private string _kod_t6;
@@ -345,6 +403,12 @@ namespace SewingProduction.Core.Models
             get => _opis_t6;
             set => SetField(ref _opis_t6, value);
         }
+        private decimal _seb_t6;
+        public decimal Seb_t6
+        {
+            get => _seb_t6;
+            set => SetField(ref _seb_t6, value);
+        }
 
         // === t7 ===
         private string _kod_t7;
@@ -373,12 +437,7 @@ namespace SewingProduction.Core.Models
             }
         }
 
-        private decimal _seb_t7;
-        public decimal Seb_t7
-        {
-            get => _seb_t7;
-            set => SetField(ref _seb_t7, value);
-        }
+        
 
         private string _opis_t7;
         public string Opis_t7
@@ -386,15 +445,16 @@ namespace SewingProduction.Core.Models
             get => _opis_t7;
             set => SetField(ref _opis_t7, value);
         }
+        private decimal _seb_t7;
+        public decimal Seb_t7
+        {
+            get => _seb_t7;
+            set => SetField(ref _seb_t7, value);
+        }
 
 
         public decimal Seb_dop { get; set; }
-        public decimal Seb_t1 { get; set; }
-        public decimal Seb_t3 { get; set; }
-        public decimal Seb_t2 { get; set; }
-        public decimal Seb_t4 { get; set; }
-        public decimal Seb_t5 { get; set; }
-        public decimal Seb_t6 { get; set; }
+
 
         public int Baza { get; set; }
         private int _kod_v;
@@ -409,7 +469,7 @@ namespace SewingProduction.Core.Models
         public decimal Koef_pr { get; set; }
         public decimal Ob_izd { get; set; }
         public int Stavka_nds { get; set; }
-        
+        public int St_nds { get; set; }
         public int Sposob_up { get; set; }
         
         private int _id_country;
@@ -418,13 +478,9 @@ namespace SewingProduction.Core.Models
         public int Sek_vyaz70 { get; set; }
         public int Sek_vyaz3 { get; set; }
         public decimal Koef_d { get; set; }
-        public int St_nds { get; set; }
+        
         public int Upd_razm { get; set; }
         public decimal Gl_rekom { get; set; }
-        public int Sek_kr { get; set; }
-        
-        private int _arh;
-        public int Arh { get => _arh; set => SetField(ref _arh, value); }
 
         public int Nds { get; set; }
         public string Ed_izm { get; set; }
@@ -451,23 +507,10 @@ namespace SewingProduction.Core.Models
         public decimal Brak_avg { get; set; }
         public decimal Cena_prdc { get; set; }
         private string _komb_det;
-        public string Komb_det { get=>_komb_det;
-            set { 
-            if (_komb_det != value) 
-                { 
-                    _komb_det = value;
-                    if (!_isInitializing) IsModified = true;
-                }
-            }}
+        public string Komb_det { get => _komb_det; set => SetField(ref _komb_det, value); }
+
         private string _komb_izd;
-        public string Komb_izd { get=>_komb_izd;
-            set {
-            if (_komb_izd != value) 
-                { 
-                    _komb_izd = value;
-                    if (!_isInitializing) IsModified = true;
-                } 
-            }}
+        public string Komb_izd { get => _komb_izd; set => SetField(ref _komb_izd, value); }
         public string Sostav { get; set; }
         public string Kod_t { get; set; }
         public decimal K_kg_m1 { get; set; }
@@ -523,7 +566,7 @@ namespace SewingProduction.Core.Models
         public decimal? Sum_komplnum { get; set; }
         public decimal Sek_vyaz57 { get; set; }
         public decimal Sek_vyaz18 { get; set; }
-        public int? Annid { get; set; }
+        
 
         
 

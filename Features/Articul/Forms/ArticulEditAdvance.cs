@@ -86,8 +86,8 @@ namespace SewingProduction.Features.Articul.Forms
 
             await Task.WhenAll(edAdvTask, nRub_kTask, sprTask);
 
-            _nRub_k = await nRub_kTask;
-            _bindingSourceArtKod.DataSource = await edAdvTask;
+            _nRub_k = nRub_kTask.Result;
+            _bindingSourceArtKod.DataSource = edAdvTask.Result;
 
             InitializeBindingsAsync();
             UpdateNorms();
@@ -482,8 +482,8 @@ namespace SewingProduction.Features.Articul.Forms
                 _bindingSourceArtCommonSave.Clear();
 
                 //копирование всех кодов с измененными общими данными в список для сохранения
-                var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
-                if (currentItem.IsModified == false)
+                //var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+                if (_currentModel.IsModified == false)
                 {
                     return;
                 }
@@ -492,7 +492,7 @@ namespace SewingProduction.Features.Articul.Forms
                 {
                     var item = (ArticulModel)_bindingSourceArtKod[i];
                     //    
-                    var newItem = ObjectCloneHelper.CloneWithExclusions(currentItem, clone =>
+                    var newItem = ObjectCloneHelper.CloneWithExclusions(_currentModel, clone =>
                     {
                         clone.Kod = item.Kod;
                         clone.IsModified = true;
@@ -516,7 +516,7 @@ namespace SewingProduction.Features.Articul.Forms
 
                 _bindingSourceArtCommonSave.Clear();
                 //принятие изменений в текущей модели
-                currentItem.AcceptChanges();
+                _currentModel.AcceptChanges();
 
                 XtraMessageBox.Show("Изменения успешно сохранены.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -553,8 +553,8 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void ArticulEditAdvance_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
-            if (currentItem.IsModified)
+            //var _currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
+            if (_currentModel.IsModified)
             {
                 var result = XtraMessageBox.Show("Есть несохраненные изменения. Сохранить перед закрытием?", "Подтверждение", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
