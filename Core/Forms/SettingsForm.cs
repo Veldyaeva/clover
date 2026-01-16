@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Reflection;
 using System.Windows.Forms;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -78,6 +79,24 @@ namespace SewingProduction.form
 
             if (colorPickEditTextBox.EditValue is Color textBoxColor && textBoxColor != Color.Empty)
                 theme.TextBoxBackground = textBoxColor;
+
+            if (colorPickEditButtonBackground.EditValue is Color buttonBgColor && buttonBgColor != Color.Empty)
+                theme.ButtonBackground = buttonBgColor;
+
+            if (colorPickEditButtonTextColor.EditValue is Color buttonTextColor && buttonTextColor != Color.Empty)
+                theme.ButtonTextColor = buttonTextColor;
+
+            if (colorPickEditLabelTextColor.EditValue is Color labelTextColor && labelTextColor != Color.Empty)
+                theme.LabelText = labelTextColor;
+
+            if (colorPickEdit3.EditValue is Color textBoxTextColor && textBoxTextColor != Color.Empty)
+                theme.TextBoxText = textBoxTextColor;
+
+            if (colorPickEditGridBackground.EditValue is Color gridBgColor && gridBgColor != Color.Empty)
+                theme.GridBackground = gridBgColor;
+
+            if (colorPickEditGridRowBackground.EditValue is Color gridRowBgColor && gridRowBgColor != Color.Empty)
+                theme.GridRowBackground = gridRowBgColor;
 
             themes[_currentThemeName] = theme;
         }
@@ -167,13 +186,26 @@ namespace SewingProduction.form
             
             if (themes.TryGetValue(_currentThemeName, out var currentTheme))
             {
-                colorPickEditLabel.EditValue = currentTheme.LabelTextColor;
+                //colorPickEditLabel.EditValue = currentTheme.Label;
                 colorPickEditTextBox.EditValue = currentTheme.TextBoxBackground;
+                colorPickEditButtonBackground.EditValue = currentTheme.ButtonBackground;
+                colorPickEditButtonTextColor.EditValue = currentTheme.ButtonTextColor;
+                colorPickEditLabelTextColor.EditValue = currentTheme.LabelText;
+                colorPickEdit3.EditValue = currentTheme.TextBoxText;
+                colorPickEditGridBackground.EditValue = currentTheme.GridBackground;
+                colorPickEditGridRowBackground.EditValue = currentTheme.GridRowBackground;
             }
             else
             {
-                colorPickEditLabel.EditValue = ThemeManager.ActiveTheme?.LabelTextColor ?? Color.Black;
-                colorPickEditTextBox.EditValue = ThemeManager.ActiveTheme?.TextBoxBackground ?? Color.White;
+                var activeTheme = ThemeManager.ActiveTheme;
+                //colorPickEditLabel.EditValue = activeTheme?.LabelTextColor ?? Color.Black;
+                colorPickEditTextBox.EditValue = activeTheme?.TextBoxBackground ?? Color.White;
+                colorPickEditButtonBackground.EditValue = activeTheme?.ButtonBackground ?? Color.LightGray;
+                colorPickEditButtonTextColor.EditValue = activeTheme?.ButtonTextColor ?? Color.Black;
+                colorPickEditLabelTextColor.EditValue = activeTheme?.LabelText ?? Color.Black;
+                colorPickEdit3.EditValue = activeTheme?.TextBoxText ?? Color.Black;
+                colorPickEditGridBackground.EditValue = activeTheme?.GridBackground ?? Color.White;
+                colorPickEditGridRowBackground.EditValue = activeTheme?.GridRowBackground ?? Color.White;
             }
 
             _isInitializingColors = false;
@@ -226,6 +258,97 @@ namespace SewingProduction.form
                 if (textBoxColor.HasValue)
                     ThemeManager.ActiveTheme.TextBoxBackground = textBoxColor.Value;
                 ThemeManager.ApplyUserColorOverrides(raiseEvent: true);
+            }
+        }
+
+        private void colorPickEditButtonBackground_EditValueChanged(object sender, EventArgs e)
+        {
+            if (_isInitializingColors)
+                return;
+
+            if (colorPickEditButtonBackground.EditValue is Color color && color != Color.Empty)
+            {
+                UpdateThemeColorProperty("ButtonBackground", color);
+            }
+        }
+
+        private void colorPickEditButtonTextColor_EditValueChanged(object sender, EventArgs e)
+        {
+            if (_isInitializingColors)
+                return;
+
+            if (colorPickEditButtonTextColor.EditValue is Color color && color != Color.Empty)
+            {
+                UpdateThemeColorProperty("ButtonTextColor", color);
+            }
+        }
+
+        private void colorPickEditLabelTextColor_EditValueChanged(object sender, EventArgs e)
+        {
+            if (_isInitializingColors)
+                return;
+
+            if (colorPickEditLabelTextColor.EditValue is Color color && color != Color.Empty)
+            {
+                UpdateThemeColorProperty("LabelText", color);
+            }
+        }
+
+        private void colorPickEdit3_EditValueChanged(object sender, EventArgs e)
+        {
+            if (_isInitializingColors)
+                return;
+
+            if (colorPickEdit3.EditValue is Color color && color != Color.Empty)
+            {
+                UpdateThemeColorProperty("TextBoxText", color);
+            }
+        }
+
+        private void colorPickEditGridBackground_EditValueChanged(object sender, EventArgs e)
+        {
+            if (_isInitializingColors)
+                return;
+
+            if (colorPickEditGridBackground.EditValue is Color color && color != Color.Empty)
+            {
+                UpdateThemeColorProperty("GridBackground", color);
+            }
+        }
+
+        private void colorPickEditGridRowBackground_EditValueChanged(object sender, EventArgs e)
+        {
+            if (_isInitializingColors)
+                return;
+
+            if (colorPickEditGridRowBackground.EditValue is Color color && color != Color.Empty)
+            {
+                UpdateThemeColorProperty("GridRowBackground", color);
+            }
+        }
+
+        private void UpdateThemeColorProperty(string propertyName, Color color)
+        {
+            if (string.IsNullOrEmpty(_currentThemeName))
+                return;
+
+            var themes = SettingsManager.GetThemes();
+            if (!themes.TryGetValue(_currentThemeName, out var theme))
+                return;
+
+            // Обновляем свойство через рефлексию для универсальности
+            var property = typeof(ThemeManager.Theme).GetProperty(propertyName);
+            if (property != null && property.CanWrite)
+            {
+                property.SetValue(theme, color);
+                themes[_currentThemeName] = theme;
+
+                // Применяем изменения к активной теме для предпросмотра
+                if (ThemeManager.ActiveTheme != null)
+                {
+                    property.SetValue(ThemeManager.ActiveTheme, color);
+                    ThemeManager.ApplyUserColorOverrides(raiseEvent: true);
+                }
             }
         }
     }
