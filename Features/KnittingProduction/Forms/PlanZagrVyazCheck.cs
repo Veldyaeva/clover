@@ -603,6 +603,39 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 MessageBox.Show($"Ошибка spinEditYear_ValueChanged: {ex.Message}");
             }
-}
+        }
+
+        private void gridViewPzvCheck_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            if (e.Column != null && e.Column.FieldName.StartsWith("d"))
+            {
+                string dayNumber = e.Column.FieldName.Substring(1);
+                if (int.TryParse(dayNumber, out int day) && day >= 1 && day <= 31)
+                {
+                    string markColumnName = $"dd{day.ToString("00")}"; ;
+                    object markValue = gridViewPzvCheck.GetRowCellValue(e.RowHandle, markColumnName);
+
+                    if (markValue != null)
+                    {
+                        string[] workingValue = { "1", "11", "8" };
+                        bool IsWorkingDay = workingValue.Any(v => markValue.ToString().Contains(v));
+                        bool IsHoliday = markValue.ToString().Contains("/3");
+                        bool IsOrderBasedLeave = markValue.ToString().Contains("/4");
+                        if (IsHoliday) { e.Appearance.BackColor = Color.FromArgb(128, 128, 255); }
+                        else
+                        {
+                            if (IsOrderBasedLeave) { e.Appearance.BackColor = Color.FromArgb(255, 128, 64); }
+                            else
+                            {
+                                if (IsWorkingDay) { e.Appearance.BackColor = Color.FromArgb(255, 255, 255); }
+                                else
+                                { e.Appearance.BackColor = Color.FromArgb(255, 128, 128); }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
