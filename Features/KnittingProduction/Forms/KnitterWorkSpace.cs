@@ -7,11 +7,12 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
-using System.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class KnitterWorkSpace : Form
+    public partial class KnitterWorkSpace : CustomForm
     {
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
@@ -100,7 +101,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Инициализирует форму рабочего места вязальщика.
         /// Настраивает источники данных, колонки гридов, оркестратор и подписки.
         /// </summary>
-        public KnitterWorkSpace()
+        public KnitterWorkSpace(UserClass user) : base(user)
         {
             try
         {
@@ -1569,6 +1570,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

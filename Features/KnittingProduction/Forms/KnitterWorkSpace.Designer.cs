@@ -2,7 +2,7 @@
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    partial class KnitterWorkSpace : Form
+    partial class KnitterWorkSpace : CustomForm
     {
         /// <summary>
         /// Required designer variable.
@@ -522,8 +522,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3.OptionsDetail.AllowExpandEmptyDetails = true;
             bandedGridView3.OptionsView.EnableAppearanceEvenRow = true;
             bandedGridView3.OptionsView.ShowColumnHeaders = false;
-            bandedGridView3.OptionsView.ShowGroupPanel = false;
             bandedGridView3.OptionsView.ShowFooter = true;
+            bandedGridView3.OptionsView.ShowGroupPanel = false;
             // 
             // gridBand30
             // 
@@ -687,6 +687,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             bandedGridColumn28.Caption = "факт в м/ч";
             bandedGridColumn28.Name = "bandedGridColumn28";
+            bandedGridColumn28.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", "SUM={0:0.##}") });
             bandedGridColumn28.Visible = true;
             // 
             // gridBand55
@@ -708,7 +709,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand28.Caption = " Статус";
             gridBand28.Columns.Add(gridColumn8);
             gridBand28.Name = "gridBand28";
-            gridBand28.VisibleIndex = 6;
+            gridBand28.VisibleIndex = 7;
             gridBand28.Width = 137;
             // 
             // gridColumn8
@@ -723,7 +724,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand33.Caption = "Время статуса";
             gridBand33.Columns.Add(gridColumn9);
             gridBand33.Name = "gridBand33";
-            gridBand33.VisibleIndex = 7;
+            gridBand33.VisibleIndex = 8;
             gridBand33.Width = 146;
             // 
             // gridColumn9

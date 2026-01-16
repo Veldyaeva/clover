@@ -39,7 +39,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int? pzvTab { get; set; }
         public int? n_pach { get; set; }
         //количество в пачке (или в рассчёте, хз)
-        public int? pzvRKol { get; set; }   
+        public int? pzvRKol { get; set; }
         public string razm { get; set; }
         public int? nrN { get; set; }
         public int? nrN1 { get; set; }
@@ -93,7 +93,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
 
     public class knitMachineList
     {
-        public int kmlId { get; set; }  
+        public int kmlId { get; set; }
         public int kmlKmAId { get; set; }
         public string kmlNumber { get; set; }
         public int kmlOdpId { get; set; }
@@ -107,89 +107,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models
         public int idKnitClass { get; set; }
         public string name_class { get; set; }
         public decimal? koefObServ { get; set; }
-        //            kma.kmaNumber
-        //		, cast(ltrim(rtrim(odp.odpDevName)) + ' // ' + ltrim(rtrim(odp.odpCategoryName)) + ' // ' + ltrim(rtrim(odp.odpName)) as nvarchar(250)) as paramName
-        //--		, cast(REPLACE(odp.odpCategoryName, 'Вход ', '') as int) inputIndex
-        //		, os.text_ob_s
-        //		, odp.odpCode
-        //    , kma.kmaIDNazn
-        //    , kma.nazn AS machNazn
-        //    , kma.kmaZdID
-        //    , kma.object AS machObject
-        //    , 'зона ' + trim(cast(ISNULL(kmaNumber, 0) as nvarchar)) + ' - ' + 'авт.№ ' + trim(cast(ISNULL(kmlNumber, 0) as nvarchar)) + ' - ' + trim(cast(ISNULL(kmlInvNum, '') as nvarchar)) + ' - ' + trim(cast(ISNULL(text_ob_s, '') as nvarchar)) as oborFullNaimen
-        //    , os.id_class AS kmlIdVyazClass
-        //    ,mc.name_class
-        //    , CAST(dbo.getNumbersOnly(kml.kmlNumber) AS INT) AS kmlNumberInt
-        //    , CAST(dbo.getNumbersOnly(kma.kmaNumber) AS INT) AS kmaNumberInt
-        //    , mc.koefObServ
-    }
-    /*
-    public class PlanZagrVyazOper
-    {
-        public int? olPzvID { get; set; }
-        public string pzvArticul { get; set; }
-        public string pzvNomZad { get; set; }
-        public int? pzvNom { get; set; }
-        public int? olNomN { get; set; }
-        public string olPachKod { get; set; }
-        public string olKod { get; set; }
-        public string olOperName { get; set; }
-        public string olOborudClass { get; set; }
-        public decimal? olSekAll { get; set; }
-        public DateTime? olPzvDateStart { get; set; }
-        public DateTime? olPzvDateEnd { get; set; }
-        public string pzvMod { get; set; }
-        public int pzvIdBrig { get; set; }
-        public int pzvSek  {get; set;}
-        public int pzvKol {get; set;}
-        public decimal pzvNChasi {get; set;}
-        public int pzvKmlID {get; set;}
-        public DateTime? pzvDateNaznKm {get; set;}
-        public int pzvTab {get; set;}
-        public DateTime? pzvDateNaznTab {get; set;}
-        public DateTime? pzvDateStart {get; set;}
-        public DateTime? pzvDateEnd {get; set;}
-        public DateTime? pzvDateML {get; set;}
-        public DateTime? pzvDateMLUt {get; set;}
-        public DateTime? pzvDateMast {get; set;}
-        public int pzvRKol {get; set;}
-        public int pzvSekNazn {get; set;}
-        public decimal pzvChasNazn {get; set;}
-        public int pzvKolNazn {get; set;}
-        public string pzvVidPr {get; set;}
-        public string pzvCompAdd {get; set;}
-        public DateTime? pzvDateAdd {get; set;}
-        public DateTime? pzvUpdDate { get; set; }
 
-        public int nrID {get; set;}
-        public int kod {get; set;}
-        public int kod_o {get; set;}
-        public int kod_podr {get; set;}
-        public int kod_proizv {get; set;}
-        public string nrText {get; set;}
-        public int sek  {get; set;}
-        public decimal seb  {get; set;}
-        public int n {get; set;}
-        public int n_ch  {get; set;}
-        public int n1 {get; set;}
-        public decimal seb_s  {get; set;}
-        public int razryd {get; set;}
-        public string spec {get; set;}
-        public string obor {get; set;}
-        public int sek12  {get; set;}
-        public int sek7 {get; set;}
-        public int sek5 {get; set;}
-        public int kod_ob  {get; set;}
-        public int sql_pr_add {get; set;}
-        public DateTime? date_add {get; set;}
-        public int komp_name {get; set;}
-        public DateTime? nrDateDel {get; set;}
-        public int nrCompDel {get; set;}
-        public DateTime? nrDateAdd {get; set;}
-        public int nrCompAdd { get; set; }
-        public int annId { get; set; }
 
     }
-    */
-
 }

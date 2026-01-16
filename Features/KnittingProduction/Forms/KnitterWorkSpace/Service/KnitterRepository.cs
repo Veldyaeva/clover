@@ -209,16 +209,34 @@ where kwsmlKmlID in @ids
                 }
 
                 // Заполняем UI-поля плана/факта из базовых значений
-                foreach (var parent in parents)
-                {
-                    // Плановые
-                    parent.PlanKol_UI ??= parent.pzvKolNazn != 0 ? parent.pzvKolNazn : parent.pzvKol;
-                    parent.PlanChas_UI ??= parent.pzvChasNazn != 0 ? parent.pzvChasNazn : parent.pzvNChasi;
+                //////////foreach (var parent in parents)
+                //////////{
+                //////////    // Плановые
+                //////////    parent.PlanKol_UI ??= parent.pzvKolNazn != 0 ? parent.pzvKolNazn : parent.pzvKol;
+                //////////    parent.PlanChas_UI ??= parent.pzvChasNazn != 0 ? parent.pzvChasNazn : parent.pzvNChasi;
 
-                    // Факт
-                    parent.FactKol_UI ??= parent.pzvKol;
-                    parent.FactChas_UI ??= parent.pzvNChasi;
+                //////////    // Факт
+                //////////    parent.FactKol_UI ??= parent.pzvKol;
+                //////////    parent.FactChas_UI ??= parent.pzvNChasi;
+                //////////}
+
+
+                static void FillUi(KnitterPZVModel r)
+                {
+                    bool assigned = (r.pzvTab ?? 0) != 0;
+
+                    // tab=0 -> Kol/NChasi = план, Nazn пустые
+                    // tab>0 -> Kol/NChasi = факт, Nazn = план
+                    r.PlanKol_UI = assigned ? r.pzvKolNazn : (r.pzvKol ?? 0);
+                    r.PlanChas_UI = assigned ? r.pzvChasNazn : (r.pzvNChasi ?? 0m);
+
+                    r.FactKol_UI = assigned ? (r.pzvKol ?? 0) : 0;
+                    r.FactChas_UI = assigned ? (r.pzvNChasi ?? 0m) : 0m;
                 }
+
+                foreach (var p in parents)
+                    FillUi(p);
+
 
                 return parents;
             }
