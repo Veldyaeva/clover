@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using SewingProduction.Core.Class.Settings;
+using System.Linq;
 
 namespace SewingProduction
 {
@@ -22,375 +23,284 @@ namespace SewingProduction
         // Переменные для текущей темы
         public static string CurrentTheme { get; private set; }// = "Lavander";
 
-        #region White
-        public static readonly Theme White = new Theme
+        // Дефолтные темы используются только для инициализации JSON при первом запуске
+        // После первого запуска все темы хранятся в settings.json и редактируются там
+        private static readonly Dictionary<string, Theme> DefaultThemes = new Dictionary<string, Theme>
         {
-            ButtonBackground = Color.FromArgb(224, 224, 224), // LightGray
-            ButtonTextColor = Color.Black,
-            LabelTextColor = Color.Black,
-            TextBoxBackground = Color.White,
-            TextBoxText = Color.Black,
-            HighlightBackground = Color.FromArgb(200, 200, 200),
-            BandHighlightColor = Color.FromArgb(180, 180, 180),
-            GradientStartColor = Color.FromArgb(255, 255, 255),
-            GradientEndColor = Color.FromArgb(255, 255, 255)
+            ["White"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(224, 224, 224),
+                ButtonTextColor = Color.Black,
+                LabelTextColor = Color.Black,
+                TextBoxBackground = Color.White,
+                TextBoxText = Color.Black,
+                HighlightBackground = Color.FromArgb(200, 200, 200),
+                BandHighlightColor = Color.FromArgb(180, 180, 180),
+                GradientStartColor = Color.FromArgb(255, 255, 255),
+                GradientEndColor = Color.FromArgb(255, 255, 255)
+            },
+            ["Gray"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(224, 224, 224),
+                ButtonTextColor = Color.Black,
+                LabelTextColor = Color.Black,
+                TextBoxBackground = Color.White,
+                TextBoxText = Color.Black,
+                HighlightBackground = Color.FromArgb(200, 200, 200),
+                BandHighlightColor = Color.FromArgb(180, 180, 180),
+                GradientStartColor = Color.FromArgb(240, 240, 240),
+                GradientEndColor = Color.FromArgb(200, 200, 200)
+            },
+            ["Rainbow"] = new Theme
+            {
+                ButtonBackground = ColorTranslator.FromHtml("#B388FF"),
+                ButtonTextColor = ColorTranslator.FromHtml("#1C1C1C"),
+                LabelTextColor = ColorTranslator.FromHtml("#333333"),
+                TextBoxBackground = ColorTranslator.FromHtml("#FFF59D"),
+                TextBoxText = ColorTranslator.FromHtml("#000000"),
+                HighlightBackground = ColorTranslator.FromHtml("#80DEEA"),
+                BandHighlightColor = ColorTranslator.FromHtml("#81C784"),
+                GradientStartColor = ColorTranslator.FromHtml("#FF8A80"),
+                GradientEndColor = ColorTranslator.FromHtml("#82B1FF")
+            },
+            ["Blue"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(173, 216, 230),
+                ButtonTextColor = Color.FromArgb(25, 25, 112),
+                LabelTextColor = Color.FromArgb(25, 25, 112),
+                TextBoxBackground = Color.FromArgb(240, 248, 255),
+                TextBoxText = Color.FromArgb(0, 0, 139),
+                HighlightBackground = Color.FromArgb(135, 206, 250),
+                BandHighlightColor = Color.FromArgb(173, 216, 230),
+                GradientStartColor = Color.FromArgb(240, 248, 255),
+                GradientEndColor = Color.FromArgb(70, 130, 180)
+            },
+            ["Gold"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(255, 235, 205),
+                ButtonTextColor = Color.FromArgb(139, 69, 19),
+                LabelTextColor = Color.FromArgb(139, 69, 19),
+                TextBoxBackground = Color.FromArgb(250, 240, 230),
+                TextBoxText = Color.FromArgb(105, 75, 45),
+                HighlightBackground = Color.FromArgb(245, 222, 179),
+                BandHighlightColor = Color.FromArgb(255, 235, 205),
+                GradientStartColor = Color.FromArgb(255, 239, 213),
+                GradientEndColor = Color.FromArgb(218, 165, 32)
+            },
+            ["Lavander"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(230, 230, 250),
+                ButtonTextColor = Color.FromArgb(72, 61, 139),
+                LabelTextColor = Color.FromArgb(72, 61, 139),
+                TextBoxBackground = Color.FromArgb(245, 245, 250),
+                TextBoxText = Color.FromArgb(85, 45, 115),
+                HighlightBackground = Color.FromArgb(240, 230, 250),
+                BandHighlightColor = Color.FromArgb(230, 230, 250),
+                GradientStartColor = Color.FromArgb(245, 245, 255),
+                GradientEndColor = Color.FromArgb(176, 148, 226)
+            },
+            ["Peach"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(255, 223, 196),
+                ButtonTextColor = Color.FromArgb(139, 69, 19),
+                LabelTextColor = Color.FromArgb(139, 69, 19),
+                TextBoxBackground = Color.FromArgb(255, 245, 230),
+                TextBoxText = Color.FromArgb(120, 60, 30),
+                HighlightBackground = Color.FromArgb(255, 228, 200),
+                BandHighlightColor = Color.FromArgb(255, 223, 196),
+                GradientStartColor = Color.FromArgb(255, 239, 213),
+                GradientEndColor = Color.FromArgb(255, 180, 150)
+            },
+            ["Sea"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(173, 216, 230),
+                ButtonTextColor = Color.FromArgb(0, 105, 148),
+                LabelTextColor = Color.FromArgb(0, 105, 148),
+                TextBoxBackground = Color.FromArgb(240, 248, 255),
+                TextBoxText = Color.FromArgb(25, 25, 112),
+                HighlightBackground = Color.FromArgb(200, 230, 240),
+                BandHighlightColor = Color.FromArgb(173, 216, 230),
+                GradientStartColor = Color.FromArgb(224, 255, 255),
+                GradientEndColor = Color.FromArgb(100, 150, 150)
+            },
+            ["Green"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(200, 230, 210),
+                ButtonTextColor = Color.FromArgb(64, 115, 79),
+                LabelTextColor = Color.FromArgb(64, 115, 79),
+                TextBoxBackground = Color.FromArgb(245, 255, 250),
+                TextBoxText = Color.FromArgb(45, 90, 60),
+                HighlightBackground = Color.FromArgb(220, 240, 230),
+                BandHighlightColor = Color.FromArgb(200, 230, 210),
+                GradientStartColor = Color.FromArgb(240, 255, 250),
+                GradientEndColor = Color.FromArgb(120, 167, 137)
+            },
+            ["Pink"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(255, 192, 203),
+                ButtonTextColor = Color.FromArgb(139, 0, 139),
+                LabelTextColor = Color.FromArgb(139, 0, 139),
+                TextBoxBackground = Color.FromArgb(255, 228, 232),
+                TextBoxText = Color.FromArgb(75, 0, 130),
+                HighlightBackground = Color.FromArgb(255, 240, 245),
+                BandHighlightColor = Color.FromArgb(255, 192, 203),
+                GradientStartColor = Color.FromArgb(255, 240, 245),
+                GradientEndColor = Color.FromArgb(255, 145, 180)
+            },
+            ["Orange"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(255, 200, 150),
+                ButtonTextColor = Color.FromArgb(139, 69, 19),
+                LabelTextColor = Color.FromArgb(139, 69, 19),
+                TextBoxBackground = Color.FromArgb(255, 245, 230),
+                TextBoxText = Color.FromArgb(120, 60, 30),
+                HighlightBackground = Color.FromArgb(255, 225, 180),
+                BandHighlightColor = Color.FromArgb(255, 200, 150),
+                GradientStartColor = Color.FromArgb(255, 239, 213),
+                GradientEndColor = Color.FromArgb(255, 165, 120)
+            },
+            ["Wine"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(139, 0, 26),
+                ButtonTextColor = Color.FromArgb(255, 245, 238),
+                LabelTextColor = Color.FromArgb(255, 245, 238),
+                TextBoxBackground = Color.FromArgb(245, 222, 179),
+                TextBoxText = Color.FromArgb(85, 26, 139),
+                HighlightBackground = Color.FromArgb(160, 0, 30),
+                BandHighlightColor = Color.FromArgb(139, 0, 26),
+                GradientStartColor = Color.FromArgb(255, 245, 238),
+                GradientEndColor = Color.FromArgb(139, 0, 0)
+            },
+            ["Sky"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(200, 225, 255),
+                ButtonTextColor = Color.FromArgb(30, 70, 140),
+                LabelTextColor = Color.FromArgb(30, 70, 140),
+                TextBoxBackground = Color.FromArgb(230, 245, 255),
+                TextBoxText = Color.FromArgb(50, 90, 160),
+                HighlightBackground = Color.FromArgb(220, 235, 250),
+                BandHighlightColor = Color.FromArgb(200, 225, 255),
+                GradientStartColor = Color.FromArgb(240, 250, 255),
+                GradientEndColor = Color.FromArgb(150, 190, 230)
+            },
+            ["Mint"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(210, 245, 230),
+                ButtonTextColor = Color.FromArgb(30, 90, 70),
+                LabelTextColor = Color.FromArgb(30, 90, 70),
+                TextBoxBackground = Color.FromArgb(230, 255, 240),
+                TextBoxText = Color.FromArgb(40, 100, 80),
+                HighlightBackground = Color.FromArgb(200, 240, 220),
+                BandHighlightColor = Color.FromArgb(210, 245, 230),
+                GradientStartColor = Color.FromArgb(240, 255, 250),
+                GradientEndColor = Color.FromArgb(120, 200, 160)
+            },
+            ["Sand"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(245, 222, 179),
+                ButtonTextColor = Color.FromArgb(105, 70, 40),
+                LabelTextColor = Color.FromArgb(105, 70, 40),
+                TextBoxBackground = Color.FromArgb(255, 245, 230),
+                TextBoxText = Color.FromArgb(120, 80, 50),
+                HighlightBackground = Color.FromArgb(235, 215, 175),
+                BandHighlightColor = Color.FromArgb(245, 222, 179),
+                GradientStartColor = Color.FromArgb(250, 240, 210),
+                GradientEndColor = Color.FromArgb(210, 190, 140)
+            },
+            ["Lilac"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(225, 200, 230),
+                ButtonTextColor = Color.FromArgb(90, 50, 120),
+                LabelTextColor = Color.FromArgb(90, 50, 120),
+                TextBoxBackground = Color.FromArgb(240, 220, 245),
+                TextBoxText = Color.FromArgb(80, 40, 100),
+                HighlightBackground = Color.FromArgb(230, 210, 240),
+                BandHighlightColor = Color.FromArgb(225, 200, 230),
+                GradientStartColor = Color.FromArgb(245, 230, 250),
+                GradientEndColor = Color.FromArgb(190, 150, 210)
+            },
+            ["Sunset"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(255, 200, 150),
+                ButtonTextColor = Color.FromArgb(139, 69, 19),
+                LabelTextColor = Color.FromArgb(139, 69, 19),
+                TextBoxBackground = Color.FromArgb(255, 240, 230),
+                TextBoxText = Color.FromArgb(110, 50, 25),
+                HighlightBackground = Color.FromArgb(255, 220, 190),
+                BandHighlightColor = Color.FromArgb(255, 200, 150),
+                GradientStartColor = Color.FromArgb(255, 230, 210),
+                GradientEndColor = Color.FromArgb(255, 165, 120)
+            },
+            ["Forest"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(200, 230, 200),
+                ButtonTextColor = Color.FromArgb(34, 85, 34),
+                LabelTextColor = Color.FromArgb(34, 85, 34),
+                TextBoxBackground = Color.FromArgb(240, 250, 240),
+                TextBoxText = Color.FromArgb(45, 90, 45),
+                GridBackground = Color.FromArgb(240, 250, 240),
+                GridRowBackground = Color.FromArgb(45, 90, 45),
+                HighlightBackground = Color.FromArgb(220, 240, 220),
+                BandHighlightColor = Color.FromArgb(200, 230, 200),
+                GradientStartColor = Color.FromArgb(230, 250, 230),
+                GradientEndColor = Color.FromArgb(120, 180, 120)
+            },
+            ["Ocean"] = new Theme
+            {
+                ButtonBackground = Color.FromArgb(180, 220, 240),
+                ButtonTextColor = Color.FromArgb(20, 70, 100),
+                LabelTextColor = Color.FromArgb(20, 70, 100),
+                TextBoxBackground = Color.FromArgb(220, 240, 250),
+                TextBoxText = Color.FromArgb(25, 75, 105),
+                HighlightBackground = Color.FromArgb(200, 220, 240),
+                BandHighlightColor = Color.FromArgb(180, 220, 240),
+                GradientStartColor = Color.FromArgb(240, 250, 255),
+                GradientEndColor = Color.FromArgb(100, 150, 200)
+            }
         };
-        #endregion
-
-        #region Gray
-        public static readonly Theme Gray = new Theme
-        {
-            ButtonBackground = Color.FromArgb(224, 224, 224), // LightGray
-            ButtonTextColor = Color.Black,
-            LabelTextColor = Color.Black,
-            TextBoxBackground = Color.White,
-            TextBoxText = Color.Black,
-            HighlightBackground = Color.FromArgb(200, 200, 200),
-            BandHighlightColor = Color.FromArgb(180, 180, 180),
-            GradientStartColor = Color.FromArgb(240, 240, 240),
-            GradientEndColor = Color.FromArgb(200, 200, 200)
-        };
-        #endregion
-
-        #region Rainbow
-        public static readonly Theme Rainbow = new Theme
-        {
-            ButtonBackground = ColorTranslator.FromHtml("#B388FF"),        // светло-фиолетовый
-            ButtonTextColor = ColorTranslator.FromHtml("#1C1C1C"),         // тёмный текст
-            LabelTextColor = ColorTranslator.FromHtml("#333333"),
-            TextBoxBackground = ColorTranslator.FromHtml("#FFF59D"),       // светло-жёлтый
-            TextBoxText = ColorTranslator.FromHtml("#000000"),             // чёрный текст
-            HighlightBackground = ColorTranslator.FromHtml("#80DEEA"),     // бирюзовый
-            BandHighlightColor = ColorTranslator.FromHtml("#81C784"),      // зелёный
-            GradientStartColor = ColorTranslator.FromHtml("#FF8A80"),      // розово-красный
-            GradientEndColor = ColorTranslator.FromHtml("#82B1FF")         // голубой
-        };
-        #endregion
-
-        #region Blue
-        public static readonly Theme Blue = new Theme
-        {
-            // Цвета для кнопок
-            ButtonBackground = Color.FromArgb(173, 216, 230), // LightBlue
-            ButtonTextColor = Color.FromArgb(25, 25, 112), // MidnightBlue
-            // Цвета для Label
-            LabelTextColor = Color.FromArgb(25, 25, 112),
-            // Цвета для текстовых полей
-            TextBoxBackground = Color.FromArgb(240, 248, 255), // AliceBlue
-            TextBoxText = Color.FromArgb(0, 0, 139), // DarkBlue
-            // Цвета для выделения в таблице
-            HighlightBackground = Color.FromArgb(135, 206, 250), // SkyBlue
-            BandHighlightColor = Color.FromArgb(173, 216, 230), // LightBlue
-            // Цвета для градиента на форме
-            GradientStartColor = Color.FromArgb(240, 248, 255), // AliceBlue
-            GradientEndColor = Color.FromArgb(70, 130, 180) // SteelBlue
-        };
-        #endregion
-
-        #region Gold
-        public static readonly Theme Gold = new Theme
-        {
-            ButtonBackground = Color.FromArgb(255, 235, 205), // BlanchedAlmond
-            ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
-            LabelTextColor = Color.FromArgb(139, 69, 19),
-            TextBoxBackground = Color.FromArgb(250, 240, 230), // Linen
-            TextBoxText = Color.FromArgb(105, 75, 45), // BrownShade
-            HighlightBackground = Color.FromArgb(245, 222, 179), // Wheat
-            BandHighlightColor = Color.FromArgb(255, 235, 205), // BlanchedAlmond
-            GradientStartColor = Color.FromArgb(255, 239, 213), // PapayaWhip
-            GradientEndColor = Color.FromArgb(218, 165, 32) // Goldenrod
-        };
-        #endregion
-
-        #region Lavender
-        public static readonly Theme Lavander = new Theme
-        {
-            ButtonBackground = Color.FromArgb(230, 230, 250), // Lavender
-            ButtonTextColor = Color.FromArgb(72, 61, 139), // DarkSlateBlue
-            LabelTextColor = Color.FromArgb(72, 61, 139),
-            TextBoxBackground = Color.FromArgb(245, 245, 250), // SoftLavender
-            TextBoxText = Color.FromArgb(85, 45, 115), // DeepLavender
-            HighlightBackground = Color.FromArgb(240, 230, 250), // LightLavender
-            BandHighlightColor = Color.FromArgb(230, 230, 250), // Lavender
-            GradientStartColor = Color.FromArgb(245, 245, 255), // GhostWhite
-            GradientEndColor = Color.FromArgb(176, 148, 226) // LavenderPurple
-        };
-        #endregion
-
-        #region Peach
-        public static readonly Theme Peach = new Theme
-        {
-            ButtonBackground = Color.FromArgb(255, 223, 196), // LightPeach
-            ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
-            LabelTextColor = Color.FromArgb(139, 69, 19),
-            TextBoxBackground = Color.FromArgb(255, 245, 230), // LightPapaya
-            TextBoxText = Color.FromArgb(120, 60, 30), // BrownShade
-            HighlightBackground = Color.FromArgb(255, 228, 200), // SoftPeach
-            BandHighlightColor = Color.FromArgb(255, 223, 196), // LightPeach
-            GradientStartColor = Color.FromArgb(255, 239, 213), // PapayaWhip
-            GradientEndColor = Color.FromArgb(255, 180, 150) // PeachCoral
-        };
-        #endregion
-
-        #region Sea
-        public static readonly Theme Sea = new Theme
-        {
-            ButtonBackground = Color.FromArgb(173, 216, 230), // LightBlue
-            ButtonTextColor = Color.FromArgb(0, 105, 148), // SeaBlue
-            LabelTextColor = Color.FromArgb(0, 105, 148), // SeaBlue
-            TextBoxBackground = Color.FromArgb(240, 248, 255), // AliceBlue
-            TextBoxText = Color.FromArgb(25, 25, 112), // MidnightBlue
-            HighlightBackground = Color.FromArgb(200, 230, 240), // SoftBlue
-            BandHighlightColor = Color.FromArgb(173, 216, 230), // LightBlue
-            GradientStartColor = Color.FromArgb(224, 255, 255), // LightCyan
-            GradientEndColor = Color.FromArgb(100, 150, 150) // CalmCyan
-        };
-        #endregion
-
-        #region Green
-        public static readonly Theme Green = new Theme
-        {
-            ButtonBackground = Color.FromArgb(200, 230, 210), // SoftGreen
-            ButtonTextColor = Color.FromArgb(64, 115, 79), // DeepGreen
-            LabelTextColor = Color.FromArgb(64, 115, 79), // DeepGreen
-            TextBoxBackground = Color.FromArgb(245, 255, 250), // LightMint
-            TextBoxText = Color.FromArgb(45, 90, 60), // ForestGreen
-            HighlightBackground = Color.FromArgb(220, 240, 230), // CalmMint
-            BandHighlightColor = Color.FromArgb(200, 230, 210), // SoftGreen
-            GradientStartColor = Color.FromArgb(240, 255, 250), // MintWhite
-            GradientEndColor = Color.FromArgb(120, 167, 137) // GentleGreen
-        };
-        #endregion
-
-        #region Pink
-        public static readonly Theme Pink = new Theme
-        {
-            ButtonBackground = Color.FromArgb(255, 192, 203), // LightPink
-            ButtonTextColor = Color.FromArgb(139, 0, 139), // DarkMagenta
-            LabelTextColor = Color.FromArgb(139, 0, 139), // DarkMagenta
-            TextBoxBackground = Color.FromArgb(255, 228, 232), // BlushPink
-            TextBoxText = Color.FromArgb(75, 0, 130), // Indigo
-            HighlightBackground = Color.FromArgb(255, 240, 245), // SoftBlush
-            BandHighlightColor = Color.FromArgb(255, 192, 203), // LightPink
-            GradientStartColor = Color.FromArgb(255, 240, 245), // LavenderBlush
-            GradientEndColor = Color.FromArgb(255, 145, 180) // CalmPink
-        };
-        #endregion
-
-        #region Orange
-        public static readonly Theme Orange = new Theme
-        {
-            ButtonBackground = Color.FromArgb(255, 200, 150), // SoftOrange
-            ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
-            LabelTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
-            TextBoxBackground = Color.FromArgb(255, 245, 230), // LightPapaya
-            TextBoxText = Color.FromArgb(120, 60, 30), // DeepBrown
-            HighlightBackground = Color.FromArgb(255, 225, 180), // LightOrange
-            BandHighlightColor = Color.FromArgb(255, 200, 150), // SoftOrange
-            GradientStartColor = Color.FromArgb(255, 239, 213), // PapayaWhip
-            GradientEndColor = Color.FromArgb(255, 165, 120) // CalmCoral
-        };
-        #endregion
-
-        #region Wine
-        public static readonly Theme Wine = new Theme
-        {
-            ButtonBackground = Color.FromArgb(139, 0, 26), // DeepWine
-            ButtonTextColor = Color.FromArgb(255, 245, 238), // SoftWhite
-            LabelTextColor = Color.FromArgb(255, 245, 238), // SoftWhite
-            TextBoxBackground = Color.FromArgb(245, 222, 179), // Wheat
-            TextBoxText = Color.FromArgb(85, 26, 139), // DarkPurple
-            HighlightBackground = Color.FromArgb(160, 0, 30), // GentleRed
-            BandHighlightColor = Color.FromArgb(139, 0, 26), // DeepWine
-            GradientStartColor = Color.FromArgb(255, 245, 238), // Seashell
-            GradientEndColor = Color.FromArgb(139, 0, 0) // CalmRed
-        };
-        #endregion
-
-        #region Sky
-        public static readonly Theme Sky = new Theme
-        {
-            ButtonBackground = Color.FromArgb(200, 225, 255), // SoftSkyBlue
-            ButtonTextColor = Color.FromArgb(30, 70, 140), // DeepSkyBlue
-            LabelTextColor = Color.FromArgb(30, 70, 140), // DeepSkyBlue
-            TextBoxBackground = Color.FromArgb(230, 245, 255), // LightSky
-            TextBoxText = Color.FromArgb(50, 90, 160), // CoolBlue
-            HighlightBackground = Color.FromArgb(220, 235, 250), // GentleSky
-            BandHighlightColor = Color.FromArgb(200, 225, 255), // SoftSkyBlue
-            GradientStartColor = Color.FromArgb(240, 250, 255), // PaleSky
-            GradientEndColor = Color.FromArgb(150, 190, 230) // DeepSky
-        };
-        #endregion
-
-        #region Mint
-        public static readonly Theme Mint = new Theme
-        {
-            ButtonBackground = Color.FromArgb(210, 245, 230), // SoftMint
-            ButtonTextColor = Color.FromArgb(30, 90, 70), // DeepMint
-            LabelTextColor = Color.FromArgb(30, 90, 70), // DeepMint
-            TextBoxBackground = Color.FromArgb(230, 255, 240), // LightMint
-            TextBoxText = Color.FromArgb(40, 100, 80), // CoolGreen
-            HighlightBackground = Color.FromArgb(200, 240, 220), // GentleMint
-            BandHighlightColor = Color.FromArgb(210, 245, 230), // SoftMint
-            GradientStartColor = Color.FromArgb(240, 255, 250), // PaleMint
-            GradientEndColor = Color.FromArgb(120, 200, 160) // DeepMint
-        };
-        #endregion
-
-        #region Sand
-        public static readonly Theme Sand = new Theme
-        {
-            ButtonBackground = Color.FromArgb(245, 222, 179), // SoftSand
-            ButtonTextColor = Color.FromArgb(105, 70, 40), // DeepSand
-            LabelTextColor = Color.FromArgb(105, 70, 40), // DeepSand
-            TextBoxBackground = Color.FromArgb(255, 245, 230), // LightSand
-            TextBoxText = Color.FromArgb(120, 80, 50), // GentleBrown
-            HighlightBackground = Color.FromArgb(235, 215, 175), // CalmSand
-            BandHighlightColor = Color.FromArgb(245, 222, 179), // SoftSand
-            GradientStartColor = Color.FromArgb(250, 240, 210), // PaleSand
-            GradientEndColor = Color.FromArgb(210, 190, 140) // DeepSand
-        };
-        #endregion
-
-        #region Lilac
-        public static readonly Theme Lilac = new Theme
-        {
-            ButtonBackground = Color.FromArgb(225, 200, 230), // SoftLilac
-            ButtonTextColor = Color.FromArgb(90, 50, 120), // DeepLilac
-            LabelTextColor = Color.FromArgb(90, 50, 120), // DeepLilac
-            TextBoxBackground = Color.FromArgb(240, 220, 245), // LightLilac
-            TextBoxText = Color.FromArgb(80, 40, 100), // CoolPurple
-            HighlightBackground = Color.FromArgb(230, 210, 240), // GentleLilac
-            BandHighlightColor = Color.FromArgb(225, 200, 230), // SoftLilac
-            GradientStartColor = Color.FromArgb(245, 230, 250), // PaleLilac
-            GradientEndColor = Color.FromArgb(190, 150, 210) // DeepLilac
-        };
-        #endregion
-
-        #region Sunset
-        public static readonly Theme Sunset = new Theme
-        {
-            ButtonBackground = Color.FromArgb(255, 200, 150), // SoftSunset
-            ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
-            LabelTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
-            TextBoxBackground = Color.FromArgb(255, 240, 230), // WarmPeach
-            TextBoxText = Color.FromArgb(110, 50, 25), // DeepCoral
-            HighlightBackground = Color.FromArgb(255, 220, 190), // GentleSunset
-            BandHighlightColor = Color.FromArgb(255, 200, 150), // SoftSunset
-            GradientStartColor = Color.FromArgb(255, 230, 210), // PaleSunset
-            GradientEndColor = Color.FromArgb(255, 165, 120) // DeepCoral
-        };
-        #endregion
-
-        #region Forest
-        public static readonly Theme Forest = new Theme
-        {
-            ButtonBackground = Color.FromArgb(200, 230, 200), // SoftForest
-            ButtonTextColor = Color.FromArgb(34, 85, 34), // DeepForest
-            LabelTextColor = Color.FromArgb(34, 85, 34), // DeepForest
-            TextBoxBackground = Color.FromArgb(240, 250, 240), // LightForest
-            TextBoxText = Color.FromArgb(45, 90, 45), // GentleGreen
-            GridBackground = Color.FromArgb(240, 250, 240), // GentleMint
-            GridRowBackground = Color.FromArgb(45, 90, 45),
-            HighlightBackground = Color.FromArgb(220, 240, 220), // CalmForest
-            BandHighlightColor = Color.FromArgb(200, 230, 200), // SoftForest
-            GradientStartColor = Color.FromArgb(230, 250, 230), // PaleForest
-            GradientEndColor = Color.FromArgb(120, 180, 120) // DeepForest
-        };
-        #endregion
-
-        #region Ocean
-        public static readonly Theme Ocean = new Theme
-        {
-            ButtonBackground = Color.FromArgb(180, 220, 240), // SoftOcean
-            ButtonTextColor = Color.FromArgb(20, 70, 100), // DeepOcean
-            LabelTextColor = Color.FromArgb(20, 70, 100), // DeepOcean
-            TextBoxBackground = Color.FromArgb(220, 240, 250), // LightOcean
-            TextBoxText = Color.FromArgb(25, 75, 105), // CoolBlue
-            HighlightBackground = Color.FromArgb(200, 220, 240), // GentleOcean
-            BandHighlightColor = Color.FromArgb(180, 220, 240), // SoftOcean
-            GradientStartColor = Color.FromArgb(240, 250, 255), // PaleOcean
-            GradientEndColor = Color.FromArgb(100, 150, 200) // DeepBlue
-        };
-        #endregion
 
         // Текущая активная тема
         public static Theme ActiveTheme { get; private set; }// = Lavander;
         static ThemeManager() { LoadTheme(); }
-        public static List<string> GetAvailableThemes()
-        {
-            return new List<string> { "Gray", "White", "Rainbow", "Gold", "Lavander", "Peach", "Sea", "Green", "Pink", "Orange", "Blue", "Wine", "Sky", "Mint", "Sand", "Lilac", "Sunset", "Forest", "Ocean" }; // Все доступные темы
-        }
+        public static List<string> GetAvailableThemes() => SettingsManager.GetThemes().Keys.ToList();
 
         public static void SetTheme(string themeName)
         {
             CurrentTheme = themeName;
-            switch (themeName)
-            {
-                case "White":
-                    ActiveTheme = White;
-                    break;
-                case "Rainbow":
-                    ActiveTheme = Rainbow;
-                    break;
-                case "Gold":
-                    ActiveTheme = Gold;
-                    break;
-                case "Lavander":
-                    ActiveTheme = Lavander;
-                    break;
-                case "Peach":
-                    ActiveTheme = Peach;
-                    break;
-                case "Sea":
-                    ActiveTheme = Sea;
-                    break;
-                case "Green":
-                    ActiveTheme = Green;
-                    break;
-                case "Pink":
-                    ActiveTheme = Pink;
-                    break;
-                case "Orange":
-                    ActiveTheme = Orange;
-                    break;
-                case "Blue":
-                    ActiveTheme = Blue;
-                    break;
-                case "Wine":
-                    ActiveTheme = Wine;
-                    break;
-                case "Sky":
-                    ActiveTheme = Sky;
-                    break;
-                case "Mint":
-                    ActiveTheme = Mint;
-                    break;
-                case "Sand":
-                    ActiveTheme = Sand;
-                    break;
-                case "Lilac":
-                    ActiveTheme = Lilac;
-                    break;
-                case "Sunset":
-                    ActiveTheme = Sunset;
-                    break;
-                case "Forest":
-                    ActiveTheme = Forest;
-                    break;
-                case "Ocean":
-                    ActiveTheme = Ocean;
-                    break;
-                default:
-                    ActiveTheme = Gray;
-                    break;
-            }
+            var themes = SettingsManager.GetThemes();
+            if (themes.TryGetValue(themeName, out var themeFromSettings))
+                ActiveTheme = CloneTheme(themeFromSettings);
+            else
+                ActiveTheme = CloneTheme(DefaultThemes.TryGetValue("Gray", out var gray) ? gray : themes.Values.FirstOrDefault());
+
+            // Цвета уже загружены из словаря тем, просто уведомляем об изменении
             ThemeChanged?.Invoke(); // Уведомление всех подписчиков
         }
 
         public static void LoadTheme()
         {
             SettingsManager.LoadTheme();
+        }
+
+        public static Dictionary<string, Theme> GetDefaultThemes()
+        {
+            return DefaultThemes.ToDictionary(kvp => kvp.Key, kvp => CloneTheme(kvp.Value));
+        }
+
+        public static void ApplyUserColorOverrides(Color? labelOverride = null, Color? textBoxOverride = null, bool raiseEvent = true)
+        {
+            if (ActiveTheme == null)
+                return;
+
+            // Применяем переданные цвета для предпросмотра (если переданы)
+            if (labelOverride.HasValue)
+                ActiveTheme.LabelTextColor = labelOverride.Value;
+
+            if (textBoxOverride.HasValue)
+                ActiveTheme.TextBoxBackground = textBoxOverride.Value;
+
+            if (raiseEvent)
+                ThemeChanged?.Invoke();
         }
 
 
@@ -455,6 +365,33 @@ namespace SewingProduction
             public Color CancelButtonBackground { get; set; }
             public Color CancelButtonTextColor { get; set; }
             public string CancelButtonText { get; set; }
+        }
+
+        private static Theme CloneTheme(Theme source)
+        {
+            if (source == null) return null;
+            return new Theme
+            {
+                ButtonBackground = source.ButtonBackground,
+                ButtonTextColor = source.ButtonTextColor,
+                GridBackground = source.GridBackground,
+                GridRowBackground = source.GridRowBackground,
+                GridTextColor = source.GridTextColor,
+                LabelTextColor = source.LabelTextColor,
+                TextBoxBackground = source.TextBoxBackground,
+                TextBoxText = source.TextBoxText,
+                LabelText = source.LabelText,
+                HighlightBackground = source.HighlightBackground,
+                BandHighlightColor = source.BandHighlightColor,
+                GradientStartColor = source.GradientStartColor,
+                GradientEndColor = source.GradientEndColor,
+                OkButtonBackground = source.OkButtonBackground,
+                OkButtonTextColor = source.OkButtonTextColor,
+                OkButtonText = source.OkButtonText,
+                CancelButtonBackground = source.CancelButtonBackground,
+                CancelButtonTextColor = source.CancelButtonTextColor,
+                CancelButtonText = source.CancelButtonText
+            };
         }
     }
 }

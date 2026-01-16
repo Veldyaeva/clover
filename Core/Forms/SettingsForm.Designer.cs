@@ -42,6 +42,10 @@ namespace SewingProduction.form
             customComboBoxRejimRab = new CustomComboBox();
             customLabelRejimRab = new CustomLabel();
             customButtonSaveExit = new CustomButton();
+            colorPickEditLabel = new DevExpress.XtraEditors.ColorPickEdit();
+            colorPickEditTextBox = new DevExpress.XtraEditors.ColorPickEdit();
+            ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
             SuspendLayout();
             // 
             // customLabelTheme
@@ -76,7 +80,7 @@ namespace SewingProduction.form
             customComboBoxSizeText.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxSizeText.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxSizeText.FormattingEnabled = true;
-            customComboBoxSizeText.Location = new System.Drawing.Point(125, 67);
+            customComboBoxSizeText.Location = new System.Drawing.Point(125, 201);
             customComboBoxSizeText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxSizeText.Name = "customComboBoxSizeText";
             customComboBoxSizeText.Size = new System.Drawing.Size(140, 24);
@@ -89,7 +93,7 @@ namespace SewingProduction.form
             customLabelSizeText.BackColor = System.Drawing.Color.Transparent;
             customLabelSizeText.Font = new System.Drawing.Font("Arial", 10F);
             customLabelSizeText.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelSizeText.Location = new System.Drawing.Point(14, 70);
+            customLabelSizeText.Location = new System.Drawing.Point(14, 204);
             customLabelSizeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelSizeText.Name = "customLabelSizeText";
             customLabelSizeText.Size = new System.Drawing.Size(103, 16);
@@ -163,7 +167,7 @@ namespace SewingProduction.form
             customComboBoxRejimRab.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxRejimRab.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxRejimRab.FormattingEnabled = true;
-            customComboBoxRejimRab.Location = new System.Drawing.Point(125, 110);
+            customComboBoxRejimRab.Location = new System.Drawing.Point(125, 244);
             customComboBoxRejimRab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxRejimRab.Name = "customComboBoxRejimRab";
             customComboBoxRejimRab.Size = new System.Drawing.Size(140, 24);
@@ -175,7 +179,7 @@ namespace SewingProduction.form
             customLabelRejimRab.BackColor = System.Drawing.Color.Transparent;
             customLabelRejimRab.Font = new System.Drawing.Font("Arial", 10F);
             customLabelRejimRab.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelRejimRab.Location = new System.Drawing.Point(14, 113);
+            customLabelRejimRab.Location = new System.Drawing.Point(14, 247);
             customLabelRejimRab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelRejimRab.Name = "customLabelRejimRab";
             customLabelRejimRab.Size = new System.Drawing.Size(103, 16);
@@ -195,11 +199,35 @@ namespace SewingProduction.form
             customButtonSaveExit.UseVisualStyleBackColor = false;
             customButtonSaveExit.Click += customButtonSaveExit_Click;
             // 
+            // colorPickEditLabel
+            // 
+            colorPickEditLabel.EditValue = System.Drawing.Color.Empty;
+            colorPickEditLabel.Location = new System.Drawing.Point(125, 63);
+            colorPickEditLabel.Name = "colorPickEditLabel";
+            colorPickEditLabel.Properties.AutomaticColor = System.Drawing.Color.Black;
+            colorPickEditLabel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            colorPickEditLabel.Size = new System.Drawing.Size(140, 20);
+            colorPickEditLabel.TabIndex = 15;
+            colorPickEditLabel.EditValueChanged += colorPickEditLabel_EditValueChanged;
+            // 
+            // colorPickEditTextBox
+            // 
+            colorPickEditTextBox.EditValue = System.Drawing.Color.Empty;
+            colorPickEditTextBox.Location = new System.Drawing.Point(125, 107);
+            colorPickEditTextBox.Name = "colorPickEditTextBox";
+            colorPickEditTextBox.Properties.AutomaticColor = System.Drawing.Color.Black;
+            colorPickEditTextBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            colorPickEditTextBox.Size = new System.Drawing.Size(140, 20);
+            colorPickEditTextBox.TabIndex = 16;
+            colorPickEditTextBox.EditValueChanged += colorPickEditTextBox_EditValueChanged;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(colorPickEditTextBox);
+            Controls.Add(colorPickEditLabel);
             Controls.Add(customButtonSaveExit);
             Controls.Add(customComboBoxRejimRab);
             Controls.Add(customLabelRejimRab);
@@ -216,6 +244,8 @@ namespace SewingProduction.form
             Name = "SettingsForm";
             Text = "SettingsForm";
             Load += SettingsForm_Load;
+            ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,5 +263,7 @@ namespace SewingProduction.form
         private CustomComboBox customComboBoxRejimRab;
         private CustomLabel customLabelRejimRab;
         private CustomButton customButtonSaveExit;
+        private DevExpress.XtraEditors.ColorPickEdit colorPickEditLabel;
+        private DevExpress.XtraEditors.ColorPickEdit colorPickEditTextBox;
     }
 }
