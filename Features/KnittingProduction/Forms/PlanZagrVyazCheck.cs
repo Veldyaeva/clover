@@ -140,6 +140,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 int daysInMonth = DateTime.DaysInMonth(_xYear, _xMonth);
                 for (int day = 1; day <= daysInMonth; day++)
                 {
+                    GridColumn grdDayColumn = new GridColumn();
+                    string fName = $"grd{day.ToString("00")}";
+                    grdDayColumn.Name = $"{_xGridName}ColumnGrd{day.ToString("00")}";
+                    grdDayColumn.FieldName = fName;
+                    grdDayColumn.Caption = day.ToString();
+                    grdDayColumn.Visible = false;
+                    grdDayColumn.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                    grdDayColumn.OptionsColumn.AllowEdit = false;
+                    _gridView.Columns.Add(grdDayColumn);
+
                     GridColumn dayColumn = new GridColumn();
                     string fieldName = $"pzvTab{day.ToString("00")}";
                     dayColumn.Name = $"{_xGridName}ColumnPzvTab{day.ToString("00")}";
@@ -607,12 +617,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void gridViewPzvCheck_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
-            if (e.Column != null && e.Column.FieldName.StartsWith("d"))
+            if (e.Column != null && e.Column.FieldName.StartsWith("pzvTab"))
             {
                 string dayNumber = e.Column.FieldName.Substring(1);
                 if (int.TryParse(dayNumber, out int day) && day >= 1 && day <= 31)
                 {
-                    string markColumnName = $"dd{day.ToString("00")}"; ;
+                    //string markColumnName = $"grd{day.ToString("00")}";
+                    string markColumnName = $"gridPzvCheckColumnGrd{day.ToString("00")}";
                     object markValue = gridViewPzvCheck.GetRowCellValue(e.RowHandle, markColumnName);
 
                     if (markValue != null)
