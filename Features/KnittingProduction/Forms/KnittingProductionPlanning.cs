@@ -10,6 +10,7 @@ using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
@@ -69,7 +70,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 		private BindingSource _artPrKnitMachineViewRecom2BindingSource;
 
 
-		public KnittingProductionPlanning()
+		public KnittingProductionPlanning(UserClass User) : base(User)
 		{
 			InitializeComponent();
 			_dbHelper = new DatabaseHelper("ace");

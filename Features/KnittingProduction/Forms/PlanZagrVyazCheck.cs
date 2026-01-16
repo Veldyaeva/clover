@@ -126,6 +126,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 _gridView.BeginUpdate();
+                _gridView.GroupSummary.Clear();
+
+                string _xGridName = _gridView.Name;
                 int _xMonth = Convert.ToInt32(comboBoxMonthList.SelectedValue);
                 int _xYear = Convert.ToInt32(spinEditYear.Value);
                 if (_xMonth == 0 || _xYear == 0)
@@ -139,6 +142,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     GridColumn dayColumn = new GridColumn();
                     string fieldName = $"pzvTab{day.ToString("00")}";
+                    dayColumn.Name = $"{_xGridName}ColumnPzvTab{day.ToString("00")}";
                     dayColumn.FieldName = fieldName;
                     dayColumn.Caption = day.ToString();
                     dayColumn.Visible = true;
@@ -146,6 +150,28 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     dayColumn.OptionsColumn.AllowEdit = false;
                     _gridView.Columns.Add(dayColumn);
 
+                    _gridView.GroupSummary.Add(
+                        new GridGroupSummaryItem
+                        {
+                            SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                            FieldName = $"pzv{day.ToString("00")}",
+                            ShowInGroupColumnFooter = dayColumn,
+                            DisplayFormat = "0.00;-0.00;"
+                        });
+                    _gridView.GroupSummary.Add(
+                        new GridGroupSummaryItem
+                        {
+                            SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                            FieldName = $"tab{day.ToString("00")}",
+                            ShowInGroupColumnFooter = dayColumn,
+                            DisplayFormat = "0.00;-0.00;"
+                        });
+                    //string _xNumFormat = "{0:0.00;-0.00;}";
+                    ////string _xNumFormat = "{0:n2}";
+                    //foreach (GridGroupSummaryItem gsi in _gridView.GroupSummary)
+                    //{
+                    //    gsi.DisplayFormat = _xNumFormat;
+                    //}
                 }
                 GridColumn itogColumnTabChasiOf = new GridColumn();
                 itogColumnTabChasiOf.FieldName = "tabChasiOf";
@@ -155,6 +181,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 itogColumnTabChasiOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 itogColumnTabChasiOf.OptionsColumn.AllowEdit = false;
                 _gridView.Columns.Add(itogColumnTabChasiOf);
+                _gridView.GroupSummary.Add(
+                    new GridGroupSummaryItem
+                    {
+                        SummaryType = DevExpress.Data.SummaryItemType.None,
+                        FieldName = $"",
+                        ShowInGroupColumnFooter = itogColumnTabChasiOf,
+                        DisplayFormat = "0.00;-0.00;"
+                    });
+                _gridView.GroupSummary.Add(
+                    new GridGroupSummaryItem
+                    {
+                        SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                        FieldName = $"tabChasiOf",
+                        ShowInGroupColumnFooter = itogColumnTabChasiOf,
+                        DisplayFormat = "0.00;-0.00;"
+                    });
 
                 GridColumn itogColumnPztChasiOf = new GridColumn();
                 itogColumnPztChasiOf.FieldName = "pztChasiOf";
@@ -164,6 +206,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 itogColumnPztChasiOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 itogColumnPztChasiOf.OptionsColumn.AllowEdit = false;
                 _gridView.Columns.Add(itogColumnPztChasiOf);
+                _gridView.GroupSummary.Add(
+                    new GridGroupSummaryItem
+                    {
+                        SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                        FieldName = $"pztChasiOf",
+                        ShowInGroupColumnFooter = itogColumnPztChasiOf,
+                        DisplayFormat = "0.00;-0.00;"
+                    });
+                _gridView.GroupSummary.Add(
+                    new GridGroupSummaryItem
+                    {
+                        SummaryType = DevExpress.Data.SummaryItemType.None,
+                        FieldName = $"",
+                        ShowInGroupColumnFooter = itogColumnPztChasiOf,
+                        DisplayFormat = "0.00;-0.00;"
+                    });
 
                 GridColumn itogColumnProcentOf = new GridColumn();
                 itogColumnProcentOf.FieldName = "procentOf";
@@ -173,6 +231,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 itogColumnProcentOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 itogColumnProcentOf.OptionsColumn.AllowEdit = false;
                 _gridView.Columns.Add(itogColumnProcentOf);
+                _gridView.GroupSummary.Add(
+                    new GridGroupSummaryItem
+                    {
+                        SummaryType = DevExpress.Data.SummaryItemType.None,
+                        FieldName = $"",
+                        ShowInGroupColumnFooter = itogColumnProcentOf,
+                        DisplayFormat = "0.00;-0.00;"
+                    });
+                _gridView.GroupSummary.Add(
+                    new GridGroupSummaryItem
+                    {
+                        SummaryType = DevExpress.Data.SummaryItemType.None,
+                        FieldName = $"",
+                        ShowInGroupColumnFooter = itogColumnProcentOf,
+                        DisplayFormat = "0.00;-0.00;"
+                    });
 
                 _gridView.BestFitColumns();
                 _gridView.EndUpdate();

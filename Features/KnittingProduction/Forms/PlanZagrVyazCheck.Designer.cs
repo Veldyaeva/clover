@@ -114,9 +114,9 @@
             comboBoxPodrVyazList.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxPodrVyazList.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxPodrVyazList.FormattingEnabled = true;
-            comboBoxPodrVyazList.Location = new System.Drawing.Point(857, 12);
+            comboBoxPodrVyazList.Location = new System.Drawing.Point(743, 12);
             comboBoxPodrVyazList.Name = "comboBoxPodrVyazList";
-            comboBoxPodrVyazList.Size = new System.Drawing.Size(224, 24);
+            comboBoxPodrVyazList.Size = new System.Drawing.Size(131, 24);
             comboBoxPodrVyazList.TabIndex = 10;
             // 
             // simpleButtonNextMonth
@@ -173,12 +173,13 @@
             buttonGetPzvCheck.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonGetPzvCheck.AppearanceDisabled.Options.UseBackColor = true;
             buttonGetPzvCheck.AppearanceDisabled.Options.UseForeColor = true;
-            buttonGetPzvCheck.Location = new System.Drawing.Point(1085, 12);
+            buttonGetPzvCheck.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonGetPzvCheck.ImageOptions.Image");
+            buttonGetPzvCheck.Location = new System.Drawing.Point(878, 12);
             buttonGetPzvCheck.Name = "buttonGetPzvCheck";
-            buttonGetPzvCheck.Size = new System.Drawing.Size(393, 22);
+            buttonGetPzvCheck.Size = new System.Drawing.Size(134, 22);
             buttonGetPzvCheck.StyleController = layoutControl1;
             buttonGetPzvCheck.TabIndex = 6;
-            buttonGetPzvCheck.Text = "customSimpleButton1";
+            buttonGetPzvCheck.Text = "Просмотр";
             buttonGetPzvCheck.Click += buttonGetPzvCheck_Click;
             // 
             // spinEditYear
@@ -220,7 +221,7 @@
             customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(556, 12);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(297, 22);
+            customLabel2.Size = new System.Drawing.Size(183, 22);
             customLabel2.TabIndex = 1;
             customLabel2.Text = "Выберите подразделение";
             // 
@@ -304,7 +305,7 @@
             layoutControlItem6.Control = customLabel2;
             layoutControlItem6.Location = new System.Drawing.Point(544, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(301, 26);
+            layoutControlItem6.Size = new System.Drawing.Size(187, 26);
             layoutControlItem6.TextVisible = false;
             // 
             // layoutControlGroup1
@@ -333,16 +334,16 @@
             // layoutControlItem7
             // 
             layoutControlItem7.Control = buttonGetPzvCheck;
-            layoutControlItem7.Location = new System.Drawing.Point(1073, 0);
+            layoutControlItem7.Location = new System.Drawing.Point(866, 0);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(397, 26);
+            layoutControlItem7.Size = new System.Drawing.Size(138, 26);
             layoutControlItem7.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(1470, 0);
+            emptySpaceItem2.Location = new System.Drawing.Point(1004, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(366, 26);
+            emptySpaceItem2.Size = new System.Drawing.Size(832, 26);
             // 
             // layoutControlItem8
             // 
@@ -363,9 +364,9 @@
             // layoutControlItem2
             // 
             layoutControlItem2.Control = comboBoxPodrVyazList;
-            layoutControlItem2.Location = new System.Drawing.Point(845, 0);
+            layoutControlItem2.Location = new System.Drawing.Point(731, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(228, 26);
+            layoutControlItem2.Size = new System.Drawing.Size(135, 26);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem5
