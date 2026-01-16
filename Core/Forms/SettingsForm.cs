@@ -183,7 +183,7 @@ namespace SewingProduction.form
 
             _currentThemeName = SettingsManager.Current.Theme;
             var themes = SettingsManager.GetThemes();
-            
+
             if (themes.TryGetValue(_currentThemeName, out var currentTheme))
             {
                 //colorPickEditLabel.EditValue = currentTheme.Label;
@@ -350,6 +350,31 @@ namespace SewingProduction.form
                     ThemeManager.ApplyUserColorOverrides(raiseEvent: true);
                 }
             }
+        }
+
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Сбросить настройки темы к значениям по умолчанию?",
+                "Сброс темы",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result != DialogResult.Yes)
+                return;
+
+            // Сбрасываем темы в settings.json на кодовые дефолты
+            var defaultThemes = ThemeManager.GetDefaultThemes();
+            SettingsManager.SetThemes(defaultThemes);
+
+            // Возвращаем выбор темы к дефолтной
+            SettingsManager.SetTheme("Gray");
+            ThemeManager.SetTheme("Gray");
+
+            // Обновляем UI-пикеры
+            LoadColorPickersFromSettings();
+
+            MessageBox.Show("Настройки темы сброшены.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

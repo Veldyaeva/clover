@@ -58,6 +58,7 @@ namespace SewingProduction.form
             customLabel8 = new CustomLabel();
             colorPickEditGridRowBackground = new DevExpress.XtraEditors.ColorPickEdit();
             colorPickEditGridBackground = new DevExpress.XtraEditors.ColorPickEdit();
+            customButton1 = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonTextColor.Properties).BeginInit();
@@ -395,11 +396,25 @@ namespace SewingProduction.form
             colorPickEditGridBackground.TabIndex = 27;
             colorPickEditGridBackground.EditValueChanged += colorPickEditGridBackground_EditValueChanged;
             // 
+            // customButton1
+            // 
+            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButton1.Font = new System.Drawing.Font("Arial", 10F);
+            customButton1.ForeColor = System.Drawing.Color.Black;
+            customButton1.Location = new System.Drawing.Point(160, 389);
+            customButton1.Name = "customButton1";
+            customButton1.Size = new System.Drawing.Size(113, 25);
+            customButton1.TabIndex = 31;
+            customButton1.Text = "ResetItem";
+            customButton1.UseVisualStyleBackColor = false;
+            customButton1.Click += customButton1_Click;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(customButton1);
             Controls.Add(customLabel7);
             Controls.Add(customLabel8);
             Controls.Add(colorPickEditGridRowBackground);
@@ -473,5 +488,6 @@ namespace SewingProduction.form
         private CustomLabel customLabel8;
         private DevExpress.XtraEditors.ColorPickEdit colorPickEditGridRowBackground;
         private DevExpress.XtraEditors.ColorPickEdit colorPickEditGridBackground;
+        private CustomButton customButton1;
     }
 }
