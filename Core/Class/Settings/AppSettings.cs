@@ -26,6 +26,16 @@ namespace SewingProduction.Core.Class.Settings
         public string SavedPassword { get; set; } = "";
     }
 
+    public class GridColumnSetting
+    {
+        public string FieldName { get; set; }
+        public int Width { get; set; }
+        public int VisibleIndex { get; set; }
+        public bool Visible { get; set; }
+        public string SortOrder { get; set; }
+        public int SortIndex { get; set; }
+    }
+
     public static class SettingsManager
     {
         private static readonly string SettingsPath = UserFilePaths.Settings;
@@ -257,7 +267,7 @@ namespace SewingProduction.Core.Class.Settings
         public static string BaseFolder => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "SewingProduction");
-
+        public static string GridSettings => Path.Combine(BaseFolder, "GridSettings");
         public static string Settings => Path.Combine(BaseFolder, "settings.json");
         public static string LogFile => Path.Combine(BaseFolder, "log.txt");
 
@@ -265,6 +275,8 @@ namespace SewingProduction.Core.Class.Settings
         {
             if (!Directory.Exists(BaseFolder))
                 Directory.CreateDirectory(BaseFolder);
+            if (!Directory.Exists(GridSettings))
+                Directory.CreateDirectory(GridSettings);
         }
     }
 }
