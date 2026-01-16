@@ -191,9 +191,8 @@ namespace SewingProduction.Features.Articul.Forms
                 chbKruj.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Kruj), true);
 
                 //составы
-                txbSost.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost), true);
-                txbSost2.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost2), true);
-                txbSost3.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Sost3), true);
+
+                BindFieldByName(this.layoutSostav, _bindingSourceArtCommon);
 
                 #endregion
 
@@ -221,6 +220,9 @@ namespace SewingProduction.Features.Articul.Forms
                 BindFieldByName(this.layoutControlGroup10, _bindingSourceArtCommon);
 
                 txtNorm_t.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Norm_t), true);
+                //зарплата
+                BindFieldByName(this.layoutControlGroup11, _bindingSourceArtCommon);
+
 
                 #endregion
 

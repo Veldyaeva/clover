@@ -137,10 +137,11 @@ namespace SewingProduction.Core.Models
         public decimal Norm_n { get; set; }
         public decimal Kat_n { get; set; }
         public decimal Seb_n { get; set; }
-        public decimal Seb_z { get; set; }
-        public decimal Koef { get; set; }
+
+        
+        
         public decimal Seb_rekom { get; set; }
-        public decimal Seb_proizv { get; set; }
+        
         public string Po { get; set; }
         public decimal Seb_z_s { get; set; }
         public int Sek_vyaz5 { get; set; }
@@ -452,10 +453,6 @@ namespace SewingProduction.Core.Models
             set => SetField(ref _seb_t7, value);
         }
 
-
-        public decimal Seb_dop { get; set; }
-
-
         public int Baza { get; set; }
         private int _kod_v;
         public int Kod_v { get => _kod_v; set => SetField(ref _kod_v, value); }
@@ -466,7 +463,7 @@ namespace SewingProduction.Core.Models
         public decimal Normapryz { get; set; }
         
         public int Id_svyaz { get; set; }
-        public decimal Koef_pr { get; set; }
+        
         public decimal Ob_izd { get; set; }
         public int Stavka_nds { get; set; }
         public int St_nds { get; set; }
@@ -477,7 +474,7 @@ namespace SewingProduction.Core.Models
         public int Old_prch { get; set; }
         public int Sek_vyaz70 { get; set; }
         public int Sek_vyaz3 { get; set; }
-        public decimal Koef_d { get; set; }
+        
         
         public int Upd_razm { get; set; }
         public decimal Gl_rekom { get; set; }
@@ -550,7 +547,8 @@ namespace SewingProduction.Core.Models
         public int Sek_vyaz62 { get; set; }
         public int Sek_vyaz71 { get; set; }
         public int Sek_vyaz72 { get; set; }
-
+        public decimal Sek_vyaz57 { get; set; }
+        public decimal Sek_vyaz18 { get; set; }
         private short _kruj;
         public short Kruj { get => _kruj; set => SetField(ref _kruj, value); }
 
@@ -559,13 +557,47 @@ namespace SewingProduction.Core.Models
         public decimal Norm_cord { get; set; }
         public int Tgm_id_n { get; set; }
         public DateTime? Dateutvkk { get; set; }
-        public decimal Sum_zarpl { get; set; }
-        public decimal? Sum_dopopl { get; set; }
-        public decimal? Sum_strvznos { get; set; }
-        public decimal? Sum_sebraskr { get; set; }
-        public decimal? Sum_komplnum { get; set; }
-        public decimal Sek_vyaz57 { get; set; }
-        public decimal Sek_vyaz18 { get; set; }
+
+        private decimal _seb_z;
+        public decimal Seb_z
+        {
+            get => _seb_z;
+            set => SetField(ref _seb_z, value);
+        }
+        //public decimal Seb_dop { get; set; }
+        private decimal _seb_dop;
+        public decimal Seb_dop
+        {
+            get => _seb_dop;
+            set => SetField(ref _seb_dop, value);
+        }
+        private decimal _koef_pr;
+        public decimal Koef_pr
+        {
+            get => _koef_pr;
+            set => SetField(ref _koef_pr, value);
+        }
+        private decimal _koef_d;
+        public decimal Koef_d
+        {
+            get => _koef_d;
+            set => SetField(ref _koef_d, value);
+        }
+        private decimal _koef;
+        public decimal Koef
+        {
+            get => _koef;
+            set => SetField(ref _koef, value);
+        }
+        public decimal Seb_proizv { get; set; }
+        // поля заполняются при изменении разделения труда
+        //-----
+        [NotMapped] public decimal Sum_zarpl { get; set; }
+        [NotMapped] public decimal? Sum_dopopl { get; set; }
+        [NotMapped] public decimal? Sum_strvznos { get; set; }
+        [NotMapped] public decimal? Sum_sebraskr { get; set; }
+        [NotMapped] public decimal? Sum_komplnum { get; set; }
+        //---->
         
 
         

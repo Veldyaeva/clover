@@ -223,8 +223,6 @@ namespace SewingProduction.Features.Articul
             chkP = new CustomCheckBox();
             chbIsFurnit = new CustomCheckBox();
             chbIsUpak = new CustomCheckBox();
-            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            customButton7 = new CustomButton();
             customButtonKart = new CustomButton();
             buttonEdit1 = new DevExpress.XtraEditors.ButtonEdit();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -258,15 +256,9 @@ namespace SewingProduction.Features.Articul
             txbKoefPr = new CustomTextBox();
             label4 = new System.Windows.Forms.Label();
             txbSebDop = new CustomTextBox();
-            layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             customGroupBox1 = new CustomGroupBox();
             csButtonEdit = new CustomSimpleButton();
             customGroupBox2 = new CustomGroupBox();
-            flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            customButton1 = new CustomButton();
-            customButton2 = new CustomButton();
-            customButton6 = new CustomButton();
             customLabel45 = new CustomLabel();
             txbSumZarpl = new CustomTextBox();
             txbSumKomplNum = new CustomTextBox();
@@ -286,6 +278,24 @@ namespace SewingProduction.Features.Articul
             customLabel41 = new CustomLabel();
             txbSebz = new CustomTextBox();
             customLabel40 = new CustomLabel();
+            layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            customCheckBox2 = new CustomCheckBox();
+            customCheckBox3 = new CustomCheckBox();
+            customCheckBox4 = new CustomCheckBox();
+            customCheckBox5 = new CustomCheckBox();
+            customCheckBox6 = new CustomCheckBox();
+            customCheckBox7 = new CustomCheckBox();
+            customCheckBox8 = new CustomCheckBox();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem30 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem31 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem37 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem32 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem33 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem34 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem35 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -324,7 +334,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)bsArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             groupBox2.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)buttonEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1).BeginInit();
@@ -339,11 +348,20 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)lCTabsControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lCPagesKoplNabor).BeginInit();
             groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
             customGroupBox1.SuspendLayout();
             customGroupBox2.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
+            layoutControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem30).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem31).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem37).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem32).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem33).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).BeginInit();
             SuspendLayout();
             // 
             // grColKomplHasDifference
@@ -2838,40 +2856,6 @@ namespace SewingProduction.Features.Articul
             chbIsUpak.Text = "упаковка";
             chbIsUpak.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            tableLayoutPanel2.BackColor = Color.Transparent;
-            tableLayoutPanel2.ColumnCount = 7;
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            tableLayoutPanel2.Controls.Add(customButton7, 0, 0);
-            tableLayoutPanel2.Location = new Point(590, 963);
-            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(792, 45);
-            tableLayoutPanel2.TabIndex = 28;
-            // 
-            // customButton7
-            // 
-            customButton7.BackColor = Color.FromArgb(173, 216, 230);
-            customButton7.Font = new Font("Arial", 10F);
-            customButton7.ForeColor = Color.FromArgb(25, 25, 112);
-            customButton7.Location = new Point(4, 3);
-            customButton7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton7.Name = "customButton7";
-            customButton7.Size = new Size(93, 29);
-            customButton7.TabIndex = 0;
-            customButton7.Text = "customButton7";
-            customButton7.UseVisualStyleBackColor = false;
-            // 
             // customButtonKart
             // 
             customButtonKart.BackColor = Color.FromArgb(230, 230, 250);
@@ -3312,23 +3296,6 @@ namespace SewingProduction.Features.Articul
             txbSebDop.Size = new Size(90, 16);
             txbSebDop.TabIndex = 39;
             // 
-            // layoutControl2
-            // 
-            layoutControl2.Location = new Point(1393, 906);
-            layoutControl2.Name = "layoutControl2";
-            layoutControl2.Root = layoutControlGroup4;
-            layoutControl2.Size = new Size(180, 120);
-            layoutControl2.TabIndex = 37;
-            layoutControl2.Text = "layoutControl2";
-            // 
-            // layoutControlGroup4
-            // 
-            layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            layoutControlGroup4.GroupBordersVisible = false;
-            layoutControlGroup4.Name = "layoutControlGroup4";
-            layoutControlGroup4.Size = new Size(180, 120);
-            layoutControlGroup4.TextVisible = false;
-            // 
             // customGroupBox1
             // 
             customGroupBox1.BackColor = Color.Transparent;
@@ -3388,7 +3355,6 @@ namespace SewingProduction.Features.Articul
             // customGroupBox2
             // 
             customGroupBox2.BackColor = Color.Transparent;
-            customGroupBox2.Controls.Add(flowLayoutPanel1);
             customGroupBox2.Controls.Add(customLabel45);
             customGroupBox2.Controls.Add(txbSumZarpl);
             customGroupBox2.Controls.Add(txbSumKomplNum);
@@ -3414,57 +3380,6 @@ namespace SewingProduction.Features.Articul
             customGroupBox2.TabIndex = 39;
             customGroupBox2.TabStop = false;
             customGroupBox2.Text = "Норма/сек";
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.BackColor = Color.Transparent;
-            flowLayoutPanel1.Controls.Add(customButton1);
-            flowLayoutPanel1.Controls.Add(customButton2);
-            flowLayoutPanel1.Controls.Add(customButton6);
-            flowLayoutPanel1.Location = new Point(207, 24);
-            flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(187, 148);
-            flowLayoutPanel1.TabIndex = 11;
-            // 
-            // customButton1
-            // 
-            customButton1.BackColor = Color.FromArgb(230, 230, 250);
-            customButton1.Font = new Font("Arial", 9F);
-            customButton1.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton1.Location = new Point(4, 3);
-            customButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new Size(180, 35);
-            customButton1.TabIndex = 0;
-            customButton1.Text = "Заполнить сек. и з\\пл";
-            customButton1.UseVisualStyleBackColor = false;
-            // 
-            // customButton2
-            // 
-            customButton2.BackColor = Color.FromArgb(230, 230, 250);
-            customButton2.Font = new Font("Arial", 9F);
-            customButton2.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton2.Location = new Point(4, 44);
-            customButton2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new Size(180, 46);
-            customButton2.TabIndex = 1;
-            customButton2.Text = "Заполнить сек. и з\\пл для комплекта";
-            customButton2.UseVisualStyleBackColor = false;
-            // 
-            // customButton6
-            // 
-            customButton6.BackColor = Color.FromArgb(230, 230, 250);
-            customButton6.Font = new Font("Arial", 9F);
-            customButton6.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton6.Location = new Point(4, 96);
-            customButton6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton6.Name = "customButton6";
-            customButton6.Size = new Size(180, 46);
-            customButton6.TabIndex = 2;
-            customButton6.Text = "Несоответствие спр-ка и разд.труда";
-            customButton6.UseVisualStyleBackColor = false;
             // 
             // customLabel45
             // 
@@ -3732,17 +3647,205 @@ namespace SewingProduction.Features.Articul
             customLabel40.TabIndex = 34;
             customLabel40.Text = "Зарплата";
             // 
+            // layoutControl2
+            // 
+            layoutControl2.Controls.Add(customCheckBox2);
+            layoutControl2.Controls.Add(customCheckBox3);
+            layoutControl2.Controls.Add(customCheckBox4);
+            layoutControl2.Controls.Add(customCheckBox5);
+            layoutControl2.Controls.Add(customCheckBox6);
+            layoutControl2.Controls.Add(customCheckBox7);
+            layoutControl2.Controls.Add(customCheckBox8);
+            layoutControl2.Location = new Point(1456, 906);
+            layoutControl2.Name = "layoutControl2";
+            layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(242, 393, 645, 623);
+            layoutControl2.Root = layoutControlGroup4;
+            layoutControl2.Size = new Size(124, 231);
+            layoutControl2.TabIndex = 48;
+            layoutControl2.Text = "layoutControl2";
+            // 
+            // customCheckBox2
+            // 
+            customCheckBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            customCheckBox2.Font = new Font("Arial", 10F);
+            customCheckBox2.ForeColor = Color.FromArgb(0, 0, 139);
+            customCheckBox2.Location = new Point(15, 196);
+            customCheckBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBox2.Name = "customCheckBox2";
+            customCheckBox2.Size = new Size(94, 20);
+            customCheckBox2.TabIndex = 7;
+            customCheckBox2.Text = "пресс";
+            customCheckBox2.UseVisualStyleBackColor = true;
+            // 
+            // customCheckBox3
+            // 
+            customCheckBox3.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            customCheckBox3.Font = new Font("Arial", 10F);
+            customCheckBox3.ForeColor = Color.FromArgb(0, 0, 139);
+            customCheckBox3.Location = new Point(15, 172);
+            customCheckBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBox3.Name = "customCheckBox3";
+            customCheckBox3.Size = new Size(94, 20);
+            customCheckBox3.TabIndex = 6;
+            customCheckBox3.Text = "стразы";
+            customCheckBox3.UseVisualStyleBackColor = true;
+            // 
+            // customCheckBox4
+            // 
+            customCheckBox4.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            customCheckBox4.Font = new Font("Arial", 10F);
+            customCheckBox4.ForeColor = Color.FromArgb(0, 0, 139);
+            customCheckBox4.Location = new Point(15, 100);
+            customCheckBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBox4.Name = "customCheckBox4";
+            customCheckBox4.Size = new Size(94, 20);
+            customCheckBox4.TabIndex = 3;
+            customCheckBox4.Text = "принт";
+            customCheckBox4.UseVisualStyleBackColor = true;
+            // 
+            // customCheckBox5
+            // 
+            customCheckBox5.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            customCheckBox5.Font = new Font("Arial", 10F);
+            customCheckBox5.ForeColor = Color.FromArgb(0, 0, 139);
+            customCheckBox5.Location = new Point(15, 148);
+            customCheckBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBox5.Name = "customCheckBox5";
+            customCheckBox5.Size = new Size(94, 20);
+            customCheckBox5.TabIndex = 5;
+            customCheckBox5.Text = "бусины";
+            customCheckBox5.UseVisualStyleBackColor = true;
+            // 
+            // customCheckBox6
+            // 
+            customCheckBox6.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            customCheckBox6.Font = new Font("Arial", 10F);
+            customCheckBox6.ForeColor = Color.FromArgb(0, 0, 139);
+            customCheckBox6.Location = new Point(15, 124);
+            customCheckBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBox6.Name = "customCheckBox6";
+            customCheckBox6.Size = new Size(94, 20);
+            customCheckBox6.TabIndex = 4;
+            customCheckBox6.Text = "вышивка";
+            customCheckBox6.UseVisualStyleBackColor = true;
+            // 
+            // customCheckBox7
+            // 
+            customCheckBox7.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            customCheckBox7.Font = new Font("Arial", 10F);
+            customCheckBox7.ForeColor = Color.FromArgb(0, 0, 139);
+            customCheckBox7.Location = new Point(15, 60);
+            customCheckBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBox7.Name = "customCheckBox7";
+            customCheckBox7.Size = new Size(94, 20);
+            customCheckBox7.TabIndex = 2;
+            customCheckBox7.Text = "фурнитура";
+            customCheckBox7.UseVisualStyleBackColor = true;
+            // 
+            // customCheckBox8
+            // 
+            customCheckBox8.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            customCheckBox8.Font = new Font("Arial", 10F);
+            customCheckBox8.ForeColor = Color.FromArgb(0, 0, 139);
+            customCheckBox8.Location = new Point(15, 36);
+            customCheckBox8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBox8.Name = "customCheckBox8";
+            customCheckBox8.Size = new Size(94, 20);
+            customCheckBox8.TabIndex = 0;
+            customCheckBox8.Text = "упаковка";
+            customCheckBox8.UseVisualStyleBackColor = true;
+            // 
+            // layoutControlGroup4
+            // 
+            layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup4.GroupBordersVisible = false;
+            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup5 });
+            layoutControlGroup4.Name = "Root";
+            layoutControlGroup4.Size = new Size(124, 231);
+            layoutControlGroup4.TextVisible = false;
+            // 
+            // layoutControlGroup5
+            // 
+            layoutControlGroup5.CustomizationFormText = "Отделка";
+            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem30, layoutControlItem31, emptySpaceItem2, layoutControlItem37, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35 });
+            layoutControlGroup5.Location = new Point(0, 0);
+            layoutControlGroup5.Name = "layoutControlGroup3";
+            layoutControlGroup5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup5.Size = new Size(104, 211);
+            layoutControlGroup5.Text = "Отделка";
+            // 
+            // layoutControlItem30
+            // 
+            layoutControlItem30.Control = customCheckBox8;
+            layoutControlItem30.Location = new Point(0, 0);
+            layoutControlItem30.Name = "layoutControlItem30";
+            layoutControlItem30.Size = new Size(98, 24);
+            layoutControlItem30.TextVisible = false;
+            // 
+            // layoutControlItem31
+            // 
+            layoutControlItem31.Control = customCheckBox7;
+            layoutControlItem31.Location = new Point(0, 24);
+            layoutControlItem31.Name = "layoutControlItem31";
+            layoutControlItem31.Size = new Size(98, 24);
+            layoutControlItem31.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.Location = new Point(0, 48);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new Size(98, 16);
+            // 
+            // layoutControlItem37
+            // 
+            layoutControlItem37.Control = customCheckBox4;
+            layoutControlItem37.Location = new Point(0, 64);
+            layoutControlItem37.Name = "layoutControlItem37";
+            layoutControlItem37.Size = new Size(98, 24);
+            layoutControlItem37.TextVisible = false;
+            // 
+            // layoutControlItem32
+            // 
+            layoutControlItem32.Control = customCheckBox6;
+            layoutControlItem32.Location = new Point(0, 88);
+            layoutControlItem32.Name = "layoutControlItem32";
+            layoutControlItem32.Size = new Size(98, 24);
+            layoutControlItem32.TextVisible = false;
+            // 
+            // layoutControlItem33
+            // 
+            layoutControlItem33.Control = customCheckBox5;
+            layoutControlItem33.Location = new Point(0, 112);
+            layoutControlItem33.Name = "layoutControlItem33";
+            layoutControlItem33.Size = new Size(98, 24);
+            layoutControlItem33.TextVisible = false;
+            // 
+            // layoutControlItem34
+            // 
+            layoutControlItem34.Control = customCheckBox3;
+            layoutControlItem34.Location = new Point(0, 136);
+            layoutControlItem34.Name = "layoutControlItem34";
+            layoutControlItem34.Size = new Size(98, 24);
+            layoutControlItem34.TextVisible = false;
+            // 
+            // layoutControlItem35
+            // 
+            layoutControlItem35.Control = customCheckBox2;
+            layoutControlItem35.Location = new Point(0, 160);
+            layoutControlItem35.Name = "layoutControlItem35";
+            layoutControlItem35.Size = new Size(98, 24);
+            layoutControlItem35.TextVisible = false;
+            // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new Size(1742, 1010);
+            Controls.Add(layoutControl2);
             Controls.Add(customGroupBox2);
             Controls.Add(customGroupBox1);
-            Controls.Add(layoutControl2);
             Controls.Add(groupBox3);
             Controls.Add(splitContainerControl1);
-            Controls.Add(tableLayoutPanel2);
             Controls.Add(groupBox2);
             Controls.Add(lContrBoxMainInfo);
             Controls.Add(gridArtDr);
@@ -3798,7 +3901,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)buttonEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).EndInit();
@@ -3814,13 +3916,22 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)lCPagesKoplNabor).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
             customGroupBox1.ResumeLayout(false);
             customGroupBox1.PerformLayout();
             customGroupBox2.ResumeLayout(false);
             customGroupBox2.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
+            layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem30).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem31).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem37).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem32).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem33).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).EndInit();
             ResumeLayout(false);
         }
 
@@ -3947,8 +4058,6 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chbIsUpak;
         private CustomCheckBox chkP;
         private CustomCheckBox chbIsFurnit;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private CustomButton customButton7;
         private CustomCheckBox chkPres;
         private CustomCheckBox chkStra;
         private CustomCheckBox chkBus;
@@ -4043,14 +4152,8 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private DevExpress.XtraLayout.LayoutControl layoutControl2;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
         private CustomGroupBox customGroupBox1;
         private CustomGroupBox customGroupBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private CustomButton customButton1;
-        private CustomButton customButton2;
-        private CustomButton customButton6;
         private CustomLabel customLabel45;
         private CustomTextBox txbSumZarpl;
         private CustomTextBox txbSumKomplNum;
@@ -4073,5 +4176,23 @@ namespace SewingProduction.Features.Articul
         private CustomGroupBox groupBox2;
         private CustomSimpleButton csButtonEdit;
         private CustomButton customButton3;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private CustomCheckBox customCheckBox2;
+        private CustomCheckBox customCheckBox3;
+        private CustomCheckBox customCheckBox4;
+        private CustomCheckBox customCheckBox5;
+        private CustomCheckBox customCheckBox6;
+        private CustomCheckBox customCheckBox7;
+        private CustomCheckBox customCheckBox8;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem30;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem31;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem37;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem32;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem33;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem34;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem35;
     }
 }
