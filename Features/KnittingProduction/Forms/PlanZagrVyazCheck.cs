@@ -78,40 +78,45 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 DataSource = new BindingList<SprMonth>()
             };
 
-            comboBoxMonthList.DataSource = _sprMonthBindingSource;
-            comboBoxMonthList.SelectedIndex = -1;
-            comboBoxMonthList.ValueMember = "kod";
-            comboBoxMonthList.DisplayMember = "name_cl";
-            #endregion
+                comboBoxMonthList.DataSource = _sprMonthBindingSource;
+                comboBoxMonthList.SelectedIndex = -1;
+                comboBoxMonthList.ValueMember = "kod";
+                comboBoxMonthList.DisplayMember = "name_cl";
+                #endregion
 
-            #region comboBoxPodrVyazList
-            _podrVyazBindingSource = new BindingSource
-            {
-                DataSource = new BindingList<PodrVyaz>()
-            };
+                #region comboBoxPodrVyazList
+                _podrVyazBindingSource = new BindingSource
+                {
+                    DataSource = new BindingList<PodrVyaz>()
+                };
 
-            comboBoxPodrVyazList.DataSource = _podrVyazBindingSource;
-            comboBoxPodrVyazList.SelectedIndex = -1;
-            comboBoxPodrVyazList.ValueMember = "kod_vyaz";
-            comboBoxPodrVyazList.DisplayMember = "text_vyaz";
-            #endregion
+                comboBoxPodrVyazList.DataSource = _podrVyazBindingSource;
+                comboBoxPodrVyazList.SelectedIndex = -1;
+                comboBoxPodrVyazList.ValueMember = "kod_vyaz";
+                comboBoxPodrVyazList.DisplayMember = "text_vyaz";
+                #endregion
 
-            #region описание gridControlVyazPlan "оперативное планирование"
-            _pzvСheckBindingSource = new BindingSource
-            {
-                DataSource = new BindingList<PzvCheck>()
-            };
-            gridControlPzvCheck.DataSource = _pzvСheckBindingSource;
-            gridPzvCheckColumnTabTab.FieldName = "tabTab";
-            gridPzvCheckColumnTabFio.FieldName = "tabFioSokr";
-            gridPzvCheckColumnTabFio.Width = 90;
-            gridViewPzvCheck.OptionsView.EnableAppearanceEvenRow = false;
-            gridViewPzvCheck.OptionsView.EnableAppearanceOddRow = false;
+                #region описание gridControlVyazPlan "оперативное планирование"
+                _pzvСheckBindingSource = new BindingSource
+                {
+                    DataSource = new BindingList<PzvCheck>()
+                };
+                gridControlPzvCheck.DataSource = _pzvСheckBindingSource;
+                gridPzvCheckColumnTabTab.FieldName = "tabTab";
+                gridPzvCheckColumnTabFio.FieldName = "tabFioSokr";
+                gridPzvCheckColumnTabFio.Width = 90;
+                gridViewPzvCheck.OptionsView.EnableAppearanceEvenRow = false;
+                gridViewPzvCheck.OptionsView.EnableAppearanceOddRow = false;
 
-            gridViewPzvCheck.OptionsView.RowAutoHeight = true;
+                gridViewPzvCheck.Appearance.Row.Options.UseTextOptions = true;
+                gridViewPzvCheck.Appearance.Row.TextOptions.WordWrap = WordWrap.Wrap;
+                gridViewPzvCheck.Appearance.Row.TextOptions.Trimming = Trimming.None;
+                gridViewPzvCheck.OptionsView.RowAutoHeight = true;
 
+                gridViewPzvCheck.OptionsView.GroupFooterShowMode = GroupFooterShowMode.VisibleAlways;
+                gridViewPzvCheck.OptionsView.ShowFooter = true;
 
-            _gridHelper.AutoRowFilterConfig(gridViewPzvCheck as GridView, 1);
+                _gridHelper.AutoRowFilterConfig(gridViewPzvCheck as GridView, 1);
 
                 #endregion
             }
@@ -127,6 +132,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 _gridView.BeginUpdate();
                 _gridView.GroupSummary.Clear();
+
+                var memo = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+                gridControlPzvCheck.RepositoryItems.Add(memo);
 
                 string _xGridName = _gridView.Name;
                 int _xMonth = Convert.ToInt32(comboBoxMonthList.SelectedValue);
@@ -144,7 +152,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     string fName = $"grd{day.ToString("00")}";
                     grdDayColumn.Name = $"{_xGridName}ColumnGrd{day.ToString("00")}";
                     grdDayColumn.FieldName = fName;
-                    grdDayColumn.Caption = day.ToString();
+                    grdDayColumn.Caption = $"grd{day.ToString()}";
                     grdDayColumn.Visible = false;
                     grdDayColumn.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                     grdDayColumn.OptionsColumn.AllowEdit = false;
@@ -158,6 +166,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     dayColumn.Visible = true;
                     dayColumn.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                     dayColumn.OptionsColumn.AllowEdit = false;
+                    dayColumn.ColumnEdit = memo;
+                    dayColumn.AppearanceCell.Options.UseTextOptions = true;
+                    //dayColumn.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                     _gridView.Columns.Add(dayColumn);
 
                     _gridView.GroupSummary.Add(
@@ -283,7 +294,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         continue;
 
                     // Дневные колонки pzvTab01..pzvTab31
-                    if (fieldName.StartsWith("pzvTab"))
+                    if (fieldName.StartsWith("pzvTab") || fieldName.StartsWith("grd"))
                     {
                         _gridView.Columns.RemoveAt(i);
                         continue;
@@ -619,11 +630,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             if (e.Column != null && e.Column.FieldName.StartsWith("pzvTab"))
             {
-                string dayNumber = e.Column.FieldName.Substring(1);
+                //string dayNumber = e.Column.FieldName.Substring(6);
+                string dayNumber = e.Column.FieldName.Replace("pzvTab","");
                 if (int.TryParse(dayNumber, out int day) && day >= 1 && day <= 31)
                 {
                     //string markColumnName = $"grd{day.ToString("00")}";
-                    string markColumnName = $"gridPzvCheckColumnGrd{day.ToString("00")}";
+                    string markColumnName = $"grd{day.ToString("00")}";
                     object markValue = gridViewPzvCheck.GetRowCellValue(e.RowHandle, markColumnName);
 
                     if (markValue != null)

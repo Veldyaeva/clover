@@ -244,10 +244,14 @@
             gridViewPzvCheck.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewPzvCheck.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPzvCheck.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewPzvCheck.Appearance.Row.Options.UseTextOptions = true;
+            gridViewPzvCheck.Appearance.Row.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
+            gridViewPzvCheck.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridViewPzvCheck.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPzvCheckColumnTabTab, gridPzvCheckColumnTabFio });
             gridViewPzvCheck.GridControl = gridControlPzvCheck;
             gridViewPzvCheck.Name = "gridViewPzvCheck";
             gridViewPzvCheck.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewPzvCheck.RowCellStyle += gridViewPzvCheck_RowCellStyle;
             // 
             // gridPzvCheckColumnTabTab
             // 
