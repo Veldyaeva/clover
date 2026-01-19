@@ -17,6 +17,7 @@ using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Features.Tabel.Services;
+using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
@@ -34,7 +35,7 @@ using static SewingProduction.Core.helpers.BindingSourceHelper;
 
 namespace SewingProduction.Features.Tabel.Forms
 {
-    public partial class TabelMain : Form
+    public partial class TabelMain : CustomForm
     {
         private string currentMG = "1225";
         private static DatabaseHelper _dbHelper;
@@ -49,6 +50,8 @@ namespace SewingProduction.Features.Tabel.Forms
         private BindingList<TimeSheet> _timeSheetFreshBindingList;
         private List<TimeSheet> _currentTimeSheetData = new List<TimeSheet>();
         private List<TimeSheet> _TimeSheetDataFresh = new List<TimeSheet>();
+        private List<SpPodr> _spPodrList = new List<SpPodr>();
+        int idUser = CurrentUser.User.UserId;
         private readonly string[] allStates = new[]
         {
             " ",   // Пусто
@@ -63,6 +66,11 @@ namespace SewingProduction.Features.Tabel.Forms
             "Б/С", // Без содержания
             "Г",   // Прогул
             "НБ"   // Отстранение от работы без начисления ЗП
+        };
+        Dictionary<int, string> workTypes = new Dictionary<int, string>
+        {
+            { 19, "ШП" },
+            { 20, "ЗЛ" }
         };
         private Dictionary<string, int> cellStateIndices = new Dictionary<string, int>();
         public TabelMain()
@@ -79,10 +87,16 @@ namespace SewingProduction.Features.Tabel.Forms
 
             DialogResult result = FDI.ShowDialog();
         }
-        private void CreateDayColumns()
+        private void GetInfoGroup(int id)
         {
-            DateTime currentDate = DateTime.Now;
-            int daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
+
+
+        }
+        private void CreateDayColumns(string mg)
+        {
+            int month = int.Parse(mg.Substring(0, 2));
+            int year = 2000 + int.Parse(mg.Substring(2, 2));
+            int daysInMonth = DateTime.DaysInMonth(year, month);
             for (int day = 1; day <= daysInMonth; day++)
             {
                 GridColumn dayColumn = new GridColumn();
@@ -111,15 +125,32 @@ namespace SewingProduction.Features.Tabel.Forms
             itogColumnChas.OptionsColumn.AllowEdit = false;
             gridView1.Columns.Add(itogColumnChas);
             gridView1.BestFitColumns();
-
         }
 
         private async void TabelMain_Load(object sender, EventArgs e)
         {
-            CreateDayColumns();
+            CreateDayColumns(currentMG);
             Task bindingsTask = InitializeBindingsAsync();
             await Task.WhenAll(bindingsTask);
+            CheckUserAccess(idUser);
         }
+        private void RemoveDayColumns()
+        {
+            gridView1.BeginUpdate();
+
+            var toRemove = gridView1.Columns
+                .Cast<GridColumn>()
+                .Where(c => (c.FieldName.StartsWith("d") && c.FieldName.Length == 3) || c.FieldName.StartsWith("tItog"))
+                .ToList();
+
+            foreach (var column in toRemove)
+            {
+                gridView1.Columns.Remove(column);
+            }
+
+            gridView1.EndUpdate();
+        }
+
         private async Task InitializeBindingsAsync()
         {
             var timeSheetFresh = Task.Run(() =>
@@ -131,6 +162,7 @@ namespace SewingProduction.Features.Tabel.Forms
             {
                 _TimeSheetBindingList = new BindingList<TimeSheet>();
                 _timeSheetBindingSource = new BindingSource { DataSource = _TimeSheetBindingList };
+                _spPodr = new BindingSource { DataSource = _spPodrList };
             });
             await Task.WhenAll(spisokViewTask);
             //var zlPodr = await _tabelDataService.GetzlPodrAsync();
@@ -139,11 +171,12 @@ namespace SewingProduction.Features.Tabel.Forms
             //lookUpEditGr.Properties.DisplayMember = "naimen";
             //lookUpEditGr.Properties.ValueMember = "gr";
             UpdateMonthYearLabels(currentMG);
-            var SpPodr = await _tabelDataService.GetSpPodrAsync();
-            _spPodr = new BindingSource { DataSource = SpPodr.ToList() };
             lookUpEditGr.Properties.DataSource = _spPodr;
             lookUpEditGr.Properties.DisplayMember = "naimen";
             lookUpEditGr.Properties.ValueMember = "tnid";
+            lookUpEditGroup.Properties.DataSource = new BindingSource(workTypes, null);
+            lookUpEditGroup.Properties.DisplayMember = "Value";
+            lookUpEditGroup.Properties.ValueMember = "Key";
             #region Увязка грида
             customGridControlTimeSheet.DataSource = _timeSheetBindingSource;
             gridColumnDd1.FieldName = "dd01";
@@ -327,8 +360,11 @@ namespace SewingProduction.Features.Tabel.Forms
                 return;
             }
             currentMG = GetPreviousMonth(currentMG);
+            RemoveDayColumns();
+            CreateDayColumns(currentMG);
             UpdateMonthYearLabels(currentMG);
             GetTimeSheet(currentMG, grId);
+
         }
         private string GetPreviousMonth(string mg)
         {
@@ -364,6 +400,8 @@ namespace SewingProduction.Features.Tabel.Forms
                 return;
             }
             currentMG = GetNextMonth(currentMG);
+            RemoveDayColumns();
+            CreateDayColumns(currentMG);
             UpdateMonthYearLabels(currentMG);
             GetTimeSheet(currentMG, grId);
         }
@@ -707,6 +745,53 @@ namespace SewingProduction.Features.Tabel.Forms
             report1.Parameters["MG"].Visible = false;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
+        }
+        public void CheckUserAccess(int id)
+        {
+            int resultCountGroup = _tabelDataService.CheckRecordsExistsGroupGr(id);
+            if (resultCountGroup == 0)
+            {
+                MessageBox.Show("Нет прав!");
+                return;
+            }
+            if (resultCountGroup == 2)
+            {
+                lookUpEditGroup.Enabled = true;
+            }
+            if (resultCountGroup == 1)
+            {
+                lookUpEditGroup.Visible = false;
+                customLabel3.Visible = false;
+                int resultGroupId = _tabelDataService.GetTabelGroupForUser(id);
+                if (resultGroupId == 0)
+                {
+                    MessageBox.Show("Не удалось определить принадлежность");
+                    return;
+                }
+                if (resultGroupId == 19)
+                {
+                    GetGrAcess(19, idUser);
+                }
+                if (resultGroupId == 20)
+                {
+                    GetGrAcess(20, idUser);
+                }
+            }
+        }
+
+        private void lookUpEditGroup_EditValueChanged(object sender, EventArgs e)
+        {
+            int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
+            GetGrAcess(grId,idUser);
+        }
+        private async Task GetGrAcess(int idGr, int idUser)
+        {
+            var SpPodr = await _tabelDataService.GetSpPodrAsync(idGr,idUser);
+            _spPodr.Clear();
+            _spPodr.ResetBindings(false);
+            _spPodr.DataSource = SpPodr.ToList() ;
+            lookUpEditGroup.Refresh();
+
         }
     }
 }

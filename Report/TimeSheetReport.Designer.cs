@@ -505,6 +505,7 @@
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable2});
             this.Detail.HeightF = 12.52044F;
+            this.Detail.KeepTogether = true;
             this.Detail.Name = "Detail";
             // 
             // xrTable2
@@ -590,8 +591,8 @@
             // 
             this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d01]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd01]) =\'11\' || trim([dd01]) = \'8\' || trim([dd01]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd01]) =\'11\' || trim([dd01]) = \'8\' || trim([dd01]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell37.Multiline = true;
             this.xrTableCell37.Name = "xrTableCell37";
             this.xrTableCell37.Text = "1";
@@ -601,8 +602,8 @@
             // 
             this.xrTableCell38.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d02]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(Trim([dd02]) = \'11\' || trim([dd02]) = \'8\' || trim([dd02]) = \'1\',\'LightGray\',\'" +
-                    "White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(Trim([dd02]) = \'11\' || trim([dd02]) = \'8\' || trim([dd02]) = \'1\',\'White\',\'Ligh" +
+                    "tGray\')\n")});
             this.xrTableCell38.Multiline = true;
             this.xrTableCell38.Name = "xrTableCell38";
             this.xrTableCell38.Text = "2";
@@ -612,8 +613,8 @@
             // 
             this.xrTableCell39.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d03]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd03]) =\'11\' || trim([dd03]) = \'8\' || trim([dd03]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd03]) =\'11\' || trim([dd03]) = \'8\' || trim([dd03]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell39.Multiline = true;
             this.xrTableCell39.Name = "xrTableCell39";
             this.xrTableCell39.Text = "3";
@@ -623,8 +624,8 @@
             // 
             this.xrTableCell40.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d04]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd04]) =\'11\' || trim([dd04]) = \'8\' || trim([dd04]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd04]) =\'11\' || trim([dd04]) = \'8\' || trim([dd04]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell40.Multiline = true;
             this.xrTableCell40.Name = "xrTableCell40";
             this.xrTableCell40.Text = "4";
@@ -634,8 +635,8 @@
             // 
             this.xrTableCell41.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d05]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd05]) =\'11\' || trim([dd05]) = \'8\' || trim([dd05]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd05]) =\'11\' || trim([dd05]) = \'8\' || trim([dd05]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell41.Multiline = true;
             this.xrTableCell41.Name = "xrTableCell41";
             this.xrTableCell41.Text = "5";
@@ -645,8 +646,8 @@
             // 
             this.xrTableCell42.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d06]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd06]) =\'11\' || trim([dd06]) = \'8\' || trim([dd06]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd06]) =\'11\' || trim([dd06]) = \'8\' || trim([dd06]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell42.Multiline = true;
             this.xrTableCell42.Name = "xrTableCell42";
             this.xrTableCell42.Text = "6";
@@ -656,8 +657,8 @@
             // 
             this.xrTableCell43.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d07]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd07]) =\'11\' || trim([dd07]) = \'8\' || trim([dd07]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd07]) =\'11\' || trim([dd07]) = \'8\' || trim([dd07]) = \'1\',\'White\',\'Light" +
+                    "Gray\')\n")});
             this.xrTableCell43.Multiline = true;
             this.xrTableCell43.Name = "xrTableCell43";
             this.xrTableCell43.Text = "7";
@@ -667,8 +668,8 @@
             // 
             this.xrTableCell44.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d08]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd08]) =\'11\' || trim([dd08]) = \'8\' || trim([dd08]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd08]) =\'11\' || trim([dd08]) = \'8\' || trim([dd08]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell44.Multiline = true;
             this.xrTableCell44.Name = "xrTableCell44";
             this.xrTableCell44.Text = "8";
@@ -678,8 +679,8 @@
             // 
             this.xrTableCell45.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d09]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd09]) =\'11\' || trim([dd09]) = \'8\' || trim([dd09]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd09]) =\'11\' || trim([dd09]) = \'8\' || trim([dd09]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell45.Multiline = true;
             this.xrTableCell45.Name = "xrTableCell45";
             this.xrTableCell45.Text = "9";
@@ -689,8 +690,8 @@
             // 
             this.xrTableCell46.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d10]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd10]) =\'11\' || trim([dd10]) = \'8\' || trim([dd10]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd10]) =\'11\' || trim([dd10]) = \'8\' || trim([dd10]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell46.Multiline = true;
             this.xrTableCell46.Name = "xrTableCell46";
             this.xrTableCell46.Text = "10";
@@ -700,8 +701,8 @@
             // 
             this.xrTableCell47.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d11]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd11]) =\'11\' || trim([dd11]) = \'8\' || trim([dd11]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd11]) =\'11\' || trim([dd11]) = \'8\' || trim([dd11]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell47.Multiline = true;
             this.xrTableCell47.Name = "xrTableCell47";
             this.xrTableCell47.Text = "11";
@@ -710,9 +711,9 @@
             // xrTableCell48
             // 
             this.xrTableCell48.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd12]) =\'11\' || trim([dd12]) = \'8\' || trim([dd12]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d12]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d12]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd12]) =\'11\' || trim([dd12]) = \'8\' || trim([dd12]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell48.Multiline = true;
             this.xrTableCell48.Name = "xrTableCell48";
             this.xrTableCell48.Text = "12";
@@ -721,9 +722,9 @@
             // xrTableCell49
             // 
             this.xrTableCell49.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd13]) =\'11\' || trim([dd13]) = \'8\' || trim([dd13]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d13]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d13]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd13]) =\'11\' || trim([dd13]) = \'8\' || trim([dd13]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell49.Multiline = true;
             this.xrTableCell49.Name = "xrTableCell49";
             this.xrTableCell49.Text = "13";
@@ -732,9 +733,9 @@
             // xrTableCell50
             // 
             this.xrTableCell50.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd14]) =\'11\' || trim([dd14]) = \'8\' || trim([dd14]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d14]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d14]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd14]) =\'11\' || trim([dd14]) = \'8\' || trim([dd14]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell50.Multiline = true;
             this.xrTableCell50.Name = "xrTableCell50";
             this.xrTableCell50.Text = "14";
@@ -743,9 +744,9 @@
             // xrTableCell51
             // 
             this.xrTableCell51.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd15]) =\'11\' || trim([dd15]) = \'8\' || trim([dd15]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d15]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d15]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd15]) =\'11\' || trim([dd15]) = \'8\' || trim([dd15]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell51.Multiline = true;
             this.xrTableCell51.Name = "xrTableCell51";
             this.xrTableCell51.Text = "15";
@@ -754,9 +755,9 @@
             // xrTableCell52
             // 
             this.xrTableCell52.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd16]) =\'11\' || trim([dd16]) = \'8\' || trim([dd16]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d16]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d16]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd16]) =\'11\' || trim([dd16]) = \'8\' || trim([dd16]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell52.Multiline = true;
             this.xrTableCell52.Name = "xrTableCell52";
             this.xrTableCell52.Text = "16";
@@ -765,9 +766,9 @@
             // xrTableCell53
             // 
             this.xrTableCell53.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd17]) =\'11\' || trim([dd17]) = \'8\' || trim([dd17]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d17]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d17]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd17]) =\'11\' || trim([dd17]) = \'8\' || trim([dd17]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell53.Multiline = true;
             this.xrTableCell53.Name = "xrTableCell53";
             this.xrTableCell53.Text = "17";
@@ -776,9 +777,9 @@
             // xrTableCell54
             // 
             this.xrTableCell54.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd18]) =\'11\' || trim([dd18]) = \'8\' || trim([dd18]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d18]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d18]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd18]) =\'11\' || trim([dd18]) = \'8\' || trim([dd18]) = \'1\',\'White\',\'Light" +
+                    "Gray\')\n")});
             this.xrTableCell54.Multiline = true;
             this.xrTableCell54.Name = "xrTableCell54";
             this.xrTableCell54.Text = "18";
@@ -787,9 +788,9 @@
             // xrTableCell55
             // 
             this.xrTableCell55.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd19]) =\'11\' || trim([dd19]) = \'8\' || trim([dd19]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d19]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d19]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd19]) =\'11\' || trim([dd19]) = \'8\' || trim([dd19]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell55.Multiline = true;
             this.xrTableCell55.Name = "xrTableCell55";
             this.xrTableCell55.Text = "19";
@@ -798,9 +799,9 @@
             // xrTableCell56
             // 
             this.xrTableCell56.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd20]) =\'11\' || trim([dd20]) = \'8\' || trim([dd20]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d20]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d20]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd20]) =\'11\' || trim([dd20]) = \'8\' || trim([dd20]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell56.Multiline = true;
             this.xrTableCell56.Name = "xrTableCell56";
             this.xrTableCell56.Text = "20";
@@ -809,9 +810,9 @@
             // xrTableCell57
             // 
             this.xrTableCell57.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd21]) =\'11\' || trim([dd21]) = \'8\' || trim([dd21]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d21]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d21]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd21]) =\'11\' || trim([dd21]) = \'8\' || trim([dd21]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell57.Multiline = true;
             this.xrTableCell57.Name = "xrTableCell57";
             this.xrTableCell57.Text = "21";
@@ -820,9 +821,9 @@
             // xrTableCell58
             // 
             this.xrTableCell58.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd22]) =\'11\' || trim([dd22]) = \'8\' || trim([dd22]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d22]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d22]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd22]) =\'11\' || trim([dd22]) = \'8\' || trim([dd22]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell58.Multiline = true;
             this.xrTableCell58.Name = "xrTableCell58";
             this.xrTableCell58.Text = "22";
@@ -831,9 +832,9 @@
             // xrTableCell59
             // 
             this.xrTableCell59.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd23]) =\'11\' || trim([dd23]) = \'8\' || trim([dd23]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d23]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d23]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd23]) =\'11\' || trim([dd23]) = \'8\' || trim([dd23]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell59.Multiline = true;
             this.xrTableCell59.Name = "xrTableCell59";
             this.xrTableCell59.Text = "23";
@@ -842,9 +843,9 @@
             // xrTableCell60
             // 
             this.xrTableCell60.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd24]) =\'11\' || trim([dd24]) = \'8\' || trim([dd24]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d24]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d24]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd24]) =\'11\' || trim([dd24]) = \'8\' || trim([dd24]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell60.Multiline = true;
             this.xrTableCell60.Name = "xrTableCell60";
             this.xrTableCell60.Text = "24";
@@ -853,9 +854,9 @@
             // xrTableCell61
             // 
             this.xrTableCell61.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd25]) =\'11\' || trim([dd25]) = \'8\' || trim([dd25]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d25]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d25]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd25]) =\'11\' || trim([dd25]) = \'8\' || trim([dd25]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell61.Multiline = true;
             this.xrTableCell61.Name = "xrTableCell61";
             this.xrTableCell61.Text = "25";
@@ -864,9 +865,9 @@
             // xrTableCell62
             // 
             this.xrTableCell62.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd26]) =\'11\' || trim([dd26]) = \'8\' || trim([dd26]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d26]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d26]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd26]) =\'11\' || trim([dd26]) = \'8\' || trim([dd26]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell62.Multiline = true;
             this.xrTableCell62.Name = "xrTableCell62";
             this.xrTableCell62.Text = "26";
@@ -875,9 +876,9 @@
             // xrTableCell63
             // 
             this.xrTableCell63.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd27]) =\'11\' || trim([dd27]) = \'8\' || trim([dd27]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d27]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d27]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd27]) =\'11\' || trim([dd27]) = \'8\' || trim([dd27]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell63.Multiline = true;
             this.xrTableCell63.Name = "xrTableCell63";
             this.xrTableCell63.Text = "27";
@@ -886,9 +887,9 @@
             // xrTableCell64
             // 
             this.xrTableCell64.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd28]) =\'11\' || trim([dd28]) = \'8\' || trim([dd28]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d28]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d28]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd28]) =\'11\' || trim([dd28]) = \'8\' || trim([dd28]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell64.Multiline = true;
             this.xrTableCell64.Name = "xrTableCell64";
             this.xrTableCell64.Text = "28";
@@ -897,9 +898,9 @@
             // xrTableCell65
             // 
             this.xrTableCell65.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd29]) =\'11\' || trim([dd29]) = \'8\' || trim([dd29]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d29]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d29]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd29]) =\'11\' || trim([dd29]) = \'8\' || trim([dd29]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell65.Multiline = true;
             this.xrTableCell65.Name = "xrTableCell65";
             this.xrTableCell65.Text = "29";
@@ -908,9 +909,9 @@
             // xrTableCell66
             // 
             this.xrTableCell66.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd30]) =\'11\' || trim([dd30]) = \'8\' || trim([dd30]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d30]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d30]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd30]) =\'11\' || trim([dd30]) = \'8\' || trim([dd30]) = \'1\',\'White\',\'Light" +
+                    "Gray\')")});
             this.xrTableCell66.Multiline = true;
             this.xrTableCell66.Name = "xrTableCell66";
             this.xrTableCell66.Text = "30";
@@ -919,9 +920,9 @@
             // xrTableCell67
             // 
             this.xrTableCell67.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd31]) =\'11\' || trim([dd31]) = \'8\' || trim([dd31]) = \'1\',\'LightGray\',\'W" +
-                    "hite\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d31]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d31]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd31]) =\'11\' || trim([dd31]) = \'8\' || trim([dd31]) = \'1\',\'White\',\'Light" +
+                    "Gray\')\n")});
             this.xrTableCell67.Multiline = true;
             this.xrTableCell67.Name = "xrTableCell67";
             this.xrTableCell67.Text = "31";

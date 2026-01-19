@@ -5,6 +5,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,16 +78,32 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
         }
-        public async Task<List<SpPodr>> GetSpPodrAsync()
+        public async Task<List<SpPodr>> GetSpPodrAsync(int idGroup,int idUser)
         {
             try
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "select tnid,t_n, naimen from tab_n order by tnid";
+                    if (idGroup == 19)
+                    {
 
-                    var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
-                    return result.ToList();
+                        string query = $"select tnid,t_n, naimen from tab_n where tnid in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) order by tnid";
+
+                        var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
+                        return result.ToList();
+                    }
+                    if (idGroup == 20)
+                    {
+                        string query = $"select gr, naimen from zlgr where gr in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) order by gr";
+
+                        var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
+                        return result.ToList();
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                    
                 }
 
             }
@@ -134,6 +151,52 @@ namespace SewingProduction.Features.Tabel.Services
             }
 
             return _isCountTabel;
+        }
+        public int CheckRecordsExistsGroupGr(int idUser)
+        {
+            int _isCountGroupGr;
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select COUNT(*) from (select podrtableid from userPodr where UserId = {idUser} group by podrtableid) s ";
+
+                    _isCountGroupGr = _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { });
+                    return _isCountGroupGr;
+                }
+            }
+            catch (SqlException ex)
+            {
+                 _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных userPodr");
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных userPodr");
+                return 0;
+            }
+
+            return _isCountGroupGr;
+        }
+        public int GetTabelGroupForUser(int idUser)
+        {
+            int _valueGroup;
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select podrtableid from userPodr where UserId = {idUser} group by podrtableid ";
+
+                    _valueGroup = _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { });
+                    return _valueGroup;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных userPodr");
+                return 0;
+            }
         }
     }
 }
