@@ -1,8 +1,9 @@
-﻿using SewingProduction.Core.Models;
+﻿using System.ComponentModel;
+using SewingProduction.Core.Models;
 
 namespace SewingProduction.Features.Articul.Models
 {
-    public class SpArticulGrupMenViewModel : ArticulModel
+    public class SpArticulGrupMenViewModel : AddNewKopmlModel, INotifyPropertyChanged
     //, INotifyPropertyChanged
     {
 
@@ -26,11 +27,13 @@ namespace SewingProduction.Features.Articul.Models
                 }
             }
         }
+        public string Po { get; set; }
         public int TabIndex { get; set; } = -1;
         public string Razm_all { get; set; }
 
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //protected void OnPropertyChanged(string propertyName)
-        //    => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
     }
 }

@@ -8,7 +8,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Services;
 using Newtonsoft.Json;
 
-namespace SewingProduction.Features.Sprav
+namespace SewingProduction.Features.Sprav.DataService
 {
     public class TarifDataService
     {
@@ -48,7 +48,7 @@ namespace SewingProduction.Features.Sprav
         {
             string query = @"EXEC dbo.ProizvConstantStores @pcid";
 
-            return await _dbService.GetListAsync<TarifModelHistory>(query, new { pcid = pcid });
+            return await _dbService.GetListAsync<TarifModelHistory>(query, new { pcid });
         }
 
 
@@ -163,7 +163,7 @@ namespace SewingProduction.Features.Sprav
                 deskr = model.describe,
                 pcstid = model.pcstId,
                 begindat = model.begin_dt.ToString("yyyy-MM-ddTHH:mm:ss"),
-                firm = model.firm,
+                model.firm,
                 typeconst = model.typeConst,
                 nametable = model.store_name,
                 namefield = model.name_field_id,

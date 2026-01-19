@@ -303,6 +303,7 @@
     <Folder Include="Features\SockProduction\Models\" />
     <Folder Include="Features\SockProduction\Services\" />
     <Folder Include="Features\Sprav\Helpers\" />
+    <Folder Include="Features\Sprav\Service\" />
   </ItemGroup>
 
   <ItemGroup>

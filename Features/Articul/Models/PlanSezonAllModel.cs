@@ -11,6 +11,8 @@ namespace SewingProduction.Features.Articul.Models
         public int Psa_id { get; set; }
         public decimal n { get; set; }
         public string nn { get; set; }
+        public string year { get { return nn.Substring(0, 4); } }
+        public string seazon { get { return nn.Substring(4, 1); } }
         public string kodd { get; set; }
         public string grup { get; set; }
         public string articul { get; set; }
