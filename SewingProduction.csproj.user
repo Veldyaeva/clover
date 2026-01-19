@@ -223,6 +223,9 @@
     <Compile Update="Features\UserDistribution\Forms\UserHierarchy.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Help\Form\HelpFormAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Help\Form\TestForm1.cs">
       <SubType>Form</SubType>
     </Compile>

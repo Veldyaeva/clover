@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Dapper;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -120,15 +124,69 @@ namespace SewingProduction.Features.Articul.Service
             return string.Join(";", codes.Where(c => c.HasValue && c.Value != 0)
                                          .OrderBy(c => c.Value));
         }
-        public bool CheckInProizv(string kod)
+        public KomplCheckInfo GetKomplRazmCheckInfo(DevExpress.XtraGrid.Views.Grid.GridView view)
         {
-            string query = "SELECT top 1 1 FROM View_rzu_rzv_nom_zad WHERE kod_k_pach  = @kod";
+            var result = new KomplCheckInfo();
+
+            var data = view?.DataSource as List<SpArticulGrupMenViewModel>;
+            if (data == null || data.Count == 0)
+                return result;
+
+            var kods = data
+                .Where(x => x?.Kod != null)
+                .Select(x => x.Kod.ToString())
+                .Distinct()
+                .ToList();
+
+            result.InProizv = CheckInProizv(kods);
+            result.InNakl = CheckNaklRas(kods);
+
+            Debug.WriteLine(result.InProizv.Count);
+            Debug.WriteLine(result.InNakl.Count);
+            Debug.WriteLine(kods.Count);
+
+            if (result.InProizv.Count == kods.Count || result.InNakl.Count == kods.Count)
+                result.IsReadOnly = true;
+
+            return result;
+        }
+        public List<string> CheckInProizv(List<string> kods)
+        {
+            if (kods == null || kods.Count == 0)
+                return new List<string>();
+
+            string query = @"
+                SELECT DISTINCT CAST(kod_k_pach AS varchar(50)) 
+                FROM View_rzu_rzv_nom_zad
+                WHERE kod_k_pach IN @kods";
+
+            return _dbService.GetListSync<string>(query, new { kods });
+        }
+        public bool CheckInProizvChast(string kod)
+        {
+            string query = @"
+                SELECT vsa.kod,psa.nn
+                from View_sp_articul vsa
+                inner join plan_sezon_all psa on vsa.kodd = psa.kodd
+                inner join plan_sezon_zad psz on psa.nn = psz.nn
+                inner join View_rzu_rzv_nom_zad nzp on nzp.nom_zad = psz.nom
+                where isnull(psa.psa_id_osn,0)>0
+                and vsa.kod = @kod
+                group by vsa.kod,psa.nn";
+
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
         }
-        public bool CheckNaklRas(string kod)
+        public List<string> CheckNaklRas(List<string> kods)
         {
-            string query = "SELECT top 1 1 FROM nakl_ras WHERE kod_k  = @kod";
-            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+            if (kods == null || kods.Count == 0)
+                return new List<string>();
+
+            string query = @"
+                SELECT DISTINCT CAST(kod_k AS varchar(50))
+                FROM nakl_ras
+                WHERE kod_k IN @kods";
+
+            return _dbService.GetListSync<string>(query, new { kods });
         }
         public bool CheckNabor(string kod)
         {
@@ -147,5 +205,13 @@ namespace SewingProduction.Features.Articul.Service
             return Convert.ToInt32(result);
         }
     }
+    public class KomplCheckInfo
+    {
+        public List<string> InProizv { get; set; } = new List<string>();
+        public List<string> InNakl { get; set; } = new List<string>();
 
+        public bool IsReadOnly { get; set; }
+        public string ReadOnlyMessage { get;} = "Только чтение. Нельзя редактировать ни один из размеров комплекта.";
+        public bool HasAny => InProizv.Count > 0 || InNakl.Count > 0;
+    }
 }

@@ -51,6 +51,7 @@ namespace SewingProduction.Features.Articul
         private readonly ILogger _logger = new FileLogger();
         //все поля таблицы Артикул
         private SpArticulPreviewModel _articulByKod;
+        KomplDataService komplService = new KomplDataService();
 
         private bool _isInitialized;
 
@@ -512,7 +513,7 @@ namespace SewingProduction.Features.Articul
 
         }
         /// <summary>
-        /// добавление нового кода 
+        /// добавление нового кода копированием
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -544,6 +545,11 @@ namespace SewingProduction.Features.Articul
         {
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as SpArtPreviewModel).Kod;
+            if (komplService.CheckNabor(kodObj))
+            {
+                MessageBox.Show("Комплектовать НАБОРЫ нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (this.MdiParent is SpMainForm mainForm)
             {
                 mainForm.OpenForm(new AddNewKopml(User, kodObj.ToString()));
@@ -552,7 +558,7 @@ namespace SewingProduction.Features.Articul
 
         private async void csButtonNew_Click(object sender, EventArgs e)
         {
-            using (EditArticul f = new EditArticul())
+            using (EditArticul f = new EditArticul(_user))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {

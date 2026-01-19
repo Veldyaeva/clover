@@ -260,5 +260,11 @@ namespace SewingProduction
             var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
             OpenForm(form, sender);
         }
+
+        private void справкаtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new SewingProduction.HelpAdmin.Forms.AdminHelpEditorForm(this._formManager);
+            f.Show();
+        }
     }
 }
