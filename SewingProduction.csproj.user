@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Vs_projects\sewingproduction\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SharpProj\sewingproduction-9.0.net\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -157,6 +157,12 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\SpisokConnect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Forms\TabelMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\AnnLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -277,10 +283,19 @@
     <Compile Update="Report\ReestrListReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\SockZadanyInfoReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\subreport\FurnitFITByKodFD.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\subreport\KnitMachineDownTimeByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\subreport\KnitMashineServiceByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitZadanyBySmenReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\subreport\PrintGroupNROborudReport.cs">
@@ -308,6 +323,12 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TimeSheetParsecOrionPrint.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\TimeSheetReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\VshivkiReport.cs">

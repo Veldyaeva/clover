@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "SewingProduction": {
+      "commandName": "Project",
+      "nativeDebugging": false,
+      "hotReloadEnabled": true
+    }
+  }
+}

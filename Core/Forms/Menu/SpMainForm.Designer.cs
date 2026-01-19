@@ -76,6 +76,7 @@ namespace SewingProduction
             кнопкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             справкаtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
+            табельToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             аналитикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -135,7 +136,7 @@ namespace SewingProduction
             // menuStrip1
             // 
             menuStrip1.BackColor = SystemColors.ButtonFace;
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem, кнопкаToolStripMenuItem, справкаtoolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem, кнопкаToolStripMenuItem, табельToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -417,6 +418,13 @@ namespace SewingProduction
             xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
             // 
+            // табельToolStripMenuItem
+            // 
+            табельToolStripMenuItem.Name = "табельToolStripMenuItem";
+            табельToolStripMenuItem.Size = new Size(57, 20);
+            табельToolStripMenuItem.Text = "Табель";
+            табельToolStripMenuItem.Click += табельToolStripMenuItem_Click;
+            // 
             // аналитикаToolStripMenuItem
             // 
             аналитикаToolStripMenuItem.Name = "аналитикаToolStripMenuItem";
@@ -500,5 +508,7 @@ namespace SewingProduction
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолВязальщицыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem аналитикаToolStripMenuItem;
      	private System.Windows.Forms.ToolStripMenuItem справкаtoolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem табельToolStripMenuItem;
+    
     }
 }

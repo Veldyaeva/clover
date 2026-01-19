@@ -112,7 +112,10 @@
     <None Remove="Help\Features\UserDistribution\Forms\UserHierarchy.html" />
     <None Remove="Help\Features\UserDistribution\Forms\UserProfile.html" />
     <None Remove="Help\Help.html" />
+    <None Remove="Resources\cat-cat-rainbow.gif" />
+    <None Remove="Resources\cat_square.gif" />
     <None Remove="Resources\gray_spinner.gif" />
+    <None Remove="Resources\icons8-сердце.gif" />
     <None Remove="Resources\loading_dude.gif" />
   </ItemGroup>
 
@@ -247,6 +250,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\AppIcons\favicon.ico" />
+    <Content Include="Resources\cat-cat-rainbow.gif" />
+    <EmbeddedResource Include="Resources\cat_square.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\loading_dude.gif" />
   </ItemGroup>
 
@@ -292,6 +299,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Update="Resources\free-icon-cursor-6825137.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -310,9 +320,9 @@
     <EmbeddedResource Include="Resources\gray_spinner.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\loading_dude.gif">
+    <Content Include="Resources\loading_dude.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
