@@ -62,7 +62,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
                 // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
-                // ВАЖНО: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты). и переставлять местави часы и кол назн и факт
+                // ВАЖНО: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).-- и переставлять местави часы и кол назн и факт --не нужно переставлять
                 using (var grid = await connection.QueryMultipleAsync(
                   "dbo.GetPlanZagrVyazNorm_ByTab4",
                     new
@@ -224,14 +224,14 @@ where kwsmlKmlID in @ids
                 static void FillUi(KnitterPZVModel r)
                 {
                     bool assigned = (r.pzvTab ?? 0) != 0;
-
+                    bool started = !(r.pzvDateStart == null);
                     // tab=0 -> Kol/NChasi = план, Nazn пустые
                     // tab>0 -> Kol/NChasi = факт, Nazn = план
                     r.PlanKol_UI = assigned ? r.pzvKolNazn : (r.pzvKol ?? 0);
                     r.PlanChas_UI = assigned ? r.pzvChasNazn : (r.pzvNChasi ?? 0m);
 
-                    r.FactKol_UI = assigned ? (r.pzvKol ?? 0) : 0;
-                    r.FactChas_UI = assigned ? (r.pzvNChasi ?? 0m) : 0m;
+                    r.FactKol_UI = started ? (r.pzvKol ?? 0) : 0;// assigned ? (r.pzvKol ?? 0) : 0;
+                    r.FactChas_UI = started ? (r.pzvNChasi ?? 0m) : 0m;
                 }
 
                 foreach (var p in parents)
@@ -325,11 +325,11 @@ ORDER BY fio";
      -- переносим плановое количество в назначенное
      pzvKolNazn = ISNULL(pzvKol, 0),
      pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
-     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2)),
-     pzvKol = 0,
-     pzvNChasi = 0
+     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2))
+     --,pzvKol = 0
+     --,pzvNChasi = 0
  WHERE pzvID IN @ids";
-    // -- после назначения плановое поле обнуляем, чтобы \"кол-во к выполнению\" стало 0
+    // -- после назначения плановое поле НЕ обнуляем, чтобы \"кол-во к выполнению\" НЕ стало 0 - не надо их занулять!!!
 
                     await connection.ExecuteAsync(sql, new { tab, ids });
                 }

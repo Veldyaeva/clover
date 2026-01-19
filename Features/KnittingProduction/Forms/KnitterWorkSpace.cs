@@ -992,6 +992,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (currentRow != null)
             {
                 currentRow.pzvKol = qty;
+                currentRow.FactKol_UI = defaultQty;
                 // Мгновенно пересчитываем часы факт для прогресса (секунды на изделие * факт / 3600)
                 decimal factHours = 0m;
                 if (currentRow.pzvSek > 0)

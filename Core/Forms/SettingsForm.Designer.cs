@@ -30,6 +30,7 @@ namespace SewingProduction.form
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             customLabelTheme = new CustomLabel();
             customComboBoxTheme = new CustomComboBox();
@@ -43,6 +44,8 @@ namespace SewingProduction.form
             customLabelRejimRab = new CustomLabel();
             customButtonSaveExit = new CustomButton();
             colorPickEditLabel = new DevExpress.XtraEditors.ColorPickEdit();
+            contextMenuReset = new System.Windows.Forms.ContextMenuStrip(components);
+            menuItemReset = new System.Windows.Forms.ToolStripMenuItem();
             colorPickEditTextBox = new DevExpress.XtraEditors.ColorPickEdit();
             customLabel1 = new CustomLabel();
             customLabel2 = new CustomLabel();
@@ -60,6 +63,7 @@ namespace SewingProduction.form
             colorPickEditGridBackground = new DevExpress.XtraEditors.ColorPickEdit();
             customButton1 = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
+            contextMenuReset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonTextColor.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonBackground.Properties).BeginInit();
@@ -230,6 +234,20 @@ namespace SewingProduction.form
             colorPickEditLabel.Size = new System.Drawing.Size(140, 20);
             colorPickEditLabel.TabIndex = 15;
             colorPickEditLabel.EditValueChanged += colorPickEditLabel_EditValueChanged;
+            colorPickEditLabel.ContextMenuStripChanged += menuItemReset_Click;
+            // 
+            // contextMenuReset
+            // 
+            contextMenuReset.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { menuItemReset });
+            contextMenuReset.Name = "contextMenuReset";
+            contextMenuReset.Size = new System.Drawing.Size(128, 26);
+            // 
+            // menuItemReset
+            // 
+            menuItemReset.Name = "menuItemReset";
+            menuItemReset.Size = new System.Drawing.Size(127, 22);
+            menuItemReset.Text = "Сбросить";
+            menuItemReset.Click += menuItemReset_Click;
             // 
             // colorPickEditTextBox
             // 
@@ -449,6 +467,7 @@ namespace SewingProduction.form
             Text = "SettingsForm";
             Load += SettingsForm_Load;
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).EndInit();
+            contextMenuReset.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonTextColor.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonBackground.Properties).EndInit();
@@ -490,5 +509,7 @@ namespace SewingProduction.form
         private DevExpress.XtraEditors.ColorPickEdit colorPickEditGridRowBackground;
         private DevExpress.XtraEditors.ColorPickEdit colorPickEditGridBackground;
         private CustomButton customButton1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuReset;
+        private System.Windows.Forms.ToolStripMenuItem menuItemReset;
     }
 }
