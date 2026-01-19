@@ -7,10 +7,12 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +20,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class KnitterWorkSpace : Form
+    public partial class KnitterWorkSpace : CustomForm
     {
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
@@ -99,7 +101,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Инициализирует форму рабочего места вязальщика.
         /// Настраивает источники данных, колонки гридов, оркестратор и подписки.
         /// </summary>
-        public KnitterWorkSpace()
+        public KnitterWorkSpace(UserClass user) : base(user)
         {
             try
         {
@@ -125,6 +127,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
+                advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
             }
             catch (Exception ex)
@@ -156,6 +160,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
+                advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
             }
             catch (Exception ex)
@@ -229,32 +235,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 initialTab = defaultTab;
             }
 
-            _isSplashShowing = true;
+			_isSplashShowing = true;
 			double oldOpacity = this.Opacity;
 			Form overlay = null;
 			try
 			{
-				// Прячем содержимое формы и показываем полноэкранный непрозрачный оверлей
-				this.Opacity = 0;
+				// Перекрываем только текущую вкладку/форму KnitterWorkSpace, не блокируя остальные вкладки/кнопки
 				overlay = new Form();
 				overlay.FormBorderStyle = FormBorderStyle.None;
 				overlay.StartPosition = FormStartPosition.Manual;
-				var bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
-				//var bounds = System.Windows.Forms.Screen.AllScreens
-				//	.Select(s => s.Bounds)
-				//	.Aggregate(System.Drawing.Rectangle.Empty, (acc, r) => System.Drawing.Rectangle.Union(acc, r));
-				if (bounds == System.Drawing.Rectangle.Empty && System.Windows.Forms.Screen.PrimaryScreen != null)
-					bounds = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
-				overlay.Bounds = bounds;
-				overlay.BackColor = System.Drawing.Color.AliceBlue;
-				overlay.TopMost = true;
 				overlay.ShowInTaskbar = false;
+				overlay.BackColor = System.Drawing.Color.AliceBlue;
+				overlay.TopMost = false; // достаточно быть над текущей формой
+				overlay.Owner = this;
+
+				// Берём границы основного layout текущей вкладки; если что-то пойдёт не так — используем всю клиентскую область формы
+				var bounds = dataLayoutControl1?.RectangleToScreen(dataLayoutControl1.ClientRectangle)
+					?? this.RectangleToScreen(this.ClientRectangle);
+				overlay.Bounds = bounds;
 				overlay.Show();
 
 				using (var splash = new FioSelectionSplash(fioList, initialTab))
 				{
 					splash.StartPosition = FormStartPosition.CenterScreen;
-					splash.TopMost = true;
+				//	splash.TopMost = true;
 					var result = splash.ShowDialog(overlay);
 					if (result == DialogResult.OK && splash.SelectedTab.HasValue)
 					{
@@ -327,19 +331,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
 
                 // Групповой итог по "назначено в м/ч" (pzvChasNazn) в футере группы
-                var assignedCol = gridColumn6 ?? advBandedGridView1.Columns.ColumnByFieldName("pzvChasNazn");
-                if (assignedCol != null)
-                {
-                    _pzvChasNaznGroupSumItem = advBandedGridView1.GroupSummary
-                        .OfType<DevExpress.XtraGrid.GridGroupSummaryItem>()
-                        .FirstOrDefault(gs => gs.FieldName == "pzvChasNazn" && gs.SummaryType == DevExpress.Data.SummaryItemType.Sum);
+                //var assignedCol = gridColumn6 ?? advBandedGridView1.Columns.ColumnByFieldName("pzvChasNazn");
+                //if (assignedCol != null)
+                //{
+                //    _pzvChasNaznGroupSumItem = advBandedGridView1.GroupSummary
+                //        .OfType<DevExpress.XtraGrid.GridGroupSummaryItem>()
+                //        .FirstOrDefault(gs => gs.FieldName == "pzvChasNazn" && gs.SummaryType == DevExpress.Data.SummaryItemType.Sum);
 
-                    if (_pzvChasNaznGroupSumItem == null)
-                    {
-                        _pzvChasNaznGroupSumItem = new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvChasNazn", assignedCol, "{0:0.00}");
-                        advBandedGridView1.GroupSummary.Add(_pzvChasNaznGroupSumItem);
-                    }
-                }
+                //    if (_pzvChasNaznGroupSumItem == null)
+                //    {
+                //        _pzvChasNaznGroupSumItem = new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvChasNazn", assignedCol, "{0:0.00}");
+                //        advBandedGridView1.GroupSummary.Add(_pzvChasNaznGroupSumItem);
+                //    }
+                //}
 
             }
             finally
@@ -944,7 +948,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (row == null)
                 return;
 
-            if (row.pzvNChasi == null || row.pzvNChasi == 0m)
+            // Считаем факт-часы только для завершённых операций (есть дата окончания)
+            if ((row.pzvNChasi == null || row.pzvNChasi == 0m) && row.pzvDateEnd != null)
             {
                 var factQty = row.pzvKol ?? 0;
                 if (row.pzvSek > 0 && factQty > 0)
@@ -966,7 +971,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Получим текущую строку для плейсхолдера (кол-во к выполнению)
             var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
+            // Если плановое количество уже перенесено в назначенное (pzvKol обнулён), используем pzvKolNazn как "к выполнению"
             int defaultQty = currentRow?.pzvKol ?? 0;
+            if (defaultQty == 0 && currentRow != null && currentRow.pzvKolNazn > 0)
+                defaultQty = currentRow.pzvKolNazn;
 
             // Диалог ввода количества отвязанных изделий
             var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
@@ -1006,7 +1014,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _view.UpdateCurrentRow();
             _view.RefreshRowCell(rowHandle, bandedGridColumn22);
 
-            // Сначала устанавливаем дату окончания (SP также ставит её, но нам важно обойти проверки до вызова SP)
+            // Сначала сохраняем факт в БД (кол-во и часы факт)
+            if (currentRow?.pzvID > 0)
+            {
+                await _orchestrator.UpdatePzvFactAsync(currentRow.pzvID, qty);
+            }
+
+            // Затем устанавливаем дату окончания (SP также ставит её, но нам важно обойти проверки до вызова SP)
             await ApplyPzvDateAsync(
                 view,
                 bandedGridColumn19,
@@ -1018,17 +1032,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 			// Затем — разделение записи в зависимости от введённого количества
 			IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
 			if (currentRow?.pzvID > 0)
-			{
-				if (qty == 0)
-				{
-					// создаём отрицательную строку mode = 2
-					newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
-				}
-				else if (qty <= defaultQty)
-				{
-					// Факт меньше запланированного — mode = 1 c qtyFact
-					newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
-				}
+			{ if (defaultQty > 0)
+                {
+                    if (qty == 0)
+                    {
+                        // создаём отрицательную строку mode = 2
+                        newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
+                    }
+                    else if (qty < defaultQty)
+                    {
+                        // Факт меньше запланированного — mode = 1 c qtyFact
+                        newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
+                    }
+                }
 			}
             
             // Обновим план, чтобы показать новую запись остатка (если была создана)
@@ -1036,7 +1052,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 // Сохраняем текущую машину, чтобы вернуть фокус после обновления
                 var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, false, false, 14);//(tab);
+                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, _currentKmaId, false, false, 14);//(tab);
                 // перестраиваем иерархию без очистки табеля
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 // Вернём фокус и раскроем нужную машину
@@ -1155,7 +1171,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void SetupIdleTimer()
         {
-            _idleTimer.Interval = 180000; // 1 минута = 60000 миллисекунд
+            _idleTimer.Interval = 180000000; // 1 минута = 60000 миллисекунд
             _idleTimer.Tick += IdleTimer_Tick;
 
             // Подписываемся на события активности для сброса таймера
@@ -1337,8 +1353,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         string.Equals(KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), taskKey, StringComparison.OrdinalIgnoreCase))
                     .ToList() ?? new List<KnitterPZVModel>();
 
-                decimal assignedHours = rows.Sum(r => r.pzvChasNazn);
-                decimal doneHours = rows.Sum(r => r.pzvNChasi ?? 0m);
+                decimal assignedHours = rows.Sum(r => r.pzvChasNazn);//pzvSekNazn);//
+                decimal doneHours = rows.Sum(r => r.pzvNChasi ?? 0m);//pzvSek);//
 
                 decimal percent = 0m;
                 if (assignedHours > 0)
@@ -1357,6 +1373,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab) && tab > 0)
             {
                 await LoadPlanForTabAsync(tab, forceReload: true);
+            }
+        }
+
+        /// <summary>
+        /// Запрещает редактирование строк, назначенных на другой табельный номер.
+        /// </summary>
+        private void GridView_PreventForeignEdit(object sender, CancelEventArgs e)
+        {
+            if (sender is not ColumnView view)
+                return;
+
+            if (view is DevExpress.XtraGrid.Views.Base.ColumnView columnView)
+            {
+                // Групповые строки не редактируются
+                if (view is GridView grid && grid.IsGroupRow(grid.FocusedRowHandle))
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                if (columnView.GetFocusedRow() is not KnitterPZVModel row)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
+                if (_currentLoadedTab.HasValue && row.pzvTab.HasValue && row.pzvTab.Value != _currentLoadedTab.Value)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -1476,7 +1522,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bool expandByNr = _expandNrToggle?.Checked == true;
 
             //var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
-            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, expandByNr, maxHours);
+            var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, _currentKmaId, onlyUnassigned, expandByNr, maxHours, includeFinished: isAdmin);
             // Если из БД факт часов пуст, считаем его по формуле pzvSek * фактическое количество / 3600
             if (plan != null)
             {
@@ -1524,6 +1570,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
