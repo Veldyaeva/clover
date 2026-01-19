@@ -86,7 +86,7 @@ namespace SewingProduction.form
             if (colorPickEditButtonTextColor.EditValue is Color buttonTextColor && buttonTextColor != Color.Empty)
                 theme.ButtonTextColor = buttonTextColor;
 
-            if (colorPickEditLabelTextColor.EditValue is Color labelTextColor && labelTextColor != Color.Empty)
+            if (colorPickEditLabelGridColor.EditValue is Color labelTextColor && labelTextColor != Color.Empty)
                 theme.LabelText = labelTextColor;
 
             if (colorPickEdit3.EditValue is Color textBoxTextColor && textBoxTextColor != Color.Empty)
@@ -190,7 +190,7 @@ namespace SewingProduction.form
                 colorPickEditTextBox.EditValue = currentTheme.TextBoxBackground;
                 colorPickEditButtonBackground.EditValue = currentTheme.ButtonBackground;
                 colorPickEditButtonTextColor.EditValue = currentTheme.ButtonTextColor;
-                colorPickEditLabelTextColor.EditValue = currentTheme.LabelText;
+                colorPickEditLabelGridColor.EditValue = currentTheme.LabelText;
                 colorPickEdit3.EditValue = currentTheme.TextBoxText;
                 colorPickEditGridBackground.EditValue = currentTheme.GridBackground;
                 colorPickEditGridRowBackground.EditValue = currentTheme.GridRowBackground;
@@ -202,7 +202,7 @@ namespace SewingProduction.form
                 colorPickEditTextBox.EditValue = activeTheme?.TextBoxBackground ?? Color.White;
                 colorPickEditButtonBackground.EditValue = activeTheme?.ButtonBackground ?? Color.LightGray;
                 colorPickEditButtonTextColor.EditValue = activeTheme?.ButtonTextColor ?? Color.Black;
-                colorPickEditLabelTextColor.EditValue = activeTheme?.LabelText ?? Color.Black;
+                colorPickEditLabelGridColor.EditValue = activeTheme?.LabelText ?? Color.Black;
                 colorPickEdit3.EditValue = activeTheme?.TextBoxText ?? Color.Black;
                 colorPickEditGridBackground.EditValue = activeTheme?.GridBackground ?? Color.White;
                 colorPickEditGridRowBackground.EditValue = activeTheme?.GridRowBackground ?? Color.White;
@@ -288,7 +288,7 @@ namespace SewingProduction.form
             if (_isInitializingColors)
                 return;
 
-            if (colorPickEditLabelTextColor.EditValue is Color color && color != Color.Empty)
+            if (colorPickEditLabelGridColor.EditValue is Color color && color != Color.Empty)
             {
                 UpdateThemeColorProperty("LabelText", color);
             }
@@ -367,9 +367,9 @@ namespace SewingProduction.form
             var defaultThemes = ThemeManager.GetDefaultThemes();
             SettingsManager.SetThemes(defaultThemes);
 
-            // Возвращаем выбор темы к дефолтной
-            SettingsManager.SetTheme("Gray");
-            ThemeManager.SetTheme("Gray");
+            //// Возвращаем выбор темы к дефолтной
+            //SettingsManager.SetTheme("Gray");
+            //ThemeManager.SetTheme("Gray");
 
             // Обновляем UI-пикеры
             LoadColorPickersFromSettings();

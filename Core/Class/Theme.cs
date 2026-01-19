@@ -324,7 +324,7 @@ namespace SewingProduction
             if (SharedSettings.DefaultFont != newFont)
             {
                 SharedSettings.DefaultFont = newFont;
-                ThemeChanged?.Invoke(); // Notify all subscribers about the change
+                ThemeChanged?.Invoke(); // Оповещаем всех подписчиков об изменении темы
             }
         }
 

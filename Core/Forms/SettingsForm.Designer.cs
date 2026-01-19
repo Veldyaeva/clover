@@ -53,7 +53,7 @@ namespace SewingProduction.form
             customLabel5 = new CustomLabel();
             customLabel6 = new CustomLabel();
             colorPickEdit3 = new DevExpress.XtraEditors.ColorPickEdit();
-            colorPickEditLabelTextColor = new DevExpress.XtraEditors.ColorPickEdit();
+            colorPickEditLabelGridColor = new DevExpress.XtraEditors.ColorPickEdit();
             customLabel7 = new CustomLabel();
             customLabel8 = new CustomLabel();
             colorPickEditGridRowBackground = new DevExpress.XtraEditors.ColorPickEdit();
@@ -64,7 +64,7 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonTextColor.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonBackground.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEdit3.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)colorPickEditLabelTextColor.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)colorPickEditLabelGridColor.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridRowBackground.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridBackground.Properties).BeginInit();
             SuspendLayout();
@@ -247,29 +247,29 @@ namespace SewingProduction.form
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.DimGray;
-            customLabel1.Location = new System.Drawing.Point(112, 64);
+            customLabel1.Location = new System.Drawing.Point(45, 67);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(42, 16);
+            customLabel1.Size = new System.Drawing.Size(109, 16);
             customLabel1.TabIndex = 17;
-            customLabel1.Text = "Label";
+            customLabel1.Text = "LabelTextColour";
             // 
             // customLabel2
             // 
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.DimGray;
-            customLabel2.Location = new System.Drawing.Point(99, 108);
+            customLabel2.Location = new System.Drawing.Point(20, 108);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(55, 16);
+            customLabel2.Size = new System.Drawing.Size(134, 16);
             customLabel2.TabIndex = 18;
-            customLabel2.Text = "TextBox";
+            customLabel2.Text = "TextBoxBackGround";
             // 
             // customLabel3
             // 
             customLabel3.AutoSize = true;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.ForeColor = System.Drawing.Color.DimGray;
-            customLabel3.Location = new System.Drawing.Point(47, 189);
+            customLabel3.Location = new System.Drawing.Point(47, 230);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(107, 16);
             customLabel3.TabIndex = 22;
@@ -280,7 +280,7 @@ namespace SewingProduction.form
             customLabel4.AutoSize = true;
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
             customLabel4.ForeColor = System.Drawing.Color.DimGray;
-            customLabel4.Location = new System.Drawing.Point(30, 145);
+            customLabel4.Location = new System.Drawing.Point(30, 186);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(124, 16);
             customLabel4.TabIndex = 21;
@@ -289,7 +289,7 @@ namespace SewingProduction.form
             // colorPickEditButtonTextColor
             // 
             colorPickEditButtonTextColor.EditValue = System.Drawing.Color.Empty;
-            colorPickEditButtonTextColor.Location = new System.Drawing.Point(160, 188);
+            colorPickEditButtonTextColor.Location = new System.Drawing.Point(160, 229);
             colorPickEditButtonTextColor.Name = "colorPickEditButtonTextColor";
             colorPickEditButtonTextColor.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditButtonTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -300,7 +300,7 @@ namespace SewingProduction.form
             // colorPickEditButtonBackground
             // 
             colorPickEditButtonBackground.EditValue = System.Drawing.Color.Empty;
-            colorPickEditButtonBackground.Location = new System.Drawing.Point(160, 144);
+            colorPickEditButtonBackground.Location = new System.Drawing.Point(160, 185);
             colorPickEditButtonBackground.Name = "colorPickEditButtonBackground";
             colorPickEditButtonBackground.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditButtonBackground.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -313,7 +313,7 @@ namespace SewingProduction.form
             customLabel5.AutoSize = true;
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
             customLabel5.ForeColor = System.Drawing.Color.DimGray;
-            customLabel5.Location = new System.Drawing.Point(99, 275);
+            customLabel5.Location = new System.Drawing.Point(99, 145);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new System.Drawing.Size(55, 16);
             customLabel5.TabIndex = 26;
@@ -324,16 +324,16 @@ namespace SewingProduction.form
             customLabel6.AutoSize = true;
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
             customLabel6.ForeColor = System.Drawing.Color.DimGray;
-            customLabel6.Location = new System.Drawing.Point(53, 229);
+            customLabel6.Location = new System.Drawing.Point(53, 269);
             customLabel6.Name = "customLabel6";
-            customLabel6.Size = new System.Drawing.Size(101, 16);
+            customLabel6.Size = new System.Drawing.Size(93, 16);
             customLabel6.TabIndex = 25;
-            customLabel6.Text = "LabelTextColor";
+            customLabel6.Text = "GridTextColor";
             // 
             // colorPickEdit3
             // 
             colorPickEdit3.EditValue = System.Drawing.Color.Empty;
-            colorPickEdit3.Location = new System.Drawing.Point(160, 272);
+            colorPickEdit3.Location = new System.Drawing.Point(160, 142);
             colorPickEdit3.Name = "colorPickEdit3";
             colorPickEdit3.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -341,16 +341,17 @@ namespace SewingProduction.form
             colorPickEdit3.TabIndex = 24;
             colorPickEdit3.EditValueChanged += colorPickEdit3_EditValueChanged;
             // 
-            // colorPickEditLabelTextColor
+            // colorPickEditLabelGridColor
             // 
-            colorPickEditLabelTextColor.EditValue = System.Drawing.Color.Empty;
-            colorPickEditLabelTextColor.Location = new System.Drawing.Point(160, 228);
-            colorPickEditLabelTextColor.Name = "colorPickEditLabelTextColor";
-            colorPickEditLabelTextColor.Properties.AutomaticColor = System.Drawing.Color.Black;
-            colorPickEditLabelTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            colorPickEditLabelTextColor.Size = new System.Drawing.Size(140, 20);
-            colorPickEditLabelTextColor.TabIndex = 23;
-            colorPickEditLabelTextColor.EditValueChanged += colorPickEditLabelTextColor_EditValueChanged;
+            colorPickEditLabelGridColor.EditValue = System.Drawing.Color.Empty;
+            colorPickEditLabelGridColor.Location = new System.Drawing.Point(160, 268);
+            colorPickEditLabelGridColor.Name = "colorPickEditLabelGridColor";
+            colorPickEditLabelGridColor.Properties.AutomaticColor = System.Drawing.Color.Black;
+            colorPickEditLabelGridColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            colorPickEditLabelGridColor.Properties.Name = "colorPickEditLabelGridColor";
+            colorPickEditLabelGridColor.Size = new System.Drawing.Size(140, 20);
+            colorPickEditLabelGridColor.TabIndex = 23;
+            colorPickEditLabelGridColor.EditValueChanged += colorPickEditLabelTextColor_EditValueChanged;
             // 
             // customLabel7
             // 
@@ -422,7 +423,7 @@ namespace SewingProduction.form
             Controls.Add(customLabel5);
             Controls.Add(customLabel6);
             Controls.Add(colorPickEdit3);
-            Controls.Add(colorPickEditLabelTextColor);
+            Controls.Add(colorPickEditLabelGridColor);
             Controls.Add(customLabel3);
             Controls.Add(customLabel4);
             Controls.Add(colorPickEditButtonTextColor);
@@ -452,7 +453,7 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonTextColor.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditButtonBackground.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEdit3.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)colorPickEditLabelTextColor.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)colorPickEditLabelGridColor.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridRowBackground.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridBackground.Properties).EndInit();
             ResumeLayout(false);
@@ -483,7 +484,7 @@ namespace SewingProduction.form
         private CustomLabel customLabel5;
         private CustomLabel customLabel6;
         private DevExpress.XtraEditors.ColorPickEdit colorPickEdit3;
-        private DevExpress.XtraEditors.ColorPickEdit colorPickEditLabelTextColor;
+        private DevExpress.XtraEditors.ColorPickEdit colorPickEditLabelGridColor;
         private CustomLabel customLabel7;
         private CustomLabel customLabel8;
         private DevExpress.XtraEditors.ColorPickEdit colorPickEditGridRowBackground;
