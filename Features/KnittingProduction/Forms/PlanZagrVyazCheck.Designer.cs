@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanZagrVyazCheck));
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             labelStatus = new SewingProduction.Core.Class.CustomLabel();
             comboBoxPodrVyazList = new CustomComboBox();
             simpleButtonNextMonth = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -39,10 +40,14 @@
             comboBoxMonthList = new CustomComboBox();
             customLabel2 = new SewingProduction.Core.Class.CustomLabel();
             gridControlPzvCheck = new SewingProduction.Core.Class.CustomGridControl();
+            bandedGridViewPzvCheck = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            bandedGridPzvCheckColumnTabTab = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            bandedGridPzvCheckColumnTabFioSokr = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            repositoryItemCheckEditPlan = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridViewPzvCheck = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridPzvCheckColumnTabTab = new DevExpress.XtraGrid.Columns.GridColumn();
             gridPzvCheckColumnTabFio = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEditPlan = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
@@ -56,12 +61,14 @@
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)spinEditYear.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlPzvCheck).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewPzvCheck).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bandedGridViewPzvCheck).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPzvCheck).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
@@ -75,10 +82,12 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(customSimpleButton1);
             layoutControl1.Controls.Add(labelStatus);
             layoutControl1.Controls.Add(comboBoxPodrVyazList);
             layoutControl1.Controls.Add(simpleButtonNextMonth);
@@ -96,6 +105,26 @@
             layoutControl1.Size = new System.Drawing.Size(1856, 749);
             layoutControl1.TabIndex = 5;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            customSimpleButton1.Appearance.Options.UseBackColor = true;
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Appearance.Options.UseForeColor = true;
+            customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton1.Location = new System.Drawing.Point(1016, 12);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new System.Drawing.Size(135, 22);
+            customSimpleButton1.StyleController = layoutControl1;
+            customSimpleButton1.TabIndex = 12;
+            customSimpleButton1.Text = "customSimpleButton1";
+            customSimpleButton1.Click += customSimpleButton1_Click;
             // 
             // labelStatus
             // 
@@ -229,12 +258,64 @@
             // 
             gridControlPzvCheck.Font = new System.Drawing.Font("Arial", 10F);
             gridControlPzvCheck.Location = new System.Drawing.Point(12, 38);
-            gridControlPzvCheck.MainView = gridViewPzvCheck;
+            gridControlPzvCheck.MainView = bandedGridViewPzvCheck;
             gridControlPzvCheck.Name = "gridControlPzvCheck";
             gridControlPzvCheck.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
             gridControlPzvCheck.Size = new System.Drawing.Size(1832, 558);
             gridControlPzvCheck.TabIndex = 7;
-            gridControlPzvCheck.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPzvCheck });
+            gridControlPzvCheck.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridViewPzvCheck, gridViewPzvCheck });
+            // 
+            // bandedGridViewPzvCheck
+            // 
+            bandedGridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            bandedGridViewPzvCheck.Appearance.EvenRow.Options.UseBackColor = true;
+            bandedGridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            bandedGridViewPzvCheck.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            bandedGridViewPzvCheck.Appearance.FocusedRow.Options.UseBackColor = true;
+            bandedGridViewPzvCheck.Appearance.FocusedRow.Options.UseFont = true;
+            bandedGridViewPzvCheck.Appearance.Row.Options.UseTextOptions = true;
+            bandedGridViewPzvCheck.Appearance.Row.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
+            bandedGridViewPzvCheck.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            bandedGridViewPzvCheck.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand1 });
+            bandedGridViewPzvCheck.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { bandedGridPzvCheckColumnTabTab, bandedGridPzvCheckColumnTabFioSokr });
+            bandedGridViewPzvCheck.GridControl = gridControlPzvCheck;
+            bandedGridViewPzvCheck.Name = "bandedGridViewPzvCheck";
+            bandedGridViewPzvCheck.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // gridBand1
+            // 
+            gridBand1.Caption = "gridBand1";
+            gridBand1.Columns.Add(bandedGridPzvCheckColumnTabTab);
+            gridBand1.Columns.Add(bandedGridPzvCheckColumnTabFioSokr);
+            gridBand1.Name = "gridBand1";
+            gridBand1.VisibleIndex = 0;
+            gridBand1.Width = 140;
+            // 
+            // bandedGridPzvCheckColumnTabTab
+            // 
+            bandedGridPzvCheckColumnTabTab.Caption = "Таб№";
+            bandedGridPzvCheckColumnTabTab.Name = "bandedGridPzvCheckColumnTabTab";
+            bandedGridPzvCheckColumnTabTab.OptionsColumn.AllowEdit = false;
+            bandedGridPzvCheckColumnTabTab.OptionsColumn.FixedWidth = true;
+            bandedGridPzvCheckColumnTabTab.Visible = true;
+            bandedGridPzvCheckColumnTabTab.Width = 50;
+            // 
+            // bandedGridPzvCheckColumnTabFioSokr
+            // 
+            bandedGridPzvCheckColumnTabFioSokr.Caption = "ФИО";
+            bandedGridPzvCheckColumnTabFioSokr.Name = "bandedGridPzvCheckColumnTabFioSokr";
+            bandedGridPzvCheckColumnTabFioSokr.OptionsColumn.AllowEdit = false;
+            bandedGridPzvCheckColumnTabFioSokr.OptionsColumn.FixedWidth = true;
+            bandedGridPzvCheckColumnTabFioSokr.Visible = true;
+            bandedGridPzvCheckColumnTabFioSokr.Width = 90;
+            // 
+            // repositoryItemCheckEditPlan
+            // 
+            repositoryItemCheckEditPlan.AutoHeight = false;
+            repositoryItemCheckEditPlan.Name = "repositoryItemCheckEditPlan";
+            repositoryItemCheckEditPlan.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEditPlan.ValueChecked = 1;
+            repositoryItemCheckEditPlan.ValueUnchecked = 0;
             // 
             // gridViewPzvCheck
             // 
@@ -273,19 +354,11 @@
             gridPzvCheckColumnTabFio.VisibleIndex = 1;
             gridPzvCheckColumnTabFio.Width = 90;
             // 
-            // repositoryItemCheckEditPlan
-            // 
-            repositoryItemCheckEditPlan.AutoHeight = false;
-            repositoryItemCheckEditPlan.Name = "repositoryItemCheckEditPlan";
-            repositoryItemCheckEditPlan.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEditPlan.ValueChecked = 1;
-            repositoryItemCheckEditPlan.ValueUnchecked = 0;
-            // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem1, layoutControlItem6, layoutControlGroup1, layoutControlItem10, layoutControlItem4, layoutControlItem7, emptySpaceItem2, layoutControlItem8, layoutControlItem3, layoutControlItem2, layoutControlItem5 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, emptySpaceItem1, layoutControlItem6, layoutControlGroup1, layoutControlItem10, layoutControlItem4, layoutControlItem7, emptySpaceItem2, layoutControlItem8, layoutControlItem3, layoutControlItem2, layoutControlItem5, layoutControlItem9 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(1856, 749);
             Root.TextVisible = false;
@@ -345,9 +418,9 @@
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(1004, 0);
+            emptySpaceItem2.Location = new System.Drawing.Point(1143, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(832, 26);
+            emptySpaceItem2.Size = new System.Drawing.Size(693, 26);
             // 
             // layoutControlItem8
             // 
@@ -381,6 +454,14 @@
             layoutControlItem5.Size = new System.Drawing.Size(1836, 30);
             layoutControlItem5.TextVisible = false;
             // 
+            // layoutControlItem9
+            // 
+            layoutControlItem9.Control = customSimpleButton1;
+            layoutControlItem9.Location = new System.Drawing.Point(1004, 0);
+            layoutControlItem9.Name = "layoutControlItem9";
+            layoutControlItem9.Size = new System.Drawing.Size(139, 26);
+            layoutControlItem9.TextVisible = false;
+            // 
             // PlanZagrVyazCheck
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -394,8 +475,9 @@
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)spinEditYear.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlPzvCheck).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewPzvCheck).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bandedGridViewPzvCheck).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPzvCheck).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
@@ -409,6 +491,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ResumeLayout(false);
         }
 
@@ -446,5 +529,11 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private Core.Class.CustomLabel labelStatus;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridViewPzvCheck;
+        private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridPzvCheckColumnTabTab;
+        private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridPzvCheckColumnTabFioSokr;
+        private Core.Class.CustomSimpleButton customSimpleButton1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
     }
 }
