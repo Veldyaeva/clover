@@ -157,6 +157,9 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\OtvlRab.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\SpisokConnect.cs">
       <SubType>Form</SubType>
     </Compile>
