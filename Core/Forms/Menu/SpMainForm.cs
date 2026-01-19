@@ -143,7 +143,7 @@ namespace SewingProduction
         #region Производство
         private void оперативноеПланированиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new KnittingProductionPlanning(), sender);
+            OpenForm(new KnittingProductionPlanning(_user), sender);
         }
         private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -265,6 +265,10 @@ namespace SewingProduction
         {
             var f = new SewingProduction.HelpAdmin.Forms.AdminHelpEditorForm(this._formManager);
             f.Show();
+        }
+        private void аналитикаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new KnittingProductionAnalytics(), sender);
         }
     }
 }

@@ -1485,14 +1485,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         new BindingList<NaryadZadanyVyaz>();
                 });
 
-                // 3️⃣долгий запрос
+                // 3️ долгий запрос
                 var bs = await _vyazService.GetNaryadZadanyVyaz(tab, kmlID, token);
 
                 // если отменили — просто выходим
                 if (token.IsCancellationRequested)
                     return;
 
-                // 4️⃣ привязываем результат
+                // 4️ привязываем результат
                 await this.InvokeAsync(() =>
                 {
                     _naryadZadanyVyazBindingSource.DataSource = bs.DataSource;
