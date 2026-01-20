@@ -55,8 +55,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private BindingSource _podrVyazBindingSource;
         private BindingSource _pzvСheckBindingSource;
 
-        private const string FooterLabelRow1 = "По таб.";
-        private const string FooterLabelRow2 = "По МЛ";
+        //private const string FooterLabelRow1 = "По таб.";
+        //private const string FooterLabelRow2 = "По МЛ";
         private const string FooterLabelColumnField = "tabFioSokr";
         private DevExpress.XtraGrid.Columns.GridColumn? _footerLabelColumn;
         public PlanZagrVyazCheck()
@@ -129,6 +129,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridPzvCheckColumnTabFioSokr.FieldName = "tabFioSokr";
                 bandedGridPzvCheckColumnTabFioSokr.Width = 90;
                 bandedGridPzvCheckColumnTabFioSokr.Fixed = FixedStyle.None;
+
+                bandedGridPzvCheckColumnTabFioSokr.Summary.Clear();
+                bandedGridPzvCheckColumnTabFioSokr.Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Custom, "tabFioSokr", "") { Tag = "R1" });
+                bandedGridPzvCheckColumnTabFioSokr.Summary.Add(
+                    new GridColumnSummaryItem(SummaryItemType.Custom, "tabFioSokr", "") { Tag = "R2" });
+
                 bandedGridViewPzvCheck.OptionsView.EnableAppearanceEvenRow = false;
                 bandedGridViewPzvCheck.OptionsView.EnableAppearanceOddRow = false;
 
@@ -193,18 +200,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // e.Bounds — прямоугольник всего футера (работает во всех версиях)
             Rectangle r = e.Bounds;
             r.Inflate(-4, -2);
+            r.X += bandedGridPzvCheckColumnTabTab.Width;
+            r.Width = bandedGridPzvCheckColumnTabFioSokr.Width;
 
-            // Ширина области под подписи — подгони под свой второй столбец
-            r.Width = 120;
+            //r.Width = 120;
 
-            TextRenderer.DrawText(
-                e.Graphics,
-                "По таб.\r\nПо МЛ",
-                view.Appearance.FooterPanel.Font,
-                r,
-                view.Appearance.FooterPanel.ForeColor,
-                TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak
-            );
+            //TextRenderer.DrawText(
+            //    e.Graphics,
+            //    "По таб.\r\n\r\nПо МЛ",
+            //    view.Appearance.FooterPanel.Font,
+            //    r,
+            //    view.Appearance.FooterPanel.ForeColor,
+            //    TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak
+            //);
 
             e.Handled = true;
         }
@@ -243,16 +251,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //    e.Appearance.GetForeColor(),
             //    TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak
             //);
-            TextRenderer.DrawText(
-                e.Graphics,
-                "По таб.\r\nПо МЛ",
-                view.Appearance.FooterPanel.Font,
-                r,
-                view.Appearance.FooterPanel.ForeColor,
-                TextFormatFlags.Left |
-                TextFormatFlags.VerticalCenter |
-                TextFormatFlags.WordBreak
-            );
+            //TextRenderer.DrawText(
+            //    e.Graphics,
+            //    "По таб.\r\n\r\nПо МЛ",
+            //    view.Appearance.FooterPanel.Font,
+            //    r,
+            //    view.Appearance.FooterPanel.ForeColor,
+            //    TextFormatFlags.Left |
+            //    TextFormatFlags.VerticalCenter |
+            //    TextFormatFlags.WordBreak
+            //);
 
             e.Handled = true;
         }
@@ -260,72 +268,267 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         // рисуем 2 строки в футере, используя 2 summary у колонки
         private void View_CustomDrawFooterCell_TwoRows(object sender, FooterCellCustomDrawEventArgs e)
         {
-            //Debug.WriteLine($"FOOTER DRAW -> {e.Column?.FieldName}");
+            #region OLD
+            ////Debug.WriteLine($"FOOTER DRAW -> {e.Column?.FieldName}");
+            //var view = (BandedGridView)sender;
+            //var col = e.Column;
+            //if (col == null) return;
+
+            //// 1) Подписи слева в футере колонки tabTab
+            ////if (col.FieldName == FooterLabelColumnField)
+            ////{
+            ////    e.Info.DisplayText = $"{FooterLabelRow1}\r\n{FooterLabelRow2}";
+            ////if (_footerLabelColumn != null && ReferenceEquals(col, _footerLabelColumn))
+            //if (col.FieldName == "tabFioSokr")
+            //    {
+            //    e.Info.DisplayText = "По таб.\r\n\r\nПо МЛ";
+            //    e.Appearance.TextOptions.WordWrap = WordWrap.Wrap;
+            //    e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+            //    e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+
+            //    e.Painter.DrawObject(e.Info);
+            //    e.Handled = true;
+            //    return;
+            //}
+
+            //string line1 = string.Empty;
+            //string line2 = string.Empty;
+
+            //// 2) procentOf — вычисляемый итог: Sum(tabChasiOf)/Sum(pztChasiOf)*100
+            //if (col.FieldName == "procentOf")
+            //{
+            //    //line1 = ""; // первая строка пустая
+            //    //line2 = CalcProcentFooter(view);
+            //    //if (string.IsNullOrEmpty(line2)) line2 = " ";  // чтобы ячейка футера была видима
+            //    //DrawTwoLines(e, line1, line2, HorzAlignment.Far);
+            //    //return;
+
+            //    line1 = "";
+            //    if (col.Summary.Count > 0 && col.Summary[0] is GridColumnSummaryItem it)
+            //        line1 = FormatFooterSummary(it);
+
+            //    DrawTwoLines(e, "", string.IsNullOrEmpty(line1) ? "0.00" : line1, HorzAlignment.Far);
+            //    return;
+            //}
+
+            //// 3) Остальные колонки: берём 2 SummaryItem и форматируем их SummaryValue
+            //FillFromTwoSummaries(col, out line1, out line2);
+
+            //// ✅ ДНИ: всегда 2 строки (не сворачиваем!)
+            //if (col.FieldName != null && col.FieldName.StartsWith("pzvTab"))
+            //{
+            //    DrawTwoRowsStrict(e, line1, line2, HorzAlignment.Far);
+            //    return;
+            //}
+
+            //// Правила пустых строк:
+            //// tabChasiOf: пусто в 1-й строке
+            //if (col.FieldName == "tabChasiOf")
+            //    line1 = "";
+
+            //// pztChasiOf: пусто во 2-й строке
+            //if (col.FieldName == "pztChasiOf")
+            //    line2 = "";
+
+            //DrawTwoLines(e, line1, line2, HorzAlignment.Far);
+            #endregion
+
             var view = (BandedGridView)sender;
             var col = e.Column;
             if (col == null) return;
 
-            // 1) Подписи слева в футере колонки tabTab
-            //if (col.FieldName == FooterLabelColumnField)
-            //{
-            //    e.Info.DisplayText = $"{FooterLabelRow1}\r\n{FooterLabelRow2}";
-            //if (_footerLabelColumn != null && ReferenceEquals(col, _footerLabelColumn))
+            // Текущий summary item (DevExpress вызывает обработчик отдельно для каждого SummaryItem)
+            var item = e.Info?.SummaryItem as GridColumnSummaryItem;
+            if (item == null)
+                return;
+
+            string tag = item.Tag as string ?? "";
+
+            // ---- 1) Подписи слева под колонкой tabFioSokr ----
             if (col.FieldName == "tabFioSokr")
-                {
-                e.Info.DisplayText = "По таб.\r\nПо МЛ";
-                e.Appearance.TextOptions.WordWrap = WordWrap.Wrap;
+            {
+                e.Info.DisplayText = (tag == "R2") ? "По МЛ" : "По таб.";
+
+                e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
                 e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
                 e.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+
+                // Рисуем только свой текст (каждый вызов рисует свою строку)
+                e.Painter.DrawObject(e.Info);
+                e.Handled = true;
+                return;
+            }
+
+            // ---- 2) procentOf: показываем только в 1-й строке (R1) ----
+            if (col.FieldName == "procentOf")
+            {
+                //if (tag == "R1")
+                //{
+                //    string s = CalcProcentFooter(view);     // ожидаем строку типа "12.34 %"
+                //    e.Info.DisplayText = s;
+                //}
+                //else
+                //{
+                //    e.Info.DisplayText = ""; // верхняя строка пустая
+                //}
+
+                //e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
+                //e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+                //e.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+
+                //e.Painter.DrawObject(e.Info);
+                //e.Handled = true;
+                //return;
+                // показываем процент только в первой строке (R1), во второй пусто
+                if ((item.Tag as string) == "R1")
+                    e.Info.DisplayText = FormatSummaryItemValue(item); // применит "{0:0.00} %"
+                else
+                    e.Info.DisplayText = "";
+
+                e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
+                e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+                e.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 
                 e.Painter.DrawObject(e.Info);
                 e.Handled = true;
                 return;
             }
 
-            string line1 = string.Empty;
-            string line2 = string.Empty;
-
-            // 2) procentOf — вычисляемый итог: Sum(tabChasiOf)/Sum(pztChasiOf)*100
-            if (col.FieldName == "procentOf")
+            // ---- 2.1) tabChasiOf: показываем только в 1-й строке (R1) ----
+            if (col.FieldName == "tabChasiOf")
             {
-                //line1 = ""; // первая строка пустая
-                //line2 = CalcProcentFooter(view);
-                //if (string.IsNullOrEmpty(line2)) line2 = " ";  // чтобы ячейка футера была видима
-                //DrawTwoLines(e, line1, line2, HorzAlignment.Far);
-                //return;
+                if (tag == "R1")
+                {
+                    string s = FormatSummaryItemValue(item);
+                    e.Info.DisplayText = s;
+                }
+                else
+                {
+                    e.Info.DisplayText = ""; // верхняя строка пустая
+                }
 
-                line1 = "";
-                if (col.Summary.Count > 0 && col.Summary[0] is GridColumnSummaryItem it)
-                    line1 = FormatFooterSummary(it);
+                e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
+                e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+                e.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 
-                DrawTwoLines(e, "", string.IsNullOrEmpty(line1) ? "0.00" : line1, HorzAlignment.Far);
+                e.Painter.DrawObject(e.Info);
+                e.Handled = true;
                 return;
             }
 
-            // 3) Остальные колонки: берём 2 SummaryItem и форматируем их SummaryValue
-            FillFromTwoSummaries(col, out line1, out line2);
-
-            // Правила пустых строк:
-            // tabChasiOf: пусто в 1-й строке
-            if (col.FieldName == "tabChasiOf")
-                line1 = "";
-
-            // pztChasiOf: пусто во 2-й строке
+            // ---- 2.2) pztChasiOf: показываем только во 2-й строке (R2) ----
             if (col.FieldName == "pztChasiOf")
-                line2 = "";
+            {
+                if (tag == "R2")
+                {
+                    string s = FormatSummaryItemValue(item);
+                    e.Info.DisplayText = s;
+                }
+                else
+                {
+                    e.Info.DisplayText = ""; // первая строка пустая
+                }
 
-            DrawTwoLines(e, line1, line2, HorzAlignment.Far);
+                e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
+                e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+                e.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+
+                e.Painter.DrawObject(e.Info);
+                e.Handled = true;
+                return;
+            }
+
+            // ---- 3) Обычные колонки (в т.ч. дни): берём значение именно текущего summary item ----
+            string text = FormatSummaryItemValue(item); // с учётом "0 -> пусто"
+
+            e.Info.DisplayText = text;
+
+            e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
+            e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+            e.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+
+            e.Painter.DrawObject(e.Info);
+            e.Handled = true;
+        }
+        private string FormatSummaryItemValue(GridColumnSummaryItem item)
+        {
+            if (item == null) return "";
+
+            object v = item.SummaryValue;
+            if (v == null || v == DBNull.Value) return "";
+
+            // если 0 -> ничего не показываем
+            try
+            {
+                if (Convert.ToDecimal(v) == 0m)
+                    return "";
+            }
+            catch { }
+
+            // DisplayFormat вида "{0:0.00}"
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(item.DisplayFormat) && item.DisplayFormat.Contains("{0"))
+                    return string.Format(item.DisplayFormat, v);
+            }
+            catch { }
+
+            return Convert.ToString(v) ?? "";
         }
         private static void DrawTwoLines(FooterCellCustomDrawEventArgs e, string line1, string line2, HorzAlignment align)
         {
-            e.Info.DisplayText = string.IsNullOrEmpty(line2) ? line1 : $"{line1}\r\n{line2}";
+            //e.Info.DisplayText = string.IsNullOrEmpty(line2) ? line1 : $"{line1}\r\n{line2}";
 
+            //e.Appearance.TextOptions.WordWrap = WordWrap.Wrap;
+            //e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+            //e.Appearance.TextOptions.HAlignment = align;
+
+            //e.Painter.DrawObject(e.Info);
+            //e.Handled = true;
+            
+            bool has1 = !string.IsNullOrWhiteSpace(line1);
+            bool has2 = !string.IsNullOrWhiteSpace(line2);
+
+            // если обе пустые — рисуем пусто
+            if (!has1 && !has2)
+            {
+                e.Info.DisplayText = "";
+                e.Handled = false; // пусть рисует стандартно (или true — оба ок)
+                return;
+            }
+
+            // если одна строка — показываем её одну, по центру
+            if (has1 && !has2)
+            {
+                e.Info.DisplayText = line1;
+                e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
+                e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+                e.Appearance.TextOptions.HAlignment = align;
+
+                e.Painter.DrawObject(e.Info);
+                e.Handled = true;
+                return;
+            }
+
+            if (!has1 && has2)
+            {
+                e.Info.DisplayText = line2;
+                e.Appearance.TextOptions.WordWrap = WordWrap.NoWrap;
+                e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+                e.Appearance.TextOptions.HAlignment = align;
+
+                e.Painter.DrawObject(e.Info);
+                e.Handled = true;
+                return;
+            }
+
+            // если обе строки заполнены — рисуем две строки
+            e.Info.DisplayText = $"{line1}\r\n{line2}";
             e.Appearance.TextOptions.WordWrap = WordWrap.Wrap;
             e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
             e.Appearance.TextOptions.HAlignment = align;
 
             e.Painter.DrawObject(e.Info);
-            e.Handled = true;
         }
         private void FillFromTwoSummaries(GridColumn col, out string line1, out string line2)
         {
@@ -428,20 +631,33 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         #endregion
         private string FormatFooterSummary(GridColumnSummaryItem item)
         {
-            if (item == null) return "";
+            if (item == null)
+                return string.Empty;
 
             object v = item.SummaryValue;
-            if (v == null || v == DBNull.Value) return "";
+            if (v == null || v == DBNull.Value)
+                return string.Empty;
 
             try
             {
-                // DisplayFormat обычно "{0:...}"
-                if (!string.IsNullOrWhiteSpace(item.DisplayFormat) && item.DisplayFormat.Contains("{0"))
+                decimal d = Convert.ToDecimal(v);
+                if (d == 0m)
+                    return string.Empty;   // ← НИЧЕГО НЕ РИСУЕМ
+            }
+            catch
+            {
+                // если не decimal — просто идём дальше
+            }
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(item.DisplayFormat) &&
+                    item.DisplayFormat.Contains("{0"))
                     return string.Format(item.DisplayFormat, v);
             }
             catch { }
 
-            return Convert.ToString(v) ?? "";
+            return Convert.ToString(v) ?? string.Empty;
         }
         #region OLD SetTwoFooterSummaries
         //private void SetTwoFooterSummaries(GridColumn col, string fieldRow1, string fieldRow2, string fmt = "{0:0.00;-0.00;;}")
@@ -454,10 +670,52 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         #endregion
         private void SetTwoFooterSummaries(GridColumn col, string fieldRow1, string fieldRow2, string fmt = "{0:0.00;-0.00;;}")
         {
+            //col.Summary.Clear();
+            //col.Summary.Add(new GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, fieldRow1, fmt));
+            //col.Summary.Add(new GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, fieldRow2, fmt));
+            //-----------------------
             col.Summary.Clear();
-            col.Summary.Add(new GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, fieldRow1, fmt));
-            col.Summary.Add(new GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, fieldRow2, fmt));
+
+            var s1 = new GridColumnSummaryItem(SummaryItemType.Sum, fieldRow1, fmt) { Tag = "R1" };
+            var s2 = new GridColumnSummaryItem(SummaryItemType.Sum, fieldRow2, fmt) { Tag = "R2" };
+
+            col.Summary.Add(s1);
+            col.Summary.Add(s2);
         }
+        private static decimal ExtractDecimal(object raw)
+        {
+            if (raw == null)
+                return 0m;
+
+            // Если уже число — просто приводим
+            if (raw is decimal d) return d;
+            if (raw is int i) return i;
+            if (raw is double db) return (decimal)db;
+
+            string s = raw.ToString();
+            if (string.IsNullOrWhiteSpace(s))
+                return 0m;
+
+            // Берём только цифры, точку и запятую
+            var filtered = new string(
+                s.Where(c => char.IsDigit(c) || c == '.' || c == ',')
+                 .ToArray()
+            );
+
+            filtered = filtered.Replace(',', '.');
+
+            if (decimal.TryParse(
+                filtered,
+                System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out decimal result))
+            {
+                return result;
+            }
+
+            return 0m;
+        }
+
         #region OLD CalcProcentFooter
         //private string CalcProcentFooter(AdvBandedGridView view)
         //{
@@ -476,14 +734,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             decimal tabSum = GetSummaryDecimal(view, "tabChasiOf");
             decimal pztSum = GetSummaryDecimal(view, "pztChasiOf");
 
-            Debug.WriteLine($"PERCENT: tabSum={tabSum} pztSum={pztSum}");
+            //Debug.WriteLine($"PERCENT: tabSum={tabSum} pztSum={pztSum}");
 
             if (pztSum == 0m)
                 //return string.Empty;
                 return "0.00";
 
-            decimal percent = tabSum / pztSum * 100m;
-            return percent.ToString("0.00"); // если хочешь "0.00%" -> + "%"
+            decimal percent = pztSum / tabSum * 100m;
+            //return percent.ToString("0.00"); // если хочешь "0.00%" -> + "%"
+            //return percent.ToString("{0:0.00} %"); // если хочешь "0.00%" -> + "%"
+            return string.Format("{0:0.00} %", percent);
         }
         private decimal GetSummaryDecimal(BandedGridView view, string fieldName)
         {
@@ -773,7 +1033,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         bandDays.Columns.Add(dayCol);
 
                         // 2 итога в футере (1 строка / 2 строка)
-                        SetTwoFooterSummaries(dayCol, $"pzv{day:00}", $"tab{day:00}");
+                        //SetTwoFooterSummaries(dayCol, $"tab{day:00}", $"pzvTab{day:00}");
+                        SetTwoFooterSummaries(dayCol, $"tab{day:00}", $"pzv{day:00}");
                     }
 
                     // 4) Итоговые колонки
@@ -804,13 +1065,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         FieldName = "procentOf",
                         Caption = "% выраб.",
                         Visible = true,
-                        OptionsColumn = { AllowEdit = false }
+                        OptionsColumn = { AllowEdit = false },
+                        DisplayFormat =
+                        {
+                            FormatType = DevExpress.Utils.FormatType.Numeric,
+                            FormatString = "0.00' %'"
+                        }
                     };
                     view.Columns.Add(proc);
                     bandTotals.Columns.Add(proc);
                     proc.Summary.Clear();
-                    proc.Summary.Add(new GridColumnSummaryItem(SummaryItemType.Custom, "procentOf", "{0:0.00}"));
+                    //proc.Summary.Add(new GridColumnSummaryItem(SummaryItemType.Custom, "procentOf", "{0:0.00}"));
+                    proc.Summary.Add(new GridColumnSummaryItem(SummaryItemType.Custom, "procentOf", "{0:0.00} %") { Tag = "R1" });
                     //proc.Summary.Clear(); // мы рисуем вручную (деление)
+                    CalcProcentFooter(bandedGridViewPzvCheck);
                 }
                 finally
                 {
@@ -848,7 +1116,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 decimal tabSum = GetSummaryDecimal(bandedGridViewPzvCheck, "tabChasiOf");
                 decimal pztSum = GetSummaryDecimal(bandedGridViewPzvCheck, "pztChasiOf");
 
-                e.TotalValue = (pztSum == 0m) ? 0m : (tabSum / pztSum * 100m);
+                e.TotalValue = (pztSum == 0m) ? 0m : (pztSum / tabSum * 100m);
             }
         }
         #region OLD RemoveDayColumns
@@ -1362,7 +1630,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             }
         }
+        private static void DrawTwoRowsStrict(FooterCellCustomDrawEventArgs e, string line1, string line2, HorzAlignment align)
+        {
+            // чтобы "окошко" не исчезало, подставляем пробел
+            if (string.IsNullOrWhiteSpace(line1)) line1 = " ";
+            if (string.IsNullOrWhiteSpace(line2)) line2 = " ";
 
+            e.Info.DisplayText = $"{line1}\r\n{line2}";
+            e.Appearance.TextOptions.WordWrap = WordWrap.Wrap;
+            e.Appearance.TextOptions.VAlignment = VertAlignment.Center;
+            e.Appearance.TextOptions.HAlignment = align;
+
+            e.Painter.DrawObject(e.Info);
+            e.Handled = true;
+        }
         private void customSimpleButton1_Click(object sender, EventArgs e)
         {
 //            var cols = string.Join("\n",
