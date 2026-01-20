@@ -494,6 +494,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Форсируем перерасчёт unbound-колонок (процент/статус)
             bandedGridView3?.RefreshData();
             advBandedGridView1?.RefreshData();
+            RefreshAdvFooterSummaries();
+        }
+
+        /// <summary>
+        /// Обновляет футер advBandedGridView1 после изменений данных.
+        /// </summary>
+        private void RefreshAdvFooterSummaries()
+        {
+            advBandedGridView1?.UpdateSummary();
         }
 
         /// <summary>
@@ -912,6 +921,50 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     e.DisplayText = string.Format("{0:0.00}", val);
                 }
             }
+        }
+
+        /// <summary>
+        /// Считает общие суммы часов по всем строкам детального уровня.
+        /// </summary>
+        private (decimal planTotal, decimal factTotal) GetGlobalHourTotals()
+        {
+            if (_planPresenter?.AllRows == null)
+                return (0m, 0m);
+
+            decimal plan = _planPresenter.AllRows
+                .Where(r => r != null)
+                .Sum(r => r.PlanChas_UI ?? 0m);
+
+            decimal fact = _planPresenter.AllRows
+                .Where(r => r != null)
+                .Sum(r => r.FactChas_UI ?? 0m);
+
+            return (Math.Round(plan, 2), Math.Round(fact, 2));
+        }
+
+        /// <summary>
+        /// В футере advBandedGridView1 показывает локальную сумму и общую сумму по всем строкам.
+        /// </summary>
+        private void AdvBandedGridView1_CustomDrawFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
+        {
+            if (e.Column == null)
+                return;
+
+            bool isPlan = string.Equals(e.Column.FieldName, "PlanChas_UI", StringComparison.OrdinalIgnoreCase);
+            bool isFact = string.Equals(e.Column.FieldName, "FactChas_UI", StringComparison.OrdinalIgnoreCase);
+            if (!isPlan && !isFact)
+                return;
+
+            decimal localSum = 0m;
+            if (e.Info?.Value != null && e.Info.Value != DBNull.Value && decimal.TryParse(e.Info.Value.ToString(), out var parsedLocal))
+            {
+                localSum = parsedLocal;
+            }
+
+            var totals = GetGlobalHourTotals();
+            decimal globalSum = isPlan ? totals.planTotal : totals.factTotal;
+
+            e.Info.DisplayText = $"Σ лок: {localSum:0.##} | Σ все: {globalSum:0.##}";
         }
 
         /// <summary>
@@ -1541,6 +1594,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             }
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
+            RefreshAdvFooterSummaries();
             _currentLoadedTab = tab;
         }
 
