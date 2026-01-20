@@ -62,6 +62,9 @@ namespace SewingProduction.form
             colorPickEditGridRowBackground = new DevExpress.XtraEditors.ColorPickEdit();
             colorPickEditGridBackground = new DevExpress.XtraEditors.ColorPickEdit();
             customButton1 = new CustomButton();
+            GridSettingsCheckBox = new CustomCheckBox();
+            ResetGridSettingsButton = new CustomButton();
+            customLabel9 = new CustomLabel();
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
             contextMenuReset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
@@ -428,11 +431,52 @@ namespace SewingProduction.form
             customButton1.UseVisualStyleBackColor = false;
             customButton1.Click += customButton1_Click;
             // 
+            // GridSettingsCheckBox
+            // 
+            GridSettingsCheckBox.AutoSize = true;
+            GridSettingsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            GridSettingsCheckBox.Font = new System.Drawing.Font("Arial", 10F);
+            GridSettingsCheckBox.ForeColor = System.Drawing.Color.FromArgb(80, 40, 100);
+            GridSettingsCheckBox.Location = new System.Drawing.Point(358, 145);
+            GridSettingsCheckBox.Name = "GridSettingsCheckBox";
+            GridSettingsCheckBox.Size = new System.Drawing.Size(220, 20);
+            GridSettingsCheckBox.TabIndex = 32;
+            GridSettingsCheckBox.Text = "Сохранять настройки таблиц";
+            GridSettingsCheckBox.UseVisualStyleBackColor = true;
+            GridSettingsCheckBox.CheckedChanged += GridSettingsCheckBox_CheckedChanged;
+            // 
+            // ResetGridSettingsButton
+            // 
+            ResetGridSettingsButton.BackColor = System.Drawing.Color.FromArgb(225, 200, 230);
+            ResetGridSettingsButton.Font = new System.Drawing.Font("Arial", 10F);
+            ResetGridSettingsButton.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
+            ResetGridSettingsButton.Location = new System.Drawing.Point(358, 186);
+            ResetGridSettingsButton.Name = "ResetGridSettingsButton";
+            ResetGridSettingsButton.Size = new System.Drawing.Size(49, 24);
+            ResetGridSettingsButton.TabIndex = 33;
+            ResetGridSettingsButton.Text = "Тыц";
+            ResetGridSettingsButton.UseVisualStyleBackColor = false;
+            ResetGridSettingsButton.Click += customButton2_Click;
+            // 
+            // customLabel9
+            // 
+            customLabel9.AutoSize = true;
+            customLabel9.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel9.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
+            customLabel9.Location = new System.Drawing.Point(358, 167);
+            customLabel9.Name = "customLabel9";
+            customLabel9.Size = new System.Drawing.Size(198, 16);
+            customLabel9.TabIndex = 34;
+            customLabel9.Text = "Сбросить настройки таблиц:";
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(customLabel9);
+            Controls.Add(ResetGridSettingsButton);
+            Controls.Add(GridSettingsCheckBox);
             Controls.Add(customButton1);
             Controls.Add(customLabel7);
             Controls.Add(customLabel8);
@@ -511,5 +555,8 @@ namespace SewingProduction.form
         private CustomButton customButton1;
         private System.Windows.Forms.ContextMenuStrip contextMenuReset;
         private System.Windows.Forms.ToolStripMenuItem menuItemReset;
+        private CustomCheckBox GridSettingsCheckBox;
+        private CustomButton ResetGridSettingsButton;
+        private CustomLabel customLabel9;
     }
 }

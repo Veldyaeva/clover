@@ -1,3 +1,4 @@
+using DevExpress.CodeParser;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
@@ -17,6 +18,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Label = System.Windows.Forms.Label;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -130,7 +132,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
-                advBandedGridView1.CustomDrawFooterCell += AdvBandedGridView1_CustomDrawFooterCell;
+                bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -164,7 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
-                advBandedGridView1.CustomDrawFooterCell += AdvBandedGridView1_CustomDrawFooterCell;
+                bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -494,14 +496,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Форсируем перерасчёт unbound-колонок (процент/статус)
             bandedGridView3?.RefreshData();
             advBandedGridView1?.RefreshData();
-            RefreshAdvFooterSummaries();
+            RefreshFooterSummaries();
         }
 
         /// <summary>
-        /// Обновляет футер advBandedGridView1 после изменений данных.
+        /// Обновляет футеры после изменений данных.
         /// </summary>
-        private void RefreshAdvFooterSummaries()
+        private void RefreshFooterSummaries()
         {
+            bandedGridView3?.UpdateSummary();
             advBandedGridView1?.UpdateSummary();
         }
 
@@ -720,7 +723,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (inProgress.Any())
             {
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                return;
                 //foreach (var row in inProgress)
                 //{
                 //    int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
@@ -943,15 +946,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// В футере advBandedGridView1 показывает локальную сумму и общую сумму по всем строкам.
+        /// В футере bandedGridView3 показываем локальную сумму и общую сумму по всем строкам.
         /// </summary>
-        private void AdvBandedGridView1_CustomDrawFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
+        private void BandedGridView3_CustomDrawFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
         {
             if (e.Column == null)
                 return;
 
-            bool isPlan = string.Equals(e.Column.FieldName, "PlanChas_UI", StringComparison.OrdinalIgnoreCase);
-            bool isFact = string.Equals(e.Column.FieldName, "FactChas_UI", StringComparison.OrdinalIgnoreCase);
+            bool isPlan = string.Equals(e.Column.FieldName, "pzvChasNazn", StringComparison.OrdinalIgnoreCase);
+            bool isFact = string.Equals(e.Column.FieldName, "pzvNChasi", StringComparison.OrdinalIgnoreCase);
             if (!isPlan && !isFact)
                 return;
 
@@ -964,7 +967,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             var totals = GetGlobalHourTotals();
             decimal globalSum = isPlan ? totals.planTotal : totals.factTotal;
 
-            e.Info.DisplayText = $"Σ лок: {localSum:0.##} | Σ все: {globalSum:0.##}";
+            e.Info.DisplayText = $"все: {globalSum:0.##}";
         }
 
         /// <summary>
@@ -1594,7 +1597,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             }
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
-            RefreshAdvFooterSummaries();
+            RefreshFooterSummaries();
             _currentLoadedTab = tab;
         }
 

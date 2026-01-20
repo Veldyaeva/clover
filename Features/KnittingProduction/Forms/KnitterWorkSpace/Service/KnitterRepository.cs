@@ -1,4 +1,5 @@
 using Dapper;
+using DevExpress.XtraDiagram.Base;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -430,42 +431,44 @@ WHERE pzvID = @pzvId;
         {
             try
             {
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    var parameters = new
-                    {
-                        pzvId,
-                        mode = 1,
-                        qtyFact = factQty,
-                        userName = (string)null
-                    };
-                    var ids = new List<PzvSplitResult>();
-                    using (var grid = await connection.QueryMultipleAsync(
-                        "dbo.PZV_Split",
-                        param: parameters,
-                        commandTimeout: 60,
-                        commandType: CommandType.StoredProcedure))
-                    {
-                        if (!grid.IsConsumed)
-                        {
-                            try
-                            {
-                                var newIds = await grid.ReadAsync<PzvSplitResult>();
-                                ids.AddRange(newIds);
-                            }
-                            catch
-                            {
-                                // ignore if no set
-                            }
-                        }
-                        if (!grid.IsConsumed)
-                        {
-                            var newIds = await grid.ReadAsync<PzvSplitResult>();
-                            ids.AddRange(newIds);
-                        }
-                    }
-                    return ids;
-                }
+                //using (var connection = _dbHelper.GetConnection())
+                //{
+                //    var parameters = new
+                //    {
+                //        pzvId,
+                //        mode = 1,
+                //        qtyFact = factQty,
+                //        userName = (string)null
+                //    };
+                //    var ids = new List<PzvSplitResult>();
+                //    using (var grid = await connection.QueryMultipleAsync(
+                //        "dbo.PZV_Split",
+                //        param: parameters,
+                //        commandTimeout: 60,
+                //        commandType: CommandType.StoredProcedure))
+                //    {
+                //        if (!grid.IsConsumed)
+                //        {
+                //            try
+                //            {
+                //                var newIds = await grid.ReadAsync<PzvSplitResult>();
+                //                ids.AddRange(newIds);
+                //            }
+                //            catch
+                //            {
+                //                // ignore if no set
+                //            }
+                //        }
+                //        if (!grid.IsConsumed)
+                //        {
+                //            var newIds = await grid.ReadAsync<PzvSplitResult>();
+                //            ids.AddRange(newIds);
+                //        }
+                //    }
+                //    return ids;
+                //}
+                var ids =  await SplitPzvByModeAsync(pzvId, mode: 1, qtyFact: factQty);
+                return ids;
             }
             catch (Exception ex)
             {

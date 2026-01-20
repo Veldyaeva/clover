@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using SewingProduction.Core.Class.Settings;
@@ -36,6 +37,7 @@ namespace SewingProduction.form
             // Сокращенное Название Вкладок
             customCheckBoxSokrNameTabs.Checked = SettingsManager.GetShortTabNames();
             customCheckBoxPovtOpenTabs.Checked = SettingsManager.GetAllowDuplicateTabs();
+            GridSettingsCheckBox.Checked = SettingsManager.GetSaveGridSettings();
             LoadColorPickersFromSettings();
         }
 
@@ -122,6 +124,10 @@ namespace SewingProduction.form
         private void customCheckBoxPovtOpenTabs_CheckedChanged(object sender, EventArgs e)
         {
             SettingsManager.SetAllowDuplicateTabs(customCheckBoxPovtOpenTabs.Checked);
+        }
+        private void GridSettingsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            SettingsManager.SetSaveGridSettings(GridSettingsCheckBox.Checked);
         }
         private void customButtonClearProfile_Click(object sender, EventArgs e)
         {
@@ -435,6 +441,56 @@ namespace SewingProduction.form
             LoadColorPickersFromSettings();
 
             MessageBox.Show("Настройки темы сброшены.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void customButton2_Click(object sender, EventArgs e)
+        {
+            var dir = UserFilePaths.GridSettings;
+            if (!Directory.Exists(dir))
+            {
+                MessageBox.Show("Сохраненных настроек таблиц не найдено.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var files = Directory.GetFiles(dir, "*.json", SearchOption.TopDirectoryOnly);
+            var confirm = MessageBox.Show(
+                $"Удалить сохраненные настройки таблиц? (файлов: {files.Length}, папок: {Directory.GetDirectories(dir).Length})",
+                "Сброс настроек таблиц",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            int deleted = 0;
+            foreach (var file in files)
+            {
+                try
+                {
+                    File.Delete(file);
+                    deleted++;
+                }
+                catch
+                {
+                    // пропускаем неудачные удаления
+                }
+            }
+
+            int deletedDirs = 0;
+            foreach (var subdir in Directory.GetDirectories(dir))
+            {
+                try
+                {
+                    Directory.Delete(subdir, true);
+                    deletedDirs++;
+                }
+                catch
+                {
+                    // пропускаем неудачные удаления
+                }
+            }
+
+            MessageBox.Show($"Сброс настроек таблиц завершен. Удалено файлов: {deleted}, папок: {deletedDirs}.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
