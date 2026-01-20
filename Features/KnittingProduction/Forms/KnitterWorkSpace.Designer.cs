@@ -490,6 +490,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // PlanZagrVyazGridControl
             // 
+            PlanZagrVyazGridControl.Dock = DockStyle.Fill;
             PlanZagrVyazGridControl.Font = new System.Drawing.Font("Arial", 10F);
             gridLevelNode1.LevelTemplate = advBandedGridView1;
             gridLevelNode1.RelationName = "ArtNom";
@@ -619,7 +620,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumn10.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridColumn10.FieldName = "pzvKolNazn";
             gridColumn10.Name = "gridColumn10";
-            gridColumn10.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvKolNazn", "{0:#,0}") });
             gridColumn10.Visible = true;
             gridColumn10.Width = 100;
             // 

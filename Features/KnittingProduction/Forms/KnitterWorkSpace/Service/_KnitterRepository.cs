@@ -223,38 +223,15 @@ where kwsmlKmlID in @ids
 
                 static void FillUi(KnitterPZVModel r)
                 {
-                    // - При открытии смены "назначено" в БД может не быть заполнено.
-                    //   При этом pzvKol/pzvNChasi содержат ПЛАН (до начала работы), а факт в UI должен быть 0.
-                    // - После начала/завершения работы pzvKol/pzvNChasi становятся ФАКТОМ, а план (если был) лежит в pzvKolNazn/pzvChasNazn.
-                    // - Обнулять нужно ТОЛЬКО UI-поля, базовые колонки в модели не трогаем.
+                    bool assigned = (r.pzvTab ?? 0) != 0;
+                    bool started = !(r.pzvDateStart == null);
+                    // tab=0 -> Kol/NChasi = план, Nazn пустые
+                    // tab>0 -> Kol/NChasi = факт, Nazn = план
+                    r.PlanKol_UI = assigned ? r.pzvKolNazn : (r.pzvKol ?? 0);
+                    r.PlanChas_UI = assigned ? r.pzvChasNazn : (r.pzvNChasi ?? 0m);
 
-                    var planKolFromFact = (r.pzvKol ?? 0);
-                    var planChasFromFact = (r.pzvNChasi ?? 0m);
-
-                    var planKolFromNazn = (r.pzvKolNazn != 0) ? r.pzvKolNazn : planKolFromFact;
-                    var planChasFromNazn = (r.pzvChasNazn != 0m) ? r.pzvChasNazn : planChasFromFact;
-
-                    // "Начата" = есть дата начала (на некоторых потоках может проставляться только при старте).
-                    // Если начато — показываем факт из pzvKol/pzvNChasi.
-                    // Если НЕ начато — факт в UI = 0, а план в UI берём из pzvKol/pzvNChasi (как ты попросила: "назн из факт, факт не обнулять").
-                    bool started = r.pzvDateStart != null;
-
-                    if (!started)
-                    {
-                        // План до старта берём из "фактовых" полей (по бизнес-логике они содержат план),
-                        // чтобы при открытии смены всё отображалось корректно.
-                        r.PlanKol_UI = planKolFromFact;
-                        r.PlanChas_UI = planChasFromFact;
-                        r.FactKol_UI = 0;
-                        r.FactChas_UI = 0m;
-                        return;
-                    }
-
-                    // После старта: план — из Nazn (если есть), иначе fallback на фактовые (на случай остатка/новых строк)
-                    r.PlanKol_UI = planKolFromNazn;
-                    r.PlanChas_UI = planChasFromNazn;
-                    r.FactKol_UI = (r.pzvKol ?? 0);
-                    r.FactChas_UI = (r.pzvNChasi ?? 0m);
+                    r.FactKol_UI = started ? (r.pzvKol ?? 0) : 0;// assigned ? (r.pzvKol ?? 0) : 0;
+                    r.FactChas_UI = started ? (r.pzvNChasi ?? 0m) : 0m;
                 }
 
                 foreach (var p in parents)

@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
@@ -130,6 +130,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
+                advBandedGridView1.CustomDrawFooterCell += AdvBandedGridView1_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -163,6 +164,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
+                advBandedGridView1.CustomDrawFooterCell += AdvBandedGridView1_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -1354,17 +1356,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         string.Equals(KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), taskKey, StringComparison.OrdinalIgnoreCase))
                     .ToList() ?? new List<KnitterPZVModel>();
 
-                decimal assignedHours = rows.Sum(r => r.pzvChasNazn);//pzvSekNazn);//
-                decimal doneHours = rows.Sum(r => r.pzvNChasi ?? 0m);//pzvSek);//
+                //decimal? assignedHours = rows.Sum(r => r.PlanChas_UI);//pzvChasNazn);//pzvSekNazn);//
+                //decimal doneHours = rows.Sum(r => r.FactChas_UI ?? 0m);//pzvNChasi ?? 0m);//pzvSek);//
 
-                decimal percent = 0m;
-                if (assignedHours > 0)
-                {
-                    percent = doneHours / assignedHours * 100m;
-                    if (percent > 100m) percent = 100m;
-                    if (percent < 0m) percent = 0m;
-                }
+                //decimal? percent = 0m;
+                //if (assignedHours > 0)
+                //{
+                //    percent = doneHours / assignedHours * 100m;
+                //    if (percent > 100m) percent = 100m;
+                //    if (percent < 0m) percent = 0m;
+                //}
+                decimal assignedHours = rows.Sum(r => r.PlanChas_UI ?? 0m);
+                decimal doneHours = rows.Sum(r => r.FactChas_UI ?? 0m);
 
+                decimal percent =
+                    assignedHours > 0m
+                        ? Math.Round(doneHours * 100m / assignedHours, 1)
+                        : 0m;
                 e.Value = percent;
             }
         }
