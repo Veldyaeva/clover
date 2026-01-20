@@ -676,11 +676,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //-----------------------
             col.Summary.Clear();
 
-            var s1 = new GridColumnSummaryItem(SummaryItemType.Sum, fieldRow1, fmt) { Tag = "R1" };
-            var s2 = new GridColumnSummaryItem(SummaryItemType.Sum, fieldRow2, fmt) { Tag = "R2" };
+            //var s1 = new GridColumnSummaryItem(SummaryItemType.Sum, fieldRow1, fmt) { Tag = "R1" };
+            //var s2 = new GridColumnSummaryItem(SummaryItemType.Sum, fieldRow2, fmt) { Tag = "R2" };
 
-            col.Summary.Add(s1);
-            col.Summary.Add(s2);
+            //col.Summary.Add(s1);
+            //col.Summary.Add(s2);
+
+            col.Summary.Add(new GridColumnSummaryItem
+            {
+                SummaryType = SummaryItemType.Custom,
+                FieldName = fieldRow1,
+                DisplayFormat = fmt,
+                Tag = "R1"
+            });
+
+            col.Summary.Add(new GridColumnSummaryItem
+            {
+                SummaryType = SummaryItemType.Custom,
+                FieldName = fieldRow2,
+                DisplayFormat = fmt,
+                Tag = "R2"
+            });
         }
         private static decimal ExtractDecimal(object raw)
         {
@@ -1106,17 +1122,74 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
         private void bandedGridViewPzvCheck_CustomSummaryCalculate(object sender, CustomSummaryEventArgs e)
         {
-            if (e.SummaryProcess != CustomSummaryProcess.Finalize)
+            //if (e.SummaryProcess != CustomSummaryProcess.Finalize)
+            //    return;
+
+            //if (e.Item is GridColumnSummaryItem item &&
+            //    item.FieldName == "procentOf" &&
+            //    item.SummaryType == SummaryItemType.Custom)
+            //{
+            //    decimal tabSum = GetSummaryDecimal(bandedGridViewPzvCheck, "tabChasiOf");
+            //    decimal pztSum = GetSummaryDecimal(bandedGridViewPzvCheck, "pztChasiOf");
+
+            //    e.TotalValue = (pztSum == 0m) ? 0m : (pztSum / tabSum * 100m);
+            //}
+            //-----------------------
+            //if (e.Item is not GridColumnSummaryItem item)
+            //    return;
+
+            //if (e.SummaryProcess == CustomSummaryProcess.Start)
+            //{
+            //    e.TotalValue = 0m;
+            //    return;
+            //}
+
+            //if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+            //{
+            //    if (e.FieldValue == null)
+            //        return;
+
+            //    decimal value = ExtractDecimal(e.FieldValue);
+            //    e.TotalValue = (decimal)e.TotalValue + value;
+            //    return;
+            //}
+            //----------------------
+            if (e.Item is not GridColumnSummaryItem item)
                 return;
 
-            if (e.Item is GridColumnSummaryItem item &&
-                item.FieldName == "procentOf" &&
-                item.SummaryType == SummaryItemType.Custom)
+            // --- 1) procentOf считаем ОТДЕЛЬНО (не суммируем по строкам) ---
+            if (item.FieldName == "procentOf" && item.SummaryType == SummaryItemType.Custom)
             {
-                decimal tabSum = GetSummaryDecimal(bandedGridViewPzvCheck, "tabChasiOf");
-                decimal pztSum = GetSummaryDecimal(bandedGridViewPzvCheck, "pztChasiOf");
+                if (e.SummaryProcess != CustomSummaryProcess.Finalize)
+                    return;
 
-                e.TotalValue = (pztSum == 0m) ? 0m : (pztSum / tabSum * 100m);
+                decimal tabSum = GetSummaryDecimal((BandedGridView)sender, "tabChasiOf");
+                decimal pztSum = GetSummaryDecimal((BandedGridView)sender, "pztChasiOf");
+
+                e.TotalValue = (tabSum == 0m) ? 0m : (pztSum / tabSum * 100m);
+                return;
+            }
+
+            // --- 2) Все остальные Custom summary: суммируем "только числа, откинув буквы" ---
+            if (item.SummaryType != SummaryItemType.Custom)
+                return;
+
+            switch (e.SummaryProcess)
+            {
+                case CustomSummaryProcess.Start:
+                    e.TotalValue = 0m;
+                    break;
+
+                case CustomSummaryProcess.Calculate:
+                    if (e.FieldValue == null) return;
+
+                    decimal value = ExtractDecimal(e.FieldValue);
+                    e.TotalValue = (decimal)e.TotalValue + value;
+                    break;
+
+                case CustomSummaryProcess.Finalize:
+                    // ничего
+                    break;
             }
         }
         #region OLD RemoveDayColumns
