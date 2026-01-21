@@ -782,16 +782,26 @@ namespace SewingProduction.Features.Tabel.Forms
         private void lookUpEditGroup_EditValueChanged(object sender, EventArgs e)
         {
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
-            GetGrAcess(grId,idUser);
+            GetGrAcess(grId, idUser);
         }
         private async Task GetGrAcess(int idGr, int idUser)
         {
-            var SpPodr = await _tabelDataService.GetSpPodrAsync(idGr,idUser);
+            var SpPodr = await _tabelDataService.GetSpPodrAsync(idGr, idUser);
             _spPodr.Clear();
             _spPodr.ResetBindings(false);
-            _spPodr.DataSource = SpPodr.ToList() ;
+            _spPodr.DataSource = SpPodr.ToList();
             lookUpEditGroup.Refresh();
 
+        }
+
+        private void customButtonOtvlRab_Click(object sender, EventArgs e)
+        {
+            int tnid = Convert.ToInt32(lookUpEditGr.EditValue);
+            if (tnid == 0) return;
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new OtvlRab(CurrentUser.User, tnid));
+            }
         }
     }
 }

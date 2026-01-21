@@ -25,6 +25,13 @@ namespace SewingProduction.CustomControls
         Cyclic = 1    // график: 5/2, 2/2, 4/2 ...
     }
 
+    public enum HorizontalNavPlacement
+    {
+        NearTitle = 0,   // ◀ Текст ▶ по центру (стрелки рядом с месяцем)
+        AtEdges = 1,     // ◀ слева, ▶ справа, текст по центру (как было изначально с Dock)
+        LeftOnly = 2,    // только ◀ рядом с текстом
+        RightOnly = 3    // только ▶ рядом с текстом
+    }
     #endregion
 
     #region DevExpress Russian Localizer
@@ -84,7 +91,7 @@ namespace SewingProduction.CustomControls
 
         // Layout mode
         private CalendarLayoutMode _layoutMode = CalendarLayoutMode.MonthGrid;
-
+        private FlowLayoutPanel _headerFlow;
         #endregion
 
         #region Ctor / Dispose
@@ -198,18 +205,45 @@ namespace SewingProduction.CustomControls
             }
 
             #region Bottom panel
+
             private bool _bottomPanelVisible = false;
-            [DefaultValue(true)]
-            public bool BottomPanelVisible { get => _bottomPanelVisible; set => Set(ref _bottomPanelVisible, value); }
+
+            [Category("Нижняя панель")]
+            [DisplayName("Показывать панель")]
+            [Description("Показывает или скрывает нижнюю панель с кнопками и комбобоксами.")]
+            [DefaultValue(false)]
+            public bool BottomPanelVisible
+            {
+                get => _bottomPanelVisible;
+                set => Set(ref _bottomPanelVisible, value);
+            }
 
             private int _bottomPanelHeight = 48;
+
+            [Category("Нижняя панель")]
+            [DisplayName("Высота панели")]
+            [Description("Высота нижней панели в пикселях.")]
             [DefaultValue(48)]
-            public int BottomPanelHeight { get => _bottomPanelHeight; set => Set(ref _bottomPanelHeight, value); }
+            public int BottomPanelHeight
+            {
+                get => _bottomPanelHeight;
+                set => Set(ref _bottomPanelHeight, value);
+            }
 
             private bool _bottomPanelResizable = false;
+
+            [Category("Нижняя панель")]
+            [DisplayName("Разрешить изменение высоты")]
+            [Description("Разрешает менять высоту нижней панели с помощью разделителя.")]
             [DefaultValue(false)]
-            public bool BottomPanelResizable { get => _bottomPanelResizable; set => Set(ref _bottomPanelResizable, value); }
+            public bool BottomPanelResizable
+            {
+                get => _bottomPanelResizable;
+                set => Set(ref _bottomPanelResizable, value);
+            }
+
             #endregion
+
 
             #region Theme / colors
             private bool _useThemeByDefault = true;
@@ -217,12 +251,24 @@ namespace SewingProduction.CustomControls
             public bool UseThemeByDefault { get => _useThemeByDefault; set => Set(ref _useThemeByDefault, value); }
 
             private Color _normalDayBackColor = Color.Empty;
+
+            [Category("Цвета дней")]
+            [DisplayName("Цвет обычного дня")]
+            [Description("Фоновый цвет обычных дней календаря.")]
             public Color NormalDayBackColor { get => _normalDayBackColor; set => Set(ref _normalDayBackColor, value); }
 
             private Color _offDayBackColor = Color.Empty;
+
+            [Category("Цвета дней")]
+            [DisplayName("Цвет выходного дня")]
+            [Description("Фоновый цвет выходных дней.")]
             public Color OffDayBackColor { get => _offDayBackColor; set => Set(ref _offDayBackColor, value); }
 
             private Color _offDayForeColor = Color.Empty;
+
+            [Category("Цвета дней")]
+            [DisplayName("Цвет текста выходного")]
+            [Description("Цвет текста для выходных дней.")]
             public Color OffDayForeColor { get => _offDayForeColor; set => Set(ref _offDayForeColor, value); }
 
             private Color _specialBackColor = Color.Empty;
@@ -230,6 +276,28 @@ namespace SewingProduction.CustomControls
 
             private Color _specialForeColor = Color.Empty;
             public Color SpecialForeColor { get => _specialForeColor; set => Set(ref _specialForeColor, value); }
+
+            private Color _selectedDayBackColor = Color.Empty;
+            private Color _selectedDayForeColor = Color.Empty;
+
+            [Category("Цвета дней")]
+            [DisplayName("Цвет выбранного дня")]
+            [Description("Фоновый цвет выбранного дня.")]
+            public Color SelectedDayBackColor
+            {
+                get => _selectedDayBackColor;
+                set => Set(ref _selectedDayBackColor, value);
+            }
+
+            [Category("Цвета дней")]
+            [DisplayName("Цвет текста выбранного")]
+            [Description("Цвет текста выбранного дня.")]
+            public Color SelectedDayForeColor
+            {
+                get => _selectedDayForeColor;
+                set => Set(ref _selectedDayForeColor, value);
+            }
+
             #endregion
 
             #region Zoom
@@ -265,6 +333,10 @@ namespace SewingProduction.CustomControls
             public CalendarLayoutMode LayoutMode { get => _layoutMode; set => Set(ref _layoutMode, value); }
 
             private bool _horizontalHeaderVisible = true;
+
+            [Category("Горизонтальный режим – Заголовок")]
+            [DisplayName("Показывать заголовок")]
+            [Description("Показывает или скрывает заголовок месяца и года в горизонтальном режиме.")]
             [DefaultValue(true)]
             public bool HorizontalHeaderVisible { get => _horizontalHeaderVisible; set => Set(ref _horizontalHeaderVisible, value); }
 
@@ -281,6 +353,9 @@ namespace SewingProduction.CustomControls
             public bool HorizontalShowYear { get => _horizontalShowYear; set => Set(ref _horizontalShowYear, value); }
 
             private int _horizontalHeaderHeight = 30;
+            [Category("Горизонтальный режим – Заголовок")]
+            [DisplayName("Высота заголовка")]
+            [Description("Высота области заголовка месяца и года.")]
             [DefaultValue(30)]
             public int HorizontalHeaderHeight { get => _horizontalHeaderHeight; set => Set(ref _horizontalHeaderHeight, value); }
 
@@ -295,6 +370,111 @@ namespace SewingProduction.CustomControls
             private bool _autoCompactInLayoutControl = true;
             [DefaultValue(true)]
             public bool AutoCompactInLayoutControl { get => _autoCompactInLayoutControl; set => Set(ref _autoCompactInLayoutControl, value); }
+
+            #region Horizontal navigation
+
+            private HorizontalNavPlacement _horizontalNavigationPlacement = HorizontalNavPlacement.NearTitle;
+            [DefaultValue(HorizontalNavPlacement.NearTitle)]
+            public HorizontalNavPlacement HorizontalNavigationPlacement
+            {
+                get => _horizontalNavigationPlacement;
+                set => Set(ref _horizontalNavigationPlacement, value);
+            }
+
+            private int _horizontalNavigationSpacing = 6;
+            [DefaultValue(6)]
+            public int HorizontalNavigationSpacing
+            {
+                get => _horizontalNavigationSpacing;
+                set => Set(ref _horizontalNavigationSpacing, value);
+            }
+
+            private int _horizontalNavigationButtonWidth = 32;
+            [DefaultValue(32)]
+            public int HorizontalNavigationButtonWidth
+            {
+                get => _horizontalNavigationButtonWidth;
+                set => Set(ref _horizontalNavigationButtonWidth, value);
+            }
+            #region Horizontal days - Stretch (CustomSettings)
+
+            private bool _horizontalStretchDaysToWidth = true;
+
+            [Category("Горизонтальный режим – Дни")]
+            [DisplayName("Растягивать по ширине")]
+            [Description("Если включено — кнопки дней растягиваются по ширине, чтобы не было пустого места справа.")]
+            [DefaultValue(true)]
+            public bool HorizontalStretchDaysToWidth
+            {
+                get => _horizontalStretchDaysToWidth;
+                set => Set(ref _horizontalStretchDaysToWidth, value);
+            }
+
+            private int _horizontalDayMinWidth = 28;
+
+            [Category("Горизонтальный режим – Дни")]
+            [DisplayName("Мин. ширина дня")]
+            [Description("Минимальная ширина кнопки дня. Если места мало — растяжка не выполняется (останется скролл).")]
+            [DefaultValue(28)]
+            public int HorizontalDayMinWidth
+            {
+                get => _horizontalDayMinWidth;
+                set => Set(ref _horizontalDayMinWidth, value);
+            }
+
+            private int _horizontalDaySpacing = 2;
+
+            [Category("Горизонтальный режим – Дни")]
+            [DisplayName("Интервал между днями")]
+            [Description("Дополнительный интервал между кнопками дней (в пикселях), учитывается при перерасчёте ширины.")]
+            [DefaultValue(2)]
+            public int HorizontalDaySpacing
+            {
+                get => _horizontalDaySpacing;
+                set => Set(ref _horizontalDaySpacing, value);
+            }
+
+            #endregion
+            #region Horizontal header title appearance (CustomSettings)
+
+            private float _horizontalTitleFontSize = 12f;
+
+            [Category("Горизонтальный режим – Заголовок")]
+            [DisplayName("Размер шрифта")]
+            [Description("Размер шрифта надписи месяца и года в горизонтальном режиме.")]
+            [DefaultValue(12f)]
+            public float HorizontalTitleFontSize
+            {
+                get => _horizontalTitleFontSize;
+                set => Set(ref _horizontalTitleFontSize, value);
+            }
+
+            private int _horizontalTitleOffsetY = 2;
+
+            [Category("Горизонтальный режим – Заголовок")]
+            [DisplayName("Смещение текста вниз")]
+            [Description("Вертикальное смещение надписи месяца и года вниз (в пикселях).")]
+            [DefaultValue(2)]
+            public int HorizontalTitleOffsetY
+            {
+                get => _horizontalTitleOffsetY;
+                set => Set(ref _horizontalTitleOffsetY, value);
+            }
+
+            private Color _horizontalTitleForeColor = Color.Empty;
+
+            [Category("Горизонтальный режим – Заголовок")]
+            [DisplayName("Цвет надписи")]
+            [Description("Цвет надписи месяца/года. Если Empty — используется ForeColor контрола.")]
+            public Color HorizontalTitleForeColor
+            {
+                get => _horizontalTitleForeColor;
+                set => Set(ref _horizontalTitleForeColor, value);
+            }
+
+            #endregion
+
+            #endregion
             #endregion
 
             public override string ToString() => "Настройки календаря";
@@ -326,7 +506,8 @@ namespace SewingProduction.CustomControls
         public Color OffDayForeColor { get; set; } = Color.Empty;
         public Color SpecialBackColor { get; set; } = Color.Empty;
         public Color SpecialForeColor { get; set; } = Color.Empty;
-
+        public Color SelectedDayBackColor { get; set; } = Color.Empty;
+        public Color SelectedDayForeColor { get; set; } = Color.Empty;
         #endregion
 
         #region Public API - Zoom
@@ -376,7 +557,7 @@ namespace SewingProduction.CustomControls
             get => _bottomPanel.Height;
             set
             {
-                _bottomPanel.Height = Math.Max(0, value); 
+                _bottomPanel.Height = Math.Max(0, value);
                 UpdateCompactHeight();
             }
         }
@@ -389,10 +570,10 @@ namespace SewingProduction.CustomControls
             get => _splitter.Visible;
             set
             {
-            _splitter.Visible = value && BottomPanelVisible;
-            UpdateCompactHeight();
+                _splitter.Visible = value && BottomPanelVisible;
+                UpdateCompactHeight();
             }
-}
+        }
 
         /// <summary>Добавить контрол в левую часть нижней панели (удобно из конструктора формы).</summary>
         public T AddBottomLeft<T>(T control) where T : Control
@@ -572,10 +753,8 @@ namespace SewingProduction.CustomControls
 
         private void OnCustomDrawDayNumberCell(object sender, CustomDrawDayNumberCellEventArgs e)
         {
-            // В горизонтальном режиме сетку месяца мы не трогаем/не рисуем (она под оверлеем),
-            // но обработчик может вызываться — оставляем как есть.
             var d = e.DateTime.Date;
-
+            bool isSelected = DateTime.Date == d;
             bool isOff = IsOffDay(d);
             bool isSpecial = SpecialDates.Contains(d);
             bool isToday = d == DateTime.Today;
@@ -598,14 +777,23 @@ namespace SewingProduction.CustomControls
                 if (!SpecialForeColor.IsEmpty) fore = SpecialForeColor;
             }
 
+            if (isSelected)
+            {
+                if (!SelectedDayBackColor.IsEmpty) back = SelectedDayBackColor;
+                if (!SelectedDayForeColor.IsEmpty) fore = SelectedDayForeColor;
+            }
+
             using (var b = new SolidBrush(back))
                 e.Cache.FillRectangle(b, e.Bounds);
 
-            var drawFont = e.Style.Font ?? Font;
             using (var br = new SolidBrush(fore))
             {
-                var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-                e.Cache.Graphics.DrawString(d.Day.ToString(), drawFont, br, e.Bounds, sf);
+                var sf = new StringFormat
+                {
+                    Alignment = StringAlignment.Center,
+                    LineAlignment = StringAlignment.Center
+                };
+                e.Cache.Graphics.DrawString(d.Day.ToString(), e.Style.Font ?? Font, br, e.Bounds, sf);
             }
 
             if (isToday)
@@ -678,9 +866,38 @@ namespace SewingProduction.CustomControls
                     Appearance = { TextOptions = { HAlignment = DevExpress.Utils.HorzAlignment.Center } }
                 };
 
-                _horizontalHeader.Controls.Add(_lblMonthYear);
-                _horizontalHeader.Controls.Add(_btnNextMonth);
-                _horizontalHeader.Controls.Add(_btnPrevMonth);
+                _lblMonthYear.Cursor = Cursors.Hand;
+                _lblMonthYear.Click += (_, __) => ShowMonthYearPicker();
+
+                _headerFlow = new FlowLayoutPanel
+                {
+                    AutoSize = true,
+                    WrapContents = false,
+                    FlowDirection = FlowDirection.LeftToRight,
+                    Margin = new Padding(0),
+                    Padding = new Padding(0),
+                    BackColor = Color.Transparent
+                };
+
+                _btnPrevMonth.Dock = DockStyle.None;
+                _btnNextMonth.Dock = DockStyle.None;
+                _lblMonthYear.Dock = DockStyle.None;
+
+                _btnPrevMonth.Width = HorizontalNavigationButtonWidth;
+                _btnNextMonth.Width = HorizontalNavigationButtonWidth;
+
+                _btnPrevMonth.Margin = new Padding(0, 0, HorizontalNavigationSpacing, 0);
+                _lblMonthYear.Margin = new Padding(0);
+                _btnNextMonth.Margin = new Padding(HorizontalNavigationSpacing, 0, 0, 0);
+
+                // важно: чтобы текст занимал столько, сколько надо
+                _lblMonthYear.AutoSizeMode = LabelAutoSizeMode.Default;
+
+                _horizontalHeader.Controls.Add(_headerFlow);
+
+                // центровка при ресайзе
+                _horizontalHeader.Resize += (_, __) => CenterHeaderFlow();
+
 
                 // header должен быть поверх и над строкой дней
                 Controls.Add(_horizontalHeader);
@@ -703,6 +920,12 @@ namespace SewingProduction.CustomControls
                 BackColor = BackColor
             };
 
+            _daysFlow.Resize += (_, __) =>
+            {
+                if (LayoutMode == CalendarLayoutMode.HorizontalDays)
+                    StretchDayButtonsToWidth();
+            };
+
             _horizontalHost.Controls.Add(_daysFlow);
 
             // Добавляем поверх календаря (оверлей)
@@ -712,6 +935,93 @@ namespace SewingProduction.CustomControls
             // Но нижнюю панель оставляем сверху, чтобы не перекрывалась
             _bottomPanel.BringToFront();
             _splitter.BringToFront();
+        }
+        private void CenterHeaderFlow()
+        {
+            if (_horizontalHeader == null || _headerFlow == null) return;
+
+            int x = (_horizontalHeader.ClientSize.Width - _headerFlow.Width) / 2;
+            int y = (_horizontalHeader.ClientSize.Height - _headerFlow.Height) / 2;
+
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+
+            _headerFlow.Location = new Point(x, y);
+        }
+        private void ShowMonthYearPicker()
+        {
+            // небольшой диалог выбора месяца и года
+            using var f = new XtraForm
+            {
+                Text = "Выбор месяца",
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                StartPosition = FormStartPosition.Manual,
+                MinimizeBox = false,
+                MaximizeBox = false,
+                ShowInTaskbar = false,
+                ClientSize = new Size(260, 110)
+            };
+
+            // позиция рядом с заголовком
+            try
+            {
+                var pt = _horizontalHeader.PointToScreen(new Point(_horizontalHeader.Width / 2 - 130, _horizontalHeader.Height));
+                f.Location = pt;
+            }
+            catch { /* не критично */ }
+
+            var cmbMonth = new ComboBoxEdit
+            {
+                Parent = f,
+                Location = new Point(10, 10),
+                Width = 160
+            };
+            cmbMonth.Properties.Items.AddRange(new object[]
+            {
+            "Январь","Февраль","Март","Апрель","Май","Июнь",
+            "Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"
+            });
+
+            var spYear = new SpinEdit
+            {
+                Parent = f,
+                Location = new Point(180, 10),
+                Width = 70
+            };
+
+            cmbMonth.SelectedIndex = DateTime.Month - 1;
+            spYear.Value = DateTime.Year;
+
+            var btnOk = new SimpleButton
+            {
+                Parent = f,
+                Text = "ОК",
+                DialogResult = DialogResult.OK,
+                Location = new Point(70, 60),
+                Width = 80
+            };
+
+            var btnCancel = new SimpleButton
+            {
+                Parent = f,
+                Text = "Отмена",
+                DialogResult = DialogResult.Cancel,
+                Location = new Point(155, 60),
+                Width = 80
+            };
+
+            f.AcceptButton = btnOk;
+            f.CancelButton = btnCancel;
+
+            if (f.ShowDialog(FindForm()) != DialogResult.OK) return;
+
+            int newMonth = cmbMonth.SelectedIndex + 1;
+            int newYear = (int)spYear.Value;
+
+            int day = Math.Min(DateTime.Day, DateTime.DaysInMonth(newYear, newMonth));
+            DateTime = new DateTime(newYear, newMonth, day);
+
+            BuildHorizontalForMonth(DateTime, force: true);
         }
 
         private void ApplyLayoutMode()
@@ -793,9 +1103,13 @@ namespace SewingProduction.CustomControls
             // фикс высоты ряда, если свойство поменяли после конструктора
             _daysFlow.Height = HorizontalRowHeight;
             _horizontalHost.Height = HorizontalRowHeight;
+            _lastDaysInMonth = daysInMonth;
+
+            if (HorizontalStretchDaysToWidth)
+                StretchDayButtonsToWidth();
 
             UpdateCompactHeight();
-            ApplyHorizontalCompactHeight(); 
+            ApplyHorizontalCompactHeight();
             UpdateHorizontalHeader();
         }
 
@@ -842,11 +1156,26 @@ namespace SewingProduction.CustomControls
                 var d = (DateTime)b.Tag;
                 bool selected = d.Date == selectedDate.Date;
 
-                // только визуальный акцент, без Bold (чтобы размер не прыгал)
-                b.Appearance.Font = selected
-                    ? new Font(Font, FontStyle.Underline)
-                    : new Font(Font, FontStyle.Regular);
-                b.Appearance.Options.UseFont = true;
+                if (selected)
+                {
+                    if (!SelectedDayBackColor.IsEmpty)
+                    {
+                        b.Appearance.BackColor = SelectedDayBackColor;
+                        b.Appearance.Options.UseBackColor = true;
+                    }
+                    if (!SelectedDayForeColor.IsEmpty)
+                    {
+                        b.Appearance.ForeColor = SelectedDayForeColor;
+                        b.Appearance.Options.UseForeColor = true;
+                    }
+
+                    b.Appearance.Font = new Font(Font, FontStyle.Regular);
+                    b.Appearance.Options.UseFont = true;
+                }
+                else
+                {
+                    ApplyDayButtonStyle(b, d);
+                }
             }
         }
 
@@ -1016,6 +1345,9 @@ namespace SewingProduction.CustomControls
         [DefaultValue(true)]
         public bool HorizontalHeaderVisible { get; set; } = true;
 
+        [Category("Горизонтальный режим – Навигация")]
+        [DisplayName("Показывать стрелки")]
+        [Description("Показывает или скрывает стрелки перелистывания месяца.")]
         [DefaultValue(true)]
         public bool HorizontalNavigationVisible { get; set; } = true;
 
@@ -1027,7 +1359,23 @@ namespace SewingProduction.CustomControls
 
         [DefaultValue(30)]
         public int HorizontalHeaderHeight { get; set; } = 30;
+        [Category("Горизонтальный режим – Навигация")]
+        [DisplayName("Расположение стрелок")]
+        [Description("Определяет расположение стрелок относительно надписи месяца и года.")]
+        [DefaultValue(HorizontalNavPlacement.NearTitle)]
+        public HorizontalNavPlacement HorizontalNavigationPlacement { get; set; } = HorizontalNavPlacement.NearTitle;
 
+        /// <summary>Расстояние между стрелкой и надписью (px).</summary>
+
+        [Category("Горизонтальный режим – Навигация")]
+        [DisplayName("Отступ от надписи")]
+        [Description("Расстояние между стрелками и надписью месяца/года.")]
+        [DefaultValue(6)]
+        public int HorizontalNavigationSpacing { get; set; } = 6;
+
+        /// <summary>Ширина кнопок-стрелок.</summary>
+        [DefaultValue(32)]
+        public int HorizontalNavigationButtonWidth { get; set; } = 32;
         private void ChangeMonth(int deltaMonths)
         {
             var cur = DateTime;
@@ -1048,60 +1396,277 @@ namespace SewingProduction.CustomControls
 
             bool showHeader = LayoutMode == CalendarLayoutMode.HorizontalDays && HorizontalHeaderVisible;
             _horizontalHeader.Visible = showHeader;
-
             if (!showHeader) return;
 
-            _btnPrevMonth.Visible = HorizontalNavigationVisible;
-            _btnNextMonth.Visible = HorizontalNavigationVisible;
-
+            // текст
             string month = HorizontalShowMonth ? DateTime.ToString("MMMM") : "";
             string year = HorizontalShowYear ? DateTime.ToString("yyyy") : "";
-
             string text = (month + " " + year).Trim();
             if (string.IsNullOrWhiteSpace(text))
                 text = DateTime.ToString("MM.yyyy");
 
             _lblMonthYear.Text = text;
+
+            // === ВНЕШНИЙ ВИД НАДПИСИ ===
+
+            // размер
+            _lblMonthYear.Appearance.Font =
+                new Font(Font.FontFamily, HorizontalTitleFontSize, FontStyle.Regular);
+            _lblMonthYear.Appearance.Options.UseFont = true;
+
+            // цвет
+            _lblMonthYear.Appearance.ForeColor =
+                HorizontalTitleForeColor.IsEmpty ? ForeColor : HorizontalTitleForeColor;
+            _lblMonthYear.Appearance.Options.UseForeColor = true;
+
+            // опускаем ниже через padding
+            _horizontalHeader.Padding = new Padding(
+                _horizontalHeader.Padding.Left,
+                4 + HorizontalTitleOffsetY,
+                _horizontalHeader.Padding.Right,
+                _horizontalHeader.Padding.Bottom);
+
+            // применяем расположение стрелок
+            ApplyHorizontalNavigationPlacement();
         }
+        private void ApplyHorizontalNavigationPlacement()
+        {
+            if (_horizontalHeader == null || _headerFlow == null) return;
+
+            _headerFlow.SuspendLayout();
+            _headerFlow.Controls.Clear();
+
+            // обновим размеры/отступы
+            _btnPrevMonth.Width = HorizontalNavigationButtonWidth;
+            _btnNextMonth.Width = HorizontalNavigationButtonWidth;
+
+            _btnPrevMonth.Margin = new Padding(0, 0, HorizontalNavigationSpacing, 0);
+            _lblMonthYear.Margin = new Padding(0);
+            _btnNextMonth.Margin = new Padding(HorizontalNavigationSpacing, 0, 0, 0);
+
+            bool showPrev = HorizontalNavigationVisible && HorizontalNavigationPlacement != HorizontalNavPlacement.RightOnly;
+            bool showNext = HorizontalNavigationVisible && HorizontalNavigationPlacement != HorizontalNavPlacement.LeftOnly;
+
+            _btnPrevMonth.Visible = showPrev;
+            _btnNextMonth.Visible = showNext;
+
+            switch (HorizontalNavigationPlacement)
+            {
+                case HorizontalNavPlacement.AtEdges:
+                    // возвращаем поведение Dock (стрелки по краям, текст в центре)
+                    _horizontalHeader.Controls.Remove(_headerFlow);
+
+                    _btnPrevMonth.Dock = DockStyle.Left;
+                    _btnNextMonth.Dock = DockStyle.Right;
+                    _lblMonthYear.Dock = DockStyle.Fill;
+                    _lblMonthYear.AutoSizeMode = LabelAutoSizeMode.None;
+
+                    // очистим и добавим в header в правильном порядке
+                    _horizontalHeader.Controls.Clear();
+                    _horizontalHeader.Controls.Add(_lblMonthYear);
+                    _horizontalHeader.Controls.Add(_btnNextMonth);
+                    _horizontalHeader.Controls.Add(_btnPrevMonth);
+                    break;
+
+                default:
+                    // NearTitle / LeftOnly / RightOnly — делаем центр-группу через FlowLayout
+                    if (!_horizontalHeader.Controls.Contains(_headerFlow))
+                    {
+                        _horizontalHeader.Controls.Clear();
+                        _horizontalHeader.Controls.Add(_headerFlow);
+                    }
+
+                    _btnPrevMonth.Dock = DockStyle.None;
+                    _btnNextMonth.Dock = DockStyle.None;
+                    _lblMonthYear.Dock = DockStyle.None;
+                    _lblMonthYear.AutoSizeMode = LabelAutoSizeMode.Default;
+
+                    if (showPrev) _headerFlow.Controls.Add(_btnPrevMonth);
+                    _headerFlow.Controls.Add(_lblMonthYear);
+                    if (showNext) _headerFlow.Controls.Add(_btnNextMonth);
+                    break;
+            }
+
+            _headerFlow.ResumeLayout(true);
+            CenterHeaderFlow();
+        }
+
+        #endregion
+        #region Horizontal days - Stretch cells
+
+        [DefaultValue(true)]
+        public bool HorizontalStretchDaysToWidth { get; set; } = true;
+
+        /// <summary>
+        /// Минимальная ширина кнопки дня (чтобы при узком контроле всё не разваливалось).
+        /// </summary>
+        [DefaultValue(28)]
+        public int HorizontalDayMinWidth { get; set; } = 28;
+
+        /// <summary>
+        /// Внутренний отступ между кнопками (в пикселях), используется при перерасчёте.
+        /// </summary>
+        [DefaultValue(2)]
+        public int HorizontalDaySpacing { get; set; } = 2;
+
+        private int _lastDaysInMonth = 0;
+
+        private void StretchDayButtonsToWidth()
+        {
+            if (!HorizontalStretchDaysToWidth) return;
+            if (_daysFlow == null) return;
+            if (_daysFlow.Controls.Count == 0) return;
+
+            // число дней (кнопок)
+            int count = _daysFlow.Controls.Count;
+
+            // доступная ширина: client - padding
+            int paddingLeft = _daysFlow.Padding.Left;
+            int paddingRight = _daysFlow.Padding.Right;
+
+            int available = _daysFlow.ClientSize.Width - paddingLeft - paddingRight;
+            if (available <= 0) return;
+
+            // Между кнопками есть Margin + мы ещё учитываем HorizontalDaySpacing
+            // В твоём коде Margin = new Padding(2) у каждой кнопки
+            int perButtonMargins = 4; // left+right (2+2)
+            int totalMargins = count * perButtonMargins;
+
+            // Доп. spacing между кнопками (если хочешь тонко регулировать)
+            int totalSpacing = (count - 1) * HorizontalDaySpacing;
+
+            int widthForButtons = available - totalMargins - totalSpacing;
+            if (widthForButtons <= 0) return;
+
+            int w = widthForButtons / count;
+
+            // если слишком мало места — оставляем минимальную ширину, и пусть останется скролл
+            if (w < HorizontalDayMinWidth) return;
+
+            // остаток распределим по первым кнопкам, чтобы заполнить до конца без хвоста
+            int remainder = widthForButtons - w * count;
+
+            _daysFlow.SuspendLayout();
+
+            int i = 0;
+            foreach (Control c in _daysFlow.Controls)
+            {
+                if (c is not SimpleButton b) continue;
+
+                int add = (i < remainder) ? 1 : 0;
+                b.Width = w + add;
+
+                // фиксируем интервал через Margin (оставляем как у тебя) + spacing
+                // spacing добавим через правый margin
+                var m = b.Margin;
+                b.Margin = new Padding(m.Left, m.Top, 2 + HorizontalDaySpacing, m.Bottom);
+
+                i++;
+            }
+
+            _daysFlow.ResumeLayout(true);
+        }
+        #endregion
+        #region Horizontal header title appearance
+
+        [Category("Горизонтальный режим – Заголовок")]
+        [DisplayName("Размер шрифта")]
+        [Description("Размер шрифта надписи месяца и года.")]
+        [DefaultValue(12f)]
+        public float HorizontalTitleFontSize { get; set; } = 12f;
+
+        /// <summary>Смещение текста вниз (px). Положительное значение опускает надпись.</summary>
+
+        [Category("Горизонтальный режим – Заголовок")]
+        [DisplayName("Смещение текста вниз")]
+        [Description("Вертикальное смещение надписи месяца и года вниз (в пикселях).")]
+        [DefaultValue(2)]
+        public int HorizontalTitleOffsetY { get; set; } = 2;
+
+        /// <summary>Цвет надписи месяца/года. Empty => ForeColor.</summary>
+        public Color HorizontalTitleForeColor { get; set; } = Color.Empty;
 
         #endregion
         private void ApplyCustomSettings()
         {
-            // bottom
+            // =========================
+            // Bottom panel
+            // =========================
             BottomPanelVisible = CustomSettings.BottomPanelVisible;
             BottomPanelHeight = CustomSettings.BottomPanelHeight;
             BottomPanelResizable = CustomSettings.BottomPanelResizable;
 
-            // theme/colors
+            // =========================
+            // Theme / base colors
+            // =========================
             UseThemeByDefault = CustomSettings.UseThemeByDefault;
+
             NormalDayBackColor = CustomSettings.NormalDayBackColor;
             OffDayBackColor = CustomSettings.OffDayBackColor;
             OffDayForeColor = CustomSettings.OffDayForeColor;
             SpecialBackColor = CustomSettings.SpecialBackColor;
             SpecialForeColor = CustomSettings.SpecialForeColor;
 
-            // zoom
+            // =========================
+            // Selected day colors
+            // =========================
+            SelectedDayBackColor = CustomSettings.SelectedDayBackColor;
+            SelectedDayForeColor = CustomSettings.SelectedDayForeColor;
+
+            // =========================
+            // Zoom
+            // =========================
             EnableZoomByCtrlWheel = CustomSettings.EnableZoomByCtrlWheel;
             ZoomLevel = CustomSettings.ZoomLevel;
 
-            // schedule
+            // =========================
+            // Schedule (weekends / cycles)
+            // =========================
             WeekendMode = CustomSettings.WeekendMode;
             WorkDaysInCycle = CustomSettings.WorkDaysInCycle;
             OffDaysInCycle = CustomSettings.OffDaysInCycle;
             CycleStartDate = CustomSettings.CycleStartDate;
 
-            // layout
+            // =========================
+            // Horizontal layout / compact
+            // =========================
             AutoCompactInLayoutControl = CustomSettings.AutoCompactInLayoutControl;
             HorizontalCompactHeight = CustomSettings.HorizontalCompactHeight;
-            HorizontalHeaderVisible = CustomSettings.HorizontalHeaderVisible;
-            HorizontalNavigationVisible = CustomSettings.HorizontalNavigationVisible;
-            HorizontalShowMonth = CustomSettings.HorizontalShowMonth;
-            HorizontalShowYear = CustomSettings.HorizontalShowYear;
-            HorizontalHeaderHeight = CustomSettings.HorizontalHeaderHeight;
             HorizontalRowHeight = CustomSettings.HorizontalRowHeight;
 
-            LayoutMode = CustomSettings.LayoutMode; // ставим в конце (перестроит UI)
+            HorizontalStretchDaysToWidth = CustomSettings.HorizontalStretchDaysToWidth;
+            HorizontalDayMinWidth = CustomSettings.HorizontalDayMinWidth;
+            HorizontalDaySpacing = CustomSettings.HorizontalDaySpacing;
 
+            // =========================
+            // Horizontal header (month / year)
+            // =========================
+            HorizontalHeaderVisible = CustomSettings.HorizontalHeaderVisible;
+            HorizontalHeaderHeight = CustomSettings.HorizontalHeaderHeight;
+
+            HorizontalShowMonth = CustomSettings.HorizontalShowMonth;
+            HorizontalShowYear = CustomSettings.HorizontalShowYear;
+
+            HorizontalTitleFontSize = CustomSettings.HorizontalTitleFontSize;
+            HorizontalTitleOffsetY = CustomSettings.HorizontalTitleOffsetY;
+            HorizontalTitleForeColor = CustomSettings.HorizontalTitleForeColor;
+
+            // =========================
+            // Horizontal navigation (arrows)
+            // =========================
+            HorizontalNavigationVisible = CustomSettings.HorizontalNavigationVisible;
+            HorizontalNavigationPlacement = CustomSettings.HorizontalNavigationPlacement;
+            HorizontalNavigationSpacing = CustomSettings.HorizontalNavigationSpacing;
+            HorizontalNavigationButtonWidth = CustomSettings.HorizontalNavigationButtonWidth;
+
+            // =========================
+            // Layout mode — ВСЕГДА В КОНЦЕ
+            // =========================
+            LayoutMode = CustomSettings.LayoutMode;
+
+            // =========================
+            // Финал
+            // =========================
             Invalidate();
         }
 

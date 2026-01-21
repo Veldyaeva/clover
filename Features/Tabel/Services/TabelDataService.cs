@@ -94,7 +94,7 @@ namespace SewingProduction.Features.Tabel.Services
                     }
                     if (idGroup == 20)
                     {
-                        string query = $"select gr, naimen from zlgr where gr in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) order by gr";
+                        string query = $"select gr AS tnid, naimen from zlgr where gr in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) order by gr";
 
                         var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
                         return result.ToList();
