@@ -300,6 +300,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int olKodPodr { get; set; }
         [NotMapped] public int olKodProizv { get; set; }
         [NotMapped] public int olPzvKwsID { get; set; }
+        [NotMapped] public int olIdVyazClass { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

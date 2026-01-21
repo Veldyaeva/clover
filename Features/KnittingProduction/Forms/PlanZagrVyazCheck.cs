@@ -156,6 +156,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridViewPzvCheck.CustomSummaryCalculate += bandedGridViewPzvCheck_CustomSummaryCalculate;
 
                 _gridHelper.AutoRowFilterConfig(bandedGridViewPzvCheck as GridView, 1);
+
+                //bandedGridViewPzvCheck.GroupFormat = "{1}: [#image]{2}"; // Показывает: <Caption>: <value>
+
+                //bandedGridViewPzvCheck.CustomDrawGroupRow += (s, e) =>
+                //{
+                //    GridView view = s as GridView;
+                //    int rowHandle = e.RowHandle;
+
+                //    int level = view.GetRowLevel(rowHandle);
+
+                //    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
+                //    if (level == 1)
+                //    {
+                //        string _olKmlNumber = Convert.ToString(view.GetGroupRowValue(e.RowHandle, view.Columns["olKmlNumber"]));
+                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["olNom"])}, в/м - {view.GetGroupRowValue(e.RowHandle, view.Columns["olKmlNumber"])}";
+                //    }
+                //};
+
                 #endregion
             }
             catch (Exception ex)
@@ -1122,38 +1140,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
         private void bandedGridViewPzvCheck_CustomSummaryCalculate(object sender, CustomSummaryEventArgs e)
         {
-            //if (e.SummaryProcess != CustomSummaryProcess.Finalize)
-            //    return;
-
-            //if (e.Item is GridColumnSummaryItem item &&
-            //    item.FieldName == "procentOf" &&
-            //    item.SummaryType == SummaryItemType.Custom)
-            //{
-            //    decimal tabSum = GetSummaryDecimal(bandedGridViewPzvCheck, "tabChasiOf");
-            //    decimal pztSum = GetSummaryDecimal(bandedGridViewPzvCheck, "pztChasiOf");
-
-            //    e.TotalValue = (pztSum == 0m) ? 0m : (pztSum / tabSum * 100m);
-            //}
-            //-----------------------
-            //if (e.Item is not GridColumnSummaryItem item)
-            //    return;
-
-            //if (e.SummaryProcess == CustomSummaryProcess.Start)
-            //{
-            //    e.TotalValue = 0m;
-            //    return;
-            //}
-
-            //if (e.SummaryProcess == CustomSummaryProcess.Calculate)
-            //{
-            //    if (e.FieldValue == null)
-            //        return;
-
-            //    decimal value = ExtractDecimal(e.FieldValue);
-            //    e.TotalValue = (decimal)e.TotalValue + value;
-            //    return;
-            //}
-            //----------------------
             if (e.Item is not GridColumnSummaryItem item)
                 return;
 
@@ -1192,47 +1178,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     break;
             }
         }
-        #region OLD RemoveDayColumns
-        //private void RemoveDayColumns(GridView _gridView)
-        //{
-        //    try
-        //    {
-        //        _gridView.BeginUpdate();
-
-        //        if (_gridView == null) return;
-
-        //        for (int i = _gridView.Columns.Count - 1; i >= 0; i--)
-        //        {
-        //            GridColumn col = _gridView.Columns[i];
-        //            string fieldName = col.FieldName;
-
-        //            if (string.IsNullOrEmpty(fieldName))
-        //                continue;
-
-        //            // Дневные колонки pzvTab01..pzvTab31
-        //            if (fieldName.StartsWith("pzvTab") || fieldName.StartsWith("grd"))
-        //            {
-        //                _gridView.Columns.RemoveAt(i);
-        //                continue;
-        //            }
-
-        //            // Итоговые колонки
-        //            if (fieldName == "tabChasiOf"
-        //                || fieldName == "pztChasiOf"
-        //                || fieldName == "procentOf")
-        //            {
-        //                _gridView.Columns.RemoveAt(i);
-        //            }
-        //        }
-
-        //        _gridView.EndUpdate();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Ошибка RemoveDayColumns: {ex.Message}");
-        //    }
-        //}
-        #endregion
         private void RemoveDayColumns(BandedGridView view)
         {
             try

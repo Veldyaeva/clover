@@ -29,6 +29,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
 using static SewingProduction.Helpers.GridHelper;
 
@@ -38,6 +39,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
     public partial class PlanZagrVyaz : CustomForm, IThemeable
     {
         int vyazPodrKod = 0;
+
+        private readonly DebouncedLoader _loader = new(delayMs: 300);
 
         private CancellationTokenSource? _loadCts;
 
@@ -117,12 +120,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //private BindingList<SmenZadanyVyazEmp> _smenZadanyVyazEmpBindingList;
         //private BindingSource _smenZadanyVyazEmpBindingSource;
 
-        private List<SmenZadanyVyaz> smenZadanyVyazData = new List<SmenZadanyVyaz>();
-        private BindingList<SmenZadanyVyaz> _smenZadanyVyazBindingList;
+        //private List<SmenZadanyVyaz> smenZadanyVyazData = new List<SmenZadanyVyaz>();
+        //private BindingList<SmenZadanyVyaz> _smenZadanyVyazBindingList;
         private BindingSource _smenZadanyVyazBindingSource;
 
-        private List<SmenZadanyVyaz> smenZadanyVyazNewData = new List<SmenZadanyVyaz>();
-        private BindingList<SmenZadanyVyaz> _smenZadanyVyazNewBindingList;
+        //private List<SmenZadanyVyaz> smenZadanyVyazNewData = new List<SmenZadanyVyaz>();
+        //private BindingList<SmenZadanyVyaz> _smenZadanyVyazNewBindingList;
         private BindingSource _smenZadanyVyazNewBindingSource;
 
         private List<KnitWorkingShiftSmen> KnitWorkingShiftSmenData = new List<KnitWorkingShiftSmen>();
@@ -205,16 +208,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    _smenZadanyVyazMachineBindingList = new BindingList<SmenZadanyVyazMachine>();
                 //    _smenZadanyVyazMachineBindingSource = new BindingSource { DataSource = _smenZadanyVyazMachineBindingList };
                 //});
-                var smenZadanyVyazTask = Task.Run(() =>
-                {
-                    _smenZadanyVyazBindingList = new BindingList<SmenZadanyVyaz>();
-                    _smenZadanyVyazBindingSource = new BindingSource { DataSource = _smenZadanyVyazBindingList };
-                });
-                var smenZadanyVyazNewTask = Task.Run(() =>
-                {
-                    _smenZadanyVyazNewBindingList = new BindingList<SmenZadanyVyaz>();
-                    _smenZadanyVyazNewBindingSource = new BindingSource { DataSource = _smenZadanyVyazNewBindingList };
-                });
+                //var smenZadanyVyazTask = Task.Run(() =>
+                //{
+                //    _smenZadanyVyazBindingList = new BindingList<SmenZadanyVyaz>();
+                //    _smenZadanyVyazBindingSource = new BindingSource { DataSource = _smenZadanyVyazBindingList };
+                //});
+                //var smenZadanyVyazNewTask = Task.Run(() =>
+                //{
+                //    _smenZadanyVyazNewBindingList = new BindingList<SmenZadanyVyaz>();
+                //    _smenZadanyVyazNewBindingSource = new BindingSource { DataSource = _smenZadanyVyazNewBindingList };
+                //});
                 var artNormNTask = Task.Run(() =>
                 {
                     _artNormNBindingList = new BindingList<ArtNormN>();
@@ -239,10 +242,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         , rzvPachListByNomTask, rzvPachListByNomNewTask
                         , pZVOperListByPachListTask, pZVOperListByPachListNewTask
                         //, smenZadanyVyazEmpTask, smenZadanyVyazMachineTask
-                        , smenZadanyVyazTask, smenZadanyVyazNewTask
+                        //, smenZadanyVyazTask
+                        //, smenZadanyVyazNewTask
                         , artNormNTask, normRaszTask
                         , mlOpTask
                         , knitWorkingShiftTask);
+
+                _smenZadanyVyazBindingSource = new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>()
+                };
+                _smenZadanyVyazNewBindingSource = new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>()
+                };
 
                 #region описание gridControlPlanTotalHoursByKnitMachine "общие часы по вяз машинам/зонам"
                 gridControlPlanTotalHoursByKnitMachine.DataSource = _planTotalHoursByKnitMachineBindingSource;
@@ -1401,69 +1414,164 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SmenZadanyVyazEmp");
         //    }
         //}
+        private Task SetStatusAsync(string text)
+           => this.UI(() => labelStatus.Text = text);
+
+        private Task SetLoadingAsync(bool isLoading)
+            => this.UI(() =>
+            {
+                labelStatus.Text = isLoading ? "Загрузка…" : "Готово";
+                Cursor = isLoading ? Cursors.WaitCursor : Cursors.Default;
+            });
+
         private async Task LoadSmenZadanyVyazDataAsync()
         {
-            try
-            {
-                _smenZadanyVyazBindingSource.Clear();
-                _smenZadanyVyazBindingSource.ResetBindings(false);
+            //try
+            //{
+            //    _smenZadanyVyazBindingSource.Clear();
+            //    _smenZadanyVyazBindingSource.ResetBindings(false);
 
-                int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
-                int _xKodProizv = 1; // код производства 1 - вязальное производство
-                int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
-                smenZadanyVyazData = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr);
+            //    int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
+            //    int _xKodProizv = 1; // код производства 1 - вязальное производство
+            //    int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
+            //    smenZadanyVyazData = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr);
 
-                if (smenZadanyVyazData != null)
+            //    if (smenZadanyVyazData != null)
+            //    {
+            //        await _logger.LogEventAsync($"Получены данные SmenZadanyVyaz", "LoadSmenZadanyVyazDataAsync");
+            //        await this.InvokeAsync(() =>
+            //        {
+            //            _smenZadanyVyazBindingSource.DataSource = smenZadanyVyazData;
+            //        });
+            //        Application.Idle -= ExpandGroupsOnIdle;
+            //        Application.Idle += ExpandGroupsOnIdle;
+            //        await _logger.LogEventAsync($"Данные SmenZadanyVyaz успешно загружены", "LoadSmenZadanyVyazDataAsync");
+            //        //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
+            //        _smenZadanyVyazBindingList.Add(smenZadanyVyazData[0]);
+            //        _smenZadanyVyazBindingSource.ResetBindings(false);
+            //    }
+            //    else
+            //    {
+            //        await _logger.LogEventAsync($"Не удалось найти данные SmenZadanyVyaz", "LoadSmenZadanyVyazDataAsync");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SmenZadanyVyaz");
+            //}
+
+            await _loader.RunAsync(
+                async token =>
                 {
-                    await _logger.LogEventAsync($"Получены данные SmenZadanyVyaz", "LoadSmenZadanyVyazDataAsync");
-                    await this.InvokeAsync(() =>
+                    try
                     {
-                        _smenZadanyVyazBindingSource.DataSource = smenZadanyVyazData;
-                    });
-                    Application.Idle -= ExpandGroupsOnIdle;
-                    Application.Idle += ExpandGroupsOnIdle;
-                    await _logger.LogEventAsync($"Данные SmenZadanyVyaz успешно загружены", "LoadSmenZadanyVyazDataAsync");
-                    //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
-                    _smenZadanyVyazBindingList.Add(smenZadanyVyazData[0]);
-                    _smenZadanyVyazBindingSource.ResetBindings(false);
-                }
-                else
+                        gridViewSmenZadany.ShowLoadingPanel();
+
+                        await SetLoadingAsync(true);
+                        int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
+                        int _xKodProizv = 1; // код производства 1 - вязальное производство
+                        int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
+                        var bs = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr, token);
+
+                        await this.UI(() =>
+                        {
+                            gridControlSmenZadany.BeginUpdate();
+                            _smenZadanyVyazBindingSource.DataSource = bs.DataSource;
+                            gridControlSmenZadany.EndUpdate();
+                        });
+
+                        await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка LoadSmenZadanyVyazDataAsync: {ex.Message}");
+                    }
+                },
+                onError: async ex =>
                 {
-                    await _logger.LogEventAsync($"Не удалось найти данные SmenZadanyVyaz", "LoadSmenZadanyVyazDataAsync");
+                    await _logger.LogErrorAsync(ex, "Ошибка загрузки LoadSmenZadanyVyazDataAsync");
+                    await SetStatusAsync("Ошибка загрузки");
+                    await SetLoadingAsync(false);
+                },
+                onCanceled: async byLifetime =>
+                {
+                    if (!byLifetime)
+                        await SetStatusAsync("Отменено");
+
+                    await SetLoadingAsync(false);
                 }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SmenZadanyVyaz");
-            }
+            );
+            await SetLoadingAsync(false);
         }
-        //private async Task LoadNaryadZadanyVyazDataAsync(int tab, int kmlID)
-        //{
-        //    try
-        //    {
-        //        var bs = await _vyazService.GetNaryadZadanyVyaz(tab, kmlID);
-        //        if (bs.Count == 0)
-        //        {
-        //            await _logger.LogEventAsync("Данные NaryadZadanyVyaz не найдены", nameof(LoadNaryadZadanyVyazDataAsync));
-        //            //return;
-        //        }
+        private async Task LoadSmenZadanyVyazNewDataAsync(int _xKodProizv)
+        {
+            await _loader.RunAsync(
+                async token =>
+                {
+                    try
+                    {
+                        gridViewSmenZadany.ShowLoadingPanel();
 
-        //        await this.InvokeAsync(() =>
-        //        {
-        //            _naryadZadanyVyazBindingSource.DataSource = bs.DataSource; // или целиком заменить ссылку на bs, см. ниже
-        //            _naryadZadanyVyazBindingSource.ResetBindings(false);
-        //        });
+                        await SetLoadingAsync(true);
+                        int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
+                        //int _xKodProizv = 1; // код производства 1 - вязальное производство
+                        int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
+                        var bs = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr, token);
 
-        //        //Application.Idle -= ExpandGroupsOnIdle;
-        //        //Application.Idle += ExpandGroupsOnIdle;
+                        await this.UI(() =>
+                        {
+                            gridControlSmenZadany.BeginUpdate();
+                            _smenZadanyVyazNewBindingSource.DataSource = bs.DataSource;
+                            //----------------------
+                            var changes = BindingSourceHelper.GetChanges<SmenZadanyVyaz>(
+                                _smenZadanyVyazBindingSource,
+                                _smenZadanyVyazNewBindingSource,
+                                HashMode.ExcludeOnly,
+                                keyProperties: new[] { "kwsKmaID", "kwsmlKmlID" },
+                                hashProperties: new[] { "IsNew", "IsModified", "IsDeleted" }
+                            );
 
-        //        await _logger.LogEventAsync("Данные NaryadZadanyVyaz успешно загружены", nameof(LoadNaryadZadanyVyazDataAsync));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, "Ошибка загрузки данных NaryadZadanyVyaz");
-        //    }
-        //}
+                            BindingSourceHelper.ApplyChanges<SmenZadanyVyaz>(
+                                _smenZadanyVyazBindingSource,
+                                changes,
+                                UpdateFieldsMode.ExcludeOnly,
+                                keyProperties: new[] { "kwsKmaID", "kwsmlKmlID" },
+                                gridViewPZVOperList,
+                                fields: new[] { "IsNew", "IsModified", "IsDeleted" }
+                            );
+
+                            BindingSourceHelper.RemoveMissingSmart<SmenZadanyVyaz>(
+                                _smenZadanyVyazBindingSource,
+                                changes.Removed,
+                                gridControlSmenZadany
+                            );
+                            //----------------------
+                            gridControlSmenZadany.EndUpdate();
+                        });
+
+                        await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка LoadSmenZadanyVyazDataAsync: {ex.Message}");
+                    }
+                },
+                onError: async ex =>
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка загрузки LoadSmenZadanyVyazDataAsync");
+                    await SetStatusAsync("Ошибка загрузки");
+                    await SetLoadingAsync(false);
+                },
+                onCanceled: async byLifetime =>
+                {
+                    if (!byLifetime)
+                        await SetStatusAsync("Отменено");
+
+                    await SetLoadingAsync(false);
+                }
+            );
+            await SetLoadingAsync(false);
+        }
         private async Task LoadNaryadZadanyVyazDataAsync(int tab, int kmlID)
         {
             // 1️ отменяем предыдущий запрос
@@ -1558,43 +1666,43 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //        _logger.LogErrorAsync(ex, $"Ошибка загрузки данных LoadSmenZadanyVyazNewDataSync");
         //    }
         //}
-        private async Task LoadSmenZadanyVyazNewDataAsync(int _xKodProizv)
-        {
-            try
-            {
-                _smenZadanyVyazNewBindingSource.Clear();
-                _smenZadanyVyazNewBindingSource.ResetBindings(false);
+        //private async Task LoadSmenZadanyVyazNewDataAsync(int _xKodProizv)
+        //{
+        //    try
+        //    {
+        //        _smenZadanyVyazNewBindingSource.Clear();
+        //        _smenZadanyVyazNewBindingSource.ResetBindings(false);
 
-                int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
-                //_xKodProizv = 1; // код производства 1 - вязальное производство
-                int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
-                smenZadanyVyazNewData = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr);
+        //        int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
+        //        //_xKodProizv = 1; // код производства 1 - вязальное производство
+        //        int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
+        //        smenZadanyVyazNewData = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr);
 
-                if (smenZadanyVyazNewData != null)
-                {
-                    await _logger.LogEventAsync($"Получены данные SmenZadanyVyazNew", "LoadSmenZadanyVyazNewDataAsync");
+        //        if (smenZadanyVyazNewData != null)
+        //        {
+        //            await _logger.LogEventAsync($"Получены данные SmenZadanyVyazNew", "LoadSmenZadanyVyazNewDataAsync");
 
-                    await this.InvokeAsync(() =>
-                    {
-                        _smenZadanyVyazNewBindingSource.DataSource = smenZadanyVyazNewData;
-                    });
+        //            await this.InvokeAsync(() =>
+        //            {
+        //                _smenZadanyVyazNewBindingSource.DataSource = smenZadanyVyazNewData;
+        //            });
 
-                    await _logger.LogEventAsync($"Данные SmenZadanyVyazNew успешно загружены", "LoadSmenZadanyVyazNewDataAsync");
-                    //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
-                    _smenZadanyVyazNewBindingList.Add(smenZadanyVyazNewData[0]);
-                    _smenZadanyVyazNewBindingSource.ResetBindings(false);
-                    //advBandedGridViewSmenZadany.ExpandAllGroups();
-                }
-                else
-                {
-                    await _logger.LogEventAsync($"Не удалось найти данные SmenZadanyVyazNew", "LoadSmenZadanyVyazNewDataAsync");
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SmenZadanyVyaz");
-            }
-        }
+        //            await _logger.LogEventAsync($"Данные SmenZadanyVyazNew успешно загружены", "LoadSmenZadanyVyazNewDataAsync");
+        //            //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
+        //            _smenZadanyVyazNewBindingList.Add(smenZadanyVyazNewData[0]);
+        //            _smenZadanyVyazNewBindingSource.ResetBindings(false);
+        //            //advBandedGridViewSmenZadany.ExpandAllGroups();
+        //        }
+        //        else
+        //        {
+        //            await _logger.LogEventAsync($"Не удалось найти данные SmenZadanyVyazNew", "LoadSmenZadanyVyazNewDataAsync");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SmenZadanyVyaz");
+        //    }
+        //}
         private async Task LoadArtNormNDataAsync(int _annID)
         {
             try
@@ -2910,6 +3018,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                if (curr == null || curr.kwsmlKmlID == null || curr.kwsmlKmlID == 0)
+                {
+                    MessageBox.Show("Не выбрана машина для назначения");
+                    return;
+                }
                 var checkList = _pZVOperListByPachListBindingSource.List
                     .OfType<PZVOperList>()
                     .Where(x => x.SyncSelection == 1)
@@ -2922,6 +3036,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         {
                             MessageBox.Show("Операция не относится к вязальному подразделению, нельзя изменять В/М!");
                             return;
+                        }
+                        int _kmlID = _dbHelper.ExecuteScalar($"SELECT pszkmKmlID " +
+                            $"FROM plan_sezon_zad_knitMachine pszm " +
+                            $"WHERE pszm.pszkmPszNom = '{record.olNomZad}' and pszkmKnitClass = {record.olIdVyazClass}");
+                        if (_kmlID != curr.kwsmlKmlID && record.olPzvKmlID == 0)
+                        {
+                            var _result = MessageBox.Show(
+                                "Внимание! Назначаемая машина не совпадает с плановой. Продолжить?", 
+                                "", 
+                                MessageBoxButtons.YesNo, 
+                                MessageBoxIcon.Warning);
+                            if (_result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         //if (record.olPzvTab != 0)
                         //{
@@ -2969,12 +3098,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     .Select(x => x.olPzvID)   // новый маппер
                     .ToList();
                 //SmenZadanyVyazMachine curr = _smenZadanyVyazMachineBindingSource.Current as SmenZadanyVyazMachine;
-                SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
-                if (curr == null || curr.kwsmlKmlID == null || curr.kwsmlKmlID == 0)
-                {
-                    MessageBox.Show("Не выбрана машина для назначения");
-                    return;
-                }
+                //SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                //if (curr == null || curr.kwsmlKmlID == null || curr.kwsmlKmlID == 0)
+                //{
+                //    MessageBox.Show("Не выбрана машина для назначения");
+                //    return;
+                //}
                 SetKnitMachineToPzvID(filteredList, curr.kwsmlKmlID);
                 //GoToPzvID(pzvCurrent.olPzvID, _xColumn);
 
@@ -2993,6 +3122,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         }
                     }
                 }
+
+                LoadSmenZadanyVyazNewDataAsync(1);
             }
             catch (Exception ex)
             {
