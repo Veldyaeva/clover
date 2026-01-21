@@ -226,7 +226,7 @@ where kwsmlKmlID in @ids
                 {
                     // - При открытии смены "назначено" в БД может не быть заполнено.
                     //   При этом pzvKol/pzvNChasi содержат ПЛАН (до начала работы), а факт в UI должен быть 0.
-                    // - После начала/завершения работы pzvKol/pzvNChasi становятся ФАКТОМ, а план (если был) лежит в pzvKolNazn/pzvChasNazn.
+                    // - После начала/завершения работы pzvKol/pzvNChasi становятся ФАКТОМ, а план лежит в pzvKolNazn/pzvChasNazn.
                     // - Обнулять нужно ТОЛЬКО UI-поля, базовые колонки в модели не трогаем.
 
                     var planKolFromFact = (r.pzvKol ?? 0);
@@ -237,13 +237,12 @@ where kwsmlKmlID in @ids
 
                     // "Начата" = есть дата начала (на некоторых потоках может проставляться только при старте).
                     // Если начато — показываем факт из pzvKol/pzvNChasi.
-                    // Если НЕ начато — факт в UI = 0, а план в UI берём из pzvKol/pzvNChasi (как ты попросила: "назн из факт, факт не обнулять").
+                    // Если НЕ начато — факт в UI = 0, а план в UI берём из pzvKol/pzvNChasi 
                     bool started = r.pzvDateStart != null;
 
                     if (!started)
                     {
-                        // План до старта берём из "фактовых" полей (по бизнес-логике они содержат план),
-                        // чтобы при открытии смены всё отображалось корректно.
+                        // План до старта берём из "фактовых" полей
                         r.PlanKol_UI = planKolFromFact;
                         r.PlanChas_UI = planChasFromFact;
                         r.FactKol_UI = 0;
@@ -350,8 +349,6 @@ ORDER BY fio";
      pzvKolNazn = ISNULL(pzvKol, 0),
      pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
      pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2))
-     --,pzvKol = 0
-     --,pzvNChasi = 0
  WHERE pzvID IN @ids";
     // -- после назначения плановое поле НЕ обнуляем, чтобы \"кол-во к выполнению\" НЕ стало 0 - не надо их занулять!!!
 
@@ -663,7 +660,7 @@ ORDER BY kwsDateStart DESC";
 				var ids = pzvIds.Distinct().ToArray();
 				if (ids.Length == 0)
 					return;
-				using (var connection = _dbHelper.GetConnection())
+				using (var connection = _dbHelper.GetConnection())//, pzvKolNazn = pzvKol, pzvSekNazn = pzvSek, pzvChasNazn = pzvNChasi 
 				{
 					const string sql = @"UPDATE dbo.planZagrVyaz
 SET pzvKwsID = @kwsId
@@ -676,6 +673,48 @@ WHERE pzvID IN @ids";
 				throw new Exception($"UpdatePzvKwsIdAsync failed (kwsId={kwsId})", ex);
 			}
 		}
+
+        //public Task AdjustNotStartedBeforeShiftEndAsync(int? kwsId, 12m)
+        //{
+        //    try
+        //    {
+        //        using (var connection = _dbHelper.GetConnection())
+        //        {
+        //            return connection.ExecuteAsync(
+        //        "dbo.PZV_UnassignNotStartedByShift",
+        //        new { KwsId = kwsId },
+        //        commandType: CommandType.StoredProcedure);
+        //        }
+        //    }
+        //    catch (Exception ex) {
+        //        throw new Exception($"UnassignNoStartedOps failed (kwsId={kwsId})", ex);
+        //    }
+        //}
+        public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? kwsId, decimal minHours)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())//, pzvKolNazn = pzvKol, pzvSekNazn = pzvSek, pzvChasNazn = pzvNChasi 
+                {
+
+                    return connection.QueryAsync<MachineHoursStat>(
+                "dbo.PZV_AdjustNotStartedBeforeShiftEnd",
+                new { KwsId = kwsId, MinHours = minHours },
+                commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception ex) { throw new Exception($"UnassignNoStartedOps failed (kwsId={kwsId})", ex); }
+        }
+
+
+        public sealed class MachineHoursStat
+        {
+            public int pzvKmlID { get; set; }
+            public decimal FactHours { get; set; }
+            public decimal KeptAssignedHours { get; set; }
+            public decimal TotalForCheck { get; set; }
+            public int StillLessThanMin { get; set; }
+        }
 
     }
 }

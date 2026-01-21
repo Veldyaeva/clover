@@ -407,8 +407,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
                 if (_isShiftRunning)
                 {
-                    // Перед завершением смены: обработать все операции
-                    await ProcessOperationsOnShiftEndAsync();
+                    // Перед завершением смены: обработать все операции; если есть незавершённые — не закрываем.
+                    var canClose = await ProcessOperationsOnShiftEndAsync();
+                    if (!canClose)
+                        return;
+                    //// снимаем назначение у всех НЕ начатых в текущей смене
+                    //await _orchestrator.UnassignNotStartedByShiftAsync(_currentShiftId);
+
+
+                    //WarnIfMachineFactHoursLessThan12(_currentShiftId);
+                    var stat = (await _orchestrator.AdjustNotStartedBeforeShiftEndAsync(_currentShiftId, 12m)).ToList();
+
+                    //var bad = stat.Where(x => x.StillLessThanMin == 1).ToList();
+                    //if (bad.Count > 0)
+                    //{
+                    //    var msg =
+                    //        "По некоторым станкам даже с добором неначатых не набирается 12 часов:\n\n" +
+                    //        string.Join("\n", bad.Select(x => $"• kmlID={x.pzvKmlID}: факт {x.FactHours:0.##} + добор {x.KeptAssignedHours:0.##} = {x.TotalForCheck:0.##}"));
+                    //    XtraMessageBox.Show(this, msg, "Проверка 12 часов", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //}
+
 
                     if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
                     {
@@ -698,32 +716,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// При завершении смены: для неначатых — split mode=2 с отриц. количеством; для начатых без конца — спросить факт и закрыть.
         /// </summary>
-        private async Task ProcessOperationsOnShiftEndAsync()
+        private async Task<bool> ProcessOperationsOnShiftEndAsync()
         {
             var rows = _planPresenter.AllRows?.Where(r => r != null && r.pzvID > 0).ToList() ?? new List<KnitterPZVModel>();
             if (!rows.Any())
-                return;
+                return true;
 
-            // Неначатые (нет даты старта и окончания) → split mode=2
-            var notStarted = rows.Where(r => r.pzvDateStart == null && r.pzvDateEnd == null).ToList();
-            foreach (var row in notStarted)
-            {
-                try
-                {
-                    await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
-                }
-                catch
-                {
-                    // Игнорируем сбой split одной операции, продолжаем остальные
-                }
-            }
 
             // Начатые, но не завершённые → спросить факт, закрыть, при необходимости split по факту
             var inProgress = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
             if (inProgress.Any())
             {
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                return false;
                 //foreach (var row in inProgress)
                 //{
                 //    int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
@@ -759,6 +764,58 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    }
                 //}
             }
+            // Неначатые (нет даты старта и окончания) → split mode=2
+            var notStarted = rows.Where(r => r.pzvDateStart == null && r.pzvDateEnd == null).ToList();
+            foreach (var row in notStarted)
+            {
+                try
+                { //если завершается в конце смены с фактом 0 - это случай 2 с отрицательной строкой
+                    await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
+                }
+                catch
+                {
+                    // Игнорируем сбой split одной операции, продолжаем остальные
+                }
+            }
+
+            return true;
+        }
+
+
+
+        private void WarnIfMachineFactHoursLessThan12(int? currentKwsId)
+        {
+            var rows = _planPresenter.AllRows?
+                .Where(r => (r.pzvKwsID ?? 0) == currentKwsId)
+                .Where(r => r.pzvKmlID > 0)
+                .ToList();
+
+            if (rows == null || rows.Count == 0)
+                return;
+
+            const decimal minHours = 12m;
+
+            var bad = rows
+                .GroupBy(r => new { KmlId = r.pzvKmlID!, r.kmlNumber })
+                .Select(g => new
+                {
+                    g.Key.KmlId,
+                    Machine = string.IsNullOrWhiteSpace(g.Key.kmlNumber) ? g.Key.KmlId.ToString() : g.Key.kmlNumber,
+                    Hours = g.Sum(x => x.FactChas_UI) 
+                })
+                .Where(x => x.Hours < minHours)
+                .OrderBy(x => x.Machine)
+                .ToList();
+
+            if (!bad.Any())
+                return;
+
+            var msg =
+                "Недобор фактических часов по машинам (< 12 ч):\n\n" +
+                string.Join("\n", bad.Select(x => $"Машина {x.Machine}: {x.Hours:0.##} ч"));
+
+            XtraMessageBox.Show(this, msg, "Проверка часов перед закрытием смены",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         // Получение выбранных строк теперь через _planPresenter.GetRowsForViewSelection(...)
@@ -1030,7 +1087,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Получим текущую строку для плейсхолдера (кол-во к выполнению)
             var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
             // Если плановое количество уже перенесено в назначенное (pzvKol обнулён), используем pzvKolNazn как "к выполнению"
-            int defaultQty = currentRow?.pzvKol ?? 0;
+            int defaultQty = currentRow?.pzvKolNazn ?? 0;
             if (defaultQty == 0 && currentRow != null && currentRow.pzvKolNazn > 0)
                 defaultQty = currentRow.pzvKolNazn;
 
@@ -1050,13 +1107,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (currentRow != null)
             {
                 currentRow.pzvKol = qty;
-                currentRow.FactKol_UI = defaultQty;
+                //currentRow.FactKol_UI = defaultQty; схерали дефалт квантити??? 
+                currentRow.FactKol_UI = qty; // вроде так
                 // Мгновенно пересчитываем часы факт для прогресса (секунды на изделие * факт / 3600)
                 decimal factHours = 0m;
                 if (currentRow.pzvSek > 0)
                 {
                     factHours = Math.Round((currentRow.pzvSek * qty) / 3600m, 2);
-                    currentRow.pzvNChasi = factHours;
+                    currentRow.pzvNChasi = factHours; 
                 }
                 var masterRow = _planPresenter.AllRows?.FirstOrDefault(r => r != null && r.pzvID == currentRow.pzvID);
                 if (masterRow != null)
@@ -1093,12 +1151,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 			if (currentRow?.pzvID > 0)
 			{ if (defaultQty > 0)
                 {
-                    if (qty == 0)
-                    {
-                        // создаём отрицательную строку mode = 2
-                        newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
-                    }
-                    else if (qty < defaultQty)
+                    //if (qty == 0)
+                    //{
+                    //    // создаём отрицательную строку mode = 2
+                    //    newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
+                    //}
+                    //else Если сама завершает с фактом 0 - это тот же случай 1 с введённым количеством 
+                    if (qty < defaultQty) 
                     {
                         // Факт меньше запланированного — mode = 1 c qtyFact
                         newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
@@ -1182,6 +1241,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var updated = await updateFunc(row.pzvID);
                 var newValue = getDate(updated) ?? getDate(row);
                 setDate(row, newValue);
+                // Также обновляем мастер-коллекцию, чтобы проверки при закрытии смены видели актуальные даты
+                var masterRow = _planPresenter?.AllRows?.FirstOrDefault(r => r != null && r.pzvID == row.pzvID);
+                if (masterRow != null)
+                {
+                    setDate(masterRow, newValue);
+                }
                 _view.PostEditor();
                 _view.SetRowCellValue(rowHandle, column, newValue);
                 _view.PostEditor();
