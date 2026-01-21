@@ -106,6 +106,9 @@ namespace SewingProduction.Core.Services
         /// </summary>
         public void SaveSettings(GridView gridView, string settingsKey = null)
         {
+            if (!SettingsManager.GetSaveGridSettings())
+                return;
+
             if (gridView == null) return;
 
             try
@@ -120,6 +123,10 @@ namespace SewingProduction.Core.Services
                         }
                     }
                 }
+
+                var formName = GetFormName(gridView) ?? "UnknownForm";
+                var dir = Path.Combine(UserFilePaths.GridSettings, formName);
+                Directory.CreateDirectory(dir);
 
                 var columnSettings = new List<GridColumnSetting>();
 
@@ -142,9 +149,7 @@ namespace SewingProduction.Core.Services
 
                 // Сохраняем в отдельный JSON файл
                 string fileName = $"{settingsKey}.json";
-                string filePath = Path.Combine(UserFilePaths.GridSettings, fileName);
-
-                UserFilePaths.EnsureFolderExists();
+                string filePath = Path.Combine(dir, fileName);
 
                 var json = JsonConvert.SerializeObject(columnSettings, Formatting.Indented);
                 File.WriteAllText(filePath, json);
@@ -162,6 +167,9 @@ namespace SewingProduction.Core.Services
         /// </summary>
         public void LoadSettings(GridView gridView, string settingsKey = null)
         {
+            if (!SettingsManager.GetSaveGridSettings())
+                return;
+
             if (gridView == null) return;
 
             try
@@ -177,11 +185,13 @@ namespace SewingProduction.Core.Services
                     }
                 }
 
+                var formName = GetFormName(gridView) ?? "UnknownForm";
+                var dir = Path.Combine(UserFilePaths.GridSettings, formName);
+                Directory.CreateDirectory(dir);
+
                 // Загружаем из отдельного JSON файла
                 string fileName = $"{settingsKey}.json";
-                string filePath = Path.Combine(UserFilePaths.GridSettings, fileName);
-
-                UserFilePaths.EnsureFolderExists();
+                string filePath = Path.Combine(dir, fileName);
 
                 if (!File.Exists(filePath))
                     return;
@@ -265,6 +275,12 @@ namespace SewingProduction.Core.Services
             }
 
             return $"{formName}_{gridName}";
+        }
+
+        private string GetFormName(GridView gridView)
+        {
+            var form = gridView.GridControl?.FindForm() ?? gridView.GridControl?.TopLevelControl as Form;
+            return form?.GetType().Name;
         }
 
         /// <summary>

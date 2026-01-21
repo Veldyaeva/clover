@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.CodeParser;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
@@ -17,6 +18,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Label = System.Windows.Forms.Label;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -130,6 +132,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
+                bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -163,6 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
+                bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
             catch (Exception ex)
             {
@@ -492,6 +496,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Форсируем перерасчёт unbound-колонок (процент/статус)
             bandedGridView3?.RefreshData();
             advBandedGridView1?.RefreshData();
+            RefreshFooterSummaries();
+        }
+
+        /// <summary>
+        /// Обновляет футеры после изменений данных.
+        /// </summary>
+        private void RefreshFooterSummaries()
+        {
+            bandedGridView3?.UpdateSummary();
+            advBandedGridView1?.UpdateSummary();
         }
 
         /// <summary>
@@ -709,7 +723,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (inProgress.Any())
             {
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                return;
                 //foreach (var row in inProgress)
                 //{
                 //    int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
@@ -913,6 +927,50 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
+        /// Считает общие суммы часов по всем строкам детального уровня.
+        /// </summary>
+        private (decimal planTotal, decimal factTotal) GetGlobalHourTotals()
+        {
+            if (_planPresenter?.AllRows == null)
+                return (0m, 0m);
+
+            decimal plan = _planPresenter.AllRows
+                .Where(r => r != null)
+                .Sum(r => r.PlanChas_UI ?? 0m);
+
+            decimal fact = _planPresenter.AllRows
+                .Where(r => r != null)
+                .Sum(r => r.FactChas_UI ?? 0m);
+
+            return (Math.Round(plan, 2), Math.Round(fact, 2));
+        }
+
+        /// <summary>
+        /// В футере bandedGridView3 показываем локальную сумму и общую сумму по всем строкам.
+        /// </summary>
+        private void BandedGridView3_CustomDrawFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
+        {
+            if (e.Column == null)
+                return;
+
+            bool isPlan = string.Equals(e.Column.FieldName, "pzvChasNazn", StringComparison.OrdinalIgnoreCase);
+            bool isFact = string.Equals(e.Column.FieldName, "pzvNChasi", StringComparison.OrdinalIgnoreCase);
+            if (!isPlan && !isFact)
+                return;
+
+            decimal localSum = 0m;
+            if (e.Info?.Value != null && e.Info.Value != DBNull.Value && decimal.TryParse(e.Info.Value.ToString(), out var parsedLocal))
+            {
+                localSum = parsedLocal;
+            }
+
+            var totals = GetGlobalHourTotals();
+            decimal globalSum = isPlan ? totals.planTotal : totals.factTotal;
+
+            e.Info.DisplayText = $"все: {globalSum:0.##}";
+        }
+
+        /// <summary>
         /// Для верхнего уровня (bandedGridView3): в колонке pzvChasNazn отображаем сумму назначенных часов по всем операциям этой машины/задания.
         /// </summary>
         private void BandedGridView3_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
@@ -992,6 +1050,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (currentRow != null)
             {
                 currentRow.pzvKol = qty;
+                currentRow.FactKol_UI = defaultQty;
                 // Мгновенно пересчитываем часы факт для прогресса (секунды на изделие * факт / 3600)
                 decimal factHours = 0m;
                 if (currentRow.pzvSek > 0)
@@ -1353,17 +1412,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         string.Equals(KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), taskKey, StringComparison.OrdinalIgnoreCase))
                     .ToList() ?? new List<KnitterPZVModel>();
 
-                decimal assignedHours = rows.Sum(r => r.pzvChasNazn);//pzvSekNazn);//
-                decimal doneHours = rows.Sum(r => r.pzvNChasi ?? 0m);//pzvSek);//
+                //decimal? assignedHours = rows.Sum(r => r.PlanChas_UI);//pzvChasNazn);//pzvSekNazn);//
+                //decimal doneHours = rows.Sum(r => r.FactChas_UI ?? 0m);//pzvNChasi ?? 0m);//pzvSek);//
 
-                decimal percent = 0m;
-                if (assignedHours > 0)
-                {
-                    percent = doneHours / assignedHours * 100m;
-                    if (percent > 100m) percent = 100m;
-                    if (percent < 0m) percent = 0m;
-                }
+                //decimal? percent = 0m;
+                //if (assignedHours > 0)
+                //{
+                //    percent = doneHours / assignedHours * 100m;
+                //    if (percent > 100m) percent = 100m;
+                //    if (percent < 0m) percent = 0m;
+                //}
+                decimal assignedHours = rows.Sum(r => r.PlanChas_UI ?? 0m);
+                decimal doneHours = rows.Sum(r => r.FactChas_UI ?? 0m);
 
+                decimal percent =
+                    assignedHours > 0m
+                        ? Math.Round(doneHours * 100m / assignedHours, 1)
+                        : 0m;
                 e.Value = percent;
             }
         }
@@ -1532,6 +1597,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             }
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
+            RefreshFooterSummaries();
             _currentLoadedTab = tab;
         }
 

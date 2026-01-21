@@ -14,6 +14,7 @@ namespace SewingProduction.Core.Class.Settings
         public bool SaveOpenTabs { get; set; } = true;
         public bool ShortTabNames { get; set; } = true;
         public bool AllowDuplicateTabs { get; set; } = false;
+        public bool SaveGridSettings { get; set; } = true;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
         public string SelectedDatabase { get; set; } = "ace";
         public Dictionary<string, ThemeManager.Theme> Themes { get; set; } = new();
@@ -193,6 +194,16 @@ namespace SewingProduction.Core.Class.Settings
         public static void SetAllowDuplicateTabs(bool value)
         {
             Current.AllowDuplicateTabs = value;
+            Save();
+        }
+        public static bool GetSaveGridSettings()
+        {
+            return Current.SaveGridSettings;
+        }
+
+        public static void SetSaveGridSettings(bool value)
+        {
+            Current.SaveGridSettings = value;
             Save();
         }
         #region Темы

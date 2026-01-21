@@ -339,6 +339,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Core\Forms\SettingsForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Features\Articul\Forms\Articul.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
