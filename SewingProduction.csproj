@@ -23,6 +23,7 @@
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Models\TaskCandidate.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\KnitterDataService.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\TaskSelector.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\_KnitterRepository.cs" />
     <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />

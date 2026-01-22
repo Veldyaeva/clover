@@ -156,7 +156,7 @@ namespace SewingProduction
         }
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(CurrentUser.User), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -261,6 +261,11 @@ namespace SewingProduction
             OpenForm(form, sender);
         }
 
+        private void справкаtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new SewingProduction.HelpAdmin.Forms.AdminHelpEditorForm(this._formManager);
+            f.Show();
+        }
         private void аналитикаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm(new KnittingProductionAnalytics(), sender);

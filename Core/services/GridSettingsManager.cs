@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml.Linq;
+using DevExpress.Data;
 using DevExpress.XtraGrid.Views.Grid;
+using Newtonsoft.Json;
+using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.Interfaces;
 
 namespace SewingProduction.Core.Services
@@ -103,6 +106,9 @@ namespace SewingProduction.Core.Services
         /// </summary>
         public void SaveSettings(GridView gridView, string settingsKey = null)
         {
+            if (!SettingsManager.GetSaveGridSettings())
+                return;
+
             if (gridView == null) return;
 
             try
@@ -118,43 +124,35 @@ namespace SewingProduction.Core.Services
                     }
                 }
 
-                string fileName = $"{settingsKey}.xml";
-                string appPath = Application.StartupPath;
-                string settingsPath = Path.Combine(appPath, "Settings", "Grids");
+                var formName = GetFormName(gridView) ?? "UnknownForm";
+                var dir = Path.Combine(UserFilePaths.GridSettings, formName);
+                Directory.CreateDirectory(dir);
 
-                if (!Directory.Exists(settingsPath))
-                    Directory.CreateDirectory(settingsPath);
-
-                string fullPath = Path.Combine(settingsPath, fileName);
-
-                var columnElements = new List<XElement>();
+                var columnSettings = new List<GridColumnSetting>();
 
                 for (int i = 0; i < gridView.Columns.Count; i++)
                 {
                     var col = gridView.Columns[i];
                     if (!string.IsNullOrEmpty(col.FieldName))
                     {
-                        columnElements.Add(
-                            new XElement("Column",
-                                new XAttribute("FieldName", col.FieldName),
-                                new XAttribute("Width", col.Width),
-                                new XAttribute("VisibleIndex", col.VisibleIndex),
-                                new XAttribute("Visible", col.Visible),
-                                new XAttribute("SortOrder", col.SortOrder.ToString()),
-                                new XAttribute("SortIndex", col.SortIndex)
-                            )
-                        );
+                        columnSettings.Add(new GridColumnSetting
+                        {
+                            FieldName = col.FieldName,
+                            Width = col.Width,
+                            VisibleIndex = col.VisibleIndex,
+                            Visible = col.Visible,
+                            SortOrder = col.SortOrder.ToString(),
+                            SortIndex = col.SortIndex
+                        });
                     }
                 }
 
-                var gridSettings = new XElement("GridSettings",
-                    new XAttribute("SettingsKey", settingsKey),
-                    new XAttribute("SaveDate", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")),
-                    new XElement("Columns", columnElements)
-                );
+                // Сохраняем в отдельный JSON файл
+                string fileName = $"{settingsKey}.json";
+                string filePath = Path.Combine(dir, fileName);
 
-                var doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), gridSettings);
-                doc.Save(fullPath);
+                var json = JsonConvert.SerializeObject(columnSettings, Formatting.Indented);
+                File.WriteAllText(filePath, json);
 
                 _logger.LogEventAsync($"GridSettingsManager: Настройки сохранены для '{settingsKey}'", "SaveSettings");
             }
@@ -169,6 +167,9 @@ namespace SewingProduction.Core.Services
         /// </summary>
         public void LoadSettings(GridView gridView, string settingsKey = null)
         {
+            if (!SettingsManager.GetSaveGridSettings())
+                return;
+
             if (gridView == null) return;
 
             try
@@ -184,42 +185,39 @@ namespace SewingProduction.Core.Services
                     }
                 }
 
-                string fileName = $"{settingsKey}.xml";
-                string appPath = Application.StartupPath;
-                string settingsPath = Path.Combine(appPath, "Settings", "Grids");
-                string fullPath = Path.Combine(settingsPath, fileName);
+                var formName = GetFormName(gridView) ?? "UnknownForm";
+                var dir = Path.Combine(UserFilePaths.GridSettings, formName);
+                Directory.CreateDirectory(dir);
 
-                if (!File.Exists(fullPath))
+                // Загружаем из отдельного JSON файла
+                string fileName = $"{settingsKey}.json";
+                string filePath = Path.Combine(dir, fileName);
+
+                if (!File.Exists(filePath))
                     return;
 
-                var doc = XDocument.Load(fullPath);
-                var columns = doc.Root?.Element("Columns")?.Elements("Column");
+                var json = File.ReadAllText(filePath);
+                var columnSettings = JsonConvert.DeserializeObject<List<GridColumnSetting>>(json);
+                
+                if (columnSettings == null || columnSettings.Count == 0)
+                    return;
 
-                if (columns != null)
+                foreach (var setting in columnSettings)
                 {
-                    foreach (var columnElement in columns)
+                    if (string.IsNullOrEmpty(setting.FieldName))
+                        continue;
+
+                    var column = gridView.Columns[setting.FieldName];
+                    if (column != null)
                     {
-                        var fieldName = columnElement.Attribute("FieldName")?.Value;
-                        if (string.IsNullOrEmpty(fieldName)) continue;
+                        column.Width = setting.Width;
+                        column.VisibleIndex = setting.VisibleIndex;
+                        column.Visible = setting.Visible;
 
-                        var column = gridView.Columns[fieldName];
-                        if (column != null)
-                        {
-                            if (int.TryParse(columnElement.Attribute("Width")?.Value, out int width))
-                                column.Width = width;
+                        if (Enum.TryParse<ColumnSortOrder>(setting.SortOrder, out var sortOrder))
+                            column.SortOrder = sortOrder;
 
-                            if (int.TryParse(columnElement.Attribute("VisibleIndex")?.Value, out int visibleIndex))
-                                column.VisibleIndex = visibleIndex;
-
-                            if (bool.TryParse(columnElement.Attribute("Visible")?.Value, out bool visible))
-                                column.Visible = visible;
-
-                            if (Enum.TryParse<DevExpress.Data.ColumnSortOrder>(columnElement.Attribute("SortOrder")?.Value, out var sortOrder))
-                                column.SortOrder = sortOrder;
-
-                            if (int.TryParse(columnElement.Attribute("SortIndex")?.Value, out int sortIndex))
-                                column.SortIndex = sortIndex;
-                        }
+                        column.SortIndex = setting.SortIndex;
                     }
                 }
 
@@ -266,9 +264,23 @@ namespace SewingProduction.Core.Services
         /// </summary>
         private string GenerateSettingsKey(GridView gridView)
         {
-            var formName = gridView.GridControl?.FindForm()?.GetType().Name ?? "UnknownForm";
+            var form = gridView.GridControl?.FindForm() ?? gridView.GridControl?.TopLevelControl as Form;
+            var formName = form?.GetType().Name;
             var gridName = gridView.Name ?? gridView.GridControl?.Name ?? "UnknownGrid";
+
+            if (string.IsNullOrWhiteSpace(formName))
+            {
+                // Избегаем префикса UnknownForm, чтобы не плодить дубликаты
+                return gridName;
+            }
+
             return $"{formName}_{gridName}";
+        }
+
+        private string GetFormName(GridView gridView)
+        {
+            var form = gridView.GridControl?.FindForm() ?? gridView.GridControl?.TopLevelControl as Form;
+            return form?.GetType().Name;
         }
 
         /// <summary>

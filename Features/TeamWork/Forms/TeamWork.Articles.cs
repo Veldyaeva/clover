@@ -703,7 +703,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControl_binded?.RefreshDataSource();
                     gridControl_wdToBind?.RefreshDataSource();
                 }
-
+                // Вызываем процедуру updateSebZArticulPsz для обновления данных во всех справочниках
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@xAnnID", selectedAnnRow.AnnID }
+                };
+                await _dbHelper.ExecuteQueryAsync(
+    "dbo.updateSebZArticulPsz",
+    parameters,
+    CommandType.StoredProcedure
+);
                 await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.kodd_rt} привязан к РТ {selectedAnnRow.AnnID}");
                 MessageBox.Show("Привязка успешно выполнена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

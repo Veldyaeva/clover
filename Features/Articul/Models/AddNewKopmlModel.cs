@@ -9,7 +9,7 @@ namespace SewingProduction.Features.Articul.Models
 {
     public class AddNewKopmlModel
     {
-        [NotMapped] public string Kodd { get; set; }
+        public string Kodd { get; set; }
         public string Kod { get; set; }
         public string Grup { get; set; }
         public string Articul { get; set; }
