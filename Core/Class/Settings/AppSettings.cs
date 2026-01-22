@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using Newtonsoft.Json;
+using SewingProduction;
 
 namespace SewingProduction.Core.Class.Settings
 {
@@ -13,9 +14,10 @@ namespace SewingProduction.Core.Class.Settings
         public bool SaveOpenTabs { get; set; } = true;
         public bool ShortTabNames { get; set; } = true;
         public bool AllowDuplicateTabs { get; set; } = false;
+        public bool SaveGridSettings { get; set; } = true;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
         public string SelectedDatabase { get; set; } = "ace";
-
+        public Dictionary<string, ThemeManager.Theme> Themes { get; set; } = new();
     }
 
     public class UserSettings
@@ -23,6 +25,16 @@ namespace SewingProduction.Core.Class.Settings
         public List<string> OpenTabs { get; set; } = new();
         public List<string> Logins { get; set; } = new();
         public string SavedPassword { get; set; } = "";
+    }
+
+    public class GridColumnSetting
+    {
+        public string FieldName { get; set; }
+        public int Width { get; set; }
+        public int VisibleIndex { get; set; }
+        public bool Visible { get; set; }
+        public string SortOrder { get; set; }
+        public int SortIndex { get; set; }
     }
 
     public static class SettingsManager
@@ -184,6 +196,33 @@ namespace SewingProduction.Core.Class.Settings
             Current.AllowDuplicateTabs = value;
             Save();
         }
+        public static bool GetSaveGridSettings()
+        {
+            return Current.SaveGridSettings;
+        }
+
+        public static void SetSaveGridSettings(bool value)
+        {
+            Current.SaveGridSettings = value;
+            Save();
+        }
+        #region Темы
+        public static Dictionary<string, ThemeManager.Theme> GetThemes()
+        {
+            if (Current.Themes == null || Current.Themes.Count == 0)
+            {
+                Current.Themes = ThemeManager.GetDefaultThemes();
+                Save();
+            }
+            return Current.Themes;
+        }
+
+        public static void SetThemes(Dictionary<string, ThemeManager.Theme> themes)
+        {
+            Current.Themes = themes ?? new Dictionary<string, ThemeManager.Theme>();
+            Save();
+        }
+        #endregion
         #region база данных
         public static void SaveSelectedDatabase(string login, string connectionName)
         {
@@ -239,7 +278,7 @@ namespace SewingProduction.Core.Class.Settings
         public static string BaseFolder => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "SewingProduction");
-
+        public static string GridSettings => Path.Combine(BaseFolder, "GridSettings");
         public static string Settings => Path.Combine(BaseFolder, "settings.json");
         public static string LogFile => Path.Combine(BaseFolder, "log.txt");
 
@@ -247,6 +286,8 @@ namespace SewingProduction.Core.Class.Settings
         {
             if (!Directory.Exists(BaseFolder))
                 Directory.CreateDirectory(BaseFolder);
+            if (!Directory.Exists(GridSettings))
+                Directory.CreateDirectory(GridSettings);
         }
     }
 }

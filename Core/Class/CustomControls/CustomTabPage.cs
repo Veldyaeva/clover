@@ -19,14 +19,8 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            // Применяем тему к TabPage
-            // DevExpress XtraTabPage автоматически наследует стили от родительского XtraTabControl
-            // Но можно настроить специфичные для страницы стили
-            if (this.TabControl != null)
-            {
-                // Шрифт наследуется от TabControl, но можем переопределить если нужно
-                // this.Font = ThemeManager.SharedSettings.DefaultFont;
-            }
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
         }
 
         private void OnThemeChanged() => ApplyTheme();

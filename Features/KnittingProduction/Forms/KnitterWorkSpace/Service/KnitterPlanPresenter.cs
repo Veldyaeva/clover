@@ -76,7 +76,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         Pach: (int?)r.n_pach))
                     .ToDictionary(g => g.Key, g => g.ToList());
 
-                //_machineArtNomMaster = _allRows
+                //_machineArtNomMaster = _allRows // это групп саммари по часам в самой вложенной таблице, не хочу его видеть
                 //    .GroupBy(r => (TaskNum: KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), MachineKey: KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber)))
                 //    .ToDictionary(
                 //        kv => kv.Key.MachineKey,
@@ -87,12 +87,39 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 var masterData = _byTaskMachine.Values.Select(list =>
                 {
-                    var master = list.First();
-                    // Часы назначено/факт берём из БД (pzvChasNazn, pzvNChasi), суммируем по операциям
-                    var assigned = list.Sum(r => (double)r.pzvChasNazn);
-                    var done = list.Sum(r => (double)(r.pzvNChasi ?? 0m));
-                    master.pzvChasNazn = (decimal)Math.Round(assigned, 2);
-                    master.pzvNChasi = (decimal)Math.Round(done, 2);
+                    //    var baseRow = list.First();
+
+                    //    var master = list.First();
+                    //    // Часы назначено/факт берём из БД (pzvChasNazn, pzvNChasi), суммируем по операциям
+                    //    //var assigned = list.Sum(r => (double)r.pzvChasNazn); // тут, если смена открыта, нужно брать назначено - pzvChasNazn, если нет - pzvNChasi
+                    //    var assigned = list.Sum(r => (double)(r.pzvNChasi??0m));
+                    //    //var done = list.Sum(r => (double)(r.pzvNChasi ?? 0m));// тут так же. И с количеством такая же логика
+                    //    var done = list.Sum(r => (double)r.pzvChasNazn);
+                    //    master.pzvChasNazn = (decimal)Math.Round(assigned, 2);
+                    //    master.pzvNChasi = (decimal)Math.Round(done, 2);
+                    //    return master;
+                    //}).ToList();
+                    var baseRow = list.First();
+
+                    var master = new KnitterPZVModel
+                    {
+                        // копируем ключевые поля, которые нужны в шапке
+                        pzvNomZad = baseRow.pzvNomZad,
+                        kmlNumber = baseRow.kmlNumber,
+                        pzvArticul = baseRow.pzvArticul,
+                        pzvMod = baseRow.pzvMod,
+                        pzvNom = baseRow.pzvNom,
+                        koefObServ = baseRow.koefObServ,
+                        name_class = baseRow.name_class,
+                        pzvKmlID = baseRow.pzvKmlID
+                    };
+
+                    //  назначено = pzvChasNazn
+                    master.pzvChasNazn = Math.Round(list.Sum(r => r.pzvChasNazn), 2);
+
+                    //  факт = pzvNChasi
+                    master.pzvNChasi = Math.Round(list.Sum(r => r.pzvNChasi ?? 0m), 2);
+
                     return master;
                 }).ToList();
                 bindingSource.DataSource = masterData;
@@ -231,6 +258,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         row.koefObServ = head.koefObServ;
                 }
             }
+            // сортировка операций внутри группы
+            result = result
+                .OrderBy(r => r.nrN ?? int.MaxValue)
+                .ThenBy(r => r.nrN1 ?? 0)
+                .ToList();
+
 
             e.ChildList = result;
         }

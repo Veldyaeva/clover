@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Vs_projects\sewingproduction\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -35,6 +35,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomSearchLookUpEdit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomSpinEdit.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
@@ -79,6 +82,9 @@
     <Compile Update="Features\CardByNom\Forms\NomLookUp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnittingProductionAnalytics.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
@@ -223,6 +232,9 @@
     <Compile Update="Features\UserDistribution\Forms\UserHierarchy.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Help\Form\HelpFormAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Help\Form\TestForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,6 +315,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Core\Forms\SettingsForm.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Features\Articul\Forms\Articul.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

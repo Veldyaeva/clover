@@ -42,7 +42,7 @@ namespace SewingProduction.Features.Articul.Service
         {
             try
             {
-                string query = "SELECT Kod,Grup,Articul,Mod,Razm,Sost,Kle,kod_v FROM sp_articul";
+                string query = "SELECT Kodd,Kod,Grup,Articul,Mod,Razm,Sost,Kle,kod_v FROM view_sp_articul";
                 return await _dbService.GetListAsync<AddNewKopmlModel>(query, new {});
             }
             catch (Exception ex)
