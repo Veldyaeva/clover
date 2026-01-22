@@ -304,135 +304,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     BeginInvoke(new Action(() => SyncSelectionUpdate()));
                 };
                 //----------------------------------------
-                #region multiselect
-                // 1. Настраиваем стандартный MultiSelect
-                //gridViewZadanyListByMachine.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор
-                //gridViewZadanyListByMachine.OptionsBehavior.AutoUpdateTotalSummary = true;
-                //gridViewZadanyListByMachine.OptionsView.ShowIndicator = false;   // Скрываем стандартный индикатор
-                //gridViewVyazPlan.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = false;
-                //gridViewVyazPlan.OptionsSelection.ShowCheckBoxSelectorInGroupRow = false;
-
-                //// 2. Создаем кастомный столбец с чекбоксами
-                ////var checkColumn = new DevExpress.XtraGrid.Columns.GridColumn();
-                ////checkColumn.FieldName = "IsSelected";
-                ////checkColumn.Caption = " ";
-                ////checkColumn.VisibleIndex = 0;  // Ставим на первое место
-                ////checkColumn.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
-                //gridViewZadanyListByMachine.IndicatorWidth = 0;
-                //gridColumnZadanyListByMachineSyncSelection.UnboundDataType = typeof(bool);
-
-                //// Создаем RepositoryItemCheckEdit для отображения чекбоксов
-                ////var checkEdit = new RepositoryItemCheckEdit();
-                ////gridControl1.RepositoryItems.Add(checkEdit);
-                ////checkColumn.ColumnEdit = checkEdit;
-
-                ////gridView1.Columns.Add(checkColumn);
-
-                //// 3. Обновляем состояние чекбоксов при выделении строк
-
-                //gridViewZadanyListByMachine.SelectionChanged += (s, e) =>
-                //{
-                //    #region "новый обработчик"
-                //    // Устанавливаем фокус на нужные колонки
-                //    gridViewZadanyListByMachine.FocusedColumn = gridViewZadanyListByMachine.Columns["dopr_name"];
-                //    gridViewZadanyListByMachine.FocusedColumn = gridViewZadanyListByMachine.Columns["SyncSelection"];
-
-                //    //gridViewZadanyListByMachine.BeginUpdate();
-                //    //try
-                //    //{
-                //    //    // Проверка выделения по IDVyazClass (новая логика)
-                //    //    if (gridViewVyazPlan.SelectedRowsCount > 0)
-                //    //    {
-                //    //        var firstSelectedId = gridViewVyazPlan.GetRowCellValue(gridViewVyazPlan.GetSelectedRows()[0], "IDVyazClass");
-                //    //        var invalidSelections = new List<int>();
-
-                //    //        foreach (int rowHandle in gridViewVyazPlan.GetSelectedRows())
-                //    //        {
-                //    //            var currentId = gridViewVyazPlan.GetRowCellValue(rowHandle, "IDVyazClass");
-                //    //            if (!object.Equals(currentId, firstSelectedId))
-                //    //            {
-                //    //                invalidSelections.Add(rowHandle);
-                //    //            }
-                //    //        }
-
-                //    //        // Если есть недопустимые выделения, снимаем их
-                //    //        if (invalidSelections.Count > 0)
-                //    //        {
-                //    //            foreach (int rowHandle in invalidSelections)
-                //    //            {
-                //    //                gridViewVyazPlan.UnselectRow(rowHandle);
-                //    //            }
-
-                //    //            XtraMessageBox.Show("Можно выделять только строки с одинаковым IDVyazClass",
-                //    //                               "Ограничение выделения",
-                //    //                               MessageBoxButtons.OK,
-                //    //                               MessageBoxIcon.Information);
-                //    //            return; // Прерываем обработку, так как выделение изменилось
-                //    //        }
-                //    //    }
-
-                //    //    // Ваша оригинальная логика обновления SyncSelection
-                //    //    foreach (int rowHandle in gridViewVyazPlan.GetSelectedRows())
-                //    //    {
-                //    //        gridViewVyazPlan.SetRowCellValue(rowHandle, gridColumnVyazPlanSyncSelection, true);
-                //    //        gridViewVyazPlan.PostEditor();
-                //    //    }
-
-                //    //    // Сбрасываем чекбоксы у невыделенных строк
-                //    //    for (int i = 0; i < gridViewVyazPlan.RowCount; i++)
-                //    //    {
-                //    //        if (!gridViewVyazPlan.IsRowSelected(i))
-                //    //        {
-                //    //            gridViewVyazPlan.SetRowCellValue(i, gridColumnVyazPlanSyncSelection, false);
-                //    //            gridViewVyazPlan.PostEditor();
-                //    //        }
-                //    //    }
-                //    //}
-                //    //finally
-                //    //{
-                //    //    gridViewVyazPlan.EndUpdate();
-                //    //    gridViewVyazPlan.FocusedColumn = gridViewVyazPlan.Columns["SyncSelection"];
-                //    //}
-                //    #endregion
-                //};
-
-                //// 4. Обрабатываем клик по чекбоксу для выделения/снятия строки
-                //gridViewZadanyListByMachine.RowCellClick += (s, e) =>
-                //{
-                //    if (e.Column == gridColumnZadanyListByMachineSyncSelection)
-                //    {
-                //        bool newValue = !(bool)(gridViewZadanyListByMachine.GetRowCellValue(e.RowHandle, gridColumnZadanyListByMachineSyncSelection) ?? false);
-                //        //gridView1.SetRowCellValue(e.RowHandle, gridColumnZadanyListByMachineSyncSelection, newValue);
-
-                //        if (newValue)
-                //        {
-                //            gridViewZadanyListByMachine.SelectRow(e.RowHandle);
-                //        }
-                //        else
-                //        {
-                //            gridViewZadanyListByMachine.UnselectRow(e.RowHandle);
-                //        }
-                //    }
-                //};
-
-                ////// Подписываемся на событие изменения данных
-                ////// В конструкторе или методе инициализации
-                ////gridViewVyazPlan.ActiveFilter.Nodes.CollectionChanged += (s, e) =>
-                ////{
-                ////    if (gridViewVyazPlan.RowCount > 0)
-                ////    {
-                ////        gridViewVyazPlan_FocusedRowChanged?.Invoke(
-                ////            gridViewVyazPlan,
-                ////            new FocusedRowChangedEventArgs(gridViewVyazPlan.FocusedRowHandle, -1)
-                ////        );
-                ////    }
-                ////};
-
-                #endregion
-
-                ////// При программном изменении фильтра
-                ////gridViewVyazPlan.ActiveFilterCriteria = newCriteria;
-                ////gridViewVyazPlan.RefreshData();
                 #endregion
 
                 #region описание gridControlRzvPachListByNom "пачки по расчету вяз"
@@ -546,30 +417,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
                 bandedGridSmenZadanyColumnChasConfirmedSmen.DisplayFormat.FormatString = "{0:0.00#;-0.00#;#}";
 
-
-                //// 2. Создаём GroupSummary 
-                //advBandedGridViewSmenZadany.GroupSummary.Clear();
-
-                //advBandedGridViewSmenZadany.GroupSummary.Add(
-                //    new GridGroupSummaryItem
-                //    {
-                //        SummaryType = DevExpress.Data.SummaryItemType.Average,
-                //        FieldName = "chasNaznZadGroup",
-                //        ShowInGroupColumnFooter = bandedGridSmenZadanyColumnChasNaznZad,
-                //        DisplayFormat = "0.00;-0.00;"
-                //    });
-
-                //advBandedGridViewSmenZadany.GroupSummary.Clear();
-
-                //advBandedGridViewSmenZadany.GroupSummary.Add(
-                //    new GridGroupSummaryItem
-                //    {
-                //        SummaryType = DevExpress.Data.SummaryItemType.Average,
-                //        FieldName = "chasNotConfirmedZadGroup",
-                //        ShowInGroupColumnFooter = bandedGridSmenZadanyColumnChasNotConfirmedZad,
-                //        DisplayFormat = "0.00;-0.00;"
-                //    });
-
                 string _xNumFormat = "{0:0.00;-0.00;}";
                 //string _xNumFormat = "{0:n2}";
                 foreach (GridGroupSummaryItem gsi in advBandedGridViewSmenZadany.GroupSummary)
@@ -577,60 +424,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     gsi.DisplayFormat = _xNumFormat;
                 }
 
-                //advBandedGridViewSmenZadany.RefreshData();
-                //advBandedGridViewSmenZadany.UpdateGroupSummary();
-
-                //advBandedGridViewSmenZadany.GroupSummary[0].DisplayFormat = _xNumFormat;
-                //advBandedGridViewSmenZadany.GroupSummary[0].FieldName = "chasNaznZad";
-                //advBandedGridViewSmenZadany.GroupSummary[0].SummaryType = DevExpress.Data.SummaryItemType.Sum;
-                //advBandedGridViewSmenZadany.GroupSummary[0].
-
-                ////var item = new DevExpress.XtraGrid.GridGroupSummaryItem();
-                //var item = advBandedGridViewSmenZadany.GroupSummary[0];
-                //item.SummaryType = DevExpress.Data.SummaryItemType.Sum;
-
-                //// 1) по чему считаем
-                //item.FieldName = "chasNaznZadGroup";
-
-                //// 2) где показываем
-                //item.ShowInGroupColumnFooter = AdvBandedGridView;
-
-                //// (опционально) формат вывода
-                //item.DisplayFormat = "{0:n2}";
-
-
-                //advBandedGridViewSmenZadany.CustomDrawBandHeader += AdvBandedGridView1_CustomDrawBandHeader;
-                //advBandedGridViewSmenZadany.CustomDrawColumnHeader += AdvBandedGridView1_CustomDrawColumnHeader;
-                //advBandedGridViewSmenZadany.ColumnPanelRowHeight = 40; // можно больше/меньше
                 _gridHelper.AutoRowFilterConfig(advBandedGridViewSmenZadany, 0);
-                //advBandedGridViewSmenZadany.Appearance.GroupRow.Assign(
-                //    advBandedGridViewSmenZadany.Appearance.HeaderPanel);
                 advBandedGridViewSmenZadany.OptionsView.GroupFooterShowMode = GroupFooterShowMode.Hidden;
                 _gridHelper.EnableGroupSummariesInGroupRow(advBandedGridViewSmenZadany, GroupSummaryLevelMode.IncludeOnly, new[] { 2 });
-                //advBandedGridViewSmenZadany.RowCountChanged += (_, __) => SetGroupExpandState();
-                //advBandedGridViewSmenZadany.CustomDrawGroupRow += (s, e) =>
-                //{
-                //    GridView view = s as GridView;
-                //    int rowHandle = e.RowHandle;
-
-                //    int level = view.GetRowLevel(rowHandle);
-
-                //    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
-                //    //groupInfo.GroupExpanded = true;
-
-                //    if (level == 0) // зона
-                //    {
-                //        groupInfo.GroupText = $"Зона: {view.GetGroupRowValue(e.RowHandle, view.Columns["kmaNumber"])} ";
-                //    }
-                //    if (level == 1) // ФИО
-                //    {
-                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["fio"])} ({view.GetGroupRowValue(e.RowHandle, view.Columns["kwsTabStart"])}) ";
-                //    }
-                //    if (level == 2) // тип данных
-                //    {
-                //        groupInfo.GroupText = $"{view.GetGroupRowValue(e.RowHandle, view.Columns["typeName"])}";
-                //    }
-                //};
                 #endregion
 
                 _naryadZadanyVyazBindingSource = new BindingSource { DataSource = new BindingList<NaryadZadanyVyaz>() };

@@ -41,6 +41,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             //_serviceBrokerForTable1.StartBroker();
             //_serviceBrokerForTable1.StartListening("TestID, TestName, TestFirst, TestSecond", "testTable1");
+            _serviceBrokerForTable1.StartBroker();
+            _serviceBrokerForTable1.StartListening("TestID, TestName", "testTable1");
             //_serviceBrokerForTable2.StartBroker();
             //_serviceBrokerForTable2.StartListening("idZeh, nameZeh, address, idProizv", "ZehList");
             await LoadDataAsync();
@@ -49,16 +51,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         public async Task UpdateDataInFormAsync(string _table)
         {
-            //switch (_table)
-            //{
-            //    case "testTable1":
-            //        await LoadDataAsync();
-            //        break;
+            switch (_table)
+            {
+                case "testTable1":
+                    await LoadDataAsync();
+                    break;
 
-            //    case "ZehList":
-            //        customTextBox2.Text = $"Обновление в {_table}";
-            //        break;
-            //}
+                case "ZehList":
+                    customTextBox2.Text = $"Обновление в {_table}";
+                    break;
+            }
         }
         private async Task LoadDataAsync()
         {
