@@ -3,6 +3,7 @@ using DevExpress.Mvvm.Native;
 using DevExpress.Utils;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Menu;
@@ -1477,6 +1478,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         {
                             gridControlSmenZadany.BeginUpdate();
                             _smenZadanyVyazBindingSource.DataSource = bs.DataSource;
+                            Application.Idle -= ExpandGroupsOnIdle;
+                            Application.Idle += ExpandGroupsOnIdle;
                             gridControlSmenZadany.EndUpdate();
                         });
 
@@ -2170,24 +2173,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                //DataRow _CurrRow = drNomListFoundRow[0]; // Take the first matching row (if there are multiple matches).
-                //string _nlArticul = _CurrRow["nlArticul"].ToString();
                 var selectedRow = _planTotalHoursByKnitMachineBindingSource.Current as PlanTotalHoursByKnitMachine;
-                //MessageBox.Show(selectedRow.kmlID.ToString());
-                //await LoadZadanyListByMachineDataAsync(selectedRow.kmlID);
                 await LoadZadanyListByMachineNewDataAsync(selectedRow.kmlID);
-
-                //var missingRecords = _zadanyListByMachineNewBindingSource.List.Cast<dynamic>()
-                //    .Where(newRec => newRec != null &&
-                //           !_zadanyListByMachineBindingSource.List.Cast<dynamic>()
-                //            .Where(oldRec => oldRec != null)
-                //            .Any(oldRec => oldRec.pszNom == newRec.pszNom && oldRec.nom == newRec.nom))
-                //    .ToList();
-                //foreach (var record in missingRecords)
-                //{
-                //    //// Добавляем строку данных
-                //    _zadanyListByMachineBindingSource.Add(record);
-                //}
 
                 var changes = BindingSourceHelper.GetChanges<ZadanyListByMachine>(
                     _zadanyListByMachineBindingSource,
@@ -2197,7 +2184,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     hashProperties: new[] { "SyncSelection" }
                 );
                 // обновить и добавить
-                //BindingSourceHelper.ApplyChanges(_smenZadanyVyazBindingSource, changes, x => (x.kwsmlKmlID, x.typeID));
                 BindingSourceHelper.ApplyChanges<ZadanyListByMachine>(
                     _zadanyListByMachineBindingSource,
                     changes,
@@ -2206,11 +2192,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     fields: new[] { "SyncSelection" }
                 );
                 //// удалить отсутствующие
-                //BindingSourceHelper.RemoveMissing(_zadanyListByMachineBindingSource, changes.Removed);
-
                 gridViewZadanyListByMachine.ActiveFilterString = $" kmlID == {selectedRow.kmlID}";
                 gridControlZadanyListByMachine.ForceInitialize();
                 gridViewZadanyListByMachine.RefreshData();
+
+                gridControlZadanyListByMachine.BeginInvoke(new Action(async () =>
+                {
+                    FocusFirstRow(gridViewZadanyListByMachine);
+                    await RefreshRzvFromZadanyCurrentAsync(); // железно обновляем 3-й грид
+                }));
+
                 //gridViewZadanyListByMachine.OptionsView.ShowAutoFilterRow = false;
                 //gridViewZadanyListByMachine.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
                 //gridViewZadanyListByMachine.OptionsFilter.AllowFilterEditor = false;
@@ -2220,7 +2211,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MessageBox.Show($"Ошибка в gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged: {ex.Message}");
             }
         }
+        private void FocusFirstRow(GridView view)
+        {
+            view.CloseEditor();
+            view.UpdateCurrentRow();
 
+            if (view.RowCount <= 0) return;
+
+            int first = view.GetVisibleRowHandle(0);
+            view.FocusedRowHandle = first;
+
+            view.ClearSelection();
+            view.SelectRow(first);
+        }
+        private async Task RefreshRzvFromZadanyCurrentAsync()
+        {
+            var z = _zadanyListByMachineBindingSource.Current as ZadanyListByMachine;
+            if (z == null) return;
+
+            await LoadRzvPachListByNomNewDataAsync(z.nom, z.pszNom /* + остальные ключи, если нужны */);
+        }
         private async void gridViewRzvPachListByNom_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             //var selectedRow = _zadanyListByMachineBindingSource.Current as ZadanyListByMachine;
@@ -2281,7 +2291,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
                 else
                 {
-                    await LoadRzvPachListByNomNewDataAsync(0, "");
+                    //await LoadRzvPachListByNomNewDataAsync(0, "");
+                    await RefreshRzvFromZadanyCurrentAsync();
                 }
                 //var missingRecords = _rzvPachListByNomNewBindingSource.List.Cast<dynamic>()
                 //    .Where(newRec => newRec != null &&
