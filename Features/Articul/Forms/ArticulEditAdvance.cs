@@ -117,22 +117,23 @@ namespace SewingProduction.Features.Articul.Forms
                 await Task.WhenAll(matrStatustask);
 
                 _matrixStatus = matrStatustask.Result != null;
-
+                
                 if (_matrixStatus)
 				{
-					layoutCommonArticul.Enabled = false;
-					//SetGroupReadOnly(layoutCommonArticul, true);
-					//layoutGostInsert.Enabled = false;
-					SetGroupReadOnly(layoutGostInsert, false);
+					//layoutCommonArticul.Enabled = false;
+					SetGroupReadOnly(layoutCommonArticul, true);
+                    SetGroupReadOnly(layoutGostInsert, true);
 
+                    SetGroupReadOnly(layoutSumZP, false);
                     layoutSostav.Enabled = false;
 
                 }
                 //есть дата описания модели - редактирование запрещено
                 if (_currentModel.DateOpis != null)
 				{
-					layoutGost.Enabled = false;
-					gcButtonEdit.Visible = false;
+                    //layoutGost.Enabled = false;
+                    SetGroupReadOnly(layoutGost, true);
+                    gcButtonEdit.Visible = false;
                 }
 			}
 			catch (Exception ex)

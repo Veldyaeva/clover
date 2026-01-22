@@ -45,15 +45,15 @@ namespace SewingProduction.Features.Articul.Forms
             gcButtonEdit = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             pictureBoxArticul = new System.Windows.Forms.PictureBox();
-            txbSost3 = new CustomTextBox();
-            txbSost2 = new CustomTextBox();
-            txbSost = new CustomTextBox();
+            txbSost3 = new CustomTextBoxEx();
+            txbSost2 = new CustomTextBoxEx();
+            txbSost = new CustomTextBoxEx();
             txbOpiGost = new CustomTextBox();
             chbArh = new CustomCheckBox();
             chbKombIzd = new CustomCheckBox();
             chbKombDet = new CustomCheckBox();
-            txbArticul = new CustomTextBox();
-            txbMod = new CustomTextBox();
+            txbArticul = new CustomTextBoxEx();
+            txbMod = new CustomTextBoxEx();
             cbTM = new CustomComboBox();
             cbGrupMen = new CustomComboBox();
             cbCountry = new CustomComboBox();
@@ -574,9 +574,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSost3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbSost3.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbSost3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txbSost3.ErrorColor = System.Drawing.Color.Red;
-            txbSost3.ErrorMessage = null;
             txbSost3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbSost3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost3.Location = new System.Drawing.Point(187, 345);
@@ -589,9 +586,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSost2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbSost2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbSost2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txbSost2.ErrorColor = System.Drawing.Color.Red;
-            txbSost2.ErrorMessage = null;
             txbSost2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbSost2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost2.Location = new System.Drawing.Point(187, 321);
@@ -604,9 +598,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbSost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbSost.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbSost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txbSost.ErrorColor = System.Drawing.Color.Red;
-            txbSost.ErrorMessage = null;
             txbSost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbSost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost.Location = new System.Drawing.Point(187, 297);
@@ -619,9 +610,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbOpiGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbOpiGost.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txbOpiGost.ErrorColor = System.Drawing.Color.Red;
-            txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbOpiGost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpiGost.Location = new System.Drawing.Point(18, 219);
@@ -678,9 +666,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbArticul.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbArticul.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txbArticul.ErrorColor = System.Drawing.Color.Red;
-            txbArticul.ErrorMessage = null;
             txbArticul.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbArticul.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbArticul.Location = new System.Drawing.Point(94, 60);
@@ -694,9 +679,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             txbMod.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             txbMod.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
-            txbMod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            txbMod.ErrorColor = System.Drawing.Color.Red;
-            txbMod.ErrorMessage = null;
             txbMod.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbMod.Location = new System.Drawing.Point(398, 60);
@@ -3665,13 +3647,13 @@ namespace SewingProduction.Features.Articul.Forms
         private CustomCheckBox chbKombIzd;
         private CustomTextBox txbKod;
         private CustomCheckBox chbKombDet;
-        private CustomTextBox txbTM;
-        private CustomTextBox txbPo;
-        private CustomTextBox txbArticul;
-        private CustomTextBox txbMod;
-        private CustomTextBox txbSost3;
-        private CustomTextBox txbSost2;
-        private CustomTextBox txbSost;
+        //private CustomTextBox txbTM;
+        private CustomTextBoxEx txbPo;
+        private CustomTextBoxEx txbArticul;
+        private CustomTextBoxEx txbMod;
+        private CustomTextBoxEx txbSost3;
+        private CustomTextBoxEx txbSost2;
+        private CustomTextBoxEx txbSost;
         private CustomTextBox txbOpiGost;
         private CustomComboBox cbTM;
         private CustomComboBox cbGrupMen;
