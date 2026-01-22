@@ -258,6 +258,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         row.koefObServ = head.koefObServ;
                 }
             }
+            // сортировка операций внутри группы
+            result = result
+                .OrderBy(r => r.nrN ?? int.MaxValue)
+                .ThenBy(r => r.nrN1 ?? 0)
+                .ToList();
+
 
             e.ChildList = result;
         }
