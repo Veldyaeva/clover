@@ -328,6 +328,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 headerCol.GroupIndex = 0;
 
+                //// Сортировка по номеру операции внутри группы
+                //var opNum = bandedGridColumn11 ?? advBandedGridView1.Columns.ColumnByFieldName("DisplayNumber");
+                //if (opNum != null)
+                //{
+                //    advBandedGridView1.SortInfo.Clear();
+                //    advBandedGridView1.SortInfo.Add(opNum, DevExpress.Data.ColumnSortOrder.Ascending);
+                //}
+
                 // 3) Внешний вид группы — показываем только текст, без имён полей
                 advBandedGridView1.GroupFormat = "{1}";
                 advBandedGridView1.OptionsView.ShowGroupedColumns = false;
