@@ -18,12 +18,18 @@ namespace SewingProduction.Features.Tabel.Forms
     public partial class OtvlRab : CustomForm
     {
         TabOtvlRDataService tabOtvlRDataService = new TabOtvlRDataService();
-        public int Group = 0;
-        private BindingList<TabOtvlRModel> _rows = new BindingList<TabOtvlRModel>();
+        private BindingList<TabOtvlRModel> tabOtvlRList = new BindingList<TabOtvlRModel>();
+        private int _idGroup = 0;
+        private int _idTabno = 0;
+        private DateTime? _lastCalendarDate;
         public OtvlRab(UserClass user, int tnid) : base(user)
         {
             InitializeComponent();
-            Group = tnid;
+            _idGroup = tnid;
+        }
+        public OtvlRab(UserClass user)
+        {
+            InitializeComponent();
         }
 
         #region Initialization
@@ -34,14 +40,14 @@ namespace SewingProduction.Features.Tabel.Forms
         }
         private async Task InitializeFormAsync()
         {
-            layoutControlGroupRab.Text = await tabOtvlRDataService.GetNaimenGroupZlAsync(Group);
+            layoutControlGroupRab.Text = await tabOtvlRDataService.GetNaimenGroupZlAsync(_idGroup);
 
-            customSearchLookUpEditFio.Properties.DataSource = await tabOtvlRDataService.GetZlSpisokAsync(Group);
+            var listFio = await tabOtvlRDataService.GetZlSpisokAsync(_idGroup);
+            customSearchLookUpEditFio.Properties.DataSource = listFio;
             customSearchLookUpEditFio.Properties.DisplayMember = "Fio";
             customSearchLookUpEditFio.Properties.ValueMember = "Tabno";
             customSearchLookUpEditFio.Properties.NullText = "";
-
-            customGridControlTabel.DataSource = _rows;
+            customSearchLookUpEditFio.EditValue = listFio[0].Tabno;
         }
         #endregion
         private void OtvlRab_Load(object sender, EventArgs e)
@@ -54,6 +60,7 @@ namespace SewingProduction.Features.Tabel.Forms
             TogglePairColumns(Sort_t_s, Sort_t_po, false);
             TogglePairColumns(Drug_s_s, Drug_s_po, false);
             TogglePairColumns(Otvl_r_s, Otvl_r_po, false);
+            ApplyCurrentCalendarFilter();
         }
         private void TogglePairColumns(
         DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colS,
@@ -89,16 +96,336 @@ namespace SewingProduction.Features.Tabel.Forms
             TogglePairColumns(Drug_s_s, Drug_s_po, !Drug_s_s.Visible);
         }
 
-        private void customButtonAdd_Click(object? sender, EventArgs e)
+        private async void customSearchLookUpEditFio_EditValueChanged(object sender, EventArgs e)
         {
-            _rows.Add(new TabOtvlRModel());
-
-            bandedGridViewTabel.RefreshData();
-            int rowHandle = bandedGridViewTabel.RowCount - 1;
-            if (rowHandle < 0) return;
-
-            bandedGridViewTabel.FocusedRowHandle = rowHandle;
+            _idTabno = Convert.ToInt32(customSearchLookUpEditFio.EditValue);
+            tabOtvlRList = new BindingList<TabOtvlRModel>(await tabOtvlRDataService.GetByMgGrTabAsync(_idGroup, _idTabno));
+            customGridControlTabel.DataSource = tabOtvlRList;
         }
 
+        #region Summary Hours
+        private static string DecimalHoursToHHmm(decimal hours)
+        {
+            if (hours <= 0m)
+                return "0:00";
+
+            var totalMinutes = (int)Math.Round(hours * 60m, MidpointRounding.AwayFromZero);
+            var ts = TimeSpan.FromMinutes(totalMinutes);
+
+            return $"{(int)ts.TotalHours} час {ts.Minutes:00} мин";
+        }
+
+        private void bandedGridViewTabel_CustomDrawFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
+        {
+            if (e.Info.SummaryItem?.SummaryValue == null) return;
+
+            if (!decimal.TryParse(e.Info.SummaryItem.SummaryValue.ToString(), out var hoursDec))
+                return;
+
+            if (e.Column == Priem_t)
+                e.Info.DisplayText = "Итого приемки: " + DecimalHoursToHHmm(hoursDec);
+            else if (e.Column == Sort_t)
+                e.Info.DisplayText = "Итого выкладки: " + DecimalHoursToHHmm(hoursDec);
+            else if (e.Column == Drug_s)
+                e.Info.DisplayText = "Итого на др.скл.: " + DecimalHoursToHHmm(hoursDec);
+            else if (e.Column == Otvl_r)
+                e.Info.DisplayText = "Итого отвл.: " + DecimalHoursToHHmm(hoursDec);
+
+            //UpdateTotalSumMasked();
+        }
+        private void UpdateTotalSumMasked()
+        {
+            decimal total =
+                GetSummaryDecimal(Priem_t) +
+                GetSummaryDecimal(Sort_t) +
+                GetSummaryDecimal(Drug_s) +
+                GetSummaryDecimal(Otvl_r);
+
+            customMaskedTextBoxSum.Text = DecimalHoursToHHmm(total);
+        }
+
+        private decimal GetSummaryDecimal(DevExpress.XtraGrid.Columns.GridColumn col)
+        {
+            var v = col.SummaryItem?.SummaryValue;
+            if (v == null || v == DBNull.Value) return 0m;
+
+            if (v is decimal d) return d;
+            return decimal.TryParse(v.ToString(), out var parsed) ? parsed : 0m;
+        }
+        private void UpdateSumPeriodText_Day(DateTime day)
+        {
+            layoutControlItemSum.Text = $"Итог за {day:dd.MM.yyyy}:";
+        }
+
+        private void UpdateSumPeriodText_Month(DateTime from, DateTime to)
+        {
+            layoutControlItemSum.Text = $"Итог за период {from:dd.MM.yyyy} - {to:dd.MM.yyyy}:";
+        }
+        #endregion
+
+        #region Filter on Calendar
+        private bool _monthMode;
+        private void customCalendarControlTabel_EditValueChanged(object sender, EventArgs e)
+        {
+            if (customCalendarControlTabel.EditValue is not DateTime dt)
+                return;
+
+            if (_lastCalendarDate.HasValue &&
+                (_lastCalendarDate.Value.Year != dt.Year ||
+                _lastCalendarDate.Value.Month != dt.Month))
+            {
+                _monthMode = true;
+                ApplyFilter_Month(dt);
+            }
+            else
+            {
+                _monthMode = false;
+                ApplyFilter_Day(dt);
+            }
+            _lastCalendarDate = dt;
+        }
+        private void customButtonAll_Click(object sender, EventArgs e)
+        {
+            var dt = customCalendarControlTabel.EditValue is DateTime x ? x : DateTime.Today;
+            _monthMode = true;
+            ApplyFilter_Month(dt);
+            _lastCalendarDate = dt;
+        }
+
+        private void ApplyFilter_Day(DateTime dt)
+        {
+            var d0 = dt.Date;
+            var d1 = d0.AddDays(1);
+
+            ApplyFilter(d0, d1);
+            UpdateSumPeriodText_Day(d0);
+        }
+        private void ApplyFilter_Month(DateTime dt)
+        {
+            var m0 = new DateTime(dt.Year, dt.Month, 1);
+            var m1 = m0.AddMonths(1);
+
+            ApplyFilter(m0, m1);
+            UpdateSumPeriodText_Month(m0, m1.AddDays(-1));
+        }
+
+        private void ApplyFilter(DateTime dt1, DateTime dt2)
+        {
+            bandedGridViewTabel.ActiveFilterString =
+                $"[Dat] >= #{dt1:MM/dd/yyyy}# AND [Dat] < #{dt2:MM/dd/yyyy}#";
+
+            bandedGridViewTabel.BeginSort();
+            bandedGridViewTabel.SortInfo.Clear();
+            bandedGridViewTabel.SortInfo.Add(Dat, DevExpress.Data.ColumnSortOrder.Ascending);
+            bandedGridViewTabel.SortInfo.Add(N_r, DevExpress.Data.ColumnSortOrder.Ascending);
+            bandedGridViewTabel.EndSort();
+            bandedGridViewTabel.UpdateSummary();
+        }
+        private void ApplyCurrentCalendarFilter()
+        {
+            if (customCalendarControlTabel.EditValue is not DateTime dt)
+                return;
+
+            if (_monthMode) ApplyFilter_Month(dt);
+            else ApplyFilter_Day(dt);
+        }
+        #endregion
+
+        #region CalcHours
+        private static decimal CalcHoursByFromTo(DateTime? timeFrom, DateTime? timeTo)
+        {
+            if (timeFrom == null || timeTo == null)
+                return 0m;
+
+            var from = timeFrom.Value.TimeOfDay;
+            var to = timeTo.Value.TimeOfDay;
+
+            TimeSpan diff;
+
+            if (to < from && to != TimeSpan.Zero)
+                return 0m;
+            else if (to < from && to == TimeSpan.Zero)
+                diff = (TimeSpan.FromHours(24) - from) + to;
+            else
+                diff = to - from;
+
+            if (diff < TimeSpan.Zero)
+                return 0m;
+
+            var hours = (decimal)diff.TotalMinutes / 60m;
+
+            return Math.Round(hours, 2, MidpointRounding.AwayFromZero);
+        }
+        #endregion
+
+        private void bandedGridViewTabel_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.RowHandle < 0) return;
+
+            var row = bandedGridViewTabel.GetRow(e.RowHandle) as TabOtvlRModel;
+            if (row == null) return;
+
+            if (e.Column == Priem_t_s || e.Column == Priem_t_po)
+                row.Priem_t = CalcHoursByFromTo(row.Priem_t_s, row.Priem_t_po);
+
+            if (e.Column == Sort_t_s || e.Column == Sort_t_po)
+                row.Sort_t = CalcHoursByFromTo(row.Sort_t_s, row.Sort_t_po);
+
+            if (e.Column == Drug_s_s || e.Column == Drug_s_po)
+                row.Drug_s = CalcHoursByFromTo(row.Drug_s_s, row.Drug_s_po);
+
+            if (e.Column == Otvl_r_s || e.Column == Otvl_r_po)
+                row.Otvl_r = CalcHoursByFromTo(row.Otvl_r_s, row.Otvl_r_po);
+
+            bandedGridViewTabel.RefreshRow(e.RowHandle);
+            bandedGridViewTabel.UpdateSummary();
+            UpdateTotalSumMasked();
+        }
+
+
+        #region 
+        private async void customButtonAdd_Click(object? sender, EventArgs e)
+        {
+            try
+            {
+                if (_idTabno <= 0)
+                {
+                    DevExpress.XtraEditors.XtraMessageBox.Show("Не выбран табельный.", "Добавление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (_monthMode == true)
+                {
+                    DevExpress.XtraEditors.XtraMessageBox.Show("Выберите конкретную дату!", "Добавление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                var day = _lastCalendarDate.Value.Date;
+                var model = new TabOtvlRModel
+                {
+                    Gr = _idGroup,
+                    Tab = _idTabno,
+                    Dat = day,
+                    Mg = $"{day.Month:00}{day.Year % 100:00}",
+                    N_r = GetNextNrForDay(day),
+
+                    Priem_t = 0m,
+                    Sort_t = 0m,
+                    Drug_s = 0m,
+                    Otvl_r = 0m,
+                    OrNew = 1
+                };
+
+                // 1) СНАЧАЛА вставляем в БД и получаем ID
+                int newId = await tabOtvlRDataService.SaveAsync(model); // должен вернуть id
+                model.Id = newId;
+
+                // 2) потом добавляем в грид
+                tabOtvlRList.Add(model);
+
+                bandedGridViewTabel.RefreshData();
+
+                int rowHandle = bandedGridViewTabel.GetRowHandle(tabOtvlRList.Count - 1);
+                bandedGridViewTabel.FocusedRowHandle = rowHandle;
+
+                // фокус на первую редактируемую ячейку
+                bandedGridViewTabel.FocusedColumn = Priem_t_s;
+                bandedGridViewTabel.ShowEditor();
+
+                bandedGridViewTabel.UpdateSummary();
+                UpdateTotalSumMasked();
+            }
+            catch (Exception ex)
+            {
+                DevExpress.XtraEditors.XtraMessageBox.Show(ex.Message, "Ошибка добавления",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int GetNextNrForDay(DateTime day)
+        {
+            int max = 0;
+
+            foreach (var r in tabOtvlRList)
+            {
+                if (r.Dat.HasValue && r.Dat.Value.Date == day.Date)
+                {
+                    if (r.N_r.HasValue && r.N_r.Value > max)
+                        max = r.N_r.Value;
+                }
+            }
+
+            return max + 1;
+        }
+
+        private async void customButtonDel_Click(object sender, EventArgs e)
+        {
+            var row = bandedGridViewTabel.GetFocusedRow() as TabOtvlRModel;
+            if (row == null) return;
+
+            var confirm = DevExpress.XtraEditors.XtraMessageBox.Show(
+                "Удалить запись?",
+                "Подтверждение",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes) return;
+
+            try
+            {
+                if (row.Id.HasValue && row.Id.Value > 0)
+                    await tabOtvlRDataService.DeleteAsync(row);
+
+                tabOtvlRList.Remove(row);
+
+                bandedGridViewTabel.UpdateSummary();
+                UpdateTotalSumMasked();
+            }
+            catch (Exception ex)
+            {
+                DevExpress.XtraEditors.XtraMessageBox.Show(ex.Message, "Ошибка удаления",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void bandedGridViewTabel_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        {
+            if (e.Row is not TabOtvlRModel row) return;
+            if (!row.Id.HasValue || row.Id.Value <= 0) return;
+
+            try
+            {
+                NormalizeRowBeforeSave(row);
+
+                await tabOtvlRDataService.SaveAsync(row); // UPDATE по Id
+                row.OrNew = 0;
+
+                bandedGridViewTabel.UpdateSummary();
+                UpdateTotalSumMasked();
+            }
+            catch (Exception ex)
+            {
+                DevExpress.XtraEditors.XtraMessageBox.Show(ex.Message, "Ошибка сохранения",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void NormalizeRowBeforeSave(TabOtvlRModel row)
+        {
+            row.Gr = _idGroup;
+            row.Tab = _idTabno;
+
+            if (row.Dat.HasValue)
+            {
+                row.Dat = row.Dat.Value.Date;
+                row.Mg = $"{row.Dat.Value.Month:00}{row.Dat.Value.Year % 100:00}";
+            }
+
+            if (!row.N_r.HasValue || row.N_r.Value <= 0)
+                row.N_r = row.Dat.HasValue ? GetNextNrForDay(row.Dat.Value) : 1;
+
+        }
+
+        #endregion
     }
 }

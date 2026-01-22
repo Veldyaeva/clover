@@ -22,7 +22,7 @@ namespace SewingProduction.Features.Tabel.Models
         [NotMapped]
         public string Fio =>
         string.Join(" ",
-            new[] { Lastname.Trim(), Firstname.Trim(), Middlename.Trim() }
+            new[] { Firstname.Trim(), Middlename.Trim(), Lastname.Trim()}
                 .Where(x => !string.IsNullOrWhiteSpace(x)));
     }
 }
