@@ -3755,7 +3755,7 @@ namespace SewingProduction.Features.Articul
             customCheckBox8.Text = "упаковка";
             customCheckBox8.UseVisualStyleBackColor = true;
             // 
-            // layoutControlGroup4
+            // layoutNorms
             // 
             layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup4.GroupBordersVisible = false;

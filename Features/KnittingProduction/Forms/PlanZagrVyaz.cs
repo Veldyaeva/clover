@@ -4773,7 +4773,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
             //MessageBox.Show($"Нажата кнопка с индексом {buttonIndex} в layoutControlGroup1");
 
-            //layoutControlGroup7.CustomHeaderButtons[0].Properties.Caption = "Скрыть информацию по делению накладной";
+            //layoutSeb.CustomHeaderButtons[0].Properties.Caption = "Скрыть информацию по делению накладной";
 
             switch (buttonIndex)
             {

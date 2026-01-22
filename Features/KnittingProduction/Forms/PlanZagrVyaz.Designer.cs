@@ -1665,7 +1665,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel5.TabIndex = 1;
             customLabel5.Text = "ID_ML_OP";
             // 
-            // layoutControlGroup8
+            // layoutTkans
             // 
             layoutControlGroup8.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup8.GroupBordersVisible = false;
@@ -1675,7 +1675,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup8.Size = new System.Drawing.Size(1007, 271);
             layoutControlGroup8.TextVisible = false;
             // 
-            // layoutControlGroup11
+            // layoutSumZP
             // 
             layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem12, layoutControlItem38, layoutControlItem11, layoutControlItem1, layoutControlItem39, layoutControlItem13, layoutControlItem40, layoutControlItem32, layoutControlItem36, layoutControlItem37, layoutControlItem42 });
             layoutControlGroup11.Location = new System.Drawing.Point(489, 0);
@@ -1804,7 +1804,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             splitterItem3.Name = "splitterItem3";
             splitterItem3.Size = new System.Drawing.Size(1003, 10);
             // 
-            // layoutControlGroup4
+            // layoutNorms
             // 
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem20, layoutControlItem24, layoutControlItem23, layoutControlItem27, layoutControlItem31, layoutControlItem35, layoutControlItem30, layoutControlItem34, layoutControlItem10, layoutControlItem18, layoutControlItem19, layoutControlItem21, layoutControlItem25, layoutControlItem33, emptySpaceItem3, emptySpaceItem4, emptySpaceItem5, layoutControlItem22, emptySpaceItem8, layoutControlItem26, emptySpaceItem1, layoutControlItem29 });
             layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
@@ -3228,7 +3228,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             splitterItem1.Name = "splitterItem1";
             splitterItem1.Size = new System.Drawing.Size(10, 139);
             // 
-            // layoutControlGroup7
+            // layoutSeb
             // 
             buttonImageOptions11.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions11.Image");
             buttonImageOptions13.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions13.Image");
@@ -3343,7 +3343,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem8.Size = new System.Drawing.Size(784, 354);
             layoutControlItem8.TextVisible = false;
             // 
-            // layoutControlGroup6
+            // layoutBrak
             // 
             buttonImageOptions26.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions26.Image");
             buttonImageOptions28.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions28.Image");

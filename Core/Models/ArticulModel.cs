@@ -140,7 +140,7 @@ namespace SewingProduction.Core.Models
 
         
         
-        public decimal Seb_rekom { get; set; }
+        
         
         public string Po { get; set; }
         public decimal Seb_z_s { get; set; }
@@ -589,7 +589,20 @@ namespace SewingProduction.Core.Models
             get => _koef;
             set => SetField(ref _koef, value);
         }
-        public decimal Seb_proizv { get; set; }
+        //public decimal Seb_proizv { get; set; }
+        private decimal _seb_proizv;
+        public decimal Seb_proizv
+            {
+            get => _seb_proizv;
+            set => SetField(ref _seb_proizv, value);
+        }
+        //public decimal Seb_rekom { get; set; }
+        private decimal _seb_rekom;
+        public decimal Seb_rekom
+        {
+            get => _seb_rekom;
+            set => SetField(ref _seb_rekom, value);
+        }
         // поля заполняются при изменении разделения труда
         //-----
         [NotMapped] public decimal Sum_zarpl { get; set; }

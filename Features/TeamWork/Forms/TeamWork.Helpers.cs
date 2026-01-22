@@ -186,7 +186,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void InitHeaderButtonTags()
         {
-            // layoutControlGroup8 — «Разделения труда»
+            // layoutTkans — «Разделения труда»
             TagByCaption(layoutControlGroup8, new (string caption, string tag)[] {
                 ("Добавить предварительное", "wd:add-prelim"),
                 ("Редактировать РТ",          "wd:edit"),
