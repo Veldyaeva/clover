@@ -40,6 +40,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
     public partial class PlanZagrVyaz : CustomForm, IThemeable
     {
         int vyazPodrKod = 0;
+        
+        private bool _suppressZadanyFocusedChanged;
+        private int _rzvLoadVersion;
 
         private readonly DebouncedLoader _loader = new(delayMs: 300);
 
@@ -2191,20 +2194,73 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     keyProperties: new[] { "kmlID", "pszNom" },
                     fields: new[] { "SyncSelection" }
                 );
-                //// удалить отсутствующие
+
                 gridViewZadanyListByMachine.ActiveFilterString = $" kmlID == {selectedRow.kmlID}";
                 gridControlZadanyListByMachine.ForceInitialize();
                 gridViewZadanyListByMachine.RefreshData();
 
-                gridControlZadanyListByMachine.BeginInvoke(new Action(async () =>
-                {
-                    FocusFirstRow(gridViewZadanyListByMachine);
-                    await RefreshRzvFromZadanyCurrentAsync(); // железно обновляем 3-й грид
-                }));
+                //gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
+                //{
+                //    if (gridViewZadanyListByMachine.RowCount <= 0) return;
 
-                //gridViewZadanyListByMachine.OptionsView.ShowAutoFilterRow = false;
-                //gridViewZadanyListByMachine.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
-                //gridViewZadanyListByMachine.OptionsFilter.AllowFilterEditor = false;
+                //    gridViewZadanyListByMachine.CloseEditor();
+                //    gridViewZadanyListByMachine.UpdateCurrentRow();
+
+                //    int first = gridViewZadanyListByMachine.GetVisibleRowHandle(0);
+
+                //    // если первая уже была в фокусе — уйдём на другую и вернёмся,
+                //    // чтобы FocusedRowChanged точно сработал
+                //    if (gridViewZadanyListByMachine.FocusedRowHandle == first &&
+                //        gridViewZadanyListByMachine.RowCount > 1)
+                //    {
+                //        int second = gridViewZadanyListByMachine.GetVisibleRowHandle(1);
+                //        gridViewZadanyListByMachine.FocusedRowHandle = second;
+                //    }
+
+                //    gridViewZadanyListByMachine.FocusedRowHandle = first;
+                //    gridViewZadanyListByMachine.ClearSelection();
+                //    gridViewZadanyListByMachine.SelectRow(first);
+                //}));
+                gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
+                {
+                    if (gridViewZadanyListByMachine.RowCount <= 0) return;
+
+                    // 1) Отслеживаем, сработало ли событие реально
+                    bool fired = false;
+                    DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler probe = (s, ee) => fired = true;
+                    gridViewZadanyListByMachine.FocusedRowChanged += probe;
+
+                    // 2) Пробуем "честно" сменить фокус так, чтобы событие точно могло сработать
+                    gridViewZadanyListByMachine.CloseEditor();
+                    gridViewZadanyListByMachine.UpdateCurrentRow();
+
+                    int oldHandle = gridViewZadanyListByMachine.FocusedRowHandle;
+                    int first = gridViewZadanyListByMachine.GetVisibleRowHandle(0);
+
+                    // если уже на первой и есть 2+ строк — уходим на вторую и возвращаемся
+                    if (oldHandle == first && gridViewZadanyListByMachine.RowCount > 1)
+                    {
+                        int second = gridViewZadanyListByMachine.GetVisibleRowHandle(1);
+                        gridViewZadanyListByMachine.FocusedRowHandle = second;
+                    }
+
+                    gridViewZadanyListByMachine.FocusedRowHandle = first;
+                    gridViewZadanyListByMachine.ClearSelection();
+                    gridViewZadanyListByMachine.SelectRow(first);
+
+                    // 3) Снимаем "пробник"
+                    gridViewZadanyListByMachine.FocusedRowChanged -= probe;
+
+                    // 4) Если DevExpress НЕ вызвал событие (например, осталась 1 строка) —
+                    //    честно гарантируем выполнение той же логики обновления 3-го грида
+                    if (!fired)
+                    {
+                        gridViewZadanyListByMachine_FocusedRowChanged(
+                            gridViewZadanyListByMachine,
+                            new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs(oldHandle, first)
+                        );
+                    }
+                }));
             }
             catch (Exception ex)
             {
@@ -2255,6 +2311,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                if (_suppressZadanyFocusedChanged) return;
+
                 var selectedRow = _zadanyListByMachineBindingSource.Current as ZadanyListByMachine;
                 if (selectedRow != null)
                 {
@@ -2291,8 +2349,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
                 else
                 {
-                    //await LoadRzvPachListByNomNewDataAsync(0, "");
-                    await RefreshRzvFromZadanyCurrentAsync();
+                    int myVersion = ++_rzvLoadVersion;
+                    if (myVersion != _rzvLoadVersion) return;
+                    await LoadRzvPachListByNomNewDataAsync(0, "");
+                    //await RefreshRzvFromZadanyCurrentAsync();
                 }
                 //var missingRecords = _rzvPachListByNomNewBindingSource.List.Cast<dynamic>()
                 //    .Where(newRec => newRec != null &&
