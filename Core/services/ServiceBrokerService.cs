@@ -50,7 +50,7 @@ namespace SewingProduction.Core.services
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPlanZagrVyazByPachList");
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных getSQLObjectSource");
                 return new List<TableListenInfo>();
             }
         }

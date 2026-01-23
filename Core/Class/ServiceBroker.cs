@@ -193,7 +193,8 @@ namespace SewingProduction
                                         // 1) Новый контракт (если форма его поддерживает)
                                         if (_form is IDataUpdatableFormAsyncV2 asyncFormV2)
                                         {
-                                            await asyncFormV2.UpdateDataInFormAsync(_table, changedFields);
+                                            //await asyncFormV2.UpdateDataInFormAsync(_table, changedFields);
+                                            await asyncFormV2.UpdateDataInFormAsync(_table);
                                             Debug.WriteLine("Async form updated." + _table);
                                         }
                                         // 2) Старый контракт (как было)
