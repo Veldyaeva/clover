@@ -134,7 +134,7 @@ namespace SewingProduction.Features.Articul.Forms
                 //есть дата описания модели - редактирование запрещено
                 if (_currentModel.DateOpis != null)
                 {
-                    layoutGost.Enabled = false;
+                    layoutGostInsert.Enabled = false;
                     //SetGroupReadOnly(layoutGost, true);
                     gcButtonEdit.Visible = false;
                 }
