@@ -7,7 +7,7 @@
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Core\Class\CustomControls\CastomLayoutControl.cs">
+    <Compile Update="Core\Class\CustomControls\CustomLayoutControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomButton.cs">

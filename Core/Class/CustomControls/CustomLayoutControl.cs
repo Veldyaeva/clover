@@ -10,13 +10,13 @@ using static DevExpress.LookAndFeel.DXSkinColors;
 
 namespace SewingProduction.Core.Class
 {
-    internal class CastomLayoutControl : DevExpress.XtraLayout.LayoutControl, IThemeable, IThemeableControl
+    internal class CustomLayoutControl : DevExpress.XtraLayout.LayoutControl, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
-        public CastomLayoutControl()
+        public CustomLayoutControl()
         {
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged;
