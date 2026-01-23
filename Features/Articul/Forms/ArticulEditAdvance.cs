@@ -551,8 +551,6 @@ namespace SewingProduction.Features.Articul.Forms
                 "Заголовок",
                 "По умолчанию"
             );
-
-
         }
         private void WireModelOnce()
         {

@@ -46,7 +46,9 @@ namespace SewingProduction.Features.Articul.Forms
             repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             pictureBoxArticul = new System.Windows.Forms.PictureBox();
             txbSost3 = new CustomTextBoxEx();
-            dataLayoutCommonArticul = new DevExpress.XtraDataLayout.DataLayoutControl();
+            //dataLayoutCommonArticul = new DevExpress.XtraDataLayout.DataLayoutControl();
+            dataLayoutCommonArticul = new CastomLayoutControl();
+
             toolboxControl1 = new DevExpress.XtraToolbox.ToolboxControl();
             cbTkan = new CustomSearchLookUpEdit();
             txtSeb_rekom = new CustomTextBoxEx();
@@ -3481,7 +3483,8 @@ namespace SewingProduction.Features.Articul.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem26;
-        private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutCommonArticul;
+        //private DevExpress.XtraDataLayout.DataLayoutControl dataLayoutCommonArticul;
+        private CastomLayoutControl dataLayoutCommonArticul;
         private CustomSearchLookUpEdit cbTkan;
         private CustomSearchLookUpEdit lookUpGost;
         private DevExpress.XtraGrid.Views.Grid.GridView customSearchLookUpEdit1View;
