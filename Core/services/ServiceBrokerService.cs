@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Org.BouncyCastle.Asn1.Ocsp;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -14,14 +15,20 @@ using static SewingProduction.Core.Models.ServiceBrokerModel;
 
 namespace SewingProduction.Core.services
 {
-    internal class ServiceBroker
+    public class ServiceBrokerService
     {
         private static DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
+        public ServiceBrokerService(DatabaseHelper dbHelper)
+        {
+            _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
+            _dbService = new DbService(_dbHelper);
+        }
+//        public async Task<List<TableListenInfo>> GetObjectListForServiceBroker(string _objectName, CancellationToken cancellationToken)
+        public async Task<List<ServiceBrokerModel.TableListenInfo>> GetObjectListForServiceBroker(string _objectName, CancellationToken cancellationToken)
 
-        public async Task<List<TableListenInfo>> GetObjectListForServiceBroker(string _objectName, CancellationToken cancellationToken)
         {
             try
             {
@@ -32,9 +39,7 @@ namespace SewingProduction.Core.services
                     new { objName = _objectName }, 
                     cancellationToken: cancellationToken);
 
-                var list = (await connection
-                    .QueryAsync<TableListenInfo>(command))
-                    .AsList();
+                var list = (await connection.QueryAsync<ServiceBrokerModel.TableListenInfo>(command)).AsList();
 
                 return list;
             }

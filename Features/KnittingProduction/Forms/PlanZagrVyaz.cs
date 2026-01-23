@@ -33,27 +33,37 @@ using System.Windows.Forms;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
 using static SewingProduction.Helpers.GridHelper;
+using static SewingProduction.Core.helpers.ServiceBrokerHelper;
+using SewingProduction.Core.services;
+using SewingProduction.Core.Models;
+using SewingProduction.Core.interfaces;
+
+
 
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class PlanZagrVyaz : CustomForm, IThemeable
+    public partial class PlanZagrVyaz : CustomForm, IThemeable, IDataUpdatableFormAsyncV2
+        //, IDataUpdatableForm, IDataUpdatableFormAsync
     {
         int vyazPodrKod = 0;
-        
+
         private bool _suppressZadanyFocusedChanged;
         private int _rzvLoadVersion;
+        private ServiceBrokerHelper? _sbHelper;
+        private ServiceBroker? _broker;
+        private CancellationTokenSource? _loadCts;
 
         private readonly DebouncedLoader _loader = new(delayMs: 300);
-
-        private CancellationTokenSource? _loadCts;
 
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private static MlService _mlService;
         private static ArtNormRepository _anService;
+        private static ServiceBrokerService _sbService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
+        private static ServiceBrokerHelper _cbHelper;
         //        private static BindingSourceHelper _bSHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
@@ -146,11 +156,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
             _anService = new ArtNormRepository(_dbHelper);
+            _sbService = new ServiceBrokerService(_dbHelper);
+            //_sbService.Changed += UpdateDataInFormAsync;
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();
+            //_sbHelper = new ServiceBrokerHelper(this, List<string>{ "GetPlanZagrVyazByPachList" });
+
             _vyazService = new VyazService(_dbHelper);
             _mlService = new MlService(_dbHelper);
             ThemeManager.UpdateTheme(this);
+
+            //_broker.Changed += UpdateDataInFormAsync;
+            //_sbHelper.UseSchemaInListenName = false;
+
+            //_broker.StartBroker();
+            //_broker.StartListening(columns, listenName);
+
             //нужно будет определять, мастер вяз цеха или отпарки заходит в форму и
             //сохранять признак подразделения для дальнейшней загрузки операций только того подразделения, чей мастер зашел
             // пока что примем, что заходит только мастер вяз цеха, признак пропишем жестко 1
@@ -162,7 +183,61 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
             vyazPodrKod = 1;
         }
+        private async Task InitServiceBrokerAsync(CancellationToken ct)
+        {
+            // objectName = то, что ты передаёшь в GetObjectListForServiceBroker(...)
+            var objectNames = new[]
+            {
+                "GetPlanZagrVyazByPachList",
+                "getSmenZadanyVyaz"
+            };
 
+            _sbHelper = new ServiceBrokerHelper(
+                owner: this,
+                loadByObjectAsync: (obj, token) => _sbService.GetObjectListForServiceBroker(obj, token)
+            )
+            {
+                // если StartListening НЕ принимает "dbo.table", поставь false
+                //UseSchemaInListenName = true
+                UseSchemaInListenName = false
+            };
+
+            await _sbHelper.InitAndStartAsync(objectNames, ct);
+
+            // (необязательно) отладка:
+            // var tables = _sbHelper.GetListeningTables();
+        }
+        public async Task UpdateDataInFormAsync(string table, string changedFieldsCsv)
+        {
+            if (_sbHelper == null) return;
+
+            await _sbHelper.HandleBrokerUpdateAsync(table, changedFieldsCsv);
+
+            // Забираешь список того, что реально затронуто (с учетом пересечения полей)
+            var affected = _sbHelper.DrainPending();
+
+            // Дальше твоя логика: сгруппировать по ObjectName и обновить нужные данные
+            // Пример:
+            foreach (var group in affected.GroupBy(x => x.ObjectName))
+            {
+                var objectName = group.Key;
+                // group: содержит TableKey, MatchedFields и т.д.
+                // Ты решаешь, что и как перезагружать.
+                MessageBox.Show($"{ objectName }");
+            }
+        }
+        public async Task UpdateDataInFormAsync(string table, List<string> changedFields)
+        {
+            if (_sbHelper == null) return;
+
+            await _sbHelper.HandleBrokerUpdateAsync(table, changedFields);
+            var affected = _sbHelper.DrainPending();
+            // твоя логика
+            //MessageBox.Show($"{ affected }");
+            LoadSmenZadanyVyazDataAsync();
+            MessageBox.Show($"{table} updated");
+
+        }
         private async Task InitializeBindingsAsync()
         {
             try
@@ -1956,10 +2031,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                _loadCts = new CancellationTokenSource();
+                InitServiceBrokerAsync(_loadCts.Token);
+
                 Task bindingsTask = InitializeBindingsAsync();
                 await Task.WhenAll(bindingsTask);
                 await LoadPlanTotalHoursByKnitMachineDataAsync();
                 await LoadSmenZadanyVyazDataAsync();
+            }
+            catch (OperationCanceledException ex)
+            {
+                Debug.WriteLine($"OperationCanceledException: {ex}");
             }
             catch (Exception ex)
             {
@@ -2910,9 +2992,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         if (_kmlID != curr.kwsmlKmlID && record.olPzvKmlID == 0)
                         {
                             var _result = MessageBox.Show(
-                                "Внимание! Назначаемая машина не совпадает с плановой. Продолжить?", 
-                                "", 
-                                MessageBoxButtons.YesNo, 
+                                "Внимание! Назначаемая машина не совпадает с плановой. Продолжить?",
+                                "",
+                                MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning);
                             if (_result == DialogResult.No)
                             {
@@ -4763,11 +4845,37 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //    Application.Idle -= ExpandGroupsOnIdle;
         //    base.OnFormClosed(e);
         //}
-        protected override void OnFormClosed(FormClosedEventArgs e)
+        //protected override void OnFormClosed(FormClosedEventArgs e)
+        //{
+        //    Application.Idle -= ExpandGroupsOnIdle;
+        //    _loadCts?.Cancel();
+        //    base.OnFormClosed(e);
+        //}
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Idle -= ExpandGroupsOnIdle;
             _loadCts?.Cancel();
             base.OnFormClosed(e);
+        }
+        //protected override async void OnFormClosing(FormClosingEventArgs e)
+        //{
+        //    _loadCts?.Cancel();
+
+        //    if (_sbHelper != null)
+        //        await _sbHelper.DisposeAsync();
+
+        //    _loadCts?.Dispose();
+        //    base.OnFormClosing(e);
+        //}
+        protected async void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            _loadCts?.Cancel();
+
+            if (_sbHelper != null)
+                await _sbHelper.DisposeAsync();
+
+            _loadCts?.Dispose();
+            base.OnFormClosing(e);
         }
 
         private void layoutControlGroup7_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
@@ -4831,7 +4939,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 case 4:
                     gridViewPZVOperList.ExpandAllGroups();
                     break;
-                
+
             }
         }
 
@@ -4848,5 +4956,31 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     break;
             }
         }
+
+        //void IDataUpdatableForm.UpdateDataInForm(string table)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //Task IDataUpdatableFormAsync.UpdateDataInFormAsync(string table)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public async void UpdateDataInForm(string table)
+        //{
+        //    await UpdateDataInFormAsync(table);
+        //}
+
+        //public async Task UpdateDataInFormAsync(string table, List<string> changedFields)
+        //{
+        //    // 1) отправляем событие в твой ServiceBrokerHelper (он фильтрует objectName по полям)
+        //    await _sbHelper.HandleBrokerUpdateAsync(table, changedFields);
+
+        //    // 2) забираем, какие objectName затронуты
+        //    var affected = _sbHelper.DrainPending();
+
+        //    // 3) дальше ТВОЯ логика: перебираешь affected и обновляешь данные
+        //}
     }
 }

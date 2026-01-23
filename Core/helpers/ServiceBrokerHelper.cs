@@ -1,4 +1,18 @@
-﻿// ServiceBrokerDependencyHelper.cs
+﻿// ServiceBrokerHelper.cs
+// Итоговый универсальный хелпер для формы:
+// - Ты передаёшь список ObjectName (хранимки/SQL-объекты)
+// - Хелпер сам по каждому ObjectName вызывает твой GetObjectListForServiceBroker(objectName, ct)
+// - Строит общий план прослушивания: TableKey (schema.table) -> UNION полей
+// - Строит индекс зависимостей: TableKey -> ObjectName -> поля, которые использует этот ObjectName
+// - При событии от брокера (table + changedFieldsCSV) фильтрует зависимости по пересечению полей
+// - Складывает результаты в очередь, форма забирает DrainPending() и решает, что обновлять
+//
+// ВАЖНО:
+// 1) Этот файл НЕ содержит объявление TableListenInfo (ты сказала, модель в отдельном файле).
+//    Хелпер предполагает, что в проекте есть класс TableListenInfo с полями:
+//    ObjectName, TableSchema, TableName, TableFieldList.
+// 2) Если твой ServiceBroker.StartListening(columns, table) НЕ понимает "schema.table",
+//    включи UseSchemaInListenName = false (по умолчанию true).
 #nullable enable
 using System;
 using System.Collections.Concurrent;
@@ -11,34 +25,35 @@ using static SewingProduction.Core.Models.ServiceBrokerModel;
 namespace SewingProduction.Core.helpers
 {
     /// <summary>
-    /// Результат: какой ObjectName (хранимка/объект) затронут, по какой таблице, и какие поля этот ObjectName использует.
+    /// Результат: какой ObjectName затронут, по какой таблице, и какие поля совпали.
     /// </summary>
     public sealed class ObjectTableFieldMatch
     {
-        public string ObjectName { get; init; } = "";   // имя хранимки/объекта
+        public string ObjectName { get; init; } = "";   // хранимка/объект
         public string TableKey { get; init; } = "";     // "dbo.table"
-        public IReadOnlyList<string> Fields { get; init; } = Array.Empty<string>();
+
+        // Поля, которые этот ObjectName использует (из TableFieldList)
+        public IReadOnlyList<string> UsedFields { get; init; } = Array.Empty<string>();
+
+        // Поля, которые реально изменились (пришли от брокера)
+        public IReadOnlyList<string> ChangedFields { get; init; } = Array.Empty<string>();
+
+        // Пересечение UsedFields и ChangedFields (если пусто - match не добавляем)
+        public IReadOnlyList<string> MatchedFields { get; init; } = Array.Empty<string>();
+
         public DateTime DetectedAtUtc { get; init; }
     }
 
-    /// <summary>
-    /// Хелпер:
-    /// - получает список ObjectName
-    /// - по каждому ObjectName грузит List&lt;TableListenInfo&gt;
-    /// - объединяет их в общий план (таблица -> union полей) и индекс (таблица -> objectName + fields)
-    /// - запускает брокеры
-    /// - при обновлении таблицы возвращает, какие objectName затронуты
-    /// </summary>
-    public sealed class ServiceBrokerDependencyHelper : IAsyncDisposable
+    public sealed class ServiceBrokerHelper : IAsyncDisposable
     {
         private readonly object _owner;
         private readonly Func<string, CancellationToken, Task<List<TableListenInfo>>> _loadByObjectAsync;
         private readonly StringComparer _cmp;
 
-        // objectName -> list(schema, table, fields)
+        // objectName -> list rows
         private readonly Dictionary<string, List<TableListenInfo>> _sourcesByObject;
 
-        // tableKey -> list(objectName + fields)
+        // tableKey -> list(objectName + used fields)
         private readonly Dictionary<string, List<DependencyItem>> _depsByTable;
 
         // tableKey -> union(fields)
@@ -47,7 +62,7 @@ namespace SewingProduction.Core.helpers
         // tableKey -> broker
         private readonly Dictionary<string, ServiceBroker> _brokers;
 
-        // pending matches for the form
+        // pending matches
         private readonly ConcurrentQueue<ObjectTableFieldMatch> _pending;
 
         private sealed class DependencyItem
@@ -56,7 +71,13 @@ namespace SewingProduction.Core.helpers
             public HashSet<string> Fields { get; init; } = new(StringComparer.OrdinalIgnoreCase);
         }
 
-        public ServiceBrokerDependencyHelper(
+        /// <summary>
+        /// Если true: StartListening получает "schema.table".
+        /// Если false: StartListening получает только "table".
+        /// </summary>
+        public bool UseSchemaInListenName { get; set; } = true;
+
+        public ServiceBrokerHelper(
             object owner,
             Func<string, CancellationToken, Task<List<TableListenInfo>>> loadByObjectAsync,
             StringComparer? comparer = null)
@@ -75,22 +96,50 @@ namespace SewingProduction.Core.helpers
         public static string MakeTableKey(string schema, string table) => $"{schema}.{table}";
 
         /// <summary>
-        /// Главный метод: передаёшь список ObjectName, хелпер сам всё загрузит, объединит и запустит брокеры.
+        /// Инициализация и запуск:
+        /// - загрузит зависимости по каждому ObjectName
+        /// - построит индекс
+        /// - запустит брокеры на общий (объединенный) список таблиц/полей
         /// </summary>
         public async Task InitAndStartAsync(IEnumerable<string> objectNames, CancellationToken ct)
         {
             if (objectNames == null) throw new ArgumentNullException(nameof(objectNames));
 
-            // 1) загрузка зависимостей по каждому ObjectName
             _sourcesByObject.Clear();
 
-            foreach (var obj in objectNames.Where(x => !string.IsNullOrWhiteSpace(x)).Distinct(_cmp))
+            foreach (var obj in objectNames
+                         .Where(x => !string.IsNullOrWhiteSpace(x))
+                         .Select(x => x.Trim())
+                         .Distinct(_cmp))
             {
                 ct.ThrowIfCancellationRequested();
 
-                var list = await _loadByObjectAsync(obj, ct).ConfigureAwait(false) ?? new List<TableListenInfo>();
+                List<TableListenInfo> list;
+                try
+                {
+                    if (_loadByObjectAsync is null)
+                        throw new InvalidOperationException("_loadByObjectAsync == null. Делегат не передан в конструктор ServiceBrokerHelper.");
 
-                // на всякий случай: если ObjectName не заполнен в строках, проставим
+                    if (obj is null)
+                        throw new InvalidOperationException("obj == null (не должен быть null после фильтрации).");
+
+                    // чтобы увидеть, ЧТО за делегат реально лежит внутри:
+                    var m = _loadByObjectAsync.Method;
+                    var target = _loadByObjectAsync.Target;
+                    System.Diagnostics.Debug.WriteLine($"LOAD: method={m.DeclaringType?.FullName}.{m.Name}, target={target?.GetType().FullName ?? "<static>"}");
+
+                    list = await _loadByObjectAsync(obj, ct).ConfigureAwait(false) ?? new List<TableListenInfo>();
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException(
+                        $"Ошибка при получении списка таблиц/полей для ObjectName='{obj}'. " +
+                        $"Проверь GetObjectListForServiceBroker и SQL-объект.",
+                        ex);
+                }
+
+
+                // На всякий случай: если ObjectName не заполнен в строках — заполним.
                 foreach (var row in list)
                 {
                     if (string.IsNullOrWhiteSpace(row.ObjectName))
@@ -100,16 +149,121 @@ namespace SewingProduction.Core.helpers
                 _sourcesByObject[obj] = list;
             }
 
-            // 2) индекс + общий план
             RebuildIndex();
-
-            // 3) запуск брокеров
             StartAllBrokers();
         }
 
         /// <summary>
-        /// Перестроить индекс "таблица -> какие ObjectName/поля используют" и общий план (union полей по таблице).
+        /// Вызов при событии от брокера:
+        /// tableFromBroker: "dbo.table" или "table"
+        /// changedFieldsCsv: "a,b,c" (может содержать несколько полей)
         /// </summary>
+        public Task HandleBrokerUpdateAsync(string tableFromBroker, string? changedFieldsCsv)
+        {
+            var changed = ParseFields(changedFieldsCsv ?? "");
+            return HandleBrokerUpdateAsync(tableFromBroker, changed);
+        }
+
+        /// <summary>
+        /// Вызов при событии от брокера:
+        /// tableFromBroker: "dbo.table" или "table"
+        /// changedFields: перечисление изменённых полей (может быть несколько)
+        /// </summary>
+        public Task HandleBrokerUpdateAsync(string tableFromBroker, IEnumerable<string> changedFields)
+        {
+            if (string.IsNullOrWhiteSpace(tableFromBroker))
+                return Task.CompletedTask;
+
+            var incoming = tableFromBroker.Trim();
+            var tableKey = incoming;
+
+            // Если пришло без схемы (например "dop_ras") — найдём полное "dbo.dop_ras"
+            if (!incoming.Contains('.'))
+            {
+                var match = _depsByTable.Keys.FirstOrDefault(k =>
+                    k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
+
+                if (match != null)
+                    tableKey = match;
+            }
+
+            if (!_depsByTable.TryGetValue(tableKey, out var deps))
+                return Task.CompletedTask;
+
+            var changedSet = (changedFields ?? Array.Empty<string>())
+                .Select(x => (x ?? "").Trim())
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            var hasChangedFields = changedSet.Count > 0;
+            var now = DateTime.UtcNow;
+
+            foreach (var d in deps)
+            {
+                // Если брокер не прислал поля (редко, но бывает) — считаем, что влияет на всё
+                List<string> matched;
+                if (!hasChangedFields)
+                {
+                    matched = d.Fields.OrderBy(x => x).ToList();
+                }
+                else
+                {
+                    matched = d.Fields.Where(changedSet.Contains).OrderBy(x => x).ToList();
+                    if (matched.Count == 0)
+                        continue; // изменились поля, которые этот ObjectName не использует
+                }
+
+                _pending.Enqueue(new ObjectTableFieldMatch
+                {
+                    ObjectName = d.ObjectName,
+                    TableKey = tableKey,
+                    UsedFields = d.Fields.OrderBy(x => x).ToList(),
+                    ChangedFields = hasChangedFields ? changedSet.OrderBy(x => x).ToList() : Array.Empty<string>(),
+                    MatchedFields = matched,
+                    DetectedAtUtc = now
+                });
+            }
+
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Забрать все накопленные совпадения и очистить очередь.
+        /// </summary>
+        public List<ObjectTableFieldMatch> DrainPending()
+        {
+            var list = new List<ObjectTableFieldMatch>();
+            while (_pending.TryDequeue(out var item))
+                list.Add(item);
+            return list;
+        }
+
+        /// <summary>Для отладки: какие таблицы реально слушаем.</summary>
+        public IReadOnlyList<string> GetListeningTables()
+            => _unionFieldsByTable.Keys.OrderBy(k => k).ToList();
+
+        /// <summary>Для отладки: какие union-поля слушаем по таблице.</summary>
+        public IReadOnlyList<string> GetListeningFields(string tableKey)
+        {
+            if (_unionFieldsByTable.TryGetValue(tableKey, out var set))
+                return set.OrderBy(x => x).ToList();
+
+            return Array.Empty<string>();
+        }
+
+        public ValueTask DisposeAsync()
+        {
+            // Если у ServiceBroker есть Stop/Dispose — вызови здесь.
+            _brokers.Clear();
+            _sourcesByObject.Clear();
+            _depsByTable.Clear();
+            _unionFieldsByTable.Clear();
+            while (_pending.TryDequeue(out _)) { }
+            return ValueTask.CompletedTask;
+        }
+
+        // ----------------- internal -----------------
+
         private void RebuildIndex()
         {
             _depsByTable.Clear();
@@ -137,14 +291,13 @@ namespace SewingProduction.Core.helpers
                     var tableKey = MakeTableKey(schema, table);
                     var fields = ParseFields(fieldCsv);
 
-                    // depsByTable
+                    // depsByTable: tableKey -> objectName -> used fields
                     if (!_depsByTable.TryGetValue(tableKey, out var depList))
                     {
                         depList = new List<DependencyItem>();
                         _depsByTable[tableKey] = depList;
                     }
 
-                    // если один objectName несколько раз встретился по одной таблице — объединяем поля
                     var dep = depList.FirstOrDefault(d => _cmp.Equals(d.ObjectName, objectName));
                     if (dep == null)
                     {
@@ -160,7 +313,7 @@ namespace SewingProduction.Core.helpers
                         foreach (var f in fields) dep.Fields.Add(f);
                     }
 
-                    // unionFieldsByTable
+                    // unionFieldsByTable: tableKey -> union(fields)
                     if (!_unionFieldsByTable.TryGetValue(tableKey, out var union))
                     {
                         union = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -171,9 +324,6 @@ namespace SewingProduction.Core.helpers
             }
         }
 
-        /// <summary>
-        /// Запускает ServiceBroker для всех таблиц из общего плана: tableKey -> union fields.
-        /// </summary>
         private void StartAllBrokers()
         {
             foreach (var kvp in _unionFieldsByTable)
@@ -189,9 +339,7 @@ namespace SewingProduction.Core.helpers
 
                 var columns = string.Join(",", unionFields);
 
-                // ВАЖНО:
-                // Если StartListening НЕ понимает "schema.table", поменяй на ExtractTableName(tableKey)
-                var listenName = tableKey;
+                var listenName = UseSchemaInListenName ? tableKey : ExtractTableName(tableKey);
 
                 broker.StartListening(columns, listenName);
 
@@ -205,87 +353,6 @@ namespace SewingProduction.Core.helpers
             return idx >= 0 ? tableKey[(idx + 1)..] : tableKey;
         }
 
-        /// <summary>
-        /// Вызывай из формы, когда ServiceBroker поймал изменение.
-        /// tableFromBroker может быть "dbo.table" или "table".
-        /// Хелпер положит в очередь совпадения по всем ObjectName, которые зависят от этой таблицы.
-        /// </summary>
-        public Task HandleBrokerUpdateAsync(string tableFromBroker)
-        {
-            if (string.IsNullOrWhiteSpace(tableFromBroker))
-                return Task.CompletedTask;
-
-            var incoming = tableFromBroker.Trim();
-            var tableKey = incoming;
-
-            // пришло без схемы (например "dop_ras") — найдём "dbo.dop_ras"
-            if (!incoming.Contains('.'))
-            {
-                var match = _depsByTable.Keys.FirstOrDefault(k =>
-                    k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
-
-                if (match != null)
-                    tableKey = match;
-            }
-
-            if (_depsByTable.TryGetValue(tableKey, out var deps))
-            {
-                var now = DateTime.UtcNow;
-
-                foreach (var d in deps)
-                {
-                    _pending.Enqueue(new ObjectTableFieldMatch
-                    {
-                        ObjectName = d.ObjectName,
-                        TableKey = tableKey,
-                        Fields = d.Fields.OrderBy(x => x).ToList(),
-                        DetectedAtUtc = now
-                    });
-                }
-            }
-
-            return Task.CompletedTask;
-        }
-
-        /// <summary>
-        /// Забрать все накопленные совпадения и очистить очередь.
-        /// Ты в форме просматриваешь этот список и решаешь, что обновлять.
-        /// </summary>
-        public List<ObjectTableFieldMatch> DrainPending()
-        {
-            var list = new List<ObjectTableFieldMatch>();
-            while (_pending.TryDequeue(out var item))
-                list.Add(item);
-            return list;
-        }
-
-        /// <summary>
-        /// Для отладки: какие таблицы реально слушаем.
-        /// </summary>
-        public IReadOnlyList<string> GetListeningTables()
-            => _unionFieldsByTable.Keys.OrderBy(k => k).ToList();
-
-        /// <summary>
-        /// Для отладки: какие поля (union) слушаем по конкретной таблице.
-        /// </summary>
-        public IReadOnlyList<string> GetListeningFields(string tableKey)
-        {
-            if (_unionFieldsByTable.TryGetValue(tableKey, out var set))
-                return set.OrderBy(x => x).ToList();
-            return Array.Empty<string>();
-        }
-
-        public ValueTask DisposeAsync()
-        {
-            // Если у ServiceBroker есть Stop/Dispose — вызови здесь.
-            _brokers.Clear();
-            _sourcesByObject.Clear();
-            _depsByTable.Clear();
-            _unionFieldsByTable.Clear();
-            while (_pending.TryDequeue(out _)) { }
-            return ValueTask.CompletedTask;
-        }
-
         private static IEnumerable<string> ParseFields(string csv)
         {
             return (csv ?? "")
@@ -295,255 +362,3 @@ namespace SewingProduction.Core.helpers
         }
     }
 }
-
-//-----------------------------------------------------------
-//    // ServiceBrokerHelper.cs
-//    // Универсальный хелпер/менеджер для ServiceBroker, пригодный для использования из любой формы.
-//    // - Загружает список таблиц (schema, name, fields) через делегат (подходит под Dapper/EF/ADO.NET)
-//    // - Хранит брокеры по ключу "schema.table"
-//    // - Регистрирует обработчики обновлений (вместо switch)
-//    // - Умеет безопасно выполнять UI-обновления через переданный UI-dispatcher (WinForms/WPF/что угодно)
-//    //
-//    // ВАЖНО:
-//    // 1) Если ваш ServiceBroker.StartListening(columns, table) НЕ понимает формат "schema.table",
-//    //    то в StartAsync замените listenName = key на listenName = x.tableName.
-//    // 2) Если у ServiceBroker есть Stop/Dispose — добавьте вызов в DisposeAsync.
-
-//#nullable enable
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading;
-//using System.Threading.Tasks;
-//using static SewingProduction.Core.Models.ServiceBrokerModel;
-
-//namespace SewingProduction.Core.helpers
-//{
-//    /// <summary>
-//    /// Универсальный менеджер ServiceBroker'ов.
-//    /// </summary>
-//    public class ServiceBrokerManager : IAsyncDisposable
-//    {
-//        private readonly object _owner;
-//        private readonly Func<CancellationToken, Task<List<TableListenInfo>>> _loadListAsync;
-//        private readonly Func<Func<Task>, Task> _runOnUiAsync;
-
-//        private readonly Dictionary<string, ServiceBroker> _brokers;
-//        private readonly Dictionary<string, Func<Task>> _handlers;
-
-//        /// <summary>Последний загруженный список из источника (SQL/хранимки).</summary>
-//        public IReadOnlyList<TableListenInfo> LastLoaded => _lastLoaded;
-//        private List<TableListenInfo> _lastLoaded = new();
-
-//        public ServiceBrokerManager(
-//            object owner,
-//            Func<CancellationToken, Task<List<TableListenInfo>>> loadListAsync,
-//            Func<Func<Task>, Task>? runOnUiAsync = null,
-//            StringComparer? comparer = null)
-//        {
-//            _owner = owner ?? throw new ArgumentNullException(nameof(owner));
-//            _loadListAsync = loadListAsync ?? throw new ArgumentNullException(nameof(loadListAsync));
-//            _runOnUiAsync = runOnUiAsync ?? (f => f());
-
-//            comparer ??= StringComparer.OrdinalIgnoreCase;
-//            _brokers = new Dictionary<string, ServiceBroker>(comparer);
-//            _handlers = new Dictionary<string, Func<Task>>(comparer);
-//        }
-
-//        /// <summary>Ключ для словарей/обработчиков: "schema.table".</summary>
-//        public static string MakeKey(string schema, string table) => $"{schema}.{table}";
-//        public static string MakeKey(TableListenInfo x) => MakeKey(x.TableSchema, x.TableName);
-
-//        /// <summary>
-//        /// Регистрирует обработчик обновлений для таблицы (ключ "schema.table").
-//        /// </summary>
-//        public void RegisterHandler(string tableKey, Func<Task> handler)
-//        {
-//            if (string.IsNullOrWhiteSpace(tableKey))
-//                throw new ArgumentException("Table key is empty.", nameof(tableKey));
-
-//            _handlers[tableKey] = handler ?? throw new ArgumentNullException(nameof(handler));
-//        }
-
-//        /// <summary>
-//        /// Регистрирует обработчик, который должен выполняться в UI-потоке (например, изменение TextBox).
-//        /// </summary>
-//        public void RegisterUiHandler(string tableKey, Action uiAction)
-//        {
-//            if (uiAction is null) throw new ArgumentNullException(nameof(uiAction));
-
-//            RegisterHandler(tableKey, () => _runOnUiAsync(() =>
-//            {
-//                uiAction();
-//                return Task.CompletedTask;
-//            }));
-//        }
-
-//        /// <summary>
-//        /// Возвращает true, если брокер уже создан и запущен для указанного ключа "schema.table".
-//        /// </summary>
-//        public bool IsStarted(string tableKey) => _brokers.ContainsKey(tableKey);
-
-//        /// <summary>
-//        /// Загружает список таблиц (через loadListAsync) и запускает брокеры для новых таблиц.
-//        /// </summary>
-//        public async Task StartAsync(CancellationToken ct)
-//        {
-//            var list = await _loadListAsync(ct).ConfigureAwait(false) ?? new List<TableListenInfo>();
-
-//            // фильтрация мусорных строк
-//            list = list.Where(x =>
-//                    !string.IsNullOrWhiteSpace(x.TableSchema) &&
-//                    !string.IsNullOrWhiteSpace(x.TableName) &&
-//                    !string.IsNullOrWhiteSpace(x.TableFieldList))
-//                .ToList();
-
-//            _lastLoaded = list;
-
-//            foreach (var x in list)
-//            {
-//                var key = MakeKey(x);
-
-//                if (_brokers.ContainsKey(key))
-//                    continue;
-
-//                var broker = new ServiceBroker(_owner);
-
-//                // Если StartBroker нужно вызывать один раз на приложение — вынесите это наружу.
-//                broker.StartBroker();
-
-//                // ВАЖНО: если StartListening не понимает "schema.table", замените на x.tableName
-//                var listenName = key;
-//                broker.StartListening(x.TableFieldList, listenName);
-
-//                _brokers[key] = broker;
-//            }
-//        }
-
-//        /// <summary>
-//        /// Обработка уведомления "таблица изменилась".
-//        /// Поддерживает вход "schema.table" и "table" (без схемы).
-//        /// </summary>
-//        public async Task HandleUpdateAsync(string tableFromBroker)
-//        {
-//            if (string.IsNullOrWhiteSpace(tableFromBroker))
-//                return;
-
-//            // 1) пришло "schema.table"
-//            if (_handlers.TryGetValue(tableFromBroker, out var handler))
-//            {
-//                await handler().ConfigureAwait(false);
-//                return;
-//            }
-
-//            // 2) пришло только "table" — ищем обработчик по совпадению окончания
-//            var matchKey = _handlers.Keys.FirstOrDefault(k =>
-//                k.EndsWith("." + tableFromBroker, StringComparison.OrdinalIgnoreCase));
-
-//            if (matchKey != null && _handlers.TryGetValue(matchKey, out handler))
-//                await handler().ConfigureAwait(false);
-//        }
-
-//        /// <summary>
-//        /// Дополнительно: можно назначить дефолтный обработчик для таблиц без явной регистрации.
-//        /// </summary>
-//        public Func<string, Task>? DefaultHandler { get; set; }
-
-//        /// <summary>
-//        /// Вариант HandleUpdateAsync с DefaultHandler (если не найден зарегистрированный обработчик).
-//        /// </summary>
-//        public async Task HandleUpdateWithDefaultAsync(string tableFromBroker)
-//        {
-//            if (string.IsNullOrWhiteSpace(tableFromBroker))
-//                return;
-
-//            if (_handlers.TryGetValue(tableFromBroker, out var handler))
-//            {
-//                await handler().ConfigureAwait(false);
-//                return;
-//            }
-
-//            var matchKey = _handlers.Keys.FirstOrDefault(k =>
-//                k.EndsWith("." + tableFromBroker, StringComparison.OrdinalIgnoreCase));
-
-//            if (matchKey != null && _handlers.TryGetValue(matchKey, out handler))
-//            {
-//                await handler().ConfigureAwait(false);
-//                return;
-//            }
-
-//            if (DefaultHandler != null)
-//                await DefaultHandler(tableFromBroker).ConfigureAwait(false);
-//        }
-
-//        public ValueTask DisposeAsync()
-//        {
-//            // Если у ServiceBroker есть методы остановки/Dispose — вызовите здесь.
-//            // Например:
-//            // foreach (var b in _brokers.Values) b.Stop();
-//            _brokers.Clear();
-//            _handlers.Clear();
-//            _lastLoaded.Clear();
-//            return ValueTask.CompletedTask;
-//        }
-//    }
-
-//    // -----------------------------
-//    // UI dispatchers (опционально)
-//    // -----------------------------
-//    // WinForms:
-//    //   var mgr = new ServiceBrokerManager(this, LoadAsync, ServiceBrokerUiDispatchers.WinForms(this));
-//    //
-//    // WPF:
-//    //   var mgr = new ServiceBrokerManager(this, LoadAsync, ServiceBrokerUiDispatchers.Wpf(Application.Current.Dispatcher));
-//    //
-//    public static class ServiceBrokerUiDispatchers
-//    {
-//#if WINDOWS
-//        // Если проект WinForms, подключите:
-//        // using System.Windows.Forms;
-//        // и раскомментируйте метод WinForms.
-
-//        /*
-//        public static Func<Func<Task>, Task> WinForms(Control control)
-//        {
-//            return f =>
-//            {
-//                if (control.IsDisposed) return Task.CompletedTask;
-
-//                if (control.InvokeRequired)
-//                {
-//                    var tcs = new TaskCompletionSource();
-//                    control.BeginInvoke(new Action(async () =>
-//                    {
-//                        try { await f().ConfigureAwait(false); tcs.SetResult(); }
-//                        catch (Exception ex) { tcs.SetException(ex); }
-//                    }));
-//                    return tcs.Task;
-//                }
-
-//                return f();
-//            };
-//        }
-//        */
-//#endif
-
-//        // WPF вариант (если нужен) — раскомментируйте и добавьте ссылку на PresentationCore/WindowsBase:
-//        /*
-//        public static Func<Func<Task>, Task> Wpf(System.Windows.Threading.Dispatcher dispatcher)
-//        {
-//            return async f =>
-//            {
-//                if (dispatcher.CheckAccess())
-//                {
-//                    await f().ConfigureAwait(false);
-//                }
-//                else
-//                {
-//                    await dispatcher.InvokeAsync(async () => await f().ConfigureAwait(false));
-//                }
-//            };
-//        }
-//        */
-//    }
-//}

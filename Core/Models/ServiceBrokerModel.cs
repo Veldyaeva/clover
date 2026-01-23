@@ -18,4 +18,13 @@ namespace SewingProduction.Core.Models
             [NotMapped] public string TableFieldList { get; set; } = "";
         }
     }
+    //public interface IDataUpdatableForm
+    //{
+    //    void UpdateDataInForm(string table);
+    //}
+
+    //public interface IDataUpdatableFormAsync
+    //{
+    //    Task UpdateDataInFormAsync(string table);
+    //}
 }

@@ -1,11 +1,16 @@
-﻿using System;
+﻿using SewingProduction.Core.Class.Settings;
+//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Core.Models;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using SewingProduction.Core.Class.Settings;
-//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
-using SewingProduction.Core.interfaces;
 
 namespace SewingProduction
 {
@@ -14,7 +19,13 @@ namespace SewingProduction
     /// </summary>
     public class ServiceBroker
     {
+        //public event Func<string, List<string>, Task>? Changed;
+
+        //private Task RaiseChangedAsync(string table, List<string> changedFields)
+        //    => Changed?.Invoke(table, changedFields) ?? Task.CompletedTask;
+        
         private readonly object _form;
+
         // Для теста:
         // private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
         //private readonly string _connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -163,12 +174,36 @@ namespace SewingProduction
                                     {
                                         Debug.WriteLine("Calling UpdateDataInForm...");
 
-                                        if (_form is IDataUpdatableFormAsync asyncForm)
+                                        //if (_form is IDataUpdatableFormAsync asyncForm)
+                                        //{
+                                        //    await asyncForm.UpdateDataInFormAsync(_table);
+                                        //    Debug.WriteLine("Async form updated." + _table);
+                                        //}
+                                        //if (_form is IDataUpdatableForm syncForm)
+                                        //{
+                                        //    syncForm.UpdateDataInForm(_table);
+                                        //    Debug.WriteLine("Sync form updated." + _table);
+                                        //}
+                                        var changedFields = (_fields ?? "")
+                                            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(s => s.Trim())
+                                            .Where(s => s.Length > 0)
+                                            .ToList();
+
+                                        // 1) Новый контракт (если форма его поддерживает)
+                                        if (_form is IDataUpdatableFormAsyncV2 asyncFormV2)
+                                        {
+                                            await asyncFormV2.UpdateDataInFormAsync(_table, changedFields);
+                                            Debug.WriteLine("Async form updated." + _table);
+                                        }
+                                        // 2) Старый контракт (как было)
+                                        else if (_form is IDataUpdatableFormAsync asyncForm)
                                         {
                                             await asyncForm.UpdateDataInFormAsync(_table);
                                             Debug.WriteLine("Async form updated." + _table);
                                         }
-                                        if (_form is IDataUpdatableForm syncForm)
+                                        // 3) Старый sync (если у тебя есть)
+                                        else if (_form is IDataUpdatableForm syncForm)
                                         {
                                             syncForm.UpdateDataInForm(_table);
                                             Debug.WriteLine("Sync form updated." + _table);
@@ -214,5 +249,10 @@ namespace SewingProduction
                 }
             }
         }
+
+        //internal async Task<List<ServiceBrokerModel.TableListenInfo>> GetObjectListForServiceBroker(string obj, CancellationToken token)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
