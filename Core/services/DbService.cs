@@ -100,7 +100,7 @@ namespace SewingProduction.Services
             }
         }
         /// <summary>
-        /// Обновляет одно поле в таблице по заданному условию.
+        /// Обновляет поля в таблице по заданному условию.
         /// </summary>
         /// <param name="tableName">Имя таблицы</param>
         /// <param name="fieldName">Имя обновляемого поля</param>
@@ -135,7 +135,7 @@ namespace SewingProduction.Services
         }
 
         /// <summary>
-        /// Обновляет одно поле в таблице по заданному условию.
+        /// Обновляет поля в таблице по заданным условиям.
         /// </summary>
         /// <param name="tableName">Имя таблицы</param>
         /// <param name="fieldName">Имя обновляемого поля</param>
@@ -536,5 +536,28 @@ namespace SewingProduction.Services
             return obj;
         }
 
+        /// <summary>
+        /// Выполняет SQL-запрос и возвращает список объектов типа T
+        /// </summary>
+        /// <typeparam name="T">Тип модели</typeparam>
+        /// <param name="query">запрос</param>
+        /// <param name="parameters">объект с параметрами запроса</param>
+        /// <returns>Список объектов типа T</returns>
+        public List<T> GetListSync<T>(string query, object parameters)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var result = connection.Query<T>(query, parameters);
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"GetListSync error: {ex.Message}\n{query}");
+                return new List<T>();
+            }
+        } 
     }
 }

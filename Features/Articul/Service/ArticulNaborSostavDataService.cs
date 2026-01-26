@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using DevExpress.DataAccess.Native.Excel;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
@@ -42,7 +49,20 @@ namespace SewingProduction.Features.Articul.Service
             string query = @"SELECT TK_ID, TK_NAME, Men FROM t_v_n";
             return await _dbService.GetListAsync<TvnModel>(query, new { });
         }
-        public async Task<List<GostModel>> GetGostNaborAsync(int? idGost, string kod)
+        public async Task<List<GostModel>> GetGostNaborAsync(int? idGost = null)
+        {
+            return await _dbService.GetListAsync<GostModel>(
+                @"SELECT DISTINCT Id_gost, Name_gost, Opi_gost
+                FROM gost 
+                WHERE pr_nabor = 1 "
+                + (idGost.HasValue ? " AND Id_gost = @IdGost" : " ORDER BY Id_gost"),
+                new Dictionary<string, object>
+                {
+                    { "@IdGost", idGost }
+                }
+            );
+        }
+        public async Task<List<GostModel>> GetGostNaborRazmAsync(int? idGost, string kod)
         {
             return await _dbService.GetListAsync<GostModel>(
                 "EXEC dbo.GetCompatibleGostByArticul @IdGost, @Kod",
@@ -94,25 +114,199 @@ namespace SewingProduction.Features.Articul.Service
                 HAVING COUNT(DISTINCT sad.t_art_poln) > 1";
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", $"{kod.Substring(0, 7)}" } });
         }
-        public async Task UpdateArticulNaborSostavAsync(SpArticulNaborSostav model, int oldAgId)
+        public async Task UpdateNaborJsonAsync(
+            string kod,
+            int oldGostMain,
+            int newGostMain,
+            int? oldGroupMain,
+            int? newGroupMain,
+            List<SpArticulNaborSostav> newList,
+            List<SpArticulNaborSostav> oldList)
         {
-            string query = @"EXEC UpdateArticulNaborSostavTransaction @kod, @TkId, @IdGost, @oldAgId, @newAgId, @sostav";
-            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> {
-                { "@Kod", $"{model.Kod.Substring(0, 7)}%" }, //kodd
-                { "@TkId", model.Tk_id },
-                { "@IdGost", model.Id_gost },
-                { "@oldAgId", oldAgId },
-                { "@newAgId", model.Ag_id },
-                { "@sostav", model.Sostav}
-            });
+            var head = new
+            {
+                kod = kod,
+                id_gost_main_old = oldGostMain,
+                id_gost_main_new = newGostMain,
+                ag_id_main_old = oldGroupMain,
+                ag_id_main_new = newGroupMain
+            };
+            var items = newList
+            .GroupBy(x => x.Tk_id)
+            .Select(g =>
+            {
+                var newRow = g.First();
+                var oldRow = oldList.FirstOrDefault(o => o.Tk_id == g.Key);
+                if (oldRow == null)
+                    return null;
+
+                bool changedMain =
+                    oldRow.Id_gost != newRow.Id_gost ||
+                    oldRow.Ag_id != newRow.Ag_id ||
+                    !string.Equals(oldRow.Sostav, newRow.Sostav, StringComparison.OrdinalIgnoreCase);
+
+                // --- размеры ---
+                var razmChanges = g
+                    .Select(x =>
+                    {
+                        var oldSize = oldList.FirstOrDefault(o => o.Ans_id == x.Ans_id);
+                        if (oldSize == null) return null;
+
+                        if (oldSize.Razm == x.Razm)
+                            return null;
+
+                        return new
+                        {
+                            Kod = oldSize.Kod,
+                            Ans_id = oldSize.Ans_id,
+                            razm_old = oldSize.Razm,
+                            razm_new = x.Razm,
+                            razm_all_old = oldSize.Razm_all,
+                            razm_all_new = x.Razm_all
+                        };
+                    })
+                    .Where(r => r != null)
+                    .ToList();
+
+                if (!changedMain && razmChanges.Count == 0)
+                    return null;
+
+                return new
+                {
+                    //kod = kod,
+                    tk_id = g.Key,
+
+                    id_gost_old = oldRow.Id_gost,
+                    id_gost_new = newRow.Id_gost,
+
+                    ag_id_old = oldRow.Ag_id,
+                    ag_id_new = newRow.Ag_id,
+
+                    sostav_old = oldRow.Sostav,
+                    sostav_new = newRow.Sostav,
+
+                    razm = razmChanges
+                };
+            })
+            .Where(x => x != null)
+            .ToList();
+
+
+            if (items.Count == 0
+                && oldGostMain == newGostMain
+                && oldGroupMain == newGroupMain)
+            { 
+                MessageBox.Show("Изменений не обнаруженно!", "Сохранение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var finalJson = new
+            {
+                head = head,
+                items = items
+            };
+
+            //string json = JsonConvert.SerializeObject(payload);
+
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(finalJson, Newtonsoft.Json.Formatting.Indented);
+
+            var param = new Dictionary<string, object>
+                {
+                    { "@ListJson", json }
+                };
+
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string filePath = Path.Combine(desktopPath, $"NaborUpdate_{DateTime.Now:yyyyMMdd_HHmmss}.json");
+
+            File.WriteAllText(filePath, json, Encoding.UTF8);
+            Process.Start("notepad.exe", filePath);
+            await Task.CompletedTask;
+
+            var result = await _dbService.GetListAsync<dynamic>(
+                "EXEC dbo.UpdateNaborFromJson @ListJson",
+                new { ListJson = json }
+            );
+
+            if (result != null && result.Count > 0)
+            {
+                var row = result.First();
+
+                int errorCode = row.error;
+                string errorMessage = row.messageerror;
+
+                if (errorCode != 0)
+                    throw new Exception("Ошибка SQL: " + errorMessage);
+            }
+
+
+            MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public async Task<List<GostRazmerNabViewModel>> GetGostRazmerNaborAsync(int? idGost = null)
+        {
+            string query = @"SELECT id_razm as Id_razmer, RTRIM (gr.razm) AS Razm, Id_gost, id as Id_gost_parent
+                            FROM gost_sv_razmer gsr
+                            LEFT JOIN gost_razmer gr ON gr.id_rost = gsr.id_razmer"
+                            + (idGost.HasValue ? " WHERE Id_gost = @id_gost" : "");
+
+            return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });
         }
         public async Task<List<GostRazmerNabViewModel>> GetGostRazmerSostAsync(int? idGost = null)
         {
-            string query = @"SELECT id_razm_nab as Id_razmer, Razm, id_gost_nab AS Id_gost, id_gost as Id_gost_parent
+            string query = @"SELECT id_razm_nab as Id_razmer, RTRIM (razm) AS Razm, id_gost_nab AS Id_gost, id_gost as Id_gost_parent
                             FROM View_gost_razmer_nab"
                             + (idGost.HasValue ? " WHERE Id_gost = @id_gost" : "");
 
             return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });
+        }
+        public async Task<List<PlanSezonAllModel>> GetPlanSezonAllByKod(int? kodd = null)
+        {
+            string query = @"SELECT Psa_id, nn, tb_id, articul, mod
+                            FROM plan_sezon_all"
+                            + (kodd.HasValue ? " WHERE kodd = @kodd" : "");
+
+            return await _dbService.GetListAsync<PlanSezonAllModel>(query, new { kodd });
+        }
+        public async Task<List<ArtKomplektModel>> GetArtKomplektByKod(string? nn = null)
+        {
+            string query = @"SELECT ak.Ak_id, ak.tk_id, ak.Parent_nn, ak.id_gost, ak.ag_id_grupgost, t.tk_name
+                            FROM art_komplekt ak
+                            LEFT JOIN t_v_n AS t ON t.TK_ID = ak.tk_id"
+                            + (nn != null ? " WHERE Parent_nn = @nn" : "");
+
+            return await _dbService.GetListAsync<ArtKomplektModel>(query, new { nn });
+        }
+        public async Task<List<TovarClassModel>> GetTovarClass()
+        {
+            string query = @"select * FROM TOVAR_class ORDER BY TC_CLASSNAME";
+
+            return await _dbService.GetListAsync<TovarClassModel>(query, new { });
+        }
+        public async Task<List<TovarGroupModel>> GetTovarGroup()
+        {
+            string query = @"select * FROM tovar_group ORDER BY TG_GROUPNAME";
+
+            return await _dbService.GetListAsync<TovarGroupModel>(query, new { });
+        }
+        public async Task<List<TovarCategoryModel>> GetTovarCategory()
+        {
+            string query = @"select * from tOVAR_CATEGORY ORDER BY TCAT_CATEGORYNAME";
+
+            return await _dbService.GetListAsync<TovarCategoryModel>(query, new { });
+        }
+        public async Task<List<TovarCatDynsignModel>> GetTovarCatDynsign()
+        {
+            string query = @"select * FROM TOVAR_CAT_DYNSIGN where tcds_name<>' ' ORDER BY TCDS_NAME";
+
+            return await _dbService.GetListAsync<TovarCatDynsignModel>(query, new { });
+        }
+        public async Task<List<SpravNoskiDetalModel>> GetSpravNoskiDetal()
+        {
+            string query = @"select * from [dbo].[SpravNoskiDetal]";
+
+            return await _dbService.GetListAsync<SpravNoskiDetalModel>(query, new { });
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
+using SewingProduction.Features.UserDistribution.DataService;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
@@ -24,7 +25,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             dbService = new DbService(dbHelper);
-            _userModelDataService = new UserModelDataService(dbService, dbHelper);
+            _userModelDataService = new UserModelDataService();
             _allProfileDataService = new AllProfileDataService(dbHelper);
             _user = user;
         }

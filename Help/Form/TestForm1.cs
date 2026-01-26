@@ -13,6 +13,7 @@ using System.Linq;
 using System.Collections.Generic;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Diagnostics;
+using SewingProduction.Features.UserDistribution.Class;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -30,7 +31,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             InitializeComponent();
             _user = user;
             _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper()));
-            _tableDataService = new AllTableNameDataService(new DbService(new DatabaseHelper()), new DatabaseHelper());
+            _tableDataService = new AllTableNameDataService();
             _columnDataService = new AllColumnNameDataService(new DbService(new DatabaseHelper()), new DatabaseHelper());
             _serviceBrokerForTable1 = new ServiceBroker(this);
             _serviceBrokerForTable2 = new ServiceBroker(this);
@@ -40,6 +41,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             //_serviceBrokerForTable1.StartBroker();
             //_serviceBrokerForTable1.StartListening("TestID, TestName, TestFirst, TestSecond", "testTable1");
+            _serviceBrokerForTable1.StartBroker();
+            _serviceBrokerForTable1.StartListening("TestID, TestName", "testTable1");
             //_serviceBrokerForTable2.StartBroker();
             //_serviceBrokerForTable2.StartListening("idZeh, nameZeh, address, idProizv", "ZehList");
             await LoadDataAsync();
@@ -48,16 +51,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         public async Task UpdateDataInFormAsync(string _table)
         {
-            //switch (_table)
-            //{
-            //    case "testTable1":
-            //        await LoadDataAsync();
-            //        break;
+            switch (_table)
+            {
+                case "testTable1":
+                    await LoadDataAsync();
+                    break;
 
-            //    case "ZehList":
-            //        customTextBox2.Text = $"Обновление в {_table}";
-            //        break;
-            //}
+                case "ZehList":
+                    customTextBox2.Text = $"Обновление в {_table}";
+                    break;
+            }
         }
         private async Task LoadDataAsync()
         {
@@ -126,6 +129,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             customButton2.Visible = !customButton2.Visible;
         }
+
+        private void customButton3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(CurrentUser.User.UserName);
+        }
+
         private static DataTable ToDataTable<T>(IEnumerable<T> items)
         {
             var table = new DataTable(typeof(T).Name);

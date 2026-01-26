@@ -47,7 +47,8 @@ namespace SewingProduction.Features.UserDistribution.Helpers
 
                 string objectType = ctrl.GetType().Name;
                 string baseText = string.IsNullOrWhiteSpace(ctrl.Text) ? "" : ctrl.Text.Trim();
-                string objectNameRus = GetRussianNameForObject(baseText, objectType);
+                string fullString = GetRussianNameForObject(baseText, objectType);
+                string objectNameRus = fullString.Length > 100 ? fullString.Substring(0, 100) : fullString;
 
                 bool alreadyExists = existingObjects.AsEnumerable()
                     .Any(row => row["ObjectName"].ToString() == objectName);
@@ -313,7 +314,8 @@ namespace SewingProduction.Features.UserDistribution.Helpers
                 {
                     string objectType = ctrl.GetType().Name;
                     string baseText = string.IsNullOrWhiteSpace(ctrl.Text) ? "" : ctrl.Text.Trim();
-                    string objectNameRus = GetRussianNameForObject(baseText, objectType);
+                    string fullString = GetRussianNameForObject(baseText, objectType);
+                    string objectNameRus = fullString.Length > 100 ? fullString.Substring(0, 100) : fullString;
 
                     int newId = await _adminFormDataService.InsertObjectForm(
                         ctrl.Name,

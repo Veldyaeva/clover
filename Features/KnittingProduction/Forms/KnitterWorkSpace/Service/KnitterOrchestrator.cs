@@ -4,6 +4,7 @@ using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service.KnitterRepository;
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
@@ -37,6 +38,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// </summary>
         public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab) => _repo.GetPlanByTabAsync(tab);
 
+        public Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false) =>
+            _repo.GetPlanByTabAsync(tab, kwsId, kmaId, onlyUnassigned, expandAssignedByNrId, maxHours, includeFinished);
+
         /// <summary>
         /// Возвращает ФИО по табельному номеру (для авто-подмешивания в список).
         /// </summary>
@@ -62,6 +66,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// Устанавливает дату окончания на стороне БД и возвращает фактически сохранённое значение (серверное время).
         /// </summary>
         public Task<KnitterPZVModel> UpdatePzvDateEndAsync(int pzvId) => _repo.UpdatePzvDateEndAsync(pzvId);
+        public Task UpdatePzvFactAsync(int pzvId, int factQty) => _repo.UpdatePzvFactAsync(pzvId, factQty);
 
         /// <summary>
         /// Получает операции плана по списку партий через хранимую процедуру.
@@ -102,10 +107,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 		/// </summary>
 		public Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab) => _repo.GetOpenShiftByTabAsync(tab);
 
+        /// <summary>
+        /// Возвращает открытую смену по зоне, если есть (ID, табель, дата начала).
+        /// </summary>
+        public Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId) => _repo.GetOpenShiftByZoneAsync(kmaId);
+
 		/// <summary>
 		/// Проставляет pzvKwsID для списка операций плана.
 		/// </summary>
 		public Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId) => _repo.UpdatePzvKwsIdAsync(pzvIds, kwsId);
+
+        /// <summary>
+        /// Сбрасываем таб при закрытии смены у неначатых операций
+        /// </summary>
+        /// <param name="currentShiftId"></param>
+        /// <returns></returns>
+        public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v) => _repo.AdjustNotStartedBeforeShiftEndAsync(currentShiftId, 12m);
+
+
     }
 }
 

@@ -36,11 +36,12 @@ namespace SewingProduction.Core.Class
         }
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.GridBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            var theme = ThemeManager.ActiveTheme;
+            BackColor = theme.GridBackground;
+            ForeColor = theme.GridTextColor;
             Font = ThemeManager.SharedSettings.DefaultFont;
-            AlternateRowColor = ThemeManager.ActiveTheme.BandHighlightColor;
-            FocusedRowColor = ThemeManager.ActiveTheme.ButtonBackground;
+            AlternateRowColor = theme.BandHighlightColor;
+            FocusedRowColor = theme.ButtonBackground;
 
 
             foreach (var view in ViewCollection)
@@ -68,6 +69,16 @@ namespace SewingProduction.Core.Class
             {
                 gridView.Appearance.EvenRow.BackColor = AlternateRowColor.Value;
                 gridView.OptionsView.EnableAppearanceEvenRow = true;
+            }
+            if (ThemeManager.ActiveTheme?.GridRowBackground != default)
+            {
+                gridView.Appearance.Row.BackColor = ThemeManager.ActiveTheme.GridRowBackground;
+                gridView.Appearance.Row.Options.UseBackColor = true;
+            }
+            if (ThemeManager.ActiveTheme?.GridTextColor != default)
+            {
+                gridView.Appearance.Row.ForeColor = ThemeManager.ActiveTheme.GridTextColor;
+                gridView.Appearance.Row.Options.UseForeColor = true;
             }
         }
 
@@ -151,10 +162,10 @@ namespace SewingProduction.Core.Class
         {
             var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
-            var roleService = new RoleDataService(dbService, dbHelper);
+            var roleService = new RoleDataService();
             var columnService = new AllColumnNameDataService(dbService, dbHelper);
-            var tableService = new AllTableNameDataService(dbService, dbHelper);
-            var formService = new FormDataService(dbService, dbHelper);
+            var tableService = new AllTableNameDataService();
+            var formService = new FormDataService();
 
             _user = user;
 

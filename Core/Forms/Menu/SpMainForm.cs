@@ -59,12 +59,12 @@ namespace SewingProduction
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox f = new AboutBox();
-            f.Show();
+            f.ShowDialog();
         }
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SettingsForm f = new SettingsForm(_user);
-            f.Show();
+            f.ShowDialog();
         }
         private void профильToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -143,7 +143,7 @@ namespace SewingProduction
         #region Производство
         private void оперативноеПланированиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new KnittingProductionPlanning(), sender);
+            OpenForm(new KnittingProductionPlanning(_user), sender);
         }
         private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -243,7 +243,7 @@ namespace SewingProduction
         private void showHelpForm(string filePath = null)
         {
             var helpForm = new HelpForm(this._formManager, filePath);
-            helpForm.Show();
+            helpForm.ShowDialog();
         }
 
         private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
@@ -259,6 +259,16 @@ namespace SewingProduction
         {
             var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
             OpenForm(form, sender);
+        }
+
+        private void справкаtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new SewingProduction.HelpAdmin.Forms.AdminHelpEditorForm(this._formManager);
+            f.Show();
+        }
+        private void аналитикаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new KnittingProductionAnalytics(), sender);
         }
     }
 }

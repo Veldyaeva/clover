@@ -22,6 +22,13 @@ namespace SewingProduction.Models
         [Column("fio")]
         public string Fio { get; set; }
 
+        // Номер зоны (для отображения в выборе сотрудника)
+        [Column("Zone")]
+        public string Zone { get; set; }
+
+        //[NotMapped]
+        //public string DisplayName => string.IsNullOrWhiteSpace(Zone) ? Fio : $"{Fio} (зона {Zone})";
+
         public FioModel Clone()
         {
             // MemberwiseClone создает "поверхностную" копию.

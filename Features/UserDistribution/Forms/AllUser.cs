@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraDialogs.FileExplorerExtensions;
 using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
+using SewingProduction.Features.UserDistribution.DataService;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
@@ -31,9 +34,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             dbService = new DbService(dbHelper);
-            _userModelDataService = new UserModelDataService(dbService, dbHelper);
+            _userModelDataService = new UserModelDataService();
             _userRoleDataService = new UserRoleDataService(dbHelper);
-            _roleDataService = new RoleDataService(dbService, dbHelper);
+            _roleDataService = new RoleDataService();
             _allRoleDataService = new AllRoleDataService(dbHelper);
             _allProfileDataService = new AllProfileDataService(dbHelper);
             _user = user;
@@ -176,7 +179,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private void customButtonShareUser_Click(object sender, EventArgs e)
         {
-            gridViewUsers.ExpandMasterRow(0);
+            ShareUser f = new ShareUser(_user, selectedUserId);
+            f.ShowDialog();
         }
         /// <summary>
         /// Копирование пользователя
@@ -185,11 +189,19 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             var currentUser = gridViewUsers.GetFocusedRow() as UserModel;
             if (currentUser == null) return;
+            
+            var names = Enumerable.Range(0, gridViewUsers.RowCount)
+                .Select(i => (gridViewUsers.GetRow(i) as UserModel)?.UserName)
+                .Where(n => !string.IsNullOrEmpty(n))
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            int i = 2;
+            while (names.Contains($"Копия_{currentUser.UserName}_{i}")) i++;
 
             int copyUserId = currentUser.UserID;
             var copyUser = new UserModel
             {
-                UserName = "Копия_" + currentUser.UserName,
+                UserName = $"Копия_{currentUser.UserName}_{i}",
                 FioID = currentUser.FioID,
                 BrigID = currentUser.BrigID,
                 CreatorID = _user.UserId,
@@ -211,10 +223,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
             await LoadUsers();
 
-            int lastRowHandle = gridViewUsers.RowCount - 1;
-            if (lastRowHandle >= 0)
+            int rowHandle = gridViewUsers.LocateByValue("UserID", newUserId);
+            if (rowHandle >= 0)
             {
-                gridViewUsers.FocusedRowHandle = lastRowHandle;
+                gridViewUsers.FocusedRowHandle = rowHandle;
                 gridViewUsers.ShowPopupEditForm();
             }
         }
@@ -233,6 +245,14 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 await _userModelDataService.DeleteAsync(user);
                 Console.WriteLine("удален пользователь, ID " + user.UserID);
                 gridViewUsers.DeleteRow(gridViewUsers.FocusedRowHandle);
+            }
+        }
+
+        private void customButtonUserPodr_Click(object sender, EventArgs e)
+        {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new UserPodr(_user));
             }
         }
     }
