@@ -1,4 +1,6 @@
-﻿using SewingProduction.Core.Class.Settings;
+﻿using DevExpress.PivotGrid.QueryMode;
+using DevExpress.Xpo.DB.Helpers;
+using SewingProduction.Core.Class.Settings;
 //using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
@@ -92,7 +94,23 @@ namespace SewingProduction
                 // Остановка предыдущего прослушивания, если оно было активно:
                 StopListening();
                 // SQL-запрос
-                string query = $"SELECT {_fields} FROM dbo.{table}";
+                //       string query = $"SELECT {_fields} FROM dbo.{table}";
+                    // _table может быть "table" или "schema.table"
+       string fullTable;
+                    if (!string.IsNullOrWhiteSpace(_table) && _table.Contains("."))
+                        {
+                            // schema.table -> [schema].[table]
+                    var parts = _table.Split('.');
+                    fullTable = $"[{parts[0].Trim().Trim('[', ']')}].[{parts[1].Trim().Trim('[', ']')}]";
+                        }
+                   else
+                        {
+                            // table -> [dbo].[table]
+                    var t = (_table ?? "").Trim().Trim('[', ']');
+                    fullTable = $"[dbo].[{t}]";
+                        }
+                
+                string query = $"SELECT {_fields} FROM {fullTable}";
                 // Создание соединения с базой данных
                 _connection = new SqlConnection(_connectionString);
                 // Открытие соединения
@@ -195,6 +213,7 @@ namespace SewingProduction
                                         {
                                             //await asyncFormV2.UpdateDataInFormAsync(_table, changedFields);
                                             await asyncFormV2.UpdateDataInFormAsync(_table);
+                                            //await asyncFormV2.UpdateDataInFormAsync(_table, string.Join(",", changedFields));
                                             Debug.WriteLine("Async form updated." + _table);
                                         }
                                         // 2) Старый контракт (как было)

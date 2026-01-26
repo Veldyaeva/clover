@@ -193,8 +193,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             )
             {
                 // если StartListening НЕ принимает "dbo.table", поставь false
-                //UseSchemaInListenName = true
-                UseSchemaInListenName = false
+                UseSchemaInListenName = true
+               // UseSchemaInListenName = false
             };
            // 0) Жёсткий ignore для таблиц, которые нам НЕ должны триггерить обновление формы
            // Важно: реальное имя таблицы у тебя используется как art_norm_n
@@ -1942,17 +1942,17 @@ private async Task InitializeBindingsAsync()
                 InitObjectRestartMap();
 
                 // 1) Конфиг "шумовых" таблиц (можно расширять по мере наблюдений)
-                _ignoredServiceBrokerTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-                {
-                    // Пример (добавь свои справочники/LEFT JOIN таблицы):
-                     "art_norn_n",
-                     "sdbo.art_norm_n",
-                };
+                //_ignoredServiceBrokerTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                //{
+                //    // Пример (добавь свои справочники/LEFT JOIN таблицы):
+                //     "art_norn_n",
+                //     "sdbo.art_norm_n",
+                //};
 
                 // 2) Координатор обновлений: debounce + maxWait + single-flight + отмена
                 _refreshCoordinator = new ObjectRefreshCoordinator(
                     reloadByObjectNameAsync: RestartDataByObjectNameAsync,
-                    debounce: TimeSpan.FromMilliseconds(500),
+                    debounce: TimeSpan.FromMilliseconds(50),
                     maxWait: TimeSpan.FromSeconds(3),
                     maxParallelReloads: 2);
 
@@ -3217,6 +3217,8 @@ private async Task InitializeBindingsAsync()
                     record.olPzvTab = _tab;
                     record.olPzvKwsID = _kwsID;
                     record.olPzvDateNaznTab = _tab == 0 ? null : DateTime.Now;
+                    record.olPzvSekNazn = record.olSekEd;
+                    record.olPzvKolNazn = record.olKol;
                     if (_tab == 999)
                     {
                         record.olPzvDateStart = DateTime.Now;
