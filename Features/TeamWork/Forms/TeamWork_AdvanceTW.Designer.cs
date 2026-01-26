@@ -283,8 +283,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // constructorComboBox
             // 
-            errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
             resources.ApplyResources(constructorComboBox, "constructorComboBox");
+            errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
             constructorComboBox.Name = "constructorComboBox";
             constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons1")) });
             constructorComboBox.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
