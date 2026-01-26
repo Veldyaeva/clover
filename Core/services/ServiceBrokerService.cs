@@ -17,7 +17,7 @@ namespace SewingProduction.Core.services
 {
     public class ServiceBrokerService
     {
-        private static DatabaseHelper _dbHelper;
+        private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();

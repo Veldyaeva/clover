@@ -18,12 +18,18 @@
 
   <ItemGroup>
     <Compile Remove="Core\helpers\GridOverlayLoader — копия.cs" />
+    <Compile Remove="Core\helpers\ServiceBrokerHelper_.cs" />
+    <Compile Remove="Core\helpers\ServiceBrokerHelper__.cs" />
+    <Compile Remove="Core\services\ServiceBrokerService_.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\Form2.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\Form2.Designer.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Models\TaskCandidate.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\KnitterDataService.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\TaskSelector.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\_KnitterRepository.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz_.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz_.Designer.cs" />
+    <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz__.cs" />
     <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
@@ -60,6 +66,7 @@
   <ItemGroup>
     <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
     <EmbeddedResource Remove="Features\KnittingProduction\Forms\Form2.resx" />
+    <EmbeddedResource Remove="Features\KnittingProduction\Forms\PlanZagrVyaz_.resx" />
     <EmbeddedResource Remove="Features\TeamWork\Forms\HistoryLog.resx" />
     <EmbeddedResource Remove="Report\PostReportFio.resx" />
   </ItemGroup>

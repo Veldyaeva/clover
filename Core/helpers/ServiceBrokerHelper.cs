@@ -1,5 +1,5 @@
 ﻿// ServiceBrokerHelper.cs
-// Итоговый универсальный хелпер для формы:
+// Универсальный хелпер для формы:
 // - Ты передаёшь список ObjectName (хранимки/SQL-объекты)
 // - Хелпер сам по каждому ObjectName вызывает твой GetObjectListForServiceBroker(objectName, ct)
 // - Строит общий план прослушивания: TableKey (schema.table) -> UNION полей
@@ -8,19 +8,19 @@
 // - Складывает результаты в очередь, форма забирает DrainPending() и решает, что обновлять
 //
 // ВАЖНО:
-// 1) Этот файл НЕ содержит объявление TableListenInfo (ты сказала, модель в отдельном файле).
-//    Хелпер предполагает, что в проекте есть класс TableListenInfo с полями:
-//    ObjectName, TableSchema, TableName, TableFieldList.
+// 1) Этот файл НЕ содержит объявление TableListenInfo (модель в отдельном файле).
+//    Ожидаемые поля: ObjectName, TableSchema, TableName, TableFieldList.
 // 2) Если твой ServiceBroker.StartListening(columns, table) НЕ понимает "schema.table",
 //    включи UseSchemaInListenName = false (по умолчанию true).
 #nullable enable
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using static SewingProduction.Core.Models.ServiceBrokerModel;
 
 namespace SewingProduction.Core.helpers
@@ -31,7 +31,7 @@ namespace SewingProduction.Core.helpers
     public sealed class ObjectTableFieldMatch
     {
         public string ObjectName { get; init; } = "";   // хранимка/объект
-        public string TableKey { get; init; } = "";     // "dbo.table"
+        public string TableKey   { get; init; } = "";   // "dbo.table"
 
         // Поля, которые этот ObjectName использует (из TableFieldList)
         public IReadOnlyList<string> UsedFields { get; init; } = Array.Empty<string>();
@@ -65,6 +65,7 @@ namespace SewingProduction.Core.helpers
 
         // pending matches
         private readonly ConcurrentQueue<ObjectTableFieldMatch> _pending;
+        private int _disposeState = 0; // 0=not disposed, 1=disposing/disposed
 
         private sealed class DependencyItem
         {
@@ -77,6 +78,18 @@ namespace SewingProduction.Core.helpers
         /// Если false: StartListening получает только "table".
         /// </summary>
         public bool UseSchemaInListenName { get; set; } = true;
+
+        /// <summary>
+        /// Таблицы, которые игнорируем (полное имя schema.table).
+        /// Полезно для LEFT JOIN-справочников, изменения которых не должны триггерить обновления.
+        /// </summary>
+        public HashSet<string> IgnoredTables { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Если список не пустой — слушаем ТОЛЬКО эти таблицы (schema.table).
+        /// Удобно для жёсткого allow-list.
+        /// </summary>
+        public HashSet<string> AllowedTables { get; } = new(StringComparer.OrdinalIgnoreCase);
 
         public ServiceBrokerHelper(
             object owner,
@@ -108,26 +121,22 @@ namespace SewingProduction.Core.helpers
 
             _sourcesByObject.Clear();
 
-            foreach (var obj in objectNames
-                         .Where(x => !string.IsNullOrWhiteSpace(x))
-                         .Select(x => x.Trim())
-                         .Distinct(_cmp))
+            var objs = objectNames
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Select(x => x.Trim())
+                .Distinct(_cmp)
+                .ToList();
+
+            foreach (var obj in objs)
             {
                 ct.ThrowIfCancellationRequested();
 
                 List<TableListenInfo> list;
                 try
                 {
-                    if (_loadByObjectAsync is null)
-                        throw new InvalidOperationException("_loadByObjectAsync == null. Делегат не передан в конструктор ServiceBrokerHelper.");
-
-                    if (obj is null)
-                        throw new InvalidOperationException("obj == null (не должен быть null после фильтрации).");
-
-                    // чтобы увидеть, ЧТО за делегат реально лежит внутри:
                     var m = _loadByObjectAsync.Method;
                     var target = _loadByObjectAsync.Target;
-                    System.Diagnostics.Debug.WriteLine($"LOAD: method={m.DeclaringType?.FullName}.{m.Name}, target={target?.GetType().FullName ?? "<static>"}");
+                    Debug.WriteLine($"LOAD: method={m.DeclaringType?.FullName}.{m.Name}, target={target?.GetType().FullName ?? "<static>"}");
 
                     list = await _loadByObjectAsync(obj, ct).ConfigureAwait(false) ?? new List<TableListenInfo>();
                 }
@@ -147,15 +156,16 @@ namespace SewingProduction.Core.helpers
                 }
 
                 _sourcesByObject[obj] = list;
-                RebuildIndex();
-                StartAllBrokers();
             }
+
+            RebuildIndex();
+            StartAllBrokers();
         }
 
         /// <summary>
         /// Вызов при событии от брокера:
         /// tableFromBroker: "dbo.table" или "table"
-        /// changedFieldsCsv: "a,b,c" (может содержать несколько полей)
+        /// changedFieldsCsv: "a,b,c"
         /// </summary>
         public Task HandleBrokerUpdateAsync(string tableFromBroker, string? changedFieldsCsv)
         {
@@ -166,7 +176,7 @@ namespace SewingProduction.Core.helpers
         /// <summary>
         /// Вызов при событии от брокера:
         /// tableFromBroker: "dbo.table" или "table"
-        /// changedFields: перечисление изменённых полей (может быть несколько)
+        /// changedFields: перечисление изменённых полей
         /// </summary>
         public Task HandleBrokerUpdateAsync(string tableFromBroker, IEnumerable<string> changedFields)
         {
@@ -186,6 +196,14 @@ namespace SewingProduction.Core.helpers
                     tableKey = match;
             }
 
+            // если таблица в ignore — выходим максимально рано
+            if (IgnoredTables.Contains(tableKey))
+                return Task.CompletedTask;
+
+            // если allow-list задан — работаем только по нему
+            if (AllowedTables.Count > 0 && !AllowedTables.Contains(tableKey))
+                return Task.CompletedTask;
+
             if (!_depsByTable.TryGetValue(tableKey, out var deps))
                 return Task.CompletedTask;
 
@@ -199,7 +217,7 @@ namespace SewingProduction.Core.helpers
 
             foreach (var d in deps)
             {
-                // Если брокер не прислал поля (редко, но бывает) — считаем, что влияет на всё
+                // Если брокер не прислал поля — считаем, что влияет на всё
                 List<string> matched;
                 if (!hasChangedFields)
                 {
@@ -209,7 +227,7 @@ namespace SewingProduction.Core.helpers
                 {
                     matched = d.Fields.Where(changedSet.Contains).OrderBy(x => x).ToList();
                     if (matched.Count == 0)
-                        continue; // изменились поля, которые этот ObjectName не использует
+                        continue;
                 }
 
                 _pending.Enqueue(new ObjectTableFieldMatch
@@ -226,16 +244,7 @@ namespace SewingProduction.Core.helpers
             return Task.CompletedTask;
         }
 
-        /// <summary>
-        /// Забрать все накопленные совпадения и очистить очередь.
-        /// </summary>
-        //public List<ObjectTableFieldMatch> DrainPending()
-        //{
-        //    var list = new List<ObjectTableFieldMatch>();
-        //    while (_pending.TryDequeue(out var item))
-        //        list.Add(item);
-        //    return list;
-        //}
+        /// <summary>Забрать список ObjectName, которые нужно перезапустить.</summary>
         public List<string> DrainPending()
         {
             var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -248,34 +257,34 @@ namespace SewingProduction.Core.helpers
 
             return result.ToList();
         }
+
+        /// <summary>Список union-полей, которые слушаем по таблице (для дебага).</summary>
         public List<string> GetUnionListeningFieldsForTable(string tableFromBroker)
-{
-    if (string.IsNullOrWhiteSpace(tableFromBroker))
-        return new List<string>();
+        {
+            if (string.IsNullOrWhiteSpace(tableFromBroker))
+                return new List<string>();
 
-    var incoming = tableFromBroker.Trim();
-    var tableKey = incoming;
+            var incoming = tableFromBroker.Trim();
+            var tableKey = incoming;
 
-    // если брокер прислал только имя таблицы (без схемы)
-    if (!incoming.Contains('.'))
-    {
-        var match = _unionFieldsByTable.Keys.FirstOrDefault(k =>
-            k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
+            if (!incoming.Contains('.'))
+            {
+                var match = _unionFieldsByTable.Keys.FirstOrDefault(k =>
+                    k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
 
-        if (match != null)
-            tableKey = match;
-    }
+                if (match != null)
+                    tableKey = match;
+            }
 
-    if (_unionFieldsByTable.TryGetValue(tableKey, out var fields))
-        return fields.OrderBy(x => x).ToList();
+            if (_unionFieldsByTable.TryGetValue(tableKey, out var fields))
+                return fields.OrderBy(x => x).ToList();
 
-    return new List<string>();
-}
-        /// <summary>Для отладки: какие таблицы реально слушаем.</summary>
+            return new List<string>();
+        }
+
         public IReadOnlyList<string> GetListeningTables()
             => _unionFieldsByTable.Keys.OrderBy(k => k).ToList();
 
-        /// <summary>Для отладки: какие union-поля слушаем по таблице.</summary>
         public IReadOnlyList<string> GetListeningFields(string tableKey)
         {
             if (_unionFieldsByTable.TryGetValue(tableKey, out var set))
@@ -284,114 +293,115 @@ namespace SewingProduction.Core.helpers
             return Array.Empty<string>();
         }
 
-        public ValueTask DisposeAsync()
+public ValueTask DisposeAsync()
         {
-            // Если у ServiceBroker есть Stop/Dispose — вызови здесь.
-            if (_brokers != null)
-                _brokers.Clear();
+            if (System.Threading.Interlocked.Exchange(ref _disposeState, 1) != 0)
+                return ValueTask.CompletedTask; 
+            if (_brokers == null || _brokers.Count == 0)
+                return ValueTask.CompletedTask;
+
+            foreach (var broker in _brokers.Values)
+            {
+                try { broker.StopBroker(); } catch { /* лог */ }
+            }
+
+            _brokers.Clear();
             _sourcesByObject.Clear();
             _depsByTable.Clear();
             _unionFieldsByTable.Clear();
             while (_pending.TryDequeue(out _)) { }
+
             return ValueTask.CompletedTask;
+        
         }
 
         // ----------------- internal -----------------
 
         private void RebuildIndex()
         {
-            try
-            {
-                _depsByTable.Clear();
-                _unionFieldsByTable.Clear();
+            _depsByTable.Clear();
+            _unionFieldsByTable.Clear();
 
-                foreach (var kvp in _sourcesByObject)
+            foreach (var kvp in _sourcesByObject)
+            {
+                var defaultObjectName = kvp.Key;
+                var list = kvp.Value ?? new List<TableListenInfo>();
+
+                foreach (var x in list)
                 {
-                    var defaultObjectName = kvp.Key;
-                    var list = kvp.Value ?? new List<TableListenInfo>();
+                    var objectName = !string.IsNullOrWhiteSpace(x.ObjectName) ? x.ObjectName.Trim() : defaultObjectName;
 
-                    foreach (var x in list)
+                    var schema = (x.TableSchema ?? "").Trim();
+                    var table = (x.TableName ?? "").Trim();
+                    var fieldCsv = (x.TableFieldList ?? "").Trim();
+
+                    if (string.IsNullOrWhiteSpace(objectName) ||
+                        string.IsNullOrWhiteSpace(schema) ||
+                        string.IsNullOrWhiteSpace(table) ||
+                        string.IsNullOrWhiteSpace(fieldCsv))
+                        continue;
+
+                    var tableKey = MakeTableKey(schema, table);
+
+                    // ФИЛЬТРЫ
+                    if (IgnoredTables.Contains(tableKey))
+                        continue;
+
+                    if (AllowedTables.Count > 0 && !AllowedTables.Contains(tableKey))
+                        continue;
+
+                    var fields = ParseFields(fieldCsv);
+
+                    if (!_depsByTable.TryGetValue(tableKey, out var depList))
                     {
-                        var objectName = !string.IsNullOrWhiteSpace(x.ObjectName) ? x.ObjectName.Trim() : defaultObjectName;
-
-                        var schema = (x.TableSchema ?? "").Trim();
-                        var table = (x.TableName ?? "").Trim();
-                        var fieldCsv = (x.TableFieldList ?? "").Trim();
-
-                        if (string.IsNullOrWhiteSpace(objectName) ||
-                            string.IsNullOrWhiteSpace(schema) ||
-                            string.IsNullOrWhiteSpace(table) ||
-                            string.IsNullOrWhiteSpace(fieldCsv))
-                            continue;
-
-                        var tableKey = MakeTableKey(schema, table);
-                        var fields = ParseFields(fieldCsv);
-
-                        // depsByTable: tableKey -> objectName -> used fields
-                        if (!_depsByTable.TryGetValue(tableKey, out var depList))
-                        {
-                            depList = new List<DependencyItem>();
-                            _depsByTable[tableKey] = depList;
-                        }
-
-                        var dep = depList.FirstOrDefault(d => _cmp.Equals(d.ObjectName, objectName));
-                        if (dep == null)
-                        {
-                            dep = new DependencyItem
-                            {
-                                ObjectName = objectName,
-                                Fields = new HashSet<string>(fields, StringComparer.OrdinalIgnoreCase)
-                            };
-                            depList.Add(dep);
-                        }
-                        else
-                        {
-                            foreach (var f in fields) dep.Fields.Add(f);
-                        }
-
-                        // unionFieldsByTable: tableKey -> union(fields)
-                        if (!_unionFieldsByTable.TryGetValue(tableKey, out var union))
-                        {
-                            union = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                            _unionFieldsByTable[tableKey] = union;
-                        }
-                        foreach (var f in fields) union.Add(f);
+                        depList = new List<DependencyItem>();
+                        _depsByTable[tableKey] = depList;
                     }
+
+                    var dep = depList.FirstOrDefault(d => _cmp.Equals(d.ObjectName, objectName));
+                    if (dep == null)
+                    {
+                        dep = new DependencyItem
+                        {
+                            ObjectName = objectName,
+                            Fields = new HashSet<string>(fields, StringComparer.OrdinalIgnoreCase)
+                        };
+                        depList.Add(dep);
+                    }
+                    else
+                    {
+                        foreach (var f in fields) dep.Fields.Add(f);
+                    }
+
+                    if (!_unionFieldsByTable.TryGetValue(tableKey, out var union))
+                    {
+                        union = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                        _unionFieldsByTable[tableKey] = union;
+                    }
+                    foreach (var f in fields) union.Add(f);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("1");
             }
         }
 
         private void StartAllBrokers()
         {
-            try
+            foreach (var kvp in _unionFieldsByTable)
             {
-                foreach (var kvp in _unionFieldsByTable)
-                {
-                    var tableKey = kvp.Key;
-                    var unionFields = kvp.Value;
+                var tableKey = kvp.Key;
+                var unionFields = kvp.Value;
 
-                    if (_brokers.ContainsKey(tableKey))
-                        continue;
+                if (_brokers.ContainsKey(tableKey))
+                    continue;
 
-                    var broker = new ServiceBroker(_owner);
-                    broker.StartBroker();
+                var broker = new ServiceBroker(_owner);
+                broker.StartBroker();
 
-                    var columns = string.Join(",", unionFields);
+                var columns = string.Join(",", unionFields);
+                var listenName = UseSchemaInListenName ? tableKey : ExtractTableName(tableKey);
 
-                    var listenName = UseSchemaInListenName ? tableKey : ExtractTableName(tableKey);
+                broker.StartListening(columns, listenName);
 
-                    broker.StartListening(columns, listenName);
-
-                    _brokers[tableKey] = broker;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("2");
+                _brokers[tableKey] = broker;
             }
         }
 

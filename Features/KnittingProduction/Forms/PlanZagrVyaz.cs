@@ -52,6 +52,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private int _rzvLoadVersion;
         private ServiceBrokerHelper? _sbHelper;
         private ServiceBroker? _broker;
+        private ObjectRefreshCoordinator? _refreshCoordinator;
+
+        // Таблицы, изменения в которых НЕ должны инициировать обновление UI
+        // (типичные LEFT JOIN справочники и прочий "шум").
+        private HashSet<string>? _ignoredServiceBrokerTables;
+
         private Dictionary<string, Func<Task>> _objectRestartMap = null!;
         private CancellationTokenSource? _loadCts;
 
@@ -190,11 +196,37 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //UseSchemaInListenName = true
                 UseSchemaInListenName = false
             };
+           // 0) Жёсткий ignore для таблиц, которые нам НЕ должны триггерить обновление формы
+           // Важно: реальное имя таблицы у тебя используется как art_norm_n
+           // (см. запросы вида: select annId from art_norm_n ...)
+           _sbHelper.IgnoredTables.Add("art_norm_n");
+           _sbHelper.IgnoredTables.Add("dbo.art_norm_n");
 
+            // 0) Фильтруем "шумовые" таблицы ДО старта брокера (LEFT JOIN справочники и т.п.)
+            if (_ignoredServiceBrokerTables != null && _ignoredServiceBrokerTables.Count > 0)
+            {
+                foreach (var t in _ignoredServiceBrokerTables)
+                {
+                    if (string.IsNullOrWhiteSpace(t)) continue;
+                    var tt = t.Trim();
+                    // поддержим оба варианта: "table" и "dbo.table"
+                    _sbHelper.IgnoredTables.Add(tt);
+                    if (!tt.Contains('.'))
+                        _sbHelper.IgnoredTables.Add("dbo." + tt);
+                }
+            }
+            // Координатор перезагрузок (debounce + max-wait + single-flight)
+            // создаём до старта брокера, чтобы не потерять первые события.
+            _refreshCoordinator ??= new ObjectRefreshCoordinator(
+            reloadByObjectNameAsync: RestartDataByObjectNameAsync,
+            debounce: TimeSpan.FromMilliseconds(500),
+            maxWait: TimeSpan.FromSeconds(3),
+            maxParallelReloads: 2
+            );
             await _sbHelper.InitAndStartAsync(objectNames, ct);
 
             // (необязательно) отладка:
-            // var tables = _sbHelper.GetListeningTables();
+             var tables = _sbHelper.GetListeningTables();
 
             //------------------------
         }
@@ -245,40 +277,59 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //    MessageBox.Show($"{table} updated");
 
         //}
-        public async Task UpdateDataInFormAsync(string table)
+        ////public async Task UpdateDataInFormAsync(string table)
+        ////{
+        ////    if (_sbHelper == null) return;
+
+        ////    // Глобальный фильтр "шумовых" таблиц (LEFT JOIN справочники и т.п.)
+        ////    if (_ignoredServiceBrokerTables != null && _ignoredServiceBrokerTables.Contains(table))
+        ////        return;
+
+        ////    // ServiceBroker.cs в текущей версии присылает только table (без списка колонок),
+        ////    // поэтому берём "интересующие поля" из подписок.
+        ////    var changedFields = _sbHelper.GetUnionListeningFieldsForTable(table);
+
+        ////    await _sbHelper.HandleBrokerUpdateAsync(table, changedFields);
+
+        ////    // Сюда попадают только "объекты" (вьюхи/хранимки), которые реально затронуты,
+        ////    // с учётом пересечения полей/таблиц внутри ServiceBrokerHelper.
+        ////    var objectsToRestart = _sbHelper.DrainPending(); // List<string>
+
+        ////    if (objectsToRestart == null || objectsToRestart.Count == 0)
+        ////        return;
+
+        ////    // Ставим на перезагрузку через анти-дребезг/накопление
+        ////    foreach (var objName in objectsToRestart)
+        ////        _refreshCoordinator?.Request(objName);
+        ////}
+        // Важно: ServiceBroker дергает owner.UpdateDataInFormAsync(...)
+        // Если сигнатуры нет/закомментирована — ты НЕ увидишь обновлений.
+        public async Task UpdateDataInFormAsync(string table, string? changedFieldsCsv = null)
         {
-            //// если ServiceBroker.cs не трогали и он присылает только table
-            //var changedFields = _sbHelper.GetUnionListeningFieldsForTable(table);
+            if (_sbHelper == null) return;
 
-            //await _sbHelper.HandleBrokerUpdateAsync(table, changedFields);
+            // 1) Пропускаем событие через фильтрацию (table + поля)
+            await _sbHelper.HandleBrokerUpdateAsync(table, changedFieldsCsv);
 
-            //// ← теперь здесь просто список ObjectName
-            //var objectsToRestart = _sbHelper.DrainPending();
+            // 2) Снимаем накопленные затронутые "объекты" (view/proc/логические источники)
+            var affected = _sbHelper.DrainPending();
+            if (affected == null || affected.Count == 0) return;
 
-            //foreach (var objectName in objectsToRestart)
-            //{
-            //    await RestartDataByObjectNameAsync(objectName);
-            //}
-
-            try
+            // 3) Планируем обновления через координатор (анти-дребезг + maxWait)
+            // В одном "affected" может быть много строк -> сгруппируем по ObjectName
+            foreach (var objName in affected
+                      //   .Select(x => x.ObjectName)
+                         .Where(x => !string.IsNullOrWhiteSpace(x))
+                         .Distinct(StringComparer.OrdinalIgnoreCase))
             {
-                if (_sbHelper == null) return;
-
-                var changedFields = _sbHelper.GetUnionListeningFieldsForTable(table);
-
-                await _sbHelper.HandleBrokerUpdateAsync(table, changedFields);
-
-                var objectsToRestart = _sbHelper.DrainPending(); // теперь List<string>
-
-                foreach (var objName in objectsToRestart)
-                    await RestartDataByObjectNameAsync(objName);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("3");
+                _refreshCoordinator?.Request(objName);
             }
         }
-        private async Task InitializeBindingsAsync()
+
+        // На всякий случай: если где-то вызывают упрощённую сигнатуру.
+        public Task UpdateDataInFormAsync(string table)
+            => UpdateDataInFormAsync(table, changedFieldsCsv: null);
+private async Task InitializeBindingsAsync()
         {
             try
             {
@@ -1258,7 +1309,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                     _smenZadanyVyazBindingSource,
                                     _smenZadanyVyazNewBindingSource,
                                     HashMode.ExcludeOnly,
-                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID" },
+                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
                                     hashProperties: new[] { "IsNew", "IsModified", "IsDeleted" }
                                 );
 
@@ -1266,7 +1317,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                     _smenZadanyVyazBindingSource,
                                     changes,
                                     UpdateFieldsMode.ExcludeOnly,
-                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID" },
+                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
                                     gridViewPZVOperList,
                                     fields: new[] { "IsNew", "IsModified", "IsDeleted" }
                                 );
@@ -1889,7 +1940,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 _loadCts = new CancellationTokenSource();
                 InitObjectRestartMap();
-                InitServiceBrokerAsync(_loadCts.Token);
+
+                // 1) Конфиг "шумовых" таблиц (можно расширять по мере наблюдений)
+                _ignoredServiceBrokerTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    // Пример (добавь свои справочники/LEFT JOIN таблицы):
+                     "art_norn_n",
+                     "sdbo.art_norm_n",
+                };
+
+                // 2) Координатор обновлений: debounce + maxWait + single-flight + отмена
+                _refreshCoordinator = new ObjectRefreshCoordinator(
+                    reloadByObjectNameAsync: RestartDataByObjectNameAsync,
+                    debounce: TimeSpan.FromMilliseconds(500),
+                    maxWait: TimeSpan.FromSeconds(3),
+                    maxParallelReloads: 2);
+
+                await InitServiceBrokerAsync(_loadCts.Token);
 
                 Task bindingsTask = InitializeBindingsAsync();
                 await Task.WhenAll(bindingsTask);
@@ -4712,7 +4779,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             Application.Idle -= ExpandGroupsOnIdle;
             _loadCts?.Cancel();
-            base.OnFormClosed(e);
+           // base.OnFormClosed(e);
         }
         //protected override async void OnFormClosing(FormClosingEventArgs e)
         //{
@@ -4726,13 +4793,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //}
         protected void OnFormClosing(object sender, FormClosingEventArgs e)
         {
-            _loadCts?.Cancel();
+            try
+            {
+                _loadCts?.Cancel();
 
-            if (_sbHelper != null)
-                _sbHelper.DisposeAsync();
+                if (_sbHelper != null)
+                    _sbHelper.DisposeAsync();
 
-            //_loadCts?.Dispose();
-            base.OnFormClosing(e);
+                //_loadCts?.Dispose();
+              //  base.OnFormClosing(e);
+            }
+            catch(Exception ex )
+            { Debug.WriteLine("FormClosingError");
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         private void layoutControlGroup7_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
@@ -4839,5 +4913,183 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         //    // 3) дальше ТВОЯ логика: перебираешь affected и обновляешь данные
         //}
+    }
+}
+
+
+namespace SewingProduction.Features.KnittingProduction.Forms
+{
+    // (оставляем namespace как в файле, чтобы класс был доступен)
+    /// <summary>
+    /// Координатор перезагрузок по "объектам" (хранимка/вьюха/логическая группа данных).
+    /// Делает накопление событий, анти-дребезг (debounce), max-wait и защиту от параллельных перезагрузок одного и того же объекта.
+    /// </summary>
+    internal sealed class ObjectRefreshCoordinator : IDisposable
+    {
+        private readonly Func<string, Task> _reloadByObjectNameAsync;
+        private readonly TimeSpan _debounce;
+        private readonly TimeSpan _maxWait;
+
+        private readonly object _lock = new();
+        private readonly HashSet<string> _pending = new(StringComparer.OrdinalIgnoreCase);
+
+        private DateTime _batchStartedUtc = DateTime.MinValue;
+
+        private CancellationTokenSource? _debounceCts;
+        private CancellationTokenSource? _maxWaitCts;
+
+        // single-flight + cancel per object
+        private readonly Dictionary<string, CancellationTokenSource> _inflightCts = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, SemaphoreSlim> _objectLocks = new(StringComparer.OrdinalIgnoreCase);
+
+        // ограничение параллелизма по форме
+        private readonly SemaphoreSlim _globalGate;
+
+        public ObjectRefreshCoordinator(
+            Func<string, Task> reloadByObjectNameAsync,
+            TimeSpan? debounce = null,
+            TimeSpan? maxWait = null,
+            int maxParallelReloads = 2)
+        {
+            _reloadByObjectNameAsync = reloadByObjectNameAsync ?? throw new ArgumentNullException(nameof(reloadByObjectNameAsync));
+            _debounce = debounce ?? TimeSpan.FromMilliseconds(500);
+            _maxWait = maxWait ?? TimeSpan.FromSeconds(3);
+            _globalGate = new SemaphoreSlim(Math.Max(1, maxParallelReloads));
+        }
+
+        public void Request(string objectName)
+        {
+            if (string.IsNullOrWhiteSpace(objectName)) return;
+
+            lock (_lock)
+            {
+                if (_batchStartedUtc == DateTime.MinValue)
+                    _batchStartedUtc = DateTime.UtcNow;
+
+                _pending.Add(objectName);
+
+                // debounce от последнего события
+                _debounceCts?.Cancel();
+                _debounceCts = new CancellationTokenSource();
+                _ = FireAfterAsync(_debounce, _debounceCts.Token, isMaxWait: false);
+
+                // max-wait от первого события пачки
+                if (_maxWaitCts == null)
+                {
+                    _maxWaitCts = new CancellationTokenSource();
+                    _ = FireAfterAsync(_maxWait, _maxWaitCts.Token, isMaxWait: true);
+                }
+            }
+        }
+
+        private async Task FireAfterAsync(TimeSpan delay, CancellationToken token, bool isMaxWait)
+        {
+            try
+            {
+                await Task.Delay(delay, token).ConfigureAwait(false);
+
+                string[] toRun;
+                lock (_lock)
+                {
+                    if (_pending.Count == 0) return;
+
+                    if (isMaxWait && _batchStartedUtc == DateTime.MinValue)
+                        return;
+
+                    toRun = _pending.ToArray();
+                    _pending.Clear();
+
+                    _batchStartedUtc = DateTime.MinValue;
+
+                    _debounceCts?.Cancel();
+                    _debounceCts = null;
+
+                    _maxWaitCts?.Cancel();
+                    _maxWaitCts = null;
+                }
+
+                foreach (var objName in toRun)
+                    _ = RunSingleAsync(objName);
+            }
+            catch (OperationCanceledException) { }
+        }
+
+        private SemaphoreSlim GetObjectLock(string objectName)
+        {
+            lock (_lock)
+            {
+                if (!_objectLocks.TryGetValue(objectName, out var sem))
+                {
+                    sem = new SemaphoreSlim(1, 1);
+                    _objectLocks[objectName] = sem;
+                }
+                return sem;
+            }
+        }
+
+        private async Task RunSingleAsync(string objectName)
+        {
+            var objLock = GetObjectLock(objectName);
+
+            await objLock.WaitAsync().ConfigureAwait(false);
+            CancellationTokenSource cts;
+            try
+            {
+                if (_inflightCts.TryGetValue(objectName, out var old))
+                {
+                    old.Cancel();
+                    old.Dispose();
+                }
+
+                cts = new CancellationTokenSource();
+                _inflightCts[objectName] = cts;
+            }
+            finally
+            {
+                objLock.Release();
+            }
+
+            try
+            {
+                await _globalGate.WaitAsync(cts.Token).ConfigureAwait(false);
+                try
+                {
+                    await _reloadByObjectNameAsync(objectName).ConfigureAwait(false);
+                }
+                finally
+                {
+                    _globalGate.Release();
+                }
+            }
+            catch (OperationCanceledException) { }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ObjectRefreshCoordinator] Reload failed: {objectName}. {ex}");
+            }
+        }
+
+        public void Dispose()
+        {
+            lock (_lock)
+            {
+                _debounceCts?.Cancel();
+                _maxWaitCts?.Cancel();
+                _debounceCts?.Dispose();
+                _maxWaitCts?.Dispose();
+                _debounceCts = null;
+                _maxWaitCts = null;
+            }
+
+            foreach (var cts in _inflightCts.Values)
+            {
+                cts.Cancel();
+                cts.Dispose();
+            }
+
+            foreach (var sem in _objectLocks.Values)
+                sem.Dispose();
+
+            _globalGate.Dispose();
+        }
     }
 }
