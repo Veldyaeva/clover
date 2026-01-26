@@ -685,7 +685,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             bandedGridColumn28.Caption = "факт в м/ч";
             bandedGridColumn28.Name = "bandedGridColumn28";
-            bandedGridColumn28.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", "SUM={0:0.##}") });
+            bandedGridColumn28.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", "{0:0.##}") });
             bandedGridColumn28.Visible = true;
             bandedGridColumn28.Width = 73;
             // 

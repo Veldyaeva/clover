@@ -75,6 +75,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions42 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions43 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            labelStatus = new CustomLabel();
             gridControlSmenZadany = new CustomGridControl();
             advBandedGridViewSmenZadany = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             gridBand9 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -374,11 +375,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup15 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem4 = new DevExpress.XtraLayout.SplitterItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             customGridControl7 = new CustomGridControl();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             layoutControlGroup13 = new DevExpress.XtraLayout.LayoutControlGroup();
-            labelStatus = new CustomLabel();
-            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControlSmenZadany).BeginInit();
@@ -493,10 +493,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
@@ -517,6 +517,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl1.Size = new System.Drawing.Size(1855, 896);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // labelStatus
+            // 
+            labelStatus.Font = new System.Drawing.Font("Arial", 10F);
+            labelStatus.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            labelStatus.Location = new System.Drawing.Point(4, 872);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new System.Drawing.Size(1847, 20);
+            labelStatus.TabIndex = 8;
+            labelStatus.Text = "customLabel7";
             // 
             // gridControlSmenZadany
             // 
@@ -2028,7 +2038,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             xtraTabPage4.Controls.Add(layoutControl3);
             xtraTabPage4.Name = "xtraTabPage4";
-            xtraTabPage4.Size = new System.Drawing.Size(1007, 271);
+            xtraTabPage4.Size = new System.Drawing.Size(1007, 263);
             xtraTabPage4.Text = "Администрирование";
             // 
             // layoutControl3
@@ -2043,7 +2053,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl3.Name = "layoutControl3";
             layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1098, 531, 650, 400);
             layoutControl3.Root = layoutControlGroup12;
-            layoutControl3.Size = new System.Drawing.Size(1007, 271);
+            layoutControl3.Size = new System.Drawing.Size(1007, 263);
             layoutControl3.TabIndex = 0;
             layoutControl3.Text = "layoutControl3";
             // 
@@ -2108,7 +2118,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridControlMlOp.Location = new System.Drawing.Point(12, 38);
             gridControlMlOp.MainView = gridViewMlOp;
             gridControlMlOp.Name = "gridControlMlOp";
-            gridControlMlOp.Size = new System.Drawing.Size(920, 221);
+            gridControlMlOp.Size = new System.Drawing.Size(920, 213);
             gridControlMlOp.TabIndex = 23;
             gridControlMlOp.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewMlOp });
             // 
@@ -2253,7 +2263,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup12.GroupBordersVisible = false;
             layoutControlGroup12.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem9, layoutControlItem17, layoutControlItem14, layoutControlItem15, layoutControlItem16 });
             layoutControlGroup12.Name = "Root";
-            layoutControlGroup12.Size = new System.Drawing.Size(1007, 271);
+            layoutControlGroup12.Size = new System.Drawing.Size(1007, 263);
             layoutControlGroup12.TextVisible = false;
             // 
             // layoutControlItem9
@@ -2261,7 +2271,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem9.Control = gridControlMlOp;
             layoutControlItem9.Location = new System.Drawing.Point(0, 26);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(924, 225);
+            layoutControlItem9.Size = new System.Drawing.Size(924, 217);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem17
@@ -2269,7 +2279,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem17.Control = customSimpleButton6;
             layoutControlItem17.Location = new System.Drawing.Point(924, 26);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(63, 225);
+            layoutControlItem17.Size = new System.Drawing.Size(63, 217);
             layoutControlItem17.TextVisible = false;
             // 
             // layoutControlItem14
@@ -3425,6 +3435,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             splitterItem4.Name = "splitterItem4";
             splitterItem4.Size = new System.Drawing.Size(10, 868);
             // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = labelStatus;
+            layoutControlItem7.Location = new System.Drawing.Point(0, 868);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new System.Drawing.Size(1851, 24);
+            layoutControlItem7.TextVisible = false;
+            // 
             // customGridControl7
             // 
             customGridControl7.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -3453,24 +3471,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup13.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup13.Name = "layoutControlGroup13";
             layoutControlGroup13.Size = new System.Drawing.Size(678, 127);
-            // 
-            // labelStatus
-            // 
-            labelStatus.Font = new System.Drawing.Font("Arial", 10F);
-            labelStatus.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            labelStatus.Location = new System.Drawing.Point(4, 872);
-            labelStatus.Name = "labelStatus";
-            labelStatus.Size = new System.Drawing.Size(1847, 20);
-            labelStatus.TabIndex = 8;
-            labelStatus.Text = "customLabel7";
-            // 
-            // layoutControlItem7
-            // 
-            layoutControlItem7.Control = labelStatus;
-            layoutControlItem7.Location = new System.Drawing.Point(0, 868);
-            layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(1851, 24);
-            layoutControlItem7.TextVisible = false;
             // 
             // PlanZagrVyaz
             // 
@@ -3595,10 +3595,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup15).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl7).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
             ResumeLayout(false);
         }
 
