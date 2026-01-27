@@ -14,6 +14,7 @@
 //    включи UseSchemaInListenName = false (по умолчанию true).
 #nullable enable
 using Microsoft.IdentityModel.Tokens;
+using SewingProduction.Core.interfaces;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static SewingProduction.Core.Models.ServiceBrokerModel;
 
 namespace SewingProduction.Core.helpers
@@ -160,6 +162,56 @@ namespace SewingProduction.Core.helpers
 
             RebuildIndex();
             StartAllBrokers();
+        }
+        //////private Task Broker_Changed(string table, string? fieldsCsv)
+        //////{
+        //////    if (_owner is IDataUpdatableFormAsyncV2 v2)
+        //////        return v2.UpdateDataInFormAsync(table, fieldsCsv);
+
+        //////    if (_owner is IDataUpdatableFormAsync v1)
+        //////        return v1.UpdateDataInFormAsync(table);
+
+        //////    if (_owner is IDataUpdatableForm sync)
+        //////    {
+        //////        sync.UpdateDataInForm(table);
+        //////        return Task.CompletedTask;
+        //////    }
+
+        //////    return Task.CompletedTask;
+        //////}
+        private Task Broker_Changed(string table, string? fieldsCsv)
+        {
+            // если _owner — форма/контрол:
+            if (_owner is Control c && c.InvokeRequired)
+            {
+                var tcs = new TaskCompletionSource<object?>();
+                c.BeginInvoke(new Action(async () =>
+                {
+                    try
+                    {
+                        await DispatchToFormAsync(table, fieldsCsv);
+                        tcs.TrySetResult(null);
+                    }
+                    catch (Exception ex) { tcs.TrySetException(ex); }
+                }));
+                return tcs.Task;
+            }
+
+            return DispatchToFormAsync(table, fieldsCsv);
+        }
+
+        private Task DispatchToFormAsync(string table, string? fieldsCsv)
+        {
+            if (_owner is IDataUpdatableFormAsyncV2 v2)
+                return v2.UpdateDataInFormAsync(table, fieldsCsv);
+            if (_owner is IDataUpdatableFormAsync v1)
+                return v1.UpdateDataInFormAsync(table);
+            if (_owner is IDataUpdatableForm sync)
+            {
+                sync.UpdateDataInForm(table);
+                return Task.CompletedTask;
+            }
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -302,7 +354,12 @@ public ValueTask DisposeAsync()
 
             foreach (var broker in _brokers.Values)
             {
-                try { broker.StopBroker(); } catch { /* лог */ }
+                try
+                {
+                    broker.Changed -= Broker_Changed;
+                    broker.StopBroker(); // локально: StopListening + запрет переподписки
+                }
+                catch { }
             }
 
             _brokers.Clear();
@@ -394,13 +451,14 @@ public ValueTask DisposeAsync()
                     continue;
 
                 var broker = new ServiceBroker(_owner);
-                broker.StartBroker();
+
+                // ВАЖНО: подписка на событие
+                broker.Changed += Broker_Changed;
 
                 var columns = string.Join(",", unionFields);
                 var listenName = UseSchemaInListenName ? tableKey : ExtractTableName(tableKey);
 
                 broker.StartListening(columns, listenName);
-
                 _brokers[tableKey] = broker;
             }
         }

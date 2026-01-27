@@ -11,23 +11,51 @@ using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
+using SewingProduction.Core.helpers;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
+using SewingProduction.Core.Models;
+using SewingProduction.Core.Class.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
+using static SewingProduction.Core.helpers.ServiceBrokerHelper;
 
+#nullable enable
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class KnitterWorkSpace : CustomForm
+    public partial class KnitterWorkSpace : CustomForm, IDataUpdatableFormAsyncV2
     {
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
         /// </summary>
         private readonly IKnitterOrchestrator _orchestrator;
+        
+        /// <summary>
+        /// ServiceBroker для отслеживания изменений в БД.
+        /// </summary>
+        private ServiceBrokerHelper? _sbHelper;
+        
+        /// <summary>
+        /// Координатор обновлений с защитой от дребезга.
+        /// </summary>
+        private EnhancedRefreshCoordinator? _refreshCoordinator;
+        
+        /// <summary>
+        /// Сервис для работы с ServiceBroker.
+        /// </summary>
+        private ServiceBrokerService? _sbService;
+        
+        /// <summary>
+        /// Токен отмены для инициализации ServiceBroker.
+        /// </summary>
+        private CancellationTokenSource? _loadCts;
         /// <summary>
         /// Источник данных, к которому привязан GridControl.
         /// </summary>
@@ -119,7 +147,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
-            this.Load += async (s, e) => await InitializeAsync();
+            this.Load += async (s, e) => 
+            {
+                await InitializeAsync();
+                await InitServiceBrokerAsync();
+            };
 
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
@@ -1709,9 +1741,191 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        public void Dispose()
+        /// <summary>
+        /// Инициализирует ServiceBroker для отслеживания изменений в таблицах БД.
+        /// </summary>
+        private async Task InitServiceBrokerAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                _loadCts = new CancellationTokenSource();
+                var dbHelper = new DatabaseHelper();
+                _sbService = new ServiceBrokerService(dbHelper);
+
+                // Имя хранимой процедуры, которую нужно отслеживать
+                const string objectName = "GetPlanZagrVyazNorm_ByTab4";
+
+                _sbHelper = new ServiceBrokerHelper(
+                    owner: this,
+                    loadByObjectAsync: (obj, token) => _sbService.GetObjectListForServiceBroker(obj, token)
+                )
+                {
+                    UseSchemaInListenName = true
+                };
+
+                // Координатор обновлений с защитой от дребезга
+                var sbSettings = SettingsManager.GetServiceBrokerSettings();
+                _refreshCoordinator = new EnhancedRefreshCoordinator(
+                    reloadByObjectNameAsync: RestartDataByObjectNameAsync,
+                    debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
+                    throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
+                    maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
+                    maxBatchSize: sbSettings.MaxBatchSize,
+                    maxParallelReloads: sbSettings.MaxParallelReloads,
+                    maxCascadeDepth: sbSettings.MaxCascadeDepth
+                );
+
+                // Настраиваем приоритет для обновления плана
+                _refreshCoordinator.SetPriority(objectName, 10);
+
+                // Инициализируем и запускаем прослушивание
+                await _sbHelper.InitAndStartAsync(new[] { objectName }, _loadCts.Token);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error initializing ServiceBroker: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Перезапускает загрузку данных по имени объекта (вызывается координатором).
+        /// </summary>
+        private async Task RestartDataByObjectNameAsync(string objectName)
+        {
+            if (string.IsNullOrWhiteSpace(objectName))
+                return;
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RestartDataByObjectNameAsync: {objectName}");
+
+                // Если это наша хранимая процедура плана - перезагружаем план
+                if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab4", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (_currentLoadedTab.HasValue)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Reloading plan for tab {_currentLoadedTab.Value}");
+                        await LoadPlanForTabAsync(_currentLoadedTab.Value, forceReload: true);
+                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Plan reloaded successfully");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No current tab loaded, skipping reload");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in RestartDataByObjectNameAsync for {objectName}: {ex.Message}");
+                throw;
+            }
+        }
+
+        public Task UpdateDataInFormAsync(string table)
+    => UpdateDataInFormAsync(table, fieldsCsv: null);
+        public async Task UpdateDataInFormAsync(string table, string? fieldsCsv)
+        {
+            if (_sbHelper == null) return;
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    $"[KnitterWorkSpace] UpdateDataInFormAsync: table={table}, fields={fieldsCsv ?? "<null>"}");
+
+                // 1) Пропускаем событие через фильтрацию + маппинг (таблица+поля -> objectNames)
+                await _sbHelper.HandleBrokerUpdateAsync(table, fieldsCsv);
+
+                // 2) Забираем затронутые объекты
+                var affected = _sbHelper.DrainPending();
+                if (affected == null || affected.Count == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"[KnitterWorkSpace] No affected objects for table={table}, fields={fieldsCsv ?? "<null>"}");
+                    return;
+                }
+
+                // 3) Планируем обновления через координатор
+                foreach (var objName in affected
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Distinct(StringComparer.OrdinalIgnoreCase))
+                {
+                    _refreshCoordinator?.Request(objName);
+                }
+
+                // 4) (опционально) лог статистики
+                if (_refreshCoordinator != null)
+                {
+                    var stats = _refreshCoordinator.GetStatistics();
+                    System.Diagnostics.Debug.WriteLine(
+                        $"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex}");
+            }
+        }
+
+
+        ///// <summary>
+        ///// Реализация IDataUpdatableFormAsyncV2 - вызывается при изменении данных в БД.
+        ///// </summary>
+        //public async Task UpdateDataInFormAsync(string table)
+        //{
+        //    if (_sbHelper == null) return;
+
+        //    try
+        //    {
+        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] UpdateDataInFormAsync: table={table}");
+
+        //        // Пропускаем событие через фильтрацию
+        //        await _sbHelper.HandleBrokerUpdateAsync(table, changedFieldsCsv: null);
+
+        //        // Получаем список затронутых объектов
+        //        var affected = _sbHelper.DrainPending();
+        //        if (affected == null || affected.Count == 0)
+        //        {
+        //            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No affected objects for table {table}");
+        //            return;
+        //        }
+
+        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Affected objects: {string.Join(", ", affected)}");
+
+        //        // Планируем обновления через координатор
+        //        foreach (var objName in affected
+        //            .Where(x => !string.IsNullOrWhiteSpace(x))
+        //            .Distinct(StringComparer.OrdinalIgnoreCase))
+        //        {
+        //            _refreshCoordinator?.Request(objName);
+        //        }
+
+        //        // Логируем статистику координатора
+        //        if (_refreshCoordinator != null)
+        //        {
+        //            var stats = _refreshCoordinator.GetStatistics();
+        //            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex.Message}");
+        //    }
+        //}
+
+        public new void Dispose()
+        {
+            try
+            {
+                _loadCts?.Cancel();
+                _loadCts?.Dispose();
+                _sbHelper?.DisposeAsync().AsTask().Wait();
+                _refreshCoordinator?.Dispose();
+            }
+            catch
+            {
+                // Игнорируем ошибки при освобождении ресурсов
+            }
+            base.Dispose();
         }
     }
 }

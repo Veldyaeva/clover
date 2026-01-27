@@ -51,7 +51,9 @@ namespace SewingProduction.form
             //gridControlSprav.InitializeAccess(_user, this.Name);
             //Загрузка комбобокса:
             comboBoxZeh_Enter(sender, e);
-            _serviceBroker.StartBroker();
+            _serviceBroker.StartListening( "*", "dbo.OborudBrig"); // имя таблицы/вьюхи — в душе не ебу, какое, просто написала, чтоб проект запустить
+
+            // _serviceBroker.StartBroker();
         }
         #region service broker
         // Интерфейс доступный сервис брокеру:
@@ -75,7 +77,7 @@ namespace SewingProduction.form
             if (!flagStartListening)
             {
                 _serviceBroker.StartListening("id_brig,idZeh,n_brig,brig", "SpBrig");
-                flagStartListening = _serviceBroker.GetFlagStartListening();
+               // flagStartListening = _serviceBroker.GetFlagStartListening();
             }
         }
         //Загрузка комбобокса список цехов:

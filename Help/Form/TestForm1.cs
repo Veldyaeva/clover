@@ -41,7 +41,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             //_serviceBrokerForTable1.StartBroker();
             //_serviceBrokerForTable1.StartListening("TestID, TestName, TestFirst, TestSecond", "testTable1");
-            _serviceBrokerForTable1.StartBroker();
+        //    _serviceBrokerForTable1.StartBroker();
             _serviceBrokerForTable1.StartListening("TestID, TestName", "testTable1");
             //_serviceBrokerForTable2.StartBroker();
             //_serviceBrokerForTable2.StartListening("idZeh, nameZeh, address, idProizv", "ZehList");
@@ -121,8 +121,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private void ProductForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBrokerForTable1.StopBroker();
-            _serviceBrokerForTable2.StopBroker();
+            //_serviceBrokerForTable1.StopBroker();
+            //_serviceBrokerForTable2.StopBroker();
         }
 
         private void customButton1_Click(object sender, EventArgs e)

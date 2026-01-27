@@ -56,15 +56,15 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabel2 = new CustomLabel();
             customButton3 = new CustomButton();
             customLayoutControl1 = new CustomLayoutControl();
+            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            progressBarControl1 = new DevExpress.XtraEditors.ProgressBarControl();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             simpleLabelItem1 = new DevExpress.XtraLayout.SimpleLabelItem();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             simpleLabelItem2 = new DevExpress.XtraLayout.SimpleLabelItem();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            progressBarControl1 = new DevExpress.XtraEditors.ProgressBarControl();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)bandedGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
@@ -73,14 +73,14 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             customLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)checkEdit1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)progressBarControl1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)checkEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)progressBarControl1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             SuspendLayout();
             // 
@@ -336,6 +336,32 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLayoutControl1.TabIndex = 4;
             customLayoutControl1.Text = "customLayoutControl1";
             // 
+            // simpleButton1
+            // 
+            simpleButton1.Location = new System.Drawing.Point(12, 30);
+            simpleButton1.Name = "simpleButton1";
+            simpleButton1.Size = new System.Drawing.Size(196, 22);
+            simpleButton1.StyleController = customLayoutControl1;
+            simpleButton1.TabIndex = 4;
+            simpleButton1.Text = "simpleButton1";
+            // 
+            // checkEdit1
+            // 
+            checkEdit1.Location = new System.Drawing.Point(12, 56);
+            checkEdit1.Name = "checkEdit1";
+            checkEdit1.Properties.Caption = "checkEdit1";
+            checkEdit1.Size = new System.Drawing.Size(196, 20);
+            checkEdit1.StyleController = customLayoutControl1;
+            checkEdit1.TabIndex = 5;
+            // 
+            // progressBarControl1
+            // 
+            progressBarControl1.Location = new System.Drawing.Point(12, 80);
+            progressBarControl1.Name = "progressBarControl1";
+            progressBarControl1.Size = new System.Drawing.Size(196, 18);
+            progressBarControl1.StyleController = customLayoutControl1;
+            progressBarControl1.TabIndex = 6;
+            // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
@@ -365,15 +391,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             simpleLabelItem2.Size = new System.Drawing.Size(200, 17);
             simpleLabelItem2.TextSize = new System.Drawing.Size(107, 13);
             // 
-            // simpleButton1
-            // 
-            simpleButton1.Location = new System.Drawing.Point(12, 30);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new System.Drawing.Size(196, 22);
-            simpleButton1.StyleController = customLayoutControl1;
-            simpleButton1.TabIndex = 4;
-            simpleButton1.Text = "simpleButton1";
-            // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = simpleButton1;
@@ -382,15 +399,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             layoutControlItem1.Size = new System.Drawing.Size(200, 26);
             layoutControlItem1.TextVisible = false;
             // 
-            // checkEdit1
-            // 
-            checkEdit1.Location = new System.Drawing.Point(12, 56);
-            checkEdit1.Name = "checkEdit1";
-            checkEdit1.Properties.Caption = "checkEdit1";
-            checkEdit1.Size = new System.Drawing.Size(196, 20);
-            checkEdit1.StyleController = customLayoutControl1;
-            checkEdit1.TabIndex = 5;
-            // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = checkEdit1;
@@ -398,14 +406,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             layoutControlItem2.Name = "layoutControlItem2";
             layoutControlItem2.Size = new System.Drawing.Size(200, 24);
             layoutControlItem2.TextVisible = false;
-            // 
-            // progressBarControl1
-            // 
-            progressBarControl1.Location = new System.Drawing.Point(12, 80);
-            progressBarControl1.Name = "progressBarControl1";
-            progressBarControl1.Size = new System.Drawing.Size(196, 18);
-            progressBarControl1.StyleController = customLayoutControl1;
-            progressBarControl1.TabIndex = 6;
             // 
             // layoutControlItem3
             // 
@@ -440,14 +440,14 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
             customLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)checkEdit1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)progressBarControl1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)checkEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)progressBarControl1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ResumeLayout(false);
             PerformLayout();

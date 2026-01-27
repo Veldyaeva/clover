@@ -1,137 +1,102 @@
-﻿using DevExpress.PivotGrid.QueryMode;
-using DevExpress.Xpo.DB.Helpers;
-using SewingProduction.Core.Class.Settings;
-//using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Core.Models;
+﻿using SewingProduction.Core.Class.Settings;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SewingProduction.Core.helpers;
 
 namespace SewingProduction
 {
     /// <summary>
-    /// Класс для получения обновлений
+    /// Тонкий адаптер SqlDependency (Query Notifications).
+    /// НЕ вызывает SqlDependency.Start/Stop (это делается один раз на процесс приложения).
+    /// Делает только:
+    /// - StartListening / StopListening
+    /// - уведомление Changed при изменениях
     /// </summary>
-    public class ServiceBroker
+    public sealed class ServiceBroker
     {
-        //public event Func<string, List<string>, Task>? Changed;
+        public event Func<string, string?, Task>? Changed;
 
-        //private Task RaiseChangedAsync(string table, List<string> changedFields)
-        //    => Changed?.Invoke(table, changedFields) ?? Task.CompletedTask;
-        
-        private readonly object _form;
+        private Task RaiseChangedAsync(string table, string? changedFieldsCsv)
+            => Changed?.Invoke(table, changedFieldsCsv) ?? Task.CompletedTask;
 
-        // Для теста:
-        // private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
-        //private readonly string _connectionString = Properties.Settings.Default.ACEConnectionString;
         private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
-        private SqlConnection _connection;
-        private SqlCommand _command;
-        private SqlDependency _dependency;
 
-        private bool _flagStartListening = false;
-        private bool _brokerStopped = false;
+        private SqlConnection? _connection;
+        private SqlCommand? _command;
+        private SqlDependency? _dependency;
 
-        private string _fields;
-        private string _table;
-        public ServiceBroker(object form)
+        private bool _flagStartListening;
+        private bool _brokerStopped;
+
+        private string _fields = "*";
+        private string _table = "";
+
+        private int _onChangeGate = 0;
+
+        public ServiceBroker(object owner)
         {
-            _form = form;
+            // owner оставляем только чтобы не ломать текущие вызовы new ServiceBroker(this);
+            // В тонкой версии брокер не знает о форме и не вызывает её напрямую.
         }
+
+        [Obsolete("SqlDependency.Start должен вызываться один раз на процесс (в Program/Main). Не вызывай это из форм/брокеров.")]
         public void StartBroker()
         {
-            try
-            {
-                // Запуск отслеживания изменений для соединения с базой данных
-                SqlDependency.Start(_connectionString);
-                Debug.WriteLine($"Broker is Started");
-            }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"SQL Error: {sqlEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error starting listener: {ex.Message}");
-            }
-        }
-        public void StopBroker()
-        {
-            _brokerStopped = true; // Устанавливаем флаг остановки
-            StopListening();
-            try
-            {
-                SqlDependency.Stop(_connectionString);
-                Debug.WriteLine("Broker is Stopped");
-            }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"SQL Error stopping broker: {sqlEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error stopping broker: {ex.Message}");
-            }
+            Debug.WriteLine("ServiceBroker.StartBroker() ignored. Use global SqlDependency.Start on app startup.");
         }
 
-        public bool GetFlagStartListening() => _flagStartListening;
+        public void StopBroker()
+        {
+            _brokerStopped = true;
+            _flagStartListening = false;
+            StopListening();
+        }
 
         public void StartListening(string fields, string table)
         {
+            if (string.IsNullOrWhiteSpace(table))
+                return;
+
+            _fields = string.IsNullOrWhiteSpace(fields) ? "*" : fields.Trim();
+            _table = table.Trim();
+            _flagStartListening = true;
+            _brokerStopped = false;
+
             try
             {
-                Debug.WriteLine($"Starting SQL Dependency for Table: {table}, Fields: {fields}");
-                _fields = fields;
-                _table = table;
-                _flagStartListening = true;
-                // Остановка предыдущего прослушивания, если оно было активно:
                 StopListening();
-                // SQL-запрос
-                //       string query = $"SELECT {_fields} FROM dbo.{table}";
-                    // _table может быть "table" или "schema.table"
-       string fullTable;
-                    if (!string.IsNullOrWhiteSpace(_table) && _table.Contains("."))
-                        {
-                            // schema.table -> [schema].[table]
-                    var parts = _table.Split('.');
-                    fullTable = $"[{parts[0].Trim().Trim('[', ']')}].[{parts[1].Trim().Trim('[', ']')}]";
-                        }
-                   else
-                        {
-                            // table -> [dbo].[table]
-                    var t = (_table ?? "").Trim().Trim('[', ']');
-                    fullTable = $"[dbo].[{t}]";
-                        }
-                
-                string query = $"SELECT {_fields} FROM {fullTable}";
-                // Создание соединения с базой данных
+
+                var fullTable = BuildQuotedTableName(_table);
+                var query = $"SELECT {_fields} FROM {fullTable}";
+
                 _connection = new SqlConnection(_connectionString);
-                // Открытие соединения
-                _connection.Open();
-                // Создание команды для выполнения SQL-запроса
-                _command = new SqlCommand(query, _connection);
-                // Dependency
+                _command = new SqlCommand(query, _connection)
+                {
+                    Notification = null
+                };
+
                 _dependency = new SqlDependency(_command);
                 _dependency.OnChange += OnDependencyChange;
 
-                // Выполнение команды
-                _command.ExecuteReader(CommandBehavior.CloseConnection);
-                Debug.WriteLine($"Listening from broker is Started");
-            }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"SQL Error: {sqlEx.Message}");
+                _connection.Open();
+
+                // обязательно выполнить команду — иначе QN не зарегистрируется
+                using (var reader = _command.ExecuteReader(CommandBehavior.SingleResult))
+                {
+                    // no-op
+                }
+
+                Debug.WriteLine($"[ServiceBroker] Listening started: table={_table}, fields={_fields}");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error starting listener: {ex.Message}");
+                Debug.WriteLine($"[ServiceBroker] StartListening error: {ex}");
+                StopListening();
             }
         }
 
@@ -139,140 +104,164 @@ namespace SewingProduction
         {
             try
             {
-                //_flagStartListening = false;
-                // Закрываем подключение
                 if (_dependency != null)
                 {
                     _dependency.OnChange -= OnDependencyChange;
                     _dependency = null;
-                    Debug.WriteLine("SqlDependency unsubscribed.");
                 }
-                if (_command != null)
-                {
-                    _command.Dispose();
-                    _command = null;
-                    Debug.WriteLine("SqlCommand disposed.");
-                }
+
+                _command?.Dispose();
+                _command = null;
+
                 if (_connection != null)
                 {
-                    _connection.Close();
+                    try { _connection.Close(); } catch { }
                     _connection.Dispose();
                     _connection = null;
-                    Debug.WriteLine("SqlConnection closed.");
                 }
-                Debug.WriteLine($"Broker job");
+
                 return true;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error during StopListening: {ex.Message}");
+                Debug.WriteLine($"[ServiceBroker] StopListening error: {ex}");
                 return false;
             }
         }
+
+        //private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
+        //{
+        //    Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
+
+        //    // защита от параллельных вызовов
+        //    if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
+        //        return;
+
+        //    try
+        //    {
+        //        // QN одноразовые — снимаем текущую подписку
+        //        StopListening();
+
+        //        if (_brokerStopped)
+        //            return;
+
+        //        // SqlDependency НЕ отдаёт список колонок — передаём null
+        //        await RaiseChangedAsync(_table, changedFieldsCsv: null);
+
+        //        // переподписка
+        //        if (_flagStartListening && !_brokerStopped)
+        //            StartListening(_fields, _table);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
+        //        try
+        //        {
+        //            if (_flagStartListening && !_brokerStopped)
+        //                StartListening(_fields, _table);
+        //        }
+        //        catch { }
+        //    }
+        //    finally
+        //    {
+        //        Interlocked.Exchange(ref _onChangeGate, 0);
+        //    }
+        //}
+
+
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
-            Debug.WriteLine($"Notification received: Table= {_table}, Type={e.Type}, Info={e.Info}, Source={e.Source}");
-
-            if (e.Type == SqlNotificationType.Change)
+            try
             {
-                switch (e.Info)
+                Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
+
+                // 1) SqlDependency шлёт Subscribe/Query при установке подписки — это НЕ изменение данных
+                if (e.Type != SqlNotificationType.Change)
                 {
-                    case SqlNotificationInfo.Insert:
-                    case SqlNotificationInfo.Update:
-                    case SqlNotificationInfo.Delete:
-                        Debug.WriteLine("Data was changed");
-
-                        try
-                        {
-                            if (_form is Form winForm)
-                            {
-                                await winForm.InvokeAsync(async () =>
-                                {
-                                    try
-                                    {
-                                        Debug.WriteLine("Calling UpdateDataInForm...");
-
-                                        //if (_form is IDataUpdatableFormAsync asyncForm)
-                                        //{
-                                        //    await asyncForm.UpdateDataInFormAsync(_table);
-                                        //    Debug.WriteLine("Async form updated." + _table);
-                                        //}
-                                        //if (_form is IDataUpdatableForm syncForm)
-                                        //{
-                                        //    syncForm.UpdateDataInForm(_table);
-                                        //    Debug.WriteLine("Sync form updated." + _table);
-                                        //}
-                                        var changedFields = (_fields ?? "")
-                                            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                                            .Select(s => s.Trim())
-                                            .Where(s => s.Length > 0)
-                                            .ToList();
-
-                                        // 1) Новый контракт (если форма его поддерживает)
-                                        if (_form is IDataUpdatableFormAsyncV2 asyncFormV2)
-                                        {
-                                            //await asyncFormV2.UpdateDataInFormAsync(_table, changedFields);
-                                            await asyncFormV2.UpdateDataInFormAsync(_table);
-                                            //await asyncFormV2.UpdateDataInFormAsync(_table, string.Join(",", changedFields));
-                                            Debug.WriteLine("Async form updated." + _table);
-                                        }
-                                        // 2) Старый контракт (как было)
-                                        else if (_form is IDataUpdatableFormAsync asyncForm)
-                                        {
-                                            await asyncForm.UpdateDataInFormAsync(_table);
-                                            Debug.WriteLine("Async form updated." + _table);
-                                        }
-                                        // 3) Старый sync (если у тебя есть)
-                                        else if (_form is IDataUpdatableForm syncForm)
-                                        {
-                                            syncForm.UpdateDataInForm(_table);
-                                            Debug.WriteLine("Sync form updated." + _table);
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Debug.WriteLine($"Ошибка при обновлении формы: {ex.Message}");
-                                    }
-                                    finally
-                                    {
-                                        // ⬅️ Перезапускаем внутри UI потока, после обновления данных
-                                        if (_flagStartListening && !_brokerStopped)
-                                        {
-                                            Debug.WriteLine("Restarting listener after update.");
-                                            StartListening(_fields, _table);
-                                        }
-                                        else
-                                        {
-                                            Debug.WriteLine("Listener not restarted (stopped or disabled).");
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                        catch (Exception invokeEx)
-                        {
-                            Debug.WriteLine($"Error invoking update on form: {invokeEx.Message}");
-                        }
-                        break;
-
-                    case SqlNotificationInfo.Invalid:
-                        Debug.WriteLine("Notification is invalid, restarting listener.");
-                        break;
-
-                    case SqlNotificationInfo.Error:
-                        Debug.WriteLine("Notification error, check SQL Server configuration.");
-                        break;
-
-                    default:
-                        Debug.WriteLine($"Unknown notification info: {e.Info}");
-                        break;
+                    // просто переподписываемся и выходим
+                   // ResubscribeSafe();
+                    return;
                 }
+                if (e.Type != SqlNotificationType.Change)
+                {
+                    Debug.WriteLine($"[ServiceBroker] Ignore notification: type={e.Type}, info={e.Info}, source={e.Source}");
+                    StartListening(_fields, _table); // если нужно переподписаться
+                    return;
+                }
+                // 2) Для Change — фильтруем мусорные состояния
+                // Обычно изменения: Insert/Update/Delete.
+                // Invalid/Unknown — лучше переподписаться, но не дёргать UI.
+                if (e.Info != SqlNotificationInfo.Insert &&
+                    e.Info != SqlNotificationInfo.Update &&
+                    e.Info != SqlNotificationInfo.Delete)
+                {
+                  //  ResubscribeSafe();
+                    return;
+                }
+                // QN одноразовые — переподписка
+                StopListening();
+                if (!_brokerStopped && _flagStartListening)
+                    StartListening(_fields, _table);
+
+                // Вызов наружу (тонко!)
+                await RaiseChangedAsync(_table, changedFieldsCsv: null);
+               // Debug.WriteLine($"[ServiceBroker:{_id}] Notification: table=...");
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
+               // ResubscribeSafe();
             }
         }
 
-        //internal async Task<List<ServiceBrokerModel.TableListenInfo>> GetObjectListForServiceBroker(string obj, CancellationToken token)
+        //private void ResubscribeSafe()
         //{
-        //    throw new NotImplementedException();
+        //    try
+        //    {
+        //        // dependency одноразовый, пересоздаём listening
+        //        StartListening(_fieldsCsv, _table);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine($"[ServiceBroker] ResubscribeSafe error: {ex.Message}");
+        //    }
         //}
+
+        //// Универсальный маршалинг в UI
+        //private Task InvokeOnOwnerAsync(Func<Task> fn)
+        //{
+        //    if (_owner is Control c && c.IsHandleCreated)
+        //    {
+        //        if (c.InvokeRequired)
+        //        {
+        //            var tcs = new TaskCompletionSource<object?>();
+        //            c.BeginInvoke(new Action(async () =>
+        //            {
+        //                try { await fn(); tcs.TrySetResult(null); }
+        //                catch (Exception ex) { tcs.TrySetException(ex); }
+        //            }));
+        //            return tcs.Task;
+        //        }
+        //    }
+
+        //    return fn();
+        //}
+
+        private static string BuildQuotedTableName(string tableOrSchemaTable)
+        {
+            var incoming = (tableOrSchemaTable ?? "").Trim();
+
+            if (incoming.Contains("."))
+            {
+                var parts = incoming.Split('.');
+                var schema = parts[0].Trim().Trim('[', ']');
+                var table = parts[1].Trim().Trim('[', ']');
+                return $"[{schema}].[{table}]";
+            }
+
+            var t = incoming.Trim().Trim('[', ']');
+            return $"[dbo].[{t}]";
+        }
     }
 }

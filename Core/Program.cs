@@ -1,19 +1,21 @@
-﻿using System;
+﻿using DevExpress.XtraGrid.Localization;
+using DevExpress.XtraReports.Design;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Win32;
+using SewingProduction.Core;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.KnittingProduction.Forms;
+using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
+using System;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Localization;
-using DevExpress.XtraReports.Design;
-using Microsoft.Win32;
-using SewingProduction.Models;
-using Microsoft.Extensions.DependencyInjection;
-using SewingProduction.Core;
-using SewingProduction.Features.KnittingProduction.Forms;
-using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
-using SewingProduction.Helpers;
 
 
 namespace SewingProduction.Core
@@ -69,7 +71,9 @@ namespace SewingProduction.Core
                 ConfigureServices(services);
                 var provider = services.BuildServiceProvider();
                 AppServices.Configure(provider);
-
+                SqlDependency.Start(SettingsManager.GetCurrentConnectionString());
+                Application.ApplicationExit += (_, __) =>
+                    SqlDependency.Stop(SettingsManager.GetCurrentConnectionString());
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
                     splashScreen.Show();

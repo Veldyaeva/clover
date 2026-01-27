@@ -58,7 +58,9 @@ namespace SewingProduction.form
         {
             //gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
             comboBoxVidProizv_Enter(sender, e);
-            _serviceBroker.StartBroker();
+            //  _serviceBroker.StartBroker();
+            _serviceBroker.StartListening("*", "dbo.OborudBrig"); // имя таблицы/вьюхи какое-то для отладки
+
         }
         #region service broker
         // Интерфейс доступный сервис брокеру:
@@ -82,7 +84,7 @@ namespace SewingProduction.form
             if (!flagStartListening)
             {
                 _serviceBroker.StartListening("idZeh,nameZeh,address,idProizv", "ZehList");
-                flagStartListening = _serviceBroker.GetFlagStartListening();
+               // flagStartListening = _serviceBroker.GetFlagStartListening();
             }
         }
         //Загрузка комбобокса виды производства:
