@@ -129,7 +129,7 @@ namespace SewingProduction.Features.Articul.Forms
                     SetGroupReadOnly(layoutCommonArticul, true);
                     SetGroupReadOnly(layoutGostInsert, true);
                     SetGroupReadOnly(layoutSostav, true);
-
+                    
                 }
                 //есть дата описания модели - редактирование запрещено
                 if (_currentModel.DateOpis != null)
