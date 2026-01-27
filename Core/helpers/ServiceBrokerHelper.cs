@@ -65,6 +65,7 @@ namespace SewingProduction.Core.helpers
 
         // pending matches
         private readonly ConcurrentQueue<ObjectTableFieldMatch> _pending;
+        private int _disposed; // 0 = не disposed, 1 = disposed
 
         private sealed class DependencyItem
         {
@@ -104,54 +105,61 @@ namespace SewingProduction.Core.helpers
         /// </summary>
         public async Task InitAndStartAsync(IEnumerable<string> objectNames, CancellationToken ct)
         {
-            if (objectNames == null) throw new ArgumentNullException(nameof(objectNames));
-
-            _sourcesByObject.Clear();
-
-            foreach (var obj in objectNames
-                         .Where(x => !string.IsNullOrWhiteSpace(x))
-                         .Select(x => x.Trim())
-                         .Distinct(_cmp))
+            try
             {
-                ct.ThrowIfCancellationRequested();
+                if (objectNames == null) throw new ArgumentNullException(nameof(objectNames));
 
-                List<TableListenInfo> list;
-                try
+                _sourcesByObject.Clear();
+
+                foreach (var obj in objectNames
+                             .Where(x => !string.IsNullOrWhiteSpace(x))
+                             .Select(x => x.Trim())
+                             .Distinct(_cmp))
                 {
-                    if (_loadByObjectAsync is null)
-                        throw new InvalidOperationException("_loadByObjectAsync == null. Делегат не передан в конструктор ServiceBrokerHelper.");
+                    ct.ThrowIfCancellationRequested();
 
-                    if (obj is null)
-                        throw new InvalidOperationException("obj == null (не должен быть null после фильтрации).");
+                    List<TableListenInfo> list;
+                    try
+                    {
+                        if (_loadByObjectAsync is null)
+                            throw new InvalidOperationException("_loadByObjectAsync == null. Делегат не передан в конструктор ServiceBrokerHelper.");
 
-                    // чтобы увидеть, ЧТО за делегат реально лежит внутри:
-                    var m = _loadByObjectAsync.Method;
-                    var target = _loadByObjectAsync.Target;
-                    System.Diagnostics.Debug.WriteLine($"LOAD: method={m.DeclaringType?.FullName}.{m.Name}, target={target?.GetType().FullName ?? "<static>"}");
+                        if (obj is null)
+                            throw new InvalidOperationException("obj == null (не должен быть null после фильтрации).");
 
-                    list = await _loadByObjectAsync(obj, ct).ConfigureAwait(false) ?? new List<TableListenInfo>();
+                        // чтобы увидеть, ЧТО за делегат реально лежит внутри:
+                        var m = _loadByObjectAsync.Method;
+                        var target = _loadByObjectAsync.Target;
+                        System.Diagnostics.Debug.WriteLine($"LOAD: method={m.DeclaringType?.FullName}.{m.Name}, target={target?.GetType().FullName ?? "<static>"}");
+
+                        list = await _loadByObjectAsync(obj, ct).ConfigureAwait(false) ?? new List<TableListenInfo>();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new InvalidOperationException(
+                            $"Ошибка при получении списка таблиц/полей для ObjectName='{obj}'. " +
+                            $"Проверь GetObjectListForServiceBroker и SQL-объект.",
+                            ex);
+                    }
+
+                    // На всякий случай: если ObjectName не заполнен в строках — заполним.
+                    foreach (var row in list)
+                    {
+                        if (string.IsNullOrWhiteSpace(row.ObjectName))
+                            row.ObjectName = obj;
+                    }
+
+                    _sourcesByObject[obj] = list;
+                    RebuildIndex();
+                    StartAllBrokers();
                 }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException(
-                        $"Ошибка при получении списка таблиц/полей для ObjectName='{obj}'. " +
-                        $"Проверь GetObjectListForServiceBroker и SQL-объект.",
-                        ex);
-                }
-
-                // На всякий случай: если ObjectName не заполнен в строках — заполним.
-                foreach (var row in list)
-                {
-                    if (string.IsNullOrWhiteSpace(row.ObjectName))
-                        row.ObjectName = obj;
-                }
-
-                _sourcesByObject[obj] = list;
-                RebuildIndex();
-                StartAllBrokers();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка ServiceBrokerHelper.InitAndStartAsync: {ex.Message}");
             }
         }
-
+        
         /// <summary>
         /// Вызов при событии от брокера:
         /// tableFromBroker: "dbo.table" или "table"
@@ -238,39 +246,47 @@ namespace SewingProduction.Core.helpers
         //}
         public List<string> DrainPending()
         {
-            var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-            while (_pending.TryDequeue(out var item))
+            try
             {
-                if (!string.IsNullOrWhiteSpace(item.ObjectName))
-                    result.Add(item.ObjectName);
-            }
+                var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            return result.ToList();
+                while (_pending.TryDequeue(out var item))
+                {
+                    if (!string.IsNullOrWhiteSpace(item.ObjectName))
+                        result.Add(item.ObjectName);
+                }
+
+                return result.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка ServiceBrokerHelper.InitAndStartAsync: {ex.Message}");
+                return new List<string>();
+            }
         }
         public List<string> GetUnionListeningFieldsForTable(string tableFromBroker)
-{
-    if (string.IsNullOrWhiteSpace(tableFromBroker))
-        return new List<string>();
+        {
+            if (string.IsNullOrWhiteSpace(tableFromBroker))
+                return new List<string>();
 
-    var incoming = tableFromBroker.Trim();
-    var tableKey = incoming;
+            var incoming = tableFromBroker.Trim();
+            var tableKey = incoming;
 
-    // если брокер прислал только имя таблицы (без схемы)
-    if (!incoming.Contains('.'))
-    {
-        var match = _unionFieldsByTable.Keys.FirstOrDefault(k =>
-            k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
+            // если брокер прислал только имя таблицы (без схемы)
+            if (!incoming.Contains('.'))
+            {
+                var match = _unionFieldsByTable.Keys.FirstOrDefault(k =>
+                    k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
 
-        if (match != null)
-            tableKey = match;
-    }
+                if (match != null)
+                    tableKey = match;
+            }
 
-    if (_unionFieldsByTable.TryGetValue(tableKey, out var fields))
-        return fields.OrderBy(x => x).ToList();
+            if (_unionFieldsByTable.TryGetValue(tableKey, out var fields))
+                return fields.OrderBy(x => x).ToList();
 
-    return new List<string>();
-}
+            return new List<string>();
+        }
         /// <summary>Для отладки: какие таблицы реально слушаем.</summary>
         public IReadOnlyList<string> GetListeningTables()
             => _unionFieldsByTable.Keys.OrderBy(k => k).ToList();
@@ -287,12 +303,31 @@ namespace SewingProduction.Core.helpers
         public ValueTask DisposeAsync()
         {
             // Если у ServiceBroker есть Stop/Dispose — вызови здесь.
+            //if (_brokers != null)
+            //    _brokers.Clear();
+            //_sourcesByObject.Clear();
+            //_depsByTable.Clear();
+            //_unionFieldsByTable.Clear();
+            //while (_pending.TryDequeue(out _)) { }
+            //return ValueTask.CompletedTask;
+            // ВАЖНО: не трогаем _pending, не надо его вычищать.
+
+            if (System.Threading.Interlocked.Exchange(ref _disposed, 1) == 1)
+                return ValueTask.CompletedTask;
+
             if (_brokers != null)
-                _brokers.Clear();
+                _brokers?.Clear();
             _sourcesByObject.Clear();
             _depsByTable.Clear();
             _unionFieldsByTable.Clear();
-            while (_pending.TryDequeue(out _)) { }
+
+            // безопасная очистка: ограничим итерации
+            for (int i = 0; i < 100000; i++)
+            {
+                if (!_pending.TryDequeue(out _))
+                    break;
+            }
+
             return ValueTask.CompletedTask;
         }
 
@@ -361,7 +396,7 @@ namespace SewingProduction.Core.helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("1");
+                MessageBox.Show($"Ошибка ServiceBrokerHelper.RebuildIndex: {ex.Message}");
             }
         }
 
@@ -391,7 +426,7 @@ namespace SewingProduction.Core.helpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show("2");
+                MessageBox.Show($"Ошибка ServiceBrokerHelper.StartAllBrokers: {ex.Message}");
             }
         }
 
