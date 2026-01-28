@@ -1034,7 +1034,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem11.Size = new System.Drawing.Size(316, 26);
             layoutControlItem11.TextVisible = false;
             // 
-            // layoutControlGroup10
+            // layoutOpis_t
             // 
             layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleSeparator3, layoutControlGroup6, layoutControlGroup11, layoutControlGroup12, layoutControlGroup7, splitterItem6, layoutControlGroup2, layoutControlGroup1, splitterItem4, splitterItem5 });
             layoutControlGroup10.Location = new System.Drawing.Point(0, 354);
@@ -1049,7 +1049,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             simpleSeparator3.Size = new System.Drawing.Size(1393, 1);
             simpleSeparator3.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
-            // layoutControlGroup6
+            // layoutBrak
             // 
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8, layoutControlItem9, emptySpaceItem6 });
             layoutControlGroup6.Location = new System.Drawing.Point(0, 50);
@@ -1079,7 +1079,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             emptySpaceItem6.Name = "emptySpaceItem6";
             emptySpaceItem6.Size = new System.Drawing.Size(975, 24);
             // 
-            // layoutControlGroup11
+            // layoutSumZP
             // 
             layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem1, layoutControlItem4, layoutControlItem3 });
             layoutControlGroup11.Location = new System.Drawing.Point(0, 0);
@@ -1139,7 +1139,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem12.Size = new System.Drawing.Size(178, 278);
             layoutControlItem12.TextVisible = false;
             // 
-            // layoutControlGroup7
+            // layoutSeb
             // 
             layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem18, emptySpaceItem12 });
             layoutControlGroup7.Location = new System.Drawing.Point(0, 410);
@@ -1259,7 +1259,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup3.Size = new System.Drawing.Size(206, 220);
             layoutControlGroup3.TextVisible = false;
             // 
-            // layoutControlGroup4
+            // layoutNorms
             // 
             layoutControlGroup4.Location = new System.Drawing.Point(0, 696);
             layoutControlGroup4.Name = "layoutControlGroup4";

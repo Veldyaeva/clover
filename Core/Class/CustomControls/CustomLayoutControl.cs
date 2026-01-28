@@ -2,6 +2,13 @@ using System.ComponentModel;
 using System.Drawing;
 using DevExpress.XtraLayout;
 using SewingProduction.Features.UserDistribution.Helpers;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static DevExpress.LookAndFeel.DXSkinColors;
 
 namespace SewingProduction.Core.Class
 {

@@ -356,7 +356,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
 
-                // layoutControlGroup10: управление нумерацией и преобразованием
+                // layoutOpis_t: управление нумерацией и преобразованием
                 if (layoutControlGroup10 != null && layoutControlGroup10.CustomHeaderButtons != null)
                 {
                     if (layoutControlGroup10.CustomHeaderButtons.Count > 0)

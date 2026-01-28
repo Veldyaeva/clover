@@ -24,6 +24,7 @@ namespace SewingProduction.Features.Articul.Service
     {
         
         private static Task _loadTask;
+        private static readonly ILogger _logger = new FileLogger();
 
         public static IReadOnlyList<GostModel> Gosts { get; private set; }
         = Array.Empty<GostModel>();
@@ -39,6 +40,8 @@ namespace SewingProduction.Features.Articul.Service
         = Array.Empty<AssortModel>();
         public static IReadOnlyList<SpArticulTkanSokr> Tkans { get; private set; }
         = Array.Empty<SpArticulTkanSokr>();
+        public static IReadOnlyList<GostGrupIzdViewModel> GostGroupNames { get; private set; }
+        = Array.Empty<GostGrupIzdViewModel>();
 
         public static Task EnsureLoadedAsync(DbService db)
         {
@@ -47,35 +50,49 @@ namespace SewingProduction.Features.Articul.Service
         }
         private static async Task LoadInternalAsync(DbService db)
         {
-            
-            var seasonsTask = db.GetListAsync<Szon_newModel>(
-                "select n,txt from dbo.szon_new", new { } );
+            try
+            {
+                var seasonsTask = db.GetListAsync<Szon_newModel>(
+                "select n,txt from dbo.szon_new", new { });
 
-            var gostTask = db.GetListAsync<GostModel>(
-              "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 ", new { }
-              );
+                var gostTask = db.GetListAsync<GostModel>(
+                  "SELECT  id_gost,name_gost,opi_gost FROM dbo.gost where ust = 0 ", new { }
+                  );
 
-            var tmTask = db.GetListAsync<TmModel>(
-                "select * from view_tmArticul", new { });
+                var tmTask = db.GetListAsync<TmModel>(
+                    "select * from view_tmArticul", new { });
 
-            var CountryTask = db.GetListAsync<CountryModel>(
-                "select frm_id_country, frm_country, frm_cu_id FROM dbo.frm_country", new { });
-            var GrupMenTask = db.GetListAsync<GrupMenModel>(
-                "select men_int,name from dbo.view_grup_men where men_int > 0 order by gm_index ", new { });
-            var AssortTask = db.GetListAsync<AssortModel>(
-                "select kod_v, txt_v from gtin.assort", new { });
-            var TkanTask = db.GetListAsync<SpArticulTkanSokr>(
-                "select Kod_t, Tkan, Tkb, IsDifficult, Difficult_koef from dbo.view_tkan", new { });
-            //ожидаем все задачи
-            await Task.WhenAll(seasonsTask, gostTask, tmTask, CountryTask, GrupMenTask, AssortTask, TkanTask);
-            
-            Gosts = (await gostTask).AsReadOnly();
-            Tms = (await tmTask).AsReadOnly();
-            Seasons = (await seasonsTask).AsReadOnly();
-            Countries = (await CountryTask).AsReadOnly();
-            GrupMen = (await GrupMenTask).AsReadOnly();
-            Assorts = (await AssortTask).AsReadOnly();
-            Tkans = (await TkanTask).AsReadOnly();
+                var CountryTask = db.GetListAsync<CountryModel>(
+                    "select frm_id_country, frm_country, frm_cu_id FROM dbo.frm_country", new { });
+                var GrupMenTask = db.GetListAsync<GrupMenModel>(
+                    "select men_int,name from dbo.view_grup_men where men_int > 0 order by gm_index ", new { });
+                var AssortTask = db.GetListAsync<AssortModel>(
+                    "select kod_v, txt_v from gtin.assort", new { });
+                var TkanTask = db.GetListAsync<SpArticulTkanSokr>(
+                    "select Kod_t, Tkan, Tkb, IsDifficult, Difficult_koef from dbo.view_tkan order by tkb", new { });
+                var GostGroupNamesTask = db.GetListAsync<GostGrupIzdViewModel>(
+                    "SELECT id_gost, ag_id, ag_name_sokr,n_i FROM View_GostGrupIzd ", new { });
+
+                //ожидаем все задачи
+                await Task.WhenAll(seasonsTask, gostTask, tmTask, CountryTask, GrupMenTask, AssortTask, TkanTask, GostGroupNamesTask);
+                //не выполняется дважды,  т.к. уже выполнены, возвращаем только результаты
+                Gosts = (await gostTask).AsReadOnly();
+                Tms = (await tmTask).AsReadOnly();
+                Seasons = (await seasonsTask).AsReadOnly();
+                Countries = (await CountryTask).AsReadOnly();
+                GrupMen = (await GrupMenTask).AsReadOnly();
+                Assorts = (await AssortTask).AsReadOnly();
+                Tkans = (await TkanTask).AsReadOnly();
+                GostGroupNames = (await GostGroupNamesTask).AsReadOnly();
+            }
+            catch (Exception ex)
+            {
+                // сброс задачи загрузки при ошибке
+                Clear();
+
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных CommonSpravArticulEditAdvance.LoadInternalAsync");
+                throw;
+            }
         }
 
         public static async Task ReloadAsync(DbService db)
@@ -95,7 +112,7 @@ namespace SewingProduction.Features.Articul.Service
             GrupMen = Array.Empty<GrupMenModel>();
             Assorts = Array.Empty<AssortModel>();
             Tkans = Array.Empty<SpArticulTkanSokr>();
-
+            GostGroupNames = Array.Empty<GostGrupIzdViewModel>();
         }
 
 
