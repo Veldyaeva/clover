@@ -148,6 +148,12 @@
     <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\CalculatorDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Forms\EmployeeTransfer .cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\SpisokConnect.cs">
       <SubType>Form</SubType>
     </Compile>
