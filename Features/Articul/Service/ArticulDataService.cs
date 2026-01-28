@@ -37,6 +37,20 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+
+        public async Task<List<AddNewKopmlModel>> GetArticulsListAsync()
+        {
+            try
+            {
+                string query = "SELECT Kodd,Kod,Grup,Articul,Mod,Razm,Sost,Kle,kod_v FROM view_sp_articul";
+                return await _dbService.GetListAsync<AddNewKopmlModel>(query, new {});
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPreviewAsyncBindingList");
+                return null;
+            }
+        }
         public async Task<BindingList<SpArtPreviewModel>> GetArtPreviewAsyncBindingList()
         {
             try

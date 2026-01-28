@@ -29,20 +29,26 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customLabel1 = new Core.Class.CustomLabel();
-            customLabel2 = new Core.Class.CustomLabel();
-            customLabel3 = new Core.Class.CustomLabel();
-            customHeaderLabel1 = new Core.Class.CustomHeaderLabel();
-            customLabel4 = new Core.Class.CustomLabel();
-            customComboBox1 = new CustomComboBox();
-            customLabel5 = new Core.Class.CustomLabel();
-            customComboBox2 = new CustomComboBox();
-            customComboBox3 = new CustomComboBox();
-            customComboBox4 = new CustomComboBox();
-            customComboBox5 = new CustomComboBox();
+            customHeaderLabelMod = new Core.Class.CustomHeaderLabel();
+            customLookUpEditSpravNoskiDetal = new Core.Class.CustomLookUpEdit();
+            customLookUpEditCatDynsign = new Core.Class.CustomLookUpEdit();
+            customLookUpEditCategory = new Core.Class.CustomLookUpEdit();
+            customLookUpEditGroup = new Core.Class.CustomLookUpEdit();
+            customLabelCategory = new Core.Class.CustomLabel();
+            customLabelGroup = new Core.Class.CustomLabel();
+            customLabelClass = new Core.Class.CustomLabel();
+            customHeaderLabelArt = new Core.Class.CustomHeaderLabel();
+            customLabelCatDynsign = new Core.Class.CustomLabel();
+            customLabelSpravNoskiDetal = new Core.Class.CustomLabel();
             customButton1 = new Core.Class.CustomButton();
             customButton2 = new Core.Class.CustomButton();
+            customLookUpEditClass = new Core.Class.CustomLookUpEdit();
             tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditSpravNoskiDetal.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditCatDynsign.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditCategory.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditGroup.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditClass.Properties).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -50,19 +56,20 @@
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.04748F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.95252F));
-            tableLayoutPanel1.Controls.Add(customLabel3, 0, 3);
-            tableLayoutPanel1.Controls.Add(customLabel2, 0, 2);
-            tableLayoutPanel1.Controls.Add(customLabel1, 0, 1);
-            tableLayoutPanel1.Controls.Add(customHeaderLabel1, 0, 0);
-            tableLayoutPanel1.Controls.Add(customLabel4, 0, 4);
-            tableLayoutPanel1.Controls.Add(customComboBox1, 1, 1);
-            tableLayoutPanel1.Controls.Add(customLabel5, 0, 5);
-            tableLayoutPanel1.Controls.Add(customComboBox5, 1, 5);
-            tableLayoutPanel1.Controls.Add(customComboBox4, 1, 4);
-            tableLayoutPanel1.Controls.Add(customComboBox3, 1, 3);
-            tableLayoutPanel1.Controls.Add(customComboBox2, 1, 2);
+            tableLayoutPanel1.Controls.Add(customHeaderLabelMod, 1, 0);
+            tableLayoutPanel1.Controls.Add(customLookUpEditSpravNoskiDetal, 1, 5);
+            tableLayoutPanel1.Controls.Add(customLookUpEditCatDynsign, 1, 4);
+            tableLayoutPanel1.Controls.Add(customLookUpEditCategory, 1, 3);
+            tableLayoutPanel1.Controls.Add(customLookUpEditGroup, 1, 2);
+            tableLayoutPanel1.Controls.Add(customLabelCategory, 0, 3);
+            tableLayoutPanel1.Controls.Add(customLabelGroup, 0, 2);
+            tableLayoutPanel1.Controls.Add(customLabelClass, 0, 1);
+            tableLayoutPanel1.Controls.Add(customHeaderLabelArt, 0, 0);
+            tableLayoutPanel1.Controls.Add(customLabelCatDynsign, 0, 4);
+            tableLayoutPanel1.Controls.Add(customLabelSpravNoskiDetal, 0, 5);
             tableLayoutPanel1.Controls.Add(customButton1, 1, 7);
             tableLayoutPanel1.Controls.Add(customButton2, 0, 7);
+            tableLayoutPanel1.Controls.Add(customLookUpEditClass, 1, 1);
             tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 8;
@@ -74,147 +81,161 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.4993782F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5018749F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5018749F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(337, 325);
+            tableLayoutPanel1.Size = new System.Drawing.Size(492, 325);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // customLabel1
+            // customHeaderLabelMod
             // 
-            customLabel1.AutoSize = true;
-            customLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabel1.Location = new System.Drawing.Point(3, 40);
-            customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(102, 40);
-            customLabel1.TabIndex = 0;
-            customLabel1.Text = "Класс";
+            customHeaderLabelMod.AutoSize = true;
+            customHeaderLabelMod.Dock = System.Windows.Forms.DockStyle.Fill;
+            customHeaderLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customHeaderLabelMod.Location = new System.Drawing.Point(160, 0);
+            customHeaderLabelMod.Name = "customHeaderLabelMod";
+            customHeaderLabelMod.Size = new System.Drawing.Size(329, 40);
+            customHeaderLabelMod.TabIndex = 24;
+            customHeaderLabelMod.Text = "Модель";
             // 
-            // customLabel2
+            // customLookUpEditSpravNoskiDetal
             // 
-            customLabel2.AutoSize = true;
-            customLabel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabel2.Location = new System.Drawing.Point(3, 80);
-            customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(102, 40);
-            customLabel2.TabIndex = 1;
-            customLabel2.Text = "Группа";
+            customLookUpEditSpravNoskiDetal.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditSpravNoskiDetal.Location = new System.Drawing.Point(160, 203);
+            customLookUpEditSpravNoskiDetal.Name = "customLookUpEditSpravNoskiDetal";
+            customLookUpEditSpravNoskiDetal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customLookUpEditSpravNoskiDetal.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLookUpEditSpravNoskiDetal.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseBackColor = true;
+            customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseFont = true;
+            customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseForeColor = true;
+            customLookUpEditSpravNoskiDetal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customLookUpEditSpravNoskiDetal.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_spr", "id_spr", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("name", "Тип") });
+            customLookUpEditSpravNoskiDetal.Size = new System.Drawing.Size(329, 22);
+            customLookUpEditSpravNoskiDetal.TabIndex = 23;
             // 
-            // customLabel3
+            // customLookUpEditCatDynsign
             // 
-            customLabel3.AutoSize = true;
-            customLabel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabel3.Location = new System.Drawing.Point(3, 120);
-            customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(102, 40);
-            customLabel3.TabIndex = 2;
-            customLabel3.Text = "Категория";
+            customLookUpEditCatDynsign.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditCatDynsign.Location = new System.Drawing.Point(160, 163);
+            customLookUpEditCatDynsign.Name = "customLookUpEditCatDynsign";
+            customLookUpEditCatDynsign.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customLookUpEditCatDynsign.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLookUpEditCatDynsign.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customLookUpEditCatDynsign.Properties.Appearance.Options.UseBackColor = true;
+            customLookUpEditCatDynsign.Properties.Appearance.Options.UseFont = true;
+            customLookUpEditCatDynsign.Properties.Appearance.Options.UseForeColor = true;
+            customLookUpEditCatDynsign.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customLookUpEditCatDynsign.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCDS_ID", "TCDS_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCDS_Name", "Признак") });
+            customLookUpEditCatDynsign.Size = new System.Drawing.Size(329, 22);
+            customLookUpEditCatDynsign.TabIndex = 22;
             // 
-            // customHeaderLabel1
+            // customLookUpEditCategory
             // 
-            customHeaderLabel1.AutoSize = true;
-            tableLayoutPanel1.SetColumnSpan(customHeaderLabel1, 2);
-            customHeaderLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customHeaderLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customHeaderLabel1.Location = new System.Drawing.Point(3, 0);
-            customHeaderLabel1.Name = "customHeaderLabel1";
-            customHeaderLabel1.Size = new System.Drawing.Size(331, 40);
-            customHeaderLabel1.TabIndex = 3;
-            customHeaderLabel1.Text = "customHeaderLabel1";
+            customLookUpEditCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditCategory.Location = new System.Drawing.Point(160, 123);
+            customLookUpEditCategory.Name = "customLookUpEditCategory";
+            customLookUpEditCategory.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customLookUpEditCategory.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLookUpEditCategory.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customLookUpEditCategory.Properties.Appearance.Options.UseBackColor = true;
+            customLookUpEditCategory.Properties.Appearance.Options.UseFont = true;
+            customLookUpEditCategory.Properties.Appearance.Options.UseForeColor = true;
+            customLookUpEditCategory.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customLookUpEditCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCAT_ID", "TCAT_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCAT_CategoryName", "Категория") });
+            customLookUpEditCategory.Size = new System.Drawing.Size(329, 22);
+            customLookUpEditCategory.TabIndex = 21;
             // 
-            // customLabel4
+            // customLookUpEditGroup
             // 
-            customLabel4.AutoSize = true;
-            customLabel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabel4.Location = new System.Drawing.Point(3, 160);
-            customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(102, 40);
-            customLabel4.TabIndex = 4;
-            customLabel4.Text = "Признаки";
+            customLookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditGroup.Location = new System.Drawing.Point(160, 83);
+            customLookUpEditGroup.Name = "customLookUpEditGroup";
+            customLookUpEditGroup.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customLookUpEditGroup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLookUpEditGroup.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customLookUpEditGroup.Properties.Appearance.Options.UseBackColor = true;
+            customLookUpEditGroup.Properties.Appearance.Options.UseFont = true;
+            customLookUpEditGroup.Properties.Appearance.Options.UseForeColor = true;
+            customLookUpEditGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customLookUpEditGroup.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TG_ID", "TG_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TG_GroupName", "Группа") });
+            customLookUpEditGroup.Size = new System.Drawing.Size(329, 22);
+            customLookUpEditGroup.TabIndex = 20;
             // 
-            // customComboBox1
+            // customLabelCategory
             // 
-            customComboBox1.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBox1.FormattingEnabled = true;
-            customComboBox1.Location = new System.Drawing.Point(111, 43);
-            customComboBox1.Name = "customComboBox1";
-            customComboBox1.Size = new System.Drawing.Size(223, 24);
-            customComboBox1.TabIndex = 6;
+            customLabelCategory.AutoSize = true;
+            customLabelCategory.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelCategory.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelCategory.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelCategory.Location = new System.Drawing.Point(3, 120);
+            customLabelCategory.Name = "customLabelCategory";
+            customLabelCategory.Size = new System.Drawing.Size(151, 40);
+            customLabelCategory.TabIndex = 2;
+            customLabelCategory.Text = "Категория";
             // 
-            // customLabel5
+            // customLabelGroup
             // 
-            customLabel5.AutoSize = true;
-            customLabel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabel5.Location = new System.Drawing.Point(3, 200);
-            customLabel5.Name = "customLabel5";
-            customLabel5.Size = new System.Drawing.Size(102, 40);
-            customLabel5.TabIndex = 7;
-            customLabel5.Text = "Тим категории";
+            customLabelGroup.AutoSize = true;
+            customLabelGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelGroup.Location = new System.Drawing.Point(3, 80);
+            customLabelGroup.Name = "customLabelGroup";
+            customLabelGroup.Size = new System.Drawing.Size(151, 40);
+            customLabelGroup.TabIndex = 1;
+            customLabelGroup.Text = "Группа";
             // 
-            // customComboBox2
+            // customLabelClass
             // 
-            customComboBox2.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBox2.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox2.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBox2.FormattingEnabled = true;
-            customComboBox2.Location = new System.Drawing.Point(111, 83);
-            customComboBox2.Name = "customComboBox2";
-            customComboBox2.Size = new System.Drawing.Size(223, 24);
-            customComboBox2.TabIndex = 8;
+            customLabelClass.AutoSize = true;
+            customLabelClass.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelClass.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelClass.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelClass.Location = new System.Drawing.Point(3, 40);
+            customLabelClass.Name = "customLabelClass";
+            customLabelClass.Size = new System.Drawing.Size(151, 40);
+            customLabelClass.TabIndex = 0;
+            customLabelClass.Text = "Класс";
             // 
-            // customComboBox3
+            // customHeaderLabelArt
             // 
-            customComboBox3.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBox3.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox3.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBox3.FormattingEnabled = true;
-            customComboBox3.Location = new System.Drawing.Point(111, 123);
-            customComboBox3.Name = "customComboBox3";
-            customComboBox3.Size = new System.Drawing.Size(223, 24);
-            customComboBox3.TabIndex = 9;
+            customHeaderLabelArt.AutoSize = true;
+            customHeaderLabelArt.Dock = System.Windows.Forms.DockStyle.Fill;
+            customHeaderLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customHeaderLabelArt.Location = new System.Drawing.Point(3, 0);
+            customHeaderLabelArt.Name = "customHeaderLabelArt";
+            customHeaderLabelArt.Size = new System.Drawing.Size(151, 40);
+            customHeaderLabelArt.TabIndex = 3;
+            customHeaderLabelArt.Text = "Артикул";
             // 
-            // customComboBox4
+            // customLabelCatDynsign
             // 
-            customComboBox4.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBox4.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox4.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBox4.FormattingEnabled = true;
-            customComboBox4.Location = new System.Drawing.Point(111, 163);
-            customComboBox4.Name = "customComboBox4";
-            customComboBox4.Size = new System.Drawing.Size(223, 24);
-            customComboBox4.TabIndex = 10;
+            customLabelCatDynsign.AutoSize = true;
+            customLabelCatDynsign.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelCatDynsign.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelCatDynsign.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelCatDynsign.Location = new System.Drawing.Point(3, 160);
+            customLabelCatDynsign.Name = "customLabelCatDynsign";
+            customLabelCatDynsign.Size = new System.Drawing.Size(151, 40);
+            customLabelCatDynsign.TabIndex = 4;
+            customLabelCatDynsign.Text = "Признаки";
             // 
-            // customComboBox5
+            // customLabelSpravNoskiDetal
             // 
-            customComboBox5.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBox5.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox5.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBox5.FormattingEnabled = true;
-            customComboBox5.Location = new System.Drawing.Point(111, 203);
-            customComboBox5.Name = "customComboBox5";
-            customComboBox5.Size = new System.Drawing.Size(223, 24);
-            customComboBox5.TabIndex = 11;
+            customLabelSpravNoskiDetal.AutoSize = true;
+            customLabelSpravNoskiDetal.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelSpravNoskiDetal.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelSpravNoskiDetal.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelSpravNoskiDetal.Location = new System.Drawing.Point(3, 200);
+            customLabelSpravNoskiDetal.Name = "customLabelSpravNoskiDetal";
+            customLabelSpravNoskiDetal.Size = new System.Drawing.Size(151, 40);
+            customLabelSpravNoskiDetal.TabIndex = 7;
+            customLabelSpravNoskiDetal.Text = "Тип категории";
             // 
             // customButton1
             // 
             customButton1.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
             customButton1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButton1.Location = new System.Drawing.Point(111, 283);
+            customButton1.Location = new System.Drawing.Point(160, 283);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(223, 39);
             customButton1.TabIndex = 12;
@@ -233,34 +254,56 @@
             customButton2.Text = "Отмена";
             customButton2.UseVisualStyleBackColor = false;
             // 
+            // customLookUpEditClass
+            // 
+            customLookUpEditClass.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditClass.Location = new System.Drawing.Point(160, 43);
+            customLookUpEditClass.Name = "customLookUpEditClass";
+            customLookUpEditClass.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customLookUpEditClass.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLookUpEditClass.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customLookUpEditClass.Properties.Appearance.Options.UseBackColor = true;
+            customLookUpEditClass.Properties.Appearance.Options.UseFont = true;
+            customLookUpEditClass.Properties.Appearance.Options.UseForeColor = true;
+            customLookUpEditClass.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            customLookUpEditClass.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TC_ID", "TC_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TC_ClassName", "Класс") });
+            customLookUpEditClass.Size = new System.Drawing.Size(329, 22);
+            customLookUpEditClass.TabIndex = 19;
+            // 
             // EditNaborSostavPart
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(361, 349);
+            ClientSize = new System.Drawing.Size(516, 349);
             Controls.Add(tableLayoutPanel1);
             Name = "EditNaborSostavPart";
             Text = "Изменение части в наборе";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditSpravNoskiDetal.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditCatDynsign.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditCategory.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditGroup.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customLookUpEditClass.Properties).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Core.Class.CustomLabel customLabel3;
-        private Core.Class.CustomLabel customLabel2;
-        private Core.Class.CustomLabel customLabel1;
-        private Core.Class.CustomHeaderLabel customHeaderLabel1;
-        private Core.Class.CustomLabel customLabel4;
-        private CustomComboBox customComboBox1;
-        private Core.Class.CustomLabel customLabel5;
-        private CustomComboBox customComboBox5;
-        private CustomComboBox customComboBox4;
-        private CustomComboBox customComboBox3;
-        private CustomComboBox customComboBox2;
+        private Core.Class.CustomLabel customLabelCategory;
+        private Core.Class.CustomLabel customLabelGroup;
+        private Core.Class.CustomLabel customLabelClass;
+        private Core.Class.CustomHeaderLabel customHeaderLabelArt;
+        private Core.Class.CustomLabel customLabelCatDynsign;
+        private Core.Class.CustomLabel customLabelSpravNoskiDetal;
         private Core.Class.CustomButton customButton1;
         private Core.Class.CustomButton customButton2;
+        private Core.Class.CustomLookUpEdit customLookUpEditSpravNoskiDetal;
+        private Core.Class.CustomLookUpEdit customLookUpEditCatDynsign;
+        private Core.Class.CustomLookUpEdit customLookUpEditCategory;
+        private Core.Class.CustomLookUpEdit customLookUpEditGroup;
+        private Core.Class.CustomLookUpEdit customLookUpEditClass;
+        private Core.Class.CustomHeaderLabel customHeaderLabelMod;
     }
 }

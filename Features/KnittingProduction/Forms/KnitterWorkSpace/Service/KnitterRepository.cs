@@ -1,5 +1,8 @@
 using Dapper;
+using DevExpress.XtraDiagram.Base;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -9,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
@@ -35,10 +39,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
             // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
-            return await GetPlanByTabAsync(tab, kwsId: 0, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
+            return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
         }
 
-        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tab"></param>
+        /// <param name="kwsId"></param>
+        /// <param name="kmaId"></param>
+        /// <param name="onlyUnassigned"></param>
+        /// <param name="expandAssignedByNrId"></param>
+        /// <param name="maxHours"></param>
+        /// <param name="includeFinished"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab, int? kwsId, int? kmaId, bool onlyUnassigned, bool expandAssignedByNrId, decimal maxHours, bool includeFinished = false)
         {
             try
             {
@@ -50,17 +66,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
                 // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
-                // Требование: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).
+                // !!!!: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).-- и переставлять местави часы и кол назн и факт --не нужно переставлять
                 using (var grid = await connection.QueryMultipleAsync(
-                    "dbo.GetPlanZagrVyazNorm_ByTab4",
+                  "dbo.GetPlanZagrVyazNorm_ByTab4",
                     new
                     {
                         tab,
                         MaxHours = maxHours,
                         OnlyActive = 1,
                         KwsId = kwsId,
+                        KmaId = kmaId,
                         OnlyUnassigned = onlyUnassigned ? 1 : 0,
-                        ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0
+                        ExpandAssignedByNrId = expandAssignedByNrId ? 1 : 0,
+                        IncludeFinished = includeFinished ? 1 : 0
                     },
                     commandType: CommandType.StoredProcedure))
                 {
@@ -148,7 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         // Закрытая смена: пропускаем первый набор, используем второй (кандидаты)
                         if (!grid.IsConsumed)
                         {
-                            grid.Read(); // просто потребляем первый набор, чтобы перейти ко второму
+                            grid.Read(); // просто съедаем первый набор, чтобы перейти ко второму
                         }
                         if (!grid.IsConsumed)
                         {
@@ -169,10 +187,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 if (missingKmlIds.Length > 0)
                 {
-                    const string kmlQuery = //@"SELECT kmlID, kmlNumber, koefObServ, name_class FROM ACE.dbo.knitMachineList_view WHERE kmlID IN @ids";
-                    @"Select kwsmlKmlId as kmlID, kmlNumber, koefObServ, nameVyazClass as name_class from ace.dbo.knitWorkingShiftStatement where kwsmlKmlId in @ids";
+                    const string kmlQuery = @"
+Select
+    kwsmlKmlID as kmlID,
+    kmlNumber,
+    koefObServ,
+    nameVyazClass as name_class
+from ace.dbo.knitWorkingShiftStatement
+where kwsmlKmlID in @ids
+  and (@kmaId is null or kwsKmaId = @kmaId)";
                     // knitWorkingShiftStatement может вернуть дубли по одной машине на разные интервалы — группируем по kmlID, чтобы не падать на ToDictionary
-                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds }))
+                    var lookup = (await connection.QueryAsync<(int kmlID, string kmlNumber, decimal? koefObServ, string name_class)>(kmlQuery, new { ids = missingKmlIds, kmaId }))
                         .GroupBy(x => x.kmlID)
                         .ToDictionary(g => g.Key, g => g.First());
 
@@ -186,6 +211,58 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         }
                     }
                 }
+
+                // Заполняем UI-поля плана/факта из базовых значений
+                //////////foreach (var parent in parents)
+                //////////{
+                //////////    // Плановые
+                //////////    parent.PlanKol_UI ??= parent.pzvKolNazn != 0 ? parent.pzvKolNazn : parent.pzvKol;
+                //////////    parent.PlanChas_UI ??= parent.pzvChasNazn != 0 ? parent.pzvChasNazn : parent.pzvNChasi;
+
+                //////////    // Факт
+                //////////    parent.FactKol_UI ??= parent.pzvKol;
+                //////////    parent.FactChas_UI ??= parent.pzvNChasi;
+                //////////}
+
+
+                static void FillUi(KnitterPZVModel r)
+                {
+                    // - При открытии смены "назначено" в БД может не быть заполнено.
+                    //   При этом pzvKol/pzvNChasi содержат ПЛАН (до начала работы), а факт в UI должен быть 0.
+                    // - После начала/завершения работы pzvKol/pzvNChasi становятся ФАКТОМ, а план лежит в pzvKolNazn/pzvChasNazn.
+                    // - Обнулять нужно ТОЛЬКО UI-поля, базовые колонки в модели не трогаем.
+
+                    var planKolFromFact = (r.pzvKol ?? 0);
+                    var planChasFromFact = (r.pzvNChasi ?? 0m);
+
+                    var planKolFromNazn = (r.pzvKolNazn != 0) ? r.pzvKolNazn : planKolFromFact;
+                    var planChasFromNazn = (r.pzvChasNazn != 0m) ? r.pzvChasNazn : planChasFromFact;
+
+                    // "Начата" = есть дата начала (на некоторых потоках может проставляться только при старте).
+                    // Если начато — показываем факт из pzvKol/pzvNChasi.
+                    // Если НЕ начато — факт в UI = 0, а план в UI берём из pzvKol/pzvNChasi 
+                    bool started = r.pzvDateStart != null;
+
+                    if (!started)
+                    {
+                        // План до старта берём из факт полей
+                        r.PlanKol_UI = planKolFromFact;
+                        r.PlanChas_UI = planChasFromFact;
+                        r.FactKol_UI = 0;
+                        r.FactChas_UI = 0m;
+                        return;
+                    }
+
+                    // После старта: план — из Nazn, иначе fallback на факт (на случай остатка/новых строк)
+                    r.PlanKol_UI = planKolFromNazn;
+                    r.PlanChas_UI = planChasFromNazn;
+                    r.FactKol_UI = (r.pzvKol ?? 0);
+                    r.FactChas_UI = (r.pzvNChasi ?? 0m);
+                }
+
+                foreach (var p in parents)
+                    FillUi(p);
+
 
                 return parents;
             }
@@ -268,13 +345,15 @@ ORDER BY fio";
                     return;
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    const string sql = @"UPDATE dbo.planZagrVyaz
-SET pzvTab = @tab,
-    pzvDateNaznTab = GETDATE(),
-    pzvKolNazn = ISNULL(pzvKol, 0),
-    pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
-    pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2)) 
-WHERE pzvID IN @ids";
+                     const string sql = @"UPDATE dbo.planZagrVyaz
+ SET pzvTab = @tab,
+     pzvDateNaznTab = GETDATE(),
+     -- переносим плановое количество в назначенное
+     pzvKolNazn = ISNULL(pzvKol, 0),
+     pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
+     pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2))
+ WHERE pzvID IN @ids";
+    // -- после назначения плановое поле НЕ обнуляем, чтобы кол-во к выполнению НЕ стало 0 - не надо их занулять!!!
 
                     await connection.ExecuteAsync(sql, new { tab, ids });
                 }
@@ -327,46 +406,69 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
             }
         }
 
-        public async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty)
+        public async Task UpdatePzvFactAsync(int pzvId, int factQty)
         {
             try
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    var parameters = new
-                    {
-                        pzvId,
-                        mode = 1,
-                        qtyFact = factQty,
-                        userName = (string)null
-                    };
-                    var ids = new List<PzvSplitResult>();
-                    using (var grid = await connection.QueryMultipleAsync(
-                        "dbo.PZV_Split",
-                        param: parameters,
-                        commandTimeout: 60,
-                        commandType: CommandType.StoredProcedure))
-                    {
-                        if (!grid.IsConsumed)
-                        {
-                            try
-                            {
-                                var newIds = await grid.ReadAsync<PzvSplitResult>();
-                                ids.AddRange(newIds);
-                            }
-                            catch
-                            {
-                                // ignore if no set
-                            }
-                        }
-                        if (!grid.IsConsumed)
-                        {
-                            var newIds = await grid.ReadAsync<PzvSplitResult>();
-                            ids.AddRange(newIds);
-                        }
-                    }
-                    return ids;
+                    const string sql = @"
+UPDATE dbo.planZagrVyaz
+SET pzvKol = @factQty,
+    pzvNChasi = CAST(ROUND(ISNULL(pzvSek,0) * @factQty / 3600.0, 2) AS decimal(16,2))
+WHERE pzvID = @pzvId;
+";
+                    await connection.ExecuteAsync(sql, new { pzvId, factQty });
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"UpdatePzvFactAsync failed (pzvId={pzvId}, factQty={factQty})", ex);
+            }
+        }
+
+        public async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByFactAsync(int pzvId, int factQty)
+        {
+            try
+            {
+                //using (var connection = _dbHelper.GetConnection())
+                //{
+                //    var parameters = new
+                //    {
+                //        pzvId,
+                //        mode = 1,
+                //        qtyFact = factQty,
+                //        userName = (string)null
+                //    };
+                //    var ids = new List<PzvSplitResult>();
+                //    using (var grid = await connection.QueryMultipleAsync(
+                //        "dbo.PZV_Split",
+                //        param: parameters,
+                //        commandTimeout: 60,
+                //        commandType: CommandType.StoredProcedure))
+                //    {
+                //        if (!grid.IsConsumed)
+                //        {
+                //            try
+                //            {
+                //                var newIds = await grid.ReadAsync<PzvSplitResult>();
+                //                ids.AddRange(newIds);
+                //            }
+                //            catch
+                //            {
+                //                // ignore if no set
+                //            }
+                //        }
+                //        if (!grid.IsConsumed)
+                //        {
+                //            var newIds = await grid.ReadAsync<PzvSplitResult>();
+                //            ids.AddRange(newIds);
+                //        }
+                //    }
+                //    return ids;
+                //}
+                var ids =  await SplitPzvByModeAsync(pzvId, mode: 1, qtyFact: factQty);
+                return ids;
             }
             catch (Exception ex)
             {
@@ -418,6 +520,46 @@ SELECT pzvID, pzvDateEnd FROM dbo.planZagrVyaz WHERE pzvID = @pzvId;";
 			}
 		}
 
+
+        public async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(
+            int? kwsId,
+            decimal minHours)
+        {
+            if (kwsId is null || kwsId <= 0)
+                throw new ArgumentException("kwsId must be > 0 for shift end adjustment.", nameof(kwsId));
+
+            if (minHours <= 0)
+                minHours = 12m;
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@KwsId", kwsId.Value, DbType.Int32);
+                parameters.Add("@MinHours", minHours, DbType.Decimal);
+
+                using var multi = await connection.QueryMultipleAsync(
+                    sql: "dbo.PZV_AdjustNotStartedBeforeShiftEnd",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 60);
+
+                var stats = (await multi.ReadAsync<MachineHoursStat>()).ToList();
+
+                // второй набор можно прочитать (если нужно для логов/отладки)
+                // var details = (await multi.ReadAsync<MachineHoursDetail>()).ToList();
+
+                // если не добрали до minHours — можно сформировать сообщение
+                // var bad = stats.Where(s => s.StillLessThanMin == 1).ToList();
+
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"AdjustNotStartedBeforeShiftEnd failed (kwsId={kwsId}, minHours={minHours})", ex);
+            }
+        }
         public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0)
         {
             try
@@ -561,7 +703,7 @@ ORDER BY kwsDateStart DESC";
 				var ids = pzvIds.Distinct().ToArray();
 				if (ids.Length == 0)
 					return;
-				using (var connection = _dbHelper.GetConnection())
+				using (var connection = _dbHelper.GetConnection())//, pzvKolNazn = pzvKol, pzvSekNazn = pzvSek, pzvChasNazn = pzvNChasi 
 				{
 					const string sql = @"UPDATE dbo.planZagrVyaz
 SET pzvKwsID = @kwsId
@@ -574,6 +716,34 @@ WHERE pzvID IN @ids";
 				throw new Exception($"UpdatePzvKwsIdAsync failed (kwsId={kwsId})", ex);
 			}
 		}
+
+        //public Task AdjustNotStartedBeforeShiftEndAsync(int? kwsId, 12m)
+        //{
+        //    try
+        //    {
+        //        using (var connection = _dbHelper.GetConnection())
+        //        {
+        //            return connection.ExecuteAsync(
+        //        "dbo.PZV_UnassignNotStartedByShift",
+        //        new { KwsId = kwsId },
+        //        commandType: CommandType.StoredProcedure);
+        //        }
+        //    }
+        //    catch (Exception ex) {
+        //        throw new Exception($"UnassignNoStartedOps failed (kwsId={kwsId})", ex);
+        //    }
+        //}
+
+
+
+        public sealed class MachineHoursStat
+        {
+            public int pzvKmlID { get; set; }
+            public decimal FactHours { get; set; }
+            public decimal KeptAssignedHours { get; set; }
+            public decimal TotalForCheck { get; set; }
+            public int StillLessThanMin { get; set; }
+        }
 
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             gridColumnDd1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            customGridControlTimeSheet = new SewingProduction.Core.Class.CustomGridControl();
+            customGridControlTimeSheet = new Core.Class.CustomGridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnCheckIncludePlan = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEditPlan = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -77,14 +77,14 @@
             customButton4 = new SewingProduction.Core.Class.CustomButton();
             customLabel3 = new SewingProduction.Core.Class.CustomLabel();
             lookUpEditGroup = new DevExpress.XtraEditors.LookUpEdit();
-            customButton3 = new SewingProduction.Core.Class.CustomButton();
-            customButton2 = new SewingProduction.Core.Class.CustomButton();
-            customButton1 = new SewingProduction.Core.Class.CustomButton();
+            customButton3 = new Core.Class.CustomButton();
+            customButton2 = new Core.Class.CustomButton();
+            customButton1 = new Core.Class.CustomButton();
             lookUpEditGr = new DevExpress.XtraEditors.LookUpEdit();
-            OpenSpisokButton = new SewingProduction.Core.Class.CustomButton();
-            customLabelYear = new SewingProduction.Core.Class.CustomLabel();
-            customLabelMonth = new SewingProduction.Core.Class.CustomLabel();
-            customLabel2 = new SewingProduction.Core.Class.CustomLabel();
+            OpenSpisokButton = new Core.Class.CustomButton();
+            customLabelYear = new Core.Class.CustomLabel();
+            customLabelMonth = new Core.Class.CustomLabel();
+            customLabel2 = new Core.Class.CustomLabel();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -102,6 +102,8 @@
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            customButtonOtvlRab = new Core.Class.CustomButton();
+            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
@@ -126,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -428,6 +431,7 @@
             // 
             layoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             layoutControl1.Controls.Add(customButton4);
+            layoutControl1.Controls.Add(customButtonOtvlRab);
             layoutControl1.Controls.Add(customLabel3);
             layoutControl1.Controls.Add(lookUpEditGroup);
             layoutControl1.Controls.Add(customButton3);
@@ -505,7 +509,7 @@
             customButton2.ForeColor = System.Drawing.Color.Black;
             customButton2.Location = new System.Drawing.Point(764, 530);
             customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(711, 44);
+            customButton2.Size = new System.Drawing.Size(599, 44);
             customButton2.TabIndex = 11;
             customButton2.Text = "Табель Parsec + Orion";
             customButton2.UseVisualStyleBackColor = false;
@@ -681,7 +685,7 @@
             layoutControlItem11.Control = customButton2;
             layoutControlItem11.Location = new System.Drawing.Point(740, 0);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(715, 48);
+            layoutControlItem11.Size = new System.Drawing.Size(603, 48);
             layoutControlItem11.TextVisible = false;
             // 
             // layoutControlItem12
@@ -715,6 +719,27 @@
             layoutControlItem14.Name = "layoutControlItem14";
             layoutControlItem14.Size = new System.Drawing.Size(132, 24);
             layoutControlItem14.TextVisible = false;
+            // 
+            // customButtonOtvlRab
+            // 
+            customButtonOtvlRab.BackColor = System.Drawing.Color.Lavender;
+            customButtonOtvlRab.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOtvlRab.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            customButtonOtvlRab.Location = new System.Drawing.Point(1367, 530);
+            customButtonOtvlRab.Name = "customButtonOtvlRab";
+            customButtonOtvlRab.Size = new System.Drawing.Size(108, 44);
+            customButtonOtvlRab.TabIndex = 13;
+            customButtonOtvlRab.Text = "Oтвл. работы";
+            customButtonOtvlRab.UseVisualStyleBackColor = false;
+            customButtonOtvlRab.Click += customButtonOtvlRab_Click;
+            // 
+            // layoutControlItem15
+            // 
+            layoutControlItem15.Control = customButtonOtvlRab;
+            layoutControlItem15.Location = new System.Drawing.Point(1343, 0);
+            layoutControlItem15.Name = "layoutControlItem15";
+            layoutControlItem15.Size = new System.Drawing.Size(112, 48);
+            layoutControlItem15.TextVisible = false;
             // 
             // TabelMain
             // 
@@ -750,6 +775,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ResumeLayout(false);
         }
 
@@ -828,6 +854,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPodrTableID;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnDlD;
         private Core.Class.CustomButton customButton4;
+        private Core.Class.CustomButton customButtonOtvlRab;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
     }
 }

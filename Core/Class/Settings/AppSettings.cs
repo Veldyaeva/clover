@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using Newtonsoft.Json;
+using SewingProduction;
 
 namespace SewingProduction.Core.Class.Settings
 {
@@ -13,9 +14,44 @@ namespace SewingProduction.Core.Class.Settings
         public bool SaveOpenTabs { get; set; } = true;
         public bool ShortTabNames { get; set; } = true;
         public bool AllowDuplicateTabs { get; set; } = false;
+        public bool SaveGridSettings { get; set; } = true;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
         public string SelectedDatabase { get; set; } = "ace";
+        public Dictionary<string, ThemeManager.Theme> Themes { get; set; } = new();
+        public ServiceBrokerSettings ServiceBroker { get; set; } = new ServiceBrokerSettings();
+    }
 
+    public class ServiceBrokerSettings
+    {
+        /// <summary>
+        /// Задержка перед выполнением после последнего события (мс).
+        /// </summary>
+        public int DebounceMs { get; set; } = 500;
+
+        /// <summary>
+        /// Минимальный интервал между обновлениями одного объекта (мс). 0 = отключен.
+        /// </summary>
+        public int ThrottleMs { get; set; } = 1000;
+
+        /// <summary>
+        /// Максимальное время ожидания накопления изменений (мс).
+        /// </summary>
+        public int MaxWaitMs { get; set; } = 3000;
+
+        /// <summary>
+        /// Максимальное количество объектов в одном батче.
+        /// </summary>
+        public int MaxBatchSize { get; set; } = 50;
+
+        /// <summary>
+        /// Максимальное количество параллельных обновлений.
+        /// </summary>
+        public int MaxParallelReloads { get; set; } = 2;
+
+        /// <summary>
+        /// Максимальная глубина каскадных обновлений для защиты от циклов.
+        /// </summary>
+        public int MaxCascadeDepth { get; set; } = 3;
     }
 
     public class UserSettings
@@ -23,6 +59,16 @@ namespace SewingProduction.Core.Class.Settings
         public List<string> OpenTabs { get; set; } = new();
         public List<string> Logins { get; set; } = new();
         public string SavedPassword { get; set; } = "";
+    }
+
+    public class GridColumnSetting
+    {
+        public string FieldName { get; set; }
+        public int Width { get; set; }
+        public int VisibleIndex { get; set; }
+        public bool Visible { get; set; }
+        public string SortOrder { get; set; }
+        public int SortIndex { get; set; }
     }
 
     public static class SettingsManager
@@ -184,6 +230,33 @@ namespace SewingProduction.Core.Class.Settings
             Current.AllowDuplicateTabs = value;
             Save();
         }
+        public static bool GetSaveGridSettings()
+        {
+            return Current.SaveGridSettings;
+        }
+
+        public static void SetSaveGridSettings(bool value)
+        {
+            Current.SaveGridSettings = value;
+            Save();
+        }
+        #region Темы
+        public static Dictionary<string, ThemeManager.Theme> GetThemes()
+        {
+            if (Current.Themes == null || Current.Themes.Count == 0)
+            {
+                Current.Themes = ThemeManager.GetDefaultThemes();
+                Save();
+            }
+            return Current.Themes;
+        }
+
+        public static void SetThemes(Dictionary<string, ThemeManager.Theme> themes)
+        {
+            Current.Themes = themes ?? new Dictionary<string, ThemeManager.Theme>();
+            Save();
+        }
+        #endregion
         #region база данных
         public static void SaveSelectedDatabase(string login, string connectionName)
         {
@@ -233,13 +306,55 @@ namespace SewingProduction.Core.Class.Settings
             }
         }
         #endregion
+        #region ServiceBroker
+        public static ServiceBrokerSettings GetServiceBrokerSettings()
+        {
+            return Current.ServiceBroker ?? new ServiceBrokerSettings();
+        }
+
+        public static void SetServiceBrokerSettings(ServiceBrokerSettings settings)
+        {
+            Current.ServiceBroker = settings ?? new ServiceBrokerSettings();
+            Save();
+        }
+
+        public static int GetServiceBrokerDebounceMs()
+        {
+            return GetServiceBrokerSettings().DebounceMs;
+        }
+
+        public static int GetServiceBrokerThrottleMs()
+        {
+            return GetServiceBrokerSettings().ThrottleMs;
+        }
+
+        public static int GetServiceBrokerMaxWaitMs()
+        {
+            return GetServiceBrokerSettings().MaxWaitMs;
+        }
+
+        public static int GetServiceBrokerMaxBatchSize()
+        {
+            return GetServiceBrokerSettings().MaxBatchSize;
+        }
+
+        public static int GetServiceBrokerMaxParallelReloads()
+        {
+            return GetServiceBrokerSettings().MaxParallelReloads;
+        }
+
+        public static int GetServiceBrokerMaxCascadeDepth()
+        {
+            return GetServiceBrokerSettings().MaxCascadeDepth;
+        }
+        #endregion
     }
     public static class UserFilePaths
     {
         public static string BaseFolder => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "SewingProduction");
-
+        public static string GridSettings => Path.Combine(BaseFolder, "GridSettings");
         public static string Settings => Path.Combine(BaseFolder, "settings.json");
         public static string LogFile => Path.Combine(BaseFolder, "log.txt");
 
@@ -247,6 +362,8 @@ namespace SewingProduction.Core.Class.Settings
         {
             if (!Directory.Exists(BaseFolder))
                 Directory.CreateDirectory(BaseFolder);
+            if (!Directory.Exists(GridSettings))
+                Directory.CreateDirectory(GridSettings);
         }
     }
 }

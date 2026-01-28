@@ -1,4 +1,6 @@
 ﻿using Dapper;
+using DevExpress.XtraGantt.Scheduling;
+using Org.BouncyCastle.Asn1.Ocsp;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -402,23 +404,59 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 return null;
             }
         }
+        //public async Task<List<SmenZadanyVyaz>> GetSmenZadanyVyaz(int _idNazn, int _kodProizv, int _kodPodr, CancellationToken cancellationToken)
+        //{
+        //    try
+        //    {
+        //        using (var connection = _dbHelper.GetConnection())
+        //        {
+        //            string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
 
-        public async Task<List<SmenZadanyVyaz>> GetSmenZadanyVyaz(int _idNazn, int _kodProizv, int _kodPodr)
+        //            var result = await connection.QueryAsync<c>(query, new Dictionary<string, object> { });
+        //            return result.ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyaz");
+        //        return null;
+        //    }
+        //}
+        public async Task<BindingSource> GetSmenZadanyVyaz(int _idNazn, int _kodProizv, int _kodPodr, CancellationToken cancellationToken)
         {
             try
             {
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
+                await using var connection = _dbHelper.GetConnection();
+                string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
 
-                    var result = await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { });
-                    return result.ToList();
-                }
+                var list = (await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { })).ToList();
+                //return result.ToList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>()
+                };
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных GetSmenZadanyVyaz");
+                return null;
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyaz");
-                return null;
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных GetSmenZadanyVyaz");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>()
+                };
             }
         }
 
@@ -453,6 +491,90 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 return new BindingSource
                 {
                     DataSource = new BindingList<NaryadZadanyVyaz>()
+                };
+            }
+        }
+
+        public async Task<BindingSource> GetPodrVyaz(CancellationToken cancellationToken)
+        {
+            try
+            {
+                await using var connection = _dbHelper.GetConnection();
+                const string query = @"SELECT kod_vyaz, text_vyaz FROM podr_vyaz WHERE kod_vyaz IN (1,2,3)";
+                var command = new CommandDefinition(query, new { }, cancellationToken: cancellationToken);
+
+                var list = (await connection
+                    .QueryAsync<PodrVyaz>(command))
+                    .AsList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PodrVyaz>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PodrVyaz>()
+                };
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных podr_vyaz");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PodrVyaz>()
+                };
+            }
+        }
+
+        public async Task<BindingSource> GetPzvCheck(int _podrID, int _month, int _year, CancellationToken cancellationToken)
+        {
+            try
+            {
+                await using var connection = _dbHelper.GetConnection();
+                //const string query = @"EXEC dbo.pzv_pivotDayTab @xPodrID = podrID
+                //    , @xMes = mes
+                //    , @xGod = god";
+                //var command = new CommandDefinition(query, new { podrID = _podrID, mes = _month, god = _year }, cancellationToken: cancellationToken);
+                
+                //string query = $"EXEC dbo.pzv_pivotDayTab @xPodrID = {_podrID}, @xMes = {_month}, @xGod = {_year}";
+                //var command = new CommandDefinition(query, new {  }, cancellationToken: cancellationToken);
+                //var list = (await connection
+                //    .QueryAsync<PzvCheck>(command))
+                //    .AsList();
+
+                string query = $"EXEC dbo.pzv_pivotDayTab @xPodrID = {_podrID}, @xMes = {_month}, @xGod = {_year}";
+
+                var list = (await connection.QueryAsync<PzvCheck>(query, new Dictionary<string, object> { })).ToList();
+                //return result.ToList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PzvCheck>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PzvCheck>()
+                };
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных GetPzvCheck");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных GetPzvCheck");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<PzvCheck>()
                 };
             }
         }

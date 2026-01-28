@@ -109,7 +109,10 @@ namespace SewingProduction.form
                 gridControlSprav.ObjectName = "gridControlSprav";
                 gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { tableString });
                 if (_servBrok)
-                    _serviceBroker.StartBroker();
+                    // _serviceBroker.StartBroker();
+                    // ВАЖНО: SqlDependency.Start уже должен быть вызван где-то один раз при старте приложения
+                    _serviceBroker.StartListening( "*", table: tableString);
+                // лучше не "*", а список колонок, но для старта можно так
                 SpravForAll_V();
             }
         }
@@ -389,8 +392,13 @@ namespace SewingProduction.form
         //закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (_servBrok)
-                _serviceBroker.StopBroker();
+            //if (_servBrok)
+            //    _serviceBroker.StopBroker();
+        }
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try { _serviceBroker?.StopListening(); } catch { }
+            base.OnFormClosed(e);
         }
     }
 

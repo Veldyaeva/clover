@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Features.Sprav.DataService;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 
@@ -50,7 +51,9 @@ namespace SewingProduction.form
             //gridControlSprav.InitializeAccess(_user, this.Name);
             //Загрузка комбобокса:
             comboBoxZeh_Enter(sender, e);
-            _serviceBroker.StartBroker();
+            _serviceBroker.StartListening( "*", "dbo.OborudBrig"); // имя таблицы/вьюхи — в душе не ебу, какое, просто написала, чтоб проект запустить
+
+            // _serviceBroker.StartBroker();
         }
         #region service broker
         // Интерфейс доступный сервис брокеру:
@@ -74,7 +77,7 @@ namespace SewingProduction.form
             if (!flagStartListening)
             {
                 _serviceBroker.StartListening("id_brig,idZeh,n_brig,brig", "SpBrig");
-                flagStartListening = _serviceBroker.GetFlagStartListening();
+               // flagStartListening = _serviceBroker.GetFlagStartListening();
             }
         }
         //Загрузка комбобокса список цехов:
@@ -253,53 +256,5 @@ namespace SewingProduction.form
             _serviceBroker.StopListening();
         }
 
-    }
-    public class SpravBrigDataService
-    {
-        private readonly DatabaseHelper _dbHelper;
-        public SpravBrigDataService(DatabaseHelper dbHelper)
-        {
-            _dbHelper = dbHelper;
-        }
-        public DataTable GetSpBrig()
-        {
-            string query = $@" SELECT id_brig,n_brig,brig,nameZeh
-                            FROM spBrig
-                            LEFT JOIN ZehList ON ZehList.idZeh = spBrig.idZeh ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public void InsertSpBrig(string brig, string nBrig, string zeh)
-        {
-            string query = $@"INSERT INTO spBrig (brig,n_brig,idZeh)
-                              VALUES (@brig,@nBrig,
-                              (SELECT idZeh FROM ZehList WHERE nameZeh = @zeh))";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@brig", brig }, { "@nBrig", nBrig }, { "@zeh", zeh } });
-        }
-        public void UpdateSpBrig(string brig, string nBrig, string zeh, string kod)
-        {
-            string query = $@"UPDATE spBrig
-                              SET brig = @brig,
-                                n_brig = @nBrig,
-                                idZeh = (SELECT idZeh FROM ZehList WHERE nameZeh = @zeh)
-                              WHERE id_brig =  @kod";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@brig", brig }, { "@nBrig", nBrig }, { "@zeh", zeh }, { "@kod", kod } });
-        }
-        public void UpdateRowSpBrig(string eFieldName, object eValue, object ekod)
-        {
-            string query = $@"UPDATE spBrig
-                              SET {eFieldName} = @eValue
-                              WHERE id_brig =  @ekod";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@eValue", eValue }, { "@ekod", ekod } });
-        }
-        public void DeleteSpBrig(string kodCol)
-        {
-            string query = $"DELETE FROM spBrig WHERE id_brig = @kodCol";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kodCol", kodCol } });
-        }
-        public DataTable GetNameZehFromZehList()
-        {
-            string query = $"SELECT nameZeh FROM ZehList";
-            return _dbHelper.ExecuteQuery(query);
-        }
     }
 }

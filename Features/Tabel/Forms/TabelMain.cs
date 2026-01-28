@@ -979,5 +979,14 @@ namespace SewingProduction.Features.Tabel.Forms
                 view.SetRowCellValue(rowHandle, column, "");
             }
         }
+        private void customButtonOtvlRab_Click(object sender, EventArgs e)
+        {
+            int tnid = Convert.ToInt32(lookUpEditGr.EditValue);
+            if (tnid == 0) return;
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new OtvlRab(CurrentUser.User, tnid)); // пока для теста 3, поменять на tnid
+            }
+        }
     }
 }

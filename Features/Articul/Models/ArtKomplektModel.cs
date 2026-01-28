@@ -12,7 +12,9 @@ namespace SewingProduction.Features.Articul.Models
         public string Parent_nn { get; set; }
         public string Sostav { get; set; }
         public int tk_id { get; set; }
+        public int tb_id { get; set; }
         public int id_gost { get; set; }
         public int ag_id_grupgost { get; set; }
+        public string tk_name { get; set; }
     }
 }

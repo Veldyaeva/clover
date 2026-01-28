@@ -28,6 +28,7 @@ namespace SewingProduction.Core.Class
         public void ApplyTheme()
         {
             ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
             Font = ThemeManager.SharedSettings.DefaultFont;
             ApplyFontSizePermission(); // перекрыть размер, если задан
         }

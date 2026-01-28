@@ -180,7 +180,7 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="annId">Идентификатор записи</param>
         /// <returns>Объект ArtNormN или null, если запись не найдена</returns>
-        public async Task<ArtNormN> GetArtNormDataById(int annId)
+        public async Task<ArtNormN> GetArtNormDataById(int annId, CancellationToken ct = default)
         {
             try
             {//            SUBSTRING(kod,1,7) AS kod, 
@@ -484,7 +484,7 @@ WHERE nr.annId = @annId";
                 return result ?? new List<NormRasz>();
             }
         }
-        public async Task<NormRasz> GetRelatedNormRaszByID(int _nrID)
+        public async Task<NormRasz> GetRelatedNormRaszByID(int _nrID, CancellationToken ct = default)
         {
             try
             {
