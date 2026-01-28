@@ -51,6 +51,7 @@ namespace SewingProduction.Features.Tabel.Forms
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customToggleSwitchAdmin = new Core.Class.CustomControls.CustomToggleSwitch();
             customMaskedTextBoxSum = new CustomMaskedTextBox();
             customGridControlTabel = new Core.Class.CustomGridControl();
             bandedGridViewTabel = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
@@ -120,9 +121,11 @@ namespace SewingProduction.Features.Tabel.Forms
             layoutControlGroupSum = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItemSum = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customToggleSwitchAdmin.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlTabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bandedGridViewTabel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTimeEditPriem_t_s).BeginInit();
@@ -160,10 +163,12 @@ namespace SewingProduction.Features.Tabel.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlGroupSum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItemSum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             SuspendLayout();
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(customToggleSwitchAdmin);
             layoutControl1.Controls.Add(customMaskedTextBoxSum);
             layoutControl1.Controls.Add(customGridControlTabel);
             layoutControl1.Controls.Add(customButton3);
@@ -182,6 +187,23 @@ namespace SewingProduction.Features.Tabel.Forms
             layoutControl1.Size = new System.Drawing.Size(1259, 605);
             layoutControl1.TabIndex = 1;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // customToggleSwitchAdmin
+            // 
+            customToggleSwitchAdmin.Location = new System.Drawing.Point(1306, 534);
+            customToggleSwitchAdmin.Name = "customToggleSwitchAdmin";
+            customToggleSwitchAdmin.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            customToggleSwitchAdmin.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customToggleSwitchAdmin.Properties.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            customToggleSwitchAdmin.Properties.Appearance.Options.UseBackColor = true;
+            customToggleSwitchAdmin.Properties.Appearance.Options.UseFont = true;
+            customToggleSwitchAdmin.Properties.Appearance.Options.UseForeColor = true;
+            customToggleSwitchAdmin.Properties.OffText = "Off";
+            customToggleSwitchAdmin.Properties.OnText = "On";
+            customToggleSwitchAdmin.Size = new System.Drawing.Size(77, 20);
+            customToggleSwitchAdmin.StyleController = layoutControl1;
+            customToggleSwitchAdmin.TabIndex = 11;
+            customToggleSwitchAdmin.Toggled += customToggleSwitchAdmin_Toggled;
             // 
             // customMaskedTextBoxSum
             // 
@@ -207,9 +229,11 @@ namespace SewingProduction.Features.Tabel.Forms
             customGridControlTabel.TabIndex = 9;
             customGridControlTabel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridViewTabel });
             customGridControlTabel.Load += customGridControlTabel_Load;
+            customGridControlTabel.Click += customGridControlTabel_Click;
             // 
             // bandedGridViewTabel
             // 
+            bandedGridViewTabel.ActiveFilterEnabled = false;
             bandedGridViewTabel.Appearance.BandPanel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             bandedGridViewTabel.Appearance.BandPanel.Options.UseFont = true;
             bandedGridViewTabel.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
@@ -235,10 +259,18 @@ namespace SewingProduction.Features.Tabel.Forms
             bandedGridViewTabel.GridControl = customGridControlTabel;
             bandedGridViewTabel.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", AllSum, "") });
             bandedGridViewTabel.Name = "bandedGridViewTabel";
+            bandedGridViewTabel.OptionsCustomization.AllowFilter = false;
+            bandedGridViewTabel.OptionsFilter.AllowAutoFilterConditionChange = DevExpress.Utils.DefaultBoolean.False;
+            bandedGridViewTabel.OptionsFilter.AllowFilterEditor = false;
+            bandedGridViewTabel.OptionsMenu.EnableColumnMenu = false;
+            bandedGridViewTabel.OptionsMenu.EnableFooterMenu = false;
+            bandedGridViewTabel.OptionsMenu.EnableGroupPanelMenu = false;
             bandedGridViewTabel.OptionsView.EnableAppearanceEvenRow = true;
+            bandedGridViewTabel.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             bandedGridViewTabel.OptionsView.ShowFooter = true;
             bandedGridViewTabel.OptionsView.ShowGroupPanel = false;
             bandedGridViewTabel.CustomDrawFooterCell += bandedGridViewTabel_CustomDrawFooterCell;
+            bandedGridViewTabel.ShowingEditor += bandedGridViewTabel_ShowingEditor;
             bandedGridViewTabel.CellValueChanged += bandedGridViewTabel_CellValueChanged;
             bandedGridViewTabel.RowUpdated += bandedGridViewTabel_RowUpdated;
             // 
@@ -260,29 +292,34 @@ namespace SewingProduction.Features.Tabel.Forms
             Id.Caption = "Id";
             Id.FieldName = "Id";
             Id.Name = "Id";
+            Id.OptionsColumn.AllowEdit = false;
             // 
             // Mg
             // 
             Mg.Caption = "Mg";
             Mg.FieldName = "Mg";
             Mg.Name = "Mg";
+            Mg.OptionsColumn.AllowEdit = false;
             // 
             // Gr
             // 
             Gr.Caption = "Группа";
             Gr.FieldName = "Gr";
             Gr.Name = "Gr";
+            Gr.OptionsColumn.AllowEdit = false;
             // 
             // Tab
             // 
             Tab.Caption = "Табельный";
             Tab.FieldName = "Tab";
             Tab.Name = "Tab";
+            Tab.OptionsColumn.AllowEdit = false;
             // 
             // AllSum
             // 
             AllSum.Caption = "Всего часов";
             AllSum.Name = "AllSum";
+            AllSum.OptionsColumn.AllowEdit = false;
             AllSum.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", "SUM={0:0.##}") });
             AllSum.Width = 100;
             // 
@@ -292,6 +329,7 @@ namespace SewingProduction.Features.Tabel.Forms
             Dat.FieldName = "Dat";
             Dat.MinWidth = 90;
             Dat.Name = "Dat";
+            Dat.OptionsColumn.AllowEdit = false;
             Dat.Visible = true;
             Dat.Width = 90;
             // 
@@ -300,6 +338,7 @@ namespace SewingProduction.Features.Tabel.Forms
             N_r.Caption = "№";
             N_r.FieldName = "N_r";
             N_r.Name = "N_r";
+            N_r.OptionsColumn.AllowEdit = false;
             N_r.Visible = true;
             N_r.Width = 20;
             // 
@@ -887,7 +926,7 @@ namespace SewingProduction.Features.Tabel.Forms
             // layoutControlGroupSum
             // 
             layoutControlGroupSum.CustomizationFormText = "Суммарно по всем видам работ";
-            layoutControlGroupSum.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItemSum, emptySpaceItem2 });
+            layoutControlGroupSum.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItemSum, emptySpaceItem2, layoutControlItem2 });
             layoutControlGroupSum.Location = new System.Drawing.Point(0, 489);
             layoutControlGroupSum.Name = "layoutControlGroupSum";
             layoutControlGroupSum.Size = new System.Drawing.Size(1387, 79);
@@ -906,7 +945,15 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             emptySpaceItem2.Location = new System.Drawing.Point(250, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(1113, 34);
+            emptySpaceItem2.Size = new System.Drawing.Size(1032, 34);
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = customToggleSwitchAdmin;
+            layoutControlItem2.Location = new System.Drawing.Point(1282, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new System.Drawing.Size(81, 34);
+            layoutControlItem2.TextVisible = false;
             // 
             // gridColumn3
             // 
@@ -925,6 +972,7 @@ namespace SewingProduction.Features.Tabel.Forms
             Load += OtvlRab_Load;
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)customToggleSwitchAdmin.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlTabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)bandedGridViewTabel).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTimeEditPriem_t_s).EndInit();
@@ -962,6 +1010,7 @@ namespace SewingProduction.Features.Tabel.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlGroupSum).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItemSum).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ResumeLayout(false);
         }
 
@@ -1039,5 +1088,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupSum;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItemSum;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private Core.Class.CustomControls.CustomToggleSwitch customToggleSwitchAdmin;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

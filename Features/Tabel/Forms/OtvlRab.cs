@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -49,11 +50,12 @@ namespace SewingProduction.Features.Tabel.Forms
             customSearchLookUpEditFio.Properties.NullText = "";
             customSearchLookUpEditFio.EditValue = listFio[0].Tabno;
         }
-        #endregion
         private void OtvlRab_Load(object sender, EventArgs e)
         {
         }
+        #endregion
 
+        #region Data Loading
         private void customGridControlTabel_Load(object sender, EventArgs e)
         {
             TogglePairColumns(Priem_t_s, Priem_t_po, false);
@@ -61,6 +63,22 @@ namespace SewingProduction.Features.Tabel.Forms
             TogglePairColumns(Drug_s_s, Drug_s_po, false);
             TogglePairColumns(Otvl_r_s, Otvl_r_po, false);
             ApplyCurrentCalendarFilter();
+        }
+        private void repositoryItemTimeEditPriem_t_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            TogglePairColumns(Priem_t_s, Priem_t_po, !Priem_t_s.Visible);
+        }
+        private void repositoryItemTimeEditSort_t_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            TogglePairColumns(Sort_t_s, Sort_t_po, !Sort_t_s.Visible);
+        }
+        private void repositoryItemTimeEditOtvl_r_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            TogglePairColumns(Otvl_r_s, Otvl_r_po, !Otvl_r_s.Visible);
+        }
+        private void repositoryItemTimeEditDrug_s_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            TogglePairColumns(Drug_s_s, Drug_s_po, !Drug_s_s.Visible);
         }
         private void TogglePairColumns(
         DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn colS,
@@ -79,29 +97,13 @@ namespace SewingProduction.Features.Tabel.Forms
                 bandedGridViewTabel.EndUpdate();
             }
         }
-        private void repositoryItemTimeEditPriem_t_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            TogglePairColumns(Priem_t_s, Priem_t_po, !Priem_t_s.Visible);
-        }
-        private void repositoryItemTimeEditSort_t_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            TogglePairColumns(Sort_t_s, Sort_t_po, !Sort_t_s.Visible);
-        }
-        private void repositoryItemTimeEditOtvl_r_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            TogglePairColumns(Otvl_r_s, Otvl_r_po, !Otvl_r_s.Visible);
-        }
-        private void repositoryItemTimeEditDrug_s_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            TogglePairColumns(Drug_s_s, Drug_s_po, !Drug_s_s.Visible);
-        }
-
         private async void customSearchLookUpEditFio_EditValueChanged(object sender, EventArgs e)
         {
             _idTabno = Convert.ToInt32(customSearchLookUpEditFio.EditValue);
             tabOtvlRList = new BindingList<TabOtvlRModel>(await tabOtvlRDataService.GetByMgGrTabAsync(_idGroup, _idTabno));
             customGridControlTabel.DataSource = tabOtvlRList;
         }
+        #endregion
 
         #region Summary Hours
         private static string DecimalHoursToHHmm(decimal hours)
@@ -131,7 +133,7 @@ namespace SewingProduction.Features.Tabel.Forms
             else if (e.Column == Otvl_r)
                 e.Info.DisplayText = "Итого отвл.: " + DecimalHoursToHHmm(hoursDec);
 
-            //UpdateTotalSumMasked();
+            UpdateTotalSumMasked();
         }
         private void UpdateTotalSumMasked()
         {
@@ -202,6 +204,7 @@ namespace SewingProduction.Features.Tabel.Forms
         }
         private void ApplyFilter_Month(DateTime dt)
         {
+            customCalendarControlTabel.EditValue = new DateTime(dt.Year, dt.Month, 1);
             var m0 = new DateTime(dt.Year, dt.Month, 1);
             var m1 = m0.AddMonths(1);
 
@@ -231,7 +234,7 @@ namespace SewingProduction.Features.Tabel.Forms
         }
         #endregion
 
-        #region CalcHours
+        #region Calc Hours
         private static decimal CalcHoursByFromTo(DateTime? timeFrom, DateTime? timeTo)
         {
             if (timeFrom == null || timeTo == null)
@@ -256,14 +259,19 @@ namespace SewingProduction.Features.Tabel.Forms
 
             return Math.Round(hours, 2, MidpointRounding.AwayFromZero);
         }
-        #endregion
-
-        private void bandedGridViewTabel_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        private async void bandedGridViewTabel_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
+            flagUpdate = false;
             if (e.RowHandle < 0) return;
 
             var row = bandedGridViewTabel.GetRow(e.RowHandle) as TabOtvlRModel;
             if (row == null) return;
+            if (!CanEditRow(row, out var reason))
+            {
+                ShowEditDenied(reason);
+                bandedGridViewTabel.CancelUpdateCurrentRow();
+                return;
+            }
 
             if (e.Column == Priem_t_s || e.Column == Priem_t_po)
                 row.Priem_t = CalcHoursByFromTo(row.Priem_t_s, row.Priem_t_po);
@@ -280,27 +288,31 @@ namespace SewingProduction.Features.Tabel.Forms
             bandedGridViewTabel.RefreshRow(e.RowHandle);
             bandedGridViewTabel.UpdateSummary();
             UpdateTotalSumMasked();
+            await tabelUpdated(row);
         }
+        private void bandedGridViewTabel_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            var row = bandedGridViewTabel.GetFocusedRow() as TabOtvlRModel;
+            if (row == null) return;
 
+            if (!CanEditRow(row, out _))
+                e.Cancel = true;
+        }
+        #endregion
 
-        #region 
+        #region Add/Del/Save
         private async void customButtonAdd_Click(object? sender, EventArgs e)
         {
             try
             {
-                if (_idTabno <= 0)
+                if (!CanAddRow(out var day, out var reason))
                 {
-                    DevExpress.XtraEditors.XtraMessageBox.Show("Не выбран табельный.", "Добавление",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ShowEditDenied(reason);
                     return;
                 }
-                if (_monthMode == true)
-                {
-                    DevExpress.XtraEditors.XtraMessageBox.Show("Выберите конкретную дату!", "Добавление",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                var day = _lastCalendarDate.Value.Date;
+
+                //var day = GetSelectedDayOrTodaySafe();
+
                 var model = new TabOtvlRModel
                 {
                     Gr = _idGroup,
@@ -308,19 +320,12 @@ namespace SewingProduction.Features.Tabel.Forms
                     Dat = day,
                     Mg = $"{day.Month:00}{day.Year % 100:00}",
                     N_r = GetNextNrForDay(day),
-
-                    Priem_t = 0m,
-                    Sort_t = 0m,
-                    Drug_s = 0m,
-                    Otvl_r = 0m,
                     OrNew = 1
                 };
 
-                // 1) СНАЧАЛА вставляем в БД и получаем ID
                 int newId = await tabOtvlRDataService.SaveAsync(model); // должен вернуть id
                 model.Id = newId;
 
-                // 2) потом добавляем в грид
                 tabOtvlRList.Add(model);
 
                 bandedGridViewTabel.RefreshData();
@@ -328,7 +333,6 @@ namespace SewingProduction.Features.Tabel.Forms
                 int rowHandle = bandedGridViewTabel.GetRowHandle(tabOtvlRList.Count - 1);
                 bandedGridViewTabel.FocusedRowHandle = rowHandle;
 
-                // фокус на первую редактируемую ячейку
                 bandedGridViewTabel.FocusedColumn = Priem_t_s;
                 bandedGridViewTabel.ShowEditor();
 
@@ -342,26 +346,16 @@ namespace SewingProduction.Features.Tabel.Forms
             }
         }
 
-        private int GetNextNrForDay(DateTime day)
-        {
-            int max = 0;
-
-            foreach (var r in tabOtvlRList)
-            {
-                if (r.Dat.HasValue && r.Dat.Value.Date == day.Date)
-                {
-                    if (r.N_r.HasValue && r.N_r.Value > max)
-                        max = r.N_r.Value;
-                }
-            }
-
-            return max + 1;
-        }
-
         private async void customButtonDel_Click(object sender, EventArgs e)
         {
             var row = bandedGridViewTabel.GetFocusedRow() as TabOtvlRModel;
             if (row == null) return;
+
+            if (!CanDeleteRow(row, out var reason))
+            {
+                ShowEditDenied(reason);
+                return;
+            }
 
             var confirm = DevExpress.XtraEditors.XtraMessageBox.Show(
                 "Удалить запись?",
@@ -390,18 +384,26 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private async void bandedGridViewTabel_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
+            flagUpdate = false;
             if (e.Row is not TabOtvlRModel row) return;
             if (!row.Id.HasValue || row.Id.Value <= 0) return;
-
+            //await tabelUpdated(row);
+        }
+        private async Task tabelUpdated(TabOtvlRModel model)
+        {
             try
             {
-                NormalizeRowBeforeSave(row);
+                if (flagUpdate) return;
 
-                await tabOtvlRDataService.SaveAsync(row); // UPDATE по Id
-                row.OrNew = 0;
+                Debug.WriteLine("Обновление данных");
+                NormalizeRowBeforeSave(model);
+
+                await tabOtvlRDataService.SaveAsync(model); // UPDATE по Id
+                model.OrNew = 0;
 
                 bandedGridViewTabel.UpdateSummary();
                 UpdateTotalSumMasked();
+                flagUpdate = true;
             }
             catch (Exception ex)
             {
@@ -409,7 +411,39 @@ namespace SewingProduction.Features.Tabel.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
 
+        #region Help for Add/Del/Save
+        private bool flagUpdate = false;
+        private void customGridControlTabel_Click(object sender, EventArgs e)
+        {
+            flagUpdate = false;
+        }
+        private int GetNextNrForDay(DateTime day)
+        {
+            int max = 0;
+
+            foreach (var r in tabOtvlRList)
+            {
+                if (r.Dat.HasValue && r.Dat.Value.Date == day.Date)
+                {
+                    if (r.N_r.HasValue && r.N_r.Value > max)
+                        max = r.N_r.Value;
+                }
+            }
+
+            return max + 1;
+        }
+        private DateTime GetSelectedDayOrTodaySafe()
+        {
+            if (customCalendarControlTabel.EditValue is DateTime dt)
+                return dt.Date;
+
+            if (_lastCalendarDate.HasValue)
+                return _lastCalendarDate.Value.Date;
+
+            return DateTime.Today.Date;
+        }
         private void NormalizeRowBeforeSave(TabOtvlRModel row)
         {
             row.Gr = _idGroup;
@@ -425,7 +459,112 @@ namespace SewingProduction.Features.Tabel.Forms
                 row.N_r = row.Dat.HasValue ? GetNextNrForDay(row.Dat.Value) : 1;
 
         }
+        #endregion
+
+        #region Admin Mode
+        private bool _isAdminMode = false;
+        private void customToggleSwitchAdmin_Toggled(object sender, EventArgs e)
+        {
+            _isAdminMode = customToggleSwitchAdmin.IsOn;
+        }
+
+        private bool CanAddRow(out DateTime day, out string reason)
+        {
+            day = GetSelectedDayOrTodaySafe();
+
+            if (!CanEditTable(out reason))
+                return false;
+
+            if (!CanEditDay(day, out reason))
+                return false;
+
+            return true;
+        }
+        private bool CanEditTable(out string reason)
+        {
+            reason = string.Empty;
+
+            if (_idTabno <= 0)
+            {
+                reason = "Не выбран табельный номер.";
+                return false;
+            }
+
+            if (_monthMode)
+            {
+                reason = "Для редактирования выберите конкретный день.";
+                return false;
+            }
+
+            return true;
+        }
+        private bool CanEditDay(DateTime day, out string reason)
+        {
+            reason = string.Empty;
+
+            if (_isAdminMode) return true;
+
+            var today = DateTime.Today;
+            day = day.Date;
+
+            // всегда можно сегодня
+            if (day == today) return true;
+            if (DateTime.Now.TimeOfDay <= new TimeSpan(14, 0, 0))
+            {
+                // вчера
+                if (day == today.AddDays(-1)) return true;
+
+                // сегодня понедельник — разрешаем пятницу/сб/вс
+                if (today.DayOfWeek == DayOfWeek.Monday)
+                {
+                    var friday = today.AddDays(-3).Date;
+                    var saturday = today.AddDays(-2).Date;
+                    var sunday = today.AddDays(-1).Date;
+
+                    if (day == friday || day == saturday || day == sunday)
+                        return true;
+                }
+            }
+            reason = "Можно изменять только за сегодня и вчера до 14:00";
+            return false;
+        }
+
+        private bool CanEditRow(TabOtvlRModel row, out string reason)
+        {
+            reason = string.Empty;
+
+            if (row == null)
+            {
+                reason = "Строка не выбрана.";
+                return false;
+            }
+
+            if (!row.Dat.HasValue)
+            {
+                reason = "У строки не заполнена дата.";
+                return false;
+            }
+
+            if (!CanEditDay(row.Dat.Value, out reason))
+                return false;
+
+            return true;
+        }
+
+        private bool CanDeleteRow(TabOtvlRModel row, out string reason)
+        {
+            return CanEditRow(row, out reason);
+        }
+        private void ShowEditDenied(string reason)
+        {
+            DevExpress.XtraEditors.XtraMessageBox.Show(
+                reason,
+                "Редактирование запрещено",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+        }
 
         #endregion
+
     }
 }

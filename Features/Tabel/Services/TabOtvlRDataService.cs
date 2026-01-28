@@ -56,21 +56,21 @@ namespace SewingProduction.Features.Tabel.Services
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
 
-            return await _dbService.SaveEntityAsync("tab_otvl_r", "id", model);
+            return await _dbService.SaveEntityAsync("tab_otvl_r", "Id", model);
         }
 
         public async Task DeleteAsync(TabOtvlRModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
 
-            await _dbService.DeleteEntityAsync("tab_otvl_r", "id", model);
+            await _dbService.DeleteEntityAsync("tab_otvl_r", "Id", model);
         }
 
         public async Task DeleteByIdAsync(int id)
         {
             if (id <= 0) return;
 
-            await _dbService.DeleteEntityAsync("tab_otvl_r", "id", new TabOtvlRModel { Id = id });
+            await _dbService.DeleteEntityAsync("tab_otvl_r", "Id", new TabOtvlRModel { Id = id });
         }
     }
 }
