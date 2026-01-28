@@ -1,6 +1,8 @@
 using Dapper;
 using DevExpress.XtraDiagram.Base;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -10,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
@@ -63,7 +66,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
                 // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
-                // ВАЖНО: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).-- и переставлять местави часы и кол назн и факт --не нужно переставлять
+                // !!!!: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).-- и переставлять местави часы и кол назн и факт --не нужно переставлять
                 using (var grid = await connection.QueryMultipleAsync(
                   "dbo.GetPlanZagrVyazNorm_ByTab4",
                     new
@@ -226,7 +229,7 @@ where kwsmlKmlID in @ids
                 {
                     // - При открытии смены "назначено" в БД может не быть заполнено.
                     //   При этом pzvKol/pzvNChasi содержат ПЛАН (до начала работы), а факт в UI должен быть 0.
-                    // - После начала/завершения работы pzvKol/pzvNChasi становятся ФАКТОМ, а план (если был) лежит в pzvKolNazn/pzvChasNazn.
+                    // - После начала/завершения работы pzvKol/pzvNChasi становятся ФАКТОМ, а план лежит в pzvKolNazn/pzvChasNazn.
                     // - Обнулять нужно ТОЛЬКО UI-поля, базовые колонки в модели не трогаем.
 
                     var planKolFromFact = (r.pzvKol ?? 0);
@@ -237,13 +240,12 @@ where kwsmlKmlID in @ids
 
                     // "Начата" = есть дата начала (на некоторых потоках может проставляться только при старте).
                     // Если начато — показываем факт из pzvKol/pzvNChasi.
-                    // Если НЕ начато — факт в UI = 0, а план в UI берём из pzvKol/pzvNChasi (как ты попросила: "назн из факт, факт не обнулять").
+                    // Если НЕ начато — факт в UI = 0, а план в UI берём из pzvKol/pzvNChasi 
                     bool started = r.pzvDateStart != null;
 
                     if (!started)
                     {
-                        // План до старта берём из "фактовых" полей (по бизнес-логике они содержат план),
-                        // чтобы при открытии смены всё отображалось корректно.
+                        // План до старта берём из факт полей
                         r.PlanKol_UI = planKolFromFact;
                         r.PlanChas_UI = planChasFromFact;
                         r.FactKol_UI = 0;
@@ -251,7 +253,7 @@ where kwsmlKmlID in @ids
                         return;
                     }
 
-                    // После старта: план — из Nazn (если есть), иначе fallback на фактовые (на случай остатка/новых строк)
+                    // После старта: план — из Nazn, иначе fallback на факт (на случай остатка/новых строк)
                     r.PlanKol_UI = planKolFromNazn;
                     r.PlanChas_UI = planChasFromNazn;
                     r.FactKol_UI = (r.pzvKol ?? 0);
@@ -350,10 +352,8 @@ ORDER BY fio";
      pzvKolNazn = ISNULL(pzvKol, 0),
      pzvSekNazn = ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0),
      pzvChasNazn = CAST(ROUND((ISNULL(pzvKol, 0) * ISNULL(pzvSek, 0)) / 3600.0, 2) AS decimal(16,2))
-     --,pzvKol = 0
-     --,pzvNChasi = 0
  WHERE pzvID IN @ids";
-    // -- после назначения плановое поле НЕ обнуляем, чтобы \"кол-во к выполнению\" НЕ стало 0 - не надо их занулять!!!
+    // -- после назначения плановое поле НЕ обнуляем, чтобы кол-во к выполнению НЕ стало 0 - не надо их занулять!!!
 
                     await connection.ExecuteAsync(sql, new { tab, ids });
                 }
@@ -520,6 +520,46 @@ WHERE pzvID = @pzvId;
 			}
 		}
 
+
+        public async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(
+            int? kwsId,
+            decimal minHours)
+        {
+            if (kwsId is null || kwsId <= 0)
+                throw new ArgumentException("kwsId must be > 0 for shift end adjustment.", nameof(kwsId));
+
+            if (minHours <= 0)
+                minHours = 12m;
+
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@KwsId", kwsId.Value, DbType.Int32);
+                parameters.Add("@MinHours", minHours, DbType.Decimal);
+
+                using var multi = await connection.QueryMultipleAsync(
+                    sql: "dbo.PZV_AdjustNotStartedBeforeShiftEnd",
+                    param: parameters,
+                    commandType: CommandType.StoredProcedure,
+                    commandTimeout: 60);
+
+                var stats = (await multi.ReadAsync<MachineHoursStat>()).ToList();
+
+                // второй набор можно прочитать (если нужно для логов/отладки)
+                // var details = (await multi.ReadAsync<MachineHoursDetail>()).ToList();
+
+                // если не добрали до minHours — можно сформировать сообщение
+                // var bad = stats.Where(s => s.StillLessThanMin == 1).ToList();
+
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"AdjustNotStartedBeforeShiftEnd failed (kwsId={kwsId}, minHours={minHours})", ex);
+            }
+        }
         public async Task<int> StartWorkingShiftAsync(int tabStart, int? kmaId, string kmaNum, int? kmsId = 0)
         {
             try
@@ -663,7 +703,7 @@ ORDER BY kwsDateStart DESC";
 				var ids = pzvIds.Distinct().ToArray();
 				if (ids.Length == 0)
 					return;
-				using (var connection = _dbHelper.GetConnection())
+				using (var connection = _dbHelper.GetConnection())//, pzvKolNazn = pzvKol, pzvSekNazn = pzvSek, pzvChasNazn = pzvNChasi 
 				{
 					const string sql = @"UPDATE dbo.planZagrVyaz
 SET pzvKwsID = @kwsId
@@ -676,6 +716,34 @@ WHERE pzvID IN @ids";
 				throw new Exception($"UpdatePzvKwsIdAsync failed (kwsId={kwsId})", ex);
 			}
 		}
+
+        //public Task AdjustNotStartedBeforeShiftEndAsync(int? kwsId, 12m)
+        //{
+        //    try
+        //    {
+        //        using (var connection = _dbHelper.GetConnection())
+        //        {
+        //            return connection.ExecuteAsync(
+        //        "dbo.PZV_UnassignNotStartedByShift",
+        //        new { KwsId = kwsId },
+        //        commandType: CommandType.StoredProcedure);
+        //        }
+        //    }
+        //    catch (Exception ex) {
+        //        throw new Exception($"UnassignNoStartedOps failed (kwsId={kwsId})", ex);
+        //    }
+        //}
+
+
+
+        public sealed class MachineHoursStat
+        {
+            public int pzvKmlID { get; set; }
+            public decimal FactHours { get; set; }
+            public decimal KeptAssignedHours { get; set; }
+            public decimal TotalForCheck { get; set; }
+            public int StillLessThanMin { get; set; }
+        }
 
     }
 }

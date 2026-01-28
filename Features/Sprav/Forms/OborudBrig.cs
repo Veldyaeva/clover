@@ -38,7 +38,11 @@ namespace SewingProduction.form
         #region service broker
         private void OborudBrig_Load_1(object sender, EventArgs e)
         {
-            _serviceBroker.StartBroker();
+            // _serviceBroker.StartBroker();
+            // Тут НЕ StartBroker()
+            // Здесь только подписка на изменения нужной таблицы:
+            _serviceBroker.StartListening( "*" , "dbo.OborudBrig"); // имя таблицы/вьюхи — ПОПРАВЬТЕ, КТО ПОНИМАЕТ
+            gridOborud_Load(null, EventArgs.Empty);
         }
         // Интерфейс доступный сервис брокеру:
         public interface IDataUpdatableForm
@@ -146,7 +150,7 @@ namespace SewingProduction.form
                 if (!flagStartListening)
                 {
                     _serviceBroker.StartListening("idOB, idZeh, kod_ob, count", "OborudBrig");
-                    flagStartListening = _serviceBroker.GetFlagStartListening();
+                  //  flagStartListening = _serviceBroker.GetFlagStartListening();
                 }
             }
         }
@@ -187,7 +191,11 @@ namespace SewingProduction.form
                 mainForm.OpenForm(new SpravBrig(_user, "spBrig", "Справочник Бригад"), "бригадыToolStripMenuItem");
             }
         }
-
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try { _serviceBroker?.StopListening(); } catch { }
+            base.OnFormClosed(e);
+        }
     }
 
 }

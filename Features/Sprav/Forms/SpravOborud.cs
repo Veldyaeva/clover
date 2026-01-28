@@ -32,7 +32,9 @@ namespace SewingProduction.form
 
         private void SpravOborud_Load(object sender, EventArgs e)
         {
-            _serviceBroker.StartBroker();
+            //_serviceBroker.StartBroker();
+            _serviceBroker.StartListening("*", "dbo.OborudBrig"); // имя таблицы/вьюхи — здесь тоже не знаю
+
             label4.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
             label7.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
             label21.Text = "Спец. оборудование \n для оказания услуг";
@@ -269,7 +271,7 @@ namespace SewingProduction.form
         }
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.StopBroker();
+        //    _serviceBroker.StopBroker();
         }
 
     }

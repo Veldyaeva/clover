@@ -1055,6 +1055,9 @@
   <data name="&gt;&gt;textBoxReco.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="constructorComboBox.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="constructorComboBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>

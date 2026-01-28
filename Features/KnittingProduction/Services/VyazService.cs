@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DevExpress.XtraGantt.Scheduling;
 using Org.BouncyCastle.Asn1.Ocsp;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Helpers;
@@ -403,23 +404,59 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 return null;
             }
         }
+        //public async Task<List<SmenZadanyVyaz>> GetSmenZadanyVyaz(int _idNazn, int _kodProizv, int _kodPodr, CancellationToken cancellationToken)
+        //{
+        //    try
+        //    {
+        //        using (var connection = _dbHelper.GetConnection())
+        //        {
+        //            string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
 
-        public async Task<List<SmenZadanyVyaz>> GetSmenZadanyVyaz(int _idNazn, int _kodProizv, int _kodPodr)
+        //            var result = await connection.QueryAsync<c>(query, new Dictionary<string, object> { });
+        //            return result.ToList();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyaz");
+        //        return null;
+        //    }
+        //}
+        public async Task<BindingSource> GetSmenZadanyVyaz(int _idNazn, int _kodProizv, int _kodPodr, CancellationToken cancellationToken)
         {
             try
             {
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
+                await using var connection = _dbHelper.GetConnection();
+                string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
 
-                    var result = await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { });
-                    return result.ToList();
-                }
+                var list = (await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { })).ToList();
+                //return result.ToList();
+
+                return new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>(list)
+                };
+            }
+            catch (OperationCanceledException)
+            {
+                // отмена — НЕ ошибка
+                return new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>()
+                };
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных GetSmenZadanyVyaz");
+                return null;
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetSmenZadanyVyaz");
-                return null;
+                await _logger.LogErrorAsync(ex, "Ошибка при получении данных GetSmenZadanyVyaz");
+                return new BindingSource
+                {
+                    DataSource = new BindingList<SmenZadanyVyaz>()
+                };
             }
         }
 

@@ -141,7 +141,7 @@ namespace SewingProduction.Core.helpers
                             SplashScreenManager.CloseOverlayForm(overlay);
                     }
                 }
-                catch 
+                catch
                 {
                     SplashScreenManager.CloseOverlayForm(overlay);
                 }

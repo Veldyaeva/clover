@@ -3,6 +3,7 @@ using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service.KnitterRepository;
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
@@ -27,6 +28,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 		Task<(int? shiftId, DateTime? dateStart)> GetOpenShiftByTabAsync(int tab);
         Task<(int? shiftId, int? tabStart, DateTime? dateStart)> GetOpenShiftByZoneAsync(int kmaId);
 		Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId);
+        Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v);
     }
 }
 

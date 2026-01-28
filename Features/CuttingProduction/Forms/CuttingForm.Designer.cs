@@ -1754,7 +1754,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             layoutControlItem4.Size = new System.Drawing.Size(54, 26);
             layoutControlItem4.TextVisible = false;
             // 
-            // layoutControlGroup4
+            // layoutNorms
             // 
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem24, layoutControlItem27, layoutControlItem28 });
             layoutControlGroup4.Location = new System.Drawing.Point(1430, 151);

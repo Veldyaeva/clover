@@ -4,6 +4,7 @@ using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service.KnitterRepository;
 
 namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 {
@@ -115,6 +116,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 		/// Проставляет pzvKwsID для списка операций плана.
 		/// </summary>
 		public Task UpdatePzvKwsIdAsync(IEnumerable<int> pzvIds, int kwsId) => _repo.UpdatePzvKwsIdAsync(pzvIds, kwsId);
+
+        /// <summary>
+        /// Сбрасываем таб при закрытии смены у неначатых операций
+        /// </summary>
+        /// <param name="currentShiftId"></param>
+        /// <returns></returns>
+        public Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(int? currentShiftId, decimal v) => _repo.AdjustNotStartedBeforeShiftEndAsync(currentShiftId, 12m);
+
+
     }
 }
 

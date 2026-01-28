@@ -15,10 +15,12 @@ namespace SewingProduction.Features.Articul.Service
     {
         private readonly DbService _dbService;
         private readonly FileLogger _logger = new FileLogger();
+        private readonly DatabaseHelper _dbHelper;
 
         public ArticulEditAdvanceService()
         {
             _dbService = new DbService(new DatabaseHelper());
+            _dbHelper = new DatabaseHelper();
         }
         public async Task<BindingList<ArticulModel>> GetArtByKoddAsync(string kodd)
         {
@@ -52,6 +54,8 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+
+
 
     }
 }

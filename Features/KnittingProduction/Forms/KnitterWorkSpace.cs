@@ -11,23 +11,51 @@ using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
+using SewingProduction.Core.helpers;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
+using SewingProduction.Core.Models;
+using SewingProduction.Core.Class.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
+using static SewingProduction.Core.helpers.ServiceBrokerHelper;
 
+#nullable enable
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class KnitterWorkSpace : CustomForm
+    public partial class KnitterWorkSpace : CustomForm, IDataUpdatableFormAsyncV2
     {
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
         /// </summary>
         private readonly IKnitterOrchestrator _orchestrator;
+        
+        /// <summary>
+        /// ServiceBroker для отслеживания изменений в БД.
+        /// </summary>
+        private ServiceBrokerHelper? _sbHelper;
+        
+        /// <summary>
+        /// Координатор обновлений с защитой от дребезга.
+        /// </summary>
+        private EnhancedRefreshCoordinator? _refreshCoordinator;
+        
+        /// <summary>
+        /// Сервис для работы с ServiceBroker.
+        /// </summary>
+        private ServiceBrokerService? _sbService;
+        
+        /// <summary>
+        /// Токен отмены для инициализации ServiceBroker.
+        /// </summary>
+        private CancellationTokenSource? _loadCts;
         /// <summary>
         /// Источник данных, к которому привязан GridControl.
         /// </summary>
@@ -119,7 +147,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
-            this.Load += async (s, e) => await InitializeAsync();
+            this.Load += async (s, e) => 
+            {
+                await InitializeAsync();
+                await InitServiceBrokerAsync();
+            };
 
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
@@ -328,6 +360,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 headerCol.GroupIndex = 0;
 
+                //// Сортировка по номеру операции внутри группы
+                //var opNum = bandedGridColumn11 ?? advBandedGridView1.Columns.ColumnByFieldName("DisplayNumber");
+                //if (opNum != null)
+                //{
+                //    advBandedGridView1.SortInfo.Clear();
+                //    advBandedGridView1.SortInfo.Add(opNum, DevExpress.Data.ColumnSortOrder.Ascending);
+                //}
+
                 // 3) Внешний вид группы — показываем только текст, без имён полей
                 advBandedGridView1.GroupFormat = "{1}";
                 advBandedGridView1.OptionsView.ShowGroupedColumns = false;
@@ -407,8 +447,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
                 if (_isShiftRunning)
                 {
-                    // Перед завершением смены: обработать все операции
-                    await ProcessOperationsOnShiftEndAsync();
+                    // Перед завершением смены: обработать все операции; если есть незавершённые — не закрываем.
+                    var canClose = await ProcessOperationsOnShiftEndAsync();
+                    if (!canClose)
+                        return;
+                    //// снимаем назначение у всех НЕ начатых в текущей смене
+                    //await _orchestrator.UnassignNotStartedByShiftAsync(_currentShiftId);
+
+
+                    //WarnIfMachineFactHoursLessThan12(_currentShiftId);
+                    var stat = (await _orchestrator.AdjustNotStartedBeforeShiftEndAsync(_currentShiftId, 12m)).ToList();
+
+                    //var bad = stat.Where(x => x.StillLessThanMin == 1).ToList();
+                    //if (bad.Count > 0)
+                    //{
+                    //    var msg =
+                    //        "По некоторым станкам даже с добором неначатых не набирается 12 часов:\n\n" +
+                    //        string.Join("\n", bad.Select(x => $"• kmlID={x.pzvKmlID}: факт {x.FactHours:0.##} + добор {x.KeptAssignedHours:0.##} = {x.TotalForCheck:0.##}"));
+                    //    XtraMessageBox.Show(this, msg, "Проверка 12 часов", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //}
+
 
                     if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
                     {
@@ -698,32 +756,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// При завершении смены: для неначатых — split mode=2 с отриц. количеством; для начатых без конца — спросить факт и закрыть.
         /// </summary>
-        private async Task ProcessOperationsOnShiftEndAsync()
+        private async Task<bool> ProcessOperationsOnShiftEndAsync()
         {
             var rows = _planPresenter.AllRows?.Where(r => r != null && r.pzvID > 0).ToList() ?? new List<KnitterPZVModel>();
             if (!rows.Any())
-                return;
+                return true;
 
-            // Неначатые (нет даты старта и окончания) → split mode=2
-            var notStarted = rows.Where(r => r.pzvDateStart == null && r.pzvDateEnd == null).ToList();
-            foreach (var row in notStarted)
-            {
-                try
-                {
-                    await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
-                }
-                catch
-                {
-                    // Игнорируем сбой split одной операции, продолжаем остальные
-                }
-            }
 
             // Начатые, но не завершённые → спросить факт, закрыть, при необходимости split по факту
             var inProgress = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
             if (inProgress.Any())
             {
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                return false;
                 //foreach (var row in inProgress)
                 //{
                 //    int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
@@ -759,6 +804,58 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    }
                 //}
             }
+            // Неначатые (нет даты старта и окончания) → split mode=2
+            var notStarted = rows.Where(r => r.pzvDateStart == null && r.pzvDateEnd == null).ToList();
+            foreach (var row in notStarted)
+            {
+                try
+                { //если завершается в конце смены с фактом 0 - это случай 2 с отрицательной строкой
+                    await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
+                }
+                catch
+                {
+                    // Игнорируем сбой split одной операции, продолжаем остальные
+                }
+            }
+
+            return true;
+        }
+
+
+
+        private void WarnIfMachineFactHoursLessThan12(int? currentKwsId)
+        {
+            var rows = _planPresenter.AllRows?
+                .Where(r => (r.pzvKwsID ?? 0) == currentKwsId)
+                .Where(r => r.pzvKmlID > 0)
+                .ToList();
+
+            if (rows == null || rows.Count == 0)
+                return;
+
+            const decimal minHours = 12m;
+
+            var bad = rows
+                .GroupBy(r => new { KmlId = r.pzvKmlID!, r.kmlNumber })
+                .Select(g => new
+                {
+                    g.Key.KmlId,
+                    Machine = string.IsNullOrWhiteSpace(g.Key.kmlNumber) ? g.Key.KmlId.ToString() : g.Key.kmlNumber,
+                    Hours = g.Sum(x => x.FactChas_UI) 
+                })
+                .Where(x => x.Hours < minHours)
+                .OrderBy(x => x.Machine)
+                .ToList();
+
+            if (!bad.Any())
+                return;
+
+            var msg =
+                "Недобор фактических часов по машинам (< 12 ч):\n\n" +
+                string.Join("\n", bad.Select(x => $"Машина {x.Machine}: {x.Hours:0.##} ч"));
+
+            XtraMessageBox.Show(this, msg, "Проверка часов перед закрытием смены",
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         // Получение выбранных строк теперь через _planPresenter.GetRowsForViewSelection(...)
@@ -1030,7 +1127,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // Получим текущую строку для плейсхолдера (кол-во к выполнению)
             var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
             // Если плановое количество уже перенесено в назначенное (pzvKol обнулён), используем pzvKolNazn как "к выполнению"
-            int defaultQty = currentRow?.pzvKol ?? 0;
+            int defaultQty = currentRow?.pzvKolNazn ?? 0;
             if (defaultQty == 0 && currentRow != null && currentRow.pzvKolNazn > 0)
                 defaultQty = currentRow.pzvKolNazn;
 
@@ -1050,13 +1147,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (currentRow != null)
             {
                 currentRow.pzvKol = qty;
-                currentRow.FactKol_UI = defaultQty;
+                //currentRow.FactKol_UI = defaultQty; схерали дефалт квантити??? 
+                currentRow.FactKol_UI = qty; // вроде так
                 // Мгновенно пересчитываем часы факт для прогресса (секунды на изделие * факт / 3600)
                 decimal factHours = 0m;
                 if (currentRow.pzvSek > 0)
                 {
                     factHours = Math.Round((currentRow.pzvSek * qty) / 3600m, 2);
-                    currentRow.pzvNChasi = factHours;
+                    currentRow.pzvNChasi = factHours; 
                 }
                 var masterRow = _planPresenter.AllRows?.FirstOrDefault(r => r != null && r.pzvID == currentRow.pzvID);
                 if (masterRow != null)
@@ -1093,12 +1191,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 			if (currentRow?.pzvID > 0)
 			{ if (defaultQty > 0)
                 {
-                    if (qty == 0)
-                    {
-                        // создаём отрицательную строку mode = 2
-                        newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
-                    }
-                    else if (qty < defaultQty)
+                    //if (qty == 0)
+                    //{
+                    //    // создаём отрицательную строку mode = 2
+                    //    newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
+                    //}
+                    //else Если сама завершает с фактом 0 - это тот же случай 1 с введённым количеством 
+                    if (qty < defaultQty) 
                     {
                         // Факт меньше запланированного — mode = 1 c qtyFact
                         newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
@@ -1182,6 +1281,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var updated = await updateFunc(row.pzvID);
                 var newValue = getDate(updated) ?? getDate(row);
                 setDate(row, newValue);
+                // Также обновляем мастер-коллекцию, чтобы проверки при закрытии смены видели актуальные даты
+                var masterRow = _planPresenter?.AllRows?.FirstOrDefault(r => r != null && r.pzvID == row.pzvID);
+                if (masterRow != null)
+                {
+                    setDate(masterRow, newValue);
+                }
                 _view.PostEditor();
                 _view.SetRowCellValue(rowHandle, column, newValue);
                 _view.PostEditor();
@@ -1636,9 +1741,191 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        public void Dispose()
+        /// <summary>
+        /// Инициализирует ServiceBroker для отслеживания изменений в таблицах БД.
+        /// </summary>
+        private async Task InitServiceBrokerAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                _loadCts = new CancellationTokenSource();
+                var dbHelper = new DatabaseHelper();
+                _sbService = new ServiceBrokerService(dbHelper);
+
+                // Имя хранимой процедуры, которую нужно отслеживать
+                const string objectName = "GetPlanZagrVyazNorm_ByTab4";
+
+                _sbHelper = new ServiceBrokerHelper(
+                    owner: this,
+                    loadByObjectAsync: (obj, token) => _sbService.GetObjectListForServiceBroker(obj, token)
+                )
+                {
+                    UseSchemaInListenName = true
+                };
+
+                // Координатор обновлений с защитой от дребезга
+                var sbSettings = SettingsManager.GetServiceBrokerSettings();
+                _refreshCoordinator = new EnhancedRefreshCoordinator(
+                    reloadByObjectNameAsync: RestartDataByObjectNameAsync,
+                    debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
+                    throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
+                    maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
+                    maxBatchSize: sbSettings.MaxBatchSize,
+                    maxParallelReloads: sbSettings.MaxParallelReloads,
+                    maxCascadeDepth: sbSettings.MaxCascadeDepth
+                );
+
+                // Настраиваем приоритет для обновления плана
+                _refreshCoordinator.SetPriority(objectName, 10);
+
+                // Инициализируем и запускаем прослушивание
+                await _sbHelper.InitAndStartAsync(new[] { objectName }, _loadCts.Token);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error initializing ServiceBroker: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Перезапускает загрузку данных по имени объекта (вызывается координатором).
+        /// </summary>
+        private async Task RestartDataByObjectNameAsync(string objectName)
+        {
+            if (string.IsNullOrWhiteSpace(objectName))
+                return;
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RestartDataByObjectNameAsync: {objectName}");
+
+                // Если это наша хранимая процедура плана - перезагружаем план
+                if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab4", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (_currentLoadedTab.HasValue)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Reloading plan for tab {_currentLoadedTab.Value}");
+                        await LoadPlanForTabAsync(_currentLoadedTab.Value, forceReload: true);
+                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Plan reloaded successfully");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No current tab loaded, skipping reload");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in RestartDataByObjectNameAsync for {objectName}: {ex.Message}");
+                throw;
+            }
+        }
+
+        public Task UpdateDataInFormAsync(string table)
+    => UpdateDataInFormAsync(table, fieldsCsv: null);
+        public async Task UpdateDataInFormAsync(string table, string? fieldsCsv)
+        {
+            if (_sbHelper == null) return;
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    $"[KnitterWorkSpace] UpdateDataInFormAsync: table={table}, fields={fieldsCsv ?? "<null>"}");
+
+                // 1) Пропускаем событие через фильтрацию + маппинг (таблица+поля -> objectNames)
+                await _sbHelper.HandleBrokerUpdateAsync(table, fieldsCsv);
+
+                // 2) Забираем затронутые объекты
+                var affected = _sbHelper.DrainPending();
+                if (affected == null || affected.Count == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"[KnitterWorkSpace] No affected objects for table={table}, fields={fieldsCsv ?? "<null>"}");
+                    return;
+                }
+
+                // 3) Планируем обновления через координатор
+                foreach (var objName in affected
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Distinct(StringComparer.OrdinalIgnoreCase))
+                {
+                    _refreshCoordinator?.Request(objName);
+                }
+
+                // 4) (опционально) лог статистики
+                if (_refreshCoordinator != null)
+                {
+                    var stats = _refreshCoordinator.GetStatistics();
+                    System.Diagnostics.Debug.WriteLine(
+                        $"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex}");
+            }
+        }
+
+
+        ///// <summary>
+        ///// Реализация IDataUpdatableFormAsyncV2 - вызывается при изменении данных в БД.
+        ///// </summary>
+        //public async Task UpdateDataInFormAsync(string table)
+        //{
+        //    if (_sbHelper == null) return;
+
+        //    try
+        //    {
+        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] UpdateDataInFormAsync: table={table}");
+
+        //        // Пропускаем событие через фильтрацию
+        //        await _sbHelper.HandleBrokerUpdateAsync(table, changedFieldsCsv: null);
+
+        //        // Получаем список затронутых объектов
+        //        var affected = _sbHelper.DrainPending();
+        //        if (affected == null || affected.Count == 0)
+        //        {
+        //            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No affected objects for table {table}");
+        //            return;
+        //        }
+
+        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Affected objects: {string.Join(", ", affected)}");
+
+        //        // Планируем обновления через координатор
+        //        foreach (var objName in affected
+        //            .Where(x => !string.IsNullOrWhiteSpace(x))
+        //            .Distinct(StringComparer.OrdinalIgnoreCase))
+        //        {
+        //            _refreshCoordinator?.Request(objName);
+        //        }
+
+        //        // Логируем статистику координатора
+        //        if (_refreshCoordinator != null)
+        //        {
+        //            var stats = _refreshCoordinator.GetStatistics();
+        //            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex.Message}");
+        //    }
+        //}
+
+        public new void Dispose()
+        {
+            try
+            {
+                _loadCts?.Cancel();
+                _loadCts?.Dispose();
+                _sbHelper?.DisposeAsync().AsTask().Wait();
+                _refreshCoordinator?.Dispose();
+            }
+            catch
+            {
+                // Игнорируем ошибки при освобождении ресурсов
+            }
+            base.Dispose();
         }
     }
 }

@@ -6232,7 +6232,7 @@ namespace SewingProduction
             layoutControlGroup3.Size = new Size(1829, 596);
             layoutControlGroup3.TextVisible = false;
             // 
-            // layoutControlGroup6
+            // layoutBrak
             // 
             buttonImageOptions11.Image = (Image)resources.GetObject("buttonImageOptions11.Image");
             layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
@@ -6588,7 +6588,7 @@ namespace SewingProduction
             simpleSeparator1.Name = "simpleSeparator1";
             simpleSeparator1.Size = new Size(1809, 1);
             // 
-            // layoutControlGroup4
+            // layoutNorms
             // 
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10 });
             layoutControlGroup4.Location = new Point(777, 0);
@@ -6604,7 +6604,7 @@ namespace SewingProduction
             layoutControlItem10.Size = new Size(1008, 230);
             layoutControlItem10.TextVisible = false;
             // 
-            // layoutControlGroup7
+            // layoutSeb
             // 
             layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem11 });
             layoutControlGroup7.Location = new Point(777, 285);
@@ -7256,7 +7256,7 @@ namespace SewingProduction
             customRadioGroup2.TabIndex = 0;
             customRadioGroup2.SelectedIndexChanged += (this.customRadioGroup2_SelectedIndexChanged);
             // 
-            // layoutControlGroup8
+            // layoutTkans
             // 
             layoutControlGroup8.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup8.GroupBordersVisible = false;
@@ -8430,7 +8430,7 @@ namespace SewingProduction
             layoutControlItem110.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem110.TextVisible = false;
             // 
-            // layoutControlGroup11
+            // layoutSumZP
             // 
             layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem53, layoutControlItem54, layoutControlItem20, layoutControlItem21, layoutControlItem55, layoutControlItem56, layoutControlItem57, layoutControlItem58, layoutControlItem59, emptySpaceItem15, emptySpaceItem17, emptySpaceItem18, emptySpaceItem19, layoutControlItem62, layoutControlItem63, emptySpaceItem20, layoutControlItem64, layoutControlItem65, emptySpaceItem21, layoutControlItem66, layoutControlItem67, layoutControlItem68, layoutControlItem69, emptySpaceItem16, layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem73, emptySpaceItem22, layoutControlItem60, layoutControlItem61 });
             layoutControlGroup11.Location = new Point(1033, 0);
@@ -8671,7 +8671,7 @@ namespace SewingProduction
             layoutControlItem61.Size = new Size(203, 76);
             layoutControlItem61.TextVisible = false;
             // 
-            // layoutControlGroup10
+            // layoutOpis_t
             // 
             layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem48, layoutControlItem16, layoutControlItem18, layoutControlItem74, layoutControlItem75, emptySpaceItem23, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81, layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, emptySpaceItem25, emptySpaceItem26, layoutControlItem47, layoutControlItem109, layoutControlItem135, layoutControlItem157, layoutControlItem158, emptySpaceItem27, layoutControlItem194 });
             layoutControlGroup10.Location = new Point(344, 0);

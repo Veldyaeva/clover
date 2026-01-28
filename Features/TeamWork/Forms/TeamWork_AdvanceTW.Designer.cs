@@ -283,8 +283,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // constructorComboBox
             // 
-            errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
             resources.ApplyResources(constructorComboBox, "constructorComboBox");
+            errorProvider1.SetIconAlignment(constructorComboBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("constructorComboBox.IconAlignment"));
             constructorComboBox.Name = "constructorComboBox";
             constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons")), new DevExpress.XtraEditors.Controls.EditorButton((DevExpress.XtraEditors.Controls.ButtonPredefines)resources.GetObject("constructorComboBox.Properties.Buttons1")) });
             constructorComboBox.StyleController = tableLayoutPanel3layoutControl1ConvertedLayout;
@@ -1122,7 +1122,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem7.Size = new System.Drawing.Size(434, 26);
             layoutControlItem7.TextVisible = false;
             // 
-            // layoutControlGroup7
+            // layoutSeb
             // 
             layoutControlGroup7.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup7.BackgroundImageOptions.ImageKey");
             layoutControlGroup7.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup7.CaptionImageOptions.ImageKey");
@@ -1282,7 +1282,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             statusLabelitem.Size = new System.Drawing.Size(1507, 25);
             statusLabelitem.TextVisible = false;
             // 
-            // layoutControlGroup10
+            // layoutOpis_t
             // 
             layoutControlGroup10.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup10.BackgroundImageOptions.ImageKey");
             layoutControlGroup10.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup10.CaptionImageOptions.ImageKey");
@@ -1359,7 +1359,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             splitterItem5.Name = "splitterItem5";
             splitterItem5.Size = new System.Drawing.Size(693, 10);
             // 
-            // layoutControlGroup4
+            // layoutNorms
             // 
             layoutControlGroup4.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup4.BackgroundImageOptions.ImageKey");
             layoutControlGroup4.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup4.CaptionImageOptions.ImageKey");
