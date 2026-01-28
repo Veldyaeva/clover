@@ -3481,7 +3481,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             Name = "PlanZagrVyaz";
             Text = "Рабочий стол мастера вяз цеха";
             FormClosing += OnFormClosing;
-            //FormClosed += OnFormClosed;
             Load += PlanZagrVyaz_Load;
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);

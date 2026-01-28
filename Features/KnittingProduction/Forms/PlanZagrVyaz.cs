@@ -79,6 +79,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         string _xColumn = string.Empty;
         int _xPzvID = 0;
         private bool _isCountTabKM = false;
+        private bool _closing;
 
         private List<KnitWorkingShiftSmen> _zonesCache = new List<KnitWorkingShiftSmen>();
 
@@ -2738,6 +2739,7 @@ private async Task InitializeBindingsAsync()
                     record.olPzvDateNaznTab = _tab == 0 ? null : DateTime.Now;
                     record.olPzvSekNazn = record.olSekEd;
                     record.olPzvKolNazn = record.olKol;
+                    record.olPzvChasNazn = record.olPzvNChasi;
                     if (_tab == 999)
                     {
                         record.olPzvDateStart = DateTime.Now;
@@ -4096,16 +4098,59 @@ private async Task InitializeBindingsAsync()
         // //   _loadCts?.Cancel();
         //   // base.OnFormClosed(e);
         //}
-        private async void OnFormClosing(object sender, FormClosingEventArgs e)
+        private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             try
             {
+                Application.Idle -= ExpandGroupsOnIdle;
+                _loadCts?.Cancel();
+                //base.OnFormClosed(e);
+                _loadCts?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка OnFormClosed: {ex.Message}");
+            }
+        }
+        //protected override async void OnFormClosing(FormClosingEventArgs e)
+        //{
+        //    _loadCts?.Cancel();
+
+        //    if (_sbHelper != null)
+        //        await _sbHelper.DisposeAsync();
+
+        //    _loadCts?.Dispose();
+        //    base.OnFormClosing(e);
+        //}
+        protected void OnFormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                //_loadCts?.Cancel();
+
+                //if (_sbHelper != null)
+                //    _sbHelper.DisposeAsync();
+
+                ////_loadCts?.Dispose();
+                //base.OnFormClosing(e);
+
+
+                if (_closing) return;
+                _closing = true;
+
+                gridViewPlanTotalHoursByKnitMachine.FocusedRowChanged -= gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged;
+                gridViewZadanyListByMachine.FocusedRowChanged -= gridViewZadanyListByMachine_FocusedRowChanged;
+                gridViewRzvPachListByNom.FocusedRowChanged -= gridViewRzvPachListByNom_FocusedRowChanged;
+                gridViewPZVOperList.FocusedRowChanged -= gridViewPZVOperList_FocusedRowChanged;
+                advBandedGridViewSmenZadany.FocusedRowChanged -= advBandedGridViewSmenZadany_FocusedRowChanged;
+
                 _loadCts?.Cancel();
 
                 if (_sbHelper != null)
-                    await _sbHelper.DisposeAsync();
-
-                _loadCts?.Dispose();
+                {
+                    // НЕ ждём, чтобы не блокировать закрытие формы
+                    _ = _sbHelper.DisposeAsync();
+                }
             }
             catch (Exception ex)
             {
