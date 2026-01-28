@@ -4098,6 +4098,19 @@ private async Task InitializeBindingsAsync()
         // //   _loadCts?.Cancel();
         //   // base.OnFormClosed(e);
         //}
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                _broker.StopListening();
+                
+            }
+            finally
+            {
+                base.OnFormClosed(e);
+            }
+        }
+
         private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             try
@@ -4143,7 +4156,7 @@ private async Task InitializeBindingsAsync()
                 gridViewRzvPachListByNom.FocusedRowChanged -= gridViewRzvPachListByNom_FocusedRowChanged;
                 gridViewPZVOperList.FocusedRowChanged -= gridViewPZVOperList_FocusedRowChanged;
                 advBandedGridViewSmenZadany.FocusedRowChanged -= advBandedGridViewSmenZadany_FocusedRowChanged;
-
+                _refreshCoordinator?.Dispose();
                 _loadCts?.Cancel();
 
                 if (_sbHelper != null)

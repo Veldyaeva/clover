@@ -31,7 +31,7 @@ namespace SewingProduction.Core.Class.Settings
         /// <summary>
         /// Минимальный интервал между обновлениями одного объекта (мс). 0 = отключен.
         /// </summary>
-        public int ThrottleMs { get; set; } = 1000;
+        public int ThrottleMs { get; set; } = 10;//1000;
 
         /// <summary>
         /// Максимальное время ожидания накопления изменений (мс).
