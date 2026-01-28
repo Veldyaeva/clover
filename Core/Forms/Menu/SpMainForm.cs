@@ -230,6 +230,8 @@ namespace SewingProduction
         }
 
         #endregion
+
+        #region help
         private void SpMainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
@@ -246,7 +248,12 @@ namespace SewingProduction
             var helpForm = new HelpForm(this._formManager, filePath);
             helpForm.ShowDialog();
         }
-
+        private void справкаtoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var f = new SewingProduction.HelpAdmin.Forms.AdminHelpEditorForm(this._formManager);
+            f.Show();
+        }
+        #endregion
         private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm(new CuttingForm(), sender);
@@ -265,11 +272,6 @@ namespace SewingProduction
         private void табельToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm(new TabelMain(), sender);
-        }
-        private void справкаtoolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var f = new SewingProduction.HelpAdmin.Forms.AdminHelpEditorForm(this._formManager);
-            f.Show();
         }
         private void аналитикаToolStripMenuItem_Click(object sender, EventArgs e)
         {

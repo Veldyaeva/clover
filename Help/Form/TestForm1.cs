@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Diagnostics;
 using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.Articul.Service;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -41,7 +42,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             //_serviceBrokerForTable1.StartBroker();
             //_serviceBrokerForTable1.StartListening("TestID, TestName, TestFirst, TestSecond", "testTable1");
-        //    _serviceBrokerForTable1.StartBroker();
+            //    _serviceBrokerForTable1.StartBroker();
             _serviceBrokerForTable1.StartListening("TestID, TestName", "testTable1");
             //_serviceBrokerForTable2.StartBroker();
             //_serviceBrokerForTable2.StartListening("idZeh, nameZeh, address, idProizv", "ZehList");
@@ -135,6 +136,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             MessageBox.Show(CurrentUser.User.UserName);
         }
 
+
         private static DataTable ToDataTable<T>(IEnumerable<T> items)
         {
             var table = new DataTable(typeof(T).Name);
@@ -152,5 +154,23 @@ namespace SewingProduction.Features.UserDistribution.Forms
             }
             return table;
         }
+        #region Test For Lena
+        private readonly ArticulEditAdvanceService _articulEdAdvDataService = new ArticulEditAdvanceService();
+        private BindingSource _bindingSourceArtKod = new BindingSource();
+        private async void customGridControlColumn1_Load(object sender, EventArgs e)
+        {
+            customGridControlColumn1.InitializeAccess(
+                _user,
+                this.Name,
+                new List<string> { "view_sp_articul" }
+            );
+
+            var data = await _articulEdAdvDataService.GetArtByKoddAsync("1000000");
+
+            _bindingSourceArtKod.DataSource = data;
+            customGridControlColumn1.DataSource = _bindingSourceArtKod;
+        }
+
+        #endregion
     }
 }
