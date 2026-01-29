@@ -6,6 +6,9 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
+using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -151,6 +154,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     await InitializeAsync();
                     await InitServiceBrokerAsync();
+                    InitHeaderButtonTags();
                 };
 
                 SetupPzvDateStartColumn();
@@ -161,6 +165,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                SetupRowStyling();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -195,6 +200,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                SetupRowStyling();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -1497,6 +1503,77 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3.CustomUnboundColumnData += BandedGridView3_CustomUnboundColumnData;
         }
 
+        /// <summary>
+        /// Настраивает подсветку текущей строки для bandedGridView3 и advBandedGridView1
+        /// </summary>
+        private void SetupRowStyling()
+        {
+            try
+            {
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.RowStyle -= BandedGridView3_RowStyle;
+                    bandedGridView3.RowStyle += BandedGridView3_RowStyle;
+                }
+
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.RowStyle -= AdvBandedGridView1_RowStyle;
+                    advBandedGridView1.RowStyle += AdvBandedGridView1_RowStyle;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при настройке подсветки строк: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Обработчик стиля строк для bandedGridView3 - подсветка фокусной строки
+        /// </summary>
+        private void BandedGridView3_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            try
+            {
+                var view = sender as BandedGridView;
+                if (view == null) return;
+                if (e.RowHandle < 0) return;
+
+                // Подсветка фокусной строки
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.Coral;
+                    e.Appearance.BackColor2 = Color.Coral;
+                    e.HighPriority = true;
+                    return;
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Обработчик стиля строк для advBandedGridView1 - подсветка фокусной строки
+        /// </summary>
+        private void AdvBandedGridView1_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            try
+            {
+                var view = sender as AdvBandedGridView;
+                if (view == null) return;
+                if (e.RowHandle < 0) return;
+
+                // Подсветка фокусной строки (не применяем к группам)
+                if (!view.IsGroupRow(e.RowHandle) && e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.Coral;
+                    e.Appearance.BackColor2 = Color.Coral;
+                    e.HighPriority = true;
+                    return;
+                }
+            }
+            catch { }
+        }
+
         private void BandedGridView3_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
         {
             if (e.Column != gridColumn8 || !e.IsGetData)
@@ -1933,9 +2010,491 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
-            await ReloadCurrentTabAsync();
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                string tag = button.Tag?.ToString() ?? string.Empty;
 
+                switch (tag)
+                {
+                    case "refresh":
+                        await ReloadCurrentTabAsync();
+                        break;
+                    case "collapse-to-vm":
+                        CollapseToFirstLevel();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "collapse-to-pachka":
+                        CollapseToPachkaLevel();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "collapse-all":
+                        CollapseAllGroups();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "expand-all":
+                        ExpandAllGroups();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "toggle-expand":
+                        ToggleExpandGroups();
+                        UpdateToggleButtonCaption();
+                        break;
+                    default:
+                        // Если тег не установлен, пытаемся определить по Caption
+                        string caption = button.Caption ?? string.Empty;
+                        if (caption.Contains("Обновить", StringComparison.OrdinalIgnoreCase))
+                        {
+                            await ReloadCurrentTabAsync();
+                        }
+                        else if (caption.Contains("Свернуть до ВМ", StringComparison.OrdinalIgnoreCase))
+                        {
+                            CollapseToFirstLevel();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Свернуть до пачки", StringComparison.OrdinalIgnoreCase))
+                        {
+                            CollapseToPachkaLevel();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Свернуть", StringComparison.OrdinalIgnoreCase))
+                        {
+                            CollapseAllGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Показать всё", StringComparison.OrdinalIgnoreCase))
+                        {
+                            ExpandAllGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Показать", StringComparison.OrdinalIgnoreCase) && !caption.Contains("всё", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Кнопка "Показать" (не "Показать всё")
+                            ToggleExpandGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Свернуть", StringComparison.OrdinalIgnoreCase) && !caption.Contains("всё", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Кнопка "Свернуть" (не "Свернуть всё") - это та же кнопка переключения
+                            ToggleExpandGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        break;
+                }
+            }
         }
+
+        #region Header Buttons
+
+        /// <summary>
+        /// Инициализирует теги для кнопок в заголовке групп
+        /// </summary>
+        private void InitHeaderButtonTags()
+        {
+            // layoutControlGroup1 — основная группа с гридом
+            TagByCaption(layoutControlGroup1, new (string caption, string tag)[] {
+                ("Обновить", "refresh"),
+                ("Свернуть до ВМ", "collapse-to-vm"),
+                ("Свернуть до пачки", "collapse-to-pachka"),
+                ("Показать всё", "expand-all"),
+                ("Показать", "toggle-expand"),
+            });
+            
+            // Обновляем подпись кнопки переключения после небольшой задержки,
+            // чтобы грид успел загрузиться
+            if (layoutControlGroup1 != null)
+            {
+                this.BeginInvoke(new Action(() =>
+                {
+                    UpdateToggleButtonCaption();
+                }));
+            }
+            
+            // Обновляем подпись кнопки переключения после небольшой задержки,
+            // чтобы грид успел загрузиться
+            if (layoutControlGroup1 != null)
+            {
+                this.BeginInvoke(new Action(() =>
+                {
+                    UpdateToggleButtonCaption();
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Проставляет теги кнопкам по их подписям
+        /// </summary>
+        private void TagByCaption(LayoutControlGroup group, IEnumerable<(string caption, string tag)> map)
+        {
+            if (group == null || group.CustomHeaderButtons == null) return;
+
+            foreach (var (caption, tag) in map)
+            {
+                var btn = group.CustomHeaderButtons
+                               .OfType<GroupBoxButton>()
+                               .FirstOrDefault(b => string.Equals(b.Caption, caption, StringComparison.OrdinalIgnoreCase));
+                if (btn != null && (btn.Tag == null || string.IsNullOrWhiteSpace(btn.Tag.ToString())))
+                {
+                    btn.Tag = tag;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Поиск кнопки по тегу
+        /// </summary>
+        private static GroupBoxButton FindButtonByTag(LayoutControlGroup group, string tag) =>
+            group?.CustomHeaderButtons?.OfType<GroupBoxButton>()
+                 .FirstOrDefault(b => string.Equals(b.Tag as string, tag, StringComparison.OrdinalIgnoreCase));
+
+        /// <summary>
+        /// Обновляет подпись кнопки "Показать" в зависимости от текущего состояния групп
+        /// </summary>
+        private void UpdateToggleButtonCaption()
+        {
+            try
+            {
+                var toggleButton = FindButtonByTag(layoutControlGroup1, "toggle-expand");
+                if (toggleButton == null) return;
+
+                bool allExpanded = AreAllGroupsExpanded();
+                toggleButton.Caption = allExpanded ? "Свернуть" : "Показать";
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при обновлении подписи кнопки: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет, все ли группы развернуты
+        /// </summary>
+        private bool AreAllGroupsExpanded()
+        {
+            try
+            {
+                bool hasAnyGroups = false;
+                bool allExpanded = true;
+
+                // Проверяем детализацию в основном гриде
+                if (bandedGridView3 != null && bandedGridView3.DataRowCount > 0)
+                {
+                    for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                    {
+                        int rowHandle = bandedGridView3.GetRowHandle(i);
+                        if (bandedGridView3.IsValidRowHandle(rowHandle))
+                        {
+                            hasAnyGroups = true;
+                            bool isExpanded = bandedGridView3.GetMasterRowExpanded(rowHandle);
+                            if (!isExpanded)
+                            {
+                                allExpanded = false;
+                                break; // Найдена хотя бы одна свернутая группа
+                            }
+                        }
+                    }
+                }
+
+                // Проверяем группы строк во втором уровне
+                if (allExpanded && advBandedGridView1 != null && advBandedGridView1.RowCount > 0)
+                {
+                    for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                    {
+                        int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                        if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                        {
+                            hasAnyGroups = true;
+                            bool isExpanded = advBandedGridView1.GetRowExpanded(rowHandle);
+                            if (!isExpanded)
+                            {
+                                allExpanded = false;
+                                break; // Найдена хотя бы одна свернутая группа
+                            }
+                        }
+                    }
+                }
+
+                // Если нет групп, считаем что все "развернуто" (по умолчанию показываем "Свернуть")
+                return hasAnyGroups ? allExpanded : true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при проверке состояния групп: {ex.Message}");
+                return false; // В случае ошибки считаем, что не все развернуты
+            }
+        }
+
+        /// <summary>
+        /// Сворачивает до первого уровня группировки (до ВМ) - сворачивает только детализацию в основном гриде,
+        /// не трогая группы внутри детализации
+        /// </summary>
+        private void CollapseToFirstLevel()
+        {
+            try
+            {
+                // Сворачиваем только детализацию в основном гриде (master-detail)
+                // Это сворачивает до уровня ВМ, оставляя видимыми только строки первого уровня
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все детализированные строки (детализация по ВМ)
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при сворачивании до первого уровня: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Сворачивает до уровня пачки - разворачивает детализацию в основном гриде и сворачивает группы по __Header,
+        /// чтобы показать только заголовки групп по пачкам, но не строки операций внутри групп.
+        /// </summary>
+        private void CollapseToPachkaLevel()
+        {
+            try
+            {
+                // Разворачиваем детализацию в основном гриде, чтобы показать детализацию
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Разворачиваем все детализированные строки (детализация по ВМ)
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, true);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Сворачиваем группы строк во втором уровне (advBandedGridView1) по __Header,
+                // чтобы показать только заголовки групп по пачкам, но не строки операций внутри
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все группы строк (группы по пачкам - __Header)
+                        // Это покажет заголовки пачек, но строки операций внутри останутся свернутыми
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                // Сворачиваем группу, чтобы видеть только её заголовок (пачку), но не строки внутри
+                                advBandedGridView1.SetRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при сворачивании до уровня пачки: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Сворачивает все группы в BandedGridView
+        /// </summary>
+        private void CollapseAllGroups()
+        {
+            try
+            {
+                // Сворачиваем детализацию в основном гриде
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все детализированные строки
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Сворачиваем группы строк во втором уровне (если есть группировка)
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все группы строк
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                advBandedGridView1.SetRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при сворачивании групп: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Разворачивает все группы в BandedGridView
+        /// </summary>
+        private void ExpandAllGroups()
+        {
+            try
+            {
+                // Разворачиваем детализацию в основном гриде
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Разворачиваем все детализированные строки
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, true);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Разворачиваем группы строк во втором уровне (если есть группировка)
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Разворачиваем все группы строк
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                advBandedGridView1.SetRowExpanded(rowHandle, true);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при разворачивании групп: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Переключает состояние групп (сворачивает развернутые, разворачивает свернутые)
+        /// </summary>
+        private void ToggleExpandGroups()
+        {
+            try
+            {
+                // Переключаем детализацию в основном гриде
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Переключаем состояние всех детализированных строк
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bool isExpanded = bandedGridView3.GetMasterRowExpanded(rowHandle);
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, !isExpanded);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Переключаем группы строк во втором уровне (если есть группировка)
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Переключаем состояние всех групп строк
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                bool isExpanded = advBandedGridView1.GetRowExpanded(rowHandle);
+                                advBandedGridView1.SetRowExpanded(rowHandle, !isExpanded);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при переключении групп: {ex.Message}");
+            }
+        }
+
+        #endregion
     }
 }
 
