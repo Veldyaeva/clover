@@ -39,16 +39,16 @@ namespace SewingProduction.Features.Articul.Service
                     mod_k,
                     razm_k,
                     sost_k,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod1),  ''))  AS kod1,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod2),  ''))  AS kod2,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod3),  ''))  AS kod3,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod4),  ''))  AS kod4,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod5),  ''))  AS kod5,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod6),  ''))  AS kod6,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod7),  ''))  AS kod7,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod8),  ''))  AS kod8,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod9),  ''))  AS kod9,
-                    TRY_CONVERT(int, NULLIF(TRIM(kod10), ''))  AS kod10,
+                    NULLIF(LTRIM(RTRIM(kod1)),  '') AS Kod1,
+                    NULLIF(LTRIM(RTRIM(kod2)),  '') AS Kod2,
+                    NULLIF(LTRIM(RTRIM(kod3)),  '') AS Kod3,
+                    NULLIF(LTRIM(RTRIM(kod4)),  '') AS Kod4,
+                    NULLIF(LTRIM(RTRIM(kod5)),  '') AS Kod5,
+                    NULLIF(LTRIM(RTRIM(kod6)),  '') AS Kod6,
+                    NULLIF(LTRIM(RTRIM(kod7)),  '') AS Kod7,
+                    NULLIF(LTRIM(RTRIM(kod8)),  '') AS Kod8,
+                    NULLIF(LTRIM(RTRIM(kod9)),  '') AS Kod9,
+                    NULLIF(LTRIM(RTRIM(kod10)), '') AS Kod10,
                     compName
                 FROM kompl
                 WHERE articul_k = @articul_k";
@@ -115,14 +115,14 @@ namespace SewingProduction.Features.Articul.Service
         }
         private string BuildCompositionKey(KomplModel model)
         {
-            var codes = new List<int?>
+            var codes = new List<string>
             {
                 model.Kod1, model.Kod2, model.Kod3, model.Kod4, model.Kod5,
                 model.Kod6, model.Kod7, model.Kod8, model.Kod9, model.Kod10
             };
             // убираем null/0, сортируем, превращаем в строку
-            return string.Join(";", codes.Where(c => c.HasValue && c.Value != 0)
-                                         .OrderBy(c => c.Value));
+            return string.Join(";", codes.Where(c => c != "")
+                                         .OrderBy(c => c));
         }
         public KomplCheckInfo GetKomplRazmCheckInfo(DevExpress.XtraGrid.Views.Grid.GridView view)
         {

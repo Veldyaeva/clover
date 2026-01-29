@@ -527,6 +527,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3.OptionsView.EnableAppearanceEvenRow = true;
             bandedGridView3.OptionsView.ShowColumnHeaders = false;
             bandedGridView3.OptionsView.ShowFooter = true;
+            bandedGridView3.OptionsView.ShowGroupPanel = false;
             // 
             // gridBand30
             // 
@@ -936,7 +937,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup1.Name = "layoutControlGroup1";
             layoutControlGroup1.Size = new System.Drawing.Size(1309, 567);
             layoutControlGroup1.Text = " ";
-            layoutControlGroup1.CustomDrawHeaderButton += layoutControlGroup1_CustomDrawHeaderButton;
+            layoutControlGroup1.CustomButtonClick += layoutControlGroup1_CustomButtonClick;
             // 
             // layoutControlItem1
             // 

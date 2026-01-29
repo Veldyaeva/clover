@@ -13,10 +13,10 @@ namespace SewingProduction.Core.Class
             BackColor = Color.FromArgb(160, Color.White), // полупрозрачный серый
             Visible = false
         };
-        private PictureBox spinnerPb = new PictureBox
+        public PictureBox spinnerPb = new PictureBox
         {
             SizeMode = PictureBoxSizeMode.CenterImage,
-            Size = new Size(64, 64),
+            Size = new Size(350, 350),
             Anchor = AnchorStyles.None
         };
         public void ShowOverlay() => overlay.Visible = true;
@@ -31,7 +31,7 @@ namespace SewingProduction.Core.Class
         {
 
             // Путь к GIF-файлу; положите файл рядом с .exe или укажите абсолютный путь.
-            string gifPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "loading_dude.gif");
+            string gifPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "loading-thinking.gif");
             if (File.Exists(gifPath))
             {
                 spinnerPb.Image = Image.FromFile(gifPath); // сохраняет анимацию

@@ -1929,9 +1929,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             base.Dispose();
         }
 
-        private async void layoutControlGroup1_CustomDrawHeaderButton(object sender, GroupBoxButtonCustomDrawEventArgs e)
+
+
+        private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
             await ReloadCurrentTabAsync();
+
         }
     }
 }

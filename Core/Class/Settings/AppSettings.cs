@@ -26,17 +26,17 @@ namespace SewingProduction.Core.Class.Settings
         /// <summary>
         /// Задержка перед выполнением после последнего события (мс).
         /// </summary>
-        public int DebounceMs { get; set; } = 500;
+        public int DebounceMs { get; set; } = 5000;
 
         /// <summary>
         /// Минимальный интервал между обновлениями одного объекта (мс). 0 = отключен.
         /// </summary>
-        public int ThrottleMs { get; set; } = 10;//1000;
+        public int ThrottleMs { get; set; } = 10000;//1000;
 
         /// <summary>
         /// Максимальное время ожидания накопления изменений (мс).
         /// </summary>
-        public int MaxWaitMs { get; set; } = 3000;
+        public int MaxWaitMs { get; set; } = 30000;
 
         /// <summary>
         /// Максимальное количество объектов в одном батче.
