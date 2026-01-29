@@ -276,21 +276,56 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             return fn();
         }
 
+        //private async Task RestartDataByObjectNameAsync(string objectName)
+        //{
+        //    await InvokeOnUiAsync(async () =>
+        //    {
+        //        Debug.WriteLine($"[PlanZagrVyaz] RestartDataByObjectNameAsync(UI): {objectName}");
+
+        //        if (string.Equals(objectName, "GetPlanZagrVyazByPachList", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //        //    await LoadPlanTotalHoursByKnitMachineDataAsync();
+        //        }
+        //        else if (string.Equals(objectName, "getSmenZadanyVyaz", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            await LoadSmenZadanyVyazDataAsync();
+        //        }
+        //    });
+        //}
         private async Task RestartDataByObjectNameAsync(string objectName)
         {
-            await InvokeOnUiAsync(async () =>
+            try
             {
-                Debug.WriteLine($"[PlanZagrVyaz] RestartDataByObjectNameAsync(UI): {objectName}");
+                if (string.IsNullOrWhiteSpace(objectName))
+                    return;
+                await InvokeOnUiAsync(async () =>
+                {
 
-                if (string.Equals(objectName, "GetPlanZagrVyazByPachList", StringComparison.OrdinalIgnoreCase))
-                {
-                    await LoadPlanTotalHoursByKnitMachineDataAsync();
-                }
-                else if (string.Equals(objectName, "getSmenZadanyVyaz", StringComparison.OrdinalIgnoreCase))
-                {
-                    await LoadSmenZadanyVyazDataAsync();
-                }
-            });
+                    if (_objectRestartMap.TryGetValue(objectName, out var action))
+                    {
+                        Debug.WriteLine($"[PlanZagrVyaz] RestartDataByObjectNameAsync(UI): {objectName}");
+                        await action();
+                    }
+                });
+
+            }
+            catch (ArgumentException ex)
+            {
+                // именно дубликаты ключей
+                MessageBox.Show(
+                    $"RestartDataByObjectNameAsync Ошибка перезапуска {objectName}: {ex.Message}",
+                    "Duplicate key",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"RestartDataByObjectNameAsync Ошибка перезапуска {objectName}: {ex.Message}",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         //private async Task RestartDataByObjectNameAsync(string objectName)
@@ -1255,6 +1290,8 @@ private async Task InitializeBindingsAsync()
                                     gridControlSmenZadany
                                 );
                                 //----------------------
+                                Application.Idle -= ExpandGroupsOnIdle;
+                                Application.Idle += ExpandGroupsOnIdle;
                                 gridControlSmenZadany.EndUpdate();
                             });
 
@@ -3911,7 +3948,7 @@ private async Task InitializeBindingsAsync()
                 {
                     case 4:
                         //MessageBox.Show("Обновление сменного задания");
-                        //await LoadSmenZadanyVyazDataAsync();
+                        await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod);
                         //SetGroupExpandState();
                         break;
                     case 6:
