@@ -67,6 +67,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Презентер, который собирает иерархию мастер-деталь и настраивает события.
         /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
+        /// <summary>
+        /// Список ID незавершённых операций (pzvID) для подсветки красным цветом
+        /// </summary>
+        private HashSet<int> _unfinishedOperationIds = new HashSet<int>();
         private CheckBox _adminToggle;
         private CheckBox _expandNrToggle;
         private RepositoryItemProgressBar _statusProgressBar;
@@ -457,6 +461,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     var canClose = await ProcessOperationsOnShiftEndAsync();
                     if (!canClose)
                         return;
+                    
+                    // Очищаем список незавершённых операций при успешном закрытии смены
+                    _unfinishedOperationIds.Clear();
+                    // Обновляем отображение, чтобы убрать подсветку
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        bandedGridView3?.RefreshData();
+                        advBandedGridView1?.RefreshData();
+                    }));
                     //// снимаем назначение у всех НЕ начатых в текущей смене
                     //await _orchestrator.UnassignNotStartedByShiftAsync(_currentShiftId);
 
@@ -773,6 +786,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             var inProgress = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
             if (inProgress.Any())
             {
+                // Сохраняем ID незавершённых операций для подсветки
+                _unfinishedOperationIds = new HashSet<int>(inProgress.Where(r => r.pzvID > 0).Select(r => r.pzvID));
+                
+                // Сразу обновляем отображение для подсветки незавершённых операций
+                bandedGridView3?.RefreshData();
+                advBandedGridView1?.RefreshData();
+                
+                // Показываем сообщение после обновления отображения
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
                 //foreach (var row in inProgress)
@@ -1287,6 +1308,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 var updated = await updateFunc(row.pzvID);
                 var newValue = getDate(updated) ?? getDate(row);
+                var oldValue = getDate(row);
                 setDate(row, newValue);
                 // Также обновляем мастер-коллекцию, чтобы проверки при закрытии смены видели актуальные даты
                 var masterRow = _planPresenter?.AllRows?.FirstOrDefault(r => r != null && r.pzvID == row.pzvID);
@@ -1294,6 +1316,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     setDate(masterRow, newValue);
                 }
+                
+                // Если операция завершена (установлена дата окончания), убираем её из списка незавершённых
+                if (column.FieldName == "pzvDateEnd" && newValue != null && oldValue == null)
+                {
+                    _unfinishedOperationIds.Remove(row.pzvID);
+                }
+                
                 _view.PostEditor();
                 _view.SetRowCellValue(rowHandle, column, newValue);
                 _view.PostEditor();
@@ -1301,6 +1330,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _view.UpdateCurrentRow();
                 _view.RefreshRowCell(rowHandle, column);
                 _view.RefreshData();
+                
+                // Обновляем подсветку строк после изменения даты
+                if (column.FieldName == "pzvDateEnd")
+                {
+                    _view.RefreshRow(rowHandle);
+                    // Также обновляем в детализации, если она видна
+                    if (advBandedGridView1 != null)
+                    {
+                        advBandedGridView1.RefreshData();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1529,7 +1569,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Обработчик стиля строк для bandedGridView3 - подсветка фокусной строки
+        /// Обновляет список незавершённых операций на основе текущих данных
+        /// </summary>
+        private void UpdateUnfinishedOperationsList()
+        {
+            try
+            {
+                var rows = _planPresenter.AllRows?.Where(r => r != null && r.pzvID > 0).ToList() ?? new List<KnitterPZVModel>();
+                // Находим незавершённые операции: начатые, но не завершённые
+                var unfinished = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
+                _unfinishedOperationIds = new HashSet<int>(unfinished.Where(r => r.pzvID > 0).Select(r => r.pzvID));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при обновлении списка незавершённых операций: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Обработчик стиля строк для bandedGridView3 - подсветка фокусной строки и незавершённых операций
         /// </summary>
         private void BandedGridView3_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
         {
@@ -1539,7 +1597,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (view == null) return;
                 if (e.RowHandle < 0) return;
 
-                // Подсветка фокусной строки
+                var row = view.GetRow(e.RowHandle) as KnitterPZVModel;
+                
+                // Подсветка незавершённых операций красным цветом (приоритет над фокусной строкой)
+                if (row != null && _unfinishedOperationIds.Contains(row.pzvID))
+                {
+                    e.Appearance.BackColor = Color.LightCoral;
+                    e.Appearance.BackColor2 = Color.LightCoral;
+                    e.HighPriority = true;
+                    return;
+                }
+
+                // Подсветка фокусной строки (только если не незавершённая)
                 if (e.RowHandle == view.FocusedRowHandle)
                 {
                     e.Appearance.BackColor = Color.Coral;
@@ -1552,7 +1621,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Обработчик стиля строк для advBandedGridView1 - подсветка фокусной строки
+        /// Обработчик стиля строк для advBandedGridView1 - подсветка фокусной строки и незавершённых операций
         /// </summary>
         private void AdvBandedGridView1_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
         {
@@ -1562,8 +1631,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (view == null) return;
                 if (e.RowHandle < 0) return;
 
-                // Подсветка фокусной строки (не применяем к группам)
-                if (!view.IsGroupRow(e.RowHandle) && e.RowHandle == view.FocusedRowHandle)
+                // Не применяем стили к группам
+                if (view.IsGroupRow(e.RowHandle))
+                    return;
+
+                var row = view.GetRow(e.RowHandle) as KnitterPZVModel;
+                
+                // Подсветка незавершённых операций красным цветом (приоритет над фокусной строкой)
+                if (row != null && _unfinishedOperationIds.Contains(row.pzvID))
+                {
+                    e.Appearance.BackColor = Color.LightCoral;
+                    e.Appearance.BackColor2 = Color.LightCoral;
+                    e.HighPriority = true;
+                    return;
+                }
+
+                // Подсветка фокусной строки (только если не незавершённая)
+                if (e.RowHandle == view.FocusedRowHandle)
                 {
                     e.Appearance.BackColor = Color.Coral;
                     e.Appearance.BackColor2 = Color.Coral;
