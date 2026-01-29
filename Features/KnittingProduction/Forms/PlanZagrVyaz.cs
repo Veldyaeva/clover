@@ -193,10 +193,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                                                            //SetGroupExpandState(); // sync-метод — просто вызываем
                     },
 
-                    //["knitWorkingShiftNewCurrentSmen_view"] = async () =>
-                    //{
-                    //    SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание
-                    //},
+                    ["knitWorkingShiftNewCurrentSmen_view"] = async () =>
+                    {
+                        SmenZadanyFocusedRowChanged(advBandedGridViewSmenZadany.FocusedRowHandle); // наряд-задание
+                    },
 
                     ["GetPlanZagrVyazByPachList"] = async () =>
                     {
@@ -4092,29 +4092,52 @@ private async Task InitializeBindingsAsync()
 
         private async void advBandedGridViewSmenZadany_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            //var col = advBandedGridViewSmenZadany.Columns["chasNaznZadGroup"];
-            //MessageBox.Show($"{col.ColumnType}");
-            var currentSmenZadanyVyaz = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
-            if (currentSmenZadanyVyaz == null)
-                return;
-            await LoadKnitWorkingShiftSmenToMoveDataAsync(currentSmenZadanyVyaz.kwsKmaID);
-            int _xTab = currentSmenZadanyVyaz.kwsTabStart;
-            int _xKmlID = currentSmenZadanyVyaz.kwsmlKmlID;
-            int _groupLevel = gridViewNaryadZadany.GetRowLevel(e.FocusedRowHandle);
-            if (currentSmenZadanyVyaz.typeID == 1 && !gridViewNaryadZadany.IsGroupRow(e.FocusedRowHandle))
+            try
             {
-                // наряд-задание по В/М
-                _xTab = 0;
-                //await LoadNaryadZadanyVyazDataAsync(currentSmenZadanyVyaz.kwsTabStart, 0);
+                SmenZadanyFocusedRowChanged(e.FocusedRowHandle);
             }
-            else if (currentSmenZadanyVyaz.typeID == 2 || (gridViewNaryadZadany.IsGroupRow(e.FocusedRowHandle) && new[] { 0, 1 }.Contains(_groupLevel)))
+            catch (Exception ex)
             {
-                // наряд-задание по таб№
-                _xKmlID = 0;
-                //await LoadNaryadZadanyVyazDataAsync(0, currentSmenZadanyVyaz.kwsmlKmlID);
+                MessageBox.Show($"Ошибка advBandedGridViewSmenZadany_FocusedRowChanged: {ex.Message}");
             }
-            await LoadNaryadZadanyVyazDataAsync(_xTab, _xKmlID);
-            gridViewNaryadZadany.RefreshData();
+        }
+        private async void SmenZadanyFocusedRowChanged(int _focusedRowHandle)
+        {
+            try
+            {
+                //var col = advBandedGridViewSmenZadany.Columns["chasNaznZadGroup"];
+                //MessageBox.Show($"{col.ColumnType}");
+                var currentSmenZadanyVyaz = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
+                if (currentSmenZadanyVyaz == null)
+                    return;
+                await LoadKnitWorkingShiftSmenToMoveDataAsync(currentSmenZadanyVyaz.kwsKmaID);
+                int _xTab = currentSmenZadanyVyaz.kwsTabStart;
+                int _xKmlID = currentSmenZadanyVyaz.kwsmlKmlID;
+                int _groupLevel = gridViewNaryadZadany.GetRowLevel(_focusedRowHandle);
+
+                //if (!new[] { 0, 1 }.Contains(_groupLevel))
+                //{
+                //    // level НЕ 0 и НЕ 1
+                //}
+                if (currentSmenZadanyVyaz.typeID == 1 && !gridViewNaryadZadany.IsGroupRow(_focusedRowHandle))
+                {
+                    // наряд-задание по В/М
+                    _xTab = 0;
+                    //await LoadNaryadZadanyVyazDataAsync(currentSmenZadanyVyaz.kwsTabStart, 0);
+                }
+                else if (currentSmenZadanyVyaz.typeID == 2 || (gridViewNaryadZadany.IsGroupRow(_focusedRowHandle) && new[] { 0, 1 }.Contains(_groupLevel)))
+                {
+                    // наряд-задание по таб№
+                    _xKmlID = 0;
+                    //await LoadNaryadZadanyVyazDataAsync(0, currentSmenZadanyVyaz.kwsmlKmlID);
+                }
+                await LoadNaryadZadanyVyazDataAsync(_xTab, _xKmlID);
+                gridViewNaryadZadany.RefreshData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка smenZadanyFocusedRowChanged: {ex.Message}");
+            }
         }
 
         private void customSimpleButton1_Click(object sender, EventArgs e)
