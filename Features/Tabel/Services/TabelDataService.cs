@@ -94,7 +94,7 @@ namespace SewingProduction.Features.Tabel.Services
                     }
                     if (idGroup == 20)
                     {
-                        string query = $"select gr AS tnid, naimen from zlgr where gr in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) order by gr";
+                        string query = $"select gr as tnid, naimen from zlgr where gr in(select podrID from userPodr where userId =  {idUser} and podrTableId = {idGroup}) order by gr";
 
                         var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
                         return result.ToList();
@@ -113,13 +113,13 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
         }
-        public async Task<List<TimeSheet>> GetTabelGrAsync(string mg, int gr)
+        public async Task<List<TimeSheet>> GetTabelGrAsync(string mg, int gr, int groupID)
         {
             try
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select *,round((tItogViewChas+0.0)/dl_d,2) as tItogD  from TimeSheetUnion where mg = '{mg}' and ttabn = {gr} order by ttabn,ttabnsort,fio asc ";
+                    string query = $"select *,round((tItogViewChas+0.0)/dl_d,2) as tItogD  from TimeSheetUnion where mg = '{mg}' and ttabn = {gr} and podrTableId = {groupID} order by ttabn,ttabnsort,fio asc ";
 
                     var result = await connection.QueryAsync<TimeSheet>(query, new Dictionary<string, object> { });
                     return result.ToList();
@@ -196,6 +196,24 @@ namespace SewingProduction.Features.Tabel.Services
             {
                 _logger.LogErrorAsync(ex, $"Ошибка при получении данных userPodr");
                 return 0;
+            }
+        }
+        public async Task<List<WorkTypes>> GetWorkTypesAsync(int idGroup)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                        string query = $"select * from WorkTypesTabel where podrId = {idGroup} order by id";
+                        var result = await connection.QueryAsync<WorkTypes>(query, new Dictionary<string, object> { });
+                        return result.ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
+                return null;
             }
         }
     }

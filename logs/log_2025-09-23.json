@@ -1,0 +1,38 @@
+[
+  {
+    "Timestamp": "2025-09-23T12:27:52.7816461Z",
+    "Message": "GridSettingsManager: Настройки загружены для 'CuttingForm_customGridRzu_gridViewRzu'",
+    "StackTrace": "",
+    "Context": "LoadSettings"
+  },
+  {
+    "Timestamp": "2025-09-23T12:27:52.7917066Z",
+    "Message": "GridSettingsManager: Включено автоматическое сохранение для 'CuttingForm_customGridRzu_gridViewRzu'",
+    "StackTrace": "",
+    "Context": "EnableAutoSettings"
+  },
+  {
+    "Timestamp": "2025-09-23T12:27:55.9399164Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'CuttingForm_customGridRzu_gridViewRzu'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-23T12:27:56.3120493Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'UnknownForm_customGridRzu_gridViewRzu'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-23T12:27:56.3134147Z",
+    "Message": "GridSettingsManager: Настройки сохранены для 'CuttingForm_customGridRzu_gridViewRzu'",
+    "StackTrace": "",
+    "Context": "SaveSettings"
+  },
+  {
+    "Timestamp": "2025-09-23T12:27:56.3142456Z",
+    "Message": "GridSettingsManager: Отключено автоматическое сохранение для 'CuttingForm_customGridRzu_gridViewRzu'",
+    "StackTrace": "",
+    "Context": "DisableAutoSettings"
+  }
+]

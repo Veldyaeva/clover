@@ -1,13 +1,16 @@
 ﻿using DevExpress.Charts.Model;
+using DevExpress.Data.Utils;
 using DevExpress.DataAccess.Sql;
 using DevExpress.Utils;
 using DevExpress.Utils.DPI;
+using DevExpress.XtraDiagram.Bars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraReports.UI;
+using Org.BouncyCastle.Asn1;
 using SewingProduction.Core.Class;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
@@ -31,6 +34,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
 
 namespace SewingProduction.Features.Tabel.Forms
@@ -51,22 +55,23 @@ namespace SewingProduction.Features.Tabel.Forms
         private List<TimeSheet> _currentTimeSheetData = new List<TimeSheet>();
         private List<TimeSheet> _TimeSheetDataFresh = new List<TimeSheet>();
         private List<SpPodr> _spPodrList = new List<SpPodr>();
+        private List<WorkTypes> _workTypes = new List<WorkTypes>();
         int idUser = CurrentUser.User.UserId;
-        private readonly string[] allStates = new[]
-        {
-            " ",   // Пусто
-            "1",   // 8 часов
- //           "11",  // 11 часов
-            "Б",   // Больничный
-            "К",   // Командировка
-            "У",   // Учебный отпуск
-            "Н",   // Неявка
-            "О",   // Основной отпуск
-            "П",   // Праздничный
-            "Б/С", // Без содержания
-            "Г",   // Прогул
-            "НБ"   // Отстранение от работы без начисления ЗП
-        };
+        private string[] allStates = new string[15];
+        //       {
+        //           " ",   // Пусто
+        //           "1",   // 8 часов
+        ////           "11",  // 11 часов
+        //           "Б",   // Больничный
+        //           "К",   // Командировка
+        //           "У",   // Учебный отпуск
+        //           "Н",   // Неявка
+        //           "О",   // Основной отпуск
+        //           "П",   // Праздничный
+        //           "Б/С", // Без содержания
+        //           "Г",   // Прогул
+        //           "НБ"   // Отстранение от работы без начисления ЗП
+        //       };
         Dictionary<int, string> workTypes = new Dictionary<int, string>
         {
             { 19, "ШП" },
@@ -215,6 +220,7 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnTsplPart.FieldName = "tsplPart";
             gridColumnTsplPartOf.FieldName = "tsplPartOf";
             gridColumnCheckIncludePlan.FieldName = "ts_plan";
+            gridColumnPodrTableID.FieldName = "podrTableID";
 
 
             gridColumnFio.Width = 90;
@@ -281,11 +287,11 @@ namespace SewingProduction.Features.Tabel.Forms
                 }
             }
         }
-        private async Task GetTimeSheet(string mg, int gr)
+        private async Task GetTimeSheet(string mg, int gr, int groupId)
         {
             _timeSheetBindingSource.Clear();
             _timeSheetBindingSource.ResetBindings(false);
-            var TimeSheetData = await _tabelDataService.GetTabelGrAsync(mg, gr);
+            var TimeSheetData = await _tabelDataService.GetTabelGrAsync(mg, gr, groupId);
             if (TimeSheetData != null)
             {
                 await _logger.LogEventAsync($"Получены данные TimeSheet", "GetTabelGrAsync");
@@ -307,11 +313,11 @@ namespace SewingProduction.Features.Tabel.Forms
                 await _logger.LogEventAsync($"Не удалось найти данные TimeSheet", "GetTabelGrAsync");
             }
         }
-        private async Task GetTimeSheetFresh(string mg, int gr)
+        private async Task GetTimeSheetFresh(string mg, int gr, int groupId)
         {
             _timeSheetFreshBindingSource.Clear();
             _timeSheetFreshBindingSource.ResetBindings(false);
-            _TimeSheetDataFresh = await _tabelDataService.GetTabelGrAsync(mg, gr);
+            _TimeSheetDataFresh = await _tabelDataService.GetTabelGrAsync(mg, gr, groupId);
             if (_TimeSheetDataFresh != null)
             {
                 await _logger.LogEventAsync($"Получены данные _timeSheetFreshBindingSource", "GetTimeSheetFresh");
@@ -336,6 +342,7 @@ namespace SewingProduction.Features.Tabel.Forms
             if (lookUp.EditValue != null)
             {
                 // Получаем ID (ValueMember)
+                int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
                 int grId = Convert.ToInt32(lookUp.EditValue);
                 if (!_tabelDataService.CheckRecordsExistsTabel(currentMG, grId))
                 {
@@ -344,7 +351,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 }
                 try
                 {
-                    GetTimeSheet(currentMG, grId);
+                    GetTimeSheet(currentMG, grId, groupId);
                 }
                 catch { }
 
@@ -353,6 +360,7 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private void customButton1_Click(object sender, EventArgs e)
         {
+            int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
             if (!_tabelDataService.CheckRecordsExistsTabel(GetPreviousMonth(currentMG), grId))
             {
@@ -363,7 +371,7 @@ namespace SewingProduction.Features.Tabel.Forms
             RemoveDayColumns();
             CreateDayColumns(currentMG);
             UpdateMonthYearLabels(currentMG);
-            GetTimeSheet(currentMG, grId);
+            GetTimeSheet(currentMG, grId, groupId);
 
         }
         private string GetPreviousMonth(string mg)
@@ -393,7 +401,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private void NextMonthButton_Click(object sender, EventArgs e)
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
-
+            int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
             if (!_tabelDataService.CheckRecordsExistsTabel(GetNextMonth(currentMG), grId))
             {
                 MessageBox.Show("В следующем месяце пусто!");
@@ -403,7 +411,7 @@ namespace SewingProduction.Features.Tabel.Forms
             RemoveDayColumns();
             CreateDayColumns(currentMG);
             UpdateMonthYearLabels(currentMG);
-            GetTimeSheet(currentMG, grId);
+            GetTimeSheet(currentMG, grId, groupId);
         }
         private string GetMonthName(int month)
         {
@@ -516,7 +524,7 @@ namespace SewingProduction.Features.Tabel.Forms
                     e.Handled = true; // Обработали сами
                 }
                 // Если Backspace
-                else if (e.KeyChar == (char)8)
+                else if (e.KeyChar == (char)Keys.Back)
                 {
                     HandleBackspaceForInteger(view);
                     e.Handled = true;
@@ -535,7 +543,7 @@ namespace SewingProduction.Features.Tabel.Forms
 
             // Получаем текущее значение
             object currentValue = view.GetRowCellValue(rowHandle, column);
-            string currentText = currentValue?.ToString() ?? "";
+            string currentText = currentValue?.ToString().Trim() ?? "";
 
             // Очищаем, если текущее значение не число
             if (!int.TryParse(currentText, out _))
@@ -587,7 +595,7 @@ namespace SewingProduction.Features.Tabel.Forms
             GridColumn column = view.FocusedColumn;
 
             object currentValue = view.GetRowCellValue(rowHandle, column);
-            string currentText = currentValue?.ToString() ?? "";
+            string currentText = currentValue?.ToString().Trim() ?? "";
 
             if (currentText.Length > 0)
             {
@@ -627,18 +635,19 @@ namespace SewingProduction.Features.Tabel.Forms
                 int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
                 string columnName = e.Column.FieldName;
                 string value = gridView1.GetRowCellValue(rowHandle, columnName).ToString();
-                UpdateDayTimeSheetInDataBase(columnName, value, recordId);
+                int podrTableId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "podrTableID"));
+                UpdateDayTimeSheetInDataBase(columnName, value, recordId, podrTableId);
 
             }
-            if (e.Column != null && e.Column.ColumnEdit is RepositoryItemCheckEdit)
-            {
-                int rowHandle = e.RowHandle;
-                int valueChecked = Convert.ToInt32(e.Value);
-                string fieldName = e.Column.FieldName;
-                int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
+            //if (e.Column != null && e.Column.ColumnEdit is RepositoryItemCheckEdit)
+            //{
+            //    int rowHandle = e.RowHandle;
+            //    int valueChecked = Convert.ToInt32(e.Value);
+            //    string fieldName = e.Column.FieldName;
+            //    int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
 
-                UpdateCheckBoxInDataBase(recordId, fieldName, valueChecked);
-            }
+            //    UpdateCheckBoxInDataBase(recordId, fieldName, valueChecked);
+            //}
         }
         public void UpdateCheckBoxInDataBase(int id, string fieldName, int value)
         {
@@ -654,14 +663,25 @@ namespace SewingProduction.Features.Tabel.Forms
 
             //}
         }
-        public async void UpdateDayTimeSheetInDataBase(string fieldName, string value, int id)
+        public async void UpdateDayTimeSheetInDataBase(string fieldName, string value, int id, int podrTableId)
         {
             try
             {
-                string query = $"update tabel_sp set {fieldName} = '{value}' where id = {id} ";
                 int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+                int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
+                string query = null;
+                if (podrTableId == 19)
+                {
+                    query = $"update tabel_sp set {fieldName} = '{value}' where id = {id} ";
+                }
+                if (podrTableId == 20)
+                {
+                    query = $"update tabel_zl set {fieldName} = '{value}' where id = {id} ";
+                }
+
+
                 await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
-                await GetTimeSheetFresh(currentMG, grId);
+                await GetTimeSheetFresh(currentMG, grId, groupId);
                 var changes = BindingSourceHelper.GetChanges<TimeSheet>(
                   _timeSheetBindingSource,
                   _timeSheetFreshBindingSource,
@@ -706,10 +726,13 @@ namespace SewingProduction.Features.Tabel.Forms
         private void customButton1_Click_1(object sender, EventArgs e)
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
             TimeSheetParsecOrionPrint report1 = new TimeSheetParsecOrionPrint();
             report1.RequestParameters = false;
             report1.Parameters["grid"].Value = grId;
             report1.Parameters["grid"].Visible = false;
+            report1.Parameters["groupId"].Value = groupId;
+            report1.Parameters["groupId"].Visible = false;
             report1.Parameters["Mg"].Value = currentMG;
             report1.Parameters["Mg"].Visible = false;
             report1.Parameters["orionAdd"].Value = 0;
@@ -722,10 +745,13 @@ namespace SewingProduction.Features.Tabel.Forms
         private void customButton2_Click(object sender, EventArgs e)
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
             TimeSheetParsecOrionPrint report1 = new TimeSheetParsecOrionPrint();
             report1.RequestParameters = false;
             report1.Parameters["grid"].Value = grId;
             report1.Parameters["grid"].Visible = false;
+            report1.Parameters["groupId"].Value = groupId;
+            report1.Parameters["groupId"].Visible = false;
             report1.Parameters["Mg"].Value = currentMG;
             report1.Parameters["Mg"].Visible = false;
             report1.Parameters["orionAdd"].Value = 1;
@@ -737,10 +763,13 @@ namespace SewingProduction.Features.Tabel.Forms
         private void customButton3_Click(object sender, EventArgs e)
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
             TimeSheetReport report1 = new TimeSheetReport();
             report1.RequestParameters = false;
             report1.Parameters["ttabn"].Value = grId;
             report1.Parameters["ttabn"].Visible = false;
+            report1.Parameters["groupId"].Value = groupId;
+            report1.Parameters["groupId"].Visible = false;
             report1.Parameters["MG"].Value = currentMG;
             report1.Parameters["MG"].Visible = false;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
@@ -760,8 +789,12 @@ namespace SewingProduction.Features.Tabel.Forms
             }
             if (resultCountGroup == 1)
             {
-                lookUpEditGroup.Visible = false;
-                customLabel3.Visible = false;
+                layoutControlItem14.ContentVisible = false;
+                layoutControlItem13.ContentVisible = false;
+                //lookUpEditGroup.Visible = false;
+                //customLabel3.VisibleLogic = false;
+                //customLabel3.VisiblePermission = false;
+                //customLabel3.Visible = false;
                 int resultGroupId = _tabelDataService.GetTabelGroupForUser(id);
                 if (resultGroupId == 0)
                 {
@@ -770,22 +803,38 @@ namespace SewingProduction.Features.Tabel.Forms
                 }
                 if (resultGroupId == 19)
                 {
-                    GetGrAcess(19, idUser);
+                    lookUpEditGroup.EditValue = 19;
                 }
                 if (resultGroupId == 20)
                 {
-                    GetGrAcess(20, idUser);
+                    lookUpEditGroup.EditValue = 20;
                 }
             }
         }
 
         private void lookUpEditGroup_EditValueChanged(object sender, EventArgs e)
         {
+            _timeSheetBindingSource.Clear();
+            _timeSheetBindingSource.ResetBindings(false);
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
+            GetCodesArray();
             GetGrAcess(grId, idUser);
         }
         private async Task GetGrAcess(int idGr, int idUser)
         {
+            if (idGr == 19)
+            {
+                gridColumnCheckIncludePlan.Visible = true;
+                gridColumnTsplPart.Visible = true;
+                gridColumnTsplPartOf.Visible = true;
+
+            }
+            if (idGr == 20)
+            {
+                gridColumnCheckIncludePlan.Visible = false;
+                gridColumnTsplPart.Visible = false;
+                gridColumnTsplPartOf.Visible = false;
+            }
             var SpPodr = await _tabelDataService.GetSpPodrAsync(idGr, idUser);
             _spPodr.Clear();
             _spPodr.ResetBindings(false);
@@ -794,6 +843,142 @@ namespace SewingProduction.Features.Tabel.Forms
 
         }
 
+        private void customGridControlTimeSheet_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.Clicks == 1)
+            {
+                OpenTimeCalculator(e.RowHandle, e.Column);
+            }
+        }
+        private void OpenTimeCalculator(int rowHandle, GridColumn column)
+        {
+            if (rowHandle < 0 || column == null) return;
+            var currentValue = gridView1.GetRowCellValue(rowHandle, column);
+            int dayNumber = int.Parse(column.FieldName.Substring(1));
+            string markColumnNameDD = $"dd{dayNumber.ToString("00")}";
+            string markColumnNameD = $"d{dayNumber.ToString("00")}";
+            string currentDd = gridView1.GetRowCellValue(rowHandle, markColumnNameDD).ToString();
+            string currentD = gridView1.GetRowCellValue(rowHandle, markColumnNameD).ToString();
+            int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
+            using (var calculator = new CalculatorDay(grId, currentDd, currentD))
+            {
+                //Point mousePosition = Control.MousePosition;
+                //calculator.StartPosition = FormStartPosition.Manual;
+                //calculator.Location = mousePosition;
+                Point cursorPos = Cursor.Position;
+                Point safePosition = CalculateSafePosition(
+                    cursorPos,
+                    calculator.Size);
+
+                calculator.StartPosition = FormStartPosition.Manual;
+                calculator.Location = safePosition;
+                if (currentValue != null && currentValue.ToString() != "")
+                {
+
+                }
+
+                if (calculator.ShowDialog() == DialogResult.OK)
+                {
+                    gridView1.SetRowCellValue(rowHandle, column, calculator.CalculatorResult);
+                }
+            }
+        }
+        public static Point CalculateSafePosition(Point desiredLocation, Size formSize)
+        {
+            // Получаем экран, на котором находится курсор
+            Screen screen = Screen.FromPoint(desiredLocation);
+            Rectangle workingArea = screen.WorkingArea;
+
+            int x = desiredLocation.X;
+            int y = desiredLocation.Y;
+
+            // Проверяем правую границу
+            if (x + formSize.Width > workingArea.Right)
+            {
+                // Не помещается справа - показываем слева от курсора
+                x = desiredLocation.X - formSize.Width - 10;
+
+                // Если и слева не помещается, прижимаем к левому краю
+                if (x < workingArea.Left)
+                {
+                    x = workingArea.Left;
+                }
+            }
+
+            // Проверяем нижнюю границу
+            if (y + formSize.Height > workingArea.Bottom)
+            {
+                // Не помещается снизу - показываем сверху от курсора
+                y = desiredLocation.Y - formSize.Height - 10;
+
+                // Если и сверху не помещается, прижимаем к верхнему краю
+                if (y < workingArea.Top)
+                {
+                    y = workingArea.Top;
+                }
+            }
+
+            // Дополнительная проверка левой и верхней границ
+            x = Math.Max(workingArea.Left, x);
+            y = Math.Max(workingArea.Top, y);
+
+            return new Point(x, y);
+        }
+        private async void GetCodesArray()
+        {
+            int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
+            _workTypes = await _tabelDataService.GetWorkTypesAsync(groupId);
+            allStates = _workTypes.Select(wt => wt.nameWorkTypes.Trim()).ToArray();
+
+        }
+
+        private void customLabelYear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customButton4_Click(object sender, EventArgs e)
+        {
+            int rowHandle = gridView1.FocusedRowHandle;
+            if (rowHandle < 0)
+            {
+                MessageBox.Show("Ничего не выбрано!");
+                return;
+            }
+            int idCurrent = (int)gridView1.GetRowCellValue(rowHandle, "id");
+            string fio = gridView1.GetRowCellValue(rowHandle, "fio").ToString();
+            int tab = (int)gridView1.GetRowCellValue(rowHandle, "tab");
+            string naimen = lookUpEditGr.Text;
+            int idGr = (int)lookUpEditGr.EditValue;
+            int idGroup = (int)lookUpEditGroup.EditValue;
+            using (var Employee = new EmployeeTransfer(fio, naimen, _spPodr, idCurrent, idGroup, currentMG, tab))
+            {
+                if (Employee.ShowDialog() == DialogResult.OK)
+                {
+                    if (Employee.EmployeeResult)
+                    {
+                        GetTimeSheet(currentMG, idGr, idGroup);
+                    }
+
+                }
+            }
+        }
+
+        private void gridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            if (e.KeyValue == (char)Keys.Delete)
+            {
+                int rowHandle = view.FocusedRowHandle;
+                GridColumn column = view.FocusedColumn;
+                view.SetRowCellValue(rowHandle, column, "");
+            }
+        }
         private void customButtonOtvlRab_Click(object sender, EventArgs e)
         {
             int tnid = Convert.ToInt32(lookUpEditGr.EditValue);

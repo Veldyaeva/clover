@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.DataAccess.Sql.SelectQuery selectQuery1 = new DevExpress.DataAccess.Sql.SelectQuery();
-            DevExpress.DataAccess.Sql.AllColumns allColumns1 = new DevExpress.DataAccess.Sql.AllColumns();
-            DevExpress.DataAccess.Sql.Table table1 = new DevExpress.DataAccess.Sql.Table();
+            DevExpress.DataAccess.Sql.CustomSqlQuery customSqlQuery1 = new DevExpress.DataAccess.Sql.CustomSqlQuery();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter2 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter3 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TimeSheetReport));
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings2 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+            DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings3 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
@@ -125,6 +125,7 @@
             this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
             this.MG = new DevExpress.XtraReports.Parameters.Parameter();
             this.ttabn = new DevExpress.XtraReports.Parameters.Parameter();
+            this.groupId = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -136,13 +137,13 @@
             this.xrLabel1,
             this.xrTable1,
             this.xrLabel4});
-            this.TopMargin.HeightF = 201.5676F;
+            this.TopMargin.HeightF = 161.9842F;
             this.TopMargin.Name = "TopMargin";
             // 
             // xrLabel2
             // 
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[monthTxt] + \' \' + [year]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[monthTxt] + \' \' + [god]")});
             this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Arial", 12F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(463.0742F, 44.17308F);
             this.xrLabel2.Multiline = true;
@@ -170,7 +171,7 @@
             this.xrTable1.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 147.8671F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 108.2838F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -489,11 +490,15 @@
             // 
             // xrLabel4
             // 
+            this.xrLabel4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[naimen]")});
+            this.xrLabel4.Font = new DevExpress.Drawing.DXFont("Times New Roman", 13F);
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(20.00008F, 67.17307F);
             this.xrLabel4.Multiline = true;
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(275.8603F, 23F);
+            this.xrLabel4.StylePriority.UseFont = false;
             // 
             // BottomMargin
             // 
@@ -962,13 +967,7 @@
             // 
             this.sqlDataSource1.ConnectionName = "SewingProduction.Properties.Settings.ACEConnectionString";
             this.sqlDataSource1.Name = "sqlDataSource1";
-            table1.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"1703\" />";
-            table1.Name = "TimeSheetUnion";
-            allColumns1.Table = table1;
-            selectQuery1.Columns.Add(allColumns1);
-            selectQuery1.FilterString = "[TimeSheetUnion.mg] = ?MG And [TimeSheetUnion.ttabn] = ?ttabn";
-            selectQuery1.GroupFilterString = "";
-            selectQuery1.Name = "TimeSheetUnion";
+            customSqlQuery1.Name = "TimeSheetUnion";
             queryParameter1.Name = "parameter1";
             queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter1.Value = new DevExpress.DataAccess.Expression("?MG", typeof(string));
@@ -978,13 +977,17 @@
             queryParameter3.Name = "ttabn";
             queryParameter3.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter3.Value = new DevExpress.DataAccess.Expression("?ttabn", typeof(int));
-            selectQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
+            queryParameter4.Name = "groupId";
+            queryParameter4.Type = typeof(global::DevExpress.DataAccess.Expression);
+            queryParameter4.Value = new DevExpress.DataAccess.Expression("?groupId", typeof(int));
+            customSqlQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1,
             queryParameter2,
-            queryParameter3});
-            selectQuery1.Tables.Add(table1);
+            queryParameter3,
+            queryParameter4});
+            customSqlQuery1.Sql = resources.GetString("customSqlQuery1.Sql");
             this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
-            selectQuery1});
+            customSqlQuery1});
             this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
             // 
             // MG
@@ -1004,6 +1007,16 @@
             staticListLookUpSettings2.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(13, "Бригада 13"));
             this.ttabn.ValueSourceSettings = staticListLookUpSettings2;
             // 
+            // groupId
+            // 
+            this.groupId.Description = "groupId";
+            this.groupId.Name = "groupId";
+            this.groupId.Type = typeof(int);
+            this.groupId.ValueInfo = "0";
+            staticListLookUpSettings3.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(19, "ШП"));
+            staticListLookUpSettings3.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(20, "ЗЛ"));
+            this.groupId.ValueSourceSettings = staticListLookUpSettings3;
+            // 
             // TimeSheetReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1015,14 +1028,17 @@
             this.DataMember = "TimeSheetUnion";
             this.DataSource = this.sqlDataSource1;
             this.Landscape = true;
-            this.Margins = new DevExpress.Drawing.DXMargins(16F, 10F, 201.5676F, 0F);
+            this.Margins = new DevExpress.Drawing.DXMargins(16F, 10F, 161.9842F, 0F);
             this.PageHeight = 827;
             this.PageWidth = 1169;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
             this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this.MG, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this.MG, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this.groupId, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this.ttabn, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.MG,
+            this.groupId,
             this.ttabn});
             this.Version = "24.2";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -1120,5 +1136,6 @@
         private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource1;
         private DevExpress.XtraReports.Parameters.Parameter MG;
         private DevExpress.XtraReports.Parameters.Parameter ttabn;
+        private DevExpress.XtraReports.Parameters.Parameter groupId;
     }
 }
