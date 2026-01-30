@@ -1122,7 +1122,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem7.Size = new System.Drawing.Size(434, 26);
             layoutControlItem7.TextVisible = false;
             // 
-            // layoutSeb
+            // layoutControlGroup7
             // 
             layoutControlGroup7.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup7.BackgroundImageOptions.ImageKey");
             layoutControlGroup7.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup7.CaptionImageOptions.ImageKey");
@@ -1282,7 +1282,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             statusLabelitem.Size = new System.Drawing.Size(1507, 25);
             statusLabelitem.TextVisible = false;
             // 
-            // layoutOpis_t
+            // layoutControlGroup10
             // 
             layoutControlGroup10.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup10.BackgroundImageOptions.ImageKey");
             layoutControlGroup10.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup10.CaptionImageOptions.ImageKey");
@@ -1359,7 +1359,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             splitterItem5.Name = "splitterItem5";
             splitterItem5.Size = new System.Drawing.Size(693, 10);
             // 
-            // layoutNorms
+            // layoutControlGroup4
             // 
             layoutControlGroup4.BackgroundImageOptions.ImageKey = resources.GetString("layoutControlGroup4.BackgroundImageOptions.ImageKey");
             layoutControlGroup4.CaptionImageOptions.ImageKey = resources.GetString("layoutControlGroup4.CaptionImageOptions.ImageKey");

@@ -363,6 +363,36 @@ namespace SewingProduction.Core.helpers
             return Array.Empty<string>();
         }
 
+        /// <summary>
+        /// Получает список затронутых объектов (ObjectName) по имени таблицы.
+        /// </summary>
+        public IReadOnlyList<string> GetAffectedObjectsByTable(string tableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+                return Array.Empty<string>();
+
+            var incoming = tableName.Trim();
+            var tableKey = incoming;
+
+            // Если пришло без схемы — найдём полное "schema.table"
+            if (!incoming.Contains('.'))
+            {
+                var match = _depsByTable.Keys.FirstOrDefault(k =>
+                    k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
+
+                if (match != null)
+                    tableKey = match;
+            }
+
+            if (!_depsByTable.TryGetValue(tableKey, out var deps))
+                return Array.Empty<string>();
+
+            return deps.Select(d => d.ObjectName)
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
 public ValueTask DisposeAsync()
         {
             if (System.Threading.Interlocked.Exchange(ref _disposeState, 1) != 0)

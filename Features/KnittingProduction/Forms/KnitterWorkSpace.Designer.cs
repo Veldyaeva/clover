@@ -1,8 +1,9 @@
 using System.Windows.Forms;
+using SewingProduction;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    partial class KnitterWorkSpace : CustomForm
+    partial class KnitterWorkSpace : ServiceBrokerFormBase
     {
         /// <summary>
         /// Required designer variable.
