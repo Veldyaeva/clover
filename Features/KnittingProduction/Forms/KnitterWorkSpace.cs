@@ -1611,8 +1611,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Подсветка фокусной строки (только если не незавершённая)
                 if (e.RowHandle == view.FocusedRowHandle)
                 {
-                    e.Appearance.BackColor = Color.Coral;
-                    e.Appearance.BackColor2 = Color.Coral;
+  //                  e.Appearance.BackColor = Color.Coral;
+  //                  e.Appearance.BackColor2 = Color.Coral;
                     e.HighPriority = true;
                     return;
                 }
