@@ -1578,10 +1578,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 // Увеличиваем шрифт на 3 pt (можно изменить на 2-4 pt по необходимости)
-                float fontSizeIncrease = 3f;
+                float fontSizeIncrease = 5f;
                 
                 if (bandedGridView3 != null)
                 {
+                    // Отключаем раскраску нечётных/чётных строк
+                    bandedGridView3.OptionsView.EnableAppearanceOddRow = false;
+                    bandedGridView3.OptionsView.EnableAppearanceEvenRow = false;
+                    
                     // Получаем текущий шрифт или используем стандартный
                     Font currentFont = bandedGridView3.Appearance.Row.Font ?? SystemFonts.DefaultFont;
                     Font newFont = new Font(currentFont.FontFamily, currentFont.Size + fontSizeIncrease, currentFont.Style);
@@ -1605,6 +1609,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 if (advBandedGridView1 != null)
                 {
+                    // Отключаем раскраску нечётных/чётных строк
+                    advBandedGridView1.OptionsView.EnableAppearanceOddRow = false;
+                    advBandedGridView1.OptionsView.EnableAppearanceEvenRow = false;
+                    
                     // Получаем текущий шрифт или используем стандартный
                     Font currentFont = advBandedGridView1.Appearance.Row.Font ?? SystemFonts.DefaultFont;
                     Font newFont = new Font(currentFont.FontFamily, currentFont.Size + fontSizeIncrease, currentFont.Style);
@@ -1713,8 +1721,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Подсветка фокусной строки (только если не незавершённая)
                 if (e.RowHandle == view.FocusedRowHandle)
                 {
-                    e.Appearance.BackColor = Color.Coral;
-                    e.Appearance.BackColor2 = Color.Coral;
+                    e.Appearance.BackColor = Color.Bisque;
+                    e.Appearance.BackColor2 = Color.BlanchedAlmond;
                     e.HighPriority = true;
                     return;
                 }
