@@ -170,6 +170,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupStatusColumn();
                 SetupBlinkTimers();
                 SetupRowStyling();
+                SetupGridFonts();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -205,6 +206,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupStatusColumn();
                 SetupBlinkTimers();
                 SetupRowStyling();
+                SetupGridFonts();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -1565,6 +1567,68 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Ошибка при настройке подсветки строк: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Настраивает увеличенные шрифты для таблиц bandedGridView3 и advBandedGridView1
+        /// </summary>
+        private void SetupGridFonts()
+        {
+            try
+            {
+                // Увеличиваем шрифт на 3 pt (можно изменить на 2-4 pt по необходимости)
+                float fontSizeIncrease = 3f;
+                
+                if (bandedGridView3 != null)
+                {
+                    // Получаем текущий шрифт или используем стандартный
+                    Font currentFont = bandedGridView3.Appearance.Row.Font ?? SystemFonts.DefaultFont;
+                    Font newFont = new Font(currentFont.FontFamily, currentFont.Size + fontSizeIncrease, currentFont.Style);
+                    
+                    // Применяем увеличенный шрифт ко всем элементам отображения
+                    bandedGridView3.Appearance.Row.Font = newFont;
+                    bandedGridView3.Appearance.HeaderPanel.Font = newFont;
+                    bandedGridView3.Appearance.FooterPanel.Font = newFont;
+                    bandedGridView3.Appearance.GroupPanel.Font = newFont;
+                    bandedGridView3.Appearance.GroupRow.Font = newFont;
+                    
+                    // Применяем к каждой колонке
+                    foreach (BandedGridColumn column in bandedGridView3.Columns)
+                    {
+                        if (column.AppearanceCell != null)
+                            column.AppearanceCell.Font = newFont;
+                        if (column.AppearanceHeader != null)
+                            column.AppearanceHeader.Font = newFont;
+                    }
+                }
+
+                if (advBandedGridView1 != null)
+                {
+                    // Получаем текущий шрифт или используем стандартный
+                    Font currentFont = advBandedGridView1.Appearance.Row.Font ?? SystemFonts.DefaultFont;
+                    Font newFont = new Font(currentFont.FontFamily, currentFont.Size + fontSizeIncrease, currentFont.Style);
+                    
+                    // Применяем увеличенный шрифт ко всем элементам отображения
+                    advBandedGridView1.Appearance.Row.Font = newFont;
+                    advBandedGridView1.Appearance.HeaderPanel.Font = newFont;
+                    advBandedGridView1.Appearance.FooterPanel.Font = newFont;
+                    advBandedGridView1.Appearance.GroupPanel.Font = newFont;
+                    advBandedGridView1.Appearance.GroupRow.Font = newFont;
+                    
+                    // Применяем к каждой колонке
+                    foreach (BandedGridColumn column in advBandedGridView1.Columns)
+                    {
+                        if (column.AppearanceCell != null)
+                            column.AppearanceCell.Font = newFont;
+                        if (column.AppearanceHeader != null)
+                            column.AppearanceHeader.Font = newFont;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при настройке шрифтов таблиц: {ex.Message}");
             }
         }
 
