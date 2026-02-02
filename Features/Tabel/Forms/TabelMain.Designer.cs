@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             gridColumnDd1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            customGridControlTimeSheet = new Core.Class.CustomGridControl();
+            customGridControlTimeSheet = new SewingProduction.Core.Class.CustomGridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnCheckIncludePlan = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEditPlan = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -74,36 +74,38 @@
             NextMonthButton = new SewingProduction.Core.Class.CustomButton();
             customLabel1 = new SewingProduction.Core.Class.CustomLabel();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            customButton4 = new SewingProduction.Core.Class.CustomButton();
+            customLabelYear = new System.Windows.Forms.Label();
+            customLabelMonth = new System.Windows.Forms.Label();
+            customButton5 = new SewingProduction.Core.Class.CustomButton();
+            customButtonOtvlRab = new SewingProduction.Core.Class.CustomButton();
             customLabel3 = new SewingProduction.Core.Class.CustomLabel();
             lookUpEditGroup = new DevExpress.XtraEditors.LookUpEdit();
-            customButton3 = new Core.Class.CustomButton();
-            customButton2 = new Core.Class.CustomButton();
-            customButton1 = new Core.Class.CustomButton();
+            customButton3 = new SewingProduction.Core.Class.CustomButton();
+            customButton2 = new SewingProduction.Core.Class.CustomButton();
+            customButton1 = new SewingProduction.Core.Class.CustomButton();
             lookUpEditGr = new DevExpress.XtraEditors.LookUpEdit();
-            OpenSpisokButton = new Core.Class.CustomButton();
-            customLabelYear = new Core.Class.CustomLabel();
-            customLabelMonth = new Core.Class.CustomLabel();
-            customLabel2 = new Core.Class.CustomLabel();
+            OpenSpisokButton = new SewingProduction.Core.Class.CustomButton();
+            customLabel2 = new SewingProduction.Core.Class.CustomLabel();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
-            customButtonOtvlRab = new Core.Class.CustomButton();
-            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            customButton4 = new SewingProduction.Core.Class.CustomButton();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
@@ -117,18 +119,19 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -139,11 +142,11 @@
             // customGridControlTimeSheet
             // 
             customGridControlTimeSheet.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlTimeSheet.Location = new System.Drawing.Point(12, 36);
+            customGridControlTimeSheet.Location = new System.Drawing.Point(12, 38);
             customGridControlTimeSheet.MainView = gridView1;
             customGridControlTimeSheet.Name = "customGridControlTimeSheet";
             customGridControlTimeSheet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
-            customGridControlTimeSheet.Size = new System.Drawing.Size(1475, 478);
+            customGridControlTimeSheet.Size = new System.Drawing.Size(1508, 472);
             customGridControlTimeSheet.TabIndex = 0;
             customGridControlTimeSheet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             customGridControlTimeSheet.Click += customGridControlTimeSheet_Click;
@@ -398,7 +401,7 @@
             PrevMonthButton.ForeColor = System.Drawing.Color.Black;
             PrevMonthButton.Location = new System.Drawing.Point(12, 12);
             PrevMonthButton.Name = "PrevMonthButton";
-            PrevMonthButton.Size = new System.Drawing.Size(68, 20);
+            PrevMonthButton.Size = new System.Drawing.Size(70, 22);
             PrevMonthButton.TabIndex = 1;
             PrevMonthButton.Text = "<--";
             PrevMonthButton.UseVisualStyleBackColor = false;
@@ -409,9 +412,9 @@
             NextMonthButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             NextMonthButton.Font = new System.Drawing.Font("Arial", 10F);
             NextMonthButton.ForeColor = System.Drawing.Color.Black;
-            NextMonthButton.Location = new System.Drawing.Point(149, 12);
+            NextMonthButton.Location = new System.Drawing.Point(152, 12);
             NextMonthButton.Name = "NextMonthButton";
-            NextMonthButton.Size = new System.Drawing.Size(80, 20);
+            NextMonthButton.Size = new System.Drawing.Size(82, 22);
             NextMonthButton.TabIndex = 2;
             NextMonthButton.Text = "-->";
             NextMonthButton.UseVisualStyleBackColor = false;
@@ -421,9 +424,9 @@
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.Black;
-            customLabel1.Location = new System.Drawing.Point(84, 12);
+            customLabel1.Location = new System.Drawing.Point(86, 12);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(61, 20);
+            customLabel1.Size = new System.Drawing.Size(62, 22);
             customLabel1.TabIndex = 3;
             customLabel1.Text = "Месяц";
             // 
@@ -431,6 +434,9 @@
             // 
             layoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             layoutControl1.Controls.Add(customButton4);
+            layoutControl1.Controls.Add(customLabelYear);
+            layoutControl1.Controls.Add(customLabelMonth);
+            layoutControl1.Controls.Add(customButton5);
             layoutControl1.Controls.Add(customButtonOtvlRab);
             layoutControl1.Controls.Add(customLabel3);
             layoutControl1.Controls.Add(lookUpEditGroup);
@@ -439,8 +445,6 @@
             layoutControl1.Controls.Add(customButton1);
             layoutControl1.Controls.Add(lookUpEditGr);
             layoutControl1.Controls.Add(OpenSpisokButton);
-            layoutControl1.Controls.Add(customLabelYear);
-            layoutControl1.Controls.Add(customLabelMonth);
             layoutControl1.Controls.Add(customLabel2);
             layoutControl1.Controls.Add(customLabel1);
             layoutControl1.Controls.Add(PrevMonthButton);
@@ -448,43 +452,78 @@
             layoutControl1.Controls.Add(customGridControlTimeSheet);
             layoutControl1.Location = new System.Drawing.Point(-6, -6);
             layoutControl1.Name = "layoutControl1";
-            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(514, 255, 650, 400);
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(271, 163, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new System.Drawing.Size(1499, 598);
+            layoutControl1.Size = new System.Drawing.Size(1532, 599);
             layoutControl1.TabIndex = 4;
             layoutControl1.Text = "layoutControl1";
             // 
-            // customButton4
+            // customLabelYear
             // 
-            customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            customButton4.Font = new System.Drawing.Font("Arial", 10F);
-            customButton4.ForeColor = System.Drawing.Color.Black;
-            customButton4.Location = new System.Drawing.Point(24, 530);
-            customButton4.Name = "customButton4";
-            customButton4.Size = new System.Drawing.Size(130, 44);
-            customButton4.TabIndex = 13;
-            customButton4.Text = "Перевод";
-            customButton4.UseVisualStyleBackColor = false;
-            customButton4.Click += customButton4_Click;
+            customLabelYear.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            customLabelYear.Location = new System.Drawing.Point(459, 12);
+            customLabelYear.Name = "customLabelYear";
+            customLabelYear.Size = new System.Drawing.Size(233, 22);
+            customLabelYear.TabIndex = 16;
+            customLabelYear.Text = "label1";
+            customLabelYear.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // customLabelMonth
+            // 
+            customLabelMonth.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            customLabelMonth.Location = new System.Drawing.Point(238, 12);
+            customLabelMonth.Name = "customLabelMonth";
+            customLabelMonth.Size = new System.Drawing.Size(217, 22);
+            customLabelMonth.TabIndex = 15;
+            customLabelMonth.Text = "label1";
+            customLabelMonth.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // customButton5
+            // 
+            customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButton5.Font = new System.Drawing.Font("Arial", 10F);
+            customButton5.ForeColor = System.Drawing.Color.Black;
+            customButton5.Location = new System.Drawing.Point(149, 526);
+            customButton5.Name = "customButton5";
+            customButton5.Size = new System.Drawing.Size(121, 49);
+            customButton5.TabIndex = 14;
+            customButton5.Text = "Перевод";
+            customButton5.UseVisualStyleBackColor = false;
+            customButton5.Click += customButton4_Click;
+            // 
+            // customButtonOtvlRab
+            // 
+            customButtonOtvlRab.BackColor = System.Drawing.Color.Lavender;
+            customButtonOtvlRab.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOtvlRab.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            customButtonOtvlRab.Location = new System.Drawing.Point(1093, 526);
+            customButtonOtvlRab.Name = "customButtonOtvlRab";
+            customButtonOtvlRab.Size = new System.Drawing.Size(415, 49);
+            customButtonOtvlRab.TabIndex = 13;
+            customButtonOtvlRab.Text = "Oтвл. работы";
+            customButtonOtvlRab.UseVisualStyleBackColor = false;
+            customButtonOtvlRab.Click += customButtonOtvlRab_Click;
             // 
             // customLabel3
             // 
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             customLabel3.ForeColor = System.Drawing.Color.Black;
-            customLabel3.Location = new System.Drawing.Point(681, 12);
+            customLabel3.Location = new System.Drawing.Point(696, 12);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(128, 20);
+            customLabel3.Size = new System.Drawing.Size(131, 22);
             customLabel3.TabIndex = 6;
             customLabel3.Text = "Выберите группу";
             // 
             // lookUpEditGroup
             // 
             lookUpEditGroup.Enabled = false;
-            lookUpEditGroup.Location = new System.Drawing.Point(813, 12);
+            lookUpEditGroup.Location = new System.Drawing.Point(831, 12);
             lookUpEditGroup.Name = "lookUpEditGroup";
+            lookUpEditGroup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            lookUpEditGroup.Properties.Appearance.Options.UseFont = true;
             lookUpEditGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             lookUpEditGroup.Properties.NullText = "Выберите группу ";
-            lookUpEditGroup.Size = new System.Drawing.Size(104, 20);
+            lookUpEditGroup.Size = new System.Drawing.Size(106, 22);
             lookUpEditGroup.StyleController = layoutControl1;
             lookUpEditGroup.TabIndex = 10;
             lookUpEditGroup.EditValueChanged += lookUpEditGroup_EditValueChanged;
@@ -494,9 +533,9 @@
             customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
             customButton3.ForeColor = System.Drawing.Color.Black;
-            customButton3.Location = new System.Drawing.Point(158, 530);
+            customButton3.Location = new System.Drawing.Point(274, 526);
             customButton3.Name = "customButton3";
-            customButton3.Size = new System.Drawing.Size(130, 44);
+            customButton3.Size = new System.Drawing.Size(277, 49);
             customButton3.TabIndex = 12;
             customButton3.Text = "Печать";
             customButton3.UseVisualStyleBackColor = false;
@@ -507,9 +546,9 @@
             customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
             customButton2.ForeColor = System.Drawing.Color.Black;
-            customButton2.Location = new System.Drawing.Point(764, 530);
+            customButton2.Location = new System.Drawing.Point(884, 526);
             customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(599, 44);
+            customButton2.Size = new System.Drawing.Size(205, 49);
             customButton2.TabIndex = 11;
             customButton2.Text = "Табель Parsec + Orion";
             customButton2.UseVisualStyleBackColor = false;
@@ -520,9 +559,9 @@
             customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
             customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(292, 530);
+            customButton1.Location = new System.Drawing.Point(555, 526);
             customButton1.Name = "customButton1";
-            customButton1.Size = new System.Drawing.Size(468, 44);
+            customButton1.Size = new System.Drawing.Size(325, 49);
             customButton1.TabIndex = 10;
             customButton1.Text = "Табель Parsec";
             customButton1.UseVisualStyleBackColor = false;
@@ -530,11 +569,13 @@
             // 
             // lookUpEditGr
             // 
-            lookUpEditGr.Location = new System.Drawing.Point(1115, 12);
+            lookUpEditGr.Location = new System.Drawing.Point(1139, 12);
             lookUpEditGr.Name = "lookUpEditGr";
+            lookUpEditGr.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            lookUpEditGr.Properties.Appearance.Options.UseFont = true;
             lookUpEditGr.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             lookUpEditGr.Properties.NullText = "Выберите подразделение";
-            lookUpEditGr.Size = new System.Drawing.Size(176, 20);
+            lookUpEditGr.Size = new System.Drawing.Size(180, 22);
             lookUpEditGr.StyleController = layoutControl1;
             lookUpEditGr.TabIndex = 9;
             lookUpEditGr.EditValueChanged += lookUpEditGr_EditValueChanged;
@@ -544,42 +585,21 @@
             OpenSpisokButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             OpenSpisokButton.Font = new System.Drawing.Font("Arial", 10F);
             OpenSpisokButton.ForeColor = System.Drawing.Color.Black;
-            OpenSpisokButton.Location = new System.Drawing.Point(1295, 12);
+            OpenSpisokButton.Location = new System.Drawing.Point(1323, 12);
             OpenSpisokButton.Name = "OpenSpisokButton";
-            OpenSpisokButton.Size = new System.Drawing.Size(192, 20);
+            OpenSpisokButton.Size = new System.Drawing.Size(197, 22);
             OpenSpisokButton.TabIndex = 8;
             OpenSpisokButton.Text = "S";
             OpenSpisokButton.UseVisualStyleBackColor = false;
             OpenSpisokButton.Click += OpenSpisokButton_Click;
             // 
-            // customLabelYear
-            // 
-            customLabelYear.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelYear.ForeColor = System.Drawing.Color.Black;
-            customLabelYear.Location = new System.Drawing.Point(449, 12);
-            customLabelYear.Name = "customLabelYear";
-            customLabelYear.Size = new System.Drawing.Size(228, 20);
-            customLabelYear.TabIndex = 7;
-            customLabelYear.Text = "ГОД";
-            customLabelYear.Click += customLabelYear_Click;
-            // 
-            // customLabelMonth
-            // 
-            customLabelMonth.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelMonth.ForeColor = System.Drawing.Color.Black;
-            customLabelMonth.Location = new System.Drawing.Point(233, 12);
-            customLabelMonth.Name = "customLabelMonth";
-            customLabelMonth.Size = new System.Drawing.Size(212, 20);
-            customLabelMonth.TabIndex = 6;
-            customLabelMonth.Text = "МЕСЯЦ";
-            // 
             // customLabel2
             // 
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             customLabel2.ForeColor = System.Drawing.Color.Black;
-            customLabel2.Location = new System.Drawing.Point(921, 12);
+            customLabel2.Location = new System.Drawing.Point(941, 12);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(190, 20);
+            customLabel2.Size = new System.Drawing.Size(194, 22);
             customLabel2.TabIndex = 5;
             customLabel2.Text = "Выберите подразделение";
             // 
@@ -587,25 +607,25 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem6, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem5, layoutControlGroup1, layoutControlItem13, layoutControlItem14 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem6, layoutControlItem9, layoutControlItem5, layoutControlGroup1, layoutControlItem13, layoutControlItem14, layoutControlItem17, layoutControlItem7 });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(1499, 598);
+            Root.Size = new System.Drawing.Size(1532, 599);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = customGridControlTimeSheet;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 24);
+            layoutControlItem1.Location = new System.Drawing.Point(0, 26);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1479, 482);
+            layoutControlItem1.Size = new System.Drawing.Size(1512, 476);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = NextMonthButton;
-            layoutControlItem2.Location = new System.Drawing.Point(137, 0);
+            layoutControlItem2.Location = new System.Drawing.Point(140, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(84, 24);
+            layoutControlItem2.Size = new System.Drawing.Size(86, 26);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
@@ -613,139 +633,152 @@
             layoutControlItem3.Control = PrevMonthButton;
             layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(72, 24);
+            layoutControlItem3.Size = new System.Drawing.Size(74, 26);
             layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = customLabel1;
-            layoutControlItem4.Location = new System.Drawing.Point(72, 0);
+            layoutControlItem4.Location = new System.Drawing.Point(74, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(65, 24);
+            layoutControlItem4.Size = new System.Drawing.Size(66, 26);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = customLabel2;
-            layoutControlItem6.Location = new System.Drawing.Point(909, 0);
+            layoutControlItem6.Location = new System.Drawing.Point(929, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(194, 24);
+            layoutControlItem6.Size = new System.Drawing.Size(198, 26);
             layoutControlItem6.TextVisible = false;
-            // 
-            // layoutControlItem7
-            // 
-            layoutControlItem7.Control = customLabelMonth;
-            layoutControlItem7.Location = new System.Drawing.Point(221, 0);
-            layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(216, 24);
-            layoutControlItem7.TextVisible = false;
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = customLabelYear;
-            layoutControlItem8.Location = new System.Drawing.Point(437, 0);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(232, 24);
-            layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = OpenSpisokButton;
-            layoutControlItem9.Location = new System.Drawing.Point(1283, 0);
+            layoutControlItem9.Location = new System.Drawing.Point(1311, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(196, 24);
+            layoutControlItem9.Size = new System.Drawing.Size(201, 26);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = lookUpEditGr;
-            layoutControlItem5.Location = new System.Drawing.Point(1103, 0);
+            layoutControlItem5.Location = new System.Drawing.Point(1127, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(180, 24);
+            layoutControlItem5.Size = new System.Drawing.Size(184, 26);
             layoutControlItem5.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
-            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem15 });
-            layoutControlGroup1.Location = new System.Drawing.Point(0, 506);
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem16, layoutControlItem12, layoutControlItem15, layoutControlItem11, layoutControlItem8 });
+            layoutControlGroup1.Location = new System.Drawing.Point(0, 502);
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new System.Drawing.Size(1479, 72);
+            layoutControlGroup1.Size = new System.Drawing.Size(1512, 77);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem10
             // 
             layoutControlItem10.Control = customButton1;
-            layoutControlItem10.Location = new System.Drawing.Point(268, 0);
+            layoutControlItem10.Location = new System.Drawing.Point(531, 0);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(472, 48);
+            layoutControlItem10.Size = new System.Drawing.Size(329, 53);
             layoutControlItem10.TextVisible = false;
             // 
-            // layoutControlItem11
+            // layoutControlItem16
             // 
-            layoutControlItem11.Control = customButton2;
-            layoutControlItem11.Location = new System.Drawing.Point(740, 0);
-            layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(603, 48);
-            layoutControlItem11.TextVisible = false;
+            layoutControlItem16.Control = customButton5;
+            layoutControlItem16.Location = new System.Drawing.Point(125, 0);
+            layoutControlItem16.Name = "layoutControlItem16";
+            layoutControlItem16.OptionsTableLayoutItem.RowIndex = 2;
+            layoutControlItem16.Size = new System.Drawing.Size(125, 53);
+            layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem12
             // 
             layoutControlItem12.Control = customButton3;
-            layoutControlItem12.Location = new System.Drawing.Point(134, 0);
+            layoutControlItem12.Location = new System.Drawing.Point(250, 0);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(134, 48);
+            layoutControlItem12.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem12.Size = new System.Drawing.Size(281, 53);
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem15
             // 
-            layoutControlItem15.Control = customButton4;
-            layoutControlItem15.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem15.Control = customButtonOtvlRab;
+            layoutControlItem15.Location = new System.Drawing.Point(1069, 0);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(134, 48);
+            layoutControlItem15.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem15.OptionsTableLayoutItem.RowIndex = 1;
+            layoutControlItem15.Size = new System.Drawing.Size(419, 53);
             layoutControlItem15.TextVisible = false;
+            // 
+            // layoutControlItem11
+            // 
+            layoutControlItem11.Control = customButton2;
+            layoutControlItem11.Location = new System.Drawing.Point(860, 0);
+            layoutControlItem11.Name = "layoutControlItem11";
+            layoutControlItem11.OptionsTableLayoutItem.RowIndex = 1;
+            layoutControlItem11.Size = new System.Drawing.Size(209, 53);
+            layoutControlItem11.TextVisible = false;
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = lookUpEditGroup;
-            layoutControlItem13.Location = new System.Drawing.Point(801, 0);
+            layoutControlItem13.Location = new System.Drawing.Point(819, 0);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(108, 24);
+            layoutControlItem13.Size = new System.Drawing.Size(110, 26);
             layoutControlItem13.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = customLabel3;
-            layoutControlItem14.Location = new System.Drawing.Point(669, 0);
+            layoutControlItem14.Location = new System.Drawing.Point(684, 0);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(132, 24);
+            layoutControlItem14.Size = new System.Drawing.Size(135, 26);
             layoutControlItem14.TextVisible = false;
             // 
-            // customButtonOtvlRab
+            // layoutControlItem17
             // 
-            customButtonOtvlRab.BackColor = System.Drawing.Color.Lavender;
-            customButtonOtvlRab.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOtvlRab.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            customButtonOtvlRab.Location = new System.Drawing.Point(1367, 530);
-            customButtonOtvlRab.Name = "customButtonOtvlRab";
-            customButtonOtvlRab.Size = new System.Drawing.Size(108, 44);
-            customButtonOtvlRab.TabIndex = 13;
-            customButtonOtvlRab.Text = "Oтвл. работы";
-            customButtonOtvlRab.UseVisualStyleBackColor = false;
-            customButtonOtvlRab.Click += customButtonOtvlRab_Click;
+            layoutControlItem17.Control = customLabelMonth;
+            layoutControlItem17.Location = new System.Drawing.Point(226, 0);
+            layoutControlItem17.Name = "layoutControlItem17";
+            layoutControlItem17.Size = new System.Drawing.Size(221, 26);
+            layoutControlItem17.TextVisible = false;
             // 
-            // layoutControlItem15
+            // layoutControlItem7
             // 
-            layoutControlItem15.Control = customButtonOtvlRab;
-            layoutControlItem15.Location = new System.Drawing.Point(1343, 0);
-            layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(112, 48);
-            layoutControlItem15.TextVisible = false;
+            layoutControlItem7.Control = customLabelYear;
+            layoutControlItem7.Location = new System.Drawing.Point(447, 0);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new System.Drawing.Size(237, 26);
+            layoutControlItem7.TextVisible = false;
+            // 
+            // customButton4
+            // 
+            customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButton4.Font = new System.Drawing.Font("Arial", 10F);
+            customButton4.ForeColor = System.Drawing.Color.Black;
+            customButton4.Location = new System.Drawing.Point(24, 526);
+            customButton4.Name = "customButton4";
+            customButton4.Size = new System.Drawing.Size(121, 49);
+            customButton4.TabIndex = 17;
+            customButton4.Text = "customButton4";
+            customButton4.UseVisualStyleBackColor = false;
+            customButton4.Click += customButton4_Click_1;
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = customButton4;
+            layoutControlItem8.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new System.Drawing.Size(125, 53);
+            layoutControlItem8.TextVisible = false;
             // 
             // TabelMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1496, 587);
+            ClientSize = new System.Drawing.Size(1529, 588);
             Controls.Add(layoutControl1);
             KeyPreview = true;
             Name = "TabelMain";
@@ -764,18 +797,19 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ResumeLayout(false);
         }
 
@@ -794,10 +828,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private Core.Class.CustomLabel customLabel2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
-        private Core.Class.CustomLabel customLabelYear;
-        private Core.Class.CustomLabel customLabelMonth;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private Core.Class.CustomButton OpenSpisokButton;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPomPech;
@@ -853,8 +883,15 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPodrTableID;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnDlD;
-        private Core.Class.CustomButton customButton4;
         private Core.Class.CustomButton customButtonOtvlRab;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private Core.Class.CustomButton customButton5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
+        private System.Windows.Forms.Label customLabelYear;
+        private System.Windows.Forms.Label customLabelMonth;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private Core.Class.CustomButton customButton4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }

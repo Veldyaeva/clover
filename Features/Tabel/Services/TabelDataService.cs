@@ -59,15 +59,15 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
         }
-        public async Task<List<zlPodr>> GetzlPodrAsync()
+        public async Task<List<SpPodr>> GetzlPodrAsync()
         {
             try
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "select gr , naimen from zlgr order by gr";
+                    string query = "select gr as tnid, naimen from zlgr";
 
-                    var result = await connection.QueryAsync<zlPodr>(query, new Dictionary<string, object> { });
+                    var result = await connection.QueryAsync<SpPodr>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
 
@@ -215,6 +215,29 @@ namespace SewingProduction.Features.Tabel.Services
                 _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
                 return null;
             }
+        }
+        public bool CheckRecordsExistsOrionUser(string mg, int gr,int podrTabelId)
+        {
+            bool _isCountTabel;
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $" select uin from TimeSheetUnion " +
+                        $" inner join [192.168.106.119\\SQLSERVER2008].[demobase1_20_3_re].[dbo].[pList] on TimeSheetUnion.uin = pList.TabNumber " +
+                        $" where TimeSheetUnion.mg = '{mg}' and TimeSheetUnion.ttabn = {gr} and TimeSheetUnion.podrTableId = {podrTabelId} and TimeSheetUnion.uin is not null ";
+
+                    _isCountTabel = _dbHelper.Exists(query, new Dictionary<string, object> { });
+                    return _isCountTabel;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spisok");
+                return false;
+            }
+
+            return _isCountTabel;
         }
     }
 }
