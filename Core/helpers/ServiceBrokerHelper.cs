@@ -1,4 +1,4 @@
-﻿// ServiceBrokerHelper.cs
+// ServiceBrokerHelper.cs
 // Универсальный хелпер для формы:
 // - Ты передаёшь список ObjectName (хранимки/SQL-объекты)
 // - Хелпер сам по каждому ObjectName вызывает твой GetObjectListForServiceBroker(objectName, ct)
@@ -162,6 +162,9 @@ namespace SewingProduction.Core.helpers
 
             RebuildIndex();
             StartAllBrokers();
+            
+            // Регистрируем остановку всех брокеров при отмене токена
+            ct.Register(() => StopAllBrokers());
         }
         //////private Task Broker_Changed(string table, string? fieldsCsv)
         //////{
@@ -221,6 +224,10 @@ namespace SewingProduction.Core.helpers
         /// </summary>
         public Task HandleBrokerUpdateAsync(string tableFromBroker, string? changedFieldsCsv)
         {
+            // подавление “самих себя”
+            if (IsMutedTable(tableFromBroker))
+                return Task.CompletedTask;
+
             var changed = ParseFields(changedFieldsCsv ?? "");
             return HandleBrokerUpdateAsync(tableFromBroker, changed);
         }
@@ -463,6 +470,32 @@ public ValueTask DisposeAsync()
             }
         }
 
+        /// <summary>
+        /// Останавливает все активные брокеры. Вызывается автоматически при отмене CancellationToken.
+        /// </summary>
+        private void StopAllBrokers()
+        {
+            if (_brokers == null || _brokers.Count == 0)
+                return;
+
+            Debug.WriteLine($"[ServiceBrokerHelper] Stopping {_brokers.Count} brokers due to cancellation");
+
+            foreach (var broker in _brokers.Values)
+            {
+                try
+                {
+                    broker.Changed -= Broker_Changed;
+                    broker.StopBroker();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[ServiceBrokerHelper] Error stopping broker: {ex}");
+                }
+            }
+
+            _brokers.Clear();
+        }
+
         private static string ExtractTableName(string tableKey)
         {
             var idx = tableKey.LastIndexOf('.');
@@ -476,5 +509,35 @@ public ValueTask DisposeAsync()
                 .Select(s => s.Trim())
                 .Where(s => !string.IsNullOrWhiteSpace(s));
         }
+        private readonly ConcurrentDictionary<string, DateTime> _muteUntilUtc = new(StringComparer.OrdinalIgnoreCase);
+
+        public void MuteTable(string tableKey, TimeSpan duration)
+        {
+            if (string.IsNullOrWhiteSpace(tableKey)) return;
+            _muteUntilUtc[NormalizeKey(tableKey)] = DateTime.UtcNow.Add(duration);
+        }
+
+        public bool IsMutedTable(string tableKey)
+        {
+            if (string.IsNullOrWhiteSpace(tableKey)) return false;
+
+            var key = NormalizeKey(tableKey);
+            if (!_muteUntilUtc.TryGetValue(key, out var until))
+                return false;
+
+            if (DateTime.UtcNow <= until)
+                return true;
+
+            _muteUntilUtc.TryRemove(key, out _);
+            return false;
+        }
+
+        private static string NormalizeKey(string s)
+        {
+            s = s.Trim();
+            // поддержим dbo.table и table
+            return s.Contains('.') ? s : "dbo." + s;
+        }
+
     }
 }

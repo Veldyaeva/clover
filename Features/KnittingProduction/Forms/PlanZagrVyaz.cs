@@ -52,7 +52,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private bool _suppressZadanyFocusedChanged;
         private int _rzvLoadVersion;
         private ServiceBrokerHelper? _sbHelper;
-        private ServiceBroker? _broker;
         private EnhancedRefreshCoordinator? _refreshCoordinator;
 
         // Таблицы, изменения в которых НЕ должны инициировать обновление UI
@@ -61,6 +60,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private Dictionary<string, Func<Task>> _objectRestartMap = null!;
         private CancellationTokenSource? _loadCts;
+        private CancellationTokenSource? _lifetimeCts;
 
         private readonly DebouncedLoader _loader = new(delayMs: 300);
 
@@ -1730,6 +1730,7 @@ private async Task InitializeBindingsAsync()
         {
             try
             {
+                _lifetimeCts = new CancellationTokenSource();
                 _loadCts = new CancellationTokenSource();
                 InitObjectRestartMap();
 
@@ -1747,9 +1748,9 @@ private async Task InitializeBindingsAsync()
                 
                 // Настраиваем приоритеты для разных объектов
                 _refreshCoordinator.SetPriority("GetPlanZagrVyazByPachList", 10);
-                _refreshCoordinator.SetPriority("getSmenZadanyVyaz", 5);
+                _refreshCoordinator.SetPriority("GetSmenZadanyVyaz", 5);
 
-                await InitServiceBrokerAsync(_loadCts.Token);
+                await InitServiceBrokerAsync(_lifetimeCts.Token);
 
                 Task bindingsTask = InitializeBindingsAsync();
                 await Task.WhenAll(bindingsTask);
@@ -4098,12 +4099,31 @@ private async Task InitializeBindingsAsync()
         // //   _loadCts?.Cancel();
         //   // base.OnFormClosed(e);
         //}
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                _lifetimeCts?.Cancel(); // ← ВСЁ, остальное автоматически
+                _loadCts?.Cancel();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Form] OnFormClosed error: {ex}");
+            }
+            finally
+            {
+                _lifetimeCts?.Dispose();
+                _loadCts?.Dispose();
+                base.OnFormClosed(e);
+            }
+        }
+
         private void OnFormClosed(object sender, FormClosedEventArgs e)
         {
             try
             {
                 Application.Idle -= ExpandGroupsOnIdle;
-                _loadCts?.Cancel();
+               // _loadCts?.Cancel();
                 //base.OnFormClosed(e);
                 _loadCts?.Dispose();
             }
@@ -4143,7 +4163,6 @@ private async Task InitializeBindingsAsync()
                 gridViewRzvPachListByNom.FocusedRowChanged -= gridViewRzvPachListByNom_FocusedRowChanged;
                 gridViewPZVOperList.FocusedRowChanged -= gridViewPZVOperList_FocusedRowChanged;
                 advBandedGridViewSmenZadany.FocusedRowChanged -= advBandedGridViewSmenZadany_FocusedRowChanged;
-
                 _loadCts?.Cancel();
 
                 if (_sbHelper != null)
@@ -4151,6 +4170,7 @@ private async Task InitializeBindingsAsync()
                     // НЕ ждём, чтобы не блокировать закрытие формы
                     _ = _sbHelper.DisposeAsync();
                 }
+                _refreshCoordinator?.Dispose();
             }
             catch (Exception ex)
             {

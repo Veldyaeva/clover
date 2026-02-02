@@ -36,22 +36,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
         /// </summary>
         private readonly IKnitterOrchestrator _orchestrator;
-        
+
         /// <summary>
         /// ServiceBroker для отслеживания изменений в БД.
         /// </summary>
         private ServiceBrokerHelper? _sbHelper;
-        
+
         /// <summary>
         /// Координатор обновлений с защитой от дребезга.
         /// </summary>
         private EnhancedRefreshCoordinator? _refreshCoordinator;
-        
+
         /// <summary>
         /// Сервис для работы с ServiceBroker.
         /// </summary>
         private ServiceBrokerService? _sbService;
-        
+
         /// <summary>
         /// Токен отмены для инициализации ServiceBroker.
         /// </summary>
@@ -134,8 +134,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public KnitterWorkSpace(UserClass user) : base(user)
         {
             try
-        {
-            InitializeComponent();
+            {
+                InitializeComponent();
                 dataLayoutControl1.DataSource = _planBindingSource;
 
                 ConfigureAdvBandedGridColumns();
@@ -144,14 +144,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
                 _orchestrator = new KnitterOrchestrator(repo, new FileLogger());
 
-            PlanZagrVyazGridControl.DataSource = _planBindingSource;
+                PlanZagrVyazGridControl.DataSource = _planBindingSource;
 
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
-            this.Load += async (s, e) => 
-            {
-                await InitializeAsync();
-                await InitServiceBrokerAsync();
-            };
+                this.Load += async (s, e) =>
+                {
+                    await InitializeAsync();
+                    await InitServiceBrokerAsync();
+                };
 
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
@@ -238,10 +238,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 TabGridLookUpEdit.Properties.ValueMember = nameof(FioModel.Tab);
                 TabGridLookUpEdit.Properties.DataSource = fioList;
                 dateEdit1.EditValue = DateTime.Now;
-                
+
                 // Сохраняем список для повторного показа сплеша при бездействии
                 _cachedFioList = fioList;
-                
+
                 PresentFioSelectionSplash(fioList, defaultTab);
             }
             catch (Exception ex)
@@ -271,55 +271,55 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 initialTab = defaultTab;
             }
 
-			_isSplashShowing = true;
-			double oldOpacity = this.Opacity;
-			Form overlay = null;
-			try
-			{
-				// Перекрываем только текущую вкладку/форму KnitterWorkSpace, не блокируя остальные вкладки/кнопки
-				overlay = new Form();
-				overlay.FormBorderStyle = FormBorderStyle.None;
-				overlay.StartPosition = FormStartPosition.Manual;
-				overlay.ShowInTaskbar = false;
-				overlay.BackColor = System.Drawing.Color.AliceBlue;
-				overlay.TopMost = false; // достаточно быть над текущей формой
-				overlay.Owner = this;
+            _isSplashShowing = true;
+            double oldOpacity = this.Opacity;
+            Form overlay = null;
+            try
+            {
+                // Перекрываем только текущую вкладку/форму KnitterWorkSpace, не блокируя остальные вкладки/кнопки
+                overlay = new Form();
+                overlay.FormBorderStyle = FormBorderStyle.None;
+                overlay.StartPosition = FormStartPosition.Manual;
+                overlay.ShowInTaskbar = false;
+                overlay.BackColor = System.Drawing.Color.AliceBlue;
+                overlay.TopMost = false; // достаточно быть над текущей формой
+                overlay.Owner = this;
 
-				// Берём границы основного layout текущей вкладки; если что-то пойдёт не так — используем всю клиентскую область формы
-				var bounds = dataLayoutControl1?.RectangleToScreen(dataLayoutControl1.ClientRectangle)
-					?? this.RectangleToScreen(this.ClientRectangle);
-				overlay.Bounds = bounds;
-				overlay.Show();
+                // Берём границы основного layout текущей вкладки; если что-то пойдёт не так — используем всю клиентскую область формы
+                var bounds = dataLayoutControl1?.RectangleToScreen(dataLayoutControl1.ClientRectangle)
+                    ?? this.RectangleToScreen(this.ClientRectangle);
+                overlay.Bounds = bounds;
+                overlay.Show();
 
-				using (var splash = new FioSelectionSplash(fioList, initialTab))
-				{
-					splash.StartPosition = FormStartPosition.CenterScreen;
-				//	splash.TopMost = true;
-					var result = splash.ShowDialog(overlay);
-					if (result == DialogResult.OK && splash.SelectedTab.HasValue)
-					{
-						FioGridLookUpEdit.EditValue = splash.SelectedTab.Value;
-						TabGridLookUpEdit.EditValue = splash.SelectedTab.Value;
-						// Перезапускаем таймер после успешного выбора
-						ResetIdleTimer();
-					}
-					else
-					{
-						BeginInvoke(new Action(Close));
-					}
-				}
-			}
-			finally
-			{
-				// Убираем оверлей и возвращаем видимость формы
-				if (overlay != null)
-				{
-					try { overlay.Close(); } catch { }
-					overlay.Dispose();
-				}
-				this.Opacity = oldOpacity;
-				_isSplashShowing = false;
-			}
+                using (var splash = new FioSelectionSplash(fioList, initialTab))
+                {
+                    splash.StartPosition = FormStartPosition.CenterScreen;
+                    //	splash.TopMost = true;
+                    var result = splash.ShowDialog(overlay);
+                    if (result == DialogResult.OK && splash.SelectedTab.HasValue)
+                    {
+                        FioGridLookUpEdit.EditValue = splash.SelectedTab.Value;
+                        TabGridLookUpEdit.EditValue = splash.SelectedTab.Value;
+                        // Перезапускаем таймер после успешного выбора
+                        ResetIdleTimer();
+                    }
+                    else
+                    {
+                        BeginInvoke(new Action(Close));
+                    }
+                }
+            }
+            finally
+            {
+                // Убираем оверлей и возвращаем видимость формы
+                if (overlay != null)
+                {
+                    try { overlay.Close(); } catch { }
+                    overlay.Dispose();
+                }
+                this.Opacity = oldOpacity;
+                _isSplashShowing = false;
+            }
         }
 
         /// <summary>
@@ -841,7 +841,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     g.Key.KmlId,
                     Machine = string.IsNullOrWhiteSpace(g.Key.kmlNumber) ? g.Key.KmlId.ToString() : g.Key.kmlNumber,
-                    Hours = g.Sum(x => x.FactChas_UI) 
+                    Hours = g.Sum(x => x.FactChas_UI)
                 })
                 .Where(x => x.Hours < minHours)
                 .OrderBy(x => x.Machine)
@@ -876,14 +876,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _pzvDateStartButtonEdit.Buttons.Clear();
             _pzvDateStartButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Начать", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
             _pzvDateStartButtonEdit.DoubleClick += PzvDateStartButtonEdit_DoubleClick;
-      //      _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEdit_ButtonClick;
+            //      _pzvDateStartButtonEdit.ButtonClick += PzvDateStartButtonEdit_ButtonClick;
 
             _pzvDateStartTextEdit = new RepositoryItemTextEdit { ReadOnly = true };
 
             PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateStartButtonEdit);
             PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateStartTextEdit);
             BandedGridColumn dateStart = bandedGridColumn18;
-             //  advBandedGridView1.CustomRowCellEdit += AdvBandedGridView1_CustomRowCellEdit;
+            //  advBandedGridView1.CustomRowCellEdit += AdvBandedGridView1_CustomRowCellEdit;
             advBandedGridView1.CustomRowCellEdit += (s, e) =>
             {
                 if (e.Column != null && e.Column.FieldName == dateStart.FieldName)
@@ -924,7 +924,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _pzvDateEndButtonEdit.Buttons.Clear();
             _pzvDateEndButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Завершить", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
             _pzvDateEndButtonEdit.DoubleClick += PzvDateEndButtonEdit_DoubleClick;
-       //     _pzvDateEndButtonEdit.ButtonClick += PzvDateEndButtonEdit_ButtonClick;
+            //     _pzvDateEndButtonEdit.ButtonClick += PzvDateEndButtonEdit_ButtonClick;
 
             _pzvDateEndTextEdit = new RepositoryItemTextEdit { ReadOnly = true };
             PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateEndButtonEdit);
@@ -941,8 +941,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (e.Column != bandedGridColumn18)
                 return;
 
-            bool isEmpty = e.CellValue == null || 
-                          e.CellValue == DBNull.Value || 
+            bool isEmpty = e.CellValue == null ||
+                          e.CellValue == DBNull.Value ||
                           (e.CellValue is DateTime dt && dt == DateTime.MinValue);
 
             e.RepositoryItem = isEmpty ? _pzvDateStartButtonEdit : _pzvDateStartTextEdit;
@@ -953,7 +953,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private async void PzvDateStartButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
-            GridView view = PlanZagrVyazGridControl.FocusedView as GridView; 
+            GridView view = PlanZagrVyazGridControl.FocusedView as GridView;
             await ApplyPzvDateStartAsync(view);
         }
 
@@ -1154,7 +1154,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (currentRow.pzvSek > 0)
                 {
                     factHours = Math.Round((currentRow.pzvSek * qty) / 3600m, 2);
-                    currentRow.pzvNChasi = factHours; 
+                    currentRow.pzvNChasi = factHours;
                 }
                 var masterRow = _planPresenter.AllRows?.FirstOrDefault(r => r != null && r.pzvID == currentRow.pzvID);
                 if (masterRow != null)
@@ -1186,10 +1186,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 (m, v) => m.pzvDateEnd = v,
                 "окончания");
 
-			// Затем — разделение записи в зависимости от введённого количества
-			IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
-			if (currentRow?.pzvID > 0)
-			{ if (defaultQty > 0)
+            // Затем — разделение записи в зависимости от введённого количества
+            IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
+            if (currentRow?.pzvID > 0)
+            {
+                if (defaultQty > 0)
                 {
                     //if (qty == 0)
                     //{
@@ -1197,14 +1198,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     //    newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
                     //}
                     //else Если сама завершает с фактом 0 - это тот же случай 1 с введённым количеством 
-                    if (qty < defaultQty) 
+                    if (qty < defaultQty)
                     {
                         // Факт меньше запланированного — mode = 1 c qtyFact
                         newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
                     }
                 }
-			}
-            
+            }
+
             // Обновим план, чтобы показать новую запись остатка (если была создана)
             if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
             {
@@ -1325,9 +1326,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-          //  var a = Block14Composer.Format(textEdit2.Text);
+            //  var a = Block14Composer.Format(textEdit2.Text);
 
-          //  textEdit3.Text = a.ToString();
+            //  textEdit3.Text = a.ToString();
         }
 
         /// <summary>
@@ -1687,7 +1688,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             int? kwsId = isShiftOpen ? _currentShiftId : 0;
             //kwsId = isAdmin
             bool onlyUnassigned = !isShiftOpen && !_showAllAssignedWhenClosed;
-         //   bool includeFinished = true;//isAdmin;
+            //   bool includeFinished = true;//isAdmin;
             decimal maxHours = isShiftOpen ? 240m : _maxHoursClosedShift;
             bool expandByNr = _expandNrToggle?.Checked == true;
 
@@ -1701,7 +1702,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     EnsureFactHours(row);
                 }
             }
-                _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
+            _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
             RefreshFooterSummaries();
             _currentLoadedTab = tab;
         }
@@ -1926,6 +1927,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Игнорируем ошибки при освобождении ресурсов
             }
             base.Dispose();
+        }
+
+
+
+        private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            await ReloadCurrentTabAsync();
+
         }
     }
 }
