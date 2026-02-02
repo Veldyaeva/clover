@@ -295,6 +295,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Report\TimeSheetReportZl.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

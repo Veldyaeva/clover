@@ -328,6 +328,7 @@
             customTextBoxValue.ForeColor = System.Drawing.Color.Black;
             customTextBoxValue.Location = new System.Drawing.Point(12, 132);
             customTextBoxValue.Name = "customTextBoxValue";
+            customTextBoxValue.ReadOnly = true;
             customTextBoxValue.Size = new System.Drawing.Size(64, 20);
             customTextBoxValue.TabIndex = 19;
             // 
@@ -402,9 +403,6 @@
             // 
             radioGroup2.Location = new System.Drawing.Point(12, 52);
             radioGroup2.Name = "radioGroup2";
-            // 
-            // radioGroup2
-            // 
             radioGroup2.Properties.Columns = 3;
             radioGroup2.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
             radioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Празд"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Приказ"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Нет") });
