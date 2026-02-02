@@ -69,13 +69,13 @@ namespace SewingProduction.Core.helpers
             int maxCascadeDepth = 3)
         {
             _reloadByObjectNameAsync = reloadByObjectNameAsync ?? throw new ArgumentNullException(nameof(reloadByObjectNameAsync));
-            _debounce = debounce ?? TimeSpan.FromMilliseconds(500);
-            _throttle = throttle; // null = отключен
-            _maxWait = maxWait ?? TimeSpan.FromSeconds(3);
+            //_debounce = debounce ?? TimeSpan.FromMilliseconds(500);
+            //_throttle = throttle; // null = отключен
+            //_maxWait = maxWait ?? TimeSpan.FromSeconds(3);
 
-            //_debounce = debounce ?? TimeSpan.FromMilliseconds(50);
-            //_throttle = throttle ?? TimeSpan.FromMicroseconds(15); // null = отключен
-            //_maxWait = maxWait ?? TimeSpan.FromSeconds(20);
+            _debounce = debounce ?? TimeSpan.FromMilliseconds(500);
+            _throttle = throttle ?? TimeSpan.FromMicroseconds(1500); // null = отключен
+            _maxWait = maxWait ?? TimeSpan.FromSeconds(2000);
             _maxBatchSize = Math.Max(1, maxBatchSize);
             _maxParallelReloads = Math.Max(1, maxParallelReloads);
             _maxCascadeDepth = Math.Max(1, maxCascadeDepth);
