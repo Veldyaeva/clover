@@ -77,8 +77,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 });
                 await Task.WhenAll(appeZakrViewTask);
                 customLookUpEdit1.Properties.DataSource = _appeZakrViewBindingSource;
-                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DisplayText", "Задание"));
-                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Nom", "Номер"));
+                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Nom", "Номер задания"));
+                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Articul", "Артикул"));
+                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Data_za", "Дата запуска"));
+                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Grup", "Группа"));
+                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Mod", "Торг. арт"));
+                customLookUpEdit1.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Kodd", "код"));
                 customLookUpEdit1.Properties.DisplayMember = "Nom";
                 customLookUpEdit1.Properties.ValueMember = "Nom";
                 //SelectNomZadComboBox.DataSource = _appeZakrViewBindingSource;
@@ -110,6 +114,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
                 BusCustomCheckBox.DataBindings.Add("Checked", _appeZakrViewBindingSource, nameof(appeZakrNewView.Bus), true, DataSourceUpdateMode.Never);
                 BdCustomCheckBox.DataBindings.Add("Checked", _appeZakrViewBindingSource, nameof(appeZakrNewView.Bd), true, DataSourceUpdateMode.Never);
                 DtfCustomCheckBox.DataBindings.Add("Checked", _appeZakrViewBindingSource, nameof(appeZakrNewView.Dtf_print), true, DataSourceUpdateMode.Never);
+                DateCustomTextBox.Text = DateTime.Now.Date.ToString();
             }
             catch (Exception ex)
             {
@@ -155,12 +160,14 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             if (lookUpEdit.EditValue != null)
             {
                 var item = _appeZakrViewBindingSource.List.OfType<appeZakrNewView>()
-                .FirstOrDefault(x => x.Nom.Equals(lookUpEdit.EditValue));
+                .FirstOrDefault(x => x.Nom.Equals(lookUpEdit.EditValue)) as appeZakrNewView;
                 if (item != null)
                 {
+                    MessageBox.Show($"{item.Nom}");
                     _appeZakrViewBindingSource.Position = _appeZakrViewBindingSource.IndexOf(item);
                 }
             }
+
         }
     }
 }

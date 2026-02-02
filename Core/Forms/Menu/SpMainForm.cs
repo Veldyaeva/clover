@@ -14,6 +14,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using Microsoft.Extensions.DependencyInjection;
 using SewingProduction.Core;
+using SewingProduction.Features.Tabel.Forms;
 
 namespace SewingProduction
 {
@@ -261,6 +262,10 @@ namespace SewingProduction
             OpenForm(form, sender);
         }
 
+        private void табельToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TabelMain(_user), sender);
+        }
         private void справкаtoolStripMenuItem_Click(object sender, EventArgs e)
         {
             var f = new SewingProduction.HelpAdmin.Forms.AdminHelpEditorForm(this._formManager);

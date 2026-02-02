@@ -1,8 +1,9 @@
 using System.Windows.Forms;
+using SewingProduction;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    partial class KnitterWorkSpace : CustomForm
+    partial class KnitterWorkSpace : ServiceBrokerFormBase
     {
         /// <summary>
         /// Required designer variable.
@@ -31,6 +32,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void InitializeComponent()
         {
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnitterWorkSpace));
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions4 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions5 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             gridBand39 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridColumn20 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -108,11 +115,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             simpleLabelItem1 = new DevExpress.XtraLayout.SimpleLabelItem();
+            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             gridBand20 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             gridBand21 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             gridBand22 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -165,11 +173,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             SuspendLayout();
             // 
             // advBandedGridView1
@@ -494,10 +503,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridLevelNode1.LevelTemplate = advBandedGridView1;
             gridLevelNode1.RelationName = "ArtNom";
             PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
-            PlanZagrVyazGridControl.Location = new System.Drawing.Point(12, 42);
+            PlanZagrVyazGridControl.Location = new System.Drawing.Point(24, 75);
             PlanZagrVyazGridControl.MainView = bandedGridView3;
             PlanZagrVyazGridControl.Name = "PlanZagrVyazGridControl";
-            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1305, 563);
+            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1281, 518);
             PlanZagrVyazGridControl.TabIndex = 6;
             PlanZagrVyazGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridView3, advBandedGridView1 });
             // 
@@ -685,7 +694,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             bandedGridColumn28.Caption = "факт в м/ч";
             bandedGridColumn28.Name = "bandedGridColumn28";
-            bandedGridColumn28.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", "SUM={0:0.##}") });
+            bandedGridColumn28.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "", "{0:0.##}") });
             bandedGridColumn28.Visible = true;
             bandedGridColumn28.Width = 73;
             // 
@@ -841,7 +850,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem1, layoutControlItem9, layoutControlItem5, emptySpaceItem1, simpleLabelItem1 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, layoutControlItem4, layoutControlItem9, layoutControlItem5, emptySpaceItem1, simpleLabelItem1, layoutControlGroup1 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(1329, 617);
             Root.TextVisible = false;
@@ -886,14 +895,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem4.TextSize = new System.Drawing.Size(45, 13);
             layoutControlItem4.TextToControlDistance = 5;
             // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = PlanZagrVyazGridControl;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 30);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1309, 567);
-            layoutControlItem1.TextVisible = false;
-            // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = simpleButton2;
@@ -931,6 +932,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             simpleLabelItem1.Size = new System.Drawing.Size(182, 30);
             simpleLabelItem1.Text = " ";
             simpleLabelItem1.TextSize = new System.Drawing.Size(143, 19);
+            // 
+            // layoutControlGroup1
+            // 
+            buttonImageOptions1.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("buttonImageOptions1.SvgImage");
+            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Обновить", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть всё", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать всё", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть до пачки", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1) });
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1 });
+            layoutControlGroup1.Location = new System.Drawing.Point(0, 30);
+            layoutControlGroup1.Name = "layoutControlGroup1";
+            layoutControlGroup1.Size = new System.Drawing.Size(1309, 567);
+            layoutControlGroup1.Text = " ";
+            layoutControlGroup1.CustomButtonClick += layoutControlGroup1_CustomButtonClick;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = PlanZagrVyazGridControl;
+            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(1285, 522);
+            layoutControlItem1.TextVisible = false;
             // 
             // gridBand20
             // 
@@ -1199,6 +1219,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1329, 617);
             Controls.Add(dataLayoutControl1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "KnitterWorkSpace";
             Text = "Рабочее место вязальщицы";
             ((System.ComponentModel.ISupportInitialize)advBandedGridView1).EndInit();
@@ -1217,11 +1238,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleLabelItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ResumeLayout(false);
         }
 
@@ -1345,5 +1367,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand55;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand28;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand33;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
     }
 }

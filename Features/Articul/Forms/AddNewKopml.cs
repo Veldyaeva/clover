@@ -152,6 +152,9 @@ namespace SewingProduction.Features.Articul.Forms
                 return;
             }
 
+            customLabelInfo.ForeColor = Color.Red;
+            customLabelInfo.Font = new Font(customLabelInfo.Font.FontFamily, 8f, FontStyle.Regular);
+
             customLabelInfo.Visible = true;
 
             var sb = new System.Text.StringBuilder();
@@ -163,7 +166,14 @@ namespace SewingProduction.Features.Articul.Forms
                 sb.AppendLine("Созданы накладные: " + string.Join(", ", info.InNakl));
 
             if (info.IsReadOnly)
+            {
                 sb.AppendLine(info.ReadOnlyMessage);
+                xAllZap = false;
+                customCheckBoxOdinak.Checked = false;
+                customCheckBoxOdinak.Enabled = false;
+                customNumericUpDownValueTab.Enabled = false; 
+                repositoryItemButtonEditAddRazm.Click -= repositoryItemButtonEditAddRazm_Click;
+            }
 
             customLabelInfo.Text = sb.ToString().Trim();
         }
@@ -381,7 +391,7 @@ namespace SewingProduction.Features.Articul.Forms
         private BindingList<SpArticulGrupMenViewModel> _selectedKomplItems = new();
 
         // карта выбранного на вкладках: tabIndex -> (kod, razm)
-        private readonly Dictionary<int, (int kod, string razm)> _tabSelection = new();
+        private readonly Dictionary<int, (string kod, string razm)> _tabSelection = new();
 
         private void CheckEditValueChanged(object sender, CustomGridControl grid)
         {
@@ -555,9 +565,9 @@ namespace SewingProduction.Features.Articul.Forms
 
             if (_tabSelection.TryGetValue(tabIndex, out var prev))
             {
-                if (prev.kod != Convert.ToInt32(selected.Kod) || prev.razm != selected.Razm)
+                if (prev.kod != selected.Kod || prev.razm != selected.Razm)
                 {
-                    var prevAgg = _selectedKomplItems.FirstOrDefault(x => Convert.ToInt32(x.Kod) == prev.kod && x.Razm == prev.razm);
+                    var prevAgg = _selectedKomplItems.FirstOrDefault(x => x.Kod == prev.kod && x.Razm == prev.razm);
                     if (prevAgg != null)
                     {
                         if (prevAgg.countStr > 1) prevAgg.countStr -= 1;
@@ -571,7 +581,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (curAgg != null) curAgg.countStr += 1;
             else { selected.countStr = 1; _selectedKomplItems.Add(selected); }
 
-            _tabSelection[tabIndex] = (Convert.ToInt32(selected.Kod), selected.Razm);
+            _tabSelection[tabIndex] = (selected.Kod, selected.Razm);
             customGridControlKomplSelected.RefreshDataSource();
 
             if (!xAutoRazm && !xAllZap)
@@ -1500,12 +1510,12 @@ namespace SewingProduction.Features.Articul.Forms
         private static void ClearKodSlots(KomplModel k)
         {
             k.Kod1 = k.Kod2 = k.Kod3 = k.Kod4 = k.Kod5 =
-            k.Kod6 = k.Kod7 = k.Kod8 = k.Kod9 = k.Kod10 = null;
+            k.Kod6 = k.Kod7 = k.Kod8 = k.Kod9 = k.Kod10 = "";
         }
 
         private static void SetKodByIndex(KomplModel k, int idx, string kodStr)
         {
-            int kod = int.Parse(kodStr);
+            string kod = kodStr;
             switch (idx)
             {
                 case 0: k.Kod1 = kod; break;
@@ -1810,10 +1820,10 @@ namespace SewingProduction.Features.Articul.Forms
 
                 var kodList = new List<object>();
 
-                void addKod(int? kodNullable)
+                void addKod(string kodNullable)
                 {
-                    if (!kodNullable.HasValue) return;
-                    var kodStr = kodNullable.Value.ToString();
+                    if (string.IsNullOrWhiteSpace(kodNullable)) return;
+                    var kodStr = kodNullable;
                     var art = LookupArt(kodStr);
 
                     kodList.Add(new
@@ -1826,16 +1836,16 @@ namespace SewingProduction.Features.Articul.Forms
                     });
                 }
 
-                if (row.Kod1.HasValue) addKod(row.Kod1);
-                if (row.Kod2.HasValue) addKod(row.Kod2);
-                if (row.Kod3.HasValue) addKod(row.Kod3);
-                if (row.Kod4.HasValue) addKod(row.Kod4);
-                if (row.Kod5.HasValue) addKod(row.Kod5);
-                if (row.Kod6.HasValue) addKod(row.Kod6);
-                if (row.Kod7.HasValue) addKod(row.Kod7);
-                if (row.Kod8.HasValue) addKod(row.Kod8);
-                if (row.Kod9.HasValue) addKod(row.Kod9);
-                if (row.Kod10.HasValue) addKod(row.Kod10);
+                if (row.Kod1 != "") addKod(row.Kod1);
+                if (row.Kod2 != "") addKod(row.Kod2);
+                if (row.Kod3 != "") addKod(row.Kod3);
+                if (row.Kod4 != "") addKod(row.Kod4);
+                if (row.Kod5 != "") addKod(row.Kod5);
+                if (row.Kod6 != "") addKod(row.Kod6);
+                if (row.Kod7 != "") addKod(row.Kod7);
+                if (row.Kod8 != "") addKod(row.Kod8);
+                if (row.Kod9 != "") addKod(row.Kod9);
+                if (row.Kod10 != "") addKod(row.Kod10);
 
                 e.ChildList = kodList;
             };
@@ -1843,7 +1853,6 @@ namespace SewingProduction.Features.Articul.Forms
             gridViewKompl.MasterRowGetRelationCount += (s, e) => e.RelationCount = 1;
             gridViewKompl.MasterRowGetRelationName += (s, e) => e.RelationName = "Коды";
 
-            // ВАЖНО: поле называется "Kod_k" (string), не конвертируем в int
             int handle = gridViewKompl.LocateByValue("Kod_k", xkod);
             if (handle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
                 gridViewKompl.ExpandMasterRow(handle);

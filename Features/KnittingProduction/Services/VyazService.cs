@@ -427,7 +427,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             try
             {
                 await using var connection = _dbHelper.GetConnection();
-                string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
+                string query = $"EXEC GetSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
 
                 var list = (await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { })).ToList();
                 //return result.ToList();

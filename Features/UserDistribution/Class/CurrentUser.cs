@@ -16,5 +16,6 @@ namespace SewingProduction.Features.UserDistribution.Class
         {
             User = null;
         }
+        
     }
 }

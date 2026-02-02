@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -18,6 +18,40 @@ namespace SewingProduction.Core.Class.Settings
         public Dictionary<string, UserSettings> Users { get; set; } = new();
         public string SelectedDatabase { get; set; } = "ace";
         public Dictionary<string, ThemeManager.Theme> Themes { get; set; } = new();
+        public ServiceBrokerSettings ServiceBroker { get; set; } = new ServiceBrokerSettings();
+    }
+
+    public class ServiceBrokerSettings
+    {
+        /// <summary>
+        /// Задержка перед выполнением после последнего события (мс).
+        /// </summary>
+        public int DebounceMs { get; set; } = 5000;
+
+        /// <summary>
+        /// Минимальный интервал между обновлениями одного объекта (мс). 0 = отключен.
+        /// </summary>
+        public int ThrottleMs { get; set; } = 10000;//1000;
+
+        /// <summary>
+        /// Максимальное время ожидания накопления изменений (мс).
+        /// </summary>
+        public int MaxWaitMs { get; set; } = 30000;
+
+        /// <summary>
+        /// Максимальное количество объектов в одном батче.
+        /// </summary>
+        public int MaxBatchSize { get; set; } = 50;
+
+        /// <summary>
+        /// Максимальное количество параллельных обновлений.
+        /// </summary>
+        public int MaxParallelReloads { get; set; } = 2;
+
+        /// <summary>
+        /// Максимальная глубина каскадных обновлений для защиты от циклов.
+        /// </summary>
+        public int MaxCascadeDepth { get; set; } = 3;
     }
 
     public class UserSettings
@@ -270,6 +304,48 @@ namespace SewingProduction.Core.Class.Settings
                 default:
                     throw new Exception($"Неизвестное имя строки подключения: '{dbKey}'");
             }
+        }
+        #endregion
+        #region ServiceBroker
+        public static ServiceBrokerSettings GetServiceBrokerSettings()
+        {
+            return Current.ServiceBroker ?? new ServiceBrokerSettings();
+        }
+
+        public static void SetServiceBrokerSettings(ServiceBrokerSettings settings)
+        {
+            Current.ServiceBroker = settings ?? new ServiceBrokerSettings();
+            Save();
+        }
+
+        public static int GetServiceBrokerDebounceMs()
+        {
+            return GetServiceBrokerSettings().DebounceMs;
+        }
+
+        public static int GetServiceBrokerThrottleMs()
+        {
+            return GetServiceBrokerSettings().ThrottleMs;
+        }
+
+        public static int GetServiceBrokerMaxWaitMs()
+        {
+            return GetServiceBrokerSettings().MaxWaitMs;
+        }
+
+        public static int GetServiceBrokerMaxBatchSize()
+        {
+            return GetServiceBrokerSettings().MaxBatchSize;
+        }
+
+        public static int GetServiceBrokerMaxParallelReloads()
+        {
+            return GetServiceBrokerSettings().MaxParallelReloads;
+        }
+
+        public static int GetServiceBrokerMaxCascadeDepth()
+        {
+            return GetServiceBrokerSettings().MaxCascadeDepth;
         }
         #endregion
     }
