@@ -55,7 +55,7 @@ namespace SewingProduction.Features.Articul
 
         private bool _isInitialized;
 
-        
+
         private BindingList<SpArticulPreviewModel> _articulBindingList;
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -116,7 +116,7 @@ namespace SewingProduction.Features.Articul
                 //bsSostKompl = new BindingSource { DataSource = _articulKomplSostList };
 
                 //});
-               
+
 
                 #region заполнение блока основных данных артикула
 
@@ -292,9 +292,9 @@ namespace SewingProduction.Features.Articul
                 {
                     await this.InvokeAsync(() =>
                     {
-                        
+
                         bsArtDr.DataSource = _artDrForKod; // Привязываем данные к форме
-                        
+
                     });
                 }
             }
@@ -373,7 +373,7 @@ namespace SewingProduction.Features.Articul
 
                     await this.InvokeAsync(() =>
                     {
-                        
+
                         bsSostNabor.DataSource = articulByKodTemp; // Привязываем данные к форме
 
                     });
@@ -386,7 +386,7 @@ namespace SewingProduction.Features.Articul
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostNaborFromSQlAsync для kod {kod}");
             }
         }
-        
+
 
         /// <summary>
         /// обновлениме данных на форме по коду при перемещении по таблице артикулов
@@ -713,6 +713,9 @@ namespace SewingProduction.Features.Articul
             components?.Dispose();
         }
 
-        
+        private void customSimpleButton7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

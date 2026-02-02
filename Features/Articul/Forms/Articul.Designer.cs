@@ -236,12 +236,7 @@ namespace SewingProduction.Features.Articul
             groupBox3 = new System.Windows.Forms.GroupBox();
             customButton3 = new CustomButton();
             customLabel48 = new CustomLabel();
-            customSimpleButton6 = new CustomSimpleButton();
             customTextBox1 = new CustomTextBox();
-            customSimpleButton5 = new CustomSimpleButton();
-            customSimpleButton4 = new CustomSimpleButton();
-            customSimpleButton3 = new CustomSimpleButton();
-            customSimpleButton1 = new CustomSimpleButton();
             txbSebRecom = new CustomTextBox();
             customLabel47 = new CustomLabel();
             labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -278,24 +273,6 @@ namespace SewingProduction.Features.Articul
             customLabel41 = new CustomLabel();
             txbSebz = new CustomTextBox();
             customLabel40 = new CustomLabel();
-            layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            customCheckBox2 = new CustomCheckBox();
-            customCheckBox3 = new CustomCheckBox();
-            customCheckBox4 = new CustomCheckBox();
-            customCheckBox5 = new CustomCheckBox();
-            customCheckBox6 = new CustomCheckBox();
-            customCheckBox7 = new CustomCheckBox();
-            customCheckBox8 = new CustomCheckBox();
-            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem30 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem31 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem37 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem32 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem33 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem34 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem35 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -350,18 +327,6 @@ namespace SewingProduction.Features.Articul
             groupBox3.SuspendLayout();
             customGroupBox1.SuspendLayout();
             customGroupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
-            layoutControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem30).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem31).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem37).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem32).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem33).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).BeginInit();
             SuspendLayout();
             // 
             // grColKomplHasDifference
@@ -411,9 +376,10 @@ namespace SewingProduction.Features.Articul
             gridControl1.GridControl = gridArt;
             gridControl1.Name = "gridControl1";
             gridControl1.OptionsBehavior.Editable = false;
+            gridControl1.OptionsCustomization.AllowFilter = false;
             gridControl1.OptionsEditForm.PopupEditFormWidth = 933;
             gridControl1.OptionsFind.AlwaysVisible = true;
-            gridControl1.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter;
+            gridControl1.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Search;
             gridControl1.OptionsView.ColumnAutoWidth = false;
             gridControl1.OptionsView.ShowAutoFilterRow = true;
             gridControl1.OptionsView.ShowGroupPanel = false;
@@ -1244,6 +1210,7 @@ namespace SewingProduction.Features.Articul
             customSimpleButton7.StyleController = layoutControl1;
             customSimpleButton7.TabIndex = 4;
             customSimpleButton7.Text = "Вшивки";
+            customSimpleButton7.Click += customSimpleButton7_Click;
             // 
             // customTabControlKomplNabor
             // 
@@ -2961,12 +2928,7 @@ namespace SewingProduction.Features.Articul
             groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             groupBox3.Controls.Add(customButton3);
             groupBox3.Controls.Add(customLabel48);
-            groupBox3.Controls.Add(customSimpleButton6);
             groupBox3.Controls.Add(customTextBox1);
-            groupBox3.Controls.Add(customSimpleButton5);
-            groupBox3.Controls.Add(customSimpleButton4);
-            groupBox3.Controls.Add(customSimpleButton3);
-            groupBox3.Controls.Add(customSimpleButton1);
             groupBox3.Controls.Add(txbSebRecom);
             groupBox3.Controls.Add(customLabel47);
             groupBox3.Controls.Add(labelControl1);
@@ -3014,26 +2976,6 @@ namespace SewingProduction.Features.Articul
             customLabel48.TabIndex = 48;
             customLabel48.Text = "Дата расчета";
             // 
-            // customSimpleButton6
-            // 
-            customSimpleButton6.Appearance.BackColor = Color.FromArgb(255, 235, 205);
-            customSimpleButton6.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton6.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            customSimpleButton6.Appearance.Options.UseBackColor = true;
-            customSimpleButton6.Appearance.Options.UseFont = true;
-            customSimpleButton6.Appearance.Options.UseForeColor = true;
-            customSimpleButton6.Appearance.Options.UseTextOptions = true;
-            customSimpleButton6.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            customSimpleButton6.AppearanceDisabled.BackColor = Color.Green;
-            customSimpleButton6.AppearanceDisabled.ForeColor = Color.GreenYellow;
-            customSimpleButton6.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton6.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton6.Location = new Point(239, 351);
-            customSimpleButton6.Name = "customSimpleButton6";
-            customSimpleButton6.Size = new Size(94, 36);
-            customSimpleButton6.TabIndex = 58;
-            customSimpleButton6.Text = "С\\ст по накладной в XLS";
-            // 
             // customTextBox1
             // 
             customTextBox1.BackColor = Color.FromArgb(248, 248, 255);
@@ -3048,84 +2990,6 @@ namespace SewingProduction.Features.Articul
             customTextBox1.ReadOnly = true;
             customTextBox1.Size = new Size(90, 16);
             customTextBox1.TabIndex = 49;
-            // 
-            // customSimpleButton5
-            // 
-            customSimpleButton5.Appearance.BackColor = Color.FromArgb(255, 235, 205);
-            customSimpleButton5.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton5.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            customSimpleButton5.Appearance.Options.UseBackColor = true;
-            customSimpleButton5.Appearance.Options.UseFont = true;
-            customSimpleButton5.Appearance.Options.UseForeColor = true;
-            customSimpleButton5.Appearance.Options.UseTextOptions = true;
-            customSimpleButton5.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            customSimpleButton5.AppearanceDisabled.BackColor = Color.Green;
-            customSimpleButton5.AppearanceDisabled.ForeColor = Color.GreenYellow;
-            customSimpleButton5.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton5.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton5.Location = new Point(105, 351);
-            customSimpleButton5.Name = "customSimpleButton5";
-            customSimpleButton5.Size = new Size(128, 36);
-            customSimpleButton5.TabIndex = 57;
-            customSimpleButton5.Text = "Скопировать во все размеры";
-            // 
-            // customSimpleButton4
-            // 
-            customSimpleButton4.Appearance.BackColor = Color.FromArgb(255, 235, 205);
-            customSimpleButton4.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton4.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            customSimpleButton4.Appearance.Options.UseBackColor = true;
-            customSimpleButton4.Appearance.Options.UseFont = true;
-            customSimpleButton4.Appearance.Options.UseForeColor = true;
-            customSimpleButton4.Appearance.Options.UseTextOptions = true;
-            customSimpleButton4.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            customSimpleButton4.AppearanceDisabled.BackColor = Color.Green;
-            customSimpleButton4.AppearanceDisabled.ForeColor = Color.GreenYellow;
-            customSimpleButton4.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton4.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton4.Location = new Point(239, 304);
-            customSimpleButton4.Name = "customSimpleButton4";
-            customSimpleButton4.Size = new Size(94, 43);
-            customSimpleButton4.TabIndex = 56;
-            customSimpleButton4.Text = "С\\ст по накладной";
-            // 
-            // customSimpleButton3
-            // 
-            customSimpleButton3.Appearance.BackColor = Color.FromArgb(255, 235, 205);
-            customSimpleButton3.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton3.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            customSimpleButton3.Appearance.Options.UseBackColor = true;
-            customSimpleButton3.Appearance.Options.UseFont = true;
-            customSimpleButton3.Appearance.Options.UseForeColor = true;
-            customSimpleButton3.AppearanceDisabled.BackColor = Color.Green;
-            customSimpleButton3.AppearanceDisabled.ForeColor = Color.GreenYellow;
-            customSimpleButton3.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton3.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton3.Location = new Point(105, 304);
-            customSimpleButton3.Name = "customSimpleButton3";
-            customSimpleButton3.Size = new Size(128, 43);
-            customSimpleButton3.TabIndex = 55;
-            customSimpleButton3.Text = "Калькуляция в XLS";
-            // 
-            // customSimpleButton1
-            // 
-            customSimpleButton1.Appearance.BackColor = Color.FromArgb(255, 235, 205);
-            customSimpleButton1.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            customSimpleButton1.Appearance.Options.UseBackColor = true;
-            customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Appearance.Options.UseForeColor = true;
-            customSimpleButton1.Appearance.Options.UseTextOptions = true;
-            customSimpleButton1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            customSimpleButton1.AppearanceDisabled.BackColor = Color.Green;
-            customSimpleButton1.AppearanceDisabled.ForeColor = Color.GreenYellow;
-            customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton1.Location = new Point(6, 351);
-            customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new Size(93, 36);
-            customSimpleButton1.TabIndex = 54;
-            customSimpleButton1.Text = "История расчета";
             // 
             // txbSebRecom
             // 
@@ -3647,201 +3511,11 @@ namespace SewingProduction.Features.Articul
             customLabel40.TabIndex = 34;
             customLabel40.Text = "Зарплата";
             // 
-            // layoutControl2
-            // 
-            layoutControl2.Controls.Add(customCheckBox2);
-            layoutControl2.Controls.Add(customCheckBox3);
-            layoutControl2.Controls.Add(customCheckBox4);
-            layoutControl2.Controls.Add(customCheckBox5);
-            layoutControl2.Controls.Add(customCheckBox6);
-            layoutControl2.Controls.Add(customCheckBox7);
-            layoutControl2.Controls.Add(customCheckBox8);
-            layoutControl2.Location = new Point(1456, 906);
-            layoutControl2.Name = "layoutControl2";
-            layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(242, 393, 645, 623);
-            layoutControl2.Root = layoutControlGroup4;
-            layoutControl2.Size = new Size(124, 231);
-            layoutControl2.TabIndex = 48;
-            layoutControl2.Text = "layoutControl2";
-            // 
-            // customCheckBox2
-            // 
-            customCheckBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            customCheckBox2.Font = new Font("Arial", 10F);
-            customCheckBox2.ForeColor = Color.FromArgb(0, 0, 139);
-            customCheckBox2.Location = new Point(15, 196);
-            customCheckBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCheckBox2.Name = "customCheckBox2";
-            customCheckBox2.Size = new Size(94, 20);
-            customCheckBox2.TabIndex = 7;
-            customCheckBox2.Text = "пресс";
-            customCheckBox2.UseVisualStyleBackColor = true;
-            // 
-            // customCheckBox3
-            // 
-            customCheckBox3.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            customCheckBox3.Font = new Font("Arial", 10F);
-            customCheckBox3.ForeColor = Color.FromArgb(0, 0, 139);
-            customCheckBox3.Location = new Point(15, 172);
-            customCheckBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCheckBox3.Name = "customCheckBox3";
-            customCheckBox3.Size = new Size(94, 20);
-            customCheckBox3.TabIndex = 6;
-            customCheckBox3.Text = "стразы";
-            customCheckBox3.UseVisualStyleBackColor = true;
-            // 
-            // customCheckBox4
-            // 
-            customCheckBox4.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            customCheckBox4.Font = new Font("Arial", 10F);
-            customCheckBox4.ForeColor = Color.FromArgb(0, 0, 139);
-            customCheckBox4.Location = new Point(15, 100);
-            customCheckBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCheckBox4.Name = "customCheckBox4";
-            customCheckBox4.Size = new Size(94, 20);
-            customCheckBox4.TabIndex = 3;
-            customCheckBox4.Text = "принт";
-            customCheckBox4.UseVisualStyleBackColor = true;
-            // 
-            // customCheckBox5
-            // 
-            customCheckBox5.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            customCheckBox5.Font = new Font("Arial", 10F);
-            customCheckBox5.ForeColor = Color.FromArgb(0, 0, 139);
-            customCheckBox5.Location = new Point(15, 148);
-            customCheckBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCheckBox5.Name = "customCheckBox5";
-            customCheckBox5.Size = new Size(94, 20);
-            customCheckBox5.TabIndex = 5;
-            customCheckBox5.Text = "бусины";
-            customCheckBox5.UseVisualStyleBackColor = true;
-            // 
-            // customCheckBox6
-            // 
-            customCheckBox6.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            customCheckBox6.Font = new Font("Arial", 10F);
-            customCheckBox6.ForeColor = Color.FromArgb(0, 0, 139);
-            customCheckBox6.Location = new Point(15, 124);
-            customCheckBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCheckBox6.Name = "customCheckBox6";
-            customCheckBox6.Size = new Size(94, 20);
-            customCheckBox6.TabIndex = 4;
-            customCheckBox6.Text = "вышивка";
-            customCheckBox6.UseVisualStyleBackColor = true;
-            // 
-            // customCheckBox7
-            // 
-            customCheckBox7.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            customCheckBox7.Font = new Font("Arial", 10F);
-            customCheckBox7.ForeColor = Color.FromArgb(0, 0, 139);
-            customCheckBox7.Location = new Point(15, 60);
-            customCheckBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCheckBox7.Name = "customCheckBox7";
-            customCheckBox7.Size = new Size(94, 20);
-            customCheckBox7.TabIndex = 2;
-            customCheckBox7.Text = "фурнитура";
-            customCheckBox7.UseVisualStyleBackColor = true;
-            // 
-            // customCheckBox8
-            // 
-            customCheckBox8.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            customCheckBox8.Font = new Font("Arial", 10F);
-            customCheckBox8.ForeColor = Color.FromArgb(0, 0, 139);
-            customCheckBox8.Location = new Point(15, 36);
-            customCheckBox8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customCheckBox8.Name = "customCheckBox8";
-            customCheckBox8.Size = new Size(94, 20);
-            customCheckBox8.TabIndex = 0;
-            customCheckBox8.Text = "упаковка";
-            customCheckBox8.UseVisualStyleBackColor = true;
-            // 
-            // layoutNorms
-            // 
-            layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            layoutControlGroup4.GroupBordersVisible = false;
-            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup5 });
-            layoutControlGroup4.Name = "Root";
-            layoutControlGroup4.Size = new Size(124, 231);
-            layoutControlGroup4.TextVisible = false;
-            // 
-            // layoutControlGroup5
-            // 
-            layoutControlGroup5.CustomizationFormText = "Отделка";
-            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem30, layoutControlItem31, emptySpaceItem2, layoutControlItem37, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35 });
-            layoutControlGroup5.Location = new Point(0, 0);
-            layoutControlGroup5.Name = "layoutControlGroup3";
-            layoutControlGroup5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup5.Size = new Size(104, 211);
-            layoutControlGroup5.Text = "Отделка";
-            // 
-            // layoutControlItem30
-            // 
-            layoutControlItem30.Control = customCheckBox8;
-            layoutControlItem30.Location = new Point(0, 0);
-            layoutControlItem30.Name = "layoutControlItem30";
-            layoutControlItem30.Size = new Size(98, 24);
-            layoutControlItem30.TextVisible = false;
-            // 
-            // layoutControlItem31
-            // 
-            layoutControlItem31.Control = customCheckBox7;
-            layoutControlItem31.Location = new Point(0, 24);
-            layoutControlItem31.Name = "layoutControlItem31";
-            layoutControlItem31.Size = new Size(98, 24);
-            layoutControlItem31.TextVisible = false;
-            // 
-            // emptySpaceItem2
-            // 
-            emptySpaceItem2.Location = new Point(0, 48);
-            emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new Size(98, 16);
-            // 
-            // layoutControlItem37
-            // 
-            layoutControlItem37.Control = customCheckBox4;
-            layoutControlItem37.Location = new Point(0, 64);
-            layoutControlItem37.Name = "layoutControlItem37";
-            layoutControlItem37.Size = new Size(98, 24);
-            layoutControlItem37.TextVisible = false;
-            // 
-            // layoutControlItem32
-            // 
-            layoutControlItem32.Control = customCheckBox6;
-            layoutControlItem32.Location = new Point(0, 88);
-            layoutControlItem32.Name = "layoutControlItem32";
-            layoutControlItem32.Size = new Size(98, 24);
-            layoutControlItem32.TextVisible = false;
-            // 
-            // layoutControlItem33
-            // 
-            layoutControlItem33.Control = customCheckBox5;
-            layoutControlItem33.Location = new Point(0, 112);
-            layoutControlItem33.Name = "layoutControlItem33";
-            layoutControlItem33.Size = new Size(98, 24);
-            layoutControlItem33.TextVisible = false;
-            // 
-            // layoutControlItem34
-            // 
-            layoutControlItem34.Control = customCheckBox3;
-            layoutControlItem34.Location = new Point(0, 136);
-            layoutControlItem34.Name = "layoutControlItem34";
-            layoutControlItem34.Size = new Size(98, 24);
-            layoutControlItem34.TextVisible = false;
-            // 
-            // layoutControlItem35
-            // 
-            layoutControlItem35.Control = customCheckBox2;
-            layoutControlItem35.Location = new Point(0, 160);
-            layoutControlItem35.Name = "layoutControlItem35";
-            layoutControlItem35.Size = new Size(98, 24);
-            layoutControlItem35.TextVisible = false;
-            // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new Size(1742, 1010);
-            Controls.Add(layoutControl2);
             Controls.Add(customGroupBox2);
             Controls.Add(customGroupBox1);
             Controls.Add(groupBox3);
@@ -3920,18 +3594,6 @@ namespace SewingProduction.Features.Articul
             customGroupBox1.PerformLayout();
             customGroupBox2.ResumeLayout(false);
             customGroupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
-            layoutControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem30).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem31).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem37).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem32).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem33).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).EndInit();
             ResumeLayout(false);
         }
 
@@ -4139,12 +3801,7 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabel47;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private CustomLabel customLabel48;
-        private CustomSimpleButton customSimpleButton6;
         private CustomTextBox customTextBox1;
-        private CustomSimpleButton customSimpleButton5;
-        private CustomSimpleButton customSimpleButton4;
-        private CustomSimpleButton customSimpleButton3;
-        private CustomSimpleButton customSimpleButton1;
         private DevExpress.XtraEditors.SimpleButton sButtodDeleteKod;
         private CustomSimpleButton customSimpleButton7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
@@ -4176,23 +3833,5 @@ namespace SewingProduction.Features.Articul
         private CustomGroupBox groupBox2;
         private CustomSimpleButton csButtonEdit;
         private CustomButton customButton3;
-        private DevExpress.XtraLayout.LayoutControl layoutControl2;
-        private CustomCheckBox customCheckBox2;
-        private CustomCheckBox customCheckBox3;
-        private CustomCheckBox customCheckBox4;
-        private CustomCheckBox customCheckBox5;
-        private CustomCheckBox customCheckBox6;
-        private CustomCheckBox customCheckBox7;
-        private CustomCheckBox customCheckBox8;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
-        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem30;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem31;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem37;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem32;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem33;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem34;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem35;
     }
 }

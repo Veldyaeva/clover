@@ -1,7 +1,9 @@
 ﻿//using DevExpress.ChartRangeControlClient.Core;
 using DevExpress.CodeParser;
+using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraBars.Customization;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using NLog.Layouts;
 using SewingProduction.Core.Class;
@@ -22,6 +24,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,6 +50,8 @@ namespace SewingProduction.Features.Articul.Forms
         private decimal _nRub_k;
         //по умолчанию не разрешено редактирование
         private bool _linkedWithMatrix = true;
+        //открытие формы редактирования размера
+        private bool _openEditFormFromButton = false;
 
         private BindingSource _bindingSourceArtKod;
         private BindingSource _bindingSourceArtCommon;
@@ -99,12 +104,18 @@ namespace SewingProduction.Features.Articul.Forms
             _nRub_k = nRub_kTask.Result;
             _bindingSourceArtKod.DataSource = edAdvTask.Result;
 
+
+
+            //доступ на определенную колонку
             //gridEditAdRazm.InitializeAccess(_user, this.Name, new List<string> { "view_sp_articul" });
 
+            //фильтр на удаленные записи
+            gridViewEditAdvRazm.ActiveFilterString = "[IsDeleted] = false";
+
             await InitializeBindingsAsync();
+            BindGostRazm();
 
             CheckStatus();
-
 
         }
         private async void CheckStatus()
@@ -129,14 +140,15 @@ namespace SewingProduction.Features.Articul.Forms
                     SetGroupReadOnly(layoutCommonArticul, true);
                     SetGroupReadOnly(layoutGostInsert, true);
                     SetGroupReadOnly(layoutSostav, true);
-                    
+
                 }
                 //есть дата описания модели - редактирование запрещено
                 if (_currentModel.DateOpis != null)
                 {
                     layoutGostInsert.Enabled = false;
-                    //SetGroupReadOnly(layoutGost, true);
-                    gcButtonEdit.Visible = false;
+                    //btEdit.Visible = false;
+                    layoutControlItem23.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
                 }
             }
             catch (Exception ex)
@@ -186,6 +198,7 @@ namespace SewingProduction.Features.Articul.Forms
                 //пересчет при смене значений в модели
                 WireModelOnce();
 
+                
 
                 #region заполнение блока основных данных артикула
 
@@ -341,7 +354,24 @@ namespace SewingProduction.Features.Articul.Forms
                 throw;
             }
         }
+        private async void BindGostRazm()
+        {
+            var ri = repositoryItemLookUpEdit1;
+            ri.DataSource = await _articulEdAdvDataService.GetGostRazmByIDAsync(_currentModel.Id_gost);
+            ri.DisplayMember = nameof(GostRazmerNabViewModel.Razm);
+            ri.ValueMember = nameof(GostRazmerNabViewModel.Razm);
+            // Колонки выпадающего списка (по желанию)
+            ri.Columns.Clear();
+            ri.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Razm", "Название"));
 
+
+            ri.NullText = ""; // что показывать, если значение null
+            ri.ShowHeader = false;
+            ri.ShowFooter = false;
+            ri.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor; // запрет ввода, только выбор
+            ri.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+
+        }
         /// <summary>
         /// настройка внешнего вида PopupGrid для выбора ткани
         /// </summary>
@@ -544,14 +574,6 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        private void editGOST()
-        {
-            string value = DevExpress.XtraEditors.XtraInputBox.Show(
-                "Введите значение",
-                "Заголовок",
-                "По умолчанию"
-            );
-        }
         private void WireModelOnce()
         {
             // отписка на всякий случай (если метод вызовут повторно)
@@ -589,32 +611,71 @@ namespace SewingProduction.Features.Articul.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SaveChanges(object sender, EventArgs e)
+        private bool isChangedData()
+        {
+            bool modyfiedRazm = _bindingSourceArtKod.List
+                        .OfType<ArticulModel>()
+                        .Any(x => (x?.IsModified == true || x?.IsNew == true || x?.IsDeleted == true) );
+
+            return _currentModel.IsModified || modyfiedRazm;
+
+        }
+        private async void SaveChanges(object sender, EventArgs e)
         {
             try
             {
                 _bindingSourceArtCommon.EndEdit();
-                _bindingSourceArtCommonSave.Clear();
+                _bindingSourceArtKod.EndEdit();
 
-                //копирование всех кодов с измененными общими данными в список для сохранения
-                //var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
-                if (_currentModel.IsModified == false)
+                _bindingSourceArtCommonSave.Clear();
+                //проверка на изменения
+                if (!isChangedData())
                 {
                     return;
                 }
 
-                for (int i = 0; i < _bindingSourceArtKod.Count; i++)
-                {
-                    var item = (ArticulModel)_bindingSourceArtKod[i];
-                    //    
-                    var newItem = ObjectCloneHelper.CloneWithExclusions(_currentModel, clone =>
-                    {
-                        clone.Kod = item.Kod;
-                        clone.IsModified = true;
+            //    string checkQuery = @"
+            //SELECT COUNT(*) 
+            //FROM INFORMATION_SCHEMA.TABLES 
+            //WHERE TABLE_NAME = @tableName";
+            //    object result = await _dbHelper.ExecuteScalarAsync(checkQuery, new Dictionary<string, object> { { "@tableName", tableName } });
 
-                    }, "Kod", "Razm");
-                    _bindingSourceArtCommonSave.Add(newItem);
+
+                //формирование списка для добавления новых размеров
+                var dictOfKod = (Dictionary<string, object>)_bindingSourceArtKod.List
+                    .OfType<ArticulModel>()
+                    .Where(x => (x.IsNew && !x.IsDeleted))
+                    .Select(x => new Dictionary<string, object>
+                    {
+                        ["Kod"] = x.Kod
+                    });
+
+                if (dictOfKod.Count > 0)
+                {
+                    string checkQuery = @"
+                    insert into sp_articul (kod)
+                    values (@Kod)";
+
+                    await _dbHelper.ExecuteScalarAsync(checkQuery, dictOfKod);
                 }
+                //формирование списка для сохранения с уникальными кодами
+                List<ArticulModel> modyfiedListRazm = _bindingSourceArtKod.List
+                    .OfType<ArticulModel>()
+                    .Where(x => (x?.IsModified == true &&  x?.IsDeleted == false ))
+                    .ToList();
+
+                //копирование всех кодов с измененными общими данными в список для сохранения
+                // сохранение размеров 
+                if (modyfiedListRazm.Count > 0)
+                {
+                    foreach (var item in modyfiedListRazm)
+                    {
+                        //public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereField, object whereValue)
+                        _dbService.UpdateFieldAsync("sp_articul", "razm", item.Razm, "kod", item.Kod);
+
+                    }
+                }
+
                 //формирование списка для сохранения с уникальными кодами
                 List<ArticulModel> filteredList = _bindingSourceArtCommonSave.List
                     .OfType<ArticulModel>()
@@ -623,15 +684,26 @@ namespace SewingProduction.Features.Articul.Forms
 
                 if (filteredList.Count > 0)
                 {
+                    for (int i = 0; i < _bindingSourceArtKod.Count; i++)
+                    {
+                        var item = (ArticulModel)_bindingSourceArtKod[i];
+                        //    
+                        var newItem = ObjectCloneHelper.CloneWithExclusions(_currentModel, clone =>
+                        {
+                            clone.Kod = item.Kod;
+                            clone.IsModified = true;
+
+                        }, "Kod", "Razm");
+                        _bindingSourceArtCommonSave.Add(newItem);
+                    }
+
                     using (SqlConnection connection = _dbHelper.GetConnection())
                     {
                         _bulkHelper.BulkAllDataUpdate<ArticulModel>(connection, filteredList, "sp_articul", new[] { "kod" });
                     }
-                }
+                    _bindingSourceArtCommonSave.Clear();
 
-                _bindingSourceArtCommonSave.Clear();
-                //принятие изменений в текущей модели
-                _currentModel.AcceptChanges();
+                }
 
                 XtraMessageBox.Show("Изменения успешно сохранены.", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -641,23 +713,23 @@ namespace SewingProduction.Features.Articul.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при сохранении изменений артикула");
                 XtraMessageBox.Show("Ошибка при сохранении изменений артикула: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
 
-        private void lookUpGost_EditValueChanged(object sender, EventArgs e)
+        private async void lookUpGost_EditValueChanged(object sender, EventArgs e)
         {
             try
             {
                 UpdateOpi();
 
                 //oбновление фильтра группы по госту
-                var currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
                 if (lookUpGost.EditValue is not int idGost)
                     return;
                 _bindingSourceGostGrup.DataSource = CommonSpravArticulEditAdvance.GostGroupNames
                     .Where(x => x.Id_gost == idGost)
                     .ToList();
+
+                BindGostRazm();
             }
             catch (Exception ex)
             {
@@ -669,7 +741,7 @@ namespace SewingProduction.Features.Articul.Forms
         private void ArticulEditAdvance_FormClosing(object sender, FormClosingEventArgs e)
         {
             //var _currentItem = (ArticulModel)_bindingSourceArtCommon.Current;
-            if (_currentModel.IsModified)
+            if (isChangedData())
             {
                 var result = XtraMessageBox.Show("Есть несохраненные изменения. Сохранить перед закрытием?", "Подтверждение", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
@@ -701,13 +773,83 @@ namespace SewingProduction.Features.Articul.Forms
                 _currentModel.PropertyChanged -= Model_PropertyChanged;
         }
 
-        private void layoutGost_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+
+
+        #region permissions for Add \ Edit \ Del  Button Razm
+        private void gridViewEditAdvRazm_EditFormShowing(object sender, EditFormShowingEventArgs e)
         {
-            switch (e.Button.Properties.Tag)
+            if (!_openEditFormFromButton)
             {
-                case "Refresh":
-                    editGOST();
+                e.Allow = false;   // запретить двойной клик / Enter / F2 / программные вызовы
+                return;
+            }
+        }
+        private void gridViewEditAdvRazm_EditFormHidden(object sender, EditFormHiddenEventArgs e)
+        {
+            _openEditFormFromButton = false;
+        }
+
+        private void gridViewEditAdvRazm_EditFormPrepared(object sender, DevExpress.XtraGrid.Views.Grid.EditFormPreparedEventArgs e)
+        {
+            bool isNewRow = gridViewEditAdvRazm.IsNewItemRow(gridViewEditAdvRazm.FocusedRowHandle)
+                            || gridViewEditAdvRazm.FocusedRowHandle == DevExpress.XtraGrid.GridControl.NewItemRowHandle;
+
+            // найдём контрол, связанный с колонкой kod, и заблокируем/разблокируем
+            foreach (Control c in e.BindableControls)
+            {
+                if (c.DataBindings.Cast<System.Windows.Forms.Binding>()
+                      .Any(b => b.BindingMemberInfo.BindingField == gcEditKod.FieldName))
+                {
+                    if (c is DevExpress.XtraEditors.BaseEdit be)
+                        be.Properties.ReadOnly = !isNewRow;
+                    else
+                        c.Enabled = isNewRow;
+
                     break;
+                }
+            }
+        }
+
+        #endregion
+        private void btEdit_Click(object sender, EventArgs e)
+        {
+            var view = gridEditAdRazm.FocusedView as GridView;
+            if (view == null) return;
+
+            _openEditFormFromButton = true;
+            view.ShowEditForm();
+        }
+
+        private void txbGostId_TextChanged(object sender, EventArgs e)
+        {
+            lookUpGost_EditValueChanged(sender, e);
+        }
+
+        private void btAdd_Click(object sender, EventArgs e)
+        {
+
+            var item = new ArticulModel();
+            item.Kod = _currentModel.Kod;
+            item.Po = _currentModel.Po;
+            item.IsNew = true;
+
+            _bindingSourceArtKod.Add(item);
+            _bindingSourceArtKod.Position = _bindingSourceArtKod.Count - 1;
+
+            // открыть форму редактирования для новой строки
+            gridViewEditAdvRazm.ShowEditForm();
+        }
+
+        private void btDel_Click(object sender, EventArgs e)
+        {
+            if ( _bindingSourceArtKod.Current is ArticulModel cur)
+            {
+                var result = XtraMessageBox.Show($"Удалить код {cur.Kod} ?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    cur.IsDeleted = true;
+                    _bindingSourceArtKod.ResetCurrentItem();
+                }
             }
         }
     }
