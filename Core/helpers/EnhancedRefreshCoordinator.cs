@@ -1,6 +1,7 @@
 using DevExpress.XtraReports.Native;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -372,6 +373,14 @@ namespace SewingProduction.Core.helpers
                 {
                     _globalGate.Release();
                 }
+            }
+            catch (SqlException ex)
+            {
+                 Debug.WriteLine(
+                    $"SQL ERROR {ex.Number}: {ex.Message}\n" +
+                    $"Procedure: {ex.Procedure}\n" +
+                    $"Line: {ex.LineNumber}");
+                throw;
             }
             catch (OperationCanceledException)
             {

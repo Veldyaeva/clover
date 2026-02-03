@@ -240,9 +240,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         _sbHelper.IgnoredTables.Add("dbo." + tt);
                 }
             }
-            // Координатор перезагрузок (debounce + max-wait + single-flight + throttle + cascade protection)
-            // создаём до старта брокера, чтобы не потерять первые события.
-            var sbSettings = SettingsManager.GetServiceBrokerSettings();
+                // Координатор перезагрузок (debounce + max-wait + single-flight + throttle + cascade protection)
+                // создаём до старта брокера, чтобы не потерять первые события.
+                var sbSettings = SettingsManager.GetServiceBrokerSettings();
+
+         //   await RestartDataByObjectNameAsync("GetPlanZagrVyazByPachList");
+
             _refreshCoordinator ??= new EnhancedRefreshCoordinator(
                 reloadByObjectNameAsync: RestartDataByObjectNameAsync,
                 debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
@@ -252,14 +255,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 maxParallelReloads: sbSettings.MaxParallelReloads,
                 maxCascadeDepth: sbSettings.MaxCascadeDepth
             );
-            
+
             // Настраиваем приоритеты для разных объектов (чем выше число, тем выше приоритет)
             _refreshCoordinator.SetPriority("GetPlanZagrVyazByPachList", 10);
             _refreshCoordinator.SetPriority("getSmenZadanyVyaz", 5);
             await _sbHelper.InitAndStartAsync(objectNames, ct);
 
             // (необязательно) отладка:
-             var tables = _sbHelper.GetListeningTables();
+            var tables = _sbHelper.GetListeningTables();
 
             //------------------------
         }
@@ -297,23 +300,35 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async Task RestartDataByObjectNameAsync(string objectName)
         {
-            await InvokeOnUiAsync(async () =>
+            try
             {
-                Debug.WriteLine($"[PlanZagrVyaz] RestartDataByObjectNameAsync(UI): {objectName}");
-
-                if (string.IsNullOrWhiteSpace(objectName))
-                    return;
-
-                if (_objectRestartMap.TryGetValue(objectName, out var action))
+                await InvokeOnUiAsync(async () =>
                 {
-                    await action();
-                }
-                else
-                {
-                    // на всякий случай: если прилетело неизвестное имя
-                    // можно залогировать
-                }
-            });
+                    Debug.WriteLine($"[PlanZagrVyaz] RestartDataByObjectNameAsync(UI): {objectName}");
+
+                    if (string.IsNullOrWhiteSpace(objectName))
+                        return;
+
+                    if (_objectRestartMap.TryGetValue(objectName, out var action))
+                    {
+                        await action();
+                    }
+                    else
+                    {
+                        // на всякий случай: если прилетело неизвестное имя
+                        // можно залогировать
+                    }
+                });
+            }
+            catch (SqlException ex)
+            {
+                var first = ex.Errors.Cast<SqlError>().FirstOrDefault();
+                _logger.LogErrorAsync(ex,
+                    $"SQL error: Number={ex.Number}, State={ex.State}, Class={ex.Class}, " +
+                    $"Procedure={first?.Procedure}, Line={first?.LineNumber}, Message={first?.Message}");
+                throw;
+            }
+
 
         }
 
@@ -1588,10 +1603,49 @@ private async Task InitializeBindingsAsync()
         {
             try
             {
-                try { gridViewRzvPachListByNom.PostEditor(); } catch { }
-                try { gridViewRzvPachListByNom.UpdateCurrentRow(); } catch { }
-                try { _rzvPachListByNomBindingSource.EndEdit(); } catch { }
-                try { _rzvPachListByNomBindingSource.CurrencyManager?.EndCurrentEdit(); } catch { }
+                try { gridViewRzvPachListByNom.PostEditor(); }
+                catch (SqlException ex)
+                {
+                   Debug.WriteLine(
+                        $"SQL ERROR 1 {ex.Number}: {ex.Message}\n" +
+                        $"Procedure: {ex.Procedure}\n" +
+                        $"Line: {ex.LineNumber}"
+                    );
+                    throw;
+                }//catch { }
+                try { gridViewRzvPachListByNom.UpdateCurrentRow(); }
+                catch (SqlException ex)
+                {
+                    Debug.WriteLine(
+                         $"SQL ERROR 2 {ex.Number}: {ex.Message}\n" +
+                         $"Procedure: {ex.Procedure}\n" +
+                         $"Line: {ex.LineNumber}"
+                     );
+                    throw;
+                }//catch { }
+                
+                try { _rzvPachListByNomBindingSource.EndEdit(); }
+                catch (SqlException ex)
+                {
+                    Debug.WriteLine(
+                         $"SQL ERROR 3 {ex.Number}: {ex.Message}\n" +
+                         $"Procedure: {ex.Procedure}\n" +
+                         $"Line: {ex.LineNumber}"
+                     );
+                    throw;
+                }//catch { }
+                 //catch { }
+                try { _rzvPachListByNomBindingSource.CurrencyManager?.EndCurrentEdit(); }
+                catch (SqlException ex)
+                {
+                    Debug.WriteLine(
+                         $"SQL ERROR 4 {ex.Number}: {ex.Message}\n" +
+                         $"Procedure: {ex.Procedure}\n" +
+                         $"Line: {ex.LineNumber}"
+                     );
+                    throw;
+                }//catch { }
+                //catch { }
 
                 // Фильтруем записи где syncSelection = 1
                 var filteredRecords = _rzvPachListByNomBindingSource.Cast<object>()
