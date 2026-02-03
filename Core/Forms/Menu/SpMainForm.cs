@@ -253,7 +253,7 @@ namespace SewingProduction
         }
         private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            OpenForm(new PlanZagrVyaz(), sender);
+            OpenForm(new PlanZagrVyaz(CurrentUser.User), sender);
         }
 
         private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, EventArgs e)
