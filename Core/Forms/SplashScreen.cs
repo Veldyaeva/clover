@@ -1,5 +1,8 @@
-﻿using System;
+using System;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace SewingProduction
@@ -9,6 +12,7 @@ namespace SewingProduction
         public SplashScreen()
         {
             InitializeComponent();
+            LoadBackgroundImagesFromSettings();
             /*Random random = new Random();
             int minValue = 0;
             int maxValue = 15;
@@ -54,6 +58,62 @@ namespace SewingProduction
             if (today >= DateTime.ParseExact("02-17", "MM-dd", CultureInfo.InvariantCulture) && today <= DateTime.ParseExact("02-25", "MM-dd", CultureInfo.InvariantCulture))
             { imageSlider1.CurrentImageIndex = 2; }//23.02
             */
+        }
+
+        private void LoadBackgroundImagesFromSettings()
+        {
+            string settingsFolder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "SewingProduction",
+                "settings");
+
+            if (!Directory.Exists(settingsFolder))
+            {
+                return;
+            }
+
+            var imageFiles = Directory.GetFiles(settingsFolder)
+                .Where(IsImageFile)
+                .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            if (imageFiles.Count == 0)
+            {
+                return;
+            }
+
+            imageSlider1.Images.Clear();
+
+            foreach (string imageFile in imageFiles)
+            {
+                try
+                {
+                    using (var stream = new FileStream(imageFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                    using (var image = Image.FromStream(stream))
+                    {
+                        imageSlider1.Images.Add((Image)image.Clone());
+                    }
+                }
+                catch
+                {
+                    // Ignore invalid or locked images.
+                }
+            }
+
+            if (imageSlider1.Images.Count > 0)
+            {
+                imageSlider1.CurrentImageIndex = 0;
+            }
+        }
+
+        private static bool IsImageFile(string path)
+        {
+            string extension = Path.GetExtension(path);
+            return extension.Equals(".png", StringComparison.OrdinalIgnoreCase)
+                || extension.Equals(".jpg", StringComparison.OrdinalIgnoreCase)
+                || extension.Equals(".jpeg", StringComparison.OrdinalIgnoreCase)
+                || extension.Equals(".bmp", StringComparison.OrdinalIgnoreCase)
+                || extension.Equals(".gif", StringComparison.OrdinalIgnoreCase);
         }
     }
 }
