@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using SewingProduction.Core.interfaces;
+using SewingProduction;
 
 namespace SewingProduction.Core.helpers
 {
@@ -14,6 +16,11 @@ namespace SewingProduction.Core.helpers
 
         /// <summary>Экземпляр хелпера, который управляет SqlDependency и маршрутизацией нотификаций.</summary>
         ServiceBrokerHelper ServiceBrokerHelper { get; }
+
+        /// <summary>
+        /// Коллекция ServiceBroker по таблицам (schema.table).
+        /// </summary>
+        IReadOnlyDictionary<string, ServiceBroker> ServiceBrokers { get; }
 
         /// <summary>Координатор, который коалесцирует (схлопывает) обновления и убирает дребезг.</summary>
         EnhancedRefreshCoordinator RefreshCoordinator { get; }

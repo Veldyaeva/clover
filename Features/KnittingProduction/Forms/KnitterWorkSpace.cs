@@ -143,6 +143,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(UserClass) start");
                 InitializeComponent();
                 dataLayoutControl1.DataSource = _planBindingSource;
 
@@ -157,6 +158,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
                 this.Load += async (s, e) =>
                 {
+                    System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] Load event start");
                     await InitializeAsync();
                     await InitServiceBrokerAsync(CancellationToken.None);
                     InitHeaderButtonTags();
@@ -191,13 +193,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator) start");
                 InitializeComponent();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
-                this.Load += async (s, e) => await InitializeAsync();
+                this.Load += async (s, e) =>
+                {
+                    System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] Load event start");
+                    await InitializeAsync();
+                    await InitServiceBrokerAsync(CancellationToken.None);
+                    InitHeaderButtonTags();
+                };
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
@@ -1987,28 +1996,47 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             try
             {
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RestartDataByObjectNameAsync: {objectName}");
-
-                // Если это наша хранимая процедура плана - перезагружаем план
-                if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab4", StringComparison.OrdinalIgnoreCase))
+                await InvokeOnUiAsync(async () =>
                 {
-                    if (_currentLoadedTab.HasValue)
+                    System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RestartDataByObjectNameAsync: {objectName}");
+
+                    // Если это наша хранимая процедура плана - перезагружаем план
+                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab4", StringComparison.OrdinalIgnoreCase))
                     {
-                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Reloading plan for tab {_currentLoadedTab.Value}");
-                        await LoadPlanForTabAsync(_currentLoadedTab.Value, forceReload: true);
-                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Plan reloaded successfully");
+                        if (_currentLoadedTab.HasValue)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Reloading plan for tab {_currentLoadedTab.Value}");
+                            await LoadPlanForTabAsync(_currentLoadedTab.Value, forceReload: true);
+                            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Plan reloaded successfully");
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No current tab loaded, skipping reload");
+                        }
                     }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No current tab loaded, skipping reload");
-                    }
-                }
+                });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in RestartDataByObjectNameAsync for {objectName}: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in RestartDataByObjectNameAsync for {objectName}: {ex}");
                 throw;
             }
+        }
+
+        private Task InvokeOnUiAsync(Func<Task> fn)
+        {
+            if (this.InvokeRequired)
+            {
+                var tcs = new TaskCompletionSource<object?>();
+                this.BeginInvoke(new Action(async () =>
+                {
+                    try { await fn(); tcs.TrySetResult(null); }
+                    catch (Exception ex) { tcs.TrySetException(ex); }
+                }));
+                return tcs.Task;
+            }
+
+            return fn();
         }
 
         /// <summary>
@@ -2022,8 +2050,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var dbHelper = new DatabaseHelper();
                 _sbService = new ServiceBrokerService(dbHelper);
             }
-            
-            return await _sbService.GetObjectListForServiceBroker(objectName, ct);
+
+            var list = await _sbService.GetObjectListForServiceBroker(objectName, ct);
+            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] LoadListenInfoByObjectNameAsync: object={objectName}, rows={list?.Count ?? 0}");
+            return list;
         }
 
         /// <summary>
@@ -2031,14 +2061,63 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         public override async Task InitServiceBrokerAsync(CancellationToken ct)
         {
+            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] InitServiceBrokerAsync start: objects={string.Join(", ", ServiceBrokerObjects)}");
             await base.InitServiceBrokerAsync(ct);
             
             // Устанавливаем UseSchemaInListenName = true (как было в оригинальной реализации)
             if (ServiceBrokerHelper != null)
             {
                 ServiceBrokerHelper.UseSchemaInListenName = true;
+                var tables = ServiceBrokerHelper.GetListeningTables();
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Listening tables: {string.Join(", ", tables)}");
             }
         }
+
+        /// <summary>
+        /// Обновление данных формы по уведомлению брокера (как в PlanZagrVyaz).
+        /// </summary>
+        public override async Task UpdateDataInFormAsync(string tableName, string fieldsChangedCsv)
+        {
+            if (ServiceBrokerHelper == null)
+                return;
+
+            try
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] UpdateDataInFormAsync: table={tableName}, fields={fieldsChangedCsv}");
+
+                // 1) Пропускаем событие через фильтрацию (table + поля)
+                await ServiceBrokerHelper.HandleBrokerUpdateAsync(tableName, fieldsChangedCsv);
+
+                // 2) Снимаем накопленные затронутые "объекты"
+                var affected = ServiceBrokerHelper.DrainPending();
+                if (affected == null || affected.Count == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No affected objects for table {tableName}");
+                    return;
+                }
+
+                // 3) Планируем обновления через координатор
+                foreach (var objName in affected
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Distinct(StringComparer.OrdinalIgnoreCase))
+                {
+                    RefreshCoordinator?.Request(objName);
+                }
+
+                if (RefreshCoordinator != null)
+                {
+                    var stats = RefreshCoordinator.GetStatistics();
+                    System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex.Message}");
+            }
+        }
+
+        public override Task UpdateDataInFormAsync(string tableName)
+            => UpdateDataInFormAsync(tableName, fieldsChangedCsv: string.Empty);
 
 
 

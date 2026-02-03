@@ -28,6 +28,9 @@ namespace SewingProduction
     /// </summary>
     public abstract class ServiceBrokerFormBase : CustomForm, IServiceBrokerForm
     {
+        private static readonly IReadOnlyDictionary<string, ServiceBroker> EmptyBrokers =
+            new Dictionary<string, ServiceBroker>(StringComparer.OrdinalIgnoreCase);
+
         private readonly object _sbInitLock = new();
         private bool _sbInitialized;
 
@@ -48,6 +51,9 @@ namespace SewingProduction
         public virtual string ServiceBrokerFormName => GetType().Name;
 
         public ServiceBrokerHelper ServiceBrokerHelper { get; protected set; }
+
+        public IReadOnlyDictionary<string, ServiceBroker> ServiceBrokers =>
+            ServiceBrokerHelper?.Brokers ?? EmptyBrokers;
 
         public EnhancedRefreshCoordinator RefreshCoordinator { get; protected set; }
 
