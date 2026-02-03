@@ -4693,8 +4693,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             */
             
             MessageBox.Show($"Поиск по № задания {textBoxPzvNomZadSearch.Text}");
-            int _xNom = _dbHelper.ExecuteScalar($"select nom from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'", new Dictionary<string, object> { });
-            int _xNPach = _dbHelper.ExecuteScalar($"select n_pach from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'", new Dictionary<string, object> { });
+            //string _xNom = _dbHelper.ExecuteScalarAsync<string>($"select nom from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'");
+            //int _xNPach = _dbHelper.ExecuteScalar($"select n_pach from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'", new Dictionary<string, object> { });
+            
             //string xper = _dbHelper.ExecuteScalar($"select zad_pl from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'", new Dictionary<string, object> { });
 
             //var list = (IList<ZadanyListByMachine>)_zadanyListByMachineBindingSource.List;
