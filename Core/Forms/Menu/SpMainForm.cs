@@ -264,7 +264,7 @@ namespace SewingProduction
 
         private void табельToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TabelMain(), sender);
+            OpenForm(new TabelMain(_user), sender);
         }
         private void справкаtoolStripMenuItem_Click(object sender, EventArgs e)
         {

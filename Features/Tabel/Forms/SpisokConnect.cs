@@ -61,11 +61,12 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridSpisokGrafik.FieldName = "idSchedule";
                 gridSpisokPodr1c.FieldName = "podrName";
                 gridSpisokPodr.FieldName = "gr";
-                var items = await _tabelDataService.GetScheduleOfWorkAsync();
-                _scheduleOfWork = new BindingSource { DataSource = items.ToList() };
-                repositoryItemLookUpEdit1.DataSource = _scheduleOfWork;
-                repositoryItemLookUpEdit1.DisplayMember = "scheduleName";
-                repositoryItemLookUpEdit1.ValueMember = "id";
+                gridSpisokGrafik.FieldName = "scheduleName";
+                //var items = await _tabelDataService.GetScheduleOfWorkAsync();
+                //_scheduleOfWork = new BindingSource { DataSource = items.ToList() };
+                //repositoryItemLookUpEdit1.DataSource = _scheduleOfWork;
+                //repositoryItemLookUpEdit1.DisplayMember = "scheduleName";
+                //repositoryItemLookUpEdit1.ValueMember = "id";
                 var zlPodr = await _tabelDataService.GetzlPodrAsync();
                 _zlPodr = new BindingSource { DataSource = zlPodr.ToList() };
                 repositoryItemLookUpEdit2.DataSource = _zlPodr;

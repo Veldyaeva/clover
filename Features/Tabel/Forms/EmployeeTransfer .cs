@@ -30,7 +30,7 @@ namespace SewingProduction.Features.Tabel.Forms
         int _idGroup;
         string _currentMg;
         int _tab;
-        public EmployeeTransfer(string fio, string naimenGr, BindingSource spPodr, int currentId, int idGroup, string currentMg,int tab)
+        public EmployeeTransfer(string fio, string naimenGr,  int currentId, int idGroup, string currentMg,int tab)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper();
@@ -38,21 +38,23 @@ namespace SewingProduction.Features.Tabel.Forms
             _tabelDataService = new TabelDataService(_dbHelper);
             _fio = fio;
             _naimenGr = naimenGr;
-            _spPodr = spPodr;
             _currentId = currentId;
             _idGroup = idGroup;
             _currentMg = currentMg.Trim();
             _tab = tab;
+           
 
         }
 
-        private void EmployeeTransfer_Load(object sender, EventArgs e)
+        private async void EmployeeTransfer_Load(object sender, EventArgs e)
         {
+            _spPodr = new BindingSource { DataSource = await _tabelDataService.GetzlPodrAsync()};
             fioEmployee.Text = "Работник " + _fio;
             PodrText.Text = "Подразделение " + _naimenGr;
             EditPodrLookUpEdit.Properties.DataSource = _spPodr;
             EditPodrLookUpEdit.Properties.DisplayMember = "naimen";
             EditPodrLookUpEdit.Properties.ValueMember = "tnid";
+
         }
 
         private void customButton2_Click(object sender, EventArgs e)

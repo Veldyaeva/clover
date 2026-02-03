@@ -21,6 +21,7 @@ using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Features.Tabel.Services;
 using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
@@ -41,7 +42,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class TabelMain : CustomForm
     {
-        private string currentMG = "1225";
+        private string currentMG = "0126";
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
@@ -78,7 +79,7 @@ namespace SewingProduction.Features.Tabel.Forms
             { 20, "ЗЛ" }
         };
         private Dictionary<string, int> cellStateIndices = new Dictionary<string, int>();
-        public TabelMain()
+        public TabelMain(UserClass user) : base(user)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper();
@@ -99,6 +100,7 @@ namespace SewingProduction.Features.Tabel.Forms
         }
         private void CreateDayColumns(string mg)
         {
+            //gridView1.BeginUpdate();
             int month = int.Parse(mg.Substring(0, 2));
             int year = 2000 + int.Parse(mg.Substring(2, 2));
             int daysInMonth = DateTime.DaysInMonth(year, month);
@@ -109,6 +111,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 dayColumn.FieldName = fieldName;
                 dayColumn.Caption = day.ToString();
                 dayColumn.Visible = true;
+                //dayColumn.VisibleIndex = day + 4;
                 dayColumn.OptionsColumn.AllowEdit = false;
                 gridView1.Columns.Add(dayColumn);
 
@@ -130,14 +133,20 @@ namespace SewingProduction.Features.Tabel.Forms
             itogColumnChas.OptionsColumn.AllowEdit = false;
             gridView1.Columns.Add(itogColumnChas);
             gridView1.BestFitColumns();
+            //gridColumnFio.VisibleIndex = 3;
+            //gridColumnTabno.VisibleIndex = 2;
+            //gridColumnPomPech.VisibleIndex = 1;
+            //gridColumnCheckIncludePlan.VisibleIndex = 0;
         }
 
         private async void TabelMain_Load(object sender, EventArgs e)
         {
-            CreateDayColumns(currentMG);
+            
             Task bindingsTask = InitializeBindingsAsync();
             await Task.WhenAll(bindingsTask);
+            CreateDayColumns(currentMG);
             CheckUserAccess(idUser);
+         
         }
         private void RemoveDayColumns()
         {
@@ -352,6 +361,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 try
                 {
                     GetTimeSheet(currentMG, grId, groupId);
+                    gridView1.BestFitColumns();
                 }
                 catch { }
 
@@ -434,10 +444,10 @@ namespace SewingProduction.Features.Tabel.Forms
 
             // Обновляем лейбл месяца (название месяца)
             string monthName = GetMonthName(month);
-            customLabelMonth.Text = "МЕСЯЦ - " + monthName;
+            customLabelMonth.Text = monthName;
 
             // Обновляем лейбл года
-            customLabelYear.Text = "ГОД - " + year.ToString();
+            customLabelYear.Text = year.ToString();
         }
         private void CycleCellState(int rowHandle, GridColumn column)
         {
@@ -744,8 +754,27 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private void customButton2_Click(object sender, EventArgs e)
         {
+
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
             int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
+            bool orionUserCheck = _tabelDataService.CheckRecordsExistsOrionUser(currentMG, grId, groupId);
+            if (!orionUserCheck)
+            {
+                DialogResult result = MessageBox.Show(
+                "В системе «Орион» не найдены сотрудники данного подразделения.\n\n Сформировать отчет по данным системы Parsec?",
+                "Подтверждение формирования отчета",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    customButton1_Click_1(sender, e);
+                    return;
+                }
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+            }
             TimeSheetParsecOrionPrint report1 = new TimeSheetParsecOrionPrint();
             report1.RequestParameters = false;
             report1.Parameters["grid"].Value = grId;
@@ -764,16 +793,38 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
             int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
-            TimeSheetReport report1 = new TimeSheetReport();
-            report1.RequestParameters = false;
-            report1.Parameters["ttabn"].Value = grId;
-            report1.Parameters["ttabn"].Visible = false;
-            report1.Parameters["groupId"].Value = groupId;
-            report1.Parameters["groupId"].Visible = false;
-            report1.Parameters["MG"].Value = currentMG;
-            report1.Parameters["MG"].Visible = false;
-            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            reportPrintTool1.ShowPreviewDialog();
+            if (groupId == 19)
+            {
+                int month = int.Parse(currentMG.Substring(0, 2));
+                TimeSheetReport report1 = new TimeSheetReport();
+                report1.RequestParameters = false;
+                report1.Parameters["ttabn"].Value = grId;
+                report1.Parameters["ttabn"].Visible = false;
+                report1.Parameters["groupId"].Value = groupId;
+                report1.Parameters["groupId"].Visible = false;
+                report1.Parameters["monthTxt"].Value = GetMonthName(month);
+                report1.Parameters["monthTxt"].Visible = false;
+                report1.Parameters["MG"].Value = currentMG;
+                report1.Parameters["MG"].Visible = false;
+                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                reportPrintTool1.ShowPreviewDialog();
+            }
+            if (groupId == 20)
+            {
+                int month = int.Parse(currentMG.Substring(0, 2));
+                TimeSheetReportZl report1 = new TimeSheetReportZl();
+                report1.RequestParameters = false;
+                report1.Parameters["ttabn"].Value = grId;
+                report1.Parameters["ttabn"].Visible = false;
+                report1.Parameters["groupId"].Value = groupId;
+                report1.Parameters["groupId"].Visible = false;
+                report1.Parameters["monthTxt"].Value = GetMonthName(month);
+                report1.Parameters["monthTxt"].Visible = false;
+                report1.Parameters["MG"].Value = currentMG;
+                report1.Parameters["MG"].Visible = false;
+                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                reportPrintTool1.ShowPreviewDialog();
+            }
         }
         public void CheckUserAccess(int id)
         {
@@ -956,7 +1007,7 @@ namespace SewingProduction.Features.Tabel.Forms
             string naimen = lookUpEditGr.Text;
             int idGr = (int)lookUpEditGr.EditValue;
             int idGroup = (int)lookUpEditGroup.EditValue;
-            using (var Employee = new EmployeeTransfer(fio, naimen, _spPodr, idCurrent, idGroup, currentMG, tab))
+            using (var Employee = new EmployeeTransfer(fio, naimen, idCurrent, idGroup, currentMG, tab))
             {
                 if (Employee.ShowDialog() == DialogResult.OK)
                 {
@@ -978,6 +1029,25 @@ namespace SewingProduction.Features.Tabel.Forms
                 GridColumn column = view.FocusedColumn;
                 view.SetRowCellValue(rowHandle, column, "");
             }
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                int rowHandle = view.FocusedRowHandle;
+                GridColumn column = view.FocusedColumn;
+                Clipboard.SetDataObject(view.GetRowCellValue(rowHandle, column));
+                e.Handled = true;
+            }
+            // Обработка Ctrl+V
+            else if (e.Control && e.KeyCode == Keys.V)
+            {
+                int rowHandle = view.FocusedRowHandle;
+                GridColumn column = view.FocusedColumn;
+                IDataObject iData = Clipboard.GetDataObject();
+                if (iData.GetDataPresent(DataFormats.Text))
+                {
+                    view.SetRowCellValue(rowHandle, column, (string)iData.GetData(DataFormats.Text));
+                }
+                e.Handled = true;
+            }
         }
         private void customButtonOtvlRab_Click(object sender, EventArgs e)
         {
@@ -987,6 +1057,12 @@ namespace SewingProduction.Features.Tabel.Forms
             {
                 mainForm.OpenForm(new OtvlRab(CurrentUser.User, tnid)); // пока для теста 3, поменять на tnid
             }
+        }
+
+        private void customButton4_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show($"{gridView1.FocusedColumn.VisibleIndex}");
+            gridColumnFio.VisibleIndex = 3;
         }
     }
 }

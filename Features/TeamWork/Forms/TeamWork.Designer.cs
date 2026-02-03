@@ -1690,6 +1690,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             colgroup.MinWidth = 23;
             colgroup.Name = "colgroup";
             colgroup.OptionsColumn.AllowEdit = false;
+            colgroup.Visible = true;
+            colgroup.VisibleIndex = 1;
             colgroup.Width = 64;
             // 
             // colarticul
@@ -1700,7 +1702,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colarticul.Name = "colarticul";
             colarticul.OptionsColumn.AllowEdit = false;
             colarticul.Visible = true;
-            colarticul.VisibleIndex = 1;
+            colarticul.VisibleIndex = 2;
             colarticul.Width = 86;
             // 
             // colmod
@@ -1711,7 +1713,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             colmod.Name = "colmod";
             colmod.OptionsColumn.AllowEdit = false;
             colmod.Visible = true;
-            colmod.VisibleIndex = 2;
+            colmod.VisibleIndex = 3;
             colmod.Width = 63;
             // 
             // colsek
@@ -1959,8 +1961,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn66.Caption = "статус";
             gridColumn66.FieldName = "Status";
             gridColumn66.Name = "gridColumn66";
-            gridColumn66.Visible = true;
-            gridColumn66.VisibleIndex = 3;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -2141,7 +2141,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditCreate.StyleController = layoutControl2;
             textEditCreate.TabIndex = 6;
             // 
-            // layoutSeb
+            // layoutControlGroup7
             // 
             layoutControlGroup7.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup7.GroupBordersVisible = false;
@@ -2151,7 +2151,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlGroup7.Size = new System.Drawing.Size(1847, 900);
             layoutControlGroup7.TextVisible = false;
             // 
-            // layoutTkans
+            // layoutControlGroup8
             // 
             layoutControlGroup8.AppearanceGroup.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             layoutControlGroup8.AppearanceGroup.Options.UseFont = true;
@@ -2179,7 +2179,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem26.TextVisible = false;
             // 
-            // layoutSumZP
+            // layoutControlGroup11
             // 
             layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem27 });
             layoutControlGroup11.Location = new System.Drawing.Point(0, 533);
@@ -2200,7 +2200,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem27.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem27.TextVisible = false;
             // 
-            // layoutOpis_t
+            // layoutControlGroup10
             // 
             layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem29 });
             layoutControlGroup10.Location = new System.Drawing.Point(913, 562);
@@ -3699,7 +3699,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem4.Text = "Пошив";
             layoutControlItem4.TextVisible = false;
             // 
-            // layoutNorms
+            // layoutControlGroup4
             // 
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8 });
             layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
@@ -3847,7 +3847,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             splitterItem7.Name = "splitterItem7";
             splitterItem7.Size = new System.Drawing.Size(10, 284);
             // 
-            // layoutBrak
+            // layoutControlGroup6
             // 
             layoutControlGroup6.CaptionImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Создать из артикула", true, buttonImageOptions31, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
