@@ -2415,56 +2415,74 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                // Разворачиваем детализацию в основном гриде, чтобы показать детализацию
-                if (bandedGridView3 != null)
+                // Разворачиваем детализацию в основном гриде и сворачиваем группы пачек во втором уровне
+                if (bandedGridView3 == null)
+                    return;
+
+                bandedGridView3.BeginUpdate();
+                try
                 {
-                    bandedGridView3.BeginUpdate();
-                    try
+                    for (int i = 0; i < bandedGridView3.DataRowCount; i++)
                     {
-                        // Разворачиваем все детализированные строки (детализация по ВМ)
-                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
-                        {
-                            int rowHandle = bandedGridView3.GetRowHandle(i);
-                            if (bandedGridView3.IsValidRowHandle(rowHandle))
-                            {
-                                bandedGridView3.SetMasterRowExpanded(rowHandle, true);
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        bandedGridView3.EndUpdate();
+                        int rowHandle = bandedGridView3.GetRowHandle(i);
+                        if (!bandedGridView3.IsValidRowHandle(rowHandle))
+                            continue;
+
+                        // Создаём detail-view (уровень операций) для каждой ВМ
+                        bandedGridView3.SetMasterRowExpanded(rowHandle, true);
+                        var detailView = bandedGridView3.GetDetailView(rowHandle, 0) as DevExpress.XtraGrid.Views.Base.ColumnView;
+                        if (detailView == null)
+                            continue;
+
+                        CollapsePachkaGroupsInDetailView(detailView);
                     }
                 }
-
-                // Сворачиваем группы строк во втором уровне (advBandedGridView1) по __Header,
-                // чтобы показать только заголовки групп по пачкам, но не строки операций внутри
-                if (advBandedGridView1 != null)
+                finally
                 {
-                    advBandedGridView1.BeginUpdate();
-                    try
-                    {
-                        // Сворачиваем все группы строк (группы по пачкам - __Header)
-                        // Это покажет заголовки пачек, но строки операций внутри останутся свернутыми
-                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
-                        {
-                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
-                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
-                            {
-                                // Сворачиваем группу, чтобы видеть только её заголовок (пачку), но не строки внутри
-                                advBandedGridView1.SetRowExpanded(rowHandle, false);
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        advBandedGridView1.EndUpdate();
-                    }
+                    bandedGridView3.EndUpdate();
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Ошибка при сворачивании до уровня пачки: {ex.Message}");
+            }
+        }
+
+        private void CollapsePachkaGroupsInDetailView(DevExpress.XtraGrid.Views.Base.ColumnView detailView)
+        {
+            if (detailView is not DevExpress.XtraGrid.Views.Grid.GridView gridView)
+                return;
+
+            gridView.BeginUpdate();
+            try
+            {
+                // Оставляем авто-разворачивание выключенным, иначе группы сразу раскроются
+                gridView.OptionsBehavior.AutoExpandAllGroups = false;
+
+                // Если группировка по пачкам не установлена, задаём её
+                var headerCol = gridView.Columns.ColumnByFieldName("__Header");
+                if (headerCol != null && headerCol.GroupIndex < 0)
+                {
+                    gridView.ClearGrouping();
+                    headerCol.GroupIndex = 0;
+                    gridView.GroupFormat = "{1}";
+                    gridView.OptionsView.ShowGroupedColumns = false;
+                    gridView.OptionsView.ShowGroupPanel = false;
+                }
+
+                // Сворачиваем все группы пачек, оставляя только заголовки
+                for (int i = 0; i < gridView.RowCount; i++)
+                {
+                    int rowHandle = gridView.GetVisibleRowHandle(i);
+                    if (gridView.IsValidRowHandle(rowHandle) && gridView.IsGroupRow(rowHandle))
+                    {
+                        gridView.SetRowExpanded(rowHandle, false);
+                    }
+                }
+            }
+            finally
+            {
+                gridView.EndUpdate();
             }
         }
 
@@ -2533,52 +2551,70 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 // Разворачиваем детализацию в основном гриде
-                if (bandedGridView3 != null)
+                if (bandedGridView3 == null)
+                    return;
+
+                bandedGridView3.BeginUpdate();
+                try
                 {
-                    bandedGridView3.BeginUpdate();
-                    try
+                    // Разворачиваем все детализированные строки
+                    for (int i = 0; i < bandedGridView3.DataRowCount; i++)
                     {
-                        // Разворачиваем все детализированные строки
-                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
-                        {
-                            int rowHandle = bandedGridView3.GetRowHandle(i);
-                            if (bandedGridView3.IsValidRowHandle(rowHandle))
-                            {
-                                bandedGridView3.SetMasterRowExpanded(rowHandle, true);
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        bandedGridView3.EndUpdate();
+                        int rowHandle = bandedGridView3.GetRowHandle(i);
+                        if (!bandedGridView3.IsValidRowHandle(rowHandle))
+                            continue;
+
+                        bandedGridView3.SetMasterRowExpanded(rowHandle, true);
+                        var detailView = bandedGridView3.GetDetailView(rowHandle, 0) as DevExpress.XtraGrid.Views.Base.ColumnView;
+                        if (detailView == null)
+                            continue;
+
+                        ExpandPachkaGroupsInDetailView(detailView);
                     }
                 }
-
-                // Разворачиваем группы строк во втором уровне (если есть группировка)
-                if (advBandedGridView1 != null)
+                finally
                 {
-                    advBandedGridView1.BeginUpdate();
-                    try
-                    {
-                        // Разворачиваем все группы строк
-                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
-                        {
-                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
-                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
-                            {
-                                advBandedGridView1.SetRowExpanded(rowHandle, true);
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        advBandedGridView1.EndUpdate();
-                    }
+                    bandedGridView3.EndUpdate();
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Ошибка при разворачивании групп: {ex.Message}");
+            }
+        }
+
+        private void ExpandPachkaGroupsInDetailView(DevExpress.XtraGrid.Views.Base.ColumnView detailView)
+        {
+            if (detailView is not DevExpress.XtraGrid.Views.Grid.GridView gridView)
+                return;
+
+            gridView.BeginUpdate();
+            try
+            {
+                gridView.OptionsBehavior.AutoExpandAllGroups = true;
+
+                var headerCol = gridView.Columns.ColumnByFieldName("__Header");
+                if (headerCol != null && headerCol.GroupIndex < 0)
+                {
+                    gridView.ClearGrouping();
+                    headerCol.GroupIndex = 0;
+                    gridView.GroupFormat = "{1}";
+                    gridView.OptionsView.ShowGroupedColumns = false;
+                    gridView.OptionsView.ShowGroupPanel = false;
+                }
+
+                for (int i = 0; i < gridView.RowCount; i++)
+                {
+                    int rowHandle = gridView.GetVisibleRowHandle(i);
+                    if (gridView.IsValidRowHandle(rowHandle) && gridView.IsGroupRow(rowHandle))
+                    {
+                        gridView.SetRowExpanded(rowHandle, true);
+                    }
+                }
+            }
+            finally
+            {
+                gridView.EndUpdate();
             }
         }
 
@@ -2589,50 +2625,45 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                // Переключаем детализацию в основном гриде
-                if (bandedGridView3 != null)
+                if (bandedGridView3 == null)
+                    return;
+
+                // Определяем целевое состояние по первой валидной строке
+                bool expandTarget = true;
+                for (int i = 0; i < bandedGridView3.DataRowCount; i++)
                 {
-                    bandedGridView3.BeginUpdate();
-                    try
-                    {
-                        // Переключаем состояние всех детализированных строк
-                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
-                        {
-                            int rowHandle = bandedGridView3.GetRowHandle(i);
-                            if (bandedGridView3.IsValidRowHandle(rowHandle))
-                            {
-                                bool isExpanded = bandedGridView3.GetMasterRowExpanded(rowHandle);
-                                bandedGridView3.SetMasterRowExpanded(rowHandle, !isExpanded);
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        bandedGridView3.EndUpdate();
-                    }
+                    int rowHandle = bandedGridView3.GetRowHandle(i);
+                    if (!bandedGridView3.IsValidRowHandle(rowHandle))
+                        continue;
+
+                    expandTarget = !bandedGridView3.GetMasterRowExpanded(rowHandle);
+                    break;
                 }
 
-                // Переключаем группы строк во втором уровне (если есть группировка)
-                if (advBandedGridView1 != null)
+                bandedGridView3.BeginUpdate();
+                try
                 {
-                    advBandedGridView1.BeginUpdate();
-                    try
+                    // Переключаем состояние всех детализированных строк
+                    for (int i = 0; i < bandedGridView3.DataRowCount; i++)
                     {
-                        // Переключаем состояние всех групп строк
-                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
-                        {
-                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
-                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
-                            {
-                                bool isExpanded = advBandedGridView1.GetRowExpanded(rowHandle);
-                                advBandedGridView1.SetRowExpanded(rowHandle, !isExpanded);
-                            }
-                        }
+                        int rowHandle = bandedGridView3.GetRowHandle(i);
+                        if (!bandedGridView3.IsValidRowHandle(rowHandle))
+                            continue;
+
+                        bandedGridView3.SetMasterRowExpanded(rowHandle, expandTarget);
+                        var detailView = bandedGridView3.GetDetailView(rowHandle, 0) as DevExpress.XtraGrid.Views.Base.ColumnView;
+                        if (detailView == null)
+                            continue;
+
+                        if (expandTarget)
+                            ExpandPachkaGroupsInDetailView(detailView);
+                        else
+                            CollapsePachkaGroupsInDetailView(detailView);
                     }
-                    finally
-                    {
-                        advBandedGridView1.EndUpdate();
-                    }
+                }
+                finally
+                {
+                    bandedGridView3.EndUpdate();
                 }
             }
             catch (Exception ex)
