@@ -29,13 +29,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
-using static SewingProduction.Core.helpers.ServiceBrokerHelper;
 
 #nullable enable
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class KnitterWorkSpace : ServiceBrokerFormBase
+    public partial class KnitterWorkSpace : CustomForm, IServiceBrokerHost
     {
+        private readonly ServiceBrokerController _sbController;
+        private readonly HashSet<string> _ignoredServiceBrokerTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
         /// </summary>
@@ -49,17 +50,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Список SQL-объектов для отслеживания через ServiceBroker.
         /// </summary>
-        protected override IReadOnlyList<string> ServiceBrokerObjects => 
+        public IReadOnlyList<string> ServiceBrokerObjects => 
             new[] { "GetPlanZagrVyazNorm_ByTab4" };
 
         /// <summary>
         /// Приоритеты обновления объектов (чем выше число, тем выше приоритет).
         /// </summary>
-        protected override IReadOnlyDictionary<string, int> RefreshPriorities => 
+        public IReadOnlyDictionary<string, int> RefreshPriorities => 
             new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
                 { "GetPlanZagrVyazNorm_ByTab4", 10 }
             };
+
+        public string ServiceBrokerFormName => GetType().Name;
+
+        public bool UseSchemaInListenName => true;
+
+        public IReadOnlyCollection<string> IgnoredTables => _ignoredServiceBrokerTables;
         /// <summary>
         /// Источник данных, к которому привязан GridControl.
         /// </summary>
@@ -145,6 +152,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(UserClass) start");
                 InitializeComponent();
+                _sbController = new ServiceBrokerController(this);
                 dataLayoutControl1.DataSource = _planBindingSource;
 
                 ConfigureAdvBandedGridColumns();
@@ -163,6 +171,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     await InitServiceBrokerAsync(CancellationToken.None);
                     InitHeaderButtonTags();
                 };
+                this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
 
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
@@ -195,6 +204,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator) start");
                 InitializeComponent();
+                _sbController = new ServiceBrokerController(this);
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
@@ -207,6 +217,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     await InitServiceBrokerAsync(CancellationToken.None);
                     InitHeaderButtonTags();
                 };
+                this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
@@ -1989,7 +2000,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Перезапускает загрузку данных по имени объекта (вызывается координатором).
         /// </summary>
-        public override async Task RestartDataByObjectNameAsync(string objectName, CancellationToken ct)
+        public async Task RestartDataByObjectNameAsync(string objectName, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(objectName))
                 return;
@@ -2042,7 +2053,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Загружает информацию о таблицах и полях для указанного объекта из БД.
         /// </summary>
-        protected override async Task<List<ServiceBrokerModel.TableListenInfo>> LoadListenInfoByObjectNameAsync(
+        public async Task<List<ServiceBrokerModel.TableListenInfo>> LoadListenInfoByObjectNameAsync(
             string objectName, CancellationToken ct)
         {
             if (_sbService == null)
@@ -2059,54 +2070,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Переопределяем инициализацию для установки UseSchemaInListenName = true.
         /// </summary>
-        public override async Task InitServiceBrokerAsync(CancellationToken ct)
+        public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
             System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] InitServiceBrokerAsync start: objects={string.Join(", ", ServiceBrokerObjects)}");
-            await base.InitServiceBrokerAsync(ct);
-            
-            // Устанавливаем UseSchemaInListenName = true (как было в оригинальной реализации)
-            if (ServiceBrokerHelper != null)
-            {
-                ServiceBrokerHelper.UseSchemaInListenName = true;
-                var tables = ServiceBrokerHelper.GetListeningTables();
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Listening tables: {string.Join(", ", tables)}");
-            }
+            await _sbController.InitAsync(ct);
+
+            var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
+            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Listening tables: {string.Join(", ", tables)}");
         }
 
         /// <summary>
         /// Обновление данных формы по уведомлению брокера (как в PlanZagrVyaz).
         /// </summary>
-        public override async Task UpdateDataInFormAsync(string tableName, string fieldsChangedCsv)
+        public async Task UpdateDataInFormAsync(string tableName, string? fieldsChangedCsv)
         {
-            if (ServiceBrokerHelper == null)
-                return;
-
             try
             {
                 System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] UpdateDataInFormAsync: table={tableName}, fields={fieldsChangedCsv}");
 
-                // 1) Пропускаем событие через фильтрацию (table + поля)
-                await ServiceBrokerHelper.HandleBrokerUpdateAsync(tableName, fieldsChangedCsv);
+                await _sbController.HandleUpdateAsync(tableName, fieldsChangedCsv ?? string.Empty);
 
-                // 2) Снимаем накопленные затронутые "объекты"
-                var affected = ServiceBrokerHelper.DrainPending();
-                if (affected == null || affected.Count == 0)
+                if (_sbController.Coordinator != null)
                 {
-                    System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No affected objects for table {tableName}");
-                    return;
-                }
-
-                // 3) Планируем обновления через координатор
-                foreach (var objName in affected
-                    .Where(x => !string.IsNullOrWhiteSpace(x))
-                    .Distinct(StringComparer.OrdinalIgnoreCase))
-                {
-                    RefreshCoordinator?.Request(objName);
-                }
-
-                if (RefreshCoordinator != null)
-                {
-                    var stats = RefreshCoordinator.GetStatistics();
+                    var stats = _sbController.Coordinator.GetStatistics();
                     System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
                 }
             }
@@ -2116,7 +2102,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        public override Task UpdateDataInFormAsync(string tableName)
+        public Task UpdateDataInFormAsync(string tableName)
             => UpdateDataInFormAsync(tableName, fieldsChangedCsv: string.Empty);
 
 
