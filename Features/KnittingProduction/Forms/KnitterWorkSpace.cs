@@ -104,6 +104,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private string _lastBlinkWindowKey;
         private DateTime _blinkEndTime;
         private Color _buttonDefaultBackColor;
+        private Color _planFooterColor;
+        private Color _factFooterColor;
         private TimeSpan _blinkTimeMorning = new TimeSpan(8, 0, 0);
         private TimeSpan _blinkTimeEvening = new TimeSpan(20, 0, 0);
         private int _blinkDurationMinutes = 1;
@@ -152,6 +154,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(UserClass) start");
                 InitializeComponent();
+                _planFooterColor = Color.LightCoral;
+                _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
                 dataLayoutControl1.DataSource = _planBindingSource;
 
@@ -204,6 +208,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] ctor(IKnitterOrchestrator) start");
                 InitializeComponent();
+                _planFooterColor = Color.LightCoral;
+                _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 dataLayoutControl1.DataSource = _planBindingSource;
@@ -1105,6 +1111,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (!isPlan && !isFact)
                 return;
 
+            ApplyFooterBackColor(e, isPlan);
+
             decimal localSum = 0m;
             if (e.Info?.Value != null && e.Info.Value != DBNull.Value && decimal.TryParse(e.Info.Value.ToString(), out var parsedLocal))
             {
@@ -1115,6 +1123,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             decimal globalSum = isPlan ? totals.planTotal : totals.factTotal;
 
             e.Info.DisplayText = $"все: {globalSum:0.##}";
+        }
+
+        private void ApplyFooterBackColor(DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e, bool isPlan)
+        {
+            e.Appearance.BackColor = isPlan ? _planFooterColor : _factFooterColor;
+            e.Appearance.Options.UseBackColor = true;
         }
 
         /// <summary>
