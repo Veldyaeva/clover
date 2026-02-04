@@ -1454,13 +1454,15 @@
             // 
             // xrTableCell68
             // 
+            this.xrTableCell68.BorderWidth = 1F;
             this.xrTableCell68.CanShrink = true;
             this.xrTableCell68.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[chas] + \':\'+[minutes]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[tItogViewChas]")});
             this.xrTableCell68.KeepTogether = true;
             this.xrTableCell68.Multiline = true;
             this.xrTableCell68.Name = "xrTableCell68";
-            this.xrTableCell68.RowSpan = 4;
+            this.xrTableCell68.RowSpan = 2;
+            this.xrTableCell68.StylePriority.UseBorderWidth = false;
             this.xrTableCell68.Text = "ИТОГО";
             this.xrTableCell68.Weight = 5.7421780868256427D;
             // 
@@ -2068,8 +2070,11 @@
             // xrTableCell208
             // 
             this.xrTableCell208.CanShrink = true;
+            this.xrTableCell208.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[chas] + \':\'+[minutes]")});
             this.xrTableCell208.Multiline = true;
             this.xrTableCell208.Name = "xrTableCell208";
+            this.xrTableCell208.RowSpan = 2;
             this.xrTableCell208.Text = "xrTableCell208";
             this.xrTableCell208.Weight = 5.7421780868256427D;
             // 
