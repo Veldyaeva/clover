@@ -232,7 +232,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 fioList ??= new List<FioModel>();
 
                 // Жестко выбираем табельный при загрузке формы
-                const int defaultTab = 1438;
+                const int defaultTab = 0;
                 bool hasDefault = fioList.Any(f => f.Tab == defaultTab);
                 if (!hasDefault)
                 {

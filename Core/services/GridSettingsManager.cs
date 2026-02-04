@@ -124,27 +124,32 @@ namespace SewingProduction.Core.Services
                     }
                 }
 
-                var formName = GetFormName(gridView) ?? "UnknownForm";
+                var formName = GetFormName(gridView);
                 var dir = Path.Combine(UserFilePaths.GridSettings, formName);
                 Directory.CreateDirectory(dir);
 
                 var columnSettings = new List<GridColumnSetting>();
 
-                for (int i = 0; i < gridView.Columns.Count; i++)
+                // Сохраняем все столбцы (включая скрытые)
+                // Используем порядок по VisibleIndex для более предсказуемого сохранения
+                var columnsToSave = gridView.Columns
+                    .Cast<DevExpress.XtraGrid.Columns.GridColumn>()
+                    .Where(col => !string.IsNullOrEmpty(col.FieldName))
+                    .OrderBy(col => col.VisibleIndex >= 0 ? col.VisibleIndex : int.MaxValue)
+                    .ThenBy(col => col.FieldName)
+                    .ToList();
+
+                foreach (var col in columnsToSave)
                 {
-                    var col = gridView.Columns[i];
-                    if (!string.IsNullOrEmpty(col.FieldName))
+                    columnSettings.Add(new GridColumnSetting
                     {
-                        columnSettings.Add(new GridColumnSetting
-                        {
-                            FieldName = col.FieldName,
-                            Width = col.Width,
-                            VisibleIndex = col.VisibleIndex,
-                            Visible = col.Visible,
-                            SortOrder = col.SortOrder.ToString(),
-                            SortIndex = col.SortIndex
-                        });
-                    }
+                        FieldName = col.FieldName,
+                        Width = col.Width,
+                        VisibleIndex = col.VisibleIndex,
+                        Visible = col.Visible,
+                        SortOrder = col.SortOrder.ToString(),
+                        SortIndex = col.SortIndex
+                    });
                 }
 
                 // Сохраняем в отдельный JSON файл
@@ -185,7 +190,7 @@ namespace SewingProduction.Core.Services
                     }
                 }
 
-                var formName = GetFormName(gridView) ?? "UnknownForm";
+                var formName = GetFormName(gridView);
                 var dir = Path.Combine(UserFilePaths.GridSettings, formName);
                 Directory.CreateDirectory(dir);
 
@@ -202,6 +207,7 @@ namespace SewingProduction.Core.Services
                 if (columnSettings == null || columnSettings.Count == 0)
                     return;
 
+                // Сначала устанавливаем видимость и другие свойства (кроме VisibleIndex)
                 foreach (var setting in columnSettings)
                 {
                     if (string.IsNullOrEmpty(setting.FieldName))
@@ -211,13 +217,29 @@ namespace SewingProduction.Core.Services
                     if (column != null)
                     {
                         column.Width = setting.Width;
-                        column.VisibleIndex = setting.VisibleIndex;
                         column.Visible = setting.Visible;
 
                         if (Enum.TryParse<ColumnSortOrder>(setting.SortOrder, out var sortOrder))
                             column.SortOrder = sortOrder;
 
                         column.SortIndex = setting.SortIndex;
+                    }
+                }
+
+                // Затем устанавливаем VisibleIndex в правильном порядке (от меньшего к большему)
+                // Это предотвращает конфликты при установке позиций столбцов
+                // Обрабатываем только видимые столбцы (VisibleIndex >= 0)
+                var sortedSettings = columnSettings
+                    .Where(s => !string.IsNullOrEmpty(s.FieldName) && s.Visible && s.VisibleIndex >= 0)
+                    .OrderBy(s => s.VisibleIndex)
+                    .ToList();
+
+                foreach (var setting in sortedSettings)
+                {
+                    var column = gridView.Columns[setting.FieldName];
+                    if (column != null)
+                    {
+                        column.VisibleIndex = setting.VisibleIndex;
                     }
                 }
 
@@ -260,27 +282,25 @@ namespace SewingProduction.Core.Services
         }
 
         /// <summary>
-        /// Генерирует уникальный ключ настроек для грида
+        /// Получает имя формы для грида (согласованно используется везде)
         /// </summary>
-        private string GenerateSettingsKey(GridView gridView)
-        {
-            var form = gridView.GridControl?.FindForm() ?? gridView.GridControl?.TopLevelControl as Form;
-            var formName = form?.GetType().Name;
-            var gridName = gridView.Name ?? gridView.GridControl?.Name ?? "UnknownGrid";
-
-            if (string.IsNullOrWhiteSpace(formName))
-            {
-                // Избегаем префикса UnknownForm, чтобы не плодить дубликаты
-                return gridName;
-            }
-
-            return $"{formName}_{gridName}";
-        }
-
         private string GetFormName(GridView gridView)
         {
             var form = gridView.GridControl?.FindForm() ?? gridView.GridControl?.TopLevelControl as Form;
-            return form?.GetType().Name;
+            return form?.GetType().Name ?? "UnknownForm";
+        }
+
+        /// <summary>
+        /// Генерирует уникальный ключ настроек для грида
+        /// Использует ту же логику определения имени формы, что и GetFormName
+        /// </summary>
+        private string GenerateSettingsKey(GridView gridView)
+        {
+            var formName = GetFormName(gridView);
+            var gridName = gridView.Name ?? gridView.GridControl?.Name ?? "UnknownGrid";
+
+            // Всегда используем имя формы в ключе для согласованности
+            return $"{formName}_{gridName}";
         }
 
         /// <summary>

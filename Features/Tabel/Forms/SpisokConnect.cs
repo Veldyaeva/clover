@@ -128,13 +128,13 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            
-            //using (var connection = _dbHelper.GetConnection())
-            //{
-            //    string sql;
-            //    sql = $"UPDATE zl_spisok SET {e.Column.FieldName} = N'{e.Value}' WHERE uin = {Convert.ToInt32(gridView1.GetDataRow(e.RowHandle)["uin"])}";
-            //    _dbHelper.ExecuteNonQuery(sql, new Dictionary<string, object> { });
-            //}
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                string sql;
+                sql = $"UPDATE zl_spisok SET {e.Column.FieldName} = N'{e.Value}' WHERE uin = {Convert.ToInt32(gridView1.GetDataRow(e.RowHandle)["uin"])}";
+                _dbHelper.ExecuteNonQuery(sql, new Dictionary<string, object> { });
+            }
         }
     }
 }
