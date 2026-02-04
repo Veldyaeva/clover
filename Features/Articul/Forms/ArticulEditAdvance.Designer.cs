@@ -124,7 +124,6 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t2 = new CustomTextBoxEx();
             txbNorm_t1 = new CustomTextBoxEx();
             txbAssort = new CustomTextBox();
-            chbArh = new CustomCheckBox();
             chbKombIzd = new CustomCheckBox();
             txbSost2 = new CustomTextBoxEx();
             chbKombDet = new CustomCheckBox();
@@ -149,7 +148,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem58 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -231,6 +229,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem85 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem86 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem87 = new DevExpress.XtraLayout.LayoutControlItem();
+            chbArh = new CustomCheckBox();
             chkPres = new CustomCheckBox();
             chkStra = new CustomCheckBox();
             chkBus = new CustomCheckBox();
@@ -365,7 +364,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem58).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
@@ -502,13 +500,16 @@ namespace SewingProduction.Features.Articul.Forms
             gridViewEditAdvRazm.EditFormShowing += gridViewEditAdvRazm_EditFormShowing;
             gridViewEditAdvRazm.EditFormPrepared += gridViewEditAdvRazm_EditFormPrepared;
             gridViewEditAdvRazm.EditFormHidden += gridViewEditAdvRazm_EditFormHidden;
+            gridViewEditAdvRazm.InitNewRow += gridViewEditAdvRazm_InitNewRow;
+            gridViewEditAdvRazm.InvalidRowException += gridView_InvalidRowException;
+            gridViewEditAdvRazm.ValidateRow += gridViewEditAdvRazm_ValidateRow;
             // 
             // gcEditKod
             // 
             gcEditKod.Caption = "Код";
             gcEditKod.FieldName = "Kod";
             gcEditKod.Name = "gcEditKod";
-            gcEditKod.OptionsColumn.ReadOnly = true;
+            gcEditKod.OptionsColumn.AllowEdit = false;
             gcEditKod.Visible = true;
             gcEditKod.VisibleIndex = 0;
             gcEditKod.Width = 81;
@@ -624,7 +625,6 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutCommonArticul.Controls.Add(txbNorm_t2);
             dataLayoutCommonArticul.Controls.Add(txbNorm_t1);
             dataLayoutCommonArticul.Controls.Add(txbAssort);
-            dataLayoutCommonArticul.Controls.Add(chbArh);
             dataLayoutCommonArticul.Controls.Add(txbSost3);
             dataLayoutCommonArticul.Controls.Add(chbKombIzd);
             dataLayoutCommonArticul.Controls.Add(txbSost2);
@@ -1579,7 +1579,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbKruj.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             chbKruj.Location = new System.Drawing.Point(363, 36);
             chbKruj.Name = "chbKruj";
-            chbKruj.Size = new System.Drawing.Size(82, 20);
+            chbKruj.Size = new System.Drawing.Size(305, 20);
             chbKruj.TabIndex = 3;
             chbKruj.UseVisualStyleBackColor = true;
             // 
@@ -1845,19 +1845,6 @@ namespace SewingProduction.Features.Articul.Forms
             txbAssort.Size = new System.Drawing.Size(40, 21);
             txbAssort.TabIndex = 11;
             // 
-            // chbArh
-            // 
-            chbArh.Enabled = false;
-            chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            chbArh.Font = new System.Drawing.Font("Arial", 10F);
-            chbArh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            chbArh.Location = new System.Drawing.Point(504, 36);
-            chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            chbArh.Name = "chbArh";
-            chbArh.Size = new System.Drawing.Size(164, 20);
-            chbArh.TabIndex = 4;
-            chbArh.UseVisualStyleBackColor = true;
-            // 
             // chbKombIzd
             // 
             chbKombIzd.Enabled = false;
@@ -2050,7 +2037,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutCommonArticul
             // 
             layoutCommonArticul.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            layoutCommonArticul.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem17, layoutControlItem18, layoutControlItem1, layoutControlItem2, layoutControlItem4, layoutControlItem5, layoutControlItem8, layoutControlItem13, layoutControlItem58, layoutControlItem19, layoutControlItem9, layoutControlItem7, layoutControlItem6 });
+            layoutCommonArticul.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem17, layoutControlItem18, layoutControlItem1, layoutControlItem2, layoutControlItem4, layoutControlItem5, layoutControlItem8, layoutControlItem13, layoutControlItem58, layoutControlItem9, layoutControlItem7, layoutControlItem6 });
             layoutCommonArticul.Location = new System.Drawing.Point(0, 0);
             layoutCommonArticul.Name = "layoutCommonArticul";
             layoutCommonArticul.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
@@ -2165,23 +2152,11 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem58.CustomizationFormText = "Кружевное";
             layoutControlItem58.Location = new System.Drawing.Point(273, 0);
             layoutControlItem58.Name = "layoutControlItem58";
-            layoutControlItem58.Size = new System.Drawing.Size(161, 24);
+            layoutControlItem58.Size = new System.Drawing.Size(384, 24);
             layoutControlItem58.Text = "Кружевное";
             layoutControlItem58.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             layoutControlItem58.TextSize = new System.Drawing.Size(70, 20);
             layoutControlItem58.TextToControlDistance = 5;
-            // 
-            // layoutControlItem19
-            // 
-            layoutControlItem19.Control = chbArh;
-            layoutControlItem19.CustomizationFormText = "Архив";
-            layoutControlItem19.Location = new System.Drawing.Point(434, 0);
-            layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(223, 24);
-            layoutControlItem19.Text = "Архив";
-            layoutControlItem19.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
-            layoutControlItem19.TextSize = new System.Drawing.Size(50, 20);
-            layoutControlItem19.TextToControlDistance = 5;
             // 
             // layoutControlItem9
             // 
@@ -2960,6 +2935,20 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem87.TextSize = new System.Drawing.Size(50, 13);
             layoutControlItem87.TextToControlDistance = 5;
             // 
+            // chbArh
+            // 
+            chbArh.Enabled = false;
+            chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            chbArh.Font = new System.Drawing.Font("Arial", 10F);
+            chbArh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            chbArh.Location = new System.Drawing.Point(1187, 34);
+            chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            chbArh.Name = "chbArh";
+            chbArh.Size = new System.Drawing.Size(82, 20);
+            chbArh.TabIndex = 4;
+            chbArh.Text = "Архив";
+            chbArh.UseVisualStyleBackColor = true;
+            // 
             // chkPres
             // 
             chkPres.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -3215,12 +3204,13 @@ namespace SewingProduction.Features.Articul.Forms
             btDel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btDel.AppearanceDisabled.Options.UseBackColor = true;
             btDel.AppearanceDisabled.Options.UseForeColor = true;
+            btDel.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btDel.ImageOptions.Image");
             btDel.Location = new System.Drawing.Point(208, 261);
             btDel.Name = "btDel";
             btDel.Size = new System.Drawing.Size(109, 22);
             btDel.StyleController = customLayoutControl2;
             btDel.TabIndex = 52;
-            btDel.Text = "btDel";
+            btDel.Text = "Удалить";
             btDel.Click += btDel_Click;
             // 
             // btEdit
@@ -3235,12 +3225,13 @@ namespace SewingProduction.Features.Articul.Forms
             btEdit.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btEdit.AppearanceDisabled.Options.UseBackColor = true;
             btEdit.AppearanceDisabled.Options.UseForeColor = true;
+            btEdit.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btEdit.ImageOptions.Image");
             btEdit.Location = new System.Drawing.Point(100, 261);
             btEdit.Name = "btEdit";
             btEdit.Size = new System.Drawing.Size(104, 22);
             btEdit.StyleController = customLayoutControl2;
             btEdit.TabIndex = 51;
-            btEdit.Text = "btEdit";
+            btEdit.Text = "Изменить";
             btEdit.Click += btEdit_Click;
             // 
             // btAdd
@@ -3255,12 +3246,13 @@ namespace SewingProduction.Features.Articul.Forms
             btAdd.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btAdd.AppearanceDisabled.Options.UseBackColor = true;
             btAdd.AppearanceDisabled.Options.UseForeColor = true;
+            btAdd.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btAdd.ImageOptions.Image");
             btAdd.Location = new System.Drawing.Point(2, 261);
             btAdd.Name = "btAdd";
             btAdd.Size = new System.Drawing.Size(94, 22);
             btAdd.StyleController = customLayoutControl2;
             btAdd.TabIndex = 50;
-            btAdd.Text = "btAdd";
+            btAdd.Text = "Добавить";
             btAdd.Click += btAdd_Click;
             // 
             // layoutControlGroup6
@@ -3318,6 +3310,7 @@ namespace SewingProduction.Features.Articul.Forms
             Controls.Add(dataLayoutCommonArticul);
             Controls.Add(pictureBoxArticul);
             Controls.Add(customSimpleButton1);
+            Controls.Add(chbArh);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "ArticulEditAdvance";
             Text = "ArticulEditAdvance";
@@ -3427,7 +3420,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem58).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
@@ -3578,7 +3570,6 @@ namespace SewingProduction.Features.Articul.Forms
         private DevExpress.XtraLayout.LayoutControlGroup layoutCommonArticul;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem18;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
         private DevExpress.XtraLayout.LayoutControlGroup layoutSostav;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
