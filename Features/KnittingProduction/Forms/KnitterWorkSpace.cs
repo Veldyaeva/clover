@@ -29,6 +29,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
+using DevExpress.XtraSpreadsheet.Model;
 
 #nullable enable
 namespace SewingProduction.Features.KnittingProduction.Forms
@@ -990,7 +991,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Подменяет редактор ячейки "Начато" (кнопка/текст) в зависимости от значения.
+        /// Подменяет редактор ячейки "Начато" (кнопка/текст) в зависимости от значения
         /// </summary>
         private void AdvBandedGridView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
         {
@@ -1005,7 +1006,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Клик по кнопке в "Начато" — установить дату начала для текущей строки.
+        /// Клик по кнопке в "Начато" — установить дату начала для текущей строки
         /// </summary>
         private async void PzvDateStartButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
@@ -1023,7 +1024,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Устанавливает дату начала: сохраняет на сервере (с использованием серверного времени) и моментально отражает в ячейке.
+        /// Устанавливает дату начала: сохраняет на сервере (с использованием серверного времени) и моментально отражает в ячейке
         /// </summary>
         private async Task ApplyPzvDateStartAsync(GridView view)//int rowHandle)
         {
@@ -1037,7 +1038,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Клик по кнопке "Завершить" — запросить количество и завершить операцию (установить дату окончания).
+        /// Клик по кнопке "Завершить" — запросить количество и завершить операцию (установить дату окончания)
         /// </summary>
         private async void PzvDateEndButtonEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
@@ -1046,7 +1047,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Двойной клик по ячейке "Закончено" — запросить количество и завершить операцию.
+        /// Двойной клик по ячейке "Завершить" — запросить количество и завершить операцию
         /// </summary>
         private async void PzvDateEndButtonEdit_DoubleClick(object sender, EventArgs e)
         {
@@ -1055,7 +1056,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Показываем сумму по группе в ячейке "назначено в м/ч" (pzvChasNazn) в строке группы.
+        /// Показываем сумму по группе в ячейке "назначено в м/ч" (pzvChasNazn) в строке группы
         /// </summary>
         private void AdvBandedGridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e)
         {
@@ -1123,6 +1124,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             decimal globalSum = isPlan ? totals.planTotal : totals.factTotal;
 
             e.Info.DisplayText = $"все: {globalSum:0.##}";
+            e.Appearance.BackColor = isPlan ? _planFooterColor : _factFooterColor;
+            e.Appearance.Options.UseBackColor = true;
         }
 
         private void ApplyFooterBackColor(DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e, bool isPlan)
@@ -1224,6 +1227,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (masterRow != null)
                 {
                     masterRow.pzvKol = qty;
+                    masterRow.FactKol_UI = qty;
+                    masterRow.FactChas_UI = factHours;
                     if (factHours > 0)
                         masterRow.pzvNChasi = factHours;
                 }
