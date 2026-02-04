@@ -68,6 +68,7 @@ namespace SewingProduction.Core.helpers
         // pending matches
         private readonly ConcurrentQueue<ObjectTableFieldMatch> _pending;
         private int _disposeState = 0; // 0=not disposed, 1=disposing/disposed
+        private int _disposed; // 0 = не disposed, 1 = disposed
 
         private sealed class DependencyItem
         {
@@ -216,7 +217,7 @@ namespace SewingProduction.Core.helpers
             }
             return Task.CompletedTask;
         }
-
+        
         /// <summary>
         /// Вызов при событии от брокера:
         /// tableFromBroker: "dbo.table" или "table"
@@ -306,15 +307,23 @@ namespace SewingProduction.Core.helpers
         /// <summary>Забрать список ObjectName, которые нужно перезапустить.</summary>
         public List<string> DrainPending()
         {
-            var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-            while (_pending.TryDequeue(out var item))
+            try
             {
-                if (!string.IsNullOrWhiteSpace(item.ObjectName))
-                    result.Add(item.ObjectName);
-            }
+                var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-            return result.ToList();
+                while (_pending.TryDequeue(out var item))
+                {
+                    if (!string.IsNullOrWhiteSpace(item.ObjectName))
+                        result.Add(item.ObjectName);
+                }
+
+                return result.ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка ServiceBrokerHelper.InitAndStartAsync: {ex.Message}");
+                return new List<string>();
+            }
         }
 
         /// <summary>Список union-полей, которые слушаем по таблице (для дебага).</summary>
@@ -326,6 +335,7 @@ namespace SewingProduction.Core.helpers
             var incoming = tableFromBroker.Trim();
             var tableKey = incoming;
 
+            // если брокер прислал только имя таблицы (без схемы)
             if (!incoming.Contains('.'))
             {
                 var match = _unionFieldsByTable.Keys.FirstOrDefault(k =>
@@ -340,16 +350,47 @@ namespace SewingProduction.Core.helpers
 
             return new List<string>();
         }
-
+        /// <summary>Для отладки: какие таблицы реально слушаем.</summary>
         public IReadOnlyList<string> GetListeningTables()
             => _unionFieldsByTable.Keys.OrderBy(k => k).ToList();
 
+        /// <summary>Для отладки: какие union-поля слушаем по таблице.</summary>
         public IReadOnlyList<string> GetListeningFields(string tableKey)
         {
             if (_unionFieldsByTable.TryGetValue(tableKey, out var set))
                 return set.OrderBy(x => x).ToList();
 
             return Array.Empty<string>();
+        }
+
+        /// <summary>
+        /// Получает список затронутых объектов (ObjectName) по имени таблицы.
+        /// </summary>
+        public IReadOnlyList<string> GetAffectedObjectsByTable(string tableName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+                return Array.Empty<string>();
+
+            var incoming = tableName.Trim();
+            var tableKey = incoming;
+
+            // Если пришло без схемы — найдём полное "schema.table"
+            if (!incoming.Contains('.'))
+            {
+                var match = _depsByTable.Keys.FirstOrDefault(k =>
+                    k.EndsWith("." + incoming, StringComparison.OrdinalIgnoreCase));
+
+                if (match != null)
+                    tableKey = match;
+            }
+
+            if (!_depsByTable.TryGetValue(tableKey, out var deps))
+                return Array.Empty<string>();
+
+            return deps.Select(d => d.ObjectName)
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
         }
 
 public ValueTask DisposeAsync()
@@ -383,6 +424,8 @@ public ValueTask DisposeAsync()
 
         private void RebuildIndex()
         {
+            try
+            {
             _depsByTable.Clear();
             _unionFieldsByTable.Clear();
 
@@ -443,7 +486,12 @@ public ValueTask DisposeAsync()
                         _unionFieldsByTable[tableKey] = union;
                     }
                     foreach (var f in fields) union.Add(f);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка ServiceBrokerHelper.RebuildIndex: {ex.Message}");
             }
         }
 

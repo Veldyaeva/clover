@@ -427,7 +427,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             try
             {
                 await using var connection = _dbHelper.GetConnection();
-                string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
+                string query = $"EXEC GetSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
 
                 var list = (await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { })).ToList();
                 //return result.ToList();
@@ -578,6 +578,27 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 };
             }
         }
+        //public async Task<string> GetAnyMachineByNomZad(string? _nomZadany = null)
+        //{
+        //    string sql;
+        //    var p = new DynamicParameters();
+
+        //    if (_nomZadany != null)        // поиск по № задания
+        //    {
+        //        sql = @"SELECT TOP (1) 
+        //               dbo.getFileEskizForKodd_rt(vsa.annId)
+        //        FROM   dbo.View_sp_articul vsa
+        //        WHERE  vsa.annId = @annId";
+        //        p.Add("@annId", annId);
+        //    }
+        //    else                      // прямой поиск по kodd
+        //    {
+        //        sql = "SELECT dbo.getFileEskizForKodd(@kod)";
+        //        p.Add("@kod", kod);
+        //    }
+
+        //    return await _dbHelper.ExecuteScalarAsync<string>(sql, p);
+        //}
         #endregion
 
     }

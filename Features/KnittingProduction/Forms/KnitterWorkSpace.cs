@@ -6,6 +6,9 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
+using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -16,6 +19,7 @@ using SewingProduction.Core.interfaces;
 using SewingProduction.Core.services;
 using SewingProduction.Core.Models;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +34,7 @@ using static SewingProduction.Core.helpers.ServiceBrokerHelper;
 #nullable enable
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class KnitterWorkSpace : CustomForm, IDataUpdatableFormAsyncV2
+    public partial class KnitterWorkSpace : ServiceBrokerFormBase
     {
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
@@ -38,24 +42,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly IKnitterOrchestrator _orchestrator;
 
         /// <summary>
-        /// ServiceBroker для отслеживания изменений в БД.
-        /// </summary>
-        private ServiceBrokerHelper? _sbHelper;
-
-        /// <summary>
-        /// Координатор обновлений с защитой от дребезга.
-        /// </summary>
-        private EnhancedRefreshCoordinator? _refreshCoordinator;
-
-        /// <summary>
         /// Сервис для работы с ServiceBroker.
         /// </summary>
         private ServiceBrokerService? _sbService;
 
         /// <summary>
-        /// Токен отмены для инициализации ServiceBroker.
+        /// Список SQL-объектов для отслеживания через ServiceBroker.
         /// </summary>
-        private CancellationTokenSource? _loadCts;
+        protected override IReadOnlyList<string> ServiceBrokerObjects => 
+            new[] { "GetPlanZagrVyazNorm_ByTab4" };
+
+        /// <summary>
+        /// Приоритеты обновления объектов (чем выше число, тем выше приоритет).
+        /// </summary>
+        protected override IReadOnlyDictionary<string, int> RefreshPriorities => 
+            new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "GetPlanZagrVyazNorm_ByTab4", 10 }
+            };
         /// <summary>
         /// Источник данных, к которому привязан GridControl.
         /// </summary>
@@ -64,6 +68,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Презентер, который собирает иерархию мастер-деталь и настраивает события.
         /// </summary>
         private readonly KnitterPlanPresenter _planPresenter = new KnitterPlanPresenter();
+        /// <summary>
+        /// Список ID незавершённых операций (pzvID) для подсветки красным цветом
+        /// </summary>
+        private HashSet<int> _unfinishedOperationIds = new HashSet<int>();
         private CheckBox _adminToggle;
         private CheckBox _expandNrToggle;
         private RepositoryItemProgressBar _statusProgressBar;
@@ -150,7 +158,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 this.Load += async (s, e) =>
                 {
                     await InitializeAsync();
-                    await InitServiceBrokerAsync();
+                    await InitServiceBrokerAsync(CancellationToken.None);
+                    InitHeaderButtonTags();
                 };
 
                 SetupPzvDateStartColumn();
@@ -161,6 +170,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                SetupRowStyling();
+                SetupGridFonts();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -195,6 +206,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //InitAdminSettingsButton();
                 SetupStatusColumn();
                 SetupBlinkTimers();
+                SetupRowStyling();
+                SetupGridFonts();
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -219,7 +232,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 fioList ??= new List<FioModel>();
 
                 // Жестко выбираем табельный при загрузке формы
-                const int defaultTab = 1438;
+                const int defaultTab = 0;
                 bool hasDefault = fioList.Any(f => f.Tab == defaultTab);
                 if (!hasDefault)
                 {
@@ -451,6 +464,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     var canClose = await ProcessOperationsOnShiftEndAsync();
                     if (!canClose)
                         return;
+                    
+                    // Очищаем список незавершённых операций при успешном закрытии смены
+                    _unfinishedOperationIds.Clear();
+                    // Обновляем отображение, чтобы убрать подсветку
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        bandedGridView3?.RefreshData();
+                        advBandedGridView1?.RefreshData();
+                    }));
                     //// снимаем назначение у всех НЕ начатых в текущей смене
                     //await _orchestrator.UnassignNotStartedByShiftAsync(_currentShiftId);
 
@@ -767,6 +789,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             var inProgress = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
             if (inProgress.Any())
             {
+                // Сохраняем ID незавершённых операций для подсветки
+                _unfinishedOperationIds = new HashSet<int>(inProgress.Where(r => r.pzvID > 0).Select(r => r.pzvID));
+                
+                // Сразу обновляем отображение для подсветки незавершённых операций
+                bandedGridView3?.RefreshData();
+                advBandedGridView1?.RefreshData();
+                
+                // Показываем сообщение после обновления отображения
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
                 //foreach (var row in inProgress)
@@ -1281,6 +1311,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 var updated = await updateFunc(row.pzvID);
                 var newValue = getDate(updated) ?? getDate(row);
+                var oldValue = getDate(row);
                 setDate(row, newValue);
                 // Также обновляем мастер-коллекцию, чтобы проверки при закрытии смены видели актуальные даты
                 var masterRow = _planPresenter?.AllRows?.FirstOrDefault(r => r != null && r.pzvID == row.pzvID);
@@ -1288,6 +1319,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     setDate(masterRow, newValue);
                 }
+                
+                // Если операция завершена (установлена дата окончания), убираем её из списка незавершённых
+                if (column.FieldName == "pzvDateEnd" && newValue != null && oldValue == null)
+                {
+                    _unfinishedOperationIds.Remove(row.pzvID);
+                }
+                
                 _view.PostEditor();
                 _view.SetRowCellValue(rowHandle, column, newValue);
                 _view.PostEditor();
@@ -1295,6 +1333,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _view.UpdateCurrentRow();
                 _view.RefreshRowCell(rowHandle, column);
                 _view.RefreshData();
+                
+                // Обновляем подсветку строк после изменения даты
+                if (column.FieldName == "pzvDateEnd")
+                {
+                    _view.RefreshRow(rowHandle);
+                    // Также обновляем в детализации, если она видна
+                    if (advBandedGridView1 != null)
+                    {
+                        advBandedGridView1.RefreshData();
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1495,6 +1544,191 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             bandedGridView3.CustomUnboundColumnData -= BandedGridView3_CustomUnboundColumnData;
             bandedGridView3.CustomUnboundColumnData += BandedGridView3_CustomUnboundColumnData;
+        }
+
+        /// <summary>
+        /// Настраивает подсветку текущей строки для bandedGridView3 и advBandedGridView1
+        /// </summary>
+        private void SetupRowStyling()
+        {
+            try
+            {
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.RowStyle -= BandedGridView3_RowStyle;
+                    bandedGridView3.RowStyle += BandedGridView3_RowStyle;
+                }
+
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.RowStyle -= AdvBandedGridView1_RowStyle;
+                    advBandedGridView1.RowStyle += AdvBandedGridView1_RowStyle;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при настройке подсветки строк: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Настраивает увеличенные шрифты для таблиц bandedGridView3 и advBandedGridView1
+        /// </summary>
+        private void SetupGridFonts()
+        {
+            try
+            {
+                // Увеличиваем шрифт на 3 pt (можно изменить на 2-4 pt по необходимости)
+                float fontSizeIncrease = 5f;
+                
+                if (bandedGridView3 != null)
+                {
+                    // Отключаем раскраску нечётных/чётных строк
+                    bandedGridView3.OptionsView.EnableAppearanceOddRow = false;
+                    bandedGridView3.OptionsView.EnableAppearanceEvenRow = false;
+                    
+                    // Получаем текущий шрифт или используем стандартный
+                    Font currentFont = bandedGridView3.Appearance.Row.Font ?? SystemFonts.DefaultFont;
+                    Font newFont = new Font(currentFont.FontFamily, currentFont.Size + fontSizeIncrease, currentFont.Style);
+                    
+                    // Применяем увеличенный шрифт ко всем элементам отображения
+                    bandedGridView3.Appearance.Row.Font = newFont;
+                    bandedGridView3.Appearance.HeaderPanel.Font = newFont;
+                    bandedGridView3.Appearance.FooterPanel.Font = newFont;
+                    bandedGridView3.Appearance.GroupPanel.Font = newFont;
+                    bandedGridView3.Appearance.GroupRow.Font = newFont;
+                    
+                    // Применяем к каждой колонке
+                    foreach (BandedGridColumn column in bandedGridView3.Columns)
+                    {
+                        if (column.AppearanceCell != null)
+                            column.AppearanceCell.Font = newFont;
+                        if (column.AppearanceHeader != null)
+                            column.AppearanceHeader.Font = newFont;
+                    }
+                }
+
+                if (advBandedGridView1 != null)
+                {
+                    // Отключаем раскраску нечётных/чётных строк
+                    advBandedGridView1.OptionsView.EnableAppearanceOddRow = false;
+                    advBandedGridView1.OptionsView.EnableAppearanceEvenRow = false;
+                    
+                    // Получаем текущий шрифт или используем стандартный
+                    Font currentFont = advBandedGridView1.Appearance.Row.Font ?? SystemFonts.DefaultFont;
+                    Font newFont = new Font(currentFont.FontFamily, currentFont.Size + fontSizeIncrease, currentFont.Style);
+                    
+                    // Применяем увеличенный шрифт ко всем элементам отображения
+                    advBandedGridView1.Appearance.Row.Font = newFont;
+                    advBandedGridView1.Appearance.HeaderPanel.Font = newFont;
+                    advBandedGridView1.Appearance.FooterPanel.Font = newFont;
+                    advBandedGridView1.Appearance.GroupPanel.Font = newFont;
+                    advBandedGridView1.Appearance.GroupRow.Font = newFont;
+                    
+                    // Применяем к каждой колонке
+                    foreach (BandedGridColumn column in advBandedGridView1.Columns)
+                    {
+                        if (column.AppearanceCell != null)
+                            column.AppearanceCell.Font = newFont;
+                        if (column.AppearanceHeader != null)
+                            column.AppearanceHeader.Font = newFont;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при настройке шрифтов таблиц: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Обновляет список незавершённых операций на основе текущих данных
+        /// </summary>
+        private void UpdateUnfinishedOperationsList()
+        {
+            try
+            {
+                var rows = _planPresenter.AllRows?.Where(r => r != null && r.pzvID > 0).ToList() ?? new List<KnitterPZVModel>();
+                // Находим незавершённые операции: начатые, но не завершённые
+                var unfinished = rows.Where(r => r.pzvDateStart != null && r.pzvDateEnd == null).ToList();
+                _unfinishedOperationIds = new HashSet<int>(unfinished.Where(r => r.pzvID > 0).Select(r => r.pzvID));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при обновлении списка незавершённых операций: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Обработчик стиля строк для bandedGridView3 - подсветка фокусной строки и незавершённых операций
+        /// </summary>
+        private void BandedGridView3_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            try
+            {
+                var view = sender as BandedGridView;
+                if (view == null) return;
+                if (e.RowHandle < 0) return;
+
+                var row = view.GetRow(e.RowHandle) as KnitterPZVModel;
+                
+                // Подсветка незавершённых операций красным цветом (приоритет над фокусной строкой)
+                if (row != null && _unfinishedOperationIds.Contains(row.pzvID))
+                {
+                    e.Appearance.BackColor = Color.LightCoral;
+                    e.Appearance.BackColor2 = Color.LightCoral;
+                    e.HighPriority = true;
+                    return;
+                }
+
+                // Подсветка фокусной строки (только если не незавершённая)
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+  //                  e.Appearance.BackColor = Color.Coral;
+  //                  e.Appearance.BackColor2 = Color.Coral;
+                    e.HighPriority = true;
+                    return;
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Обработчик стиля строк для advBandedGridView1 - подсветка фокусной строки и незавершённых операций
+        /// </summary>
+        private void AdvBandedGridView1_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            try
+            {
+                var view = sender as AdvBandedGridView;
+                if (view == null) return;
+                if (e.RowHandle < 0) return;
+
+                // Не применяем стили к группам
+                if (view.IsGroupRow(e.RowHandle))
+                    return;
+
+                var row = view.GetRow(e.RowHandle) as KnitterPZVModel;
+                
+                // Подсветка незавершённых операций красным цветом (приоритет над фокусной строкой)
+                if (row != null && _unfinishedOperationIds.Contains(row.pzvID))
+                {
+                    e.Appearance.BackColor = Color.LightCoral;
+                    e.Appearance.BackColor2 = Color.LightCoral;
+                    e.HighPriority = true;
+                    return;
+                }
+
+                // Подсветка фокусной строки (только если не незавершённая)
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.Bisque;
+                    e.Appearance.BackColor2 = Color.BlanchedAlmond;
+                    e.HighPriority = true;
+                    return;
+                }
+            }
+            catch { }
         }
 
         private void BandedGridView3_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
@@ -1742,56 +1976,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        /// <summary>
-        /// Инициализирует ServiceBroker для отслеживания изменений в таблицах БД.
-        /// </summary>
-        private async Task InitServiceBrokerAsync()
-        {
-            try
-            {
-                _loadCts = new CancellationTokenSource();
-                var dbHelper = new DatabaseHelper();
-                _sbService = new ServiceBrokerService(dbHelper);
-
-                // Имя хранимой процедуры, которую нужно отслеживать
-                const string objectName = "GetPlanZagrVyazNorm_ByTab4";
-
-                _sbHelper = new ServiceBrokerHelper(
-                    owner: this,
-                    loadByObjectAsync: (obj, token) => _sbService.GetObjectListForServiceBroker(obj, token)
-                )
-                {
-                    UseSchemaInListenName = true
-                };
-
-                // Координатор обновлений с защитой от дребезга
-                var sbSettings = SettingsManager.GetServiceBrokerSettings();
-                _refreshCoordinator = new EnhancedRefreshCoordinator(
-                    reloadByObjectNameAsync: RestartDataByObjectNameAsync,
-                    debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
-                    throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
-                    maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
-                    maxBatchSize: sbSettings.MaxBatchSize,
-                    maxParallelReloads: sbSettings.MaxParallelReloads,
-                    maxCascadeDepth: sbSettings.MaxCascadeDepth
-                );
-
-                // Настраиваем приоритет для обновления плана
-                _refreshCoordinator.SetPriority(objectName, 10);
-
-                // Инициализируем и запускаем прослушивание
-                await _sbHelper.InitAndStartAsync(new[] { objectName }, _loadCts.Token);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error initializing ServiceBroker: {ex.Message}");
-            }
-        }
 
         /// <summary>
         /// Перезапускает загрузку данных по имени объекта (вызывается координатором).
         /// </summary>
-        private async Task RestartDataByObjectNameAsync(string objectName)
+        public override async Task RestartDataByObjectNameAsync(string objectName, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(objectName))
                 return;
@@ -1822,50 +2011,35 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        public Task UpdateDataInFormAsync(string table)
-    => UpdateDataInFormAsync(table, fieldsCsv: null);
-        public async Task UpdateDataInFormAsync(string table, string? fieldsCsv)
+        /// <summary>
+        /// Загружает информацию о таблицах и полях для указанного объекта из БД.
+        /// </summary>
+        protected override async Task<List<ServiceBrokerModel.TableListenInfo>> LoadListenInfoByObjectNameAsync(
+            string objectName, CancellationToken ct)
         {
-            if (_sbHelper == null) return;
-
-            try
+            if (_sbService == null)
             {
-                System.Diagnostics.Debug.WriteLine(
-                    $"[KnitterWorkSpace] UpdateDataInFormAsync: table={table}, fields={fieldsCsv ?? "<null>"}");
-
-                // 1) Пропускаем событие через фильтрацию + маппинг (таблица+поля -> objectNames)
-                await _sbHelper.HandleBrokerUpdateAsync(table, fieldsCsv);
-
-                // 2) Забираем затронутые объекты
-                var affected = _sbHelper.DrainPending();
-                if (affected == null || affected.Count == 0)
-                {
-                    System.Diagnostics.Debug.WriteLine(
-                        $"[KnitterWorkSpace] No affected objects for table={table}, fields={fieldsCsv ?? "<null>"}");
-                    return;
-                }
-
-                // 3) Планируем обновления через координатор
-                foreach (var objName in affected
-                    .Where(x => !string.IsNullOrWhiteSpace(x))
-                    .Distinct(StringComparer.OrdinalIgnoreCase))
-                {
-                    _refreshCoordinator?.Request(objName);
-                }
-
-                // 4) (опционально) лог статистики
-                if (_refreshCoordinator != null)
-                {
-                    var stats = _refreshCoordinator.GetStatistics();
-                    System.Diagnostics.Debug.WriteLine(
-                        $"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
-                }
+                var dbHelper = new DatabaseHelper();
+                _sbService = new ServiceBrokerService(dbHelper);
             }
-            catch (Exception ex)
+            
+            return await _sbService.GetObjectListForServiceBroker(objectName, ct);
+        }
+
+        /// <summary>
+        /// Переопределяем инициализацию для установки UseSchemaInListenName = true.
+        /// </summary>
+        public override async Task InitServiceBrokerAsync(CancellationToken ct)
+        {
+            await base.InitServiceBrokerAsync(ct);
+            
+            // Устанавливаем UseSchemaInListenName = true (как было в оригинальной реализации)
+            if (ServiceBrokerHelper != null)
             {
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex}");
+                ServiceBrokerHelper.UseSchemaInListenName = true;
             }
         }
+
 
 
         ///// <summary>
@@ -1913,29 +2087,496 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //    }
         //}
 
-        public new void Dispose()
-        {
-            try
-            {
-                _loadCts?.Cancel();
-                _loadCts?.Dispose();
-                _sbHelper?.DisposeAsync().AsTask().Wait();
-                _refreshCoordinator?.Dispose();
-            }
-            catch
-            {
-                // Игнорируем ошибки при освобождении ресурсов
-            }
-            base.Dispose();
-        }
 
 
 
         private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
-            await ReloadCurrentTabAsync();
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                string tag = button.Tag?.ToString() ?? string.Empty;
 
+                switch (tag)
+                {
+                    case "refresh":
+                        await ReloadCurrentTabAsync();
+                        break;
+                    case "collapse-to-vm":
+                        CollapseToFirstLevel();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "collapse-to-pachka":
+                        CollapseToPachkaLevel();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "collapse-all":
+                        CollapseAllGroups();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "expand-all":
+                        ExpandAllGroups();
+                        UpdateToggleButtonCaption();
+                        break;
+                    case "toggle-expand":
+                        ToggleExpandGroups();
+                        UpdateToggleButtonCaption();
+                        break;
+                    default:
+                        // Если тег не установлен, пытаемся определить по Caption
+                        string caption = button.Caption ?? string.Empty;
+                        if (caption.Contains("Обновить", StringComparison.OrdinalIgnoreCase))
+                        {
+                            await ReloadCurrentTabAsync();
+                        }
+                        else if (caption.Contains("Свернуть до ВМ", StringComparison.OrdinalIgnoreCase))
+                        {
+                            CollapseToFirstLevel();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Свернуть до пачки", StringComparison.OrdinalIgnoreCase))
+                        {
+                            CollapseToPachkaLevel();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Свернуть", StringComparison.OrdinalIgnoreCase))
+                        {
+                            CollapseAllGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Показать всё", StringComparison.OrdinalIgnoreCase))
+                        {
+                            ExpandAllGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Показать", StringComparison.OrdinalIgnoreCase) && !caption.Contains("всё", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Кнопка "Показать" (не "Показать всё")
+                            ToggleExpandGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        else if (caption.Contains("Свернуть", StringComparison.OrdinalIgnoreCase) && !caption.Contains("всё", StringComparison.OrdinalIgnoreCase))
+                        {
+                            // Кнопка "Свернуть" (не "Свернуть всё") - это та же кнопка переключения
+                            ToggleExpandGroups();
+                            UpdateToggleButtonCaption();
+                        }
+                        break;
+                }
+            }
         }
+
+        #region Header Buttons
+
+        /// <summary>
+        /// Инициализирует теги для кнопок в заголовке групп
+        /// </summary>
+        private void InitHeaderButtonTags()
+        {
+            // layoutControlGroup1 — основная группа с гридом
+            TagByCaption(layoutControlGroup1, new (string caption, string tag)[] {
+                ("Обновить", "refresh"),
+                ("Свернуть до ВМ", "collapse-to-vm"),
+                ("Свернуть до пачки", "collapse-to-pachka"),
+                ("Показать всё", "expand-all"),
+                ("Показать", "toggle-expand"),
+            });
+            
+            // Обновляем подпись кнопки переключения после небольшой задержки,
+            // чтобы грид успел загрузиться
+            if (layoutControlGroup1 != null)
+            {
+                this.BeginInvoke(new Action(() =>
+                {
+                    UpdateToggleButtonCaption();
+                }));
+            }
+            
+            // Обновляем подпись кнопки переключения после небольшой задержки,
+            // чтобы грид успел загрузиться
+            if (layoutControlGroup1 != null)
+            {
+                this.BeginInvoke(new Action(() =>
+                {
+                    UpdateToggleButtonCaption();
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Проставляет теги кнопкам по их подписям
+        /// </summary>
+        private void TagByCaption(LayoutControlGroup group, IEnumerable<(string caption, string tag)> map)
+        {
+            if (group == null || group.CustomHeaderButtons == null) return;
+
+            foreach (var (caption, tag) in map)
+            {
+                var btn = group.CustomHeaderButtons
+                               .OfType<GroupBoxButton>()
+                               .FirstOrDefault(b => string.Equals(b.Caption, caption, StringComparison.OrdinalIgnoreCase));
+                if (btn != null && (btn.Tag == null || string.IsNullOrWhiteSpace(btn.Tag.ToString())))
+                {
+                    btn.Tag = tag;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Поиск кнопки по тегу
+        /// </summary>
+        private static GroupBoxButton FindButtonByTag(LayoutControlGroup group, string tag) =>
+            group?.CustomHeaderButtons?.OfType<GroupBoxButton>()
+                 .FirstOrDefault(b => string.Equals(b.Tag as string, tag, StringComparison.OrdinalIgnoreCase));
+
+        /// <summary>
+        /// Обновляет подпись кнопки "Показать" в зависимости от текущего состояния групп
+        /// </summary>
+        private void UpdateToggleButtonCaption()
+        {
+            try
+            {
+                var toggleButton = FindButtonByTag(layoutControlGroup1, "toggle-expand");
+                if (toggleButton == null) return;
+
+                bool allExpanded = AreAllGroupsExpanded();
+                toggleButton.Caption = allExpanded ? "Свернуть" : "Показать";
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при обновлении подписи кнопки: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет, все ли группы развернуты
+        /// </summary>
+        private bool AreAllGroupsExpanded()
+        {
+            try
+            {
+                bool hasAnyGroups = false;
+                bool allExpanded = true;
+
+                // Проверяем детализацию в основном гриде
+                if (bandedGridView3 != null && bandedGridView3.DataRowCount > 0)
+                {
+                    for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                    {
+                        int rowHandle = bandedGridView3.GetRowHandle(i);
+                        if (bandedGridView3.IsValidRowHandle(rowHandle))
+                        {
+                            hasAnyGroups = true;
+                            bool isExpanded = bandedGridView3.GetMasterRowExpanded(rowHandle);
+                            if (!isExpanded)
+                            {
+                                allExpanded = false;
+                                break; // Найдена хотя бы одна свернутая группа
+                            }
+                        }
+                    }
+                }
+
+                // Проверяем группы строк во втором уровне
+                if (allExpanded && advBandedGridView1 != null && advBandedGridView1.RowCount > 0)
+                {
+                    for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                    {
+                        int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                        if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                        {
+                            hasAnyGroups = true;
+                            bool isExpanded = advBandedGridView1.GetRowExpanded(rowHandle);
+                            if (!isExpanded)
+                            {
+                                allExpanded = false;
+                                break; // Найдена хотя бы одна свернутая группа
+                            }
+                        }
+                    }
+                }
+
+                // Если нет групп, считаем что все "развернуто" (по умолчанию показываем "Свернуть")
+                return hasAnyGroups ? allExpanded : true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при проверке состояния групп: {ex.Message}");
+                return false; // В случае ошибки считаем, что не все развернуты
+            }
+        }
+
+        /// <summary>
+        /// Сворачивает до первого уровня группировки (до ВМ) - сворачивает только детализацию в основном гриде,
+        /// не трогая группы внутри детализации
+        /// </summary>
+        private void CollapseToFirstLevel()
+        {
+            try
+            {
+                // Сворачиваем только детализацию в основном гриде (master-detail)
+                // Это сворачивает до уровня ВМ, оставляя видимыми только строки первого уровня
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все детализированные строки (детализация по ВМ)
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при сворачивании до первого уровня: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Сворачивает до уровня пачки - разворачивает детализацию в основном гриде и сворачивает группы по __Header,
+        /// чтобы показать только заголовки групп по пачкам, но не строки операций внутри групп.
+        /// </summary>
+        private void CollapseToPachkaLevel()
+        {
+            try
+            {
+                // Разворачиваем детализацию в основном гриде, чтобы показать детализацию
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Разворачиваем все детализированные строки (детализация по ВМ)
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, true);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Сворачиваем группы строк во втором уровне (advBandedGridView1) по __Header,
+                // чтобы показать только заголовки групп по пачкам, но не строки операций внутри
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все группы строк (группы по пачкам - __Header)
+                        // Это покажет заголовки пачек, но строки операций внутри останутся свернутыми
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                // Сворачиваем группу, чтобы видеть только её заголовок (пачку), но не строки внутри
+                                advBandedGridView1.SetRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при сворачивании до уровня пачки: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Сворачивает все группы в BandedGridView
+        /// </summary>
+        private void CollapseAllGroups()
+        {
+            try
+            {
+                // Сворачиваем детализацию в основном гриде
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все детализированные строки
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Сворачиваем группы строк во втором уровне (если есть группировка)
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Сворачиваем все группы строк
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                advBandedGridView1.SetRowExpanded(rowHandle, false);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при сворачивании групп: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Разворачивает все группы в BandedGridView
+        /// </summary>
+        private void ExpandAllGroups()
+        {
+            try
+            {
+                // Разворачиваем детализацию в основном гриде
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Разворачиваем все детализированные строки
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, true);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Разворачиваем группы строк во втором уровне (если есть группировка)
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Разворачиваем все группы строк
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                advBandedGridView1.SetRowExpanded(rowHandle, true);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при разворачивании групп: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Переключает состояние групп (сворачивает развернутые, разворачивает свернутые)
+        /// </summary>
+        private void ToggleExpandGroups()
+        {
+            try
+            {
+                // Переключаем детализацию в основном гриде
+                if (bandedGridView3 != null)
+                {
+                    bandedGridView3.BeginUpdate();
+                    try
+                    {
+                        // Переключаем состояние всех детализированных строк
+                        for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                        {
+                            int rowHandle = bandedGridView3.GetRowHandle(i);
+                            if (bandedGridView3.IsValidRowHandle(rowHandle))
+                            {
+                                bool isExpanded = bandedGridView3.GetMasterRowExpanded(rowHandle);
+                                bandedGridView3.SetMasterRowExpanded(rowHandle, !isExpanded);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        bandedGridView3.EndUpdate();
+                    }
+                }
+
+                // Переключаем группы строк во втором уровне (если есть группировка)
+                if (advBandedGridView1 != null)
+                {
+                    advBandedGridView1.BeginUpdate();
+                    try
+                    {
+                        // Переключаем состояние всех групп строк
+                        for (int i = 0; i < advBandedGridView1.RowCount; i++)
+                        {
+                            int rowHandle = advBandedGridView1.GetVisibleRowHandle(i);
+                            if (advBandedGridView1.IsValidRowHandle(rowHandle) && advBandedGridView1.IsGroupRow(rowHandle))
+                            {
+                                bool isExpanded = advBandedGridView1.GetRowExpanded(rowHandle);
+                                advBandedGridView1.SetRowExpanded(rowHandle, !isExpanded);
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        advBandedGridView1.EndUpdate();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при переключении групп: {ex.Message}");
+            }
+        }
+
+        #endregion
     }
 }
 

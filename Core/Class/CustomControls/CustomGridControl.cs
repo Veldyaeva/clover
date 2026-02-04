@@ -84,7 +84,7 @@ namespace SewingProduction.Core.Class
             if (AlternateRowColor.HasValue)
             {
                 gridView.Appearance.EvenRow.BackColor = AlternateRowColor.Value;
-                gridView.OptionsView.EnableAppearanceEvenRow = true;
+             //   gridView.OptionsView.EnableAppearanceEvenRow = true;
             }
             if (ThemeManager.ActiveTheme?.GridRowBackground != default)
             {
