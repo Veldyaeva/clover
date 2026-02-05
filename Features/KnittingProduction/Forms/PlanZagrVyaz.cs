@@ -2107,122 +2107,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //}));
             gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
             {
-                var view = gridViewZadanyListByMachine;
-                if (view.RowCount <= 0) return;
-
-                // 1) Приоритет: поиск по номеру задания (если активен)
-                if (_autoSelectPending && !string.IsNullOrWhiteSpace(_pendingPszNom))
+                if (_autoSelectPending)
                 {
-                    var col = view.Columns.FirstOrDefault(c => c.FieldName == "pszNom");
-                    if (col == null) return;
-
-                    var search = (_pendingPszNom ?? "").Trim();
-                    int rh = view.LocateByValue(0, col, search);
-
-                    if (view.IsValidRowHandle(rh) && view.IsDataRow(rh))
-                    {
-                        view.BeginUpdate();
-                        try
-                        {
-                            // форсим событие 2-го грида → обновится 3-й
-                            if (view.FocusedRowHandle == rh)
-                                view.FocusedRowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
-
-                            view.FocusedRowHandle = rh;
-                            view.MakeRowVisible(rh);
-                            view.ClearSelection();
-                            view.SelectRow(rh);
-                        }
-                        finally { view.EndUpdate(); }
-
-                        _pendingPszNom = null;
-                        _autoSelectPending = false;
-                        return;
-                    }
+                    TryFocusPendingPszNom();
+                    _autoSelectPending = false;
                 }
-
-                // 2) Иначе — первая data-строка
-                int first = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
-                for (int i = 0; i < view.RowCount; i++)
+                else
                 {
-                    int h = view.GetVisibleRowHandle(i);
-                    if (view.IsDataRow(h)) { first = h; break; }
+                    EnsureFirstRowSelectedIfNothingSelected(gridViewZadanyListByMachine, _suppressZadanyFocusHandler);
+                    //EnsureFirstRowSelectedIfNothingSelected(gridViewRzvPachListByNom, _suppressPachFocusHandler);
+                    gridViewZadanyListByMachine_FocusedRowChanged(
+                                gridViewZadanyListByMachine,
+                                new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs(-1, gridViewZadanyListByMachine.FocusedRowHandle)
+                            );
                 }
-                if (!view.IsValidRowHandle(first) || !view.IsDataRow(first)) return;
-
-                view.BeginUpdate();
-                try
-                {
-                    // важно: закрыть редактор, чтобы грид применил текущие значения
-                    view.CloseEditor();
-                    view.UpdateCurrentRow();
-
-                    // ФОРС: если уже стоим на первой строке, DevExpress событие не вызовет.
-                    // Поэтому делаем "скачок" на InvalidRowHandle.
-                    if (view.FocusedRowHandle == first)
-                        view.FocusedRowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
-
-                    view.FocusedRowHandle = first;
-                    view.MakeRowVisible(first);
-                    view.ClearSelection();
-                    view.SelectRow(first);
-                    //// форсим событие 2-го грида → обновится 3-й
-                    //if (view.FocusedRowHandle == first)
-                    //    view.FocusedRowHandle = DevExpress.XtraGrid.GridControl.InvalidRowHandle;
-
-                    //view.FocusedRowHandle = first;
-                    //view.MakeRowVisible(first);
-                    //view.ClearSelection();
-                    //view.SelectRow(first);
-                }
-                finally 
-                {
-                    view.EndUpdate(); 
-                }
-                ////var view2 = gridViewZadanyListByMachine;
-                //if (gridViewZadanyListByMachine.RowCount <= 0) return;
-
-                //// 1) Если был поиск — приоритет найденной строке
-                //if (_autoSelectPending && !string.IsNullOrWhiteSpace(_pendingPszNom))
-                //{
-                //    TryFocusPendingPszNom();  // сам сбросит флаги
-                //    return;
-                //}
-
-                //// 2) Иначе — ВСЕГДА первая строка (не "если ничего не выбрано")
-                //int first = GetFirstDataRowHandle(gridViewZadanyListByMachine);
-                //if (gridViewZadanyListByMachine.IsValidRowHandle(first))
-                //{
-                //    // suppress НЕ нужен, потому что нам как раз нужно,
-                //    // чтобы сработал gridViewZadanyListByMachine_FocusedRowChanged
-                //    gridViewZadanyListByMachine.BeginUpdate();
-                //    try
-                //    {
-                //        if (gridViewZadanyListByMachine.FocusedRowHandle == first)
-                //            gridViewZadanyListByMachine.FocusedRowHandle = GridControl.InvalidRowHandle;
-
-                //        FocusAndScrollToRow(gridViewZadanyListByMachine, first);
-                //        gridViewZadanyListByMachine.ClearSelection();
-                //        gridViewZadanyListByMachine.SelectRow(first);
-                //    }
-                //    finally
-                //    {
-                //        gridViewZadanyListByMachine.EndUpdate();
-                //    }
-                //}
-                ////if (_autoSelectPending)
-                ////{
-                ////    TryFocusPendingPszNom();
-                ////}
-                ////else
-                ////{
-                ////    EnsureFirstRowSelectedIfNothingSelected(gridViewZadanyListByMachine, _suppressZadanyFocusHandler);
-                ////    //EnsureFirstRowSelectedIfNothingSelected(gridViewRzvPachListByNom, _suppressPachFocusHandler);
-                ////    gridViewZadanyListByMachine_FocusedRowChanged(
-                ////                gridViewZadanyListByMachine,
-                ////                new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs(-1, gridViewZadanyListByMachine.FocusedRowHandle)
-                ////            );
-                ////}
             }));
         }
         private void TryFocusPendingPszNom()
