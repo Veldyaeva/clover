@@ -1,7 +1,9 @@
+using DevExpress.CodeParser;
 using DevExpress.Data;
 using DevExpress.Mvvm.Native;
 using DevExpress.Utils;
 using DevExpress.Utils.Menu;
+using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraEditors;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
@@ -13,9 +15,13 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using Newtonsoft.Json;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
+using SewingProduction.Core.Models;
+using SewingProduction.Core.services;
 using SewingProduction.Core.services;
 using SewingProduction.Extensions;
 using SewingProduction.Features.KnittingProduction.Models;
@@ -38,13 +44,8 @@ using System.Windows.Forms;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
 using static SewingProduction.Core.helpers.ServiceBrokerHelper;
-using static SewingProduction.Helpers.GridHelper;
 using static SewingProduction.Core.helpers.ServiceBrokerHelper;
-using SewingProduction.Core.services;
-using SewingProduction.Core.Models;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Core.Class.Settings;
-using DevExpress.CodeParser;
+using static SewingProduction.Helpers.GridHelper;
 using Volatile = System.Threading.Volatile;
 
 
@@ -57,8 +58,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
     {
         int vyazPodrKod = 0;
 
-        private bool _suppressZadanyFocusedChanged;
-        private int _rzvLoadVersion;
         private ServiceBrokerHelper? _sbHelper;
         private EnhancedRefreshCoordinator? _refreshCoordinator;
 
@@ -88,6 +87,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         int _xPzvID = 0;
         private bool _isCountTabKM = false;
         private bool _closing;
+        private string? _pendingPszNom;
+        private bool _autoSelectPending;
+        private bool _suppressZadanyFocusHandler;
+        private bool _suppressPachFocusHandler;
+        private bool _suppressZadanyFocusedChanged;
+        private int _rzvLoadVersion = 0;
+        private int _loadVersion = 0;
 
         private List<KnitWorkingShiftSmen> _zonesCache = new List<KnitWorkingShiftSmen>();
 
@@ -549,6 +555,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridColumnPlanTotalHoursByKnitMachineHoursTotal.FieldName = "hoursTotal";
                 gridColumnPlanTotalHoursByKnitMachineIdVyazClass.FieldName = "idVyazClass";
                 gridColumnPlanTotalHoursByKnitMachineKnitClass.FieldName = "knitClass";
+                gridColumnPlanTotalHoursByKnitMachineKmlID.FieldName = "kmlID";
                 #endregion
 
                 #region описание gridControlZadanyListByMachine "задания по номеру машины"
@@ -715,7 +722,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridNaryadZadanyColumnPzvArticul.FieldName = "pzvArticul";
                 gridNaryadZadanyColumnPzvNomZad.FieldName = "pzvNomZad";
                 gridNaryadZadanyColumnPzvNom.FieldName = "pzvNom";
-                gridNaryadZadanyColumnNPach.FieldName = "n_pach";
+                gridNaryadZadanyColumnNPach.FieldName = "nPach";
                 gridNaryadZadanyColumnNomOper.FieldName = "nomOper";
                 gridNaryadZadanyColumnText.FieldName = "text";
                 gridNaryadZadanyColumnRazryd.FieldName = "razryd";
@@ -726,6 +733,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridNaryadZadanyColumnStatusName.FieldName = "statusName";
                 gridNaryadZadanyColumnStatusDate.FieldName = "statusDate";
                 gridNaryadZadanyColumnPzvTab.FieldName = "pzvTab";
+                gridNaryadZadanyColumnYearPach.FieldName = "yearPach";
+                gridNaryadZadanyColumnPachKod.FieldName = "pachKod";
 
 
                 gridNaryadZadanyColumnKmlNumber.OptionsColumn.AllowEdit = false;
@@ -940,7 +949,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 string _columnName = hit.Column.FieldName;
                 Debug.WriteLine($"FocusedColumn = '{hit.Column.Name}'");
                 // Проверяем, что клик был в ячейке колонки NomZad
-                if (hit.InRowCell && (hit.Column.FieldName == "pzvNomZad" || hit.Column.FieldName == "pzvNom" || hit.Column.FieldName == "n_pach"))
+                if (hit.InRowCell && (hit.Column.FieldName == "pzvNomZad" /*|| hit.Column.FieldName == "pzvNom" || hit.Column.FieldName == "nPach"*/))
                 {
                     // Получаем значение ячейки
                     object cellValue = gridViewNaryadZadany.GetRowCellValue(hit.RowHandle, hit.Column);
@@ -971,16 +980,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     switch (gridViewNaryadZadany.FocusedColumn.FieldName)
                     {
                         case "pzvNomZad":
+                            textBoxPzvNomZadSearch.Text = string.Empty;
                             textBoxPzvNomZadSearch.Text = searchItem.Tag.ToString();
+                            textBoxPzvNomSearch.Text = string.Empty;
                             textBoxPzvNomZadSearch.Focus();
                             textBoxPzvNomZadSearch.SelectAll();
                             break;
                         case "pzvNom":
+                            //textBoxPzvNomZadSearch.Text = Convert.ToString(gridViewNaryadZadany.GetRowCellValue(_hit.RowHandle, gridNaryadZadanyColumnPzvNomZad));
+                            textBoxPzvYearPachSearch.Text = Convert.ToString(gridViewNaryadZadany.GetRowCellValue(_hit.RowHandle, gridNaryadZadanyColumnYearPach));
                             textBoxPzvNomSearch.Text = searchItem.Tag.ToString();
+                            //textBoxPzvNPachSearch.Text = string.Empty;
                             textBoxPzvNomSearch.Focus();
                             textBoxPzvNomSearch.SelectAll();
                             break;
-                        case "n_pach":
+                        case "nPach":
+                            //textBoxPzvNomZadSearch.Text = Convert.ToString(gridViewNaryadZadany.GetRowCellValue(_hit.RowHandle, gridNaryadZadanyColumnPzvNomZad));
+                            //textBoxPzvNomSearch.Text = Convert.ToString(gridViewNaryadZadany.GetRowCellValue(_hit.RowHandle, gridNaryadZadanyColumnPzvNom));
+                            textBoxPzvYearPachSearch.Text = Convert.ToString(gridViewNaryadZadany.GetRowCellValue(_hit.RowHandle, gridNaryadZadanyColumnYearPach));
                             textBoxPzvNPachSearch.Text = searchItem.Tag.ToString();
                             textBoxPzvNPachSearch.Focus();
                             textBoxPzvNPachSearch.SelectAll();
@@ -1959,9 +1976,103 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                var selectedRow = _planTotalHoursByKnitMachineBindingSource.Current as PlanTotalHoursByKnitMachine;
-                await LoadZadanyListByMachineNewDataAsync(selectedRow.kmlID);
+                var viewTop = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
 
+                if (!viewTop.IsDataRow(e.FocusedRowHandle))
+                    return;
+
+                var row = viewTop.GetRow(e.FocusedRowHandle) as PlanTotalHoursByKnitMachine;
+                if (row == null) return;
+
+                await ReloadZadanyForKmlAsync(row.kmlID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка в gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged: {ex.Message}");
+            }
+            //try
+            //{
+            //    var selectedRow = _planTotalHoursByKnitMachineBindingSource.Current as PlanTotalHoursByKnitMachine;
+            //    await LoadZadanyListByMachineNewDataAsync(selectedRow.kmlID);
+
+            //    var changes = BindingSourceHelper.GetChanges<ZadanyListByMachine>(
+            //        _zadanyListByMachineBindingSource,
+            //        _zadanyListByMachineNewBindingSource,
+            //        HashMode.ExcludeOnly,
+            //        keyProperties: new[] { "kmlID", "pszNom" },
+            //        hashProperties: new[] { "SyncSelection" }
+            //    );
+            //    // обновить и добавить
+            //    BindingSourceHelper.ApplyChanges<ZadanyListByMachine>(
+            //        _zadanyListByMachineBindingSource,
+            //        changes,
+            //        UpdateFieldsMode.ExcludeOnly,
+            //        keyProperties: new[] { "kmlID", "pszNom" },
+            //        fields: new[] { "SyncSelection" }
+            //    );
+
+            //    gridViewZadanyListByMachine.ActiveFilterString = $" kmlID == {selectedRow.kmlID}";
+            //    gridControlZadanyListByMachine.ForceInitialize();
+            //    gridViewZadanyListByMachine.RefreshData();
+            //    gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
+            //    {
+            //        if (gridViewZadanyListByMachine.RowCount <= 0) return;
+
+            //        // 1) Отслеживаем, сработало ли событие реально
+            //        bool fired = false;
+            //        DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler probe = (s, ee) => fired = true;
+            //        gridViewZadanyListByMachine.FocusedRowChanged += probe;
+
+            //        // 2) Пробуем "честно" сменить фокус так, чтобы событие точно могло сработать
+            //        gridViewZadanyListByMachine.CloseEditor();
+            //        gridViewZadanyListByMachine.UpdateCurrentRow();
+
+            //        int oldHandle = gridViewZadanyListByMachine.FocusedRowHandle;
+            //        int first = gridViewZadanyListByMachine.GetVisibleRowHandle(0);
+
+            //        // если уже на первой и есть 2+ строк — уходим на вторую и возвращаемся
+            //        if (oldHandle == first && gridViewZadanyListByMachine.RowCount > 1)
+            //        {
+            //            int second = gridViewZadanyListByMachine.GetVisibleRowHandle(1);
+            //            gridViewZadanyListByMachine.FocusedRowHandle = second;
+            //        }
+
+            //        gridViewZadanyListByMachine.FocusedRowHandle = first;
+            //        gridViewZadanyListByMachine.ClearSelection();
+            //        gridViewZadanyListByMachine.SelectRow(first);
+
+            //        // 3) Снимаем "пробник"
+            //        gridViewZadanyListByMachine.FocusedRowChanged -= probe;
+
+            //        // 4) Если DevExpress НЕ вызвал событие (например, осталась 1 строка) —
+            //        //    честно гарантируем выполнение той же логики обновления 3-го грида
+            //        if (!fired)
+            //        {
+            //            gridViewZadanyListByMachine_FocusedRowChanged(
+            //                gridViewZadanyListByMachine,
+            //                new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs(oldHandle, first)
+            //            );
+            //        }
+            //    }));
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Ошибка в gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged: {ex.Message}");
+            //}
+        }
+        private async Task ReloadZadanyForKmlAsync(int kmlId)
+        {
+            var view = gridViewZadanyListByMachine;
+
+            view.BeginUpdate();
+            try
+            {
+                // 1) грузим новые данные
+                int version = ++_loadVersion;
+                await LoadZadanyListByMachineNewDataAsync(kmlId);
+                if (version != _loadVersion) return; // был новый запрос — этот выкидываем
+
+                // 2) применяем изменения (как у тебя)
                 var changes = BindingSourceHelper.GetChanges<ZadanyListByMachine>(
                     _zadanyListByMachineBindingSource,
                     _zadanyListByMachineNewBindingSource,
@@ -1969,7 +2080,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     keyProperties: new[] { "kmlID", "pszNom" },
                     hashProperties: new[] { "SyncSelection" }
                 );
-                // обновить и добавить
+
                 BindingSourceHelper.ApplyChanges<ZadanyListByMachine>(
                     _zadanyListByMachineBindingSource,
                     changes,
@@ -1978,54 +2089,83 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     fields: new[] { "SyncSelection" }
                 );
 
-                gridViewZadanyListByMachine.ActiveFilterString = $" kmlID == {selectedRow.kmlID}";
-                gridControlZadanyListByMachine.ForceInitialize();
-                gridViewZadanyListByMachine.RefreshData();
-                gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
-                {
-                    if (gridViewZadanyListByMachine.RowCount <= 0) return;
+                // 3) фильтр
+                view.ActiveFilterString = $"kmlID == {kmlId}";
 
-                    // 1) Отслеживаем, сработало ли событие реально
-                    bool fired = false;
-                    DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler probe = (s, ee) => fired = true;
-                    gridViewZadanyListByMachine.FocusedRowChanged += probe;
-
-                    // 2) Пробуем "честно" сменить фокус так, чтобы событие точно могло сработать
-                    gridViewZadanyListByMachine.CloseEditor();
-                    gridViewZadanyListByMachine.UpdateCurrentRow();
-
-                    int oldHandle = gridViewZadanyListByMachine.FocusedRowHandle;
-                    int first = gridViewZadanyListByMachine.GetVisibleRowHandle(0);
-
-                    // если уже на первой и есть 2+ строк — уходим на вторую и возвращаемся
-                    if (oldHandle == first && gridViewZadanyListByMachine.RowCount > 1)
-                    {
-                        int second = gridViewZadanyListByMachine.GetVisibleRowHandle(1);
-                        gridViewZadanyListByMachine.FocusedRowHandle = second;
-                    }
-
-                    gridViewZadanyListByMachine.FocusedRowHandle = first;
-                    gridViewZadanyListByMachine.ClearSelection();
-                    gridViewZadanyListByMachine.SelectRow(first);
-
-                    // 3) Снимаем "пробник"
-                    gridViewZadanyListByMachine.FocusedRowChanged -= probe;
-
-                    // 4) Если DevExpress НЕ вызвал событие (например, осталась 1 строка) —
-                    //    честно гарантируем выполнение той же логики обновления 3-го грида
-                    if (!fired)
-                    {
-                        gridViewZadanyListByMachine_FocusedRowChanged(
-                            gridViewZadanyListByMachine,
-                            new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs(oldHandle, first)
-                        );
-                    }
-                }));
+                // 4) обновление данных грида
+                view.RefreshData();
             }
-            catch (Exception ex)
+            finally
             {
-                MessageBox.Show($"Ошибка в gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged: {ex.Message}");
+                view.EndUpdate();
             }
+
+            // 5) после того, как UI применил изменения — делаем фокус/поиск
+            //gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
+            //{
+            //    TryFocusPendingPszNom();
+            //}));
+            gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
+            {
+                if (_autoSelectPending)
+                {
+                    TryFocusPendingPszNom();
+                    _autoSelectPending = false;
+                }
+                else
+                {
+                    EnsureFirstRowSelectedIfNothingSelected(gridViewZadanyListByMachine, _suppressZadanyFocusHandler);
+                    //EnsureFirstRowSelectedIfNothingSelected(gridViewRzvPachListByNom, _suppressPachFocusHandler);
+                    gridViewZadanyListByMachine_FocusedRowChanged(
+                                gridViewZadanyListByMachine,
+                                new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs(-1, gridViewZadanyListByMachine.FocusedRowHandle)
+                            );
+                }
+            }));
+        }
+        private void TryFocusPendingPszNom()
+        {
+            if (!_autoSelectPending) return;
+            if (string.IsNullOrWhiteSpace(_pendingPszNom))
+                return;
+
+            var view = gridViewZadanyListByMachine;
+            var col = view.Columns.FirstOrDefault(c => c.FieldName == "pszNom");
+            if (col == null) return;
+
+            string search = NormalizeNom(_pendingPszNom);
+
+            int rh = view.LocateByValue(0, col, search);
+
+            if (!view.IsValidRowHandle(rh) || !view.IsDataRow(rh))
+                return;
+
+            _suppressZadanyFocusHandler = true;
+            view.BeginUpdate();
+            try
+            {
+                //view.FocusedRowHandle = rh;
+                //view.MakeRowVisible(rh);
+                //view.ClearSelection();
+                //view.SelectRow(rh);
+                FocusAndScrollToRow(view, rh); // см. ниже
+                view.ClearSelection();
+                view.SelectRow(rh);
+            }
+            finally
+            {
+                //view.EndUpdate();
+                view.EndUpdate();
+                _suppressZadanyFocusHandler = false;
+            }
+
+            _pendingPszNom = null;
+        }
+        private static string NormalizeNom(string? s)
+        {
+            return (s ?? "")
+                .Replace('\u00A0', ' ')
+                .Trim();
         }
         private void FocusFirstRow(GridView view)
         {
@@ -2069,57 +2209,239 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                if (_suppressZadanyFocusedChanged) return;
+                var viewTop = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
 
-                var selectedRow = _zadanyListByMachineBindingSource.Current as ZadanyListByMachine;
-                if (selectedRow != null)
-                {
-                    //MessageBox.Show(selectedRow.SyncSelection.ToString());
-                    //MessageBox.Show(gridViewZadanyListByMachine.IsCellSelect.ToString());
-                    await LoadRzvPachListByNomNewDataAsync(selectedRow.nom, selectedRow.pszNom);
-                    var changes = BindingSourceHelper.GetChanges<RzvPachListByNom>(
-                        _rzvPachListByNomBindingSource,
-                        _rzvPachListByNomNewBindingSource,
-                        HashMode.ExcludeOnly,
-                        keyProperties: new[] { "nomZad", "nom", "nom_n" },
-                        hashProperties: new[] { "SyncSelection" }
-                    );
-                    // обновить и добавить
-                    BindingSourceHelper.ApplyChanges<RzvPachListByNom>(
-                        _rzvPachListByNomBindingSource,
-                        changes,
-                        UpdateFieldsMode.ExcludeOnly,
-                        keyProperties: new[] { "nomZad", "nom", "nom_n" },
-                        fields: new[] { "SyncSelection" }
-                    );
-                    //// удалить отсутствующие
+                if (!viewTop.IsDataRow(e.FocusedRowHandle))
+                    return;
 
-                    if (selectedRow.Gradacia != 1)
-                    {
-                        gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = true;
-                    }
-                    else
-                    {
-                        gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = false;
-                    }
-                }
-                else
-                {
-                    int myVersion = ++_rzvLoadVersion;
-                    if (myVersion != _rzvLoadVersion) return;
-                    await LoadRzvPachListByNomNewDataAsync(0, "");
-                }
-                gridViewRzvPachListByNom.ActiveFilterString = $" nomZad == '{selectedRow.pszNom}' and nom == {selectedRow.nom}";
-                gridControlRzvPachListByNom.ForceInitialize();
-                gridViewRzvPachListByNom.RefreshData();
+                var row = viewTop.GetRow(e.FocusedRowHandle) as ZadanyListByMachine;
+                if (row == null) return;
+
+                await ReloadPachListForZadanyAsync(row.nom, row.pszNom, row.Gradacia);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка в gridViewZadanyListByMachine_FocusedRowChanged: {ex.Message}");
             }
 
+            //try
+            //{
+            //    if (_suppressZadanyFocusHandler) return;
+            //    if (_suppressZadanyFocusedChanged) return;
+
+            //    var view = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+
+            //    // если ушли на group row / пустоту — чистим 3-й грид
+            //    if (!view.IsDataRow(e.FocusedRowHandle))
+            //    {
+            //        int ver = ++_rzvLoadVersion;
+            //        await LoadRzvPachListByNomNewDataAsync(0, "");
+            //        if (ver != _rzvLoadVersion) return;
+
+            //        gridViewRzvPachListByNom.ActiveFilterString = "1=0"; // ничего не показываем
+            //        gridViewRzvPachListByNom.RefreshData();
+            //        return;
+            //    }
+
+            //    // Берём строку именно из view (а не BindingSource.Current)
+            //    var selectedRow = view.GetRow(e.FocusedRowHandle) as ZadanyListByMachine;
+            //    if (selectedRow == null) return;
+
+            //    // Снимаем значения сразу, чтобы после await не зависеть от selectedRow
+            //    int nom = selectedRow.nom;
+            //    //string nomZad = selectedRow.pszNom ?? "";
+            //    string nomZad = (selectedRow.pszNom ?? "").Replace("'", "''");
+            //    int grad = selectedRow.Gradacia;
+
+            //    int myVersion = ++_rzvLoadVersion;
+
+            //    await LoadRzvPachListByNomNewDataAsync(nom, nomZad);
+
+            //    // если за время await фокус сменился и стартовала новая загрузка — выходим
+            //    if (myVersion != _rzvLoadVersion) return;
+
+            //    var changes = BindingSourceHelper.GetChanges<RzvPachListByNom>(
+            //        _rzvPachListByNomBindingSource,
+            //        _rzvPachListByNomNewBindingSource,
+            //        HashMode.ExcludeOnly,
+            //        keyProperties: new[] { "nomZad", "nom", "nom_n" },
+            //        hashProperties: new[] { "SyncSelection" }
+            //    );
+
+            //    BindingSourceHelper.ApplyChanges<RzvPachListByNom>(
+            //        _rzvPachListByNomBindingSource,
+            //        changes,
+            //        UpdateFieldsMode.ExcludeOnly,
+            //        keyProperties: new[] { "nomZad", "nom", "nom_n" },
+            //        fields: new[] { "SyncSelection" }
+            //    );
+
+            //    // read-only по градации
+            //    gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = (grad != 1);
+
+            //    // Фильтр 3-го грида — используем сохранённые nomZad/nom
+            //    gridViewRzvPachListByNom.ActiveFilterString = $"nomZad == '{nomZad}' and nom == {nom}";
+            //    gridViewRzvPachListByNom.RefreshData();
+
+            //    // если надо — чтобы прокрутка/фокус в 3-м гриде тоже “устаканились” после refresh
+            //    // gridControlRzvPachListByNom.BeginInvoke(new Action(() => { ... }));
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Ошибка в gridViewZadanyListByMachine_FocusedRowChanged: {ex.Message}");
+            //}
+
+            ////try
+            ////{
+            ////    if (_suppressZadanyFocusHandler) return;
+            ////    if (_suppressZadanyFocusedChanged) return;
+
+            ////    var selectedRow = _zadanyListByMachineBindingSource.Current as ZadanyListByMachine;
+            ////    if (selectedRow != null)
+            ////    {
+            ////        //MessageBox.Show(selectedRow.SyncSelection.ToString());
+            ////        //MessageBox.Show(gridViewZadanyListByMachine.IsCellSelect.ToString());
+            ////        await LoadRzvPachListByNomNewDataAsync(selectedRow.nom, selectedRow.pszNom);
+            ////        var changes = BindingSourceHelper.GetChanges<RzvPachListByNom>(
+            ////            _rzvPachListByNomBindingSource,
+            ////            _rzvPachListByNomNewBindingSource,
+            ////            HashMode.ExcludeOnly,
+            ////            keyProperties: new[] { "nomZad", "nom", "nom_n" },
+            ////            hashProperties: new[] { "SyncSelection" }
+            ////        );
+            ////        // обновить и добавить
+            ////        BindingSourceHelper.ApplyChanges<RzvPachListByNom>(
+            ////            _rzvPachListByNomBindingSource,
+            ////            changes,
+            ////            UpdateFieldsMode.ExcludeOnly,
+            ////            keyProperties: new[] { "nomZad", "nom", "nom_n" },
+            ////            fields: new[] { "SyncSelection" }
+            ////        );
+            ////        //// удалить отсутствующие
+
+            ////        if (selectedRow.Gradacia != 1)
+            ////        {
+            ////            gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = true;
+            ////        }
+            ////        else
+            ////        {
+            ////            gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = false;
+            ////        }
+            ////    }
+            ////    else
+            ////    {
+            ////        int myVersion = ++_rzvLoadVersion;
+            ////        if (myVersion != _rzvLoadVersion) return;
+            ////        await LoadRzvPachListByNomNewDataAsync(0, "");
+            ////    }
+            ////    gridViewRzvPachListByNom.ActiveFilterString = $" nomZad == '{selectedRow.pszNom}' and nom == {selectedRow.nom}";
+            ////    gridControlRzvPachListByNom.ForceInitialize();
+            ////    gridViewRzvPachListByNom.RefreshData();
+            ////}
+            ////catch (Exception ex)
+            ////{
+            ////    MessageBox.Show($"Ошибка в gridViewZadanyListByMachine_FocusedRowChanged: {ex.Message}");
+            ////}
+
+        }
+        private async Task ReloadPachListForZadanyAsync(int _nom, string _nomZad, int _gradacia)
+        {
+            var view = gridViewRzvPachListByNom;
+
+            view.BeginUpdate();
+            try
+            {
+                // 1) грузим новые данные
+                int version = ++_rzvLoadVersion;
+                await LoadRzvPachListByNomNewDataAsync(_nom, _nomZad);
+                if (version != _rzvLoadVersion) return; // был новый запрос — этот выкидываем
+
+                // 2) применяем изменения (как у тебя)
+                var changes = BindingSourceHelper.GetChanges<RzvPachListByNom>(
+                    _rzvPachListByNomBindingSource,
+                    _rzvPachListByNomNewBindingSource,
+                    HashMode.ExcludeOnly,
+                    keyProperties: new[] { "nomZad", "nom", "nom_n" },
+                    hashProperties: new[] { "SyncSelection" }
+                );
+
+                BindingSourceHelper.ApplyChanges<RzvPachListByNom>(
+                    _rzvPachListByNomBindingSource,
+                    changes,
+                    UpdateFieldsMode.ExcludeOnly,
+                    keyProperties: new[] { "nomZad", "nom", "nom_n" },
+                    fields: new[] { "SyncSelection" }
+                );
+
+                // 3) фильтр + запрет редактирования поля Градация
+                gridColumnRzvPachListByNomGradacia.OptionsColumn.ReadOnly = (_gradacia != 1);
+
+                // Фильтр 3-го грида — используем сохранённые nomZad/nom
+                view.ActiveFilterString = $"nomZad == '{_nomZad}' and nom == {_nom}";
+
+                // 4) обновление данных грида
+                view.RefreshData();
+            }
+            finally
+            {
+                view.EndUpdate();
+            }
+
+            // 5) после того, как UI применил изменения — делаем фокус/поиск
+            //gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
+            //{
+            //    TryFocusPendingPszNom();
+            //}));
+            
+            gridControlRzvPachListByNom.BeginInvoke(new Action(() =>
+            {
+                //if (_autoSelectPending)
+                //{
+                //    TryFocusPendingPszNom();
+                //}
+                //else
+                EnsureFirstRowSelectedIfNothingSelected(gridViewRzvPachListByNom, _suppressPachFocusHandler);
+            }));
+        }
+        private void EnsureFirstRowSelectedIfNothingSelected(GridView _view, bool _handler)
+        {
+            if (_view.RowCount <= 0) return;
+
+            if (_view.IsValidRowHandle(_view.FocusedRowHandle) && _view.IsDataRow(_view.FocusedRowHandle))
+                return; // <-- уже есть выбор, не ломаем пользовательский клик
+
+            int first = _view.GetVisibleRowHandle(0);
+            if (!_view.IsValidRowHandle(first) || !_view.IsDataRow(first)) return;
+
+            _handler = true;
+            try
+            {
+                FocusAndScrollToRow(_view, first);
+                _view.ClearSelection();
+                _view.SelectRow(first);
+            }
+            finally
+            {
+                _handler = false;
+            }
         }
 
+        private static void FocusAndScrollToRow(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            view.FocusedRowHandle = rowHandle;
+
+            // 1) гарантируем, что строка станет видимой
+            view.MakeRowVisible(rowHandle);
+
+            // 2) аккуратно прокручиваем вверх так, чтобы строка была не в самом низу
+            int visibleIndex = view.GetVisibleIndex(rowHandle);
+            if (visibleIndex < 0) return;
+
+            int rowsOnScreen = Math.Max(1, view.GridControl.Height / view.RowHeight);
+            int targetTop = Math.Max(0, visibleIndex - rowsOnScreen / 2);
+
+            view.TopRowIndex = targetTop;
+        }
         private void repositoryItemCheckEdit1_CheckedChanged(object sender, EventArgs e)
         {
         }
@@ -2986,9 +3308,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     record.olPzvTab = _tab;
                     record.olPzvKwsID = _kwsID;
                     record.olPzvDateNaznTab = _tab == 0 ? null : DateTime.Now;
-                    record.olPzvSekNazn = record.olSekEd;
-                    record.olPzvKolNazn = record.olKol;
-                    record.olPzvChasNazn = record.olPzvNChasi;
+                    record.olPzvSekNazn = _tab == 0 ? 0 : record.olSekEd;
+                    record.olPzvKolNazn = _tab == 0 ? 0 : record.olKol;
+                    record.olPzvChasNazn = _tab == 0 ? 0 : record.olPzvNChasi;
                     if (_tab == 999)
                     {
                         record.olPzvDateStart = DateTime.Now;
@@ -4679,55 +5001,115 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private void FindPzvNomZadInNzp()
+        private async void FindPzvNomZadInNzp()
         {
-            //this.UI(() =>
-            //   {
-                   
-            //   });
+            _autoSelectPending = true;
+            string pszNom = NormalizeNom(textBoxPzvNomZadSearch.Text);
+            if (pszNom.Length == 0) return;
 
-            /*    
-                грид gridControlPlanTotalHoursByKnitMachine - _planTotalHoursByKnitMachineBindingSource
-                грид gridControlZadanyListByMachine - _zadanyListByMachineNewBindingSource
-                грид gridControlRzvPachListByNom -_rzvPachListByNomBindingSource
-            */
-            
-            MessageBox.Show($"Поиск по № задания {textBoxPzvNomZadSearch.Text}");
-            //string _xNom = _dbHelper.ExecuteScalarAsync<string>($"select nom from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'");
-            //int _xNPach = _dbHelper.ExecuteScalar($"select n_pach from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'", new Dictionary<string, object> { });
-            
-            //string xper = _dbHelper.ExecuteScalar($"select zad_pl from raskr_zeh_vyaz where zad_pl = '{textBoxPzvNomZadSearch.Text}'", new Dictionary<string, object> { });
+            // Параметр вместо интерполяции
+            int kmlId = _dbHelper.ExecuteScalar(
+                @"SELECT TOP (1) pszm.pszkmKmlID
+                  FROM plan_sezon_zad_knitMachine pszm
+                  WHERE pszm.pszkmPszNom = @pszNom",
+                new Dictionary<string, object>
+                {
+                    ["@pszNom"] = pszNom
+                });
 
-            //var list = (IList<ZadanyListByMachine>)_zadanyListByMachineBindingSource.List;
+            if (kmlId <= 0) return;
 
-            //var item = list.FirstOrDefault(x => x.pszNom == textBoxPzvNomZadSearch.Text);
+            _pendingPszNom = pszNom;
 
-            //if (item != null)
-            //    _zadanyListByMachineBindingSource.Position = list.IndexOf(item);
+            //------------------------------------
+            //var viewTop = gridViewPlanTotalHoursByKnitMachine;
+            var colKnitMachine = gridViewPlanTotalHoursByKnitMachine.Columns.FirstOrDefault(c => c.FieldName == "kmlID");
+            if (colKnitMachine == null) return;
 
-            //var curr = _zadanyListByMachineBindingSource.Current as ZadanyListByMachine;
-            //MessageBox.Show($"{curr.pszNom}");
+            int rhKnitMachine = gridViewPlanTotalHoursByKnitMachine.LocateByValue(0, colKnitMachine, kmlId);
+            if (!gridViewPlanTotalHoursByKnitMachine.IsValidRowHandle(rhKnitMachine) || !gridViewPlanTotalHoursByKnitMachine.IsDataRow(rhKnitMachine)) return;
 
-            //int rowIndex = _zadanyListByMachineNewBindingSource..Find("pszNom", textBoxPzvNomZadSearch.Text);
-            //if (rowIndex >= 0)
+            gridViewPlanTotalHoursByKnitMachine.BeginUpdate();
+            try
+            {
+                gridViewPlanTotalHoursByKnitMachine.FocusedRowHandle = rhKnitMachine;
+                gridViewPlanTotalHoursByKnitMachine.MakeRowVisible(rhKnitMachine);
+                gridViewPlanTotalHoursByKnitMachine.ClearSelection();
+                gridViewPlanTotalHoursByKnitMachine.SelectRow(rhKnitMachine);
+            }
+            finally
+            {
+                gridViewPlanTotalHoursByKnitMachine.EndUpdate();
+            }
+
+            //-----------------------------------
+            var colNomZadany = gridViewZadanyListByMachine.Columns.FirstOrDefault(c => c.FieldName == "kmlID");
+            if (colNomZadany == null) return;
+
+            int rhNomZadany = gridViewZadanyListByMachine.LocateByValue(0, colNomZadany, _pendingPszNom);
+            if (!gridViewZadanyListByMachine.IsValidRowHandle(rhNomZadany) || !gridViewZadanyListByMachine.IsDataRow(rhNomZadany)) return;
+
+            gridViewZadanyListByMachine.BeginUpdate();
+            try
+            {
+                gridViewZadanyListByMachine.FocusedRowHandle = rhNomZadany;
+                gridViewZadanyListByMachine.MakeRowVisible(rhNomZadany);
+                gridViewZadanyListByMachine.ClearSelection();
+                gridViewZadanyListByMachine.SelectRow(rhNomZadany);
+            }
+            finally
+            {
+                gridViewZadanyListByMachine.EndUpdate();
+            }
+
+            _autoSelectPending = false;
+            // ВАЖНО: НЕ вызываем gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged руками.
+            ////MessageBox.Show($"Поиск по № задания {textBoxPzvNomZadSearch.Text}");
+            //int _xKmlID = _dbHelper.ExecuteScalar($"SELECT pszm.pszkmKmlID, mlv.kmlNumber, pszm.pszkmPszNom " +
+            //    $" FROM plan_sezon_zad_knitMachine pszm " +
+            //    $"    LEFT JOIN knitMachineList_view mlv ON pszm.pszkmKmlID = mlv.kmlID " +
+            //    $" WHERE pszm.pszkmPszNom = '{textBoxPzvNomZadSearch.Text}'", new Dictionary<string, object> {  });
+
+            ////var col = gridViewPlanTotalHoursByKnitMachine.Columns["kmlID"];
+            ////var col = gridViewPlanTotalHoursByKnitMachine.Columns["gridColumnPlanTotalHoursByKnitMachineKmlID"];
+
+            ////----позиционирование на строке с номером машины
+            //var col = gridViewPlanTotalHoursByKnitMachine.Columns
+            //    .FirstOrDefault(c => c.FieldName == "kmlID");
+            //if (col == null) return;
+
+            //int _rowHandle = gridViewPlanTotalHoursByKnitMachine.LocateByValue(0, col, _xKmlID);
+            //if (_rowHandle < 0 || !gridViewPlanTotalHoursByKnitMachine.IsDataRow(_rowHandle)) return;
+
+            //gridViewPlanTotalHoursByKnitMachine.FocusedRowHandle = _rowHandle;
+            //gridViewPlanTotalHoursByKnitMachine.MakeRowVisible(_rowHandle);
+            //gridViewPlanTotalHoursByKnitMachine_FocusedRowChanged(
+            //            gridViewPlanTotalHoursByKnitMachine,
+            //            new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs(-1, _rowHandle)
+            //        );
+
+            //gridViewZadanyListByMachine.RefreshData();
+            //gridControlZadanyListByMachine.ForceInitialize();
+
+
+            ////----позиционирование на строке с номером задания
+            //gridControlZadanyListByMachine.BeginInvoke(new Action(() =>
             //{
-            //    // Перемещаемся к найденной строке
-            //    _zadanyListByMachineNewBindingSource.Position = rowIndex;
+            //    var view = gridViewZadanyListByMachine;
 
-            //    // Получаем текущую строку
-            //    DataRowView row = _zadanyListByMachineNewBindingSource.Current as DataRowView;
-            //    if (row != null)
-            //    {
-            //        MessageBox.Show($"Найдено: {row["FieldName"]}");
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Запись не найдена");
-            //}
+            //    var col = view.Columns.FirstOrDefault(c => c.FieldName == "pszNom");
+            //    if (col == null) return;
 
-            //var curr = _zadanyListByMachineNewBindingSource.Current as ZadanyListByMachine;
-            //MessageBox.Show($"{curr.pszNom}");
+            //    var search = (textBoxPzvNomZadSearch.Text ?? "").Trim();
+            //    if (search.Length == 0) return;
+
+            //    int rh = view.LocateByValue(0, col, search);
+
+            //    if (!view.IsValidRowHandle(rh) || !view.IsDataRow(rh)) return;
+
+            //    view.FocusedRowHandle = rh;
+            //    view.MakeRowVisible(rh);
+            //}));
         }
 
         private void textBoxPzvNomZadSearch_TextChanged(object sender, EventArgs e)
