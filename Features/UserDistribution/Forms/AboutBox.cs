@@ -186,22 +186,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 directory = directory.Parent;
             }
 
-            string repoProfilesDir = Path.Combine(@"D:\Work\sewingproduction", "Properties", "PublishProfiles");
-            if (Directory.Exists(repoProfilesDir))
-            {
-                string primaryPath = Path.Combine(repoProfilesDir, primaryFileName);
-                if (File.Exists(primaryPath))
-                {
-                    return primaryPath;
-                }
-
-                string fallbackPath = Path.Combine(repoProfilesDir, fallbackFileName);
-                if (File.Exists(fallbackPath))
-                {
-                    return fallbackPath;
-                }
-            }
-
             return null;
         }
 
