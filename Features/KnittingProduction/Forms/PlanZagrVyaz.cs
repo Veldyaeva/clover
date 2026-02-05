@@ -44,8 +44,8 @@ using System.Windows.Forms;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
 using static SewingProduction.Core.helpers.ServiceBrokerHelper;
-using static SewingProduction.Core.helpers.ServiceBrokerHelper;
 using static SewingProduction.Helpers.GridHelper;
+using DevExpress.CodeParser;
 using Volatile = System.Threading.Volatile;
 
 
@@ -53,17 +53,17 @@ using Volatile = System.Threading.Volatile;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class PlanZagrVyaz : CustomForm, IThemeable, IDataUpdatableFormAsyncV2
+    public partial class PlanZagrVyaz : CustomForm, IThemeable, IServiceBrokerHost
     //, IDataUpdatableForm, IDataUpdatableFormAsync
     {
         int vyazPodrKod = 0;
 
-        private ServiceBrokerHelper? _sbHelper;
-        private EnhancedRefreshCoordinator? _refreshCoordinator;
+
+        private readonly ServiceBrokerController _sbController;
 
         // Таблицы, изменения в которых НЕ должны инициировать обновление UI
         // (типичные LEFT JOIN справочники и прочий "шум").
-        private HashSet<string>? _ignoredServiceBrokerTables;
+        private readonly HashSet<string> _ignoredServiceBrokerTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         private Dictionary<string, Func<Task>> _objectRestartMap = null!;
         private CancellationTokenSource? _loadCts;
@@ -78,7 +78,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static ServiceBrokerService _sbService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
-        private static ServiceBrokerHelper _cbHelper;
         //        private static BindingSourceHelper _bSHelper;
         private readonly ILogger _logger = new FileLogger();
         private readonly VyazService _vyazService;
@@ -170,6 +169,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbService = new DbService(_dbHelper);
             _anService = new ArtNormRepository(_dbHelper);
             _sbService = new ServiceBrokerService(_dbHelper);
+            _sbController = new ServiceBrokerController(this);
             //_sbService.Changed += UpdateDataInFormAsync;
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();
@@ -178,6 +178,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _vyazService = new VyazService(_dbHelper);
             _mlService = new MlService(_dbHelper);
             ThemeManager.UpdateTheme(this);
+
+            _smenZadanyVyazBindingSource = new BindingSource
+            {
+                DataSource = new BindingList<SmenZadanyVyaz>()
+            };
+            _smenZadanyVyazNewBindingSource = new BindingSource
+            {
+                DataSource = new BindingList<SmenZadanyVyaz>()
+            };
 
             //_broker.Changed += UpdateDataInFormAsync;
             //_sbHelper.UseSchemaInListenName = false;
@@ -227,58 +236,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         }
 
-        private async Task InitServiceBrokerAsync(CancellationToken ct)
-        {
-            // objectName = то, что ты передаёшь в GetObjectListForServiceBroker(...)
-            var objectNames = _objectRestartMap.Keys.ToArray();
+        public IReadOnlyList<string> ServiceBrokerObjects =>
+            _objectRestartMap?.Keys.ToArray() ?? Array.Empty<string>();
 
-            _sbHelper = new ServiceBrokerHelper(
-                owner: this,
-                loadByObjectAsync: (obj, token) => _sbService.GetObjectListForServiceBroker(obj, token)
-            )
+        public IReadOnlyDictionary<string, int> RefreshPriorities =>
+            new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
             {
-                // если StartListening НЕ принимает "dbo.table", поставь false
-                UseSchemaInListenName = true
-                // UseSchemaInListenName = false
+                { "GetPlanZagrVyazByPachList", 10 },
+                { "GetSmenZadanyVyaz", 5 }
             };
-            // 0) Фильтруем "шумовые" таблицы ДО старта брокера (LEFT JOIN справочники и т.п.)
-            if (_ignoredServiceBrokerTables != null && _ignoredServiceBrokerTables.Count > 0)
-            {
-                foreach (var t in _ignoredServiceBrokerTables)
-                {
-                    if (string.IsNullOrWhiteSpace(t)) continue;
-                    var tt = t.Trim();
-                    // поддержим оба варианта: "table" и "dbo.table"
-                    _sbHelper.IgnoredTables.Add(tt);
-                    if (!tt.Contains('.'))
-                        _sbHelper.IgnoredTables.Add("dbo." + tt);
-                }
-            }
-                // Координатор перезагрузок (debounce + max-wait + single-flight + throttle + cascade protection)
-                // создаём до старта брокера, чтобы не потерять первые события.
-                var sbSettings = SettingsManager.GetServiceBrokerSettings();
 
-         //   await RestartDataByObjectNameAsync("GetPlanZagrVyazByPachList");
+        public string ServiceBrokerFormName => GetType().Name;
 
-            _refreshCoordinator ??= new EnhancedRefreshCoordinator(
-                reloadByObjectNameAsync: RestartDataByObjectNameAsync,
-                debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
-                throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
-                maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
-                maxBatchSize: sbSettings.MaxBatchSize,
-                maxParallelReloads: sbSettings.MaxParallelReloads,
-                maxCascadeDepth: sbSettings.MaxCascadeDepth
-            );
+        public bool UseSchemaInListenName => true;
 
-            // Настраиваем приоритеты для разных объектов (чем выше число, тем выше приоритет)
-            _refreshCoordinator.SetPriority("GetPlanZagrVyazByPachList", 10);
-            _refreshCoordinator.SetPriority("getSmenZadanyVyaz", 5);
-            await _sbHelper.InitAndStartAsync(objectNames, ct);
+        public IReadOnlyCollection<string> IgnoredTables => _ignoredServiceBrokerTables;
 
-            // (необязательно) отладка:
-            var tables = _sbHelper.GetListeningTables();
+        public async Task InitServiceBrokerAsync(CancellationToken ct)
+        {
+            await _sbController.InitAsync(ct);
+
+            var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
+            Debug.WriteLine($"[PlanZagrVyaz] Listening tables: {string.Join(", ", tables)}");
 
             //------------------------
+        }
+
+        public async Task<List<ServiceBrokerModel.TableListenInfo>> LoadListenInfoByObjectNameAsync(
+            string objectName, CancellationToken ct)
+        {
+            return await _sbService.GetObjectListForServiceBroker(objectName, ct);
         }
         private Task InvokeOnUiAsync(Func<Task> fn)
         {
@@ -312,7 +299,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //    });
         //}
 
-        private async Task RestartDataByObjectNameAsync(string objectName)
+        public async Task RestartDataByObjectNameAsync(string objectName, CancellationToken ct)
         {
             try
             {
@@ -423,39 +410,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         // Если сигнатуры нет/закомментирована — ты НЕ увидишь обновлений.
         public async Task UpdateDataInFormAsync(string table, string? changedFieldsCsv = null)
         {
-            if (_sbHelper == null) return;
-
             try
             {
                 Debug.WriteLine($"[PlanZagrVyaz] UpdateDataInFormAsync: table={table}, fields={changedFieldsCsv}");
+                await _sbController.HandleUpdateAsync(table, changedFieldsCsv ?? string.Empty);
 
-                // 1) Пропускаем событие через фильтрацию (table + поля)
-                await _sbHelper.HandleBrokerUpdateAsync(table, changedFieldsCsv);
-
-                // 2) Снимаем накопленные затронутые "объекты" (view/proc/логические источники)
-                var affected = _sbHelper.DrainPending();
-                if (affected == null || affected.Count == 0)
+                if (_sbController.Coordinator != null)
                 {
-                    Debug.WriteLine($"[PlanZagrVyaz] No affected objects for table {table}");
-                    return;
-                }
-
-                Debug.WriteLine($"[PlanZagrVyaz] Affected objects: {string.Join(", ", affected)}");
-
-                // 3) Планируем обновления через координатор (анти-дребезг + maxWait)
-                // В одном "affected" может быть много строк -> сгруппируем по ObjectName
-                foreach (var objName in affected
-                             //   .Select(x => x.ObjectName)
-                             .Where(x => !string.IsNullOrWhiteSpace(x))
-                             .Distinct(StringComparer.OrdinalIgnoreCase))
-                {
-                    _refreshCoordinator?.Request(objName);
-                }
-
-                // Логируем статистику координатора
-                if (_refreshCoordinator != null)
-                {
-                    var stats = _refreshCoordinator.GetStatistics();
+                    var stats = _sbController.Coordinator.GetStatistics();
                     Debug.WriteLine($"[PlanZagrVyaz] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
                 }
             }
@@ -1934,30 +1896,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                customLabel12.VisibleLogic = false;
+                customLabel12.VisiblePermission = false;
+                textBoxPzvNomSearch.VisibleLogic = false;
+                textBoxPzvNomSearch.VisiblePermission = false;
+                customLabel13.VisibleLogic = false;
+                customLabel13.VisiblePermission = false;
+                textBoxPzvNPachSearch.VisibleLogic = false;
+                textBoxPzvNPachSearch.VisiblePermission = false;
+                customLabel14.VisibleLogic = false;
+                customLabel14.VisiblePermission = false;
+                textBoxPzvYearPachSearch.VisibleLogic = false;
+                textBoxPzvYearPachSearch.VisiblePermission = false;
+
                 _lifetimeCts = new CancellationTokenSource();
                 _loadCts = new CancellationTokenSource();
                 InitObjectRestartMap();
 
-                // 1) Конфиг "шумовых" таблиц (можно расширять по мере наблюдений)
-                // 2) Координатор обновлений: debounce + maxWait + single-flight + throttle + cascade protection
-                var sbSettings = SettingsManager.GetServiceBrokerSettings();
-                _refreshCoordinator = new EnhancedRefreshCoordinator(
-                    reloadByObjectNameAsync: RestartDataByObjectNameAsync,
-                    debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
-                    throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
-                    maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
-                    maxBatchSize: sbSettings.MaxBatchSize,
-                    maxParallelReloads: sbSettings.MaxParallelReloads,
-                    maxCascadeDepth: sbSettings.MaxCascadeDepth);
-
-                // Настраиваем приоритеты для разных объектов
-                _refreshCoordinator.SetPriority("GetPlanZagrVyazByPachList", 10);
-                _refreshCoordinator.SetPriority("GetSmenZadanyVyaz", 5);
-
-                await InitServiceBrokerAsync(_lifetimeCts.Token);
-
                 Task bindingsTask = InitializeBindingsAsync();
                 await Task.WhenAll(bindingsTask);
+
+                await InitServiceBrokerAsync(_lifetimeCts.Token);
                 await LoadPlanTotalHoursByKnitMachineDataAsync();
                 await LoadSmenZadanyVyazDataAsync();
             }
@@ -4835,12 +4794,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewNaryadZadany.PopupMenuShowing -= gridViewNaryadZadany_PopupMenuShowing;
                 _loadCts?.Cancel();
 
-                if (_sbHelper != null)
-                {
-                    // НЕ ждём, чтобы не блокировать закрытие формы
-                    _ = _sbHelper.DisposeAsync();
-                }
-                _refreshCoordinator?.Dispose();
+                // НЕ ждём, чтобы не блокировать закрытие формы
+                _ = _sbController.DisposeAsync();
             }
             catch (Exception ex)
             {

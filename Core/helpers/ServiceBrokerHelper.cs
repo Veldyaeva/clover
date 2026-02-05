@@ -83,6 +83,11 @@ namespace SewingProduction.Core.helpers
         public bool UseSchemaInListenName { get; set; } = true;
 
         /// <summary>
+        /// Доступ к активным брокерам по таблицам (schema.table).
+        /// </summary>
+        public IReadOnlyDictionary<string, ServiceBroker> Brokers => _brokers;
+
+        /// <summary>
         /// Таблицы, которые игнорируем (полное имя schema.table).
         /// Полезно для LEFT JOIN-справочников, изменения которых не должны триггерить обновления.
         /// </summary>
@@ -513,6 +518,7 @@ public ValueTask DisposeAsync()
                 var columns = string.Join(",", unionFields);
                 var listenName = UseSchemaInListenName ? tableKey : ExtractTableName(tableKey);
 
+                Debug.WriteLine($"[ServiceBrokerHelper] Start broker: tableKey={tableKey}, listenName={listenName}, columns={columns}");
                 broker.StartListening(columns, listenName);
                 _brokers[tableKey] = broker;
             }
@@ -532,6 +538,7 @@ public ValueTask DisposeAsync()
             {
                 try
                 {
+                    Debug.WriteLine("[ServiceBrokerHelper] Stop broker");
                     broker.Changed -= Broker_Changed;
                     broker.StopBroker();
                 }

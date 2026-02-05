@@ -104,8 +104,6 @@
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            customButton4 = new SewingProduction.Core.Class.CustomButton();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
@@ -131,7 +129,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -433,7 +430,6 @@
             // layoutControl1
             // 
             layoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            layoutControl1.Controls.Add(customButton4);
             layoutControl1.Controls.Add(customLabelYear);
             layoutControl1.Controls.Add(customLabelMonth);
             layoutControl1.Controls.Add(customButton5);
@@ -483,9 +479,9 @@
             customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton5.Font = new System.Drawing.Font("Arial", 10F);
             customButton5.ForeColor = System.Drawing.Color.Black;
-            customButton5.Location = new System.Drawing.Point(149, 526);
+            customButton5.Location = new System.Drawing.Point(24, 526);
             customButton5.Name = "customButton5";
-            customButton5.Size = new System.Drawing.Size(121, 49);
+            customButton5.Size = new System.Drawing.Size(246, 49);
             customButton5.TabIndex = 14;
             customButton5.Text = "Перевод";
             customButton5.UseVisualStyleBackColor = false;
@@ -670,7 +666,7 @@
             // 
             // layoutControlGroup1
             // 
-            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem16, layoutControlItem12, layoutControlItem15, layoutControlItem11, layoutControlItem8 });
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem16, layoutControlItem12, layoutControlItem15, layoutControlItem11 });
             layoutControlGroup1.Location = new System.Drawing.Point(0, 502);
             layoutControlGroup1.Name = "layoutControlGroup1";
             layoutControlGroup1.Size = new System.Drawing.Size(1512, 77);
@@ -687,10 +683,10 @@
             // layoutControlItem16
             // 
             layoutControlItem16.Control = customButton5;
-            layoutControlItem16.Location = new System.Drawing.Point(125, 0);
+            layoutControlItem16.Location = new System.Drawing.Point(0, 0);
             layoutControlItem16.Name = "layoutControlItem16";
             layoutControlItem16.OptionsTableLayoutItem.RowIndex = 2;
-            layoutControlItem16.Size = new System.Drawing.Size(125, 53);
+            layoutControlItem16.Size = new System.Drawing.Size(250, 53);
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem12
@@ -753,27 +749,6 @@
             layoutControlItem7.Size = new System.Drawing.Size(237, 26);
             layoutControlItem7.TextVisible = false;
             // 
-            // customButton4
-            // 
-            customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            customButton4.Font = new System.Drawing.Font("Arial", 10F);
-            customButton4.ForeColor = System.Drawing.Color.Black;
-            customButton4.Location = new System.Drawing.Point(24, 526);
-            customButton4.Name = "customButton4";
-            customButton4.Size = new System.Drawing.Size(121, 49);
-            customButton4.TabIndex = 17;
-            customButton4.Text = "customButton4";
-            customButton4.UseVisualStyleBackColor = false;
-            customButton4.Click += customButton4_Click_1;
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = customButton4;
-            layoutControlItem8.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(125, 53);
-            layoutControlItem8.TextVisible = false;
-            // 
             // TabelMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -809,7 +784,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ResumeLayout(false);
         }
 
@@ -891,7 +865,5 @@
         private System.Windows.Forms.Label customLabelMonth;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
-        private Core.Class.CustomButton customButton4;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
     }
 }

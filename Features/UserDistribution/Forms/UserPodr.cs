@@ -166,7 +166,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             int oldTopRowIndex = gridViewPodr.TopRowIndex;
 
             var row = gridViewPodr.GetRow(e.RowHandle) as UserPodrModel;
-            
+
             if (row == null)
                 return;
 
@@ -393,7 +393,11 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 : $"Доступные для выбора ({childCount})";
         }
 
-        #endregion 
+        #endregion
 
+        private void customGridControlUser_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGrid.Localization;
+using DevExpress.XtraGrid.Localization;
 using DevExpress.XtraReports.Design;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
@@ -80,6 +80,16 @@ namespace SewingProduction.Core
                     splashScreen.Update();
                     Application.DoEvents();
 
+                    if (!ValidateSystemDate(out var dateError))
+                    {
+                        MessageBox.Show(dateError,
+                            "SewingProduction — Ошибка",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                        try { splashScreen.Close(); } catch { }
+                        return;
+                    }
+
                     SpMainForm mainForm = new SpMainForm();
                     Thread.Sleep(2000);
                     ThemeManager.LoadTheme();
@@ -158,6 +168,47 @@ namespace SewingProduction.Core
                 try { _ = _logger.LogErrorAsync(e.Exception, "TaskScheduler UnobservedTaskException"); } catch { }
                 e.SetObserved();
             };
+        }
+
+        private static bool ValidateSystemDate(out string errorMessage)
+        {
+            errorMessage = null;
+            try
+            {
+                DateTime systemDateTime = DateTime.Now;
+                DateTime dbDateTime;
+                using (var connection = new SqlConnection(SettingsManager.GetCurrentConnectionString()))
+                {
+                    connection.Open();
+                    using (var command = new SqlCommand("SELECT GETDATE()", connection))
+                    {
+                        var result = command.ExecuteScalar();
+                        if (result == null || result == DBNull.Value)
+                        {
+                            throw new InvalidOperationException("Сервер БД вернул пустую дату.");
+                        }
+                        dbDateTime = Convert.ToDateTime(result);
+                    }
+                }
+
+                var difference = (systemDateTime - dbDateTime).Duration();
+                if (difference > TimeSpan.FromMinutes(10))//даём 10 минут на расхождение, т.к. может быть небольшая разница из-за синхронизации времени
+                {
+                    errorMessage =
+                        $"Дата/время компьютера ({systemDateTime:dd.MM.yyyy HH:mm:ss}) не совпадает с сервером " +
+                        $"({dbDateTime:dd.MM.yyyy HH:mm:ss}). " +
+                        "Разница более 10 минут. Обратитесь к администратору и перезапустите программу.";
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                try { _ = _logger.LogErrorAsync(ex, "Date check failed"); } catch { }
+                errorMessage = $"Не удалось проверить дату на сервере БД: {ex.Message}";
+                return false;
+            }
         }
     }
 }
