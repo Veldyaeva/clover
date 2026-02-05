@@ -163,7 +163,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbController = new ServiceBrokerController(this);
                 dataLayoutControl1.DataSource = _planBindingSource;
 
-                ConfigureAdvBandedGridColumns();
+                //ConfigureAdvBandedGridColumns();
 
                 var dbHelper = new DatabaseHelper();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
@@ -198,35 +198,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
                 advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
 
-                //#region advBandedGridView1
-                //advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
-                //// group summaries
-                //GridGroupSummaryItem item = new GridGroupSummaryItem()
-                //{
-                //    FieldName = "PlanChas_UI",
-                //    SummaryType = DevExpress.Data.SummaryItemType.Sum,
-                //    ShowInGroupColumnFooter = advBandedGridView1.Columns["PlanChas_UI"]
-                //};
-                //advBandedGridView1.GroupSummary.Add(item);
+                #region advBandedGridView1
+                advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
+                // group summaries
+                GridGroupSummaryItem item = new GridGroupSummaryItem()
+                {
+                    FieldName = "PlanChas_UI",
+                    SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                    ShowInGroupColumnFooter = advBandedGridView1.Columns["PlanChas_UI"]
+                };
+                advBandedGridView1.GroupSummary.Add(item);
 
-                //item = new GridGroupSummaryItem()
-                //{
-                //    FieldName = "FactChas_UI",
-                //    SummaryType = SummaryItemType.Sum,
-                //    ShowInGroupColumnFooter = advBandedGridView1.Columns["FactChas_UI"]
-                //};
-                //advBandedGridView1.GroupSummary.Add(item);
-                //advBandedGridView1.Columns["ID"].Group();
+                item = new GridGroupSummaryItem()
+                {
+                    FieldName = "FactChas_UI",
+                    SummaryType = SummaryItemType.Sum,
+                    ShowInGroupColumnFooter = advBandedGridView1.Columns["FactChas_UI"]
+                };
+                advBandedGridView1.GroupSummary.Add(item);
+                advBandedGridView1.Columns["ID"].Group();
 
-                //// Handle this event to paint group row cells manually
-                //advBandedGridView1.CustomDrawGroupRowCell += (s, e) => {
-                //    e.Appearance.BackColor = Color.BlanchedAlmond;
-                //    e.Appearance.FillRectangle(e.Cache, e.Bounds);
-                //    e.Appearance.ForeColor = Color.DimGray;
-                //    e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
-                //    e.Handled = true;
-                //};
-                //#endregion
+                // Handle this event to paint group row cells manually
+                advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
+                {
+                    e.Appearance.BackColor = Color.BlanchedAlmond;
+                    e.Appearance.FillRectangle(e.Cache, e.Bounds);
+                    e.Appearance.ForeColor = Color.DimGray;
+                    e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
+                    e.Handled = true;
+                };
+                #endregion
             }
             catch (Exception ex)
             {
@@ -249,7 +250,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbController = new ServiceBrokerController(this);
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 dataLayoutControl1.DataSource = _planBindingSource;
-                ConfigureAdvBandedGridColumns();
+               // ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
                 this.Load += async (s, e) =>
@@ -276,35 +277,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
                 advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
                 advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
-                //#region advBandedGridView1
-                //advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
-                //// group summaries
-                //GridGroupSummaryItem item = new GridGroupSummaryItem()
-                //{
-                //    FieldName = "PlanChas_UI",
-                //    SummaryType = DevExpress.Data.SummaryItemType.Sum,
-                //    ShowInGroupColumnFooter = advBandedGridView1.Columns["PlanChas_UI"]
-                //};
-                //advBandedGridView1.GroupSummary.Add(item);
+                #region advBandedGridView1
+                advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
+                // group summaries
+                GridGroupSummaryItem item = new GridGroupSummaryItem()
+                {
+                    FieldName = "PlanChas_UI",
+                    SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                    ShowInGroupColumnFooter = advBandedGridView1.Columns["PlanChas_UI"]
+                };
+                advBandedGridView1.GroupSummary.Add(item);
 
-                //item = new GridGroupSummaryItem()
-                //{
-                //    FieldName = "FactChas_UI",
-                //    SummaryType = SummaryItemType.Sum,
-                //    ShowInGroupColumnFooter = advBandedGridView1.Columns["FactChas_UI"]
-                //};
-                //advBandedGridView1.GroupSummary.Add(item);
-                //advBandedGridView1.Columns["ID"].Group();
+                item = new GridGroupSummaryItem()
+                {
+                    FieldName = "FactChas_UI",
+                    SummaryType = SummaryItemType.Sum,
+                    ShowInGroupColumnFooter = advBandedGridView1.Columns["FactChas_UI"]
+                };
+                advBandedGridView1.GroupSummary.Add(item);
+      //          advBandedGridView1.Columns["ID"].Group();
 
-                //// Handle this event to paint group row cells manually
-                //advBandedGridView1.CustomDrawGroupRowCell += (s, e) => {
-                //    e.Appearance.BackColor = Color.BlanchedAlmond;
-                //    e.Appearance.FillRectangle(e.Cache, e.Bounds);
-                //    e.Appearance.ForeColor = Color.DimGray;
-                //    e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
-                //    e.Handled = true;
-                //};
-                //#endregion
+                // Handle this event to paint group row cells manually
+                advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
+                {
+                    e.Appearance.BackColor = Color.BlanchedAlmond;
+                    e.Appearance.FillRectangle(e.Cache, e.Bounds);
+                    e.Appearance.ForeColor = Color.DimGray;
+                    e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
+                    e.Handled = true;
+                };
+                #endregion
             }
             catch (Exception ex)
             {
@@ -437,48 +439,48 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void ConfigureAdvBandedGridColumns()
         {
             // Конфигурация колонок задана в Designer.cs
-            // Дополнительная настройка: группировка второго уровня (advBandedGridView1)
-            if (advBandedGridView1 == null)
-                return;
+            //// Дополнительная настройка: группировка второго уровня (advBandedGridView1)
+            //if (advBandedGridView1 == null)
+            //    return;
 
-            // 1) Единая скрытая колонка с готовым заголовком группы
-            var headerCol = advBandedGridView1.Columns.ColumnByFieldName("__Header");
-            if (headerCol == null)
-            {
-                headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-                {
-                    FieldName = "__Header",
-                    Caption = "Header",
-                    UnboundType = DevExpress.Data.UnboundColumnType.String,
-                    // Строка заголовка: Пачка | Расчёт | Размер | Кол-во
-                    UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
-                    Visible = false,
-                    OptionsColumn = { ShowInCustomizationForm = false }
-                };
-                advBandedGridView1.Columns.Add(headerCol);
-            }
+            //// 1) Единая скрытая колонка с готовым заголовком группы
+            //var headerCol = advBandedGridView1.Columns.ColumnByFieldName("__Header");
+            //if (headerCol == null)
+            //{
+            //    headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+            //    {
+            //        FieldName = "__Header",
+            //        Caption = "Header",
+            //        UnboundType = DevExpress.Data.UnboundColumnType.String,
+            //        // Строка заголовка: Пачка | Расчёт | Размер | Кол-во
+            //       // UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+            //        Visible = true,
+            //        OptionsColumn = { ShowInCustomizationForm = false }
+            //    };
+            //    advBandedGridView1.Columns.Add(headerCol);
+            //}
 
-            // 2) Сбрасываем прошлую группировку и группируем только по __Header
-            advBandedGridView1.BeginUpdate();
-            try
-            {
-                ////////////////advBandedGridView1.ClearGrouping();
+            //// 2) Сбрасываем прошлую группировку и группируем только по __Header
+            //advBandedGridView1.BeginUpdate();
+            //try
+            //{
+            //    advBandedGridView1.ClearGrouping();
 
-                ////////////////headerCol.GroupIndex = 0;
+            //    headerCol.GroupIndex = 0;
 
-                //// Сортировка по номеру операции внутри группы
-                //var opNum = bandedGridColumn11 ?? advBandedGridView1.Columns.ColumnByFieldName("DisplayNumber");
-                //if (opNum != null)
-                //{
-                //    advBandedGridView1.SortInfo.Clear();
-                //    advBandedGridView1.SortInfo.Add(opNum, DevExpress.Data.ColumnSortOrder.Ascending);
-                //}
+            //    //// Сортировка по номеру операции внутри группы
+            //    //var opNum = bandedGridColumn11 ?? advBandedGridView1.Columns.ColumnByFieldName("DisplayNumber");
+            //    //if (opNum != null)
+            //    //{
+            //    //    advBandedGridView1.SortInfo.Clear();
+            //    //    advBandedGridView1.SortInfo.Add(opNum, DevExpress.Data.ColumnSortOrder.Ascending);
+            //    //}
 
-                // 3) Внешний вид группы — показываем только текст, без имён полей
-                //////////advBandedGridView1.GroupFormat = "{1}";
-                //////////advBandedGridView1.OptionsView.ShowGroupedColumns = false;
-                //////////advBandedGridView1.OptionsView.ShowGroupPanel = false;
-                advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
+            //    // 3) Внешний вид группы — показываем только текст, без имён полей
+            //    advBandedGridView1.GroupFormat = "{1}";
+            //    advBandedGridView1.OptionsView.ShowGroupedColumns = false;
+            //    advBandedGridView1.OptionsView.ShowGroupPanel = false;
+            //    advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
 
 
                 #region advBandedGridView1
@@ -527,11 +529,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    }
                 //}
 
-            }
-            finally
-            {
-                advBandedGridView1.EndUpdate();
-            }
+            //}
+            //finally
+            //{
+            //    advBandedGridView1.EndUpdate();
+            //}
         }
 
         /// <summary>
