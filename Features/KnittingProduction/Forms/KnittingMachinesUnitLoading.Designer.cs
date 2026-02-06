@@ -45,7 +45,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridPlanSezonZadKnitMachineColumnYearMonthText = new DevExpress.XtraGrid.Columns.GridColumn();
             gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt = new DevExpress.XtraGrid.Columns.GridColumn();
             labelKmlNumber = new CustomLabel();
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             gridControlPlanSezonZadKnitMachineLoadingSummary = new CustomGridControl();
             gridViewPlanSezonZadKnitMachineLoadingSummary = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod = new DevExpress.XtraGrid.Columns.GridColumn();

@@ -57,7 +57,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridKnitMachineLoadInfoColumnYearMonth = new DevExpress.XtraGrid.Columns.GridColumn();
             gridKnitMachineLoadInfoColumnKmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             gridKnitMachineLoadInfoColumnCombinedPszNom = new DevExpress.XtraGrid.Columns.GridColumn();
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             splitterItem1 = new DevExpress.XtraLayout.SplitterItem();

@@ -353,6 +353,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridColumnZadanyListByMachineKmlID = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnZadanyListByMachineGradacia = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit7 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            gridColumnZadanyListByMachineYearPlan = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControlPlanTotalHoursByKnitMachine = new CustomGridControl();
             gridViewPlanTotalHoursByKnitMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnPlanTotalHoursByKnitMachineKmaNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -3169,7 +3170,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewZadanyListByMachine.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewZadanyListByMachine.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewZadanyListByMachine.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewZadanyListByMachine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnZadanyListByMachinePszNom, gridColumnZadanyListByMachineNom, gridColumnZadanyListByMachineArticul, gridColumnZadanyListByMachineZvet, gridColumnZadanyListByMachineKol, gridColumnZadanyListByMachineDatePryazZayav, gridColumnZadanyListByMachineData_plan, gridColumnZadanyListByMachineVid_stir, gridColumnZadanyListByMachineDopr_name, gridColumnZadanyListByMachineSyncSelection, gridColumnZadanyListByMachineKmlID, gridColumnZadanyListByMachineGradacia });
+            gridViewZadanyListByMachine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnZadanyListByMachinePszNom, gridColumnZadanyListByMachineNom, gridColumnZadanyListByMachineArticul, gridColumnZadanyListByMachineZvet, gridColumnZadanyListByMachineKol, gridColumnZadanyListByMachineDatePryazZayav, gridColumnZadanyListByMachineData_plan, gridColumnZadanyListByMachineVid_stir, gridColumnZadanyListByMachineDopr_name, gridColumnZadanyListByMachineSyncSelection, gridColumnZadanyListByMachineKmlID, gridColumnZadanyListByMachineGradacia, gridColumnZadanyListByMachineYearPlan });
             gridViewZadanyListByMachine.GridControl = gridControlZadanyListByMachine;
             gridViewZadanyListByMachine.Name = "gridViewZadanyListByMachine";
             gridViewZadanyListByMachine.OptionsView.ColumnAutoWidth = false;
@@ -3311,6 +3312,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             repositoryItemCheckEdit7.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             repositoryItemCheckEdit7.ValueChecked = 1;
             repositoryItemCheckEdit7.ValueUnchecked = 0;
+            // 
+            // gridColumnZadanyListByMachineYearPlan
+            // 
+            gridColumnZadanyListByMachineYearPlan.Caption = "YearPlan";
+            gridColumnZadanyListByMachineYearPlan.Name = "gridColumnZadanyListByMachineYearPlan";
             // 
             // gridControlPlanTotalHoursByKnitMachine
             // 
@@ -4238,6 +4244,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem52;
         private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnYearPach;
         private DevExpress.XtraGrid.Columns.GridColumn gridNaryadZadanyColumnPachKod;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnZadanyListByMachineYearPlan;
         //        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPZVOperListOlSekAll;
     }
 }

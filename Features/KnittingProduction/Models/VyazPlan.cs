@@ -175,6 +175,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int kmlID { get; set; }
         [NotMapped] public int SyncSelection { get; set; } = 0;
         [NotMapped] public int Gradacia { get; set; }
+        [NotMapped] public int yearPlan { get; set; }
     }
     public class RzvPachListByNom
     {

@@ -148,7 +148,7 @@ namespace SewingProduction
             gridControlOtdelka = new CustomGridControl();
             WorkInfo = new DevExpress.XtraTab.XtraTabPage();
             FurnInfo = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl9 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl9 = new SewingProduction.Core.Class.CustomLayoutControl();
             furnitZayavViewUpak = new FurnitZayavView();
             furnitZayavViewFurnit = new FurnitZayavView();
             tbDatZayav = new CustomTextBox();
@@ -236,10 +236,10 @@ namespace SewingProduction
             layoutControlItem185 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem60 = new DevExpress.XtraLayout.EmptySpaceItem();
             RasInfo = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl7 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl7 = new SewingProduction.Core.Class.CustomLayoutControl();
             layoutControlGroup22 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlGroup23 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControl5 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl5 = new SewingProduction.Core.Class.CustomLayoutControl();
             gridControlPartNaklList = new CustomGridControl();
             gridViewPartNaklList = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnNaklPartIzObPrch = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -265,7 +265,7 @@ namespace SewingProduction
             layoutControlGroup16 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem105 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem107 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControl6 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl6 = new SewingProduction.Core.Class.CustomLayoutControl();
             mtbRzuVidStir = new CustomTextBoxEx();
             mtbRzuDataStCd = new CustomTextBoxEx();
             mtbRzuDataStR = new CustomTextBoxEx();
@@ -366,7 +366,7 @@ namespace SewingProduction
             emptySpaceItem58 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem126 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator8 = new DevExpress.XtraLayout.SimpleSeparator();
-            layoutControl4 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl4 = new SewingProduction.Core.Class.CustomLayoutControl();
             textBoxDataZa = new CustomTextBoxEx();
             customLabel21 = new CustomLabel();
             mtbRzuData1С = new CustomTextBoxEx();
@@ -426,7 +426,7 @@ namespace SewingProduction
             layoutControlItem156 = new DevExpress.XtraLayout.LayoutControlItem();
             xtraTabControl1 = new CustomTabControl();
             SockZadanyInfo = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl2 = new SewingProduction.Core.Class.CustomLayoutControl();
             TextBoxKolPlanZadany = new CustomTextBoxEx();
             customLabel5 = new CustomLabel();
             gridControlSockDefectList = new CustomGridControl();
@@ -564,7 +564,7 @@ namespace SewingProduction
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             TabPageMgKart = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl8 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl8 = new SewingProduction.Core.Class.CustomLayoutControl();
             gridControlNastilGroupView = new CustomGridControl();
             gridViewNastilGroupView = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridNastilGroupViewColumnMgKart = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -613,7 +613,7 @@ namespace SewingProduction
             tbNomZad = new CustomTextBox();
             customLabel4 = new CustomLabel();
             customRadioGroup3 = new CustomRadioGroup();
-            layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl3 = new SewingProduction.Core.Class.CustomLayoutControl();
             textBoxYearIzNakl = new CustomTextBox();
             customLabel24 = new CustomLabel();
             textBoxIzNakl = new CustomTextBox();
@@ -655,7 +655,7 @@ namespace SewingProduction
             layoutControlItem198 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem65 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             buttonVshivkiPrint = new CustomSimpleButton();
             textBoxRzId = new CustomTextBoxEx();
             customLabel22 = new CustomLabel();

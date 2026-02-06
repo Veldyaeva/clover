@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             customSimpleButton8 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton7 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton6 = new SewingProduction.Core.Class.CustomSimpleButton();
