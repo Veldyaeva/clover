@@ -69,6 +69,7 @@ namespace SewingProduction
 
             try
             {
+                Debug.WriteLine($"[ServiceBroker] StartListening: table={_table}, fields={_fields}");
                 StopListening();
 
                 var fullTable = BuildQuotedTableName(_table);
@@ -104,6 +105,7 @@ namespace SewingProduction
         {
             try
             {
+                Debug.WriteLine($"[ServiceBroker] StopListening: table={_table}, fields={_fields}");
                 // 1) Отписываемся от события ПЕРЕД обнулением dependency
                 if (_dependency != null)
                 {
@@ -213,6 +215,7 @@ namespace SewingProduction
                     return;
                 }
                 // 2) QN одноразовые — переподписываемся ВСЕГДА на Change
+                Debug.WriteLine($"[ServiceBroker] Resubscribe: table={_table}, fields={_fields}");
                 StopListening();
                 if (!_brokerStopped && _flagStartListening)
                     StartListening(_fields, _table);
@@ -231,8 +234,8 @@ namespace SewingProduction
                     return;
                 }
 
-
                 // Вызов наружу (тонко!)
+                Debug.WriteLine($"[ServiceBroker] RaiseChanged: table={_table}");
                 await RaiseChangedAsync(_table, changedFieldsCsv: null);
                 // Debug.WriteLine($"[ServiceBroker:{_id}] Notification: table=...");
 
