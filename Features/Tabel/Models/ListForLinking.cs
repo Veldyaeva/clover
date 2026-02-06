@@ -8,6 +8,7 @@ namespace SewingProduction.Features.Tabel.Models
 {
     public class ListForLinking
     {
+        public int tabno {  get; set; }
         public string inn { get; set; }
         public string lastname { get; set; }
         public string firstname { get; set; }
@@ -23,6 +24,8 @@ namespace SewingProduction.Features.Tabel.Models
         public string? podrName { get; set; }
         public int? idSchedule { get; set; }
         public int? gr { get; set; }
+        public int verif1c { get; set; }
+        public int verifParsec { get; set; }
 
 
     }
