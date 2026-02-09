@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.Class.Settings;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -69,6 +69,7 @@ namespace SewingProduction
 
             try
             {
+                Debug.WriteLine($"[ServiceBroker] StartListening: table={_table}, fields={_fields}");
                 StopListening();
 
                 var fullTable = BuildQuotedTableName(_table);
@@ -104,18 +105,35 @@ namespace SewingProduction
         {
             try
             {
+                Debug.WriteLine($"[ServiceBroker] StopListening: table={_table}, fields={_fields}");
+                // 1) Отписываемся от события ПЕРЕД обнулением dependency
                 if (_dependency != null)
                 {
                     _dependency.OnChange -= OnDependencyChange;
                     _dependency = null;
                 }
 
-                _command?.Dispose();
-                _command = null;
+                // 2) КРИТИЧНО: обнуляем Notification ПЕРЕД Dispose команды
+                if (_command != null)
+                {
+                    _command.Notification = null; // ← ВАЖНО для предотвращения утечек
+                    _command.Dispose();
+                    _command = null;
+                }
 
+                // 3) Закрываем и освобождаем соединение
                 if (_connection != null)
                 {
-                    try { _connection.Close(); } catch { }
+                    try 
+                    { 
+                        if (_connection.State != ConnectionState.Closed)
+                            _connection.Close(); 
+                    } 
+                    catch (Exception closeEx)
+                    {
+                        Debug.WriteLine($"[ServiceBroker] Error closing connection: {closeEx}");
+                    }
+                    
                     _connection.Dispose();
                     _connection = null;
                 }
@@ -125,6 +143,16 @@ namespace SewingProduction
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ServiceBroker] StopListening error: {ex}");
+                // Гарантируем освобождение даже при ошибке
+                try
+                {
+                    _command?.Dispose();
+                    _command = null;
+                    _connection?.Dispose();
+                    _connection = null;
+                    _dependency = null;
+                }
+                catch { }
                 return false;
             }
         }
@@ -171,47 +199,55 @@ namespace SewingProduction
 
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
+            Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
+            // защита от параллельных вызовов 
+            if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
+                return;
+
             try
             {
-                Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
-
                 // 1) SqlDependency шлёт Subscribe/Query при установке подписки — это НЕ изменение данных
                 if (e.Type != SqlNotificationType.Change)
                 {
-                    // просто переподписываемся и выходим
-                   // ResubscribeSafe();
-                    return;
-                }
-                if (e.Type != SqlNotificationType.Change)
-                {
                     Debug.WriteLine($"[ServiceBroker] Ignore notification: type={e.Type}, info={e.Info}, source={e.Source}");
-                    StartListening(_fields, _table); // если нужно переподписаться
+                    // просто переподписываемся и выходим
+                    // ResubscribeSafe();
                     return;
                 }
-                // 2) Для Change — фильтруем мусорные состояния
-                // Обычно изменения: Insert/Update/Delete.
-                // Invalid/Unknown — лучше переподписаться, но не дёргать UI.
-                if (e.Info != SqlNotificationInfo.Insert &&
-                    e.Info != SqlNotificationInfo.Update &&
-                    e.Info != SqlNotificationInfo.Delete)
-                {
-                  //  ResubscribeSafe();
-                    return;
-                }
-                // QN одноразовые — переподписка
+                // 2) QN одноразовые — переподписываемся ВСЕГДА на Change
+                Debug.WriteLine($"[ServiceBroker] Resubscribe: table={_table}, fields={_fields}");
                 StopListening();
                 if (!_brokerStopped && _flagStartListening)
                     StartListening(_fields, _table);
 
+                // 2) Для Change — фильтруем мусорные состояния
+                // Обычно изменения: Insert/Update/Delete.
+                var isDataChange =
+                           e.Info == SqlNotificationInfo.Insert ||
+                           e.Info == SqlNotificationInfo.Update ||
+                           e.Info == SqlNotificationInfo.Delete ||
+                           e.Info == SqlNotificationInfo.Merge;
+
+                if (!isDataChange)
+                {
+                    Debug.WriteLine($"[ServiceBroker] Change ignored (no UI): info={e.Info}, source={e.Source}");
+                    return;
+                }
+
                 // Вызов наружу (тонко!)
+                Debug.WriteLine($"[ServiceBroker] RaiseChanged: table={_table}");
                 await RaiseChangedAsync(_table, changedFieldsCsv: null);
-               // Debug.WriteLine($"[ServiceBroker:{_id}] Notification: table=...");
+                // Debug.WriteLine($"[ServiceBroker:{_id}] Notification: table=...");
 
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
-               // ResubscribeSafe();
+                // ResubscribeSafe();
+            }
+            finally
+            {
+                Interlocked.Exchange(ref _onChangeGate, 0);
             }
         }
 

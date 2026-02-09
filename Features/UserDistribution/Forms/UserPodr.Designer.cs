@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            customGridControlPodr = new Core.Class.CustomGridControl();
+            customGridControlPodr = new SewingProduction.Core.Class.CustomGridControl();
             gridViewPodr = new DevExpress.XtraGrid.Views.Grid.GridView();
             IsSelectedPodr = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEditPodr = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -38,7 +38,7 @@
             PodrID = new DevExpress.XtraGrid.Columns.GridColumn();
             PodrTableID = new DevExpress.XtraGrid.Columns.GridColumn();
             UserPodrID = new DevExpress.XtraGrid.Columns.GridColumn();
-            customGridControlUser = new Core.Class.CustomGridControl();
+            customGridControlUser = new SewingProduction.Core.Class.CustomGridControl();
             gridViewUser = new DevExpress.XtraGrid.Views.Grid.GridView();
             UserID = new DevExpress.XtraGrid.Columns.GridColumn();
             UserName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -194,6 +194,7 @@
             customGridControlUser.Size = new System.Drawing.Size(522, 560);
             customGridControlUser.TabIndex = 4;
             customGridControlUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewUser });
+            customGridControlUser.Click += customGridControlUser_Click;
             // 
             // gridViewUser
             // 

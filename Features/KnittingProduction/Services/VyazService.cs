@@ -427,7 +427,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             try
             {
                 await using var connection = _dbHelper.GetConnection();
-                string query = $"EXEC getSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
+                string query = $"EXEC GetSmenZadanyVyaz @xKmaIDNazn = {_idNazn}, @xKodProizv = {_kodProizv}, @xKodPodr = {_kodPodr}";
 
                 var list = (await connection.QueryAsync<SmenZadanyVyaz>(query, new Dictionary<string, object> { })).ToList();
                 //return result.ToList();
@@ -577,6 +577,34 @@ namespace SewingProduction.Features.KnittingProduction.Services
                     DataSource = new BindingList<PzvCheck>()
                 };
             }
+        }
+        public async Task<string> GetAnyMachineByNomZad(string? _nomZadany = null)
+        {
+            string sql;
+            var p = new DynamicParameters();
+
+            if (_nomZadany != null)        // поиск по № задания
+            {
+                sql = @"SELECT pszm.pszkmKmlID, mlv.kmlNumber, pszm.pszkmPszNom 
+                  FROM plan_sezon_zad_knitMachine pszm 
+                    LEFT JOIN knitMachineList_view mlv ON pszm.pszkmKmlID = mlv.kmlID
+                  WHERE pszm.pszkmPszNom = @nomZadany";
+                p.Add("@nomZadany", _nomZadany);
+                return await _dbHelper.ExecuteScalarAsync<string>(sql, p);
+            }
+            else
+            {
+                {
+                    return string.Empty;
+                }
+            }
+            //else                      // прямой поиск по kodd
+            //{
+            //    sql = "SELECT dbo.getFileEskizForKodd(@kod)";
+            //    p.Add("@kod", kod);
+            //}
+
+
         }
         #endregion
 

@@ -1,5 +1,7 @@
+using DevExpress.XtraReports.Native;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -68,9 +70,13 @@ namespace SewingProduction.Core.helpers
             int maxCascadeDepth = 3)
         {
             _reloadByObjectNameAsync = reloadByObjectNameAsync ?? throw new ArgumentNullException(nameof(reloadByObjectNameAsync));
+            //_debounce = debounce ?? TimeSpan.FromMilliseconds(500);
+            //_throttle = throttle; // null = отключен
+            //_maxWait = maxWait ?? TimeSpan.FromSeconds(3);
+
             _debounce = debounce ?? TimeSpan.FromMilliseconds(500);
-            _throttle = throttle; // null = отключен
-            _maxWait = maxWait ?? TimeSpan.FromSeconds(3);
+            _throttle = throttle ?? TimeSpan.FromMicroseconds(1500); // null = отключен
+            _maxWait = maxWait ?? TimeSpan.FromSeconds(2000);
             _maxBatchSize = Math.Max(1, maxBatchSize);
             _maxParallelReloads = Math.Max(1, maxParallelReloads);
             _maxCascadeDepth = Math.Max(1, maxCascadeDepth);
@@ -311,6 +317,10 @@ namespace SewingProduction.Core.helpers
                         if (timeSinceLastExecution < _throttle.Value)
                         {
                             Debug.WriteLine($"[EnhancedRefreshCoordinator] Throttled: {objectName} (last execution: {timeSinceLastExecution.TotalMilliseconds}ms ago)");
+                            lock (_lock)
+                            {
+                                _cascadeDepth.Remove(objectName);
+                            }
                             return;
                         }
                     }
@@ -343,7 +353,8 @@ namespace SewingProduction.Core.helpers
 
             try
             {
-                await _globalGate.WaitAsync(cts.Token).ConfigureAwait(false);
+                await _globalGate.WaitAsync().ConfigureAwait(false);
+                cts.Token.ThrowIfCancellationRequested();
                 try
                 {
                     Debug.WriteLine($"[EnhancedRefreshCoordinator] Executing: {objectName}");
@@ -363,9 +374,21 @@ namespace SewingProduction.Core.helpers
                     _globalGate.Release();
                 }
             }
+            catch (SqlException ex)
+            {
+                 Debug.WriteLine(
+                    $"SQL ERROR {ex.Number}: {ex.Message}\n" +
+                    $"Procedure: {ex.Procedure}\n" +
+                    $"Line: {ex.LineNumber}");
+                throw;
+            }
             catch (OperationCanceledException)
             {
                 Debug.WriteLine($"[EnhancedRefreshCoordinator] Cancelled: {objectName}");
+                lock (_lock)
+                {
+                    _cascadeDepth.Remove(objectName);
+                }
             }
             catch (Exception ex)
             {
@@ -399,7 +422,15 @@ namespace SewingProduction.Core.helpers
                 _debounceCts = null;
                 _maxWaitCts = null;
             }
+            List<CancellationTokenSource> inflight;
+            List<SemaphoreSlim> locks;
 
+            lock (_lock)
+            {
+                inflight = _inflightCts.Values.ToList();
+                locks = _objectLocks.Values.ToList();
+                Debug.WriteLine(inflight.ToString(), "dispose");
+            }
             foreach (var cts in _inflightCts.Values)
             {
                 cts.Cancel();

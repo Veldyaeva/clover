@@ -268,7 +268,7 @@ namespace SewingProduction.form
         }
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.StopListening();
+        //    _serviceBroker.StopBroker();
         }
 
     }

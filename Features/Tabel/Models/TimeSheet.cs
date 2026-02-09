@@ -82,6 +82,8 @@ namespace SewingProduction.Features.Tabel.Models
         public decimal tsplPart { get; set; }
         public decimal tsplPartOf {  get; set; }
         public int ts_plan { get; set; }
+        public int podrTableID { get; set; }
+
 
 
 
