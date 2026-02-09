@@ -105,7 +105,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly System.Windows.Forms.Timer _blinkCheckTimer = new System.Windows.Forms.Timer();
         private readonly System.Windows.Forms.Timer _blinkTimer = new System.Windows.Forms.Timer();
         private bool _isBlinking;
+        private bool _isGroupRowCellHandlerAttached;
         private string _lastBlinkWindowKey;
+        private GridGroupSummaryItem _planChasGroupSummaryItem;
+        private GridGroupSummaryItem _factChasGroupSummaryItem;
         private DateTime _blinkEndTime;
         private Color _buttonDefaultBackColor;
         private Color _planFooterColor;
@@ -163,7 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbController = new ServiceBrokerController(this);
                 dataLayoutControl1.DataSource = _planBindingSource;
 
-                //ConfigureAdvBandedGridColumns();
+                ConfigureAdvBandedGridColumns();
 
                 var dbHelper = new DatabaseHelper();
                 IKnitterRepository repo = new KnitterRepository(dbHelper);
@@ -198,36 +201,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
                 advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
 
-                #region advBandedGridView1
-                advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
-                // group summaries
-                GridGroupSummaryItem item = new GridGroupSummaryItem()
-                {
-                    FieldName = "PlanChas_UI",
-                    SummaryType = DevExpress.Data.SummaryItemType.Sum,
-                    ShowInGroupColumnFooter = advBandedGridView1.Columns["PlanChas_UI"]
-                };
-                advBandedGridView1.GroupSummary.Add(item);
-
-                item = new GridGroupSummaryItem()
-                {
-                    FieldName = "FactChas_UI",
-                    SummaryType = SummaryItemType.Sum,
-                    ShowInGroupColumnFooter = advBandedGridView1.Columns["FactChas_UI"]
-                };
-                advBandedGridView1.GroupSummary.Add(item);
-                advBandedGridView1.Columns["ID"].Group();
-
-                // Handle this event to paint group row cells manually
-                advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
-                {
-                    e.Appearance.BackColor = Color.BlanchedAlmond;
-                    e.Appearance.FillRectangle(e.Cache, e.Bounds);
-                    e.Appearance.ForeColor = Color.DimGray;
-                    e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
-                    e.Handled = true;
-                };
-                #endregion
+                ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -250,7 +224,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _sbController = new ServiceBrokerController(this);
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 dataLayoutControl1.DataSource = _planBindingSource;
-               // ConfigureAdvBandedGridColumns();
+                ConfigureAdvBandedGridColumns();
                 PlanZagrVyazGridControl.DataSource = _planBindingSource;
                 // Детализация на втором уровне настраивается в Designer: advBandedGridView1 является шаблоном уровня "ArtNom"
                 this.Load += async (s, e) =>
@@ -277,36 +251,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
                 advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
                 advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
-                #region advBandedGridView1
-                advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
-                // group summaries
-                GridGroupSummaryItem item = new GridGroupSummaryItem()
-                {
-                    FieldName = "PlanChas_UI",
-                    SummaryType = DevExpress.Data.SummaryItemType.Sum,
-                    ShowInGroupColumnFooter = advBandedGridView1.Columns["PlanChas_UI"]
-                };
-                advBandedGridView1.GroupSummary.Add(item);
-
-                item = new GridGroupSummaryItem()
-                {
-                    FieldName = "FactChas_UI",
-                    SummaryType = SummaryItemType.Sum,
-                    ShowInGroupColumnFooter = advBandedGridView1.Columns["FactChas_UI"]
-                };
-                advBandedGridView1.GroupSummary.Add(item);
-      //          advBandedGridView1.Columns["ID"].Group();
-
-                // Handle this event to paint group row cells manually
-                advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
-                {
-                    e.Appearance.BackColor = Color.BlanchedAlmond;
-                    e.Appearance.FillRectangle(e.Cache, e.Bounds);
-                    e.Appearance.ForeColor = Color.DimGray;
-                    e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
-                    e.Handled = true;
-                };
-                #endregion
+                ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -438,102 +383,80 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void ConfigureAdvBandedGridColumns()
         {
-            // Конфигурация колонок задана в Designer.cs
-            //// Дополнительная настройка: группировка второго уровня (advBandedGridView1)
-            //if (advBandedGridView1 == null)
-            //    return;
+            if (advBandedGridView1 == null)
+                return;
 
-            //// 1) Единая скрытая колонка с готовым заголовком группы
-            //var headerCol = advBandedGridView1.Columns.ColumnByFieldName("__Header");
-            //if (headerCol == null)
-            //{
-            //    headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-            //    {
-            //        FieldName = "__Header",
-            //        Caption = "Header",
-            //        UnboundType = DevExpress.Data.UnboundColumnType.String,
-            //        // Строка заголовка: Пачка | Расчёт | Размер | Кол-во
-            //       // UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
-            //        Visible = true,
-            //        OptionsColumn = { ShowInCustomizationForm = false }
-            //    };
-            //    advBandedGridView1.Columns.Add(headerCol);
-            //}
+            advBandedGridView1.BeginUpdate();
+            try
+            {
+                var headerCol = advBandedGridView1.Columns.ColumnByFieldName("__Header");
+                if (headerCol == null)
+                {
+                    headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+                    {
+                        FieldName = "__Header",
+                        Caption = "Header",
+                        UnboundType = DevExpress.Data.UnboundColumnType.String,
+                        UnboundExpression = "Concat('№пачки: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+                        Visible = false,
+                        OptionsColumn = { ShowInCustomizationForm = false }
+                    };
+                    advBandedGridView1.Columns.Add(headerCol);
+                }
 
-            //// 2) Сбрасываем прошлую группировку и группируем только по __Header
-            //advBandedGridView1.BeginUpdate();
-            //try
-            //{
-            //    advBandedGridView1.ClearGrouping();
+                advBandedGridView1.ClearGrouping();
+                headerCol.GroupIndex = 0;
 
-            //    headerCol.GroupIndex = 0;
-
-            //    //// Сортировка по номеру операции внутри группы
-            //    //var opNum = bandedGridColumn11 ?? advBandedGridView1.Columns.ColumnByFieldName("DisplayNumber");
-            //    //if (opNum != null)
-            //    //{
-            //    //    advBandedGridView1.SortInfo.Clear();
-            //    //    advBandedGridView1.SortInfo.Add(opNum, DevExpress.Data.ColumnSortOrder.Ascending);
-            //    //}
-
-            //    // 3) Внешний вид группы — показываем только текст, без имён полей
-            //    advBandedGridView1.GroupFormat = "{1}";
-            //    advBandedGridView1.OptionsView.ShowGroupedColumns = false;
-            //    advBandedGridView1.OptionsView.ShowGroupPanel = false;
-            //    advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
-
-
-                #region advBandedGridView1
+                advBandedGridView1.GroupFormat = "{1}";
+                advBandedGridView1.OptionsView.ShowGroupedColumns = false;
+                advBandedGridView1.OptionsView.ShowGroupPanel = false;
+                advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
                 advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
-                // group summaries
-                GridGroupSummaryItem item = new GridGroupSummaryItem()
+
+                var existingSummaries = advBandedGridView1.GroupSummary
+                    .OfType<GridGroupSummaryItem>()
+                    .Where(gs => gs.FieldName == "PlanChas_UI" || gs.FieldName == "FactChas_UI")
+                    .ToList();
+                foreach (var summary in existingSummaries)
+                {
+                    advBandedGridView1.GroupSummary.Remove(summary);
+                }
+
+                var planSummary = new GridGroupSummaryItem
                 {
                     FieldName = "PlanChas_UI",
-                    SummaryType = DevExpress.Data.SummaryItemType.Sum,
-                    ShowInGroupColumnFooter = advBandedGridView1.Columns[7]//advBandedGridView1.Columns["Часы назн"]
+                    SummaryType = SummaryItemType.Sum,
+                    DisplayFormat = "{0:0.##}"
                 };
-                advBandedGridView1.GroupSummary.Add(item);
+                advBandedGridView1.GroupSummary.Add(planSummary);
+                _planChasGroupSummaryItem = planSummary;
 
-                item = new GridGroupSummaryItem()
+                var factSummary = new GridGroupSummaryItem
                 {
                     FieldName = "FactChas_UI",
                     SummaryType = SummaryItemType.Sum,
-                    ShowInGroupColumnFooter = advBandedGridView1.Columns["Часы факт"]
+                    DisplayFormat = "{0:0.##}"
                 };
-                advBandedGridView1.GroupSummary.Add(item);
-            //    advBandedGridView1.Columns["ID"].Group();
+                advBandedGridView1.GroupSummary.Add(factSummary);
+                _factChasGroupSummaryItem = factSummary;
 
-                // Handle this event to paint group row cells manually
-                advBandedGridView1.CustomDrawGroupRowCell += (s, e) => {
-                    e.Appearance.BackColor = Color.BlanchedAlmond;
-                    e.Appearance.FillRectangle(e.Cache, e.Bounds);
-                    e.Appearance.ForeColor = Color.DimGray;
-                    e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
-                    e.Handled = true;
-                };
-                #endregion
-
-
-                // Групповой итог по "назначено в м/ч" (pzvChasNazn) в футере группы
-                //var assignedCol = gridColumn6 ?? advBandedGridView1.Columns.ColumnByFieldName("pzvChasNazn");
-                //if (assignedCol != null)
-                //{
-                //    _pzvChasNaznGroupSumItem = advBandedGridView1.GroupSummary
-                //        .OfType<DevExpress.XtraGrid.GridGroupSummaryItem>()
-                //        .FirstOrDefault(gs => gs.FieldName == "pzvChasNazn" && gs.SummaryType == DevExpress.Data.SummaryItemType.Sum);
-
-                //    if (_pzvChasNaznGroupSumItem == null)
-                //    {
-                //        _pzvChasNaznGroupSumItem = new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvChasNazn", assignedCol, "{0:0.00}");
-                //        advBandedGridView1.GroupSummary.Add(_pzvChasNaznGroupSumItem);
-                //    }
-                //}
-
-            //}
-            //finally
-            //{
-            //    advBandedGridView1.EndUpdate();
-            //}
+                if (!_isGroupRowCellHandlerAttached)
+                {
+                    advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
+                    {
+                        e.Appearance.BackColor = Color.BlanchedAlmond;
+                        e.Appearance.FillRectangle(e.Cache, e.Bounds);
+                        e.Appearance.ForeColor = Color.DimGray;
+                        e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
+                        e.Handled = true;
+                    };
+                    _isGroupRowCellHandlerAttached = true;
+                }
+            }
+            finally
+            {
+                advBandedGridView1.EndUpdate();
+            }
         }
 
         /// <summary>
@@ -1275,6 +1198,71 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        private int? PromptFactQuantity(int defaultQty)
+        {
+            using (var form = new DevExpress.XtraEditors.XtraForm())
+            using (var inputFont = new Font(Font.FontFamily, Font.Size + 8f, FontStyle.Bold))
+            using (var labelFont = new Font(Font.FontFamily, Font.Size + 2f, FontStyle.Regular))
+            {
+                form.Text = "Завершение операции";
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.FormBorderStyle = FormBorderStyle.FixedDialog;
+                form.MaximizeBox = false;
+                form.MinimizeBox = false;
+                form.ShowInTaskbar = false;
+                form.ClientSize = new Size(520, 220);
+
+                var label = new DevExpress.XtraEditors.LabelControl
+                {
+                    Text = "Количество отвязанных изделий",
+                    Font = labelFont,
+                    AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None,
+                    Bounds = new Rectangle(20, 20, 480, 40)
+                };
+
+                var input = new DevExpress.XtraEditors.TextEdit
+                {
+                    Font = inputFont,
+                    Bounds = new Rectangle(20, 70, 480, 60),
+                    Text = defaultQty.ToString()
+                };
+                input.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+                input.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+                input.Properties.MaskSettings.Set("mask", "d");
+                input.Properties.UseMaskAsDisplayFormat = true;
+
+                var okButton = new DevExpress.XtraEditors.SimpleButton
+                {
+                    Text = "OK",
+                    DialogResult = DialogResult.OK,
+                    Bounds = new Rectangle(260, 150, 110, 40)
+                };
+
+                var cancelButton = new DevExpress.XtraEditors.SimpleButton
+                {
+                    Text = "Отмена",
+                    DialogResult = DialogResult.Cancel,
+                    Bounds = new Rectangle(390, 150, 110, 40)
+                };
+
+                form.Controls.Add(label);
+                form.Controls.Add(input);
+                form.Controls.Add(okButton);
+                form.Controls.Add(cancelButton);
+                form.AcceptButton = okButton;
+                form.CancelButton = cancelButton;
+
+                var result = form.ShowDialog(this);
+                if (result != DialogResult.OK)
+                    return null;
+
+                if (int.TryParse(input.Text, out int qty))
+                    return qty;
+
+                return null;
+            }
+        }
+
         /// <summary>
         /// Запрашивает у пользователя фактическое количество, отражает его в колонке "Кол-во факт (шт)" и устанавливает дату окончания.
         /// </summary>
@@ -1293,10 +1281,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 defaultQty = currentRow.pzvKolNazn;
 
             // Диалог ввода количества отвязанных изделий
-            var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
-                "Количество отвязанных изделий",
-                "Завершение операции",
-                defaultQty);
+            var qtyObj = PromptFactQuantity(defaultQty);
             if (qtyObj == null)
                 return; // отмена
             if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > defaultQty)
@@ -1794,8 +1779,70 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 return false;
 
             string trimmed = segment.TrimStart();
-            return trimmed.StartsWith("Пачка:", StringComparison.OrdinalIgnoreCase)
+            return trimmed.StartsWith("№пачки:", StringComparison.OrdinalIgnoreCase)
                 || trimmed.StartsWith("Размер:", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private int GetGroupSummaryLeftEdge(AdvBandedGridView view, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo info)
+        {
+            if (view == null || info == null)
+                return info?.Bounds.Right ?? 0;
+
+            var viewInfo = view.GetViewInfo() as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo;
+            if (viewInfo == null)
+                return info.Bounds.Right;
+
+            int left = info.Bounds.Right;
+            var planCol = view.Columns.ColumnByFieldName("PlanChas_UI");
+            var factCol = view.Columns.ColumnByFieldName("FactChas_UI");
+            var columns = new[] { planCol, factCol };
+            foreach (var col in columns)
+            {
+                if (col == null || !col.Visible)
+                    continue;
+
+                var colInfo = viewInfo.ColumnsInfo[col];
+                if (colInfo != null)
+                    left = Math.Min(left, colInfo.Bounds.Left);
+            }
+
+            return left;
+        }
+
+        private void DrawGroupSummaryValue(
+            AdvBandedGridView view,
+            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo viewInfo,
+            int rowHandle,
+            GridGroupSummaryItem summaryItem,
+            string fieldName,
+            DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+            if (summaryItem == null || viewInfo == null)
+                return;
+
+            var column = view.Columns.ColumnByFieldName(fieldName);
+            if (column == null || !column.Visible)
+                return;
+
+            var colInfo = viewInfo.ColumnsInfo[column];
+            if (colInfo == null)
+                return;
+
+            var value = view.GetGroupSummaryValue(rowHandle, summaryItem);
+            if (value == null || value == DBNull.Value)
+                return;
+
+            string displayFormat = summaryItem.DisplayFormat;
+            string text = string.IsNullOrWhiteSpace(displayFormat)
+                ? value.ToString()
+                : string.Format(System.Globalization.CultureInfo.CurrentCulture, displayFormat, value);
+
+            using (var format = new StringFormat(StringFormatFlags.NoWrap))
+            {
+                format.Alignment = StringAlignment.Far;
+                format.LineAlignment = StringAlignment.Center;
+                e.Graphics.DrawString(text, view.Appearance.GroupRow.Font, e.Appearance.GetForeBrush(e.Cache), colInfo.Bounds, format);
+            }
         }
 
         private void AdvBandedGridView1_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
@@ -1826,12 +1873,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (left > textBounds.Left)
                 textBounds = new Rectangle(left, textBounds.Top, Math.Max(0, textBounds.Right - left), textBounds.Height);
 
+            int summaryLeft = GetGroupSummaryLeftEdge(view, info);
+            if (summaryLeft > textBounds.Left)
+            {
+                int width = Math.Max(0, summaryLeft - textBounds.Left - 4);
+                textBounds = new Rectangle(textBounds.Left, textBounds.Top, width, textBounds.Height);
+            }
+
             using (var largeFont = new Font(baseFont.FontFamily, largeSize, largeStyle))
             using (var smallFont = new Font(baseFont.FontFamily, smallSize, smallStyle))
             using (var format = new StringFormat(StringFormatFlags.NoWrap))
             {
                 format.Alignment = StringAlignment.Near;
                 format.LineAlignment = StringAlignment.Center;
+
+                using (var shadeBrush = new SolidBrush(Color.FromArgb(24, Color.Red)))
+                {
+                    e.Graphics.FillRectangle(shadeBrush, textBounds);
+                }
 
                 float x = textBounds.Left;
                 string[] parts = groupText.Split(new[] { " | " }, StringSplitOptions.None);
@@ -1853,6 +1912,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         x += sepSize.Width;
                     }
                 }
+            }
+
+            var viewInfo = view.GetViewInfo() as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo;
+            if (viewInfo != null)
+            {
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _planChasGroupSummaryItem, "PlanChas_UI", e);
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _factChasGroupSummaryItem, "FactChas_UI", e);
             }
 
             e.Handled = true;

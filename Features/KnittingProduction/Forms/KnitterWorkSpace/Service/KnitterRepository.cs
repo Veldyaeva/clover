@@ -64,11 +64,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 var map = new ConcurrentDictionary<int, KnitterPZVModel>();
 
-                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
-                // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
-                // !!!!: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).-- и переставлять местави часы и кол назн и факт --не нужно переставлять
+                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня
+                // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты
+                // !!!! при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты) -- и переставлять местави часы и кол назн и факт --не нужно переставлять
                 using (var grid = await connection.QueryMultipleAsync(
-                  "dbo.GetPlanZagrVyazNorm_ByTab4",
+                  "dbo.GetPlanZagrVyazNorm_ByTab3",
                     new
                     {
                         tab,
