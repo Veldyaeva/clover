@@ -3017,13 +3017,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             MessageBox.Show("Операция не относится к вязальному подразделению, нельзя изменять В/М!");
                             return;
                         }
-                        int _kmlID = _dbHelper.ExecuteScalar($"SELECT pszkmKmlID " +
-                            $"FROM plan_sezon_zad_knitMachine pszm " +
-                            $"WHERE pszm.pszkmPszNom = '{record.olNomZad}' and pszkmKnitClass = {record.olIdVyazClass}");
+                        //int _kmlID = _dbHelper.ExecuteScalar($"SELECT pszkmKmlID " +
+                        //    $"FROM plan_sezon_zad_knitMachine pszm " +
+                        //    $"WHERE pszm.pszkmPszNom = '{record.olNomZad}' and pszkmKnitClass = {record.olIdVyazClass}");
+                        string query = @"SELECT pszm.pszkmKmlID, mlv.kmlNumber " +
+                            @"FROM plan_sezon_zad_knitMachine pszm " +
+                            @"  LEFT JOIN knitMachineList_view mlv ON pszm.pszkmKmlID = mlv.kmlID " +
+                            @"WHERE pszm.pszkmPszNom = @PszNom and pszkmKnitClass = @KnitClass";
+                        DataTable machineInfo = _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@PszNom", record.olNomZad }, { "@KnitClass", record.olIdVyazClass } });
+
+                        int _kmlID = Convert.ToInt32(machineInfo.Rows[0]["pszkmKmlID"]);
+                        string _kmlNumber = Convert.ToString(machineInfo.Rows[0]["kmlNumber"]);
+
                         if (_kmlID != curr.kwsmlKmlID && record.olPzvKmlID == 0)
                         {
                             var _result = MessageBox.Show(
-                                "Внимание! Назначаемая машина не совпадает с плановой. Продолжить?",
+                                $"Внимание! Операция {record.olNomOper} {record.olOperName} " +
+                                $"\n Назначаемая машина ({curr.kmlNumber}) не совпадает с плановой ({_kmlNumber}). Продолжить?",
                                 "",
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning);
