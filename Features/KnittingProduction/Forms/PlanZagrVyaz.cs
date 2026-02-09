@@ -1909,6 +1909,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 textBoxPzvYearPachSearch.VisibleLogic = false;
                 textBoxPzvYearPachSearch.VisiblePermission = false;
 
+                layoutControlItem47.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem48.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem49.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem50.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem51.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem52.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+
                 _lifetimeCts = new CancellationTokenSource();
                 _loadCts = new CancellationTokenSource();
                 InitObjectRestartMap();
