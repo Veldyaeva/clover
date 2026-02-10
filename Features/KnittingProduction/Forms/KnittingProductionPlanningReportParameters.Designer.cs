@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnittingProductionPlanningReportParameters));
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             textBoxExecMonth = new CustomTextBoxEx();
             customSimpleButton2 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();

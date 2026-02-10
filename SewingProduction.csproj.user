@@ -52,9 +52,6 @@
     <Compile Update="Core\Class\CustomControls\CustomToggleSwitch.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Core\Class\ServiceBrokerFormBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Core\Class\SP_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +88,9 @@
     <Compile Update="Features\CardByNom\Forms\NomLookUp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\KnittingProduction\Forms\KnittingProductionAnalytics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,9 +107,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Features\KnittingProduction\Forms\KnitterWorkSpace.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
@@ -167,6 +164,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\CalculatorDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Tabel\Forms\ChooseUin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Tabel\Forms\EmployeeTransfer .cs">

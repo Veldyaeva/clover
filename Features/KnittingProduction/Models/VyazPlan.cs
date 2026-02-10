@@ -175,6 +175,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int kmlID { get; set; }
         [NotMapped] public int SyncSelection { get; set; } = 0;
         [NotMapped] public int Gradacia { get; set; }
+        [NotMapped] public int yearPlan { get; set; }
     }
     public class RzvPachListByNom
     {
@@ -477,7 +478,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public string pzvArticul { get; set; }
         [NotMapped] public string pzvNomZad { get; set; }
         [NotMapped] public int pzvNom { get; set; }
-        [NotMapped] public int n_pach { get; set; }
+        [NotMapped] public int nPach { get; set; }
+        [NotMapped] public string pachKod { get; set; }
+        [NotMapped] public int yearPach { get; set; }
         [NotMapped] public int n { get; set; }
         [NotMapped] public int n1 { get; set; }
         [NotMapped] public string nomOper => $"{n}/{n1}";

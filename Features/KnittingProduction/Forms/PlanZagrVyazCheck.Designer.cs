@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.Features.KnittingProduction.Forms
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class PlanZagrVyazCheck
     {
@@ -29,7 +30,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanZagrVyazCheck));
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             labelStatus = new SewingProduction.Core.Class.CustomLabel();
             comboBoxPodrVyazList = new CustomComboBox();
