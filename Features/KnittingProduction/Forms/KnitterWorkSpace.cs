@@ -13,6 +13,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
 using DevExpress.XtraSpreadsheet.Model;
+using Newtonsoft.Json.Serialization;
 using SewingProduction;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.helpers;
@@ -33,6 +34,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
+using DevExpress.XtraEditors;
 
 #nullable enable
 namespace SewingProduction.Features.KnittingProduction.Forms

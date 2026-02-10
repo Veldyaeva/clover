@@ -194,6 +194,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             advBandedGridView1.Appearance.GroupFooter.BorderColor = System.Drawing.Color.White;
             advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand39, gridBand40, gridBand41, gridBand42, gridBand43, gridBand44, gridBand45, gridBand46, gridBand27, gridBand29, gridBand56 });
             advBandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { bandedGridColumn11, bandedGridColumn12, bandedGridColumn13, bandedGridColumn14, bandedGridColumn16, bandedGridColumn15, bandedGridColumn17, bandedGridColumn26, bandedGridColumn18, bandedGridColumn19, bandedGridColumn20, bandedGridColumn21, bandedGridColumn22, bandedGridColumn23, bandedGridColumn27, bandedGridColumn24, bandedGridColumn31 });
+            advBandedGridView1.DetailHeight = 4038;
             advBandedGridView1.GridControl = PlanZagrVyazGridControl;
             advBandedGridView1.GroupFormat = "{1}";
             advBandedGridView1.Name = "advBandedGridView1";
@@ -201,6 +202,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             advBandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
             advBandedGridView1.OptionsDetail.AllowZoomDetail = false;
             advBandedGridView1.OptionsMenu.ShowSummaryItemMode = DevExpress.Utils.DefaultBoolean.True;
+            advBandedGridView1.OptionsPrint.MaxMergedCellHeight = 1080;
             advBandedGridView1.OptionsView.ColumnAutoWidth = true;
             advBandedGridView1.OptionsView.ShowColumnHeaders = false;
             advBandedGridView1.OptionsView.ShowDetailButtons = false;
@@ -529,6 +531,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3.ChildGridLevelName = "ArtNom";
             bandedGridView3.ColumnPanelRowHeight = 10;
             bandedGridView3.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { gridColumn1, gridColumn2, gridColumn3, gridColumn4, gridColumn5, gridColumn6, bandedGridColumn33, gridColumn7, gridColumn10, bandedGridColumn28, bandedGridColumn25, gridColumn8, gridColumn9 });
+            bandedGridView3.DetailHeight = 4038;
             bandedGridView3.GridControl = PlanZagrVyazGridControl;
             bandedGridView3.Name = "bandedGridView3";
             bandedGridView3.OptionsDetail.AllowExpandEmptyDetails = true;
