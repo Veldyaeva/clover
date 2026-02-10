@@ -122,16 +122,16 @@
     <value>..\Resources\sneg.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="new" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TeamWorkIcons\new.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\TeamWorkIcons\new.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="moveup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\moveup.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\moveup.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="save_32x321" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save_32x321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="movedown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\movedown.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\movedown.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="save_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -146,7 +146,7 @@
     <value>..\Resources\saveto_32x321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="convertto" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\convertto.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\convertto.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="saveto_32x322" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\saveto_32x322.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -170,7 +170,7 @@
     <value>..\Resources\saveto_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\undo.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.2, Version=24.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\undo.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v25.2, Version=25.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="save_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

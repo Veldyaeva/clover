@@ -117,26 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="DevExpress.Data.v24.2" name="DevExpress.Data.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-  <data name="buttonImageOptions1.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <assembly alias="DevExpress.Data.v25.2" name="DevExpress.Data.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="buttonImageOptions1.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v25.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjIsIFZlcnNpb249MjQuMi43
-        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
-        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAABgDAAAC77u/
-        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
-        IHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
-        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
-        MTYgMTYiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLlJlZHtmaWxsOiNEMTFDMUM7fQoJLkJs
-        YWNre2ZpbGw6IzcyNzI3Mjt9CgkuQmx1ZXtmaWxsOiMxMTc3RDc7fQoJLkdyZWVue2ZpbGw6IzAzOUMy
-        Mzt9CgkuWWVsbG93e2ZpbGw6I0ZGQjExNTt9CgkuV2hpdGV7ZmlsbDojRkZGRkZGO30KCS5zdDB7b3Bh
-        Y2l0eTowLjU7fQoJLnN0MXtvcGFjaXR5OjAuNzU7fQoJLnN0MntvcGFjaXR5OjAuMjU7fQo8L3N0eWxl
-        Pg0KICA8ZyBpZD0iUmVjdXJyZW50QXBwb2ludG1lbnRfMV8iPg0KICAgIDxwYXRoIGQ9Ik0xNCwydjVI
-        OWwxLjgtMS44QzEwLjEsNC41LDkuMSw0LDgsNEM2LjEsNCw0LjYsNS4zLDQuMSw3SDIuMUMyLjYsNC4y
-        LDUsMiw4LDJjMS43LDAsMy4xLDAuNyw0LjIsMS44TDE0LDJ6ICAgIE04LDEyYy0xLjEsMC0yLjEtMC41
-        LTIuOC0xLjJMNyw5SDIuMUgydjVsMS44LTEuOEM0LjksMTMuMyw2LjMsMTQsOCwxNGMzLDAsNS40LTIu
-        Miw1LjktNWgtMi4xQzExLjQsMTAuNyw5LjksMTIsOCwxMnoiIGNsYXNzPSJCbGFjayIgLz4NCiAgPC9n
-        Pg0KPC9zdmc+Cw==
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI1LjIsIFZlcnNpb249MjUu
+        Mi40LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUB
+        AAAAHURldkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAA
+        ABgDAAAC77u/PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0i
+        MHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0
+        cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8x
+        OTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJs
+        ZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTYgMTYiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJ
+        LlJlZHtmaWxsOiNEMTFDMUM7fQoJLkJsYWNre2ZpbGw6IzcyNzI3Mjt9CgkuQmx1ZXtmaWxsOiMx
+        MTc3RDc7fQoJLkdyZWVue2ZpbGw6IzAzOUMyMzt9CgkuWWVsbG93e2ZpbGw6I0ZGQjExNTt9Cgku
+        V2hpdGV7ZmlsbDojRkZGRkZGO30KCS5zdDB7b3BhY2l0eTowLjU7fQoJLnN0MXtvcGFjaXR5OjAu
+        NzU7fQoJLnN0MntvcGFjaXR5OjAuMjU7fQo8L3N0eWxlPg0KICA8ZyBpZD0iUmVjdXJyZW50QXBw
+        b2ludG1lbnRfMV8iPg0KICAgIDxwYXRoIGQ9Ik0xNCwydjVIOWwxLjgtMS44QzEwLjEsNC41LDku
+        MSw0LDgsNEM2LjEsNCw0LjYsNS4zLDQuMSw3SDIuMUMyLjYsNC4yLDUsMiw4LDJjMS43LDAsMy4x
+        LDAuNyw0LjIsMS44TDE0LDJ6ICAgIE04LDEyYy0xLjEsMC0yLjEtMC41LTIuOC0xLjJMNyw5SDIu
+        MUgydjVsMS44LTEuOEM0LjksMTMuMyw2LjMsMTQsOCwxNGMzLDAsNS40LTIuMiw1LjktNWgtMi4x
+        QzExLjQsMTAuNyw5LjksMTIsOCwxMnoiIGNsYXNzPSJCbGFjayIgLz4NCiAgPC9nPg0KPC9zdmc+
+        Cw==
 </value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />

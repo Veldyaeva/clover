@@ -305,8 +305,6 @@ namespace SewingProduction.Features.Articul
         }
         private async Task getArticulFromSQlAsync(string kod)
         {
-
-
             try
             {
                 // отображение панели загрузки
@@ -317,10 +315,8 @@ namespace SewingProduction.Features.Articul
 
                 if (_articulByKod != null)
                 {
-
                     await this.InvokeAsync(() =>
                     {
-
                         bsArticul.DataSource = _articulByKod; // Привязываем данные к форме
                     });
                 }

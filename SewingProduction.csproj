@@ -16,118 +16,7 @@
     <Optimize>True</Optimize>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Core\helpers\GridOverlayLoader — копия.cs" />
-    <Compile Remove="Core\helpers\ServiceBrokerHelper_.cs" />
-    <Compile Remove="Core\helpers\ServiceBrokerHelper__.cs" />
-    <Compile Remove="Core\services\ServiceBrokerService_.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\Form2.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\Form2.Designer.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace!111.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Models\TaskCandidate.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\KnitterDataService.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\TaskSelector.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\_KnitterRepository.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz_.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz_.Designer.cs" />
-    <Compile Remove="Features\KnittingProduction\Forms\PlanZagrVyaz__.cs" />
-    <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
-    <Compile Remove="Features\Settings.cs" />
-    <Compile Remove="Features\Settings.Designer.cs" />
-    <Compile Remove="Features\TeamWork\Forms\HistoryLog.cs" />
-    <Compile Remove="Features\TeamWork\Forms\HistoryLog.Designer.cs" />
-    <Compile Remove="Features\TeamWork\Forms\NormRaskrNew_old.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork.Designer_.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork.Events_old.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork.Helpers_old.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork.WorkDivisions1.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork.WorkDivisions_old.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork_AdvanceTW.Designer_.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork_AdvanceTW_old.cs" />
-    <Compile Remove="Features\TeamWork\Forms\TeamWork_old.cs" />
-    <Compile Remove="Features\TeamWork\Forms\_TeamWork.Designer.cs" />
-    <Compile Remove="Features\TeamWork\Forms\_TeamWork.Helpers.cs" />
-    <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
-    <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
-    <Compile Remove="Features\TeamWork\Helpers\CopyHelper_old.cs" />
-    <Compile Remove="Features\TeamWork\Helpers\NormRaskManager.cs" />
-    <Compile Remove="Features\TeamWork\Helpers\NormRaszManager.cs" />
-    <Compile Remove="Features\TeamWork\Helpers\TWGridHelper_old.cs" />
-    <Compile Remove="Features\TeamWork\Models\ArtNormN_.cs" />
-    <Compile Remove="Features\TeamWork\Models\ArtNormN_old.cs" />
-    <Compile Remove="Features\TeamWork\Models\MyDataANN_old.cs" />
-    <Compile Remove="Features\TeamWork\Models\NormRasz1.cs" />
-    <Compile Remove="Features\TeamWork\Models\NormRasz2.cs" />
-    <Compile Remove="Features\TeamWork\Models\NormRasz_old.cs" />
-    <Compile Remove="Features\TeamWork\Services\TeamWorkBuffer___.cs" />
-    <Compile Remove="Report\PostReportFio.cs" />
-    <Compile Remove="Report\PostReportFio.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
-    <EmbeddedResource Remove="Features\KnittingProduction\Forms\Form2.resx" />
-    <EmbeddedResource Remove="Features\KnittingProduction\Forms\PlanZagrVyaz_.resx" />
-    <EmbeddedResource Remove="Features\TeamWork\Forms\HistoryLog.resx" />
-    <EmbeddedResource Remove="Report\PostReportFio.resx" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Features\CardByNom\Forms\CardByNom.cs~RF1e89fe20.TMP" />
-    <None Remove="Features\Features.zip" />
-    <None Remove="Features\TeamWork.zip" />
-    <None Remove="Features\TeamWork1.zip" />
-    <None Remove="Features\TeamWork\Forms\исходная НАДИНА SQL процедура .txt" />
-    <None Remove="Features\_TeamWork.zip" />
-    <None Remove="Help\Features\TeamWork\Forms\img\1.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\10.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\11.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\12.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\13.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\14.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\2.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\3.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\4.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\5.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\6.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\7.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\8.png" />
-    <None Remove="Help\Features\TeamWork\Forms\img\9.png" />
-    <None Remove="Help\Features\TeamWork\Forms\TeamWork.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\ActionHistory.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\AdminForm.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\AllRole.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\AllUser.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\Dictionary.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\ActionHistory.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AdminForm.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AllRole-SetForm.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AllRole-SetUser.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AllRole.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser-AddUser.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser-AddUser2.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser-SetRole.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\Dictionary-add.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\Dictionary-add2.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\Dictionary.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\RoleColumn.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\RoleColumnY.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\Settings.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\UserHierarchy.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\Img\UserProfile.png" />
-    <None Remove="Help\Features\UserDistribution\Forms\RoleColumn.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\Settings.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\UserHierarchy.html" />
-    <None Remove="Help\Features\UserDistribution\Forms\UserProfile.html" />
-    <None Remove="Help\Help.html" />
-    <None Remove="Resources\cat-cat-rainbow.gif" />
-    <None Remove="Resources\cat_square.gif" />
-    <None Remove="Resources\gray_spinner.gif" />
-    <None Remove="Resources\icons8-сердце.gif" />
-    <None Remove="Resources\loading_dude.gif" />
-  </ItemGroup>
-
+ 
   <ItemGroup>
     <Content Include="Help\Features\TeamWork\Forms\img\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -270,7 +159,7 @@
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
     <PackageReference Include="Dapper" Version="2.1.66" />
-    <PackageReference Include="DevExpress.Win.Design" Version="24.2.7" />
+    <PackageReference Include="DevExpress.Win.Design" Version="25.2.4" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.10" />

@@ -261,6 +261,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
@@ -467,6 +468,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem24).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             SuspendLayout();
             // 
             // gridEditAdRazm
@@ -562,6 +564,7 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutCommonArticul.AccessibleRole = System.Windows.Forms.AccessibleRole.Pane;
             dataLayoutCommonArticul.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             dataLayoutCommonArticul.Controls.Add(customLayoutControl1);
+            dataLayoutCommonArticul.Controls.Add(chbArh);
             dataLayoutCommonArticul.Controls.Add(cbTkan);
             dataLayoutCommonArticul.Controls.Add(txtSeb_rekom);
             dataLayoutCommonArticul.Controls.Add(txtSum_sebraskr);
@@ -850,7 +853,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSeb_rekom
             // 
-            txtSeb_rekom.Location = new System.Drawing.Point(678, 403);
+            txtSeb_rekom.Location = new System.Drawing.Point(678, 407);
             txtSeb_rekom.Name = "txtSeb_rekom";
             txtSeb_rekom.ObjectName = null;
             txtSeb_rekom.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -865,7 +868,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSum_sebraskr
             // 
-            txtSum_sebraskr.Location = new System.Drawing.Point(759, 118);
+            txtSum_sebraskr.Location = new System.Drawing.Point(759, 139);
             txtSum_sebraskr.Name = "txtSum_sebraskr";
             txtSum_sebraskr.ObjectName = null;
             txtSum_sebraskr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -881,7 +884,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtKod
             // 
-            txtKod.Location = new System.Drawing.Point(768, 350);
+            txtKod.Location = new System.Drawing.Point(768, 358);
             txtKod.Name = "txtKod";
             txtKod.ObjectName = null;
             txtKod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -896,7 +899,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtKoef
             // 
-            txtKoef.Location = new System.Drawing.Point(759, 319);
+            txtKoef.Location = new System.Drawing.Point(759, 329);
             txtKoef.Name = "txtKoef";
             txtKoef.ObjectName = null;
             txtKoef.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -911,7 +914,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSeb_proizv
             // 
-            txtSeb_proizv.Location = new System.Drawing.Point(759, 291);
+            txtSeb_proizv.Location = new System.Drawing.Point(759, 302);
             txtSeb_proizv.Name = "txtSeb_proizv";
             txtSeb_proizv.ObjectName = null;
             txtSeb_proizv.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -927,7 +930,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtKoef_d
             // 
-            txtKoef_d.Location = new System.Drawing.Point(759, 260);
+            txtKoef_d.Location = new System.Drawing.Point(759, 273);
             txtKoef_d.Name = "txtKoef_d";
             txtKoef_d.ObjectName = null;
             txtKoef_d.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -942,7 +945,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtKoef_pr
             // 
-            txtKoef_pr.Location = new System.Drawing.Point(759, 233);
+            txtKoef_pr.Location = new System.Drawing.Point(759, 247);
             txtKoef_pr.Name = "txtKoef_pr";
             txtKoef_pr.ObjectName = null;
             txtKoef_pr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -957,7 +960,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSeb_dop
             // 
-            txtSeb_dop.Location = new System.Drawing.Point(759, 202);
+            txtSeb_dop.Location = new System.Drawing.Point(759, 218);
             txtSeb_dop.Name = "txtSeb_dop";
             txtSeb_dop.ObjectName = null;
             txtSeb_dop.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -972,7 +975,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSeb_z
             // 
-            txtSeb_z.Location = new System.Drawing.Point(759, 174);
+            txtSeb_z.Location = new System.Drawing.Point(759, 192);
             txtSeb_z.Name = "txtSeb_z";
             txtSeb_z.ObjectName = null;
             txtSeb_z.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -987,7 +990,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSum_komplnum
             // 
-            txtSum_komplnum.Location = new System.Drawing.Point(759, 147);
+            txtSum_komplnum.Location = new System.Drawing.Point(759, 166);
             txtSum_komplnum.Name = "txtSum_komplnum";
             txtSum_komplnum.ObjectName = null;
             txtSum_komplnum.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -1003,7 +1006,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSum_strvznos
             // 
-            txtSum_strvznos.Location = new System.Drawing.Point(759, 91);
+            txtSum_strvznos.Location = new System.Drawing.Point(759, 113);
             txtSum_strvznos.Name = "txtSum_strvznos";
             txtSum_strvznos.ObjectName = null;
             txtSum_strvznos.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -1019,7 +1022,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSum_dopopl
             // 
-            txtSum_dopopl.Location = new System.Drawing.Point(759, 63);
+            txtSum_dopopl.Location = new System.Drawing.Point(759, 86);
             txtSum_dopopl.Name = "txtSum_dopopl";
             txtSum_dopopl.ObjectName = null;
             txtSum_dopopl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -1050,7 +1053,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSum_zarpl
             // 
-            txtSum_zarpl.Location = new System.Drawing.Point(759, 36);
+            txtSum_zarpl.Location = new System.Drawing.Point(759, 60);
             txtSum_zarpl.Name = "txtSum_zarpl";
             txtSum_zarpl.ObjectName = null;
             txtSum_zarpl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -2030,7 +2033,7 @@ namespace SewingProduction.Features.Articul.Forms
             Root.CustomizationFormText = "Основная информация";
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutCommonArticul, layoutSostav, layoutNorms, layoutSeb, layoutTkans, layoutBrak, layoutOpis_t, layoutControlGroup9, emptySpaceItem3, layoutControlItem82, layoutSumZP, emptySpaceItem4, layoutControlItem3, emptySpaceItem1, emptySpaceItem7, layoutControlItem83, layoutControlGroup5 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutCommonArticul, layoutSostav, layoutNorms, layoutSeb, layoutTkans, layoutBrak, layoutOpis_t, layoutControlGroup9, emptySpaceItem3, layoutControlItem82, layoutSumZP, emptySpaceItem4, layoutControlItem3, emptySpaceItem1, emptySpaceItem7, layoutControlItem83, layoutControlGroup5, layoutControlItem19 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(851, 803);
             // 
@@ -2646,21 +2649,21 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutSumZP
             // 
             layoutSumZP.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem89, layoutControlItem91, layoutControlItem88, layoutControlItem90, layoutControlItem96, layoutControlItem97, layoutControlItem92, layoutControlItem93, layoutControlItem94, layoutControlItem95, layoutControlItem98, layoutControlItem100, layoutControlItem101 });
-            layoutSumZP.Location = new System.Drawing.Point(663, 0);
+            layoutSumZP.Location = new System.Drawing.Point(663, 24);
             layoutSumZP.Name = "layoutControlGroup11";
             layoutSumZP.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutSumZP.Size = new System.Drawing.Size(168, 420);
+            layoutSumZP.Size = new System.Drawing.Size(168, 400);
             layoutSumZP.Text = "ЗП";
             // 
             // layoutControlItem89
             // 
             layoutControlItem89.Control = txtSum_dopopl;
             layoutControlItem89.CustomizationFormText = "доп.оплата";
-            layoutControlItem89.Location = new System.Drawing.Point(0, 27);
+            layoutControlItem89.Location = new System.Drawing.Point(0, 26);
             layoutControlItem89.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem89.Name = "layoutControlItem89";
             layoutControlItem89.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem89.Size = new System.Drawing.Size(162, 28);
+            layoutControlItem89.Size = new System.Drawing.Size(162, 27);
             layoutControlItem89.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem89.Text = "доп.оплата";
             layoutControlItem89.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2670,10 +2673,10 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem91
             // 
             layoutControlItem91.Control = txtSum_sebraskr;
-            layoutControlItem91.Location = new System.Drawing.Point(0, 82);
+            layoutControlItem91.Location = new System.Drawing.Point(0, 79);
             layoutControlItem91.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem91.Name = "layoutControlItem91";
-            layoutControlItem91.Size = new System.Drawing.Size(162, 29);
+            layoutControlItem91.Size = new System.Drawing.Size(162, 27);
             layoutControlItem91.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem91.Text = "раскрой";
             layoutControlItem91.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2687,7 +2690,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem88.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem88.Name = "layoutControlItem88";
             layoutControlItem88.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem88.Size = new System.Drawing.Size(162, 27);
+            layoutControlItem88.Size = new System.Drawing.Size(162, 26);
             layoutControlItem88.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem88.Text = "зарплата РТ";
             layoutControlItem88.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2697,12 +2700,12 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem90
             // 
             layoutControlItem90.Control = txtSum_strvznos;
-            layoutControlItem90.Location = new System.Drawing.Point(0, 55);
+            layoutControlItem90.Location = new System.Drawing.Point(0, 53);
             layoutControlItem90.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem90.Name = "layoutControlItem90";
             layoutControlItem90.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem90.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem90.Size = new System.Drawing.Size(162, 27);
+            layoutControlItem90.Size = new System.Drawing.Size(162, 26);
             layoutControlItem90.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem90.Text = "ст.взносы";
             layoutControlItem90.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2712,11 +2715,11 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem96
             // 
             layoutControlItem96.Control = txtKoef_d;
-            layoutControlItem96.Location = new System.Drawing.Point(0, 224);
+            layoutControlItem96.Location = new System.Drawing.Point(0, 213);
             layoutControlItem96.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem96.Name = "layoutControlItem96";
             layoutControlItem96.OptionsTableLayoutItem.RowIndex = 4;
-            layoutControlItem96.Size = new System.Drawing.Size(162, 31);
+            layoutControlItem96.Size = new System.Drawing.Size(162, 29);
             layoutControlItem96.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem96.Text = "коэф.ВЭД и ДГ";
             layoutControlItem96.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2728,12 +2731,12 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem97.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             layoutControlItem97.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem97.Control = txtSeb_proizv;
-            layoutControlItem97.Location = new System.Drawing.Point(0, 255);
+            layoutControlItem97.Location = new System.Drawing.Point(0, 242);
             layoutControlItem97.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem97.Name = "layoutControlItem97";
             layoutControlItem97.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem97.OptionsTableLayoutItem.RowIndex = 4;
-            layoutControlItem97.Size = new System.Drawing.Size(162, 28);
+            layoutControlItem97.Size = new System.Drawing.Size(162, 27);
             layoutControlItem97.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem97.Text = "произв.себ.";
             layoutControlItem97.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2743,11 +2746,11 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem92
             // 
             layoutControlItem92.Control = txtSum_komplnum;
-            layoutControlItem92.Location = new System.Drawing.Point(0, 111);
+            layoutControlItem92.Location = new System.Drawing.Point(0, 106);
             layoutControlItem92.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem92.Name = "layoutControlItem92";
             layoutControlItem92.OptionsTableLayoutItem.RowIndex = 2;
-            layoutControlItem92.Size = new System.Drawing.Size(162, 27);
+            layoutControlItem92.Size = new System.Drawing.Size(162, 26);
             layoutControlItem92.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem92.Text = "компл. и нумер.";
             layoutControlItem92.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2757,12 +2760,12 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem93
             // 
             layoutControlItem93.Control = txtSeb_z;
-            layoutControlItem93.Location = new System.Drawing.Point(0, 138);
+            layoutControlItem93.Location = new System.Drawing.Point(0, 132);
             layoutControlItem93.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem93.Name = "layoutControlItem93";
             layoutControlItem93.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem93.OptionsTableLayoutItem.RowIndex = 2;
-            layoutControlItem93.Size = new System.Drawing.Size(162, 28);
+            layoutControlItem93.Size = new System.Drawing.Size(162, 26);
             layoutControlItem93.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem93.Text = "зарплата";
             layoutControlItem93.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2772,11 +2775,11 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem94
             // 
             layoutControlItem94.Control = txtSeb_dop;
-            layoutControlItem94.Location = new System.Drawing.Point(0, 166);
+            layoutControlItem94.Location = new System.Drawing.Point(0, 158);
             layoutControlItem94.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem94.Name = "layoutControlItem94";
             layoutControlItem94.OptionsTableLayoutItem.RowIndex = 3;
-            layoutControlItem94.Size = new System.Drawing.Size(162, 31);
+            layoutControlItem94.Size = new System.Drawing.Size(162, 29);
             layoutControlItem94.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem94.Text = "пр.затраты";
             layoutControlItem94.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2786,12 +2789,12 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem95
             // 
             layoutControlItem95.Control = txtKoef_pr;
-            layoutControlItem95.Location = new System.Drawing.Point(0, 197);
+            layoutControlItem95.Location = new System.Drawing.Point(0, 187);
             layoutControlItem95.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem95.Name = "layoutControlItem95";
             layoutControlItem95.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem95.OptionsTableLayoutItem.RowIndex = 3;
-            layoutControlItem95.Size = new System.Drawing.Size(162, 27);
+            layoutControlItem95.Size = new System.Drawing.Size(162, 26);
             layoutControlItem95.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem95.Text = "коэф.затрат";
             layoutControlItem95.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2801,11 +2804,11 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem98
             // 
             layoutControlItem98.Control = txtKoef;
-            layoutControlItem98.Location = new System.Drawing.Point(0, 283);
+            layoutControlItem98.Location = new System.Drawing.Point(0, 269);
             layoutControlItem98.MinSize = new System.Drawing.Size(135, 26);
             layoutControlItem98.Name = "layoutControlItem98";
             layoutControlItem98.OptionsTableLayoutItem.RowIndex = 5;
-            layoutControlItem98.Size = new System.Drawing.Size(162, 31);
+            layoutControlItem98.Size = new System.Drawing.Size(162, 29);
             layoutControlItem98.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem98.Text = "коэф.";
             layoutControlItem98.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2815,10 +2818,10 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem100
             // 
             layoutControlItem100.Control = txtKod;
-            layoutControlItem100.Location = new System.Drawing.Point(0, 314);
+            layoutControlItem100.Location = new System.Drawing.Point(0, 298);
             layoutControlItem100.MinSize = new System.Drawing.Size(144, 26);
             layoutControlItem100.Name = "layoutControlItem100";
-            layoutControlItem100.Size = new System.Drawing.Size(162, 35);
+            layoutControlItem100.Size = new System.Drawing.Size(162, 31);
             layoutControlItem100.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem100.Text = "расч.реком.цена";
             layoutControlItem100.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2831,7 +2834,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem101.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             layoutControlItem101.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem101.Control = txtSeb_rekom;
-            layoutControlItem101.Location = new System.Drawing.Point(0, 349);
+            layoutControlItem101.Location = new System.Drawing.Point(0, 329);
             layoutControlItem101.Name = "layoutControlItem101";
             layoutControlItem101.Size = new System.Drawing.Size(162, 44);
             layoutControlItem101.Text = "рекомендованная цена";
@@ -2842,10 +2845,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // emptySpaceItem4
             // 
-            emptySpaceItem4.Location = new System.Drawing.Point(663, 420);
+            emptySpaceItem4.Location = new System.Drawing.Point(663, 424);
             emptySpaceItem4.MinSize = new System.Drawing.Size(104, 24);
             emptySpaceItem4.Name = "emptySpaceItem4";
-            emptySpaceItem4.Size = new System.Drawing.Size(168, 86);
+            emptySpaceItem4.Size = new System.Drawing.Size(168, 82);
             emptySpaceItem4.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             // 
             // layoutControlItem3
@@ -2941,10 +2944,10 @@ namespace SewingProduction.Features.Articul.Forms
             chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbArh.Font = new System.Drawing.Font("Arial", 10F);
             chbArh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            chbArh.Location = new System.Drawing.Point(1187, 34);
+            chbArh.Location = new System.Drawing.Point(675, 12);
             chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbArh.Name = "chbArh";
-            chbArh.Size = new System.Drawing.Size(82, 20);
+            chbArh.Size = new System.Drawing.Size(164, 20);
             chbArh.TabIndex = 4;
             chbArh.Text = "Архив";
             chbArh.UseVisualStyleBackColor = true;
@@ -3300,6 +3303,14 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem24.Size = new System.Drawing.Size(113, 26);
             layoutControlItem24.TextVisible = false;
             // 
+            // layoutControlItem19
+            // 
+            layoutControlItem19.Control = chbArh;
+            layoutControlItem19.Location = new System.Drawing.Point(663, 0);
+            layoutControlItem19.Name = "layoutControlItem19";
+            layoutControlItem19.Size = new System.Drawing.Size(168, 24);
+            layoutControlItem19.TextVisible = false;
+            // 
             // ArticulEditAdvance
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -3310,7 +3321,6 @@ namespace SewingProduction.Features.Articul.Forms
             Controls.Add(dataLayoutCommonArticul);
             Controls.Add(pictureBoxArticul);
             Controls.Add(customSimpleButton1);
-            Controls.Add(chbArh);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "ArticulEditAdvance";
             Text = "ArticulEditAdvance";
@@ -3523,6 +3533,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem24).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ResumeLayout(false);
         }
 
@@ -3764,5 +3775,6 @@ namespace SewingProduction.Features.Articul.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem24;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
     }
 }
