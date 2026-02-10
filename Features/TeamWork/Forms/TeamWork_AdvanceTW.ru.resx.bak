@@ -666,20 +666,20 @@
   <data name="layoutControlGroup1.Text" xml:space="preserve">
     <value>  </value>
   </data>
-  <assembly alias="DevExpress.Utils.v25.2" name="DevExpress.Utils.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-  <data name="layoutControlGroup10.CustomHeaderButtons6" type="DevExpress.Utils.SuperToolTip, DevExpress.Utils.v25.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <assembly alias="DevExpress.Utils.v24.2" name="DevExpress.Utils.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="layoutControlGroup10.CustomHeaderButtons6" type="DevExpress.Utils.SuperToolTip, DevExpress.Utils.v24.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFpEZXZFeHByZXNzLlV0aWxzLnYyNS4yLCBWZXJzaW9uPTI1
-        LjIuNC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEM
-        AwAAAFlEZXZFeHByZXNzLkRhdGEudjI1LjIsIFZlcnNpb249MjUuMi40LjAsIEN1bHR1cmU9bmV1
-        dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURldkV4cHJlc3MuVXRp
-        bHMuU3VwZXJUb29sVGlwBQAAAA1BbGxvd0h0bWxUZXh0EUZpeGVkVG9vbFRpcFdpZHRoCkl0ZW1z
-        Q291bnQJaXRlbVR5cGUwBWl0ZW0wBAAABAQfRGV2RXhwcmVzcy5VdGlscy5EZWZhdWx0Qm9vbGVh
-        bgMAAAABCCVEZXZFeHByZXNzLlV0aWxzLlN1cGVyVG9vbFRpcEl0ZW1UeXBlAgAAACVEZXZFeHBy
-        ZXNzLlV0aWxzLlRvb2xUaXBTZXBhcmF0b3JJdGVtAgAAAAIAAAAF/P///x9EZXZFeHByZXNzLlV0
-        aWxzLkRlZmF1bHRCb29sZWFuAQAAAAd2YWx1ZV9fAAgDAAAAAgAAAAABAAAABfv///8lRGV2RXhw
-        cmVzcy5VdGlscy5TdXBlclRvb2xUaXBJdGVtVHlwZQEAAAAHdmFsdWVfXwAIAgAAAAIAAAAJBgAA
-        AAUGAAAAJURldkV4cHJlc3MuVXRpbHMuVG9vbFRpcFNlcGFyYXRvckl0ZW0AAAAAAgAAAAs=
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFpEZXZFeHByZXNzLlV0aWxzLnYyNC4yLCBWZXJzaW9uPTI0LjIu
+        Ny4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI4OGQxNzU0ZDcwMGU0OWEMAwAAAFlE
+        ZXZFeHByZXNzLkRhdGEudjI0LjIsIFZlcnNpb249MjQuMi43LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVi
+        bGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURldkV4cHJlc3MuVXRpbHMuU3VwZXJUb29s
+        VGlwBQAAAA1BbGxvd0h0bWxUZXh0EUZpeGVkVG9vbFRpcFdpZHRoCkl0ZW1zQ291bnQJaXRlbVR5cGUw
+        BWl0ZW0wBAAABAQfRGV2RXhwcmVzcy5VdGlscy5EZWZhdWx0Qm9vbGVhbgMAAAABCCVEZXZFeHByZXNz
+        LlV0aWxzLlN1cGVyVG9vbFRpcEl0ZW1UeXBlAgAAACVEZXZFeHByZXNzLlV0aWxzLlRvb2xUaXBTZXBh
+        cmF0b3JJdGVtAgAAAAIAAAAF/P///x9EZXZFeHByZXNzLlV0aWxzLkRlZmF1bHRCb29sZWFuAQAAAAd2
+        YWx1ZV9fAAgDAAAAAgAAAAABAAAABfv///8lRGV2RXhwcmVzcy5VdGlscy5TdXBlclRvb2xUaXBJdGVt
+        VHlwZQEAAAAHdmFsdWVfXwAIAgAAAAIAAAAJBgAAAAUGAAAAJURldkV4cHJlc3MuVXRpbHMuVG9vbFRp
+        cFNlcGFyYXRvckl0ZW0AAAAAAgAAAAs=
 </value>
   </data>
   <data name="layoutControlGroup10.CustomizationFormText" xml:space="preserve">
