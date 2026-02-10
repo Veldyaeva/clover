@@ -1,6 +1,9 @@
 ﻿using Dapper;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraDiagram.Bars;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraSpreadsheet.UI;
+using SewingProduction.Core.helpers;
 using SewingProduction.Extensions;
 using SewingProduction.Features.CuttingProduction.Models;
 using SewingProduction.Features.CuttingProduction.Services;
@@ -17,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SewingProduction.Core.helpers.BindingSourceHelper;
 
 namespace SewingProduction.Features.Tabel.Forms
 {
@@ -31,12 +35,14 @@ namespace SewingProduction.Features.Tabel.Forms
         private static TabelDataService _tabelDataService;
         public BindingSource _scheduleOfWork;
         public BindingSource _zlPodr;
+        public BindingSource _spisokNewBindingSource;
         public SpisokConnect()
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
+            _spisokNewBindingSource = new BindingSource();
         }
         private async Task InitializeBindingsAsync()
         {
@@ -58,16 +64,17 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridSpisokDateU.FieldName = "date_u";
                 gridSpisokUin.FieldName = "s_uin";
                 gridSpisokOrgName.FieldName = "orgName";
-                gridSpisokGrafik.FieldName = "idSchedule";
                 gridSpisokPodr1c.FieldName = "podrName";
                 gridSpisokPodr.FieldName = "gr";
-                gridSpisokGrafik.FieldName = "scheduleName";
+                gridColumnTabno.FieldName = "tabno";
+                gridSpisokVerif1c.FieldName = "verif1c";
+                gridSpisokVerifParsec.FieldName = "verifParsec";
                 //var items = await _tabelDataService.GetScheduleOfWorkAsync();
                 //_scheduleOfWork = new BindingSource { DataSource = items.ToList() };
                 //repositoryItemLookUpEdit1.DataSource = _scheduleOfWork;
                 //repositoryItemLookUpEdit1.DisplayMember = "scheduleName";
                 //repositoryItemLookUpEdit1.ValueMember = "id";
-                var zlPodr = await _tabelDataService.GetzlPodrAsync();
+                var zlPodr = await _tabelDataService.GetZlComboPodrAsync();
                 _zlPodr = new BindingSource { DataSource = zlPodr.ToList() };
                 repositoryItemLookUpEdit2.DataSource = _zlPodr;
                 repositoryItemLookUpEdit2.DisplayMember = "naimen";
@@ -120,6 +127,32 @@ namespace SewingProduction.Features.Tabel.Forms
                 await _logger.LogEventAsync($"Не удалось найти данные spisok", "GetListForLinkingsAsync");
             }
         }
+        private async Task LoadAsyncSpisokNew()
+        {
+            _spisokNewBindingSource.Clear();
+            _spisokNewBindingSource.ResetBindings(false);
+            var spisokData = await _tabelDataService.GetListForLinkingsAsync();
+            if (spisokData != null)
+            {
+                await _logger.LogEventAsync($"Получены данные ListForLinking", "LoadCuttingForm");
+
+                await this.InvokeAsync(() =>
+                {
+                    _currentSpisokData = spisokData;                // Обновляем текущую модель
+                    _spisokNewBindingSource.DataSource = _currentSpisokData; // Привязываем данные к форме
+                });
+
+                await _logger.LogEventAsync($"Данные ListForLinking успешно загружены", "LoadVyazPlanDataAsync");
+                //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
+                //_spisokBindingList.Add(spisokData[0]);
+                _spisokBindingSource.ResetBindings(false);
+
+            }
+            else
+            {
+                await _logger.LogEventAsync($"Не удалось найти данные spisok", "GetListForLinkingsAsync");
+            }
+        }
 
         private void customGridSpisokForLinking_Click(object sender, EventArgs e)
         {
@@ -131,10 +164,111 @@ namespace SewingProduction.Features.Tabel.Forms
 
             using (var connection = _dbHelper.GetConnection())
             {
-                string sql;
-                sql = $"UPDATE zl_spisok SET {e.Column.FieldName} = N'{e.Value}' WHERE uin = {Convert.ToInt32(gridView1.GetDataRow(e.RowHandle)["uin"])}";
-                _dbHelper.ExecuteNonQuery(sql, new Dictionary<string, object> { });
+                int rowHandle = gridView1.FocusedRowHandle;
+                string columnName = e.Column.FieldName;
+                if (columnName == "gr")
+                {
+                    int tabno = (int)gridView1.GetRowCellValue(rowHandle, "tabno");
+                    int value = (int)gridView1.GetRowCellValue(rowHandle, columnName);
+                    string sql;
+                    sql = $"UPDATE zl_spisok SET {columnName} = {value} WHERE tabno = {tabno}";
+                    _dbHelper.ExecuteNonQuery(sql, new Dictionary<string, object> { });
+                }
             }
+        }
+
+        private void gridView1_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.Clicks == 1)
+            {
+                OpenTimeCalculator(e.RowHandle, e.Column);
+            }
+        }
+        private async void OpenTimeCalculator(int rowHandle, GridColumn column)
+        {
+            if (rowHandle < 0 || column == null) return;
+            string lastName = gridView1.GetRowCellValue(rowHandle, "firstname").ToString();
+            string firstName = gridView1.GetRowCellValue(rowHandle, "middlename").ToString();
+            string middleName = gridView1.GetRowCellValue(rowHandle, "lastname").ToString();
+            int valueVerif1c = (int)gridView1.GetRowCellValue(rowHandle, "verif1c");
+            int tabno = (int)gridView1.GetRowCellValue(rowHandle, "tabno");
+            string naimenPodr = gridView1.GetRowCellValue(rowHandle, "naimen").ToString();
+            if (valueVerif1c == 1)
+            {
+                MessageBox.Show("Увязка с 1с не требуется!");
+                return;
+            }
+            using (var chooseForm = new ChooseUin(lastName, firstName, middleName,tabno,naimenPodr))
+            {
+                //Point mousePosition = Control.MousePosition;
+                //calculator.StartPosition = FormStartPosition.Manual;
+                //calculator.Location = mousePosition;
+                Point cursorPos = Cursor.Position;
+                Point safePosition = CalculateSafePosition(
+                    cursorPos,
+                    chooseForm.Size);
+
+                chooseForm.StartPosition = FormStartPosition.Manual;
+                chooseForm.Location = safePosition;
+                if (chooseForm.ShowDialog() == DialogResult.OK)
+                {
+                    _spisokNewBindingSource.Clear();
+                    _spisokNewBindingSource = new BindingSource { DataSource = await _tabelDataService.GetListForLinkingsAsync()};
+                    var changes = BindingSourceHelper.GetChanges<ListForLinking>(
+                      _spisokBindingSource,
+                      _spisokNewBindingSource,
+                      HashMode.All,
+                      keyProperties: new[] { "tabno" });
+                    BindingSourceHelper.ApplyChanges<ListForLinking>(
+                       _spisokBindingSource,
+                       changes,
+                       UpdateFieldsMode.All,
+                       keyProperties: new[] { "tabno" },
+                       gridView1);
+                }
+
+            }
+        }
+        public static Point CalculateSafePosition(Point desiredLocation, Size formSize)
+        {
+            // Получаем экран, на котором находится курсор
+            Screen screen = Screen.FromPoint(desiredLocation);
+            Rectangle workingArea = screen.WorkingArea;
+
+            int x = desiredLocation.X;
+            int y = desiredLocation.Y;
+
+            // Проверяем правую границу
+            if (x + formSize.Width > workingArea.Right)
+            {
+                // Не помещается справа - показываем слева от курсора
+                x = desiredLocation.X - formSize.Width - 10;
+
+                // Если и слева не помещается, прижимаем к левому краю
+                if (x < workingArea.Left)
+                {
+                    x = workingArea.Left;
+                }
+            }
+
+            // Проверяем нижнюю границу
+            if (y + formSize.Height > workingArea.Bottom)
+            {
+                // Не помещается снизу - показываем сверху от курсора
+                y = desiredLocation.Y - formSize.Height - 10;
+
+                // Если и сверху не помещается, прижимаем к верхнему краю
+                if (y < workingArea.Top)
+                {
+                    y = workingArea.Top;
+                }
+            }
+
+            // Дополнительная проверка левой и верхней границ
+            x = Math.Max(workingArea.Left, x);
+            y = Math.Max(workingArea.Top, y);
+
+            return new Point(x, y);
         }
     }
 }

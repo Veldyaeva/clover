@@ -299,7 +299,7 @@
             // xrLabel2
             // 
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[monthTxt] + \' \' + [year]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[monthTxt] + \' \' + ?year")});
             this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Arial", 12F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(447.907F, 44.17308F);
             this.xrLabel2.Multiline = true;

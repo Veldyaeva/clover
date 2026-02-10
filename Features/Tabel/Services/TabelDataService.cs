@@ -59,6 +59,25 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
         }
+        public async Task<List<zlPodr>> GetZlComboPodrAsync()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = "select gr , naimen from zlgr";
+
+                    var result = await connection.QueryAsync<zlPodr>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных zlPodr");
+                return null;
+            }
+        }
         public async Task<List<SpPodr>> GetzlPodrAsync()
         {
             try
@@ -78,7 +97,7 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
         }
-        public async Task<List<SpPodr>> GetSpPodrAsync(int idGroup,int idUser)
+        public async Task<List<SpPodr>> GetSpPodrAsync(int idGroup, int idUser)
         {
             try
             {
@@ -103,7 +122,7 @@ namespace SewingProduction.Features.Tabel.Services
                     {
                         return null;
                     }
-                    
+
                 }
 
             }
@@ -167,7 +186,7 @@ namespace SewingProduction.Features.Tabel.Services
             }
             catch (SqlException ex)
             {
-                 _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных userPodr");
+                _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных userPodr");
                 return 0;
             }
             catch (Exception ex)
@@ -204,9 +223,9 @@ namespace SewingProduction.Features.Tabel.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                        string query = $"select * from WorkTypesTabel where podrId = {idGroup} order by id";
-                        var result = await connection.QueryAsync<WorkTypes>(query, new Dictionary<string, object> { });
-                        return result.ToList();
+                    string query = $"select * from WorkTypesTabel where podrId = {idGroup} order by id";
+                    var result = await connection.QueryAsync<WorkTypes>(query, new Dictionary<string, object> { });
+                    return result.ToList();
                 }
 
             }
@@ -216,7 +235,7 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
         }
-        public bool CheckRecordsExistsOrionUser(string mg, int gr,int podrTabelId)
+        public bool CheckRecordsExistsOrionUser(string mg, int gr, int podrTabelId)
         {
             bool _isCountTabel;
             try
@@ -238,6 +257,29 @@ namespace SewingProduction.Features.Tabel.Services
             }
 
             return _isCountTabel;
+        }
+    
+        public async Task<List<Spisok1c>> GetSpisok1cAsync(string lastName, string firstName, string middleName)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+
+                    string query = $"select uin,tab1c,LastName,FirstName,MiddleName,bDay,orgName,podrName,date_p,date_u from spisok1c where trim(LastName) = trim('{lastName}') and trim(FirstName) =  trim('{firstName}') and trim(middleName) = trim('{middleName}') and sovm =0 ";
+
+                    var result = await connection.QueryAsync<Spisok1c>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
+                return null;
+            }
+            
         }
     }
 }
