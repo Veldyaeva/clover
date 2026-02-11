@@ -16,5 +16,7 @@ namespace SewingProduction.Features.Articul.Models
         public int id_gost { get; set; }
         public int ag_id_grupgost { get; set; }
         public string tk_name { get; set; }
+        public int tg_id_n { get; set; }
+        public int tgm_id_n { get; set; }
     }
 }
