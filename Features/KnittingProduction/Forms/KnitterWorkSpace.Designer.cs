@@ -403,7 +403,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand29.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand47, gridBand51 });
             gridBand29.Name = "gridBand29";
             gridBand29.VisibleIndex = 9;
-            gridBand29.Width = 181;
+            gridBand29.Width = 132;
             // 
             // gridBand47
             // 
@@ -412,7 +412,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand47.Columns.Add(bandedGridColumn31);
             gridBand47.Name = "gridBand47";
             gridBand47.VisibleIndex = 0;
-            gridBand47.Width = 118;
+            gridBand47.Width = 69;
             // 
             // bandedGridColumn22
             // 
@@ -420,7 +420,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn22.FieldName = "FactKol_UI";
             bandedGridColumn22.Name = "bandedGridColumn22";
             bandedGridColumn22.Visible = true;
-            bandedGridColumn22.Width = 118;
+            bandedGridColumn22.Width = 69;
             // 
             // bandedGridColumn31
             // 
@@ -452,7 +452,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand56.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand48, gridBand49, gridBand50 });
             gridBand56.Name = "gridBand56";
             gridBand56.VisibleIndex = 10;
-            gridBand56.Width = 250;
+            gridBand56.Width = 299;
             // 
             // gridBand48
             // 
@@ -460,7 +460,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand48.Columns.Add(bandedGridColumn18);
             gridBand48.Name = "gridBand48";
             gridBand48.VisibleIndex = 0;
-            gridBand48.Width = 69;
+            gridBand48.Width = 81;
             // 
             // bandedGridColumn18
             // 
@@ -468,7 +468,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn18.FieldName = "pzvDateStart";
             bandedGridColumn18.Name = "bandedGridColumn18";
             bandedGridColumn18.Visible = true;
-            bandedGridColumn18.Width = 69;
+            bandedGridColumn18.Width = 81;
             // 
             // gridBand49
             // 
@@ -476,7 +476,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand49.Columns.Add(bandedGridColumn19);
             gridBand49.Name = "gridBand49";
             gridBand49.VisibleIndex = 1;
-            gridBand49.Width = 83;
+            gridBand49.Width = 98;
             // 
             // bandedGridColumn19
             // 
@@ -484,7 +484,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn19.FieldName = "pzvDateEnd";
             bandedGridColumn19.Name = "bandedGridColumn19";
             bandedGridColumn19.Visible = true;
-            bandedGridColumn19.Width = 83;
+            bandedGridColumn19.Width = 98;
             // 
             // gridBand50
             // 
@@ -492,7 +492,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand50.Columns.Add(bandedGridColumn24);
             gridBand50.Name = "gridBand50";
             gridBand50.VisibleIndex = 2;
-            gridBand50.Width = 98;
+            gridBand50.Width = 120;
             // 
             // bandedGridColumn24
             // 
@@ -500,7 +500,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn24.FieldName = "pzvDateMast";
             bandedGridColumn24.Name = "bandedGridColumn24";
             bandedGridColumn24.Visible = true;
-            bandedGridColumn24.Width = 98;
+            bandedGridColumn24.Width = 120;
             // 
             // PlanZagrVyazGridControl
             // 
@@ -539,6 +539,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3.OptionsView.ShowColumnHeaders = false;
             bandedGridView3.OptionsView.ShowFooter = true;
             bandedGridView3.OptionsView.ShowGroupPanel = false;
+            bandedGridView3.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumn1, DevExpress.Data.ColumnSortOrder.Ascending) });
             // 
             // gridBand30
             // 

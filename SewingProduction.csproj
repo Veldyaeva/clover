@@ -17,6 +17,7 @@
   </PropertyGroup>
 
 
+
   <ItemGroup>
     <Content Include="Help\Features\TeamWork\Forms\img\1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

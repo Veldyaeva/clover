@@ -1439,6 +1439,32 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     setDate(masterRow, newValue);
                 }
+
+                // При старте операции фактические значения должны быть пустыми
+                if (column.FieldName == "pzvDateStart" && newValue != null && oldValue == null)
+                {
+                    row.FactKol_UI = 0;
+                    row.FactChas_UI = 0m;
+                    if (masterRow != null)
+                    {
+                        masterRow.FactKol_UI = 0;
+                        masterRow.FactChas_UI = 0m;
+                    }
+
+                    var factKolColumn = _view.Columns.ColumnByFieldName("FactKol_UI");
+                    if (factKolColumn != null)
+                    {
+                        _view.SetRowCellValue(rowHandle, factKolColumn, 0);
+                        _view.RefreshRowCell(rowHandle, factKolColumn);
+                    }
+
+                    var factChasColumn = _view.Columns.ColumnByFieldName("FactChas_UI");
+                    if (factChasColumn != null)
+                    {
+                        _view.SetRowCellValue(rowHandle, factChasColumn, 0m);
+                        _view.RefreshRowCell(rowHandle, factChasColumn);
+                    }
+                }
                 
                 // Если операция завершена (установлена дата окончания), убираем её из списка незавершённых
                 if (column.FieldName == "pzvDateEnd" && newValue != null && oldValue == null)
