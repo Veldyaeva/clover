@@ -158,7 +158,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 //    "FROM sp_articul sa " +
                 //    "   left join kompl k on sa.kod = k.kod_k " +
                 //    "WHERE sa.annID IS NULL and k.kod_k is null";//
-                                                                 "SELECT * FROM articulListGroupBySizeLabeltb where annId is null or annId = 0";
+                                                                 "SELECT * FROM articulListGroupBySizeLabel where annId is null or annId = 0";
                 await GridOverlayLoader.LoadListAsync(
                     gridControl_unboundArts,
                     _myDataArtList,

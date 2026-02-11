@@ -262,6 +262,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             result = result
                 .OrderBy(r => r.nrN ?? int.MaxValue)
                 .ThenBy(r => r.nrN1 ?? 0)
+                .ThenBy(r => r.pzvID)
                 .ToList();
 
 

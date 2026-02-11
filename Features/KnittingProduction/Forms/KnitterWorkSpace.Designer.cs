@@ -403,7 +403,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand29.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand47, gridBand51 });
             gridBand29.Name = "gridBand29";
             gridBand29.VisibleIndex = 9;
-            gridBand29.Width = 181;
+            gridBand29.Width = 132;
             // 
             // gridBand47
             // 
@@ -412,7 +412,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand47.Columns.Add(bandedGridColumn31);
             gridBand47.Name = "gridBand47";
             gridBand47.VisibleIndex = 0;
-            gridBand47.Width = 118;
+            gridBand47.Width = 69;
             // 
             // bandedGridColumn22
             // 
@@ -420,7 +420,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn22.FieldName = "FactKol_UI";
             bandedGridColumn22.Name = "bandedGridColumn22";
             bandedGridColumn22.Visible = true;
-            bandedGridColumn22.Width = 118;
+            bandedGridColumn22.Width = 69;
             // 
             // bandedGridColumn31
             // 
@@ -452,7 +452,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand56.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand48, gridBand49, gridBand50 });
             gridBand56.Name = "gridBand56";
             gridBand56.VisibleIndex = 10;
-            gridBand56.Width = 250;
+            gridBand56.Width = 299;
             // 
             // gridBand48
             // 
@@ -460,7 +460,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand48.Columns.Add(bandedGridColumn18);
             gridBand48.Name = "gridBand48";
             gridBand48.VisibleIndex = 0;
-            gridBand48.Width = 69;
+            gridBand48.Width = 81;
             // 
             // bandedGridColumn18
             // 
@@ -468,7 +468,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn18.FieldName = "pzvDateStart";
             bandedGridColumn18.Name = "bandedGridColumn18";
             bandedGridColumn18.Visible = true;
-            bandedGridColumn18.Width = 69;
+            bandedGridColumn18.Width = 81;
             // 
             // gridBand49
             // 
@@ -476,7 +476,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand49.Columns.Add(bandedGridColumn19);
             gridBand49.Name = "gridBand49";
             gridBand49.VisibleIndex = 1;
-            gridBand49.Width = 83;
+            gridBand49.Width = 98;
             // 
             // bandedGridColumn19
             // 
@@ -484,7 +484,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn19.FieldName = "pzvDateEnd";
             bandedGridColumn19.Name = "bandedGridColumn19";
             bandedGridColumn19.Visible = true;
-            bandedGridColumn19.Width = 83;
+            bandedGridColumn19.Width = 98;
             // 
             // gridBand50
             // 
@@ -492,7 +492,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand50.Columns.Add(bandedGridColumn24);
             gridBand50.Name = "gridBand50";
             gridBand50.VisibleIndex = 2;
-            gridBand50.Width = 98;
+            gridBand50.Width = 120;
             // 
             // bandedGridColumn24
             // 
@@ -500,7 +500,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridColumn24.FieldName = "pzvDateMast";
             bandedGridColumn24.Name = "bandedGridColumn24";
             bandedGridColumn24.Visible = true;
-            bandedGridColumn24.Width = 98;
+            bandedGridColumn24.Width = 120;
             // 
             // PlanZagrVyazGridControl
             // 
@@ -539,6 +539,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             bandedGridView3.OptionsView.ShowColumnHeaders = false;
             bandedGridView3.OptionsView.ShowFooter = true;
             bandedGridView3.OptionsView.ShowGroupPanel = false;
+            bandedGridView3.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridColumn1, DevExpress.Data.ColumnSortOrder.Ascending) });
             // 
             // gridBand30
             // 
@@ -834,14 +835,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // dateEdit1
             // 
             dateEdit1.EditValue = null;
-            dateEdit1.Location = new System.Drawing.Point(721, 12);
+            dateEdit1.Location = new System.Drawing.Point(725, 12);
             dateEdit1.Name = "dateEdit1";
             dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             dateEdit1.Properties.Appearance.Options.UseFont = true;
             dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.MaskSettings.Set("mask", "D");
-            dateEdit1.Size = new System.Drawing.Size(228, 32);
+            dateEdit1.Size = new System.Drawing.Size(226, 32);
             dateEdit1.StyleController = dataLayoutControl1;
             dateEdit1.TabIndex = 4;
             // 
@@ -849,9 +850,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             simpleButton2.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             simpleButton2.Appearance.Options.UseFont = true;
-            simpleButton2.Location = new System.Drawing.Point(953, 12);
+            simpleButton2.Location = new System.Drawing.Point(955, 12);
             simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new System.Drawing.Size(163, 30);
+            simpleButton2.Size = new System.Drawing.Size(162, 30);
             simpleButton2.StyleController = dataLayoutControl1;
             simpleButton2.TabIndex = 5;
             simpleButton2.Text = "Начать смену";
@@ -868,7 +869,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             TabGridLookUpEdit.Properties.NullText = "";
             TabGridLookUpEdit.Properties.PopupSizeable = false;
             TabGridLookUpEdit.Properties.PopupView = gridLookUpEdit1View;
-            TabGridLookUpEdit.Size = new System.Drawing.Size(61, 32);
+            TabGridLookUpEdit.Size = new System.Drawing.Size(65, 32);
             TabGridLookUpEdit.StyleController = dataLayoutControl1;
             TabGridLookUpEdit.TabIndex = 3;
             // 
@@ -919,9 +920,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem4.Control = dateEdit1;
-            layoutControlItem4.Location = new System.Drawing.Point(659, 0);
+            layoutControlItem4.Location = new System.Drawing.Point(663, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(282, 36);
+            layoutControlItem4.Size = new System.Drawing.Size(280, 36);
             layoutControlItem4.Text = "Дата";
             layoutControlItem4.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Left;
@@ -931,9 +932,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // layoutControlItem9
             // 
             layoutControlItem9.Control = simpleButton2;
-            layoutControlItem9.Location = new System.Drawing.Point(941, 0);
+            layoutControlItem9.Location = new System.Drawing.Point(943, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(167, 36);
+            layoutControlItem9.Size = new System.Drawing.Size(166, 36);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem5
@@ -944,7 +945,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem5.CustomizationFormText = "таб №  ";
             layoutControlItem5.Location = new System.Drawing.Point(525, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(134, 36);
+            layoutControlItem5.Size = new System.Drawing.Size(138, 36);
             layoutControlItem5.Text = "таб №  ";
             layoutControlItem5.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem5.TextSize = new System.Drawing.Size(64, 19);
@@ -952,7 +953,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(1108, 0);
+            emptySpaceItem1.Location = new System.Drawing.Point(1109, 0);
             emptySpaceItem1.Name = "emptySpaceItem1";
             emptySpaceItem1.Size = new System.Drawing.Size(22, 36);
             // 
@@ -960,9 +961,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             simpleLabelItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             simpleLabelItem1.AppearanceItemCaption.Options.UseFont = true;
-            simpleLabelItem1.Location = new System.Drawing.Point(1130, 0);
+            simpleLabelItem1.Location = new System.Drawing.Point(1131, 0);
             simpleLabelItem1.Name = "simpleLabelItem1";
-            simpleLabelItem1.Size = new System.Drawing.Size(179, 36);
+            simpleLabelItem1.Size = new System.Drawing.Size(178, 36);
             simpleLabelItem1.Text = " ";
             simpleLabelItem1.TextSize = new System.Drawing.Size(143, 19);
             // 
