@@ -1,25 +1,30 @@
 using DevExpress.CodeParser;
+using DevExpress.Data;
+using DevExpress.Utils;
+using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout;
-using DevExpress.XtraBars.Docking2010;
-using DevExpress.XtraEditors.ButtonsPanelControl;
+using DevExpress.XtraSpreadsheet.Model;
+using Newtonsoft.Json.Serialization;
+using SewingProduction;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.helpers;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Core.Models;
+using SewingProduction.Core.services;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
-using SewingProduction.Core.helpers;
-using SewingProduction.Core.interfaces;
-using SewingProduction.Core.services;
-using SewingProduction.Core.Models;
-using SewingProduction.Core.Class.Settings;
-using SewingProduction;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +34,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Label = System.Windows.Forms.Label;
-using DevExpress.XtraSpreadsheet.Model;
+using DevExpress.XtraEditors;
 
 #nullable enable
 namespace SewingProduction.Features.KnittingProduction.Forms
@@ -102,7 +107,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private readonly System.Windows.Forms.Timer _blinkCheckTimer = new System.Windows.Forms.Timer();
         private readonly System.Windows.Forms.Timer _blinkTimer = new System.Windows.Forms.Timer();
         private bool _isBlinking;
+        private bool _isGroupRowCellHandlerAttached;
         private string _lastBlinkWindowKey;
+        private GridGroupSummaryItem _planChasGroupSummaryItem;
+        private GridGroupSummaryItem _factChasGroupSummaryItem;
         private DateTime _blinkEndTime;
         private Color _buttonDefaultBackColor;
         private Color _planFooterColor;
@@ -192,6 +200,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
+                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
+                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
+
+                ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -239,6 +251,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
+                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
+                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
+                ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -370,77 +385,81 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private void ConfigureAdvBandedGridColumns()
         {
-            // Конфигурация колонок задана в Designer.cs
-            // Дополнительная настройка: группировка второго уровня (advBandedGridView1)
             if (advBandedGridView1 == null)
                 return;
 
-            // 1) Единая скрытая колонка с готовым заголовком группы
-            var headerCol = advBandedGridView1.Columns.ColumnByFieldName("__Header");
-            if (headerCol == null)
-            {
-                headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
-                {
-                    FieldName = "__Header",
-                    Caption = "Header",
-                    UnboundType = DevExpress.Data.UnboundColumnType.String,
-                    // Строка заголовка: Пачка | Расчёт | Размер | Кол-во
-                    UnboundExpression = "Concat('Пачка: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
-                    Visible = false,
-                    OptionsColumn = { ShowInCustomizationForm = false }
-                };
-                advBandedGridView1.Columns.Add(headerCol);
-            }
-
-            // 2) Сбрасываем прошлую группировку и группируем только по __Header
             advBandedGridView1.BeginUpdate();
             try
             {
-                advBandedGridView1.ClearGrouping();
+                var headerCol = advBandedGridView1.Columns.ColumnByFieldName("__Header");
+                if (headerCol == null)
+                {
+                    headerCol = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+                    {
+                        FieldName = "__Header",
+                        Caption = "Header",
+                        UnboundType = DevExpress.Data.UnboundColumnType.String,
+                        UnboundExpression = "Concat('№пачки: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+                        Visible = false,
+                        OptionsColumn = { ShowInCustomizationForm = false }
+                    };
+                    advBandedGridView1.Columns.Add(headerCol);
+                }
 
+                advBandedGridView1.ClearGrouping();
                 headerCol.GroupIndex = 0;
 
-                //// Сортировка по номеру операции внутри группы
-                //var opNum = bandedGridColumn11 ?? advBandedGridView1.Columns.ColumnByFieldName("DisplayNumber");
-                //if (opNum != null)
-                //{
-                //    advBandedGridView1.SortInfo.Clear();
-                //    advBandedGridView1.SortInfo.Add(opNum, DevExpress.Data.ColumnSortOrder.Ascending);
-                //}
-
-                // 3) Внешний вид группы — показываем только текст, без имён полей
                 advBandedGridView1.GroupFormat = "{1}";
                 advBandedGridView1.OptionsView.ShowGroupedColumns = false;
                 advBandedGridView1.OptionsView.ShowGroupPanel = false;
                 advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
+                advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
 
-                // Групповой итог по "назначено в м/ч" (pzvChasNazn) в футере группы
-                //var assignedCol = gridColumn6 ?? advBandedGridView1.Columns.ColumnByFieldName("pzvChasNazn");
-                //if (assignedCol != null)
-                //{
-                //    _pzvChasNaznGroupSumItem = advBandedGridView1.GroupSummary
-                //        .OfType<DevExpress.XtraGrid.GridGroupSummaryItem>()
-                //        .FirstOrDefault(gs => gs.FieldName == "pzvChasNazn" && gs.SummaryType == DevExpress.Data.SummaryItemType.Sum);
+                var existingSummaries = advBandedGridView1.GroupSummary
+                    .OfType<GridGroupSummaryItem>()
+                    .Where(gs => gs.FieldName == "PlanChas_UI" || gs.FieldName == "FactChas_UI")
+                    .ToList();
+                foreach (var summary in existingSummaries)
+                {
+                    advBandedGridView1.GroupSummary.Remove(summary);
+                }
 
-                //    if (_pzvChasNaznGroupSumItem == null)
-                //    {
-                //        _pzvChasNaznGroupSumItem = new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "pzvChasNazn", assignedCol, "{0:0.00}");
-                //        advBandedGridView1.GroupSummary.Add(_pzvChasNaznGroupSumItem);
-                //    }
-                //}
+                var planSummary = new GridGroupSummaryItem
+                {
+                    FieldName = "PlanChas_UI",
+                    SummaryType = SummaryItemType.Sum,
+                    DisplayFormat = "{0:0.##}"
+                };
+                advBandedGridView1.GroupSummary.Add(planSummary);
+                _planChasGroupSummaryItem = planSummary;
 
+                var factSummary = new GridGroupSummaryItem
+                {
+                    FieldName = "FactChas_UI",
+                    SummaryType = SummaryItemType.Sum,
+                    DisplayFormat = "{0:0.##}"
+                };
+                advBandedGridView1.GroupSummary.Add(factSummary);
+                _factChasGroupSummaryItem = factSummary;
+
+                if (!_isGroupRowCellHandlerAttached)
+                {
+                    advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
+                    {
+                        e.Appearance.BackColor = Color.BlanchedAlmond;
+                        e.Appearance.FillRectangle(e.Cache, e.Bounds);
+                        e.Appearance.ForeColor = Color.DimGray;
+                        e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
+                        e.Handled = true;
+                    };
+                    _isGroupRowCellHandlerAttached = true;
+                }
             }
             finally
             {
                 advBandedGridView1.EndUpdate();
             }
         }
-
-        // Пользовательская отрисовка группы больше не требуется — заголовок формируется колонкой __Header
-
-        // Сборка иерархии — вынесено в KnitterPlanPresenter
-
-        // master-detail логика перенесена в KnitterPlanPresenter
 
         /// <summary>
         /// Загружает данные из модели высокого уровня (не используется в текущей версии, оставлено для совместимости).
@@ -1181,6 +1200,71 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        private int? PromptFactQuantity(int defaultQty)
+        {
+            using (var form = new DevExpress.XtraEditors.XtraForm())
+            using (var inputFont = new Font(Font.FontFamily, Font.Size + 8f, FontStyle.Bold))
+            using (var labelFont = new Font(Font.FontFamily, Font.Size + 2f, FontStyle.Regular))
+            {
+                form.Text = "Завершение операции";
+                form.StartPosition = FormStartPosition.CenterParent;
+                form.FormBorderStyle = FormBorderStyle.FixedDialog;
+                form.MaximizeBox = false;
+                form.MinimizeBox = false;
+                form.ShowInTaskbar = false;
+                form.ClientSize = new Size(520, 220);
+
+                var label = new DevExpress.XtraEditors.LabelControl
+                {
+                    Text = "Количество отвязанных изделий",
+                    Font = labelFont,
+                    AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None,
+                    Bounds = new Rectangle(20, 20, 480, 40)
+                };
+
+                var input = new DevExpress.XtraEditors.TextEdit
+                {
+                    Font = inputFont,
+                    Bounds = new Rectangle(20, 70, 480, 60),
+                    Text = defaultQty.ToString()
+                };
+                input.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
+                input.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
+                input.Properties.MaskSettings.Set("mask", "d");
+                input.Properties.UseMaskAsDisplayFormat = true;
+
+                var okButton = new DevExpress.XtraEditors.SimpleButton
+                {
+                    Text = "OK",
+                    DialogResult = DialogResult.OK,
+                    Bounds = new Rectangle(260, 150, 110, 40)
+                };
+
+                var cancelButton = new DevExpress.XtraEditors.SimpleButton
+                {
+                    Text = "Отмена",
+                    DialogResult = DialogResult.Cancel,
+                    Bounds = new Rectangle(390, 150, 110, 40)
+                };
+
+                form.Controls.Add(label);
+                form.Controls.Add(input);
+                form.Controls.Add(okButton);
+                form.Controls.Add(cancelButton);
+                form.AcceptButton = okButton;
+                form.CancelButton = cancelButton;
+
+                var result = form.ShowDialog(this);
+                if (result != DialogResult.OK)
+                    return null;
+
+                if (int.TryParse(input.Text, out int qty))
+                    return qty;
+
+                return null;
+            }
+        }
+
         /// <summary>
         /// Запрашивает у пользователя фактическое количество, отражает его в колонке "Кол-во факт (шт)" и устанавливает дату окончания.
         /// </summary>
@@ -1199,10 +1283,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 defaultQty = currentRow.pzvKolNazn;
 
             // Диалог ввода количества отвязанных изделий
-            var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
-                "Количество отвязанных изделий",
-                "Завершение операции",
-                defaultQty);
+            var qtyObj = PromptFactQuantity(defaultQty);
             if (qtyObj == null)
                 return; // отмена
             if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > defaultQty)
@@ -1357,6 +1438,32 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (masterRow != null)
                 {
                     setDate(masterRow, newValue);
+                }
+
+                // При старте операции фактические значения должны быть пустыми
+                if (column.FieldName == "pzvDateStart" && newValue != null && oldValue == null)
+                {
+                    row.FactKol_UI = 0;
+                    row.FactChas_UI = 0m;
+                    if (masterRow != null)
+                    {
+                        masterRow.FactKol_UI = 0;
+                        masterRow.FactChas_UI = 0m;
+                    }
+
+                    var factKolColumn = _view.Columns.ColumnByFieldName("FactKol_UI");
+                    if (factKolColumn != null)
+                    {
+                        _view.SetRowCellValue(rowHandle, factKolColumn, 0);
+                        _view.RefreshRowCell(rowHandle, factKolColumn);
+                    }
+
+                    var factChasColumn = _view.Columns.ColumnByFieldName("FactChas_UI");
+                    if (factChasColumn != null)
+                    {
+                        _view.SetRowCellValue(rowHandle, factChasColumn, 0m);
+                        _view.RefreshRowCell(rowHandle, factChasColumn);
+                    }
                 }
                 
                 // Если операция завершена (установлена дата окончания), убираем её из списка незавершённых
@@ -1672,12 +1779,177 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         if (column.AppearanceHeader != null)
                             column.AppearanceHeader.Font = newFont;
                     }
+
+                    int headerGroupRowHeight = GetHeaderGroupRowHeight(currentFont);
+                    if (advBandedGridView1.GroupRowHeight < headerGroupRowHeight)
+                        advBandedGridView1.GroupRowHeight = headerGroupRowHeight;
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Ошибка при настройке шрифтов таблиц: {ex.Message}");
             }
+        }
+
+        private int GetHeaderGroupRowHeight(Font baseFont)
+        {
+            float largeSize = baseFont.Size + 2f;
+            FontStyle largeStyle = baseFont.Style | FontStyle.Bold;
+            using (var largeFont = new Font(baseFont.FontFamily, largeSize, largeStyle))
+            {
+                return (int)Math.Ceiling(largeFont.GetHeight() + 6f);
+            }
+        }
+
+        private static bool IsHeaderEmphasisSegment(string segment)
+        {
+            if (string.IsNullOrWhiteSpace(segment))
+                return false;
+
+            string trimmed = segment.TrimStart();
+            return trimmed.StartsWith("№пачки:", StringComparison.OrdinalIgnoreCase)
+                || trimmed.StartsWith("Размер:", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private int GetGroupSummaryLeftEdge(AdvBandedGridView view, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo info)
+        {
+            if (view == null || info == null)
+                return info?.Bounds.Right ?? 0;
+
+            var viewInfo = view.GetViewInfo() as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo;
+            if (viewInfo == null)
+                return info.Bounds.Right;
+
+            int left = info.Bounds.Right;
+            var planCol = view.Columns.ColumnByFieldName("PlanChas_UI");
+            var factCol = view.Columns.ColumnByFieldName("FactChas_UI");
+            var columns = new[] { planCol, factCol };
+            foreach (var col in columns)
+            {
+                if (col == null || !col.Visible)
+                    continue;
+
+                var colInfo = viewInfo.ColumnsInfo[col];
+                if (colInfo != null)
+                    left = Math.Min(left, colInfo.Bounds.Left);
+            }
+
+            return left;
+        }
+
+        private void DrawGroupSummaryValue(
+            AdvBandedGridView view,
+            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo viewInfo,
+            int rowHandle,
+            GridGroupSummaryItem summaryItem,
+            string fieldName,
+            DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
+        {
+            if (summaryItem == null || viewInfo == null)
+                return;
+
+            var column = view.Columns.ColumnByFieldName(fieldName);
+            if (column == null || !column.Visible)
+                return;
+
+            var colInfo = viewInfo.ColumnsInfo[column];
+            if (colInfo == null)
+                return;
+
+            var value = view.GetGroupSummaryValue(rowHandle, summaryItem);
+            if (value == null || value == DBNull.Value)
+                return;
+
+            string displayFormat = summaryItem.DisplayFormat;
+            string text = string.IsNullOrWhiteSpace(displayFormat)
+                ? value.ToString()
+                : string.Format(System.Globalization.CultureInfo.CurrentCulture, displayFormat, value);
+
+            using (var format = new StringFormat(StringFormatFlags.NoWrap))
+            {
+                format.Alignment = StringAlignment.Far;
+                format.LineAlignment = StringAlignment.Center;
+                e.Graphics.DrawString(text, view.Appearance.GroupRow.Font, e.Appearance.GetForeBrush(e.Cache), colInfo.Bounds, format);
+            }
+        }
+
+        private void AdvBandedGridView1_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
+        {
+            var view = sender as AdvBandedGridView;
+            var info = e.Info as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo;
+            if (view == null || info == null)
+                return;
+
+            string groupText = info.GroupText;
+            if (string.IsNullOrWhiteSpace(groupText))
+                return;
+
+            string originalText = info.GroupText;
+            info.GroupText = string.Empty;
+            e.Painter.DrawObject(e.Info);
+            info.GroupText = originalText;
+
+            Font baseFont = view.Appearance.GroupRow.Font ?? SystemFonts.DefaultFont;
+            float largeSize = baseFont.Size + 2f;
+            float smallSize = Math.Max(6f, baseFont.Size - 2f);
+
+            FontStyle largeStyle = baseFont.Style | FontStyle.Bold;
+            FontStyle smallStyle = baseFont.Style & ~FontStyle.Bold;
+
+            Rectangle textBounds = info.Bounds;
+            int left = info.ButtonBounds.Right + 6;
+            if (left > textBounds.Left)
+                textBounds = new Rectangle(left, textBounds.Top, Math.Max(0, textBounds.Right - left), textBounds.Height);
+
+            int summaryLeft = GetGroupSummaryLeftEdge(view, info);
+            if (summaryLeft > textBounds.Left)
+            {
+                int width = Math.Max(0, summaryLeft - textBounds.Left - 4);
+                textBounds = new Rectangle(textBounds.Left, textBounds.Top, width, textBounds.Height);
+            }
+
+            using (var largeFont = new Font(baseFont.FontFamily, largeSize, largeStyle))
+            using (var smallFont = new Font(baseFont.FontFamily, smallSize, smallStyle))
+            using (var format = new StringFormat(StringFormatFlags.NoWrap))
+            {
+                format.Alignment = StringAlignment.Near;
+                format.LineAlignment = StringAlignment.Center;
+
+                using (var shadeBrush = new SolidBrush(Color.FromArgb(24, Color.Red)))
+                {
+                    e.Graphics.FillRectangle(shadeBrush, textBounds);
+                }
+
+                float x = textBounds.Left;
+                string[] parts = groupText.Split(new[] { " | " }, StringSplitOptions.None);
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    string part = parts[i];
+                    Font font = IsHeaderEmphasisSegment(part) ? largeFont : smallFont;
+                    SizeF partSize = e.Cache.CalcTextSize(part, font);
+                    var partBounds = new RectangleF(x, textBounds.Top, partSize.Width, textBounds.Height);
+                    e.Graphics.DrawString(part, font, e.Appearance.GetForeBrush(e.Cache), partBounds, format);
+                    x += partSize.Width;
+
+                    if (i < parts.Length - 1)
+                    {
+                        string separator = " | ";
+                        SizeF sepSize = e.Cache.CalcTextSize(separator, smallFont);
+                        var sepBounds = new RectangleF(x, textBounds.Top, sepSize.Width, textBounds.Height);
+                        e.Graphics.DrawString(separator, smallFont, e.Appearance.GetForeBrush(e.Cache), sepBounds, format);
+                        x += sepSize.Width;
+                    }
+                }
+            }
+
+            var viewInfo = view.GetViewInfo() as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo;
+            if (viewInfo != null)
+            {
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _planChasGroupSummaryItem, "PlanChas_UI", e);
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _factChasGroupSummaryItem, "FactChas_UI", e);
+            }
+
+            e.Handled = true;
         }
 
         /// <summary>
@@ -2099,7 +2371,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         /// <summary>
-        /// Обновление данных формы по уведомлению брокера (как в PlanZagrVyaz).
+        /// Обновление данных формы по уведомлению брокера (как в PlanZagrVyaz)
         /// </summary>
         public async Task UpdateDataInFormAsync(string tableName, string? fieldsChangedCsv)
         {
@@ -2127,7 +2399,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
 
         ///// <summary>
-        ///// Реализация IDataUpdatableFormAsyncV2 - вызывается при изменении данных в БД.
+        ///// Реализация IDataUpdatableFormAsyncV2 - вызывается при изменении данных в БД
         ///// </summary>
         //public async Task UpdateDataInFormAsync(string table)
         //{
@@ -2222,23 +2494,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             CollapseToPachkaLevel();
                             UpdateToggleButtonCaption();
                         }
-                        else if (caption.Contains("Свернуть", StringComparison.OrdinalIgnoreCase))
+                        else if (caption.Contains("Свернуть всё совсем", StringComparison.OrdinalIgnoreCase))
                         {
                             CollapseAllGroups();
                             UpdateToggleButtonCaption();
                         }
-                        else if (caption.Contains("Показать всё", StringComparison.OrdinalIgnoreCase))
+                        else if (caption.Contains("Показать всё вообще", StringComparison.OrdinalIgnoreCase))
                         {
                             ExpandAllGroups();
                             UpdateToggleButtonCaption();
                         }
-                        else if (caption.Contains("Показать", StringComparison.OrdinalIgnoreCase) && !caption.Contains("всё", StringComparison.OrdinalIgnoreCase))
+                        else if (caption.Contains("Показать всё", StringComparison.OrdinalIgnoreCase))
                         {
                             // Кнопка "Показать" (не "Показать всё")
                             ToggleExpandGroups();
                             UpdateToggleButtonCaption();
                         }
-                        else if (caption.Contains("Свернуть", StringComparison.OrdinalIgnoreCase) && !caption.Contains("всё", StringComparison.OrdinalIgnoreCase))
+                        else if (caption.Contains("Свернуть всё", StringComparison.OrdinalIgnoreCase))
                         {
                             // Кнопка "Свернуть" (не "Свернуть всё") - это та же кнопка переключения
                             ToggleExpandGroups();
@@ -2261,8 +2533,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 ("Обновить", "refresh"),
                 ("Свернуть до ВМ", "collapse-to-vm"),
                 ("Свернуть до пачки", "collapse-to-pachka"),
-                ("Показать всё", "expand-all"),
-                ("Показать", "toggle-expand"),
+                ("Показать всё совсем", "expand-all"),
+                ("Показать всё", "toggle-expand"),
             });
             
             // Обновляем подпись кнопки переключения после небольшой задержки,
@@ -2322,8 +2594,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 var toggleButton = FindButtonByTag(layoutControlGroup1, "toggle-expand");
                 if (toggleButton == null) return;
 
-                bool allExpanded = AreAllGroupsExpanded();
-                toggleButton.Caption = allExpanded ? "Свернуть" : "Показать";
+                bool anyExpanded = AreAnyGroupsExpanded();
+                toggleButton.Caption = anyExpanded ? "Свернуть всё" : "Показать всё";
             }
             catch (Exception ex)
             {
@@ -2386,6 +2658,47 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 System.Diagnostics.Debug.WriteLine($"Ошибка при проверке состояния групп: {ex.Message}");
                 return false; // В случае ошибки считаем, что не все развернуты
+            }
+        }
+
+        private bool AreAnyGroupsExpanded()
+        {
+            try
+            {
+                // Проверяем детализацию в основном гриде
+                if (bandedGridView3 != null && bandedGridView3.DataRowCount > 0)
+                {
+                    for (int i = 0; i < bandedGridView3.DataRowCount; i++)
+                    {
+                        int rowHandle = bandedGridView3.GetRowHandle(i);
+                        if (!bandedGridView3.IsValidRowHandle(rowHandle))
+                            continue;
+
+                        if (bandedGridView3.GetMasterRowExpanded(rowHandle))
+                            return true;
+
+                        var detailView = bandedGridView3.GetDetailView(rowHandle, 0) as DevExpress.XtraGrid.Views.Grid.GridView;
+                        if (detailView == null)
+                            continue;
+
+                        for (int r = 0; r < detailView.RowCount; r++)
+                        {
+                            int detailRowHandle = detailView.GetVisibleRowHandle(r);
+                            if (detailView.IsValidRowHandle(detailRowHandle) && detailView.IsGroupRow(detailRowHandle))
+                            {
+                                if (detailView.GetRowExpanded(detailRowHandle))
+                                    return true;
+                            }
+                        }
+                    }
+                }
+
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Ошибка при проверке состояния групп: {ex.Message}");
+                return false;
             }
         }
 

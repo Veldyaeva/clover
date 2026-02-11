@@ -64,11 +64,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                 var map = new ConcurrentDictionary<int, KnitterPZVModel>();
 
-                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня.
-                // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты.
-                // !!!!: при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты).-- и переставлять местави часы и кол назн и факт --не нужно переставлять
+                // Multi-mapping: агрегируем строки по pzvID и наполняем коллекции операций/раскроя для детального уровня
+                // SP возвращает два набора: 1) назначенные/родственные; 2) кандидаты
+                // !!!! при закрытой смене (kwsId = 0/null) использовать второй набор (кандидаты) -- и переставлять местави часы и кол назн и факт --не нужно переставлять
                 using (var grid = await connection.QueryMultipleAsync(
-                  "dbo.GetPlanZagrVyazNorm_ByTab4",
+                  "dbo.GetPlanZagrVyazNorm_ByTab3",
                     new
                     {
                         tab,
@@ -238,10 +238,12 @@ where kwsmlKmlID in @ids
                     var planKolFromNazn = (r.pzvKolNazn != 0) ? r.pzvKolNazn : planKolFromFact;
                     var planChasFromNazn = (r.pzvChasNazn != 0m) ? r.pzvChasNazn : planChasFromFact;
 
-                    // "Начата" = есть дата начала (на некоторых потоках может проставляться только при старте).
-                    // Если начато — показываем факт из pzvKol/pzvNChasi.
+                    // "Начата" = есть дата начала.
+                    // "Завершена" = есть дата завершения.
+                    // Факт показываем ТОЛЬКО после завершения; до завершения факт = 0.
                     // Если НЕ начато — факт в UI = 0, а план в UI берём из pzvKol/pzvNChasi 
                     bool started = r.pzvDateStart != null;
+                    bool finished = r.pzvDateEnd != null;
 
                     if (!started)
                     {
@@ -256,13 +258,24 @@ where kwsmlKmlID in @ids
                     // После старта: план — из Nazn, иначе fallback на факт (на случай остатка/новых строк)
                     r.PlanKol_UI = planKolFromNazn;
                     r.PlanChas_UI = planChasFromNazn;
-                    r.FactKol_UI = (r.pzvKol ?? 0);
-                    r.FactChas_UI = (r.pzvNChasi ?? 0m);
+                    if (finished)
+                    {
+                        r.FactKol_UI = (r.pzvKol ?? 0);
+                        r.FactChas_UI = (r.pzvNChasi ?? 0m);
+                    }
+                    else
+                    {
+                        r.FactKol_UI = 0;
+                        r.FactChas_UI = 0m;
+                    }
                 }
 
                 foreach (var p in parents)
                     FillUi(p);
 
+                parents = parents
+                    .OrderBy(p => p.kmlNumber, StringComparer.OrdinalIgnoreCase)
+                    .ToList();
 
                 return parents;
             }

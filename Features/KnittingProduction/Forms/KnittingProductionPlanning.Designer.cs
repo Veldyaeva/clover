@@ -57,7 +57,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             pictureBoxEskiz = new System.Windows.Forms.PictureBox();
             customSimpleButton1 = new CustomSimpleButton();
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             customSimpleButton2 = new CustomSimpleButton();
             gridControlArtPrKnitMachineViewRecom2 = new CustomGridControl();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
