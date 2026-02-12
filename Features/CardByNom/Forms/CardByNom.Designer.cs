@@ -80,6 +80,52 @@ namespace SewingProduction
             tbYearPach = new CustomTextBox();
             tbNomPach = new CustomTextBox();
             label4 = new CustomLabel();
+            layoutControl3 = new CustomLayoutControl();
+            textBoxYearIzNakl = new CustomTextBox();
+            customLabel24 = new CustomLabel();
+            textBoxIzNakl = new CustomTextBox();
+            customLabel23 = new CustomLabel();
+            searchLookUpEditArticul = new CustomSearchLookUpEdit();
+            customSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            columnKo = new DevExpress.XtraGrid.Columns.GridColumn();
+            columnGrup = new DevExpress.XtraGrid.Columns.GridColumn();
+            columnArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            columnMod = new DevExpress.XtraGrid.Columns.GridColumn();
+            customLabel6 = new CustomLabel();
+            tbNomZad = new CustomTextBox();
+            customLabel2 = new CustomLabel();
+            customLabel4 = new CustomLabel();
+            customRadioGroup2 = new CustomRadioGroup();
+            customRadioGroup3 = new CustomRadioGroup();
+            customLabel1 = new CustomLabel();
+            layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem64 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlGroup24 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem147 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem152 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem63 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlGroup28 = new DevExpress.XtraLayout.LayoutControlGroup();
+            emptySpaceItem76 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem195 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem196 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem197 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem77 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem198 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem65 = new DevExpress.XtraLayout.EmptySpaceItem();
             bsProizvCombIzdSP = new BindingSource(components);
             bsProizvCombIzdVZP = new BindingSource(components);
             gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -148,7 +194,7 @@ namespace SewingProduction
             gridControlOtdelka = new CustomGridControl();
             WorkInfo = new DevExpress.XtraTab.XtraTabPage();
             FurnInfo = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl9 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl9 = new CustomLayoutControl();
             furnitZayavViewUpak = new FurnitZayavView();
             furnitZayavViewFurnit = new FurnitZayavView();
             tbDatZayav = new CustomTextBox();
@@ -236,10 +282,10 @@ namespace SewingProduction
             layoutControlItem185 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem60 = new DevExpress.XtraLayout.EmptySpaceItem();
             RasInfo = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl7 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl7 = new CustomLayoutControl();
             layoutControlGroup22 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlGroup23 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControl5 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl5 = new CustomLayoutControl();
             gridControlPartNaklList = new CustomGridControl();
             gridViewPartNaklList = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnNaklPartIzObPrch = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -265,7 +311,7 @@ namespace SewingProduction
             layoutControlGroup16 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem105 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem107 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControl6 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl6 = new CustomLayoutControl();
             mtbRzuVidStir = new CustomTextBoxEx();
             mtbRzuDataStCd = new CustomTextBoxEx();
             mtbRzuDataStR = new CustomTextBoxEx();
@@ -366,7 +412,7 @@ namespace SewingProduction
             emptySpaceItem58 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem126 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator8 = new DevExpress.XtraLayout.SimpleSeparator();
-            layoutControl4 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl4 = new CustomLayoutControl();
             textBoxDataZa = new CustomTextBoxEx();
             customLabel21 = new CustomLabel();
             mtbRzuData1С = new CustomTextBoxEx();
@@ -426,7 +472,7 @@ namespace SewingProduction
             layoutControlItem156 = new DevExpress.XtraLayout.LayoutControlItem();
             xtraTabControl1 = new CustomTabControl();
             SockZadanyInfo = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl2 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl2 = new CustomLayoutControl();
             TextBoxKolPlanZadany = new CustomTextBoxEx();
             customLabel5 = new CustomLabel();
             gridControlSockDefectList = new CustomGridControl();
@@ -564,7 +610,7 @@ namespace SewingProduction
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             TabPageMgKart = new DevExpress.XtraTab.XtraTabPage();
-            layoutControl8 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl8 = new CustomLayoutControl();
             gridControlNastilGroupView = new CustomGridControl();
             gridViewNastilGroupView = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridNastilGroupViewColumnMgKart = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -608,54 +654,8 @@ namespace SewingProduction
             layoutControlItem145 = new DevExpress.XtraLayout.LayoutControlItem();
             splitterItem3 = new DevExpress.XtraLayout.SplitterItem();
             gridColumn57 = new DevExpress.XtraGrid.Columns.GridColumn();
-            customLabel2 = new CustomLabel();
-            customLabel1 = new CustomLabel();
-            tbNomZad = new CustomTextBox();
-            customLabel4 = new CustomLabel();
-            customRadioGroup3 = new CustomRadioGroup();
-            layoutControl3 = new SewingProduction.Core.Class.CustomLayoutControl();
-            textBoxYearIzNakl = new CustomTextBox();
-            customLabel24 = new CustomLabel();
-            textBoxIzNakl = new CustomTextBox();
-            customLabel23 = new CustomLabel();
-            searchLookUpEditArticul = new CustomSearchLookUpEdit();
-            customSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            columnKo = new DevExpress.XtraGrid.Columns.GridColumn();
-            columnGrup = new DevExpress.XtraGrid.Columns.GridColumn();
-            columnArticul = new DevExpress.XtraGrid.Columns.GridColumn();
-            columnMod = new DevExpress.XtraGrid.Columns.GridColumn();
-            customLabel6 = new CustomLabel();
-            customRadioGroup2 = new CustomRadioGroup();
-            layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
-            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem64 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlGroup24 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem147 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem152 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem63 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlGroup28 = new DevExpress.XtraLayout.LayoutControlGroup();
-            emptySpaceItem76 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem195 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem196 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem197 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem77 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem198 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem65 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl1 = new CustomLayoutControl();
             buttonVshivkiPrint = new CustomSimpleButton();
             textBoxRzId = new CustomTextBoxEx();
             customLabel22 = new CustomLabel();
@@ -789,6 +789,40 @@ namespace SewingProduction
             layoutControlItem194 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             customTextBoxEx1 = new CustomTextBoxEx();
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
+            layoutControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditArticul.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem64).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup24).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem147).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem152).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem63).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup28).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem76).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem195).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem196).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem197).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem77).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem198).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem65).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdSP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdVZP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridSplitContainer1).BeginInit();
@@ -1087,40 +1121,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem143).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem145).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
-            layoutControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEditArticul.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem64).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup24).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem147).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem152).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem63).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup28).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem76).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem195).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem196).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem197).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem77).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem198).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem65).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
@@ -1299,7 +1299,7 @@ namespace SewingProduction
             tbYearPach.ErrorMessage = null;
             tbYearPach.Font = new Font("Arial", 10F);
             tbYearPach.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbYearPach.Location = new Point(926, 5);
+            tbYearPach.Location = new Point(915, 5);
             tbYearPach.Margin = new Padding(0);
             tbYearPach.Name = "tbYearPach";
             tbYearPach.Size = new Size(48, 22);
@@ -1313,7 +1313,7 @@ namespace SewingProduction
             tbNomPach.ErrorMessage = null;
             tbNomPach.Font = new Font("Arial", 10F);
             tbNomPach.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbNomPach.Location = new Point(798, 5);
+            tbNomPach.Location = new Point(767, 5);
             tbNomPach.Margin = new Padding(0);
             tbNomPach.Name = "tbNomPach";
             tbNomPach.Size = new Size(77, 22);
@@ -1322,16 +1322,512 @@ namespace SewingProduction
             // 
             // label4
             // 
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Arial", 10F);
-            label4.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label4.Location = new Point(889, 5);
+            label4.Appearance.BackColor = Color.Transparent;
+            label4.Appearance.Font = new Font("Arial", 10F);
+            label4.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label4.Appearance.Options.UseBackColor = true;
+            label4.Appearance.Options.UseFont = true;
+            label4.Appearance.Options.UseForeColor = true;
+            label4.Appearance.Options.UseTextOptions = true;
+            label4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label4.Location = new Point(891, 5);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(33, 24);
+            label4.Size = new Size(20, 16);
+            label4.StyleController = layoutControl3;
             label4.TabIndex = 1;
             label4.Text = "год";
-            label4.TextAlign = ContentAlignment.MiddleRight;
+            label4.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // layoutControl3
+            // 
+            layoutControl3.Controls.Add(textBoxYearIzNakl);
+            layoutControl3.Controls.Add(customLabel24);
+            layoutControl3.Controls.Add(textBoxIzNakl);
+            layoutControl3.Controls.Add(customLabel23);
+            layoutControl3.Controls.Add(searchLookUpEditArticul);
+            layoutControl3.Controls.Add(customLabel6);
+            layoutControl3.Controls.Add(tbNomZad);
+            layoutControl3.Controls.Add(customLabel2);
+            layoutControl3.Controls.Add(customLabel4);
+            layoutControl3.Controls.Add(customRadioGroup2);
+            layoutControl3.Controls.Add(tbYearPach);
+            layoutControl3.Controls.Add(customRadioGroup3);
+            layoutControl3.Controls.Add(label4);
+            layoutControl3.Controls.Add(customLabel1);
+            layoutControl3.Controls.Add(tbNomPach);
+            layoutControl3.Location = new Point(2, 3);
+            layoutControl3.Name = "layoutControl3";
+            layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(824, 283, 650, 400);
+            layoutControl3.Root = layoutControlGroup8;
+            layoutControl3.Size = new Size(1821, 34);
+            layoutControl3.TabIndex = 13;
+            layoutControl3.Text = "layoutControl3";
+            // 
+            // textBoxYearIzNakl
+            // 
+            textBoxYearIzNakl.BorderStyle = BorderStyle.FixedSingle;
+            textBoxYearIzNakl.ErrorColor = Color.Red;
+            textBoxYearIzNakl.ErrorMessage = null;
+            textBoxYearIzNakl.Font = new Font("Arial", 10F);
+            textBoxYearIzNakl.Location = new Point(1656, 5);
+            textBoxYearIzNakl.Name = "textBoxYearIzNakl";
+            textBoxYearIzNakl.Size = new Size(82, 20);
+            textBoxYearIzNakl.TabIndex = 10;
+            // 
+            // customLabel24
+            // 
+            customLabel24.Appearance.Font = new Font("Arial", 10F);
+            customLabel24.Appearance.Options.UseFont = true;
+            customLabel24.Appearance.Options.UseTextOptions = true;
+            customLabel24.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel24.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel24.Location = new Point(1632, 5);
+            customLabel24.Name = "customLabel24";
+            customLabel24.Size = new Size(20, 16);
+            customLabel24.StyleController = layoutControl3;
+            customLabel24.TabIndex = 9;
+            customLabel24.Text = "год";
+            customLabel24.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // textBoxIzNakl
+            // 
+            textBoxIzNakl.BorderStyle = BorderStyle.FixedSingle;
+            textBoxIzNakl.ErrorColor = Color.Red;
+            textBoxIzNakl.ErrorMessage = null;
+            textBoxIzNakl.Font = new Font("Arial", 10F);
+            textBoxIzNakl.Location = new Point(1526, 5);
+            textBoxIzNakl.Name = "textBoxIzNakl";
+            textBoxIzNakl.Size = new Size(89, 20);
+            textBoxIzNakl.TabIndex = 7;
+            textBoxIzNakl.KeyDown += (this.textBoxIzNakl_KeyDown);
+            // 
+            // customLabel23
+            // 
+            customLabel23.Appearance.Font = new Font("Arial", 10F);
+            customLabel23.Appearance.Options.UseFont = true;
+            customLabel23.Appearance.Options.UseTextOptions = true;
+            customLabel23.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel23.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel23.Location = new Point(1441, 5);
+            customLabel23.Name = "customLabel23";
+            customLabel23.Size = new Size(81, 16);
+            customLabel23.StyleController = layoutControl3;
+            customLabel23.TabIndex = 7;
+            customLabel23.Text = "№ накладной";
+            customLabel23.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // searchLookUpEditArticul
+            // 
+            searchLookUpEditArticul.Location = new Point(1231, 6);
+            searchLookUpEditArticul.Name = "searchLookUpEditArticul";
+            searchLookUpEditArticul.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
+            searchLookUpEditArticul.Properties.Appearance.Font = new Font("Arial", 10F);
+            searchLookUpEditArticul.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
+            searchLookUpEditArticul.Properties.Appearance.Options.UseBackColor = true;
+            searchLookUpEditArticul.Properties.Appearance.Options.UseFont = true;
+            searchLookUpEditArticul.Properties.Appearance.Options.UseForeColor = true;
+            searchLookUpEditArticul.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search) });
+            searchLookUpEditArticul.Properties.PopupView = customSearchLookUpEdit1View;
+            searchLookUpEditArticul.Size = new Size(187, 22);
+            searchLookUpEditArticul.StyleController = layoutControl3;
+            searchLookUpEditArticul.TabIndex = 6;
+            searchLookUpEditArticul.ButtonClick += (this.searchLookUpEditArticul_ButtonClick);
+            searchLookUpEditArticul.EditValueChanged += (this.searchLookUpEditArticul_EditValueChanged);
+            // 
+            // customSearchLookUpEdit1View
+            // 
+            customSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { columnKo, columnGrup, columnArticul, columnMod });
+            customSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            customSearchLookUpEdit1View.Name = "customSearchLookUpEdit1View";
+            customSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            customSearchLookUpEdit1View.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
+            customSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // columnKo
+            // 
+            columnKo.Caption = "Код";
+            columnKo.Name = "columnKo";
+            columnKo.Visible = true;
+            columnKo.VisibleIndex = 0;
+            // 
+            // columnGrup
+            // 
+            columnGrup.Caption = "Группа";
+            columnGrup.Name = "columnGrup";
+            columnGrup.Visible = true;
+            columnGrup.VisibleIndex = 1;
+            // 
+            // columnArticul
+            // 
+            columnArticul.Caption = "Артикул";
+            columnArticul.Name = "columnArticul";
+            columnArticul.Visible = true;
+            columnArticul.VisibleIndex = 2;
+            // 
+            // columnMod
+            // 
+            columnMod.Caption = "Модель";
+            columnMod.Name = "columnMod";
+            columnMod.Visible = true;
+            columnMod.VisibleIndex = 3;
+            // 
+            // customLabel6
+            // 
+            customLabel6.Appearance.Font = new Font("Arial", 10F);
+            customLabel6.Appearance.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
+            customLabel6.Appearance.Options.UseFont = true;
+            customLabel6.Appearance.Options.UseForeColor = true;
+            customLabel6.Appearance.Options.UseTextOptions = true;
+            customLabel6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel6.Location = new Point(1179, 6);
+            customLabel6.Name = "customLabel6";
+            customLabel6.Size = new Size(48, 16);
+            customLabel6.StyleController = layoutControl3;
+            customLabel6.TabIndex = 1;
+            customLabel6.Text = "Артикул";
+            customLabel6.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // tbNomZad
+            // 
+            tbNomZad.BackColor = Color.FromArgb((int)(byte)248, (int)(byte)248, (int)(byte)255);
+            tbNomZad.BorderStyle = BorderStyle.FixedSingle;
+            tbNomZad.ErrorColor = Color.Red;
+            tbNomZad.ErrorMessage = null;
+            tbNomZad.Font = new Font("Arial", 10F);
+            tbNomZad.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
+            tbNomZad.Location = new Point(1054, 5);
+            tbNomZad.Margin = new Padding(0);
+            tbNomZad.Name = "tbNomZad";
+            tbNomZad.Size = new Size(104, 22);
+            tbNomZad.TabIndex = 5;
+            tbNomZad.KeyDown += (this.tbNomZad_KeyDown);
+            // 
+            // customLabel2
+            // 
+            customLabel2.Appearance.BackColor = Color.Transparent;
+            customLabel2.Appearance.Font = new Font("Arial", 12F, FontStyle.Bold);
+            customLabel2.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            customLabel2.Appearance.Options.UseBackColor = true;
+            customLabel2.Appearance.Options.UseFont = true;
+            customLabel2.Appearance.Options.UseForeColor = true;
+            customLabel2.Appearance.Options.UseTextOptions = true;
+            customLabel2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel2.Location = new Point(2, 2);
+            customLabel2.Margin = new Padding(0);
+            customLabel2.Name = "customLabel2";
+            customLabel2.Padding = new Padding(9, 0, 0, 0);
+            customLabel2.Size = new Size(67, 19);
+            customLabel2.StyleController = layoutControl3;
+            customLabel2.TabIndex = 1;
+            customLabel2.Text = "ПОИСК";
+            customLabel2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // customLabel4
+            // 
+            customLabel4.Appearance.BackColor = Color.Transparent;
+            customLabel4.Appearance.Font = new Font("Arial", 10F);
+            customLabel4.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            customLabel4.Appearance.Options.UseBackColor = true;
+            customLabel4.Appearance.Options.UseFont = true;
+            customLabel4.Appearance.Options.UseForeColor = true;
+            customLabel4.Appearance.Options.UseTextOptions = true;
+            customLabel4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel4.Location = new Point(983, 5);
+            customLabel4.Margin = new Padding(0);
+            customLabel4.Name = "customLabel4";
+            customLabel4.Size = new Size(67, 16);
+            customLabel4.StyleController = layoutControl3;
+            customLabel4.TabIndex = 1;
+            customLabel4.Text = "№ задания";
+            customLabel4.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // customRadioGroup2
+            // 
+            customRadioGroup2.Location = new Point(73, 2);
+            customRadioGroup2.Name = "customRadioGroup2";
+            customRadioGroup2.ObjectName = null;
+            customRadioGroup2.Properties.Appearance.Font = new Font("Arial", 10F);
+            customRadioGroup2.Properties.Appearance.ForeColor = SystemColors.ControlText;
+            customRadioGroup2.Properties.Appearance.Options.UseFont = true;
+            customRadioGroup2.Properties.Appearance.Options.UseForeColor = true;
+            customRadioGroup2.Properties.Columns = 4;
+            customRadioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ШП"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ВЗП"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Носки"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ШПМ") });
+            customRadioGroup2.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
+            customRadioGroup2.Properties.Padding = new Padding(1, 0, 0, 0);
+            customRadioGroup2.Size = new Size(243, 30);
+            customRadioGroup2.StyleController = layoutControl3;
+            customRadioGroup2.TabIndex = 0;
+            customRadioGroup2.SelectedIndexChanged += (this.customRadioGroup2_SelectedIndexChanged);
+            // 
+            // customRadioGroup3
+            // 
+            customRadioGroup3.Location = new Point(330, 2);
+            customRadioGroup3.Name = "customRadioGroup3";
+            customRadioGroup3.ObjectName = null;
+            customRadioGroup3.Properties.Appearance.Font = new Font("Arial", 10F);
+            customRadioGroup3.Properties.Appearance.ForeColor = SystemColors.ControlText;
+            customRadioGroup3.Properties.Appearance.Options.UseFont = true;
+            customRadioGroup3.Properties.Appearance.Options.UseForeColor = true;
+            customRadioGroup3.Properties.Columns = 4;
+            customRadioGroup3.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ задания", true, null, "ProcessingByTaskNumber"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ пачки", true, null, "ProcessingByPachNumber"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Артикул"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ накладной") });
+            customRadioGroup3.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
+            customRadioGroup3.Properties.Padding = new Padding(1, 0, 0, 0);
+            customRadioGroup3.Size = new Size(364, 30);
+            customRadioGroup3.StyleController = layoutControl3;
+            customRadioGroup3.TabIndex = 2;
+            customRadioGroup3.SelectedIndexChanged += (this.customRadioGroup3_SelectedIndexChanged);
+            customRadioGroup3.EditValueChanged += (this.customRadioGroup3_EditValueChanged);
+            // 
+            // customLabel1
+            // 
+            customLabel1.Appearance.BackColor = Color.Transparent;
+            customLabel1.Appearance.Font = new Font("Arial", 10F);
+            customLabel1.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            customLabel1.Appearance.Options.UseBackColor = true;
+            customLabel1.Appearance.Options.UseFont = true;
+            customLabel1.Appearance.Options.UseForeColor = true;
+            customLabel1.Appearance.Options.UseTextOptions = true;
+            customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel1.Location = new Point(711, 5);
+            customLabel1.Margin = new Padding(0);
+            customLabel1.Name = "customLabel1";
+            customLabel1.Size = new Size(52, 16);
+            customLabel1.StyleController = layoutControl3;
+            customLabel1.TabIndex = 1;
+            customLabel1.Text = "№ пачки";
+            customLabel1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // layoutControlGroup8
+            // 
+            layoutControlGroup8.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup8.GroupBordersVisible = false;
+            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, emptySpaceItem1, emptySpaceItem3, layoutControlGroup1, layoutControlGroup2, layoutControlItem1, emptySpaceItem64, layoutControlGroup24, emptySpaceItem63, layoutControlGroup28, emptySpaceItem65 });
+            layoutControlGroup8.Name = "Root";
+            layoutControlGroup8.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup8.Size = new Size(1821, 34);
+            layoutControlGroup8.TextLocation = DevExpress.Utils.Locations.Left;
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = customRadioGroup2;
+            layoutControlItem2.Location = new Point(71, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new Size(247, 34);
+            layoutControlItem2.TextVisible = false;
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = customRadioGroup3;
+            layoutControlItem3.Location = new Point(328, 0);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new Size(368, 34);
+            layoutControlItem3.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            emptySpaceItem1.Location = new Point(696, 0);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new Size(10, 34);
+            // 
+            // emptySpaceItem3
+            // 
+            emptySpaceItem3.Location = new Point(968, 0);
+            emptySpaceItem3.Name = "emptySpaceItem3";
+            emptySpaceItem3.Size = new Size(10, 34);
+            // 
+            // layoutControlGroup1
+            // 
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, emptySpaceItem2, layoutControlItem6, layoutControlItem7 });
+            layoutControlGroup1.Location = new Point(706, 0);
+            layoutControlGroup1.Name = "layoutControlGroup1";
+            layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup1.Size = new Size(262, 34);
+            layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            layoutControlItem4.Control = customLabel1;
+            layoutControlItem4.Location = new Point(0, 0);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new Size(56, 28);
+            layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.Control = tbNomPach;
+            layoutControlItem5.Location = new Point(56, 0);
+            layoutControlItem5.MaxSize = new Size(81, 26);
+            layoutControlItem5.MinSize = new Size(81, 26);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new Size(81, 28);
+            layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem5.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.Location = new Point(137, 0);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new Size(43, 28);
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.Control = label4;
+            layoutControlItem6.Location = new Point(180, 0);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(24, 28);
+            layoutControlItem6.TextVisible = false;
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = tbYearPach;
+            layoutControlItem7.Location = new Point(204, 0);
+            layoutControlItem7.MaxSize = new Size(52, 26);
+            layoutControlItem7.MinSize = new Size(52, 26);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new Size(52, 28);
+            layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlGroup2
+            // 
+            layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8, layoutControlItem9 });
+            layoutControlGroup2.Location = new Point(978, 0);
+            layoutControlGroup2.Name = "layoutControlGroup2";
+            layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup2.Size = new Size(185, 34);
+            layoutControlGroup2.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = customLabel4;
+            layoutControlItem8.Location = new Point(0, 0);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new Size(71, 28);
+            layoutControlItem8.TextVisible = false;
+            // 
+            // layoutControlItem9
+            // 
+            layoutControlItem9.Control = tbNomZad;
+            layoutControlItem9.Location = new Point(71, 0);
+            layoutControlItem9.MaxSize = new Size(108, 26);
+            layoutControlItem9.MinSize = new Size(108, 26);
+            layoutControlItem9.Name = "layoutControlItem9";
+            layoutControlItem9.Size = new Size(108, 28);
+            layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem9.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = customLabel2;
+            layoutControlItem1.Location = new Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new Size(71, 34);
+            layoutControlItem1.TextVisible = false;
+            // 
+            // emptySpaceItem64
+            // 
+            emptySpaceItem64.Location = new Point(318, 0);
+            emptySpaceItem64.Name = "emptySpaceItem64";
+            emptySpaceItem64.Size = new Size(10, 34);
+            // 
+            // layoutControlGroup24
+            // 
+            layoutControlGroup24.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem147, layoutControlItem152 });
+            layoutControlGroup24.Location = new Point(1173, 0);
+            layoutControlGroup24.Name = "layoutControlGroup24";
+            layoutControlGroup24.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
+            layoutControlGroup24.Size = new Size(251, 34);
+            layoutControlGroup24.TextVisible = false;
+            // 
+            // layoutControlItem147
+            // 
+            layoutControlItem147.Control = customLabel6;
+            layoutControlItem147.Location = new Point(0, 0);
+            layoutControlItem147.Name = "layoutControlItem147";
+            layoutControlItem147.Size = new Size(52, 26);
+            layoutControlItem147.TextVisible = false;
+            // 
+            // layoutControlItem152
+            // 
+            layoutControlItem152.Control = searchLookUpEditArticul;
+            layoutControlItem152.Location = new Point(52, 0);
+            layoutControlItem152.MaxSize = new Size(191, 26);
+            layoutControlItem152.MinSize = new Size(191, 26);
+            layoutControlItem152.Name = "layoutControlItem152";
+            layoutControlItem152.Size = new Size(191, 26);
+            layoutControlItem152.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem152.TextVisible = false;
+            // 
+            // emptySpaceItem63
+            // 
+            emptySpaceItem63.Location = new Point(1163, 0);
+            emptySpaceItem63.Name = "emptySpaceItem63";
+            emptySpaceItem63.Size = new Size(10, 34);
+            // 
+            // layoutControlGroup28
+            // 
+            layoutControlGroup28.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem76, layoutControlItem195, layoutControlItem196, layoutControlItem197, emptySpaceItem77, layoutControlItem198 });
+            layoutControlGroup28.Location = new Point(1436, 0);
+            layoutControlGroup28.Name = "layoutControlGroup28";
+            layoutControlGroup28.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup28.Size = new Size(385, 34);
+            layoutControlGroup28.TextVisible = false;
+            // 
+            // emptySpaceItem76
+            // 
+            emptySpaceItem76.Location = new Point(301, 0);
+            emptySpaceItem76.Name = "emptySpaceItem76";
+            emptySpaceItem76.Size = new Size(78, 28);
+            // 
+            // layoutControlItem195
+            // 
+            layoutControlItem195.Control = customLabel23;
+            layoutControlItem195.Location = new Point(0, 0);
+            layoutControlItem195.Name = "layoutControlItem195";
+            layoutControlItem195.Size = new Size(85, 28);
+            layoutControlItem195.TextVisible = false;
+            // 
+            // layoutControlItem196
+            // 
+            layoutControlItem196.Control = textBoxIzNakl;
+            layoutControlItem196.Location = new Point(85, 0);
+            layoutControlItem196.Name = "layoutControlItem196";
+            layoutControlItem196.Size = new Size(93, 28);
+            layoutControlItem196.TextVisible = false;
+            // 
+            // layoutControlItem197
+            // 
+            layoutControlItem197.Control = customLabel24;
+            layoutControlItem197.Location = new Point(191, 0);
+            layoutControlItem197.Name = "layoutControlItem197";
+            layoutControlItem197.Size = new Size(24, 28);
+            layoutControlItem197.TextVisible = false;
+            // 
+            // emptySpaceItem77
+            // 
+            emptySpaceItem77.Location = new Point(178, 0);
+            emptySpaceItem77.Name = "emptySpaceItem77";
+            emptySpaceItem77.Size = new Size(13, 28);
+            // 
+            // layoutControlItem198
+            // 
+            layoutControlItem198.Control = textBoxYearIzNakl;
+            layoutControlItem198.Location = new Point(215, 0);
+            layoutControlItem198.Name = "layoutControlItem198";
+            layoutControlItem198.Size = new Size(86, 28);
+            layoutControlItem198.TextVisible = false;
+            // 
+            // emptySpaceItem65
+            // 
+            emptySpaceItem65.Location = new Point(1424, 0);
+            emptySpaceItem65.Name = "emptySpaceItem65";
+            emptySpaceItem65.Size = new Size(12, 34);
             // 
             // gridColumn41
             // 
@@ -2370,9 +2866,7 @@ namespace SewingProduction
             // simpleButtonUpakDeliveryInfoShow
             // 
             simpleButtonUpakDeliveryInfoShow.Appearance.Font = new Font("Arial", 10F);
-            simpleButtonUpakDeliveryInfoShow.Appearance.ForeColor = Color.FromArgb((int)(byte)139, (int)(byte)69, (int)(byte)19);
             simpleButtonUpakDeliveryInfoShow.Appearance.Options.UseFont = true;
-            simpleButtonUpakDeliveryInfoShow.Appearance.Options.UseForeColor = true;
             simpleButtonUpakDeliveryInfoShow.ImageOptions.Image = (Image)resources.GetObject("simpleButtonUpakDeliveryInfoShow.ImageOptions.Image");
             simpleButtonUpakDeliveryInfoShow.Location = new Point(9, 390);
             simpleButtonUpakDeliveryInfoShow.Margin = new Padding(4, 3, 4, 3);
@@ -2385,16 +2879,23 @@ namespace SewingProduction
             // 
             // label61
             // 
-            label61.BackColor = Color.Transparent;
-            label61.Font = new Font("Arial", 9F);
-            label61.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label61.Appearance.BackColor = Color.Transparent;
+            label61.Appearance.Font = new Font("Arial", 9F);
+            label61.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label61.Appearance.Options.UseBackColor = true;
+            label61.Appearance.Options.UseFont = true;
+            label61.Appearance.Options.UseForeColor = true;
+            label61.Appearance.Options.UseTextOptions = true;
+            label61.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label61.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label61.Location = new Point(9, 587);
             label61.Margin = new Padding(4, 0, 4, 0);
             label61.Name = "label61";
             label61.Size = new Size(253, 20);
+            label61.StyleController = layoutControl9;
             label61.TabIndex = 1;
             label61.Text = "Предположительная дата создания заявки (при выполнении всех условий)";
-            label61.TextAlign = ContentAlignment.TopCenter;
+            label61.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbOtgrStat
             // 
@@ -2414,9 +2915,7 @@ namespace SewingProduction
             // simpleButtonFullKKPrint
             // 
             simpleButtonFullKKPrint.Appearance.Font = new Font("Arial", 10F);
-            simpleButtonFullKKPrint.Appearance.ForeColor = Color.FromArgb((int)(byte)139, (int)(byte)69, (int)(byte)19);
             simpleButtonFullKKPrint.Appearance.Options.UseFont = true;
-            simpleButtonFullKKPrint.Appearance.Options.UseForeColor = true;
             simpleButtonFullKKPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonFullKKPrint.ImageOptions.Image");
             simpleButtonFullKKPrint.Location = new Point(9, 30);
             simpleButtonFullKKPrint.Margin = new Padding(4, 3, 4, 3);
@@ -2442,9 +2941,7 @@ namespace SewingProduction
             // simpleButtonZayavUpakPrint
             // 
             simpleButtonZayavUpakPrint.Appearance.Font = new Font("Arial", 10F);
-            simpleButtonZayavUpakPrint.Appearance.ForeColor = Color.FromArgb((int)(byte)139, (int)(byte)69, (int)(byte)19);
             simpleButtonZayavUpakPrint.Appearance.Options.UseFont = true;
-            simpleButtonZayavUpakPrint.Appearance.Options.UseForeColor = true;
             simpleButtonZayavUpakPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonZayavUpakPrint.ImageOptions.Image");
             simpleButtonZayavUpakPrint.Location = new Point(9, 364);
             simpleButtonZayavUpakPrint.Margin = new Padding(4, 3, 4, 3);
@@ -2458,10 +2955,8 @@ namespace SewingProduction
             // simpleButtonFurnDeliveryInfoShow
             // 
             simpleButtonFurnDeliveryInfoShow.Appearance.Font = new Font("Arial", 10F);
-            simpleButtonFurnDeliveryInfoShow.Appearance.ForeColor = Color.FromArgb((int)(byte)139, (int)(byte)69, (int)(byte)19);
             simpleButtonFurnDeliveryInfoShow.Appearance.Options.UseBackColor = true;
             simpleButtonFurnDeliveryInfoShow.Appearance.Options.UseFont = true;
-            simpleButtonFurnDeliveryInfoShow.Appearance.Options.UseForeColor = true;
             simpleButtonFurnDeliveryInfoShow.ImageOptions.Image = (Image)resources.GetObject("simpleButtonFurnDeliveryInfoShow.ImageOptions.Image");
             simpleButtonFurnDeliveryInfoShow.Location = new Point(9, 215);
             simpleButtonFurnDeliveryInfoShow.Margin = new Padding(4, 3, 4, 3);
@@ -2474,15 +2969,23 @@ namespace SewingProduction
             // 
             // label60
             // 
-            label60.BackColor = Color.Transparent;
-            label60.Font = new Font("Arial", 9F);
-            label60.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label60.Appearance.BackColor = Color.Transparent;
+            label60.Appearance.Font = new Font("Arial", 9F);
+            label60.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label60.Appearance.Options.UseBackColor = true;
+            label60.Appearance.Options.UseFont = true;
+            label60.Appearance.Options.UseForeColor = true;
+            label60.Appearance.Options.UseTextOptions = true;
+            label60.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label60.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label60.Location = new Point(9, 540);
             label60.Margin = new Padding(4, 0, 4, 0);
             label60.Name = "label60";
             label60.Size = new Size(88, 33);
+            label60.StyleController = layoutControl9;
             label60.TabIndex = 1;
             label60.Text = "Дата отгрузки \r\nс производства";
+            label60.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // mtbData_zeh
             // 
@@ -2514,9 +3017,7 @@ namespace SewingProduction
             // simpleButtonUpakKKPrint
             // 
             simpleButtonUpakKKPrint.Appearance.Font = new Font("Arial", 10F);
-            simpleButtonUpakKKPrint.Appearance.ForeColor = Color.FromArgb((int)(byte)139, (int)(byte)69, (int)(byte)19);
             simpleButtonUpakKKPrint.Appearance.Options.UseFont = true;
-            simpleButtonUpakKKPrint.Appearance.Options.UseForeColor = true;
             simpleButtonUpakKKPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonUpakKKPrint.ImageOptions.Image");
             simpleButtonUpakKKPrint.Location = new Point(9, 251);
             simpleButtonUpakKKPrint.Margin = new Padding(4, 3, 4, 3);
@@ -2529,22 +3030,28 @@ namespace SewingProduction
             // 
             // label59
             // 
-            label59.BackColor = Color.Transparent;
-            label59.Font = new Font("Arial", 9F);
-            label59.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label59.Appearance.BackColor = Color.Transparent;
+            label59.Appearance.Font = new Font("Arial", 9F);
+            label59.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label59.Appearance.Options.UseBackColor = true;
+            label59.Appearance.Options.UseFont = true;
+            label59.Appearance.Options.UseForeColor = true;
+            label59.Appearance.Options.UseTextOptions = true;
+            label59.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label59.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label59.Location = new Point(9, 492);
             label59.Margin = new Padding(4, 0, 4, 0);
             label59.Name = "label59";
             label59.Size = new Size(88, 20);
+            label59.StyleController = layoutControl9;
             label59.TabIndex = 1;
             label59.Text = "Дата в цех";
+            label59.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // simpleButtonZayavFurnPrint
             // 
             simpleButtonZayavFurnPrint.Appearance.Font = new Font("Arial", 10F);
-            simpleButtonZayavFurnPrint.Appearance.ForeColor = Color.FromArgb((int)(byte)139, (int)(byte)69, (int)(byte)19);
             simpleButtonZayavFurnPrint.Appearance.Options.UseFont = true;
-            simpleButtonZayavFurnPrint.Appearance.Options.UseForeColor = true;
             simpleButtonZayavFurnPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonZayavFurnPrint.ImageOptions.Image");
             simpleButtonZayavFurnPrint.Location = new Point(9, 189);
             simpleButtonZayavFurnPrint.Margin = new Padding(4, 3, 4, 3);
@@ -2558,9 +3065,7 @@ namespace SewingProduction
             // simpleButtonFurnKKPrint
             // 
             simpleButtonFurnKKPrint.Appearance.Font = new Font("Arial", 10F);
-            simpleButtonFurnKKPrint.Appearance.ForeColor = Color.FromArgb((int)(byte)139, (int)(byte)69, (int)(byte)19);
             simpleButtonFurnKKPrint.Appearance.Options.UseFont = true;
-            simpleButtonFurnKKPrint.Appearance.Options.UseForeColor = true;
             simpleButtonFurnKKPrint.Appearance.Options.UseTextOptions = true;
             simpleButtonFurnKKPrint.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             simpleButtonFurnKKPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonFurnKKPrint.ImageOptions.Image");
@@ -2581,10 +3086,10 @@ namespace SewingProduction
             tbData_f_z_u.ErrorMessage = null;
             tbData_f_z_u.Font = new Font("Arial", 10F);
             tbData_f_z_u.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbData_f_z_u.Location = new Point(73, 340);
+            tbData_f_z_u.Location = new Point(61, 340);
             tbData_f_z_u.Margin = new Padding(0);
             tbData_f_z_u.Name = "tbData_f_z_u";
-            tbData_f_z_u.Size = new Size(137, 20);
+            tbData_f_z_u.Size = new Size(146, 20);
             tbData_f_z_u.TabIndex = 16;
             // 
             // tbUZSobrStat
@@ -2625,35 +3130,51 @@ namespace SewingProduction
             tbData_f_o_u.ErrorMessage = null;
             tbData_f_o_u.Font = new Font("Arial", 10F);
             tbData_f_o_u.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbData_f_o_u.Location = new Point(73, 316);
+            tbData_f_o_u.Location = new Point(60, 316);
             tbData_f_o_u.Margin = new Padding(0);
             tbData_f_o_u.Name = "tbData_f_o_u";
-            tbData_f_o_u.Size = new Size(137, 20);
+            tbData_f_o_u.Size = new Size(146, 20);
             tbData_f_o_u.TabIndex = 14;
             // 
             // label25
             // 
-            label25.BackColor = Color.Transparent;
-            label25.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            label25.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label25.Appearance.BackColor = Color.Transparent;
+            label25.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            label25.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label25.Appearance.Options.UseBackColor = true;
+            label25.Appearance.Options.UseFont = true;
+            label25.Appearance.Options.UseForeColor = true;
+            label25.Appearance.Options.UseTextOptions = true;
+            label25.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label25.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label25.Location = new Point(9, 117);
             label25.Margin = new Padding(4, 0, 4, 0);
             label25.Name = "label25";
             label25.Size = new Size(147, 20);
+            label25.StyleController = layoutControl9;
             label25.TabIndex = 1;
             label25.Text = "Заявка на фурнитуру №";
+            label25.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label56
             // 
-            label56.BackColor = Color.Transparent;
-            label56.Font = new Font("Arial", 9F);
-            label56.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label56.Appearance.BackColor = Color.Transparent;
+            label56.Appearance.Font = new Font("Arial", 9F);
+            label56.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label56.Appearance.Options.UseBackColor = true;
+            label56.Appearance.Options.UseFont = true;
+            label56.Appearance.Options.UseForeColor = true;
+            label56.Appearance.Options.UseTextOptions = true;
+            label56.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label56.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label56.Location = new Point(9, 340);
             label56.Margin = new Padding(4, 0, 4, 0);
             label56.Name = "label56";
-            label56.Size = new Size(60, 20);
+            label56.Size = new Size(48, 15);
+            label56.StyleController = layoutControl9;
             label56.TabIndex = 1;
             label56.Text = "собрана";
+            label56.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbFurnZayav
             // 
@@ -2701,15 +3222,23 @@ namespace SewingProduction
             // 
             // label54
             // 
-            label54.BackColor = Color.Transparent;
-            label54.Font = new Font("Arial", 9F);
-            label54.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label54.Appearance.BackColor = Color.Transparent;
+            label54.Appearance.Font = new Font("Arial", 9F);
+            label54.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label54.Appearance.Options.UseBackColor = true;
+            label54.Appearance.Options.UseFont = true;
+            label54.Appearance.Options.UseForeColor = true;
+            label54.Appearance.Options.UseTextOptions = true;
+            label54.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label54.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label54.Location = new Point(9, 141);
             label54.Margin = new Padding(4, 0, 4, 0);
             label54.Name = "label54";
             label54.Size = new Size(60, 20);
+            label54.StyleController = layoutControl9;
             label54.TabIndex = 1;
             label54.Text = "создана";
+            label54.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbData_f_o
             // 
@@ -2727,15 +3256,23 @@ namespace SewingProduction
             // 
             // label57
             // 
-            label57.BackColor = Color.Transparent;
-            label57.Font = new Font("Arial", 9F);
-            label57.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label57.Appearance.BackColor = Color.Transparent;
+            label57.Appearance.Font = new Font("Arial", 9F);
+            label57.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label57.Appearance.Options.UseBackColor = true;
+            label57.Appearance.Options.UseFont = true;
+            label57.Appearance.Options.UseForeColor = true;
+            label57.Appearance.Options.UseTextOptions = true;
+            label57.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label57.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label57.Location = new Point(9, 316);
             label57.Margin = new Padding(4, 0, 4, 0);
             label57.Name = "label57";
-            label57.Size = new Size(60, 20);
+            label57.Size = new Size(47, 15);
+            label57.StyleController = layoutControl9;
             label57.TabIndex = 1;
             label57.Text = "создана";
+            label57.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbFZSozdStat
             // 
@@ -2760,35 +3297,51 @@ namespace SewingProduction
             tbUpakZayav.ErrorMessage = null;
             tbUpakZayav.Font = new Font("Arial", 10F);
             tbUpakZayav.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbUpakZayav.Location = new Point(160, 292);
+            tbUpakZayav.Location = new Point(148, 292);
             tbUpakZayav.Margin = new Padding(0);
             tbUpakZayav.Name = "tbUpakZayav";
-            tbUpakZayav.Size = new Size(102, 20);
+            tbUpakZayav.Size = new Size(114, 20);
             tbUpakZayav.TabIndex = 13;
             // 
             // label55
             // 
-            label55.BackColor = Color.Transparent;
-            label55.Font = new Font("Arial", 9F);
-            label55.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label55.Appearance.BackColor = Color.Transparent;
+            label55.Appearance.Font = new Font("Arial", 9F);
+            label55.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label55.Appearance.Options.UseBackColor = true;
+            label55.Appearance.Options.UseFont = true;
+            label55.Appearance.Options.UseForeColor = true;
+            label55.Appearance.Options.UseTextOptions = true;
+            label55.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label55.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label55.Location = new Point(9, 165);
             label55.Margin = new Padding(4, 0, 4, 0);
             label55.Name = "label55";
-            label55.Size = new Size(60, 20);
+            label55.Size = new Size(48, 15);
+            label55.StyleController = layoutControl9;
             label55.TabIndex = 1;
             label55.Text = "собрана";
+            label55.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label58
             // 
-            label58.BackColor = Color.Transparent;
-            label58.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            label58.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label58.Appearance.BackColor = Color.Transparent;
+            label58.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            label58.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label58.Appearance.Options.UseBackColor = true;
+            label58.Appearance.Options.UseFont = true;
+            label58.Appearance.Options.UseForeColor = true;
+            label58.Appearance.Options.UseTextOptions = true;
+            label58.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label58.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label58.Location = new Point(9, 292);
             label58.Margin = new Padding(4, 0, 4, 0);
             label58.Name = "label58";
-            label58.Size = new Size(147, 20);
+            label58.Size = new Size(135, 13);
+            label58.StyleController = layoutControl9;
             label58.TabIndex = 1;
             label58.Text = "Заявка на упаковку №";
+            label58.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbData_f_z
             // 
@@ -2798,10 +3351,10 @@ namespace SewingProduction
             tbData_f_z.ErrorMessage = null;
             tbData_f_z.Font = new Font("Arial", 10F);
             tbData_f_z.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbData_f_z.Location = new Point(73, 165);
+            tbData_f_z.Location = new Point(61, 165);
             tbData_f_z.Margin = new Padding(0);
             tbData_f_z.Name = "tbData_f_z";
-            tbData_f_z.Size = new Size(137, 20);
+            tbData_f_z.Size = new Size(146, 20);
             tbData_f_z.TabIndex = 7;
             // 
             // tbFZSobrStat
@@ -2962,22 +3515,22 @@ namespace SewingProduction
             layoutControlItem167.Control = label55;
             layoutControlItem167.Location = new Point(0, 135);
             layoutControlItem167.Name = "layoutControlItem167";
-            layoutControlItem167.Size = new Size(64, 24);
+            layoutControlItem167.Size = new Size(52, 24);
             layoutControlItem167.TextVisible = false;
             // 
             // layoutControlItem168
             // 
             layoutControlItem168.Control = tbData_f_z;
-            layoutControlItem168.Location = new Point(64, 135);
+            layoutControlItem168.Location = new Point(52, 135);
             layoutControlItem168.Name = "layoutControlItem168";
-            layoutControlItem168.Size = new Size(141, 24);
+            layoutControlItem168.Size = new Size(150, 24);
             layoutControlItem168.TextVisible = false;
             // 
             // emptySpaceItem66
             // 
-            emptySpaceItem66.Location = new Point(205, 135);
+            emptySpaceItem66.Location = new Point(202, 135);
             emptySpaceItem66.Name = "emptySpaceItem66";
-            emptySpaceItem66.Size = new Size(10, 24);
+            emptySpaceItem66.Size = new Size(13, 24);
             // 
             // layoutControlItem169
             // 
@@ -3042,15 +3595,15 @@ namespace SewingProduction
             layoutControlItem174.Control = label58;
             layoutControlItem174.Location = new Point(0, 262);
             layoutControlItem174.Name = "layoutControlItem174";
-            layoutControlItem174.Size = new Size(151, 24);
+            layoutControlItem174.Size = new Size(139, 24);
             layoutControlItem174.TextVisible = false;
             // 
             // layoutControlItem175
             // 
             layoutControlItem175.Control = tbUpakZayav;
-            layoutControlItem175.Location = new Point(151, 262);
+            layoutControlItem175.Location = new Point(139, 262);
             layoutControlItem175.Name = "layoutControlItem175";
-            layoutControlItem175.Size = new Size(106, 24);
+            layoutControlItem175.Size = new Size(118, 24);
             layoutControlItem175.TextVisible = false;
             // 
             // layoutControlItem176
@@ -3058,22 +3611,22 @@ namespace SewingProduction
             layoutControlItem176.Control = label57;
             layoutControlItem176.Location = new Point(0, 286);
             layoutControlItem176.Name = "layoutControlItem176";
-            layoutControlItem176.Size = new Size(64, 24);
+            layoutControlItem176.Size = new Size(51, 24);
             layoutControlItem176.TextVisible = false;
             // 
             // layoutControlItem177
             // 
             layoutControlItem177.Control = tbData_f_o_u;
-            layoutControlItem177.Location = new Point(64, 286);
+            layoutControlItem177.Location = new Point(51, 286);
             layoutControlItem177.Name = "layoutControlItem177";
-            layoutControlItem177.Size = new Size(141, 24);
+            layoutControlItem177.Size = new Size(150, 24);
             layoutControlItem177.TextVisible = false;
             // 
             // emptySpaceItem68
             // 
-            emptySpaceItem68.Location = new Point(205, 286);
+            emptySpaceItem68.Location = new Point(201, 286);
             emptySpaceItem68.Name = "emptySpaceItem68";
-            emptySpaceItem68.Size = new Size(10, 24);
+            emptySpaceItem68.Size = new Size(14, 24);
             // 
             // layoutControlItem178
             // 
@@ -3091,15 +3644,15 @@ namespace SewingProduction
             layoutControlItem179.Control = label56;
             layoutControlItem179.Location = new Point(0, 310);
             layoutControlItem179.Name = "layoutControlItem179";
-            layoutControlItem179.Size = new Size(64, 24);
+            layoutControlItem179.Size = new Size(52, 24);
             layoutControlItem179.TextVisible = false;
             // 
             // layoutControlItem180
             // 
             layoutControlItem180.Control = tbData_f_z_u;
-            layoutControlItem180.Location = new Point(64, 310);
+            layoutControlItem180.Location = new Point(52, 310);
             layoutControlItem180.Name = "layoutControlItem180";
-            layoutControlItem180.Size = new Size(141, 24);
+            layoutControlItem180.Size = new Size(150, 24);
             layoutControlItem180.TextVisible = false;
             // 
             // layoutControlItem181
@@ -3115,9 +3668,9 @@ namespace SewingProduction
             // 
             // emptySpaceItem69
             // 
-            emptySpaceItem69.Location = new Point(205, 310);
+            emptySpaceItem69.Location = new Point(202, 310);
             emptySpaceItem69.Name = "emptySpaceItem69";
-            emptySpaceItem69.Size = new Size(10, 24);
+            emptySpaceItem69.Size = new Size(13, 24);
             // 
             // layoutControlItem182
             // 
@@ -3731,20 +4284,28 @@ namespace SewingProduction
             // 
             // label44
             // 
-            label44.BackColor = Color.Transparent;
-            label44.Font = new Font("Arial", 9F);
-            label44.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label44.Appearance.BackColor = Color.Transparent;
+            label44.Appearance.Font = new Font("Arial", 9F);
+            label44.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label44.Appearance.Options.UseBackColor = true;
+            label44.Appearance.Options.UseFont = true;
+            label44.Appearance.Options.UseForeColor = true;
+            label44.Appearance.Options.UseTextOptions = true;
+            label44.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label44.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label44.Location = new Point(738, 270);
             label44.Margin = new Padding(4, 0, 4, 0);
             label44.Name = "label44";
             label44.Size = new Size(114, 36);
+            label44.StyleController = layoutControl6;
             label44.TabIndex = 52;
             label44.Text = "Вид стирки";
+            label44.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbRzuStirFact
             // 
             cbRzuStirFact.Font = new Font("Arial", 10F);
-            cbRzuStirFact.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
+            cbRzuStirFact.ForeColor = SystemColors.ControlText;
             cbRzuStirFact.Location = new Point(149, 246);
             cbRzuStirFact.Margin = new Padding(4, 3, 4, 3);
             cbRzuStirFact.Name = "cbRzuStirFact";
@@ -3772,15 +4333,23 @@ namespace SewingProduction
             // 
             // label49
             // 
-            label49.BackColor = Color.Transparent;
-            label49.Font = new Font("Arial", 9F);
-            label49.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label49.Appearance.BackColor = Color.Transparent;
+            label49.Appearance.Font = new Font("Arial", 9F);
+            label49.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label49.Appearance.Options.UseBackColor = true;
+            label49.Appearance.Options.UseFont = true;
+            label49.Appearance.Options.UseForeColor = true;
+            label49.Appearance.Options.UseTextOptions = true;
+            label49.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label49.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label49.Location = new Point(522, 270);
             label49.Margin = new Padding(4, 0, 4, 0);
             label49.Name = "label49";
             label49.Size = new Size(116, 36);
+            label49.StyleController = layoutControl6;
             label49.TabIndex = 50;
             label49.Text = "Дата сдачи";
+            label49.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // mtbRzuDataVR
             // 
@@ -3818,15 +4387,23 @@ namespace SewingProduction
             // 
             // label50
             // 
-            label50.BackColor = Color.Transparent;
-            label50.Font = new Font("Arial", 9F);
-            label50.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label50.Appearance.BackColor = Color.Transparent;
+            label50.Appearance.Font = new Font("Arial", 9F);
+            label50.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label50.Appearance.Options.UseBackColor = true;
+            label50.Appearance.Options.UseFont = true;
+            label50.Appearance.Options.UseForeColor = true;
+            label50.Appearance.Options.UseTextOptions = true;
+            label50.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label50.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label50.Location = new Point(300, 270);
             label50.Margin = new Padding(4, 0, 4, 0);
             label50.Name = "label50";
             label50.Size = new Size(123, 36);
+            label50.StyleController = layoutControl6;
             label50.TabIndex = 48;
             label50.Text = "Дата стирки";
+            label50.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // mtbRzuDataRasv
             // 
@@ -3848,7 +4425,7 @@ namespace SewingProduction
             // cbPszStirPlan
             // 
             cbPszStirPlan.Font = new Font("Arial", 10F);
-            cbPszStirPlan.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
+            cbPszStirPlan.ForeColor = SystemColors.ControlText;
             cbPszStirPlan.Location = new Point(10, 246);
             cbPszStirPlan.Margin = new Padding(4, 3, 4, 3);
             cbPszStirPlan.Name = "cbPszStirPlan";
@@ -3859,19 +4436,27 @@ namespace SewingProduction
             // 
             // label51
             // 
-            label51.BackColor = Color.Transparent;
-            label51.Font = new Font("Arial", 9F);
-            label51.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label51.Appearance.BackColor = Color.Transparent;
+            label51.Appearance.Font = new Font("Arial", 9F);
+            label51.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label51.Appearance.Options.UseBackColor = true;
+            label51.Appearance.Options.UseFont = true;
+            label51.Appearance.Options.UseForeColor = true;
+            label51.Appearance.Options.UseTextOptions = true;
+            label51.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label51.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label51.Location = new Point(10, 270);
             label51.Margin = new Padding(4, 0, 4, 0);
             label51.Name = "label51";
             label51.Size = new Size(190, 36);
+            label51.StyleController = layoutControl6;
             label51.TabIndex = 46;
             label51.Text = "Дата принято на стирку";
+            label51.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // mtbRzuDataPrCd
             // 
-            mtbRzuDataPrCd.Location = new Point(1161, 76);
+            mtbRzuDataPrCd.Location = new Point(1004, 84);
             mtbRzuDataPrCd.Name = "mtbRzuDataPrCd";
             mtbRzuDataPrCd.ObjectName = null;
             mtbRzuDataPrCd.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -3882,13 +4467,13 @@ namespace SewingProduction
             mtbRzuDataPrCd.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataPrCd.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrCd.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            mtbRzuDataPrCd.Size = new Size(81, 22);
+            mtbRzuDataPrCd.Size = new Size(203, 22);
             mtbRzuDataPrCd.StyleController = layoutControl6;
             mtbRzuDataPrCd.TabIndex = 74;
             // 
             // mtbRzuDataPrKm
             // 
-            mtbRzuDataPrKm.Location = new Point(993, 76);
+            mtbRzuDataPrKm.Location = new Point(808, 84);
             mtbRzuDataPrKm.Name = "mtbRzuDataPrKm";
             mtbRzuDataPrKm.ObjectName = null;
             mtbRzuDataPrKm.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -3899,13 +4484,13 @@ namespace SewingProduction
             mtbRzuDataPrKm.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataPrKm.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrKm.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            mtbRzuDataPrKm.Size = new Size(81, 22);
+            mtbRzuDataPrKm.Size = new Size(138, 22);
             mtbRzuDataPrKm.StyleController = layoutControl6;
             mtbRzuDataPrKm.TabIndex = 73;
             // 
             // mtbRzuDataPrPe
             // 
-            mtbRzuDataPrPe.Location = new Point(813, 76);
+            mtbRzuDataPrPe.Location = new Point(631, 84);
             mtbRzuDataPrPe.Name = "mtbRzuDataPrPe";
             mtbRzuDataPrPe.ObjectName = null;
             mtbRzuDataPrPe.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -3916,13 +4501,13 @@ namespace SewingProduction
             mtbRzuDataPrPe.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataPrPe.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrPe.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            mtbRzuDataPrPe.Size = new Size(82, 22);
+            mtbRzuDataPrPe.Size = new Size(116, 22);
             mtbRzuDataPrPe.StyleController = layoutControl6;
             mtbRzuDataPrPe.TabIndex = 72;
             // 
             // mtbRzuDataPrR
             // 
-            mtbRzuDataPrR.Location = new Point(579, 76);
+            mtbRzuDataPrR.Location = new Point(434, 84);
             mtbRzuDataPrR.Name = "mtbRzuDataPrR";
             mtbRzuDataPrR.ObjectName = null;
             mtbRzuDataPrR.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -3933,13 +4518,13 @@ namespace SewingProduction
             mtbRzuDataPrR.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataPrR.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrR.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            mtbRzuDataPrR.Size = new Size(81, 22);
+            mtbRzuDataPrR.Size = new Size(99, 22);
             mtbRzuDataPrR.StyleController = layoutControl6;
             mtbRzuDataPrR.TabIndex = 71;
             // 
             // mtbRzuDataPrP
             // 
-            mtbRzuDataPrP.Location = new Point(341, 76);
+            mtbRzuDataPrP.Location = new Point(247, 84);
             mtbRzuDataPrP.Name = "mtbRzuDataPrP";
             mtbRzuDataPrP.ObjectName = null;
             mtbRzuDataPrP.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -3950,13 +4535,13 @@ namespace SewingProduction
             mtbRzuDataPrP.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataPrP.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrP.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            mtbRzuDataPrP.Size = new Size(82, 22);
+            mtbRzuDataPrP.Size = new Size(91, 22);
             mtbRzuDataPrP.StyleController = layoutControl6;
             mtbRzuDataPrP.TabIndex = 70;
             // 
             // mtbRzuDataRasp
             // 
-            mtbRzuDataRasp.Location = new Point(107, 76);
+            mtbRzuDataRasp.Location = new Point(64, 84);
             mtbRzuDataRasp.Name = "mtbRzuDataRasp";
             mtbRzuDataRasp.ObjectName = null;
             mtbRzuDataRasp.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -3967,14 +4552,14 @@ namespace SewingProduction
             mtbRzuDataRasp.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataRasp.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataRasp.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
-            mtbRzuDataRasp.Size = new Size(82, 22);
+            mtbRzuDataRasp.Size = new Size(85, 22);
             mtbRzuDataRasp.StyleController = layoutControl6;
             mtbRzuDataRasp.TabIndex = 69;
             // 
             // cbRzuVishFact
             // 
             cbRzuVishFact.Font = new Font("Arial", 10F);
-            cbRzuVishFact.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
+            cbRzuVishFact.ForeColor = SystemColors.ControlText;
             cbRzuVishFact.Location = new Point(149, 149);
             cbRzuVishFact.Margin = new Padding(4, 3, 4, 3);
             cbRzuVishFact.Name = "cbRzuVishFact";
@@ -3985,24 +4570,31 @@ namespace SewingProduction
             // 
             // label43
             // 
-            label43.BackColor = Color.Transparent;
-            label43.Font = new Font("Arial", 9F);
-            label43.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label43.Appearance.BackColor = Color.Transparent;
+            label43.Appearance.Font = new Font("Arial", 9F);
+            label43.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label43.Appearance.Options.UseBackColor = true;
+            label43.Appearance.Options.UseFont = true;
+            label43.Appearance.Options.UseForeColor = true;
+            label43.Appearance.Options.UseTextOptions = true;
+            label43.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label43.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label43.Location = new Point(909, 173);
             label43.Margin = new Padding(4, 0, 4, 0);
             label43.Name = "label43";
             label43.Size = new Size(80, 38);
+            label43.StyleController = layoutControl6;
             label43.TabIndex = 42;
             label43.Text = "Дата\r\nсдачи";
+            label43.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbPszPrintPlan
             // 
             cbPszPrintPlan.Font = new Font("Arial", 10F);
-            cbPszPrintPlan.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
             cbPszPrintPlan.Location = new Point(10, 52);
             cbPszPrintPlan.Margin = new Padding(4, 3, 4, 3);
             cbPszPrintPlan.Name = "cbPszPrintPlan";
-            cbPszPrintPlan.Size = new Size(93, 20);
+            cbPszPrintPlan.Size = new Size(50, 28);
             cbPszPrintPlan.TabIndex = 67;
             cbPszPrintPlan.Text = "План";
             cbPszPrintPlan.UseVisualStyleBackColor = true;
@@ -4010,43 +4602,58 @@ namespace SewingProduction
             // cbRzuPrintFact
             // 
             cbRzuPrintFact.Font = new Font("Arial", 10F);
-            cbRzuPrintFact.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            cbRzuPrintFact.Location = new Point(120, 52);
+            cbRzuPrintFact.Location = new Point(77, 52);
             cbRzuPrintFact.Margin = new Padding(4, 3, 4, 3);
             cbRzuPrintFact.Name = "cbRzuPrintFact";
-            cbRzuPrintFact.Size = new Size(69, 20);
+            cbRzuPrintFact.Size = new Size(72, 28);
             cbRzuPrintFact.TabIndex = 68;
             cbRzuPrintFact.Text = "Факт";
             cbRzuPrintFact.UseVisualStyleBackColor = true;
             // 
             // label45
             // 
-            label45.BackColor = Color.Transparent;
-            label45.Font = new Font("Arial", 9F);
-            label45.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label45.Appearance.BackColor = Color.Transparent;
+            label45.Appearance.Font = new Font("Arial", 9F);
+            label45.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label45.Appearance.Options.UseBackColor = true;
+            label45.Appearance.Options.UseFont = true;
+            label45.Appearance.Options.UseForeColor = true;
+            label45.Appearance.Options.UseTextOptions = true;
+            label45.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label45.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label45.Location = new Point(672, 173);
             label45.Margin = new Padding(4, 0, 4, 0);
             label45.Name = "label45";
             label45.Size = new Size(137, 38);
+            label45.StyleController = layoutControl6;
             label45.TabIndex = 38;
             label45.Text = "Дата на чистку";
+            label45.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label37
             // 
-            label37.BackColor = Color.Transparent;
-            label37.Font = new Font("Arial", 9F);
-            label37.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label37.Location = new Point(10, 76);
+            label37.Appearance.BackColor = Color.Transparent;
+            label37.Appearance.Font = new Font("Arial", 9F);
+            label37.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label37.Appearance.Options.UseBackColor = true;
+            label37.Appearance.Options.UseFont = true;
+            label37.Appearance.Options.UseForeColor = true;
+            label37.Appearance.Options.UseTextOptions = true;
+            label37.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label37.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label37.Location = new Point(10, 84);
             label37.Margin = new Padding(4, 0, 4, 0);
             label37.Name = "label37";
-            label37.Size = new Size(93, 38);
+            label37.Size = new Size(50, 30);
+            label37.StyleController = layoutControl6;
             label37.TabIndex = 20;
             label37.Text = "Дата\r\nна принт";
+            label37.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbPszVishPlan
             // 
             cbPszVishPlan.Font = new Font("Arial", 10F);
-            cbPszVishPlan.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
+            cbPszVishPlan.ForeColor = SystemColors.ControlText;
             cbPszVishPlan.Location = new Point(10, 149);
             cbPszVishPlan.Margin = new Padding(4, 3, 4, 3);
             cbPszVishPlan.Name = "cbPszVishPlan";
@@ -4057,99 +4664,163 @@ namespace SewingProduction
             // 
             // label38
             // 
-            label38.BackColor = Color.Transparent;
-            label38.Font = new Font("Arial", 9F);
-            label38.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label38.Location = new Point(206, 76);
+            label38.Appearance.BackColor = Color.Transparent;
+            label38.Appearance.Font = new Font("Arial", 9F);
+            label38.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label38.Appearance.Options.UseBackColor = true;
+            label38.Appearance.Options.UseFont = true;
+            label38.Appearance.Options.UseForeColor = true;
+            label38.Appearance.Options.UseTextOptions = true;
+            label38.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label38.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label38.Location = new Point(166, 84);
             label38.Margin = new Padding(4, 0, 4, 0);
             label38.Name = "label38";
-            label38.Size = new Size(131, 38);
+            label38.Size = new Size(77, 30);
+            label38.StyleController = layoutControl6;
             label38.TabIndex = 22;
             label38.Text = "Дата принято\r\nна принт";
+            label38.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label46
             // 
-            label46.BackColor = Color.Transparent;
-            label46.Font = new Font("Arial", 9F);
-            label46.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label46.Appearance.BackColor = Color.Transparent;
+            label46.Appearance.Font = new Font("Arial", 9F);
+            label46.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label46.Appearance.Options.UseBackColor = true;
+            label46.Appearance.Options.UseFont = true;
+            label46.Appearance.Options.UseForeColor = true;
+            label46.Appearance.Options.UseTextOptions = true;
+            label46.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label46.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label46.Location = new Point(436, 173);
             label46.Margin = new Padding(4, 0, 4, 0);
             label46.Name = "label46";
             label46.Size = new Size(137, 38);
+            label46.StyleController = layoutControl6;
             label46.TabIndex = 36;
             label46.Text = "Дата в работу\r\nвышивка";
+            label46.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label39
             // 
-            label39.BackColor = Color.Transparent;
-            label39.Font = new Font("Arial", 9F);
-            label39.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label39.Location = new Point(437, 76);
+            label39.Appearance.BackColor = Color.Transparent;
+            label39.Appearance.Font = new Font("Arial", 9F);
+            label39.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label39.Appearance.Options.UseBackColor = true;
+            label39.Appearance.Options.UseFont = true;
+            label39.Appearance.Options.UseForeColor = true;
+            label39.Appearance.Options.UseTextOptions = true;
+            label39.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label39.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label39.Location = new Point(353, 84);
             label39.Margin = new Padding(4, 0, 4, 0);
             label39.Name = "label39";
-            label39.Size = new Size(138, 38);
+            label39.Size = new Size(77, 30);
+            label39.StyleController = layoutControl6;
             label39.TabIndex = 24;
             label39.Text = "Дата в работу\r\nпринт";
+            label39.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label47
             // 
-            label47.BackColor = Color.Transparent;
-            label47.Font = new Font("Arial", 9F);
-            label47.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label47.Appearance.BackColor = Color.Transparent;
+            label47.Appearance.Font = new Font("Arial", 9F);
+            label47.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label47.Appearance.Options.UseBackColor = true;
+            label47.Appearance.Options.UseFont = true;
+            label47.Appearance.Options.UseForeColor = true;
+            label47.Appearance.Options.UseTextOptions = true;
+            label47.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label47.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label47.Location = new Point(203, 173);
             label47.Margin = new Padding(4, 0, 4, 0);
             label47.Name = "label47";
             label47.Size = new Size(133, 38);
+            label47.StyleController = layoutControl6;
             label47.TabIndex = 34;
             label47.Text = "Дата принято\r\nна вышивку";
+            label47.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label40
             // 
-            label40.BackColor = Color.Transparent;
-            label40.Font = new Font("Arial", 9F);
-            label40.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label40.Location = new Point(674, 76);
+            label40.Appearance.BackColor = Color.Transparent;
+            label40.Appearance.Font = new Font("Arial", 9F);
+            label40.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label40.Appearance.Options.UseBackColor = true;
+            label40.Appearance.Options.UseFont = true;
+            label40.Appearance.Options.UseForeColor = true;
+            label40.Appearance.Options.UseTextOptions = true;
+            label40.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label40.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label40.Location = new Point(549, 84);
             label40.Margin = new Padding(4, 0, 4, 0);
             label40.Name = "label40";
-            label40.Size = new Size(135, 38);
+            label40.Size = new Size(78, 30);
+            label40.StyleController = layoutControl6;
             label40.TabIndex = 26;
             label40.Text = "Дата на печку\r\nпринт";
+            label40.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label41
             // 
-            label41.BackColor = Color.Transparent;
-            label41.Font = new Font("Arial", 9F);
-            label41.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label41.Location = new Point(909, 76);
+            label41.Appearance.BackColor = Color.Transparent;
+            label41.Appearance.Font = new Font("Arial", 9F);
+            label41.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label41.Appearance.Options.UseBackColor = true;
+            label41.Appearance.Options.UseFont = true;
+            label41.Appearance.Options.UseForeColor = true;
+            label41.Appearance.Options.UseTextOptions = true;
+            label41.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label41.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label41.Location = new Point(765, 84);
             label41.Margin = new Padding(4, 0, 4, 0);
             label41.Name = "label41";
-            label41.Size = new Size(80, 38);
+            label41.Size = new Size(39, 30);
+            label41.StyleController = layoutControl6;
             label41.TabIndex = 28;
             label41.Text = "Дата\r\nкомпл.";
+            label41.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label42
             // 
-            label42.BackColor = Color.Transparent;
-            label42.Font = new Font("Arial", 9F);
-            label42.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label42.Location = new Point(1088, 76);
+            label42.Appearance.BackColor = Color.Transparent;
+            label42.Appearance.Font = new Font("Arial", 9F);
+            label42.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label42.Appearance.Options.UseBackColor = true;
+            label42.Appearance.Options.UseFont = true;
+            label42.Appearance.Options.UseForeColor = true;
+            label42.Appearance.Options.UseTextOptions = true;
+            label42.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label42.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label42.Location = new Point(967, 84);
             label42.Margin = new Padding(4, 0, 4, 0);
             label42.Name = "label42";
-            label42.Size = new Size(69, 38);
+            label42.Size = new Size(33, 30);
+            label42.StyleController = layoutControl6;
             label42.TabIndex = 30;
             label42.Text = "Дата\r\nсдачи";
+            label42.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label48
             // 
-            label48.BackColor = Color.Transparent;
-            label48.Font = new Font("Arial", 9F);
-            label48.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label48.Appearance.BackColor = Color.Transparent;
+            label48.Appearance.Font = new Font("Arial", 9F);
+            label48.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label48.Appearance.Options.UseBackColor = true;
+            label48.Appearance.Options.UseFont = true;
+            label48.Appearance.Options.UseForeColor = true;
+            label48.Appearance.Options.UseTextOptions = true;
+            label48.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label48.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label48.Location = new Point(10, 173);
             label48.Margin = new Padding(4, 0, 4, 0);
             label48.Name = "label48";
             label48.Size = new Size(93, 38);
+            label48.StyleController = layoutControl6;
             label48.TabIndex = 32;
             label48.Text = "Дата\r\nна вышивку";
+            label48.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // layoutControlGroup17
             // 
@@ -4185,175 +4856,175 @@ namespace SewingProduction
             layoutControlItem112.Location = new Point(0, 0);
             layoutControlItem112.MinSize = new Size(24, 24);
             layoutControlItem112.Name = "layoutControlItem112";
-            layoutControlItem112.Size = new Size(97, 24);
+            layoutControlItem112.Size = new Size(54, 32);
             layoutControlItem112.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem112.TextVisible = false;
             // 
             // layoutControlItem113
             // 
             layoutControlItem113.Control = cbRzuPrintFact;
-            layoutControlItem113.Location = new Point(110, 0);
+            layoutControlItem113.Location = new Point(67, 0);
             layoutControlItem113.MinSize = new Size(24, 24);
             layoutControlItem113.Name = "layoutControlItem113";
-            layoutControlItem113.Size = new Size(73, 24);
+            layoutControlItem113.Size = new Size(76, 32);
             layoutControlItem113.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem113.TextVisible = false;
             // 
             // layoutControlItem114
             // 
             layoutControlItem114.Control = label37;
-            layoutControlItem114.Location = new Point(0, 24);
+            layoutControlItem114.Location = new Point(0, 32);
             layoutControlItem114.Name = "layoutControlItem114";
-            layoutControlItem114.Size = new Size(97, 42);
+            layoutControlItem114.Size = new Size(54, 34);
             layoutControlItem114.TextVisible = false;
             // 
             // layoutControlItem116
             // 
             layoutControlItem116.Control = label38;
-            layoutControlItem116.Location = new Point(196, 24);
+            layoutControlItem116.Location = new Point(156, 32);
             layoutControlItem116.Name = "layoutControlItem116";
-            layoutControlItem116.Size = new Size(135, 42);
+            layoutControlItem116.Size = new Size(81, 34);
             layoutControlItem116.TextVisible = false;
             // 
             // layoutControlItem118
             // 
             layoutControlItem118.Control = label39;
-            layoutControlItem118.Location = new Point(427, 24);
+            layoutControlItem118.Location = new Point(343, 32);
             layoutControlItem118.Name = "layoutControlItem118";
-            layoutControlItem118.Size = new Size(142, 42);
+            layoutControlItem118.Size = new Size(81, 34);
             layoutControlItem118.TextVisible = false;
             // 
             // layoutControlItem120
             // 
             layoutControlItem120.Control = label40;
-            layoutControlItem120.Location = new Point(664, 24);
+            layoutControlItem120.Location = new Point(539, 32);
             layoutControlItem120.Name = "layoutControlItem120";
-            layoutControlItem120.Size = new Size(139, 42);
+            layoutControlItem120.Size = new Size(82, 34);
             layoutControlItem120.TextVisible = false;
             // 
             // layoutControlItem122
             // 
             layoutControlItem122.Control = label41;
-            layoutControlItem122.Location = new Point(899, 24);
+            layoutControlItem122.Location = new Point(755, 32);
             layoutControlItem122.Name = "layoutControlItem122";
-            layoutControlItem122.Size = new Size(84, 42);
+            layoutControlItem122.Size = new Size(43, 34);
             layoutControlItem122.TextVisible = false;
             // 
             // layoutControlItem124
             // 
             layoutControlItem124.Control = label42;
-            layoutControlItem124.Location = new Point(1078, 24);
+            layoutControlItem124.Location = new Point(957, 32);
             layoutControlItem124.Name = "layoutControlItem124";
-            layoutControlItem124.Size = new Size(73, 42);
+            layoutControlItem124.Size = new Size(37, 34);
             layoutControlItem124.TextVisible = false;
             // 
             // layoutControlItem111
             // 
             layoutControlItem111.Control = mtbRzuDataRasp;
-            layoutControlItem111.Location = new Point(97, 24);
+            layoutControlItem111.Location = new Point(54, 32);
             layoutControlItem111.MinSize = new Size(54, 26);
             layoutControlItem111.Name = "layoutControlItem111";
-            layoutControlItem111.Size = new Size(86, 42);
+            layoutControlItem111.Size = new Size(89, 34);
             layoutControlItem111.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem111.TextVisible = false;
             // 
             // layoutControlItem115
             // 
             layoutControlItem115.Control = mtbRzuDataPrP;
-            layoutControlItem115.Location = new Point(331, 24);
+            layoutControlItem115.Location = new Point(237, 32);
             layoutControlItem115.MinSize = new Size(54, 26);
             layoutControlItem115.Name = "layoutControlItem115";
-            layoutControlItem115.Size = new Size(86, 42);
+            layoutControlItem115.Size = new Size(95, 34);
             layoutControlItem115.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem115.TextVisible = false;
             // 
             // layoutControlItem117
             // 
             layoutControlItem117.Control = mtbRzuDataPrR;
-            layoutControlItem117.Location = new Point(569, 24);
+            layoutControlItem117.Location = new Point(424, 32);
             layoutControlItem117.MinSize = new Size(54, 26);
             layoutControlItem117.Name = "layoutControlItem117";
-            layoutControlItem117.Size = new Size(85, 42);
+            layoutControlItem117.Size = new Size(103, 34);
             layoutControlItem117.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem117.TextVisible = false;
             // 
             // layoutControlItem119
             // 
             layoutControlItem119.Control = mtbRzuDataPrPe;
-            layoutControlItem119.Location = new Point(803, 24);
+            layoutControlItem119.Location = new Point(621, 32);
             layoutControlItem119.MinSize = new Size(54, 26);
             layoutControlItem119.Name = "layoutControlItem119";
-            layoutControlItem119.Size = new Size(86, 42);
+            layoutControlItem119.Size = new Size(120, 34);
             layoutControlItem119.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem119.TextVisible = false;
             // 
             // layoutControlItem121
             // 
             layoutControlItem121.Control = mtbRzuDataPrKm;
-            layoutControlItem121.Location = new Point(983, 24);
+            layoutControlItem121.Location = new Point(798, 32);
             layoutControlItem121.MinSize = new Size(54, 26);
             layoutControlItem121.Name = "layoutControlItem121";
-            layoutControlItem121.Size = new Size(85, 42);
+            layoutControlItem121.Size = new Size(142, 34);
             layoutControlItem121.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem121.TextVisible = false;
             // 
             // layoutControlItem123
             // 
             layoutControlItem123.Control = mtbRzuDataPrCd;
-            layoutControlItem123.Location = new Point(1151, 24);
+            layoutControlItem123.Location = new Point(994, 32);
             layoutControlItem123.MinSize = new Size(54, 26);
             layoutControlItem123.Name = "layoutControlItem123";
-            layoutControlItem123.Size = new Size(85, 42);
+            layoutControlItem123.Size = new Size(207, 34);
             layoutControlItem123.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem123.TextVisible = false;
             // 
             // emptySpaceItem40
             // 
-            emptySpaceItem40.Location = new Point(97, 0);
+            emptySpaceItem40.Location = new Point(54, 0);
             emptySpaceItem40.Name = "emptySpaceItem40";
-            emptySpaceItem40.Size = new Size(13, 24);
+            emptySpaceItem40.Size = new Size(13, 32);
             // 
             // emptySpaceItem41
             // 
-            emptySpaceItem41.Location = new Point(183, 24);
+            emptySpaceItem41.Location = new Point(143, 32);
             emptySpaceItem41.Name = "emptySpaceItem41";
-            emptySpaceItem41.Size = new Size(13, 42);
+            emptySpaceItem41.Size = new Size(13, 34);
             // 
             // emptySpaceItem42
             // 
-            emptySpaceItem42.Location = new Point(417, 24);
+            emptySpaceItem42.Location = new Point(332, 32);
             emptySpaceItem42.Name = "emptySpaceItem42";
-            emptySpaceItem42.Size = new Size(10, 42);
+            emptySpaceItem42.Size = new Size(11, 34);
             // 
             // emptySpaceItem43
             // 
-            emptySpaceItem43.Location = new Point(654, 24);
+            emptySpaceItem43.Location = new Point(527, 32);
             emptySpaceItem43.Name = "emptySpaceItem43";
-            emptySpaceItem43.Size = new Size(10, 42);
+            emptySpaceItem43.Size = new Size(12, 34);
             // 
             // emptySpaceItem44
             // 
-            emptySpaceItem44.Location = new Point(889, 24);
+            emptySpaceItem44.Location = new Point(741, 32);
             emptySpaceItem44.Name = "emptySpaceItem44";
-            emptySpaceItem44.Size = new Size(10, 42);
+            emptySpaceItem44.Size = new Size(14, 34);
             // 
             // emptySpaceItem45
             // 
-            emptySpaceItem45.Location = new Point(1068, 24);
+            emptySpaceItem45.Location = new Point(940, 32);
             emptySpaceItem45.Name = "emptySpaceItem45";
-            emptySpaceItem45.Size = new Size(10, 42);
+            emptySpaceItem45.Size = new Size(17, 34);
             // 
             // emptySpaceItem46
             // 
-            emptySpaceItem46.Location = new Point(183, 0);
+            emptySpaceItem46.Location = new Point(143, 0);
             emptySpaceItem46.Name = "emptySpaceItem46";
-            emptySpaceItem46.Size = new Size(1077, 24);
+            emptySpaceItem46.Size = new Size(1117, 32);
             // 
             // emptySpaceItem39
             // 
-            emptySpaceItem39.Location = new Point(1236, 24);
+            emptySpaceItem39.Location = new Point(1201, 32);
             emptySpaceItem39.Name = "emptySpaceItem39";
-            emptySpaceItem39.Size = new Size(24, 42);
+            emptySpaceItem39.Size = new Size(59, 34);
             // 
             // layoutControlGroup19
             // 
@@ -4721,7 +5392,7 @@ namespace SewingProduction
             // 
             // textBoxDataZa
             // 
-            textBoxDataZa.Location = new Point(81, 28);
+            textBoxDataZa.Location = new Point(131, 28);
             textBoxDataZa.Name = "textBoxDataZa";
             textBoxDataZa.ObjectName = null;
             textBoxDataZa.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4730,23 +5401,28 @@ namespace SewingProduction
             textBoxDataZa.Properties.Appearance.Options.UseBackColor = true;
             textBoxDataZa.Properties.Appearance.Options.UseFont = true;
             textBoxDataZa.Properties.Appearance.Options.UseForeColor = true;
-            textBoxDataZa.Size = new Size(78, 22);
+            textBoxDataZa.Size = new Size(76, 22);
             textBoxDataZa.StyleController = layoutControl4;
             textBoxDataZa.TabIndex = 17;
             // 
             // customLabel21
             // 
-            customLabel21.Font = new Font("Arial", 10F);
-            customLabel21.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
+            customLabel21.Appearance.Font = new Font("Arial", 10F);
+            customLabel21.Appearance.Options.UseFont = true;
+            customLabel21.Appearance.Options.UseTextOptions = true;
+            customLabel21.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel21.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel21.Location = new Point(7, 28);
             customLabel21.Name = "customLabel21";
-            customLabel21.Size = new Size(70, 63);
+            customLabel21.Size = new Size(120, 16);
+            customLabel21.StyleController = layoutControl4;
             customLabel21.TabIndex = 16;
             customLabel21.Text = "Дата планиро вания";
+            customLabel21.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // mtbRzuData1С
             // 
-            mtbRzuData1С.Location = new Point(1714, 28);
+            mtbRzuData1С.Location = new Point(1717, 28);
             mtbRzuData1С.Name = "mtbRzuData1С";
             mtbRzuData1С.ObjectName = null;
             mtbRzuData1С.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4755,13 +5431,13 @@ namespace SewingProduction
             mtbRzuData1С.Properties.Appearance.Options.UseBackColor = true;
             mtbRzuData1С.Properties.Appearance.Options.UseFont = true;
             mtbRzuData1С.Properties.Appearance.Options.UseForeColor = true;
-            mtbRzuData1С.Size = new Size(86, 22);
+            mtbRzuData1С.Size = new Size(83, 22);
             mtbRzuData1С.StyleController = layoutControl4;
             mtbRzuData1С.TabIndex = 15;
             // 
             // mtbRzuDataCd
             // 
-            mtbRzuDataCd.Location = new Point(1565, 28);
+            mtbRzuDataCd.Location = new Point(1572, 28);
             mtbRzuDataCd.Name = "mtbRzuDataCd";
             mtbRzuDataCd.ObjectName = null;
             mtbRzuDataCd.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4770,13 +5446,13 @@ namespace SewingProduction
             mtbRzuDataCd.Properties.Appearance.Options.UseBackColor = true;
             mtbRzuDataCd.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataCd.Properties.Appearance.Options.UseForeColor = true;
-            mtbRzuDataCd.Size = new Size(78, 22);
+            mtbRzuDataCd.Size = new Size(76, 22);
             mtbRzuDataCd.StyleController = layoutControl4;
             mtbRzuDataCd.TabIndex = 14;
             // 
             // mtbRzuDataUp
             // 
-            mtbRzuDataUp.Location = new Point(1386, 28);
+            mtbRzuDataUp.Location = new Point(1399, 28);
             mtbRzuDataUp.Name = "mtbRzuDataUp";
             mtbRzuDataUp.ObjectName = null;
             mtbRzuDataUp.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4785,13 +5461,13 @@ namespace SewingProduction
             mtbRzuDataUp.Properties.Appearance.Options.UseBackColor = true;
             mtbRzuDataUp.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataUp.Properties.Appearance.Options.UseForeColor = true;
-            mtbRzuDataUp.Size = new Size(78, 22);
+            mtbRzuDataUp.Size = new Size(75, 22);
             mtbRzuDataUp.StyleController = layoutControl4;
             mtbRzuDataUp.TabIndex = 13;
             // 
             // mtbRzuDataRab
             // 
-            mtbRzuDataRab.Location = new Point(1215, 28);
+            mtbRzuDataRab.Location = new Point(1233, 28);
             mtbRzuDataRab.Name = "mtbRzuDataRab";
             mtbRzuDataRab.ObjectName = null;
             mtbRzuDataRab.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4800,13 +5476,13 @@ namespace SewingProduction
             mtbRzuDataRab.Properties.Appearance.Options.UseBackColor = true;
             mtbRzuDataRab.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataRab.Properties.Appearance.Options.UseForeColor = true;
-            mtbRzuDataRab.Size = new Size(78, 22);
+            mtbRzuDataRab.Size = new Size(76, 22);
             mtbRzuDataRab.StyleController = layoutControl4;
             mtbRzuDataRab.TabIndex = 12;
             // 
             // mtbRzuDataZeh
             // 
-            mtbRzuDataZeh.Location = new Point(1059, 28);
+            mtbRzuDataZeh.Location = new Point(1082, 28);
             mtbRzuDataZeh.Name = "mtbRzuDataZeh";
             mtbRzuDataZeh.ObjectName = null;
             mtbRzuDataZeh.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4815,13 +5491,13 @@ namespace SewingProduction
             mtbRzuDataZeh.Properties.Appearance.Options.UseBackColor = true;
             mtbRzuDataZeh.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataZeh.Properties.Appearance.Options.UseForeColor = true;
-            mtbRzuDataZeh.Size = new Size(78, 22);
+            mtbRzuDataZeh.Size = new Size(75, 22);
             mtbRzuDataZeh.StyleController = layoutControl4;
             mtbRzuDataZeh.TabIndex = 11;
             // 
             // tbPszRpcNom
             // 
-            tbPszRpcNom.Location = new Point(912, 28);
+            tbPszRpcNom.Location = new Point(940, 28);
             tbPszRpcNom.Name = "tbPszRpcNom";
             tbPszRpcNom.ObjectName = null;
             tbPszRpcNom.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4830,13 +5506,13 @@ namespace SewingProduction
             tbPszRpcNom.Properties.Appearance.Options.UseBackColor = true;
             tbPszRpcNom.Properties.Appearance.Options.UseFont = true;
             tbPszRpcNom.Properties.Appearance.Options.UseForeColor = true;
-            tbPszRpcNom.Size = new Size(78, 22);
+            tbPszRpcNom.Size = new Size(75, 22);
             tbPszRpcNom.StyleController = layoutControl4;
             tbPszRpcNom.TabIndex = 5;
             // 
             // mtbRzuDataR
             // 
-            mtbRzuDataR.Location = new Point(774, 28);
+            mtbRzuDataR.Location = new Point(806, 28);
             mtbRzuDataR.Name = "mtbRzuDataR";
             mtbRzuDataR.ObjectName = null;
             mtbRzuDataR.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4846,13 +5522,13 @@ namespace SewingProduction
             mtbRzuDataR.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataR.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataR.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
-            mtbRzuDataR.Size = new Size(78, 22);
+            mtbRzuDataR.Size = new Size(75, 22);
             mtbRzuDataR.StyleController = layoutControl4;
             mtbRzuDataR.TabIndex = 4;
             // 
             // mtbRzuDataCdUt
             // 
-            mtbRzuDataCdUt.Location = new Point(606, 28);
+            mtbRzuDataCdUt.Location = new Point(643, 28);
             mtbRzuDataCdUt.Name = "mtbRzuDataCdUt";
             mtbRzuDataCdUt.ObjectName = null;
             mtbRzuDataCdUt.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4862,13 +5538,13 @@ namespace SewingProduction
             mtbRzuDataCdUt.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataCdUt.Properties.Appearance.Options.UseForeColor = true;
             mtbRzuDataCdUt.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
-            mtbRzuDataCdUt.Size = new Size(78, 22);
+            mtbRzuDataCdUt.Size = new Size(75, 22);
             mtbRzuDataCdUt.StyleController = layoutControl4;
             mtbRzuDataCdUt.TabIndex = 3;
             // 
             // mtbPsaDataCdPlan
             // 
-            mtbPsaDataCdPlan.Location = new Point(412, 28);
+            mtbPsaDataCdPlan.Location = new Point(454, 28);
             mtbPsaDataCdPlan.Name = "mtbPsaDataCdPlan";
             mtbPsaDataCdPlan.ObjectName = null;
             mtbPsaDataCdPlan.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4878,13 +5554,13 @@ namespace SewingProduction
             mtbPsaDataCdPlan.Properties.Appearance.Options.UseFont = true;
             mtbPsaDataCdPlan.Properties.Appearance.Options.UseForeColor = true;
             mtbPsaDataCdPlan.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
-            mtbPsaDataCdPlan.Size = new Size(78, 22);
+            mtbPsaDataCdPlan.Size = new Size(76, 22);
             mtbPsaDataCdPlan.StyleController = layoutControl4;
             mtbPsaDataCdPlan.TabIndex = 2;
             // 
             // mtbPsaDataZap
             // 
-            mtbPsaDataZap.Location = new Point(247, 28);
+            mtbPsaDataZap.Location = new Point(293, 28);
             mtbPsaDataZap.Name = "mtbPsaDataZap";
             mtbPsaDataZap.ObjectName = null;
             mtbPsaDataZap.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -4894,129 +5570,209 @@ namespace SewingProduction
             mtbPsaDataZap.Properties.Appearance.Options.UseFont = true;
             mtbPsaDataZap.Properties.Appearance.Options.UseForeColor = true;
             mtbPsaDataZap.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
-            mtbPsaDataZap.Size = new Size(78, 22);
+            mtbPsaDataZap.Size = new Size(76, 22);
             mtbPsaDataZap.StyleController = layoutControl4;
             mtbPsaDataZap.TabIndex = 0;
             // 
             // label63
             // 
-            label63.BackColor = Color.Transparent;
-            label63.Font = new Font("Arial", 9F);
-            label63.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label63.Location = new Point(1657, 28);
+            label63.Appearance.BackColor = Color.Transparent;
+            label63.Appearance.Font = new Font("Arial", 9F);
+            label63.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label63.Appearance.Options.UseBackColor = true;
+            label63.Appearance.Options.UseFont = true;
+            label63.Appearance.Options.UseForeColor = true;
+            label63.Appearance.Options.UseTextOptions = true;
+            label63.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label63.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label63.Location = new Point(1662, 28);
             label63.Margin = new Padding(4, 0, 4, 0);
             label63.Name = "label63";
-            label63.Size = new Size(53, 63);
+            label63.Size = new Size(51, 63);
+            label63.StyleController = layoutControl4;
             label63.TabIndex = 1;
             label63.Text = "Дата 1к.т. в 1С";
+            label63.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel3
             // 
-            customLabel3.BackColor = Color.Transparent;
-            customLabel3.Font = new Font("Arial", 9F);
-            customLabel3.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            customLabel3.Location = new Point(866, 28);
+            customLabel3.Appearance.BackColor = Color.Transparent;
+            customLabel3.Appearance.Font = new Font("Arial", 9F);
+            customLabel3.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            customLabel3.Appearance.Options.UseBackColor = true;
+            customLabel3.Appearance.Options.UseFont = true;
+            customLabel3.Appearance.Options.UseForeColor = true;
+            customLabel3.Appearance.Options.UseTextOptions = true;
+            customLabel3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel3.Location = new Point(895, 28);
             customLabel3.Margin = new Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new Size(42, 63);
+            customLabel3.Size = new Size(41, 63);
+            customLabel3.StyleController = layoutControl4;
             customLabel3.TabIndex = 1;
             customLabel3.Text = "РЦ-";
+            customLabel3.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label14
             // 
-            label14.BackColor = Color.Transparent;
-            label14.Font = new Font("Arial", 9F);
-            label14.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label14.Location = new Point(1478, 28);
+            label14.Appearance.BackColor = Color.Transparent;
+            label14.Appearance.Font = new Font("Arial", 9F);
+            label14.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label14.Appearance.Options.UseBackColor = true;
+            label14.Appearance.Options.UseFont = true;
+            label14.Appearance.Options.UseForeColor = true;
+            label14.Appearance.Options.UseTextOptions = true;
+            label14.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label14.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label14.Location = new Point(1488, 28);
             label14.Margin = new Padding(4, 0, 4, 0);
             label14.Name = "label14";
-            label14.Size = new Size(83, 63);
+            label14.Size = new Size(80, 63);
+            label14.StyleController = layoutControl4;
             label14.TabIndex = 1;
             label14.Text = "Дата СДАНО (осн. накл.)";
+            label14.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label33
             // 
-            label33.BackColor = Color.Transparent;
-            label33.Font = new Font("Arial", 9F);
-            label33.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label33.Location = new Point(1307, 28);
+            label33.Appearance.BackColor = Color.Transparent;
+            label33.Appearance.Font = new Font("Arial", 9F);
+            label33.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label33.Appearance.Options.UseBackColor = true;
+            label33.Appearance.Options.UseFont = true;
+            label33.Appearance.Options.UseForeColor = true;
+            label33.Appearance.Options.UseTextOptions = true;
+            label33.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label33.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label33.Location = new Point(1323, 28);
             label33.Margin = new Padding(4, 0, 4, 0);
             label33.Name = "label33";
-            label33.Size = new Size(75, 63);
+            label33.Size = new Size(72, 63);
+            label33.StyleController = layoutControl4;
             label33.TabIndex = 1;
             label33.Text = "Дата на упаковку";
+            label33.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label29
             // 
-            label29.BackColor = Color.Transparent;
-            label29.Font = new Font("Arial", 9F);
-            label29.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label29.Location = new Point(173, 28);
+            label29.Appearance.BackColor = Color.Transparent;
+            label29.Appearance.Font = new Font("Arial", 9F);
+            label29.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label29.Appearance.Options.UseBackColor = true;
+            label29.Appearance.Options.UseFont = true;
+            label29.Appearance.Options.UseForeColor = true;
+            label29.Appearance.Options.UseTextOptions = true;
+            label29.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label29.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label29.Location = new Point(221, 28);
             label29.Margin = new Padding(4, 0, 4, 0);
             label29.Name = "label29";
-            label29.Size = new Size(70, 63);
+            label29.Size = new Size(68, 63);
+            label29.StyleController = layoutControl4;
             label29.TabIndex = 1;
             label29.Text = "Дата запуска";
+            label29.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label26
             // 
-            label26.BackColor = Color.Transparent;
-            label26.Font = new Font("Arial", 9F);
-            label26.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label26.Location = new Point(1151, 28);
+            label26.Appearance.BackColor = Color.Transparent;
+            label26.Appearance.Font = new Font("Arial", 9F);
+            label26.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label26.Appearance.Options.UseBackColor = true;
+            label26.Appearance.Options.UseFont = true;
+            label26.Appearance.Options.UseForeColor = true;
+            label26.Appearance.Options.UseTextOptions = true;
+            label26.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label26.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label26.Location = new Point(1171, 28);
             label26.Margin = new Padding(4, 0, 4, 0);
             label26.Name = "label26";
-            label26.Size = new Size(60, 63);
+            label26.Size = new Size(58, 63);
+            label26.StyleController = layoutControl4;
             label26.TabIndex = 1;
             label26.Text = "Дата в работу";
+            label26.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label27
             // 
-            label27.BackColor = Color.Transparent;
-            label27.Font = new Font("Arial", 9F);
-            label27.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label27.Location = new Point(1004, 28);
+            label27.Appearance.BackColor = Color.Transparent;
+            label27.Appearance.Font = new Font("Arial", 9F);
+            label27.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label27.Appearance.Options.UseBackColor = true;
+            label27.Appearance.Options.UseFont = true;
+            label27.Appearance.Options.UseForeColor = true;
+            label27.Appearance.Options.UseTextOptions = true;
+            label27.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label27.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label27.Location = new Point(1029, 28);
             label27.Margin = new Padding(4, 0, 4, 0);
             label27.Name = "label27";
-            label27.Size = new Size(51, 63);
+            label27.Size = new Size(49, 63);
+            label27.StyleController = layoutControl4;
             label27.TabIndex = 1;
             label27.Text = "Дата в цех";
+            label27.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label28
             // 
-            label28.BackColor = Color.Transparent;
-            label28.Font = new Font("Arial", 9F);
-            label28.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label28.Location = new Point(339, 28);
+            label28.Appearance.BackColor = Color.Transparent;
+            label28.Appearance.Font = new Font("Arial", 9F);
+            label28.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label28.Appearance.Options.UseBackColor = true;
+            label28.Appearance.Options.UseFont = true;
+            label28.Appearance.Options.UseForeColor = true;
+            label28.Appearance.Options.UseTextOptions = true;
+            label28.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label28.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label28.Location = new Point(383, 28);
             label28.Margin = new Padding(4, 0, 4, 0);
             label28.Name = "label28";
-            label28.Size = new Size(69, 63);
+            label28.Size = new Size(67, 63);
+            label28.StyleController = layoutControl4;
             label28.TabIndex = 1;
             label28.Text = "План. дата сдачи";
+            label28.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label34
             // 
-            label34.BackColor = Color.Transparent;
-            label34.Font = new Font("Arial", 9F);
-            label34.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label34.Location = new Point(504, 28);
+            label34.Appearance.BackColor = Color.Transparent;
+            label34.Appearance.Font = new Font("Arial", 9F);
+            label34.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label34.Appearance.Options.UseBackColor = true;
+            label34.Appearance.Options.UseFont = true;
+            label34.Appearance.Options.UseForeColor = true;
+            label34.Appearance.Options.UseTextOptions = true;
+            label34.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label34.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label34.Location = new Point(544, 28);
             label34.Margin = new Padding(4, 0, 4, 0);
             label34.Name = "label34";
-            label34.Size = new Size(98, 63);
+            label34.Size = new Size(95, 63);
+            label34.StyleController = layoutControl4;
             label34.TabIndex = 1;
             label34.Text = "План. дата сдачи Уточненная";
+            label34.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label64
             // 
-            label64.BackColor = Color.Transparent;
-            label64.Font = new Font("Arial", 9F);
-            label64.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label64.Location = new Point(698, 28);
+            label64.Appearance.BackColor = Color.Transparent;
+            label64.Appearance.Font = new Font("Arial", 9F);
+            label64.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label64.Appearance.Options.UseBackColor = true;
+            label64.Appearance.Options.UseFont = true;
+            label64.Appearance.Options.UseForeColor = true;
+            label64.Appearance.Options.UseTextOptions = true;
+            label64.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label64.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label64.Location = new Point(732, 28);
             label64.Margin = new Padding(4, 0, 4, 0);
             label64.Name = "label64";
-            label64.Size = new Size(72, 63);
+            label64.Size = new Size(70, 63);
+            label64.StyleController = layoutControl4;
             label64.TabIndex = 1;
             label64.Text = "Дата раскроя";
+            label64.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // layoutControlGroup13
             // 
@@ -5040,27 +5796,27 @@ namespace SewingProduction
             // layoutControlItem86
             // 
             layoutControlItem86.Control = label29;
-            layoutControlItem86.Location = new Point(166, 0);
+            layoutControlItem86.Location = new Point(214, 0);
             layoutControlItem86.MinSize = new Size(24, 24);
             layoutControlItem86.Name = "layoutControlItem86";
-            layoutControlItem86.Size = new Size(74, 67);
+            layoutControlItem86.Size = new Size(72, 67);
             layoutControlItem86.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem86.TextVisible = false;
             // 
             // layoutControlItem106
             // 
             layoutControlItem106.Control = mtbPsaDataZap;
-            layoutControlItem106.Location = new Point(240, 0);
+            layoutControlItem106.Location = new Point(286, 0);
             layoutControlItem106.MinSize = new Size(54, 26);
             layoutControlItem106.Name = "layoutControlItem106";
             layoutControlItem106.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem106.Size = new Size(82, 67);
+            layoutControlItem106.Size = new Size(80, 67);
             layoutControlItem106.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem106.TextVisible = false;
             // 
             // emptySpaceItem28
             // 
-            emptySpaceItem28.Location = new Point(322, 0);
+            emptySpaceItem28.Location = new Point(366, 0);
             emptySpaceItem28.Name = "emptySpaceItem28";
             emptySpaceItem28.OptionsTableLayoutItem.RowIndex = 1;
             emptySpaceItem28.Size = new Size(10, 67);
@@ -5068,29 +5824,29 @@ namespace SewingProduction
             // layoutControlItem88
             // 
             layoutControlItem88.Control = label28;
-            layoutControlItem88.Location = new Point(332, 0);
+            layoutControlItem88.Location = new Point(376, 0);
             layoutControlItem88.MinSize = new Size(24, 24);
             layoutControlItem88.Name = "layoutControlItem88";
             layoutControlItem88.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem88.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem88.Size = new Size(73, 67);
+            layoutControlItem88.Size = new Size(71, 67);
             layoutControlItem88.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem88.TextVisible = false;
             // 
             // layoutControlItem87
             // 
             layoutControlItem87.Control = mtbPsaDataCdPlan;
-            layoutControlItem87.Location = new Point(405, 0);
+            layoutControlItem87.Location = new Point(447, 0);
             layoutControlItem87.MinSize = new Size(54, 26);
             layoutControlItem87.Name = "layoutControlItem87";
             layoutControlItem87.OptionsTableLayoutItem.RowIndex = 2;
-            layoutControlItem87.Size = new Size(82, 67);
+            layoutControlItem87.Size = new Size(80, 67);
             layoutControlItem87.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem87.TextVisible = false;
             // 
             // emptySpaceItem29
             // 
-            emptySpaceItem29.Location = new Point(487, 0);
+            emptySpaceItem29.Location = new Point(527, 0);
             emptySpaceItem29.Name = "emptySpaceItem29";
             emptySpaceItem29.OptionsTableLayoutItem.ColumnIndex = 1;
             emptySpaceItem29.OptionsTableLayoutItem.RowIndex = 2;
@@ -5099,29 +5855,29 @@ namespace SewingProduction
             // layoutControlItem90
             // 
             layoutControlItem90.Control = label34;
-            layoutControlItem90.Location = new Point(497, 0);
+            layoutControlItem90.Location = new Point(537, 0);
             layoutControlItem90.MinSize = new Size(24, 24);
             layoutControlItem90.Name = "layoutControlItem90";
             layoutControlItem90.OptionsTableLayoutItem.RowIndex = 3;
-            layoutControlItem90.Size = new Size(102, 67);
+            layoutControlItem90.Size = new Size(99, 67);
             layoutControlItem90.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem90.TextVisible = false;
             // 
             // layoutControlItem89
             // 
             layoutControlItem89.Control = mtbRzuDataCdUt;
-            layoutControlItem89.Location = new Point(599, 0);
+            layoutControlItem89.Location = new Point(636, 0);
             layoutControlItem89.MinSize = new Size(54, 26);
             layoutControlItem89.Name = "layoutControlItem89";
             layoutControlItem89.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem89.OptionsTableLayoutItem.RowIndex = 3;
-            layoutControlItem89.Size = new Size(82, 67);
+            layoutControlItem89.Size = new Size(79, 67);
             layoutControlItem89.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem89.TextVisible = false;
             // 
             // emptySpaceItem30
             // 
-            emptySpaceItem30.Location = new Point(681, 0);
+            emptySpaceItem30.Location = new Point(715, 0);
             emptySpaceItem30.Name = "emptySpaceItem30";
             emptySpaceItem30.OptionsTableLayoutItem.RowIndex = 4;
             emptySpaceItem30.Size = new Size(10, 67);
@@ -5129,29 +5885,29 @@ namespace SewingProduction
             // layoutControlItem92
             // 
             layoutControlItem92.Control = label64;
-            layoutControlItem92.Location = new Point(691, 0);
+            layoutControlItem92.Location = new Point(725, 0);
             layoutControlItem92.MinSize = new Size(24, 24);
             layoutControlItem92.Name = "layoutControlItem92";
             layoutControlItem92.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem92.OptionsTableLayoutItem.RowIndex = 4;
-            layoutControlItem92.Size = new Size(76, 67);
+            layoutControlItem92.Size = new Size(74, 67);
             layoutControlItem92.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem92.TextVisible = false;
             // 
             // layoutControlItem91
             // 
             layoutControlItem91.Control = mtbRzuDataR;
-            layoutControlItem91.Location = new Point(767, 0);
+            layoutControlItem91.Location = new Point(799, 0);
             layoutControlItem91.MinSize = new Size(54, 26);
             layoutControlItem91.Name = "layoutControlItem91";
             layoutControlItem91.OptionsTableLayoutItem.RowIndex = 5;
-            layoutControlItem91.Size = new Size(82, 67);
+            layoutControlItem91.Size = new Size(79, 67);
             layoutControlItem91.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem91.TextVisible = false;
             // 
             // emptySpaceItem31
             // 
-            emptySpaceItem31.Location = new Point(849, 0);
+            emptySpaceItem31.Location = new Point(878, 0);
             emptySpaceItem31.Name = "emptySpaceItem31";
             emptySpaceItem31.OptionsTableLayoutItem.ColumnIndex = 1;
             emptySpaceItem31.OptionsTableLayoutItem.RowIndex = 5;
@@ -5160,29 +5916,29 @@ namespace SewingProduction
             // layoutControlItem94
             // 
             layoutControlItem94.Control = customLabel3;
-            layoutControlItem94.Location = new Point(859, 0);
+            layoutControlItem94.Location = new Point(888, 0);
             layoutControlItem94.MinSize = new Size(24, 24);
             layoutControlItem94.Name = "layoutControlItem94";
             layoutControlItem94.OptionsTableLayoutItem.RowIndex = 6;
-            layoutControlItem94.Size = new Size(46, 67);
+            layoutControlItem94.Size = new Size(45, 67);
             layoutControlItem94.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem94.TextVisible = false;
             // 
             // layoutControlItem93
             // 
             layoutControlItem93.Control = tbPszRpcNom;
-            layoutControlItem93.Location = new Point(905, 0);
+            layoutControlItem93.Location = new Point(933, 0);
             layoutControlItem93.MinSize = new Size(54, 26);
             layoutControlItem93.Name = "layoutControlItem93";
             layoutControlItem93.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem93.OptionsTableLayoutItem.RowIndex = 6;
-            layoutControlItem93.Size = new Size(82, 67);
+            layoutControlItem93.Size = new Size(79, 67);
             layoutControlItem93.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem93.TextVisible = false;
             // 
             // emptySpaceItem32
             // 
-            emptySpaceItem32.Location = new Point(987, 0);
+            emptySpaceItem32.Location = new Point(1012, 0);
             emptySpaceItem32.Name = "emptySpaceItem32";
             emptySpaceItem32.OptionsTableLayoutItem.RowIndex = 7;
             emptySpaceItem32.Size = new Size(10, 67);
@@ -5190,29 +5946,29 @@ namespace SewingProduction
             // layoutControlItem96
             // 
             layoutControlItem96.Control = label27;
-            layoutControlItem96.Location = new Point(997, 0);
+            layoutControlItem96.Location = new Point(1022, 0);
             layoutControlItem96.MinSize = new Size(24, 24);
             layoutControlItem96.Name = "layoutControlItem96";
             layoutControlItem96.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem96.OptionsTableLayoutItem.RowIndex = 7;
-            layoutControlItem96.Size = new Size(55, 67);
+            layoutControlItem96.Size = new Size(53, 67);
             layoutControlItem96.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem96.TextVisible = false;
             // 
             // layoutControlItem95
             // 
             layoutControlItem95.Control = mtbRzuDataZeh;
-            layoutControlItem95.Location = new Point(1052, 0);
+            layoutControlItem95.Location = new Point(1075, 0);
             layoutControlItem95.MinSize = new Size(54, 26);
             layoutControlItem95.Name = "layoutControlItem95";
             layoutControlItem95.OptionsTableLayoutItem.RowIndex = 8;
-            layoutControlItem95.Size = new Size(82, 67);
+            layoutControlItem95.Size = new Size(79, 67);
             layoutControlItem95.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem95.TextVisible = false;
             // 
             // emptySpaceItem33
             // 
-            emptySpaceItem33.Location = new Point(1134, 0);
+            emptySpaceItem33.Location = new Point(1154, 0);
             emptySpaceItem33.Name = "emptySpaceItem33";
             emptySpaceItem33.OptionsTableLayoutItem.ColumnIndex = 1;
             emptySpaceItem33.OptionsTableLayoutItem.RowIndex = 8;
@@ -5221,29 +5977,29 @@ namespace SewingProduction
             // layoutControlItem98
             // 
             layoutControlItem98.Control = label26;
-            layoutControlItem98.Location = new Point(1144, 0);
+            layoutControlItem98.Location = new Point(1164, 0);
             layoutControlItem98.MinSize = new Size(24, 24);
             layoutControlItem98.Name = "layoutControlItem98";
             layoutControlItem98.OptionsTableLayoutItem.RowIndex = 9;
-            layoutControlItem98.Size = new Size(64, 67);
+            layoutControlItem98.Size = new Size(62, 67);
             layoutControlItem98.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem98.TextVisible = false;
             // 
             // layoutControlItem97
             // 
             layoutControlItem97.Control = mtbRzuDataRab;
-            layoutControlItem97.Location = new Point(1208, 0);
+            layoutControlItem97.Location = new Point(1226, 0);
             layoutControlItem97.MinSize = new Size(54, 26);
             layoutControlItem97.Name = "layoutControlItem97";
             layoutControlItem97.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem97.OptionsTableLayoutItem.RowIndex = 9;
-            layoutControlItem97.Size = new Size(82, 67);
+            layoutControlItem97.Size = new Size(80, 67);
             layoutControlItem97.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem97.TextVisible = false;
             // 
             // emptySpaceItem34
             // 
-            emptySpaceItem34.Location = new Point(1290, 0);
+            emptySpaceItem34.Location = new Point(1306, 0);
             emptySpaceItem34.Name = "emptySpaceItem34";
             emptySpaceItem34.OptionsTableLayoutItem.RowIndex = 10;
             emptySpaceItem34.Size = new Size(10, 67);
@@ -5251,29 +6007,29 @@ namespace SewingProduction
             // layoutControlItem100
             // 
             layoutControlItem100.Control = label33;
-            layoutControlItem100.Location = new Point(1300, 0);
+            layoutControlItem100.Location = new Point(1316, 0);
             layoutControlItem100.MinSize = new Size(24, 24);
             layoutControlItem100.Name = "layoutControlItem100";
             layoutControlItem100.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem100.OptionsTableLayoutItem.RowIndex = 10;
-            layoutControlItem100.Size = new Size(79, 67);
+            layoutControlItem100.Size = new Size(76, 67);
             layoutControlItem100.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem100.TextVisible = false;
             // 
             // layoutControlItem99
             // 
             layoutControlItem99.Control = mtbRzuDataUp;
-            layoutControlItem99.Location = new Point(1379, 0);
+            layoutControlItem99.Location = new Point(1392, 0);
             layoutControlItem99.MinSize = new Size(54, 26);
             layoutControlItem99.Name = "layoutControlItem99";
             layoutControlItem99.OptionsTableLayoutItem.RowIndex = 11;
-            layoutControlItem99.Size = new Size(82, 67);
+            layoutControlItem99.Size = new Size(79, 67);
             layoutControlItem99.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem99.TextVisible = false;
             // 
             // emptySpaceItem35
             // 
-            emptySpaceItem35.Location = new Point(1461, 0);
+            emptySpaceItem35.Location = new Point(1471, 0);
             emptySpaceItem35.Name = "emptySpaceItem35";
             emptySpaceItem35.OptionsTableLayoutItem.ColumnIndex = 1;
             emptySpaceItem35.OptionsTableLayoutItem.RowIndex = 11;
@@ -5282,29 +6038,29 @@ namespace SewingProduction
             // layoutControlItem102
             // 
             layoutControlItem102.Control = label14;
-            layoutControlItem102.Location = new Point(1471, 0);
+            layoutControlItem102.Location = new Point(1481, 0);
             layoutControlItem102.MinSize = new Size(24, 24);
             layoutControlItem102.Name = "layoutControlItem102";
             layoutControlItem102.OptionsTableLayoutItem.RowIndex = 12;
-            layoutControlItem102.Size = new Size(87, 67);
+            layoutControlItem102.Size = new Size(84, 67);
             layoutControlItem102.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem102.TextVisible = false;
             // 
             // layoutControlItem101
             // 
             layoutControlItem101.Control = mtbRzuDataCd;
-            layoutControlItem101.Location = new Point(1558, 0);
+            layoutControlItem101.Location = new Point(1565, 0);
             layoutControlItem101.MinSize = new Size(54, 26);
             layoutControlItem101.Name = "layoutControlItem101";
             layoutControlItem101.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem101.OptionsTableLayoutItem.RowIndex = 12;
-            layoutControlItem101.Size = new Size(82, 67);
+            layoutControlItem101.Size = new Size(80, 67);
             layoutControlItem101.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem101.TextVisible = false;
             // 
             // emptySpaceItem36
             // 
-            emptySpaceItem36.Location = new Point(1640, 0);
+            emptySpaceItem36.Location = new Point(1645, 0);
             emptySpaceItem36.Name = "emptySpaceItem36";
             emptySpaceItem36.OptionsTableLayoutItem.RowIndex = 13;
             emptySpaceItem36.Size = new Size(10, 67);
@@ -5312,23 +6068,23 @@ namespace SewingProduction
             // layoutControlItem104
             // 
             layoutControlItem104.Control = label63;
-            layoutControlItem104.Location = new Point(1650, 0);
+            layoutControlItem104.Location = new Point(1655, 0);
             layoutControlItem104.MinSize = new Size(24, 24);
             layoutControlItem104.Name = "layoutControlItem104";
             layoutControlItem104.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem104.OptionsTableLayoutItem.RowIndex = 13;
-            layoutControlItem104.Size = new Size(57, 67);
+            layoutControlItem104.Size = new Size(55, 67);
             layoutControlItem104.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem104.TextVisible = false;
             // 
             // layoutControlItem103
             // 
             layoutControlItem103.Control = mtbRzuData1С;
-            layoutControlItem103.Location = new Point(1707, 0);
+            layoutControlItem103.Location = new Point(1710, 0);
             layoutControlItem103.MinSize = new Size(54, 26);
             layoutControlItem103.Name = "layoutControlItem103";
             layoutControlItem103.OptionsTableLayoutItem.RowIndex = 14;
-            layoutControlItem103.Size = new Size(90, 67);
+            layoutControlItem103.Size = new Size(87, 67);
             layoutControlItem103.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem103.TextVisible = false;
             // 
@@ -5337,12 +6093,12 @@ namespace SewingProduction
             layoutControlItem154.Control = customLabel21;
             layoutControlItem154.Location = new Point(0, 0);
             layoutControlItem154.Name = "layoutControlItem154";
-            layoutControlItem154.Size = new Size(74, 67);
+            layoutControlItem154.Size = new Size(124, 67);
             layoutControlItem154.TextVisible = false;
             // 
             // emptySpaceItem37
             // 
-            emptySpaceItem37.Location = new Point(156, 0);
+            emptySpaceItem37.Location = new Point(204, 0);
             emptySpaceItem37.Name = "emptySpaceItem37";
             emptySpaceItem37.Size = new Size(10, 67);
             // 
@@ -5355,9 +6111,9 @@ namespace SewingProduction
             // layoutControlItem156
             // 
             layoutControlItem156.Control = textBoxDataZa;
-            layoutControlItem156.Location = new Point(74, 0);
+            layoutControlItem156.Location = new Point(124, 0);
             layoutControlItem156.Name = "layoutControlItem156";
-            layoutControlItem156.Size = new Size(82, 67);
+            layoutControlItem156.Size = new Size(80, 67);
             layoutControlItem156.TextVisible = false;
             // 
             // xtraTabControl1
@@ -5426,7 +6182,7 @@ namespace SewingProduction
             // 
             // TextBoxKolPlanZadany
             // 
-            TextBoxKolPlanZadany.Location = new Point(154, 168);
+            TextBoxKolPlanZadany.Location = new Point(232, 132);
             TextBoxKolPlanZadany.Name = "TextBoxKolPlanZadany";
             TextBoxKolPlanZadany.ObjectName = null;
             TextBoxKolPlanZadany.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -5435,27 +6191,32 @@ namespace SewingProduction
             TextBoxKolPlanZadany.Properties.Appearance.Options.UseBackColor = true;
             TextBoxKolPlanZadany.Properties.Appearance.Options.UseFont = true;
             TextBoxKolPlanZadany.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxKolPlanZadany.Size = new Size(69, 22);
+            TextBoxKolPlanZadany.Size = new Size(50, 22);
             TextBoxKolPlanZadany.StyleController = layoutControl2;
             TextBoxKolPlanZadany.TabIndex = 24;
             // 
             // customLabel5
             // 
-            customLabel5.Font = new Font("Arial", 10F);
-            customLabel5.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
-            customLabel5.Location = new Point(24, 168);
+            customLabel5.Appearance.Font = new Font("Arial", 10F);
+            customLabel5.Appearance.Options.UseFont = true;
+            customLabel5.Appearance.Options.UseTextOptions = true;
+            customLabel5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel5.Location = new Point(24, 132);
             customLabel5.Name = "customLabel5";
-            customLabel5.Size = new Size(126, 32);
+            customLabel5.Size = new Size(204, 16);
+            customLabel5.StyleController = layoutControl2;
             customLabel5.TabIndex = 23;
             customLabel5.Text = "План. кол-во по заданию пар/наб.";
+            customLabel5.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // gridControlSockDefectList
             // 
             gridControlSockDefectList.Font = new Font("Arial", 10F);
-            gridControlSockDefectList.Location = new Point(290, 205);
+            gridControlSockDefectList.Location = new Point(365, 169);
             gridControlSockDefectList.MainView = gridViewSockDefectList;
             gridControlSockDefectList.Name = "gridControlSockDefectList";
-            gridControlSockDefectList.Size = new Size(483, 150);
+            gridControlSockDefectList.Size = new Size(621, 368);
             gridControlSockDefectList.TabIndex = 22;
             gridControlSockDefectList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewSockDefectList });
             // 
@@ -5528,34 +6289,38 @@ namespace SewingProduction
             // 
             // TextBoxKnitTotalTime
             // 
-            TextBoxKnitTotalTime.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
             TextBoxKnitTotalTime.BorderStyle = BorderStyle.FixedSingle;
             TextBoxKnitTotalTime.ErrorColor = Color.Red;
             TextBoxKnitTotalTime.ErrorMessage = null;
             TextBoxKnitTotalTime.Font = new Font("Arial", 10F);
             TextBoxKnitTotalTime.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
-            TextBoxKnitTotalTime.Location = new Point(663, 133);
+            TextBoxKnitTotalTime.Location = new Point(693, 95);
             TextBoxKnitTotalTime.Name = "TextBoxKnitTotalTime";
-            TextBoxKnitTotalTime.Size = new Size(110, 20);
+            TextBoxKnitTotalTime.Size = new Size(293, 21);
             TextBoxKnitTotalTime.TabIndex = 21;
             // 
             // customLabel20
             // 
-            customLabel20.Font = new Font("Arial", 10F);
-            customLabel20.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
-            customLabel20.Location = new Point(533, 133);
+            customLabel20.Appearance.Font = new Font("Arial", 10F);
+            customLabel20.Appearance.Options.UseFont = true;
+            customLabel20.Appearance.Options.UseTextOptions = true;
+            customLabel20.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel20.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel20.Location = new Point(598, 95);
             customLabel20.Name = "customLabel20";
-            customLabel20.Size = new Size(126, 30);
+            customLabel20.Size = new Size(91, 32);
+            customLabel20.StyleController = layoutControl2;
             customLabel20.TabIndex = 20;
             customLabel20.Text = "Время вязания\r\nзадания";
+            customLabel20.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // gridControlSockDownTimeList
             // 
             gridControlSockDownTimeList.Font = new Font("Arial", 10F);
-            gridControlSockDownTimeList.Location = new Point(138, 369);
+            gridControlSockDownTimeList.Location = new Point(224, 551);
             gridControlSockDownTimeList.MainView = gridViewSockDownTimeList;
             gridControlSockDownTimeList.Name = "gridControlSockDownTimeList";
-            gridControlSockDownTimeList.Size = new Size(635, 202);
+            gridControlSockDownTimeList.Size = new Size(762, 20);
             gridControlSockDownTimeList.TabIndex = 19;
             gridControlSockDownTimeList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewSockDownTimeList });
             // 
@@ -5664,7 +6429,7 @@ namespace SewingProduction
             // 
             // TextBoxKolFactSmen
             // 
-            TextBoxKolFactSmen.Location = new Point(541, 168);
+            TextBoxKolFactSmen.Location = new Point(712, 132);
             TextBoxKolFactSmen.Name = "TextBoxKolFactSmen";
             TextBoxKolFactSmen.ObjectName = null;
             TextBoxKolFactSmen.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -5673,13 +6438,13 @@ namespace SewingProduction
             TextBoxKolFactSmen.Properties.Appearance.Options.UseBackColor = true;
             TextBoxKolFactSmen.Properties.Appearance.Options.UseFont = true;
             TextBoxKolFactSmen.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxKolFactSmen.Size = new Size(63, 22);
+            TextBoxKolFactSmen.Size = new Size(50, 22);
             TextBoxKolFactSmen.StyleController = layoutControl2;
             TextBoxKolFactSmen.TabIndex = 14;
             // 
             // TextBoxKolFactDelta
             // 
-            TextBoxKolFactDelta.Location = new Point(722, 168);
+            TextBoxKolFactDelta.Location = new Point(936, 132);
             TextBoxKolFactDelta.Name = "TextBoxKolFactDelta";
             TextBoxKolFactDelta.ObjectName = null;
             TextBoxKolFactDelta.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
@@ -5688,23 +6453,28 @@ namespace SewingProduction
             TextBoxKolFactDelta.Properties.Appearance.Options.UseBackColor = true;
             TextBoxKolFactDelta.Properties.Appearance.Options.UseFont = true;
             TextBoxKolFactDelta.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxKolFactDelta.Size = new Size(51, 22);
+            TextBoxKolFactDelta.Size = new Size(50, 22);
             TextBoxKolFactDelta.StyleController = layoutControl2;
             TextBoxKolFactDelta.TabIndex = 15;
             // 
             // customLabel19
             // 
-            customLabel19.Font = new Font("Arial", 10F);
-            customLabel19.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel19.Location = new Point(618, 168);
+            customLabel19.Appearance.Font = new Font("Arial", 10F);
+            customLabel19.Appearance.Options.UseFont = true;
+            customLabel19.Appearance.Options.UseTextOptions = true;
+            customLabel19.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel19.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel19.Location = new Point(776, 132);
             customLabel19.Name = "customLabel19";
-            customLabel19.Size = new Size(100, 32);
+            customLabel19.Size = new Size(156, 16);
+            customLabel19.StyleController = layoutControl2;
             customLabel19.TabIndex = 1;
             customLabel19.Text = "Разница по датчикам, шт.";
+            customLabel19.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // TextBoxKolFactZadany
             // 
-            TextBoxKolFactZadany.Location = new Point(349, 168);
+            TextBoxKolFactZadany.Location = new Point(473, 132);
             TextBoxKolFactZadany.Name = "TextBoxKolFactZadany";
             TextBoxKolFactZadany.ObjectName = null;
             TextBoxKolFactZadany.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
@@ -5713,27 +6483,32 @@ namespace SewingProduction
             TextBoxKolFactZadany.Properties.Appearance.Options.UseBackColor = true;
             TextBoxKolFactZadany.Properties.Appearance.Options.UseFont = true;
             TextBoxKolFactZadany.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxKolFactZadany.Size = new Size(61, 22);
+            TextBoxKolFactZadany.Size = new Size(50, 22);
             TextBoxKolFactZadany.StyleController = layoutControl2;
             TextBoxKolFactZadany.TabIndex = 13;
             // 
             // customLabel18
             // 
-            customLabel18.Font = new Font("Arial", 10F);
-            customLabel18.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel18.Location = new Point(237, 168);
+            customLabel18.Appearance.Font = new Font("Arial", 10F);
+            customLabel18.Appearance.Options.UseFont = true;
+            customLabel18.Appearance.Options.UseTextOptions = true;
+            customLabel18.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel18.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel18.Location = new Point(296, 132);
             customLabel18.Name = "customLabel18";
-            customLabel18.Size = new Size(108, 32);
+            customLabel18.Size = new Size(173, 16);
+            customLabel18.StyleController = layoutControl2;
             customLabel18.TabIndex = 1;
             customLabel18.Text = "Факт. кол-во по заданию, шт";
+            customLabel18.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // gridControlSockServiceList
             // 
             gridControlSockServiceList.Font = new Font("Arial", 10F);
-            gridControlSockServiceList.Location = new Point(801, 330);
+            gridControlSockServiceList.Location = new Point(1014, 330);
             gridControlSockServiceList.MainView = gridView2;
             gridControlSockServiceList.Name = "gridControlSockServiceList";
-            gridControlSockServiceList.Size = new Size(1004, 240);
+            gridControlSockServiceList.Size = new Size(791, 240);
             gridControlSockServiceList.TabIndex = 18;
             gridControlSockServiceList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
             // 
@@ -5872,10 +6647,10 @@ namespace SewingProduction
             // gridControlSockZadanySmenList
             // 
             gridControlSockZadanySmenList.Font = new Font("Arial", 10F);
-            gridControlSockZadanySmenList.Location = new Point(801, 45);
+            gridControlSockZadanySmenList.Location = new Point(1014, 45);
             gridControlSockZadanySmenList.MainView = gridView1;
             gridControlSockZadanySmenList.Name = "gridControlSockZadanySmenList";
-            gridControlSockZadanySmenList.Size = new Size(1004, 226);
+            gridControlSockZadanySmenList.Size = new Size(791, 226);
             gridControlSockZadanySmenList.TabIndex = 7;
             gridControlSockZadanySmenList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
@@ -6045,147 +6820,177 @@ namespace SewingProduction
             // 
             // TextBoxKnitEndDate
             // 
-            TextBoxKnitEndDate.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
             TextBoxKnitEndDate.BorderStyle = BorderStyle.FixedSingle;
             TextBoxKnitEndDate.ErrorColor = Color.Red;
             TextBoxKnitEndDate.ErrorMessage = null;
             TextBoxKnitEndDate.Font = new Font("Arial", 10F);
             TextBoxKnitEndDate.ForeColor = Color.FromArgb((int)(byte)85, (int)(byte)45, (int)(byte)115);
-            TextBoxKnitEndDate.Location = new Point(386, 133);
+            TextBoxKnitEndDate.Location = new Point(362, 95);
             TextBoxKnitEndDate.Multiline = true;
             TextBoxKnitEndDate.Name = "TextBoxKnitEndDate";
-            TextBoxKnitEndDate.Size = new Size(133, 20);
+            TextBoxKnitEndDate.Size = new Size(216, 21);
             TextBoxKnitEndDate.TabIndex = 12;
             // 
             // TextBoxKnitStartDate
             // 
-            TextBoxKnitStartDate.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
             TextBoxKnitStartDate.BorderStyle = BorderStyle.FixedSingle;
             TextBoxKnitStartDate.ErrorColor = Color.Red;
             TextBoxKnitStartDate.ErrorMessage = null;
             TextBoxKnitStartDate.Font = new Font("Arial", 10F);
             TextBoxKnitStartDate.ForeColor = Color.FromArgb((int)(byte)85, (int)(byte)45, (int)(byte)115);
-            TextBoxKnitStartDate.Location = new Point(138, 133);
+            TextBoxKnitStartDate.Location = new Point(76, 95);
             TextBoxKnitStartDate.Multiline = true;
             TextBoxKnitStartDate.Name = "TextBoxKnitStartDate";
-            TextBoxKnitStartDate.Size = new Size(127, 20);
+            TextBoxKnitStartDate.Size = new Size(183, 21);
             TextBoxKnitStartDate.TabIndex = 11;
             // 
             // TextBoxAreaNumber
             // 
-            TextBoxAreaNumber.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
             TextBoxAreaNumber.BorderStyle = BorderStyle.FixedSingle;
             TextBoxAreaNumber.ErrorColor = Color.Red;
             TextBoxAreaNumber.ErrorMessage = null;
             TextBoxAreaNumber.Font = new Font("Arial", 10F);
             TextBoxAreaNumber.ForeColor = Color.FromArgb((int)(byte)85, (int)(byte)45, (int)(byte)115);
-            TextBoxAreaNumber.Location = new Point(138, 108);
+            TextBoxAreaNumber.Location = new Point(57, 70);
             TextBoxAreaNumber.Multiline = true;
             TextBoxAreaNumber.Name = "TextBoxAreaNumber";
-            TextBoxAreaNumber.Size = new Size(127, 20);
+            TextBoxAreaNumber.Size = new Size(187, 20);
             TextBoxAreaNumber.TabIndex = 9;
             // 
             // TextBoxMachineNumber
             // 
-            TextBoxMachineNumber.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
             TextBoxMachineNumber.BorderStyle = BorderStyle.FixedSingle;
             TextBoxMachineNumber.ErrorColor = Color.Red;
             TextBoxMachineNumber.ErrorMessage = null;
             TextBoxMachineNumber.Font = new Font("Arial", 10F);
             TextBoxMachineNumber.ForeColor = Color.FromArgb((int)(byte)85, (int)(byte)45, (int)(byte)115);
-            TextBoxMachineNumber.Location = new Point(386, 108);
+            TextBoxMachineNumber.Location = new Point(332, 70);
             TextBoxMachineNumber.Multiline = true;
             TextBoxMachineNumber.Name = "TextBoxMachineNumber";
-            TextBoxMachineNumber.Size = new Size(387, 20);
+            TextBoxMachineNumber.Size = new Size(654, 20);
             TextBoxMachineNumber.TabIndex = 10;
             // 
             // TextBoxTabFio
             // 
-            TextBoxTabFio.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
             TextBoxTabFio.BorderStyle = BorderStyle.FixedSingle;
             TextBoxTabFio.ErrorColor = Color.Red;
             TextBoxTabFio.ErrorMessage = null;
             TextBoxTabFio.Font = new Font("Arial", 10F);
             TextBoxTabFio.ForeColor = Color.FromArgb((int)(byte)85, (int)(byte)45, (int)(byte)115);
-            TextBoxTabFio.Location = new Point(138, 45);
+            TextBoxTabFio.Location = new Point(113, 45);
             TextBoxTabFio.Multiline = true;
             TextBoxTabFio.Name = "TextBoxTabFio";
-            TextBoxTabFio.Size = new Size(635, 58);
+            TextBoxTabFio.Size = new Size(873, 20);
             TextBoxTabFio.TabIndex = 8;
             // 
             // customLabel14
             // 
-            customLabel14.Font = new Font("Arial", 10F);
-            customLabel14.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel14.Location = new Point(24, 369);
+            customLabel14.Appearance.Font = new Font("Arial", 10F);
+            customLabel14.Appearance.Options.UseFont = true;
+            customLabel14.Appearance.Options.UseTextOptions = true;
+            customLabel14.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel14.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel14.Location = new Point(24, 551);
             customLabel14.Name = "customLabel14";
-            customLabel14.Size = new Size(110, 202);
+            customLabel14.Size = new Size(196, 16);
+            customLabel14.StyleController = layoutControl2;
             customLabel14.TabIndex = 1;
             customLabel14.Text = "Простои - нет данных от датчика";
+            customLabel14.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel13
             // 
-            customLabel13.Font = new Font("Arial", 10F);
-            customLabel13.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel13.Location = new Point(424, 168);
+            customLabel13.Appearance.Font = new Font("Arial", 10F);
+            customLabel13.Appearance.Options.UseFont = true;
+            customLabel13.Appearance.Options.UseTextOptions = true;
+            customLabel13.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel13.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel13.Location = new Point(537, 132);
             customLabel13.Name = "customLabel13";
-            customLabel13.Size = new Size(113, 32);
+            customLabel13.Size = new Size(171, 16);
+            customLabel13.StyleController = layoutControl2;
             customLabel13.TabIndex = 1;
             customLabel13.Text = "Факт. кол-во по сменам, шт.";
+            customLabel13.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel12
             // 
-            customLabel12.Font = new Font("Arial", 10F);
-            customLabel12.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel12.Location = new Point(290, 133);
+            customLabel12.Appearance.Font = new Font("Arial", 10F);
+            customLabel12.Appearance.Options.UseFont = true;
+            customLabel12.Appearance.Options.UseTextOptions = true;
+            customLabel12.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel12.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel12.Location = new Point(293, 95);
             customLabel12.Name = "customLabel12";
-            customLabel12.Size = new Size(92, 30);
+            customLabel12.Size = new Size(65, 32);
+            customLabel12.StyleController = layoutControl2;
             customLabel12.TabIndex = 1;
             customLabel12.Text = "Окончание \r\nвязания";
+            customLabel12.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel11
             // 
-            customLabel11.Font = new Font("Arial", 10F);
-            customLabel11.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel11.Location = new Point(24, 133);
+            customLabel11.Appearance.Font = new Font("Arial", 10F);
+            customLabel11.Appearance.Options.UseFont = true;
+            customLabel11.Appearance.Options.UseTextOptions = true;
+            customLabel11.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel11.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel11.Location = new Point(24, 95);
             customLabel11.Name = "customLabel11";
-            customLabel11.Size = new Size(110, 30);
+            customLabel11.Size = new Size(48, 32);
+            customLabel11.StyleController = layoutControl2;
             customLabel11.TabIndex = 1;
             customLabel11.Text = "Начало \r\nвязания";
+            customLabel11.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel10
             // 
-            customLabel10.Font = new Font("Arial", 10F);
-            customLabel10.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel10.Location = new Point(24, 108);
+            customLabel10.Appearance.Font = new Font("Arial", 10F);
+            customLabel10.Appearance.Options.UseFont = true;
+            customLabel10.Appearance.Options.UseTextOptions = true;
+            customLabel10.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel10.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel10.Location = new Point(24, 70);
             customLabel10.Name = "customLabel10";
-            customLabel10.Size = new Size(110, 20);
+            customLabel10.Size = new Size(29, 16);
+            customLabel10.StyleController = layoutControl2;
             customLabel10.TabIndex = 1;
             customLabel10.Text = "Зона";
+            customLabel10.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel9
             // 
-            customLabel9.Font = new Font("Arial", 10F);
-            customLabel9.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel9.Location = new Point(290, 108);
+            customLabel9.Appearance.Font = new Font("Arial", 10F);
+            customLabel9.Appearance.Options.UseFont = true;
+            customLabel9.Appearance.Options.UseTextOptions = true;
+            customLabel9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel9.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel9.Location = new Point(279, 70);
             customLabel9.Name = "customLabel9";
-            customLabel9.Size = new Size(92, 20);
+            customLabel9.Size = new Size(49, 16);
+            customLabel9.StyleController = layoutControl2;
             customLabel9.TabIndex = 1;
             customLabel9.Text = "Автомат";
+            customLabel9.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel8
             // 
-            customLabel8.Font = new Font("Arial", 10F);
-            customLabel8.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
+            customLabel8.Appearance.Font = new Font("Arial", 10F);
+            customLabel8.Appearance.Options.UseFont = true;
+            customLabel8.Appearance.Options.UseTextOptions = true;
+            customLabel8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel8.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel8.Location = new Point(24, 45);
             customLabel8.Name = "customLabel8";
-            customLabel8.Size = new Size(110, 58);
+            customLabel8.Size = new Size(85, 16);
+            customLabel8.StyleController = layoutControl2;
             customLabel8.TabIndex = 1;
             customLabel8.Text = "Таб. № - ФИО";
+            customLabel8.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // TextBoxDefectCount
             // 
-            TextBoxDefectCount.Location = new Point(138, 235);
+            TextBoxDefectCount.Location = new Point(170, 241);
             TextBoxDefectCount.Name = "TextBoxDefectCount";
             TextBoxDefectCount.ObjectName = null;
             TextBoxDefectCount.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
@@ -6194,13 +6999,13 @@ namespace SewingProduction
             TextBoxDefectCount.Properties.Appearance.Options.UseBackColor = true;
             TextBoxDefectCount.Properties.Appearance.Options.UseFont = true;
             TextBoxDefectCount.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxDefectCount.Size = new Size(122, 22);
+            TextBoxDefectCount.Size = new Size(165, 22);
             TextBoxDefectCount.StyleController = layoutControl2;
             TextBoxDefectCount.TabIndex = 6;
             // 
             // TextBoxDefectWeight
             // 
-            TextBoxDefectWeight.Location = new Point(138, 205);
+            TextBoxDefectWeight.Location = new Point(170, 169);
             TextBoxDefectWeight.Name = "TextBoxDefectWeight";
             TextBoxDefectWeight.ObjectName = null;
             TextBoxDefectWeight.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)245, (int)(byte)245, (int)(byte)250);
@@ -6209,19 +7014,24 @@ namespace SewingProduction
             TextBoxDefectWeight.Properties.Appearance.Options.UseBackColor = true;
             TextBoxDefectWeight.Properties.Appearance.Options.UseFont = true;
             TextBoxDefectWeight.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxDefectWeight.Size = new Size(122, 22);
+            TextBoxDefectWeight.Size = new Size(165, 22);
             TextBoxDefectWeight.StyleController = layoutControl2;
             TextBoxDefectWeight.TabIndex = 16;
             // 
             // customLabel7
             // 
-            customLabel7.Font = new Font("Arial", 10F);
-            customLabel7.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            customLabel7.Location = new Point(24, 205);
+            customLabel7.Appearance.Font = new Font("Arial", 10F);
+            customLabel7.Appearance.Options.UseFont = true;
+            customLabel7.Appearance.Options.UseTextOptions = true;
+            customLabel7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel7.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel7.Location = new Point(24, 169);
             customLabel7.Name = "customLabel7";
-            customLabel7.Size = new Size(110, 150);
+            customLabel7.Size = new Size(142, 368);
+            customLabel7.StyleController = layoutControl2;
             customLabel7.TabIndex = 1;
             customLabel7.Text = "Брак";
+            customLabel7.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // layoutControlGroup3
             // 
@@ -6232,7 +7042,7 @@ namespace SewingProduction
             layoutControlGroup3.Size = new Size(1829, 596);
             layoutControlGroup3.TextVisible = false;
             // 
-            // layoutBrak
+            // layoutControlGroup6
             // 
             buttonImageOptions11.Image = (Image)resources.GetObject("buttonImageOptions11.Image");
             layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
@@ -6240,7 +7050,7 @@ namespace SewingProduction
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26, layoutControlItem27, layoutControlItem29, layoutControlItem30, layoutControlItem31, emptySpaceItem8, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, emptySpaceItem9, layoutControlItem36, layoutControlItem37, emptySpaceItem4, layoutControlItem12, layoutControlItem28, layoutControlItem41, layoutControlItem42, emptySpaceItem6, layoutControlItem38, layoutControlItem40, emptySpaceItem7, layoutControlItem43, layoutControlItem44, layoutControlItem45, emptySpaceItem13, emptySpaceItem14, simpleSeparator2, simpleSeparator4, simpleSeparator5, simpleSeparator6, layoutControlItem24, layoutControlItem19, layoutControlItem25, layoutControlItem39, emptySpaceItem11, splitterItem1, layoutControlItem13, layoutControlItem14, emptySpaceItem12, emptySpaceItem10, emptySpaceItem5 });
             layoutControlGroup6.Location = new Point(0, 0);
             layoutControlGroup6.Name = "layoutControlGroup3";
-            layoutControlGroup6.Size = new Size(777, 575);
+            layoutControlGroup6.Size = new Size(990, 575);
             layoutControlGroup6.Text = "Вязание";
             layoutControlGroup6.CustomButtonClick += (this.layoutControlGroup6_CustomButtonClick);
             // 
@@ -6249,252 +7059,252 @@ namespace SewingProduction
             layoutControlItem26.Control = customLabel8;
             layoutControlItem26.Location = new Point(0, 0);
             layoutControlItem26.Name = "layoutControlItem10";
-            layoutControlItem26.Size = new Size(114, 62);
+            layoutControlItem26.Size = new Size(89, 24);
             layoutControlItem26.TextVisible = false;
             // 
             // layoutControlItem27
             // 
             layoutControlItem27.Control = customLabel11;
-            layoutControlItem27.Location = new Point(0, 88);
+            layoutControlItem27.Location = new Point(0, 50);
             layoutControlItem27.Name = "layoutControlItem20";
-            layoutControlItem27.Size = new Size(114, 34);
+            layoutControlItem27.Size = new Size(52, 36);
             layoutControlItem27.TextVisible = false;
             // 
             // layoutControlItem29
             // 
             layoutControlItem29.Control = customLabel14;
-            layoutControlItem29.Location = new Point(0, 324);
+            layoutControlItem29.Location = new Point(0, 506);
             layoutControlItem29.Name = "layoutControlItem23";
-            layoutControlItem29.Size = new Size(114, 206);
+            layoutControlItem29.Size = new Size(200, 24);
             layoutControlItem29.TextVisible = false;
             // 
             // layoutControlItem30
             // 
             layoutControlItem30.Control = customLabel10;
-            layoutControlItem30.Location = new Point(0, 63);
+            layoutControlItem30.Location = new Point(0, 25);
             layoutControlItem30.Name = "layoutControlItem19";
-            layoutControlItem30.Size = new Size(114, 24);
+            layoutControlItem30.Size = new Size(33, 24);
             layoutControlItem30.TextVisible = false;
             // 
             // layoutControlItem31
             // 
             layoutControlItem31.Control = TextBoxAreaNumber;
-            layoutControlItem31.Location = new Point(114, 63);
+            layoutControlItem31.Location = new Point(33, 25);
             layoutControlItem31.MinSize = new Size(24, 24);
             layoutControlItem31.Name = "layoutControlItem26";
-            layoutControlItem31.Size = new Size(131, 24);
+            layoutControlItem31.Size = new Size(191, 24);
             layoutControlItem31.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem31.TextVisible = false;
             // 
             // emptySpaceItem8
             // 
-            emptySpaceItem8.Location = new Point(245, 63);
+            emptySpaceItem8.Location = new Point(224, 25);
             emptySpaceItem8.Name = "emptySpaceItem6";
-            emptySpaceItem8.Size = new Size(21, 24);
+            emptySpaceItem8.Size = new Size(31, 24);
             // 
             // layoutControlItem32
             // 
             layoutControlItem32.Control = TextBoxTabFio;
-            layoutControlItem32.Location = new Point(114, 0);
+            layoutControlItem32.Location = new Point(89, 0);
             layoutControlItem32.MinSize = new Size(24, 24);
             layoutControlItem32.Name = "layoutControlItem24";
-            layoutControlItem32.Size = new Size(639, 62);
+            layoutControlItem32.Size = new Size(877, 24);
             layoutControlItem32.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem32.TextVisible = false;
             // 
             // layoutControlItem33
             // 
             layoutControlItem33.Control = customLabel9;
-            layoutControlItem33.Location = new Point(266, 63);
+            layoutControlItem33.Location = new Point(255, 25);
             layoutControlItem33.Name = "layoutControlItem18";
-            layoutControlItem33.Size = new Size(96, 24);
+            layoutControlItem33.Size = new Size(53, 24);
             layoutControlItem33.TextVisible = false;
             // 
             // layoutControlItem34
             // 
             layoutControlItem34.Control = TextBoxMachineNumber;
-            layoutControlItem34.Location = new Point(362, 63);
+            layoutControlItem34.Location = new Point(308, 25);
             layoutControlItem34.MinSize = new Size(24, 24);
             layoutControlItem34.Name = "layoutControlItem25";
-            layoutControlItem34.Size = new Size(391, 24);
+            layoutControlItem34.Size = new Size(658, 24);
             layoutControlItem34.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem34.TextVisible = false;
             // 
             // layoutControlItem35
             // 
             layoutControlItem35.Control = TextBoxKnitStartDate;
-            layoutControlItem35.Location = new Point(114, 88);
+            layoutControlItem35.Location = new Point(52, 50);
             layoutControlItem35.MinSize = new Size(24, 24);
             layoutControlItem35.Name = "layoutControlItem27";
-            layoutControlItem35.Size = new Size(131, 24);
+            layoutControlItem35.Size = new Size(187, 25);
             layoutControlItem35.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem35.TextVisible = false;
             // 
             // emptySpaceItem9
             // 
-            emptySpaceItem9.Location = new Point(245, 88);
+            emptySpaceItem9.Location = new Point(239, 50);
             emptySpaceItem9.Name = "emptySpaceItem7";
-            emptySpaceItem9.Size = new Size(21, 34);
+            emptySpaceItem9.Size = new Size(30, 36);
             // 
             // layoutControlItem36
             // 
             layoutControlItem36.Control = customLabel12;
-            layoutControlItem36.Location = new Point(266, 88);
+            layoutControlItem36.Location = new Point(269, 50);
             layoutControlItem36.Name = "layoutControlItem21";
-            layoutControlItem36.Size = new Size(96, 34);
+            layoutControlItem36.Size = new Size(69, 36);
             layoutControlItem36.TextVisible = false;
             // 
             // layoutControlItem37
             // 
             layoutControlItem37.Control = TextBoxKnitEndDate;
-            layoutControlItem37.Location = new Point(362, 88);
+            layoutControlItem37.Location = new Point(338, 50);
             layoutControlItem37.MinSize = new Size(24, 24);
             layoutControlItem37.Name = "layoutControlItem28";
-            layoutControlItem37.Size = new Size(137, 24);
+            layoutControlItem37.Size = new Size(220, 25);
             layoutControlItem37.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem37.TextVisible = false;
             // 
             // emptySpaceItem4
             // 
-            emptySpaceItem4.Location = new Point(114, 112);
+            emptySpaceItem4.Location = new Point(52, 75);
             emptySpaceItem4.Name = "item0";
-            emptySpaceItem4.Size = new Size(131, 10);
+            emptySpaceItem4.Size = new Size(187, 11);
             // 
             // layoutControlItem12
             // 
             layoutControlItem12.Control = customLabel18;
-            layoutControlItem12.Location = new Point(213, 123);
+            layoutControlItem12.Location = new Point(272, 87);
             layoutControlItem12.Name = "item2";
-            layoutControlItem12.Size = new Size(112, 36);
+            layoutControlItem12.Size = new Size(177, 36);
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem28
             // 
             layoutControlItem28.Control = customLabel13;
-            layoutControlItem28.Location = new Point(400, 123);
+            layoutControlItem28.Location = new Point(513, 87);
             layoutControlItem28.Name = "layoutControlItem22";
-            layoutControlItem28.Size = new Size(117, 36);
+            layoutControlItem28.Size = new Size(175, 36);
             layoutControlItem28.TextVisible = false;
             // 
             // layoutControlItem41
             // 
             layoutControlItem41.Control = customLabel19;
-            layoutControlItem41.Location = new Point(594, 123);
+            layoutControlItem41.Location = new Point(752, 87);
             layoutControlItem41.Name = "layoutControlItem41";
-            layoutControlItem41.Size = new Size(104, 36);
+            layoutControlItem41.Size = new Size(160, 36);
             layoutControlItem41.TextVisible = false;
             // 
             // layoutControlItem42
             // 
             layoutControlItem42.Control = TextBoxKolFactDelta;
-            layoutControlItem42.Location = new Point(698, 123);
+            layoutControlItem42.Location = new Point(912, 87);
             layoutControlItem42.MinSize = new Size(54, 26);
             layoutControlItem42.Name = "layoutControlItem42";
-            layoutControlItem42.Size = new Size(55, 36);
+            layoutControlItem42.Size = new Size(54, 36);
             layoutControlItem42.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem42.TextVisible = false;
             // 
             // emptySpaceItem6
             // 
-            emptySpaceItem6.Location = new Point(584, 123);
+            emptySpaceItem6.Location = new Point(742, 87);
             emptySpaceItem6.Name = "item5";
             emptySpaceItem6.Size = new Size(10, 36);
             // 
             // layoutControlItem38
             // 
             layoutControlItem38.Control = TextBoxKolFactSmen;
-            layoutControlItem38.Location = new Point(517, 123);
+            layoutControlItem38.Location = new Point(688, 87);
             layoutControlItem38.MinSize = new Size(54, 26);
             layoutControlItem38.Name = "layoutControlItem38";
-            layoutControlItem38.Size = new Size(67, 36);
+            layoutControlItem38.Size = new Size(54, 36);
             layoutControlItem38.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem38.TextVisible = false;
             // 
             // layoutControlItem40
             // 
             layoutControlItem40.Control = TextBoxKolFactZadany;
-            layoutControlItem40.Location = new Point(325, 123);
+            layoutControlItem40.Location = new Point(449, 87);
             layoutControlItem40.MinSize = new Size(54, 26);
             layoutControlItem40.Name = "layoutControlItem40";
-            layoutControlItem40.Size = new Size(65, 26);
+            layoutControlItem40.Size = new Size(54, 26);
             layoutControlItem40.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem40.TextVisible = false;
             // 
             // emptySpaceItem7
             // 
-            emptySpaceItem7.Location = new Point(362, 112);
+            emptySpaceItem7.Location = new Point(338, 75);
             emptySpaceItem7.Name = "item1";
-            emptySpaceItem7.Size = new Size(137, 10);
+            emptySpaceItem7.Size = new Size(220, 11);
             // 
             // layoutControlItem43
             // 
             layoutControlItem43.Control = gridControlSockDownTimeList;
-            layoutControlItem43.Location = new Point(114, 324);
+            layoutControlItem43.Location = new Point(200, 506);
             layoutControlItem43.Name = "layoutControlItem43";
-            layoutControlItem43.Size = new Size(639, 206);
+            layoutControlItem43.Size = new Size(766, 24);
             layoutControlItem43.TextVisible = false;
             // 
             // layoutControlItem44
             // 
             layoutControlItem44.Control = customLabel20;
-            layoutControlItem44.Location = new Point(509, 88);
+            layoutControlItem44.Location = new Point(574, 50);
             layoutControlItem44.Name = "layoutControlItem44";
-            layoutControlItem44.Size = new Size(130, 34);
+            layoutControlItem44.Size = new Size(95, 36);
             layoutControlItem44.TextVisible = false;
             // 
             // layoutControlItem45
             // 
             layoutControlItem45.Control = TextBoxKnitTotalTime;
-            layoutControlItem45.Location = new Point(639, 88);
+            layoutControlItem45.Location = new Point(669, 50);
             layoutControlItem45.MinSize = new Size(24, 24);
             layoutControlItem45.Name = "layoutControlItem45";
-            layoutControlItem45.Size = new Size(114, 24);
+            layoutControlItem45.Size = new Size(297, 25);
             layoutControlItem45.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem45.TextVisible = false;
             // 
             // emptySpaceItem13
             // 
-            emptySpaceItem13.Location = new Point(499, 88);
+            emptySpaceItem13.Location = new Point(558, 50);
             emptySpaceItem13.Name = "emptySpaceItem13";
-            emptySpaceItem13.Size = new Size(10, 34);
+            emptySpaceItem13.Size = new Size(16, 36);
             // 
             // emptySpaceItem14
             // 
-            emptySpaceItem14.Location = new Point(639, 112);
+            emptySpaceItem14.Location = new Point(669, 75);
             emptySpaceItem14.Name = "emptySpaceItem14";
-            emptySpaceItem14.Size = new Size(114, 10);
+            emptySpaceItem14.Size = new Size(297, 11);
             // 
             // simpleSeparator2
             // 
-            simpleSeparator2.Location = new Point(0, 62);
+            simpleSeparator2.Location = new Point(0, 24);
             simpleSeparator2.Name = "simpleSeparator2";
-            simpleSeparator2.Size = new Size(753, 1);
+            simpleSeparator2.Size = new Size(966, 1);
             // 
             // simpleSeparator4
             // 
-            simpleSeparator4.Location = new Point(0, 87);
+            simpleSeparator4.Location = new Point(0, 49);
             simpleSeparator4.Name = "simpleSeparator4";
-            simpleSeparator4.Size = new Size(753, 1);
+            simpleSeparator4.Size = new Size(966, 1);
             // 
             // simpleSeparator5
             // 
-            simpleSeparator5.Location = new Point(0, 122);
+            simpleSeparator5.Location = new Point(0, 86);
             simpleSeparator5.Name = "simpleSeparator5";
-            simpleSeparator5.Size = new Size(753, 1);
+            simpleSeparator5.Size = new Size(966, 1);
             // 
             // simpleSeparator6
             // 
-            simpleSeparator6.Location = new Point(0, 159);
+            simpleSeparator6.Location = new Point(0, 123);
             simpleSeparator6.Name = "simpleSeparator6";
-            simpleSeparator6.Size = new Size(753, 1);
+            simpleSeparator6.Size = new Size(966, 1);
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = TextBoxDefectWeight;
-            layoutControlItem24.Location = new Point(114, 160);
+            layoutControlItem24.Location = new Point(146, 124);
             layoutControlItem24.MinSize = new Size(54, 26);
             layoutControlItem24.Name = "layoutControlItem16";
-            layoutControlItem24.Size = new Size(152, 30);
+            layoutControlItem24.Size = new Size(195, 72);
             layoutControlItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem24.Text = "кг";
             layoutControlItem24.TextLocation = DevExpress.Utils.Locations.Right;
@@ -6503,20 +7313,20 @@ namespace SewingProduction
             // layoutControlItem19
             // 
             layoutControlItem19.Control = customLabel7;
-            layoutControlItem19.Location = new Point(0, 160);
+            layoutControlItem19.Location = new Point(0, 124);
             layoutControlItem19.MinSize = new Size(24, 24);
             layoutControlItem19.Name = "layoutControlItem9";
-            layoutControlItem19.Size = new Size(114, 154);
+            layoutControlItem19.Size = new Size(146, 372);
             layoutControlItem19.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem19.TextVisible = false;
             // 
             // layoutControlItem25
             // 
             layoutControlItem25.Control = TextBoxDefectCount;
-            layoutControlItem25.Location = new Point(114, 190);
+            layoutControlItem25.Location = new Point(146, 196);
             layoutControlItem25.MinSize = new Size(54, 26);
             layoutControlItem25.Name = "layoutControlItem17";
-            layoutControlItem25.Size = new Size(152, 30);
+            layoutControlItem25.Size = new Size(195, 73);
             layoutControlItem25.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem25.Text = "шт";
             layoutControlItem25.TextLocation = DevExpress.Utils.Locations.Right;
@@ -6525,62 +7335,62 @@ namespace SewingProduction
             // layoutControlItem39
             // 
             layoutControlItem39.Control = gridControlSockDefectList;
-            layoutControlItem39.Location = new Point(266, 160);
+            layoutControlItem39.Location = new Point(341, 124);
             layoutControlItem39.Name = "layoutControlItem39";
-            layoutControlItem39.Size = new Size(487, 154);
+            layoutControlItem39.Size = new Size(625, 372);
             layoutControlItem39.TextVisible = false;
             // 
             // emptySpaceItem11
             // 
-            emptySpaceItem11.Location = new Point(114, 220);
+            emptySpaceItem11.Location = new Point(146, 269);
             emptySpaceItem11.Name = "emptySpaceItem11";
-            emptySpaceItem11.Size = new Size(152, 94);
+            emptySpaceItem11.Size = new Size(195, 227);
             // 
             // splitterItem1
             // 
-            splitterItem1.Location = new Point(0, 314);
+            splitterItem1.Location = new Point(0, 496);
             splitterItem1.Name = "splitterItem1";
-            splitterItem1.Size = new Size(753, 10);
+            splitterItem1.Size = new Size(966, 10);
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = customLabel5;
-            layoutControlItem13.Location = new Point(0, 123);
+            layoutControlItem13.Location = new Point(0, 87);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new Size(130, 36);
+            layoutControlItem13.Size = new Size(208, 36);
             layoutControlItem13.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = TextBoxKolPlanZadany;
-            layoutControlItem14.Location = new Point(130, 123);
+            layoutControlItem14.Location = new Point(208, 87);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new Size(73, 36);
+            layoutControlItem14.Size = new Size(54, 36);
             layoutControlItem14.TextVisible = false;
             // 
             // emptySpaceItem12
             // 
-            emptySpaceItem12.Location = new Point(203, 123);
+            emptySpaceItem12.Location = new Point(262, 87);
             emptySpaceItem12.Name = "emptySpaceItem12";
             emptySpaceItem12.Size = new Size(10, 36);
             // 
             // emptySpaceItem10
             // 
-            emptySpaceItem10.Location = new Point(390, 123);
+            emptySpaceItem10.Location = new Point(503, 87);
             emptySpaceItem10.Name = "emptySpaceItem10";
             emptySpaceItem10.Size = new Size(10, 36);
             // 
             // emptySpaceItem5
             // 
-            emptySpaceItem5.Location = new Point(325, 149);
+            emptySpaceItem5.Location = new Point(449, 113);
             emptySpaceItem5.Name = "emptySpaceItem5";
-            emptySpaceItem5.Size = new Size(65, 10);
+            emptySpaceItem5.Size = new Size(54, 10);
             // 
             // simpleSeparator3
             // 
-            simpleSeparator3.Location = new Point(777, 574);
+            simpleSeparator3.Location = new Point(990, 574);
             simpleSeparator3.Name = "simpleSeparator3";
-            simpleSeparator3.Size = new Size(1032, 1);
+            simpleSeparator3.Size = new Size(819, 1);
             // 
             // simpleSeparator1
             // 
@@ -6588,12 +7398,12 @@ namespace SewingProduction
             simpleSeparator1.Name = "simpleSeparator1";
             simpleSeparator1.Size = new Size(1809, 1);
             // 
-            // layoutNorms
+            // layoutControlGroup4
             // 
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10 });
-            layoutControlGroup4.Location = new Point(777, 0);
+            layoutControlGroup4.Location = new Point(990, 0);
             layoutControlGroup4.Name = "layoutControlGroup4";
-            layoutControlGroup4.Size = new Size(1032, 275);
+            layoutControlGroup4.Size = new Size(819, 275);
             layoutControlGroup4.Text = "Смены";
             // 
             // layoutControlItem10
@@ -6601,15 +7411,15 @@ namespace SewingProduction
             layoutControlItem10.Control = gridControlSockZadanySmenList;
             layoutControlItem10.Location = new Point(0, 0);
             layoutControlItem10.Name = "item4";
-            layoutControlItem10.Size = new Size(1008, 230);
+            layoutControlItem10.Size = new Size(795, 230);
             layoutControlItem10.TextVisible = false;
             // 
-            // layoutSeb
+            // layoutControlGroup7
             // 
             layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem11 });
-            layoutControlGroup7.Location = new Point(777, 285);
+            layoutControlGroup7.Location = new Point(990, 285);
             layoutControlGroup7.Name = "layoutControlGroup7";
-            layoutControlGroup7.Size = new Size(1032, 289);
+            layoutControlGroup7.Size = new Size(819, 289);
             layoutControlGroup7.Text = "Обслуживание оборудования";
             // 
             // layoutControlItem11
@@ -6617,14 +7427,14 @@ namespace SewingProduction
             layoutControlItem11.Control = gridControlSockServiceList;
             layoutControlItem11.Location = new Point(0, 0);
             layoutControlItem11.Name = "item6";
-            layoutControlItem11.Size = new Size(1008, 244);
+            layoutControlItem11.Size = new Size(795, 244);
             layoutControlItem11.TextVisible = false;
             // 
             // splitterItem2
             // 
-            splitterItem2.Location = new Point(777, 275);
+            splitterItem2.Location = new Point(990, 275);
             splitterItem2.Name = "splitterItem2";
-            splitterItem2.Size = new Size(1032, 10);
+            splitterItem2.Size = new Size(819, 10);
             // 
             // TabPageMgKart
             // 
@@ -7027,461 +7837,6 @@ namespace SewingProduction
             gridColumn57.Visible = true;
             gridColumn57.VisibleIndex = 8;
             // 
-            // customLabel2
-            // 
-            customLabel2.BackColor = Color.Transparent;
-            customLabel2.Font = new Font("Arial", 12F, FontStyle.Bold);
-            customLabel2.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            customLabel2.Location = new Point(2, 2);
-            customLabel2.Margin = new Padding(0);
-            customLabel2.Name = "customLabel2";
-            customLabel2.Padding = new Padding(9, 0, 0, 0);
-            customLabel2.Size = new Size(90, 30);
-            customLabel2.TabIndex = 1;
-            customLabel2.Text = "ПОИСК";
-            customLabel2.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // customLabel1
-            // 
-            customLabel1.BackColor = Color.Transparent;
-            customLabel1.Font = new Font("Arial", 10F);
-            customLabel1.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            customLabel1.Location = new Point(726, 5);
-            customLabel1.Margin = new Padding(0);
-            customLabel1.Name = "customLabel1";
-            customLabel1.Size = new Size(68, 24);
-            customLabel1.TabIndex = 1;
-            customLabel1.Text = "№ пачки";
-            customLabel1.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // tbNomZad
-            // 
-            tbNomZad.BackColor = Color.FromArgb((int)(byte)248, (int)(byte)248, (int)(byte)255);
-            tbNomZad.BorderStyle = BorderStyle.FixedSingle;
-            tbNomZad.ErrorColor = Color.Red;
-            tbNomZad.ErrorMessage = null;
-            tbNomZad.Font = new Font("Arial", 10F);
-            tbNomZad.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbNomZad.Location = new Point(1078, 5);
-            tbNomZad.Margin = new Padding(0);
-            tbNomZad.Name = "tbNomZad";
-            tbNomZad.Size = new Size(104, 22);
-            tbNomZad.TabIndex = 5;
-            tbNomZad.KeyDown += (this.tbNomZad_KeyDown);
-            // 
-            // customLabel4
-            // 
-            customLabel4.BackColor = Color.Transparent;
-            customLabel4.Font = new Font("Arial", 10F);
-            customLabel4.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            customLabel4.Location = new Point(994, 5);
-            customLabel4.Margin = new Padding(0);
-            customLabel4.Name = "customLabel4";
-            customLabel4.Size = new Size(80, 24);
-            customLabel4.TabIndex = 1;
-            customLabel4.Text = "№ задания";
-            customLabel4.TextAlign = ContentAlignment.MiddleRight;
-            // 
-            // customRadioGroup3
-            // 
-            customRadioGroup3.Location = new Point(350, 2);
-            customRadioGroup3.Name = "customRadioGroup3";
-            customRadioGroup3.ObjectName = null;
-            customRadioGroup3.Properties.Appearance.Font = new Font("Arial", 10F);
-            customRadioGroup3.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)85, (int)(byte)45, (int)(byte)115);
-            customRadioGroup3.Properties.Appearance.Options.UseFont = true;
-            customRadioGroup3.Properties.Appearance.Options.UseForeColor = true;
-            customRadioGroup3.Properties.Columns = 4;
-            customRadioGroup3.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ задания", true, null, "ProcessingByTaskNumber"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ пачки", true, null, "ProcessingByPachNumber"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Артикул"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "№ накладной") });
-            customRadioGroup3.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
-            customRadioGroup3.Properties.Padding = new Padding(1, 0, 0, 0);
-            customRadioGroup3.Size = new Size(359, 30);
-            customRadioGroup3.StyleController = layoutControl3;
-            customRadioGroup3.TabIndex = 2;
-            customRadioGroup3.SelectedIndexChanged += (this.customRadioGroup3_SelectedIndexChanged);
-            customRadioGroup3.EditValueChanged += (this.customRadioGroup3_EditValueChanged);
-            // 
-            // layoutControl3
-            // 
-            layoutControl3.Controls.Add(textBoxYearIzNakl);
-            layoutControl3.Controls.Add(customLabel24);
-            layoutControl3.Controls.Add(textBoxIzNakl);
-            layoutControl3.Controls.Add(customLabel23);
-            layoutControl3.Controls.Add(searchLookUpEditArticul);
-            layoutControl3.Controls.Add(customLabel6);
-            layoutControl3.Controls.Add(tbNomZad);
-            layoutControl3.Controls.Add(customLabel2);
-            layoutControl3.Controls.Add(customLabel4);
-            layoutControl3.Controls.Add(customRadioGroup2);
-            layoutControl3.Controls.Add(tbYearPach);
-            layoutControl3.Controls.Add(customRadioGroup3);
-            layoutControl3.Controls.Add(label4);
-            layoutControl3.Controls.Add(customLabel1);
-            layoutControl3.Controls.Add(tbNomPach);
-            layoutControl3.Location = new Point(2, 3);
-            layoutControl3.Name = "layoutControl3";
-            layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(824, 283, 650, 400);
-            layoutControl3.Root = layoutControlGroup8;
-            layoutControl3.Size = new Size(1821, 34);
-            layoutControl3.TabIndex = 13;
-            layoutControl3.Text = "layoutControl3";
-            // 
-            // textBoxYearIzNakl
-            // 
-            textBoxYearIzNakl.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
-            textBoxYearIzNakl.BorderStyle = BorderStyle.FixedSingle;
-            textBoxYearIzNakl.ErrorColor = Color.Red;
-            textBoxYearIzNakl.ErrorMessage = null;
-            textBoxYearIzNakl.Font = new Font("Arial", 10F);
-            textBoxYearIzNakl.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
-            textBoxYearIzNakl.Location = new Point(1713, 5);
-            textBoxYearIzNakl.Name = "textBoxYearIzNakl";
-            textBoxYearIzNakl.Size = new Size(52, 20);
-            textBoxYearIzNakl.TabIndex = 10;
-            // 
-            // customLabel24
-            // 
-            customLabel24.Font = new Font("Arial", 10F);
-            customLabel24.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
-            customLabel24.Location = new Point(1674, 5);
-            customLabel24.Name = "customLabel24";
-            customLabel24.Size = new Size(35, 24);
-            customLabel24.TabIndex = 9;
-            customLabel24.Text = "год";
-            // 
-            // textBoxIzNakl
-            // 
-            textBoxIzNakl.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
-            textBoxIzNakl.BorderStyle = BorderStyle.FixedSingle;
-            textBoxIzNakl.ErrorColor = Color.Red;
-            textBoxIzNakl.ErrorMessage = null;
-            textBoxIzNakl.Font = new Font("Arial", 10F);
-            textBoxIzNakl.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
-            textBoxIzNakl.Location = new Point(1592, 5);
-            textBoxIzNakl.Name = "textBoxIzNakl";
-            textBoxIzNakl.Size = new Size(68, 20);
-            textBoxIzNakl.TabIndex = 7;
-            textBoxIzNakl.KeyDown += (this.textBoxIzNakl_KeyDown);
-            // 
-            // customLabel23
-            // 
-            customLabel23.Font = new Font("Arial", 10F);
-            customLabel23.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
-            customLabel23.Location = new Point(1484, 5);
-            customLabel23.Name = "customLabel23";
-            customLabel23.Size = new Size(104, 24);
-            customLabel23.TabIndex = 7;
-            customLabel23.Text = "№ накладной";
-            // 
-            // searchLookUpEditArticul
-            // 
-            searchLookUpEditArticul.Location = new Point(1275, 6);
-            searchLookUpEditArticul.Name = "searchLookUpEditArticul";
-            searchLookUpEditArticul.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
-            searchLookUpEditArticul.Properties.Appearance.Font = new Font("Arial", 10F);
-            searchLookUpEditArticul.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
-            searchLookUpEditArticul.Properties.Appearance.Options.UseBackColor = true;
-            searchLookUpEditArticul.Properties.Appearance.Options.UseFont = true;
-            searchLookUpEditArticul.Properties.Appearance.Options.UseForeColor = true;
-            searchLookUpEditArticul.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search) });
-            searchLookUpEditArticul.Properties.PopupView = customSearchLookUpEdit1View;
-            searchLookUpEditArticul.Size = new Size(187, 22);
-            searchLookUpEditArticul.StyleController = layoutControl3;
-            searchLookUpEditArticul.TabIndex = 6;
-            searchLookUpEditArticul.ButtonClick += (this.searchLookUpEditArticul_ButtonClick);
-            searchLookUpEditArticul.EditValueChanged += (this.searchLookUpEditArticul_EditValueChanged);
-            // 
-            // customSearchLookUpEdit1View
-            // 
-            customSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { columnKo, columnGrup, columnArticul, columnMod });
-            customSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            customSearchLookUpEdit1View.Name = "customSearchLookUpEdit1View";
-            customSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            customSearchLookUpEdit1View.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
-            customSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // columnKo
-            // 
-            columnKo.Caption = "Код";
-            columnKo.Name = "columnKo";
-            columnKo.Visible = true;
-            columnKo.VisibleIndex = 0;
-            // 
-            // columnGrup
-            // 
-            columnGrup.Caption = "Группа";
-            columnGrup.Name = "columnGrup";
-            columnGrup.Visible = true;
-            columnGrup.VisibleIndex = 1;
-            // 
-            // columnArticul
-            // 
-            columnArticul.Caption = "Артикул";
-            columnArticul.Name = "columnArticul";
-            columnArticul.Visible = true;
-            columnArticul.VisibleIndex = 2;
-            // 
-            // columnMod
-            // 
-            columnMod.Caption = "Модель";
-            columnMod.Name = "columnMod";
-            columnMod.Visible = true;
-            columnMod.VisibleIndex = 3;
-            // 
-            // customLabel6
-            // 
-            customLabel6.Font = new Font("Arial", 10F);
-            customLabel6.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
-            customLabel6.Location = new Point(1203, 6);
-            customLabel6.Name = "customLabel6";
-            customLabel6.Size = new Size(68, 22);
-            customLabel6.TabIndex = 1;
-            customLabel6.Text = "Артикул";
-            // 
-            // customRadioGroup2
-            // 
-            customRadioGroup2.Location = new Point(96, 2);
-            customRadioGroup2.Name = "customRadioGroup2";
-            customRadioGroup2.ObjectName = null;
-            customRadioGroup2.Properties.Appearance.Font = new Font("Arial", 10F);
-            customRadioGroup2.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)85, (int)(byte)45, (int)(byte)115);
-            customRadioGroup2.Properties.Appearance.Options.UseFont = true;
-            customRadioGroup2.Properties.Appearance.Options.UseForeColor = true;
-            customRadioGroup2.Properties.Columns = 4;
-            customRadioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ШП"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ВЗП"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Носки"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "ШПМ") });
-            customRadioGroup2.Properties.ItemsLayout = DevExpress.XtraEditors.RadioGroupItemsLayout.Flow;
-            customRadioGroup2.Properties.Padding = new Padding(1, 0, 0, 0);
-            customRadioGroup2.Size = new Size(240, 30);
-            customRadioGroup2.StyleController = layoutControl3;
-            customRadioGroup2.TabIndex = 0;
-            customRadioGroup2.SelectedIndexChanged += (this.customRadioGroup2_SelectedIndexChanged);
-            // 
-            // layoutTkans
-            // 
-            layoutControlGroup8.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            layoutControlGroup8.GroupBordersVisible = false;
-            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, emptySpaceItem1, emptySpaceItem3, layoutControlGroup1, layoutControlGroup2, layoutControlItem1, emptySpaceItem64, layoutControlGroup24, emptySpaceItem63, layoutControlGroup28, emptySpaceItem65 });
-            layoutControlGroup8.Name = "Root";
-            layoutControlGroup8.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup8.Size = new Size(1821, 34);
-            layoutControlGroup8.TextLocation = DevExpress.Utils.Locations.Left;
-            // 
-            // layoutControlItem2
-            // 
-            layoutControlItem2.Control = customRadioGroup2;
-            layoutControlItem2.Location = new Point(94, 0);
-            layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(244, 34);
-            layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            layoutControlItem3.Control = customRadioGroup3;
-            layoutControlItem3.Location = new Point(348, 0);
-            layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(363, 34);
-            layoutControlItem3.TextVisible = false;
-            // 
-            // emptySpaceItem1
-            // 
-            emptySpaceItem1.Location = new Point(711, 0);
-            emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new Size(10, 34);
-            // 
-            // emptySpaceItem3
-            // 
-            emptySpaceItem3.Location = new Point(979, 0);
-            emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new Size(10, 34);
-            // 
-            // layoutControlGroup1
-            // 
-            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, emptySpaceItem2, layoutControlItem6, layoutControlItem7 });
-            layoutControlGroup1.Location = new Point(721, 0);
-            layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup1.Size = new Size(258, 34);
-            layoutControlGroup1.TextVisible = false;
-            // 
-            // layoutControlItem4
-            // 
-            layoutControlItem4.Control = customLabel1;
-            layoutControlItem4.Location = new Point(0, 0);
-            layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new Size(72, 28);
-            layoutControlItem4.TextVisible = false;
-            // 
-            // layoutControlItem5
-            // 
-            layoutControlItem5.Control = tbNomPach;
-            layoutControlItem5.Location = new Point(72, 0);
-            layoutControlItem5.MaxSize = new Size(81, 26);
-            layoutControlItem5.MinSize = new Size(81, 26);
-            layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(81, 28);
-            layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem5.TextVisible = false;
-            // 
-            // emptySpaceItem2
-            // 
-            emptySpaceItem2.Location = new Point(153, 0);
-            emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new Size(10, 28);
-            // 
-            // layoutControlItem6
-            // 
-            layoutControlItem6.Control = label4;
-            layoutControlItem6.Location = new Point(163, 0);
-            layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(37, 28);
-            layoutControlItem6.TextVisible = false;
-            // 
-            // layoutControlItem7
-            // 
-            layoutControlItem7.Control = tbYearPach;
-            layoutControlItem7.Location = new Point(200, 0);
-            layoutControlItem7.MaxSize = new Size(52, 26);
-            layoutControlItem7.MinSize = new Size(52, 26);
-            layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new Size(52, 28);
-            layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem7.TextVisible = false;
-            // 
-            // layoutControlGroup2
-            // 
-            layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8, layoutControlItem9 });
-            layoutControlGroup2.Location = new Point(989, 0);
-            layoutControlGroup2.Name = "layoutControlGroup2";
-            layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup2.Size = new Size(198, 34);
-            layoutControlGroup2.TextVisible = false;
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = customLabel4;
-            layoutControlItem8.Location = new Point(0, 0);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new Size(84, 28);
-            layoutControlItem8.TextVisible = false;
-            // 
-            // layoutControlItem9
-            // 
-            layoutControlItem9.Control = tbNomZad;
-            layoutControlItem9.Location = new Point(84, 0);
-            layoutControlItem9.MaxSize = new Size(108, 26);
-            layoutControlItem9.MinSize = new Size(108, 26);
-            layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new Size(108, 28);
-            layoutControlItem9.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem9.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = customLabel2;
-            layoutControlItem1.Location = new Point(0, 0);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(94, 34);
-            layoutControlItem1.TextVisible = false;
-            // 
-            // emptySpaceItem64
-            // 
-            emptySpaceItem64.Location = new Point(338, 0);
-            emptySpaceItem64.Name = "emptySpaceItem64";
-            emptySpaceItem64.Size = new Size(10, 34);
-            // 
-            // layoutControlGroup24
-            // 
-            layoutControlGroup24.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem147, layoutControlItem152 });
-            layoutControlGroup24.Location = new Point(1197, 0);
-            layoutControlGroup24.Name = "layoutControlGroup24";
-            layoutControlGroup24.Padding = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
-            layoutControlGroup24.Size = new Size(271, 34);
-            layoutControlGroup24.TextVisible = false;
-            // 
-            // layoutControlItem147
-            // 
-            layoutControlItem147.Control = customLabel6;
-            layoutControlItem147.Location = new Point(0, 0);
-            layoutControlItem147.Name = "layoutControlItem147";
-            layoutControlItem147.Size = new Size(72, 26);
-            layoutControlItem147.TextVisible = false;
-            // 
-            // layoutControlItem152
-            // 
-            layoutControlItem152.Control = searchLookUpEditArticul;
-            layoutControlItem152.Location = new Point(72, 0);
-            layoutControlItem152.MaxSize = new Size(191, 26);
-            layoutControlItem152.MinSize = new Size(191, 26);
-            layoutControlItem152.Name = "layoutControlItem152";
-            layoutControlItem152.Size = new Size(191, 26);
-            layoutControlItem152.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem152.TextVisible = false;
-            // 
-            // emptySpaceItem63
-            // 
-            emptySpaceItem63.Location = new Point(1187, 0);
-            emptySpaceItem63.Name = "emptySpaceItem63";
-            emptySpaceItem63.Size = new Size(10, 34);
-            // 
-            // layoutControlGroup28
-            // 
-            layoutControlGroup28.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { emptySpaceItem76, layoutControlItem195, layoutControlItem196, layoutControlItem197, emptySpaceItem77, layoutControlItem198 });
-            layoutControlGroup28.Location = new Point(1479, 0);
-            layoutControlGroup28.Name = "layoutControlGroup28";
-            layoutControlGroup28.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup28.Size = new Size(342, 34);
-            layoutControlGroup28.TextVisible = false;
-            // 
-            // emptySpaceItem76
-            // 
-            emptySpaceItem76.Location = new Point(285, 0);
-            emptySpaceItem76.Name = "emptySpaceItem76";
-            emptySpaceItem76.Size = new Size(51, 28);
-            // 
-            // layoutControlItem195
-            // 
-            layoutControlItem195.Control = customLabel23;
-            layoutControlItem195.Location = new Point(0, 0);
-            layoutControlItem195.Name = "layoutControlItem195";
-            layoutControlItem195.Size = new Size(108, 28);
-            layoutControlItem195.TextVisible = false;
-            // 
-            // layoutControlItem196
-            // 
-            layoutControlItem196.Control = textBoxIzNakl;
-            layoutControlItem196.Location = new Point(108, 0);
-            layoutControlItem196.Name = "layoutControlItem196";
-            layoutControlItem196.Size = new Size(72, 28);
-            layoutControlItem196.TextVisible = false;
-            // 
-            // layoutControlItem197
-            // 
-            layoutControlItem197.Control = customLabel24;
-            layoutControlItem197.Location = new Point(190, 0);
-            layoutControlItem197.Name = "layoutControlItem197";
-            layoutControlItem197.Size = new Size(39, 28);
-            layoutControlItem197.TextVisible = false;
-            // 
-            // emptySpaceItem77
-            // 
-            emptySpaceItem77.Location = new Point(180, 0);
-            emptySpaceItem77.Name = "emptySpaceItem77";
-            emptySpaceItem77.Size = new Size(10, 28);
-            // 
-            // layoutControlItem198
-            // 
-            layoutControlItem198.Control = textBoxYearIzNakl;
-            layoutControlItem198.Location = new Point(229, 0);
-            layoutControlItem198.Name = "layoutControlItem198";
-            layoutControlItem198.Size = new Size(56, 28);
-            layoutControlItem198.TextVisible = false;
-            // 
-            // emptySpaceItem65
-            // 
-            emptySpaceItem65.Location = new Point(1468, 0);
-            emptySpaceItem65.Name = "emptySpaceItem65";
-            emptySpaceItem65.Size = new Size(11, 34);
-            // 
             // layoutControlGroup5
             // 
             layoutControlGroup5.Location = new Point(0, 0);
@@ -7568,9 +7923,9 @@ namespace SewingProduction
             buttonVshivkiPrint.AppearanceDisabled.Options.UseBackColor = true;
             buttonVshivkiPrint.AppearanceDisabled.Options.UseForeColor = true;
             buttonVshivkiPrint.ImageOptions.Image = (Image)resources.GetObject("buttonVshivkiPrint.ImageOptions.Image");
-            buttonVshivkiPrint.Location = new Point(742, 115);
+            buttonVshivkiPrint.Location = new Point(742, 114);
             buttonVshivkiPrint.Name = "buttonVshivkiPrint";
-            buttonVshivkiPrint.Size = new Size(104, 22);
+            buttonVshivkiPrint.Size = new Size(87, 22);
             buttonVshivkiPrint.StyleController = layoutControl1;
             buttonVshivkiPrint.TabIndex = 33;
             buttonVshivkiPrint.Text = "Вшивки";
@@ -7578,28 +7933,35 @@ namespace SewingProduction
             // 
             // textBoxRzId
             // 
-            textBoxRzId.Location = new Point(872, 52);
+            textBoxRzId.Location = new Point(837, 52);
             textBoxRzId.Name = "textBoxRzId";
             textBoxRzId.ObjectName = null;
-            textBoxRzId.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
+            textBoxRzId.Properties.Appearance.BackColor = SystemColors.Window;
             textBoxRzId.Properties.Appearance.Font = new Font("Arial", 10F);
-            textBoxRzId.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
+            textBoxRzId.Properties.Appearance.ForeColor = SystemColors.ControlText;
             textBoxRzId.Properties.Appearance.Options.UseBackColor = true;
             textBoxRzId.Properties.Appearance.Options.UseFont = true;
             textBoxRzId.Properties.Appearance.Options.UseForeColor = true;
-            textBoxRzId.Size = new Size(157, 22);
+            textBoxRzId.Size = new Size(192, 22);
             textBoxRzId.StyleController = layoutControl1;
             textBoxRzId.TabIndex = 32;
             // 
             // customLabel22
             // 
-            customLabel22.Font = new Font("Arial", 10F);
-            customLabel22.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
+            customLabel22.Appearance.Font = new Font("Arial", 10F);
+            customLabel22.Appearance.ForeColor = SystemColors.ControlText;
+            customLabel22.Appearance.Options.UseFont = true;
+            customLabel22.Appearance.Options.UseForeColor = true;
+            customLabel22.Appearance.Options.UseTextOptions = true;
+            customLabel22.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel22.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel22.Location = new Point(742, 52);
             customLabel22.Name = "customLabel22";
-            customLabel22.Size = new Size(126, 22);
+            customLabel22.Size = new Size(91, 16);
+            customLabel22.StyleController = layoutControl1;
             customLabel22.TabIndex = 31;
             customLabel22.Text = "Наряд-задание";
+            customLabel22.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // TextBoxRecomendZad
             // 
@@ -7609,10 +7971,10 @@ namespace SewingProduction
             TextBoxRecomendZad.ErrorMessage = null;
             TextBoxRecomendZad.Font = new Font("Arial", 10F);
             TextBoxRecomendZad.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
-            TextBoxRecomendZad.Location = new Point(465, 148);
+            TextBoxRecomendZad.Location = new Point(446, 148);
             TextBoxRecomendZad.Multiline = true;
             TextBoxRecomendZad.Name = "TextBoxRecomendZad";
-            TextBoxRecomendZad.Size = new Size(263, 48);
+            TextBoxRecomendZad.Size = new Size(282, 48);
             TextBoxRecomendZad.TabIndex = 30;
             // 
             // TextBoxRecomendNom
@@ -7623,35 +7985,49 @@ namespace SewingProduction
             TextBoxRecomendNom.ErrorMessage = null;
             TextBoxRecomendNom.Font = new Font("Arial", 10F);
             TextBoxRecomendNom.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
-            TextBoxRecomendNom.Location = new Point(93, 150);
+            TextBoxRecomendNom.Location = new Point(102, 150);
             TextBoxRecomendNom.Multiline = true;
             TextBoxRecomendNom.Name = "TextBoxRecomendNom";
-            TextBoxRecomendNom.Size = new Size(247, 46);
+            TextBoxRecomendNom.Size = new Size(238, 46);
             TextBoxRecomendNom.TabIndex = 29;
             // 
             // customLabel17
             // 
-            customLabel17.Font = new Font("Arial", 10F);
-            customLabel17.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
+            customLabel17.Appearance.Font = new Font("Arial", 10F);
+            customLabel17.Appearance.ForeColor = SystemColors.ControlText;
+            customLabel17.Appearance.Options.UseFont = true;
+            customLabel17.Appearance.Options.UseForeColor = true;
+            customLabel17.Appearance.Options.UseTextOptions = true;
+            customLabel17.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel17.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel17.Location = new Point(354, 148);
             customLabel17.Name = "customLabel17";
-            customLabel17.Size = new Size(107, 48);
+            customLabel17.Size = new Size(88, 16);
+            customLabel17.StyleController = layoutControl1;
             customLabel17.TabIndex = 28;
             customLabel17.Text = "Рекомендации";
+            customLabel17.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel16
             // 
-            customLabel16.Font = new Font("Arial", 10F);
-            customLabel16.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
+            customLabel16.Appearance.Font = new Font("Arial", 10F);
+            customLabel16.Appearance.ForeColor = SystemColors.ControlText;
+            customLabel16.Appearance.Options.UseFont = true;
+            customLabel16.Appearance.Options.UseForeColor = true;
+            customLabel16.Appearance.Options.UseTextOptions = true;
+            customLabel16.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel16.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel16.Location = new Point(10, 150);
             customLabel16.Name = "customLabel16";
-            customLabel16.Size = new Size(79, 46);
+            customLabel16.Size = new Size(88, 16);
+            customLabel16.StyleController = layoutControl1;
             customLabel16.TabIndex = 27;
             customLabel16.Text = "Рекомендации";
+            customLabel16.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbRzuMgZakr
             // 
-            tbRzuMgZakr.Location = new Point(136, 124);
+            tbRzuMgZakr.Location = new Point(100, 124);
             tbRzuMgZakr.Name = "tbRzuMgZakr";
             tbRzuMgZakr.ObjectName = null;
             tbRzuMgZakr.Properties.Appearance.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
@@ -7660,19 +8036,26 @@ namespace SewingProduction
             tbRzuMgZakr.Properties.Appearance.Options.UseBackColor = true;
             tbRzuMgZakr.Properties.Appearance.Options.UseFont = true;
             tbRzuMgZakr.Properties.Appearance.Options.UseForeColor = true;
-            tbRzuMgZakr.Size = new Size(204, 22);
+            tbRzuMgZakr.Size = new Size(240, 22);
             tbRzuMgZakr.StyleController = layoutControl1;
             tbRzuMgZakr.TabIndex = 26;
             // 
             // customLabel15
             // 
-            customLabel15.Font = new Font("Arial", 10F);
-            customLabel15.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
+            customLabel15.Appearance.Font = new Font("Arial", 10F);
+            customLabel15.Appearance.ForeColor = SystemColors.ControlText;
+            customLabel15.Appearance.Options.UseFont = true;
+            customLabel15.Appearance.Options.UseForeColor = true;
+            customLabel15.Appearance.Options.UseTextOptions = true;
+            customLabel15.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel15.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel15.Location = new Point(10, 124);
             customLabel15.Name = "customLabel15";
-            customLabel15.Size = new Size(122, 22);
+            customLabel15.Size = new Size(86, 16);
+            customLabel15.StyleController = layoutControl1;
             customLabel15.TabIndex = 25;
             customLabel15.Text = "Карта раскроя";
+            customLabel15.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pbEskiz
             // 
@@ -7686,16 +8069,15 @@ namespace SewingProduction
             // 
             // tbSostPoln
             // 
-            tbSostPoln.BackColor = Color.FromArgb((int)(byte)230, (int)(byte)245, (int)(byte)255);
             tbSostPoln.BorderStyle = BorderStyle.FixedSingle;
             tbSostPoln.ErrorColor = Color.Red;
             tbSostPoln.ErrorMessage = null;
             tbSostPoln.Font = new Font("Arial", 10F);
-            tbSostPoln.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
-            tbSostPoln.Location = new Point(850, 78);
+            tbSostPoln.ForeColor = SystemColors.ControlText;
+            tbSostPoln.Location = new Point(833, 78);
             tbSostPoln.Multiline = true;
             tbSostPoln.Name = "tbSostPoln";
-            tbSostPoln.Size = new Size(179, 59);
+            tbSostPoln.Size = new Size(196, 58);
             tbSostPoln.TabIndex = 7;
             // 
             // tbRzuMod
@@ -7706,23 +8088,31 @@ namespace SewingProduction
             tbRzuMod.ErrorMessage = null;
             tbRzuMod.Font = new Font("Arial", 10F);
             tbRzuMod.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbRzuMod.Location = new Point(850, 141);
+            tbRzuMod.Location = new Point(833, 140);
             tbRzuMod.Margin = new Padding(0);
             tbRzuMod.Name = "tbRzuMod";
-            tbRzuMod.Size = new Size(179, 55);
+            tbRzuMod.Size = new Size(196, 56);
             tbRzuMod.TabIndex = 11;
             // 
             // label13
             // 
-            label13.BackColor = Color.Transparent;
-            label13.Font = new Font("Arial", 10F);
-            label13.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label13.Appearance.BackColor = Color.Transparent;
+            label13.Appearance.Font = new Font("Arial", 10F);
+            label13.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label13.Appearance.Options.UseBackColor = true;
+            label13.Appearance.Options.UseFont = true;
+            label13.Appearance.Options.UseForeColor = true;
+            label13.Appearance.Options.UseTextOptions = true;
+            label13.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label13.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label13.Location = new Point(742, 78);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
-            label13.Size = new Size(104, 33);
+            label13.Size = new Size(64, 32);
+            label13.StyleController = layoutControl1;
             label13.TabIndex = 1;
             label13.Text = "Состав\r\n(из справ.)";
+            label13.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbArtGrup
             // 
@@ -7732,10 +8122,10 @@ namespace SewingProduction
             tbArtGrup.ErrorMessage = null;
             tbArtGrup.Font = new Font("Arial", 10F);
             tbArtGrup.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbArtGrup.Location = new Point(544, 124);
+            tbArtGrup.Location = new Point(514, 124);
             tbArtGrup.Margin = new Padding(0);
             tbArtGrup.Name = "tbArtGrup";
-            tbArtGrup.Size = new Size(184, 20);
+            tbArtGrup.Size = new Size(214, 20);
             tbArtGrup.TabIndex = 12;
             // 
             // tbPsaKombOsn
@@ -7746,23 +8136,31 @@ namespace SewingProduction
             tbPsaKombOsn.ErrorMessage = null;
             tbPsaKombOsn.Font = new Font("Arial", 10F);
             tbPsaKombOsn.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaKombOsn.Location = new Point(1544, 100);
+            tbPsaKombOsn.Location = new Point(1494, 100);
             tbPsaKombOsn.Margin = new Padding(0);
             tbPsaKombOsn.Name = "tbPsaKombOsn";
-            tbPsaKombOsn.Size = new Size(76, 20);
+            tbPsaKombOsn.Size = new Size(126, 20);
             tbPsaKombOsn.TabIndex = 22;
             // 
             // label10
             // 
-            label10.BackColor = Color.Transparent;
-            label10.Font = new Font("Arial", 10F);
-            label10.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label10.Location = new Point(742, 141);
+            label10.Appearance.BackColor = Color.Transparent;
+            label10.Appearance.Font = new Font("Arial", 10F);
+            label10.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label10.Appearance.Options.UseBackColor = true;
+            label10.Appearance.Options.UseFont = true;
+            label10.Appearance.Options.UseForeColor = true;
+            label10.Appearance.Options.UseTextOptions = true;
+            label10.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label10.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label10.Location = new Point(742, 140);
             label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
-            label10.Size = new Size(104, 55);
+            label10.Size = new Size(87, 16);
+            label10.StyleController = layoutControl1;
             label10.TabIndex = 1;
             label10.Text = "Модель (торг.)";
+            label10.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaPrn
             // 
@@ -7772,24 +8170,32 @@ namespace SewingProduction
             tbPsaPrn.ErrorMessage = null;
             tbPsaPrn.Font = new Font("Arial", 10F);
             tbPsaPrn.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaPrn.Location = new Point(556, 52);
+            tbPsaPrn.Location = new Point(530, 52);
             tbPsaPrn.Margin = new Padding(0);
             tbPsaPrn.Multiline = true;
             tbPsaPrn.Name = "tbPsaPrn";
-            tbPsaPrn.Size = new Size(172, 20);
+            tbPsaPrn.Size = new Size(198, 20);
             tbPsaPrn.TabIndex = 6;
             // 
             // label67
             // 
-            label67.BackColor = Color.Transparent;
-            label67.Font = new Font("Arial", 10F);
-            label67.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label67.Location = new Point(1451, 100);
+            label67.Appearance.BackColor = Color.Transparent;
+            label67.Appearance.Font = new Font("Arial", 10F);
+            label67.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label67.Appearance.Options.UseBackColor = true;
+            label67.Appearance.Options.UseFont = true;
+            label67.Appearance.Options.UseForeColor = true;
+            label67.Appearance.Options.UseTextOptions = true;
+            label67.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label67.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label67.Location = new Point(1430, 100);
             label67.Margin = new Padding(4, 0, 4, 0);
             label67.Name = "label67";
-            label67.Size = new Size(89, 20);
+            label67.Size = new Size(60, 16);
+            label67.StyleController = layoutControl1;
             label67.TabIndex = 1;
             label67.Text = "komb_osn";
+            label67.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaKodZv2
             // 
@@ -7799,23 +8205,31 @@ namespace SewingProduction
             tbPsaKodZv2.ErrorMessage = null;
             tbPsaKodZv2.Font = new Font("Arial", 10F);
             tbPsaKodZv2.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaKodZv2.Location = new Point(659, 76);
+            tbPsaKodZv2.Location = new Point(635, 76);
             tbPsaKodZv2.Margin = new Padding(0);
             tbPsaKodZv2.Name = "tbPsaKodZv2";
-            tbPsaKodZv2.Size = new Size(69, 20);
+            tbPsaKodZv2.Size = new Size(93, 20);
             tbPsaKodZv2.TabIndex = 9;
             // 
             // label15
             // 
-            label15.BackColor = Color.Transparent;
-            label15.Font = new Font("Arial", 10F);
-            label15.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label15.Appearance.BackColor = Color.Transparent;
+            label15.Appearance.Font = new Font("Arial", 10F);
+            label15.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label15.Appearance.Options.UseBackColor = true;
+            label15.Appearance.Options.UseFont = true;
+            label15.Appearance.Options.UseForeColor = true;
+            label15.Appearance.Options.UseTextOptions = true;
+            label15.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label15.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label15.Location = new Point(354, 124);
             label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
-            label15.Size = new Size(186, 20);
+            label15.Size = new Size(156, 16);
+            label15.StyleController = layoutControl1;
             label15.TabIndex = 1;
             label15.Text = "Наименование (из справ.)";
+            label15.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaPsaIDOsn
             // 
@@ -7825,10 +8239,10 @@ namespace SewingProduction
             tbPsaPsaIDOsn.ErrorMessage = null;
             tbPsaPsaIDOsn.Font = new Font("Arial", 10F);
             tbPsaPsaIDOsn.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaPsaIDOsn.Location = new Point(1544, 76);
+            tbPsaPsaIDOsn.Location = new Point(1495, 76);
             tbPsaPsaIDOsn.Margin = new Padding(0);
             tbPsaPsaIDOsn.Name = "tbPsaPsaIDOsn";
-            tbPsaPsaIDOsn.Size = new Size(76, 20);
+            tbPsaPsaIDOsn.Size = new Size(125, 20);
             tbPsaPsaIDOsn.TabIndex = 19;
             // 
             // tbPsaKodZv1
@@ -7839,23 +8253,31 @@ namespace SewingProduction
             tbPsaKodZv1.ErrorMessage = null;
             tbPsaKodZv1.Font = new Font("Arial", 10F);
             tbPsaKodZv1.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaKodZv1.Location = new Point(493, 76);
+            tbPsaKodZv1.Location = new Point(478, 76);
             tbPsaKodZv1.Margin = new Padding(0);
             tbPsaKodZv1.Name = "tbPsaKodZv1";
-            tbPsaKodZv1.Size = new Size(81, 20);
+            tbPsaKodZv1.Size = new Size(86, 20);
             tbPsaKodZv1.TabIndex = 8;
             // 
             // label22
             // 
-            label22.BackColor = Color.Transparent;
-            label22.Font = new Font("Arial", 10F);
-            label22.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label22.Location = new Point(588, 76);
+            label22.Appearance.BackColor = Color.Transparent;
+            label22.Appearance.Font = new Font("Arial", 10F);
+            label22.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label22.Appearance.Options.UseBackColor = true;
+            label22.Appearance.Options.UseFont = true;
+            label22.Appearance.Options.UseForeColor = true;
+            label22.Appearance.Options.UseTextOptions = true;
+            label22.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label22.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label22.Location = new Point(579, 76);
             label22.Margin = new Padding(4, 0, 4, 0);
             label22.Name = "label22";
-            label22.Size = new Size(67, 20);
+            label22.Size = new Size(52, 16);
+            label22.StyleController = layoutControl1;
             label22.TabIndex = 1;
             label22.Text = "Код цв.2";
+            label22.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaKombIzd
             // 
@@ -7865,71 +8287,111 @@ namespace SewingProduction
             tbPsaKombIzd.ErrorMessage = null;
             tbPsaKombIzd.Font = new Font("Arial", 10F);
             tbPsaKombIzd.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaKombIzd.Location = new Point(1371, 100);
+            tbPsaKombIzd.Location = new Point(1340, 100);
             tbPsaKombIzd.Margin = new Padding(0);
             tbPsaKombIzd.Name = "tbPsaKombIzd";
-            tbPsaKombIzd.Size = new Size(66, 20);
+            tbPsaKombIzd.Size = new Size(75, 20);
             tbPsaKombIzd.TabIndex = 21;
             // 
             // label23
             // 
-            label23.BackColor = Color.Transparent;
-            label23.Font = new Font("Arial", 10F);
-            label23.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label23.Appearance.BackColor = Color.Transparent;
+            label23.Appearance.Font = new Font("Arial", 10F);
+            label23.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label23.Appearance.Options.UseBackColor = true;
+            label23.Appearance.Options.UseFont = true;
+            label23.Appearance.Options.UseForeColor = true;
+            label23.Appearance.Options.UseTextOptions = true;
+            label23.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label23.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label23.Location = new Point(422, 76);
             label23.Margin = new Padding(4, 0, 4, 0);
             label23.Name = "label23";
-            label23.Size = new Size(67, 20);
+            label23.Size = new Size(52, 16);
+            label23.StyleController = layoutControl1;
             label23.TabIndex = 1;
             label23.Text = "Код цв.1";
+            label23.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label66
             // 
-            label66.BackColor = Color.Transparent;
-            label66.Font = new Font("Arial", 10F);
-            label66.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label66.Location = new Point(1297, 100);
+            label66.Appearance.BackColor = Color.Transparent;
+            label66.Appearance.Font = new Font("Arial", 10F);
+            label66.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label66.Appearance.Options.UseBackColor = true;
+            label66.Appearance.Options.UseFont = true;
+            label66.Appearance.Options.UseForeColor = true;
+            label66.Appearance.Options.UseTextOptions = true;
+            label66.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label66.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label66.Location = new Point(1280, 100);
             label66.Margin = new Padding(4, 0, 4, 0);
             label66.Name = "label66";
-            label66.Size = new Size(70, 20);
+            label66.Size = new Size(56, 16);
+            label66.StyleController = layoutControl1;
             label66.TabIndex = 1;
             label66.Text = "komb_izd";
+            label66.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label8
             // 
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Arial", 10F);
-            label8.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label8.Location = new Point(509, 52);
+            label8.Appearance.BackColor = Color.Transparent;
+            label8.Appearance.Font = new Font("Arial", 10F);
+            label8.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label8.Appearance.Options.UseBackColor = true;
+            label8.Appearance.Options.UseFont = true;
+            label8.Appearance.Options.UseForeColor = true;
+            label8.Appearance.Options.UseTextOptions = true;
+            label8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label8.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label8.Location = new Point(497, 52);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
-            label8.Size = new Size(43, 20);
+            label8.Size = new Size(29, 16);
+            label8.StyleController = layoutControl1;
             label8.TabIndex = 1;
             label8.Text = "Цвет";
+            label8.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label65
             // 
-            label65.BackColor = Color.Transparent;
-            label65.Font = new Font("Arial", 10F);
-            label65.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label65.Location = new Point(1451, 76);
+            label65.Appearance.BackColor = Color.Transparent;
+            label65.Appearance.Font = new Font("Arial", 10F);
+            label65.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label65.Appearance.Options.UseBackColor = true;
+            label65.Appearance.Options.UseFont = true;
+            label65.Appearance.Options.UseForeColor = true;
+            label65.Appearance.Options.UseTextOptions = true;
+            label65.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label65.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label65.Location = new Point(1425, 76);
             label65.Margin = new Padding(4, 0, 4, 0);
             label65.Name = "label65";
-            label65.Size = new Size(89, 20);
+            label65.Size = new Size(66, 16);
+            label65.StyleController = layoutControl1;
             label65.TabIndex = 1;
             label65.Text = "psa_id_osn";
+            label65.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label9
             // 
-            label9.BackColor = Color.Transparent;
-            label9.Font = new Font("Arial", 10F);
-            label9.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label9.Appearance.BackColor = Color.Transparent;
+            label9.Appearance.Font = new Font("Arial", 10F);
+            label9.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label9.Appearance.Options.UseBackColor = true;
+            label9.Appearance.Options.UseFont = true;
+            label9.Appearance.Options.UseForeColor = true;
+            label9.Appearance.Options.UseTextOptions = true;
+            label9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label9.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label9.Location = new Point(354, 100);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(136, 20);
+            label9.Size = new Size(82, 16);
+            label9.StyleController = layoutControl1;
             label9.TabIndex = 1;
             label9.Text = "Артикул (шв.)";
+            label9.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaPsaID
             // 
@@ -7939,35 +8401,51 @@ namespace SewingProduction
             tbPsaPsaID.ErrorMessage = null;
             tbPsaPsaID.Font = new Font("Arial", 10F);
             tbPsaPsaID.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaPsaID.Location = new Point(1371, 76);
+            tbPsaPsaID.Location = new Point(1332, 76);
             tbPsaPsaID.Margin = new Padding(0);
             tbPsaPsaID.Name = "tbPsaPsaID";
-            tbPsaPsaID.Size = new Size(66, 20);
+            tbPsaPsaID.Size = new Size(77, 20);
             tbPsaPsaID.TabIndex = 18;
             // 
             // label5
             // 
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Arial", 10F);
-            label5.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label5.Appearance.BackColor = Color.Transparent;
+            label5.Appearance.Font = new Font("Arial", 10F);
+            label5.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label5.Appearance.Options.UseBackColor = true;
+            label5.Appearance.Options.UseFont = true;
+            label5.Appearance.Options.UseForeColor = true;
+            label5.Appearance.Options.UseTextOptions = true;
+            label5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label5.Location = new Point(10, 52);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(27, 20);
+            label5.Size = new Size(14, 16);
+            label5.StyleController = layoutControl1;
             label5.TabIndex = 1;
             label5.Text = "№";
+            label5.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label62
             // 
-            label62.BackColor = Color.Transparent;
-            label62.Font = new Font("Arial", 10F);
-            label62.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label62.Location = new Point(1297, 76);
+            label62.Appearance.BackColor = Color.Transparent;
+            label62.Appearance.Font = new Font("Arial", 10F);
+            label62.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label62.Appearance.Options.UseBackColor = true;
+            label62.Appearance.Options.UseFont = true;
+            label62.Appearance.Options.UseForeColor = true;
+            label62.Appearance.Options.UseTextOptions = true;
+            label62.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label62.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label62.Location = new Point(1290, 76);
             label62.Margin = new Padding(4, 0, 4, 0);
             label62.Name = "label62";
-            label62.Size = new Size(70, 20);
+            label62.Size = new Size(38, 16);
+            label62.StyleController = layoutControl1;
             label62.TabIndex = 1;
             label62.Text = "psa_id";
+            label62.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbArtTradeMark
             // 
@@ -7977,10 +8455,10 @@ namespace SewingProduction
             tbArtTradeMark.ErrorMessage = null;
             tbArtTradeMark.Font = new Font("Arial", 10F);
             tbArtTradeMark.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbArtTradeMark.Location = new Point(1163, 124);
+            tbArtTradeMark.Location = new Point(1141, 124);
             tbArtTradeMark.Margin = new Padding(0);
             tbArtTradeMark.Name = "tbArtTradeMark";
-            tbArtTradeMark.Size = new Size(64, 20);
+            tbArtTradeMark.Size = new Size(67, 20);
             tbArtTradeMark.TabIndex = 23;
             // 
             // tbPsaNameSbit
@@ -7991,10 +8469,10 @@ namespace SewingProduction
             tbPsaNameSbit.ErrorMessage = null;
             tbPsaNameSbit.Font = new Font("Arial", 10F);
             tbPsaNameSbit.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaNameSbit.Location = new Point(1146, 100);
+            tbPsaNameSbit.Location = new Point(1122, 100);
             tbPsaNameSbit.Margin = new Padding(0);
             tbPsaNameSbit.Name = "tbPsaNameSbit";
-            tbPsaNameSbit.Size = new Size(137, 20);
+            tbPsaNameSbit.Size = new Size(144, 20);
             tbPsaNameSbit.TabIndex = 20;
             // 
             // tbRzuNom
@@ -8005,33 +8483,40 @@ namespace SewingProduction
             tbRzuNom.ErrorMessage = null;
             tbRzuNom.Font = new Font("Arial", 10F);
             tbRzuNom.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbRzuNom.Location = new Point(41, 52);
+            tbRzuNom.Location = new Point(28, 52);
             tbRzuNom.Margin = new Padding(0);
             tbRzuNom.Name = "tbRzuNom";
-            tbRzuNom.Size = new Size(74, 20);
+            tbRzuNom.Size = new Size(77, 20);
             tbRzuNom.TabIndex = 0;
             // 
             // label68
             // 
-            label68.BackColor = Color.Transparent;
-            label68.Font = new Font("Arial", 10F);
-            label68.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label68.Appearance.BackColor = Color.Transparent;
+            label68.Appearance.Font = new Font("Arial", 10F);
+            label68.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label68.Appearance.Options.UseBackColor = true;
+            label68.Appearance.Options.UseFont = true;
+            label68.Appearance.Options.UseForeColor = true;
+            label68.Appearance.Options.UseTextOptions = true;
+            label68.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label68.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label68.Location = new Point(1043, 124);
             label68.Margin = new Padding(4, 0, 4, 0);
             label68.Name = "label68";
-            label68.Size = new Size(116, 72);
+            label68.Size = new Size(94, 16);
+            label68.StyleController = layoutControl1;
             label68.TabIndex = 1;
             label68.Text = "Торговая марка";
+            label68.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbIsChip
             // 
             cbIsChip.Enabled = false;
             cbIsChip.Font = new Font("Arial", 10F);
-            cbIsChip.ForeColor = Color.FromArgb((int)(byte)120, (int)(byte)60, (int)(byte)30);
-            cbIsChip.Location = new Point(1515, 52);
+            cbIsChip.Location = new Point(1491, 52);
             cbIsChip.Margin = new Padding(4, 3, 4, 3);
             cbIsChip.Name = "cbIsChip";
-            cbIsChip.Size = new Size(105, 20);
+            cbIsChip.Size = new Size(129, 20);
             cbIsChip.TabIndex = 16;
             cbIsChip.Text = "Чип";
             cbIsChip.UseVisualStyleBackColor = true;
@@ -8044,35 +8529,51 @@ namespace SewingProduction
             tbRzuArticul.ErrorMessage = null;
             tbRzuArticul.Font = new Font("Arial", 10F);
             tbRzuArticul.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbRzuArticul.Location = new Point(494, 100);
+            tbRzuArticul.Location = new Point(440, 100);
             tbRzuArticul.Margin = new Padding(0);
             tbRzuArticul.Name = "tbRzuArticul";
-            tbRzuArticul.Size = new Size(234, 20);
+            tbRzuArticul.Size = new Size(288, 20);
             tbRzuArticul.TabIndex = 10;
             // 
             // label19
             // 
-            label19.BackColor = Color.Transparent;
-            label19.Font = new Font("Arial", 10F);
-            label19.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label19.Appearance.BackColor = Color.Transparent;
+            label19.Appearance.Font = new Font("Arial", 10F);
+            label19.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label19.Appearance.Options.UseBackColor = true;
+            label19.Appearance.Options.UseFont = true;
+            label19.Appearance.Options.UseForeColor = true;
+            label19.Appearance.Options.UseTextOptions = true;
+            label19.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label19.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label19.Location = new Point(1043, 76);
             label19.Margin = new Padding(4, 0, 4, 0);
             label19.Name = "label19";
-            label19.Size = new Size(40, 20);
+            label19.Size = new Size(29, 16);
+            label19.StyleController = layoutControl1;
             label19.TabIndex = 1;
             label19.Text = "Блок";
+            label19.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label11
             // 
-            label11.BackColor = Color.Transparent;
-            label11.Font = new Font("Arial", 10F);
-            label11.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label11.Appearance.BackColor = Color.Transparent;
+            label11.Appearance.Font = new Font("Arial", 10F);
+            label11.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label11.Appearance.Options.UseBackColor = true;
+            label11.Appearance.Options.UseFont = true;
+            label11.Appearance.Options.UseForeColor = true;
+            label11.Appearance.Options.UseTextOptions = true;
+            label11.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label11.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label11.Location = new Point(1043, 100);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
-            label11.Size = new Size(99, 20);
+            label11.Size = new Size(75, 16);
+            label11.StyleController = layoutControl1;
             label11.TabIndex = 1;
             label11.Text = "Канал сбыта";
+            label11.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaMenName
             // 
@@ -8082,11 +8583,11 @@ namespace SewingProduction
             tbPsaMenName.ErrorMessage = null;
             tbPsaMenName.Font = new Font("Arial", 10F);
             tbPsaMenName.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaMenName.Location = new Point(1421, 124);
+            tbPsaMenName.Location = new Point(1359, 124);
             tbPsaMenName.Margin = new Padding(0);
             tbPsaMenName.Multiline = true;
             tbPsaMenName.Name = "tbPsaMenName";
-            tbPsaMenName.Size = new Size(199, 20);
+            tbPsaMenName.Size = new Size(261, 20);
             tbPsaMenName.TabIndex = 24;
             // 
             // tbPsaTbID
@@ -8097,10 +8598,10 @@ namespace SewingProduction
             tbPsaTbID.ErrorMessage = null;
             tbPsaTbID.Font = new Font("Arial", 10F);
             tbPsaTbID.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaTbID.Location = new Point(1087, 76);
+            tbPsaTbID.Location = new Point(1076, 76);
             tbPsaTbID.Margin = new Padding(0);
             tbPsaTbID.Name = "tbPsaTbID";
-            tbPsaTbID.Size = new Size(196, 20);
+            tbPsaTbID.Size = new Size(200, 20);
             tbPsaTbID.TabIndex = 17;
             // 
             // psaSezName
@@ -8111,10 +8612,10 @@ namespace SewingProduction
             psaSezName.ErrorMessage = null;
             psaSezName.Font = new Font("Arial", 10F);
             psaSezName.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            psaSezName.Location = new Point(1421, 52);
+            psaSezName.Location = new Point(1377, 52);
             psaSezName.Margin = new Padding(0);
             psaSezName.Name = "psaSezName";
-            psaSezName.Size = new Size(80, 20);
+            psaSezName.Size = new Size(98, 20);
             psaSezName.TabIndex = 15;
             // 
             // tbPsaYear
@@ -8125,47 +8626,71 @@ namespace SewingProduction
             tbPsaYear.ErrorMessage = null;
             tbPsaYear.Font = new Font("Arial", 10F);
             tbPsaYear.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaYear.Location = new Point(1298, 52);
+            tbPsaYear.Location = new Point(1272, 52);
             tbPsaYear.Margin = new Padding(0);
             tbPsaYear.Name = "tbPsaYear";
-            tbPsaYear.Size = new Size(46, 20);
+            tbPsaYear.Size = new Size(50, 20);
             tbPsaYear.TabIndex = 14;
             // 
             // label20
             // 
-            label20.BackColor = Color.Transparent;
-            label20.Font = new Font("Arial", 10F);
-            label20.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label20.Location = new Point(1241, 124);
+            label20.Appearance.BackColor = Color.Transparent;
+            label20.Appearance.Font = new Font("Arial", 10F);
+            label20.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label20.Appearance.Options.UseBackColor = true;
+            label20.Appearance.Options.UseFont = true;
+            label20.Appearance.Options.UseForeColor = true;
+            label20.Appearance.Options.UseTextOptions = true;
+            label20.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label20.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label20.Location = new Point(1222, 124);
             label20.Margin = new Padding(4, 0, 4, 0);
             label20.Name = "label20";
-            label20.Size = new Size(176, 72);
+            label20.Size = new Size(133, 16);
+            label20.StyleController = layoutControl1;
             label20.TabIndex = 1;
             label20.Text = "Категория (менеджер)";
+            label20.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label16
             // 
-            label16.BackColor = Color.Transparent;
-            label16.Font = new Font("Arial", 10F);
-            label16.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label16.Location = new Point(1358, 52);
+            label16.Appearance.BackColor = Color.Transparent;
+            label16.Appearance.Font = new Font("Arial", 10F);
+            label16.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label16.Appearance.Options.UseBackColor = true;
+            label16.Appearance.Options.UseFont = true;
+            label16.Appearance.Options.UseForeColor = true;
+            label16.Appearance.Options.UseTextOptions = true;
+            label16.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label16.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label16.Location = new Point(1337, 52);
             label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
-            label16.Size = new Size(59, 20);
+            label16.Size = new Size(36, 16);
+            label16.StyleController = layoutControl1;
             label16.TabIndex = 1;
             label16.Text = "Сезон";
+            label16.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label7
             // 
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Arial", 10F);
-            label7.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label7.Location = new Point(130, 52);
+            label7.Appearance.BackColor = Color.Transparent;
+            label7.Appearance.Font = new Font("Arial", 10F);
+            label7.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label7.Appearance.Options.UseBackColor = true;
+            label7.Appearance.Options.UseFont = true;
+            label7.Appearance.Options.UseForeColor = true;
+            label7.Appearance.Options.UseTextOptions = true;
+            label7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label7.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label7.Location = new Point(120, 52);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
-            label7.Size = new Size(55, 20);
+            label7.Size = new Size(40, 16);
+            label7.StyleController = layoutControl1;
             label7.TabIndex = 1;
             label7.Text = "Кол-во";
+            label7.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbRzuKol
             // 
@@ -8175,35 +8700,51 @@ namespace SewingProduction
             tbRzuKol.ErrorMessage = null;
             tbRzuKol.Font = new Font("Arial", 10F);
             tbRzuKol.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbRzuKol.Location = new Point(189, 52);
+            tbRzuKol.Location = new Point(164, 52);
             tbRzuKol.Margin = new Padding(0);
             tbRzuKol.Name = "tbRzuKol";
-            tbRzuKol.Size = new Size(151, 20);
+            tbRzuKol.Size = new Size(176, 20);
             tbRzuKol.TabIndex = 2;
             // 
             // label17
             // 
-            label17.BackColor = Color.Transparent;
-            label17.Font = new Font("Arial", 10F);
-            label17.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
-            label17.Location = new Point(1258, 52);
+            label17.Appearance.BackColor = Color.Transparent;
+            label17.Appearance.Font = new Font("Arial", 10F);
+            label17.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label17.Appearance.Options.UseBackColor = true;
+            label17.Appearance.Options.UseFont = true;
+            label17.Appearance.Options.UseForeColor = true;
+            label17.Appearance.Options.UseTextOptions = true;
+            label17.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label17.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label17.Location = new Point(1246, 52);
             label17.Margin = new Padding(4, 0, 4, 0);
             label17.Name = "label17";
-            label17.Size = new Size(36, 20);
+            label17.Size = new Size(22, 16);
+            label17.StyleController = layoutControl1;
             label17.TabIndex = 1;
             label17.Text = "Год";
+            label17.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label53
             // 
-            label53.BackColor = Color.Transparent;
-            label53.Font = new Font("Arial", 10F);
-            label53.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label53.Appearance.BackColor = Color.Transparent;
+            label53.Appearance.Font = new Font("Arial", 10F);
+            label53.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label53.Appearance.Options.UseBackColor = true;
+            label53.Appearance.Options.UseFont = true;
+            label53.Appearance.Options.UseForeColor = true;
+            label53.Appearance.Options.UseTextOptions = true;
+            label53.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label53.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label53.Location = new Point(354, 52);
             label53.Margin = new Padding(4, 0, 4, 0);
             label53.Name = "label53";
-            label53.Size = new Size(33, 20);
+            label53.Size = new Size(14, 16);
+            label53.StyleController = layoutControl1;
             label53.TabIndex = 1;
             label53.Text = "№";
+            label53.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaNomZad
             // 
@@ -8213,35 +8754,51 @@ namespace SewingProduction
             tbPsaNomZad.ErrorMessage = null;
             tbPsaNomZad.Font = new Font("Arial", 10F);
             tbPsaNomZad.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaNomZad.Location = new Point(391, 52);
+            tbPsaNomZad.Location = new Point(372, 52);
             tbPsaNomZad.Margin = new Padding(0);
             tbPsaNomZad.Name = "tbPsaNomZad";
-            tbPsaNomZad.Size = new Size(104, 20);
+            tbPsaNomZad.Size = new Size(110, 20);
             tbPsaNomZad.TabIndex = 5;
             // 
             // label21
             // 
-            label21.BackColor = Color.Transparent;
-            label21.Font = new Font("Arial", 10F);
-            label21.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label21.Appearance.BackColor = Color.Transparent;
+            label21.Appearance.Font = new Font("Arial", 10F);
+            label21.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label21.Appearance.Options.UseBackColor = true;
+            label21.Appearance.Options.UseFont = true;
+            label21.Appearance.Options.UseForeColor = true;
+            label21.Appearance.Options.UseTextOptions = true;
+            label21.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label21.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label21.Location = new Point(1043, 52);
             label21.Margin = new Padding(4, 0, 4, 0);
             label21.Name = "label21";
-            label21.Size = new Size(40, 20);
+            label21.Size = new Size(23, 16);
+            label21.StyleController = layoutControl1;
             label21.TabIndex = 1;
             label21.Text = "Код";
+            label21.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label12
             // 
-            label12.BackColor = Color.Transparent;
-            label12.Font = new Font("Arial", 10F);
-            label12.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label12.Appearance.BackColor = Color.Transparent;
+            label12.Appearance.Font = new Font("Arial", 10F);
+            label12.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label12.Appearance.Options.UseBackColor = true;
+            label12.Appearance.Options.UseFont = true;
+            label12.Appearance.Options.UseForeColor = true;
+            label12.Appearance.Options.UseTextOptions = true;
+            label12.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label12.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label12.Location = new Point(10, 76);
             label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
-            label12.Size = new Size(67, 20);
+            label12.Size = new Size(68, 16);
+            label12.StyleController = layoutControl1;
             label12.TabIndex = 1;
             label12.Text = "Бригада №";
+            label12.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbPsaNN
             // 
@@ -8251,10 +8808,10 @@ namespace SewingProduction
             tbPsaNN.ErrorMessage = null;
             tbPsaNN.Font = new Font("Arial", 10F);
             tbPsaNN.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbPsaNN.Location = new Point(1087, 52);
+            tbPsaNN.Location = new Point(1070, 52);
             tbPsaNN.Margin = new Padding(0);
             tbPsaNN.Name = "tbPsaNN";
-            tbPsaNN.Size = new Size(157, 20);
+            tbPsaNN.Size = new Size(162, 20);
             tbPsaNN.TabIndex = 13;
             // 
             // tbRzuDostZeh
@@ -8265,23 +8822,31 @@ namespace SewingProduction
             tbRzuDostZeh.ErrorMessage = null;
             tbRzuDostZeh.Font = new Font("Arial", 10F);
             tbRzuDostZeh.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbRzuDostZeh.Location = new Point(81, 76);
+            tbRzuDostZeh.Location = new Point(82, 76);
             tbRzuDostZeh.Margin = new Padding(0);
             tbRzuDostZeh.Name = "tbRzuDostZeh";
-            tbRzuDostZeh.Size = new Size(259, 20);
+            tbRzuDostZeh.Size = new Size(258, 20);
             tbRzuDostZeh.TabIndex = 3;
             // 
             // label6
             // 
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Arial", 10F);
-            label6.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label6.Appearance.BackColor = Color.Transparent;
+            label6.Appearance.Font = new Font("Arial", 10F);
+            label6.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+            label6.Appearance.Options.UseBackColor = true;
+            label6.Appearance.Options.UseFont = true;
+            label6.Appearance.Options.UseForeColor = true;
+            label6.Appearance.Options.UseTextOptions = true;
+            label6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             label6.Location = new Point(10, 100);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
-            label6.Size = new Size(67, 20);
+            label6.Size = new Size(52, 16);
+            label6.StyleController = layoutControl1;
             label6.TabIndex = 1;
             label6.Text = "№ пачек";
+            label6.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbRzuPach
             // 
@@ -8291,10 +8856,10 @@ namespace SewingProduction
             tbRzuPach.ErrorMessage = null;
             tbRzuPach.Font = new Font("Arial", 10F);
             tbRzuPach.ForeColor = Color.FromArgb((int)(byte)72, (int)(byte)61, (int)(byte)139);
-            tbRzuPach.Location = new Point(81, 100);
+            tbRzuPach.Location = new Point(66, 100);
             tbRzuPach.Margin = new Padding(0);
             tbRzuPach.Name = "tbRzuPach";
-            tbRzuPach.Size = new Size(259, 20);
+            tbRzuPach.Size = new Size(274, 20);
             tbRzuPach.TabIndex = 4;
             // 
             // Root
@@ -8330,31 +8895,31 @@ namespace SewingProduction
             layoutControlItem15.Control = label5;
             layoutControlItem15.Location = new Point(0, 0);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new Size(31, 24);
+            layoutControlItem15.Size = new Size(18, 24);
             layoutControlItem15.TextVisible = false;
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = tbRzuNom;
-            layoutControlItem17.Location = new Point(31, 0);
+            layoutControlItem17.Location = new Point(18, 0);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new Size(78, 24);
+            layoutControlItem17.Size = new Size(81, 24);
             layoutControlItem17.TextVisible = false;
             // 
             // layoutControlItem23
             // 
             layoutControlItem23.Control = label7;
-            layoutControlItem23.Location = new Point(120, 0);
+            layoutControlItem23.Location = new Point(110, 0);
             layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new Size(59, 24);
+            layoutControlItem23.Size = new Size(44, 24);
             layoutControlItem23.TextVisible = false;
             // 
             // layoutControlItem46
             // 
             layoutControlItem46.Control = tbRzuKol;
-            layoutControlItem46.Location = new Point(179, 0);
+            layoutControlItem46.Location = new Point(154, 0);
             layoutControlItem46.Name = "layoutControlItem46";
-            layoutControlItem46.Size = new Size(155, 24);
+            layoutControlItem46.Size = new Size(180, 24);
             layoutControlItem46.TextVisible = false;
             // 
             // layoutControlItem49
@@ -8362,15 +8927,15 @@ namespace SewingProduction
             layoutControlItem49.Control = label12;
             layoutControlItem49.Location = new Point(0, 24);
             layoutControlItem49.Name = "layoutControlItem49";
-            layoutControlItem49.Size = new Size(71, 24);
+            layoutControlItem49.Size = new Size(72, 24);
             layoutControlItem49.TextVisible = false;
             // 
             // layoutControlItem50
             // 
             layoutControlItem50.Control = tbRzuDostZeh;
-            layoutControlItem50.Location = new Point(71, 24);
+            layoutControlItem50.Location = new Point(72, 24);
             layoutControlItem50.Name = "layoutControlItem50";
-            layoutControlItem50.Size = new Size(263, 24);
+            layoutControlItem50.Size = new Size(262, 24);
             layoutControlItem50.TextVisible = false;
             // 
             // layoutControlItem51
@@ -8378,20 +8943,20 @@ namespace SewingProduction
             layoutControlItem51.Control = label6;
             layoutControlItem51.Location = new Point(0, 48);
             layoutControlItem51.Name = "layoutControlItem51";
-            layoutControlItem51.Size = new Size(71, 24);
+            layoutControlItem51.Size = new Size(56, 24);
             layoutControlItem51.TextVisible = false;
             // 
             // layoutControlItem52
             // 
             layoutControlItem52.Control = tbRzuPach;
-            layoutControlItem52.Location = new Point(71, 48);
+            layoutControlItem52.Location = new Point(56, 48);
             layoutControlItem52.Name = "layoutControlItem52";
-            layoutControlItem52.Size = new Size(263, 24);
+            layoutControlItem52.Size = new Size(278, 24);
             layoutControlItem52.TextVisible = false;
             // 
             // emptySpaceItem24
             // 
-            emptySpaceItem24.Location = new Point(109, 0);
+            emptySpaceItem24.Location = new Point(99, 0);
             emptySpaceItem24.Name = "emptySpaceItem24";
             emptySpaceItem24.Size = new Size(11, 24);
             // 
@@ -8400,15 +8965,15 @@ namespace SewingProduction
             layoutControlItem153.Control = customLabel15;
             layoutControlItem153.Location = new Point(0, 72);
             layoutControlItem153.Name = "layoutControlItem153";
-            layoutControlItem153.Size = new Size(126, 26);
+            layoutControlItem153.Size = new Size(90, 26);
             layoutControlItem153.TextVisible = false;
             // 
             // layoutControlItem155
             // 
             layoutControlItem155.Control = tbRzuMgZakr;
-            layoutControlItem155.Location = new Point(126, 72);
+            layoutControlItem155.Location = new Point(90, 72);
             layoutControlItem155.Name = "layoutControlItem155";
-            layoutControlItem155.Size = new Size(208, 26);
+            layoutControlItem155.Size = new Size(244, 26);
             layoutControlItem155.Text = "Карта кроя";
             layoutControlItem155.TextVisible = false;
             // 
@@ -8417,20 +8982,20 @@ namespace SewingProduction
             layoutControlItem108.Control = customLabel16;
             layoutControlItem108.Location = new Point(0, 98);
             layoutControlItem108.Name = "layoutControlItem108";
-            layoutControlItem108.Size = new Size(83, 50);
+            layoutControlItem108.Size = new Size(92, 50);
             layoutControlItem108.TextVisible = false;
             // 
             // layoutControlItem110
             // 
             layoutControlItem110.Control = TextBoxRecomendNom;
-            layoutControlItem110.Location = new Point(83, 98);
+            layoutControlItem110.Location = new Point(92, 98);
             layoutControlItem110.MinSize = new Size(24, 24);
             layoutControlItem110.Name = "layoutControlItem110";
-            layoutControlItem110.Size = new Size(251, 50);
+            layoutControlItem110.Size = new Size(242, 50);
             layoutControlItem110.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem110.TextVisible = false;
             // 
-            // layoutSumZP
+            // layoutControlGroup11
             // 
             layoutControlGroup11.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem53, layoutControlItem54, layoutControlItem20, layoutControlItem21, layoutControlItem55, layoutControlItem56, layoutControlItem57, layoutControlItem58, layoutControlItem59, emptySpaceItem15, emptySpaceItem17, emptySpaceItem18, emptySpaceItem19, layoutControlItem62, layoutControlItem63, emptySpaceItem20, layoutControlItem64, layoutControlItem65, emptySpaceItem21, layoutControlItem66, layoutControlItem67, layoutControlItem68, layoutControlItem69, emptySpaceItem16, layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem73, emptySpaceItem22, layoutControlItem60, layoutControlItem61 });
             layoutControlGroup11.Location = new Point(1033, 0);
@@ -8444,15 +9009,15 @@ namespace SewingProduction
             layoutControlItem53.Control = label21;
             layoutControlItem53.Location = new Point(0, 0);
             layoutControlItem53.Name = "layoutControlItem53";
-            layoutControlItem53.Size = new Size(44, 24);
+            layoutControlItem53.Size = new Size(27, 24);
             layoutControlItem53.TextVisible = false;
             // 
             // layoutControlItem54
             // 
             layoutControlItem54.Control = tbPsaNN;
-            layoutControlItem54.Location = new Point(44, 0);
+            layoutControlItem54.Location = new Point(27, 0);
             layoutControlItem54.Name = "layoutControlItem54";
-            layoutControlItem54.Size = new Size(161, 24);
+            layoutControlItem54.Size = new Size(166, 24);
             layoutControlItem54.TextVisible = false;
             // 
             // layoutControlItem20
@@ -8460,100 +9025,100 @@ namespace SewingProduction
             layoutControlItem20.Control = label19;
             layoutControlItem20.Location = new Point(0, 24);
             layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new Size(44, 24);
+            layoutControlItem20.Size = new Size(33, 24);
             layoutControlItem20.TextVisible = false;
             // 
             // layoutControlItem21
             // 
             layoutControlItem21.Control = tbPsaTbID;
-            layoutControlItem21.Location = new Point(44, 24);
+            layoutControlItem21.Location = new Point(33, 24);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new Size(200, 24);
+            layoutControlItem21.Size = new Size(204, 24);
             layoutControlItem21.TextVisible = false;
             // 
             // layoutControlItem55
             // 
             layoutControlItem55.Control = label17;
-            layoutControlItem55.Location = new Point(215, 0);
+            layoutControlItem55.Location = new Point(203, 0);
             layoutControlItem55.Name = "layoutControlItem55";
-            layoutControlItem55.Size = new Size(40, 24);
+            layoutControlItem55.Size = new Size(26, 24);
             layoutControlItem55.TextVisible = false;
             // 
             // layoutControlItem56
             // 
             layoutControlItem56.Control = tbPsaYear;
-            layoutControlItem56.Location = new Point(255, 0);
+            layoutControlItem56.Location = new Point(229, 0);
             layoutControlItem56.Name = "layoutControlItem56";
-            layoutControlItem56.Size = new Size(50, 24);
+            layoutControlItem56.Size = new Size(54, 24);
             layoutControlItem56.TextVisible = false;
             // 
             // layoutControlItem57
             // 
             layoutControlItem57.Control = label16;
-            layoutControlItem57.Location = new Point(315, 0);
+            layoutControlItem57.Location = new Point(294, 0);
             layoutControlItem57.Name = "layoutControlItem57";
-            layoutControlItem57.Size = new Size(63, 24);
+            layoutControlItem57.Size = new Size(40, 24);
             layoutControlItem57.TextVisible = false;
             // 
             // layoutControlItem58
             // 
             layoutControlItem58.Control = psaSezName;
-            layoutControlItem58.Location = new Point(378, 0);
+            layoutControlItem58.Location = new Point(334, 0);
             layoutControlItem58.Name = "layoutControlItem58";
-            layoutControlItem58.Size = new Size(84, 24);
+            layoutControlItem58.Size = new Size(102, 24);
             layoutControlItem58.TextVisible = false;
             // 
             // layoutControlItem59
             // 
             layoutControlItem59.Control = cbIsChip;
-            layoutControlItem59.Location = new Point(472, 0);
+            layoutControlItem59.Location = new Point(448, 0);
             layoutControlItem59.Name = "layoutControlItem59";
-            layoutControlItem59.Size = new Size(109, 24);
+            layoutControlItem59.Size = new Size(133, 24);
             layoutControlItem59.TextVisible = false;
             // 
             // emptySpaceItem15
             // 
-            emptySpaceItem15.Location = new Point(244, 24);
+            emptySpaceItem15.Location = new Point(237, 24);
             emptySpaceItem15.Name = "emptySpaceItem15";
             emptySpaceItem15.Size = new Size(10, 24);
             // 
             // emptySpaceItem17
             // 
-            emptySpaceItem17.Location = new Point(205, 0);
+            emptySpaceItem17.Location = new Point(193, 0);
             emptySpaceItem17.Name = "emptySpaceItem17";
             emptySpaceItem17.Size = new Size(10, 24);
             // 
             // emptySpaceItem18
             // 
-            emptySpaceItem18.Location = new Point(305, 0);
+            emptySpaceItem18.Location = new Point(283, 0);
             emptySpaceItem18.Name = "emptySpaceItem18";
-            emptySpaceItem18.Size = new Size(10, 24);
+            emptySpaceItem18.Size = new Size(11, 24);
             // 
             // emptySpaceItem19
             // 
-            emptySpaceItem19.Location = new Point(462, 0);
+            emptySpaceItem19.Location = new Point(436, 0);
             emptySpaceItem19.Name = "emptySpaceItem19";
-            emptySpaceItem19.Size = new Size(10, 24);
+            emptySpaceItem19.Size = new Size(12, 24);
             // 
             // layoutControlItem62
             // 
             layoutControlItem62.Control = label11;
             layoutControlItem62.Location = new Point(0, 48);
             layoutControlItem62.Name = "layoutControlItem62";
-            layoutControlItem62.Size = new Size(103, 24);
+            layoutControlItem62.Size = new Size(79, 24);
             layoutControlItem62.TextVisible = false;
             // 
             // layoutControlItem63
             // 
             layoutControlItem63.Control = tbPsaNameSbit;
-            layoutControlItem63.Location = new Point(103, 48);
+            layoutControlItem63.Location = new Point(79, 48);
             layoutControlItem63.Name = "layoutControlItem63";
-            layoutControlItem63.Size = new Size(141, 24);
+            layoutControlItem63.Size = new Size(148, 24);
             layoutControlItem63.TextVisible = false;
             // 
             // emptySpaceItem20
             // 
-            emptySpaceItem20.Location = new Point(244, 48);
+            emptySpaceItem20.Location = new Point(227, 48);
             emptySpaceItem20.Name = "emptySpaceItem20";
             emptySpaceItem20.Size = new Size(10, 24);
             // 
@@ -8562,116 +9127,116 @@ namespace SewingProduction
             layoutControlItem64.Control = label68;
             layoutControlItem64.Location = new Point(0, 72);
             layoutControlItem64.Name = "layoutControlItem64";
-            layoutControlItem64.Size = new Size(120, 76);
+            layoutControlItem64.Size = new Size(98, 76);
             layoutControlItem64.TextVisible = false;
             // 
             // layoutControlItem65
             // 
             layoutControlItem65.Control = tbArtTradeMark;
-            layoutControlItem65.Location = new Point(120, 72);
+            layoutControlItem65.Location = new Point(98, 72);
             layoutControlItem65.Name = "layoutControlItem65";
-            layoutControlItem65.Size = new Size(68, 76);
+            layoutControlItem65.Size = new Size(71, 76);
             layoutControlItem65.TextVisible = false;
             // 
             // emptySpaceItem21
             // 
-            emptySpaceItem21.Location = new Point(188, 72);
+            emptySpaceItem21.Location = new Point(169, 72);
             emptySpaceItem21.Name = "emptySpaceItem21";
             emptySpaceItem21.Size = new Size(10, 76);
             // 
             // layoutControlItem66
             // 
             layoutControlItem66.Control = label62;
-            layoutControlItem66.Location = new Point(254, 24);
+            layoutControlItem66.Location = new Point(247, 24);
             layoutControlItem66.Name = "layoutControlItem66";
-            layoutControlItem66.Size = new Size(74, 24);
+            layoutControlItem66.Size = new Size(42, 24);
             layoutControlItem66.TextVisible = false;
             // 
             // layoutControlItem67
             // 
             layoutControlItem67.Control = tbPsaPsaID;
-            layoutControlItem67.Location = new Point(328, 24);
+            layoutControlItem67.Location = new Point(289, 24);
             layoutControlItem67.Name = "layoutControlItem67";
-            layoutControlItem67.Size = new Size(70, 24);
+            layoutControlItem67.Size = new Size(81, 24);
             layoutControlItem67.TextVisible = false;
             // 
             // layoutControlItem68
             // 
             layoutControlItem68.Control = label65;
-            layoutControlItem68.Location = new Point(408, 24);
+            layoutControlItem68.Location = new Point(382, 24);
             layoutControlItem68.Name = "layoutControlItem68";
-            layoutControlItem68.Size = new Size(93, 24);
+            layoutControlItem68.Size = new Size(70, 24);
             layoutControlItem68.TextVisible = false;
             // 
             // layoutControlItem69
             // 
             layoutControlItem69.Control = tbPsaPsaIDOsn;
-            layoutControlItem69.Location = new Point(501, 24);
+            layoutControlItem69.Location = new Point(452, 24);
             layoutControlItem69.Name = "layoutControlItem69";
-            layoutControlItem69.Size = new Size(80, 24);
+            layoutControlItem69.Size = new Size(129, 24);
             layoutControlItem69.TextVisible = false;
             // 
             // emptySpaceItem16
             // 
-            emptySpaceItem16.Location = new Point(398, 24);
+            emptySpaceItem16.Location = new Point(370, 24);
             emptySpaceItem16.Name = "emptySpaceItem16";
-            emptySpaceItem16.Size = new Size(10, 24);
+            emptySpaceItem16.Size = new Size(12, 24);
             // 
             // layoutControlItem70
             // 
             layoutControlItem70.Control = label66;
-            layoutControlItem70.Location = new Point(254, 48);
+            layoutControlItem70.Location = new Point(237, 48);
             layoutControlItem70.Name = "layoutControlItem70";
-            layoutControlItem70.Size = new Size(74, 24);
+            layoutControlItem70.Size = new Size(60, 24);
             layoutControlItem70.TextVisible = false;
             // 
             // layoutControlItem71
             // 
             layoutControlItem71.Control = tbPsaKombIzd;
-            layoutControlItem71.Location = new Point(328, 48);
+            layoutControlItem71.Location = new Point(297, 48);
             layoutControlItem71.Name = "layoutControlItem71";
-            layoutControlItem71.Size = new Size(70, 24);
+            layoutControlItem71.Size = new Size(79, 24);
             layoutControlItem71.TextVisible = false;
             // 
             // layoutControlItem72
             // 
             layoutControlItem72.Control = label67;
-            layoutControlItem72.Location = new Point(408, 48);
+            layoutControlItem72.Location = new Point(387, 48);
             layoutControlItem72.Name = "layoutControlItem72";
-            layoutControlItem72.Size = new Size(93, 24);
+            layoutControlItem72.Size = new Size(64, 24);
             layoutControlItem72.TextVisible = false;
             // 
             // layoutControlItem73
             // 
             layoutControlItem73.Control = tbPsaKombOsn;
-            layoutControlItem73.Location = new Point(501, 48);
+            layoutControlItem73.Location = new Point(451, 48);
             layoutControlItem73.Name = "layoutControlItem73";
-            layoutControlItem73.Size = new Size(80, 24);
+            layoutControlItem73.Size = new Size(130, 24);
             layoutControlItem73.TextVisible = false;
             // 
             // emptySpaceItem22
             // 
-            emptySpaceItem22.Location = new Point(398, 48);
+            emptySpaceItem22.Location = new Point(376, 48);
             emptySpaceItem22.Name = "emptySpaceItem22";
-            emptySpaceItem22.Size = new Size(10, 24);
+            emptySpaceItem22.Size = new Size(11, 24);
             // 
             // layoutControlItem60
             // 
             layoutControlItem60.Control = label20;
-            layoutControlItem60.Location = new Point(198, 72);
+            layoutControlItem60.Location = new Point(179, 72);
             layoutControlItem60.Name = "layoutControlItem60";
-            layoutControlItem60.Size = new Size(180, 76);
+            layoutControlItem60.Size = new Size(137, 76);
             layoutControlItem60.TextVisible = false;
             // 
             // layoutControlItem61
             // 
             layoutControlItem61.Control = tbPsaMenName;
-            layoutControlItem61.Location = new Point(378, 72);
+            layoutControlItem61.Location = new Point(316, 72);
             layoutControlItem61.Name = "layoutControlItem61";
-            layoutControlItem61.Size = new Size(203, 76);
+            layoutControlItem61.Size = new Size(265, 76);
             layoutControlItem61.TextVisible = false;
             // 
-            // layoutOpis_t
+            // layoutControlGroup10
             // 
             layoutControlGroup10.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem48, layoutControlItem16, layoutControlItem18, layoutControlItem74, layoutControlItem75, emptySpaceItem23, layoutControlItem76, layoutControlItem77, layoutControlItem78, layoutControlItem79, layoutControlItem80, layoutControlItem81, layoutControlItem82, layoutControlItem83, layoutControlItem84, layoutControlItem85, emptySpaceItem25, emptySpaceItem26, layoutControlItem47, layoutControlItem109, layoutControlItem135, layoutControlItem157, layoutControlItem158, emptySpaceItem27, layoutControlItem194 });
             layoutControlGroup10.Location = new Point(344, 0);
@@ -8683,9 +9248,9 @@ namespace SewingProduction
             // layoutControlItem48
             // 
             layoutControlItem48.Control = tbPsaNomZad;
-            layoutControlItem48.Location = new Point(37, 0);
+            layoutControlItem48.Location = new Point(18, 0);
             layoutControlItem48.Name = "layoutControlItem48";
-            layoutControlItem48.Size = new Size(108, 24);
+            layoutControlItem48.Size = new Size(114, 24);
             layoutControlItem48.TextVisible = false;
             // 
             // layoutControlItem16
@@ -8693,31 +9258,31 @@ namespace SewingProduction
             layoutControlItem16.Control = label9;
             layoutControlItem16.Location = new Point(0, 48);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new Size(140, 24);
+            layoutControlItem16.Size = new Size(86, 24);
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem18
             // 
             layoutControlItem18.Control = tbRzuArticul;
-            layoutControlItem18.Location = new Point(140, 48);
+            layoutControlItem18.Location = new Point(86, 48);
             layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new Size(238, 24);
+            layoutControlItem18.Size = new Size(292, 24);
             layoutControlItem18.TextVisible = false;
             // 
             // layoutControlItem74
             // 
             layoutControlItem74.Control = label8;
-            layoutControlItem74.Location = new Point(155, 0);
+            layoutControlItem74.Location = new Point(143, 0);
             layoutControlItem74.Name = "layoutControlItem74";
-            layoutControlItem74.Size = new Size(47, 24);
+            layoutControlItem74.Size = new Size(33, 24);
             layoutControlItem74.TextVisible = false;
             // 
             // layoutControlItem75
             // 
             layoutControlItem75.Control = tbPsaPrn;
-            layoutControlItem75.Location = new Point(202, 0);
+            layoutControlItem75.Location = new Point(176, 0);
             layoutControlItem75.Name = "layoutControlItem75";
-            layoutControlItem75.Size = new Size(176, 24);
+            layoutControlItem75.Size = new Size(202, 24);
             layoutControlItem75.TextVisible = false;
             // 
             // emptySpaceItem23
@@ -8731,31 +9296,31 @@ namespace SewingProduction
             layoutControlItem76.Control = label23;
             layoutControlItem76.Location = new Point(68, 24);
             layoutControlItem76.Name = "layoutControlItem76";
-            layoutControlItem76.Size = new Size(71, 24);
+            layoutControlItem76.Size = new Size(56, 24);
             layoutControlItem76.TextVisible = false;
             // 
             // layoutControlItem77
             // 
             layoutControlItem77.Control = tbPsaKodZv1;
-            layoutControlItem77.Location = new Point(139, 24);
+            layoutControlItem77.Location = new Point(124, 24);
             layoutControlItem77.Name = "layoutControlItem77";
-            layoutControlItem77.Size = new Size(85, 24);
+            layoutControlItem77.Size = new Size(90, 24);
             layoutControlItem77.TextVisible = false;
             // 
             // layoutControlItem78
             // 
             layoutControlItem78.Control = label22;
-            layoutControlItem78.Location = new Point(234, 24);
+            layoutControlItem78.Location = new Point(225, 24);
             layoutControlItem78.Name = "layoutControlItem78";
-            layoutControlItem78.Size = new Size(71, 24);
+            layoutControlItem78.Size = new Size(56, 24);
             layoutControlItem78.TextVisible = false;
             // 
             // layoutControlItem79
             // 
             layoutControlItem79.Control = tbPsaKodZv2;
-            layoutControlItem79.Location = new Point(305, 24);
+            layoutControlItem79.Location = new Point(281, 24);
             layoutControlItem79.Name = "layoutControlItem79";
-            layoutControlItem79.Size = new Size(73, 24);
+            layoutControlItem79.Size = new Size(97, 24);
             layoutControlItem79.TextVisible = false;
             // 
             // layoutControlItem80
@@ -8763,32 +9328,32 @@ namespace SewingProduction
             layoutControlItem80.Control = label15;
             layoutControlItem80.Location = new Point(0, 72);
             layoutControlItem80.Name = "layoutControlItem80";
-            layoutControlItem80.Size = new Size(190, 24);
+            layoutControlItem80.Size = new Size(160, 24);
             layoutControlItem80.TextVisible = false;
             // 
             // layoutControlItem81
             // 
             layoutControlItem81.Control = tbArtGrup;
-            layoutControlItem81.Location = new Point(190, 72);
+            layoutControlItem81.Location = new Point(160, 72);
             layoutControlItem81.Name = "layoutControlItem81";
-            layoutControlItem81.Size = new Size(188, 24);
+            layoutControlItem81.Size = new Size(218, 24);
             layoutControlItem81.TextVisible = false;
             // 
             // layoutControlItem82
             // 
             layoutControlItem82.Control = label10;
-            layoutControlItem82.Location = new Point(388, 89);
+            layoutControlItem82.Location = new Point(388, 88);
             layoutControlItem82.Name = "layoutControlItem82";
-            layoutControlItem82.Size = new Size(108, 59);
+            layoutControlItem82.Size = new Size(91, 60);
             layoutControlItem82.TextVisible = false;
             // 
             // layoutControlItem83
             // 
             layoutControlItem83.Control = tbRzuMod;
-            layoutControlItem83.Location = new Point(496, 89);
+            layoutControlItem83.Location = new Point(479, 88);
             layoutControlItem83.MinSize = new Size(24, 24);
             layoutControlItem83.Name = "layoutControlItem83";
-            layoutControlItem83.Size = new Size(183, 59);
+            layoutControlItem83.Size = new Size(200, 60);
             layoutControlItem83.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem83.TextVisible = false;
             // 
@@ -8797,37 +9362,37 @@ namespace SewingProduction
             layoutControlItem84.Control = label13;
             layoutControlItem84.Location = new Point(388, 26);
             layoutControlItem84.Name = "layoutControlItem84";
-            layoutControlItem84.Size = new Size(108, 37);
+            layoutControlItem84.Size = new Size(91, 36);
             layoutControlItem84.TextVisible = false;
             // 
             // layoutControlItem85
             // 
             layoutControlItem85.Control = tbSostPoln;
-            layoutControlItem85.Location = new Point(496, 26);
+            layoutControlItem85.Location = new Point(479, 26);
             layoutControlItem85.MinSize = new Size(24, 24);
             layoutControlItem85.Name = "layoutControlItem85";
-            layoutControlItem85.Size = new Size(183, 63);
+            layoutControlItem85.Size = new Size(200, 62);
             layoutControlItem85.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem85.TextVisible = false;
             // 
             // emptySpaceItem25
             // 
-            emptySpaceItem25.Location = new Point(145, 0);
+            emptySpaceItem25.Location = new Point(132, 0);
             emptySpaceItem25.Name = "emptySpaceItem25";
-            emptySpaceItem25.Size = new Size(10, 24);
+            emptySpaceItem25.Size = new Size(11, 24);
             // 
             // emptySpaceItem26
             // 
-            emptySpaceItem26.Location = new Point(224, 24);
+            emptySpaceItem26.Location = new Point(214, 24);
             emptySpaceItem26.Name = "emptySpaceItem26";
-            emptySpaceItem26.Size = new Size(10, 24);
+            emptySpaceItem26.Size = new Size(11, 24);
             // 
             // layoutControlItem47
             // 
             layoutControlItem47.Control = label53;
             layoutControlItem47.Location = new Point(0, 0);
             layoutControlItem47.Name = "layoutControlItem47";
-            layoutControlItem47.Size = new Size(37, 24);
+            layoutControlItem47.Size = new Size(18, 24);
             layoutControlItem47.TextVisible = false;
             // 
             // layoutControlItem109
@@ -8835,16 +9400,16 @@ namespace SewingProduction
             layoutControlItem109.Control = customLabel17;
             layoutControlItem109.Location = new Point(0, 96);
             layoutControlItem109.Name = "layoutControlItem109";
-            layoutControlItem109.Size = new Size(111, 52);
+            layoutControlItem109.Size = new Size(92, 52);
             layoutControlItem109.TextVisible = false;
             // 
             // layoutControlItem135
             // 
             layoutControlItem135.Control = TextBoxRecomendZad;
-            layoutControlItem135.Location = new Point(111, 96);
+            layoutControlItem135.Location = new Point(92, 96);
             layoutControlItem135.MinSize = new Size(24, 24);
             layoutControlItem135.Name = "layoutControlItem135";
-            layoutControlItem135.Size = new Size(267, 52);
+            layoutControlItem135.Size = new Size(286, 52);
             layoutControlItem135.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem135.TextVisible = false;
             // 
@@ -8853,15 +9418,15 @@ namespace SewingProduction
             layoutControlItem157.Control = customLabel22;
             layoutControlItem157.Location = new Point(388, 0);
             layoutControlItem157.Name = "layoutControlItem157";
-            layoutControlItem157.Size = new Size(130, 26);
+            layoutControlItem157.Size = new Size(95, 26);
             layoutControlItem157.TextVisible = false;
             // 
             // layoutControlItem158
             // 
             layoutControlItem158.Control = textBoxRzId;
-            layoutControlItem158.Location = new Point(518, 0);
+            layoutControlItem158.Location = new Point(483, 0);
             layoutControlItem158.Name = "layoutControlItem158";
-            layoutControlItem158.Size = new Size(161, 26);
+            layoutControlItem158.Size = new Size(196, 26);
             layoutControlItem158.TextVisible = false;
             // 
             // emptySpaceItem27
@@ -8873,9 +9438,9 @@ namespace SewingProduction
             // layoutControlItem194
             // 
             layoutControlItem194.Control = buttonVshivkiPrint;
-            layoutControlItem194.Location = new Point(388, 63);
+            layoutControlItem194.Location = new Point(388, 62);
             layoutControlItem194.Name = "layoutControlItem194";
-            layoutControlItem194.Size = new Size(108, 26);
+            layoutControlItem194.Size = new Size(91, 26);
             layoutControlItem194.TextVisible = false;
             // 
             // layoutControlItem22
@@ -8913,6 +9478,40 @@ namespace SewingProduction
             this.Name = "CardByNom";
             this.Text = "Карточка расчета";
             this.Load += (this.CardByNom_Load);
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
+            layoutControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditArticul.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem64).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup24).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem147).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem152).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem63).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup28).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem76).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem195).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem196).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem197).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem77).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem198).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem65).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdSP).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdVZP).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridSplitContainer1.Panel1).EndInit();
@@ -9211,40 +9810,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem143).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem145).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup3.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
-            layoutControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEditArticul.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customSearchLookUpEdit1View).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem64).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup24).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem147).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem152).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem63).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup28).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem76).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem195).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem196).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem197).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem77).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem198).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem65).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
@@ -9508,7 +10073,6 @@ namespace SewingProduction
         private CustomTextBox tbNomZad;
         private CustomLabel customLabel4;
         private DevExpress.XtraTab.XtraTabPage SockZadanyInfo;
-        private DevExpress.XtraLayout.LayoutControl layoutControl2;
         private CustomTextBox TextBoxKnitEndDate;
         private CustomTextBox TextBoxKnitStartDate;
         private CustomTextBox TextBoxAreaNumber;
@@ -9598,7 +10162,6 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem38;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem10;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;
-        private DevExpress.XtraLayout.LayoutControl layoutControl3;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
@@ -9663,7 +10226,6 @@ namespace SewingProduction
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem12;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup5;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private CustomTextBox tbSostPoln;
         private CustomTextBox tbRzuMod;
         private CustomLabel label13;
@@ -9778,7 +10340,6 @@ namespace SewingProduction
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem26;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem27;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
-        private DevExpress.XtraLayout.LayoutControl layoutControl4;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup13;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup14;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem86;
@@ -9820,12 +10381,10 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem99;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem101;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem103;
-        private DevExpress.XtraLayout.LayoutControl layoutControl5;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup15;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup16;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem105;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem107;
-        private DevExpress.XtraLayout.LayoutControl layoutControl6;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup17;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup18;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem112;
@@ -9903,7 +10462,6 @@ namespace SewingProduction
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem58;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup21;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem126;
-        private DevExpress.XtraLayout.LayoutControl layoutControl7;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup22;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup23;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator8;
@@ -9934,7 +10492,6 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem109;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem135;
         private DevExpress.XtraTab.XtraTabPage TabPageMgKart;
-        private DevExpress.XtraLayout.LayoutControl layoutControl8;
         private CustomGridControl gridControlNastilList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewNastilList;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup25;
@@ -9988,7 +10545,6 @@ namespace SewingProduction
         private CustomTextBoxEx textBoxDataZa;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem156;
         private CustomTextBoxEx customTextBoxEx1;
-        private DevExpress.XtraLayout.LayoutControl layoutControl9;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup26;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup27;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem159;
@@ -10053,5 +10609,14 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem197;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem77;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem198;
+        private CustomLayoutControl layoutControl2;
+        private CustomLayoutControl layoutControl3;
+        private CustomLayoutControl layoutControl1;
+        private CustomLayoutControl layoutControl4;
+        private CustomLayoutControl layoutControl5;
+        private CustomLayoutControl layoutControl6;
+        private CustomLayoutControl layoutControl7;
+        private CustomLayoutControl layoutControl8;
+        private CustomLayoutControl layoutControl9;
     }
 }

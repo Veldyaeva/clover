@@ -110,13 +110,13 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(gcFurnitArt, 7);
             gcFurnitArt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitArt.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitArt.Location = new System.Drawing.Point(15, 74);
+            gcFurnitArt.Location = new System.Drawing.Point(15, 70);
             gcFurnitArt.MainView = gridView1;
             gcFurnitArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitArt.Name = "gcFurnitArt";
             gcFurnitArt.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit3 });
             tablePanel1.SetRow(gcFurnitArt, 2);
-            gcFurnitArt.Size = new System.Drawing.Size(427, 232);
+            gcFurnitArt.Size = new System.Drawing.Size(370, 232);
             gcFurnitArt.TabIndex = 23;
             gcFurnitArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             gcFurnitArt.Click += gcFurnitArt_Click;
@@ -307,12 +307,12 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(gcFurnitPach, 2);
             gcFurnitPach.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitPach.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitPach.Location = new System.Drawing.Point(449, 74);
+            gcFurnitPach.Location = new System.Drawing.Point(393, 70);
             gcFurnitPach.MainView = gridView2;
             gcFurnitPach.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitPach.Name = "gcFurnitPach";
             tablePanel1.SetRow(gcFurnitPach, 2);
-            gcFurnitPach.Size = new System.Drawing.Size(178, 232);
+            gcFurnitPach.Size = new System.Drawing.Size(154, 232);
             gcFurnitPach.TabIndex = 24;
             gcFurnitPach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
             // 
@@ -385,69 +385,61 @@ namespace SewingProduction
             // 
             // tbBr
             // 
-            tbBr.BackColor = System.Drawing.SystemColors.Window;
             tbBr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tablePanel1.SetColumn(tbBr, 9);
             tbBr.ErrorColor = System.Drawing.Color.Red;
             tbBr.ErrorMessage = null;
             tbBr.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbBr.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbBr.Location = new System.Drawing.Point(635, 13);
+            tbBr.Location = new System.Drawing.Point(555, 13);
             tbBr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbBr.Name = "tbBr";
             tablePanel1.SetRow(tbBr, 0);
-            tbBr.Size = new System.Drawing.Size(400, 29);
+            tbBr.Size = new System.Drawing.Size(342, 29);
             tbBr.TabIndex = 22;
             tbBr.Text = "Br";
             // 
             // tbDataFO
             // 
-            tbDataFO.BackColor = System.Drawing.SystemColors.Window;
             tbDataFO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tablePanel1.SetColumn(tbDataFO, 7);
             tbDataFO.ErrorColor = System.Drawing.Color.Red;
             tbDataFO.ErrorMessage = null;
             tbDataFO.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbDataFO.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbDataFO.Location = new System.Drawing.Point(449, 13);
+            tbDataFO.Location = new System.Drawing.Point(393, 13);
             tbDataFO.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbDataFO.Name = "tbDataFO";
             tablePanel1.SetRow(tbDataFO, 0);
-            tbDataFO.Size = new System.Drawing.Size(158, 29);
+            tbDataFO.Size = new System.Drawing.Size(134, 29);
             tbDataFO.TabIndex = 21;
             tbDataFO.Text = "DataFO";
             // 
             // tbNZ
             // 
-            tbNZ.BackColor = System.Drawing.SystemColors.Window;
             tbNZ.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tablePanel1.SetColumn(tbNZ, 4);
             tbNZ.ErrorColor = System.Drawing.Color.Red;
             tbNZ.ErrorMessage = null;
             tbNZ.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbNZ.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbNZ.Location = new System.Drawing.Point(266, 13);
+            tbNZ.Location = new System.Drawing.Point(233, 13);
             tbNZ.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbNZ.Name = "tbNZ";
             tablePanel1.SetRow(tbNZ, 0);
-            tbNZ.Size = new System.Drawing.Size(114, 29);
+            tbNZ.Size = new System.Drawing.Size(97, 29);
             tbNZ.TabIndex = 20;
             tbNZ.Text = "NZ";
             // 
             // tbVidFName
             // 
-            tbVidFName.BackColor = System.Drawing.SystemColors.Window;
             tbVidFName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tablePanel1.SetColumn(tbVidFName, 0);
             tbVidFName.ErrorColor = System.Drawing.Color.Red;
             tbVidFName.ErrorMessage = null;
             tbVidFName.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbVidFName.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             tbVidFName.Location = new System.Drawing.Point(15, 13);
             tbVidFName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbVidFName.Name = "tbVidFName";
             tablePanel1.SetRow(tbVidFName, 0);
-            tbVidFName.Size = new System.Drawing.Size(160, 29);
+            tbVidFName.Size = new System.Drawing.Size(136, 29);
             tbVidFName.TabIndex = 19;
             tbVidFName.Text = "VidFName";
             // 
@@ -456,12 +448,11 @@ namespace SewingProduction
             label2.AutoSize = true;
             tablePanel1.SetColumn(label2, 6);
             label2.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label2.Location = new System.Drawing.Point(409, 14);
+            label2.Location = new System.Drawing.Point(358, 10);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             tablePanel1.SetRow(label2, 0);
-            label2.Size = new System.Drawing.Size(29, 22);
+            label2.Size = new System.Drawing.Size(21, 26);
             label2.TabIndex = 18;
             label2.Text = "от";
             // 
@@ -470,12 +461,11 @@ namespace SewingProduction
             label1.AutoSize = true;
             tablePanel1.SetColumn(label1, 3);
             label1.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label1.Location = new System.Drawing.Point(228, 14);
+            label1.Location = new System.Drawing.Point(200, 12);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             tablePanel1.SetRow(label1, 0);
-            label1.Size = new System.Drawing.Size(30, 22);
+            label1.Size = new System.Drawing.Size(25, 22);
             label1.TabIndex = 17;
             label1.Text = "№";
             // 
@@ -485,13 +475,13 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(gcFurnitF, 2);
             gcFurnitF.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitF.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitF.Location = new System.Drawing.Point(635, 74);
+            gcFurnitF.Location = new System.Drawing.Point(555, 70);
             gcFurnitF.MainView = gridView3;
             gcFurnitF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitF.Name = "gcFurnitF";
             gcFurnitF.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit2 });
             tablePanel1.SetRow(gcFurnitF, 2);
-            gcFurnitF.Size = new System.Drawing.Size(420, 232);
+            gcFurnitF.Size = new System.Drawing.Size(362, 232);
             gcFurnitF.TabIndex = 25;
             gcFurnitF.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView3 });
             // 
@@ -664,12 +654,12 @@ namespace SewingProduction
             gcFurnitFIt.DataSource = bsFurnitFIt;
             gcFurnitFIt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitFIt.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitFIt.Location = new System.Drawing.Point(1063, 74);
+            gcFurnitFIt.Location = new System.Drawing.Point(925, 70);
             gcFurnitFIt.MainView = gridView4;
             gcFurnitFIt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitFIt.Name = "gcFurnitFIt";
             tablePanel1.SetRow(gcFurnitFIt, 2);
-            gcFurnitFIt.Size = new System.Drawing.Size(486, 232);
+            gcFurnitFIt.Size = new System.Drawing.Size(624, 232);
             gcFurnitFIt.TabIndex = 26;
             gcFurnitFIt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView4 });
             gcFurnitFIt.Click += gcFurnitFIt_Click;
@@ -815,18 +805,16 @@ namespace SewingProduction
             // 
             // tbKodF
             // 
-            tbKodF.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tbKodF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tablePanel1.SetColumn(tbKodF, 11);
             tbKodF.ErrorColor = System.Drawing.Color.Red;
             tbKodF.ErrorMessage = null;
             tbKodF.Font = new System.Drawing.Font("Arial", 10F);
-            tbKodF.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbKodF.Location = new System.Drawing.Point(1063, 13);
+            tbKodF.Location = new System.Drawing.Point(925, 13);
             tbKodF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbKodF.Name = "tbKodF";
             tablePanel1.SetRow(tbKodF, 0);
-            tbKodF.Size = new System.Drawing.Size(197, 23);
+            tbKodF.Size = new System.Drawing.Size(168, 23);
             tbKodF.TabIndex = 27;
             tbKodF.Visible = false;
             tbKodF.TextChanged += tbKodF_TextChanged;
@@ -837,8 +825,7 @@ namespace SewingProduction
             label3.AutoSize = true;
             tablePanel1.SetColumn(label3, 0);
             label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label3.Location = new System.Drawing.Point(15, 46);
+            label3.Location = new System.Drawing.Point(15, 40);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             tablePanel1.SetRow(label3, 1);
@@ -851,8 +838,7 @@ namespace SewingProduction
             label4.AutoSize = true;
             tablePanel1.SetColumn(label4, 7);
             label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label4.Location = new System.Drawing.Point(449, 46);
+            label4.Location = new System.Drawing.Point(393, 40);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
             tablePanel1.SetRow(label4, 1);
@@ -865,8 +851,7 @@ namespace SewingProduction
             label5.AutoSize = true;
             tablePanel1.SetColumn(label5, 9);
             label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label5.Location = new System.Drawing.Point(635, 46);
+            label5.Location = new System.Drawing.Point(555, 40);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             tablePanel1.SetRow(label5, 1);
@@ -879,12 +864,11 @@ namespace SewingProduction
             button1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             tablePanel1.SetColumn(button1, 12);
             button1.Font = new System.Drawing.Font("Arial", 10F);
-            button1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            button1.Location = new System.Drawing.Point(1269, 13);
+            button1.Location = new System.Drawing.Point(1101, 13);
             button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             button1.Name = "button1";
             tablePanel1.SetRow(button1, 0);
-            button1.Size = new System.Drawing.Size(280, 24);
+            button1.Size = new System.Drawing.Size(448, 20);
             button1.TabIndex = 31;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
@@ -897,8 +881,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label6, 11);
             tablePanel1.SetColumnSpan(label6, 2);
             label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label6.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label6.Location = new System.Drawing.Point(1063, 46);
+            label6.Location = new System.Drawing.Point(925, 40);
             label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label6.Name = "label6";
             tablePanel1.SetRow(label6, 1);
@@ -917,18 +900,16 @@ namespace SewingProduction
             // 
             // tbViewType
             // 
-            tbViewType.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tbViewType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tablePanel1.SetColumn(tbViewType, 1);
             tbViewType.ErrorColor = System.Drawing.Color.Red;
             tbViewType.ErrorMessage = null;
             tbViewType.Font = new System.Drawing.Font("Arial", 10F);
-            tbViewType.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbViewType.Location = new System.Drawing.Point(183, 13);
+            tbViewType.Location = new System.Drawing.Point(159, 13);
             tbViewType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbViewType.Name = "tbViewType";
             tablePanel1.SetRow(tbViewType, 0);
-            tbViewType.Size = new System.Drawing.Size(17, 23);
+            tbViewType.Size = new System.Drawing.Size(13, 23);
             tbViewType.TabIndex = 33;
             tbViewType.Visible = false;
             // 

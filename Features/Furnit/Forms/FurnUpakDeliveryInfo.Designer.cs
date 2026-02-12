@@ -30,1097 +30,1080 @@ namespace SewingProduction.form
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.tbKodF = new SewingProduction.Core.Class.CustomTextBox();
-            this.label1 = new SewingProduction.Core.Class.CustomLabel();
-            this.gridControlReestrFurn = new CustomGridControl();
-            this.bsReestrFurn = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewReestrFurn = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnReestrFurnRfNOtgrPp = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfPachList = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfMod = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfArticul = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfGrup = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfBrig = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfTipZ = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfKodF = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfKolM = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfKomp = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnRfID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label2 = new SewingProduction.Core.Class.CustomLabel();
-            this.label3 = new SewingProduction.Core.Class.CustomLabel();
-            this.gridControlReestrFurnSostView = new CustomGridControl();
-            this.bsReestrFurnSost = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewReestrFurnSostView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnReestrFurnSostViewRfsDataPrin = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsKolPrin = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsDataOtpr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsKolOtpr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsTEd = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewFn = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsKodArt = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsKodO = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsNPp = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnSostViewRfsID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label4 = new SewingProduction.Core.Class.CustomLabel();
-            this.gridControlReestrFurnShtr = new CustomGridControl();
-            this.bsReestrFurnShtr = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewReestrFurnShtr = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnReestrFurnShtrRfshType = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnShtrRfshScan = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnShtrRfshShtr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnShtrRfshSNum = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnShtrRfshID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label5 = new SewingProduction.Core.Class.CustomLabel();
-            this.gridControlReestrFurnDeliveryBagView = new CustomGridControl();
-            this.bsReestrFurnDeliveryBag = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewReestrFurnDeliveryBagView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagViewDdName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label6 = new SewingProduction.Core.Class.CustomLabel();
-            this.gridControlReestrFurnDeliveryBagSost = new CustomGridControl();
-            this.bsReestrFurnDeliveryBagSost = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewReestrFurnDeliveryBagSost = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.button1 = new CustomButton();
-            this.button2 = new CustomButton();
-            this.button3 = new CustomButton();
-            this.button4 = new CustomButton();
-            this.button5 = new CustomButton();
-            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            this.tablePanel6 = new DevExpress.Utils.Layout.TablePanel();
-            this.tablePanel5 = new DevExpress.Utils.Layout.TablePanel();
-            this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
-            this.tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
-            this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
-            this.customSimpleButton1 = new CustomSimpleButton();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnSostView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnSost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnSostView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnShtr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnShtr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnShtr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnDeliveryBagView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnDeliveryBag)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnDeliveryBagView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnDeliveryBagSost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnDeliveryBagSost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnDeliveryBagSost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
-            this.tablePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel6)).BeginInit();
-            this.tablePanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel5)).BeginInit();
-            this.tablePanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).BeginInit();
-            this.tablePanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel3)).BeginInit();
-            this.tablePanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).BeginInit();
-            this.tablePanel2.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            tbKodF = new CustomTextBox();
+            label1 = new CustomLabel();
+            gridControlReestrFurn = new CustomGridControl();
+            bsReestrFurn = new System.Windows.Forms.BindingSource(components);
+            gridViewReestrFurn = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnReestrFurnRfNOtgrPp = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfPachList = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfMod = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfGrup = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfBrig = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfTipZ = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfKodF = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfKolM = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfKomp = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnRfID = new DevExpress.XtraGrid.Columns.GridColumn();
+            label2 = new CustomLabel();
+            label3 = new CustomLabel();
+            gridControlReestrFurnSostView = new CustomGridControl();
+            bsReestrFurnSost = new System.Windows.Forms.BindingSource(components);
+            gridViewReestrFurnSostView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnReestrFurnSostViewRfsDataPrin = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsKolPrin = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsDataOtpr = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsKolOtpr = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsTEd = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewFn = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsKodArt = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsKodO = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsNPp = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnSostViewRfsID = new DevExpress.XtraGrid.Columns.GridColumn();
+            label4 = new CustomLabel();
+            gridControlReestrFurnShtr = new CustomGridControl();
+            bsReestrFurnShtr = new System.Windows.Forms.BindingSource(components);
+            gridViewReestrFurnShtr = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnReestrFurnShtrRfshType = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnShtrRfshScan = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnShtrRfshShtr = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnShtrRfshSNum = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnShtrRfshID = new DevExpress.XtraGrid.Columns.GridColumn();
+            label5 = new CustomLabel();
+            gridControlReestrFurnDeliveryBagView = new CustomGridControl();
+            bsReestrFurnDeliveryBag = new System.Windows.Forms.BindingSource(components);
+            gridViewReestrFurnDeliveryBagView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnReestrFurnDeliveryBagViewDtDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagViewDdName = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagViewRfdbDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagViewRfdbID = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID = new DevExpress.XtraGrid.Columns.GridColumn();
+            label6 = new CustomLabel();
+            gridControlReestrFurnDeliveryBagSost = new CustomGridControl();
+            bsReestrFurnDeliveryBagSost = new System.Windows.Forms.BindingSource(components);
+            gridViewReestrFurnDeliveryBagSost = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnReestrFurnDeliveryBagSostRfdbsID = new DevExpress.XtraGrid.Columns.GridColumn();
+            button1 = new CustomButton();
+            button2 = new CustomButton();
+            button3 = new CustomButton();
+            button4 = new CustomButton();
+            button5 = new CustomButton();
+            gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
+            tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            tablePanel6 = new DevExpress.Utils.Layout.TablePanel();
+            tablePanel5 = new DevExpress.Utils.Layout.TablePanel();
+            tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
+            tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
+            tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
+            customSimpleButton1 = new CustomSimpleButton();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnSostView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnSostView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnShtr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnShtr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnShtr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnDeliveryBagView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnDeliveryBag).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnDeliveryBagView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnDeliveryBagSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnDeliveryBagSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnDeliveryBagSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tablePanel1).BeginInit();
+            tablePanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tablePanel6).BeginInit();
+            tablePanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tablePanel5).BeginInit();
+            tablePanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tablePanel4).BeginInit();
+            tablePanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tablePanel3).BeginInit();
+            tablePanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)tablePanel2).BeginInit();
+            tablePanel2.SuspendLayout();
+            SuspendLayout();
             // 
             // tbKodF
             // 
-            this.tbKodF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.tablePanel2.SetColumn(this.tbKodF, 1);
-            this.tbKodF.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbKodF.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbKodF.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.tbKodF.Location = new System.Drawing.Point(79, 12);
-            this.tbKodF.Name = "tbKodF";
-            this.tablePanel2.SetRow(this.tbKodF, 0);
-            this.tbKodF.Size = new System.Drawing.Size(110, 23);
-            this.tbKodF.TabIndex = 0;
-            this.tbKodF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbKodF_KeyDown);
+            tbKodF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tablePanel2.SetColumn(tbKodF, 1);
+            tbKodF.Dock = System.Windows.Forms.DockStyle.Fill;
+            tbKodF.ErrorColor = System.Drawing.Color.Red;
+            tbKodF.ErrorMessage = null;
+            tbKodF.Font = new System.Drawing.Font("Arial", 10F);
+            tbKodF.Location = new System.Drawing.Point(92, 13);
+            tbKodF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbKodF.Name = "tbKodF";
+            tablePanel2.SetRow(tbKodF, 0);
+            tbKodF.Size = new System.Drawing.Size(125, 23);
+            tbKodF.TabIndex = 0;
+            tbKodF.KeyDown += tbKodF_KeyDown;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.tablePanel2.SetColumn(this.label1, 0);
-            this.label1.Font = new System.Drawing.Font("Arial", 10F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label1.Location = new System.Drawing.Point(13, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(3);
-            this.label1.Name = "label1";
-            this.tablePanel2.SetRow(this.label1, 0);
-            this.label1.Size = new System.Drawing.Size(52, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Заявка";
+            label1.AutoSize = true;
+            tablePanel2.SetColumn(label1, 0);
+            label1.Font = new System.Drawing.Font("Arial", 10F);
+            label1.Location = new System.Drawing.Point(15, 18);
+            label1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            label1.Name = "label1";
+            tablePanel2.SetRow(label1, 0);
+            label1.Size = new System.Drawing.Size(52, 16);
+            label1.TabIndex = 1;
+            label1.Text = "Заявка";
             // 
             // gridControlReestrFurn
             // 
-            this.gridControlReestrFurn.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel1.SetColumn(this.gridControlReestrFurn, 0);
-            this.tablePanel1.SetColumnSpan(this.gridControlReestrFurn, 4);
-            this.gridControlReestrFurn.DataSource = this.bsReestrFurn;
-            this.gridControlReestrFurn.Font = new System.Drawing.Font("Arial", 10F);
-            this.gridControlReestrFurn.Location = new System.Drawing.Point(13, 86);
-            this.gridControlReestrFurn.MainView = this.gridViewReestrFurn;
-            this.gridControlReestrFurn.Name = "gridControlReestrFurn";
-            this.tablePanel1.SetRow(this.gridControlReestrFurn, 2);
-            this.gridControlReestrFurn.Size = new System.Drawing.Size(1440, 154);
-            this.gridControlReestrFurn.TabIndex = 3;
-            this.gridControlReestrFurn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewReestrFurn});
+            tablePanel1.SetColumn(gridControlReestrFurn, 0);
+            tablePanel1.SetColumnSpan(gridControlReestrFurn, 4);
+            gridControlReestrFurn.DataSource = bsReestrFurn;
+            gridControlReestrFurn.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurn.Font = new System.Drawing.Font("Arial", 10F);
+            gridControlReestrFurn.Location = new System.Drawing.Point(15, 98);
+            gridControlReestrFurn.MainView = gridViewReestrFurn;
+            gridControlReestrFurn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurn.Name = "gridControlReestrFurn";
+            tablePanel1.SetRow(gridControlReestrFurn, 2);
+            gridControlReestrFurn.Size = new System.Drawing.Size(1674, 176);
+            gridControlReestrFurn.TabIndex = 3;
+            gridControlReestrFurn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewReestrFurn });
             // 
             // gridViewReestrFurn
             // 
-            this.gridViewReestrFurn.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridViewReestrFurn.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridViewReestrFurn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnReestrFurnRfNOtgrPp,
-            this.gridColumnReestrFurnRfPachList,
-            this.gridColumnReestrFurnRfMod,
-            this.gridColumnReestrFurnRfArticul,
-            this.gridColumnReestrFurnRfGrup,
-            this.gridColumnReestrFurnRfBrig,
-            this.gridColumnReestrFurnRfTipZ,
-            this.gridColumnReestrFurnRfKodF,
-            this.gridColumnReestrFurnRfKolM,
-            this.gridColumnReestrFurnRfKomp,
-            this.gridColumnReestrFurnRfDateTime,
-            this.gridColumnReestrFurnRfID});
-            this.gridViewReestrFurn.GridControl = this.gridControlReestrFurn;
-            this.gridViewReestrFurn.Name = "gridViewReestrFurn";
-            this.gridViewReestrFurn.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewReestrFurn.OptionsView.RowAutoHeight = true;
-            this.gridViewReestrFurn.OptionsView.ShowGroupPanel = false;
-            this.gridViewReestrFurn.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gcReestrFurn_FocusedRowChanged);
+            gridViewReestrFurn.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            gridViewReestrFurn.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridViewReestrFurn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnReestrFurnRfNOtgrPp, gridColumnReestrFurnRfPachList, gridColumnReestrFurnRfMod, gridColumnReestrFurnRfArticul, gridColumnReestrFurnRfGrup, gridColumnReestrFurnRfBrig, gridColumnReestrFurnRfTipZ, gridColumnReestrFurnRfKodF, gridColumnReestrFurnRfKolM, gridColumnReestrFurnRfKomp, gridColumnReestrFurnRfDateTime, gridColumnReestrFurnRfID });
+            gridViewReestrFurn.DetailHeight = 404;
+            gridViewReestrFurn.GridControl = gridControlReestrFurn;
+            gridViewReestrFurn.Name = "gridViewReestrFurn";
+            gridViewReestrFurn.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewReestrFurn.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewReestrFurn.OptionsView.RowAutoHeight = true;
+            gridViewReestrFurn.OptionsView.ShowGroupPanel = false;
+            gridViewReestrFurn.FocusedRowChanged += gcReestrFurn_FocusedRowChanged;
             // 
             // gridColumnReestrFurnRfNOtgrPp
             // 
-            this.gridColumnReestrFurnRfNOtgrPp.Caption = "№ заборн. карты";
-            this.gridColumnReestrFurnRfNOtgrPp.Name = "gridColumnReestrFurnRfNOtgrPp";
-            this.gridColumnReestrFurnRfNOtgrPp.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfNOtgrPp.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfNOtgrPp.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfNOtgrPp.Visible = true;
-            this.gridColumnReestrFurnRfNOtgrPp.VisibleIndex = 11;
-            this.gridColumnReestrFurnRfNOtgrPp.Width = 65;
+            gridColumnReestrFurnRfNOtgrPp.Caption = "№ заборн. карты";
+            gridColumnReestrFurnRfNOtgrPp.MinWidth = 23;
+            gridColumnReestrFurnRfNOtgrPp.Name = "gridColumnReestrFurnRfNOtgrPp";
+            gridColumnReestrFurnRfNOtgrPp.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfNOtgrPp.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfNOtgrPp.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfNOtgrPp.Visible = true;
+            gridColumnReestrFurnRfNOtgrPp.VisibleIndex = 11;
+            gridColumnReestrFurnRfNOtgrPp.Width = 76;
             // 
             // gridColumnReestrFurnRfPachList
             // 
-            this.gridColumnReestrFurnRfPachList.Caption = "Список пачек";
-            this.gridColumnReestrFurnRfPachList.Name = "gridColumnReestrFurnRfPachList";
-            this.gridColumnReestrFurnRfPachList.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfPachList.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfPachList.Visible = true;
-            this.gridColumnReestrFurnRfPachList.VisibleIndex = 10;
-            this.gridColumnReestrFurnRfPachList.Width = 362;
+            gridColumnReestrFurnRfPachList.Caption = "Список пачек";
+            gridColumnReestrFurnRfPachList.MinWidth = 23;
+            gridColumnReestrFurnRfPachList.Name = "gridColumnReestrFurnRfPachList";
+            gridColumnReestrFurnRfPachList.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfPachList.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfPachList.Visible = true;
+            gridColumnReestrFurnRfPachList.VisibleIndex = 10;
+            gridColumnReestrFurnRfPachList.Width = 422;
             // 
             // gridColumnReestrFurnRfMod
             // 
-            this.gridColumnReestrFurnRfMod.Caption = "Модель";
-            this.gridColumnReestrFurnRfMod.Name = "gridColumnReestrFurnRfMod";
-            this.gridColumnReestrFurnRfMod.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfMod.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfMod.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfMod.Visible = true;
-            this.gridColumnReestrFurnRfMod.VisibleIndex = 9;
-            this.gridColumnReestrFurnRfMod.Width = 150;
+            gridColumnReestrFurnRfMod.Caption = "Модель";
+            gridColumnReestrFurnRfMod.MinWidth = 23;
+            gridColumnReestrFurnRfMod.Name = "gridColumnReestrFurnRfMod";
+            gridColumnReestrFurnRfMod.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfMod.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfMod.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfMod.Visible = true;
+            gridColumnReestrFurnRfMod.VisibleIndex = 9;
+            gridColumnReestrFurnRfMod.Width = 175;
             // 
             // gridColumnReestrFurnRfArticul
             // 
-            this.gridColumnReestrFurnRfArticul.Caption = "Артикул";
-            this.gridColumnReestrFurnRfArticul.Name = "gridColumnReestrFurnRfArticul";
-            this.gridColumnReestrFurnRfArticul.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfArticul.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfArticul.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfArticul.Visible = true;
-            this.gridColumnReestrFurnRfArticul.VisibleIndex = 8;
-            this.gridColumnReestrFurnRfArticul.Width = 120;
+            gridColumnReestrFurnRfArticul.Caption = "Артикул";
+            gridColumnReestrFurnRfArticul.MinWidth = 23;
+            gridColumnReestrFurnRfArticul.Name = "gridColumnReestrFurnRfArticul";
+            gridColumnReestrFurnRfArticul.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfArticul.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfArticul.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfArticul.Visible = true;
+            gridColumnReestrFurnRfArticul.VisibleIndex = 8;
+            gridColumnReestrFurnRfArticul.Width = 140;
             // 
             // gridColumnReestrFurnRfGrup
             // 
-            this.gridColumnReestrFurnRfGrup.Caption = "Группа";
-            this.gridColumnReestrFurnRfGrup.Name = "gridColumnReestrFurnRfGrup";
-            this.gridColumnReestrFurnRfGrup.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfGrup.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfGrup.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfGrup.Visible = true;
-            this.gridColumnReestrFurnRfGrup.VisibleIndex = 7;
-            this.gridColumnReestrFurnRfGrup.Width = 130;
+            gridColumnReestrFurnRfGrup.Caption = "Группа";
+            gridColumnReestrFurnRfGrup.MinWidth = 23;
+            gridColumnReestrFurnRfGrup.Name = "gridColumnReestrFurnRfGrup";
+            gridColumnReestrFurnRfGrup.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfGrup.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfGrup.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfGrup.Visible = true;
+            gridColumnReestrFurnRfGrup.VisibleIndex = 7;
+            gridColumnReestrFurnRfGrup.Width = 152;
             // 
             // gridColumnReestrFurnRfBrig
             // 
-            this.gridColumnReestrFurnRfBrig.Caption = "Бригада";
-            this.gridColumnReestrFurnRfBrig.Name = "gridColumnReestrFurnRfBrig";
-            this.gridColumnReestrFurnRfBrig.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfBrig.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfBrig.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfBrig.Visible = true;
-            this.gridColumnReestrFurnRfBrig.VisibleIndex = 6;
-            this.gridColumnReestrFurnRfBrig.Width = 150;
+            gridColumnReestrFurnRfBrig.Caption = "Бригада";
+            gridColumnReestrFurnRfBrig.MinWidth = 23;
+            gridColumnReestrFurnRfBrig.Name = "gridColumnReestrFurnRfBrig";
+            gridColumnReestrFurnRfBrig.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfBrig.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfBrig.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfBrig.Visible = true;
+            gridColumnReestrFurnRfBrig.VisibleIndex = 6;
+            gridColumnReestrFurnRfBrig.Width = 175;
             // 
             // gridColumnReestrFurnRfTipZ
             // 
-            this.gridColumnReestrFurnRfTipZ.Caption = "Вид док.";
-            this.gridColumnReestrFurnRfTipZ.Name = "gridColumnReestrFurnRfTipZ";
-            this.gridColumnReestrFurnRfTipZ.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfTipZ.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfTipZ.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfTipZ.Visible = true;
-            this.gridColumnReestrFurnRfTipZ.VisibleIndex = 5;
-            this.gridColumnReestrFurnRfTipZ.Width = 35;
+            gridColumnReestrFurnRfTipZ.Caption = "Вид док.";
+            gridColumnReestrFurnRfTipZ.MinWidth = 23;
+            gridColumnReestrFurnRfTipZ.Name = "gridColumnReestrFurnRfTipZ";
+            gridColumnReestrFurnRfTipZ.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfTipZ.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfTipZ.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfTipZ.Visible = true;
+            gridColumnReestrFurnRfTipZ.VisibleIndex = 5;
+            gridColumnReestrFurnRfTipZ.Width = 41;
             // 
             // gridColumnReestrFurnRfKodF
             // 
-            this.gridColumnReestrFurnRfKodF.Caption = "№ заявки / передачи";
-            this.gridColumnReestrFurnRfKodF.Name = "gridColumnReestrFurnRfKodF";
-            this.gridColumnReestrFurnRfKodF.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfKodF.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfKodF.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfKodF.Visible = true;
-            this.gridColumnReestrFurnRfKodF.VisibleIndex = 4;
-            this.gridColumnReestrFurnRfKodF.Width = 100;
+            gridColumnReestrFurnRfKodF.Caption = "№ заявки / передачи";
+            gridColumnReestrFurnRfKodF.MinWidth = 23;
+            gridColumnReestrFurnRfKodF.Name = "gridColumnReestrFurnRfKodF";
+            gridColumnReestrFurnRfKodF.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfKodF.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfKodF.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfKodF.Visible = true;
+            gridColumnReestrFurnRfKodF.VisibleIndex = 4;
+            gridColumnReestrFurnRfKodF.Width = 117;
             // 
             // gridColumnReestrFurnRfKolM
             // 
-            this.gridColumnReestrFurnRfKolM.Caption = "Кол-во мест";
-            this.gridColumnReestrFurnRfKolM.Name = "gridColumnReestrFurnRfKolM";
-            this.gridColumnReestrFurnRfKolM.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfKolM.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfKolM.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfKolM.Visible = true;
-            this.gridColumnReestrFurnRfKolM.VisibleIndex = 3;
-            this.gridColumnReestrFurnRfKolM.Width = 45;
+            gridColumnReestrFurnRfKolM.Caption = "Кол-во мест";
+            gridColumnReestrFurnRfKolM.MinWidth = 23;
+            gridColumnReestrFurnRfKolM.Name = "gridColumnReestrFurnRfKolM";
+            gridColumnReestrFurnRfKolM.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfKolM.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfKolM.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfKolM.Visible = true;
+            gridColumnReestrFurnRfKolM.VisibleIndex = 3;
+            gridColumnReestrFurnRfKolM.Width = 52;
             // 
             // gridColumnReestrFurnRfKomp
             // 
-            this.gridColumnReestrFurnRfKomp.Caption = "Компьютер";
-            this.gridColumnReestrFurnRfKomp.Name = "gridColumnReestrFurnRfKomp";
-            this.gridColumnReestrFurnRfKomp.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfKomp.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfKomp.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfKomp.Visible = true;
-            this.gridColumnReestrFurnRfKomp.VisibleIndex = 2;
-            this.gridColumnReestrFurnRfKomp.Width = 130;
+            gridColumnReestrFurnRfKomp.Caption = "Компьютер";
+            gridColumnReestrFurnRfKomp.MinWidth = 23;
+            gridColumnReestrFurnRfKomp.Name = "gridColumnReestrFurnRfKomp";
+            gridColumnReestrFurnRfKomp.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfKomp.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfKomp.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfKomp.Visible = true;
+            gridColumnReestrFurnRfKomp.VisibleIndex = 2;
+            gridColumnReestrFurnRfKomp.Width = 152;
             // 
             // gridColumnReestrFurnRfDateTime
             // 
-            this.gridColumnReestrFurnRfDateTime.Caption = "Дата/время добавления";
-            this.gridColumnReestrFurnRfDateTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumnReestrFurnRfDateTime.Name = "gridColumnReestrFurnRfDateTime";
-            this.gridColumnReestrFurnRfDateTime.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfDateTime.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfDateTime.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfDateTime.Visible = true;
-            this.gridColumnReestrFurnRfDateTime.VisibleIndex = 1;
-            this.gridColumnReestrFurnRfDateTime.Width = 110;
+            gridColumnReestrFurnRfDateTime.Caption = "Дата/время добавления";
+            gridColumnReestrFurnRfDateTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            gridColumnReestrFurnRfDateTime.MinWidth = 23;
+            gridColumnReestrFurnRfDateTime.Name = "gridColumnReestrFurnRfDateTime";
+            gridColumnReestrFurnRfDateTime.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfDateTime.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfDateTime.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfDateTime.Visible = true;
+            gridColumnReestrFurnRfDateTime.VisibleIndex = 1;
+            gridColumnReestrFurnRfDateTime.Width = 128;
             // 
             // gridColumnReestrFurnRfID
             // 
-            this.gridColumnReestrFurnRfID.Caption = "ID";
-            this.gridColumnReestrFurnRfID.Name = "gridColumnReestrFurnRfID";
-            this.gridColumnReestrFurnRfID.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnRfID.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnRfID.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnRfID.Visible = true;
-            this.gridColumnReestrFurnRfID.VisibleIndex = 0;
-            this.gridColumnReestrFurnRfID.Width = 50;
+            gridColumnReestrFurnRfID.Caption = "ID";
+            gridColumnReestrFurnRfID.MinWidth = 23;
+            gridColumnReestrFurnRfID.Name = "gridColumnReestrFurnRfID";
+            gridColumnReestrFurnRfID.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnRfID.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnRfID.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnRfID.Visible = true;
+            gridColumnReestrFurnRfID.VisibleIndex = 0;
+            gridColumnReestrFurnRfID.Width = 58;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.tablePanel1.SetColumn(this.label2, 0);
-            this.tablePanel1.SetColumnSpan(this.label2, 4);
-            this.label2.Font = new System.Drawing.Font("Arial", 10F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(14, 65);
-            this.label2.Name = "label2";
-            this.tablePanel1.SetRow(this.label2, 1);
-            this.label2.Size = new System.Drawing.Size(116, 16);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Заборные карты";
+            label2.AutoSize = true;
+            tablePanel1.SetColumn(label2, 0);
+            tablePanel1.SetColumnSpan(label2, 4);
+            label2.Font = new System.Drawing.Font("Arial", 10F);
+            label2.Location = new System.Drawing.Point(15, 74);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            tablePanel1.SetRow(label2, 1);
+            label2.Size = new System.Drawing.Size(116, 16);
+            label2.TabIndex = 4;
+            label2.Text = "Заборные карты";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.tablePanel1.SetColumn(this.label3, 0);
-            this.label3.Font = new System.Drawing.Font("Arial", 10F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(14, 259);
-            this.label3.Name = "label3";
-            this.tablePanel1.SetRow(this.label3, 4);
-            this.label3.Size = new System.Drawing.Size(163, 16);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Состав заборной карты";
+            label3.AutoSize = true;
+            tablePanel1.SetColumn(label3, 0);
+            label3.Font = new System.Drawing.Font("Arial", 10F);
+            label3.Location = new System.Drawing.Point(15, 296);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            tablePanel1.SetRow(label3, 4);
+            label3.Size = new System.Drawing.Size(163, 16);
+            label3.TabIndex = 6;
+            label3.Text = "Состав заборной карты";
             // 
             // gridControlReestrFurnSostView
             // 
-            this.gridControlReestrFurnSostView.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel1.SetColumn(this.gridControlReestrFurnSostView, 0);
-            this.gridControlReestrFurnSostView.DataSource = this.bsReestrFurnSost;
-            this.gridControlReestrFurnSostView.Font = new System.Drawing.Font("Arial", 10F);
-            this.gridControlReestrFurnSostView.Location = new System.Drawing.Point(13, 282);
-            this.gridControlReestrFurnSostView.MainView = this.gridViewReestrFurnSostView;
-            this.gridControlReestrFurnSostView.Name = "gridControlReestrFurnSostView";
-            this.tablePanel1.SetRow(this.gridControlReestrFurnSostView, 5);
-            this.gridControlReestrFurnSostView.Size = new System.Drawing.Size(842, 173);
-            this.gridControlReestrFurnSostView.TabIndex = 5;
-            this.gridControlReestrFurnSostView.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewReestrFurnSostView});
+            tablePanel1.SetColumn(gridControlReestrFurnSostView, 0);
+            gridControlReestrFurnSostView.DataSource = bsReestrFurnSost;
+            gridControlReestrFurnSostView.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnSostView.Font = new System.Drawing.Font("Arial", 10F);
+            gridControlReestrFurnSostView.Location = new System.Drawing.Point(15, 322);
+            gridControlReestrFurnSostView.MainView = gridViewReestrFurnSostView;
+            gridControlReestrFurnSostView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnSostView.Name = "gridControlReestrFurnSostView";
+            tablePanel1.SetRow(gridControlReestrFurnSostView, 5);
+            gridControlReestrFurnSostView.Size = new System.Drawing.Size(979, 198);
+            gridControlReestrFurnSostView.TabIndex = 5;
+            gridControlReestrFurnSostView.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewReestrFurnSostView });
             // 
             // gridViewReestrFurnSostView
             // 
-            this.gridViewReestrFurnSostView.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridViewReestrFurnSostView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridViewReestrFurnSostView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnReestrFurnSostViewRfsDataPrin,
-            this.gridColumnReestrFurnSostViewRfsKolPrin,
-            this.gridColumnReestrFurnSostViewRfsDataOtpr,
-            this.gridColumnReestrFurnSostViewRfsKolOtpr,
-            this.gridColumnReestrFurnSostViewRfsTEd,
-            this.gridColumnReestrFurnSostViewFn,
-            this.gridColumnReestrFurnSostViewRfsKodArt,
-            this.gridColumnReestrFurnSostViewRfsKodO,
-            this.gridColumnReestrFurnSostViewRfsNPp,
-            this.gridColumnReestrFurnSostViewRfsDate,
-            this.gridColumnReestrFurnSostViewRfsID});
-            this.gridViewReestrFurnSostView.GridControl = this.gridControlReestrFurnSostView;
-            this.gridViewReestrFurnSostView.Name = "gridViewReestrFurnSostView";
-            this.gridViewReestrFurnSostView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewReestrFurnSostView.OptionsView.RowAutoHeight = true;
-            this.gridViewReestrFurnSostView.OptionsView.ShowGroupPanel = false;
+            gridViewReestrFurnSostView.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            gridViewReestrFurnSostView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridViewReestrFurnSostView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnReestrFurnSostViewRfsDataPrin, gridColumnReestrFurnSostViewRfsKolPrin, gridColumnReestrFurnSostViewRfsDataOtpr, gridColumnReestrFurnSostViewRfsKolOtpr, gridColumnReestrFurnSostViewRfsTEd, gridColumnReestrFurnSostViewFn, gridColumnReestrFurnSostViewRfsKodArt, gridColumnReestrFurnSostViewRfsKodO, gridColumnReestrFurnSostViewRfsNPp, gridColumnReestrFurnSostViewRfsDate, gridColumnReestrFurnSostViewRfsID });
+            gridViewReestrFurnSostView.DetailHeight = 404;
+            gridViewReestrFurnSostView.GridControl = gridControlReestrFurnSostView;
+            gridViewReestrFurnSostView.Name = "gridViewReestrFurnSostView";
+            gridViewReestrFurnSostView.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewReestrFurnSostView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewReestrFurnSostView.OptionsView.RowAutoHeight = true;
+            gridViewReestrFurnSostView.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumnReestrFurnSostViewRfsDataPrin
             // 
-            this.gridColumnReestrFurnSostViewRfsDataPrin.Caption = "Дата прин.";
-            this.gridColumnReestrFurnSostViewRfsDataPrin.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumnReestrFurnSostViewRfsDataPrin.Name = "gridColumnReestrFurnSostViewRfsDataPrin";
-            this.gridColumnReestrFurnSostViewRfsDataPrin.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsDataPrin.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsDataPrin.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsDataPrin.VisibleIndex = 10;
-            this.gridColumnReestrFurnSostViewRfsDataPrin.Width = 111;
+            gridColumnReestrFurnSostViewRfsDataPrin.Caption = "Дата прин.";
+            gridColumnReestrFurnSostViewRfsDataPrin.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            gridColumnReestrFurnSostViewRfsDataPrin.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsDataPrin.Name = "gridColumnReestrFurnSostViewRfsDataPrin";
+            gridColumnReestrFurnSostViewRfsDataPrin.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsDataPrin.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsDataPrin.Visible = true;
+            gridColumnReestrFurnSostViewRfsDataPrin.VisibleIndex = 10;
+            gridColumnReestrFurnSostViewRfsDataPrin.Width = 129;
             // 
             // gridColumnReestrFurnSostViewRfsKolPrin
             // 
-            this.gridColumnReestrFurnSostViewRfsKolPrin.Caption = "Кол-во прин.";
-            this.gridColumnReestrFurnSostViewRfsKolPrin.Name = "gridColumnReestrFurnSostViewRfsKolPrin";
-            this.gridColumnReestrFurnSostViewRfsKolPrin.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsKolPrin.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKolPrin.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKolPrin.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsKolPrin.VisibleIndex = 9;
-            this.gridColumnReestrFurnSostViewRfsKolPrin.Width = 65;
+            gridColumnReestrFurnSostViewRfsKolPrin.Caption = "Кол-во прин.";
+            gridColumnReestrFurnSostViewRfsKolPrin.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsKolPrin.Name = "gridColumnReestrFurnSostViewRfsKolPrin";
+            gridColumnReestrFurnSostViewRfsKolPrin.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsKolPrin.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsKolPrin.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsKolPrin.Visible = true;
+            gridColumnReestrFurnSostViewRfsKolPrin.VisibleIndex = 9;
+            gridColumnReestrFurnSostViewRfsKolPrin.Width = 76;
             // 
             // gridColumnReestrFurnSostViewRfsDataOtpr
             // 
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.Caption = "Дата отпр.";
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.Name = "gridColumnReestrFurnSostViewRfsDataOtpr";
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.VisibleIndex = 8;
-            this.gridColumnReestrFurnSostViewRfsDataOtpr.Width = 110;
+            gridColumnReestrFurnSostViewRfsDataOtpr.Caption = "Дата отпр.";
+            gridColumnReestrFurnSostViewRfsDataOtpr.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            gridColumnReestrFurnSostViewRfsDataOtpr.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsDataOtpr.Name = "gridColumnReestrFurnSostViewRfsDataOtpr";
+            gridColumnReestrFurnSostViewRfsDataOtpr.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsDataOtpr.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsDataOtpr.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsDataOtpr.Visible = true;
+            gridColumnReestrFurnSostViewRfsDataOtpr.VisibleIndex = 8;
+            gridColumnReestrFurnSostViewRfsDataOtpr.Width = 128;
             // 
             // gridColumnReestrFurnSostViewRfsKolOtpr
             // 
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.Caption = "Кол-во отпр.";
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.Name = "gridColumnReestrFurnSostViewRfsKolOtpr";
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.VisibleIndex = 7;
-            this.gridColumnReestrFurnSostViewRfsKolOtpr.Width = 65;
+            gridColumnReestrFurnSostViewRfsKolOtpr.Caption = "Кол-во отпр.";
+            gridColumnReestrFurnSostViewRfsKolOtpr.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsKolOtpr.Name = "gridColumnReestrFurnSostViewRfsKolOtpr";
+            gridColumnReestrFurnSostViewRfsKolOtpr.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsKolOtpr.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsKolOtpr.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsKolOtpr.Visible = true;
+            gridColumnReestrFurnSostViewRfsKolOtpr.VisibleIndex = 7;
+            gridColumnReestrFurnSostViewRfsKolOtpr.Width = 76;
             // 
             // gridColumnReestrFurnSostViewRfsTEd
             // 
-            this.gridColumnReestrFurnSostViewRfsTEd.Caption = "Ед. изм.";
-            this.gridColumnReestrFurnSostViewRfsTEd.Name = "gridColumnReestrFurnSostViewRfsTEd";
-            this.gridColumnReestrFurnSostViewRfsTEd.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsTEd.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsTEd.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsTEd.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsTEd.VisibleIndex = 6;
-            this.gridColumnReestrFurnSostViewRfsTEd.Width = 50;
+            gridColumnReestrFurnSostViewRfsTEd.Caption = "Ед. изм.";
+            gridColumnReestrFurnSostViewRfsTEd.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsTEd.Name = "gridColumnReestrFurnSostViewRfsTEd";
+            gridColumnReestrFurnSostViewRfsTEd.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsTEd.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsTEd.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsTEd.Visible = true;
+            gridColumnReestrFurnSostViewRfsTEd.VisibleIndex = 6;
+            gridColumnReestrFurnSostViewRfsTEd.Width = 58;
             // 
             // gridColumnReestrFurnSostViewFn
             // 
-            this.gridColumnReestrFurnSostViewFn.Caption = "Наименование";
-            this.gridColumnReestrFurnSostViewFn.Name = "gridColumnReestrFurnSostViewFn";
-            this.gridColumnReestrFurnSostViewFn.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewFn.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewFn.Visible = true;
-            this.gridColumnReestrFurnSostViewFn.VisibleIndex = 5;
-            this.gridColumnReestrFurnSostViewFn.Width = 263;
+            gridColumnReestrFurnSostViewFn.Caption = "Наименование";
+            gridColumnReestrFurnSostViewFn.MinWidth = 23;
+            gridColumnReestrFurnSostViewFn.Name = "gridColumnReestrFurnSostViewFn";
+            gridColumnReestrFurnSostViewFn.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewFn.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewFn.Visible = true;
+            gridColumnReestrFurnSostViewFn.VisibleIndex = 5;
+            gridColumnReestrFurnSostViewFn.Width = 307;
             // 
             // gridColumnReestrFurnSostViewRfsKodArt
             // 
-            this.gridColumnReestrFurnSostViewRfsKodArt.Caption = "Код арт.";
-            this.gridColumnReestrFurnSostViewRfsKodArt.Name = "gridColumnReestrFurnSostViewRfsKodArt";
-            this.gridColumnReestrFurnSostViewRfsKodArt.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsKodArt.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKodArt.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKodArt.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsKodArt.VisibleIndex = 4;
-            this.gridColumnReestrFurnSostViewRfsKodArt.Width = 35;
+            gridColumnReestrFurnSostViewRfsKodArt.Caption = "Код арт.";
+            gridColumnReestrFurnSostViewRfsKodArt.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsKodArt.Name = "gridColumnReestrFurnSostViewRfsKodArt";
+            gridColumnReestrFurnSostViewRfsKodArt.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsKodArt.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsKodArt.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsKodArt.Visible = true;
+            gridColumnReestrFurnSostViewRfsKodArt.VisibleIndex = 4;
+            gridColumnReestrFurnSostViewRfsKodArt.Width = 41;
             // 
             // gridColumnReestrFurnSostViewRfsKodO
             // 
-            this.gridColumnReestrFurnSostViewRfsKodO.Caption = "Код";
-            this.gridColumnReestrFurnSostViewRfsKodO.Name = "gridColumnReestrFurnSostViewRfsKodO";
-            this.gridColumnReestrFurnSostViewRfsKodO.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsKodO.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKodO.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsKodO.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsKodO.VisibleIndex = 3;
-            this.gridColumnReestrFurnSostViewRfsKodO.Width = 50;
+            gridColumnReestrFurnSostViewRfsKodO.Caption = "Код";
+            gridColumnReestrFurnSostViewRfsKodO.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsKodO.Name = "gridColumnReestrFurnSostViewRfsKodO";
+            gridColumnReestrFurnSostViewRfsKodO.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsKodO.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsKodO.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsKodO.Visible = true;
+            gridColumnReestrFurnSostViewRfsKodO.VisibleIndex = 3;
+            gridColumnReestrFurnSostViewRfsKodO.Width = 58;
             // 
             // gridColumnReestrFurnSostViewRfsNPp
             // 
-            this.gridColumnReestrFurnSostViewRfsNPp.Caption = "№ п/п в заявке";
-            this.gridColumnReestrFurnSostViewRfsNPp.Name = "gridColumnReestrFurnSostViewRfsNPp";
-            this.gridColumnReestrFurnSostViewRfsNPp.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsNPp.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsNPp.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsNPp.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsNPp.VisibleIndex = 2;
-            this.gridColumnReestrFurnSostViewRfsNPp.Width = 50;
+            gridColumnReestrFurnSostViewRfsNPp.Caption = "№ п/п в заявке";
+            gridColumnReestrFurnSostViewRfsNPp.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsNPp.Name = "gridColumnReestrFurnSostViewRfsNPp";
+            gridColumnReestrFurnSostViewRfsNPp.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsNPp.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsNPp.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsNPp.Visible = true;
+            gridColumnReestrFurnSostViewRfsNPp.VisibleIndex = 2;
+            gridColumnReestrFurnSostViewRfsNPp.Width = 58;
             // 
             // gridColumnReestrFurnSostViewRfsDate
             // 
-            this.gridColumnReestrFurnSostViewRfsDate.Caption = "Дата/время добавления";
-            this.gridColumnReestrFurnSostViewRfsDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumnReestrFurnSostViewRfsDate.Name = "gridColumnReestrFurnSostViewRfsDate";
-            this.gridColumnReestrFurnSostViewRfsDate.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsDate.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsDate.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsDate.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsDate.VisibleIndex = 1;
-            this.gridColumnReestrFurnSostViewRfsDate.Width = 110;
+            gridColumnReestrFurnSostViewRfsDate.Caption = "Дата/время добавления";
+            gridColumnReestrFurnSostViewRfsDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            gridColumnReestrFurnSostViewRfsDate.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsDate.Name = "gridColumnReestrFurnSostViewRfsDate";
+            gridColumnReestrFurnSostViewRfsDate.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsDate.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsDate.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsDate.Visible = true;
+            gridColumnReestrFurnSostViewRfsDate.VisibleIndex = 1;
+            gridColumnReestrFurnSostViewRfsDate.Width = 128;
             // 
             // gridColumnReestrFurnSostViewRfsID
             // 
-            this.gridColumnReestrFurnSostViewRfsID.Caption = "ID";
-            this.gridColumnReestrFurnSostViewRfsID.Name = "gridColumnReestrFurnSostViewRfsID";
-            this.gridColumnReestrFurnSostViewRfsID.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnSostViewRfsID.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnSostViewRfsID.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnSostViewRfsID.Visible = true;
-            this.gridColumnReestrFurnSostViewRfsID.VisibleIndex = 0;
-            this.gridColumnReestrFurnSostViewRfsID.Width = 60;
+            gridColumnReestrFurnSostViewRfsID.Caption = "ID";
+            gridColumnReestrFurnSostViewRfsID.MinWidth = 23;
+            gridColumnReestrFurnSostViewRfsID.Name = "gridColumnReestrFurnSostViewRfsID";
+            gridColumnReestrFurnSostViewRfsID.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnSostViewRfsID.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnSostViewRfsID.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnSostViewRfsID.Visible = true;
+            gridColumnReestrFurnSostViewRfsID.VisibleIndex = 0;
+            gridColumnReestrFurnSostViewRfsID.Width = 70;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.tablePanel1.SetColumn(this.label4, 3);
-            this.label4.Font = new System.Drawing.Font("Arial", 10F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(987, 259);
-            this.label4.Name = "label4";
-            this.tablePanel1.SetRow(this.label4, 4);
-            this.label4.Size = new System.Drawing.Size(137, 16);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "ШК заборной карты";
+            label4.AutoSize = true;
+            tablePanel1.SetColumn(label4, 3);
+            label4.Font = new System.Drawing.Font("Arial", 10F);
+            label4.Location = new System.Drawing.Point(1147, 296);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            tablePanel1.SetRow(label4, 4);
+            label4.Size = new System.Drawing.Size(137, 16);
+            label4.TabIndex = 8;
+            label4.Text = "ШК заборной карты";
             // 
             // gridControlReestrFurnShtr
             // 
-            this.gridControlReestrFurnShtr.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel1.SetColumn(this.gridControlReestrFurnShtr, 3);
-            this.gridControlReestrFurnShtr.DataSource = this.bsReestrFurnShtr;
-            this.gridControlReestrFurnShtr.Font = new System.Drawing.Font("Arial", 10F);
-            this.gridControlReestrFurnShtr.Location = new System.Drawing.Point(986, 282);
-            this.gridControlReestrFurnShtr.MainView = this.gridViewReestrFurnShtr;
-            this.gridControlReestrFurnShtr.Name = "gridControlReestrFurnShtr";
-            this.tablePanel1.SetRow(this.gridControlReestrFurnShtr, 5);
-            this.gridControlReestrFurnShtr.Size = new System.Drawing.Size(467, 173);
-            this.gridControlReestrFurnShtr.TabIndex = 7;
-            this.gridControlReestrFurnShtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewReestrFurnShtr});
-            this.gridControlReestrFurnShtr.Click += new System.EventHandler(this.gridControl3_Click);
+            tablePanel1.SetColumn(gridControlReestrFurnShtr, 3);
+            gridControlReestrFurnShtr.DataSource = bsReestrFurnShtr;
+            gridControlReestrFurnShtr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnShtr.Font = new System.Drawing.Font("Arial", 10F);
+            gridControlReestrFurnShtr.Location = new System.Drawing.Point(1147, 322);
+            gridControlReestrFurnShtr.MainView = gridViewReestrFurnShtr;
+            gridControlReestrFurnShtr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnShtr.Name = "gridControlReestrFurnShtr";
+            tablePanel1.SetRow(gridControlReestrFurnShtr, 5);
+            gridControlReestrFurnShtr.Size = new System.Drawing.Size(542, 198);
+            gridControlReestrFurnShtr.TabIndex = 7;
+            gridControlReestrFurnShtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewReestrFurnShtr });
+            gridControlReestrFurnShtr.Click += gridControl3_Click;
             // 
             // gridViewReestrFurnShtr
             // 
-            this.gridViewReestrFurnShtr.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridViewReestrFurnShtr.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridViewReestrFurnShtr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnReestrFurnShtrRfshType,
-            this.gridColumnReestrFurnShtrRfshScan,
-            this.gridColumnReestrFurnShtrRfshShtr,
-            this.gridColumnReestrFurnShtrRfshSNum,
-            this.gridColumnReestrFurnShtrRfshID});
-            this.gridViewReestrFurnShtr.GridControl = this.gridControlReestrFurnShtr;
-            this.gridViewReestrFurnShtr.Name = "gridViewReestrFurnShtr";
-            this.gridViewReestrFurnShtr.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewReestrFurnShtr.OptionsView.ShowGroupPanel = false;
+            gridViewReestrFurnShtr.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            gridViewReestrFurnShtr.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridViewReestrFurnShtr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnReestrFurnShtrRfshType, gridColumnReestrFurnShtrRfshScan, gridColumnReestrFurnShtrRfshShtr, gridColumnReestrFurnShtrRfshSNum, gridColumnReestrFurnShtrRfshID });
+            gridViewReestrFurnShtr.DetailHeight = 404;
+            gridViewReestrFurnShtr.GridControl = gridControlReestrFurnShtr;
+            gridViewReestrFurnShtr.Name = "gridViewReestrFurnShtr";
+            gridViewReestrFurnShtr.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewReestrFurnShtr.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewReestrFurnShtr.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumnReestrFurnShtrRfshType
             // 
-            this.gridColumnReestrFurnShtrRfshType.Caption = "Тип скан.";
-            this.gridColumnReestrFurnShtrRfshType.Name = "gridColumnReestrFurnShtrRfshType";
-            this.gridColumnReestrFurnShtrRfshType.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnShtrRfshType.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnShtrRfshType.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnShtrRfshType.Visible = true;
-            this.gridColumnReestrFurnShtrRfshType.VisibleIndex = 4;
-            this.gridColumnReestrFurnShtrRfshType.Width = 30;
+            gridColumnReestrFurnShtrRfshType.Caption = "Тип скан.";
+            gridColumnReestrFurnShtrRfshType.MinWidth = 23;
+            gridColumnReestrFurnShtrRfshType.Name = "gridColumnReestrFurnShtrRfshType";
+            gridColumnReestrFurnShtrRfshType.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnShtrRfshType.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnShtrRfshType.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnShtrRfshType.Visible = true;
+            gridColumnReestrFurnShtrRfshType.VisibleIndex = 4;
+            gridColumnReestrFurnShtrRfshType.Width = 35;
             // 
             // gridColumnReestrFurnShtrRfshScan
             // 
-            this.gridColumnReestrFurnShtrRfshScan.Caption = "Дата/время сканирования";
-            this.gridColumnReestrFurnShtrRfshScan.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumnReestrFurnShtrRfshScan.Name = "gridColumnReestrFurnShtrRfshScan";
-            this.gridColumnReestrFurnShtrRfshScan.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnShtrRfshScan.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnShtrRfshScan.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnShtrRfshScan.Visible = true;
-            this.gridColumnReestrFurnShtrRfshScan.VisibleIndex = 3;
-            this.gridColumnReestrFurnShtrRfshScan.Width = 90;
+            gridColumnReestrFurnShtrRfshScan.Caption = "Дата/время сканирования";
+            gridColumnReestrFurnShtrRfshScan.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            gridColumnReestrFurnShtrRfshScan.MinWidth = 23;
+            gridColumnReestrFurnShtrRfshScan.Name = "gridColumnReestrFurnShtrRfshScan";
+            gridColumnReestrFurnShtrRfshScan.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnShtrRfshScan.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnShtrRfshScan.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnShtrRfshScan.Visible = true;
+            gridColumnReestrFurnShtrRfshScan.VisibleIndex = 3;
+            gridColumnReestrFurnShtrRfshScan.Width = 105;
             // 
             // gridColumnReestrFurnShtrRfshShtr
             // 
-            this.gridColumnReestrFurnShtrRfshShtr.Caption = "ШК места";
-            this.gridColumnReestrFurnShtrRfshShtr.Name = "gridColumnReestrFurnShtrRfshShtr";
-            this.gridColumnReestrFurnShtrRfshShtr.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnShtrRfshShtr.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnShtrRfshShtr.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnShtrRfshShtr.Visible = true;
-            this.gridColumnReestrFurnShtrRfshShtr.VisibleIndex = 2;
-            this.gridColumnReestrFurnShtrRfshShtr.Width = 80;
+            gridColumnReestrFurnShtrRfshShtr.Caption = "ШК места";
+            gridColumnReestrFurnShtrRfshShtr.MinWidth = 23;
+            gridColumnReestrFurnShtrRfshShtr.Name = "gridColumnReestrFurnShtrRfshShtr";
+            gridColumnReestrFurnShtrRfshShtr.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnShtrRfshShtr.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnShtrRfshShtr.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnShtrRfshShtr.Visible = true;
+            gridColumnReestrFurnShtrRfshShtr.VisibleIndex = 2;
+            gridColumnReestrFurnShtrRfshShtr.Width = 93;
             // 
             // gridColumnReestrFurnShtrRfshSNum
             // 
-            this.gridColumnReestrFurnShtrRfshSNum.Caption = "№ места";
-            this.gridColumnReestrFurnShtrRfshSNum.Name = "gridColumnReestrFurnShtrRfshSNum";
-            this.gridColumnReestrFurnShtrRfshSNum.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnShtrRfshSNum.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnShtrRfshSNum.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnShtrRfshSNum.Visible = true;
-            this.gridColumnReestrFurnShtrRfshSNum.VisibleIndex = 1;
-            this.gridColumnReestrFurnShtrRfshSNum.Width = 35;
+            gridColumnReestrFurnShtrRfshSNum.Caption = "№ места";
+            gridColumnReestrFurnShtrRfshSNum.MinWidth = 23;
+            gridColumnReestrFurnShtrRfshSNum.Name = "gridColumnReestrFurnShtrRfshSNum";
+            gridColumnReestrFurnShtrRfshSNum.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnShtrRfshSNum.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnShtrRfshSNum.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnShtrRfshSNum.Visible = true;
+            gridColumnReestrFurnShtrRfshSNum.VisibleIndex = 1;
+            gridColumnReestrFurnShtrRfshSNum.Width = 41;
             // 
             // gridColumnReestrFurnShtrRfshID
             // 
-            this.gridColumnReestrFurnShtrRfshID.Caption = "ID";
-            this.gridColumnReestrFurnShtrRfshID.Name = "gridColumnReestrFurnShtrRfshID";
-            this.gridColumnReestrFurnShtrRfshID.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnShtrRfshID.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnShtrRfshID.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnShtrRfshID.Visible = true;
-            this.gridColumnReestrFurnShtrRfshID.VisibleIndex = 0;
-            this.gridColumnReestrFurnShtrRfshID.Width = 60;
+            gridColumnReestrFurnShtrRfshID.Caption = "ID";
+            gridColumnReestrFurnShtrRfshID.MinWidth = 23;
+            gridColumnReestrFurnShtrRfshID.Name = "gridColumnReestrFurnShtrRfshID";
+            gridColumnReestrFurnShtrRfshID.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnShtrRfshID.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnShtrRfshID.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnShtrRfshID.Visible = true;
+            gridColumnReestrFurnShtrRfshID.VisibleIndex = 0;
+            gridColumnReestrFurnShtrRfshID.Width = 70;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.tablePanel1.SetColumn(this.label5, 0);
-            this.label5.Font = new System.Drawing.Font("Arial", 10F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(14, 474);
-            this.label5.Name = "label5";
-            this.tablePanel1.SetRow(this.label5, 7);
-            this.label5.Size = new System.Drawing.Size(139, 16);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Места для доставки";
+            label5.AutoSize = true;
+            tablePanel1.SetColumn(label5, 0);
+            label5.Font = new System.Drawing.Font("Arial", 10F);
+            label5.Location = new System.Drawing.Point(15, 542);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            tablePanel1.SetRow(label5, 7);
+            label5.Size = new System.Drawing.Size(139, 16);
+            label5.TabIndex = 10;
+            label5.Text = "Места для доставки";
             // 
             // gridControlReestrFurnDeliveryBagView
             // 
-            this.gridControlReestrFurnDeliveryBagView.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel1.SetColumn(this.gridControlReestrFurnDeliveryBagView, 0);
-            this.gridControlReestrFurnDeliveryBagView.DataSource = this.bsReestrFurnDeliveryBag;
-            this.gridControlReestrFurnDeliveryBagView.Font = new System.Drawing.Font("Arial", 10F);
-            this.gridControlReestrFurnDeliveryBagView.Location = new System.Drawing.Point(13, 524);
-            this.gridControlReestrFurnDeliveryBagView.MainView = this.gridViewReestrFurnDeliveryBagView;
-            this.gridControlReestrFurnDeliveryBagView.Name = "gridControlReestrFurnDeliveryBagView";
-            this.tablePanel1.SetRow(this.gridControlReestrFurnDeliveryBagView, 8);
-            this.gridControlReestrFurnDeliveryBagView.Size = new System.Drawing.Size(842, 185);
-            this.gridControlReestrFurnDeliveryBagView.TabIndex = 9;
-            this.gridControlReestrFurnDeliveryBagView.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewReestrFurnDeliveryBagView});
+            tablePanel1.SetColumn(gridControlReestrFurnDeliveryBagView, 0);
+            gridControlReestrFurnDeliveryBagView.DataSource = bsReestrFurnDeliveryBag;
+            gridControlReestrFurnDeliveryBagView.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnDeliveryBagView.Font = new System.Drawing.Font("Arial", 10F);
+            gridControlReestrFurnDeliveryBagView.Location = new System.Drawing.Point(15, 603);
+            gridControlReestrFurnDeliveryBagView.MainView = gridViewReestrFurnDeliveryBagView;
+            gridControlReestrFurnDeliveryBagView.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnDeliveryBagView.Name = "gridControlReestrFurnDeliveryBagView";
+            tablePanel1.SetRow(gridControlReestrFurnDeliveryBagView, 8);
+            gridControlReestrFurnDeliveryBagView.Size = new System.Drawing.Size(979, 213);
+            gridControlReestrFurnDeliveryBagView.TabIndex = 9;
+            gridControlReestrFurnDeliveryBagView.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewReestrFurnDeliveryBagView });
             // 
             // gridViewReestrFurnDeliveryBagView
             // 
-            this.gridViewReestrFurnDeliveryBagView.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridViewReestrFurnDeliveryBagView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridViewReestrFurnDeliveryBagView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime,
-            this.gridColumnReestrFurnDeliveryBagViewDdName,
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag,
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM,
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate,
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID,
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID,
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID});
-            this.gridViewReestrFurnDeliveryBagView.GridControl = this.gridControlReestrFurnDeliveryBagView;
-            this.gridViewReestrFurnDeliveryBagView.Name = "gridViewReestrFurnDeliveryBagView";
-            this.gridViewReestrFurnDeliveryBagView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewReestrFurnDeliveryBagView.OptionsView.ShowGroupPanel = false;
+            gridViewReestrFurnDeliveryBagView.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            gridViewReestrFurnDeliveryBagView.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridViewReestrFurnDeliveryBagView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnReestrFurnDeliveryBagViewDtDateTime, gridColumnReestrFurnDeliveryBagViewDdName, gridColumnReestrFurnDeliveryBagViewRfdbKolBag, gridColumnReestrFurnDeliveryBagViewRfdbKolM, gridColumnReestrFurnDeliveryBagViewRfdbDate, gridColumnReestrFurnDeliveryBagViewRfdbID, gridColumnReestrFurnDeliveryBagViewRfdbDtID, gridColumnReestrFurnDeliveryBagViewRfdbDdID });
+            gridViewReestrFurnDeliveryBagView.DetailHeight = 404;
+            gridViewReestrFurnDeliveryBagView.GridControl = gridControlReestrFurnDeliveryBagView;
+            gridViewReestrFurnDeliveryBagView.Name = "gridViewReestrFurnDeliveryBagView";
+            gridViewReestrFurnDeliveryBagView.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewReestrFurnDeliveryBagView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewReestrFurnDeliveryBagView.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumnReestrFurnDeliveryBagViewDtDateTime
             // 
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.Caption = "Машина";
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.Name = "gridColumnReestrFurnDeliveryBagViewDtDateTime";
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.VisibleIndex = 7;
-            this.gridColumnReestrFurnDeliveryBagViewDtDateTime.Width = 90;
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.Caption = "Машина";
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.Name = "gridColumnReestrFurnDeliveryBagViewDtDateTime";
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.VisibleIndex = 7;
+            gridColumnReestrFurnDeliveryBagViewDtDateTime.Width = 105;
             // 
             // gridColumnReestrFurnDeliveryBagViewDdName
             // 
-            this.gridColumnReestrFurnDeliveryBagViewDdName.Caption = "Направление";
-            this.gridColumnReestrFurnDeliveryBagViewDdName.Name = "gridColumnReestrFurnDeliveryBagViewDdName";
-            this.gridColumnReestrFurnDeliveryBagViewDdName.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewDdName.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewDdName.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewDdName.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewDdName.VisibleIndex = 5;
-            this.gridColumnReestrFurnDeliveryBagViewDdName.Width = 150;
+            gridColumnReestrFurnDeliveryBagViewDdName.Caption = "Направление";
+            gridColumnReestrFurnDeliveryBagViewDdName.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewDdName.Name = "gridColumnReestrFurnDeliveryBagViewDdName";
+            gridColumnReestrFurnDeliveryBagViewDdName.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewDdName.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewDdName.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewDdName.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewDdName.VisibleIndex = 5;
+            gridColumnReestrFurnDeliveryBagViewDdName.Width = 175;
             // 
             // gridColumnReestrFurnDeliveryBagViewRfdbKolBag
             // 
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Caption = "Кол-во мест д/доставки";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Name = "gridColumnReestrFurnDeliveryBagViewRfdbKolBag";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.VisibleIndex = 3;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Width = 80;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Caption = "Кол-во мест д/доставки";
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Name = "gridColumnReestrFurnDeliveryBagViewRfdbKolBag";
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.VisibleIndex = 3;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolBag.Width = 93;
             // 
             // gridColumnReestrFurnDeliveryBagViewRfdbKolM
             // 
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.Caption = "Кол-во мест д/получателя";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.Name = "gridColumnReestrFurnDeliveryBagViewRfdbKolM";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.VisibleIndex = 2;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbKolM.Width = 80;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.Caption = "Кол-во мест д/получателя";
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.Name = "gridColumnReestrFurnDeliveryBagViewRfdbKolM";
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.VisibleIndex = 2;
+            gridColumnReestrFurnDeliveryBagViewRfdbKolM.Width = 93;
             // 
             // gridColumnReestrFurnDeliveryBagViewRfdbDate
             // 
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.Caption = "Дата/время добавления";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.Name = "gridColumnReestrFurnDeliveryBagViewRfdbDate";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.VisibleIndex = 1;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDate.Width = 90;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.Caption = "Дата/время добавления";
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.Name = "gridColumnReestrFurnDeliveryBagViewRfdbDate";
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.VisibleIndex = 1;
+            gridColumnReestrFurnDeliveryBagViewRfdbDate.Width = 105;
             // 
             // gridColumnReestrFurnDeliveryBagViewRfdbID
             // 
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.Caption = "№ отгрузки";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.Name = "gridColumnReestrFurnDeliveryBagViewRfdbID";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.VisibleIndex = 0;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbID.Width = 60;
+            gridColumnReestrFurnDeliveryBagViewRfdbID.Caption = "№ отгрузки";
+            gridColumnReestrFurnDeliveryBagViewRfdbID.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewRfdbID.Name = "gridColumnReestrFurnDeliveryBagViewRfdbID";
+            gridColumnReestrFurnDeliveryBagViewRfdbID.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbID.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbID.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbID.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbID.VisibleIndex = 0;
+            gridColumnReestrFurnDeliveryBagViewRfdbID.Width = 70;
             // 
             // gridColumnReestrFurnDeliveryBagViewRfdbDtID
             // 
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.Caption = "ID";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.Name = "gridColumnReestrFurnDeliveryBagViewRfdbDtID";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.VisibleIndex = 6;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDtID.Width = 50;
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.Caption = "ID";
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.Name = "gridColumnReestrFurnDeliveryBagViewRfdbDtID";
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.VisibleIndex = 6;
+            gridColumnReestrFurnDeliveryBagViewRfdbDtID.Width = 58;
             // 
             // gridColumnReestrFurnDeliveryBagViewRfdbDdID
             // 
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.Caption = "ID";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.Name = "gridColumnReestrFurnDeliveryBagViewRfdbDdID";
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.OptionsFilter.AllowFilter = false;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.VisibleIndex = 4;
-            this.gridColumnReestrFurnDeliveryBagViewRfdbDdID.Width = 50;
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.Caption = "ID";
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.Name = "gridColumnReestrFurnDeliveryBagViewRfdbDdID";
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.OptionsFilter.AllowAutoFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.OptionsFilter.AllowFilter = false;
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.Visible = true;
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.VisibleIndex = 4;
+            gridColumnReestrFurnDeliveryBagViewRfdbDdID.Width = 58;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.tablePanel1.SetColumn(this.label6, 3);
-            this.label6.Font = new System.Drawing.Font("Arial", 10F);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label6.Location = new System.Drawing.Point(987, 474);
-            this.label6.Name = "label6";
-            this.tablePanel1.SetRow(this.label6, 7);
-            this.label6.Size = new System.Drawing.Size(207, 16);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "ШК транспортировочных мест";
+            label6.AutoSize = true;
+            tablePanel1.SetColumn(label6, 3);
+            label6.Font = new System.Drawing.Font("Arial", 10F);
+            label6.Location = new System.Drawing.Point(1147, 542);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            tablePanel1.SetRow(label6, 7);
+            label6.Size = new System.Drawing.Size(207, 16);
+            label6.TabIndex = 12;
+            label6.Text = "ШК транспортировочных мест";
             // 
             // gridControlReestrFurnDeliveryBagSost
             // 
-            this.gridControlReestrFurnDeliveryBagSost.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel1.SetColumn(this.gridControlReestrFurnDeliveryBagSost, 3);
-            this.gridControlReestrFurnDeliveryBagSost.DataSource = this.bsReestrFurnDeliveryBagSost;
-            this.gridControlReestrFurnDeliveryBagSost.Font = new System.Drawing.Font("Arial", 10F);
-            this.gridControlReestrFurnDeliveryBagSost.Location = new System.Drawing.Point(986, 524);
-            this.gridControlReestrFurnDeliveryBagSost.MainView = this.gridViewReestrFurnDeliveryBagSost;
-            this.gridControlReestrFurnDeliveryBagSost.Name = "gridControlReestrFurnDeliveryBagSost";
-            this.tablePanel1.SetRow(this.gridControlReestrFurnDeliveryBagSost, 8);
-            this.gridControlReestrFurnDeliveryBagSost.Size = new System.Drawing.Size(467, 185);
-            this.gridControlReestrFurnDeliveryBagSost.TabIndex = 11;
-            this.gridControlReestrFurnDeliveryBagSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewReestrFurnDeliveryBagSost});
+            tablePanel1.SetColumn(gridControlReestrFurnDeliveryBagSost, 3);
+            gridControlReestrFurnDeliveryBagSost.DataSource = bsReestrFurnDeliveryBagSost;
+            gridControlReestrFurnDeliveryBagSost.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnDeliveryBagSost.Font = new System.Drawing.Font("Arial", 10F);
+            gridControlReestrFurnDeliveryBagSost.Location = new System.Drawing.Point(1147, 603);
+            gridControlReestrFurnDeliveryBagSost.MainView = gridViewReestrFurnDeliveryBagSost;
+            gridControlReestrFurnDeliveryBagSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlReestrFurnDeliveryBagSost.Name = "gridControlReestrFurnDeliveryBagSost";
+            tablePanel1.SetRow(gridControlReestrFurnDeliveryBagSost, 8);
+            gridControlReestrFurnDeliveryBagSost.Size = new System.Drawing.Size(542, 213);
+            gridControlReestrFurnDeliveryBagSost.TabIndex = 11;
+            gridControlReestrFurnDeliveryBagSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewReestrFurnDeliveryBagSost });
             // 
             // gridViewReestrFurnDeliveryBagSost
             // 
-            this.gridViewReestrFurnDeliveryBagSost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan,
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr,
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber,
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID});
-            this.gridViewReestrFurnDeliveryBagSost.GridControl = this.gridControlReestrFurnDeliveryBagSost;
-            this.gridViewReestrFurnDeliveryBagSost.Name = "gridViewReestrFurnDeliveryBagSost";
-            this.gridViewReestrFurnDeliveryBagSost.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewReestrFurnDeliveryBagSost.OptionsView.RowAutoHeight = true;
-            this.gridViewReestrFurnDeliveryBagSost.OptionsView.ShowGroupPanel = false;
+            gridViewReestrFurnDeliveryBagSost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnReestrFurnDeliveryBagSostRfdbsScan, gridColumnReestrFurnDeliveryBagSostRfdbsShtr, gridColumnReestrFurnDeliveryBagSostRfdbsNumber, gridColumnReestrFurnDeliveryBagSostRfdbsID });
+            gridViewReestrFurnDeliveryBagSost.DetailHeight = 404;
+            gridViewReestrFurnDeliveryBagSost.GridControl = gridControlReestrFurnDeliveryBagSost;
+            gridViewReestrFurnDeliveryBagSost.Name = "gridViewReestrFurnDeliveryBagSost";
+            gridViewReestrFurnDeliveryBagSost.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewReestrFurnDeliveryBagSost.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewReestrFurnDeliveryBagSost.OptionsView.RowAutoHeight = true;
+            gridViewReestrFurnDeliveryBagSost.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumnReestrFurnDeliveryBagSostRfdbsScan
             // 
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan.Caption = "Дата/время сканирования";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsScan";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan.VisibleIndex = 3;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsScan.Width = 90;
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.Caption = "Дата/время сканирования";
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsScan";
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.Visible = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.VisibleIndex = 3;
+            gridColumnReestrFurnDeliveryBagSostRfdbsScan.Width = 105;
             // 
             // gridColumnReestrFurnDeliveryBagSostRfdbsShtr
             // 
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Caption = "ШК места";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsShtr";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr.VisibleIndex = 2;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Width = 80;
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Caption = "ШК места";
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsShtr";
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Visible = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr.VisibleIndex = 2;
+            gridColumnReestrFurnDeliveryBagSostRfdbsShtr.Width = 93;
             // 
             // gridColumnReestrFurnDeliveryBagSostRfdbsNumber
             // 
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Caption = "№ места";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsNumber";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber.VisibleIndex = 1;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Width = 40;
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Caption = "№ места";
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsNumber";
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Visible = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber.VisibleIndex = 1;
+            gridColumnReestrFurnDeliveryBagSostRfdbsNumber.Width = 47;
             // 
             // gridColumnReestrFurnDeliveryBagSostRfdbsID
             // 
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID.Caption = "ID";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsID";
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID.OptionsColumn.FixedWidth = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID.Visible = true;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID.VisibleIndex = 0;
-            this.gridColumnReestrFurnDeliveryBagSostRfdbsID.Width = 60;
+            gridColumnReestrFurnDeliveryBagSostRfdbsID.Caption = "ID";
+            gridColumnReestrFurnDeliveryBagSostRfdbsID.MinWidth = 23;
+            gridColumnReestrFurnDeliveryBagSostRfdbsID.Name = "gridColumnReestrFurnDeliveryBagSostRfdbsID";
+            gridColumnReestrFurnDeliveryBagSostRfdbsID.OptionsColumn.FixedWidth = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsID.Visible = true;
+            gridColumnReestrFurnDeliveryBagSostRfdbsID.VisibleIndex = 0;
+            gridColumnReestrFurnDeliveryBagSostRfdbsID.Width = 70;
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel3.SetColumn(this.button1, 0);
-            this.button1.Font = new System.Drawing.Font("Arial", 10F);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.button1.Location = new System.Drawing.Point(13, 12);
-            this.button1.Name = "button1";
-            this.tablePanel3.SetRow(this.button1, 0);
-            this.button1.Size = new System.Drawing.Size(81, 59);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Печать\r\nсостава\r\nреестра";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
+            tablePanel3.SetColumn(button1, 0);
+            button1.Font = new System.Drawing.Font("Arial", 10F);
+            button1.Location = new System.Drawing.Point(15, 13);
+            button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            tablePanel3.SetRow(button1, 0);
+            button1.Size = new System.Drawing.Size(99, 67);
+            button1.TabIndex = 13;
+            button1.Text = "Печать\r\nсостава\r\nреестра";
+            button1.UseVisualStyleBackColor = true;
+            button1.Visible = false;
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel3.SetColumn(this.button2, 0);
-            this.button2.Font = new System.Drawing.Font("Arial", 10F);
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.button2.Location = new System.Drawing.Point(13, 75);
-            this.button2.Name = "button2";
-            this.tablePanel3.SetRow(this.button2, 1);
-            this.button2.Size = new System.Drawing.Size(81, 66);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Добавить\r\nв реестр";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
+            tablePanel3.SetColumn(button2, 0);
+            button2.Font = new System.Drawing.Font("Arial", 10F);
+            button2.Location = new System.Drawing.Point(15, 86);
+            button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button2.Name = "button2";
+            tablePanel3.SetRow(button2, 1);
+            button2.Size = new System.Drawing.Size(99, 76);
+            button2.TabIndex = 14;
+            button2.Text = "Добавить\r\nв реестр";
+            button2.UseVisualStyleBackColor = true;
+            button2.Visible = false;
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel6.SetColumn(this.button3, 0);
-            this.button3.Font = new System.Drawing.Font("Arial", 10F);
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.button3.Location = new System.Drawing.Point(13, 44);
-            this.button3.Name = "button3";
-            this.tablePanel6.SetRow(this.button3, 0);
-            this.button3.Size = new System.Drawing.Size(77, 83);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "Удалить\r\nпозицию\r\nиз\r\nреестра";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
+            tablePanel6.SetColumn(button3, 0);
+            button3.Font = new System.Drawing.Font("Arial", 10F);
+            button3.Location = new System.Drawing.Point(15, 50);
+            button3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button3.Name = "button3";
+            tablePanel6.SetRow(button3, 0);
+            button3.Size = new System.Drawing.Size(87, 96);
+            button3.TabIndex = 16;
+            button3.Text = "Удалить\r\nпозицию\r\nиз\r\nреестра";
+            button3.UseVisualStyleBackColor = true;
+            button3.Visible = false;
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel4.SetColumn(this.button4, 0);
-            this.button4.Font = new System.Drawing.Font("Arial", 10F);
-            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.button4.Location = new System.Drawing.Point(13, 44);
-            this.button4.Name = "button4";
-            this.tablePanel4.SetRow(this.button4, 0);
-            this.button4.Size = new System.Drawing.Size(81, 83);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "Печать\r\nШК\r\nЗаборной\r\nкарты";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Visible = false;
+            tablePanel4.SetColumn(button4, 0);
+            button4.Font = new System.Drawing.Font("Arial", 10F);
+            button4.Location = new System.Drawing.Point(15, 50);
+            button4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button4.Name = "button4";
+            tablePanel4.SetRow(button4, 0);
+            button4.Size = new System.Drawing.Size(99, 96);
+            button4.TabIndex = 15;
+            button4.Text = "Печать\r\nШК\r\nЗаборной\r\nкарты";
+            button4.UseVisualStyleBackColor = true;
+            button4.Visible = false;
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.tablePanel5.SetColumn(this.button5, 0);
-            this.button5.Font = new System.Drawing.Font("Arial", 10F);
-            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.button5.Location = new System.Drawing.Point(13, 78);
-            this.button5.Name = "button5";
-            this.tablePanel5.SetRow(this.button5, 0);
-            this.button5.Size = new System.Drawing.Size(81, 83);
-            this.button5.TabIndex = 17;
-            this.button5.Text = "Печать\r\nШК\r\nГрузового\r\nместа";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Visible = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            tablePanel5.SetColumn(button5, 0);
+            button5.Font = new System.Drawing.Font("Arial", 10F);
+            button5.Location = new System.Drawing.Point(15, 93);
+            button5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button5.Name = "button5";
+            tablePanel5.SetRow(button5, 0);
+            button5.Size = new System.Drawing.Size(99, 96);
+            button5.TabIndex = 17;
+            button5.Text = "Печать\r\nШК\r\nГрузового\r\nместа";
+            button5.UseVisualStyleBackColor = true;
+            button5.Visible = false;
+            button5.Click += button5_Click;
             // 
             // gridColumn24
             // 
-            this.gridColumn24.Caption = "Дата/время добавления";
-            this.gridColumn24.FieldName = "rfDateTime";
-            this.gridColumn24.Name = "gridColumn24";
-            this.gridColumn24.OptionsColumn.FixedWidth = true;
-            this.gridColumn24.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn24.OptionsFilter.AllowFilter = false;
-            this.gridColumn24.Visible = true;
-            this.gridColumn24.VisibleIndex = 1;
-            this.gridColumn24.Width = 90;
+            gridColumn24.Caption = "Дата/время добавления";
+            gridColumn24.FieldName = "rfDateTime";
+            gridColumn24.Name = "gridColumn24";
+            gridColumn24.OptionsColumn.FixedWidth = true;
+            gridColumn24.OptionsFilter.AllowAutoFilter = false;
+            gridColumn24.OptionsFilter.AllowFilter = false;
+            gridColumn24.Visible = true;
+            gridColumn24.VisibleIndex = 1;
+            gridColumn24.Width = 90;
             // 
             // gridColumn25
             // 
-            this.gridColumn25.Caption = "Дата/время добавления";
-            this.gridColumn25.FieldName = "rfDateTime";
-            this.gridColumn25.Name = "gridColumn25";
-            this.gridColumn25.OptionsColumn.FixedWidth = true;
-            this.gridColumn25.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn25.OptionsFilter.AllowFilter = false;
-            this.gridColumn25.Visible = true;
-            this.gridColumn25.VisibleIndex = 1;
-            this.gridColumn25.Width = 90;
+            gridColumn25.Caption = "Дата/время добавления";
+            gridColumn25.FieldName = "rfDateTime";
+            gridColumn25.Name = "gridColumn25";
+            gridColumn25.OptionsColumn.FixedWidth = true;
+            gridColumn25.OptionsFilter.AllowAutoFilter = false;
+            gridColumn25.OptionsFilter.AllowFilter = false;
+            gridColumn25.Visible = true;
+            gridColumn25.VisibleIndex = 1;
+            gridColumn25.Width = 90;
             // 
             // tablePanel1
             // 
-            this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 846.31F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 107F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 471.2F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 12F)});
-            this.tablePanel1.Controls.Add(this.tablePanel6);
-            this.tablePanel1.Controls.Add(this.tablePanel5);
-            this.tablePanel1.Controls.Add(this.tablePanel4);
-            this.tablePanel1.Controls.Add(this.tablePanel3);
-            this.tablePanel1.Controls.Add(this.tablePanel2);
-            this.tablePanel1.Controls.Add(this.gridControlReestrFurnDeliveryBagSost);
-            this.tablePanel1.Controls.Add(this.label6);
-            this.tablePanel1.Controls.Add(this.gridControlReestrFurnDeliveryBagView);
-            this.tablePanel1.Controls.Add(this.label5);
-            this.tablePanel1.Controls.Add(this.label2);
-            this.tablePanel1.Controls.Add(this.gridControlReestrFurn);
-            this.tablePanel1.Controls.Add(this.label3);
-            this.tablePanel1.Controls.Add(this.gridControlReestrFurnSostView);
-            this.tablePanel1.Controls.Add(this.gridControlReestrFurnShtr);
-            this.tablePanel1.Controls.Add(this.label4);
-            this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel1.Location = new System.Drawing.Point(0, 0);
-            this.tablePanel1.Name = "tablePanel1";
-            this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 52F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 22F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 158F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 177F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1578, 750);
-            this.tablePanel1.TabIndex = 18;
-            this.tablePanel1.UseSkinIndents = true;
+            tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 846.31F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 107F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 471.2F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 12F) });
+            tablePanel1.Controls.Add(tablePanel6);
+            tablePanel1.Controls.Add(tablePanel5);
+            tablePanel1.Controls.Add(tablePanel4);
+            tablePanel1.Controls.Add(tablePanel3);
+            tablePanel1.Controls.Add(tablePanel2);
+            tablePanel1.Controls.Add(gridControlReestrFurnDeliveryBagSost);
+            tablePanel1.Controls.Add(label6);
+            tablePanel1.Controls.Add(gridControlReestrFurnDeliveryBagView);
+            tablePanel1.Controls.Add(label5);
+            tablePanel1.Controls.Add(label2);
+            tablePanel1.Controls.Add(gridControlReestrFurn);
+            tablePanel1.Controls.Add(label3);
+            tablePanel1.Controls.Add(gridControlReestrFurnSostView);
+            tablePanel1.Controls.Add(gridControlReestrFurnShtr);
+            tablePanel1.Controls.Add(label4);
+            tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tablePanel1.Location = new System.Drawing.Point(0, 0);
+            tablePanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tablePanel1.Name = "tablePanel1";
+            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 52F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 22F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 158F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 177F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
+            tablePanel1.Size = new System.Drawing.Size(1841, 865);
+            tablePanel1.TabIndex = 18;
+            tablePanel1.UseSkinIndents = true;
             // 
             // tablePanel6
             // 
-            this.tablePanel1.SetColumn(this.tablePanel6, 1);
-            this.tablePanel6.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F)});
-            this.tablePanel6.Controls.Add(this.button3);
-            this.tablePanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel6.Location = new System.Drawing.Point(859, 282);
-            this.tablePanel6.Name = "tablePanel6";
-            this.tablePanel1.SetRow(this.tablePanel6, 5);
-            this.tablePanel6.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel6.Size = new System.Drawing.Size(103, 173);
-            this.tablePanel6.TabIndex = 20;
-            this.tablePanel6.UseSkinIndents = true;
+            tablePanel1.SetColumn(tablePanel6, 1);
+            tablePanel6.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F) });
+            tablePanel6.Controls.Add(button3);
+            tablePanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            tablePanel6.Location = new System.Drawing.Point(1002, 322);
+            tablePanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tablePanel6.Name = "tablePanel6";
+            tablePanel1.SetRow(tablePanel6, 5);
+            tablePanel6.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
+            tablePanel6.Size = new System.Drawing.Size(117, 198);
+            tablePanel6.TabIndex = 20;
+            tablePanel6.UseSkinIndents = true;
             // 
             // tablePanel5
             // 
-            this.tablePanel1.SetColumn(this.tablePanel5, 4);
-            this.tablePanel5.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F)});
-            this.tablePanel5.Controls.Add(this.button5);
-            this.tablePanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel5.Location = new System.Drawing.Point(1458, 497);
-            this.tablePanel5.Name = "tablePanel5";
-            this.tablePanel1.SetRow(this.tablePanel5, 8);
-            this.tablePanel5.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel5.Size = new System.Drawing.Size(107, 240);
-            this.tablePanel5.TabIndex = 19;
-            this.tablePanel5.UseSkinIndents = true;
+            tablePanel1.SetColumn(tablePanel5, 4);
+            tablePanel5.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 55F) });
+            tablePanel5.Controls.Add(button5);
+            tablePanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            tablePanel5.Location = new System.Drawing.Point(1697, 568);
+            tablePanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tablePanel5.Name = "tablePanel5";
+            tablePanel1.SetRow(tablePanel5, 8);
+            tablePanel5.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
+            tablePanel5.Size = new System.Drawing.Size(129, 283);
+            tablePanel5.TabIndex = 19;
+            tablePanel5.UseSkinIndents = true;
             // 
             // tablePanel4
             // 
-            this.tablePanel1.SetColumn(this.tablePanel4, 4);
-            this.tablePanel4.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F)});
-            this.tablePanel4.Controls.Add(this.button4);
-            this.tablePanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel4.Location = new System.Drawing.Point(1458, 282);
-            this.tablePanel4.Name = "tablePanel4";
-            this.tablePanel1.SetRow(this.tablePanel4, 5);
-            this.tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel4.Size = new System.Drawing.Size(107, 173);
-            this.tablePanel4.TabIndex = 18;
-            this.tablePanel4.UseSkinIndents = true;
+            tablePanel1.SetColumn(tablePanel4, 4);
+            tablePanel4.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F) });
+            tablePanel4.Controls.Add(button4);
+            tablePanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            tablePanel4.Location = new System.Drawing.Point(1697, 322);
+            tablePanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tablePanel4.Name = "tablePanel4";
+            tablePanel1.SetRow(tablePanel4, 5);
+            tablePanel4.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
+            tablePanel4.Size = new System.Drawing.Size(129, 198);
+            tablePanel4.TabIndex = 18;
+            tablePanel4.UseSkinIndents = true;
             // 
             // tablePanel3
             // 
-            this.tablePanel1.SetColumn(this.tablePanel3, 4);
-            this.tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F)});
-            this.tablePanel3.Controls.Add(this.button1);
-            this.tablePanel3.Controls.Add(this.button2);
-            this.tablePanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel3.Location = new System.Drawing.Point(1458, 86);
-            this.tablePanel3.Name = "tablePanel3";
-            this.tablePanel1.SetRow(this.tablePanel3, 2);
-            this.tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 63F),
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel3.Size = new System.Drawing.Size(107, 154);
-            this.tablePanel3.TabIndex = 5;
-            this.tablePanel3.UseSkinIndents = true;
+            tablePanel1.SetColumn(tablePanel3, 4);
+            tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 5F) });
+            tablePanel3.Controls.Add(button1);
+            tablePanel3.Controls.Add(button2);
+            tablePanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tablePanel3.Location = new System.Drawing.Point(1697, 98);
+            tablePanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tablePanel3.Name = "tablePanel3";
+            tablePanel1.SetRow(tablePanel3, 2);
+            tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 63F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
+            tablePanel3.Size = new System.Drawing.Size(129, 176);
+            tablePanel3.TabIndex = 5;
+            tablePanel3.UseSkinIndents = true;
             // 
             // tablePanel2
             // 
-            this.tablePanel1.SetColumn(this.tablePanel2, 0);
-            this.tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 66F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 114F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 61.6F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 81F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 77.94F)});
-            this.tablePanel1.SetColumnSpan(this.tablePanel2, 5);
-            this.tablePanel2.Controls.Add(this.customSimpleButton1);
-            this.tablePanel2.Controls.Add(this.label1);
-            this.tablePanel2.Controls.Add(this.tbKodF);
-            this.tablePanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePanel2.Location = new System.Drawing.Point(13, 12);
-            this.tablePanel2.Name = "tablePanel2";
-            this.tablePanel1.SetRow(this.tablePanel2, 0);
-            this.tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel2.Size = new System.Drawing.Size(1552, 48);
-            this.tablePanel2.TabIndex = 0;
-            this.tablePanel2.UseSkinIndents = true;
+            tablePanel1.SetColumn(tablePanel2, 0);
+            tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 66F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 114F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 61.6F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 81F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 77.94F) });
+            tablePanel1.SetColumnSpan(tablePanel2, 5);
+            tablePanel2.Controls.Add(customSimpleButton1);
+            tablePanel2.Controls.Add(label1);
+            tablePanel2.Controls.Add(tbKodF);
+            tablePanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tablePanel2.Location = new System.Drawing.Point(15, 13);
+            tablePanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tablePanel2.Name = "tablePanel2";
+            tablePanel1.SetRow(tablePanel2, 0);
+            tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
+            tablePanel2.Size = new System.Drawing.Size(1811, 54);
+            tablePanel2.TabIndex = 0;
+            tablePanel2.UseSkinIndents = true;
             // 
             // customSimpleButton1
             // 
-            this.customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            this.customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customSimpleButton1.Appearance.Options.UseFont = true;
-            this.customSimpleButton1.Appearance.Options.UseForeColor = true;
-            this.tablePanel2.SetColumn(this.customSimpleButton1, 3);
-            this.customSimpleButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customSimpleButton1.Location = new System.Drawing.Point(213, 12);
-            this.customSimpleButton1.Name = "customSimpleButton1";
-            this.tablePanel2.SetRow(this.customSimpleButton1, 0);
-            this.customSimpleButton1.Size = new System.Drawing.Size(77, 23);
-            this.customSimpleButton1.TabIndex = 3;
-            this.customSimpleButton1.Text = "Поиск";
-            this.customSimpleButton1.Click += new System.EventHandler(this.customSimpleButton1_Click);
+            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            tablePanel2.SetColumn(customSimpleButton1, 3);
+            customSimpleButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customSimpleButton1.Location = new System.Drawing.Point(245, 13);
+            customSimpleButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customSimpleButton1.Name = "customSimpleButton1";
+            tablePanel2.SetRow(customSimpleButton1, 0);
+            customSimpleButton1.Size = new System.Drawing.Size(87, 27);
+            customSimpleButton1.TabIndex = 3;
+            customSimpleButton1.Text = "Поиск";
+            customSimpleButton1.Click += customSimpleButton1_Click;
             // 
             // FurnUpakDeliveryInfo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1578, 750);
-            this.Controls.Add(this.tablePanel1);
-            this.Name = "FurnUpakDeliveryInfo";
-            this.Text = "Информация по доставке фурнитуры/упаковки в бригаду";
-            this.TopMost = true;
-            this.Deactivate += new System.EventHandler(this.FurnUpakDeliveryInfo_Deactivate);
-            this.Load += new System.EventHandler(this.FurnUpakDeliveryInfo_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnSostView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnSost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnSostView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnShtr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnShtr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnShtr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnDeliveryBagView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnDeliveryBag)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnDeliveryBagView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurnDeliveryBagSost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurnDeliveryBagSost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurnDeliveryBagSost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
-            this.tablePanel1.ResumeLayout(false);
-            this.tablePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel6)).EndInit();
-            this.tablePanel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel5)).EndInit();
-            this.tablePanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel4)).EndInit();
-            this.tablePanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel3)).EndInit();
-            this.tablePanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
-            this.tablePanel2.ResumeLayout(false);
-            this.tablePanel2.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1841, 865);
+            Controls.Add(tablePanel1);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "FurnUpakDeliveryInfo";
+            Text = "Информация по доставке фурнитуры/упаковки в бригаду";
+            TopMost = true;
+            Deactivate += FurnUpakDeliveryInfo_Deactivate;
+            Load += FurnUpakDeliveryInfo_Load;
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnSostView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnSostView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnShtr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnShtr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnShtr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnDeliveryBagView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnDeliveryBag).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnDeliveryBagView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlReestrFurnDeliveryBagSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsReestrFurnDeliveryBagSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewReestrFurnDeliveryBagSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
+            tablePanel1.ResumeLayout(false);
+            tablePanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)tablePanel6).EndInit();
+            tablePanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)tablePanel5).EndInit();
+            tablePanel5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)tablePanel4).EndInit();
+            tablePanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)tablePanel3).EndInit();
+            tablePanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)tablePanel2).EndInit();
+            tablePanel2.ResumeLayout(false);
+            tablePanel2.PerformLayout();
+            ResumeLayout(false);
 
         }
 
