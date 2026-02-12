@@ -263,7 +263,7 @@ namespace SewingProduction.Features.Articul.Service
         }
         public async Task<List<PlanSezonAllModel>> GetPlanSezonAllByKod(int? kodd = null)
         {
-            string query = @"SELECT Psa_id, nn, tb_id, articul, mod
+            string query = @"SELECT Psa_id, nn, tb_id, articul, mod, tg_id_n, tgm_id_n, men
                             FROM plan_sezon_all"
                             + (kodd.HasValue ? " WHERE kodd = @kodd" : "");
 
@@ -271,42 +271,56 @@ namespace SewingProduction.Features.Articul.Service
         }
         public async Task<List<ArtKomplektModel>> GetArtKomplektByKod(string? nn = null)
         {
-            string query = @"SELECT ak.Ak_id, ak.tk_id, ak.Parent_nn, ak.id_gost, ak.ag_id_grupgost, t.tk_name
+            string query = @"SELECT ak.Ak_id, ak.tk_id, ak.Parent_nn, ak.id_gost, ak.ag_id_grupgost, t.tk_name, ak.tg_id_n, ak.tgm_id_n
                             FROM art_komplekt ak
                             LEFT JOIN t_v_n AS t ON t.TK_ID = ak.tk_id"
                             + (nn != null ? " WHERE Parent_nn = @nn" : "");
 
             return await _dbService.GetListAsync<ArtKomplektModel>(query, new { nn });
         }
+        #region EditNaborSostavPart
+        public async Task UpdatePlanSezonAll(PlanSezonAllModel PSA)
+        {
+            await _dbService.UpdateEntityAsync("plan_sezon_all", "psa_id", PSA);
+        }
+        public async Task UpdateArtKomplekt(ArtKomplektModel AK)
+        {
+            await _dbService.UpdateEntityAsync("art_komplekt", "ak_id", AK);
+        }
+        public async Task UpdateSpravNoskiDetal(int? id_spr, int? tcds_id)
+        {
+            await _dbService.UpdateFieldAsync("GLOBAL.PLANETA.dbo.TOVAR_CAT_DYNSIGN", "tcds_id_spr", id_spr, "tcds_id ", tcds_id);
+        }
         public async Task<List<TovarClassModel>> GetTovarClass()
         {
-            string query = @"select * FROM TOVAR_class ORDER BY TC_CLASSNAME";
+            string query = @"SELECT * FROM GLOBAL.PLANETA.dbo.TOVAR_class ORDER BY TC_CLASSNAME";
 
             return await _dbService.GetListAsync<TovarClassModel>(query, new { });
         }
         public async Task<List<TovarGroupModel>> GetTovarGroup()
         {
-            string query = @"select * FROM tovar_group ORDER BY TG_GROUPNAME";
+            string query = @"SELECT * FROM GLOBAL.PLANETA.dbo.tovar_group ORDER BY TG_GROUPNAME";
 
             return await _dbService.GetListAsync<TovarGroupModel>(query, new { });
         }
         public async Task<List<TovarCategoryModel>> GetTovarCategory()
         {
-            string query = @"select * from tOVAR_CATEGORY ORDER BY TCAT_CATEGORYNAME";
+            string query = @"SELECT * from GLOBAL.PLANETA.dbo.tOVAR_CATEGORY ORDER BY TCAT_CATEGORYNAME";
 
             return await _dbService.GetListAsync<TovarCategoryModel>(query, new { });
         }
         public async Task<List<TovarCatDynsignModel>> GetTovarCatDynsign()
         {
-            string query = @"select * FROM TOVAR_CAT_DYNSIGN where tcds_name<>' ' ORDER BY TCDS_NAME";
+            string query = @"SELECT * FROM GLOBAL.PLANETA.dbo.TOVAR_CAT_DYNSIGN where tcds_name<>' ' ORDER BY TCDS_NAME";
 
             return await _dbService.GetListAsync<TovarCatDynsignModel>(query, new { });
         }
         public async Task<List<SpravNoskiDetalModel>> GetSpravNoskiDetal()
         {
-            string query = @"select * from [dbo].[SpravNoskiDetal]";
+            string query = @"SELECT * from [dbo].[SpravNoskiDetal]";
 
             return await _dbService.GetListAsync<SpravNoskiDetalModel>(query, new { });
         }
+        #endregion 
     }
 }

@@ -30,7 +30,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             data_type11 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             data_type1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -66,6 +66,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            customGridControlColumn1 = new CustomGridControlColumn();
+            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            kod = new DevExpress.XtraGrid.Columns.GridColumn();
+            razm = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)bandedGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
@@ -82,6 +86,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlColumn1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             SuspendLayout();
             // 
             // bandedGridView1
@@ -147,13 +153,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customGridControl1.DataSource = bindingSource1;
             customGridControl1.Font = new System.Drawing.Font("Arial", 10F);
-            gridLevelNode1.LevelTemplate = bandedGridView1;
-            gridLevelNode1.RelationName = "Level1";
-            customGridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
+            gridLevelNode2.LevelTemplate = bandedGridView1;
+            gridLevelNode2.RelationName = "Level1";
+            customGridControl1.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode2 });
             customGridControl1.Location = new System.Drawing.Point(12, 12);
             customGridControl1.MainView = gridViewTable1;
             customGridControl1.Name = "customGridControl1";
-            customGridControl1.Size = new System.Drawing.Size(639, 474);
+            customGridControl1.Size = new System.Drawing.Size(639, 259);
             customGridControl1.TabIndex = 0;
             customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTable1, bandedGridView1 });
             // 
@@ -415,11 +421,54 @@ namespace SewingProduction.Features.UserDistribution.Forms
             layoutControlItem3.Size = new System.Drawing.Size(200, 22);
             layoutControlItem3.TextVisible = false;
             // 
+            // customGridControlColumn1
+            // 
+            customGridControlColumn1.Font = new System.Drawing.Font("Arial", 10F);
+            customGridControlColumn1.Location = new System.Drawing.Point(12, 325);
+            customGridControlColumn1.MainView = gridView1;
+            customGridControlColumn1.Name = "customGridControlColumn1";
+            customGridControlColumn1.Size = new System.Drawing.Size(554, 200);
+            customGridControlColumn1.TabIndex = 5;
+            customGridControlColumn1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            customGridControlColumn1.Load += customGridControlColumn1_Load;
+            // 
+            // gridView1
+            // 
+            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
+            gridView1.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
+            gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridView1.Appearance.FocusedRow.Options.UseFont = true;
+            gridView1.Appearance.Row.Options.UseBackColor = true;
+            gridView1.Appearance.Row.Options.UseForeColor = true;
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { kod, razm });
+            gridView1.GridControl = customGridControlColumn1;
+            gridView1.Name = "gridView1";
+            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // kod
+            // 
+            kod.Caption = "Код";
+            kod.FieldName = "Kod";
+            kod.Name = "kod";
+            kod.Visible = true;
+            kod.VisibleIndex = 0;
+            // 
+            // razm
+            // 
+            razm.Caption = "Размер";
+            razm.FieldName = "Razm";
+            razm.Name = "razm";
+            razm.Visible = true;
+            razm.VisibleIndex = 1;
+            // 
             // TestForm1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1171, 508);
+            ClientSize = new System.Drawing.Size(1171, 537);
+            Controls.Add(customGridControlColumn1);
             Controls.Add(customLayoutControl1);
             Controls.Add(customLabel2);
             Controls.Add(customButton3);
@@ -449,6 +498,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlColumn1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -493,5 +544,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private CustomGridControlColumn customGridControlColumn1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn kod;
+        private DevExpress.XtraGrid.Columns.GridColumn razm;
     }
 }

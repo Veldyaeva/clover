@@ -10,10 +10,7 @@ namespace SewingProduction.Features.Articul.Models
     public class TovarClassModel
     {
         public int TC_ID { get; set; }
-        public int T_GlovalCode { get; set; }
-        public string TC_1cCode { get; set; }
         public string TC_ClassName { get; set; }
-        public int DeletionMark { get; set; }
 
 
     }

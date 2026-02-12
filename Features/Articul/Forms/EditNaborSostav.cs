@@ -38,7 +38,7 @@ namespace SewingProduction.Features.Articul.Forms
         BindingSource _bsOld = new BindingSource();
         int oldAgIdBeforeEdit = 0;
         ArticulModel articulNabor_old = new ArticulModel();
-        ArticulModel articulNabor_new = new ArticulModel();
+        //ArticulModel articulNabor_new = new ArticulModel();
         List<GostRazmerNabViewModel> _razmNaborForGost;
         List<GostRazmerNabViewModel> _razmSostavForGost;
         public EditNaborSostav()
@@ -161,7 +161,7 @@ namespace SewingProduction.Features.Articul.Forms
         private async Task SetupPictursBox()
         {
             //customPictureBoxNabor.ImagePath = await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod);
-            customPictureBoxNabor.Image = Image.FromFile(await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod));
+            customPictureBoxNabor.Image = Image.FromFile(await _articulDataService.GetFileEskizForKod(articulNabor_old.Kod)); //проверку на существует ли картинка
         }
         private async Task ArticulNaborColumnsOld(int? Id_gost)
         {
