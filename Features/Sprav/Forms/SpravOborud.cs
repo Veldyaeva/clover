@@ -27,7 +27,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravOborudDataService = new SpravOborudDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
 
         private void SpravOborud_Load(object sender, EventArgs e)

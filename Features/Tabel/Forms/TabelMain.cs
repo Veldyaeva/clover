@@ -42,8 +42,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class TabelMain : CustomForm
     {
-
-        private string currentMG;
+        private string currentMG = DateTime.Today.ToString("MMyy");
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
@@ -148,12 +147,12 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private async void TabelMain_Load(object sender, EventArgs e)
         {
-
+            
             Task bindingsTask = InitializeBindingsAsync();
             await Task.WhenAll(bindingsTask);
             CreateDayColumns(currentMG);
             CheckUserAccess(idUser);
-
+         
         }
         private void RemoveDayColumns()
         {

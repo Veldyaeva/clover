@@ -16,7 +16,7 @@ using DataTable = System.Data.DataTable;
 
 namespace SewingProduction.form
 {
-    public partial class PlanZagrBrig : CustomForm, IThemeable
+    public partial class PlanZagrBrig : CustomForm//, IThemeable
     {
         public int XIdBrig;
         public string XNameBrig;
@@ -32,7 +32,7 @@ namespace SewingProduction.form
             InitializeComponent();
             _dbHelperACE = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
             _dbHelperGLOBAL = new DatabaseHelper("global");
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
         public PlanZagrBrig(UserClass user) : base(user)
         {

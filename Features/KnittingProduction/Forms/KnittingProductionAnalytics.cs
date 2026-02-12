@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class KnittingProductionAnalytics : CustomForm, IThemeable
+    public partial class KnittingProductionAnalytics : CustomForm//, IThemeable
     {
         public FormManager _formManager;
         public KnittingProductionAnalytics()
@@ -22,7 +22,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             MenuStrip mainMenu = mainForm.MainMenuStrip;
             _formManager = new FormManager(mainForm, mainMenu, _user);
 
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
         public void OpenForm(Form form, object sender = null)
         {

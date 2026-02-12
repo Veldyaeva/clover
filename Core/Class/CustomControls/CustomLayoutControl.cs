@@ -12,7 +12,7 @@ using static DevExpress.LookAndFeel.DXSkinColors;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomLayoutControl : LayoutControl, IThemeable, IThemeableControl
+    public class CustomLayoutControl : LayoutControl//, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -25,8 +25,8 @@ namespace SewingProduction.Core.Class
             if (IsDesignMode())
                 return;
 
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -40,13 +40,13 @@ namespace SewingProduction.Core.Class
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && !IsDesignMode())
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }

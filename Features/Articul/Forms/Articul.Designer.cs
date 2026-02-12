@@ -236,7 +236,12 @@ namespace SewingProduction.Features.Articul
             groupBox3 = new System.Windows.Forms.GroupBox();
             customButton3 = new CustomButton();
             customLabel48 = new CustomLabel();
+            customSimpleButton6 = new CustomSimpleButton();
             customTextBox1 = new CustomTextBox();
+            customSimpleButton5 = new CustomSimpleButton();
+            customSimpleButton4 = new CustomSimpleButton();
+            customSimpleButton3 = new CustomSimpleButton();
+            customSimpleButton1 = new CustomSimpleButton();
             txbSebRecom = new CustomTextBox();
             customLabel47 = new CustomLabel();
             labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -1139,9 +1144,7 @@ namespace SewingProduction.Features.Articul
             // customButtonCopy
             // 
             customButtonCopy.Appearance.Font = new Font("Arial", 10F);
-            customButtonCopy.Appearance.ForeColor = Color.FromArgb(106, 90, 205);
             customButtonCopy.Appearance.Options.UseFont = true;
-            customButtonCopy.Appearance.Options.UseForeColor = true;
             customButtonCopy.Location = new Point(2, 32);
             customButtonCopy.Margin = new System.Windows.Forms.Padding(1);
             customButtonCopy.MaximumSize = new Size(285, 26);
@@ -1173,12 +1176,8 @@ namespace SewingProduction.Features.Articul
             // 
             // sButtodDeleteKod
             // 
-            sButtodDeleteKod.Appearance.BackColor = Color.FromArgb(224, 224, 224);
             sButtodDeleteKod.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            sButtodDeleteKod.Appearance.ForeColor = Color.Red;
-            sButtodDeleteKod.Appearance.Options.UseBackColor = true;
             sButtodDeleteKod.Appearance.Options.UseFont = true;
-            sButtodDeleteKod.Appearance.Options.UseForeColor = true;
             sButtodDeleteKod.Location = new Point(291, 62);
             sButtodDeleteKod.Margin = new System.Windows.Forms.Padding(0);
             sButtodDeleteKod.MaximumSize = new Size(285, 26);
@@ -1192,12 +1191,8 @@ namespace SewingProduction.Features.Articul
             // 
             // customSimpleButton7
             // 
-            customSimpleButton7.Appearance.BackColor = Color.FromArgb(255, 235, 205);
             customSimpleButton7.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton7.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            customSimpleButton7.Appearance.Options.UseBackColor = true;
             customSimpleButton7.Appearance.Options.UseFont = true;
-            customSimpleButton7.Appearance.Options.UseForeColor = true;
             customSimpleButton7.AppearanceDisabled.BackColor = Color.Green;
             customSimpleButton7.AppearanceDisabled.ForeColor = Color.GreenYellow;
             customSimpleButton7.AppearanceDisabled.Options.UseBackColor = true;
@@ -1403,12 +1398,8 @@ namespace SewingProduction.Features.Articul
             // 
             // customSimpleButton2
             // 
-            customSimpleButton2.Appearance.BackColor = Color.FromArgb(255, 235, 205);
             customSimpleButton2.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton2.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            customSimpleButton2.Appearance.Options.UseBackColor = true;
             customSimpleButton2.Appearance.Options.UseFont = true;
-            customSimpleButton2.Appearance.Options.UseForeColor = true;
             customSimpleButton2.AppearanceDisabled.BackColor = Color.Green;
             customSimpleButton2.AppearanceDisabled.ForeColor = Color.GreenYellow;
             customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
@@ -1425,9 +1416,7 @@ namespace SewingProduction.Features.Articul
             // customButtonKompl
             // 
             customButtonKompl.Appearance.Font = new Font("Arial", 10F);
-            customButtonKompl.Appearance.ForeColor = Color.FromArgb(106, 90, 205);
             customButtonKompl.Appearance.Options.UseFont = true;
-            customButtonKompl.Appearance.Options.UseForeColor = true;
             customButtonKompl.Location = new Point(2, 62);
             customButtonKompl.Margin = new System.Windows.Forms.Padding(0);
             customButtonKompl.MaximumSize = new Size(285, 26);
@@ -1441,12 +1430,8 @@ namespace SewingProduction.Features.Articul
             // 
             // csButtonNew
             // 
-            csButtonNew.Appearance.BackColor = Color.FromArgb(255, 235, 205);
             csButtonNew.Appearance.Font = new Font("Arial", 10F);
-            csButtonNew.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
-            csButtonNew.Appearance.Options.UseBackColor = true;
             csButtonNew.Appearance.Options.UseFont = true;
-            csButtonNew.Appearance.Options.UseForeColor = true;
             csButtonNew.AppearanceDisabled.BackColor = Color.Green;
             csButtonNew.AppearanceDisabled.ForeColor = Color.GreenYellow;
             csButtonNew.AppearanceDisabled.Options.UseBackColor = true;
@@ -3594,6 +3579,18 @@ namespace SewingProduction.Features.Articul
             customGroupBox1.PerformLayout();
             customGroupBox2.ResumeLayout(false);
             customGroupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
+            layoutControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem30).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem31).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem37).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem32).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem33).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem34).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem35).EndInit();
             ResumeLayout(false);
         }
 

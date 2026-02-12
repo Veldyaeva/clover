@@ -29,7 +29,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            ThemeManager.UpdateTheme(this);
+          //  ThemeManager.UpdateTheme(this);
         }
         #region service broker
         private void OborudBrig_Load_1(object sender, EventArgs e)

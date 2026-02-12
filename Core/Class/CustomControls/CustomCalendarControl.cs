@@ -52,7 +52,7 @@ namespace SewingProduction.CustomControls
 
     #endregion
 
-    public class CustomCalendarControl : CalendarControl, IThemeable
+    public class CustomCalendarControl : CalendarControl//, IThemeable
     {
         #region Static localization bootstrap
 
@@ -160,8 +160,8 @@ namespace SewingProduction.CustomControls
             CustomSettings.PropertyChanged += _settingsChangedHandler;
 
             // 2) Тема
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
 
             // 3) Дефолтный Zoom
             ZoomLevel = 0;
@@ -181,7 +181,7 @@ namespace SewingProduction.CustomControls
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
 
                 if (_settingsChangedHandler != null)
                     CustomSettings.PropertyChanged -= _settingsChangedHandler;
@@ -705,7 +705,7 @@ namespace SewingProduction.CustomControls
                 RebuildHorizontal(force: true);
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         #endregion
 

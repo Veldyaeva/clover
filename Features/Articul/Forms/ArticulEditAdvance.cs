@@ -78,7 +78,7 @@ namespace SewingProduction.Features.Articul.Forms
             _user = user;
             _kodd = kodd;
             this.Text = articul + " " + kodd;
-            ThemeManager.UpdateTheme(this);
+          //  ThemeManager.UpdateTheme(this);
 
             _bindingSourceArtKod = new BindingSource { };
             if (gridEditAdRazm != null) gridEditAdRazm.DataSource = _bindingSourceArtKod;
