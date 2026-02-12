@@ -399,7 +399,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         FieldName = "__Header",
                         Caption = "Header",
                         UnboundType = DevExpress.Data.UnboundColumnType.String,
-                        UnboundExpression = "Concat('№пачки: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+                        UnboundExpression =// "Concat('№пачки: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+                         "Concat('№пачки: ', [n_pach], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
                         Visible = false,
                         OptionsColumn = { ShowInCustomizationForm = false }
                     };
@@ -415,45 +416,45 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
                 advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
 
-                var existingSummaries = advBandedGridView1.GroupSummary
-                    .OfType<GridGroupSummaryItem>()
-                    .Where(gs => gs.FieldName == "PlanChas_UI" || gs.FieldName == "FactChas_UI")
-                    .ToList();
-                foreach (var summary in existingSummaries)
-                {
-                    advBandedGridView1.GroupSummary.Remove(summary);
-                }
+                //var existingSummaries = advBandedGridView1.GroupSummary
+                //    .OfType<GridGroupSummaryItem>()
+                //    .Where(gs => gs.FieldName == "PlanChas_UI" || gs.FieldName == "FactChas_UI")
+                //    .ToList();
+                //foreach (var summary in existingSummaries)
+                //{
+                //    advBandedGridView1.GroupSummary.Remove(summary);
+                //}
 
-                var planSummary = new GridGroupSummaryItem
-                {
-                    FieldName = "PlanChas_UI",
-                    SummaryType = SummaryItemType.Sum,
-                    DisplayFormat = "{0:0.##}"
-                };
-                advBandedGridView1.GroupSummary.Add(planSummary);
-                _planChasGroupSummaryItem = planSummary;
+                //var planSummary = new GridGroupSummaryItem
+                //{
+                //    FieldName = "PlanChas_UI",
+                //    SummaryType = SummaryItemType.Sum,
+                //    DisplayFormat = "{0:0.##}"
+                //};
+                //advBandedGridView1.GroupSummary.Add(planSummary);
+                //_planChasGroupSummaryItem = planSummary;
 
-                var factSummary = new GridGroupSummaryItem
-                {
-                    FieldName = "FactChas_UI",
-                    SummaryType = SummaryItemType.Sum,
-                    DisplayFormat = "{0:0.##}"
-                };
-                advBandedGridView1.GroupSummary.Add(factSummary);
-                _factChasGroupSummaryItem = factSummary;
+                //var factSummary = new GridGroupSummaryItem
+                //{
+                //    FieldName = "FactChas_UI",
+                //    SummaryType = SummaryItemType.Sum,
+                //    DisplayFormat = "{0:0.##}"
+                //};
+                //advBandedGridView1.GroupSummary.Add(factSummary);
+                //_factChasGroupSummaryItem = factSummary;
 
-                if (!_isGroupRowCellHandlerAttached)
-                {
-                    advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
-                    {
-                        e.Appearance.BackColor = Color.BlanchedAlmond;
-                        e.Appearance.FillRectangle(e.Cache, e.Bounds);
-                        e.Appearance.ForeColor = Color.DimGray;
-                        e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
-                        e.Handled = true;
-                    };
-                    _isGroupRowCellHandlerAttached = true;
-                }
+                //if (!_isGroupRowCellHandlerAttached)
+                //{
+                //    advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
+                //    {
+                //        e.Appearance.BackColor = Color.BlanchedAlmond;
+                //        e.Appearance.FillRectangle(e.Cache, e.Bounds);
+                //        e.Appearance.ForeColor = Color.DimGray;
+                //        e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
+                //        e.Handled = true;
+                //    };
+                //    _isGroupRowCellHandlerAttached = true;
+                //}
             }
             finally
             {
@@ -1922,23 +1923,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 float x = textBounds.Left;
                 string[] parts = groupText.Split(new[] { " | " }, StringSplitOptions.None);
+                var tokens = new List<(string Text, Font Font, float Width)>(parts.Length * 2);
                 for (int i = 0; i < parts.Length; i++)
                 {
                     string part = parts[i];
                     Font font = IsHeaderEmphasisSegment(part) ? largeFont : smallFont;
-                    SizeF partSize = e.Cache.CalcTextSize(part, font);
-                    var partBounds = new RectangleF(x, textBounds.Top, partSize.Width, textBounds.Height);
-                    e.Graphics.DrawString(part, font, e.Appearance.GetForeBrush(e.Cache), partBounds, format);
-                    x += partSize.Width;
+                    float width = e.Cache.CalcTextSize(part, font).Width;
+                    tokens.Add((part, font, width));
 
                     if (i < parts.Length - 1)
                     {
-                        string separator = " | ";
-                        SizeF sepSize = e.Cache.CalcTextSize(separator, smallFont);
-                        var sepBounds = new RectangleF(x, textBounds.Top, sepSize.Width, textBounds.Height);
-                        e.Graphics.DrawString(separator, smallFont, e.Appearance.GetForeBrush(e.Cache), sepBounds, format);
-                        x += sepSize.Width;
+                        const string separator = " | ";
+                        float sepWidth = e.Cache.CalcTextSize(separator, smallFont).Width;
+                        tokens.Add((separator, smallFont, sepWidth));
                     }
+                }
+
+                foreach (var token in tokens)
+                {
+                    var tokenBounds = new RectangleF(x, textBounds.Top, token.Width, textBounds.Height);
+                    e.Graphics.DrawString(token.Text, token.Font, e.Appearance.GetForeBrush(e.Cache), tokenBounds, format);
+                    x += token.Width;
                 }
             }
 
