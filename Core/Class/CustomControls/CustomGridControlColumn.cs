@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -31,17 +31,12 @@ namespace SewingProduction.Core.Class
         public CustomGridControlColumn()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
             ViewRegistered += OnViewRegistered;
         }
         public void ApplyTheme()
         {
-            var theme = ThemeManager.ActiveTheme;
-            BackColor = theme.GridBackground;
-            ForeColor = theme.GridTextColor;
+            // Оставляем цвета под управлением DevExpress/скинов, только шрифт берём из общих настроек
             Font = ThemeManager.SharedSettings.DefaultFont;
-            AlternateRowColor = theme.BandHighlightColor;
-            FocusedRowColor = theme.ButtonBackground;
 
 
             foreach (var view in ViewCollection)
@@ -70,16 +65,6 @@ namespace SewingProduction.Core.Class
                 gridView.Appearance.EvenRow.BackColor = AlternateRowColor.Value;
                 gridView.OptionsView.EnableAppearanceEvenRow = true;
             }
-            if (ThemeManager.ActiveTheme?.GridRowBackground != default)
-            {
-                gridView.Appearance.Row.BackColor = ThemeManager.ActiveTheme.GridRowBackground;
-                gridView.Appearance.Row.Options.UseBackColor = true;
-            }
-            if (ThemeManager.ActiveTheme?.GridTextColor != default)
-            {
-                gridView.Appearance.Row.ForeColor = ThemeManager.ActiveTheme.GridTextColor;
-                gridView.Appearance.Row.Options.UseForeColor = true;
-            }
         }
 
         private void ApplyFocusedRowStyle(DevExpress.XtraGrid.Views.Grid.GridView gridView)
@@ -96,13 +81,10 @@ namespace SewingProduction.Core.Class
                 gridView.Appearance.FocusedRow.Options.UseFont = true;
             }
         }
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }

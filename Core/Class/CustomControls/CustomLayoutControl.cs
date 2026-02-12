@@ -26,27 +26,20 @@ namespace SewingProduction.Core.Class
                 return;
 
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            var theme = ThemeManager.ActiveTheme;
-            if (theme == null)
-                return;
-
-            BackColor = theme.TextBoxBackground;
-            ForeColor = theme.LabelTextColor;
+            // Используем системные цвета вместо цветовой темы
+            BackColor = SystemColors.Control;
+            ForeColor = SystemColors.ControlText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-
-        private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && !IsDesignMode())
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }

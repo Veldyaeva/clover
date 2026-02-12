@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -19,24 +19,18 @@ namespace SewingProduction.Core.Class
         public CustomLabel()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
+            // Метки используют системный цвет текста
+            ForeColor = SystemColors.ControlText;
             Font = ThemeManager.SharedSettings.DefaultFont;
             ApplyFontSizePermission(); // перекрыть размер, если задан
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
 
@@ -133,21 +127,11 @@ namespace SewingProduction.Core.Class
         public CustomHeaderLabel()
         {
             ApplyHeaderStyle();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
-        }
-
-        private void OnThemeChanged()
-        {
-            ApplyHeaderStyle();
         }
 
         private void ApplyHeaderStyle()

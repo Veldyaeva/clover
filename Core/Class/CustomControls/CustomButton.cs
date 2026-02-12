@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -28,7 +28,6 @@ namespace SewingProduction.Core.Class
         public CustomButton()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         protected override void OnHandleCreated(EventArgs e)
         {
@@ -44,22 +43,18 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            // Используем стандартное оформление кнопок Windows
+            UseVisualStyleBackColor = true;
+            BackColor = SystemColors.Control;
+            ForeColor = SystemColors.ControlText;
             Font = ThemeManager.SharedSettings.DefaultFont;
             FlatStyle = FlatStyle.Standard;
             FlatAppearance.BorderSize = 1;
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -143,31 +138,19 @@ namespace SewingProduction.Core.Class
         public CustomSimpleButton()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            // Оставляем цвета под управлением DevExpress скинов, задаём только шрифт/высоту
             Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-            AppearanceDisabled.BackColor = Color.Green;
-            AppearanceDisabled.ForeColor = Color.GreenYellow;
-            AppearanceDisabled.Options.UseBackColor = true;
-            AppearanceDisabled.Options.UseForeColor = true;
+            Appearance.Options.UseFont = true;
 
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
 

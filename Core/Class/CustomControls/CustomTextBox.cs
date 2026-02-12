@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -60,7 +60,6 @@ namespace SewingProduction.Core.Class
         public CustomTextBox()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
 
             // Режим: однострочный чаще всего — там EM_SETMARGINS работает.
             // Если вам нужно multiline — значок нарисуется, но правое поле для текста не изменится (ограничение Win32).
@@ -77,15 +76,12 @@ namespace SewingProduction.Core.Class
         // ===== Тема/права — как у вас =====
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            BackColor = SystemColors.Window;
+            ForeColor = SystemColors.WindowText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-                ThemeManager.ThemeChanged -= OnThemeChanged;
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user) => PermissionHelper.ApplyTo(this, ObjectName, user);

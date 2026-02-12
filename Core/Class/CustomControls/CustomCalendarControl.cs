@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Calendar;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraLayout;
@@ -159,9 +159,8 @@ namespace SewingProduction.CustomControls
             _settingsChangedHandler = (_, __) => ApplyCustomSettings();
             CustomSettings.PropertyChanged += _settingsChangedHandler;
 
-            // 2) Тема
+            // 2) Базовое оформление (без привязки к ThemeManager.ActiveTheme)
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
 
             // 3) Дефолтный Zoom
             ZoomLevel = 0;
@@ -181,8 +180,6 @@ namespace SewingProduction.CustomControls
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-
                 if (_settingsChangedHandler != null)
                     CustomSettings.PropertyChanged -= _settingsChangedHandler;
             }
@@ -679,24 +676,25 @@ namespace SewingProduction.CustomControls
         {
             if (!UseThemeByDefault) return;
 
+            // Базируемся на системных цветах, без использования кастомной цветовой темы
             Font = ThemeManager.SharedSettings.DefaultFont;
-            BackColor = ThemeManager.ActiveTheme.GridBackground;
-            ForeColor = ThemeManager.ActiveTheme.GridTextColor;
+            BackColor = SystemColors.Window;
+            ForeColor = SystemColors.WindowText;
 
             if (NormalDayBackColor.IsEmpty)
-                NormalDayBackColor = ThemeManager.ActiveTheme.GridRowBackground;
+                NormalDayBackColor = SystemColors.Window;
 
             if (OffDayBackColor.IsEmpty)
-                OffDayBackColor = ThemeManager.ActiveTheme.BandHighlightColor;
+                OffDayBackColor = SystemColors.ControlLight;
 
             if (OffDayForeColor.IsEmpty)
-                OffDayForeColor = ThemeManager.ActiveTheme.GridTextColor;
+                OffDayForeColor = SystemColors.GrayText;
 
             if (SpecialBackColor.IsEmpty)
-                SpecialBackColor = ThemeManager.ActiveTheme.HighlightBackground;
+                SpecialBackColor = SystemColors.Info;
 
             if (SpecialForeColor.IsEmpty)
-                SpecialForeColor = ThemeManager.ActiveTheme.GridTextColor;
+                SpecialForeColor = SystemColors.InfoText;
 
             ApplyZoom();
             Invalidate();
@@ -704,8 +702,6 @@ namespace SewingProduction.CustomControls
             if (LayoutMode == CalendarLayoutMode.HorizontalDays)
                 RebuildHorizontal(force: true);
         }
-
-        private void OnThemeChanged() => ApplyTheme();
 
         #endregion
 
