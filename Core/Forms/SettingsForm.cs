@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using static SewingProduction.form.SettingsForm;
+using DevExpress.LookAndFeel;
 
 namespace SewingProduction.form
 {

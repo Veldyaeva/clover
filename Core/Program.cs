@@ -49,6 +49,7 @@ namespace SewingProduction.Core
         {
             RegisterGlobalExceptionHandlers();
             // Уникальное имя Mutex
+            
             bool createdNew;
             bool isRestarting = args.Contains("--restart");
             using (var mutex = new Mutex(true, "SewingProductionAppMutex", out createdNew))
@@ -130,6 +131,7 @@ namespace SewingProduction.Core
 
                     Application.Run(mainForm);
                 }
+
             }
         }
         private static string PickExistingSkinOrDefault(string? skinName, string defaultSkin)

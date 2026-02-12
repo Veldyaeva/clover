@@ -10,10 +10,10 @@ using System;
 
 namespace SewingProduction
 {
-    public interface IThemeable
-    {
-        void ApplyTheme();
-    }
+    //public interface IThemeable
+    //{
+    //    void ApplyTheme();
+    //}
     public interface IThemeableControl
     {
         string ObjectName { get; set; }
@@ -22,7 +22,8 @@ namespace SewingProduction
         void ApplyPermission(UserClass user);
     }
 
-    public class CustomCheckBox : CheckBox, IThemeable, IThemeableControl
+    public class CustomCheckBox : CheckBox////, IThemeable
+                                          , IThemeableControl
     {
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
@@ -30,8 +31,8 @@ namespace SewingProduction
         public string ObjectName { get; set; }
         public CustomCheckBox()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -40,13 +41,13 @@ namespace SewingProduction
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -87,27 +88,28 @@ namespace SewingProduction
         }
     }
 
-    public class CustomRadioButton : RadioButton, IThemeable, IThemeableControl
+    public class CustomRadioButton : RadioButton //IThemeable
+                                                 , IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomRadioButton()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -147,15 +149,16 @@ namespace SewingProduction
             }
         }
     }
-    public class CustomDateTimePicker : DateTimePicker, IThemeable, IThemeableControl
+    public class CustomDateTimePicker : DateTimePicker //, IThemeable
+                                                       , IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomDateTimePicker()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
@@ -163,12 +166,12 @@ namespace SewingProduction
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -208,15 +211,16 @@ namespace SewingProduction
             }
         }
     }
-    public class CustomNumericUpDown : NumericUpDown, IThemeable, IThemeableControl
+    public class CustomNumericUpDown : NumericUpDown//, IThemeable
+                                                    , IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomNumericUpDown()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
@@ -224,12 +228,12 @@ namespace SewingProduction
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -270,15 +274,16 @@ namespace SewingProduction
         }
     }
     
-    public class CustomCheckedListBox : CheckedListBox, IThemeable, IThemeableControl
+    public class CustomCheckedListBox : CheckedListBox//, IThemeable
+                                                      , IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomCheckedListBox()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
@@ -286,12 +291,12 @@ namespace SewingProduction
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -331,15 +336,16 @@ namespace SewingProduction
             }
         }
     }
-    public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable, IThemeableControl
+    public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit//, IThemeable
+                                                                  , IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomTextBoxEx()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
@@ -347,12 +353,12 @@ namespace SewingProduction
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -393,7 +399,8 @@ namespace SewingProduction
         }
     }
 
-    public class CustomMaskedTextBox : MaskedTextBox, IThemeable, IThemeableControl
+    public class CustomMaskedTextBox : MaskedTextBox//, IThemeable
+                                                    , IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -401,8 +408,8 @@ namespace SewingProduction
         private bool _visibleLogic = true;
         public CustomMaskedTextBox()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -412,13 +419,13 @@ namespace SewingProduction
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -460,7 +467,8 @@ namespace SewingProduction
     }
 
 
-    public class CustomComboBox : ComboBox, IThemeable, IThemeableControl
+    public class CustomComboBox : ComboBox//, IThemeable
+                                          , IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -468,8 +476,8 @@ namespace SewingProduction
         private bool _visibleLogic = true;
         public CustomComboBox()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -479,13 +487,13 @@ namespace SewingProduction
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -526,15 +534,16 @@ namespace SewingProduction
         }
     }
 
-    public class CustomTabControl : DevExpress.XtraTab.XtraTabControl, IThemeable, IThemeableControl
+    public class CustomTabControl : DevExpress.XtraTab.XtraTabControl//, IThemeable
+                                                                     , IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomTabControl()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -543,13 +552,13 @@ namespace SewingProduction
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -596,7 +605,7 @@ namespace SewingProduction
     /// <summary>
     /// Кастомный прозрачный группбокс с черной обводкой
     /// </summary>
-    public class CustomGroupBox : GroupBox, IThemeableControl, IThemeable
+    public class CustomGroupBox : GroupBox, IThemeableControl//, IThemeable
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -702,27 +711,27 @@ namespace SewingProduction
     /// <summary>
     /// Кастомная форма с градиентным фоном
     /// </summary>
-    public class CustomForm : Form, SewingProduction.IThemeable
+    public class CustomForm : Form//, SewingProduction.IThemeable
     {
         public int FormID;
         protected UserClass _user;
         public UserClass User => _user;
         public bool IsPreview { get; set; }
 
-        private void ApplyThemeToChildren(Control parentControl)
-        {
-            foreach (Control childControl in parentControl.Controls)
-            {
-                if (childControl is IThemeable themeableChild)
-                {
-                    themeableChild.ApplyTheme();
-                }
-                if (childControl.HasChildren)
-                {
-                    ApplyThemeToChildren(childControl);
-                }
-            }
-        }
+        //private void ApplyThemeToChildren(Control parentControl)
+        //{
+        //    foreach (Control childControl in parentControl.Controls)
+        //    {
+        //        if (childControl is IThemeable themeableChild)
+        //        {
+        //            themeableChild.ApplyTheme();
+        //        }
+        //        if (childControl.HasChildren)
+        //        {
+        //            ApplyThemeToChildren(childControl);
+        //        }
+        //    }
+        //}
 
         public CustomForm()
         {
@@ -735,9 +744,9 @@ namespace SewingProduction
                 _user = new UserClass();
             }
 
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
+            //this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
         }
         public CustomForm(UserClass user)
         {
@@ -748,10 +757,10 @@ namespace SewingProduction
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
 
-            ApplyTheme(); // Применяем тему к самой форме (фон)
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme(); // Применяем тему к самой форме (фон)
+            //ThemeManager.ThemeChanged += OnThemeChanged;
             // Применяем тему к дочерним контролам после инициализации самой формы
-            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
+            //this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
 
             // подписка на загрузку формы (для логирования и прав доступа - существующий код)
             this.Load += async (s, e) =>
@@ -827,7 +836,7 @@ namespace SewingProduction
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
@@ -848,7 +857,7 @@ namespace SewingProduction
             }
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         private async void CustomForm_Load(object sender, EventArgs e)
         {
             if (IsPreview)

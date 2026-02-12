@@ -11,7 +11,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class.CustomControls
 {
-    public class CustomToggleSwitch : ToggleSwitch, IThemeable, IThemeableControl
+    public class CustomToggleSwitch : ToggleSwitch//, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -26,8 +26,8 @@ namespace SewingProduction.Core.Class.CustomControls
         private bool _visibleLogic = true;
         public CustomToggleSwitch()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
@@ -36,13 +36,13 @@ namespace SewingProduction.Core.Class.CustomControls
             Font = ThemeManager.SharedSettings.DefaultFont;
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }

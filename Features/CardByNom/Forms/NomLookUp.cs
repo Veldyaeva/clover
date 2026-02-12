@@ -49,7 +49,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbService = new DbService(_dbHelper);
             _cardByNomService = new CardByNomService(_dbHelper);
             _gridHelper = new GridHelper();
-            ThemeManager.UpdateTheme(this);
+          //  ThemeManager.UpdateTheme(this);
 
             xNomZadany = _nomZadany;
             xKo = _ko;

@@ -48,7 +48,7 @@ namespace SewingProduction.form.TeamWork.Forms
 
             _dbService = new DbService(new DatabaseHelper());
             _artNormService = new ArtNormRepository(new DatabaseHelper());
-            ThemeManager.UpdateTheme(this);
+            //ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();
             _gridHelper.LoadGridViewSettings(gridView1, "NormRaskrGrid.xml");

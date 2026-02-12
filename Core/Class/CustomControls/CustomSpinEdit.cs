@@ -8,7 +8,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomSpinEdit : SpinEdit, IThemeable, IThemeableControl
+    public class CustomSpinEdit : SpinEdit//, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -60,8 +60,8 @@ namespace SewingProduction.Core.Class
 
         public CustomSpinEdit()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
 
             // Режим: однострочный чаще всего — там EM_SETMARGINS работает.
             // Если вам нужно multiline — значок нарисуется, но правое поле для текста не изменится (ограничение Win32).
@@ -82,11 +82,11 @@ namespace SewingProduction.Core.Class
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user) => PermissionHelper.ApplyTo(this, ObjectName, user);

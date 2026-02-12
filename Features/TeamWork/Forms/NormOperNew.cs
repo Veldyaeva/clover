@@ -42,7 +42,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _artNormService = new ArtNormRepository(_dbHelper);
 
             _annId = annId;
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
 
             //// Режим редактирования через EditForm и подписки
             //gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;

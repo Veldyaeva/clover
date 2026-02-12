@@ -54,7 +54,8 @@ using Volatile = System.Threading.Volatile;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class PlanZagrVyaz : CustomForm, IThemeable, IServiceBrokerHost
+    public partial class PlanZagrVyaz : CustomForm//, IThemeable
+                                                  , IServiceBrokerHost
     //, IDataUpdatableForm, IDataUpdatableFormAsync
     {
         int vyazPodrKod = 0;
@@ -178,7 +179,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _vyazService = new VyazService(_dbHelper);
             _mlService = new MlService(_dbHelper);
-            ThemeManager.UpdateTheme(this);
+        //    ThemeManager.UpdateTheme(this);
 
             _smenZadanyVyazBindingSource = new BindingSource
             {

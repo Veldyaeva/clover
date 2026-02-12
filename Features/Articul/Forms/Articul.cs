@@ -68,7 +68,7 @@ namespace SewingProduction.Features.Articul
 
             //_artPreviewBindingList = new BindingList<SpArtPreviewModel>();
 
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
         private async Task RefreshArtPreviewAsync()
         {

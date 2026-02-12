@@ -304,20 +304,20 @@ namespace SewingProduction
         }
 
 
-        public static void UpdateTheme(Control control)
-        {
-            foreach (Control child in control.Controls)
-            {
-                if (child is IThemeable themeable)
-                {
-                    themeable.ApplyTheme();
-                }
-                else if (child.HasChildren)
-                {
-                    UpdateTheme(child); // Рекурсивно обновляем вложенные элементы
-                }
-            }
-        }
+        //public static void UpdateTheme(Control control)
+        //{
+        //    foreach (Control child in control.Controls)
+        //    {
+        //        if (child is IThemeable themeable)
+        //        {
+        //            //themeable.ApplyTheme();
+        //        }
+        //        else if (child.HasChildren)
+        //        {
+        //            UpdateTheme(child); // Рекурсивно обновляем вложенные элементы
+        //        }
+        //    }
+        //}
 
         public static void UpdateDefaultFont(Font newFont)
         {

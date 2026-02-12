@@ -30,7 +30,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            ThemeManager.UpdateTheme(this);
+          //  ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;
