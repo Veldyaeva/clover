@@ -2026,7 +2026,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             SortBox.AutoSize = true;
             SortBox.Font = new System.Drawing.Font("Arial", 10F);
-            SortBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             SortBox.Location = new System.Drawing.Point(10, 97);
             SortBox.Margin = new Padding(4, 3, 4, 3);
             SortBox.Name = "SortBox";
@@ -2040,7 +2039,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             archiveCheckBox.AutoSize = true;
             archiveCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            archiveCheckBox.ForeColor = System.Drawing.Color.FromArgb(128, 64, 0);
             archiveCheckBox.Location = new System.Drawing.Point(10, 63);
             archiveCheckBox.Margin = new Padding(4, 3, 4, 3);
             archiveCheckBox.Name = "archiveCheckBox";
@@ -2056,7 +2054,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             actualCheckBox.Checked = true;
             actualCheckBox.CheckState = CheckState.Checked;
             actualCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            actualCheckBox.ForeColor = System.Drawing.Color.FromArgb(128, 64, 0);
             actualCheckBox.Location = new System.Drawing.Point(10, 36);
             actualCheckBox.Margin = new Padding(4, 3, 4, 3);
             actualCheckBox.Name = "actualCheckBox";
@@ -2072,7 +2069,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             preliminaryCheckBox.Checked = true;
             preliminaryCheckBox.CheckState = CheckState.Checked;
             preliminaryCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            preliminaryCheckBox.ForeColor = System.Drawing.Color.FromArgb(128, 64, 0);
             preliminaryCheckBox.Location = new System.Drawing.Point(10, 12);
             preliminaryCheckBox.Margin = new Padding(4, 3, 4, 3);
             preliminaryCheckBox.Name = "preliminaryCheckBox";
@@ -4161,7 +4157,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn63.FieldName = "Size_label";
             gridColumn63.Name = "gridColumn63";
             gridColumn63.Visible = true;
-            gridColumn63.VisibleIndex = 4;
+            gridColumn63.VisibleIndex = 3;
             gridColumn63.Width = 100;
             // 
             // gridColumn64
@@ -4170,7 +4166,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn64.FieldName = "StatusText";
             gridColumn64.Name = "gridColumn64";
             gridColumn64.Visible = true;
-            gridColumn64.VisibleIndex = 5;
+            gridColumn64.VisibleIndex = 4;
             gridColumn64.Width = 120;
             // 
             // gridColumn65
@@ -4179,7 +4175,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn65.FieldName = "AnnID";
             gridColumn65.Name = "gridColumn65";
             gridColumn65.Visible = true;
-            gridColumn65.VisibleIndex = 6;
+            gridColumn65.VisibleIndex = 5;
             gridColumn65.Width = 80;
             // 
             // layoutControlItem40
