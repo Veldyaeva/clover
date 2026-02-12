@@ -1167,7 +1167,7 @@ namespace SewingProduction.Features.Articul
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-1105, 201, 650, 400);
             layoutControl1.Root = layoutControlGroup1;
-            layoutControl1.Size = new Size(580, 248);
+            layoutControl1.Size = new Size(580, 257);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -1220,7 +1220,7 @@ namespace SewingProduction.Features.Articul
             customTabControlKomplNabor.Name = "customTabControlKomplNabor";
             customTabControlKomplNabor.ObjectName = null;
             customTabControlKomplNabor.SelectedTabPage = cTabPage1;
-            customTabControlKomplNabor.Size = new Size(576, 154);
+            customTabControlKomplNabor.Size = new Size(576, 163);
             customTabControlKomplNabor.TabIndex = 7;
             customTabControlKomplNabor.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { cTabPage1, cTabPage2 });
             // 
@@ -1228,7 +1228,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage1.Controls.Add(cGridKomplSost);
             cTabPage1.Name = "cTabPage1";
-            cTabPage1.Size = new Size(574, 129);
+            cTabPage1.Size = new Size(570, 135);
             cTabPage1.Text = "Состав комплекта";
             // 
             // cGridKomplSost
@@ -1239,7 +1239,7 @@ namespace SewingProduction.Features.Articul
             cGridKomplSost.Location = new Point(0, 0);
             cGridKomplSost.MainView = gridViewKomplSost;
             cGridKomplSost.Name = "cGridKomplSost";
-            cGridKomplSost.Size = new Size(574, 129);
+            cGridKomplSost.Size = new Size(570, 135);
             cGridKomplSost.TabIndex = 6;
             cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost });
             // 
@@ -1468,7 +1468,7 @@ namespace SewingProduction.Features.Articul
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem4, layoutControlItem7, layoutControlItem2, layoutControlItem6, layoutControlItem5, layoutControlItem8 });
             layoutControlGroup1.Name = "Root";
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup1.Size = new Size(580, 248);
+            layoutControlGroup1.Size = new Size(580, 257);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -1476,7 +1476,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem1.Control = customTabControlKomplNabor;
             layoutControlItem1.Location = new Point(0, 90);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(580, 158);
+            layoutControlItem1.Size = new Size(580, 167);
             layoutControlItem1.Text = "SostKomplNabor";
             layoutControlItem1.TextVisible = false;
             // 

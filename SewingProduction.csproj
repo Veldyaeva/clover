@@ -16,6 +16,11 @@
     <Optimize>True</Optimize>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace\Service\_KnitterRepository.cs" />
+    <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
+  </ItemGroup>
+
  
   <ItemGroup>
     <Content Include="Help\Features\TeamWork\Forms\img\1.png">
