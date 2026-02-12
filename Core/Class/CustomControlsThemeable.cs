@@ -35,8 +35,7 @@ namespace SewingProduction
 
         public void ApplyTheme()
         {
-            // Используем системные цвета вместо кастомной темы
-            ForeColor = SystemColors.ControlText;
+            // Цвета не трогаем, только общий шрифт
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
@@ -92,8 +91,6 @@ namespace SewingProduction
         }
         public void ApplyTheme()
         {
-            // Используем системные цвета вместо кастомной темы
-            ForeColor = SystemColors.ControlText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
         protected override void Dispose(bool disposing)
@@ -147,9 +144,6 @@ namespace SewingProduction
         }
         public void ApplyTheme()
         {
-            // Поля ввода используют стандартные системные цвета
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
         protected override void Dispose(bool disposing)
@@ -203,8 +197,6 @@ namespace SewingProduction
         }
         public void ApplyTheme()
         {
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
         protected override void Dispose(bool disposing)
@@ -658,7 +650,8 @@ namespace SewingProduction
         {
             foreach (Control childControl in parentControl.Controls)
             {
-                if (childControl is IThemeable themeableChild)
+                // Custom controls now rely on system colors and should not be recolored by theme traversal.
+                if (childControl is IThemeable themeableChild && childControl is not IThemeableControl)
                 {
                     themeableChild.ApplyTheme();
                 }
@@ -791,7 +784,6 @@ namespace SewingProduction
             }
         }
 
-        private void OnThemeChanged() => ApplyTheme();
         private async void CustomForm_Load(object sender, EventArgs e)
         {
             if (IsPreview)

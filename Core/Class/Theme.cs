@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -308,11 +308,12 @@ namespace SewingProduction
         {
             foreach (Control child in control.Controls)
             {
-                if (child is IThemeable themeable)
+                // Keep theme infrastructure available, but do not recolor custom controls.
+                if (child is IThemeable themeable && child is not IThemeableControl)
                 {
                     themeable.ApplyTheme();
                 }
-                else if (child.HasChildren)
+                if (child.HasChildren)
                 {
                     UpdateTheme(child); // Рекурсивно обновляем вложенные элементы
                 }
