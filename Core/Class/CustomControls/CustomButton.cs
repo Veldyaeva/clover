@@ -146,65 +146,66 @@ namespace SewingProduction.Core.Class
 
         public CustomSimpleButton()
         {
-            ApplyTheme();
+            //ApplyTheme();
             //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            if (UseDevExpressSkin)
-            {
-                ResetToSkin();
-                return;
-            }
+            //if (UseDevExpressSkin)
+            //{
+            //    ResetToSkin();
+            //    return;
+            //}
 
-            // ваш текущий кастомный ThemeManager-режим
-            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-            // !!! вот это сейчас прям ломает скины
-            // AppearanceDisabled... лучше тоже делать только в кастом-режиме
-            AppearanceDisabled.BackColor = Color.Green;
-            AppearanceDisabled.ForeColor = Color.GreenYellow;
-            AppearanceDisabled.Options.UseBackColor = true;
-            AppearanceDisabled.Options.UseForeColor = true;
-
-            Height = ThemeManager.SharedSettings.ButtonHeight;
+            //// ваш текущий кастомный ThemeManager-режим
             //Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
             //Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
             //Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
 
+            //// !!! вот это сейчас прям ломает скины
+            //// AppearanceDisabled... лучше тоже делать только в кастом-режиме
             //AppearanceDisabled.BackColor = Color.Green;
             //AppearanceDisabled.ForeColor = Color.GreenYellow;
             //AppearanceDisabled.Options.UseBackColor = true;
             //AppearanceDisabled.Options.UseForeColor = true;
 
             //Height = ThemeManager.SharedSettings.ButtonHeight;
+            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
+            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
+
+            AppearanceDisabled.BackColor = Color.Green;
+            AppearanceDisabled.ForeColor = Color.GreenYellow;
+            AppearanceDisabled.Options.UseBackColor = true;
+            AppearanceDisabled.Options.UseForeColor = true;
+
+            Height = ThemeManager.SharedSettings.ButtonHeight;
         }
-        private void ResetToSkin()
-        {
-            // Отпускаем цвета, пусть ими управляет скин
-            Appearance.BackColor = Color.Empty;
-            Appearance.ForeColor = Color.Empty;
-            Appearance.BorderColor = Color.Empty;
-            Appearance.Options.UseBackColor = false;
-            Appearance.Options.UseForeColor = false;
-            Appearance.Options.UseBorderColor = false;
+        //private void ResetToSkin()
+        //{
+        //    // Отпускаем цвета, пусть ими управляет скин
+        //    Appearance.BackColor = Color.Empty;
+        //    Appearance.ForeColor = Color.Empty;
+        //    Appearance.BorderColor = Color.Empty;
+        //    Appearance.Options.UseBackColor = false;
+        //    Appearance.Options.UseForeColor = false;
+        //    Appearance.Options.UseBorderColor = false;
 
-            AppearanceDisabled.BackColor = Color.Empty;
-            AppearanceDisabled.ForeColor = Color.Empty;
-            AppearanceDisabled.BorderColor = Color.Empty;
-            AppearanceDisabled.Options.UseBackColor = false;
-            AppearanceDisabled.Options.UseForeColor = false;
-            AppearanceDisabled.Options.UseBorderColor = false;
+        //    AppearanceDisabled.BackColor = Color.Empty;
+        //    AppearanceDisabled.ForeColor = Color.Empty;
+        //    AppearanceDisabled.BorderColor = Color.Empty;
+        //    AppearanceDisabled.Options.UseBackColor = false;
+        //    AppearanceDisabled.Options.UseForeColor = false;
+        //    AppearanceDisabled.Options.UseBorderColor = false;
 
-            // Font можно оставить ваш общий (если хотите единый шрифт),
-            // либо отпустить тоже:
-            // Appearance.Font = null;
+        //    // Font можно оставить ваш общий (если хотите единый шрифт),
+        //    // либо отпустить тоже:
+        //    // Appearance.Font = null;
 
-            LookAndFeel.UseDefaultLookAndFeel = true;
-        }
+        //    LookAndFeel.UseDefaultLookAndFeel = true;
+        //}
+
         //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
