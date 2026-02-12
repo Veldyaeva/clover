@@ -64,7 +64,9 @@ namespace SewingProduction.form
             customButton1 = new CustomButton();
             GridSettingsCheckBox = new CustomCheckBox();
             ResetGridSettingsButton = new CustomButton();
-            customLabel9 = new CustomLabel();
+            tabPane1 = new DevExpress.XtraBars.Navigation.TabPane();
+            tabNavigationPageTheme = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            tabNavigationPageOsn = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
             contextMenuReset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
@@ -74,6 +76,10 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabelGridColor.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridRowBackground.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridBackground.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tabPane1).BeginInit();
+            tabPane1.SuspendLayout();
+            tabNavigationPageTheme.SuspendLayout();
+            tabNavigationPageOsn.SuspendLayout();
             SuspendLayout();
             // 
             // customLabelTheme
@@ -82,7 +88,7 @@ namespace SewingProduction.form
             customLabelTheme.BackColor = System.Drawing.Color.Transparent;
             customLabelTheme.Font = new System.Drawing.Font("Arial", 10F);
             customLabelTheme.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelTheme.Location = new System.Drawing.Point(14, 25);
+            customLabelTheme.Location = new System.Drawing.Point(24, 19);
             customLabelTheme.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelTheme.Name = "customLabelTheme";
             customLabelTheme.Size = new System.Drawing.Size(41, 16);
@@ -95,7 +101,7 @@ namespace SewingProduction.form
             customComboBoxTheme.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxTheme.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxTheme.FormattingEnabled = true;
-            customComboBoxTheme.Location = new System.Drawing.Point(125, 22);
+            customComboBoxTheme.Location = new System.Drawing.Point(135, 16);
             customComboBoxTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxTheme.Name = "customComboBoxTheme";
             customComboBoxTheme.Size = new System.Drawing.Size(140, 24);
@@ -108,7 +114,7 @@ namespace SewingProduction.form
             customComboBoxSizeText.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxSizeText.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxSizeText.FormattingEnabled = true;
-            customComboBoxSizeText.Location = new System.Drawing.Point(125, 435);
+            customComboBoxSizeText.Location = new System.Drawing.Point(722, 51);
             customComboBoxSizeText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxSizeText.Name = "customComboBoxSizeText";
             customComboBoxSizeText.Size = new System.Drawing.Size(140, 24);
@@ -121,7 +127,7 @@ namespace SewingProduction.form
             customLabelSizeText.BackColor = System.Drawing.Color.Transparent;
             customLabelSizeText.Font = new System.Drawing.Font("Arial", 10F);
             customLabelSizeText.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelSizeText.Location = new System.Drawing.Point(14, 438);
+            customLabelSizeText.Location = new System.Drawing.Point(611, 54);
             customLabelSizeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelSizeText.Name = "customLabelSizeText";
             customLabelSizeText.Size = new System.Drawing.Size(103, 16);
@@ -134,7 +140,7 @@ namespace SewingProduction.form
             customCheckBoxSaveOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSaveOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(327, 21);
+            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(25, 8);
             customCheckBoxSaveOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxSaveOpenTabs.Name = "customCheckBoxSaveOpenTabs";
             customCheckBoxSaveOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -149,7 +155,7 @@ namespace SewingProduction.form
             customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButtonClearProfile.Font = new System.Drawing.Font("Arial", 10F);
             customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
-            customButtonClearProfile.Location = new System.Drawing.Point(654, 17);
+            customButtonClearProfile.Location = new System.Drawing.Point(25, 247);
             customButtonClearProfile.Name = "customButtonClearProfile";
             customButtonClearProfile.Size = new System.Drawing.Size(251, 29);
             customButtonClearProfile.TabIndex = 9;
@@ -163,7 +169,7 @@ namespace SewingProduction.form
             customCheckBoxSokrNameTabs.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxSokrNameTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSokrNameTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(327, 66);
+            customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(25, 53);
             customCheckBoxSokrNameTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxSokrNameTabs.Name = "customCheckBoxSokrNameTabs";
             customCheckBoxSokrNameTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -179,7 +185,7 @@ namespace SewingProduction.form
             customCheckBoxPovtOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxPovtOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxPovtOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(327, 107);
+            customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(25, 94);
             customCheckBoxPovtOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxPovtOpenTabs.Name = "customCheckBoxPovtOpenTabs";
             customCheckBoxPovtOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -195,7 +201,7 @@ namespace SewingProduction.form
             customComboBoxRejimRab.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxRejimRab.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxRejimRab.FormattingEnabled = true;
-            customComboBoxRejimRab.Location = new System.Drawing.Point(125, 478);
+            customComboBoxRejimRab.Location = new System.Drawing.Point(722, 8);
             customComboBoxRejimRab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxRejimRab.Name = "customComboBoxRejimRab";
             customComboBoxRejimRab.Size = new System.Drawing.Size(140, 24);
@@ -207,7 +213,7 @@ namespace SewingProduction.form
             customLabelRejimRab.BackColor = System.Drawing.Color.Transparent;
             customLabelRejimRab.Font = new System.Drawing.Font("Arial", 10F);
             customLabelRejimRab.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelRejimRab.Location = new System.Drawing.Point(14, 481);
+            customLabelRejimRab.Location = new System.Drawing.Point(611, 11);
             customLabelRejimRab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelRejimRab.Name = "customLabelRejimRab";
             customLabelRejimRab.Size = new System.Drawing.Size(103, 16);
@@ -230,7 +236,7 @@ namespace SewingProduction.form
             // colorPickEditLabel
             // 
             colorPickEditLabel.EditValue = System.Drawing.Color.Empty;
-            colorPickEditLabel.Location = new System.Drawing.Point(160, 63);
+            colorPickEditLabel.Location = new System.Drawing.Point(170, 57);
             colorPickEditLabel.Name = "colorPickEditLabel";
             colorPickEditLabel.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditLabel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -255,7 +261,7 @@ namespace SewingProduction.form
             // colorPickEditTextBox
             // 
             colorPickEditTextBox.EditValue = System.Drawing.Color.Empty;
-            colorPickEditTextBox.Location = new System.Drawing.Point(160, 107);
+            colorPickEditTextBox.Location = new System.Drawing.Point(170, 101);
             colorPickEditTextBox.Name = "colorPickEditTextBox";
             colorPickEditTextBox.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditTextBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -268,7 +274,7 @@ namespace SewingProduction.form
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.DimGray;
-            customLabel1.Location = new System.Drawing.Point(45, 67);
+            customLabel1.Location = new System.Drawing.Point(55, 61);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(109, 16);
             customLabel1.TabIndex = 17;
@@ -279,7 +285,7 @@ namespace SewingProduction.form
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.DimGray;
-            customLabel2.Location = new System.Drawing.Point(20, 108);
+            customLabel2.Location = new System.Drawing.Point(30, 102);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(134, 16);
             customLabel2.TabIndex = 18;
@@ -290,7 +296,7 @@ namespace SewingProduction.form
             customLabel3.AutoSize = true;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.ForeColor = System.Drawing.Color.DimGray;
-            customLabel3.Location = new System.Drawing.Point(47, 230);
+            customLabel3.Location = new System.Drawing.Point(57, 224);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(107, 16);
             customLabel3.TabIndex = 22;
@@ -301,7 +307,7 @@ namespace SewingProduction.form
             customLabel4.AutoSize = true;
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
             customLabel4.ForeColor = System.Drawing.Color.DimGray;
-            customLabel4.Location = new System.Drawing.Point(30, 186);
+            customLabel4.Location = new System.Drawing.Point(40, 180);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(124, 16);
             customLabel4.TabIndex = 21;
@@ -310,7 +316,7 @@ namespace SewingProduction.form
             // colorPickEditButtonTextColor
             // 
             colorPickEditButtonTextColor.EditValue = System.Drawing.Color.Empty;
-            colorPickEditButtonTextColor.Location = new System.Drawing.Point(160, 229);
+            colorPickEditButtonTextColor.Location = new System.Drawing.Point(170, 223);
             colorPickEditButtonTextColor.Name = "colorPickEditButtonTextColor";
             colorPickEditButtonTextColor.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditButtonTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -321,7 +327,7 @@ namespace SewingProduction.form
             // colorPickEditButtonBackground
             // 
             colorPickEditButtonBackground.EditValue = System.Drawing.Color.Empty;
-            colorPickEditButtonBackground.Location = new System.Drawing.Point(160, 185);
+            colorPickEditButtonBackground.Location = new System.Drawing.Point(170, 179);
             colorPickEditButtonBackground.Name = "colorPickEditButtonBackground";
             colorPickEditButtonBackground.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditButtonBackground.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -334,7 +340,7 @@ namespace SewingProduction.form
             customLabel5.AutoSize = true;
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
             customLabel5.ForeColor = System.Drawing.Color.DimGray;
-            customLabel5.Location = new System.Drawing.Point(99, 145);
+            customLabel5.Location = new System.Drawing.Point(109, 139);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new System.Drawing.Size(55, 16);
             customLabel5.TabIndex = 26;
@@ -345,7 +351,7 @@ namespace SewingProduction.form
             customLabel6.AutoSize = true;
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
             customLabel6.ForeColor = System.Drawing.Color.DimGray;
-            customLabel6.Location = new System.Drawing.Point(53, 269);
+            customLabel6.Location = new System.Drawing.Point(63, 263);
             customLabel6.Name = "customLabel6";
             customLabel6.Size = new System.Drawing.Size(93, 16);
             customLabel6.TabIndex = 25;
@@ -354,7 +360,7 @@ namespace SewingProduction.form
             // colorPickEdit3
             // 
             colorPickEdit3.EditValue = System.Drawing.Color.Empty;
-            colorPickEdit3.Location = new System.Drawing.Point(160, 142);
+            colorPickEdit3.Location = new System.Drawing.Point(170, 136);
             colorPickEdit3.Name = "colorPickEdit3";
             colorPickEdit3.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -365,7 +371,7 @@ namespace SewingProduction.form
             // colorPickEditLabelGridColor
             // 
             colorPickEditLabelGridColor.EditValue = System.Drawing.Color.Empty;
-            colorPickEditLabelGridColor.Location = new System.Drawing.Point(160, 268);
+            colorPickEditLabelGridColor.Location = new System.Drawing.Point(170, 262);
             colorPickEditLabelGridColor.Name = "colorPickEditLabelGridColor";
             colorPickEditLabelGridColor.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditLabelGridColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -379,7 +385,7 @@ namespace SewingProduction.form
             customLabel7.AutoSize = true;
             customLabel7.Font = new System.Drawing.Font("Arial", 10F);
             customLabel7.ForeColor = System.Drawing.Color.DimGray;
-            customLabel7.Location = new System.Drawing.Point(17, 354);
+            customLabel7.Location = new System.Drawing.Point(27, 348);
             customLabel7.Name = "customLabel7";
             customLabel7.Size = new System.Drawing.Size(137, 16);
             customLabel7.TabIndex = 30;
@@ -390,7 +396,7 @@ namespace SewingProduction.form
             customLabel8.AutoSize = true;
             customLabel8.Font = new System.Drawing.Font("Arial", 10F);
             customLabel8.ForeColor = System.Drawing.Color.DimGray;
-            customLabel8.Location = new System.Drawing.Point(44, 310);
+            customLabel8.Location = new System.Drawing.Point(54, 304);
             customLabel8.Name = "customLabel8";
             customLabel8.Size = new System.Drawing.Size(110, 16);
             customLabel8.TabIndex = 29;
@@ -399,7 +405,7 @@ namespace SewingProduction.form
             // colorPickEditGridRowBackground
             // 
             colorPickEditGridRowBackground.EditValue = System.Drawing.Color.Empty;
-            colorPickEditGridRowBackground.Location = new System.Drawing.Point(160, 353);
+            colorPickEditGridRowBackground.Location = new System.Drawing.Point(170, 347);
             colorPickEditGridRowBackground.Name = "colorPickEditGridRowBackground";
             colorPickEditGridRowBackground.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditGridRowBackground.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -410,7 +416,7 @@ namespace SewingProduction.form
             // colorPickEditGridBackground
             // 
             colorPickEditGridBackground.EditValue = System.Drawing.Color.Empty;
-            colorPickEditGridBackground.Location = new System.Drawing.Point(160, 309);
+            colorPickEditGridBackground.Location = new System.Drawing.Point(170, 303);
             colorPickEditGridBackground.Name = "colorPickEditGridBackground";
             colorPickEditGridBackground.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditGridBackground.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -423,7 +429,7 @@ namespace SewingProduction.form
             customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
             customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(160, 389);
+            customButton1.Location = new System.Drawing.Point(170, 383);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(113, 25);
             customButton1.TabIndex = 31;
@@ -437,7 +443,7 @@ namespace SewingProduction.form
             GridSettingsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             GridSettingsCheckBox.Font = new System.Drawing.Font("Arial", 10F);
             GridSettingsCheckBox.ForeColor = System.Drawing.Color.FromArgb(80, 40, 100);
-            GridSettingsCheckBox.Location = new System.Drawing.Point(358, 145);
+            GridSettingsCheckBox.Location = new System.Drawing.Point(56, 139);
             GridSettingsCheckBox.Name = "GridSettingsCheckBox";
             GridSettingsCheckBox.Size = new System.Drawing.Size(220, 20);
             GridSettingsCheckBox.TabIndex = 32;
@@ -450,65 +456,79 @@ namespace SewingProduction.form
             ResetGridSettingsButton.BackColor = System.Drawing.Color.FromArgb(225, 200, 230);
             ResetGridSettingsButton.Font = new System.Drawing.Font("Arial", 10F);
             ResetGridSettingsButton.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
-            ResetGridSettingsButton.Location = new System.Drawing.Point(358, 186);
+            ResetGridSettingsButton.Location = new System.Drawing.Point(25, 193);
             ResetGridSettingsButton.Name = "ResetGridSettingsButton";
-            ResetGridSettingsButton.Size = new System.Drawing.Size(49, 24);
+            ResetGridSettingsButton.Size = new System.Drawing.Size(251, 29);
             ResetGridSettingsButton.TabIndex = 33;
-            ResetGridSettingsButton.Text = "Тыц";
+            ResetGridSettingsButton.Text = "Сбросить настройки таблиц";
             ResetGridSettingsButton.UseVisualStyleBackColor = false;
             ResetGridSettingsButton.Click += customButton2_Click;
             // 
-            // customLabel9
+            // tabPane1
             // 
-            customLabel9.AutoSize = true;
-            customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
-            customLabel9.Location = new System.Drawing.Point(358, 167);
-            customLabel9.Name = "customLabel9";
-            customLabel9.Size = new System.Drawing.Size(198, 16);
-            customLabel9.TabIndex = 34;
-            customLabel9.Text = "Сбросить настройки таблиц:";
+            tabPane1.Controls.Add(tabNavigationPageTheme);
+            tabPane1.Controls.Add(tabNavigationPageOsn);
+            tabPane1.Location = new System.Drawing.Point(12, 12);
+            tabPane1.Name = "tabPane1";
+            tabPane1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { tabNavigationPageTheme, tabNavigationPageOsn });
+            tabPane1.RegularSize = new System.Drawing.Size(909, 460);
+            tabPane1.SelectedPage = tabNavigationPageOsn;
+            tabPane1.Size = new System.Drawing.Size(909, 460);
+            tabPane1.TabIndex = 35;
+            tabPane1.Text = "tabPane1";
+            // 
+            // tabNavigationPageTheme
+            // 
+            tabNavigationPageTheme.Caption = "Тема";
+            tabNavigationPageTheme.Controls.Add(customLabelTheme);
+            tabNavigationPageTheme.Controls.Add(customComboBoxTheme);
+            tabNavigationPageTheme.Controls.Add(customButton1);
+            tabNavigationPageTheme.Controls.Add(colorPickEditLabel);
+            tabNavigationPageTheme.Controls.Add(customLabel7);
+            tabNavigationPageTheme.Controls.Add(colorPickEditTextBox);
+            tabNavigationPageTheme.Controls.Add(customLabel8);
+            tabNavigationPageTheme.Controls.Add(customLabel1);
+            tabNavigationPageTheme.Controls.Add(colorPickEditGridRowBackground);
+            tabNavigationPageTheme.Controls.Add(customLabel2);
+            tabNavigationPageTheme.Controls.Add(colorPickEditGridBackground);
+            tabNavigationPageTheme.Controls.Add(colorPickEditButtonBackground);
+            tabNavigationPageTheme.Controls.Add(customLabel5);
+            tabNavigationPageTheme.Controls.Add(colorPickEditButtonTextColor);
+            tabNavigationPageTheme.Controls.Add(customLabel6);
+            tabNavigationPageTheme.Controls.Add(customLabel4);
+            tabNavigationPageTheme.Controls.Add(colorPickEdit3);
+            tabNavigationPageTheme.Controls.Add(customLabel3);
+            tabNavigationPageTheme.Controls.Add(colorPickEditLabelGridColor);
+            tabNavigationPageTheme.Name = "tabNavigationPageTheme";
+            tabNavigationPageTheme.Size = new System.Drawing.Size(909, 427);
+            // 
+            // tabNavigationPageOsn
+            // 
+            tabNavigationPageOsn.Caption = "Основные";
+            tabNavigationPageOsn.Controls.Add(customCheckBoxSaveOpenTabs);
+            tabNavigationPageOsn.Controls.Add(customCheckBoxSokrNameTabs);
+            tabNavigationPageOsn.Controls.Add(customCheckBoxPovtOpenTabs);
+            tabNavigationPageOsn.Controls.Add(customComboBoxSizeText);
+            tabNavigationPageOsn.Controls.Add(customLabelSizeText);
+            tabNavigationPageOsn.Controls.Add(customComboBoxRejimRab);
+            tabNavigationPageOsn.Controls.Add(customLabelRejimRab);
+            tabNavigationPageOsn.Controls.Add(ResetGridSettingsButton);
+            tabNavigationPageOsn.Controls.Add(GridSettingsCheckBox);
+            tabNavigationPageOsn.Controls.Add(customButtonClearProfile);
+            tabNavigationPageOsn.Name = "tabNavigationPageOsn";
+            tabNavigationPageOsn.Size = new System.Drawing.Size(909, 427);
             // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
-            Controls.Add(customLabel9);
-            Controls.Add(ResetGridSettingsButton);
-            Controls.Add(GridSettingsCheckBox);
-            Controls.Add(customButton1);
-            Controls.Add(customLabel7);
-            Controls.Add(customLabel8);
-            Controls.Add(colorPickEditGridRowBackground);
-            Controls.Add(colorPickEditGridBackground);
-            Controls.Add(customLabel5);
-            Controls.Add(customLabel6);
-            Controls.Add(colorPickEdit3);
-            Controls.Add(colorPickEditLabelGridColor);
-            Controls.Add(customLabel3);
-            Controls.Add(customLabel4);
-            Controls.Add(colorPickEditButtonTextColor);
-            Controls.Add(colorPickEditButtonBackground);
-            Controls.Add(customLabel2);
-            Controls.Add(customLabel1);
-            Controls.Add(colorPickEditTextBox);
-            Controls.Add(colorPickEditLabel);
+            Controls.Add(tabPane1);
             Controls.Add(customButtonSaveExit);
-            Controls.Add(customComboBoxRejimRab);
-            Controls.Add(customLabelRejimRab);
-            Controls.Add(customCheckBoxPovtOpenTabs);
-            Controls.Add(customCheckBoxSokrNameTabs);
-            Controls.Add(customButtonClearProfile);
-            Controls.Add(customCheckBoxSaveOpenTabs);
-            Controls.Add(customComboBoxSizeText);
-            Controls.Add(customLabelSizeText);
-            Controls.Add(customComboBoxTheme);
-            Controls.Add(customLabelTheme);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "SettingsForm";
-            Text = "SettingsForm";
+            Text = "Настройки";
             Load += SettingsForm_Load;
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).EndInit();
             contextMenuReset.ResumeLayout(false);
@@ -519,8 +539,13 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabelGridColor.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridRowBackground.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridBackground.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tabPane1).EndInit();
+            tabPane1.ResumeLayout(false);
+            tabNavigationPageTheme.ResumeLayout(false);
+            tabNavigationPageTheme.PerformLayout();
+            tabNavigationPageOsn.ResumeLayout(false);
+            tabNavigationPageOsn.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -558,5 +583,10 @@ namespace SewingProduction.form
         private CustomCheckBox GridSettingsCheckBox;
         private CustomButton ResetGridSettingsButton;
         private CustomLabel customLabel9;
+        private DevExpress.XtraBars.Navigation.TabPane tabPane1;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPageTheme;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPageOsn;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPageText;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage3;
     }
 }

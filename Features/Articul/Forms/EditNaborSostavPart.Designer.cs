@@ -40,9 +40,9 @@
             customHeaderLabelArt = new Core.Class.CustomHeaderLabel();
             customLabelCatDynsign = new Core.Class.CustomLabel();
             customLabelSpravNoskiDetal = new Core.Class.CustomLabel();
-            customButton1 = new Core.Class.CustomButton();
-            customButton2 = new Core.Class.CustomButton();
+            customButtonOtm = new Core.Class.CustomButton();
             customLookUpEditClass = new Core.Class.CustomLookUpEdit();
+            customActionButtonSave = new Core.Class.CustomActionButton();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditSpravNoskiDetal.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditCatDynsign.Properties).BeginInit();
@@ -67,9 +67,9 @@
             tableLayoutPanel1.Controls.Add(customHeaderLabelArt, 0, 0);
             tableLayoutPanel1.Controls.Add(customLabelCatDynsign, 0, 4);
             tableLayoutPanel1.Controls.Add(customLabelSpravNoskiDetal, 0, 5);
-            tableLayoutPanel1.Controls.Add(customButton1, 1, 7);
-            tableLayoutPanel1.Controls.Add(customButton2, 0, 7);
+            tableLayoutPanel1.Controls.Add(customButtonOtm, 0, 7);
             tableLayoutPanel1.Controls.Add(customLookUpEditClass, 1, 1);
+            tableLayoutPanel1.Controls.Add(customActionButtonSave, 1, 7);
             tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 8;
@@ -110,6 +110,7 @@
             customLookUpEditSpravNoskiDetal.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("id_spr", "id_spr", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("name", "Тип") });
             customLookUpEditSpravNoskiDetal.Size = new System.Drawing.Size(329, 22);
             customLookUpEditSpravNoskiDetal.TabIndex = 23;
+            customLookUpEditSpravNoskiDetal.EditValueChanged += customLookUpEditSpravNoskiDetal_EditValueChanged;
             // 
             // customLookUpEditCatDynsign
             // 
@@ -126,6 +127,7 @@
             customLookUpEditCatDynsign.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCDS_ID", "TCDS_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCDS_Name", "Признак") });
             customLookUpEditCatDynsign.Size = new System.Drawing.Size(329, 22);
             customLookUpEditCatDynsign.TabIndex = 22;
+            customLookUpEditCatDynsign.EditValueChanged += customLookUpEditCatDynsign_EditValueChanged;
             // 
             // customLookUpEditCategory
             // 
@@ -142,6 +144,7 @@
             customLookUpEditCategory.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCAT_ID", "TCAT_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TCAT_CategoryName", "Категория") });
             customLookUpEditCategory.Size = new System.Drawing.Size(329, 22);
             customLookUpEditCategory.TabIndex = 21;
+            customLookUpEditCategory.EditValueChanged += customLookUpEditCategory_EditValueChanged;
             // 
             // customLookUpEditGroup
             // 
@@ -158,6 +161,7 @@
             customLookUpEditGroup.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TG_ID", "TG_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TG_GroupName", "Группа") });
             customLookUpEditGroup.Size = new System.Drawing.Size(329, 22);
             customLookUpEditGroup.TabIndex = 20;
+            customLookUpEditGroup.EditValueChanged += customLookUpEditGroup_EditValueChanged;
             // 
             // customLabelCategory
             // 
@@ -230,29 +234,18 @@
             customLabelSpravNoskiDetal.TabIndex = 7;
             customLabelSpravNoskiDetal.Text = "Тип категории";
             // 
-            // customButton1
+            // customButtonOtm
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButton1.Location = new System.Drawing.Point(160, 283);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new System.Drawing.Size(223, 39);
-            customButton1.TabIndex = 12;
-            customButton1.Text = "Сохранить";
-            customButton1.UseVisualStyleBackColor = false;
-            // 
-            // customButton2
-            // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButton2.Location = new System.Drawing.Point(3, 283);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(102, 39);
-            customButton2.TabIndex = 13;
-            customButton2.Text = "Отмена";
-            customButton2.UseVisualStyleBackColor = false;
+            customButtonOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonOtm.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonOtm.Location = new System.Drawing.Point(3, 283);
+            customButtonOtm.Name = "customButtonOtm";
+            customButtonOtm.Size = new System.Drawing.Size(151, 39);
+            customButtonOtm.TabIndex = 13;
+            customButtonOtm.Text = "Отмена";
+            customButtonOtm.UseVisualStyleBackColor = false;
+            customButtonOtm.Click += customButtonOtm_Click;
             // 
             // customLookUpEditClass
             // 
@@ -269,6 +262,20 @@
             customLookUpEditClass.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] { new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TC_ID", "TC_ID", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default), new DevExpress.XtraEditors.Controls.LookUpColumnInfo("TC_ClassName", "Класс") });
             customLookUpEditClass.Size = new System.Drawing.Size(329, 22);
             customLookUpEditClass.TabIndex = 19;
+            customLookUpEditClass.EditValueChanged += customLookUpEditClass_EditValueChanged;
+            // 
+            // customActionButtonSave
+            // 
+            customActionButtonSave.BackColor = System.Drawing.Color.Lavender;
+            customActionButtonSave.Font = new System.Drawing.Font("Arial", 10F);
+            customActionButtonSave.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            customActionButtonSave.Location = new System.Drawing.Point(160, 283);
+            customActionButtonSave.Name = "customActionButtonSave";
+            customActionButtonSave.Size = new System.Drawing.Size(329, 39);
+            customActionButtonSave.TabIndex = 25;
+            customActionButtonSave.Text = "Сохранить";
+            customActionButtonSave.UseVisualStyleBackColor = false;
+            customActionButtonSave.Click += customActionButtonSave_Click;
             // 
             // EditNaborSostavPart
             // 
@@ -277,7 +284,7 @@
             ClientSize = new System.Drawing.Size(516, 349);
             Controls.Add(tableLayoutPanel1);
             Name = "EditNaborSostavPart";
-            Text = "Изменение части в наборе";
+            Text = "Изменение";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditSpravNoskiDetal.Properties).EndInit();
@@ -297,13 +304,13 @@
         private Core.Class.CustomHeaderLabel customHeaderLabelArt;
         private Core.Class.CustomLabel customLabelCatDynsign;
         private Core.Class.CustomLabel customLabelSpravNoskiDetal;
-        private Core.Class.CustomButton customButton1;
-        private Core.Class.CustomButton customButton2;
+        private Core.Class.CustomButton customButtonOtm;
         private Core.Class.CustomLookUpEdit customLookUpEditSpravNoskiDetal;
         private Core.Class.CustomLookUpEdit customLookUpEditCatDynsign;
         private Core.Class.CustomLookUpEdit customLookUpEditCategory;
         private Core.Class.CustomLookUpEdit customLookUpEditGroup;
         private Core.Class.CustomLookUpEdit customLookUpEditClass;
         private Core.Class.CustomHeaderLabel customHeaderLabelMod;
+        private Core.Class.CustomActionButton customActionButtonSave;
     }
 }

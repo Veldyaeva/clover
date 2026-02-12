@@ -16,6 +16,7 @@ using SewingProduction.Features.Articul.Service;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.Articul.Models;
 using System.Threading;
+using SewingProduction.Core.Models;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -30,6 +31,10 @@ namespace SewingProduction.Features.Articul.Forms
             InitializeComponent();
             _kod = Kod;
         }
+        public EditNaborSostavMatr(UserClass user) : base(user)
+        {
+            InitializeComponent();
+        }
 
         #region Initialization
         protected override async void OnShown(EventArgs e)
@@ -42,6 +47,7 @@ namespace SewingProduction.Features.Articul.Forms
             customGridControlPlanSezonAll.DataSource = await _ANSDataService.GetPlanSezonAllByKod(_kod);
             EnableEditorsInPSA();
             EnableEditorsInAK();
+            LoadInfoArticulMod();
         }
         #endregion
         private async void gridViewPlanSezonAll_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -59,11 +65,36 @@ namespace SewingProduction.Features.Articul.Forms
         {
 
         }
+        private void LoadInfoArticulMod()
+        {
+            customTextBoxArt.Text = string.Empty;
+            customTextBoxMod.Text = string.Empty;
+            customTextBoxNN.Text = string.Empty;
+            customLabelTextMO.Text = string.Empty;
+        }
 
         private void repositoryItemButtonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            EditNaborSostavPart f = new EditNaborSostavPart(_user);
-            f.ShowDialog();
+            var rowHandle = gridViewPlanSezonAll.FocusedRowHandle;
+
+            var row = gridViewPlanSezonAll.GetRow(rowHandle) as PlanSezonAllModel;
+            if (row == null || row.nn == null) return;
+
+            using var f = new EditNaborSostavPart(_user, row);
+            if (f.ShowDialog() != DialogResult.OK) return;
+
+            gridViewPlanSezonAll.RefreshRow(rowHandle);
+        }
+        private void repositoryItemButtonEdit2_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            var rowHandle = gridViewArtKomplekt.FocusedRowHandle;
+            var row = gridViewArtKomplekt.GetRow(rowHandle) as ArtKomplektModel;
+            if (row == null || row.Parent_nn == null) return;
+
+            using var f = new EditNaborSostavPart(_user, row);
+            if (f.ShowDialog() != DialogResult.OK) return;
+
+            gridViewArtKomplekt.RefreshRow(rowHandle);
         }
 
         private void EnableEditorsInPSA()
@@ -101,5 +132,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 4) задать тип
             akGridColumnButton.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
         }
+
     }
 }
