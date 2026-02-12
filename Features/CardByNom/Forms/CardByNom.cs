@@ -36,7 +36,7 @@ using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction
 {
-    public partial class CardByNom : CustomForm, IThemeable
+    public partial class CardByNom : CustomForm//, IThemeable
     {
         public int fspecrez, uspecrez;
         public string fkodfd, ukodfd;
@@ -145,7 +145,7 @@ namespace SewingProduction
             MenuStrip mainMenu = mainForm.MainMenuStrip;
             _formManager = new FormManager(mainForm, mainMenu, _user);
             //ApplyTheme();
-            ThemeManager.UpdateTheme(this);
+            //ThemeManager.UpdateTheme(this);
             tbNomZad.Enter += tbNomZad_Enter;
             tbNomPach.Enter += tbNomPach_Enter;
             tbYearPach.Enter += tbYearPach_Enter;

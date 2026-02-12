@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Helpers;
 using static SewingProduction.form.SettingsForm;
+using DevExpress.LookAndFeel;
 
 namespace SewingProduction.form
 {
@@ -17,6 +18,11 @@ namespace SewingProduction.form
         public SettingsForm(UserClass user) : base(user)
         {
             InitializeComponent();
+            UserLookAndFeel.Default.StyleChanged += (_, __) =>
+            {
+                Properties.Settings.Default.AppSkin = UserLookAndFeel.Default.SkinName;
+                Properties.Settings.Default.Save();
+            };
         }
         private void SettingsForm_Load(object sender, EventArgs e)
         {

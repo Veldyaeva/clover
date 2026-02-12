@@ -9,7 +9,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomGridControl : GridControl, SewingProduction.IThemeable, IThemeableControl
+    public class CustomGridControl : GridControl//, SewingProduction.IThemeable//, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color? AlternateRowColor { get; set; }
@@ -40,8 +40,8 @@ namespace SewingProduction.Core.Class
         private bool _settingsInitialized = false;
         public CustomGridControl()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
             ViewRegistered += OnViewRegistered;
 
             // Подписываемся на события для инициализации настроек
@@ -112,7 +112,7 @@ namespace SewingProduction.Core.Class
                 gridView.Appearance.FocusedRow.Options.UseFont = true;
             }
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         /// <summary>
         /// Обработчик события Load для инициализации настроек
         /// </summary>
@@ -230,7 +230,7 @@ namespace SewingProduction.Core.Class
                 }
                 this.DataSource = null;
                 this.ViewCollection.Clear();
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
                 this.Load -= OnCustomGridLoad;
                 this.HandleCreated -= OnHandleCreated;
             }

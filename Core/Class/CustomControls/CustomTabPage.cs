@@ -4,7 +4,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomTabPage : XtraTabPage, IThemeableControl
+    public class CustomTabPage : XtraTabPage//, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -13,8 +13,8 @@ namespace SewingProduction.Core.Class
 
         public CustomTabPage()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -23,13 +23,13 @@ namespace SewingProduction.Core.Class
             ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }

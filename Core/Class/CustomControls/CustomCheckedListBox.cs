@@ -4,15 +4,15 @@ using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class.CustomControls
 {
-    public class CustomCheckedListBox : CheckedListBox, IThemeable, IThemeableControl
+    public class CustomCheckedListBox : CheckedListBox//, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomCheckedListBox()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
@@ -20,12 +20,12 @@ namespace SewingProduction.Core.Class.CustomControls
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }

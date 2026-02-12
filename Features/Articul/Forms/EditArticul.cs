@@ -20,7 +20,7 @@ namespace SewingProduction.Features.Articul
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _artNewDataService = new ArtNewDataService(dbHelper);
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
             customTextBoxKod.Text = kodSQL;
             visibleSP(false);

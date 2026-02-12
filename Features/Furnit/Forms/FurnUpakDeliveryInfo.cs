@@ -39,7 +39,7 @@ namespace SewingProduction.form
             _dbHelper = new DatabaseHelper("ace");
             _furnitService = new FurnitService(_dbHelper);
             tbKodF.Text = _kodF;
-            ThemeManager.UpdateTheme(this);
+         //   ThemeManager.UpdateTheme(this);
 
         }
         public FurnUpakDeliveryInfo()

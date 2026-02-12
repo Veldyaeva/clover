@@ -13,7 +13,7 @@ using SewingProduction.Services;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomGridControlColumn : GridControl, SewingProduction.IThemeable, IThemeableControl
+    public class CustomGridControlColumn : GridControl//, SewingProduction.IThemeable//, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color? AlternateRowColor { get; set; }
@@ -30,8 +30,8 @@ namespace SewingProduction.Core.Class
         private int _formId;
         public CustomGridControlColumn()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            //ApplyTheme();
+            //ThemeManager.ThemeChanged += OnThemeChanged;
             ViewRegistered += OnViewRegistered;
         }
         public void ApplyTheme()
@@ -96,13 +96,13 @@ namespace SewingProduction.Core.Class
                 gridView.Appearance.FocusedRow.Options.UseFont = true;
             }
         }
-        private void OnThemeChanged() => ApplyTheme();
+        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                //ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
