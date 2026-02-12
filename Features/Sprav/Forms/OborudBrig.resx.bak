@@ -472,7 +472,7 @@
     <value>gridViewBrig</value>
   </data>
   <data name="&gt;&gt;gridViewBrig.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bindingZeh.Name" xml:space="preserve">
     <value>bindingZeh</value>
@@ -484,7 +484,7 @@
     <value>gridViewZeh</value>
   </data>
   <data name="&gt;&gt;gridViewZeh.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bindingOborud.Name" xml:space="preserve">
     <value>bindingOborud</value>
@@ -496,7 +496,7 @@
     <value>gridViewOborud</value>
   </data>
   <data name="&gt;&gt;gridViewOborud.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v25.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>OborudBrig</value>

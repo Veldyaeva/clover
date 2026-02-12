@@ -14,7 +14,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             InitializeComponent();
             this.Text = String.Format("О программе {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Версия {0}", GetDisplayVersion());
+            this.labelVersion.Text = String.Format("Версия {0} ({1})", GetDisplayVersion(), GetAppBitness());
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
@@ -186,28 +186,17 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 directory = directory.Parent;
             }
 
-            string repoProfilesDir = Path.Combine(@"D:\Work\sewingproduction", "Properties", "PublishProfiles");
-            if (Directory.Exists(repoProfilesDir))
-            {
-                string primaryPath = Path.Combine(repoProfilesDir, primaryFileName);
-                if (File.Exists(primaryPath))
-                {
-                    return primaryPath;
-                }
-
-                string fallbackPath = Path.Combine(repoProfilesDir, fallbackFileName);
-                if (File.Exists(fallbackPath))
-                {
-                    return fallbackPath;
-                }
-            }
-
             return null;
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private static string GetAppBitness()
+        {
+            return Environment.Is64BitProcess ? "x64" : "x86";
         }
     }
 }

@@ -10,11 +10,9 @@ namespace SewingProduction.Features.Articul.Models
     public class TovarGroupModel
     {
         public int TG_ID { get; set; }
-        public int TG_GlovalCode { get; set; }
-        public string TG_1cCode { get; set; }
-        public string TG_TC_ID { get; set; }
+        public int TG_TC_ID { get; set; }
         public string TG_GroupName { get; set; }
-        public int DeletionMark { get; set; }
+        public string TG_GroupName_short { get; set; }
 
 
     }

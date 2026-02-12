@@ -56,11 +56,7 @@ namespace SewingProduction.form
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {
-            //gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
             comboBoxVidProizv_Enter(sender, e);
-            //  _serviceBroker.StartBroker();
-            _serviceBroker.StartListening("*", "dbo.OborudBrig"); // имя таблицы/вьюхи какое-то для отладки
-
         }
         #region service broker
         // Интерфейс доступный сервис брокеру:

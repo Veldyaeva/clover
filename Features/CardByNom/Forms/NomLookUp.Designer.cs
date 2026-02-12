@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             gridControlRasNomList = new SewingProduction.Core.Class.CustomGridControl();
             gridViewRasNomList = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridRasNomListColumnNomZad = new DevExpress.XtraGrid.Columns.GridColumn();

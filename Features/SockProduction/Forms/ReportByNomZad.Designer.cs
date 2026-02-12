@@ -29,7 +29,7 @@ namespace SewingProduction.Features.SockProduction.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
             customTextBox6 = new CustomTextBox();
             customTextBox5 = new CustomTextBox();
             customTextBox4 = new CustomTextBox();
