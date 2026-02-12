@@ -30,17 +30,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanZagrVyazCheck));
-            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
-            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
-            labelStatus = new SewingProduction.Core.Class.CustomLabel();
+            layoutControl1 = new CustomLayoutControl();
+            customSimpleButton1 = new CustomSimpleButton();
+            labelStatus = new CustomLabel();
             comboBoxPodrVyazList = new CustomComboBox();
-            simpleButtonNextMonth = new SewingProduction.Core.Class.CustomSimpleButton();
-            simpleButtonPrevMonth = new SewingProduction.Core.Class.CustomSimpleButton();
-            buttonGetPzvCheck = new SewingProduction.Core.Class.CustomSimpleButton();
-            spinEditYear = new SewingProduction.Core.Class.CustomSpinEdit();
+            simpleButtonNextMonth = new CustomSimpleButton();
+            simpleButtonPrevMonth = new CustomSimpleButton();
+            buttonGetPzvCheck = new CustomSimpleButton();
+            spinEditYear = new CustomSpinEdit();
             comboBoxMonthList = new CustomComboBox();
-            customLabel2 = new SewingProduction.Core.Class.CustomLabel();
-            gridControlPzvCheck = new SewingProduction.Core.Class.CustomGridControl();
+            customLabel2 = new CustomLabel();
+            gridControlPzvCheck = new CustomGridControl();
             bandedGridViewPzvCheck = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             bandedGridPzvCheckColumnTabTab = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -109,12 +109,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // customSimpleButton1
             // 
-            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Appearance.Options.UseForeColor = true;
             customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
@@ -130,7 +126,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // labelStatus
             // 
             labelStatus.Font = new System.Drawing.Font("Arial", 10F);
-            labelStatus.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             labelStatus.Location = new System.Drawing.Point(12, 711);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new System.Drawing.Size(1832, 26);
@@ -139,10 +134,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // comboBoxPodrVyazList
             // 
-            comboBoxPodrVyazList.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             comboBoxPodrVyazList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxPodrVyazList.Font = new System.Drawing.Font("Arial", 10F);
-            comboBoxPodrVyazList.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxPodrVyazList.FormattingEnabled = true;
             comboBoxPodrVyazList.Location = new System.Drawing.Point(743, 12);
             comboBoxPodrVyazList.Name = "comboBoxPodrVyazList";
@@ -151,12 +144,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // simpleButtonNextMonth
             // 
-            simpleButtonNextMonth.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             simpleButtonNextMonth.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonNextMonth.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            simpleButtonNextMonth.Appearance.Options.UseBackColor = true;
             simpleButtonNextMonth.Appearance.Options.UseFont = true;
-            simpleButtonNextMonth.Appearance.Options.UseForeColor = true;
             simpleButtonNextMonth.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             simpleButtonNextMonth.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             simpleButtonNextMonth.AppearanceDisabled.Options.UseBackColor = true;
@@ -172,12 +161,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // simpleButtonPrevMonth
             // 
-            simpleButtonPrevMonth.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             simpleButtonPrevMonth.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonPrevMonth.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            simpleButtonPrevMonth.Appearance.Options.UseBackColor = true;
             simpleButtonPrevMonth.Appearance.Options.UseFont = true;
-            simpleButtonPrevMonth.Appearance.Options.UseForeColor = true;
             simpleButtonPrevMonth.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             simpleButtonPrevMonth.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             simpleButtonPrevMonth.AppearanceDisabled.Options.UseBackColor = true;
@@ -193,12 +178,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // buttonGetPzvCheck
             // 
-            buttonGetPzvCheck.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             buttonGetPzvCheck.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            buttonGetPzvCheck.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            buttonGetPzvCheck.Appearance.Options.UseBackColor = true;
             buttonGetPzvCheck.Appearance.Options.UseFont = true;
-            buttonGetPzvCheck.Appearance.Options.UseForeColor = true;
             buttonGetPzvCheck.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             buttonGetPzvCheck.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonGetPzvCheck.AppearanceDisabled.Options.UseBackColor = true;
@@ -233,10 +214,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // comboBoxMonthList
             // 
-            comboBoxMonthList.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             comboBoxMonthList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxMonthList.Font = new System.Drawing.Font("Arial", 10F);
-            comboBoxMonthList.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxMonthList.FormattingEnabled = true;
             comboBoxMonthList.Location = new System.Drawing.Point(70, 12);
             comboBoxMonthList.Name = "comboBoxMonthList";
@@ -497,8 +476,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         #endregion
-
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private Core.Class.CustomLabel customLabel2;
         private Core.Class.CustomGridControl gridControlPzvCheck;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewPzvCheck;
@@ -536,5 +513,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridPzvCheckColumnTabFioSokr;
         private Core.Class.CustomSimpleButton customSimpleButton1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private CustomLayoutControl layoutControl1;
     }
 }

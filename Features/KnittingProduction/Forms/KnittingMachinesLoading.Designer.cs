@@ -57,7 +57,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridKnitMachineLoadInfoColumnYearMonth = new DevExpress.XtraGrid.Columns.GridColumn();
             gridKnitMachineLoadInfoColumnKmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             gridKnitMachineLoadInfoColumnCombinedPszNom = new DevExpress.XtraGrid.Columns.GridColumn();
-            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl1 = new CustomLayoutControl();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
@@ -126,10 +126,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // сomboBoxKnitMachineClassList
             // 
-            сomboBoxKnitMachineClassList.BackColor = System.Drawing.Color.FromArgb(220, 240, 250);
             сomboBoxKnitMachineClassList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             сomboBoxKnitMachineClassList.Font = new System.Drawing.Font("Arial", 10F);
-            сomboBoxKnitMachineClassList.ForeColor = System.Drawing.Color.FromArgb(25, 75, 105);
             сomboBoxKnitMachineClassList.FormattingEnabled = true;
             сomboBoxKnitMachineClassList.Location = new System.Drawing.Point(86, 45);
             сomboBoxKnitMachineClassList.Name = "сomboBoxKnitMachineClassList";
@@ -456,7 +454,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnKmlNumber;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnYearMonth;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnCombinedPszNomCard;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
@@ -477,5 +474,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel repositoryItemHypertextLabelCombinedPszNomCard;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlID;
         private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repositoryItemRichTextEditCombinedPszNomCard;
+        private CustomLayoutControl layoutControl1;
     }
 }

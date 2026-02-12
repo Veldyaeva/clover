@@ -166,6 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public PlanZagrVyaz(UserClass User) : base(User)
         {
             InitializeComponent();
+            DxSkinFix.ResetLabelsToSkin(this);
             SetupGridNaryadZadanyEvents();
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
@@ -206,6 +207,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList.ShownEditor += gridViewPZVOperList_ShownEditor;
             gridViewPZVOperList.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
             vyazPodrKod = 1;
+        }
+        public static class DxSkinFix
+        {
+            public static void ResetLabelsToSkin(Control root)
+            {
+                foreach (Control c in root.Controls)
+                {
+                    if (c is LabelControl lc)
+                    {
+                        lc.Appearance.BackColor = Color.Empty;
+                        lc.Appearance.ForeColor = Color.Empty;
+                        lc.Appearance.Options.UseBackColor = false;
+                        lc.Appearance.Options.UseForeColor = false;
+                        lc.LookAndFeel.UseDefaultLookAndFeel = true;
+                    }
+
+                    if (c.HasChildren)
+                        ResetLabelsToSkin(c);
+                }
+            }
         }
         #region ServiceBroker
         private void InitObjectRestartMap()
