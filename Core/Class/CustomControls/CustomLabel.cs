@@ -105,7 +105,34 @@ namespace SewingProduction.Core.Class
                         Appearance.TextOptions.HAlignment = HorzAlignment.Near;
                         Appearance.TextOptions.VAlignment = VertAlignment.Center;
                         break;
+                    case ContentAlignment.TopCenter:
+                        Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+                        Appearance.TextOptions.VAlignment = VertAlignment.Top;
+                        break;
 
+                    case ContentAlignment.TopRight:
+                        Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+                        Appearance.TextOptions.VAlignment = VertAlignment.Top;
+                        break;
+
+                    case ContentAlignment.TopLeft:
+                        Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                        Appearance.TextOptions.VAlignment = VertAlignment.Top;
+                        break;
+                    case ContentAlignment.BottomCenter:
+                        Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+                        Appearance.TextOptions.VAlignment = VertAlignment.Bottom;
+                        break;
+
+                    case ContentAlignment.BottomRight:
+                        Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+                        Appearance.TextOptions.VAlignment = VertAlignment.Bottom;
+                        break;
+
+                    case ContentAlignment.BottomLeft:
+                        Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+                        Appearance.TextOptions.VAlignment = VertAlignment.Bottom;
+                        break;
                         // при необходимости добавьте остальные варианты
                 }
             }
