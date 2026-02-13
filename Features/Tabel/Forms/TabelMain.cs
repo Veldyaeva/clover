@@ -42,7 +42,7 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class TabelMain : CustomForm
     {
-        private string currentMG = "0126";
+        private string currentMG = DateTime.Today.ToString("MMyy");
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
@@ -85,6 +85,7 @@ namespace SewingProduction.Features.Tabel.Forms
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _tabelDataService = new TabelDataService(_dbHelper);
+            currentMG = GetCurrentMg();
         }
 
         private void OpenSpisokButton_Click(object sender, EventArgs e)
@@ -97,6 +98,11 @@ namespace SewingProduction.Features.Tabel.Forms
         {
 
 
+        }
+        private string GetCurrentMg()
+        {
+            DateTime today = DateTime.Today;
+            return today.ToString("MMyy");
         }
         private void CreateDayColumns(string mg)
         {
@@ -1063,6 +1069,21 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             MessageBox.Show($"{gridView1.FocusedColumn.VisibleIndex}");
             gridColumnFio.VisibleIndex = 3;
+        }
+
+        private void customButton4_Click_2(object sender, EventArgs e)
+        {
+            int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            TimeSheetReportSkladi report1 = new TimeSheetReportSkladi();
+            report1.RequestParameters = false;
+            report1.Parameters["groupString"].Value = "zl";
+            report1.Parameters["groupString"].Visible = false;
+            report1.Parameters["idgr"].Value = grId;
+            report1.Parameters["idgr"].Visible = false;
+            report1.Parameters["mg"].Value = currentMG;
+            report1.Parameters["mg"].Visible = false;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
         }
     }
 }

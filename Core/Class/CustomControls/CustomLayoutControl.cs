@@ -30,9 +30,12 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            // Используем системные цвета вместо цветовой темы
-            BackColor = SystemColors.Control;
-            ForeColor = SystemColors.ControlText;
+            var theme = ThemeManager.ActiveTheme;
+            if (theme == null)
+                return;
+
+            BackColor = theme.TextBoxBackground;
+            ForeColor = theme.LabelTextColor;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 

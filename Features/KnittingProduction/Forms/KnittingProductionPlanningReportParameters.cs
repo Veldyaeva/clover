@@ -55,7 +55,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _vyazService = new VyazService(_dbHelper);
             _bulkHelper = new BulkHelper();
             //_loadingScreen = new LoadingScreen();
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
 
         private async Task InitializeBindingsAsync()

@@ -69,7 +69,7 @@ namespace SewingProduction
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
             _furnitService = new FurnitService(_dbHelper);
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
 
         private async Task InitializeBindingsAsync()

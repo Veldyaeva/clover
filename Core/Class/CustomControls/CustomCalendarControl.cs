@@ -676,25 +676,24 @@ namespace SewingProduction.CustomControls
         {
             if (!UseThemeByDefault) return;
 
-            // Базируемся на системных цветах, без использования кастомной цветовой темы
             Font = ThemeManager.SharedSettings.DefaultFont;
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
+            BackColor = ThemeManager.ActiveTheme.GridBackground;
+            ForeColor = ThemeManager.ActiveTheme.GridTextColor;
 
             if (NormalDayBackColor.IsEmpty)
-                NormalDayBackColor = SystemColors.Window;
+                NormalDayBackColor = ThemeManager.ActiveTheme.GridRowBackground;
 
             if (OffDayBackColor.IsEmpty)
-                OffDayBackColor = SystemColors.ControlLight;
+                OffDayBackColor = ThemeManager.ActiveTheme.BandHighlightColor;
 
             if (OffDayForeColor.IsEmpty)
-                OffDayForeColor = SystemColors.GrayText;
+                OffDayForeColor = ThemeManager.ActiveTheme.GridTextColor;
 
             if (SpecialBackColor.IsEmpty)
-                SpecialBackColor = SystemColors.Info;
+                SpecialBackColor = ThemeManager.ActiveTheme.HighlightBackground;
 
             if (SpecialForeColor.IsEmpty)
-                SpecialForeColor = SystemColors.InfoText;
+                SpecialForeColor = ThemeManager.ActiveTheme.GridTextColor;
 
             ApplyZoom();
             Invalidate();

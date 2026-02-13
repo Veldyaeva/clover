@@ -17,8 +17,8 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            BackColor = System.Drawing.SystemColors.Window;
-            ForeColor = System.Drawing.SystemColors.WindowText;
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 

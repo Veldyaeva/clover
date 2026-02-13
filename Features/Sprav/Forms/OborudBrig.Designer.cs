@@ -163,6 +163,7 @@ namespace SewingProduction.form
             Controls.Add(tableLayoutPanel1);
             Name = "OborudBrig";
             Activated += OborudBrig_Activated;
+            FormClosing += OborudBrig_FormClosing;
             Load += OborudBrig_Load_1;
             ((System.ComponentModel.ISupportInitialize)gridBrig).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingBrig).EndInit();

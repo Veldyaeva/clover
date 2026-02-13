@@ -17,9 +17,11 @@ namespace SewingProduction.Features.Articul.Models
         public string grup { get; set; }
         public string articul { get; set; }
         public string mod { get; set; }
+        public string men { get; set; }
         public string text_mo { get; set; }
         public string tb_id { get; set; }
-        public string tg_id_n { get; set; }
         public string tgm_id { get; set; }
+        public int tg_id_n { get; set; }
+        public int tgm_id_n { get; set; }
     }
 }

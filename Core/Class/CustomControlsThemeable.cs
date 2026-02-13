@@ -529,7 +529,7 @@ namespace SewingProduction
     /// <summary>
     /// Кастомный прозрачный группбокс с черной обводкой
     /// </summary>
-    public class CustomGroupBox : GroupBox, IThemeableControl, IThemeable
+    public class CustomGroupBox : GroupBox, IThemeableControl//, IThemeable
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }

@@ -54,7 +54,8 @@ using Volatile = System.Threading.Volatile;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class PlanZagrVyaz : CustomForm, IThemeable, IServiceBrokerHost
+    public partial class PlanZagrVyaz : CustomForm//, IThemeable
+                                                  , IServiceBrokerHost
     //, IDataUpdatableForm, IDataUpdatableFormAsync
     {
         int vyazPodrKod = 0;
@@ -165,6 +166,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public PlanZagrVyaz(UserClass User) : base(User)
         {
             InitializeComponent();
+            DxSkinFix.ResetLabelsToSkin(this);
             SetupGridNaryadZadanyEvents();
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
@@ -178,7 +180,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _vyazService = new VyazService(_dbHelper);
             _mlService = new MlService(_dbHelper);
-            ThemeManager.UpdateTheme(this);
+        //    ThemeManager.UpdateTheme(this);
 
             _smenZadanyVyazBindingSource = new BindingSource
             {
@@ -205,6 +207,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewPZVOperList.ShownEditor += gridViewPZVOperList_ShownEditor;
             gridViewPZVOperList.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
             vyazPodrKod = 1;
+        }
+        public static class DxSkinFix
+        {
+            public static void ResetLabelsToSkin(Control root)
+            {
+                foreach (Control c in root.Controls)
+                {
+                    if (c is LabelControl lc)
+                    {
+                        lc.Appearance.BackColor = Color.Empty;
+                        lc.Appearance.ForeColor = Color.Empty;
+                        lc.Appearance.Options.UseBackColor = false;
+                        lc.Appearance.Options.UseForeColor = false;
+                        lc.LookAndFeel.UseDefaultLookAndFeel = true;
+                    }
+
+                    if (c.HasChildren)
+                        ResetLabelsToSkin(c);
+                }
+            }
         }
         #region ServiceBroker
         private void InitObjectRestartMap()

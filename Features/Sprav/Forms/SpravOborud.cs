@@ -27,14 +27,11 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravOborudDataService = new SpravOborudDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
 
         private void SpravOborud_Load(object sender, EventArgs e)
         {
-            //_serviceBroker.StartBroker();
-          //  _serviceBroker.StartListening("*", "dbo.OborudBrig"); // имя таблицы/вьюхи — здесь тоже не знаю
-
             label4.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
             label7.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
             label21.Text = "Спец. оборудование \n для оказания услуг";

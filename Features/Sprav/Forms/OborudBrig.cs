@@ -16,10 +16,6 @@ namespace SewingProduction.form
     /// </summary>
     public partial class OborudBrig : CustomForm, IDataUpdatableForm
     {
-        // Оснавная БД:
-        //string connectionString = Properties.Settings.Default.ACEConnectionString;
-        // Для тестов:
-        //string connectionString = Properties.Settings.Default.ACEtestConnectionString;
         private readonly OborudBrigDataService _oborudBrigDataService;
         private readonly ServiceBroker _serviceBroker;
         private SqlDependency sqlDependency;
@@ -33,15 +29,12 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            ThemeManager.UpdateTheme(this);
+          //  ThemeManager.UpdateTheme(this);
         }
         #region service broker
         private void OborudBrig_Load_1(object sender, EventArgs e)
         {
-            // _serviceBroker.StartBroker();
-            // Тут НЕ StartBroker()
-            // Здесь только подписка на изменения нужной таблицы:
-            _serviceBroker.StartListening( "*" , "dbo.OborudBrig"); // имя таблицы/вьюхи — ПОПРАВЬТЕ, КТО ПОНИМАЕТ
+            _serviceBroker.StartListening("*", "dbo.OborudBrig");
             gridOborud_Load(null, EventArgs.Empty);
         }
         // Интерфейс доступный сервис брокеру:
@@ -149,8 +142,8 @@ namespace SewingProduction.form
                 }
                 if (!flagStartListening)
                 {
-                    _serviceBroker.StartListening("idOB, idZeh, kod_ob, count", "OborudBrig");
-                  //  flagStartListening = _serviceBroker.GetFlagStartListening();
+                    //_serviceBroker.StartListening("idOB, idZeh, kod_ob, count", "OborudBrig");
+                    //  flagStartListening = _serviceBroker.GetFlagStartListening();
                 }
             }
         }
@@ -191,10 +184,9 @@ namespace SewingProduction.form
                 mainForm.OpenForm(new SpravBrig(_user, "spBrig", "Справочник Бригад"), "бригадыToolStripMenuItem");
             }
         }
-        protected override void OnFormClosed(FormClosedEventArgs e)
+        private void OborudBrig_FormClosing(object sender, FormClosingEventArgs e)
         {
             try { _serviceBroker?.StopListening(); } catch { }
-            base.OnFormClosed(e);
         }
     }
 

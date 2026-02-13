@@ -29,7 +29,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            ThemeManager.UpdateTheme(this);
+         //   ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;
@@ -51,7 +51,6 @@ namespace SewingProduction.form
             //gridControlSprav.InitializeAccess(_user, this.Name);
             //Загрузка комбобокса:
             comboBoxZeh_Enter(sender, e);
-            _serviceBroker.StartListening( "*", "dbo.OborudBrig"); // имя таблицы/вьюхи — в душе не ебу, какое, просто написала, чтоб проект запустить
 
             // _serviceBroker.StartBroker();
         }

@@ -10,11 +10,12 @@ namespace SewingProduction.Features.Articul.Models
     public class TovarCatDynsignModel
     {
         public int TCDS_ID { get; set; }
-        public int TCDS_GlovalCode { get; set; }
-        public string TCDS_1cCode { get; set; }
-        public string TCDS_TCAT_ID { get; set; }
+        public int TCDS_TCAT_ID { get; set; }
         public string TCDS_Name { get; set; }
-        public int DeletionMark { get; set; }
+
+        public int TCDS_id_spr { get; set; }
+        public string TCDS_ShortName { get; set; }
+        public string TCDS_SostName { get; set; }
 
 
     }

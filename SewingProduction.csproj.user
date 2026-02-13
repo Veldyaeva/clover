@@ -349,6 +349,9 @@
     <Compile Update="Report\TimeSheetReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\TimeSheetReportSkladi.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\VshivkiReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>

@@ -50,5 +50,11 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ace;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
     </Setting>
+    <Setting Name="AppSkin" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SettingsUpgraded" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

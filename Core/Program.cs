@@ -1,3 +1,6 @@
+using DevExpress.LookAndFeel;
+using DevExpress.Skins;
+using DevExpress.UserSkins;
 using DevExpress.XtraGrid.Localization;
 using DevExpress.XtraReports.Design;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +38,9 @@ namespace SewingProduction.Core
         private const int SW_RESTORE = 9;
 
         private static ILogger _logger = new HybridLogger();
+
+        private const string DefaultSkin = "Office 2019 Colorful";
+
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -43,6 +49,7 @@ namespace SewingProduction.Core
         {
             RegisterGlobalExceptionHandlers();
             // Уникальное имя Mutex
+            
             bool createdNew;
             bool isRestarting = args.Contains("--restart");
             using (var mutex = new Mutex(true, "SewingProductionAppMutex", out createdNew))
@@ -92,13 +99,59 @@ namespace SewingProduction.Core
 
                     SpMainForm mainForm = new SpMainForm();
                     Thread.Sleep(2000);
+
+                    //ThemeManager.LoadTheme();
+
+                    BonusSkins.Register();
+                    SkinManager.EnableFormSkins();
+
+                    // 1) Миграция user-настроек после обновления (один раз)
+                    if (!Properties.Settings.Default.SettingsUpgraded)
+                    {
+                        Properties.Settings.Default.Upgrade();
+                        Properties.Settings.Default.SettingsUpgraded = true;
+                        Properties.Settings.Default.Save();
+                    }
+
+                    // 2) Применяем тему безопасно (если темы нет — ставим дефолт)
+                    var saved = Properties.Settings.Default.AppSkin;
+                    var skinToApply = PickExistingSkinOrDefault(saved, DefaultSkin);
+
+                    UserLookAndFeel.Default.SkinName = skinToApply;
+
+                    // если сохранённая была битая/несуществующая — поправим и сохраним
+                    if (skinToApply != saved)
+                    {
+                        Properties.Settings.Default.AppSkin = skinToApply;
+                        Properties.Settings.Default.Save();
+                    }
+
                     ThemeManager.LoadTheme();
                     splashScreen.Close();
 
                     Application.Run(mainForm);
                 }
+
             }
         }
+        private static string PickExistingSkinOrDefault(string? skinName, string defaultSkin)
+        {
+            if (!string.IsNullOrWhiteSpace(skinName) && SkinExists(skinName))
+                return skinName;
+
+            // дефолт тоже проверим (на всякий случай)
+            if (SkinExists(defaultSkin))
+                return defaultSkin;
+
+            // крайний случай: берём первую доступную
+            return SkinManager.Default.Skins.Count > 0
+                ? SkinManager.Default.Skins[0].SkinName
+                : defaultSkin;
+        }
+
+        private static bool SkinExists(string skinName)
+            => SkinManager.Default.Skins.Cast<SkinContainer>()
+                .Any(s => string.Equals(s.SkinName, skinName, StringComparison.OrdinalIgnoreCase));
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<DatabaseHelper>();

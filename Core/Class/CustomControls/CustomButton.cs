@@ -130,6 +130,10 @@ namespace SewingProduction.Core.Class
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
 
+        private static bool UseDevExpressSkin =>
+        DevExpress.LookAndFeel.UserLookAndFeel.Default.ActiveSkinName != null;
+        // или заведите свой флаг ThemeManager.UseDevExpressSkin
+
         public CustomSimpleButton()
         {
             ApplyTheme();
@@ -143,6 +147,16 @@ namespace SewingProduction.Core.Class
 
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
+        //private void ResetToSkin()
+        //{
+        //    // Отпускаем цвета, пусть ими управляет скин
+        //    Appearance.BackColor = Color.Empty;
+        //    Appearance.ForeColor = Color.Empty;
+        //    Appearance.BorderColor = Color.Empty;
+        //    Appearance.Options.UseBackColor = false;
+        //    Appearance.Options.UseForeColor = false;
+        //    Appearance.Options.UseBorderColor = false;
+
 
         protected override void Dispose(bool disposing)
         {
