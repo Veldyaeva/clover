@@ -506,7 +506,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNDS
             // 
-            txbNDS.BackColor = Color.FromArgb(248, 248, 255);
             txbNDS.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNDS.Enabled = false;
             txbNDS.ErrorColor = Color.Red;
@@ -534,12 +533,10 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKodTnved
             // 
-            txbKodTnved.BackColor = Color.FromArgb(248, 248, 255);
             txbKodTnved.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKodTnved.ErrorColor = Color.Red;
             txbKodTnved.ErrorMessage = null;
             txbKodTnved.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbKodTnved.ForeColor = Color.FromArgb(72, 61, 139);
             txbKodTnved.Location = new Point(850, 227);
             txbKodTnved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKodTnved.Name = "txbKodTnved";
@@ -552,7 +549,6 @@ namespace SewingProduction.Features.Articul
             customLabel17.AutoSize = true;
             customLabel17.BackColor = Color.Transparent;
             customLabel17.Font = new Font("Arial", 8.25F);
-            // customLabel17.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel17.Location = new Point(458, 228);
             customLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel17.Name = "customLabel17";
@@ -562,12 +558,10 @@ namespace SewingProduction.Features.Articul
             // 
             // txbScNomer
             // 
-            txbScNomer.BackColor = Color.FromArgb(248, 248, 255);
             txbScNomer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbScNomer.ErrorColor = Color.Red;
             txbScNomer.ErrorMessage = null;
             txbScNomer.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbScNomer.ForeColor = Color.FromArgb(72, 61, 139);
             txbScNomer.Location = new Point(540, 227);
             txbScNomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbScNomer.Name = "txbScNomer";
@@ -577,10 +571,8 @@ namespace SewingProduction.Features.Articul
             // 
             // mtbDateOpis
             // 
-            mtbDateOpis.BackColor = Color.FromArgb(248, 248, 255);
             mtbDateOpis.BorderStyle = System.Windows.Forms.BorderStyle.None;
             mtbDateOpis.Font = new Font("Arial", 10F);
-            // mtbDateOpis.ForeColor = Color.FromArgb(72, 61, 139);
             mtbDateOpis.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             mtbDateOpis.Location = new Point(371, 227);
             mtbDateOpis.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -620,12 +612,10 @@ namespace SewingProduction.Features.Articul
             // txbRazmPrint
             // 
             txbRazmPrint.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbRazmPrint.BackColor = Color.FromArgb(248, 248, 255);
             txbRazmPrint.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbRazmPrint.ErrorColor = Color.Red;
             txbRazmPrint.ErrorMessage = null;
             txbRazmPrint.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbRazmPrint.ForeColor = Color.FromArgb(72, 61, 139);
             txbRazmPrint.Location = new Point(877, 178);
             txbRazmPrint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazmPrint.Name = "txbRazmPrint";
@@ -648,12 +638,10 @@ namespace SewingProduction.Features.Articul
             // 
             // txbRazm
             // 
-            txbRazm.BackColor = Color.FromArgb(248, 248, 255);
             txbRazm.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbRazm.ErrorColor = Color.Red;
             txbRazm.ErrorMessage = null;
             txbRazm.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbRazm.ForeColor = Color.FromArgb(72, 61, 139);
             txbRazm.Location = new Point(567, 178);
             txbRazm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazm.Name = "txbRazm";
@@ -677,12 +665,10 @@ namespace SewingProduction.Features.Articul
             // txbSost3
             // 
             txbSost3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost3.BackColor = Color.FromArgb(248, 248, 255);
             txbSost3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSost3.ErrorColor = Color.Red;
             txbSost3.ErrorMessage = null;
             txbSost3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbSost3.ForeColor = Color.FromArgb(72, 61, 139);
             txbSost3.Location = new Point(567, 153);
             txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost3.Name = "txbSost3";
@@ -706,12 +692,10 @@ namespace SewingProduction.Features.Articul
             // txbSost2
             // 
             txbSost2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost2.BackColor = Color.FromArgb(248, 248, 255);
             txbSost2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSost2.ErrorColor = Color.Red;
             txbSost2.ErrorMessage = null;
             txbSost2.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbSost2.ForeColor = Color.FromArgb(72, 61, 139);
             txbSost2.Location = new Point(567, 129);
             txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost2.Name = "txbSost2";
@@ -735,7 +719,6 @@ namespace SewingProduction.Features.Articul
             // txbSost
             // 
             txbSost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost.BackColor = Color.FromArgb(248, 248, 255);
             txbSost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSost.ErrorColor = Color.Red;
             txbSost.ErrorMessage = null;
@@ -765,7 +748,6 @@ namespace SewingProduction.Features.Articul
             // txbOpiGost
             // 
             txbOpiGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbOpiGost.BackColor = Color.FromArgb(248, 248, 255);
             txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpiGost.ErrorColor = Color.Red;
             txbOpiGost.ErrorMessage = null;
@@ -795,7 +777,6 @@ namespace SewingProduction.Features.Articul
             // txbNameGost
             // 
             txbNameGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbNameGost.BackColor = Color.FromArgb(248, 248, 255);
             txbNameGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNameGost.ErrorColor = Color.Red;
             txbNameGost.ErrorMessage = null;
@@ -839,7 +820,6 @@ namespace SewingProduction.Features.Articul
             // txbIdGost
             // 
             txbIdGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbIdGost.BackColor = Color.FromArgb(248, 248, 255);
             txbIdGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbIdGost.ErrorColor = Color.Red;
             txbIdGost.ErrorMessage = null;
@@ -869,7 +849,6 @@ namespace SewingProduction.Features.Articul
             // txbGrup
             // 
             txbGrup.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbGrup.BackColor = Color.FromArgb(248, 248, 255);
             txbGrup.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbGrup.ErrorColor = Color.Red;
             txbGrup.ErrorMessage = null;
@@ -898,7 +877,6 @@ namespace SewingProduction.Features.Articul
             // txbGrupMenName
             // 
             txbGrupMenName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbGrupMenName.BackColor = Color.FromArgb(248, 248, 255);
             txbGrupMenName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbGrupMenName.ErrorColor = Color.Red;
             txbGrupMenName.ErrorMessage = null;
@@ -926,7 +904,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbCountry
             // 
-            txbCountry.BackColor = Color.FromArgb(248, 248, 255);
             txbCountry.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbCountry.ErrorColor = Color.Red;
             txbCountry.ErrorMessage = null;
@@ -954,7 +931,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbAssort
             // 
-            txbAssort.BackColor = Color.FromArgb(248, 248, 255);
             txbAssort.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbAssort.ErrorColor = Color.Red;
             txbAssort.ErrorMessage = null;
@@ -982,7 +958,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTM
             // 
-            txbTM.BackColor = Color.FromArgb(248, 248, 255);
             txbTM.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTM.ErrorColor = Color.Red;
             txbTM.ErrorMessage = null;
@@ -1010,7 +985,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSeason
             // 
-            txbSeason.BackColor = Color.FromArgb(248, 248, 255);
             txbSeason.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSeason.ErrorColor = Color.Red;
             txbSeason.ErrorMessage = null;
@@ -1049,7 +1023,6 @@ namespace SewingProduction.Features.Articul
             // txbMod
             // 
             txbMod.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbMod.BackColor = Color.FromArgb(248, 248, 255);
             txbMod.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbMod.ErrorColor = Color.Red;
             txbMod.ErrorMessage = null;
@@ -1079,7 +1052,6 @@ namespace SewingProduction.Features.Articul
             // txbArticul
             // 
             txbArticul.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbArticul.BackColor = Color.FromArgb(248, 248, 255);
             txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbArticul.ErrorColor = Color.Red;
             txbArticul.ErrorMessage = null;
@@ -1095,7 +1067,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbPo
             // 
-            txbPo.BackColor = Color.FromArgb(248, 248, 255);
             txbPo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbPo.ErrorColor = Color.Red;
             txbPo.ErrorMessage = null;
@@ -1123,7 +1094,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKod
             // 
-            txbKod.BackColor = Color.FromArgb(248, 248, 255);
             txbKod.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKod.ErrorColor = Color.Red;
             txbKod.ErrorMessage = null;
@@ -1606,7 +1576,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbOpis_t7
             // 
-            txbOpis_t7.BackColor = Color.FromArgb(248, 248, 255);
             txbOpis_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpis_t7.ErrorColor = Color.Red;
             txbOpis_t7.ErrorMessage = null;
@@ -1621,7 +1590,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbOpis_t6
             // 
-            txbOpis_t6.BackColor = Color.FromArgb(248, 248, 255);
             txbOpis_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpis_t6.ErrorColor = Color.Red;
             txbOpis_t6.ErrorMessage = null;
@@ -1636,7 +1604,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbOpis_t1
             // 
-            txbOpis_t1.BackColor = Color.FromArgb(248, 248, 255);
             txbOpis_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpis_t1.ErrorColor = Color.Red;
             txbOpis_t1.ErrorMessage = null;
@@ -1651,7 +1618,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbOpis_t5
             // 
-            txbOpis_t5.BackColor = Color.FromArgb(248, 248, 255);
             txbOpis_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpis_t5.ErrorColor = Color.Red;
             txbOpis_t5.ErrorMessage = null;
@@ -1666,7 +1632,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbOpis_t2
             // 
-            txbOpis_t2.BackColor = Color.FromArgb(248, 248, 255);
             txbOpis_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpis_t2.ErrorColor = Color.Red;
             txbOpis_t2.ErrorMessage = null;
@@ -1681,7 +1646,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbOpis_t4
             // 
-            txbOpis_t4.BackColor = Color.FromArgb(248, 248, 255);
             txbOpis_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpis_t4.ErrorColor = Color.Red;
             txbOpis_t4.ErrorMessage = null;
@@ -1696,7 +1660,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbOpis_t3
             // 
-            txbOpis_t3.BackColor = Color.FromArgb(248, 248, 255);
             txbOpis_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpis_t3.ErrorColor = Color.Red;
             txbOpis_t3.ErrorMessage = null;
@@ -1729,7 +1692,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach7
             // 
-            txbKfKach7.BackColor = Color.FromArgb(248, 248, 255);
             txbKfKach7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKfKach7.ErrorColor = Color.Red;
             txbKfKach7.ErrorMessage = null;
@@ -1744,7 +1706,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach6
             // 
-            txbKfKach6.BackColor = Color.FromArgb(248, 248, 255);
             txbKfKach6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKfKach6.ErrorColor = Color.Red;
             txbKfKach6.ErrorMessage = null;
@@ -1759,7 +1720,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach5
             // 
-            txbKfKach5.BackColor = Color.FromArgb(248, 248, 255);
             txbKfKach5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKfKach5.ErrorColor = Color.Red;
             txbKfKach5.ErrorMessage = null;
@@ -1774,7 +1734,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach4
             // 
-            txbKfKach4.BackColor = Color.FromArgb(248, 248, 255);
             txbKfKach4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKfKach4.ErrorColor = Color.Red;
             txbKfKach4.ErrorMessage = null;
@@ -1789,7 +1748,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach3
             // 
-            txbKfKach3.BackColor = Color.FromArgb(248, 248, 255);
             txbKfKach3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKfKach3.ErrorColor = Color.Red;
             txbKfKach3.ErrorMessage = null;
@@ -1804,7 +1762,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach2
             // 
-            txbKfKach2.BackColor = Color.FromArgb(248, 248, 255);
             txbKfKach2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKfKach2.ErrorColor = Color.Red;
             txbKfKach2.ErrorMessage = null;
@@ -1819,7 +1776,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach1
             // 
-            txbKfKach1.BackColor = Color.FromArgb(248, 248, 255);
             txbKfKach1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKfKach1.ErrorColor = Color.Red;
             txbKfKach1.ErrorMessage = null;
@@ -1851,7 +1807,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent7
             // 
-            txtBrakPercent7.BackColor = Color.FromArgb(248, 248, 255);
             txtBrakPercent7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtBrakPercent7.ErrorColor = Color.Red;
             txtBrakPercent7.ErrorMessage = null;
@@ -1866,7 +1821,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent6
             // 
-            txtBrakPercent6.BackColor = Color.FromArgb(248, 248, 255);
             txtBrakPercent6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtBrakPercent6.ErrorColor = Color.Red;
             txtBrakPercent6.ErrorMessage = null;
@@ -1881,7 +1835,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent1
             // 
-            txtBrakPercent1.BackColor = Color.FromArgb(248, 248, 255);
             txtBrakPercent1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtBrakPercent1.ErrorColor = Color.Red;
             txtBrakPercent1.ErrorMessage = null;
@@ -1896,7 +1849,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent5
             // 
-            txtBrakPercent5.BackColor = Color.FromArgb(248, 248, 255);
             txtBrakPercent5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtBrakPercent5.ErrorColor = Color.Red;
             txtBrakPercent5.ErrorMessage = null;
@@ -1911,7 +1863,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent2
             // 
-            txtBrakPercent2.BackColor = Color.FromArgb(248, 248, 255);
             txtBrakPercent2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtBrakPercent2.ErrorColor = Color.Red;
             txtBrakPercent2.ErrorMessage = null;
@@ -1926,7 +1877,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent4
             // 
-            txtBrakPercent4.BackColor = Color.FromArgb(248, 248, 255);
             txtBrakPercent4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtBrakPercent4.ErrorColor = Color.Red;
             txtBrakPercent4.ErrorMessage = null;
@@ -1941,7 +1891,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent3
             // 
-            txtBrakPercent3.BackColor = Color.FromArgb(248, 248, 255);
             txtBrakPercent3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txtBrakPercent3.ErrorColor = Color.Red;
             txtBrakPercent3.ErrorMessage = null;
@@ -1972,7 +1921,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTkanSeb_t7
             // 
-            txbTkanSeb_t7.BackColor = Color.FromArgb(248, 248, 255);
             txbTkanSeb_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTkanSeb_t7.ErrorColor = Color.Red;
             txbTkanSeb_t7.ErrorMessage = null;
@@ -1987,7 +1935,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTkanSeb_t6
             // 
-            txbTkanSeb_t6.BackColor = Color.FromArgb(248, 248, 255);
             txbTkanSeb_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTkanSeb_t6.ErrorColor = Color.Red;
             txbTkanSeb_t6.ErrorMessage = null;
@@ -2002,7 +1949,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTkanSeb_t1
             // 
-            txbTkanSeb_t1.BackColor = Color.FromArgb(248, 248, 255);
             txbTkanSeb_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTkanSeb_t1.ErrorColor = Color.Red;
             txbTkanSeb_t1.ErrorMessage = null;
@@ -2017,7 +1963,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTkanSeb_t5
             // 
-            txbTkanSeb_t5.BackColor = Color.FromArgb(248, 248, 255);
             txbTkanSeb_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTkanSeb_t5.ErrorColor = Color.Red;
             txbTkanSeb_t5.ErrorMessage = null;
@@ -2032,7 +1977,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTkanSeb_t2
             // 
-            txbTkanSeb_t2.BackColor = Color.FromArgb(248, 248, 255);
             txbTkanSeb_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTkanSeb_t2.ErrorColor = Color.Red;
             txbTkanSeb_t2.ErrorMessage = null;
@@ -2047,7 +1991,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTkanSeb_t4
             // 
-            txbTkanSeb_t4.BackColor = Color.FromArgb(248, 248, 255);
             txbTkanSeb_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTkanSeb_t4.ErrorColor = Color.Red;
             txbTkanSeb_t4.ErrorMessage = null;
@@ -2062,7 +2005,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbTkanSeb_t3
             // 
-            txbTkanSeb_t3.BackColor = Color.FromArgb(248, 248, 255);
             txbTkanSeb_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTkanSeb_t3.ErrorColor = Color.Red;
             txbTkanSeb_t3.ErrorMessage = null;
@@ -2093,7 +2035,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNorm_t7
             // 
-            txbNorm_t7.BackColor = Color.FromArgb(248, 248, 255);
             txbNorm_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t7.ErrorColor = Color.Red;
             txbNorm_t7.ErrorMessage = null;
@@ -2108,7 +2049,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNorm_t6
             // 
-            txbNorm_t6.BackColor = Color.FromArgb(248, 248, 255);
             txbNorm_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t6.ErrorColor = Color.Red;
             txbNorm_t6.ErrorMessage = null;
@@ -2123,7 +2063,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNorm_t1
             // 
-            txbNorm_t1.BackColor = Color.FromArgb(248, 248, 255);
             txbNorm_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t1.ErrorColor = Color.Red;
             txbNorm_t1.ErrorMessage = null;
@@ -2138,7 +2077,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNorm_t5
             // 
-            txbNorm_t5.BackColor = Color.FromArgb(248, 248, 255);
             txbNorm_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t5.ErrorColor = Color.Red;
             txbNorm_t5.ErrorMessage = null;
@@ -2153,7 +2091,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNorm_t2
             // 
-            txbNorm_t2.BackColor = Color.FromArgb(248, 248, 255);
             txbNorm_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t2.ErrorColor = Color.Red;
             txbNorm_t2.ErrorMessage = null;
@@ -2168,7 +2105,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNorm_t4
             // 
-            txbNorm_t4.BackColor = Color.FromArgb(248, 248, 255);
             txbNorm_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t4.ErrorColor = Color.Red;
             txbNorm_t4.ErrorMessage = null;
@@ -2183,7 +2119,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNorm_t3
             // 
-            txbNorm_t3.BackColor = Color.FromArgb(248, 248, 255);
             txbNorm_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t3.ErrorColor = Color.Red;
             txbNorm_t3.ErrorMessage = null;
@@ -2215,7 +2150,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak7
             // 
-            txbBrak7.BackColor = Color.FromArgb(248, 248, 255);
             txbBrak7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrak7.ErrorColor = Color.Red;
             txbBrak7.ErrorMessage = null;
@@ -2230,7 +2164,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak1
             // 
-            txbBrak1.BackColor = Color.FromArgb(248, 248, 255);
             txbBrak1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrak1.ErrorColor = Color.Red;
             txbBrak1.ErrorMessage = null;
@@ -2245,7 +2178,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak6
             // 
-            txbBrak6.BackColor = Color.FromArgb(248, 248, 255);
             txbBrak6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrak6.ErrorColor = Color.Red;
             txbBrak6.ErrorMessage = null;
@@ -2260,7 +2192,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak2
             // 
-            txbBrak2.BackColor = Color.FromArgb(248, 248, 255);
             txbBrak2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrak2.ErrorColor = Color.Red;
             txbBrak2.ErrorMessage = null;
@@ -2275,7 +2206,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak5
             // 
-            txbBrak5.BackColor = Color.FromArgb(248, 248, 255);
             txbBrak5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrak5.ErrorColor = Color.Red;
             txbBrak5.ErrorMessage = null;
@@ -2290,7 +2220,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak3
             // 
-            txbBrak3.BackColor = Color.FromArgb(248, 248, 255);
             txbBrak3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrak3.ErrorColor = Color.Red;
             txbBrak3.ErrorMessage = null;
@@ -2305,7 +2234,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak4
             // 
-            txbBrak4.BackColor = Color.FromArgb(248, 248, 255);
             txbBrak4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrak4.ErrorColor = Color.Red;
             txbBrak4.ErrorMessage = null;
@@ -2424,7 +2352,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrakAll
             // 
-            txbBrakAll.BackColor = Color.FromArgb(248, 248, 255);
             txbBrakAll.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrakAll.ErrorColor = Color.Red;
             txbBrakAll.ErrorMessage = null;
@@ -2491,7 +2418,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSeb
             // 
-            txbSeb.BackColor = Color.FromArgb(248, 248, 255);
             txbSeb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSeb.ErrorColor = Color.Red;
             txbSeb.ErrorMessage = null;
@@ -2519,7 +2445,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNormt
             // 
-            txbNormt.BackColor = Color.FromArgb(248, 248, 255);
             txbNormt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNormt.ErrorColor = Color.Red;
             txbNormt.ErrorMessage = null;
@@ -2952,7 +2877,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBox1
             // 
-            customTextBox1.BackColor = Color.FromArgb(248, 248, 255);
             customTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             customTextBox1.ErrorColor = Color.Red;
             customTextBox1.ErrorMessage = null;
@@ -2967,7 +2891,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSebRecom
             // 
-            txbSebRecom.BackColor = Color.FromArgb(248, 248, 255);
             txbSebRecom.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSebRecom.ErrorColor = Color.Red;
             txbSebRecom.ErrorMessage = null;
@@ -3022,7 +2945,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKoef
             // 
-            txbKoef.BackColor = Color.FromArgb(248, 248, 255);
             txbKoef.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKoef.ErrorColor = Color.Red;
             txbKoef.ErrorMessage = null;
@@ -3047,7 +2969,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSebProizv
             // 
-            txbSebProizv.BackColor = Color.FromArgb(248, 248, 255);
             txbSebProizv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSebProizv.ErrorColor = Color.Red;
             txbSebProizv.ErrorMessage = null;
@@ -3071,7 +2992,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKoefVedDG
             // 
-            txbKoefVedDG.BackColor = Color.FromArgb(248, 248, 255);
             txbKoefVedDG.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKoefVedDG.ErrorColor = Color.Red;
             txbKoefVedDG.ErrorMessage = null;
@@ -3095,7 +3015,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKoefPr
             // 
-            txbKoefPr.BackColor = Color.FromArgb(248, 248, 255);
             txbKoefPr.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKoefPr.ErrorColor = Color.Red;
             txbKoefPr.ErrorMessage = null;
@@ -3119,7 +3038,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSebDop
             // 
-            txbSebDop.BackColor = Color.FromArgb(248, 248, 255);
             txbSebDop.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSebDop.ErrorColor = Color.Red;
             txbSebDop.ErrorMessage = null;
@@ -3228,7 +3146,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSumZarpl
             // 
-            txbSumZarpl.BackColor = Color.FromArgb(248, 248, 255);
             txbSumZarpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSumZarpl.ErrorColor = Color.Red;
             txbSumZarpl.ErrorMessage = null;
@@ -3243,7 +3160,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSumKomplNum
             // 
-            txbSumKomplNum.BackColor = Color.FromArgb(248, 248, 255);
             txbSumKomplNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSumKomplNum.ErrorColor = Color.Red;
             txbSumKomplNum.ErrorMessage = null;
@@ -3258,7 +3174,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSek
             // 
-            txbSek.BackColor = Color.FromArgb(248, 248, 255);
             txbSek.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSek.ErrorColor = Color.Red;
             txbSek.ErrorMessage = null;
@@ -3300,7 +3215,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSumSebRaskr
             // 
-            txbSumSebRaskr.BackColor = Color.FromArgb(248, 248, 255);
             txbSumSebRaskr.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSumSebRaskr.ErrorColor = Color.Red;
             txbSumSebRaskr.ErrorMessage = null;
@@ -3358,7 +3272,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSumStrVznos
             // 
-            txbSumStrVznos.BackColor = Color.FromArgb(248, 248, 255);
             txbSumStrVznos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSumStrVznos.ErrorColor = Color.Red;
             txbSumStrVznos.ErrorMessage = null;
@@ -3412,7 +3325,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSumDopOpl
             // 
-            txbSumDopOpl.BackColor = Color.FromArgb(248, 248, 255);
             txbSumDopOpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSumDopOpl.ErrorColor = Color.Red;
             txbSumDopOpl.ErrorMessage = null;
@@ -3453,7 +3365,6 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSebz
             // 
-            txbSebz.BackColor = Color.FromArgb(248, 248, 255);
             txbSebz.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSebz.ErrorColor = Color.Red;
             txbSebz.ErrorMessage = null;

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customLabel2 = new SewingProduction.Core.Class.CustomLabel();
+            customDateTimePicker1 = new CustomDateTimePicker();
             customButton3 = new SewingProduction.Core.Class.CustomButton();
             customButton2 = new SewingProduction.Core.Class.CustomButton();
             customButton1 = new SewingProduction.Core.Class.CustomButton();
@@ -46,9 +48,7 @@
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            customDateTimePicker1 = new CustomDateTimePicker();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            customLabel2 = new SewingProduction.Core.Class.CustomLabel();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
@@ -86,26 +86,43 @@
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
+            // customLabel2
+            // 
+            customLabel2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.Appearance.Options.UseFont = true;
+            customLabel2.Location = new System.Drawing.Point(12, 166);
+            customLabel2.Name = "customLabel2";
+            customLabel2.Size = new System.Drawing.Size(125, 16);
+            customLabel2.StyleController = layoutControl1;
+            customLabel2.TabIndex = 13;
+            customLabel2.Text = "Факт. дата перевода";
+            customLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // customDateTimePicker1
+            // 
+            customDateTimePicker1.Font = new System.Drawing.Font("Arial", 10F);
+            customDateTimePicker1.Location = new System.Drawing.Point(141, 166);
+            customDateTimePicker1.Name = "customDateTimePicker1";
+            customDateTimePicker1.ObjectName = null;
+            customDateTimePicker1.Size = new System.Drawing.Size(303, 23);
+            customDateTimePicker1.TabIndex = 12;
+            // 
             // customButton3
             // 
-            // customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            // customButton3.ForeColor = System.Drawing.Color.Black;
-            customButton3.Location = new System.Drawing.Point(339, 315);
+            customButton3.Location = new System.Drawing.Point(339, 190);
             customButton3.Name = "customButton3";
-            customButton3.Size = new System.Drawing.Size(105, 98);
+            customButton3.Size = new System.Drawing.Size(105, 223);
             customButton3.TabIndex = 11;
             customButton3.Text = "Печать";
             customButton3.UseVisualStyleBackColor = false;
             // 
             // customButton2
             // 
-            // customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            // customButton2.ForeColor = System.Drawing.Color.Black;
-            customButton2.Location = new System.Drawing.Point(177, 315);
+            customButton2.Location = new System.Drawing.Point(177, 190);
             customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(158, 98);
+            customButton2.Size = new System.Drawing.Size(158, 223);
             customButton2.TabIndex = 10;
             customButton2.Text = "Нет";
             customButton2.UseVisualStyleBackColor = false;
@@ -113,12 +130,10 @@
             // 
             // customButton1
             // 
-            // customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            // customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(12, 315);
+            customButton1.Location = new System.Drawing.Point(12, 190);
             customButton1.Name = "customButton1";
-            customButton1.Size = new System.Drawing.Size(161, 98);
+            customButton1.Size = new System.Drawing.Size(161, 223);
             customButton1.TabIndex = 9;
             customButton1.Text = "Да";
             customButton1.UseVisualStyleBackColor = false;
@@ -126,12 +141,9 @@
             // 
             // EditPodrLookUpEdit
             // 
-            EditPodrLookUpEdit.Location = new System.Drawing.Point(12, 265);
+            EditPodrLookUpEdit.Location = new System.Drawing.Point(12, 140);
             EditPodrLookUpEdit.Name = "EditPodrLookUpEdit";
-            // EditPodrLookUpEdit.Properties.Appearance.BackColor = System.Drawing.Color.White;
             EditPodrLookUpEdit.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // EditPodrLookUpEdit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            EditPodrLookUpEdit.Properties.Appearance.Options.UseBackColor = true;
             EditPodrLookUpEdit.Properties.Appearance.Options.UseFont = true;
             EditPodrLookUpEdit.Properties.Appearance.Options.UseForeColor = true;
             EditPodrLookUpEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -142,43 +154,51 @@
             // 
             // customLabel4
             // 
-            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabel4.ForeColor = System.Drawing.Color.Black;
-            customLabel4.Location = new System.Drawing.Point(12, 179);
+            customLabel4.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.Appearance.Options.UseFont = true;
+            customLabel4.Location = new System.Drawing.Point(12, 120);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(432, 82);
+            customLabel4.Size = new System.Drawing.Size(87, 16);
+            customLabel4.StyleController = layoutControl1;
             customLabel4.TabIndex = 7;
             customLabel4.Text = "переводится в";
+            customLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PodrText
             // 
-            PodrText.Font = new System.Drawing.Font("Arial", 20F);
-            // PodrText.ForeColor = System.Drawing.Color.Black;
-            PodrText.Location = new System.Drawing.Point(12, 115);
+            PodrText.Appearance.Font = new System.Drawing.Font("Arial", 20F);
+            PodrText.Appearance.Options.UseFont = true;
+            PodrText.Location = new System.Drawing.Point(12, 84);
             PodrText.Name = "PodrText";
-            PodrText.Size = new System.Drawing.Size(432, 60);
+            PodrText.Size = new System.Drawing.Size(198, 32);
+            PodrText.StyleController = layoutControl1;
             PodrText.TabIndex = 6;
             PodrText.Text = "Подразделение";
+            PodrText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // fioEmployee
             // 
-            fioEmployee.Font = new System.Drawing.Font("Arial", 20F);
-            // fioEmployee.ForeColor = System.Drawing.Color.Black;
-            fioEmployee.Location = new System.Drawing.Point(12, 58);
+            fioEmployee.Appearance.Font = new System.Drawing.Font("Arial", 20F);
+            fioEmployee.Appearance.Options.UseFont = true;
+            fioEmployee.Location = new System.Drawing.Point(12, 48);
             fioEmployee.Name = "fioEmployee";
-            fioEmployee.Size = new System.Drawing.Size(432, 53);
+            fioEmployee.Size = new System.Drawing.Size(117, 32);
+            fioEmployee.StyleController = layoutControl1;
             fioEmployee.TabIndex = 5;
             fioEmployee.Text = "Работник";
+            fioEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel1
             // 
-            customLabel1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
-            // customLabel1.ForeColor = System.Drawing.Color.Black;
+            customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
+            customLabel1.Appearance.Options.UseFont = true;
             customLabel1.Location = new System.Drawing.Point(12, 12);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(432, 42);
+            customLabel1.Size = new System.Drawing.Size(117, 32);
+            customLabel1.StyleController = layoutControl1;
             customLabel1.TabIndex = 4;
             customLabel1.Text = "Перевод";
+            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Root
             // 
@@ -194,37 +214,37 @@
             layoutControlItem1.Control = customLabel1;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(436, 46);
+            layoutControlItem1.Size = new System.Drawing.Size(436, 36);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = fioEmployee;
-            layoutControlItem2.Location = new System.Drawing.Point(0, 46);
+            layoutControlItem2.Location = new System.Drawing.Point(0, 36);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(436, 57);
+            layoutControlItem2.Size = new System.Drawing.Size(436, 36);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem3
             // 
             layoutControlItem3.Control = PodrText;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 103);
+            layoutControlItem3.Location = new System.Drawing.Point(0, 72);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(436, 64);
+            layoutControlItem3.Size = new System.Drawing.Size(436, 36);
             layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = customLabel4;
-            layoutControlItem4.Location = new System.Drawing.Point(0, 167);
+            layoutControlItem4.Location = new System.Drawing.Point(0, 108);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(436, 86);
+            layoutControlItem4.Size = new System.Drawing.Size(436, 20);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = EditPodrLookUpEdit;
-            layoutControlItem5.Location = new System.Drawing.Point(0, 253);
+            layoutControlItem5.Location = new System.Drawing.Point(0, 128);
             layoutControlItem5.Name = "layoutControlItem5";
             layoutControlItem5.Size = new System.Drawing.Size(436, 26);
             layoutControlItem5.TextVisible = false;
@@ -232,62 +252,41 @@
             // layoutControlItem6
             // 
             layoutControlItem6.Control = customButton1;
-            layoutControlItem6.Location = new System.Drawing.Point(0, 303);
+            layoutControlItem6.Location = new System.Drawing.Point(0, 178);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(165, 102);
+            layoutControlItem6.Size = new System.Drawing.Size(165, 227);
             layoutControlItem6.TextVisible = false;
             // 
             // layoutControlItem7
             // 
             layoutControlItem7.Control = customButton2;
-            layoutControlItem7.Location = new System.Drawing.Point(165, 303);
+            layoutControlItem7.Location = new System.Drawing.Point(165, 178);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(162, 102);
+            layoutControlItem7.Size = new System.Drawing.Size(162, 227);
             layoutControlItem7.TextVisible = false;
             // 
             // layoutControlItem8
             // 
             layoutControlItem8.Control = customButton3;
-            layoutControlItem8.Location = new System.Drawing.Point(327, 303);
+            layoutControlItem8.Location = new System.Drawing.Point(327, 178);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(109, 102);
+            layoutControlItem8.Size = new System.Drawing.Size(109, 227);
             layoutControlItem8.TextVisible = false;
-            // 
-            // customDateTimePicker1
-            // 
-            // customDateTimePicker1.BackColor = System.Drawing.Color.White;
-            customDateTimePicker1.Font = new System.Drawing.Font("Arial", 10F);
-            // customDateTimePicker1.ForeColor = System.Drawing.Color.Black;
-            customDateTimePicker1.Location = new System.Drawing.Point(170, 291);
-            customDateTimePicker1.Name = "customDateTimePicker1";
-            customDateTimePicker1.ObjectName = null;
-            customDateTimePicker1.Size = new System.Drawing.Size(274, 23);
-            customDateTimePicker1.TabIndex = 12;
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = customDateTimePicker1;
-            layoutControlItem9.Location = new System.Drawing.Point(158, 279);
+            layoutControlItem9.Location = new System.Drawing.Point(129, 154);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(278, 24);
+            layoutControlItem9.Size = new System.Drawing.Size(307, 24);
             layoutControlItem9.TextVisible = false;
-            // 
-            // customLabel2
-            // 
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabel2.ForeColor = System.Drawing.Color.Black;
-            customLabel2.Location = new System.Drawing.Point(12, 291);
-            customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(154, 20);
-            customLabel2.TabIndex = 13;
-            customLabel2.Text = "Факт. дата перевода";
             // 
             // layoutControlItem10
             // 
             layoutControlItem10.Control = customLabel2;
-            layoutControlItem10.Location = new System.Drawing.Point(0, 279);
+            layoutControlItem10.Location = new System.Drawing.Point(0, 154);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(158, 24);
+            layoutControlItem10.Size = new System.Drawing.Size(129, 24);
             layoutControlItem10.TextVisible = false;
             // 
             // EmployeeTransfer

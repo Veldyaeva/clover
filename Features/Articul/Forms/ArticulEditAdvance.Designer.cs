@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -55,6 +55,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            chbArh = new CustomCheckBox();
             cbTkan = new CustomSearchLookUpEdit();
             txtSeb_rekom = new CustomTextBoxEx();
             txtSum_sebraskr = new CustomTextBoxEx();
@@ -229,7 +230,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem85 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem86 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem87 = new DevExpress.XtraLayout.LayoutControlItem();
-            chbArh = new CustomCheckBox();
+            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             chkPres = new CustomCheckBox();
             chkStra = new CustomCheckBox();
             chkBus = new CustomCheckBox();
@@ -261,7 +262,6 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)gridEditAdRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewEditAdvRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
@@ -446,6 +446,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem85).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem86).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem87).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
@@ -468,7 +469,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem24).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             SuspendLayout();
             // 
             // gridEditAdRazm
@@ -478,17 +478,13 @@ namespace SewingProduction.Features.Articul.Forms
             gridEditAdRazm.MainView = gridViewEditAdvRazm;
             gridEditAdRazm.Name = "gridEditAdRazm";
             gridEditAdRazm.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit1 });
-            gridEditAdRazm.Size = new System.Drawing.Size(315, 255);
+            gridEditAdRazm.Size = new System.Drawing.Size(315, 254);
             gridEditAdRazm.TabIndex = 0;
             gridEditAdRazm.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewEditAdvRazm });
             // 
             // gridViewEditAdvRazm
             // 
-            // gridViewEditAdvRazm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            gridViewEditAdvRazm.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewEditAdvRazm.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridViewEditAdvRazm.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridViewEditAdvRazm.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewEditAdvRazm.Appearance.FocusedRow.Options.UseFont = true;
             gridViewEditAdvRazm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcEditKod, gcRazm });
             gridViewEditAdvRazm.GridControl = gridEditAdRazm;
@@ -545,24 +541,19 @@ namespace SewingProduction.Features.Articul.Forms
             // txbSost3
             // 
             txbSost3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost3.Location = new System.Drawing.Point(141, 301);
+            txbSost3.Location = new System.Drawing.Point(133, 299);
             txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost3.Name = "txbSost3";
             txbSost3.ObjectName = null;
-            txbSost3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSost3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // txbSost3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbSost3.Properties.Appearance.Options.UseBackColor = true;
             txbSost3.Properties.Appearance.Options.UseFont = true;
-            txbSost3.Properties.Appearance.Options.UseForeColor = true;
-            txbSost3.Size = new System.Drawing.Size(527, 22);
+            txbSost3.Size = new System.Drawing.Size(535, 22);
             txbSost3.StyleController = dataLayoutCommonArticul;
             txbSost3.TabIndex = 30;
             // 
             // dataLayoutCommonArticul
             // 
             dataLayoutCommonArticul.AccessibleRole = System.Windows.Forms.AccessibleRole.Pane;
-            // dataLayoutCommonArticul.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             dataLayoutCommonArticul.Controls.Add(customLayoutControl1);
             dataLayoutCommonArticul.Controls.Add(chbArh);
             dataLayoutCommonArticul.Controls.Add(cbTkan);
@@ -642,7 +633,7 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutCommonArticul.Controls.Add(cbTM);
             dataLayoutCommonArticul.Controls.Add(cbuKod_t1);
             dataLayoutCommonArticul.Font = new System.Drawing.Font("Arial", 10F);
-            // dataLayoutCommonArticul.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            dataLayoutCommonArticul.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             dataLayoutCommonArticul.Location = new System.Drawing.Point(329, -2);
             dataLayoutCommonArticul.Name = "dataLayoutCommonArticul";
             dataLayoutCommonArticul.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-847, 290, 650, 636);
@@ -653,14 +644,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLayoutControl1
             // 
-            // customLayoutControl1.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLayoutControl1.Controls.Add(lookUpGostGrup);
             customLayoutControl1.Controls.Add(txbGostId);
             customLayoutControl1.Controls.Add(txbOpiGost);
             customLayoutControl1.Controls.Add(lookUpGost);
             customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-            // customLayoutControl1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customLayoutControl1.Location = new System.Drawing.Point(12, 140);
+            customLayoutControl1.Location = new System.Drawing.Point(12, 139);
             customLayoutControl1.Name = "customLayoutControl1";
             customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-829, 65, 651, 653);
             customLayoutControl1.Root = layoutControlGroup4;
@@ -670,7 +659,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // lookUpGostGrup
             // 
-            lookUpGostGrup.Location = new System.Drawing.Point(60, 26);
+            lookUpGostGrup.Location = new System.Drawing.Point(60, 25);
             lookUpGostGrup.Name = "lookUpGostGrup";
             lookUpGostGrup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             lookUpGostGrup.Properties.Appearance.Options.UseFont = true;
@@ -690,13 +679,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txbGostId
             // 
-            txbGostId.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbGostId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbGostId.ErrorColor = System.Drawing.Color.Red;
             txbGostId.ErrorMessage = null;
             txbGostId.Font = new System.Drawing.Font("Arial", 9F);
-            // txbGostId.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbGostId.Location = new System.Drawing.Point(264, 26);
+            txbGostId.Location = new System.Drawing.Point(264, 25);
             txbGostId.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGostId.Name = "txbGostId";
             txbGostId.Size = new System.Drawing.Size(56, 22);
@@ -706,31 +693,25 @@ namespace SewingProduction.Features.Articul.Forms
             // txbOpiGost
             // 
             txbOpiGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbOpiGost.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbOpiGost.ErrorColor = System.Drawing.Color.Red;
             txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // txbOpiGost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbOpiGost.Location = new System.Drawing.Point(5, 52);
+            txbOpiGost.Location = new System.Drawing.Point(5, 51);
             txbOpiGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpiGost.Multiline = true;
             txbOpiGost.Name = "txbOpiGost";
             txbOpiGost.ReadOnly = true;
-            txbOpiGost.Size = new System.Drawing.Size(649, 24);
+            txbOpiGost.Size = new System.Drawing.Size(649, 25);
             txbOpiGost.TabIndex = 4;
             // 
             // lookUpGost
             // 
             lookUpGost.Enabled = false;
-            lookUpGost.Location = new System.Drawing.Point(324, 26);
+            lookUpGost.Location = new System.Drawing.Point(324, 25);
             lookUpGost.Name = "lookUpGost";
-            // lookUpGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             lookUpGost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // lookUpGost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            lookUpGost.Properties.Appearance.Options.UseBackColor = true;
             lookUpGost.Properties.Appearance.Options.UseFont = true;
-            lookUpGost.Properties.Appearance.Options.UseForeColor = true;
             lookUpGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             lookUpGost.Properties.PopupView = customSearchLookUpEdit1View;
             lookUpGost.Size = new System.Drawing.Size(330, 22);
@@ -831,21 +812,30 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem15.Location = new System.Drawing.Point(0, 26);
             layoutControlItem15.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(653, 28);
+            layoutControlItem15.Size = new System.Drawing.Size(653, 29);
             layoutControlItem15.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem15.TextLocation = DevExpress.Utils.Locations.Left;
             layoutControlItem15.TextVisible = false;
             // 
+            // chbArh
+            // 
+            chbArh.Enabled = false;
+            chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            chbArh.Font = new System.Drawing.Font("Arial", 10F);
+            chbArh.Location = new System.Drawing.Point(675, 12);
+            chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            chbArh.Name = "chbArh";
+            chbArh.Size = new System.Drawing.Size(164, 20);
+            chbArh.TabIndex = 4;
+            chbArh.Text = "Архив";
+            chbArh.UseVisualStyleBackColor = true;
+            // 
             // cbTkan
             // 
-            cbTkan.Location = new System.Drawing.Point(340, 86);
+            cbTkan.Location = new System.Drawing.Point(340, 85);
             cbTkan.Name = "cbTkan";
-            // cbTkan.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbTkan.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbTkan.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbTkan.Properties.Appearance.Options.UseBackColor = true;
             cbTkan.Properties.Appearance.Options.UseFont = true;
-            cbTkan.Properties.Appearance.Options.UseForeColor = true;
             cbTkan.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbTkan.Size = new System.Drawing.Size(328, 22);
             cbTkan.StyleController = dataLayoutCommonArticul;
@@ -856,27 +846,19 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_rekom.Location = new System.Drawing.Point(678, 407);
             txtSeb_rekom.Name = "txtSeb_rekom";
             txtSeb_rekom.ObjectName = null;
-            // txtSeb_rekom.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_rekom.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_rekom.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_rekom.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_rekom.Properties.Appearance.Options.UseFont = true;
-            txtSeb_rekom.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_rekom.Size = new System.Drawing.Size(158, 22);
             txtSeb_rekom.StyleController = dataLayoutCommonArticul;
             txtSeb_rekom.TabIndex = 26;
             // 
             // txtSum_sebraskr
             // 
-            txtSum_sebraskr.Location = new System.Drawing.Point(759, 139);
+            txtSum_sebraskr.Location = new System.Drawing.Point(759, 138);
             txtSum_sebraskr.Name = "txtSum_sebraskr";
             txtSum_sebraskr.ObjectName = null;
-            // txtSum_sebraskr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_sebraskr.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSum_sebraskr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSum_sebraskr.Properties.Appearance.Options.UseBackColor = true;
             txtSum_sebraskr.Properties.Appearance.Options.UseFont = true;
-            txtSum_sebraskr.Properties.Appearance.Options.UseForeColor = true;
             txtSum_sebraskr.Properties.ReadOnly = true;
             txtSum_sebraskr.Size = new System.Drawing.Size(77, 22);
             txtSum_sebraskr.StyleController = dataLayoutCommonArticul;
@@ -884,45 +866,33 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtKod
             // 
-            txtKod.Location = new System.Drawing.Point(768, 358);
+            txtKod.Location = new System.Drawing.Point(768, 357);
             txtKod.Name = "txtKod";
             txtKod.ObjectName = null;
-            // txtKod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKod.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtKod.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtKod.Properties.Appearance.Options.UseBackColor = true;
             txtKod.Properties.Appearance.Options.UseFont = true;
-            txtKod.Properties.Appearance.Options.UseForeColor = true;
             txtKod.Size = new System.Drawing.Size(68, 22);
             txtKod.StyleController = dataLayoutCommonArticul;
             txtKod.TabIndex = 25;
             // 
             // txtKoef
             // 
-            txtKoef.Location = new System.Drawing.Point(759, 329);
+            txtKoef.Location = new System.Drawing.Point(759, 328);
             txtKoef.Name = "txtKoef";
             txtKoef.ObjectName = null;
-            // txtKoef.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKoef.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // txtKoef.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtKoef.Properties.Appearance.Options.UseBackColor = true;
             txtKoef.Properties.Appearance.Options.UseFont = true;
-            txtKoef.Properties.Appearance.Options.UseForeColor = true;
             txtKoef.Size = new System.Drawing.Size(77, 22);
             txtKoef.StyleController = dataLayoutCommonArticul;
             txtKoef.TabIndex = 24;
             // 
             // txtSeb_proizv
             // 
-            txtSeb_proizv.Location = new System.Drawing.Point(759, 302);
+            txtSeb_proizv.Location = new System.Drawing.Point(759, 301);
             txtSeb_proizv.Name = "txtSeb_proizv";
             txtSeb_proizv.ObjectName = null;
-            // txtSeb_proizv.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_proizv.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_proizv.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_proizv.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_proizv.Properties.Appearance.Options.UseFont = true;
-            txtSeb_proizv.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_proizv.Properties.ReadOnly = true;
             txtSeb_proizv.Size = new System.Drawing.Size(77, 22);
             txtSeb_proizv.StyleController = dataLayoutCommonArticul;
@@ -930,75 +900,55 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtKoef_d
             // 
-            txtKoef_d.Location = new System.Drawing.Point(759, 273);
+            txtKoef_d.Location = new System.Drawing.Point(759, 272);
             txtKoef_d.Name = "txtKoef_d";
             txtKoef_d.ObjectName = null;
-            // txtKoef_d.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKoef_d.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // txtKoef_d.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtKoef_d.Properties.Appearance.Options.UseBackColor = true;
             txtKoef_d.Properties.Appearance.Options.UseFont = true;
-            txtKoef_d.Properties.Appearance.Options.UseForeColor = true;
             txtKoef_d.Size = new System.Drawing.Size(77, 22);
             txtKoef_d.StyleController = dataLayoutCommonArticul;
             txtKoef_d.TabIndex = 22;
             // 
             // txtKoef_pr
             // 
-            txtKoef_pr.Location = new System.Drawing.Point(759, 247);
+            txtKoef_pr.Location = new System.Drawing.Point(759, 246);
             txtKoef_pr.Name = "txtKoef_pr";
             txtKoef_pr.ObjectName = null;
-            // txtKoef_pr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKoef_pr.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // txtKoef_pr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtKoef_pr.Properties.Appearance.Options.UseBackColor = true;
             txtKoef_pr.Properties.Appearance.Options.UseFont = true;
-            txtKoef_pr.Properties.Appearance.Options.UseForeColor = true;
             txtKoef_pr.Size = new System.Drawing.Size(77, 22);
             txtKoef_pr.StyleController = dataLayoutCommonArticul;
             txtKoef_pr.TabIndex = 21;
             // 
             // txtSeb_dop
             // 
-            txtSeb_dop.Location = new System.Drawing.Point(759, 218);
+            txtSeb_dop.Location = new System.Drawing.Point(759, 217);
             txtSeb_dop.Name = "txtSeb_dop";
             txtSeb_dop.ObjectName = null;
-            // txtSeb_dop.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_dop.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_dop.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_dop.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_dop.Properties.Appearance.Options.UseFont = true;
-            txtSeb_dop.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_dop.Size = new System.Drawing.Size(77, 22);
             txtSeb_dop.StyleController = dataLayoutCommonArticul;
             txtSeb_dop.TabIndex = 20;
             // 
             // txtSeb_z
             // 
-            txtSeb_z.Location = new System.Drawing.Point(759, 192);
+            txtSeb_z.Location = new System.Drawing.Point(759, 191);
             txtSeb_z.Name = "txtSeb_z";
             txtSeb_z.ObjectName = null;
-            // txtSeb_z.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_z.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_z.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_z.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_z.Properties.Appearance.Options.UseFont = true;
-            txtSeb_z.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_z.Size = new System.Drawing.Size(77, 22);
             txtSeb_z.StyleController = dataLayoutCommonArticul;
             txtSeb_z.TabIndex = 19;
             // 
             // txtSum_komplnum
             // 
-            txtSum_komplnum.Location = new System.Drawing.Point(759, 166);
+            txtSum_komplnum.Location = new System.Drawing.Point(759, 165);
             txtSum_komplnum.Name = "txtSum_komplnum";
             txtSum_komplnum.ObjectName = null;
-            // txtSum_komplnum.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_komplnum.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSum_komplnum.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSum_komplnum.Properties.Appearance.Options.UseBackColor = true;
             txtSum_komplnum.Properties.Appearance.Options.UseFont = true;
-            txtSum_komplnum.Properties.Appearance.Options.UseForeColor = true;
             txtSum_komplnum.Properties.ReadOnly = true;
             txtSum_komplnum.Size = new System.Drawing.Size(77, 22);
             txtSum_komplnum.StyleController = dataLayoutCommonArticul;
@@ -1006,15 +956,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSum_strvznos
             // 
-            txtSum_strvznos.Location = new System.Drawing.Point(759, 113);
+            txtSum_strvznos.Location = new System.Drawing.Point(759, 112);
             txtSum_strvznos.Name = "txtSum_strvznos";
             txtSum_strvznos.ObjectName = null;
-            // txtSum_strvznos.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_strvznos.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSum_strvznos.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSum_strvznos.Properties.Appearance.Options.UseBackColor = true;
             txtSum_strvznos.Properties.Appearance.Options.UseFont = true;
-            txtSum_strvznos.Properties.Appearance.Options.UseForeColor = true;
             txtSum_strvznos.Properties.ReadOnly = true;
             txtSum_strvznos.Size = new System.Drawing.Size(77, 22);
             txtSum_strvznos.StyleController = dataLayoutCommonArticul;
@@ -1022,15 +968,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtSum_dopopl
             // 
-            txtSum_dopopl.Location = new System.Drawing.Point(759, 86);
+            txtSum_dopopl.Location = new System.Drawing.Point(759, 85);
             txtSum_dopopl.Name = "txtSum_dopopl";
             txtSum_dopopl.ObjectName = null;
-            // txtSum_dopopl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_dopopl.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSum_dopopl.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSum_dopopl.Properties.Appearance.Options.UseBackColor = true;
             txtSum_dopopl.Properties.Appearance.Options.UseFont = true;
-            txtSum_dopopl.Properties.Appearance.Options.UseForeColor = true;
             txtSum_dopopl.Properties.ReadOnly = true;
             txtSum_dopopl.Size = new System.Drawing.Size(77, 22);
             txtSum_dopopl.StyleController = dataLayoutCommonArticul;
@@ -1041,27 +983,19 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek_kr.Location = new System.Drawing.Point(67, 492);
             txtSek_kr.Name = "txtSek_kr";
             txtSek_kr.ObjectName = null;
-            // txtSek_kr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek_kr.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSek_kr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSek_kr.Properties.Appearance.Options.UseBackColor = true;
             txtSek_kr.Properties.Appearance.Options.UseFont = true;
-            txtSek_kr.Properties.Appearance.Options.UseForeColor = true;
             txtSek_kr.Size = new System.Drawing.Size(116, 22);
             txtSek_kr.StyleController = dataLayoutCommonArticul;
             txtSek_kr.TabIndex = 36;
             // 
             // txtSum_zarpl
             // 
-            txtSum_zarpl.Location = new System.Drawing.Point(759, 60);
+            txtSum_zarpl.Location = new System.Drawing.Point(759, 59);
             txtSum_zarpl.Name = "txtSum_zarpl";
             txtSum_zarpl.ObjectName = null;
-            // txtSum_zarpl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_zarpl.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSum_zarpl.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSum_zarpl.Properties.Appearance.Options.UseBackColor = true;
             txtSum_zarpl.Properties.Appearance.Options.UseFont = true;
-            txtSum_zarpl.Properties.Appearance.Options.UseForeColor = true;
             txtSum_zarpl.Properties.ReadOnly = true;
             txtSum_zarpl.Size = new System.Drawing.Size(77, 22);
             txtSum_zarpl.StyleController = dataLayoutCommonArticul;
@@ -1072,12 +1006,8 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek_vyaz.Location = new System.Drawing.Point(67, 440);
             txtSek_vyaz.Name = "txtSek_vyaz";
             txtSek_vyaz.ObjectName = null;
-            // txtSek_vyaz.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek_vyaz.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSek_vyaz.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSek_vyaz.Properties.Appearance.Options.UseBackColor = true;
             txtSek_vyaz.Properties.Appearance.Options.UseFont = true;
-            txtSek_vyaz.Properties.Appearance.Options.UseForeColor = true;
             txtSek_vyaz.Size = new System.Drawing.Size(116, 22);
             txtSek_vyaz.StyleController = dataLayoutCommonArticul;
             txtSek_vyaz.TabIndex = 34;
@@ -1087,12 +1017,8 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek_shv.Location = new System.Drawing.Point(67, 466);
             txtSek_shv.Name = "txtSek_shv";
             txtSek_shv.ObjectName = null;
-            // txtSek_shv.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek_shv.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSek_shv.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSek_shv.Properties.Appearance.Options.UseBackColor = true;
             txtSek_shv.Properties.Appearance.Options.UseFont = true;
-            txtSek_shv.Properties.Appearance.Options.UseForeColor = true;
             txtSek_shv.Size = new System.Drawing.Size(116, 22);
             txtSek_shv.StyleController = dataLayoutCommonArticul;
             txtSek_shv.TabIndex = 35;
@@ -1102,27 +1028,19 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek.Location = new System.Drawing.Point(67, 414);
             txtSek.Name = "txtSek";
             txtSek.ObjectName = null;
-            // txtSek.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSek.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSek.Properties.Appearance.Options.UseBackColor = true;
             txtSek.Properties.Appearance.Options.UseFont = true;
-            txtSek.Properties.Appearance.Options.UseForeColor = true;
             txtSek.Size = new System.Drawing.Size(116, 22);
             txtSek.StyleController = dataLayoutCommonArticul;
             txtSek.TabIndex = 33;
             // 
             // txtSeb_all
             // 
-            txtSeb_all.Location = new System.Drawing.Point(67, 361);
+            txtSeb_all.Location = new System.Drawing.Point(67, 359);
             txtSeb_all.Name = "txtSeb_all";
             txtSeb_all.ObjectName = null;
-            // txtSeb_all.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_all.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_all.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_all.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_all.Properties.Appearance.Options.UseFont = true;
-            txtSeb_all.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_all.Properties.ReadOnly = true;
             txtSeb_all.Size = new System.Drawing.Size(116, 22);
             txtSeb_all.StyleController = dataLayoutCommonArticul;
@@ -1130,15 +1048,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtNorm_t
             // 
-            txtNorm_t.Location = new System.Drawing.Point(67, 330);
+            txtNorm_t.Location = new System.Drawing.Point(67, 328);
             txtNorm_t.Name = "txtNorm_t";
             txtNorm_t.ObjectName = null;
-            // txtNorm_t.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtNorm_t.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtNorm_t.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtNorm_t.Properties.Appearance.Options.UseBackColor = true;
             txtNorm_t.Properties.Appearance.Options.UseFont = true;
-            txtNorm_t.Properties.Appearance.Options.UseForeColor = true;
             txtNorm_t.Properties.ReadOnly = true;
             txtNorm_t.Size = new System.Drawing.Size(116, 22);
             txtNorm_t.StyleController = dataLayoutCommonArticul;
@@ -1146,15 +1060,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtOpis_t7
             // 
-            txtOpis_t7.Location = new System.Drawing.Point(487, 698);
+            txtOpis_t7.Location = new System.Drawing.Point(487, 697);
             txtOpis_t7.Name = "txtOpis_t7";
             txtOpis_t7.ObjectName = null;
-            // txtOpis_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtOpis_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtOpis_t7.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t7.Properties.Appearance.Options.UseFont = true;
-            txtOpis_t7.Properties.Appearance.Options.UseForeColor = true;
             txtOpis_t7.Properties.ReadOnly = true;
             txtOpis_t7.Size = new System.Drawing.Size(109, 22);
             txtOpis_t7.StyleController = dataLayoutCommonArticul;
@@ -1162,15 +1072,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtOpis_t6
             // 
-            txtOpis_t6.Location = new System.Drawing.Point(487, 672);
+            txtOpis_t6.Location = new System.Drawing.Point(487, 671);
             txtOpis_t6.Name = "txtOpis_t6";
             txtOpis_t6.ObjectName = null;
-            // txtOpis_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtOpis_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtOpis_t6.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t6.Properties.Appearance.Options.UseFont = true;
-            txtOpis_t6.Properties.Appearance.Options.UseForeColor = true;
             txtOpis_t6.Properties.ReadOnly = true;
             txtOpis_t6.Size = new System.Drawing.Size(109, 22);
             txtOpis_t6.StyleController = dataLayoutCommonArticul;
@@ -1178,30 +1084,22 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxEx7
             // 
-            customTextBoxEx7.Location = new System.Drawing.Point(369, 698);
+            customTextBoxEx7.Location = new System.Drawing.Point(369, 697);
             customTextBoxEx7.Name = "customTextBoxEx7";
             customTextBoxEx7.ObjectName = null;
-            // customTextBoxEx7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxEx7.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx7.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx7.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx7.Size = new System.Drawing.Size(108, 22);
             customTextBoxEx7.StyleController = dataLayoutCommonArticul;
             customTextBoxEx7.TabIndex = 64;
             // 
             // txtOpis_t5
             // 
-            txtOpis_t5.Location = new System.Drawing.Point(487, 646);
+            txtOpis_t5.Location = new System.Drawing.Point(487, 645);
             txtOpis_t5.Name = "txtOpis_t5";
             txtOpis_t5.ObjectName = null;
-            // txtOpis_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtOpis_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtOpis_t5.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t5.Properties.Appearance.Options.UseFont = true;
-            txtOpis_t5.Properties.Appearance.Options.UseForeColor = true;
             txtOpis_t5.Properties.ReadOnly = true;
             txtOpis_t5.Size = new System.Drawing.Size(109, 22);
             txtOpis_t5.StyleController = dataLayoutCommonArticul;
@@ -1209,30 +1107,22 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxEx6
             // 
-            customTextBoxEx6.Location = new System.Drawing.Point(369, 672);
+            customTextBoxEx6.Location = new System.Drawing.Point(369, 671);
             customTextBoxEx6.Name = "customTextBoxEx6";
             customTextBoxEx6.ObjectName = null;
-            // customTextBoxEx6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxEx6.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx6.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx6.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx6.Size = new System.Drawing.Size(108, 22);
             customTextBoxEx6.StyleController = dataLayoutCommonArticul;
             customTextBoxEx6.TabIndex = 63;
             // 
             // txtOpis_t4
             // 
-            txtOpis_t4.Location = new System.Drawing.Point(487, 620);
+            txtOpis_t4.Location = new System.Drawing.Point(487, 619);
             txtOpis_t4.Name = "txtOpis_t4";
             txtOpis_t4.ObjectName = null;
-            // txtOpis_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtOpis_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtOpis_t4.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t4.Properties.Appearance.Options.UseFont = true;
-            txtOpis_t4.Properties.Appearance.Options.UseForeColor = true;
             txtOpis_t4.Properties.ReadOnly = true;
             txtOpis_t4.Size = new System.Drawing.Size(109, 22);
             txtOpis_t4.StyleController = dataLayoutCommonArticul;
@@ -1240,15 +1130,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtOpis_t3
             // 
-            txtOpis_t3.Location = new System.Drawing.Point(487, 594);
+            txtOpis_t3.Location = new System.Drawing.Point(487, 593);
             txtOpis_t3.Name = "txtOpis_t3";
             txtOpis_t3.ObjectName = null;
-            // txtOpis_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtOpis_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtOpis_t3.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t3.Properties.Appearance.Options.UseFont = true;
-            txtOpis_t3.Properties.Appearance.Options.UseForeColor = true;
             txtOpis_t3.Properties.ReadOnly = true;
             txtOpis_t3.Size = new System.Drawing.Size(109, 22);
             txtOpis_t3.StyleController = dataLayoutCommonArticul;
@@ -1256,30 +1142,22 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxEx5
             // 
-            customTextBoxEx5.Location = new System.Drawing.Point(369, 646);
+            customTextBoxEx5.Location = new System.Drawing.Point(369, 645);
             customTextBoxEx5.Name = "customTextBoxEx5";
             customTextBoxEx5.ObjectName = null;
-            // customTextBoxEx5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxEx5.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx5.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx5.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx5.Size = new System.Drawing.Size(108, 22);
             customTextBoxEx5.StyleController = dataLayoutCommonArticul;
             customTextBoxEx5.TabIndex = 62;
             // 
             // txtOpis_t2
             // 
-            txtOpis_t2.Location = new System.Drawing.Point(487, 568);
+            txtOpis_t2.Location = new System.Drawing.Point(487, 567);
             txtOpis_t2.Name = "txtOpis_t2";
             txtOpis_t2.ObjectName = null;
-            // txtOpis_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtOpis_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtOpis_t2.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t2.Properties.Appearance.Options.UseFont = true;
-            txtOpis_t2.Properties.Appearance.Options.UseForeColor = true;
             txtOpis_t2.Properties.ReadOnly = true;
             txtOpis_t2.Size = new System.Drawing.Size(109, 22);
             txtOpis_t2.StyleController = dataLayoutCommonArticul;
@@ -1287,15 +1165,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txtOpis_t1
             // 
-            txtOpis_t1.Location = new System.Drawing.Point(487, 542);
+            txtOpis_t1.Location = new System.Drawing.Point(487, 541);
             txtOpis_t1.Name = "txtOpis_t1";
             txtOpis_t1.ObjectName = null;
-            // txtOpis_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtOpis_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtOpis_t1.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t1.Properties.Appearance.Options.UseFont = true;
-            txtOpis_t1.Properties.Appearance.Options.UseForeColor = true;
             txtOpis_t1.Properties.ReadOnly = true;
             txtOpis_t1.Size = new System.Drawing.Size(109, 22);
             txtOpis_t1.StyleController = dataLayoutCommonArticul;
@@ -1303,270 +1177,198 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxEx4
             // 
-            customTextBoxEx4.Location = new System.Drawing.Point(369, 620);
+            customTextBoxEx4.Location = new System.Drawing.Point(369, 619);
             customTextBoxEx4.Name = "customTextBoxEx4";
             customTextBoxEx4.ObjectName = null;
-            // customTextBoxEx4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxEx4.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx4.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx4.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx4.Size = new System.Drawing.Size(108, 22);
             customTextBoxEx4.StyleController = dataLayoutCommonArticul;
             customTextBoxEx4.TabIndex = 61;
             // 
             // customTextBoxEx3
             // 
-            customTextBoxEx3.Location = new System.Drawing.Point(369, 594);
+            customTextBoxEx3.Location = new System.Drawing.Point(369, 593);
             customTextBoxEx3.Name = "customTextBoxEx3";
             customTextBoxEx3.ObjectName = null;
-            // customTextBoxEx3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxEx3.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx3.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx3.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx3.Size = new System.Drawing.Size(108, 22);
             customTextBoxEx3.StyleController = dataLayoutCommonArticul;
             customTextBoxEx3.TabIndex = 60;
             // 
             // txtBrak_t7
             // 
-            txtBrak_t7.Location = new System.Drawing.Point(606, 698);
+            txtBrak_t7.Location = new System.Drawing.Point(606, 697);
             txtBrak_t7.Name = "txtBrak_t7";
             txtBrak_t7.ObjectName = null;
-            // txtBrak_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtBrak_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtBrak_t7.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t7.Properties.Appearance.Options.UseFont = true;
-            txtBrak_t7.Properties.Appearance.Options.UseForeColor = true;
             txtBrak_t7.Size = new System.Drawing.Size(110, 22);
             txtBrak_t7.StyleController = dataLayoutCommonArticul;
             txtBrak_t7.TabIndex = 78;
             // 
             // customTextBoxEx2
             // 
-            customTextBoxEx2.Location = new System.Drawing.Point(369, 568);
+            customTextBoxEx2.Location = new System.Drawing.Point(369, 567);
             customTextBoxEx2.Name = "customTextBoxEx2";
             customTextBoxEx2.ObjectName = null;
-            // customTextBoxEx2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxEx2.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx2.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx2.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx2.Size = new System.Drawing.Size(108, 22);
             customTextBoxEx2.StyleController = dataLayoutCommonArticul;
             customTextBoxEx2.TabIndex = 59;
             // 
             // txtBrak_t6
             // 
-            txtBrak_t6.Location = new System.Drawing.Point(606, 672);
+            txtBrak_t6.Location = new System.Drawing.Point(606, 671);
             txtBrak_t6.Name = "txtBrak_t6";
             txtBrak_t6.ObjectName = null;
-            // txtBrak_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtBrak_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtBrak_t6.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t6.Properties.Appearance.Options.UseFont = true;
-            txtBrak_t6.Properties.Appearance.Options.UseForeColor = true;
             txtBrak_t6.Size = new System.Drawing.Size(110, 22);
             txtBrak_t6.StyleController = dataLayoutCommonArticul;
             txtBrak_t6.TabIndex = 77;
             // 
             // customTextBoxEx1
             // 
-            customTextBoxEx1.Location = new System.Drawing.Point(369, 542);
+            customTextBoxEx1.Location = new System.Drawing.Point(369, 541);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
-            // customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx1.Size = new System.Drawing.Size(108, 22);
             customTextBoxEx1.StyleController = dataLayoutCommonArticul;
             customTextBoxEx1.TabIndex = 58;
             // 
             // txtBrak_t5
             // 
-            txtBrak_t5.Location = new System.Drawing.Point(606, 646);
+            txtBrak_t5.Location = new System.Drawing.Point(606, 645);
             txtBrak_t5.Name = "txtBrak_t5";
             txtBrak_t5.ObjectName = null;
-            // txtBrak_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtBrak_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtBrak_t5.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t5.Properties.Appearance.Options.UseFont = true;
-            txtBrak_t5.Properties.Appearance.Options.UseForeColor = true;
             txtBrak_t5.Size = new System.Drawing.Size(110, 22);
             txtBrak_t5.StyleController = dataLayoutCommonArticul;
             txtBrak_t5.TabIndex = 76;
             // 
             // txtBrak_t4
             // 
-            txtBrak_t4.Location = new System.Drawing.Point(606, 620);
+            txtBrak_t4.Location = new System.Drawing.Point(606, 619);
             txtBrak_t4.Name = "txtBrak_t4";
             txtBrak_t4.ObjectName = null;
-            // txtBrak_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtBrak_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtBrak_t4.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t4.Properties.Appearance.Options.UseFont = true;
-            txtBrak_t4.Properties.Appearance.Options.UseForeColor = true;
             txtBrak_t4.Size = new System.Drawing.Size(110, 22);
             txtBrak_t4.StyleController = dataLayoutCommonArticul;
             txtBrak_t4.TabIndex = 75;
             // 
             // txtBrak_t3
             // 
-            txtBrak_t3.Location = new System.Drawing.Point(606, 594);
+            txtBrak_t3.Location = new System.Drawing.Point(606, 593);
             txtBrak_t3.Name = "txtBrak_t3";
             txtBrak_t3.ObjectName = null;
-            // txtBrak_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtBrak_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtBrak_t3.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t3.Properties.Appearance.Options.UseFont = true;
-            txtBrak_t3.Properties.Appearance.Options.UseForeColor = true;
             txtBrak_t3.Size = new System.Drawing.Size(110, 22);
             txtBrak_t3.StyleController = dataLayoutCommonArticul;
             txtBrak_t3.TabIndex = 74;
             // 
             // txtSeb_t7
             // 
-            txtSeb_t7.Location = new System.Drawing.Point(251, 698);
+            txtSeb_t7.Location = new System.Drawing.Point(251, 697);
             txtSeb_t7.Name = "txtSeb_t7";
             txtSeb_t7.ObjectName = null;
-            // txtSeb_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_t7.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t7.Properties.Appearance.Options.UseFont = true;
-            txtSeb_t7.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_t7.Size = new System.Drawing.Size(108, 22);
             txtSeb_t7.StyleController = dataLayoutCommonArticul;
             txtSeb_t7.TabIndex = 57;
             // 
             // txtBrak_t2
             // 
-            txtBrak_t2.Location = new System.Drawing.Point(606, 568);
+            txtBrak_t2.Location = new System.Drawing.Point(606, 567);
             txtBrak_t2.Name = "txtBrak_t2";
             txtBrak_t2.ObjectName = null;
-            // txtBrak_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtBrak_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtBrak_t2.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t2.Properties.Appearance.Options.UseFont = true;
-            txtBrak_t2.Properties.Appearance.Options.UseForeColor = true;
             txtBrak_t2.Size = new System.Drawing.Size(110, 22);
             txtBrak_t2.StyleController = dataLayoutCommonArticul;
             txtBrak_t2.TabIndex = 73;
             // 
             // txtSeb_t6
             // 
-            txtSeb_t6.Location = new System.Drawing.Point(251, 672);
+            txtSeb_t6.Location = new System.Drawing.Point(251, 671);
             txtSeb_t6.Name = "txtSeb_t6";
             txtSeb_t6.ObjectName = null;
-            // txtSeb_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_t6.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t6.Properties.Appearance.Options.UseFont = true;
-            txtSeb_t6.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_t6.Size = new System.Drawing.Size(108, 22);
             txtSeb_t6.StyleController = dataLayoutCommonArticul;
             txtSeb_t6.TabIndex = 56;
             // 
             // txtBrak_t1
             // 
-            txtBrak_t1.Location = new System.Drawing.Point(606, 542);
+            txtBrak_t1.Location = new System.Drawing.Point(606, 541);
             txtBrak_t1.Name = "txtBrak_t1";
             txtBrak_t1.ObjectName = null;
-            // txtBrak_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtBrak_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtBrak_t1.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t1.Properties.Appearance.Options.UseFont = true;
-            txtBrak_t1.Properties.Appearance.Options.UseForeColor = true;
             txtBrak_t1.Size = new System.Drawing.Size(110, 22);
             txtBrak_t1.StyleController = dataLayoutCommonArticul;
             txtBrak_t1.TabIndex = 72;
             // 
             // txtSeb_t5
             // 
-            txtSeb_t5.Location = new System.Drawing.Point(251, 646);
+            txtSeb_t5.Location = new System.Drawing.Point(251, 645);
             txtSeb_t5.Name = "txtSeb_t5";
             txtSeb_t5.ObjectName = null;
-            // txtSeb_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_t5.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t5.Properties.Appearance.Options.UseFont = true;
-            txtSeb_t5.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_t5.Size = new System.Drawing.Size(108, 22);
             txtSeb_t5.StyleController = dataLayoutCommonArticul;
             txtSeb_t5.TabIndex = 55;
             // 
             // txtSeb_t4
             // 
-            txtSeb_t4.Location = new System.Drawing.Point(251, 620);
+            txtSeb_t4.Location = new System.Drawing.Point(251, 619);
             txtSeb_t4.Name = "txtSeb_t4";
             txtSeb_t4.ObjectName = null;
-            // txtSeb_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_t4.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t4.Properties.Appearance.Options.UseFont = true;
-            txtSeb_t4.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_t4.Size = new System.Drawing.Size(108, 22);
             txtSeb_t4.StyleController = dataLayoutCommonArticul;
             txtSeb_t4.TabIndex = 54;
             // 
             // txtSeb_t3
             // 
-            txtSeb_t3.Location = new System.Drawing.Point(251, 594);
+            txtSeb_t3.Location = new System.Drawing.Point(251, 593);
             txtSeb_t3.Name = "txtSeb_t3";
             txtSeb_t3.ObjectName = null;
-            // txtSeb_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_t3.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t3.Properties.Appearance.Options.UseFont = true;
-            txtSeb_t3.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_t3.Size = new System.Drawing.Size(108, 22);
             txtSeb_t3.StyleController = dataLayoutCommonArticul;
             txtSeb_t3.TabIndex = 53;
             // 
             // txtSeb_t2
             // 
-            txtSeb_t2.Location = new System.Drawing.Point(251, 568);
+            txtSeb_t2.Location = new System.Drawing.Point(251, 567);
             txtSeb_t2.Name = "txtSeb_t2";
             txtSeb_t2.ObjectName = null;
-            // txtSeb_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_t2.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t2.Properties.Appearance.Options.UseFont = true;
-            txtSeb_t2.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_t2.Size = new System.Drawing.Size(108, 22);
             txtSeb_t2.StyleController = dataLayoutCommonArticul;
             txtSeb_t2.TabIndex = 52;
             // 
             // txtSeb_t1
             // 
-            txtSeb_t1.Location = new System.Drawing.Point(251, 542);
+            txtSeb_t1.Location = new System.Drawing.Point(251, 541);
             txtSeb_t1.Name = "txtSeb_t1";
             txtSeb_t1.ObjectName = null;
-            // txtSeb_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txtSeb_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txtSeb_t1.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t1.Properties.Appearance.Options.UseFont = true;
-            txtSeb_t1.Properties.Appearance.Options.UseForeColor = true;
             txtSeb_t1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             txtSeb_t1.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             txtSeb_t1.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -1579,8 +1381,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chbKruj.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKruj.Font = new System.Drawing.Font("Arial", 10F);
-            // chbKruj.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            chbKruj.Location = new System.Drawing.Point(363, 36);
+            chbKruj.Location = new System.Drawing.Point(363, 35);
             chbKruj.Name = "chbKruj";
             chbKruj.Size = new System.Drawing.Size(305, 20);
             chbKruj.TabIndex = 3;
@@ -1588,14 +1389,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t7
             // 
-            cbuKod_t7.Location = new System.Drawing.Point(15, 698);
+            cbuKod_t7.Location = new System.Drawing.Point(15, 697);
             cbuKod_t7.Name = "cbuKod_t7";
-            // cbuKod_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbuKod_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbuKod_t7.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t7.Properties.Appearance.Options.UseFont = true;
-            cbuKod_t7.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t7.Properties.PopupView = customSearchLookUpEdit7View;
             cbuKod_t7.Size = new System.Drawing.Size(108, 22);
@@ -1611,14 +1408,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t6
             // 
-            cbuKod_t6.Location = new System.Drawing.Point(15, 672);
+            cbuKod_t6.Location = new System.Drawing.Point(15, 671);
             cbuKod_t6.Name = "cbuKod_t6";
-            // cbuKod_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbuKod_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbuKod_t6.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t6.Properties.Appearance.Options.UseFont = true;
-            cbuKod_t6.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t6.Properties.PopupView = customSearchLookUpEdit6View;
             cbuKod_t6.Size = new System.Drawing.Size(108, 22);
@@ -1634,14 +1427,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t5
             // 
-            cbuKod_t5.Location = new System.Drawing.Point(15, 646);
+            cbuKod_t5.Location = new System.Drawing.Point(15, 645);
             cbuKod_t5.Name = "cbuKod_t5";
-            // cbuKod_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbuKod_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbuKod_t5.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t5.Properties.Appearance.Options.UseFont = true;
-            cbuKod_t5.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t5.Properties.PopupView = customSearchLookUpEdit5View;
             cbuKod_t5.Size = new System.Drawing.Size(108, 22);
@@ -1657,14 +1446,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t4
             // 
-            cbuKod_t4.Location = new System.Drawing.Point(15, 620);
+            cbuKod_t4.Location = new System.Drawing.Point(15, 619);
             cbuKod_t4.Name = "cbuKod_t4";
-            // cbuKod_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbuKod_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbuKod_t4.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t4.Properties.Appearance.Options.UseFont = true;
-            cbuKod_t4.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t4.Properties.PopupView = customSearchLookUpEdit4View;
             cbuKod_t4.Size = new System.Drawing.Size(108, 22);
@@ -1680,14 +1465,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t3
             // 
-            cbuKod_t3.Location = new System.Drawing.Point(15, 594);
+            cbuKod_t3.Location = new System.Drawing.Point(15, 593);
             cbuKod_t3.Name = "cbuKod_t3";
-            // cbuKod_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbuKod_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbuKod_t3.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t3.Properties.Appearance.Options.UseFont = true;
-            cbuKod_t3.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t3.Properties.PopupView = customSearchLookUpEdit3View;
             cbuKod_t3.Size = new System.Drawing.Size(108, 22);
@@ -1703,14 +1484,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbuKod_t2
             // 
-            cbuKod_t2.Location = new System.Drawing.Point(15, 568);
+            cbuKod_t2.Location = new System.Drawing.Point(15, 567);
             cbuKod_t2.Name = "cbuKod_t2";
-            // cbuKod_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbuKod_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbuKod_t2.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t2.Properties.Appearance.Options.UseFont = true;
-            cbuKod_t2.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t2.Properties.PopupView = customSearchLookUpEdit2View;
             cbuKod_t2.Size = new System.Drawing.Size(108, 22);
@@ -1726,106 +1503,83 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txbNorm_t7
             // 
-            txbNorm_t7.Location = new System.Drawing.Point(133, 698);
+            txbNorm_t7.Location = new System.Drawing.Point(133, 697);
             txbNorm_t7.Name = "txbNorm_t7";
             txbNorm_t7.ObjectName = null;
-            // txbNorm_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txbNorm_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txbNorm_t7.Properties.Appearance.Options.UseBackColor = true;
+            txbNorm_t7.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t7.Properties.Appearance.Options.UseFont = true;
-            txbNorm_t7.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t7.Size = new System.Drawing.Size(108, 22);
             txbNorm_t7.StyleController = dataLayoutCommonArticul;
             txbNorm_t7.TabIndex = 50;
             // 
             // txbNorm_t6
             // 
-            txbNorm_t6.Location = new System.Drawing.Point(133, 672);
+            txbNorm_t6.Location = new System.Drawing.Point(133, 671);
             txbNorm_t6.Name = "txbNorm_t6";
             txbNorm_t6.ObjectName = null;
-            // txbNorm_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txbNorm_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txbNorm_t6.Properties.Appearance.Options.UseBackColor = true;
+            txbNorm_t6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t6.Properties.Appearance.Options.UseFont = true;
-            txbNorm_t6.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t6.Size = new System.Drawing.Size(108, 22);
             txbNorm_t6.StyleController = dataLayoutCommonArticul;
             txbNorm_t6.TabIndex = 49;
             // 
             // txbNorm_t5
             // 
-            txbNorm_t5.Location = new System.Drawing.Point(133, 646);
+            txbNorm_t5.Location = new System.Drawing.Point(133, 645);
             txbNorm_t5.Name = "txbNorm_t5";
             txbNorm_t5.ObjectName = null;
-            // txbNorm_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txbNorm_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txbNorm_t5.Properties.Appearance.Options.UseBackColor = true;
+            txbNorm_t5.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t5.Properties.Appearance.Options.UseFont = true;
-            txbNorm_t5.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t5.Size = new System.Drawing.Size(108, 22);
             txbNorm_t5.StyleController = dataLayoutCommonArticul;
             txbNorm_t5.TabIndex = 48;
             // 
             // txbNorm_t4
             // 
-            txbNorm_t4.Location = new System.Drawing.Point(133, 620);
+            txbNorm_t4.Location = new System.Drawing.Point(133, 619);
             txbNorm_t4.Name = "txbNorm_t4";
             txbNorm_t4.ObjectName = null;
-            // txbNorm_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txbNorm_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txbNorm_t4.Properties.Appearance.Options.UseBackColor = true;
+            txbNorm_t4.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t4.Properties.Appearance.Options.UseFont = true;
-            txbNorm_t4.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t4.Size = new System.Drawing.Size(108, 22);
             txbNorm_t4.StyleController = dataLayoutCommonArticul;
             txbNorm_t4.TabIndex = 47;
             // 
             // txbNorm_t3
             // 
-            txbNorm_t3.Location = new System.Drawing.Point(133, 594);
+            txbNorm_t3.Location = new System.Drawing.Point(133, 593);
             txbNorm_t3.Name = "txbNorm_t3";
             txbNorm_t3.ObjectName = null;
-            // txbNorm_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txbNorm_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txbNorm_t3.Properties.Appearance.Options.UseBackColor = true;
+            txbNorm_t3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t3.Properties.Appearance.Options.UseFont = true;
-            txbNorm_t3.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t3.Size = new System.Drawing.Size(108, 22);
             txbNorm_t3.StyleController = dataLayoutCommonArticul;
             txbNorm_t3.TabIndex = 46;
             // 
             // txbNorm_t2
             // 
-            txbNorm_t2.Location = new System.Drawing.Point(133, 568);
+            txbNorm_t2.Location = new System.Drawing.Point(133, 567);
             txbNorm_t2.Name = "txbNorm_t2";
             txbNorm_t2.ObjectName = null;
-            // txbNorm_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txbNorm_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txbNorm_t2.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t2.Properties.Appearance.Options.UseFont = true;
-            txbNorm_t2.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t2.Size = new System.Drawing.Size(108, 22);
             txbNorm_t2.StyleController = dataLayoutCommonArticul;
             txbNorm_t2.TabIndex = 45;
             // 
             // txbNorm_t1
             // 
-            txbNorm_t1.Location = new System.Drawing.Point(133, 542);
+            txbNorm_t1.Location = new System.Drawing.Point(133, 541);
             txbNorm_t1.Margin = new System.Windows.Forms.Padding(2);
             txbNorm_t1.Name = "txbNorm_t1";
             txbNorm_t1.ObjectName = null;
-            // txbNorm_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // txbNorm_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            txbNorm_t1.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t1.Properties.Appearance.Options.UseFont = true;
-            txbNorm_t1.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t1.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
             txbNorm_t1.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
             txbNorm_t1.Properties.UseMaskAsDisplayFormat = true;
@@ -1835,13 +1589,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // txbAssort
             // 
-            txbAssort.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbAssort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbAssort.ErrorColor = System.Drawing.Color.Red;
             txbAssort.ErrorMessage = null;
             txbAssort.Font = new System.Drawing.Font("Arial", 10F);
-            // txbAssort.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbAssort.Location = new System.Drawing.Point(85, 112);
+            txbAssort.Location = new System.Drawing.Point(85, 111);
             txbAssort.Margin = new System.Windows.Forms.Padding(0);
             txbAssort.Name = "txbAssort";
             txbAssort.ReadOnly = true;
@@ -1853,8 +1605,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbKombIzd.Enabled = false;
             chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombIzd.Font = new System.Drawing.Font("Arial", 10F);
-            // chbKombIzd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            chbKombIzd.Location = new System.Drawing.Point(244, 36);
+            chbKombIzd.Location = new System.Drawing.Point(244, 35);
             chbKombIzd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombIzd.Name = "chbKombIzd";
             chbKombIzd.Size = new System.Drawing.Size(40, 20);
@@ -1864,17 +1615,13 @@ namespace SewingProduction.Features.Articul.Forms
             // txbSost2
             // 
             txbSost2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost2.Location = new System.Drawing.Point(141, 275);
+            txbSost2.Location = new System.Drawing.Point(133, 273);
             txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost2.Name = "txbSost2";
             txbSost2.ObjectName = null;
-            txbSost2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSost2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // txbSost2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbSost2.Properties.Appearance.Options.UseBackColor = true;
             txbSost2.Properties.Appearance.Options.UseFont = true;
-            txbSost2.Properties.Appearance.Options.UseForeColor = true;
-            txbSost2.Size = new System.Drawing.Size(527, 22);
+            txbSost2.Size = new System.Drawing.Size(535, 22);
             txbSost2.StyleController = dataLayoutCommonArticul;
             txbSost2.TabIndex = 29;
             // 
@@ -1883,8 +1630,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbKombDet.Enabled = false;
             chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombDet.Font = new System.Drawing.Font("Arial", 10F);
-            // chbKombDet.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            chbKombDet.Location = new System.Drawing.Point(80, 36);
+            chbKombDet.Location = new System.Drawing.Point(80, 35);
             chbKombDet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombDet.Name = "chbKombDet";
             chbKombDet.Size = new System.Drawing.Size(95, 20);
@@ -1893,24 +1639,20 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbGrupMen
             // 
-            // cbGrupMen.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbGrupMen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbGrupMen.Font = new System.Drawing.Font("Arial", 10F);
-            // cbGrupMen.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbGrupMen.FormattingEnabled = true;
-            cbGrupMen.Location = new System.Drawing.Point(85, 86);
+            cbGrupMen.Location = new System.Drawing.Point(85, 85);
             cbGrupMen.Name = "cbGrupMen";
             cbGrupMen.Size = new System.Drawing.Size(199, 24);
             cbGrupMen.TabIndex = 9;
             // 
             // cbCountry
             // 
-            // cbCountry.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbCountry.Font = new System.Drawing.Font("Arial", 10F);
-            // cbCountry.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbCountry.FormattingEnabled = true;
-            cbCountry.Location = new System.Drawing.Point(358, 112);
+            cbCountry.Location = new System.Drawing.Point(358, 111);
             cbCountry.Name = "cbCountry";
             cbCountry.Size = new System.Drawing.Size(310, 24);
             cbCountry.TabIndex = 13;
@@ -1918,40 +1660,32 @@ namespace SewingProduction.Features.Articul.Forms
             // txbSost
             // 
             txbSost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost.Location = new System.Drawing.Point(141, 249);
+            txbSost.Location = new System.Drawing.Point(133, 247);
             txbSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost.Name = "txbSost";
             txbSost.ObjectName = null;
-            txbSost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // txbSost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbSost.Properties.Appearance.Options.UseBackColor = true;
             txbSost.Properties.Appearance.Options.UseFont = true;
-            txbSost.Properties.Appearance.Options.UseForeColor = true;
-            txbSost.Size = new System.Drawing.Size(527, 22);
+            txbSost.Size = new System.Drawing.Size(535, 22);
             txbSost.StyleController = dataLayoutCommonArticul;
             txbSost.TabIndex = 28;
             // 
             // cbAssort
             // 
-            // cbAssort.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbAssort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbAssort.Font = new System.Drawing.Font("Arial", 10F);
-            // cbAssort.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbAssort.FormattingEnabled = true;
-            cbAssort.Location = new System.Drawing.Point(129, 112);
+            cbAssort.Location = new System.Drawing.Point(129, 111);
             cbAssort.Name = "cbAssort";
             cbAssort.Size = new System.Drawing.Size(155, 24);
             cbAssort.TabIndex = 12;
             // 
             // cbSeason
             // 
-            // cbSeason.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbSeason.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbSeason.Font = new System.Drawing.Font("Arial", 10F);
-            // cbSeason.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbSeason.FormattingEnabled = true;
-            cbSeason.Location = new System.Drawing.Point(476, 60);
+            cbSeason.Location = new System.Drawing.Point(476, 59);
             cbSeason.Name = "cbSeason";
             cbSeason.Size = new System.Drawing.Size(192, 24);
             cbSeason.TabIndex = 8;
@@ -1959,17 +1693,13 @@ namespace SewingProduction.Features.Articul.Forms
             // txbArticul
             // 
             txbArticul.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbArticul.Location = new System.Drawing.Point(60, 60);
+            txbArticul.Location = new System.Drawing.Point(60, 59);
             txbArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbArticul.MinimumSize = new System.Drawing.Size(120, 15);
             txbArticul.Name = "txbArticul";
             txbArticul.ObjectName = null;
-            txbArticul.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbArticul.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // txbArticul.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbArticul.Properties.Appearance.Options.UseBackColor = true;
             txbArticul.Properties.Appearance.Options.UseFont = true;
-            txbArticul.Properties.Appearance.Options.UseForeColor = true;
             txbArticul.Size = new System.Drawing.Size(124, 22);
             txbArticul.StyleController = dataLayoutCommonArticul;
             txbArticul.TabIndex = 5;
@@ -1977,43 +1707,33 @@ namespace SewingProduction.Features.Articul.Forms
             // txbMod
             // 
             txbMod.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbMod.Location = new System.Drawing.Point(340, 60);
+            txbMod.Location = new System.Drawing.Point(340, 59);
             txbMod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbMod.MinimumSize = new System.Drawing.Size(120, 15);
             txbMod.Name = "txbMod";
             txbMod.ObjectName = null;
-            txbMod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbMod.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            // txbMod.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            txbMod.Properties.Appearance.Options.UseBackColor = true;
             txbMod.Properties.Appearance.Options.UseFont = true;
-            txbMod.Properties.Appearance.Options.UseForeColor = true;
             txbMod.Size = new System.Drawing.Size(132, 22);
             txbMod.StyleController = dataLayoutCommonArticul;
             txbMod.TabIndex = 7;
             // 
             // cbTM
             // 
-            // cbTM.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbTM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbTM.Font = new System.Drawing.Font("Arial", 10F);
-            // cbTM.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbTM.FormattingEnabled = true;
-            cbTM.Location = new System.Drawing.Point(223, 60);
+            cbTM.Location = new System.Drawing.Point(223, 59);
             cbTM.Name = "cbTM";
             cbTM.Size = new System.Drawing.Size(61, 24);
             cbTM.TabIndex = 6;
             // 
             // cbuKod_t1
             // 
-            cbuKod_t1.Location = new System.Drawing.Point(15, 542);
+            cbuKod_t1.Location = new System.Drawing.Point(15, 541);
             cbuKod_t1.Name = "cbuKod_t1";
-            // cbuKod_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // cbuKod_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            cbuKod_t1.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t1.Properties.Appearance.Options.UseFont = true;
-            cbuKod_t1.Properties.Appearance.Options.UseForeColor = true;
             cbuKod_t1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cbuKod_t1.Properties.PopupView = gridView1;
             cbuKod_t1.Size = new System.Drawing.Size(108, 22);
@@ -2044,7 +1764,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutCommonArticul.Location = new System.Drawing.Point(0, 0);
             layoutCommonArticul.Name = "layoutCommonArticul";
             layoutCommonArticul.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutCommonArticul.Size = new System.Drawing.Size(663, 128);
+            layoutCommonArticul.Size = new System.Drawing.Size(663, 127);
             layoutCommonArticul.Text = "Основная информация";
             // 
             // layoutControlItem17
@@ -2197,10 +1917,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             layoutSostav.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutSostav.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem20, layoutControlItem21, layoutControlItem22 });
-            layoutSostav.Location = new System.Drawing.Point(0, 213);
+            layoutSostav.Location = new System.Drawing.Point(0, 212);
             layoutSostav.Name = "layoutSostav";
             layoutSostav.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutSostav.Size = new System.Drawing.Size(663, 105);
+            layoutSostav.Size = new System.Drawing.Size(663, 104);
             layoutSostav.Text = "Состав";
             // 
             // layoutControlItem20
@@ -2237,7 +1957,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutNorms.Location = new System.Drawing.Point(118, 506);
             layoutNorms.Name = "layoutControlGroup4";
             layoutNorms.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutNorms.Size = new System.Drawing.Size(118, 209);
+            layoutNorms.Size = new System.Drawing.Size(118, 208);
             layoutNorms.Text = "Норма";
             // 
             // layoutControlItem36
@@ -2303,7 +2023,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutSeb.Location = new System.Drawing.Point(236, 506);
             layoutSeb.Name = "layoutControlGroup7";
             layoutSeb.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutSeb.Size = new System.Drawing.Size(118, 209);
+            layoutSeb.Size = new System.Drawing.Size(118, 208);
             layoutSeb.Text = "Себ. тк.";
             // 
             // layoutControlItem44
@@ -2371,7 +2091,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutTkans.Location = new System.Drawing.Point(0, 506);
             layoutTkans.Name = "layoutControlGroup8";
             layoutTkans.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutTkans.Size = new System.Drawing.Size(118, 209);
+            layoutTkans.Size = new System.Drawing.Size(118, 208);
             layoutTkans.Text = "Ткань";
             // 
             // layoutControlItem51
@@ -2437,7 +2157,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutBrak.Location = new System.Drawing.Point(591, 506);
             layoutBrak.Name = "layoutControlGroup6";
             layoutBrak.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutBrak.Size = new System.Drawing.Size(120, 209);
+            layoutBrak.Size = new System.Drawing.Size(120, 208);
             layoutBrak.Text = "Брак";
             // 
             // layoutControlItem62
@@ -2502,7 +2222,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutOpis_t.Location = new System.Drawing.Point(472, 506);
             layoutOpis_t.Name = "layoutControlGroup10";
             layoutOpis_t.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutOpis_t.Size = new System.Drawing.Size(119, 209);
+            layoutOpis_t.Size = new System.Drawing.Size(119, 208);
             layoutOpis_t.Text = "Описание";
             // 
             // layoutControlItem75
@@ -2568,7 +2288,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlGroup9.Location = new System.Drawing.Point(354, 506);
             layoutControlGroup9.Name = "layoutControlGroup9";
             layoutControlGroup9.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup9.Size = new System.Drawing.Size(118, 209);
+            layoutControlGroup9.Size = new System.Drawing.Size(118, 208);
             layoutControlGroup9.Text = "Кф кач";
             // 
             // layoutControlItem68
@@ -2636,7 +2356,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem82
             // 
             layoutControlItem82.Control = txtNorm_t;
-            layoutControlItem82.Location = new System.Drawing.Point(0, 318);
+            layoutControlItem82.Location = new System.Drawing.Point(0, 316);
             layoutControlItem82.MinSize = new System.Drawing.Size(109, 26);
             layoutControlItem82.Name = "layoutControlItem82";
             layoutControlItem82.Size = new System.Drawing.Size(175, 31);
@@ -2821,7 +2541,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem100.Location = new System.Drawing.Point(0, 298);
             layoutControlItem100.MinSize = new System.Drawing.Size(144, 26);
             layoutControlItem100.Name = "layoutControlItem100";
-            layoutControlItem100.Size = new System.Drawing.Size(162, 31);
+            layoutControlItem100.Size = new System.Drawing.Size(162, 32);
             layoutControlItem100.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem100.Text = "расч.реком.цена";
             layoutControlItem100.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2834,7 +2554,7 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem101.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
             layoutControlItem101.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem101.Control = txtSeb_rekom;
-            layoutControlItem101.Location = new System.Drawing.Point(0, 329);
+            layoutControlItem101.Location = new System.Drawing.Point(0, 330);
             layoutControlItem101.Name = "layoutControlItem101";
             layoutControlItem101.Size = new System.Drawing.Size(162, 44);
             layoutControlItem101.Text = "рекомендованная цена";
@@ -2854,7 +2574,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem3
             // 
             layoutControlItem3.Control = customLayoutControl1;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 128);
+            layoutControlItem3.Location = new System.Drawing.Point(0, 127);
             layoutControlItem3.MinSize = new System.Drawing.Size(376, 81);
             layoutControlItem3.Name = "layoutControlItem3";
             layoutControlItem3.Size = new System.Drawing.Size(663, 85);
@@ -2863,23 +2583,23 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(0, 715);
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 714);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(711, 68);
+            emptySpaceItem1.Size = new System.Drawing.Size(711, 69);
             // 
             // emptySpaceItem7
             // 
-            emptySpaceItem7.Location = new System.Drawing.Point(175, 318);
+            emptySpaceItem7.Location = new System.Drawing.Point(175, 316);
             emptySpaceItem7.Name = "emptySpaceItem7";
-            emptySpaceItem7.Size = new System.Drawing.Size(488, 188);
+            emptySpaceItem7.Size = new System.Drawing.Size(488, 190);
             // 
             // layoutControlItem83
             // 
             layoutControlItem83.Control = txtSeb_all;
-            layoutControlItem83.Location = new System.Drawing.Point(0, 349);
+            layoutControlItem83.Location = new System.Drawing.Point(0, 347);
             layoutControlItem83.MinSize = new System.Drawing.Size(109, 26);
             layoutControlItem83.Name = "layoutControlItem83";
-            layoutControlItem83.Size = new System.Drawing.Size(175, 53);
+            layoutControlItem83.Size = new System.Drawing.Size(175, 55);
             layoutControlItem83.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem83.Text = "руб.";
             layoutControlItem83.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
@@ -2938,25 +2658,18 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem87.TextSize = new System.Drawing.Size(50, 13);
             layoutControlItem87.TextToControlDistance = 5;
             // 
-            // chbArh
+            // layoutControlItem19
             // 
-            chbArh.Enabled = false;
-            chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            chbArh.Font = new System.Drawing.Font("Arial", 10F);
-            // chbArh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            chbArh.Location = new System.Drawing.Point(675, 12);
-            chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            chbArh.Name = "chbArh";
-            chbArh.Size = new System.Drawing.Size(164, 20);
-            chbArh.TabIndex = 4;
-            chbArh.Text = "Архив";
-            chbArh.UseVisualStyleBackColor = true;
+            layoutControlItem19.Control = chbArh;
+            layoutControlItem19.Location = new System.Drawing.Point(663, 0);
+            layoutControlItem19.Name = "layoutControlItem19";
+            layoutControlItem19.Size = new System.Drawing.Size(168, 24);
+            layoutControlItem19.TextVisible = false;
             // 
             // chkPres
             // 
             chkPres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkPres.Font = new System.Drawing.Font("Arial", 10F);
-            // chkPres.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkPres.Location = new System.Drawing.Point(15, 196);
             chkPres.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkPres.Name = "chkPres";
@@ -2969,7 +2682,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkStra.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkStra.Font = new System.Drawing.Font("Arial", 10F);
-            // chkStra.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkStra.Location = new System.Drawing.Point(15, 172);
             chkStra.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkStra.Name = "chkStra";
@@ -2982,7 +2694,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkBus.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkBus.Font = new System.Drawing.Font("Arial", 10F);
-            // chkBus.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkBus.Location = new System.Drawing.Point(15, 148);
             chkBus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkBus.Name = "chkBus";
@@ -2995,7 +2706,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkV.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkV.Font = new System.Drawing.Font("Arial", 10F);
-            // chkV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkV.Location = new System.Drawing.Point(15, 124);
             chkV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkV.Name = "chkV";
@@ -3008,7 +2718,6 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkP.Font = new System.Drawing.Font("Arial", 10F);
-            // chkP.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkP.Location = new System.Drawing.Point(15, 100);
             chkP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkP.Name = "chkP";
@@ -3021,8 +2730,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chbIsFurnit.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsFurnit.Font = new System.Drawing.Font("Arial", 10F);
-            // chbIsFurnit.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
-            chbIsFurnit.Location = new System.Drawing.Point(15, 60);
+            chbIsFurnit.Location = new System.Drawing.Point(15, 59);
             chbIsFurnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsFurnit.Name = "chbIsFurnit";
             chbIsFurnit.Size = new System.Drawing.Size(94, 20);
@@ -3034,8 +2742,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chbIsUpak.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsUpak.Font = new System.Drawing.Font("Arial", 10F);
-            // chbIsUpak.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
-            chbIsUpak.Location = new System.Drawing.Point(15, 36);
+            chbIsUpak.Location = new System.Drawing.Point(15, 35);
             chbIsUpak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsUpak.Name = "chbIsUpak";
             chbIsUpak.Size = new System.Drawing.Size(94, 20);
@@ -3045,16 +2752,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customSimpleButton1
             // 
-            // customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Appearance.Options.UseForeColor = true;
             customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButton1.Location = new System.Drawing.Point(13, 601);
             customSimpleButton1.Name = "customSimpleButton1";
             customSimpleButton1.Size = new System.Drawing.Size(146, 25);
@@ -3118,12 +2821,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             emptySpaceItem2.Location = new System.Drawing.Point(0, 48);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(98, 16);
+            emptySpaceItem2.Size = new System.Drawing.Size(98, 17);
             // 
             // layoutControlItem37
             // 
             layoutControlItem37.Control = chkP;
-            layoutControlItem37.Location = new System.Drawing.Point(0, 64);
+            layoutControlItem37.Location = new System.Drawing.Point(0, 65);
             layoutControlItem37.Name = "layoutControlItem37";
             layoutControlItem37.Size = new System.Drawing.Size(98, 24);
             layoutControlItem37.TextVisible = false;
@@ -3131,7 +2834,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem32
             // 
             layoutControlItem32.Control = chkV;
-            layoutControlItem32.Location = new System.Drawing.Point(0, 88);
+            layoutControlItem32.Location = new System.Drawing.Point(0, 89);
             layoutControlItem32.Name = "layoutControlItem32";
             layoutControlItem32.Size = new System.Drawing.Size(98, 24);
             layoutControlItem32.TextVisible = false;
@@ -3139,7 +2842,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem33
             // 
             layoutControlItem33.Control = chkBus;
-            layoutControlItem33.Location = new System.Drawing.Point(0, 112);
+            layoutControlItem33.Location = new System.Drawing.Point(0, 113);
             layoutControlItem33.Name = "layoutControlItem33";
             layoutControlItem33.Size = new System.Drawing.Size(98, 24);
             layoutControlItem33.TextVisible = false;
@@ -3147,7 +2850,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem34
             // 
             layoutControlItem34.Control = chkStra;
-            layoutControlItem34.Location = new System.Drawing.Point(0, 136);
+            layoutControlItem34.Location = new System.Drawing.Point(0, 137);
             layoutControlItem34.Name = "layoutControlItem34";
             layoutControlItem34.Size = new System.Drawing.Size(98, 24);
             layoutControlItem34.TextVisible = false;
@@ -3155,7 +2858,7 @@ namespace SewingProduction.Features.Articul.Forms
             // layoutControlItem35
             // 
             layoutControlItem35.Control = chkPres;
-            layoutControlItem35.Location = new System.Drawing.Point(0, 160);
+            layoutControlItem35.Location = new System.Drawing.Point(0, 161);
             layoutControlItem35.Name = "layoutControlItem35";
             layoutControlItem35.Size = new System.Drawing.Size(98, 24);
             layoutControlItem35.TextVisible = false;
@@ -3180,13 +2883,11 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLayoutControl2
             // 
-            // customLayoutControl2.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLayoutControl2.Controls.Add(btDel);
             customLayoutControl2.Controls.Add(btEdit);
             customLayoutControl2.Controls.Add(btAdd);
             customLayoutControl2.Controls.Add(gridEditAdRazm);
             customLayoutControl2.Font = new System.Drawing.Font("Arial", 10F);
-            // customLayoutControl2.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLayoutControl2.Location = new System.Drawing.Point(11, 284);
             customLayoutControl2.Name = "customLayoutControl2";
             customLayoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-1216, 253, 650, 400);
@@ -3197,20 +2898,16 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // btDel
             // 
-            // btDel.Appearance.BackColor = System.Drawing.Color.Lavender;
             btDel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // btDel.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             btDel.Appearance.Options.UseBackColor = true;
             btDel.Appearance.Options.UseFont = true;
-            btDel.Appearance.Options.UseForeColor = true;
             btDel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             btDel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btDel.AppearanceDisabled.Options.UseBackColor = true;
-            btDel.AppearanceDisabled.Options.UseForeColor = true;
             btDel.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btDel.ImageOptions.Image");
-            btDel.Location = new System.Drawing.Point(208, 261);
+            btDel.Location = new System.Drawing.Point(208, 260);
             btDel.Name = "btDel";
-            btDel.Size = new System.Drawing.Size(109, 22);
+            btDel.Size = new System.Drawing.Size(109, 23);
             btDel.StyleController = customLayoutControl2;
             btDel.TabIndex = 52;
             btDel.Text = "Удалить";
@@ -3218,20 +2915,16 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // btEdit
             // 
-            // btEdit.Appearance.BackColor = System.Drawing.Color.Lavender;
             btEdit.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // btEdit.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             btEdit.Appearance.Options.UseBackColor = true;
             btEdit.Appearance.Options.UseFont = true;
-            btEdit.Appearance.Options.UseForeColor = true;
             btEdit.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             btEdit.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btEdit.AppearanceDisabled.Options.UseBackColor = true;
-            btEdit.AppearanceDisabled.Options.UseForeColor = true;
             btEdit.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btEdit.ImageOptions.Image");
-            btEdit.Location = new System.Drawing.Point(100, 261);
+            btEdit.Location = new System.Drawing.Point(100, 260);
             btEdit.Name = "btEdit";
-            btEdit.Size = new System.Drawing.Size(104, 22);
+            btEdit.Size = new System.Drawing.Size(104, 23);
             btEdit.StyleController = customLayoutControl2;
             btEdit.TabIndex = 51;
             btEdit.Text = "Изменить";
@@ -3239,20 +2932,16 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // btAdd
             // 
-            // btAdd.Appearance.BackColor = System.Drawing.Color.Lavender;
             btAdd.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // btAdd.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             btAdd.Appearance.Options.UseBackColor = true;
             btAdd.Appearance.Options.UseFont = true;
-            btAdd.Appearance.Options.UseForeColor = true;
             btAdd.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             btAdd.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btAdd.AppearanceDisabled.Options.UseBackColor = true;
-            btAdd.AppearanceDisabled.Options.UseForeColor = true;
             btAdd.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btAdd.ImageOptions.Image");
-            btAdd.Location = new System.Drawing.Point(2, 261);
+            btAdd.Location = new System.Drawing.Point(2, 260);
             btAdd.Name = "btAdd";
-            btAdd.Size = new System.Drawing.Size(94, 22);
+            btAdd.Size = new System.Drawing.Size(94, 23);
             btAdd.StyleController = customLayoutControl2;
             btAdd.TabIndex = 50;
             btAdd.Text = "Добавить";
@@ -3273,43 +2962,35 @@ namespace SewingProduction.Features.Articul.Forms
             layoutControlItem10.Control = gridEditAdRazm;
             layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(319, 259);
+            layoutControlItem10.Size = new System.Drawing.Size(319, 258);
             layoutControlItem10.TextVisible = false;
             // 
             // layoutControlItem16
             // 
             layoutControlItem16.Control = btAdd;
             layoutControlItem16.CustomizationFormText = "add";
-            layoutControlItem16.Location = new System.Drawing.Point(0, 259);
+            layoutControlItem16.Location = new System.Drawing.Point(0, 258);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(98, 26);
+            layoutControlItem16.Size = new System.Drawing.Size(98, 27);
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem23
             // 
             layoutControlItem23.Control = btEdit;
             layoutControlItem23.CustomizationFormText = "edit";
-            layoutControlItem23.Location = new System.Drawing.Point(98, 259);
+            layoutControlItem23.Location = new System.Drawing.Point(98, 258);
             layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new System.Drawing.Size(108, 26);
+            layoutControlItem23.Size = new System.Drawing.Size(108, 27);
             layoutControlItem23.TextVisible = false;
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = btDel;
             layoutControlItem24.CustomizationFormText = "del";
-            layoutControlItem24.Location = new System.Drawing.Point(206, 259);
+            layoutControlItem24.Location = new System.Drawing.Point(206, 258);
             layoutControlItem24.Name = "layoutControlItem24";
-            layoutControlItem24.Size = new System.Drawing.Size(113, 26);
+            layoutControlItem24.Size = new System.Drawing.Size(113, 27);
             layoutControlItem24.TextVisible = false;
-            // 
-            // layoutControlItem19
-            // 
-            layoutControlItem19.Control = chbArh;
-            layoutControlItem19.Location = new System.Drawing.Point(663, 0);
-            layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(168, 24);
-            layoutControlItem19.TextVisible = false;
             // 
             // ArticulEditAdvance
             // 
@@ -3511,6 +3192,7 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem85).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem86).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem87).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
@@ -3533,7 +3215,6 @@ namespace SewingProduction.Features.Articul.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem24).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ResumeLayout(false);
         }
 

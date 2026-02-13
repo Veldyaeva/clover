@@ -15,6 +15,20 @@ namespace SewingProduction.Core.Class
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = value;
+        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get => base.ForeColor;
+            set => base.ForeColor = value;
+        }
         private UserClass _lastUser;
         /// <summary>
         ///Контролирует видимость элемента на основе прав пользователя в системе
@@ -127,6 +141,20 @@ namespace SewingProduction.Core.Class
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = value;
+        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get => base.ForeColor;
+            set => base.ForeColor = value;
+        }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
 

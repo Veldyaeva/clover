@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.form
 {
@@ -131,7 +131,6 @@ namespace SewingProduction.form
             customButtonPech1.FlatAppearance.BorderSize = 0;
             customButtonPech1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonPech1.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonPech1.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonPech1.Location = new System.Drawing.Point(4, 155);
             customButtonPech1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPech1.MaximumSize = new System.Drawing.Size(0, 58);
@@ -235,7 +234,6 @@ namespace SewingProduction.form
             customButtonPech2.FlatAppearance.BorderSize = 0;
             customButtonPech2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonPech2.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonPech2.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonPech2.Location = new System.Drawing.Point(4, 155);
             customButtonPech2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPech2.MaximumSize = new System.Drawing.Size(0, 58);

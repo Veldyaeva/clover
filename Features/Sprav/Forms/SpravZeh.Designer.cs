@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 namespace SewingProduction.form
 {
     partial class SpravZeh
@@ -159,7 +159,6 @@ namespace SewingProduction.form
             customButton1.FlatAppearance.BorderSize = 0;
             customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButton1.Location = new System.Drawing.Point(471, 3);
             customButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButton1.Name = "customButton1";
@@ -176,7 +175,6 @@ namespace SewingProduction.form
             customButton2.FlatAppearance.BorderSize = 0;
             customButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButton2.Location = new System.Drawing.Point(389, 3);
             customButton2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButton2.Name = "customButton2";
@@ -356,7 +354,6 @@ namespace SewingProduction.form
             simpleButtonAddSave.FlatAppearance.BorderSize = 0;
             simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAddSave.Location = new System.Drawing.Point(429, 186);
             simpleButtonAddSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddSave.MinimumSize = new System.Drawing.Size(0, 47);
@@ -374,7 +371,6 @@ namespace SewingProduction.form
             simpleButtonDel.FlatAppearance.BorderSize = 0;
             simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonDel.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonDel.Location = new System.Drawing.Point(216, 186);
             simpleButtonDel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonDel.MinimumSize = new System.Drawing.Size(0, 47);
@@ -392,7 +388,6 @@ namespace SewingProduction.form
             simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
             simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAddOtm.Location = new System.Drawing.Point(4, 186);
             simpleButtonAddOtm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddOtm.MinimumSize = new System.Drawing.Size(0, 47);

@@ -874,7 +874,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRaskr.Appearance.ColumnFilterButtonActive.BackColor = System.Drawing.Color.Navy;
             gridViewRaskr.Appearance.ColumnFilterButtonActive.Options.UseBackColor = true;
 //            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
-            gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = false;
             gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
             gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
             gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn9, gridColumn10, gridColumn13, gridColumn14, gridColumn11, gridColumn15, colspec, gridColumn16, colkod1, gridColumn12, coln_ch, colannId1 });

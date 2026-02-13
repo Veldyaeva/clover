@@ -99,6 +99,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl1.Controls.Add(customLabel2);
             layoutControl1.Controls.Add(gridControlPzvCheck);
             layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            layoutControl1.Font = new System.Drawing.Font("Arial", 10F);
+            layoutControl1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl1.Location = new System.Drawing.Point(0, 0);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(514, 255, 650, 400);
@@ -115,9 +117,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
             customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton1.Location = new System.Drawing.Point(1016, 12);
+            customSimpleButton1.Location = new System.Drawing.Point(995, 12);
             customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(135, 22);
+            customSimpleButton1.Size = new System.Drawing.Size(138, 23);
             customSimpleButton1.StyleController = layoutControl1;
             customSimpleButton1.TabIndex = 12;
             customSimpleButton1.Text = "customSimpleButton1";
@@ -125,21 +127,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // labelStatus
             // 
-            labelStatus.Font = new System.Drawing.Font("Arial", 10F);
-            labelStatus.Location = new System.Drawing.Point(12, 711);
+            labelStatus.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            labelStatus.Appearance.Options.UseFont = true;
+            labelStatus.Location = new System.Drawing.Point(12, 721);
             labelStatus.Name = "labelStatus";
-            labelStatus.Size = new System.Drawing.Size(1832, 26);
+            labelStatus.Size = new System.Drawing.Size(81, 16);
+            labelStatus.StyleController = layoutControl1;
             labelStatus.TabIndex = 11;
             labelStatus.Text = "customLabel1";
+            labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // comboBoxPodrVyazList
             // 
             comboBoxPodrVyazList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxPodrVyazList.Font = new System.Drawing.Font("Arial", 10F);
             comboBoxPodrVyazList.FormattingEnabled = true;
-            comboBoxPodrVyazList.Location = new System.Drawing.Point(743, 12);
+            comboBoxPodrVyazList.Location = new System.Drawing.Point(714, 12);
             comboBoxPodrVyazList.Name = "comboBoxPodrVyazList";
-            comboBoxPodrVyazList.Size = new System.Drawing.Size(131, 24);
+            comboBoxPodrVyazList.Size = new System.Drawing.Size(135, 24);
             comboBoxPodrVyazList.TabIndex = 10;
             // 
             // simpleButtonNextMonth
@@ -185,9 +190,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonGetPzvCheck.AppearanceDisabled.Options.UseBackColor = true;
             buttonGetPzvCheck.AppearanceDisabled.Options.UseForeColor = true;
             buttonGetPzvCheck.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonGetPzvCheck.ImageOptions.Image");
-            buttonGetPzvCheck.Location = new System.Drawing.Point(878, 12);
+            buttonGetPzvCheck.Location = new System.Drawing.Point(853, 12);
             buttonGetPzvCheck.Name = "buttonGetPzvCheck";
-            buttonGetPzvCheck.Size = new System.Drawing.Size(134, 22);
+            buttonGetPzvCheck.Size = new System.Drawing.Size(138, 23);
             buttonGetPzvCheck.StyleController = layoutControl1;
             buttonGetPzvCheck.TabIndex = 6;
             buttonGetPzvCheck.Text = "Просмотр";
@@ -200,10 +205,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             spinEditYear.ErrorMessage = null;
             spinEditYear.Location = new System.Drawing.Point(278, 12);
             spinEditYear.Name = "spinEditYear";
-            // spinEditYear.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             spinEditYear.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // spinEditYear.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            spinEditYear.Properties.Appearance.Options.UseBackColor = true;
             spinEditYear.Properties.Appearance.Options.UseFont = true;
             spinEditYear.Properties.Appearance.Options.UseForeColor = true;
             spinEditYear.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -226,30 +228,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // customLabel2
             // 
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabel2.ForeColor = System.Drawing.Color.Black;
+            customLabel2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.Appearance.Options.UseFont = true;
             customLabel2.Location = new System.Drawing.Point(556, 12);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(183, 22);
+            customLabel2.Size = new System.Drawing.Size(154, 16);
+            customLabel2.StyleController = layoutControl1;
             customLabel2.TabIndex = 1;
             customLabel2.Text = "Выберите подразделение";
+            customLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // gridControlPzvCheck
             // 
             gridControlPzvCheck.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlPzvCheck.Location = new System.Drawing.Point(12, 38);
+            gridControlPzvCheck.Location = new System.Drawing.Point(12, 39);
             gridControlPzvCheck.MainView = bandedGridViewPzvCheck;
             gridControlPzvCheck.Name = "gridControlPzvCheck";
             gridControlPzvCheck.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
-            gridControlPzvCheck.Size = new System.Drawing.Size(1832, 558);
+            gridControlPzvCheck.Size = new System.Drawing.Size(1832, 565);
             gridControlPzvCheck.TabIndex = 7;
             gridControlPzvCheck.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridViewPzvCheck, gridViewPzvCheck });
             // 
             // bandedGridViewPzvCheck
             // 
-            // bandedGridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             bandedGridViewPzvCheck.Appearance.EvenRow.Options.UseBackColor = true;
-            // bandedGridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             bandedGridViewPzvCheck.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             bandedGridViewPzvCheck.Appearance.FocusedRow.Options.UseBackColor = true;
             bandedGridViewPzvCheck.Appearance.FocusedRow.Options.UseFont = true;
@@ -299,9 +301,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPzvCheck
             // 
-            // gridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridViewPzvCheck.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridViewPzvCheck.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewPzvCheck.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPzvCheck.Appearance.FocusedRow.Options.UseFont = true;
@@ -346,30 +346,30 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // layoutControlItem1
             // 
             layoutControlItem1.Control = gridControlPzvCheck;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem1.Location = new System.Drawing.Point(0, 27);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1836, 562);
+            layoutControlItem1.Size = new System.Drawing.Size(1836, 569);
             layoutControlItem1.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
             emptySpaceItem1.Location = new System.Drawing.Point(445, 0);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(99, 26);
+            emptySpaceItem1.Size = new System.Drawing.Size(99, 27);
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = customLabel2;
             layoutControlItem6.Location = new System.Drawing.Point(544, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(187, 26);
+            layoutControlItem6.Size = new System.Drawing.Size(158, 27);
             layoutControlItem6.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
-            layoutControlGroup1.Location = new System.Drawing.Point(0, 588);
+            layoutControlGroup1.Location = new System.Drawing.Point(0, 596);
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new System.Drawing.Size(1836, 111);
+            layoutControlGroup1.Size = new System.Drawing.Size(1836, 113);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem10
@@ -377,7 +377,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem10.Control = comboBoxMonthList;
             layoutControlItem10.Location = new System.Drawing.Point(58, 0);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(208, 26);
+            layoutControlItem10.Size = new System.Drawing.Size(208, 27);
             layoutControlItem10.TextVisible = false;
             // 
             // layoutControlItem4
@@ -385,29 +385,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem4.Control = spinEditYear;
             layoutControlItem4.Location = new System.Drawing.Point(266, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(121, 26);
+            layoutControlItem4.Size = new System.Drawing.Size(121, 27);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem7
             // 
             layoutControlItem7.Control = buttonGetPzvCheck;
-            layoutControlItem7.Location = new System.Drawing.Point(866, 0);
+            layoutControlItem7.Location = new System.Drawing.Point(841, 0);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(138, 26);
+            layoutControlItem7.Size = new System.Drawing.Size(142, 27);
             layoutControlItem7.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(1143, 0);
+            emptySpaceItem2.Location = new System.Drawing.Point(1125, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(693, 26);
+            emptySpaceItem2.Size = new System.Drawing.Size(711, 27);
             // 
             // layoutControlItem8
             // 
             layoutControlItem8.Control = simpleButtonPrevMonth;
             layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(58, 26);
+            layoutControlItem8.Size = new System.Drawing.Size(58, 27);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem3
@@ -415,31 +415,31 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem3.Control = simpleButtonNextMonth;
             layoutControlItem3.Location = new System.Drawing.Point(387, 0);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(58, 26);
+            layoutControlItem3.Size = new System.Drawing.Size(58, 27);
             layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = comboBoxPodrVyazList;
-            layoutControlItem2.Location = new System.Drawing.Point(731, 0);
+            layoutControlItem2.Location = new System.Drawing.Point(702, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(135, 26);
+            layoutControlItem2.Size = new System.Drawing.Size(139, 27);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = labelStatus;
-            layoutControlItem5.Location = new System.Drawing.Point(0, 699);
+            layoutControlItem5.Location = new System.Drawing.Point(0, 709);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(1836, 30);
+            layoutControlItem5.Size = new System.Drawing.Size(1836, 20);
             layoutControlItem5.TextVisible = false;
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = customSimpleButton1;
-            layoutControlItem9.Location = new System.Drawing.Point(1004, 0);
+            layoutControlItem9.Location = new System.Drawing.Point(983, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(139, 26);
+            layoutControlItem9.Size = new System.Drawing.Size(142, 27);
             layoutControlItem9.TextVisible = false;
             // 
             // PlanZagrVyazCheck

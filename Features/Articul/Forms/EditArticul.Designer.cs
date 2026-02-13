@@ -188,7 +188,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxKod
             // 
-            customTextBoxKod.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxKod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxKod, 2);
             customTextBoxKod.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -207,7 +206,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxPo
             // 
-            customTextBoxPo.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPo.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxPo.ErrorColor = System.Drawing.Color.Red;
@@ -223,7 +221,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxKodFurn
             // 
-            customTextBoxKodFurn.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxKodFurn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxKodFurn, 3);
             customTextBoxKodFurn.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -240,7 +237,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxNameFurn
             // 
-            customTextBoxNameFurn.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxNameFurn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxNameFurn, 3);
             customTextBoxNameFurn.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -257,7 +253,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxDlin
             // 
-            customTextBoxDlin.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxDlin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxDlin, 2);
             customTextBoxDlin.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -273,7 +268,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxTimePlet
             // 
-            customTextBoxTimePlet.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxTimePlet.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxTimePlet, 2);
             customTextBoxTimePlet.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -289,7 +283,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxNormP
             // 
-            customTextBoxNormP.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxNormP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxNormP, 2);
             customTextBoxNormP.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -560,7 +553,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxArt
             // 
-            customTextBoxArt.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxArt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxArt, 3);
             customTextBoxArt.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -576,7 +568,6 @@ namespace SewingProduction.Features.Articul
             // 
             // customTextBoxModel
             // 
-            customTextBoxModel.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxModel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel1.SetColumnSpan(customTextBoxModel, 3);
             customTextBoxModel.Dock = System.Windows.Forms.DockStyle.Fill;

@@ -200,12 +200,8 @@
             customTextBoxEx1.Location = new System.Drawing.Point(166, 12);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
-            // customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx1.Size = new System.Drawing.Size(165, 22);
             customTextBoxEx1.StyleController = layoutControl1;
             customTextBoxEx1.TabIndex = 5;
