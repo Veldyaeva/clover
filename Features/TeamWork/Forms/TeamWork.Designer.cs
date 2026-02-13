@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -661,7 +661,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabControl1.AppearancePage.Header.BackColor = System.Drawing.Color.Transparent;
             xtraTabControl1.AppearancePage.Header.Options.UseBackColor = true;
             xtraTabControl1.AppearancePage.HeaderActive.BackColor = System.Drawing.Color.Transparent;
-            xtraTabControl1.AppearancePage.HeaderActive.ForeColor = System.Drawing.Color.Black;
+//            xtraTabControl1.AppearancePage.HeaderActive.ForeColor = System.Drawing.Color.Black;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseBackColor = true;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseForeColor = true;
@@ -750,7 +750,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // statusLabel
             // 
             statusLabel.Font = new System.Drawing.Font("Arial", 10F);
-            statusLabel.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
+//            statusLabel.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
             statusLabel.Location = new System.Drawing.Point(5, 5);
             statusLabel.Name = "statusLabel";
             statusLabel.Size = new System.Drawing.Size(899, 20);
@@ -2084,11 +2084,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditMod.Location = new System.Drawing.Point(921, 45);
             textEditMod.Name = "textEditMod";
             textEditMod.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditMod.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+//            textEditMod.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             textEditMod.Properties.Appearance.Options.UseFont = true;
             textEditMod.Properties.Appearance.Options.UseForeColor = true;
             textEditMod.Properties.AppearanceDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditMod.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+//            textEditMod.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             textEditMod.Properties.AppearanceDisabled.Options.UseFont = true;
             textEditMod.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditMod.Properties.AppearanceDisabled.Options.UseTextOptions = true;
@@ -2104,7 +2104,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditArt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             textEditArt.Properties.Appearance.Options.UseFont = true;
             textEditArt.Properties.AppearanceDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditArt.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+//            textEditArt.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             textEditArt.Properties.AppearanceDisabled.Options.UseFont = true;
             textEditArt.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditArt.Size = new System.Drawing.Size(480, 20);
@@ -2117,7 +2117,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditSec.Location = new System.Drawing.Point(1632, 45);
             textEditSec.Name = "textEditSec";
             textEditSec.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditSec.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+//            textEditSec.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             textEditSec.Properties.Appearance.Options.UseFont = true;
             textEditSec.Properties.Appearance.Options.UseForeColor = true;
             textEditSec.Size = new System.Drawing.Size(100, 20);
@@ -2131,7 +2131,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditCreate.Name = "textEditCreate";
             textEditCreate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             textEditCreate.Properties.Appearance.Options.UseFont = true;
-            textEditCreate.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+//            textEditCreate.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             textEditCreate.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditCreate.Size = new System.Drawing.Size(103, 20);
             textEditCreate.StyleController = layoutControl2;
@@ -2595,11 +2595,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem35
             // 
             layoutControlItem35.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem35.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem35.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem35.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem35.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem35.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem35.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem35.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem35.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem35.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem35.Control = textEditCreate;
@@ -2615,12 +2615,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem32
             // 
             layoutControlItem32.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem32.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem32.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem32.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem32.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem32.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem32.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem32.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem32.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem32.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem32.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem32.Control = textEditMod;
@@ -2636,11 +2636,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem33
             // 
             layoutControlItem33.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem33.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem33.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem33.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem33.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem33.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem33.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem33.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem33.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem33.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem33.Control = textEditArt;
@@ -2654,11 +2654,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem34
             // 
             layoutControlItem34.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem34.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem34.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem34.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem34.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem34.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem34.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem34.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem34.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem34.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem34.Control = textEditSec;
@@ -2799,7 +2799,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // normRaskArt
             // 
-            normRaskArt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            normRaskArt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             normRaskArt.Appearance.EvenRow.Options.UseBackColor = true;
             normRaskArt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Kod_o, TextRask, razryd, sek, spec, Obor });
             normRaskArt.GridControl = customGridControl2;
@@ -2875,7 +2875,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // normKontTab
             // 
-            normKontTab.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            normKontTab.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             normKontTab.Appearance.EvenRow.Options.UseBackColor = true;
             normKontTab.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn67, gridColumn69, gridColumn70, gridColumn71 });
             normKontTab.GridControl = customGridControl1;
@@ -2918,7 +2918,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+//            customLabel2.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customLabel2.Location = new System.Drawing.Point(5, 588);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(518, 26);
@@ -3910,7 +3910,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // xtraTabPage3
             // 
             xtraTabPage3.Appearance.Header.BackColor = System.Drawing.Color.Transparent;
-            xtraTabPage3.Appearance.Header.ForeColor = System.Drawing.Color.Black;
+//            xtraTabPage3.Appearance.Header.ForeColor = System.Drawing.Color.Black;
             xtraTabPage3.Appearance.Header.Options.UseBackColor = true;
             xtraTabPage3.Appearance.Header.Options.UseForeColor = true;
             xtraTabPage3.Appearance.HeaderActive.BackColor = System.Drawing.Color.Transparent;
@@ -4103,9 +4103,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridViewArch
             // 
-            gridViewArch.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            gridViewArch.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewArch.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewArch.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            gridViewArch.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewArch.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewArch.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewArch.Appearance.FocusedRow.Options.UseFont = true;
@@ -4274,12 +4274,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem48
             // 
             layoutControlItem48.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem48.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem48.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem48.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem48.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem48.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem48.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem48.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem48.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem48.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem48.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem48.Control = textEditMod;
@@ -4295,11 +4295,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem50
             // 
             layoutControlItem50.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem50.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem50.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem50.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem50.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem50.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem50.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem50.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem50.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem50.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem50.Control = textEditArt;
@@ -4313,11 +4313,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem51
             // 
             layoutControlItem51.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem51.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem51.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem51.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem51.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem51.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem51.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem51.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem51.AppearanceItemCaptionDisabled.Options.UseFont = true;
             layoutControlItem51.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem51.Control = textEditSec;

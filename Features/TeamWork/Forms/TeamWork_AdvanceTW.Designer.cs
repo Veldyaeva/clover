@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -873,7 +873,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridViewRaskr.Appearance.ColumnFilterButtonActive.BackColor = System.Drawing.Color.Navy;
             gridViewRaskr.Appearance.ColumnFilterButtonActive.Options.UseBackColor = true;
-            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+//            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
             gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
             gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
@@ -1000,7 +1000,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // statusLabel
             // 
             resources.ApplyResources(statusLabel, "statusLabel");
-            statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(statusLabel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("statusLabel.IconAlignment"));
             statusLabel.Name = "statusLabel";
             // 
@@ -1012,9 +1012,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // buffer
             // 
-            buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             resources.ApplyResources(buffer, "buffer");
-            buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(buffer, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("buffer.IconAlignment"));
             buffer.Name = "buffer";
             buffer.UseVisualStyleBackColor = false;
@@ -1403,18 +1403,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // rasz
             // 
-            rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             resources.ApplyResources(rasz, "rasz");
-            rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(rasz, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("rasz.IconAlignment"));
             rasz.Name = "rasz";
             rasz.UseVisualStyleBackColor = false;
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             resources.ApplyResources(customButton2, "customButton2");
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(customButton2, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customButton2.IconAlignment"));
             customButton2.Name = "customButton2";
             customButton2.UseVisualStyleBackColor = false;

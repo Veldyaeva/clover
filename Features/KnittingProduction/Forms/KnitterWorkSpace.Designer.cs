@@ -184,14 +184,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // advBandedGridView1
             // 
-            advBandedGridView1.Appearance.BandPanel.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+//            advBandedGridView1.Appearance.BandPanel.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             advBandedGridView1.Appearance.BandPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             advBandedGridView1.Appearance.BandPanel.Options.UseBackColor = true;
             advBandedGridView1.Appearance.BandPanel.Options.UseFont = true;
             advBandedGridView1.Appearance.BandPanel.Options.UseTextOptions = true;
             advBandedGridView1.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             advBandedGridView1.Appearance.GroupFooter.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
-            advBandedGridView1.Appearance.GroupFooter.BorderColor = System.Drawing.Color.White;
+//            advBandedGridView1.Appearance.GroupFooter.BorderColor = System.Drawing.Color.White;
             advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand39, gridBand40, gridBand41, gridBand42, gridBand43, gridBand44, gridBand45, gridBand46, gridBand27, gridBand29, gridBand56 });
             advBandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { bandedGridColumn11, bandedGridColumn12, bandedGridColumn13, bandedGridColumn14, bandedGridColumn16, bandedGridColumn15, bandedGridColumn17, bandedGridColumn26, bandedGridColumn18, bandedGridColumn19, bandedGridColumn20, bandedGridColumn21, bandedGridColumn22, bandedGridColumn23, bandedGridColumn27, bandedGridColumn24, bandedGridColumn31 });
             advBandedGridView1.DetailHeight = 4038;
