@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class PlanZagrVyazCheck
@@ -100,7 +100,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl1.Controls.Add(gridControlPzvCheck);
             layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-            layoutControl1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl1.Location = new System.Drawing.Point(0, 0);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(514, 255, 650, 400);

@@ -562,7 +562,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl1.Controls.Add(gridControlPlanTotalHoursByKnitMachine);
             layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-            layoutControl1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl1.Location = new System.Drawing.Point(0, 0);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(2288, 154, 650, 644);
@@ -1237,7 +1236,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl2.Controls.Add(customLabel5);
             layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl2.Font = new System.Drawing.Font("Arial", 10F);
-            layoutControl2.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl2.Location = new System.Drawing.Point(0, 0);
             layoutControl2.Name = "layoutControl2";
             layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1133, 449, 650, 400);
@@ -2217,7 +2215,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl3.Controls.Add(customSimpleButton6);
             layoutControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl3.Font = new System.Drawing.Font("Arial", 10F);
-            layoutControl3.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl3.Location = new System.Drawing.Point(0, 0);
             layoutControl3.Name = "layoutControl3";
             layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1098, 531, 650, 400);

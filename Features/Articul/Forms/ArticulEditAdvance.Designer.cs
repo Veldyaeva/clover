@@ -633,7 +633,6 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutCommonArticul.Controls.Add(cbTM);
             dataLayoutCommonArticul.Controls.Add(cbuKod_t1);
             dataLayoutCommonArticul.Font = new System.Drawing.Font("Arial", 10F);
-            dataLayoutCommonArticul.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             dataLayoutCommonArticul.Location = new System.Drawing.Point(329, -2);
             dataLayoutCommonArticul.Name = "dataLayoutCommonArticul";
             dataLayoutCommonArticul.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-847, 290, 650, 636);
