@@ -308,8 +308,7 @@ namespace SewingProduction
         {
             foreach (Control child in control.Controls)
             {
-                // Keep theme infrastructure available, but do not recolor custom controls.
-                if (child is IThemeable themeable && child is not IThemeableControl)
+                if (child is IThemeable themeable)
                 {
                     themeable.ApplyTheme();
                 }

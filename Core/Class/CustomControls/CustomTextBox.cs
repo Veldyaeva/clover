@@ -76,8 +76,7 @@ namespace SewingProduction.Core.Class
         // ===== Тема/права — как у вас =====
         public void ApplyTheme()
         {
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
         protected override void Dispose(bool disposing)

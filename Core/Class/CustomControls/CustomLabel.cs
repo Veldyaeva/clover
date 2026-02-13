@@ -23,8 +23,7 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            // Метки используют системный цвет текста
-            ForeColor = SystemColors.ControlText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
             ApplyFontSizePermission(); // перекрыть размер, если задан
         }

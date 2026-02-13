@@ -43,13 +43,8 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            // Используем стандартное оформление кнопок Windows
-            UseVisualStyleBackColor = true;
-            BackColor = SystemColors.Control;
-            ForeColor = SystemColors.ControlText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
-            FlatStyle = FlatStyle.Standard;
-            FlatAppearance.BorderSize = 1;
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
 

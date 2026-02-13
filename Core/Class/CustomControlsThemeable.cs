@@ -251,8 +251,7 @@ namespace SewingProduction
         }
         public void ApplyTheme()
         {
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
         protected override void Dispose(bool disposing)
@@ -306,8 +305,7 @@ namespace SewingProduction
         }
         public void ApplyTheme()
         {
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
         protected override void Dispose(bool disposing)
@@ -364,8 +362,7 @@ namespace SewingProduction
 
         public void ApplyTheme()
         {
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
@@ -424,8 +421,7 @@ namespace SewingProduction
 
         public void ApplyTheme()
         {
-            BackColor = SystemColors.Window;
-            ForeColor = SystemColors.WindowText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
@@ -482,8 +478,7 @@ namespace SewingProduction
 
         public void ApplyTheme()
         {
-            // Оставляем цвет текста системным, только шрифт берём из общих настроек
-            ForeColor = SystemColors.ControlText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
@@ -598,10 +593,8 @@ namespace SewingProduction
 
         public void ApplyTheme()
         {
-            // Устанавливаем системные цвета и общий шрифт
-            this.ForeColor = SystemColors.ControlText;
+            // Цвета не форсируем: берем из Designer/скина
             this.Font = ThemeManager.SharedSettings.DefaultFont;
-            this.BorderColor = SystemColors.ControlDark;
             Invalidate(); // Перерисовать контрол с новыми цветами
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -645,13 +638,48 @@ namespace SewingProduction
         protected UserClass _user;
         public UserClass User => _user;
         public bool IsPreview { get; set; }
+        private string _appliedFontSignature;
+
+        private static string GetFontSignature(Font font)
+        {
+            if (font == null)
+                return string.Empty;
+
+            return $"{font.FontFamily?.Name}|{font.SizeInPoints}|{font.Style}|{font.Unit}|{font.GdiCharSet}|{font.GdiVerticalFont}";
+        }
+
+        private void InitializeFontTracking()
+        {
+            _appliedFontSignature = GetFontSignature(ThemeManager.SharedSettings.DefaultFont);
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+
+        private void OnThemeChanged()
+        {
+            var currentSignature = GetFontSignature(ThemeManager.SharedSettings.DefaultFont);
+            if (string.Equals(currentSignature, _appliedFontSignature, StringComparison.Ordinal))
+                return;
+
+            _appliedFontSignature = currentSignature;
+
+            if (IsDisposed || !IsHandleCreated)
+                return;
+
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => ApplyThemeToChildren(this)));
+            }
+            else
+            {
+                ApplyThemeToChildren(this);
+            }
+        }
 
         private void ApplyThemeToChildren(Control parentControl)
         {
             foreach (Control childControl in parentControl.Controls)
             {
-                // Custom controls now rely on system colors and should not be recolored by theme traversal.
-                if (childControl is IThemeable themeableChild && childControl is not IThemeableControl)
+                if (childControl is IThemeable themeableChild)
                 {
                     themeableChild.ApplyTheme();
                 }
@@ -673,8 +701,7 @@ namespace SewingProduction
                 _user = new UserClass();
             }
 
-            ApplyTheme();
-            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
+            InitializeFontTracking();
         }
         public CustomForm(UserClass user)
         {
@@ -684,10 +711,7 @@ namespace SewingProduction
             }
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
-
-            ApplyTheme(); // Применяем базовое оформление к самой форме (фон/перерисовка)
-            // Применяем оформление к дочерним контролам после инициализации самой формы
-            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
+            InitializeFontTracking();
 
             // подписка на загрузку формы (для логирования и прав доступа - существующий код)
             this.Load += async (s, e) =>
@@ -763,7 +787,7 @@ namespace SewingProduction
         {
             if (disposing)
             {
-                // здесь больше нет подписки на смену темы
+                ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
