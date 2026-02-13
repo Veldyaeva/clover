@@ -154,11 +154,11 @@
             // 
             // gridView1
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            // gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridView1.Appearance.EvenRow.Options.UseBackColor = true;
             gridView1.Appearance.FixedLine.Options.UseTextOptions = true;
             gridView1.Appearance.FixedLine.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
-            gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView1.Appearance.FocusedRow.Options.UseFont = true;
@@ -396,9 +396,9 @@
             // 
             // PrevMonthButton
             // 
-            PrevMonthButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // PrevMonthButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             PrevMonthButton.Font = new System.Drawing.Font("Arial", 10F);
-            PrevMonthButton.ForeColor = System.Drawing.Color.Black;
+            // PrevMonthButton.ForeColor = System.Drawing.Color.Black;
             PrevMonthButton.Location = new System.Drawing.Point(12, 12);
             PrevMonthButton.Name = "PrevMonthButton";
             PrevMonthButton.Size = new System.Drawing.Size(70, 22);
@@ -409,9 +409,9 @@
             // 
             // NextMonthButton
             // 
-            NextMonthButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // NextMonthButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             NextMonthButton.Font = new System.Drawing.Font("Arial", 10F);
-            NextMonthButton.ForeColor = System.Drawing.Color.Black;
+            // NextMonthButton.ForeColor = System.Drawing.Color.Black;
             NextMonthButton.Location = new System.Drawing.Point(152, 12);
             NextMonthButton.Name = "NextMonthButton";
             NextMonthButton.Size = new System.Drawing.Size(82, 22);
@@ -423,7 +423,7 @@
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.Black;
+            // customLabel1.ForeColor = System.Drawing.Color.Black;
             customLabel1.Location = new System.Drawing.Point(86, 12);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(62, 22);
@@ -460,9 +460,9 @@
             // 
             // customButton4
             // 
-            customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton4.Font = new System.Drawing.Font("Arial", 10F);
-            customButton4.ForeColor = System.Drawing.Color.Black;
+            // customButton4.ForeColor = System.Drawing.Color.Black;
             customButton4.Location = new System.Drawing.Point(24, 526);
             customButton4.Name = "customButton4";
             customButton4.Size = new System.Drawing.Size(85, 49);
@@ -493,9 +493,9 @@
             // 
             // customButton5
             // 
-            customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton5.Font = new System.Drawing.Font("Arial", 10F);
-            customButton5.ForeColor = System.Drawing.Color.Black;
+            // customButton5.ForeColor = System.Drawing.Color.Black;
             customButton5.Location = new System.Drawing.Point(113, 526);
             customButton5.Name = "customButton5";
             customButton5.Size = new System.Drawing.Size(176, 49);
@@ -506,9 +506,9 @@
             // 
             // customButtonOtvlRab
             // 
-            customButtonOtvlRab.BackColor = System.Drawing.Color.Lavender;
+            // customButtonOtvlRab.BackColor = System.Drawing.Color.Lavender;
             customButtonOtvlRab.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOtvlRab.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customButtonOtvlRab.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customButtonOtvlRab.Location = new System.Drawing.Point(1100, 526);
             customButtonOtvlRab.Name = "customButtonOtvlRab";
             customButtonOtvlRab.Size = new System.Drawing.Size(408, 49);
@@ -520,7 +520,7 @@
             // customLabel3
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            customLabel3.ForeColor = System.Drawing.Color.Black;
+            // customLabel3.ForeColor = System.Drawing.Color.Black;
             customLabel3.Location = new System.Drawing.Point(696, 12);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(131, 22);
@@ -543,9 +543,9 @@
             // 
             // customButton3
             // 
-            customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            customButton3.ForeColor = System.Drawing.Color.Black;
+            // customButton3.ForeColor = System.Drawing.Color.Black;
             customButton3.Location = new System.Drawing.Point(293, 526);
             customButton3.Name = "customButton3";
             customButton3.Size = new System.Drawing.Size(273, 49);
@@ -556,9 +556,9 @@
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.Black;
+            // customButton2.ForeColor = System.Drawing.Color.Black;
             customButton2.Location = new System.Drawing.Point(894, 526);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(202, 49);
@@ -569,9 +569,9 @@
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.Black;
+            // customButton1.ForeColor = System.Drawing.Color.Black;
             customButton1.Location = new System.Drawing.Point(570, 526);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(320, 49);
@@ -595,9 +595,9 @@
             // 
             // OpenSpisokButton
             // 
-            OpenSpisokButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // OpenSpisokButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             OpenSpisokButton.Font = new System.Drawing.Font("Arial", 10F);
-            OpenSpisokButton.ForeColor = System.Drawing.Color.Black;
+            // OpenSpisokButton.ForeColor = System.Drawing.Color.Black;
             OpenSpisokButton.Location = new System.Drawing.Point(1323, 12);
             OpenSpisokButton.Name = "OpenSpisokButton";
             OpenSpisokButton.Size = new System.Drawing.Size(197, 22);
@@ -609,7 +609,7 @@
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            customLabel2.ForeColor = System.Drawing.Color.Black;
+            // customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(941, 12);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(194, 22);

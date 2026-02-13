@@ -91,9 +91,9 @@
             // 
             // gridViewRasNomList
             // 
-            gridViewRasNomList.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewRasNomList.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewRasNomList.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewRasNomList.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewRasNomList.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewRasNomList.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRasNomList.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRasNomList.Appearance.FocusedRow.Options.UseFont = true;
@@ -200,9 +200,9 @@
             customTextBoxEx1.Location = new System.Drawing.Point(166, 12);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
-            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            // customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            // customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;

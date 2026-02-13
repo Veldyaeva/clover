@@ -192,9 +192,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             customToggleSwitchAdmin.Location = new System.Drawing.Point(1306, 534);
             customToggleSwitchAdmin.Name = "customToggleSwitchAdmin";
-            customToggleSwitchAdmin.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            // customToggleSwitchAdmin.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             customToggleSwitchAdmin.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customToggleSwitchAdmin.Properties.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customToggleSwitchAdmin.Properties.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customToggleSwitchAdmin.Properties.Appearance.Options.UseBackColor = true;
             customToggleSwitchAdmin.Properties.Appearance.Options.UseFont = true;
             customToggleSwitchAdmin.Properties.Appearance.Options.UseForeColor = true;
@@ -207,9 +207,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customMaskedTextBoxSum
             // 
-            customMaskedTextBoxSum.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customMaskedTextBoxSum.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customMaskedTextBoxSum.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            customMaskedTextBoxSum.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customMaskedTextBoxSum.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customMaskedTextBoxSum.Location = new System.Drawing.Point(59, 534);
             customMaskedTextBoxSum.MaximumSize = new System.Drawing.Size(0, 30);
             customMaskedTextBoxSum.MinimumSize = new System.Drawing.Size(0, 30);
@@ -236,9 +236,9 @@ namespace SewingProduction.Features.Tabel.Forms
             bandedGridViewTabel.ActiveFilterEnabled = false;
             bandedGridViewTabel.Appearance.BandPanel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             bandedGridViewTabel.Appearance.BandPanel.Options.UseFont = true;
-            bandedGridViewTabel.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
+            // bandedGridViewTabel.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
             bandedGridViewTabel.Appearance.EvenRow.Options.UseBackColor = true;
-            bandedGridViewTabel.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
+            // bandedGridViewTabel.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
             bandedGridViewTabel.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             bandedGridViewTabel.Appearance.FocusedRow.Options.UseBackColor = true;
             bandedGridViewTabel.Appearance.FocusedRow.Options.UseFont = true;
@@ -621,9 +621,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButton3
             // 
-            customButton3.BackColor = System.Drawing.Color.Lavender;
+            // customButton3.BackColor = System.Drawing.Color.Lavender;
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            customButton3.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customButton3.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customButton3.Location = new System.Drawing.Point(1223, 45);
             customButton3.MinimumSize = new System.Drawing.Size(160, 0);
             customButton3.Name = "customButton3";
@@ -634,9 +634,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.Lavender;
+            // customButton2.BackColor = System.Drawing.Color.Lavender;
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customButton2.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customButton2.Location = new System.Drawing.Point(1059, 45);
             customButton2.MinimumSize = new System.Drawing.Size(160, 0);
             customButton2.Name = "customButton2";
@@ -647,9 +647,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.Lavender;
+            // customButton1.BackColor = System.Drawing.Color.Lavender;
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customButton1.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customButton1.Location = new System.Drawing.Point(895, 45);
             customButton1.MinimumSize = new System.Drawing.Size(160, 0);
             customButton1.Name = "customButton1";
@@ -660,9 +660,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButtonDel
             // 
-            customButtonDel.BackColor = System.Drawing.Color.Lavender;
+            // customButtonDel.BackColor = System.Drawing.Color.Lavender;
             customButtonDel.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDel.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customButtonDel.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customButtonDel.Location = new System.Drawing.Point(228, 45);
             customButtonDel.MaximumSize = new System.Drawing.Size(200, 0);
             customButtonDel.MinimumSize = new System.Drawing.Size(200, 0);
@@ -675,9 +675,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButtonAdd
             // 
-            customButtonAdd.BackColor = System.Drawing.Color.Lavender;
+            // customButtonAdd.BackColor = System.Drawing.Color.Lavender;
             customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAdd.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customButtonAdd.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customButtonAdd.Location = new System.Drawing.Point(24, 45);
             customButtonAdd.MaximumSize = new System.Drawing.Size(200, 40);
             customButtonAdd.MinimumSize = new System.Drawing.Size(200, 0);
@@ -690,9 +690,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButtonAll
             // 
-            customButtonAll.BackColor = System.Drawing.Color.Lavender;
+            // customButtonAll.BackColor = System.Drawing.Color.Lavender;
             customButtonAll.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAll.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customButtonAll.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customButtonAll.Location = new System.Drawing.Point(1360, 112);
             customButtonAll.Name = "customButtonAll";
             customButtonAll.Size = new System.Drawing.Size(35, 74);
@@ -760,9 +760,9 @@ namespace SewingProduction.Features.Tabel.Forms
             customSearchLookUpEditFio.MaximumSize = new System.Drawing.Size(400, 30);
             customSearchLookUpEditFio.MinimumSize = new System.Drawing.Size(400, 30);
             customSearchLookUpEditFio.Name = "customSearchLookUpEditFio";
-            customSearchLookUpEditFio.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customSearchLookUpEditFio.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customSearchLookUpEditFio.Properties.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            customSearchLookUpEditFio.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customSearchLookUpEditFio.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customSearchLookUpEditFio.Properties.Appearance.Options.UseBackColor = true;
             customSearchLookUpEditFio.Properties.Appearance.Options.UseFont = true;
             customSearchLookUpEditFio.Properties.Appearance.Options.UseForeColor = true;

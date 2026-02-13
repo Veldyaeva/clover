@@ -210,7 +210,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.Black;
+            // customLabel1.ForeColor = System.Drawing.Color.Black;
             customLabel1.Location = new System.Drawing.Point(9, 8);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(72, 16);
@@ -273,9 +273,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // DateCustomTextBox
             // 
-            DateCustomTextBox.BackColor = System.Drawing.Color.White;
+            // DateCustomTextBox.BackColor = System.Drawing.Color.White;
             DateCustomTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            DateCustomTextBox.ForeColor = System.Drawing.Color.Black;
+            // DateCustomTextBox.ForeColor = System.Drawing.Color.Black;
             DateCustomTextBox.Location = new System.Drawing.Point(185, 68);
             DateCustomTextBox.Name = "DateCustomTextBox";
             DateCustomTextBox.Size = new System.Drawing.Size(81, 20);
@@ -284,7 +284,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel3
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.Black;
+            // customLabel3.ForeColor = System.Drawing.Color.Black;
             customLabel3.Location = new System.Drawing.Point(12, 12);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(109, 22);
@@ -295,9 +295,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLookUpEdit1.Location = new System.Drawing.Point(125, 12);
             customLookUpEdit1.Name = "customLookUpEdit1";
-            customLookUpEdit1.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            // customLookUpEdit1.Properties.Appearance.BackColor = System.Drawing.Color.White;
             customLookUpEdit1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            // customLookUpEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             customLookUpEdit1.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEdit1.Properties.Appearance.Options.UseFont = true;
             customLookUpEdit1.Properties.Appearance.Options.UseForeColor = true;
@@ -313,7 +313,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // KolVCustomLabel
             // 
             KolVCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            KolVCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // KolVCustomLabel.ForeColor = System.Drawing.Color.Black;
             KolVCustomLabel.Location = new System.Drawing.Point(252, 200);
             KolVCustomLabel.Name = "KolVCustomLabel";
             KolVCustomLabel.Size = new System.Drawing.Size(35, 20);
@@ -323,7 +323,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.Black;
+            // customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(252, 176);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(35, 20);
@@ -333,7 +333,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // DtfCustomCheckBox
             // 
             DtfCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            DtfCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // DtfCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             DtfCustomCheckBox.Location = new System.Drawing.Point(402, 176);
             DtfCustomCheckBox.Name = "DtfCustomCheckBox";
             DtfCustomCheckBox.Size = new System.Drawing.Size(102, 20);
@@ -344,7 +344,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // PrintKolZvCustomLabel
             // 
             PrintKolZvCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            PrintKolZvCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // PrintKolZvCustomLabel.ForeColor = System.Drawing.Color.Black;
             PrintKolZvCustomLabel.Location = new System.Drawing.Point(125, 200);
             PrintKolZvCustomLabel.Name = "PrintKolZvCustomLabel";
             PrintKolZvCustomLabel.Size = new System.Drawing.Size(33, 20);
@@ -354,7 +354,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // PrintKolCustomLabel
             // 
             PrintKolCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            PrintKolCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // PrintKolCustomLabel.ForeColor = System.Drawing.Color.Black;
             PrintKolCustomLabel.Location = new System.Drawing.Point(89, 200);
             PrintKolCustomLabel.Name = "PrintKolCustomLabel";
             PrintKolCustomLabel.Size = new System.Drawing.Size(32, 20);
@@ -364,7 +364,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel18
             // 
             customLabel18.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel18.ForeColor = System.Drawing.Color.Black;
+            // customLabel18.ForeColor = System.Drawing.Color.Black;
             customLabel18.Location = new System.Drawing.Point(89, 176);
             customLabel18.Name = "customLabel18";
             customLabel18.Size = new System.Drawing.Size(69, 20);
@@ -374,7 +374,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // BdCustomCheckBox
             // 
             BdCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            BdCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // BdCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             BdCustomCheckBox.Location = new System.Drawing.Point(291, 296);
             BdCustomCheckBox.Name = "BdCustomCheckBox";
             BdCustomCheckBox.Size = new System.Drawing.Size(213, 20);
@@ -385,7 +385,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // BusCustomCheckBox
             // 
             BusCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            BusCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // BusCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             BusCustomCheckBox.Location = new System.Drawing.Point(291, 272);
             BusCustomCheckBox.Name = "BusCustomCheckBox";
             BusCustomCheckBox.Size = new System.Drawing.Size(213, 20);
@@ -396,7 +396,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customCheckBox13
             // 
             customCheckBox13.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBox13.ForeColor = System.Drawing.Color.Black;
+            // customCheckBox13.ForeColor = System.Drawing.Color.Black;
             customCheckBox13.Location = new System.Drawing.Point(291, 248);
             customCheckBox13.Name = "customCheckBox13";
             customCheckBox13.Size = new System.Drawing.Size(213, 20);
@@ -407,7 +407,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // StirCustomCheckBox
             // 
             StirCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            StirCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // StirCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             StirCustomCheckBox.Location = new System.Drawing.Point(291, 224);
             StirCustomCheckBox.Name = "StirCustomCheckBox";
             StirCustomCheckBox.Size = new System.Drawing.Size(213, 20);
@@ -418,7 +418,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // PoetCustomCheckBox
             // 
             PoetCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            PoetCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // PoetCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             PoetCustomCheckBox.Location = new System.Drawing.Point(291, 176);
             PoetCustomCheckBox.Name = "PoetCustomCheckBox";
             PoetCustomCheckBox.Size = new System.Drawing.Size(107, 20);
@@ -429,7 +429,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // StraCustomCheckBox
             // 
             StraCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            StraCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // StraCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             StraCustomCheckBox.Location = new System.Drawing.Point(162, 296);
             StraCustomCheckBox.Name = "StraCustomCheckBox";
             StraCustomCheckBox.Size = new System.Drawing.Size(125, 20);
@@ -440,7 +440,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // PPresCustomCheckBox
             // 
             PPresCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            PPresCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // PPresCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             PPresCustomCheckBox.Location = new System.Drawing.Point(162, 272);
             PPresCustomCheckBox.Name = "PPresCustomCheckBox";
             PPresCustomCheckBox.Size = new System.Drawing.Size(125, 20);
@@ -451,7 +451,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // ZvetAllCustomCheckBox
             // 
             ZvetAllCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            ZvetAllCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // ZvetAllCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             ZvetAllCustomCheckBox.Location = new System.Drawing.Point(162, 248);
             ZvetAllCustomCheckBox.Name = "ZvetAllCustomCheckBox";
             ZvetAllCustomCheckBox.Size = new System.Drawing.Size(125, 20);
@@ -462,7 +462,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // LazerCustomCheckBox
             // 
             LazerCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            LazerCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // LazerCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             LazerCustomCheckBox.Location = new System.Drawing.Point(162, 224);
             LazerCustomCheckBox.Name = "LazerCustomCheckBox";
             LazerCustomCheckBox.Size = new System.Drawing.Size(125, 20);
@@ -473,7 +473,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // VishCustomCheckBox
             // 
             VishCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            VishCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // VishCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             VishCustomCheckBox.Location = new System.Drawing.Point(162, 176);
             VishCustomCheckBox.Name = "VishCustomCheckBox";
             VishCustomCheckBox.Size = new System.Drawing.Size(86, 20);
@@ -484,7 +484,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // GofpCustomCheckBox
             // 
             GofpCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            GofpCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // GofpCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             GofpCustomCheckBox.Location = new System.Drawing.Point(12, 296);
             GofpCustomCheckBox.Name = "GofpCustomCheckBox";
             GofpCustomCheckBox.Size = new System.Drawing.Size(146, 20);
@@ -495,7 +495,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // PTampCustomCheckBox
             // 
             PTampCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            PTampCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // PTampCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             PTampCustomCheckBox.Location = new System.Drawing.Point(12, 272);
             PTampCustomCheckBox.Name = "PTampCustomCheckBox";
             PTampCustomCheckBox.Size = new System.Drawing.Size(146, 20);
@@ -506,7 +506,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // NabivAllCustomCheckBox
             // 
             NabivAllCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            NabivAllCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // NabivAllCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             NabivAllCustomCheckBox.Location = new System.Drawing.Point(12, 248);
             NabivAllCustomCheckBox.Name = "NabivAllCustomCheckBox";
             NabivAllCustomCheckBox.Size = new System.Drawing.Size(146, 20);
@@ -517,7 +517,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // PrinterCustomCheckBox
             // 
             PrinterCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            PrinterCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // PrinterCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             PrinterCustomCheckBox.Location = new System.Drawing.Point(12, 224);
             PrinterCustomCheckBox.Name = "PrinterCustomCheckBox";
             PrinterCustomCheckBox.Size = new System.Drawing.Size(146, 20);
@@ -528,7 +528,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // PrintCustomCheckBox
             // 
             PrintCustomCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            PrintCustomCheckBox.ForeColor = System.Drawing.Color.Black;
+            // PrintCustomCheckBox.ForeColor = System.Drawing.Color.Black;
             PrintCustomCheckBox.Location = new System.Drawing.Point(12, 176);
             PrintCustomCheckBox.Name = "PrintCustomCheckBox";
             PrintCustomCheckBox.Size = new System.Drawing.Size(73, 20);
@@ -539,7 +539,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // RostCustomLabel
             // 
             RostCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            RostCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // RostCustomLabel.ForeColor = System.Drawing.Color.Black;
             RostCustomLabel.Location = new System.Drawing.Point(377, 146);
             RostCustomLabel.Name = "RostCustomLabel";
             RostCustomLabel.Size = new System.Drawing.Size(127, 26);
@@ -549,7 +549,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // ModBlokCustomLabel
             // 
             ModBlokCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            ModBlokCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // ModBlokCustomLabel.ForeColor = System.Drawing.Color.Black;
             ModBlokCustomLabel.Location = new System.Drawing.Point(277, 146);
             ModBlokCustomLabel.Name = "ModBlokCustomLabel";
             ModBlokCustomLabel.Size = new System.Drawing.Size(96, 26);
@@ -559,7 +559,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel15
             // 
             customLabel15.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel15.ForeColor = System.Drawing.Color.Black;
+            // customLabel15.ForeColor = System.Drawing.Color.Black;
             customLabel15.Location = new System.Drawing.Point(198, 146);
             customLabel15.Name = "customLabel15";
             customLabel15.Size = new System.Drawing.Size(75, 26);
@@ -569,7 +569,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // trCustomLabel
             // 
             trCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            trCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // trCustomLabel.ForeColor = System.Drawing.Color.Black;
             trCustomLabel.Location = new System.Drawing.Point(89, 146);
             trCustomLabel.Name = "trCustomLabel";
             trCustomLabel.Size = new System.Drawing.Size(105, 26);
@@ -579,7 +579,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel13
             // 
             customLabel13.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel13.ForeColor = System.Drawing.Color.Black;
+            // customLabel13.ForeColor = System.Drawing.Color.Black;
             customLabel13.Location = new System.Drawing.Point(12, 146);
             customLabel13.Name = "customLabel13";
             customLabel13.Size = new System.Drawing.Size(73, 26);
@@ -589,7 +589,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // nZvetCustomLabel
             // 
             nZvetCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            nZvetCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // nZvetCustomLabel.ForeColor = System.Drawing.Color.Black;
             nZvetCustomLabel.Location = new System.Drawing.Point(56, 117);
             nZvetCustomLabel.Name = "nZvetCustomLabel";
             nZvetCustomLabel.Size = new System.Drawing.Size(448, 25);
@@ -599,7 +599,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel11
             // 
             customLabel11.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel11.ForeColor = System.Drawing.Color.Black;
+            // customLabel11.ForeColor = System.Drawing.Color.Black;
             customLabel11.Location = new System.Drawing.Point(12, 117);
             customLabel11.Name = "customLabel11";
             customLabel11.Size = new System.Drawing.Size(40, 25);
@@ -609,7 +609,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel10
             // 
             customLabel10.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel10.ForeColor = System.Drawing.Color.Black;
+            // customLabel10.ForeColor = System.Drawing.Color.Black;
             customLabel10.Location = new System.Drawing.Point(12, 92);
             customLabel10.Name = "customLabel10";
             customLabel10.Size = new System.Drawing.Size(134, 21);
@@ -618,9 +618,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customComboBox2
             // 
-            customComboBox2.BackColor = System.Drawing.Color.White;
+            // customComboBox2.BackColor = System.Drawing.Color.White;
             customComboBox2.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox2.ForeColor = System.Drawing.Color.Black;
+            // customComboBox2.ForeColor = System.Drawing.Color.Black;
             customComboBox2.FormattingEnabled = true;
             customComboBox2.Location = new System.Drawing.Point(150, 92);
             customComboBox2.Name = "customComboBox2";
@@ -630,7 +630,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel9
             // 
             customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.Black;
+            // customLabel9.ForeColor = System.Drawing.Color.Black;
             customLabel9.Location = new System.Drawing.Point(270, 68);
             customLabel9.Name = "customLabel9";
             customLabel9.Size = new System.Drawing.Size(62, 20);
@@ -640,7 +640,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel8
             // 
             customLabel8.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel8.ForeColor = System.Drawing.Color.Black;
+            // customLabel8.ForeColor = System.Drawing.Color.Black;
             customLabel8.Location = new System.Drawing.Point(141, 68);
             customLabel8.Name = "customLabel8";
             customLabel8.Size = new System.Drawing.Size(40, 20);
@@ -650,7 +650,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel7
             // 
             customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.Black;
+            // customLabel7.ForeColor = System.Drawing.Color.Black;
             customLabel7.Location = new System.Drawing.Point(12, 68);
             customLabel7.Name = "customLabel7";
             customLabel7.Size = new System.Drawing.Size(86, 20);
@@ -660,7 +660,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel6
             // 
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.Black;
+            // customLabel6.ForeColor = System.Drawing.Color.Black;
             customLabel6.Location = new System.Drawing.Point(198, 38);
             customLabel6.Name = "customLabel6";
             customLabel6.Size = new System.Drawing.Size(63, 26);
@@ -670,7 +670,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel5
             // 
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.Black;
+            // customLabel5.ForeColor = System.Drawing.Color.Black;
             customLabel5.Location = new System.Drawing.Point(12, 38);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new System.Drawing.Size(62, 26);
@@ -680,7 +680,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // BazaCustomLabel
             // 
             BazaCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            BazaCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // BazaCustomLabel.ForeColor = System.Drawing.Color.Black;
             BazaCustomLabel.Location = new System.Drawing.Point(336, 68);
             BazaCustomLabel.Name = "BazaCustomLabel";
             BazaCustomLabel.Size = new System.Drawing.Size(168, 20);
@@ -697,7 +697,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // ModCustomLabel
             // 
             ModCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            ModCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // ModCustomLabel.ForeColor = System.Drawing.Color.Black;
             ModCustomLabel.Location = new System.Drawing.Point(265, 38);
             ModCustomLabel.Name = "ModCustomLabel";
             ModCustomLabel.Size = new System.Drawing.Size(239, 26);
@@ -707,7 +707,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // ArticulCustomLabel
             // 
             ArticulCustomLabel.Font = new System.Drawing.Font("Arial", 10F);
-            ArticulCustomLabel.ForeColor = System.Drawing.Color.Black;
+            // ArticulCustomLabel.ForeColor = System.Drawing.Color.Black;
             ArticulCustomLabel.Location = new System.Drawing.Point(78, 38);
             ArticulCustomLabel.Name = "ArticulCustomLabel";
             ArticulCustomLabel.Size = new System.Drawing.Size(116, 26);
@@ -726,9 +726,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // gridView2
             // 
-            gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            // gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridView2.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView2.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // gridView2.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridView2.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridView2.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView2.Appearance.FocusedRow.Options.UseFont = true;
@@ -805,9 +805,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // gridView1
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            // gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridView1.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView1.Appearance.FocusedRow.Options.UseFont = true;

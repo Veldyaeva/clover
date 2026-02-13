@@ -280,12 +280,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // NomZadSearchTextBox
             // 
-            NomZadSearchTextBox.BackColor = System.Drawing.Color.White;
+            // NomZadSearchTextBox.BackColor = System.Drawing.Color.White;
             NomZadSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             NomZadSearchTextBox.ErrorColor = System.Drawing.Color.Red;
             NomZadSearchTextBox.ErrorMessage = null;
             NomZadSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            NomZadSearchTextBox.ForeColor = System.Drawing.Color.Black;
+            // NomZadSearchTextBox.ForeColor = System.Drawing.Color.Black;
             NomZadSearchTextBox.Location = new System.Drawing.Point(819, 36);
             NomZadSearchTextBox.Name = "NomZadSearchTextBox";
             NomZadSearchTextBox.Size = new System.Drawing.Size(183, 23);
@@ -342,12 +342,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // recNomTextBox
             // 
-            recNomTextBox.BackColor = System.Drawing.Color.White;
+            // recNomTextBox.BackColor = System.Drawing.Color.White;
             recNomTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             recNomTextBox.ErrorColor = System.Drawing.Color.Red;
             recNomTextBox.ErrorMessage = null;
             recNomTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            recNomTextBox.ForeColor = System.Drawing.Color.Black;
+            // recNomTextBox.ForeColor = System.Drawing.Color.Black;
             recNomTextBox.Location = new System.Drawing.Point(153, 553);
             recNomTextBox.Name = "recNomTextBox";
             recNomTextBox.Size = new System.Drawing.Size(973, 20);
@@ -355,12 +355,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // recNomZadTextBox
             // 
-            recNomZadTextBox.BackColor = System.Drawing.Color.White;
+            // recNomZadTextBox.BackColor = System.Drawing.Color.White;
             recNomZadTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             recNomZadTextBox.ErrorColor = System.Drawing.Color.Red;
             recNomZadTextBox.ErrorMessage = null;
             recNomZadTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            recNomZadTextBox.ForeColor = System.Drawing.Color.Black;
+            // recNomZadTextBox.ForeColor = System.Drawing.Color.Black;
             recNomZadTextBox.Location = new System.Drawing.Point(153, 529);
             recNomZadTextBox.Multiline = true;
             recNomZadTextBox.Name = "recNomZadTextBox";
@@ -369,12 +369,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // nZvetTextBox
             // 
-            nZvetTextBox.BackColor = System.Drawing.Color.White;
+            // nZvetTextBox.BackColor = System.Drawing.Color.White;
             nZvetTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             nZvetTextBox.ErrorColor = System.Drawing.Color.Red;
             nZvetTextBox.ErrorMessage = null;
             nZvetTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            nZvetTextBox.ForeColor = System.Drawing.Color.Black;
+            // nZvetTextBox.ForeColor = System.Drawing.Color.Black;
             nZvetTextBox.Location = new System.Drawing.Point(153, 505);
             nZvetTextBox.Name = "nZvetTextBox";
             nZvetTextBox.Size = new System.Drawing.Size(973, 20);
@@ -384,9 +384,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton14
             // 
-            customButton14.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton14.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton14.Font = new System.Drawing.Font("Arial", 10F);
-            customButton14.ForeColor = System.Drawing.Color.Black;
+            // customButton14.ForeColor = System.Drawing.Color.Black;
             customButton14.Location = new System.Drawing.Point(1449, 538);
             customButton14.Name = "customButton14";
             customButton14.Size = new System.Drawing.Size(85, 56);
@@ -399,9 +399,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             YearSearchTextBox.Location = new System.Drawing.Point(1492, 53);
             YearSearchTextBox.Name = "YearSearchTextBox";
             YearSearchTextBox.ObjectName = null;
-            YearSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            // YearSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
             YearSearchTextBox.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            YearSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            // YearSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             YearSearchTextBox.Properties.Appearance.Options.UseBackColor = true;
             YearSearchTextBox.Properties.Appearance.Options.UseFont = true;
             YearSearchTextBox.Properties.Appearance.Options.UseForeColor = true;
@@ -414,9 +414,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             PachSearchTextBox.Location = new System.Drawing.Point(1599, 53);
             PachSearchTextBox.Name = "PachSearchTextBox";
             PachSearchTextBox.ObjectName = null;
-            PachSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            // PachSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
             PachSearchTextBox.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            PachSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            // PachSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             PachSearchTextBox.Properties.Appearance.Options.UseBackColor = true;
             PachSearchTextBox.Properties.Appearance.Options.UseFont = true;
             PachSearchTextBox.Properties.Appearance.Options.UseForeColor = true;
@@ -448,7 +448,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel16.AutoSize = true;
             customLabel16.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel16.ForeColor = System.Drawing.Color.Black;
+            // customLabel16.ForeColor = System.Drawing.Color.Black;
             customLabel16.Location = new System.Drawing.Point(78, 58);
             customLabel16.Name = "customLabel16";
             customLabel16.Size = new System.Drawing.Size(107, 16);
@@ -457,12 +457,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // rzIdTextBox
             // 
-            rzIdTextBox.BackColor = System.Drawing.Color.White;
+            // rzIdTextBox.BackColor = System.Drawing.Color.White;
             rzIdTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             rzIdTextBox.ErrorColor = System.Drawing.Color.Red;
             rzIdTextBox.ErrorMessage = null;
             rzIdTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            rzIdTextBox.ForeColor = System.Drawing.Color.Black;
+            // rzIdTextBox.ForeColor = System.Drawing.Color.Black;
             rzIdTextBox.Location = new System.Drawing.Point(3, 61);
             rzIdTextBox.Name = "rzIdTextBox";
             rzIdTextBox.Size = new System.Drawing.Size(69, 23);
@@ -472,7 +472,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel14.AutoSize = true;
             customLabel14.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel14.ForeColor = System.Drawing.Color.Black;
+            // customLabel14.ForeColor = System.Drawing.Color.Black;
             customLabel14.Location = new System.Drawing.Point(78, 29);
             customLabel14.Name = "customLabel14";
             customLabel14.Size = new System.Drawing.Size(63, 16);
@@ -481,12 +481,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // nomZadTextBox
             // 
-            nomZadTextBox.BackColor = System.Drawing.Color.White;
+            // nomZadTextBox.BackColor = System.Drawing.Color.White;
             nomZadTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             nomZadTextBox.ErrorColor = System.Drawing.Color.Red;
             nomZadTextBox.ErrorMessage = null;
             nomZadTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            nomZadTextBox.ForeColor = System.Drawing.Color.Black;
+            // nomZadTextBox.ForeColor = System.Drawing.Color.Black;
             nomZadTextBox.Location = new System.Drawing.Point(3, 32);
             nomZadTextBox.Name = "nomZadTextBox";
             nomZadTextBox.Size = new System.Drawing.Size(69, 23);
@@ -494,12 +494,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // datePlanTextBox
             // 
-            datePlanTextBox.BackColor = System.Drawing.Color.White;
+            // datePlanTextBox.BackColor = System.Drawing.Color.White;
             datePlanTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             datePlanTextBox.ErrorColor = System.Drawing.Color.Red;
             datePlanTextBox.ErrorMessage = null;
             datePlanTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            datePlanTextBox.ForeColor = System.Drawing.Color.Black;
+            // datePlanTextBox.ForeColor = System.Drawing.Color.Black;
             datePlanTextBox.Location = new System.Drawing.Point(3, 3);
             datePlanTextBox.Name = "datePlanTextBox";
             datePlanTextBox.Size = new System.Drawing.Size(69, 23);
@@ -509,7 +509,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel12.AutoSize = true;
             customLabel12.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel12.ForeColor = System.Drawing.Color.Black;
+            // customLabel12.ForeColor = System.Drawing.Color.Black;
             customLabel12.Location = new System.Drawing.Point(78, 0);
             customLabel12.Name = "customLabel12";
             customLabel12.Size = new System.Drawing.Size(113, 16);
@@ -518,9 +518,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton13
             // 
-            customButton13.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton13.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton13.Font = new System.Drawing.Font("Arial", 10F);
-            customButton13.ForeColor = System.Drawing.Color.Black;
+            // customButton13.ForeColor = System.Drawing.Color.Black;
             customButton13.Location = new System.Drawing.Point(1345, 538);
             customButton13.Name = "customButton13";
             customButton13.Size = new System.Drawing.Size(100, 56);
@@ -530,9 +530,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton12
             // 
-            customButton12.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton12.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton12.Font = new System.Drawing.Font("Arial", 10F);
-            customButton12.ForeColor = System.Drawing.Color.Black;
+            // customButton12.ForeColor = System.Drawing.Color.Black;
             customButton12.Location = new System.Drawing.Point(1345, 705);
             customButton12.Name = "customButton12";
             customButton12.Size = new System.Drawing.Size(189, 70);
@@ -542,9 +542,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton11
             // 
-            customButton11.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton11.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton11.Font = new System.Drawing.Font("Arial", 10F);
-            customButton11.ForeColor = System.Drawing.Color.Black;
+            // customButton11.ForeColor = System.Drawing.Color.Black;
             customButton11.Location = new System.Drawing.Point(1345, 652);
             customButton11.Name = "customButton11";
             customButton11.Size = new System.Drawing.Size(189, 49);
@@ -554,9 +554,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton10
             // 
-            customButton10.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton10.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton10.Font = new System.Drawing.Font("Arial", 10F);
-            customButton10.ForeColor = System.Drawing.Color.Black;
+            // customButton10.ForeColor = System.Drawing.Color.Black;
             customButton10.Location = new System.Drawing.Point(1345, 598);
             customButton10.Name = "customButton10";
             customButton10.Size = new System.Drawing.Size(189, 50);
@@ -566,9 +566,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton9
             // 
-            customButton9.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton9.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton9.Font = new System.Drawing.Font("Arial", 10F);
-            customButton9.ForeColor = System.Drawing.Color.Black;
+            // customButton9.ForeColor = System.Drawing.Color.Black;
             customButton9.Location = new System.Drawing.Point(1266, 705);
             customButton9.Name = "customButton9";
             customButton9.Size = new System.Drawing.Size(75, 70);
@@ -578,9 +578,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton8
             // 
-            customButton8.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton8.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton8.Font = new System.Drawing.Font("Arial", 10F);
-            customButton8.ForeColor = System.Drawing.Color.Black;
+            // customButton8.ForeColor = System.Drawing.Color.Black;
             customButton8.Location = new System.Drawing.Point(1266, 652);
             customButton8.Name = "customButton8";
             customButton8.Size = new System.Drawing.Size(75, 49);
@@ -590,9 +590,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton7
             // 
-            customButton7.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton7.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton7.Font = new System.Drawing.Font("Arial", 10F);
-            customButton7.ForeColor = System.Drawing.Color.Black;
+            // customButton7.ForeColor = System.Drawing.Color.Black;
             customButton7.Location = new System.Drawing.Point(1266, 596);
             customButton7.Name = "customButton7";
             customButton7.Size = new System.Drawing.Size(75, 52);
@@ -602,9 +602,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton6
             // 
-            customButton6.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton6.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton6.Font = new System.Drawing.Font("Arial", 10F);
-            customButton6.ForeColor = System.Drawing.Color.Black;
+            // customButton6.ForeColor = System.Drawing.Color.Black;
             customButton6.Location = new System.Drawing.Point(1266, 538);
             customButton6.Name = "customButton6";
             customButton6.Size = new System.Drawing.Size(75, 54);
@@ -614,9 +614,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton5
             // 
-            customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton5.Font = new System.Drawing.Font("Arial", 10F);
-            customButton5.ForeColor = System.Drawing.Color.Black;
+            // customButton5.ForeColor = System.Drawing.Color.Black;
             customButton5.Location = new System.Drawing.Point(1142, 705);
             customButton5.Name = "customButton5";
             customButton5.Size = new System.Drawing.Size(120, 70);
@@ -626,9 +626,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton4
             // 
-            customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton4.Font = new System.Drawing.Font("Arial", 10F);
-            customButton4.ForeColor = System.Drawing.Color.Black;
+            // customButton4.ForeColor = System.Drawing.Color.Black;
             customButton4.Location = new System.Drawing.Point(1142, 652);
             customButton4.Name = "customButton4";
             customButton4.Size = new System.Drawing.Size(120, 49);
@@ -638,9 +638,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton3
             // 
-            customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            customButton3.ForeColor = System.Drawing.Color.Black;
+            // customButton3.ForeColor = System.Drawing.Color.Black;
             customButton3.Location = new System.Drawing.Point(1142, 596);
             customButton3.Name = "customButton3";
             customButton3.Size = new System.Drawing.Size(120, 52);
@@ -650,9 +650,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.Black;
+            // customButton2.ForeColor = System.Drawing.Color.Black;
             customButton2.Location = new System.Drawing.Point(1142, 538);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(120, 54);
@@ -707,12 +707,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // dostZehTextBox
             // 
-            dostZehTextBox.BackColor = System.Drawing.Color.White;
+            // dostZehTextBox.BackColor = System.Drawing.Color.White;
             dostZehTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             dostZehTextBox.ErrorColor = System.Drawing.Color.Red;
             dostZehTextBox.ErrorMessage = null;
             dostZehTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            dostZehTextBox.ForeColor = System.Drawing.Color.Black;
+            // dostZehTextBox.ForeColor = System.Drawing.Color.Black;
             dostZehTextBox.Location = new System.Drawing.Point(149, 240);
             dostZehTextBox.Name = "dostZehTextBox";
             dostZehTextBox.Size = new System.Drawing.Size(100, 23);
@@ -722,7 +722,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel8.AutoSize = true;
             customLabel8.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel8.ForeColor = System.Drawing.Color.Black;
+            // customLabel8.ForeColor = System.Drawing.Color.Black;
             customLabel8.Location = new System.Drawing.Point(3, 237);
             customLabel8.Name = "customLabel8";
             customLabel8.Size = new System.Drawing.Size(48, 16);
@@ -731,12 +731,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // TabKpvTextBox
             // 
-            TabKpvTextBox.BackColor = System.Drawing.Color.White;
+            // TabKpvTextBox.BackColor = System.Drawing.Color.White;
             TabKpvTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabKpvTextBox.ErrorColor = System.Drawing.Color.Red;
             TabKpvTextBox.ErrorMessage = null;
             TabKpvTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabKpvTextBox.ForeColor = System.Drawing.Color.Black;
+            // TabKpvTextBox.ForeColor = System.Drawing.Color.Black;
             TabKpvTextBox.Location = new System.Drawing.Point(69, 200);
             TabKpvTextBox.Name = "TabKpvTextBox";
             TabKpvTextBox.Size = new System.Drawing.Size(55, 23);
@@ -746,7 +746,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             TabMLabel.AutoSize = true;
             TabMLabel.Font = new System.Drawing.Font("Arial", 10F);
-            TabMLabel.ForeColor = System.Drawing.Color.Black;
+            // TabMLabel.ForeColor = System.Drawing.Color.Black;
             TabMLabel.Location = new System.Drawing.Point(149, 159);
             TabMLabel.Name = "TabMLabel";
             TabMLabel.Size = new System.Drawing.Size(39, 16);
@@ -755,12 +755,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // TabMTextBox
             // 
-            TabMTextBox.BackColor = System.Drawing.Color.White;
+            // TabMTextBox.BackColor = System.Drawing.Color.White;
             TabMTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabMTextBox.ErrorColor = System.Drawing.Color.Red;
             TabMTextBox.ErrorMessage = null;
             TabMTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabMTextBox.ForeColor = System.Drawing.Color.Black;
+            // TabMTextBox.ForeColor = System.Drawing.Color.Black;
             TabMTextBox.Location = new System.Drawing.Point(69, 162);
             TabMTextBox.Name = "TabMTextBox";
             TabMTextBox.Size = new System.Drawing.Size(55, 23);
@@ -768,12 +768,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // TabPTextBox
             // 
-            TabPTextBox.BackColor = System.Drawing.Color.White;
+            // TabPTextBox.BackColor = System.Drawing.Color.White;
             TabPTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabPTextBox.ErrorColor = System.Drawing.Color.Red;
             TabPTextBox.ErrorMessage = null;
             TabPTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabPTextBox.ForeColor = System.Drawing.Color.Black;
+            // TabPTextBox.ForeColor = System.Drawing.Color.Black;
             TabPTextBox.Location = new System.Drawing.Point(69, 129);
             TabPTextBox.Name = "TabPTextBox";
             TabPTextBox.Size = new System.Drawing.Size(55, 23);
@@ -782,7 +782,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel7
             // 
             customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.Black;
+            // customLabel7.ForeColor = System.Drawing.Color.Black;
             customLabel7.Location = new System.Drawing.Point(3, 0);
             customLabel7.Name = "customLabel7";
             customLabel7.Size = new System.Drawing.Size(58, 20);
@@ -793,7 +793,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             TabPLabel.AutoSize = true;
             TabPLabel.Font = new System.Drawing.Font("Arial", 10F);
-            TabPLabel.ForeColor = System.Drawing.Color.Black;
+            // TabPLabel.ForeColor = System.Drawing.Color.Black;
             TabPLabel.Location = new System.Drawing.Point(149, 126);
             TabPLabel.Name = "TabPLabel";
             TabPLabel.Size = new System.Drawing.Size(39, 16);
@@ -802,12 +802,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // tabKTextBox
             // 
-            tabKTextBox.BackColor = System.Drawing.Color.White;
+            // tabKTextBox.BackColor = System.Drawing.Color.White;
             tabKTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tabKTextBox.ErrorColor = System.Drawing.Color.Red;
             tabKTextBox.ErrorMessage = null;
             tabKTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            tabKTextBox.ForeColor = System.Drawing.Color.Black;
+            // tabKTextBox.ForeColor = System.Drawing.Color.Black;
             tabKTextBox.Location = new System.Drawing.Point(69, 96);
             tabKTextBox.Name = "tabKTextBox";
             tabKTextBox.ReadOnly = true;
@@ -817,7 +817,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel13
             // 
             customLabel13.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel13.ForeColor = System.Drawing.Color.Black;
+            // customLabel13.ForeColor = System.Drawing.Color.Black;
             customLabel13.Location = new System.Drawing.Point(3, 60);
             customLabel13.Name = "customLabel13";
             customLabel13.Size = new System.Drawing.Size(60, 31);
@@ -826,12 +826,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // TabOrkTextBox
             // 
-            TabOrkTextBox.BackColor = System.Drawing.Color.White;
+            // TabOrkTextBox.BackColor = System.Drawing.Color.White;
             TabOrkTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabOrkTextBox.ErrorColor = System.Drawing.Color.Red;
             TabOrkTextBox.ErrorMessage = null;
             TabOrkTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabOrkTextBox.ForeColor = System.Drawing.Color.Black;
+            // TabOrkTextBox.ForeColor = System.Drawing.Color.Black;
             TabOrkTextBox.Location = new System.Drawing.Point(69, 63);
             TabOrkTextBox.Name = "TabOrkTextBox";
             TabOrkTextBox.ReadOnly = true;
@@ -842,7 +842,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             FioOrkLabel.AutoSize = true;
             FioOrkLabel.Font = new System.Drawing.Font("Arial", 10F);
-            FioOrkLabel.ForeColor = System.Drawing.Color.Black;
+            // FioOrkLabel.ForeColor = System.Drawing.Color.Black;
             FioOrkLabel.Location = new System.Drawing.Point(149, 60);
             FioOrkLabel.Name = "FioOrkLabel";
             FioOrkLabel.Size = new System.Drawing.Size(39, 16);
@@ -851,12 +851,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // TabR1TextBox
             // 
-            TabR1TextBox.BackColor = System.Drawing.Color.White;
+            // TabR1TextBox.BackColor = System.Drawing.Color.White;
             TabR1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabR1TextBox.ErrorColor = System.Drawing.Color.Red;
             TabR1TextBox.ErrorMessage = null;
             TabR1TextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabR1TextBox.ForeColor = System.Drawing.Color.Black;
+            // TabR1TextBox.ForeColor = System.Drawing.Color.Black;
             TabR1TextBox.Location = new System.Drawing.Point(69, 3);
             TabR1TextBox.Name = "TabR1TextBox";
             TabR1TextBox.ReadOnly = true;
@@ -866,7 +866,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel11
             // 
             customLabel11.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel11.ForeColor = System.Drawing.Color.Black;
+            // customLabel11.ForeColor = System.Drawing.Color.Black;
             customLabel11.Location = new System.Drawing.Point(3, 29);
             customLabel11.Name = "customLabel11";
             customLabel11.Size = new System.Drawing.Size(60, 31);
@@ -875,12 +875,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // TabR2TextBox
             // 
-            TabR2TextBox.BackColor = System.Drawing.Color.White;
+            // TabR2TextBox.BackColor = System.Drawing.Color.White;
             TabR2TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabR2TextBox.ErrorColor = System.Drawing.Color.Red;
             TabR2TextBox.ErrorMessage = null;
             TabR2TextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabR2TextBox.ForeColor = System.Drawing.Color.Black;
+            // TabR2TextBox.ForeColor = System.Drawing.Color.Black;
             TabR2TextBox.Location = new System.Drawing.Point(69, 32);
             TabR2TextBox.Name = "TabR2TextBox";
             TabR2TextBox.ReadOnly = true;
@@ -890,7 +890,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // Fio2Label
             // 
             Fio2Label.Font = new System.Drawing.Font("Arial", 10F);
-            Fio2Label.ForeColor = System.Drawing.Color.Black;
+            // Fio2Label.ForeColor = System.Drawing.Color.Black;
             Fio2Label.Location = new System.Drawing.Point(149, 29);
             Fio2Label.Name = "Fio2Label";
             Fio2Label.Size = new System.Drawing.Size(203, 31);
@@ -900,7 +900,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // TabKpvLabel
             // 
             TabKpvLabel.Font = new System.Drawing.Font("Arial", 10F);
-            TabKpvLabel.ForeColor = System.Drawing.Color.Black;
+            // TabKpvLabel.ForeColor = System.Drawing.Color.Black;
             TabKpvLabel.Location = new System.Drawing.Point(149, 197);
             TabKpvLabel.Name = "TabKpvLabel";
             TabKpvLabel.Size = new System.Drawing.Size(203, 28);
@@ -910,7 +910,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // Fio1Label
             // 
             Fio1Label.Font = new System.Drawing.Font("Arial", 10F);
-            Fio1Label.ForeColor = System.Drawing.Color.Black;
+            // Fio1Label.ForeColor = System.Drawing.Color.Black;
             Fio1Label.Location = new System.Drawing.Point(149, 0);
             Fio1Label.Name = "Fio1Label";
             Fio1Label.Size = new System.Drawing.Size(203, 20);
@@ -921,7 +921,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             FioKLabel.AutoSize = true;
             FioKLabel.Font = new System.Drawing.Font("Arial", 10F);
-            FioKLabel.ForeColor = System.Drawing.Color.Black;
+            // FioKLabel.ForeColor = System.Drawing.Color.Black;
             FioKLabel.Location = new System.Drawing.Point(149, 93);
             FioKLabel.Name = "FioKLabel";
             FioKLabel.Size = new System.Drawing.Size(39, 16);
@@ -932,7 +932,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel15.AutoSize = true;
             customLabel15.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel15.ForeColor = System.Drawing.Color.Black;
+            // customLabel15.ForeColor = System.Drawing.Color.Black;
             customLabel15.Location = new System.Drawing.Point(3, 93);
             customLabel15.Name = "customLabel15";
             customLabel15.Size = new System.Drawing.Size(54, 32);
@@ -943,7 +943,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel17.AutoSize = true;
             customLabel17.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel17.ForeColor = System.Drawing.Color.Black;
+            // customLabel17.ForeColor = System.Drawing.Color.Black;
             customLabel17.Location = new System.Drawing.Point(3, 126);
             customLabel17.Name = "customLabel17";
             customLabel17.Size = new System.Drawing.Size(54, 32);
@@ -954,7 +954,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel21.AutoSize = true;
             customLabel21.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel21.ForeColor = System.Drawing.Color.Black;
+            // customLabel21.ForeColor = System.Drawing.Color.Black;
             customLabel21.Location = new System.Drawing.Point(3, 197);
             customLabel21.Name = "customLabel21";
             customLabel21.Size = new System.Drawing.Size(54, 32);
@@ -965,7 +965,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             customLabel19.AutoSize = true;
             customLabel19.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel19.ForeColor = System.Drawing.Color.Black;
+            // customLabel19.ForeColor = System.Drawing.Color.Black;
             customLabel19.Location = new System.Drawing.Point(3, 159);
             customLabel19.Name = "customLabel19";
             customLabel19.Size = new System.Drawing.Size(54, 32);
@@ -974,12 +974,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // dateZehTextBox
             // 
-            dateZehTextBox.BackColor = System.Drawing.Color.White;
+            // dateZehTextBox.BackColor = System.Drawing.Color.White;
             dateZehTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             dateZehTextBox.ErrorColor = System.Drawing.Color.Red;
             dateZehTextBox.ErrorMessage = null;
             dateZehTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            dateZehTextBox.ForeColor = System.Drawing.Color.Black;
+            // dateZehTextBox.ForeColor = System.Drawing.Color.Black;
             dateZehTextBox.Location = new System.Drawing.Point(69, 240);
             dateZehTextBox.Name = "dateZehTextBox";
             dateZehTextBox.Size = new System.Drawing.Size(74, 23);
@@ -988,7 +988,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel10
             // 
             customLabel10.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel10.ForeColor = System.Drawing.Color.Black;
+            // customLabel10.ForeColor = System.Drawing.Color.Black;
             customLabel10.Location = new System.Drawing.Point(1454, 199);
             customLabel10.Name = "customLabel10";
             customLabel10.Size = new System.Drawing.Size(112, 20);
@@ -998,7 +998,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel9
             // 
             customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.Black;
+            // customLabel9.ForeColor = System.Drawing.Color.Black;
             customLabel9.Location = new System.Drawing.Point(1454, 175);
             customLabel9.Name = "customLabel9";
             customLabel9.Size = new System.Drawing.Size(112, 20);
@@ -1008,7 +1008,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel6
             // 
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.Black;
+            // customLabel6.ForeColor = System.Drawing.Color.Black;
             customLabel6.Location = new System.Drawing.Point(1682, 175);
             customLabel6.Name = "customLabel6";
             customLabel6.Size = new System.Drawing.Size(135, 20);
@@ -1017,12 +1017,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // ModKTextBox
             // 
-            ModKTextBox.BackColor = System.Drawing.Color.White;
+            // ModKTextBox.BackColor = System.Drawing.Color.White;
             ModKTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             ModKTextBox.ErrorColor = System.Drawing.Color.Red;
             ModKTextBox.ErrorMessage = null;
             ModKTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            ModKTextBox.ForeColor = System.Drawing.Color.Black;
+            // ModKTextBox.ForeColor = System.Drawing.Color.Black;
             ModKTextBox.Location = new System.Drawing.Point(1678, 127);
             ModKTextBox.Name = "ModKTextBox";
             ModKTextBox.Size = new System.Drawing.Size(139, 20);
@@ -1030,12 +1030,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // ArticulKTextBox
             // 
-            ArticulKTextBox.BackColor = System.Drawing.Color.White;
+            // ArticulKTextBox.BackColor = System.Drawing.Color.White;
             ArticulKTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             ArticulKTextBox.ErrorColor = System.Drawing.Color.Red;
             ArticulKTextBox.ErrorMessage = null;
             ArticulKTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            ArticulKTextBox.ForeColor = System.Drawing.Color.Black;
+            // ArticulKTextBox.ForeColor = System.Drawing.Color.Black;
             ArticulKTextBox.Location = new System.Drawing.Point(1542, 127);
             ArticulKTextBox.Name = "ArticulKTextBox";
             ArticulKTextBox.Size = new System.Drawing.Size(132, 20);
@@ -1044,7 +1044,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel5
             // 
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.Black;
+            // customLabel5.ForeColor = System.Drawing.Color.Black;
             customLabel5.Location = new System.Drawing.Point(1454, 127);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new System.Drawing.Size(84, 20);
@@ -1054,7 +1054,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel4
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.Black;
+            // customLabel4.ForeColor = System.Drawing.Color.Black;
             customLabel4.Location = new System.Drawing.Point(1594, 103);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(80, 20);
@@ -1064,7 +1064,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel3
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.Black;
+            // customLabel3.ForeColor = System.Drawing.Color.Black;
             customLabel3.Location = new System.Drawing.Point(1454, 103);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(51, 20);
@@ -1074,7 +1074,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.Black;
+            // customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(1546, 53);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(49, 22);
@@ -1084,7 +1084,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.Black;
+            // customLabel1.ForeColor = System.Drawing.Color.Black;
             customLabel1.Location = new System.Drawing.Point(1454, 53);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(34, 22);
@@ -1093,12 +1093,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // VipadTextBox
             // 
-            VipadTextBox.BackColor = System.Drawing.Color.White;
+            // VipadTextBox.BackColor = System.Drawing.Color.White;
             VipadTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             VipadTextBox.ErrorColor = System.Drawing.Color.Red;
             VipadTextBox.ErrorMessage = null;
             VipadTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            VipadTextBox.ForeColor = System.Drawing.Color.Black;
+            // VipadTextBox.ForeColor = System.Drawing.Color.Black;
             VipadTextBox.Location = new System.Drawing.Point(1682, 199);
             VipadTextBox.Name = "VipadTextBox";
             VipadTextBox.Size = new System.Drawing.Size(135, 20);
@@ -1106,12 +1106,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // DataVTextBox
             // 
-            DataVTextBox.BackColor = System.Drawing.Color.White;
+            // DataVTextBox.BackColor = System.Drawing.Color.White;
             DataVTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             DataVTextBox.ErrorColor = System.Drawing.Color.Red;
             DataVTextBox.ErrorMessage = null;
             DataVTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            DataVTextBox.ForeColor = System.Drawing.Color.Black;
+            // DataVTextBox.ForeColor = System.Drawing.Color.Black;
             DataVTextBox.Location = new System.Drawing.Point(1570, 199);
             DataVTextBox.Name = "DataVTextBox";
             DataVTextBox.Size = new System.Drawing.Size(108, 20);
@@ -1119,12 +1119,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // DataPrTextBox
             // 
-            DataPrTextBox.BackColor = System.Drawing.Color.White;
+            // DataPrTextBox.BackColor = System.Drawing.Color.White;
             DataPrTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             DataPrTextBox.ErrorColor = System.Drawing.Color.Red;
             DataPrTextBox.ErrorMessage = null;
             DataPrTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            DataPrTextBox.ForeColor = System.Drawing.Color.Black;
+            // DataPrTextBox.ForeColor = System.Drawing.Color.Black;
             DataPrTextBox.Location = new System.Drawing.Point(1570, 175);
             DataPrTextBox.Name = "DataPrTextBox";
             DataPrTextBox.Size = new System.Drawing.Size(108, 20);
@@ -1132,12 +1132,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // pachTextBox
             // 
-            pachTextBox.BackColor = System.Drawing.Color.White;
+            // pachTextBox.BackColor = System.Drawing.Color.White;
             pachTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pachTextBox.ErrorColor = System.Drawing.Color.Red;
             pachTextBox.ErrorMessage = null;
             pachTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            pachTextBox.ForeColor = System.Drawing.Color.Black;
+            // pachTextBox.ForeColor = System.Drawing.Color.Black;
             pachTextBox.Location = new System.Drawing.Point(1509, 103);
             pachTextBox.Name = "pachTextBox";
             pachTextBox.Size = new System.Drawing.Size(81, 20);
@@ -1145,12 +1145,12 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // DataRTextBox
             // 
-            DataRTextBox.BackColor = System.Drawing.Color.White;
+            // DataRTextBox.BackColor = System.Drawing.Color.White;
             DataRTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             DataRTextBox.ErrorColor = System.Drawing.Color.Red;
             DataRTextBox.ErrorMessage = null;
             DataRTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            DataRTextBox.ForeColor = System.Drawing.Color.Black;
+            // DataRTextBox.ForeColor = System.Drawing.Color.Black;
             DataRTextBox.Location = new System.Drawing.Point(1678, 103);
             DataRTextBox.Name = "DataRTextBox";
             DataRTextBox.Size = new System.Drawing.Size(139, 20);
@@ -1158,9 +1158,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.Black;
+            // customButton1.ForeColor = System.Drawing.Color.Black;
             customButton1.Location = new System.Drawing.Point(1442, 12);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(387, 25);
@@ -1171,9 +1171,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // SearchPachСustomButton
             // 
-            SearchPachСustomButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // SearchPachСustomButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             SearchPachСustomButton.Font = new System.Drawing.Font("Arial", 10F);
-            SearchPachСustomButton.ForeColor = System.Drawing.Color.Black;
+            // SearchPachСustomButton.ForeColor = System.Drawing.Color.Black;
             SearchPachСustomButton.Location = new System.Drawing.Point(1699, 53);
             SearchPachСustomButton.Name = "SearchPachСustomButton";
             SearchPachСustomButton.Size = new System.Drawing.Size(117, 22);
@@ -1197,9 +1197,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // gridViewRzu
             // 
-            gridViewRzu.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            // gridViewRzu.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridViewRzu.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewRzu.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // gridViewRzu.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridViewRzu.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRzu.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRzu.Appearance.FocusedRow.Options.UseFont = true;
@@ -1207,8 +1207,8 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridFormatRule1.ApplyToRow = true;
             gridFormatRule1.Column = gridColumnRzuNom;
             gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // formatConditionRuleValue1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.FromArgb(224, 224, 224);
             formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
             formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
             formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Expression;

@@ -96,7 +96,7 @@ namespace SewingProduction.form
             customLabelTheme.AutoSize = true;
             customLabelTheme.BackColor = System.Drawing.Color.Transparent;
             customLabelTheme.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelTheme.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelTheme.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelTheme.Location = new System.Drawing.Point(14, 46);
             customLabelTheme.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelTheme.Name = "customLabelTheme";
@@ -106,9 +106,9 @@ namespace SewingProduction.form
             // 
             // customComboBoxTheme
             // 
-            customComboBoxTheme.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
+            // customComboBoxTheme.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
             customComboBoxTheme.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxTheme.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
+            // customComboBoxTheme.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxTheme.FormattingEnabled = true;
             customComboBoxTheme.Location = new System.Drawing.Point(125, 43);
             customComboBoxTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -119,9 +119,9 @@ namespace SewingProduction.form
             // 
             // customComboBoxSizeText
             // 
-            customComboBoxSizeText.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
+            // customComboBoxSizeText.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
             customComboBoxSizeText.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxSizeText.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
+            // customComboBoxSizeText.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxSizeText.FormattingEnabled = true;
             customComboBoxSizeText.Location = new System.Drawing.Point(125, 456);
             customComboBoxSizeText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -135,7 +135,7 @@ namespace SewingProduction.form
             customLabelSizeText.AutoSize = true;
             customLabelSizeText.BackColor = System.Drawing.Color.Transparent;
             customLabelSizeText.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelSizeText.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelSizeText.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelSizeText.Location = new System.Drawing.Point(14, 459);
             customLabelSizeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelSizeText.Name = "customLabelSizeText";
@@ -147,7 +147,7 @@ namespace SewingProduction.form
             // 
             customCheckBoxSaveOpenTabs.AutoSize = true;
             customCheckBoxSaveOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
+            // customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSaveOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(327, 42);
             customCheckBoxSaveOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
@@ -161,9 +161,9 @@ namespace SewingProduction.form
             // 
             // customButtonClearProfile
             // 
-            customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButtonClearProfile.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
+            // customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
             customButtonClearProfile.Location = new System.Drawing.Point(654, 38);
             customButtonClearProfile.Name = "customButtonClearProfile";
             customButtonClearProfile.Size = new System.Drawing.Size(251, 29);
@@ -176,7 +176,7 @@ namespace SewingProduction.form
             // 
             customCheckBoxSokrNameTabs.AutoSize = true;
             customCheckBoxSokrNameTabs.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxSokrNameTabs.ForeColor = System.Drawing.Color.Black;
+            // customCheckBoxSokrNameTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSokrNameTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(327, 87);
             customCheckBoxSokrNameTabs.MinimumSize = new System.Drawing.Size(251, 0);
@@ -192,7 +192,7 @@ namespace SewingProduction.form
             // 
             customCheckBoxPovtOpenTabs.AutoSize = true;
             customCheckBoxPovtOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxPovtOpenTabs.ForeColor = System.Drawing.Color.Black;
+            // customCheckBoxPovtOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxPovtOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(327, 128);
             customCheckBoxPovtOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
@@ -206,9 +206,9 @@ namespace SewingProduction.form
             // 
             // customComboBoxRejimRab
             // 
-            customComboBoxRejimRab.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
+            // customComboBoxRejimRab.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
             customComboBoxRejimRab.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxRejimRab.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
+            // customComboBoxRejimRab.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxRejimRab.FormattingEnabled = true;
             customComboBoxRejimRab.Location = new System.Drawing.Point(125, 499);
             customComboBoxRejimRab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -221,7 +221,7 @@ namespace SewingProduction.form
             customLabelRejimRab.AutoSize = true;
             customLabelRejimRab.BackColor = System.Drawing.Color.Transparent;
             customLabelRejimRab.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelRejimRab.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelRejimRab.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelRejimRab.Location = new System.Drawing.Point(14, 502);
             customLabelRejimRab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelRejimRab.Name = "customLabelRejimRab";
@@ -231,9 +231,9 @@ namespace SewingProduction.form
             // 
             // customButtonSaveExit
             // 
-            customButtonSaveExit.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButtonSaveExit.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButtonSaveExit.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSaveExit.ForeColor = System.Drawing.Color.Black;
+            // customButtonSaveExit.ForeColor = System.Drawing.Color.Black;
             customButtonSaveExit.Location = new System.Drawing.Point(327, 499);
             customButtonSaveExit.Name = "customButtonSaveExit";
             customButtonSaveExit.Size = new System.Drawing.Size(251, 29);
@@ -435,9 +435,9 @@ namespace SewingProduction.form
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.Black;
+            // customButton1.ForeColor = System.Drawing.Color.Black;
             customButton1.Location = new System.Drawing.Point(160, 410);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(113, 25);
@@ -451,7 +451,7 @@ namespace SewingProduction.form
             GridSettingsCheckBox.AutoSize = true;
             GridSettingsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             GridSettingsCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            GridSettingsCheckBox.ForeColor = System.Drawing.Color.FromArgb(80, 40, 100);
+            // GridSettingsCheckBox.ForeColor = System.Drawing.Color.FromArgb(80, 40, 100);
             GridSettingsCheckBox.Location = new System.Drawing.Point(358, 166);
             GridSettingsCheckBox.Name = "GridSettingsCheckBox";
             GridSettingsCheckBox.Size = new System.Drawing.Size(220, 20);
@@ -462,9 +462,9 @@ namespace SewingProduction.form
             // 
             // ResetGridSettingsButton
             // 
-            ResetGridSettingsButton.BackColor = System.Drawing.Color.FromArgb(225, 200, 230);
+            // ResetGridSettingsButton.BackColor = System.Drawing.Color.FromArgb(225, 200, 230);
             ResetGridSettingsButton.Font = new System.Drawing.Font("Arial", 10F);
-            ResetGridSettingsButton.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
+            // ResetGridSettingsButton.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
             ResetGridSettingsButton.Location = new System.Drawing.Point(358, 207);
             ResetGridSettingsButton.Name = "ResetGridSettingsButton";
             ResetGridSettingsButton.Size = new System.Drawing.Size(251, 29);
@@ -479,7 +479,7 @@ namespace SewingProduction.form
             // 
             customLabel9.AutoSize = true;
             customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
+            // customLabel9.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
             customLabel9.Location = new System.Drawing.Point(358, 188);
             customLabel9.Name = "customLabel9";
             customLabel9.Size = new System.Drawing.Size(198, 16);

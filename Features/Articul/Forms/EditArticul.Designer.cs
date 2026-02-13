@@ -196,7 +196,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxKod.ErrorMessage = "Код должен состоять из 8 символов";
             customTextBoxKod.ErrorShape = CustomTextBox.ErrorIconShape.Triangle;
             customTextBoxKod.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxKod.Location = new System.Drawing.Point(240, 71);
             customTextBoxKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxKod.MaxLength = 8;
@@ -213,7 +213,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxPo.ErrorColor = System.Drawing.Color.Red;
             customTextBoxPo.ErrorMessage = null;
             customTextBoxPo.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxPo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPo.Location = new System.Drawing.Point(476, 71);
             customTextBoxPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPo.MaxLength = 1;
@@ -230,7 +230,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxKodFurn.ErrorColor = System.Drawing.Color.Red;
             customTextBoxKodFurn.ErrorMessage = null;
             customTextBoxKodFurn.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxKodFurn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxKodFurn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxKodFurn.Location = new System.Drawing.Point(240, 309);
             customTextBoxKodFurn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxKodFurn.Name = "customTextBoxKodFurn";
@@ -247,7 +247,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxNameFurn.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNameFurn.ErrorMessage = null;
             customTextBoxNameFurn.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNameFurn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxNameFurn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxNameFurn.Location = new System.Drawing.Point(240, 343);
             customTextBoxNameFurn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNameFurn.Name = "customTextBoxNameFurn";
@@ -264,7 +264,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxDlin.ErrorColor = System.Drawing.Color.Red;
             customTextBoxDlin.ErrorMessage = null;
             customTextBoxDlin.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxDlin.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxDlin.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxDlin.Location = new System.Drawing.Point(240, 377);
             customTextBoxDlin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxDlin.Name = "customTextBoxDlin";
@@ -280,7 +280,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxTimePlet.ErrorColor = System.Drawing.Color.Red;
             customTextBoxTimePlet.ErrorMessage = null;
             customTextBoxTimePlet.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxTimePlet.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxTimePlet.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxTimePlet.Location = new System.Drawing.Point(240, 411);
             customTextBoxTimePlet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxTimePlet.Name = "customTextBoxTimePlet";
@@ -296,7 +296,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxNormP.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNormP.ErrorMessage = null;
             customTextBoxNormP.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNormP.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxNormP.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxNormP.Location = new System.Drawing.Point(240, 445);
             customTextBoxNormP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNormP.Name = "customTextBoxNormP";
@@ -310,7 +310,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelKodFurn, 2);
             customLabelKodFurn.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelKodFurn.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelKodFurn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelKodFurn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelKodFurn.Location = new System.Drawing.Point(97, 306);
             customLabelKodFurn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelKodFurn.Name = "customLabelKodFurn";
@@ -326,7 +326,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabel1, 2);
             customLabel1.Dock = System.Windows.Forms.DockStyle.Right;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel1.Location = new System.Drawing.Point(221, 340);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
@@ -342,7 +342,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelDlin, 2);
             customLabelDlin.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelDlin.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelDlin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelDlin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelDlin.Location = new System.Drawing.Point(184, 374);
             customLabelDlin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelDlin.Name = "customLabelDlin";
@@ -358,7 +358,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelTimePlet, 2);
             customLabelTimePlet.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelTimePlet.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelTimePlet.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelTimePlet.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelTimePlet.Location = new System.Drawing.Point(86, 408);
             customLabelTimePlet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelTimePlet.Name = "customLabelTimePlet";
@@ -374,7 +374,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelNormP, 2);
             customLabelNormP.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelNormP.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelNormP.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelNormP.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelNormP.Location = new System.Drawing.Point(118, 442);
             customLabelNormP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelNormP.Name = "customLabelNormP";
@@ -389,7 +389,7 @@ namespace SewingProduction.Features.Articul
             customLabelM.BackColor = System.Drawing.Color.Transparent;
             customLabelM.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelM.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelM.Location = new System.Drawing.Point(476, 374);
             customLabelM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM.Name = "customLabelM";
@@ -404,7 +404,7 @@ namespace SewingProduction.Features.Articul
             customLabelM1.BackColor = System.Drawing.Color.Transparent;
             customLabelM1.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelM1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelM1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelM1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelM1.Location = new System.Drawing.Point(476, 408);
             customLabelM1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM1.Name = "customLabelM1";
@@ -419,7 +419,7 @@ namespace SewingProduction.Features.Articul
             customLabelM2.BackColor = System.Drawing.Color.Transparent;
             customLabelM2.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelM2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelM2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelM2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelM2.Location = new System.Drawing.Point(476, 442);
             customLabelM2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelM2.Name = "customLabelM2";
@@ -452,10 +452,10 @@ namespace SewingProduction.Features.Articul
             // 
             // customButtonSave
             // 
-            customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSave.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonSave.Location = new System.Drawing.Point(122, 513);
             customButtonSave.Name = "customButtonSave";
             customButtonSave.Size = new System.Drawing.Size(111, 39);
@@ -466,10 +466,10 @@ namespace SewingProduction.Features.Articul
             // 
             // customButtonCancel
             // 
-            customButtonCancel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonCancel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonCancel.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonCancel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonCancel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonCancel.Location = new System.Drawing.Point(475, 513);
             customButtonCancel.Name = "customButtonCancel";
             customButtonCancel.Size = new System.Drawing.Size(112, 39);
@@ -485,7 +485,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelPrizn, 2);
             customLabelPrizn.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelPrizn.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelPrizn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelPrizn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelPrizn.Location = new System.Drawing.Point(172, 476);
             customLabelPrizn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelPrizn.Name = "customLabelPrizn";
@@ -501,7 +501,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelTM, 2);
             customLabelTM.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelTM.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelTM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelTM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelTM.Location = new System.Drawing.Point(205, 170);
             customLabelTM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelTM.Name = "customLabelTM";
@@ -567,7 +567,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxArt.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArt.ErrorMessage = null;
             customTextBoxArt.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxArt.Location = new System.Drawing.Point(240, 105);
             customTextBoxArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxArt.Name = "customTextBoxArt";
@@ -583,7 +583,7 @@ namespace SewingProduction.Features.Articul
             customTextBoxModel.ErrorColor = System.Drawing.Color.Red;
             customTextBoxModel.ErrorMessage = null;
             customTextBoxModel.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxModel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxModel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxModel.Location = new System.Drawing.Point(240, 139);
             customTextBoxModel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxModel.Name = "customTextBoxModel";
@@ -669,7 +669,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelArt, 2);
             customLabelArt.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelArt.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelArt.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelArt.Location = new System.Drawing.Point(172, 102);
             customLabelArt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelArt.Name = "customLabelArt";
@@ -685,7 +685,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelGOST, 2);
             customLabelGOST.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelGOST.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelGOST.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelGOST.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelGOST.Location = new System.Drawing.Point(188, 204);
             customLabelGOST.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelGOST.Name = "customLabelGOST";
@@ -701,7 +701,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelModel, 2);
             customLabelModel.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelModel.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelModel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelModel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelModel.Location = new System.Drawing.Point(174, 136);
             customLabelModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelModel.Name = "customLabelModel";
@@ -717,7 +717,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelGroup, 2);
             customLabelGroup.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelGroup.Location = new System.Drawing.Point(179, 238);
             customLabelGroup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelGroup.Name = "customLabelGroup";
@@ -733,7 +733,7 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.SetColumnSpan(customLabelRazm, 2);
             customLabelRazm.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelRazm.Location = new System.Drawing.Point(176, 272);
             customLabelRazm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelRazm.Name = "customLabelRazm";
@@ -806,7 +806,7 @@ namespace SewingProduction.Features.Articul
             customLabelKod.BackColor = System.Drawing.Color.Transparent;
             customLabelKod.Dock = System.Windows.Forms.DockStyle.Right;
             customLabelKod.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelKod.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelKod.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelKod.Location = new System.Drawing.Point(201, 68);
             customLabelKod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelKod.Name = "customLabelKod";
@@ -817,10 +817,10 @@ namespace SewingProduction.Features.Articul
             // 
             // customButtonKod
             // 
-            customButtonKod.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonKod.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonKod.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonKod.Font = new System.Drawing.Font("Bahnschrift Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            customButtonKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonKod.Location = new System.Drawing.Point(3, 71);
             customButtonKod.Name = "customButtonKod";
             customButtonKod.Size = new System.Drawing.Size(113, 28);

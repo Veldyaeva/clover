@@ -296,12 +296,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxKodGost_Old
             // 
-            customTextBoxKodGost_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxKodGost_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxKodGost_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxKodGost_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxKodGost_Old.ErrorMessage = null;
             customTextBoxKodGost_Old.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxKodGost_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxKodGost_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxKodGost_Old.Location = new System.Drawing.Point(121, 70);
             customTextBoxKodGost_Old.Name = "customTextBoxKodGost_Old";
             customTextBoxKodGost_Old.ReadOnly = true;
@@ -310,12 +310,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxOpiGost_Old
             // 
-            customTextBoxOpiGost_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxOpiGost_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxOpiGost_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxOpiGost_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxOpiGost_Old.ErrorMessage = null;
             customTextBoxOpiGost_Old.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxOpiGost_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxOpiGost_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxOpiGost_Old.Location = new System.Drawing.Point(121, 118);
             customTextBoxOpiGost_Old.Name = "customTextBoxOpiGost_Old";
             customTextBoxOpiGost_Old.ReadOnly = true;
@@ -325,7 +325,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customLabel4
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel4.Location = new System.Drawing.Point(499, 277);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(73, 20);
@@ -335,7 +335,7 @@ namespace SewingProduction.Features.Articul.Forms
             // cLabelInfo
             // 
             cLabelInfo.Font = new System.Drawing.Font("Arial", 10F);
-            cLabelInfo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // cLabelInfo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             cLabelInfo.Location = new System.Drawing.Point(576, 277);
             cLabelInfo.Name = "cLabelInfo";
             cLabelInfo.Size = new System.Drawing.Size(376, 20);
@@ -345,7 +345,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customLabel3
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel3.Location = new System.Drawing.Point(499, 170);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(453, 20);
@@ -355,7 +355,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel2.Location = new System.Drawing.Point(499, 146);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(453, 20);
@@ -365,7 +365,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel1.Location = new System.Drawing.Point(499, 122);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(453, 20);
@@ -374,7 +374,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customCheckBoxVerified
             // 
             customCheckBoxVerified.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxVerified.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customCheckBoxVerified.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxVerified.Location = new System.Drawing.Point(499, 532);
             customCheckBoxVerified.Name = "customCheckBoxVerified";
             customCheckBoxVerified.RightToLeft = RightToLeft.No;
@@ -388,9 +388,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             customSearchLookUpEditGrupN.Location = new System.Drawing.Point(596, 96);
             customSearchLookUpEditGrupN.Name = "customSearchLookUpEditGrupN";
-            customSearchLookUpEditGrupN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customSearchLookUpEditGrupN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customSearchLookUpEditGrupN.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSearchLookUpEditGrupN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customSearchLookUpEditGrupN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customSearchLookUpEditGrupN.Properties.Appearance.Options.UseBackColor = true;
             customSearchLookUpEditGrupN.Properties.Appearance.Options.UseFont = true;
             customSearchLookUpEditGrupN.Properties.Appearance.Options.UseForeColor = true;
@@ -468,9 +468,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             customSearchLookUpEditGostN.Location = new System.Drawing.Point(596, 70);
             customSearchLookUpEditGostN.Name = "customSearchLookUpEditGostN";
-            customSearchLookUpEditGostN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customSearchLookUpEditGostN.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customSearchLookUpEditGostN.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSearchLookUpEditGostN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customSearchLookUpEditGostN.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customSearchLookUpEditGostN.Properties.Appearance.Options.UseBackColor = true;
             customSearchLookUpEditGostN.Properties.Appearance.Options.UseFont = true;
             customSearchLookUpEditGostN.Properties.Appearance.Options.UseForeColor = true;
@@ -526,9 +526,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customButtonSaveNabor
             // 
-            customButtonSaveNabor.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonSaveNabor.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSaveNabor.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSaveNabor.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonSaveNabor.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonSaveNabor.Location = new System.Drawing.Point(673, 532);
             customButtonSaveNabor.MinimumSize = new System.Drawing.Size(250, 30);
             customButtonSaveNabor.Name = "customButtonSaveNabor";
@@ -557,9 +557,9 @@ namespace SewingProduction.Features.Articul.Forms
             // GridViewNabor
             // 
             GridViewNabor.ActiveFilterEnabled = false;
-            GridViewNabor.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
+            // GridViewNabor.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
             GridViewNabor.Appearance.EvenRow.Options.UseBackColor = true;
-            GridViewNabor.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
+            // GridViewNabor.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
             GridViewNabor.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             GridViewNabor.Appearance.FocusedRow.Options.UseBackColor = true;
             GridViewNabor.Appearance.FocusedRow.Options.UseFont = true;
@@ -883,12 +883,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxArtN
             // 
-            customTextBoxArtN.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxArtN.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxArtN.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxArtN.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArtN.ErrorMessage = null;
             customTextBoxArtN.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxArtN.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxArtN.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxArtN.Location = new System.Drawing.Point(596, 46);
             customTextBoxArtN.Name = "customTextBoxArtN";
             customTextBoxArtN.Size = new System.Drawing.Size(356, 20);
@@ -896,12 +896,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxGrupN_Old
             // 
-            customTextBoxGrupN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxGrupN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxGrupN_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxGrupN_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxGrupN_Old.ErrorMessage = null;
             customTextBoxGrupN_Old.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxGrupN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxGrupN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxGrupN_Old.Location = new System.Drawing.Point(121, 142);
             customTextBoxGrupN_Old.Name = "customTextBoxGrupN_Old";
             customTextBoxGrupN_Old.ReadOnly = true;
@@ -910,12 +910,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxGostN_Old
             // 
-            customTextBoxGostN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxGostN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxGostN_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxGostN_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxGostN_Old.ErrorMessage = null;
             customTextBoxGostN_Old.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxGostN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxGostN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxGostN_Old.Location = new System.Drawing.Point(121, 94);
             customTextBoxGostN_Old.Name = "customTextBoxGostN_Old";
             customTextBoxGostN_Old.ReadOnly = true;
@@ -924,12 +924,12 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxArtN_Old
             // 
-            customTextBoxArtN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxArtN_Old.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxArtN_Old.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxArtN_Old.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArtN_Old.ErrorMessage = null;
             customTextBoxArtN_Old.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxArtN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxArtN_Old.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxArtN_Old.Location = new System.Drawing.Point(121, 46);
             customTextBoxArtN_Old.Name = "customTextBoxArtN_Old";
             customTextBoxArtN_Old.ReadOnly = true;
@@ -939,7 +939,7 @@ namespace SewingProduction.Features.Articul.Forms
             // customPictureBoxNabor
             // 
             customPictureBoxNabor.Font = new System.Drawing.Font("Arial", 10F);
-            customPictureBoxNabor.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customPictureBoxNabor.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customPictureBoxNabor.ImagePath = null;
             customPictureBoxNabor.Location = new System.Drawing.Point(313, 46);
             customPictureBoxNabor.Name = "customPictureBoxNabor";
@@ -961,9 +961,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // GridViewNabor_Old
             // 
-            GridViewNabor_Old.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
+            // GridViewNabor_Old.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
             GridViewNabor_Old.Appearance.EvenRow.Options.UseBackColor = true;
-            GridViewNabor_Old.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
+            // GridViewNabor_Old.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
             GridViewNabor_Old.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             GridViewNabor_Old.Appearance.FocusedRow.Options.UseBackColor = true;
             GridViewNabor_Old.Appearance.FocusedRow.Options.UseFont = true;
@@ -1113,9 +1113,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customButtonSave
             // 
-            customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonSave.Location = new System.Drawing.Point(998, 197);
             customButtonSave.Name = "customButtonSave";
             customButtonSave.Size = new System.Drawing.Size(143, 33);
@@ -1125,13 +1125,13 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxId_razm_nab
             // 
-            customTextBoxId_razm_nab.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxId_razm_nab.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxId_razm_nab.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxId_razm_nab.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Id_razm_nab", true));
             customTextBoxId_razm_nab.ErrorColor = System.Drawing.Color.Red;
             customTextBoxId_razm_nab.ErrorMessage = null;
             customTextBoxId_razm_nab.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxId_razm_nab.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxId_razm_nab.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxId_razm_nab.Location = new System.Drawing.Point(747, 173);
             customTextBoxId_razm_nab.Name = "customTextBoxId_razm_nab";
             customTextBoxId_razm_nab.Size = new System.Drawing.Size(394, 20);
@@ -1139,13 +1139,13 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxSostav
             // 
-            customTextBoxSostav.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxSostav.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxSostav.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxSostav.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Sostav", true));
             customTextBoxSostav.ErrorColor = System.Drawing.Color.Red;
             customTextBoxSostav.ErrorMessage = null;
             customTextBoxSostav.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxSostav.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxSostav.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxSostav.Location = new System.Drawing.Point(1077, 149);
             customTextBoxSostav.Name = "customTextBoxSostav";
             customTextBoxSostav.Size = new System.Drawing.Size(64, 20);
@@ -1153,13 +1153,13 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxKod
             // 
-            customTextBoxKod.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxKod.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxKod.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxKod.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Kod", true));
             customTextBoxKod.ErrorColor = System.Drawing.Color.Red;
             customTextBoxKod.ErrorMessage = null;
             customTextBoxKod.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxKod.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxKod.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxKod.Location = new System.Drawing.Point(747, 45);
             customTextBoxKod.Name = "customTextBoxKod";
             customTextBoxKod.Size = new System.Drawing.Size(394, 20);
@@ -1170,9 +1170,9 @@ namespace SewingProduction.Features.Articul.Forms
             customLookUpEditAg_id.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Ag_id", true));
             customLookUpEditAg_id.Location = new System.Drawing.Point(1077, 123);
             customLookUpEditAg_id.Name = "customLookUpEditAg_id";
-            customLookUpEditAg_id.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditAg_id.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditAg_id.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditAg_id.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditAg_id.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditAg_id.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditAg_id.Properties.Appearance.Options.UseFont = true;
             customLookUpEditAg_id.Properties.Appearance.Options.UseForeColor = true;
@@ -1191,9 +1191,9 @@ namespace SewingProduction.Features.Articul.Forms
             customLookUpEditGost.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Id_gost", true));
             customLookUpEditGost.Location = new System.Drawing.Point(1077, 97);
             customLookUpEditGost.Name = "customLookUpEditGost";
-            customLookUpEditGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditGost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditGost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditGost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditGost.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditGost.Properties.Appearance.Options.UseFont = true;
             customLookUpEditGost.Properties.Appearance.Options.UseForeColor = true;
@@ -1212,9 +1212,9 @@ namespace SewingProduction.Features.Articul.Forms
             customLookUpEditT_v_n.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Tk_id", true));
             customLookUpEditT_v_n.Location = new System.Drawing.Point(1077, 71);
             customLookUpEditT_v_n.Name = "customLookUpEditT_v_n";
-            customLookUpEditT_v_n.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditT_v_n.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditT_v_n.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditT_v_n.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditT_v_n.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditT_v_n.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditT_v_n.Properties.Appearance.Options.UseFont = true;
             customLookUpEditT_v_n.Properties.Appearance.Options.UseForeColor = true;
@@ -1237,9 +1237,9 @@ namespace SewingProduction.Features.Articul.Forms
             customLookUpEditAssort.DataBindings.Add(new Binding("EditValue", spArticulNaborSostavBindingSource, "Ta_id", true));
             customLookUpEditAssort.Location = new System.Drawing.Point(1077, 45);
             customLookUpEditAssort.Name = "customLookUpEditAssort";
-            customLookUpEditAssort.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditAssort.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditAssort.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditAssort.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditAssort.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditAssort.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditAssort.Properties.Appearance.Options.UseFont = true;
             customLookUpEditAssort.Properties.Appearance.Options.UseForeColor = true;
@@ -1259,13 +1259,13 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxAns_id
             // 
-            customTextBoxAns_id.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxAns_id.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxAns_id.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxAns_id.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Ans_id", true));
             customTextBoxAns_id.ErrorColor = System.Drawing.Color.Red;
             customTextBoxAns_id.ErrorMessage = null;
             customTextBoxAns_id.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxAns_id.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxAns_id.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxAns_id.Location = new System.Drawing.Point(787, 46);
             customTextBoxAns_id.Name = "customTextBoxAns_id";
             customTextBoxAns_id.Size = new System.Drawing.Size(82, 20);
@@ -1273,13 +1273,13 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customTextBoxRazm
             // 
-            customTextBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxRazm.BorderStyle = BorderStyle.FixedSingle;
             customTextBoxRazm.DataBindings.Add(new Binding("Text", spArticulNaborSostavBindingSource, "Razm", true));
             customTextBoxRazm.ErrorColor = System.Drawing.Color.Red;
             customTextBoxRazm.ErrorMessage = null;
             customTextBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxRazm.Location = new System.Drawing.Point(1077, 173);
             customTextBoxRazm.Name = "customTextBoxRazm";
             customTextBoxRazm.Size = new System.Drawing.Size(64, 20);
@@ -1686,9 +1686,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customListBoxRazm
             // 
-            customListBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customListBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customListBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
-            customListBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customListBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customListBoxRazm.FormattingEnabled = true;
             customListBoxRazm.Location = new System.Drawing.Point(0, 0);
             customListBoxRazm.Name = "customListBoxRazm";

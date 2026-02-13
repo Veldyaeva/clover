@@ -88,7 +88,7 @@
             // 
             customHeaderLabelMod.AutoSize = true;
             customHeaderLabelMod.Dock = System.Windows.Forms.DockStyle.Fill;
-            customHeaderLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customHeaderLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customHeaderLabelMod.Location = new System.Drawing.Point(160, 0);
             customHeaderLabelMod.Name = "customHeaderLabelMod";
             customHeaderLabelMod.Size = new System.Drawing.Size(329, 40);
@@ -100,9 +100,9 @@
             customLookUpEditSpravNoskiDetal.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditSpravNoskiDetal.Location = new System.Drawing.Point(160, 203);
             customLookUpEditSpravNoskiDetal.Name = "customLookUpEditSpravNoskiDetal";
-            customLookUpEditSpravNoskiDetal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditSpravNoskiDetal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditSpravNoskiDetal.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditSpravNoskiDetal.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseFont = true;
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseForeColor = true;
@@ -117,9 +117,9 @@
             customLookUpEditCatDynsign.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditCatDynsign.Location = new System.Drawing.Point(160, 163);
             customLookUpEditCatDynsign.Name = "customLookUpEditCatDynsign";
-            customLookUpEditCatDynsign.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditCatDynsign.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditCatDynsign.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditCatDynsign.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditCatDynsign.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditCatDynsign.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditCatDynsign.Properties.Appearance.Options.UseFont = true;
             customLookUpEditCatDynsign.Properties.Appearance.Options.UseForeColor = true;
@@ -134,9 +134,9 @@
             customLookUpEditCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditCategory.Location = new System.Drawing.Point(160, 123);
             customLookUpEditCategory.Name = "customLookUpEditCategory";
-            customLookUpEditCategory.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditCategory.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditCategory.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditCategory.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditCategory.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditCategory.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditCategory.Properties.Appearance.Options.UseFont = true;
             customLookUpEditCategory.Properties.Appearance.Options.UseForeColor = true;
@@ -151,9 +151,9 @@
             customLookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditGroup.Location = new System.Drawing.Point(160, 83);
             customLookUpEditGroup.Name = "customLookUpEditGroup";
-            customLookUpEditGroup.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditGroup.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditGroup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditGroup.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditGroup.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditGroup.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditGroup.Properties.Appearance.Options.UseFont = true;
             customLookUpEditGroup.Properties.Appearance.Options.UseForeColor = true;
@@ -168,7 +168,7 @@
             customLabelCategory.AutoSize = true;
             customLabelCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelCategory.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelCategory.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelCategory.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelCategory.Location = new System.Drawing.Point(3, 120);
             customLabelCategory.Name = "customLabelCategory";
             customLabelCategory.Size = new System.Drawing.Size(151, 40);
@@ -180,7 +180,7 @@
             customLabelGroup.AutoSize = true;
             customLabelGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelGroup.Location = new System.Drawing.Point(3, 80);
             customLabelGroup.Name = "customLabelGroup";
             customLabelGroup.Size = new System.Drawing.Size(151, 40);
@@ -192,7 +192,7 @@
             customLabelClass.AutoSize = true;
             customLabelClass.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelClass.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelClass.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelClass.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelClass.Location = new System.Drawing.Point(3, 40);
             customLabelClass.Name = "customLabelClass";
             customLabelClass.Size = new System.Drawing.Size(151, 40);
@@ -203,7 +203,7 @@
             // 
             customHeaderLabelArt.AutoSize = true;
             customHeaderLabelArt.Dock = System.Windows.Forms.DockStyle.Fill;
-            customHeaderLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customHeaderLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customHeaderLabelArt.Location = new System.Drawing.Point(3, 0);
             customHeaderLabelArt.Name = "customHeaderLabelArt";
             customHeaderLabelArt.Size = new System.Drawing.Size(151, 40);
@@ -215,7 +215,7 @@
             customLabelCatDynsign.AutoSize = true;
             customLabelCatDynsign.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelCatDynsign.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelCatDynsign.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelCatDynsign.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelCatDynsign.Location = new System.Drawing.Point(3, 160);
             customLabelCatDynsign.Name = "customLabelCatDynsign";
             customLabelCatDynsign.Size = new System.Drawing.Size(151, 40);
@@ -227,7 +227,7 @@
             customLabelSpravNoskiDetal.AutoSize = true;
             customLabelSpravNoskiDetal.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelSpravNoskiDetal.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelSpravNoskiDetal.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelSpravNoskiDetal.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelSpravNoskiDetal.Location = new System.Drawing.Point(3, 200);
             customLabelSpravNoskiDetal.Name = "customLabelSpravNoskiDetal";
             customLabelSpravNoskiDetal.Size = new System.Drawing.Size(151, 40);
@@ -236,9 +236,9 @@
             // 
             // customButtonOtm
             // 
-            customButtonOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonOtm.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonOtm.Location = new System.Drawing.Point(3, 283);
             customButtonOtm.Name = "customButtonOtm";
             customButtonOtm.Size = new System.Drawing.Size(151, 39);
@@ -252,9 +252,9 @@
             customLookUpEditClass.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditClass.Location = new System.Drawing.Point(160, 43);
             customLookUpEditClass.Name = "customLookUpEditClass";
-            customLookUpEditClass.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLookUpEditClass.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditClass.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditClass.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLookUpEditClass.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditClass.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditClass.Properties.Appearance.Options.UseFont = true;
             customLookUpEditClass.Properties.Appearance.Options.UseForeColor = true;
@@ -266,9 +266,9 @@
             // 
             // customActionButtonSave
             // 
-            customActionButtonSave.BackColor = System.Drawing.Color.Lavender;
+            // customActionButtonSave.BackColor = System.Drawing.Color.Lavender;
             customActionButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            customActionButtonSave.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customActionButtonSave.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customActionButtonSave.Location = new System.Drawing.Point(160, 283);
             customActionButtonSave.Name = "customActionButtonSave";
             customActionButtonSave.Size = new System.Drawing.Size(329, 39);

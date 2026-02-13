@@ -86,7 +86,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPlanSezonZadKnitMachine
             // 
-            gridViewPlanSezonZadKnitMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewPlanSezonZadKnitMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewPlanSezonZadKnitMachine.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewPlanSezonZadKnitMachine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPlanSezonZadKnitMachineColumnArticul, gridPlanSezonZadKnitMachineColumnPszkmPszNom, gridPlanSezonZadKnitMachineColumnHoursTotal, gridPlanSezonZadKnitMachineColumnDateZap, gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom, gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo, gridPlanSezonZadKnitMachineColumnYearMonthPlanDate, gridPlanSezonZadKnitMachineColumnKmlNumber, gridPlanSezonZadKnitMachineColumnYearNumberPlanDate, gridPlanSezonZadKnitMachineColumnMonthNumberPlanDate, gridPlanSezonZadKnitMachineColumnYearMonthText, gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt });
             gridViewPlanSezonZadKnitMachine.GridControl = gridControlPlanSezonZadKnitMachine;
@@ -216,7 +216,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPlanSezonZadKnitMachineLoadingSummary
             // 
-            gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(129, 199, 132);
+            // gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(129, 199, 132);
             gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewPlanSezonZadKnitMachineLoadingSummary.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod, gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal });
             gridViewPlanSezonZadKnitMachineLoadingSummary.GridControl = gridControlPlanSezonZadKnitMachineLoadingSummary;

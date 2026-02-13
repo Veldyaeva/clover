@@ -543,7 +543,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // layoutControl1
             // 
-            layoutControl1.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            // layoutControl1.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             layoutControl1.Controls.Add(textBoxPzvYearPachSearch);
             layoutControl1.Controls.Add(customLabel14);
             layoutControl1.Controls.Add(customLabel13);
@@ -563,7 +563,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl1.Controls.Add(gridControlPlanTotalHoursByKnitMachine);
             layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-            layoutControl1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            // layoutControl1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl1.Location = new System.Drawing.Point(0, 0);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(2288, 154, 650, 644);
@@ -579,7 +579,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxPzvYearPachSearch.ObjectName = null;
             textBoxPzvYearPachSearch.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             textBoxPzvYearPachSearch.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxPzvYearPachSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            // textBoxPzvYearPachSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             textBoxPzvYearPachSearch.Properties.Appearance.Options.UseBackColor = true;
             textBoxPzvYearPachSearch.Properties.Appearance.Options.UseFont = true;
             textBoxPzvYearPachSearch.Properties.Appearance.Options.UseForeColor = true;
@@ -632,7 +632,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxPzvNPachSearch.ObjectName = null;
             textBoxPzvNPachSearch.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             textBoxPzvNPachSearch.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxPzvNPachSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            // textBoxPzvNPachSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             textBoxPzvNPachSearch.Properties.Appearance.Options.UseBackColor = true;
             textBoxPzvNPachSearch.Properties.Appearance.Options.UseFont = true;
             textBoxPzvNPachSearch.Properties.Appearance.Options.UseForeColor = true;
@@ -696,7 +696,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxPzvNomZadSearch.ObjectName = null;
             textBoxPzvNomZadSearch.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             textBoxPzvNomZadSearch.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxPzvNomZadSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            // textBoxPzvNomZadSearch.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             textBoxPzvNomZadSearch.Properties.Appearance.Options.UseBackColor = true;
             textBoxPzvNomZadSearch.Properties.Appearance.Options.UseFont = true;
             textBoxPzvNomZadSearch.Properties.Appearance.Options.UseForeColor = true;
@@ -724,7 +724,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // labelStatus
             // 
             labelStatus.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            labelStatus.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            // labelStatus.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             labelStatus.Appearance.Options.UseFont = true;
             labelStatus.Appearance.Options.UseForeColor = true;
             labelStatus.Appearance.Options.UseTextOptions = true;
@@ -750,9 +750,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // advBandedGridViewSmenZadany
             // 
-            advBandedGridViewSmenZadany.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // advBandedGridViewSmenZadany.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             advBandedGridViewSmenZadany.Appearance.EvenRow.Options.UseBackColor = true;
-            advBandedGridViewSmenZadany.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // advBandedGridViewSmenZadany.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             advBandedGridViewSmenZadany.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             advBandedGridViewSmenZadany.Appearance.FocusedRow.Options.UseBackColor = true;
             advBandedGridViewSmenZadany.Appearance.FocusedRow.Options.UseFont = true;
@@ -1203,9 +1203,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewSmenZadany
             // 
-            gridViewSmenZadany.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewSmenZadany.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewSmenZadany.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewSmenZadany.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewSmenZadany.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewSmenZadany.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewSmenZadany.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewSmenZadany.Appearance.FocusedRow.Options.UseFont = true;
@@ -1215,7 +1215,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // customTabControl2
             // 
-            customTabControl2.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            // customTabControl2.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             customTabControl2.Appearance.Options.UseForeColor = true;
             customTabControl2.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
             customTabControl2.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Left;
@@ -1236,7 +1236,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // layoutControl2
             // 
-            layoutControl2.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            // layoutControl2.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             layoutControl2.Controls.Add(buttonCancelWorkStopExecution);
             layoutControl2.Controls.Add(buttonWorkStopExecution);
             layoutControl2.Controls.Add(buttonCancelWorkStartExecution);
@@ -1269,7 +1269,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl2.Controls.Add(customLabel5);
             layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl2.Font = new System.Drawing.Font("Arial", 10F);
-            layoutControl2.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            // layoutControl2.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl2.Location = new System.Drawing.Point(0, 0);
             layoutControl2.Name = "layoutControl2";
             layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1133, 449, 650, 400);
@@ -1358,9 +1358,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewNormRasz
             // 
-            gridViewNormRasz.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewNormRasz.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewNormRasz.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewNormRasz.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewNormRasz.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewNormRasz.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewNormRasz.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewNormRasz.Appearance.FocusedRow.Options.UseFont = true;
@@ -1457,9 +1457,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewArtNormN
             // 
-            gridViewArtNormN.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewArtNormN.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewArtNormN.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewArtNormN.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewArtNormN.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewArtNormN.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewArtNormN.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewArtNormN.Appearance.FocusedRow.Options.UseFont = true;
@@ -1528,9 +1528,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxOlPzvNrID.Location = new System.Drawing.Point(313, 75);
             textBoxOlPzvNrID.Name = "textBoxOlPzvNrID";
             textBoxOlPzvNrID.ObjectName = null;
-            textBoxOlPzvNrID.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // textBoxOlPzvNrID.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             textBoxOlPzvNrID.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxOlPzvNrID.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // textBoxOlPzvNrID.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             textBoxOlPzvNrID.Properties.Appearance.Options.UseBackColor = true;
             textBoxOlPzvNrID.Properties.Appearance.Options.UseFont = true;
             textBoxOlPzvNrID.Properties.Appearance.Options.UseForeColor = true;
@@ -1613,9 +1613,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxOlNomOper.Location = new System.Drawing.Point(433, 75);
             textBoxOlNomOper.Name = "textBoxOlNomOper";
             textBoxOlNomOper.ObjectName = null;
-            textBoxOlNomOper.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // textBoxOlNomOper.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             textBoxOlNomOper.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxOlNomOper.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // textBoxOlNomOper.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             textBoxOlNomOper.Properties.Appearance.Options.UseBackColor = true;
             textBoxOlNomOper.Properties.Appearance.Options.UseFont = true;
             textBoxOlNomOper.Properties.Appearance.Options.UseForeColor = true;
@@ -1645,9 +1645,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxOlPzvUpdDate.Location = new System.Drawing.Point(263, 107);
             textBoxOlPzvUpdDate.Name = "textBoxOlPzvUpdDate";
             textBoxOlPzvUpdDate.ObjectName = null;
-            textBoxOlPzvUpdDate.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // textBoxOlPzvUpdDate.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             textBoxOlPzvUpdDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxOlPzvUpdDate.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // textBoxOlPzvUpdDate.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             textBoxOlPzvUpdDate.Properties.Appearance.Options.UseBackColor = true;
             textBoxOlPzvUpdDate.Properties.Appearance.Options.UseFont = true;
             textBoxOlPzvUpdDate.Properties.Appearance.Options.UseForeColor = true;
@@ -1788,9 +1788,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customTextBoxEx1.Location = new System.Drawing.Point(195, 33);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
-            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
@@ -1822,9 +1822,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxOlPzvAnnID.Location = new System.Drawing.Point(195, 75);
             textBoxOlPzvAnnID.Name = "textBoxOlPzvAnnID";
             textBoxOlPzvAnnID.ObjectName = null;
-            textBoxOlPzvAnnID.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // textBoxOlPzvAnnID.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             textBoxOlPzvAnnID.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxOlPzvAnnID.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // textBoxOlPzvAnnID.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             textBoxOlPzvAnnID.Properties.Appearance.Options.UseBackColor = true;
             textBoxOlPzvAnnID.Properties.Appearance.Options.UseFont = true;
             textBoxOlPzvAnnID.Properties.Appearance.Options.UseForeColor = true;
@@ -1837,9 +1837,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxOlPzvNom.Location = new System.Drawing.Point(72, 75);
             textBoxOlPzvNom.Name = "textBoxOlPzvNom";
             textBoxOlPzvNom.ObjectName = null;
-            textBoxOlPzvNom.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // textBoxOlPzvNom.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             textBoxOlPzvNom.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxOlPzvNom.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // textBoxOlPzvNom.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             textBoxOlPzvNom.Properties.Appearance.Options.UseBackColor = true;
             textBoxOlPzvNom.Properties.Appearance.Options.UseFont = true;
             textBoxOlPzvNom.Properties.Appearance.Options.UseForeColor = true;
@@ -1871,9 +1871,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxOlPzvIDMlOp.Location = new System.Drawing.Point(371, 33);
             textBoxOlPzvIDMlOp.Name = "textBoxOlPzvIDMlOp";
             textBoxOlPzvIDMlOp.ObjectName = null;
-            textBoxOlPzvIDMlOp.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // textBoxOlPzvIDMlOp.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             textBoxOlPzvIDMlOp.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxOlPzvIDMlOp.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // textBoxOlPzvIDMlOp.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             textBoxOlPzvIDMlOp.Properties.Appearance.Options.UseBackColor = true;
             textBoxOlPzvIDMlOp.Properties.Appearance.Options.UseFont = true;
             textBoxOlPzvIDMlOp.Properties.Appearance.Options.UseForeColor = true;
@@ -1905,9 +1905,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxOlPzvID.Location = new System.Drawing.Point(72, 107);
             textBoxOlPzvID.Name = "textBoxOlPzvID";
             textBoxOlPzvID.ObjectName = null;
-            textBoxOlPzvID.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // textBoxOlPzvID.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             textBoxOlPzvID.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxOlPzvID.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // textBoxOlPzvID.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             textBoxOlPzvID.Properties.Appearance.Options.UseBackColor = true;
             textBoxOlPzvID.Properties.Appearance.Options.UseFont = true;
             textBoxOlPzvID.Properties.Appearance.Options.UseForeColor = true;
@@ -2294,7 +2294,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // layoutControl3
             // 
-            layoutControl3.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            // layoutControl3.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             layoutControl3.Controls.Add(customCheckBox1);
             layoutControl3.Controls.Add(customSimpleButton4);
             layoutControl3.Controls.Add(customSimpleButton5);
@@ -2302,7 +2302,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl3.Controls.Add(customSimpleButton6);
             layoutControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl3.Font = new System.Drawing.Font("Arial", 10F);
-            layoutControl3.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
+            // layoutControl3.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             layoutControl3.Location = new System.Drawing.Point(0, 0);
             layoutControl3.Name = "layoutControl3";
             layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1098, 531, 650, 400);
@@ -2315,7 +2315,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             customCheckBox1.Enabled = false;
             customCheckBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBox1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customCheckBox1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBox1.Location = new System.Drawing.Point(733, 12);
             customCheckBox1.Name = "customCheckBox1";
             customCheckBox1.Size = new System.Drawing.Size(262, 20);
@@ -2325,9 +2325,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // customSimpleButton4
             // 
-            customSimpleButton4.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customSimpleButton4.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customSimpleButton4.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton4.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customSimpleButton4.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customSimpleButton4.Appearance.Options.UseBackColor = true;
             customSimpleButton4.Appearance.Options.UseFont = true;
             customSimpleButton4.Appearance.Options.UseForeColor = true;
@@ -2346,9 +2346,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // customSimpleButton5
             // 
-            customSimpleButton5.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customSimpleButton5.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customSimpleButton5.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton5.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customSimpleButton5.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customSimpleButton5.Appearance.Options.UseBackColor = true;
             customSimpleButton5.Appearance.Options.UseFont = true;
             customSimpleButton5.Appearance.Options.UseForeColor = true;
@@ -2378,9 +2378,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewMlOp
             // 
-            gridViewMlOp.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewMlOp.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewMlOp.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewMlOp.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewMlOp.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewMlOp.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewMlOp.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewMlOp.Appearance.FocusedRow.Options.UseFont = true;
@@ -2491,9 +2491,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // customSimpleButton6
             // 
-            customSimpleButton6.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customSimpleButton6.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customSimpleButton6.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton6.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customSimpleButton6.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customSimpleButton6.Appearance.Options.UseBackColor = true;
             customSimpleButton6.Appearance.Options.UseFont = true;
             customSimpleButton6.Appearance.Options.UseForeColor = true;
@@ -2572,9 +2572,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewNaryadZadany
             // 
-            gridViewNaryadZadany.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewNaryadZadany.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewNaryadZadany.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewNaryadZadany.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewNaryadZadany.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewNaryadZadany.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewNaryadZadany.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewNaryadZadany.Appearance.FocusedRow.Options.UseFont = true;
@@ -2746,9 +2746,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPZVOperList
             // 
-            gridViewPZVOperList.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPZVOperList.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPZVOperList.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewPZVOperList.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPZVOperList.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPZVOperList.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewPZVOperList.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPZVOperList.Appearance.FocusedRow.Options.UseFont = true;
@@ -3132,9 +3132,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewRzvPachListByNom
             // 
-            gridViewRzvPachListByNom.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewRzvPachListByNom.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewRzvPachListByNom.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewRzvPachListByNom.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewRzvPachListByNom.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewRzvPachListByNom.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRzvPachListByNom.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRzvPachListByNom.Appearance.FocusedRow.Options.UseFont = true;
@@ -3241,9 +3241,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewZadanyListByMachine
             // 
-            gridViewZadanyListByMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewZadanyListByMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewZadanyListByMachine.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewZadanyListByMachine.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewZadanyListByMachine.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewZadanyListByMachine.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewZadanyListByMachine.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewZadanyListByMachine.Appearance.FocusedRow.Options.UseFont = true;
@@ -3407,9 +3407,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPlanTotalHoursByKnitMachine
             // 
-            gridViewPlanTotalHoursByKnitMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPlanTotalHoursByKnitMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPlanTotalHoursByKnitMachine.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewPlanTotalHoursByKnitMachine.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPlanTotalHoursByKnitMachine.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPlanTotalHoursByKnitMachine.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewPlanTotalHoursByKnitMachine.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPlanTotalHoursByKnitMachine.Appearance.FocusedRow.Options.UseFont = true;
@@ -3824,9 +3824,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridView6
             // 
-            gridView6.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridView6.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridView6.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView6.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridView6.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridView6.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridView6.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView6.Appearance.FocusedRow.Options.UseFont = true;

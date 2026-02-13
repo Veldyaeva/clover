@@ -223,7 +223,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewVyazPlan
             // 
-            gridViewVyazPlan.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // gridViewVyazPlan.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridViewVyazPlan.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewVyazPlan.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnVyazPlanPszkmPlanDateFrom, gridColumnVyazPlanKmlNumber, gridColumnVyazPlanSekVyazAll, gridColumnVyazPlanKol, gridColumnVyazPlanZvetTkan, gridColumnVyazPlanSekVyaz, gridColumnVyazPlanNameVyazClass, gridColumnVyazPlanGrup, gridColumnVyazPlanArticul, gridColumnVyazPlanDateCdPlan, gridColumnVyazPlanNameSbit, gridColumnVyazPlanDateZap, gridColumnVyazPlanNomZad, gridColumnVyazPlanSyncSelection, gridColumnVyazPlanNn, gridColumnVyazPlanPszkmPlanDateTo, gridColumnVyazPlanPszkmGradacia, gridColumnVyazPlanProgrFio });
             gridViewVyazPlan.CustomizationFormBounds = new System.Drawing.Rectangle(1597, 675, 308, 314);
@@ -539,7 +539,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridView6
             // 
-            gridView6.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+            // gridView6.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             gridView6.Appearance.EvenRow.Options.UseBackColor = true;
             gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth, gridColumnArtPrKnitMachineViewRecom2KmlNumber, gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth });
             gridView6.DetailHeight = 404;
@@ -590,7 +590,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridView5
             // 
-            gridView5.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+            // gridView5.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             gridView5.Appearance.EvenRow.Options.UseBackColor = true;
             gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnArtPrKnitMachineViewPr2KmlNumber });
             gridView5.DetailHeight = 404;
@@ -624,7 +624,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridView4
             // 
-            gridView4.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+            // gridView4.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             gridView4.Appearance.EvenRow.Options.UseBackColor = true;
             gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth, gridColumnArtPrKnitMachineViewRecom1KmlNumber, gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth });
             gridView4.DetailHeight = 404;
@@ -675,7 +675,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridView1
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridView1.Appearance.EvenRow.Options.UseBackColor = true;
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn1, gridColumn2, gridColumnArtPrFioProgrRazm, gridColumnArtPrFioProgrArticul });
             gridView1.DetailHeight = 404;
@@ -733,7 +733,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridView3
             // 
-            gridView3.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+            // gridView3.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             gridView3.Appearance.EvenRow.Options.UseBackColor = true;
             gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnArtPrKnitMachineViewPr1KmlNumber });
             gridView3.DetailHeight = 404;
@@ -778,7 +778,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridView2
             // 
-            gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridView2.Appearance.EvenRow.Options.UseBackColor = true;
             gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnPlanSezonZadanyRazmKolKol, gridColumnPlanSezonZadanyRazmKolRazm });
             gridView2.DetailHeight = 404;

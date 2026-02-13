@@ -87,7 +87,7 @@
             // 
             // gridViewRole
             // 
-            gridViewRole.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewRole.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewRole.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewRole.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewRole.Appearance.FocusedRow.Options.UseFont = true;
@@ -160,7 +160,7 @@
             // 
             // gridViewTable
             // 
-            gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewTable.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewTable.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewTable.Appearance.FocusedRow.Options.UseFont = true;
@@ -211,7 +211,7 @@
             // 
             customCheckBoxPodr.AutoSize = true;
             customCheckBoxPodr.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxPodr.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customCheckBoxPodr.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxPodr.Location = new System.Drawing.Point(3, 590);
             customCheckBoxPodr.Name = "customCheckBoxPodr";
             customCheckBoxPodr.Size = new System.Drawing.Size(129, 20);

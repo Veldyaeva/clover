@@ -138,10 +138,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButton1.Location = new System.Drawing.Point(1036, 3);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(230, 61);
@@ -151,10 +151,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButton2.Dock = System.Windows.Forms.DockStyle.Fill;
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButton2.Location = new System.Drawing.Point(1036, 606);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(230, 64);
@@ -231,10 +231,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonChangeUser
             // 
-            customButtonChangeUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonChangeUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonChangeUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonChangeUser.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonChangeUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonChangeUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonChangeUser.Location = new System.Drawing.Point(4, 3);
             customButtonChangeUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonChangeUser.MinimumSize = new System.Drawing.Size(160, 20);
@@ -247,10 +247,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonHistory
             // 
-            customButtonHistory.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonHistory.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonHistory.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonHistory.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonHistory.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonHistory.Location = new System.Drawing.Point(4, 363);
             customButtonHistory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonHistory.MinimumSize = new System.Drawing.Size(160, 20);
@@ -263,10 +263,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customActionButtonNon
             // 
-            customActionButtonNon.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customActionButtonNon.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customActionButtonNon.Dock = System.Windows.Forms.DockStyle.Fill;
             customActionButtonNon.Font = new System.Drawing.Font("Arial", 10F);
-            customActionButtonNon.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customActionButtonNon.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customActionButtonNon.Location = new System.Drawing.Point(4, 408);
             customActionButtonNon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customActionButtonNon.MinimumSize = new System.Drawing.Size(160, 20);
@@ -315,10 +315,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonShareUser
             // 
-            customButtonShareUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonShareUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonShareUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonShareUser.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonShareUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonShareUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonShareUser.Location = new System.Drawing.Point(4, 107);
             customButtonShareUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonShareUser.MinimumSize = new System.Drawing.Size(160, 20);
@@ -331,10 +331,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonUserHierarchy
             // 
-            customButtonUserHierarchy.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonUserHierarchy.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonUserHierarchy.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonUserHierarchy.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonUserHierarchy.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonUserHierarchy.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonUserHierarchy.Location = new System.Drawing.Point(4, 3);
             customButtonUserHierarchy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(160, 20);
@@ -347,10 +347,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAllRpofile
             // 
-            customButtonAllRpofile.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAllRpofile.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAllRpofile.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAllRpofile.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAllRpofile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAllRpofile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAllRpofile.Location = new System.Drawing.Point(4, 55);
             customButtonAllRpofile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAllRpofile.MinimumSize = new System.Drawing.Size(160, 20);
@@ -363,10 +363,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAdminSprav
             // 
-            customButtonAdminSprav.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAdminSprav.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAdminSprav.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAdminSprav.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAdminSprav.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAdminSprav.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAdminSprav.Location = new System.Drawing.Point(4, 575);
             customButtonAdminSprav.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAdminSprav.MinimumSize = new System.Drawing.Size(160, 20);
@@ -379,10 +379,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonSpravTable
             // 
-            customButtonSpravTable.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonSpravTable.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonSpravTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonSpravTable.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSpravTable.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonSpravTable.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonSpravTable.Location = new System.Drawing.Point(4, 523);
             customButtonSpravTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSpravTable.MinimumSize = new System.Drawing.Size(160, 20);
@@ -395,10 +395,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAdminForm
             // 
-            customButtonAdminForm.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAdminForm.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAdminForm.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAdminForm.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAdminForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAdminForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAdminForm.Location = new System.Drawing.Point(4, 471);
             customButtonAdminForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAdminForm.MinimumSize = new System.Drawing.Size(160, 20);
@@ -411,10 +411,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonUserPodr
             // 
-            customButtonUserPodr.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonUserPodr.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonUserPodr.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonUserPodr.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonUserPodr.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonUserPodr.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonUserPodr.Location = new System.Drawing.Point(4, 419);
             customButtonUserPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonUserPodr.MinimumSize = new System.Drawing.Size(160, 20);
@@ -427,10 +427,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonRolePodr
             // 
-            customButtonRolePodr.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonRolePodr.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonRolePodr.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonRolePodr.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonRolePodr.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonRolePodr.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonRolePodr.Location = new System.Drawing.Point(4, 315);
             customButtonRolePodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonRolePodr.MinimumSize = new System.Drawing.Size(160, 20);
@@ -443,10 +443,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAllDistribution
             // 
-            customButtonAllDistribution.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAllDistribution.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAllDistribution.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAllDistribution.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAllDistribution.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAllDistribution.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAllDistribution.Location = new System.Drawing.Point(4, 263);
             customButtonAllDistribution.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAllDistribution.MinimumSize = new System.Drawing.Size(160, 20);
@@ -459,10 +459,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAllRole
             // 
-            customButtonAllRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAllRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAllRole.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAllRole.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAllRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAllRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAllRole.Location = new System.Drawing.Point(4, 211);
             customButtonAllRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAllRole.MinimumSize = new System.Drawing.Size(160, 20);
@@ -499,7 +499,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabelProfileName.Anchor = System.Windows.Forms.AnchorStyles.None;
             customLabelProfileName.AutoSize = true;
             customLabelProfileName.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelProfileName.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelProfileName.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelProfileName.Location = new System.Drawing.Point(262, 11);
             customLabelProfileName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelProfileName.Name = "customLabelProfileName";
@@ -512,7 +512,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabelComp.Anchor = System.Windows.Forms.AnchorStyles.None;
             customLabelComp.AutoSize = true;
             customLabelComp.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelComp.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelComp.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelComp.Location = new System.Drawing.Point(57, 49);
             customLabelComp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelComp.Name = "customLabelComp";
@@ -525,7 +525,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabelProfile.Anchor = System.Windows.Forms.AnchorStyles.None;
             customLabelProfile.AutoSize = true;
             customLabelProfile.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelProfile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelProfile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelProfile.Location = new System.Drawing.Point(65, 11);
             customLabelProfile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelProfile.Name = "customLabelProfile";
@@ -538,7 +538,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabelCompName.Anchor = System.Windows.Forms.AnchorStyles.None;
             customLabelCompName.AutoSize = true;
             customLabelCompName.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelCompName.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelCompName.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelCompName.Location = new System.Drawing.Point(254, 49);
             customLabelCompName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelCompName.Name = "customLabelCompName";
@@ -619,7 +619,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel1.Location = new System.Drawing.Point(79, 9);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
@@ -632,7 +632,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel2.Location = new System.Drawing.Point(88, 44);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
@@ -643,12 +643,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customTextBoxNewPassword2
             // 
             customTextBoxNewPassword2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customTextBoxNewPassword2.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // customTextBoxNewPassword2.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxNewPassword2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxNewPassword2.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNewPassword2.ErrorMessage = null;
             customTextBoxNewPassword2.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNewPassword2.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // customTextBoxNewPassword2.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBoxNewPassword2.Location = new System.Drawing.Point(197, 76);
             customTextBoxNewPassword2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNewPassword2.MaximumSize = new System.Drawing.Size(224, 0);
@@ -661,7 +661,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabel3.AutoSize = true;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel3.Location = new System.Drawing.Point(60, 79);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
@@ -672,12 +672,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customTextBoxNewPassword
             // 
             customTextBoxNewPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customTextBoxNewPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // customTextBoxNewPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxNewPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxNewPassword.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNewPassword.ErrorMessage = null;
             customTextBoxNewPassword.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNewPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // customTextBoxNewPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBoxNewPassword.Location = new System.Drawing.Point(197, 41);
             customTextBoxNewPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNewPassword.MaximumSize = new System.Drawing.Size(224, 0);
@@ -688,12 +688,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customTextBoxOldPassword
             // 
             customTextBoxOldPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customTextBoxOldPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // customTextBoxOldPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxOldPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxOldPassword.ErrorColor = System.Drawing.Color.Red;
             customTextBoxOldPassword.ErrorMessage = null;
             customTextBoxOldPassword.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxOldPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // customTextBoxOldPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBoxOldPassword.Location = new System.Drawing.Point(197, 6);
             customTextBoxOldPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxOldPassword.MaximumSize = new System.Drawing.Size(224, 0);
@@ -703,10 +703,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customActionButtonEditPassword
             // 
-            customActionButtonEditPassword.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customActionButtonEditPassword.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customActionButtonEditPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             customActionButtonEditPassword.Font = new System.Drawing.Font("Arial", 10F);
-            customActionButtonEditPassword.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customActionButtonEditPassword.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customActionButtonEditPassword.Location = new System.Drawing.Point(197, 108);
             customActionButtonEditPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customActionButtonEditPassword.MaximumSize = new System.Drawing.Size(224, 0);
@@ -759,7 +759,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabelNewLogin.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabelNewLogin.AutoSize = true;
             customLabelNewLogin.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelNewLogin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelNewLogin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelNewLogin.Location = new System.Drawing.Point(99, 9);
             customLabelNewLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelNewLogin.Name = "customLabelNewLogin";
@@ -772,7 +772,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabelPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabelPassword.AutoSize = true;
             customLabelPassword.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelPassword.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customLabelPassword.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabelPassword.Location = new System.Drawing.Point(133, 44);
             customLabelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelPassword.Name = "customLabelPassword";
@@ -783,12 +783,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customTextBoxPassword
             // 
             customTextBoxPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customTextBoxPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // customTextBoxPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPassword.ErrorColor = System.Drawing.Color.Red;
             customTextBoxPassword.ErrorMessage = null;
             customTextBoxPassword.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // customTextBoxPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBoxPassword.Location = new System.Drawing.Point(197, 41);
             customTextBoxPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPassword.MaximumSize = new System.Drawing.Size(224, 0);
@@ -799,12 +799,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customTextBoxNewLogin
             // 
             customTextBoxNewLogin.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            customTextBoxNewLogin.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // customTextBoxNewLogin.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxNewLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxNewLogin.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNewLogin.ErrorMessage = null;
             customTextBoxNewLogin.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNewLogin.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // customTextBoxNewLogin.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customTextBoxNewLogin.Location = new System.Drawing.Point(197, 6);
             customTextBoxNewLogin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNewLogin.MaximumSize = new System.Drawing.Size(224, 0);
@@ -814,10 +814,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customActionButtonEditLogin
             // 
-            customActionButtonEditLogin.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customActionButtonEditLogin.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customActionButtonEditLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             customActionButtonEditLogin.Font = new System.Drawing.Font("Arial", 10F);
-            customActionButtonEditLogin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customActionButtonEditLogin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customActionButtonEditLogin.Location = new System.Drawing.Point(197, 108);
             customActionButtonEditLogin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customActionButtonEditLogin.MaximumSize = new System.Drawing.Size(224, 0);

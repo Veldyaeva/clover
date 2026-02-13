@@ -452,7 +452,7 @@ namespace SewingProduction.Features.Articul
             chbArh.Enabled = false;
             chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbArh.Font = new Font("Arial", 10F);
-            chbArh.ForeColor = Color.FromArgb(72, 61, 139);
+            // chbArh.ForeColor = Color.FromArgb(72, 61, 139);
             chbArh.Location = new Point(1054, 6);
             chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbArh.Name = "chbArh";
@@ -467,7 +467,7 @@ namespace SewingProduction.Features.Articul
             chbKombIzd.Enabled = false;
             chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombIzd.Font = new Font("Arial", 10F);
-            chbKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
+            // chbKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
             chbKombIzd.Location = new Point(937, 6);
             chbKombIzd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombIzd.Name = "chbKombIzd";
@@ -482,7 +482,7 @@ namespace SewingProduction.Features.Articul
             chbKombDet.Enabled = false;
             chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombDet.Font = new Font("Arial", 10F);
-            chbKombDet.ForeColor = Color.FromArgb(72, 61, 139);
+            // chbKombDet.ForeColor = Color.FromArgb(72, 61, 139);
             chbKombDet.Location = new Point(824, 7);
             chbKombDet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombDet.Name = "chbKombDet";
@@ -496,7 +496,7 @@ namespace SewingProduction.Features.Articul
             customLabel19.AutoSize = true;
             customLabel19.BackColor = Color.Transparent;
             customLabel19.Font = new Font("Arial", 8.25F);
-            customLabel19.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel19.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel19.Location = new Point(1051, 228);
             customLabel19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel19.Name = "customLabel19";
@@ -512,7 +512,7 @@ namespace SewingProduction.Features.Articul
             txbNDS.ErrorColor = Color.Red;
             txbNDS.ErrorMessage = null;
             txbNDS.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbNDS.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNDS.ForeColor = Color.FromArgb(72, 61, 139);
             txbNDS.Location = new Point(1086, 227);
             txbNDS.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNDS.Name = "txbNDS";
@@ -524,7 +524,7 @@ namespace SewingProduction.Features.Articul
             customLabel18.AutoSize = true;
             customLabel18.BackColor = Color.Transparent;
             customLabel18.Font = new Font("Arial", 8.25F);
-            customLabel18.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel18.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel18.Location = new Point(776, 228);
             customLabel18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel18.Name = "customLabel18";
@@ -539,7 +539,7 @@ namespace SewingProduction.Features.Articul
             txbKodTnved.ErrorColor = Color.Red;
             txbKodTnved.ErrorMessage = null;
             txbKodTnved.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbKodTnved.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKodTnved.ForeColor = Color.FromArgb(72, 61, 139);
             txbKodTnved.Location = new Point(850, 227);
             txbKodTnved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKodTnved.Name = "txbKodTnved";
@@ -552,7 +552,7 @@ namespace SewingProduction.Features.Articul
             customLabel17.AutoSize = true;
             customLabel17.BackColor = Color.Transparent;
             customLabel17.Font = new Font("Arial", 8.25F);
-            customLabel17.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel17.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel17.Location = new Point(458, 228);
             customLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel17.Name = "customLabel17";
@@ -567,7 +567,7 @@ namespace SewingProduction.Features.Articul
             txbScNomer.ErrorColor = Color.Red;
             txbScNomer.ErrorMessage = null;
             txbScNomer.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbScNomer.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbScNomer.ForeColor = Color.FromArgb(72, 61, 139);
             txbScNomer.Location = new Point(540, 227);
             txbScNomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbScNomer.Name = "txbScNomer";
@@ -580,7 +580,7 @@ namespace SewingProduction.Features.Articul
             mtbDateOpis.BackColor = Color.FromArgb(248, 248, 255);
             mtbDateOpis.BorderStyle = System.Windows.Forms.BorderStyle.None;
             mtbDateOpis.Font = new Font("Arial", 10F);
-            mtbDateOpis.ForeColor = Color.FromArgb(72, 61, 139);
+            // mtbDateOpis.ForeColor = Color.FromArgb(72, 61, 139);
             mtbDateOpis.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             mtbDateOpis.Location = new Point(371, 227);
             mtbDateOpis.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -596,7 +596,7 @@ namespace SewingProduction.Features.Articul
             customLabel16.AutoSize = true;
             customLabel16.BackColor = Color.Transparent;
             customLabel16.Font = new Font("Arial", 8.25F);
-            customLabel16.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel16.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel16.Location = new Point(269, 228);
             customLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel16.Name = "customLabel16";
@@ -609,7 +609,7 @@ namespace SewingProduction.Features.Articul
             customLabel15.AutoSize = true;
             customLabel15.BackColor = Color.Transparent;
             customLabel15.Font = new Font("Arial", 8.25F);
-            customLabel15.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel15.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel15.Location = new Point(796, 178);
             customLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel15.Name = "customLabel15";
@@ -625,7 +625,7 @@ namespace SewingProduction.Features.Articul
             txbRazmPrint.ErrorColor = Color.Red;
             txbRazmPrint.ErrorMessage = null;
             txbRazmPrint.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbRazmPrint.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbRazmPrint.ForeColor = Color.FromArgb(72, 61, 139);
             txbRazmPrint.Location = new Point(877, 178);
             txbRazmPrint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazmPrint.Name = "txbRazmPrint";
@@ -638,7 +638,7 @@ namespace SewingProduction.Features.Articul
             customLabel14.AutoSize = true;
             customLabel14.BackColor = Color.Transparent;
             customLabel14.Font = new Font("Arial", 8.25F);
-            customLabel14.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel14.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel14.Location = new Point(509, 178);
             customLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel14.Name = "customLabel14";
@@ -653,7 +653,7 @@ namespace SewingProduction.Features.Articul
             txbRazm.ErrorColor = Color.Red;
             txbRazm.ErrorMessage = null;
             txbRazm.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbRazm.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbRazm.ForeColor = Color.FromArgb(72, 61, 139);
             txbRazm.Location = new Point(567, 178);
             txbRazm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazm.Name = "txbRazm";
@@ -666,7 +666,7 @@ namespace SewingProduction.Features.Articul
             customLabel13.AutoSize = true;
             customLabel13.BackColor = Color.Transparent;
             customLabel13.Font = new Font("Arial", 8.25F);
-            customLabel13.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel13.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel13.Location = new Point(424, 153);
             customLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel13.Name = "customLabel13";
@@ -682,7 +682,7 @@ namespace SewingProduction.Features.Articul
             txbSost3.ErrorColor = Color.Red;
             txbSost3.ErrorMessage = null;
             txbSost3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbSost3.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSost3.ForeColor = Color.FromArgb(72, 61, 139);
             txbSost3.Location = new Point(567, 153);
             txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost3.Name = "txbSost3";
@@ -695,7 +695,7 @@ namespace SewingProduction.Features.Articul
             customLabel12.AutoSize = true;
             customLabel12.BackColor = Color.Transparent;
             customLabel12.Font = new Font("Arial", 8.25F);
-            customLabel12.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel12.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel12.Location = new Point(504, 130);
             customLabel12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel12.Name = "customLabel12";
@@ -711,7 +711,7 @@ namespace SewingProduction.Features.Articul
             txbSost2.ErrorColor = Color.Red;
             txbSost2.ErrorMessage = null;
             txbSost2.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbSost2.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSost2.ForeColor = Color.FromArgb(72, 61, 139);
             txbSost2.Location = new Point(567, 129);
             txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost2.Name = "txbSost2";
@@ -724,7 +724,7 @@ namespace SewingProduction.Features.Articul
             customLabel11.AutoSize = true;
             customLabel11.BackColor = Color.Transparent;
             customLabel11.Font = new Font("Arial", 8.25F);
-            customLabel11.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel11.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel11.Location = new Point(458, 105);
             customLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel11.Name = "customLabel11";
@@ -740,7 +740,7 @@ namespace SewingProduction.Features.Articul
             txbSost.ErrorColor = Color.Red;
             txbSost.ErrorMessage = null;
             txbSost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbSost.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSost.ForeColor = Color.FromArgb(72, 61, 139);
             txbSost.Location = new Point(567, 105);
             txbSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost.Name = "txbSost";
@@ -754,7 +754,7 @@ namespace SewingProduction.Features.Articul
             customLabel10.AutoSize = true;
             customLabel10.BackColor = Color.Transparent;
             customLabel10.Font = new Font("Arial", 8.25F);
-            customLabel10.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel10.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel10.Location = new Point(820, 60);
             customLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel10.Name = "customLabel10";
@@ -770,7 +770,7 @@ namespace SewingProduction.Features.Articul
             txbOpiGost.ErrorColor = Color.Red;
             txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbOpiGost.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpiGost.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpiGost.Location = new Point(824, 81);
             txbOpiGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpiGost.Name = "txbOpiGost";
@@ -784,7 +784,7 @@ namespace SewingProduction.Features.Articul
             customLabel9.AutoSize = true;
             customLabel9.BackColor = Color.Transparent;
             customLabel9.Font = new Font("Arial", 8.25F);
-            customLabel9.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel9.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel9.Location = new Point(615, 60);
             customLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel9.Name = "customLabel9";
@@ -800,7 +800,7 @@ namespace SewingProduction.Features.Articul
             txbNameGost.ErrorColor = Color.Red;
             txbNameGost.ErrorMessage = null;
             txbNameGost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbNameGost.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNameGost.ForeColor = Color.FromArgb(72, 61, 139);
             txbNameGost.Location = new Point(618, 81);
             txbNameGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNameGost.Name = "txbNameGost";
@@ -814,7 +814,7 @@ namespace SewingProduction.Features.Articul
             customLabel8.AutoSize = true;
             customLabel8.BackColor = Color.Transparent;
             customLabel8.Font = new Font("Arial", 8.25F);
-            customLabel8.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel8.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel8.Location = new Point(564, 60);
             customLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel8.Name = "customLabel8";
@@ -828,7 +828,7 @@ namespace SewingProduction.Features.Articul
             customLabel7.AutoSize = true;
             customLabel7.BackColor = Color.Transparent;
             customLabel7.Font = new Font("Arial", 8.25F);
-            customLabel7.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel7.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel7.Location = new Point(522, 81);
             customLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel7.Name = "customLabel7";
@@ -844,7 +844,7 @@ namespace SewingProduction.Features.Articul
             txbIdGost.ErrorColor = Color.Red;
             txbIdGost.ErrorMessage = null;
             txbIdGost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbIdGost.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbIdGost.ForeColor = Color.FromArgb(72, 61, 139);
             txbIdGost.Location = new Point(567, 81);
             txbIdGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbIdGost.Name = "txbIdGost";
@@ -858,7 +858,7 @@ namespace SewingProduction.Features.Articul
             customLabel6.AutoSize = true;
             customLabel6.BackColor = Color.Transparent;
             customLabel6.Font = new Font("Arial", 8.25F);
-            customLabel6.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel6.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel6.Location = new Point(465, 37);
             customLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel6.Name = "customLabel6";
@@ -874,7 +874,7 @@ namespace SewingProduction.Features.Articul
             txbGrup.ErrorColor = Color.Red;
             txbGrup.ErrorMessage = null;
             txbGrup.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbGrup.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbGrup.ForeColor = Color.FromArgb(72, 61, 139);
             txbGrup.Location = new Point(567, 37);
             txbGrup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGrup.Name = "txbGrup";
@@ -887,7 +887,7 @@ namespace SewingProduction.Features.Articul
             customLabel5.AutoSize = true;
             customLabel5.BackColor = Color.Transparent;
             customLabel5.Font = new Font("Arial", 8.25F);
-            customLabel5.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel5.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel5.Location = new Point(269, 202);
             customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel5.Name = "customLabel5";
@@ -903,7 +903,7 @@ namespace SewingProduction.Features.Articul
             txbGrupMenName.ErrorColor = Color.Red;
             txbGrupMenName.ErrorMessage = null;
             txbGrupMenName.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbGrupMenName.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbGrupMenName.ForeColor = Color.FromArgb(72, 61, 139);
             txbGrupMenName.Location = new Point(336, 202);
             txbGrupMenName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGrupMenName.Name = "txbGrupMenName";
@@ -916,7 +916,7 @@ namespace SewingProduction.Features.Articul
             customLabel4.AutoSize = true;
             customLabel4.BackColor = Color.Transparent;
             customLabel4.Font = new Font("Arial", 8.25F);
-            customLabel4.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel4.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel4.Location = new Point(284, 178);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
@@ -931,7 +931,7 @@ namespace SewingProduction.Features.Articul
             txbCountry.ErrorColor = Color.Red;
             txbCountry.ErrorMessage = null;
             txbCountry.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbCountry.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbCountry.ForeColor = Color.FromArgb(72, 61, 139);
             txbCountry.Location = new Point(336, 178);
             txbCountry.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbCountry.Name = "txbCountry";
@@ -944,7 +944,7 @@ namespace SewingProduction.Features.Articul
             customLabel3.AutoSize = true;
             customLabel3.BackColor = Color.Transparent;
             customLabel3.Font = new Font("Arial", 8.25F);
-            customLabel3.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel3.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel3.Location = new Point(281, 149);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
@@ -959,7 +959,7 @@ namespace SewingProduction.Features.Articul
             txbAssort.ErrorColor = Color.Red;
             txbAssort.ErrorMessage = null;
             txbAssort.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbAssort.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbAssort.ForeColor = Color.FromArgb(72, 61, 139);
             txbAssort.Location = new Point(336, 150);
             txbAssort.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbAssort.Name = "txbAssort";
@@ -972,7 +972,7 @@ namespace SewingProduction.Features.Articul
             customLabel2.AutoSize = true;
             customLabel2.BackColor = Color.Transparent;
             customLabel2.Font = new Font("Arial", 8.25F);
-            customLabel2.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel2.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel2.Location = new Point(307, 95);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
@@ -987,7 +987,7 @@ namespace SewingProduction.Features.Articul
             txbTM.ErrorColor = Color.Red;
             txbTM.ErrorMessage = null;
             txbTM.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbTM.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTM.ForeColor = Color.FromArgb(72, 61, 139);
             txbTM.Location = new Point(336, 93);
             txbTM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTM.Name = "txbTM";
@@ -1000,7 +1000,7 @@ namespace SewingProduction.Features.Articul
             customLabel1.AutoSize = true;
             customLabel1.BackColor = Color.Transparent;
             customLabel1.Font = new Font("Arial", 8.25F);
-            customLabel1.ForeColor = Color.FromArgb(0, 0, 0);
+            // customLabel1.ForeColor = Color.FromArgb(0, 0, 0);
             customLabel1.Location = new Point(291, 121);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
@@ -1015,7 +1015,7 @@ namespace SewingProduction.Features.Articul
             txbSeason.ErrorColor = Color.Red;
             txbSeason.ErrorMessage = null;
             txbSeason.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbSeason.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSeason.ForeColor = Color.FromArgb(72, 61, 139);
             txbSeason.Location = new Point(336, 121);
             txbSeason.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeason.Name = "txbSeason";
@@ -1038,7 +1038,7 @@ namespace SewingProduction.Features.Articul
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Arial", 8.25F);
-            label3.ForeColor = Color.FromArgb(0, 0, 0);
+            // label3.ForeColor = Color.FromArgb(0, 0, 0);
             label3.Location = new Point(283, 66);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
@@ -1054,7 +1054,7 @@ namespace SewingProduction.Features.Articul
             txbMod.ErrorColor = Color.Red;
             txbMod.ErrorMessage = null;
             txbMod.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbMod.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbMod.ForeColor = Color.FromArgb(72, 61, 139);
             txbMod.Location = new Point(336, 66);
             txbMod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbMod.MinimumSize = new Size(120, 15);
@@ -1068,7 +1068,7 @@ namespace SewingProduction.Features.Articul
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Arial", 8.25F);
-            label2.ForeColor = Color.FromArgb(0, 0, 0);
+            // label2.ForeColor = Color.FromArgb(0, 0, 0);
             label2.Location = new Point(278, 39);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
@@ -1084,7 +1084,7 @@ namespace SewingProduction.Features.Articul
             txbArticul.ErrorColor = Color.Red;
             txbArticul.ErrorMessage = null;
             txbArticul.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbArticul.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbArticul.ForeColor = Color.FromArgb(72, 61, 139);
             txbArticul.Location = new Point(336, 39);
             txbArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbArticul.MinimumSize = new Size(120, 15);
@@ -1100,7 +1100,7 @@ namespace SewingProduction.Features.Articul
             txbPo.ErrorColor = Color.Red;
             txbPo.ErrorMessage = null;
             txbPo.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbPo.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbPo.ForeColor = Color.FromArgb(72, 61, 139);
             txbPo.Location = new Point(427, 12);
             txbPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbPo.Name = "txbPo";
@@ -1113,7 +1113,7 @@ namespace SewingProduction.Features.Articul
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Arial", 8.25F);
-            label1.ForeColor = Color.FromArgb(0, 0, 0);
+            // label1.ForeColor = Color.FromArgb(0, 0, 0);
             label1.Location = new Point(302, 12);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
@@ -1128,7 +1128,7 @@ namespace SewingProduction.Features.Articul
             txbKod.ErrorColor = Color.Red;
             txbKod.ErrorMessage = null;
             txbKod.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbKod.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKod.ForeColor = Color.FromArgb(72, 61, 139);
             txbKod.Location = new Point(335, 12);
             txbKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKod.Name = "txbKod";
@@ -1204,7 +1204,7 @@ namespace SewingProduction.Features.Articul
             // 
             // customTabControlKomplNabor
             // 
-            customTabControlKomplNabor.Appearance.ForeColor = Color.FromArgb(105, 75, 45);
+            // customTabControlKomplNabor.Appearance.ForeColor = Color.FromArgb(105, 75, 45);
             customTabControlKomplNabor.Appearance.Options.UseForeColor = true;
             customTabControlKomplNabor.Location = new Point(2, 92);
             customTabControlKomplNabor.Name = "customTabControlKomplNabor";
@@ -1235,9 +1235,9 @@ namespace SewingProduction.Features.Articul
             // 
             // gridViewKomplSost
             // 
-            gridViewKomplSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
+            // gridViewKomplSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewKomplSost.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewKomplSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
+            // gridViewKomplSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewKomplSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
             gridViewKomplSost.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKomplSost.Appearance.FocusedRow.Options.UseFont = true;
@@ -1319,9 +1319,9 @@ namespace SewingProduction.Features.Articul
             // 
             // gridViewNaborSost
             // 
-            gridViewNaborSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
+            // gridViewNaborSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewNaborSost.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewNaborSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
+            // gridViewNaborSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewNaborSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
             gridViewNaborSost.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewNaborSost.Appearance.FocusedRow.Options.UseFont = true;
@@ -1611,7 +1611,7 @@ namespace SewingProduction.Features.Articul
             txbOpis_t7.ErrorColor = Color.Red;
             txbOpis_t7.ErrorMessage = null;
             txbOpis_t7.Font = new Font("Arial", 9F);
-            txbOpis_t7.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpis_t7.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t7.Location = new Point(5, 181);
             txbOpis_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t7.Name = "txbOpis_t7";
@@ -1626,7 +1626,7 @@ namespace SewingProduction.Features.Articul
             txbOpis_t6.ErrorColor = Color.Red;
             txbOpis_t6.ErrorMessage = null;
             txbOpis_t6.Font = new Font("Arial", 9F);
-            txbOpis_t6.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpis_t6.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t6.Location = new Point(5, 153);
             txbOpis_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t6.Name = "txbOpis_t6";
@@ -1641,7 +1641,7 @@ namespace SewingProduction.Features.Articul
             txbOpis_t1.ErrorColor = Color.Red;
             txbOpis_t1.ErrorMessage = null;
             txbOpis_t1.Font = new Font("Arial", 9F);
-            txbOpis_t1.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpis_t1.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t1.Location = new Point(5, 17);
             txbOpis_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t1.Name = "txbOpis_t1";
@@ -1656,7 +1656,7 @@ namespace SewingProduction.Features.Articul
             txbOpis_t5.ErrorColor = Color.Red;
             txbOpis_t5.ErrorMessage = null;
             txbOpis_t5.Font = new Font("Arial", 9F);
-            txbOpis_t5.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpis_t5.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t5.Location = new Point(5, 127);
             txbOpis_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t5.Name = "txbOpis_t5";
@@ -1671,7 +1671,7 @@ namespace SewingProduction.Features.Articul
             txbOpis_t2.ErrorColor = Color.Red;
             txbOpis_t2.ErrorMessage = null;
             txbOpis_t2.Font = new Font("Arial", 9F);
-            txbOpis_t2.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpis_t2.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t2.Location = new Point(5, 45);
             txbOpis_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t2.Name = "txbOpis_t2";
@@ -1686,7 +1686,7 @@ namespace SewingProduction.Features.Articul
             txbOpis_t4.ErrorColor = Color.Red;
             txbOpis_t4.ErrorMessage = null;
             txbOpis_t4.Font = new Font("Arial", 9F);
-            txbOpis_t4.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpis_t4.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t4.Location = new Point(5, 100);
             txbOpis_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t4.Name = "txbOpis_t4";
@@ -1701,7 +1701,7 @@ namespace SewingProduction.Features.Articul
             txbOpis_t3.ErrorColor = Color.Red;
             txbOpis_t3.ErrorMessage = null;
             txbOpis_t3.Font = new Font("Arial", 9F);
-            txbOpis_t3.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbOpis_t3.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t3.Location = new Point(5, 73);
             txbOpis_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t3.Name = "txbOpis_t3";
@@ -1734,7 +1734,7 @@ namespace SewingProduction.Features.Articul
             txbKfKach7.ErrorColor = Color.Red;
             txbKfKach7.ErrorMessage = null;
             txbKfKach7.Font = new Font("Arial", 9F);
-            txbKfKach7.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKfKach7.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach7.Location = new Point(5, 180);
             txbKfKach7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach7.Name = "txbKfKach7";
@@ -1749,7 +1749,7 @@ namespace SewingProduction.Features.Articul
             txbKfKach6.ErrorColor = Color.Red;
             txbKfKach6.ErrorMessage = null;
             txbKfKach6.Font = new Font("Arial", 9F);
-            txbKfKach6.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKfKach6.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach6.Location = new Point(5, 152);
             txbKfKach6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach6.Name = "txbKfKach6";
@@ -1764,7 +1764,7 @@ namespace SewingProduction.Features.Articul
             txbKfKach5.ErrorColor = Color.Red;
             txbKfKach5.ErrorMessage = null;
             txbKfKach5.Font = new Font("Arial", 9F);
-            txbKfKach5.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKfKach5.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach5.Location = new Point(5, 126);
             txbKfKach5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach5.Name = "txbKfKach5";
@@ -1779,7 +1779,7 @@ namespace SewingProduction.Features.Articul
             txbKfKach4.ErrorColor = Color.Red;
             txbKfKach4.ErrorMessage = null;
             txbKfKach4.Font = new Font("Arial", 9F);
-            txbKfKach4.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKfKach4.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach4.Location = new Point(5, 99);
             txbKfKach4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach4.Name = "txbKfKach4";
@@ -1794,7 +1794,7 @@ namespace SewingProduction.Features.Articul
             txbKfKach3.ErrorColor = Color.Red;
             txbKfKach3.ErrorMessage = null;
             txbKfKach3.Font = new Font("Arial", 9F);
-            txbKfKach3.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKfKach3.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach3.Location = new Point(5, 72);
             txbKfKach3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach3.Name = "txbKfKach3";
@@ -1809,7 +1809,7 @@ namespace SewingProduction.Features.Articul
             txbKfKach2.ErrorColor = Color.Red;
             txbKfKach2.ErrorMessage = null;
             txbKfKach2.Font = new Font("Arial", 9F);
-            txbKfKach2.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKfKach2.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach2.Location = new Point(5, 44);
             txbKfKach2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach2.Name = "txbKfKach2";
@@ -1824,7 +1824,7 @@ namespace SewingProduction.Features.Articul
             txbKfKach1.ErrorColor = Color.Red;
             txbKfKach1.ErrorMessage = null;
             txbKfKach1.Font = new Font("Arial", 9F);
-            txbKfKach1.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKfKach1.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach1.Location = new Point(5, 16);
             txbKfKach1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach1.Name = "txbKfKach1";
@@ -1856,7 +1856,7 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent7.ErrorColor = Color.Red;
             txtBrakPercent7.ErrorMessage = null;
             txtBrakPercent7.Font = new Font("Arial", 9F);
-            txtBrakPercent7.ForeColor = Color.FromArgb(72, 61, 139);
+            // txtBrakPercent7.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent7.Location = new Point(3, 182);
             txtBrakPercent7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent7.Name = "txtBrakPercent7";
@@ -1871,7 +1871,7 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent6.ErrorColor = Color.Red;
             txtBrakPercent6.ErrorMessage = null;
             txtBrakPercent6.Font = new Font("Arial", 9F);
-            txtBrakPercent6.ForeColor = Color.FromArgb(72, 61, 139);
+            // txtBrakPercent6.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent6.Location = new Point(3, 154);
             txtBrakPercent6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent6.Name = "txtBrakPercent6";
@@ -1886,7 +1886,7 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent1.ErrorColor = Color.Red;
             txtBrakPercent1.ErrorMessage = null;
             txtBrakPercent1.Font = new Font("Arial", 9F);
-            txtBrakPercent1.ForeColor = Color.FromArgb(72, 61, 139);
+            // txtBrakPercent1.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent1.Location = new Point(4, 18);
             txtBrakPercent1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent1.Name = "txtBrakPercent1";
@@ -1901,7 +1901,7 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent5.ErrorColor = Color.Red;
             txtBrakPercent5.ErrorMessage = null;
             txtBrakPercent5.Font = new Font("Arial", 9F);
-            txtBrakPercent5.ForeColor = Color.FromArgb(72, 61, 139);
+            // txtBrakPercent5.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent5.Location = new Point(3, 128);
             txtBrakPercent5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent5.Name = "txtBrakPercent5";
@@ -1916,7 +1916,7 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent2.ErrorColor = Color.Red;
             txtBrakPercent2.ErrorMessage = null;
             txtBrakPercent2.Font = new Font("Arial", 9F);
-            txtBrakPercent2.ForeColor = Color.FromArgb(72, 61, 139);
+            // txtBrakPercent2.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent2.Location = new Point(4, 46);
             txtBrakPercent2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent2.Name = "txtBrakPercent2";
@@ -1931,7 +1931,7 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent4.ErrorColor = Color.Red;
             txtBrakPercent4.ErrorMessage = null;
             txtBrakPercent4.Font = new Font("Arial", 9F);
-            txtBrakPercent4.ForeColor = Color.FromArgb(72, 61, 139);
+            // txtBrakPercent4.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent4.Location = new Point(2, 101);
             txtBrakPercent4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent4.Name = "txtBrakPercent4";
@@ -1946,7 +1946,7 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent3.ErrorColor = Color.Red;
             txtBrakPercent3.ErrorMessage = null;
             txtBrakPercent3.Font = new Font("Arial", 9F);
-            txtBrakPercent3.ForeColor = Color.FromArgb(72, 61, 139);
+            // txtBrakPercent3.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent3.Location = new Point(3, 74);
             txtBrakPercent3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent3.Name = "txtBrakPercent3";
@@ -1977,7 +1977,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t7.ErrorColor = Color.Red;
             txbTkanSeb_t7.ErrorMessage = null;
             txbTkanSeb_t7.Font = new Font("Arial", 9F);
-            txbTkanSeb_t7.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTkanSeb_t7.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t7.Location = new Point(5, 181);
             txbTkanSeb_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t7.Name = "txbTkanSeb_t7";
@@ -1992,7 +1992,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t6.ErrorColor = Color.Red;
             txbTkanSeb_t6.ErrorMessage = null;
             txbTkanSeb_t6.Font = new Font("Arial", 9F);
-            txbTkanSeb_t6.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTkanSeb_t6.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t6.Location = new Point(5, 153);
             txbTkanSeb_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t6.Name = "txbTkanSeb_t6";
@@ -2007,7 +2007,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t1.ErrorColor = Color.Red;
             txbTkanSeb_t1.ErrorMessage = null;
             txbTkanSeb_t1.Font = new Font("Arial", 9F);
-            txbTkanSeb_t1.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTkanSeb_t1.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t1.Location = new Point(5, 17);
             txbTkanSeb_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t1.Name = "txbTkanSeb_t1";
@@ -2022,7 +2022,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t5.ErrorColor = Color.Red;
             txbTkanSeb_t5.ErrorMessage = null;
             txbTkanSeb_t5.Font = new Font("Arial", 9F);
-            txbTkanSeb_t5.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTkanSeb_t5.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t5.Location = new Point(5, 127);
             txbTkanSeb_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t5.Name = "txbTkanSeb_t5";
@@ -2037,7 +2037,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t2.ErrorColor = Color.Red;
             txbTkanSeb_t2.ErrorMessage = null;
             txbTkanSeb_t2.Font = new Font("Arial", 9F);
-            txbTkanSeb_t2.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTkanSeb_t2.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t2.Location = new Point(5, 45);
             txbTkanSeb_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t2.Name = "txbTkanSeb_t2";
@@ -2052,7 +2052,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t4.ErrorColor = Color.Red;
             txbTkanSeb_t4.ErrorMessage = null;
             txbTkanSeb_t4.Font = new Font("Arial", 9F);
-            txbTkanSeb_t4.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTkanSeb_t4.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t4.Location = new Point(5, 100);
             txbTkanSeb_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t4.Name = "txbTkanSeb_t4";
@@ -2067,7 +2067,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t3.ErrorColor = Color.Red;
             txbTkanSeb_t3.ErrorMessage = null;
             txbTkanSeb_t3.Font = new Font("Arial", 9F);
-            txbTkanSeb_t3.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbTkanSeb_t3.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t3.Location = new Point(5, 73);
             txbTkanSeb_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t3.Name = "txbTkanSeb_t3";
@@ -2098,7 +2098,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t7.ErrorColor = Color.Red;
             txbNorm_t7.ErrorMessage = null;
             txbNorm_t7.Font = new Font("Arial", 9F);
-            txbNorm_t7.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNorm_t7.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t7.Location = new Point(5, 177);
             txbNorm_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t7.Name = "txbNorm_t7";
@@ -2113,7 +2113,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t6.ErrorColor = Color.Red;
             txbNorm_t6.ErrorMessage = null;
             txbNorm_t6.Font = new Font("Arial", 9F);
-            txbNorm_t6.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNorm_t6.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t6.Location = new Point(5, 149);
             txbNorm_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t6.Name = "txbNorm_t6";
@@ -2128,7 +2128,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t1.ErrorColor = Color.Red;
             txbNorm_t1.ErrorMessage = null;
             txbNorm_t1.Font = new Font("Arial", 9F);
-            txbNorm_t1.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNorm_t1.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t1.Location = new Point(5, 13);
             txbNorm_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t1.Name = "txbNorm_t1";
@@ -2143,7 +2143,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t5.ErrorColor = Color.Red;
             txbNorm_t5.ErrorMessage = null;
             txbNorm_t5.Font = new Font("Arial", 9F);
-            txbNorm_t5.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNorm_t5.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t5.Location = new Point(5, 123);
             txbNorm_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t5.Name = "txbNorm_t5";
@@ -2158,7 +2158,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t2.ErrorColor = Color.Red;
             txbNorm_t2.ErrorMessage = null;
             txbNorm_t2.Font = new Font("Arial", 9F);
-            txbNorm_t2.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNorm_t2.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t2.Location = new Point(5, 41);
             txbNorm_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t2.Name = "txbNorm_t2";
@@ -2173,7 +2173,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t4.ErrorColor = Color.Red;
             txbNorm_t4.ErrorMessage = null;
             txbNorm_t4.Font = new Font("Arial", 9F);
-            txbNorm_t4.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNorm_t4.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t4.Location = new Point(5, 96);
             txbNorm_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t4.Name = "txbNorm_t4";
@@ -2188,7 +2188,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t3.ErrorColor = Color.Red;
             txbNorm_t3.ErrorMessage = null;
             txbNorm_t3.Font = new Font("Arial", 9F);
-            txbNorm_t3.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNorm_t3.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t3.Location = new Point(5, 69);
             txbNorm_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t3.Name = "txbNorm_t3";
@@ -2220,7 +2220,7 @@ namespace SewingProduction.Features.Articul
             txbBrak7.ErrorColor = Color.Red;
             txbBrak7.ErrorMessage = null;
             txbBrak7.Font = new Font("Arial", 9F);
-            txbBrak7.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrak7.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak7.Location = new Point(5, 182);
             txbBrak7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak7.Name = "txbBrak7";
@@ -2235,7 +2235,7 @@ namespace SewingProduction.Features.Articul
             txbBrak1.ErrorColor = Color.Red;
             txbBrak1.ErrorMessage = null;
             txbBrak1.Font = new Font("Arial", 9F);
-            txbBrak1.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrak1.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak1.Location = new Point(5, 18);
             txbBrak1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak1.Name = "txbBrak1";
@@ -2250,7 +2250,7 @@ namespace SewingProduction.Features.Articul
             txbBrak6.ErrorColor = Color.Red;
             txbBrak6.ErrorMessage = null;
             txbBrak6.Font = new Font("Arial", 9F);
-            txbBrak6.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrak6.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak6.Location = new Point(5, 154);
             txbBrak6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak6.Name = "txbBrak6";
@@ -2265,7 +2265,7 @@ namespace SewingProduction.Features.Articul
             txbBrak2.ErrorColor = Color.Red;
             txbBrak2.ErrorMessage = null;
             txbBrak2.Font = new Font("Arial", 9F);
-            txbBrak2.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrak2.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak2.Location = new Point(5, 46);
             txbBrak2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak2.Name = "txbBrak2";
@@ -2280,7 +2280,7 @@ namespace SewingProduction.Features.Articul
             txbBrak5.ErrorColor = Color.Red;
             txbBrak5.ErrorMessage = null;
             txbBrak5.Font = new Font("Arial", 9F);
-            txbBrak5.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrak5.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak5.Location = new Point(5, 128);
             txbBrak5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak5.Name = "txbBrak5";
@@ -2295,7 +2295,7 @@ namespace SewingProduction.Features.Articul
             txbBrak3.ErrorColor = Color.Red;
             txbBrak3.ErrorMessage = null;
             txbBrak3.Font = new Font("Arial", 9F);
-            txbBrak3.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrak3.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak3.Location = new Point(5, 74);
             txbBrak3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak3.Name = "txbBrak3";
@@ -2310,7 +2310,7 @@ namespace SewingProduction.Features.Articul
             txbBrak4.ErrorColor = Color.Red;
             txbBrak4.ErrorMessage = null;
             txbBrak4.Font = new Font("Arial", 9F);
-            txbBrak4.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrak4.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak4.Location = new Point(5, 101);
             txbBrak4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak4.Name = "txbBrak4";
@@ -2323,7 +2323,7 @@ namespace SewingProduction.Features.Articul
             customLabel30.AutoSize = true;
             customLabel30.BackColor = Color.Transparent;
             customLabel30.Font = new Font("Arial", 8F);
-            customLabel30.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel30.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel30.Location = new Point(160, 202);
             customLabel30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel30.Name = "customLabel30";
@@ -2336,7 +2336,7 @@ namespace SewingProduction.Features.Articul
             customLabel31.AutoSize = true;
             customLabel31.BackColor = Color.Transparent;
             customLabel31.Font = new Font("Arial", 8F);
-            customLabel31.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel31.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel31.Location = new Point(160, 174);
             customLabel31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel31.Name = "customLabel31";
@@ -2349,7 +2349,7 @@ namespace SewingProduction.Features.Articul
             customLabel32.AutoSize = true;
             customLabel32.BackColor = Color.Transparent;
             customLabel32.Font = new Font("Arial", 8F);
-            customLabel32.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel32.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel32.Location = new Point(160, 145);
             customLabel32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel32.Name = "customLabel32";
@@ -2362,7 +2362,7 @@ namespace SewingProduction.Features.Articul
             customLabel33.AutoSize = true;
             customLabel33.BackColor = Color.Transparent;
             customLabel33.Font = new Font("Arial", 8F);
-            customLabel33.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel33.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel33.Location = new Point(160, 119);
             customLabel33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel33.Name = "customLabel33";
@@ -2375,7 +2375,7 @@ namespace SewingProduction.Features.Articul
             customLabel34.AutoSize = true;
             customLabel34.BackColor = Color.Transparent;
             customLabel34.Font = new Font("Arial", 8F);
-            customLabel34.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel34.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel34.Location = new Point(160, 91);
             customLabel34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel34.Name = "customLabel34";
@@ -2388,7 +2388,7 @@ namespace SewingProduction.Features.Articul
             customLabel35.AutoSize = true;
             customLabel35.BackColor = Color.Transparent;
             customLabel35.Font = new Font("Arial", 8F);
-            customLabel35.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel35.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel35.Location = new Point(160, 63);
             customLabel35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel35.Name = "customLabel35";
@@ -2401,7 +2401,7 @@ namespace SewingProduction.Features.Articul
             customLabel36.AutoSize = true;
             customLabel36.BackColor = Color.Transparent;
             customLabel36.Font = new Font("Arial", 8F);
-            customLabel36.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel36.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel36.Location = new Point(160, 36);
             customLabel36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel36.Name = "customLabel36";
@@ -2414,7 +2414,7 @@ namespace SewingProduction.Features.Articul
             customLabel29.AutoSize = true;
             customLabel29.BackColor = Color.Transparent;
             customLabel29.Font = new Font("Arial", 8F);
-            customLabel29.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel29.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel29.Location = new Point(520, 235);
             customLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel29.Name = "customLabel29";
@@ -2429,7 +2429,7 @@ namespace SewingProduction.Features.Articul
             txbBrakAll.ErrorColor = Color.Red;
             txbBrakAll.ErrorMessage = null;
             txbBrakAll.Font = new Font("Arial", 9F);
-            txbBrakAll.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbBrakAll.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrakAll.Location = new Point(461, 235);
             txbBrakAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrakAll.Name = "txbBrakAll";
@@ -2442,7 +2442,7 @@ namespace SewingProduction.Features.Articul
             customLabel28.AutoSize = true;
             customLabel28.BackColor = Color.Transparent;
             customLabel28.Font = new Font("Arial", 8F);
-            customLabel28.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel28.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel28.Location = new Point(6, 72);
             customLabel28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel28.Name = "customLabel28";
@@ -2455,7 +2455,7 @@ namespace SewingProduction.Features.Articul
             customLabel27.AutoSize = true;
             customLabel27.BackColor = Color.Transparent;
             customLabel27.Font = new Font("Arial", 8F);
-            customLabel27.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel27.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel27.Location = new Point(6, 34);
             customLabel27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel27.Name = "customLabel27";
@@ -2468,7 +2468,7 @@ namespace SewingProduction.Features.Articul
             customLabel26.AutoSize = true;
             customLabel26.BackColor = Color.Transparent;
             customLabel26.Font = new Font("Arial", 8F);
-            customLabel26.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel26.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel26.Location = new Point(266, 205);
             customLabel26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel26.Name = "customLabel26";
@@ -2481,7 +2481,7 @@ namespace SewingProduction.Features.Articul
             customLabel25.AutoSize = true;
             customLabel25.BackColor = Color.Transparent;
             customLabel25.Font = new Font("Arial", 8F);
-            customLabel25.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel25.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel25.Location = new Point(266, 177);
             customLabel25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel25.Name = "customLabel25";
@@ -2496,7 +2496,7 @@ namespace SewingProduction.Features.Articul
             txbSeb.ErrorColor = Color.Red;
             txbSeb.ErrorMessage = null;
             txbSeb.Font = new Font("Arial", 10F);
-            txbSeb.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSeb.ForeColor = Color.FromArgb(72, 61, 139);
             txbSeb.Location = new Point(6, 90);
             txbSeb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeb.Name = "txbSeb";
@@ -2509,7 +2509,7 @@ namespace SewingProduction.Features.Articul
             customLabel24.AutoSize = true;
             customLabel24.BackColor = Color.Transparent;
             customLabel24.Font = new Font("Arial", 8F);
-            customLabel24.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel24.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel24.Location = new Point(266, 149);
             customLabel24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel24.Name = "customLabel24";
@@ -2524,7 +2524,7 @@ namespace SewingProduction.Features.Articul
             txbNormt.ErrorColor = Color.Red;
             txbNormt.ErrorMessage = null;
             txbNormt.Font = new Font("Arial", 10F);
-            txbNormt.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbNormt.ForeColor = Color.FromArgb(72, 61, 139);
             txbNormt.Location = new Point(6, 50);
             txbNormt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNormt.Name = "txbNormt";
@@ -2537,7 +2537,7 @@ namespace SewingProduction.Features.Articul
             customLabel23.AutoSize = true;
             customLabel23.BackColor = Color.Transparent;
             customLabel23.Font = new Font("Arial", 8F);
-            customLabel23.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel23.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel23.Location = new Point(267, 122);
             customLabel23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel23.Name = "customLabel23";
@@ -2550,7 +2550,7 @@ namespace SewingProduction.Features.Articul
             customLabel22.AutoSize = true;
             customLabel22.BackColor = Color.Transparent;
             customLabel22.Font = new Font("Arial", 8F);
-            customLabel22.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel22.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel22.Location = new Point(266, 94);
             customLabel22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel22.Name = "customLabel22";
@@ -2563,7 +2563,7 @@ namespace SewingProduction.Features.Articul
             customLabel21.AutoSize = true;
             customLabel21.BackColor = Color.Transparent;
             customLabel21.Font = new Font("Arial", 8F);
-            customLabel21.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel21.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel21.Location = new Point(266, 66);
             customLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel21.Name = "customLabel21";
@@ -2576,7 +2576,7 @@ namespace SewingProduction.Features.Articul
             customLabel20.AutoSize = true;
             customLabel20.BackColor = Color.Transparent;
             customLabel20.Font = new Font("Arial", 8F);
-            customLabel20.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel20.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel20.Location = new Point(266, 39);
             customLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel20.Name = "customLabel20";
@@ -2710,7 +2710,7 @@ namespace SewingProduction.Features.Articul
             chkPres.AutoSize = true;
             chkPres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkPres.Font = new Font("Arial", 10F);
-            chkPres.ForeColor = Color.FromArgb(0, 0, 139);
+            // chkPres.ForeColor = Color.FromArgb(0, 0, 139);
             chkPres.Location = new Point(7, 220);
             chkPres.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkPres.Name = "chkPres";
@@ -2724,7 +2724,7 @@ namespace SewingProduction.Features.Articul
             chkStra.AutoSize = true;
             chkStra.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkStra.Font = new Font("Arial", 10F);
-            chkStra.ForeColor = Color.FromArgb(0, 0, 139);
+            // chkStra.ForeColor = Color.FromArgb(0, 0, 139);
             chkStra.Location = new Point(7, 190);
             chkStra.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkStra.Name = "chkStra";
@@ -2738,7 +2738,7 @@ namespace SewingProduction.Features.Articul
             chkBus.AutoSize = true;
             chkBus.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkBus.Font = new Font("Arial", 10F);
-            chkBus.ForeColor = Color.FromArgb(0, 0, 139);
+            // chkBus.ForeColor = Color.FromArgb(0, 0, 139);
             chkBus.Location = new Point(7, 159);
             chkBus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkBus.Name = "chkBus";
@@ -2752,7 +2752,7 @@ namespace SewingProduction.Features.Articul
             chkV.AutoSize = true;
             chkV.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkV.Font = new Font("Arial", 10F);
-            chkV.ForeColor = Color.FromArgb(0, 0, 139);
+            // chkV.ForeColor = Color.FromArgb(0, 0, 139);
             chkV.Location = new Point(7, 132);
             chkV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkV.Name = "chkV";
@@ -2766,7 +2766,7 @@ namespace SewingProduction.Features.Articul
             chkP.AutoSize = true;
             chkP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkP.Font = new Font("Arial", 10F);
-            chkP.ForeColor = Color.FromArgb(0, 0, 139);
+            // chkP.ForeColor = Color.FromArgb(0, 0, 139);
             chkP.Location = new Point(7, 104);
             chkP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkP.Name = "chkP";
@@ -2780,7 +2780,7 @@ namespace SewingProduction.Features.Articul
             chbIsFurnit.AutoSize = true;
             chbIsFurnit.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsFurnit.Font = new Font("Arial", 10F);
-            chbIsFurnit.ForeColor = Color.FromArgb(0, 0, 139);
+            // chbIsFurnit.ForeColor = Color.FromArgb(0, 0, 139);
             chbIsFurnit.Location = new Point(7, 43);
             chbIsFurnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsFurnit.Name = "chbIsFurnit";
@@ -2794,7 +2794,7 @@ namespace SewingProduction.Features.Articul
             chbIsUpak.AutoSize = true;
             chbIsUpak.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsUpak.Font = new Font("Arial", 10F);
-            chbIsUpak.ForeColor = Color.FromArgb(0, 0, 139);
+            // chbIsUpak.ForeColor = Color.FromArgb(0, 0, 139);
             chbIsUpak.Location = new Point(7, 16);
             chbIsUpak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsUpak.Name = "chbIsUpak";
@@ -2893,7 +2893,7 @@ namespace SewingProduction.Features.Articul
             customCheckBox1.AutoSize = true;
             customCheckBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBox1.Font = new Font("Arial", 10F);
-            customCheckBox1.ForeColor = Color.FromArgb(105, 75, 45);
+            // customCheckBox1.ForeColor = Color.FromArgb(105, 75, 45);
             customCheckBox1.Location = new Point(7, 15);
             customCheckBox1.Name = "customCheckBox1";
             customCheckBox1.Size = new Size(331, 21);
@@ -2957,7 +2957,7 @@ namespace SewingProduction.Features.Articul
             customTextBox1.ErrorColor = Color.Red;
             customTextBox1.ErrorMessage = null;
             customTextBox1.Font = new Font("Arial", 10F);
-            customTextBox1.ForeColor = Color.FromArgb(72, 61, 139);
+            // customTextBox1.ForeColor = Color.FromArgb(72, 61, 139);
             customTextBox1.Location = new Point(9, 319);
             customTextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox1.Name = "customTextBox1";
@@ -2972,7 +2972,7 @@ namespace SewingProduction.Features.Articul
             txbSebRecom.ErrorColor = Color.Red;
             txbSebRecom.ErrorMessage = null;
             txbSebRecom.Font = new Font("Arial", 10F);
-            txbSebRecom.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSebRecom.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebRecom.Location = new Point(193, 273);
             txbSebRecom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebRecom.Name = "txbSebRecom";
@@ -3027,7 +3027,7 @@ namespace SewingProduction.Features.Articul
             txbKoef.ErrorColor = Color.Red;
             txbKoef.ErrorMessage = null;
             txbKoef.Font = new Font("Arial", 10F);
-            txbKoef.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKoef.ForeColor = Color.FromArgb(72, 61, 139);
             txbKoef.Location = new Point(6, 221);
             txbKoef.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoef.Name = "txbKoef";
@@ -3052,7 +3052,7 @@ namespace SewingProduction.Features.Articul
             txbSebProizv.ErrorColor = Color.Red;
             txbSebProizv.ErrorMessage = null;
             txbSebProizv.Font = new Font("Arial", 10F);
-            txbSebProizv.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSebProizv.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebProizv.Location = new Point(7, 166);
             txbSebProizv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebProizv.Name = "txbSebProizv";
@@ -3076,7 +3076,7 @@ namespace SewingProduction.Features.Articul
             txbKoefVedDG.ErrorColor = Color.Red;
             txbKoefVedDG.ErrorMessage = null;
             txbKoefVedDG.Font = new Font("Arial", 10F);
-            txbKoefVedDG.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKoefVedDG.ForeColor = Color.FromArgb(72, 61, 139);
             txbKoefVedDG.Location = new Point(7, 129);
             txbKoefVedDG.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoefVedDG.Name = "txbKoefVedDG";
@@ -3100,7 +3100,7 @@ namespace SewingProduction.Features.Articul
             txbKoefPr.ErrorColor = Color.Red;
             txbKoefPr.ErrorMessage = null;
             txbKoefPr.Font = new Font("Arial", 10F);
-            txbKoefPr.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbKoefPr.ForeColor = Color.FromArgb(72, 61, 139);
             txbKoefPr.Location = new Point(7, 92);
             txbKoefPr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoefPr.Name = "txbKoefPr";
@@ -3124,7 +3124,7 @@ namespace SewingProduction.Features.Articul
             txbSebDop.ErrorColor = Color.Red;
             txbSebDop.ErrorMessage = null;
             txbSebDop.Font = new Font("Arial", 10F);
-            txbSebDop.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSebDop.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebDop.Location = new Point(7, 55);
             txbSebDop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebDop.Name = "txbSebDop";
@@ -3218,7 +3218,7 @@ namespace SewingProduction.Features.Articul
             customLabel45.AutoSize = true;
             customLabel45.BackColor = Color.Transparent;
             customLabel45.Font = new Font("Arial", 8F);
-            customLabel45.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel45.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel45.Location = new Point(104, 168);
             customLabel45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel45.Name = "customLabel45";
@@ -3233,7 +3233,7 @@ namespace SewingProduction.Features.Articul
             txbSumZarpl.ErrorColor = Color.Red;
             txbSumZarpl.ErrorMessage = null;
             txbSumZarpl.Font = new Font("Arial", 10F);
-            txbSumZarpl.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSumZarpl.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumZarpl.Location = new Point(106, 38);
             txbSumZarpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumZarpl.Name = "txbSumZarpl";
@@ -3248,7 +3248,7 @@ namespace SewingProduction.Features.Articul
             txbSumKomplNum.ErrorColor = Color.Red;
             txbSumKomplNum.ErrorMessage = null;
             txbSumKomplNum.Font = new Font("Arial", 10F);
-            txbSumKomplNum.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSumKomplNum.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumKomplNum.Location = new Point(105, 185);
             txbSumKomplNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumKomplNum.Name = "txbSumKomplNum";
@@ -3263,7 +3263,7 @@ namespace SewingProduction.Features.Articul
             txbSek.ErrorColor = Color.Red;
             txbSek.ErrorMessage = null;
             txbSek.Font = new Font("Arial", 10F);
-            txbSek.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSek.ForeColor = Color.FromArgb(72, 61, 139);
             txbSek.Location = new Point(7, 39);
             txbSek.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSek.Name = "txbSek";
@@ -3275,7 +3275,7 @@ namespace SewingProduction.Features.Articul
             customLabel44.AutoSize = true;
             customLabel44.BackColor = Color.Transparent;
             customLabel44.Font = new Font("Arial", 8F);
-            customLabel44.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel44.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel44.Location = new Point(105, 130);
             customLabel44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel44.Name = "customLabel44";
@@ -3290,7 +3290,7 @@ namespace SewingProduction.Features.Articul
             txbSekVyaz.ErrorColor = Color.Red;
             txbSekVyaz.ErrorMessage = null;
             txbSekVyaz.Font = new Font("Arial", 10F);
-            txbSekVyaz.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSekVyaz.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekVyaz.Location = new Point(32, 74);
             txbSekVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekVyaz.Name = "txbSekVyaz";
@@ -3305,7 +3305,7 @@ namespace SewingProduction.Features.Articul
             txbSumSebRaskr.ErrorColor = Color.Red;
             txbSumSebRaskr.ErrorMessage = null;
             txbSumSebRaskr.Font = new Font("Arial", 10F);
-            txbSumSebRaskr.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSumSebRaskr.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumSebRaskr.Location = new Point(106, 147);
             txbSumSebRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumSebRaskr.Name = "txbSumSebRaskr";
@@ -3320,7 +3320,7 @@ namespace SewingProduction.Features.Articul
             txbSekShv.ErrorColor = Color.Red;
             txbSekShv.ErrorMessage = null;
             txbSekShv.Font = new Font("Arial", 10F);
-            txbSekShv.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSekShv.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekShv.Location = new Point(32, 104);
             txbSekShv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekShv.Name = "txbSekShv";
@@ -3333,7 +3333,7 @@ namespace SewingProduction.Features.Articul
             customLabel43.AutoSize = true;
             customLabel43.BackColor = Color.Transparent;
             customLabel43.Font = new Font("Arial", 8F);
-            customLabel43.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel43.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel43.Location = new Point(105, 93);
             customLabel43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel43.Name = "customLabel43";
@@ -3348,7 +3348,7 @@ namespace SewingProduction.Features.Articul
             txbSekKr.ErrorColor = Color.Red;
             txbSekKr.ErrorMessage = null;
             txbSekKr.Font = new Font("Arial", 10F);
-            txbSekKr.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSekKr.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekKr.Location = new Point(32, 135);
             txbSekKr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekKr.Name = "txbSekKr";
@@ -3363,7 +3363,7 @@ namespace SewingProduction.Features.Articul
             txbSumStrVznos.ErrorColor = Color.Red;
             txbSumStrVznos.ErrorMessage = null;
             txbSumStrVznos.Font = new Font("Arial", 10F);
-            txbSumStrVznos.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSumStrVznos.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumStrVznos.Location = new Point(106, 110);
             txbSumStrVznos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumStrVznos.Name = "txbSumStrVznos";
@@ -3376,7 +3376,7 @@ namespace SewingProduction.Features.Articul
             customLabel37.AutoSize = true;
             customLabel37.BackColor = Color.Transparent;
             customLabel37.Font = new Font("Arial", 8F);
-            customLabel37.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel37.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel37.Location = new Point(4, 74);
             customLabel37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel37.Name = "customLabel37";
@@ -3389,7 +3389,7 @@ namespace SewingProduction.Features.Articul
             customLabel42.AutoSize = true;
             customLabel42.BackColor = Color.Transparent;
             customLabel42.Font = new Font("Arial", 8F);
-            customLabel42.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel42.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel42.Location = new Point(106, 57);
             customLabel42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel42.Name = "customLabel42";
@@ -3402,7 +3402,7 @@ namespace SewingProduction.Features.Articul
             customLabel38.AutoSize = true;
             customLabel38.BackColor = Color.Transparent;
             customLabel38.Font = new Font("Arial", 8F);
-            customLabel38.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel38.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel38.Location = new Point(4, 104);
             customLabel38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel38.Name = "customLabel38";
@@ -3417,7 +3417,7 @@ namespace SewingProduction.Features.Articul
             txbSumDopOpl.ErrorColor = Color.Red;
             txbSumDopOpl.ErrorMessage = null;
             txbSumDopOpl.Font = new Font("Arial", 10F);
-            txbSumDopOpl.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSumDopOpl.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumDopOpl.Location = new Point(107, 74);
             txbSumDopOpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumDopOpl.Name = "txbSumDopOpl";
@@ -3430,7 +3430,7 @@ namespace SewingProduction.Features.Articul
             customLabel39.AutoSize = true;
             customLabel39.BackColor = Color.Transparent;
             customLabel39.Font = new Font("Arial", 8F);
-            customLabel39.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel39.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel39.Location = new Point(4, 135);
             customLabel39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel39.Name = "customLabel39";
@@ -3443,7 +3443,7 @@ namespace SewingProduction.Features.Articul
             customLabel41.AutoSize = true;
             customLabel41.BackColor = Color.Transparent;
             customLabel41.Font = new Font("Arial", 8F);
-            customLabel41.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel41.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel41.Location = new Point(105, 21);
             customLabel41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel41.Name = "customLabel41";
@@ -3458,7 +3458,7 @@ namespace SewingProduction.Features.Articul
             txbSebz.ErrorColor = Color.Red;
             txbSebz.ErrorMessage = null;
             txbSebz.Font = new Font("Arial", 10F);
-            txbSebz.ForeColor = Color.FromArgb(72, 61, 139);
+            // txbSebz.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebz.Location = new Point(104, 220);
             txbSebz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebz.Name = "txbSebz";
@@ -3471,7 +3471,7 @@ namespace SewingProduction.Features.Articul
             customLabel40.AutoSize = true;
             customLabel40.BackColor = Color.Transparent;
             customLabel40.Font = new Font("Arial", 8F);
-            customLabel40.ForeColor = Color.FromArgb(139, 69, 19);
+            // customLabel40.ForeColor = Color.FromArgb(139, 69, 19);
             customLabel40.Location = new Point(103, 203);
             customLabel40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel40.Name = "customLabel40";

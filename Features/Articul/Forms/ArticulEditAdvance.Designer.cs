@@ -484,9 +484,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // gridViewEditAdvRazm
             // 
-            gridViewEditAdvRazm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // gridViewEditAdvRazm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridViewEditAdvRazm.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewEditAdvRazm.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // gridViewEditAdvRazm.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridViewEditAdvRazm.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewEditAdvRazm.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewEditAdvRazm.Appearance.FocusedRow.Options.UseFont = true;
@@ -551,7 +551,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbSost3.ObjectName = null;
             txbSost3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSost3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbSost3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbSost3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost3.Properties.Appearance.Options.UseBackColor = true;
             txbSost3.Properties.Appearance.Options.UseFont = true;
             txbSost3.Properties.Appearance.Options.UseForeColor = true;
@@ -562,7 +562,7 @@ namespace SewingProduction.Features.Articul.Forms
             // dataLayoutCommonArticul
             // 
             dataLayoutCommonArticul.AccessibleRole = System.Windows.Forms.AccessibleRole.Pane;
-            dataLayoutCommonArticul.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // dataLayoutCommonArticul.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             dataLayoutCommonArticul.Controls.Add(customLayoutControl1);
             dataLayoutCommonArticul.Controls.Add(chbArh);
             dataLayoutCommonArticul.Controls.Add(cbTkan);
@@ -642,7 +642,7 @@ namespace SewingProduction.Features.Articul.Forms
             dataLayoutCommonArticul.Controls.Add(cbTM);
             dataLayoutCommonArticul.Controls.Add(cbuKod_t1);
             dataLayoutCommonArticul.Font = new System.Drawing.Font("Arial", 10F);
-            dataLayoutCommonArticul.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // dataLayoutCommonArticul.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             dataLayoutCommonArticul.Location = new System.Drawing.Point(329, -2);
             dataLayoutCommonArticul.Name = "dataLayoutCommonArticul";
             dataLayoutCommonArticul.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-847, 290, 650, 636);
@@ -653,13 +653,13 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLayoutControl1
             // 
-            customLayoutControl1.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLayoutControl1.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLayoutControl1.Controls.Add(lookUpGostGrup);
             customLayoutControl1.Controls.Add(txbGostId);
             customLayoutControl1.Controls.Add(txbOpiGost);
             customLayoutControl1.Controls.Add(lookUpGost);
             customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-            customLayoutControl1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLayoutControl1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLayoutControl1.Location = new System.Drawing.Point(12, 140);
             customLayoutControl1.Name = "customLayoutControl1";
             customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-829, 65, 651, 653);
@@ -695,7 +695,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbGostId.ErrorColor = System.Drawing.Color.Red;
             txbGostId.ErrorMessage = null;
             txbGostId.Font = new System.Drawing.Font("Arial", 9F);
-            txbGostId.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbGostId.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbGostId.Location = new System.Drawing.Point(264, 26);
             txbGostId.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGostId.Name = "txbGostId";
@@ -711,7 +711,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbOpiGost.ErrorColor = System.Drawing.Color.Red;
             txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbOpiGost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbOpiGost.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbOpiGost.Location = new System.Drawing.Point(5, 52);
             txbOpiGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpiGost.Multiline = true;
@@ -725,9 +725,9 @@ namespace SewingProduction.Features.Articul.Forms
             lookUpGost.Enabled = false;
             lookUpGost.Location = new System.Drawing.Point(324, 26);
             lookUpGost.Name = "lookUpGost";
-            lookUpGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // lookUpGost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             lookUpGost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            lookUpGost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // lookUpGost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             lookUpGost.Properties.Appearance.Options.UseBackColor = true;
             lookUpGost.Properties.Appearance.Options.UseFont = true;
             lookUpGost.Properties.Appearance.Options.UseForeColor = true;
@@ -840,9 +840,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbTkan.Location = new System.Drawing.Point(340, 86);
             cbTkan.Name = "cbTkan";
-            cbTkan.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbTkan.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbTkan.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbTkan.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbTkan.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbTkan.Properties.Appearance.Options.UseBackColor = true;
             cbTkan.Properties.Appearance.Options.UseFont = true;
             cbTkan.Properties.Appearance.Options.UseForeColor = true;
@@ -856,9 +856,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_rekom.Location = new System.Drawing.Point(678, 407);
             txtSeb_rekom.Name = "txtSeb_rekom";
             txtSeb_rekom.ObjectName = null;
-            txtSeb_rekom.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_rekom.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_rekom.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_rekom.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_rekom.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_rekom.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_rekom.Properties.Appearance.Options.UseFont = true;
             txtSeb_rekom.Properties.Appearance.Options.UseForeColor = true;
@@ -871,9 +871,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSum_sebraskr.Location = new System.Drawing.Point(759, 139);
             txtSum_sebraskr.Name = "txtSum_sebraskr";
             txtSum_sebraskr.ObjectName = null;
-            txtSum_sebraskr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSum_sebraskr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_sebraskr.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSum_sebraskr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSum_sebraskr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSum_sebraskr.Properties.Appearance.Options.UseBackColor = true;
             txtSum_sebraskr.Properties.Appearance.Options.UseFont = true;
             txtSum_sebraskr.Properties.Appearance.Options.UseForeColor = true;
@@ -887,9 +887,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtKod.Location = new System.Drawing.Point(768, 358);
             txtKod.Name = "txtKod";
             txtKod.ObjectName = null;
-            txtKod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtKod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKod.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtKod.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtKod.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtKod.Properties.Appearance.Options.UseBackColor = true;
             txtKod.Properties.Appearance.Options.UseFont = true;
             txtKod.Properties.Appearance.Options.UseForeColor = true;
@@ -902,9 +902,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtKoef.Location = new System.Drawing.Point(759, 329);
             txtKoef.Name = "txtKoef";
             txtKoef.ObjectName = null;
-            txtKoef.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtKoef.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKoef.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            txtKoef.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtKoef.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtKoef.Properties.Appearance.Options.UseBackColor = true;
             txtKoef.Properties.Appearance.Options.UseFont = true;
             txtKoef.Properties.Appearance.Options.UseForeColor = true;
@@ -917,9 +917,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_proizv.Location = new System.Drawing.Point(759, 302);
             txtSeb_proizv.Name = "txtSeb_proizv";
             txtSeb_proizv.ObjectName = null;
-            txtSeb_proizv.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_proizv.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_proizv.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_proizv.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_proizv.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_proizv.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_proizv.Properties.Appearance.Options.UseFont = true;
             txtSeb_proizv.Properties.Appearance.Options.UseForeColor = true;
@@ -933,9 +933,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtKoef_d.Location = new System.Drawing.Point(759, 273);
             txtKoef_d.Name = "txtKoef_d";
             txtKoef_d.ObjectName = null;
-            txtKoef_d.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtKoef_d.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKoef_d.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            txtKoef_d.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtKoef_d.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtKoef_d.Properties.Appearance.Options.UseBackColor = true;
             txtKoef_d.Properties.Appearance.Options.UseFont = true;
             txtKoef_d.Properties.Appearance.Options.UseForeColor = true;
@@ -948,9 +948,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtKoef_pr.Location = new System.Drawing.Point(759, 247);
             txtKoef_pr.Name = "txtKoef_pr";
             txtKoef_pr.ObjectName = null;
-            txtKoef_pr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtKoef_pr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtKoef_pr.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            txtKoef_pr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtKoef_pr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtKoef_pr.Properties.Appearance.Options.UseBackColor = true;
             txtKoef_pr.Properties.Appearance.Options.UseFont = true;
             txtKoef_pr.Properties.Appearance.Options.UseForeColor = true;
@@ -963,9 +963,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_dop.Location = new System.Drawing.Point(759, 218);
             txtSeb_dop.Name = "txtSeb_dop";
             txtSeb_dop.ObjectName = null;
-            txtSeb_dop.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_dop.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_dop.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_dop.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_dop.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_dop.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_dop.Properties.Appearance.Options.UseFont = true;
             txtSeb_dop.Properties.Appearance.Options.UseForeColor = true;
@@ -978,9 +978,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_z.Location = new System.Drawing.Point(759, 192);
             txtSeb_z.Name = "txtSeb_z";
             txtSeb_z.ObjectName = null;
-            txtSeb_z.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_z.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_z.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_z.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_z.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_z.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_z.Properties.Appearance.Options.UseFont = true;
             txtSeb_z.Properties.Appearance.Options.UseForeColor = true;
@@ -993,9 +993,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSum_komplnum.Location = new System.Drawing.Point(759, 166);
             txtSum_komplnum.Name = "txtSum_komplnum";
             txtSum_komplnum.ObjectName = null;
-            txtSum_komplnum.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSum_komplnum.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_komplnum.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSum_komplnum.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSum_komplnum.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSum_komplnum.Properties.Appearance.Options.UseBackColor = true;
             txtSum_komplnum.Properties.Appearance.Options.UseFont = true;
             txtSum_komplnum.Properties.Appearance.Options.UseForeColor = true;
@@ -1009,9 +1009,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSum_strvznos.Location = new System.Drawing.Point(759, 113);
             txtSum_strvznos.Name = "txtSum_strvznos";
             txtSum_strvznos.ObjectName = null;
-            txtSum_strvznos.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSum_strvznos.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_strvznos.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSum_strvznos.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSum_strvznos.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSum_strvznos.Properties.Appearance.Options.UseBackColor = true;
             txtSum_strvznos.Properties.Appearance.Options.UseFont = true;
             txtSum_strvznos.Properties.Appearance.Options.UseForeColor = true;
@@ -1025,9 +1025,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSum_dopopl.Location = new System.Drawing.Point(759, 86);
             txtSum_dopopl.Name = "txtSum_dopopl";
             txtSum_dopopl.ObjectName = null;
-            txtSum_dopopl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSum_dopopl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_dopopl.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSum_dopopl.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSum_dopopl.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSum_dopopl.Properties.Appearance.Options.UseBackColor = true;
             txtSum_dopopl.Properties.Appearance.Options.UseFont = true;
             txtSum_dopopl.Properties.Appearance.Options.UseForeColor = true;
@@ -1041,9 +1041,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek_kr.Location = new System.Drawing.Point(67, 492);
             txtSek_kr.Name = "txtSek_kr";
             txtSek_kr.ObjectName = null;
-            txtSek_kr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSek_kr.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek_kr.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSek_kr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSek_kr.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSek_kr.Properties.Appearance.Options.UseBackColor = true;
             txtSek_kr.Properties.Appearance.Options.UseFont = true;
             txtSek_kr.Properties.Appearance.Options.UseForeColor = true;
@@ -1056,9 +1056,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSum_zarpl.Location = new System.Drawing.Point(759, 60);
             txtSum_zarpl.Name = "txtSum_zarpl";
             txtSum_zarpl.ObjectName = null;
-            txtSum_zarpl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSum_zarpl.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSum_zarpl.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSum_zarpl.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSum_zarpl.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSum_zarpl.Properties.Appearance.Options.UseBackColor = true;
             txtSum_zarpl.Properties.Appearance.Options.UseFont = true;
             txtSum_zarpl.Properties.Appearance.Options.UseForeColor = true;
@@ -1072,9 +1072,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek_vyaz.Location = new System.Drawing.Point(67, 440);
             txtSek_vyaz.Name = "txtSek_vyaz";
             txtSek_vyaz.ObjectName = null;
-            txtSek_vyaz.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSek_vyaz.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek_vyaz.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSek_vyaz.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSek_vyaz.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSek_vyaz.Properties.Appearance.Options.UseBackColor = true;
             txtSek_vyaz.Properties.Appearance.Options.UseFont = true;
             txtSek_vyaz.Properties.Appearance.Options.UseForeColor = true;
@@ -1087,9 +1087,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek_shv.Location = new System.Drawing.Point(67, 466);
             txtSek_shv.Name = "txtSek_shv";
             txtSek_shv.ObjectName = null;
-            txtSek_shv.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSek_shv.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek_shv.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSek_shv.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSek_shv.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSek_shv.Properties.Appearance.Options.UseBackColor = true;
             txtSek_shv.Properties.Appearance.Options.UseFont = true;
             txtSek_shv.Properties.Appearance.Options.UseForeColor = true;
@@ -1102,9 +1102,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSek.Location = new System.Drawing.Point(67, 414);
             txtSek.Name = "txtSek";
             txtSek.ObjectName = null;
-            txtSek.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSek.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSek.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSek.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSek.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSek.Properties.Appearance.Options.UseBackColor = true;
             txtSek.Properties.Appearance.Options.UseFont = true;
             txtSek.Properties.Appearance.Options.UseForeColor = true;
@@ -1117,9 +1117,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_all.Location = new System.Drawing.Point(67, 361);
             txtSeb_all.Name = "txtSeb_all";
             txtSeb_all.ObjectName = null;
-            txtSeb_all.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_all.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_all.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_all.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_all.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_all.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_all.Properties.Appearance.Options.UseFont = true;
             txtSeb_all.Properties.Appearance.Options.UseForeColor = true;
@@ -1133,9 +1133,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtNorm_t.Location = new System.Drawing.Point(67, 330);
             txtNorm_t.Name = "txtNorm_t";
             txtNorm_t.ObjectName = null;
-            txtNorm_t.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtNorm_t.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtNorm_t.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtNorm_t.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtNorm_t.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtNorm_t.Properties.Appearance.Options.UseBackColor = true;
             txtNorm_t.Properties.Appearance.Options.UseFont = true;
             txtNorm_t.Properties.Appearance.Options.UseForeColor = true;
@@ -1149,9 +1149,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtOpis_t7.Location = new System.Drawing.Point(487, 698);
             txtOpis_t7.Name = "txtOpis_t7";
             txtOpis_t7.ObjectName = null;
-            txtOpis_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtOpis_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtOpis_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtOpis_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtOpis_t7.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t7.Properties.Appearance.Options.UseFont = true;
             txtOpis_t7.Properties.Appearance.Options.UseForeColor = true;
@@ -1165,9 +1165,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtOpis_t6.Location = new System.Drawing.Point(487, 672);
             txtOpis_t6.Name = "txtOpis_t6";
             txtOpis_t6.ObjectName = null;
-            txtOpis_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtOpis_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtOpis_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtOpis_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtOpis_t6.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t6.Properties.Appearance.Options.UseFont = true;
             txtOpis_t6.Properties.Appearance.Options.UseForeColor = true;
@@ -1181,9 +1181,9 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxEx7.Location = new System.Drawing.Point(369, 698);
             customTextBoxEx7.Name = "customTextBoxEx7";
             customTextBoxEx7.ObjectName = null;
-            customTextBoxEx7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx7.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx7.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx7.Properties.Appearance.Options.UseForeColor = true;
@@ -1196,9 +1196,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtOpis_t5.Location = new System.Drawing.Point(487, 646);
             txtOpis_t5.Name = "txtOpis_t5";
             txtOpis_t5.ObjectName = null;
-            txtOpis_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtOpis_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtOpis_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtOpis_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtOpis_t5.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t5.Properties.Appearance.Options.UseFont = true;
             txtOpis_t5.Properties.Appearance.Options.UseForeColor = true;
@@ -1212,9 +1212,9 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxEx6.Location = new System.Drawing.Point(369, 672);
             customTextBoxEx6.Name = "customTextBoxEx6";
             customTextBoxEx6.ObjectName = null;
-            customTextBoxEx6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx6.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx6.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx6.Properties.Appearance.Options.UseForeColor = true;
@@ -1227,9 +1227,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtOpis_t4.Location = new System.Drawing.Point(487, 620);
             txtOpis_t4.Name = "txtOpis_t4";
             txtOpis_t4.ObjectName = null;
-            txtOpis_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtOpis_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtOpis_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtOpis_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtOpis_t4.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t4.Properties.Appearance.Options.UseFont = true;
             txtOpis_t4.Properties.Appearance.Options.UseForeColor = true;
@@ -1243,9 +1243,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtOpis_t3.Location = new System.Drawing.Point(487, 594);
             txtOpis_t3.Name = "txtOpis_t3";
             txtOpis_t3.ObjectName = null;
-            txtOpis_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtOpis_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtOpis_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtOpis_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtOpis_t3.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t3.Properties.Appearance.Options.UseFont = true;
             txtOpis_t3.Properties.Appearance.Options.UseForeColor = true;
@@ -1259,9 +1259,9 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxEx5.Location = new System.Drawing.Point(369, 646);
             customTextBoxEx5.Name = "customTextBoxEx5";
             customTextBoxEx5.ObjectName = null;
-            customTextBoxEx5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx5.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx5.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx5.Properties.Appearance.Options.UseForeColor = true;
@@ -1274,9 +1274,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtOpis_t2.Location = new System.Drawing.Point(487, 568);
             txtOpis_t2.Name = "txtOpis_t2";
             txtOpis_t2.ObjectName = null;
-            txtOpis_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtOpis_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtOpis_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtOpis_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtOpis_t2.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t2.Properties.Appearance.Options.UseFont = true;
             txtOpis_t2.Properties.Appearance.Options.UseForeColor = true;
@@ -1290,9 +1290,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtOpis_t1.Location = new System.Drawing.Point(487, 542);
             txtOpis_t1.Name = "txtOpis_t1";
             txtOpis_t1.ObjectName = null;
-            txtOpis_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtOpis_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtOpis_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtOpis_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtOpis_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtOpis_t1.Properties.Appearance.Options.UseBackColor = true;
             txtOpis_t1.Properties.Appearance.Options.UseFont = true;
             txtOpis_t1.Properties.Appearance.Options.UseForeColor = true;
@@ -1306,9 +1306,9 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxEx4.Location = new System.Drawing.Point(369, 620);
             customTextBoxEx4.Name = "customTextBoxEx4";
             customTextBoxEx4.ObjectName = null;
-            customTextBoxEx4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx4.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx4.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx4.Properties.Appearance.Options.UseForeColor = true;
@@ -1321,9 +1321,9 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxEx3.Location = new System.Drawing.Point(369, 594);
             customTextBoxEx3.Name = "customTextBoxEx3";
             customTextBoxEx3.ObjectName = null;
-            customTextBoxEx3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx3.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx3.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx3.Properties.Appearance.Options.UseForeColor = true;
@@ -1336,9 +1336,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrak_t7.Location = new System.Drawing.Point(606, 698);
             txtBrak_t7.Name = "txtBrak_t7";
             txtBrak_t7.ObjectName = null;
-            txtBrak_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtBrak_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtBrak_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtBrak_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtBrak_t7.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t7.Properties.Appearance.Options.UseFont = true;
             txtBrak_t7.Properties.Appearance.Options.UseForeColor = true;
@@ -1351,9 +1351,9 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxEx2.Location = new System.Drawing.Point(369, 568);
             customTextBoxEx2.Name = "customTextBoxEx2";
             customTextBoxEx2.ObjectName = null;
-            customTextBoxEx2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx2.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx2.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx2.Properties.Appearance.Options.UseForeColor = true;
@@ -1366,9 +1366,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrak_t6.Location = new System.Drawing.Point(606, 672);
             txtBrak_t6.Name = "txtBrak_t6";
             txtBrak_t6.ObjectName = null;
-            txtBrak_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtBrak_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtBrak_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtBrak_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtBrak_t6.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t6.Properties.Appearance.Options.UseFont = true;
             txtBrak_t6.Properties.Appearance.Options.UseForeColor = true;
@@ -1381,9 +1381,9 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxEx1.Location = new System.Drawing.Point(369, 542);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
-            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
@@ -1396,9 +1396,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrak_t5.Location = new System.Drawing.Point(606, 646);
             txtBrak_t5.Name = "txtBrak_t5";
             txtBrak_t5.ObjectName = null;
-            txtBrak_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtBrak_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtBrak_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtBrak_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtBrak_t5.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t5.Properties.Appearance.Options.UseFont = true;
             txtBrak_t5.Properties.Appearance.Options.UseForeColor = true;
@@ -1411,9 +1411,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrak_t4.Location = new System.Drawing.Point(606, 620);
             txtBrak_t4.Name = "txtBrak_t4";
             txtBrak_t4.ObjectName = null;
-            txtBrak_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtBrak_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtBrak_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtBrak_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtBrak_t4.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t4.Properties.Appearance.Options.UseFont = true;
             txtBrak_t4.Properties.Appearance.Options.UseForeColor = true;
@@ -1426,9 +1426,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrak_t3.Location = new System.Drawing.Point(606, 594);
             txtBrak_t3.Name = "txtBrak_t3";
             txtBrak_t3.ObjectName = null;
-            txtBrak_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtBrak_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtBrak_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtBrak_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtBrak_t3.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t3.Properties.Appearance.Options.UseFont = true;
             txtBrak_t3.Properties.Appearance.Options.UseForeColor = true;
@@ -1441,9 +1441,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_t7.Location = new System.Drawing.Point(251, 698);
             txtSeb_t7.Name = "txtSeb_t7";
             txtSeb_t7.ObjectName = null;
-            txtSeb_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_t7.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t7.Properties.Appearance.Options.UseFont = true;
             txtSeb_t7.Properties.Appearance.Options.UseForeColor = true;
@@ -1456,9 +1456,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrak_t2.Location = new System.Drawing.Point(606, 568);
             txtBrak_t2.Name = "txtBrak_t2";
             txtBrak_t2.ObjectName = null;
-            txtBrak_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtBrak_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtBrak_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtBrak_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtBrak_t2.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t2.Properties.Appearance.Options.UseFont = true;
             txtBrak_t2.Properties.Appearance.Options.UseForeColor = true;
@@ -1471,9 +1471,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_t6.Location = new System.Drawing.Point(251, 672);
             txtSeb_t6.Name = "txtSeb_t6";
             txtSeb_t6.ObjectName = null;
-            txtSeb_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_t6.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t6.Properties.Appearance.Options.UseFont = true;
             txtSeb_t6.Properties.Appearance.Options.UseForeColor = true;
@@ -1486,9 +1486,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtBrak_t1.Location = new System.Drawing.Point(606, 542);
             txtBrak_t1.Name = "txtBrak_t1";
             txtBrak_t1.ObjectName = null;
-            txtBrak_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtBrak_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtBrak_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtBrak_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtBrak_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtBrak_t1.Properties.Appearance.Options.UseBackColor = true;
             txtBrak_t1.Properties.Appearance.Options.UseFont = true;
             txtBrak_t1.Properties.Appearance.Options.UseForeColor = true;
@@ -1501,9 +1501,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_t5.Location = new System.Drawing.Point(251, 646);
             txtSeb_t5.Name = "txtSeb_t5";
             txtSeb_t5.ObjectName = null;
-            txtSeb_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_t5.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t5.Properties.Appearance.Options.UseFont = true;
             txtSeb_t5.Properties.Appearance.Options.UseForeColor = true;
@@ -1516,9 +1516,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_t4.Location = new System.Drawing.Point(251, 620);
             txtSeb_t4.Name = "txtSeb_t4";
             txtSeb_t4.ObjectName = null;
-            txtSeb_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_t4.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t4.Properties.Appearance.Options.UseFont = true;
             txtSeb_t4.Properties.Appearance.Options.UseForeColor = true;
@@ -1531,9 +1531,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_t3.Location = new System.Drawing.Point(251, 594);
             txtSeb_t3.Name = "txtSeb_t3";
             txtSeb_t3.ObjectName = null;
-            txtSeb_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_t3.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t3.Properties.Appearance.Options.UseFont = true;
             txtSeb_t3.Properties.Appearance.Options.UseForeColor = true;
@@ -1546,9 +1546,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_t2.Location = new System.Drawing.Point(251, 568);
             txtSeb_t2.Name = "txtSeb_t2";
             txtSeb_t2.ObjectName = null;
-            txtSeb_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_t2.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t2.Properties.Appearance.Options.UseFont = true;
             txtSeb_t2.Properties.Appearance.Options.UseForeColor = true;
@@ -1561,9 +1561,9 @@ namespace SewingProduction.Features.Articul.Forms
             txtSeb_t1.Location = new System.Drawing.Point(251, 542);
             txtSeb_t1.Name = "txtSeb_t1";
             txtSeb_t1.ObjectName = null;
-            txtSeb_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txtSeb_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txtSeb_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txtSeb_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txtSeb_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txtSeb_t1.Properties.Appearance.Options.UseBackColor = true;
             txtSeb_t1.Properties.Appearance.Options.UseFont = true;
             txtSeb_t1.Properties.Appearance.Options.UseForeColor = true;
@@ -1579,7 +1579,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chbKruj.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKruj.Font = new System.Drawing.Font("Arial", 10F);
-            chbKruj.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // chbKruj.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             chbKruj.Location = new System.Drawing.Point(363, 36);
             chbKruj.Name = "chbKruj";
             chbKruj.Size = new System.Drawing.Size(305, 20);
@@ -1590,9 +1590,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbuKod_t7.Location = new System.Drawing.Point(15, 698);
             cbuKod_t7.Name = "cbuKod_t7";
-            cbuKod_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbuKod_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbuKod_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbuKod_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbuKod_t7.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t7.Properties.Appearance.Options.UseFont = true;
             cbuKod_t7.Properties.Appearance.Options.UseForeColor = true;
@@ -1613,9 +1613,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbuKod_t6.Location = new System.Drawing.Point(15, 672);
             cbuKod_t6.Name = "cbuKod_t6";
-            cbuKod_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbuKod_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbuKod_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbuKod_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbuKod_t6.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t6.Properties.Appearance.Options.UseFont = true;
             cbuKod_t6.Properties.Appearance.Options.UseForeColor = true;
@@ -1636,9 +1636,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbuKod_t5.Location = new System.Drawing.Point(15, 646);
             cbuKod_t5.Name = "cbuKod_t5";
-            cbuKod_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbuKod_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbuKod_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbuKod_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbuKod_t5.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t5.Properties.Appearance.Options.UseFont = true;
             cbuKod_t5.Properties.Appearance.Options.UseForeColor = true;
@@ -1659,9 +1659,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbuKod_t4.Location = new System.Drawing.Point(15, 620);
             cbuKod_t4.Name = "cbuKod_t4";
-            cbuKod_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbuKod_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbuKod_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbuKod_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbuKod_t4.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t4.Properties.Appearance.Options.UseFont = true;
             cbuKod_t4.Properties.Appearance.Options.UseForeColor = true;
@@ -1682,9 +1682,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbuKod_t3.Location = new System.Drawing.Point(15, 594);
             cbuKod_t3.Name = "cbuKod_t3";
-            cbuKod_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbuKod_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbuKod_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbuKod_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbuKod_t3.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t3.Properties.Appearance.Options.UseFont = true;
             cbuKod_t3.Properties.Appearance.Options.UseForeColor = true;
@@ -1705,9 +1705,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbuKod_t2.Location = new System.Drawing.Point(15, 568);
             cbuKod_t2.Name = "cbuKod_t2";
-            cbuKod_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbuKod_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbuKod_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbuKod_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbuKod_t2.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t2.Properties.Appearance.Options.UseFont = true;
             cbuKod_t2.Properties.Appearance.Options.UseForeColor = true;
@@ -1729,9 +1729,9 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t7.Location = new System.Drawing.Point(133, 698);
             txbNorm_t7.Name = "txbNorm_t7";
             txbNorm_t7.ObjectName = null;
-            txbNorm_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txbNorm_t7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txbNorm_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txbNorm_t7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txbNorm_t7.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t7.Properties.Appearance.Options.UseFont = true;
             txbNorm_t7.Properties.Appearance.Options.UseForeColor = true;
@@ -1744,9 +1744,9 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t6.Location = new System.Drawing.Point(133, 672);
             txbNorm_t6.Name = "txbNorm_t6";
             txbNorm_t6.ObjectName = null;
-            txbNorm_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txbNorm_t6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txbNorm_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txbNorm_t6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txbNorm_t6.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t6.Properties.Appearance.Options.UseFont = true;
             txbNorm_t6.Properties.Appearance.Options.UseForeColor = true;
@@ -1759,9 +1759,9 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t5.Location = new System.Drawing.Point(133, 646);
             txbNorm_t5.Name = "txbNorm_t5";
             txbNorm_t5.ObjectName = null;
-            txbNorm_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txbNorm_t5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txbNorm_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txbNorm_t5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txbNorm_t5.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t5.Properties.Appearance.Options.UseFont = true;
             txbNorm_t5.Properties.Appearance.Options.UseForeColor = true;
@@ -1774,9 +1774,9 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t4.Location = new System.Drawing.Point(133, 620);
             txbNorm_t4.Name = "txbNorm_t4";
             txbNorm_t4.ObjectName = null;
-            txbNorm_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txbNorm_t4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txbNorm_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txbNorm_t4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txbNorm_t4.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t4.Properties.Appearance.Options.UseFont = true;
             txbNorm_t4.Properties.Appearance.Options.UseForeColor = true;
@@ -1789,9 +1789,9 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t3.Location = new System.Drawing.Point(133, 594);
             txbNorm_t3.Name = "txbNorm_t3";
             txbNorm_t3.ObjectName = null;
-            txbNorm_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txbNorm_t3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txbNorm_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txbNorm_t3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txbNorm_t3.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t3.Properties.Appearance.Options.UseFont = true;
             txbNorm_t3.Properties.Appearance.Options.UseForeColor = true;
@@ -1804,9 +1804,9 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t2.Location = new System.Drawing.Point(133, 568);
             txbNorm_t2.Name = "txbNorm_t2";
             txbNorm_t2.ObjectName = null;
-            txbNorm_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txbNorm_t2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txbNorm_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txbNorm_t2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txbNorm_t2.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t2.Properties.Appearance.Options.UseFont = true;
             txbNorm_t2.Properties.Appearance.Options.UseForeColor = true;
@@ -1820,9 +1820,9 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t1.Margin = new System.Windows.Forms.Padding(2);
             txbNorm_t1.Name = "txbNorm_t1";
             txbNorm_t1.ObjectName = null;
-            txbNorm_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // txbNorm_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             txbNorm_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            txbNorm_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // txbNorm_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             txbNorm_t1.Properties.Appearance.Options.UseBackColor = true;
             txbNorm_t1.Properties.Appearance.Options.UseFont = true;
             txbNorm_t1.Properties.Appearance.Options.UseForeColor = true;
@@ -1840,7 +1840,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbAssort.ErrorColor = System.Drawing.Color.Red;
             txbAssort.ErrorMessage = null;
             txbAssort.Font = new System.Drawing.Font("Arial", 10F);
-            txbAssort.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbAssort.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbAssort.Location = new System.Drawing.Point(85, 112);
             txbAssort.Margin = new System.Windows.Forms.Padding(0);
             txbAssort.Name = "txbAssort";
@@ -1853,7 +1853,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbKombIzd.Enabled = false;
             chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombIzd.Font = new System.Drawing.Font("Arial", 10F);
-            chbKombIzd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // chbKombIzd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             chbKombIzd.Location = new System.Drawing.Point(244, 36);
             chbKombIzd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombIzd.Name = "chbKombIzd";
@@ -1870,7 +1870,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbSost2.ObjectName = null;
             txbSost2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSost2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbSost2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbSost2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost2.Properties.Appearance.Options.UseBackColor = true;
             txbSost2.Properties.Appearance.Options.UseFont = true;
             txbSost2.Properties.Appearance.Options.UseForeColor = true;
@@ -1883,7 +1883,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbKombDet.Enabled = false;
             chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombDet.Font = new System.Drawing.Font("Arial", 10F);
-            chbKombDet.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // chbKombDet.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             chbKombDet.Location = new System.Drawing.Point(80, 36);
             chbKombDet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombDet.Name = "chbKombDet";
@@ -1893,10 +1893,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbGrupMen
             // 
-            cbGrupMen.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // cbGrupMen.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbGrupMen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbGrupMen.Font = new System.Drawing.Font("Arial", 10F);
-            cbGrupMen.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // cbGrupMen.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbGrupMen.FormattingEnabled = true;
             cbGrupMen.Location = new System.Drawing.Point(85, 86);
             cbGrupMen.Name = "cbGrupMen";
@@ -1905,10 +1905,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbCountry
             // 
-            cbCountry.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // cbCountry.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbCountry.Font = new System.Drawing.Font("Arial", 10F);
-            cbCountry.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // cbCountry.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbCountry.FormattingEnabled = true;
             cbCountry.Location = new System.Drawing.Point(358, 112);
             cbCountry.Name = "cbCountry";
@@ -1924,7 +1924,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbSost.ObjectName = null;
             txbSost.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbSost.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbSost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbSost.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbSost.Properties.Appearance.Options.UseBackColor = true;
             txbSost.Properties.Appearance.Options.UseFont = true;
             txbSost.Properties.Appearance.Options.UseForeColor = true;
@@ -1934,10 +1934,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbAssort
             // 
-            cbAssort.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // cbAssort.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbAssort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbAssort.Font = new System.Drawing.Font("Arial", 10F);
-            cbAssort.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // cbAssort.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbAssort.FormattingEnabled = true;
             cbAssort.Location = new System.Drawing.Point(129, 112);
             cbAssort.Name = "cbAssort";
@@ -1946,10 +1946,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbSeason
             // 
-            cbSeason.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // cbSeason.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbSeason.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbSeason.Font = new System.Drawing.Font("Arial", 10F);
-            cbSeason.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // cbSeason.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbSeason.FormattingEnabled = true;
             cbSeason.Location = new System.Drawing.Point(476, 60);
             cbSeason.Name = "cbSeason";
@@ -1966,7 +1966,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbArticul.ObjectName = null;
             txbArticul.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbArticul.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbArticul.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbArticul.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbArticul.Properties.Appearance.Options.UseBackColor = true;
             txbArticul.Properties.Appearance.Options.UseFont = true;
             txbArticul.Properties.Appearance.Options.UseForeColor = true;
@@ -1984,7 +1984,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbMod.ObjectName = null;
             txbMod.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             txbMod.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbMod.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // txbMod.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             txbMod.Properties.Appearance.Options.UseBackColor = true;
             txbMod.Properties.Appearance.Options.UseFont = true;
             txbMod.Properties.Appearance.Options.UseForeColor = true;
@@ -1994,10 +1994,10 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // cbTM
             // 
-            cbTM.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            // cbTM.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             cbTM.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbTM.Font = new System.Drawing.Font("Arial", 10F);
-            cbTM.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // cbTM.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             cbTM.FormattingEnabled = true;
             cbTM.Location = new System.Drawing.Point(223, 60);
             cbTM.Name = "cbTM";
@@ -2008,9 +2008,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             cbuKod_t1.Location = new System.Drawing.Point(15, 542);
             cbuKod_t1.Name = "cbuKod_t1";
-            cbuKod_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // cbuKod_t1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             cbuKod_t1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            cbuKod_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // cbuKod_t1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             cbuKod_t1.Properties.Appearance.Options.UseBackColor = true;
             cbuKod_t1.Properties.Appearance.Options.UseFont = true;
             cbuKod_t1.Properties.Appearance.Options.UseForeColor = true;
@@ -2943,7 +2943,7 @@ namespace SewingProduction.Features.Articul.Forms
             chbArh.Enabled = false;
             chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbArh.Font = new System.Drawing.Font("Arial", 10F);
-            chbArh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // chbArh.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             chbArh.Location = new System.Drawing.Point(675, 12);
             chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbArh.Name = "chbArh";
@@ -2956,7 +2956,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkPres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkPres.Font = new System.Drawing.Font("Arial", 10F);
-            chkPres.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
+            // chkPres.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkPres.Location = new System.Drawing.Point(15, 196);
             chkPres.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkPres.Name = "chkPres";
@@ -2969,7 +2969,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkStra.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkStra.Font = new System.Drawing.Font("Arial", 10F);
-            chkStra.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
+            // chkStra.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkStra.Location = new System.Drawing.Point(15, 172);
             chkStra.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkStra.Name = "chkStra";
@@ -2982,7 +2982,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkBus.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkBus.Font = new System.Drawing.Font("Arial", 10F);
-            chkBus.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
+            // chkBus.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkBus.Location = new System.Drawing.Point(15, 148);
             chkBus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkBus.Name = "chkBus";
@@ -2995,7 +2995,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkV.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkV.Font = new System.Drawing.Font("Arial", 10F);
-            chkV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
+            // chkV.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkV.Location = new System.Drawing.Point(15, 124);
             chkV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkV.Name = "chkV";
@@ -3008,7 +3008,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chkP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkP.Font = new System.Drawing.Font("Arial", 10F);
-            chkP.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
+            // chkP.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chkP.Location = new System.Drawing.Point(15, 100);
             chkP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkP.Name = "chkP";
@@ -3021,7 +3021,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chbIsFurnit.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsFurnit.Font = new System.Drawing.Font("Arial", 10F);
-            chbIsFurnit.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
+            // chbIsFurnit.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chbIsFurnit.Location = new System.Drawing.Point(15, 60);
             chbIsFurnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsFurnit.Name = "chbIsFurnit";
@@ -3034,7 +3034,7 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             chbIsUpak.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsUpak.Font = new System.Drawing.Font("Arial", 10F);
-            chbIsUpak.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
+            // chbIsUpak.ForeColor = System.Drawing.Color.FromArgb(0, 0, 139);
             chbIsUpak.Location = new System.Drawing.Point(15, 36);
             chbIsUpak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsUpak.Name = "chbIsUpak";
@@ -3045,9 +3045,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customSimpleButton1
             // 
-            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
             customSimpleButton1.Appearance.Options.UseForeColor = true;
@@ -3180,13 +3180,13 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // customLayoutControl2
             // 
-            customLayoutControl2.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customLayoutControl2.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLayoutControl2.Controls.Add(btDel);
             customLayoutControl2.Controls.Add(btEdit);
             customLayoutControl2.Controls.Add(btAdd);
             customLayoutControl2.Controls.Add(gridEditAdRazm);
             customLayoutControl2.Font = new System.Drawing.Font("Arial", 10F);
-            customLayoutControl2.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customLayoutControl2.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLayoutControl2.Location = new System.Drawing.Point(11, 284);
             customLayoutControl2.Name = "customLayoutControl2";
             customLayoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-1216, 253, 650, 400);
@@ -3197,9 +3197,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // btDel
             // 
-            btDel.Appearance.BackColor = System.Drawing.Color.Lavender;
+            // btDel.Appearance.BackColor = System.Drawing.Color.Lavender;
             btDel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            btDel.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // btDel.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             btDel.Appearance.Options.UseBackColor = true;
             btDel.Appearance.Options.UseFont = true;
             btDel.Appearance.Options.UseForeColor = true;
@@ -3218,9 +3218,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // btEdit
             // 
-            btEdit.Appearance.BackColor = System.Drawing.Color.Lavender;
+            // btEdit.Appearance.BackColor = System.Drawing.Color.Lavender;
             btEdit.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            btEdit.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // btEdit.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             btEdit.Appearance.Options.UseBackColor = true;
             btEdit.Appearance.Options.UseFont = true;
             btEdit.Appearance.Options.UseForeColor = true;
@@ -3239,9 +3239,9 @@ namespace SewingProduction.Features.Articul.Forms
             // 
             // btAdd
             // 
-            btAdd.Appearance.BackColor = System.Drawing.Color.Lavender;
+            // btAdd.Appearance.BackColor = System.Drawing.Color.Lavender;
             btAdd.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            btAdd.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // btAdd.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             btAdd.Appearance.Options.UseBackColor = true;
             btAdd.Appearance.Options.UseFont = true;
             btAdd.Appearance.Options.UseForeColor = true;

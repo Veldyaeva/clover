@@ -200,9 +200,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             spinEditYear.ErrorMessage = null;
             spinEditYear.Location = new System.Drawing.Point(278, 12);
             spinEditYear.Name = "spinEditYear";
-            spinEditYear.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            // spinEditYear.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             spinEditYear.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            spinEditYear.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            // spinEditYear.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             spinEditYear.Properties.Appearance.Options.UseBackColor = true;
             spinEditYear.Properties.Appearance.Options.UseFont = true;
             spinEditYear.Properties.Appearance.Options.UseForeColor = true;
@@ -227,7 +227,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.Black;
+            // customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(556, 12);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(183, 22);
@@ -247,9 +247,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // bandedGridViewPzvCheck
             // 
-            bandedGridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            // bandedGridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             bandedGridViewPzvCheck.Appearance.EvenRow.Options.UseBackColor = true;
-            bandedGridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // bandedGridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             bandedGridViewPzvCheck.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             bandedGridViewPzvCheck.Appearance.FocusedRow.Options.UseBackColor = true;
             bandedGridViewPzvCheck.Appearance.FocusedRow.Options.UseFont = true;
@@ -299,9 +299,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPzvCheck
             // 
-            gridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            // gridViewPzvCheck.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridViewPzvCheck.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // gridViewPzvCheck.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridViewPzvCheck.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewPzvCheck.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPzvCheck.Appearance.FocusedRow.Options.UseFont = true;

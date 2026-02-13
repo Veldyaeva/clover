@@ -861,7 +861,7 @@ namespace SewingProduction
             // 
             // button1
             // 
-            button1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // button1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             tablePanel1.SetColumn(button1, 12);
             button1.Font = new System.Drawing.Font("Arial", 10F);
             button1.Location = new System.Drawing.Point(1101, 13);

@@ -104,7 +104,7 @@
             // 
             customCheckBox1.AutoSize = true;
             customCheckBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBox1.ForeColor = System.Drawing.Color.Black;
+            // customCheckBox1.ForeColor = System.Drawing.Color.Black;
             customCheckBox1.Location = new System.Drawing.Point(49, 154);
             customCheckBox1.Name = "customCheckBox1";
             customCheckBox1.Size = new System.Drawing.Size(149, 20);
@@ -116,7 +116,7 @@
             // labelGlaz
             // 
             labelGlaz.AutoSize = true;
-            labelGlaz.BackColor = System.Drawing.Color.White;
+            // labelGlaz.BackColor = System.Drawing.Color.White;
             labelGlaz.Font = new System.Drawing.Font("Showcard Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             labelGlaz.Location = new System.Drawing.Point(434, 89);
             labelGlaz.Name = "labelGlaz";
@@ -130,7 +130,7 @@
             // 
             _gifBackground.BackColor = System.Drawing.Color.Transparent;
             _gifBackground.Font = new System.Drawing.Font("Arial", 10F);
-            _gifBackground.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // _gifBackground.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             _gifBackground.ImagePath = null;
             _gifBackground.Location = new System.Drawing.Point(36, 192);
             _gifBackground.Name = "_gifBackground";

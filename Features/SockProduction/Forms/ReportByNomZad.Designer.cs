@@ -199,9 +199,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             // 
             // customTextBox6
             // 
-            customTextBox6.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBox6.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBox6.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox6.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBox6.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBox6.Location = new System.Drawing.Point(367, 248);
             customTextBox6.Multiline = true;
             customTextBox6.Name = "customTextBox6";
@@ -210,9 +210,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             // 
             // customTextBox5
             // 
-            customTextBox5.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBox5.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBox5.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox5.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBox5.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBox5.Location = new System.Drawing.Point(416, 224);
             customTextBox5.Multiline = true;
             customTextBox5.Name = "customTextBox5";
@@ -221,9 +221,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             // 
             // customTextBox4
             // 
-            customTextBox4.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBox4.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBox4.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox4.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBox4.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBox4.Location = new System.Drawing.Point(617, 188);
             customTextBox4.Multiline = true;
             customTextBox4.Name = "customTextBox4";
@@ -232,9 +232,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             // 
             // customTextBox3
             // 
-            customTextBox3.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBox3.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBox3.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox3.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBox3.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBox3.Location = new System.Drawing.Point(367, 188);
             customTextBox3.Multiline = true;
             customTextBox3.Name = "customTextBox3";
@@ -243,9 +243,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             // 
             // customTextBox2
             // 
-            customTextBox2.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBox2.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBox2.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox2.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBox2.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBox2.Location = new System.Drawing.Point(367, 164);
             customTextBox2.Multiline = true;
             customTextBox2.Name = "customTextBox2";
@@ -254,9 +254,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             // 
             // customTextBox1
             // 
-            customTextBox1.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBox1.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBox1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBox1.Location = new System.Drawing.Point(617, 164);
             customTextBox1.Multiline = true;
             customTextBox1.Name = "customTextBox1";
@@ -274,7 +274,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel14
             // 
             customLabel14.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel14.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel14.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel14.Location = new System.Drawing.Point(289, 248);
             customLabel14.Name = "customLabel14";
             customLabel14.Size = new System.Drawing.Size(74, 54);
@@ -284,7 +284,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel13
             // 
             customLabel13.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel13.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel13.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel13.Location = new System.Drawing.Point(289, 224);
             customLabel13.Name = "customLabel13";
             customLabel13.Size = new System.Drawing.Size(123, 20);
@@ -294,7 +294,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel12
             // 
             customLabel12.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel12.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel12.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel12.Location = new System.Drawing.Point(525, 188);
             customLabel12.Name = "customLabel12";
             customLabel12.Size = new System.Drawing.Size(88, 32);
@@ -304,7 +304,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel11
             // 
             customLabel11.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel11.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel11.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel11.Location = new System.Drawing.Point(289, 188);
             customLabel11.Name = "customLabel11";
             customLabel11.Size = new System.Drawing.Size(74, 32);
@@ -314,7 +314,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel10
             // 
             customLabel10.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel10.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel10.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel10.Location = new System.Drawing.Point(289, 164);
             customLabel10.Name = "customLabel10";
             customLabel10.Size = new System.Drawing.Size(74, 20);
@@ -324,7 +324,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel9
             // 
             customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel9.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel9.Location = new System.Drawing.Point(525, 164);
             customLabel9.Name = "customLabel9";
             customLabel9.Size = new System.Drawing.Size(88, 20);
@@ -334,7 +334,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel8
             // 
             customLabel8.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel8.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel8.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel8.Location = new System.Drawing.Point(289, 112);
             customLabel8.Name = "customLabel8";
             customLabel8.Size = new System.Drawing.Size(74, 48);
@@ -346,9 +346,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx8.Location = new System.Drawing.Point(115, 268);
             customTextBoxEx8.Name = "customTextBoxEx8";
             customTextBoxEx8.ObjectName = null;
-            customTextBoxEx8.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx8.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx8.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx8.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx8.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx8.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx8.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx8.Properties.Appearance.Options.UseForeColor = true;
@@ -361,9 +361,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx7.Location = new System.Drawing.Point(115, 242);
             customTextBoxEx7.Name = "customTextBoxEx7";
             customTextBoxEx7.ObjectName = null;
-            customTextBoxEx7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx7.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx7.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx7.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx7.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx7.Properties.Appearance.Options.UseForeColor = true;
@@ -376,9 +376,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx6.Location = new System.Drawing.Point(115, 216);
             customTextBoxEx6.Name = "customTextBoxEx6";
             customTextBoxEx6.ObjectName = null;
-            customTextBoxEx6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx6.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx6.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx6.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx6.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx6.Properties.Appearance.Options.UseForeColor = true;
@@ -391,9 +391,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx5.Location = new System.Drawing.Point(115, 190);
             customTextBoxEx5.Name = "customTextBoxEx5";
             customTextBoxEx5.ObjectName = null;
-            customTextBoxEx5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx5.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx5.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx5.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx5.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx5.Properties.Appearance.Options.UseForeColor = true;
@@ -406,9 +406,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx4.Location = new System.Drawing.Point(198, 164);
             customTextBoxEx4.Name = "customTextBoxEx4";
             customTextBoxEx4.ObjectName = null;
-            customTextBoxEx4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx4.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx4.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx4.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx4.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx4.Properties.Appearance.Options.UseForeColor = true;
@@ -421,9 +421,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx3.Location = new System.Drawing.Point(115, 138);
             customTextBoxEx3.Name = "customTextBoxEx3";
             customTextBoxEx3.ObjectName = null;
-            customTextBoxEx3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx3.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx3.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx3.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx3.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx3.Properties.Appearance.Options.UseForeColor = true;
@@ -436,9 +436,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx2.Location = new System.Drawing.Point(115, 112);
             customTextBoxEx2.Name = "customTextBoxEx2";
             customTextBoxEx2.ObjectName = null;
-            customTextBoxEx2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx2.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx2.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx2.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx2.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx2.Properties.Appearance.Options.UseForeColor = true;
@@ -449,7 +449,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel7
             // 
             customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel7.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel7.Location = new System.Drawing.Point(24, 242);
             customLabel7.Name = "customLabel7";
             customLabel7.Size = new System.Drawing.Size(87, 50);
@@ -459,7 +459,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel6
             // 
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel6.Location = new System.Drawing.Point(24, 216);
             customLabel6.Name = "customLabel6";
             customLabel6.Size = new System.Drawing.Size(87, 22);
@@ -469,7 +469,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel5
             // 
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel5.Location = new System.Drawing.Point(24, 190);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new System.Drawing.Size(87, 22);
@@ -479,7 +479,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel4
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel4.Location = new System.Drawing.Point(24, 164);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(170, 22);
@@ -489,7 +489,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel3
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel3.Location = new System.Drawing.Point(24, 138);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(87, 22);
@@ -499,7 +499,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel2.Location = new System.Drawing.Point(24, 112);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(87, 22);
@@ -508,9 +508,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             // 
             // customSimpleButton1
             // 
-            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
             customSimpleButton1.Appearance.Options.UseForeColor = true;
@@ -531,9 +531,9 @@ namespace SewingProduction.Features.SockProduction.Forms
             customTextBoxEx1.Location = new System.Drawing.Point(194, 24);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
-            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
@@ -544,7 +544,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel1.Location = new System.Drawing.Point(24, 24);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(166, 22);

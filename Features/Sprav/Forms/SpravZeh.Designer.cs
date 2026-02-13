@@ -154,7 +154,7 @@ namespace SewingProduction.form
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButton1.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             customButton1.FlatAppearance.BorderSize = 0;
             customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -171,7 +171,7 @@ namespace SewingProduction.form
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButton2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButton2.Dock = System.Windows.Forms.DockStyle.Fill;
             customButton2.FlatAppearance.BorderSize = 0;
             customButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -281,7 +281,7 @@ namespace SewingProduction.form
             // textBoxName
             // 
             textBoxName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            textBoxName.BackColor = System.Drawing.Color.White;
+            // textBoxName.BackColor = System.Drawing.Color.White;
             tableLayoutPanel3.SetColumnSpan(textBoxName, 2);
             textBoxName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             textBoxName.Location = new System.Drawing.Point(216, 47);
@@ -326,7 +326,7 @@ namespace SewingProduction.form
             linkLabelVid.Anchor = System.Windows.Forms.AnchorStyles.Left;
             linkLabelVid.AutoSize = true;
             linkLabelVid.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            linkLabelVid.LinkColor = System.Drawing.Color.Black;
+            // linkLabelVid.LinkColor = System.Drawing.Color.Black;
             linkLabelVid.Location = new System.Drawing.Point(4, 91);
             linkLabelVid.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             linkLabelVid.Name = "linkLabelVid";
@@ -352,7 +352,7 @@ namespace SewingProduction.form
             // simpleButtonAddSave
             // 
             simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddSave.FlatAppearance.BorderSize = 0;
             simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
@@ -370,7 +370,7 @@ namespace SewingProduction.form
             // simpleButtonDel
             // 
             simpleButtonDel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonDel.FlatAppearance.BorderSize = 0;
             simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
@@ -388,7 +388,7 @@ namespace SewingProduction.form
             // simpleButtonAddOtm
             // 
             simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
             simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);

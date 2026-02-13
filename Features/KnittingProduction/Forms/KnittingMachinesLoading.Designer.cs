@@ -306,7 +306,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewKnitMachineLoadInfo
             // 
-            gridViewKnitMachineLoadInfo.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewKnitMachineLoadInfo.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewKnitMachineLoadInfo.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewKnitMachineLoadInfo.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridKnitMachineLoadInfoColumnYearMonth, gridKnitMachineLoadInfoColumnKmlNumber, gridKnitMachineLoadInfoColumnCombinedPszNom });
             gridViewKnitMachineLoadInfo.GridControl = gridControlKnitMachineLoadInfo;

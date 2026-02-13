@@ -88,9 +88,9 @@
             // 
             // customButton3
             // 
-            customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            customButton3.ForeColor = System.Drawing.Color.Black;
+            // customButton3.ForeColor = System.Drawing.Color.Black;
             customButton3.Location = new System.Drawing.Point(339, 315);
             customButton3.Name = "customButton3";
             customButton3.Size = new System.Drawing.Size(105, 98);
@@ -100,9 +100,9 @@
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.Black;
+            // customButton2.ForeColor = System.Drawing.Color.Black;
             customButton2.Location = new System.Drawing.Point(177, 315);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(158, 98);
@@ -113,9 +113,9 @@
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.Black;
+            // customButton1.ForeColor = System.Drawing.Color.Black;
             customButton1.Location = new System.Drawing.Point(12, 315);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(161, 98);
@@ -128,9 +128,9 @@
             // 
             EditPodrLookUpEdit.Location = new System.Drawing.Point(12, 265);
             EditPodrLookUpEdit.Name = "EditPodrLookUpEdit";
-            EditPodrLookUpEdit.Properties.Appearance.BackColor = System.Drawing.Color.White;
+            // EditPodrLookUpEdit.Properties.Appearance.BackColor = System.Drawing.Color.White;
             EditPodrLookUpEdit.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            EditPodrLookUpEdit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            // EditPodrLookUpEdit.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             EditPodrLookUpEdit.Properties.Appearance.Options.UseBackColor = true;
             EditPodrLookUpEdit.Properties.Appearance.Options.UseFont = true;
             EditPodrLookUpEdit.Properties.Appearance.Options.UseForeColor = true;
@@ -143,7 +143,7 @@
             // customLabel4
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.Black;
+            // customLabel4.ForeColor = System.Drawing.Color.Black;
             customLabel4.Location = new System.Drawing.Point(12, 179);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(432, 82);
@@ -153,7 +153,7 @@
             // PodrText
             // 
             PodrText.Font = new System.Drawing.Font("Arial", 20F);
-            PodrText.ForeColor = System.Drawing.Color.Black;
+            // PodrText.ForeColor = System.Drawing.Color.Black;
             PodrText.Location = new System.Drawing.Point(12, 115);
             PodrText.Name = "PodrText";
             PodrText.Size = new System.Drawing.Size(432, 60);
@@ -163,7 +163,7 @@
             // fioEmployee
             // 
             fioEmployee.Font = new System.Drawing.Font("Arial", 20F);
-            fioEmployee.ForeColor = System.Drawing.Color.Black;
+            // fioEmployee.ForeColor = System.Drawing.Color.Black;
             fioEmployee.Location = new System.Drawing.Point(12, 58);
             fioEmployee.Name = "fioEmployee";
             fioEmployee.Size = new System.Drawing.Size(432, 53);
@@ -173,7 +173,7 @@
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
-            customLabel1.ForeColor = System.Drawing.Color.Black;
+            // customLabel1.ForeColor = System.Drawing.Color.Black;
             customLabel1.Location = new System.Drawing.Point(12, 12);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(432, 42);
@@ -255,9 +255,9 @@
             // 
             // customDateTimePicker1
             // 
-            customDateTimePicker1.BackColor = System.Drawing.Color.White;
+            // customDateTimePicker1.BackColor = System.Drawing.Color.White;
             customDateTimePicker1.Font = new System.Drawing.Font("Arial", 10F);
-            customDateTimePicker1.ForeColor = System.Drawing.Color.Black;
+            // customDateTimePicker1.ForeColor = System.Drawing.Color.Black;
             customDateTimePicker1.Location = new System.Drawing.Point(170, 291);
             customDateTimePicker1.Name = "customDateTimePicker1";
             customDateTimePicker1.ObjectName = null;
@@ -275,7 +275,7 @@
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.Black;
+            // customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(12, 291);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(154, 20);
