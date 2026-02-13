@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction.form
 {
@@ -282,7 +282,7 @@ namespace SewingProduction.form
             // 
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel1.ForeColor = System.Drawing.Color.DimGray;
             customLabel1.Location = new System.Drawing.Point(45, 88);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(109, 16);
@@ -293,7 +293,7 @@ namespace SewingProduction.form
             // 
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel2.ForeColor = System.Drawing.Color.DimGray;
             customLabel2.Location = new System.Drawing.Point(20, 129);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(134, 16);
@@ -304,7 +304,7 @@ namespace SewingProduction.form
             // 
             customLabel3.AutoSize = true;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel3.ForeColor = System.Drawing.Color.DimGray;
             customLabel3.Location = new System.Drawing.Point(47, 251);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(107, 16);
@@ -315,7 +315,7 @@ namespace SewingProduction.form
             // 
             customLabel4.AutoSize = true;
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel4.ForeColor = System.Drawing.Color.DimGray;
             customLabel4.Location = new System.Drawing.Point(30, 207);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(124, 16);
@@ -348,7 +348,7 @@ namespace SewingProduction.form
             // 
             customLabel5.AutoSize = true;
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel5.ForeColor = System.Drawing.Color.DimGray;
             customLabel5.Location = new System.Drawing.Point(99, 166);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new System.Drawing.Size(55, 16);
@@ -359,7 +359,7 @@ namespace SewingProduction.form
             // 
             customLabel6.AutoSize = true;
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel6.ForeColor = System.Drawing.Color.DimGray;
             customLabel6.Location = new System.Drawing.Point(53, 290);
             customLabel6.Name = "customLabel6";
             customLabel6.Size = new System.Drawing.Size(93, 16);
@@ -393,7 +393,7 @@ namespace SewingProduction.form
             // 
             customLabel7.AutoSize = true;
             customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel7.ForeColor = System.Drawing.Color.DimGray;
             customLabel7.Location = new System.Drawing.Point(17, 375);
             customLabel7.Name = "customLabel7";
             customLabel7.Size = new System.Drawing.Size(137, 16);
@@ -404,7 +404,7 @@ namespace SewingProduction.form
             // 
             customLabel8.AutoSize = true;
             customLabel8.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel8.ForeColor = System.Drawing.Color.DimGray;
+//            customLabel8.ForeColor = System.Drawing.Color.DimGray;
             customLabel8.Location = new System.Drawing.Point(44, 331);
             customLabel8.Name = "customLabel8";
             customLabel8.Size = new System.Drawing.Size(110, 16);

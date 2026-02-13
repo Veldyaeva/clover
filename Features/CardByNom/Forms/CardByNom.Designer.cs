@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 //using System.Windows.Media;
@@ -1476,9 +1476,9 @@ namespace SewingProduction
             // customLabel6
             // 
             customLabel6.Appearance.Font = new Font("Arial", 10F);
-            customLabel6.Appearance.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
+//            customLabel6.Appearance.ForeColor = Color.FromArgb((int)(byte)30, (int)(byte)70, (int)(byte)140);
             customLabel6.Appearance.Options.UseFont = true;
-            customLabel6.Appearance.Options.UseForeColor = true;
+//            customLabel6.Appearance.Options.UseForeColor = true;
             customLabel6.Appearance.Options.UseTextOptions = true;
             customLabel6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -1509,10 +1509,10 @@ namespace SewingProduction
             // 
             customLabel2.Appearance.BackColor = Color.Transparent;
             customLabel2.Appearance.Font = new Font("Arial", 12F, FontStyle.Bold);
-            customLabel2.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+//            customLabel2.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
             customLabel2.Appearance.Options.UseBackColor = true;
             customLabel2.Appearance.Options.UseFont = true;
-            customLabel2.Appearance.Options.UseForeColor = true;
+//            customLabel2.Appearance.Options.UseForeColor = true;
             customLabel2.Appearance.Options.UseTextOptions = true;
             customLabel2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -1530,10 +1530,10 @@ namespace SewingProduction
             // 
             customLabel4.Appearance.BackColor = Color.Transparent;
             customLabel4.Appearance.Font = new Font("Arial", 10F);
-            customLabel4.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+//            customLabel4.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
             customLabel4.Appearance.Options.UseBackColor = true;
             customLabel4.Appearance.Options.UseFont = true;
-            customLabel4.Appearance.Options.UseForeColor = true;
+//            customLabel4.Appearance.Options.UseForeColor = true;
             customLabel4.Appearance.Options.UseTextOptions = true;
             customLabel4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -1587,10 +1587,10 @@ namespace SewingProduction
             // 
             customLabel1.Appearance.BackColor = Color.Transparent;
             customLabel1.Appearance.Font = new Font("Arial", 10F);
-            customLabel1.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+//            customLabel1.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
             customLabel1.Appearance.Options.UseBackColor = true;
             customLabel1.Appearance.Options.UseFont = true;
-            customLabel1.Appearance.Options.UseForeColor = true;
+//            customLabel1.Appearance.Options.UseForeColor = true;
             customLabel1.Appearance.Options.UseTextOptions = true;
             customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -5598,10 +5598,10 @@ namespace SewingProduction
             // 
             customLabel3.Appearance.BackColor = Color.Transparent;
             customLabel3.Appearance.Font = new Font("Arial", 9F);
-            customLabel3.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
+//            customLabel3.Appearance.ForeColor = Color.FromArgb((int)(byte)0, (int)(byte)0, (int)(byte)0);
             customLabel3.Appearance.Options.UseBackColor = true;
             customLabel3.Appearance.Options.UseFont = true;
-            customLabel3.Appearance.Options.UseForeColor = true;
+//            customLabel3.Appearance.Options.UseForeColor = true;
             customLabel3.Appearance.Options.UseTextOptions = true;
             customLabel3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -7949,9 +7949,9 @@ namespace SewingProduction
             // customLabel22
             // 
             customLabel22.Appearance.Font = new Font("Arial", 10F);
-            customLabel22.Appearance.ForeColor = SystemColors.ControlText;
+//            customLabel22.Appearance.ForeColor = SystemColors.ControlText;
             customLabel22.Appearance.Options.UseFont = true;
-            customLabel22.Appearance.Options.UseForeColor = true;
+//            customLabel22.Appearance.Options.UseForeColor = true;
             customLabel22.Appearance.Options.UseTextOptions = true;
             customLabel22.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel22.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -7994,9 +7994,9 @@ namespace SewingProduction
             // customLabel17
             // 
             customLabel17.Appearance.Font = new Font("Arial", 10F);
-            customLabel17.Appearance.ForeColor = SystemColors.ControlText;
+//            customLabel17.Appearance.ForeColor = SystemColors.ControlText;
             customLabel17.Appearance.Options.UseFont = true;
-            customLabel17.Appearance.Options.UseForeColor = true;
+//            customLabel17.Appearance.Options.UseForeColor = true;
             customLabel17.Appearance.Options.UseTextOptions = true;
             customLabel17.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel17.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -8011,9 +8011,9 @@ namespace SewingProduction
             // customLabel16
             // 
             customLabel16.Appearance.Font = new Font("Arial", 10F);
-            customLabel16.Appearance.ForeColor = SystemColors.ControlText;
+//            customLabel16.Appearance.ForeColor = SystemColors.ControlText;
             customLabel16.Appearance.Options.UseFont = true;
-            customLabel16.Appearance.Options.UseForeColor = true;
+//            customLabel16.Appearance.Options.UseForeColor = true;
             customLabel16.Appearance.Options.UseTextOptions = true;
             customLabel16.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel16.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
@@ -8043,9 +8043,9 @@ namespace SewingProduction
             // customLabel15
             // 
             customLabel15.Appearance.Font = new Font("Arial", 10F);
-            customLabel15.Appearance.ForeColor = SystemColors.ControlText;
+//            customLabel15.Appearance.ForeColor = SystemColors.ControlText;
             customLabel15.Appearance.Options.UseFont = true;
-            customLabel15.Appearance.Options.UseForeColor = true;
+//            customLabel15.Appearance.Options.UseForeColor = true;
             customLabel15.Appearance.Options.UseTextOptions = true;
             customLabel15.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel15.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;

@@ -877,7 +877,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // KITlabel
             // 
             KITlabel.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            KITlabel.ForeColor = System.Drawing.Color.Red;
+//            KITlabel.ForeColor = System.Drawing.Color.Red;
             KITlabel.Location = new System.Drawing.Point(11, 211);
             KITlabel.Name = "KITlabel";
             KITlabel.Size = new System.Drawing.Size(222, 31);
