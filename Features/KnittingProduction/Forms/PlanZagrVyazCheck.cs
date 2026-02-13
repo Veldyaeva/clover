@@ -38,7 +38,7 @@ using static SewingProduction.Helpers.GridHelper;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
-    public partial class PlanZagrVyazCheck : CustomForm, IThemeable
+    public partial class PlanZagrVyazCheck : CustomForm//, IThemeable
     {
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
@@ -70,7 +70,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _sprMonthService = new SprMonthService(_dbHelper);
             _vyazService = new VyazService(_dbHelper);
 
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
         }
         private async Task InitializeBindingsAsync()
         {

@@ -1,4 +1,4 @@
-﻿using DevExpress.CodeParser;
+using DevExpress.CodeParser;
 using DevExpress.XtraEditors;
 using SewingProduction;
 using SewingProduction.Features.UserDistribution.Class;
@@ -285,22 +285,11 @@ public class CustomMessageBoxForm : CustomForm
 
     private void ApplyThemeToControls()
     {
-        // Применяем тему к главной панели
-        if (_mainPanel != null && ThemeManager.ActiveTheme != null)
+        // Для сообщений теперь используем только системные цвета,
+        // если явный цвет не был задан в опциях
+        if (_mainPanel != null && !_options.BackColor.HasValue)
         {
-            // Используем TextBoxBackground как фон для панели
-            if (!_options.BackColor.HasValue)
-            {
-                try
-                {
-                    _mainPanel.BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-                }
-                catch
-                {
-                    // Если свойство недоступно, используем системный цвет
-                    _mainPanel.BackColor = SystemColors.Control;
-                }
-            }
+            _mainPanel.BackColor = SystemColors.Control;
         }
     }
 }
@@ -323,29 +312,15 @@ public static class AdvancedMessageBox
         return new Font("Segoe UI", 9f);
     }
 
-    // Получаем цвет текста из темы
+    // Получаем цвет текста (системный, без завязки на кастомную тему)
     private static Color GetTextColor()
     {
-        try
-        {
-            if (ThemeManager.ActiveTheme != null)
-                return ThemeManager.ActiveTheme.LabelTextColor;
-        }
-        catch { }
-
         return SystemColors.ControlText;
     }
 
-    // Получаем цвет фона из темы
+    // Получаем цвет фона (системный)
     private static Color GetBackgroundColor()
     {
-        try
-        {
-            if (ThemeManager.ActiveTheme != null)
-                return ThemeManager.ActiveTheme.TextBoxBackground;
-        }
-        catch { }
-
         return SystemColors.Control;
     }
 
@@ -1007,26 +982,11 @@ public static class AdvancedMessageBox
         // Компактные отступы внутри кнопки
         btn.Appearance.Options.UseTextOptions = true;
 
-        // Используем цвета из темы если они доступны
-        try
-        {
-            if (ThemeManager.ActiveTheme != null)
-            {
-                // Используем цвета из TextBox для кнопок
-                btn.Appearance.BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-                btn.Appearance.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-                btn.Appearance.Options.UseBackColor = true;
-                btn.Appearance.Options.UseForeColor = true;
-            }
-        }
-        catch
-        {
-            // Если не удалось получить цвета из темы, используем системные
-            btn.Appearance.BackColor = SystemColors.Control;
-            btn.Appearance.ForeColor = SystemColors.ControlText;
-            btn.Appearance.Options.UseBackColor = true;
-            btn.Appearance.Options.UseForeColor = true;
-        }
+        // Используем системные цвета для кнопок
+        btn.Appearance.BackColor = SystemColors.Control;
+        btn.Appearance.ForeColor = SystemColors.ControlText;
+        btn.Appearance.Options.UseBackColor = true;
+        btn.Appearance.Options.UseForeColor = true;
     }
 
     private static void AutoConfigureOptions(MessageBoxOptions options)

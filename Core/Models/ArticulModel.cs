@@ -63,8 +63,10 @@ namespace SewingProduction.Core.Models
         public int? Annid { get; set; }
 
         public string Kod { get; set; }
-        
-        public string Grup { get; set; }
+        private string _grup;
+        public string Grup { get=>_grup;
+            set => SetField(ref _grup, value);
+        }
         private int _ag_id;
         public int Ag_id{get => _ag_id; set=> SetField(ref _ag_id, value); }
 

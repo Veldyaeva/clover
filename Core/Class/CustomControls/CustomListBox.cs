@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,21 +19,15 @@ namespace SewingProduction.Core.Class
         public CustomListBox()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            BackColor = System.Drawing.SystemColors.Window;
+            ForeColor = System.Drawing.SystemColors.WindowText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)

@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction.form
 {
@@ -64,9 +64,21 @@ namespace SewingProduction.form
             customButton1 = new CustomButton();
             GridSettingsCheckBox = new CustomCheckBox();
             ResetGridSettingsButton = new CustomButton();
-            tabPane1 = new DevExpress.XtraBars.Navigation.TabPane();
-            tabNavigationPageTheme = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            tabNavigationPageOsn = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            customLabel9 = new CustomLabel();
+            bar2 = new DevExpress.XtraBars.Bar();
+            bar3 = new DevExpress.XtraBars.Bar();
+            bar4 = new DevExpress.XtraBars.Bar();
+            bar5 = new DevExpress.XtraBars.Bar();
+            barManager1 = new DevExpress.XtraBars.BarManager(components);
+            bar6 = new DevExpress.XtraBars.Bar();
+            skinBarSubItem1 = new DevExpress.XtraBars.SkinBarSubItem();
+            skinDropDownButtonItem1 = new DevExpress.XtraBars.SkinDropDownButtonItem();
+            skinPaletteDropDownButtonItem1 = new DevExpress.XtraBars.SkinPaletteDropDownButtonItem();
+            bar7 = new DevExpress.XtraBars.Bar();
+            barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).BeginInit();
             contextMenuReset.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)colorPickEditTextBox.Properties).BeginInit();
@@ -76,45 +88,41 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabelGridColor.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridRowBackground.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridBackground.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)tabPane1).BeginInit();
-            tabPane1.SuspendLayout();
-            tabNavigationPageTheme.SuspendLayout();
-            tabNavigationPageOsn.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             SuspendLayout();
             // 
             // customLabelTheme
             // 
-            customLabelTheme.AutoSize = true;
-            customLabelTheme.BackColor = System.Drawing.Color.Transparent;
-            customLabelTheme.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelTheme.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelTheme.Location = new System.Drawing.Point(24, 19);
+            customLabelTheme.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelTheme.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelTheme.Appearance.Options.UseBackColor = true;
+            customLabelTheme.Appearance.Options.UseFont = true;
+            customLabelTheme.Location = new System.Drawing.Point(14, 46);
             customLabelTheme.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelTheme.Name = "customLabelTheme";
-            customLabelTheme.Size = new System.Drawing.Size(41, 16);
+            customLabelTheme.Size = new System.Drawing.Size(30, 16);
             customLabelTheme.TabIndex = 0;
             customLabelTheme.Text = "Тема";
+            customLabelTheme.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabelTheme.Visible = false;
             // 
             // customComboBoxTheme
             // 
-            customComboBoxTheme.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
             customComboBoxTheme.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxTheme.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxTheme.FormattingEnabled = true;
-            customComboBoxTheme.Location = new System.Drawing.Point(135, 16);
+            customComboBoxTheme.Location = new System.Drawing.Point(125, 43);
             customComboBoxTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxTheme.Name = "customComboBoxTheme";
             customComboBoxTheme.Size = new System.Drawing.Size(140, 24);
             customComboBoxTheme.TabIndex = 3;
+            customComboBoxTheme.Visible = false;
             customComboBoxTheme.SelectedIndexChanged += customComboBoxTheme_SelectedIndexChanged;
             // 
             // customComboBoxSizeText
             // 
-            customComboBoxSizeText.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
             customComboBoxSizeText.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxSizeText.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxSizeText.FormattingEnabled = true;
-            customComboBoxSizeText.Location = new System.Drawing.Point(722, 51);
+            customComboBoxSizeText.Location = new System.Drawing.Point(125, 456);
             customComboBoxSizeText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxSizeText.Name = "customComboBoxSizeText";
             customComboBoxSizeText.Size = new System.Drawing.Size(140, 24);
@@ -123,24 +131,24 @@ namespace SewingProduction.form
             // 
             // customLabelSizeText
             // 
-            customLabelSizeText.AutoSize = true;
-            customLabelSizeText.BackColor = System.Drawing.Color.Transparent;
-            customLabelSizeText.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelSizeText.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelSizeText.Location = new System.Drawing.Point(611, 54);
+            customLabelSizeText.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelSizeText.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelSizeText.Appearance.Options.UseBackColor = true;
+            customLabelSizeText.Appearance.Options.UseFont = true;
+            customLabelSizeText.Location = new System.Drawing.Point(14, 459);
             customLabelSizeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelSizeText.Name = "customLabelSizeText";
-            customLabelSizeText.Size = new System.Drawing.Size(103, 16);
+            customLabelSizeText.Size = new System.Drawing.Size(86, 16);
             customLabelSizeText.TabIndex = 5;
             customLabelSizeText.Text = "Размер текста";
+            customLabelSizeText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customCheckBoxSaveOpenTabs
             // 
             customCheckBoxSaveOpenTabs.AutoSize = true;
             customCheckBoxSaveOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSaveOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(25, 8);
+            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(327, 42);
             customCheckBoxSaveOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxSaveOpenTabs.Name = "customCheckBoxSaveOpenTabs";
             customCheckBoxSaveOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -152,10 +160,8 @@ namespace SewingProduction.form
             // 
             // customButtonClearProfile
             // 
-            customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButtonClearProfile.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
-            customButtonClearProfile.Location = new System.Drawing.Point(25, 247);
+            customButtonClearProfile.Location = new System.Drawing.Point(654, 38);
             customButtonClearProfile.Name = "customButtonClearProfile";
             customButtonClearProfile.Size = new System.Drawing.Size(251, 29);
             customButtonClearProfile.TabIndex = 9;
@@ -167,9 +173,8 @@ namespace SewingProduction.form
             // 
             customCheckBoxSokrNameTabs.AutoSize = true;
             customCheckBoxSokrNameTabs.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxSokrNameTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSokrNameTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(25, 53);
+            customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(327, 87);
             customCheckBoxSokrNameTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxSokrNameTabs.Name = "customCheckBoxSokrNameTabs";
             customCheckBoxSokrNameTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -183,9 +188,8 @@ namespace SewingProduction.form
             // 
             customCheckBoxPovtOpenTabs.AutoSize = true;
             customCheckBoxPovtOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxPovtOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxPovtOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(25, 94);
+            customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(327, 128);
             customCheckBoxPovtOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxPovtOpenTabs.Name = "customCheckBoxPovtOpenTabs";
             customCheckBoxPovtOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -197,11 +201,9 @@ namespace SewingProduction.form
             // 
             // customComboBoxRejimRab
             // 
-            customComboBoxRejimRab.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
             customComboBoxRejimRab.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxRejimRab.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxRejimRab.FormattingEnabled = true;
-            customComboBoxRejimRab.Location = new System.Drawing.Point(722, 8);
+            customComboBoxRejimRab.Location = new System.Drawing.Point(125, 499);
             customComboBoxRejimRab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxRejimRab.Name = "customComboBoxRejimRab";
             customComboBoxRejimRab.Size = new System.Drawing.Size(140, 24);
@@ -209,23 +211,22 @@ namespace SewingProduction.form
             // 
             // customLabelRejimRab
             // 
-            customLabelRejimRab.AutoSize = true;
-            customLabelRejimRab.BackColor = System.Drawing.Color.Transparent;
-            customLabelRejimRab.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelRejimRab.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelRejimRab.Location = new System.Drawing.Point(611, 11);
+            customLabelRejimRab.Appearance.BackColor = System.Drawing.Color.Transparent;
+            customLabelRejimRab.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRejimRab.Appearance.Options.UseBackColor = true;
+            customLabelRejimRab.Appearance.Options.UseFont = true;
+            customLabelRejimRab.Location = new System.Drawing.Point(14, 502);
             customLabelRejimRab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelRejimRab.Name = "customLabelRejimRab";
-            customLabelRejimRab.Size = new System.Drawing.Size(103, 16);
+            customLabelRejimRab.Size = new System.Drawing.Size(87, 16);
             customLabelRejimRab.TabIndex = 12;
             customLabelRejimRab.Text = "Режим работы";
+            customLabelRejimRab.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customButtonSaveExit
             // 
-            customButtonSaveExit.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButtonSaveExit.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSaveExit.ForeColor = System.Drawing.Color.Black;
-            customButtonSaveExit.Location = new System.Drawing.Point(327, 478);
+            customButtonSaveExit.Location = new System.Drawing.Point(327, 499);
             customButtonSaveExit.Name = "customButtonSaveExit";
             customButtonSaveExit.Size = new System.Drawing.Size(251, 29);
             customButtonSaveExit.TabIndex = 14;
@@ -236,12 +237,13 @@ namespace SewingProduction.form
             // colorPickEditLabel
             // 
             colorPickEditLabel.EditValue = System.Drawing.Color.Empty;
-            colorPickEditLabel.Location = new System.Drawing.Point(170, 57);
+            colorPickEditLabel.Location = new System.Drawing.Point(160, 84);
             colorPickEditLabel.Name = "colorPickEditLabel";
             colorPickEditLabel.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditLabel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEditLabel.Size = new System.Drawing.Size(140, 20);
             colorPickEditLabel.TabIndex = 15;
+            colorPickEditLabel.Visible = false;
             colorPickEditLabel.EditValueChanged += colorPickEditLabel_EditValueChanged;
             colorPickEditLabel.ContextMenuStripChanged += menuItemReset_Click;
             // 
@@ -261,180 +263,194 @@ namespace SewingProduction.form
             // colorPickEditTextBox
             // 
             colorPickEditTextBox.EditValue = System.Drawing.Color.Empty;
-            colorPickEditTextBox.Location = new System.Drawing.Point(170, 101);
+            colorPickEditTextBox.Location = new System.Drawing.Point(160, 128);
             colorPickEditTextBox.Name = "colorPickEditTextBox";
             colorPickEditTextBox.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditTextBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEditTextBox.Size = new System.Drawing.Size(140, 20);
             colorPickEditTextBox.TabIndex = 16;
+            colorPickEditTextBox.Visible = false;
             colorPickEditTextBox.EditValueChanged += colorPickEditTextBox_EditValueChanged;
             // 
             // customLabel1
             // 
-            customLabel1.AutoSize = true;
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.DimGray;
-            customLabel1.Location = new System.Drawing.Point(55, 61);
+            customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.Appearance.Options.UseFont = true;
+            customLabel1.Location = new System.Drawing.Point(45, 88);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(109, 16);
+            customLabel1.Size = new System.Drawing.Size(94, 16);
             customLabel1.TabIndex = 17;
             customLabel1.Text = "LabelTextColour";
+            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel1.Visible = false;
             // 
             // customLabel2
             // 
-            customLabel2.AutoSize = true;
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.DimGray;
-            customLabel2.Location = new System.Drawing.Point(30, 102);
+            customLabel2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.Appearance.Options.UseFont = true;
+            customLabel2.Location = new System.Drawing.Point(20, 129);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(134, 16);
+            customLabel2.Size = new System.Drawing.Size(120, 16);
             customLabel2.TabIndex = 18;
             customLabel2.Text = "TextBoxBackGround";
+            customLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel2.Visible = false;
             // 
             // customLabel3
             // 
-            customLabel3.AutoSize = true;
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.DimGray;
-            customLabel3.Location = new System.Drawing.Point(57, 224);
+            customLabel3.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.Appearance.Options.UseFont = true;
+            customLabel3.Location = new System.Drawing.Point(47, 251);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(107, 16);
+            customLabel3.Size = new System.Drawing.Size(94, 16);
             customLabel3.TabIndex = 22;
             customLabel3.Text = "ButtonTextColor";
+            customLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel3.Visible = false;
             // 
             // customLabel4
             // 
-            customLabel4.AutoSize = true;
-            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.DimGray;
-            customLabel4.Location = new System.Drawing.Point(40, 180);
+            customLabel4.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.Appearance.Options.UseFont = true;
+            customLabel4.Location = new System.Drawing.Point(30, 207);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(124, 16);
+            customLabel4.Size = new System.Drawing.Size(107, 16);
             customLabel4.TabIndex = 21;
             customLabel4.Text = "ButtonBackground";
+            customLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel4.Visible = false;
             // 
             // colorPickEditButtonTextColor
             // 
             colorPickEditButtonTextColor.EditValue = System.Drawing.Color.Empty;
-            colorPickEditButtonTextColor.Location = new System.Drawing.Point(170, 223);
+            colorPickEditButtonTextColor.Location = new System.Drawing.Point(160, 250);
             colorPickEditButtonTextColor.Name = "colorPickEditButtonTextColor";
             colorPickEditButtonTextColor.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditButtonTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEditButtonTextColor.Size = new System.Drawing.Size(140, 20);
             colorPickEditButtonTextColor.TabIndex = 20;
+            colorPickEditButtonTextColor.Visible = false;
             colorPickEditButtonTextColor.EditValueChanged += colorPickEditButtonTextColor_EditValueChanged;
             // 
             // colorPickEditButtonBackground
             // 
             colorPickEditButtonBackground.EditValue = System.Drawing.Color.Empty;
-            colorPickEditButtonBackground.Location = new System.Drawing.Point(170, 179);
+            colorPickEditButtonBackground.Location = new System.Drawing.Point(160, 206);
             colorPickEditButtonBackground.Name = "colorPickEditButtonBackground";
             colorPickEditButtonBackground.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditButtonBackground.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEditButtonBackground.Size = new System.Drawing.Size(140, 20);
             colorPickEditButtonBackground.TabIndex = 19;
+            colorPickEditButtonBackground.Visible = false;
             colorPickEditButtonBackground.EditValueChanged += colorPickEditButtonBackground_EditValueChanged;
             // 
             // customLabel5
             // 
-            customLabel5.AutoSize = true;
-            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.DimGray;
-            customLabel5.Location = new System.Drawing.Point(109, 139);
+            customLabel5.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel5.Appearance.Options.UseFont = true;
+            customLabel5.Location = new System.Drawing.Point(99, 166);
             customLabel5.Name = "customLabel5";
-            customLabel5.Size = new System.Drawing.Size(55, 16);
+            customLabel5.Size = new System.Drawing.Size(48, 16);
             customLabel5.TabIndex = 26;
             customLabel5.Text = "TextBox";
+            customLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel5.Visible = false;
             // 
             // customLabel6
             // 
-            customLabel6.AutoSize = true;
-            customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.DimGray;
-            customLabel6.Location = new System.Drawing.Point(63, 263);
+            customLabel6.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel6.Appearance.Options.UseFont = true;
+            customLabel6.Location = new System.Drawing.Point(53, 290);
             customLabel6.Name = "customLabel6";
-            customLabel6.Size = new System.Drawing.Size(93, 16);
+            customLabel6.Size = new System.Drawing.Size(80, 16);
             customLabel6.TabIndex = 25;
             customLabel6.Text = "GridTextColor";
+            customLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel6.Visible = false;
             // 
             // colorPickEdit3
             // 
             colorPickEdit3.EditValue = System.Drawing.Color.Empty;
-            colorPickEdit3.Location = new System.Drawing.Point(170, 136);
+            colorPickEdit3.Location = new System.Drawing.Point(160, 163);
             colorPickEdit3.Name = "colorPickEdit3";
             colorPickEdit3.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEdit3.Size = new System.Drawing.Size(140, 20);
             colorPickEdit3.TabIndex = 24;
+            colorPickEdit3.Visible = false;
             colorPickEdit3.EditValueChanged += colorPickEdit3_EditValueChanged;
             // 
             // colorPickEditLabelGridColor
             // 
             colorPickEditLabelGridColor.EditValue = System.Drawing.Color.Empty;
-            colorPickEditLabelGridColor.Location = new System.Drawing.Point(170, 262);
+            colorPickEditLabelGridColor.Location = new System.Drawing.Point(160, 289);
             colorPickEditLabelGridColor.Name = "colorPickEditLabelGridColor";
             colorPickEditLabelGridColor.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditLabelGridColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEditLabelGridColor.Properties.Name = "colorPickEditLabelGridColor";
             colorPickEditLabelGridColor.Size = new System.Drawing.Size(140, 20);
             colorPickEditLabelGridColor.TabIndex = 23;
+            colorPickEditLabelGridColor.Visible = false;
             colorPickEditLabelGridColor.EditValueChanged += colorPickEditLabelTextColor_EditValueChanged;
             // 
             // customLabel7
             // 
-            customLabel7.AutoSize = true;
-            customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.DimGray;
-            customLabel7.Location = new System.Drawing.Point(27, 348);
+            customLabel7.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel7.Appearance.Options.UseFont = true;
+            customLabel7.Location = new System.Drawing.Point(17, 375);
             customLabel7.Name = "customLabel7";
-            customLabel7.Size = new System.Drawing.Size(137, 16);
+            customLabel7.Size = new System.Drawing.Size(118, 16);
             customLabel7.TabIndex = 30;
             customLabel7.Text = "GridRowBackground";
+            customLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel7.Visible = false;
             // 
             // customLabel8
             // 
-            customLabel8.AutoSize = true;
-            customLabel8.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel8.ForeColor = System.Drawing.Color.DimGray;
-            customLabel8.Location = new System.Drawing.Point(54, 304);
+            customLabel8.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel8.Appearance.Options.UseFont = true;
+            customLabel8.Location = new System.Drawing.Point(44, 331);
             customLabel8.Name = "customLabel8";
-            customLabel8.Size = new System.Drawing.Size(110, 16);
+            customLabel8.Size = new System.Drawing.Size(93, 16);
             customLabel8.TabIndex = 29;
             customLabel8.Text = "GridBackground";
+            customLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabel8.Visible = false;
             // 
             // colorPickEditGridRowBackground
             // 
             colorPickEditGridRowBackground.EditValue = System.Drawing.Color.Empty;
-            colorPickEditGridRowBackground.Location = new System.Drawing.Point(170, 347);
+            colorPickEditGridRowBackground.Location = new System.Drawing.Point(160, 374);
             colorPickEditGridRowBackground.Name = "colorPickEditGridRowBackground";
             colorPickEditGridRowBackground.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditGridRowBackground.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEditGridRowBackground.Size = new System.Drawing.Size(140, 20);
             colorPickEditGridRowBackground.TabIndex = 28;
+            colorPickEditGridRowBackground.Visible = false;
             colorPickEditGridRowBackground.EditValueChanged += colorPickEditGridRowBackground_EditValueChanged;
             // 
             // colorPickEditGridBackground
             // 
             colorPickEditGridBackground.EditValue = System.Drawing.Color.Empty;
-            colorPickEditGridBackground.Location = new System.Drawing.Point(170, 303);
+            colorPickEditGridBackground.Location = new System.Drawing.Point(160, 330);
             colorPickEditGridBackground.Name = "colorPickEditGridBackground";
             colorPickEditGridBackground.Properties.AutomaticColor = System.Drawing.Color.Black;
             colorPickEditGridBackground.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             colorPickEditGridBackground.Size = new System.Drawing.Size(140, 20);
             colorPickEditGridBackground.TabIndex = 27;
+            colorPickEditGridBackground.Visible = false;
             colorPickEditGridBackground.EditValueChanged += colorPickEditGridBackground_EditValueChanged;
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(170, 383);
+            customButton1.Location = new System.Drawing.Point(160, 410);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(113, 25);
             customButton1.TabIndex = 31;
             customButton1.Text = "ResetItem";
             customButton1.UseVisualStyleBackColor = false;
+            customButton1.Visible = false;
             customButton1.Click += customButton1_Click;
             // 
             // GridSettingsCheckBox
@@ -442,8 +458,7 @@ namespace SewingProduction.form
             GridSettingsCheckBox.AutoSize = true;
             GridSettingsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             GridSettingsCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            GridSettingsCheckBox.ForeColor = System.Drawing.Color.FromArgb(80, 40, 100);
-            GridSettingsCheckBox.Location = new System.Drawing.Point(56, 139);
+            GridSettingsCheckBox.Location = new System.Drawing.Point(358, 166);
             GridSettingsCheckBox.Name = "GridSettingsCheckBox";
             GridSettingsCheckBox.Size = new System.Drawing.Size(220, 20);
             GridSettingsCheckBox.TabIndex = 32;
@@ -453,10 +468,8 @@ namespace SewingProduction.form
             // 
             // ResetGridSettingsButton
             // 
-            ResetGridSettingsButton.BackColor = System.Drawing.Color.FromArgb(225, 200, 230);
             ResetGridSettingsButton.Font = new System.Drawing.Font("Arial", 10F);
-            ResetGridSettingsButton.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
-            ResetGridSettingsButton.Location = new System.Drawing.Point(25, 193);
+            ResetGridSettingsButton.Location = new System.Drawing.Point(358, 207);
             ResetGridSettingsButton.Name = "ResetGridSettingsButton";
             ResetGridSettingsButton.Size = new System.Drawing.Size(251, 29);
             ResetGridSettingsButton.TabIndex = 33;
@@ -464,71 +477,188 @@ namespace SewingProduction.form
             ResetGridSettingsButton.UseVisualStyleBackColor = false;
             ResetGridSettingsButton.Click += customButton2_Click;
             // 
-            // tabPane1
+            // customLabel9
             // 
-            tabPane1.Controls.Add(tabNavigationPageTheme);
-            tabPane1.Controls.Add(tabNavigationPageOsn);
-            tabPane1.Location = new System.Drawing.Point(12, 12);
-            tabPane1.Name = "tabPane1";
-            tabPane1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] { tabNavigationPageTheme, tabNavigationPageOsn });
-            tabPane1.RegularSize = new System.Drawing.Size(909, 460);
-            tabPane1.SelectedPage = tabNavigationPageOsn;
-            tabPane1.Size = new System.Drawing.Size(909, 460);
-            tabPane1.TabIndex = 35;
-            tabPane1.Text = "tabPane1";
+            customLabel9.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel9.Appearance.Options.UseFont = true;
+            customLabel9.Location = new System.Drawing.Point(358, 188);
+            customLabel9.Name = "customLabel9";
+            customLabel9.Size = new System.Drawing.Size(168, 16);
+            customLabel9.TabIndex = 34;
+            customLabel9.Text = "Сбросить настройки таблиц:";
+            customLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tabNavigationPageTheme
+            // bar2
             // 
-            tabNavigationPageTheme.Caption = "Тема";
-            tabNavigationPageTheme.Controls.Add(customLabelTheme);
-            tabNavigationPageTheme.Controls.Add(customComboBoxTheme);
-            tabNavigationPageTheme.Controls.Add(customButton1);
-            tabNavigationPageTheme.Controls.Add(colorPickEditLabel);
-            tabNavigationPageTheme.Controls.Add(customLabel7);
-            tabNavigationPageTheme.Controls.Add(colorPickEditTextBox);
-            tabNavigationPageTheme.Controls.Add(customLabel8);
-            tabNavigationPageTheme.Controls.Add(customLabel1);
-            tabNavigationPageTheme.Controls.Add(colorPickEditGridRowBackground);
-            tabNavigationPageTheme.Controls.Add(customLabel2);
-            tabNavigationPageTheme.Controls.Add(colorPickEditGridBackground);
-            tabNavigationPageTheme.Controls.Add(colorPickEditButtonBackground);
-            tabNavigationPageTheme.Controls.Add(customLabel5);
-            tabNavigationPageTheme.Controls.Add(colorPickEditButtonTextColor);
-            tabNavigationPageTheme.Controls.Add(customLabel6);
-            tabNavigationPageTheme.Controls.Add(customLabel4);
-            tabNavigationPageTheme.Controls.Add(colorPickEdit3);
-            tabNavigationPageTheme.Controls.Add(customLabel3);
-            tabNavigationPageTheme.Controls.Add(colorPickEditLabelGridColor);
-            tabNavigationPageTheme.Name = "tabNavigationPageTheme";
-            tabNavigationPageTheme.Size = new System.Drawing.Size(909, 427);
+            bar2.BarName = "Main menu";
+            bar2.DockCol = 0;
+            bar2.DockRow = 0;
+            bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            bar2.OptionsBar.MultiLine = true;
+            bar2.OptionsBar.UseWholeRow = true;
+            bar2.Text = "Main menu";
             // 
-            // tabNavigationPageOsn
+            // bar3
             // 
-            tabNavigationPageOsn.Caption = "Основные";
-            tabNavigationPageOsn.Controls.Add(customCheckBoxSaveOpenTabs);
-            tabNavigationPageOsn.Controls.Add(customCheckBoxSokrNameTabs);
-            tabNavigationPageOsn.Controls.Add(customCheckBoxPovtOpenTabs);
-            tabNavigationPageOsn.Controls.Add(customComboBoxSizeText);
-            tabNavigationPageOsn.Controls.Add(customLabelSizeText);
-            tabNavigationPageOsn.Controls.Add(customComboBoxRejimRab);
-            tabNavigationPageOsn.Controls.Add(customLabelRejimRab);
-            tabNavigationPageOsn.Controls.Add(ResetGridSettingsButton);
-            tabNavigationPageOsn.Controls.Add(GridSettingsCheckBox);
-            tabNavigationPageOsn.Controls.Add(customButtonClearProfile);
-            tabNavigationPageOsn.Name = "tabNavigationPageOsn";
-            tabNavigationPageOsn.Size = new System.Drawing.Size(909, 427);
+            bar3.BarName = "Status bar";
+            bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
+            bar3.DockCol = 0;
+            bar3.DockRow = 0;
+            bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            bar3.OptionsBar.AllowQuickCustomization = false;
+            bar3.OptionsBar.DrawDragBorder = false;
+            bar3.OptionsBar.UseWholeRow = true;
+            bar3.Text = "Status bar";
+            // 
+            // bar4
+            // 
+            bar4.BarName = "Custom 5";
+            bar4.DockCol = 0;
+            bar4.DockRow = 2;
+            bar4.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            bar4.Text = "Custom 5";
+            // 
+            // bar5
+            // 
+            bar5.BarName = "Custom 6";
+            bar5.DockCol = 0;
+            bar5.DockRow = 3;
+            bar5.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            bar5.Text = "Custom 6";
+            // 
+            // barManager1
+            // 
+            barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] { bar6, bar7 });
+            barManager1.DockControls.Add(barDockControlTop);
+            barManager1.DockControls.Add(barDockControlBottom);
+            barManager1.DockControls.Add(barDockControlLeft);
+            barManager1.DockControls.Add(barDockControlRight);
+            barManager1.Form = this;
+            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1 });
+            barManager1.MainMenu = bar6;
+            barManager1.MaxItemId = 3;
+            barManager1.StatusBar = bar7;
+            // 
+            // bar6
+            // 
+            bar6.BarName = "Main menu";
+            bar6.DockCol = 0;
+            bar6.DockRow = 0;
+            bar6.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            bar6.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(skinBarSubItem1), new DevExpress.XtraBars.LinkPersistInfo(skinDropDownButtonItem1), new DevExpress.XtraBars.LinkPersistInfo(skinPaletteDropDownButtonItem1) });
+            bar6.OptionsBar.MultiLine = true;
+            bar6.OptionsBar.UseWholeRow = true;
+            bar6.Text = "Main menu";
+            // 
+            // skinBarSubItem1
+            // 
+            skinBarSubItem1.Caption = "Тема";
+            skinBarSubItem1.Id = 0;
+            skinBarSubItem1.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("skinBarSubItem1.ImageOptions.Image");
+            skinBarSubItem1.ImageOptions.LargeImage = (System.Drawing.Image)resources.GetObject("skinBarSubItem1.ImageOptions.LargeImage");
+            skinBarSubItem1.Name = "skinBarSubItem1";
+            skinBarSubItem1.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // skinDropDownButtonItem1
+            // 
+            skinDropDownButtonItem1.Id = 1;
+            skinDropDownButtonItem1.Name = "skinDropDownButtonItem1";
+            // 
+            // skinPaletteDropDownButtonItem1
+            // 
+            skinPaletteDropDownButtonItem1.ActAsDropDown = true;
+            skinPaletteDropDownButtonItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            skinPaletteDropDownButtonItem1.Id = 2;
+            skinPaletteDropDownButtonItem1.Name = "skinPaletteDropDownButtonItem1";
+            // 
+            // bar7
+            // 
+            bar7.BarName = "Status bar";
+            bar7.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
+            bar7.DockCol = 0;
+            bar7.DockRow = 0;
+            bar7.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            bar7.OptionsBar.AllowQuickCustomization = false;
+            bar7.OptionsBar.DrawDragBorder = false;
+            bar7.OptionsBar.UseWholeRow = true;
+            bar7.Text = "Status bar";
+            // 
+            // barDockControlTop
+            // 
+            barDockControlTop.CausesValidation = false;
+            barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            barDockControlTop.Manager = barManager1;
+            barDockControlTop.Size = new System.Drawing.Size(933, 24);
+            // 
+            // barDockControlBottom
+            // 
+            barDockControlBottom.CausesValidation = false;
+            barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            barDockControlBottom.Location = new System.Drawing.Point(0, 566);
+            barDockControlBottom.Manager = barManager1;
+            barDockControlBottom.Size = new System.Drawing.Size(933, 20);
+            // 
+            // barDockControlLeft
+            // 
+            barDockControlLeft.CausesValidation = false;
+            barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            barDockControlLeft.Location = new System.Drawing.Point(0, 24);
+            barDockControlLeft.Manager = barManager1;
+            barDockControlLeft.Size = new System.Drawing.Size(0, 542);
+            // 
+            // barDockControlRight
+            // 
+            barDockControlRight.CausesValidation = false;
+            barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            barDockControlRight.Location = new System.Drawing.Point(933, 24);
+            barDockControlRight.Manager = barManager1;
+            barDockControlRight.Size = new System.Drawing.Size(0, 542);
             // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(933, 519);
-            Controls.Add(tabPane1);
+            ClientSize = new System.Drawing.Size(933, 586);
+            Controls.Add(customLabel9);
+            Controls.Add(ResetGridSettingsButton);
+            Controls.Add(GridSettingsCheckBox);
+            Controls.Add(customButton1);
+            Controls.Add(customLabel7);
+            Controls.Add(customLabel8);
+            Controls.Add(colorPickEditGridRowBackground);
+            Controls.Add(colorPickEditGridBackground);
+            Controls.Add(customLabel5);
+            Controls.Add(customLabel6);
+            Controls.Add(colorPickEdit3);
+            Controls.Add(colorPickEditLabelGridColor);
+            Controls.Add(customLabel3);
+            Controls.Add(customLabel4);
+            Controls.Add(colorPickEditButtonTextColor);
+            Controls.Add(colorPickEditButtonBackground);
+            Controls.Add(customLabel2);
+            Controls.Add(customLabel1);
+            Controls.Add(colorPickEditTextBox);
+            Controls.Add(colorPickEditLabel);
             Controls.Add(customButtonSaveExit);
+            Controls.Add(customComboBoxRejimRab);
+            Controls.Add(customLabelRejimRab);
+            Controls.Add(customCheckBoxPovtOpenTabs);
+            Controls.Add(customCheckBoxSokrNameTabs);
+            Controls.Add(customButtonClearProfile);
+            Controls.Add(customCheckBoxSaveOpenTabs);
+            Controls.Add(customComboBoxSizeText);
+            Controls.Add(customLabelSizeText);
+            Controls.Add(customComboBoxTheme);
+            Controls.Add(customLabelTheme);
+            Controls.Add(barDockControlLeft);
+            Controls.Add(barDockControlRight);
+            Controls.Add(barDockControlBottom);
+            Controls.Add(barDockControlTop);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "SettingsForm";
-            Text = "Настройки";
+            Text = "SettingsForm";
             Load += SettingsForm_Load;
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabel.Properties).EndInit();
             contextMenuReset.ResumeLayout(false);
@@ -539,13 +669,9 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)colorPickEditLabelGridColor.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridRowBackground.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)colorPickEditGridBackground.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)tabPane1).EndInit();
-            tabPane1.ResumeLayout(false);
-            tabNavigationPageTheme.ResumeLayout(false);
-            tabNavigationPageTheme.PerformLayout();
-            tabNavigationPageOsn.ResumeLayout(false);
-            tabNavigationPageOsn.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -583,10 +709,19 @@ namespace SewingProduction.form
         private CustomCheckBox GridSettingsCheckBox;
         private CustomButton ResetGridSettingsButton;
         private CustomLabel customLabel9;
-        private DevExpress.XtraBars.Navigation.TabPane tabPane1;
-        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPageTheme;
-        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPageOsn;
-        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPageText;
-        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage3;
+        private DevExpress.XtraBars.Bar bar2;
+        private DevExpress.XtraBars.Bar bar3;
+        private DevExpress.XtraBars.Bar bar4;
+        private DevExpress.XtraBars.Bar bar5;
+        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.Bar bar6;
+        private DevExpress.XtraBars.SkinBarSubItem skinBarSubItem1;
+        private DevExpress.XtraBars.SkinDropDownButtonItem skinDropDownButtonItem1;
+        private DevExpress.XtraBars.SkinPaletteDropDownButtonItem skinPaletteDropDownButtonItem1;
+        private DevExpress.XtraBars.Bar bar7;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
     }
 }

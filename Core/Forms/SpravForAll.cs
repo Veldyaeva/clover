@@ -58,7 +58,7 @@ namespace SewingProduction.form
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _servBrok = servBrok;
             _serviceBroker = _servBrok == true ? new ServiceBroker(this) : null;
-            ThemeManager.UpdateTheme(this);
+          //  ThemeManager.UpdateTheme(this);
             // Пользователь:
             _user = user;
             // Таймер

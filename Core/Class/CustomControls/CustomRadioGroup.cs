@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using DevExpress.XtraEditors;
 using SewingProduction.Features.UserDistribution.Helpers;
 
@@ -12,21 +12,15 @@ namespace SewingProduction.Core.Class
         public CustomRadioGroup()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = System.Drawing.SystemColors.ControlText;
+            BackColor = System.Drawing.SystemColors.Control;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)

@@ -184,14 +184,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // advBandedGridView1
             // 
-            advBandedGridView1.Appearance.BandPanel.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+//            advBandedGridView1.Appearance.BandPanel.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             advBandedGridView1.Appearance.BandPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             advBandedGridView1.Appearance.BandPanel.Options.UseBackColor = true;
             advBandedGridView1.Appearance.BandPanel.Options.UseFont = true;
             advBandedGridView1.Appearance.BandPanel.Options.UseTextOptions = true;
             advBandedGridView1.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             advBandedGridView1.Appearance.GroupFooter.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
-            advBandedGridView1.Appearance.GroupFooter.BorderColor = System.Drawing.Color.White;
+//            advBandedGridView1.Appearance.GroupFooter.BorderColor = System.Drawing.Color.White;
             advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand39, gridBand40, gridBand41, gridBand42, gridBand43, gridBand44, gridBand45, gridBand46, gridBand27, gridBand29, gridBand56 });
             advBandedGridView1.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { bandedGridColumn11, bandedGridColumn12, bandedGridColumn13, bandedGridColumn14, bandedGridColumn16, bandedGridColumn15, bandedGridColumn17, bandedGridColumn26, bandedGridColumn18, bandedGridColumn19, bandedGridColumn20, bandedGridColumn21, bandedGridColumn22, bandedGridColumn23, bandedGridColumn27, bandedGridColumn24, bandedGridColumn31 });
             advBandedGridView1.DetailHeight = 4038;
@@ -793,7 +793,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             FioGridLookUpEdit.Properties.Appearance.Options.UseFont = true;
             FioGridLookUpEdit.Properties.NullText = "[Выберите сотрудника]";
             FioGridLookUpEdit.Properties.PopupView = FioGridLookUpEditView;
-            FioGridLookUpEdit.Size = new System.Drawing.Size(176, 32);
+            FioGridLookUpEdit.Size = new System.Drawing.Size(175, 32);
             FioGridLookUpEdit.StyleController = dataLayoutControl1;
             FioGridLookUpEdit.TabIndex = 2;
             FioGridLookUpEdit.EditValueChanged += FioGridLookUpEdit_EditValueChanged;
@@ -835,14 +835,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // dateEdit1
             // 
             dateEdit1.EditValue = null;
-            dateEdit1.Location = new System.Drawing.Point(725, 12);
+            dateEdit1.Location = new System.Drawing.Point(784, 12);
             dateEdit1.Name = "dateEdit1";
             dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             dateEdit1.Properties.Appearance.Options.UseFont = true;
             dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             dateEdit1.Properties.MaskSettings.Set("mask", "D");
-            dateEdit1.Size = new System.Drawing.Size(226, 32);
+            dateEdit1.Size = new System.Drawing.Size(178, 32);
             dateEdit1.StyleController = dataLayoutControl1;
             dateEdit1.TabIndex = 4;
             // 
@@ -850,17 +850,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             simpleButton2.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             simpleButton2.Appearance.Options.UseFont = true;
-            simpleButton2.Location = new System.Drawing.Point(955, 12);
+            simpleButton2.Location = new System.Drawing.Point(966, 12);
             simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new System.Drawing.Size(162, 30);
+            simpleButton2.Size = new System.Drawing.Size(157, 30);
             simpleButton2.StyleController = dataLayoutControl1;
             simpleButton2.TabIndex = 5;
             simpleButton2.Text = "Начать смену";
             simpleButton2.Click += simpleButton2_Click;
+            simpleButton2.DoubleClick += simpleButton2_Click;
             // 
             // TabGridLookUpEdit
             // 
-            TabGridLookUpEdit.Location = new System.Drawing.Point(606, 12);
+            TabGridLookUpEdit.Location = new System.Drawing.Point(605, 12);
             TabGridLookUpEdit.Name = "TabGridLookUpEdit";
             TabGridLookUpEdit.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             TabGridLookUpEdit.Properties.Appearance.Options.UseFont = true;
@@ -869,7 +870,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             TabGridLookUpEdit.Properties.NullText = "";
             TabGridLookUpEdit.Properties.PopupSizeable = false;
             TabGridLookUpEdit.Properties.PopupView = gridLookUpEdit1View;
-            TabGridLookUpEdit.Size = new System.Drawing.Size(65, 32);
+            TabGridLookUpEdit.Size = new System.Drawing.Size(125, 32);
             TabGridLookUpEdit.StyleController = dataLayoutControl1;
             TabGridLookUpEdit.TabIndex = 3;
             // 
@@ -897,7 +898,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem2.CustomizationFormText = "ФИО оператора - ";
             layoutControlItem2.Location = new System.Drawing.Point(190, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(335, 36);
+            layoutControlItem2.Size = new System.Drawing.Size(334, 36);
             layoutControlItem2.Text = "ФИО оператора -";
             layoutControlItem2.TextSize = new System.Drawing.Size(143, 19);
             // 
@@ -920,9 +921,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem4.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             layoutControlItem4.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem4.Control = dateEdit1;
-            layoutControlItem4.Location = new System.Drawing.Point(663, 0);
+            layoutControlItem4.Location = new System.Drawing.Point(722, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(280, 36);
+            layoutControlItem4.Size = new System.Drawing.Size(232, 36);
             layoutControlItem4.Text = "Дата";
             layoutControlItem4.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
             layoutControlItem4.TextLocation = DevExpress.Utils.Locations.Left;
@@ -932,9 +933,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // layoutControlItem9
             // 
             layoutControlItem9.Control = simpleButton2;
-            layoutControlItem9.Location = new System.Drawing.Point(943, 0);
+            layoutControlItem9.Location = new System.Drawing.Point(954, 0);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(166, 36);
+            layoutControlItem9.Size = new System.Drawing.Size(161, 36);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem5
@@ -943,9 +944,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem5.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem5.Control = TabGridLookUpEdit;
             layoutControlItem5.CustomizationFormText = "таб №  ";
-            layoutControlItem5.Location = new System.Drawing.Point(525, 0);
+            layoutControlItem5.Location = new System.Drawing.Point(524, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(138, 36);
+            layoutControlItem5.Size = new System.Drawing.Size(198, 36);
             layoutControlItem5.Text = "таб №  ";
             layoutControlItem5.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem5.TextSize = new System.Drawing.Size(64, 19);
@@ -953,17 +954,17 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(1109, 0);
+            emptySpaceItem1.Location = new System.Drawing.Point(1115, 0);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(22, 36);
+            emptySpaceItem1.Size = new System.Drawing.Size(21, 36);
             // 
             // simpleLabelItem1
             // 
             simpleLabelItem1.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             simpleLabelItem1.AppearanceItemCaption.Options.UseFont = true;
-            simpleLabelItem1.Location = new System.Drawing.Point(1131, 0);
+            simpleLabelItem1.Location = new System.Drawing.Point(1136, 0);
             simpleLabelItem1.Name = "simpleLabelItem1";
-            simpleLabelItem1.Size = new System.Drawing.Size(178, 36);
+            simpleLabelItem1.Size = new System.Drawing.Size(173, 36);
             simpleLabelItem1.Text = " ";
             simpleLabelItem1.TextSize = new System.Drawing.Size(143, 19);
             // 

@@ -131,7 +131,7 @@ namespace SewingProduction.form
             // linkLabelBrig
             // 
             resources.ApplyResources(linkLabelBrig, "linkLabelBrig");
-            linkLabelBrig.LinkColor = System.Drawing.Color.Black;
+            // linkLabelBrig.LinkColor = System.Drawing.Color.Black;
             linkLabelBrig.Name = "linkLabelBrig";
             linkLabelBrig.TabStop = true;
             linkLabelBrig.LinkClicked += linkLabelBrig_LinkClicked;
@@ -139,7 +139,7 @@ namespace SewingProduction.form
             // linkLabelZeh
             // 
             resources.ApplyResources(linkLabelZeh, "linkLabelZeh");
-            linkLabelZeh.LinkColor = System.Drawing.Color.Black;
+            // linkLabelZeh.LinkColor = System.Drawing.Color.Black;
             linkLabelZeh.Name = "linkLabelZeh";
             linkLabelZeh.TabStop = true;
             linkLabelZeh.LinkClicked += labelZeh_LinkClicked;

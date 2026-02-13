@@ -165,7 +165,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewTable1
             // 
-            gridViewTable1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            // gridViewTable1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridViewTable1.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewTable1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_atn, name, name_rus });
             gridViewTable1.DetailHeight = 4038;
@@ -221,7 +221,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customHeaderLabel1
             // 
             customHeaderLabel1.AutoSize = true;
-            customHeaderLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customHeaderLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customHeaderLabel1.Location = new System.Drawing.Point(15, 32);
             customHeaderLabel1.Name = "customHeaderLabel1";
             customHeaderLabel1.Size = new System.Drawing.Size(131, 27);
@@ -232,7 +232,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customLabel4.AutoSize = true;
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabel4.Location = new System.Drawing.Point(15, 135);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(126, 16);
@@ -243,7 +243,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.Black;
+            // customLabel1.ForeColor = System.Drawing.Color.Black;
             customLabel1.Location = new System.Drawing.Point(15, 99);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(118, 16);
@@ -252,12 +252,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customTextBox1
             // 
-            customTextBox1.BackColor = System.Drawing.Color.White;
+            // customTextBox1.BackColor = System.Drawing.Color.White;
             customTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBox1.ErrorColor = System.Drawing.Color.Red;
             customTextBox1.ErrorMessage = null;
             customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1.ForeColor = System.Drawing.Color.Black;
+            // customTextBox1.ForeColor = System.Drawing.Color.Black;
             customTextBox1.Location = new System.Drawing.Point(15, 204);
             customTextBox1.Name = "customTextBox1";
             customTextBox1.Size = new System.Drawing.Size(187, 23);
@@ -266,9 +266,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.Black;
+            // customButton1.ForeColor = System.Drawing.Color.Black;
             customButton1.Location = new System.Drawing.Point(946, 76);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(187, 51);
@@ -279,12 +279,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customTextBox2
             // 
-            customTextBox2.BackColor = System.Drawing.Color.White;
+            // customTextBox2.BackColor = System.Drawing.Color.White;
             customTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBox2.ErrorColor = System.Drawing.Color.Red;
             customTextBox2.ErrorMessage = null;
             customTextBox2.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox2.ForeColor = System.Drawing.Color.Black;
+            // customTextBox2.ForeColor = System.Drawing.Color.Black;
             customTextBox2.Location = new System.Drawing.Point(946, 185);
             customTextBox2.Name = "customTextBox2";
             customTextBox2.Size = new System.Drawing.Size(191, 23);
@@ -293,9 +293,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.Black;
+            // customButton2.ForeColor = System.Drawing.Color.Black;
             customButton2.Location = new System.Drawing.Point(946, 133);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(187, 30);
@@ -307,7 +307,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.Black;
+            // customLabel2.ForeColor = System.Drawing.Color.Black;
             customLabel2.Location = new System.Drawing.Point(946, 57);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(95, 16);
@@ -316,9 +316,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButton3
             // 
-            customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            customButton3.ForeColor = System.Drawing.Color.Black;
+            // customButton3.ForeColor = System.Drawing.Color.Black;
             customButton3.Location = new System.Drawing.Point(686, 289);
             customButton3.Name = "customButton3";
             customButton3.Size = new System.Drawing.Size(187, 30);
@@ -329,12 +329,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customLayoutControl1
             // 
-            customLayoutControl1.BackColor = System.Drawing.Color.FromArgb(240, 220, 245);
+            // customLayoutControl1.BackColor = System.Drawing.Color.FromArgb(240, 220, 245);
             customLayoutControl1.Controls.Add(simpleButton1);
             customLayoutControl1.Controls.Add(checkEdit1);
             customLayoutControl1.Controls.Add(progressBarControl1);
             customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-            customLayoutControl1.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
+            // customLayoutControl1.ForeColor = System.Drawing.Color.FromArgb(90, 50, 120);
             customLayoutControl1.Location = new System.Drawing.Point(933, 234);
             customLayoutControl1.Name = "customLayoutControl1";
             customLayoutControl1.Root = Root;
@@ -434,9 +434,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridView1
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
+            // gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
             gridView1.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
+            // gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
             gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView1.Appearance.FocusedRow.Options.UseFont = true;

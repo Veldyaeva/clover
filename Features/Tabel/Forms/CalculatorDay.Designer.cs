@@ -150,9 +150,9 @@
             // 
             // btnC
             // 
-            btnC.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btnC.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btnC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btnC.ForeColor = System.Drawing.Color.Black;
+            // btnC.ForeColor = System.Drawing.Color.Black;
             btnC.Location = new System.Drawing.Point(148, 288);
             btnC.Name = "btnC";
             btnC.Size = new System.Drawing.Size(65, 40);
@@ -173,9 +173,9 @@
             // 
             // btn9
             // 
-            btn9.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn9.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn9.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn9.ForeColor = System.Drawing.Color.Black;
+            // btn9.ForeColor = System.Drawing.Color.Black;
             btn9.Location = new System.Drawing.Point(148, 244);
             btn9.Name = "btn9";
             btn9.Size = new System.Drawing.Size(65, 40);
@@ -186,9 +186,9 @@
             // 
             // btnPoint
             // 
-            btnPoint.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btnPoint.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btnPoint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btnPoint.ForeColor = System.Drawing.Color.Black;
+            // btnPoint.ForeColor = System.Drawing.Color.Black;
             btnPoint.Location = new System.Drawing.Point(80, 288);
             btnPoint.Name = "btnPoint";
             btnPoint.Size = new System.Drawing.Size(64, 40);
@@ -199,9 +199,9 @@
             // 
             // btn6
             // 
-            btn6.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn6.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn6.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn6.ForeColor = System.Drawing.Color.Black;
+            // btn6.ForeColor = System.Drawing.Color.Black;
             btn6.Location = new System.Drawing.Point(148, 200);
             btn6.Name = "btn6";
             btn6.Size = new System.Drawing.Size(65, 40);
@@ -212,12 +212,12 @@
             // 
             // customTextBoxString
             // 
-            customTextBoxString.BackColor = System.Drawing.Color.White;
+            // customTextBoxString.BackColor = System.Drawing.Color.White;
             customTextBoxString.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxString.ErrorColor = System.Drawing.Color.Red;
             customTextBoxString.ErrorMessage = null;
             customTextBoxString.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxString.ForeColor = System.Drawing.Color.Black;
+            // customTextBoxString.ForeColor = System.Drawing.Color.Black;
             customTextBoxString.Location = new System.Drawing.Point(148, 132);
             customTextBoxString.Name = "customTextBoxString";
             customTextBoxString.ReadOnly = true;
@@ -227,9 +227,9 @@
             // 
             // btn3
             // 
-            btn3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn3.ForeColor = System.Drawing.Color.Black;
+            // btn3.ForeColor = System.Drawing.Color.Black;
             btn3.Location = new System.Drawing.Point(148, 156);
             btn3.Name = "btn3";
             btn3.Size = new System.Drawing.Size(65, 40);
@@ -240,9 +240,9 @@
             // 
             // btn0
             // 
-            btn0.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn0.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn0.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn0.ForeColor = System.Drawing.Color.Black;
+            // btn0.ForeColor = System.Drawing.Color.Black;
             btn0.Location = new System.Drawing.Point(12, 288);
             btn0.Name = "btn0";
             btn0.Size = new System.Drawing.Size(64, 40);
@@ -253,9 +253,9 @@
             // 
             // btn8
             // 
-            btn8.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn8.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn8.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn8.ForeColor = System.Drawing.Color.Black;
+            // btn8.ForeColor = System.Drawing.Color.Black;
             btn8.Location = new System.Drawing.Point(80, 244);
             btn8.Name = "btn8";
             btn8.Size = new System.Drawing.Size(64, 40);
@@ -266,12 +266,12 @@
             // 
             // customTextBoxValueDigit
             // 
-            customTextBoxValueDigit.BackColor = System.Drawing.Color.White;
+            // customTextBoxValueDigit.BackColor = System.Drawing.Color.White;
             customTextBoxValueDigit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxValueDigit.ErrorColor = System.Drawing.Color.Red;
             customTextBoxValueDigit.ErrorMessage = null;
             customTextBoxValueDigit.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxValueDigit.ForeColor = System.Drawing.Color.Black;
+            // customTextBoxValueDigit.ForeColor = System.Drawing.Color.Black;
             customTextBoxValueDigit.Location = new System.Drawing.Point(80, 132);
             customTextBoxValueDigit.Name = "customTextBoxValueDigit";
             customTextBoxValueDigit.ReadOnly = true;
@@ -281,9 +281,9 @@
             // 
             // btn5
             // 
-            btn5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn5.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn5.ForeColor = System.Drawing.Color.Black;
+            // btn5.ForeColor = System.Drawing.Color.Black;
             btn5.Location = new System.Drawing.Point(80, 200);
             btn5.Name = "btn5";
             btn5.Size = new System.Drawing.Size(64, 40);
@@ -294,9 +294,9 @@
             // 
             // btn7
             // 
-            btn7.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn7.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn7.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn7.ForeColor = System.Drawing.Color.Black;
+            // btn7.ForeColor = System.Drawing.Color.Black;
             btn7.Location = new System.Drawing.Point(12, 244);
             btn7.Name = "btn7";
             btn7.Size = new System.Drawing.Size(64, 40);
@@ -307,9 +307,9 @@
             // 
             // btn2
             // 
-            btn2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn2.ForeColor = System.Drawing.Color.Black;
+            // btn2.ForeColor = System.Drawing.Color.Black;
             btn2.Location = new System.Drawing.Point(80, 156);
             btn2.Name = "btn2";
             btn2.Size = new System.Drawing.Size(64, 40);
@@ -320,12 +320,12 @@
             // 
             // customTextBoxValue
             // 
-            customTextBoxValue.BackColor = System.Drawing.Color.White;
+            // customTextBoxValue.BackColor = System.Drawing.Color.White;
             customTextBoxValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxValue.ErrorColor = System.Drawing.Color.Red;
             customTextBoxValue.ErrorMessage = null;
             customTextBoxValue.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxValue.ForeColor = System.Drawing.Color.Black;
+            // customTextBoxValue.ForeColor = System.Drawing.Color.Black;
             customTextBoxValue.Location = new System.Drawing.Point(12, 132);
             customTextBoxValue.Name = "customTextBoxValue";
             customTextBoxValue.ReadOnly = true;
@@ -334,12 +334,12 @@
             // 
             // customTextBoxDd
             // 
-            customTextBoxDd.BackColor = System.Drawing.Color.White;
+            // customTextBoxDd.BackColor = System.Drawing.Color.White;
             customTextBoxDd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxDd.ErrorColor = System.Drawing.Color.Red;
             customTextBoxDd.ErrorMessage = null;
             customTextBoxDd.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxDd.ForeColor = System.Drawing.Color.Black;
+            // customTextBoxDd.ForeColor = System.Drawing.Color.Black;
             customTextBoxDd.Location = new System.Drawing.Point(217, 12);
             customTextBoxDd.Name = "customTextBoxDd";
             customTextBoxDd.Size = new System.Drawing.Size(64, 20);
@@ -348,9 +348,9 @@
             // 
             // customSimpleButton1
             // 
-            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
+            // customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
             customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
             customSimpleButton1.Appearance.Options.UseForeColor = true;
@@ -368,9 +368,9 @@
             // 
             // btn4
             // 
-            btn4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn4.ForeColor = System.Drawing.Color.Black;
+            // btn4.ForeColor = System.Drawing.Color.Black;
             btn4.Location = new System.Drawing.Point(12, 200);
             btn4.Name = "btn4";
             btn4.Size = new System.Drawing.Size(64, 40);
@@ -381,9 +381,9 @@
             // 
             // customSimpleButton2
             // 
-            customSimpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customSimpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customSimpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton2.Appearance.ForeColor = System.Drawing.Color.Black;
+            // customSimpleButton2.Appearance.ForeColor = System.Drawing.Color.Black;
             customSimpleButton2.Appearance.Options.UseBackColor = true;
             customSimpleButton2.Appearance.Options.UseFont = true;
             customSimpleButton2.Appearance.Options.UseForeColor = true;
@@ -413,9 +413,9 @@
             // 
             // btn1
             // 
-            btn1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // btn1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            btn1.ForeColor = System.Drawing.Color.Black;
+            // btn1.ForeColor = System.Drawing.Color.Black;
             btn1.Location = new System.Drawing.Point(12, 156);
             btn1.Name = "btn1";
             btn1.Size = new System.Drawing.Size(64, 40);
@@ -617,7 +617,7 @@
             // 
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.Black;
+            // customLabel1.ForeColor = System.Drawing.Color.Black;
             customLabel1.Location = new System.Drawing.Point(12, 266);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(0, 16);

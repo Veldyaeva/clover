@@ -48,7 +48,7 @@ namespace SewingProduction.form.TeamWork.Forms
 
             _dbService = new DbService(new DatabaseHelper());
             _artNormService = new ArtNormRepository(new DatabaseHelper());
-            ThemeManager.UpdateTheme(this);
+            //ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();
             _gridHelper.LoadGridViewSettings(gridView1, "NormRaskrGrid.xml");
@@ -181,7 +181,8 @@ namespace SewingProduction.form.TeamWork.Forms
         }
         private void HighlightBand(GridBand band)
         {
-            var color = ThemeManager.ActiveTheme.BandHighlightColor;
+            // Используем системный цвет подсветки вместо кастомной темы
+            var color = SystemColors.Highlight;
             band.AppearanceHeader.BackColor = color;
             foreach (GridBand child in band.Children)
                 child.AppearanceHeader.BackColor = color;

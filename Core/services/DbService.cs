@@ -1,17 +1,18 @@
+using Dapper;
+using DevExpress.Mvvm.Native;
+using SewingProduction.Core.Models;
+using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
-using System.Diagnostics;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
 
 namespace SewingProduction.Services
 {
@@ -185,7 +186,44 @@ namespace SewingProduction.Services
                 throw; // Пробрасываем исключение, чтобы вызывающий код мог его обработать
             }
         }
+        /// <summary>
+        /// выполняет хранимую процедуру с возвратом статуса выполнения
+        /// принимает имя процедуры и параметры вида 
+        /// var p = new DynamicParameters();
+        ///         p.Add("@kodd", kodd);
+        ///         p.Add("@userId", userId);
+        ///         p.Add("@dateFrom", from);
+        ///         p.Add("@dateTo", to);
+        ///пример OUTPUT (если вдруг понадобится)
+        ///p.Add("@outId", dbType: DbType.Int32, direction: ParameterDirection.Output);
+        /// </summary>
+        /// <param name="procName"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public async Task<SpResult> ExecuteSpWithStatusAsync(string procName, DynamicParameters parameters)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var res = await connection.QuerySingleAsync<SpResult>(
+                        procName,
+                        parameters,
+                        commandType: CommandType.StoredProcedure);
+                    
+                    if (res is null) throw new Exception($"Хранимая процедура {procName} не вернула результат.");
 
+                    return res;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при выполнении хранимой процедуры {procName}");
+                
+                throw;
+            }
+        }
         /// <summary>
         /// Вставляет данные в таблицу
         /// </summary>
@@ -378,9 +416,7 @@ namespace SewingProduction.Services
             }
         }
 
-
-
-
+        
         /*public async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, List<int> deletedIds)
     where T : class, INewable, new()
         {

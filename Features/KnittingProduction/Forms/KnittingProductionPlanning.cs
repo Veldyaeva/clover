@@ -85,7 +85,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 			MenuStrip mainMenu = mainForm.MainMenuStrip;
 			_formManager = new FormManager(mainForm, mainMenu, _user);
 
-			ThemeManager.UpdateTheme(this);
+			//ThemeManager.UpdateTheme(this);
 		}
 
 		private async Task InitializeBindingsAsync()

@@ -92,9 +92,9 @@
             // 
             // gridViewPodr
             // 
-            gridViewPodr.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPodr.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPodr.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewPodr.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPodr.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPodr.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             gridViewPodr.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPodr.Appearance.FocusedRow.Options.UseFont = true;
@@ -198,9 +198,9 @@
             // 
             // gridViewUser
             // 
-            gridViewUser.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewUser.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewUser.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewUser.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewUser.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewUser.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             gridViewUser.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewUser.Appearance.FocusedRow.Options.UseFont = true;

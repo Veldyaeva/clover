@@ -169,9 +169,9 @@
             textBoxExecMonth.Location = new System.Drawing.Point(209, 128);
             textBoxExecMonth.Name = "textBoxExecMonth";
             textBoxExecMonth.ObjectName = null;
-            textBoxExecMonth.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
+            textBoxExecMonth.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             textBoxExecMonth.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            textBoxExecMonth.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
+            textBoxExecMonth.Properties.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
             textBoxExecMonth.Properties.Appearance.Options.UseBackColor = true;
             textBoxExecMonth.Properties.Appearance.Options.UseFont = true;
             textBoxExecMonth.Properties.Appearance.Options.UseForeColor = true;
@@ -183,12 +183,8 @@
             // 
             // customSimpleButton2
             // 
-            customSimpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton2.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton2.Appearance.Options.UseBackColor = true;
             customSimpleButton2.Appearance.Options.UseFont = true;
-            customSimpleButton2.Appearance.Options.UseForeColor = true;
             customSimpleButton2.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton2.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
@@ -203,12 +199,8 @@
             // 
             // customSimpleButton1
             // 
-            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Appearance.Options.UseForeColor = true;
             customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
@@ -235,7 +227,6 @@
             // customLabel7
             // 
             customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel7.Location = new System.Drawing.Point(209, 50);
             customLabel7.Name = "customLabel7";
             customLabel7.Size = new System.Drawing.Size(30, 22);
@@ -245,7 +236,6 @@
             // customLabel6
             // 
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel6.Location = new System.Drawing.Point(209, 24);
             customLabel6.Name = "customLabel6";
             customLabel6.Size = new System.Drawing.Size(30, 22);
@@ -266,7 +256,6 @@
             // customLabel5
             // 
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel5.Location = new System.Drawing.Point(48, 24);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new System.Drawing.Size(157, 22);
@@ -279,7 +268,6 @@
             checkBoxKnitPeriod.Checked = true;
             checkBoxKnitPeriod.CheckState = System.Windows.Forms.CheckState.Checked;
             checkBoxKnitPeriod.Font = new System.Drawing.Font("Arial", 10F);
-            checkBoxKnitPeriod.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             checkBoxKnitPeriod.Location = new System.Drawing.Point(24, 24);
             checkBoxKnitPeriod.Name = "checkBoxKnitPeriod";
             checkBoxKnitPeriod.Size = new System.Drawing.Size(20, 20);
@@ -288,12 +276,8 @@
             // 
             // buttonArticulClear
             // 
-            buttonArticulClear.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             buttonArticulClear.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            buttonArticulClear.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            buttonArticulClear.Appearance.Options.UseBackColor = true;
             buttonArticulClear.Appearance.Options.UseFont = true;
-            buttonArticulClear.Appearance.Options.UseForeColor = true;
             buttonArticulClear.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             buttonArticulClear.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonArticulClear.AppearanceDisabled.Options.UseBackColor = true;
@@ -308,12 +292,8 @@
             // 
             // buttonExecMonthClear
             // 
-            buttonExecMonthClear.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             buttonExecMonthClear.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            buttonExecMonthClear.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            buttonExecMonthClear.Appearance.Options.UseBackColor = true;
             buttonExecMonthClear.Appearance.Options.UseFont = true;
-            buttonExecMonthClear.Appearance.Options.UseForeColor = true;
             buttonExecMonthClear.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             buttonExecMonthClear.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonExecMonthClear.AppearanceDisabled.Options.UseBackColor = true;
@@ -328,12 +308,8 @@
             // 
             // buttonKmlInvNumberClear
             // 
-            buttonKmlInvNumberClear.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             buttonKmlInvNumberClear.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            buttonKmlInvNumberClear.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            buttonKmlInvNumberClear.Appearance.Options.UseBackColor = true;
             buttonKmlInvNumberClear.Appearance.Options.UseFont = true;
-            buttonKmlInvNumberClear.Appearance.Options.UseForeColor = true;
             buttonKmlInvNumberClear.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             buttonKmlInvNumberClear.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonKmlInvNumberClear.AppearanceDisabled.Options.UseBackColor = true;
@@ -348,12 +324,8 @@
             // 
             // buttonKnitClassClear
             // 
-            buttonKnitClassClear.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             buttonKnitClassClear.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            buttonKnitClassClear.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            buttonKnitClassClear.Appearance.Options.UseBackColor = true;
             buttonKnitClassClear.Appearance.Options.UseFont = true;
-            buttonKnitClassClear.Appearance.Options.UseForeColor = true;
             buttonKnitClassClear.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             buttonKnitClassClear.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonKnitClassClear.AppearanceDisabled.Options.UseBackColor = true;
@@ -368,12 +340,8 @@
             // 
             // buttonPrintReport
             // 
-            buttonPrintReport.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             buttonPrintReport.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            buttonPrintReport.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            buttonPrintReport.Appearance.Options.UseBackColor = true;
             buttonPrintReport.Appearance.Options.UseFont = true;
-            buttonPrintReport.Appearance.Options.UseForeColor = true;
             buttonPrintReport.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             buttonPrintReport.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             buttonPrintReport.AppearanceDisabled.Options.UseBackColor = true;
@@ -389,10 +357,8 @@
             // 
             // comboBoxArticul
             // 
-            comboBoxArticul.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             comboBoxArticul.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxArticul.Font = new System.Drawing.Font("Arial", 10F);
-            comboBoxArticul.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxArticul.FormattingEnabled = true;
             comboBoxArticul.Location = new System.Drawing.Point(209, 154);
             comboBoxArticul.Name = "comboBoxArticul";
@@ -404,7 +370,6 @@
             // 
             checkBoxArticul.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxArticul.Font = new System.Drawing.Font("Arial", 10F);
-            checkBoxArticul.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             checkBoxArticul.Location = new System.Drawing.Point(24, 154);
             checkBoxArticul.Name = "checkBoxArticul";
             checkBoxArticul.Size = new System.Drawing.Size(20, 22);
@@ -415,7 +380,6 @@
             // 
             checkBoxExecMonth.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxExecMonth.Font = new System.Drawing.Font("Arial", 10F);
-            checkBoxExecMonth.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             checkBoxExecMonth.Location = new System.Drawing.Point(24, 128);
             checkBoxExecMonth.Name = "checkBoxExecMonth";
             checkBoxExecMonth.Size = new System.Drawing.Size(20, 22);
@@ -426,7 +390,6 @@
             // 
             checkBoxKmlInvNumber.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxKmlInvNumber.Font = new System.Drawing.Font("Arial", 10F);
-            checkBoxKmlInvNumber.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             checkBoxKmlInvNumber.Location = new System.Drawing.Point(24, 102);
             checkBoxKmlInvNumber.Name = "checkBoxKmlInvNumber";
             checkBoxKmlInvNumber.Size = new System.Drawing.Size(20, 22);
@@ -437,7 +400,6 @@
             // 
             checkBoxKnitClass.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             checkBoxKnitClass.Font = new System.Drawing.Font("Arial", 10F);
-            checkBoxKnitClass.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             checkBoxKnitClass.Location = new System.Drawing.Point(24, 76);
             checkBoxKnitClass.Name = "checkBoxKnitClass";
             checkBoxKnitClass.Size = new System.Drawing.Size(20, 22);
@@ -447,7 +409,6 @@
             // customLabel4
             // 
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel4.Location = new System.Drawing.Point(48, 154);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(157, 21);
@@ -456,10 +417,8 @@
             // 
             // comboBoxExecMonth
             // 
-            comboBoxExecMonth.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             comboBoxExecMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxExecMonth.Font = new System.Drawing.Font("Arial", 10F);
-            comboBoxExecMonth.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxExecMonth.FormattingEnabled = true;
             comboBoxExecMonth.Location = new System.Drawing.Point(344, 128);
             comboBoxExecMonth.Name = "comboBoxExecMonth";
@@ -470,7 +429,6 @@
             // customLabel3
             // 
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel3.Location = new System.Drawing.Point(48, 128);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(157, 21);
@@ -480,7 +438,6 @@
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel2.Location = new System.Drawing.Point(48, 102);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(157, 21);
@@ -489,10 +446,8 @@
             // 
             // comboBoxKmlInvNumber
             // 
-            comboBoxKmlInvNumber.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             comboBoxKmlInvNumber.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxKmlInvNumber.Font = new System.Drawing.Font("Arial", 10F);
-            comboBoxKmlInvNumber.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxKmlInvNumber.FormattingEnabled = true;
             comboBoxKmlInvNumber.Location = new System.Drawing.Point(209, 102);
             comboBoxKmlInvNumber.Name = "comboBoxKmlInvNumber";
@@ -503,7 +458,6 @@
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel1.Location = new System.Drawing.Point(48, 76);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(157, 21);
@@ -512,10 +466,8 @@
             // 
             // comboBoxKnitClass
             // 
-            comboBoxKnitClass.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             comboBoxKnitClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxKnitClass.Font = new System.Drawing.Font("Arial", 10F);
-            comboBoxKnitClass.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
             comboBoxKnitClass.FormattingEnabled = true;
             comboBoxKnitClass.Location = new System.Drawing.Point(209, 76);
             comboBoxKnitClass.Name = "comboBoxKnitClass";
@@ -856,8 +808,6 @@
         }
 
         #endregion
-
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private CustomComboBox comboBoxKnitClass;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
@@ -915,5 +865,6 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
         private CustomTextBoxEx textBoxExecMonth;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem26;
+        private Core.Class.CustomLayoutControl layoutControl1;
     }
 }

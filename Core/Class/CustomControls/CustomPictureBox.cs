@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -22,25 +22,18 @@ namespace SewingProduction.Core.Class
         public CustomPictureBox()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = SystemColors.ControlText;
+            BackColor = SystemColors.Control;
             Font = ThemeManager.SharedSettings.DefaultFont;
             ApplyFontSizePermission(); // перекрыть размер, если задан
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
 

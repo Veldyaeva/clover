@@ -90,12 +90,8 @@
             // 
             // customSimpleButton8
             // 
-            customSimpleButton8.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton8.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton8.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton8.Appearance.Options.UseBackColor = true;
             customSimpleButton8.Appearance.Options.UseFont = true;
-            customSimpleButton8.Appearance.Options.UseForeColor = true;
             customSimpleButton8.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton8.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton8.AppearanceDisabled.Options.UseBackColor = true;
@@ -109,12 +105,8 @@
             // 
             // customSimpleButton7
             // 
-            customSimpleButton7.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton7.Appearance.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            customSimpleButton7.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton7.Appearance.Options.UseBackColor = true;
             customSimpleButton7.Appearance.Options.UseFont = true;
-            customSimpleButton7.Appearance.Options.UseForeColor = true;
             customSimpleButton7.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton7.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton7.AppearanceDisabled.Options.UseBackColor = true;
@@ -129,12 +121,8 @@
             // 
             // customSimpleButton6
             // 
-            customSimpleButton6.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton6.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton6.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton6.Appearance.Options.UseBackColor = true;
             customSimpleButton6.Appearance.Options.UseFont = true;
-            customSimpleButton6.Appearance.Options.UseForeColor = true;
             customSimpleButton6.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton6.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton6.AppearanceDisabled.Options.UseBackColor = true;
@@ -148,12 +136,8 @@
             // 
             // customSimpleButton5
             // 
-            customSimpleButton5.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton5.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton5.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton5.Appearance.Options.UseBackColor = true;
             customSimpleButton5.Appearance.Options.UseFont = true;
-            customSimpleButton5.Appearance.Options.UseForeColor = true;
             customSimpleButton5.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton5.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton5.AppearanceDisabled.Options.UseBackColor = true;
@@ -167,12 +151,8 @@
             // 
             // customSimpleButton4
             // 
-            customSimpleButton4.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton4.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton4.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton4.Appearance.Options.UseBackColor = true;
             customSimpleButton4.Appearance.Options.UseFont = true;
-            customSimpleButton4.Appearance.Options.UseForeColor = true;
             customSimpleButton4.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton4.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton4.AppearanceDisabled.Options.UseBackColor = true;
@@ -186,12 +166,8 @@
             // 
             // customSimpleButton3
             // 
-            customSimpleButton3.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton3.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton3.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton3.Appearance.Options.UseBackColor = true;
             customSimpleButton3.Appearance.Options.UseFont = true;
-            customSimpleButton3.Appearance.Options.UseForeColor = true;
             customSimpleButton3.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton3.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton3.AppearanceDisabled.Options.UseBackColor = true;
@@ -205,12 +181,8 @@
             // 
             // customSimpleButton2
             // 
-            customSimpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton2.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton2.Appearance.Options.UseBackColor = true;
             customSimpleButton2.Appearance.Options.UseFont = true;
-            customSimpleButton2.Appearance.Options.UseForeColor = true;
             customSimpleButton2.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton2.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
@@ -224,12 +196,8 @@
             // 
             // customSimpleButton1
             // 
-            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
-            customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Appearance.Options.UseForeColor = true;
             customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
@@ -396,8 +364,6 @@
         }
 
         #endregion
-
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private Core.Class.CustomSimpleButton customSimpleButton3;
         private Core.Class.CustomSimpleButton customSimpleButton2;
         private Core.Class.CustomSimpleButton customSimpleButton1;
@@ -420,5 +386,6 @@
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator3;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private Core.Class.CustomLayoutControl layoutControl1;
     }
 }

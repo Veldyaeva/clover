@@ -110,10 +110,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonOpen
             // 
-            customButtonOpen.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // customButtonOpen.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             customButtonOpen.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonOpen.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            // customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customButtonOpen.Location = new System.Drawing.Point(1123, 3);
             customButtonOpen.Name = "customButtonOpen";
             customButtonOpen.Size = new System.Drawing.Size(138, 35);
@@ -138,7 +138,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewColumn
             // 
-            gridViewColumn.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewColumn.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewColumn.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewColumn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_acn, id_atn, ordinal_position, name, name_rus, data_type, Readonly, default_value });
             gridViewColumn.GridControl = customGridControlColumn;
@@ -237,7 +237,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewTable
             // 
-            gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewTable.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewTable.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IdAtn, TableName, TableNameRus });
             gridViewTable.GridControl = customGridControlTable;
@@ -276,10 +276,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAddTable
             // 
-            customButtonAddTable.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // customButtonAddTable.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             customButtonAddTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddTable.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            // customButtonAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customButtonAddTable.Location = new System.Drawing.Point(1123, 126);
             customButtonAddTable.Name = "customButtonAddTable";
             customButtonAddTable.Size = new System.Drawing.Size(138, 35);
@@ -290,10 +290,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customTextBoxAddTable
             // 
-            customTextBoxAddTable.BackColor = System.Drawing.Color.FromArgb(220, 240, 250);
+            // customTextBoxAddTable.BackColor = System.Drawing.Color.FromArgb(220, 240, 250);
             customTextBoxAddTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxAddTable.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxAddTable.ForeColor = System.Drawing.Color.FromArgb(25, 75, 105);
+            // customTextBoxAddTable.ForeColor = System.Drawing.Color.FromArgb(25, 75, 105);
             customTextBoxAddTable.Location = new System.Drawing.Point(1123, 85);
             customTextBoxAddTable.Name = "customTextBoxAddTable";
             customTextBoxAddTable.Size = new System.Drawing.Size(138, 23);
@@ -304,7 +304,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customLabelAddTable.AutoSize = true;
             customLabelAddTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             customLabelAddTable.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            // customLabelAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customLabelAddTable.Location = new System.Drawing.Point(1123, 50);
             customLabelAddTable.Name = "customLabelAddTable";
             customLabelAddTable.Size = new System.Drawing.Size(138, 32);
@@ -313,10 +313,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonDeleteTable
             // 
-            customButtonDeleteTable.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // customButtonDeleteTable.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             customButtonDeleteTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteTable.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDeleteTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            // customButtonDeleteTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customButtonDeleteTable.Location = new System.Drawing.Point(1123, 167);
             customButtonDeleteTable.Name = "customButtonDeleteTable";
             customButtonDeleteTable.Size = new System.Drawing.Size(138, 35);
@@ -327,10 +327,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonDeleteColumn
             // 
-            customButtonDeleteColumn.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // customButtonDeleteColumn.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             customButtonDeleteColumn.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteColumn.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDeleteColumn.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            // customButtonDeleteColumn.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customButtonDeleteColumn.Location = new System.Drawing.Point(1123, 618);
             customButtonDeleteColumn.Name = "customButtonDeleteColumn";
             customButtonDeleteColumn.Size = new System.Drawing.Size(138, 41);
@@ -341,10 +341,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAddButton
             // 
-            customButtonAddButton.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // customButtonAddButton.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             customButtonAddButton.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddButton.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAddButton.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            // customButtonAddButton.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customButtonAddButton.Location = new System.Drawing.Point(1123, 331);
             customButtonAddButton.Name = "customButtonAddButton";
             customButtonAddButton.Size = new System.Drawing.Size(138, 35);
