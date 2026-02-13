@@ -92,10 +92,10 @@
             // gridViewRasNomList
             // 
             // gridViewRasNomList.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
-            gridViewRasNomList.Appearance.EvenRow.Options.UseBackColor = true;
+            //gridViewRasNomList.Appearance.EvenRow.Options.UseBackColor = true;
             // gridViewRasNomList.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewRasNomList.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridViewRasNomList.Appearance.FocusedRow.Options.UseBackColor = true;
+            //gridViewRasNomList.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRasNomList.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRasNomList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridRasNomListColumnNomZad, gridRasNomListColumnNomPach, gridRasNomListColumnDataR, gridRasNomListColumnMinPach, gridRasNomListColumnMaxPach, gridRasNomListColumnMgZakr, gridRasNomListColumnKod7, gridRasNomListColumnGrupPach, gridRasNomListColumnArticulPach, gridRasNomListColumnModPach, gridRasNomListColumnYearPach, gridRasNomListColumnProizvType, gridRasNomListColumnDostZeh, gridRasNomListColumnIDBrig });
             gridViewRasNomList.GridControl = gridControlRasNomList;

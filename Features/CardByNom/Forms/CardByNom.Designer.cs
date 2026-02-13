@@ -1418,7 +1418,6 @@ namespace SewingProduction
             searchLookUpEditArticul.Location = new Point(1231, 6);
             searchLookUpEditArticul.Name = "searchLookUpEditArticul";
             searchLookUpEditArticul.Properties.Appearance.Font = new Font("Arial", 10F);
-            searchLookUpEditArticul.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             searchLookUpEditArticul.Properties.Appearance.Options.UseFont = true;
             searchLookUpEditArticul.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo), new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Search) });
             searchLookUpEditArticul.Properties.PopupView = customSearchLookUpEdit1View;
@@ -4120,7 +4119,6 @@ namespace SewingProduction
             mtbRzuVidStir.Name = "mtbRzuVidStir";
             mtbRzuVidStir.ObjectName = null;
             mtbRzuVidStir.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuVidStir.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuVidStir.Properties.Appearance.Options.UseFont = true;
             mtbRzuVidStir.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuVidStir.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4134,7 +4132,6 @@ namespace SewingProduction
             mtbRzuDataStCd.Name = "mtbRzuDataStCd";
             mtbRzuDataStCd.ObjectName = null;
             mtbRzuDataStCd.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataStCd.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataStCd.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataStCd.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataStCd.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4148,7 +4145,6 @@ namespace SewingProduction
             mtbRzuDataStR.Name = "mtbRzuDataStR";
             mtbRzuDataStR.ObjectName = null;
             mtbRzuDataStR.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataStR.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataStR.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataStR.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataStR.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4162,7 +4158,6 @@ namespace SewingProduction
             mtbRzuDataStP.Name = "mtbRzuDataStP";
             mtbRzuDataStP.ObjectName = null;
             mtbRzuDataStP.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataStP.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataStP.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataStP.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataStP.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4176,7 +4171,6 @@ namespace SewingProduction
             mtbRzuDataVCd.Name = "mtbRzuDataVCd";
             mtbRzuDataVCd.ObjectName = null;
             mtbRzuDataVCd.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataVCd.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataVCd.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataVCd.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataVCd.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4220,7 +4214,6 @@ namespace SewingProduction
             mtbRzuDataVChi.Name = "mtbRzuDataVChi";
             mtbRzuDataVChi.ObjectName = null;
             mtbRzuDataVChi.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataVChi.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataVChi.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataVChi.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataVChi.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4252,7 +4245,6 @@ namespace SewingProduction
             mtbRzuDataVR.Name = "mtbRzuDataVR";
             mtbRzuDataVR.ObjectName = null;
             mtbRzuDataVR.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataVR.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataVR.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataVR.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataVR.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4266,7 +4258,6 @@ namespace SewingProduction
             mtbRzuDataVP.Name = "mtbRzuDataVP";
             mtbRzuDataVP.ObjectName = null;
             mtbRzuDataVP.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataVP.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataVP.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataVP.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataVP.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4298,7 +4289,6 @@ namespace SewingProduction
             mtbRzuDataRasv.Name = "mtbRzuDataRasv";
             mtbRzuDataRasv.ObjectName = null;
             mtbRzuDataRasv.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataRasv.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataRasv.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataRasv.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataRasv.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4342,7 +4332,6 @@ namespace SewingProduction
             mtbRzuDataPrCd.Name = "mtbRzuDataPrCd";
             mtbRzuDataPrCd.ObjectName = null;
             mtbRzuDataPrCd.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataPrCd.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataPrCd.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataPrCd.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrCd.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4356,7 +4345,6 @@ namespace SewingProduction
             mtbRzuDataPrKm.Name = "mtbRzuDataPrKm";
             mtbRzuDataPrKm.ObjectName = null;
             mtbRzuDataPrKm.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataPrKm.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataPrKm.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataPrKm.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrKm.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4370,7 +4358,6 @@ namespace SewingProduction
             mtbRzuDataPrPe.Name = "mtbRzuDataPrPe";
             mtbRzuDataPrPe.ObjectName = null;
             mtbRzuDataPrPe.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataPrPe.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataPrPe.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataPrPe.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrPe.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4384,7 +4371,6 @@ namespace SewingProduction
             mtbRzuDataPrR.Name = "mtbRzuDataPrR";
             mtbRzuDataPrR.ObjectName = null;
             mtbRzuDataPrR.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataPrR.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataPrR.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataPrR.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrR.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4398,7 +4384,6 @@ namespace SewingProduction
             mtbRzuDataPrP.Name = "mtbRzuDataPrP";
             mtbRzuDataPrP.ObjectName = null;
             mtbRzuDataPrP.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataPrP.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataPrP.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataPrP.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataPrP.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -4412,7 +4397,6 @@ namespace SewingProduction
             mtbRzuDataRasp.Name = "mtbRzuDataRasp";
             mtbRzuDataRasp.ObjectName = null;
             mtbRzuDataRasp.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataRasp.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataRasp.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataRasp.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataRasp.Properties.MaskSettings.Set("MaskManagerSignature", "allowNull=False");
@@ -5239,7 +5223,6 @@ namespace SewingProduction
             textBoxDataZa.Name = "textBoxDataZa";
             textBoxDataZa.ObjectName = null;
             textBoxDataZa.Properties.Appearance.Font = new Font("Arial", 10F);
-            textBoxDataZa.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             textBoxDataZa.Properties.Appearance.Options.UseFont = true;
             textBoxDataZa.Size = new Size(76, 22);
             textBoxDataZa.StyleController = layoutControl4;
@@ -5266,7 +5249,6 @@ namespace SewingProduction
             mtbRzuData1С.Name = "mtbRzuData1С";
             mtbRzuData1С.ObjectName = null;
             mtbRzuData1С.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuData1С.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuData1С.Properties.Appearance.Options.UseFont = true;
             mtbRzuData1С.Size = new Size(83, 22);
             mtbRzuData1С.StyleController = layoutControl4;
@@ -5278,7 +5260,6 @@ namespace SewingProduction
             mtbRzuDataCd.Name = "mtbRzuDataCd";
             mtbRzuDataCd.ObjectName = null;
             mtbRzuDataCd.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataCd.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataCd.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataCd.Size = new Size(76, 22);
             mtbRzuDataCd.StyleController = layoutControl4;
@@ -5290,7 +5271,6 @@ namespace SewingProduction
             mtbRzuDataUp.Name = "mtbRzuDataUp";
             mtbRzuDataUp.ObjectName = null;
             mtbRzuDataUp.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataUp.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataUp.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataUp.Size = new Size(75, 22);
             mtbRzuDataUp.StyleController = layoutControl4;
@@ -5302,7 +5282,6 @@ namespace SewingProduction
             mtbRzuDataRab.Name = "mtbRzuDataRab";
             mtbRzuDataRab.ObjectName = null;
             mtbRzuDataRab.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataRab.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataRab.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataRab.Size = new Size(76, 22);
             mtbRzuDataRab.StyleController = layoutControl4;
@@ -5314,7 +5293,6 @@ namespace SewingProduction
             mtbRzuDataZeh.Name = "mtbRzuDataZeh";
             mtbRzuDataZeh.ObjectName = null;
             mtbRzuDataZeh.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataZeh.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataZeh.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataZeh.Size = new Size(75, 22);
             mtbRzuDataZeh.StyleController = layoutControl4;
@@ -5326,7 +5304,6 @@ namespace SewingProduction
             tbPszRpcNom.Name = "tbPszRpcNom";
             tbPszRpcNom.ObjectName = null;
             tbPszRpcNom.Properties.Appearance.Font = new Font("Arial", 10F);
-            tbPszRpcNom.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             tbPszRpcNom.Properties.Appearance.Options.UseFont = true;
             tbPszRpcNom.Size = new Size(75, 22);
             tbPszRpcNom.StyleController = layoutControl4;
@@ -5338,7 +5315,6 @@ namespace SewingProduction
             mtbRzuDataR.Name = "mtbRzuDataR";
             mtbRzuDataR.ObjectName = null;
             mtbRzuDataR.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataR.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataR.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataR.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataR.Size = new Size(75, 22);
@@ -5351,7 +5327,6 @@ namespace SewingProduction
             mtbRzuDataCdUt.Name = "mtbRzuDataCdUt";
             mtbRzuDataCdUt.ObjectName = null;
             mtbRzuDataCdUt.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbRzuDataCdUt.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbRzuDataCdUt.Properties.Appearance.Options.UseFont = true;
             mtbRzuDataCdUt.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbRzuDataCdUt.Size = new Size(75, 22);
@@ -5364,7 +5339,6 @@ namespace SewingProduction
             mtbPsaDataCdPlan.Name = "mtbPsaDataCdPlan";
             mtbPsaDataCdPlan.ObjectName = null;
             mtbPsaDataCdPlan.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbPsaDataCdPlan.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbPsaDataCdPlan.Properties.Appearance.Options.UseFont = true;
             mtbPsaDataCdPlan.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbPsaDataCdPlan.Size = new Size(76, 22);
@@ -5377,7 +5351,6 @@ namespace SewingProduction
             mtbPsaDataZap.Name = "mtbPsaDataZap";
             mtbPsaDataZap.ObjectName = null;
             mtbPsaDataZap.Properties.Appearance.Font = new Font("Arial", 10F);
-            mtbPsaDataZap.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             mtbPsaDataZap.Properties.Appearance.Options.UseFont = true;
             mtbPsaDataZap.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
             mtbPsaDataZap.Size = new Size(76, 22);
@@ -5976,7 +5949,6 @@ namespace SewingProduction
             TextBoxKolPlanZadany.Name = "TextBoxKolPlanZadany";
             TextBoxKolPlanZadany.ObjectName = null;
             TextBoxKolPlanZadany.Properties.Appearance.Font = new Font("Arial", 10F);
-            TextBoxKolPlanZadany.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             TextBoxKolPlanZadany.Properties.Appearance.Options.UseFont = true;
             TextBoxKolPlanZadany.Size = new Size(50, 22);
             TextBoxKolPlanZadany.StyleController = layoutControl2;
@@ -6078,7 +6050,6 @@ namespace SewingProduction
             TextBoxKnitTotalTime.ErrorColor = Color.Red;
             TextBoxKnitTotalTime.ErrorMessage = null;
             TextBoxKnitTotalTime.Font = new Font("Arial", 10F);
-            TextBoxKnitTotalTime.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             TextBoxKnitTotalTime.Location = new Point(693, 99);
             TextBoxKnitTotalTime.Name = "TextBoxKnitTotalTime";
             TextBoxKnitTotalTime.Size = new Size(293, 21);
@@ -6216,7 +6187,6 @@ namespace SewingProduction
             TextBoxKolFactSmen.Name = "TextBoxKolFactSmen";
             TextBoxKolFactSmen.ObjectName = null;
             TextBoxKolFactSmen.Properties.Appearance.Font = new Font("Arial", 10F);
-            TextBoxKolFactSmen.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             TextBoxKolFactSmen.Properties.Appearance.Options.UseFont = true;
             TextBoxKolFactSmen.Size = new Size(50, 22);
             TextBoxKolFactSmen.StyleController = layoutControl2;
@@ -7726,7 +7696,6 @@ namespace SewingProduction
             TextBoxRecomendZad.ErrorColor = Color.Red;
             TextBoxRecomendZad.ErrorMessage = null;
             TextBoxRecomendZad.Font = new Font("Arial", 10F);
-            TextBoxRecomendZad.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             TextBoxRecomendZad.Location = new Point(446, 146);
             TextBoxRecomendZad.Multiline = true;
             TextBoxRecomendZad.Name = "TextBoxRecomendZad";
@@ -7739,7 +7708,6 @@ namespace SewingProduction
             TextBoxRecomendNom.ErrorColor = Color.Red;
             TextBoxRecomendNom.ErrorMessage = null;
             TextBoxRecomendNom.Font = new Font("Arial", 10F);
-            TextBoxRecomendNom.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             TextBoxRecomendNom.Location = new Point(102, 148);
             TextBoxRecomendNom.Multiline = true;
             TextBoxRecomendNom.Name = "TextBoxRecomendNom";
@@ -7782,7 +7750,6 @@ namespace SewingProduction
             tbRzuMgZakr.Name = "tbRzuMgZakr";
             tbRzuMgZakr.ObjectName = null;
             tbRzuMgZakr.Properties.Appearance.Font = new Font("Arial", 10F);
-            tbRzuMgZakr.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             tbRzuMgZakr.Properties.Appearance.Options.UseFont = true;
             tbRzuMgZakr.Size = new Size(240, 22);
             tbRzuMgZakr.StyleController = layoutControl1;
@@ -9113,7 +9080,6 @@ namespace SewingProduction
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
             customTextBoxEx1.Properties.Appearance.Font = new Font("Arial", 10F);
-            customTextBoxEx1.Properties.Appearance.ForeColor = Color.FromArgb((int)(byte)50, (int)(byte)90, (int)(byte)160);
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
             customTextBoxEx1.Size = new Size(78, 20);
             customTextBoxEx1.StyleController = layoutControl4;
