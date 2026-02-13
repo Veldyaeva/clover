@@ -32,6 +32,7 @@ using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
+using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
@@ -184,7 +185,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             _vyazService = new VyazService(_dbHelper);
             _mlService = new MlService(_dbHelper);
-        //    ThemeManager.UpdateTheme(this);
+            //    ThemeManager.UpdateTheme(this);
 
             _smenZadanyVyazBindingSource = new BindingSource
             {
@@ -1213,7 +1214,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     await _logger.LogEventAsync($"Данные ZadanyListByMachine успешно загружены", "LoadZadanyListByMachineNewDataAsync");
                     _zadanyListByMachineNewBindingList.Add(zadanyListByMachineNewData[0]);
                     _zadanyListByMachineNewBindingSource.ResetBindings(false);
-                    
+
                     gridViewZadanyListByMachine.BeginSort();
                     gridViewZadanyListByMachine.ClearSorting();
                     //gridViewZadanyListByMachine.SortInfo.Add(new GridColumnSortInfo(gridViewPZVOperList.Columns["nom"], ColumnSortOrder.Ascending));
@@ -1737,11 +1738,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 try { gridViewRzvPachListByNom.PostEditor(); }
                 catch (SqlException ex)
                 {
-                   Debug.WriteLine(
-                        $"SQL ERROR 1 {ex.Number}: {ex.Message}\n" +
-                        $"Procedure: {ex.Procedure}\n" +
-                        $"Line: {ex.LineNumber}"
-                    );
+                    Debug.WriteLine(
+                         $"SQL ERROR 1 {ex.Number}: {ex.Message}\n" +
+                         $"Procedure: {ex.Procedure}\n" +
+                         $"Line: {ex.LineNumber}"
+                     );
                     throw;
                 }//catch { }
                 try { gridViewRzvPachListByNom.UpdateCurrentRow(); }
@@ -1754,7 +1755,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                      );
                     throw;
                 }//catch { }
-                
+
                 try { _rzvPachListByNomBindingSource.EndEdit(); }
                 catch (SqlException ex)
                 {
@@ -2411,7 +2412,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //{
             //    TryFocusPendingPszNom();
             //}));
-            
+
             gridControlRzvPachListByNom.BeginInvoke(new Action(() =>
             {
                 //if (_autoSelectPending)
@@ -3026,7 +3027,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 //SmenZadanyVyaz curr = _smenZadanyVyazBindingSource.Current as SmenZadanyVyaz;
-                SmenZadanyVyaz curr = advBandedGridViewSmenZadany.GetRow(advBandedGridViewSmenZadany.FocusedRowHandle) as SmenZadanyVyaz  ;
+                SmenZadanyVyaz curr = advBandedGridViewSmenZadany.GetRow(advBandedGridViewSmenZadany.FocusedRowHandle) as SmenZadanyVyaz;
                 if (curr == null || curr.kwsmlKmlID == null || curr.kwsmlKmlID == 0)
                 {
                     MessageBox.Show("Не выбрана машина для назначения");
@@ -3225,7 +3226,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                                     break;
                                 case DialogResult.Abort:
                                     return;
-                                    //break;
+                                //break;
                                 case DialogResult.Cancel:
                                     return;
                                     //break;
@@ -4191,22 +4192,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void layoutControlGroup1_CustomButtonChecked(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
-            switch (buttonIndex)
-            {
-                case 10:
-                    try
-                    {
-                        NaklReport report1 = new NaklReport();
-                        ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-                        reportPrintTool1.ShowPreviewDialog();
-                    }
-                    catch (Exception ex)
-                    {
-                        await _logger.LogErrorAsync(ex, $"Ошибка печати накладной");
-                    }
-                    break;
-            }
+
         }
 
         private async void gridViewPZVOperList_CellValueChanged(object sender, CellValueChangedEventArgs e)
@@ -4658,7 +4644,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                             record.SyncSelection = 0;
                             continue;
                         }
-                        if (!(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})") 
+                        if (!(CheckPZVShiftOpened(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")
                             && !CheckPZVShiftClosed(record.olPzvKwsID, $"нельзя отменить окончание выполнения (пачка {record.olNPach} операция {record.olNomOper} {record.olOperName.Trim()})")))
                         {
                             record.ErrorSelection = 1;
@@ -5034,7 +5020,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                       {
                           gridViewSmenZadany.FocusedRowHandle = _rowHandle + 1;
                       }
-                  }          ));  
+                  }));
             }
             catch (Exception ex)
             {
@@ -5190,18 +5176,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void layoutControlGroup7_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
-			try
+            try
             {
-            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+                int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
                 switch (buttonIndex)
-            {
-                case 0:
-                    gridViewPlanTotalHoursByKnitMachine.CollapseAllGroups();
-                    break;
-                case 2:
-                    gridViewPlanTotalHoursByKnitMachine.ExpandAllGroups();
-                    break;
-            }
+                {
+                    case 0:
+                        gridViewPlanTotalHoursByKnitMachine.CollapseAllGroups();
+                        break;
+                    case 2:
+                        gridViewPlanTotalHoursByKnitMachine.ExpandAllGroups();
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -5504,6 +5490,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (textBoxPzvNomZadSearch.Text.Length > 0)
             {
                 FindPzvNomZadInNzp();
+            }
+        }
+
+        private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            switch (buttonIndex)
+            {
+                case 0:
+                    MessageBox.Show("1");
+                    break;
+                case 10:
+                    try
+                    {
+                        PZVCurrentMachineAssignmentReport report1 = new PZVCurrentMachineAssignmentReport();
+                        ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                        reportPrintTool1.ShowPreviewDialog();
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, $"Ошибка печати накладной");
+                    }
+                    break;
             }
         }
     }
