@@ -200,8 +200,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
-                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
-                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
+                //advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
+                //advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
 
                 ConfigureAdvBandedGridColumns();
             }
@@ -251,8 +251,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
-                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
-                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
+                //advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
+                //advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
                 ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
@@ -1891,14 +1891,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             info.GroupText = originalText;
 
             Font baseFont = view.Appearance.GroupRow.Font ?? SystemFonts.DefaultFont;
-            float largeSize = baseFont.Size + 2f;
+            float largeSize = baseFont.Size;// + 1f;
             float smallSize = Math.Max(6f, baseFont.Size - 2f);
 
             FontStyle largeStyle = baseFont.Style | FontStyle.Bold;
             FontStyle smallStyle = baseFont.Style & ~FontStyle.Bold;
 
             Rectangle textBounds = info.Bounds;
-            int left = info.ButtonBounds.Right + 6;
+            int left = info.ButtonBounds.Right;// + 3;
             if (left > textBounds.Left)
                 textBounds = new Rectangle(left, textBounds.Top, Math.Max(0, textBounds.Right - left), textBounds.Height);
 

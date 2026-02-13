@@ -42,7 +42,8 @@ namespace SewingProduction.Features.Tabel.Forms
 {
     public partial class TabelMain : CustomForm
     {
-        private string currentMG = DateTime.Today.ToString("MMyy");
+
+        private string currentMG;
         private static DatabaseHelper _dbHelper;
         private static DbService _dbService;
         private readonly ILogger _logger = new FileLogger();
@@ -106,6 +107,7 @@ namespace SewingProduction.Features.Tabel.Forms
         }
         private void CreateDayColumns(string mg)
         {
+            gridView1.BeginUpdate();
             //gridView1.BeginUpdate();
             int month = int.Parse(mg.Substring(0, 2));
             int year = 2000 + int.Parse(mg.Substring(2, 2));
@@ -138,7 +140,7 @@ namespace SewingProduction.Features.Tabel.Forms
             itogColumnChas.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             itogColumnChas.OptionsColumn.AllowEdit = false;
             gridView1.Columns.Add(itogColumnChas);
-            gridView1.BestFitColumns();
+            gridView1.EndUpdate();
             //gridColumnFio.VisibleIndex = 3;
             //gridColumnTabno.VisibleIndex = 2;
             //gridColumnPomPech.VisibleIndex = 1;
@@ -147,12 +149,13 @@ namespace SewingProduction.Features.Tabel.Forms
 
         private async void TabelMain_Load(object sender, EventArgs e)
         {
-            
+
             Task bindingsTask = InitializeBindingsAsync();
             await Task.WhenAll(bindingsTask);
             CreateDayColumns(currentMG);
             CheckUserAccess(idUser);
-         
+            
+
         }
         private void RemoveDayColumns()
         {
@@ -367,7 +370,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 try
                 {
                     GetTimeSheet(currentMG, grId, groupId);
-                    gridView1.BestFitColumns();
+                   
                 }
                 catch { }
 
@@ -388,6 +391,7 @@ namespace SewingProduction.Features.Tabel.Forms
             CreateDayColumns(currentMG);
             UpdateMonthYearLabels(currentMG);
             GetTimeSheet(currentMG, grId, groupId);
+           
 
         }
         private string GetPreviousMonth(string mg)
@@ -897,6 +901,7 @@ namespace SewingProduction.Features.Tabel.Forms
             _spPodr.ResetBindings(false);
             _spPodr.DataSource = SpPodr.ToList();
             lookUpEditGroup.Refresh();
+           
 
         }
 
@@ -1072,6 +1077,21 @@ namespace SewingProduction.Features.Tabel.Forms
         }
 
         private void customButton4_Click_2(object sender, EventArgs e)
+        {
+            int grId = Convert.ToInt32(lookUpEditGr.EditValue);
+            TimeSheetReportSkladi report1 = new TimeSheetReportSkladi();
+            report1.RequestParameters = false;
+            report1.Parameters["groupString"].Value = "zl";
+            report1.Parameters["groupString"].Visible = false;
+            report1.Parameters["idgr"].Value = grId;
+            report1.Parameters["idgr"].Visible = false;
+            report1.Parameters["mg"].Value = currentMG;
+            report1.Parameters["mg"].Visible = false;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+        }
+
+        private void customSimpleButton1_Click(object sender, EventArgs e)
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
             TimeSheetReportSkladi report1 = new TimeSheetReportSkladi();
