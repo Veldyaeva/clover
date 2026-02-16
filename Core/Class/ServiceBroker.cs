@@ -195,61 +195,124 @@ namespace SewingProduction
         //        Interlocked.Exchange(ref _onChangeGate, 0);
         //    }
         //}
-
-
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
             Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
-            // защита от параллельных вызовов 
+
             if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
                 return;
 
             try
             {
-                // 1) SqlDependency шлёт Subscribe/Query при установке подписки — это НЕ изменение данных
-                if (e.Type != SqlNotificationType.Change)
-                {
-                    Debug.WriteLine($"[ServiceBroker] Ignore notification: type={e.Type}, info={e.Info}, source={e.Source}");
-                    // просто переподписываемся и выходим
-                    // ResubscribeSafe();
-                    return;
-                }
-                // 2) QN одноразовые — переподписываемся ВСЕГДА на Change
-                Debug.WriteLine($"[ServiceBroker] Resubscribe: table={_table}, fields={_fields}");
+                // ВСЕГДА снимаем старую подписку (она одноразовая)
                 StopListening();
-                if (!_brokerStopped && _flagStartListening)
+
+                if (_brokerStopped)
+                    return;
+
+                // ВСЕГДА переподписываемся, если слушание активно
+                if (_flagStartListening)
                     StartListening(_fields, _table);
 
-                // 2) Для Change — фильтруем мусорные состояния
-                // Обычно изменения: Insert/Update/Delete.
+                // UI/обновление — только если это реальное изменение данных
+                if (e.Type != SqlNotificationType.Change)
+                    return;
+
                 var isDataChange =
-                           e.Info == SqlNotificationInfo.Insert ||
-                           e.Info == SqlNotificationInfo.Update ||
-                           e.Info == SqlNotificationInfo.Delete ||
-                           e.Info == SqlNotificationInfo.Merge;
+                    e.Info == SqlNotificationInfo.Insert ||
+                    e.Info == SqlNotificationInfo.Update ||
+                    e.Info == SqlNotificationInfo.Delete ||
+                    e.Info == SqlNotificationInfo.Merge;
 
                 if (!isDataChange)
-                {
-                    Debug.WriteLine($"[ServiceBroker] Change ignored (no UI): info={e.Info}, source={e.Source}");
                     return;
-                }
 
-                // Вызов наружу (тонко!)
-                Debug.WriteLine($"[ServiceBroker] RaiseChanged: table={_table}");
                 await RaiseChangedAsync(_table, changedFieldsCsv: null);
-                // Debug.WriteLine($"[ServiceBroker:{_id}] Notification: table=...");
-
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
-                // ResubscribeSafe();
+                // на всякий случай попробуем переподписаться
+                try
+                {
+                    StopListening();
+                    if (!_brokerStopped && _flagStartListening)
+                        StartListening(_fields, _table);
+                }
+                catch { }
             }
             finally
             {
                 Interlocked.Exchange(ref _onChangeGate, 0);
             }
         }
+
+
+        //////private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
+        //////{
+        //////    Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
+        //////    // защита от параллельных вызовов 
+        //////    if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
+        //////        return;
+
+        //////    try
+        //////    {
+        //////        // ВСЕГДА снимаем старую подписку (она одноразовая)
+        //////        StopListening();
+
+        //////        if (_brokerStopped)
+        //////            return;
+        //////        // ВСЕГДА переподписываемся, если слушание активно
+        //////        if (_flagStartListening)
+        //////            StartListening(_fields, _table);
+
+
+
+
+        //////        // 1) SqlDependency шлёт Subscribe/Query при установке подписки — это НЕ изменение данных
+        //////        if (e.Type != SqlNotificationType.Change)
+        //////        {
+        //////            Debug.WriteLine($"[ServiceBroker] Ignore notification: type={e.Type}, info={e.Info}, source={e.Source}");
+        //////            // просто переподписываемся и выходим
+        //////            // ResubscribeSafe();
+        //////            return;
+        //////        }
+        //////        // 2) QN одноразовые — переподписываемся ВСЕГДА на Change
+        //////        Debug.WriteLine($"[ServiceBroker] Resubscribe: table={_table}, fields={_fields}");
+        //////        StopListening();
+        //////        if (!_brokerStopped && _flagStartListening)
+        //////            StartListening(_fields, _table);
+
+        //////        // 2) Для Change — фильтруем мусорные состояния
+        //////        // Обычно изменения: Insert/Update/Delete.
+        //////        var isDataChange =
+        //////                   e.Info == SqlNotificationInfo.Insert ||
+        //////                   e.Info == SqlNotificationInfo.Update ||
+        //////                   e.Info == SqlNotificationInfo.Delete ||
+        //////                   e.Info == SqlNotificationInfo.Merge;
+
+        //////        if (!isDataChange)
+        //////        {
+        //////            Debug.WriteLine($"[ServiceBroker] Change ignored (no UI): info={e.Info}, source={e.Source}");
+        //////            return;
+        //////        }
+
+        //////        // Вызов наружу (тонко!)
+        //////        Debug.WriteLine($"[ServiceBroker] RaiseChanged: table={_table}");
+        //////        await RaiseChangedAsync(_table, changedFieldsCsv: null);
+        //////        // Debug.WriteLine($"[ServiceBroker:{_id}] Notification: table=...");
+
+        //////    }
+        //////    catch (Exception ex)
+        //////    {
+        //////        Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
+        //////        // ResubscribeSafe();
+        //////    }
+        //////    finally
+        //////    {
+        //////        Interlocked.Exchange(ref _onChangeGate, 0);
+        //////    }
+        //////}
 
         //private void ResubscribeSafe()
         //{

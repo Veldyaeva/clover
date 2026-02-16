@@ -78,6 +78,8 @@ namespace SewingProduction
             табельToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             справкаtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
+            bar6 = new DevExpress.XtraBars.Bar();
+            bar1 = new DevExpress.XtraBars.Bar();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -154,28 +156,28 @@ namespace SewingProduction
             // профильToolStripMenuItem
             // 
             профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            профильToolStripMenuItem.Size = new Size(180, 22);
+            профильToolStripMenuItem.Size = new Size(149, 22);
             профильToolStripMenuItem.Text = "Профиль";
             профильToolStripMenuItem.Click += профильToolStripMenuItem_Click;
             // 
             // настройкиToolStripMenuItem
             // 
             настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            настройкиToolStripMenuItem.Size = new Size(180, 22);
+            настройкиToolStripMenuItem.Size = new Size(149, 22);
             настройкиToolStripMenuItem.Text = "Настройки";
             настройкиToolStripMenuItem.Click += настройкиToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(180, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(149, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
             оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // помощьToolStripMenuItem
             // 
             помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            помощьToolStripMenuItem.Size = new Size(180, 22);
+            помощьToolStripMenuItem.Size = new Size(149, 22);
             помощьToolStripMenuItem.Text = "Помощь";
             помощьToolStripMenuItem.Click += помощьToolStripMenuItem_Click;
             // 
@@ -410,11 +412,8 @@ namespace SewingProduction
             // справкаtoolStripMenuItem
             // 
             справкаtoolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            кнопкаToolStripMenuItem.BackColor = SystemColors.ButtonFace;
-            кнопкаToolStripMenuItem.ForeColor = SystemColors.ActiveCaptionText;
             справкаtoolStripMenuItem.Name = "справкаtoolStripMenuItem";
-            кнопкаToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            справкаtoolStripMenuItem.Size = new Size(29, 21);
+            справкаtoolStripMenuItem.Size = new Size(30, 20);
             справкаtoolStripMenuItem.Text = "@";
             справкаtoolStripMenuItem.Click += справкаtoolStripMenuItem_Click;
             // 
@@ -433,6 +432,26 @@ namespace SewingProduction
             xtraTabbedMdiManager1.ShowToolTips = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
+            // 
+            // bar6
+            // 
+            bar6.BarName = "Main menu";
+            bar6.DockCol = 0;
+            bar6.DockRow = 0;
+            bar6.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            bar6.OptionsBar.MultiLine = true;
+            bar6.OptionsBar.UseWholeRow = true;
+            bar6.Text = "Main menu";
+            // 
+            // bar1
+            // 
+            bar1.BarName = "Main menu";
+            bar1.DockCol = 0;
+            bar1.DockRow = 0;
+            bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            bar1.OptionsBar.MultiLine = true;
+            bar1.OptionsBar.UseWholeRow = true;
+            bar1.Text = "Main menu";
             // 
             // SpMainForm
             // 
@@ -511,6 +530,7 @@ namespace SewingProduction
         private System.Windows.Forms.ToolStripMenuItem аналитикаToolStripMenuItem;
      	private System.Windows.Forms.ToolStripMenuItem справкаtoolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem табельToolStripMenuItem;
-    
+        private DevExpress.XtraBars.Bar bar6;
+        private DevExpress.XtraBars.Bar bar1;
     }
 }

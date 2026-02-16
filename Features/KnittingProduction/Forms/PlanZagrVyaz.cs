@@ -1,5 +1,4 @@
 using DevExpress.CodeParser;
-using DevExpress.CodeParser;
 using DevExpress.Data;
 using DevExpress.Mvvm.Native;
 using DevExpress.Utils;
@@ -15,7 +14,6 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using Newtonsoft.Json;
-using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
@@ -45,7 +43,6 @@ using System.Windows.Forms;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static DevExpress.XtraEditors.XtraInputBox;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
-using static SewingProduction.Core.helpers.ServiceBrokerHelper;
 using static SewingProduction.Helpers.GridHelper;
 using Volatile = System.Threading.Volatile;
 
@@ -5089,6 +5086,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                Application.Idle -= ExpandGroupsOnIdle;
                 _lifetimeCts?.Cancel(); // ← ВСЁ, остальное автоматически
                 _loadCts?.Cancel();
             }
@@ -5104,20 +5102,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private void OnFormClosed(object sender, FormClosedEventArgs e)
-        {
-            try
-            {
-                Application.Idle -= ExpandGroupsOnIdle;
-                // _loadCts?.Cancel();
-                //base.OnFormClosed(e);
-                _loadCts?.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка OnFormClosed: {ex.Message}");
-            }
-        }
+        //private void OnFormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        Application.Idle -= ExpandGroupsOnIdle;
+        //        // _loadCts?.Cancel();
+        //        //base.OnFormClosed(e);
+        //        _loadCts?.Dispose();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Ошибка OnFormClosed: {ex.Message}");
+        //    }
+        //}
         //protected override async void OnFormClosing(FormClosingEventArgs e)
         //{
         //    _loadCts?.Cancel();
@@ -5128,7 +5126,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //    _loadCts?.Dispose();
         //    base.OnFormClosing(e);
         //}
-        protected void OnFormClosing(object sender, FormClosingEventArgs e)
+        protected async void OnFormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
@@ -5151,9 +5149,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridViewSmenZadany.FocusedRowChanged -= advBandedGridViewSmenZadany_FocusedRowChanged;
                 gridViewNaryadZadany.PopupMenuShowing -= gridViewNaryadZadany_PopupMenuShowing;
                 _loadCts?.Cancel();
-
-                // НЕ ждём, чтобы не блокировать закрытие формы
-                _ = _sbController.DisposeAsync();
+                _lifetimeCts?.Cancel();
+                //// НЕ ждём, чтобы не блокировать закрытие формы
+                //_ = _sbController.DisposeAsync();
+                // Важно: ждём корректного снятия SqlDependency/ServiceBroker-диалогов
+                await _sbController.DisposeAsync();
             }
             catch (Exception ex)
             {

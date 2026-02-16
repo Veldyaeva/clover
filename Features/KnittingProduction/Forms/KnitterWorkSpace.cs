@@ -121,6 +121,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private decimal _maxHoursClosedShift = 14m;
         private bool _showAllAssignedWhenClosed = false;
         private Button _adminSettingsButton;
+        private CancellationTokenSource? _sbCts;
         /// <summary>
         /// Флаг активной смены.
         /// </summary>
@@ -181,11 +182,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] Load event start");
                     await InitializeAsync();
-                    await InitServiceBrokerAsync(CancellationToken.None);
+                    _sbCts = new CancellationTokenSource();
+                    await InitServiceBrokerAsync(_sbCts.Token);
                     InitHeaderButtonTags();
                 };
-                this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
-
+                //this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
+                this.FormClosing += KnitterWorkSpace_FormClosing;
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
@@ -203,7 +205,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
                 //advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
 
-                ConfigureAdvBandedGridColumns();
+              //  ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -233,10 +235,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] Load event start");
                     await InitializeAsync();
-                    await InitServiceBrokerAsync(CancellationToken.None);
+                    _sbCts = new CancellationTokenSource();
+                    await InitServiceBrokerAsync(_sbCts.Token);
                     InitHeaderButtonTags();
                 };
-                this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
+//                this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
+                this.FormClosing += KnitterWorkSpace_FormClosing;
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
@@ -253,7 +257,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
                 //advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
                 //advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
-                ConfigureAdvBandedGridColumns();
+              //  ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -1628,6 +1632,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
                 }
             };
+        }
+        private async void KnitterWorkSpace_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // 1) Сначала отменяем слушание/лупы
+            try { _sbCts?.Cancel(); } catch { }
+
+            // 2) И гарантированно дожидаемся корректной отписки/END CONVERSATION
+            try
+            {
+                if (_sbController != null)
+                    await _sbController.DisposeAsync();
+            }
+            catch
+            {
+                // лог/игнор — но НЕ даём крашить закрытие формы
+            }
+            finally
+            {
+                try { _sbCts?.Dispose(); } catch { }
+                _sbCts = null;
+            }
         }
 
         #region adminToggle
