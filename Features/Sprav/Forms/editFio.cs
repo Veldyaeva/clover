@@ -20,7 +20,7 @@ namespace SewingProduction.form
             InitializeComponent();
             _editFioDataService = new EditFioDataService(dbHelper);
             _person = new Person();
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
             //Имя формы:
             this.Text = openType;
             customTextBoxTab.Text = idFIO;

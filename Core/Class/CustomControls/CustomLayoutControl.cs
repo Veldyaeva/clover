@@ -16,6 +16,20 @@ namespace SewingProduction.Core.Class
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = value;
+        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get => base.ForeColor;
+            set => base.ForeColor = value;
+        }
 
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
@@ -26,27 +40,18 @@ namespace SewingProduction.Core.Class
                 return;
 
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            var theme = ThemeManager.ActiveTheme;
-            if (theme == null)
-                return;
-
-            BackColor = theme.TextBoxBackground;
-            ForeColor = theme.LabelTextColor;
+            // Цвета не форсируем: берем из Designer/скина.
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-
-        private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
             if (disposing && !IsDesignMode())
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }

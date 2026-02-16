@@ -134,12 +134,12 @@
             // 
             // customTextBoxMod
             // 
-            customTextBoxMod.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxMod.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxMod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxMod.ErrorColor = System.Drawing.Color.Red;
             customTextBoxMod.ErrorMessage = null;
             customTextBoxMod.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxMod.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxMod.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxMod.Location = new System.Drawing.Point(521, 45);
             customTextBoxMod.Name = "customTextBoxMod";
             customTextBoxMod.Size = new System.Drawing.Size(335, 20);
@@ -147,12 +147,12 @@
             // 
             // customTextBoxNN
             // 
-            customTextBoxNN.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxNN.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxNN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxNN.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNN.ErrorMessage = null;
             customTextBoxNN.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNN.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxNN.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxNN.Location = new System.Drawing.Point(939, 45);
             customTextBoxNN.Name = "customTextBoxNN";
             customTextBoxNN.Size = new System.Drawing.Size(337, 20);
@@ -160,12 +160,12 @@
             // 
             // customTextBoxArt
             // 
-            customTextBoxArt.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customTextBoxArt.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxArt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxArt.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArt.ErrorMessage = null;
             customTextBoxArt.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxArt.Location = new System.Drawing.Point(103, 45);
             customTextBoxArt.Name = "customTextBoxArt";
             customTextBoxArt.Size = new System.Drawing.Size(335, 20);
@@ -173,9 +173,9 @@
             // 
             // customButtonSave
             // 
-            customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonSave.Location = new System.Drawing.Point(1110, 498);
             customButtonSave.Name = "customButtonSave";
             customButtonSave.Size = new System.Drawing.Size(166, 57);
@@ -197,9 +197,9 @@
             // 
             // gridViewArtKomplekt
             // 
-            gridViewArtKomplekt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewArtKomplekt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewArtKomplekt.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewArtKomplekt.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewArtKomplekt.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewArtKomplekt.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewArtKomplekt.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewArtKomplekt.Appearance.FocusedRow.Options.UseFont = true;
@@ -297,9 +297,9 @@
             // 
             // gridViewPlanSezonAll
             // 
-            gridViewPlanSezonAll.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPlanSezonAll.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPlanSezonAll.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewPlanSezonAll.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewPlanSezonAll.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewPlanSezonAll.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewPlanSezonAll.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewPlanSezonAll.Appearance.FocusedRow.Options.UseFont = true;
@@ -541,7 +541,7 @@
             // customLabelTextMO
             // 
             customLabelTextMO.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelTextMO.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            // customLabelTextMO.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customLabelTextMO.Location = new System.Drawing.Point(24, 69);
             customLabelTextMO.Name = "customLabelTextMO";
             customLabelTextMO.Size = new System.Drawing.Size(1252, 20);

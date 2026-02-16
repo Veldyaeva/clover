@@ -1,4 +1,4 @@
-﻿namespace SewingProduction.report
+namespace SewingProduction.report
 {
     partial class FullConfectionCardReport
     {
@@ -358,7 +358,7 @@
                     "alse)"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'размер кольца\'\n")});
             this.xrLabel38.Font = new DevExpress.Drawing.DXFont("Arial Narrow", 7F, DevExpress.Drawing.DXFontStyle.Italic);
-            this.xrLabel38.ForeColor = System.Drawing.Color.Gray;
+            // this.xrLabel38.ForeColor = System.Drawing.Color.Gray;
             this.xrLabel38.LocationFloat = new DevExpress.Utils.PointFloat(2F, 2F);
             this.xrLabel38.Multiline = true;
             this.xrLabel38.Name = "xrLabel38";
@@ -388,7 +388,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(IsNull([ring_size],0) != 0, true, false)"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ring_size]")});
             this.xrLabel39.Font = new DevExpress.Drawing.DXFont("Arial", 8F);
-            this.xrLabel39.ForeColor = System.Drawing.Color.Gray;
+            // this.xrLabel39.ForeColor = System.Drawing.Color.Gray;
             this.xrLabel39.LocationFloat = new DevExpress.Utils.PointFloat(2F, 2F);
             this.xrLabel39.Multiline = true;
             this.xrLabel39.Name = "xrLabel39";
@@ -471,22 +471,22 @@
             // Title
             // 
             this.Title.BackColor = System.Drawing.Color.Transparent;
-            this.Title.BorderColor = System.Drawing.Color.Black;
+            // this.Title.BorderColor = System.Drawing.Color.Black;
             this.Title.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.Title.BorderWidth = 1F;
             this.Title.Font = new DevExpress.Drawing.DXFont("Arial", 14.25F);
-            this.Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            // this.Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.Title.Name = "Title";
             this.Title.Padding = new DevExpress.XtraPrinting.PaddingInfo(6, 6, 0, 0, 100F);
             // 
             // DetailCaption1
             // 
             this.DetailCaption1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.DetailCaption1.BorderColor = System.Drawing.Color.White;
+            // this.DetailCaption1.BorderColor = System.Drawing.Color.White;
             this.DetailCaption1.Borders = DevExpress.XtraPrinting.BorderSide.Left;
             this.DetailCaption1.BorderWidth = 2F;
             this.DetailCaption1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.DetailCaption1.ForeColor = System.Drawing.Color.White;
+            // this.DetailCaption1.ForeColor = System.Drawing.Color.White;
             this.DetailCaption1.Name = "DetailCaption1";
             this.DetailCaption1.Padding = new DevExpress.XtraPrinting.PaddingInfo(6, 6, 0, 0, 100F);
             this.DetailCaption1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -497,7 +497,7 @@
             this.DetailData1.Borders = DevExpress.XtraPrinting.BorderSide.Left;
             this.DetailData1.BorderWidth = 2F;
             this.DetailData1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F);
-            this.DetailData1.ForeColor = System.Drawing.Color.Black;
+            // this.DetailData1.ForeColor = System.Drawing.Color.Black;
             this.DetailData1.Name = "DetailData1";
             this.DetailData1.Padding = new DevExpress.XtraPrinting.PaddingInfo(6, 6, 0, 0, 100F);
             this.DetailData1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -509,7 +509,7 @@
             this.DetailData3_Odd.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.DetailData3_Odd.BorderWidth = 1F;
             this.DetailData3_Odd.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F);
-            this.DetailData3_Odd.ForeColor = System.Drawing.Color.Black;
+            // this.DetailData3_Odd.ForeColor = System.Drawing.Color.Black;
             this.DetailData3_Odd.Name = "DetailData3_Odd";
             this.DetailData3_Odd.Padding = new DevExpress.XtraPrinting.PaddingInfo(6, 6, 0, 0, 100F);
             this.DetailData3_Odd.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -517,7 +517,7 @@
             // PageInfo
             // 
             this.PageInfo.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.PageInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            // this.PageInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.PageInfo.Name = "PageInfo";
             this.PageInfo.Padding = new DevExpress.XtraPrinting.PaddingInfo(6, 6, 0, 0, 100F);
             // 
@@ -968,7 +968,7 @@
             this.xrLabel17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([utv] = 1, \'Утверждена\', Iif([utv] = 2, \'Уточнена\', \'\'))")});
             this.xrLabel17.Font = new DevExpress.Drawing.DXFont("Arial", 16F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrLabel17.ForeColor = System.Drawing.Color.Red;
+            // this.xrLabel17.ForeColor = System.Drawing.Color.Red;
             this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLabel17.Multiline = true;
             this.xrLabel17.Name = "xrLabel17";
@@ -1286,7 +1286,7 @@
             this.xrLabel21.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[naim_pos]")});
             this.xrLabel21.Font = new DevExpress.Drawing.DXFont("Arial", 7F);
-            this.xrLabel21.ForeColor = System.Drawing.Color.Gray;
+            // this.xrLabel21.ForeColor = System.Drawing.Color.Gray;
             this.xrLabel21.LocationFloat = new DevExpress.Utils.PointFloat(65.12807F, 5F);
             this.xrLabel21.Multiline = true;
             this.xrLabel21.Name = "xrLabel21";
@@ -1304,7 +1304,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[razm]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ForeColor", "iif(IsNull([approved],0) < 1, \'Red\', \'Black\')\n")});
             this.xrLabel25.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
-            this.xrLabel25.ForeColor = System.Drawing.Color.Black;
+            // this.xrLabel25.ForeColor = System.Drawing.Color.Black;
             this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(2F, 2F);
             this.xrLabel25.Multiline = true;
             this.xrLabel25.Name = "xrLabel25";
@@ -1406,7 +1406,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([approved] = 1, \'Yes\', \'No\')"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'От \'")});
             this.xrLabel31.Font = new DevExpress.Drawing.DXFont("Arial", 7F);
-            this.xrLabel31.ForeColor = System.Drawing.Color.Gray;
+            // this.xrLabel31.ForeColor = System.Drawing.Color.Gray;
             this.xrLabel31.LocationFloat = new DevExpress.Utils.PointFloat(2F, 5F);
             this.xrLabel31.Multiline = true;
             this.xrLabel31.Name = "xrLabel31";
@@ -1426,7 +1426,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([approved] = 1, \'Yes\', \'No\')"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[approvedDate]")});
             this.xrLabel34.Font = new DevExpress.Drawing.DXFont("Arial", 7F);
-            this.xrLabel34.ForeColor = System.Drawing.Color.Gray;
+            // this.xrLabel34.ForeColor = System.Drawing.Color.Gray;
             this.xrLabel34.LocationFloat = new DevExpress.Utils.PointFloat(24F, 5F);
             this.xrLabel34.Multiline = true;
             this.xrLabel34.Name = "xrLabel34";
@@ -1491,7 +1491,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif(IsNull([date_dost]), \'\', [date_dost])"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "iif(IsNull([approved], 0) < 1 && IsNull([date_dost]), \'Yes\', \'No\')")});
             this.xrLabel33.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
-            this.xrLabel33.ForeColor = System.Drawing.Color.Red;
+            // this.xrLabel33.ForeColor = System.Drawing.Color.Red;
             this.xrLabel33.LocationFloat = new DevExpress.Utils.PointFloat(2F, 2.000046F);
             this.xrLabel33.Multiline = true;
             this.xrLabel33.Name = "xrLabel33";
@@ -1549,7 +1549,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[rezKrujName]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(trim(isnull([rezKrujName],\'\'))) != 0, true, false)")});
             this.xrLabel23.Font = new DevExpress.Drawing.DXFont("Arial", 9F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrLabel23.ForeColor = System.Drawing.Color.Red;
+            // this.xrLabel23.ForeColor = System.Drawing.Color.Red;
             this.xrLabel23.LocationFloat = new DevExpress.Utils.PointFloat(2F, 2.00001F);
             this.xrLabel23.Multiline = true;
             this.xrLabel23.Name = "xrLabel23";
@@ -1574,7 +1574,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Заказ №\' + Trim([cfo_number]) + \' \' + Trim(IsNull([statusorder], \'\'))"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "iif(IsNull([approved],0) < 1, true, false)")});
             this.xrLabel24.Font = new DevExpress.Drawing.DXFont("Arial", 7F);
-            this.xrLabel24.ForeColor = System.Drawing.Color.Red;
+            // this.xrLabel24.ForeColor = System.Drawing.Color.Red;
             this.xrLabel24.LocationFloat = new DevExpress.Utils.PointFloat(1.999939F, 2.00001F);
             this.xrLabel24.Multiline = true;
             this.xrLabel24.Name = "xrLabel24";

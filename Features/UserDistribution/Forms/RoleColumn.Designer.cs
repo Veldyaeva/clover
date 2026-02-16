@@ -147,7 +147,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewColumn
             // 
-            gridViewColumn.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewColumn.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewColumn.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewColumn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_acn, id_atn, ordinal_position, name, name_rus, data_type, Readonly, ModeName });
             gridViewColumn.GridControl = customGridControlColumn;
@@ -250,7 +250,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewRole
             // 
-            gridViewRole.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewRole.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewRole.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewRole.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { RoleID, RoleName, Description });
             gridViewRole.GridControl = customGridControlRole;
@@ -300,7 +300,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewObject
             // 
-            gridViewObject.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewObject.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewObject.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewObject.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ObjectID, ObjectName, ObjectNameRus, ObjectType });
             gridViewObject.GridControl = customGridControlObject;
@@ -359,7 +359,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewForm
             // 
-            gridViewForm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewForm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewForm.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ProjectFormsID, NameForm, NameFormRus });
             gridViewForm.GridControl = customGridControlForm;
@@ -410,7 +410,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewTable
             // 
-            gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewTable.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewTable.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IdAtn, TableName, TableNameRus });
             gridViewTable.GridControl = customGridControlTable;
@@ -448,10 +448,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customComboBoxRightForTable
             // 
-            customComboBoxRightForTable.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customComboBoxRightForTable.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customComboBoxRightForTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customComboBoxRightForTable.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxRightForTable.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customComboBoxRightForTable.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxRightForTable.FormattingEnabled = true;
             customComboBoxRightForTable.Items.AddRange(new object[] { "Нет досутпа", "Просмотр", "Редактор" });
             customComboBoxRightForTable.Location = new System.Drawing.Point(1053, 619);

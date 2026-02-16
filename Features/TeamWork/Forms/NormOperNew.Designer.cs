@@ -286,11 +286,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customOkButton1
             // 
-            customOkButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+   //         customOkButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             tablePanel2.SetColumn(customOkButton1, 3);
             customOkButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
             customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customOkButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+   //         customOkButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customOkButton1.Location = new System.Drawing.Point(815, 12);
             customOkButton1.Name = "customOkButton1";
             tablePanel2.SetRow(customOkButton1, 0);
@@ -331,10 +331,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customAddButton
             // 
-            customAddButton.BackColor = System.Drawing.Color.FromArgb(173, 216, 230);
+   //         customAddButton.BackColor = System.Drawing.Color.FromArgb(173, 216, 230);
             tablePanel2.SetColumn(customAddButton, 0);
             customAddButton.Font = new System.Drawing.Font("Arial", 10F);
-            customAddButton.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
+   //         customAddButton.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
             customAddButton.Location = new System.Drawing.Point(13, 12);
             customAddButton.Name = "customAddButton";
             tablePanel2.SetRow(customAddButton, 0);

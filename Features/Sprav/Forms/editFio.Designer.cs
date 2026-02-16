@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.form
 {
@@ -129,7 +129,7 @@ namespace SewingProduction.form
             customCancelButton1.FlatAppearance.BorderSize = 0;
             customCancelButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customCancelButton1.ForeColor = System.Drawing.Color.White;
+            // customCancelButton1.ForeColor = System.Drawing.Color.White;
             customCancelButton1.Location = new System.Drawing.Point(578, 673);
             customCancelButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customCancelButton1.MaximumSize = new System.Drawing.Size(203, 52);
@@ -148,7 +148,7 @@ namespace SewingProduction.form
             customOkButton1.FlatAppearance.BorderSize = 0;
             customOkButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customOkButton1.ForeColor = System.Drawing.Color.Black;
+            // customOkButton1.ForeColor = System.Drawing.Color.Black;
             customOkButton1.Location = new System.Drawing.Point(158, 673);
             customOkButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customOkButton1.MaximumSize = new System.Drawing.Size(203, 52);
@@ -165,7 +165,7 @@ namespace SewingProduction.form
             customLabel1.AutoSize = true;
             customLabel1.BackColor = System.Drawing.Color.Transparent;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel1.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel1.Location = new System.Drawing.Point(9, 33);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
@@ -178,7 +178,7 @@ namespace SewingProduction.form
             customTextBoxTab.BackColor = System.Drawing.SystemColors.Control;
             customTextBoxTab.Cursor = System.Windows.Forms.Cursors.No;
             customTextBoxTab.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxTab.Location = new System.Drawing.Point(145, 30);
             customTextBoxTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxTab.Name = "customTextBoxTab";
@@ -193,7 +193,7 @@ namespace SewingProduction.form
             customCheckBoxSdel.Cursor = System.Windows.Forms.Cursors.Hand;
             customCheckBoxSdel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBoxSdel.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxSdel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customCheckBoxSdel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customCheckBoxSdel.Location = new System.Drawing.Point(23, 47);
             customCheckBoxSdel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customCheckBoxSdel.Name = "customCheckBoxSdel";
@@ -208,7 +208,7 @@ namespace SewingProduction.form
             customComboBoxOb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxOb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxOb.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxOb.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxOb.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxOb.FormattingEnabled = true;
             customComboBoxOb.Location = new System.Drawing.Point(145, 92);
             customComboBoxOb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -219,9 +219,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxFIO
             // 
-            customTextBoxFIO.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxFIO.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxFIO.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxFIO.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxFIO.Location = new System.Drawing.Point(145, 62);
             customTextBoxFIO.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxFIO.Name = "customTextBoxFIO";
@@ -233,7 +232,7 @@ namespace SewingProduction.form
             customLabel2.AutoSize = true;
             customLabel2.BackColor = System.Drawing.Color.Transparent;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel2.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel2.Location = new System.Drawing.Point(9, 66);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
@@ -246,7 +245,7 @@ namespace SewingProduction.form
             customLabel3.AutoSize = true;
             customLabel3.BackColor = System.Drawing.Color.Transparent;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel3.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel3.Location = new System.Drawing.Point(16, 31);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
@@ -259,7 +258,7 @@ namespace SewingProduction.form
             customLabel4.AutoSize = true;
             customLabel4.BackColor = System.Drawing.Color.Transparent;
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel4.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel4.Location = new System.Drawing.Point(9, 99);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
@@ -272,7 +271,7 @@ namespace SewingProduction.form
             customTextBoxMast.BackColor = System.Drawing.SystemColors.Control;
             customTextBoxMast.Cursor = System.Windows.Forms.Cursors.No;
             customTextBoxMast.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxMast.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxMast.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxMast.Location = new System.Drawing.Point(413, 127);
             customTextBoxMast.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxMast.Name = "customTextBoxMast";
@@ -285,7 +284,7 @@ namespace SewingProduction.form
             customLabel5.AutoSize = true;
             customLabel5.BackColor = System.Drawing.Color.Transparent;
             customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel5.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel5.Location = new System.Drawing.Point(14, 97);
             customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel5.Name = "customLabel5";
@@ -298,7 +297,7 @@ namespace SewingProduction.form
             customLabel6.AutoSize = true;
             customLabel6.BackColor = System.Drawing.Color.Transparent;
             customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel6.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel6.Location = new System.Drawing.Point(13, 63);
             customLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel6.Name = "customLabel6";
@@ -311,7 +310,7 @@ namespace SewingProduction.form
             customTextBoxNved.BackColor = System.Drawing.SystemColors.Control;
             customTextBoxNved.Cursor = System.Windows.Forms.Cursors.PanEast;
             customTextBoxNved.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNved.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxNved.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxNved.Location = new System.Drawing.Point(601, 60);
             customTextBoxNved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNved.Name = "customTextBoxNved";
@@ -325,7 +324,7 @@ namespace SewingProduction.form
             customLabel7.AutoSize = true;
             customLabel7.BackColor = System.Drawing.Color.Transparent;
             customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel7.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel7.Location = new System.Drawing.Point(14, 30);
             customLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel7.Name = "customLabel7";
@@ -338,7 +337,7 @@ namespace SewingProduction.form
             customLabel8.AutoSize = true;
             customLabel8.BackColor = System.Drawing.Color.Transparent;
             customLabel8.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel8.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel8.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel8.Location = new System.Drawing.Point(16, 35);
             customLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel8.Name = "customLabel8";
@@ -348,9 +347,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxTelRab
             // 
-            customTextBoxTelRab.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxTelRab.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxTelRab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxTelRab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxTelRab.Location = new System.Drawing.Point(144, 61);
             customTextBoxTelRab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxTelRab.Name = "customTextBoxTelRab";
@@ -362,7 +360,7 @@ namespace SewingProduction.form
             customLabel13.AutoSize = true;
             customLabel13.BackColor = System.Drawing.Color.Transparent;
             customLabel13.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel13.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel13.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel13.Location = new System.Drawing.Point(16, 65);
             customLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel13.Name = "customLabel13";
@@ -372,11 +370,10 @@ namespace SewingProduction.form
             // 
             // customTextBoxPodr
             // 
-            customTextBoxPodr.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPodr.Cursor = System.Windows.Forms.Cursors.No;
             customTextBoxPodr.Enabled = false;
             customTextBoxPodr.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPodr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxPodr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPodr.Location = new System.Drawing.Point(159, 495);
             customTextBoxPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPodr.Name = "customTextBoxPodr";
@@ -389,7 +386,7 @@ namespace SewingProduction.form
             customLabel14.AutoSize = true;
             customLabel14.BackColor = System.Drawing.Color.Transparent;
             customLabel14.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel14.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel14.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel14.Location = new System.Drawing.Point(23, 498);
             customLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel14.Name = "customLabel14";
@@ -399,9 +396,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxTabN
             // 
-            customTextBoxTabN.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxTabN.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxTabN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxTabN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxTabN.Location = new System.Drawing.Point(601, 127);
             customTextBoxTabN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxTabN.Name = "customTextBoxTabN";
@@ -414,7 +410,7 @@ namespace SewingProduction.form
             customLabel15.AutoSize = true;
             customLabel15.BackColor = System.Drawing.Color.Transparent;
             customLabel15.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel15.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel15.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel15.Location = new System.Drawing.Point(23, 465);
             customLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel15.Name = "customLabel15";
@@ -424,9 +420,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxTab1с
             // 
-            customTextBoxTab1с.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxTab1с.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxTab1с.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxTab1с.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxTab1с.Location = new System.Drawing.Point(145, 127);
             customTextBoxTab1с.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxTab1с.Name = "customTextBoxTab1с";
@@ -438,7 +433,7 @@ namespace SewingProduction.form
             customLabel16.AutoSize = true;
             customLabel16.BackColor = System.Drawing.Color.Transparent;
             customLabel16.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel16.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel16.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel16.Location = new System.Drawing.Point(14, 133);
             customLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel16.Name = "customLabel16";
@@ -451,7 +446,7 @@ namespace SewingProduction.form
             customLabel17.AutoSize = true;
             customLabel17.BackColor = System.Drawing.Color.Transparent;
             customLabel17.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel17.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel17.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel17.Location = new System.Drawing.Point(16, 68);
             customLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel17.Name = "customLabel17";
@@ -461,9 +456,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxOsnTab
             // 
-            customTextBoxOsnTab.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxOsnTab.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxOsnTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxOsnTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxOsnTab.Location = new System.Drawing.Point(766, 30);
             customTextBoxOsnTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxOsnTab.Name = "customTextBoxOsnTab";
@@ -476,7 +470,7 @@ namespace SewingProduction.form
             customLabel18.AutoSize = true;
             customLabel18.BackColor = System.Drawing.Color.Transparent;
             customLabel18.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel18.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel18.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel18.Location = new System.Drawing.Point(654, 35);
             customLabel18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel18.Name = "customLabel18";
@@ -486,12 +480,11 @@ namespace SewingProduction.form
             // 
             // customButtonXNtab
             // 
-            customButtonXNtab.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonXNtab.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonXNtab.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonXNtab.FlatAppearance.BorderSize = 0;
             customButtonXNtab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonXNtab.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonXNtab.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonXNtab.Location = new System.Drawing.Point(894, 91);
             customButtonXNtab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonXNtab.Name = "customButtonXNtab";
@@ -503,12 +496,11 @@ namespace SewingProduction.form
             // 
             // customButtonXPodr
             // 
-            customButtonXPodr.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonXPodr.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonXPodr.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonXPodr.FlatAppearance.BorderSize = 0;
             customButtonXPodr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonXPodr.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonXPodr.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonXPodr.Location = new System.Drawing.Point(894, 25);
             customButtonXPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonXPodr.Name = "customButtonXPodr";
@@ -520,12 +512,11 @@ namespace SewingProduction.form
             // 
             // customButtonXOb
             // 
-            customButtonXOb.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // customButtonXOb.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             customButtonXOb.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonXOb.FlatAppearance.BorderSize = 0;
             customButtonXOb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonXOb.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonXOb.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonXOb.Location = new System.Drawing.Point(438, 91);
             customButtonXOb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonXOb.Name = "customButtonXOb";
@@ -537,12 +528,11 @@ namespace SewingProduction.form
             // 
             // customButtonXDolj
             // 
-            customButtonXDolj.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonXDolj.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonXDolj.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonXDolj.FlatAppearance.BorderSize = 0;
             customButtonXDolj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonXDolj.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonXDolj.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonXDolj.Location = new System.Drawing.Point(438, 58);
             customButtonXDolj.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonXDolj.Name = "customButtonXDolj";
@@ -554,12 +544,11 @@ namespace SewingProduction.form
             // 
             // customButtonXOrg
             // 
-            customButtonXOrg.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonXOrg.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonXOrg.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonXOrg.FlatAppearance.BorderSize = 0;
             customButtonXOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonXOrg.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonXOrg.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonXOrg.Location = new System.Drawing.Point(438, 25);
             customButtonXOrg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonXOrg.Name = "customButtonXOrg";
@@ -574,7 +563,7 @@ namespace SewingProduction.form
             customTextBoxNTab.BackColor = System.Drawing.SystemColors.Control;
             customTextBoxNTab.Cursor = System.Windows.Forms.Cursors.PanEast;
             customTextBoxNTab.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxNTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxNTab.Location = new System.Drawing.Point(601, 93);
             customTextBoxNTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNTab.Name = "customTextBoxNTab";
@@ -588,7 +577,7 @@ namespace SewingProduction.form
             customLabel23.AutoSize = true;
             customLabel23.BackColor = System.Drawing.Color.Transparent;
             customLabel23.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel23.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel23.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel23.Location = new System.Drawing.Point(726, 127);
             customLabel23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel23.Name = "customLabel23";
@@ -598,9 +587,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxSorted
             // 
-            customTextBoxSorted.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxSorted.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxSorted.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxSorted.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxSorted.Location = new System.Drawing.Point(832, 127);
             customTextBoxSorted.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxSorted.Name = "customTextBoxSorted";
@@ -613,7 +601,7 @@ namespace SewingProduction.form
             customLabel20.AutoSize = true;
             customLabel20.BackColor = System.Drawing.Color.Transparent;
             customLabel20.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel20.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel20.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel20.Location = new System.Drawing.Point(512, 60);
             customLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel20.Name = "customLabel20";
@@ -626,7 +614,7 @@ namespace SewingProduction.form
             customLabel21.AutoSize = true;
             customLabel21.BackColor = System.Drawing.Color.Transparent;
             customLabel21.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel21.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel21.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel21.Location = new System.Drawing.Point(512, 93);
             customLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel21.Name = "customLabel21";
@@ -639,7 +627,7 @@ namespace SewingProduction.form
             customLabel22.AutoSize = true;
             customLabel22.BackColor = System.Drawing.Color.Transparent;
             customLabel22.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel22.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel22.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel22.Location = new System.Drawing.Point(512, 127);
             customLabel22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel22.Name = "customLabel22";
@@ -649,11 +637,10 @@ namespace SewingProduction.form
             // 
             // customComboBoxPodr
             // 
-            customComboBoxPodr.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customComboBoxPodr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxPodr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxPodr.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxPodr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxPodr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxPodr.FormattingEnabled = true;
             customComboBoxPodr.Location = new System.Drawing.Point(601, 25);
             customComboBoxPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -664,11 +651,10 @@ namespace SewingProduction.form
             // 
             // customComboBoxNTab
             // 
-            customComboBoxNTab.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customComboBoxNTab.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxNTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxNTab.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxNTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxNTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxNTab.FormattingEnabled = true;
             customComboBoxNTab.Location = new System.Drawing.Point(672, 92);
             customComboBoxNTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -682,7 +668,7 @@ namespace SewingProduction.form
             customLabel19.AutoSize = true;
             customLabel19.BackColor = System.Drawing.Color.Transparent;
             customLabel19.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel19.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel19.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel19.Location = new System.Drawing.Point(465, 27);
             customLabel19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel19.Name = "customLabel19";
@@ -695,7 +681,7 @@ namespace SewingProduction.form
             customLabel12.AutoSize = true;
             customLabel12.BackColor = System.Drawing.Color.Transparent;
             customLabel12.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel12.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel12.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel12.Location = new System.Drawing.Point(392, 134);
             customLabel12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel12.Name = "customLabel12";
@@ -711,7 +697,7 @@ namespace SewingProduction.form
             customComboBoxOrg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxOrg.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxOrg.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxOrg.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxOrg.Location = new System.Drawing.Point(145, 25);
             customComboBoxOrg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxOrg.Name = "customComboBoxOrg";
@@ -721,11 +707,10 @@ namespace SewingProduction.form
             // 
             // customComboBoxDolj
             // 
-            customComboBoxDolj.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customComboBoxDolj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxDolj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxDolj.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxDolj.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxDolj.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxDolj.FormattingEnabled = true;
             customComboBoxDolj.Location = new System.Drawing.Point(145, 59);
             customComboBoxDolj.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -740,7 +725,7 @@ namespace SewingProduction.form
             customCheckBoxITR.Cursor = System.Windows.Forms.Cursors.Hand;
             customCheckBoxITR.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBoxITR.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxITR.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customCheckBoxITR.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customCheckBoxITR.Location = new System.Drawing.Point(121, 47);
             customCheckBoxITR.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customCheckBoxITR.Name = "customCheckBoxITR";
@@ -755,7 +740,7 @@ namespace SewingProduction.form
             customCheckBoxDekret.Cursor = System.Windows.Forms.Cursors.Hand;
             customCheckBoxDekret.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBoxDekret.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxDekret.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customCheckBoxDekret.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customCheckBoxDekret.Location = new System.Drawing.Point(198, 47);
             customCheckBoxDekret.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customCheckBoxDekret.Name = "customCheckBoxDekret";
@@ -770,7 +755,7 @@ namespace SewingProduction.form
             customCheckBoxSovm.Cursor = System.Windows.Forms.Cursors.Hand;
             customCheckBoxSovm.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBoxSovm.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxSovm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customCheckBoxSovm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customCheckBoxSovm.Location = new System.Drawing.Point(565, 31);
             customCheckBoxSovm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customCheckBoxSovm.Name = "customCheckBoxSovm";
@@ -781,9 +766,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxNTabVed
             // 
-            customTextBoxNTabVed.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxNTabVed.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNTabVed.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxNTabVed.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxNTabVed.Location = new System.Drawing.Point(132, 95);
             customTextBoxNTabVed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNTabVed.Name = "customTextBoxNTabVed";
@@ -797,7 +781,7 @@ namespace SewingProduction.form
             customLabel9.AutoSize = true;
             customLabel9.BackColor = System.Drawing.Color.Transparent;
             customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel9.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel9.Location = new System.Drawing.Point(36, 99);
             customLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel9.Name = "customLabel9";
@@ -810,7 +794,7 @@ namespace SewingProduction.form
             customLabel11.AutoSize = true;
             customLabel11.BackColor = System.Drawing.Color.Transparent;
             customLabel11.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel11.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel11.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel11.Location = new System.Drawing.Point(16, 98);
             customLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel11.Name = "customLabel11";
@@ -820,9 +804,8 @@ namespace SewingProduction.form
             // 
             // customTextBoxTelDom
             // 
-            customTextBoxTelDom.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxTelDom.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxTelDom.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxTelDom.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxTelDom.Location = new System.Drawing.Point(144, 95);
             customTextBoxTelDom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxTelDom.Name = "customTextBoxTelDom";
@@ -831,13 +814,12 @@ namespace SewingProduction.form
             // 
             // customComboBoxPodr1c
             // 
-            customComboBoxPodr1c.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customComboBoxPodr1c.Cursor = System.Windows.Forms.Cursors.No;
             customComboBoxPodr1c.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxPodr1c.Enabled = false;
             customComboBoxPodr1c.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxPodr1c.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxPodr1c.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxPodr1c.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxPodr1c.FormattingEnabled = true;
             customComboBoxPodr1c.Location = new System.Drawing.Point(159, 462);
             customComboBoxPodr1c.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -859,9 +841,8 @@ namespace SewingProduction.form
             // 
             // customMaskedTextBoxTelSot
             // 
-            customMaskedTextBoxTelSot.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customMaskedTextBoxTelSot.Font = new System.Drawing.Font("Arial", 10F);
-            customMaskedTextBoxTelSot.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customMaskedTextBoxTelSot.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customMaskedTextBoxTelSot.Location = new System.Drawing.Point(144, 28);
             customMaskedTextBoxTelSot.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customMaskedTextBoxTelSot.Mask = "0 000 000 00 00";
@@ -871,9 +852,8 @@ namespace SewingProduction.form
             // 
             // customMaskedTextBoxDatePriem
             // 
-            customMaskedTextBoxDatePriem.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customMaskedTextBoxDatePriem.Font = new System.Drawing.Font("Arial", 10F);
-            customMaskedTextBoxDatePriem.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customMaskedTextBoxDatePriem.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customMaskedTextBoxDatePriem.Location = new System.Drawing.Point(177, 31);
             customMaskedTextBoxDatePriem.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customMaskedTextBoxDatePriem.Mask = "00/00/0000";
@@ -885,12 +865,11 @@ namespace SewingProduction.form
             // 
             // customButtonNowPriem
             // 
-            customButtonNowPriem.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonNowPriem.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonNowPriem.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonNowPriem.FlatAppearance.BorderSize = 0;
             customButtonNowPriem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonNowPriem.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonNowPriem.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonNowPriem.Location = new System.Drawing.Point(153, 30);
             customButtonNowPriem.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonNowPriem.Name = "customButtonNowPriem";
@@ -902,12 +881,11 @@ namespace SewingProduction.form
             // 
             // customButtonNowYvol
             // 
-            customButtonNowYvol.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonNowYvol.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonNowYvol.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonNowYvol.FlatAppearance.BorderSize = 0;
             customButtonNowYvol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonNowYvol.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonNowYvol.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonNowYvol.Location = new System.Drawing.Point(153, 63);
             customButtonNowYvol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonNowYvol.Name = "customButtonNowYvol";
@@ -920,9 +898,8 @@ namespace SewingProduction.form
             // 
             // customMaskedTextBoxDateYvoln
             // 
-            customMaskedTextBoxDateYvoln.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customMaskedTextBoxDateYvoln.Font = new System.Drawing.Font("Arial", 10F);
-            customMaskedTextBoxDateYvoln.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customMaskedTextBoxDateYvoln.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customMaskedTextBoxDateYvoln.Location = new System.Drawing.Point(177, 65);
             customMaskedTextBoxDateYvoln.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customMaskedTextBoxDateYvoln.Mask = "00/00/0000";
@@ -936,7 +913,7 @@ namespace SewingProduction.form
             // 
             customTextBoxINN.BackColor = System.Drawing.SystemColors.Control;
             customTextBoxINN.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxINN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxINN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxINN.Location = new System.Drawing.Point(766, 96);
             customTextBoxINN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxINN.Name = "customTextBoxINN";
@@ -949,7 +926,7 @@ namespace SewingProduction.form
             customLabel24.AutoSize = true;
             customLabel24.BackColor = System.Drawing.Color.Transparent;
             customLabel24.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel24.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel24.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel24.Location = new System.Drawing.Point(716, 99);
             customLabel24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel24.Name = "customLabel24";
@@ -962,7 +939,7 @@ namespace SewingProduction.form
             customTextBox1CdolgINN.BackColor = System.Drawing.SystemColors.Control;
             customTextBox1CdolgINN.Cursor = System.Windows.Forms.Cursors.PanNorth;
             customTextBox1CdolgINN.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1CdolgINN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBox1CdolgINN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBox1CdolgINN.Location = new System.Drawing.Point(601, 95);
             customTextBox1CdolgINN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox1CdolgINN.Name = "customTextBox1CdolgINN";
@@ -976,7 +953,7 @@ namespace SewingProduction.form
             customTextBox1CdolgID.BackColor = System.Drawing.SystemColors.Control;
             customTextBox1CdolgID.Cursor = System.Windows.Forms.Cursors.PanNorth;
             customTextBox1CdolgID.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1CdolgID.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBox1CdolgID.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBox1CdolgID.Location = new System.Drawing.Point(601, 61);
             customTextBox1CdolgID.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox1CdolgID.Name = "customTextBox1CdolgID";
@@ -990,7 +967,7 @@ namespace SewingProduction.form
             customTextBox1CpodrINN.BackColor = System.Drawing.SystemColors.Control;
             customTextBox1CpodrINN.Cursor = System.Windows.Forms.Cursors.PanNorth;
             customTextBox1CpodrINN.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1CpodrINN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBox1CpodrINN.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBox1CpodrINN.Location = new System.Drawing.Point(145, 93);
             customTextBox1CpodrINN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox1CpodrINN.Name = "customTextBox1CpodrINN";
@@ -1004,7 +981,7 @@ namespace SewingProduction.form
             customTextBox1CpodrID.BackColor = System.Drawing.SystemColors.Control;
             customTextBox1CpodrID.Cursor = System.Windows.Forms.Cursors.PanNorth;
             customTextBox1CpodrID.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1CpodrID.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBox1CpodrID.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBox1CpodrID.Location = new System.Drawing.Point(145, 60);
             customTextBox1CpodrID.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox1CpodrID.Name = "customTextBox1CpodrID";
@@ -1018,7 +995,7 @@ namespace SewingProduction.form
             customLabel27.AutoSize = true;
             customLabel27.BackColor = System.Drawing.Color.Transparent;
             customLabel27.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel27.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel27.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel27.Location = new System.Drawing.Point(470, 95);
             customLabel27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel27.Name = "customLabel27";
@@ -1031,7 +1008,7 @@ namespace SewingProduction.form
             customLabel26.AutoSize = true;
             customLabel26.BackColor = System.Drawing.Color.Transparent;
             customLabel26.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel26.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel26.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel26.Location = new System.Drawing.Point(470, 61);
             customLabel26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel26.Name = "customLabel26";
@@ -1044,7 +1021,7 @@ namespace SewingProduction.form
             customLabel25.AutoSize = true;
             customLabel25.BackColor = System.Drawing.Color.Transparent;
             customLabel25.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel25.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel25.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel25.Location = new System.Drawing.Point(16, 95);
             customLabel25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel25.Name = "customLabel25";
@@ -1054,12 +1031,11 @@ namespace SewingProduction.form
             // 
             // customButton1Cdolg
             // 
-            customButton1Cdolg.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButton1Cdolg.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButton1Cdolg.Cursor = System.Windows.Forms.Cursors.Hand;
             customButton1Cdolg.FlatAppearance.BorderSize = 0;
             customButton1Cdolg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButton1Cdolg.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1Cdolg.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButton1Cdolg.Location = new System.Drawing.Point(894, 25);
             customButton1Cdolg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButton1Cdolg.Name = "customButton1Cdolg";
@@ -1071,12 +1047,11 @@ namespace SewingProduction.form
             // 
             // customButton1Cpodr
             // 
-            customButton1Cpodr.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButton1Cpodr.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButton1Cpodr.Cursor = System.Windows.Forms.Cursors.Hand;
             customButton1Cpodr.FlatAppearance.BorderSize = 0;
             customButton1Cpodr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButton1Cpodr.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1Cpodr.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButton1Cpodr.Location = new System.Drawing.Point(438, 25);
             customButton1Cpodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButton1Cpodr.Name = "customButton1Cpodr";
@@ -1088,11 +1063,10 @@ namespace SewingProduction.form
             // 
             // customComboBox1Cdolg
             // 
-            customComboBox1Cdolg.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customComboBox1Cdolg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBox1Cdolg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBox1Cdolg.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox1Cdolg.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBox1Cdolg.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBox1Cdolg.FormattingEnabled = true;
             customComboBox1Cdolg.Location = new System.Drawing.Point(601, 27);
             customComboBox1Cdolg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1106,7 +1080,7 @@ namespace SewingProduction.form
             customLabel29.AutoSize = true;
             customLabel29.BackColor = System.Drawing.Color.Transparent;
             customLabel29.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel29.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel29.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel29.Location = new System.Drawing.Point(470, 30);
             customLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel29.Name = "customLabel29";
@@ -1120,7 +1094,7 @@ namespace SewingProduction.form
             customComboBox1Cpodr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBox1Cpodr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBox1Cpodr.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox1Cpodr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBox1Cpodr.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBox1Cpodr.Location = new System.Drawing.Point(145, 25);
             customComboBox1Cpodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBox1Cpodr.Name = "customComboBox1Cpodr";
@@ -1133,7 +1107,7 @@ namespace SewingProduction.form
             customLabel31.AutoSize = true;
             customLabel31.BackColor = System.Drawing.Color.Transparent;
             customLabel31.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel31.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel31.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel31.Location = new System.Drawing.Point(14, 30);
             customLabel31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel31.Name = "customLabel31";
@@ -1146,7 +1120,7 @@ namespace SewingProduction.form
             customLabel34.AutoSize = true;
             customLabel34.BackColor = System.Drawing.Color.Transparent;
             customLabel34.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel34.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel34.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel34.Location = new System.Drawing.Point(16, 61);
             customLabel34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel34.Name = "customLabel34";
@@ -1169,7 +1143,7 @@ namespace SewingProduction.form
             customGroupBox1.Controls.Add(customTextBoxFIO);
             customGroupBox1.Controls.Add(customLabel4);
             customGroupBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBox1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customGroupBox1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customGroupBox1.Location = new System.Drawing.Point(14, 14);
             customGroupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox1.Name = "customGroupBox1";
@@ -1189,7 +1163,7 @@ namespace SewingProduction.form
             customGroupBox2.Controls.Add(customTextBoxTelRab);
             customGroupBox2.Controls.Add(customLabel13);
             customGroupBox2.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBox2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customGroupBox2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customGroupBox2.Location = new System.Drawing.Point(14, 148);
             customGroupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox2.Name = "customGroupBox2";
@@ -1209,7 +1183,7 @@ namespace SewingProduction.form
             customGroupBox3.Controls.Add(customButtonNowYvol);
             customGroupBox3.Controls.Add(customMaskedTextBoxDateYvoln);
             customGroupBox3.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBox3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customGroupBox3.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customGroupBox3.Location = new System.Drawing.Point(331, 148);
             customGroupBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox3.Name = "customGroupBox3";
@@ -1228,7 +1202,7 @@ namespace SewingProduction.form
             customGroupBox4.Controls.Add(customLabel9);
             customGroupBox4.Controls.Add(customTextBoxNTabVed);
             customGroupBox4.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBox4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customGroupBox4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customGroupBox4.Location = new System.Drawing.Point(649, 148);
             customGroupBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox4.Name = "customGroupBox4";
@@ -1270,7 +1244,7 @@ namespace SewingProduction.form
             customGroupBox5.Controls.Add(customTextBoxSorted);
             customGroupBox5.Controls.Add(customLabel5);
             customGroupBox5.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBox5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customGroupBox5.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customGroupBox5.Location = new System.Drawing.Point(14, 283);
             customGroupBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox5.Name = "customGroupBox5";
@@ -1282,12 +1256,11 @@ namespace SewingProduction.form
             // 
             // customButtonXNved
             // 
-            customButtonXNved.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonXNved.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonXNved.Cursor = System.Windows.Forms.Cursors.Hand;
             customButtonXNved.FlatAppearance.BorderSize = 0;
             customButtonXNved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonXNved.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonXNved.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonXNved.Location = new System.Drawing.Point(894, 59);
             customButtonXNved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonXNved.Name = "customButtonXNved";
@@ -1299,11 +1272,10 @@ namespace SewingProduction.form
             // 
             // customComboBoxNved
             // 
-            customComboBoxNved.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customComboBoxNved.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxNved.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxNved.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxNved.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxNved.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxNved.FormattingEnabled = true;
             customComboBoxNved.Location = new System.Drawing.Point(672, 60);
             customComboBoxNved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1330,7 +1302,7 @@ namespace SewingProduction.form
             customGroupBox6.Controls.Add(customLabel27);
             customGroupBox6.Controls.Add(customLabel29);
             customGroupBox6.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBox6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customGroupBox6.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customGroupBox6.Location = new System.Drawing.Point(14, 528);
             customGroupBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox6.Name = "customGroupBox6";

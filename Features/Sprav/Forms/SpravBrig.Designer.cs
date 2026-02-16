@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using SewingProduction.Core.Class;
 namespace SewingProduction.form
 {
@@ -184,7 +184,7 @@ namespace SewingProduction.form
             // textBoxBrig
             // 
             textBoxBrig.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            textBoxBrig.BackColor = System.Drawing.Color.White;
+            // textBoxBrig.BackColor = System.Drawing.Color.White;
             tableLayoutPanel3.SetColumnSpan(textBoxBrig, 2);
             textBoxBrig.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             textBoxBrig.Location = new System.Drawing.Point(216, 34);
@@ -258,7 +258,7 @@ namespace SewingProduction.form
             linkLabelZeh.Anchor = System.Windows.Forms.AnchorStyles.Left;
             linkLabelZeh.AutoSize = true;
             linkLabelZeh.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            linkLabelZeh.LinkColor = System.Drawing.Color.Black;
+            // linkLabelZeh.LinkColor = System.Drawing.Color.Black;
             linkLabelZeh.Location = new System.Drawing.Point(4, 100);
             linkLabelZeh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             linkLabelZeh.Name = "linkLabelZeh";
@@ -296,11 +296,10 @@ namespace SewingProduction.form
             // simpleButtonAddOtm
             // 
             simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
             simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAddOtm.Location = new System.Drawing.Point(5, 146);
             simpleButtonAddOtm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddOtm.MinimumSize = new System.Drawing.Size(0, 47);
@@ -314,11 +313,10 @@ namespace SewingProduction.form
             // simpleButtonDel
             // 
             simpleButtonDel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonDel.FlatAppearance.BorderSize = 0;
             simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonDel.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonDel.Location = new System.Drawing.Point(216, 146);
             simpleButtonDel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonDel.MinimumSize = new System.Drawing.Size(0, 47);
@@ -332,11 +330,10 @@ namespace SewingProduction.form
             // simpleButtonAddSave
             // 
             simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddSave.FlatAppearance.BorderSize = 0;
             simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAddSave.Location = new System.Drawing.Point(429, 146);
             simpleButtonAddSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddSave.MinimumSize = new System.Drawing.Size(0, 47);
@@ -414,12 +411,11 @@ namespace SewingProduction.form
             // 
             // simpleButtonAdd
             // 
-            simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             simpleButtonAdd.FlatAppearance.BorderSize = 0;
             simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAdd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAdd.Location = new System.Drawing.Point(471, 3);
             simpleButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAdd.Name = "simpleButtonAdd";
@@ -431,12 +427,11 @@ namespace SewingProduction.form
             // 
             // simpleButtonRed
             // 
-            simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
             simpleButtonRed.FlatAppearance.BorderSize = 0;
             simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonRed.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonRed.Location = new System.Drawing.Point(389, 3);
             simpleButtonRed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonRed.Name = "simpleButtonRed";

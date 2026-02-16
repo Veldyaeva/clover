@@ -299,7 +299,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             _dataService = new TeamWorkDataServiceAdapter(_artNormService, _dbService);
             _uiService = new TeamWorkUIServiceAdapter(this);
             _validationService = new TeamWorkValidationServiceAdapter();
-            ThemeManager.UpdateTheme(this);
+         //   ThemeManager.UpdateTheme(this);
 
             if (!oldId.HasValue)
                 _selectedAnnId = _newAnnId = newId.Value;

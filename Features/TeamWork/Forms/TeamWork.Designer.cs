@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -661,7 +661,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabControl1.AppearancePage.Header.BackColor = System.Drawing.Color.Transparent;
             xtraTabControl1.AppearancePage.Header.Options.UseBackColor = true;
             xtraTabControl1.AppearancePage.HeaderActive.BackColor = System.Drawing.Color.Transparent;
-            xtraTabControl1.AppearancePage.HeaderActive.ForeColor = System.Drawing.Color.Black;
+//            xtraTabControl1.AppearancePage.HeaderActive.ForeColor = System.Drawing.Color.Black;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseBackColor = true;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseForeColor = true;
@@ -750,7 +750,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // statusLabel
             // 
             statusLabel.Font = new System.Drawing.Font("Arial", 10F);
-            statusLabel.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
+//            statusLabel.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
             statusLabel.Location = new System.Drawing.Point(5, 5);
             statusLabel.Name = "statusLabel";
             statusLabel.Size = new System.Drawing.Size(899, 20);
@@ -758,16 +758,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customSimpleButtonRaszLog
             // 
-            customSimpleButtonRaszLog.Appearance.BackColor = System.Drawing.Color.FromArgb(173, 216, 230);
+    //        customSimpleButtonRaszLog.Appearance.BackColor = System.Drawing.Color.FromArgb(173, 216, 230);
             customSimpleButtonRaszLog.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButtonRaszLog.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
-            customSimpleButtonRaszLog.Appearance.Options.UseBackColor = true;
+    //        customSimpleButtonRaszLog.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
+      //      customSimpleButtonRaszLog.Appearance.Options.UseBackColor = true;
             customSimpleButtonRaszLog.Appearance.Options.UseFont = true;
-            customSimpleButtonRaszLog.Appearance.Options.UseForeColor = true;
-            customSimpleButtonRaszLog.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            customSimpleButtonRaszLog.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            customSimpleButtonRaszLog.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButtonRaszLog.AppearanceDisabled.Options.UseForeColor = true;
+     //       customSimpleButtonRaszLog.Appearance.Options.UseForeColor = true;
+     //       customSimpleButtonRaszLog.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+     //       customSimpleButtonRaszLog.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+     //       customSimpleButtonRaszLog.AppearanceDisabled.Options.UseBackColor = true;
+     //       customSimpleButtonRaszLog.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButtonRaszLog.Location = new System.Drawing.Point(8, 939);
             customSimpleButtonRaszLog.Name = "customSimpleButtonRaszLog";
             customSimpleButtonRaszLog.Size = new System.Drawing.Size(212, 22);
@@ -778,16 +778,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customSimpleButtonAnnLog
             // 
-            customSimpleButtonAnnLog.Appearance.BackColor = System.Drawing.Color.FromArgb(173, 216, 230);
+    //        customSimpleButtonAnnLog.Appearance.BackColor = System.Drawing.Color.FromArgb(173, 216, 230);
             customSimpleButtonAnnLog.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButtonAnnLog.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
-            customSimpleButtonAnnLog.Appearance.Options.UseBackColor = true;
+    //        customSimpleButtonAnnLog.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 105, 148);
+    //        customSimpleButtonAnnLog.Appearance.Options.UseBackColor = true;
             customSimpleButtonAnnLog.Appearance.Options.UseFont = true;
-            customSimpleButtonAnnLog.Appearance.Options.UseForeColor = true;
-            customSimpleButtonAnnLog.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            customSimpleButtonAnnLog.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            customSimpleButtonAnnLog.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButtonAnnLog.AppearanceDisabled.Options.UseForeColor = true;
+     //       customSimpleButtonAnnLog.Appearance.Options.UseForeColor = true;
+     //       customSimpleButtonAnnLog.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+      //      customSimpleButtonAnnLog.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+      //      customSimpleButtonAnnLog.AppearanceDisabled.Options.UseBackColor = true;
+      //      customSimpleButtonAnnLog.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButtonAnnLog.Location = new System.Drawing.Point(169, 913);
             customSimpleButtonAnnLog.Name = "customSimpleButtonAnnLog";
             customSimpleButtonAnnLog.Size = new System.Drawing.Size(51, 22);
@@ -798,11 +798,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // ButtonArchAndCopyWd
             // 
-            ButtonArchAndCopyWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            ButtonArchAndCopyWd.FlatAppearance.BorderSize = 0;
-            ButtonArchAndCopyWd.FlatStyle = FlatStyle.Flat;
+      //      ButtonArchAndCopyWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+     //       ButtonArchAndCopyWd.FlatAppearance.BorderSize = 0;
+     //       ButtonArchAndCopyWd.FlatStyle = FlatStyle.Flat;
             ButtonArchAndCopyWd.Font = new System.Drawing.Font("Arial", 12F);
-            ButtonArchAndCopyWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+     //       ButtonArchAndCopyWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             ButtonArchAndCopyWd.Location = new System.Drawing.Point(11, 339);
             ButtonArchAndCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonArchAndCopyWd.Name = "ButtonArchAndCopyWd";
@@ -814,11 +814,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // ButtonDouble
             // 
-            ButtonDouble.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            ButtonDouble.FlatAppearance.BorderSize = 0;
-            ButtonDouble.FlatStyle = FlatStyle.Flat;
+     //       ButtonDouble.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+     //       ButtonDouble.FlatAppearance.BorderSize = 0;
+     //       ButtonDouble.FlatStyle = FlatStyle.Flat;
             ButtonDouble.Font = new System.Drawing.Font("Arial", 10F);
-            ButtonDouble.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+     //       ButtonDouble.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             ButtonDouble.Location = new System.Drawing.Point(11, 310);
             ButtonDouble.Margin = new Padding(4, 3, 4, 3);
             ButtonDouble.Name = "ButtonDouble";
@@ -830,9 +830,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // ButtonEditOnlyAdv
             // 
-            ButtonEditOnlyAdv.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+     //       ButtonEditOnlyAdv.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             ButtonEditOnlyAdv.Font = new System.Drawing.Font("Arial", 10F);
-            ButtonEditOnlyAdv.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       ButtonEditOnlyAdv.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             ButtonEditOnlyAdv.Location = new System.Drawing.Point(124, 281);
             ButtonEditOnlyAdv.Margin = new Padding(0);
             ButtonEditOnlyAdv.Name = "ButtonEditOnlyAdv";
@@ -844,11 +844,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // ButtonEditWd
             // 
-            ButtonEditWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            ButtonEditWd.FlatAppearance.BorderSize = 0;
-            ButtonEditWd.FlatStyle = FlatStyle.Flat;
+     //       ButtonEditWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+     //       ButtonEditWd.FlatAppearance.BorderSize = 0;
+     //       ButtonEditWd.FlatStyle = FlatStyle.Flat;
             ButtonEditWd.Font = new System.Drawing.Font("Arial", 12F);
-            ButtonEditWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+     //       ButtonEditWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             ButtonEditWd.Location = new System.Drawing.Point(11, 281);
             ButtonEditWd.Margin = new Padding(4, 3, 4, 3);
             ButtonEditWd.Name = "ButtonEditWd";
@@ -877,7 +877,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // KITlabel
             // 
             KITlabel.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            KITlabel.ForeColor = System.Drawing.Color.Red;
+//            KITlabel.ForeColor = System.Drawing.Color.Red;
             KITlabel.Location = new System.Drawing.Point(11, 211);
             KITlabel.Name = "KITlabel";
             KITlabel.Size = new System.Drawing.Size(222, 31);
@@ -887,11 +887,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // ButtonPreliminaryWd
             // 
-            ButtonPreliminaryWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            ButtonPreliminaryWd.FlatAppearance.BorderSize = 0;
-            ButtonPreliminaryWd.FlatStyle = FlatStyle.Flat;
+     //       ButtonPreliminaryWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+     //       ButtonPreliminaryWd.FlatAppearance.BorderSize = 0;
+     //       ButtonPreliminaryWd.FlatStyle = FlatStyle.Flat;
             ButtonPreliminaryWd.Font = new System.Drawing.Font("Arial", 10F);
-            ButtonPreliminaryWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+     //       ButtonPreliminaryWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             ButtonPreliminaryWd.Location = new System.Drawing.Point(11, 246);
             ButtonPreliminaryWd.Margin = new Padding(4, 3, 4, 3);
             ButtonPreliminaryWd.Name = "ButtonPreliminaryWd";
@@ -904,9 +904,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customSimpleButtonDel
             // 
-            customSimpleButtonDel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+     //       customSimpleButtonDel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             customSimpleButtonDel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButtonDel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       customSimpleButtonDel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customSimpleButtonDel.Appearance.Options.UseBackColor = true;
             customSimpleButtonDel.Appearance.Options.UseFont = true;
             customSimpleButtonDel.Appearance.Options.UseForeColor = true;
@@ -924,9 +924,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customSimpleButtonUpd
             // 
-            customSimpleButtonUpd.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+     //       customSimpleButtonUpd.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             customSimpleButtonUpd.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButtonUpd.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       customSimpleButtonUpd.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customSimpleButtonUpd.Appearance.Options.UseBackColor = true;
             customSimpleButtonUpd.Appearance.Options.UseFont = true;
             customSimpleButtonUpd.Appearance.Options.UseForeColor = true;
@@ -944,9 +944,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customSimpleButtonUnbind
             // 
-            customSimpleButtonUnbind.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+     //       customSimpleButtonUnbind.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             customSimpleButtonUnbind.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButtonUnbind.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       customSimpleButtonUnbind.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customSimpleButtonUnbind.Appearance.Options.UseBackColor = true;
             customSimpleButtonUnbind.Appearance.Options.UseFont = true;
             customSimpleButtonUnbind.Appearance.Options.UseForeColor = true;
@@ -964,16 +964,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customSimpleButtonArchARTICUL
             // 
-            customSimpleButtonArchARTICUL.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+     //       customSimpleButtonArchARTICUL.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             customSimpleButtonArchARTICUL.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButtonArchARTICUL.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customSimpleButtonArchARTICUL.Appearance.Options.UseBackColor = true;
-            customSimpleButtonArchARTICUL.Appearance.Options.UseFont = true;
-            customSimpleButtonArchARTICUL.Appearance.Options.UseForeColor = true;
-            customSimpleButtonArchARTICUL.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            customSimpleButtonArchARTICUL.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            customSimpleButtonArchARTICUL.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButtonArchARTICUL.AppearanceDisabled.Options.UseForeColor = true;
+     //       customSimpleButtonArchARTICUL.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       customSimpleButtonArchARTICUL.Appearance.Options.UseBackColor = true;
+     //       customSimpleButtonArchARTICUL.Appearance.Options.UseFont = true;
+     //       customSimpleButtonArchARTICUL.Appearance.Options.UseForeColor = true;
+     //       customSimpleButtonArchARTICUL.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+     //       customSimpleButtonArchARTICUL.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+     //       customSimpleButtonArchARTICUL.AppearanceDisabled.Options.UseBackColor = true;
+     //       customSimpleButtonArchARTICUL.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButtonArchARTICUL.Location = new System.Drawing.Point(167, 887);
             customSimpleButtonArchARTICUL.Name = "customSimpleButtonArchARTICUL";
             customSimpleButtonArchARTICUL.Size = new System.Drawing.Size(53, 22);
@@ -984,16 +984,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customSimpleButtonArch
             // 
-            customSimpleButtonArch.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+     //       customSimpleButtonArch.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             customSimpleButtonArch.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButtonArch.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customSimpleButtonArch.Appearance.Options.UseBackColor = true;
-            customSimpleButtonArch.Appearance.Options.UseFont = true;
-            customSimpleButtonArch.Appearance.Options.UseForeColor = true;
-            customSimpleButtonArch.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            customSimpleButtonArch.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            customSimpleButtonArch.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButtonArch.AppearanceDisabled.Options.UseForeColor = true;
+     //       customSimpleButtonArch.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       customSimpleButtonArch.Appearance.Options.UseBackColor = true;
+     //       customSimpleButtonArch.Appearance.Options.UseFont = true;
+     //       customSimpleButtonArch.Appearance.Options.UseForeColor = true;
+     //       customSimpleButtonArch.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+     //       customSimpleButtonArch.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+     //       customSimpleButtonArch.AppearanceDisabled.Options.UseBackColor = true;
+     //       customSimpleButtonArch.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButtonArch.Location = new System.Drawing.Point(119, 965);
             customSimpleButtonArch.Name = "customSimpleButtonArch";
             customSimpleButtonArch.Size = new System.Drawing.Size(101, 22);
@@ -1004,16 +1004,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // printButtonPlus
             // 
-            printButtonPlus.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+     //       printButtonPlus.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
             printButtonPlus.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            printButtonPlus.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            printButtonPlus.Appearance.Options.UseBackColor = true;
-            printButtonPlus.Appearance.Options.UseFont = true;
-            printButtonPlus.Appearance.Options.UseForeColor = true;
-            printButtonPlus.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            printButtonPlus.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            printButtonPlus.AppearanceDisabled.Options.UseBackColor = true;
-            printButtonPlus.AppearanceDisabled.Options.UseForeColor = true;
+     //       printButtonPlus.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       printButtonPlus.Appearance.Options.UseBackColor = true;
+     //       printButtonPlus.Appearance.Options.UseFont = true;
+     //       printButtonPlus.Appearance.Options.UseForeColor = true;
+     //       printButtonPlus.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+     //       printButtonPlus.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+     //       printButtonPlus.AppearanceDisabled.Options.UseBackColor = true;
+     //       printButtonPlus.AppearanceDisabled.Options.UseForeColor = true;
             printButtonPlus.Location = new System.Drawing.Point(131, 158);
             printButtonPlus.Name = "printButtonPlus";
             printButtonPlus.Size = new System.Drawing.Size(105, 22);
@@ -1052,13 +1052,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // buffer
             // 
-            buffer.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+     //       buffer.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             buffer.BorderStyle = BorderStyle.FixedSingle;
             buffer.Enabled = false;
             buffer.ErrorColor = System.Drawing.Color.Red;
             buffer.ErrorMessage = null;
             buffer.Font = new System.Drawing.Font("Arial", 10F);
-            buffer.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+     //       buffer.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             buffer.Location = new System.Drawing.Point(8, 592);
             buffer.Margin = new Padding(4, 3, 4, 3);
             buffer.Multiline = true;
@@ -1974,9 +1974,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // ButtonCopyWd
             // 
-            ButtonCopyWd.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+    //        ButtonCopyWd.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             ButtonCopyWd.Font = new System.Drawing.Font("Arial", 10F);
-            ButtonCopyWd.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+    //        ButtonCopyWd.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             ButtonCopyWd.Location = new System.Drawing.Point(6, 553);
             ButtonCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonCopyWd.Name = "ButtonCopyWd";
@@ -1989,16 +1989,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // PrintButton
             // 
-            PrintButton.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+    //        PrintButton.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             PrintButton.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            PrintButton.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            PrintButton.Appearance.Options.UseBackColor = true;
-            PrintButton.Appearance.Options.UseFont = true;
-            PrintButton.Appearance.Options.UseForeColor = true;
-            PrintButton.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            PrintButton.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            PrintButton.AppearanceDisabled.Options.UseBackColor = true;
-            PrintButton.AppearanceDisabled.Options.UseForeColor = true;
+    //        PrintButton.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+    //        PrintButton.Appearance.Options.UseBackColor = true;
+    //        PrintButton.Appearance.Options.UseFont = true;
+    //        PrintButton.Appearance.Options.UseForeColor = true;
+    //        PrintButton.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+    //        PrintButton.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+    //        PrintButton.AppearanceDisabled.Options.UseBackColor = true;
+    //        PrintButton.AppearanceDisabled.Options.UseForeColor = true;
             PrintButton.Location = new System.Drawing.Point(8, 158);
             PrintButton.Margin = new Padding(4, 3, 4, 3);
             PrintButton.Name = "PrintButton";
@@ -2026,7 +2026,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             SortBox.AutoSize = true;
             SortBox.Font = new System.Drawing.Font("Arial", 10F);
-            SortBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             SortBox.Location = new System.Drawing.Point(10, 97);
             SortBox.Margin = new Padding(4, 3, 4, 3);
             SortBox.Name = "SortBox";
@@ -2040,7 +2039,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             archiveCheckBox.AutoSize = true;
             archiveCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            archiveCheckBox.ForeColor = System.Drawing.Color.FromArgb(128, 64, 0);
             archiveCheckBox.Location = new System.Drawing.Point(10, 63);
             archiveCheckBox.Margin = new Padding(4, 3, 4, 3);
             archiveCheckBox.Name = "archiveCheckBox";
@@ -2056,7 +2054,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             actualCheckBox.Checked = true;
             actualCheckBox.CheckState = CheckState.Checked;
             actualCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            actualCheckBox.ForeColor = System.Drawing.Color.FromArgb(128, 64, 0);
             actualCheckBox.Location = new System.Drawing.Point(10, 36);
             actualCheckBox.Margin = new Padding(4, 3, 4, 3);
             actualCheckBox.Name = "actualCheckBox";
@@ -2072,7 +2069,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             preliminaryCheckBox.Checked = true;
             preliminaryCheckBox.CheckState = CheckState.Checked;
             preliminaryCheckBox.Font = new System.Drawing.Font("Arial", 10F);
-            preliminaryCheckBox.ForeColor = System.Drawing.Color.FromArgb(128, 64, 0);
             preliminaryCheckBox.Location = new System.Drawing.Point(10, 12);
             preliminaryCheckBox.Margin = new Padding(4, 3, 4, 3);
             preliminaryCheckBox.Name = "preliminaryCheckBox";
@@ -2088,11 +2084,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditMod.Location = new System.Drawing.Point(921, 45);
             textEditMod.Name = "textEditMod";
             textEditMod.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditMod.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+//            textEditMod.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             textEditMod.Properties.Appearance.Options.UseFont = true;
             textEditMod.Properties.Appearance.Options.UseForeColor = true;
             textEditMod.Properties.AppearanceDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditMod.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+//            textEditMod.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             textEditMod.Properties.AppearanceDisabled.Options.UseFont = true;
             textEditMod.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditMod.Properties.AppearanceDisabled.Options.UseTextOptions = true;
@@ -2108,7 +2104,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditArt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             textEditArt.Properties.Appearance.Options.UseFont = true;
             textEditArt.Properties.AppearanceDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditArt.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+//            textEditArt.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             textEditArt.Properties.AppearanceDisabled.Options.UseFont = true;
             textEditArt.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditArt.Size = new System.Drawing.Size(480, 20);
@@ -2121,7 +2117,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditSec.Location = new System.Drawing.Point(1632, 45);
             textEditSec.Name = "textEditSec";
             textEditSec.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            textEditSec.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+//            textEditSec.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             textEditSec.Properties.Appearance.Options.UseFont = true;
             textEditSec.Properties.Appearance.Options.UseForeColor = true;
             textEditSec.Size = new System.Drawing.Size(100, 20);
@@ -2135,7 +2131,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditCreate.Name = "textEditCreate";
             textEditCreate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             textEditCreate.Properties.Appearance.Options.UseFont = true;
-            textEditCreate.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
+//            textEditCreate.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
             textEditCreate.Properties.AppearanceDisabled.Options.UseForeColor = true;
             textEditCreate.Size = new System.Drawing.Size(103, 20);
             textEditCreate.StyleController = layoutControl2;
@@ -2599,13 +2595,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem35
             // 
             layoutControlItem35.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem35.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem35.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem35.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem35.AppearanceItemCaption.Options.UseForeColor = true;
+            layoutControlItem35.AppearanceItemCaption.Options.UseForeColor = false;
             layoutControlItem35.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem35.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem35.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem35.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem35.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            layoutControlItem35.AppearanceItemCaptionDisabled.Options.UseForeColor = false;
             layoutControlItem35.Control = textEditCreate;
             layoutControlItem35.Location = new System.Drawing.Point(815, 0);
             layoutControlItem35.MinSize = new System.Drawing.Size(50, 40);
@@ -2619,14 +2615,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem32
             // 
             layoutControlItem32.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem32.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem32.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem32.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem32.AppearanceItemCaption.Options.UseForeColor = true;
+            layoutControlItem32.AppearanceItemCaption.Options.UseForeColor = false;
             layoutControlItem32.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem32.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem32.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem32.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem32.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem32.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            layoutControlItem32.AppearanceItemCaptionDisabled.Options.UseForeColor = false;
             layoutControlItem32.Control = textEditMod;
             layoutControlItem32.Location = new System.Drawing.Point(0, 0);
             layoutControlItem32.MinSize = new System.Drawing.Size(1, 40);
@@ -2640,13 +2636,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem33
             // 
             layoutControlItem33.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem33.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem33.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem33.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem33.AppearanceItemCaption.Options.UseForeColor = true;
+            layoutControlItem33.AppearanceItemCaption.Options.UseForeColor = false;
             layoutControlItem33.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem33.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem33.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem33.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem33.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            layoutControlItem33.AppearanceItemCaptionDisabled.Options.UseForeColor = false;
             layoutControlItem33.Control = textEditArt;
             layoutControlItem33.Location = new System.Drawing.Point(227, 0);
             layoutControlItem33.Name = "layoutControlItem33";
@@ -2658,13 +2654,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem34
             // 
             layoutControlItem34.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem34.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem34.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem34.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem34.AppearanceItemCaption.Options.UseForeColor = true;
+            layoutControlItem34.AppearanceItemCaption.Options.UseForeColor = false;
             layoutControlItem34.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem34.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem34.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem34.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem34.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            layoutControlItem34.AppearanceItemCaptionDisabled.Options.UseForeColor = false;
             layoutControlItem34.Control = textEditSec;
             layoutControlItem34.Location = new System.Drawing.Point(711, 0);
             layoutControlItem34.MinSize = new System.Drawing.Size(50, 40);
@@ -2803,7 +2799,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // normRaskArt
             // 
-            normRaskArt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            normRaskArt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             normRaskArt.Appearance.EvenRow.Options.UseBackColor = true;
             normRaskArt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Kod_o, TextRask, razryd, sek, spec, Obor });
             normRaskArt.GridControl = customGridControl2;
@@ -2879,7 +2875,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // normKontTab
             // 
-            normKontTab.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            normKontTab.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             normKontTab.Appearance.EvenRow.Options.UseBackColor = true;
             normKontTab.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn67, gridColumn69, gridColumn70, gridColumn71 });
             normKontTab.GridControl = customGridControl1;
@@ -2922,7 +2918,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // customLabel2
             // 
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+//            customLabel2.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             customLabel2.Location = new System.Drawing.Point(5, 588);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(518, 26);
@@ -3914,7 +3910,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // xtraTabPage3
             // 
             xtraTabPage3.Appearance.Header.BackColor = System.Drawing.Color.Transparent;
-            xtraTabPage3.Appearance.Header.ForeColor = System.Drawing.Color.Black;
+//            xtraTabPage3.Appearance.Header.ForeColor = System.Drawing.Color.Black;
             xtraTabPage3.Appearance.Header.Options.UseBackColor = true;
             xtraTabPage3.Appearance.Header.Options.UseForeColor = true;
             xtraTabPage3.Appearance.HeaderActive.BackColor = System.Drawing.Color.Transparent;
@@ -3947,11 +3943,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButton2.FlatAppearance.BorderSize = 0;
-            customButton2.FlatStyle = FlatStyle.Flat;
+     //       customButton2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+     //       customButton2.FlatAppearance.BorderSize = 0;
+     //       customButton2.FlatStyle = FlatStyle.Flat;
             customButton2.Font = new System.Drawing.Font("Arial", 12F);
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+     //       customButton2.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButton2.Location = new System.Drawing.Point(12, 12);
             customButton2.Margin = new Padding(4, 3, 4, 3);
             customButton2.Name = "customButton2";
@@ -3986,10 +3982,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customCancelButton1
             // 
-            customCancelButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+     //       customCancelButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customCancelButton1.DialogResult = DialogResult.Cancel;
             customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customCancelButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       customCancelButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customCancelButton1.Location = new System.Drawing.Point(322, 38);
             customCancelButton1.Margin = new Padding(4, 3, 4, 3);
             customCancelButton1.Name = "customCancelButton1";
@@ -4000,9 +3996,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customComboBox1
             // 
-            customComboBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+     //       customComboBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+     //       customComboBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customComboBox1.FormattingEnabled = true;
             customComboBox1.Location = new System.Drawing.Point(254, 144);
             customComboBox1.Margin = new Padding(4, 3, 4, 3);
@@ -4012,9 +4008,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+     //       customButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+     //       customButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButton1.Location = new System.Drawing.Point(61, 39);
             customButton1.Margin = new Padding(4, 3, 4, 3);
             customButton1.Name = "customButton1";
@@ -4107,9 +4103,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridViewArch
             // 
-            gridViewArch.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            gridViewArch.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewArch.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewArch.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+//            gridViewArch.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewArch.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewArch.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewArch.Appearance.FocusedRow.Options.UseFont = true;
@@ -4161,7 +4157,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn63.FieldName = "Size_label";
             gridColumn63.Name = "gridColumn63";
             gridColumn63.Visible = true;
-            gridColumn63.VisibleIndex = 4;
+            gridColumn63.VisibleIndex = 3;
             gridColumn63.Width = 100;
             // 
             // gridColumn64
@@ -4170,7 +4166,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn64.FieldName = "StatusText";
             gridColumn64.Name = "gridColumn64";
             gridColumn64.Visible = true;
-            gridColumn64.VisibleIndex = 5;
+            gridColumn64.VisibleIndex = 4;
             gridColumn64.Width = 120;
             // 
             // gridColumn65
@@ -4179,7 +4175,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn65.FieldName = "AnnID";
             gridColumn65.Name = "gridColumn65";
             gridColumn65.Visible = true;
-            gridColumn65.VisibleIndex = 6;
+            gridColumn65.VisibleIndex = 5;
             gridColumn65.Width = 80;
             // 
             // layoutControlItem40
@@ -4278,14 +4274,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem48
             // 
             layoutControlItem48.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem48.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem48.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem48.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem48.AppearanceItemCaption.Options.UseForeColor = true;
+            layoutControlItem48.AppearanceItemCaption.Options.UseForeColor = false;
             layoutControlItem48.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem48.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem48.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem48.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem48.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem48.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            layoutControlItem48.AppearanceItemCaptionDisabled.Options.UseForeColor = false;
             layoutControlItem48.Control = textEditMod;
             layoutControlItem48.Location = new System.Drawing.Point(0, 0);
             layoutControlItem48.MinSize = new System.Drawing.Size(1, 40);
@@ -4299,13 +4295,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem50
             // 
             layoutControlItem50.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem50.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem50.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem50.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem50.AppearanceItemCaption.Options.UseForeColor = true;
+            layoutControlItem50.AppearanceItemCaption.Options.UseForeColor = false;
             layoutControlItem50.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem50.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem50.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem50.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem50.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            layoutControlItem50.AppearanceItemCaptionDisabled.Options.UseForeColor = false;
             layoutControlItem50.Control = textEditArt;
             layoutControlItem50.Location = new System.Drawing.Point(227, 0);
             layoutControlItem50.Name = "layoutControlItem33";
@@ -4317,13 +4313,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem51
             // 
             layoutControlItem51.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem51.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem51.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem51.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem51.AppearanceItemCaption.Options.UseForeColor = true;
+            layoutControlItem51.AppearanceItemCaption.Options.UseForeColor = false;
             layoutControlItem51.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem51.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+//            layoutControlItem51.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem51.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem51.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+            layoutControlItem51.AppearanceItemCaptionDisabled.Options.UseForeColor = false;
             layoutControlItem51.Control = textEditSec;
             layoutControlItem51.Location = new System.Drawing.Point(711, 0);
             layoutControlItem51.MinSize = new System.Drawing.Size(50, 40);
@@ -4337,13 +4333,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem52
             // 
             layoutControlItem52.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem52.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem52.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem52.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem52.AppearanceItemCaption.Options.UseForeColor = true;
+     //       layoutControlItem52.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem52.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem52.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem52.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem52.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem52.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+     //       layoutControlItem52.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem52.Control = textEditCreate;
             layoutControlItem52.Location = new System.Drawing.Point(815, 0);
             layoutControlItem52.MinSize = new System.Drawing.Size(50, 40);
@@ -4366,13 +4362,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem53
             // 
             layoutControlItem53.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem53.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem53.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem53.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem53.AppearanceItemCaption.Options.UseForeColor = true;
+     //       layoutControlItem53.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem53.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem53.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem53.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem53.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem53.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+     //       layoutControlItem53.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem53.Control = textEditCreate;
             layoutControlItem53.Location = new System.Drawing.Point(815, 0);
             layoutControlItem53.MinSize = new System.Drawing.Size(50, 40);
@@ -4386,14 +4382,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem54
             // 
             layoutControlItem54.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem54.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem54.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem54.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem54.AppearanceItemCaption.Options.UseForeColor = true;
+     //       layoutControlItem54.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem54.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem54.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem54.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem54.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem54.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem54.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+     //       layoutControlItem54.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem54.Control = textEditMod;
             layoutControlItem54.Location = new System.Drawing.Point(0, 0);
             layoutControlItem54.MinSize = new System.Drawing.Size(1, 40);
@@ -4407,13 +4403,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem55
             // 
             layoutControlItem55.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem55.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem55.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem55.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem55.AppearanceItemCaption.Options.UseForeColor = true;
+     //       layoutControlItem55.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem55.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem55.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem55.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem55.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem55.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+     //       layoutControlItem55.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem55.Control = textEditArt;
             layoutControlItem55.Location = new System.Drawing.Point(227, 0);
             layoutControlItem55.Name = "layoutControlItem33";
@@ -4425,13 +4421,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem56
             // 
             layoutControlItem56.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem56.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem56.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem56.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem56.AppearanceItemCaption.Options.UseForeColor = true;
+     //       layoutControlItem56.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem56.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem56.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem56.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem56.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem56.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+     //       layoutControlItem56.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem56.Control = textEditSec;
             layoutControlItem56.Location = new System.Drawing.Point(711, 0);
             layoutControlItem56.MinSize = new System.Drawing.Size(50, 40);
@@ -4445,14 +4441,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem57
             // 
             layoutControlItem57.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem57.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
+     //       layoutControlItem57.AppearanceItemCaption.ForeColor = System.Drawing.Color.Black;
             layoutControlItem57.AppearanceItemCaption.Options.UseFont = true;
-            layoutControlItem57.AppearanceItemCaption.Options.UseForeColor = true;
+     //       layoutControlItem57.AppearanceItemCaption.Options.UseForeColor = true;
             layoutControlItem57.AppearanceItemCaption.Options.UseTextOptions = true;
             layoutControlItem57.AppearanceItemCaptionDisabled.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            layoutControlItem57.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
+     //     layoutControlItem57.AppearanceItemCaptionDisabled.ForeColor = System.Drawing.Color.Black;
             layoutControlItem57.AppearanceItemCaptionDisabled.Options.UseFont = true;
-            layoutControlItem57.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
+     //       layoutControlItem57.AppearanceItemCaptionDisabled.Options.UseForeColor = true;
             layoutControlItem57.Control = textEditMod;
             layoutControlItem57.Location = new System.Drawing.Point(0, 0);
             layoutControlItem57.MinSize = new System.Drawing.Size(1, 40);

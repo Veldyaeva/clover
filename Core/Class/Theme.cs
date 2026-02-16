@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -312,7 +312,7 @@ namespace SewingProduction
                 {
                     themeable.ApplyTheme();
                 }
-                else if (child.HasChildren)
+                if (child.HasChildren)
                 {
                     UpdateTheme(child); // Рекурсивно обновляем вложенные элементы
                 }

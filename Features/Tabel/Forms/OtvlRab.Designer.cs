@@ -51,9 +51,9 @@ namespace SewingProduction.Features.Tabel.Forms
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            customToggleSwitchAdmin = new Core.Class.CustomControls.CustomToggleSwitch();
+            customToggleSwitchAdmin = new SewingProduction.Core.Class.CustomControls.CustomToggleSwitch();
             customMaskedTextBoxSum = new CustomMaskedTextBox();
-            customGridControlTabel = new Core.Class.CustomGridControl();
+            customGridControlTabel = new SewingProduction.Core.Class.CustomGridControl();
             bandedGridViewTabel = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             DatAndNom = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             Id = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
@@ -91,14 +91,14 @@ namespace SewingProduction.Features.Tabel.Forms
             repositoryItemTimeEditOtvl_r_po = new DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit();
             Otvl_r = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             repositoryItemTimeEditOtvl_r = new DevExpress.XtraEditors.Repository.RepositoryItemTimeEdit();
-            customButton3 = new Core.Class.CustomButton();
-            customButton2 = new Core.Class.CustomButton();
-            customButton1 = new Core.Class.CustomButton();
-            customButtonDel = new Core.Class.CustomButton();
-            customButtonAdd = new Core.Class.CustomButton();
-            customButtonAll = new Core.Class.CustomButton();
+            customButton3 = new SewingProduction.Core.Class.CustomButton();
+            customButton2 = new SewingProduction.Core.Class.CustomButton();
+            customButton1 = new SewingProduction.Core.Class.CustomButton();
+            customButtonDel = new SewingProduction.Core.Class.CustomButton();
+            customButtonAdd = new SewingProduction.Core.Class.CustomButton();
+            customButtonAll = new SewingProduction.Core.Class.CustomButton();
             customCalendarControlTabel = new CustomCalendarControl();
-            customSearchLookUpEditFio = new Core.Class.CustomSearchLookUpEdit();
+            customSearchLookUpEditFio = new SewingProduction.Core.Class.CustomSearchLookUpEdit();
             customSearchLookUpEditView = new DevExpress.XtraGrid.Views.Grid.GridView();
             Tabno = new DevExpress.XtraGrid.Columns.GridColumn();
             Fio = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -190,42 +190,38 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customToggleSwitchAdmin
             // 
-            customToggleSwitchAdmin.Location = new System.Drawing.Point(1306, 534);
+            customToggleSwitchAdmin.Location = new System.Drawing.Point(1278, 534);
             customToggleSwitchAdmin.Name = "customToggleSwitchAdmin";
-            customToggleSwitchAdmin.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
             customToggleSwitchAdmin.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customToggleSwitchAdmin.Properties.Appearance.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customToggleSwitchAdmin.Properties.Appearance.Options.UseBackColor = true;
             customToggleSwitchAdmin.Properties.Appearance.Options.UseFont = true;
             customToggleSwitchAdmin.Properties.Appearance.Options.UseForeColor = true;
             customToggleSwitchAdmin.Properties.OffText = "Off";
             customToggleSwitchAdmin.Properties.OnText = "On";
-            customToggleSwitchAdmin.Size = new System.Drawing.Size(77, 20);
+            customToggleSwitchAdmin.Size = new System.Drawing.Size(97, 26);
             customToggleSwitchAdmin.StyleController = layoutControl1;
             customToggleSwitchAdmin.TabIndex = 11;
             customToggleSwitchAdmin.Toggled += customToggleSwitchAdmin_Toggled;
             // 
             // customMaskedTextBoxSum
             // 
-            customMaskedTextBoxSum.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customMaskedTextBoxSum.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            customMaskedTextBoxSum.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customMaskedTextBoxSum.Location = new System.Drawing.Point(59, 534);
+            customMaskedTextBoxSum.Location = new System.Drawing.Point(51, 534);
             customMaskedTextBoxSum.MaximumSize = new System.Drawing.Size(0, 30);
             customMaskedTextBoxSum.MinimumSize = new System.Drawing.Size(0, 30);
             customMaskedTextBoxSum.Name = "customMaskedTextBoxSum";
-            customMaskedTextBoxSum.Size = new System.Drawing.Size(211, 30);
+            customMaskedTextBoxSum.Size = new System.Drawing.Size(218, 30);
             customMaskedTextBoxSum.TabIndex = 10;
             customMaskedTextBoxSum.ValidatingType = typeof(System.DateTime);
             // 
             // customGridControlTabel
             // 
             customGridControlTabel.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlTabel.Location = new System.Drawing.Point(12, 200);
+            customGridControlTabel.Location = new System.Drawing.Point(12, 191);
             customGridControlTabel.MainView = bandedGridViewTabel;
             customGridControlTabel.Name = "customGridControlTabel";
             customGridControlTabel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemTimeEditPriem_t, repositoryItemTimeEditPriem_t_s, repositoryItemTimeEditPriem_t_po, repositoryItemTimeEditSort_t_s, repositoryItemTimeEditSort_t_po, repositoryItemTimeEditDrug_s_s, repositoryItemTimeEditDrug_s_po, repositoryItemTimeEditOtvl_r_s, repositoryItemTimeEditOtvl_r_po });
-            customGridControlTabel.Size = new System.Drawing.Size(1383, 297);
+            customGridControlTabel.Size = new System.Drawing.Size(1375, 307);
             customGridControlTabel.TabIndex = 9;
             customGridControlTabel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridViewTabel });
             customGridControlTabel.Load += customGridControlTabel_Load;
@@ -236,9 +232,7 @@ namespace SewingProduction.Features.Tabel.Forms
             bandedGridViewTabel.ActiveFilterEnabled = false;
             bandedGridViewTabel.Appearance.BandPanel.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             bandedGridViewTabel.Appearance.BandPanel.Options.UseFont = true;
-            bandedGridViewTabel.Appearance.EvenRow.BackColor = System.Drawing.Color.Lavender;
             bandedGridViewTabel.Appearance.EvenRow.Options.UseBackColor = true;
-            bandedGridViewTabel.Appearance.FocusedRow.BackColor = System.Drawing.Color.Lavender;
             bandedGridViewTabel.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             bandedGridViewTabel.Appearance.FocusedRow.Options.UseBackColor = true;
             bandedGridViewTabel.Appearance.FocusedRow.Options.UseFont = true;
@@ -621,10 +615,8 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButton3
             // 
-            customButton3.BackColor = System.Drawing.Color.Lavender;
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            customButton3.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            customButton3.Location = new System.Drawing.Point(1223, 45);
+            customButton3.Location = new System.Drawing.Point(1215, 44);
             customButton3.MinimumSize = new System.Drawing.Size(160, 0);
             customButton3.Name = "customButton3";
             customButton3.Size = new System.Drawing.Size(160, 40);
@@ -634,10 +626,8 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.Lavender;
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            customButton2.Location = new System.Drawing.Point(1059, 45);
+            customButton2.Location = new System.Drawing.Point(1051, 44);
             customButton2.MinimumSize = new System.Drawing.Size(160, 0);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(160, 40);
@@ -647,10 +637,8 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.Lavender;
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            customButton1.Location = new System.Drawing.Point(895, 45);
+            customButton1.Location = new System.Drawing.Point(887, 44);
             customButton1.MinimumSize = new System.Drawing.Size(160, 0);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(160, 40);
@@ -660,10 +648,8 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButtonDel
             // 
-            customButtonDel.BackColor = System.Drawing.Color.Lavender;
             customButtonDel.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDel.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            customButtonDel.Location = new System.Drawing.Point(228, 45);
+            customButtonDel.Location = new System.Drawing.Point(228, 44);
             customButtonDel.MaximumSize = new System.Drawing.Size(200, 0);
             customButtonDel.MinimumSize = new System.Drawing.Size(200, 0);
             customButtonDel.Name = "customButtonDel";
@@ -675,10 +661,8 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButtonAdd
             // 
-            customButtonAdd.BackColor = System.Drawing.Color.Lavender;
             customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAdd.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            customButtonAdd.Location = new System.Drawing.Point(24, 45);
+            customButtonAdd.Location = new System.Drawing.Point(24, 44);
             customButtonAdd.MaximumSize = new System.Drawing.Size(200, 40);
             customButtonAdd.MinimumSize = new System.Drawing.Size(200, 0);
             customButtonAdd.Name = "customButtonAdd";
@@ -690,10 +674,8 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customButtonAll
             // 
-            customButtonAll.BackColor = System.Drawing.Color.Lavender;
             customButtonAll.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAll.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            customButtonAll.Location = new System.Drawing.Point(1360, 112);
+            customButtonAll.Location = new System.Drawing.Point(1352, 107);
             customButtonAll.Name = "customButtonAll";
             customButtonAll.Size = new System.Drawing.Size(35, 74);
             customButtonAll.TabIndex = 8;
@@ -711,7 +693,7 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             customCalendarControlTabel.BottomPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             customCalendarControlTabel.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            customCalendarControlTabel.BottomPanel.Location = new System.Drawing.Point(0, 193);
+            customCalendarControlTabel.BottomPanel.Location = new System.Drawing.Point(0, 185);
             customCalendarControlTabel.BottomPanel.Name = "";
             customCalendarControlTabel.BottomPanel.Padding = new System.Windows.Forms.Padding(6);
             customCalendarControlTabel.BottomPanel.Size = new System.Drawing.Size(225, 42);
@@ -740,14 +722,14 @@ namespace SewingProduction.Features.Tabel.Forms
             customCalendarControlTabel.HorizontalRowHeight = 42;
             customCalendarControlTabel.HorizontalTitleForeColor = System.Drawing.Color.Empty;
             customCalendarControlTabel.LayoutMode = CalendarLayoutMode.HorizontalDays;
-            customCalendarControlTabel.Location = new System.Drawing.Point(12, 112);
+            customCalendarControlTabel.Location = new System.Drawing.Point(12, 107);
             customCalendarControlTabel.Name = "customCalendarControlTabel";
             customCalendarControlTabel.NormalDayBackColor = System.Drawing.Color.Transparent;
             customCalendarControlTabel.OffDayBackColor = System.Drawing.Color.Gainsboro;
             customCalendarControlTabel.OffDayForeColor = System.Drawing.Color.Empty;
             customCalendarControlTabel.SelectedDayBackColor = System.Drawing.Color.Lavender;
             customCalendarControlTabel.SelectedDayForeColor = System.Drawing.Color.Empty;
-            customCalendarControlTabel.Size = new System.Drawing.Size(1344, 74);
+            customCalendarControlTabel.Size = new System.Drawing.Size(1336, 74);
             customCalendarControlTabel.SpecialBackColor = System.Drawing.Color.Transparent;
             customCalendarControlTabel.SpecialForeColor = System.Drawing.Color.Empty;
             customCalendarControlTabel.StyleController = layoutControl1;
@@ -756,14 +738,11 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             // customSearchLookUpEditFio
             // 
-            customSearchLookUpEditFio.Location = new System.Drawing.Point(467, 45);
+            customSearchLookUpEditFio.Location = new System.Drawing.Point(459, 44);
             customSearchLookUpEditFio.MaximumSize = new System.Drawing.Size(400, 30);
             customSearchLookUpEditFio.MinimumSize = new System.Drawing.Size(400, 30);
             customSearchLookUpEditFio.Name = "customSearchLookUpEditFio";
-            customSearchLookUpEditFio.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customSearchLookUpEditFio.Properties.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            customSearchLookUpEditFio.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customSearchLookUpEditFio.Properties.Appearance.Options.UseBackColor = true;
             customSearchLookUpEditFio.Properties.Appearance.Options.UseFont = true;
             customSearchLookUpEditFio.Properties.Appearance.Options.UseForeColor = true;
             customSearchLookUpEditFio.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -803,35 +782,35 @@ namespace SewingProduction.Features.Tabel.Forms
             Root.GroupBordersVisible = false;
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleSeparator2, splitterItem2, splitterItem1, layoutControlItem1, layoutControlGroupRab, layoutControlItem4, layoutControlGroupOtch, layoutControlItem9, layoutControlGroupSum });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(1407, 588);
+            Root.Size = new System.Drawing.Size(1399, 588);
             Root.TextVisible = false;
             // 
             // simpleSeparator2
             // 
-            simpleSeparator2.Location = new System.Drawing.Point(0, 99);
+            simpleSeparator2.Location = new System.Drawing.Point(0, 94);
             simpleSeparator2.Name = "simpleSeparator2";
-            simpleSeparator2.Size = new System.Drawing.Size(1387, 1);
+            simpleSeparator2.Size = new System.Drawing.Size(1379, 1);
             // 
             // splitterItem2
             // 
-            splitterItem2.Location = new System.Drawing.Point(0, 89);
+            splitterItem2.Location = new System.Drawing.Point(0, 88);
             splitterItem2.Name = "splitterItem2";
-            splitterItem2.Size = new System.Drawing.Size(1387, 10);
+            splitterItem2.Size = new System.Drawing.Size(1379, 6);
             // 
             // splitterItem1
             // 
-            splitterItem1.Location = new System.Drawing.Point(0, 178);
+            splitterItem1.Location = new System.Drawing.Point(0, 173);
             splitterItem1.Name = "splitterItem1";
-            splitterItem1.Size = new System.Drawing.Size(1387, 10);
+            splitterItem1.Size = new System.Drawing.Size(1379, 6);
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = customCalendarControlTabel;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 100);
+            layoutControlItem1.Location = new System.Drawing.Point(0, 95);
             layoutControlItem1.MaxSize = new System.Drawing.Size(0, 78);
             layoutControlItem1.MinSize = new System.Drawing.Size(1, 78);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1348, 78);
+            layoutControlItem1.Size = new System.Drawing.Size(1340, 78);
             layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem1.TextVisible = false;
             // 
@@ -840,7 +819,7 @@ namespace SewingProduction.Features.Tabel.Forms
             layoutControlGroupRab.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem5, layoutControlItem6, layoutControlItemFio, emptySpaceItem1 });
             layoutControlGroupRab.Location = new System.Drawing.Point(0, 0);
             layoutControlGroupRab.Name = "layoutControlGroupRab";
-            layoutControlGroupRab.Size = new System.Drawing.Size(871, 89);
+            layoutControlGroupRab.Size = new System.Drawing.Size(863, 88);
             layoutControlGroupRab.Text = "Почасовая занятость работника склада";
             // 
             // layoutControlItem5
@@ -864,7 +843,7 @@ namespace SewingProduction.Features.Tabel.Forms
             layoutControlItemFio.Control = customSearchLookUpEditFio;
             layoutControlItemFio.Location = new System.Drawing.Point(408, 0);
             layoutControlItemFio.Name = "layoutControlItemFio";
-            layoutControlItemFio.Size = new System.Drawing.Size(439, 34);
+            layoutControlItemFio.Size = new System.Drawing.Size(431, 34);
             layoutControlItemFio.Text = "ФИО";
             layoutControlItemFio.TextSize = new System.Drawing.Size(23, 13);
             // 
@@ -872,12 +851,12 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             emptySpaceItem1.Location = new System.Drawing.Point(408, 34);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(439, 10);
+            emptySpaceItem1.Size = new System.Drawing.Size(431, 10);
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = customButtonAll;
-            layoutControlItem4.Location = new System.Drawing.Point(1348, 100);
+            layoutControlItem4.Location = new System.Drawing.Point(1340, 95);
             layoutControlItem4.Name = "layoutControlItem4";
             layoutControlItem4.Size = new System.Drawing.Size(39, 78);
             layoutControlItem4.TextVisible = false;
@@ -886,9 +865,9 @@ namespace SewingProduction.Features.Tabel.Forms
             // 
             layoutControlGroupOtch.CustomizationFormText = "layoutControlGroupOtch";
             layoutControlGroupOtch.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3, layoutControlItem7, layoutControlItem8 });
-            layoutControlGroupOtch.Location = new System.Drawing.Point(871, 0);
+            layoutControlGroupOtch.Location = new System.Drawing.Point(863, 0);
             layoutControlGroupOtch.Name = "layoutControlGroupOtch";
-            layoutControlGroupOtch.Size = new System.Drawing.Size(516, 89);
+            layoutControlGroupOtch.Size = new System.Drawing.Size(516, 88);
             layoutControlGroupOtch.Text = "Отчеты";
             // 
             // layoutControlItem3
@@ -918,18 +897,18 @@ namespace SewingProduction.Features.Tabel.Forms
             // layoutControlItem9
             // 
             layoutControlItem9.Control = customGridControlTabel;
-            layoutControlItem9.Location = new System.Drawing.Point(0, 188);
+            layoutControlItem9.Location = new System.Drawing.Point(0, 179);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(1387, 301);
+            layoutControlItem9.Size = new System.Drawing.Size(1379, 311);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlGroupSum
             // 
             layoutControlGroupSum.CustomizationFormText = "Суммарно по всем видам работ";
             layoutControlGroupSum.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItemSum, emptySpaceItem2, layoutControlItem2 });
-            layoutControlGroupSum.Location = new System.Drawing.Point(0, 489);
+            layoutControlGroupSum.Location = new System.Drawing.Point(0, 490);
             layoutControlGroupSum.Name = "layoutControlGroupSum";
-            layoutControlGroupSum.Size = new System.Drawing.Size(1387, 79);
+            layoutControlGroupSum.Size = new System.Drawing.Size(1379, 78);
             layoutControlGroupSum.Text = "Суммарно по всем видам работ";
             // 
             // layoutControlItemSum
@@ -937,22 +916,22 @@ namespace SewingProduction.Features.Tabel.Forms
             layoutControlItemSum.Control = customMaskedTextBoxSum;
             layoutControlItemSum.Location = new System.Drawing.Point(0, 0);
             layoutControlItemSum.Name = "layoutControlItemSum";
-            layoutControlItemSum.Size = new System.Drawing.Size(250, 34);
+            layoutControlItemSum.Size = new System.Drawing.Size(249, 34);
             layoutControlItemSum.Text = "l";
             layoutControlItemSum.TextSize = new System.Drawing.Size(23, 13);
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(250, 0);
+            emptySpaceItem2.Location = new System.Drawing.Point(249, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(1032, 34);
+            emptySpaceItem2.Size = new System.Drawing.Size(1005, 34);
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = customToggleSwitchAdmin;
-            layoutControlItem2.Location = new System.Drawing.Point(1282, 0);
+            layoutControlItem2.Location = new System.Drawing.Point(1254, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(81, 34);
+            layoutControlItem2.Size = new System.Drawing.Size(101, 34);
             layoutControlItem2.TextVisible = false;
             // 
             // gridColumn3

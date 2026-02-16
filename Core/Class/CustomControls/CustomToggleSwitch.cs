@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -27,23 +27,16 @@ namespace SewingProduction.Core.Class.CustomControls
         public CustomToggleSwitch()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            // Цвета оставляем на усмотрение DevExpress/скинов, только базовые параметры
             Font = ThemeManager.SharedSettings.DefaultFont;
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
-        private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
 

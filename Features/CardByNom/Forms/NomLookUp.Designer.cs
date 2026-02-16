@@ -33,6 +33,7 @@
             gridViewRasNomList = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridRasNomListColumnNomZad = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnNomPach = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridRasNomListColumnDataR = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnMinPach = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnMaxPach = new DevExpress.XtraGrid.Columns.GridColumn();
             gridRasNomListColumnMgZakr = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -51,7 +52,6 @@
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            gridRasNomListColumnDataR = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControlRasNomList).BeginInit();
@@ -91,11 +91,11 @@
             // 
             // gridViewRasNomList
             // 
-            gridViewRasNomList.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
-            gridViewRasNomList.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewRasNomList.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            // gridViewRasNomList.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
+            //gridViewRasNomList.Appearance.EvenRow.Options.UseBackColor = true;
+            // gridViewRasNomList.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(200, 225, 255);
             gridViewRasNomList.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridViewRasNomList.Appearance.FocusedRow.Options.UseBackColor = true;
+            //gridViewRasNomList.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRasNomList.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRasNomList.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridRasNomListColumnNomZad, gridRasNomListColumnNomPach, gridRasNomListColumnDataR, gridRasNomListColumnMinPach, gridRasNomListColumnMaxPach, gridRasNomListColumnMgZakr, gridRasNomListColumnKod7, gridRasNomListColumnGrupPach, gridRasNomListColumnArticulPach, gridRasNomListColumnModPach, gridRasNomListColumnYearPach, gridRasNomListColumnProizvType, gridRasNomListColumnDostZeh, gridRasNomListColumnIDBrig });
             gridViewRasNomList.GridControl = gridControlRasNomList;
@@ -116,6 +116,13 @@
             gridRasNomListColumnNomPach.Name = "gridRasNomListColumnNomPach";
             gridRasNomListColumnNomPach.Visible = true;
             gridRasNomListColumnNomPach.VisibleIndex = 2;
+            // 
+            // gridRasNomListColumnDataR
+            // 
+            gridRasNomListColumnDataR.Caption = "Дата расчета";
+            gridRasNomListColumnDataR.Name = "gridRasNomListColumnDataR";
+            gridRasNomListColumnDataR.Visible = true;
+            gridRasNomListColumnDataR.VisibleIndex = 3;
             // 
             // gridRasNomListColumnMinPach
             // 
@@ -193,12 +200,8 @@
             customTextBoxEx1.Location = new System.Drawing.Point(166, 12);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
-            customTextBoxEx1.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(230, 245, 255);
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxEx1.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(50, 90, 160);
-            customTextBoxEx1.Properties.Appearance.Options.UseBackColor = true;
             customTextBoxEx1.Properties.Appearance.Options.UseFont = true;
-            customTextBoxEx1.Properties.Appearance.Options.UseForeColor = true;
             customTextBoxEx1.Size = new System.Drawing.Size(165, 22);
             customTextBoxEx1.StyleController = layoutControl1;
             customTextBoxEx1.TabIndex = 5;
@@ -207,7 +210,6 @@
             // customLabel1
             // 
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(30, 70, 140);
             customLabel1.Location = new System.Drawing.Point(12, 12);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(150, 22);
@@ -253,13 +255,6 @@
             layoutControlItem3.Size = new System.Drawing.Size(916, 599);
             layoutControlItem3.TextVisible = false;
             // 
-            // gridRasNomListColumnDataR
-            // 
-            gridRasNomListColumnDataR.Caption = "Дата расчета";
-            gridRasNomListColumnDataR.Name = "gridRasNomListColumnDataR";
-            gridRasNomListColumnDataR.Visible = true;
-            gridRasNomListColumnDataR.VisibleIndex = 3;
-            // 
             // NomLookUp
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -283,8 +278,6 @@
         }
 
         #endregion
-
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private Core.Class.CustomGridControl gridControlRasNomList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewRasNomList;
         private CustomTextBoxEx customTextBoxEx1;
@@ -308,5 +301,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnDostZeh;
         private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnIDBrig;
         private DevExpress.XtraGrid.Columns.GridColumn gridRasNomListColumnDataR;
+        private Core.Class.CustomLayoutControl layoutControl1;
     }
 }
