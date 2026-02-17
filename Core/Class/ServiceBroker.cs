@@ -157,48 +157,10 @@ namespace SewingProduction
             }
         }
 
-        //private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
-        //{
-        //    Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
-
-        //    // защита от параллельных вызовов
-        //    if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
-        //        return;
-
-        //    try
-        //    {
-        //        // QN одноразовые — снимаем текущую подписку
-        //        StopListening();
-
-        //        if (_brokerStopped)
-        //            return;
-
-        //        // SqlDependency НЕ отдаёт список колонок — передаём null
-        //        await RaiseChangedAsync(_table, changedFieldsCsv: null);
-
-        //        // переподписка
-        //        if (_flagStartListening && !_brokerStopped)
-        //            StartListening(_fields, _table);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
-        //        try
-        //        {
-        //            if (_flagStartListening && !_brokerStopped)
-        //                StartListening(_fields, _table);
-        //        }
-        //        catch { }
-        //    }
-        //    finally
-        //    {
-        //        Interlocked.Exchange(ref _onChangeGate, 0);
-        //    }
-        //}
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
             Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
-
+            // защита от параллельных вызовов
             if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
                 return;
 
@@ -246,106 +208,6 @@ namespace SewingProduction
                 Interlocked.Exchange(ref _onChangeGate, 0);
             }
         }
-
-
-        //////private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
-        //////{
-        //////    Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
-        //////    // защита от параллельных вызовов 
-        //////    if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
-        //////        return;
-
-        //////    try
-        //////    {
-        //////        // ВСЕГДА снимаем старую подписку (она одноразовая)
-        //////        StopListening();
-
-        //////        if (_brokerStopped)
-        //////            return;
-        //////        // ВСЕГДА переподписываемся, если слушание активно
-        //////        if (_flagStartListening)
-        //////            StartListening(_fields, _table);
-
-
-
-
-        //////        // 1) SqlDependency шлёт Subscribe/Query при установке подписки — это НЕ изменение данных
-        //////        if (e.Type != SqlNotificationType.Change)
-        //////        {
-        //////            Debug.WriteLine($"[ServiceBroker] Ignore notification: type={e.Type}, info={e.Info}, source={e.Source}");
-        //////            // просто переподписываемся и выходим
-        //////            // ResubscribeSafe();
-        //////            return;
-        //////        }
-        //////        // 2) QN одноразовые — переподписываемся ВСЕГДА на Change
-        //////        Debug.WriteLine($"[ServiceBroker] Resubscribe: table={_table}, fields={_fields}");
-        //////        StopListening();
-        //////        if (!_brokerStopped && _flagStartListening)
-        //////            StartListening(_fields, _table);
-
-        //////        // 2) Для Change — фильтруем мусорные состояния
-        //////        // Обычно изменения: Insert/Update/Delete.
-        //////        var isDataChange =
-        //////                   e.Info == SqlNotificationInfo.Insert ||
-        //////                   e.Info == SqlNotificationInfo.Update ||
-        //////                   e.Info == SqlNotificationInfo.Delete ||
-        //////                   e.Info == SqlNotificationInfo.Merge;
-
-        //////        if (!isDataChange)
-        //////        {
-        //////            Debug.WriteLine($"[ServiceBroker] Change ignored (no UI): info={e.Info}, source={e.Source}");
-        //////            return;
-        //////        }
-
-        //////        // Вызов наружу (тонко!)
-        //////        Debug.WriteLine($"[ServiceBroker] RaiseChanged: table={_table}");
-        //////        await RaiseChangedAsync(_table, changedFieldsCsv: null);
-        //////        // Debug.WriteLine($"[ServiceBroker:{_id}] Notification: table=...");
-
-        //////    }
-        //////    catch (Exception ex)
-        //////    {
-        //////        Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
-        //////        // ResubscribeSafe();
-        //////    }
-        //////    finally
-        //////    {
-        //////        Interlocked.Exchange(ref _onChangeGate, 0);
-        //////    }
-        //////}
-
-        //private void ResubscribeSafe()
-        //{
-        //    try
-        //    {
-        //        // dependency одноразовый, пересоздаём listening
-        //        StartListening(_fieldsCsv, _table);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine($"[ServiceBroker] ResubscribeSafe error: {ex.Message}");
-        //    }
-        //}
-
-        //// Универсальный маршалинг в UI
-        //private Task InvokeOnOwnerAsync(Func<Task> fn)
-        //{
-        //    if (_owner is Control c && c.IsHandleCreated)
-        //    {
-        //        if (c.InvokeRequired)
-        //        {
-        //            var tcs = new TaskCompletionSource<object?>();
-        //            c.BeginInvoke(new Action(async () =>
-        //            {
-        //                try { await fn(); tcs.TrySetResult(null); }
-        //                catch (Exception ex) { tcs.TrySetException(ex); }
-        //            }));
-        //            return tcs.Task;
-        //        }
-        //    }
-
-        //    return fn();
-        //}
 
         private static string BuildQuotedTableName(string tableOrSchemaTable)
         {
