@@ -34,11 +34,20 @@ namespace SewingProduction
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpMainForm));
             popupMenu1 = new DevExpress.XtraBars.PopupMenu(components);
             barManager1 = new DevExpress.XtraBars.BarManager(components);
+            bar1 = new DevExpress.XtraBars.Bar();
+            skinBarSubItem2 = new DevExpress.XtraBars.SkinBarSubItem();
+            skinDropDownButtonItem2 = new DevExpress.XtraBars.SkinDropDownButtonItem();
+            skinPaletteDropDownButtonItem2 = new DevExpress.XtraBars.SkinPaletteDropDownButtonItem();
+            standaloneBarDockControl2 = new DevExpress.XtraBars.StandaloneBarDockControl();
             barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            menuStrip1 = new System.Windows.Forms.MenuStrip();
+            skinBarSubItem1 = new DevExpress.XtraBars.SkinBarSubItem();
+            skinDropDownButtonItem1 = new DevExpress.XtraBars.SkinDropDownButtonItem();
+            skinPaletteDropDownButtonItem1 = new DevExpress.XtraBars.SkinPaletteDropDownButtonItem();
+            xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
+            miniToolStrip = new System.Windows.Forms.MenuStrip();
             МенюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             профильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,11 +86,20 @@ namespace SewingProduction
             кнопкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             табельToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             справкаtoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
+            menuStrip1 = new System.Windows.Forms.MenuStrip();
+            customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
-            menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)xtraTabbedMdiManager1).BeginInit();
+            menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
+            customLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             SuspendLayout();
             // 
             // popupMenu1
@@ -91,11 +109,65 @@ namespace SewingProduction
             // 
             // barManager1
             // 
+            barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] { bar1 });
             barManager1.DockControls.Add(barDockControlTop);
             barManager1.DockControls.Add(barDockControlBottom);
             barManager1.DockControls.Add(barDockControlLeft);
             barManager1.DockControls.Add(barDockControlRight);
+            barManager1.DockControls.Add(standaloneBarDockControl2);
             barManager1.Form = this;
+            barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2 });
+            barManager1.MaxItemId = 6;
+            // 
+            // bar1
+            // 
+            bar1.BarName = "Custom 2";
+            bar1.DockCol = 0;
+            bar1.DockRow = 0;
+            bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Standalone;
+            bar1.FloatLocation = new Point(3298, 388);
+            bar1.FloatSize = new Size(46, 100);
+            bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(skinBarSubItem2), new DevExpress.XtraBars.LinkPersistInfo(skinDropDownButtonItem2), new DevExpress.XtraBars.LinkPersistInfo(skinPaletteDropDownButtonItem2) });
+            bar1.Offset = 657;
+            bar1.OptionsBar.AllowCollapse = true;
+            bar1.OptionsBar.AllowQuickCustomization = false;
+            bar1.OptionsBar.DisableClose = true;
+            bar1.OptionsBar.DistanceBetweenItems = 3;
+            bar1.OptionsBar.ExpandAnimationDuration = 1;
+            bar1.OptionsBar.MultiLine = true;
+            bar1.StandaloneBarDockControl = standaloneBarDockControl2;
+            bar1.Text = "Custom 2";
+            // 
+            // skinBarSubItem2
+            // 
+            skinBarSubItem2.Id = 3;
+            skinBarSubItem2.ImageOptions.Image = (Image)resources.GetObject("skinBarSubItem2.ImageOptions.Image");
+            skinBarSubItem2.ImageOptions.LargeImage = (Image)resources.GetObject("skinBarSubItem2.ImageOptions.LargeImage");
+            skinBarSubItem2.Name = "skinBarSubItem2";
+            skinBarSubItem2.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // skinDropDownButtonItem2
+            // 
+            skinDropDownButtonItem2.Id = 4;
+            skinDropDownButtonItem2.Name = "skinDropDownButtonItem2";
+            // 
+            // skinPaletteDropDownButtonItem2
+            // 
+            skinPaletteDropDownButtonItem2.ActAsDropDown = true;
+            skinPaletteDropDownButtonItem2.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            skinPaletteDropDownButtonItem2.Id = 5;
+            skinPaletteDropDownButtonItem2.Name = "skinPaletteDropDownButtonItem2";
+            // 
+            // standaloneBarDockControl2
+            // 
+            standaloneBarDockControl2.AutoSizeInLayoutControl = false;
+            standaloneBarDockControl2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            standaloneBarDockControl2.CausesValidation = false;
+            standaloneBarDockControl2.Location = new Point(1049, 2);
+            standaloneBarDockControl2.Manager = barManager1;
+            standaloneBarDockControl2.Name = "standaloneBarDockControl2";
+            standaloneBarDockControl2.Size = new Size(133, 24);
+            standaloneBarDockControl2.Text = "standaloneBarDockControl2";
             // 
             // barDockControlTop
             // 
@@ -133,16 +205,52 @@ namespace SewingProduction
             barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             barDockControlRight.Size = new Size(0, 513);
             // 
-            // menuStrip1
+            // skinBarSubItem1
             // 
-            menuStrip1.BackColor = SystemColors.ButtonFace;
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem, кнопкаToolStripMenuItem, табельToolStripMenuItem, справкаtoolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            menuStrip1.Size = new Size(1184, 24);
-            menuStrip1.TabIndex = 21;
-            menuStrip1.Text = "menuStrip1";
+            skinBarSubItem1.Caption = "Тема оформления";
+            skinBarSubItem1.Id = 0;
+            skinBarSubItem1.Name = "skinBarSubItem1";
+            // 
+            // skinDropDownButtonItem1
+            // 
+            skinDropDownButtonItem1.Id = 1;
+            skinDropDownButtonItem1.Name = "skinDropDownButtonItem1";
+            // 
+            // skinPaletteDropDownButtonItem1
+            // 
+            skinPaletteDropDownButtonItem1.ActAsDropDown = true;
+            skinPaletteDropDownButtonItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            skinPaletteDropDownButtonItem1.Id = 2;
+            skinPaletteDropDownButtonItem1.Name = "skinPaletteDropDownButtonItem1";
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            xtraTabbedMdiManager1.AppearancePage.Header.Font = new Font("Segoe UI", 10F);
+            xtraTabbedMdiManager1.AppearancePage.Header.Options.UseFont = true;
+            xtraTabbedMdiManager1.AppearancePage.Header.Options.UseTextOptions = true;
+            xtraTabbedMdiManager1.AppearancePage.Header.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            xtraTabbedMdiManager1.AppearancePage.Header.TextOptions.Trimming = DevExpress.Utils.Trimming.EllipsisCharacter;
+            xtraTabbedMdiManager1.AppearancePage.Header.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageHeaderAndOnMouseHover;
+            xtraTabbedMdiManager1.HeaderButtonsShowMode = DevExpress.XtraTab.TabButtonShowMode.Always;
+            xtraTabbedMdiManager1.HeaderOrientation = DevExpress.XtraTab.TabOrientation.Horizontal;
+            xtraTabbedMdiManager1.MdiParent = this;
+            xtraTabbedMdiManager1.ShowToolTips = DevExpress.Utils.DefaultBoolean.True;
+            xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
+            xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
+            // 
+            // miniToolStrip
+            // 
+            miniToolStrip.AccessibleName = "Выбор нового элемента";
+            miniToolStrip.AccessibleRole = System.Windows.Forms.AccessibleRole.ComboBox;
+            miniToolStrip.AutoSize = false;
+            miniToolStrip.BackColor = SystemColors.ButtonFace;
+            miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            miniToolStrip.Location = new Point(639, 30);
+            miniToolStrip.Name = "miniToolStrip";
+            miniToolStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            miniToolStrip.Size = new Size(473, 165);
+            miniToolStrip.TabIndex = 21;
             // 
             // МенюToolStripMenuItem
             // 
@@ -154,28 +262,28 @@ namespace SewingProduction
             // профильToolStripMenuItem
             // 
             профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            профильToolStripMenuItem.Size = new Size(180, 22);
+            профильToolStripMenuItem.Size = new Size(149, 22);
             профильToolStripMenuItem.Text = "Профиль";
             профильToolStripMenuItem.Click += профильToolStripMenuItem_Click;
             // 
             // настройкиToolStripMenuItem
             // 
             настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            настройкиToolStripMenuItem.Size = new Size(180, 22);
+            настройкиToolStripMenuItem.Size = new Size(149, 22);
             настройкиToolStripMenuItem.Text = "Настройки";
             настройкиToolStripMenuItem.Click += настройкиToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(180, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(149, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
             оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // помощьToolStripMenuItem
             // 
             помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            помощьToolStripMenuItem.Size = new Size(180, 22);
+            помощьToolStripMenuItem.Size = new Size(149, 22);
             помощьToolStripMenuItem.Text = "Помощь";
             помощьToolStripMenuItem.Click += помощьToolStripMenuItem_Click;
             // 
@@ -410,36 +518,75 @@ namespace SewingProduction
             // справкаtoolStripMenuItem
             // 
             справкаtoolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            кнопкаToolStripMenuItem.BackColor = SystemColors.ButtonFace;
-            кнопкаToolStripMenuItem.ForeColor = SystemColors.ActiveCaptionText;
             справкаtoolStripMenuItem.Name = "справкаtoolStripMenuItem";
-            кнопкаToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            справкаtoolStripMenuItem.Size = new Size(29, 21);
+            справкаtoolStripMenuItem.Size = new Size(30, 20);
             справкаtoolStripMenuItem.Text = "@";
             справкаtoolStripMenuItem.Click += справкаtoolStripMenuItem_Click;
             // 
-            // xtraTabbedMdiManager1
+            // menuStrip1
             // 
-            xtraTabbedMdiManager1.AppearancePage.Header.Font = new Font("Segoe UI", 10F);
-            xtraTabbedMdiManager1.AppearancePage.Header.Options.UseFont = true;
-            xtraTabbedMdiManager1.AppearancePage.Header.Options.UseTextOptions = true;
-            xtraTabbedMdiManager1.AppearancePage.Header.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            xtraTabbedMdiManager1.AppearancePage.Header.TextOptions.Trimming = DevExpress.Utils.Trimming.EllipsisCharacter;
-            xtraTabbedMdiManager1.AppearancePage.Header.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageHeaderAndOnMouseHover;
-            xtraTabbedMdiManager1.HeaderButtonsShowMode = DevExpress.XtraTab.TabButtonShowMode.Always;
-            xtraTabbedMdiManager1.HeaderOrientation = DevExpress.XtraTab.TabOrientation.Horizontal;
-            xtraTabbedMdiManager1.MdiParent = this;
-            xtraTabbedMdiManager1.ShowToolTips = DevExpress.Utils.DefaultBoolean.True;
-            xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
-            xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
+            menuStrip1.AutoSize = false;
+            menuStrip1.BackColor = SystemColors.ButtonFace;
+            menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem, кнопкаToolStripMenuItem, табельToolStripMenuItem, справкаtoolStripMenuItem });
+            menuStrip1.Location = new Point(2, 2);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            menuStrip1.Size = new Size(1043, 24);
+            menuStrip1.TabIndex = 21;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // customLayoutControl1
+            // 
+            customLayoutControl1.Controls.Add(standaloneBarDockControl2);
+            customLayoutControl1.Controls.Add(menuStrip1);
+            customLayoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            customLayoutControl1.Font = new Font("Arial", 10F);
+            customLayoutControl1.Location = new Point(0, 0);
+            customLayoutControl1.Name = "customLayoutControl1";
+            customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(2635, 381, 650, 400);
+            customLayoutControl1.Root = Root;
+            customLayoutControl1.Size = new Size(1184, 28);
+            customLayoutControl1.TabIndex = 27;
+            customLayoutControl1.Text = "customLayoutControl1";
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2 });
+            Root.Name = "Root";
+            Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            Root.Size = new Size(1184, 28);
+            Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = menuStrip1;
+            layoutControlItem1.Location = new Point(0, 0);
+            layoutControlItem1.MinSize = new Size(104, 24);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new Size(1047, 28);
+            layoutControlItem1.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = standaloneBarDockControl2;
+            layoutControlItem2.Location = new Point(1047, 0);
+            layoutControlItem2.MaxSize = new Size(137, 28);
+            layoutControlItem2.MinSize = new Size(137, 28);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new Size(137, 28);
+            layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem2.TextVisible = false;
             // 
             // SpMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new Size(1184, 513);
-            Controls.Add(menuStrip1);
+            Controls.Add(customLayoutControl1);
             Controls.Add(barDockControlLeft);
             Controls.Add(barDockControlRight);
             Controls.Add(barDockControlBottom);
@@ -447,7 +594,7 @@ namespace SewingProduction
             HelpButton = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
-            MainMenuStrip = menuStrip1;
+            MainMenuStrip = miniToolStrip;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "SpMainForm";
             Text = "Швейное производство";
@@ -456,9 +603,14 @@ namespace SewingProduction
             KeyDown += SpMainForm_KeyDown;
             ((System.ComponentModel.ISupportInitialize)popupMenu1).EndInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)xtraTabbedMdiManager1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)xtraTabbedMdiManager1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
+            customLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -470,47 +622,59 @@ namespace SewingProduction
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
+        private System.Windows.Forms.ToolStripMenuItem разделенияТрудаToolStripMenuItem;
+        private DevExpress.XtraBars.Bar bar1;
+        private DevExpress.XtraBars.SkinBarSubItem skinBarSubItem2;
+        private DevExpress.XtraBars.SkinDropDownButtonItem skinDropDownButtonItem2;
+        private DevExpress.XtraBars.SkinPaletteDropDownButtonItem skinPaletteDropDownButtonItem2;
+        private DevExpress.XtraBars.SkinBarSubItem skinBarSubItem1;
+        private DevExpress.XtraBars.SkinDropDownButtonItem skinDropDownButtonItem1;
+        private DevExpress.XtraBars.SkinPaletteDropDownButtonItem skinPaletteDropDownButtonItem1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem МенюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem профильToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem карточкаРасчетаToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem оборудованиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оборудованиеВБригадахToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оборудованиеToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem видыОборудованияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem матрицыКлассовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыОперацийToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem изделияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem производствоToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem разделенияТрудаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem TeamWorktoolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem бригадыЦехаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem бригадыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem цехаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыПроизводствToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem карточкаРасчетаToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem работникиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem тарифыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem изделияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem моделиСПризнакомМаркировкToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem артикулToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem МенюToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem профильToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem карточкаРасчетаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem вязальноеПроизводствоToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem швейноеПроизводствоToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem оперативноеПланированиеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem кнопкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыБраковПряжиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыБраковНосковToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem раскройныйЦехToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem производствоToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem вязальноеПроизводствоToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оперативноеПланированиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолВязальщицыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem аналитикаToolStripMenuItem;
-     	private System.Windows.Forms.ToolStripMenuItem справкаtoolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem табельToolStripMenuItem;
-    
+        private System.Windows.Forms.ToolStripMenuItem швейноеПроизводствоToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem раскройныйЦехToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TeamWorktoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem артикулToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem карточкаРасчетаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem кнопкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem табельToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem справкаtoolStripMenuItem;
+        private System.Windows.Forms.MenuStrip miniToolStrip;
+        private Core.Class.CustomLayoutControl customLayoutControl1;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraBars.StandaloneBarDockControl standaloneBarDockControl2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }
