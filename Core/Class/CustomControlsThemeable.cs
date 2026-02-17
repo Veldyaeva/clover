@@ -31,23 +31,16 @@ namespace SewingProduction
         public CustomCheckBox()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            // Цвета не трогаем, только общий шрифт
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -95,20 +88,13 @@ namespace SewingProduction
         public CustomRadioButton()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -155,21 +141,13 @@ namespace SewingProduction
         public CustomDateTimePicker()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -216,21 +194,13 @@ namespace SewingProduction
         public CustomNumericUpDown()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -278,21 +248,14 @@ namespace SewingProduction
         public CustomCheckedListBox()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -339,21 +302,14 @@ namespace SewingProduction
         public CustomTextBoxEx()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -402,24 +358,16 @@ namespace SewingProduction
         public CustomMaskedTextBox()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -469,24 +417,16 @@ namespace SewingProduction
         public CustomComboBox()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -534,23 +474,16 @@ namespace SewingProduction
         public CustomTabControl()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -596,7 +529,7 @@ namespace SewingProduction
     /// <summary>
     /// Кастомный прозрачный группбокс с черной обводкой
     /// </summary>
-    public class CustomGroupBox : GroupBox, IThemeableControl, IThemeable
+    public class CustomGroupBox : GroupBox, IThemeableControl//, IThemeable
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -650,8 +583,7 @@ namespace SewingProduction
         public CustomGroupBox()
         {
             this.BackColor = Color.Transparent;
-            //this.ForeColor = Theme.TextBoxText;
-            //this.Font = Theme.DefaultFont;
+            ApplyTheme();
         }
 
         public void ApplyPermission(UserClass user)
@@ -661,10 +593,8 @@ namespace SewingProduction
 
         public void ApplyTheme()
         {
-            // Устанавливаем цвет текста и шрифт из текущей темы
-            this.ForeColor = ThemeManager.ActiveTheme.LabelTextColor; // Используем цвет для Label
+            // Цвета не форсируем: берем из Designer/скина
             this.Font = ThemeManager.SharedSettings.DefaultFont;
-            this.BorderColor = ThemeManager.ActiveTheme.LabelTextColor; // Можно сделать цвет рамки таким же
             Invalidate(); // Перерисовать контрол с новыми цветами
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -708,6 +638,42 @@ namespace SewingProduction
         protected UserClass _user;
         public UserClass User => _user;
         public bool IsPreview { get; set; }
+        private string _appliedFontSignature;
+
+        private static string GetFontSignature(Font font)
+        {
+            if (font == null)
+                return string.Empty;
+
+            return $"{font.FontFamily?.Name}|{font.SizeInPoints}|{font.Style}|{font.Unit}|{font.GdiCharSet}|{font.GdiVerticalFont}";
+        }
+
+        private void InitializeFontTracking()
+        {
+            _appliedFontSignature = GetFontSignature(ThemeManager.SharedSettings.DefaultFont);
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+
+        private void OnThemeChanged()
+        {
+            var currentSignature = GetFontSignature(ThemeManager.SharedSettings.DefaultFont);
+            if (string.Equals(currentSignature, _appliedFontSignature, StringComparison.Ordinal))
+                return;
+
+            _appliedFontSignature = currentSignature;
+
+            if (IsDisposed || !IsHandleCreated)
+                return;
+
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => ApplyThemeToChildren(this)));
+            }
+            else
+            {
+                ApplyThemeToChildren(this);
+            }
+        }
 
         private void ApplyThemeToChildren(Control parentControl)
         {
@@ -735,9 +701,7 @@ namespace SewingProduction
                 _user = new UserClass();
             }
 
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
+            InitializeFontTracking();
         }
         public CustomForm(UserClass user)
         {
@@ -747,11 +711,7 @@ namespace SewingProduction
             }
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
-
-            ApplyTheme(); // Применяем тему к самой форме (фон)
-            ThemeManager.ThemeChanged += OnThemeChanged;
-            // Применяем тему к дочерним контролам после инициализации самой формы
-            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
+            InitializeFontTracking();
 
             // подписка на загрузку формы (для логирования и прав доступа - существующий код)
             this.Load += async (s, e) =>
@@ -848,7 +808,6 @@ namespace SewingProduction
             }
         }
 
-        private void OnThemeChanged() => ApplyTheme();
         private async void CustomForm_Load(object sender, EventArgs e)
         {
             if (IsPreview)

@@ -67,6 +67,7 @@ namespace SewingProduction.Core.helpers
 
         // pending matches
         private readonly ConcurrentQueue<ObjectTableFieldMatch> _pending;
+        private CancellationTokenRegistration _stopReg;
         private int _disposeState = 0; // 0=not disposed, 1=disposing/disposed
         private int _disposed; // 0 = не disposed, 1 = disposed
 
@@ -168,26 +169,11 @@ namespace SewingProduction.Core.helpers
 
             RebuildIndex();
             StartAllBrokers();
-            
+
             // Регистрируем остановку всех брокеров при отмене токена
-            ct.Register(() => StopAllBrokers());
+            // ct.Register(() => StopAllBrokers());
+            _stopReg = ct.Register(() => StopAllBrokers());
         }
-        //////private Task Broker_Changed(string table, string? fieldsCsv)
-        //////{
-        //////    if (_owner is IDataUpdatableFormAsyncV2 v2)
-        //////        return v2.UpdateDataInFormAsync(table, fieldsCsv);
-
-        //////    if (_owner is IDataUpdatableFormAsync v1)
-        //////        return v1.UpdateDataInFormAsync(table);
-
-        //////    if (_owner is IDataUpdatableForm sync)
-        //////    {
-        //////        sync.UpdateDataInForm(table);
-        //////        return Task.CompletedTask;
-        //////    }
-
-        //////    return Task.CompletedTask;
-        //////}
         private Task Broker_Changed(string table, string? fieldsCsv)
         {
             // если _owner — форма/контрол:
@@ -398,12 +384,14 @@ namespace SewingProduction.Core.helpers
                 .ToList();
         }
 
-public ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()
         {
             if (System.Threading.Interlocked.Exchange(ref _disposeState, 1) != 0)
-                return ValueTask.CompletedTask; 
+                return ValueTask.CompletedTask;
             if (_brokers == null || _brokers.Count == 0)
                 return ValueTask.CompletedTask;
+
+            try { _stopReg.Dispose(); } catch { }
 
             foreach (var broker in _brokers.Values)
             {
@@ -422,7 +410,7 @@ public ValueTask DisposeAsync()
             while (_pending.TryDequeue(out _)) { }
 
             return ValueTask.CompletedTask;
-        
+
         }
 
         // ----------------- internal -----------------

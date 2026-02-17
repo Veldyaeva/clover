@@ -298,6 +298,9 @@
     <Compile Update="Report\PrintShkReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\PZVCurrentMachineAssignmentReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\ReestrListReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -353,6 +356,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\VshivkiReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\PZVCurrentMachineAssignmentReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>

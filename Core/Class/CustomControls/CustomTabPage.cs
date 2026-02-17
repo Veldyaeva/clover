@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using DevExpress.XtraTab;
 using SewingProduction.Features.UserDistribution.Helpers;
 
@@ -13,24 +13,11 @@ namespace SewingProduction.Core.Class
 
         public CustomTabPage()
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
+            // Цвета вкладки оставляем стандартными DevExpress, без привязки к ThemeManager
         }
-
-        public void ApplyTheme()
-        {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
-        }
-
-        private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
 

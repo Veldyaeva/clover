@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Class;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -254,12 +254,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // btnMoveDown
             // 
-            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             btnMoveDown.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveDown.Appearance.Font");
-            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnMoveDown.Appearance.Options.UseBackColor = true;
+//            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            btnMoveDown.Appearance.Options.UseBackColor = true;
             btnMoveDown.Appearance.Options.UseFont = true;
-            btnMoveDown.Appearance.Options.UseForeColor = true;
+//            btnMoveDown.Appearance.Options.UseForeColor = true;
             errorProvider1.SetIconAlignment(btnMoveDown, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveDown.IconAlignment"));
             btnMoveDown.ImageOptions.ImageKey = resources.GetString("btnMoveDown.ImageOptions.ImageKey");
             resources.ApplyResources(btnMoveDown, "btnMoveDown");
@@ -292,24 +292,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // secTimeTextBox
             // 
-            secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            secTimeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+ //           secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+ //           secTimeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             secTimeTextBox.ErrorColor = System.Drawing.Color.Red;
             secTimeTextBox.ErrorMessage = null;
             resources.ApplyResources(secTimeTextBox, "secTimeTextBox");
-            secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+ //           secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             errorProvider1.SetIconAlignment(secTimeTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("secTimeTextBox.IconAlignment"));
             secTimeTextBox.Name = "secTimeTextBox";
             secTimeTextBox.ReadOnly = true;
             // 
             // btnMoveUp
             // 
-            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             btnMoveUp.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnMoveUp.Appearance.Font");
-            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnMoveUp.Appearance.Options.UseBackColor = true;
+//            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            btnMoveUp.Appearance.Options.UseBackColor = true;
             btnMoveUp.Appearance.Options.UseFont = true;
-            btnMoveUp.Appearance.Options.UseForeColor = true;
+//            btnMoveUp.Appearance.Options.UseForeColor = true;
             errorProvider1.SetIconAlignment(btnMoveUp, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnMoveUp.IconAlignment"));
             btnMoveUp.ImageOptions.ImageKey = resources.GetString("btnMoveUp.ImageOptions.ImageKey");
             resources.ApplyResources(btnMoveUp, "btnMoveUp");
@@ -319,16 +319,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // btnOK
             // 
-            btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             btnOK.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnOK.Appearance.Font");
-            btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnOK.Appearance.Options.UseBackColor = true;
+//            btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            btnOK.Appearance.Options.UseBackColor = true;
             btnOK.Appearance.Options.UseFont = true;
-            btnOK.Appearance.Options.UseForeColor = true;
-            btnOK.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnOK.AppearanceDisabled.Options.UseBackColor = true;
-            btnOK.AppearanceDisabled.Options.UseForeColor = true;
+//            btnOK.Appearance.Options.UseForeColor = true;
+//            btnOK.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+//            btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+//            btnOK.AppearanceDisabled.Options.UseBackColor = true;
+//            btnOK.AppearanceDisabled.Options.UseForeColor = true;
             errorProvider1.SetIconAlignment(btnOK, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnOK.IconAlignment"));
             btnOK.ImageOptions.ImageKey = resources.GetString("btnOK.ImageOptions.ImageKey");
             resources.ApplyResources(btnOK, "btnOK");
@@ -338,12 +338,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // nameTextBox
             // 
-            nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+//            nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             nameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             nameTextBox.ErrorColor = System.Drawing.Color.Red;
             nameTextBox.ErrorMessage = null;
             resources.ApplyResources(nameTextBox, "nameTextBox");
-            nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+//            nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             errorProvider1.SetIconAlignment(nameTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("nameTextBox.IconAlignment"));
             nameTextBox.Name = "nameTextBox";
             // 
@@ -355,16 +355,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // btnSave
             // 
-            btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             btnSave.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnSave.Appearance.Font");
-            btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnSave.Appearance.Options.UseBackColor = true;
+//            btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            btnSave.Appearance.Options.UseBackColor = true;
             btnSave.Appearance.Options.UseFont = true;
-            btnSave.Appearance.Options.UseForeColor = true;
-            btnSave.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnSave.AppearanceDisabled.Options.UseBackColor = true;
-            btnSave.AppearanceDisabled.Options.UseForeColor = true;
+//            btnSave.Appearance.Options.UseForeColor = true;
+//            btnSave.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+//            btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+//            btnSave.AppearanceDisabled.Options.UseBackColor = true;
+//            btnSave.AppearanceDisabled.Options.UseForeColor = true;
             errorProvider1.SetIconAlignment(btnSave, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnSave.IconAlignment"));
             btnSave.ImageOptions.ImageKey = resources.GetString("btnSave.ImageOptions.ImageKey");
             resources.ApplyResources(btnSave, "btnSave");
@@ -374,12 +374,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // modelTextBox
             // 
-            modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+//            modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             modelTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(modelTextBox, "modelTextBox");
             modelTextBox.ErrorColor = System.Drawing.Color.Red;
             modelTextBox.ErrorMessage = null;
-            modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+//            modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             errorProvider1.SetIconAlignment(modelTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("modelTextBox.IconAlignment"));
             modelTextBox.Name = "modelTextBox";
             // 
@@ -392,12 +392,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // btnRecalculateNumbers
             // 
-            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
+//            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
             btnRecalculateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnRecalculateNumbers.Appearance.Font");
-            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
-            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
+//            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
+//            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
             btnRecalculateNumbers.Appearance.Options.UseFont = true;
-            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
+//            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
             errorProvider1.SetIconAlignment(btnRecalculateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnRecalculateNumbers.IconAlignment"));
             btnRecalculateNumbers.ImageOptions.ImageKey = resources.GetString("btnRecalculateNumbers.ImageOptions.ImageKey");
             resources.ApplyResources(btnRecalculateNumbers, "btnRecalculateNumbers");
@@ -407,12 +407,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // btnValidateNumbers
             // 
-            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
+//            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
             btnValidateNumbers.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnValidateNumbers.Appearance.Font");
-            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
-            btnValidateNumbers.Appearance.Options.UseBackColor = true;
+//            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
+//            btnValidateNumbers.Appearance.Options.UseBackColor = true;
             btnValidateNumbers.Appearance.Options.UseFont = true;
-            btnValidateNumbers.Appearance.Options.UseForeColor = true;
+//            btnValidateNumbers.Appearance.Options.UseForeColor = true;
             errorProvider1.SetIconAlignment(btnValidateNumbers, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnValidateNumbers.IconAlignment"));
             btnValidateNumbers.ImageOptions.ImageKey = resources.GetString("btnValidateNumbers.ImageOptions.ImageKey");
             resources.ApplyResources(btnValidateNumbers, "btnValidateNumbers");
@@ -422,16 +422,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // btnCancel
             // 
-            btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             btnCancel.Appearance.Font = (System.Drawing.Font)resources.GetObject("btnCancel.Appearance.Font");
-            btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            btnCancel.Appearance.Options.UseBackColor = true;
+//            btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            btnCancel.Appearance.Options.UseBackColor = true;
             btnCancel.Appearance.Options.UseFont = true;
-            btnCancel.Appearance.Options.UseForeColor = true;
-            btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            btnCancel.AppearanceDisabled.Options.UseBackColor = true;
-            btnCancel.AppearanceDisabled.Options.UseForeColor = true;
+//            btnCancel.Appearance.Options.UseForeColor = true;
+//            btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+//            btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+//            btnCancel.AppearanceDisabled.Options.UseBackColor = true;
+//            btnCancel.AppearanceDisabled.Options.UseForeColor = true;
             errorProvider1.SetIconAlignment(btnCancel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("btnCancel.IconAlignment"));
             btnCancel.ImageOptions.ImageKey = resources.GetString("btnCancel.ImageOptions.ImageKey");
             resources.ApplyResources(btnCancel, "btnCancel");
@@ -441,20 +441,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // groupTextBox
             // 
-            groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+//            groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             groupTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(groupTextBox, "groupTextBox");
             groupTextBox.ErrorColor = System.Drawing.Color.Red;
             groupTextBox.ErrorMessage = null;
-            groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+//            groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             errorProvider1.SetIconAlignment(groupTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("groupTextBox.IconAlignment"));
             groupTextBox.Name = "groupTextBox";
             // 
             // dateCreate
             // 
-            dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+//          dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             resources.ApplyResources(dateCreate, "dateCreate");
-            dateCreate.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+//            dateCreate.ForeColor
             errorProvider1.SetIconAlignment(dateCreate, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("dateCreate.IconAlignment"));
             dateCreate.Name = "dateCreate";
             dateCreate.ObjectName = null;
@@ -873,8 +873,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridViewRaskr.Appearance.ColumnFilterButtonActive.BackColor = System.Drawing.Color.Navy;
             gridViewRaskr.Appearance.ColumnFilterButtonActive.Options.UseBackColor = true;
-            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
-            gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
+//            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+            gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = false;
             gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
             gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
             gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn9, gridColumn10, gridColumn13, gridColumn14, gridColumn11, gridColumn15, colspec, gridColumn16, colkod1, gridColumn12, coln_ch, colannId1 });
@@ -1000,7 +1000,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // statusLabel
             // 
             resources.ApplyResources(statusLabel, "statusLabel");
-            statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(statusLabel, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("statusLabel.IconAlignment"));
             statusLabel.Name = "statusLabel";
             // 
@@ -1012,9 +1012,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // buffer
             // 
-            buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             resources.ApplyResources(buffer, "buffer");
-            buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(buffer, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("buffer.IconAlignment"));
             buffer.Name = "buffer";
             buffer.UseVisualStyleBackColor = false;
@@ -1403,18 +1403,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // rasz
             // 
-            rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             resources.ApplyResources(rasz, "rasz");
-            rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(rasz, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("rasz.IconAlignment"));
             rasz.Name = "rasz";
             rasz.UseVisualStyleBackColor = false;
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+//            customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             resources.ApplyResources(customButton2, "customButton2");
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+//            customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             errorProvider1.SetIconAlignment(customButton2, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("customButton2.IconAlignment"));
             customButton2.Name = "customButton2";
             customButton2.UseVisualStyleBackColor = false;

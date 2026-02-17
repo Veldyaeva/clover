@@ -12,7 +12,7 @@
               <Bindings>
                 <Item Id="{d18a79d1-fff5-4b71-8301-fb8f2397e0ac}" />
                 <Item Id="{cc238591-6417-4f4c-bca3-08b8ecbb8a1b}">
-                  <Enabled>False</Enabled>
+                  <Enabled>True</Enabled>
                 </Item>
                 <Item Id="{36089646-1fb3-41ff-aef5-d48bd0ee4769}">
                   <Key1>

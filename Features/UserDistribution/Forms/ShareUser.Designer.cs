@@ -85,9 +85,9 @@
             // 
             // customButtonOk
             // 
-            customButtonOk.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonOk.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonOk.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOk.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonOk.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonOk.Location = new System.Drawing.Point(520, 586);
             customButtonOk.Name = "customButtonOk";
             customButtonOk.Size = new System.Drawing.Size(205, 31);
@@ -109,9 +109,9 @@
             // 
             // gridViewChild
             // 
-            gridViewChild.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewChild.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewChild.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewChild.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewChild.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewChild.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             gridViewChild.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewChild.Appearance.FocusedRow.Options.UseFont = true;
@@ -193,9 +193,9 @@
             // 
             // gridViewUser
             // 
-            gridViewUser.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewUser.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewUser.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewUser.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewUser.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewUser.Appearance.FocusedRow.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             gridViewUser.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewUser.Appearance.FocusedRow.Options.UseFont = true;
