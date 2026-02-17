@@ -1,20 +1,21 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using DevExpress.LookAndFeel;
 using DevExpress.XtraTabbedMdi;
 using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Tabel.Forms;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
-using Microsoft.Extensions.DependencyInjection;
-using SewingProduction.Core;
-using SewingProduction.Features.Tabel.Forms;
+using System;
+using System.Windows.Forms;
 
 namespace SewingProduction
 {
@@ -29,6 +30,11 @@ namespace SewingProduction
         public SpMainForm()
         {
             InitializeComponent();
+            UserLookAndFeel.Default.StyleChanged += (_, __) =>
+            {
+                Properties.Settings.Default.AppSkin = UserLookAndFeel.Default.SkinName;
+                Properties.Settings.Default.Save();
+            };
             UserFilePaths.EnsureFolderExists();
             this.IsMdiContainer = true;
             this.KeyPreview = true;

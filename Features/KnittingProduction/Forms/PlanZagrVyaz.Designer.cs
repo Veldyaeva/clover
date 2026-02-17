@@ -76,6 +76,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions43 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions44 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions45 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions46 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             layoutControl1 = new CustomLayoutControl();
             textBoxPzvYearPachSearch = new CustomTextBoxEx();
             customLabel14 = new CustomLabel();
@@ -572,14 +573,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxPzvYearPachSearch
             // 
-            textBoxPzvYearPachSearch.Location = new System.Drawing.Point(907, 32);
+            textBoxPzvYearPachSearch.Location = new System.Drawing.Point(908, 33);
             textBoxPzvYearPachSearch.Name = "textBoxPzvYearPachSearch";
             textBoxPzvYearPachSearch.ObjectName = null;
             textBoxPzvYearPachSearch.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             textBoxPzvYearPachSearch.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             textBoxPzvYearPachSearch.Properties.Appearance.Options.UseBackColor = true;
             textBoxPzvYearPachSearch.Properties.Appearance.Options.UseFont = true;
-            textBoxPzvYearPachSearch.Size = new System.Drawing.Size(132, 22);
+            textBoxPzvYearPachSearch.Size = new System.Drawing.Size(131, 22);
             textBoxPzvYearPachSearch.StyleController = layoutControl1;
             textBoxPzvYearPachSearch.TabIndex = 12;
             // 
@@ -590,7 +591,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel14.Appearance.Options.UseTextOptions = true;
             customLabel14.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel14.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel14.Location = new System.Drawing.Point(883, 32);
+            customLabel14.Location = new System.Drawing.Point(884, 33);
             customLabel14.Name = "customLabel14";
             customLabel14.Size = new System.Drawing.Size(20, 16);
             customLabel14.StyleController = layoutControl1;
@@ -605,7 +606,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel13.Appearance.Options.UseTextOptions = true;
             customLabel13.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel13.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel13.Location = new System.Drawing.Point(700, 32);
+            customLabel13.Location = new System.Drawing.Point(702, 33);
             customLabel13.Name = "customLabel13";
             customLabel13.Size = new System.Drawing.Size(70, 16);
             customLabel13.StyleController = layoutControl1;
@@ -615,20 +616,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxPzvNPachSearch
             // 
-            textBoxPzvNPachSearch.Location = new System.Drawing.Point(774, 32);
+            textBoxPzvNPachSearch.Location = new System.Drawing.Point(776, 33);
             textBoxPzvNPachSearch.Name = "textBoxPzvNPachSearch";
             textBoxPzvNPachSearch.ObjectName = null;
             textBoxPzvNPachSearch.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             textBoxPzvNPachSearch.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             textBoxPzvNPachSearch.Properties.Appearance.Options.UseBackColor = true;
             textBoxPzvNPachSearch.Properties.Appearance.Options.UseFont = true;
-            textBoxPzvNPachSearch.Size = new System.Drawing.Size(91, 22);
+            textBoxPzvNPachSearch.Size = new System.Drawing.Size(90, 22);
             textBoxPzvNPachSearch.StyleController = layoutControl1;
             textBoxPzvNPachSearch.TabIndex = 4;
             // 
             // textBoxPzvNomSearch
             // 
-            textBoxPzvNomSearch.Location = new System.Drawing.Point(603, 32);
+            textBoxPzvNomSearch.Location = new System.Drawing.Point(606, 33);
             textBoxPzvNomSearch.Name = "textBoxPzvNomSearch";
             textBoxPzvNomSearch.ObjectName = null;
             textBoxPzvNomSearch.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -637,7 +638,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             textBoxPzvNomSearch.Properties.Appearance.Options.UseBackColor = true;
             textBoxPzvNomSearch.Properties.Appearance.Options.UseFont = true;
             textBoxPzvNomSearch.Properties.Appearance.Options.UseForeColor = true;
-            textBoxPzvNomSearch.Size = new System.Drawing.Size(81, 22);
+            textBoxPzvNomSearch.Size = new System.Drawing.Size(80, 22);
             textBoxPzvNomSearch.StyleController = layoutControl1;
             textBoxPzvNomSearch.TabIndex = 3;
             // 
@@ -648,7 +649,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel12.Appearance.Options.UseTextOptions = true;
             customLabel12.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel12.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel12.Location = new System.Drawing.Point(516, 32);
+            customLabel12.Location = new System.Drawing.Point(519, 33);
             customLabel12.Name = "customLabel12";
             customLabel12.Size = new System.Drawing.Size(83, 16);
             customLabel12.StyleController = layoutControl1;
@@ -663,7 +664,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel11.Appearance.Options.UseTextOptions = true;
             customLabel11.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel11.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel11.Location = new System.Drawing.Point(321, 32);
+            customLabel11.Location = new System.Drawing.Point(325, 33);
             customLabel11.Name = "customLabel11";
             customLabel11.Size = new System.Drawing.Size(85, 16);
             customLabel11.StyleController = layoutControl1;
@@ -673,14 +674,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxPzvNomZadSearch
             // 
-            textBoxPzvNomZadSearch.Location = new System.Drawing.Point(410, 32);
+            textBoxPzvNomZadSearch.Location = new System.Drawing.Point(414, 33);
             textBoxPzvNomZadSearch.Name = "textBoxPzvNomZadSearch";
             textBoxPzvNomZadSearch.ObjectName = null;
             textBoxPzvNomZadSearch.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
             textBoxPzvNomZadSearch.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             textBoxPzvNomZadSearch.Properties.Appearance.Options.UseBackColor = true;
             textBoxPzvNomZadSearch.Properties.Appearance.Options.UseFont = true;
-            textBoxPzvNomZadSearch.Size = new System.Drawing.Size(91, 22);
+            textBoxPzvNomZadSearch.Size = new System.Drawing.Size(90, 22);
             textBoxPzvNomZadSearch.StyleController = layoutControl1;
             textBoxPzvNomZadSearch.TabIndex = 2;
             textBoxPzvNomZadSearch.TextChanged += textBoxPzvNomZadSearch_TextChanged;
@@ -693,7 +694,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel7.Appearance.Options.UseTextOptions = true;
             customLabel7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel7.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel7.Location = new System.Drawing.Point(262, 32);
+            customLabel7.Location = new System.Drawing.Point(266, 33);
             customLabel7.Name = "customLabel7";
             customLabel7.Size = new System.Drawing.Size(45, 16);
             customLabel7.StyleController = layoutControl1;
@@ -719,10 +720,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridControlSmenZadany
             // 
             gridControlSmenZadany.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlSmenZadany.Location = new System.Drawing.Point(1062, 34);
+            gridControlSmenZadany.Location = new System.Drawing.Point(1066, 30);
             gridControlSmenZadany.MainView = advBandedGridViewSmenZadany;
             gridControlSmenZadany.Name = "gridControlSmenZadany";
-            gridControlSmenZadany.Size = new System.Drawing.Size(784, 358);
+            gridControlSmenZadany.Size = new System.Drawing.Size(780, 362);
             gridControlSmenZadany.TabIndex = 7;
             gridControlSmenZadany.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { advBandedGridViewSmenZadany, gridViewSmenZadany });
             // 
@@ -1187,11 +1188,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             customTabControl2.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
             customTabControl2.HeaderLocation = DevExpress.XtraTab.TabHeaderLocation.Left;
-            customTabControl2.Location = new System.Drawing.Point(9, 558);
+            customTabControl2.Location = new System.Drawing.Point(9, 562);
             customTabControl2.Name = "customTabControl2";
             customTabControl2.ObjectName = null;
             customTabControl2.SelectedTabPage = xtraTabPage2;
-            customTabControl2.Size = new System.Drawing.Size(1033, 308);
+            customTabControl2.Size = new System.Drawing.Size(1033, 304);
             customTabControl2.TabIndex = 9;
             customTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPage2, xtraTabPage4 });
             // 
@@ -1199,7 +1200,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             xtraTabPage2.Controls.Add(layoutControl2);
             xtraTabPage2.Name = "xtraTabPage2";
-            xtraTabPage2.Size = new System.Drawing.Size(1002, 300);
+            xtraTabPage2.Size = new System.Drawing.Size(1007, 302);
             xtraTabPage2.Text = "Стандарт";
             // 
             // layoutControl2
@@ -1240,7 +1241,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl2.Name = "layoutControl2";
             layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1133, 449, 650, 400);
             layoutControl2.Root = layoutControlGroup8;
-            layoutControl2.Size = new System.Drawing.Size(1002, 300);
+            layoutControl2.Size = new System.Drawing.Size(1007, 302);
             layoutControl2.TabIndex = 0;
             layoutControl2.Text = "layoutControl2";
             // 
@@ -1253,9 +1254,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonCancelWorkStopExecution.AppearanceDisabled.Options.UseBackColor = true;
             buttonCancelWorkStopExecution.AppearanceDisabled.Options.UseForeColor = true;
             buttonCancelWorkStopExecution.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonCancelWorkStopExecution.ImageOptions.Image");
-            buttonCancelWorkStopExecution.Location = new System.Drawing.Point(704, 117);
+            buttonCancelWorkStopExecution.Location = new System.Drawing.Point(706, 113);
             buttonCancelWorkStopExecution.Name = "buttonCancelWorkStopExecution";
-            buttonCancelWorkStopExecution.Size = new System.Drawing.Size(289, 23);
+            buttonCancelWorkStopExecution.Size = new System.Drawing.Size(292, 22);
             buttonCancelWorkStopExecution.StyleController = layoutControl2;
             buttonCancelWorkStopExecution.TabIndex = 9;
             buttonCancelWorkStopExecution.Text = "Отменить окончание выполнения по V";
@@ -1270,9 +1271,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonWorkStopExecution.AppearanceDisabled.Options.UseBackColor = true;
             buttonWorkStopExecution.AppearanceDisabled.Options.UseForeColor = true;
             buttonWorkStopExecution.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonWorkStopExecution.ImageOptions.Image");
-            buttonWorkStopExecution.Location = new System.Drawing.Point(496, 117);
+            buttonWorkStopExecution.Location = new System.Drawing.Point(496, 113);
             buttonWorkStopExecution.Name = "buttonWorkStopExecution";
-            buttonWorkStopExecution.Size = new System.Drawing.Size(204, 23);
+            buttonWorkStopExecution.Size = new System.Drawing.Size(206, 22);
             buttonWorkStopExecution.StyleController = layoutControl2;
             buttonWorkStopExecution.TabIndex = 8;
             buttonWorkStopExecution.Text = "Окончить выполнение по v";
@@ -1287,9 +1288,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonCancelWorkStartExecution.AppearanceDisabled.Options.UseBackColor = true;
             buttonCancelWorkStartExecution.AppearanceDisabled.Options.UseForeColor = true;
             buttonCancelWorkStartExecution.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonCancelWorkStartExecution.ImageOptions.Image");
-            buttonCancelWorkStartExecution.Location = new System.Drawing.Point(704, 90);
+            buttonCancelWorkStartExecution.Location = new System.Drawing.Point(706, 87);
             buttonCancelWorkStartExecution.Name = "buttonCancelWorkStartExecution";
-            buttonCancelWorkStartExecution.Size = new System.Drawing.Size(289, 23);
+            buttonCancelWorkStartExecution.Size = new System.Drawing.Size(292, 22);
             buttonCancelWorkStartExecution.StyleController = layoutControl2;
             buttonCancelWorkStartExecution.TabIndex = 7;
             buttonCancelWorkStartExecution.Text = "Отменить начало выполнения по V";
@@ -1304,9 +1305,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonWorkStartExecution.AppearanceDisabled.Options.UseBackColor = true;
             buttonWorkStartExecution.AppearanceDisabled.Options.UseForeColor = true;
             buttonWorkStartExecution.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonWorkStartExecution.ImageOptions.Image");
-            buttonWorkStartExecution.Location = new System.Drawing.Point(496, 90);
+            buttonWorkStartExecution.Location = new System.Drawing.Point(496, 87);
             buttonWorkStartExecution.Name = "buttonWorkStartExecution";
-            buttonWorkStartExecution.Size = new System.Drawing.Size(204, 23);
+            buttonWorkStartExecution.Size = new System.Drawing.Size(206, 22);
             buttonWorkStartExecution.StyleController = layoutControl2;
             buttonWorkStartExecution.TabIndex = 6;
             buttonWorkStartExecution.Text = "Начать выполнение по V";
@@ -1315,7 +1316,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridControlNormRasz
             // 
             gridControlNormRasz.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlNormRasz.Location = new System.Drawing.Point(4, 223);
+            gridControlNormRasz.Location = new System.Drawing.Point(4, 221);
             gridControlNormRasz.MainView = gridViewNormRasz;
             gridControlNormRasz.Name = "gridControlNormRasz";
             gridControlNormRasz.Size = new System.Drawing.Size(1106, 38);
@@ -1410,7 +1411,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridControlArtNormN
             // 
             gridControlArtNormN.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlArtNormN.Location = new System.Drawing.Point(4, 182);
+            gridControlArtNormN.Location = new System.Drawing.Point(4, 180);
             gridControlArtNormN.MainView = gridViewArtNormN;
             gridControlArtNormN.Name = "gridControlArtNormN";
             gridControlArtNormN.Size = new System.Drawing.Size(1106, 37);
@@ -1483,7 +1484,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxOlPzvNrID
             // 
-            textBoxOlPzvNrID.Location = new System.Drawing.Point(312, 78);
+            textBoxOlPzvNrID.Location = new System.Drawing.Point(312, 75);
             textBoxOlPzvNrID.Name = "textBoxOlPzvNrID";
             textBoxOlPzvNrID.ObjectName = null;
             textBoxOlPzvNrID.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -1501,9 +1502,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel10.Appearance.Options.UseTextOptions = true;
             customLabel10.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel10.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel10.Location = new System.Drawing.Point(262, 78);
+            customLabel10.Location = new System.Drawing.Point(262, 75);
             customLabel10.Name = "customLabel10";
-            customLabel10.Size = new System.Drawing.Size(46, 29);
+            customLabel10.Size = new System.Drawing.Size(46, 28);
             customLabel10.StyleController = layoutControl2;
             customLabel10.TabIndex = 1;
             customLabel10.Text = "nrID";
@@ -1518,9 +1519,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonMasterCancelConfirmation.AppearanceDisabled.Options.UseBackColor = true;
             buttonMasterCancelConfirmation.AppearanceDisabled.Options.UseForeColor = true;
             buttonMasterCancelConfirmation.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonMasterCancelConfirmation.ImageOptions.Image");
-            buttonMasterCancelConfirmation.Location = new System.Drawing.Point(704, 144);
+            buttonMasterCancelConfirmation.Location = new System.Drawing.Point(706, 139);
             buttonMasterCancelConfirmation.Name = "buttonMasterCancelConfirmation";
-            buttonMasterCancelConfirmation.Size = new System.Drawing.Size(289, 23);
+            buttonMasterCancelConfirmation.Size = new System.Drawing.Size(292, 22);
             buttonMasterCancelConfirmation.StyleController = layoutControl2;
             buttonMasterCancelConfirmation.TabIndex = 11;
             buttonMasterCancelConfirmation.Text = "Отменить подтверждение мастером по V";
@@ -1535,9 +1536,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonTabCanelWorkAssignment.AppearanceDisabled.Options.UseBackColor = true;
             buttonTabCanelWorkAssignment.AppearanceDisabled.Options.UseForeColor = true;
             buttonTabCanelWorkAssignment.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonTabCanelWorkAssignment.ImageOptions.Image");
-            buttonTabCanelWorkAssignment.Location = new System.Drawing.Point(727, 36);
+            buttonTabCanelWorkAssignment.Location = new System.Drawing.Point(729, 35);
             buttonTabCanelWorkAssignment.Name = "buttonTabCanelWorkAssignment";
-            buttonTabCanelWorkAssignment.Size = new System.Drawing.Size(266, 23);
+            buttonTabCanelWorkAssignment.Size = new System.Drawing.Size(269, 22);
             buttonTabCanelWorkAssignment.StyleController = layoutControl2;
             buttonTabCanelWorkAssignment.TabIndex = 4;
             buttonTabCanelWorkAssignment.Text = "Отменить назначение на Таб№ по V";
@@ -1552,9 +1553,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonKnittingMachineCancelWorkAssignment.AppearanceDisabled.Options.UseBackColor = true;
             buttonKnittingMachineCancelWorkAssignment.AppearanceDisabled.Options.UseForeColor = true;
             buttonKnittingMachineCancelWorkAssignment.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonKnittingMachineCancelWorkAssignment.ImageOptions.Image");
-            buttonKnittingMachineCancelWorkAssignment.Location = new System.Drawing.Point(727, 9);
+            buttonKnittingMachineCancelWorkAssignment.Location = new System.Drawing.Point(729, 9);
             buttonKnittingMachineCancelWorkAssignment.Name = "buttonKnittingMachineCancelWorkAssignment";
-            buttonKnittingMachineCancelWorkAssignment.Size = new System.Drawing.Size(266, 23);
+            buttonKnittingMachineCancelWorkAssignment.Size = new System.Drawing.Size(269, 22);
             buttonKnittingMachineCancelWorkAssignment.StyleController = layoutControl2;
             buttonKnittingMachineCancelWorkAssignment.TabIndex = 2;
             buttonKnittingMachineCancelWorkAssignment.Text = "Отменить назначение на В/М по V";
@@ -1562,12 +1563,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxOlNomOper
             // 
-            textBoxOlNomOper.Location = new System.Drawing.Point(432, 78);
+            textBoxOlNomOper.Location = new System.Drawing.Point(431, 75);
             textBoxOlNomOper.Name = "textBoxOlNomOper";
             textBoxOlNomOper.ObjectName = null;
             textBoxOlNomOper.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             textBoxOlNomOper.Properties.Appearance.Options.UseFont = true;
-            textBoxOlNomOper.Size = new System.Drawing.Size(50, 22);
+            textBoxOlNomOper.Size = new System.Drawing.Size(51, 22);
             textBoxOlNomOper.StyleController = layoutControl2;
             textBoxOlNomOper.TabIndex = 17;
             // 
@@ -1580,9 +1581,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonTabWorkAssignment.AppearanceDisabled.Options.UseBackColor = true;
             buttonTabWorkAssignment.AppearanceDisabled.Options.UseForeColor = true;
             buttonTabWorkAssignment.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonTabWorkAssignment.ImageOptions.Image");
-            buttonTabWorkAssignment.Location = new System.Drawing.Point(496, 36);
+            buttonTabWorkAssignment.Location = new System.Drawing.Point(496, 35);
             buttonTabWorkAssignment.Name = "buttonTabWorkAssignment";
-            buttonTabWorkAssignment.Size = new System.Drawing.Size(227, 23);
+            buttonTabWorkAssignment.Size = new System.Drawing.Size(229, 22);
             buttonTabWorkAssignment.StyleController = layoutControl2;
             buttonTabWorkAssignment.TabIndex = 3;
             buttonTabWorkAssignment.Text = "Назначить на Таб№ по V";
@@ -1590,7 +1591,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxOlPzvUpdDate
             // 
-            textBoxOlPzvUpdDate.Location = new System.Drawing.Point(262, 111);
+            textBoxOlPzvUpdDate.Location = new System.Drawing.Point(262, 107);
             textBoxOlPzvUpdDate.Name = "textBoxOlPzvUpdDate";
             textBoxOlPzvUpdDate.ObjectName = null;
             textBoxOlPzvUpdDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -1609,9 +1610,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel9.Appearance.Options.UseTextOptions = true;
             customLabel9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel9.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel9.Location = new System.Drawing.Point(394, 78);
+            customLabel9.Location = new System.Drawing.Point(394, 75);
             customLabel9.Name = "customLabel9";
-            customLabel9.Size = new System.Drawing.Size(34, 29);
+            customLabel9.Size = new System.Drawing.Size(33, 28);
             customLabel9.StyleController = layoutControl2;
             customLabel9.TabIndex = 1;
             customLabel9.Text = "оп";
@@ -1626,9 +1627,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonTab999WorkAssignment.AppearanceDisabled.Options.UseBackColor = true;
             buttonTab999WorkAssignment.AppearanceDisabled.Options.UseForeColor = true;
             buttonTab999WorkAssignment.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonTab999WorkAssignment.ImageOptions.Image");
-            buttonTab999WorkAssignment.Location = new System.Drawing.Point(496, 63);
+            buttonTab999WorkAssignment.Location = new System.Drawing.Point(496, 61);
             buttonTab999WorkAssignment.Name = "buttonTab999WorkAssignment";
-            buttonTab999WorkAssignment.Size = new System.Drawing.Size(497, 23);
+            buttonTab999WorkAssignment.Size = new System.Drawing.Size(502, 22);
             buttonTab999WorkAssignment.StyleController = layoutControl2;
             buttonTab999WorkAssignment.TabIndex = 5;
             buttonTab999WorkAssignment.Text = "Таб 999 по V";
@@ -1645,7 +1646,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonKnittingMachineWorkAssignment.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonKnittingMachineWorkAssignment.ImageOptions.Image");
             buttonKnittingMachineWorkAssignment.Location = new System.Drawing.Point(496, 9);
             buttonKnittingMachineWorkAssignment.Name = "buttonKnittingMachineWorkAssignment";
-            buttonKnittingMachineWorkAssignment.Size = new System.Drawing.Size(227, 23);
+            buttonKnittingMachineWorkAssignment.Size = new System.Drawing.Size(229, 22);
             buttonKnittingMachineWorkAssignment.StyleController = layoutControl2;
             buttonKnittingMachineWorkAssignment.TabIndex = 0;
             buttonKnittingMachineWorkAssignment.Text = "Назначить на В/М по V";
@@ -1660,9 +1661,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel8.Appearance.Options.UseTextOptions = true;
             customLabel8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel8.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel8.Location = new System.Drawing.Point(172, 111);
+            customLabel8.Location = new System.Drawing.Point(172, 107);
             customLabel8.Name = "customLabel8";
-            customLabel8.Size = new System.Drawing.Size(86, 56);
+            customLabel8.Size = new System.Drawing.Size(86, 54);
             customLabel8.StyleController = layoutControl2;
             customLabel8.TabIndex = 1;
             customLabel8.Text = "UpdDate";
@@ -1677,9 +1678,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             buttonMasterConfirmation.AppearanceDisabled.Options.UseBackColor = true;
             buttonMasterConfirmation.AppearanceDisabled.Options.UseForeColor = true;
             buttonMasterConfirmation.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("buttonMasterConfirmation.ImageOptions.Image");
-            buttonMasterConfirmation.Location = new System.Drawing.Point(496, 144);
+            buttonMasterConfirmation.Location = new System.Drawing.Point(496, 139);
             buttonMasterConfirmation.Name = "buttonMasterConfirmation";
-            buttonMasterConfirmation.Size = new System.Drawing.Size(204, 23);
+            buttonMasterConfirmation.Size = new System.Drawing.Size(206, 22);
             buttonMasterConfirmation.StyleController = layoutControl2;
             buttonMasterConfirmation.TabIndex = 10;
             buttonMasterConfirmation.Text = "Подтвердить мастером по V";
@@ -1696,7 +1697,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel1.Location = new System.Drawing.Point(9, 9);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(473, 21);
+            customLabel1.Size = new System.Drawing.Size(473, 20);
             customLabel1.StyleController = layoutControl2;
             customLabel1.TabIndex = 1;
             customLabel1.Text = "customLabel1";
@@ -1712,9 +1713,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel2.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            customLabel2.Location = new System.Drawing.Point(9, 34);
+            customLabel2.Location = new System.Drawing.Point(9, 33);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(181, 40);
+            customLabel2.Size = new System.Drawing.Size(181, 38);
             customLabel2.StyleController = layoutControl2;
             customLabel2.TabIndex = 1;
             customLabel2.Text = "Дата запрета редактирования";
@@ -1722,7 +1723,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // customTextBoxEx1
             // 
-            customTextBoxEx1.Location = new System.Drawing.Point(194, 34);
+            customTextBoxEx1.Location = new System.Drawing.Point(194, 33);
             customTextBoxEx1.Name = "customTextBoxEx1";
             customTextBoxEx1.ObjectName = null;
             customTextBoxEx1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -1741,9 +1742,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel3.Appearance.Options.UseTextOptions = true;
             customLabel3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel3.Location = new System.Drawing.Point(9, 78);
+            customLabel3.Location = new System.Drawing.Point(9, 75);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(59, 29);
+            customLabel3.Size = new System.Drawing.Size(59, 28);
             customLabel3.StyleController = layoutControl2;
             customLabel3.TabIndex = 1;
             customLabel3.Text = "Расчет";
@@ -1751,7 +1752,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxOlPzvAnnID
             // 
-            textBoxOlPzvAnnID.Location = new System.Drawing.Point(195, 78);
+            textBoxOlPzvAnnID.Location = new System.Drawing.Point(195, 75);
             textBoxOlPzvAnnID.Name = "textBoxOlPzvAnnID";
             textBoxOlPzvAnnID.ObjectName = null;
             textBoxOlPzvAnnID.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -1763,7 +1764,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxOlPzvNom
             // 
-            textBoxOlPzvNom.Location = new System.Drawing.Point(72, 78);
+            textBoxOlPzvNom.Location = new System.Drawing.Point(72, 75);
             textBoxOlPzvNom.Name = "textBoxOlPzvNom";
             textBoxOlPzvNom.ObjectName = null;
             textBoxOlPzvNom.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -1782,9 +1783,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel6.Appearance.Options.UseTextOptions = true;
             customLabel6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel6.Location = new System.Drawing.Point(143, 78);
+            customLabel6.Location = new System.Drawing.Point(143, 75);
             customLabel6.Name = "customLabel6";
-            customLabel6.Size = new System.Drawing.Size(48, 29);
+            customLabel6.Size = new System.Drawing.Size(48, 28);
             customLabel6.StyleController = layoutControl2;
             customLabel6.TabIndex = 1;
             customLabel6.Text = "annID";
@@ -1792,7 +1793,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxOlPzvIDMlOp
             // 
-            textBoxOlPzvIDMlOp.Location = new System.Drawing.Point(370, 34);
+            textBoxOlPzvIDMlOp.Location = new System.Drawing.Point(370, 33);
             textBoxOlPzvIDMlOp.Name = "textBoxOlPzvIDMlOp";
             textBoxOlPzvIDMlOp.ObjectName = null;
             textBoxOlPzvIDMlOp.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -1811,9 +1812,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel4.Appearance.Options.UseTextOptions = true;
             customLabel4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel4.Location = new System.Drawing.Point(9, 111);
+            customLabel4.Location = new System.Drawing.Point(9, 107);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(59, 56);
+            customLabel4.Size = new System.Drawing.Size(59, 54);
             customLabel4.StyleController = layoutControl2;
             customLabel4.TabIndex = 1;
             customLabel4.Text = "pzvID";
@@ -1821,7 +1822,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // textBoxOlPzvID
             // 
-            textBoxOlPzvID.Location = new System.Drawing.Point(72, 111);
+            textBoxOlPzvID.Location = new System.Drawing.Point(72, 107);
             textBoxOlPzvID.Name = "textBoxOlPzvID";
             textBoxOlPzvID.ObjectName = null;
             textBoxOlPzvID.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -1840,9 +1841,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customLabel5.Appearance.Options.UseTextOptions = true;
             customLabel5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             customLabel5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            customLabel5.Location = new System.Drawing.Point(311, 34);
+            customLabel5.Location = new System.Drawing.Point(311, 33);
             customLabel5.Name = "customLabel5";
-            customLabel5.Size = new System.Drawing.Size(55, 40);
+            customLabel5.Size = new System.Drawing.Size(55, 38);
             customLabel5.StyleController = layoutControl2;
             customLabel5.TabIndex = 1;
             customLabel5.Text = "ID_ML_OP";
@@ -1855,7 +1856,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup11, layoutControlGroup5, layoutControlGroup4, splitterItem3 });
             layoutControlGroup8.Name = "Root";
             layoutControlGroup8.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            layoutControlGroup8.Size = new System.Drawing.Size(1002, 300);
+            layoutControlGroup8.Size = new System.Drawing.Size(1007, 302);
             layoutControlGroup8.TextVisible = false;
             // 
             // layoutControlGroup11
@@ -1864,7 +1865,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup11.Location = new System.Drawing.Point(487, 0);
             layoutControlGroup11.Name = "layoutControlGroup11";
             layoutControlGroup11.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            layoutControlGroup11.Size = new System.Drawing.Size(511, 172);
+            layoutControlGroup11.Size = new System.Drawing.Size(516, 166);
             layoutControlGroup11.TextVisible = false;
             // 
             // layoutControlItem12
@@ -1872,87 +1873,87 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem12.Control = buttonKnittingMachineWorkAssignment;
             layoutControlItem12.Location = new System.Drawing.Point(0, 0);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(231, 27);
+            layoutControlItem12.Size = new System.Drawing.Size(233, 26);
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem38
             // 
             layoutControlItem38.Control = buttonKnittingMachineCancelWorkAssignment;
-            layoutControlItem38.Location = new System.Drawing.Point(231, 0);
+            layoutControlItem38.Location = new System.Drawing.Point(233, 0);
             layoutControlItem38.Name = "layoutControlItem38";
-            layoutControlItem38.Size = new System.Drawing.Size(270, 27);
+            layoutControlItem38.Size = new System.Drawing.Size(273, 26);
             layoutControlItem38.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             layoutControlItem11.Control = buttonTab999WorkAssignment;
-            layoutControlItem11.Location = new System.Drawing.Point(0, 54);
+            layoutControlItem11.Location = new System.Drawing.Point(0, 52);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(501, 27);
+            layoutControlItem11.Size = new System.Drawing.Size(506, 26);
             layoutControlItem11.TextVisible = false;
             // 
             // layoutControlItem1
             // 
             layoutControlItem1.Control = buttonTabWorkAssignment;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 27);
+            layoutControlItem1.Location = new System.Drawing.Point(0, 26);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(231, 27);
+            layoutControlItem1.Size = new System.Drawing.Size(233, 26);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem39
             // 
             layoutControlItem39.Control = buttonTabCanelWorkAssignment;
-            layoutControlItem39.Location = new System.Drawing.Point(231, 27);
+            layoutControlItem39.Location = new System.Drawing.Point(233, 26);
             layoutControlItem39.Name = "layoutControlItem39";
-            layoutControlItem39.Size = new System.Drawing.Size(270, 27);
+            layoutControlItem39.Size = new System.Drawing.Size(273, 26);
             layoutControlItem39.TextVisible = false;
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = buttonMasterConfirmation;
-            layoutControlItem13.Location = new System.Drawing.Point(0, 135);
+            layoutControlItem13.Location = new System.Drawing.Point(0, 130);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(208, 27);
+            layoutControlItem13.Size = new System.Drawing.Size(210, 26);
             layoutControlItem13.TextVisible = false;
             // 
             // layoutControlItem40
             // 
             layoutControlItem40.Control = buttonMasterCancelConfirmation;
-            layoutControlItem40.Location = new System.Drawing.Point(208, 135);
+            layoutControlItem40.Location = new System.Drawing.Point(210, 130);
             layoutControlItem40.Name = "layoutControlItem40";
-            layoutControlItem40.Size = new System.Drawing.Size(293, 27);
+            layoutControlItem40.Size = new System.Drawing.Size(296, 26);
             layoutControlItem40.TextVisible = false;
             // 
             // layoutControlItem32
             // 
             layoutControlItem32.Control = buttonWorkStartExecution;
-            layoutControlItem32.Location = new System.Drawing.Point(0, 81);
+            layoutControlItem32.Location = new System.Drawing.Point(0, 78);
             layoutControlItem32.Name = "layoutControlItem32";
-            layoutControlItem32.Size = new System.Drawing.Size(208, 27);
+            layoutControlItem32.Size = new System.Drawing.Size(210, 26);
             layoutControlItem32.TextVisible = false;
             // 
             // layoutControlItem36
             // 
             layoutControlItem36.Control = buttonCancelWorkStartExecution;
-            layoutControlItem36.Location = new System.Drawing.Point(208, 81);
+            layoutControlItem36.Location = new System.Drawing.Point(210, 78);
             layoutControlItem36.Name = "layoutControlItem36";
-            layoutControlItem36.Size = new System.Drawing.Size(293, 27);
+            layoutControlItem36.Size = new System.Drawing.Size(296, 26);
             layoutControlItem36.TextVisible = false;
             // 
             // layoutControlItem37
             // 
             layoutControlItem37.Control = buttonWorkStopExecution;
-            layoutControlItem37.Location = new System.Drawing.Point(0, 108);
+            layoutControlItem37.Location = new System.Drawing.Point(0, 104);
             layoutControlItem37.Name = "layoutControlItem37";
-            layoutControlItem37.Size = new System.Drawing.Size(208, 27);
+            layoutControlItem37.Size = new System.Drawing.Size(210, 26);
             layoutControlItem37.TextVisible = false;
             // 
             // layoutControlItem42
             // 
             layoutControlItem42.Control = buttonCancelWorkStopExecution;
-            layoutControlItem42.Location = new System.Drawing.Point(208, 108);
+            layoutControlItem42.Location = new System.Drawing.Point(210, 104);
             layoutControlItem42.Name = "layoutControlItem42";
-            layoutControlItem42.Size = new System.Drawing.Size(293, 27);
+            layoutControlItem42.Size = new System.Drawing.Size(296, 26);
             layoutControlItem42.TextVisible = false;
             // 
             // layoutControlGroup5
@@ -1960,9 +1961,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup5.ExpandButtonVisible = true;
             layoutControlGroup5.Expanded = false;
             layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem28 });
-            layoutControlGroup5.Location = new System.Drawing.Point(0, 178);
+            layoutControlGroup5.Location = new System.Drawing.Point(0, 176);
             layoutControlGroup5.Name = "layoutControlGroup5";
-            layoutControlGroup5.Size = new System.Drawing.Size(998, 118);
+            layoutControlGroup5.Size = new System.Drawing.Size(1003, 122);
             layoutControlGroup5.TextVisible = false;
             // 
             // layoutControlItem2
@@ -1987,89 +1988,89 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup4.Name = "layoutControlGroup4";
             layoutControlGroup4.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            layoutControlGroup4.Size = new System.Drawing.Size(487, 172);
+            layoutControlGroup4.Size = new System.Drawing.Size(487, 166);
             layoutControlGroup4.TextVisible = false;
             // 
             // layoutControlItem20
             // 
             layoutControlItem20.Control = customLabel3;
-            layoutControlItem20.Location = new System.Drawing.Point(0, 69);
+            layoutControlItem20.Location = new System.Drawing.Point(0, 66);
             layoutControlItem20.MaxSize = new System.Drawing.Size(63, 0);
             layoutControlItem20.MinSize = new System.Drawing.Size(63, 24);
             layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new System.Drawing.Size(63, 33);
+            layoutControlItem20.Size = new System.Drawing.Size(63, 32);
             layoutControlItem20.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem20.TextVisible = false;
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = textBoxOlPzvNom;
-            layoutControlItem24.Location = new System.Drawing.Point(63, 69);
+            layoutControlItem24.Location = new System.Drawing.Point(63, 66);
             layoutControlItem24.MaxSize = new System.Drawing.Size(61, 0);
             layoutControlItem24.MinSize = new System.Drawing.Size(61, 26);
             layoutControlItem24.Name = "layoutControlItem24";
-            layoutControlItem24.Size = new System.Drawing.Size(61, 33);
+            layoutControlItem24.Size = new System.Drawing.Size(61, 32);
             layoutControlItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem24.TextVisible = false;
             // 
             // layoutControlItem23
             // 
             layoutControlItem23.Control = customLabel6;
-            layoutControlItem23.Location = new System.Drawing.Point(134, 69);
+            layoutControlItem23.Location = new System.Drawing.Point(134, 66);
             layoutControlItem23.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new System.Drawing.Size(52, 33);
+            layoutControlItem23.Size = new System.Drawing.Size(52, 32);
             layoutControlItem23.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem23.TextVisible = false;
             // 
             // layoutControlItem27
             // 
             layoutControlItem27.Control = textBoxOlPzvAnnID;
-            layoutControlItem27.Location = new System.Drawing.Point(186, 69);
+            layoutControlItem27.Location = new System.Drawing.Point(186, 66);
             layoutControlItem27.MaxSize = new System.Drawing.Size(56, 0);
             layoutControlItem27.MinSize = new System.Drawing.Size(56, 26);
             layoutControlItem27.Name = "layoutControlItem27";
-            layoutControlItem27.Size = new System.Drawing.Size(56, 33);
+            layoutControlItem27.Size = new System.Drawing.Size(56, 32);
             layoutControlItem27.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem27.TextVisible = false;
             // 
             // layoutControlItem31
             // 
             layoutControlItem31.Control = customLabel10;
-            layoutControlItem31.Location = new System.Drawing.Point(253, 69);
+            layoutControlItem31.Location = new System.Drawing.Point(253, 66);
             layoutControlItem31.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem31.Name = "layoutControlItem31";
-            layoutControlItem31.Size = new System.Drawing.Size(50, 33);
+            layoutControlItem31.Size = new System.Drawing.Size(50, 32);
             layoutControlItem31.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem31.TextVisible = false;
             // 
             // layoutControlItem35
             // 
             layoutControlItem35.Control = textBoxOlPzvNrID;
-            layoutControlItem35.Location = new System.Drawing.Point(303, 69);
+            layoutControlItem35.Location = new System.Drawing.Point(303, 66);
             layoutControlItem35.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem35.Name = "layoutControlItem35";
-            layoutControlItem35.Size = new System.Drawing.Size(72, 33);
+            layoutControlItem35.Size = new System.Drawing.Size(72, 32);
             layoutControlItem35.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem35.TextVisible = false;
             // 
             // layoutControlItem30
             // 
             layoutControlItem30.Control = customLabel9;
-            layoutControlItem30.Location = new System.Drawing.Point(385, 69);
+            layoutControlItem30.Location = new System.Drawing.Point(385, 66);
             layoutControlItem30.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem30.Name = "layoutControlItem30";
-            layoutControlItem30.Size = new System.Drawing.Size(38, 33);
+            layoutControlItem30.Size = new System.Drawing.Size(37, 32);
             layoutControlItem30.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem30.TextVisible = false;
             // 
             // layoutControlItem34
             // 
             layoutControlItem34.Control = textBoxOlNomOper;
-            layoutControlItem34.Location = new System.Drawing.Point(423, 69);
+            layoutControlItem34.Location = new System.Drawing.Point(422, 66);
             layoutControlItem34.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem34.Name = "layoutControlItem34";
-            layoutControlItem34.Size = new System.Drawing.Size(54, 33);
+            layoutControlItem34.Size = new System.Drawing.Size(55, 32);
             layoutControlItem34.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem34.TextVisible = false;
             // 
@@ -2079,131 +2080,131 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem10.Location = new System.Drawing.Point(0, 0);
             layoutControlItem10.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(477, 25);
+            layoutControlItem10.Size = new System.Drawing.Size(477, 24);
             layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem10.TextVisible = false;
             // 
             // layoutControlItem18
             // 
             layoutControlItem18.Control = customLabel2;
-            layoutControlItem18.Location = new System.Drawing.Point(0, 25);
+            layoutControlItem18.Location = new System.Drawing.Point(0, 24);
             layoutControlItem18.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new System.Drawing.Size(185, 44);
+            layoutControlItem18.Size = new System.Drawing.Size(185, 42);
             layoutControlItem18.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem18.TextVisible = false;
             // 
             // layoutControlItem19
             // 
             layoutControlItem19.Control = customTextBoxEx1;
-            layoutControlItem19.Location = new System.Drawing.Point(185, 25);
+            layoutControlItem19.Location = new System.Drawing.Point(185, 24);
             layoutControlItem19.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(92, 44);
+            layoutControlItem19.Size = new System.Drawing.Size(92, 42);
             layoutControlItem19.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem19.TextVisible = false;
             // 
             // layoutControlItem21
             // 
             layoutControlItem21.Control = customLabel4;
-            layoutControlItem21.Location = new System.Drawing.Point(0, 102);
+            layoutControlItem21.Location = new System.Drawing.Point(0, 98);
             layoutControlItem21.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(63, 60);
+            layoutControlItem21.Size = new System.Drawing.Size(63, 58);
             layoutControlItem21.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem21.TextVisible = false;
             // 
             // layoutControlItem25
             // 
             layoutControlItem25.Control = textBoxOlPzvID;
-            layoutControlItem25.Location = new System.Drawing.Point(63, 102);
+            layoutControlItem25.Location = new System.Drawing.Point(63, 98);
             layoutControlItem25.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem25.Name = "layoutControlItem25";
-            layoutControlItem25.Size = new System.Drawing.Size(81, 60);
+            layoutControlItem25.Size = new System.Drawing.Size(81, 58);
             layoutControlItem25.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem25.TextVisible = false;
             // 
             // layoutControlItem33
             // 
             layoutControlItem33.Control = textBoxOlPzvUpdDate;
-            layoutControlItem33.Location = new System.Drawing.Point(253, 102);
+            layoutControlItem33.Location = new System.Drawing.Point(253, 98);
             layoutControlItem33.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem33.Name = "layoutControlItem33";
-            layoutControlItem33.Size = new System.Drawing.Size(224, 60);
+            layoutControlItem33.Size = new System.Drawing.Size(224, 58);
             layoutControlItem33.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem33.TextVisible = false;
             // 
             // emptySpaceItem3
             // 
-            emptySpaceItem3.Location = new System.Drawing.Point(124, 69);
+            emptySpaceItem3.Location = new System.Drawing.Point(124, 66);
             emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new System.Drawing.Size(10, 33);
+            emptySpaceItem3.Size = new System.Drawing.Size(10, 32);
             // 
             // emptySpaceItem4
             // 
-            emptySpaceItem4.Location = new System.Drawing.Point(242, 69);
+            emptySpaceItem4.Location = new System.Drawing.Point(242, 66);
             emptySpaceItem4.Name = "emptySpaceItem4";
-            emptySpaceItem4.Size = new System.Drawing.Size(11, 33);
+            emptySpaceItem4.Size = new System.Drawing.Size(11, 32);
             // 
             // emptySpaceItem5
             // 
-            emptySpaceItem5.Location = new System.Drawing.Point(375, 69);
+            emptySpaceItem5.Location = new System.Drawing.Point(375, 66);
             emptySpaceItem5.Name = "emptySpaceItem5";
-            emptySpaceItem5.Size = new System.Drawing.Size(10, 33);
+            emptySpaceItem5.Size = new System.Drawing.Size(10, 32);
             // 
             // layoutControlItem22
             // 
             layoutControlItem22.Control = customLabel5;
-            layoutControlItem22.Location = new System.Drawing.Point(302, 25);
+            layoutControlItem22.Location = new System.Drawing.Point(302, 24);
             layoutControlItem22.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(59, 44);
+            layoutControlItem22.Size = new System.Drawing.Size(59, 42);
             layoutControlItem22.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem22.TextVisible = false;
             // 
             // emptySpaceItem8
             // 
-            emptySpaceItem8.Location = new System.Drawing.Point(277, 25);
+            emptySpaceItem8.Location = new System.Drawing.Point(277, 24);
             emptySpaceItem8.Name = "emptySpaceItem8";
-            emptySpaceItem8.Size = new System.Drawing.Size(25, 44);
+            emptySpaceItem8.Size = new System.Drawing.Size(25, 42);
             // 
             // layoutControlItem26
             // 
             layoutControlItem26.Control = textBoxOlPzvIDMlOp;
-            layoutControlItem26.Location = new System.Drawing.Point(361, 25);
+            layoutControlItem26.Location = new System.Drawing.Point(361, 24);
             layoutControlItem26.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem26.Name = "layoutControlItem26";
-            layoutControlItem26.Size = new System.Drawing.Size(116, 44);
+            layoutControlItem26.Size = new System.Drawing.Size(116, 42);
             layoutControlItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem26.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(144, 102);
+            emptySpaceItem1.Location = new System.Drawing.Point(144, 98);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(19, 60);
+            emptySpaceItem1.Size = new System.Drawing.Size(19, 58);
             // 
             // layoutControlItem29
             // 
             layoutControlItem29.Control = customLabel8;
-            layoutControlItem29.Location = new System.Drawing.Point(163, 102);
+            layoutControlItem29.Location = new System.Drawing.Point(163, 98);
             layoutControlItem29.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem29.Name = "layoutControlItem29";
-            layoutControlItem29.Size = new System.Drawing.Size(90, 60);
+            layoutControlItem29.Size = new System.Drawing.Size(90, 58);
             layoutControlItem29.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem29.TextVisible = false;
             // 
             // splitterItem3
             // 
-            splitterItem3.Location = new System.Drawing.Point(0, 172);
+            splitterItem3.Location = new System.Drawing.Point(0, 166);
             splitterItem3.Name = "splitterItem3";
-            splitterItem3.Size = new System.Drawing.Size(998, 6);
+            splitterItem3.Size = new System.Drawing.Size(1003, 10);
             // 
             // xtraTabPage4
             // 
             xtraTabPage4.Controls.Add(layoutControl3);
             xtraTabPage4.Name = "xtraTabPage4";
-            xtraTabPage4.Size = new System.Drawing.Size(1002, 300);
+            xtraTabPage4.Size = new System.Drawing.Size(1007, 302);
             xtraTabPage4.Text = "Администрирование";
             // 
             // layoutControl3
@@ -2219,7 +2220,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControl3.Name = "layoutControl3";
             layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1098, 531, 650, 400);
             layoutControl3.Root = layoutControlGroup12;
-            layoutControl3.Size = new System.Drawing.Size(1002, 300);
+            layoutControl3.Size = new System.Drawing.Size(1007, 302);
             layoutControl3.TabIndex = 0;
             layoutControl3.Text = "layoutControl3";
             // 
@@ -2229,7 +2230,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customCheckBox1.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBox1.Location = new System.Drawing.Point(729, 12);
             customCheckBox1.Name = "customCheckBox1";
-            customCheckBox1.Size = new System.Drawing.Size(261, 20);
+            customCheckBox1.Size = new System.Drawing.Size(266, 20);
             customCheckBox1.TabIndex = 20;
             customCheckBox1.Text = "Показывать запросы";
             customCheckBox1.UseVisualStyleBackColor = true;
@@ -2248,7 +2249,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customSimpleButton4.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton4.ImageOptions.Image");
             customSimpleButton4.Location = new System.Drawing.Point(12, 12);
             customSimpleButton4.Name = "customSimpleButton4";
-            customSimpleButton4.Size = new System.Drawing.Size(433, 23);
+            customSimpleButton4.Size = new System.Drawing.Size(433, 22);
             customSimpleButton4.StyleController = layoutControl3;
             customSimpleButton4.TabIndex = 21;
             customSimpleButton4.Text = "Разрешить редактирование";
@@ -2266,7 +2267,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customSimpleButton5.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton5.ImageOptions.Image");
             customSimpleButton5.Location = new System.Drawing.Point(449, 12);
             customSimpleButton5.Name = "customSimpleButton5";
-            customSimpleButton5.Size = new System.Drawing.Size(276, 23);
+            customSimpleButton5.Size = new System.Drawing.Size(276, 22);
             customSimpleButton5.StyleController = layoutControl3;
             customSimpleButton5.TabIndex = 22;
             customSimpleButton5.Text = "Удалить из план. загр. по V";
@@ -2276,10 +2277,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             gridControlMlOp.Enabled = false;
             gridControlMlOp.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlMlOp.Location = new System.Drawing.Point(12, 39);
+            gridControlMlOp.Location = new System.Drawing.Point(12, 38);
             gridControlMlOp.MainView = gridViewMlOp;
             gridControlMlOp.Name = "gridControlMlOp";
-            gridControlMlOp.Size = new System.Drawing.Size(915, 249);
+            gridControlMlOp.Size = new System.Drawing.Size(920, 252);
             gridControlMlOp.TabIndex = 23;
             gridControlMlOp.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewMlOp });
             // 
@@ -2407,9 +2408,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customSimpleButton6.Enabled = false;
             customSimpleButton6.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton6.ImageOptions.Image");
             customSimpleButton6.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.TopCenter;
-            customSimpleButton6.Location = new System.Drawing.Point(931, 39);
+            customSimpleButton6.Location = new System.Drawing.Point(936, 38);
             customSimpleButton6.Name = "customSimpleButton6";
-            customSimpleButton6.Size = new System.Drawing.Size(59, 74);
+            customSimpleButton6.Size = new System.Drawing.Size(59, 72);
             customSimpleButton6.StyleController = layoutControl3;
             customSimpleButton6.TabIndex = 24;
             customSimpleButton6.Text = "Удал\r\nиз\r\nМЛ";
@@ -2420,23 +2421,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup12.GroupBordersVisible = false;
             layoutControlGroup12.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem9, layoutControlItem17, layoutControlItem14, layoutControlItem15, layoutControlItem16 });
             layoutControlGroup12.Name = "Root";
-            layoutControlGroup12.Size = new System.Drawing.Size(1002, 300);
+            layoutControlGroup12.Size = new System.Drawing.Size(1007, 302);
             layoutControlGroup12.TextVisible = false;
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = gridControlMlOp;
-            layoutControlItem9.Location = new System.Drawing.Point(0, 27);
+            layoutControlItem9.Location = new System.Drawing.Point(0, 26);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(919, 253);
+            layoutControlItem9.Size = new System.Drawing.Size(924, 256);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = customSimpleButton6;
-            layoutControlItem17.Location = new System.Drawing.Point(919, 27);
+            layoutControlItem17.Location = new System.Drawing.Point(924, 26);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(63, 253);
+            layoutControlItem17.Size = new System.Drawing.Size(63, 256);
             layoutControlItem17.TextVisible = false;
             // 
             // layoutControlItem14
@@ -2444,7 +2445,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem14.Control = customSimpleButton4;
             layoutControlItem14.Location = new System.Drawing.Point(0, 0);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(437, 27);
+            layoutControlItem14.Size = new System.Drawing.Size(437, 26);
             layoutControlItem14.TextVisible = false;
             // 
             // layoutControlItem15
@@ -2452,7 +2453,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem15.Control = customSimpleButton5;
             layoutControlItem15.Location = new System.Drawing.Point(437, 0);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(280, 27);
+            layoutControlItem15.Size = new System.Drawing.Size(280, 26);
             layoutControlItem15.TextVisible = false;
             // 
             // layoutControlItem16
@@ -2460,16 +2461,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem16.Control = customCheckBox1;
             layoutControlItem16.Location = new System.Drawing.Point(717, 0);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(265, 27);
+            layoutControlItem16.Size = new System.Drawing.Size(270, 26);
             layoutControlItem16.TextVisible = false;
             // 
             // gridControlNaryadZadany
             // 
             gridControlNaryadZadany.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlNaryadZadany.Location = new System.Drawing.Point(1062, 437);
+            gridControlNaryadZadany.Location = new System.Drawing.Point(1066, 437);
             gridControlNaryadZadany.MainView = gridViewNaryadZadany;
             gridControlNaryadZadany.Name = "gridControlNaryadZadany";
-            gridControlNaryadZadany.Size = new System.Drawing.Size(784, 430);
+            gridControlNaryadZadany.Size = new System.Drawing.Size(780, 430);
             gridControlNaryadZadany.TabIndex = 10;
             gridControlNaryadZadany.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNaryadZadany });
             // 
@@ -2637,11 +2638,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridControlPZVOperList
             // 
             gridControlPZVOperList.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlPZVOperList.Location = new System.Drawing.Point(12, 223);
+            gridControlPZVOperList.Location = new System.Drawing.Point(12, 219);
             gridControlPZVOperList.MainView = gridViewPZVOperList;
             gridControlPZVOperList.Name = "gridControlPZVOperList";
             gridControlPZVOperList.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit4, repositoryItemCheckEdit6 });
-            gridControlPZVOperList.Size = new System.Drawing.Size(1027, 322);
+            gridControlPZVOperList.Size = new System.Drawing.Size(1027, 326);
             gridControlPZVOperList.TabIndex = 8;
             gridControlPZVOperList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPZVOperList });
             // 
@@ -3021,11 +3022,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridControlRzvPachListByNom
             // 
             gridControlRzvPachListByNom.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlRzvPachListByNom.Location = new System.Drawing.Point(812, 61);
+            gridControlRzvPachListByNom.Location = new System.Drawing.Point(817, 62);
             gridControlRzvPachListByNom.MainView = gridViewRzvPachListByNom;
             gridControlRzvPachListByNom.Name = "gridControlRzvPachListByNom";
             gridControlRzvPachListByNom.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit2, repositoryItemCheckEdit5 });
-            gridControlRzvPachListByNom.Size = new System.Drawing.Size(230, 89);
+            gridControlRzvPachListByNom.Size = new System.Drawing.Size(225, 88);
             gridControlRzvPachListByNom.TabIndex = 6;
             gridControlRzvPachListByNom.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRzvPachListByNom });
             // 
@@ -3128,11 +3129,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridControlZadanyListByMachine
             // 
             gridControlZadanyListByMachine.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlZadanyListByMachine.Location = new System.Drawing.Point(259, 61);
+            gridControlZadanyListByMachine.Location = new System.Drawing.Point(263, 62);
             gridControlZadanyListByMachine.MainView = gridViewZadanyListByMachine;
             gridControlZadanyListByMachine.Name = "gridControlZadanyListByMachine";
             gridControlZadanyListByMachine.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit3, repositoryItemCheckEdit7 });
-            gridControlZadanyListByMachine.Size = new System.Drawing.Size(543, 89);
+            gridControlZadanyListByMachine.Size = new System.Drawing.Size(540, 88);
             gridControlZadanyListByMachine.TabIndex = 5;
             gridControlZadanyListByMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewZadanyListByMachine });
             // 
@@ -3293,10 +3294,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // gridControlPlanTotalHoursByKnitMachine
             // 
             gridControlPlanTotalHoursByKnitMachine.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlPlanTotalHoursByKnitMachine.Location = new System.Drawing.Point(12, 57);
+            gridControlPlanTotalHoursByKnitMachine.Location = new System.Drawing.Point(12, 54);
             gridControlPlanTotalHoursByKnitMachine.MainView = gridViewPlanTotalHoursByKnitMachine;
             gridControlPlanTotalHoursByKnitMachine.Name = "gridControlPlanTotalHoursByKnitMachine";
-            gridControlPlanTotalHoursByKnitMachine.Size = new System.Drawing.Size(234, 90);
+            gridControlPlanTotalHoursByKnitMachine.Size = new System.Drawing.Size(234, 93);
             gridControlPlanTotalHoursByKnitMachine.TabIndex = 0;
             gridControlPlanTotalHoursByKnitMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPlanTotalHoursByKnitMachine });
             // 
@@ -3393,7 +3394,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // layoutControlGroup1
             // 
-            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("ВСЕ не отгр.", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("ВСЕ с НЗОп", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Отгр. с НЗОп", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Отгр. б/НЗОп", true, buttonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("ВСЕ", true, buttonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1) });
+            buttonImageOptions11.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions11.Image");
+            layoutControlGroup1.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("ВСЕ не отгр.", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("ВСЕ с НЗОп", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Отгр. с НЗОп", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Отгр. б/НЗОп", true, buttonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions8, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("ВСЕ", true, buttonImageOptions9, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions10, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Текущие назначения на В/М", true, buttonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup1.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup7, layoutControlItem4, layoutControlGroup9, layoutControlItem5, splitterItem2, splitterItem1 });
             layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
@@ -3401,19 +3403,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
             layoutControlGroup1.Size = new System.Drawing.Size(1047, 155);
             layoutControlGroup1.Text = "НЕЗАВЕРШЕННОЕ ПРОИЗВОДСТВО";
+            layoutControlGroup1.CustomButtonClick += layoutControlGroup1_CustomButtonClick;
             layoutControlGroup1.CustomButtonChecked += layoutControlGroup1_CustomButtonChecked;
             // 
             // layoutControlGroup7
             // 
-            buttonImageOptions11.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions11.Image");
-            buttonImageOptions13.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions13.Image");
-            layoutControlGroup7.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions11, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            buttonImageOptions12.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions12.Image");
+            buttonImageOptions14.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions14.Image");
+            layoutControlGroup7.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions12, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions13, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup7.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3 });
             layoutControlGroup7.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup7.Name = "layoutControlGroup7";
             layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup7.Size = new System.Drawing.Size(244, 125);
+            layoutControlGroup7.Size = new System.Drawing.Size(244, 124);
             layoutControlGroup7.Text = " ";
             layoutControlGroup7.CustomButtonClick += layoutControlGroup7_CustomButtonClick;
             // 
@@ -3422,25 +3425,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem3.Control = gridControlPlanTotalHoursByKnitMachine;
             layoutControlItem3.Location = new System.Drawing.Point(0, 0);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(238, 94);
+            layoutControlItem3.Size = new System.Drawing.Size(238, 97);
             layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = gridControlZadanyListByMachine;
-            layoutControlItem4.Location = new System.Drawing.Point(250, 32);
+            layoutControlItem4.Location = new System.Drawing.Point(254, 32);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(547, 93);
+            layoutControlItem4.Size = new System.Drawing.Size(544, 92);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlGroup9
             // 
             layoutControlGroup9.AllowHtmlStringInCaption = true;
             layoutControlGroup9.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem44, layoutControlItem45, layoutControlItem46, emptySpaceItem9, emptySpaceItem10, layoutControlItem47, layoutControlItem48, emptySpaceItem11, layoutControlItem49, layoutControlItem50, emptySpaceItem2, layoutControlItem51, layoutControlItem52 });
-            layoutControlGroup9.Location = new System.Drawing.Point(250, 0);
+            layoutControlGroup9.Location = new System.Drawing.Point(254, 0);
             layoutControlGroup9.Name = "layoutControlGroup9";
             layoutControlGroup9.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup9.Size = new System.Drawing.Size(787, 32);
+            layoutControlGroup9.Size = new System.Drawing.Size(783, 32);
             layoutControlGroup9.Text = "ПОИСК";
             layoutControlGroup9.TextLocation = DevExpress.Utils.Locations.Left;
             layoutControlGroup9.TextVisible = false;
@@ -3458,7 +3461,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem45.Control = textBoxPzvNomZadSearch;
             layoutControlItem45.Location = new System.Drawing.Point(148, 0);
             layoutControlItem45.Name = "layoutControlItem45";
-            layoutControlItem45.Size = new System.Drawing.Size(95, 26);
+            layoutControlItem45.Size = new System.Drawing.Size(94, 26);
             layoutControlItem45.TextVisible = false;
             // 
             // layoutControlItem46
@@ -3477,14 +3480,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // emptySpaceItem10
             // 
-            emptySpaceItem10.Location = new System.Drawing.Point(243, 0);
+            emptySpaceItem10.Location = new System.Drawing.Point(242, 0);
             emptySpaceItem10.Name = "emptySpaceItem10";
             emptySpaceItem10.Size = new System.Drawing.Size(11, 26);
             // 
             // layoutControlItem47
             // 
             layoutControlItem47.Control = customLabel12;
-            layoutControlItem47.Location = new System.Drawing.Point(254, 0);
+            layoutControlItem47.Location = new System.Drawing.Point(253, 0);
             layoutControlItem47.Name = "layoutControlItem47";
             layoutControlItem47.Size = new System.Drawing.Size(87, 26);
             layoutControlItem47.TextVisible = false;
@@ -3492,43 +3495,43 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // layoutControlItem48
             // 
             layoutControlItem48.Control = textBoxPzvNomSearch;
-            layoutControlItem48.Location = new System.Drawing.Point(341, 0);
+            layoutControlItem48.Location = new System.Drawing.Point(340, 0);
             layoutControlItem48.Name = "layoutControlItem48";
-            layoutControlItem48.Size = new System.Drawing.Size(85, 26);
+            layoutControlItem48.Size = new System.Drawing.Size(84, 26);
             layoutControlItem48.TextVisible = false;
             // 
             // emptySpaceItem11
             // 
-            emptySpaceItem11.Location = new System.Drawing.Point(426, 0);
+            emptySpaceItem11.Location = new System.Drawing.Point(424, 0);
             emptySpaceItem11.Name = "emptySpaceItem11";
             emptySpaceItem11.Size = new System.Drawing.Size(12, 26);
             // 
             // layoutControlItem49
             // 
             layoutControlItem49.Control = textBoxPzvNPachSearch;
-            layoutControlItem49.Location = new System.Drawing.Point(512, 0);
+            layoutControlItem49.Location = new System.Drawing.Point(510, 0);
             layoutControlItem49.Name = "layoutControlItem49";
-            layoutControlItem49.Size = new System.Drawing.Size(95, 26);
+            layoutControlItem49.Size = new System.Drawing.Size(94, 26);
             layoutControlItem49.TextVisible = false;
             // 
             // layoutControlItem50
             // 
             layoutControlItem50.Control = customLabel13;
-            layoutControlItem50.Location = new System.Drawing.Point(438, 0);
+            layoutControlItem50.Location = new System.Drawing.Point(436, 0);
             layoutControlItem50.Name = "layoutControlItem50";
             layoutControlItem50.Size = new System.Drawing.Size(74, 26);
             layoutControlItem50.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(607, 0);
+            emptySpaceItem2.Location = new System.Drawing.Point(604, 0);
             emptySpaceItem2.Name = "emptySpaceItem2";
             emptySpaceItem2.Size = new System.Drawing.Size(14, 26);
             // 
             // layoutControlItem51
             // 
             layoutControlItem51.Control = customLabel14;
-            layoutControlItem51.Location = new System.Drawing.Point(621, 0);
+            layoutControlItem51.Location = new System.Drawing.Point(618, 0);
             layoutControlItem51.Name = "layoutControlItem51";
             layoutControlItem51.Size = new System.Drawing.Size(24, 26);
             layoutControlItem51.TextVisible = false;
@@ -3536,47 +3539,47 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // layoutControlItem52
             // 
             layoutControlItem52.Control = textBoxPzvYearPachSearch;
-            layoutControlItem52.Location = new System.Drawing.Point(645, 0);
+            layoutControlItem52.Location = new System.Drawing.Point(642, 0);
             layoutControlItem52.Name = "layoutControlItem52";
-            layoutControlItem52.Size = new System.Drawing.Size(136, 26);
+            layoutControlItem52.Size = new System.Drawing.Size(135, 26);
             layoutControlItem52.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = gridControlRzvPachListByNom;
-            layoutControlItem5.Location = new System.Drawing.Point(803, 32);
+            layoutControlItem5.Location = new System.Drawing.Point(808, 32);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(234, 93);
+            layoutControlItem5.Size = new System.Drawing.Size(229, 92);
             layoutControlItem5.TextVisible = false;
             // 
             // splitterItem2
             // 
-            splitterItem2.Location = new System.Drawing.Point(797, 32);
+            splitterItem2.Location = new System.Drawing.Point(798, 32);
             splitterItem2.Name = "splitterItem2";
-            splitterItem2.Size = new System.Drawing.Size(6, 93);
+            splitterItem2.Size = new System.Drawing.Size(10, 92);
             // 
             // splitterItem1
             // 
             splitterItem1.Location = new System.Drawing.Point(244, 0);
             splitterItem1.Name = "splitterItem1";
-            splitterItem1.Size = new System.Drawing.Size(6, 125);
+            splitterItem1.Size = new System.Drawing.Size(10, 124);
             // 
             // layoutControlGroup2
             // 
-            buttonImageOptions14.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions14.Image");
-            buttonImageOptions16.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions16.Image");
-            buttonImageOptions18.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions18.Image");
-            buttonImageOptions20.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions20.Image");
-            buttonImageOptions22.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions22.Image");
-            buttonImageOptions24.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions24.Image");
-            buttonImageOptions26.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions26.Image");
-            layoutControlGroup2.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Оборудование/коэффициенты", true, buttonImageOptions14, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Обновить сменное задание", true, buttonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("", true, buttonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 8, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 7, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 4, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions21, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 5, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions22, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 6, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions23, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 3, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать ФИО", true, buttonImageOptions24, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 2, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions25, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать м/ч", true, buttonImageOptions26, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 0, true, null, true, false, true, null, -1) });
+            buttonImageOptions15.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions15.Image");
+            buttonImageOptions17.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions17.Image");
+            buttonImageOptions19.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions19.Image");
+            buttonImageOptions21.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions21.Image");
+            buttonImageOptions23.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions23.Image");
+            buttonImageOptions25.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions25.Image");
+            buttonImageOptions27.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions27.Image");
+            layoutControlGroup2.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Оборудование/коэффициенты", true, buttonImageOptions15, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions16, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Обновить сменное задание", true, buttonImageOptions17, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions18, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, false, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("", true, buttonImageOptions19, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 8, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions20, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 7, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions21, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 4, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions22, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 5, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions23, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 6, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions24, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 3, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать ФИО", true, buttonImageOptions25, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 2, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions26, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать м/ч", true, buttonImageOptions27, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", 0, true, null, true, false, true, null, -1) });
             layoutControlGroup2.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem43 });
-            layoutControlGroup2.Location = new System.Drawing.Point(1053, 0);
+            layoutControlGroup2.Location = new System.Drawing.Point(1057, 0);
             layoutControlGroup2.Name = "layoutControlGroup2";
             layoutControlGroup2.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            layoutControlGroup2.Size = new System.Drawing.Size(798, 397);
+            layoutControlGroup2.Size = new System.Drawing.Size(794, 397);
             layoutControlGroup2.Text = "СМЕННОЕ ЗАДАНИЕ";
             layoutControlGroup2.CustomButtonClick += layoutControlGroup2_CustomButtonClick;
             layoutControlGroup2.CustomButtonChecked += layoutControlGroup2_CustomButtonChecked;
@@ -3586,32 +3589,32 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem43.Control = gridControlSmenZadany;
             layoutControlItem43.Location = new System.Drawing.Point(0, 0);
             layoutControlItem43.Name = "layoutControlItem43";
-            layoutControlItem43.Size = new System.Drawing.Size(788, 362);
+            layoutControlItem43.Size = new System.Drawing.Size(784, 366);
             layoutControlItem43.TextVisible = false;
             // 
             // splitterItem6
             // 
             splitterItem6.Location = new System.Drawing.Point(0, 155);
             splitterItem6.Name = "splitterItem6";
-            splitterItem6.Size = new System.Drawing.Size(1047, 6);
+            splitterItem6.Size = new System.Drawing.Size(1047, 10);
             // 
             // splitterItem7
             // 
-            splitterItem7.Location = new System.Drawing.Point(1053, 397);
+            splitterItem7.Location = new System.Drawing.Point(1057, 397);
             splitterItem7.Name = "splitterItem7";
-            splitterItem7.Size = new System.Drawing.Size(798, 6);
+            splitterItem7.Size = new System.Drawing.Size(794, 10);
             // 
             // layoutControlGroup3
             // 
-            buttonImageOptions27.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions27.Image");
-            buttonImageOptions29.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions29.Image");
-            layoutControlGroup3.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions27, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions28, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions29, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            buttonImageOptions28.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions28.Image");
+            buttonImageOptions30.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions30.Image");
+            layoutControlGroup3.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions28, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions29, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions30, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup3.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8 });
-            layoutControlGroup3.Location = new System.Drawing.Point(1053, 403);
+            layoutControlGroup3.Location = new System.Drawing.Point(1057, 407);
             layoutControlGroup3.Name = "layoutControlGroup3";
             layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            layoutControlGroup3.Size = new System.Drawing.Size(798, 469);
+            layoutControlGroup3.Size = new System.Drawing.Size(794, 465);
             layoutControlGroup3.Text = "НАРЯД-ЗАДАНИЕ";
             layoutControlGroup3.CustomButtonClick += layoutControlGroup3_CustomButtonClick;
             // 
@@ -3620,24 +3623,24 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem8.Control = gridControlNaryadZadany;
             layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(788, 434);
+            layoutControlItem8.Size = new System.Drawing.Size(784, 434);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlGroup6
             // 
-            buttonImageOptions30.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions30.Image");
-            buttonImageOptions32.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions32.Image");
-            buttonImageOptions34.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions34.Image");
-            buttonImageOptions36.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions36.Image");
-            buttonImageOptions38.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions38.Image");
-            buttonImageOptions40.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions40.Image");
-            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Просмотр работы к подтверждению", true, buttonImageOptions30, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions31, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("История по операции", true, buttonImageOptions32, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions33, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать списка операций", true, buttonImageOptions34, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions35, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Загрузить операции", true, buttonImageOptions36, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions37, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Очистить список операций", true, buttonImageOptions38, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions39, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Обновить", true, buttonImageOptions40, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            buttonImageOptions31.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions31.Image");
+            buttonImageOptions33.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions33.Image");
+            buttonImageOptions35.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions35.Image");
+            buttonImageOptions37.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions37.Image");
+            buttonImageOptions39.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions39.Image");
+            buttonImageOptions41.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions41.Image");
+            layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Просмотр работы к подтверждению", true, buttonImageOptions31, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions32, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("История по операции", true, buttonImageOptions33, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions34, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать списка операций", true, buttonImageOptions35, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions36, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Загрузить операции", true, buttonImageOptions37, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions38, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Очистить список операций", true, buttonImageOptions39, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions40, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Обновить", true, buttonImageOptions41, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup6.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleSeparator3, simpleSeparator1, layoutControlItem41, splitterItem5, layoutControlGroup15 });
-            layoutControlGroup6.Location = new System.Drawing.Point(0, 161);
+            layoutControlGroup6.Location = new System.Drawing.Point(0, 165);
             layoutControlGroup6.Name = "layoutControlGroup6";
             layoutControlGroup6.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            layoutControlGroup6.Size = new System.Drawing.Size(1047, 711);
+            layoutControlGroup6.Size = new System.Drawing.Size(1047, 707);
             layoutControlGroup6.Text = " ";
             layoutControlGroup6.CustomButtonClick += layoutControlGroup6_CustomButtonClick;
             // 
@@ -3656,23 +3659,23 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // layoutControlItem41
             // 
             layoutControlItem41.Control = customTabControl2;
-            layoutControlItem41.Location = new System.Drawing.Point(0, 363);
+            layoutControlItem41.Location = new System.Drawing.Point(0, 367);
             layoutControlItem41.Name = "layoutControlItem41";
-            layoutControlItem41.Size = new System.Drawing.Size(1037, 312);
+            layoutControlItem41.Size = new System.Drawing.Size(1037, 308);
             layoutControlItem41.TextVisible = false;
             // 
             // splitterItem5
             // 
             splitterItem5.Location = new System.Drawing.Point(0, 357);
             splitterItem5.Name = "splitterItem5";
-            splitterItem5.Size = new System.Drawing.Size(1037, 6);
+            splitterItem5.Size = new System.Drawing.Size(1037, 10);
             // 
             // layoutControlGroup15
             // 
-            buttonImageOptions41.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions41.Image");
-            buttonImageOptions43.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions43.Image");
-            buttonImageOptions45.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions45.Image");
-            layoutControlGroup15.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать расчеты", true, buttonImageOptions41, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions42, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions43, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions44, DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions45, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
+            buttonImageOptions42.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions42.Image");
+            buttonImageOptions44.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions44.Image");
+            buttonImageOptions46.Image = (System.Drawing.Image)resources.GetObject("buttonImageOptions46.Image");
+            layoutControlGroup15.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Показать расчеты", true, buttonImageOptions42, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions43, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Свернуть ВСЕ", true, buttonImageOptions44, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions45, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Развернуть ВСЕ", true, buttonImageOptions46, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup15.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
             layoutControlGroup15.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem6 });
             layoutControlGroup15.Location = new System.Drawing.Point(0, 0);
@@ -3687,14 +3690,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem6.Control = gridControlPZVOperList;
             layoutControlItem6.Location = new System.Drawing.Point(0, 0);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new System.Drawing.Size(1031, 326);
+            layoutControlItem6.Size = new System.Drawing.Size(1031, 330);
             layoutControlItem6.TextVisible = false;
             // 
             // splitterItem4
             // 
             splitterItem4.Location = new System.Drawing.Point(1047, 0);
             splitterItem4.Name = "splitterItem4";
-            splitterItem4.Size = new System.Drawing.Size(6, 872);
+            splitterItem4.Size = new System.Drawing.Size(10, 872);
             // 
             // layoutControlItem7
             // 
