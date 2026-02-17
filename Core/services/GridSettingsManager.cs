@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using DevExpress.Data;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
 using Newtonsoft.Json;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.Interfaces;
@@ -17,6 +18,7 @@ namespace SewingProduction.Core.Services
     public class GridSettingsManager : IGridSettingsManager
     {
         private readonly Dictionary<GridView, string> _registeredGrids = new Dictionary<GridView, string>();
+        private readonly HashSet<Form> _layoutLoadedForms = new HashSet<Form>();
         private readonly ILogger _logger = new FileLogger();
         private readonly object _lockObject = new object();
         private static GridSettingsManager _instance;
@@ -68,6 +70,7 @@ namespace SewingProduction.Core.Services
 
                     // Загружаем существующие настройки
                     LoadSettings(gridView, settingsKey);
+                    EnsureFormLayoutLoaded(gridView);
 
                     _logger.LogEventAsync($"GridSettingsManager: Включено автоматическое сохранение для '{settingsKey}'", "EnableAutoSettings");
                 }
@@ -389,6 +392,107 @@ namespace SewingProduction.Core.Services
                 {
                     SaveSettings(kvp.Key, kvp.Value);
                 }
+
+                SaveFormLayout(form);
+            }
+        }
+
+        /// <summary>
+        /// Загружает layout всех LayoutControl на форме один раз за сессию,
+        /// чтобы восстановить пользовательские позиции сплиттеров.
+        /// </summary>
+        private void EnsureFormLayoutLoaded(GridView gridView)
+        {
+            var form = gridView?.GridControl?.FindForm();
+            if (form == null)
+                return;
+
+            lock (_lockObject)
+            {
+                if (_layoutLoadedForms.Contains(form))
+                    return;
+            }
+
+            LoadFormLayout(form);
+
+            lock (_lockObject)
+            {
+                _layoutLoadedForms.Add(form);
+            }
+        }
+
+        /// <summary>
+        /// Сохраняет layout каждого LayoutControl формы в XML.
+        /// </summary>
+        private void SaveFormLayout(Form form)
+        {
+            if (form == null || !SettingsManager.GetSaveGridSettings())
+                return;
+
+            try
+            {
+                var formName = form.GetType().Name;
+                var dir = Path.Combine(UserFilePaths.GridSettings, formName);
+                Directory.CreateDirectory(dir);
+
+                foreach (var layout in GetAllLayoutControls(form))
+                {
+                    var layoutName = string.IsNullOrWhiteSpace(layout.Name) ? "LayoutControl" : layout.Name;
+                    var filePath = Path.Combine(dir, $"{formName}_{layoutName}_layout.xml");
+                    layout.SaveLayoutToXml(filePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"GridSettingsManager: Ошибка при сохранении layout формы '{form?.GetType().Name}'");
+            }
+        }
+
+        /// <summary>
+        /// Загружает layout каждого LayoutControl формы из XML.
+        /// </summary>
+        private void LoadFormLayout(Form form)
+        {
+            if (form == null || !SettingsManager.GetSaveGridSettings())
+                return;
+
+            try
+            {
+                var formName = form.GetType().Name;
+                var dir = Path.Combine(UserFilePaths.GridSettings, formName);
+                Directory.CreateDirectory(dir);
+
+                foreach (var layout in GetAllLayoutControls(form))
+                {
+                    var layoutName = string.IsNullOrWhiteSpace(layout.Name) ? "LayoutControl" : layout.Name;
+                    var filePath = Path.Combine(dir, $"{formName}_{layoutName}_layout.xml");
+                    if (File.Exists(filePath))
+                    {
+                        layout.RestoreLayoutFromXml(filePath);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"GridSettingsManager: Ошибка при загрузке layout формы '{form?.GetType().Name}'");
+            }
+        }
+
+        /// <summary>
+        /// Возвращает все LayoutControl на форме (включая вложенные).
+        /// </summary>
+        private static IEnumerable<LayoutControl> GetAllLayoutControls(Control root)
+        {
+            if (root == null)
+                yield break;
+
+            if (root is LayoutControl layout)
+                yield return layout;
+
+            foreach (Control child in root.Controls)
+            {
+                foreach (var nested in GetAllLayoutControls(child))
+                    yield return nested;
             }
         }
     }
