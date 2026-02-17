@@ -792,6 +792,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewPZVOperList.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.AllowEdit = true;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.ReadOnly = false;
+
+                //gridViewPZVOperList.DoubleClick += gridViewPZVOperList_DoubleClick;
+
                 #endregion
 
                 #region описание блока Информация по операции
@@ -2075,6 +2078,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                //var view = (GridView)sender;
+                //// где именно кликнули
+                //var pt = view.GridControl.PointToClient(Control.MousePosition);
+                //var hit = view.CalcHitInfo(pt);
+
                 var view = sender as GridView;
                 if (view == null) return;
 
@@ -2083,6 +2091,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _xColumn = view.FocusedColumn.FieldName;
                 _xPzvID = Convert.ToInt32(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvID));
                 int tab = Convert.ToInt32(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvTab));
+                int xSelected = Convert.ToInt32(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListSyncSelection));
                 DateTime _OlPvDateNaznKm = Convert.ToDateTime(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPvDateNaznKm));
                 DateTime _OlPvDateNaznTab = Convert.ToDateTime(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvDateNaznTab));
                 DateTime _OlPvDateStart = Convert.ToDateTime(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvDateStart));
@@ -2165,6 +2174,47 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         MasterCancelConfirmation();
                     }
                 }
+
+                if (hit.InColumnPanel && hit.Column == gridColumnPZVOperListSyncSelection)
+                {
+                    int newValue = (xSelected == 0) ? 1 : 0;
+
+                    view.BeginUpdate();
+                    view.GridControl.BeginUpdate();
+                    try
+                    {
+                        // массовое изменение только видимых (после фильтра) строк
+                        for (int i = 0; i < view.DataRowCount; i++)
+                        {
+                            //int rowHandle = view.GetVisibleRowHandle(i);
+                            //if (!view.IsDataRow(rowHandle))
+                            //    continue;
+
+                            //view.SetRowCellValue(rowHandle, gridColumnPZVOperListSyncSelection, newValue);
+                            int rh = view.GetVisibleRowHandle(i);
+                            if (!view.IsDataRow(rh)) continue;
+                            view.SetRowCellValue(rh, gridColumnPZVOperListSyncSelection, newValue);
+                        }
+                        view.PostEditor();
+                        view.UpdateCurrentRow();
+                    }
+                    finally
+                    {
+                        view.GridControl.EndUpdate();
+                        view.EndUpdate();
+                    }
+                }
+
+                // нужен именно заголовок колонки
+                //if (!hit.InColumnPanel || hit.Column == null)
+                //    return;
+
+                // только для нужной колонки
+                //if (hit.Column != gridColumnPZVOperListSyncSelection)
+                //    return;
+
+                // значение берём у текущей строки
+                
             }
             catch (Exception ex)
             {
