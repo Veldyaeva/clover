@@ -121,11 +121,11 @@ namespace SewingProduction
             // 
             // bar1
             // 
-            bar1.BarName = "Custom 2";
+            bar1.BarName = "Main menu";
             bar1.DockCol = 0;
             bar1.DockRow = 0;
             bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Standalone;
-            bar1.FloatLocation = new Point(3298, 388);
+            bar1.FloatLocation = new Point(3224, 172);
             bar1.FloatSize = new Size(46, 100);
             bar1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] { new DevExpress.XtraBars.LinkPersistInfo(skinBarSubItem2), new DevExpress.XtraBars.LinkPersistInfo(skinDropDownButtonItem2), new DevExpress.XtraBars.LinkPersistInfo(skinPaletteDropDownButtonItem2) });
             bar1.Offset = 657;
@@ -137,7 +137,7 @@ namespace SewingProduction
             bar1.OptionsBar.MultiLine = true;
             bar1.OptionsBar.UseWholeRow = true;
             bar1.StandaloneBarDockControl = standaloneBarDockControl2;
-            bar1.Text = "Custom 2";
+            bar1.Text = "Main menu";
             // 
             // skinBarSubItem2
             // 
@@ -264,28 +264,28 @@ namespace SewingProduction
             // профильToolStripMenuItem
             // 
             профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            профильToolStripMenuItem.Size = new Size(180, 22);
+            профильToolStripMenuItem.Size = new Size(149, 22);
             профильToolStripMenuItem.Text = "Профиль";
             профильToolStripMenuItem.Click += профильToolStripMenuItem_Click;
             // 
             // настройкиToolStripMenuItem
             // 
             настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            настройкиToolStripMenuItem.Size = new Size(180, 22);
+            настройкиToolStripMenuItem.Size = new Size(149, 22);
             настройкиToolStripMenuItem.Text = "Настройки";
             настройкиToolStripMenuItem.Click += настройкиToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(180, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(149, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
             оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // помощьToolStripMenuItem
             // 
             помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            помощьToolStripMenuItem.Size = new Size(180, 22);
+            помощьToolStripMenuItem.Size = new Size(149, 22);
             помощьToolStripMenuItem.Text = "Помощь";
             помощьToolStripMenuItem.Click += помощьToolStripMenuItem_Click;
             // 
@@ -582,16 +582,6 @@ namespace SewingProduction
             layoutControlItem2.Size = new Size(137, 28);
             layoutControlItem2.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem2.TextVisible = false;
-            // 
-            // bar1
-            // 
-            bar1.BarName = "Main menu";
-            bar1.DockCol = 0;
-            bar1.DockRow = 0;
-            bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            bar1.OptionsBar.MultiLine = true;
-            bar1.OptionsBar.UseWholeRow = true;
-            bar1.Text = "Main menu";
             // 
             // SpMainForm
             // 
