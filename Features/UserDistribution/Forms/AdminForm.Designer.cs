@@ -375,10 +375,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAddObject
             // 
-            customButtonAddObject.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAddObject.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAddObject.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddObject.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAddObject.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAddObject.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAddObject.Location = new System.Drawing.Point(4, 37);
             customButtonAddObject.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAddObject.Name = "customButtonAddObject";
@@ -390,10 +390,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonDeleteObject
             // 
-            customButtonDeleteObject.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonDeleteObject.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonDeleteObject.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteObject.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDeleteObject.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonDeleteObject.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonDeleteObject.Location = new System.Drawing.Point(224, 37);
             customButtonDeleteObject.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonDeleteObject.Name = "customButtonDeleteObject";
@@ -405,10 +405,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonLoadObject
             // 
-            customButtonLoadObject.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonLoadObject.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonLoadObject.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonLoadObject.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonLoadObject.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonLoadObject.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonLoadObject.Location = new System.Drawing.Point(664, 37);
             customButtonLoadObject.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonLoadObject.Name = "customButtonLoadObject";
@@ -442,10 +442,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonOpen
             // 
-            customButtonOpen.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonOpen.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonOpen.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonOpen.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonOpen.Location = new System.Drawing.Point(392, 37);
             customButtonOpen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonOpen.Name = "customButtonOpen";
@@ -457,10 +457,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonLoadMenu
             // 
-            customButtonLoadMenu.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonLoadMenu.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonLoadMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonLoadMenu.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonLoadMenu.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonLoadMenu.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonLoadMenu.Location = new System.Drawing.Point(198, 3);
             customButtonLoadMenu.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonLoadMenu.Name = "customButtonLoadMenu";
@@ -472,10 +472,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonLoadForm
             // 
-            customButtonLoadForm.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonLoadForm.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonLoadForm.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonLoadForm.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonLoadForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonLoadForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonLoadForm.Location = new System.Drawing.Point(4, 3);
             customButtonLoadForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonLoadForm.Name = "customButtonLoadForm";
@@ -487,10 +487,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonFormAdd
             // 
-            customButtonFormAdd.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonFormAdd.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonFormAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonFormAdd.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonFormAdd.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonFormAdd.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonFormAdd.Location = new System.Drawing.Point(4, 37);
             customButtonFormAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonFormAdd.Name = "customButtonFormAdd";
@@ -502,10 +502,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonDeleteForm
             // 
-            customButtonDeleteForm.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonDeleteForm.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonDeleteForm.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteForm.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDeleteForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonDeleteForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonDeleteForm.Location = new System.Drawing.Point(198, 37);
             customButtonDeleteForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonDeleteForm.Name = "customButtonDeleteForm";
@@ -520,7 +520,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customCheckBoxMyForm.AutoSize = true;
             customCheckBoxMyForm.Dock = System.Windows.Forms.DockStyle.Fill;
             customCheckBoxMyForm.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxMyForm.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            // customCheckBoxMyForm.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             customCheckBoxMyForm.Location = new System.Drawing.Point(392, 3);
             customCheckBoxMyForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customCheckBoxMyForm.Name = "customCheckBoxMyForm";

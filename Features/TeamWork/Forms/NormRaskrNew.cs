@@ -181,7 +181,8 @@ namespace SewingProduction.form.TeamWork.Forms
         }
         private void HighlightBand(GridBand band)
         {
-            var color = ThemeManager.ActiveTheme.BandHighlightColor;
+            // Используем системный цвет подсветки вместо кастомной темы
+            var color = SystemColors.Highlight;
             band.AppearanceHeader.BackColor = color;
             foreach (GridBand child in band.Children)
                 child.AppearanceHeader.BackColor = color;

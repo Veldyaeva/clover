@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using DevExpress.XtraEditors;
 using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomLookUpEdit : LookUpEdit//, IThemeable, IThemeableControl
+    public class CustomLookUpEdit : LookUpEdit, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -12,8 +12,7 @@ namespace SewingProduction.Core.Class
         private bool _visibleLogic = true;
         public CustomLookUpEdit()
         {
-            //ApplyTheme();
-            //ThemeManager.ThemeChanged += OnThemeChanged;
+            ApplyTheme();
         }
 
         public void ApplyTheme()
@@ -23,14 +22,8 @@ namespace SewingProduction.Core.Class
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        //private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                //ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)

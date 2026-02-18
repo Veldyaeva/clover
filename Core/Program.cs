@@ -2,7 +2,10 @@ using DevExpress.LookAndFeel;
 using DevExpress.Skins;
 using DevExpress.UserSkins;
 using DevExpress.XtraGrid.Localization;
+using DevExpress.XtraPrinting.Localization;
+using DevExpress.XtraPrinting.Preview;
 using DevExpress.XtraReports.Design;
+using DevExpress.XtraReports.Localization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using SewingProduction.Core;
@@ -13,6 +16,8 @@ using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -38,6 +43,7 @@ namespace SewingProduction.Core
         private const int SW_RESTORE = 9;
 
         private static ILogger _logger = new HybridLogger();
+
         private const string DefaultSkin = "Office 2019 Colorful";
 
         /// <summary>
@@ -46,9 +52,18 @@ namespace SewingProduction.Core
         [STAThread]
         static void Main(string[] args)
         {
+            //PrintDialogRunner.Instance = new DefaultPrintDialogRunner();
+            //Debug.WriteLine(PrintDialogRunner.Instance.GetType().FullName);
+            //PrintDialogRunner.Instance = new DefaultPrintDialogRunner();
+            //Debug.WriteLine("After set: " + PrintDialogRunner.Instance.GetType().FullName);
+
             RegisterGlobalExceptionHandlers();
+
+            //CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("ru-RU");
+            //CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("ru-RU");
+
             // Уникальное имя Mutex
-            
+
             bool createdNew;
             bool isRestarting = args.Contains("--restart");
             using (var mutex = new Mutex(true, "SewingProductionAppMutex", out createdNew))
@@ -77,9 +92,20 @@ namespace SewingProduction.Core
                 ConfigureServices(services);
                 var provider = services.BuildServiceProvider();
                 AppServices.Configure(provider);
-                SqlDependency.Start(SettingsManager.GetCurrentConnectionString());
-                Application.ApplicationExit += (_, __) =>
-                    SqlDependency.Stop(SettingsManager.GetCurrentConnectionString());
+                //SqlDependency.Start(SettingsManager.GetCurrentConnectionString());
+                //Application.ApplicationExit += (_, __) =>
+                //    SqlDependency.Stop(SettingsManager.GetCurrentConnectionString());
+                var qnConn = SettingsManager.GetCurrentConnectionString();
+                SqlDependency.Start(qnConn);
+                
+                void StopQN()
+                {
+                    try { SqlDependency.Stop(qnConn); } catch { }
+                }
+                
+                Application.ApplicationExit += (_, __) => StopQN();
+                AppDomain.CurrentDomain.ProcessExit += (_, __) => StopQN();
+                AppDomain.CurrentDomain.DomainUnload += (_, __) => StopQN();
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
                     splashScreen.Show();
@@ -98,6 +124,7 @@ namespace SewingProduction.Core
 
                     SpMainForm mainForm = new SpMainForm();
                     Thread.Sleep(2000);
+
                     //ThemeManager.LoadTheme();
 
                     BonusSkins.Register();
@@ -124,6 +151,12 @@ namespace SewingProduction.Core
                         Properties.Settings.Default.Save();
                     }
 
+                    ThemeManager.LoadTheme();
+
+                    //XtraReportsLocalizer.Active = new DxReportsLocalizerRu(traceUnknown);
+                    //PrintingSystemLocalizer.Active = new DxPrintingLocalizerRu(traceUnknown);
+                    PreviewLocalizer.Active = new DxPreviewLocalizerRu();
+                    
                     splashScreen.Close();
 
                     Application.Run(mainForm);

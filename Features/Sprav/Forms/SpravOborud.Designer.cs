@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 namespace SewingProduction.form
 {
     partial class SpravOborud
@@ -232,7 +232,7 @@ namespace SewingProduction.form
             gridView1.Appearance.VertLine.Options.UseTextOptions = true;
             gridView1.Appearance.ViewCaption.Options.UseTextOptions = true;
             gridView1.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            gridView1.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
+            // gridView1.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
             gridView1.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridView1.AppearancePrint.EvenRow.Options.UseTextOptions = true;
             gridView1.AppearancePrint.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
@@ -430,8 +430,8 @@ namespace SewingProduction.form
             // 
             // arhiv
             // 
-            arhiv.AppearanceCell.BackColor = System.Drawing.Color.White;
-            arhiv.AppearanceCell.BorderColor = System.Drawing.Color.White;
+            // arhiv.AppearanceCell.BackColor = System.Drawing.Color.White;
+            // arhiv.AppearanceCell.BorderColor = System.Drawing.Color.White;
             arhiv.AppearanceCell.Options.UseBackColor = true;
             arhiv.AppearanceCell.Options.UseBorderColor = true;
             arhiv.AppearanceHeader.Options.UseTextOptions = true;
@@ -568,8 +568,8 @@ namespace SewingProduction.form
             // 
             // gridColumn12
             // 
-            gridColumn12.AppearanceCell.BackColor = System.Drawing.Color.White;
-            gridColumn12.AppearanceCell.BorderColor = System.Drawing.Color.White;
+            // gridColumn12.AppearanceCell.BackColor = System.Drawing.Color.White;
+            // gridColumn12.AppearanceCell.BorderColor = System.Drawing.Color.White;
             gridColumn12.AppearanceCell.Options.UseBackColor = true;
             gridColumn12.AppearanceCell.Options.UseBorderColor = true;
             gridColumn12.Caption = "Архив";
@@ -581,8 +581,8 @@ namespace SewingProduction.form
             // 
             // gridColumn13
             // 
-            gridColumn13.AppearanceCell.BackColor = System.Drawing.Color.White;
-            gridColumn13.AppearanceCell.BorderColor = System.Drawing.Color.White;
+            // gridColumn13.AppearanceCell.BackColor = System.Drawing.Color.White;
+            // gridColumn13.AppearanceCell.BorderColor = System.Drawing.Color.White;
             gridColumn13.AppearanceCell.Options.UseBackColor = true;
             gridColumn13.AppearanceCell.Options.UseBorderColor = true;
             gridColumn13.Caption = "Архив";
@@ -655,7 +655,7 @@ namespace SewingProduction.form
             label8.AutoSize = true;
             label8.BackColor = System.Drawing.Color.Transparent;
             label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
-            label8.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // label8.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             label8.Location = new System.Drawing.Point(4, 7);
             label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label8.Name = "label8";
@@ -1019,11 +1019,10 @@ namespace SewingProduction.form
             // simpleButtonRedSave
             // 
             simpleButtonRedSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            simpleButtonRedSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonRedSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonRedSave.FlatAppearance.BorderSize = 0;
             simpleButtonRedSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonRedSave.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonRedSave.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonRedSave.Location = new System.Drawing.Point(301, 760);
             simpleButtonRedSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonRedSave.MaximumSize = new System.Drawing.Size(203, 46);
@@ -1038,11 +1037,10 @@ namespace SewingProduction.form
             // simpleButtonRedOtm
             // 
             simpleButtonRedOtm.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            simpleButtonRedOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonRedOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonRedOtm.FlatAppearance.BorderSize = 0;
             simpleButtonRedOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonRedOtm.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonRedOtm.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonRedOtm.Location = new System.Drawing.Point(7, 760);
             simpleButtonRedOtm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonRedOtm.MaximumSize = new System.Drawing.Size(203, 46);
@@ -1056,7 +1054,7 @@ namespace SewingProduction.form
             // 
             // xtraTabPageAdd
             // 
-            xtraTabPageAdd.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
+            // xtraTabPageAdd.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
             xtraTabPageAdd.Appearance.PageClient.Options.UseBackColor = true;
             xtraTabPageAdd.Controls.Add(tableLayoutPanel4);
             xtraTabPageAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1289,7 +1287,7 @@ namespace SewingProduction.form
             // comboBoxAddGrup
             // 
             comboBoxAddGrup.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            comboBoxAddGrup.BackColor = System.Drawing.Color.White;
+            // comboBoxAddGrup.BackColor = System.Drawing.Color.White;
             comboBoxAddGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             comboBoxAddGrup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             comboBoxAddGrup.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
@@ -1377,7 +1375,7 @@ namespace SewingProduction.form
             // textBoxAddName
             // 
             textBoxAddName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            textBoxAddName.BackColor = System.Drawing.Color.White;
+            // textBoxAddName.BackColor = System.Drawing.Color.White;
             textBoxAddName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
             textBoxAddName.Location = new System.Drawing.Point(254, 74);
             textBoxAddName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1485,11 +1483,10 @@ namespace SewingProduction.form
             // simpleButtonAddSave
             // 
             simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddSave.FlatAppearance.BorderSize = 0;
             simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAddSave.Location = new System.Drawing.Point(317, 825);
             simpleButtonAddSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddSave.MaximumSize = new System.Drawing.Size(203, 46);
@@ -1504,11 +1501,10 @@ namespace SewingProduction.form
             // simpleButtonAddOtm
             // 
             simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
             simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAddOtm.Location = new System.Drawing.Point(23, 825);
             simpleButtonAddOtm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddOtm.MaximumSize = new System.Drawing.Size(203, 46);
@@ -1523,9 +1519,8 @@ namespace SewingProduction.form
             // AddTab
             // 
             AddTab.Appearance.BackColor = System.Drawing.Color.Transparent;
-            AddTab.Appearance.ForeColor = System.Drawing.Color.Black;
+            // AddTab.Appearance.ForeColor = System.Drawing.Color.Black;
             AddTab.Appearance.Options.UseBackColor = true;
-            AddTab.Appearance.Options.UseForeColor = true;
             AddTab.Location = new System.Drawing.Point(1640, 3);
             AddTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             AddTab.Name = "AddTab";
@@ -1584,11 +1579,10 @@ namespace SewingProduction.form
             // 
             // simpleButtonAdd
             // 
-            simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAdd.FlatAppearance.BorderSize = 0;
             simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonAdd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonAdd.Location = new System.Drawing.Point(1406, 3);
             simpleButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAdd.MaximumSize = new System.Drawing.Size(218, 46);
@@ -1602,11 +1596,10 @@ namespace SewingProduction.form
             // 
             // simpleButtonRed
             // 
-            simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonRed.FlatAppearance.BorderSize = 0;
             simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonRed.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             simpleButtonRed.Location = new System.Drawing.Point(1180, 3);
             simpleButtonRed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonRed.MaximumSize = new System.Drawing.Size(218, 46);

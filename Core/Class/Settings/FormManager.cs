@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraBars;
 using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class.Settings
@@ -9,61 +11,45 @@ namespace SewingProduction.Core.Class.Settings
     public class FormManager
     {
         private readonly Form _mainForm;
-        private readonly MenuStrip _menuStrip;
+        private readonly BarManager _barManager; // вместо MenuStrip
         private readonly UserClass _user;
         private readonly Dictionary<string, Form> _openedForms;
 
-        public FormManager(Form mainForm, MenuStrip menuStrip, UserClass user)
+        public FormManager(Form mainForm, BarManager barManager, UserClass user)
         {
-            _mainForm = mainForm;
-            _menuStrip = menuStrip;
+            _mainForm = mainForm ?? throw new ArgumentNullException(nameof(mainForm));
+            _barManager = barManager; 
             _user = user;
             _openedForms = new Dictionary<string, Form>();
         }
 
         public void OpenForm(Form form, object sender = null)
         {
+            if (form == null) return;
+
             form.MdiParent = _mainForm;
+
+            string key = ExtractBarItemName(sender);
 
             bool allowDuplicates = SettingsManager.GetAllowDuplicateTabs();
 
-            string key = sender switch
+            if (!allowDuplicates && !string.IsNullOrWhiteSpace(key))
             {
-                ToolStripMenuItem menuItem => menuItem.Name,
-                string name => name,
-                _ => form.Text // если не из меню — используем заголовок формы как ключ
-            };
-
-            // 🔐 Проверка по ключу
-            if (!allowDuplicates && !string.IsNullOrEmpty(key))
-            {
-                if (_openedForms.TryGetValue(key, out Form existingForm))
+                if (_openedForms.TryGetValue(key, out var existing) && existing != null && !existing.IsDisposed)
                 {
-                    if (existingForm != null && !existingForm.IsDisposed)
-                    {
-                        existingForm.Activate();
-                        return;
-                    }
-                    else
-                    {
-                        _openedForms.Remove(key);
-                    }
+                    existing.Activate();
+                    return;
                 }
+                _openedForms.Remove(key);
             }
 
-            // Регистрируем форму по ключу (если включено отслеживание)
-            if (!string.IsNullOrEmpty(key) && !_openedForms.ContainsKey(key))
-            {
+            if (!string.IsNullOrWhiteSpace(key) && !_openedForms.ContainsKey(key))
                 _openedForms[key] = form;
-            }
 
-            // Удаление формы из словаря при закрытии
-            form.FormClosed += (s, e) =>
+            form.FormClosed += (_, __) =>
             {
-                var closedForm = s as Form;
-                var item = _openedForms.FirstOrDefault(x => x.Value == closedForm);
-                if (!string.IsNullOrEmpty(item.Key))
-                    _openedForms.Remove(item.Key);
+                if (string.IsNullOrWhiteSpace(key)) return;
+                _openedForms.Remove(key);
             };
 
             form.Show();
@@ -71,41 +57,47 @@ namespace SewingProduction.Core.Class.Settings
 
         public async Task RestoreOpenTabs()
         {
+            if (_barManager == null || _user == null) return;
+
             var openTabs = SettingsManager.GetOpenTabs(_user.UserName);
-            foreach (var menuItemName in openTabs)
+            foreach (var barItemName in openTabs)
             {
-                ToolStripMenuItem menuItem = FindMenuItemByName(_menuStrip.Items, menuItemName);
-                if (menuItem != null)
+                if (string.IsNullOrWhiteSpace(barItemName)) continue;
+
+                var item = GetBarItemByName(barItemName);
+
+                if (item is BarButtonItem button)
                 {
-                    await Task.Delay(100);
-                    menuItem.PerformClick();
+                    await Task.Delay(50);
+
+                    if (_mainForm.InvokeRequired)
+                        _mainForm.BeginInvoke(new Action(button.PerformClick));
+                    else
+                        button.PerformClick();
                 }
             }
+        }
+        private static string ExtractBarItemName(object sender)
+        {
+            return sender switch
+            {
+                BarItem bi => bi.Name,
+                ItemClickEventArgs icea when icea.Item != null => icea.Item.Name,
+                _ => null
+            };
         }
 
         public void SaveOpenTabs()
         {
             SettingsManager.SetOpenTabs(_user.UserName, _openedForms.Keys.ToList());
         }
-        public ToolStripMenuItem GetMenuItemByName(string name)
-        {
-            return FindMenuItemByName(_menuStrip.Items, name);
-        }
-        private ToolStripMenuItem FindMenuItemByName(ToolStripItemCollection items, string name)
-        {
-            foreach (ToolStripItem item in items)
-            {
-                if (item.Name == name && item is ToolStripMenuItem menuItem)
-                    return menuItem;
 
-                if (item is ToolStripMenuItem parentMenu && parentMenu.DropDownItems.Count > 0)
-                {
-                    var found = FindMenuItemByName(parentMenu.DropDownItems, name);
-                    if (found != null)
-                        return found;
-                }
-            }
-            return null;
+        public BarItem GetBarItemByName(string name)
+        {
+            if (_barManager == null || string.IsNullOrWhiteSpace(name))
+                return null;
+
+            return _barManager.Items.FirstOrDefault(i => i != null && i.Name == name);
         }
 
         public Form GetActiveForm()
@@ -113,7 +105,6 @@ namespace SewingProduction.Core.Class.Settings
             if (_mainForm == null)
                 return null;
 
-            // Ищем форму, у которой сейчас фокус или которая активна
             foreach (var form in _mainForm.MdiChildren)
             {
                 if (form.ContainsFocus || form == _mainForm.ActiveMdiChild)

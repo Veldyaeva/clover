@@ -45,7 +45,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridPlanSezonZadKnitMachineColumnYearMonthText = new DevExpress.XtraGrid.Columns.GridColumn();
             gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt = new DevExpress.XtraGrid.Columns.GridColumn();
             labelKmlNumber = new CustomLabel();
-            layoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            layoutControl1 = new CustomLayoutControl();
             gridControlPlanSezonZadKnitMachineLoadingSummary = new CustomGridControl();
             gridViewPlanSezonZadKnitMachineLoadingSummary = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -86,7 +86,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPlanSezonZadKnitMachine
             // 
-            gridViewPlanSezonZadKnitMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            // gridViewPlanSezonZadKnitMachine.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewPlanSezonZadKnitMachine.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewPlanSezonZadKnitMachine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPlanSezonZadKnitMachineColumnArticul, gridPlanSezonZadKnitMachineColumnPszkmPszNom, gridPlanSezonZadKnitMachineColumnHoursTotal, gridPlanSezonZadKnitMachineColumnDateZap, gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom, gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo, gridPlanSezonZadKnitMachineColumnYearMonthPlanDate, gridPlanSezonZadKnitMachineColumnKmlNumber, gridPlanSezonZadKnitMachineColumnYearNumberPlanDate, gridPlanSezonZadKnitMachineColumnMonthNumberPlanDate, gridPlanSezonZadKnitMachineColumnYearMonthText, gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt });
             gridViewPlanSezonZadKnitMachine.GridControl = gridControlPlanSezonZadKnitMachine;
@@ -183,7 +183,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // labelKmlNumber
             // 
             labelKmlNumber.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
-            labelKmlNumber.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             labelKmlNumber.Location = new System.Drawing.Point(12, 12);
             labelKmlNumber.Name = "labelKmlNumber";
             labelKmlNumber.Size = new System.Drawing.Size(650, 35);
@@ -217,7 +216,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // gridViewPlanSezonZadKnitMachineLoadingSummary
             // 
-            gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(129, 199, 132);
+            // gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(129, 199, 132);
             gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewPlanSezonZadKnitMachineLoadingSummary.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod, gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal });
             gridViewPlanSezonZadKnitMachineLoadingSummary.GridControl = gridControlPlanSezonZadKnitMachineLoadingSummary;
@@ -337,7 +336,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridPlanSezonZadKnitMachineColumnMonthNumberPlanDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridPlanSezonZadKnitMachineColumnYearMonthText;
         private DevExpress.XtraGrid.Columns.GridColumn gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
@@ -350,5 +348,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator4;
         private DevExpress.XtraGrid.Columns.GridColumn gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod;
         private DevExpress.XtraGrid.Columns.GridColumn gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal;
+        private CustomLayoutControl layoutControl1;
     }
 }

@@ -232,9 +232,9 @@
             // 
             // gridViewKompl
             // 
-            gridViewKompl.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewKompl.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewKompl.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewKompl.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewKompl.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewKompl.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewKompl.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKompl.Appearance.FocusedRow.Options.UseFont = true;
@@ -456,7 +456,7 @@
             customLabelGrupKompl.AutoSize = true;
             customLabelGrupKompl.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelGrupKompl.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelGrupKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelGrupKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelGrupKompl.Location = new System.Drawing.Point(3, 0);
             customLabelGrupKompl.Name = "customLabelGrupKompl";
             customLabelGrupKompl.Size = new System.Drawing.Size(205, 31);
@@ -466,10 +466,10 @@
             // 
             // customButtonKompl
             // 
-            customButtonKompl.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonKompl.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonKompl.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonKompl.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonKompl.Location = new System.Drawing.Point(214, 3);
             customButtonKompl.Name = "customButtonKompl";
             customButtonKompl.Size = new System.Drawing.Size(229, 25);
@@ -481,9 +481,9 @@
             // customButtonDelKompl
             // 
             customButtonDelKompl.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            customButtonDelKompl.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonDelKompl.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonDelKompl.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDelKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonDelKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonDelKompl.Location = new System.Drawing.Point(449, 34);
             customButtonDelKompl.MaximumSize = new System.Drawing.Size(25, 25);
             customButtonDelKompl.MinimumSize = new System.Drawing.Size(25, 25);
@@ -514,9 +514,9 @@
             // customButtonDelKomplSelected
             // 
             customButtonDelKomplSelected.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            customButtonDelKomplSelected.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonDelKomplSelected.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonDelKomplSelected.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDelKomplSelected.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonDelKomplSelected.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonDelKomplSelected.Location = new System.Drawing.Point(449, 3);
             customButtonDelKomplSelected.MaximumSize = new System.Drawing.Size(25, 25);
             customButtonDelKomplSelected.MinimumSize = new System.Drawing.Size(25, 25);
@@ -547,7 +547,7 @@
             // 
             customCheckBoxVerified.Dock = System.Windows.Forms.DockStyle.Fill;
             customCheckBoxVerified.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxVerified.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customCheckBoxVerified.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxVerified.Location = new System.Drawing.Point(223, 3);
             customCheckBoxVerified.Name = "customCheckBoxVerified";
             customCheckBoxVerified.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -573,9 +573,9 @@
             // 
             // gridViewKomplArt
             // 
-            gridViewKomplArt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewKomplArt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewKomplArt.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewKomplArt.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewKomplArt.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewKomplArt.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewKomplArt.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKomplArt.Appearance.FocusedRow.Options.UseFont = true;
@@ -716,9 +716,9 @@
             // 
             // gridViewKomplRazm
             // 
-            gridViewKomplRazm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewKomplRazm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewKomplRazm.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewKomplRazm.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // gridViewKomplRazm.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             gridViewKomplRazm.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewKomplRazm.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKomplRazm.Appearance.FocusedRow.Options.UseFont = true;
@@ -835,10 +835,10 @@
             // 
             // customButtonBack
             // 
-            customButtonBack.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonBack.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonBack.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonBack.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonBack.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonBack.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonBack.Location = new System.Drawing.Point(3, 626);
             customButtonBack.Name = "customButtonBack";
             customButtonBack.Size = new System.Drawing.Size(158, 28);
@@ -849,11 +849,11 @@
             // 
             // customButtonNext
             // 
-            customButtonNext.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonNext.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             tableLayoutPanel8.SetColumnSpan(customButtonNext, 2);
             customButtonNext.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonNext.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonNext.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customButtonNext.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonNext.Location = new System.Drawing.Point(167, 626);
             customButtonNext.Name = "customButtonNext";
             customButtonNext.Size = new System.Drawing.Size(159, 28);
@@ -864,7 +864,7 @@
             // 
             // customTabControlKomplRazm
             // 
-            customTabControlKomplRazm.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customTabControlKomplRazm.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTabControlKomplRazm.Appearance.Options.UseForeColor = true;
             tableLayoutPanel8.SetColumnSpan(customTabControlKomplRazm, 3);
             customTabControlKomplRazm.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -880,7 +880,7 @@
             customCheckBoxAutoRazm.AutoSize = true;
             customCheckBoxAutoRazm.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             customCheckBoxAutoRazm.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxAutoRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customCheckBoxAutoRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxAutoRazm.Location = new System.Drawing.Point(3, 3);
             customCheckBoxAutoRazm.Name = "customCheckBoxAutoRazm";
             customCheckBoxAutoRazm.Size = new System.Drawing.Size(105, 20);
@@ -891,10 +891,10 @@
             // 
             // customNumericUpDownValueTab
             // 
-            customNumericUpDownValueTab.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            // customNumericUpDownValueTab.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customNumericUpDownValueTab.Dock = System.Windows.Forms.DockStyle.Fill;
             customNumericUpDownValueTab.Font = new System.Drawing.Font("Arial", 10F);
-            customNumericUpDownValueTab.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customNumericUpDownValueTab.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customNumericUpDownValueTab.Location = new System.Drawing.Point(167, 29);
             customNumericUpDownValueTab.MaximumSize = new System.Drawing.Size(100, 0);
             customNumericUpDownValueTab.Name = "customNumericUpDownValueTab";
@@ -908,7 +908,7 @@
             customLabelKolTab.AutoSize = true;
             customLabelKolTab.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelKolTab.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelKolTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelKolTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelKolTab.Location = new System.Drawing.Point(3, 26);
             customLabelKolTab.Name = "customLabelKolTab";
             customLabelKolTab.Size = new System.Drawing.Size(158, 29);
@@ -922,7 +922,7 @@
             customCheckBoxOdinak.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             tableLayoutPanel8.SetColumnSpan(customCheckBoxOdinak, 2);
             customCheckBoxOdinak.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxOdinak.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customCheckBoxOdinak.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxOdinak.Location = new System.Drawing.Point(167, 3);
             customCheckBoxOdinak.Name = "customCheckBoxOdinak";
             customCheckBoxOdinak.Size = new System.Drawing.Size(159, 20);
@@ -985,7 +985,7 @@
             customLabelArtVib.AutoSize = true;
             customLabelArtVib.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelArtVib.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelArtVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelArtVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelArtVib.Location = new System.Drawing.Point(3, 42);
             customLabelArtVib.Name = "customLabelArtVib";
             customLabelArtVib.Size = new System.Drawing.Size(50, 42);
@@ -998,7 +998,7 @@
             customHeaderLabelGrupVib.AutoSize = true;
             tableLayoutPanel7.SetColumnSpan(customHeaderLabelGrupVib, 2);
             customHeaderLabelGrupVib.Dock = System.Windows.Forms.DockStyle.Fill;
-            customHeaderLabelGrupVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customHeaderLabelGrupVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customHeaderLabelGrupVib.Location = new System.Drawing.Point(3, 0);
             customHeaderLabelGrupVib.Name = "customHeaderLabelGrupVib";
             customHeaderLabelGrupVib.Size = new System.Drawing.Size(154, 42);
@@ -1011,7 +1011,7 @@
             customLabelModVib.AutoSize = true;
             customLabelModVib.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelModVib.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelModVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelModVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelModVib.Location = new System.Drawing.Point(3, 84);
             customLabelModVib.Name = "customLabelModVib";
             customLabelModVib.Size = new System.Drawing.Size(50, 44);
@@ -1024,7 +1024,7 @@
             customLabelArtTextVib.AutoSize = true;
             customLabelArtTextVib.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelArtTextVib.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelArtTextVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelArtTextVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelArtTextVib.Location = new System.Drawing.Point(59, 42);
             customLabelArtTextVib.Name = "customLabelArtTextVib";
             customLabelArtTextVib.Size = new System.Drawing.Size(98, 42);
@@ -1037,7 +1037,7 @@
             customLabelModTextVib.AutoSize = true;
             customLabelModTextVib.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelModTextVib.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelModTextVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelModTextVib.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelModTextVib.Location = new System.Drawing.Point(59, 84);
             customLabelModTextVib.Name = "customLabelModTextVib";
             customLabelModTextVib.Size = new System.Drawing.Size(98, 44);
@@ -1085,7 +1085,7 @@
             customLabelArt.AutoSize = true;
             customLabelArt.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelArt.Location = new System.Drawing.Point(3, 42);
             customLabelArt.Name = "customLabelArt";
             customLabelArt.Size = new System.Drawing.Size(50, 42);
@@ -1098,7 +1098,7 @@
             customHeaderLabelGrup.AutoSize = true;
             tableLayoutPanel6.SetColumnSpan(customHeaderLabelGrup, 2);
             customHeaderLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customHeaderLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customHeaderLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customHeaderLabelGrup.Location = new System.Drawing.Point(3, 0);
             customHeaderLabelGrup.Name = "customHeaderLabelGrup";
             customHeaderLabelGrup.Size = new System.Drawing.Size(154, 42);
@@ -1111,7 +1111,7 @@
             customLabelMod.AutoSize = true;
             customLabelMod.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelMod.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelMod.Location = new System.Drawing.Point(3, 84);
             customLabelMod.Name = "customLabelMod";
             customLabelMod.Size = new System.Drawing.Size(50, 44);
@@ -1124,7 +1124,7 @@
             customLabelArtText.AutoSize = true;
             customLabelArtText.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelArtText.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelArtText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelArtText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelArtText.Location = new System.Drawing.Point(59, 42);
             customLabelArtText.Name = "customLabelArtText";
             customLabelArtText.Size = new System.Drawing.Size(98, 42);
@@ -1137,7 +1137,7 @@
             customLabelModText.AutoSize = true;
             customLabelModText.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelModText.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelModText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelModText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelModText.Location = new System.Drawing.Point(59, 84);
             customLabelModText.Name = "customLabelModText";
             customLabelModText.Size = new System.Drawing.Size(98, 44);
@@ -1164,7 +1164,7 @@
             customRadioGroupVib.Name = "customRadioGroupVib";
             customRadioGroupVib.ObjectName = null;
             customRadioGroupVib.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customRadioGroupVib.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            // customRadioGroupVib.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customRadioGroupVib.Properties.Appearance.Options.UseFont = true;
             customRadioGroupVib.Properties.Appearance.Options.UseForeColor = true;
             customRadioGroupVib.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
@@ -1180,7 +1180,7 @@
             tableLayoutPanel1.SetColumnSpan(customLabelInfo, 3);
             customLabelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelInfo.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelInfo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customLabelInfo.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelInfo.Location = new System.Drawing.Point(3, 0);
             customLabelInfo.Name = "customLabelInfo";
             customLabelInfo.Size = new System.Drawing.Size(1114, 16);

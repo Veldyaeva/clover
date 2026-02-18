@@ -67,7 +67,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewHistory
             // 
-            gridViewHistory.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // gridViewHistory.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridViewHistory.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewHistory.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(250, 250, 200);
             gridViewHistory.Appearance.Row.Options.UseBackColor = true;

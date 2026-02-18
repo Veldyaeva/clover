@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -11,10 +11,24 @@ using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomButton : Button//, IThemeable, IThemeableControl
+    public class CustomButton : Button, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = value;
+        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get => base.ForeColor;
+            set => base.ForeColor = value;
+        }
         private UserClass _lastUser;
         /// <summary>
         ///Контролирует видимость элемента на основе прав пользователя в системе
@@ -27,8 +41,7 @@ namespace SewingProduction.Core.Class
 
         public CustomButton()
         {
-            //ApplyTheme();
-            //ThemeManager.ThemeChanged += OnThemeChanged;
+            ApplyTheme();
         }
         protected override void OnHandleCreated(EventArgs e)
         {
@@ -44,22 +57,13 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
-            FlatStyle = FlatStyle.Standard;
-            FlatAppearance.BorderSize = 1;
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
 
-        //private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                //ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -133,10 +137,24 @@ namespace SewingProduction.Core.Class
             }
         }
     }
-    public class CustomSimpleButton : SimpleButton//, IThemeable, IThemeableControl
+    public class CustomSimpleButton : SimpleButton, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = value;
+        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get => base.ForeColor;
+            set => base.ForeColor = value;
+        }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
 
@@ -147,72 +165,29 @@ namespace SewingProduction.Core.Class
         public CustomSimpleButton()
         {
             ApplyTheme();
-            //ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            if (UseDevExpressSkin)
-            {
-                ResetToSkin();
-                return;
-            }
-
-            // ваш текущий кастомный ThemeManager-режим
-            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            // Оставляем цвета под управлением DevExpress скинов, задаём только шрифт/высоту
             Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-            // !!! вот это сейчас прям ломает скины
-            // AppearanceDisabled... лучше тоже делать только в кастом-режиме
-            AppearanceDisabled.BackColor = Color.Green;
-            AppearanceDisabled.ForeColor = Color.GreenYellow;
-            AppearanceDisabled.Options.UseBackColor = true;
-            AppearanceDisabled.Options.UseForeColor = true;
+            Appearance.Options.UseFont = true;
 
             Height = ThemeManager.SharedSettings.ButtonHeight;
-            //Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            //Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            //Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-            //AppearanceDisabled.BackColor = Color.Green;
-            //AppearanceDisabled.ForeColor = Color.GreenYellow;
-            //AppearanceDisabled.Options.UseBackColor = true;
-            //AppearanceDisabled.Options.UseForeColor = true;
-
-            //Height = ThemeManager.SharedSettings.ButtonHeight;
         }
-        private void ResetToSkin()
-        {
-            // Отпускаем цвета, пусть ими управляет скин
-            Appearance.BackColor = Color.Empty;
-            Appearance.ForeColor = Color.Empty;
-            Appearance.BorderColor = Color.Empty;
-            Appearance.Options.UseBackColor = false;
-            Appearance.Options.UseForeColor = false;
-            Appearance.Options.UseBorderColor = false;
+        //private void ResetToSkin()
+        //{
+        //    // Отпускаем цвета, пусть ими управляет скин
+        //    Appearance.BackColor = Color.Empty;
+        //    Appearance.ForeColor = Color.Empty;
+        //    Appearance.BorderColor = Color.Empty;
+        //    Appearance.Options.UseBackColor = false;
+        //    Appearance.Options.UseForeColor = false;
+        //    Appearance.Options.UseBorderColor = false;
 
-            AppearanceDisabled.BackColor = Color.Empty;
-            AppearanceDisabled.ForeColor = Color.Empty;
-            AppearanceDisabled.BorderColor = Color.Empty;
-            AppearanceDisabled.Options.UseBackColor = false;
-            AppearanceDisabled.Options.UseForeColor = false;
-            AppearanceDisabled.Options.UseBorderColor = false;
-
-            // Font можно оставить ваш общий (если хотите единый шрифт),
-            // либо отпустить тоже:
-            // Appearance.Font = null;
-
-            LookAndFeel.UseDefaultLookAndFeel = true;
-        }
-        //private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                //ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
 

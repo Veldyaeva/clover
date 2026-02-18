@@ -280,12 +280,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // NomZadSearchTextBox
             // 
-            NomZadSearchTextBox.BackColor = System.Drawing.Color.White;
             NomZadSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             NomZadSearchTextBox.ErrorColor = System.Drawing.Color.Red;
             NomZadSearchTextBox.ErrorMessage = null;
             NomZadSearchTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            NomZadSearchTextBox.ForeColor = System.Drawing.Color.Black;
             NomZadSearchTextBox.Location = new System.Drawing.Point(819, 36);
             NomZadSearchTextBox.Name = "NomZadSearchTextBox";
             NomZadSearchTextBox.Size = new System.Drawing.Size(183, 23);
@@ -342,12 +340,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // recNomTextBox
             // 
-            recNomTextBox.BackColor = System.Drawing.Color.White;
             recNomTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             recNomTextBox.ErrorColor = System.Drawing.Color.Red;
             recNomTextBox.ErrorMessage = null;
             recNomTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            recNomTextBox.ForeColor = System.Drawing.Color.Black;
             recNomTextBox.Location = new System.Drawing.Point(153, 553);
             recNomTextBox.Name = "recNomTextBox";
             recNomTextBox.Size = new System.Drawing.Size(973, 20);
@@ -355,12 +351,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // recNomZadTextBox
             // 
-            recNomZadTextBox.BackColor = System.Drawing.Color.White;
             recNomZadTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             recNomZadTextBox.ErrorColor = System.Drawing.Color.Red;
             recNomZadTextBox.ErrorMessage = null;
             recNomZadTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            recNomZadTextBox.ForeColor = System.Drawing.Color.Black;
             recNomZadTextBox.Location = new System.Drawing.Point(153, 529);
             recNomZadTextBox.Multiline = true;
             recNomZadTextBox.Name = "recNomZadTextBox";
@@ -369,12 +363,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // nZvetTextBox
             // 
-            nZvetTextBox.BackColor = System.Drawing.Color.White;
             nZvetTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             nZvetTextBox.ErrorColor = System.Drawing.Color.Red;
             nZvetTextBox.ErrorMessage = null;
             nZvetTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            nZvetTextBox.ForeColor = System.Drawing.Color.Black;
             nZvetTextBox.Location = new System.Drawing.Point(153, 505);
             nZvetTextBox.Name = "nZvetTextBox";
             nZvetTextBox.Size = new System.Drawing.Size(973, 20);
@@ -384,9 +376,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton14
             // 
-            customButton14.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton14.Font = new System.Drawing.Font("Arial", 10F);
-            customButton14.ForeColor = System.Drawing.Color.Black;
             customButton14.Location = new System.Drawing.Point(1449, 538);
             customButton14.Name = "customButton14";
             customButton14.Size = new System.Drawing.Size(85, 56);
@@ -396,31 +386,25 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // YearSearchTextBox
             // 
-            YearSearchTextBox.Location = new System.Drawing.Point(1492, 53);
+            YearSearchTextBox.Location = new System.Drawing.Point(1480, 53);
             YearSearchTextBox.Name = "YearSearchTextBox";
             YearSearchTextBox.ObjectName = null;
-            YearSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
             YearSearchTextBox.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            YearSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            YearSearchTextBox.Properties.Appearance.Options.UseBackColor = true;
             YearSearchTextBox.Properties.Appearance.Options.UseFont = true;
             YearSearchTextBox.Properties.Appearance.Options.UseForeColor = true;
-            YearSearchTextBox.Size = new System.Drawing.Size(50, 22);
+            YearSearchTextBox.Size = new System.Drawing.Size(52, 22);
             YearSearchTextBox.StyleController = layoutControl2;
             YearSearchTextBox.TabIndex = 38;
             // 
             // PachSearchTextBox
             // 
-            PachSearchTextBox.Location = new System.Drawing.Point(1599, 53);
+            PachSearchTextBox.Location = new System.Drawing.Point(1576, 53);
             PachSearchTextBox.Name = "PachSearchTextBox";
             PachSearchTextBox.ObjectName = null;
-            PachSearchTextBox.Properties.Appearance.BackColor = System.Drawing.Color.White;
             PachSearchTextBox.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            PachSearchTextBox.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
-            PachSearchTextBox.Properties.Appearance.Options.UseBackColor = true;
             PachSearchTextBox.Properties.Appearance.Options.UseFont = true;
             PachSearchTextBox.Properties.Appearance.Options.UseForeColor = true;
-            PachSearchTextBox.Size = new System.Drawing.Size(96, 22);
+            PachSearchTextBox.Size = new System.Drawing.Size(106, 22);
             PachSearchTextBox.StyleController = layoutControl2;
             PachSearchTextBox.TabIndex = 37;
             // 
@@ -446,23 +430,24 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customLabel16
             // 
-            customLabel16.AutoSize = true;
-            customLabel16.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel16.ForeColor = System.Drawing.Color.Black;
-            customLabel16.Location = new System.Drawing.Point(78, 58);
+            customLabel16.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel16.Appearance.Options.UseFont = true;
+            customLabel16.Appearance.Options.UseTextOptions = true;
+            customLabel16.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel16.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel16.Location = new System.Drawing.Point(78, 61);
             customLabel16.Name = "customLabel16";
-            customLabel16.Size = new System.Drawing.Size(107, 16);
+            customLabel16.Size = new System.Drawing.Size(91, 16);
             customLabel16.TabIndex = 5;
             customLabel16.Text = "Наряд-задание";
+            customLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // rzIdTextBox
             // 
-            rzIdTextBox.BackColor = System.Drawing.Color.White;
             rzIdTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             rzIdTextBox.ErrorColor = System.Drawing.Color.Red;
             rzIdTextBox.ErrorMessage = null;
             rzIdTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            rzIdTextBox.ForeColor = System.Drawing.Color.Black;
             rzIdTextBox.Location = new System.Drawing.Point(3, 61);
             rzIdTextBox.Name = "rzIdTextBox";
             rzIdTextBox.Size = new System.Drawing.Size(69, 23);
@@ -470,23 +455,24 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customLabel14
             // 
-            customLabel14.AutoSize = true;
-            customLabel14.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel14.ForeColor = System.Drawing.Color.Black;
-            customLabel14.Location = new System.Drawing.Point(78, 29);
+            customLabel14.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel14.Appearance.Options.UseFont = true;
+            customLabel14.Appearance.Options.UseTextOptions = true;
+            customLabel14.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel14.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel14.Location = new System.Drawing.Point(78, 32);
             customLabel14.Name = "customLabel14";
-            customLabel14.Size = new System.Drawing.Size(63, 16);
+            customLabel14.Size = new System.Drawing.Size(51, 16);
             customLabel14.TabIndex = 3;
             customLabel14.Text = "Задание";
+            customLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // nomZadTextBox
             // 
-            nomZadTextBox.BackColor = System.Drawing.Color.White;
             nomZadTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             nomZadTextBox.ErrorColor = System.Drawing.Color.Red;
             nomZadTextBox.ErrorMessage = null;
             nomZadTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            nomZadTextBox.ForeColor = System.Drawing.Color.Black;
             nomZadTextBox.Location = new System.Drawing.Point(3, 32);
             nomZadTextBox.Name = "nomZadTextBox";
             nomZadTextBox.Size = new System.Drawing.Size(69, 23);
@@ -494,12 +480,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // datePlanTextBox
             // 
-            datePlanTextBox.BackColor = System.Drawing.Color.White;
             datePlanTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             datePlanTextBox.ErrorColor = System.Drawing.Color.Red;
             datePlanTextBox.ErrorMessage = null;
             datePlanTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            datePlanTextBox.ForeColor = System.Drawing.Color.Black;
             datePlanTextBox.Location = new System.Drawing.Point(3, 3);
             datePlanTextBox.Name = "datePlanTextBox";
             datePlanTextBox.Size = new System.Drawing.Size(69, 23);
@@ -507,20 +491,21 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customLabel12
             // 
-            customLabel12.AutoSize = true;
-            customLabel12.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel12.ForeColor = System.Drawing.Color.Black;
-            customLabel12.Location = new System.Drawing.Point(78, 0);
+            customLabel12.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel12.Appearance.Options.UseFont = true;
+            customLabel12.Appearance.Options.UseTextOptions = true;
+            customLabel12.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel12.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel12.Location = new System.Drawing.Point(78, 3);
             customLabel12.Name = "customLabel12";
-            customLabel12.Size = new System.Drawing.Size(113, 16);
+            customLabel12.Size = new System.Drawing.Size(98, 16);
             customLabel12.TabIndex = 1;
             customLabel12.Text = "Плановая сдача";
+            customLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customButton13
             // 
-            customButton13.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton13.Font = new System.Drawing.Font("Arial", 10F);
-            customButton13.ForeColor = System.Drawing.Color.Black;
             customButton13.Location = new System.Drawing.Point(1345, 538);
             customButton13.Name = "customButton13";
             customButton13.Size = new System.Drawing.Size(100, 56);
@@ -530,9 +515,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton12
             // 
-            customButton12.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton12.Font = new System.Drawing.Font("Arial", 10F);
-            customButton12.ForeColor = System.Drawing.Color.Black;
             customButton12.Location = new System.Drawing.Point(1345, 705);
             customButton12.Name = "customButton12";
             customButton12.Size = new System.Drawing.Size(189, 70);
@@ -542,9 +525,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton11
             // 
-            customButton11.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton11.Font = new System.Drawing.Font("Arial", 10F);
-            customButton11.ForeColor = System.Drawing.Color.Black;
             customButton11.Location = new System.Drawing.Point(1345, 652);
             customButton11.Name = "customButton11";
             customButton11.Size = new System.Drawing.Size(189, 49);
@@ -554,9 +535,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton10
             // 
-            customButton10.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton10.Font = new System.Drawing.Font("Arial", 10F);
-            customButton10.ForeColor = System.Drawing.Color.Black;
             customButton10.Location = new System.Drawing.Point(1345, 598);
             customButton10.Name = "customButton10";
             customButton10.Size = new System.Drawing.Size(189, 50);
@@ -566,9 +545,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton9
             // 
-            customButton9.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton9.Font = new System.Drawing.Font("Arial", 10F);
-            customButton9.ForeColor = System.Drawing.Color.Black;
             customButton9.Location = new System.Drawing.Point(1266, 705);
             customButton9.Name = "customButton9";
             customButton9.Size = new System.Drawing.Size(75, 70);
@@ -578,9 +555,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton8
             // 
-            customButton8.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton8.Font = new System.Drawing.Font("Arial", 10F);
-            customButton8.ForeColor = System.Drawing.Color.Black;
             customButton8.Location = new System.Drawing.Point(1266, 652);
             customButton8.Name = "customButton8";
             customButton8.Size = new System.Drawing.Size(75, 49);
@@ -590,9 +565,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton7
             // 
-            customButton7.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton7.Font = new System.Drawing.Font("Arial", 10F);
-            customButton7.ForeColor = System.Drawing.Color.Black;
             customButton7.Location = new System.Drawing.Point(1266, 596);
             customButton7.Name = "customButton7";
             customButton7.Size = new System.Drawing.Size(75, 52);
@@ -602,9 +575,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton6
             // 
-            customButton6.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton6.Font = new System.Drawing.Font("Arial", 10F);
-            customButton6.ForeColor = System.Drawing.Color.Black;
             customButton6.Location = new System.Drawing.Point(1266, 538);
             customButton6.Name = "customButton6";
             customButton6.Size = new System.Drawing.Size(75, 54);
@@ -614,9 +585,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton5
             // 
-            customButton5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton5.Font = new System.Drawing.Font("Arial", 10F);
-            customButton5.ForeColor = System.Drawing.Color.Black;
             customButton5.Location = new System.Drawing.Point(1142, 705);
             customButton5.Name = "customButton5";
             customButton5.Size = new System.Drawing.Size(120, 70);
@@ -626,9 +595,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton4
             // 
-            customButton4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton4.Font = new System.Drawing.Font("Arial", 10F);
-            customButton4.ForeColor = System.Drawing.Color.Black;
             customButton4.Location = new System.Drawing.Point(1142, 652);
             customButton4.Name = "customButton4";
             customButton4.Size = new System.Drawing.Size(120, 49);
@@ -638,9 +605,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton3
             // 
-            customButton3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            customButton3.ForeColor = System.Drawing.Color.Black;
             customButton3.Location = new System.Drawing.Point(1142, 596);
             customButton3.Name = "customButton3";
             customButton3.Size = new System.Drawing.Size(120, 52);
@@ -650,9 +615,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton2
             // 
-            customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.Black;
             customButton2.Location = new System.Drawing.Point(1142, 538);
             customButton2.Name = "customButton2";
             customButton2.Size = new System.Drawing.Size(120, 54);
@@ -707,108 +670,111 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // dostZehTextBox
             // 
-            dostZehTextBox.BackColor = System.Drawing.Color.White;
             dostZehTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             dostZehTextBox.ErrorColor = System.Drawing.Color.Red;
             dostZehTextBox.ErrorMessage = null;
             dostZehTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            dostZehTextBox.ForeColor = System.Drawing.Color.Black;
-            dostZehTextBox.Location = new System.Drawing.Point(149, 240);
+            dostZehTextBox.Location = new System.Drawing.Point(138, 240);
             dostZehTextBox.Name = "dostZehTextBox";
             dostZehTextBox.Size = new System.Drawing.Size(100, 23);
             dostZehTextBox.TabIndex = 30;
             // 
             // customLabel8
             // 
-            customLabel8.AutoSize = true;
-            customLabel8.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel8.ForeColor = System.Drawing.Color.Black;
-            customLabel8.Location = new System.Drawing.Point(3, 237);
+            customLabel8.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel8.Appearance.Options.UseFont = true;
+            customLabel8.Appearance.Options.UseTextOptions = true;
+            customLabel8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel8.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel8.Location = new System.Drawing.Point(3, 240);
             customLabel8.Name = "customLabel8";
-            customLabel8.Size = new System.Drawing.Size(48, 16);
+            customLabel8.Size = new System.Drawing.Size(38, 16);
             customLabel8.TabIndex = 28;
             customLabel8.Text = "Сдача";
+            customLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabKpvTextBox
             // 
-            TabKpvTextBox.BackColor = System.Drawing.Color.White;
             TabKpvTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabKpvTextBox.ErrorColor = System.Drawing.Color.Red;
             TabKpvTextBox.ErrorMessage = null;
             TabKpvTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabKpvTextBox.ForeColor = System.Drawing.Color.Black;
-            TabKpvTextBox.Location = new System.Drawing.Point(69, 200);
+            TabKpvTextBox.Location = new System.Drawing.Point(58, 200);
             TabKpvTextBox.Name = "TabKpvTextBox";
             TabKpvTextBox.Size = new System.Drawing.Size(55, 23);
             TabKpvTextBox.TabIndex = 15;
             // 
             // TabMLabel
             // 
-            TabMLabel.AutoSize = true;
-            TabMLabel.Font = new System.Drawing.Font("Arial", 10F);
-            TabMLabel.ForeColor = System.Drawing.Color.Black;
-            TabMLabel.Location = new System.Drawing.Point(149, 159);
+            TabMLabel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            TabMLabel.Appearance.Options.UseFont = true;
+            TabMLabel.Appearance.Options.UseTextOptions = true;
+            TabMLabel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            TabMLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            TabMLabel.Location = new System.Drawing.Point(138, 162);
             TabMLabel.Name = "TabMLabel";
-            TabMLabel.Size = new System.Drawing.Size(39, 16);
+            TabMLabel.Size = new System.Drawing.Size(30, 16);
             TabMLabel.TabIndex = 11;
             TabMLabel.Text = "ФИО";
+            TabMLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabMTextBox
             // 
-            TabMTextBox.BackColor = System.Drawing.Color.White;
             TabMTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabMTextBox.ErrorColor = System.Drawing.Color.Red;
             TabMTextBox.ErrorMessage = null;
             TabMTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabMTextBox.ForeColor = System.Drawing.Color.Black;
-            TabMTextBox.Location = new System.Drawing.Point(69, 162);
+            TabMTextBox.Location = new System.Drawing.Point(58, 162);
             TabMTextBox.Name = "TabMTextBox";
             TabMTextBox.Size = new System.Drawing.Size(55, 23);
             TabMTextBox.TabIndex = 27;
             // 
             // TabPTextBox
             // 
-            TabPTextBox.BackColor = System.Drawing.Color.White;
             TabPTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabPTextBox.ErrorColor = System.Drawing.Color.Red;
             TabPTextBox.ErrorMessage = null;
             TabPTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabPTextBox.ForeColor = System.Drawing.Color.Black;
-            TabPTextBox.Location = new System.Drawing.Point(69, 129);
+            TabPTextBox.Location = new System.Drawing.Point(58, 129);
             TabPTextBox.Name = "TabPTextBox";
             TabPTextBox.Size = new System.Drawing.Size(55, 23);
             TabPTextBox.TabIndex = 7;
             // 
             // customLabel7
             // 
-            customLabel7.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel7.ForeColor = System.Drawing.Color.Black;
-            customLabel7.Location = new System.Drawing.Point(3, 0);
+            customLabel7.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel7.Appearance.Options.UseFont = true;
+            customLabel7.Appearance.Options.UseTextOptions = true;
+            customLabel7.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel7.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel7.Location = new System.Drawing.Point(3, 3);
             customLabel7.Name = "customLabel7";
-            customLabel7.Size = new System.Drawing.Size(58, 20);
+            customLabel7.Size = new System.Drawing.Size(39, 16);
             customLabel7.TabIndex = 1;
             customLabel7.Text = "Таб.№";
+            customLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabPLabel
             // 
-            TabPLabel.AutoSize = true;
-            TabPLabel.Font = new System.Drawing.Font("Arial", 10F);
-            TabPLabel.ForeColor = System.Drawing.Color.Black;
-            TabPLabel.Location = new System.Drawing.Point(149, 126);
+            TabPLabel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            TabPLabel.Appearance.Options.UseFont = true;
+            TabPLabel.Appearance.Options.UseTextOptions = true;
+            TabPLabel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            TabPLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            TabPLabel.Location = new System.Drawing.Point(138, 129);
             TabPLabel.Name = "TabPLabel";
-            TabPLabel.Size = new System.Drawing.Size(39, 16);
+            TabPLabel.Size = new System.Drawing.Size(30, 16);
             TabPLabel.TabIndex = 8;
             TabPLabel.Text = "ФИО";
+            TabPLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabKTextBox
             // 
-            tabKTextBox.BackColor = System.Drawing.Color.White;
             tabKTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tabKTextBox.ErrorColor = System.Drawing.Color.Red;
             tabKTextBox.ErrorMessage = null;
             tabKTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            tabKTextBox.ForeColor = System.Drawing.Color.Black;
-            tabKTextBox.Location = new System.Drawing.Point(69, 96);
+            tabKTextBox.Location = new System.Drawing.Point(58, 96);
             tabKTextBox.Name = "tabKTextBox";
             tabKTextBox.ReadOnly = true;
             tabKTextBox.Size = new System.Drawing.Size(55, 23);
@@ -816,23 +782,25 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customLabel13
             // 
-            customLabel13.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel13.ForeColor = System.Drawing.Color.Black;
-            customLabel13.Location = new System.Drawing.Point(3, 60);
+            customLabel13.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel13.Appearance.Options.UseFont = true;
+            customLabel13.Appearance.Options.UseTextOptions = true;
+            customLabel13.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel13.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel13.Location = new System.Drawing.Point(3, 63);
             customLabel13.Name = "customLabel13";
-            customLabel13.Size = new System.Drawing.Size(60, 31);
+            customLabel13.Size = new System.Drawing.Size(49, 32);
             customLabel13.TabIndex = 1;
             customLabel13.Text = "Таб.№ \r\nопер.РК";
+            customLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabOrkTextBox
             // 
-            TabOrkTextBox.BackColor = System.Drawing.Color.White;
             TabOrkTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabOrkTextBox.ErrorColor = System.Drawing.Color.Red;
             TabOrkTextBox.ErrorMessage = null;
             TabOrkTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabOrkTextBox.ForeColor = System.Drawing.Color.Black;
-            TabOrkTextBox.Location = new System.Drawing.Point(69, 63);
+            TabOrkTextBox.Location = new System.Drawing.Point(58, 63);
             TabOrkTextBox.Name = "TabOrkTextBox";
             TabOrkTextBox.ReadOnly = true;
             TabOrkTextBox.Size = new System.Drawing.Size(55, 23);
@@ -840,24 +808,25 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // FioOrkLabel
             // 
-            FioOrkLabel.AutoSize = true;
-            FioOrkLabel.Font = new System.Drawing.Font("Arial", 10F);
-            FioOrkLabel.ForeColor = System.Drawing.Color.Black;
-            FioOrkLabel.Location = new System.Drawing.Point(149, 60);
+            FioOrkLabel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            FioOrkLabel.Appearance.Options.UseFont = true;
+            FioOrkLabel.Appearance.Options.UseTextOptions = true;
+            FioOrkLabel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            FioOrkLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            FioOrkLabel.Location = new System.Drawing.Point(138, 63);
             FioOrkLabel.Name = "FioOrkLabel";
-            FioOrkLabel.Size = new System.Drawing.Size(39, 16);
+            FioOrkLabel.Size = new System.Drawing.Size(30, 16);
             FioOrkLabel.TabIndex = 2;
             FioOrkLabel.Text = "ФИО";
+            FioOrkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabR1TextBox
             // 
-            TabR1TextBox.BackColor = System.Drawing.Color.White;
             TabR1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabR1TextBox.ErrorColor = System.Drawing.Color.Red;
             TabR1TextBox.ErrorMessage = null;
             TabR1TextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabR1TextBox.ForeColor = System.Drawing.Color.Black;
-            TabR1TextBox.Location = new System.Drawing.Point(69, 3);
+            TabR1TextBox.Location = new System.Drawing.Point(58, 3);
             TabR1TextBox.Name = "TabR1TextBox";
             TabR1TextBox.ReadOnly = true;
             TabR1TextBox.Size = new System.Drawing.Size(55, 23);
@@ -865,23 +834,25 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customLabel11
             // 
-            customLabel11.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel11.ForeColor = System.Drawing.Color.Black;
-            customLabel11.Location = new System.Drawing.Point(3, 29);
+            customLabel11.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel11.Appearance.Options.UseFont = true;
+            customLabel11.Appearance.Options.UseTextOptions = true;
+            customLabel11.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel11.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel11.Location = new System.Drawing.Point(3, 32);
             customLabel11.Name = "customLabel11";
-            customLabel11.Size = new System.Drawing.Size(60, 31);
+            customLabel11.Size = new System.Drawing.Size(39, 16);
             customLabel11.TabIndex = 25;
             customLabel11.Text = "Таб.№";
+            customLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabR2TextBox
             // 
-            TabR2TextBox.BackColor = System.Drawing.Color.White;
             TabR2TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             TabR2TextBox.ErrorColor = System.Drawing.Color.Red;
             TabR2TextBox.ErrorMessage = null;
             TabR2TextBox.Font = new System.Drawing.Font("Arial", 10F);
-            TabR2TextBox.ForeColor = System.Drawing.Color.Black;
-            TabR2TextBox.Location = new System.Drawing.Point(69, 32);
+            TabR2TextBox.Location = new System.Drawing.Point(58, 32);
             TabR2TextBox.Name = "TabR2TextBox";
             TabR2TextBox.ReadOnly = true;
             TabR2TextBox.Size = new System.Drawing.Size(55, 23);
@@ -889,140 +860,178 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // Fio2Label
             // 
-            Fio2Label.Font = new System.Drawing.Font("Arial", 10F);
-            Fio2Label.ForeColor = System.Drawing.Color.Black;
-            Fio2Label.Location = new System.Drawing.Point(149, 29);
+            Fio2Label.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            Fio2Label.Appearance.Options.UseFont = true;
+            Fio2Label.Appearance.Options.UseTextOptions = true;
+            Fio2Label.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            Fio2Label.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            Fio2Label.Location = new System.Drawing.Point(138, 32);
             Fio2Label.Name = "Fio2Label";
-            Fio2Label.Size = new System.Drawing.Size(203, 31);
+            Fio2Label.Size = new System.Drawing.Size(30, 16);
             Fio2Label.TabIndex = 26;
             Fio2Label.Text = "ФИО";
+            Fio2Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TabKpvLabel
             // 
-            TabKpvLabel.Font = new System.Drawing.Font("Arial", 10F);
-            TabKpvLabel.ForeColor = System.Drawing.Color.Black;
-            TabKpvLabel.Location = new System.Drawing.Point(149, 197);
+            TabKpvLabel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            TabKpvLabel.Appearance.Options.UseFont = true;
+            TabKpvLabel.Appearance.Options.UseTextOptions = true;
+            TabKpvLabel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            TabKpvLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            TabKpvLabel.Location = new System.Drawing.Point(138, 200);
             TabKpvLabel.Name = "TabKpvLabel";
-            TabKpvLabel.Size = new System.Drawing.Size(203, 28);
+            TabKpvLabel.Size = new System.Drawing.Size(30, 16);
             TabKpvLabel.TabIndex = 22;
             TabKpvLabel.Text = "ФИО";
+            TabKpvLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Fio1Label
             // 
-            Fio1Label.Font = new System.Drawing.Font("Arial", 10F);
-            Fio1Label.ForeColor = System.Drawing.Color.Black;
-            Fio1Label.Location = new System.Drawing.Point(149, 0);
+            Fio1Label.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            Fio1Label.Appearance.Options.UseFont = true;
+            Fio1Label.Appearance.Options.UseTextOptions = true;
+            Fio1Label.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            Fio1Label.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            Fio1Label.Location = new System.Drawing.Point(138, 3);
             Fio1Label.Name = "Fio1Label";
-            Fio1Label.Size = new System.Drawing.Size(203, 20);
+            Fio1Label.Size = new System.Drawing.Size(30, 16);
             Fio1Label.TabIndex = 1;
             Fio1Label.Text = "ФИО";
+            Fio1Label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FioKLabel
             // 
-            FioKLabel.AutoSize = true;
-            FioKLabel.Font = new System.Drawing.Font("Arial", 10F);
-            FioKLabel.ForeColor = System.Drawing.Color.Black;
-            FioKLabel.Location = new System.Drawing.Point(149, 93);
+            FioKLabel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            FioKLabel.Appearance.Options.UseFont = true;
+            FioKLabel.Appearance.Options.UseTextOptions = true;
+            FioKLabel.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            FioKLabel.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            FioKLabel.Location = new System.Drawing.Point(138, 96);
             FioKLabel.Name = "FioKLabel";
-            FioKLabel.Size = new System.Drawing.Size(39, 16);
+            FioKLabel.Size = new System.Drawing.Size(30, 16);
             FioKLabel.TabIndex = 5;
             FioKLabel.Text = "ФИО";
+            FioKLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel15
             // 
-            customLabel15.AutoSize = true;
-            customLabel15.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel15.ForeColor = System.Drawing.Color.Black;
-            customLabel15.Location = new System.Drawing.Point(3, 93);
+            customLabel15.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel15.Appearance.Options.UseFont = true;
+            customLabel15.Appearance.Options.UseTextOptions = true;
+            customLabel15.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel15.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel15.Location = new System.Drawing.Point(3, 96);
             customLabel15.Name = "customLabel15";
-            customLabel15.Size = new System.Drawing.Size(54, 32);
+            customLabel15.Size = new System.Drawing.Size(39, 32);
             customLabel15.TabIndex = 0;
             customLabel15.Text = "Таб.№ \r\nкомпл";
+            customLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel17
             // 
-            customLabel17.AutoSize = true;
-            customLabel17.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel17.ForeColor = System.Drawing.Color.Black;
-            customLabel17.Location = new System.Drawing.Point(3, 126);
+            customLabel17.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel17.Appearance.Options.UseFont = true;
+            customLabel17.Appearance.Options.UseTextOptions = true;
+            customLabel17.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel17.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel17.Location = new System.Drawing.Point(3, 129);
             customLabel17.Name = "customLabel17";
-            customLabel17.Size = new System.Drawing.Size(54, 32);
+            customLabel17.Size = new System.Drawing.Size(39, 32);
             customLabel17.TabIndex = 3;
             customLabel17.Text = "Таб.№ \r\nтехн";
+            customLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel21
             // 
-            customLabel21.AutoSize = true;
-            customLabel21.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel21.ForeColor = System.Drawing.Color.Black;
-            customLabel21.Location = new System.Drawing.Point(3, 197);
+            customLabel21.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel21.Appearance.Options.UseFont = true;
+            customLabel21.Appearance.Options.UseTextOptions = true;
+            customLabel21.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel21.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel21.Location = new System.Drawing.Point(3, 200);
             customLabel21.Name = "customLabel21";
-            customLabel21.Size = new System.Drawing.Size(54, 32);
+            customLabel21.Size = new System.Drawing.Size(39, 32);
             customLabel21.TabIndex = 9;
             customLabel21.Text = "Таб.№ \r\nс п/в";
+            customLabel21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel19
             // 
-            customLabel19.AutoSize = true;
-            customLabel19.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel19.ForeColor = System.Drawing.Color.Black;
-            customLabel19.Location = new System.Drawing.Point(3, 159);
+            customLabel19.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel19.Appearance.Options.UseFont = true;
+            customLabel19.Appearance.Options.UseTextOptions = true;
+            customLabel19.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel19.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel19.Location = new System.Drawing.Point(3, 162);
             customLabel19.Name = "customLabel19";
-            customLabel19.Size = new System.Drawing.Size(54, 32);
+            customLabel19.Size = new System.Drawing.Size(39, 32);
             customLabel19.TabIndex = 6;
             customLabel19.Text = "Таб.№ \r\nмаст";
+            customLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dateZehTextBox
             // 
-            dateZehTextBox.BackColor = System.Drawing.Color.White;
             dateZehTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             dateZehTextBox.ErrorColor = System.Drawing.Color.Red;
             dateZehTextBox.ErrorMessage = null;
             dateZehTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            dateZehTextBox.ForeColor = System.Drawing.Color.Black;
-            dateZehTextBox.Location = new System.Drawing.Point(69, 240);
+            dateZehTextBox.Location = new System.Drawing.Point(58, 240);
             dateZehTextBox.Name = "dateZehTextBox";
             dateZehTextBox.Size = new System.Drawing.Size(74, 23);
             dateZehTextBox.TabIndex = 29;
             // 
             // customLabel10
             // 
-            customLabel10.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel10.ForeColor = System.Drawing.Color.Black;
+            customLabel10.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel10.Appearance.Options.UseFont = true;
+            customLabel10.Appearance.Options.UseTextOptions = true;
+            customLabel10.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel10.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel10.Location = new System.Drawing.Point(1454, 199);
             customLabel10.Name = "customLabel10";
-            customLabel10.Size = new System.Drawing.Size(112, 20);
+            customLabel10.Size = new System.Drawing.Size(74, 16);
+            customLabel10.StyleController = layoutControl2;
             customLabel10.TabIndex = 1;
             customLabel10.Text = "На вышивку";
+            customLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel9
             // 
-            customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.Black;
+            customLabel9.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel9.Appearance.Options.UseFont = true;
+            customLabel9.Appearance.Options.UseTextOptions = true;
+            customLabel9.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel9.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel9.Location = new System.Drawing.Point(1454, 175);
             customLabel9.Name = "customLabel9";
-            customLabel9.Size = new System.Drawing.Size(112, 20);
+            customLabel9.Size = new System.Drawing.Size(53, 16);
+            customLabel9.StyleController = layoutControl2;
             customLabel9.TabIndex = 1;
             customLabel9.Text = "На принт";
+            customLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel6
             // 
-            customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.Black;
-            customLabel6.Location = new System.Drawing.Point(1682, 175);
+            customLabel6.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel6.Appearance.Options.UseFont = true;
+            customLabel6.Appearance.Options.UseTextOptions = true;
+            customLabel6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel6.Location = new System.Drawing.Point(1770, 175);
             customLabel6.Name = "customLabel6";
-            customLabel6.Size = new System.Drawing.Size(135, 20);
+            customLabel6.Size = new System.Drawing.Size(47, 16);
+            customLabel6.StyleController = layoutControl2;
             customLabel6.TabIndex = 1;
             customLabel6.Text = "Выпада";
+            customLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // ModKTextBox
             // 
-            ModKTextBox.BackColor = System.Drawing.Color.White;
             ModKTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             ModKTextBox.ErrorColor = System.Drawing.Color.Red;
             ModKTextBox.ErrorMessage = null;
             ModKTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            ModKTextBox.ForeColor = System.Drawing.Color.Black;
             ModKTextBox.Location = new System.Drawing.Point(1678, 127);
             ModKTextBox.Name = "ModKTextBox";
             ModKTextBox.Size = new System.Drawing.Size(139, 20);
@@ -1030,127 +1039,140 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // ArticulKTextBox
             // 
-            ArticulKTextBox.BackColor = System.Drawing.Color.White;
             ArticulKTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             ArticulKTextBox.ErrorColor = System.Drawing.Color.Red;
             ArticulKTextBox.ErrorMessage = null;
             ArticulKTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            ArticulKTextBox.ForeColor = System.Drawing.Color.Black;
-            ArticulKTextBox.Location = new System.Drawing.Point(1542, 127);
+            ArticulKTextBox.Location = new System.Drawing.Point(1514, 127);
             ArticulKTextBox.Name = "ArticulKTextBox";
-            ArticulKTextBox.Size = new System.Drawing.Size(132, 20);
+            ArticulKTextBox.Size = new System.Drawing.Size(160, 20);
             ArticulKTextBox.TabIndex = 8;
             // 
             // customLabel5
             // 
-            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.Black;
+            customLabel5.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel5.Appearance.Options.UseFont = true;
+            customLabel5.Appearance.Options.UseTextOptions = true;
+            customLabel5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel5.Location = new System.Drawing.Point(1454, 127);
             customLabel5.Name = "customLabel5";
-            customLabel5.Size = new System.Drawing.Size(84, 20);
+            customLabel5.Size = new System.Drawing.Size(56, 16);
+            customLabel5.StyleController = layoutControl2;
             customLabel5.TabIndex = 1;
             customLabel5.Text = "Комплект";
+            customLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel4
             // 
-            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.Black;
-            customLabel4.Location = new System.Drawing.Point(1594, 103);
+            customLabel4.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.Appearance.Options.UseFont = true;
+            customLabel4.Appearance.Options.UseTextOptions = true;
+            customLabel4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel4.Location = new System.Drawing.Point(1646, 103);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(80, 20);
+            customLabel4.Size = new System.Drawing.Size(28, 16);
+            customLabel4.StyleController = layoutControl2;
             customLabel4.TabIndex = 1;
             customLabel4.Text = "Дата";
+            customLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel3
             // 
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.Black;
+            customLabel3.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.Appearance.Options.UseFont = true;
+            customLabel3.Appearance.Options.UseTextOptions = true;
+            customLabel3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel3.Location = new System.Drawing.Point(1454, 103);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(51, 20);
+            customLabel3.Size = new System.Drawing.Size(36, 16);
+            customLabel3.StyleController = layoutControl2;
             customLabel3.TabIndex = 1;
             customLabel3.Text = "Пачка";
+            customLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel2
             // 
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.Black;
-            customLabel2.Location = new System.Drawing.Point(1546, 53);
+            customLabel2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.Appearance.Options.UseFont = true;
+            customLabel2.Appearance.Options.UseTextOptions = true;
+            customLabel2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabel2.Location = new System.Drawing.Point(1536, 53);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(49, 22);
+            customLabel2.Size = new System.Drawing.Size(36, 16);
+            customLabel2.StyleController = layoutControl2;
             customLabel2.TabIndex = 1;
             customLabel2.Text = "Пачка";
+            customLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabel1
             // 
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.Black;
+            customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.Appearance.Options.UseFont = true;
+            customLabel1.Appearance.Options.UseTextOptions = true;
+            customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel1.Location = new System.Drawing.Point(1454, 53);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(34, 22);
+            customLabel1.Size = new System.Drawing.Size(22, 16);
+            customLabel1.StyleController = layoutControl2;
             customLabel1.TabIndex = 1;
             customLabel1.Text = "Год";
+            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // VipadTextBox
             // 
-            VipadTextBox.BackColor = System.Drawing.Color.White;
             VipadTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             VipadTextBox.ErrorColor = System.Drawing.Color.Red;
             VipadTextBox.ErrorMessage = null;
             VipadTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            VipadTextBox.ForeColor = System.Drawing.Color.Black;
-            VipadTextBox.Location = new System.Drawing.Point(1682, 199);
+            VipadTextBox.Location = new System.Drawing.Point(1770, 199);
             VipadTextBox.Name = "VipadTextBox";
-            VipadTextBox.Size = new System.Drawing.Size(135, 20);
+            VipadTextBox.Size = new System.Drawing.Size(47, 20);
             VipadTextBox.TabIndex = 12;
             // 
             // DataVTextBox
             // 
-            DataVTextBox.BackColor = System.Drawing.Color.White;
             DataVTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             DataVTextBox.ErrorColor = System.Drawing.Color.Red;
             DataVTextBox.ErrorMessage = null;
             DataVTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            DataVTextBox.ForeColor = System.Drawing.Color.Black;
-            DataVTextBox.Location = new System.Drawing.Point(1570, 199);
+            DataVTextBox.Location = new System.Drawing.Point(1532, 199);
             DataVTextBox.Name = "DataVTextBox";
-            DataVTextBox.Size = new System.Drawing.Size(108, 20);
+            DataVTextBox.Size = new System.Drawing.Size(234, 20);
             DataVTextBox.TabIndex = 11;
             // 
             // DataPrTextBox
             // 
-            DataPrTextBox.BackColor = System.Drawing.Color.White;
             DataPrTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             DataPrTextBox.ErrorColor = System.Drawing.Color.Red;
             DataPrTextBox.ErrorMessage = null;
             DataPrTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            DataPrTextBox.ForeColor = System.Drawing.Color.Black;
-            DataPrTextBox.Location = new System.Drawing.Point(1570, 175);
+            DataPrTextBox.Location = new System.Drawing.Point(1532, 175);
             DataPrTextBox.Name = "DataPrTextBox";
-            DataPrTextBox.Size = new System.Drawing.Size(108, 20);
+            DataPrTextBox.Size = new System.Drawing.Size(234, 20);
             DataPrTextBox.TabIndex = 10;
             // 
             // pachTextBox
             // 
-            pachTextBox.BackColor = System.Drawing.Color.White;
             pachTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pachTextBox.ErrorColor = System.Drawing.Color.Red;
             pachTextBox.ErrorMessage = null;
             pachTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            pachTextBox.ForeColor = System.Drawing.Color.Black;
-            pachTextBox.Location = new System.Drawing.Point(1509, 103);
+            pachTextBox.Location = new System.Drawing.Point(1494, 103);
             pachTextBox.Name = "pachTextBox";
-            pachTextBox.Size = new System.Drawing.Size(81, 20);
+            pachTextBox.Size = new System.Drawing.Size(148, 20);
             pachTextBox.TabIndex = 6;
             // 
             // DataRTextBox
             // 
-            DataRTextBox.BackColor = System.Drawing.Color.White;
             DataRTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             DataRTextBox.ErrorColor = System.Drawing.Color.Red;
             DataRTextBox.ErrorMessage = null;
             DataRTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            DataRTextBox.ForeColor = System.Drawing.Color.Black;
             DataRTextBox.Location = new System.Drawing.Point(1678, 103);
             DataRTextBox.Name = "DataRTextBox";
             DataRTextBox.Size = new System.Drawing.Size(139, 20);
@@ -1158,9 +1180,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // customButton1
             // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.Black;
             customButton1.Location = new System.Drawing.Point(1442, 12);
             customButton1.Name = "customButton1";
             customButton1.Size = new System.Drawing.Size(387, 25);
@@ -1171,12 +1191,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // SearchPachСustomButton
             // 
-            SearchPachСustomButton.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             SearchPachСustomButton.Font = new System.Drawing.Font("Arial", 10F);
-            SearchPachСustomButton.ForeColor = System.Drawing.Color.Black;
-            SearchPachСustomButton.Location = new System.Drawing.Point(1699, 53);
+            SearchPachСustomButton.Location = new System.Drawing.Point(1686, 53);
             SearchPachСustomButton.Name = "SearchPachСustomButton";
-            SearchPachСustomButton.Size = new System.Drawing.Size(117, 22);
+            SearchPachСustomButton.Size = new System.Drawing.Size(130, 22);
             SearchPachСustomButton.TabIndex = 3;
             SearchPachСustomButton.Text = "Поиск по пачке";
             SearchPachСustomButton.UseVisualStyleBackColor = false;
@@ -1197,9 +1215,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             // gridViewRzu
             // 
-            gridViewRzu.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridViewRzu.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewRzu.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridViewRzu.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRzu.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewRzu.Appearance.FocusedRow.Options.UseFont = true;
@@ -1207,8 +1223,6 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridFormatRule1.ApplyToRow = true;
             gridFormatRule1.Column = gridColumnRzuNom;
             gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
-            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.FromArgb(224, 224, 224);
             formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
             formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
             formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Expression;
@@ -1706,7 +1720,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             layoutControlItem18.Control = customLabel1;
             layoutControlItem18.Location = new System.Drawing.Point(0, 0);
             layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new System.Drawing.Size(38, 26);
+            layoutControlItem18.Size = new System.Drawing.Size(26, 26);
             layoutControlItem18.TextVisible = false;
             // 
             // simpleSeparator1
@@ -1719,10 +1733,10 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // 
             layoutControlItem5.ContentVertAlignment = DevExpress.Utils.VertAlignment.Top;
             layoutControlItem5.Control = SearchPachСustomButton;
-            layoutControlItem5.Location = new System.Drawing.Point(245, 0);
+            layoutControlItem5.Location = new System.Drawing.Point(232, 0);
             layoutControlItem5.MinSize = new System.Drawing.Size(20, 20);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(121, 26);
+            layoutControlItem5.Size = new System.Drawing.Size(134, 26);
             layoutControlItem5.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem5.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem5.TextToControlDistance = 0;
@@ -1731,30 +1745,30 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // layoutControlItem20
             // 
             layoutControlItem20.Control = customLabel2;
-            layoutControlItem20.Location = new System.Drawing.Point(92, 0);
+            layoutControlItem20.Location = new System.Drawing.Point(82, 0);
             layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new System.Drawing.Size(53, 26);
+            layoutControlItem20.Size = new System.Drawing.Size(40, 26);
             layoutControlItem20.TextVisible = false;
             // 
             // layoutControlItem35
             // 
             layoutControlItem35.Control = PachSearchTextBox;
-            layoutControlItem35.Location = new System.Drawing.Point(145, 0);
+            layoutControlItem35.Location = new System.Drawing.Point(122, 0);
             layoutControlItem35.MinSize = new System.Drawing.Size(54, 26);
             layoutControlItem35.Name = "layoutControlItem35";
-            layoutControlItem35.Size = new System.Drawing.Size(100, 26);
+            layoutControlItem35.Size = new System.Drawing.Size(110, 26);
             layoutControlItem35.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem35.TextVisible = false;
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = YearSearchTextBox;
-            layoutControlItem4.Location = new System.Drawing.Point(38, 0);
+            layoutControlItem4.Location = new System.Drawing.Point(26, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(54, 26);
+            layoutControlItem4.Size = new System.Drawing.Size(56, 26);
             layoutControlItem4.TextVisible = false;
             // 
-            // layoutNorms
+            // layoutControlGroup4
             // 
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem24, layoutControlItem27, layoutControlItem28 });
             layoutControlGroup4.Location = new System.Drawing.Point(1430, 151);
@@ -1765,36 +1779,36 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // layoutControlItem10
             // 
             layoutControlItem10.Control = DataPrTextBox;
-            layoutControlItem10.Location = new System.Drawing.Point(116, 0);
+            layoutControlItem10.Location = new System.Drawing.Point(78, 0);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(112, 24);
+            layoutControlItem10.Size = new System.Drawing.Size(238, 24);
             layoutControlItem10.Text = "На принт";
             layoutControlItem10.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             layoutControlItem11.Control = DataVTextBox;
-            layoutControlItem11.Location = new System.Drawing.Point(116, 24);
+            layoutControlItem11.Location = new System.Drawing.Point(78, 24);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(112, 24);
+            layoutControlItem11.Size = new System.Drawing.Size(238, 24);
             layoutControlItem11.Text = "На вышивку";
             layoutControlItem11.TextVisible = false;
             // 
             // layoutControlItem12
             // 
             layoutControlItem12.Control = VipadTextBox;
-            layoutControlItem12.Location = new System.Drawing.Point(228, 24);
+            layoutControlItem12.Location = new System.Drawing.Point(316, 24);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(139, 24);
+            layoutControlItem12.Size = new System.Drawing.Size(51, 24);
             layoutControlItem12.Text = "выпада";
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = customLabel6;
-            layoutControlItem24.Location = new System.Drawing.Point(228, 0);
+            layoutControlItem24.Location = new System.Drawing.Point(316, 0);
             layoutControlItem24.Name = "layoutControlItem24";
-            layoutControlItem24.Size = new System.Drawing.Size(139, 24);
+            layoutControlItem24.Size = new System.Drawing.Size(51, 24);
             layoutControlItem24.TextVisible = false;
             // 
             // layoutControlItem27
@@ -1802,7 +1816,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             layoutControlItem27.Control = customLabel9;
             layoutControlItem27.Location = new System.Drawing.Point(0, 0);
             layoutControlItem27.Name = "layoutControlItem27";
-            layoutControlItem27.Size = new System.Drawing.Size(116, 24);
+            layoutControlItem27.Size = new System.Drawing.Size(78, 24);
             layoutControlItem27.TextVisible = false;
             // 
             // layoutControlItem28
@@ -1810,7 +1824,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             layoutControlItem28.Control = customLabel10;
             layoutControlItem28.Location = new System.Drawing.Point(0, 24);
             layoutControlItem28.Name = "layoutControlItem28";
-            layoutControlItem28.Size = new System.Drawing.Size(116, 24);
+            layoutControlItem28.Size = new System.Drawing.Size(78, 24);
             layoutControlItem28.TextVisible = false;
             // 
             // layoutControlItem15
@@ -1855,15 +1869,15 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             layoutControlItem21.Control = customLabel3;
             layoutControlItem21.Location = new System.Drawing.Point(0, 0);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(55, 24);
+            layoutControlItem21.Size = new System.Drawing.Size(40, 24);
             layoutControlItem21.TextVisible = false;
             // 
             // layoutControlItem22
             // 
             layoutControlItem22.Control = customLabel4;
-            layoutControlItem22.Location = new System.Drawing.Point(140, 0);
+            layoutControlItem22.Location = new System.Drawing.Point(192, 0);
             layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(84, 24);
+            layoutControlItem22.Size = new System.Drawing.Size(32, 24);
             layoutControlItem22.TextVisible = false;
             // 
             // layoutControlItem8
@@ -1871,15 +1885,15 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             layoutControlItem8.Control = customLabel5;
             layoutControlItem8.Location = new System.Drawing.Point(0, 24);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(88, 24);
+            layoutControlItem8.Size = new System.Drawing.Size(60, 24);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = ArticulKTextBox;
-            layoutControlItem9.Location = new System.Drawing.Point(88, 24);
+            layoutControlItem9.Location = new System.Drawing.Point(60, 24);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(136, 24);
+            layoutControlItem9.Size = new System.Drawing.Size(164, 24);
             layoutControlItem9.TextVisible = false;
             // 
             // layoutControlItem23
@@ -1893,9 +1907,9 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             // layoutControlItem7
             // 
             layoutControlItem7.Control = pachTextBox;
-            layoutControlItem7.Location = new System.Drawing.Point(55, 0);
+            layoutControlItem7.Location = new System.Drawing.Point(40, 0);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(85, 24);
+            layoutControlItem7.Size = new System.Drawing.Size(152, 24);
             layoutControlItem7.Text = "Дата";
             layoutControlItem7.TextVisible = false;
             // 

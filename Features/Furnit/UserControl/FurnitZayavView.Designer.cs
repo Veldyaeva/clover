@@ -53,18 +53,7 @@ namespace SewingProduction
             tbNZ = new CustomTextBox();
             tbVidFName = new CustomTextBox();
             label2 = new CustomLabel();
-            label1 = new CustomLabel();
-            gcFurnitF = new CustomGridControl();
-            gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gridColumnFurnitFFfSpecRez = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gridColumnFurnitFKolFO = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnFurnitFTEd = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnFurnitFN = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnFurnitFArt = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnFurnitFkodDr = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnFurnitFNPp = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnFurnitFKolF = new DevExpress.XtraGrid.Columns.GridColumn();
+            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             gcFurnitFIt = new CustomGridControl();
             bsFurnitFIt = new System.Windows.Forms.BindingSource(components);
             gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -77,47 +66,107 @@ namespace SewingProduction
             gridColumnFurnitFItKolFBr = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnFurnitFItKolFUp = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnFurnitFItKolFRa = new DevExpress.XtraGrid.Columns.GridColumn();
-            tbKodF = new CustomTextBox();
-            label3 = new CustomLabel();
-            label4 = new CustomLabel();
-            label5 = new CustomLabel();
-            button1 = new CustomButton();
+            gcFurnitF = new CustomGridControl();
+            gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnFurnitFFfSpecRez = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            gridColumnFurnitFKolFO = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnFurnitFTEd = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnFurnitFN = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnFurnitFArt = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnFurnitFkodDr = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnFurnitFNPp = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnFurnitFKolF = new DevExpress.XtraGrid.Columns.GridColumn();
             label6 = new CustomLabel();
-            gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            label5 = new CustomLabel();
+            label4 = new CustomLabel();
+            label3 = new CustomLabel();
             tbViewType = new CustomTextBox();
+            button1 = new CustomButton();
+            label1 = new CustomLabel();
+            tbKodF = new CustomTextBox();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
+            layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
+            splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
+            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            splitterItem3 = new DevExpress.XtraLayout.SplitterItem();
+            layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
+            gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(components);
-            tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             ((System.ComponentModel.ISupportInitialize)gcFurnitArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gcFurnitPach).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gcFurnitF).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
+            layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gcFurnitFIt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsFurnitFIt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gcFurnitF).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)behaviorManager1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)tablePanel1).BeginInit();
-            tablePanel1.SuspendLayout();
             SuspendLayout();
             // 
             // gcFurnitArt
             // 
-            tablePanel1.SetColumn(gcFurnitArt, 0);
-            tablePanel1.SetColumnSpan(gcFurnitArt, 7);
             gcFurnitArt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitArt.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitArt.Location = new System.Drawing.Point(15, 74);
+            gcFurnitArt.Location = new System.Drawing.Point(2, 50);
             gcFurnitArt.MainView = gridView1;
             gcFurnitArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitArt.Name = "gcFurnitArt";
             gcFurnitArt.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit3 });
-            tablePanel1.SetRow(gcFurnitArt, 2);
-            gcFurnitArt.Size = new System.Drawing.Size(427, 232);
-            gcFurnitArt.TabIndex = 23;
+            gcFurnitArt.Size = new System.Drawing.Size(392, 262);
+            gcFurnitArt.TabIndex = 8;
             gcFurnitArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             gcFurnitArt.Click += gcFurnitArt_Click;
             // 
@@ -303,17 +352,14 @@ namespace SewingProduction
             // 
             // gcFurnitPach
             // 
-            tablePanel1.SetColumn(gcFurnitPach, 7);
-            tablePanel1.SetColumnSpan(gcFurnitPach, 2);
             gcFurnitPach.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitPach.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitPach.Location = new System.Drawing.Point(449, 74);
+            gcFurnitPach.Location = new System.Drawing.Point(408, 52);
             gcFurnitPach.MainView = gridView2;
             gcFurnitPach.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitPach.Name = "gcFurnitPach";
-            tablePanel1.SetRow(gcFurnitPach, 2);
-            gcFurnitPach.Size = new System.Drawing.Size(178, 232);
-            gcFurnitPach.TabIndex = 24;
+            gcFurnitPach.Size = new System.Drawing.Size(157, 260);
+            gcFurnitPach.TabIndex = 9;
             gcFurnitPach.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
             // 
             // gridView2
@@ -385,114 +431,264 @@ namespace SewingProduction
             // 
             // tbBr
             // 
-            tbBr.BackColor = System.Drawing.SystemColors.Window;
             tbBr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tablePanel1.SetColumn(tbBr, 9);
             tbBr.ErrorColor = System.Drawing.Color.Red;
             tbBr.ErrorMessage = null;
             tbBr.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbBr.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbBr.Location = new System.Drawing.Point(635, 13);
+            tbBr.Location = new System.Drawing.Point(703, 2);
             tbBr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbBr.Name = "tbBr";
-            tablePanel1.SetRow(tbBr, 0);
-            tbBr.Size = new System.Drawing.Size(400, 29);
-            tbBr.TabIndex = 22;
+            tbBr.Size = new System.Drawing.Size(314, 20);
+            tbBr.TabIndex = 5;
             tbBr.Text = "Br";
             // 
             // tbDataFO
             // 
-            tbDataFO.BackColor = System.Drawing.SystemColors.Window;
             tbDataFO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tablePanel1.SetColumn(tbDataFO, 7);
             tbDataFO.ErrorColor = System.Drawing.Color.Red;
             tbDataFO.ErrorMessage = null;
             tbDataFO.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbDataFO.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbDataFO.Location = new System.Drawing.Point(449, 13);
+            tbDataFO.Location = new System.Drawing.Point(409, 2);
             tbDataFO.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbDataFO.Name = "tbDataFO";
-            tablePanel1.SetRow(tbDataFO, 0);
-            tbDataFO.Size = new System.Drawing.Size(158, 29);
-            tbDataFO.TabIndex = 21;
+            tbDataFO.Size = new System.Drawing.Size(269, 20);
+            tbDataFO.TabIndex = 4;
             tbDataFO.Text = "DataFO";
             // 
             // tbNZ
             // 
-            tbNZ.BackColor = System.Drawing.SystemColors.Window;
             tbNZ.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tablePanel1.SetColumn(tbNZ, 4);
             tbNZ.ErrorColor = System.Drawing.Color.Red;
             tbNZ.ErrorMessage = null;
             tbNZ.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbNZ.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbNZ.Location = new System.Drawing.Point(266, 13);
+            tbNZ.Location = new System.Drawing.Point(229, 2);
             tbNZ.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbNZ.Name = "tbNZ";
-            tablePanel1.SetRow(tbNZ, 0);
-            tbNZ.Size = new System.Drawing.Size(114, 29);
-            tbNZ.TabIndex = 20;
+            tbNZ.Size = new System.Drawing.Size(127, 20);
+            tbNZ.TabIndex = 3;
             tbNZ.Text = "NZ";
             // 
             // tbVidFName
             // 
-            tbVidFName.BackColor = System.Drawing.SystemColors.Window;
             tbVidFName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tablePanel1.SetColumn(tbVidFName, 0);
             tbVidFName.ErrorColor = System.Drawing.Color.Red;
             tbVidFName.ErrorMessage = null;
             tbVidFName.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            tbVidFName.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbVidFName.Location = new System.Drawing.Point(15, 13);
+            tbVidFName.Location = new System.Drawing.Point(2, 2);
             tbVidFName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbVidFName.Name = "tbVidFName";
-            tablePanel1.SetRow(tbVidFName, 0);
-            tbVidFName.Size = new System.Drawing.Size(160, 29);
-            tbVidFName.TabIndex = 19;
+            tbVidFName.Size = new System.Drawing.Size(150, 20);
+            tbVidFName.TabIndex = 0;
             tbVidFName.Text = "VidFName";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            tablePanel1.SetColumn(label2, 6);
-            label2.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label2.Location = new System.Drawing.Point(409, 14);
+            label2.Appearance.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            label2.Appearance.Options.UseFont = true;
+            label2.Appearance.Options.UseTextOptions = true;
+            label2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label2.Location = new System.Drawing.Point(386, 2);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            tablePanel1.SetRow(label2, 0);
-            label2.Size = new System.Drawing.Size(29, 22);
-            label2.TabIndex = 18;
+            label2.Size = new System.Drawing.Size(19, 22);
+            label2.StyleController = layoutControl1;
+            label2.TabIndex = 1;
             label2.Text = "от";
+            label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label1
+            // layoutControl1
             // 
-            label1.AutoSize = true;
-            tablePanel1.SetColumn(label1, 3);
-            label1.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label1.Location = new System.Drawing.Point(228, 14);
-            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            tablePanel1.SetRow(label1, 0);
-            label1.Size = new System.Drawing.Size(30, 22);
-            label1.TabIndex = 17;
-            label1.Text = "№";
+            layoutControl1.Controls.Add(gcFurnitFIt);
+            layoutControl1.Controls.Add(gcFurnitF);
+            layoutControl1.Controls.Add(gcFurnitPach);
+            layoutControl1.Controls.Add(gcFurnitArt);
+            layoutControl1.Controls.Add(label6);
+            layoutControl1.Controls.Add(tbVidFName);
+            layoutControl1.Controls.Add(label5);
+            layoutControl1.Controls.Add(label4);
+            layoutControl1.Controls.Add(label3);
+            layoutControl1.Controls.Add(tbViewType);
+            layoutControl1.Controls.Add(button1);
+            layoutControl1.Controls.Add(label1);
+            layoutControl1.Controls.Add(tbNZ);
+            layoutControl1.Controls.Add(label2);
+            layoutControl1.Controls.Add(tbKodF);
+            layoutControl1.Controls.Add(tbDataFO);
+            layoutControl1.Controls.Add(tbBr);
+            layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            layoutControl1.Location = new System.Drawing.Point(0, 0);
+            layoutControl1.Name = "layoutControl1";
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(2783, 258, 650, 400);
+            layoutControl1.Root = Root;
+            layoutControl1.Size = new System.Drawing.Size(1564, 314);
+            layoutControl1.TabIndex = 35;
+            layoutControl1.Text = "layoutControl1";
+            // 
+            // gcFurnitFIt
+            // 
+            gcFurnitFIt.DataSource = bsFurnitFIt;
+            gcFurnitFIt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gcFurnitFIt.Font = new System.Drawing.Font("Arial", 10F);
+            gcFurnitFIt.Location = new System.Drawing.Point(964, 52);
+            gcFurnitFIt.MainView = gridView4;
+            gcFurnitFIt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gcFurnitFIt.Name = "gcFurnitFIt";
+            gcFurnitFIt.Size = new System.Drawing.Size(598, 260);
+            gcFurnitFIt.TabIndex = 11;
+            gcFurnitFIt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView4 });
+            gcFurnitFIt.Click += gcFurnitFIt_Click;
+            // 
+            // gridView4
+            // 
+            gridView4.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial Narrow", 8F);
+            gridView4.Appearance.HeaderPanel.Options.UseFont = true;
+            gridView4.Appearance.Row.Font = new System.Drawing.Font("Arial Narrow", 8F);
+            gridView4.Appearance.Row.Options.UseFont = true;
+            gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnFurnitFItNPp, gridColumnFurnitFItKodO, gridColumnFurnitFItKodArt, gridColumnFurnitFItArt, gridColumnFurnitFItTEd, gridColumnFurnitFItKolFO, gridColumnFurnitFItKolFBr, gridColumnFurnitFItKolFUp, gridColumnFurnitFItKolFRa });
+            gridView4.DetailHeight = 404;
+            gridView4.GridControl = gcFurnitFIt;
+            gridView4.Name = "gridView4";
+            gridView4.OptionsBehavior.Editable = false;
+            gridView4.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView4.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
+            gridView4.OptionsView.RowAutoHeight = true;
+            gridView4.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumnFurnitFItNPp
+            // 
+            gridColumnFurnitFItNPp.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
+            gridColumnFurnitFItNPp.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItNPp.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
+            gridColumnFurnitFItNPp.AppearanceHeader.Options.UseFont = true;
+            gridColumnFurnitFItNPp.Caption = "№";
+            gridColumnFurnitFItNPp.MinWidth = 23;
+            gridColumnFurnitFItNPp.Name = "gridColumnFurnitFItNPp";
+            gridColumnFurnitFItNPp.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItNPp.Visible = true;
+            gridColumnFurnitFItNPp.VisibleIndex = 0;
+            gridColumnFurnitFItNPp.Width = 23;
+            // 
+            // gridColumnFurnitFItKodO
+            // 
+            gridColumnFurnitFItKodO.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
+            gridColumnFurnitFItKodO.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItKodO.Caption = "Код";
+            gridColumnFurnitFItKodO.MinWidth = 23;
+            gridColumnFurnitFItKodO.Name = "gridColumnFurnitFItKodO";
+            gridColumnFurnitFItKodO.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItKodO.Visible = true;
+            gridColumnFurnitFItKodO.VisibleIndex = 1;
+            gridColumnFurnitFItKodO.Width = 52;
+            // 
+            // gridColumnFurnitFItKodArt
+            // 
+            gridColumnFurnitFItKodArt.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
+            gridColumnFurnitFItKodArt.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItKodArt.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 5F);
+            gridColumnFurnitFItKodArt.AppearanceHeader.Options.UseFont = true;
+            gridColumnFurnitFItKodArt.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumnFurnitFItKodArt.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridColumnFurnitFItKodArt.Caption = "Код арт";
+            gridColumnFurnitFItKodArt.MinWidth = 23;
+            gridColumnFurnitFItKodArt.Name = "gridColumnFurnitFItKodArt";
+            gridColumnFurnitFItKodArt.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItKodArt.Visible = true;
+            gridColumnFurnitFItKodArt.VisibleIndex = 2;
+            gridColumnFurnitFItKodArt.Width = 35;
+            // 
+            // gridColumnFurnitFItArt
+            // 
+            gridColumnFurnitFItArt.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
+            gridColumnFurnitFItArt.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItArt.Caption = "Арт";
+            gridColumnFurnitFItArt.MinWidth = 23;
+            gridColumnFurnitFItArt.Name = "gridColumnFurnitFItArt";
+            gridColumnFurnitFItArt.Visible = true;
+            gridColumnFurnitFItArt.VisibleIndex = 3;
+            gridColumnFurnitFItArt.Width = 147;
+            // 
+            // gridColumnFurnitFItTEd
+            // 
+            gridColumnFurnitFItTEd.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 6.5F);
+            gridColumnFurnitFItTEd.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItTEd.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItTEd.AppearanceHeader.Options.UseFont = true;
+            gridColumnFurnitFItTEd.Caption = "Ед";
+            gridColumnFurnitFItTEd.MinWidth = 23;
+            gridColumnFurnitFItTEd.Name = "gridColumnFurnitFItTEd";
+            gridColumnFurnitFItTEd.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItTEd.Visible = true;
+            gridColumnFurnitFItTEd.VisibleIndex = 4;
+            gridColumnFurnitFItTEd.Width = 33;
+            // 
+            // gridColumnFurnitFItKolFO
+            // 
+            gridColumnFurnitFItKolFO.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFO.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItKolFO.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFO.AppearanceHeader.Options.UseFont = true;
+            gridColumnFurnitFItKolFO.Caption = "Скл";
+            gridColumnFurnitFItKolFO.MinWidth = 23;
+            gridColumnFurnitFItKolFO.Name = "gridColumnFurnitFItKolFO";
+            gridColumnFurnitFItKolFO.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItKolFO.Visible = true;
+            gridColumnFurnitFItKolFO.VisibleIndex = 5;
+            gridColumnFurnitFItKolFO.Width = 45;
+            // 
+            // gridColumnFurnitFItKolFBr
+            // 
+            gridColumnFurnitFItKolFBr.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFBr.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItKolFBr.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFBr.AppearanceHeader.Options.UseFont = true;
+            gridColumnFurnitFItKolFBr.Caption = "Цех";
+            gridColumnFurnitFItKolFBr.MinWidth = 23;
+            gridColumnFurnitFItKolFBr.Name = "gridColumnFurnitFItKolFBr";
+            gridColumnFurnitFItKolFBr.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItKolFBr.Visible = true;
+            gridColumnFurnitFItKolFBr.VisibleIndex = 6;
+            gridColumnFurnitFItKolFBr.Width = 45;
+            // 
+            // gridColumnFurnitFItKolFUp
+            // 
+            gridColumnFurnitFItKolFUp.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFUp.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItKolFUp.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFUp.AppearanceHeader.Options.UseFont = true;
+            gridColumnFurnitFItKolFUp.Caption = "Упак";
+            gridColumnFurnitFItKolFUp.MinWidth = 23;
+            gridColumnFurnitFItKolFUp.Name = "gridColumnFurnitFItKolFUp";
+            gridColumnFurnitFItKolFUp.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItKolFUp.Visible = true;
+            gridColumnFurnitFItKolFUp.VisibleIndex = 7;
+            gridColumnFurnitFItKolFUp.Width = 45;
+            // 
+            // gridColumnFurnitFItKolFRa
+            // 
+            gridColumnFurnitFItKolFRa.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFRa.AppearanceCell.Options.UseFont = true;
+            gridColumnFurnitFItKolFRa.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
+            gridColumnFurnitFItKolFRa.AppearanceHeader.Options.UseFont = true;
+            gridColumnFurnitFItKolFRa.Caption = "Раскр";
+            gridColumnFurnitFItKolFRa.MinWidth = 23;
+            gridColumnFurnitFItKolFRa.Name = "gridColumnFurnitFItKolFRa";
+            gridColumnFurnitFItKolFRa.OptionsColumn.FixedWidth = true;
+            gridColumnFurnitFItKolFRa.Visible = true;
+            gridColumnFurnitFItKolFRa.VisibleIndex = 8;
+            gridColumnFurnitFItKolFRa.Width = 45;
             // 
             // gcFurnitF
             // 
-            tablePanel1.SetColumn(gcFurnitF, 9);
-            tablePanel1.SetColumnSpan(gcFurnitF, 2);
             gcFurnitF.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitF.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitF.Location = new System.Drawing.Point(635, 74);
+            gcFurnitF.Location = new System.Drawing.Point(579, 52);
             gcFurnitF.MainView = gridView3;
             gcFurnitF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gcFurnitF.Name = "gcFurnitF";
             gcFurnitF.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit2 });
-            tablePanel1.SetRow(gcFurnitF, 2);
-            gcFurnitF.Size = new System.Drawing.Size(420, 232);
-            gcFurnitF.TabIndex = 25;
+            gcFurnitF.Size = new System.Drawing.Size(371, 260);
+            gcFurnitF.TabIndex = 10;
             gcFurnitF.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView3 });
             // 
             // gridView3
@@ -657,254 +853,329 @@ namespace SewingProduction
             gridColumnFurnitFKolF.VisibleIndex = 4;
             gridColumnFurnitFKolF.Width = 58;
             // 
-            // gcFurnitFIt
+            // label6
             // 
-            tablePanel1.SetColumn(gcFurnitFIt, 11);
-            tablePanel1.SetColumnSpan(gcFurnitFIt, 2);
-            gcFurnitFIt.DataSource = bsFurnitFIt;
-            gcFurnitFIt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gcFurnitFIt.Font = new System.Drawing.Font("Arial", 10F);
-            gcFurnitFIt.Location = new System.Drawing.Point(1063, 74);
-            gcFurnitFIt.MainView = gridView4;
-            gcFurnitFIt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gcFurnitFIt.Name = "gcFurnitFIt";
-            tablePanel1.SetRow(gcFurnitFIt, 2);
-            gcFurnitFIt.Size = new System.Drawing.Size(486, 232);
-            gcFurnitFIt.TabIndex = 26;
-            gcFurnitFIt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView4 });
-            gcFurnitFIt.Click += gcFurnitFIt_Click;
+            label6.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            label6.Appearance.Options.UseFont = true;
+            label6.Appearance.Options.UseTextOptions = true;
+            label6.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label6.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label6.Location = new System.Drawing.Point(964, 28);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(598, 20);
+            label6.StyleController = layoutControl1;
+            label6.TabIndex = 32;
+            label6.Text = "Собрано";
+            label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // gridView4
+            // label5
             // 
-            gridView4.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial Narrow", 8F);
-            gridView4.Appearance.HeaderPanel.Options.UseFont = true;
-            gridView4.Appearance.Row.Font = new System.Drawing.Font("Arial Narrow", 8F);
-            gridView4.Appearance.Row.Options.UseFont = true;
-            gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnFurnitFItNPp, gridColumnFurnitFItKodO, gridColumnFurnitFItKodArt, gridColumnFurnitFItArt, gridColumnFurnitFItTEd, gridColumnFurnitFItKolFO, gridColumnFurnitFItKolFBr, gridColumnFurnitFItKolFUp, gridColumnFurnitFItKolFRa });
-            gridView4.DetailHeight = 404;
-            gridView4.GridControl = gcFurnitFIt;
-            gridView4.Name = "gridView4";
-            gridView4.OptionsBehavior.Editable = false;
-            gridView4.OptionsEditForm.PopupEditFormWidth = 933;
-            gridView4.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
-            gridView4.OptionsView.RowAutoHeight = true;
-            gridView4.OptionsView.ShowGroupPanel = false;
+            label5.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            label5.Appearance.Options.UseFont = true;
+            label5.Appearance.Options.UseTextOptions = true;
+            label5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label5.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label5.Location = new System.Drawing.Point(579, 28);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(371, 20);
+            label5.StyleController = layoutControl1;
+            label5.TabIndex = 1;
+            label5.Text = "Заявка";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // gridColumnFurnitFItNPp
+            // label4
             // 
-            gridColumnFurnitFItNPp.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
-            gridColumnFurnitFItNPp.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItNPp.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
-            gridColumnFurnitFItNPp.AppearanceHeader.Options.UseFont = true;
-            gridColumnFurnitFItNPp.Caption = "№";
-            gridColumnFurnitFItNPp.MinWidth = 23;
-            gridColumnFurnitFItNPp.Name = "gridColumnFurnitFItNPp";
-            gridColumnFurnitFItNPp.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItNPp.Visible = true;
-            gridColumnFurnitFItNPp.VisibleIndex = 0;
-            gridColumnFurnitFItNPp.Width = 23;
+            label4.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            label4.Appearance.Options.UseFont = true;
+            label4.Appearance.Options.UseTextOptions = true;
+            label4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label4.Location = new System.Drawing.Point(408, 28);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(157, 20);
+            label4.StyleController = layoutControl1;
+            label4.TabIndex = 1;
+            label4.Text = "Пачки";
+            label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // gridColumnFurnitFItKodO
+            // label3
             // 
-            gridColumnFurnitFItKodO.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
-            gridColumnFurnitFItKodO.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItKodO.Caption = "Код";
-            gridColumnFurnitFItKodO.MinWidth = 23;
-            gridColumnFurnitFItKodO.Name = "gridColumnFurnitFItKodO";
-            gridColumnFurnitFItKodO.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItKodO.Visible = true;
-            gridColumnFurnitFItKodO.VisibleIndex = 1;
-            gridColumnFurnitFItKodO.Width = 52;
+            label3.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            label3.Appearance.Options.UseFont = true;
+            label3.Appearance.Options.UseTextOptions = true;
+            label3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label3.Location = new System.Drawing.Point(2, 28);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(392, 18);
+            label3.StyleController = layoutControl1;
+            label3.TabIndex = 1;
+            label3.Text = "Изделия";
+            label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // gridColumnFurnitFItKodArt
+            // tbViewType
             // 
-            gridColumnFurnitFItKodArt.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
-            gridColumnFurnitFItKodArt.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItKodArt.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 5F);
-            gridColumnFurnitFItKodArt.AppearanceHeader.Options.UseFont = true;
-            gridColumnFurnitFItKodArt.AppearanceHeader.Options.UseTextOptions = true;
-            gridColumnFurnitFItKodArt.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            gridColumnFurnitFItKodArt.Caption = "Код арт";
-            gridColumnFurnitFItKodArt.MinWidth = 23;
-            gridColumnFurnitFItKodArt.Name = "gridColumnFurnitFItKodArt";
-            gridColumnFurnitFItKodArt.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItKodArt.Visible = true;
-            gridColumnFurnitFItKodArt.VisibleIndex = 2;
-            gridColumnFurnitFItKodArt.Width = 35;
+            tbViewType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tbViewType.ErrorColor = System.Drawing.Color.Red;
+            tbViewType.ErrorMessage = null;
+            tbViewType.Font = new System.Drawing.Font("Arial", 10F);
+            tbViewType.Location = new System.Drawing.Point(156, 2);
+            tbViewType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tbViewType.Name = "tbViewType";
+            tbViewType.Size = new System.Drawing.Size(21, 20);
+            tbViewType.TabIndex = 2;
+            tbViewType.Visible = false;
             // 
-            // gridColumnFurnitFItArt
+            // button1
             // 
-            gridColumnFurnitFItArt.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
-            gridColumnFurnitFItArt.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItArt.Caption = "Арт";
-            gridColumnFurnitFItArt.MinWidth = 23;
-            gridColumnFurnitFItArt.Name = "gridColumnFurnitFItArt";
-            gridColumnFurnitFItArt.Visible = true;
-            gridColumnFurnitFItArt.VisibleIndex = 3;
-            gridColumnFurnitFItArt.Width = 147;
+            button1.Font = new System.Drawing.Font("Arial", 10F);
+            button1.Location = new System.Drawing.Point(1069, 2);
+            button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(216, 22);
+            button1.TabIndex = 7;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // gridColumnFurnitFItTEd
+            // label1
             // 
-            gridColumnFurnitFItTEd.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 6.5F);
-            gridColumnFurnitFItTEd.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItTEd.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItTEd.AppearanceHeader.Options.UseFont = true;
-            gridColumnFurnitFItTEd.Caption = "Ед";
-            gridColumnFurnitFItTEd.MinWidth = 23;
-            gridColumnFurnitFItTEd.Name = "gridColumnFurnitFItTEd";
-            gridColumnFurnitFItTEd.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItTEd.Visible = true;
-            gridColumnFurnitFItTEd.VisibleIndex = 4;
-            gridColumnFurnitFItTEd.Width = 33;
-            // 
-            // gridColumnFurnitFItKolFO
-            // 
-            gridColumnFurnitFItKolFO.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFO.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItKolFO.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFO.AppearanceHeader.Options.UseFont = true;
-            gridColumnFurnitFItKolFO.Caption = "Скл";
-            gridColumnFurnitFItKolFO.MinWidth = 23;
-            gridColumnFurnitFItKolFO.Name = "gridColumnFurnitFItKolFO";
-            gridColumnFurnitFItKolFO.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItKolFO.Visible = true;
-            gridColumnFurnitFItKolFO.VisibleIndex = 5;
-            gridColumnFurnitFItKolFO.Width = 45;
-            // 
-            // gridColumnFurnitFItKolFBr
-            // 
-            gridColumnFurnitFItKolFBr.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFBr.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItKolFBr.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFBr.AppearanceHeader.Options.UseFont = true;
-            gridColumnFurnitFItKolFBr.Caption = "Цех";
-            gridColumnFurnitFItKolFBr.MinWidth = 23;
-            gridColumnFurnitFItKolFBr.Name = "gridColumnFurnitFItKolFBr";
-            gridColumnFurnitFItKolFBr.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItKolFBr.Visible = true;
-            gridColumnFurnitFItKolFBr.VisibleIndex = 6;
-            gridColumnFurnitFItKolFBr.Width = 45;
-            // 
-            // gridColumnFurnitFItKolFUp
-            // 
-            gridColumnFurnitFItKolFUp.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFUp.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItKolFUp.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFUp.AppearanceHeader.Options.UseFont = true;
-            gridColumnFurnitFItKolFUp.Caption = "Упак";
-            gridColumnFurnitFItKolFUp.MinWidth = 23;
-            gridColumnFurnitFItKolFUp.Name = "gridColumnFurnitFItKolFUp";
-            gridColumnFurnitFItKolFUp.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItKolFUp.Visible = true;
-            gridColumnFurnitFItKolFUp.VisibleIndex = 7;
-            gridColumnFurnitFItKolFUp.Width = 45;
-            // 
-            // gridColumnFurnitFItKolFRa
-            // 
-            gridColumnFurnitFItKolFRa.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFRa.AppearanceCell.Options.UseFont = true;
-            gridColumnFurnitFItKolFRa.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
-            gridColumnFurnitFItKolFRa.AppearanceHeader.Options.UseFont = true;
-            gridColumnFurnitFItKolFRa.Caption = "Раскр";
-            gridColumnFurnitFItKolFRa.MinWidth = 23;
-            gridColumnFurnitFItKolFRa.Name = "gridColumnFurnitFItKolFRa";
-            gridColumnFurnitFItKolFRa.OptionsColumn.FixedWidth = true;
-            gridColumnFurnitFItKolFRa.Visible = true;
-            gridColumnFurnitFItKolFRa.VisibleIndex = 8;
-            gridColumnFurnitFItKolFRa.Width = 45;
+            label1.Appearance.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            label1.Appearance.Options.UseFont = true;
+            label1.Appearance.Options.UseTextOptions = true;
+            label1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            label1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            label1.Location = new System.Drawing.Point(205, 2);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(20, 22);
+            label1.StyleController = layoutControl1;
+            label1.TabIndex = 1;
+            label1.Text = "№";
+            label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tbKodF
             // 
-            tbKodF.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tbKodF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tablePanel1.SetColumn(tbKodF, 11);
             tbKodF.ErrorColor = System.Drawing.Color.Red;
             tbKodF.ErrorMessage = null;
             tbKodF.Font = new System.Drawing.Font("Arial", 10F);
-            tbKodF.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbKodF.Location = new System.Drawing.Point(1063, 13);
+            tbKodF.Location = new System.Drawing.Point(1044, 2);
             tbKodF.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tbKodF.Name = "tbKodF";
-            tablePanel1.SetRow(tbKodF, 0);
-            tbKodF.Size = new System.Drawing.Size(197, 23);
-            tbKodF.TabIndex = 27;
+            tbKodF.Size = new System.Drawing.Size(21, 20);
+            tbKodF.TabIndex = 6;
             tbKodF.Visible = false;
             tbKodF.TextChanged += tbKodF_TextChanged;
             tbKodF.KeyDown += textBox5_KeyDown;
             // 
-            // label3
+            // Root
             // 
-            label3.AutoSize = true;
-            tablePanel1.SetColumn(label3, 0);
-            label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label3.Location = new System.Drawing.Point(15, 46);
-            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            tablePanel1.SetRow(label3, 1);
-            label3.Size = new System.Drawing.Size(69, 18);
-            label3.TabIndex = 28;
-            label3.Text = "Изделия";
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, emptySpaceItem3, layoutControlItem3, layoutControlItem4, emptySpaceItem4, layoutControlItem6, emptySpaceItem2, emptySpaceItem5, layoutControlItem7, emptySpaceItem6, layoutControlItem8, layoutControlItem9, layoutControlItem5, layoutControlItem11, splitterItem1, layoutControlItem13, splitterItem2, layoutControlItem15, splitterItem3, layoutControlItem17, layoutControlItem14, layoutControlItem10, layoutControlItem12, layoutControlItem16 });
+            Root.Name = "Root";
+            Root.Size = new System.Drawing.Size(1564, 314);
+            Root.TextVisible = false;
             // 
-            // label4
+            // layoutControlItem1
             // 
-            label4.AutoSize = true;
-            tablePanel1.SetColumn(label4, 7);
-            label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label4.Location = new System.Drawing.Point(449, 46);
-            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            tablePanel1.SetRow(label4, 1);
-            label4.Size = new System.Drawing.Size(51, 18);
-            label4.TabIndex = 29;
-            label4.Text = "Пачки";
+            layoutControlItem1.Control = tbVidFName;
+            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(154, 26);
+            layoutControlItem1.TextVisible = false;
             // 
-            // label5
+            // layoutControlItem2
             // 
-            label5.AutoSize = true;
-            tablePanel1.SetColumn(label5, 9);
-            label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label5.Location = new System.Drawing.Point(635, 46);
-            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            tablePanel1.SetRow(label5, 1);
-            label5.Size = new System.Drawing.Size(61, 18);
-            label5.TabIndex = 30;
-            label5.Text = "Заявка";
+            layoutControlItem2.Control = tbViewType;
+            layoutControlItem2.Location = new System.Drawing.Point(154, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new System.Drawing.Size(25, 26);
+            layoutControlItem2.TextVisible = false;
+            layoutControlItem2.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             // 
-            // button1
+            // emptySpaceItem3
             // 
-            button1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            tablePanel1.SetColumn(button1, 12);
-            button1.Font = new System.Drawing.Font("Arial", 10F);
-            button1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            button1.Location = new System.Drawing.Point(1269, 13);
-            button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            button1.Name = "button1";
-            tablePanel1.SetRow(button1, 0);
-            button1.Size = new System.Drawing.Size(280, 24);
-            button1.TabIndex = 31;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Visible = false;
-            button1.Click += button1_Click;
+            emptySpaceItem3.Location = new System.Drawing.Point(179, 0);
+            emptySpaceItem3.Name = "emptySpaceItem3";
+            emptySpaceItem3.Size = new System.Drawing.Size(24, 26);
             // 
-            // label6
+            // layoutControlItem3
             // 
-            label6.AutoSize = true;
-            tablePanel1.SetColumn(label6, 11);
-            tablePanel1.SetColumnSpan(label6, 2);
-            label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label6.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label6.Location = new System.Drawing.Point(1063, 46);
-            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            tablePanel1.SetRow(label6, 1);
-            label6.Size = new System.Drawing.Size(73, 18);
-            label6.TabIndex = 32;
-            label6.Text = "Собрано";
+            layoutControlItem3.Control = label1;
+            layoutControlItem3.Location = new System.Drawing.Point(203, 0);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(24, 26);
+            layoutControlItem3.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            layoutControlItem4.Control = tbNZ;
+            layoutControlItem4.Location = new System.Drawing.Point(227, 0);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new System.Drawing.Size(131, 26);
+            layoutControlItem4.TextVisible = false;
+            // 
+            // emptySpaceItem4
+            // 
+            emptySpaceItem4.Location = new System.Drawing.Point(358, 0);
+            emptySpaceItem4.Name = "emptySpaceItem4";
+            emptySpaceItem4.Size = new System.Drawing.Size(26, 26);
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.Control = tbDataFO;
+            layoutControlItem6.Location = new System.Drawing.Point(407, 0);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new System.Drawing.Size(273, 26);
+            layoutControlItem6.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.Location = new System.Drawing.Point(1287, 0);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new System.Drawing.Size(277, 26);
+            // 
+            // emptySpaceItem5
+            // 
+            emptySpaceItem5.Location = new System.Drawing.Point(680, 0);
+            emptySpaceItem5.Name = "emptySpaceItem5";
+            emptySpaceItem5.Size = new System.Drawing.Size(21, 26);
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = tbBr;
+            layoutControlItem7.Location = new System.Drawing.Point(701, 0);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new System.Drawing.Size(318, 26);
+            layoutControlItem7.TextVisible = false;
+            // 
+            // emptySpaceItem6
+            // 
+            emptySpaceItem6.Location = new System.Drawing.Point(1019, 0);
+            emptySpaceItem6.Name = "emptySpaceItem6";
+            emptySpaceItem6.Size = new System.Drawing.Size(23, 26);
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = tbKodF;
+            layoutControlItem8.Location = new System.Drawing.Point(1042, 0);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new System.Drawing.Size(25, 26);
+            layoutControlItem8.TextVisible = false;
+            layoutControlItem8.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutControlItem9
+            // 
+            layoutControlItem9.Control = button1;
+            layoutControlItem9.Location = new System.Drawing.Point(1067, 0);
+            layoutControlItem9.Name = "layoutControlItem9";
+            layoutControlItem9.Size = new System.Drawing.Size(220, 26);
+            layoutControlItem9.TextVisible = false;
+            layoutControlItem9.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+            // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.Control = label2;
+            layoutControlItem5.Location = new System.Drawing.Point(384, 0);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new System.Drawing.Size(23, 26);
+            layoutControlItem5.TextVisible = false;
+            // 
+            // layoutControlItem11
+            // 
+            layoutControlItem11.Control = label3;
+            layoutControlItem11.Location = new System.Drawing.Point(0, 26);
+            layoutControlItem11.MinSize = new System.Drawing.Size(66, 22);
+            layoutControlItem11.Name = "layoutControlItem11";
+            layoutControlItem11.Size = new System.Drawing.Size(396, 22);
+            layoutControlItem11.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem11.TextVisible = false;
+            // 
+            // splitterItem1
+            // 
+            splitterItem1.Location = new System.Drawing.Point(396, 26);
+            splitterItem1.Name = "splitterItem1";
+            splitterItem1.Size = new System.Drawing.Size(10, 288);
+            // 
+            // layoutControlItem13
+            // 
+            layoutControlItem13.Control = label4;
+            layoutControlItem13.Location = new System.Drawing.Point(406, 26);
+            layoutControlItem13.MinSize = new System.Drawing.Size(47, 22);
+            layoutControlItem13.Name = "layoutControlItem13";
+            layoutControlItem13.Size = new System.Drawing.Size(161, 24);
+            layoutControlItem13.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem13.TextVisible = false;
+            // 
+            // splitterItem2
+            // 
+            splitterItem2.Location = new System.Drawing.Point(567, 26);
+            splitterItem2.Name = "splitterItem2";
+            splitterItem2.Size = new System.Drawing.Size(10, 288);
+            // 
+            // layoutControlItem15
+            // 
+            layoutControlItem15.Control = label5;
+            layoutControlItem15.Location = new System.Drawing.Point(577, 26);
+            layoutControlItem15.MinSize = new System.Drawing.Size(57, 22);
+            layoutControlItem15.Name = "layoutControlItem15";
+            layoutControlItem15.Size = new System.Drawing.Size(375, 24);
+            layoutControlItem15.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem15.TextVisible = false;
+            // 
+            // splitterItem3
+            // 
+            splitterItem3.Location = new System.Drawing.Point(952, 26);
+            splitterItem3.Name = "splitterItem3";
+            splitterItem3.Size = new System.Drawing.Size(10, 288);
+            // 
+            // layoutControlItem17
+            // 
+            layoutControlItem17.Control = label6;
+            layoutControlItem17.Location = new System.Drawing.Point(962, 26);
+            layoutControlItem17.MinSize = new System.Drawing.Size(69, 22);
+            layoutControlItem17.Name = "layoutControlItem17";
+            layoutControlItem17.Size = new System.Drawing.Size(602, 24);
+            layoutControlItem17.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem17.TextVisible = false;
+            // 
+            // layoutControlItem14
+            // 
+            layoutControlItem14.Control = gcFurnitF;
+            layoutControlItem14.Location = new System.Drawing.Point(577, 50);
+            layoutControlItem14.Name = "layoutControlItem14";
+            layoutControlItem14.Size = new System.Drawing.Size(375, 264);
+            layoutControlItem14.TextVisible = false;
+            // 
+            // layoutControlItem10
+            // 
+            layoutControlItem10.Control = gcFurnitArt;
+            layoutControlItem10.Location = new System.Drawing.Point(0, 48);
+            layoutControlItem10.Name = "layoutControlItem10";
+            layoutControlItem10.Size = new System.Drawing.Size(396, 266);
+            layoutControlItem10.TextVisible = false;
+            // 
+            // layoutControlItem12
+            // 
+            layoutControlItem12.Control = gcFurnitPach;
+            layoutControlItem12.Location = new System.Drawing.Point(406, 50);
+            layoutControlItem12.Name = "layoutControlItem12";
+            layoutControlItem12.Size = new System.Drawing.Size(161, 264);
+            layoutControlItem12.TextVisible = false;
+            // 
+            // layoutControlItem16
+            // 
+            layoutControlItem16.Control = gcFurnitFIt;
+            layoutControlItem16.Location = new System.Drawing.Point(962, 50);
+            layoutControlItem16.Name = "layoutControlItem16";
+            layoutControlItem16.Size = new System.Drawing.Size(602, 264);
+            layoutControlItem16.TextVisible = false;
             // 
             // gridColumn15
             // 
@@ -915,60 +1186,14 @@ namespace SewingProduction
             gridColumn15.Visible = true;
             gridColumn15.VisibleIndex = 4;
             // 
-            // tbViewType
-            // 
-            tbViewType.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            tbViewType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tablePanel1.SetColumn(tbViewType, 1);
-            tbViewType.ErrorColor = System.Drawing.Color.Red;
-            tbViewType.ErrorMessage = null;
-            tbViewType.Font = new System.Drawing.Font("Arial", 10F);
-            tbViewType.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            tbViewType.Location = new System.Drawing.Point(183, 13);
-            tbViewType.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tbViewType.Name = "tbViewType";
-            tablePanel1.SetRow(tbViewType, 0);
-            tbViewType.Size = new System.Drawing.Size(17, 23);
-            tbViewType.TabIndex = 33;
-            tbViewType.Visible = false;
-            // 
-            // tablePanel1
-            // 
-            tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 144F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 21F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 30F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 105F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 37F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 35F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 142F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 37F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 350F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 176F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F) });
-            tablePanel1.Controls.Add(tbVidFName);
-            tablePanel1.Controls.Add(gcFurnitFIt);
-            tablePanel1.Controls.Add(gcFurnitF);
-            tablePanel1.Controls.Add(gcFurnitPach);
-            tablePanel1.Controls.Add(gcFurnitArt);
-            tablePanel1.Controls.Add(label6);
-            tablePanel1.Controls.Add(tbViewType);
-            tablePanel1.Controls.Add(label5);
-            tablePanel1.Controls.Add(button1);
-            tablePanel1.Controls.Add(label4);
-            tablePanel1.Controls.Add(label1);
-            tablePanel1.Controls.Add(label3);
-            tablePanel1.Controls.Add(tbNZ);
-            tablePanel1.Controls.Add(label2);
-            tablePanel1.Controls.Add(tbDataFO);
-            tablePanel1.Controls.Add(tbKodF);
-            tablePanel1.Controls.Add(tbBr);
-            tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            tablePanel1.Location = new System.Drawing.Point(0, 0);
-            tablePanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tablePanel1.Name = "tablePanel1";
-            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
-            tablePanel1.Size = new System.Drawing.Size(1564, 321);
-            tablePanel1.TabIndex = 34;
-            tablePanel1.UseSkinIndents = true;
-            // 
             // FurnitZayavView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            Controls.Add(tablePanel1);
+            Controls.Add(layoutControl1);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "FurnitZayavView";
-            Size = new System.Drawing.Size(1564, 321);
+            Size = new System.Drawing.Size(1564, 314);
             Load += FurnitZayavView_Load;
             ((System.ComponentModel.ISupportInitialize)gcFurnitArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
@@ -976,16 +1201,41 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gcFurnitPach).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gcFurnitF).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
+            layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gcFurnitFIt).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsFurnitFIt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gcFurnitF).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)behaviorManager1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
-            tablePanel1.ResumeLayout(false);
-            tablePanel1.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -1046,7 +1296,33 @@ namespace SewingProduction
         private CustomButton button1;
         private CustomLabel label6;
         private CustomTextBox tbViewType;
-        private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnFurnitFItKolFO;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraLayout.SplitterItem splitterItem1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem13;
+        private DevExpress.XtraLayout.SplitterItem splitterItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.SplitterItem splitterItem3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
     }
 }

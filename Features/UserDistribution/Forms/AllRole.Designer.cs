@@ -220,17 +220,17 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewRoles
             // 
-            gridViewRoles.Appearance.Row.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.Appearance.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.Appearance.Row.Options.UseBackColor = true;
-            gridViewRoles.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
-            gridViewRoles.AppearancePrint.EvenRow.BorderColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.EvenRow.BorderColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBorderColor = true;
-            gridViewRoles.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.GroupRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
             gridViewRoles.AppearancePrint.OddRow.Options.UseBackColor = true;
-            gridViewRoles.AppearancePrint.Row.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.Row.Options.UseBackColor = true;
             gridViewRoles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { RoleID, RoleName, Description, UserName });
             gridViewRoles.DetailHeight = 4038;
@@ -376,10 +376,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAddRole
             // 
-            customButtonAddRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAddRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAddRole.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddRole.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAddRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAddRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAddRole.Location = new System.Drawing.Point(1125, 3);
             customButtonAddRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAddRole.Name = "customButtonAddRole";
@@ -391,10 +391,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonDeleteRole
             // 
-            customButtonDeleteRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonDeleteRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonDeleteRole.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteRole.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDeleteRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonDeleteRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonDeleteRole.Location = new System.Drawing.Point(1125, 597);
             customButtonDeleteRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonDeleteRole.Name = "customButtonDeleteRole";
@@ -434,10 +434,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonCopyRole
             // 
-            customButtonCopyRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonCopyRole.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonCopyRole.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonCopyRole.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonCopyRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonCopyRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonCopyRole.Location = new System.Drawing.Point(1125, 69);
             customButtonCopyRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonCopyRole.Name = "customButtonCopyRole";

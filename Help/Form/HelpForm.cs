@@ -78,7 +78,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 string encoded = e.Url.AbsoluteUri.Replace("menu:", "");
                 string menuItemName = Uri.UnescapeDataString(encoded);
 
-                ToolStripMenuItem item = _formManager.GetMenuItemByName(menuItemName);
+                var item = _formManager.GetBarItemByName(menuItemName);
                 if (item != null)
                 {
                     item.PerformClick();

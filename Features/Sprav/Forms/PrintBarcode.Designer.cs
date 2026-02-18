@@ -1,4 +1,4 @@
-﻿using SewingProduction.Core.Class;
+using SewingProduction.Core.Class;
 using SewingProduction.Core.Class.CustomControls;
 namespace SewingProduction.form
 {
@@ -103,7 +103,7 @@ namespace SewingProduction.form
             customTextBoxPechSHK1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPechSHK1.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxPechSHK1.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPechSHK1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxPechSHK1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPechSHK1.Location = new System.Drawing.Point(4, 107);
             customTextBoxPechSHK1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPechSHK1.Name = "customTextBoxPechSHK1";
@@ -117,7 +117,7 @@ namespace SewingProduction.form
             customComboBoxPechVed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxPechVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxPechVed.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxPechVed.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customComboBoxPechVed.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customComboBoxPechVed.Location = new System.Drawing.Point(4, 31);
             customComboBoxPechVed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxPechVed.Name = "customComboBoxPechVed";
@@ -126,12 +126,11 @@ namespace SewingProduction.form
             // 
             // customButtonPech1
             // 
-            customButtonPech1.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonPech1.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonPech1.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonPech1.FlatAppearance.BorderSize = 0;
             customButtonPech1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonPech1.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonPech1.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonPech1.Location = new System.Drawing.Point(4, 155);
             customButtonPech1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPech1.MaximumSize = new System.Drawing.Size(0, 58);
@@ -148,7 +147,7 @@ namespace SewingProduction.form
             customLabel1.AutoSize = true;
             customLabel1.BackColor = System.Drawing.Color.Transparent;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel1.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel1.Location = new System.Drawing.Point(4, 12);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
@@ -162,7 +161,7 @@ namespace SewingProduction.form
             customLabel2.BackColor = System.Drawing.Color.Transparent;
             customLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel2.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel2.Location = new System.Drawing.Point(4, 88);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
@@ -209,7 +208,7 @@ namespace SewingProduction.form
             customTextBoxPechTab.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPechTab.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxPechTab.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPechTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxPechTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPechTab.Location = new System.Drawing.Point(4, 31);
             customTextBoxPechTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPechTab.Name = "customTextBoxPechTab";
@@ -221,7 +220,7 @@ namespace SewingProduction.form
             customTextBoxPechSHK2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPechSHK2.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxPechSHK2.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPechSHK2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            // customTextBoxPechSHK2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customTextBoxPechSHK2.Location = new System.Drawing.Point(4, 107);
             customTextBoxPechSHK2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPechSHK2.Name = "customTextBoxPechSHK2";
@@ -230,12 +229,11 @@ namespace SewingProduction.form
             // 
             // customButtonPech2
             // 
-            customButtonPech2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            // customButtonPech2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonPech2.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonPech2.FlatAppearance.BorderSize = 0;
             customButtonPech2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonPech2.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonPech2.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
             customButtonPech2.Location = new System.Drawing.Point(4, 155);
             customButtonPech2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPech2.MaximumSize = new System.Drawing.Size(0, 58);
@@ -252,7 +250,7 @@ namespace SewingProduction.form
             customLabel3.AutoSize = true;
             customLabel3.BackColor = System.Drawing.Color.Transparent;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel3.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel3.Location = new System.Drawing.Point(4, 12);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
@@ -266,7 +264,7 @@ namespace SewingProduction.form
             customLabel4.BackColor = System.Drawing.Color.Transparent;
             customLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            // customLabel4.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
             customLabel4.Location = new System.Drawing.Point(4, 88);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";

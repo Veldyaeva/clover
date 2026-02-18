@@ -56,11 +56,11 @@
             // 
             // customLayoutControl1
             // 
-            customLayoutControl1.BackColor = System.Drawing.Color.White;
+            // customLayoutControl1.BackColor = System.Drawing.Color.White;
             customLayoutControl1.Controls.Add(customSimpleButton1);
             customLayoutControl1.Controls.Add(customGridControl1);
             customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
-            customLayoutControl1.ForeColor = System.Drawing.Color.Black;
+            // customLayoutControl1.ForeColor = System.Drawing.Color.Black;
             customLayoutControl1.Location = new System.Drawing.Point(12, 12);
             customLayoutControl1.Name = "customLayoutControl1";
             customLayoutControl1.Root = Root;
@@ -70,9 +70,9 @@
             // 
             // customSimpleButton1
             // 
-            customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
+            // customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
             customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
             customSimpleButton1.Appearance.Options.UseForeColor = true;
@@ -102,7 +102,7 @@
             // 
             gridViewSpisok.Appearance.EvenRow.BackColor = System.Drawing.SystemColors.ActiveBorder;
             gridViewSpisok.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewSpisok.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            // gridViewSpisok.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridViewSpisok.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewSpisok.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewSpisok.Appearance.FocusedRow.Options.UseFont = true;

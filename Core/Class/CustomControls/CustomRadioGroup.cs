@@ -1,32 +1,26 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using DevExpress.XtraEditors;
 using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomRadioGroup : RadioGroup//, IThemeable, IThemeableControl
+    public class CustomRadioGroup : RadioGroup, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
         public CustomRadioGroup()
         {
-            //ApplyTheme();
-            //ThemeManager.ThemeChanged += OnThemeChanged;
+            ApplyTheme();
         }
         public void ApplyTheme()
         {
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = System.Drawing.SystemColors.ControlText;
+            BackColor = System.Drawing.SystemColors.Control;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
-        //private void OnThemeChanged() => ApplyTheme();
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                //ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)

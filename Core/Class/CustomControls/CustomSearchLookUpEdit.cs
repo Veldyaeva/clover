@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using DevExpress.XtraEditors;
 using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    internal class CustomSearchLookUpEdit : SearchLookUpEdit//, IThemeable, IThemeableControl
+    internal class CustomSearchLookUpEdit : SearchLookUpEdit, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
@@ -12,25 +12,18 @@ namespace SewingProduction.Core.Class
         private bool _visibleLogic = true;
         public CustomSearchLookUpEdit()
         {
-            //ApplyTheme();
-            //ThemeManager.ThemeChanged += OnThemeChanged;
+            ApplyTheme();
         }
 
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            BackColor = System.Drawing.SystemColors.Window;
+            ForeColor = System.Drawing.SystemColors.WindowText;
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        //private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                //ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)

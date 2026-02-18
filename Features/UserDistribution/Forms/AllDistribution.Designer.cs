@@ -164,17 +164,17 @@
             // 
             // gridViewRoles
             // 
-            gridViewRoles.Appearance.Row.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.Appearance.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.Appearance.Row.Options.UseBackColor = true;
-            gridViewRoles.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
-            gridViewRoles.AppearancePrint.EvenRow.BorderColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.EvenRow.BorderColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBorderColor = true;
-            gridViewRoles.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.GroupRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
             gridViewRoles.AppearancePrint.OddRow.Options.UseBackColor = true;
-            gridViewRoles.AppearancePrint.Row.BackColor = System.Drawing.Color.White;
+            // gridViewRoles.AppearancePrint.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.Row.Options.UseBackColor = true;
             gridViewRoles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { RoleID, RoleName, Description });
             gridViewRoles.DetailHeight = 4038;

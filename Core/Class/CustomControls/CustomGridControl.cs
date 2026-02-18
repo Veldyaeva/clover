@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -9,7 +9,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Core.Class
 {
-    public class CustomGridControl : GridControl//, SewingProduction.IThemeable//, IThemeableControl
+    public class CustomGridControl : GridControl, SewingProduction.IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color? AlternateRowColor { get; set; }
@@ -40,8 +40,7 @@ namespace SewingProduction.Core.Class
         private bool _settingsInitialized = false;
         public CustomGridControl()
         {
-            //ApplyTheme();
-            //ThemeManager.ThemeChanged += OnThemeChanged;
+            ApplyTheme();
             ViewRegistered += OnViewRegistered;
 
             // Подписываемся на события для инициализации настроек
@@ -50,12 +49,9 @@ namespace SewingProduction.Core.Class
         }
         public void ApplyTheme()
         {
-            var theme = ThemeManager.ActiveTheme;
-            BackColor = theme.GridBackground;
-            ForeColor = theme.GridTextColor;
+            // Для гридов оставляем цвета под управлением DevExpress/скинов,
+            // задаём только общий шрифт
             Font = ThemeManager.SharedSettings.DefaultFont;
-            AlternateRowColor = theme.BandHighlightColor;
-            FocusedRowColor = theme.ButtonBackground;
 
 
             foreach (var view in ViewCollection)
@@ -64,8 +60,9 @@ namespace SewingProduction.Core.Class
                 {
                     ApplyRowColors(gridView);
                     ApplyFocusedRowStyle(gridView);
-                    gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+                    //gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
                     gridView.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                    gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
                 }
             }
         }
@@ -84,17 +81,7 @@ namespace SewingProduction.Core.Class
             if (AlternateRowColor.HasValue)
             {
                 gridView.Appearance.EvenRow.BackColor = AlternateRowColor.Value;
-             //   gridView.OptionsView.EnableAppearanceEvenRow = true;
-            }
-            if (ThemeManager.ActiveTheme?.GridRowBackground != default)
-            {
-                gridView.Appearance.Row.BackColor = ThemeManager.ActiveTheme.GridRowBackground;
-                gridView.Appearance.Row.Options.UseBackColor = true;
-            }
-            if (ThemeManager.ActiveTheme?.GridTextColor != default)
-            {
-                gridView.Appearance.Row.ForeColor = ThemeManager.ActiveTheme.GridTextColor;
-                gridView.Appearance.Row.Options.UseForeColor = true;
+                // Включение чередующихся строк оставляем на усмотрение вызывающего кода
             }
         }
 
@@ -112,7 +99,6 @@ namespace SewingProduction.Core.Class
                 gridView.Appearance.FocusedRow.Options.UseFont = true;
             }
         }
-        //private void OnThemeChanged() => ApplyTheme();
         /// <summary>
         /// Обработчик события Load для инициализации настроек
         /// </summary>
@@ -230,7 +216,6 @@ namespace SewingProduction.Core.Class
                 }
                 this.DataSource = null;
                 this.ViewCollection.Clear();
-                //ThemeManager.ThemeChanged -= OnThemeChanged;
                 this.Load -= OnCustomGridLoad;
                 this.HandleCreated -= OnHandleCreated;
             }

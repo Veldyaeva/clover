@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Calendar;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraLayout;
@@ -52,7 +52,7 @@ namespace SewingProduction.CustomControls
 
     #endregion
 
-    public class CustomCalendarControl : CalendarControl//, IThemeable
+    public class CustomCalendarControl : CalendarControl, IThemeable
     {
         #region Static localization bootstrap
 
@@ -159,9 +159,8 @@ namespace SewingProduction.CustomControls
             _settingsChangedHandler = (_, __) => ApplyCustomSettings();
             CustomSettings.PropertyChanged += _settingsChangedHandler;
 
-            // 2) Тема
-            //ApplyTheme();
-            //ThemeManager.ThemeChanged += OnThemeChanged;
+            // 2) Базовое оформление (без привязки к ThemeManager.ActiveTheme)
+            ApplyTheme();
 
             // 3) Дефолтный Zoom
             ZoomLevel = 0;
@@ -181,8 +180,6 @@ namespace SewingProduction.CustomControls
         {
             if (disposing)
             {
-                //ThemeManager.ThemeChanged -= OnThemeChanged;
-
                 if (_settingsChangedHandler != null)
                     CustomSettings.PropertyChanged -= _settingsChangedHandler;
             }
@@ -704,8 +701,6 @@ namespace SewingProduction.CustomControls
             if (LayoutMode == CalendarLayoutMode.HorizontalDays)
                 RebuildHorizontal(force: true);
         }
-
-        //private void OnThemeChanged() => ApplyTheme();
 
         #endregion
 
