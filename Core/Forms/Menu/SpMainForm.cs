@@ -1,4 +1,7 @@
-﻿using DevExpress.LookAndFeel;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Forms;
+using DevExpress.LookAndFeel;
 using DevExpress.XtraTabbedMdi;
 using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,8 +17,6 @@ using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
-using System;
-using System.Windows.Forms;
 
 namespace SewingProduction
 {
@@ -26,6 +27,7 @@ namespace SewingProduction
         private ToolStripMenuItem[] toolStripMenuItems;
         public FormManager _formManager;
         private XtraTabbedMdiManager mdiManager => xtraTabbedMdiManager1;
+        public DevExpress.XtraBars.BarManager MainBarManager => barManager1;
 
         public SpMainForm()
         {
@@ -53,6 +55,7 @@ namespace SewingProduction
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm();
+
                 if (SettingsManager.GetSaveOpenTabs())
                     await _formManager.RestoreOpenTabs();
             }
@@ -196,14 +199,8 @@ namespace SewingProduction
         /// </summary>
         private void LoadObjectForm()
         {
-            var scanner = new MenuScanner(null, _user);
-            foreach (Control control in this.Controls)
-            {
-                if (control is MenuStrip menuStrip)
-                {
-                    scanner.ApplyPermissionsToMenu(menuStrip);
-                }
-            }
+            if (barManager1 != null)
+                barManager1.ApplyPermissions(_user);
         }
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Helpers;
@@ -46,10 +47,8 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         {
             if (myObjectForm == null || myObjectForm.Rows.Count == 0)
             {
-                // Если DataTable пустой, считаем, что прав нет
                 return false;
             }
-            // Ищем строку, где ObjectName соответствует имени объекта и соответствует нужному разрешению
             foreach (DataRow row in myObjectForm.Rows)
             {
                 string objectNameFromTable = row["ObjectName"]?.ToString();

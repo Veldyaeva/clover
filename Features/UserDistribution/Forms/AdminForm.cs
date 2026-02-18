@@ -324,20 +324,20 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 return;
             }
 
-
-            var menuStrip = mainForm.MainMenuStrip;
-            if (menuStrip == null)
+            var barManager = mainForm.MainBarManager;
+            if (barManager == null)
             {
-                MessageBox.Show("MenuStrip не найден.");
+                MessageBox.Show("BarManager не найден.");
                 return;
             }
 
             var scanner = new MenuScanner(_adminFormDataService, _user);
-            await scanner.ScanAndInsertMenuAsync(menuStrip, formID);
+            await scanner.ScanAndInsertBarAsync(barManager, formID);
 
             await Objects_Load();
-            MessageBox.Show("Пункты меню успешно добавлены в базу данных.");
+            MessageBox.Show("Пункты меню (BarManager) успешно добавлены в базу данных.");
         }
+
         #endregion
 
         private void customButtonOpen_Click(object sender, EventArgs e)
