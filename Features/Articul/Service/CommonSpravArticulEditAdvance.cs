@@ -42,6 +42,7 @@ namespace SewingProduction.Features.Articul.Service
         = Array.Empty<SpArticulTkanSokr>();
         public static IReadOnlyList<GostGrupIzdViewModel> GostGroupNames { get; private set; }
         = Array.Empty<GostGrupIzdViewModel>();
+        
 
         public static Task EnsureLoadedAsync(DbService db)
         {
@@ -84,6 +85,7 @@ namespace SewingProduction.Features.Articul.Service
                 Assorts = (await AssortTask).AsReadOnly();
                 Tkans = (await TkanTask).AsReadOnly();
                 GostGroupNames = (await GostGroupNamesTask).AsReadOnly();
+                
             }
             catch (Exception ex)
             {
@@ -113,6 +115,7 @@ namespace SewingProduction.Features.Articul.Service
             Assorts = Array.Empty<AssortModel>();
             Tkans = Array.Empty<SpArticulTkanSokr>();
             GostGroupNames = Array.Empty<GostGrupIzdViewModel>();
+            
         }
 
 

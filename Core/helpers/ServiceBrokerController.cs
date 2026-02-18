@@ -29,11 +29,11 @@ namespace SewingProduction.Core.helpers
 
         public async Task InitAsync(CancellationToken ct)
         {
-            lock (_initLock)
-            {
-                if (_initialized) return;
-                _initialized = true;
-            }
+            //lock (_initLock)
+            //{
+            //    if (_initialized) return;
+            //    _initialized = true;
+            //}
 
             var sbSettings = SettingsManager.GetServiceBrokerSettings();
             Coordinator = new EnhancedRefreshCoordinator(
@@ -78,6 +78,12 @@ namespace SewingProduction.Core.helpers
             }
 
             await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
+            lock (_initLock)
+            {
+                if (_initialized) return;
+                _initialized = true;
+            }
+
         }
 
         /// <summary>

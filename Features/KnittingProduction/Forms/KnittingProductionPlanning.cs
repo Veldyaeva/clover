@@ -81,11 +81,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 			_prorabotkiService = new ProrabotkiService(_dbHelper);
 			_matrixService = new MatrixService(_dbHelper);
 
-			Form mainForm = Application.OpenForms["SpMainForm"];
-			MenuStrip mainMenu = mainForm.MainMenuStrip;
-			_formManager = new FormManager(mainForm, mainMenu, _user);
+			//Form mainForm = Application.OpenForms["SpMainForm"];
+			//MenuStrip mainMenu = mainForm.MainMenuStrip;
+			//_formManager = new FormManager(mainForm, mainMenu, _user);
 
-			ThemeManager.UpdateTheme(this);
+			//ThemeManager.UpdateTheme(this);
 		}
 
 		private async Task InitializeBindingsAsync()

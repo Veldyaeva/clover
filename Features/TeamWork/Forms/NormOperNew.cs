@@ -42,11 +42,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             _artNormService = new ArtNormRepository(_dbHelper);
 
             _annId = annId;
-            ThemeManager.UpdateTheme(this);
+           // ThemeManager.UpdateTheme(this);
 
             //// Режим редактирования через EditForm и подписки
             //gridView1.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-            //gridView1.EditFormShowing += gridView1_EditFormShowing;
+            //gridView1.EditFormShowing += gridViewEditAdvRazm_EditFormShowing;
         }
 
         private async void NormOperNew_Load(object sender, EventArgs e)
@@ -220,7 +220,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        //private void gridView1_EditFormShowing(object sender, EditFormShowingEventArgs e)
+        //private void gridViewEditAdvRazm_EditFormShowing(object sender, EditFormShowingEventArgs e)
         //{
         //    var view = sender as GridView;
         //    if (view == null) return;

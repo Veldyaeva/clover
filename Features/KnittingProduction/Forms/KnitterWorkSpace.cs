@@ -56,18 +56,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// <summary>
         /// Список SQL-объектов для отслеживания через ServiceBroker.
         /// </summary>
-        public IReadOnlyList<string> ServiceBrokerObjects => 
+        //public IReadOnlyList<string> ServiceBrokerObjects => 
+        //    new[] { "GetPlanZagrVyazNorm_ByTab4" };
+        private static readonly IReadOnlyList<string> _sbObjects =
             new[] { "GetPlanZagrVyazNorm_ByTab4" };
-
+        public IReadOnlyList<string> ServiceBrokerObjects => _sbObjects;
         /// <summary>
         /// Приоритеты обновления объектов (чем выше число, тем выше приоритет).
         /// </summary>
-        public IReadOnlyDictionary<string, int> RefreshPriorities => 
-            new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "GetPlanZagrVyazNorm_ByTab4", 10 }
-            };
-
+        //public IReadOnlyDictionary<string, int> RefreshPriorities => 
+        //    new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+        //    {
+        //        { "GetPlanZagrVyazNorm_ByTab4", 10 }
+        //    };
+        private static readonly IReadOnlyDictionary<string, int> _sbPriorities =
+    new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+    {
+        { "GetPlanZagrVyazNorm_ByTab4", 10 }
+    };
+        public IReadOnlyDictionary<string, int> RefreshPriorities => _sbPriorities;
         public string ServiceBrokerFormName => GetType().Name;
 
         public bool UseSchemaInListenName => true;
@@ -121,6 +128,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private decimal _maxHoursClosedShift = 14m;
         private bool _showAllAssignedWhenClosed = false;
         private Button _adminSettingsButton;
+        private CancellationTokenSource? _sbCts;
+        private int _serviceBrokerShutdownStarted;
         /// <summary>
         /// Флаг активной смены.
         /// </summary>
@@ -181,11 +190,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] Load event start");
                     await InitializeAsync();
-                    await InitServiceBrokerAsync(CancellationToken.None);
+                    _sbCts = new CancellationTokenSource();
+                    await InitServiceBrokerAsync(_sbCts.Token);
                     InitHeaderButtonTags();
                 };
-                this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
-
+                //this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
+                this.FormClosing += KnitterWorkSpace_FormClosing;
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
@@ -200,10 +210,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
-                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
-                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
-
-                ConfigureAdvBandedGridColumns();
+              //  ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -233,10 +240,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     System.Diagnostics.Debug.WriteLine("[KnitterWorkSpace] Load event start");
                     await InitializeAsync();
-                    await InitServiceBrokerAsync(CancellationToken.None);
+                    _sbCts = new CancellationTokenSource();
+                    await InitServiceBrokerAsync(_sbCts.Token);
                     InitHeaderButtonTags();
                 };
-                this.FormClosed += (_, __) => _ = _sbController.DisposeAsync();
+                this.FormClosing += KnitterWorkSpace_FormClosing;
                 SetupPzvDateStartColumn();
                 SetupIdleTimer();
                 SetupShiftTimer();
@@ -251,9 +259,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
-                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
-                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
-                ConfigureAdvBandedGridColumns();
             }
             catch (Exception ex)
             {
@@ -349,7 +354,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 using (var splash = new FioSelectionSplash(fioList, initialTab))
                 {
                     splash.StartPosition = FormStartPosition.CenterScreen;
-                    //	splash.TopMost = true;
                     var result = splash.ShowDialog(overlay);
                     if (result == DialogResult.OK && splash.SelectedTab.HasValue)
                     {
@@ -399,7 +403,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         FieldName = "__Header",
                         Caption = "Header",
                         UnboundType = DevExpress.Data.UnboundColumnType.String,
-                        UnboundExpression = "Concat('№пачки: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+                        UnboundExpression =// "Concat('№пачки: ', [n_pach], ' | Задание: ', [pzvNomZad], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
+                         "Concat('№пачки: ', [n_pach], ' | Размер: ', [razm], ' | Кол-во: ', [pzvRKol])",
                         Visible = false,
                         OptionsColumn = { ShowInCustomizationForm = false }
                     };
@@ -415,45 +420,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 advBandedGridView1.OptionsBehavior.AutoExpandAllGroups = true;
                 advBandedGridView1.OptionsBehavior.AlignGroupSummaryInGroupRow = DefaultBoolean.True;
 
-                var existingSummaries = advBandedGridView1.GroupSummary
-                    .OfType<GridGroupSummaryItem>()
-                    .Where(gs => gs.FieldName == "PlanChas_UI" || gs.FieldName == "FactChas_UI")
-                    .ToList();
-                foreach (var summary in existingSummaries)
-                {
-                    advBandedGridView1.GroupSummary.Remove(summary);
-                }
-
-                var planSummary = new GridGroupSummaryItem
-                {
-                    FieldName = "PlanChas_UI",
-                    SummaryType = SummaryItemType.Sum,
-                    DisplayFormat = "{0:0.##}"
-                };
-                advBandedGridView1.GroupSummary.Add(planSummary);
-                _planChasGroupSummaryItem = planSummary;
-
-                var factSummary = new GridGroupSummaryItem
-                {
-                    FieldName = "FactChas_UI",
-                    SummaryType = SummaryItemType.Sum,
-                    DisplayFormat = "{0:0.##}"
-                };
-                advBandedGridView1.GroupSummary.Add(factSummary);
-                _factChasGroupSummaryItem = factSummary;
-
-                if (!_isGroupRowCellHandlerAttached)
-                {
-                    advBandedGridView1.CustomDrawGroupRowCell += (s, e) =>
-                    {
-                        e.Appearance.BackColor = Color.BlanchedAlmond;
-                        e.Appearance.FillRectangle(e.Cache, e.Bounds);
-                        e.Appearance.ForeColor = Color.DimGray;
-                        e.Appearance.DrawString(e.Cache, e.DisplayText, e.Bounds);
-                        e.Handled = true;
-                    };
-                    _isGroupRowCellHandlerAttached = true;
-                }
             }
             finally
             {
@@ -520,21 +486,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         advBandedGridView1?.RefreshData();
                     }));
                     //// снимаем назначение у всех НЕ начатых в текущей смене
-                    //await _orchestrator.UnassignNotStartedByShiftAsync(_currentShiftId);
-
-
-                    //WarnIfMachineFactHoursLessThan12(_currentShiftId);
                     var stat = (await _orchestrator.AdjustNotStartedBeforeShiftEndAsync(_currentShiftId, 12m)).ToList();
-
-                    //var bad = stat.Where(x => x.StillLessThanMin == 1).ToList();
-                    //if (bad.Count > 0)
-                    //{
-                    //    var msg =
-                    //        "По некоторым станкам даже с добором неначатых не набирается 12 часов:\n\n" +
-                    //        string.Join("\n", bad.Select(x => $"• kmlID={x.pzvKmlID}: факт {x.FactHours:0.##} + добор {x.KeptAssignedHours:0.##} = {x.TotalForCheck:0.##}"));
-                    //    XtraMessageBox.Show(this, msg, "Проверка 12 часов", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    //}
-
 
                     if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
                     {
@@ -845,40 +797,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Показываем сообщение после обновления отображения
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
-                //foreach (var row in inProgress)
-                //{
-                //    int plannedQty = row.pzvKolNazn > 0 ? row.pzvKolNazn : (row.pzvKol ?? 0);
-                //    var qtyObj = DevExpress.XtraEditors.XtraInputBox.Show(
-                //        $"Введите фактическое количество для операции {row.pzvNomZad}/{row.pzvArticul}",
-                //        "Завершение операции",
-                //        plannedQty);
-                //    if (qtyObj == null)
-                //        continue; // пропускаем, если отмена
-                //    if (!int.TryParse(qtyObj.ToString(), out int qty) || qty < 0 || qty > plannedQty)
-                //    {
-                //        XtraMessageBox.Show(this, "Значение должно быть в диапазоне 0..план.", "Неверное значение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //        continue;
-                //    }
-
-                //    try
-                //    {
-                //        await _orchestrator.UpdatePzvDateEndAsync(row.pzvID);
-
-                //        if (qty == 0)
-                //        {
-                //            await _orchestrator.SplitPzvAsync(row.pzvID, 2, 0);
-                //        }
-                //        else if (qty < plannedQty)
-                //        {
-                //            await _orchestrator.SplitPzvByFactAsync(row.pzvID, qty);
-                //        }
-                //        // qty == plannedQty: только дата окончания уже поставлена
-                //    }
-                //    catch
-                //    {
-                //        // Игнорируем сбой одной операции, продолжаем остальные
-                //    }
-                //}
             }
             // Неначатые (нет даты старта и окончания) → split mode=2
             var notStarted = rows.Where(r => r.pzvDateStart == null && r.pzvDateEnd == null).ToList();
@@ -896,45 +814,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             return true;
         }
-
-
-
-        private void WarnIfMachineFactHoursLessThan12(int? currentKwsId)
-        {
-            var rows = _planPresenter.AllRows?
-                .Where(r => (r.pzvKwsID ?? 0) == currentKwsId)
-                .Where(r => r.pzvKmlID > 0)
-                .ToList();
-
-            if (rows == null || rows.Count == 0)
-                return;
-
-            const decimal minHours = 12m;
-
-            var bad = rows
-                .GroupBy(r => new { KmlId = r.pzvKmlID!, r.kmlNumber })
-                .Select(g => new
-                {
-                    g.Key.KmlId,
-                    Machine = string.IsNullOrWhiteSpace(g.Key.kmlNumber) ? g.Key.KmlId.ToString() : g.Key.kmlNumber,
-                    Hours = g.Sum(x => x.FactChas_UI)
-                })
-                .Where(x => x.Hours < minHours)
-                .OrderBy(x => x.Machine)
-                .ToList();
-
-            if (!bad.Any())
-                return;
-
-            var msg =
-                "Недобор фактических часов по машинам (< 12 ч):\n\n" +
-                string.Join("\n", bad.Select(x => $"Машина {x.Machine}: {x.Hours:0.##} ч"));
-
-            XtraMessageBox.Show(this, msg, "Проверка часов перед закрытием смены",
-                MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        // Получение выбранных строк теперь через _planPresenter.GetRowsForViewSelection(...)
 
         /// <summary>
         /// Настройка редакторов ячеек для колонок "Начато" и "Закончено":
@@ -1000,7 +879,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _pzvDateEndButtonEdit.Buttons.Clear();
             _pzvDateEndButtonEdit.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Завершить", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, null));
             _pzvDateEndButtonEdit.DoubleClick += PzvDateEndButtonEdit_DoubleClick;
-            //     _pzvDateEndButtonEdit.ButtonClick += PzvDateEndButtonEdit_ButtonClick;
 
             _pzvDateEndTextEdit = new RepositoryItemTextEdit { ReadOnly = true };
             PlanZagrVyazGridControl.RepositoryItems.Add(_pzvDateEndButtonEdit);
@@ -1342,12 +1220,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 if (defaultQty > 0)
                 {
-                    //if (qty == 0)
-                    //{
-                    //    // создаём отрицательную строку mode = 2
-                    //    newIds = await _orchestrator.SplitPzvAsync(currentRow.pzvID, 2, 0);
-                    //}
-                    //else Если сама завершает с фактом 0 - это тот же случай 1 с введённым количеством 
                     if (qty < defaultQty)
                     {
                         // Факт меньше запланированного — mode = 1 c qtyFact
@@ -1514,18 +1386,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             return string.IsNullOrWhiteSpace(kmlNumber) ? string.Empty : kmlNumber.Trim();
         }
 
-        private static string NormalizeArtKey(string articul)
-        {
-            return string.IsNullOrWhiteSpace(articul) ? string.Empty : articul.Trim();
-        }
-
-        private void simpleButton1_Click(object sender, EventArgs e)
-        {
-            //  var a = Block14Composer.Format(textEdit2.Text);
-
-            //  textEdit3.Text = a.ToString();
-        }
-
         /// <summary>
         /// Настраивает таймер бездействия и подписывается на события активности пользователя.
         /// </summary>
@@ -1627,6 +1487,35 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     simpleLabelItem1.Text = $"Смена: {elapsed:hh\\:mm\\:ss}";
                 }
             };
+        }
+        private async void KnitterWorkSpace_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            await ShutdownServiceBrokerAsync();
+        }
+
+        private async Task ShutdownServiceBrokerAsync()
+        {
+            if (Interlocked.Exchange(ref _serviceBrokerShutdownStarted, 1) != 0)
+                return;
+
+            // 1) Сначала отменяем слушание/лупы
+            try { _sbCts?.Cancel(); } catch { }
+
+            // 2) И гарантированно дожидаемся корректной отписки/END CONVERSATION
+            try
+            {
+                if (_sbController != null)
+                    await _sbController.DisposeAsync();
+            }
+            catch
+            {
+                // лог/игнор — но НЕ даём крашить закрытие формы
+            }
+            finally
+            {
+                try { _sbCts?.Dispose(); } catch { }
+                _sbCts = null;
+            }
         }
 
         #region adminToggle
@@ -1890,14 +1779,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             info.GroupText = originalText;
 
             Font baseFont = view.Appearance.GroupRow.Font ?? SystemFonts.DefaultFont;
-            float largeSize = baseFont.Size + 2f;
+            float largeSize = baseFont.Size;// + 1f;
             float smallSize = Math.Max(6f, baseFont.Size - 2f);
 
             FontStyle largeStyle = baseFont.Style | FontStyle.Bold;
             FontStyle smallStyle = baseFont.Style & ~FontStyle.Bold;
 
             Rectangle textBounds = info.Bounds;
-            int left = info.ButtonBounds.Right + 6;
+            int left = info.ButtonBounds.Right;// + 3;
             if (left > textBounds.Left)
                 textBounds = new Rectangle(left, textBounds.Top, Math.Max(0, textBounds.Right - left), textBounds.Height);
 
@@ -1922,23 +1811,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 float x = textBounds.Left;
                 string[] parts = groupText.Split(new[] { " | " }, StringSplitOptions.None);
+                var tokens = new List<(string Text, Font Font, float Width)>(parts.Length * 2);
                 for (int i = 0; i < parts.Length; i++)
                 {
                     string part = parts[i];
                     Font font = IsHeaderEmphasisSegment(part) ? largeFont : smallFont;
-                    SizeF partSize = e.Cache.CalcTextSize(part, font);
-                    var partBounds = new RectangleF(x, textBounds.Top, partSize.Width, textBounds.Height);
-                    e.Graphics.DrawString(part, font, e.Appearance.GetForeBrush(e.Cache), partBounds, format);
-                    x += partSize.Width;
+                    float width = e.Cache.CalcTextSize(part, font).Width;
+                    tokens.Add((part, font, width));
 
                     if (i < parts.Length - 1)
                     {
-                        string separator = " | ";
-                        SizeF sepSize = e.Cache.CalcTextSize(separator, smallFont);
-                        var sepBounds = new RectangleF(x, textBounds.Top, sepSize.Width, textBounds.Height);
-                        e.Graphics.DrawString(separator, smallFont, e.Appearance.GetForeBrush(e.Cache), sepBounds, format);
-                        x += sepSize.Width;
+                        const string separator = " | ";
+                        float sepWidth = e.Cache.CalcTextSize(separator, smallFont).Width;
+                        tokens.Add((separator, smallFont, sepWidth));
                     }
+                }
+
+                foreach (var token in tokens)
+                {
+                    var tokenBounds = new RectangleF(x, textBounds.Top, token.Width, textBounds.Height);
+                    e.Graphics.DrawString(token.Text, token.Font, e.Appearance.GetForeBrush(e.Cache), tokenBounds, format);
+                    x += token.Width;
                 }
             }
 
@@ -2063,16 +1956,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         string.Equals(KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), taskKey, StringComparison.OrdinalIgnoreCase))
                     .ToList() ?? new List<KnitterPZVModel>();
 
-                //decimal? assignedHours = rows.Sum(r => r.PlanChas_UI);//pzvChasNazn);//pzvSekNazn);//
-                //decimal doneHours = rows.Sum(r => r.FactChas_UI ?? 0m);//pzvNChasi ?? 0m);//pzvSek);//
-
-                //decimal? percent = 0m;
-                //if (assignedHours > 0)
-                //{
-                //    percent = doneHours / assignedHours * 100m;
-                //    if (percent > 100m) percent = 100m;
-                //    if (percent < 0m) percent = 0m;
-                //}
                 decimal assignedHours = rows.Sum(r => r.PlanChas_UI ?? 0m);
                 decimal doneHours = rows.Sum(r => r.FactChas_UI ?? 0m);
 
@@ -2395,56 +2278,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         public Task UpdateDataInFormAsync(string tableName)
             => UpdateDataInFormAsync(tableName, fieldsChangedCsv: string.Empty);
-
-
-
-        ///// <summary>
-        ///// Реализация IDataUpdatableFormAsyncV2 - вызывается при изменении данных в БД
-        ///// </summary>
-        //public async Task UpdateDataInFormAsync(string table)
-        //{
-        //    if (_sbHelper == null) return;
-
-        //    try
-        //    {
-        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] UpdateDataInFormAsync: table={table}");
-
-        //        // Пропускаем событие через фильтрацию
-        //        await _sbHelper.HandleBrokerUpdateAsync(table, changedFieldsCsv: null);
-
-        //        // Получаем список затронутых объектов
-        //        var affected = _sbHelper.DrainPending();
-        //        if (affected == null || affected.Count == 0)
-        //        {
-        //            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No affected objects for table {table}");
-        //            return;
-        //        }
-
-        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Affected objects: {string.Join(", ", affected)}");
-
-        //        // Планируем обновления через координатор
-        //        foreach (var objName in affected
-        //            .Where(x => !string.IsNullOrWhiteSpace(x))
-        //            .Distinct(StringComparer.OrdinalIgnoreCase))
-        //        {
-        //            _refreshCoordinator?.Request(objName);
-        //        }
-
-        //        // Логируем статистику координатора
-        //        if (_refreshCoordinator != null)
-        //        {
-        //            var stats = _refreshCoordinator.GetStatistics();
-        //            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex.Message}");
-        //    }
-        //}
-
-
-
 
         private async void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {

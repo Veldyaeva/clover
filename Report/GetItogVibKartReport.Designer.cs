@@ -1,4 +1,4 @@
-﻿namespace SewingProduction.Report
+namespace SewingProduction.Report
 {
     partial class GetItogVibKartReport
     {
@@ -320,7 +320,7 @@
             // 
             this.tableCell3.BackColor = System.Drawing.Color.Transparent;
             this.tableCell3.Dpi = 254F;
-            this.tableCell3.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell3.ForeColor = System.Drawing.Color.Black;
             this.tableCell3.Name = "tableCell3";
             this.tableCell3.StyleName = "GroupCaption1";
             this.tableCell3.StylePriority.UseBackColor = false;
@@ -334,7 +334,7 @@
             this.tableCell4.Dpi = 254F;
             this.tableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[br_n]")});
-            this.tableCell4.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell4.ForeColor = System.Drawing.Color.Black;
             this.tableCell4.Name = "tableCell4";
             this.tableCell4.StyleName = "GroupData1";
             this.tableCell4.StylePriority.UseBackColor = false;
@@ -422,7 +422,7 @@
             // 
             this.tableCell5.BackColor = System.Drawing.Color.Transparent;
             this.tableCell5.Dpi = 254F;
-            this.tableCell5.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell5.ForeColor = System.Drawing.Color.Black;
             this.tableCell5.Name = "tableCell5";
             this.tableCell5.StyleName = "GroupCaption1";
             this.tableCell5.StylePriority.UseBackColor = false;
@@ -436,7 +436,7 @@
             this.tableCell6.Dpi = 254F;
             this.tableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[nn]")});
-            this.tableCell6.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell6.ForeColor = System.Drawing.Color.Black;
             this.tableCell6.Name = "tableCell6";
             this.tableCell6.StyleName = "GroupData1";
             this.tableCell6.StylePriority.UseBackColor = false;
@@ -490,13 +490,13 @@
             // 
             // tableCell7
             // 
-            this.tableCell7.BackColor = System.Drawing.Color.White;
-            this.tableCell7.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell7.BackColor = System.Drawing.Color.White;
+            // this.tableCell7.BorderColor = System.Drawing.Color.Black;
             this.tableCell7.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.tableCell7.BorderWidth = 1F;
             this.tableCell7.Dpi = 254F;
             this.tableCell7.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.tableCell7.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell7.ForeColor = System.Drawing.Color.Black;
             this.tableCell7.Name = "tableCell7";
             this.tableCell7.StyleName = "DetailCaption1";
             this.tableCell7.StylePriority.UseBackColor = false;
@@ -512,13 +512,13 @@
             // 
             // tableCell15
             // 
-            this.tableCell15.BackColor = System.Drawing.Color.White;
-            this.tableCell15.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell15.BackColor = System.Drawing.Color.White;
+            // this.tableCell15.BorderColor = System.Drawing.Color.Black;
             this.tableCell15.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.tableCell15.BorderWidth = 1F;
             this.tableCell15.Dpi = 254F;
             this.tableCell15.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.tableCell15.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell15.ForeColor = System.Drawing.Color.Black;
             this.tableCell15.Name = "tableCell15";
             this.tableCell15.StyleName = "DetailCaption1";
             this.tableCell15.StylePriority.UseBackColor = false;
@@ -532,13 +532,13 @@
             // 
             // tableCell16
             // 
-            this.tableCell16.BackColor = System.Drawing.Color.White;
-            this.tableCell16.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell16.BackColor = System.Drawing.Color.White;
+            // this.tableCell16.BorderColor = System.Drawing.Color.Black;
             this.tableCell16.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.tableCell16.BorderWidth = 1F;
             this.tableCell16.Dpi = 254F;
             this.tableCell16.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.tableCell16.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell16.ForeColor = System.Drawing.Color.Black;
             this.tableCell16.Name = "tableCell16";
             this.tableCell16.StyleName = "DetailCaption1";
             this.tableCell16.StylePriority.UseBackColor = false;
@@ -555,13 +555,13 @@
             // xrTableCell5
             // 
             this.xrTableCell5.Angle = 90F;
-            this.xrTableCell5.BackColor = System.Drawing.Color.White;
-            this.xrTableCell5.BorderColor = System.Drawing.Color.Black;
+            // this.xrTableCell5.BackColor = System.Drawing.Color.White;
+            // this.xrTableCell5.BorderColor = System.Drawing.Color.Black;
             this.xrTableCell5.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell5.BorderWidth = 1F;
             this.xrTableCell5.Dpi = 254F;
             this.xrTableCell5.Font = new DevExpress.Drawing.DXFont("Tahoma", 6F);
-            this.xrTableCell5.ForeColor = System.Drawing.Color.Black;
+            // this.xrTableCell5.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StyleName = "DetailCaption1";
@@ -579,13 +579,13 @@
             // xrTableCell4
             // 
             this.xrTableCell4.Angle = 90F;
-            this.xrTableCell4.BackColor = System.Drawing.Color.White;
-            this.xrTableCell4.BorderColor = System.Drawing.Color.Black;
+            // this.xrTableCell4.BackColor = System.Drawing.Color.White;
+            // this.xrTableCell4.BorderColor = System.Drawing.Color.Black;
             this.xrTableCell4.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell4.BorderWidth = 1F;
             this.xrTableCell4.Dpi = 254F;
             this.xrTableCell4.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.xrTableCell4.ForeColor = System.Drawing.Color.Black;
+            // this.xrTableCell4.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StyleName = "DetailCaption1";
@@ -602,13 +602,13 @@
             // 
             // xrTableCell3
             // 
-            this.xrTableCell3.BackColor = System.Drawing.Color.White;
-            this.xrTableCell3.BorderColor = System.Drawing.Color.Black;
+            // this.xrTableCell3.BackColor = System.Drawing.Color.White;
+            // this.xrTableCell3.BorderColor = System.Drawing.Color.Black;
             this.xrTableCell3.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell3.BorderWidth = 1F;
             this.xrTableCell3.Dpi = 254F;
             this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.xrTableCell3.ForeColor = System.Drawing.Color.Black;
+            // this.xrTableCell3.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.StyleName = "DetailCaption1";
@@ -625,13 +625,13 @@
             // 
             // tableCell18
             // 
-            this.tableCell18.BackColor = System.Drawing.Color.White;
-            this.tableCell18.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell18.BackColor = System.Drawing.Color.White;
+            // this.tableCell18.BorderColor = System.Drawing.Color.Black;
             this.tableCell18.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.tableCell18.BorderWidth = 1F;
             this.tableCell18.Dpi = 254F;
             this.tableCell18.Font = new DevExpress.Drawing.DXFont("Tahoma", 6F);
-            this.tableCell18.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell18.ForeColor = System.Drawing.Color.Black;
             this.tableCell18.Name = "tableCell18";
             this.tableCell18.StyleName = "DetailCaption1";
             this.tableCell18.StylePriority.UseBackColor = false;
@@ -646,13 +646,13 @@
             // 
             // tableCell19
             // 
-            this.tableCell19.BackColor = System.Drawing.Color.White;
-            this.tableCell19.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell19.BackColor = System.Drawing.Color.White;
+            // this.tableCell19.BorderColor = System.Drawing.Color.Black;
             this.tableCell19.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.tableCell19.BorderWidth = 1F;
             this.tableCell19.Dpi = 254F;
             this.tableCell19.Font = new DevExpress.Drawing.DXFont("Tahoma", 7F);
-            this.tableCell19.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell19.ForeColor = System.Drawing.Color.Black;
             this.tableCell19.Name = "tableCell19";
             this.tableCell19.StyleName = "DetailCaption1";
             this.tableCell19.StylePriority.UseBackColor = false;
@@ -668,13 +668,13 @@
             // 
             // tableCell20
             // 
-            this.tableCell20.BackColor = System.Drawing.Color.White;
-            this.tableCell20.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell20.BackColor = System.Drawing.Color.White;
+            // this.tableCell20.BorderColor = System.Drawing.Color.Black;
             this.tableCell20.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.tableCell20.BorderWidth = 1F;
             this.tableCell20.Dpi = 254F;
             this.tableCell20.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.tableCell20.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell20.ForeColor = System.Drawing.Color.Black;
             this.tableCell20.Name = "tableCell20";
             this.tableCell20.StyleName = "DetailCaption1";
             this.tableCell20.StylePriority.UseBackColor = false;
@@ -690,13 +690,13 @@
             // 
             // xrTableCell2
             // 
-            this.xrTableCell2.BackColor = System.Drawing.Color.White;
-            this.xrTableCell2.BorderColor = System.Drawing.Color.Black;
+            // this.xrTableCell2.BackColor = System.Drawing.Color.White;
+            // this.xrTableCell2.BorderColor = System.Drawing.Color.Black;
             this.xrTableCell2.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell2.BorderWidth = 1F;
             this.xrTableCell2.Dpi = 254F;
             this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("Tahoma", 6F);
-            this.xrTableCell2.ForeColor = System.Drawing.Color.Black;
+            // this.xrTableCell2.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StyleName = "DetailCaption1";
@@ -714,14 +714,14 @@
             // tableCell21
             // 
             this.tableCell21.Angle = 90F;
-            this.tableCell21.BackColor = System.Drawing.Color.White;
-            this.tableCell21.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell21.BackColor = System.Drawing.Color.White;
+            // this.tableCell21.BorderColor = System.Drawing.Color.Black;
             this.tableCell21.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.tableCell21.BorderWidth = 1F;
             this.tableCell21.Dpi = 254F;
             this.tableCell21.Font = new DevExpress.Drawing.DXFont("Tahoma", 6F);
-            this.tableCell21.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell21.ForeColor = System.Drawing.Color.Black;
             this.tableCell21.Name = "tableCell21";
             this.tableCell21.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.tableCell21.StyleName = "DetailCaption1";
@@ -740,14 +740,14 @@
             // tableCell22
             // 
             this.tableCell22.Angle = 90F;
-            this.tableCell22.BackColor = System.Drawing.Color.White;
-            this.tableCell22.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell22.BackColor = System.Drawing.Color.White;
+            // this.tableCell22.BorderColor = System.Drawing.Color.Black;
             this.tableCell22.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.tableCell22.BorderWidth = 1F;
             this.tableCell22.Dpi = 254F;
             this.tableCell22.Font = new DevExpress.Drawing.DXFont("Tahoma", 6F);
-            this.tableCell22.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell22.ForeColor = System.Drawing.Color.Black;
             this.tableCell22.Name = "tableCell22";
             this.tableCell22.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.tableCell22.StyleName = "DetailCaption1";
@@ -766,14 +766,14 @@
             // tableCell23
             // 
             this.tableCell23.Angle = 90F;
-            this.tableCell23.BackColor = System.Drawing.Color.White;
-            this.tableCell23.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell23.BackColor = System.Drawing.Color.White;
+            // this.tableCell23.BorderColor = System.Drawing.Color.Black;
             this.tableCell23.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.tableCell23.BorderWidth = 1F;
             this.tableCell23.Dpi = 254F;
             this.tableCell23.Font = new DevExpress.Drawing.DXFont("Tahoma", 7F);
-            this.tableCell23.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell23.ForeColor = System.Drawing.Color.Black;
             this.tableCell23.Name = "tableCell23";
             this.tableCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.tableCell23.StyleName = "DetailCaption1";
@@ -792,14 +792,14 @@
             // tableCell24
             // 
             this.tableCell24.Angle = 90F;
-            this.tableCell24.BackColor = System.Drawing.Color.White;
-            this.tableCell24.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell24.BackColor = System.Drawing.Color.White;
+            // this.tableCell24.BorderColor = System.Drawing.Color.Black;
             this.tableCell24.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.tableCell24.BorderWidth = 1F;
             this.tableCell24.Dpi = 254F;
             this.tableCell24.Font = new DevExpress.Drawing.DXFont("Tahoma", 7F);
-            this.tableCell24.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell24.ForeColor = System.Drawing.Color.Black;
             this.tableCell24.Name = "tableCell24";
             this.tableCell24.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.tableCell24.StyleName = "DetailCaption1";
@@ -818,14 +818,14 @@
             // tableCell25
             // 
             this.tableCell25.Angle = 90F;
-            this.tableCell25.BackColor = System.Drawing.Color.White;
-            this.tableCell25.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell25.BackColor = System.Drawing.Color.White;
+            // this.tableCell25.BorderColor = System.Drawing.Color.Black;
             this.tableCell25.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.tableCell25.BorderWidth = 1F;
             this.tableCell25.Dpi = 254F;
             this.tableCell25.Font = new DevExpress.Drawing.DXFont("Tahoma", 7F);
-            this.tableCell25.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell25.ForeColor = System.Drawing.Color.Black;
             this.tableCell25.Name = "tableCell25";
             this.tableCell25.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
             this.tableCell25.StyleName = "DetailCaption1";
@@ -844,13 +844,13 @@
             // 
             // tableCell26
             // 
-            this.tableCell26.BackColor = System.Drawing.Color.White;
-            this.tableCell26.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell26.BackColor = System.Drawing.Color.White;
+            // this.tableCell26.BorderColor = System.Drawing.Color.Black;
             this.tableCell26.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.tableCell26.BorderWidth = 1F;
             this.tableCell26.Dpi = 254F;
             this.tableCell26.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.tableCell26.ForeColor = System.Drawing.Color.Black;
+            // this.tableCell26.ForeColor = System.Drawing.Color.Black;
             this.tableCell26.Name = "tableCell26";
             this.tableCell26.StyleName = "DetailCaption1";
             this.tableCell26.StylePriority.UseBackColor = false;
@@ -865,13 +865,13 @@
             // 
             // xrTableCell6
             // 
-            this.xrTableCell6.BackColor = System.Drawing.Color.White;
-            this.xrTableCell6.BorderColor = System.Drawing.Color.Black;
+            // this.xrTableCell6.BackColor = System.Drawing.Color.White;
+            // this.xrTableCell6.BorderColor = System.Drawing.Color.Black;
             this.xrTableCell6.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell6.BorderWidth = 1F;
             this.xrTableCell6.Dpi = 254F;
             this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
-            this.xrTableCell6.ForeColor = System.Drawing.Color.Black;
+            // this.xrTableCell6.ForeColor = System.Drawing.Color.Black;
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.StyleName = "DetailCaption1";
@@ -1086,7 +1086,7 @@
             // 
             // tableCell42
             // 
-            this.tableCell42.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell42.BorderColor = System.Drawing.Color.Black;
             this.tableCell42.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right)));
             this.tableCell42.BorderWidth = 1F;
             this.tableCell42.Dpi = 254F;
@@ -1107,7 +1107,7 @@
             // 
             // tableCell43
             // 
-            this.tableCell43.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell43.BorderColor = System.Drawing.Color.Black;
             this.tableCell43.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right)));
             this.tableCell43.BorderWidth = 1F;
             this.tableCell43.Dpi = 254F;
@@ -1128,7 +1128,7 @@
             // 
             // tableCell44
             // 
-            this.tableCell44.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell44.BorderColor = System.Drawing.Color.Black;
             this.tableCell44.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right)));
             this.tableCell44.BorderWidth = 1F;
             this.tableCell44.Dpi = 254F;
@@ -1149,7 +1149,7 @@
             // 
             // tableCell45
             // 
-            this.tableCell45.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell45.BorderColor = System.Drawing.Color.Black;
             this.tableCell45.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right)));
             this.tableCell45.BorderWidth = 1F;
             this.tableCell45.Dpi = 254F;
@@ -1170,7 +1170,7 @@
             // 
             // tableCell46
             // 
-            this.tableCell46.BorderColor = System.Drawing.Color.Black;
+            // this.tableCell46.BorderColor = System.Drawing.Color.Black;
             this.tableCell46.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right)));
             this.tableCell46.BorderWidth = 1F;
             this.tableCell46.Dpi = 254F;
@@ -1270,7 +1270,7 @@
             this.xrLabel8.Dpi = 254F;
             this.xrLabel8.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[br_n]")});
-            this.xrLabel8.ForeColor = System.Drawing.Color.Gray;
+            // this.xrLabel8.ForeColor = System.Drawing.Color.Gray;
             this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(1384.006F, 101.9234F);
             this.xrLabel8.Multiline = true;
             this.xrLabel8.Name = "xrLabel8";
@@ -1658,22 +1658,22 @@
             // Title
             // 
             this.Title.BackColor = System.Drawing.Color.Transparent;
-            this.Title.BorderColor = System.Drawing.Color.Black;
+            // this.Title.BorderColor = System.Drawing.Color.Black;
             this.Title.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.Title.BorderWidth = 1F;
             this.Title.Font = new DevExpress.Drawing.DXFont("Arial", 14.25F);
-            this.Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            // this.Title.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.Title.Name = "Title";
             this.Title.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 15, 0, 0, 254F);
             // 
             // GroupCaption1
             // 
             this.GroupCaption1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.GroupCaption1.BorderColor = System.Drawing.Color.White;
+            // this.GroupCaption1.BorderColor = System.Drawing.Color.White;
             this.GroupCaption1.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.GroupCaption1.BorderWidth = 2F;
             this.GroupCaption1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.GroupCaption1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+            // this.GroupCaption1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
             this.GroupCaption1.Name = "GroupCaption1";
             this.GroupCaption1.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 5, 0, 0, 254F);
             this.GroupCaption1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1681,11 +1681,11 @@
             // GroupData1
             // 
             this.GroupData1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.GroupData1.BorderColor = System.Drawing.Color.White;
+            // this.GroupData1.BorderColor = System.Drawing.Color.White;
             this.GroupData1.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.GroupData1.BorderWidth = 2F;
             this.GroupData1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.GroupData1.ForeColor = System.Drawing.Color.White;
+            // this.GroupData1.ForeColor = System.Drawing.Color.White;
             this.GroupData1.Name = "GroupData1";
             this.GroupData1.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 5, 0, 0, 254F);
             this.GroupData1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1693,11 +1693,11 @@
             // DetailCaption1
             // 
             this.DetailCaption1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.DetailCaption1.BorderColor = System.Drawing.Color.White;
+            // this.DetailCaption1.BorderColor = System.Drawing.Color.White;
             this.DetailCaption1.Borders = DevExpress.XtraPrinting.BorderSide.Left;
             this.DetailCaption1.BorderWidth = 2F;
             this.DetailCaption1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.DetailCaption1.ForeColor = System.Drawing.Color.White;
+            // this.DetailCaption1.ForeColor = System.Drawing.Color.White;
             this.DetailCaption1.Name = "DetailCaption1";
             this.DetailCaption1.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 15, 0, 0, 254F);
             this.DetailCaption1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1708,7 +1708,7 @@
             this.DetailData1.Borders = DevExpress.XtraPrinting.BorderSide.Left;
             this.DetailData1.BorderWidth = 2F;
             this.DetailData1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F);
-            this.DetailData1.ForeColor = System.Drawing.Color.Black;
+            // this.DetailData1.ForeColor = System.Drawing.Color.Black;
             this.DetailData1.Name = "DetailData1";
             this.DetailData1.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 15, 0, 0, 254F);
             this.DetailData1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1716,11 +1716,11 @@
             // GroupFooterBackground3
             // 
             this.GroupFooterBackground3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(131)))), ((int)(((byte)(131)))), ((int)(((byte)(131)))));
-            this.GroupFooterBackground3.BorderColor = System.Drawing.Color.White;
+            // this.GroupFooterBackground3.BorderColor = System.Drawing.Color.White;
             this.GroupFooterBackground3.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.GroupFooterBackground3.BorderWidth = 2F;
             this.GroupFooterBackground3.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.GroupFooterBackground3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
+            // this.GroupFooterBackground3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(228)))), ((int)(((byte)(228)))), ((int)(((byte)(228)))));
             this.GroupFooterBackground3.Name = "GroupFooterBackground3";
             this.GroupFooterBackground3.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 5, 0, 0, 254F);
             this.GroupFooterBackground3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1732,7 +1732,7 @@
             this.DetailData3_Odd.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.DetailData3_Odd.BorderWidth = 1F;
             this.DetailData3_Odd.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F);
-            this.DetailData3_Odd.ForeColor = System.Drawing.Color.Black;
+            // this.DetailData3_Odd.ForeColor = System.Drawing.Color.Black;
             this.DetailData3_Odd.Name = "DetailData3_Odd";
             this.DetailData3_Odd.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 15, 0, 0, 254F);
             this.DetailData3_Odd.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1741,7 +1741,7 @@
             // 
             this.TotalCaption1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.TotalCaption1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.TotalCaption1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(206)))), ((int)(((byte)(206)))));
+            // this.TotalCaption1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(206)))), ((int)(((byte)(206)))), ((int)(((byte)(206)))));
             this.TotalCaption1.Name = "TotalCaption1";
             this.TotalCaption1.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 5, 0, 0, 254F);
             this.TotalCaption1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1750,7 +1750,7 @@
             // 
             this.TotalData1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.TotalData1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.TotalData1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            // this.TotalData1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.TotalData1.Name = "TotalData1";
             this.TotalData1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 15, 0, 0, 254F);
             this.TotalData1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1758,7 +1758,7 @@
             // TotalBackground1
             // 
             this.TotalBackground1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
-            this.TotalBackground1.BorderColor = System.Drawing.Color.White;
+            // this.TotalBackground1.BorderColor = System.Drawing.Color.White;
             this.TotalBackground1.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.TotalBackground1.BorderWidth = 2F;
             this.TotalBackground1.Name = "TotalBackground1";
@@ -1767,7 +1767,7 @@
             // 
             this.GrandTotalCaption1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.GrandTotalCaption1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.GrandTotalCaption1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(147)))), ((int)(((byte)(147)))));
+            // this.GrandTotalCaption1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(147)))), ((int)(((byte)(147)))));
             this.GrandTotalCaption1.Name = "GrandTotalCaption1";
             this.GrandTotalCaption1.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 5, 0, 0, 254F);
             this.GrandTotalCaption1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -1776,14 +1776,14 @@
             // 
             this.GrandTotalData1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.GrandTotalData1.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.GrandTotalData1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            // this.GrandTotalData1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.GrandTotalData1.Name = "GrandTotalData1";
             this.GrandTotalData1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 15, 0, 0, 254F);
             this.GrandTotalData1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // GrandTotalBackground1
             // 
-            this.GrandTotalBackground1.BackColor = System.Drawing.Color.White;
+            // this.GrandTotalBackground1.BackColor = System.Drawing.Color.White;
             this.GrandTotalBackground1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.GrandTotalBackground1.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.GrandTotalBackground1.BorderWidth = 2F;
@@ -1792,7 +1792,7 @@
             // PageInfo
             // 
             this.PageInfo.Font = new DevExpress.Drawing.DXFont("Arial", 8.25F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.PageInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            // this.PageInfo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.PageInfo.Name = "PageInfo";
             this.PageInfo.Padding = new DevExpress.XtraPrinting.PaddingInfo(15, 15, 0, 0, 254F);
             // 

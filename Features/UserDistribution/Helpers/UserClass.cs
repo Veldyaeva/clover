@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Helpers;
@@ -22,6 +24,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         public List<string> Roles { get; set; } = new List<string>();
         public List<UserClass> Children { get; set; } = new List<UserClass>();
         public DataTable myObjectForm;
+        
         public UserClass()
         {
             _userClassDataService = new UserClassDataService(dbHelper);
@@ -41,26 +44,76 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         public async Task LoadObjectForm(string NameForm)
         {
             myObjectForm = await _userClassDataService.GetObjectForm(UserId, NameForm);
+            BuildPermIndex();
         }
-        public bool HasPermission(string objectName, string permissionType)
+        //public bool HasPermission(string objectName, string permissionType)
+        //{
+        //    if (myObjectForm == null || myObjectForm.Rows.Count == 0) 
+        //    { 
+        //        return false; 
+        //    }
+
+        //    foreach (DataRow row in myObjectForm.Rows)
+        //    {
+        //        string objectNameFromTable = row["ObjectName"]?.ToString(); 
+        //        string modeIdFromTable = row["ModeName"]?.ToString();
+        //        if (objectNameFromTable == objectName && modeIdFromTable == permissionType)
+        //        {
+        //            return true;
+        //        }
+        //    }
+        //    return false;
+        //}
+        private HashSet<(string ObjectName, string ModeName)> _permIndex;
+
+        private static string Norm(string s)
+            => (s ?? "").Trim(); // при желании можно .ToUpperInvariant()
+
+        public void BuildPermIndex()
         {
+            _permIndex = new HashSet<(string, string)>();
+
             if (myObjectForm == null || myObjectForm.Rows.Count == 0)
             {
-                // Если DataTable пустой, считаем, что прав нет
-                return false;
+                //Debug.WriteLine("[PermIndex] myObjectForm пустая — индекс пуст.");
+                return;
             }
-            // Ищем строку, где ObjectName соответствует имени объекта и соответствует нужному разрешению
+
             foreach (DataRow row in myObjectForm.Rows)
             {
-                string objectNameFromTable = row["ObjectName"]?.ToString();
-                string modeIdFromTable = row["ModeName"]?.ToString();
-                if (objectNameFromTable == objectName && modeIdFromTable == permissionType)
-                {
-                    return true; // Нашли разрешение
-                }
+                var obj = Norm(row["ObjectName"]?.ToString());
+                var mode = Norm(row["ModeName"]?.ToString());
+
+                if (obj.Length == 0 || mode.Length == 0)
+                    continue;
+
+                _permIndex.Add((obj, mode));
             }
-            return false; // Разрешение не найдено
+
+            //Debug.WriteLine($"[PermIndex] Построен. Записей: {_permIndex.Count}");
         }
+
+        public void ClearPermIndex()
+        {
+            _permIndex = null;
+        }
+
+        public bool HasPermission(string objectName, string permissionType)
+        {
+            if (string.IsNullOrWhiteSpace(objectName) || string.IsNullOrWhiteSpace(permissionType))
+                return false;
+
+            // Если индекс не построен — это почти наверняка причина "нет доступа"
+            if (_permIndex == null)
+            {
+                //Debug.WriteLine("[HasPermission] ⚠ Индекс не построен! BuildPermIndex не вызывался.");
+                return false;
+            }
+
+            var key = (Norm(objectName), Norm(permissionType));
+            return _permIndex.Contains(key);
+        }
+
         public async void ExitUser()
         {
             UserId = 0;

@@ -119,7 +119,7 @@ namespace SewingProduction.Services
         public async Task<List<ArtNormN>> GetArtNormData()
         {
             string query = @" select 
-                   AnnID, kod, grup, RTRIM(LTRIM(articul)) articul, mod, size_label, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
+                   AnnID, kod, trim(grup) grup, TRIM(articul) articul, trim(mod) mod, size_label, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
                     slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId,
                     annDateDel, annCompDel, annDateAdd, annCompAdd, arh
@@ -186,7 +186,7 @@ namespace SewingProduction.Services
             {//            SUBSTRING(kod,1,7) AS kod, 
                 string query = @"
         SELECT 
-                annId, grup,  RTRIM(LTRIM(articul)) articul, mod,size_label, sek, seb, sek_vyaz, 
+                annId, grup,  TRIM(articul) articul, mod,size_label, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
             data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
@@ -245,7 +245,7 @@ namespace SewingProduction.Services
         {
             string query = @"
                 SELECT  
-                    v.annId, v.grup, v.articul, v.mod, v.size_label, v.sek, v.sek_vyaz,
+                    v.annId, trim(v.grup) grup, trim(v.articul) articul, trim(v.mod) mod, v.size_label, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
                     v.data_sozd, v.diz, v.constr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
@@ -278,7 +278,7 @@ namespace SewingProduction.Services
         public async Task<List<MyDataANN>> GetArtNormDataByArticul(string artPrefix)
         {
             string query = @"SELECT 
-                annId, grup, articul, mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
+                annId, trim(grup) grup, trim(articul) articul, trim(mod) mod, size_label, sek, sek_vyaz, data_obn, sek_shv, 
                 status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
                 sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
                 annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
@@ -372,7 +372,7 @@ namespace SewingProduction.Services
                 using (var connection = _dbHelper.GetConnection())
                 {
                     string query = @"SELECT 
- nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,
+ nr.AnnId, nr.N, nr.N1,nr.razryd, Trim(nr.Text) text,
     nr.Sek, nr.Seb, nr.Kod, 
     nr.kod_o AS Kod_o,       
     nr.kod_ob AS KodOb,   
@@ -431,7 +431,7 @@ WHERE nr.annId = @annId";
             using (var connection = _dbHelper.GetConnection())
             {
                 string query = @"SELECT 
- nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,
+ nr.AnnId, nr.N, nr.N1,nr.razryd, trim(nr.Text) text,
     nr.Sek, nr.Seb, nr.Kod, 
     nr.kod_o AS Kod_o,       
     nr.kod_ob AS KodOb,   
@@ -489,7 +489,7 @@ WHERE nr.annId = @annId";
             try
             {
                 string query = @"SELECT 
-                            nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,
+                            nr.AnnId, nr.N, nr.N1,nr.razryd, trim(nr.Text) text,
                             nr.Sek, nr.Seb, nr.Kod, 
                             nr.kod_o AS Kod_o,       
                             nr.kod_ob AS KodOb,   
@@ -528,7 +528,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                    string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                     //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                     //return result.ToList();
                     var list = await connection.QueryAsync<NormRask>(
@@ -548,7 +548,7 @@ WHERE nr.annId = @annId";
             using (
                 var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT id, AnnId, kod_o, Text as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor, spec FROM norm_rask WHERE annId = @annId";
+                string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor, spec FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                 //return result.ToList();
                 var list = await connection.QueryAsync<NormRask>(
@@ -569,7 +569,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT AnnId, kod_o, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                    string query = "SELECT AnnId, kod_o, Trim(Text) text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                     //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                     var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                     return result.ToList();
@@ -580,7 +580,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT AnnId, kod_o, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                string query = "SELECT AnnId, kod_o, Trim(Text) text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                 //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                 var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                 return result.ToList();

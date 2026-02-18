@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using DevExpress.XtraEditors;
 using SewingProduction.Features.UserDistribution.Helpers;
 
@@ -13,7 +13,6 @@ namespace SewingProduction.Core.Class
         public CustomLookUpEdit()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -23,14 +22,8 @@ namespace SewingProduction.Core.Class
             Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)

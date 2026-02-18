@@ -192,10 +192,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAddProfile
             // 
-            customButtonAddProfile.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            // customButtonAddProfile.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAddProfile.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddProfile.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAddProfile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            // customButtonAddProfile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAddProfile.Location = new System.Drawing.Point(1162, 3);
             customButtonAddProfile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAddProfile.Name = "customButtonAddProfile";

@@ -54,7 +54,23 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+        public async Task<BindingList<GostRazmerNabViewModel>> GetGostRazmByIDAsync(int idgost)
+        {
+            try
+            {
+                string query = "select id_gost,id_razmer, trim(razm) as razm from gost_sv_razmer sv inner join gost_razmer gr on sv.id_razmer = gr.id_rost WHERE id_gost = @idgost";
+                var bb = await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { idgost });
+                var ret = new BindingList<GostRazmerNabViewModel>(bb);
+                bb = null;
+                return ret;
 
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetGostRazmByIDAsync");
+                return null;
+            }
+        }
 
 
     }

@@ -1,20 +1,23 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
+using DevExpress.LookAndFeel;
+using DevExpress.XtraBars;
 using DevExpress.XtraTabbedMdi;
 using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.CuttingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Tabel.Forms;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
-using Microsoft.Extensions.DependencyInjection;
-using SewingProduction.Core;
-using SewingProduction.Features.Tabel.Forms;
 
 namespace SewingProduction
 {
@@ -25,10 +28,16 @@ namespace SewingProduction
         private ToolStripMenuItem[] toolStripMenuItems;
         public FormManager _formManager;
         private XtraTabbedMdiManager mdiManager => xtraTabbedMdiManager1;
+        public DevExpress.XtraBars.BarManager MainBarManager => barManager1;
 
         public SpMainForm()
         {
             InitializeComponent();
+            UserLookAndFeel.Default.StyleChanged += (_, __) =>
+            {
+                Properties.Settings.Default.AppSkin = UserLookAndFeel.Default.SkinName;
+                Properties.Settings.Default.Save();
+            };
             UserFilePaths.EnsureFolderExists();
             this.IsMdiContainer = true;
             this.KeyPreview = true;
@@ -41,12 +50,13 @@ namespace SewingProduction
             {
                 this.WindowState = FormWindowState.Maximized;
 
-                _formManager = new FormManager(this, menuStrip1, _user);
+                _formManager = new FormManager(this, barManager1, _user);
                 await _user.LoadUserData();
                 CurrentUser.SetUser(_user);
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm();
+
                 if (SettingsManager.GetSaveOpenTabs())
                     await _formManager.RestoreOpenTabs();
             }
@@ -57,21 +67,21 @@ namespace SewingProduction
         }
 
         #region МЕНЮ
-        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void оПрограммеToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             AboutBox f = new AboutBox();
             f.ShowDialog();
         }
-        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void настройкиToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             SettingsForm f = new SettingsForm(_user);
             f.ShowDialog();
         }
-        private void профильToolStripMenuItem_Click(object sender, EventArgs e)
+        private void профильToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new UserProfile(_user), sender);
+            OpenForm(new UserProfile(_user), e.Item);
         }
-        private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void помощьToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             string helpPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
             showHelpForm(helpPath);
@@ -79,99 +89,99 @@ namespace SewingProduction
         #endregion
         #region Справочники
         #region Оборудование
-        private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
+        private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new OborudBrig(_user), sender);
+            OpenForm(new OborudBrig(_user), e.Item);
         }
-        private void оборудованиеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void оборудованиеToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravOborud(_user), sender);
+            OpenForm(new SpravOborud(_user), e.Item);
         }
-        private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void видыОборудованияToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об.", user: _user), sender);
+            OpenForm(new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об.", user: _user), e.Item);
         }
-        private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
+        private void матрицаКлассовToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об.", user: _user), sender);
+            OpenForm(new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об.", user: _user), e.Item);
         }
-        private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
+        private void видОперацToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций", user: _user), sender);
+            OpenForm(new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций", user: _user), e.Item);
         }
         #endregion
         #region Бригады/цеха
-        private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void бригадыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravBrig(_user, "spBrig", "Справочник Бригад"), sender);
+            OpenForm(new SpravBrig(_user, "spBrig", "Справочник Бригад"), e.Item);
         }
-        private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void цехаToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravZeh(_user, "ZehList", "Справочник Цехов"), sender);
+            OpenForm(new SpravZeh(_user, "ZehList", "Справочник Цехов"), e.Item);
         }
-        private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
+        private void видыПроизводстваToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв", user: _user), sender);
+            OpenForm(new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв", user: _user), e.Item);
         }
         #endregion
-        private void карточкаРасчетаToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void карточкаРасчетаToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new CardByNom(_user), sender);
+            OpenForm(new CardByNom(_user), e.Item);
         }
-        private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
+        private void работникиToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new Fio(_user, "fio", "Справочник работников"), sender);
+            OpenForm(new Fio(_user, "fio", "Справочник работников"), e.Item);
         }
-        private void тарифыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void тарифыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new EditTarif(_user), sender);
+            OpenForm(new EditTarif(_user), e.Item);
         }
-        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
+        private void изделияToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new Articul(_user), sender);
+            OpenForm(new Articul(_user), e.Item);
         }
-        private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
+        private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", rusNameTableSQL: "Список моделей для маркировки"), sender);
+            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", rusNameTableSQL: "Список моделей для маркировки"), e.Item);
         }
         #region Виды браков пряжи
-        private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
+        private void видыБраковНосковToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user: _user, servBrok: false), sender);
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user: _user, servBrok: false), e.Item);
         }
         #endregion
         #endregion
         #region Производство
-        private void оперативноеПланированиеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void оперативноеПланированиеToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new KnittingProductionPlanning(_user), sender);
+            OpenForm(new KnittingProductionPlanning(_user), e.Item);
         }
-        private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
+        private void рабочийСтолМастераToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new PlanZagrBrig(), sender);
+            OpenForm(new PlanZagrBrig(), e.Item);
         }
         #endregion
-        private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
+        private void TeamWorktoolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new TeamWork(_user), sender);
+            OpenForm(new TeamWork(_user), e.Item);
         }
-        private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
+        private void артикулToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new Articul(_user), sender);
+            OpenForm(new Articul(_user), e.Item);
         }
-        private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void карточкаРасчетаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new CardByNom(_user), sender);
+            OpenForm(new CardByNom(_user), e.Item);
         }
         #region процедуры
         /// <summary>
         /// Универсальное открытие формы, если форма открыта, сделает активной
         /// </summary>
         /// <param name="form">Конструктор формы</param>
-        /// <param name="sender">Пункт меню (объект или название) (Можно не передавать)</param>
-        public void OpenForm(Form form, object sender = null)
+        /// <param name="Item">Пункт меню (объект или название) (Можно не передавать)</param>
+        public void OpenForm(Form form, object Item = null)
         {
-            _formManager.OpenForm(form, sender);
+            _formManager.OpenForm(form, Item);
         }
 
         private void SpMainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -190,14 +200,8 @@ namespace SewingProduction
         /// </summary>
         private void LoadObjectForm()
         {
-            var scanner = new MenuScanner(null, _user);
-            foreach (Control control in this.Controls)
-            {
-                if (control is MenuStrip menuStrip)
-                {
-                    scanner.ApplyPermissionsToMenu(menuStrip);
-                }
-            }
+            if (barManager1 != null)
+                barManager1.ApplyPermissions(_user);
         }
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
@@ -254,28 +258,28 @@ namespace SewingProduction
             f.Show();
         }
         #endregion
-        private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
+        private void раскройныйЦехToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new CuttingForm(), sender);
+            OpenForm(new CuttingForm(), e.Item);
         }
-        private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new PlanZagrVyaz(CurrentUser.User), sender);
+            OpenForm(new PlanZagrVyaz(CurrentUser.User), e.Item);
         }
 
-        private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
             var form = AppServices.Services.GetRequiredService<KnitterWorkSpace>();
-            OpenForm(form, sender);
+            OpenForm(form, e.Item);
         }
 
-        private void табельToolStripMenuItem_Click(object sender, EventArgs e)
+        private void табельToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new TabelMain(_user), sender);
+            OpenForm(new TabelMain(_user), e.Item);
         }
-        private void аналитикаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void аналитикаToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new KnittingProductionAnalytics(), sender);
+            OpenForm(new KnittingProductionAnalytics(), e.Item);
         }
     }
 }

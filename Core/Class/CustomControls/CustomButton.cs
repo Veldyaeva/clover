@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -15,6 +15,20 @@ namespace SewingProduction.Core.Class
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = value;
+        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get => base.ForeColor;
+            set => base.ForeColor = value;
+        }
         private UserClass _lastUser;
         /// <summary>
         ///Контролирует видимость элемента на основе прав пользователя в системе
@@ -28,7 +42,6 @@ namespace SewingProduction.Core.Class
         public CustomButton()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
         protected override void OnHandleCreated(EventArgs e)
         {
@@ -44,22 +57,13 @@ namespace SewingProduction.Core.Class
 
         public void ApplyTheme()
         {
-            BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            // Цвета не форсируем: берем из Designer/скина
             Font = ThemeManager.SharedSettings.DefaultFont;
-            FlatStyle = FlatStyle.Standard;
-            FlatAppearance.BorderSize = 1;
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
 
-        private void OnThemeChanged() => ApplyTheme();
-
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
         public void ApplyPermission(UserClass user)
@@ -137,37 +141,53 @@ namespace SewingProduction.Core.Class
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get => base.BackColor;
+            set => base.BackColor = value;
+        }
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get => base.ForeColor;
+            set => base.ForeColor = value;
+        }
         private bool _visiblePermission = true;
         private bool _visibleLogic = true;
+
+        private static bool UseDevExpressSkin =>
+        DevExpress.LookAndFeel.UserLookAndFeel.Default.ActiveSkinName != null;
+        // или заведите свой флаг ThemeManager.UseDevExpressSkin
 
         public CustomSimpleButton()
         {
             ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
         {
-            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            // Оставляем цвета под управлением DevExpress скинов, задаём только шрифт/высоту
             Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-            AppearanceDisabled.BackColor = Color.Green;
-            AppearanceDisabled.ForeColor = Color.GreenYellow;
-            AppearanceDisabled.Options.UseBackColor = true;
-            AppearanceDisabled.Options.UseForeColor = true;
+            Appearance.Options.UseFont = true;
 
             Height = ThemeManager.SharedSettings.ButtonHeight;
         }
+        //private void ResetToSkin()
+        //{
+        //    // Отпускаем цвета, пусть ими управляет скин
+        //    Appearance.BackColor = Color.Empty;
+        //    Appearance.ForeColor = Color.Empty;
+        //    Appearance.BorderColor = Color.Empty;
+        //    Appearance.Options.UseBackColor = false;
+        //    Appearance.Options.UseForeColor = false;
+        //    Appearance.Options.UseBorderColor = false;
 
-        private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
             base.Dispose(disposing);
         }
 

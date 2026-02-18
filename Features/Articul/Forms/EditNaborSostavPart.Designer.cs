@@ -86,23 +86,20 @@
             // 
             // customHeaderLabelMod
             // 
-            customHeaderLabelMod.AutoSize = true;
             customHeaderLabelMod.Dock = System.Windows.Forms.DockStyle.Fill;
-            customHeaderLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customHeaderLabelMod.Location = new System.Drawing.Point(160, 0);
+            customHeaderLabelMod.Location = new System.Drawing.Point(160, 3);
             customHeaderLabelMod.Name = "customHeaderLabelMod";
-            customHeaderLabelMod.Size = new System.Drawing.Size(329, 40);
+            customHeaderLabelMod.Size = new System.Drawing.Size(329, 34);
             customHeaderLabelMod.TabIndex = 24;
             customHeaderLabelMod.Text = "Модель";
+            customHeaderLabelMod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLookUpEditSpravNoskiDetal
             // 
             customLookUpEditSpravNoskiDetal.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditSpravNoskiDetal.Location = new System.Drawing.Point(160, 203);
             customLookUpEditSpravNoskiDetal.Name = "customLookUpEditSpravNoskiDetal";
-            customLookUpEditSpravNoskiDetal.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditSpravNoskiDetal.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseFont = true;
             customLookUpEditSpravNoskiDetal.Properties.Appearance.Options.UseForeColor = true;
@@ -117,9 +114,7 @@
             customLookUpEditCatDynsign.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditCatDynsign.Location = new System.Drawing.Point(160, 163);
             customLookUpEditCatDynsign.Name = "customLookUpEditCatDynsign";
-            customLookUpEditCatDynsign.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditCatDynsign.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditCatDynsign.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditCatDynsign.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditCatDynsign.Properties.Appearance.Options.UseFont = true;
             customLookUpEditCatDynsign.Properties.Appearance.Options.UseForeColor = true;
@@ -134,9 +129,7 @@
             customLookUpEditCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             customLookUpEditCategory.Location = new System.Drawing.Point(160, 123);
             customLookUpEditCategory.Name = "customLookUpEditCategory";
-            customLookUpEditCategory.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditCategory.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditCategory.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditCategory.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditCategory.Properties.Appearance.Options.UseFont = true;
             customLookUpEditCategory.Properties.Appearance.Options.UseForeColor = true;
@@ -152,9 +145,7 @@
             customLookUpEditGroup.Enabled = false;
             customLookUpEditGroup.Location = new System.Drawing.Point(160, 83);
             customLookUpEditGroup.Name = "customLookUpEditGroup";
-            customLookUpEditGroup.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditGroup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditGroup.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditGroup.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditGroup.Properties.Appearance.Options.UseFont = true;
             customLookUpEditGroup.Properties.Appearance.Options.UseForeColor = true;
@@ -166,80 +157,77 @@
             // 
             // customLabelCategory
             // 
-            customLabelCategory.AutoSize = true;
+            customLabelCategory.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelCategory.Appearance.Options.UseFont = true;
             customLabelCategory.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelCategory.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelCategory.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelCategory.Location = new System.Drawing.Point(3, 120);
+            customLabelCategory.Location = new System.Drawing.Point(3, 123);
             customLabelCategory.Name = "customLabelCategory";
-            customLabelCategory.Size = new System.Drawing.Size(151, 40);
+            customLabelCategory.Size = new System.Drawing.Size(151, 34);
             customLabelCategory.TabIndex = 2;
             customLabelCategory.Text = "Категория";
+            customLabelCategory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelGroup
             // 
-            customLabelGroup.AutoSize = true;
+            customLabelGroup.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGroup.Appearance.Options.UseFont = true;
             customLabelGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelGroup.Location = new System.Drawing.Point(3, 80);
+            customLabelGroup.Location = new System.Drawing.Point(3, 83);
             customLabelGroup.Name = "customLabelGroup";
-            customLabelGroup.Size = new System.Drawing.Size(151, 40);
+            customLabelGroup.Size = new System.Drawing.Size(151, 34);
             customLabelGroup.TabIndex = 1;
             customLabelGroup.Text = "Группа";
+            customLabelGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelClass
             // 
-            customLabelClass.AutoSize = true;
+            customLabelClass.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelClass.Appearance.Options.UseFont = true;
             customLabelClass.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelClass.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelClass.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelClass.Location = new System.Drawing.Point(3, 40);
+            customLabelClass.Location = new System.Drawing.Point(3, 43);
             customLabelClass.Name = "customLabelClass";
-            customLabelClass.Size = new System.Drawing.Size(151, 40);
+            customLabelClass.Size = new System.Drawing.Size(151, 34);
             customLabelClass.TabIndex = 0;
             customLabelClass.Text = "Класс";
+            customLabelClass.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customHeaderLabelArt
             // 
-            customHeaderLabelArt.AutoSize = true;
             customHeaderLabelArt.Dock = System.Windows.Forms.DockStyle.Fill;
-            customHeaderLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customHeaderLabelArt.Location = new System.Drawing.Point(3, 0);
+            customHeaderLabelArt.Location = new System.Drawing.Point(3, 3);
             customHeaderLabelArt.Name = "customHeaderLabelArt";
-            customHeaderLabelArt.Size = new System.Drawing.Size(151, 40);
+            customHeaderLabelArt.Size = new System.Drawing.Size(151, 34);
             customHeaderLabelArt.TabIndex = 3;
             customHeaderLabelArt.Text = "Артикул";
+            customHeaderLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelCatDynsign
             // 
-            customLabelCatDynsign.AutoSize = true;
+            customLabelCatDynsign.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelCatDynsign.Appearance.Options.UseFont = true;
             customLabelCatDynsign.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelCatDynsign.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelCatDynsign.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelCatDynsign.Location = new System.Drawing.Point(3, 160);
+            customLabelCatDynsign.Location = new System.Drawing.Point(3, 163);
             customLabelCatDynsign.Name = "customLabelCatDynsign";
-            customLabelCatDynsign.Size = new System.Drawing.Size(151, 40);
+            customLabelCatDynsign.Size = new System.Drawing.Size(151, 34);
             customLabelCatDynsign.TabIndex = 4;
             customLabelCatDynsign.Text = "Признаки";
+            customLabelCatDynsign.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelSpravNoskiDetal
             // 
-            customLabelSpravNoskiDetal.AutoSize = true;
+            customLabelSpravNoskiDetal.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelSpravNoskiDetal.Appearance.Options.UseFont = true;
             customLabelSpravNoskiDetal.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelSpravNoskiDetal.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelSpravNoskiDetal.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelSpravNoskiDetal.Location = new System.Drawing.Point(3, 200);
+            customLabelSpravNoskiDetal.Location = new System.Drawing.Point(3, 203);
             customLabelSpravNoskiDetal.Name = "customLabelSpravNoskiDetal";
-            customLabelSpravNoskiDetal.Size = new System.Drawing.Size(151, 40);
+            customLabelSpravNoskiDetal.Size = new System.Drawing.Size(151, 34);
             customLabelSpravNoskiDetal.TabIndex = 7;
             customLabelSpravNoskiDetal.Text = "Тип категории";
+            customLabelSpravNoskiDetal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customButtonOtm
             // 
-            customButtonOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonOtm.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonOtm.Location = new System.Drawing.Point(3, 283);
             customButtonOtm.Name = "customButtonOtm";
             customButtonOtm.Size = new System.Drawing.Size(151, 39);
@@ -254,9 +242,7 @@
             customLookUpEditClass.Enabled = false;
             customLookUpEditClass.Location = new System.Drawing.Point(160, 43);
             customLookUpEditClass.Name = "customLookUpEditClass";
-            customLookUpEditClass.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customLookUpEditClass.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            customLookUpEditClass.Properties.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customLookUpEditClass.Properties.Appearance.Options.UseBackColor = true;
             customLookUpEditClass.Properties.Appearance.Options.UseFont = true;
             customLookUpEditClass.Properties.Appearance.Options.UseForeColor = true;
@@ -268,9 +254,7 @@
             // 
             // customActionButtonSave
             // 
-            customActionButtonSave.BackColor = System.Drawing.Color.Lavender;
             customActionButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            customActionButtonSave.ForeColor = System.Drawing.Color.DarkSlateBlue;
             customActionButtonSave.Location = new System.Drawing.Point(160, 283);
             customActionButtonSave.Name = "customActionButtonSave";
             customActionButtonSave.Size = new System.Drawing.Size(329, 39);

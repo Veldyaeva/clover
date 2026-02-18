@@ -28,7 +28,7 @@ namespace SewingProduction.Features.SockProduction.Forms
             _dbService = new DbService(_dbHelper);
             _bulkHelper = new BulkHelper();
             _vyazService = new VyazService(_dbHelper);
-            ThemeManager.UpdateTheme(this);
+          //  ThemeManager.UpdateTheme(this);
         }
         private async Task InitializeBindingsAsync()
         {
