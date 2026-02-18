@@ -24,20 +24,6 @@ namespace SewingProduction.Features.Articul.Service
             //_dbHelper = new DatabaseHelper(); 
         }
 
-        public async Task<ArticulModel> GetArtByKodAsync(string kod)
-        {
-            try
-            {
-                string query = "SELECT * FROM sp_articul WHERE kod = @kod";
-                return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPreviewAsyncBindingList");
-                return null;
-            }
-        }
-
         public async Task<List<AddNewKopmlModel>> GetArticulsListAsync()
         {
             try

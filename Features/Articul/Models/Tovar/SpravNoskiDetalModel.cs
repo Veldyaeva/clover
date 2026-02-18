@@ -9,7 +9,7 @@ namespace SewingProduction.Features.Articul.Models
 {
     public class SpravNoskiDetalModel
     {
-        public int id_spr { get; set; }
-        public string name { get; set; }
+        public int Id_spr { get; set; }
+        public string Name { get; set; }
     }
 }

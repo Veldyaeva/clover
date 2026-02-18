@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customHeaderLabelMod = new Core.Class.CustomHeaderLabel();
-            customLookUpEditSpravNoskiDetal = new Core.Class.CustomLookUpEdit();
-            customLookUpEditCatDynsign = new Core.Class.CustomLookUpEdit();
-            customLookUpEditCategory = new Core.Class.CustomLookUpEdit();
-            customLookUpEditGroup = new Core.Class.CustomLookUpEdit();
-            customLabelCategory = new Core.Class.CustomLabel();
-            customLabelGroup = new Core.Class.CustomLabel();
-            customLabelClass = new Core.Class.CustomLabel();
-            customHeaderLabelArt = new Core.Class.CustomHeaderLabel();
-            customLabelCatDynsign = new Core.Class.CustomLabel();
-            customLabelSpravNoskiDetal = new Core.Class.CustomLabel();
-            customButtonOtm = new Core.Class.CustomButton();
-            customLookUpEditClass = new Core.Class.CustomLookUpEdit();
-            customActionButtonSave = new Core.Class.CustomActionButton();
+            customHeaderLabelMod = new SewingProduction.Core.Class.CustomHeaderLabel();
+            customLookUpEditSpravNoskiDetal = new SewingProduction.Core.Class.CustomLookUpEdit();
+            customLookUpEditCatDynsign = new SewingProduction.Core.Class.CustomLookUpEdit();
+            customLookUpEditCategory = new SewingProduction.Core.Class.CustomLookUpEdit();
+            customLookUpEditGroup = new SewingProduction.Core.Class.CustomLookUpEdit();
+            customLabelCategory = new SewingProduction.Core.Class.CustomLabel();
+            customLabelGroup = new SewingProduction.Core.Class.CustomLabel();
+            customLabelClass = new SewingProduction.Core.Class.CustomLabel();
+            customHeaderLabelArt = new SewingProduction.Core.Class.CustomHeaderLabel();
+            customLabelCatDynsign = new SewingProduction.Core.Class.CustomLabel();
+            customLabelSpravNoskiDetal = new SewingProduction.Core.Class.CustomLabel();
+            customButtonOtm = new SewingProduction.Core.Class.CustomButton();
+            customLookUpEditClass = new SewingProduction.Core.Class.CustomLookUpEdit();
+            customActionButtonSave = new SewingProduction.Core.Class.CustomActionButton();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditSpravNoskiDetal.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLookUpEditCatDynsign.Properties).BeginInit();
@@ -149,6 +149,7 @@
             // customLookUpEditGroup
             // 
             customLookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditGroup.Enabled = false;
             customLookUpEditGroup.Location = new System.Drawing.Point(160, 83);
             customLookUpEditGroup.Name = "customLookUpEditGroup";
             customLookUpEditGroup.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -250,6 +251,7 @@
             // customLookUpEditClass
             // 
             customLookUpEditClass.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditClass.Enabled = false;
             customLookUpEditClass.Location = new System.Drawing.Point(160, 43);
             customLookUpEditClass.Name = "customLookUpEditClass";
             customLookUpEditClass.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);

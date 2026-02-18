@@ -74,7 +74,7 @@ namespace SewingProduction.Features.Articul.Service
             );
         }
 
-        public async Task<List<GostModel>> GetGostSostavAsync(int? idGost = null)
+        public async Task<List<GostModel>> GetGostSostavAsync(int? idGost = null, int? idGostChast = null)
         {
             string query = @"SELECT Id_gost_nab AS Id_gost,
                                 Name_gost_nab AS Name_gost,
@@ -82,9 +82,10 @@ namespace SewingProduction.Features.Articul.Service
                                 Tk_id_nab AS Tk_id,
                                 Id_gost AS Id_glav_gost
                             FROM View_gost_nab"
-                            + (idGost.HasValue ? " WHERE Id_gost = @id_gost" :"");
+                            + (idGost.HasValue ? " WHERE Id_gost = @idGost" : "")
+                            + (idGostChast.HasValue ? " WHERE Id_gost_nab = @idGostChast" : "");
 
-            return await _dbService.GetListAsync<GostModel>(query, new { id_gost = idGost});
+            return await _dbService.GetListAsync<GostModel>(query, new { idGost, idGostChast });
         }
         public async Task<List<GostGrupIzdViewModel>> GetGostGrupIzdNaborAsync(int[] Ids = null, int? tkId = null)
         {
@@ -243,6 +244,160 @@ namespace SewingProduction.Features.Articul.Service
             MessageBox.Show("Изменения успешно сохранены!", "Сохранение",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+        
+       
+        public async Task<string> UpdateNaborByKodJsonAsync(
+            string kod,
+            int oldGostMain,
+            int newGostMain,
+            int? oldGroupMain,
+            int? newGroupMain,
+            List<SpArticulNaborSostav> newList,
+            List<SpArticulNaborSostav> oldList)
+        {
+            var head = new
+            {
+                kod = kod,
+                id_gost_main_old = oldGostMain,
+                id_gost_main_new = newGostMain,
+                ag_id_main_old = oldGroupMain,
+                ag_id_main_new = newGroupMain
+            };
+
+            var items = newList
+                .GroupBy(x => x.Tk_id)
+                .Select(g =>
+                {
+                    var newRow = g.First();
+                    var oldRow = oldList.FirstOrDefault(o => o.Tk_id == g.Key);
+                    if (oldRow == null) return null;
+
+                    bool changedMain =
+                        oldRow.Id_gost != newRow.Id_gost ||
+                        oldRow.Ag_id != newRow.Ag_id ||
+                        !string.Equals(oldRow.Sostav, newRow.Sostav, StringComparison.OrdinalIgnoreCase);
+
+                    // размеры
+                    var razmChanges = g
+                        .Select(x =>
+                        {
+                            var oldSize = oldList.FirstOrDefault(o => o.Ans_id == x.Ans_id);
+                            if (oldSize == null) return null;
+
+                            if (oldSize.Razm == x.Razm && oldSize.Razm_all == x.Razm_all)
+                                return null;
+
+                            return new
+                            {
+                                Kod = oldSize.Kod,
+                                Ans_id = oldSize.Ans_id,
+                                razm_old = oldSize.Razm,
+                                razm_new = x.Razm,
+                                razm_all_old = oldSize.Razm_all,
+                                razm_all_new = x.Razm_all
+                            };
+                        })
+                        .Where(r => r != null)
+                        .ToList();
+
+                    if (!changedMain && razmChanges.Count == 0)
+                        return null;
+
+                    return new
+                    {
+                        tk_id = g.Key,
+                        id_gost_old = oldRow.Id_gost,
+                        id_gost_new = newRow.Id_gost,
+                        ag_id_old = oldRow.Ag_id,
+                        ag_id_new = newRow.Ag_id,
+                        sostav_old = oldRow.Sostav,
+                        sostav_new = newRow.Sostav,
+                        razm = razmChanges
+                    };
+                })
+                .Where(x => x != null)
+                .ToList();
+
+            if (items.Count == 0
+                && oldGostMain == newGostMain
+                && oldGroupMain == newGroupMain)
+            {
+                MessageBox.Show("Изменений не обнаружено!", "Сохранение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return null;
+            }
+
+            var finalJson = new
+            {
+                head = head,
+                items = items
+            };
+
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(finalJson, Newtonsoft.Json.Formatting.Indented);
+
+            var result = await _dbService.GetListAsync<dynamic>(
+                "EXEC dbo.UpdateNaborByKodFromJson @ListJson",
+                new { ListJson = json }
+            );
+
+            if (result != null && result.Count > 0)
+            {
+                var row = result.First();
+                int errorCode = row.error;
+                string errorMessage = row.messageerror;
+
+                if (errorCode != 0)
+                    throw new Exception("Ошибка SQL: " + errorMessage);
+            }
+            return json;
+        }
+        public async Task UpdateNaborByNnJsonAsync(string applyBaseJson, List<string> selectedNns)
+        {
+            if (string.IsNullOrWhiteSpace(applyBaseJson))
+                throw new ArgumentException("applyBaseJson пустой", nameof(applyBaseJson));
+
+            if (selectedNns == null || selectedNns.Count == 0)
+            {
+                MessageBox.Show("Не выбраны nn для применения изменений.", "Сохранение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // чистим nn
+            var nns = selectedNns
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Select(x => x.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            if (nns.Count == 0)
+                return;
+
+            // ВАЖНО: в SQL ты читаешь $.selected_nn
+            var jObj = Newtonsoft.Json.Linq.JObject.Parse(applyBaseJson);
+            jObj["selected_nn"] = new Newtonsoft.Json.Linq.JArray(nns);
+
+            string finalJson = jObj.ToString(Newtonsoft.Json.Formatting.Indented);
+
+            var result = await _dbService.GetListAsync<dynamic>(
+                "EXEC dbo.UpdateNaborByNnFromJson @ListJson",
+                new { ListJson = finalJson }
+            );
+
+            // Если процедура вернула ошибку через SELECT messageerror/error (как в твоём старом варианте)
+            if (result != null && result.Count > 0)
+            {
+                var row = result.First();
+                int errorCode = row.error;
+                string errorMessage = row.messageerror;
+
+                if (errorCode != 0)
+                    throw new Exception("Ошибка SQL: " + errorMessage);
+            }
+
+            MessageBox.Show("Изменения применены к выбранным nn!", "Сохранение",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         public async Task<List<GostRazmerNabViewModel>> GetGostRazmerNaborAsync(int? idGost = null)
         {
@@ -263,29 +418,34 @@ namespace SewingProduction.Features.Articul.Service
         }
         public async Task<List<PlanSezonAllModel>> GetPlanSezonAllByKod(int? kodd = null)
         {
-            string query = @"SELECT Psa_id, nn, tb_id, articul, mod, tg_id_n, tgm_id_n, men
+            string query = @"SELECT Psa_id, Nn, Tb_id, Articul, Mod, Tg_id_n, Tgm_id_n, Men, Text_mo
                             FROM plan_sezon_all"
                             + (kodd.HasValue ? " WHERE kodd = @kodd" : "");
 
             return await _dbService.GetListAsync<PlanSezonAllModel>(query, new { kodd });
         }
-        public async Task<List<ArtKomplektModel>> GetArtKomplektByKod(string? nn = null)
+        public async Task<List<ArtKomplektModel>> GetArtKomplektByNn(string? nn = null)
         {
-            string query = @"SELECT ak.Ak_id, ak.tk_id, ak.Parent_nn, ak.id_gost, ak.ag_id_grupgost, t.tk_name, ak.tg_id_n, ak.tgm_id_n
+            string query = @"SELECT ak.Npp, ak.Ak_id, ak.Tk_id, ak.Parent_nn, ak.Id_gost, ak.Ag_id_grupgost, t.Tk_name, ak.Tg_id_n, ak.Tgm_id_n
                             FROM art_komplekt ak
                             LEFT JOIN t_v_n AS t ON t.TK_ID = ak.tk_id"
                             + (nn != null ? " WHERE Parent_nn = @nn" : "");
 
             return await _dbService.GetListAsync<ArtKomplektModel>(query, new { nn });
         }
+        public async Task<ArticulModel> GetArtByKodAsync(string kod)
+        {
+            string query = "SELECT * FROM sp_articul WHERE kod = @kod";
+            return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
+        }
         #region EditNaborSostavPart
         public async Task UpdatePlanSezonAll(PlanSezonAllModel PSA)
         {
-            await _dbService.UpdateEntityAsync("plan_sezon_all", "psa_id", PSA);
+            await _dbService.UpdateEntityAsync("plan_sezon_all", "Psa_id", PSA);
         }
         public async Task UpdateArtKomplekt(ArtKomplektModel AK)
         {
-            await _dbService.UpdateEntityAsync("art_komplekt", "ak_id", AK);
+            await _dbService.UpdateEntityAsync("art_komplekt", "Ak_id", AK);
         }
         public async Task UpdateSpravNoskiDetal(int? id_spr, int? tcds_id)
         {
