@@ -92,9 +92,20 @@ namespace SewingProduction.Core
                 ConfigureServices(services);
                 var provider = services.BuildServiceProvider();
                 AppServices.Configure(provider);
-                SqlDependency.Start(SettingsManager.GetCurrentConnectionString());
-                Application.ApplicationExit += (_, __) =>
-                    SqlDependency.Stop(SettingsManager.GetCurrentConnectionString());
+                //SqlDependency.Start(SettingsManager.GetCurrentConnectionString());
+                //Application.ApplicationExit += (_, __) =>
+                //    SqlDependency.Stop(SettingsManager.GetCurrentConnectionString());
+                var qnConn = SettingsManager.GetCurrentConnectionString();
+                SqlDependency.Start(qnConn);
+                
+                void StopQN()
+                {
+                    try { SqlDependency.Stop(qnConn); } catch { }
+                }
+                
+                Application.ApplicationExit += (_, __) => StopQN();
+                AppDomain.CurrentDomain.ProcessExit += (_, __) => StopQN();
+                AppDomain.CurrentDomain.DomainUnload += (_, __) => StopQN();
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
                     splashScreen.Show();
