@@ -68,7 +68,7 @@ namespace SewingProduction.Features.Articul
 
             //_artPreviewBindingList = new BindingList<SpArtPreviewModel>();
 
-           // ThemeManager.UpdateTheme(this);
+            // ThemeManager.UpdateTheme(this);
         }
         private async Task RefreshArtPreviewAsync()
         {
@@ -711,6 +711,19 @@ namespace SewingProduction.Features.Articul
 
         private void customSimpleButton7_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void PublishedArticles_Click(object sender, EventArgs e)
+        {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new CreateArticulMatr(CurrentUser.User));
+                /*using (CreateArticulMatr f = new CreateArticulMatr(_user))
+                { }*/
+
+            }
+           
 
         }
     }

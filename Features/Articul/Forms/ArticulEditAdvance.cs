@@ -109,8 +109,6 @@ namespace SewingProduction.Features.Articul.Forms
             _nRub_k = nRub_kTask.Result;
             _bindingSourceArtKod.DataSource = edAdvTask.Result;
 
-
-
             //доступ на определенную колонку
             //gridEditAdRazm.InitializeAccess(_user, this.Name, new List<string> { "view_sp_articul" });
 
