@@ -89,17 +89,12 @@ namespace SewingProduction.HelpAdmin.Forms
             labelHelpPath.Text = ResolveHelpPathLikeHelpForm_ProjectRoot() ?? "(не удалось определить путь)";
         }
 
-        /// <summary>
-        /// ВАЖНО: как HelpForm, но root = корень проекта (перед bin), а не AppContext.BaseDirectory
-        /// </summary>
         private string ResolveHelpPathLikeHelpForm_ProjectRoot()
         {
-            // 1) если явно передали путь
             if (!string.IsNullOrWhiteSpace(_filePathOverride))
                 return _filePathOverride;
 
-            // 2) иначе берём активную форму, как HelpForm :contentReference[oaicite:2]{index=2}
-            var activeForm = _formManager.GetActiveForm(); // :contentReference[oaicite:3]{index=3}
+            var activeForm = _formManager.GetActiveForm(); 
             if (activeForm == null)
                 return null;
 
@@ -107,7 +102,6 @@ namespace SewingProduction.HelpAdmin.Forms
             var ns = type.Namespace ?? "";
             var className = type.Name;
 
-            // Убираем только "SewingProduction." в начале, оставляем Features (как у вас) :contentReference[oaicite:4]{index=4}
             string relativeNamespace = ns.StartsWith("SewingProduction.", StringComparison.OrdinalIgnoreCase)
                 ? ns.Substring("SewingProduction.".Length)
                 : ns;
@@ -117,16 +111,11 @@ namespace SewingProduction.HelpAdmin.Forms
                 className + ".html"
             );
 
-            // !!! вот тут отличие: projectRoot не BaseDirectory, а корень проекта
             string projectRoot = GetProjectRootFromBaseDirectory();
 
             return Path.Combine(projectRoot, "Help", relativePath);
         }
 
-        /// <summary>
-        /// AppContext.BaseDirectory обычно: ...\bin\Debug\net8.0-windows7.0\
-        /// Поднимаемся вверх, пока не найдём папку "bin", и берём её Parent.
-        /// </summary>
         public static string GetProjectRootFromBaseDirectory()
         {
             var dir = new DirectoryInfo(AppContext.BaseDirectory);
