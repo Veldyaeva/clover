@@ -2091,7 +2091,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _xColumn = view.FocusedColumn.FieldName;
                 _xPzvID = Convert.ToInt32(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvID));
                 int tab = Convert.ToInt32(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvTab));
-                int xSelected = Convert.ToInt32(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListSyncSelection));
                 DateTime _OlPvDateNaznKm = Convert.ToDateTime(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPvDateNaznKm));
                 DateTime _OlPvDateNaznTab = Convert.ToDateTime(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvDateNaznTab));
                 DateTime _OlPvDateStart = Convert.ToDateTime(view.GetRowCellValue(hit.RowHandle, gridColumnPZVOperListOlPzvDateStart));
@@ -2177,32 +2176,31 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 if (hit.InColumnPanel && hit.Column == gridColumnPZVOperListSyncSelection)
                 {
+                    int xSelected = Convert.ToInt32(gridViewPZVOperList.GetRowCellValue(0, gridColumnPZVOperListSyncSelection));
                     int newValue = (xSelected == 0) ? 1 : 0;
 
-                    view.BeginUpdate();
-                    view.GridControl.BeginUpdate();
-                    try
-                    {
-                        // массовое изменение только видимых (после фильтра) строк
-                        for (int i = 0; i < view.DataRowCount; i++)
-                        {
-                            //int rowHandle = view.GetVisibleRowHandle(i);
-                            //if (!view.IsDataRow(rowHandle))
-                            //    continue;
+                    _gridHelper.SetIntValueForFilteredRecordsInGrid(gridViewPZVOperList, gridColumnPZVOperListSyncSelection, newValue);
 
-                            //view.SetRowCellValue(rowHandle, gridColumnPZVOperListSyncSelection, newValue);
-                            int rh = view.GetVisibleRowHandle(i);
-                            if (!view.IsDataRow(rh)) continue;
-                            view.SetRowCellValue(rh, gridColumnPZVOperListSyncSelection, newValue);
-                        }
-                        view.PostEditor();
-                        view.UpdateCurrentRow();
-                    }
-                    finally
-                    {
-                        view.GridControl.EndUpdate();
-                        view.EndUpdate();
-                    }
+                    //view.BeginUpdate();
+                    //view.GridControl.BeginUpdate();
+                    //try
+                    //{
+                    //    Enumerable.Range(0, view.RowCount)
+                    //    .Where(view.IsDataRow) // отсекаем group rows и прочие
+                    //    .ToList()
+                    //    .ForEach(rh =>
+                    //    {
+                    //        view.SetRowCellValue(rh, gridColumnPZVOperListSyncSelection, newValue);
+                    //        //view.PostEditor();
+                    //    });
+                    //    view.PostEditor();
+                    //    view.UpdateCurrentRow();
+                    //}
+                    //finally
+                    //{
+                    //    view.GridControl.EndUpdate();
+                    //    view.EndUpdate();
+                    //}
                 }
 
                 // нужен именно заголовок колонки
