@@ -1,4 +1,6 @@
-﻿using SewingProduction.Features.Articul.Service;
+﻿using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -19,7 +21,7 @@ namespace SewingProduction.Features.Articul.Forms
     {
         private DatabaseHelper _dbHelper;
         private DbService _dbService;
-        private CreateArticulMatrService CreateArticulMatrService = new CreateArticulMatrService();
+        private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
         private readonly ILogger _logger = new FileLogger();
 
 
@@ -35,17 +37,45 @@ namespace SewingProduction.Features.Articul.Forms
             _bindingSourceArtMatr = new BindingSource { };
             //if (gridArtMatr != null) gridArtMatr.DataSource = _bindingSourceArtMatr;
             gridArtMatr.DataSource = _bindingSourceArtMatr;
-
+            
+            InitializeBindings();
         }
 
         private async void CreateArticulMatr_Load(object sender, EventArgs e)
         {
             //загрузка данных для отображения в гриде
             gridViewArtMatr.ShowLoadingPanel();
-            var getArtTask = await CreateArticulMatrService.GetMatrForArticulAsync();
+            var getArtTask = await _createArticulMatrService.GetMatrForArticulAsync();
             _bindingSourceArtMatr.DataSource = getArtTask;
+
             gridViewArtMatr.HideLoadingPanel();
 
+        }
+        private void InitializeBindings()
+        {
+            gcGrupmen_name.FieldName = nameof(CreateArticulMatrModel.Grupmen_name);
+            gcTsn_name.FieldName = nameof(CreateArticulMatrModel.Tsn_name);
+            gcTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
+            gcMod.FieldName = nameof(CreateArticulMatrModel.Mod);
+            gcArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
+            gcTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
+            gcGrup.FieldName = nameof(CreateArticulMatrModel.Grup);
+            gcText_mo.FieldName = nameof(CreateArticulMatrModel.Text_mo);
+            gcP.FieldName = nameof(CreateArticulMatrModel.P);
+            gcPrinter.FieldName = nameof(CreateArticulMatrModel.Printer);
+            gcBus.FieldName = nameof(CreateArticulMatrModel.Bus);
+            gcStra.FieldName = nameof(CreateArticulMatrModel.Stra);
+            gcV.FieldName = nameof(CreateArticulMatrModel.V);
+            gcKruj.FieldName = nameof(CreateArticulMatrModel.Kruj);
+            gcTkan.FieldName = nameof(CreateArticulMatrModel.Tkan);
+            gcSost.FieldName = nameof(CreateArticulMatrModel.Sost);
+            gcSost2.FieldName = nameof(CreateArticulMatrModel.Sost2);
+            gcSost3.FieldName = nameof(CreateArticulMatrModel.Sost3);
+            gcRazmNames.FieldName = nameof(CreateArticulMatrModel.RazmNames);
+            gcDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
+
+
+            //txbGostId.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true);
         }
     }
 }
