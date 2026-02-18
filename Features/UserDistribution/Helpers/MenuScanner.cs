@@ -1,6 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using DevExpress.XtraBars;
 using SewingProduction.Features.UserDistribution.Forms;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
@@ -16,67 +19,101 @@ namespace SewingProduction.Features.UserDistribution.Helpers
             _user = user;
         }
 
-        public async Task ScanAndInsertMenuAsync(MenuStrip menuStrip, int formId)
+        #region === DevExpress BarManager Scan ===
+
+        public async Task ScanAndInsertBarAsync(BarManager manager, int formId)
         {
-            foreach (ToolStripMenuItem item in menuStrip.Items)
+            if (_adminFormDataService == null) return;
+            if (manager == null) return;
+
+            // Защита от циклов / повторов
+            var visited = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (Bar bar in manager.Bars)
             {
-                await ScanMenuItemAsync(item, formId);
-            }
-        }
+                if (bar == null) continue;
 
-        private async Task ScanMenuItemAsync(ToolStripMenuItem item, int formId)
-        {
-            string name = item.Name;
-            string text = item.Text;
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                bool exists = await _adminFormDataService.ObjectExists(formId, name);
-
-                if (!exists)
+                foreach (BarItemLink link in bar.ItemLinks)
                 {
-                    await _adminFormDataService.InsertObjectForm(name, text, "ToolStripMenuItem", _user.UserId, formId);
-                    Debug.WriteLine($"[MenuScanner] ✅ Добавлен: Name = {name}, Text = {text}");
-                }
-                else
-                {
-                    Debug.WriteLine($"[MenuScanner] ⚠️ Уже существует: Name = {name}, Text = {text}");
-                }
-            }
+                    var item = link?.Item;
+                    if (item == null) continue;
 
-            foreach (ToolStripItem subItem in item.DropDownItems)
-            {
-                if (subItem is ToolStripMenuItem subMenuItem)
-                {
-                    await ScanMenuItemAsync(subMenuItem, formId);
+                    await ScanBarItemAsync(item, formId, visited);
                 }
             }
         }
-        public void ApplyPermissionsToMenu(MenuStrip menuStrip)
-        {
-            ApplyPermissionsToMenuItems(menuStrip.Items);
-        }
 
-        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items, int indentLevel = 0)
+        private async Task ScanBarItemAsync(BarItem item, int formId, HashSet<string> visited)
         {
-            foreach (ToolStripItem item in items)
+            if (item == null) return;
+            if (visited == null) return;
+
+            // скины/темы не пишем в БД
+            if (IsDevExpressSkinItem(item))
+                return;
+
+            // КЛЮЧ — ТОЛЬКО Name (как ты и сказал)
+            string name = (item.Name ?? "").Trim();
+            if (string.IsNullOrWhiteSpace(name))
+                return;
+
+            // если уже проходили — выходим (иначе легко зациклиться на ссылках)
+            if (!visited.Add(name))
+                return;
+
+            string caption = GetBarCaption(item);
+            string typeName = item.GetType().Name;
+
+            bool exists = await _adminFormDataService.ObjectExists(formId, name);
+            if (!exists)
             {
-                if (string.IsNullOrWhiteSpace(item.Name)) continue;
+                await _adminFormDataService.InsertObjectForm(
+                    name,               // object_name (ключ)
+                    caption,            // caption
+                    typeName,           // type
+                    _user?.UserId ?? 0, // кто добавил
+                    formId);
 
-                string objectName = item.Tag as string ?? item.Name;
+                Debug.WriteLine($"[MenuScanner] ✅ Добавлен BarItem: {name} / {caption} ({typeName})");
+            }
 
-                bool hasWrite = _user.HasPermission(objectName, "Редактор");
-                bool hasRead = _user.HasPermission(objectName, "Просмотр");
-
-                item.Visible = hasRead || hasWrite;
-                item.Enabled = hasWrite;
-
-                if (item is ToolStripMenuItem menuItem && menuItem.HasDropDownItems)
+            // рекурсия для подменю
+            if (item is BarSubItem sub)
+            {
+                foreach (BarItemLink childLink in sub.ItemLinks)
                 {
-                    ApplyPermissionsToMenuItems(menuItem.DropDownItems, indentLevel + 1);
+                    var child = childLink?.Item;
+                    if (child == null) continue;
+
+                    await ScanBarItemAsync(child, formId, visited);
                 }
             }
         }
+
+        private static string GetBarCaption(BarItem item)
+        {
+            string cap = item?.Caption ?? "";
+            return cap.Replace("&", "").Trim();
+        }
+
+        private static bool IsDevExpressSkinItem(BarItem item)
+        {
+            if (item == null) return false;
+
+            string fullName = item.GetType().FullName ?? "";
+            if (fullName.Contains("DevExpress.XtraBars.SkinBarSubItem", StringComparison.OrdinalIgnoreCase) ||
+                fullName.Contains("DevExpress.XtraBars.SkinDropDownButtonItem", StringComparison.OrdinalIgnoreCase) ||
+                fullName.Contains("DevExpress.XtraBars.SkinPaletteDropDownButtonItem", StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            string name = item.Name ?? "";
+            if (!string.IsNullOrWhiteSpace(name) &&
+                name.StartsWith("skin", StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            return false;
+        }
+
+        #endregion
     }
-
 }

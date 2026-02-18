@@ -141,9 +141,9 @@ namespace SewingProduction
             _sockService = new SockService(_dbHelper);
             _nastilService = new NastilService(_dbHelper);
             _dbService = new DbService(_dbHelper);
-            Form mainForm = Application.OpenForms["SpMainForm"];
-            MenuStrip mainMenu = mainForm.MainMenuStrip;
-            _formManager = new FormManager(mainForm, mainMenu, _user);
+            //Form mainForm = Application.OpenForms["SpMainForm"];
+            //MenuStrip mainMenu = mainForm.MainMenuStrip;
+            //_formManager = new FormManager(mainForm, mainMenu, _user);
             //ApplyTheme();
             //ThemeManager.UpdateTheme(this);
             tbNomZad.Enter += tbNomZad_Enter;
