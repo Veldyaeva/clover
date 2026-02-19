@@ -1,6 +1,7 @@
 ﻿using DevExpress.Charts.Model;
 using DevExpress.Data.Utils;
 using DevExpress.DataAccess.Sql;
+using DevExpress.LookAndFeel.Design;
 using DevExpress.Utils;
 using DevExpress.Utils.DPI;
 using DevExpress.XtraDiagram.Bars;
@@ -1120,7 +1121,7 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             int grId = Convert.ToInt32(lookUpEditGr.EditValue);
             TimeSheetReportSkladi report1 = new TimeSheetReportSkladi();
-            report1.RequestParameters = false;
+            report1.RequestParameters = true;
             report1.Parameters["groupString"].Value = "zl";
             report1.Parameters["groupString"].Visible = false;
             //report1.Parameters["idgr"].Value = grId;
@@ -1128,7 +1129,9 @@ namespace SewingProduction.Features.Tabel.Forms
             report1.Parameters["mg"].Value = currentMG;
             report1.Parameters["mg"].Visible = false;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            reportPrintTool1.ShowPreviewDialog();
+            reportPrintTool1.ShowPreview(UserLookAndFeelDefault.Default);
+
+
         }
     }
 }
