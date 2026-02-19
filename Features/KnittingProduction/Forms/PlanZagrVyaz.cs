@@ -792,6 +792,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridViewPZVOperList.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.AllowEdit = true;
                 gridColumnPZVOperListSyncSelection.OptionsColumn.ReadOnly = false;
+
+                //gridViewPZVOperList.DoubleClick += gridViewPZVOperList_DoubleClick;
+
                 #endregion
 
                 #region описание блока Информация по операции
@@ -2075,6 +2078,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
+                //var view = (GridView)sender;
+                //// где именно кликнули
+                //var pt = view.GridControl.PointToClient(Control.MousePosition);
+                //var hit = view.CalcHitInfo(pt);
+
                 var view = sender as GridView;
                 if (view == null) return;
 
@@ -2165,6 +2173,46 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         MasterCancelConfirmation();
                     }
                 }
+
+                if (hit.InColumnPanel && hit.Column == gridColumnPZVOperListSyncSelection)
+                {
+                    int xSelected = Convert.ToInt32(gridViewPZVOperList.GetRowCellValue(0, gridColumnPZVOperListSyncSelection));
+                    int newValue = (xSelected == 0) ? 1 : 0;
+
+                    _gridHelper.SetIntValueForFilteredRecordsInGrid(gridViewPZVOperList, gridColumnPZVOperListSyncSelection, newValue);
+
+                    //view.BeginUpdate();
+                    //view.GridControl.BeginUpdate();
+                    //try
+                    //{
+                    //    Enumerable.Range(0, view.RowCount)
+                    //    .Where(view.IsDataRow) // отсекаем group rows и прочие
+                    //    .ToList()
+                    //    .ForEach(rh =>
+                    //    {
+                    //        view.SetRowCellValue(rh, gridColumnPZVOperListSyncSelection, newValue);
+                    //        //view.PostEditor();
+                    //    });
+                    //    view.PostEditor();
+                    //    view.UpdateCurrentRow();
+                    //}
+                    //finally
+                    //{
+                    //    view.GridControl.EndUpdate();
+                    //    view.EndUpdate();
+                    //}
+                }
+
+                // нужен именно заголовок колонки
+                //if (!hit.InColumnPanel || hit.Column == null)
+                //    return;
+
+                // только для нужной колонки
+                //if (hit.Column != gridColumnPZVOperListSyncSelection)
+                //    return;
+
+                // значение берём у текущей строки
+                
             }
             catch (Exception ex)
             {

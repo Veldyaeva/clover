@@ -817,13 +817,13 @@ namespace SewingProduction.Helpers
 /// <param name="idSelector"></param>
 /// <param name="idValue"></param>
 /// <param name="columnFieldName"></param>
-public void GoToRowById<T, TKey>(
-            GridView view,
-            BindingSource bindingSource,
-            Func<T, TKey> idSelector,       // поле идентификатора для позиционирования
-            TKey idValue,                   // значение идентификатора
-            string? columnFieldName = null  // колонка, на которую нужно перенести фокус
-)
+    public void GoToRowById<T, TKey>(
+        GridView view,
+        BindingSource bindingSource,
+        Func<T, TKey> idSelector,       // поле идентификатора для позиционирования
+        TKey idValue,                   // значение идентификатора
+        string? columnFieldName = null  // колонка, на которую нужно перенести фокус
+        )
         {
             if (view == null || bindingSource == null)
                 return;
@@ -904,6 +904,36 @@ public void GoToRowById<T, TKey>(
 
         //// строка + колонка
         //GoToRowById<PZVOperList, int>(gridViewPZVOperList, bsPzv, x => x.olPzvID, _pzvID, _column);
+
+        /// <summary>
+        /// Присвоение значения в поле грида по всем строкам. Если на грид наложен фильтр, то только для строк, попадающих в фильтр
+        /// </summary>
+        /// <param name="_view"></param>
+        /// <param name="_grIDColumn"></param>
+        /// <param name="_newValue"></param>
+        public void SetIntValueForFilteredRecordsInGrid<T>(GridView _view, GridColumn _grIDColumn, T _newValue)
+        {
+            _view.BeginUpdate();
+            _view.GridControl.BeginUpdate();
+            try
+            {
+                Enumerable.Range(0, _view.RowCount)
+                .Where(_view.IsDataRow) // отсекаем group rows и прочие
+                .ToList()
+                .ForEach(rh =>
+                {
+                    _view.SetRowCellValue(rh, _grIDColumn, _newValue);
+                    //view.PostEditor();
+                });
+                _view.PostEditor();
+                _view.UpdateCurrentRow();
+            }
+            finally
+            {
+                _view.GridControl.EndUpdate();
+                _view.EndUpdate();
+            }
+        }
 
     }
 }
