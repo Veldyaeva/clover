@@ -1129,7 +1129,7 @@ namespace SewingProduction.Features.Tabel.Forms
             report1.Parameters["mg"].Value = currentMG;
             report1.Parameters["mg"].Visible = false;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            reportPrintTool1.ShowPreview(UserLookAndFeelDefault.Default);
+            reportPrintTool1.ShowPreview();
 
 
         }
