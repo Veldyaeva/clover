@@ -282,7 +282,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 else
                 {
                     // Журнал изменений norm_rasz
-                    query = @"SELECT TOP (100) *
+                    query = @"SELECT TOP (200) *
                               FROM ACE_log.dbo.norm_rasz_updLog nrl
                               WHERE nrl.annId = @annId
                               ORDER BY nrl.nrlID DESC";
