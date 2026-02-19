@@ -78,7 +78,7 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async Task LoadNabor()
         {
-            articulNabor_old = await _articulDataService.GetArtByKodAsync(articulNabor_old?.Kod);
+            articulNabor_old = await _ANSDataService.GetArtByKodAsync(articulNabor_old?.Kod);
             assortModelBindingSource.DataSource = await _ANSDataService.GetAssortAsync();
             tvnModelBindingSource.DataSource = await _ANSDataService.GetTvnAsync();
 
@@ -852,10 +852,10 @@ namespace SewingProduction.Features.Articul.Forms
                 if (mismatch)
                     invalidRazm = true;
             }
-
-            if (invalidRazm)
+            
+            if (invalidRazm && ValidateGost())
             {
-                cLabelInfo.Text = "Размеры не соответсвуют ГОСТу!";
+                cLabelInfo.Text = "Размеры не соответствуют ГОСТу!";
                 return;
             }
             if (emptyGost)
@@ -893,70 +893,81 @@ namespace SewingProduction.Features.Articul.Forms
             cLabelInfo.ForeColor = System.Drawing.Color.Green;
         }
 
+        bool ValidateGost()
+        {
+            if
+            ((customTextBoxGostN_Old.Text == customSearchLookUpEditGostN.Text) &&
+            (customTextBoxKodGost_Old.Text == customSearchLookUpEditGostN.EditValue.ToString()))
+                return false;
+            else
+                return true;
+        }
         #endregion
 
         #region Обработчики кнопок
         private async void customButtonSaveNabor_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    if (customCheckBoxVerified.Checked == false) return;
-            //    GridViewNabor.PostEditor();
-            //    GridViewNabor.UpdateCurrentRow();
-            //    spArticulNaborSostavBindingSource.EndEdit();
+            try
+            {
+                if (customCheckBoxVerified.Checked == false) return;
+                GridViewNabor.PostEditor();
+                GridViewNabor.UpdateCurrentRow();
+                spArticulNaborSostavBindingSource.EndEdit();
                 currentItem = spArticulNaborSostavBindingSource.Current as SpArticulNaborSostav;
-            //    if (currentItem == null)
-            //    {
-            //        MessageBox.Show("Нет выбранной записи для сохранения!", "Внимание",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
-            //    if (_ANSDataService.CheckPovt(currentItem.Kod))
-            //    {
-            //        MessageBox.Show("Изменение невозможно! дубликаты в описании! обратитесь к администратору!", "Внимание",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //        return;
-            //    }
+                if (currentItem == null)
+                {
+                    MessageBox.Show("Нет выбранной записи для сохранения!", "Внимание",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (_ANSDataService.CheckPovt(currentItem.Kod))
+                {
+                    MessageBox.Show("Изменение невозможно! дубликаты в описании! обратитесь к администратору!", "Внимание",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            //    if (_ANSDataService.CheckOpis(currentItem.Kod))
-            //    {
-            //        var result = MessageBox.Show($"Набор уже описан, изменения применятся на весь размерный ряд!,Вы уверены что хотите продолжить?", "Подтверждение",
-            //            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //        if (result != DialogResult.Yes)
-            //            return;
-            //    }
+                if (_ANSDataService.CheckOpis(currentItem.Kod))
+                {
+                    var result = MessageBox.Show($"Набор уже описан, изменения применятся на весь размерный ряд!,Вы уверены что хотите продолжить?", "Подтверждение",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result != DialogResult.Yes)
+                        return;
+                }
 
-            //    int newGostMain = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
-            //    int? newGroupMain = Convert.ToInt32(customSearchLookUpEditGrupN.EditValue);
+                int newGostMain = Convert.ToInt32(customSearchLookUpEditGostN.EditValue);
+                int? newGroupMain = Convert.ToInt32(customSearchLookUpEditGrupN.EditValue);
+                string kodd = currentItem.Kod.Substring(0, 7);
 
-            //    await _ANSDataService.UpdateNaborJsonAsync(
-            //        currentItem.Kod.Substring(0, 7),
-            //        articulNabor_old.Id_gost,
-            //        newGostMain,
-            //        articulNabor_old.Ag_id,
-            //        newGroupMain,
-            //        _listCurrent.ToList(),
-            //        _listOld.ToList());
+                string json = await _ANSDataService.UpdateNaborByKodJsonAsync(
+                    kodd,
+                    articulNabor_old.Id_gost,
+                    newGostMain,
+                    articulNabor_old.Ag_id,
+                    newGroupMain,
+                    _listCurrent.ToList(),
+                    _listOld.ToList());
 
-            //    customGridControlNabor_Old.DataSource = await _ANSDataService.GetByKodAsync(articulNabor_old.Kod);
-            //    GridViewNabor.ExpandAllGroups();
-            //    GridViewNabor_Old.ExpandAllGroups();
-            //    oldAgIdBeforeEdit = currentItem.Ag_id;
-            //    await Task.Delay(50);
-            //    await LoadNabor();
-            //    await ArticulNaborColumnsOld(articulNabor_old.Id_gost);
-            //    await Task.Delay(50);
-            //    await LoadSostav();
-            //    HideTechnicalColumns();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                customGridControlNabor_Old.DataSource = await _ANSDataService.GetByKodAsync(articulNabor_old.Kod);
+                GridViewNabor.ExpandAllGroups();
+                GridViewNabor_Old.ExpandAllGroups();
+                oldAgIdBeforeEdit = currentItem.Ag_id;
+                //await Task.Delay(50);
+                await LoadNabor();
+                await ArticulNaborColumnsOld(articulNabor_old.Id_gost);
+                //await Task.Delay(50);
+                await LoadSostav();
+                HideTechnicalColumns();
 
-            EditNaborSostavMatr f = new EditNaborSostavMatr(_user, Convert.ToInt32(currentItem.Kod.Substring(0, 7)));
-            f.ShowDialog();
+                // Матрица:
+                using var f = new EditNaborSostavMatr(_user, Convert.ToInt32(kodd), json);
+                f.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении: {ex.Message}", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void customCheckBoxVerified_CheckedChanged(object sender, EventArgs e)
         {
