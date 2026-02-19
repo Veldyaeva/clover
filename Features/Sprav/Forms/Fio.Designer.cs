@@ -35,8 +35,8 @@ namespace SewingProduction.form
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fio));
             tableLayoutPanelAll = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonINN = new CustomButton();
-            customButtonOtcDol = new CustomButton();
+            customButtonINN = new CustomSimpleButton();
+            customButtonOtcDol = new CustomSimpleButton();
             customTextBoxInn = new CustomTextBox();
             tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             customCheckBoxDel = new CustomCheckBox();
@@ -80,12 +80,12 @@ namespace SewingProduction.form
             spisok1c_orgName = new DevExpress.XtraGrid.Columns.GridColumn();
             spisok1c_podrName = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonPdrSP = new CustomButton();
-            customButtonSpVed = new CustomButton();
-            customButtonSpOrg1C = new CustomButton();
-            customButtonSpDol1C = new CustomButton();
+            customButtonPdrSP = new CustomSimpleButton();
+            customButtonSpVed = new CustomSimpleButton();
+            customButtonSpOrg1C = new CustomSimpleButton();
+            customButtonSpDol1C = new CustomSimpleButton();
             tableLayoutPanelPech = new System.Windows.Forms.TableLayoutPanel();
-            customButtonPchShk = new CustomButton();
+            customButtonPchShk = new CustomSimpleButton();
             xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             xtraTabPageX = new DevExpress.XtraTab.XtraTabPage();
             xtraTabPagePechSHk = new DevExpress.XtraTab.XtraTabPage();
@@ -94,31 +94,31 @@ namespace SewingProduction.form
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             customTextBoxPechSHK1 = new CustomTextBox();
             customComboBoxPechVed = new CustomComboBox();
-            customButtonPech1 = new CustomButton();
+            customButtonPech1 = new CustomSimpleButton();
             customLabel1 = new CustomLabel();
             customLabel2 = new CustomLabel();
             tabPage2 = new System.Windows.Forms.TabPage();
             tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             customTextBoxPechTab = new CustomTextBox();
             customTextBoxPechSHK2 = new CustomTextBox();
-            customButtonPech2 = new CustomButton();
+            customButtonPech2 = new CustomSimpleButton();
             customLabel3 = new CustomLabel();
             customLabel4 = new CustomLabel();
             xtraTabPageOtchDolg = new DevExpress.XtraTab.XtraTabPage();
             tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonSforming = new CustomButton();
+            customButtonSforming = new CustomSimpleButton();
             radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
             customLabelOtch = new CustomLabel();
             customComboBoxOtch = new CustomComboBox();
             customCheckBoxOsnTab = new CustomCheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonSov = new CustomButton();
-            customButtonAddSov = new CustomButton();
+            customButtonSov = new CustomSimpleButton();
+            customButtonAddSov = new CustomSimpleButton();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonRed = new CustomButton();
-            customButtonAdd = new CustomButton();
-            customButtonSpOrg = new CustomButton();
-            customButtonSpDol = new CustomButton();
+            customButtonRed = new CustomSimpleButton();
+            customButtonAdd = new CustomSimpleButton();
+            customButtonSpOrg = new CustomSimpleButton();
+            customButtonSpDol = new CustomSimpleButton();
             behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(components);
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -213,10 +213,9 @@ namespace SewingProduction.form
             // 
             // customButtonINN
             // 
+            customButtonINN.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonINN.Appearance.Options.UseFont = true;
             customButtonINN.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonINN.FlatAppearance.BorderSize = 0;
-            customButtonINN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonINN.Font = new System.Drawing.Font("Arial", 10F);
             customButtonINN.Location = new System.Drawing.Point(4, 108);
             customButtonINN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonINN.MaximumSize = new System.Drawing.Size(0, 58);
@@ -224,27 +223,23 @@ namespace SewingProduction.form
             customButtonINN.Size = new System.Drawing.Size(154, 32);
             customButtonINN.TabIndex = 7;
             customButtonINN.Text = "Найти по ИНН";
-            customButtonINN.UseVisualStyleBackColor = false;
             customButtonINN.Click += customButtonINN_Click;
             // 
             // customButtonOtcDol
             // 
+            customButtonOtcDol.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOtcDol.Appearance.Options.UseFont = true;
             customButtonOtcDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonOtcDol.FlatAppearance.BorderSize = 0;
-            customButtonOtcDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonOtcDol.Font = new System.Drawing.Font("Arial", 10F);
             customButtonOtcDol.Location = new System.Drawing.Point(4, 318);
             customButtonOtcDol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonOtcDol.Name = "customButtonOtcDol";
             customButtonOtcDol.Size = new System.Drawing.Size(154, 37);
             customButtonOtcDol.TabIndex = 2;
             customButtonOtcDol.Text = "Отчет по должности";
-            customButtonOtcDol.UseVisualStyleBackColor = false;
             customButtonOtcDol.Click += customButtonOtcDol_Click;
             // 
             // customTextBoxInn
             // 
-            customTextBoxInn.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxInn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxInn.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxInn.ErrorColor = System.Drawing.Color.Red;
@@ -926,62 +921,54 @@ namespace SewingProduction.form
             // 
             // customButtonPdrSP
             // 
+            customButtonPdrSP.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPdrSP.Appearance.Options.UseFont = true;
             customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonPdrSP.FlatAppearance.BorderSize = 0;
-            customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
             customButtonPdrSP.Location = new System.Drawing.Point(343, 3);
             customButtonPdrSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPdrSP.Name = "customButtonPdrSP";
             customButtonPdrSP.Size = new System.Drawing.Size(163, 35);
             customButtonPdrSP.TabIndex = 5;
             customButtonPdrSP.Text = "Подразделения ШП - 1С";
-            customButtonPdrSP.UseVisualStyleBackColor = false;
             customButtonPdrSP.Click += customButtonPdrSP_Click;
             // 
             // customButtonSpVed
             // 
+            customButtonSpVed.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpVed.Appearance.Options.UseFont = true;
             customButtonSpVed.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSpVed.FlatAppearance.BorderSize = 0;
-            customButtonSpVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonSpVed.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSpVed.Location = new System.Drawing.Point(343, 44);
             customButtonSpVed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSpVed.Name = "customButtonSpVed";
             customButtonSpVed.Size = new System.Drawing.Size(163, 35);
             customButtonSpVed.TabIndex = 9;
             customButtonSpVed.Text = "Справочник ведомостей";
-            customButtonSpVed.UseVisualStyleBackColor = false;
             customButtonSpVed.Click += customButtonSpVed_Click;
             // 
             // customButtonSpOrg1C
             // 
+            customButtonSpOrg1C.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpOrg1C.Appearance.Options.UseFont = true;
             customButtonSpOrg1C.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSpOrg1C.FlatAppearance.BorderSize = 0;
-            customButtonSpOrg1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonSpOrg1C.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSpOrg1C.Location = new System.Drawing.Point(173, 44);
             customButtonSpOrg1C.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSpOrg1C.Name = "customButtonSpOrg1C";
             customButtonSpOrg1C.Size = new System.Drawing.Size(162, 35);
             customButtonSpOrg1C.TabIndex = 8;
             customButtonSpOrg1C.Text = "Подразделения 1С";
-            customButtonSpOrg1C.UseVisualStyleBackColor = false;
             customButtonSpOrg1C.Click += customButtonSpOrg1C_Click;
             // 
             // customButtonSpDol1C
             // 
+            customButtonSpDol1C.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpDol1C.Appearance.Options.UseFont = true;
             customButtonSpDol1C.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSpDol1C.FlatAppearance.BorderSize = 0;
-            customButtonSpDol1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonSpDol1C.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSpDol1C.Location = new System.Drawing.Point(4, 44);
             customButtonSpDol1C.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSpDol1C.Name = "customButtonSpDol1C";
             customButtonSpDol1C.Size = new System.Drawing.Size(161, 35);
             customButtonSpDol1C.TabIndex = 7;
             customButtonSpDol1C.Text = "Должности 1С";
-            customButtonSpDol1C.UseVisualStyleBackColor = false;
             customButtonSpDol1C.Click += customButtonSpDol1C_Click;
             // 
             // tableLayoutPanelPech
@@ -1015,17 +1002,15 @@ namespace SewingProduction.form
             // 
             // customButtonPchShk
             // 
+            customButtonPchShk.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPchShk.Appearance.Options.UseFont = true;
             customButtonPchShk.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonPchShk.FlatAppearance.BorderSize = 0;
-            customButtonPchShk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonPchShk.Font = new System.Drawing.Font("Arial", 10F);
             customButtonPchShk.Location = new System.Drawing.Point(4, 3);
             customButtonPchShk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPchShk.Name = "customButtonPchShk";
             customButtonPchShk.Size = new System.Drawing.Size(154, 35);
             customButtonPchShk.TabIndex = 4;
             customButtonPchShk.Text = "Печать ШК";
-            customButtonPchShk.UseVisualStyleBackColor = false;
             customButtonPchShk.Click += customButtonPchShk_Click;
             // 
             // xtraTabControl1
@@ -1046,7 +1031,7 @@ namespace SewingProduction.form
             // 
             xtraTabPageX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             xtraTabPageX.Name = "xtraTabPageX";
-            xtraTabPageX.Size = new System.Drawing.Size(146, 213);
+            xtraTabPageX.Size = new System.Drawing.Size(152, 218);
             xtraTabPageX.Text = "Х";
             xtraTabPageX.Paint += xtraTabPageX_Paint;
             // 
@@ -1055,7 +1040,7 @@ namespace SewingProduction.form
             xtraTabPagePechSHk.Controls.Add(tabControlSHK);
             xtraTabPagePechSHk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             xtraTabPagePechSHk.Name = "xtraTabPagePechSHk";
-            xtraTabPagePechSHk.Size = new System.Drawing.Size(146, 213);
+            xtraTabPagePechSHk.Size = new System.Drawing.Size(152, 218);
             xtraTabPagePechSHk.Text = "Печать ШК";
             // 
             // tabControlSHK
@@ -1067,7 +1052,7 @@ namespace SewingProduction.form
             tabControlSHK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabControlSHK.Name = "tabControlSHK";
             tabControlSHK.SelectedIndex = 0;
-            tabControlSHK.Size = new System.Drawing.Size(146, 213);
+            tabControlSHK.Size = new System.Drawing.Size(152, 218);
             tabControlSHK.TabIndex = 5;
             // 
             // tabPage1
@@ -1078,7 +1063,7 @@ namespace SewingProduction.form
             tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabPage1.Size = new System.Drawing.Size(138, 187);
+            tabPage1.Size = new System.Drawing.Size(144, 192);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "По ведомости";
             // 
@@ -1101,21 +1086,20 @@ namespace SewingProduction.form
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(130, 181);
+            tableLayoutPanel5.Size = new System.Drawing.Size(136, 186);
             tableLayoutPanel5.TabIndex = 0;
             // 
             // customTextBoxPechSHK1
             // 
-            customTextBoxPechSHK1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPechSHK1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPechSHK1.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxPechSHK1.ErrorColor = System.Drawing.Color.Red;
             customTextBoxPechSHK1.ErrorMessage = null;
             customTextBoxPechSHK1.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPechSHK1.Location = new System.Drawing.Point(4, 102);
+            customTextBoxPechSHK1.Location = new System.Drawing.Point(4, 103);
             customTextBoxPechSHK1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPechSHK1.Name = "customTextBoxPechSHK1";
-            customTextBoxPechSHK1.Size = new System.Drawing.Size(122, 23);
+            customTextBoxPechSHK1.Size = new System.Drawing.Size(128, 23);
             customTextBoxPechSHK1.TabIndex = 28;
             // 
             // customComboBoxPechVed
@@ -1128,23 +1112,21 @@ namespace SewingProduction.form
             customComboBoxPechVed.Location = new System.Drawing.Point(4, 30);
             customComboBoxPechVed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxPechVed.Name = "customComboBoxPechVed";
-            customComboBoxPechVed.Size = new System.Drawing.Size(122, 24);
+            customComboBoxPechVed.Size = new System.Drawing.Size(128, 24);
             customComboBoxPechVed.TabIndex = 26;
             // 
             // customButtonPech1
             // 
+            customButtonPech1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPech1.Appearance.Options.UseFont = true;
             customButtonPech1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonPech1.FlatAppearance.BorderSize = 0;
-            customButtonPech1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonPech1.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonPech1.Location = new System.Drawing.Point(4, 147);
+            customButtonPech1.Location = new System.Drawing.Point(4, 149);
             customButtonPech1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPech1.MaximumSize = new System.Drawing.Size(0, 58);
             customButtonPech1.Name = "customButtonPech1";
-            customButtonPech1.Size = new System.Drawing.Size(122, 31);
+            customButtonPech1.Size = new System.Drawing.Size(128, 34);
             customButtonPech1.TabIndex = 8;
             customButtonPech1.Text = "Печать";
-            customButtonPech1.UseVisualStyleBackColor = false;
             customButtonPech1.Click += customButtonPech1_Click;
             // 
             // customLabel1
@@ -1154,6 +1136,9 @@ namespace SewingProduction.form
             customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.Appearance.Options.UseBackColor = true;
             customLabel1.Appearance.Options.UseFont = true;
+            customLabel1.Appearance.Options.UseTextOptions = true;
+            customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel1.Location = new System.Drawing.Point(4, 11);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
@@ -1168,8 +1153,11 @@ namespace SewingProduction.form
             customLabel2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.Appearance.Options.UseBackColor = true;
             customLabel2.Appearance.Options.UseFont = true;
+            customLabel2.Appearance.Options.UseTextOptions = true;
+            customLabel2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            customLabel2.Location = new System.Drawing.Point(4, 83);
+            customLabel2.Location = new System.Drawing.Point(4, 84);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(161, 16);
@@ -1185,7 +1173,7 @@ namespace SewingProduction.form
             tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tabPage2.Size = new System.Drawing.Size(138, 187);
+            tabPage2.Size = new System.Drawing.Size(144, 192);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "По таб. №";
             // 
@@ -1208,12 +1196,11 @@ namespace SewingProduction.form
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel6.Size = new System.Drawing.Size(130, 181);
+            tableLayoutPanel6.Size = new System.Drawing.Size(136, 186);
             tableLayoutPanel6.TabIndex = 1;
             // 
             // customTextBoxPechTab
             // 
-            customTextBoxPechTab.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPechTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPechTab.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxPechTab.ErrorColor = System.Drawing.Color.Red;
@@ -1222,37 +1209,34 @@ namespace SewingProduction.form
             customTextBoxPechTab.Location = new System.Drawing.Point(4, 30);
             customTextBoxPechTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPechTab.Name = "customTextBoxPechTab";
-            customTextBoxPechTab.Size = new System.Drawing.Size(122, 23);
+            customTextBoxPechTab.Size = new System.Drawing.Size(128, 23);
             customTextBoxPechTab.TabIndex = 29;
             // 
             // customTextBoxPechSHK2
             // 
-            customTextBoxPechSHK2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
             customTextBoxPechSHK2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxPechSHK2.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxPechSHK2.ErrorColor = System.Drawing.Color.Red;
             customTextBoxPechSHK2.ErrorMessage = null;
             customTextBoxPechSHK2.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxPechSHK2.Location = new System.Drawing.Point(4, 102);
+            customTextBoxPechSHK2.Location = new System.Drawing.Point(4, 103);
             customTextBoxPechSHK2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxPechSHK2.Name = "customTextBoxPechSHK2";
-            customTextBoxPechSHK2.Size = new System.Drawing.Size(122, 23);
+            customTextBoxPechSHK2.Size = new System.Drawing.Size(128, 23);
             customTextBoxPechSHK2.TabIndex = 28;
             // 
             // customButtonPech2
             // 
+            customButtonPech2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPech2.Appearance.Options.UseFont = true;
             customButtonPech2.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonPech2.FlatAppearance.BorderSize = 0;
-            customButtonPech2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonPech2.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonPech2.Location = new System.Drawing.Point(4, 147);
+            customButtonPech2.Location = new System.Drawing.Point(4, 149);
             customButtonPech2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonPech2.MaximumSize = new System.Drawing.Size(0, 58);
             customButtonPech2.Name = "customButtonPech2";
-            customButtonPech2.Size = new System.Drawing.Size(122, 31);
+            customButtonPech2.Size = new System.Drawing.Size(128, 34);
             customButtonPech2.TabIndex = 8;
             customButtonPech2.Text = "Печать";
-            customButtonPech2.UseVisualStyleBackColor = false;
             customButtonPech2.Click += customButtonPech2_Click;
             // 
             // customLabel3
@@ -1262,6 +1246,9 @@ namespace SewingProduction.form
             customLabel3.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.Appearance.Options.UseBackColor = true;
             customLabel3.Appearance.Options.UseFont = true;
+            customLabel3.Appearance.Options.UseTextOptions = true;
+            customLabel3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel3.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel3.Location = new System.Drawing.Point(4, 11);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
@@ -1276,8 +1263,11 @@ namespace SewingProduction.form
             customLabel4.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabel4.Appearance.Options.UseBackColor = true;
             customLabel4.Appearance.Options.UseFont = true;
+            customLabel4.Appearance.Options.UseTextOptions = true;
+            customLabel4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel4.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            customLabel4.Location = new System.Drawing.Point(4, 83);
+            customLabel4.Location = new System.Drawing.Point(4, 84);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new System.Drawing.Size(63, 16);
@@ -1291,7 +1281,7 @@ namespace SewingProduction.form
             xtraTabPageOtchDolg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             xtraTabPageOtchDolg.Name = "xtraTabPageOtchDolg";
             xtraTabPageOtchDolg.PageVisible = false;
-            xtraTabPageOtchDolg.Size = new System.Drawing.Size(146, 213);
+            xtraTabPageOtchDolg.Size = new System.Drawing.Size(152, 218);
             xtraTabPageOtchDolg.Text = "Отчет по должности";
             // 
             // tableLayoutPanel8
@@ -1313,24 +1303,22 @@ namespace SewingProduction.form
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel8.Size = new System.Drawing.Size(146, 213);
+            tableLayoutPanel8.Size = new System.Drawing.Size(152, 218);
             tableLayoutPanel8.TabIndex = 1;
             tableLayoutPanel8.Paint += tableLayoutPanel8_Paint;
             // 
             // customButtonSforming
             // 
+            customButtonSforming.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSforming.Appearance.Options.UseFont = true;
             customButtonSforming.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSforming.FlatAppearance.BorderSize = 0;
-            customButtonSforming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonSforming.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSforming.Location = new System.Drawing.Point(4, 171);
+            customButtonSforming.Location = new System.Drawing.Point(4, 175);
             customButtonSforming.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSforming.MaximumSize = new System.Drawing.Size(0, 58);
             customButtonSforming.Name = "customButtonSforming";
-            customButtonSforming.Size = new System.Drawing.Size(138, 39);
+            customButtonSforming.Size = new System.Drawing.Size(144, 40);
             customButtonSforming.TabIndex = 8;
             customButtonSforming.Text = "Сформировать";
-            customButtonSforming.UseVisualStyleBackColor = false;
             customButtonSforming.Click += customButtonSforming_Click;
             // 
             // radioGroup1
@@ -1341,7 +1329,7 @@ namespace SewingProduction.form
             radioGroup1.Name = "radioGroup1";
             radioGroup1.Properties.Columns = 1;
             radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По организации", true, null, ""), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По подразделению 1С"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По табелю ШП") });
-            radioGroup1.Size = new System.Drawing.Size(138, 68);
+            radioGroup1.Size = new System.Drawing.Size(144, 70);
             radioGroup1.TabIndex = 28;
             radioGroup1.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
             // 
@@ -1352,7 +1340,10 @@ namespace SewingProduction.form
             customLabelOtch.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelOtch.Appearance.Options.UseBackColor = true;
             customLabelOtch.Appearance.Options.UseFont = true;
-            customLabelOtch.Location = new System.Drawing.Point(4, 110);
+            customLabelOtch.Appearance.Options.UseTextOptions = true;
+            customLabelOtch.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelOtch.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            customLabelOtch.Location = new System.Drawing.Point(4, 113);
             customLabelOtch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelOtch.Name = "customLabelOtch";
             customLabelOtch.Size = new System.Drawing.Size(32, 16);
@@ -1367,10 +1358,10 @@ namespace SewingProduction.form
             customComboBoxOtch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             customComboBoxOtch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customComboBoxOtch.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxOtch.Location = new System.Drawing.Point(4, 129);
+            customComboBoxOtch.Location = new System.Drawing.Point(4, 132);
             customComboBoxOtch.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxOtch.Name = "customComboBoxOtch";
-            customComboBoxOtch.Size = new System.Drawing.Size(138, 24);
+            customComboBoxOtch.Size = new System.Drawing.Size(144, 24);
             customComboBoxOtch.TabIndex = 26;
             // 
             // customCheckBoxOsnTab
@@ -1379,10 +1370,10 @@ namespace SewingProduction.form
             customCheckBoxOsnTab.Checked = true;
             customCheckBoxOsnTab.CheckState = System.Windows.Forms.CheckState.Checked;
             customCheckBoxOsnTab.Font = new System.Drawing.Font("Arial", 10F);
-            customCheckBoxOsnTab.Location = new System.Drawing.Point(4, 77);
+            customCheckBoxOsnTab.Location = new System.Drawing.Point(4, 79);
             customCheckBoxOsnTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customCheckBoxOsnTab.Name = "customCheckBoxOsnTab";
-            customCheckBoxOsnTab.Size = new System.Drawing.Size(138, 20);
+            customCheckBoxOsnTab.Size = new System.Drawing.Size(144, 20);
             customCheckBoxOsnTab.TabIndex = 27;
             customCheckBoxOsnTab.Text = "Основные табельные";
             customCheckBoxOsnTab.UseVisualStyleBackColor = true;
@@ -1410,32 +1401,28 @@ namespace SewingProduction.form
             // 
             // customButtonSov
             // 
+            customButtonSov.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSov.Appearance.Options.UseFont = true;
             customButtonSov.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSov.FlatAppearance.BorderSize = 0;
-            customButtonSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonSov.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSov.Location = new System.Drawing.Point(4, 3);
             customButtonSov.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSov.Name = "customButtonSov";
             customButtonSov.Size = new System.Drawing.Size(154, 36);
             customButtonSov.TabIndex = 1;
             customButtonSov.Text = "Совместители";
-            customButtonSov.UseVisualStyleBackColor = false;
             customButtonSov.Click += customButtonSov_Click;
             // 
             // customButtonAddSov
             // 
+            customButtonAddSov.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAddSov.Appearance.Options.UseFont = true;
             customButtonAddSov.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAddSov.FlatAppearance.BorderSize = 0;
-            customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonAddSov.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAddSov.Location = new System.Drawing.Point(4, 45);
             customButtonAddSov.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAddSov.Name = "customButtonAddSov";
             customButtonAddSov.Size = new System.Drawing.Size(154, 36);
             customButtonAddSov.TabIndex = 0;
             customButtonAddSov.Text = "Добавить совмест.";
-            customButtonAddSov.UseVisualStyleBackColor = false;
             customButtonAddSov.Click += customButtonAddSov_Click;
             // 
             // tableLayoutPanel2
@@ -1459,60 +1446,52 @@ namespace SewingProduction.form
             // 
             // customButtonRed
             // 
+            customButtonRed.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonRed.Appearance.Options.UseFont = true;
             customButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonRed.FlatAppearance.BorderSize = 0;
-            customButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonRed.Font = new System.Drawing.Font("Arial", 10F);
             customButtonRed.Location = new System.Drawing.Point(173, 3);
             customButtonRed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonRed.Name = "customButtonRed";
             customButtonRed.Size = new System.Drawing.Size(162, 36);
             customButtonRed.TabIndex = 2;
             customButtonRed.Text = "Редактировать";
-            customButtonRed.UseVisualStyleBackColor = false;
             customButtonRed.Click += customButtonRed_Click;
             // 
             // customButtonAdd
             // 
+            customButtonAdd.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAdd.Appearance.Options.UseFont = true;
             customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAdd.FlatAppearance.BorderSize = 0;
-            customButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAdd.Location = new System.Drawing.Point(4, 3);
             customButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAdd.Name = "customButtonAdd";
             customButtonAdd.Size = new System.Drawing.Size(161, 36);
             customButtonAdd.TabIndex = 0;
             customButtonAdd.Text = "Добавить";
-            customButtonAdd.UseVisualStyleBackColor = false;
             customButtonAdd.Click += customButtonAdd_Click;
             // 
             // customButtonSpOrg
             // 
+            customButtonSpOrg.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpOrg.Appearance.Options.UseFont = true;
             customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSpOrg.FlatAppearance.BorderSize = 0;
-            customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
             customButtonSpOrg.Name = "customButtonSpOrg";
             customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
             customButtonSpOrg.TabIndex = 6;
             customButtonSpOrg.Text = "Справочник организаций";
-            customButtonSpOrg.UseVisualStyleBackColor = false;
             customButtonSpOrg.Click += customButtonSpOrg_Click;
             // 
             // customButtonSpDol
             // 
+            customButtonSpDol.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpDol.Appearance.Options.UseFont = true;
             customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSpDol.FlatAppearance.BorderSize = 0;
-            customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSpDol.Location = new System.Drawing.Point(3, 39);
             customButtonSpDol.Name = "customButtonSpDol";
             customButtonSpDol.Size = new System.Drawing.Size(139, 30);
             customButtonSpDol.TabIndex = 5;
             customButtonSpDol.Text = "Справочник должностей";
-            customButtonSpDol.UseVisualStyleBackColor = false;
             customButtonSpDol.Click += customButtonSpDol_Click;
             // 
             // gridColumn4
@@ -1697,17 +1676,17 @@ namespace SewingProduction.form
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelAll;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelPech;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private CustomButton customButtonOtcDol;
-        private CustomButton customButtonSov;
-        private CustomButton customButtonAddSov;
-        private CustomButton customButtonPchShk;
+        private CustomSimpleButton customButtonOtcDol;
+        private CustomSimpleButton customButtonSov;
+        private CustomSimpleButton customButtonAddSov;
+        private CustomSimpleButton customButtonPchShk;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private CustomButton customButtonPdrSP;
-        private CustomButton customButtonSpOrg;
-        private CustomButton customButtonSpDol;
-        private CustomButton customButtonRed;
-        private CustomButton customButtonAdd;
+        private CustomSimpleButton customButtonPdrSP;
+        private CustomSimpleButton customButtonSpOrg;
+        private CustomSimpleButton customButtonSpDol;
+        private CustomSimpleButton customButtonRed;
+        private CustomSimpleButton customButtonAdd;
         private System.Windows.Forms.BindingSource fioList;
         private DevExpress.XtraGrid.GridControl fioGrid;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewFio;
@@ -1755,7 +1734,7 @@ namespace SewingProduction.form
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItr;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private CustomButton customButtonINN;
+        private CustomSimpleButton customButtonINN;
         private DevExpress.XtraGrid.Columns.GridColumn spisok1c_inn;
         private DevExpress.XtraGrid.Columns.GridColumn spisok1c_id;
         private DevExpress.XtraGrid.Columns.GridColumn spisok1c_orgName;
@@ -1767,14 +1746,14 @@ namespace SewingProduction.form
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private CustomButton customButtonPech1;
+        private CustomSimpleButton customButtonPech1;
         private CustomLabel customLabel1;
         private CustomLabel customLabel2;
         private CustomComboBox customComboBoxPechVed;
         private CustomTextBox customTextBoxPechSHK1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private CustomTextBox customTextBoxPechSHK2;
-        private CustomButton customButtonPech2;
+        private CustomSimpleButton customButtonPech2;
         private CustomLabel customLabel3;
         private CustomLabel customLabel4;
         private CustomTextBox customTextBoxPechTab;
@@ -1786,13 +1765,13 @@ namespace SewingProduction.form
         private DevExpress.XtraTab.XtraTabPage xtraTabPageOtchDolg;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private CustomComboBox customComboBoxOtch;
-        private CustomButton customButtonSforming;
+        private CustomSimpleButton customButtonSforming;
         private CustomLabel customLabelOtch;
         private CustomCheckBox customCheckBoxOsnTab;
         private DevExpress.XtraEditors.RadioGroup radioGroup1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageX;
-        private CustomButton customButtonSpOrg1C;
-        private CustomButton customButtonSpDol1C;
-        private CustomButton customButtonSpVed;
+        private CustomSimpleButton customButtonSpOrg1C;
+        private CustomSimpleButton customButtonSpDol1C;
+        private CustomSimpleButton customButtonSpVed;
     }
 }

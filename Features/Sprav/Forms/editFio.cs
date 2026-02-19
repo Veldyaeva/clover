@@ -123,7 +123,7 @@ namespace SewingProduction.form
             customTextBox1CpodrID.Text = _person.podr_id_podr1C;
             customTextBox1CpodrINN.Text = _person.podr_inn_podr1C;
             customComboBox1Cdolg.Text = _person.dolg_name_dolg1C;
-            customTextBox1CdolgID.Text = _person.dolg_d_id;
+            customTextBox1CdolgID.Text = _person.dolg_d_id.ToString();
             customTextBox1CdolgINN.Text = _person.dolg_inn_dolg1C;
         }
         //Добавление сотрудника
