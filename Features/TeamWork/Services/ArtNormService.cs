@@ -441,7 +441,7 @@ WHERE nr.annId = @annId";
     nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,
-    ob.text_ob as TextOb
+    trim(ob.text_ob) as TextOb
 FROM dbo.normraszview nr
 LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
 LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
@@ -499,7 +499,7 @@ WHERE nr.annId = @annId";
                             nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
                             kp.text_proizv as TextProizv,
                             pv.text_vyaz as TextVyaz,
-                            ob.text_ob as TextOb
+                            trim(ob.text_ob) as TextOb
                         FROM dbo.normraszview nr
                         LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
                         LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
@@ -528,7 +528,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                    string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, trim(Obor) Obor FROM norm_rask WHERE annId = @annId";
                     //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                     //return result.ToList();
                     var list = await connection.QueryAsync<NormRask>(
@@ -548,7 +548,7 @@ WHERE nr.annId = @annId";
             using (
                 var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor, spec FROM norm_rask WHERE annId = @annId";
+                string query = "SELECT id, AnnId, kod_o, Trim(Text) as TextRask, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, trim(Obor) Obor, spec FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                 //return result.ToList();
                 var list = await connection.QueryAsync<NormRask>(
