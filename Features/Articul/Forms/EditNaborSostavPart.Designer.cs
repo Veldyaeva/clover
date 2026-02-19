@@ -142,6 +142,7 @@
             // customLookUpEditGroup
             // 
             customLookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditGroup.Enabled = false;
             customLookUpEditGroup.Location = new System.Drawing.Point(160, 83);
             customLookUpEditGroup.Name = "customLookUpEditGroup";
             customLookUpEditGroup.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -238,6 +239,7 @@
             // customLookUpEditClass
             // 
             customLookUpEditClass.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLookUpEditClass.Enabled = false;
             customLookUpEditClass.Location = new System.Drawing.Point(160, 43);
             customLookUpEditClass.Name = "customLookUpEditClass";
             customLookUpEditClass.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);

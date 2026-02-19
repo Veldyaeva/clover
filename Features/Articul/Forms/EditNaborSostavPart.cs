@@ -41,16 +41,17 @@ namespace SewingProduction.Features.Articul.Forms
             switch (_sourceRow)
             {
                 case PlanSezonAllModel p:
-                    if (p.nn == null) { Close(); return; }
-                    ApplyChainByDynsign(p.tgm_id_n);
-                    LoadArticulModel(p.articul,p.mod);
+                    if (p.Nn == null) { Close(); return; }
+                    ApplyChainByDynsign(p.Tgm_id_n);
+                    LoadArticulModel(p.Articul,p.Mod);
                     ApplyVisibilityRules();
                     break;
 
                 case ArtKomplektModel a:
                     if (a.Parent_nn == null) { Close(); return; }
-                    ApplyChainByDynsign(a.tgm_id_n);
+                    ApplyChainByDynsign(a.Tgm_id_n);
                     LoadArticulModel("", "");
+                    ApplyVisibilityRules();
                     break;
 
                 default:
@@ -278,7 +279,7 @@ namespace SewingProduction.Features.Articul.Forms
         {
             bool showNoskiDetal = false;
             if (_sourceRow is PlanSezonAllModel p)
-                showNoskiDetal = p.men?.ToString() == "10";
+                showNoskiDetal = p.Men?.ToString() == "10";
             customLookUpEditSpravNoskiDetal.Visible = showNoskiDetal;
             customLabelSpravNoskiDetal.Visible = showNoskiDetal;
         }
@@ -336,11 +337,11 @@ namespace SewingProduction.Features.Articul.Forms
             switch (_sourceRow)
             {
                 case PlanSezonAllModel p:
-                    p.tg_id_n = tgId;
-                    p.tgm_id_n = tgmId;
+                    p.Tg_id_n = tgId;
+                    p.Tgm_id_n = tgmId;
                     await _ANSDataService.UpdatePlanSezonAll(p);
 
-                    if (p.men.ToString() == "10")
+                    if (p.Men.ToString() == "10")
                     {
                         var id_spr = customLookUpEditSpravNoskiDetal.EditValue as int?;
                         var TCDS_id = customLookUpEditCatDynsign.EditValue as int?;
@@ -349,8 +350,8 @@ namespace SewingProduction.Features.Articul.Forms
                     break;
 
                 case ArtKomplektModel a:
-                    a.tg_id_n = tgId;
-                    a.tgm_id_n = tgmId;
+                    a.Tg_id_n = tgId;
+                    a.Tgm_id_n = tgmId;
                     await _ANSDataService.UpdateArtKomplekt(a);
                     break;
             }
