@@ -660,6 +660,15 @@ namespace SewingProduction.Features.Tabel.Forms
                 UpdateDayTimeSheetInDataBase(columnName, value, recordId, podrTableId);
 
             }
+            if (e.Column.FieldName == "tsplPartOf" || e.Column.FieldName == "tsplPart")
+            {
+                int rowHandle = e.RowHandle;
+                int recordId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "id"));
+                string columnName = e.Column.FieldName;
+                string value = gridView1.GetRowCellValue(rowHandle, columnName).ToString();
+                int podrTableId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "podrTableID"));
+                UpdateDayTimeSheetInDataBase(columnName, value, recordId, podrTableId);
+            }
             //if (e.Column != null && e.Column.ColumnEdit is RepositoryItemCheckEdit)
             //{
             //    int rowHandle = e.RowHandle;
