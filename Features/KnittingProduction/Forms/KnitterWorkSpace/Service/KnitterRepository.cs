@@ -480,7 +480,7 @@ WHERE pzvID = @pzvId;
                 //    }
                 //    return ids;
                 //}
-                var ids =  await SplitPzvByModeAsync(pzvId, mode: 4, qtyFact: factQty);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                var ids =  await SplitPzvByModeAsync(pzvId, mode: 1, qtyFact: factQty);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 return ids;
             }
             catch (Exception ex)
