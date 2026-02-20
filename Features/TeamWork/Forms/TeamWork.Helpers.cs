@@ -911,9 +911,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             // Используем VisibleLogic для программного управления видимостью
             ButtonEditWd.VisibleLogic = true;
-            layoutControlEditWd.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             ButtonEditOnlyAdv.VisibleLogic = true;
-            layoutControlEditOnlyAdv.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             ButtonArchAndCopyWd.VisibleLogic = true;
             ButtonDouble.VisibleLogic = true;
             ButtonCopyWd.VisibleLogic = true;
@@ -951,9 +949,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Используем VisibleLogic для программного управления видимостью
             // Скрываем большинство кнопок
             ButtonEditWd.VisibleLogic = false;
-            layoutControlEditWd.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             ButtonEditOnlyAdv.VisibleLogic = false;
-            layoutControlEditOnlyAdv.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             ButtonArchAndCopyWd.VisibleLogic = false;
             ButtonDouble.VisibleLogic = false;
 
@@ -994,12 +990,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ButtonEditOnlyAdv == null || ButtonEditWd == null) return;
 
                 // Итоговая видимость учитывает и права, и логику
-                //bool advancedVisible = ButtonEditOnlyAdv.Visible;
-                bool advancedVisible = DevExpress.XtraLayout.Utils.LayoutVisibility.Always == layoutControlItem4.Visibility; // layoutControlItem4 - это ButtonEditOnlyAdv
+                bool advancedVisible = ButtonEditOnlyAdv.Visible;
                 if (advancedVisible)
                 {
                     ButtonEditWd.VisibleLogic = false;
-                    layoutControlEditWd.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
                 // Если расширенная скрыта — не трогаем состояние обычной, оно может управляться режимом
             }

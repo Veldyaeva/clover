@@ -482,12 +482,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ButtonEditOnlyAdv.Visible)
                 {
                     ButtonEditWd.VisibleLogic = false;
-                    layoutControlEditWd.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
                 }
                 else if (ButtonEditWd.VisiblePermission)
                 {
                     ButtonEditWd.VisibleLogic = true;
-                    layoutControlEditWd.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
                 }
             }
             catch { }
