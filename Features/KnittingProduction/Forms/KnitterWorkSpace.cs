@@ -206,6 +206,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupBlinkTimers();
                 SetupRowStyling();
                 SetupGridFonts();
+                bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -255,6 +256,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 SetupBlinkTimers();
                 SetupRowStyling();
                 SetupGridFonts();
+                bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
@@ -424,6 +426,53 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             finally
             {
                 advBandedGridView1.EndUpdate();
+            }
+        }
+
+        private void BandedGridView3_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
+        {
+            if (sender is not BandedGridView masterView)
+                return;
+
+            var detailView = masterView.GetDetailView(e.RowHandle, e.RelationIndex) as AdvBandedGridView;
+            ApplyOperationNameWidth(detailView);
+        }
+
+        private static void ApplyOperationNameWidth(AdvBandedGridView? detailView)
+        {
+            if (detailView == null)
+                return;
+
+            const int operationNameWidth = 465;
+
+            detailView.BeginUpdate();
+            try
+            {
+               // detailView.OptionsView.ColumnAutoWidth = false;
+
+                var operationCol = detailView.Columns.ColumnByFieldName("nrText");
+                if (operationCol != null)
+                {
+                    operationCol.OptionsColumn.FixedWidth = true;
+                    operationCol.MinWidth = operationNameWidth;
+                    operationCol.MaxWidth = operationNameWidth;
+                    operationCol.Width = operationNameWidth;
+                }
+
+                var operationBand = detailView.Bands
+                    .Cast<GridBand>()
+                    .FirstOrDefault(b => b.Columns.Contains(operationCol));
+                if (operationBand != null)
+                {
+                    operationBand.OptionsBand.FixedWidth = true;
+                    operationBand.MinWidth = operationNameWidth;
+                    operationBand.Width = operationNameWidth;
+                }
+            }
+            finally
+            {
+                detailView.EndUpdate();
+                detailView.LayoutChanged();
             }
         }
 
