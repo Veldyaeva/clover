@@ -124,7 +124,7 @@
     <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesLoading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Sprav\Forms\editFio.cs">
+    <Compile Update="Features\Sprav\Forms\EditFio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\Fio.cs">

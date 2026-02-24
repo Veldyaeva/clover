@@ -35,9 +35,9 @@ namespace SewingProduction.Features.Articul.Forms
         //private BindingList<SpArticulNaborSostav> _ArticulNaborSostav = new();
         //private int? _lastNnLoaded = null;
         //private CancellationTokenSource _loadCts;
-        private int? _Kodd;
+        private string _Kodd;
         private string _Json;
-        public EditNaborSostavMatr(UserClass user, int kodd, string json) : base(user)
+        public EditNaborSostavMatr(UserClass user, string kodd, string json) : base(user)
         {
             InitializeComponent();
             _Kodd = kodd;
@@ -58,19 +58,11 @@ namespace SewingProduction.Features.Articul.Forms
         {
             _Categories = await _ANSDataService.GetTovarCategory();
             _Dynsigns = await _ANSDataService.GetTovarCatDynsign();
-            _PlanSezonAll = await _ANSDataService.GetPlanSezonAllByKod(_Kodd);
-            customGridControlPlanSezonAll.DataSource = _PlanSezonAll;
-            EnableEditorsInPSA();
-            EnableEditorsInAK();
-            LoadInfoCatDynPSA();
-            _selectedNn.Clear();
-            foreach (var r in _PlanSezonAll)
-            {
-                if (!string.IsNullOrWhiteSpace(r.Nn))
-                    _selectedNn.Add(r.Nn);
-            }
+            LoadPSA();
         }
         #endregion
+
+        #region Загрузка данных
         private void gridViewPlanSezonAll_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             if (e.FocusedRowHandle < 0) return;
@@ -88,6 +80,20 @@ namespace SewingProduction.Features.Articul.Forms
             customTextBoxMod.Text = row.Mod;
             customTextBoxNN.Text = row.Nn;
             customTextBoxMO.Text = row.Text_mo;
+        }
+        private async void LoadPSA()
+        {
+            _PlanSezonAll = await _ANSDataService.GetPlanSezonAllByKod(_Kodd);
+            customGridControlPlanSezonAll.DataSource = _PlanSezonAll;
+            //EnableEditorsInPSA();
+            //EnableEditorsInAK();
+            LoadInfoCatDynPSA();
+            _selectedNn.Clear();
+            foreach (var r in _PlanSezonAll)
+            {
+                if (!string.IsNullOrWhiteSpace(r.Nn))
+                    _selectedNn.Add(r.Nn);
+            }
         }
         private void LoadInfoCatDynPSA()
         {
@@ -119,7 +125,30 @@ namespace SewingProduction.Features.Articul.Forms
             customGridControlArtKomplekt.DataSource = _ArtKomplekt;
             gridViewArtKomplekt.RefreshData();
         }
+        private void gridViewPlanSezonAll_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
+        {
+            if (e.Column != psaGridColumnCheck) return;
 
+            var row = e.Row as PlanSezonAllModel;
+            if (row == null || string.IsNullOrWhiteSpace(row.Nn))
+            {
+                if (e.IsGetData) e.Value = false;
+                return;
+            }
+
+            if (e.IsGetData)
+                e.Value = _selectedNn.Contains(row.Nn);
+
+            if (e.IsSetData)
+            {
+                bool isChecked = e.Value != null && e.Value != DBNull.Value && Convert.ToBoolean(e.Value);
+                if (isChecked) _selectedNn.Add(row.Nn);
+                else _selectedNn.Remove(row.Nn);
+            }
+        }
+        #endregion
+
+        #region Динамический признак
         private void repositoryItemButtonEdit1_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             var rowHandle = gridViewPlanSezonAll.FocusedRowHandle;
@@ -131,6 +160,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (f.ShowDialog() != DialogResult.OK) return;
 
             gridViewPlanSezonAll.RefreshRow(rowHandle);
+            LoadPSA();
         }
         private void repositoryItemButtonEdit2_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -142,8 +172,13 @@ namespace SewingProduction.Features.Articul.Forms
             if (f.ShowDialog() != DialogResult.OK) return;
 
             gridViewArtKomplekt.RefreshRow(rowHandle);
+            //LoadPSA();
+            //LoadInfoAK(rowPSA.Nn);
+            //обновление строчки
         }
+        #endregion
 
+        #region Вспомогательные методы грида
         private void EnableEditorsInPSA()
         {
             // 1) Разрешаем редактирование на уровне View
@@ -179,7 +214,16 @@ namespace SewingProduction.Features.Articul.Forms
             // 4) задать тип
             akGridColumnButton.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;
         }
+        #endregion
 
+        #region Select and save
+        private List<string> GetSelectedNns()
+        {
+            return _selectedNn
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
         private async void customButtonSave_Click(object sender, EventArgs e)
         {
             try
@@ -208,36 +252,8 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
-        private List<string> GetSelectedNns()
-        {
-            return _selectedNn
-                .Where(x => !string.IsNullOrWhiteSpace(x))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList();
-        }
+        #endregion
 
-        private void gridViewPlanSezonAll_CustomUnboundColumnData(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDataEventArgs e)
-        {
-            if (e.Column != psaGridColumnCheck) return;
-
-            var row = e.Row as PlanSezonAllModel;
-            if (row == null || string.IsNullOrWhiteSpace(row.Nn))
-            {
-                if (e.IsGetData) e.Value = false;
-                return;
-            }
-
-            if (e.IsGetData)
-                e.Value = _selectedNn.Contains(row.Nn);
-
-            if (e.IsSetData)
-            {
-                bool isChecked = e.Value != null && e.Value != DBNull.Value && Convert.ToBoolean(e.Value);
-                if (isChecked) _selectedNn.Add(row.Nn);
-                else _selectedNn.Remove(row.Nn);
-            }
-        }
     }
 }
