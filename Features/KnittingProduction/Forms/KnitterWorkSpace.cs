@@ -1204,6 +1204,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Получим текущую строку для плейсхолдера (кол-во к выполнению)
             var currentRow = _view.GetRow(rowHandle) as KnitterPZVModel;
+
+            // Снимаем снапшот фокуса до любых RefreshData: после ApplyPzvDateAsync/RefreshData фокус сбрасывается,
+            // и при факт < назн (split) CapturePlanFocus() тогда ловил бы уже другую машину/строку.
+            var focusSnap = CapturePlanFocusFromRow(currentRow, _view);
+
             // Если плановое количество уже перенесено в назначенное (pzvKol обнулён), используем pzvKolNazn как "к выполнению"
             int defaultQty = currentRow?.pzvKolNazn ?? 0;
             if (defaultQty == 0 && currentRow != null && currentRow.pzvKolNazn > 0)
@@ -1277,16 +1282,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             }
 
-            //// Обновим план, чтобы показать новую запись остатка (если была создана)
+            // Обновим план, чтобы показать новую запись остатка (если была создана)
             if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab))
             {
-                //    // Сохраняем текущую машину, чтобы вернуть фокус после обновления
-                //    var currentMachineKey = NormalizeMachineKey(currentRow?.kmlNumber);
-                var focusSnap = CapturePlanFocus();
                 var preferDetailId = (newIds != null && newIds.Count > 0) ? (int?)newIds[0].NewPzvId : null;
 
-                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, _currentKmaId, false, false, 14);//(tab);
-                                                                                                                                 // перестраиваем иерархию без очистки табеля
+                var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, _currentKmaId, false, false, 14);
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, refreshedPlan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 RestorePlanFocus(focusSnap, preferDetailId);
             }
@@ -2132,23 +2133,50 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 MasterTop = bandedGridView3.TopRowIndex
             };
 
-var fv = PlanZagrVyazGridControl.FocusedView as DevExpress.XtraGrid.Views.Grid.GridView;
-snap.WasInDetail = fv != null && fv != bandedGridView3;
+            var fv = PlanZagrVyazGridControl.FocusedView as DevExpress.XtraGrid.Views.Grid.GridView;
+            snap.WasInDetail = fv != null && fv != bandedGridView3;
 
             if (bandedGridView3.GetFocusedRow() is KnitterPZVModel m)
-               {
-   snap.TaskNum = KnitterPlanUtils.NormalizeTaskNum(m.pzvNomZad);
-   snap.Machine = KnitterPlanUtils.NormalizeMachineKey(m.kmlNumber);
-               }
+            {
+                snap.TaskNum = KnitterPlanUtils.NormalizeTaskNum(m.pzvNomZad);
+                snap.Machine = KnitterPlanUtils.NormalizeMachineKey(m.kmlNumber);
+            }
 
-           if (snap.WasInDetail && fv?.GetFocusedRow() is KnitterPZVModel d && d.pzvID > 0)
-               {
-   snap.DetailPzvId = d.pzvID;
-   snap.DetailTop = fv.TopRowIndex;
-               }
+            if (snap.WasInDetail && fv?.GetFocusedRow() is KnitterPZVModel d && d.pzvID > 0)
+            {
+                snap.DetailPzvId = d.pzvID;
+                snap.DetailTop = fv.TopRowIndex;
+            }
 
-           return snap;
-       }
+            return snap;
+        }
+
+        /// <summary>
+        /// Строит снапшот фокуса по строке и текущему виду (без чтения FocusedRow после RefreshData).
+        /// Используется при завершении операции до вызова ApplyPzvDateAsync/RefreshData, чтобы не терять машину при факт &lt; назн.
+        /// </summary>
+        private PlanFocusSnap CapturePlanFocusFromRow(KnitterPZVModel? currentRow, GridView detailView)
+        {
+            var snap = new PlanFocusSnap
+            {
+                MasterTop = bandedGridView3?.TopRowIndex ?? 0,
+                WasInDetail = detailView != null && detailView != bandedGridView3
+            };
+
+            if (currentRow != null)
+            {
+                snap.TaskNum = KnitterPlanUtils.NormalizeTaskNum(currentRow.pzvNomZad);
+                snap.Machine = KnitterPlanUtils.NormalizeMachineKey(currentRow.kmlNumber);
+                if (currentRow.pzvID > 0)
+                {
+                    snap.DetailPzvId = currentRow.pzvID;
+                    if (detailView != null)
+                        snap.DetailTop = detailView.TopRowIndex;
+                }
+            }
+
+            return snap;
+        }
 
        private void RestorePlanFocus(PlanFocusSnap snap, int? preferDetailId = null)
        {
