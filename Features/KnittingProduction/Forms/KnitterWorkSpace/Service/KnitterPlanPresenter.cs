@@ -122,7 +122,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                     return master;
                 }).ToList();
-                bindingSource.DataSource = masterData;
+                // bindingSource.DataSource = masterData;
+                if (bindingSource.DataSource is BindingList<KnitterPZVModel> bl)
+                {
+                    ApplyMasterDelta(bl, masterData);
+                }
+                else
+                {
+                    bindingSource.DataSource = new BindingList<KnitterPZVModel>(masterData);
+                }
 
                 //
                 masterView3.MasterRowGetRelationCount -= Master_MasterRowGetRelationCount;
@@ -132,7 +140,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 masterView3.MasterRowGetRelationName += Master_MasterRowGetRelationName;
                 masterView3.MasterRowGetChildList += Master_MasterRowGetChildList;
                 masterView3.OptionsDetail.EnableMasterViewMode = true;
-                masterView3.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
+               // masterView3.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
                 masterView3.OptionsDetail.ShowDetailTabs = false;
 
                 //bandedGridView1.OptionsDetail.EnableMasterViewMode = true;
@@ -147,6 +155,48 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
             _expansionService.Restore(masterView3, expansionState);
         }
+
+        private static string MasterKey(KnitterPZVModel m) =>
+    $"{KnitterPlanUtils.NormalizeTaskNum(m.pzvNomZad)}|{KnitterPlanUtils.NormalizeMachineKey(m.kmlNumber)}";
+
+        private static void ApplyMasterDelta(BindingList<KnitterPZVModel> target, List<KnitterPZVModel> fresh)
+        {
+            var targetByKey = target.ToDictionary(MasterKey);
+            var freshByKey = fresh.ToDictionary(MasterKey);
+
+            // remove missing
+            for (int i = target.Count - 1; i >= 0; i--)
+            {
+                var key = MasterKey(target[i]);
+                if (!freshByKey.ContainsKey(key))
+                    target.RemoveAt(i);
+            }
+
+            // update existing + add new
+            foreach (var f in fresh)
+            {
+                var key = MasterKey(f);
+                if (targetByKey.TryGetValue(key, out var t))
+                {
+                    // обновляем поля (ВАЖНО: не заменяем ссылку!)
+                    t.pzvNomZad = f.pzvNomZad;
+                    t.kmlNumber = f.kmlNumber;
+                    t.pzvArticul = f.pzvArticul;
+                    t.pzvMod = f.pzvMod;
+                    t.pzvNom = f.pzvNom;
+                    t.koefObServ = f.koefObServ;
+                    t.name_class = f.name_class;
+                    t.pzvKmlID = f.pzvKmlID;
+                    t.pzvChasNazn = f.pzvChasNazn;
+                    t.pzvNChasi = f.pzvNChasi;
+                }
+                else
+                {
+                    target.Add(f);
+                }
+            }
+        }
+
 
         /// <summary>
         /// Возвращает набор записей, соответствующий текущему выбору пользователя в указанном представлении.
