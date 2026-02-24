@@ -2252,19 +2252,34 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             decimal maxHours = isShiftOpen ? 240m : _maxHoursClosedShift;
             bool expandByNr = _expandNrToggle?.Checked == true;
 
+            // Сохраняем фокус до перезагрузки (обновление по Service Broker иначе сбрасывает фокус).
+            // Снимок делаем до await — после await продолжение может выполниться не на UI-потоке.
+            var focusSnap = CapturePlanFocus();
+
             //var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, onlyUnassigned, includeFinished, maxHours);
             var plan = await _orchestrator.GetPlanByTabAsync(tab, kwsId, _currentKmaId, onlyUnassigned, expandByNr, maxHours, includeFinished: isAdmin);
-            // Если из БД факт часов пуст, считаем его по формуле pzvSek * фактическое количество / 3600
-            if (plan != null)
+
+            // Привязка и восстановление фокуса — только в UI-потоке (после await контекст мог смениться)
+            void ApplyPlanAndRestoreFocus()
             {
-                foreach (var row in plan)
+                if (IsDisposed || bandedGridView3 == null) return;
+                if (plan != null)
                 {
-                    EnsureFactHours(row);
+                    foreach (var row in plan)
+                    {
+                        EnsureFactHours(row);
+                    }
                 }
+                _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
+                RestorePlanFocus(focusSnap, preferDetailId: null);
+                RefreshFooterSummaries();
+                _currentLoadedTab = tab;
             }
-            _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
-            RefreshFooterSummaries();
-            _currentLoadedTab = tab;
+
+            if (InvokeRequired)
+                Invoke(new Action(ApplyPlanAndRestoreFocus));
+            else
+                ApplyPlanAndRestoreFocus();
         }
 
         private async Task UpdateZoneAsync(int tab)

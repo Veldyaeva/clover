@@ -128,17 +128,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                             detailView.SetMasterRowExpanded(j, true);
                         }
 
-                        // Группы по __Header (пачки): свернуть все, затем раскрыть сохранённые
+                        // Группы по __Header (пачки): выставляем развёрнутость по сохранённому состоянию.
+                        // Не вызываем CollapseAllGroups() — один detail view на все мастер-строки, иначе сбросим группы у предыдущей машины.
                         if (detailView is GridView gridDetail)
                         {
-                            gridDetail.CollapseAllGroups();
-                            foreach (var (mk, header) in state.HeaderGroups)
+                            for (int j = 0; j < gridDetail.RowCount; j++)
                             {
-                                if (mk != machineKey) continue;
+                                int grh = gridDetail.GetVisibleRowHandle(j);
+                                if (grh < 0) continue;
+                                if (!gridDetail.IsGroupRow(grh) || gridDetail.GetRowLevel(grh) != 0)
+                                    continue;
 
-                                int groupRh = FindGroupRowByValue(gridDetail, header);
-                                if (groupRh >= 0)
-                                    gridDetail.SetRowExpanded(groupRh, true);
+                                var headerVal = gridDetail.GetGroupRowValue(grh)?.ToString();
+                                bool shouldExpand = !string.IsNullOrEmpty(headerVal) &&
+                                    state.HeaderGroups.Contains((machineKey, headerVal));
+                                gridDetail.SetRowExpanded(grh, shouldExpand);
                             }
                         }
                     }
