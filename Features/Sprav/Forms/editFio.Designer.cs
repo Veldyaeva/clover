@@ -31,8 +31,8 @@ namespace SewingProduction.form
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditFio));
-            customCancelButton1 = new CustomCancelButton();
-            customOkButton1 = new CustomOkButton();
+            customCancelButton1 = new CustomSimpleButton();
+            customOkButton1 = new CustomSimpleButton();
             customLabel1 = new CustomLabel();
             customTextBoxTab = new CustomTextBox();
             customCheckBoxSdel = new CustomCheckBox();
@@ -126,8 +126,6 @@ namespace SewingProduction.form
             // 
             customCancelButton1.BackColor = System.Drawing.Color.IndianRed;
             customCancelButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            customCancelButton1.FlatAppearance.BorderSize = 0;
-            customCancelButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
             // customCancelButton1.ForeColor = System.Drawing.Color.White;
             customCancelButton1.Location = new System.Drawing.Point(578, 673);
@@ -138,15 +136,12 @@ namespace SewingProduction.form
             customCancelButton1.Size = new System.Drawing.Size(203, 52);
             customCancelButton1.TabIndex = 0;
             customCancelButton1.Text = "Выход";
-            customCancelButton1.UseVisualStyleBackColor = false;
             customCancelButton1.Click += customCancelButton1_Click;
             // 
             // customOkButton1
             // 
             customOkButton1.BackColor = System.Drawing.Color.LightGreen;
             customOkButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            customOkButton1.FlatAppearance.BorderSize = 0;
-            customOkButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
             // customOkButton1.ForeColor = System.Drawing.Color.Black;
             customOkButton1.Location = new System.Drawing.Point(158, 673);
@@ -157,7 +152,6 @@ namespace SewingProduction.form
             customOkButton1.Size = new System.Drawing.Size(203, 52);
             customOkButton1.TabIndex = 1;
             customOkButton1.Text = "Сохранить";
-            customOkButton1.UseVisualStyleBackColor = false;
             customOkButton1.Click += customOkButton1_Click;
             // 
             // customLabel1
@@ -1353,8 +1347,8 @@ namespace SewingProduction.form
 
         #endregion
 
-        private CustomCancelButton customCancelButton1;
-        private CustomOkButton customOkButton1;
+        private CustomSimpleButton customCancelButton1;
+        private CustomSimpleButton customOkButton1;
         private CustomLabel customLabel1;
         private CustomTextBox customTextBoxTab;
         private CustomCheckBox customCheckBoxSdel;
