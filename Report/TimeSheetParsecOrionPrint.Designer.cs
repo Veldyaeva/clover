@@ -291,7 +291,7 @@
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(20.00003F, 44.17308F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel3.SizeF = new System.Drawing.SizeF(216.4794F, 23F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.Text = "xrLabel3";
@@ -304,7 +304,7 @@
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(447.907F, 44.17308F);
             this.xrLabel2.Multiline = true;
             this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel2.SizeF = new System.Drawing.SizeF(218.7617F, 22.99999F);
             this.xrLabel2.StylePriority.UseFont = false;
             this.xrLabel2.StylePriority.UseTextAlignment = false;
@@ -317,7 +317,7 @@
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(325.5508F, 10.00001F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrLabel1.SizeF = new System.Drawing.SizeF(468.3468F, 23F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseTextAlignment = false;
@@ -331,7 +331,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(3.973643E-05F, 93.29807F);
             this.xrTable1.Name = "xrTable1";
-            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
             this.xrTableRow3});
@@ -983,7 +983,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable2.Name = "xrTable2";
-            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2F, 2F, 0F, 0F, 100F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2,
             this.xrTableRow4,
@@ -1055,10 +1055,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d01]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd01]) =\'11\' || trim([dd01]) = \'8\' || trim([dd01]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell37.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell37.KeepTogether = true;
             this.xrTableCell37.Multiline = true;
             this.xrTableCell37.Name = "xrTableCell37";
+            this.xrTableCell37.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell37.RowSpan = 4;
+            this.xrTableCell37.StylePriority.UseFont = false;
+            this.xrTableCell37.StylePriority.UsePadding = false;
             this.xrTableCell37.Text = "1";
             this.xrTableCell37.Weight = 5.7421780868256427D;
             // 
@@ -1068,10 +1072,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d02]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(Trim([dd02]) = \'11\' || trim([dd02]) = \'8\' || trim([dd02]) = \'1\',\'White\',\'Ligh" +
                     "tGray\')\n")});
+            this.xrTableCell38.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell38.KeepTogether = true;
             this.xrTableCell38.Multiline = true;
             this.xrTableCell38.Name = "xrTableCell38";
+            this.xrTableCell38.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell38.RowSpan = 4;
+            this.xrTableCell38.StylePriority.UseFont = false;
+            this.xrTableCell38.StylePriority.UsePadding = false;
             this.xrTableCell38.Text = "2";
             this.xrTableCell38.Weight = 5.7421780868256427D;
             // 
@@ -1081,10 +1089,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d03]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd03]) =\'11\' || trim([dd03]) = \'8\' || trim([dd03]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell39.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell39.KeepTogether = true;
             this.xrTableCell39.Multiline = true;
             this.xrTableCell39.Name = "xrTableCell39";
+            this.xrTableCell39.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell39.RowSpan = 4;
+            this.xrTableCell39.StylePriority.UseFont = false;
+            this.xrTableCell39.StylePriority.UsePadding = false;
             this.xrTableCell39.Text = "3";
             this.xrTableCell39.Weight = 5.7421780868256427D;
             // 
@@ -1094,10 +1106,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d04]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd04]) =\'11\' || trim([dd04]) = \'8\' || trim([dd04]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell40.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell40.KeepTogether = true;
             this.xrTableCell40.Multiline = true;
             this.xrTableCell40.Name = "xrTableCell40";
+            this.xrTableCell40.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell40.RowSpan = 4;
+            this.xrTableCell40.StylePriority.UseFont = false;
+            this.xrTableCell40.StylePriority.UsePadding = false;
             this.xrTableCell40.Text = "4";
             this.xrTableCell40.Weight = 5.7421780868256427D;
             // 
@@ -1107,10 +1123,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d05]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd05]) =\'11\' || trim([dd05]) = \'8\' || trim([dd05]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell41.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell41.KeepTogether = true;
             this.xrTableCell41.Multiline = true;
             this.xrTableCell41.Name = "xrTableCell41";
+            this.xrTableCell41.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell41.RowSpan = 4;
+            this.xrTableCell41.StylePriority.UseFont = false;
+            this.xrTableCell41.StylePriority.UsePadding = false;
             this.xrTableCell41.Text = "5";
             this.xrTableCell41.Weight = 5.7421780868256427D;
             // 
@@ -1120,10 +1140,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d06]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd06]) =\'11\' || trim([dd06]) = \'8\' || trim([dd06]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell42.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell42.KeepTogether = true;
             this.xrTableCell42.Multiline = true;
             this.xrTableCell42.Name = "xrTableCell42";
+            this.xrTableCell42.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell42.RowSpan = 4;
+            this.xrTableCell42.StylePriority.UseFont = false;
+            this.xrTableCell42.StylePriority.UsePadding = false;
             this.xrTableCell42.Text = "6";
             this.xrTableCell42.Weight = 5.7421780868256427D;
             // 
@@ -1133,10 +1157,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d07]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd07]) =\'11\' || trim([dd07]) = \'8\' || trim([dd07]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell43.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell43.KeepTogether = true;
             this.xrTableCell43.Multiline = true;
             this.xrTableCell43.Name = "xrTableCell43";
+            this.xrTableCell43.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell43.RowSpan = 4;
+            this.xrTableCell43.StylePriority.UseFont = false;
+            this.xrTableCell43.StylePriority.UsePadding = false;
             this.xrTableCell43.Text = "7";
             this.xrTableCell43.Weight = 5.7421780868256427D;
             // 
@@ -1146,10 +1174,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d08]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd08]) =\'11\' || trim([dd08]) = \'8\' || trim([dd08]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell44.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell44.KeepTogether = true;
             this.xrTableCell44.Multiline = true;
             this.xrTableCell44.Name = "xrTableCell44";
+            this.xrTableCell44.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell44.RowSpan = 4;
+            this.xrTableCell44.StylePriority.UseFont = false;
+            this.xrTableCell44.StylePriority.UsePadding = false;
             this.xrTableCell44.Text = "8";
             this.xrTableCell44.Weight = 5.7421780868256427D;
             // 
@@ -1159,10 +1191,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d09]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd09]) =\'11\' || trim([dd09]) = \'8\' || trim([dd09]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell45.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell45.KeepTogether = true;
             this.xrTableCell45.Multiline = true;
             this.xrTableCell45.Name = "xrTableCell45";
+            this.xrTableCell45.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell45.RowSpan = 4;
+            this.xrTableCell45.StylePriority.UseFont = false;
+            this.xrTableCell45.StylePriority.UsePadding = false;
             this.xrTableCell45.Text = "9";
             this.xrTableCell45.Weight = 5.7421780868256427D;
             // 
@@ -1172,10 +1208,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d10]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd10]) =\'11\' || trim([dd10]) = \'8\' || trim([dd10]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell46.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell46.KeepTogether = true;
             this.xrTableCell46.Multiline = true;
             this.xrTableCell46.Name = "xrTableCell46";
+            this.xrTableCell46.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell46.RowSpan = 4;
+            this.xrTableCell46.StylePriority.UseFont = false;
+            this.xrTableCell46.StylePriority.UsePadding = false;
             this.xrTableCell46.Text = "10";
             this.xrTableCell46.Weight = 5.7421780868256427D;
             // 
@@ -1185,10 +1225,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d11]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd11]) =\'11\' || trim([dd11]) = \'8\' || trim([dd11]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell47.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell47.KeepTogether = true;
             this.xrTableCell47.Multiline = true;
             this.xrTableCell47.Name = "xrTableCell47";
+            this.xrTableCell47.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell47.RowSpan = 4;
+            this.xrTableCell47.StylePriority.UseFont = false;
+            this.xrTableCell47.StylePriority.UsePadding = false;
             this.xrTableCell47.Text = "11";
             this.xrTableCell47.Weight = 5.7421780868256427D;
             // 
@@ -1198,10 +1242,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d12]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd12]) =\'11\' || trim([dd12]) = \'8\' || trim([dd12]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell48.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell48.KeepTogether = true;
             this.xrTableCell48.Multiline = true;
             this.xrTableCell48.Name = "xrTableCell48";
+            this.xrTableCell48.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell48.RowSpan = 4;
+            this.xrTableCell48.StylePriority.UseFont = false;
+            this.xrTableCell48.StylePriority.UsePadding = false;
             this.xrTableCell48.Text = "12";
             this.xrTableCell48.Weight = 5.7421780868256427D;
             // 
@@ -1211,10 +1259,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d13]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd13]) =\'11\' || trim([dd13]) = \'8\' || trim([dd13]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell49.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell49.KeepTogether = true;
             this.xrTableCell49.Multiline = true;
             this.xrTableCell49.Name = "xrTableCell49";
+            this.xrTableCell49.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell49.RowSpan = 4;
+            this.xrTableCell49.StylePriority.UseFont = false;
+            this.xrTableCell49.StylePriority.UsePadding = false;
             this.xrTableCell49.Text = "13";
             this.xrTableCell49.Weight = 5.7421780868256427D;
             // 
@@ -1224,10 +1276,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d14]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd14]) =\'11\' || trim([dd14]) = \'8\' || trim([dd14]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell50.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell50.KeepTogether = true;
             this.xrTableCell50.Multiline = true;
             this.xrTableCell50.Name = "xrTableCell50";
+            this.xrTableCell50.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell50.RowSpan = 4;
+            this.xrTableCell50.StylePriority.UseFont = false;
+            this.xrTableCell50.StylePriority.UsePadding = false;
             this.xrTableCell50.Text = "14";
             this.xrTableCell50.Weight = 5.7421780868256427D;
             // 
@@ -1237,10 +1293,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d15]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd15]) =\'11\' || trim([dd15]) = \'8\' || trim([dd15]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell51.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell51.KeepTogether = true;
             this.xrTableCell51.Multiline = true;
             this.xrTableCell51.Name = "xrTableCell51";
+            this.xrTableCell51.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell51.RowSpan = 4;
+            this.xrTableCell51.StylePriority.UseFont = false;
+            this.xrTableCell51.StylePriority.UsePadding = false;
             this.xrTableCell51.Text = "15";
             this.xrTableCell51.Weight = 5.7421780868256427D;
             // 
@@ -1250,10 +1310,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d16]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd16]) =\'11\' || trim([dd16]) = \'8\' || trim([dd16]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell52.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell52.KeepTogether = true;
             this.xrTableCell52.Multiline = true;
             this.xrTableCell52.Name = "xrTableCell52";
+            this.xrTableCell52.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell52.RowSpan = 4;
+            this.xrTableCell52.StylePriority.UseFont = false;
+            this.xrTableCell52.StylePriority.UsePadding = false;
             this.xrTableCell52.Text = "16";
             this.xrTableCell52.Weight = 5.7421780868256427D;
             // 
@@ -1263,10 +1327,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d17]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd17]) =\'11\' || trim([dd17]) = \'8\' || trim([dd17]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell53.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell53.KeepTogether = true;
             this.xrTableCell53.Multiline = true;
             this.xrTableCell53.Name = "xrTableCell53";
+            this.xrTableCell53.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell53.RowSpan = 4;
+            this.xrTableCell53.StylePriority.UseFont = false;
+            this.xrTableCell53.StylePriority.UsePadding = false;
             this.xrTableCell53.Text = "17";
             this.xrTableCell53.Weight = 5.7421780868256427D;
             // 
@@ -1276,10 +1344,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d18]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd18]) =\'11\' || trim([dd18]) = \'8\' || trim([dd18]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell54.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell54.KeepTogether = true;
             this.xrTableCell54.Multiline = true;
             this.xrTableCell54.Name = "xrTableCell54";
+            this.xrTableCell54.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell54.RowSpan = 4;
+            this.xrTableCell54.StylePriority.UseFont = false;
+            this.xrTableCell54.StylePriority.UsePadding = false;
             this.xrTableCell54.Text = "18";
             this.xrTableCell54.Weight = 5.7421780868256427D;
             // 
@@ -1289,10 +1361,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d19]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd19]) =\'11\' || trim([dd19]) = \'8\' || trim([dd19]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell55.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell55.KeepTogether = true;
             this.xrTableCell55.Multiline = true;
             this.xrTableCell55.Name = "xrTableCell55";
+            this.xrTableCell55.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell55.RowSpan = 4;
+            this.xrTableCell55.StylePriority.UseFont = false;
+            this.xrTableCell55.StylePriority.UsePadding = false;
             this.xrTableCell55.Text = "19";
             this.xrTableCell55.Weight = 5.7421780868256427D;
             // 
@@ -1302,10 +1378,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d20]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd20]) =\'11\' || trim([dd20]) = \'8\' || trim([dd20]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell56.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell56.KeepTogether = true;
             this.xrTableCell56.Multiline = true;
             this.xrTableCell56.Name = "xrTableCell56";
+            this.xrTableCell56.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell56.RowSpan = 4;
+            this.xrTableCell56.StylePriority.UseFont = false;
+            this.xrTableCell56.StylePriority.UsePadding = false;
             this.xrTableCell56.Text = "20";
             this.xrTableCell56.Weight = 5.7421780868256427D;
             // 
@@ -1315,10 +1395,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d21]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd21]) =\'11\' || trim([dd21]) = \'8\' || trim([dd21]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell57.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell57.KeepTogether = true;
             this.xrTableCell57.Multiline = true;
             this.xrTableCell57.Name = "xrTableCell57";
+            this.xrTableCell57.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell57.RowSpan = 4;
+            this.xrTableCell57.StylePriority.UseFont = false;
+            this.xrTableCell57.StylePriority.UsePadding = false;
             this.xrTableCell57.Text = "21";
             this.xrTableCell57.Weight = 5.7421780868256427D;
             // 
@@ -1328,10 +1412,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d22]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd22]) =\'11\' || trim([dd22]) = \'8\' || trim([dd22]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell58.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell58.KeepTogether = true;
             this.xrTableCell58.Multiline = true;
             this.xrTableCell58.Name = "xrTableCell58";
+            this.xrTableCell58.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell58.RowSpan = 4;
+            this.xrTableCell58.StylePriority.UseFont = false;
+            this.xrTableCell58.StylePriority.UsePadding = false;
             this.xrTableCell58.Text = "22";
             this.xrTableCell58.Weight = 5.7421780868256427D;
             // 
@@ -1341,10 +1429,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d23]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd23]) =\'11\' || trim([dd23]) = \'8\' || trim([dd23]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell59.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell59.KeepTogether = true;
             this.xrTableCell59.Multiline = true;
             this.xrTableCell59.Name = "xrTableCell59";
+            this.xrTableCell59.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell59.RowSpan = 4;
+            this.xrTableCell59.StylePriority.UseFont = false;
+            this.xrTableCell59.StylePriority.UsePadding = false;
             this.xrTableCell59.Text = "23";
             this.xrTableCell59.Weight = 5.7421780868256427D;
             // 
@@ -1354,10 +1446,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d24]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd24]) =\'11\' || trim([dd24]) = \'8\' || trim([dd24]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell60.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell60.KeepTogether = true;
             this.xrTableCell60.Multiline = true;
             this.xrTableCell60.Name = "xrTableCell60";
+            this.xrTableCell60.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell60.RowSpan = 4;
+            this.xrTableCell60.StylePriority.UseFont = false;
+            this.xrTableCell60.StylePriority.UsePadding = false;
             this.xrTableCell60.Text = "24";
             this.xrTableCell60.Weight = 5.7421780868256427D;
             // 
@@ -1367,10 +1463,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d25]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd25]) =\'11\' || trim([dd25]) = \'8\' || trim([dd25]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell61.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell61.KeepTogether = true;
             this.xrTableCell61.Multiline = true;
             this.xrTableCell61.Name = "xrTableCell61";
+            this.xrTableCell61.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell61.RowSpan = 4;
+            this.xrTableCell61.StylePriority.UseFont = false;
+            this.xrTableCell61.StylePriority.UsePadding = false;
             this.xrTableCell61.Text = "25";
             this.xrTableCell61.Weight = 5.7421780868256427D;
             // 
@@ -1380,10 +1480,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d26]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd26]) =\'11\' || trim([dd26]) = \'8\' || trim([dd26]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell62.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell62.KeepTogether = true;
             this.xrTableCell62.Multiline = true;
             this.xrTableCell62.Name = "xrTableCell62";
+            this.xrTableCell62.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell62.RowSpan = 4;
+            this.xrTableCell62.StylePriority.UseFont = false;
+            this.xrTableCell62.StylePriority.UsePadding = false;
             this.xrTableCell62.Text = "26";
             this.xrTableCell62.Weight = 5.7421780868256427D;
             // 
@@ -1393,10 +1497,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d27]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd27]) =\'11\' || trim([dd27]) = \'8\' || trim([dd27]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell63.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell63.KeepTogether = true;
             this.xrTableCell63.Multiline = true;
             this.xrTableCell63.Name = "xrTableCell63";
+            this.xrTableCell63.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell63.RowSpan = 4;
+            this.xrTableCell63.StylePriority.UseFont = false;
+            this.xrTableCell63.StylePriority.UsePadding = false;
             this.xrTableCell63.Text = "27";
             this.xrTableCell63.Weight = 5.7421780868256427D;
             // 
@@ -1406,10 +1514,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d28]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd28]) =\'11\' || trim([dd28]) = \'8\' || trim([dd28]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell64.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell64.KeepTogether = true;
             this.xrTableCell64.Multiline = true;
             this.xrTableCell64.Name = "xrTableCell64";
+            this.xrTableCell64.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell64.RowSpan = 4;
+            this.xrTableCell64.StylePriority.UseFont = false;
+            this.xrTableCell64.StylePriority.UsePadding = false;
             this.xrTableCell64.Text = "28";
             this.xrTableCell64.Weight = 5.7421780868256427D;
             // 
@@ -1419,10 +1531,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d29]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd29]) =\'11\' || trim([dd29]) = \'8\' || trim([dd29]) = \'1\',\'White\',\'Light" +
                     "Gray\')")});
+            this.xrTableCell65.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell65.KeepTogether = true;
             this.xrTableCell65.Multiline = true;
             this.xrTableCell65.Name = "xrTableCell65";
+            this.xrTableCell65.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell65.RowSpan = 4;
+            this.xrTableCell65.StylePriority.UseFont = false;
+            this.xrTableCell65.StylePriority.UsePadding = false;
             this.xrTableCell65.Text = "29";
             this.xrTableCell65.Weight = 5.7421780868256427D;
             // 
@@ -1432,10 +1548,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d30]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd30]) =\'11\' || trim([dd30]) = \'8\' || trim([dd30]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell66.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell66.KeepTogether = true;
             this.xrTableCell66.Multiline = true;
             this.xrTableCell66.Name = "xrTableCell66";
+            this.xrTableCell66.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell66.RowSpan = 4;
+            this.xrTableCell66.StylePriority.UseFont = false;
+            this.xrTableCell66.StylePriority.UsePadding = false;
             this.xrTableCell66.Text = "30";
             this.xrTableCell66.Weight = 5.7421780868256427D;
             // 
@@ -1445,10 +1565,14 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[d31]"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "iif(trim([dd31]) =\'11\' || trim([dd31]) = \'8\' || trim([dd31]) = \'1\',\'White\',\'Light" +
                     "Gray\')\n")});
+            this.xrTableCell67.Font = new DevExpress.Drawing.DXFont("Arial", 6.5F);
             this.xrTableCell67.KeepTogether = true;
             this.xrTableCell67.Multiline = true;
             this.xrTableCell67.Name = "xrTableCell67";
+            this.xrTableCell67.Padding = new DevExpress.XtraPrinting.PaddingInfo(1F, 0F, 0F, 0F, 100F);
             this.xrTableCell67.RowSpan = 4;
+            this.xrTableCell67.StylePriority.UseFont = false;
+            this.xrTableCell67.StylePriority.UsePadding = false;
             this.xrTableCell67.Text = "31";
             this.xrTableCell67.Weight = 5.7421780868256427D;
             // 
@@ -2481,8 +2605,8 @@
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
             this.Margins = new DevExpress.Drawing.DXMargins(14F, 17F, 128.824F, 0F);
-            this.PageHeight = 827;
-            this.PageWidth = 1169;
+            this.PageHeightF = 826.7717F;
+            this.PageWidthF = 1169.291F;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
             this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
             new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this.grid, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
@@ -2494,7 +2618,7 @@
             this.Mg,
             this.groupId,
             this.orionAdd});
-            this.Version = "24.2";
+            this.Version = "25.2";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

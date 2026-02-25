@@ -146,6 +146,17 @@ namespace SewingProduction.Features.UserDistribution.Forms
             this.Controls.Add(_gifBackground);
             _gifBackground.SendToBack();
         }
+
+        private void textEditPassword_Enter(object sender, EventArgs e)
+        {
+            textEditPassword.SelectAll();
+        }
+
+        private void textEditPassword_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (textEditPassword.SelectionLength==0)
+                textEditPassword.SelectAll();
+        }
     }
 
     public class LoginFormDataService
