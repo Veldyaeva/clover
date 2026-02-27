@@ -14,25 +14,26 @@ namespace SewingProduction.Features.Sprav
         #region fio
         public System.Data.DataTable GetFioTable()
         {
-            string query = $@"SELECT fio.tab,       fio.fio,       fio.rab,    fio.ved,       fio.ftabn,
-                                     fio.ftabnsort, fio.fgrd,      fio.data_p, fio.datau,     fio.bday,
-                                     fio.tel_s,     fio.f_fvr_kod, fio.tab1c,  fio.tab_sovm,  fio.tel_r,
-                                     fio.tel_d,     fio.mast,      fio.okl,    fio.tab_new,   
-                                     fio.sovm,      fio.sdel,      fio.itr,    fio.dekret,
-                                     sp_firms.name AS firms_name,
-                                     sp_firms.frm_1c_inn,
-                                     brig_object.name AS BRIG_object_name,
-                                     spbrig.podrname1c AS podr1cname,
-                                     spisok1c.id AS spisok1c_id,
-                                     spisok1c.inn AS spisok1c_inn,
-                                     spisok1c.orgName AS spisok1c_orgName,
-                                     spisok1c.podrName AS spisok1c_podrName
-                                FROM fio
-                                LEFT JOIN sp_firms ON sp_firms.kod = fio.mast
-                                LEFT JOIN brig_object ON brig_object.gr = fio.gr
-                                LEFT JOIN spbrig ON spbrig.podrid1c = fio.podr_1c_id AND spbrig.podrid1c LIKE '%ЭЙС%'
-                                LEFT JOIN spisok1c ON TRY_CAST(REPLACE(spisok1c.tab1c, ' ', '') AS INT) = CAST(fio.tab1c AS INT) AND spisok1c.orgcode = sp_firms.frm_1c_inn
-                                ORDER BY fio.tab ASC";
+            //string query = $@"SELECT fio.tab,       fio.fio,       fio.rab,    fio.ved,       fio.ftabn,
+            //                         fio.ftabnsort, fio.fgrd,      fio.data_p, fio.datau,     fio.bday,
+            //                         fio.tel_s,     fio.f_fvr_kod, fio.tab1c,  fio.tab_sovm,  fio.tel_r,
+            //                         fio.tel_d,     fio.mast,      fio.okl,    fio.tab_new,   
+            //                         fio.sovm,      fio.sdel,      fio.itr,    fio.dekret,
+            //                         sp_firms.name AS firms_name,
+            //                         sp_firms.frm_1c_inn,
+            //                         brig_object.name AS BRIG_object_name,
+            //                         spbrig.podrname1c AS podr1cname,
+            //                         spisok1c.id AS spisok1c_id,
+            //                         spisok1c.inn AS spisok1c_inn,
+            //                         spisok1c.orgName AS spisok1c_orgName,
+            //                         spisok1c.podrName AS spisok1c_podrName
+            //                    FROM fio
+            //                    LEFT JOIN sp_firms ON sp_firms.kod = fio.mast
+            //                    LEFT JOIN brig_object ON brig_object.gr = fio.gr
+            //                    LEFT JOIN spbrig ON spbrig.podrid1c = fio.podr_1c_id AND spbrig.podrid1c LIKE '%ЭЙС%'
+            //                    LEFT JOIN spisok1c ON TRY_CAST(REPLACE(spisok1c.tab1c, ' ', '') AS INT) = CAST(fio.tab1c AS INT) AND spisok1c.orgcode = sp_firms.frm_1c_inn
+            //                    ORDER BY fio.tab ASC";
+            string query = $@"SELECT * FROM fio_spisok1c_view ORDER BY tab ASC";
             return _dbHelper.ExecuteQuery(query);
         }
         public System.Data.DataTable GetBrigVed()

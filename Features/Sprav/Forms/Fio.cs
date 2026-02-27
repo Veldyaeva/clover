@@ -25,7 +25,7 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _fioDataService = new Features.Sprav.FioDataService(dbHelper);
-          //  ThemeManager.UpdateTheme(this);
+            //  ThemeManager.UpdateTheme(this);
             //Таблица fio:
             tableString = tableSQL;
             //Имя формы:

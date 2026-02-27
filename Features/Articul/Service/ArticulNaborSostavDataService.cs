@@ -358,7 +358,7 @@ namespace SewingProduction.Features.Articul.Service
 
             if (selectedNns == null || selectedNns.Count == 0)
             {
-                MessageBox.Show("Не выбраны nn для применения изменений.", "Сохранение",
+                MessageBox.Show("Не выбраны номера для применения изменений.", "Сохранение",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -395,7 +395,7 @@ namespace SewingProduction.Features.Articul.Service
                     throw new Exception("Ошибка SQL: " + errorMessage);
             }
 
-            MessageBox.Show("Изменения применены к выбранным nn!", "Сохранение",
+            MessageBox.Show("Изменения применены к выбранным номерам!", "Сохранение",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -416,12 +416,11 @@ namespace SewingProduction.Features.Articul.Service
 
             return await _dbService.GetListAsync<GostRazmerNabViewModel>(query, new { id_gost = idGost });
         }
-        public async Task<List<PlanSezonAllModel>> GetPlanSezonAllByKod(int? kodd = null)
+        public async Task<List<PlanSezonAllModel>> GetPlanSezonAllByKod(string kodd = null)
         {
             string query = @"SELECT Psa_id, Nn, Tb_id, Articul, Mod, Tg_id_n, Tgm_id_n, Men, Text_mo
                             FROM plan_sezon_all"
-                            + (kodd.HasValue ? " WHERE kodd = @kodd" : "");
-
+                            + (kodd != null ? " WHERE kodd = @kodd" : "");
             return await _dbService.GetListAsync<PlanSezonAllModel>(query, new { kodd });
         }
         public async Task<List<ArtKomplektModel>> GetArtKomplektByNn(string? nn = null)
@@ -441,11 +440,11 @@ namespace SewingProduction.Features.Articul.Service
         #region EditNaborSostavPart
         public async Task UpdatePlanSezonAll(PlanSezonAllModel PSA)
         {
-            await _dbService.UpdateEntityAsync("plan_sezon_all", "Psa_id", PSA);
+            await _dbService.UpdateEntityAsync("plan_sezon_all", "Psa_id", PSA, true);
         }
         public async Task UpdateArtKomplekt(ArtKomplektModel AK)
         {
-            await _dbService.UpdateEntityAsync("art_komplekt", "Ak_id", AK);
+            await _dbService.UpdateEntityAsync("art_komplekt", "Ak_id", AK, true);
         }
         public async Task UpdateSpravNoskiDetal(int? id_spr, int? tcds_id)
         {

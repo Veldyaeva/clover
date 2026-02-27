@@ -86,6 +86,9 @@
             // 
             // customHeaderLabelMod
             // 
+            customHeaderLabelMod.Appearance.Options.UseTextOptions = true;
+            customHeaderLabelMod.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customHeaderLabelMod.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customHeaderLabelMod.Dock = System.Windows.Forms.DockStyle.Fill;
             customHeaderLabelMod.Location = new System.Drawing.Point(160, 3);
             customHeaderLabelMod.Name = "customHeaderLabelMod";
@@ -159,6 +162,9 @@
             // 
             customLabelCategory.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelCategory.Appearance.Options.UseFont = true;
+            customLabelCategory.Appearance.Options.UseTextOptions = true;
+            customLabelCategory.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelCategory.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelCategory.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelCategory.Location = new System.Drawing.Point(3, 123);
             customLabelCategory.Name = "customLabelCategory";
@@ -171,6 +177,9 @@
             // 
             customLabelGroup.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelGroup.Appearance.Options.UseFont = true;
+            customLabelGroup.Appearance.Options.UseTextOptions = true;
+            customLabelGroup.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelGroup.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelGroup.Location = new System.Drawing.Point(3, 83);
             customLabelGroup.Name = "customLabelGroup";
@@ -183,6 +192,9 @@
             // 
             customLabelClass.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelClass.Appearance.Options.UseFont = true;
+            customLabelClass.Appearance.Options.UseTextOptions = true;
+            customLabelClass.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelClass.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelClass.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelClass.Location = new System.Drawing.Point(3, 43);
             customLabelClass.Name = "customLabelClass";
@@ -193,6 +205,9 @@
             // 
             // customHeaderLabelArt
             // 
+            customHeaderLabelArt.Appearance.Options.UseTextOptions = true;
+            customHeaderLabelArt.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customHeaderLabelArt.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customHeaderLabelArt.Dock = System.Windows.Forms.DockStyle.Fill;
             customHeaderLabelArt.Location = new System.Drawing.Point(3, 3);
             customHeaderLabelArt.Name = "customHeaderLabelArt";
@@ -205,6 +220,9 @@
             // 
             customLabelCatDynsign.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelCatDynsign.Appearance.Options.UseFont = true;
+            customLabelCatDynsign.Appearance.Options.UseTextOptions = true;
+            customLabelCatDynsign.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelCatDynsign.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelCatDynsign.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelCatDynsign.Location = new System.Drawing.Point(3, 163);
             customLabelCatDynsign.Name = "customLabelCatDynsign";
@@ -217,6 +235,9 @@
             // 
             customLabelSpravNoskiDetal.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customLabelSpravNoskiDetal.Appearance.Options.UseFont = true;
+            customLabelSpravNoskiDetal.Appearance.Options.UseTextOptions = true;
+            customLabelSpravNoskiDetal.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabelSpravNoskiDetal.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabelSpravNoskiDetal.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelSpravNoskiDetal.Location = new System.Drawing.Point(3, 203);
             customLabelSpravNoskiDetal.Name = "customLabelSpravNoskiDetal";

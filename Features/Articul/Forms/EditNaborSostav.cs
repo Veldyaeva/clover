@@ -958,9 +958,11 @@ namespace SewingProduction.Features.Articul.Forms
                 //await Task.Delay(50);
                 await LoadSostav();
                 HideTechnicalColumns();
+                ConfigureGridViewNaborColumns(GridViewNabor);
+                ConfigureGridViewNaborColumns(GridViewNabor_Old);
 
                 // Матрица:
-                using var f = new EditNaborSostavMatr(_user, Convert.ToInt32(kodd), json);
+                using var f = new EditNaborSostavMatr(_user, kodd, json);
                 f.ShowDialog();
             }
             catch (Exception ex)
