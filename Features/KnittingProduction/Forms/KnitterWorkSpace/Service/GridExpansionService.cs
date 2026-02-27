@@ -158,26 +158,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             }
         }
 
-        /// <summary>
-        /// Находит handle групповой строки по значению группы (аналог FindGroupRow по header).
-        /// </summary>
-        private static int FindGroupRowByValue(GridView gridView, string headerValue)
-        {
-            if (gridView == null || string.IsNullOrEmpty(headerValue))
-                return -1;
-            for (int j = 0; j < gridView.RowCount; j++)
-            {
-                int rh = gridView.GetVisibleRowHandle(j);
-                if (rh < 0) continue;
-                if (!gridView.IsGroupRow(rh) || gridView.GetRowLevel(rh) != 0)
-                    continue;
-                var val = gridView.GetGroupRowValue(rh)?.ToString();
-                if (string.Equals(val, headerValue, StringComparison.Ordinal))
-                    return rh;
-            }
-            return -1;
-        }
-
         private static string NormalizeMachineKey(string kmlNumber)
         {
             return string.IsNullOrWhiteSpace(kmlNumber) ? string.Empty : kmlNumber.Trim();

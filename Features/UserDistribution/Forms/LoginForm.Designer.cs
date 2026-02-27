@@ -36,7 +36,7 @@
             comboBoxEditLogin = new DevExpress.XtraEditors.ComboBoxEdit();
             customCheckBox1 = new CustomCheckBox();
             labelGlaz = new System.Windows.Forms.Label();
-            _gifBackground = new Core.Class.CustomPictureBox();
+            _gifBackground = new SewingProduction.Core.Class.CustomPictureBox();
             ((System.ComponentModel.ISupportInitialize)textEditPassword.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)comboBoxEditLogin.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)_gifBackground).BeginInit();
@@ -104,7 +104,6 @@
             // 
             customCheckBox1.AutoSize = true;
             customCheckBox1.Font = new System.Drawing.Font("Arial", 10F);
-            // customCheckBox1.ForeColor = System.Drawing.Color.Black;
             customCheckBox1.Location = new System.Drawing.Point(49, 154);
             customCheckBox1.Name = "customCheckBox1";
             customCheckBox1.Size = new System.Drawing.Size(149, 20);
@@ -116,7 +115,6 @@
             // labelGlaz
             // 
             labelGlaz.AutoSize = true;
-            // labelGlaz.BackColor = System.Drawing.Color.White;
             labelGlaz.Font = new System.Drawing.Font("Showcard Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
             labelGlaz.Location = new System.Drawing.Point(434, 89);
             labelGlaz.Name = "labelGlaz";
@@ -130,7 +128,7 @@
             // 
             _gifBackground.BackColor = System.Drawing.Color.Transparent;
             _gifBackground.Font = new System.Drawing.Font("Arial", 10F);
-            // _gifBackground.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            _gifBackground.ForeColor = System.Drawing.SystemColors.ControlText;
             _gifBackground.ImagePath = null;
             _gifBackground.Location = new System.Drawing.Point(36, 192);
             _gifBackground.Name = "_gifBackground";
@@ -143,7 +141,7 @@
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.Menu;
-            BackgroundImage = Properties.Resources.snej;
+            BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new System.Drawing.Size(499, 211);
             Controls.Add(_gifBackground);
             Controls.Add(labelGlaz);
