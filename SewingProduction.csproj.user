@@ -67,7 +67,7 @@
     <Compile Update="Features\Articul\Forms\ArticulEditAdvance.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\CreateArticulMatr.cs">
+    <Compile Update="Features\Articul\Forms\CreateArticulMatrForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\EditArticul.cs">

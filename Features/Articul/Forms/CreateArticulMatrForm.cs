@@ -16,7 +16,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Forms
 {
-    public partial class CreateArticulMatr : CustomForm
+    public partial class CreateArticulMatrForm : CustomForm
 
     {
         private DatabaseHelper _dbHelper;
@@ -27,7 +27,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         private BindingSource _bindingSourceArtMatr;
 
-        public CreateArticulMatr(UserClass user)
+        public CreateArticulMatrForm(UserClass user)
         {
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);

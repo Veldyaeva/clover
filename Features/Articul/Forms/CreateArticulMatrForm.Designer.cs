@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction.Features.Articul.Forms
 {
-    partial class CreateArticulMatr
+    partial class CreateArticulMatrForm
     {
         /// <summary>
         /// Required designer variable.
@@ -93,7 +93,7 @@
             gridViewArtMatr.OptionsBehavior.ReadOnly = true;
             gridViewArtMatr.OptionsSelection.MultiSelect = true;
             gridViewArtMatr.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-            gridViewArtMatr.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.False;
+            gridViewArtMatr.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatr.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             // 
             // gcGrupmen_name
@@ -328,13 +328,13 @@
             gcSost3.VisibleIndex = 21;
             gcSost3.Width = 176;
             // 
-            // CreateArticulMatr
+            // CreateArticulMatrForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1683, 676);
             Controls.Add(gridArtMatr);
-            Name = "CreateArticulMatr";
+            Name = "CreateArticulMatrForm";
             Text = "CreateArticulMatr";
             Load += CreateArticulMatr_Load;
             ((System.ComponentModel.ISupportInitialize)gridArtMatr).EndInit();

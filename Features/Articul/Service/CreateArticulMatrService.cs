@@ -1,5 +1,6 @@
 ﻿using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
@@ -27,11 +28,10 @@ namespace SewingProduction.Features.Articul.Service
             {
                 var list = await _dbService
                     .GetListAsync<CreateArticulMatrModel>(
-                        "select * from dbo.view_createarticul_matr_articul",
-                        new { });
-
+                        //"select * from dbo.view_createarticul_matr_articul",
+                        "exec dbo.spCreateArticulMatr",
+                new { });
                 return new BindingList<CreateArticulMatrModel>(list);
-
             }
             catch (Exception ex)
             {

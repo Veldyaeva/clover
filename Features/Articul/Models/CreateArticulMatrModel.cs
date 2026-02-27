@@ -39,5 +39,7 @@ namespace SewingProduction.Features.Articul.Models
         public string Sost2 { get; set; }
         public string Sost3 { get; set; }
 
+
+
     }
 }

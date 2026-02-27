@@ -718,8 +718,8 @@ namespace SewingProduction.Features.Articul
         {
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new CreateArticulMatr(CurrentUser.User));
-                /*using (CreateArticulMatr f = new CreateArticulMatr(_user))
+                mainForm.OpenForm(new CreateArticulMatrForm(CurrentUser.User));
+                /*using (CreateArticulMatrForm f = new CreateArticulMatrForm(_user))
                 { }*/
 
             }
