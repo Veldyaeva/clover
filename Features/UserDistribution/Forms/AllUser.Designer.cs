@@ -68,17 +68,12 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewRoles
             // 
-            // gridViewRoles.Appearance.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.Appearance.Row.Options.UseBackColor = true;
-            // gridViewRoles.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
-            // gridViewRoles.AppearancePrint.EvenRow.BorderColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBorderColor = true;
-            // gridViewRoles.AppearancePrint.GroupRow.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.GroupRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
             gridViewRoles.AppearancePrint.OddRow.Options.UseBackColor = true;
-            // gridViewRoles.AppearancePrint.Row.BackColor = System.Drawing.Color.White;
             gridViewRoles.AppearancePrint.Row.Options.UseBackColor = true;
             gridViewRoles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { RoleID, RoleName, Description, HasRole1 });
             gridViewRoles.DetailHeight = 4038;
@@ -160,7 +155,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewUsers
             // 
-            // gridViewUsers.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridViewUsers.Appearance.EvenRow.Options.UseBackColor = true;
             gridViewUsers.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(250, 250, 200);
             gridViewUsers.Appearance.Row.Options.UseBackColor = true;
@@ -221,7 +215,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Brig.Name = "Brig";
             Brig.Visible = true;
             Brig.VisibleIndex = 1;
-            Brig.Width = 266;
+            Brig.Width = 87;
             // 
             // repositoryItemLookUpEditBrig
             // 
@@ -252,7 +246,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Fio.Name = "Fio";
             Fio.Visible = true;
             Fio.VisibleIndex = 2;
-            Fio.Width = 329;
+            Fio.Width = 87;
             // 
             // repositoryItemLookUpEditFio
             // 
@@ -312,10 +306,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonUserPodr
             // 
-            // customButtonUserPodr.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonUserPodr.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonUserPodr.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonUserPodr.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonUserPodr.Location = new System.Drawing.Point(1136, 198);
             customButtonUserPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonUserPodr.MinimumSize = new System.Drawing.Size(160, 20);
@@ -328,10 +320,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonShareUser
             // 
-            // customButtonShareUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonShareUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonShareUser.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonShareUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonShareUser.Location = new System.Drawing.Point(1136, 133);
             customButtonShareUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonShareUser.Name = "customButtonShareUser";
@@ -343,10 +333,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonCopyUser
             // 
-            // customButtonCopyUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonCopyUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonCopyUser.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonCopyUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonCopyUser.Location = new System.Drawing.Point(1136, 68);
             customButtonCopyUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonCopyUser.Name = "customButtonCopyUser";
@@ -358,10 +346,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonAddUser
             // 
-            // customButtonAddUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonAddUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddUser.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonAddUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAddUser.Location = new System.Drawing.Point(1136, 3);
             customButtonAddUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAddUser.Name = "customButtonAddUser";
@@ -373,10 +359,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // customButtonDeleteUser
             // 
-            // customButtonDeleteUser.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             customButtonDeleteUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteUser.Font = new System.Drawing.Font("Arial", 10F);
-            // customButtonDeleteUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonDeleteUser.Location = new System.Drawing.Point(1136, 588);
             customButtonDeleteUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonDeleteUser.Name = "customButtonDeleteUser";

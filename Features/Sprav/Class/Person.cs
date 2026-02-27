@@ -116,12 +116,18 @@ namespace SewingProduction.Features.Sprav
                 podr_1c_id_spbrig = _editFioDataService.GetPodrname1cFromSpbrig(podr_1c_id);
                 // 1C
                 dolg_d_id = row["dolg_d_id"].ToString();
-                dolg_name_dolg1C = _editFioDataService.GetNameFromDolg1C(dolg_d_id);
-                dolg_inn_dolg1C = _editFioDataService.GetInnFromDolg1C(dolg_d_id);
+                if (dolg_d_id != null && dolg_d_id.Length > 0)
+                {
+                    dolg_name_dolg1C = _editFioDataService.GetNameFromDolg1C(dolg_d_id);
+                    dolg_inn_dolg1C = _editFioDataService.GetInnFromDolg1C(dolg_d_id);
+                }
                 podr_pd_uid = row["podr_pd_uid"].ToString();
-                podr_id_podr1C = _editFioDataService.GetIdFromPodr1C(podr_pd_uid);
-                podr_name_podr1C = _editFioDataService.GetNameFromPodr1C(podr_pd_uid); ;
-                podr_inn_podr1C = _editFioDataService.GetInnFromPodr1C(podr_pd_uid); ;
+                if (podr_pd_uid != null && podr_pd_uid.Length > 0)
+                {
+                    podr_id_podr1C = _editFioDataService.GetIdFromPodr1C(podr_pd_uid);
+                    podr_name_podr1C = _editFioDataService.GetNameFromPodr1C(podr_pd_uid);
+                    podr_inn_podr1C = _editFioDataService.GetInnFromPodr1C(podr_pd_uid);
+                }
 
                 return true;
             }

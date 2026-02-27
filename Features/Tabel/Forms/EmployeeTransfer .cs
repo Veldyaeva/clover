@@ -77,8 +77,12 @@ namespace SewingProduction.Features.Tabel.Forms
                     DateTime selectedDate = customDateTimePicker1.Value;
                     string dateString = selectedDate.ToString("yyyyMMdd");
                     int newIdGr = (int)EditPodrLookUpEdit.EditValue;
-                    string query = $"update tabel_zl set gr = {newIdGr} where id = {_currentId} and mg ='{_currentMg}'";
-                    _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+                    // Не нужно убирать из табеля текущего месяца при увольнении
+                    if (newIdGr != 99)
+                    {
+                        string query = $"update tabel_zl set gr = {newIdGr} where id = {_currentId} and mg ='{_currentMg}'";
+                        _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
+                    }
                     string queryUpdGr = $"update zl_spisok set gr_s = gr, gr = {newIdGr} where tabno = {_tab}";
                     _dbHelper.ExecuteNonQueryAsync(queryUpdGr, new Dictionary<string, object> { });
                     string queryIns = $"insert into dv_pers (tabno, firstname, middlename, lastname, dolg, gr_s, gr_n, dat, pom, podr, dat_f) " +

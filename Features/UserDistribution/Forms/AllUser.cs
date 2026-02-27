@@ -112,6 +112,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private async void gridViewUsers_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
+            int rowHandle = gridViewUsers.FocusedRowHandle;
             try
             {
                 var user = e.Row as UserModel;
@@ -124,8 +125,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
                 int newUserId = await _userModelDataService.SaveAsync(user);
                 user.UserID = newUserId;
-
-                _userModelDataService.SetPravaForAddUser(newUserId);
+                // перенесено на триггер в SQL
+                //_userModelDataService.SetPravaForAddUser(newUserId);
                 customGridControlUsers_Load(sender, e);
             }
             catch (System.Data.SqlClient.SqlException ex)
@@ -141,6 +142,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
                 gridViewUsers.DeleteRow(gridViewUsers.FocusedRowHandle); // откат строки
             }
+            gridViewUsers.FocusedRowHandle = rowHandle;
 
         }
         #endregion
