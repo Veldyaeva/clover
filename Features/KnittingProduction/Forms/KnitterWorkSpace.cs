@@ -59,7 +59,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Список SQL-объектов для отслеживания через ServiceBroker.
         /// </summary>
         private static readonly IReadOnlyList<string> _sbObjects =
-            new[] { "GetPlanZagrVyazNorm_ByTab4" };
+            new[] { "GetPlanZagrVyazNorm_ByTab3" };
         public IReadOnlyList<string> ServiceBrokerObjects => _sbObjects;
         /// <summary>
         /// Приоритеты обновления объектов (чем выше число, тем выше приоритет).
@@ -67,7 +67,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static readonly IReadOnlyDictionary<string, int> _sbPriorities =
     new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
     {
-        { "GetPlanZagrVyazNorm_ByTab4", 10 }
+        { "GetPlanZagrVyazNorm_ByTab3", 10 }
     };
         public IReadOnlyDictionary<string, int> RefreshPriorities => _sbPriorities;
         public string ServiceBrokerFormName => GetType().Name;
@@ -2326,6 +2326,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _planPresenter.BindGroupDetails(bandedGridView3, advBandedGridView1, _planBindingSource, plan ?? new List<KnitterPZVModel>(), clearTabs: false);
                 RefreshFooterSummaries();
                 _currentLoadedTab = tab;
+                RestorePlanFocus(focusSnap);
             }
 
             if (InvokeRequired)
@@ -2385,7 +2386,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RestartDataByObjectNameAsync: {objectName}");
 
                     // Если это наша хранимая процедура плана - перезагружаем план
-                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab4", StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab3", StringComparison.OrdinalIgnoreCase))
                     {
                         if (_currentLoadedTab.HasValue)
                         {

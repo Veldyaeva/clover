@@ -28,29 +28,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             public HashSet<(string MachineKey, string Header)> HeaderGroups { get; }
         }
 
-        public ExpansionState Capture(BandedGridView masterView3)
+        public ExpansionState Capture(BandedGridView masterView)
         {
-            if (masterView3 == null || masterView3.DataRowCount == 0)
+            if (masterView == null || masterView.DataRowCount == 0)
                 return ExpansionState.Empty;
 
             var machines = new HashSet<string>();
             var artNom = new HashSet<(string MachineKey, string ArtKey, int? Nom)>();
             var headers = new HashSet<(string MachineKey, string Header)>();
 
-            for (int i = 0; i < masterView3.DataRowCount; i++)
+            for (int i = 0; i < masterView.DataRowCount; i++)
             {
-                int rh = masterView3.GetVisibleRowHandle(i);
+                int rh = masterView.GetVisibleRowHandle(i);
                 if (rh < 0) continue;
 
-                if (masterView3.IsMasterRow(rh) && masterView3.GetMasterRowExpanded(rh))
+                if (masterView.IsMasterRow(rh) && masterView.GetMasterRowExpanded(rh))
                 {
-                    if (masterView3.GetRow(rh) is not KnitterPZVModel machineRow)
+                    if (masterView.GetRow(rh) is not KnitterPZVModel machineRow)
                         continue;
 
                     var machineKey = NormalizeMachineKey(machineRow.kmlNumber);
                     machines.Add(machineKey);
 
-                    var detailView = masterView3.GetDetailView(rh, 0) as BandedGridView;
+                    var detailView = masterView.GetDetailView(rh, 0) as BandedGridView;
                     if (detailView != null)
                     {
                         // Art/Nom — развёрнутые группы по артикулу/ному (если есть такой уровень)
@@ -87,29 +87,29 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             return new ExpansionState(machines, artNom, headers);
         }
 
-        public void Restore(BandedGridView masterView3, ExpansionState state)
+        public void Restore(BandedGridView masterView, ExpansionState state)
         {
-            if (state == null || masterView3 == null)
+            if (state == null || masterView == null)
                 return;
 
-            masterView3.BeginUpdate();
+            masterView.BeginUpdate();
             try
             {
-                for (int i = 0; i < masterView3.DataRowCount; i++)
+                for (int i = 0; i < masterView.DataRowCount; i++)
                 {
-                    int rh = masterView3.GetVisibleRowHandle(i);
+                    int rh = masterView.GetVisibleRowHandle(i);
                     if (rh < 0) continue;
 
-                    if (masterView3.GetRow(rh) is not KnitterPZVModel machineRow)
+                    if (masterView.GetRow(rh) is not KnitterPZVModel machineRow)
                         continue;
 
                     var machineKey = NormalizeMachineKey(machineRow.kmlNumber);
                     if (!state.MachineKeys.Contains(machineKey))
                         continue;
 
-                    masterView3.SetMasterRowExpanded(rh, true);
+                    masterView.SetMasterRowExpanded(rh, true);
 
-                    var detailView = masterView3.GetDetailView(rh, 0) as BandedGridView;
+                    var detailView = masterView.GetDetailView(rh, 0) as BandedGridView;
                     if (detailView == null)
                         continue;
 
@@ -154,7 +154,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
             }
             finally
             {
-                masterView3.EndUpdate();
+                masterView.EndUpdate();
             }
         }
 
