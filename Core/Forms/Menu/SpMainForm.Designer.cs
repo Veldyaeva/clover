@@ -86,6 +86,7 @@ namespace SewingProduction
             skinPaletteDropDownButtonItem1 = new SkinPaletteDropDownButtonItem();
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
             miniToolStrip = new System.Windows.Forms.MenuStrip();
+            barButtonItem1 = new BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabbedMdiManager1).BeginInit();
@@ -105,8 +106,8 @@ namespace SewingProduction
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
             barManager1.HideIfNoRight = true;
-            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt });
-            barManager1.MaxItemId = 44;
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItem1 });
+            barManager1.MaxItemId = 45;
             barManager1.SkipDevExpressSkinItems = true;
             // 
             // bar1
@@ -323,7 +324,7 @@ namespace SewingProduction
             // 
             barSubKnitting.Caption = "Вязальное производство";
             barSubKnitting.Id = 30;
-            barSubKnitting.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnOperPlan), new LinkPersistInfo(barBtnMasterDesk1), new LinkPersistInfo(barBtnKnitterDesk), new LinkPersistInfo(barBtnAnalytics) });
+            barSubKnitting.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnOperPlan), new LinkPersistInfo(barBtnMasterDesk1), new LinkPersistInfo(barBtnKnitterDesk), new LinkPersistInfo(barBtnAnalytics), new LinkPersistInfo(barButtonItem1) });
             barSubKnitting.Name = "barSubKnitting";
             barSubKnitting.Tag = "вязальноеПроизводствоToolStripMenuItem";
             // 
@@ -468,7 +469,7 @@ namespace SewingProduction
             barDockControlTop.Location = new Point(0, 0);
             barDockControlTop.Manager = barManager1;
             barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            barDockControlTop.Size = new Size(1184, 25);
+            barDockControlTop.Size = new Size(1184, 27);
             // 
             // barDockControlBottom
             // 
@@ -483,19 +484,19 @@ namespace SewingProduction
             // 
             barDockControlLeft.CausesValidation = false;
             barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            barDockControlLeft.Location = new Point(0, 25);
+            barDockControlLeft.Location = new Point(0, 27);
             barDockControlLeft.Manager = barManager1;
             barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            barDockControlLeft.Size = new Size(0, 488);
+            barDockControlLeft.Size = new Size(0, 486);
             // 
             // barDockControlRight
             // 
             barDockControlRight.CausesValidation = false;
             barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            barDockControlRight.Location = new Point(1184, 25);
+            barDockControlRight.Location = new Point(1184, 27);
             barDockControlRight.Manager = barManager1;
             barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            barDockControlRight.Size = new Size(0, 488);
+            barDockControlRight.Size = new Size(0, 486);
             // 
             // skinBarSubItem1
             // 
@@ -544,6 +545,13 @@ namespace SewingProduction
             miniToolStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
             miniToolStrip.Size = new Size(473, 165);
             miniToolStrip.TabIndex = 21;
+            // 
+            // barButtonItem1
+            // 
+            barButtonItem1.Caption = "Доступ ТСД";
+            barButtonItem1.Id = 44;
+            barButtonItem1.Name = "barButtonItem1";
+            barButtonItem1.ItemClick += barButtonItem1_ItemClick;
             // 
             // SpMainForm
             // 
@@ -634,6 +642,6 @@ namespace SewingProduction
 
         private DevExpress.XtraBars.BarButtonItem barBtnQuestion;
         private DevExpress.XtraBars.BarButtonItem barBtnAt;
-
+        private BarButtonItem barButtonItem1;
     }
 }
