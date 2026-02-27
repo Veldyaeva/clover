@@ -2490,12 +2490,33 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     case "refresh":
                         await ReloadCurrentTabAsync();
                         break;
+
+                    case "collapse-to-vm":
+                        // Свернуть всё: скрыть все детальные уровни (master-detail)
+                        CollapseAllMasterDetail();
+                        break;
+
+                    case "collapse-to-pachka":
+                        // Свернуть до пачки: машины раскрыты, внутри детального грида свёрнуты группы по __Header
+                        CollapseToPachkaLevel();
+                        break;
+
+                    case "expand-all":
+                    case "toggle-expand":
+                        // Показать всё: раскрыть все машины и все группы в детальном гриде
+                        ExpandAllMasterDetail();
+                        break;
+
                     default:
                         // Если тег не установлен, пытаемся определить по Caption
                         string caption = button.Caption ?? string.Empty;
                         if (caption.Contains("Обновить", StringComparison.OrdinalIgnoreCase))
                         {
                             await ReloadCurrentTabAsync();
+                        }
+                        if (caption.Contains("Свернуть всё", StringComparison.OrdinalIgnoreCase))
+                        {
+                            CollapseAllMasterDetail();
                         }
                         break;
                 }
@@ -2536,6 +2557,117 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     btn.Tag = tag;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Свернуть всё: скрыть все детальные уровни master-detail (остаётся только верхний уровень машин).
+        /// </summary>
+        private void CollapseAllMasterDetail()
+        {
+            if (bandedGridView3 == null)
+                return;
+
+            bandedGridView3.BeginUpdate();
+            try
+            {
+                for (int rh = 0; rh < bandedGridView3.RowCount; rh++)
+                {
+                    if (bandedGridView3.IsMasterRow(rh))
+                    {
+                        bandedGridView3.SetMasterRowExpanded(rh, false);
+                    }
+                }
+            }
+            finally
+            {
+                bandedGridView3.EndUpdate();
+            }
+        }
+
+        /// <summary>
+        /// Свернуть до пачки: все машины раскрыты, внутри детального грида свернуты группы по __Header.
+        /// </summary>
+        private void CollapseToPachkaLevel()
+        {
+            if (bandedGridView3 == null)
+                return;
+
+            bandedGridView3.BeginUpdate();
+            try
+            {
+                for (int rh = 0; rh < bandedGridView3.RowCount; rh++)
+                {
+                    if (!bandedGridView3.IsDataRow(rh))
+                        continue;
+
+                    if (bandedGridView3.IsMasterRow(rh))
+                    {
+                        bandedGridView3.SetMasterRowExpanded(rh, true);
+                    }
+
+                    var detail = bandedGridView3.GetDetailView(rh, 0) as DevExpress.XtraGrid.Views.Grid.GridView;
+                    if (detail == null)
+                        continue;
+
+                    detail.BeginUpdate();
+                    try
+                    {
+                        // Группы по __Header находятся на уровне 0 — CollapseAllGroups сворачивает их,
+                        // оставляя видимыми строки-группы (пачки) с итогами.
+                        detail.CollapseAllGroups();
+                    }
+                    finally
+                    {
+                        detail.EndUpdate();
+                    }
+                }
+            }
+            finally
+            {
+                bandedGridView3.EndUpdate();
+            }
+        }
+
+        /// <summary>
+        /// Показать всё: раскрыть все master-строки и все группы в детальном гриде.
+        /// </summary>
+        private void ExpandAllMasterDetail()
+        {
+            if (bandedGridView3 == null)
+                return;
+
+            bandedGridView3.BeginUpdate();
+            try
+            {
+                for (int rh = 0; rh < bandedGridView3.RowCount; rh++)
+                {
+                    if (!bandedGridView3.IsDataRow(rh))
+                        continue;
+
+                    if (bandedGridView3.IsMasterRow(rh))
+                    {
+                        bandedGridView3.ExpandAllGroups();//.SetMasterRowExpanded(rh, true);
+                    }
+
+                    var detail = bandedGridView3.GetDetailView(rh, 0) as DevExpress.XtraGrid.Views.Grid.GridView;
+                    if (detail == null)
+                        continue;
+
+                    detail.BeginUpdate();
+                    try
+                    {
+                        detail.ExpandAllGroups();
+                    }
+                    finally
+                    {
+                        detail.EndUpdate();
+                    }
+                }
+            }
+            finally
+            {
+                bandedGridView3.EndUpdate();
             }
         }
 
