@@ -247,8 +247,11 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnUin.FieldName = "uin";
             gridColumnTsplPart.FieldName = "tsplPart";
             gridColumnTsplPart.DisplayFormat.FormatString = "0.00";
+            gridColumnTsplPart.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridColumnTsplPartOf.FieldName = "tsplPartOf";
-            gridColumnTsplPartOf.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+            gridColumnTsplPartOf.DisplayFormat.FormatString = "0.00";
+            gridColumnTsplPartOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+
             gridColumnCheckIncludePlan.FieldName = "ts_plan";
             gridColumnPodrTableID.FieldName = "podrTableID";
             gridColumnFio.Width = 90;
@@ -910,6 +913,10 @@ namespace SewingProduction.Features.Tabel.Forms
                 int grId = Convert.ToInt32(lookUpEditGr.EditValue);
                 int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
                 string query = null;
+                if (fieldName == "tslpPart" || fieldName == "tsplPartOf")
+                {
+                    value = value.Replace(',', '.');
+                }
                 if (podrTableId == 19)
                 {
                     query = $"update tabel_sp set {fieldName} = '{value}' where id = {id} ";
