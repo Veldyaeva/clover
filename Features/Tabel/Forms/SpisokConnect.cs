@@ -2,6 +2,7 @@
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraDiagram.Bars;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraSpreadsheet.UI;
 using SewingProduction.Core.helpers;
 using SewingProduction.Extensions;
@@ -35,6 +36,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private static TabelDataService _tabelDataService;
         public BindingSource _scheduleOfWork;
         public BindingSource _zlPodr;
+        public BindingSource _spPodr;
         public BindingSource _spisokNewBindingSource;
         public SpisokConnect()
         {
@@ -69,6 +71,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridColumnTabno.FieldName = "tabno";
                 gridSpisokVerif1c.FieldName = "verif1c";
                 gridSpisokVerifParsec.FieldName = "verifParsec";
+                gridColumnGroupName.FieldName = "nameGroup";
                 //var items = await _tabelDataService.GetScheduleOfWorkAsync();
                 //_scheduleOfWork = new BindingSource { DataSource = items.ToList() };
                 //repositoryItemLookUpEdit1.DataSource = _scheduleOfWork;
@@ -79,6 +82,11 @@ namespace SewingProduction.Features.Tabel.Forms
                 repositoryItemLookUpEdit2.DataSource = _zlPodr;
                 repositoryItemLookUpEdit2.DisplayMember = "naimen";
                 repositoryItemLookUpEdit2.ValueMember = "gr";
+                var spPodr = await _tabelDataService.GetSpComboPodrAsync();
+                _spPodr = new BindingSource { DataSource = spPodr.ToList() };
+                repositoryItemLookUpEdit1.DataSource = _spPodr;
+                repositoryItemLookUpEdit1.DisplayMember = "naimen";
+                repositoryItemLookUpEdit1.ValueMember = "gr";
                 // 
                 //repositoryItemComboBox1.Items
                 #endregion
@@ -181,52 +189,64 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             if (e.Button == MouseButtons.Right && e.Clicks == 1)
             {
-                OpenTimeCalculator(e.RowHandle, e.Column);
+                OpenChoouseUin(e.RowHandle, e.Column);
             }
         }
-        private async void OpenTimeCalculator(int rowHandle, GridColumn column)
+        private async void OpenChoouseUin(int rowHandle, GridColumn column)
         {
-            if (rowHandle < 0 || column == null) return;
-            string lastName = gridView1.GetRowCellValue(rowHandle, "firstname").ToString();
-            string firstName = gridView1.GetRowCellValue(rowHandle, "middlename").ToString();
-            string middleName = gridView1.GetRowCellValue(rowHandle, "lastname").ToString();
-            int valueVerif1c = (int)gridView1.GetRowCellValue(rowHandle, "verif1c");
-            int tabno = (int)gridView1.GetRowCellValue(rowHandle, "tabno");
-            string naimenPodr = gridView1.GetRowCellValue(rowHandle, "naimen").ToString();
-            if (valueVerif1c == 1)
+            try
             {
-                MessageBox.Show("Увязка с 1с не требуется!");
-                return;
-            }
-            using (var chooseForm = new ChooseUin(lastName, firstName, middleName,tabno,naimenPodr))
-            {
-                //Point mousePosition = Control.MousePosition;
-                //calculator.StartPosition = FormStartPosition.Manual;
-                //calculator.Location = mousePosition;
-                Point cursorPos = Cursor.Position;
-                Point safePosition = CalculateSafePosition(
-                    cursorPos,
-                    chooseForm.Size);
-
-                chooseForm.StartPosition = FormStartPosition.Manual;
-                chooseForm.Location = safePosition;
-                if (chooseForm.ShowDialog() == DialogResult.OK)
+                if (rowHandle < 0 || column == null) return;
+                string lastName = gridView1.GetRowCellValue(rowHandle, "firstname").ToString();
+                string firstName = gridView1.GetRowCellValue(rowHandle, "middlename").ToString();
+                string middleName = gridView1.GetRowCellValue(rowHandle, "lastname").ToString();
+                int valueVerif1c = (int)gridView1.GetRowCellValue(rowHandle, "verif1c");
+                int tabno = (int)gridView1.GetRowCellValue(rowHandle, "tabno");
+                string naimenPodr = gridView1.GetRowCellValue(rowHandle, "naimen").ToString();
+                string nameGroup = gridView1.GetRowCellValue(rowHandle, "nameGroup").ToString();
+                if (valueVerif1c == 1)
                 {
-                    _spisokNewBindingSource.Clear();
-                    _spisokNewBindingSource = new BindingSource { DataSource = await _tabelDataService.GetListForLinkingsAsync()};
-                    var changes = BindingSourceHelper.GetChanges<ListForLinking>(
-                      _spisokBindingSource,
-                      _spisokNewBindingSource,
-                      HashMode.All,
-                      keyProperties: new[] { "tabno" });
-                    BindingSourceHelper.ApplyChanges<ListForLinking>(
-                       _spisokBindingSource,
-                       changes,
-                       UpdateFieldsMode.All,
-                       keyProperties: new[] { "tabno" },
-                       gridView1);
+                    MessageBox.Show("Увязка с 1с не требуется!");
+                    return;
                 }
+                using (var chooseForm = new ChooseUin(lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
+                {
+                    //Point mousePosition = Control.MousePosition;
+                    //calculator.StartPosition = FormStartPosition.Manual;
+                    //calculator.Location = mousePosition;
+                    Point cursorPos = Cursor.Position;
+                    Point safePosition = CalculateSafePosition(
+                        cursorPos,
+                        chooseForm.Size);
 
+                    chooseForm.StartPosition = FormStartPosition.Manual;
+                    chooseForm.Location = safePosition;
+                    if (chooseForm.ShowDialog() == DialogResult.OK)
+                    {
+                        gridView1.BeginUpdate();
+                        _spisokNewBindingSource.Clear();
+                        _spisokNewBindingSource = new BindingSource { DataSource = await _tabelDataService.GetListForLinkingsAsync() };
+                        var changes = BindingSourceHelper.GetChanges<ListForLinking>(
+                          _spisokBindingSource,
+                          _spisokNewBindingSource,
+                          HashMode.All,
+                          keyProperties: new[] { "tabno", "nameGroup" });
+                        int indexGrid = gridView1.TopRowIndex;
+                        BindingSourceHelper.ApplyChanges<ListForLinking>(
+                           _spisokBindingSource,
+                           changes,
+                           UpdateFieldsMode.All,
+                           keyProperties: new[] { "tabno", "nameGroup" },
+                           gridView1);
+                        gridView1.TopRowIndex = indexGrid;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Произошла ошибка!");
+                return;
             }
         }
         public static Point CalculateSafePosition(Point desiredLocation, Size formSize)
@@ -269,6 +289,53 @@ namespace SewingProduction.Features.Tabel.Forms
             y = Math.Max(workingArea.Top, y);
 
             return new Point(x, y);
+        }
+
+        private void gridView1_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName == "gr")
+            {
+                GridView view = sender as GridView;
+                string condition = view.GetRowCellValue(e.RowHandle, "nameGroup")?.ToString();
+                if (condition != null)
+                {
+                    if (condition == "shp")
+                    {
+                        e.RepositoryItem = repositoryItemLookUpEdit1;
+
+                    }
+                    else if (condition == "zl")
+                    {
+                        e.RepositoryItem = repositoryItemLookUpEdit2;
+                    }
+                }
+            }
+        }
+
+        private void gridView1_ShowingEditor(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void gridView1_EditFormShowing(object sender, EditFormShowingEventArgs e)
+        {
+            GridView view = sender as GridView;
+
+            // Получаем текущую строку
+            int rowHandle = view.FocusedRowHandle;
+
+            // Проверяем условие для конкретной строки
+            if (rowHandle == 0) // Запрещаем редактирование первой строки
+            {
+                e.Allow = false; // Отменяем открытие редактора
+            }
+
+            // Или по значению в строке
+            string status = view.GetRowCellValue(rowHandle, "nameGroup")?.ToString();
+            if (status == "shp")
+            {
+                e.Allow = false; // Запрещаем редактирование для закрытых записей
+            }
         }
     }
 }

@@ -21,7 +21,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         private Dictionary<(string TaskNum, string MachineKey), List<KnitterPZVModel>> _byTaskMachine;
         private Dictionary<string, List<KnitterPZVModel>> _machineArtNomMaster;
         private Dictionary<(string MachineKey, string ArtKey, int? Nom), List<KnitterPZVModel>> _machineArtNomGroups;
-        //private Dictionary<(string TaskNum, string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _machineArtNomPachGroups;
         private Dictionary<(string TaskNum, string MachineKey, string ArtKey, int? Nom, int? Pach), List<KnitterPZVModel>> _taskMachineArtNomPachGroups;
         private readonly GridExpansionService _expansionService = new GridExpansionService();
 
@@ -76,29 +75,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                         Pach: (int?)r.n_pach))
                     .ToDictionary(g => g.Key, g => g.ToList());
 
-                //_machineArtNomMaster = _allRows // это групп саммари по часам в самой вложенной таблице, не хочу его видеть
-                //    .GroupBy(r => (TaskNum: KnitterPlanUtils.NormalizeTaskNum(r.pzvNomZad), MachineKey: KnitterPlanUtils.NormalizeMachineKey(r.kmlNumber)))
-                //    .ToDictionary(
-                //        kv => kv.Key.MachineKey,
-                //        kv => kv
-                //        .GroupBy(r => (KnitterPlanUtils.NormalizeArtKey(r.pzvArticul), r.pzvNom))
-                //        .Select(g => g.First())
-                //        .ToList());
-
                 var masterData = _byTaskMachine.Values.Select(list =>
                 {
-                    //    var baseRow = list.First();
-
-                    //    var master = list.First();
-                    //    // Часы назначено/факт берём из БД (pzvChasNazn, pzvNChasi), суммируем по операциям
-                    //    //var assigned = list.Sum(r => (double)r.pzvChasNazn); // тут, если смена открыта, нужно брать назначено - pzvChasNazn, если нет - pzvNChasi
-                    //    var assigned = list.Sum(r => (double)(r.pzvNChasi??0m));
-                    //    //var done = list.Sum(r => (double)(r.pzvNChasi ?? 0m));// тут так же. И с количеством такая же логика
-                    //    var done = list.Sum(r => (double)r.pzvChasNazn);
-                    //    master.pzvChasNazn = (decimal)Math.Round(assigned, 2);
-                    //    master.pzvNChasi = (decimal)Math.Round(done, 2);
-                    //    return master;
-                    //}).ToList();
                     var baseRow = list.First();
 
                     var master = new KnitterPZVModel
@@ -122,7 +100,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
                     return master;
                 }).ToList();
-                bindingSource.DataSource = masterData;
+                if (bindingSource.DataSource is BindingList<KnitterPZVModel> bl)
+                {
+                    ApplyMasterDelta(bl, masterData);
+                }
+                else
+                {
+                    bindingSource.DataSource = new BindingList<KnitterPZVModel>(masterData);
+                }
 
                 //
                 masterView3.MasterRowGetRelationCount -= Master_MasterRowGetRelationCount;
@@ -132,13 +117,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 masterView3.MasterRowGetRelationName += Master_MasterRowGetRelationName;
                 masterView3.MasterRowGetChildList += Master_MasterRowGetChildList;
                 masterView3.OptionsDetail.EnableMasterViewMode = true;
-                masterView3.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
                 masterView3.OptionsDetail.ShowDetailTabs = false;
-
-                //bandedGridView1.OptionsDetail.EnableMasterViewMode = true;
-                //bandedGridView1.OptionsDetail.AllowOnlyOneMasterRowExpanded = false;
-                //bandedGridView1.OptionsDetail.AllowExpandEmptyDetails = true;
-                //bandedGridView1.OptionsDetail.ShowDetailTabs = false;
             }
             finally
             {
@@ -147,6 +126,48 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
 
             _expansionService.Restore(masterView3, expansionState);
         }
+
+        private static string MasterKey(KnitterPZVModel m) =>
+    $"{KnitterPlanUtils.NormalizeTaskNum(m.pzvNomZad)}|{KnitterPlanUtils.NormalizeMachineKey(m.kmlNumber)}";
+
+        private static void ApplyMasterDelta(BindingList<KnitterPZVModel> target, List<KnitterPZVModel> fresh)
+        {
+            var targetByKey = target.ToDictionary(MasterKey);
+            var freshByKey = fresh.ToDictionary(MasterKey);
+
+            // remove missing
+            for (int i = target.Count - 1; i >= 0; i--)
+            {
+                var key = MasterKey(target[i]);
+                if (!freshByKey.ContainsKey(key))
+                    target.RemoveAt(i);
+            }
+
+            // update existing + add new
+            foreach (var f in fresh)
+            {
+                var key = MasterKey(f);
+                if (targetByKey.TryGetValue(key, out var t))
+                {
+                    // обновляем поля (ВАЖНО: не заменяем ссылку!)
+                    t.pzvNomZad = f.pzvNomZad;
+                    t.kmlNumber = f.kmlNumber;
+                    t.pzvArticul = f.pzvArticul;
+                    t.pzvMod = f.pzvMod;
+                    t.pzvNom = f.pzvNom;
+                    t.koefObServ = f.koefObServ;
+                    t.name_class = f.name_class;
+                    t.pzvKmlID = f.pzvKmlID;
+                    t.pzvChasNazn = f.pzvChasNazn;
+                    t.pzvNChasi = f.pzvNChasi;
+                }
+                else
+                {
+                    target.Add(f);
+                }
+            }
+        }
+
 
         /// <summary>
         /// Возвращает набор записей, соответствующий текущему выбору пользователя в указанном представлении.

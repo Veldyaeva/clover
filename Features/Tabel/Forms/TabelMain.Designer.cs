@@ -71,8 +71,10 @@
             gridColumnDd31 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPodrTableID = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnDlD = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnUin = new DevExpress.XtraGrid.Columns.GridColumn();
             customLabel1 = new SewingProduction.Core.Class.CustomLabel();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton7 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton6 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton5 = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -98,6 +100,7 @@
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -107,8 +110,6 @@
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
-            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
-            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
@@ -127,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
@@ -136,7 +138,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -171,13 +172,14 @@
             gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             gridView1.Appearance.Row.Options.UseTextOptions = true;
             gridView1.Appearance.Row.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnCheckIncludePlan, gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31, gridColumnPodrTableID, gridColumnDlD });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnCheckIncludePlan, gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31, gridColumnPodrTableID, gridColumnDlD, gridColumnUin });
             gridView1.GridControl = customGridControlTimeSheet;
             gridView1.Name = "gridView1";
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
             gridView1.RowCellClick += gridView1_RowCellClick;
             gridView1.RowCellStyle += gridView1_RowCellStyle;
             gridView1.CellValueChanged += gridView1_CellValueChanged;
+            gridView1.CellValueChanging += gridView1_CellValueChanging;
             gridView1.KeyDown += gridView1_KeyDown;
             gridView1.KeyPress += gridView1_KeyPress;
             gridView1.DoubleClick += gridView1_DoubleClick;
@@ -198,6 +200,7 @@
             repositoryItemCheckEditPlan.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             repositoryItemCheckEditPlan.ValueChecked = 1;
             repositoryItemCheckEditPlan.ValueUnchecked = 0;
+            repositoryItemCheckEditPlan.EditValueChanged += repositoryItemCheckEditPlan_EditValueChanged;
             // 
             // gridColumnPomPech
             // 
@@ -229,6 +232,7 @@
             // gridColumnTsplPart
             // 
             gridColumnTsplPart.Caption = "Ставка д/пл";
+            gridColumnTsplPart.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             gridColumnTsplPart.Name = "gridColumnTsplPart";
             gridColumnTsplPart.OptionsColumn.AllowEdit = false;
             gridColumnTsplPart.Visible = true;
@@ -404,6 +408,11 @@
             gridColumnDlD.Caption = "dld";
             gridColumnDlD.Name = "gridColumnDlD";
             // 
+            // gridColumnUin
+            // 
+            gridColumnUin.Caption = "УИН";
+            gridColumnUin.Name = "gridColumnUin";
+            // 
             // customLabel1
             // 
             customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -446,6 +455,18 @@
             layoutControl1.Size = new System.Drawing.Size(1532, 599);
             layoutControl1.TabIndex = 4;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 12F);
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Location = new System.Drawing.Point(1203, 532);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new System.Drawing.Size(305, 43);
+            customSimpleButton1.StyleController = layoutControl1;
+            customSimpleButton1.TabIndex = 31;
+            customSimpleButton1.Text = "Отвл. Работы";
+            customSimpleButton1.Click += customButtonOtvlRab_Click;
             // 
             // customSimpleButton7
             // 
@@ -741,6 +762,16 @@
             layoutControlItem12.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem12.TextVisible = false;
             // 
+            // layoutControlItem10
+            // 
+            layoutControlItem10.Control = customSimpleButton1;
+            layoutControlItem10.Location = new System.Drawing.Point(1179, 0);
+            layoutControlItem10.MinSize = new System.Drawing.Size(92, 26);
+            layoutControlItem10.Name = "layoutControlItem10";
+            layoutControlItem10.Size = new System.Drawing.Size(309, 47);
+            layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem10.TextVisible = false;
+            // 
             // layoutControlItem13
             // 
             layoutControlItem13.ContentHorzAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -826,28 +857,6 @@
             layoutControlItem15.Size = new System.Drawing.Size(677, 47);
             layoutControlItem15.TextVisible = false;
             // 
-            // customSimpleButton1
-            // 
-            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 12F);
-            customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Location = new System.Drawing.Point(1203, 532);
-            customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(305, 43);
-            customSimpleButton1.StyleController = layoutControl1;
-            customSimpleButton1.TabIndex = 31;
-            customSimpleButton1.Text = "Отвл. Работы";
-            customSimpleButton1.Click += customButtonOtvlRab_Click;
-            // 
-            // layoutControlItem10
-            // 
-            layoutControlItem10.Control = customSimpleButton1;
-            layoutControlItem10.Location = new System.Drawing.Point(1179, 0);
-            layoutControlItem10.MinSize = new System.Drawing.Size(92, 26);
-            layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(309, 47);
-            layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem10.TextVisible = false;
-            // 
             // TabelMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -876,6 +885,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
@@ -885,7 +895,6 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ResumeLayout(false);
         }
 
@@ -972,5 +981,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private Core.Class.CustomSimpleButton customSimpleButton1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnUin;
     }
 }
