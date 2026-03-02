@@ -913,7 +913,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 int grId = Convert.ToInt32(lookUpEditGr.EditValue);
                 int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
                 string query = null;
-                if (fieldName == "tslpPart" || fieldName == "tsplPartOf")
+                if (fieldName == "tsplPart" || fieldName == "tsplPartOf")
                 {
                     value = value.Replace(',', '.');
                 }
