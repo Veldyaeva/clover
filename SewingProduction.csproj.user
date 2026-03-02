@@ -112,6 +112,9 @@
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyazCheck.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\TSDAccessManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
       <SubType>Form</SubType>
     </Compile>

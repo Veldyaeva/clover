@@ -5,6 +5,7 @@ using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -530,8 +531,11 @@ namespace SewingProduction.Core.helpers
             DevExpress.XtraGrid.Views.Grid.GridView view,
             Func<T, TKey> keySelector,
             TKey key,
-            string? focusedColumnFieldName)
+            string? focusedColumnFieldName
+            //int topRowIndex = -1
+            )
         {
+            //Debug.WriteLine($"[RestoreGridPosition] key={key}, focusedColumnFieldName={focusedColumnFieldName}, topRowIndex={topRowIndex}");
             // 1. Индекс в BindingSource
             int index = -1;
             for (int i = 0; i < source.Count; i++)
@@ -569,6 +573,9 @@ namespace SewingProduction.Core.helpers
                 if (col != null)
                     view.FocusedColumn = col;
             }
+            //Debug.WriteLine($"[RestoreGridPosition] After setting focused row and column: FocusedRowHandle={view.FocusedRowHandle}, FocusedColumn={view.FocusedColumn?.FieldName}, TopRowIndex={view.TopRowIndex}");
+            //view.TopRowIndex = topRowIndex >= 0 ? topRowIndex : view.TopRowIndex;
+            //Debug.WriteLine($"[RestoreGridPosition] After setting TopRowIndex: TopRowIndex={view.TopRowIndex}");
         }
         private static void ExpandParentGroups(
             DevExpress.XtraGrid.Views.Grid.GridView view,
@@ -591,6 +598,7 @@ namespace SewingProduction.Core.helpers
             string? focusedColumnFieldName = null,
             params string[] fields)
         {
+            Debug.WriteLine($"[ApplyChanges] mode={mode}, gridView={(gridView != null ? gridView.Name : "null")}, focusedColumnFieldName={focusedColumnFieldName}, topRowIndex={gridView?.TopRowIndex}");
             if (oldSource == null) throw new ArgumentNullException(nameof(oldSource));
             if (changes == null) throw new ArgumentNullException(nameof(changes));
             if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
@@ -600,16 +608,19 @@ namespace SewingProduction.Core.helpers
             // === 1. Запоминаем текущий ключ
             TKey? currentKey = default;
             bool hasCurrent = false;
+            //int currentTopRowIndex = -1;
 
             if (gridView != null && oldSource.Current is T currentItem)
             {
                 currentKey = keySelector(currentItem);
+                //currentTopRowIndex = gridView.TopRowIndex;
                 hasCurrent = true;
                 if (gridView.FocusedColumn != null)
                 {
                     focusedColumnFieldName = gridView.FocusedColumn.FieldName;
                 }
             }
+            //Debug.WriteLine($"[ApplyChanges] currentTopRowIndex={currentTopRowIndex}");
 
             // === 2. Основная логика обновления
             var oldDict = oldSource.List.Cast<T>()
@@ -664,8 +675,10 @@ namespace SewingProduction.Core.helpers
                     keySelector,
                     currentKey!,
                     focusedColumnFieldName
+                    //topRowIndex: currentTopRowIndex
                 );
             }
+            Debug.WriteLine($"[ApplyChanges] Completed");
         }
 
         public static void ApplyChanges<T>(
@@ -705,6 +718,7 @@ namespace SewingProduction.Core.helpers
            // string? focusedColumnFieldName = null,
             params string[] fields)
         {
+            Debug.WriteLine($"[ApplyChanges overload with GridView] keyProperties={string.Join(", ", keyProperties)}, gridView={(gridView != null ? gridView.Name : "null")}, focusedColumnFieldName={gridView?.FocusedColumn?.FieldName}, topRowIndex={gridView.TopRowIndex}");
             if (keyProperties == null || keyProperties.Length == 0)
                 throw new ArgumentException("Key properties must be specified", nameof(keyProperties));
 
@@ -733,6 +747,7 @@ namespace SewingProduction.Core.helpers
                // focusedColumnFieldName,
                 fields: fields
             );
+            Debug.WriteLine($"[ApplyChanges overload with GridView] Completed");
         }
 
         //    public static void ApplyChanges<T>(
@@ -836,9 +851,15 @@ namespace SewingProduction.Core.helpers
             double percent = totalCount == 0 ? 0 : (removedCount * 100.0 / totalCount);
 
             string strategy;
+            
+            int topRowIndex = 0;
 
             try
             {
+                topRowIndex = grid?.MainView is DevExpress.XtraGrid.Views.Grid.GridView view
+                    ? view.TopRowIndex
+                    : -1;
+
                 grid?.BeginUpdate();
                 oldSource.SuspendBinding();
 
@@ -906,6 +927,8 @@ namespace SewingProduction.Core.helpers
                 oldSource.ResetBindings(false);
                 grid?.EndUpdate();
                 swTotal.Stop();
+                DevExpress.XtraGrid.Views.Grid.GridView gw = (DevExpress.XtraGrid.Views.Grid.GridView)grid?.MainView;
+                gw.TopRowIndex = topRowIndex;
             }
         }
 

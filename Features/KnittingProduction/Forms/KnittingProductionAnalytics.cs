@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
@@ -23,7 +24,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //Form mainForm = Application.OpenForms["SpMainForm"];
             //_formManager = new FormManager(mainForm, mainMenu, _user);
 
-           // ThemeManager.UpdateTheme(this);
+            // ThemeManager.UpdateTheme(this);
         }
         public void OpenForm(Form form, object sender = null)
         {

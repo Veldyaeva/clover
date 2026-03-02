@@ -919,7 +919,7 @@ namespace SewingProduction
             bool hasWrite = user.HasPermission(objectName, "Редактор");
             bool hasRead = user.HasPermission(objectName, "Просмотр");
 
-            //Debug.WriteLine($"[PermissionHelper] {objectName}: Просмотр={hasRead}, Редактор={hasWrite}");
+            Debug.WriteLine($"[PermissionHelper] {objectName}: Просмотр={hasRead}, Редактор={hasWrite}");
 
             ctrl.Enabled = hasWrite;
             ctrl.Visible = hasRead || hasWrite;
