@@ -726,7 +726,7 @@ namespace SewingProduction.Features.Articul.Forms
             customSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             customSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "ID";
             gridColumn1.FieldName = "Id_gost";
@@ -734,7 +734,7 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn1.Visible = true;
             gridColumn1.VisibleIndex = 0;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "ГОСТ";
             gridColumn2.FieldName = "Name_gost";
@@ -742,7 +742,7 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn2.Visible = true;
             gridColumn2.VisibleIndex = 1;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Описание";
             gridColumn3.FieldName = "Opi_gost";

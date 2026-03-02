@@ -385,7 +385,7 @@ namespace SewingProduction.Features.Articul
             gridControl1.OptionsView.ShowGroupPanel = false;
             gridControl1.FocusedRowChanged += gridControl1_FocusedRowChanged;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "Код";
             gridColumn1.FieldName = "Kod";
@@ -395,7 +395,7 @@ namespace SewingProduction.Features.Articul
             gridColumn1.VisibleIndex = 0;
             gridColumn1.Width = 91;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "Группа";
             gridColumn2.FieldName = "Grup";
@@ -405,7 +405,7 @@ namespace SewingProduction.Features.Articul
             gridColumn2.VisibleIndex = 1;
             gridColumn2.Width = 110;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Артикул";
             gridColumn3.FieldName = "Articul";
@@ -416,7 +416,7 @@ namespace SewingProduction.Features.Articul
             gridColumn3.VisibleIndex = 2;
             gridColumn3.Width = 98;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "Размер";
             gridColumn4.FieldName = "Razm";
@@ -426,7 +426,7 @@ namespace SewingProduction.Features.Articul
             gridColumn4.VisibleIndex = 3;
             gridColumn4.Width = 110;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "Модель";
             gridColumn5.FieldName = "Mod";
@@ -436,7 +436,7 @@ namespace SewingProduction.Features.Articul
             gridColumn5.VisibleIndex = 4;
             gridColumn5.Width = 119;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "ТМ";
             gridColumn6.FieldName = "Kle";

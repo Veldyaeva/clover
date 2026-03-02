@@ -139,7 +139,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.Disk1.VisibleIndex = 0;
             this.Disk1.Width = 210;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             this.gridColumn1.Caption = "рассекание";
             this.gridColumn1.FieldName = "dras1";
@@ -147,7 +147,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn1.Visible = true;
             this.gridColumn1.Width = 70;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             this.gridColumn2.Caption = "резка диском";
             this.gridColumn2.FieldName = "drez1";
@@ -155,7 +155,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn2.Visible = true;
             this.gridColumn2.Width = 70;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             this.gridColumn3.Caption = "до проймы";
             this.gridColumn3.FieldName = "dpro1";
@@ -173,7 +173,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.Bound1.VisibleIndex = 1;
             this.Bound1.Width = 210;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             this.gridColumn4.Caption = "Рассекание";
             this.gridColumn4.FieldName = "lras1";
@@ -181,7 +181,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn4.Visible = true;
             this.gridColumn4.Width = 70;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             this.gridColumn5.Caption = "резка диском";
             this.gridColumn5.FieldName = "lrez1";
@@ -189,7 +189,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn5.Visible = true;
             this.gridColumn5.Width = 70;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             this.gridColumn6.Caption = "до проймы";
             this.gridColumn6.FieldName = "lpro1";
@@ -217,7 +217,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.Disk2.VisibleIndex = 0;
             this.Disk2.Width = 210;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             this.gridColumn7.Caption = "Рассекание";
             this.gridColumn7.FieldName = "dras2";
@@ -225,7 +225,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn7.Visible = true;
             this.gridColumn7.Width = 70;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             this.gridColumn8.Caption = "резка диском";
             this.gridColumn8.FieldName = "drez2";

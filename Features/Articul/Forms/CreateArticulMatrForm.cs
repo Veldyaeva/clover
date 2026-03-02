@@ -54,25 +54,45 @@ namespace SewingProduction.Features.Articul.Forms
         private void InitializeBindings()
         {
             gcGrupmen_name.FieldName = nameof(CreateArticulMatrModel.Grupmen_name);
+            gcCertGrupmen_name.FieldName = nameof(CreateArticulMatrModel.Grupmen_name);
             gcTsn_name.FieldName = nameof(CreateArticulMatrModel.Tsn_name);
+            gcCertTsn_name.FieldName = nameof(CreateArticulMatrModel.Tsn_name);
             gcTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
+            gcCertTb_id.FieldName = nameof(CreateArticulMatrModel.Tb_id);
             gcMod.FieldName = nameof(CreateArticulMatrModel.Mod);
+            gcCertMod.FieldName = nameof(CreateArticulMatrModel.Mod);
             gcArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
+            gcCertArticul.FieldName = nameof(CreateArticulMatrModel.Articul);
             gcTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
+            gcCertTm_name.FieldName = nameof(CreateArticulMatrModel.Tm_name);
             gcGrup.FieldName = nameof(CreateArticulMatrModel.Grup);
+            gcCertGrup.FieldName = nameof(CreateArticulMatrModel.Grup);
             gcText_mo.FieldName = nameof(CreateArticulMatrModel.Text_mo);
+            gcCertText_mo.FieldName = nameof(CreateArticulMatrModel.Text_mo);
             gcP.FieldName = nameof(CreateArticulMatrModel.P);
+            gcCertP.FieldName = nameof(CreateArticulMatrModel.P);
             gcPrinter.FieldName = nameof(CreateArticulMatrModel.Printer);
+            gcCertPrinter.FieldName = nameof(CreateArticulMatrModel.Printer);
             gcBus.FieldName = nameof(CreateArticulMatrModel.Bus);
+            gcCertBus.FieldName = nameof(CreateArticulMatrModel.Bus);
             gcStra.FieldName = nameof(CreateArticulMatrModel.Stra);
+            gcCertStra.FieldName = nameof(CreateArticulMatrModel.Stra);
             gcV.FieldName = nameof(CreateArticulMatrModel.V);
+            gcCertV.FieldName = nameof(CreateArticulMatrModel.V);
             gcKruj.FieldName = nameof(CreateArticulMatrModel.Kruj);
+            gcCertKruj.FieldName = nameof(CreateArticulMatrModel.Kruj);
             gcTkan.FieldName = nameof(CreateArticulMatrModel.Tkan);
+            gcCertTkan.FieldName = nameof(CreateArticulMatrModel.Tkan);
             gcSost.FieldName = nameof(CreateArticulMatrModel.Sost);
+            gcCertSost.FieldName = nameof(CreateArticulMatrModel.Sost);
             gcSost2.FieldName = nameof(CreateArticulMatrModel.Sost2);
+            gcCertSost2.FieldName = nameof(CreateArticulMatrModel.Sost2);
             gcSost3.FieldName = nameof(CreateArticulMatrModel.Sost3);
+            gcCertSost3.FieldName = nameof(CreateArticulMatrModel.Sost3);
             gcRazmNames.FieldName = nameof(CreateArticulMatrModel.RazmNames);
+            gcCertRazmNames.FieldName = nameof(CreateArticulMatrModel.RazmNames);
             gcDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
+            gcCertDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
 
 
             //txbGostId.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Id_gost), true);

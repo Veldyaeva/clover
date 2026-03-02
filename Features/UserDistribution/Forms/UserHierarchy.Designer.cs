@@ -240,19 +240,19 @@ namespace SewingProduction.Features.UserDistribution.Forms
             RoleName.VisibleIndex = 0;
             RoleName.Width = 255;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Name = "gridColumn1";
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Name = "gridColumn2";
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Name = "gridColumn3";
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Name = "gridColumn4";
             // 
