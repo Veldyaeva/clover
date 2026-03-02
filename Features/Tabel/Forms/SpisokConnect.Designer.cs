@@ -31,6 +31,7 @@
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             customGridSpisokForLinking = new SewingProduction.Core.Class.CustomGridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridColumnGroupName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridSpisokInn = new DevExpress.XtraGrid.Columns.GridColumn();
             gridSpisokLastName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridSpisokFirstName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,6 +48,7 @@
             repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridSpisokVerifParsec = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -57,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
@@ -80,7 +83,7 @@
             customGridSpisokForLinking.Location = new System.Drawing.Point(24, 24);
             customGridSpisokForLinking.MainView = gridView1;
             customGridSpisokForLinking.Name = "customGridSpisokForLinking";
-            customGridSpisokForLinking.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit2, repositoryItemCheckEdit1, repositoryItemCheckEdit2 });
+            customGridSpisokForLinking.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit2, repositoryItemCheckEdit1, repositoryItemCheckEdit2, repositoryItemLookUpEdit1 });
             customGridSpisokForLinking.Size = new System.Drawing.Size(1453, 569);
             customGridSpisokForLinking.TabIndex = 4;
             customGridSpisokForLinking.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
@@ -88,20 +91,29 @@
             // 
             // gridView1
             // 
-            // gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
             gridView1.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
             gridView1.Appearance.FocusedRow.Options.UseFont = true;
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridSpisokInn, gridSpisokLastName, gridSpisokFirstName, gridSpisokMiddleName, gridSpisokDateP, gridSpisokDateU, gridSpisokUin, gridSpisokOrgName, gridSpisokPodr1c, gridSpisokPodr, gridColumnTabno, gridSpisokVerif1c, gridSpisokVerifParsec });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnGroupName, gridSpisokInn, gridSpisokLastName, gridSpisokFirstName, gridSpisokMiddleName, gridSpisokDateP, gridSpisokDateU, gridSpisokUin, gridSpisokOrgName, gridSpisokPodr1c, gridSpisokPodr, gridColumnTabno, gridSpisokVerif1c, gridSpisokVerifParsec });
             gridView1.GridControl = customGridSpisokForLinking;
             gridView1.Name = "gridView1";
             gridView1.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             gridView1.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
             gridView1.RowCellClick += gridView1_RowCellClick;
+            gridView1.EditFormShowing += gridView1_EditFormShowing;
+            gridView1.CustomRowCellEdit += gridView1_CustomRowCellEdit;
+            gridView1.ShowingEditor += gridView1_ShowingEditor;
             gridView1.CellValueChanged += gridView1_CellValueChanged;
+            // 
+            // gridColumnGroupName
+            // 
+            gridColumnGroupName.Caption = "Тип компании";
+            gridColumnGroupName.Name = "gridColumnGroupName";
+            gridColumnGroupName.OptionsColumn.ReadOnly = true;
+            gridColumnGroupName.Visible = true;
+            gridColumnGroupName.VisibleIndex = 0;
             // 
             // gridSpisokInn
             // 
@@ -109,7 +121,7 @@
             gridSpisokInn.Name = "gridSpisokInn";
             gridSpisokInn.OptionsColumn.ReadOnly = true;
             gridSpisokInn.Visible = true;
-            gridSpisokInn.VisibleIndex = 0;
+            gridSpisokInn.VisibleIndex = 1;
             gridSpisokInn.Width = 98;
             // 
             // gridSpisokLastName
@@ -118,7 +130,7 @@
             gridSpisokLastName.Name = "gridSpisokLastName";
             gridSpisokLastName.OptionsColumn.ReadOnly = true;
             gridSpisokLastName.Visible = true;
-            gridSpisokLastName.VisibleIndex = 1;
+            gridSpisokLastName.VisibleIndex = 2;
             gridSpisokLastName.Width = 120;
             // 
             // gridSpisokFirstName
@@ -127,7 +139,7 @@
             gridSpisokFirstName.Name = "gridSpisokFirstName";
             gridSpisokFirstName.OptionsColumn.ReadOnly = true;
             gridSpisokFirstName.Visible = true;
-            gridSpisokFirstName.VisibleIndex = 2;
+            gridSpisokFirstName.VisibleIndex = 3;
             gridSpisokFirstName.Width = 77;
             // 
             // gridSpisokMiddleName
@@ -136,7 +148,7 @@
             gridSpisokMiddleName.Name = "gridSpisokMiddleName";
             gridSpisokMiddleName.OptionsColumn.ReadOnly = true;
             gridSpisokMiddleName.Visible = true;
-            gridSpisokMiddleName.VisibleIndex = 3;
+            gridSpisokMiddleName.VisibleIndex = 4;
             gridSpisokMiddleName.Width = 96;
             // 
             // gridSpisokDateP
@@ -145,7 +157,7 @@
             gridSpisokDateP.Name = "gridSpisokDateP";
             gridSpisokDateP.OptionsColumn.ReadOnly = true;
             gridSpisokDateP.Visible = true;
-            gridSpisokDateP.VisibleIndex = 4;
+            gridSpisokDateP.VisibleIndex = 5;
             // 
             // gridSpisokDateU
             // 
@@ -153,7 +165,7 @@
             gridSpisokDateU.Name = "gridSpisokDateU";
             gridSpisokDateU.OptionsColumn.ReadOnly = true;
             gridSpisokDateU.Visible = true;
-            gridSpisokDateU.VisibleIndex = 5;
+            gridSpisokDateU.VisibleIndex = 6;
             gridSpisokDateU.Width = 86;
             // 
             // gridSpisokUin
@@ -162,7 +174,7 @@
             gridSpisokUin.Name = "gridSpisokUin";
             gridSpisokUin.OptionsColumn.ReadOnly = true;
             gridSpisokUin.Visible = true;
-            gridSpisokUin.VisibleIndex = 6;
+            gridSpisokUin.VisibleIndex = 7;
             gridSpisokUin.Width = 111;
             // 
             // gridSpisokOrgName
@@ -171,7 +183,7 @@
             gridSpisokOrgName.Name = "gridSpisokOrgName";
             gridSpisokOrgName.OptionsColumn.ReadOnly = true;
             gridSpisokOrgName.Visible = true;
-            gridSpisokOrgName.VisibleIndex = 7;
+            gridSpisokOrgName.VisibleIndex = 8;
             gridSpisokOrgName.Width = 146;
             // 
             // gridSpisokPodr1c
@@ -180,7 +192,7 @@
             gridSpisokPodr1c.Name = "gridSpisokPodr1c";
             gridSpisokPodr1c.OptionsColumn.ReadOnly = true;
             gridSpisokPodr1c.Visible = true;
-            gridSpisokPodr1c.VisibleIndex = 8;
+            gridSpisokPodr1c.VisibleIndex = 9;
             gridSpisokPodr1c.Width = 179;
             // 
             // gridSpisokPodr
@@ -189,7 +201,7 @@
             gridSpisokPodr.ColumnEdit = repositoryItemLookUpEdit2;
             gridSpisokPodr.Name = "gridSpisokPodr";
             gridSpisokPodr.Visible = true;
-            gridSpisokPodr.VisibleIndex = 9;
+            gridSpisokPodr.VisibleIndex = 10;
             gridSpisokPodr.Width = 140;
             // 
             // repositoryItemLookUpEdit2
@@ -210,7 +222,7 @@
             gridSpisokVerif1c.ColumnEdit = repositoryItemCheckEdit1;
             gridSpisokVerif1c.Name = "gridSpisokVerif1c";
             gridSpisokVerif1c.Visible = true;
-            gridSpisokVerif1c.VisibleIndex = 10;
+            gridSpisokVerif1c.VisibleIndex = 11;
             gridSpisokVerif1c.Width = 79;
             // 
             // repositoryItemCheckEdit1
@@ -226,7 +238,7 @@
             gridSpisokVerifParsec.ColumnEdit = repositoryItemCheckEdit2;
             gridSpisokVerifParsec.Name = "gridSpisokVerifParsec";
             gridSpisokVerifParsec.Visible = true;
-            gridSpisokVerifParsec.VisibleIndex = 11;
+            gridSpisokVerifParsec.VisibleIndex = 12;
             gridSpisokVerifParsec.Width = 86;
             // 
             // repositoryItemCheckEdit2
@@ -235,6 +247,13 @@
             repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
             repositoryItemCheckEdit2.ValueChecked = 1;
             repositoryItemCheckEdit2.ValueUnchecked = 0;
+            // 
+            // repositoryItemLookUpEdit1
+            // 
+            repositoryItemLookUpEdit1.AutoHeight = false;
+            repositoryItemLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEdit1.Name = "repositoryItemLookUpEdit1";
+            repositoryItemLookUpEdit1.NullText = "Не выбрано подразделение!";
             // 
             // Root
             // 
@@ -278,6 +297,7 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
@@ -308,5 +328,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn gridSpisokVerifParsec;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnGroupName;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
     }
 }

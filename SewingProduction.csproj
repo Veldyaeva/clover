@@ -20,13 +20,6 @@
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="SplashImages\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
 
 
   <ItemGroup>

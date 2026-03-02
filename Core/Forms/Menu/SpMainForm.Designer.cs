@@ -65,6 +65,7 @@ namespace SewingProduction
             barBtnMasterDesk1 = new BarButtonItem();
             barBtnKnitterDesk = new BarButtonItem();
             barBtnAnalytics = new BarButtonItem();
+            barBtnTSDAdmin = new BarButtonItem();
             barSubSewing = new BarSubItem();
             barBtnMasterDesk = new BarButtonItem();
             barBtnCutShop = new BarButtonItem();
@@ -105,8 +106,8 @@ namespace SewingProduction
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
             barManager1.HideIfNoRight = true;
-            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt });
-            barManager1.MaxItemId = 44;
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barBtnTSDAdmin });
+            barManager1.MaxItemId = 45;
             barManager1.SkipDevExpressSkinItems = true;
             // 
             // bar1
@@ -323,7 +324,7 @@ namespace SewingProduction
             // 
             barSubKnitting.Caption = "Вязальное производство";
             barSubKnitting.Id = 30;
-            barSubKnitting.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnOperPlan), new LinkPersistInfo(barBtnMasterDesk1), new LinkPersistInfo(barBtnKnitterDesk), new LinkPersistInfo(barBtnAnalytics) });
+            barSubKnitting.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnOperPlan), new LinkPersistInfo(barBtnMasterDesk1), new LinkPersistInfo(barBtnKnitterDesk), new LinkPersistInfo(barBtnAnalytics), new LinkPersistInfo(barBtnTSDAdmin) });
             barSubKnitting.Name = "barSubKnitting";
             barSubKnitting.Tag = "вязальноеПроизводствоToolStripMenuItem";
             // 
@@ -358,6 +359,13 @@ namespace SewingProduction
             barBtnAnalytics.Name = "barBtnAnalytics";
             barBtnAnalytics.Tag = "аналитикаToolStripMenuItem";
             barBtnAnalytics.ItemClick += аналитикаToolStripMenuItem_Click;
+            // 
+            // barBtnTSDAdmin
+            // 
+            barBtnTSDAdmin.Caption = "Доступ ТСД";
+            barBtnTSDAdmin.Id = 44;
+            barBtnTSDAdmin.Name = "barBtnTSDAdmin";
+            barBtnTSDAdmin.ItemClick += barButtonTSDAdmin_ItemClick;
             // 
             // barSubSewing
             // 
@@ -634,6 +642,7 @@ namespace SewingProduction
 
         private DevExpress.XtraBars.BarButtonItem barBtnQuestion;
         private DevExpress.XtraBars.BarButtonItem barBtnAt;
-
+        private BarButtonItem barButtonItem1;
+        private BarButtonItem barBtnTSDAdmin;
     }
 }

@@ -80,6 +80,7 @@
             layoutControl1.Controls.Add(customSimpleButton2);
             layoutControl1.Controls.Add(customSimpleButton1);
             layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            layoutControl1.Font = new System.Drawing.Font("Arial", 10F);
             layoutControl1.Location = new System.Drawing.Point(0, 0);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(830, 160, 650, 400);

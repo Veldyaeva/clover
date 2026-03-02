@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculatorDay));
-            radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customRadioGroup2 = new SewingProduction.Core.Class.CustomRadioGroup();
+            customRadioGroup1 = new SewingProduction.Core.Class.CustomRadioGroup();
             btnC = new SewingProduction.Core.Class.CustomButton();
             workTypesCheckedListBox = new DevExpress.XtraEditors.CheckedListBoxControl();
             btn9 = new SewingProduction.Core.Class.CustomButton();
@@ -49,11 +50,8 @@
             customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             btn4 = new SewingProduction.Core.Class.CustomButton();
             customSimpleButton2 = new SewingProduction.Core.Class.CustomSimpleButton();
-            radioGroup2 = new DevExpress.XtraEditors.RadioGroup();
             btn1 = new SewingProduction.Core.Class.CustomButton();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -75,15 +73,15 @@
             layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             customLabel1 = new SewingProduction.Core.Class.CustomLabel();
-            ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)workTypesCheckedListBox).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)radioGroup2.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
@@ -105,20 +103,14 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             SuspendLayout();
-            // 
-            // radioGroup1
-            // 
-            radioGroup1.Location = new System.Drawing.Point(12, 12);
-            radioGroup1.Name = "radioGroup1";
-            radioGroup1.Properties.Columns = 2;
-            radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Рабочий"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Выходной") });
-            radioGroup1.Size = new System.Drawing.Size(201, 36);
-            radioGroup1.StyleController = layoutControl1;
-            radioGroup1.TabIndex = 1;
             // 
             // layoutControl1
             // 
+            layoutControl1.Controls.Add(customRadioGroup2);
+            layoutControl1.Controls.Add(customRadioGroup1);
             layoutControl1.Controls.Add(btnC);
             layoutControl1.Controls.Add(workTypesCheckedListBox);
             layoutControl1.Controls.Add(btn9);
@@ -137,8 +129,6 @@
             layoutControl1.Controls.Add(customSimpleButton1);
             layoutControl1.Controls.Add(btn4);
             layoutControl1.Controls.Add(customSimpleButton2);
-            layoutControl1.Controls.Add(radioGroup1);
-            layoutControl1.Controls.Add(radioGroup2);
             layoutControl1.Controls.Add(btn1);
             layoutControl1.Location = new System.Drawing.Point(12, 12);
             layoutControl1.Name = "layoutControl1";
@@ -148,14 +138,48 @@
             layoutControl1.TabIndex = 24;
             layoutControl1.Text = "layoutControl1";
             // 
+            // customRadioGroup2
+            // 
+            customRadioGroup2.Location = new System.Drawing.Point(12, 52);
+            customRadioGroup2.Name = "customRadioGroup2";
+            customRadioGroup2.ObjectName = null;
+            customRadioGroup2.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
+            customRadioGroup2.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customRadioGroup2.Properties.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
+            customRadioGroup2.Properties.Appearance.Options.UseBackColor = true;
+            customRadioGroup2.Properties.Appearance.Options.UseFont = true;
+            customRadioGroup2.Properties.Appearance.Options.UseForeColor = true;
+            customRadioGroup2.Properties.Columns = 3;
+            customRadioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Празд"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Приказ"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Нет") });
+            customRadioGroup2.Size = new System.Drawing.Size(201, 42);
+            customRadioGroup2.StyleController = layoutControl1;
+            customRadioGroup2.TabIndex = 25;
+            customRadioGroup2.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
+            // 
+            // customRadioGroup1
+            // 
+            customRadioGroup1.Location = new System.Drawing.Point(12, 12);
+            customRadioGroup1.Name = "customRadioGroup1";
+            customRadioGroup1.ObjectName = null;
+            customRadioGroup1.Properties.Appearance.BackColor = System.Drawing.SystemColors.Control;
+            customRadioGroup1.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customRadioGroup1.Properties.Appearance.ForeColor = System.Drawing.SystemColors.ControlText;
+            customRadioGroup1.Properties.Appearance.Options.UseBackColor = true;
+            customRadioGroup1.Properties.Appearance.Options.UseFont = true;
+            customRadioGroup1.Properties.Appearance.Options.UseForeColor = true;
+            customRadioGroup1.Properties.Columns = 2;
+            customRadioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Рабочий"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Выходной") });
+            customRadioGroup1.Size = new System.Drawing.Size(201, 36);
+            customRadioGroup1.StyleController = layoutControl1;
+            customRadioGroup1.TabIndex = 24;
+            customRadioGroup1.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
+            // 
             // btnC
             // 
-            // btnC.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btnC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btnC.ForeColor = System.Drawing.Color.Black;
-            btnC.Location = new System.Drawing.Point(148, 288);
+            btnC.Location = new System.Drawing.Point(148, 295);
             btnC.Name = "btnC";
-            btnC.Size = new System.Drawing.Size(65, 40);
+            btnC.Size = new System.Drawing.Size(65, 33);
             btnC.TabIndex = 14;
             btnC.Text = "C";
             btnC.UseVisualStyleBackColor = false;
@@ -173,12 +197,10 @@
             // 
             // btn9
             // 
-            // btn9.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn9.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn9.ForeColor = System.Drawing.Color.Black;
-            btn9.Location = new System.Drawing.Point(148, 244);
+            btn9.Location = new System.Drawing.Point(148, 258);
             btn9.Name = "btn9";
-            btn9.Size = new System.Drawing.Size(65, 40);
+            btn9.Size = new System.Drawing.Size(65, 33);
             btn9.TabIndex = 11;
             btn9.Text = "9";
             btn9.UseVisualStyleBackColor = false;
@@ -186,12 +208,10 @@
             // 
             // btnPoint
             // 
-            // btnPoint.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btnPoint.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btnPoint.ForeColor = System.Drawing.Color.Black;
-            btnPoint.Location = new System.Drawing.Point(80, 288);
+            btnPoint.Location = new System.Drawing.Point(80, 295);
             btnPoint.Name = "btnPoint";
-            btnPoint.Size = new System.Drawing.Size(64, 40);
+            btnPoint.Size = new System.Drawing.Size(64, 33);
             btnPoint.TabIndex = 13;
             btnPoint.Text = ".";
             btnPoint.UseVisualStyleBackColor = false;
@@ -199,12 +219,10 @@
             // 
             // btn6
             // 
-            // btn6.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn6.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn6.ForeColor = System.Drawing.Color.Black;
-            btn6.Location = new System.Drawing.Point(148, 200);
+            btn6.Location = new System.Drawing.Point(148, 222);
             btn6.Name = "btn6";
-            btn6.Size = new System.Drawing.Size(65, 40);
+            btn6.Size = new System.Drawing.Size(65, 32);
             btn6.TabIndex = 8;
             btn6.Text = "6";
             btn6.UseVisualStyleBackColor = false;
@@ -212,13 +230,11 @@
             // 
             // customTextBoxString
             // 
-            // customTextBoxString.BackColor = System.Drawing.Color.White;
             customTextBoxString.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxString.ErrorColor = System.Drawing.Color.Red;
             customTextBoxString.ErrorMessage = null;
             customTextBoxString.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxString.ForeColor = System.Drawing.Color.Black;
-            customTextBoxString.Location = new System.Drawing.Point(148, 132);
+            customTextBoxString.Location = new System.Drawing.Point(148, 162);
             customTextBoxString.Name = "customTextBoxString";
             customTextBoxString.ReadOnly = true;
             customTextBoxString.Size = new System.Drawing.Size(65, 20);
@@ -227,12 +243,10 @@
             // 
             // btn3
             // 
-            // btn3.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn3.ForeColor = System.Drawing.Color.Black;
-            btn3.Location = new System.Drawing.Point(148, 156);
+            btn3.Location = new System.Drawing.Point(148, 186);
             btn3.Name = "btn3";
-            btn3.Size = new System.Drawing.Size(65, 40);
+            btn3.Size = new System.Drawing.Size(65, 32);
             btn3.TabIndex = 5;
             btn3.Text = "3";
             btn3.UseVisualStyleBackColor = false;
@@ -240,12 +254,10 @@
             // 
             // btn0
             // 
-            // btn0.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn0.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn0.ForeColor = System.Drawing.Color.Black;
-            btn0.Location = new System.Drawing.Point(12, 288);
+            btn0.Location = new System.Drawing.Point(12, 295);
             btn0.Name = "btn0";
-            btn0.Size = new System.Drawing.Size(64, 40);
+            btn0.Size = new System.Drawing.Size(64, 33);
             btn0.TabIndex = 12;
             btn0.Text = "0";
             btn0.UseVisualStyleBackColor = false;
@@ -253,12 +265,10 @@
             // 
             // btn8
             // 
-            // btn8.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn8.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn8.ForeColor = System.Drawing.Color.Black;
-            btn8.Location = new System.Drawing.Point(80, 244);
+            btn8.Location = new System.Drawing.Point(80, 258);
             btn8.Name = "btn8";
-            btn8.Size = new System.Drawing.Size(64, 40);
+            btn8.Size = new System.Drawing.Size(64, 33);
             btn8.TabIndex = 10;
             btn8.Text = "8";
             btn8.UseVisualStyleBackColor = false;
@@ -266,13 +276,11 @@
             // 
             // customTextBoxValueDigit
             // 
-            // customTextBoxValueDigit.BackColor = System.Drawing.Color.White;
             customTextBoxValueDigit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxValueDigit.ErrorColor = System.Drawing.Color.Red;
             customTextBoxValueDigit.ErrorMessage = null;
             customTextBoxValueDigit.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxValueDigit.ForeColor = System.Drawing.Color.Black;
-            customTextBoxValueDigit.Location = new System.Drawing.Point(80, 132);
+            customTextBoxValueDigit.Location = new System.Drawing.Point(80, 162);
             customTextBoxValueDigit.Name = "customTextBoxValueDigit";
             customTextBoxValueDigit.ReadOnly = true;
             customTextBoxValueDigit.Size = new System.Drawing.Size(64, 20);
@@ -281,12 +289,10 @@
             // 
             // btn5
             // 
-            // btn5.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn5.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn5.ForeColor = System.Drawing.Color.Black;
-            btn5.Location = new System.Drawing.Point(80, 200);
+            btn5.Location = new System.Drawing.Point(80, 222);
             btn5.Name = "btn5";
-            btn5.Size = new System.Drawing.Size(64, 40);
+            btn5.Size = new System.Drawing.Size(64, 32);
             btn5.TabIndex = 7;
             btn5.Text = "5";
             btn5.UseVisualStyleBackColor = false;
@@ -294,12 +300,10 @@
             // 
             // btn7
             // 
-            // btn7.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn7.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn7.ForeColor = System.Drawing.Color.Black;
-            btn7.Location = new System.Drawing.Point(12, 244);
+            btn7.Location = new System.Drawing.Point(12, 258);
             btn7.Name = "btn7";
-            btn7.Size = new System.Drawing.Size(64, 40);
+            btn7.Size = new System.Drawing.Size(64, 33);
             btn7.TabIndex = 9;
             btn7.Text = "7";
             btn7.UseVisualStyleBackColor = false;
@@ -307,12 +311,10 @@
             // 
             // btn2
             // 
-            // btn2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn2.ForeColor = System.Drawing.Color.Black;
-            btn2.Location = new System.Drawing.Point(80, 156);
+            btn2.Location = new System.Drawing.Point(80, 186);
             btn2.Name = "btn2";
-            btn2.Size = new System.Drawing.Size(64, 40);
+            btn2.Size = new System.Drawing.Size(64, 32);
             btn2.TabIndex = 4;
             btn2.Text = "2";
             btn2.UseVisualStyleBackColor = false;
@@ -320,13 +322,11 @@
             // 
             // customTextBoxValue
             // 
-            // customTextBoxValue.BackColor = System.Drawing.Color.White;
             customTextBoxValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxValue.ErrorColor = System.Drawing.Color.Red;
             customTextBoxValue.ErrorMessage = null;
             customTextBoxValue.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxValue.ForeColor = System.Drawing.Color.Black;
-            customTextBoxValue.Location = new System.Drawing.Point(12, 132);
+            customTextBoxValue.Location = new System.Drawing.Point(12, 162);
             customTextBoxValue.Name = "customTextBoxValue";
             customTextBoxValue.ReadOnly = true;
             customTextBoxValue.Size = new System.Drawing.Size(64, 20);
@@ -334,12 +334,10 @@
             // 
             // customTextBoxDd
             // 
-            // customTextBoxDd.BackColor = System.Drawing.Color.White;
             customTextBoxDd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxDd.ErrorColor = System.Drawing.Color.Red;
             customTextBoxDd.ErrorMessage = null;
             customTextBoxDd.Font = new System.Drawing.Font("Arial", 10F);
-            // customTextBoxDd.ForeColor = System.Drawing.Color.Black;
             customTextBoxDd.Location = new System.Drawing.Point(217, 12);
             customTextBoxDd.Name = "customTextBoxDd";
             customTextBoxDd.Size = new System.Drawing.Size(64, 20);
@@ -348,9 +346,7 @@
             // 
             // customSimpleButton1
             // 
-            // customSimpleButton1.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customSimpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
             customSimpleButton1.Appearance.Options.UseBackColor = true;
             customSimpleButton1.Appearance.Options.UseFont = true;
             customSimpleButton1.Appearance.Options.UseForeColor = true;
@@ -368,12 +364,10 @@
             // 
             // btn4
             // 
-            // btn4.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn4.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn4.ForeColor = System.Drawing.Color.Black;
-            btn4.Location = new System.Drawing.Point(12, 200);
+            btn4.Location = new System.Drawing.Point(12, 222);
             btn4.Name = "btn4";
-            btn4.Size = new System.Drawing.Size(64, 40);
+            btn4.Size = new System.Drawing.Size(64, 32);
             btn4.TabIndex = 6;
             btn4.Text = "4";
             btn4.UseVisualStyleBackColor = false;
@@ -381,9 +375,7 @@
             // 
             // customSimpleButton2
             // 
-            // customSimpleButton2.Appearance.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customSimpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            // customSimpleButton2.Appearance.ForeColor = System.Drawing.Color.Black;
             customSimpleButton2.Appearance.Options.UseBackColor = true;
             customSimpleButton2.Appearance.Options.UseFont = true;
             customSimpleButton2.Appearance.Options.UseForeColor = true;
@@ -399,26 +391,12 @@
             customSimpleButton2.TabIndex = 18;
             customSimpleButton2.Click += customSimpleButton2_Click;
             // 
-            // radioGroup2
-            // 
-            radioGroup2.Location = new System.Drawing.Point(12, 52);
-            radioGroup2.Name = "radioGroup2";
-            radioGroup2.Properties.Columns = 3;
-            radioGroup2.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            radioGroup2.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Празд"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Приказ"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Нет") });
-            radioGroup2.Properties.Name = "radioGroup2";
-            radioGroup2.Size = new System.Drawing.Size(201, 36);
-            radioGroup2.StyleController = layoutControl1;
-            radioGroup2.TabIndex = 2;
-            // 
             // btn1
             // 
-            // btn1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             btn1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            // btn1.ForeColor = System.Drawing.Color.Black;
-            btn1.Location = new System.Drawing.Point(12, 156);
+            btn1.Location = new System.Drawing.Point(12, 186);
             btn1.Name = "btn1";
-            btn1.Size = new System.Drawing.Size(64, 40);
+            btn1.Size = new System.Drawing.Size(64, 32);
             btn1.TabIndex = 3;
             btn1.Text = "1";
             btn1.UseVisualStyleBackColor = false;
@@ -428,26 +406,10 @@
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem3, layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem7, emptySpaceItem1, layoutControlItem2, emptySpaceItem2, layoutControlItem9, layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem13, layoutControlItem15, layoutControlItem16, layoutControlItem17, layoutControlItem14, layoutControlItem8, layoutControlItem18, layoutControlItem21, layoutControlItem20, layoutControlItem19 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, layoutControlItem6, layoutControlItem7, emptySpaceItem1, layoutControlItem2, emptySpaceItem2, layoutControlItem9, layoutControlItem10, layoutControlItem11, layoutControlItem12, layoutControlItem13, layoutControlItem15, layoutControlItem16, layoutControlItem17, layoutControlItem14, layoutControlItem8, layoutControlItem18, layoutControlItem21, layoutControlItem20, layoutControlItem19, layoutControlItem22, layoutControlItem1 });
             Root.Name = "Root";
             Root.Size = new System.Drawing.Size(498, 340);
             Root.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = radioGroup1;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(205, 40);
-            layoutControlItem1.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            layoutControlItem3.Control = radioGroup2;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 40);
-            layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(205, 40);
-            layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem4
             // 
@@ -468,7 +430,7 @@
             // layoutControlItem6
             // 
             layoutControlItem6.Control = customTextBoxValue;
-            layoutControlItem6.Location = new System.Drawing.Point(0, 120);
+            layoutControlItem6.Location = new System.Drawing.Point(0, 150);
             layoutControlItem6.Name = "layoutControlItem6";
             layoutControlItem6.Size = new System.Drawing.Size(68, 24);
             layoutControlItem6.TextVisible = false;
@@ -476,16 +438,16 @@
             // layoutControlItem7
             // 
             layoutControlItem7.Control = customTextBoxValueDigit;
-            layoutControlItem7.Location = new System.Drawing.Point(68, 120);
+            layoutControlItem7.Location = new System.Drawing.Point(68, 150);
             layoutControlItem7.Name = "layoutControlItem7";
             layoutControlItem7.Size = new System.Drawing.Size(68, 24);
             layoutControlItem7.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(0, 80);
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 86);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(205, 40);
+            emptySpaceItem1.Size = new System.Drawing.Size(205, 64);
             // 
             // layoutControlItem2
             // 
@@ -512,71 +474,71 @@
             // layoutControlItem10
             // 
             layoutControlItem10.Control = btn1;
-            layoutControlItem10.Location = new System.Drawing.Point(0, 144);
+            layoutControlItem10.Location = new System.Drawing.Point(0, 174);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem10.Size = new System.Drawing.Size(68, 36);
             layoutControlItem10.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             layoutControlItem11.Control = btn4;
-            layoutControlItem11.Location = new System.Drawing.Point(0, 188);
+            layoutControlItem11.Location = new System.Drawing.Point(0, 210);
             layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem11.Size = new System.Drawing.Size(68, 36);
             layoutControlItem11.TextVisible = false;
             // 
             // layoutControlItem12
             // 
             layoutControlItem12.Control = btn7;
-            layoutControlItem12.Location = new System.Drawing.Point(0, 232);
+            layoutControlItem12.Location = new System.Drawing.Point(0, 246);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem12.Size = new System.Drawing.Size(68, 37);
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = btn0;
-            layoutControlItem13.Location = new System.Drawing.Point(0, 276);
+            layoutControlItem13.Location = new System.Drawing.Point(0, 283);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem13.Size = new System.Drawing.Size(68, 37);
             layoutControlItem13.TextVisible = false;
             // 
             // layoutControlItem15
             // 
             layoutControlItem15.Control = btn5;
-            layoutControlItem15.Location = new System.Drawing.Point(68, 188);
+            layoutControlItem15.Location = new System.Drawing.Point(68, 210);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem15.Size = new System.Drawing.Size(68, 36);
             layoutControlItem15.TextVisible = false;
             // 
             // layoutControlItem16
             // 
             layoutControlItem16.Control = btn8;
-            layoutControlItem16.Location = new System.Drawing.Point(68, 232);
+            layoutControlItem16.Location = new System.Drawing.Point(68, 246);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem16.Size = new System.Drawing.Size(68, 37);
             layoutControlItem16.TextVisible = false;
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = btnPoint;
-            layoutControlItem17.Location = new System.Drawing.Point(68, 276);
+            layoutControlItem17.Location = new System.Drawing.Point(68, 283);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem17.Size = new System.Drawing.Size(68, 37);
             layoutControlItem17.TextVisible = false;
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = btn2;
-            layoutControlItem14.Location = new System.Drawing.Point(68, 144);
+            layoutControlItem14.Location = new System.Drawing.Point(68, 174);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(68, 44);
+            layoutControlItem14.Size = new System.Drawing.Size(68, 36);
             layoutControlItem14.TextVisible = false;
             // 
             // layoutControlItem8
             // 
             layoutControlItem8.Control = customTextBoxString;
-            layoutControlItem8.Location = new System.Drawing.Point(136, 120);
+            layoutControlItem8.Location = new System.Drawing.Point(136, 150);
             layoutControlItem8.Name = "layoutControlItem8";
             layoutControlItem8.Size = new System.Drawing.Size(69, 24);
             layoutControlItem8.TextVisible = false;
@@ -584,44 +546,63 @@
             // layoutControlItem18
             // 
             layoutControlItem18.Control = btn3;
-            layoutControlItem18.Location = new System.Drawing.Point(136, 144);
+            layoutControlItem18.Location = new System.Drawing.Point(136, 174);
             layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new System.Drawing.Size(69, 44);
+            layoutControlItem18.Size = new System.Drawing.Size(69, 36);
             layoutControlItem18.TextVisible = false;
             // 
             // layoutControlItem21
             // 
             layoutControlItem21.Control = btnC;
-            layoutControlItem21.Location = new System.Drawing.Point(136, 276);
+            layoutControlItem21.Location = new System.Drawing.Point(136, 283);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(69, 44);
+            layoutControlItem21.Size = new System.Drawing.Size(69, 37);
             layoutControlItem21.TextVisible = false;
             // 
             // layoutControlItem20
             // 
             layoutControlItem20.Control = btn9;
-            layoutControlItem20.Location = new System.Drawing.Point(136, 232);
+            layoutControlItem20.Location = new System.Drawing.Point(136, 246);
             layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new System.Drawing.Size(69, 44);
+            layoutControlItem20.Size = new System.Drawing.Size(69, 37);
             layoutControlItem20.TextVisible = false;
             // 
             // layoutControlItem19
             // 
             layoutControlItem19.Control = btn6;
-            layoutControlItem19.Location = new System.Drawing.Point(136, 188);
+            layoutControlItem19.Location = new System.Drawing.Point(136, 210);
             layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(69, 44);
+            layoutControlItem19.Size = new System.Drawing.Size(69, 36);
             layoutControlItem19.TextVisible = false;
+            // 
+            // layoutControlItem22
+            // 
+            layoutControlItem22.Control = customRadioGroup1;
+            layoutControlItem22.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem22.Name = "layoutControlItem22";
+            layoutControlItem22.Size = new System.Drawing.Size(205, 40);
+            layoutControlItem22.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = customRadioGroup2;
+            layoutControlItem1.Location = new System.Drawing.Point(0, 40);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(205, 46);
+            layoutControlItem1.TextVisible = false;
             // 
             // customLabel1
             // 
-            customLabel1.AutoSize = true;
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            // customLabel1.ForeColor = System.Drawing.Color.Black;
+            customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.Appearance.Options.UseFont = true;
+            customLabel1.Appearance.Options.UseTextOptions = true;
+            customLabel1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel1.Location = new System.Drawing.Point(12, 266);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(0, 16);
             customLabel1.TabIndex = 16;
+            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CalculatorDay
             // 
@@ -633,14 +614,12 @@
             Name = "CalculatorDay";
             Text = "CalculatorDay";
             Load += CalculatorDay_Load;
-            ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customRadioGroup1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)workTypesCheckedListBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)radioGroup2.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
@@ -662,14 +641,13 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.RadioGroup radioGroup1;
-        private DevExpress.XtraEditors.RadioGroup radioGroup2;
         private Core.Class.CustomButton btn1;
         private Core.Class.CustomButton btn2;
         private Core.Class.CustomButton btn3;
@@ -692,9 +670,7 @@
         private DevExpress.XtraEditors.CheckedListBoxControl workTypesCheckedListBox;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
@@ -715,5 +691,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem20;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem21;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem19;
+        private Core.Class.CustomRadioGroup customRadioGroup2;
+        private Core.Class.CustomRadioGroup customRadioGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem22;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
     }
 }

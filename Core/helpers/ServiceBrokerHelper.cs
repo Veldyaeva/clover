@@ -506,7 +506,7 @@ namespace SewingProduction.Core.helpers
                 var columns = string.Join(",", unionFields);
                 var listenName = UseSchemaInListenName ? tableKey : ExtractTableName(tableKey);
 
-                Debug.WriteLine($"[ServiceBrokerHelper] Start broker: tableKey={tableKey}, listenName={listenName}, columns={columns}");
+                //Debug.WriteLine($"[ServiceBrokerHelper] Start broker: tableKey={tableKey}, listenName={listenName}, columns={columns}");
                 broker.StartListening(columns, listenName);
                 _brokers[tableKey] = broker;
             }

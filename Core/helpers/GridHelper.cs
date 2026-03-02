@@ -911,8 +911,9 @@ namespace SewingProduction.Helpers
         /// <param name="_view"></param>
         /// <param name="_grIDColumn"></param>
         /// <param name="_newValue"></param>
-        public void SetIntValueForFilteredRecordsInGrid<T>(GridView _view, GridColumn _grIDColumn, T _newValue)
+        public void SetValueForFilteredRecordsInGrid<T>(GridView _view, GridColumn _grIDColumn, T _newValue)
         {
+            Debug.WriteLine($"SetIntValueForFilteredRecordsInGrid started or GridView={_view}, GridColumn={_grIDColumn}, newValue = {_newValue}");
             _view.BeginUpdate();
             _view.GridControl.BeginUpdate();
             try
@@ -933,8 +934,29 @@ namespace SewingProduction.Helpers
                 _view.GridControl.EndUpdate();
                 _view.EndUpdate();
             }
+            Debug.WriteLine($"SetIntValueForFilteredRecordsInGrid completed or GridView={_view}, GridColumn={_grIDColumn}, newValue = {_newValue}");
         }
+        /// <summary>
+        /// Фокусирует строку и аккуратно так, чтобы она была примерно посередине экрана
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="rowHandle"></param>
+        public void FocusAndScrollToRow(DevExpress.XtraGrid.Views.Grid.GridView view, int rowHandle)
+        {
+            view.FocusedRowHandle = rowHandle;
 
+            // 1) гарантируем, что строка станет видимой
+            view.MakeRowVisible(rowHandle);
+
+            // 2) аккуратно прокручиваем вверх так, чтобы строка была не в самом низу
+            int visibleIndex = view.GetVisibleIndex(rowHandle);
+            if (visibleIndex < 0) return;
+
+            int rowsOnScreen = Math.Max(1, view.GridControl.Height / view.RowHeight);
+            int targetTop = Math.Max(0, visibleIndex - rowsOnScreen / 2);
+
+            view.TopRowIndex = targetTop;
+        }
     }
 }
 

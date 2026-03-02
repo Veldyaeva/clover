@@ -27,9 +27,10 @@ namespace SewingProduction.Features.Tabel.Forms
         string _firstName;
         string _middleName;
         string _naimenPodr;
+        string _nameGroup;
         int _tabno;
 
-        public ChooseUin(string lastName, string firstName, string middleName, int tabno, string naimenPodr)
+        public ChooseUin(string lastName, string firstName, string middleName, int tabno, string naimenPodr, string nameGroup)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper();
@@ -39,6 +40,7 @@ namespace SewingProduction.Features.Tabel.Forms
             _firstName = firstName;
             _middleName = middleName;
             _naimenPodr = naimenPodr;
+            _nameGroup = nameGroup;
             _tabno = tabno;
         }
 
@@ -87,14 +89,26 @@ namespace SewingProduction.Features.Tabel.Forms
                 {
                     using (var connection = _dbHelper.GetConnection())
                     {
-
-                        string sql;
-                        sql = $"UPDATE zl_spisok SET s_uin = '{uin.Trim()}',tab1c = '{tab1c.Trim()}' WHERE tabno = {_tabno}";
-                        _dbHelper.ExecuteNonQuery(sql, new Dictionary<string, object> { });
-                        MessageBox.Show("Успешно!");
-                        this.ChooseResult = true;
-                        DialogResult = DialogResult.OK;
-                        Close();
+                        if (_nameGroup == "zl")
+                        {
+                            string sql;
+                            sql = $"UPDATE zl_spisok SET s_uin = '{uin.Trim()}',tab1c = '{tab1c.Trim()}' WHERE tabno = {_tabno}";
+                            _dbHelper.ExecuteNonQuery(sql, new Dictionary<string, object> { });
+                            MessageBox.Show("Успешно!");
+                            this.ChooseResult = true;
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
+                        if (_nameGroup == "shp")
+                        {
+                            string sql;
+                            sql = $"UPDATE fio SET uin = '{uin.Trim()}',tab1c = isnull(tab1c,'{tab1c.Trim()}') WHERE tab = {_tabno}";
+                            _dbHelper.ExecuteNonQuery(sql, new Dictionary<string, object> { });
+                            MessageBox.Show("Успешно!");
+                            this.ChooseResult = true;
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
                     }
                 }
                 catch (Exception ex) 

@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System.Data;
 using SewingProduction.Features.CuttingProduction.Models;
 using SewingProduction.Features.Tabel.Models;
 using SewingProduction.Helpers;
@@ -280,6 +281,113 @@ namespace SewingProduction.Features.Tabel.Services
                 return null;
             }
             
+        }
+        public DateTime? GetDateReadOnlyDd(string mg)
+        {
+            DataTable TableResult;
+            DateTime? _dateTime;
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select tsl_dateTo from tabel_sp_lock where tsl_tsltID=1 and tsl_mg='{mg}'";
+
+                    TableResult =  _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { });
+                    if (TableResult.Rows.Count == 0)
+                    {
+                        _dateTime = null;
+                    }
+                    else
+                    {
+                       _dateTime = Convert.ToDateTime(TableResult.Rows[0]["tsl_dateTo"]);
+                    }
+                    return _dateTime;
+                }
+            }
+            catch (SqlException ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных userPodr");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных userPodr");
+                return null;
+            }
+
+            return null;
+        }
+        public DateTime? GetDateReadOnlyTarif(string mg)
+        {
+            DataTable TableResult;
+            DateTime? _dateTime;
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select tsl_dateTo from tabel_sp_lock where tsl_tsltID=2 and tsl_mg='{mg}'";
+
+                    TableResult = _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { });
+                    if (TableResult.Rows.Count == 0)
+                    {
+                        _dateTime = null;
+                    }
+                    else
+                    {
+                        _dateTime = Convert.ToDateTime(TableResult.Rows[0]["tsl_dateTo"]);
+                    }
+                    return _dateTime;
+                }
+            }
+            catch (SqlException ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка SQL при получении данных userPodr");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных userPodr");
+                return null;
+            }
+
+            return null;
+        }
+        public async Task<List<PrichInclude>> GetPrichIncludeAsync()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select * from tabel_sp_pr order by tsp_id";
+                    var result = await connection.QueryAsync<PrichInclude>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных spPodr");
+                return null;
+            }
+        }
+        public async Task<List<zlPodr>> GetSpComboPodrAsync()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = "select tnid as gr , naimen from tab_n";
+
+                    var result = await connection.QueryAsync<zlPodr>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при получении данных zlPodr");
+                return null;
+            }
         }
     }
 }

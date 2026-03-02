@@ -69,7 +69,7 @@ namespace SewingProduction
 
             try
             {
-                Debug.WriteLine($"[ServiceBroker] StartListening: table={_table}, fields={_fields}");
+                //Debug.WriteLine($"[ServiceBroker] StartListening: table={_table}, fields={_fields}");
                 StopListening();
 
                 var fullTable = BuildQuotedTableName(_table);
@@ -92,7 +92,7 @@ namespace SewingProduction
                     // no-op
                 }
 
-                Debug.WriteLine($"[ServiceBroker] Listening started: table={_table}, fields={_fields}");
+                //Debug.WriteLine($"[ServiceBroker] Listening started: table={_table}, fields={_fields}");
             }
             catch (Exception ex)
             {
@@ -105,7 +105,7 @@ namespace SewingProduction
         {
             try
             {
-                Debug.WriteLine($"[ServiceBroker] StopListening: table={_table}, fields={_fields}");
+                //Debug.WriteLine($"[ServiceBroker] StopListening: table={_table}, fields={_fields}");
                 // 1) Отписываемся от события ПЕРЕД обнулением dependency
                 if (_dependency != null)
                 {
@@ -159,7 +159,7 @@ namespace SewingProduction
 
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
-            Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
+            //Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
             // защита от параллельных вызовов
             if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
                 return;
