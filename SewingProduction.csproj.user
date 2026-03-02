@@ -169,6 +169,9 @@
     <Compile Update="Features\Tabel\Forms\CalculatorDay.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Tabel\Forms\ChoosePrich.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Tabel\Forms\ChooseUin.cs">
       <SubType>Form</SubType>
     </Compile>
