@@ -63,46 +63,92 @@ namespace SewingProduction
         private void LoadBackgroundImagesFromSettings()
         {
             string settingsFolder = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 "SewingProduction",
-                "settings");
+                "SplashImages");
 
             if (!Directory.Exists(settingsFolder))
             {
                 return;
             }
 
-            var imageFiles = Directory.GetFiles(settingsFolder)
-                .Where(IsImageFile)
-                .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
-                .ToList();
+            int seasonIndex = GetSeasonIndex(DateTime.Now.Month);
+            string seasonFolder = Path.Combine(settingsFolder, $"Season_{seasonIndex}");
+
+            var imageFiles = GetImageFiles(seasonFolder);
+            if (imageFiles.Count == 0)
+            {
+                imageFiles = GetImageFiles(settingsFolder);
+            }
 
             if (imageFiles.Count == 0)
             {
                 return;
             }
 
-            imageSlider1.Images.Clear();
+            var random = new Random();
+            int startIndex = random.Next(imageFiles.Count);
 
-            foreach (string imageFile in imageFiles)
+            for (int i = 0; i < imageFiles.Count; i++)
             {
-                try
+                string imageFile = imageFiles[(startIndex + i) % imageFiles.Count];
+                if (TryLoadSingleImage(imageFile))
                 {
-                    using (var stream = new FileStream(imageFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using (var image = Image.FromStream(stream))
-                    {
-                        imageSlider1.Images.Add((Image)image.Clone());
-                    }
-                }
-                catch
-                {
-                    // Ignore invalid or locked images.
+                    return;
                 }
             }
+        }
 
-            if (imageSlider1.Images.Count > 0)
+        private static int GetSeasonIndex(int month)
+        {
+            if (month >= 3 && month <= 5)
             {
-                imageSlider1.CurrentImageIndex = 0;
+                return 0; // spring
+            }
+
+            if (month >= 6 && month <= 8)
+            {
+                return 1; // summer
+            }
+
+            if (month >= 9 && month <= 11)
+            {
+                return 2; // autumn
+            }
+
+            return 3; // winter
+        }
+
+        private static System.Collections.Generic.List<string> GetImageFiles(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                return new System.Collections.Generic.List<string>();
+            }
+
+            return Directory.GetFiles(folderPath)
+                .Where(IsImageFile)
+                .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
+        private bool TryLoadSingleImage(string imageFile)
+        {
+            try
+            {
+                using (var stream = new FileStream(imageFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var image = Image.FromStream(stream))
+                {
+                    imageSlider1.Images.Clear();
+                    imageSlider1.Images.Add((Image)image.Clone());
+                    imageSlider1.CurrentImageIndex = 0;
+                    return true;
+                }
+            }
+            catch
+            {
+                // Ignore invalid or locked images.
+                return false;
             }
         }
 
