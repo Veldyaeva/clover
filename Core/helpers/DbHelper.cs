@@ -209,7 +209,7 @@ namespace SewingProduction.Helpers
             }
             catch (Exception ex)
             {
-                //  _logger.LogError(ex, $"Ошибка при ExecuteScalarAsync<{typeof(T).Name}>: {query}");
+                 // _logger.LogError(ex, $"Ошибка при ExecuteScalarAsync<{typeof(T).Name}>: {query}");
                 throw;
             }
         }

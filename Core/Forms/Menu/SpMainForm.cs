@@ -286,5 +286,10 @@ namespace SewingProduction
         {
 
         }
+
+        private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new TSDAccessManagement (CurrentUser.User), e.Item);
+        }
     }
 }

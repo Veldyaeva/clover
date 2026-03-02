@@ -26,7 +26,8 @@ namespace SewingProduction.Features.Tabel.Models
         public int? gr { get; set; }
         public int verif1c { get; set; }
         public int verifParsec { get; set; }
-
+        public int groupId { get; set; }
+        public string nameGroup { get; set; }
 
     }
 }

@@ -39,6 +39,7 @@
             gridColumnFio = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnTsplPart = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnTsplPartOf = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             gridColumnDd2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnDd3 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnDd4 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -71,8 +72,11 @@
             gridColumnDd31 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPodrTableID = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnDlD = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnUin = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             customLabel1 = new SewingProduction.Core.Class.CustomLabel();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton7 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton6 = new SewingProduction.Core.Class.CustomSimpleButton();
             customSimpleButton5 = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -98,6 +102,7 @@
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -107,11 +112,12 @@
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
-            customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
-            layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
+            repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSpinEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)lookUpEditGroup.Properties).BeginInit();
@@ -127,6 +133,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
@@ -136,7 +143,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -150,7 +157,7 @@
             customGridControlTimeSheet.Location = new System.Drawing.Point(12, 52);
             customGridControlTimeSheet.MainView = gridView1;
             customGridControlTimeSheet.Name = "customGridControlTimeSheet";
-            customGridControlTimeSheet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
+            customGridControlTimeSheet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan, repositoryItemSpinEdit1, repositoryItemTextEdit1, repositoryItemTextEdit2 });
             customGridControlTimeSheet.Size = new System.Drawing.Size(1508, 464);
             customGridControlTimeSheet.TabIndex = 0;
             customGridControlTimeSheet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
@@ -171,16 +178,19 @@
             gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             gridView1.Appearance.Row.Options.UseTextOptions = true;
             gridView1.Appearance.Row.TextOptions.Trimming = DevExpress.Utils.Trimming.None;
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnCheckIncludePlan, gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31, gridColumnPodrTableID, gridColumnDlD });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnCheckIncludePlan, gridColumnPomPech, gridColumnTabno, gridColumnFio, gridColumnTsplPart, gridColumnTsplPartOf, gridColumnDd1, gridColumnDd2, gridColumnDd3, gridColumnDd4, gridColumnDd5, gridColumnDd6, gridColumnDd7, gridColumnDd8, gridColumnDd9, gridColumnDd10, gridColumnDd11, gridColumnDd12, gridColumnDd13, gridColumnDd14, gridColumnDd15, gridColumnDd16, gridColumnDd17, gridColumnDd18, gridColumnDd19, gridColumnDd20, gridColumnDd21, gridColumnDd22, gridColumnDd23, gridColumnDd24, gridColumnDd25, gridColumnDd26, gridColumnDd27, gridColumnDd28, gridColumnDd29, gridColumnDd30, gridColumnDd31, gridColumnPodrTableID, gridColumnDlD, gridColumnUin });
             gridView1.GridControl = customGridControlTimeSheet;
             gridView1.Name = "gridView1";
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
             gridView1.RowCellClick += gridView1_RowCellClick;
             gridView1.RowCellStyle += gridView1_RowCellStyle;
+            gridView1.ShownEditor += gridView1_ShownEditor;
             gridView1.CellValueChanged += gridView1_CellValueChanged;
+            gridView1.CellValueChanging += gridView1_CellValueChanging;
             gridView1.KeyDown += gridView1_KeyDown;
             gridView1.KeyPress += gridView1_KeyPress;
             gridView1.DoubleClick += gridView1_DoubleClick;
+            gridView1.ValidatingEditor += gridView1_ValidatingEditor;
             // 
             // gridColumnCheckIncludePlan
             // 
@@ -198,6 +208,7 @@
             repositoryItemCheckEditPlan.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             repositoryItemCheckEditPlan.ValueChecked = 1;
             repositoryItemCheckEditPlan.ValueUnchecked = 0;
+            repositoryItemCheckEditPlan.EditValueChanged += repositoryItemCheckEditPlan_EditValueChanged;
             // 
             // gridColumnPomPech
             // 
@@ -229,8 +240,8 @@
             // gridColumnTsplPart
             // 
             gridColumnTsplPart.Caption = "Ставка д/пл";
+            gridColumnTsplPart.ColumnEdit = repositoryItemTextEdit2;
             gridColumnTsplPart.Name = "gridColumnTsplPart";
-            gridColumnTsplPart.OptionsColumn.AllowEdit = false;
             gridColumnTsplPart.Visible = true;
             gridColumnTsplPart.VisibleIndex = 4;
             gridColumnTsplPart.Width = 282;
@@ -238,11 +249,16 @@
             // gridColumnTsplPartOf
             // 
             gridColumnTsplPartOf.Caption = "Ставка оф";
+            gridColumnTsplPartOf.ColumnEdit = repositoryItemTextEdit1;
             gridColumnTsplPartOf.Name = "gridColumnTsplPartOf";
-            gridColumnTsplPartOf.OptionsColumn.AllowEdit = false;
             gridColumnTsplPartOf.Visible = true;
             gridColumnTsplPartOf.VisibleIndex = 5;
             gridColumnTsplPartOf.Width = 289;
+            // 
+            // repositoryItemTextEdit1
+            // 
+            repositoryItemTextEdit1.AutoHeight = false;
+            repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
             // 
             // gridColumnDd2
             // 
@@ -404,6 +420,20 @@
             gridColumnDlD.Caption = "dld";
             gridColumnDlD.Name = "gridColumnDlD";
             // 
+            // gridColumnUin
+            // 
+            gridColumnUin.Caption = "УИН";
+            gridColumnUin.Name = "gridColumnUin";
+            // 
+            // repositoryItemSpinEdit1
+            // 
+            repositoryItemSpinEdit1.AutoHeight = false;
+            repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemSpinEdit1.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+            repositoryItemSpinEdit1.MaskSettings.Set("mask", "\"n2\"");
+            repositoryItemSpinEdit1.MaxValue = new decimal(new int[] { 200, 0, 0, 131072 });
+            repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
+            // 
             // customLabel1
             // 
             customLabel1.Appearance.Font = new System.Drawing.Font("Arial", 10F);
@@ -446,6 +476,18 @@
             layoutControl1.Size = new System.Drawing.Size(1532, 599);
             layoutControl1.TabIndex = 4;
             layoutControl1.Text = "layoutControl1";
+            // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 12F);
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Location = new System.Drawing.Point(1203, 532);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new System.Drawing.Size(305, 43);
+            customSimpleButton1.StyleController = layoutControl1;
+            customSimpleButton1.TabIndex = 31;
+            customSimpleButton1.Text = "Отвл. Работы";
+            customSimpleButton1.Click += customButtonOtvlRab_Click;
             // 
             // customSimpleButton7
             // 
@@ -741,6 +783,16 @@
             layoutControlItem12.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem12.TextVisible = false;
             // 
+            // layoutControlItem10
+            // 
+            layoutControlItem10.Control = customSimpleButton1;
+            layoutControlItem10.Location = new System.Drawing.Point(1179, 0);
+            layoutControlItem10.MinSize = new System.Drawing.Size(92, 26);
+            layoutControlItem10.Name = "layoutControlItem10";
+            layoutControlItem10.Size = new System.Drawing.Size(309, 47);
+            layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem10.TextVisible = false;
+            // 
             // layoutControlItem13
             // 
             layoutControlItem13.ContentHorzAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -826,27 +878,10 @@
             layoutControlItem15.Size = new System.Drawing.Size(677, 47);
             layoutControlItem15.TextVisible = false;
             // 
-            // customSimpleButton1
+            // repositoryItemTextEdit2
             // 
-            customSimpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 12F);
-            customSimpleButton1.Appearance.Options.UseFont = true;
-            customSimpleButton1.Location = new System.Drawing.Point(1203, 532);
-            customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(305, 43);
-            customSimpleButton1.StyleController = layoutControl1;
-            customSimpleButton1.TabIndex = 31;
-            customSimpleButton1.Text = "Отвл. Работы";
-            customSimpleButton1.Click += customButtonOtvlRab_Click;
-            // 
-            // layoutControlItem10
-            // 
-            layoutControlItem10.Control = customSimpleButton1;
-            layoutControlItem10.Location = new System.Drawing.Point(1179, 0);
-            layoutControlItem10.MinSize = new System.Drawing.Size(92, 26);
-            layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(309, 47);
-            layoutControlItem10.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            layoutControlItem10.TextVisible = false;
+            repositoryItemTextEdit2.AutoHeight = false;
+            repositoryItemTextEdit2.Name = "repositoryItemTextEdit2";
             // 
             // TabelMain
             // 
@@ -861,6 +896,8 @@
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSpinEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)lookUpEditGroup.Properties).EndInit();
@@ -876,6 +913,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
@@ -885,7 +923,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).EndInit();
             ResumeLayout(false);
         }
 
@@ -972,5 +1010,9 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem12;
         private Core.Class.CustomSimpleButton customSimpleButton1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnUin;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit2;
     }
 }

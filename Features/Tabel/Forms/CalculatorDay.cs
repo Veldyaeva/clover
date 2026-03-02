@@ -24,6 +24,7 @@ namespace SewingProduction.Features.Tabel.Forms
     public partial class CalculatorDay : CustomForm
     {
         public string CalculatorResult { get; private set; }
+        public string ddResult { get ; private set; }
         private readonly int _grId;
         private readonly string _dd;
         private readonly string _dLetters;
@@ -57,6 +58,7 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             _WorkTypesList.Clear();
             _WorkTypesList = await _tabelDataService.GetWorkTypesAsync(idGr);
+            _WorkTypesList.RemoveAll(p => p.nameWorkTypes.Trim() == "1");
 
         }
         private void FillCheckedList(List<WorkTypes> workTypes)
@@ -85,11 +87,11 @@ namespace SewingProduction.Features.Tabel.Forms
         private async void CalculatorDay_Load(object sender, EventArgs e)
         {
             await Task.WhenAll(GetWorkTypes(_grId));
-            if(_grId == 20)
+            if (_grId == 20)
             {
                 layoutControlItem1.ContentVisible = false;
                 layoutControlItem2.ContentVisible = false;
-                layoutControlItem3.ContentVisible = false;
+                layoutControlItem22.ContentVisible = false;
             }
             FillCheckedList(_WorkTypesList);
             customTextBoxDd.Text = _dd;
@@ -301,25 +303,31 @@ namespace SewingProduction.Features.Tabel.Forms
             bool IsOrderBasedLeave = MarkDay.ToString().Contains("/4");
             if (IsWorkingDay)
             {
-                radioGroup1.Properties.Items[1].Value = true;
+                customRadioGroup1.SelectedIndex = 0;
+              //  customRadioGroup1.Properties.Items[1].Value = true;
             }
             else
             {
-                radioGroup1.Properties.Items[0].Value = true;
+                customRadioGroup1.SelectedIndex = 1;
+              //  customRadioGroup1.Properties.Items[0].Value = true;
             }
             if (IsOrderBasedLeave)
             {
-                radioGroup2.Properties.Items[0].Value = true;
+                customRadioGroup2.SelectedIndex = 1;
+                //customRadioGroup2.Properties.Items[0].Value = true;
             }
             if (IsHoliday)
             {
-                radioGroup2.Properties.Items[1].Value = true;
+                customRadioGroup2.SelectedIndex = 0;
+               // customRadioGroup2.Properties.Items[1].Value = true;
             }
             if (!IsOrderBasedLeave && !IsHoliday)
             {
-                radioGroup2.Properties.Items[0].Value = false;
-                radioGroup2.Properties.Items[1].Value = false;
+                customRadioGroup2.SelectedIndex = 2;
+               // customRadioGroup2.Properties.Items[0].Value = false;
+               // customRadioGroup2.Properties.Items[1].Value = false;
             }
+            
         }
 
         private void btnC_Click(object sender, EventArgs e)
@@ -331,6 +339,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private void customSimpleButton2_Click(object sender, EventArgs e)
         {
             this.CalculatorResult = customTextBoxValue.Text;
+            this.ddResult = customTextBoxDd.Text.Trim();
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -338,6 +347,33 @@ namespace SewingProduction.Features.Tabel.Forms
         private void customTextBoxDd_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetValueDd();
+        }
+        public void GetValueDd()
+        {
+            StringBuilder valueDd = new StringBuilder();
+            if (customRadioGroup1.SelectedIndex == 0)
+            {
+                valueDd.Append("1");
+            }
+            else if(customRadioGroup1.SelectedIndex == 1)
+            {
+                valueDd.Append("2");
+            }
+            if (customRadioGroup2.SelectedIndex == 0)
+            {
+                valueDd.Append("/3");
+            }
+            else if (customRadioGroup2.SelectedIndex == 1)
+            {
+                valueDd.Append("/4");
+            }
+            customTextBoxDd.Text = valueDd.ToString().Trim();
+            customTextBoxDd.Refresh();
         }
     }
 }
