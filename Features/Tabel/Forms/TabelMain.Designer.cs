@@ -39,6 +39,7 @@
             gridColumnFio = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnTsplPart = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnTsplPartOf = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             gridColumnDd2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnDd3 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnDd4 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -72,6 +73,7 @@
             gridColumnPodrTableID = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnDlD = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnUin = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             customLabel1 = new SewingProduction.Core.Class.CustomLabel();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             customSimpleButton1 = new SewingProduction.Core.Class.CustomSimpleButton();
@@ -110,9 +112,12 @@
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
+            repositoryItemTextEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSpinEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)lookUpEditGroup.Properties).BeginInit();
@@ -138,6 +143,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).BeginInit();
             SuspendLayout();
             // 
             // gridColumnDd1
@@ -151,7 +157,7 @@
             customGridControlTimeSheet.Location = new System.Drawing.Point(12, 52);
             customGridControlTimeSheet.MainView = gridView1;
             customGridControlTimeSheet.Name = "customGridControlTimeSheet";
-            customGridControlTimeSheet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan });
+            customGridControlTimeSheet.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditPlan, repositoryItemSpinEdit1, repositoryItemTextEdit1, repositoryItemTextEdit2 });
             customGridControlTimeSheet.Size = new System.Drawing.Size(1508, 464);
             customGridControlTimeSheet.TabIndex = 0;
             customGridControlTimeSheet.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
@@ -178,11 +184,13 @@
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
             gridView1.RowCellClick += gridView1_RowCellClick;
             gridView1.RowCellStyle += gridView1_RowCellStyle;
+            gridView1.ShownEditor += gridView1_ShownEditor;
             gridView1.CellValueChanged += gridView1_CellValueChanged;
             gridView1.CellValueChanging += gridView1_CellValueChanging;
             gridView1.KeyDown += gridView1_KeyDown;
             gridView1.KeyPress += gridView1_KeyPress;
             gridView1.DoubleClick += gridView1_DoubleClick;
+            gridView1.ValidatingEditor += gridView1_ValidatingEditor;
             // 
             // gridColumnCheckIncludePlan
             // 
@@ -232,9 +240,8 @@
             // gridColumnTsplPart
             // 
             gridColumnTsplPart.Caption = "Ставка д/пл";
-            gridColumnTsplPart.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            gridColumnTsplPart.ColumnEdit = repositoryItemTextEdit2;
             gridColumnTsplPart.Name = "gridColumnTsplPart";
-            gridColumnTsplPart.OptionsColumn.AllowEdit = false;
             gridColumnTsplPart.Visible = true;
             gridColumnTsplPart.VisibleIndex = 4;
             gridColumnTsplPart.Width = 282;
@@ -242,11 +249,16 @@
             // gridColumnTsplPartOf
             // 
             gridColumnTsplPartOf.Caption = "Ставка оф";
+            gridColumnTsplPartOf.ColumnEdit = repositoryItemTextEdit1;
             gridColumnTsplPartOf.Name = "gridColumnTsplPartOf";
-            gridColumnTsplPartOf.OptionsColumn.AllowEdit = false;
             gridColumnTsplPartOf.Visible = true;
             gridColumnTsplPartOf.VisibleIndex = 5;
             gridColumnTsplPartOf.Width = 289;
+            // 
+            // repositoryItemTextEdit1
+            // 
+            repositoryItemTextEdit1.AutoHeight = false;
+            repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
             // 
             // gridColumnDd2
             // 
@@ -412,6 +424,15 @@
             // 
             gridColumnUin.Caption = "УИН";
             gridColumnUin.Name = "gridColumnUin";
+            // 
+            // repositoryItemSpinEdit1
+            // 
+            repositoryItemSpinEdit1.AutoHeight = false;
+            repositoryItemSpinEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemSpinEdit1.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
+            repositoryItemSpinEdit1.MaskSettings.Set("mask", "\"n2\"");
+            repositoryItemSpinEdit1.MaxValue = new decimal(new int[] { 200, 0, 0, 131072 });
+            repositoryItemSpinEdit1.Name = "repositoryItemSpinEdit1";
             // 
             // customLabel1
             // 
@@ -857,6 +878,11 @@
             layoutControlItem15.Size = new System.Drawing.Size(677, 47);
             layoutControlItem15.TextVisible = false;
             // 
+            // repositoryItemTextEdit2
+            // 
+            repositoryItemTextEdit2.AutoHeight = false;
+            repositoryItemTextEdit2.Name = "repositoryItemTextEdit2";
+            // 
             // TabelMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -870,6 +896,8 @@
             ((System.ComponentModel.ISupportInitialize)customGridControlTimeSheet).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEditPlan).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemSpinEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)lookUpEditGroup.Properties).EndInit();
@@ -895,6 +923,7 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEdit2).EndInit();
             ResumeLayout(false);
         }
 
@@ -982,5 +1011,8 @@
         private Core.Class.CustomSimpleButton customSimpleButton1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnUin;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit2;
     }
 }
