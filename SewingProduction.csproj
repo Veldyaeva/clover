@@ -16,6 +16,10 @@
     <Optimize>True</Optimize>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
+  </ItemGroup>
+
 
 
   <ItemGroup>

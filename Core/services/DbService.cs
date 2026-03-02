@@ -318,8 +318,9 @@ namespace SewingProduction.Services
         /// <param name="tableName">имя таблицы</param>
         /// <param name="keyFieldName">имя ключевого параметра</param>
         /// <param name="entity">объект обновления</param>
+        /// <param name="UseNull">true - исключает NULL</param>
         /// <returns></returns>
-        public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity)
+        public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity, bool UseNull = false)
         {
             try
             {
@@ -334,16 +335,28 @@ namespace SewingProduction.Services
 
                 foreach (var prop in properties)
                 {
+                    var value = prop.GetValue(entity);
+
+                    if (UseNull)
+                    {
+                        if (value == null || value == DBNull.Value)
+                            continue;
+
+                        if (value is string strValue && string.IsNullOrWhiteSpace(strValue))
+                            continue;
+                    }
+
                     string columnName = prop.Name;
                     var columnAttr = prop.GetCustomAttributes(typeof(ColumnAttribute), false)
-                     .FirstOrDefault() as ColumnAttribute;
+                        .FirstOrDefault() as ColumnAttribute;
                     if (columnAttr != null)
                     {
                         columnName = columnAttr.Name;
                     }
+
                     string parameterName = "@" + columnName;
                     setClauses.Add($"{columnName} = {parameterName}");
-                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity), updating: true);
+                    parameters[parameterName] = NormalizeValue(value, updating: true);
                 }
 
                 // Ключевое поле

@@ -281,5 +281,10 @@ namespace SewingProduction
         {
             OpenForm(new KnittingProductionAnalytics(), e.Item);
         }
+
+        private void МенюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

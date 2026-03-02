@@ -60,8 +60,9 @@ namespace SewingProduction.Core.Class
                 {
                     ApplyRowColors(gridView);
                     ApplyFocusedRowStyle(gridView);
-                    gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+                    //gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
                     gridView.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                    gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
                 }
             }
         }

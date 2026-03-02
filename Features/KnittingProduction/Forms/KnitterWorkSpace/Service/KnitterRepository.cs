@@ -212,19 +212,6 @@ where kwsmlKmlID in @ids
                     }
                 }
 
-                // Заполняем UI-поля плана/факта из базовых значений
-                //////////foreach (var parent in parents)
-                //////////{
-                //////////    // Плановые
-                //////////    parent.PlanKol_UI ??= parent.pzvKolNazn != 0 ? parent.pzvKolNazn : parent.pzvKol;
-                //////////    parent.PlanChas_UI ??= parent.pzvChasNazn != 0 ? parent.pzvChasNazn : parent.pzvNChasi;
-
-                //////////    // Факт
-                //////////    parent.FactKol_UI ??= parent.pzvKol;
-                //////////    parent.FactChas_UI ??= parent.pzvNChasi;
-                //////////}
-
-
                 static void FillUi(KnitterPZVModel r)
                 {
                     // - При открытии смены "назначено" в БД может не быть заполнено.
@@ -444,45 +431,9 @@ WHERE pzvID = @pzvId;
         {
             try
             {
-                //using (var connection = _dbHelper.GetConnection())
-                //{
-                //    var parameters = new
-                //    {
-                //        pzvId,
-                //        mode = 1,
-                //        qtyFact = factQty,
-                //        userName = (string)null
-                //    };
-                //    var ids = new List<PzvSplitResult>();
-                //    using (var grid = await connection.QueryMultipleAsync(
-                //        "dbo.PZV_Split",
-                //        param: parameters,
-                //        commandTimeout: 60,
-                //        commandType: CommandType.StoredProcedure))
-                //    {
-                //        if (!grid.IsConsumed)
-                //        {
-                //            try
-                //            {
-                //                var newIds = await grid.ReadAsync<PzvSplitResult>();
-                //                ids.AddRange(newIds);
-                //            }
-                //            catch
-                //            {
-                //                // ignore if no set
-                //            }
-                //        }
-                //        if (!grid.IsConsumed)
-                //        {
-                //            var newIds = await grid.ReadAsync<PzvSplitResult>();
-                //            ids.AddRange(newIds);
-                //        }
-                //    }
-                //    return ids;
-                //}
-                var ids =  await SplitPzvByModeAsync(pzvId, mode: 1, qtyFact: factQty);
-                return ids;
-            }
+                var ids = await SplitPzvByModeAsync(pzvId, mode: 1, qtyFact: factQty);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            return ids;
+        }
             catch (Exception ex)
             {
                 throw new Exception($"SplitPzvByFactAsync failed (pzvId={pzvId}, factQty={factQty})", ex);
@@ -504,25 +455,26 @@ WHERE pzvID = @pzvId;
 					};
 					var ids = new List<PzvSplitResult>();
 					using (var grid = await connection.QueryMultipleAsync(
-						"dbo.PZV_Split",
+                        "dbo.PZV_Split",
 						param: parameters,
 						commandTimeout: 60,
 						commandType: CommandType.StoredProcedure))
 					{
-						if (!grid.IsConsumed)
-						{
-							try
-							{
-								var head = await grid.ReadAsync();
-								// ignore head set if present
-							}
-							catch { }
-						}
-						if (!grid.IsConsumed)
-						{
-							var newIds = await grid.ReadAsync<PzvSplitResult>();
-							ids.AddRange(newIds);
-						}
+                       if(mode==2)
+                        if (!grid.IsConsumed) //не нужно выкидывать первый набор, там данные
+                                {
+                                    try
+                                        {
+                                            var head = await grid.ReadAsync();
+                                            // ignore head set if present
+                                        }
+                                    catch { }
+                                }
+                        if (!grid.IsConsumed)
+						    {
+							    var newIds = await grid.ReadAsync<PzvSplitResult>();
+							    ids.AddRange(newIds);
+						    }
 					}
 					return ids;
 				}
@@ -559,13 +511,6 @@ WHERE pzvID = @pzvId;
                     commandTimeout: 60);
 
                 var stats = (await multi.ReadAsync<MachineHoursStat>()).ToList();
-
-                // второй набор можно прочитать (если нужно для логов/отладки)
-                // var details = (await multi.ReadAsync<MachineHoursDetail>()).ToList();
-
-                // если не добрали до minHours — можно сформировать сообщение
-                // var bad = stats.Where(s => s.StillLessThanMin == 1).ToList();
-
                 return stats;
             }
             catch (Exception ex)
@@ -579,7 +524,6 @@ WHERE pzvID = @pzvId;
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                   // await connection.OpenAsync();
                     using (var tx = connection.BeginTransaction())
                     {
                         const string sqlMain = @"
@@ -729,25 +673,6 @@ WHERE pzvID IN @ids";
 				throw new Exception($"UpdatePzvKwsIdAsync failed (kwsId={kwsId})", ex);
 			}
 		}
-
-        //public Task AdjustNotStartedBeforeShiftEndAsync(int? kwsId, 12m)
-        //{
-        //    try
-        //    {
-        //        using (var connection = _dbHelper.GetConnection())
-        //        {
-        //            return connection.ExecuteAsync(
-        //        "dbo.PZV_UnassignNotStartedByShift",
-        //        new { KwsId = kwsId },
-        //        commandType: CommandType.StoredProcedure);
-        //        }
-        //    }
-        //    catch (Exception ex) {
-        //        throw new Exception($"UnassignNoStartedOps failed (kwsId={kwsId})", ex);
-        //    }
-        //}
-
-
 
         public sealed class MachineHoursStat
         {

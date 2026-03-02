@@ -139,61 +139,55 @@
             // 
             // customTextBoxMO
             // 
-            customTextBoxMO.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxMO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxMO.ErrorColor = System.Drawing.Color.Red;
             customTextBoxMO.ErrorMessage = null;
             customTextBoxMO.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxMO.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxMO.Location = new System.Drawing.Point(789, 117);
             customTextBoxMO.Name = "customTextBoxMO";
+            customTextBoxMO.ReadOnly = true;
             customTextBoxMO.Size = new System.Drawing.Size(487, 20);
             customTextBoxMO.TabIndex = 5;
             // 
             // customTextBoxNN
             // 
-            customTextBoxNN.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxNN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxNN.ErrorColor = System.Drawing.Color.Red;
             customTextBoxNN.ErrorMessage = null;
             customTextBoxNN.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxNN.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxNN.Location = new System.Drawing.Point(789, 93);
             customTextBoxNN.Name = "customTextBoxNN";
+            customTextBoxNN.ReadOnly = true;
             customTextBoxNN.Size = new System.Drawing.Size(487, 20);
             customTextBoxNN.TabIndex = 4;
             // 
             // customTextBoxMod
             // 
-            customTextBoxMod.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxMod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxMod.ErrorColor = System.Drawing.Color.Red;
             customTextBoxMod.ErrorMessage = null;
             customTextBoxMod.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxMod.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxMod.Location = new System.Drawing.Point(789, 69);
             customTextBoxMod.Name = "customTextBoxMod";
+            customTextBoxMod.ReadOnly = true;
             customTextBoxMod.Size = new System.Drawing.Size(487, 20);
             customTextBoxMod.TabIndex = 3;
             // 
             // customTextBoxArt
             // 
-            customTextBoxArt.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customTextBoxArt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             customTextBoxArt.ErrorColor = System.Drawing.Color.Red;
             customTextBoxArt.ErrorMessage = null;
             customTextBoxArt.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxArt.Location = new System.Drawing.Point(789, 45);
             customTextBoxArt.Name = "customTextBoxArt";
+            customTextBoxArt.ReadOnly = true;
             customTextBoxArt.Size = new System.Drawing.Size(487, 20);
             customTextBoxArt.TabIndex = 2;
             // 
             // customButtonSave
             // 
-            customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonSave.Location = new System.Drawing.Point(1072, 512);
             customButtonSave.Name = "customButtonSave";
             customButtonSave.Size = new System.Drawing.Size(204, 43);
@@ -224,6 +218,8 @@
             gridViewArtKomplekt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { akAkId, akParentNN, akParentPsaid, akTkId, akGridColumnButton, akTkName, akTGIDN, akTGMIDN, akTG_Name, akTGM_Name, Npp });
             gridViewArtKomplekt.GridControl = customGridControlArtKomplekt;
             gridViewArtKomplekt.Name = "gridViewArtKomplekt";
+            gridViewArtKomplekt.OptionsBehavior.Editable = false;
+            gridViewArtKomplekt.OptionsBehavior.ReadOnly = true;
             gridViewArtKomplekt.OptionsView.EnableAppearanceEvenRow = true;
             gridViewArtKomplekt.OptionsView.ShowGroupPanel = false;
             // 
@@ -232,6 +228,7 @@
             akAkId.Caption = "akAkId";
             akAkId.FieldName = "Ak_id";
             akAkId.Name = "akAkId";
+            akAkId.OptionsColumn.ReadOnly = true;
             akAkId.Width = 96;
             // 
             // akParentNN
@@ -239,6 +236,7 @@
             akParentNN.Caption = "Номер";
             akParentNN.FieldName = "Parent_nn";
             akParentNN.Name = "akParentNN";
+            akParentNN.OptionsColumn.ReadOnly = true;
             akParentNN.Visible = true;
             akParentNN.VisibleIndex = 2;
             akParentNN.Width = 95;
@@ -248,6 +246,7 @@
             akParentPsaid.Caption = "akParentPsaid";
             akParentPsaid.FieldName = "Parent_psaid";
             akParentPsaid.Name = "akParentPsaid";
+            akParentPsaid.OptionsColumn.ReadOnly = true;
             akParentPsaid.Width = 96;
             // 
             // akTkId
@@ -255,6 +254,7 @@
             akTkId.Caption = "akTkId";
             akTkId.FieldName = "Tk_id";
             akTkId.Name = "akTkId";
+            akTkId.OptionsColumn.ReadOnly = true;
             // 
             // akGridColumnButton
             // 
@@ -278,6 +278,7 @@
             akTkName.Caption = "Часть в наборе";
             akTkName.FieldName = "Tk_name";
             akTkName.Name = "akTkName";
+            akTkName.OptionsColumn.ReadOnly = true;
             akTkName.Visible = true;
             akTkName.VisibleIndex = 1;
             akTkName.Width = 89;
@@ -287,18 +288,21 @@
             akTGIDN.Caption = "TG_ID_N";
             akTGIDN.FieldName = "Tg_id_n";
             akTGIDN.Name = "akTGIDN";
+            akTGIDN.OptionsColumn.ReadOnly = true;
             // 
             // akTGMIDN
             // 
             akTGMIDN.Caption = "TGM_ID_N";
             akTGMIDN.FieldName = "Tgm_id_n";
             akTGMIDN.Name = "akTGMIDN";
+            akTGMIDN.OptionsColumn.ReadOnly = true;
             // 
             // akTG_Name
             // 
             akTG_Name.Caption = "Категория";
             akTG_Name.FieldName = "TCAT_CategoryName";
             akTG_Name.Name = "akTG_Name";
+            akTG_Name.OptionsColumn.ReadOnly = true;
             akTG_Name.Visible = true;
             akTG_Name.VisibleIndex = 3;
             akTG_Name.Width = 109;
@@ -308,6 +312,7 @@
             akTGM_Name.Caption = "Дин. признак";
             akTGM_Name.FieldName = "TCDS_Name";
             akTGM_Name.Name = "akTGM_Name";
+            akTGM_Name.OptionsColumn.ReadOnly = true;
             akTGM_Name.Visible = true;
             akTGM_Name.VisibleIndex = 4;
             akTGM_Name.Width = 107;
@@ -317,6 +322,7 @@
             Npp.Caption = "№";
             Npp.FieldName = "Npp";
             Npp.Name = "Npp";
+            Npp.OptionsColumn.ReadOnly = true;
             Npp.Visible = true;
             Npp.VisibleIndex = 0;
             Npp.Width = 27;
@@ -343,6 +349,8 @@
             gridViewPlanSezonAll.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { psaGridColumnCheck, psaPsaid, psaNn, psaYear, psaSezon, psaTG_Name, psaTGM_Name, psaTbid, psaArticul, psaMod, psaGridColumnButton, psaTGIDN, psaTGMIDN });
             gridViewPlanSezonAll.GridControl = customGridControlPlanSezonAll;
             gridViewPlanSezonAll.Name = "gridViewPlanSezonAll";
+            gridViewPlanSezonAll.OptionsBehavior.Editable = false;
+            gridViewPlanSezonAll.OptionsBehavior.ReadOnly = true;
             gridViewPlanSezonAll.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter;
             gridViewPlanSezonAll.OptionsView.EnableAppearanceEvenRow = true;
             gridViewPlanSezonAll.OptionsView.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
@@ -370,6 +378,7 @@
             psaPsaid.Caption = "Psa_id";
             psaPsaid.FieldName = "Psa_id";
             psaPsaid.Name = "psaPsaid";
+            psaPsaid.OptionsColumn.ReadOnly = true;
             psaPsaid.Width = 79;
             // 
             // psaNn
@@ -377,6 +386,7 @@
             psaNn.Caption = "Номер";
             psaNn.FieldName = "Nn";
             psaNn.Name = "psaNn";
+            psaNn.OptionsColumn.ReadOnly = true;
             psaNn.Visible = true;
             psaNn.VisibleIndex = 1;
             psaNn.Width = 95;
@@ -386,6 +396,7 @@
             psaYear.Caption = "Год";
             psaYear.FieldName = "Year";
             psaYear.Name = "psaYear";
+            psaYear.OptionsColumn.ReadOnly = true;
             psaYear.Visible = true;
             psaYear.VisibleIndex = 2;
             psaYear.Width = 53;
@@ -395,6 +406,7 @@
             psaSezon.Caption = "Сезон";
             psaSezon.FieldName = "Seazon";
             psaSezon.Name = "psaSezon";
+            psaSezon.OptionsColumn.ReadOnly = true;
             psaSezon.Visible = true;
             psaSezon.VisibleIndex = 3;
             psaSezon.Width = 72;
@@ -404,6 +416,7 @@
             psaTG_Name.Caption = "Категория";
             psaTG_Name.FieldName = "TCAT_CategoryName";
             psaTG_Name.Name = "psaTG_Name";
+            psaTG_Name.OptionsColumn.ReadOnly = true;
             psaTG_Name.Visible = true;
             psaTG_Name.VisibleIndex = 5;
             psaTG_Name.Width = 133;
@@ -413,6 +426,7 @@
             psaTGM_Name.Caption = "Дин. признак";
             psaTGM_Name.FieldName = "TCDS_Name";
             psaTGM_Name.Name = "psaTGM_Name";
+            psaTGM_Name.OptionsColumn.ReadOnly = true;
             psaTGM_Name.Visible = true;
             psaTGM_Name.VisibleIndex = 6;
             psaTGM_Name.Width = 137;
@@ -422,6 +436,7 @@
             psaTbid.Caption = "Блок";
             psaTbid.FieldName = "Tb_id";
             psaTbid.Name = "psaTbid";
+            psaTbid.OptionsColumn.ReadOnly = true;
             psaTbid.Visible = true;
             psaTbid.VisibleIndex = 4;
             psaTbid.Width = 74;
@@ -431,6 +446,7 @@
             psaArticul.Caption = "Артикул";
             psaArticul.FieldName = "Articul";
             psaArticul.Name = "psaArticul";
+            psaArticul.OptionsColumn.ReadOnly = true;
             psaArticul.Width = 79;
             // 
             // psaMod
@@ -438,6 +454,7 @@
             psaMod.Caption = "Модель";
             psaMod.FieldName = "Mod";
             psaMod.Name = "psaMod";
+            psaMod.OptionsColumn.ReadOnly = true;
             psaMod.Width = 114;
             // 
             // psaGridColumnButton
@@ -462,12 +479,14 @@
             psaTGIDN.Caption = "TG_ID_N";
             psaTGIDN.FieldName = "Tg_id_n";
             psaTGIDN.Name = "psaTGIDN";
+            psaTGIDN.OptionsColumn.ReadOnly = true;
             // 
             // psaTGMIDN
             // 
             psaTGMIDN.Caption = "TGM_ID_N";
             psaTGMIDN.FieldName = "Tgm_id_n";
             psaTGMIDN.Name = "psaTGMIDN";
+            psaTGMIDN.OptionsColumn.ReadOnly = true;
             // 
             // Root
             // 
