@@ -30,6 +30,7 @@ using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -487,6 +488,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
 
                 await LoadPlanForTabAsync(tab);
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(this, $"Ошибка доступа к базе данных при загрузке плана: {ex.Message}", "Ошибка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
