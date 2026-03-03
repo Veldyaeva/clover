@@ -120,27 +120,6 @@ namespace SewingProduction.Features.Articul
 
                 #region заполнение блока основных данных артикула
 
-                txbKod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod), true, DataSourceUpdateMode.Never);
-                txbArticul.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Articul), true, DataSourceUpdateMode.Never);
-                txbMod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Mod), true);
-                txbTM.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.TmName), true);
-                txbSeason.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.SeasonName), true);
-                txbAssort.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.AssortName), true);
-                txbCountry.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.CountryName), true);
-                txbGrupMenName.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GrupMenName), true);
-                mtbDateOpis.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.DateOpis), true);
-                txbGrup.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Grup), true);
-                txbIdGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Id_gost), true);
-                txbNameGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GostName), true);
-                txbOpiGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GostOpi), true);
-                txbSost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost), true);
-                txbSost2.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost2), true);
-                txbSost3.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost3), true);
-                txbRazm.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Razm), true);
-                txbScNomer.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.ScNomer), true);
-                txbKodTnved.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod_tnved), true);
-                txbNDS.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Nds), true);
-
                 #endregion
 
                 #region галки с отделками
@@ -149,10 +128,7 @@ namespace SewingProduction.Features.Articul
                 //chbKombIzd.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_izd), true);
 
                 //галки вяз отделки
-                chbKombIzd.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_izd), true);
-                chbKombDet.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_det), true);
                 //архив
-                chbArh.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Arh), true);
 
                 //отделка
                 chbIsUpak.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Is_upak), true);
@@ -430,24 +406,24 @@ namespace SewingProduction.Features.Articul
                             break;
                     }
                     // получение изображения по пути
-                    string imagePath = null;
-                    try
-                    {
-                        imagePath = await _articulDataService.GetFileEskizForKod(kodd);
-                        if (!string.IsNullOrEmpty(imagePath))
-                        {
-                            pictureBoxArticul.ImageLocation = imagePath;
-                        }
-                        else
-                        {
-                            pictureBoxArticul.ImageLocation = null;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
-                        pictureBoxArticul.ImageLocation = null;
-                    }
+                    //string imagePath = null;
+                    //try
+                    //{
+                    //    imagePath = await _articulDataService.GetFileEskizForKod(kodd);
+                    //    if (!string.IsNullOrEmpty(imagePath))
+                    //    {
+                    //        pictureBoxArticul.ImageLocation = imagePath;
+                    //    }
+                    //    else
+                    //    {
+                    //        pictureBoxArticul.ImageLocation = null;
+                    //    }
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
+                    //    pictureBoxArticul.ImageLocation = null;
+                    //}
 
                 }
             }
