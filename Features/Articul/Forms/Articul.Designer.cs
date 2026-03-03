@@ -224,6 +224,7 @@ namespace SewingProduction.Features.Articul
             txbSebz = new CustomTextBox();
             customLabel40 = new CustomLabel();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            articulControl1 = new SewingProduction.Features.Articul.Forms.ArticulControl();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -556,7 +557,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage2.Controls.Add(cGridNaborSost);
             cTabPage2.Name = "cTabPage2";
-            cTabPage2.Size = new Size(574, 142);
+            cTabPage2.Size = new Size(568, 141);
             cTabPage2.Text = "Состав набора";
             // 
             // cGridNaborSost
@@ -567,7 +568,7 @@ namespace SewingProduction.Features.Articul
             cGridNaborSost.Location = new Point(0, 0);
             cGridNaborSost.MainView = gridViewNaborSost;
             cGridNaborSost.Name = "cGridNaborSost";
-            cGridNaborSost.Size = new Size(574, 142);
+            cGridNaborSost.Size = new Size(568, 141);
             cGridNaborSost.TabIndex = 1;
             cGridNaborSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNaborSost });
             // 
@@ -1421,6 +1422,9 @@ namespace SewingProduction.Features.Articul
             customLabel30.Appearance.Font = new Font("Arial", 8F);
             customLabel30.Appearance.Options.UseBackColor = true;
             customLabel30.Appearance.Options.UseFont = true;
+            customLabel30.Appearance.Options.UseTextOptions = true;
+            customLabel30.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel30.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel30.Location = new Point(160, 202);
             customLabel30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel30.Name = "customLabel30";
@@ -1435,6 +1439,9 @@ namespace SewingProduction.Features.Articul
             customLabel31.Appearance.Font = new Font("Arial", 8F);
             customLabel31.Appearance.Options.UseBackColor = true;
             customLabel31.Appearance.Options.UseFont = true;
+            customLabel31.Appearance.Options.UseTextOptions = true;
+            customLabel31.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel31.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel31.Location = new Point(160, 174);
             customLabel31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel31.Name = "customLabel31";
@@ -1449,6 +1456,9 @@ namespace SewingProduction.Features.Articul
             customLabel32.Appearance.Font = new Font("Arial", 8F);
             customLabel32.Appearance.Options.UseBackColor = true;
             customLabel32.Appearance.Options.UseFont = true;
+            customLabel32.Appearance.Options.UseTextOptions = true;
+            customLabel32.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel32.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel32.Location = new Point(160, 145);
             customLabel32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel32.Name = "customLabel32";
@@ -1463,6 +1473,9 @@ namespace SewingProduction.Features.Articul
             customLabel33.Appearance.Font = new Font("Arial", 8F);
             customLabel33.Appearance.Options.UseBackColor = true;
             customLabel33.Appearance.Options.UseFont = true;
+            customLabel33.Appearance.Options.UseTextOptions = true;
+            customLabel33.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel33.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel33.Location = new Point(160, 119);
             customLabel33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel33.Name = "customLabel33";
@@ -1477,6 +1490,9 @@ namespace SewingProduction.Features.Articul
             customLabel34.Appearance.Font = new Font("Arial", 8F);
             customLabel34.Appearance.Options.UseBackColor = true;
             customLabel34.Appearance.Options.UseFont = true;
+            customLabel34.Appearance.Options.UseTextOptions = true;
+            customLabel34.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel34.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel34.Location = new Point(160, 91);
             customLabel34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel34.Name = "customLabel34";
@@ -1491,6 +1507,9 @@ namespace SewingProduction.Features.Articul
             customLabel35.Appearance.Font = new Font("Arial", 8F);
             customLabel35.Appearance.Options.UseBackColor = true;
             customLabel35.Appearance.Options.UseFont = true;
+            customLabel35.Appearance.Options.UseTextOptions = true;
+            customLabel35.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel35.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel35.Location = new Point(160, 63);
             customLabel35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel35.Name = "customLabel35";
@@ -1505,6 +1524,9 @@ namespace SewingProduction.Features.Articul
             customLabel36.Appearance.Font = new Font("Arial", 8F);
             customLabel36.Appearance.Options.UseBackColor = true;
             customLabel36.Appearance.Options.UseFont = true;
+            customLabel36.Appearance.Options.UseTextOptions = true;
+            customLabel36.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel36.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel36.Location = new Point(160, 36);
             customLabel36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel36.Name = "customLabel36";
@@ -1519,6 +1541,9 @@ namespace SewingProduction.Features.Articul
             customLabel29.Appearance.Font = new Font("Arial", 8F);
             customLabel29.Appearance.Options.UseBackColor = true;
             customLabel29.Appearance.Options.UseFont = true;
+            customLabel29.Appearance.Options.UseTextOptions = true;
+            customLabel29.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel29.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel29.Location = new Point(520, 235);
             customLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel29.Name = "customLabel29";
@@ -1546,6 +1571,9 @@ namespace SewingProduction.Features.Articul
             customLabel28.Appearance.Font = new Font("Arial", 8F);
             customLabel28.Appearance.Options.UseBackColor = true;
             customLabel28.Appearance.Options.UseFont = true;
+            customLabel28.Appearance.Options.UseTextOptions = true;
+            customLabel28.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel28.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel28.Location = new Point(6, 72);
             customLabel28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel28.Name = "customLabel28";
@@ -1560,6 +1588,9 @@ namespace SewingProduction.Features.Articul
             customLabel27.Appearance.Font = new Font("Arial", 8F);
             customLabel27.Appearance.Options.UseBackColor = true;
             customLabel27.Appearance.Options.UseFont = true;
+            customLabel27.Appearance.Options.UseTextOptions = true;
+            customLabel27.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel27.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel27.Location = new Point(6, 34);
             customLabel27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel27.Name = "customLabel27";
@@ -1574,6 +1605,9 @@ namespace SewingProduction.Features.Articul
             customLabel26.Appearance.Font = new Font("Arial", 8F);
             customLabel26.Appearance.Options.UseBackColor = true;
             customLabel26.Appearance.Options.UseFont = true;
+            customLabel26.Appearance.Options.UseTextOptions = true;
+            customLabel26.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel26.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel26.Location = new Point(266, 205);
             customLabel26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel26.Name = "customLabel26";
@@ -1588,6 +1622,9 @@ namespace SewingProduction.Features.Articul
             customLabel25.Appearance.Font = new Font("Arial", 8F);
             customLabel25.Appearance.Options.UseBackColor = true;
             customLabel25.Appearance.Options.UseFont = true;
+            customLabel25.Appearance.Options.UseTextOptions = true;
+            customLabel25.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel25.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel25.Location = new Point(266, 177);
             customLabel25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel25.Name = "customLabel25";
@@ -1615,6 +1652,9 @@ namespace SewingProduction.Features.Articul
             customLabel24.Appearance.Font = new Font("Arial", 8F);
             customLabel24.Appearance.Options.UseBackColor = true;
             customLabel24.Appearance.Options.UseFont = true;
+            customLabel24.Appearance.Options.UseTextOptions = true;
+            customLabel24.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel24.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel24.Location = new Point(266, 149);
             customLabel24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel24.Name = "customLabel24";
@@ -1642,6 +1682,9 @@ namespace SewingProduction.Features.Articul
             customLabel23.Appearance.Font = new Font("Arial", 8F);
             customLabel23.Appearance.Options.UseBackColor = true;
             customLabel23.Appearance.Options.UseFont = true;
+            customLabel23.Appearance.Options.UseTextOptions = true;
+            customLabel23.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel23.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel23.Location = new Point(267, 122);
             customLabel23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel23.Name = "customLabel23";
@@ -1656,6 +1699,9 @@ namespace SewingProduction.Features.Articul
             customLabel22.Appearance.Font = new Font("Arial", 8F);
             customLabel22.Appearance.Options.UseBackColor = true;
             customLabel22.Appearance.Options.UseFont = true;
+            customLabel22.Appearance.Options.UseTextOptions = true;
+            customLabel22.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel22.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel22.Location = new Point(266, 94);
             customLabel22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel22.Name = "customLabel22";
@@ -1670,6 +1716,9 @@ namespace SewingProduction.Features.Articul
             customLabel21.Appearance.Font = new Font("Arial", 8F);
             customLabel21.Appearance.Options.UseBackColor = true;
             customLabel21.Appearance.Options.UseFont = true;
+            customLabel21.Appearance.Options.UseTextOptions = true;
+            customLabel21.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel21.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel21.Location = new Point(266, 66);
             customLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel21.Name = "customLabel21";
@@ -1684,6 +1733,9 @@ namespace SewingProduction.Features.Articul
             customLabel20.Appearance.Font = new Font("Arial", 8F);
             customLabel20.Appearance.Options.UseBackColor = true;
             customLabel20.Appearance.Options.UseFont = true;
+            customLabel20.Appearance.Options.UseTextOptions = true;
+            customLabel20.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel20.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel20.Location = new Point(266, 39);
             customLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel20.Name = "customLabel20";
@@ -2046,6 +2098,9 @@ namespace SewingProduction.Features.Articul
             customLabel48.Appearance.Font = new Font("Arial", 8F);
             customLabel48.Appearance.Options.UseBackColor = true;
             customLabel48.Appearance.Options.UseFont = true;
+            customLabel48.Appearance.Options.UseTextOptions = true;
+            customLabel48.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel48.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel48.Location = new Point(8, 302);
             customLabel48.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel48.Name = "customLabel48";
@@ -2084,6 +2139,9 @@ namespace SewingProduction.Features.Articul
             // 
             customLabel47.Appearance.Font = new Font("Arial", 10F);
             customLabel47.Appearance.Options.UseFont = true;
+            customLabel47.Appearance.Options.UseTextOptions = true;
+            customLabel47.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel47.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel47.Location = new Point(8, 273);
             customLabel47.Name = "customLabel47";
             customLabel47.Size = new Size(141, 16);
@@ -2105,6 +2163,9 @@ namespace SewingProduction.Features.Articul
             // 
             customLabel46.Appearance.Font = new Font("Arial", 10F);
             customLabel46.Appearance.Options.UseFont = true;
+            customLabel46.Appearance.Options.UseTextOptions = true;
+            customLabel46.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel46.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel46.Location = new Point(8, 245);
             customLabel46.Name = "customLabel46";
             customLabel46.Size = new Size(139, 16);
@@ -2313,6 +2374,9 @@ namespace SewingProduction.Features.Articul
             customLabel45.Appearance.Font = new Font("Arial", 8F);
             customLabel45.Appearance.Options.UseBackColor = true;
             customLabel45.Appearance.Options.UseFont = true;
+            customLabel45.Appearance.Options.UseTextOptions = true;
+            customLabel45.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel45.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel45.Location = new Point(104, 168);
             customLabel45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel45.Name = "customLabel45";
@@ -2365,6 +2429,9 @@ namespace SewingProduction.Features.Articul
             customLabel44.Appearance.Font = new Font("Arial", 8F);
             customLabel44.Appearance.Options.UseBackColor = true;
             customLabel44.Appearance.Options.UseFont = true;
+            customLabel44.Appearance.Options.UseTextOptions = true;
+            customLabel44.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel44.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel44.Location = new Point(105, 130);
             customLabel44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel44.Name = "customLabel44";
@@ -2418,6 +2485,9 @@ namespace SewingProduction.Features.Articul
             customLabel43.Appearance.Font = new Font("Arial", 8F);
             customLabel43.Appearance.Options.UseBackColor = true;
             customLabel43.Appearance.Options.UseFont = true;
+            customLabel43.Appearance.Options.UseTextOptions = true;
+            customLabel43.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel43.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel43.Location = new Point(105, 93);
             customLabel43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel43.Name = "customLabel43";
@@ -2458,6 +2528,9 @@ namespace SewingProduction.Features.Articul
             customLabel37.Appearance.Font = new Font("Arial", 8F);
             customLabel37.Appearance.Options.UseBackColor = true;
             customLabel37.Appearance.Options.UseFont = true;
+            customLabel37.Appearance.Options.UseTextOptions = true;
+            customLabel37.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel37.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel37.Location = new Point(4, 74);
             customLabel37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel37.Name = "customLabel37";
@@ -2472,6 +2545,9 @@ namespace SewingProduction.Features.Articul
             customLabel42.Appearance.Font = new Font("Arial", 8F);
             customLabel42.Appearance.Options.UseBackColor = true;
             customLabel42.Appearance.Options.UseFont = true;
+            customLabel42.Appearance.Options.UseTextOptions = true;
+            customLabel42.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel42.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel42.Location = new Point(106, 57);
             customLabel42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel42.Name = "customLabel42";
@@ -2486,6 +2562,9 @@ namespace SewingProduction.Features.Articul
             customLabel38.Appearance.Font = new Font("Arial", 8F);
             customLabel38.Appearance.Options.UseBackColor = true;
             customLabel38.Appearance.Options.UseFont = true;
+            customLabel38.Appearance.Options.UseTextOptions = true;
+            customLabel38.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel38.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel38.Location = new Point(4, 104);
             customLabel38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel38.Name = "customLabel38";
@@ -2513,6 +2592,9 @@ namespace SewingProduction.Features.Articul
             customLabel39.Appearance.Font = new Font("Arial", 8F);
             customLabel39.Appearance.Options.UseBackColor = true;
             customLabel39.Appearance.Options.UseFont = true;
+            customLabel39.Appearance.Options.UseTextOptions = true;
+            customLabel39.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel39.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel39.Location = new Point(4, 135);
             customLabel39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel39.Name = "customLabel39";
@@ -2527,6 +2609,9 @@ namespace SewingProduction.Features.Articul
             customLabel41.Appearance.Font = new Font("Arial", 8F);
             customLabel41.Appearance.Options.UseBackColor = true;
             customLabel41.Appearance.Options.UseFont = true;
+            customLabel41.Appearance.Options.UseTextOptions = true;
+            customLabel41.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel41.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel41.Location = new Point(105, 21);
             customLabel41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel41.Name = "customLabel41";
@@ -2554,6 +2639,9 @@ namespace SewingProduction.Features.Articul
             customLabel40.Appearance.Font = new Font("Arial", 8F);
             customLabel40.Appearance.Options.UseBackColor = true;
             customLabel40.Appearance.Options.UseFont = true;
+            customLabel40.Appearance.Options.UseTextOptions = true;
+            customLabel40.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel40.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel40.Location = new Point(103, 203);
             customLabel40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel40.Name = "customLabel40";
@@ -2562,11 +2650,20 @@ namespace SewingProduction.Features.Articul
             customLabel40.Text = "Зарплата";
             customLabel40.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // articulControl1
+            // 
+            articulControl1.IsReadOnly = true;
+            articulControl1.Location = new Point(598, 1);
+            articulControl1.Name = "articulControl1";
+            articulControl1.Size = new Size(701, 239);
+            articulControl1.TabIndex = 40;
+            // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new Size(1742, 1010);
+            Controls.Add(articulControl1);
             Controls.Add(customGroupBox2);
             Controls.Add(customGroupBox1);
             Controls.Add(groupBox3);
@@ -2829,5 +2926,6 @@ namespace SewingProduction.Features.Articul
         private CustomSimpleButton csButtonEdit;
         private CustomSimpleButton btnArticulEdit;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Forms.ArticulControl articulControl1;
     }
 }
