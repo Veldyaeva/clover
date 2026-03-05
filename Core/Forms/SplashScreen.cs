@@ -12,6 +12,7 @@ namespace SewingProduction
         public SplashScreen()
         {
             InitializeComponent();
+            imageSlider1.LayoutMode = DevExpress.Utils.Drawing.ImageLayoutMode.ZoomInside;
             LoadBackgroundImagesFromSettings();
             /*Random random = new Random();
             int minValue = 0;
@@ -74,8 +75,17 @@ namespace SewingProduction
 
             int seasonIndex = GetSeasonIndex(DateTime.Now.Month);
             string seasonFolder = Path.Combine(settingsFolder, $"Season_{seasonIndex}");
+            string eventsFolder = Path.Combine(settingsFolder, "Events", "8.03");
 
-            var imageFiles = GetImageFiles(seasonFolder);
+            var imageFiles = IsMarch8EventPeriod(DateTime.Now)
+                ? GetImageFiles(eventsFolder)
+                : new System.Collections.Generic.List<string>();
+
+            if (imageFiles.Count == 0)
+            {
+                imageFiles = GetImageFiles(seasonFolder);
+            }
+
             if (imageFiles.Count == 0)
             {
                 imageFiles = GetImageFiles(settingsFolder);
@@ -97,6 +107,12 @@ namespace SewingProduction
                     return;
                 }
             }
+        }
+
+        private static bool IsMarch8EventPeriod(DateTime date)
+        {
+            DateTime eventDate = new DateTime(date.Year, 3, 8);
+            return date.Date >= eventDate.AddDays(-4) && date.Date <= eventDate.AddDays(4);
         }
 
         private static int GetSeasonIndex(int month)
@@ -141,6 +157,7 @@ namespace SewingProduction
                 {
                     imageSlider1.Images.Clear();
                     imageSlider1.Images.Add((Image)image.Clone());
+                    AdjustSplashSizeToImage(image);
                     imageSlider1.CurrentImageIndex = 0;
                     return true;
                 }
@@ -150,6 +167,28 @@ namespace SewingProduction
                 // Ignore invalid or locked images.
                 return false;
             }
+        }
+
+        private void AdjustSplashSizeToImage(Image image)
+        {
+            if (image.Width <= 0 || image.Height <= 0)
+            {
+                return;
+            }
+
+            Rectangle workingArea = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 933, 519);
+            const double maxScreenFill = 0.82;
+
+            double maxWidth = Math.Max(320, workingArea.Width * maxScreenFill);
+            double maxHeight = Math.Max(240, workingArea.Height * maxScreenFill);
+            double scale = Math.Min(maxWidth / image.Width, maxHeight / image.Height);
+            scale = Math.Min(scale, 1.0);
+
+            int targetWidth = Math.Max(320, (int)Math.Round(image.Width * scale));
+            int targetHeight = Math.Max(240, (int)Math.Round(image.Height * scale));
+
+            ClientSize = new Size(targetWidth, targetHeight);
+            CenterToScreen();
         }
 
         private static bool IsImageFile(string path)

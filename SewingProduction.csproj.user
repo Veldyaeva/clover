@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\anyCPU.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -57,12 +57,6 @@
     </Compile>
     <Compile Update="Core\Class\SP_form.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Core\Forms\SplashScreenDev.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Core\Forms\SplashScreenDev.Designer.cs">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Update="Core\Forms\TextSplashScreen.cs">
       <SubType>Form</SubType>
@@ -383,9 +377,6 @@
   <ItemGroup>
     <EmbeddedResource Update="Core\Forms\SettingsForm.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Core\Forms\SplashScreenDev.resx">
-      <SubType>Code</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Features\Articul\Forms\Articul.resx">
       <SubType>Designer</SubType>
