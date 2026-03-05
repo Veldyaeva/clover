@@ -58,6 +58,12 @@
     <Compile Update="Core\Class\SP_form.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Core\Forms\SplashScreenDev.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Core\Forms\SplashScreenDev.Designer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Core\Forms\TextSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,6 +383,9 @@
   <ItemGroup>
     <EmbeddedResource Update="Core\Forms\SettingsForm.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Core\Forms\SplashScreenDev.resx">
+      <SubType>Code</SubType>
     </EmbeddedResource>
     <EmbeddedResource Update="Features\Articul\Forms\Articul.resx">
       <SubType>Designer</SubType>
