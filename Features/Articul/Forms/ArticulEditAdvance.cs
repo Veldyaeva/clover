@@ -204,7 +204,6 @@ namespace SewingProduction.Features.Articul.Forms
                 #region заполнение блока основных данных артикула
 
                 txbArticul.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Articul), true);
-
                 txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Mod), true);
 
                 //госты

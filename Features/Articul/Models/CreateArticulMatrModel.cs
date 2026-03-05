@@ -1,14 +1,20 @@
-﻿using System;
+﻿using SewingProduction.Core.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Features.Articul.Models
 {
-    public class CreateArticulMatrModel
+    public class CreateArticulMatrModel :  INotifyPropertyChanged
 
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         public string Nn { get; set; }
         public string Article { get; set; }
         public string RepeatArticle { get; set; }
@@ -38,7 +44,10 @@ namespace SewingProduction.Features.Articul.Models
         public string Sost1 { get; set; }
         public string Sost2 { get; set; }
         public string Sost3 { get; set; }
+        public int agIdAppr { get; set; }
+        public int idGostAppr { get; set; }
 
+        public DateTime dateCertificationApproval { get; set; }
 
 
     }

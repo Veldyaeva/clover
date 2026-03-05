@@ -585,7 +585,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand30.VisibleIndex = 0;
             gridBand30.Width = 101;
             // 
-            // gcCertGrupmen_name1
+            // gridColumn1
             // 
             gridColumn1.Caption = "№ В/м";
             gridColumn1.FieldName = "kmlNumber";
@@ -602,7 +602,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand34.VisibleIndex = 1;
             gridBand34.Width = 90;
             // 
-            // gcCertTb_id1
+            // gridColumn3
             // 
             gridColumn3.Caption = "Класс вязания";
             gridColumn3.FieldName = "name_class";
@@ -619,7 +619,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand32.VisibleIndex = 2;
             gridBand32.Width = 75;
             // 
-            // gcCertTsn_name1
+            // gridColumn2
             // 
             gridColumn2.Caption = "Артикул";
             gridColumn2.FieldName = "pzvArticul";
@@ -635,7 +635,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand35.VisibleIndex = 3;
             gridBand35.Width = 152;
             // 
-            // gcCertArticul1
+            // gridColumn4
             // 
             gridColumn4.Caption = "№ задания";
             gridColumn4.FieldName = "pzvNomZad";
@@ -652,7 +652,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand36.VisibleIndex = 4;
             gridBand36.Width = 133;
             // 
-            // gcCertMod1
+            // gridColumn5
             // 
             gridColumn5.Caption = "№ рассчёта";
             gridColumn5.FieldName = "pzvNom";
@@ -702,7 +702,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand37.VisibleIndex = 0;
             gridBand37.Width = 105;
             // 
-            // gcCertTm_name1
+            // gridColumn6
             // 
             gridColumn6.Caption = "назначено в м/ч";
             gridColumn6.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -723,7 +723,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand38.VisibleIndex = 1;
             gridBand38.Width = 105;
             // 
-            // gcCertGrup1
+            // gridColumn7
             // 
             gridColumn7.Caption = "назначено в ч/ч";
             gridColumn7.FieldName = "gridColumn7";
@@ -788,7 +788,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridBand28.VisibleIndex = 7;
             gridBand28.Width = 347;
             // 
-            // gcCertText_mo1
+            // gridColumn8
             // 
             gridColumn8.Caption = "Статус";
             gridColumn8.Name = "gridColumn8";
