@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
@@ -26,7 +26,7 @@ namespace SewingProduction.Features.Articul.Forms
         private readonly ILogger _logger = new FileLogger();
         private readonly DbService _dbService;
         private readonly Dictionary<Control, System.Reflection.PropertyInfo> _controlToArtNormProperty = new Dictionary<Control, System.Reflection.PropertyInfo>();
-        private readonly BindingSource _bs = new BindingSource();
+        //private readonly BindingSource _bs = new BindingSource();
         private readonly DXErrorProvider _dx = new DXErrorProvider();
 
         private bool _isReadOnly = true;
@@ -41,7 +41,7 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        public SpArticulPreviewModel? Model => _bs.Current as SpArticulPreviewModel;
+        public SpArticulPreviewModel Model => _bs?.Current as SpArticulPreviewModel;
 
         public ArticulControl()
         {
@@ -50,18 +50,36 @@ namespace SewingProduction.Features.Articul.Forms
             InitializeComponent();
 
             _dx.ContainerControl = this;
-            _dx.DataSource = _bs; // пригодится, если внедришь IDataErrorInfo/атрибуты
+        }
+        private BindingSource _bs;
 
+        public void BindTo(BindingSource source)
+        {
+            if (ReferenceEquals(_bs, source)) return;
+            _bs = source;
+            _dx.DataSource = _bs;
+            InitializeBindings();
+            ApplyReadOnlyState();
         }
 
+        public void BindModel(SpArticulPreviewModel model)
+        {
+            if (_bs == null) throw new InvalidOperationException("Сначала вызови BindTo(bindingSource)");
+            _bs.DataSource = model;
+            _bs.ResetBindings(false);
+        }
 
         private async void ArticulControl_Load(object sender, EventArgs e)
         {
             try
             {
-                if (!_isInitialized) 
-                AttachChangeHandlers();
-                InitializeBindings();      // <-- ключевое
+                if (!_isInitialized)
+                    AttachChangeHandlers();
+
+                // На момент Load внешний BindingSource может быть еще не передан через BindTo().
+                if (_bs != null)
+                    InitializeBindings();
+
                 ApplyReadOnlyState();      // учитываем начальный режим
                 _isInitialized = true;
             }
@@ -71,26 +89,29 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
 
-        /// <summary> Привязать карточку к модели (загрузка/переключение артикула) </summary>
-        public void BindModel(SpArticulPreviewModel? model)
-        {
-            // чтобы не было дёрганий и лишних событий при массовой установке:
-            _bs.RaiseListChangedEvents = false;
-            try
-            {
-                _bs.DataSource = model ?? new SpArticulPreviewModel();
-            }
-            finally
-            {
-                _bs.RaiseListChangedEvents = true;
-                _bs.ResetBindings(false);
-            }
-        }
+        ///// <summary> Привязать карточку к модели (загрузка/переключение артикула) </summary>
+        //public void BindModel(SpArticulPreviewModel? model)
+        //{
+        //    // чтобы не было дёрганий и лишних событий при массовой установке:
+        //    _bs.RaiseListChangedEvents = false;
+        //    try
+        //    {
+        //        _bs.DataSource = model ?? new SpArticulPreviewModel();
+        //    }
+        //    finally
+        //    {
+        //        _bs.RaiseListChangedEvents = true;
+        //        _bs.ResetBindings(false);
+        //    }
+        //}
 
         private void InitializeBindings()
         {
+            if (_bs == null) return;
+
             // тип для дизайнерской поддержки, но по сути — держим один объект
-            _bs.DataSource = typeof(SpArticulPreviewModel);
+            _bs.DataSource ??= new SpArticulPreviewModel();
+            _bs.ResetBindings(false);
 
             foreach (var kv in _controlToArtNormProperty)
             {
@@ -101,7 +122,7 @@ namespace SewingProduction.Features.Articul.Forms
                 control.DataBindings.Clear();
 
                 var (controlProp, updateMode) = GetBindingTarget(control);
-                if (controlProp == null) continue;
+                if (string.IsNullOrEmpty(controlProp)) continue;
 
                 var binding = new Binding(
                     controlProp,
@@ -133,10 +154,10 @@ namespace SewingProduction.Features.Articul.Forms
         {
             // пересоздаём бинды с новым UpdateMode
             InitializeBindings();
-            _bs.ResetBindings(false);
+            _bs?.ResetBindings(false);
         }
 
-        private (string? ControlPropertyName, DataSourceUpdateMode UpdateMode) GetBindingTarget(Control control)
+        private (string ControlPropertyName, DataSourceUpdateMode UpdateMode) GetBindingTarget(Control control)
         {
             // В read-only режиме не пишем обратно в модель.
             var mode = _isReadOnly ? DataSourceUpdateMode.Never : DataSourceUpdateMode.OnPropertyChanged;
@@ -153,7 +174,7 @@ namespace SewingProduction.Features.Articul.Forms
             if (control is BaseEdit)
                 return ("EditValue", mode);
 
-            return (null, DataSourceUpdateMode.Never);
+            return (string.Empty, DataSourceUpdateMode.Never);
         }
 
         private void ApplyReadOnlyState()
