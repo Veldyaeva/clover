@@ -536,10 +536,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridLevelNode1.LevelTemplate = advBandedGridView1;
             gridLevelNode1.RelationName = "ArtNom";
             PlanZagrVyazGridControl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
-            PlanZagrVyazGridControl.Location = new System.Drawing.Point(24, 81);
+            PlanZagrVyazGridControl.Location = new System.Drawing.Point(24, 85);
             PlanZagrVyazGridControl.MainView = bandedGridView3;
             PlanZagrVyazGridControl.Name = "PlanZagrVyazGridControl";
-            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1281, 512);
+            PlanZagrVyazGridControl.Size = new System.Drawing.Size(1281, 508);
             PlanZagrVyazGridControl.TabIndex = 6;
             PlanZagrVyazGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridView3, advBandedGridView1 });
             // 
@@ -818,13 +818,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             // FioGridLookUpEdit
             // 
-            FioGridLookUpEdit.Location = new System.Drawing.Point(357, 12);
+            FioGridLookUpEdit.Location = new System.Drawing.Point(349, 12);
             FioGridLookUpEdit.Name = "FioGridLookUpEdit";
             FioGridLookUpEdit.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             FioGridLookUpEdit.Properties.Appearance.Options.UseFont = true;
             FioGridLookUpEdit.Properties.NullText = "[Выберите сотрудника]";
             FioGridLookUpEdit.Properties.PopupView = FioGridLookUpEditView;
-            FioGridLookUpEdit.Size = new System.Drawing.Size(175, 32);
+            FioGridLookUpEdit.Size = new System.Drawing.Size(183, 32);
             FioGridLookUpEdit.StyleController = dataLayoutControl1;
             FioGridLookUpEdit.TabIndex = 2;
             FioGridLookUpEdit.EditValueChanged += FioGridLookUpEdit_EditValueChanged;
@@ -883,7 +883,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             simpleButton2.Appearance.Options.UseFont = true;
             simpleButton2.Location = new System.Drawing.Point(966, 12);
             simpleButton2.Name = "simpleButton2";
-            simpleButton2.Size = new System.Drawing.Size(159, 30);
+            simpleButton2.Size = new System.Drawing.Size(159, 32);
             simpleButton2.StyleController = dataLayoutControl1;
             simpleButton2.TabIndex = 5;
             simpleButton2.Text = "Начать смену";
@@ -1015,7 +1015,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlItem1.Control = PlanZagrVyazGridControl;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1285, 516);
+            layoutControlItem1.Size = new System.Drawing.Size(1285, 512);
             layoutControlItem1.TextVisible = false;
             // 
             // gridBand20
