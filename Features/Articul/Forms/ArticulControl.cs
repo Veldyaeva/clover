@@ -58,6 +58,12 @@ namespace SewingProduction.Features.Articul.Forms
             if (ReferenceEquals(_bs, source)) return;
             _bs = source;
             _dx.DataSource = _bs;
+
+            // Гарантируем, что маппинг контролов подготовлен даже если Load уже прошел
+            // или еще не наступил.
+            if (_controlToArtNormProperty.Count == 0)
+                AttachChangeHandlers();
+
             InitializeBindings();
             ApplyReadOnlyState();
         }
@@ -67,6 +73,12 @@ namespace SewingProduction.Features.Articul.Forms
             if (_bs == null) throw new InvalidOperationException("Сначала вызови BindTo(bindingSource)");
             _bs.DataSource = model;
             _bs.ResetBindings(false);
+        }
+
+        public void SetKod(string kod)
+        {
+            if (string.IsNullOrWhiteSpace(kod)) return;
+            txbKod.Text = kod;
         }
 
         private async void ArticulControl_Load(object sender, EventArgs e)

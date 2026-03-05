@@ -2653,9 +2653,9 @@ namespace SewingProduction.Features.Articul
             // articulControl1
             // 
             articulControl1.IsReadOnly = true;
-            articulControl1.Location = new Point(598, 1);
+            articulControl1.Location = new Point(136, 138);
             articulControl1.Name = "articulControl1";
-            articulControl1.Size = new Size(701, 239);
+            articulControl1.Size = new Size(1378, 301);
             articulControl1.TabIndex = 40;
             // 
             // Articul

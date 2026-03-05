@@ -130,9 +130,12 @@ namespace SewingProduction.Features.Articul
 
                 await ReloadPreviewAsync();
 
-                // load details for first row (optional)
-                if (bsPreview.Current is SpArtPreviewModel first)
+                if (_previewList.Count > 0)
+                {
+                    bsPreview.Position = 0;
+                    var first = _previewList[0];
                     await LoadArticulAsync(first.Kod, first.Kodd);
+                }
             }
             catch (Exception ex)
             {
@@ -312,6 +315,8 @@ namespace SewingProduction.Features.Articul
             gridControl1.ShowLoadingPanel();
             try
             {
+                articulControl1.SetKod(kod);
+
                 var detailsTask = _articulDataService.GetByKodAsync(kod);
                 var artDrTask = _articulDataService.GetArtDrByKodAsync(kod);
                 var komplTask = _articulDataService.GetSostavkomplForKod(kod);
@@ -321,8 +326,11 @@ namespace SewingProduction.Features.Articul
 
                 if (version != _loadVersion) return;
 
-                bsDetails.DataSource = await detailsTask;
+                var details = await detailsTask;
+                bsDetails.DataSource = details;
                 bsDetails.ResetBindings(false);
+                if (details != null)
+                    articulControl1.BindModel(details);
 
                 bsArtDr.DataSource = await artDrTask;
                 bsSostKompl.DataSource = await komplTask;

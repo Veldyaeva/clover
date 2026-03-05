@@ -1,0 +1,348 @@
+﻿CREATE PROCEDURE dbo.PZV_AdjustNotStartedBeforeShiftEnd
+    @KwsId INT,
+    @MinHours DECIMAL(18,2) = 12.0,
+    @UserName sysname = NULL  -- чтобы писать кто закрыл
+AS
+BEGIN
+    SET NOCOUNT ON;
+ -- SET XACT_ABORT ON;
+    /*
+      Правила:
+      - факт по машине = SUM(pzvNChasi) по строкам текущей смены, где операция начата (pzvDateStart IS NOT NULL)
+      - добор = из неначатых (pzvDateStart IS NULL AND pzvDateEnd IS NULL) по "времени назначено"
+              берем pzvChasNazn, а если он 0/null — fallback на pzvNChasi (на всякий)
+      - оставляем столько неначатых, чтобы факт+добор >= @MinHours (с включением "перешагнувшей" строки)
+      - все остальные неначатые в смене разназначаем: tab=0, kwsId=0, dateNaznTab=NULL
+    */
+
+   IF ISNULL(@KwsId,0) = 0
+        THROW 50001, 'Смена не открыта', 1;
+    IF @MinHours IS NULL OR @MinHours <= 0
+        SET @MinHours = 12.0;
+    DECLARE @now datetime = GETDATE();
+
+    IF OBJECT_ID('tempdb..#ShiftRows')   IS NOT NULL DROP TABLE #ShiftRows;
+    IF OBJECT_ID('tempdb..#FactByMachine') IS NOT NULL DROP TABLE #FactByMachine;
+    IF OBJECT_ID('tempdb..#NotStarted')  IS NOT NULL DROP TABLE #NotStarted;
+    IF OBJECT_ID('tempdb..#Ranked')      IS NOT NULL DROP TABLE #Ranked;
+    IF OBJECT_ID('tempdb..#Keep')        IS NOT NULL DROP TABLE #Keep;
+
+        BEGIN TRY
+        BEGIN TRAN;
+
+        -------------------------------------------------------------------
+        -- 1) База по строкам смены (фиксируем снимок и берём блокировки)
+        -------------------------------------------------------------------
+        SELECT
+            p.pzvID,
+            p.pzvKmlID,
+            p.pzvTab,
+            p.pzvKwsID,
+            p.pzvDateStart,
+            p.pzvDateEnd,
+            CAST(ISNULL(p.pzvNChasi, 0) AS DECIMAL(18,2)) AS FactHours,
+            CAST(
+                CASE
+                    WHEN ISNULL(p.pzvChasNazn,0) <> 0 THEN ISNULL(p.pzvChasNazn,0)
+                    ELSE ISNULL(p.pzvNChasi,0)
+                END
+            AS DECIMAL(18,2)) AS AssignedHours,
+            p.pzvNomZad, p.pzvNom, p.pzvNomN, p.pzvNrID
+        INTO #ShiftRows
+        FROM dbo.planZagrVyaz p WITH (UPDLOCK, HOLDLOCK)
+        WHERE p.pzvKwsID = @KwsId
+          AND p.pzvKmlID IS NOT NULL;
+
+        CREATE CLUSTERED INDEX IX__ShiftRows__Kml ON #ShiftRows(pzvKmlID, pzvID);
+
+--
+--    ;WITH ShiftRows AS (
+--        SELECT
+--            p.pzvID,
+--            p.pzvKmlID,
+--            p.pzvTab,
+--            p.pzvKwsID,
+--            p.pzvDateStart,
+--            p.pzvDateEnd,
+--            CAST(ISNULL(p.pzvNChasi, 0) AS DECIMAL(18,2)) AS FactHours, -- факт
+--            CAST(
+--                CASE
+--                    WHEN ISNULL(p.pzvChasNazn,0) <> 0 THEN ISNULL(p.pzvChasNazn,0)
+--                    ELSE ISNULL(p.pzvNChasi,0)  -- fallback
+--                END
+--            AS DECIMAL(18,2)) AS AssignedHours,  -- "время назн" для добора
+--            -- порядок отбора неначатых: можно менять под приоритеты
+--            p.pzvNomZad, p.pzvNom, p.pzvNomN, p.pzvNrID
+--        FROM dbo.planZagrVyaz p
+--        WHERE p.pzvKwsID = @KwsId
+--          AND p.pzvKmlID IS NOT NULL
+--    ),
+    -------------------------------------------------------------------
+        -- 2) Факт по машине: только начатые
+        -------------------------------------------------------------------
+        SELECT
+            pzvKmlID,
+            SUM(FactHours) AS FactSum
+        INTO #FactByMachine
+        FROM #ShiftRows
+        WHERE pzvDateStart IS NOT NULL
+        GROUP BY pzvKmlID;
+
+        CREATE UNIQUE CLUSTERED INDEX IX__FactByMachine ON #FactByMachine(pzvKmlID);
+
+--    FactByMachine AS (
+--        SELECT
+--            pzvKmlID,
+--            SUM(FactHours) AS FactSum
+--        FROM ShiftRows
+--        WHERE pzvDateStart IS NOT NULL
+--        GROUP BY pzvKmlID
+--    ),
+
+        -------------------------------------------------------------------
+        -- 3) Неначатые + сколько нужно добрать
+        -------------------------------------------------------------------
+        SELECT
+            s.*,
+            ISNULL(fbm.FactSum, 0) AS FactSum,
+            CASE
+                WHEN @MinHours - ISNULL(fbm.FactSum,0) > 0 THEN @MinHours - ISNULL(fbm.FactSum,0)
+                ELSE CAST(0 AS DECIMAL(18,2))
+            END AS NeedHours
+        INTO #NotStarted
+        FROM #ShiftRows s
+        LEFT JOIN #FactByMachine fbm ON fbm.pzvKmlID = s.pzvKmlID
+        WHERE s.pzvDateStart IS NULL
+          AND s.pzvDateEnd IS NULL;
+
+        CREATE CLUSTERED INDEX IX__NotStarted__Kml ON #NotStarted(pzvKmlID, pzvID);
+--    NotStarted AS (
+--        SELECT
+--            s.*,
+--            ISNULL(fbm.FactSum, 0) AS FactSum,
+--            CASE
+--                WHEN @MinHours - ISNULL(fbm.FactSum,0) > 0 THEN @MinHours - ISNULL(fbm.FactSum,0)
+--                ELSE CAST(0 AS DECIMAL(18,2))
+--            END AS NeedHours
+--        FROM ShiftRows s
+--        LEFT JOIN FactByMachine fbm ON fbm.pzvKmlID = s.pzvKmlID
+--        WHERE s.pzvDateStart IS NULL
+--          AND s.pzvDateEnd IS NULL
+--    ),
+
+        -------------------------------------------------------------------
+        -- 4) Ранжирование неначатых для добора (RunningAssigned)
+        -------------------------------------------------------------------
+        SELECT
+            n.*,
+            SUM(n.AssignedHours) OVER (
+                PARTITION BY n.pzvKmlID
+                ORDER BY
+                    n.AssignedHours DESC,
+                    n.pzvNomZad, n.pzvNom, n.pzvNomN, n.pzvNrID, n.pzvID
+                ROWS UNBOUNDED PRECEDING
+            ) AS RunningAssigned
+        INTO #Ranked
+        FROM #NotStarted n;
+
+        CREATE CLUSTERED INDEX IX__Ranked__Kml ON #Ranked(pzvKmlID, pzvID);
+
+--    Ranked AS (
+--        SELECT
+--            n.*,
+--            SUM(n.AssignedHours) OVER (
+--                PARTITION BY n.pzvKmlID
+--                ORDER BY
+--                    -- ВАЖНО: порядок, в каком "добираем". Сейчас — по назначенным часам (больше сначала),
+--                    -- потом по номерам
+--                    n.AssignedHours DESC,
+--                    n.pzvNomZad, n.pzvNom, n.pzvNomN, n.pzvNrID, n.pzvID
+--                ROWS UNBOUNDED PRECEDING
+--            ) AS RunningAssigned
+--        FROM NotStarted n
+--    ),
+
+        -------------------------------------------------------------------
+        -- 5) Какие неначатые оставить (добор до MinHours)
+        -------------------------------------------------------------------
+        SELECT r.pzvID
+        INTO #Keep
+        FROM #Ranked r
+        WHERE r.NeedHours > 0
+          AND (
+                 r.RunningAssigned <= r.NeedHours
+              OR (r.RunningAssigned > r.NeedHours AND r.RunningAssigned - r.AssignedHours < r.NeedHours)
+          );
+
+        CREATE UNIQUE CLUSTERED INDEX IX__Keep ON #Keep(pzvID);
+--    Keep AS (
+--        SELECT r.pzvID
+--        FROM Ranked r
+--        WHERE r.NeedHours > 0
+--          AND (
+--                 r.RunningAssigned <= r.NeedHours
+--              OR (r.RunningAssigned > r.NeedHours AND r.RunningAssigned - r.AssignedHours < r.NeedHours)
+--          )
+--    )
+
+
+      -------------------------------------------------------------------
+        -- 6) Обработка неначатых, которые НЕ в Keep:
+        --    - если FactSum >= MinHours => UNASSIGN
+        --    - если FactSum <  MinHours => STORNO (через PZV_Split mode=2)
+        -------------------------------------------------------------------
+
+        /* 6.1) UNASSIGN: FactSum >= MinHours */
+-- UNASSIGN: всё неначатое назначенное, что НЕ попало в Keep (когда часов не хватает)
+UPDATE p
+SET p.pzvTab = 0,
+    p.pzvKwsID = 0,
+    p.pzvDateNaznTab = NULL,
+    p.pzvUpdDate = @now
+FROM dbo.planZagrVyaz p
+JOIN #NotStarted ns ON ns.pzvID = p.pzvID
+LEFT JOIN #Keep k ON k.pzvID = p.pzvID
+WHERE ns.FactSum < @MinHours
+  AND k.pzvID IS NULL
+  AND p.pzvDateStart IS NULL AND p.pzvDateEnd IS NULL
+  AND ISNULL(p.pzvTab,0) <> 0
+  AND p.pzvKwsID = @KwsId;
+
+        /* 6.2) STORNO: FactSum < MinHours */
+        DECLARE @toStorno TABLE
+        (
+            pzvID int NOT NULL,
+            pzvKmlID int NULL,
+            FactSum decimal(18,2) NULL,
+            AssignedHours decimal(18,2) NULL
+        );
+
+ -- STORNO: только те, кого выбрали для добора
+INSERT @toStorno(pzvID, pzvKmlID, FactSum, AssignedHours)
+SELECT
+    ns.pzvID, ns.pzvKmlID, ns.FactSum, ns.AssignedHours
+FROM #NotStarted ns
+JOIN #Keep k ON k.pzvID = ns.pzvID
+JOIN dbo.planZagrVyaz p WITH (UPDLOCK, HOLDLOCK) ON p.pzvID = ns.pzvID
+WHERE ns.FactSum < @MinHours
+  AND p.pzvDateStart IS NULL AND p.pzvDateEnd IS NULL
+  AND ISNULL(p.pzvTab,0) <> 0
+  AND p.pzvKwsID = @KwsId;
+
+        /* Важно: PZV_Split сама открывает транзакцию.
+           Внутри нашей транзакции это будет вложенная (savepoint) — норм.
+           Главное — фиксированный набор @toStorno и блокировка строк уже есть. */
+        DECLARE @pzvId int;
+
+        DECLARE c CURSOR LOCAL FAST_FORWARD FOR
+            SELECT pzvID FROM @toStorno ORDER BY pzvID;
+
+        OPEN c;
+        FETCH NEXT FROM c INTO @pzvId;
+
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+            BEGIN TRY
+                EXEC dbo.PZV_Split
+                    @pzvId = @pzvId,
+                    @mode = 2,
+                    @qtyFact = 0,
+                    @userName = @UserName,
+                    @gradacia = 0;
+
+                INSERT dbo.PZV_ShiftEndAdjustLog(KwsId, PzvId, KmlId, ActionKind, FactSum, MinHours, AssignedHrs, Note)
+                SELECT
+                    @KwsId,
+                    t.pzvID,
+                    t.pzvKmlID,
+                    N'STORNO',
+                    t.FactSum,
+                    @MinHours,
+                    t.AssignedHours,
+                    CONCAT(N'user=', COALESCE(@UserName,N''))
+                FROM @toStorno t
+                WHERE t.pzvID = @pzvId;
+            END TRY
+            BEGIN CATCH
+                -- Логируем ошибку, но НЕ валим всю процедуру из-за одной строки
+                INSERT dbo.PZV_ShiftEndAdjustLog(KwsId, PzvId, KmlId, ActionKind, FactSum, MinHours, AssignedHrs, Note)
+                SELECT
+                    @KwsId,
+                    t.pzvID,
+                    t.pzvKmlID,
+                    N'STORNO_ERR',
+                    t.FactSum,
+                    @MinHours,
+                    t.AssignedHours,
+                    LEFT(ERROR_MESSAGE(), 200)
+                FROM @toStorno t
+                WHERE t.pzvID = @pzvId;
+            END CATCH;
+
+            FETCH NEXT FROM c INTO @pzvId;
+        END
+
+        CLOSE c;
+        DEALLOCATE c;
+
+        /* KEEP — тоже можно логировать (по желанию) */
+        INSERT dbo.PZV_ShiftEndAdjustLog(KwsId, PzvId, KmlId, ActionKind, FactSum, MinHours, AssignedHrs, Note)
+        SELECT
+            @KwsId,
+            r.pzvID,
+            r.pzvKmlID,
+            N'KEEP',
+            r.FactSum,
+            @MinHours,
+            r.AssignedHours,
+            CONCAT(N'user=', COALESCE(@UserName,N''))
+        FROM #Ranked r
+        JOIN #Keep k ON k.pzvID = r.pzvID;
+
+        COMMIT;
+
+--    UPDATE p
+--    SET
+--        p.pzvTab = 0,
+--        p.pzvKwsID = 0,
+--        p.pzvDateNaznTab = NULL,
+--        p.pzvUpdDate = GETDATE()
+--    FROM dbo.planZagrVyaz p
+--    JOIN NotStarted ns ON ns.pzvID = p.pzvID
+--    LEFT JOIN Keep k ON k.pzvID = p.pzvID
+--    WHERE k.pzvID IS NULL;  -- разназначаем ВСЕ неначатые, которые не нужны для добора
+
+        -------------------------------------------------------------------
+        -- 7) Отчет для UI: факт + добор (как было) + можно расширить
+        -------------------------------------------------------------------
+        ;WITH KeptByMachine AS (
+            SELECT
+                r.pzvKmlID,
+                SUM(r.AssignedHours) AS KeptAssigned
+            FROM #Ranked r
+            JOIN #Keep k ON k.pzvID = r.pzvID
+            GROUP BY r.pzvKmlID
+        )
+        SELECT
+            m.pzvKmlID,
+            FactHours = ISNULL(f.FactSum,0),
+            KeptAssignedHours = ISNULL(k.KeptAssigned,0),
+            TotalForCheck = ISNULL(f.FactSum,0) + ISNULL(k.KeptAssigned,0),
+            StillLessThanMin =
+                CASE
+                    WHEN ISNULL(f.FactSum,0) + ISNULL(k.KeptAssigned,0) < @MinHours THEN 1
+                    ELSE 0
+                END
+        FROM (SELECT DISTINCT pzvKmlID FROM #ShiftRows) m
+        LEFT JOIN #FactByMachine f ON f.pzvKmlID = m.pzvKmlID
+        LEFT JOIN KeptByMachine k ON k.pzvKmlID = m.pzvKmlID
+        ORDER BY m.pzvKmlID;
+
+    END TRY
+    BEGIN CATCH
+        IF @@TRANCOUNT > 0 ROLLBACK;
+        DECLARE @msg nvarchar(4000) = ERROR_MESSAGE();
+        THROW 51000, @msg, 1;
+    END CATCH
+END
+GO
