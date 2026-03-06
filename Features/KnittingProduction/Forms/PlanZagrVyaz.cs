@@ -234,7 +234,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 {
                     ["GetSmenZadanyVyaz"] = async () =>
                     {
+                        int xTopRowIndex = gridViewSmenZadany.TopRowIndex;
                         await LoadSmenZadanyVyazNewDataAsync(vyazPodrKod); // сменное задание
+                        gridViewSmenZadany.TopRowIndex = xTopRowIndex;
                     },
 
                     ["knitWorkingShiftNewCurrentSmen_view"] = async () =>
@@ -244,7 +246,32 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                     ["GetPlanZagrVyazByPachList"] = async () =>
                     {
+                        int xTopRowIndex = gridViewPZVOperList.TopRowIndex;
+                        int xFocusedRowHandle = gridViewPZVOperList.FocusedRowHandle;
+                        //MessageBox.Show($"before xTopRowIndex = {xTopRowIndex}" +
+                        //    $"\n before gridViewPZVOperList.TopRowIndex = {gridViewPZVOperList.TopRowIndex} " +
+                        //    $"\n before xFocusedRowHandle = {xFocusedRowHandle}" +
+                        //    $"\n before gridViewPZVOperList.FocusedRowHandle = {gridViewPZVOperList.FocusedRowHandle}");
                         await LoadPlanZagrVyazByZadanySelection(); // операции по расчетам/пачкам
+                        //Debug.WriteLine($"after1 xTopRowIndex = {xTopRowIndex}" +
+                        //    $"\n after1 gridViewPZVOperList.TopRowIndex = {gridViewPZVOperList.TopRowIndex}" +
+                        //    $"\n after1 xFocusedRowHandle = {xFocusedRowHandle}" +
+                        //    $"\n after1 gridViewPZVOperList.FocusedRowHandle = {gridViewPZVOperList.FocusedRowHandle}");
+                        //MessageBox.Show($"after1 xTopRowIndex = {xTopRowIndex}" +
+                        //    $"\n after1 gridViewPZVOperList.TopRowIndex = {gridViewPZVOperList.TopRowIndex}" +
+                        //    $"\n after1 xFocusedRowHandle = {xFocusedRowHandle}" +
+                        //    $"\n after1 gridViewPZVOperList.FocusedRowHandle = {gridViewPZVOperList.FocusedRowHandle}");
+                        //Thread.Sleep(10000);
+                        //await Task.Yield();
+                        await InvokeOnUiAsync(async () =>
+                        {
+                            gridViewPZVOperList.FocusedRowHandle = xFocusedRowHandle;
+                            gridViewPZVOperList.TopRowIndex = xTopRowIndex;
+                        });
+                        //MessageBox.Show($"after2 xTopRowIndex = {xTopRowIndex}" +
+                        //    $"\n after2 gridViewPZVOperList.TopRowIndex = {gridViewPZVOperList.TopRowIndex}" +
+                        //    $"\n after2 xFocusedRowHandle = {xFocusedRowHandle}" +
+                        //    $"\n after2 gridViewPZVOperList.FocusedRowHandle = {gridViewPZVOperList.FocusedRowHandle}");
                     }
                 };
                 Debug.WriteLine($"[PlanZagrVyaz] InitObjectRestartMap initialized with keys: {string.Join(", ", _objectRestartMap.Keys)}");
@@ -1614,6 +1641,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 gridViewPZVOperList.EndSort();
                 gridViewPZVOperList.TopRowIndex = TopRowIndexPZV;
+
                 Debug.WriteLine($"LoadPlanZagrVyazByZadanySelection after await gridViewPZVOperList.EndSort TopRowIndex={gridViewPZVOperList.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
                 var changes = BindingSourceHelper.GetChanges<PZVOperList>(
                     _pZVOperListByPachListBindingSource,
