@@ -165,6 +165,14 @@ namespace SewingProduction.Features.Tabel.Forms
             await Task.WhenAll(bindingsTask);
             CreateDayColumns(currentMG);
             CheckUserAccess(idUser);
+            if (idUser == 170 || idUser == 3)
+            {
+                layoutControlItem19.ContentVisible  = true;
+            }
+            else
+            {
+                layoutControlItem19.ContentVisible = false;
+            }
         }
         private void RemoveDayColumns()
         {
