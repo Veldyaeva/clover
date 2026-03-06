@@ -46,9 +46,8 @@ namespace SewingProduction.Features.Articul.Forms
 
             //if (gridArtMatr != null) gridArtMatr.DataSource = _bindingSourceArtMatr;
             gridArtMatr.DataSource = _bindingSourceArtMatr;
-            //gridArtMatrEdit.DataSource = _bindingSourceArtMatr;
             
-
+            
 
         }
 
