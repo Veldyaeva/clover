@@ -357,7 +357,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 _timeSheetBindingSource.ResetBindings(false);
                 if (groupId == 19)
                 {
-                    DateTime dateTimeNow = DateTime.Now;
+                    DateTime dateTimeNow = DateTime.Now.Date;
                     DateTime? datetimeValue = _tabelDataService.GetDateReadOnlyDd(currentMG);
                     if (dateTimeNow >= datetimeValue)
                     {
@@ -386,18 +386,19 @@ namespace SewingProduction.Features.Tabel.Forms
                         }
                     }
                     DateTime? datetimeValueTarif = _tabelDataService.GetDateReadOnlyTarif(currentMG);
-                    if (dateTimeNow >= datetimeValueTarif)
-                    {
-                        gridColumnTsplPart.OptionsColumn.ReadOnly = true;
-                        gridColumnTsplPartOf.OptionsColumn.ReadOnly = true;
-                        gridColumnCheckIncludePlan.OptionsColumn.ReadOnly = true;
-                    }
-                    else
+                    if (dateTimeNow <= datetimeValueTarif)
                     {
                         gridColumnTsplPart.OptionsColumn.ReadOnly = false;
                         gridColumnTsplPartOf.OptionsColumn.ReadOnly = false;
                         gridColumnCheckIncludePlan.OptionsColumn.ReadOnly = false;
+                   
+                    }
+                    else
+                    {
 
+                        gridColumnTsplPart.OptionsColumn.ReadOnly = true;
+                        gridColumnTsplPartOf.OptionsColumn.ReadOnly = true;
+                        gridColumnCheckIncludePlan.OptionsColumn.ReadOnly = true;
                     }
 
 
@@ -1098,10 +1099,11 @@ namespace SewingProduction.Features.Tabel.Forms
             int dayNumber = int.Parse(column.FieldName.Substring(1));
             string markColumnNameDD = $"dd{dayNumber.ToString("00")}";
             string markColumnNameD = $"d{dayNumber.ToString("00")}";
+            string markColumnNameDop = $"dop{dayNumber.ToString("00")}";
             string currentDd = gridView1.GetRowCellValue(rowHandle, markColumnNameDD).ToString();
             string currentD = gridView1.GetRowCellValue(rowHandle, markColumnNameD).ToString();
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
-            using (var calculator = new CalculatorDay(grId, currentDd, currentD))
+            using (var calculator = new CalculatorDay(grId, currentDd, currentD, markColumnNameDop))
             {
                 //Point mousePosition = Control.MousePosition;
                 //calculator.StartPosition = FormStartPosition.Manual;

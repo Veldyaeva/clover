@@ -25,6 +25,7 @@ namespace SewingProduction.Features.Tabel.Forms
     {
         public string CalculatorResult { get; private set; }
         public string ddResult { get ; private set; }
+        public string dopResult { get ; private set; }
         private readonly int _grId;
         private readonly string _dd;
         private readonly string _dLetters;
@@ -34,7 +35,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
         private List<WorkTypes> _WorkTypesList = new List<WorkTypes>();
-        public CalculatorDay(int idGr, string dd, string d)
+        public CalculatorDay(int idGr, string dd, string d,string dop)
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
@@ -181,7 +182,7 @@ namespace SewingProduction.Features.Tabel.Forms
         {
             foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in workTypesCheckedListBox.Items)
             {
-                bool contains = d.Contains(ExtractCode(item.Description));
+                bool contains = d.Equals(ExtractCode(item.Description));
                 if (contains)
                 {
                     item.CheckState = CheckState.Checked;

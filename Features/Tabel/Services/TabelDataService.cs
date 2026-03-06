@@ -224,7 +224,7 @@ namespace SewingProduction.Features.Tabel.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select * from WorkTypesTabel where podrId = {idGroup} order by id";
+                    string query = $"select * from WorkTypesTabel where podrId = {idGroup} order by nameWorkTypes";
                     var result = await connection.QueryAsync<WorkTypes>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
