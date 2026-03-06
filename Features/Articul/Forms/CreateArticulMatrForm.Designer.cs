@@ -28,37 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit10 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit11 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit12 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit13 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit14 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateArticulMatrForm));
             gridArtMatr = new SewingProduction.Core.Class.CustomGridControl();
-            gridViewArtMatr = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gcGrupmen_name = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcTsn_name = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcTb_id = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcArticul = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcMod = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcTm_name = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcGrup = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcText_mo = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcP = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gcPrinter = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gcStra = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gcBus = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gcPpres = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gcV = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit6 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gcKruj = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit7 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            gcTkan = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcSost = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcRazmNames = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcDatePublic = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcSost2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gcSost3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridArtMatrEdit = new SewingProduction.Core.Class.CustomGridControl();
             gridViewArtMatrEdit = new DevExpress.XtraGrid.Views.Grid.GridView();
             gcCertGrupmen_name = new DevExpress.XtraGrid.Columns.GridColumn();
             gcCertTsn_name = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -69,19 +47,12 @@
             gcCertGrup = new DevExpress.XtraGrid.Columns.GridColumn();
             gcCertText_mo = new DevExpress.XtraGrid.Columns.GridColumn();
             gcCertP = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gcCertPrinter = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gcCertStra = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit10 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gcCertBus = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit11 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gcCertPpres = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit12 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gcCertV = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit13 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gcCertKruj = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit14 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gcCertTkan = new DevExpress.XtraGrid.Columns.GridColumn();
             gcCertSost = new DevExpress.XtraGrid.Columns.GridColumn();
             gcCertRazmNames = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -95,18 +66,39 @@
             repositoryItemSearchLookUpEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             repositoryItemSearchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             gcCertDateCertificationApproval = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit4 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit6 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit7 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             repositoryItemLookUpEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            gridViewArtMatr = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gcGrupmen_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcTsn_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcTb_id = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcMod = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcTm_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcGrup = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcText_mo = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcP = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcPrinter = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcStra = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcBus = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcPpres = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcV = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcKruj = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcTkan = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcSost = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcRazmNames = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcDatePublic = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcSost2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcSost3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            customSimpleButtonPermissions = new SewingProduction.Core.Class.CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridArtMatr).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridArtMatrEdit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit9).BeginInit();
@@ -119,8 +111,16 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2View).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).BeginInit();
             SuspendLayout();
             // 
             // gridArtMatr
@@ -128,278 +128,12 @@
             gridArtMatr.Dock = System.Windows.Forms.DockStyle.Top;
             gridArtMatr.Font = new System.Drawing.Font("Arial", 10F);
             gridArtMatr.Location = new System.Drawing.Point(0, 0);
-            gridArtMatr.MainView = gridViewArtMatr;
+            gridArtMatr.MainView = gridViewArtMatrEdit;
             gridArtMatr.Name = "gridArtMatr";
-            gridArtMatr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit2, repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit5, repositoryItemCheckEdit6, repositoryItemCheckEdit7 });
+            gridArtMatr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit2, repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit5, repositoryItemCheckEdit6, repositoryItemCheckEdit7, repositoryItemLookUpEdit1, repositoryItemLookUpEdit2, repositoryItemSearchLookUpEdit1, repositoryItemSearchLookUpEdit2 });
             gridArtMatr.Size = new System.Drawing.Size(1772, 512);
             gridArtMatr.TabIndex = 0;
-            gridArtMatr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtMatr });
-            // 
-            // gridViewArtMatr
-            // 
-            gridViewArtMatr.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridViewArtMatr.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewArtMatr.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            gridViewArtMatr.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            gridViewArtMatr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcGrupmen_name, gcTsn_name, gcTb_id, gcArticul, gcMod, gcTm_name, gcGrup, gcText_mo, gcP, gcPrinter, gcStra, gcBus, gcPpres, gcV, gcKruj, gcTkan, gcSost, gcRazmNames, gcDatePublic, gcSost2, gcSost3 });
-            gridViewArtMatr.GridControl = gridArtMatr;
-            gridViewArtMatr.GroupCount = 1;
-            gridViewArtMatr.Name = "gridViewArtMatr";
-            gridViewArtMatr.OptionsBehavior.ReadOnly = true;
-            gridViewArtMatr.OptionsCustomization.AllowFilter = false;
-            gridViewArtMatr.OptionsFind.AlwaysVisible = true;
-            gridViewArtMatr.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Search;
-            gridViewArtMatr.OptionsSelection.MultiSelect = true;
-            gridViewArtMatr.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-            gridViewArtMatr.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
-            gridViewArtMatr.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            gridViewArtMatr.OptionsView.ShowAutoFilterRow = true;
-            gridViewArtMatr.OptionsView.ShowGroupPanel = false;
-            gridViewArtMatr.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gcGrupmen_name, DevExpress.Data.ColumnSortOrder.Ascending) });
-            // 
-            // gcGrupmen_name
-            // 
-            gcGrupmen_name.Caption = "Менеджер";
-            gcGrupmen_name.Name = "gcGrupmen_name";
-            gcGrupmen_name.Visible = true;
-            gcGrupmen_name.VisibleIndex = 1;
-            gcGrupmen_name.Width = 119;
-            // 
-            // gcTsn_name
-            // 
-            gcTsn_name.Caption = "Сезон";
-            gcTsn_name.Name = "gcTsn_name";
-            gcTsn_name.Visible = true;
-            gcTsn_name.VisibleIndex = 1;
-            gcTsn_name.Width = 61;
-            // 
-            // gcTb_id
-            // 
-            gcTb_id.Caption = "Блок";
-            gcTb_id.Name = "gcTb_id";
-            gcTb_id.Visible = true;
-            gcTb_id.VisibleIndex = 2;
-            gcTb_id.Width = 71;
-            // 
-            // gcArticul
-            // 
-            gcArticul.Caption = "Артикул";
-            gcArticul.Name = "gcArticul";
-            gcArticul.Visible = true;
-            gcArticul.VisibleIndex = 3;
-            gcArticul.Width = 70;
-            // 
-            // gcMod
-            // 
-            gcMod.Caption = "Модель";
-            gcMod.Name = "gcMod";
-            gcMod.Visible = true;
-            gcMod.VisibleIndex = 4;
-            gcMod.Width = 71;
-            // 
-            // gcTm_name
-            // 
-            gcTm_name.Caption = "Торг Марка";
-            gcTm_name.Name = "gcTm_name";
-            gcTm_name.Visible = true;
-            gcTm_name.VisibleIndex = 5;
-            gcTm_name.Width = 38;
-            // 
-            // gcGrup
-            // 
-            gcGrup.Caption = "Группа матрица";
-            gcGrup.Name = "gcGrup";
-            gcGrup.Visible = true;
-            gcGrup.VisibleIndex = 6;
-            gcGrup.Width = 84;
-            // 
-            // gcText_mo
-            // 
-            gcText_mo.Caption = "Модельный признак";
-            gcText_mo.Name = "gcText_mo";
-            gcText_mo.Visible = true;
-            gcText_mo.VisibleIndex = 7;
-            gcText_mo.Width = 70;
-            // 
-            // gcP
-            // 
-            gcP.Caption = "П";
-            gcP.ColumnEdit = repositoryItemCheckEdit1;
-            gcP.Name = "gcP";
-            gcP.Visible = true;
-            gcP.VisibleIndex = 13;
-            gcP.Width = 20;
-            // 
-            // repositoryItemCheckEdit1
-            // 
-            repositoryItemCheckEdit1.AutoHeight = false;
-            repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
-            repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit1.ValueChecked = (short)1;
-            repositoryItemCheckEdit1.ValueUnchecked = (short)0;
-            // 
-            // gcPrinter
-            // 
-            gcPrinter.Caption = "Прин тер";
-            gcPrinter.ColumnEdit = repositoryItemCheckEdit3;
-            gcPrinter.Name = "gcPrinter";
-            gcPrinter.Visible = true;
-            gcPrinter.VisibleIndex = 14;
-            gcPrinter.Width = 25;
-            // 
-            // repositoryItemCheckEdit3
-            // 
-            repositoryItemCheckEdit3.AutoHeight = false;
-            repositoryItemCheckEdit3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            repositoryItemCheckEdit3.Name = "repositoryItemCheckEdit3";
-            repositoryItemCheckEdit3.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit3.ValueChecked = (short)1;
-            repositoryItemCheckEdit3.ValueUnchecked = (short)0;
-            // 
-            // gcStra
-            // 
-            gcStra.Caption = "С";
-            gcStra.ColumnEdit = repositoryItemCheckEdit2;
-            gcStra.Name = "gcStra";
-            gcStra.Visible = true;
-            gcStra.VisibleIndex = 15;
-            gcStra.Width = 20;
-            // 
-            // repositoryItemCheckEdit2
-            // 
-            repositoryItemCheckEdit2.AutoHeight = false;
-            repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
-            repositoryItemCheckEdit2.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit2.ValueChecked = (short)1;
-            repositoryItemCheckEdit2.ValueUnchecked = (short)0;
-            // 
-            // gcBus
-            // 
-            gcBus.Caption = "Б";
-            gcBus.ColumnEdit = repositoryItemCheckEdit4;
-            gcBus.Name = "gcBus";
-            gcBus.Visible = true;
-            gcBus.VisibleIndex = 16;
-            gcBus.Width = 20;
-            // 
-            // repositoryItemCheckEdit4
-            // 
-            repositoryItemCheckEdit4.AutoHeight = false;
-            repositoryItemCheckEdit4.Name = "repositoryItemCheckEdit4";
-            repositoryItemCheckEdit4.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit4.ValueChecked = (short)1;
-            repositoryItemCheckEdit4.ValueUnchecked = (short)0;
-            // 
-            // gcPpres
-            // 
-            gcPpres.Caption = "Пресс";
-            gcPpres.ColumnEdit = repositoryItemCheckEdit5;
-            gcPpres.Name = "gcPpres";
-            gcPpres.Visible = true;
-            gcPpres.VisibleIndex = 17;
-            gcPpres.Width = 27;
-            // 
-            // repositoryItemCheckEdit5
-            // 
-            repositoryItemCheckEdit5.AutoHeight = false;
-            repositoryItemCheckEdit5.Name = "repositoryItemCheckEdit5";
-            repositoryItemCheckEdit5.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit5.ValueChecked = (short)1;
-            repositoryItemCheckEdit5.ValueUnchecked = (short)0;
-            // 
-            // gcV
-            // 
-            gcV.Caption = "В";
-            gcV.ColumnEdit = repositoryItemCheckEdit6;
-            gcV.Name = "gcV";
-            gcV.Visible = true;
-            gcV.VisibleIndex = 18;
-            gcV.Width = 20;
-            // 
-            // repositoryItemCheckEdit6
-            // 
-            repositoryItemCheckEdit6.AutoHeight = false;
-            repositoryItemCheckEdit6.Name = "repositoryItemCheckEdit6";
-            repositoryItemCheckEdit6.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit6.ValueChecked = (short)1;
-            repositoryItemCheckEdit6.ValueUnchecked = (short)0;
-            // 
-            // gcKruj
-            // 
-            gcKruj.Caption = "Круж";
-            gcKruj.ColumnEdit = repositoryItemCheckEdit7;
-            gcKruj.Name = "gcKruj";
-            gcKruj.Visible = true;
-            gcKruj.VisibleIndex = 19;
-            gcKruj.Width = 27;
-            // 
-            // repositoryItemCheckEdit7
-            // 
-            repositoryItemCheckEdit7.AutoHeight = false;
-            repositoryItemCheckEdit7.Name = "repositoryItemCheckEdit7";
-            repositoryItemCheckEdit7.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit7.ValueChecked = (short)1;
-            repositoryItemCheckEdit7.ValueUnchecked = (short)0;
-            // 
-            // gcTkan
-            // 
-            gcTkan.Caption = "Полотно";
-            gcTkan.Name = "gcTkan";
-            gcTkan.Visible = true;
-            gcTkan.VisibleIndex = 8;
-            gcTkan.Width = 181;
-            // 
-            // gcSost
-            // 
-            gcSost.Caption = "Состав: Основа";
-            gcSost.Name = "gcSost";
-            gcSost.Visible = true;
-            gcSost.VisibleIndex = 9;
-            gcSost.Width = 129;
-            // 
-            // gcRazmNames
-            // 
-            gcRazmNames.Caption = "Размеры";
-            gcRazmNames.Name = "gcRazmNames";
-            gcRazmNames.Visible = true;
-            gcRazmNames.VisibleIndex = 12;
-            gcRazmNames.Width = 197;
-            // 
-            // gcDatePublic
-            // 
-            gcDatePublic.Caption = "Публикация";
-            gcDatePublic.Name = "gcDatePublic";
-            gcDatePublic.Visible = true;
-            gcDatePublic.VisibleIndex = 20;
-            gcDatePublic.Width = 220;
-            // 
-            // gcSost2
-            // 
-            gcSost2.Caption = "Состав: Отделка";
-            gcSost2.Name = "gcSost2";
-            gcSost2.Visible = true;
-            gcSost2.VisibleIndex = 10;
-            gcSost2.Width = 95;
-            // 
-            // gcSost3
-            // 
-            gcSost3.Caption = "Состав: Подклад";
-            gcSost3.Name = "gcSost3";
-            gcSost3.Visible = true;
-            gcSost3.VisibleIndex = 11;
-            gcSost3.Width = 107;
-            // 
-            // gridArtMatrEdit
-            // 
-            gridArtMatrEdit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            gridArtMatrEdit.Font = new System.Drawing.Font("Arial", 10F);
-            gridArtMatrEdit.Location = new System.Drawing.Point(-334, 375);
-            gridArtMatrEdit.MainView = gridViewArtMatrEdit;
-            gridArtMatrEdit.Name = "gridArtMatrEdit";
-            gridArtMatrEdit.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit8, repositoryItemCheckEdit10, repositoryItemCheckEdit9, repositoryItemCheckEdit11, repositoryItemCheckEdit12, repositoryItemCheckEdit13, repositoryItemCheckEdit14, repositoryItemLookUpEdit1, repositoryItemLookUpEdit2, repositoryItemSearchLookUpEdit1, repositoryItemSearchLookUpEdit2 });
-            gridArtMatrEdit.Size = new System.Drawing.Size(1772, 447);
-            gridArtMatrEdit.TabIndex = 1;
-            gridArtMatrEdit.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtMatrEdit });
+            gridArtMatr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtMatrEdit, gridViewArtMatr });
             // 
             // gridViewArtMatrEdit
             // 
@@ -408,7 +142,7 @@
             gridViewArtMatrEdit.Appearance.HeaderPanel.Options.UseTextOptions = true;
             gridViewArtMatrEdit.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridViewArtMatrEdit.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcCertGrupmen_name, gcCertTsn_name, gcCertTb_id, gcCertArticul, gcCertMod, gcCertTm_name, gcCertGrup, gcCertText_mo, gcCertP, gcCertPrinter, gcCertStra, gcCertBus, gcCertPpres, gcCertV, gcCertKruj, gcCertTkan, gcCertSost, gcCertRazmNames, gcCertDatePublic, gcCertSost2, gcCertSost3, gcCertidGost, gcCertAgid, gcCertDateCertificationApproval });
-            gridViewArtMatrEdit.GridControl = gridArtMatrEdit;
+            gridViewArtMatrEdit.GridControl = gridArtMatr;
             gridViewArtMatrEdit.GroupCount = 1;
             gridViewArtMatrEdit.Name = "gridViewArtMatrEdit";
             gridViewArtMatrEdit.OptionsCustomization.AllowFilter = false;
@@ -495,6 +229,11 @@
             // gcCertP
             // 
             gcCertP.Caption = "П";
+            repositoryItemCheckEdit8.AutoHeight = false;
+            repositoryItemCheckEdit8.Name = "repositoryItemCheckEdit8";
+            repositoryItemCheckEdit8.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit8.ValueChecked = (short)1;
+            repositoryItemCheckEdit8.ValueUnchecked = (short)0;
             gcCertP.ColumnEdit = repositoryItemCheckEdit8;
             gcCertP.Name = "gcCertP";
             gcCertP.OptionsColumn.ReadOnly = true;
@@ -502,17 +241,15 @@
             gcCertP.VisibleIndex = 16;
             gcCertP.Width = 20;
             // 
-            // repositoryItemCheckEdit8
-            // 
-            repositoryItemCheckEdit8.AutoHeight = false;
-            repositoryItemCheckEdit8.Name = "repositoryItemCheckEdit8";
-            repositoryItemCheckEdit8.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit8.ValueChecked = (short)1;
-            repositoryItemCheckEdit8.ValueUnchecked = (short)0;
-            // 
             // gcCertPrinter
             // 
             gcCertPrinter.Caption = "Прин тер";
+            repositoryItemCheckEdit9.AutoHeight = false;
+            repositoryItemCheckEdit9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            repositoryItemCheckEdit9.Name = "repositoryItemCheckEdit9";
+            repositoryItemCheckEdit9.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit9.ValueChecked = (short)1;
+            repositoryItemCheckEdit9.ValueUnchecked = (short)0;
             gcCertPrinter.ColumnEdit = repositoryItemCheckEdit9;
             gcCertPrinter.Name = "gcCertPrinter";
             gcCertPrinter.OptionsColumn.ReadOnly = true;
@@ -520,18 +257,14 @@
             gcCertPrinter.VisibleIndex = 17;
             gcCertPrinter.Width = 27;
             // 
-            // repositoryItemCheckEdit9
-            // 
-            repositoryItemCheckEdit9.AutoHeight = false;
-            repositoryItemCheckEdit9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            repositoryItemCheckEdit9.Name = "repositoryItemCheckEdit9";
-            repositoryItemCheckEdit9.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit9.ValueChecked = (short)1;
-            repositoryItemCheckEdit9.ValueUnchecked = (short)0;
-            // 
             // gcCertStra
             // 
             gcCertStra.Caption = "С";
+            repositoryItemCheckEdit10.AutoHeight = false;
+            repositoryItemCheckEdit10.Name = "repositoryItemCheckEdit10";
+            repositoryItemCheckEdit10.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit10.ValueChecked = (short)1;
+            repositoryItemCheckEdit10.ValueUnchecked = (short)0;
             gcCertStra.ColumnEdit = repositoryItemCheckEdit10;
             gcCertStra.Name = "gcCertStra";
             gcCertStra.OptionsColumn.ReadOnly = true;
@@ -539,17 +272,14 @@
             gcCertStra.VisibleIndex = 18;
             gcCertStra.Width = 20;
             // 
-            // repositoryItemCheckEdit10
-            // 
-            repositoryItemCheckEdit10.AutoHeight = false;
-            repositoryItemCheckEdit10.Name = "repositoryItemCheckEdit10";
-            repositoryItemCheckEdit10.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit10.ValueChecked = (short)1;
-            repositoryItemCheckEdit10.ValueUnchecked = (short)0;
-            // 
             // gcCertBus
             // 
             gcCertBus.Caption = "Б";
+            repositoryItemCheckEdit11.AutoHeight = false;
+            repositoryItemCheckEdit11.Name = "repositoryItemCheckEdit11";
+            repositoryItemCheckEdit11.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit11.ValueChecked = (short)1;
+            repositoryItemCheckEdit11.ValueUnchecked = (short)0;
             gcCertBus.ColumnEdit = repositoryItemCheckEdit11;
             gcCertBus.Name = "gcCertBus";
             gcCertBus.OptionsColumn.ReadOnly = true;
@@ -557,17 +287,14 @@
             gcCertBus.VisibleIndex = 19;
             gcCertBus.Width = 20;
             // 
-            // repositoryItemCheckEdit11
-            // 
-            repositoryItemCheckEdit11.AutoHeight = false;
-            repositoryItemCheckEdit11.Name = "repositoryItemCheckEdit11";
-            repositoryItemCheckEdit11.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit11.ValueChecked = (short)1;
-            repositoryItemCheckEdit11.ValueUnchecked = (short)0;
-            // 
             // gcCertPpres
             // 
             gcCertPpres.Caption = "Пресс";
+            repositoryItemCheckEdit12.AutoHeight = false;
+            repositoryItemCheckEdit12.Name = "repositoryItemCheckEdit12";
+            repositoryItemCheckEdit12.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit12.ValueChecked = (short)1;
+            repositoryItemCheckEdit12.ValueUnchecked = (short)0;
             gcCertPpres.ColumnEdit = repositoryItemCheckEdit12;
             gcCertPpres.Name = "gcCertPpres";
             gcCertPpres.OptionsColumn.ReadOnly = true;
@@ -575,17 +302,14 @@
             gcCertPpres.VisibleIndex = 20;
             gcCertPpres.Width = 34;
             // 
-            // repositoryItemCheckEdit12
-            // 
-            repositoryItemCheckEdit12.AutoHeight = false;
-            repositoryItemCheckEdit12.Name = "repositoryItemCheckEdit12";
-            repositoryItemCheckEdit12.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit12.ValueChecked = (short)1;
-            repositoryItemCheckEdit12.ValueUnchecked = (short)0;
-            // 
             // gcCertV
             // 
             gcCertV.Caption = "В";
+            repositoryItemCheckEdit13.AutoHeight = false;
+            repositoryItemCheckEdit13.Name = "repositoryItemCheckEdit13";
+            repositoryItemCheckEdit13.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit13.ValueChecked = (short)1;
+            repositoryItemCheckEdit13.ValueUnchecked = (short)0;
             gcCertV.ColumnEdit = repositoryItemCheckEdit13;
             gcCertV.Name = "gcCertV";
             gcCertV.OptionsColumn.ReadOnly = true;
@@ -593,31 +317,20 @@
             gcCertV.VisibleIndex = 21;
             gcCertV.Width = 20;
             // 
-            // repositoryItemCheckEdit13
-            // 
-            repositoryItemCheckEdit13.AutoHeight = false;
-            repositoryItemCheckEdit13.Name = "repositoryItemCheckEdit13";
-            repositoryItemCheckEdit13.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit13.ValueChecked = (short)1;
-            repositoryItemCheckEdit13.ValueUnchecked = (short)0;
-            // 
             // gcCertKruj
             // 
             gcCertKruj.Caption = "Круж";
+            repositoryItemCheckEdit14.AutoHeight = false;
+            repositoryItemCheckEdit14.Name = "repositoryItemCheckEdit14";
+            repositoryItemCheckEdit14.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit14.ValueChecked = (short)1;
+            repositoryItemCheckEdit14.ValueUnchecked = (short)0;
             gcCertKruj.ColumnEdit = repositoryItemCheckEdit14;
             gcCertKruj.Name = "gcCertKruj";
             gcCertKruj.OptionsColumn.ReadOnly = true;
             gcCertKruj.Visible = true;
             gcCertKruj.VisibleIndex = 22;
             gcCertKruj.Width = 29;
-            // 
-            // repositoryItemCheckEdit14
-            // 
-            repositoryItemCheckEdit14.AutoHeight = false;
-            repositoryItemCheckEdit14.Name = "repositoryItemCheckEdit14";
-            repositoryItemCheckEdit14.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit14.ValueChecked = (short)1;
-            repositoryItemCheckEdit14.ValueUnchecked = (short)0;
             // 
             // gcCertTkan
             // 
@@ -733,6 +446,63 @@
             gcCertDateCertificationApproval.VisibleIndex = 1;
             gcCertDateCertificationApproval.Width = 68;
             // 
+            // repositoryItemCheckEdit1
+            // 
+            repositoryItemCheckEdit1.AutoHeight = false;
+            repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit1.ValueChecked = (short)1;
+            repositoryItemCheckEdit1.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit2
+            // 
+            repositoryItemCheckEdit2.AutoHeight = false;
+            repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
+            repositoryItemCheckEdit2.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit2.ValueChecked = (short)1;
+            repositoryItemCheckEdit2.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit3
+            // 
+            repositoryItemCheckEdit3.AutoHeight = false;
+            repositoryItemCheckEdit3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            repositoryItemCheckEdit3.Name = "repositoryItemCheckEdit3";
+            repositoryItemCheckEdit3.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit3.ValueChecked = (short)1;
+            repositoryItemCheckEdit3.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit4
+            // 
+            repositoryItemCheckEdit4.AutoHeight = false;
+            repositoryItemCheckEdit4.Name = "repositoryItemCheckEdit4";
+            repositoryItemCheckEdit4.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit4.ValueChecked = (short)1;
+            repositoryItemCheckEdit4.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit5
+            // 
+            repositoryItemCheckEdit5.AutoHeight = false;
+            repositoryItemCheckEdit5.Name = "repositoryItemCheckEdit5";
+            repositoryItemCheckEdit5.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit5.ValueChecked = (short)1;
+            repositoryItemCheckEdit5.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit6
+            // 
+            repositoryItemCheckEdit6.AutoHeight = false;
+            repositoryItemCheckEdit6.Name = "repositoryItemCheckEdit6";
+            repositoryItemCheckEdit6.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit6.ValueChecked = (short)1;
+            repositoryItemCheckEdit6.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit7
+            // 
+            repositoryItemCheckEdit7.AutoHeight = false;
+            repositoryItemCheckEdit7.Name = "repositoryItemCheckEdit7";
+            repositoryItemCheckEdit7.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit7.ValueChecked = (short)1;
+            repositoryItemCheckEdit7.ValueUnchecked = (short)0;
+            // 
             // repositoryItemLookUpEdit1
             // 
             repositoryItemLookUpEdit1.AutoHeight = false;
@@ -747,26 +517,225 @@
             repositoryItemLookUpEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             repositoryItemLookUpEdit2.Name = "repositoryItemLookUpEdit2";
             // 
+            // gridViewArtMatr
+            // 
+            gridViewArtMatr.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridViewArtMatr.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewArtMatr.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            gridViewArtMatr.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewArtMatr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcGrupmen_name, gcTsn_name, gcTb_id, gcArticul, gcMod, gcTm_name, gcGrup, gcText_mo, gcP, gcPrinter, gcStra, gcBus, gcPpres, gcV, gcKruj, gcTkan, gcSost, gcRazmNames, gcDatePublic, gcSost2, gcSost3 });
+            gridViewArtMatr.GridControl = gridArtMatr;
+            gridViewArtMatr.GroupCount = 1;
+            gridViewArtMatr.Name = "gridViewArtMatr";
+            gridViewArtMatr.OptionsBehavior.ReadOnly = true;
+            gridViewArtMatr.OptionsCustomization.AllowFilter = false;
+            gridViewArtMatr.OptionsFind.AlwaysVisible = true;
+            gridViewArtMatr.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Search;
+            gridViewArtMatr.OptionsSelection.MultiSelect = true;
+            gridViewArtMatr.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            gridViewArtMatr.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
+            gridViewArtMatr.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewArtMatr.OptionsView.ShowAutoFilterRow = true;
+            gridViewArtMatr.OptionsView.ShowGroupPanel = false;
+            gridViewArtMatr.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gcGrupmen_name, DevExpress.Data.ColumnSortOrder.Ascending) });
+            // 
+            // gcGrupmen_name
+            // 
+            gcGrupmen_name.Caption = "Менеджер";
+            gcGrupmen_name.Name = "gcGrupmen_name";
+            gcGrupmen_name.Visible = true;
+            gcGrupmen_name.VisibleIndex = 1;
+            gcGrupmen_name.Width = 119;
+            // 
+            // gcTsn_name
+            // 
+            gcTsn_name.Caption = "Сезон";
+            gcTsn_name.Name = "gcTsn_name";
+            gcTsn_name.Visible = true;
+            gcTsn_name.VisibleIndex = 1;
+            gcTsn_name.Width = 61;
+            // 
+            // gcTb_id
+            // 
+            gcTb_id.Caption = "Блок";
+            gcTb_id.Name = "gcTb_id";
+            gcTb_id.Visible = true;
+            gcTb_id.VisibleIndex = 2;
+            gcTb_id.Width = 71;
+            // 
+            // gcArticul
+            // 
+            gcArticul.Caption = "Артикул";
+            gcArticul.Name = "gcArticul";
+            gcArticul.Visible = true;
+            gcArticul.VisibleIndex = 3;
+            gcArticul.Width = 70;
+            // 
+            // gcMod
+            // 
+            gcMod.Caption = "Модель";
+            gcMod.Name = "gcMod";
+            gcMod.Visible = true;
+            gcMod.VisibleIndex = 4;
+            gcMod.Width = 71;
+            // 
+            // gcTm_name
+            // 
+            gcTm_name.Caption = "Торг Марка";
+            gcTm_name.Name = "gcTm_name";
+            gcTm_name.Visible = true;
+            gcTm_name.VisibleIndex = 5;
+            gcTm_name.Width = 38;
+            // 
+            // gcGrup
+            // 
+            gcGrup.Caption = "Группа матрица";
+            gcGrup.Name = "gcGrup";
+            gcGrup.Visible = true;
+            gcGrup.VisibleIndex = 6;
+            gcGrup.Width = 84;
+            // 
+            // gcText_mo
+            // 
+            gcText_mo.Caption = "Модельный признак";
+            gcText_mo.Name = "gcText_mo";
+            gcText_mo.Visible = true;
+            gcText_mo.VisibleIndex = 7;
+            gcText_mo.Width = 70;
+            // 
+            // gcP
+            // 
+            gcP.Caption = "П";
+            gcP.ColumnEdit = repositoryItemCheckEdit1;
+            gcP.Name = "gcP";
+            gcP.Visible = true;
+            gcP.VisibleIndex = 13;
+            gcP.Width = 20;
+            // 
+            // gcPrinter
+            // 
+            gcPrinter.Caption = "Прин тер";
+            gcPrinter.ColumnEdit = repositoryItemCheckEdit3;
+            gcPrinter.Name = "gcPrinter";
+            gcPrinter.Visible = true;
+            gcPrinter.VisibleIndex = 14;
+            gcPrinter.Width = 25;
+            // 
+            // gcStra
+            // 
+            gcStra.Caption = "С";
+            gcStra.ColumnEdit = repositoryItemCheckEdit2;
+            gcStra.Name = "gcStra";
+            gcStra.Visible = true;
+            gcStra.VisibleIndex = 15;
+            gcStra.Width = 20;
+            // 
+            // gcBus
+            // 
+            gcBus.Caption = "Б";
+            gcBus.ColumnEdit = repositoryItemCheckEdit4;
+            gcBus.Name = "gcBus";
+            gcBus.Visible = true;
+            gcBus.VisibleIndex = 16;
+            gcBus.Width = 20;
+            // 
+            // gcPpres
+            // 
+            gcPpres.Caption = "Пресс";
+            gcPpres.ColumnEdit = repositoryItemCheckEdit5;
+            gcPpres.Name = "gcPpres";
+            gcPpres.Visible = true;
+            gcPpres.VisibleIndex = 17;
+            gcPpres.Width = 27;
+            // 
+            // gcV
+            // 
+            gcV.Caption = "В";
+            gcV.ColumnEdit = repositoryItemCheckEdit6;
+            gcV.Name = "gcV";
+            gcV.Visible = true;
+            gcV.VisibleIndex = 18;
+            gcV.Width = 20;
+            // 
+            // gcKruj
+            // 
+            gcKruj.Caption = "Круж";
+            gcKruj.ColumnEdit = repositoryItemCheckEdit7;
+            gcKruj.Name = "gcKruj";
+            gcKruj.Visible = true;
+            gcKruj.VisibleIndex = 19;
+            gcKruj.Width = 27;
+            // 
+            // gcTkan
+            // 
+            gcTkan.Caption = "Полотно";
+            gcTkan.Name = "gcTkan";
+            gcTkan.Visible = true;
+            gcTkan.VisibleIndex = 8;
+            gcTkan.Width = 181;
+            // 
+            // gcSost
+            // 
+            gcSost.Caption = "Состав: Основа";
+            gcSost.Name = "gcSost";
+            gcSost.Visible = true;
+            gcSost.VisibleIndex = 9;
+            gcSost.Width = 129;
+            // 
+            // gcRazmNames
+            // 
+            gcRazmNames.Caption = "Размеры";
+            gcRazmNames.Name = "gcRazmNames";
+            gcRazmNames.Visible = true;
+            gcRazmNames.VisibleIndex = 12;
+            gcRazmNames.Width = 197;
+            // 
+            // gcDatePublic
+            // 
+            gcDatePublic.Caption = "Публикация";
+            gcDatePublic.Name = "gcDatePublic";
+            gcDatePublic.Visible = true;
+            gcDatePublic.VisibleIndex = 20;
+            gcDatePublic.Width = 220;
+            // 
+            // gcSost2
+            // 
+            gcSost2.Caption = "Состав: Отделка";
+            gcSost2.Name = "gcSost2";
+            gcSost2.Visible = true;
+            gcSost2.VisibleIndex = 10;
+            gcSost2.Width = 95;
+            // 
+            // gcSost3
+            // 
+            gcSost3.Caption = "Состав: Подклад";
+            gcSost3.Name = "gcSost3";
+            gcSost3.Visible = true;
+            gcSost3.VisibleIndex = 11;
+            gcSost3.Width = 107;
+            // 
+            // customSimpleButtonPermissions
+            // 
+            customSimpleButtonPermissions.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            customSimpleButtonPermissions.Appearance.Options.UseFont = true;
+            customSimpleButtonPermissions.Location = new System.Drawing.Point(12, 622);
+            customSimpleButtonPermissions.Name = "customSimpleButtonPermissions";
+            customSimpleButtonPermissions.Size = new System.Drawing.Size(93, 42);
+            customSimpleButtonPermissions.TabIndex = 2;
+            customSimpleButtonPermissions.Text = "кнопка с правами";
+            // 
             // CreateArticulMatrForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1772, 676);
-            Controls.Add(gridArtMatrEdit);
+            Controls.Add(customSimpleButtonPermissions);
             Controls.Add(gridArtMatr);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "CreateArticulMatrForm";
             Text = "CreateArticulMatr";
             Load += CreateArticulMatr_Load;
             ((System.ComponentModel.ISupportInitialize)gridArtMatr).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridArtMatrEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit9).EndInit();
@@ -779,8 +748,16 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2View).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit7).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).EndInit();
             ResumeLayout(false);
         }
 
@@ -816,22 +793,14 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit6;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit7;
-        private Core.Class.CustomGridControl gridArtMatrEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewArtMatrEdit;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertP;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit8;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertPrinter;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit9;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertStra;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit10;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertBus;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit11;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertPpres;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit12;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertV;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit13;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertKruj;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit14;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertTkan;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertSost;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertRazmNames;
@@ -848,12 +817,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn gcCertText_mo;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertAgid;
         private DevExpress.XtraGrid.Columns.GridColumn gcCertidGost;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit2;
+        private DevExpress.XtraGrid.Columns.GridColumn gcCertDateCertificationApproval;
+        private Core.Class.CustomSimpleButton customSimpleButtonPermissions;
         private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit repositoryItemSearchLookUpEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit1View;
         private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit repositoryItemSearchLookUpEdit2;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit2View;
-        private DevExpress.XtraGrid.Columns.GridColumn gcCertDateCertificationApproval;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit2;
     }
 }

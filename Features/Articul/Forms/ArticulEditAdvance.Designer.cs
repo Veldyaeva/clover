@@ -726,7 +726,7 @@ namespace SewingProduction.Features.Articul.Forms
             customSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             customSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
-            // gcCertGrupmen_name1
+            // gridColumn1
             // 
             gridColumn1.Caption = "ID";
             gridColumn1.FieldName = "Id_gost";
@@ -734,7 +734,7 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn1.Visible = true;
             gridColumn1.VisibleIndex = 0;
             // 
-            // gcCertTsn_name1
+            // gridColumn2
             // 
             gridColumn2.Caption = "ГОСТ";
             gridColumn2.FieldName = "Name_gost";
@@ -742,7 +742,7 @@ namespace SewingProduction.Features.Articul.Forms
             gridColumn2.Visible = true;
             gridColumn2.VisibleIndex = 1;
             // 
-            // gcCertTb_id1
+            // gridColumn3
             // 
             gridColumn3.Caption = "Описание";
             gridColumn3.FieldName = "Opi_gost";
@@ -1508,6 +1508,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t7.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txbNorm_t7.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t7.Properties.Appearance.Options.UseFont = true;
+            txbNorm_t7.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t7.Size = new System.Drawing.Size(108, 22);
             txbNorm_t7.StyleController = dataLayoutCommonArticul;
             txbNorm_t7.TabIndex = 50;
@@ -1520,6 +1521,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t6.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txbNorm_t6.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t6.Properties.Appearance.Options.UseFont = true;
+            txbNorm_t6.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t6.Size = new System.Drawing.Size(108, 22);
             txbNorm_t6.StyleController = dataLayoutCommonArticul;
             txbNorm_t6.TabIndex = 49;
@@ -1532,6 +1534,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t5.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txbNorm_t5.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t5.Properties.Appearance.Options.UseFont = true;
+            txbNorm_t5.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t5.Size = new System.Drawing.Size(108, 22);
             txbNorm_t5.StyleController = dataLayoutCommonArticul;
             txbNorm_t5.TabIndex = 48;
@@ -1544,6 +1547,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t4.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txbNorm_t4.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t4.Properties.Appearance.Options.UseFont = true;
+            txbNorm_t4.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t4.Size = new System.Drawing.Size(108, 22);
             txbNorm_t4.StyleController = dataLayoutCommonArticul;
             txbNorm_t4.TabIndex = 47;
@@ -1556,6 +1560,7 @@ namespace SewingProduction.Features.Articul.Forms
             txbNorm_t3.Properties.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             txbNorm_t3.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
             txbNorm_t3.Properties.Appearance.Options.UseFont = true;
+            txbNorm_t3.Properties.Appearance.Options.UseForeColor = true;
             txbNorm_t3.Size = new System.Drawing.Size(108, 22);
             txbNorm_t3.StyleController = dataLayoutCommonArticul;
             txbNorm_t3.TabIndex = 46;
@@ -2757,6 +2762,7 @@ namespace SewingProduction.Features.Articul.Forms
             customSimpleButton1.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             customSimpleButton1.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButton1.Location = new System.Drawing.Point(13, 601);
             customSimpleButton1.Name = "customSimpleButton1";
             customSimpleButton1.Size = new System.Drawing.Size(146, 25);
@@ -2903,6 +2909,7 @@ namespace SewingProduction.Features.Articul.Forms
             btDel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             btDel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btDel.AppearanceDisabled.Options.UseBackColor = true;
+            btDel.AppearanceDisabled.Options.UseForeColor = true;
             btDel.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btDel.ImageOptions.Image");
             btDel.Location = new System.Drawing.Point(208, 260);
             btDel.Name = "btDel";
@@ -2920,6 +2927,7 @@ namespace SewingProduction.Features.Articul.Forms
             btEdit.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             btEdit.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btEdit.AppearanceDisabled.Options.UseBackColor = true;
+            btEdit.AppearanceDisabled.Options.UseForeColor = true;
             btEdit.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btEdit.ImageOptions.Image");
             btEdit.Location = new System.Drawing.Point(100, 260);
             btEdit.Name = "btEdit";
@@ -2937,6 +2945,7 @@ namespace SewingProduction.Features.Articul.Forms
             btAdd.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
             btAdd.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btAdd.AppearanceDisabled.Options.UseBackColor = true;
+            btAdd.AppearanceDisabled.Options.UseForeColor = true;
             btAdd.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("btAdd.ImageOptions.Image");
             btAdd.Location = new System.Drawing.Point(2, 260);
             btAdd.Name = "btAdd";
