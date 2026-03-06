@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit10 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit11 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit12 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit13 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit14 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateArticulMatrForm));
+            repositoryItemCheckEdit8 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit9 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit10 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit11 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit12 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit13 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            repositoryItemCheckEdit14 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             gridArtMatr = new SewingProduction.Core.Class.CustomGridControl();
             gridViewArtMatrEdit = new DevExpress.XtraGrid.Views.Grid.GridView();
             gcCertGrupmen_name = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -98,8 +98,6 @@
             gcSost2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gcSost3 = new DevExpress.XtraGrid.Columns.GridColumn();
             customSimpleButtonPermissions = new SewingProduction.Core.Class.CustomSimpleButton();
-            ((System.ComponentModel.ISupportInitialize)gridArtMatr).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit10).BeginInit();
@@ -107,6 +105,8 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridArtMatr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2).BeginInit();
@@ -122,6 +122,63 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).BeginInit();
             SuspendLayout();
+            // 
+            // repositoryItemCheckEdit8
+            // 
+            repositoryItemCheckEdit8.AutoHeight = false;
+            repositoryItemCheckEdit8.Name = "repositoryItemCheckEdit8";
+            repositoryItemCheckEdit8.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit8.ValueChecked = (short)1;
+            repositoryItemCheckEdit8.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit9
+            // 
+            repositoryItemCheckEdit9.AutoHeight = false;
+            repositoryItemCheckEdit9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            repositoryItemCheckEdit9.Name = "repositoryItemCheckEdit9";
+            repositoryItemCheckEdit9.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit9.ValueChecked = (short)1;
+            repositoryItemCheckEdit9.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit10
+            // 
+            repositoryItemCheckEdit10.AutoHeight = false;
+            repositoryItemCheckEdit10.Name = "repositoryItemCheckEdit10";
+            repositoryItemCheckEdit10.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit10.ValueChecked = (short)1;
+            repositoryItemCheckEdit10.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit11
+            // 
+            repositoryItemCheckEdit11.AutoHeight = false;
+            repositoryItemCheckEdit11.Name = "repositoryItemCheckEdit11";
+            repositoryItemCheckEdit11.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit11.ValueChecked = (short)1;
+            repositoryItemCheckEdit11.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit12
+            // 
+            repositoryItemCheckEdit12.AutoHeight = false;
+            repositoryItemCheckEdit12.Name = "repositoryItemCheckEdit12";
+            repositoryItemCheckEdit12.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit12.ValueChecked = (short)1;
+            repositoryItemCheckEdit12.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit13
+            // 
+            repositoryItemCheckEdit13.AutoHeight = false;
+            repositoryItemCheckEdit13.Name = "repositoryItemCheckEdit13";
+            repositoryItemCheckEdit13.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit13.ValueChecked = (short)1;
+            repositoryItemCheckEdit13.ValueUnchecked = (short)0;
+            // 
+            // repositoryItemCheckEdit14
+            // 
+            repositoryItemCheckEdit14.AutoHeight = false;
+            repositoryItemCheckEdit14.Name = "repositoryItemCheckEdit14";
+            repositoryItemCheckEdit14.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit14.ValueChecked = (short)1;
+            repositoryItemCheckEdit14.ValueUnchecked = (short)0;
             // 
             // gridArtMatr
             // 
@@ -229,11 +286,6 @@
             // gcCertP
             // 
             gcCertP.Caption = "П";
-            repositoryItemCheckEdit8.AutoHeight = false;
-            repositoryItemCheckEdit8.Name = "repositoryItemCheckEdit8";
-            repositoryItemCheckEdit8.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit8.ValueChecked = (short)1;
-            repositoryItemCheckEdit8.ValueUnchecked = (short)0;
             gcCertP.ColumnEdit = repositoryItemCheckEdit8;
             gcCertP.Name = "gcCertP";
             gcCertP.OptionsColumn.ReadOnly = true;
@@ -244,12 +296,6 @@
             // gcCertPrinter
             // 
             gcCertPrinter.Caption = "Прин тер";
-            repositoryItemCheckEdit9.AutoHeight = false;
-            repositoryItemCheckEdit9.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            repositoryItemCheckEdit9.Name = "repositoryItemCheckEdit9";
-            repositoryItemCheckEdit9.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit9.ValueChecked = (short)1;
-            repositoryItemCheckEdit9.ValueUnchecked = (short)0;
             gcCertPrinter.ColumnEdit = repositoryItemCheckEdit9;
             gcCertPrinter.Name = "gcCertPrinter";
             gcCertPrinter.OptionsColumn.ReadOnly = true;
@@ -260,11 +306,6 @@
             // gcCertStra
             // 
             gcCertStra.Caption = "С";
-            repositoryItemCheckEdit10.AutoHeight = false;
-            repositoryItemCheckEdit10.Name = "repositoryItemCheckEdit10";
-            repositoryItemCheckEdit10.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit10.ValueChecked = (short)1;
-            repositoryItemCheckEdit10.ValueUnchecked = (short)0;
             gcCertStra.ColumnEdit = repositoryItemCheckEdit10;
             gcCertStra.Name = "gcCertStra";
             gcCertStra.OptionsColumn.ReadOnly = true;
@@ -275,11 +316,6 @@
             // gcCertBus
             // 
             gcCertBus.Caption = "Б";
-            repositoryItemCheckEdit11.AutoHeight = false;
-            repositoryItemCheckEdit11.Name = "repositoryItemCheckEdit11";
-            repositoryItemCheckEdit11.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit11.ValueChecked = (short)1;
-            repositoryItemCheckEdit11.ValueUnchecked = (short)0;
             gcCertBus.ColumnEdit = repositoryItemCheckEdit11;
             gcCertBus.Name = "gcCertBus";
             gcCertBus.OptionsColumn.ReadOnly = true;
@@ -290,11 +326,6 @@
             // gcCertPpres
             // 
             gcCertPpres.Caption = "Пресс";
-            repositoryItemCheckEdit12.AutoHeight = false;
-            repositoryItemCheckEdit12.Name = "repositoryItemCheckEdit12";
-            repositoryItemCheckEdit12.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit12.ValueChecked = (short)1;
-            repositoryItemCheckEdit12.ValueUnchecked = (short)0;
             gcCertPpres.ColumnEdit = repositoryItemCheckEdit12;
             gcCertPpres.Name = "gcCertPpres";
             gcCertPpres.OptionsColumn.ReadOnly = true;
@@ -305,11 +336,6 @@
             // gcCertV
             // 
             gcCertV.Caption = "В";
-            repositoryItemCheckEdit13.AutoHeight = false;
-            repositoryItemCheckEdit13.Name = "repositoryItemCheckEdit13";
-            repositoryItemCheckEdit13.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit13.ValueChecked = (short)1;
-            repositoryItemCheckEdit13.ValueUnchecked = (short)0;
             gcCertV.ColumnEdit = repositoryItemCheckEdit13;
             gcCertV.Name = "gcCertV";
             gcCertV.OptionsColumn.ReadOnly = true;
@@ -320,11 +346,6 @@
             // gcCertKruj
             // 
             gcCertKruj.Caption = "Круж";
-            repositoryItemCheckEdit14.AutoHeight = false;
-            repositoryItemCheckEdit14.Name = "repositoryItemCheckEdit14";
-            repositoryItemCheckEdit14.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            repositoryItemCheckEdit14.ValueChecked = (short)1;
-            repositoryItemCheckEdit14.ValueUnchecked = (short)0;
             gcCertKruj.ColumnEdit = repositoryItemCheckEdit14;
             gcCertKruj.Name = "gcCertKruj";
             gcCertKruj.OptionsColumn.ReadOnly = true;
@@ -735,8 +756,6 @@
             Name = "CreateArticulMatrForm";
             Text = "CreateArticulMatr";
             Load += CreateArticulMatr_Load;
-            ((System.ComponentModel.ISupportInitialize)gridArtMatr).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit9).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit10).EndInit();
@@ -744,6 +763,8 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit12).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit13).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridArtMatr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewArtMatrEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemSearchLookUpEdit2).EndInit();
@@ -825,5 +846,12 @@
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit2View;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit8;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit9;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit10;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit11;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit12;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit13;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit14;
     }
 }

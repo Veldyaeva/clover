@@ -432,23 +432,7 @@ namespace SewingProduction.Features.Articul
                     }
                     // получение изображения по пути
                     string imagePath = getImagePathTask.Result;
-                    try
-                    {
-                        //imagePath = await _articulDataService.GetFileEskizForKod(kodd);
-                        if (!string.IsNullOrEmpty(imagePath))
-                        {
-                            pictureBoxArticul.ImageLocation = imagePath;
-                        }
-                        else
-                        {
-                            pictureBoxArticul.ImageLocation = null;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
-                        pictureBoxArticul.ImageLocation = null;
-                    }
+                    pictureBoxArticul.ImageLocation = !string.IsNullOrEmpty(imagePath) ? imagePath : null;
 
                 }
             }
