@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             gridArtMatr = new SewingProduction.Core.Class.CustomGridControl();
             gridViewArtMatr = new DevExpress.XtraGrid.Views.Grid.GridView();
             gcGrupmen_name = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -128,8 +127,6 @@
             // 
             gridArtMatr.Dock = System.Windows.Forms.DockStyle.Top;
             gridArtMatr.Font = new System.Drawing.Font("Arial", 10F);
-            gridLevelNode1.RelationName = "Level1";
-            gridArtMatr.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
             gridArtMatr.Location = new System.Drawing.Point(0, 0);
             gridArtMatr.MainView = gridViewArtMatr;
             gridArtMatr.Name = "gridArtMatr";
@@ -146,6 +143,7 @@
             gridViewArtMatr.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridViewArtMatr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcGrupmen_name, gcTsn_name, gcTb_id, gcArticul, gcMod, gcTm_name, gcGrup, gcText_mo, gcP, gcPrinter, gcStra, gcBus, gcPpres, gcV, gcKruj, gcTkan, gcSost, gcRazmNames, gcDatePublic, gcSost2, gcSost3 });
             gridViewArtMatr.GridControl = gridArtMatr;
+            gridViewArtMatr.GroupCount = 1;
             gridViewArtMatr.Name = "gridViewArtMatr";
             gridViewArtMatr.OptionsBehavior.ReadOnly = true;
             gridViewArtMatr.OptionsCustomization.AllowFilter = false;
@@ -157,6 +155,7 @@
             gridViewArtMatr.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatr.OptionsView.ShowAutoFilterRow = true;
             gridViewArtMatr.OptionsView.ShowGroupPanel = false;
+            gridViewArtMatr.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gcGrupmen_name, DevExpress.Data.ColumnSortOrder.Ascending) });
             // 
             // gcGrupmen_name
             // 
@@ -171,7 +170,7 @@
             gcTsn_name.Caption = "Сезон";
             gcTsn_name.Name = "gcTsn_name";
             gcTsn_name.Visible = true;
-            gcTsn_name.VisibleIndex = 2;
+            gcTsn_name.VisibleIndex = 1;
             gcTsn_name.Width = 61;
             // 
             // gcTb_id
@@ -179,7 +178,7 @@
             gcTb_id.Caption = "Блок";
             gcTb_id.Name = "gcTb_id";
             gcTb_id.Visible = true;
-            gcTb_id.VisibleIndex = 3;
+            gcTb_id.VisibleIndex = 2;
             gcTb_id.Width = 71;
             // 
             // gcArticul
@@ -187,7 +186,7 @@
             gcArticul.Caption = "Артикул";
             gcArticul.Name = "gcArticul";
             gcArticul.Visible = true;
-            gcArticul.VisibleIndex = 4;
+            gcArticul.VisibleIndex = 3;
             gcArticul.Width = 70;
             // 
             // gcMod
@@ -195,7 +194,7 @@
             gcMod.Caption = "Модель";
             gcMod.Name = "gcMod";
             gcMod.Visible = true;
-            gcMod.VisibleIndex = 5;
+            gcMod.VisibleIndex = 4;
             gcMod.Width = 71;
             // 
             // gcTm_name
@@ -203,7 +202,7 @@
             gcTm_name.Caption = "Торг Марка";
             gcTm_name.Name = "gcTm_name";
             gcTm_name.Visible = true;
-            gcTm_name.VisibleIndex = 6;
+            gcTm_name.VisibleIndex = 5;
             gcTm_name.Width = 38;
             // 
             // gcGrup
@@ -211,7 +210,7 @@
             gcGrup.Caption = "Группа матрица";
             gcGrup.Name = "gcGrup";
             gcGrup.Visible = true;
-            gcGrup.VisibleIndex = 7;
+            gcGrup.VisibleIndex = 6;
             gcGrup.Width = 84;
             // 
             // gcText_mo
@@ -219,7 +218,7 @@
             gcText_mo.Caption = "Модельный признак";
             gcText_mo.Name = "gcText_mo";
             gcText_mo.Visible = true;
-            gcText_mo.VisibleIndex = 8;
+            gcText_mo.VisibleIndex = 7;
             gcText_mo.Width = 70;
             // 
             // gcP
@@ -228,7 +227,7 @@
             gcP.ColumnEdit = repositoryItemCheckEdit1;
             gcP.Name = "gcP";
             gcP.Visible = true;
-            gcP.VisibleIndex = 14;
+            gcP.VisibleIndex = 13;
             gcP.Width = 20;
             // 
             // repositoryItemCheckEdit1
@@ -245,7 +244,7 @@
             gcPrinter.ColumnEdit = repositoryItemCheckEdit3;
             gcPrinter.Name = "gcPrinter";
             gcPrinter.Visible = true;
-            gcPrinter.VisibleIndex = 15;
+            gcPrinter.VisibleIndex = 14;
             gcPrinter.Width = 25;
             // 
             // repositoryItemCheckEdit3
@@ -263,7 +262,7 @@
             gcStra.ColumnEdit = repositoryItemCheckEdit2;
             gcStra.Name = "gcStra";
             gcStra.Visible = true;
-            gcStra.VisibleIndex = 16;
+            gcStra.VisibleIndex = 15;
             gcStra.Width = 20;
             // 
             // repositoryItemCheckEdit2
@@ -280,7 +279,7 @@
             gcBus.ColumnEdit = repositoryItemCheckEdit4;
             gcBus.Name = "gcBus";
             gcBus.Visible = true;
-            gcBus.VisibleIndex = 17;
+            gcBus.VisibleIndex = 16;
             gcBus.Width = 20;
             // 
             // repositoryItemCheckEdit4
@@ -297,7 +296,7 @@
             gcPpres.ColumnEdit = repositoryItemCheckEdit5;
             gcPpres.Name = "gcPpres";
             gcPpres.Visible = true;
-            gcPpres.VisibleIndex = 18;
+            gcPpres.VisibleIndex = 17;
             gcPpres.Width = 27;
             // 
             // repositoryItemCheckEdit5
@@ -314,7 +313,7 @@
             gcV.ColumnEdit = repositoryItemCheckEdit6;
             gcV.Name = "gcV";
             gcV.Visible = true;
-            gcV.VisibleIndex = 19;
+            gcV.VisibleIndex = 18;
             gcV.Width = 20;
             // 
             // repositoryItemCheckEdit6
@@ -331,7 +330,7 @@
             gcKruj.ColumnEdit = repositoryItemCheckEdit7;
             gcKruj.Name = "gcKruj";
             gcKruj.Visible = true;
-            gcKruj.VisibleIndex = 20;
+            gcKruj.VisibleIndex = 19;
             gcKruj.Width = 27;
             // 
             // repositoryItemCheckEdit7
@@ -347,7 +346,7 @@
             gcTkan.Caption = "Полотно";
             gcTkan.Name = "gcTkan";
             gcTkan.Visible = true;
-            gcTkan.VisibleIndex = 9;
+            gcTkan.VisibleIndex = 8;
             gcTkan.Width = 181;
             // 
             // gcSost
@@ -355,7 +354,7 @@
             gcSost.Caption = "Состав: Основа";
             gcSost.Name = "gcSost";
             gcSost.Visible = true;
-            gcSost.VisibleIndex = 10;
+            gcSost.VisibleIndex = 9;
             gcSost.Width = 129;
             // 
             // gcRazmNames
@@ -363,7 +362,7 @@
             gcRazmNames.Caption = "Размеры";
             gcRazmNames.Name = "gcRazmNames";
             gcRazmNames.Visible = true;
-            gcRazmNames.VisibleIndex = 13;
+            gcRazmNames.VisibleIndex = 12;
             gcRazmNames.Width = 197;
             // 
             // gcDatePublic
@@ -371,7 +370,7 @@
             gcDatePublic.Caption = "Публикация";
             gcDatePublic.Name = "gcDatePublic";
             gcDatePublic.Visible = true;
-            gcDatePublic.VisibleIndex = 21;
+            gcDatePublic.VisibleIndex = 20;
             gcDatePublic.Width = 220;
             // 
             // gcSost2
@@ -379,7 +378,7 @@
             gcSost2.Caption = "Состав: Отделка";
             gcSost2.Name = "gcSost2";
             gcSost2.Visible = true;
-            gcSost2.VisibleIndex = 11;
+            gcSost2.VisibleIndex = 10;
             gcSost2.Width = 95;
             // 
             // gcSost3
@@ -387,14 +386,14 @@
             gcSost3.Caption = "Состав: Подклад";
             gcSost3.Name = "gcSost3";
             gcSost3.Visible = true;
-            gcSost3.VisibleIndex = 12;
+            gcSost3.VisibleIndex = 11;
             gcSost3.Width = 107;
             // 
             // gridArtMatrEdit
             // 
             gridArtMatrEdit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             gridArtMatrEdit.Font = new System.Drawing.Font("Arial", 10F);
-            gridArtMatrEdit.Location = new System.Drawing.Point(1, 207);
+            gridArtMatrEdit.Location = new System.Drawing.Point(-334, 375);
             gridArtMatrEdit.MainView = gridViewArtMatrEdit;
             gridArtMatrEdit.Name = "gridArtMatrEdit";
             gridArtMatrEdit.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit8, repositoryItemCheckEdit10, repositoryItemCheckEdit9, repositoryItemCheckEdit11, repositoryItemCheckEdit12, repositoryItemCheckEdit13, repositoryItemCheckEdit14, repositoryItemLookUpEdit1, repositoryItemLookUpEdit2, repositoryItemSearchLookUpEdit1, repositoryItemSearchLookUpEdit2 });
@@ -410,6 +409,7 @@
             gridViewArtMatrEdit.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridViewArtMatrEdit.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcCertGrupmen_name, gcCertTsn_name, gcCertTb_id, gcCertArticul, gcCertMod, gcCertTm_name, gcCertGrup, gcCertText_mo, gcCertP, gcCertPrinter, gcCertStra, gcCertBus, gcCertPpres, gcCertV, gcCertKruj, gcCertTkan, gcCertSost, gcCertRazmNames, gcCertDatePublic, gcCertSost2, gcCertSost3, gcCertidGost, gcCertAgid, gcCertDateCertificationApproval });
             gridViewArtMatrEdit.GridControl = gridArtMatrEdit;
+            gridViewArtMatrEdit.GroupCount = 1;
             gridViewArtMatrEdit.Name = "gridViewArtMatrEdit";
             gridViewArtMatrEdit.OptionsCustomization.AllowFilter = false;
             gridViewArtMatrEdit.OptionsFind.AlwaysVisible = true;
@@ -420,6 +420,7 @@
             gridViewArtMatrEdit.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatrEdit.OptionsView.ShowAutoFilterRow = true;
             gridViewArtMatrEdit.OptionsView.ShowGroupPanel = false;
+            gridViewArtMatrEdit.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gcCertGrupmen_name, DevExpress.Data.ColumnSortOrder.Ascending) });
             // 
             // gcCertGrupmen_name
             // 
@@ -435,7 +436,7 @@
             gcCertTsn_name.Name = "gcCertTsn_name";
             gcCertTsn_name.OptionsColumn.ReadOnly = true;
             gcCertTsn_name.Visible = true;
-            gcCertTsn_name.VisibleIndex = 3;
+            gcCertTsn_name.VisibleIndex = 2;
             gcCertTsn_name.Width = 56;
             // 
             // gcCertTb_id
@@ -444,7 +445,7 @@
             gcCertTb_id.Name = "gcCertTb_id";
             gcCertTb_id.OptionsColumn.ReadOnly = true;
             gcCertTb_id.Visible = true;
-            gcCertTb_id.VisibleIndex = 4;
+            gcCertTb_id.VisibleIndex = 3;
             gcCertTb_id.Width = 65;
             // 
             // gcCertArticul
@@ -453,7 +454,7 @@
             gcCertArticul.Name = "gcCertArticul";
             gcCertArticul.OptionsColumn.ReadOnly = true;
             gcCertArticul.Visible = true;
-            gcCertArticul.VisibleIndex = 5;
+            gcCertArticul.VisibleIndex = 4;
             gcCertArticul.Width = 65;
             // 
             // gcCertMod
@@ -462,7 +463,7 @@
             gcCertMod.Name = "gcCertMod";
             gcCertMod.OptionsColumn.ReadOnly = true;
             gcCertMod.Visible = true;
-            gcCertMod.VisibleIndex = 6;
+            gcCertMod.VisibleIndex = 5;
             gcCertMod.Width = 65;
             // 
             // gcCertTm_name
@@ -471,7 +472,7 @@
             gcCertTm_name.Name = "gcCertTm_name";
             gcCertTm_name.OptionsColumn.ReadOnly = true;
             gcCertTm_name.Visible = true;
-            gcCertTm_name.VisibleIndex = 7;
+            gcCertTm_name.VisibleIndex = 6;
             gcCertTm_name.Width = 33;
             // 
             // gcCertGrup
@@ -480,7 +481,7 @@
             gcCertGrup.Name = "gcCertGrup";
             gcCertGrup.OptionsColumn.ReadOnly = true;
             gcCertGrup.Visible = true;
-            gcCertGrup.VisibleIndex = 8;
+            gcCertGrup.VisibleIndex = 7;
             gcCertGrup.Width = 76;
             // 
             // gcCertText_mo
@@ -489,7 +490,7 @@
             gcCertText_mo.Name = "gcCertText_mo";
             gcCertText_mo.OptionsColumn.ReadOnly = true;
             gcCertText_mo.Visible = true;
-            gcCertText_mo.VisibleIndex = 9;
+            gcCertText_mo.VisibleIndex = 8;
             // 
             // gcCertP
             // 
@@ -498,7 +499,7 @@
             gcCertP.Name = "gcCertP";
             gcCertP.OptionsColumn.ReadOnly = true;
             gcCertP.Visible = true;
-            gcCertP.VisibleIndex = 17;
+            gcCertP.VisibleIndex = 16;
             gcCertP.Width = 20;
             // 
             // repositoryItemCheckEdit8
@@ -516,7 +517,7 @@
             gcCertPrinter.Name = "gcCertPrinter";
             gcCertPrinter.OptionsColumn.ReadOnly = true;
             gcCertPrinter.Visible = true;
-            gcCertPrinter.VisibleIndex = 18;
+            gcCertPrinter.VisibleIndex = 17;
             gcCertPrinter.Width = 27;
             // 
             // repositoryItemCheckEdit9
@@ -535,7 +536,7 @@
             gcCertStra.Name = "gcCertStra";
             gcCertStra.OptionsColumn.ReadOnly = true;
             gcCertStra.Visible = true;
-            gcCertStra.VisibleIndex = 19;
+            gcCertStra.VisibleIndex = 18;
             gcCertStra.Width = 20;
             // 
             // repositoryItemCheckEdit10
@@ -553,7 +554,7 @@
             gcCertBus.Name = "gcCertBus";
             gcCertBus.OptionsColumn.ReadOnly = true;
             gcCertBus.Visible = true;
-            gcCertBus.VisibleIndex = 20;
+            gcCertBus.VisibleIndex = 19;
             gcCertBus.Width = 20;
             // 
             // repositoryItemCheckEdit11
@@ -571,7 +572,7 @@
             gcCertPpres.Name = "gcCertPpres";
             gcCertPpres.OptionsColumn.ReadOnly = true;
             gcCertPpres.Visible = true;
-            gcCertPpres.VisibleIndex = 21;
+            gcCertPpres.VisibleIndex = 20;
             gcCertPpres.Width = 34;
             // 
             // repositoryItemCheckEdit12
@@ -589,7 +590,7 @@
             gcCertV.Name = "gcCertV";
             gcCertV.OptionsColumn.ReadOnly = true;
             gcCertV.Visible = true;
-            gcCertV.VisibleIndex = 22;
+            gcCertV.VisibleIndex = 21;
             gcCertV.Width = 20;
             // 
             // repositoryItemCheckEdit13
@@ -607,7 +608,7 @@
             gcCertKruj.Name = "gcCertKruj";
             gcCertKruj.OptionsColumn.ReadOnly = true;
             gcCertKruj.Visible = true;
-            gcCertKruj.VisibleIndex = 23;
+            gcCertKruj.VisibleIndex = 22;
             gcCertKruj.Width = 29;
             // 
             // repositoryItemCheckEdit14
@@ -624,7 +625,7 @@
             gcCertTkan.Name = "gcCertTkan";
             gcCertTkan.OptionsColumn.ReadOnly = true;
             gcCertTkan.Visible = true;
-            gcCertTkan.VisibleIndex = 10;
+            gcCertTkan.VisibleIndex = 9;
             gcCertTkan.Width = 108;
             // 
             // gcCertSost
@@ -633,7 +634,7 @@
             gcCertSost.Name = "gcCertSost";
             gcCertSost.OptionsColumn.ReadOnly = true;
             gcCertSost.Visible = true;
-            gcCertSost.VisibleIndex = 13;
+            gcCertSost.VisibleIndex = 12;
             gcCertSost.Width = 123;
             // 
             // gcCertRazmNames
@@ -642,7 +643,7 @@
             gcCertRazmNames.Name = "gcCertRazmNames";
             gcCertRazmNames.OptionsColumn.ReadOnly = true;
             gcCertRazmNames.Visible = true;
-            gcCertRazmNames.VisibleIndex = 16;
+            gcCertRazmNames.VisibleIndex = 15;
             gcCertRazmNames.Width = 116;
             // 
             // gcCertDatePublic
@@ -651,7 +652,7 @@
             gcCertDatePublic.Name = "gcCertDatePublic";
             gcCertDatePublic.OptionsColumn.ReadOnly = true;
             gcCertDatePublic.Visible = true;
-            gcCertDatePublic.VisibleIndex = 24;
+            gcCertDatePublic.VisibleIndex = 23;
             gcCertDatePublic.Width = 212;
             // 
             // gcCertSost2
@@ -660,7 +661,7 @@
             gcCertSost2.Name = "gcCertSost2";
             gcCertSost2.OptionsColumn.ReadOnly = true;
             gcCertSost2.Visible = true;
-            gcCertSost2.VisibleIndex = 14;
+            gcCertSost2.VisibleIndex = 13;
             gcCertSost2.Width = 82;
             // 
             // gcCertSost3
@@ -669,7 +670,7 @@
             gcCertSost3.Name = "gcCertSost3";
             gcCertSost3.OptionsColumn.ReadOnly = true;
             gcCertSost3.Visible = true;
-            gcCertSost3.VisibleIndex = 15;
+            gcCertSost3.VisibleIndex = 14;
             gcCertSost3.Width = 108;
             // 
             // gcCertidGost
@@ -678,7 +679,7 @@
             gcCertidGost.ColumnEdit = repositoryItemSearchLookUpEdit1;
             gcCertidGost.Name = "gcCertidGost";
             gcCertidGost.Visible = true;
-            gcCertidGost.VisibleIndex = 11;
+            gcCertidGost.VisibleIndex = 10;
             gcCertidGost.Width = 63;
             // 
             // repositoryItemSearchLookUpEdit1
@@ -702,7 +703,7 @@
             gcCertAgid.ColumnEdit = repositoryItemSearchLookUpEdit2;
             gcCertAgid.Name = "gcCertAgid";
             gcCertAgid.Visible = true;
-            gcCertAgid.VisibleIndex = 12;
+            gcCertAgid.VisibleIndex = 11;
             gcCertAgid.Width = 78;
             // 
             // repositoryItemSearchLookUpEdit2

@@ -214,18 +214,12 @@ namespace SewingProduction.Features.Articul.Forms
 
                 var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
 
-                //oбновление фильтра группы по госту
-                var idGost = currentItem.idGostAppr;
-                //if (currentItem.idGostAppr == 0 || currentItem.idGostAppr == null)
-                //{
-                    currentItem.agIdAppr = 0;
-                //    return;
-                //}
+                //скидываем группу госта при изменении самого госта, чтобы не было "висячих" групп, не относящихся к выбранному госту
+                currentItem.agIdAppr = 0;
 
                 view.PostEditor();
                 view.UpdateCurrentRow();
 
-                //BindGostGrupp();
             }
             catch (Exception ex)
             {
@@ -236,17 +230,28 @@ namespace SewingProduction.Features.Articul.Forms
 
         private void repositoryItemSearchLookUpEdit2_BeforePopup(object sender, EventArgs e)
         {
-            var editor = gridViewArtMatrEdit.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
-            if (editor == null)
-                return;
+            try
+            {
+                var editor = gridViewArtMatrEdit.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
+                if (editor == null)
+                    return;
 
-            if (sender == null) return;
-            var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
-            var idGost = _currentItem.idGostAppr;
-            editor.Properties.DataSource = _gostGroupAll
-                .Where(x => x.Id_gost == idGost)
-                .ToList();
-            
+                if (sender == null) return;
+
+                var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+                var idGost = _currentItem.idGostAppr;
+                editor.Properties.DataSource = _gostGroupAll
+                    .Where(x => x.Id_gost == idGost)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при открытии выпадающего списка групп ГОСТ");
+                throw;
+            }
+
         }
+
+
     }
 }

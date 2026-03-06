@@ -385,7 +385,7 @@ namespace SewingProduction.Features.Articul
             gridControl1.OptionsView.ShowGroupPanel = false;
             gridControl1.FocusedRowChanged += gridControl1_FocusedRowChanged;
             // 
-            // gcCertGrupmen_name1
+            // gridColumn1
             // 
             gridColumn1.Caption = "Код";
             gridColumn1.FieldName = "Kod";
@@ -395,7 +395,7 @@ namespace SewingProduction.Features.Articul
             gridColumn1.VisibleIndex = 0;
             gridColumn1.Width = 91;
             // 
-            // gcCertTsn_name1
+            // gridColumn2
             // 
             gridColumn2.Caption = "Группа";
             gridColumn2.FieldName = "Grup";
@@ -405,7 +405,7 @@ namespace SewingProduction.Features.Articul
             gridColumn2.VisibleIndex = 1;
             gridColumn2.Width = 110;
             // 
-            // gcCertTb_id1
+            // gridColumn3
             // 
             gridColumn3.Caption = "Артикул";
             gridColumn3.FieldName = "Articul";
@@ -416,7 +416,7 @@ namespace SewingProduction.Features.Articul
             gridColumn3.VisibleIndex = 2;
             gridColumn3.Width = 98;
             // 
-            // gcCertArticul1
+            // gridColumn4
             // 
             gridColumn4.Caption = "Размер";
             gridColumn4.FieldName = "Razm";
@@ -426,7 +426,7 @@ namespace SewingProduction.Features.Articul
             gridColumn4.VisibleIndex = 3;
             gridColumn4.Width = 110;
             // 
-            // gcCertMod1
+            // gridColumn5
             // 
             gridColumn5.Caption = "Модель";
             gridColumn5.FieldName = "Mod";
@@ -436,7 +436,7 @@ namespace SewingProduction.Features.Articul
             gridColumn5.VisibleIndex = 4;
             gridColumn5.Width = 119;
             // 
-            // gcCertTm_name1
+            // gridColumn6
             // 
             gridColumn6.Caption = "ТМ";
             gridColumn6.FieldName = "Kle";
@@ -558,7 +558,7 @@ namespace SewingProduction.Features.Articul
             lContrBoxMainInfo.Controls.Add(customLabel7);
             lContrBoxMainInfo.Controls.Add(txbOpiGost);
             lContrBoxMainInfo.Controls.Add(txbNameGost);
-            lContrBoxMainInfo.Location = new Point(589, 2);
+            lContrBoxMainInfo.Location = new Point(590, 2);
             lContrBoxMainInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             lContrBoxMainInfo.Name = "lContrBoxMainInfo";
             lContrBoxMainInfo.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-650, 6, 650, 400);
