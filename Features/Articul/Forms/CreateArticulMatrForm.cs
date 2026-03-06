@@ -28,17 +28,14 @@ namespace SewingProduction.Features.Articul.Forms
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
         private readonly ILogger _logger = new FileLogger();
 
+        private bool _isEditing = false; // флаг для отслеживания, находится ли грид в режиме редактирования
 
         private BindingSource _bindingSourceArtMatr;
         //private BindingSource _bindingSourceGostGrupAll;
         private List<GostGrupIzdViewModel> _gostGroupAll;
-        private List<GostGrupIzdViewModel> _gostGroup;
 
-        private BindingSource _bindingSourceGroupGost = new BindingSource();
 
-        //private BindingSource _bindingSourceGostGrup;
-
-        public CreateArticulMatrForm(UserClass user)
+        public CreateArticulMatrForm(UserClass user) : base(user)
         {
             _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
@@ -49,7 +46,9 @@ namespace SewingProduction.Features.Articul.Forms
 
             //if (gridArtMatr != null) gridArtMatr.DataSource = _bindingSourceArtMatr;
             gridArtMatr.DataSource = _bindingSourceArtMatr;
-            gridArtMatrEdit.DataSource = _bindingSourceArtMatr;
+            //gridArtMatrEdit.DataSource = _bindingSourceArtMatr;
+            
+
 
         }
 
@@ -74,6 +73,18 @@ namespace SewingProduction.Features.Articul.Forms
             InitializeBindings();
             BindGost();
             BindGostGrupp();
+
+            //в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
+            _isEditing = customSimpleButtonPermissions.Visible;
+            SetPermisions();
+
+        }
+        /// <summary>
+        /// в зависимости от прав пользователя - разрешаем или запрещаем редактирование грида 
+        /// </summary>
+        private void SetPermisions()
+        {
+            gridArtMatr.MainView = _isEditing ? gridViewArtMatrEdit : gridViewArtMatr;
 
         }
         private void InitializeBindings()
@@ -252,6 +263,14 @@ namespace SewingProduction.Features.Articul.Forms
 
         }
 
+        private void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Visible = {customSimpleButtonPermissions.Visible}");
+            MessageBox.Show($"VisibleLogic = {customSimpleButtonPermissions.VisibleLogic}");
+            MessageBox.Show($"VisiblePermission = {customSimpleButtonPermissions.VisiblePermission}");
+            MessageBox.Show($"_isEditing = {_isEditing}");
 
+
+        }
     }
 }

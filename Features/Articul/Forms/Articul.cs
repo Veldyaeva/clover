@@ -404,12 +404,13 @@ namespace SewingProduction.Features.Articul
                     kodd = currentRow.Kodd;
 
 
-                    Task getData = getArticulFromSQlAsync(kod);
-                    Task getArtDrData = getArtDrForKodAsync(kod);
-                    Task getKomplSostData = getSostKomplFromSQlAsync(kod);
-                    Task getNaborSostData = getSostNaborFromSQlAsync(kod);
+                    Task getDataTask = getArticulFromSQlAsync(kod);
+                    Task getArtDrDataTask = getArtDrForKodAsync(kod);
+                    Task getKomplSostDataTask = getSostKomplFromSQlAsync(kod);
+                    Task getNaborSostDataTask = getSostNaborFromSQlAsync(kod);
+                    Task<string> getImagePathTask = _articulDataService.GetFileEskizForKod(kodd);
 
-                    await Task.WhenAll(getData, getArtDrData, getKomplSostData, getNaborSostData);
+                    await Task.WhenAll(getDataTask, getArtDrDataTask, getKomplSostDataTask, getNaborSostDataTask, getImagePathTask);
 
                     cTabPage1.PageVisible = false;
                     cTabPage2.PageVisible = false;
@@ -430,24 +431,8 @@ namespace SewingProduction.Features.Articul
                             break;
                     }
                     // получение изображения по пути
-                    string imagePath = null;
-                    try
-                    {
-                        imagePath = await _articulDataService.GetFileEskizForKod(kodd);
-                        if (!string.IsNullOrEmpty(imagePath))
-                        {
-                            pictureBoxArticul.ImageLocation = imagePath;
-                        }
-                        else
-                        {
-                            pictureBoxArticul.ImageLocation = null;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}'");
-                        pictureBoxArticul.ImageLocation = null;
-                    }
+                    string imagePath = getImagePathTask.Result;
+                    pictureBoxArticul.ImageLocation = !string.IsNullOrEmpty(imagePath) ? imagePath : null;
 
                 }
             }
@@ -721,10 +706,7 @@ namespace SewingProduction.Features.Articul
                 mainForm.OpenForm(new CreateArticulMatrForm(CurrentUser.User));
                 /*using (CreateArticulMatrForm f = new CreateArticulMatrForm(_user))
                 { }*/
-
             }
-           
-
         }
     }
 }
