@@ -1299,7 +1299,7 @@ namespace SewingProduction.Features.Articul
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-1105, 201, 650, 400);
             layoutControl1.Root = layoutControlGroup1;
-            layoutControl1.Size = new Size(580, 289);
+            layoutControl1.Size = new Size(580, 293);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -1343,7 +1343,7 @@ namespace SewingProduction.Features.Articul
             customTabControlKomplNabor.Name = "customTabControlKomplNabor";
             customTabControlKomplNabor.ObjectName = null;
             customTabControlKomplNabor.SelectedTabPage = cTabPage1;
-            customTabControlKomplNabor.Size = new Size(576, 195);
+            customTabControlKomplNabor.Size = new Size(576, 199);
             customTabControlKomplNabor.TabIndex = 7;
             customTabControlKomplNabor.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { cTabPage1, cTabPage2 });
             // 
@@ -1351,7 +1351,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage1.Controls.Add(cGridKomplSost);
             cTabPage1.Name = "cTabPage1";
-            cTabPage1.Size = new Size(568, 165);
+            cTabPage1.Size = new Size(568, 169);
             cTabPage1.Text = "Состав комплекта";
             // 
             // cGridKomplSost
@@ -1362,7 +1362,7 @@ namespace SewingProduction.Features.Articul
             cGridKomplSost.Location = new Point(0, 0);
             cGridKomplSost.MainView = gridViewKomplSost;
             cGridKomplSost.Name = "cGridKomplSost";
-            cGridKomplSost.Size = new Size(568, 165);
+            cGridKomplSost.Size = new Size(568, 169);
             cGridKomplSost.TabIndex = 6;
             cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost });
             // 
@@ -1433,7 +1433,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage2.Controls.Add(cGridNaborSost);
             cTabPage2.Name = "cTabPage2";
-            cTabPage2.Size = new Size(574, 166);
+            cTabPage2.Size = new Size(574, 170);
             cTabPage2.Text = "Состав набора";
             // 
             // cGridNaborSost
@@ -1444,7 +1444,7 @@ namespace SewingProduction.Features.Articul
             cGridNaborSost.Location = new Point(0, 0);
             cGridNaborSost.MainView = gridViewNaborSost;
             cGridNaborSost.Name = "cGridNaborSost";
-            cGridNaborSost.Size = new Size(574, 166);
+            cGridNaborSost.Size = new Size(574, 170);
             cGridNaborSost.TabIndex = 1;
             cGridNaborSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNaborSost });
             // 
@@ -1576,7 +1576,7 @@ namespace SewingProduction.Features.Articul
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem4, layoutControlItem7, layoutControlItem2, layoutControlItem6, layoutControlItem5, layoutControlItem8 });
             layoutControlGroup1.Name = "Root";
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup1.Size = new Size(580, 289);
+            layoutControlGroup1.Size = new Size(580, 293);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -1584,7 +1584,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem1.Control = customTabControlKomplNabor;
             layoutControlItem1.Location = new Point(0, 90);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(580, 199);
+            layoutControlItem1.Size = new Size(580, 203);
             layoutControlItem1.Text = "SostKomplNabor";
             layoutControlItem1.TextVisible = false;
             // 
