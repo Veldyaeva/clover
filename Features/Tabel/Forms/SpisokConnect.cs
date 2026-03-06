@@ -325,7 +325,7 @@ namespace SewingProduction.Features.Tabel.Forms
             int rowHandle = view.FocusedRowHandle;
 
             // Проверяем условие для конкретной строки
-            if (rowHandle == 0) // Запрещаем редактирование первой строки
+            if (rowHandle == -1) // Запрещаем редактирование первой строки
             {
                 e.Allow = false; // Отменяем открытие редактора
             }

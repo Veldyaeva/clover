@@ -84,6 +84,7 @@ namespace SewingProduction.Core
                 GridLocalizer.Active = new CustomLocalizer();
 
                 Application.EnableVisualStyles();
+                EnsureSeasonImagesInRoaming();
                 Application.SetCompatibleTextRenderingDefault(false);
                 DapperMappings.Configure();
 
@@ -106,8 +107,6 @@ namespace SewingProduction.Core
                 Application.ApplicationExit += (_, __) => StopQN();
                 AppDomain.CurrentDomain.ProcessExit += (_, __) => StopQN();
                 AppDomain.CurrentDomain.DomainUnload += (_, __) => StopQN();
-
-                EnsureSeasonImagesInRoaming();
 
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
@@ -258,24 +257,25 @@ namespace SewingProduction.Core
 
         private static void EnsureSeasonImagesInRoaming()
         {
+            string sourceRoot = Path.Combine(AppContext.BaseDirectory, "SplashImages");
+            string destinationRoot = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "SewingProduction",
+                "SplashImages");
+
             try
             {
-                string sourceRoot = Path.Combine(AppContext.BaseDirectory, "SplashImages");
                 if (!Directory.Exists(sourceRoot))
                 {
                     return;
                 }
 
-                string SplashImages = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    "SewingProduction",
-                    "SplashImages");
-                Directory.CreateDirectory(SplashImages);
+                Directory.CreateDirectory(destinationRoot);
 
                 foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
                 {
                     string relativePath = Path.GetRelativePath(sourceRoot, sourceFile);
-                    string destinationFile = Path.Combine(SplashImages, relativePath);
+                    string destinationFile = Path.Combine(destinationRoot, relativePath);
                     string destinationDir = Path.GetDirectoryName(destinationFile);
                     if (!string.IsNullOrEmpty(destinationDir))
                     {
@@ -290,7 +290,13 @@ namespace SewingProduction.Core
             }
             catch (Exception ex)
             {
-                try { _ = _logger.LogErrorAsync(ex, "Failed to seed splash images to Roaming settings"); } catch { }
+                try
+                {
+                    _ = _logger.LogErrorAsync(
+                        ex,
+                        $"Failed to seed splash images. Source='{sourceRoot}', Destination='{destinationRoot}', Error='{ex.Message}'");
+                }
+                catch { }
             }
         }
 

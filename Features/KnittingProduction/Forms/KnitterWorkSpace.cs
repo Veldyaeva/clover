@@ -30,12 +30,14 @@ using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 using Label = System.Windows.Forms.Label;
 
 #nullable enable
@@ -487,6 +489,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
 
                 await LoadPlanForTabAsync(tab);
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(this, $"Ошибка доступа к базе данных при загрузке плана: {ex.Message}", "Ошибка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -1252,15 +1258,25 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // Затем — разделение записи в зависимости от введённого количества
             IReadOnlyList<PzvSplitResult> newIds = Array.Empty<PzvSplitResult>();
+            bool forceRowRefresh = false;
             if (currentRow?.pzvID > 0)
             {
                 if (defaultQty > 0)
                 {
                     if (qty <= defaultQty)
                     {
-                        // Факт меньше запланированного — mode = 1 c qtyFact
-                        newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
-                        Debug.WriteLine(string.Join(", ", newIds.Select(x => $"{x.Kind}:{x.NewPzvId}")));
+                        try
+                        {
+                            // Факт меньше или равен запланированному — mode = 1 c qtyFact
+                            newIds = await _orchestrator.SplitPzvByFactAsync(currentRow.pzvID, qty);
+                            Debug.WriteLine(string.Join(", ", newIds.Select(x => $"{x.Kind}:{x.NewPzvId}")));
+                        }
+                        catch (SqlException ex)
+                        {
+                            // При ошибке SQL (PZV_Split) не падаем, а принудительно перезагружаем текущую строку из БД
+                            Debug.WriteLine($"[KnitterWorkSpace] SplitPzvByFactAsync SQL error {ex.Number}: {ex.Message}");
+                            forceRowRefresh = true;
+                        }
                     }
                 }
             }
@@ -1270,32 +1286,40 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 int? preferDetailId = null;
 
-                if (newIds != null && newIds.Count > 0)
+                if (forceRowRefresh)
                 {
-                    // 1️ Пытаемся найти остаток
-                    var remainder = newIds.FirstOrDefault(x =>
-                        x != null &&
-                        string.Equals(x.Kind, "Remainder", StringComparison.OrdinalIgnoreCase));
-
-                    if (remainder != null && remainder.NewPzvId > 0)
-                    {
-                        // Есть остаток → фокус на нём
-                        preferDetailId = remainder.NewPzvId;
-                    }
-                    else
-                    {
-                        // 2️⃣ Остатка нет (remaining = 0) → остаёмся на исходной строке
-                        preferDetailId = currentRow?.pzvID;
-
-                        // 3️⃣ Fallback (на всякий случай)
-                        if (preferDetailId == null || preferDetailId <= 0)
-                            preferDetailId = newIds[0].NewPzvId;
-                    }
+                    // В случае ошибки split просто обновляем текущую строку/задание
+                    preferDetailId = currentRow?.pzvID;
                 }
                 else
                 {
-                    // Если split ничего не вернул — остаёмся на текущей строке
-                    preferDetailId = currentRow?.pzvID;
+                    if (newIds != null && newIds.Count > 0)
+                    {
+                        // 1️ Пытаемся найти остаток
+                        var remainder = newIds.FirstOrDefault(x =>
+                            x != null &&
+                            string.Equals(x.Kind, "Remainder", StringComparison.OrdinalIgnoreCase));
+
+                        if (remainder != null && remainder.NewPzvId > 0)
+                        {
+                            // Есть остаток - фокус на нём
+                            preferDetailId = remainder.NewPzvId;
+                        }
+                        else
+                        {
+                            // 2️ Остатка нет (remaining = 0) - остаёмся на исходной строке
+                            preferDetailId = currentRow?.pzvID;
+
+                            // 3️ Fallback (на всякий случай)
+                            if (preferDetailId == null || preferDetailId <= 0)
+                                preferDetailId = newIds[0].NewPzvId;
+                        }
+                    }
+                    else
+                    {
+                        // Если split ничего не вернул — остаёмся на текущей строке
+                        preferDetailId = currentRow?.pzvID;
+                    }
                 }
 
                 var refreshedPlan = await _orchestrator.GetPlanByTabAsync(tab, _currentShiftId, _currentKmaId, false, false, 14);
