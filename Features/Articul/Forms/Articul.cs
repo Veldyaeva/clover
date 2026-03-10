@@ -177,7 +177,7 @@ namespace SewingProduction.Features.Articul
                 #region галки с отделками
                 //галки вяз отделки
                 //архив
-                                // (желательно) чтобы при повторном вызове не плодились биндинги
+                // (желательно) чтобы при повторном вызове не плодились биндинги
                 chbIsUpak.DataBindings.Clear();
                 chbIsFurnit.DataBindings.Clear();
                 chkP.DataBindings.Clear();
@@ -301,7 +301,7 @@ namespace SewingProduction.Features.Articul
             }
             catch (Exception ex)
             {
-                 _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
+                _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
             }
 
@@ -350,8 +350,8 @@ namespace SewingProduction.Features.Articul
         }
         private void UpdateTabsVisibility()
         {
-            cTabPage1.PageVisible = bsSostKompl.Current != null;
-            cTabPage2.PageVisible = bsSostNabor.Current != null;
+            //cTabPage1.PageVisible = bsSostKompl.Current != null;
+            //cTabPage2.PageVisible = bsSostNabor.Current != null;
 
             // сделаем проверку Count/Rows.
         }
@@ -658,6 +658,11 @@ namespace SewingProduction.Features.Articul
         private void customSimpleButton7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            customButtonKart_Click(sender, EventArgs.Empty);
         }
     }
 }

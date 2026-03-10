@@ -7,6 +7,7 @@ using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,18 +16,63 @@ using static SewingProduction.Core.Models.ServiceBrokerModel;
 
 namespace SewingProduction.Core.services
 {
-    public class ServiceBrokerService
+    public class ServiceBrokerService: IDisposable, IAsyncDisposable
     {
         private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
+        private bool _disposed;
+        private SqlConnection? _connection;
+        private SqlCommand? _command;
+
         public ServiceBrokerService(DatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
         }
-//        public async Task<List<TableListenInfo>> GetObjectListForServiceBroker(string _objectName, CancellationToken cancellationToken)
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
+
+            if (disposing)
+            {
+                // освобождаем managed ресурсы
+                _command?.Dispose();
+                _connection?.Dispose();
+            }
+            _connection = null;
+            _disposed = true;
+        }
+
+        ServiceBrokerService()
+        { Dispose(false); }
+
+        public async ValueTask DisposeAsync()
+        {
+            if (_disposed) return;
+
+            try
+            {
+                if (_connection != null)
+                    await _connection.DisposeAsync();
+            }
+            finally
+            {
+                _connection = null;
+                _disposed = true;
+            }
+
+            GC.SuppressFinalize(this);
+        }
+        //        public async Task<List<TableListenInfo>> GetObjectListForServiceBroker(string _objectName, CancellationToken cancellationToken)
         public async Task<List<ServiceBrokerModel.TableListenInfo>> GetObjectListForServiceBroker(string _objectName, CancellationToken cancellationToken)
 
         {
