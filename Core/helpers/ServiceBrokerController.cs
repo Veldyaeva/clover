@@ -29,66 +29,69 @@ namespace SewingProduction.Core.helpers
 
         public async Task InitAsync(CancellationToken ct)
         {
-            //lock (_initLock)
-            //{
-            //    if (_initialized) return;
-            //    _initialized = true;
-            //}
-            if (_initialized)
-                return;
-
-            if (!ServiceBrokerSettings.Enabled)
-                return;
-
-            var sbSettings = SettingsManager.GetServiceBrokerSettings();
-            Coordinator = new EnhancedRefreshCoordinator(
-                reloadByObjectNameAsync: async (obj) => await _host.RestartDataByObjectNameAsync(obj, ct).ConfigureAwait(false),
-                debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
-                throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
-                maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
-                maxBatchSize: sbSettings.MaxBatchSize,
-                maxParallelReloads: sbSettings.MaxParallelReloads,
-                maxCascadeDepth: sbSettings.MaxCascadeDepth);
-
-            foreach (var kv in _host.RefreshPriorities ?? new Dictionary<string, int>())
-                Coordinator.SetPriority(kv.Key, kv.Value);
-
-            Helper = new ServiceBrokerHelper(
-                owner: _host,
-                loadByObjectAsync: (obj, token) => _host.LoadListenInfoByObjectNameAsync(obj, token))
-            {
-                UseSchemaInListenName = _host.UseSchemaInListenName
-            };
-
-            if (_host.IgnoredTables != null)
-            {
-                foreach (var t in _host.IgnoredTables.Where(x => !string.IsNullOrWhiteSpace(x)))
-                {
-                    var tt = t.Trim();
-                    Helper.IgnoredTables.Add(tt);
-                    if (!tt.Contains('.'))
-                        Helper.IgnoredTables.Add("dbo." + tt);
-                }
-            }
-
-            var objects = _host.ServiceBrokerObjects?
-                .Where(x => !string.IsNullOrWhiteSpace(x))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .ToList() ?? new List<string>();
-
-            if (objects.Count == 0)
-            {
-                Debug.WriteLine($"[{_host.ServiceBrokerFormName}] InitAsync called, but ServiceBrokerObjects is empty");
-                return;
-            }
-            _initialized = true;
-            await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
             lock (_initLock)
             {
-                if (_initialized) return;
+                if (_initialized)
+                    return;
                 _initialized = true;
             }
 
+            if (!ServiceBrokerSettings.Enabled)
+                return;
+            try
+            {
+                var sbSettings = SettingsManager.GetServiceBrokerSettings();
+                Coordinator = new EnhancedRefreshCoordinator(
+                    reloadByObjectNameAsync: async (obj) => await _host.RestartDataByObjectNameAsync(obj, ct).ConfigureAwait(false),
+                    debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
+                    throttle: sbSettings.ThrottleMs > 0 ? TimeSpan.FromMilliseconds(sbSettings.ThrottleMs) : null,
+                    maxWait: TimeSpan.FromMilliseconds(sbSettings.MaxWaitMs),
+                    maxBatchSize: sbSettings.MaxBatchSize,
+                    maxParallelReloads: sbSettings.MaxParallelReloads,
+                    maxCascadeDepth: sbSettings.MaxCascadeDepth);
+
+                foreach (var kv in _host.RefreshPriorities ?? new Dictionary<string, int>())
+                    Coordinator.SetPriority(kv.Key, kv.Value);
+
+                Helper = new ServiceBrokerHelper(
+                    owner: _host,
+                    loadByObjectAsync: (obj, token) => _host.LoadListenInfoByObjectNameAsync(obj, token))
+                {
+                    UseSchemaInListenName = _host.UseSchemaInListenName
+                };
+
+                if (_host.IgnoredTables != null)
+                {
+                    foreach (var t in _host.IgnoredTables.Where(x => !string.IsNullOrWhiteSpace(x)))
+                    {
+                        var tt = t.Trim();
+                        Helper.IgnoredTables.Add(tt);
+                        if (!tt.Contains('.'))
+                            Helper.IgnoredTables.Add("dbo." + tt);
+                    }
+                }
+
+                var objects = _host.ServiceBrokerObjects?
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList() ?? new List<string>();
+
+                if (objects.Count == 0)
+                {
+                    Debug.WriteLine($"[{_host.ServiceBrokerFormName}] InitAsync called, but ServiceBrokerObjects is empty");
+                    return;
+                }
+
+                await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
+            }
+            catch
+            {
+                lock (_initLock)
+                {
+                    _initialized = false;
+                }
+                throw;
+            }
         }
 
         /// <summary>

@@ -12,7 +12,8 @@ namespace SewingProduction
 {
     /// <summary>
     /// Тонкий адаптер SqlDependency (Query Notifications).
-    /// НЕ вызывает SqlDependency.Start/Stop (это делается один раз на процесс приложения).
+    /// Глобальный SqlDependency.Start/Stop выполняется лениво (при первом StartListening)
+    /// и один раз на процесс приложения.
     /// Делает только:
     /// - StartListening / StopListening
     /// - уведомление Changed при изменениях
@@ -25,6 +26,10 @@ namespace SewingProduction
             => Changed?.Invoke(table, changedFieldsCsv) ?? Task.CompletedTask;
 
         private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
+        private readonly string _ownerName;
+        private static readonly object _sqlDependencySync = new object();
+        private static int _sqlDependencyStarted;
+        private static string? _sqlDependencyConn;
 
         private SqlConnection? _connection;
         private SqlCommand? _command;
@@ -35,13 +40,15 @@ namespace SewingProduction
 
         private string _fields = "*";
         private string _table = "";
+        private DateTime _lastStartAttemptUtc = DateTime.MinValue;
+        private int _startRetryScheduled;
 
         private int _onChangeGate = 0;
 
         public ServiceBroker(object owner)
         {
-            // owner оставляем только чтобы не ломать текущие вызовы new ServiceBroker(this);
-            // В тонкой версии брокер не знает о форме и не вызывает её напрямую.
+            // owner сохраняем для диагностики источника подписок.
+            _ownerName = owner?.GetType().FullName ?? "<null>";
         }
 
         [Obsolete("SqlDependency.Start должен вызываться один раз на процесс (в Program/Main). Не вызывай это из форм/брокеров.")]
@@ -54,6 +61,7 @@ namespace SewingProduction
         {
             _brokerStopped = true;
             _flagStartListening = false;
+            Interlocked.Exchange(ref _startRetryScheduled, 0);
             StopListening();
         }
 
@@ -62,19 +70,47 @@ namespace SewingProduction
             if (string.IsNullOrWhiteSpace(table))
                 return;
 
-            _fields = string.IsNullOrWhiteSpace(fields) ? "*" : fields.Trim();
-            _table = table.Trim();
+            var requestedFields = string.IsNullOrWhiteSpace(fields) ? "*" : fields.Trim();
+            var requestedTable = table.Trim();
+
+            // Защита от лишних повторных вызовов StartListening извне
+            // (если уже подписаны на те же table/fields и соединение живое).
+            if (_flagStartListening &&
+                !_brokerStopped &&
+                _dependency != null &&
+                _connection != null &&
+                _connection.State == ConnectionState.Open &&
+                string.Equals(_fields, requestedFields, StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(_table, requestedTable, StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            // Минимальный интервал между попытками старта при нестабильной БД,
+            // чтобы не разгонять STARTED_OUTBOUND в цикле.
+            var nowUtc = DateTime.UtcNow;
+            if ((nowUtc - _lastStartAttemptUtc) < TimeSpan.FromSeconds(10))
+            {
+                Debug.WriteLine(
+                    $"[ServiceBroker] StartListening skipped by backoff: owner={_ownerName}, table={requestedTable}, fields={requestedFields}");
+                return;
+            }
+            _lastStartAttemptUtc = nowUtc;
+
+            _fields = requestedFields;
+            _table = requestedTable;
             _flagStartListening = true;
             _brokerStopped = false;
 
             try
             {
+                EnsureSqlDependencyStarted(_connectionString);
                 StopListening();
 
                 var fullTable = BuildQuotedTableName(_table);
                 var query = $"SELECT {_fields} FROM {fullTable}";
                 Debug.WriteLine(
-                    $"[ServiceBroker] StartListening: table={_table}, fields={_fields}, query={query}");
+                    $"[ServiceBroker] StartListening: owner={_ownerName}, table={_table}, fields={_fields}, query={query}");
 
                 _connection = new SqlConnection(_connectionString);
                 _command = new SqlCommand(query, _connection)
@@ -95,12 +131,51 @@ namespace SewingProduction
                 }
 
                 Debug.WriteLine(
-                    $"[ServiceBroker] Listening started: table={_table}, fields={_fields}, state={_connection.State}");
+                    $"[ServiceBroker] Listening started: owner={_ownerName}, table={_table}, fields={_fields}, state={_connection.State}");
+                Interlocked.Exchange(ref _startRetryScheduled, 0);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[ServiceBroker] StartListening error: {ex}");
+                Debug.WriteLine($"[ServiceBroker] StartListening error: owner={_ownerName}, table={_table}, fields={_fields}, error={ex}");
                 StopListening();
+                ScheduleStartRetry("start-error");
+            }
+        }
+        private static void EnsureSqlDependencyStarted(string connectionString)
+        {
+            if (Interlocked.CompareExchange(ref _sqlDependencyStarted, 1, 1) == 1)
+                return;
+
+            lock (_sqlDependencySync)
+            {
+                if (_sqlDependencyStarted == 1)
+                    return;
+
+                SqlDependency.Start(connectionString);
+                _sqlDependencyConn = connectionString;
+                _sqlDependencyStarted = 1;
+                Debug.WriteLine("[ServiceBroker] SqlDependency.Start initialized lazily.");
+
+                AppDomain.CurrentDomain.ProcessExit += (_, __) => StopSqlDependencyGlobal();
+                AppDomain.CurrentDomain.DomainUnload += (_, __) => StopSqlDependencyGlobal();
+                Application.ApplicationExit += (_, __) => StopSqlDependencyGlobal();
+            }
+        }
+
+        private static void StopSqlDependencyGlobal()
+        {
+            if (Interlocked.Exchange(ref _sqlDependencyStarted, 0) != 1)
+                return;
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(_sqlDependencyConn))
+                    SqlDependency.Stop(_sqlDependencyConn);
+            }
+            catch { }
+            finally
+            {
+                _sqlDependencyConn = null;
             }
         }
 
@@ -226,14 +301,40 @@ namespace SewingProduction
             }
         }
 
+        private void ScheduleStartRetry(string reason)
+        {
+            if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
+                return;
+
+            if (Interlocked.Exchange(ref _startRetryScheduled, 1) == 1)
+                return;
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                    if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
+                        return;
+
+                    Debug.WriteLine($"[ServiceBroker] Retry StartListening: owner={_ownerName}, table={_table}, reason={reason}");
+                    StartListening(_fields, _table);
+                }
+                catch { }
+                finally
+                {
+                    Interlocked.Exchange(ref _startRetryScheduled, 0);
+                }
+            });
+        }
+
         private static bool IsInvalidSubscription(SqlNotificationEventArgs e)
         {
             return e.Info == SqlNotificationInfo.Invalid
                 || e.Info == SqlNotificationInfo.Options
                 || e.Info == SqlNotificationInfo.Query
                 || e.Info == SqlNotificationInfo.Isolation
-                || e.Info == SqlNotificationInfo.TemplateLimit
-                || e.Info == SqlNotificationInfo.Error;
+                || e.Info == SqlNotificationInfo.TemplateLimit;
         }
 
         private static string BuildQuotedTableName(string tableOrSchemaTable)

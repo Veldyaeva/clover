@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.interfaces;
@@ -29,12 +30,17 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
           //  ThemeManager.UpdateTheme(this);
         }
         #region service broker
         private void OborudBrig_Load_1(object sender, EventArgs e)
         {
-         //   _serviceBroker.StartListening("*", "dbo.OborudBrig");
+            if (!flagStartListening)
+            {
+                _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
+                flagStartListening = true;
+            }
             gridOborud_Load(null, EventArgs.Empty);
         }
         // Интерфейс доступный сервис брокеру:
@@ -46,6 +52,21 @@ namespace SewingProduction.form
         public void UpdateDataInForm(string _table)
         {
             gridOborud_Load(null, EventArgs.Empty);
+        }
+
+        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
+        {
+            if (IsDisposed || Disposing)
+                return Task.CompletedTask;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                return Task.CompletedTask;
+            }
+
+            UpdateDataInForm(table);
+            return Task.CompletedTask;
         }
         #endregion
 
@@ -142,8 +163,8 @@ namespace SewingProduction.form
                 }
                 if (!flagStartListening)
                 {
-                    //_serviceBroker.StartListening("idOB, idZeh, kod_ob, count", "OborudBrig");
-                    //  flagStartListening = _serviceBroker.GetFlagStartListening();
+                    _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
+                    flagStartListening = true;
                 }
             }
         }
@@ -186,7 +207,8 @@ namespace SewingProduction.form
         }
         private void OborudBrig_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try { _serviceBroker?.StopListening(); } catch { }
+            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
+            try { _serviceBroker?.StopBroker(); } catch { }
         }
     }
 

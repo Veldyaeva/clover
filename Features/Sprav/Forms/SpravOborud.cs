@@ -1,7 +1,8 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -21,12 +22,14 @@ namespace SewingProduction.form
         int topRowIndex = 0;//верхний индекс 
         //если добавили поле в таблицу:
         bool flagAddDown = false;
+        bool flagStartListening = false;
         public SpravOborud(UserClass user) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravOborudDataService = new SpravOborudDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
            // ThemeManager.UpdateTheme(this);
         }
 
@@ -48,6 +51,21 @@ namespace SewingProduction.form
         public void UpdateDataInForm(string _table)
         {
             LoadData();
+        }
+
+        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
+        {
+            if (IsDisposed || Disposing)
+                return Task.CompletedTask;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                return Task.CompletedTask;
+            }
+
+            UpdateDataInForm(table);
+            return Task.CompletedTask;
         }
         #endregion
 
@@ -83,7 +101,11 @@ namespace SewingProduction.form
         private void oborudGrid_Load(object sender, EventArgs e)
         {
             LoadData();
-          //  _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
+            if (!flagStartListening)
+            {
+                _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
+                flagStartListening = true;
+            }
         }
 
 
@@ -268,7 +290,8 @@ namespace SewingProduction.form
         }
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
         {
-        //    _serviceBroker.StopBroker();
+            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
+            _serviceBroker.StopBroker();
         }
 
     }
