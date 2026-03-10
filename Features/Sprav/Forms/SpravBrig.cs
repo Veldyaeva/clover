@@ -75,7 +75,7 @@ namespace SewingProduction.form
             gridView1.OptionsView.ColumnAutoWidth = true;
             if (!flagStartListening)
             {
-                _serviceBroker.StartListening("id_brig,idZeh,n_brig,brig", "SpBrig");
+               // _serviceBroker.StartListening("id_brig,idZeh,n_brig,brig", "SpBrig");
                // flagStartListening = _serviceBroker.GetFlagStartListening();
             }
         }

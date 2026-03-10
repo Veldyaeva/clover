@@ -148,6 +148,7 @@ namespace SewingProduction.Core.helpers
                     Debug.WriteLine($"LOAD: method={m.DeclaringType?.FullName}.{m.Name}, target={target?.GetType().FullName ?? "<static>"}");
 
                     list = await _loadByObjectAsync(obj, ct).ConfigureAwait(false) ?? new List<TableListenInfo>();
+                    Debug.WriteLine($"[ServiceBrokerHelper] Source loaded: object={obj}, rows={list.Count}");
                 }
                 catch (Exception ex)
                 {
@@ -168,6 +169,8 @@ namespace SewingProduction.Core.helpers
             }
 
             RebuildIndex();
+            Debug.WriteLine(
+                $"[ServiceBrokerHelper] Rebuild completed: tables={_unionFieldsByTable.Count}, deps={_depsByTable.Count}, objects={_sourcesByObject.Count}");
             StartAllBrokers();
 
             // Регистрируем остановку всех брокеров при отмене токена

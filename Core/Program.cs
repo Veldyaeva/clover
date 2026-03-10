@@ -17,6 +17,7 @@ using SewingProduction.Models;
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Runtime.ExceptionServices;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -52,6 +53,7 @@ namespace SewingProduction.Core
         [STAThread]
         static void Main(string[] args)
         {
+            RegisterSqlFirstChanceTrace();
             //PrintDialogRunner.Instance = new DefaultPrintDialogRunner();
             //Debug.WriteLine(PrintDialogRunner.Instance.GetType().FullName);
             //PrintDialogRunner.Instance = new DefaultPrintDialogRunner();
@@ -165,6 +167,45 @@ namespace SewingProduction.Core
                 }
 
             }
+        }
+        [Conditional("DEBUG")]
+        private static void RegisterSqlFirstChanceTrace()
+        {
+            AppDomain.CurrentDomain.FirstChanceException += (_, e) =>
+            {
+                if (e?.Exception is not SqlException sqlEx)
+                    return;
+
+                var topStack = sqlEx.StackTrace;
+                if (!string.IsNullOrWhiteSpace(topStack))
+                {
+                    var nl = topStack.IndexOf('\n');
+                    if (nl > 0)
+                        topStack = topStack[..nl].Trim();
+                }
+
+                Debug.WriteLine(
+                    $"[SQL-FIRST-CHANCE] Number={sqlEx.Number}, State={sqlEx.State}, Class={sqlEx.Class}, " +
+                    $"Procedure={sqlEx.Procedure}, Line={sqlEx.LineNumber}, Message={sqlEx.Message}");
+                if (!string.IsNullOrWhiteSpace(topStack))
+                    Debug.WriteLine($"[SQL-FIRST-CHANCE] TopFrame={topStack}");
+
+                try
+                {
+                    var st = new StackTrace(fNeedFileInfo: false);
+                    var appFrame = st.GetFrames()?
+                        .Select(f => f.GetMethod())
+                        .FirstOrDefault(m =>
+                            m?.DeclaringType?.FullName?.StartsWith("SewingProduction.", StringComparison.Ordinal) == true);
+
+                    if (appFrame != null)
+                    {
+                        Debug.WriteLine(
+                            $"[SQL-FIRST-CHANCE] AppFrame={appFrame.DeclaringType!.FullName}.{appFrame.Name}");
+                    }
+                }
+                catch { }
+            };
         }
         private static string PickExistingSkinOrDefault(string? skinName, string defaultSkin)
         {

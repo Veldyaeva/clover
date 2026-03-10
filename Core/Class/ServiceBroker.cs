@@ -69,16 +69,18 @@ namespace SewingProduction
 
             try
             {
-                //Debug.WriteLine($"[ServiceBroker] StartListening: table={_table}, fields={_fields}");
                 StopListening();
 
                 var fullTable = BuildQuotedTableName(_table);
                 var query = $"SELECT {_fields} FROM {fullTable}";
+                Debug.WriteLine(
+                    $"[ServiceBroker] StartListening: table={_table}, fields={_fields}, query={query}");
 
                 _connection = new SqlConnection(_connectionString);
                 _command = new SqlCommand(query, _connection)
                 {
-                    Notification = null
+                    Notification = null,
+                    CommandTimeout = 120
                 };
 
                 _dependency = new SqlDependency(_command);
@@ -92,7 +94,8 @@ namespace SewingProduction
                     // no-op
                 }
 
-                //Debug.WriteLine($"[ServiceBroker] Listening started: table={_table}, fields={_fields}");
+                Debug.WriteLine(
+                    $"[ServiceBroker] Listening started: table={_table}, fields={_fields}, state={_connection.State}");
             }
             catch (Exception ex)
             {
@@ -159,7 +162,8 @@ namespace SewingProduction
 
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
-            //Debug.WriteLine($"[ServiceBroker] Notification: table={_table}, type={e.Type}, info={e.Info}, source={e.Source}");
+            Debug.WriteLine(
+                $"[ServiceBroker] Notification: table={_table}, fields={_fields}, type={e.Type}, info={e.Info}, source={e.Source}");
             // защита от параллельных вызовов
             if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
                 return;
@@ -172,7 +176,20 @@ namespace SewingProduction
                 if (_brokerStopped)
                     return;
 
-                // ВСЕГДА переподписываемся, если слушание активно
+                // Если подписка невалидна (SQL options/query restrictions),
+                // не запускаем бесконечный цикл мгновенных переподписок.
+                if (IsInvalidSubscription(e))
+                {
+                    _flagStartListening = false;
+                    _brokerStopped = true;
+                    Debug.WriteLine(
+                        $"[ServiceBroker] Subscription invalid. Listening stopped for table={_table}. " +
+                        $"type={e.Type}, info={e.Info}, source={e.Source}. " +
+                        "Fix SELECT/query notification prerequisites before restarting listening.");
+                    return;
+                }
+
+                // ВСЕГДА переподписываемся, если слушание активно и подписка валидна
                 if (_flagStartListening)
                     StartListening(_fields, _table);
 
@@ -207,6 +224,16 @@ namespace SewingProduction
             {
                 Interlocked.Exchange(ref _onChangeGate, 0);
             }
+        }
+
+        private static bool IsInvalidSubscription(SqlNotificationEventArgs e)
+        {
+            return e.Info == SqlNotificationInfo.Invalid
+                || e.Info == SqlNotificationInfo.Options
+                || e.Info == SqlNotificationInfo.Query
+                || e.Info == SqlNotificationInfo.Isolation
+                || e.Info == SqlNotificationInfo.TemplateLimit
+                || e.Info == SqlNotificationInfo.Error;
         }
 
         private static string BuildQuotedTableName(string tableOrSchemaTable)

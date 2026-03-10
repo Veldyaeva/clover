@@ -83,7 +83,7 @@ namespace SewingProduction.form
         private void oborudGrid_Load(object sender, EventArgs e)
         {
             LoadData();
-            _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
+          //  _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
         }
 
 

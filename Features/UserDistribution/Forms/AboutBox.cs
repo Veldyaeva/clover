@@ -107,8 +107,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private static string GetClickOnceProfileVersion()
         {
-            string profileFileName = Environment.Is64BitProcess ? "anyCPU.pubxml.user" : "ver.x32.pubxml.user";
-            string fallbackFileName = Environment.Is64BitProcess ? "anyCPU.pubxml" : "ver.x32.pubxml";
+            // .pubxml.user хранит служебные локальные данные VS и может не содержать версию.
+            // Для окна "О программе" читаем только реальные профили публикации.
+            string profileFileName = Environment.Is64BitProcess ? "anyCPU.pubxml" : "ver.x32.pubxml";
+            string fallbackFileName = Environment.Is64BitProcess ? "ver.x32.pubxml" : "anyCPU.pubxml";
 
             string profilePath = FindPublishProfilePath(profileFileName, fallbackFileName);
             if (string.IsNullOrWhiteSpace(profilePath) || !File.Exists(profilePath))
