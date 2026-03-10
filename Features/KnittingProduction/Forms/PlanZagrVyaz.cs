@@ -178,7 +178,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbService = new DbService(_dbHelper);
             _anService = new ArtNormRepository(_dbHelper);
             _sbService = new ServiceBrokerService(_dbHelper);
-          //  _sbController = new ServiceBrokerController(this);
+            _sbController = new ServiceBrokerController(this);
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();
 
