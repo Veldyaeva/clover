@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Org.BouncyCastle.Asn1.Ocsp;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.KnittingProduction.Models;
@@ -94,9 +94,22 @@ namespace SewingProduction.Core.services
                 // отмена — НЕ ошибка
                 return new List<TableListenInfo>();
             }
+            catch (SqlException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    $"[ServiceBrokerService] SqlException in getSQLObjectSource: obj={_objectName}, " +
+                    $"Number={ex.Number}, State={ex.State}, Class={ex.Class}, Procedure={ex.Procedure}, Line={ex.LineNumber}, " +
+                    $"Message={ex.Message}");
+                await _logger.LogErrorAsync(
+                    ex,
+                    $"Ошибка getSQLObjectSource: obj={_objectName}, Number={ex.Number}, State={ex.State}, Procedure={ex.Procedure}, Line={ex.LineNumber}");
+                return new List<TableListenInfo>();
+            }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных getSQLObjectSource");
+                System.Diagnostics.Debug.WriteLine(
+                    $"[ServiceBrokerService] Exception in getSQLObjectSource: obj={_objectName}, {ex}");
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных getSQLObjectSource: obj={_objectName}");
                 return new List<TableListenInfo>();
             }
         }

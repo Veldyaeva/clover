@@ -79,7 +79,7 @@ namespace SewingProduction.form
             gridViewZeh.OptionsView.ColumnAutoWidth = true;
             if (!flagStartListening)
             {
-                _serviceBroker.StartListening("idZeh,nameZeh,address,idProizv", "ZehList");
+              //  _serviceBroker.StartListening("idZeh,nameZeh,address,idProizv", "ZehList");
                // flagStartListening = _serviceBroker.GetFlagStartListening();
             }
         }

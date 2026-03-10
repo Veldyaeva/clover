@@ -34,7 +34,7 @@ namespace SewingProduction.form
         #region service broker
         private void OborudBrig_Load_1(object sender, EventArgs e)
         {
-            _serviceBroker.StartListening("*", "dbo.OborudBrig");
+         //   _serviceBroker.StartListening("*", "dbo.OborudBrig");
             gridOborud_Load(null, EventArgs.Empty);
         }
         // Интерфейс доступный сервис брокеру:

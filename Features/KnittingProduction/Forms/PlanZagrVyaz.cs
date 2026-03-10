@@ -1696,7 +1696,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Task bindingsTask = InitializeBindingsAsync();
                 await Task.WhenAll(bindingsTask);
 
-                await InitServiceBrokerAsync(_lifetimeCts.Token);
+           //     await InitServiceBrokerAsync(_lifetimeCts.Token);
                 await LoadPlanTotalHoursByKnitMachineDataAsync();
                 await LoadSmenZadanyVyazDataAsync();
                 Debug.WriteLine($"PlanZagrVyaz_Load completed");
@@ -4674,7 +4674,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 try { _lifetimeCts?.Cancel(); } catch { }
 
                 // Важно: дожидаемся корректного снятия SqlDependency/ServiceBroker диалогов.
-                await _sbController.DisposeAsync();
+              //  await _sbController.DisposeAsync();
             }
             catch (Exception ex)
             {
