@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -79,8 +79,8 @@ namespace SewingProduction.form
             gridViewZeh.OptionsView.ColumnAutoWidth = true;
             if (!flagStartListening)
             {
-              //  _serviceBroker.StartListening("idZeh,nameZeh,address,idProizv", "ZehList");
-               // flagStartListening = _serviceBroker.GetFlagStartListening();
+                _serviceBroker.StartListening("idZeh,nameZeh,address,idProizv", "ZehList");
+                flagStartListening = true;
             }
         }
         //Загрузка комбобокса виды производства:
@@ -243,7 +243,7 @@ namespace SewingProduction.form
         // Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.StopListening();
+            _serviceBroker.StopBroker();
         }
 
     }

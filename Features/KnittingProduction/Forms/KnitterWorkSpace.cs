@@ -1514,6 +1514,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _idleTimer.Dispose();
                 _shiftTimer.Stop();
                 _shiftTimer.Dispose();
+                _blinkCheckTimer.Stop();
+                _blinkCheckTimer.Dispose();
+                _blinkTimer.Stop();
+                _blinkTimer.Dispose();
             };
         }
 
@@ -1612,6 +1616,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             finally
             {
+                try
+                {
+                    if (_sbService != null)
+                        await _sbService.DisposeAsync();
+                }
+                catch { }
+                _sbService = null;
                 try { _sbCts?.Dispose(); } catch { }
                 _sbCts = null;
             }

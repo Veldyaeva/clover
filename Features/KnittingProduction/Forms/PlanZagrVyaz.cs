@@ -4674,7 +4674,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 try { _lifetimeCts?.Cancel(); } catch { }
 
                 // Важно: дожидаемся корректного снятия SqlDependency/ServiceBroker диалогов.
-              //  await _sbController.DisposeAsync();
+                await _sbController.DisposeAsync();
             }
             catch (Exception ex)
             {
@@ -4682,6 +4682,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             finally
             {
+                try { await _sbService.DisposeAsync(); } catch { }
                 try { _lifetimeCts?.Dispose(); } catch { }
                 _lifetimeCts = null;
 

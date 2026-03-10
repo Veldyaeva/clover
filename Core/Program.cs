@@ -164,6 +164,12 @@ namespace SewingProduction.Core
                 if (e?.Exception is not SqlException sqlEx)
                     return;
 
+                // Для SqlDependency Query Notifications SqlClient может бросать и сам
+                // перехватывать транзиентные first-chance (-2 timeout при регистрации,
+                // 2714 duplicate internal QN procedure). Не засоряем лог ими.
+                if (sqlEx.Number == -2 || sqlEx.Number == 2714)
+                    return;
+
                 var topStack = sqlEx.StackTrace;
                 if (!string.IsNullOrWhiteSpace(topStack))
                 {
@@ -184,7 +190,9 @@ namespace SewingProduction.Core
                     var appFrame = st.GetFrames()?
                         .Select(f => f.GetMethod())
                         .FirstOrDefault(m =>
-                            m?.DeclaringType?.FullName?.StartsWith("SewingProduction.", StringComparison.Ordinal) == true);
+                            m?.DeclaringType?.FullName?.StartsWith("SewingProduction.", StringComparison.Ordinal) == true &&
+                            !string.Equals(m.DeclaringType?.FullName, typeof(Program).FullName, StringComparison.Ordinal) &&
+                            !string.Equals(m.Name, "RegisterSqlFirstChanceTrace", StringComparison.Ordinal));
 
                     if (appFrame != null)
                     {
@@ -195,7 +203,7 @@ namespace SewingProduction.Core
                 catch { }
             };
         }
-        private static string PickExistingSkinOrDefault(string? skinName, string defaultSkin)
+        private static string PickExistingSkinOrDefault(string skinName, string defaultSkin)
         {
             if (!string.IsNullOrWhiteSpace(skinName) && SkinExists(skinName))
                 return skinName;

@@ -1,4 +1,4 @@
-﻿
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,6 +21,7 @@ namespace SewingProduction.form
         int topRowIndex = 0;//верхний индекс 
         //если добавили поле в таблицу:
         bool flagAddDown = false;
+        bool flagStartListening = false;
         public SpravOborud(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -83,7 +84,11 @@ namespace SewingProduction.form
         private void oborudGrid_Load(object sender, EventArgs e)
         {
             LoadData();
-          //  _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
+            if (!flagStartListening)
+            {
+                _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
+                flagStartListening = true;
+            }
         }
 
 
@@ -268,7 +273,7 @@ namespace SewingProduction.form
         }
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
         {
-        //    _serviceBroker.StopBroker();
+            _serviceBroker.StopBroker();
         }
 
     }

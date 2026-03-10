@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -34,7 +34,11 @@ namespace SewingProduction.form
         #region service broker
         private void OborudBrig_Load_1(object sender, EventArgs e)
         {
-         //   _serviceBroker.StartListening("*", "dbo.OborudBrig");
+            if (!flagStartListening)
+            {
+                _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
+                flagStartListening = true;
+            }
             gridOborud_Load(null, EventArgs.Empty);
         }
         // Интерфейс доступный сервис брокеру:
@@ -142,8 +146,8 @@ namespace SewingProduction.form
                 }
                 if (!flagStartListening)
                 {
-                    //_serviceBroker.StartListening("idOB, idZeh, kod_ob, count", "OborudBrig");
-                    //  flagStartListening = _serviceBroker.GetFlagStartListening();
+                    _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
+                    flagStartListening = true;
                 }
             }
         }
@@ -186,7 +190,7 @@ namespace SewingProduction.form
         }
         private void OborudBrig_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try { _serviceBroker?.StopListening(); } catch { }
+            try { _serviceBroker?.StopBroker(); } catch { }
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -75,8 +75,8 @@ namespace SewingProduction.form
             gridView1.OptionsView.ColumnAutoWidth = true;
             if (!flagStartListening)
             {
-               // _serviceBroker.StartListening("id_brig,idZeh,n_brig,brig", "SpBrig");
-               // flagStartListening = _serviceBroker.GetFlagStartListening();
+                _serviceBroker.StartListening("id_brig,idZeh,n_brig,brig", "SpBrig");
+                flagStartListening = true;
             }
         }
         //Загрузка комбобокса список цехов:
@@ -252,7 +252,7 @@ namespace SewingProduction.form
         //Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.StopListening();
+            _serviceBroker.StopBroker();
         }
 
     }

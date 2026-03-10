@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -156,11 +156,11 @@ namespace SewingProduction.form
 
             // Загружаем данные и запускаем прослушивание
             LoadData();
-            if (_servBrok)
+            if (_servBrok && !flagStartListening)
             {
-                flagStartListening = true; // Устанавливаем флаг прослушки
                 string columnsStr = string.Join(", ", fieldsQueryListSQL);
-             //   _serviceBroker.StartListening(columnsStr, tableString);
+                _serviceBroker.StartListening(columnsStr, tableString);
+                flagStartListening = true;
             }
         }
         private void LoadData()
@@ -387,12 +387,12 @@ namespace SewingProduction.form
         //закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (_servBrok)
-            //    _serviceBroker.StopBroker();
+            if (_servBrok)
+                _serviceBroker?.StopBroker();
         }
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
-            try { _serviceBroker?.StopListening(); } catch { }
+            try { _serviceBroker?.StopBroker(); } catch { }
             base.OnFormClosed(e);
         }
     }
