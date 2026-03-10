@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 //using DevExpress.XtraGrid.Localization;
@@ -58,6 +59,8 @@ namespace SewingProduction.form
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _servBrok = servBrok;
             _serviceBroker = _servBrok == true ? new ServiceBroker(this) : null;
+            if (_serviceBroker != null)
+                _serviceBroker.Changed += ServiceBrokerChangedAsync;
           //  ThemeManager.UpdateTheme(this);
             // Пользователь:
             _user = user;
@@ -98,6 +101,21 @@ namespace SewingProduction.form
         public void UpdateDataInForm(string _table)
         {
             LoadData();
+        }
+
+        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
+        {
+            if (IsDisposed || Disposing)
+                return Task.CompletedTask;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                return Task.CompletedTask;
+            }
+
+            UpdateDataInForm(table);
+            return Task.CompletedTask;
         }
         #endregion
         private void SpravForAll_Load(object sender, EventArgs e)
@@ -387,11 +405,13 @@ namespace SewingProduction.form
         //закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _serviceBroker?.Changed -= ServiceBrokerChangedAsync;
             if (_servBrok)
                 _serviceBroker?.StopBroker();
         }
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
+            try { _serviceBroker?.Changed -= ServiceBrokerChangedAsync; } catch { }
             try { _serviceBroker?.StopBroker(); } catch { }
             base.OnFormClosed(e);
         }

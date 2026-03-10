@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.interfaces;
@@ -29,6 +30,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
          //   ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
@@ -44,6 +46,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
         }
         private void SpravBrig_Load(object sender, EventArgs e)
         {
@@ -64,6 +67,21 @@ namespace SewingProduction.form
         public void UpdateDataInForm(string table = null)
         {
             gridControlSprav_Load(null, EventArgs.Empty);
+        }
+
+        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
+        {
+            if (IsDisposed || Disposing)
+                return Task.CompletedTask;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                return Task.CompletedTask;
+            }
+
+            UpdateDataInForm(table);
+            return Task.CompletedTask;
         }
         #endregion
         //Загрузка грида:
@@ -252,6 +270,7 @@ namespace SewingProduction.form
         //Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
             _serviceBroker.StopBroker();
         }
 

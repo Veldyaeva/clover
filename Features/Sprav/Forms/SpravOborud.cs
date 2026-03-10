@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
@@ -28,6 +29,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravOborudDataService = new SpravOborudDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
            // ThemeManager.UpdateTheme(this);
         }
 
@@ -49,6 +51,21 @@ namespace SewingProduction.form
         public void UpdateDataInForm(string _table)
         {
             LoadData();
+        }
+
+        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
+        {
+            if (IsDisposed || Disposing)
+                return Task.CompletedTask;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                return Task.CompletedTask;
+            }
+
+            UpdateDataInForm(table);
+            return Task.CompletedTask;
         }
         #endregion
 
@@ -273,6 +290,7 @@ namespace SewingProduction.form
         }
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
         {
+            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
             _serviceBroker.StopBroker();
         }
 

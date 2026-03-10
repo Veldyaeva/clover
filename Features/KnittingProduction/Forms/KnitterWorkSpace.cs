@@ -2467,7 +2467,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             if (_sbService == null)
             {
-                var dbHelper = new DatabaseHelper();
+                var dbHelper = new DatabaseHelper("ace");
                 _sbService = new ServiceBrokerService(dbHelper);
             }
 
