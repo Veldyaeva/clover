@@ -79,7 +79,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static DbService _dbService;
         private static MlService _mlService;
         private static ArtNormRepository _anService;
-        private static ServiceBrokerService _sbService;
+        private readonly ServiceBrokerService _sbService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
         //        private static BindingSourceHelper _bSHelper;
@@ -178,7 +178,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _dbService = new DbService(_dbHelper);
             _anService = new ArtNormRepository(_dbHelper);
             _sbService = new ServiceBrokerService(_dbHelper);
-            _sbController = new ServiceBrokerController(this);
+          //  _sbController = new ServiceBrokerController(this);
             _bulkHelper = new BulkHelper();
             _gridHelper = new GridHelper();
 

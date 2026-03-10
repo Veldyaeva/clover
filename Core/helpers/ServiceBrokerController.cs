@@ -34,6 +34,11 @@ namespace SewingProduction.Core.helpers
             //    if (_initialized) return;
             //    _initialized = true;
             //}
+            if (_initialized)
+                return;
+
+            if (!ServiceBrokerSettings.Enabled)
+                return;
 
             var sbSettings = SettingsManager.GetServiceBrokerSettings();
             Coordinator = new EnhancedRefreshCoordinator(
@@ -76,7 +81,7 @@ namespace SewingProduction.Core.helpers
                 Debug.WriteLine($"[{_host.ServiceBrokerFormName}] InitAsync called, but ServiceBrokerObjects is empty");
                 return;
             }
-
+            _initialized = true;
             await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
             lock (_initLock)
             {

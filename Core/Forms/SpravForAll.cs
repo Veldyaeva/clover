@@ -160,7 +160,7 @@ namespace SewingProduction.form
             {
                 flagStartListening = true; // Устанавливаем флаг прослушки
                 string columnsStr = string.Join(", ", fieldsQueryListSQL);
-                _serviceBroker.StartListening(columnsStr, tableString);
+             //   _serviceBroker.StartListening(columnsStr, tableString);
             }
         }
         private void LoadData()

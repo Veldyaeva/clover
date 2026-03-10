@@ -52,6 +52,8 @@ namespace SewingProduction.Core.Class.Settings
         /// Максимальная глубина каскадных обновлений для защиты от циклов.
         /// </summary>
         public int MaxCascadeDepth { get; set; } = 3;
+
+        public static bool Enabled { get; set; } = false;
     }
 
     public class UserSettings
