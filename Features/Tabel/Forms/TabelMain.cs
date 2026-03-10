@@ -247,8 +247,21 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnUin.FieldName = "uin";
             gridColumnTsplPart.FieldName = "tsplPart";
             gridColumnTsplPart.DisplayFormat.FormatString = "0.00";
+            gridColumnTsplPart.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            repositoryItemTextEdit1.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            repositoryItemTextEdit1.Mask.EditMask = "f2";                     // 2 знака после запятой
+            repositoryItemTextEdit1.Mask.UseMaskAsDisplayFormat = true;
+            repositoryItemTextEdit1.Mask.Culture = System.Globalization.CultureInfo.CurrentCulture;
+            repositoryItemTextEdit1.MaxLength = 4;
+            repositoryItemTextEdit2.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            repositoryItemTextEdit2.Mask.EditMask = "f2";                     // 2 знака после запятой
+            repositoryItemTextEdit2.Mask.UseMaskAsDisplayFormat = true;
+            repositoryItemTextEdit2.Mask.Culture = System.Globalization.CultureInfo.CurrentCulture;
+            repositoryItemTextEdit2.MaxLength = 4;
             gridColumnTsplPartOf.FieldName = "tsplPartOf";
-            gridColumnTsplPartOf.DisplayFormat.FormatString = "{0:0.00#;0:#;#}";
+            gridColumnTsplPartOf.DisplayFormat.FormatString = "0.00";
+            gridColumnTsplPartOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+
             gridColumnCheckIncludePlan.FieldName = "ts_plan";
             gridColumnPodrTableID.FieldName = "podrTableID";
             gridColumnFio.Width = 90;
@@ -615,14 +628,14 @@ namespace SewingProduction.Features.Tabel.Forms
                 return;
 
             }
-            if (view.FocusedColumn.FieldName.StartsWith("tsplPart") || view.FocusedColumn.FieldName.StartsWith("tsplPartOf"))
-            {
-                if (char.IsDigit(e.KeyChar))
-                {
-                    HandleRateDigitSimple(view, e.KeyChar);
-                    e.Handled = true; // Обработали сами
-                }
-            }
+            //if (view.FocusedColumn.FieldName.StartsWith("tsplPart") || view.FocusedColumn.FieldName.StartsWith("tsplPartOf"))
+            //{
+            //    if (char.IsDigit(e.KeyChar))
+            //    {
+            //        HandleRateDigitSimple(view, e.KeyChar);
+            //        e.Handled = true; // Обработали сами
+            //    }
+            //}
             if (view.FocusedColumn != null &&
                 view.FocusedColumn.FieldName.StartsWith("d"))
             {
@@ -719,95 +732,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 view.SetRowCellValue(rowHandle, column, "");
             }
         }
-        private void HandleRateDigitSimple(GridView view, char digit)
-        {
-            if (!char.IsDigit(digit)) return;
-
-            int rowHandle = view.FocusedRowHandle;
-            GridColumn col = view.FocusedColumn;
-
-            string s = GetRateText(view.GetRowCellValue(rowHandle, col)); // "", "0", "1", "1.2", ...
-
-            // 1) Если пусто - вводим целую часть (только 0/1/2)
-            if (s.Length == 0)
-            {
-                if (digit != '0' && digit != '1' && digit != '2') return;
-                SetRateIfValid(view, rowHandle, col, digit.ToString());
-                return;
-            }
-
-            // 2) Особый случай: сейчас "0" без точки
-            if (s == "0")
-            {
-                if (digit == '0' || digit == '1' || digit == '2')
-                {
-                    // хотим начать ввод целой части заново: 0 -> 1 / 2 / 0
-                    SetRateIfValid(view, rowHandle, col, digit.ToString());
-                }
-                else
-                {
-                    // хотим ввести дробь: 0 + 5 => 0.5
-                    SetRateIfValid(view, rowHandle, col, "0." + digit);
-                }
-                return;
-            }
-
-            // 3) Если точки нет - начинаем дробную часть автоматически
-            if (!s.Contains("."))
-            {
-                // если целая часть 2 - дробь только 0
-                if (s == "2" && digit != '0') return;
-
-                SetRateIfValid(view, rowHandle, col, s + "." + digit);
-                return;
-            }
-
-            // 4) Точка есть - дописываем дробь (до 2 цифр)
-            int fracLen = s.Length - s.IndexOf('.') - 1;
-
-            if (fracLen >= 2)
-            {
-                // уже 2 цифры дроби -> начинаем новый ввод с этой цифры (0/1/2)
-                if (digit != '0' && digit != '1' && digit != '2') return;
-                SetRateIfValid(view, rowHandle, col, digit.ToString());
-                return;
-            }
-
-            // если целая часть 2 - дробь только 0
-            if (s.StartsWith("2.") && digit != '0') return;
-
-            SetRateIfValid(view, rowHandle, col, s + digit);
-        }
-        private static string GetRateText(object value)
-        {
-            if (value == null || value == DBNull.Value) return "";
-
-            if (value is decimal d)
-            {
-                // 1.00 -> "1", 1.50 -> "1.5", 0.50 -> "0.5"
-                return d.ToString("0.################", CultureInfo.InvariantCulture);
-            }
-
-            // на всякий случай
-            return value.ToString().Trim().Replace(',', '.');
-        }
-
-        private void SetRateIfValid(GridView view, int rowHandle, GridColumn col, string s)
-        {
-            // "1." тут не бывает, но на всякий случай:
-            if (s.EndsWith(".")) s = s.TrimEnd('.');
-
-            if (!decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out var rate))
-                return;
-
-            if (rate < 0m || rate > 2.00m)
-                return;
-
-            view.SetRowCellValue(rowHandle, col, rate);
-
-            // если хочешь автопереход при 2 знаках:
-            // if (s.Contains(".") && (s.Length - s.IndexOf('.') - 1) == 2) MoveToNextCell(view);
-        }
+       
         private void MoveToNextCell(GridView view)
         {
             // Переходим к следующей ячейке справа
@@ -847,7 +772,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 int podrTableId = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "podrTableID"));
                 UpdateDayTimeSheetInDataBase(columnName, value, recordId, podrTableId);
             }
-           
+
         }
         public async void UpdateCheckBoxInDataBase(int id, string fieldName, int value, string fio, int tabno)
         {
@@ -873,7 +798,7 @@ namespace SewingProduction.Features.Tabel.Forms
             }
             else
             {
-                
+
                 string query = $"update tabel_sp set {fieldName} = {value},tsPlPart = 0 where id = {id}";
                 _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { });
                 using (var prichIskl = new ChoosePrich(id, tabno, fio))
@@ -910,6 +835,10 @@ namespace SewingProduction.Features.Tabel.Forms
                 int grId = Convert.ToInt32(lookUpEditGr.EditValue);
                 int groupId = Convert.ToInt32(lookUpEditGroup.EditValue);
                 string query = null;
+                if (fieldName == "tsplPart" || fieldName == "tsplPartOf")
+                {
+                    value = value.Replace(',', '.');
+                }
                 if (podrTableId == 19)
                 {
                     query = $"update tabel_sp set {fieldName} = '{value}' where id = {id} ";
@@ -1406,6 +1335,25 @@ namespace SewingProduction.Features.Tabel.Forms
 
             UpdateCheckBoxInDataBase(recordId, "ts_plan", valueChecked, fio, tabno);
 
+        }
+
+        private void gridView1_ShownEditor(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridView1_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (gridView1.FocusedColumn != gridColumnTsplPart && gridView1.FocusedColumn != gridColumnTsplPartOf) return;
+
+            if (decimal.TryParse(e.Value?.ToString(), out decimal val))
+            {
+                if (val < 0m || val > 2.00m)
+                {
+                    e.Valid = false;
+                    e.ErrorText = "Допустимый диапазон 0.00 – 2.00";
+                }
+            }
         }
     }
 }

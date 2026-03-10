@@ -33,10 +33,10 @@ namespace SewingProduction.Features.Articul
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue3 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Articul));
             grColKomplHasDifference = new DevExpress.XtraGrid.Columns.GridColumn();
             grColKomplSostSost = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,54 +50,6 @@ namespace SewingProduction.Features.Articul
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            chbArh = new CustomCheckBox();
-            chbKombIzd = new CustomCheckBox();
-            chbKombDet = new CustomCheckBox();
-            customLabel19 = new CustomLabel();
-            txbNDS = new CustomTextBox();
-            customLabel18 = new CustomLabel();
-            txbKodTnved = new CustomTextBox();
-            customLabel17 = new CustomLabel();
-            txbScNomer = new CustomTextBox();
-            mtbDateOpis = new CustomMaskedTextBox();
-            customLabel16 = new CustomLabel();
-            customLabel15 = new CustomLabel();
-            txbRazmPrint = new CustomTextBox();
-            customLabel14 = new CustomLabel();
-            txbRazm = new CustomTextBox();
-            customLabel13 = new CustomLabel();
-            txbSost3 = new CustomTextBox();
-            customLabel12 = new CustomLabel();
-            txbSost2 = new CustomTextBox();
-            customLabel11 = new CustomLabel();
-            txbSost = new CustomTextBox();
-            customLabel10 = new CustomLabel();
-            txbOpiGost = new CustomTextBox();
-            customLabel9 = new CustomLabel();
-            txbNameGost = new CustomTextBox();
-            customLabel8 = new CustomLabel();
-            customLabel7 = new CustomLabel();
-            txbIdGost = new CustomTextBox();
-            customLabel6 = new CustomLabel();
-            txbGrup = new CustomTextBox();
-            customLabel5 = new CustomLabel();
-            txbGrupMenName = new CustomTextBox();
-            customLabel4 = new CustomLabel();
-            txbCountry = new CustomTextBox();
-            customLabel3 = new CustomLabel();
-            txbAssort = new CustomTextBox();
-            customLabel2 = new CustomLabel();
-            txbTM = new CustomTextBox();
-            customLabel1 = new CustomLabel();
-            txbSeason = new CustomTextBox();
-            pictureBoxArticul = new System.Windows.Forms.PictureBox();
-            label3 = new CustomLabel();
-            txbMod = new CustomTextBox();
-            label2 = new CustomLabel();
-            txbArticul = new CustomTextBox();
-            txbPo = new CustomTextBox();
-            label1 = new CustomLabel();
-            txbKod = new CustomTextBox();
             bsArticul = new System.Windows.Forms.BindingSource(components);
             customButtonCopy = new CustomSimpleButton();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -135,8 +87,6 @@ namespace SewingProduction.Features.Articul
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            lContrBoxMainInfo = new DevExpress.XtraLayout.LayoutControl();
-            Root = new DevExpress.XtraLayout.LayoutControlGroup();
             cgbTkanPurpose = new System.Windows.Forms.GroupBox();
             txbOpis_t7 = new CustomTextBox();
             txbOpis_t6 = new CustomTextBox();
@@ -273,10 +223,11 @@ namespace SewingProduction.Features.Articul
             customLabel41 = new CustomLabel();
             txbSebz = new CustomTextBox();
             customLabel40 = new CustomLabel();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            articulControl1 = new SewingProduction.Features.Articul.Forms.ArticulControl();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
@@ -298,9 +249,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).BeginInit();
-            lContrBoxMainInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             cgbTkanPurpose.SuspendLayout();
             cgbKfKach.SuspendLayout();
             cgbBrakPercent.SuspendLayout();
@@ -446,666 +394,6 @@ namespace SewingProduction.Features.Articul
             gridColumn6.VisibleIndex = 5;
             gridColumn6.Width = 23;
             // 
-            // chbArh
-            // 
-            chbArh.AutoSize = true;
-            chbArh.Enabled = false;
-            chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            chbArh.Font = new Font("Arial", 10F);
-            // chbArh.ForeColor = Color.FromArgb(72, 61, 139);
-            chbArh.Location = new Point(1054, 6);
-            chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            chbArh.Name = "chbArh";
-            chbArh.Size = new Size(64, 20);
-            chbArh.TabIndex = 49;
-            chbArh.Text = "Архив";
-            chbArh.UseVisualStyleBackColor = true;
-            // 
-            // chbKombIzd
-            // 
-            chbKombIzd.AutoSize = true;
-            chbKombIzd.Enabled = false;
-            chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            chbKombIzd.Font = new Font("Arial", 10F);
-            // chbKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
-            chbKombIzd.Location = new Point(937, 6);
-            chbKombIzd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            chbKombIzd.Name = "chbKombIzd";
-            chbKombIzd.Size = new Size(94, 20);
-            chbKombIzd.TabIndex = 48;
-            chbKombIzd.Text = "Комб. изд.";
-            chbKombIzd.UseVisualStyleBackColor = true;
-            // 
-            // chbKombDet
-            // 
-            chbKombDet.AutoSize = true;
-            chbKombDet.Enabled = false;
-            chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            chbKombDet.Font = new Font("Arial", 10F);
-            // chbKombDet.ForeColor = Color.FromArgb(72, 61, 139);
-            chbKombDet.Location = new Point(824, 7);
-            chbKombDet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            chbKombDet.Name = "chbKombDet";
-            chbKombDet.Size = new Size(93, 20);
-            chbKombDet.TabIndex = 47;
-            chbKombDet.Text = "Комб. дет.";
-            chbKombDet.UseVisualStyleBackColor = true;
-            // 
-            // customLabel19
-            // 
-            customLabel19.AutoSize = true;
-            customLabel19.BackColor = Color.Transparent;
-            customLabel19.Font = new Font("Arial", 8.25F);
-            // customLabel19.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel19.Location = new Point(1051, 228);
-            customLabel19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel19.Name = "customLabel19";
-            customLabel19.Size = new Size(29, 14);
-            customLabel19.TabIndex = 46;
-            customLabel19.Text = "НДС";
-            // 
-            // txbNDS
-            // 
-            txbNDS.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbNDS.Enabled = false;
-            txbNDS.ErrorColor = Color.Red;
-            txbNDS.ErrorMessage = null;
-            txbNDS.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbNDS.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNDS.Location = new Point(1086, 227);
-            txbNDS.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNDS.Name = "txbNDS";
-            txbNDS.Size = new Size(64, 15);
-            txbNDS.TabIndex = 45;
-            // 
-            // customLabel18
-            // 
-            customLabel18.AutoSize = true;
-            customLabel18.BackColor = Color.Transparent;
-            customLabel18.Font = new Font("Arial", 8.25F);
-            // customLabel18.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel18.Location = new Point(776, 228);
-            customLabel18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel18.Name = "customLabel18";
-            customLabel18.Size = new Size(61, 14);
-            customLabel18.TabIndex = 44;
-            customLabel18.Text = "Код ТНВэд";
-            // 
-            // txbKodTnved
-            // 
-            txbKodTnved.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKodTnved.ErrorColor = Color.Red;
-            txbKodTnved.ErrorMessage = null;
-            txbKodTnved.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbKodTnved.Location = new Point(850, 227);
-            txbKodTnved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKodTnved.Name = "txbKodTnved";
-            txbKodTnved.ReadOnly = true;
-            txbKodTnved.Size = new Size(196, 15);
-            txbKodTnved.TabIndex = 43;
-            // 
-            // customLabel17
-            // 
-            customLabel17.AutoSize = true;
-            customLabel17.BackColor = Color.Transparent;
-            customLabel17.Font = new Font("Arial", 8.25F);
-            customLabel17.Location = new Point(458, 228);
-            customLabel17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel17.Name = "customLabel17";
-            customLabel17.Size = new Size(69, 14);
-            customLabel17.TabIndex = 42;
-            customLabel17.Text = "Сертификат";
-            // 
-            // txbScNomer
-            // 
-            txbScNomer.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbScNomer.ErrorColor = Color.Red;
-            txbScNomer.ErrorMessage = null;
-            txbScNomer.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbScNomer.Location = new Point(540, 227);
-            txbScNomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbScNomer.Name = "txbScNomer";
-            txbScNomer.ReadOnly = true;
-            txbScNomer.Size = new Size(223, 15);
-            txbScNomer.TabIndex = 41;
-            // 
-            // mtbDateOpis
-            // 
-            mtbDateOpis.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            mtbDateOpis.Font = new Font("Arial", 10F);
-            mtbDateOpis.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            mtbDateOpis.Location = new Point(371, 227);
-            mtbDateOpis.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            mtbDateOpis.Mask = "00/00/0000";
-            mtbDateOpis.Name = "mtbDateOpis";
-            mtbDateOpis.ReadOnly = true;
-            mtbDateOpis.Size = new Size(85, 16);
-            mtbDateOpis.TabIndex = 40;
-            mtbDateOpis.ValidatingType = typeof(System.DateTime);
-            // 
-            // customLabel16
-            // 
-            customLabel16.AutoSize = true;
-            customLabel16.BackColor = Color.Transparent;
-            customLabel16.Font = new Font("Arial", 8.25F);
-            // customLabel16.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel16.Location = new Point(269, 228);
-            customLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel16.Name = "customLabel16";
-            customLabel16.Size = new Size(84, 14);
-            customLabel16.TabIndex = 39;
-            customLabel16.Text = "Дата описания";
-            // 
-            // customLabel15
-            // 
-            customLabel15.AutoSize = true;
-            customLabel15.BackColor = Color.Transparent;
-            customLabel15.Font = new Font("Arial", 8.25F);
-            // customLabel15.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel15.Location = new Point(796, 178);
-            customLabel15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel15.Name = "customLabel15";
-            customLabel15.Size = new Size(64, 14);
-            customLabel15.TabIndex = 37;
-            customLabel15.Text = "при печати";
-            // 
-            // txbRazmPrint
-            // 
-            txbRazmPrint.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbRazmPrint.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbRazmPrint.ErrorColor = Color.Red;
-            txbRazmPrint.ErrorMessage = null;
-            txbRazmPrint.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbRazmPrint.Location = new Point(877, 178);
-            txbRazmPrint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbRazmPrint.Name = "txbRazmPrint";
-            txbRazmPrint.ReadOnly = true;
-            txbRazmPrint.Size = new Size(273, 15);
-            txbRazmPrint.TabIndex = 36;
-            // 
-            // customLabel14
-            // 
-            customLabel14.AutoSize = true;
-            customLabel14.BackColor = Color.Transparent;
-            customLabel14.Font = new Font("Arial", 8.25F);
-            // customLabel14.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel14.Location = new Point(509, 178);
-            customLabel14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel14.Name = "customLabel14";
-            customLabel14.Size = new Size(44, 14);
-            customLabel14.TabIndex = 35;
-            customLabel14.Text = "Размер";
-            // 
-            // txbRazm
-            // 
-            txbRazm.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbRazm.ErrorColor = Color.Red;
-            txbRazm.ErrorMessage = null;
-            txbRazm.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbRazm.Location = new Point(567, 178);
-            txbRazm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbRazm.Name = "txbRazm";
-            txbRazm.ReadOnly = true;
-            txbRazm.Size = new Size(196, 15);
-            txbRazm.TabIndex = 34;
-            // 
-            // customLabel13
-            // 
-            customLabel13.AutoSize = true;
-            customLabel13.BackColor = Color.Transparent;
-            customLabel13.Font = new Font("Arial", 8.25F);
-            // customLabel13.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel13.Location = new Point(424, 153);
-            customLabel13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel13.Name = "customLabel13";
-            customLabel13.Size = new Size(117, 14);
-            customLabel13.TabIndex = 33;
-            customLabel13.Text = "подклад\\наполнитель";
-            // 
-            // txbSost3
-            // 
-            txbSost3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSost3.ErrorColor = Color.Red;
-            txbSost3.ErrorMessage = null;
-            txbSost3.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbSost3.Location = new Point(567, 153);
-            txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSost3.Name = "txbSost3";
-            txbSost3.ReadOnly = true;
-            txbSost3.Size = new Size(583, 15);
-            txbSost3.TabIndex = 32;
-            // 
-            // customLabel12
-            // 
-            customLabel12.AutoSize = true;
-            customLabel12.BackColor = Color.Transparent;
-            customLabel12.Font = new Font("Arial", 8.25F);
-            // customLabel12.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel12.Location = new Point(504, 130);
-            customLabel12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel12.Name = "customLabel12";
-            customLabel12.Size = new Size(48, 14);
-            customLabel12.TabIndex = 31;
-            customLabel12.Text = "отделка";
-            // 
-            // txbSost2
-            // 
-            txbSost2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSost2.ErrorColor = Color.Red;
-            txbSost2.ErrorMessage = null;
-            txbSost2.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            txbSost2.Location = new Point(567, 129);
-            txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSost2.Name = "txbSost2";
-            txbSost2.ReadOnly = true;
-            txbSost2.Size = new Size(583, 15);
-            txbSost2.TabIndex = 30;
-            // 
-            // customLabel11
-            // 
-            customLabel11.AutoSize = true;
-            customLabel11.BackColor = Color.Transparent;
-            customLabel11.Font = new Font("Arial", 8.25F);
-            // customLabel11.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel11.Location = new Point(458, 105);
-            customLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel11.Name = "customLabel11";
-            customLabel11.Size = new Size(88, 14);
-            customLabel11.TabIndex = 29;
-            customLabel11.Text = "Состав основн.";
-            // 
-            // txbSost
-            // 
-            txbSost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSost.ErrorColor = Color.Red;
-            txbSost.ErrorMessage = null;
-            txbSost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbSost.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSost.Location = new Point(567, 105);
-            txbSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSost.Name = "txbSost";
-            txbSost.ReadOnly = true;
-            txbSost.Size = new Size(583, 15);
-            txbSost.TabIndex = 28;
-            // 
-            // customLabel10
-            // 
-            customLabel10.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            customLabel10.AutoSize = true;
-            customLabel10.BackColor = Color.Transparent;
-            customLabel10.Font = new Font("Arial", 8.25F);
-            // customLabel10.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel10.Location = new Point(820, 60);
-            customLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel10.Name = "customLabel10";
-            customLabel10.Size = new Size(55, 14);
-            customLabel10.TabIndex = 27;
-            customLabel10.Text = "описание";
-            // 
-            // txbOpiGost
-            // 
-            txbOpiGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbOpiGost.ErrorColor = Color.Red;
-            txbOpiGost.ErrorMessage = null;
-            txbOpiGost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbOpiGost.ForeColor = Color.FromArgb(72, 61, 139);
-            txbOpiGost.Location = new Point(824, 81);
-            txbOpiGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbOpiGost.Name = "txbOpiGost";
-            txbOpiGost.ReadOnly = true;
-            txbOpiGost.Size = new Size(327, 15);
-            txbOpiGost.TabIndex = 26;
-            // 
-            // customLabel9
-            // 
-            customLabel9.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            customLabel9.AutoSize = true;
-            customLabel9.BackColor = Color.Transparent;
-            customLabel9.Font = new Font("Arial", 8.25F);
-            // customLabel9.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel9.Location = new Point(615, 60);
-            customLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel9.Name = "customLabel9";
-            customLabel9.Size = new Size(39, 14);
-            customLabel9.TabIndex = 25;
-            customLabel9.Text = "номер";
-            // 
-            // txbNameGost
-            // 
-            txbNameGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbNameGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbNameGost.ErrorColor = Color.Red;
-            txbNameGost.ErrorMessage = null;
-            txbNameGost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbNameGost.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNameGost.Location = new Point(618, 81);
-            txbNameGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNameGost.Name = "txbNameGost";
-            txbNameGost.ReadOnly = true;
-            txbNameGost.Size = new Size(198, 15);
-            txbNameGost.TabIndex = 24;
-            // 
-            // customLabel8
-            // 
-            customLabel8.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            customLabel8.AutoSize = true;
-            customLabel8.BackColor = Color.Transparent;
-            customLabel8.Font = new Font("Arial", 8.25F);
-            // customLabel8.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel8.Location = new Point(564, 60);
-            customLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel8.Name = "customLabel8";
-            customLabel8.Size = new Size(24, 14);
-            customLabel8.TabIndex = 23;
-            customLabel8.Text = "код";
-            // 
-            // customLabel7
-            // 
-            customLabel7.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            customLabel7.AutoSize = true;
-            customLabel7.BackColor = Color.Transparent;
-            customLabel7.Font = new Font("Arial", 8.25F);
-            // customLabel7.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel7.Location = new Point(522, 81);
-            customLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel7.Name = "customLabel7";
-            customLabel7.Size = new Size(33, 14);
-            customLabel7.TabIndex = 22;
-            customLabel7.Text = "ГОСТ";
-            // 
-            // txbIdGost
-            // 
-            txbIdGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbIdGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbIdGost.ErrorColor = Color.Red;
-            txbIdGost.ErrorMessage = null;
-            txbIdGost.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbIdGost.ForeColor = Color.FromArgb(72, 61, 139);
-            txbIdGost.Location = new Point(567, 81);
-            txbIdGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbIdGost.Name = "txbIdGost";
-            txbIdGost.ReadOnly = true;
-            txbIdGost.Size = new Size(44, 15);
-            txbIdGost.TabIndex = 21;
-            // 
-            // customLabel6
-            // 
-            customLabel6.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            customLabel6.AutoSize = true;
-            customLabel6.BackColor = Color.Transparent;
-            customLabel6.Font = new Font("Arial", 8.25F);
-            // customLabel6.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel6.Location = new Point(465, 37);
-            customLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel6.Name = "customLabel6";
-            customLabel6.Size = new Size(81, 14);
-            customLabel6.TabIndex = 20;
-            customLabel6.Text = "Наим. по ГОСТ";
-            // 
-            // txbGrup
-            // 
-            txbGrup.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbGrup.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbGrup.ErrorColor = Color.Red;
-            txbGrup.ErrorMessage = null;
-            txbGrup.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbGrup.ForeColor = Color.FromArgb(72, 61, 139);
-            txbGrup.Location = new Point(567, 37);
-            txbGrup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbGrup.Name = "txbGrup";
-            txbGrup.ReadOnly = true;
-            txbGrup.Size = new Size(292, 15);
-            txbGrup.TabIndex = 19;
-            // 
-            // customLabel5
-            // 
-            customLabel5.AutoSize = true;
-            customLabel5.BackColor = Color.Transparent;
-            customLabel5.Font = new Font("Arial", 8.25F);
-            // customLabel5.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel5.Location = new Point(269, 202);
-            customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel5.Name = "customLabel5";
-            customLabel5.Size = new Size(59, 14);
-            customLabel5.TabIndex = 18;
-            customLabel5.Text = "Менеджер";
-            // 
-            // txbGrupMenName
-            // 
-            txbGrupMenName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbGrupMenName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbGrupMenName.ErrorColor = Color.Red;
-            txbGrupMenName.ErrorMessage = null;
-            txbGrupMenName.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbGrupMenName.ForeColor = Color.FromArgb(72, 61, 139);
-            txbGrupMenName.Location = new Point(336, 202);
-            txbGrupMenName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbGrupMenName.Name = "txbGrupMenName";
-            txbGrupMenName.ReadOnly = true;
-            txbGrupMenName.Size = new Size(427, 15);
-            txbGrupMenName.TabIndex = 17;
-            // 
-            // customLabel4
-            // 
-            customLabel4.AutoSize = true;
-            customLabel4.BackColor = Color.Transparent;
-            customLabel4.Font = new Font("Arial", 8.25F);
-            // customLabel4.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel4.Location = new Point(284, 178);
-            customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel4.Name = "customLabel4";
-            customLabel4.Size = new Size(44, 14);
-            customLabel4.TabIndex = 16;
-            customLabel4.Text = "Страна";
-            // 
-            // txbCountry
-            // 
-            txbCountry.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbCountry.ErrorColor = Color.Red;
-            txbCountry.ErrorMessage = null;
-            txbCountry.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbCountry.ForeColor = Color.FromArgb(72, 61, 139);
-            txbCountry.Location = new Point(336, 178);
-            txbCountry.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbCountry.Name = "txbCountry";
-            txbCountry.ReadOnly = true;
-            txbCountry.Size = new Size(147, 15);
-            txbCountry.TabIndex = 15;
-            // 
-            // customLabel3
-            // 
-            customLabel3.AutoSize = true;
-            customLabel3.BackColor = Color.Transparent;
-            customLabel3.Font = new Font("Arial", 8.25F);
-            // customLabel3.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel3.Location = new Point(281, 149);
-            customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel3.Name = "customLabel3";
-            customLabel3.Size = new Size(47, 14);
-            customLabel3.TabIndex = 14;
-            customLabel3.Text = "Ассорт.";
-            // 
-            // txbAssort
-            // 
-            txbAssort.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbAssort.ErrorColor = Color.Red;
-            txbAssort.ErrorMessage = null;
-            txbAssort.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbAssort.ForeColor = Color.FromArgb(72, 61, 139);
-            txbAssort.Location = new Point(336, 150);
-            txbAssort.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbAssort.Name = "txbAssort";
-            txbAssort.ReadOnly = true;
-            txbAssort.Size = new Size(86, 15);
-            txbAssort.TabIndex = 13;
-            // 
-            // customLabel2
-            // 
-            customLabel2.AutoSize = true;
-            customLabel2.BackColor = Color.Transparent;
-            customLabel2.Font = new Font("Arial", 8.25F);
-            // customLabel2.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel2.Location = new Point(307, 95);
-            customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel2.Name = "customLabel2";
-            customLabel2.Size = new Size(21, 14);
-            customLabel2.TabIndex = 12;
-            customLabel2.Text = "ТМ";
-            // 
-            // txbTM
-            // 
-            txbTM.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbTM.ErrorColor = Color.Red;
-            txbTM.ErrorMessage = null;
-            txbTM.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbTM.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTM.Location = new Point(336, 93);
-            txbTM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTM.Name = "txbTM";
-            txbTM.ReadOnly = true;
-            txbTM.Size = new Size(86, 15);
-            txbTM.TabIndex = 11;
-            // 
-            // customLabel1
-            // 
-            customLabel1.AutoSize = true;
-            customLabel1.BackColor = Color.Transparent;
-            customLabel1.Font = new Font("Arial", 8.25F);
-            // customLabel1.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel1.Location = new Point(291, 121);
-            customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel1.Name = "customLabel1";
-            customLabel1.Size = new Size(37, 14);
-            customLabel1.TabIndex = 10;
-            customLabel1.Text = "Сезон";
-            // 
-            // txbSeason
-            // 
-            txbSeason.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbSeason.ErrorColor = Color.Red;
-            txbSeason.ErrorMessage = null;
-            txbSeason.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbSeason.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSeason.Location = new Point(336, 121);
-            txbSeason.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbSeason.Name = "txbSeason";
-            txbSeason.ReadOnly = true;
-            txbSeason.Size = new Size(86, 15);
-            txbSeason.TabIndex = 9;
-            // 
-            // pictureBoxArticul
-            // 
-            pictureBoxArticul.Location = new Point(7, 3);
-            pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            pictureBoxArticul.Name = "pictureBoxArticul";
-            pictureBoxArticul.Size = new Size(261, 239);
-            pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            pictureBoxArticul.TabIndex = 8;
-            pictureBoxArticul.TabStop = false;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Arial", 8.25F);
-            // label3.ForeColor = Color.FromArgb(0, 0, 0);
-            label3.Location = new Point(283, 66);
-            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(45, 14);
-            label3.TabIndex = 6;
-            label3.Text = "Модель";
-            // 
-            // txbMod
-            // 
-            txbMod.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbMod.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbMod.ErrorColor = Color.Red;
-            txbMod.ErrorMessage = null;
-            txbMod.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbMod.ForeColor = Color.FromArgb(72, 61, 139);
-            txbMod.Location = new Point(336, 66);
-            txbMod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbMod.MinimumSize = new Size(120, 15);
-            txbMod.Name = "txbMod";
-            txbMod.ReadOnly = true;
-            txbMod.Size = new Size(120, 15);
-            txbMod.TabIndex = 5;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Arial", 8.25F);
-            // label2.ForeColor = Color.FromArgb(0, 0, 0);
-            label2.Location = new Point(278, 39);
-            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 14);
-            label2.TabIndex = 4;
-            label2.Text = "Артикул";
-            // 
-            // txbArticul
-            // 
-            txbArticul.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbArticul.ErrorColor = Color.Red;
-            txbArticul.ErrorMessage = null;
-            txbArticul.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbArticul.ForeColor = Color.FromArgb(72, 61, 139);
-            txbArticul.Location = new Point(336, 39);
-            txbArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbArticul.MinimumSize = new Size(120, 15);
-            txbArticul.Name = "txbArticul";
-            txbArticul.ReadOnly = true;
-            txbArticul.Size = new Size(120, 15);
-            txbArticul.TabIndex = 3;
-            // 
-            // txbPo
-            // 
-            txbPo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbPo.ErrorColor = Color.Red;
-            txbPo.ErrorMessage = null;
-            txbPo.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbPo.ForeColor = Color.FromArgb(72, 61, 139);
-            txbPo.Location = new Point(427, 12);
-            txbPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbPo.Name = "txbPo";
-            txbPo.ReadOnly = true;
-            txbPo.Size = new Size(27, 15);
-            txbPo.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Arial", 8.25F);
-            // label1.ForeColor = Color.FromArgb(0, 0, 0);
-            label1.Location = new Point(302, 12);
-            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(26, 14);
-            label1.TabIndex = 1;
-            label1.Text = "Код";
-            // 
-            // txbKod
-            // 
-            txbKod.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            txbKod.ErrorColor = Color.Red;
-            txbKod.ErrorMessage = null;
-            txbKod.Font = new Font("Arial", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            // txbKod.ForeColor = Color.FromArgb(72, 61, 139);
-            txbKod.Location = new Point(335, 12);
-            txbKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbKod.Name = "txbKod";
-            txbKod.ReadOnly = true;
-            txbKod.Size = new Size(86, 15);
-            txbKod.TabIndex = 0;
-            // 
             // customButtonCopy
             // 
             customButtonCopy.Appearance.Font = new Font("Arial", 10F);
@@ -1135,7 +423,7 @@ namespace SewingProduction.Features.Articul
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-1105, 201, 650, 400);
             layoutControl1.Root = layoutControlGroup1;
-            layoutControl1.Size = new Size(580, 261);
+            layoutControl1.Size = new Size(580, 265);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -1174,13 +462,12 @@ namespace SewingProduction.Features.Articul
             // 
             // customTabControlKomplNabor
             // 
-            // customTabControlKomplNabor.Appearance.ForeColor = Color.FromArgb(105, 75, 45);
             customTabControlKomplNabor.Appearance.Options.UseForeColor = true;
             customTabControlKomplNabor.Location = new Point(2, 92);
             customTabControlKomplNabor.Name = "customTabControlKomplNabor";
             customTabControlKomplNabor.ObjectName = null;
             customTabControlKomplNabor.SelectedTabPage = cTabPage1;
-            customTabControlKomplNabor.Size = new Size(576, 167);
+            customTabControlKomplNabor.Size = new Size(576, 171);
             customTabControlKomplNabor.TabIndex = 7;
             customTabControlKomplNabor.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { cTabPage1, cTabPage2 });
             // 
@@ -1188,7 +475,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage1.Controls.Add(cGridKomplSost);
             cTabPage1.Name = "cTabPage1";
-            cTabPage1.Size = new Size(568, 137);
+            cTabPage1.Size = new Size(568, 141);
             cTabPage1.Text = "Состав комплекта";
             // 
             // cGridKomplSost
@@ -1199,28 +486,26 @@ namespace SewingProduction.Features.Articul
             cGridKomplSost.Location = new Point(0, 0);
             cGridKomplSost.MainView = gridViewKomplSost;
             cGridKomplSost.Name = "cGridKomplSost";
-            cGridKomplSost.Size = new Size(568, 137);
+            cGridKomplSost.Size = new Size(568, 141);
             cGridKomplSost.TabIndex = 6;
             cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost });
             // 
             // gridViewKomplSost
             // 
-            // gridViewKomplSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewKomplSost.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewKomplSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewKomplSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
             gridViewKomplSost.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKomplSost.Appearance.FocusedRow.Options.UseFont = true;
             gridViewKomplSost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grColKomplSostKod, grColKomplSostGrup_k, grColKomplSostGrup, grColKomplSostArticul, grColKomplSostRazm, grColKomplSostSost, grColKomplHasDifference });
-            gridFormatRule3.Column = grColKomplHasDifference;
-            gridFormatRule3.ColumnApplyTo = grColKomplSostSost;
-            gridFormatRule3.Name = "Format0";
-            formatConditionRuleValue3.Appearance.BackColor = Color.FromArgb(255, 192, 192);
-            formatConditionRuleValue3.Appearance.Options.UseBackColor = true;
-            formatConditionRuleValue3.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue3.Value1 = true;
-            gridFormatRule3.Rule = formatConditionRuleValue3;
-            gridViewKomplSost.FormatRules.Add(gridFormatRule3);
+            gridFormatRule1.Column = grColKomplHasDifference;
+            gridFormatRule1.ColumnApplyTo = grColKomplSostSost;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.BackColor = Color.FromArgb(255, 192, 192);
+            formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.Value1 = true;
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridViewKomplSost.FormatRules.Add(gridFormatRule1);
             gridViewKomplSost.GridControl = cGridKomplSost;
             gridViewKomplSost.Name = "gridViewKomplSost";
             gridViewKomplSost.OptionsBehavior.Editable = false;
@@ -1272,7 +557,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage2.Controls.Add(cGridNaborSost);
             cTabPage2.Name = "cTabPage2";
-            cTabPage2.Size = new Size(568, 137);
+            cTabPage2.Size = new Size(568, 141);
             cTabPage2.Text = "Состав набора";
             // 
             // cGridNaborSost
@@ -1283,15 +568,13 @@ namespace SewingProduction.Features.Articul
             cGridNaborSost.Location = new Point(0, 0);
             cGridNaborSost.MainView = gridViewNaborSost;
             cGridNaborSost.Name = "cGridNaborSost";
-            cGridNaborSost.Size = new Size(568, 137);
+            cGridNaborSost.Size = new Size(568, 141);
             cGridNaborSost.TabIndex = 1;
             cGridNaborSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNaborSost });
             // 
             // gridViewNaborSost
             // 
-            // gridViewNaborSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewNaborSost.Appearance.EvenRow.Options.UseBackColor = true;
-            // gridViewNaborSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
             gridViewNaborSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
             gridViewNaborSost.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewNaborSost.Appearance.FocusedRow.Options.UseFont = true;
@@ -1418,7 +701,7 @@ namespace SewingProduction.Features.Articul
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem4, layoutControlItem7, layoutControlItem2, layoutControlItem6, layoutControlItem5, layoutControlItem8 });
             layoutControlGroup1.Name = "Root";
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup1.Size = new Size(580, 261);
+            layoutControlGroup1.Size = new Size(580, 265);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -1426,7 +709,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem1.Control = customTabControlKomplNabor;
             layoutControlItem1.Location = new Point(0, 90);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(580, 171);
+            layoutControlItem1.Size = new Size(580, 175);
             layoutControlItem1.Text = "SostKomplNabor";
             layoutControlItem1.TextVisible = false;
             // 
@@ -1486,77 +769,6 @@ namespace SewingProduction.Features.Articul
             layoutControlItem8.Text = "Del";
             layoutControlItem8.TextVisible = false;
             // 
-            // lContrBoxMainInfo
-            // 
-            lContrBoxMainInfo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            lContrBoxMainInfo.BackColor = Color.Transparent;
-            lContrBoxMainInfo.Controls.Add(customLabel10);
-            lContrBoxMainInfo.Controls.Add(chbArh);
-            lContrBoxMainInfo.Controls.Add(customLabel9);
-            lContrBoxMainInfo.Controls.Add(customLabel8);
-            lContrBoxMainInfo.Controls.Add(pictureBoxArticul);
-            lContrBoxMainInfo.Controls.Add(chbKombIzd);
-            lContrBoxMainInfo.Controls.Add(txbKod);
-            lContrBoxMainInfo.Controls.Add(chbKombDet);
-            lContrBoxMainInfo.Controls.Add(label1);
-            lContrBoxMainInfo.Controls.Add(customLabel19);
-            lContrBoxMainInfo.Controls.Add(txbTM);
-            lContrBoxMainInfo.Controls.Add(txbNDS);
-            lContrBoxMainInfo.Controls.Add(txbPo);
-            lContrBoxMainInfo.Controls.Add(customLabel18);
-            lContrBoxMainInfo.Controls.Add(txbArticul);
-            lContrBoxMainInfo.Controls.Add(txbKodTnved);
-            lContrBoxMainInfo.Controls.Add(label2);
-            lContrBoxMainInfo.Controls.Add(customLabel17);
-            lContrBoxMainInfo.Controls.Add(txbMod);
-            lContrBoxMainInfo.Controls.Add(txbScNomer);
-            lContrBoxMainInfo.Controls.Add(label3);
-            lContrBoxMainInfo.Controls.Add(mtbDateOpis);
-            lContrBoxMainInfo.Controls.Add(txbSeason);
-            lContrBoxMainInfo.Controls.Add(customLabel16);
-            lContrBoxMainInfo.Controls.Add(customLabel1);
-            lContrBoxMainInfo.Controls.Add(customLabel15);
-            lContrBoxMainInfo.Controls.Add(customLabel2);
-            lContrBoxMainInfo.Controls.Add(txbRazmPrint);
-            lContrBoxMainInfo.Controls.Add(txbAssort);
-            lContrBoxMainInfo.Controls.Add(customLabel14);
-            lContrBoxMainInfo.Controls.Add(customLabel3);
-            lContrBoxMainInfo.Controls.Add(txbRazm);
-            lContrBoxMainInfo.Controls.Add(txbCountry);
-            lContrBoxMainInfo.Controls.Add(customLabel13);
-            lContrBoxMainInfo.Controls.Add(customLabel4);
-            lContrBoxMainInfo.Controls.Add(txbSost3);
-            lContrBoxMainInfo.Controls.Add(txbGrupMenName);
-            lContrBoxMainInfo.Controls.Add(customLabel12);
-            lContrBoxMainInfo.Controls.Add(customLabel5);
-            lContrBoxMainInfo.Controls.Add(txbSost2);
-            lContrBoxMainInfo.Controls.Add(txbGrup);
-            lContrBoxMainInfo.Controls.Add(customLabel11);
-            lContrBoxMainInfo.Controls.Add(customLabel6);
-            lContrBoxMainInfo.Controls.Add(txbSost);
-            lContrBoxMainInfo.Controls.Add(txbIdGost);
-            lContrBoxMainInfo.Controls.Add(customLabel7);
-            lContrBoxMainInfo.Controls.Add(txbOpiGost);
-            lContrBoxMainInfo.Controls.Add(txbNameGost);
-            lContrBoxMainInfo.Location = new Point(589, 2);
-            lContrBoxMainInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            lContrBoxMainInfo.Name = "lContrBoxMainInfo";
-            lContrBoxMainInfo.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-650, 6, 650, 400);
-            lContrBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            lContrBoxMainInfo.Root = Root;
-            lContrBoxMainInfo.Size = new Size(1148, 249);
-            lContrBoxMainInfo.TabIndex = 31;
-            lContrBoxMainInfo.TabStop = false;
-            lContrBoxMainInfo.Text = "layoutControl1";
-            // 
-            // Root
-            // 
-            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            Root.GroupBordersVisible = false;
-            Root.Name = "Root";
-            Root.Size = new Size(1148, 249);
-            Root.TextVisible = false;
-            // 
             // cgbTkanPurpose
             // 
             cgbTkanPurpose.BackColor = Color.Transparent;
@@ -1580,7 +792,6 @@ namespace SewingProduction.Features.Articul
             txbOpis_t7.ErrorColor = Color.Red;
             txbOpis_t7.ErrorMessage = null;
             txbOpis_t7.Font = new Font("Arial", 9F);
-            // txbOpis_t7.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t7.Location = new Point(5, 181);
             txbOpis_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t7.Name = "txbOpis_t7";
@@ -1594,7 +805,6 @@ namespace SewingProduction.Features.Articul
             txbOpis_t6.ErrorColor = Color.Red;
             txbOpis_t6.ErrorMessage = null;
             txbOpis_t6.Font = new Font("Arial", 9F);
-            // txbOpis_t6.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t6.Location = new Point(5, 153);
             txbOpis_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t6.Name = "txbOpis_t6";
@@ -1608,7 +818,6 @@ namespace SewingProduction.Features.Articul
             txbOpis_t1.ErrorColor = Color.Red;
             txbOpis_t1.ErrorMessage = null;
             txbOpis_t1.Font = new Font("Arial", 9F);
-            // txbOpis_t1.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t1.Location = new Point(5, 17);
             txbOpis_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t1.Name = "txbOpis_t1";
@@ -1622,7 +831,6 @@ namespace SewingProduction.Features.Articul
             txbOpis_t5.ErrorColor = Color.Red;
             txbOpis_t5.ErrorMessage = null;
             txbOpis_t5.Font = new Font("Arial", 9F);
-            // txbOpis_t5.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t5.Location = new Point(5, 127);
             txbOpis_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t5.Name = "txbOpis_t5";
@@ -1636,7 +844,6 @@ namespace SewingProduction.Features.Articul
             txbOpis_t2.ErrorColor = Color.Red;
             txbOpis_t2.ErrorMessage = null;
             txbOpis_t2.Font = new Font("Arial", 9F);
-            // txbOpis_t2.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t2.Location = new Point(5, 45);
             txbOpis_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t2.Name = "txbOpis_t2";
@@ -1650,7 +857,6 @@ namespace SewingProduction.Features.Articul
             txbOpis_t4.ErrorColor = Color.Red;
             txbOpis_t4.ErrorMessage = null;
             txbOpis_t4.Font = new Font("Arial", 9F);
-            // txbOpis_t4.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t4.Location = new Point(5, 100);
             txbOpis_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t4.Name = "txbOpis_t4";
@@ -1664,7 +870,6 @@ namespace SewingProduction.Features.Articul
             txbOpis_t3.ErrorColor = Color.Red;
             txbOpis_t3.ErrorMessage = null;
             txbOpis_t3.Font = new Font("Arial", 9F);
-            // txbOpis_t3.ForeColor = Color.FromArgb(72, 61, 139);
             txbOpis_t3.Location = new Point(5, 73);
             txbOpis_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t3.Name = "txbOpis_t3";
@@ -1696,7 +901,6 @@ namespace SewingProduction.Features.Articul
             txbKfKach7.ErrorColor = Color.Red;
             txbKfKach7.ErrorMessage = null;
             txbKfKach7.Font = new Font("Arial", 9F);
-            // txbKfKach7.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach7.Location = new Point(5, 180);
             txbKfKach7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach7.Name = "txbKfKach7";
@@ -1710,7 +914,6 @@ namespace SewingProduction.Features.Articul
             txbKfKach6.ErrorColor = Color.Red;
             txbKfKach6.ErrorMessage = null;
             txbKfKach6.Font = new Font("Arial", 9F);
-            // txbKfKach6.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach6.Location = new Point(5, 152);
             txbKfKach6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach6.Name = "txbKfKach6";
@@ -1724,7 +927,6 @@ namespace SewingProduction.Features.Articul
             txbKfKach5.ErrorColor = Color.Red;
             txbKfKach5.ErrorMessage = null;
             txbKfKach5.Font = new Font("Arial", 9F);
-            // txbKfKach5.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach5.Location = new Point(5, 126);
             txbKfKach5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach5.Name = "txbKfKach5";
@@ -1738,7 +940,6 @@ namespace SewingProduction.Features.Articul
             txbKfKach4.ErrorColor = Color.Red;
             txbKfKach4.ErrorMessage = null;
             txbKfKach4.Font = new Font("Arial", 9F);
-            // txbKfKach4.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach4.Location = new Point(5, 99);
             txbKfKach4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach4.Name = "txbKfKach4";
@@ -1752,7 +953,6 @@ namespace SewingProduction.Features.Articul
             txbKfKach3.ErrorColor = Color.Red;
             txbKfKach3.ErrorMessage = null;
             txbKfKach3.Font = new Font("Arial", 9F);
-            // txbKfKach3.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach3.Location = new Point(5, 72);
             txbKfKach3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach3.Name = "txbKfKach3";
@@ -1766,7 +966,6 @@ namespace SewingProduction.Features.Articul
             txbKfKach2.ErrorColor = Color.Red;
             txbKfKach2.ErrorMessage = null;
             txbKfKach2.Font = new Font("Arial", 9F);
-            // txbKfKach2.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach2.Location = new Point(5, 44);
             txbKfKach2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach2.Name = "txbKfKach2";
@@ -1780,7 +979,6 @@ namespace SewingProduction.Features.Articul
             txbKfKach1.ErrorColor = Color.Red;
             txbKfKach1.ErrorMessage = null;
             txbKfKach1.Font = new Font("Arial", 9F);
-            // txbKfKach1.ForeColor = Color.FromArgb(72, 61, 139);
             txbKfKach1.Location = new Point(5, 16);
             txbKfKach1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach1.Name = "txbKfKach1";
@@ -1811,7 +1009,6 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent7.ErrorColor = Color.Red;
             txtBrakPercent7.ErrorMessage = null;
             txtBrakPercent7.Font = new Font("Arial", 9F);
-            // txtBrakPercent7.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent7.Location = new Point(3, 182);
             txtBrakPercent7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent7.Name = "txtBrakPercent7";
@@ -1825,7 +1022,6 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent6.ErrorColor = Color.Red;
             txtBrakPercent6.ErrorMessage = null;
             txtBrakPercent6.Font = new Font("Arial", 9F);
-            // txtBrakPercent6.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent6.Location = new Point(3, 154);
             txtBrakPercent6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent6.Name = "txtBrakPercent6";
@@ -1839,7 +1035,6 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent1.ErrorColor = Color.Red;
             txtBrakPercent1.ErrorMessage = null;
             txtBrakPercent1.Font = new Font("Arial", 9F);
-            // txtBrakPercent1.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent1.Location = new Point(4, 18);
             txtBrakPercent1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent1.Name = "txtBrakPercent1";
@@ -1853,7 +1048,6 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent5.ErrorColor = Color.Red;
             txtBrakPercent5.ErrorMessage = null;
             txtBrakPercent5.Font = new Font("Arial", 9F);
-            // txtBrakPercent5.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent5.Location = new Point(3, 128);
             txtBrakPercent5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent5.Name = "txtBrakPercent5";
@@ -1867,7 +1061,6 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent2.ErrorColor = Color.Red;
             txtBrakPercent2.ErrorMessage = null;
             txtBrakPercent2.Font = new Font("Arial", 9F);
-            // txtBrakPercent2.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent2.Location = new Point(4, 46);
             txtBrakPercent2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent2.Name = "txtBrakPercent2";
@@ -1881,7 +1074,6 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent4.ErrorColor = Color.Red;
             txtBrakPercent4.ErrorMessage = null;
             txtBrakPercent4.Font = new Font("Arial", 9F);
-            // txtBrakPercent4.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent4.Location = new Point(2, 101);
             txtBrakPercent4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent4.Name = "txtBrakPercent4";
@@ -1895,7 +1087,6 @@ namespace SewingProduction.Features.Articul
             txtBrakPercent3.ErrorColor = Color.Red;
             txtBrakPercent3.ErrorMessage = null;
             txtBrakPercent3.Font = new Font("Arial", 9F);
-            // txtBrakPercent3.ForeColor = Color.FromArgb(72, 61, 139);
             txtBrakPercent3.Location = new Point(3, 74);
             txtBrakPercent3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent3.Name = "txtBrakPercent3";
@@ -1925,7 +1116,6 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t7.ErrorColor = Color.Red;
             txbTkanSeb_t7.ErrorMessage = null;
             txbTkanSeb_t7.Font = new Font("Arial", 9F);
-            // txbTkanSeb_t7.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t7.Location = new Point(5, 181);
             txbTkanSeb_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t7.Name = "txbTkanSeb_t7";
@@ -1939,7 +1129,6 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t6.ErrorColor = Color.Red;
             txbTkanSeb_t6.ErrorMessage = null;
             txbTkanSeb_t6.Font = new Font("Arial", 9F);
-            // txbTkanSeb_t6.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t6.Location = new Point(5, 153);
             txbTkanSeb_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t6.Name = "txbTkanSeb_t6";
@@ -1953,7 +1142,6 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t1.ErrorColor = Color.Red;
             txbTkanSeb_t1.ErrorMessage = null;
             txbTkanSeb_t1.Font = new Font("Arial", 9F);
-            // txbTkanSeb_t1.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t1.Location = new Point(5, 17);
             txbTkanSeb_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t1.Name = "txbTkanSeb_t1";
@@ -1967,7 +1155,6 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t5.ErrorColor = Color.Red;
             txbTkanSeb_t5.ErrorMessage = null;
             txbTkanSeb_t5.Font = new Font("Arial", 9F);
-            // txbTkanSeb_t5.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t5.Location = new Point(5, 127);
             txbTkanSeb_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t5.Name = "txbTkanSeb_t5";
@@ -1981,7 +1168,6 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t2.ErrorColor = Color.Red;
             txbTkanSeb_t2.ErrorMessage = null;
             txbTkanSeb_t2.Font = new Font("Arial", 9F);
-            // txbTkanSeb_t2.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t2.Location = new Point(5, 45);
             txbTkanSeb_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t2.Name = "txbTkanSeb_t2";
@@ -1995,7 +1181,6 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t4.ErrorColor = Color.Red;
             txbTkanSeb_t4.ErrorMessage = null;
             txbTkanSeb_t4.Font = new Font("Arial", 9F);
-            // txbTkanSeb_t4.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t4.Location = new Point(5, 100);
             txbTkanSeb_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t4.Name = "txbTkanSeb_t4";
@@ -2009,7 +1194,6 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t3.ErrorColor = Color.Red;
             txbTkanSeb_t3.ErrorMessage = null;
             txbTkanSeb_t3.Font = new Font("Arial", 9F);
-            // txbTkanSeb_t3.ForeColor = Color.FromArgb(72, 61, 139);
             txbTkanSeb_t3.Location = new Point(5, 73);
             txbTkanSeb_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t3.Name = "txbTkanSeb_t3";
@@ -2039,7 +1223,6 @@ namespace SewingProduction.Features.Articul
             txbNorm_t7.ErrorColor = Color.Red;
             txbNorm_t7.ErrorMessage = null;
             txbNorm_t7.Font = new Font("Arial", 9F);
-            // txbNorm_t7.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t7.Location = new Point(5, 177);
             txbNorm_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t7.Name = "txbNorm_t7";
@@ -2053,7 +1236,6 @@ namespace SewingProduction.Features.Articul
             txbNorm_t6.ErrorColor = Color.Red;
             txbNorm_t6.ErrorMessage = null;
             txbNorm_t6.Font = new Font("Arial", 9F);
-            // txbNorm_t6.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t6.Location = new Point(5, 149);
             txbNorm_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t6.Name = "txbNorm_t6";
@@ -2067,7 +1249,6 @@ namespace SewingProduction.Features.Articul
             txbNorm_t1.ErrorColor = Color.Red;
             txbNorm_t1.ErrorMessage = null;
             txbNorm_t1.Font = new Font("Arial", 9F);
-            // txbNorm_t1.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t1.Location = new Point(5, 13);
             txbNorm_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t1.Name = "txbNorm_t1";
@@ -2081,7 +1262,6 @@ namespace SewingProduction.Features.Articul
             txbNorm_t5.ErrorColor = Color.Red;
             txbNorm_t5.ErrorMessage = null;
             txbNorm_t5.Font = new Font("Arial", 9F);
-            // txbNorm_t5.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t5.Location = new Point(5, 123);
             txbNorm_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t5.Name = "txbNorm_t5";
@@ -2095,7 +1275,6 @@ namespace SewingProduction.Features.Articul
             txbNorm_t2.ErrorColor = Color.Red;
             txbNorm_t2.ErrorMessage = null;
             txbNorm_t2.Font = new Font("Arial", 9F);
-            // txbNorm_t2.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t2.Location = new Point(5, 41);
             txbNorm_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t2.Name = "txbNorm_t2";
@@ -2109,7 +1288,6 @@ namespace SewingProduction.Features.Articul
             txbNorm_t4.ErrorColor = Color.Red;
             txbNorm_t4.ErrorMessage = null;
             txbNorm_t4.Font = new Font("Arial", 9F);
-            // txbNorm_t4.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t4.Location = new Point(5, 96);
             txbNorm_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t4.Name = "txbNorm_t4";
@@ -2123,7 +1301,6 @@ namespace SewingProduction.Features.Articul
             txbNorm_t3.ErrorColor = Color.Red;
             txbNorm_t3.ErrorMessage = null;
             txbNorm_t3.Font = new Font("Arial", 9F);
-            // txbNorm_t3.ForeColor = Color.FromArgb(72, 61, 139);
             txbNorm_t3.Location = new Point(5, 69);
             txbNorm_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t3.Name = "txbNorm_t3";
@@ -2154,7 +1331,6 @@ namespace SewingProduction.Features.Articul
             txbBrak7.ErrorColor = Color.Red;
             txbBrak7.ErrorMessage = null;
             txbBrak7.Font = new Font("Arial", 9F);
-            // txbBrak7.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak7.Location = new Point(5, 182);
             txbBrak7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak7.Name = "txbBrak7";
@@ -2168,7 +1344,6 @@ namespace SewingProduction.Features.Articul
             txbBrak1.ErrorColor = Color.Red;
             txbBrak1.ErrorMessage = null;
             txbBrak1.Font = new Font("Arial", 9F);
-            // txbBrak1.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak1.Location = new Point(5, 18);
             txbBrak1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak1.Name = "txbBrak1";
@@ -2182,7 +1357,6 @@ namespace SewingProduction.Features.Articul
             txbBrak6.ErrorColor = Color.Red;
             txbBrak6.ErrorMessage = null;
             txbBrak6.Font = new Font("Arial", 9F);
-            // txbBrak6.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak6.Location = new Point(5, 154);
             txbBrak6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak6.Name = "txbBrak6";
@@ -2196,7 +1370,6 @@ namespace SewingProduction.Features.Articul
             txbBrak2.ErrorColor = Color.Red;
             txbBrak2.ErrorMessage = null;
             txbBrak2.Font = new Font("Arial", 9F);
-            // txbBrak2.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak2.Location = new Point(5, 46);
             txbBrak2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak2.Name = "txbBrak2";
@@ -2210,7 +1383,6 @@ namespace SewingProduction.Features.Articul
             txbBrak5.ErrorColor = Color.Red;
             txbBrak5.ErrorMessage = null;
             txbBrak5.Font = new Font("Arial", 9F);
-            // txbBrak5.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak5.Location = new Point(5, 128);
             txbBrak5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak5.Name = "txbBrak5";
@@ -2224,7 +1396,6 @@ namespace SewingProduction.Features.Articul
             txbBrak3.ErrorColor = Color.Red;
             txbBrak3.ErrorMessage = null;
             txbBrak3.Font = new Font("Arial", 9F);
-            // txbBrak3.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak3.Location = new Point(5, 74);
             txbBrak3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak3.Name = "txbBrak3";
@@ -2238,7 +1409,6 @@ namespace SewingProduction.Features.Articul
             txbBrak4.ErrorColor = Color.Red;
             txbBrak4.ErrorMessage = null;
             txbBrak4.Font = new Font("Arial", 9F);
-            // txbBrak4.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrak4.Location = new Point(5, 101);
             txbBrak4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak4.Name = "txbBrak4";
@@ -2248,107 +1418,139 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel30
             // 
-            customLabel30.AutoSize = true;
-            customLabel30.BackColor = Color.Transparent;
-            customLabel30.Font = new Font("Arial", 8F);
-            // customLabel30.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel30.Appearance.BackColor = Color.Transparent;
+            customLabel30.Appearance.Font = new Font("Arial", 8F);
+            customLabel30.Appearance.Options.UseBackColor = true;
+            customLabel30.Appearance.Options.UseFont = true;
+            customLabel30.Appearance.Options.UseTextOptions = true;
+            customLabel30.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel30.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel30.Location = new Point(160, 202);
             customLabel30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel30.Name = "customLabel30";
-            customLabel30.Size = new Size(18, 14);
+            customLabel30.Size = new Size(11, 14);
             customLabel30.TabIndex = 33;
             customLabel30.Text = "м.";
+            customLabel30.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel31
             // 
-            customLabel31.AutoSize = true;
-            customLabel31.BackColor = Color.Transparent;
-            customLabel31.Font = new Font("Arial", 8F);
-            // customLabel31.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel31.Appearance.BackColor = Color.Transparent;
+            customLabel31.Appearance.Font = new Font("Arial", 8F);
+            customLabel31.Appearance.Options.UseBackColor = true;
+            customLabel31.Appearance.Options.UseFont = true;
+            customLabel31.Appearance.Options.UseTextOptions = true;
+            customLabel31.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel31.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel31.Location = new Point(160, 174);
             customLabel31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel31.Name = "customLabel31";
-            customLabel31.Size = new Size(18, 14);
+            customLabel31.Size = new Size(11, 14);
             customLabel31.TabIndex = 32;
             customLabel31.Text = "м.";
+            customLabel31.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel32
             // 
-            customLabel32.AutoSize = true;
-            customLabel32.BackColor = Color.Transparent;
-            customLabel32.Font = new Font("Arial", 8F);
-            // customLabel32.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel32.Appearance.BackColor = Color.Transparent;
+            customLabel32.Appearance.Font = new Font("Arial", 8F);
+            customLabel32.Appearance.Options.UseBackColor = true;
+            customLabel32.Appearance.Options.UseFont = true;
+            customLabel32.Appearance.Options.UseTextOptions = true;
+            customLabel32.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel32.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel32.Location = new Point(160, 145);
             customLabel32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel32.Name = "customLabel32";
-            customLabel32.Size = new Size(18, 14);
+            customLabel32.Size = new Size(11, 14);
             customLabel32.TabIndex = 31;
             customLabel32.Text = "м.";
+            customLabel32.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel33
             // 
-            customLabel33.AutoSize = true;
-            customLabel33.BackColor = Color.Transparent;
-            customLabel33.Font = new Font("Arial", 8F);
-            // customLabel33.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel33.Appearance.BackColor = Color.Transparent;
+            customLabel33.Appearance.Font = new Font("Arial", 8F);
+            customLabel33.Appearance.Options.UseBackColor = true;
+            customLabel33.Appearance.Options.UseFont = true;
+            customLabel33.Appearance.Options.UseTextOptions = true;
+            customLabel33.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel33.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel33.Location = new Point(160, 119);
             customLabel33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel33.Name = "customLabel33";
-            customLabel33.Size = new Size(18, 14);
+            customLabel33.Size = new Size(11, 14);
             customLabel33.TabIndex = 30;
             customLabel33.Text = "м.";
+            customLabel33.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel34
             // 
-            customLabel34.AutoSize = true;
-            customLabel34.BackColor = Color.Transparent;
-            customLabel34.Font = new Font("Arial", 8F);
-            // customLabel34.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel34.Appearance.BackColor = Color.Transparent;
+            customLabel34.Appearance.Font = new Font("Arial", 8F);
+            customLabel34.Appearance.Options.UseBackColor = true;
+            customLabel34.Appearance.Options.UseFont = true;
+            customLabel34.Appearance.Options.UseTextOptions = true;
+            customLabel34.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel34.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel34.Location = new Point(160, 91);
             customLabel34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel34.Name = "customLabel34";
-            customLabel34.Size = new Size(18, 14);
+            customLabel34.Size = new Size(11, 14);
             customLabel34.TabIndex = 29;
             customLabel34.Text = "м.";
+            customLabel34.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel35
             // 
-            customLabel35.AutoSize = true;
-            customLabel35.BackColor = Color.Transparent;
-            customLabel35.Font = new Font("Arial", 8F);
-            // customLabel35.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel35.Appearance.BackColor = Color.Transparent;
+            customLabel35.Appearance.Font = new Font("Arial", 8F);
+            customLabel35.Appearance.Options.UseBackColor = true;
+            customLabel35.Appearance.Options.UseFont = true;
+            customLabel35.Appearance.Options.UseTextOptions = true;
+            customLabel35.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel35.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel35.Location = new Point(160, 63);
             customLabel35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel35.Name = "customLabel35";
-            customLabel35.Size = new Size(18, 14);
+            customLabel35.Size = new Size(11, 14);
             customLabel35.TabIndex = 28;
             customLabel35.Text = "м.";
+            customLabel35.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel36
             // 
-            customLabel36.AutoSize = true;
-            customLabel36.BackColor = Color.Transparent;
-            customLabel36.Font = new Font("Arial", 8F);
-            // customLabel36.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel36.Appearance.BackColor = Color.Transparent;
+            customLabel36.Appearance.Font = new Font("Arial", 8F);
+            customLabel36.Appearance.Options.UseBackColor = true;
+            customLabel36.Appearance.Options.UseFont = true;
+            customLabel36.Appearance.Options.UseTextOptions = true;
+            customLabel36.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel36.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel36.Location = new Point(160, 36);
             customLabel36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel36.Name = "customLabel36";
-            customLabel36.Size = new Size(18, 14);
+            customLabel36.Size = new Size(11, 14);
             customLabel36.TabIndex = 27;
             customLabel36.Text = "м.";
+            customLabel36.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel29
             // 
-            customLabel29.AutoSize = true;
-            customLabel29.BackColor = Color.Transparent;
-            customLabel29.Font = new Font("Arial", 8F);
-            // customLabel29.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel29.Appearance.BackColor = Color.Transparent;
+            customLabel29.Appearance.Font = new Font("Arial", 8F);
+            customLabel29.Appearance.Options.UseBackColor = true;
+            customLabel29.Appearance.Options.UseFont = true;
+            customLabel29.Appearance.Options.UseTextOptions = true;
+            customLabel29.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel29.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel29.Location = new Point(520, 235);
             customLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel29.Name = "customLabel29";
-            customLabel29.Size = new Size(28, 14);
+            customLabel29.Size = new Size(21, 14);
             customLabel29.TabIndex = 26;
             customLabel29.Text = "руб.";
+            customLabel29.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbBrakAll
             // 
@@ -2356,7 +1558,6 @@ namespace SewingProduction.Features.Articul
             txbBrakAll.ErrorColor = Color.Red;
             txbBrakAll.ErrorMessage = null;
             txbBrakAll.Font = new Font("Arial", 9F);
-            // txbBrakAll.ForeColor = Color.FromArgb(72, 61, 139);
             txbBrakAll.Location = new Point(461, 235);
             txbBrakAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrakAll.Name = "txbBrakAll";
@@ -2366,55 +1567,71 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel28
             // 
-            customLabel28.AutoSize = true;
-            customLabel28.BackColor = Color.Transparent;
-            customLabel28.Font = new Font("Arial", 8F);
-            // customLabel28.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel28.Appearance.BackColor = Color.Transparent;
+            customLabel28.Appearance.Font = new Font("Arial", 8F);
+            customLabel28.Appearance.Options.UseBackColor = true;
+            customLabel28.Appearance.Options.UseFont = true;
+            customLabel28.Appearance.Options.UseTextOptions = true;
+            customLabel28.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel28.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel28.Location = new Point(6, 72);
             customLabel28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel28.Name = "customLabel28";
-            customLabel28.Size = new Size(28, 14);
+            customLabel28.Size = new Size(21, 14);
             customLabel28.TabIndex = 25;
             customLabel28.Text = "руб.";
+            customLabel28.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel27
             // 
-            customLabel27.AutoSize = true;
-            customLabel27.BackColor = Color.Transparent;
-            customLabel27.Font = new Font("Arial", 8F);
-            // customLabel27.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel27.Appearance.BackColor = Color.Transparent;
+            customLabel27.Appearance.Font = new Font("Arial", 8F);
+            customLabel27.Appearance.Options.UseBackColor = true;
+            customLabel27.Appearance.Options.UseFont = true;
+            customLabel27.Appearance.Options.UseTextOptions = true;
+            customLabel27.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel27.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel27.Location = new Point(6, 34);
             customLabel27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel27.Name = "customLabel27";
-            customLabel27.Size = new Size(54, 14);
+            customLabel27.Size = new Size(47, 14);
             customLabel27.TabIndex = 24;
             customLabel27.Text = "Норма, м";
+            customLabel27.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel26
             // 
-            customLabel26.AutoSize = true;
-            customLabel26.BackColor = Color.Transparent;
-            customLabel26.Font = new Font("Arial", 8F);
-            // customLabel26.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel26.Appearance.BackColor = Color.Transparent;
+            customLabel26.Appearance.Font = new Font("Arial", 8F);
+            customLabel26.Appearance.Options.UseBackColor = true;
+            customLabel26.Appearance.Options.UseFont = true;
+            customLabel26.Appearance.Options.UseTextOptions = true;
+            customLabel26.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel26.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel26.Location = new Point(266, 205);
             customLabel26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel26.Name = "customLabel26";
-            customLabel26.Size = new Size(28, 14);
+            customLabel26.Size = new Size(21, 14);
             customLabel26.TabIndex = 13;
             customLabel26.Text = "руб.";
+            customLabel26.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel25
             // 
-            customLabel25.AutoSize = true;
-            customLabel25.BackColor = Color.Transparent;
-            customLabel25.Font = new Font("Arial", 8F);
-            // customLabel25.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel25.Appearance.BackColor = Color.Transparent;
+            customLabel25.Appearance.Font = new Font("Arial", 8F);
+            customLabel25.Appearance.Options.UseBackColor = true;
+            customLabel25.Appearance.Options.UseFont = true;
+            customLabel25.Appearance.Options.UseTextOptions = true;
+            customLabel25.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel25.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel25.Location = new Point(266, 177);
             customLabel25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel25.Name = "customLabel25";
-            customLabel25.Size = new Size(28, 14);
+            customLabel25.Size = new Size(21, 14);
             customLabel25.TabIndex = 12;
             customLabel25.Text = "руб.";
+            customLabel25.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbSeb
             // 
@@ -2422,7 +1639,6 @@ namespace SewingProduction.Features.Articul
             txbSeb.ErrorColor = Color.Red;
             txbSeb.ErrorMessage = null;
             txbSeb.Font = new Font("Arial", 10F);
-            // txbSeb.ForeColor = Color.FromArgb(72, 61, 139);
             txbSeb.Location = new Point(6, 90);
             txbSeb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeb.Name = "txbSeb";
@@ -2432,16 +1648,20 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel24
             // 
-            customLabel24.AutoSize = true;
-            customLabel24.BackColor = Color.Transparent;
-            customLabel24.Font = new Font("Arial", 8F);
-            // customLabel24.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel24.Appearance.BackColor = Color.Transparent;
+            customLabel24.Appearance.Font = new Font("Arial", 8F);
+            customLabel24.Appearance.Options.UseBackColor = true;
+            customLabel24.Appearance.Options.UseFont = true;
+            customLabel24.Appearance.Options.UseTextOptions = true;
+            customLabel24.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel24.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel24.Location = new Point(266, 149);
             customLabel24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel24.Name = "customLabel24";
-            customLabel24.Size = new Size(28, 14);
+            customLabel24.Size = new Size(21, 14);
             customLabel24.TabIndex = 11;
             customLabel24.Text = "руб.";
+            customLabel24.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbNormt
             // 
@@ -2449,7 +1669,6 @@ namespace SewingProduction.Features.Articul
             txbNormt.ErrorColor = Color.Red;
             txbNormt.ErrorMessage = null;
             txbNormt.Font = new Font("Arial", 10F);
-            // txbNormt.ForeColor = Color.FromArgb(72, 61, 139);
             txbNormt.Location = new Point(6, 50);
             txbNormt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNormt.Name = "txbNormt";
@@ -2459,55 +1678,71 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel23
             // 
-            customLabel23.AutoSize = true;
-            customLabel23.BackColor = Color.Transparent;
-            customLabel23.Font = new Font("Arial", 8F);
-            // customLabel23.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel23.Appearance.BackColor = Color.Transparent;
+            customLabel23.Appearance.Font = new Font("Arial", 8F);
+            customLabel23.Appearance.Options.UseBackColor = true;
+            customLabel23.Appearance.Options.UseFont = true;
+            customLabel23.Appearance.Options.UseTextOptions = true;
+            customLabel23.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel23.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel23.Location = new Point(267, 122);
             customLabel23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel23.Name = "customLabel23";
-            customLabel23.Size = new Size(28, 14);
+            customLabel23.Size = new Size(21, 14);
             customLabel23.TabIndex = 10;
             customLabel23.Text = "руб.";
+            customLabel23.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel22
             // 
-            customLabel22.AutoSize = true;
-            customLabel22.BackColor = Color.Transparent;
-            customLabel22.Font = new Font("Arial", 8F);
-            // customLabel22.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel22.Appearance.BackColor = Color.Transparent;
+            customLabel22.Appearance.Font = new Font("Arial", 8F);
+            customLabel22.Appearance.Options.UseBackColor = true;
+            customLabel22.Appearance.Options.UseFont = true;
+            customLabel22.Appearance.Options.UseTextOptions = true;
+            customLabel22.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel22.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel22.Location = new Point(266, 94);
             customLabel22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel22.Name = "customLabel22";
-            customLabel22.Size = new Size(28, 14);
+            customLabel22.Size = new Size(21, 14);
             customLabel22.TabIndex = 9;
             customLabel22.Text = "руб.";
+            customLabel22.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel21
             // 
-            customLabel21.AutoSize = true;
-            customLabel21.BackColor = Color.Transparent;
-            customLabel21.Font = new Font("Arial", 8F);
-            // customLabel21.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel21.Appearance.BackColor = Color.Transparent;
+            customLabel21.Appearance.Font = new Font("Arial", 8F);
+            customLabel21.Appearance.Options.UseBackColor = true;
+            customLabel21.Appearance.Options.UseFont = true;
+            customLabel21.Appearance.Options.UseTextOptions = true;
+            customLabel21.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel21.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel21.Location = new Point(266, 66);
             customLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel21.Name = "customLabel21";
-            customLabel21.Size = new Size(28, 14);
+            customLabel21.Size = new Size(21, 14);
             customLabel21.TabIndex = 8;
             customLabel21.Text = "руб.";
+            customLabel21.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel20
             // 
-            customLabel20.AutoSize = true;
-            customLabel20.BackColor = Color.Transparent;
-            customLabel20.Font = new Font("Arial", 8F);
-            // customLabel20.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel20.Appearance.BackColor = Color.Transparent;
+            customLabel20.Appearance.Font = new Font("Arial", 8F);
+            customLabel20.Appearance.Options.UseBackColor = true;
+            customLabel20.Appearance.Options.UseFont = true;
+            customLabel20.Appearance.Options.UseTextOptions = true;
+            customLabel20.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel20.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel20.Location = new Point(266, 39);
             customLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel20.Name = "customLabel20";
-            customLabel20.Size = new Size(28, 14);
+            customLabel20.Size = new Size(21, 14);
             customLabel20.TabIndex = 7;
             customLabel20.Text = "руб.";
+            customLabel20.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // gridArtDr
             // 
@@ -2527,13 +1762,13 @@ namespace SewingProduction.Features.Articul
             // 
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grArtDrName, grArtDrEd, artDrSeb, grArtDrKol, grArtDrSum, grArtDrKod_fur, grArtDrKod_furn_ar, grArtDrData_nitki });
             gridView1.DetailHeight = 404;
-            gridFormatRule1.ColumnApplyTo = grArtDrName;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.ForeColor = Color.Cyan;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Expression = "1=1";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridView1.FormatRules.Add(gridFormatRule1);
+            gridFormatRule2.ColumnApplyTo = grArtDrName;
+            gridFormatRule2.Name = "Format0";
+            formatConditionRuleValue2.Appearance.ForeColor = Color.Cyan;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Expression = "1=1";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            gridView1.FormatRules.Add(gridFormatRule2);
             gridView1.GridControl = gridArtDr;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
@@ -2621,6 +1856,7 @@ namespace SewingProduction.Features.Articul
             groupBox2.Controls.Add(chbIsFurnit);
             groupBox2.Controls.Add(chbIsUpak);
             groupBox2.Enabled = false;
+            groupBox2.Font = new Font("Arial", 10F);
             groupBox2.Location = new Point(1610, 246);
             groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
@@ -2635,7 +1871,6 @@ namespace SewingProduction.Features.Articul
             chkPres.AutoSize = true;
             chkPres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkPres.Font = new Font("Arial", 10F);
-            // chkPres.ForeColor = Color.FromArgb(0, 0, 139);
             chkPres.Location = new Point(7, 220);
             chkPres.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkPres.Name = "chkPres";
@@ -2649,7 +1884,6 @@ namespace SewingProduction.Features.Articul
             chkStra.AutoSize = true;
             chkStra.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkStra.Font = new Font("Arial", 10F);
-            // chkStra.ForeColor = Color.FromArgb(0, 0, 139);
             chkStra.Location = new Point(7, 190);
             chkStra.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkStra.Name = "chkStra";
@@ -2663,7 +1897,6 @@ namespace SewingProduction.Features.Articul
             chkBus.AutoSize = true;
             chkBus.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkBus.Font = new Font("Arial", 10F);
-            // chkBus.ForeColor = Color.FromArgb(0, 0, 139);
             chkBus.Location = new Point(7, 159);
             chkBus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkBus.Name = "chkBus";
@@ -2677,7 +1910,6 @@ namespace SewingProduction.Features.Articul
             chkV.AutoSize = true;
             chkV.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkV.Font = new Font("Arial", 10F);
-            // chkV.ForeColor = Color.FromArgb(0, 0, 139);
             chkV.Location = new Point(7, 132);
             chkV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkV.Name = "chkV";
@@ -2691,7 +1923,6 @@ namespace SewingProduction.Features.Articul
             chkP.AutoSize = true;
             chkP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkP.Font = new Font("Arial", 10F);
-            // chkP.ForeColor = Color.FromArgb(0, 0, 139);
             chkP.Location = new Point(7, 104);
             chkP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkP.Name = "chkP";
@@ -2705,7 +1936,6 @@ namespace SewingProduction.Features.Articul
             chbIsFurnit.AutoSize = true;
             chbIsFurnit.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsFurnit.Font = new Font("Arial", 10F);
-            // chbIsFurnit.ForeColor = Color.FromArgb(0, 0, 139);
             chbIsFurnit.Location = new Point(7, 43);
             chbIsFurnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsFurnit.Name = "chbIsFurnit";
@@ -2719,7 +1949,6 @@ namespace SewingProduction.Features.Articul
             chbIsUpak.AutoSize = true;
             chbIsUpak.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsUpak.Font = new Font("Arial", 10F);
-            // chbIsUpak.ForeColor = Color.FromArgb(0, 0, 139);
             chbIsUpak.Location = new Point(7, 16);
             chbIsUpak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsUpak.Name = "chbIsUpak";
@@ -2818,7 +2047,6 @@ namespace SewingProduction.Features.Articul
             customCheckBox1.AutoSize = true;
             customCheckBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBox1.Font = new Font("Arial", 10F);
-            // customCheckBox1.ForeColor = Color.FromArgb(105, 75, 45);
             customCheckBox1.Location = new Point(7, 15);
             customCheckBox1.Name = "customCheckBox1";
             customCheckBox1.Size = new Size(331, 21);
@@ -2855,7 +2083,8 @@ namespace SewingProduction.Features.Articul
             // 
             // btnArticulEdit
             // 
-            btnArticulEdit.Font = new Font("Arial", 10F);
+            btnArticulEdit.Appearance.Font = new Font("Arial", 10F);
+            btnArticulEdit.Appearance.Options.UseFont = true;
             btnArticulEdit.Location = new Point(107, 55);
             btnArticulEdit.Name = "btnArticulEdit";
             btnArticulEdit.Size = new Size(206, 52);
@@ -2865,15 +2094,20 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel48
             // 
-            customLabel48.AutoSize = true;
-            customLabel48.BackColor = Color.Transparent;
-            customLabel48.Font = new Font("Arial", 8F);
+            customLabel48.Appearance.BackColor = Color.Transparent;
+            customLabel48.Appearance.Font = new Font("Arial", 8F);
+            customLabel48.Appearance.Options.UseBackColor = true;
+            customLabel48.Appearance.Options.UseFont = true;
+            customLabel48.Appearance.Options.UseTextOptions = true;
+            customLabel48.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel48.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel48.Location = new Point(8, 302);
             customLabel48.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel48.Name = "customLabel48";
-            customLabel48.Size = new Size(78, 14);
+            customLabel48.Size = new Size(71, 14);
             customLabel48.TabIndex = 48;
             customLabel48.Text = "Дата расчета";
+            customLabel48.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customTextBox1
             // 
@@ -2881,7 +2115,6 @@ namespace SewingProduction.Features.Articul
             customTextBox1.ErrorColor = Color.Red;
             customTextBox1.ErrorMessage = null;
             customTextBox1.Font = new Font("Arial", 10F);
-            // customTextBox1.ForeColor = Color.FromArgb(72, 61, 139);
             customTextBox1.Location = new Point(9, 319);
             customTextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBox1.Name = "customTextBox1";
@@ -2895,7 +2128,6 @@ namespace SewingProduction.Features.Articul
             txbSebRecom.ErrorColor = Color.Red;
             txbSebRecom.ErrorMessage = null;
             txbSebRecom.Font = new Font("Arial", 10F);
-            // txbSebRecom.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebRecom.Location = new Point(193, 273);
             txbSebRecom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebRecom.Name = "txbSebRecom";
@@ -2905,13 +2137,17 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel47
             // 
-            customLabel47.AutoSize = true;
-            customLabel47.Font = new Font("Arial", 10F);
+            customLabel47.Appearance.Font = new Font("Arial", 10F);
+            customLabel47.Appearance.Options.UseFont = true;
+            customLabel47.Appearance.Options.UseTextOptions = true;
+            customLabel47.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel47.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel47.Location = new Point(8, 273);
             customLabel47.Name = "customLabel47";
-            customLabel47.Size = new Size(163, 16);
+            customLabel47.Size = new Size(141, 16);
             customLabel47.TabIndex = 52;
             customLabel47.Text = "Рекомендованная цена";
+            customLabel47.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelControl1
             // 
@@ -2925,13 +2161,17 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel46
             // 
-            customLabel46.AutoSize = true;
-            customLabel46.Font = new Font("Arial", 10F);
+            customLabel46.Appearance.Font = new Font("Arial", 10F);
+            customLabel46.Appearance.Options.UseFont = true;
+            customLabel46.Appearance.Options.UseTextOptions = true;
+            customLabel46.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel46.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel46.Location = new Point(8, 245);
             customLabel46.Name = "customLabel46";
-            customLabel46.Size = new Size(162, 16);
+            customLabel46.Size = new Size(139, 16);
             customLabel46.TabIndex = 49;
             customLabel46.Text = "Расчетная реком. цена";
+            customLabel46.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label8
             // 
@@ -2949,7 +2189,6 @@ namespace SewingProduction.Features.Articul
             txbKoef.ErrorColor = Color.Red;
             txbKoef.ErrorMessage = null;
             txbKoef.Font = new Font("Arial", 10F);
-            // txbKoef.ForeColor = Color.FromArgb(72, 61, 139);
             txbKoef.Location = new Point(6, 221);
             txbKoef.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoef.Name = "txbKoef";
@@ -2973,7 +2212,6 @@ namespace SewingProduction.Features.Articul
             txbSebProizv.ErrorColor = Color.Red;
             txbSebProizv.ErrorMessage = null;
             txbSebProizv.Font = new Font("Arial", 10F);
-            // txbSebProizv.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebProizv.Location = new Point(7, 166);
             txbSebProizv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebProizv.Name = "txbSebProizv";
@@ -2996,7 +2234,6 @@ namespace SewingProduction.Features.Articul
             txbKoefVedDG.ErrorColor = Color.Red;
             txbKoefVedDG.ErrorMessage = null;
             txbKoefVedDG.Font = new Font("Arial", 10F);
-            // txbKoefVedDG.ForeColor = Color.FromArgb(72, 61, 139);
             txbKoefVedDG.Location = new Point(7, 129);
             txbKoefVedDG.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoefVedDG.Name = "txbKoefVedDG";
@@ -3019,7 +2256,6 @@ namespace SewingProduction.Features.Articul
             txbKoefPr.ErrorColor = Color.Red;
             txbKoefPr.ErrorMessage = null;
             txbKoefPr.Font = new Font("Arial", 10F);
-            // txbKoefPr.ForeColor = Color.FromArgb(72, 61, 139);
             txbKoefPr.Location = new Point(7, 92);
             txbKoefPr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoefPr.Name = "txbKoefPr";
@@ -3042,7 +2278,6 @@ namespace SewingProduction.Features.Articul
             txbSebDop.ErrorColor = Color.Red;
             txbSebDop.ErrorMessage = null;
             txbSebDop.Font = new Font("Arial", 10F);
-            // txbSebDop.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebDop.Location = new Point(7, 55);
             txbSebDop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebDop.Name = "txbSebDop";
@@ -3080,6 +2315,7 @@ namespace SewingProduction.Features.Articul
             customGroupBox1.Controls.Add(customLabel35);
             customGroupBox1.Controls.Add(customLabel29);
             customGroupBox1.Controls.Add(customLabel36);
+            customGroupBox1.Font = new Font("Arial", 10F);
             customGroupBox1.Location = new Point(592, 246);
             customGroupBox1.Name = "customGroupBox1";
             customGroupBox1.Size = new Size(606, 258);
@@ -3124,6 +2360,7 @@ namespace SewingProduction.Features.Articul
             customGroupBox2.Controls.Add(customLabel41);
             customGroupBox2.Controls.Add(txbSebz);
             customGroupBox2.Controls.Add(customLabel40);
+            customGroupBox2.Font = new Font("Arial", 10F);
             customGroupBox2.Location = new Point(1202, 246);
             customGroupBox2.Name = "customGroupBox2";
             customGroupBox2.Size = new Size(403, 258);
@@ -3133,16 +2370,20 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel45
             // 
-            customLabel45.AutoSize = true;
-            customLabel45.BackColor = Color.Transparent;
-            customLabel45.Font = new Font("Arial", 8F);
-            // customLabel45.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel45.Appearance.BackColor = Color.Transparent;
+            customLabel45.Appearance.Font = new Font("Arial", 8F);
+            customLabel45.Appearance.Options.UseBackColor = true;
+            customLabel45.Appearance.Options.UseFont = true;
+            customLabel45.Appearance.Options.UseTextOptions = true;
+            customLabel45.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel45.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel45.Location = new Point(104, 168);
             customLabel45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel45.Name = "customLabel45";
-            customLabel45.Size = new Size(78, 14);
+            customLabel45.Size = new Size(71, 14);
             customLabel45.TabIndex = 46;
             customLabel45.Text = "Компл. и нум.";
+            customLabel45.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbSumZarpl
             // 
@@ -3150,7 +2391,6 @@ namespace SewingProduction.Features.Articul
             txbSumZarpl.ErrorColor = Color.Red;
             txbSumZarpl.ErrorMessage = null;
             txbSumZarpl.Font = new Font("Arial", 10F);
-            // txbSumZarpl.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumZarpl.Location = new Point(106, 38);
             txbSumZarpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumZarpl.Name = "txbSumZarpl";
@@ -3164,7 +2404,6 @@ namespace SewingProduction.Features.Articul
             txbSumKomplNum.ErrorColor = Color.Red;
             txbSumKomplNum.ErrorMessage = null;
             txbSumKomplNum.Font = new Font("Arial", 10F);
-            // txbSumKomplNum.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumKomplNum.Location = new Point(105, 185);
             txbSumKomplNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumKomplNum.Name = "txbSumKomplNum";
@@ -3178,7 +2417,6 @@ namespace SewingProduction.Features.Articul
             txbSek.ErrorColor = Color.Red;
             txbSek.ErrorMessage = null;
             txbSek.Font = new Font("Arial", 10F);
-            // txbSek.ForeColor = Color.FromArgb(72, 61, 139);
             txbSek.Location = new Point(7, 39);
             txbSek.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSek.Name = "txbSek";
@@ -3187,25 +2425,27 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel44
             // 
-            customLabel44.AutoSize = true;
-            customLabel44.BackColor = Color.Transparent;
-            customLabel44.Font = new Font("Arial", 8F);
-            // customLabel44.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel44.Appearance.BackColor = Color.Transparent;
+            customLabel44.Appearance.Font = new Font("Arial", 8F);
+            customLabel44.Appearance.Options.UseBackColor = true;
+            customLabel44.Appearance.Options.UseFont = true;
+            customLabel44.Appearance.Options.UseTextOptions = true;
+            customLabel44.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel44.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel44.Location = new Point(105, 130);
             customLabel44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel44.Name = "customLabel44";
-            customLabel44.Size = new Size(48, 14);
+            customLabel44.Size = new Size(41, 14);
             customLabel44.TabIndex = 44;
             customLabel44.Text = "Раскрой";
+            customLabel44.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbSekVyaz
             // 
-            txbSekVyaz.BackColor = Color.Pink;
             txbSekVyaz.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSekVyaz.ErrorColor = Color.Red;
             txbSekVyaz.ErrorMessage = null;
             txbSekVyaz.Font = new Font("Arial", 10F);
-            // txbSekVyaz.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekVyaz.Location = new Point(32, 74);
             txbSekVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekVyaz.Name = "txbSekVyaz";
@@ -3219,7 +2459,6 @@ namespace SewingProduction.Features.Articul
             txbSumSebRaskr.ErrorColor = Color.Red;
             txbSumSebRaskr.ErrorMessage = null;
             txbSumSebRaskr.Font = new Font("Arial", 10F);
-            // txbSumSebRaskr.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumSebRaskr.Location = new Point(106, 147);
             txbSumSebRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumSebRaskr.Name = "txbSumSebRaskr";
@@ -3229,12 +2468,10 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSekShv
             // 
-            txbSekShv.BackColor = Color.Pink;
             txbSekShv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSekShv.ErrorColor = Color.Red;
             txbSekShv.ErrorMessage = null;
             txbSekShv.Font = new Font("Arial", 10F);
-            // txbSekShv.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekShv.Location = new Point(32, 104);
             txbSekShv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekShv.Name = "txbSekShv";
@@ -3244,25 +2481,27 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel43
             // 
-            customLabel43.AutoSize = true;
-            customLabel43.BackColor = Color.Transparent;
-            customLabel43.Font = new Font("Arial", 8F);
-            // customLabel43.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel43.Appearance.BackColor = Color.Transparent;
+            customLabel43.Appearance.Font = new Font("Arial", 8F);
+            customLabel43.Appearance.Options.UseBackColor = true;
+            customLabel43.Appearance.Options.UseFont = true;
+            customLabel43.Appearance.Options.UseTextOptions = true;
+            customLabel43.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel43.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel43.Location = new Point(105, 93);
             customLabel43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel43.Name = "customLabel43";
-            customLabel43.Size = new Size(70, 14);
+            customLabel43.Size = new Size(63, 14);
             customLabel43.TabIndex = 42;
             customLabel43.Text = "Стр. взносы";
+            customLabel43.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbSekKr
             // 
-            txbSekKr.BackColor = Color.Pink;
             txbSekKr.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSekKr.ErrorColor = Color.Red;
             txbSekKr.ErrorMessage = null;
             txbSekKr.Font = new Font("Arial", 10F);
-            // txbSekKr.ForeColor = Color.FromArgb(72, 61, 139);
             txbSekKr.Location = new Point(32, 135);
             txbSekKr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekKr.Name = "txbSekKr";
@@ -3276,7 +2515,6 @@ namespace SewingProduction.Features.Articul
             txbSumStrVznos.ErrorColor = Color.Red;
             txbSumStrVznos.ErrorMessage = null;
             txbSumStrVznos.Font = new Font("Arial", 10F);
-            // txbSumStrVznos.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumStrVznos.Location = new Point(106, 110);
             txbSumStrVznos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumStrVznos.Name = "txbSumStrVznos";
@@ -3286,42 +2524,54 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel37
             // 
-            customLabel37.AutoSize = true;
-            customLabel37.BackColor = Color.Transparent;
-            customLabel37.Font = new Font("Arial", 8F);
-            // customLabel37.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel37.Appearance.BackColor = Color.Transparent;
+            customLabel37.Appearance.Font = new Font("Arial", 8F);
+            customLabel37.Appearance.Options.UseBackColor = true;
+            customLabel37.Appearance.Options.UseFont = true;
+            customLabel37.Appearance.Options.UseTextOptions = true;
+            customLabel37.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel37.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel37.Location = new Point(4, 74);
             customLabel37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel37.Name = "customLabel37";
-            customLabel37.Size = new Size(28, 14);
+            customLabel37.Size = new Size(21, 14);
             customLabel37.TabIndex = 34;
             customLabel37.Text = "вяз.";
+            customLabel37.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel42
             // 
-            customLabel42.AutoSize = true;
-            customLabel42.BackColor = Color.Transparent;
-            customLabel42.Font = new Font("Arial", 8F);
-            // customLabel42.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel42.Appearance.BackColor = Color.Transparent;
+            customLabel42.Appearance.Font = new Font("Arial", 8F);
+            customLabel42.Appearance.Options.UseBackColor = true;
+            customLabel42.Appearance.Options.UseFont = true;
+            customLabel42.Appearance.Options.UseTextOptions = true;
+            customLabel42.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel42.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel42.Location = new Point(106, 57);
             customLabel42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel42.Name = "customLabel42";
-            customLabel42.Size = new Size(69, 14);
+            customLabel42.Size = new Size(62, 14);
             customLabel42.TabIndex = 40;
             customLabel42.Text = "Доп. оплата";
+            customLabel42.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel38
             // 
-            customLabel38.AutoSize = true;
-            customLabel38.BackColor = Color.Transparent;
-            customLabel38.Font = new Font("Arial", 8F);
-            // customLabel38.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel38.Appearance.BackColor = Color.Transparent;
+            customLabel38.Appearance.Font = new Font("Arial", 8F);
+            customLabel38.Appearance.Options.UseBackColor = true;
+            customLabel38.Appearance.Options.UseFont = true;
+            customLabel38.Appearance.Options.UseTextOptions = true;
+            customLabel38.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel38.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel38.Location = new Point(4, 104);
             customLabel38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel38.Name = "customLabel38";
-            customLabel38.Size = new Size(25, 14);
+            customLabel38.Size = new Size(18, 14);
             customLabel38.TabIndex = 35;
             customLabel38.Text = "шв.";
+            customLabel38.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbSumDopOpl
             // 
@@ -3329,7 +2579,6 @@ namespace SewingProduction.Features.Articul
             txbSumDopOpl.ErrorColor = Color.Red;
             txbSumDopOpl.ErrorMessage = null;
             txbSumDopOpl.Font = new Font("Arial", 10F);
-            // txbSumDopOpl.ForeColor = Color.FromArgb(72, 61, 139);
             txbSumDopOpl.Location = new Point(107, 74);
             txbSumDopOpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumDopOpl.Name = "txbSumDopOpl";
@@ -3339,29 +2588,37 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel39
             // 
-            customLabel39.AutoSize = true;
-            customLabel39.BackColor = Color.Transparent;
-            customLabel39.Font = new Font("Arial", 8F);
-            // customLabel39.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel39.Appearance.BackColor = Color.Transparent;
+            customLabel39.Appearance.Font = new Font("Arial", 8F);
+            customLabel39.Appearance.Options.UseBackColor = true;
+            customLabel39.Appearance.Options.UseFont = true;
+            customLabel39.Appearance.Options.UseTextOptions = true;
+            customLabel39.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel39.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel39.Location = new Point(4, 135);
             customLabel39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel39.Name = "customLabel39";
-            customLabel39.Size = new Size(21, 14);
+            customLabel39.Size = new Size(14, 14);
             customLabel39.TabIndex = 36;
             customLabel39.Text = "кр.";
+            customLabel39.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // customLabel41
             // 
-            customLabel41.AutoSize = true;
-            customLabel41.BackColor = Color.Transparent;
-            customLabel41.Font = new Font("Arial", 8F);
-            // customLabel41.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel41.Appearance.BackColor = Color.Transparent;
+            customLabel41.Appearance.Font = new Font("Arial", 8F);
+            customLabel41.Appearance.Options.UseBackColor = true;
+            customLabel41.Appearance.Options.UseFont = true;
+            customLabel41.Appearance.Options.UseTextOptions = true;
+            customLabel41.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel41.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel41.Location = new Point(105, 21);
             customLabel41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel41.Name = "customLabel41";
-            customLabel41.Size = new Size(71, 14);
+            customLabel41.Size = new Size(65, 14);
             customLabel41.TabIndex = 38;
             customLabel41.Text = "Зарплата РТ";
+            customLabel41.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txbSebz
             // 
@@ -3369,7 +2626,6 @@ namespace SewingProduction.Features.Articul
             txbSebz.ErrorColor = Color.Red;
             txbSebz.ErrorMessage = null;
             txbSebz.Font = new Font("Arial", 10F);
-            // txbSebz.ForeColor = Color.FromArgb(72, 61, 139);
             txbSebz.Location = new Point(104, 220);
             txbSebz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebz.Name = "txbSebz";
@@ -3379,28 +2635,40 @@ namespace SewingProduction.Features.Articul
             // 
             // customLabel40
             // 
-            customLabel40.AutoSize = true;
-            customLabel40.BackColor = Color.Transparent;
-            customLabel40.Font = new Font("Arial", 8F);
-            // customLabel40.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel40.Appearance.BackColor = Color.Transparent;
+            customLabel40.Appearance.Font = new Font("Arial", 8F);
+            customLabel40.Appearance.Options.UseBackColor = true;
+            customLabel40.Appearance.Options.UseFont = true;
+            customLabel40.Appearance.Options.UseTextOptions = true;
+            customLabel40.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            customLabel40.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             customLabel40.Location = new Point(103, 203);
             customLabel40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel40.Name = "customLabel40";
-            customLabel40.Size = new Size(56, 14);
+            customLabel40.Size = new Size(49, 14);
             customLabel40.TabIndex = 34;
             customLabel40.Text = "Зарплата";
+            customLabel40.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // articulControl1
+            // 
+            articulControl1.IsReadOnly = true;
+            articulControl1.Location = new Point(136, 138);
+            articulControl1.Name = "articulControl1";
+            articulControl1.Size = new Size(1378, 301);
+            articulControl1.TabIndex = 40;
             // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new Size(1742, 1010);
+            Controls.Add(articulControl1);
             Controls.Add(customGroupBox2);
             Controls.Add(customGroupBox1);
             Controls.Add(groupBox3);
             Controls.Add(splitContainerControl1);
             Controls.Add(groupBox2);
-            Controls.Add(lContrBoxMainInfo);
             Controls.Add(gridArtDr);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -3411,7 +2679,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)gridArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
@@ -3433,10 +2700,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).EndInit();
-            lContrBoxMainInfo.ResumeLayout(false);
-            lContrBoxMainInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             cgbTkanPurpose.ResumeLayout(false);
             cgbTkanPurpose.PerformLayout();
             cgbKfKach.ResumeLayout(false);
@@ -3485,56 +2748,8 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private CustomTextBox txbKod;
-        private CustomTextBox txbPo;
-        private CustomTextBox txbArticul;
         private System.Windows.Forms.BindingSource bsArticul;
         private System.Windows.Forms.BindingSource bsArt;
-        private CustomTextBox txbMod;
-        private System.Windows.Forms.PictureBox pictureBoxArticul;
-        private CustomLabel label1;
-        private CustomLabel label2;
-        private CustomLabel label3;
-        private CustomLabel customLabel1;
-        private CustomTextBox txbSeason;
-        private CustomLabel customLabel2;
-        private CustomTextBox txbTM;
-        private CustomLabel customLabel3;
-        private CustomTextBox txbAssort;
-        private CustomLabel customLabel4;
-        private CustomTextBox txbCountry;
-        private CustomLabel customLabel5;
-        private CustomTextBox txbGrupMenName;
-        private CustomLabel customLabel6;
-        private CustomTextBox txbGrup;
-        private CustomLabel customLabel8;
-        private CustomLabel customLabel7;
-        private CustomTextBox txbIdGost;
-        private CustomLabel customLabel10;
-        private CustomTextBox txbOpiGost;
-        private CustomLabel customLabel9;
-        private CustomTextBox txbNameGost;
-        private CustomLabel customLabel11;
-        private CustomTextBox txbSost;
-        private CustomLabel customLabel13;
-        private CustomTextBox txbSost3;
-        private CustomLabel customLabel12;
-        private CustomTextBox txbSost2;
-        private CustomLabel customLabel15;
-        private CustomTextBox txbRazmPrint;
-        private CustomLabel customLabel14;
-        private CustomTextBox txbRazm;
-        private CustomLabel customLabel16;
-        private CustomMaskedTextBox mtbDateOpis;
-        private CustomLabel customLabel17;
-        private CustomTextBox txbScNomer;
-        private CustomLabel customLabel18;
-        private CustomTextBox txbKodTnved;
-        private CustomLabel customLabel19;
-        private CustomTextBox txbNDS;
-        private CustomCheckBox chbKombIzd;
-        private CustomCheckBox chbKombDet;
-        private CustomCheckBox chbArh;
         private CustomSimpleButton customButtonCopy;
         private CustomSimpleButton customButtonKompl;
         private CustomTextBox txbNorm_t1;
@@ -3604,8 +2819,6 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chkBus;
         private CustomCheckBox chkV;
         private CustomSimpleButton customButtonKart;
-        private DevExpress.XtraLayout.LayoutControl lContrBoxMainInfo;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
         private CustomGridControl cGridKomplSost;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewKomplSost;
         private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostKod;
@@ -3712,5 +2925,7 @@ namespace SewingProduction.Features.Articul
         private CustomGroupBox groupBox2;
         private CustomSimpleButton csButtonEdit;
         private CustomSimpleButton btnArticulEdit;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Forms.ArticulControl articulControl1;
     }
 }

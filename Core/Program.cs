@@ -84,6 +84,7 @@ namespace SewingProduction.Core
                 GridLocalizer.Active = new CustomLocalizer();
 
                 Application.EnableVisualStyles();
+                EnsureSeasonImagesInRoaming();
                 Application.SetCompatibleTextRenderingDefault(false);
                 DapperMappings.Configure();
 
@@ -106,6 +107,7 @@ namespace SewingProduction.Core
                 Application.ApplicationExit += (_, __) => StopQN();
                 AppDomain.CurrentDomain.ProcessExit += (_, __) => StopQN();
                 AppDomain.CurrentDomain.DomainUnload += (_, __) => StopQN();
+
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
                     splashScreen.Show();
@@ -114,10 +116,10 @@ namespace SewingProduction.Core
 
                     if (!ValidateSystemDate(out var dateError))
                     {
-                        MessageBox.Show(dateError,
-                            "SewingProduction — Ошибка",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
+                        //MessageBox.Show(dateError,
+                        //    "SewingProduction — Ошибка",
+                        //    MessageBoxButtons.OK,
+                        //    MessageBoxIcon.Error);
                         try { splashScreen.Close(); } catch { }
                         return;
                     }
@@ -251,6 +253,69 @@ namespace SewingProduction.Core
                 try { _ = _logger.LogErrorAsync(e.Exception, "TaskScheduler UnobservedTaskException"); } catch { }
                 e.SetObserved();
             };
+        }
+
+        private static void EnsureSeasonImagesInRoaming()
+        {
+            string sourceRoot = Path.Combine(AppContext.BaseDirectory, "SplashImages");
+            string destinationRoot = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "SewingProduction",
+                "SplashImages");
+
+            try
+            {
+                if (!Directory.Exists(sourceRoot))
+                {
+                    return;
+                }
+
+                Directory.CreateDirectory(destinationRoot);
+
+                foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
+                {
+                    string relativePath = Path.GetRelativePath(sourceRoot, sourceFile);
+                    string destinationFile = Path.Combine(destinationRoot, relativePath);
+                    string destinationDir = Path.GetDirectoryName(destinationFile);
+                    if (!string.IsNullOrEmpty(destinationDir))
+                    {
+                        Directory.CreateDirectory(destinationDir);
+                    }
+
+                    if (NeedToCopyFile(sourceFile, destinationFile))
+                    {
+                        File.Copy(sourceFile, destinationFile, true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    _ = _logger.LogErrorAsync(
+                        ex,
+                        $"Failed to seed splash images. Source='{sourceRoot}', Destination='{destinationRoot}', Error='{ex.Message}'");
+                }
+                catch { }
+            }
+        }
+
+        private static bool NeedToCopyFile(string sourceFile, string destinationFile)
+        {
+            if (!File.Exists(destinationFile))
+            {
+                return true;
+            }
+
+            var sourceInfo = new FileInfo(sourceFile);
+            var destinationInfo = new FileInfo(destinationFile);
+
+            if (sourceInfo.Length != destinationInfo.Length)
+            {
+                return true;
+            }
+
+            return sourceInfo.LastWriteTimeUtc > destinationInfo.LastWriteTimeUtc;
         }
 
         private static bool ValidateSystemDate(out string errorMessage)

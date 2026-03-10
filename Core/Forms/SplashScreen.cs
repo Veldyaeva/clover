@@ -12,6 +12,7 @@ namespace SewingProduction
         public SplashScreen()
         {
             InitializeComponent();
+            imageSlider1.LayoutMode = DevExpress.Utils.Drawing.ImageLayoutMode.ZoomInside;
             LoadBackgroundImagesFromSettings();
             /*Random random = new Random();
             int minValue = 0;
@@ -63,47 +64,131 @@ namespace SewingProduction
         private void LoadBackgroundImagesFromSettings()
         {
             string settingsFolder = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 "SewingProduction",
-                "settings");
+                "SplashImages");
 
             if (!Directory.Exists(settingsFolder))
             {
                 return;
             }
 
-            var imageFiles = Directory.GetFiles(settingsFolder)
-                .Where(IsImageFile)
-                .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
-                .ToList();
+            int seasonIndex = GetSeasonIndex(DateTime.Now.Month);
+            string seasonFolder = Path.Combine(settingsFolder, $"Season_{seasonIndex}");
+            string eventsFolder = Path.Combine(settingsFolder, "Events", "8.03");
+
+            var imageFiles = IsMarch8EventPeriod(DateTime.Now)
+                ? GetImageFiles(eventsFolder)
+                : new System.Collections.Generic.List<string>();
+
+            if (imageFiles.Count == 0)
+            {
+                imageFiles = GetImageFiles(seasonFolder);
+            }
+
+            if (imageFiles.Count == 0)
+            {
+                imageFiles = GetImageFiles(settingsFolder);
+            }
 
             if (imageFiles.Count == 0)
             {
                 return;
             }
 
-            imageSlider1.Images.Clear();
+            var random = new Random();
+            int startIndex = random.Next(imageFiles.Count);
 
-            foreach (string imageFile in imageFiles)
+            for (int i = 0; i < imageFiles.Count; i++)
             {
-                try
+                string imageFile = imageFiles[(startIndex + i) % imageFiles.Count];
+                if (TryLoadSingleImage(imageFile))
                 {
-                    using (var stream = new FileStream(imageFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                    using (var image = Image.FromStream(stream))
-                    {
-                        imageSlider1.Images.Add((Image)image.Clone());
-                    }
-                }
-                catch
-                {
-                    // Ignore invalid or locked images.
+                    return;
                 }
             }
+        }
 
-            if (imageSlider1.Images.Count > 0)
+        private static bool IsMarch8EventPeriod(DateTime date)
+        {
+            DateTime eventDate = new DateTime(date.Year, 3, 8);
+            return date.Date >= eventDate.AddDays(-4) && date.Date <= eventDate.AddDays(4);
+        }
+
+        private static int GetSeasonIndex(int month)
+        {
+            if (month >= 3 && month <= 5)
             {
-                imageSlider1.CurrentImageIndex = 0;
+                return 0; // spring
             }
+
+            if (month >= 6 && month <= 8)
+            {
+                return 1; // summer
+            }
+
+            if (month >= 9 && month <= 11)
+            {
+                return 2; // autumn
+            }
+
+            return 3; // winter
+        }
+
+        private static System.Collections.Generic.List<string> GetImageFiles(string folderPath)
+        {
+            if (!Directory.Exists(folderPath))
+            {
+                return new System.Collections.Generic.List<string>();
+            }
+
+            return Directory.GetFiles(folderPath)
+                .Where(IsImageFile)
+                .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+
+        private bool TryLoadSingleImage(string imageFile)
+        {
+            try
+            {
+                using (var stream = new FileStream(imageFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var image = Image.FromStream(stream))
+                {
+                    imageSlider1.Images.Clear();
+                    imageSlider1.Images.Add((Image)image.Clone());
+                    AdjustSplashSizeToImage(image);
+                    imageSlider1.CurrentImageIndex = 0;
+                    return true;
+                }
+            }
+            catch
+            {
+                // Ignore invalid or locked images.
+                return false;
+            }
+        }
+
+        private void AdjustSplashSizeToImage(Image image)
+        {
+            if (image.Width <= 0 || image.Height <= 0)
+            {
+                return;
+            }
+
+            Rectangle workingArea = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 933, 519);
+            const double maxScreenFill = 0.82;
+
+            double maxWidth = Math.Max(320, workingArea.Width * maxScreenFill);
+            double maxHeight = Math.Max(240, workingArea.Height * maxScreenFill);
+            double scale = Math.Min(maxWidth / image.Width, maxHeight / image.Height);
+            scale = Math.Min(scale, 1.0);
+
+            int targetWidth = Math.Max(320, (int)Math.Round(image.Width * scale));
+            int targetHeight = Math.Max(240, (int)Math.Round(image.Height * scale));
+
+            ClientSize = new Size(targetWidth, targetHeight);
+            CenterToScreen();
         }
 
         private static bool IsImageFile(string path)
