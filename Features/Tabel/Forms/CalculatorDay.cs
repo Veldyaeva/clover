@@ -28,6 +28,7 @@ namespace SewingProduction.Features.Tabel.Forms
         public string dopResult { get ; private set; }
         private readonly int _grId;
         private readonly string _dd;
+        private readonly int _dl_d;
         private readonly string _dLetters;
         private readonly string _dNumber;
         private static DatabaseHelper _dbHelper;
@@ -35,7 +36,7 @@ namespace SewingProduction.Features.Tabel.Forms
         private readonly ILogger _logger = new FileLogger();
         private static TabelDataService _tabelDataService;
         private List<WorkTypes> _WorkTypesList = new List<WorkTypes>();
-        public CalculatorDay(int idGr, string dd, string d,string dop)
+        public CalculatorDay(int idGr, string dd, string d,string dop, int dl_d)
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.Manual;
@@ -47,6 +48,7 @@ namespace SewingProduction.Features.Tabel.Forms
             this.Size = new Size(220, 150);
             _grId = idGr;
             _dd = dd;
+            _dl_d = dl_d;
             _dLetters = ExtractLettersRegex(d);
             _dNumber = ExtractNumber(d);
             InitializeComponent();
@@ -359,7 +361,15 @@ namespace SewingProduction.Features.Tabel.Forms
             StringBuilder valueDd = new StringBuilder();
             if (customRadioGroup1.SelectedIndex == 0)
             {
-                valueDd.Append("1");
+                if (_dl_d == 8)
+                {
+                    valueDd.Append("1");
+                }
+                else
+                {
+                    valueDd.Append("11");
+                }
+                    
             }
             else if(customRadioGroup1.SelectedIndex == 1)
             {

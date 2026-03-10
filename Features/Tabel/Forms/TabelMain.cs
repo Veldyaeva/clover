@@ -253,6 +253,7 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnTabno.FieldName = "tab";
             gridColumnFio.FieldName = "fio";
             gridColumnUin.FieldName = "uin";
+            gridColumnDlD.FieldName = "dl_d";
             gridColumnTsplPart.FieldName = "tsplPart";
             gridColumnTsplPart.DisplayFormat.FormatString = "0.00";
             gridColumnTsplPart.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -1105,8 +1106,9 @@ namespace SewingProduction.Features.Tabel.Forms
             string markColumnNameDop = $"dop{dayNumber.ToString("00")}";
             string currentDd = gridView1.GetRowCellValue(rowHandle, markColumnNameDD).ToString();
             string currentD = gridView1.GetRowCellValue(rowHandle, markColumnNameD).ToString();
+            int dl_d = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "dl_d"));
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
-            using (var calculator = new CalculatorDay(grId, currentDd, currentD, markColumnNameDop))
+            using (var calculator = new CalculatorDay(grId, currentDd, currentD, markColumnNameDop,dl_d))
             {
                 //Point mousePosition = Control.MousePosition;
                 //calculator.StartPosition = FormStartPosition.Manual;

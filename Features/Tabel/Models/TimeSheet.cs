@@ -78,6 +78,7 @@ namespace SewingProduction.Features.Tabel.Models
         public string dd30 { get; set; }
         public string dd31 { get; set; }
         public double tItogD { get; set; }
+        public int dl_d { get; set; }
         public double tItogViewChas { get; set; }
         public decimal tsplPart { get; set; }
         public decimal tsplPartOf {  get; set; }
