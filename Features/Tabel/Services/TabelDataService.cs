@@ -139,7 +139,7 @@ namespace SewingProduction.Features.Tabel.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select *,round((tItogViewChas+0.0)/dl_d,2) as tItogD  from TimeSheetUnion where mg = '{mg}' and ttabn = {gr} and podrTableId = {groupID} order by ttabn,ttabnsort,fio asc ";
+                    string query = $"select *,iif(dl_d = 0 ,0,round((tItogViewChas+0.0)/dl_d,2)) as tItogD  from TimeSheetUnion where mg = '{mg}' and ttabn = {gr} and podrTableId = {groupID} order by ttabn,ttabnsort,fio asc ";
 
                     var result = await connection.QueryAsync<TimeSheet>(query, new Dictionary<string, object> { });
                     return result.ToList();
@@ -224,7 +224,7 @@ namespace SewingProduction.Features.Tabel.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select * from WorkTypesTabel where podrId = {idGroup} order by id";
+                    string query = $"select * from WorkTypesTabel where podrId = {idGroup} order by nameWorkTypes";
                     var result = await connection.QueryAsync<WorkTypes>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
