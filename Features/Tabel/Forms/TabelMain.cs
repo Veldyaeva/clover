@@ -359,20 +359,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 {
                     DateTime dateTimeNow = DateTime.Now.Date;
                     DateTime? datetimeValue = _tabelDataService.GetDateReadOnlyDd(currentMG);
-                    if (dateTimeNow >= datetimeValue)
-                    {
-                        foreach (GridColumn column in gridView1.Columns)
-                        {
-                            // Проверяем, что FieldName не пустой и начинается на "d" (без учета регистра)
-                            if (!string.IsNullOrEmpty(column.FieldName) &&
-                                column.FieldName.StartsWith("d", StringComparison.OrdinalIgnoreCase))
-                            {
-                                // Делаем колонку только для чтения
-                                column.OptionsColumn.ReadOnly = true;
-                            }
-                        }
-                    }
-                    else
+                    if (dateTimeNow <= datetimeValue)
                     {
                         foreach (GridColumn column in gridView1.Columns)
                         {
@@ -382,6 +369,21 @@ namespace SewingProduction.Features.Tabel.Forms
                             {
                                 // Делаем колонку только для чтения
                                 column.OptionsColumn.ReadOnly = false;
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                       
+                        foreach (GridColumn column in gridView1.Columns)
+                        {
+                            // Проверяем, что FieldName не пустой и начинается на "d" (без учета регистра)
+                            if (!string.IsNullOrEmpty(column.FieldName) &&
+                                column.FieldName.StartsWith("d", StringComparison.OrdinalIgnoreCase))
+                            {
+                                // Делаем колонку только для чтения
+                                column.OptionsColumn.ReadOnly = true;
                             }
                         }
                     }
@@ -1054,7 +1056,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridColumnTsplPart.Visible = true;
                 gridColumnTsplPartOf.Visible = true;
                 gridView1.Columns["tsp_naimen"].Visible = true;
-
+                layoutControlItem18.ContentVisible = false;
 
             }
             if (idGr == 20)
@@ -1063,6 +1065,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridColumnTsplPart.Visible = false;
                 gridColumnTsplPartOf.Visible = false;
                 gridView1.Columns["tsp_naimen"].Visible = false;
+                layoutControlItem18.ContentVisible = true;
             }
             var SpPodr = await _tabelDataService.GetSpPodrAsync(idGr, idUser);
             _spPodr.Clear();
