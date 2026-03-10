@@ -41,6 +41,7 @@ namespace SewingProduction
         private string _fields = "*";
         private string _table = "";
         private DateTime _lastStartAttemptUtc = DateTime.MinValue;
+        private int _startRetryScheduled;
 
         private int _onChangeGate = 0;
 
@@ -60,6 +61,7 @@ namespace SewingProduction
         {
             _brokerStopped = true;
             _flagStartListening = false;
+            Interlocked.Exchange(ref _startRetryScheduled, 0);
             StopListening();
         }
 
@@ -130,11 +132,13 @@ namespace SewingProduction
 
                 Debug.WriteLine(
                     $"[ServiceBroker] Listening started: owner={_ownerName}, table={_table}, fields={_fields}, state={_connection.State}");
+                Interlocked.Exchange(ref _startRetryScheduled, 0);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ServiceBroker] StartListening error: owner={_ownerName}, table={_table}, fields={_fields}, error={ex}");
                 StopListening();
+                ScheduleStartRetry("start-error");
             }
         }
         private static void EnsureSqlDependencyStarted(string connectionString)
@@ -297,14 +301,40 @@ namespace SewingProduction
             }
         }
 
+        private void ScheduleStartRetry(string reason)
+        {
+            if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
+                return;
+
+            if (Interlocked.Exchange(ref _startRetryScheduled, 1) == 1)
+                return;
+
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                    if (_brokerStopped || !_flagStartListening || string.IsNullOrWhiteSpace(_table))
+                        return;
+
+                    Debug.WriteLine($"[ServiceBroker] Retry StartListening: owner={_ownerName}, table={_table}, reason={reason}");
+                    StartListening(_fields, _table);
+                }
+                catch { }
+                finally
+                {
+                    Interlocked.Exchange(ref _startRetryScheduled, 0);
+                }
+            });
+        }
+
         private static bool IsInvalidSubscription(SqlNotificationEventArgs e)
         {
             return e.Info == SqlNotificationInfo.Invalid
                 || e.Info == SqlNotificationInfo.Options
                 || e.Info == SqlNotificationInfo.Query
                 || e.Info == SqlNotificationInfo.Isolation
-                || e.Info == SqlNotificationInfo.TemplateLimit
-                || e.Info == SqlNotificationInfo.Error;
+                || e.Info == SqlNotificationInfo.TemplateLimit;
         }
 
         private static string BuildQuotedTableName(string tableOrSchemaTable)
