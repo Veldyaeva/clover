@@ -1,4 +1,5 @@
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ using System.Threading.Tasks;
 namespace SewingProduction.Core.helpers
 {
     /// <summary>
-    /// РљРѕРјРїРѕР·РёС†РёРѕРЅРЅС‹Р№ РєРѕРЅС‚СЂРѕР»Р»РµСЂ ServiceBroker Р±РµР· Р±Р°Р·РѕРІРѕР№ С„РѕСЂРјС‹.
-    /// РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ: С„РѕСЂРјР° (CustomForm) СЂРµР°Р»РёР·СѓРµС‚ IServiceBrokerHost Рё РІС‹Р·С‹РІР°РµС‚ InitAsync.
+    /// Композиционный контроллер ServiceBroker без базовой формы.
+    /// Использование: форма (CustomForm) реализует IServiceBrokerHost и вызывает InitAsync.
     /// </summary>
     public sealed class ServiceBrokerController : IAsyncDisposable
     {
@@ -29,18 +30,18 @@ namespace SewingProduction.Core.helpers
 
         public async Task InitAsync(CancellationToken ct)
         {
-            lock (_initLock)
             {
                 if (_initialized)
                     return;
-                _initialized = true;
             }
 
             if (!ServiceBrokerSettings.Enabled)
                 return;
+
             try
             {
                 var sbSettings = SettingsManager.GetServiceBrokerSettings();
+
                 Coordinator = new EnhancedRefreshCoordinator(
                     reloadByObjectNameAsync: async (obj) => await _host.RestartDataByObjectNameAsync(obj, ct).ConfigureAwait(false),
                     debounce: TimeSpan.FromMilliseconds(sbSettings.DebounceMs),
@@ -83,6 +84,11 @@ namespace SewingProduction.Core.helpers
                 }
 
                 await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
+
+                lock (_initLock)
+                {
+                    _initialized = true;
+                }
             }
             catch
             {
@@ -93,10 +99,9 @@ namespace SewingProduction.Core.helpers
                 throw;
             }
         }
-
         /// <summary>
-        /// Р‘Р°Р·РѕРІР°СЏ РѕР±СЂР°Р±РѕС‚РєР° РѕР±РЅРѕРІР»РµРЅРёСЏ (table->objectName->РєРѕРѕСЂРґРёРЅР°С‚РѕСЂ).
-        /// Р’С‹Р·С‹РІР°Р№С‚Рµ РёР· IDataUpdatableFormAsyncV2.UpdateDataInFormAsync.
+        /// Базовая обработка обновления (table->objectName->координатор).
+        /// Вызывайте из IDataUpdatableFormAsyncV2.UpdateDataInFormAsync.
         /// </summary>
         public async Task HandleUpdateAsync(string tableName, string fieldsChangedCsv)
         {
@@ -111,7 +116,6 @@ namespace SewingProduction.Core.helpers
             Coordinator.RequestBatch(affected);
             return;
         }
-
         public async ValueTask DisposeAsync()
         {
             try

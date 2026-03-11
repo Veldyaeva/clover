@@ -5,15 +5,13 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using SewingProduction.Core.helpers;
 
 namespace SewingProduction
 {
     /// <summary>
     /// Тонкий адаптер SqlDependency (Query Notifications).
-    /// Глобальный SqlDependency.Start/Stop выполняется лениво (при первом StartListening)
-    /// и один раз на процесс приложения.
+    /// Глобальный SqlDependency.Start/Stop управляется в Program/Main.
     /// Делает только:
     /// - StartListening / StopListening
     /// - уведомление Changed при изменениях
@@ -26,10 +24,7 @@ namespace SewingProduction
             => Changed?.Invoke(table, changedFieldsCsv) ?? Task.CompletedTask;
 
         private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
-        private readonly string _ownerName;
-        private static readonly object _sqlDependencySync = new object();
-        private static int _sqlDependencyStarted;
-        private static string? _sqlDependencyConn;
+        private readonly object _ownerName;
 
         private SqlConnection? _connection;
         private SqlCommand? _command;
@@ -44,6 +39,14 @@ namespace SewingProduction
         private int _startRetryScheduled;
 
         private int _onChangeGate = 0;
+
+        private readonly SemaphoreSlim _listenSemaphore = new(1, 1);
+        private volatile bool _isListening;
+        private readonly Guid _brokerId = Guid.NewGuid();
+        private string OwnerName =>
+     _ownerName?.GetType().FullName
+    ?? "<unknown>";
+
 
         public ServiceBroker(object owner)
         {
@@ -67,178 +70,273 @@ namespace SewingProduction
 
         public void StartListening(string fields, string table)
         {
-            if (string.IsNullOrWhiteSpace(table))
-                return;
+            //if (string.IsNullOrWhiteSpace(table))
+            //    return;
 
-            var requestedFields = string.IsNullOrWhiteSpace(fields) ? "*" : fields.Trim();
-            var requestedTable = table.Trim();
+            //var requestedFields = string.IsNullOrWhiteSpace(fields) ? "*" : fields.Trim();
+            //var requestedTable = table.Trim();
 
-            // Защита от лишних повторных вызовов StartListening извне
-            // (если уже подписаны на те же table/fields и соединение живое).
-            if (_flagStartListening &&
-                !_brokerStopped &&
-                _dependency != null &&
-                _connection != null &&
-                _connection.State == ConnectionState.Open &&
-                string.Equals(_fields, requestedFields, StringComparison.OrdinalIgnoreCase) &&
-                string.Equals(_table, requestedTable, StringComparison.OrdinalIgnoreCase))
-            {
-                return;
-            }
+            //// Защита от лишних повторных вызовов StartListening извне
+            //// (если уже подписаны на те же table/fields и соединение живое).
+            //if (_flagStartListening &&
+            //    !_brokerStopped &&
+            //    _dependency != null &&
+            //    _connection != null &&
+            //    _connection.State == ConnectionState.Open &&
+            //    string.Equals(_fields, requestedFields, StringComparison.OrdinalIgnoreCase) &&
+            //    string.Equals(_table, requestedTable, StringComparison.OrdinalIgnoreCase))
+            //{
+            //    return;
+            //}
 
-            // Минимальный интервал между попытками старта при нестабильной БД,
-            // чтобы не разгонять STARTED_OUTBOUND в цикле.
-            var nowUtc = DateTime.UtcNow;
-            if ((nowUtc - _lastStartAttemptUtc) < TimeSpan.FromSeconds(10))
-            {
-                Debug.WriteLine(
-                    $"[ServiceBroker] StartListening skipped by backoff: owner={_ownerName}, table={requestedTable}, fields={requestedFields}");
-                return;
-            }
-            _lastStartAttemptUtc = nowUtc;
+            //// Минимальный интервал между попытками старта при нестабильной БД,
+            //// чтобы не разгонять STARTED_OUTBOUND в цикле.
+            //var nowUtc = DateTime.UtcNow;
+            //if ((nowUtc - _lastStartAttemptUtc) < TimeSpan.FromSeconds(10))
+            //{
+            //    Debug.WriteLine(
+            //        $"[ServiceBroker] StartListening skipped by backoff: owner={_ownerName}, table={requestedTable}, fields={requestedFields}");
+            //    return;
+            //}
+            //_lastStartAttemptUtc = nowUtc;
 
-            _fields = requestedFields;
-            _table = requestedTable;
-            _flagStartListening = true;
-            _brokerStopped = false;
+            //_fields = requestedFields;
+            //_table = requestedTable;
+            //_flagStartListening = true;
+            //_brokerStopped = false;
 
+            //try
+            //{
+            //    EnsureSqlDependencyStarted(_connectionString);
+            //    StopListening();
+
+            //    var fullTable = BuildQuotedTableName(_table);
+            //    var query = $"SELECT {_fields} FROM {fullTable}";
+            //    Debug.WriteLine(
+            //        $"[ServiceBroker] StartListening: owner={_ownerName}, table={_table}, fields={_fields}, query={query}");
+
+            //    _connection = new SqlConnection(_connectionString);
+            //    _command = new SqlCommand(query, _connection)
+            //    {
+            //        Notification = null,
+            //        CommandTimeout = 120
+            //    };
+
+            //    _dependency = new SqlDependency(_command);
+            //    _dependency.OnChange += OnDependencyChange;
+
+            //    _connection.Open();
+
+            //    // обязательно выполнить команду — иначе QN не зарегистрируется
+            //    using (var reader = _command.ExecuteReader(CommandBehavior.SingleResult))
+            //    {
+            //        // no-op
+            //    }
+
+            //    Debug.WriteLine(
+            //        $"[ServiceBroker] Listening started: owner={_ownerName}, table={_table}, fields={_fields}, state={_connection.State}");
+            //    Interlocked.Exchange(ref _startRetryScheduled, 0);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.WriteLine($"[ServiceBroker] StartListening error: owner={_ownerName}, table={_table}, fields={_fields}, error={ex}");
+            //    StopListening();
+            //    ScheduleStartRetry("start-error");
+            //}
+
+            StartListeningAsync(fields, table).GetAwaiter().GetResult();
+        }
+
+
+        public async Task StartListeningAsync(string fields, string table, CancellationToken ct = default)
+        {
+            await _listenSemaphore.WaitAsync(ct).ConfigureAwait(false);
             try
             {
-                EnsureSqlDependencyStarted(_connectionString);
-                StopListening();
-
-                var fullTable = BuildQuotedTableName(_table);
-                var query = $"SELECT {_fields} FROM {fullTable}";
-                Debug.WriteLine(
-                    $"[ServiceBroker] StartListening: owner={_ownerName}, table={_table}, fields={_fields}, query={query}");
-
-                _connection = new SqlConnection(_connectionString);
-                _command = new SqlCommand(query, _connection)
-                {
-                    Notification = null,
-                    CommandTimeout = 120
-                };
-
-                _dependency = new SqlDependency(_command);
-                _dependency.OnChange += OnDependencyChange;
-
-                _connection.Open();
-
-                // обязательно выполнить команду — иначе QN не зарегистрируется
-                using (var reader = _command.ExecuteReader(CommandBehavior.SingleResult))
-                {
-                    // no-op
-                }
-
-                Debug.WriteLine(
-                    $"[ServiceBroker] Listening started: owner={_ownerName}, table={_table}, fields={_fields}, state={_connection.State}");
-                Interlocked.Exchange(ref _startRetryScheduled, 0);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[ServiceBroker] StartListening error: owner={_ownerName}, table={_table}, fields={_fields}, error={ex}");
-                StopListening();
-                ScheduleStartRetry("start-error");
-            }
-        }
-        private static void EnsureSqlDependencyStarted(string connectionString)
-        {
-            if (Interlocked.CompareExchange(ref _sqlDependencyStarted, 1, 1) == 1)
-                return;
-
-            lock (_sqlDependencySync)
-            {
-                if (_sqlDependencyStarted == 1)
+                if (_brokerStopped)
                     return;
 
-                SqlDependency.Start(connectionString);
-                _sqlDependencyConn = connectionString;
-                _sqlDependencyStarted = 1;
-                Debug.WriteLine("[ServiceBroker] SqlDependency.Start initialized lazily.");
-
-                AppDomain.CurrentDomain.ProcessExit += (_, __) => StopSqlDependencyGlobal();
-                AppDomain.CurrentDomain.DomainUnload += (_, __) => StopSqlDependencyGlobal();
-                Application.ApplicationExit += (_, __) => StopSqlDependencyGlobal();
-            }
-        }
-
-        private static void StopSqlDependencyGlobal()
-        {
-            if (Interlocked.Exchange(ref _sqlDependencyStarted, 0) != 1)
-                return;
-
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(_sqlDependencyConn))
-                    SqlDependency.Stop(_sqlDependencyConn);
-            }
-            catch { }
-            finally
-            {
-                _sqlDependencyConn = null;
-            }
-        }
-
-        public bool StopListening()
-        {
-            try
-            {
-                //Debug.WriteLine($"[ServiceBroker] StopListening: table={_table}, fields={_fields}");
-                // 1) Отписываемся от события ПЕРЕД обнулением dependency
-                if (_dependency != null)
+                if (_isListening)
                 {
-                    _dependency.OnChange -= OnDependencyChange;
-                    _dependency = null;
+                    Debug.WriteLine(
+                        $"[ServiceBroker:{_brokerId}] StartListening skipped: already listening, owner={OwnerName}, table={table}");
+                    return;
                 }
 
-                // 2) КРИТИЧНО: обнуляем Notification ПЕРЕД Dispose команды
-                if (_command != null)
-                {
-                    _command.Notification = null; // ← ВАЖНО для предотвращения утечек
-                    _command.Dispose();
-                    _command = null;
-                }
+                _fields = fields;
+                _table = table;
+                _flagStartListening = true;
 
-                // 3) Закрываем и освобождаем соединение
-                if (_connection != null)
+                var query = $"SELECT {fields} FROM [{table.Replace(".", "].[")}]";
+
+                Debug.WriteLine(
+                    $"[ServiceBroker:{_brokerId}] StartListening: owner={OwnerName}, table={table}, fields={fields}, query={query}");
+
+                _connection = new SqlConnection(_connectionString);
+                await _connection.OpenAsync(ct).ConfigureAwait(false);
+
+                Debug.WriteLine(
+                    $"[ServiceBroker:{_brokerId}] Connection opened: owner={OwnerName}, table={table}, clientConnectionId={_connection.ClientConnectionId}");
+
+                _command = _connection.CreateCommand();
+                _command.CommandText = query;
+                _command.CommandType = CommandType.Text;
+                _command.CommandTimeout = 30; // при желании вынести в настройки
+
+                _dependency = new SqlDependency(_command);
+                _dependency.OnChange -= OnDependencyChange;
+                _dependency.OnChange += OnDependencyChange;
+
+                using (var reader = await _command.ExecuteReaderAsync(ct).ConfigureAwait(false))
                 {
-                    try 
-                    { 
-                        if (_connection.State != ConnectionState.Closed)
-                            _connection.Close(); 
-                    } 
-                    catch (Exception closeEx)
+                    while (await reader.ReadAsync(ct).ConfigureAwait(false))
                     {
-                        Debug.WriteLine($"[ServiceBroker] Error closing connection: {closeEx}");
+                        // ничего не делаем — нам важно зарегистрировать подписку
                     }
-                    
-                    _connection.Dispose();
-                    _connection = null;
                 }
 
-                return true;
+                _isListening = true;
+
+                Debug.WriteLine(
+                    $"[ServiceBroker:{_brokerId}] Listening started: owner={OwnerName}, table={table}, clientConnectionId={_connection.ClientConnectionId}, state={_connection.State}");
+            }
+            catch (SqlException ex)
+            {
+                Debug.WriteLine(
+                    $"[ServiceBroker:{_brokerId}][SQL-ERROR] owner={OwnerName}, table={table}, fields={fields}, " +
+                    $"clientConnectionId={ex.ClientConnectionId}, number={ex.Number}, state={ex.State}, class={ex.Class}, " +
+                    $"procedure={ex.Procedure}, message={ex.Message}");
+
+                SafeStopListeningInternal();
+                throw;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[ServiceBroker] StopListening error: {ex}");
-                // Гарантируем освобождение даже при ошибке
-                try
-                {
-                    _command?.Dispose();
-                    _command = null;
-                    _connection?.Dispose();
-                    _connection = null;
-                    _dependency = null;
-                }
-                catch { }
-                return false;
+                Debug.WriteLine(
+                    $"[ServiceBroker:{_brokerId}][ERROR] owner={OwnerName}, table={table}, fields={fields}, message={ex}");
+
+                SafeStopListeningInternal();
+                throw;
+            }
+            finally
+            {
+                _listenSemaphore.Release();
             }
         }
+
+        public void StopListening()
+        {
+            try
+            {
+                _listenSemaphore.Wait();
+                SafeStopListeningInternal();
+            }
+            finally
+            {
+                _listenSemaphore.Release();
+            }
+        }
+
+        private void SafeStopListeningInternal()
+        {
+            try
+            {
+                if (_dependency != null)
+                    _dependency.OnChange -= OnDependencyChange;
+            }
+            catch { }
+
+            try
+            {
+                if (_command != null)
+                    _command.Notification = null;
+            }
+            catch { }
+
+            try
+            {
+                _command?.Dispose();
+            }
+            catch { }
+
+            try
+            {
+                _connection?.Dispose();
+            }
+            catch { }
+
+            Debug.WriteLine(
+                $"[ServiceBroker:{_brokerId}] StopListening: owner={OwnerName}, table={_table}, clientConnectionId={_connection?.ClientConnectionId}");
+
+            _dependency = null;
+            _command = null;
+            _connection = null;
+            _isListening = false;
+        }
+        //public bool StopListening()
+        //{
+        //    try
+        //    {
+        //        //Debug.WriteLine($"[ServiceBroker] StopListening: table={_table}, fields={_fields}");
+        //        // 1) Отписываемся от события ПЕРЕД обнулением dependency
+        //        if (_dependency != null)
+        //        {
+        //            _dependency.OnChange -= OnDependencyChange;
+        //            _dependency = null;
+        //        }
+
+        //        // 2) КРИТИЧНО: обнуляем Notification ПЕРЕД Dispose команды
+        //        if (_command != null)
+        //        {
+        //            _command.Notification = null; // ← ВАЖНО для предотвращения утечек
+        //            _command.Dispose();
+        //            _command = null;
+        //        }
+
+        //        // 3) Закрываем и освобождаем соединение
+        //        if (_connection != null)
+        //        {
+        //            try 
+        //            { 
+        //                if (_connection.State != ConnectionState.Closed)
+        //                    _connection.Close(); 
+        //            } 
+        //            catch (Exception closeEx)
+        //            {
+        //                Debug.WriteLine($"[ServiceBroker] Error closing connection: {closeEx}");
+        //            }
+                    
+        //            _connection.Dispose();
+        //            _connection = null;
+        //        }
+
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine($"[ServiceBroker] StopListening error: {ex}");
+        //        // Гарантируем освобождение даже при ошибке
+        //        try
+        //        {
+        //            _command?.Dispose();
+        //            _command = null;
+        //            _connection?.Dispose();
+        //            _connection = null;
+        //            _dependency = null;
+        //        }
+        //        catch { }
+        //        return false;
+        //    }
+        //}
 
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
+            //Debug.WriteLine(
+            //    $"[ServiceBroker] Notification: table={_table}, fields={_fields}, type={e.Type}, info={e.Info}, source={e.Source}");
             Debug.WriteLine(
-                $"[ServiceBroker] Notification: table={_table}, fields={_fields}, type={e.Type}, info={e.Info}, source={e.Source}");
+        $"[ServiceBroker:{_brokerId}] Notification: owner={OwnerName}, table={_table}, fields={_fields}, " +
+        $"type={e.Type}, info={e.Info}, source={e.Source}");
+
             // защита от параллельных вызовов
             if (Interlocked.Exchange(ref _onChangeGate, 1) == 1)
                 return;
@@ -251,22 +349,40 @@ namespace SewingProduction
                 if (_brokerStopped)
                     return;
 
-                // Если подписка невалидна (SQL options/query restrictions),
-                // не запускаем бесконечный цикл мгновенных переподписок.
-                if (IsInvalidSubscription(e))
-                {
-                    _flagStartListening = false;
-                    _brokerStopped = true;
-                    Debug.WriteLine(
-                        $"[ServiceBroker] Subscription invalid. Listening stopped for table={_table}. " +
-                        $"type={e.Type}, info={e.Info}, source={e.Source}. " +
-                        "Fix SELECT/query notification prerequisites before restarting listening.");
-                    return;
-                }
+                //// Если подписка невалидна (SQL options/query restrictions),
+                //// не запускаем бесконечный цикл мгновенных переподписок.
+                //if (IsInvalidSubscription(e))
+                //{
+                //    _flagStartListening = false;
+                //    _brokerStopped = true;
+                //    Debug.WriteLine(
+                //        $"[ServiceBroker] Subscription invalid. Listening stopped for table={_table}. " +
+                //        $"type={e.Type}, info={e.Info}, source={e.Source}. " +
+                //        "Fix SELECT/query notification prerequisites before restarting listening.");
+                //    return;
+                //}
 
-                // ВСЕГДА переподписываемся, если слушание активно и подписка валидна
-                if (_flagStartListening)
-                    StartListening(_fields, _table);
+                //// ВСЕГДА переподписываемся, если слушание активно и подписка валидна
+                //if (_flagStartListening)
+                //    StartListening(_fields, _table);
+                var shouldResubscribe = _flagStartListening;
+                if (shouldResubscribe)
+                {
+                    try
+                    {
+                        await StartListeningAsync(_fields, _table).ConfigureAwait(false);
+                    }
+                    catch (SqlException ex) when (ex.Number == -2 || ex.Number == 2714)
+                    {
+                        Debug.WriteLine(
+                            $"[ServiceBroker:{_brokerId}] Resubscribe delayed after SQL error: owner={OwnerName}, table={_table}, number={ex.Number}");
+
+                        await Task.Delay(2000).ConfigureAwait(false);
+
+                        if (!_brokerStopped && _flagStartListening)
+                            await StartListeningAsync(_fields, _table).ConfigureAwait(false);
+                    }
+                }
 
                 // UI/обновление — только если это реальное изменение данных
                 if (e.Type != SqlNotificationType.Change)
@@ -285,15 +401,17 @@ namespace SewingProduction
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[ServiceBroker] OnDependencyChange error: {ex}");
+                 Debug.WriteLine(//$"[ServiceBroker] OnDependencyChange error: {ex}");
+                $"[ServiceBroker:{_brokerId}] OnDependencyChange error: owner={OwnerName}, table={_table}, message={ex}");
+
                 // на всякий случай попробуем переподписаться
-                try
-                {
-                    StopListening();
-                    if (!_brokerStopped && _flagStartListening)
-                        StartListening(_fields, _table);
-                }
-                catch { }
+                //try
+                //{
+                //    StopListening();
+                //    if (!_brokerStopped && _flagStartListening)
+                //        StartListening(_fields, _table);
+                //}
+                //catch { }
             }
             finally
             {

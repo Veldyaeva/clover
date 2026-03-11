@@ -17,14 +17,15 @@ using SewingProduction.Models;
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Runtime.ExceptionServices;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SewingProduction.ServiceBroker;
 
 
 namespace SewingProduction.Core
@@ -46,6 +47,7 @@ namespace SewingProduction.Core
         private static ILogger _logger = new HybridLogger();
 
         private const string DefaultSkin = "Office 2019 Colorful";
+        private const string SqlFirstChanceVerboseEnv = "SP_SQL_TRACE_ALL";
 
         /// <summary>
         /// Главная точка входа для приложения.
@@ -96,13 +98,28 @@ namespace SewingProduction.Core
                 var provider = services.BuildServiceProvider();
                 AppServices.Configure(provider);
                 ServiceBrokerSettings.Enabled = true;
-                Debug.WriteLine("[Program] SqlDependency global start moved to lazy mode (ServiceBroker.StartListening).");
-
+                var sqlDependencyConnection = SettingsManager.GetCurrentConnectionString();
+                var sqlDependencyStarted = false;
+                if (ServiceBrokerSettings.Enabled && !string.IsNullOrWhiteSpace(sqlDependencyConnection))
+                {
+                    try
+                    {
+                        SqlDependency.Start(sqlDependencyConnection);
+                        sqlDependencyStarted = true;
+                        Debug.WriteLine("[Program] SqlDependency.Start initialized globally.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"[Program] SqlDependency.Start failed: {ex}");
+                    }
+                }
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
-                    splashScreen.Show();
-                    splashScreen.Update();
-                    Application.DoEvents();
+                    try
+                    {
+                        splashScreen.Show();
+                        splashScreen.Update();
+                        Application.DoEvents();
 
                     if (!ValidateSystemDate(out var dateError))
                     {
@@ -149,9 +166,25 @@ namespace SewingProduction.Core
                     //PrintingSystemLocalizer.Active = new DxPrintingLocalizerRu(traceUnknown);
                     PreviewLocalizer.Active = new DxPreviewLocalizerRu();
                     
-                    splashScreen.Close();
+                        splashScreen.Close();
 
-                    Application.Run(mainForm);
+                        Application.Run(mainForm);
+                    }
+                    finally
+                    {
+                        if (sqlDependencyStarted && !string.IsNullOrWhiteSpace(sqlDependencyConnection))
+                        {
+                            try
+                            {
+                                SqlDependency.Stop(sqlDependencyConnection);
+                                Debug.WriteLine("[Program] SqlDependency.Stop completed.");
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine($"[Program] SqlDependency.Stop failed: {ex}");
+                            }
+                        }
+                    }
                 }
 
             }
@@ -159,6 +192,11 @@ namespace SewingProduction.Core
         [Conditional("DEBUG")]
         private static void RegisterSqlFirstChanceTrace()
         {
+            var (traceTransient, rawEnvValue, envSource) = ResolveSqlFirstChanceVerbose();
+            Debug.WriteLine(
+                $"[SQL-FIRST-CHANCE] Trace enabled. IncludeTransient={traceTransient}, " +
+                $"{SqlFirstChanceVerboseEnv}='{rawEnvValue ?? "<null>"}', Source={envSource}");
+
             AppDomain.CurrentDomain.FirstChanceException += (_, e) =>
             {
                 if (e?.Exception is not SqlException sqlEx)
@@ -167,7 +205,7 @@ namespace SewingProduction.Core
                 // Для SqlDependency Query Notifications SqlClient может бросать и сам
                 // перехватывать транзиентные first-chance (-2 timeout при регистрации,
                 // 2714 duplicate internal QN procedure). Не засоряем лог ими.
-                if (sqlEx.Number == -2 || sqlEx.Number == 2714)
+                if (!traceTransient && (sqlEx.Number == -2 || sqlEx.Number == 2714))
                     return;
 
                 var topStack = sqlEx.StackTrace;
@@ -180,9 +218,23 @@ namespace SewingProduction.Core
 
                 Debug.WriteLine(
                     $"[SQL-FIRST-CHANCE] Number={sqlEx.Number}, State={sqlEx.State}, Class={sqlEx.Class}, " +
-                    $"Procedure={sqlEx.Procedure}, Line={sqlEx.LineNumber}, Message={sqlEx.Message}");
+                    $"Procedure={sqlEx.Procedure}, Line={sqlEx.LineNumber}, " +
+                    $"ClientConnectionId={sqlEx.ClientConnectionId}, ThreadId={Environment.CurrentManagedThreadId}, " +
+                    $"Message={sqlEx.Message}");
                 if (!string.IsNullOrWhiteSpace(topStack))
                     Debug.WriteLine($"[SQL-FIRST-CHANCE] TopFrame={topStack}");
+
+                try
+                {
+                    var allErrors = sqlEx.Errors
+                        .Cast<SqlError>()
+                        .Select(err => $"#{err.Number}/S{err.State}/C{err.Class}/P:{err.Procedure}/L:{err.LineNumber} -> {err.Message}")
+                        .ToArray();
+
+                    if (allErrors.Length > 0)
+                        Debug.WriteLine("[SQL-FIRST-CHANCE] Errors=[" + string.Join(" | ", allErrors) + "]");
+                }
+                catch { }
 
                 try
                 {
@@ -202,6 +254,33 @@ namespace SewingProduction.Core
                 }
                 catch { }
             };
+        }
+        private static (bool Enabled, string? RawValue, string Source) ResolveSqlFirstChanceVerbose()
+        {
+            string? value = Environment.GetEnvironmentVariable(SqlFirstChanceVerboseEnv);
+            string source = "process";
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                value = Environment.GetEnvironmentVariable(SqlFirstChanceVerboseEnv, EnvironmentVariableTarget.User);
+                source = "user";
+            }
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                value = Environment.GetEnvironmentVariable(SqlFirstChanceVerboseEnv, EnvironmentVariableTarget.Machine);
+                source = "machine";
+            }
+
+            if (string.IsNullOrWhiteSpace(value))
+                return (false, value, source);
+
+            bool enabled =
+                string.Equals(value.Trim(), "1", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(value.Trim(), "true", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(value.Trim(), "yes", StringComparison.OrdinalIgnoreCase);
+
+            return (enabled, value, source);
         }
         private static string PickExistingSkinOrDefault(string skinName, string defaultSkin)
         {
