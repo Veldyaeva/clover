@@ -625,6 +625,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             using (var messageLabel = new Label())
             using (var okButton = new Button())
             using (var cancelButton = new Button())
+            using (var messageFont = new Font("Segoe UI", 25f, FontStyle.Regular, GraphicsUnit.Point))
+            using (var buttonFont = new Font("Segoe UI", 18f, FontStyle.Bold, GraphicsUnit.Point))
+            using (var cancelFont = new Font("Segoe UI", 20f, FontStyle.Bold, GraphicsUnit.Point))
             {
                 dialog.Text = "Завершение смены";
                 dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -632,23 +635,26 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 dialog.MinimizeBox = false;
                 dialog.MaximizeBox = false;
                 dialog.ShowInTaskbar = false;
-                dialog.ClientSize = new Size(360, 140);
+                dialog.ClientSize = new Size(980, 360);
 
                 messageLabel.AutoSize = false;
                 messageLabel.Text = "Завершить текущую смену?";
-                messageLabel.TextAlign = ContentAlignment.MiddleLeft;
-                messageLabel.Location = new Point(16, 16);
-                messageLabel.Size = new Size(328, 48);
+                messageLabel.Font = messageFont;
+                messageLabel.TextAlign = ContentAlignment.MiddleCenter;
+                messageLabel.Location = new Point(20, 20);
+                messageLabel.Size = new Size(940, 150);
 
                 okButton.Text = "Завершить";
+                okButton.Font = buttonFont;
                 okButton.DialogResult = DialogResult.OK;
-                okButton.Size = new Size(110, 32);
-                okButton.Location = new Point(118, 88);
+                okButton.Size = new Size(320, 120);
+                okButton.Location = new Point(170, 205);
 
-                cancelButton.Text = "Отмена";
+                cancelButton.Text = "ОТМЕНА";
+                cancelButton.Font = cancelFont;
                 cancelButton.DialogResult = DialogResult.Cancel;
-                cancelButton.Size = new Size(110, 32);
-                cancelButton.Location = new Point(234, 88);
+                cancelButton.Size = new Size(320, 120);
+                cancelButton.Location = new Point(510, 205);
 
                 dialog.Controls.Add(messageLabel);
                 dialog.Controls.Add(okButton);
