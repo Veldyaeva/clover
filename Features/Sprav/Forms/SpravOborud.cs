@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
 using SewingProduction.Features.Sprav.DataService;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
@@ -17,7 +20,8 @@ namespace SewingProduction.form
     public partial class SpravOborud : CustomForm, IDataUpdatableForm
     {
         private readonly SpravOborudDataService _spravOborudDataService;
-        private readonly ServiceBroker _serviceBroker;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"SpravOborud:{Guid.NewGuid():N}";
         int currentRowIndex = 0;//текущий индекс
         int topRowIndex = 0;//верхний индекс 
         //если добавили поле в таблицу:
@@ -28,8 +32,7 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravOborudDataService = new SpravOborudDataService(dbHelper);
-            _serviceBroker = new ServiceBroker(this);
-            _serviceBroker.Changed += ServiceBrokerChangedAsync;
+            _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
            // ThemeManager.UpdateTheme(this);
         }
 
@@ -53,20 +56,6 @@ namespace SewingProduction.form
             LoadData();
         }
 
-        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
-        {
-            if (IsDisposed || Disposing)
-                return Task.CompletedTask;
-
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateDataInForm(table)));
-                return Task.CompletedTask;
-            }
-
-            UpdateDataInForm(table);
-            return Task.CompletedTask;
-        }
         #endregion
 
         // Загрузка / обновление данных:
@@ -98,12 +87,36 @@ namespace SewingProduction.form
         }
 
         // Загрузка таблицы:
-        private void oborudGrid_Load(object sender, EventArgs e)
+        private async void oborudGrid_Load(object sender, EventArgs e)
         {
             LoadData();
             if (!flagStartListening)
             {
-                _serviceBroker.StartListening("kod_ob,text_ob,text_ob_s,ko_ob_all,spec_ob,nastav,arhiv,no_spec,pokaz_sp,id_class,show_for_plan,vid_shp,vid_vzp,vid_np,vid_rz", "spoborudshv");
+                var tableFields = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["dbo.spoborudshv"] = new[]
+                    {
+                        "kod_ob","text_ob","text_ob_s","ko_ob_all","spec_ob","nastav","arhiv","no_spec",
+                        "pokaz_sp","id_class","show_for_plan","vid_shp","vid_vzp","vid_np","vid_rz"
+                    }
+                };
+                await _sbHub.SubscribeAsync(
+                    ownerId: _sbHubOwnerId,
+                    ownerName: GetType().Name,
+                    tableFields: tableFields,
+                    onTableChangedAsync: async (table, changed) =>
+                    {
+                        if (IsDisposed || Disposing)
+                            return;
+                        if (InvokeRequired)
+                        {
+                            BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                            return;
+                        }
+                        UpdateDataInForm(table);
+                        await Task.CompletedTask;
+                    },
+                    ct: default);
                 flagStartListening = true;
             }
         }
@@ -290,8 +303,7 @@ namespace SewingProduction.form
         }
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
-            _serviceBroker.StopBroker();
+            try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
         }
 
     }

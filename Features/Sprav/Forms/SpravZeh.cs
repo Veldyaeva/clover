@@ -5,7 +5,10 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
 using SewingProduction.Features.Sprav.DataService;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
@@ -15,7 +18,8 @@ namespace SewingProduction.form
     public partial class SpravZeh : CustomForm, IDataUpdatableForm
     {
         private readonly SpravZehDataService _spravZehDataService;
-        private readonly ServiceBroker _serviceBroker;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"SpravZeh:{Guid.NewGuid():N}";
         //чтобы перейти к нужной строке в таблице:
         int currentRowIndex = 0;//текущий индекс
         int topRowIndex = 0;//верхний индекс 
@@ -30,8 +34,7 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
-            _serviceBroker = new ServiceBroker(this);
-            _serviceBroker.Changed += ServiceBrokerChangedAsync;
+            _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
           //  ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
@@ -47,16 +50,14 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
-            _serviceBroker = new ServiceBroker(this);
-            _serviceBroker.Changed += ServiceBrokerChangedAsync;
+            _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
         }
         public SpravZeh()
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
-            _serviceBroker = new ServiceBroker(this);
-            _serviceBroker.Changed += ServiceBrokerChangedAsync;
+            _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {
@@ -74,23 +75,9 @@ namespace SewingProduction.form
             gridControlSprav_Load(null, EventArgs.Empty);
         }
 
-        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
-        {
-            if (IsDisposed || Disposing)
-                return Task.CompletedTask;
-
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateDataInForm(table)));
-                return Task.CompletedTask;
-            }
-
-            UpdateDataInForm(table);
-            return Task.CompletedTask;
-        }
         #endregion
         //Загрузка грида:
-        private void gridControlSprav_Load(object sender, EventArgs e)
+        private async void gridControlSprav_Load(object sender, EventArgs e)
         {
             spravList.DataSource = _spravZehDataService.GetZehList();
             gridViewZeh.Columns[0].Visible = false;
@@ -98,7 +85,27 @@ namespace SewingProduction.form
             gridViewZeh.OptionsView.ColumnAutoWidth = true;
             if (!flagStartListening)
             {
-                _serviceBroker.StartListening("idZeh,nameZeh,address,idProizv", "ZehList");
+                var tableFields = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["dbo.ZehList"] = new[] { "idZeh", "nameZeh", "address", "idProizv" }
+                };
+                await _sbHub.SubscribeAsync(
+                    ownerId: _sbHubOwnerId,
+                    ownerName: GetType().Name,
+                    tableFields: tableFields,
+                    onTableChangedAsync: async (table, changed) =>
+                    {
+                        if (IsDisposed || Disposing)
+                            return;
+                        if (InvokeRequired)
+                        {
+                            BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                            return;
+                        }
+                        UpdateDataInForm(table);
+                        await Task.CompletedTask;
+                    },
+                    ct: default);
                 flagStartListening = true;
             }
         }
@@ -262,8 +269,7 @@ namespace SewingProduction.form
         // Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
-            _serviceBroker.StopBroker();
+            try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
         }
 
     }

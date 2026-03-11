@@ -5,7 +5,10 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.Extensions.DependencyInjection;
+using SewingProduction.Core;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
 using SewingProduction.Features.Sprav.DataService;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
@@ -18,7 +21,8 @@ namespace SewingProduction.form
     public partial class OborudBrig : CustomForm, IDataUpdatableForm
     {
         private readonly OborudBrigDataService _oborudBrigDataService;
-        private readonly ServiceBroker _serviceBroker;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"OborudBrig:{Guid.NewGuid():N}";
         private SqlDependency sqlDependency;
         private SqlConnection connection;
         bool flagStartListening = false; //вкл прослушки
@@ -29,16 +33,35 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
-            _serviceBroker = new ServiceBroker(this);
-            _serviceBroker.Changed += ServiceBrokerChangedAsync;
+            _sbHub = AppServices.Services?.GetService<IAppServiceBrokerHub>() ?? new AppServiceBrokerHub();
           //  ThemeManager.UpdateTheme(this);
         }
         #region service broker
-        private void OborudBrig_Load_1(object sender, EventArgs e)
+        private async void OborudBrig_Load_1(object sender, EventArgs e)
         {
             if (!flagStartListening)
             {
-                _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
+                var tableFields = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
+                {
+                    ["dbo.OborudBrig"] = new[] { "idOB", "idZeh", "kod_ob", "count" }
+                };
+                await _sbHub.SubscribeAsync(
+                    ownerId: _sbHubOwnerId,
+                    ownerName: GetType().Name,
+                    tableFields: tableFields,
+                    onTableChangedAsync: async (table, changed) =>
+                    {
+                        if (IsDisposed || Disposing)
+                            return;
+                        if (InvokeRequired)
+                        {
+                            BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                            return;
+                        }
+                        UpdateDataInForm(table);
+                        await Task.CompletedTask;
+                    },
+                    ct: default);
                 flagStartListening = true;
             }
             gridOborud_Load(null, EventArgs.Empty);
@@ -54,20 +77,6 @@ namespace SewingProduction.form
             gridOborud_Load(null, EventArgs.Empty);
         }
 
-        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
-        {
-            if (IsDisposed || Disposing)
-                return Task.CompletedTask;
-
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateDataInForm(table)));
-                return Task.CompletedTask;
-            }
-
-            UpdateDataInForm(table);
-            return Task.CompletedTask;
-        }
         #endregion
 
         // Обнолвение таблиц при активации вкладки:
@@ -161,11 +170,6 @@ namespace SewingProduction.form
                     gridView.FocusedRowHandle = rowHandle;
                     gridView.MakeRowVisible(rowHandle);
                 }
-                if (!flagStartListening)
-                {
-                    _serviceBroker.StartListening("idOB,idZeh,kod_ob,count", "OborudBrig");
-                    flagStartListening = true;
-                }
             }
         }
         //Редактирование кол-ва оборудования
@@ -207,8 +211,7 @@ namespace SewingProduction.form
         }
         private void OborudBrig_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
-            try { _serviceBroker?.StopBroker(); } catch { }
+            try { _sbHub.UnsubscribeAsync(_sbHubOwnerId).GetAwaiter().GetResult(); } catch { }
         }
     }
 
