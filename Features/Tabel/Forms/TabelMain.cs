@@ -270,8 +270,10 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnTsplPartOf.FieldName = "tsplPartOf";
             gridColumnTsplPartOf.DisplayFormat.FormatString = "0.00";
             gridColumnTsplPartOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-
+            gridView1.OptionsView.ShowFooter = true;
             gridColumnCheckIncludePlan.FieldName = "ts_plan";
+            gridColumnCheckIncludePlan.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gridColumnCheckIncludePlan.SummaryItem.DisplayFormat = "План: {0}";
             gridColumnPodrTableID.FieldName = "podrTableID";
             gridColumnFio.Width = 90;
             gridView1.OptionsView.EnableAppearanceEvenRow = false;
