@@ -1910,7 +1910,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             AdvBandedGridView view,
             DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo viewInfo,
             int rowHandle,
-            GridGroupSummaryItem summaryItem,
             string fieldName,
             DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
         {
@@ -1925,20 +1924,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (colInfo == null)
                 return;
 
-            object value = null;
-            if (summaryItem != null)
-                value = view.GetGroupSummaryValue(rowHandle, summaryItem);
-
-            if (value == null || value == DBNull.Value)
-            {
-                var fallback = GetGroupColumnSum(view, rowHandle, fieldName);
-                value = fallback ?? 0m;
-            }
-
-            string displayFormat = summaryItem?.DisplayFormat;
-            string text = string.IsNullOrWhiteSpace(displayFormat)
-                ? string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:0.00}", value)
-                : string.Format(System.Globalization.CultureInfo.CurrentCulture, displayFormat, value);
+            decimal value = GetGroupColumnSum(view, rowHandle, fieldName) ?? 0m;
+            string text = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:0.00}", value);
 
             using (var format = new StringFormat(StringFormatFlags.NoWrap))
             {
@@ -1993,9 +1980,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (view == null || info == null)
                 return;
 
-            string groupText = info.GroupText;
-            if (string.IsNullOrWhiteSpace(groupText))
-                return;
+            string groupText = info.GroupText ?? string.Empty;
 
             string originalText = info.GroupText;
             info.GroupText = string.Empty;
@@ -2069,8 +2054,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             var viewInfo = view.GetViewInfo() as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo;
             if (viewInfo != null)
             {
-                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _planChasGroupSummaryItem, "PlanChas_UI", e);
-                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _factChasGroupSummaryItem, "FactChas_UI", e);
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, "PlanChas_UI", e);
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, "FactChas_UI", e);
             }
 
             e.Handled = true;
