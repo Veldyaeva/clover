@@ -221,6 +221,16 @@ namespace SewingProduction.Core
                     $"Procedure={sqlEx.Procedure}, Line={sqlEx.LineNumber}, " +
                     $"ClientConnectionId={sqlEx.ClientConnectionId}, ThreadId={Environment.CurrentManagedThreadId}, " +
                     $"Message={sqlEx.Message}");
+                if (ServiceBroker.TryGetConnectionContext(sqlEx.ClientConnectionId, out var sbContext))
+                {
+                    Debug.WriteLine($"[SQL-FIRST-CHANCE] ServiceBrokerContext={sbContext}");
+                }
+                else if (traceTransient)
+                {
+                    var snapshot = ServiceBroker.GetActiveConnectionContextsSnapshot();
+                    Debug.WriteLine(
+                        $"[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts={snapshot}");
+                }
                 if (!string.IsNullOrWhiteSpace(topStack))
                     Debug.WriteLine($"[SQL-FIRST-CHANCE] TopFrame={topStack}");
 

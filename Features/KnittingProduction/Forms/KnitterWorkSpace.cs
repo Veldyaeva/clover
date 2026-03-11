@@ -203,6 +203,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
+                advBandedGridView1.DoubleClick -= AdvBandedGridView1_DoubleClick;
+                advBandedGridView1.DoubleClick += AdvBandedGridView1_DoubleClick;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
@@ -252,6 +254,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
+                advBandedGridView1.DoubleClick -= AdvBandedGridView1_DoubleClick;
+                advBandedGridView1.DoubleClick += AdvBandedGridView1_DoubleClick;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
@@ -1029,6 +1033,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        private void AdvBandedGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            if (sender is not AdvBandedGridView view)
+                return;
+
+            int rowHandle = view.FocusedRowHandle;
+            if (!view.IsGroupRow(rowHandle))
+                return;
+
+            if (view.GetRowExpanded(rowHandle))
+                view.CollapseGroupRow(rowHandle);
+            else
+                view.ExpandGroupRow(rowHandle);
+        }
+
         /// <summary>
         /// Считает общие суммы часов по всем строкам детального уровня.
         /// </summary>
@@ -1800,14 +1819,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private static bool IsHeaderEmphasisSegment(string segment)
+        private static bool TrySplitHeaderSegment(string segment, out string label, out string value)
         {
+            label = segment;
+            value = string.Empty;
             if (string.IsNullOrWhiteSpace(segment))
                 return false;
 
-            string trimmed = segment.TrimStart();
-            return trimmed.StartsWith("№пачки:", StringComparison.OrdinalIgnoreCase)
-                || trimmed.StartsWith("Размер:", StringComparison.OrdinalIgnoreCase);
+            int separatorIndex = segment.IndexOf(':');
+            if (separatorIndex < 0)
+                return false;
+
+            label = segment.Substring(0, separatorIndex + 1);
+            value = separatorIndex + 1 < segment.Length
+                ? segment.Substring(separatorIndex + 1).TrimStart()
+                : string.Empty;
+            return true;
         }
 
         private int GetGroupSummaryLeftEdge(AdvBandedGridView view, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo info)
@@ -1889,11 +1916,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             info.GroupText = originalText;
 
             Font baseFont = view.Appearance.GroupRow.Font ?? SystemFonts.DefaultFont;
-            float largeSize = baseFont.Size;// + 1f;
-            float smallSize = Math.Max(6f, baseFont.Size - 2f);
-
-            FontStyle largeStyle = baseFont.Style | FontStyle.Bold;
-            FontStyle smallStyle = baseFont.Style & ~FontStyle.Bold;
+            float valueSize = baseFont.Size + 2f;
+            float labelSize = baseFont.Size;
+            FontStyle valueStyle = baseFont.Style | FontStyle.Bold;
+            FontStyle labelStyle = baseFont.Style & ~FontStyle.Bold;
 
             Rectangle textBounds = info.Bounds;
             int left = info.ButtonBounds.Right;// + 3;
@@ -1907,40 +1933,49 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 textBounds = new Rectangle(textBounds.Left, textBounds.Top, width, textBounds.Height);
             }
 
-            using (var largeFont = new Font(baseFont.FontFamily, largeSize, largeStyle))
-            using (var smallFont = new Font(baseFont.FontFamily, smallSize, smallStyle))
+            using (var valueFont = new Font(baseFont.FontFamily, valueSize, valueStyle))
+            using (var labelFont = new Font(baseFont.FontFamily, labelSize, labelStyle))
+            using (var labelBrush = new SolidBrush(Color.DimGray))
             using (var format = new StringFormat(StringFormatFlags.NoWrap))
             {
                 format.Alignment = StringAlignment.Near;
                 format.LineAlignment = StringAlignment.Center;
 
-                using (var shadeBrush = new SolidBrush(Color.FromArgb(24, Color.Red)))
-                {
-                    e.Graphics.FillRectangle(shadeBrush, textBounds);
-                }
-
                 float x = textBounds.Left;
                 string[] parts = groupText.Split(new[] { " | " }, StringSplitOptions.None);
-                var tokens = new List<(string Text, Font Font, float Width)>(parts.Length * 2);
+                var tokens = new List<(string Text, Font Font, float Width, Brush Brush)>(parts.Length * 3);
                 for (int i = 0; i < parts.Length; i++)
                 {
                     string part = parts[i];
-                    Font font = IsHeaderEmphasisSegment(part) ? largeFont : smallFont;
-                    float width = e.Cache.CalcTextSize(part, font).Width;
-                    tokens.Add((part, font, width));
+                    if (TrySplitHeaderSegment(part, out string label, out string value))
+                    {
+                        float labelWidth = e.Cache.CalcTextSize($"{label} ", labelFont).Width;
+                        tokens.Add(($"{label} ", labelFont, labelWidth, labelBrush));
+
+                        if (!string.IsNullOrWhiteSpace(value))
+                        {
+                            float valueWidth = e.Cache.CalcTextSize(value, valueFont).Width;
+                            tokens.Add((value, valueFont, valueWidth, e.Appearance.GetForeBrush(e.Cache)));
+                        }
+                    }
+                    else
+                    {
+                        float partWidth = e.Cache.CalcTextSize(part, valueFont).Width;
+                        tokens.Add((part, valueFont, partWidth, e.Appearance.GetForeBrush(e.Cache)));
+                    }
 
                     if (i < parts.Length - 1)
                     {
                         const string separator = " | ";
-                        float sepWidth = e.Cache.CalcTextSize(separator, smallFont).Width;
-                        tokens.Add((separator, smallFont, sepWidth));
+                        float sepWidth = e.Cache.CalcTextSize(separator, labelFont).Width;
+                        tokens.Add((separator, labelFont, sepWidth, labelBrush));
                     }
                 }
 
                 foreach (var token in tokens)
                 {
                     var tokenBounds = new RectangleF(x, textBounds.Top, token.Width, textBounds.Height);
-                    e.Graphics.DrawString(token.Text, token.Font, e.Appearance.GetForeBrush(e.Cache), tokenBounds, format);
+                    e.Graphics.DrawString(token.Text, token.Font, token.Brush, tokenBounds, format);
                     x += token.Width;
                 }
             }

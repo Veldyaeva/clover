@@ -1,8 +1,10 @@
 using SewingProduction.Core.Class.Settings;
 using System;
+using System.Collections.Concurrent;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SewingProduction.Core.helpers;
@@ -24,7 +26,7 @@ namespace SewingProduction
             => Changed?.Invoke(table, changedFieldsCsv) ?? Task.CompletedTask;
 
         private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
-        private readonly object _ownerName;
+        private readonly string _ownerName;
 
         private SqlConnection? _connection;
         private SqlCommand? _command;
@@ -43,9 +45,9 @@ namespace SewingProduction
         private readonly SemaphoreSlim _listenSemaphore = new(1, 1);
         private volatile bool _isListening;
         private readonly Guid _brokerId = Guid.NewGuid();
-        private string OwnerName =>
-     _ownerName?.GetType().FullName
-    ?? "<unknown>";
+        private static readonly ConcurrentDictionary<Guid, string> _connectionContext =
+            new ConcurrentDictionary<Guid, string>();
+        private string OwnerName => string.IsNullOrWhiteSpace(_ownerName) ? "<unknown>" : _ownerName;
 
 
         public ServiceBroker(object owner)
@@ -177,11 +179,13 @@ namespace SewingProduction
 
                 Debug.WriteLine(
                     $"[ServiceBroker:{_brokerId}] Connection opened: owner={OwnerName}, table={table}, clientConnectionId={_connection.ClientConnectionId}");
+                _connectionContext[_connection.ClientConnectionId] =
+                    $"owner={OwnerName}, table={table}, brokerId={_brokerId}";
 
                 _command = _connection.CreateCommand();
                 _command.CommandText = query;
                 _command.CommandType = CommandType.Text;
-                _command.CommandTimeout = 30; // при желании вынести в настройки
+                _command.CommandTimeout = 120; // больше времени на регистрацию QN при нагрузке
 
                 _dependency = new SqlDependency(_command);
                 _dependency.OnChange -= OnDependencyChange;
@@ -239,6 +243,7 @@ namespace SewingProduction
 
         private void SafeStopListeningInternal()
         {
+            var cid = _connection?.ClientConnectionId;
             try
             {
                 if (_dependency != null)
@@ -266,12 +271,32 @@ namespace SewingProduction
             catch { }
 
             Debug.WriteLine(
-                $"[ServiceBroker:{_brokerId}] StopListening: owner={OwnerName}, table={_table}, clientConnectionId={_connection?.ClientConnectionId}");
+                $"[ServiceBroker:{_brokerId}] StopListening: owner={OwnerName}, table={_table}, clientConnectionId={cid}");
+            if (cid.HasValue)
+                _connectionContext.TryRemove(cid.Value, out _);
 
             _dependency = null;
             _command = null;
             _connection = null;
             _isListening = false;
+        }
+
+        public static bool TryGetConnectionContext(Guid clientConnectionId, out string context)
+        {
+            return _connectionContext.TryGetValue(clientConnectionId, out context);
+        }
+
+        public static string GetActiveConnectionContextsSnapshot(int maxItems = 20)
+        {
+            if (_connectionContext.IsEmpty)
+                return "<empty>";
+
+            var items = _connectionContext
+                .Take(Math.Max(1, maxItems))
+                .Select(kv => $"{kv.Key} => {kv.Value}")
+                .ToArray();
+
+            return string.Join(" || ", items);
         }
         //public bool StopListening()
         //{
