@@ -28,7 +28,7 @@ namespace SewingProduction.Core.helpers
             _host = host ?? throw new ArgumentNullException(nameof(host));
         }
 
-        public async Task InitAsync(CancellationToken ct)
+        public async Task InitAsync(CancellationToken ct, bool startBrokers = true)
         {
             {
                 if (_initialized)
@@ -83,7 +83,7 @@ namespace SewingProduction.Core.helpers
                     return;
                 }
 
-                await Helper.InitAndStartAsync(objects, ct).ConfigureAwait(false);
+                await Helper.InitAndStartAsync(objects, ct, startBrokers).ConfigureAwait(false);
 
                 lock (_initLock)
                 {

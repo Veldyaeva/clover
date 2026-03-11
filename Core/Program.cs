@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
 using SewingProduction.Helpers;
@@ -313,6 +315,7 @@ namespace SewingProduction.Core
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<DatabaseHelper>();
+            services.AddSingleton<IAppServiceBrokerHub, AppServiceBrokerHub>();
             services.AddTransient<ILogger, HybridLogger>();
             services.AddTransient<IKnitterRepository, KnitterRepository>();
             services.AddTransient<IKnitterOrchestrator, KnitterOrchestrator>();

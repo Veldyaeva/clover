@@ -17,6 +17,7 @@ using DevExpress.XtraLayout;
 using DevExpress.XtraSpreadsheet.Model;
 using Newtonsoft.Json.Serialization;
 using SewingProduction;
+using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
@@ -38,6 +39,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
 using Label = System.Windows.Forms.Label;
 
 #nullable enable
@@ -46,6 +48,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
     public partial class KnitterWorkSpace : CustomForm, IServiceBrokerHost
     {
         private readonly ServiceBrokerController _sbController;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"KnitterWorkSpace:{Guid.NewGuid():N}";
         private readonly HashSet<string> _ignoredServiceBrokerTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
@@ -172,6 +176,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _planFooterColor = Color.LightCoral;
                 _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
+                _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 dataLayoutControl1.DataSource = _planBindingSource;
 
                 ConfigureAdvBandedGridColumns();
@@ -227,6 +232,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _planFooterColor = Color.LightCoral;
                 _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
+                _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
@@ -1622,6 +1628,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // 1) Сначала отменяем слушание/лупы
             try { _sbCts?.Cancel(); } catch { }
+            try { await _sbHub.UnsubscribeAsync(_sbHubOwnerId); } catch { }
 
             // 2) И гарантированно дожидаемся корректной отписки/END CONVERSATION
             try
@@ -2517,9 +2524,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
             System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] InitServiceBrokerAsync start: objects={string.Join(", ", ServiceBrokerObjects)}");
-            await _sbController.InitAsync(ct);
+            await _sbController.InitAsync(ct, startBrokers: false);
 
-            var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
+            var tableFields = _sbController.Helper?.GetUnionFieldsByTableSnapshot()
+                              ?? new Dictionary<string, IReadOnlyCollection<string>>();
+            await _sbHub.SubscribeAsync(
+                ownerId: _sbHubOwnerId,
+                ownerName: ServiceBrokerFormName,
+                tableFields: tableFields,
+                onTableChangedAsync: async (table, fields) =>
+                    await InvokeOnUiAsync(async () => await UpdateDataInFormAsync(table, fields)),
+                ct: ct);
+
+            var tables = tableFields.Keys;
             System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Listening tables: {string.Join(", ", tables)}");
         }
 
