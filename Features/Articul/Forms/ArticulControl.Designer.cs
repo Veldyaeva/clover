@@ -61,15 +61,8 @@
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -77,20 +70,28 @@
             layoutControlItem18 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem21 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem20 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem26 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem22 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem23 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem25 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup7 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup8 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
@@ -100,15 +101,8 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
@@ -116,20 +110,28 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem24).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem26).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem24).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             SuspendLayout();
             // 
             // Root
@@ -164,7 +166,7 @@
             pictureBoxArticul.Location = new System.Drawing.Point(24, 44);
             pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxArticul.Name = "pictureBoxArticul";
-            pictureBoxArticul.Size = new System.Drawing.Size(220, 271);
+            pictureBoxArticul.Size = new System.Drawing.Size(204, 187);
             pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxArticul.TabIndex = 1;
             pictureBoxArticul.TabStop = false;
@@ -203,7 +205,7 @@
             customLayoutControl1.Name = "customLayoutControl1";
             customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1196, 440, 650, 400);
             customLayoutControl1.Root = layoutControlGroup4;
-            customLayoutControl1.Size = new System.Drawing.Size(961, 354);
+            customLayoutControl1.Size = new System.Drawing.Size(933, 339);
             customLayoutControl1.TabIndex = 33;
             customLayoutControl1.Text = "customLayoutControl1";
             // 
@@ -212,10 +214,10 @@
             chbArh.Enabled = false;
             chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbArh.Font = new System.Drawing.Font("Arial", 10F);
-            chbArh.Location = new System.Drawing.Point(24, 319);
+            chbArh.Location = new System.Drawing.Point(24, 235);
             chbArh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbArh.Name = "chbArh";
-            chbArh.Size = new System.Drawing.Size(220, 95);
+            chbArh.Size = new System.Drawing.Size(204, 20);
             chbArh.TabIndex = 0;
             chbArh.Text = "Архив";
             chbArh.UseVisualStyleBackColor = true;
@@ -226,11 +228,11 @@
             txbKod.ErrorColor = System.Drawing.Color.Red;
             txbKod.ErrorMessage = null;
             txbKod.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbKod.Location = new System.Drawing.Point(390, 44);
+            txbKod.Location = new System.Drawing.Point(374, 44);
             txbKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKod.Name = "txbKod";
             txbKod.ReadOnly = true;
-            txbKod.Size = new System.Drawing.Size(135, 20);
+            txbKod.Size = new System.Drawing.Size(122, 20);
             txbKod.TabIndex = 2;
             // 
             // txbPo
@@ -239,11 +241,11 @@
             txbPo.ErrorColor = System.Drawing.Color.Red;
             txbPo.ErrorMessage = null;
             txbPo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbPo.Location = new System.Drawing.Point(529, 44);
+            txbPo.Location = new System.Drawing.Point(500, 44);
             txbPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbPo.Name = "txbPo";
             txbPo.ReadOnly = true;
-            txbPo.Size = new System.Drawing.Size(254, 20);
+            txbPo.Size = new System.Drawing.Size(20, 20);
             txbPo.TabIndex = 3;
             // 
             // chbKombDet
@@ -251,11 +253,11 @@
             chbKombDet.Enabled = false;
             chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombDet.Font = new System.Drawing.Font("Arial", 10F);
-            chbKombDet.Location = new System.Drawing.Point(799, 12);
+            chbKombDet.Location = new System.Drawing.Point(536, 12);
             chbKombDet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombDet.Name = "chbKombDet";
-            chbKombDet.Size = new System.Drawing.Size(105, 20);
-            chbKombDet.TabIndex = 4;
+            chbKombDet.Size = new System.Drawing.Size(217, 20);
+            chbKombDet.TabIndex = 11;
             chbKombDet.Text = "Комб. дет.";
             chbKombDet.UseVisualStyleBackColor = true;
             // 
@@ -266,10 +268,10 @@
             txbNDS.ErrorColor = System.Drawing.Color.Red;
             txbNDS.ErrorMessage = null;
             txbNDS.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbNDS.Location = new System.Drawing.Point(899, 384);
+            txbNDS.Location = new System.Drawing.Point(884, 278);
             txbNDS.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNDS.Name = "txbNDS";
-            txbNDS.Size = new System.Drawing.Size(21, 20);
+            txbNDS.Size = new System.Drawing.Size(25, 20);
             txbNDS.TabIndex = 25;
             // 
             // txbTM
@@ -278,23 +280,23 @@
             txbTM.ErrorColor = System.Drawing.Color.Red;
             txbTM.ErrorMessage = null;
             txbTM.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbTM.Location = new System.Drawing.Point(378, 232);
+            txbTM.Location = new System.Drawing.Point(374, 114);
             txbTM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTM.Name = "txbTM";
             txbTM.ReadOnly = true;
-            txbTM.Size = new System.Drawing.Size(233, 20);
-            txbTM.TabIndex = 12;
+            txbTM.Size = new System.Drawing.Size(146, 20);
+            txbTM.TabIndex = 6;
             // 
             // chbKombIzd
             // 
             chbKombIzd.Enabled = false;
             chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombIzd.Font = new System.Drawing.Font("Arial", 10F);
-            chbKombIzd.Location = new System.Drawing.Point(908, 12);
+            chbKombIzd.Location = new System.Drawing.Point(757, 12);
             chbKombIzd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombIzd.Name = "chbKombIzd";
-            chbKombIzd.Size = new System.Drawing.Size(24, 20);
-            chbKombIzd.TabIndex = 5;
+            chbKombIzd.Size = new System.Drawing.Size(164, 20);
+            chbKombIzd.TabIndex = 12;
             chbKombIzd.Text = "Комб. изд.";
             chbKombIzd.UseVisualStyleBackColor = true;
             // 
@@ -304,11 +306,11 @@
             txbKodTnved.ErrorColor = System.Drawing.Color.Red;
             txbKodTnved.ErrorMessage = null;
             txbKodTnved.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbKodTnved.Location = new System.Drawing.Point(756, 384);
+            txbKodTnved.Location = new System.Drawing.Point(742, 278);
             txbKodTnved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKodTnved.Name = "txbKodTnved";
             txbKodTnved.ReadOnly = true;
-            txbKodTnved.Size = new System.Drawing.Size(21, 20);
+            txbKodTnved.Size = new System.Drawing.Size(20, 20);
             txbKodTnved.TabIndex = 24;
             // 
             // txbArticul
@@ -318,13 +320,13 @@
             txbArticul.ErrorColor = System.Drawing.Color.Red;
             txbArticul.ErrorMessage = null;
             txbArticul.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbArticul.Location = new System.Drawing.Point(390, 112);
+            txbArticul.Location = new System.Drawing.Point(374, 68);
             txbArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbArticul.MinimumSize = new System.Drawing.Size(120, 15);
             txbArticul.Name = "txbArticul";
             txbArticul.ReadOnly = true;
-            txbArticul.Size = new System.Drawing.Size(148, 20);
-            txbArticul.TabIndex = 6;
+            txbArticul.Size = new System.Drawing.Size(122, 15);
+            txbArticul.TabIndex = 4;
             // 
             // txbGrup
             // 
@@ -333,12 +335,12 @@
             txbGrup.ErrorColor = System.Drawing.Color.Red;
             txbGrup.ErrorMessage = null;
             txbGrup.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbGrup.Location = new System.Drawing.Point(660, 112);
+            txbGrup.Location = new System.Drawing.Point(666, 68);
             txbGrup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGrup.Name = "txbGrup";
             txbGrup.ReadOnly = true;
-            txbGrup.Size = new System.Drawing.Size(260, 20);
-            txbGrup.TabIndex = 7;
+            txbGrup.Size = new System.Drawing.Size(243, 20);
+            txbGrup.TabIndex = 13;
             // 
             // txbScNomer
             // 
@@ -346,11 +348,11 @@
             txbScNomer.ErrorColor = System.Drawing.Color.Red;
             txbScNomer.ErrorMessage = null;
             txbScNomer.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbScNomer.Location = new System.Drawing.Point(613, 384);
+            txbScNomer.Location = new System.Drawing.Point(600, 278);
             txbScNomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbScNomer.Name = "txbScNomer";
             txbScNomer.ReadOnly = true;
-            txbScNomer.Size = new System.Drawing.Size(21, 20);
+            txbScNomer.Size = new System.Drawing.Size(20, 20);
             txbScNomer.TabIndex = 23;
             // 
             // txbMod
@@ -360,13 +362,13 @@
             txbMod.ErrorColor = System.Drawing.Color.Red;
             txbMod.ErrorMessage = null;
             txbMod.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbMod.Location = new System.Drawing.Point(390, 180);
+            txbMod.Location = new System.Drawing.Point(374, 87);
             txbMod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbMod.MinimumSize = new System.Drawing.Size(120, 15);
             txbMod.Name = "txbMod";
             txbMod.ReadOnly = true;
-            txbMod.Size = new System.Drawing.Size(143, 36);
-            txbMod.TabIndex = 8;
+            txbMod.Size = new System.Drawing.Size(146, 23);
+            txbMod.TabIndex = 5;
             // 
             // txbSost
             // 
@@ -375,24 +377,24 @@
             txbSost.ErrorColor = System.Drawing.Color.Red;
             txbSost.ErrorMessage = null;
             txbSost.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbSost.Location = new System.Drawing.Point(733, 232);
+            txbSost.Location = new System.Drawing.Point(666, 138);
             txbSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost.Name = "txbSost";
             txbSost.ReadOnly = true;
-            txbSost.Size = new System.Drawing.Size(199, 20);
-            txbSost.TabIndex = 13;
+            txbSost.Size = new System.Drawing.Size(243, 20);
+            txbSost.TabIndex = 17;
             // 
             // mtbDateOpis
             // 
             mtbDateOpis.BorderStyle = System.Windows.Forms.BorderStyle.None;
             mtbDateOpis.Font = new System.Drawing.Font("Arial Narrow", 9F);
             mtbDateOpis.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            mtbDateOpis.Location = new System.Drawing.Point(390, 384);
+            mtbDateOpis.Location = new System.Drawing.Point(374, 278);
             mtbDateOpis.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mtbDateOpis.Mask = "00/00/0000";
             mtbDateOpis.Name = "mtbDateOpis";
             mtbDateOpis.ReadOnly = true;
-            mtbDateOpis.Size = new System.Drawing.Size(101, 20);
+            mtbDateOpis.Size = new System.Drawing.Size(104, 20);
             mtbDateOpis.TabIndex = 22;
             mtbDateOpis.ValidatingType = typeof(System.DateTime);
             // 
@@ -403,12 +405,12 @@
             txbIdGost.ErrorColor = System.Drawing.Color.Red;
             txbIdGost.ErrorMessage = null;
             txbIdGost.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbIdGost.Location = new System.Drawing.Point(537, 196);
+            txbIdGost.Location = new System.Drawing.Point(551, 111);
             txbIdGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbIdGost.Name = "txbIdGost";
             txbIdGost.ReadOnly = true;
-            txbIdGost.Size = new System.Drawing.Size(125, 20);
-            txbIdGost.TabIndex = 9;
+            txbIdGost.Size = new System.Drawing.Size(114, 20);
+            txbIdGost.TabIndex = 14;
             // 
             // txbSeason
             // 
@@ -416,12 +418,12 @@
             txbSeason.ErrorColor = System.Drawing.Color.Red;
             txbSeason.ErrorMessage = null;
             txbSeason.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbSeason.Location = new System.Drawing.Point(378, 256);
+            txbSeason.Location = new System.Drawing.Point(374, 138);
             txbSeason.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeason.Name = "txbSeason";
             txbSeason.ReadOnly = true;
-            txbSeason.Size = new System.Drawing.Size(233, 20);
-            txbSeason.TabIndex = 14;
+            txbSeason.Size = new System.Drawing.Size(146, 20);
+            txbSeason.TabIndex = 7;
             // 
             // txbNameGost
             // 
@@ -430,12 +432,12 @@
             txbNameGost.ErrorColor = System.Drawing.Color.Red;
             txbNameGost.ErrorMessage = null;
             txbNameGost.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbNameGost.Location = new System.Drawing.Point(666, 196);
+            txbNameGost.Location = new System.Drawing.Point(669, 111);
             txbNameGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNameGost.Name = "txbNameGost";
             txbNameGost.ReadOnly = true;
-            txbNameGost.Size = new System.Drawing.Size(125, 20);
-            txbNameGost.TabIndex = 10;
+            txbNameGost.Size = new System.Drawing.Size(114, 20);
+            txbNameGost.TabIndex = 15;
             // 
             // txbOpiGost
             // 
@@ -444,12 +446,12 @@
             txbOpiGost.ErrorColor = System.Drawing.Color.Red;
             txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbOpiGost.Location = new System.Drawing.Point(795, 196);
+            txbOpiGost.Location = new System.Drawing.Point(787, 111);
             txbOpiGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpiGost.Name = "txbOpiGost";
             txbOpiGost.ReadOnly = true;
-            txbOpiGost.Size = new System.Drawing.Size(125, 20);
-            txbOpiGost.TabIndex = 11;
+            txbOpiGost.Size = new System.Drawing.Size(119, 20);
+            txbOpiGost.TabIndex = 16;
             // 
             // txbSost2
             // 
@@ -458,12 +460,12 @@
             txbSost2.ErrorColor = System.Drawing.Color.Red;
             txbSost2.ErrorMessage = null;
             txbSost2.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbSost2.Location = new System.Drawing.Point(733, 256);
+            txbSost2.Location = new System.Drawing.Point(666, 162);
             txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost2.Name = "txbSost2";
             txbSost2.ReadOnly = true;
-            txbSost2.Size = new System.Drawing.Size(199, 20);
-            txbSost2.TabIndex = 15;
+            txbSost2.Size = new System.Drawing.Size(243, 20);
+            txbSost2.TabIndex = 18;
             // 
             // txbRazmPrint
             // 
@@ -472,12 +474,12 @@
             txbRazmPrint.ErrorColor = System.Drawing.Color.Red;
             txbRazmPrint.ErrorMessage = null;
             txbRazmPrint.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbRazmPrint.Location = new System.Drawing.Point(893, 304);
+            txbRazmPrint.Location = new System.Drawing.Point(859, 210);
             txbRazmPrint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazmPrint.Name = "txbRazmPrint";
             txbRazmPrint.ReadOnly = true;
-            txbRazmPrint.Size = new System.Drawing.Size(39, 20);
-            txbRazmPrint.TabIndex = 20;
+            txbRazmPrint.Size = new System.Drawing.Size(50, 20);
+            txbRazmPrint.TabIndex = 21;
             // 
             // txbAssort
             // 
@@ -485,12 +487,12 @@
             txbAssort.ErrorColor = System.Drawing.Color.Red;
             txbAssort.ErrorMessage = null;
             txbAssort.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbAssort.Location = new System.Drawing.Point(378, 280);
+            txbAssort.Location = new System.Drawing.Point(374, 162);
             txbAssort.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbAssort.Name = "txbAssort";
             txbAssort.ReadOnly = true;
-            txbAssort.Size = new System.Drawing.Size(233, 20);
-            txbAssort.TabIndex = 16;
+            txbAssort.Size = new System.Drawing.Size(146, 20);
+            txbAssort.TabIndex = 8;
             // 
             // txbSost3
             // 
@@ -499,12 +501,12 @@
             txbSost3.ErrorColor = System.Drawing.Color.Red;
             txbSost3.ErrorMessage = null;
             txbSost3.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbSost3.Location = new System.Drawing.Point(733, 280);
+            txbSost3.Location = new System.Drawing.Point(666, 186);
             txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost3.Name = "txbSost3";
             txbSost3.ReadOnly = true;
-            txbSost3.Size = new System.Drawing.Size(199, 20);
-            txbSost3.TabIndex = 17;
+            txbSost3.Size = new System.Drawing.Size(243, 20);
+            txbSost3.TabIndex = 19;
             // 
             // txbCountry
             // 
@@ -512,12 +514,12 @@
             txbCountry.ErrorColor = System.Drawing.Color.Red;
             txbCountry.ErrorMessage = null;
             txbCountry.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbCountry.Location = new System.Drawing.Point(378, 304);
+            txbCountry.Location = new System.Drawing.Point(374, 186);
             txbCountry.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbCountry.Name = "txbCountry";
             txbCountry.ReadOnly = true;
-            txbCountry.Size = new System.Drawing.Size(233, 20);
-            txbCountry.TabIndex = 18;
+            txbCountry.Size = new System.Drawing.Size(146, 20);
+            txbCountry.TabIndex = 9;
             // 
             // txbGrupMenName
             // 
@@ -526,12 +528,12 @@
             txbGrupMenName.ErrorColor = System.Drawing.Color.Red;
             txbGrupMenName.ErrorMessage = null;
             txbGrupMenName.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbGrupMenName.Location = new System.Drawing.Point(378, 328);
+            txbGrupMenName.Location = new System.Drawing.Point(374, 210);
             txbGrupMenName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGrupMenName.Name = "txbGrupMenName";
             txbGrupMenName.ReadOnly = true;
-            txbGrupMenName.Size = new System.Drawing.Size(554, 20);
-            txbGrupMenName.TabIndex = 21;
+            txbGrupMenName.Size = new System.Drawing.Size(146, 20);
+            txbGrupMenName.TabIndex = 10;
             // 
             // txbRazm
             // 
@@ -539,261 +541,177 @@
             txbRazm.ErrorColor = System.Drawing.Color.Red;
             txbRazm.ErrorMessage = null;
             txbRazm.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbRazm.Location = new System.Drawing.Point(733, 304);
+            txbRazm.Location = new System.Drawing.Point(666, 210);
             txbRazm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazm.Name = "txbRazm";
             txbRazm.ReadOnly = true;
-            txbRazm.Size = new System.Drawing.Size(38, 20);
-            txbRazm.TabIndex = 19;
+            txbRazm.Size = new System.Drawing.Size(71, 20);
+            txbRazm.TabIndex = 20;
             // 
             // layoutControlGroup4
             // 
             layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup4.GroupBordersVisible = false;
-            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, layoutControlItem10, layoutControlItem9, layoutControlItem14, layoutControlItem15, layoutControlItem16, layoutControlItem17, layoutControlItem18, layoutControlItem19, layoutControlItem21, layoutControlItem20, emptySpaceItem3, layoutControlGroup5, layoutControlGroup3, layoutControlGroup6, layoutControlGroup7, layoutControlGroup8 });
+            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem5, emptySpaceItem3, layoutControlGroup3, layoutControlGroup6, layoutControlGroup8, layoutControlGroup5 });
             layoutControlGroup4.Name = "Root";
-            layoutControlGroup4.Size = new System.Drawing.Size(944, 438);
+            layoutControlGroup4.Size = new System.Drawing.Size(933, 339);
             layoutControlGroup4.TextVisible = false;
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = chbKombDet;
-            layoutControlItem4.Location = new System.Drawing.Point(787, 0);
+            layoutControlItem4.Location = new System.Drawing.Point(524, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(109, 68);
+            layoutControlItem4.Size = new System.Drawing.Size(221, 24);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = chbKombIzd;
-            layoutControlItem5.Location = new System.Drawing.Point(896, 0);
+            layoutControlItem5.Location = new System.Drawing.Point(745, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new System.Drawing.Size(28, 68);
+            layoutControlItem5.Size = new System.Drawing.Size(168, 24);
             layoutControlItem5.TextVisible = false;
-            // 
-            // layoutControlItem2
-            // 
-            layoutControlItem2.Control = txbPo;
-            layoutControlItem2.Location = new System.Drawing.Point(257, 0);
-            layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(258, 24);
-            layoutControlItem2.Text = "Пометка";
-            layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem3
-            // 
-            layoutControlItem3.Control = txbArticul;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(270, 24);
-            layoutControlItem3.Text = "Артикул";
-            layoutControlItem3.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem7
-            // 
-            layoutControlItem7.Control = txbGrup;
-            layoutControlItem7.Location = new System.Drawing.Point(270, 0);
-            layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(382, 24);
-            layoutControlItem7.Text = "Наим. по ГОСТ";
-            layoutControlItem7.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem8
-            // 
-            layoutControlItem8.Control = txbMod;
-            layoutControlItem8.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(265, 40);
-            layoutControlItem8.Text = "Модель";
-            layoutControlItem8.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem10
             // 
             layoutControlItem10.Control = txbSost;
-            layoutControlItem10.Location = new System.Drawing.Point(603, 220);
+            layoutControlItem10.Location = new System.Drawing.Point(0, 70);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(321, 24);
+            layoutControlItem10.Size = new System.Drawing.Size(365, 24);
             layoutControlItem10.Text = "Состав основн.";
             layoutControlItem10.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem9
             // 
             layoutControlItem9.Control = txbTM;
-            layoutControlItem9.Location = new System.Drawing.Point(248, 220);
+            layoutControlItem9.Location = new System.Drawing.Point(0, 70);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new System.Drawing.Size(355, 24);
+            layoutControlItem9.Size = new System.Drawing.Size(268, 24);
             layoutControlItem9.Text = "ТМ";
             layoutControlItem9.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem11
-            // 
-            layoutControlItem11.Control = txbIdGost;
-            layoutControlItem11.Location = new System.Drawing.Point(265, 0);
-            layoutControlItem11.Name = "layoutControlItem11";
-            layoutControlItem11.Size = new System.Drawing.Size(129, 40);
-            layoutControlItem11.Text = "код";
-            layoutControlItem11.TextLocation = DevExpress.Utils.Locations.Top;
-            layoutControlItem11.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem12
-            // 
-            layoutControlItem12.Control = txbNameGost;
-            layoutControlItem12.Location = new System.Drawing.Point(394, 0);
-            layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(129, 40);
-            layoutControlItem12.Text = "номер";
-            layoutControlItem12.TextLocation = DevExpress.Utils.Locations.Top;
-            layoutControlItem12.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem13
-            // 
-            layoutControlItem13.Control = txbOpiGost;
-            layoutControlItem13.Location = new System.Drawing.Point(523, 0);
-            layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(129, 40);
-            layoutControlItem13.Text = "описание";
-            layoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top;
-            layoutControlItem13.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = txbSeason;
-            layoutControlItem14.Location = new System.Drawing.Point(248, 244);
+            layoutControlItem14.Location = new System.Drawing.Point(0, 94);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(355, 24);
+            layoutControlItem14.Size = new System.Drawing.Size(268, 24);
             layoutControlItem14.Text = "Сезон";
             layoutControlItem14.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem15
             // 
             layoutControlItem15.Control = txbSost2;
-            layoutControlItem15.Location = new System.Drawing.Point(603, 244);
+            layoutControlItem15.Location = new System.Drawing.Point(0, 94);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(321, 24);
+            layoutControlItem15.Size = new System.Drawing.Size(365, 24);
             layoutControlItem15.Text = "отделка";
             layoutControlItem15.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem16
             // 
             layoutControlItem16.Control = txbAssort;
-            layoutControlItem16.Location = new System.Drawing.Point(248, 268);
+            layoutControlItem16.Location = new System.Drawing.Point(0, 118);
             layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new System.Drawing.Size(355, 24);
+            layoutControlItem16.Size = new System.Drawing.Size(268, 24);
             layoutControlItem16.Text = "Ассорт.";
             layoutControlItem16.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = txbSost3;
-            layoutControlItem17.Location = new System.Drawing.Point(603, 268);
+            layoutControlItem17.Location = new System.Drawing.Point(0, 118);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(321, 24);
+            layoutControlItem17.Size = new System.Drawing.Size(365, 24);
             layoutControlItem17.Text = "подклад\\наполнитель";
             layoutControlItem17.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem18
             // 
             layoutControlItem18.Control = txbCountry;
-            layoutControlItem18.Location = new System.Drawing.Point(248, 292);
+            layoutControlItem18.Location = new System.Drawing.Point(0, 142);
             layoutControlItem18.Name = "layoutControlItem18";
-            layoutControlItem18.Size = new System.Drawing.Size(355, 24);
+            layoutControlItem18.Size = new System.Drawing.Size(268, 24);
             layoutControlItem18.Text = "Страна";
             layoutControlItem18.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem19
             // 
             layoutControlItem19.Control = txbRazm;
-            layoutControlItem19.Location = new System.Drawing.Point(603, 292);
+            layoutControlItem19.Location = new System.Drawing.Point(0, 142);
             layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(160, 24);
+            layoutControlItem19.Size = new System.Drawing.Size(193, 24);
             layoutControlItem19.Text = "размер";
             layoutControlItem19.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem21
             // 
             layoutControlItem21.Control = txbGrupMenName;
-            layoutControlItem21.Location = new System.Drawing.Point(248, 316);
+            layoutControlItem21.Location = new System.Drawing.Point(0, 166);
             layoutControlItem21.Name = "layoutControlItem21";
-            layoutControlItem21.Size = new System.Drawing.Size(676, 24);
+            layoutControlItem21.Size = new System.Drawing.Size(268, 24);
             layoutControlItem21.Text = "Менеджер";
             layoutControlItem21.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem22
-            // 
-            layoutControlItem22.Control = mtbDateOpis;
-            layoutControlItem22.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(223, 24);
-            layoutControlItem22.Text = "Дата описания";
-            layoutControlItem22.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem20
             // 
             layoutControlItem20.Control = txbRazmPrint;
-            layoutControlItem20.Location = new System.Drawing.Point(763, 292);
+            layoutControlItem20.Location = new System.Drawing.Point(193, 142);
             layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new System.Drawing.Size(161, 24);
+            layoutControlItem20.Size = new System.Drawing.Size(172, 24);
             layoutControlItem20.Text = "при печати";
             layoutControlItem20.TextSize = new System.Drawing.Size(114, 13);
             // 
-            // layoutControlItem23
-            // 
-            layoutControlItem23.Control = txbScNomer;
-            layoutControlItem23.Location = new System.Drawing.Point(223, 0);
-            layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new System.Drawing.Size(143, 24);
-            layoutControlItem23.Text = "Сертификат";
-            layoutControlItem23.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem24
-            // 
-            layoutControlItem24.Control = txbKodTnved;
-            layoutControlItem24.Location = new System.Drawing.Point(366, 0);
-            layoutControlItem24.Name = "layoutControlItem24";
-            layoutControlItem24.Size = new System.Drawing.Size(143, 24);
-            layoutControlItem24.Text = "Код ТНВэд";
-            layoutControlItem24.TextSize = new System.Drawing.Size(114, 13);
-            // 
             // emptySpaceItem3
             // 
-            emptySpaceItem3.Location = new System.Drawing.Point(248, 408);
+            emptySpaceItem3.Location = new System.Drawing.Point(232, 302);
             emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new System.Drawing.Size(676, 10);
-            // 
-            // layoutControlItem25
-            // 
-            layoutControlItem25.Control = txbNDS;
-            layoutControlItem25.Location = new System.Drawing.Point(509, 0);
-            layoutControlItem25.Name = "layoutControlItem25";
-            layoutControlItem25.Size = new System.Drawing.Size(143, 24);
-            layoutControlItem25.Text = "НДС";
-            layoutControlItem25.TextSize = new System.Drawing.Size(114, 13);
-            // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = txbKod;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(257, 24);
-            layoutControlItem1.Text = "Код";
-            layoutControlItem1.TextSize = new System.Drawing.Size(114, 13);
+            emptySpaceItem3.Size = new System.Drawing.Size(681, 17);
             // 
             // layoutControlGroup5
             // 
-            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem3, layoutControlItem7 });
-            layoutControlGroup5.Location = new System.Drawing.Point(248, 68);
+            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem7, layoutControlGroup7, layoutControlItem10, layoutControlItem15, layoutControlItem17, layoutControlItem19, layoutControlItem20 });
+            layoutControlGroup5.Location = new System.Drawing.Point(524, 24);
             layoutControlGroup5.Name = "layoutControlGroup5";
-            layoutControlGroup5.Size = new System.Drawing.Size(676, 68);
+            layoutControlGroup5.Size = new System.Drawing.Size(389, 210);
+            layoutControlGroup5.Text = "ГОСТ и состав";
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = txbArticul;
+            layoutControlItem3.Location = new System.Drawing.Point(0, 24);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(244, 19);
+            layoutControlItem3.Text = "Артикул";
+            layoutControlItem3.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = txbGrup;
+            layoutControlItem7.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new System.Drawing.Size(365, 24);
+            layoutControlItem7.Text = "Наим. по ГОСТ";
+            layoutControlItem7.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlGroup3
+            // 
+            layoutControlGroup3.CustomizationFormText = "картинка";
+            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem6, layoutControlItem26, emptySpaceItem1 });
+            layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
+            layoutControlGroup3.Name = "layoutControlGroup3";
+            layoutControlGroup3.Size = new System.Drawing.Size(232, 319);
             // 
             // layoutControlItem6
             // 
             layoutControlItem6.Control = chbArh;
-            layoutControlItem6.Location = new System.Drawing.Point(0, 275);
+            layoutControlItem6.Location = new System.Drawing.Point(0, 191);
             layoutControlItem6.MinSize = new System.Drawing.Size(24, 24);
             layoutControlItem6.Name = "layoutControlItem6";
             layoutControlItem6.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem6.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem6.Size = new System.Drawing.Size(224, 99);
+            layoutControlItem6.Size = new System.Drawing.Size(208, 24);
             layoutControlItem6.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem6.TextVisible = false;
             // 
@@ -804,39 +722,134 @@
             layoutControlItem26.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem26.Name = "layoutControlItem26";
             layoutControlItem26.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem26.Size = new System.Drawing.Size(224, 275);
+            layoutControlItem26.Size = new System.Drawing.Size(208, 191);
             layoutControlItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem26.TextVisible = false;
             // 
-            // layoutControlGroup3
+            // emptySpaceItem1
             // 
-            layoutControlGroup3.CustomizationFormText = "картинка";
-            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem6, layoutControlItem26 });
-            layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
-            layoutControlGroup3.Name = "layoutControlGroup3";
-            layoutControlGroup3.Size = new System.Drawing.Size(248, 418);
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 215);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new System.Drawing.Size(208, 60);
             // 
             // layoutControlGroup6
             // 
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem22, layoutControlItem23, layoutControlItem24, layoutControlItem25 });
-            layoutControlGroup6.Location = new System.Drawing.Point(248, 340);
+            layoutControlGroup6.Location = new System.Drawing.Point(232, 234);
             layoutControlGroup6.Name = "layoutControlGroup6";
-            layoutControlGroup6.Size = new System.Drawing.Size(676, 68);
+            layoutControlGroup6.Size = new System.Drawing.Size(681, 68);
             layoutControlGroup6.Text = "Сертификация";
+            // 
+            // layoutControlItem22
+            // 
+            layoutControlItem22.Control = mtbDateOpis;
+            layoutControlItem22.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem22.Name = "layoutControlItem22";
+            layoutControlItem22.Size = new System.Drawing.Size(226, 24);
+            layoutControlItem22.Text = "Дата описания";
+            layoutControlItem22.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem23
+            // 
+            layoutControlItem23.Control = txbScNomer;
+            layoutControlItem23.Location = new System.Drawing.Point(226, 0);
+            layoutControlItem23.Name = "layoutControlItem23";
+            layoutControlItem23.Size = new System.Drawing.Size(142, 24);
+            layoutControlItem23.Text = "Сертификат";
+            layoutControlItem23.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem24
+            // 
+            layoutControlItem24.Control = txbKodTnved;
+            layoutControlItem24.Location = new System.Drawing.Point(368, 0);
+            layoutControlItem24.Name = "layoutControlItem24";
+            layoutControlItem24.Size = new System.Drawing.Size(142, 24);
+            layoutControlItem24.Text = "Код ТНВэд";
+            layoutControlItem24.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem25
+            // 
+            layoutControlItem25.Control = txbNDS;
+            layoutControlItem25.Location = new System.Drawing.Point(510, 0);
+            layoutControlItem25.Name = "layoutControlItem25";
+            layoutControlItem25.Size = new System.Drawing.Size(147, 24);
+            layoutControlItem25.Text = "НДС";
+            layoutControlItem25.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlGroup7
             // 
-            layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8, layoutControlItem11, layoutControlItem12, layoutControlItem13 });
-            layoutControlGroup7.Location = new System.Drawing.Point(248, 136);
+            layoutControlGroup7.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem11, layoutControlItem12, layoutControlItem13 });
+            layoutControlGroup7.Location = new System.Drawing.Point(0, 24);
             layoutControlGroup7.Name = "layoutControlGroup7";
-            layoutControlGroup7.Size = new System.Drawing.Size(676, 84);
+            layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup7.Size = new System.Drawing.Size(365, 46);
+            layoutControlGroup7.Text = "ГОСТ";
+            layoutControlGroup7.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = txbMod;
+            layoutControlItem8.Location = new System.Drawing.Point(0, 43);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new System.Drawing.Size(268, 27);
+            layoutControlItem8.Text = "Модель";
+            layoutControlItem8.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem11
+            // 
+            layoutControlItem11.Control = txbIdGost;
+            layoutControlItem11.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem11.Name = "layoutControlItem11";
+            layoutControlItem11.Size = new System.Drawing.Size(118, 40);
+            layoutControlItem11.Text = "код";
+            layoutControlItem11.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem11.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem12
+            // 
+            layoutControlItem12.Control = txbNameGost;
+            layoutControlItem12.Location = new System.Drawing.Point(118, 0);
+            layoutControlItem12.Name = "layoutControlItem12";
+            layoutControlItem12.Size = new System.Drawing.Size(118, 40);
+            layoutControlItem12.Text = "номер";
+            layoutControlItem12.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem12.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem13
+            // 
+            layoutControlItem13.Control = txbOpiGost;
+            layoutControlItem13.Location = new System.Drawing.Point(236, 0);
+            layoutControlItem13.Name = "layoutControlItem13";
+            layoutControlItem13.Size = new System.Drawing.Size(123, 40);
+            layoutControlItem13.Text = "описание";
+            layoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top;
+            layoutControlItem13.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlGroup8
             // 
-            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2 });
-            layoutControlGroup8.Location = new System.Drawing.Point(248, 0);
+            layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem8, layoutControlItem9, layoutControlItem14, layoutControlItem16, layoutControlItem18, layoutControlItem21 });
+            layoutControlGroup8.Location = new System.Drawing.Point(232, 0);
             layoutControlGroup8.Name = "layoutControlGroup8";
-            layoutControlGroup8.Size = new System.Drawing.Size(539, 68);
+            layoutControlGroup8.Size = new System.Drawing.Size(292, 234);
+            layoutControlGroup8.Text = "Карточка артикула";
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = txbKod;
+            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(244, 24);
+            layoutControlItem1.Text = "Код";
+            layoutControlItem1.TextSize = new System.Drawing.Size(114, 13);
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = txbPo;
+            layoutControlItem2.Location = new System.Drawing.Point(244, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new System.Drawing.Size(24, 43);
+            layoutControlItem2.Text = "Пометка";
+            layoutControlItem2.TextVisible = false;
             // 
             // ArticulControl
             // 
@@ -844,7 +857,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(customLayoutControl1);
             Name = "ArticulControl";
-            Size = new System.Drawing.Size(961, 354);
+            Size = new System.Drawing.Size(933, 339);
             Load += ArticulControl_Load;
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
@@ -855,15 +868,8 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
@@ -871,20 +877,28 @@
             ((System.ComponentModel.ISupportInitialize)layoutControlItem18).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem21).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem20).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem24).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem26).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem22).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem24).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem25).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ResumeLayout(false);
         }
 
@@ -952,5 +966,6 @@
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup7;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup8;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }
