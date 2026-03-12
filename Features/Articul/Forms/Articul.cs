@@ -53,7 +53,7 @@ namespace SewingProduction.Features.Articul
         KomplDataService komplService = new KomplDataService();
 
         private bool _isInitialized;
-
+        private SpArticulPreviewModel _articulByKod;
 
         private readonly BindingSource bsPreview = new(); // для грида
         private readonly BindingSource bsDetails = new(); // для карточки/деталей
@@ -110,15 +110,31 @@ namespace SewingProduction.Features.Articul
         }
         private async void Articul_Load(object sender, EventArgs e)
         {
-
             try
             {
-                //загрузка перечня кодов из справочника, часть полей
-                await RefreshArtPreviewAsync();
-                if (!_isInitialized)
+                if (_isInitialized) return;
+
+                // Grid
+                //gridControl1.DataSource = bsPreview;
+                gridControl1.GridControl.DataSource = bsPreview;
+                bsPreview.DataSource = _previewList; // один раз, дальше обновляем _previewList
+
+                // Card
+                articulControl1.BindTo(bsDetails);
+                articulControl1.IsReadOnly = true;
+
+                // Bind all right-side controls ONCE
+                InitializeBindings();
+
+                _isInitialized = true;
+
+                await ReloadPreviewAsync();
+
+                if (_previewList.Count > 0)
                 {
-                    await InitializeBindingsAsync();
-                    _isInitialized = true;
+                    bsPreview.Position = 0;
+                    var first = _previewList[0];
+                    await LoadArticulAsync(first.Kod, first.Kodd);
                 }
             }
             catch (Exception ex)
@@ -472,7 +488,158 @@ namespace SewingProduction.Features.Articul
 
             }
         }
+
+
+
+        ///// <summary>
+        ///// обновлениме данных на форме по коду при перемещении по таблице артикулов
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private async void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        //{
+        //    var current = bsPreview.Current as SpArtPreviewModel;
+        //    if (current == null) return;
+
+        //    var kod = current.Kod;
+        //    var kodd = current.Kodd;
+
+        //    gridControl1.ShowLoadingPanel();
+        //    try
+        //    {
+        //        var detailsTask = _articulDataService.GetByKodAsync(kod);
+        //        var artDrTask = _articulDataService.GetArtDrByKodAsync(kod);
+        //        var komplTask = _articulDataService.GetSostavkomplForKod(kod);
+        //        var naborTask = _articulDataService.GetSostavNaborForKod(kod);
+
+        //        await Task.WhenAll(detailsTask, artDrTask, komplTask, naborTask);
+
+        //        var details = await detailsTask;
+
+        //        // ВАЖНО: меняем DataSource у одного bsDetails, ничего не пересоздаём
+        //        bsDetails.DataSource = details;
+        //        bsDetails.ResetBindings(false);
+
+        //        bsArtDr.DataSource = await artDrTask;
+        //        bsSostKompl.DataSource = await komplTask;
+        //        bsSostNabor.DataSource = await naborTask;
+        //        bsSostNabor.ResetBindings(false);
+
+        //        UpdateTabsVisibility();
+        //    }
+        //    finally
+        //    {
+        //        gridControl1.HideLoadingPanel();
+        //    } }
+
         /// <summary>
+        /// Получение фурнитуры по коду справочника
+        /// </summary>
+        /// <param name="kod"></param>
+        /// <returns></returns>
+        private async Task getArtDrForKodAsync(string kod)
+        {
+            try
+            {
+                bsArtDr?.Clear();
+
+                var _artDrForKod = await _articulDataService.GetArtDrByKodAsync(kod);
+
+                if (_artDrForKod != null)
+                {
+                    await this.InvokeAsync(() =>
+                    {
+
+                        bsArtDr.DataSource = _artDrForKod; // Привязываем данные к форме
+
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных GetArtDrByKod для kod {kod}");
+            }
+        }
+        private async Task getArticulFromSQlAsync(string kod)
+        {
+            try
+            {
+                // отображение панели загрузки
+                gridControl1.ShowLoadingPanel();
+                bsArticul?.Clear();
+
+                _articulByKod = await _articulDataService.GetByKodAsync(kod);
+
+                if (_articulByKod != null)
+                {
+                    await this.InvokeAsync(() =>
+                    {
+                        bsArticul.DataSource = _articulByKod; // Привязываем данные к форме
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для kod {kod}");
+            }
+            finally
+            {
+                // скрытие панели загрузки
+                gridControl1.HideLoadingPanel();
+            }
+        }
+        private async Task getSostKomplFromSQlAsync(string kod)
+        {
+            try
+            {
+                bsSostKompl?.Clear();
+
+                var articulByKodTemp = await _articulDataService.GetSostavkomplForKod(kod);
+
+                if (articulByKodTemp != null)
+                {
+
+                    await this.InvokeAsync(() =>
+                    {
+                        //_articulKomplSostList = articulByKodTemp;                // Обновляем текущую модель
+                        bsSostKompl.DataSource = articulByKodTemp; // Привязываем данные к форме
+
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostKomplFromSQlAsync для kod {kod}");
+            }
+        }
+        private async Task getSostNaborFromSQlAsync(string kod)
+        {
+            try
+            {
+                bsSostNabor?.Clear();
+
+                var articulByKodTemp = await _articulDataService.GetSostavNaborForKod(kod);
+
+                if (articulByKodTemp != null)
+                {
+
+                    await this.InvokeAsync(() =>
+                    {
+
+                        bsSostNabor.DataSource = articulByKodTemp; // Привязываем данные к форме
+
+                    });
+                    bsSostNabor.ResetBindings(false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostNaborFromSQlAsync для kod {kod}");
+            }
+        }
+        //// <summary>
         /// вызывает карточку по коду из справочника ШП
         /// </summary>
         /// <param name="sender"></param>
@@ -713,7 +880,7 @@ namespace SewingProduction.Features.Articul
             gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
 
             // Отвязать BindingSource
-            bsArt.DataSource = null;
+            bsPreview.DataSource = null;
 
             // Dispose DevExpress контролов
             gridControl1?.Dispose();
