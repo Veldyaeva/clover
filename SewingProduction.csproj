@@ -10,6 +10,7 @@
     <ApplicationIcon>Resources\AppIcons\favicon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

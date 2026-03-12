@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.interfaces;
@@ -30,6 +31,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
           //  ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
@@ -46,6 +48,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
         }
         public SpravZeh()
         {
@@ -53,6 +56,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
+            _serviceBroker.Changed += ServiceBrokerChangedAsync;
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {
@@ -69,6 +73,21 @@ namespace SewingProduction.form
         {
             gridControlSprav_Load(null, EventArgs.Empty);
         }
+
+        private Task ServiceBrokerChangedAsync(string table, string? changedFieldsCsv)
+        {
+            if (IsDisposed || Disposing)
+                return Task.CompletedTask;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => UpdateDataInForm(table)));
+                return Task.CompletedTask;
+            }
+
+            UpdateDataInForm(table);
+            return Task.CompletedTask;
+        }
         #endregion
         //Загрузка грида:
         private void gridControlSprav_Load(object sender, EventArgs e)
@@ -80,7 +99,7 @@ namespace SewingProduction.form
             if (!flagStartListening)
             {
                 _serviceBroker.StartListening("idZeh,nameZeh,address,idProizv", "ZehList");
-               // flagStartListening = _serviceBroker.GetFlagStartListening();
+                flagStartListening = true;
             }
         }
         //Загрузка комбобокса виды производства:
@@ -243,7 +262,8 @@ namespace SewingProduction.form
         // Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _serviceBroker.StopListening();
+            _serviceBroker.Changed -= ServiceBrokerChangedAsync;
+            _serviceBroker.StopBroker();
         }
 
     }

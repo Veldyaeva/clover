@@ -79,7 +79,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private static DbService _dbService;
         private static MlService _mlService;
         private static ArtNormRepository _anService;
-        private static ServiceBrokerService _sbService;
+        private readonly ServiceBrokerService _sbService;
         private static BulkHelper _bulkHelper;
         private static GridHelper _gridHelper;
         //        private static BindingSourceHelper _bSHelper;
@@ -4682,6 +4682,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             finally
             {
+                try { await _sbService.DisposeAsync(); } catch { }
                 try { _lifetimeCts?.Dispose(); } catch { }
                 _lifetimeCts = null;
 

@@ -103,6 +103,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
                 if (bindingSource.DataSource is BindingList<KnitterPZVModel> bl)
                 {
                     ApplyMasterDelta(bl, masterData);
+                    // Модель не уведомляет об изменениях свойств (нет INotifyPropertyChanged),
+                    // поэтому после in-place обновления нужно явно сообщить привязке о refresh.
+                    bindingSource.ResetBindings(metadataChanged: false);
+                    masterView3?.RefreshData();
+                    advBandedGridView1?.RefreshData();
                 }
                 else
                 {

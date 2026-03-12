@@ -165,6 +165,14 @@ namespace SewingProduction.Features.Tabel.Forms
             await Task.WhenAll(bindingsTask);
             CreateDayColumns(currentMG);
             CheckUserAccess(idUser);
+            if (idUser == 170 || idUser == 3)
+            {
+                layoutControlItem19.ContentVisible  = true;
+            }
+            else
+            {
+                layoutControlItem19.ContentVisible = false;
+            }
         }
         private void RemoveDayColumns()
         {
@@ -245,6 +253,7 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnTabno.FieldName = "tab";
             gridColumnFio.FieldName = "fio";
             gridColumnUin.FieldName = "uin";
+            gridColumnDlD.FieldName = "dl_d";
             gridColumnTsplPart.FieldName = "tsplPart";
             gridColumnTsplPart.DisplayFormat.FormatString = "0.00";
             gridColumnTsplPart.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
@@ -261,8 +270,10 @@ namespace SewingProduction.Features.Tabel.Forms
             gridColumnTsplPartOf.FieldName = "tsplPartOf";
             gridColumnTsplPartOf.DisplayFormat.FormatString = "0.00";
             gridColumnTsplPartOf.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-
+            gridView1.OptionsView.ShowFooter = true;
             gridColumnCheckIncludePlan.FieldName = "ts_plan";
+            gridColumnCheckIncludePlan.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            gridColumnCheckIncludePlan.SummaryItem.DisplayFormat = "План: {0}";
             gridColumnPodrTableID.FieldName = "podrTableID";
             gridColumnFio.Width = 90;
             gridView1.OptionsView.EnableAppearanceEvenRow = false;
@@ -349,10 +360,25 @@ namespace SewingProduction.Features.Tabel.Forms
                 _timeSheetBindingSource.ResetBindings(false);
                 if (groupId == 19)
                 {
-                    DateTime dateTimeNow = DateTime.Now;
+                    DateTime dateTimeNow = DateTime.Now.Date;
                     DateTime? datetimeValue = _tabelDataService.GetDateReadOnlyDd(currentMG);
-                    if (dateTimeNow >= datetimeValue)
+                    if (dateTimeNow <= datetimeValue)
                     {
+                        foreach (GridColumn column in gridView1.Columns)
+                        {
+                            // Проверяем, что FieldName не пустой и начинается на "d" (без учета регистра)
+                            if (!string.IsNullOrEmpty(column.FieldName) &&
+                                column.FieldName.StartsWith("d", StringComparison.OrdinalIgnoreCase))
+                            {
+                                // Делаем колонку только для чтения
+                                column.OptionsColumn.ReadOnly = false;
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                       
                         foreach (GridColumn column in gridView1.Columns)
                         {
                             // Проверяем, что FieldName не пустой и начинается на "d" (без учета регистра)
@@ -364,32 +390,20 @@ namespace SewingProduction.Features.Tabel.Forms
                             }
                         }
                     }
-                    else
-                    {
-                        foreach (GridColumn column in gridView1.Columns)
-                        {
-                            // Проверяем, что FieldName не пустой и начинается на "d" (без учета регистра)
-                            if (!string.IsNullOrEmpty(column.FieldName) &&
-                                column.FieldName.StartsWith("d", StringComparison.OrdinalIgnoreCase))
-                            {
-                                // Делаем колонку только для чтения
-                                column.OptionsColumn.ReadOnly = false;
-                            }
-                        }
-                    }
                     DateTime? datetimeValueTarif = _tabelDataService.GetDateReadOnlyTarif(currentMG);
-                    if (dateTimeNow >= datetimeValueTarif)
-                    {
-                        gridColumnTsplPart.OptionsColumn.ReadOnly = true;
-                        gridColumnTsplPartOf.OptionsColumn.ReadOnly = true;
-                        gridColumnCheckIncludePlan.OptionsColumn.ReadOnly = true;
-                    }
-                    else
+                    if (dateTimeNow <= datetimeValueTarif)
                     {
                         gridColumnTsplPart.OptionsColumn.ReadOnly = false;
                         gridColumnTsplPartOf.OptionsColumn.ReadOnly = false;
                         gridColumnCheckIncludePlan.OptionsColumn.ReadOnly = false;
+                   
+                    }
+                    else
+                    {
 
+                        gridColumnTsplPart.OptionsColumn.ReadOnly = true;
+                        gridColumnTsplPartOf.OptionsColumn.ReadOnly = true;
+                        gridColumnCheckIncludePlan.OptionsColumn.ReadOnly = true;
                     }
 
 
@@ -1045,7 +1059,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridColumnTsplPart.Visible = true;
                 gridColumnTsplPartOf.Visible = true;
                 gridView1.Columns["tsp_naimen"].Visible = true;
-
+                layoutControlItem18.ContentVisible = false;
 
             }
             if (idGr == 20)
@@ -1054,6 +1068,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 gridColumnTsplPart.Visible = false;
                 gridColumnTsplPartOf.Visible = false;
                 gridView1.Columns["tsp_naimen"].Visible = false;
+                layoutControlItem18.ContentVisible = true;
             }
             var SpPodr = await _tabelDataService.GetSpPodrAsync(idGr, idUser);
             _spPodr.Clear();
@@ -1090,10 +1105,12 @@ namespace SewingProduction.Features.Tabel.Forms
             int dayNumber = int.Parse(column.FieldName.Substring(1));
             string markColumnNameDD = $"dd{dayNumber.ToString("00")}";
             string markColumnNameD = $"d{dayNumber.ToString("00")}";
+            string markColumnNameDop = $"dop{dayNumber.ToString("00")}";
             string currentDd = gridView1.GetRowCellValue(rowHandle, markColumnNameDD).ToString();
             string currentD = gridView1.GetRowCellValue(rowHandle, markColumnNameD).ToString();
+            int dl_d = Convert.ToInt32(gridView1.GetRowCellValue(rowHandle, "dl_d"));
             int grId = Convert.ToInt32(lookUpEditGroup.EditValue);
-            using (var calculator = new CalculatorDay(grId, currentDd, currentD))
+            using (var calculator = new CalculatorDay(grId, currentDd, currentD, markColumnNameDop,dl_d))
             {
                 //Point mousePosition = Control.MousePosition;
                 //calculator.StartPosition = FormStartPosition.Manual;
