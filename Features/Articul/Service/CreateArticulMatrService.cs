@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DevExpress.Utils.Gesture;
 using DevExpress.Xpo.DB.Helpers;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.Core.Models;
@@ -8,9 +9,9 @@ using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
-using System.Data;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,30 @@ namespace SewingProduction.Features.Articul.Service
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrForArticulAsync");
+                return null;
+            }
+        }
+        public async Task<CreateArticulMatrModel> GetStatusForArticulAsync(string nn, int idgost, int agid )
+        {
+            try
+            {
+                using var connection = _dbHelper.GetConnection();
+                var result = await connection.QueryFirstOrDefaultAsync<CreateArticulMatrModel>(
+                    "dbo.spSetDateCertificationApproval",
+                    new
+                    {
+                        nn,
+                        idgost,
+                        agid
+                    },
+                        commandType: CommandType.StoredProcedure
+                    );
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetStatusForArticulAsync");
                 return null;
             }
         }

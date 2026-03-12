@@ -23,7 +23,7 @@ namespace SewingProduction.Features.Articul.Models
         public string Tb_id { get; set; }
         public string Mod { get; set; }
         public string Articul { get; set; }
-        public DateTime DatePublic { get; set; }
+        public DateTime? DatePublic { get; set; }
         public string Tm_name { get; set; }
         public string Grup { get; set; }
         public string Text_mo { get; set; }
@@ -44,10 +44,10 @@ namespace SewingProduction.Features.Articul.Models
         public string Sost1 { get; set; }
         public string Sost2 { get; set; }
         public string Sost3 { get; set; }
-        public int agIdAppr { get; set; }
-        public int idGostAppr { get; set; }
+        public int Ag_id { get; set; }
+        public int Id_gost { get; set; }
 
-        public DateTime dateCertificationApproval { get; set; }
+        public DateTime? DateCertificationApproval { get; set; }
 
 
     }

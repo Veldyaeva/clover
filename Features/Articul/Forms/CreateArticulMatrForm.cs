@@ -1,6 +1,6 @@
-﻿using Dapper;
-using DevExpress.Mvvm.Native;
-using Org.BouncyCastle.Crypto;
+﻿using DevExpress.Mvvm.Native;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
@@ -9,12 +9,10 @@ using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -42,12 +40,12 @@ namespace SewingProduction.Features.Articul.Forms
 
             InitializeComponent();
 
+
             _bindingSourceArtMatr = new BindingSource { };
 
             //if (gridArtMatr != null) gridArtMatr.DataSource = _bindingSourceArtMatr;
             gridArtMatr.DataSource = _bindingSourceArtMatr;
-            
-            
+
 
         }
 
@@ -130,9 +128,11 @@ namespace SewingProduction.Features.Articul.Forms
             gcCertDatePublic.FieldName = nameof(CreateArticulMatrModel.DatePublic);
 
             //поля уточнения для отд сертификации
-            gcCertidGost.FieldName = nameof(CreateArticulMatrModel.idGostAppr);
-            gcCertAgid.FieldName = nameof(CreateArticulMatrModel.agIdAppr);
-            gcCertDateCertificationApproval.FieldName = nameof(CreateArticulMatrModel.dateCertificationApproval);
+            gcCertidGost.FieldName = nameof(CreateArticulMatrModel.Id_gost);
+            gcCertAgid.FieldName = nameof(CreateArticulMatrModel.Ag_id);
+            gcCertDateCertificationApproval.FieldName = nameof(CreateArticulMatrModel.DateCertificationApproval);
+            //запрет редактирования полей, которые не должны редактироваться напрямую пользователем, а заполняются через выбор из справочника и/или автоматически
+            gcCertDateCertificationApproval.OptionsColumn.AllowEdit = false;
 
 
         }
@@ -225,7 +225,7 @@ namespace SewingProduction.Features.Articul.Forms
                 var currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
 
                 //скидываем группу госта при изменении самого госта, чтобы не было "висячих" групп, не относящихся к выбранному госту
-                currentItem.agIdAppr = 0;
+                currentItem.Ag_id = 0;
 
                 view.PostEditor();
                 view.UpdateCurrentRow();
@@ -249,7 +249,7 @@ namespace SewingProduction.Features.Articul.Forms
                 if (sender == null) return;
 
                 var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
-                var idGost = _currentItem.idGostAppr;
+                var idGost = _currentItem.Id_gost;
                 editor.Properties.DataSource = _gostGroupAll
                     .Where(x => x.Id_gost == idGost)
                     .ToList();
@@ -262,14 +262,57 @@ namespace SewingProduction.Features.Articul.Forms
 
         }
 
-        private void customSimpleButton1_Click(object sender, EventArgs e)
+        private async void gridViewArtMatrEdit_DoubleClick(object sender, EventArgs e)
         {
-            MessageBox.Show($"Visible = {customSimpleButtonPermissions.Visible}");
-            MessageBox.Show($"VisibleLogic = {customSimpleButtonPermissions.VisibleLogic}");
-            MessageBox.Show($"VisiblePermission = {customSimpleButtonPermissions.VisiblePermission}");
-            MessageBox.Show($"_isEditing = {_isEditing}");
 
+            try
+            {
+                var view = sender as GridView;
+                if (view == null) return;
 
+                Point pt = view.GridControl.PointToClient(Control.MousePosition);
+                GridHitInfo hit = view.CalcHitInfo(pt);
+                if (hit.InRowCell && (hit.Column == gcCertidGost || hit.Column == gcCertAgid || hit.Column == gcCertDateCertificationApproval) && hit.RowHandle >= 0)
+                {
+                    var _currentItem = (CreateArticulMatrModel)_bindingSourceArtMatr.Current;
+                    if (_currentItem == null) return;
+
+                    if (_currentItem.DateCertificationApproval != null)
+                    {
+                        DialogResult msres = MessageBox.Show("Снять дату подтверждения ГОСТ?", "Снять дату", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (msres == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+
+                    if (_currentItem.Id_gost == 0 && _currentItem.Ag_id == 0)
+                    {
+                        MessageBox.Show("Для утверждения необходимо выбрать ГОСТ и группу ГОСТ", "Невозможно утвердить", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        //_currentItem.DateCertificationApproval = null;
+                    }
+                    else
+                    {
+                        var res = await _createArticulMatrService.GetStatusForArticulAsync(_currentItem.Nn, _currentItem.Id_gost, _currentItem.Ag_id) ;
+                        if (res != null )
+                        {
+                            _currentItem.DateCertificationApproval = res.DateCertificationApproval;
+                            //обновляем только ячейку с датой утверждения, чтобы не сбрасывать фокус и не уходить из режима редактирования
+                            _bindingSourceArtMatr.ResetCurrentItem();
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlex)
+            {
+                MessageBox.Show($"{sqlex.ErrorCode} - {sqlex.Message}", "Ошибка SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка в gridViewArtMatrEdit_DoubleClick при утверждении госта");
+                throw;
+            }
         }
     }
 }

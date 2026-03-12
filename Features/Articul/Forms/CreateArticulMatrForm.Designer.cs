@@ -98,6 +98,11 @@
             gcSost2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gcSost3 = new DevExpress.XtraGrid.Columns.GridColumn();
             customSimpleButtonPermissions = new SewingProduction.Core.Class.CustomSimpleButton();
+            customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit10).BeginInit();
@@ -121,6 +126,12 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
+            customLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             SuspendLayout();
             // 
             // repositoryItemCheckEdit8
@@ -182,13 +193,12 @@
             // 
             // gridArtMatr
             // 
-            gridArtMatr.Dock = System.Windows.Forms.DockStyle.Top;
             gridArtMatr.Font = new System.Drawing.Font("Arial", 10F);
-            gridArtMatr.Location = new System.Drawing.Point(0, 0);
+            gridArtMatr.Location = new System.Drawing.Point(2, 2);
             gridArtMatr.MainView = gridViewArtMatrEdit;
             gridArtMatr.Name = "gridArtMatr";
             gridArtMatr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit2, repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit5, repositoryItemCheckEdit6, repositoryItemCheckEdit7, repositoryItemLookUpEdit1, repositoryItemLookUpEdit2, repositoryItemSearchLookUpEdit1, repositoryItemSearchLookUpEdit2 });
-            gridArtMatr.Size = new System.Drawing.Size(1772, 512);
+            gridArtMatr.Size = new System.Drawing.Size(1768, 427);
             gridArtMatr.TabIndex = 0;
             gridArtMatr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtMatrEdit, gridViewArtMatr });
             // 
@@ -209,13 +219,15 @@
             gridViewArtMatrEdit.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatrEdit.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatrEdit.OptionsView.ShowAutoFilterRow = true;
+            gridViewArtMatrEdit.OptionsView.ShowGroupPanel = false;
+            gridViewArtMatrEdit.DoubleClick += gridViewArtMatrEdit_DoubleClick;
             // 
             // gcCertGrupmen_name
             // 
             gcCertGrupmen_name.Caption = "Менеджер";
             gcCertGrupmen_name.Name = "gcCertGrupmen_name";
             gcCertGrupmen_name.Visible = true;
-            gcCertGrupmen_name.VisibleIndex = 2;
+            gcCertGrupmen_name.VisibleIndex = 1;
             gcCertGrupmen_name.Width = 109;
             // 
             // gcCertTsn_name
@@ -224,7 +236,7 @@
             gcCertTsn_name.Name = "gcCertTsn_name";
             gcCertTsn_name.OptionsColumn.ReadOnly = true;
             gcCertTsn_name.Visible = true;
-            gcCertTsn_name.VisibleIndex = 3;
+            gcCertTsn_name.VisibleIndex = 2;
             gcCertTsn_name.Width = 56;
             // 
             // gcCertTb_id
@@ -233,7 +245,7 @@
             gcCertTb_id.Name = "gcCertTb_id";
             gcCertTb_id.OptionsColumn.ReadOnly = true;
             gcCertTb_id.Visible = true;
-            gcCertTb_id.VisibleIndex = 4;
+            gcCertTb_id.VisibleIndex = 3;
             gcCertTb_id.Width = 65;
             // 
             // gcCertArticul
@@ -242,7 +254,7 @@
             gcCertArticul.Name = "gcCertArticul";
             gcCertArticul.OptionsColumn.ReadOnly = true;
             gcCertArticul.Visible = true;
-            gcCertArticul.VisibleIndex = 5;
+            gcCertArticul.VisibleIndex = 4;
             gcCertArticul.Width = 65;
             // 
             // gcCertMod
@@ -251,7 +263,7 @@
             gcCertMod.Name = "gcCertMod";
             gcCertMod.OptionsColumn.ReadOnly = true;
             gcCertMod.Visible = true;
-            gcCertMod.VisibleIndex = 6;
+            gcCertMod.VisibleIndex = 5;
             gcCertMod.Width = 65;
             // 
             // gcCertTm_name
@@ -260,7 +272,7 @@
             gcCertTm_name.Name = "gcCertTm_name";
             gcCertTm_name.OptionsColumn.ReadOnly = true;
             gcCertTm_name.Visible = true;
-            gcCertTm_name.VisibleIndex = 7;
+            gcCertTm_name.VisibleIndex = 6;
             gcCertTm_name.Width = 33;
             // 
             // gcCertGrup
@@ -269,7 +281,7 @@
             gcCertGrup.Name = "gcCertGrup";
             gcCertGrup.OptionsColumn.ReadOnly = true;
             gcCertGrup.Visible = true;
-            gcCertGrup.VisibleIndex = 8;
+            gcCertGrup.VisibleIndex = 7;
             gcCertGrup.Width = 76;
             // 
             // gcCertText_mo
@@ -278,7 +290,7 @@
             gcCertText_mo.Name = "gcCertText_mo";
             gcCertText_mo.OptionsColumn.ReadOnly = true;
             gcCertText_mo.Visible = true;
-            gcCertText_mo.VisibleIndex = 9;
+            gcCertText_mo.VisibleIndex = 8;
             // 
             // gcCertP
             // 
@@ -356,7 +368,7 @@
             gcCertTkan.Name = "gcCertTkan";
             gcCertTkan.OptionsColumn.ReadOnly = true;
             gcCertTkan.Visible = true;
-            gcCertTkan.VisibleIndex = 10;
+            gcCertTkan.VisibleIndex = 12;
             gcCertTkan.Width = 108;
             // 
             // gcCertSost
@@ -410,7 +422,7 @@
             gcCertidGost.ColumnEdit = repositoryItemSearchLookUpEdit1;
             gcCertidGost.Name = "gcCertidGost";
             gcCertidGost.Visible = true;
-            gcCertidGost.VisibleIndex = 11;
+            gcCertidGost.VisibleIndex = 9;
             gcCertidGost.Width = 63;
             // 
             // repositoryItemSearchLookUpEdit1
@@ -434,7 +446,7 @@
             gcCertAgid.ColumnEdit = repositoryItemSearchLookUpEdit2;
             gcCertAgid.Name = "gcCertAgid";
             gcCertAgid.Visible = true;
-            gcCertAgid.VisibleIndex = 12;
+            gcCertAgid.VisibleIndex = 10;
             gcCertAgid.Width = 78;
             // 
             // repositoryItemSearchLookUpEdit2
@@ -455,13 +467,12 @@
             // gcCertDateCertificationApproval
             // 
             gcCertDateCertificationApproval.Caption = "Дата подтверждения ГОСТ";
-            gcCertDateCertificationApproval.DisplayFormat.FormatString = "d";
             gcCertDateCertificationApproval.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            gcCertDateCertificationApproval.FieldName = "gcCertDateCertificationApproval";
             gcCertDateCertificationApproval.Name = "gcCertDateCertificationApproval";
+            gcCertDateCertificationApproval.OptionsColumn.ReadOnly = true;
             gcCertDateCertificationApproval.UnboundDataType = typeof(System.DateTime);
             gcCertDateCertificationApproval.Visible = true;
-            gcCertDateCertificationApproval.VisibleIndex = 1;
+            gcCertDateCertificationApproval.VisibleIndex = 11;
             gcCertDateCertificationApproval.Width = 68;
             // 
             // repositoryItemCheckEdit1
@@ -733,19 +744,63 @@
             // 
             customSimpleButtonPermissions.Appearance.Font = new System.Drawing.Font("Arial", 10F);
             customSimpleButtonPermissions.Appearance.Options.UseFont = true;
-            customSimpleButtonPermissions.Location = new System.Drawing.Point(12, 622);
+            customSimpleButtonPermissions.Enabled = false;
+            customSimpleButtonPermissions.Location = new System.Drawing.Point(4, 644);
             customSimpleButtonPermissions.Name = "customSimpleButtonPermissions";
-            customSimpleButtonPermissions.Size = new System.Drawing.Size(93, 42);
+            customSimpleButtonPermissions.Size = new System.Drawing.Size(47, 30);
             customSimpleButtonPermissions.TabIndex = 2;
             customSimpleButtonPermissions.Text = "кнопка с правами";
+            // 
+            // customLayoutControl1
+            // 
+            customLayoutControl1.Controls.Add(gridArtMatr);
+            customLayoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
+            customLayoutControl1.Location = new System.Drawing.Point(0, 0);
+            customLayoutControl1.Name = "customLayoutControl1";
+            customLayoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(-1028, 237, 650, 400);
+            customLayoutControl1.Root = Root;
+            customLayoutControl1.Size = new System.Drawing.Size(1772, 654);
+            customLayoutControl1.TabIndex = 3;
+            customLayoutControl1.Text = "customLayoutControl1";
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, simpleSeparator1, emptySpaceItem1 });
+            Root.Name = "Root";
+            Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            Root.Size = new System.Drawing.Size(1772, 654);
+            Root.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = gridArtMatr;
+            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(1772, 431);
+            layoutControlItem1.TextVisible = false;
+            // 
+            // simpleSeparator1
+            // 
+            simpleSeparator1.Location = new System.Drawing.Point(0, 431);
+            simpleSeparator1.Name = "simpleSeparator1";
+            simpleSeparator1.Size = new System.Drawing.Size(1772, 1);
+            // 
+            // emptySpaceItem1
+            // 
+            emptySpaceItem1.Location = new System.Drawing.Point(0, 432);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new System.Drawing.Size(1772, 222);
             // 
             // CreateArticulMatrForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1772, 676);
+            Controls.Add(customLayoutControl1);
             Controls.Add(customSimpleButtonPermissions);
-            Controls.Add(gridArtMatr);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "CreateArticulMatrForm";
             Text = "CreateArticulMatr";
@@ -773,6 +828,12 @@
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
+            customLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ResumeLayout(false);
         }
 
@@ -847,5 +908,10 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit12;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit13;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit14;
+        private Core.Class.CustomLayoutControl customLayoutControl1;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }
