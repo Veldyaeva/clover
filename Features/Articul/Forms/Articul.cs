@@ -220,56 +220,56 @@ namespace SewingProduction.Features.Articul
                 //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
                 // нормы на полотно 
-                foreach (Control control in cgbTkanNorm.Controls)
-                {
-                    if (control is not CustomTextBox el) continue;
-                    char si = el.Name.Last();
-                    var name = $"Norm_t{si}";
-                    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                    el.Text = string.Format("{0:F2}", el.Text);
-                }
-                //себестоимость
-                foreach (Control control in cgbTkanSeb.Controls)
-                {
-                    if (control is not CustomTextBox el) continue;
-                    char si = el.Name.Last();
-                    var name = $"Seb_t{si}";
-                    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                }
-                // брак
-                foreach (Control control in cgbTkanBrak.Controls)
-                {
-                    if (control is not CustomTextBox el) continue;
-                    char si = el.Name.Last();
-                    var name = $"Brak_t{si}";
-                    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                }
-                // % брака 
-                foreach (Control control in cgbBrakPercent.Controls)
-                {
-                    if (control is not CustomTextBox el) continue;
-                    char si = el.Name.Last();
-                    var name = $"Brak_percent{si}";
-                    // вывод строки в формате 2 знака после запятой 
-                    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
-                }
-                // коэф-т качества полотна
-                foreach (Control control in cgbKfKach.Controls)
-                {
-                    if (control is not CustomTextBox el) continue;
-                    char si = el.Name.Last();
-                    var name = $"Kf_tkan_kach{si}";
-                    // вывод строки в формате 2 знака после запятой 
-                    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
-                }
-                // назначение полотна 
-                foreach (Control control in cgbTkanPurpose.Controls)
-                {
-                    if (control is not CustomTextBox el) continue;
-                    char si = el.Name.Last();
-                    var name = $"Opis_t{si}";
-                    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                }
+                //foreach (Control control in cgbTkanNorm.Controls)
+                //{
+                //    if (control is not CustomTextBox el) continue;
+                //    char si = el.Name.Last();
+                //    var name = $"Norm_t{si}";
+                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
+                //    el.Text = string.Format("{0:F2}", el.Text);
+                //}
+                ////себестоимость
+                //foreach (Control control in cgbTkanSeb.Controls)
+                //{
+                //    if (control is not CustomTextBox el) continue;
+                //    char si = el.Name.Last();
+                //    var name = $"Seb_t{si}";
+                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
+                //}
+                //// брак
+                //foreach (Control control in cgbTkanBrak.Controls)
+                //{
+                //    if (control is not CustomTextBox el) continue;
+                //    char si = el.Name.Last();
+                //    var name = $"Brak_t{si}";
+                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
+                //}
+                //// % брака 
+                //foreach (Control control in cgbBrakPercent.Controls)
+                //{
+                //    if (control is not CustomTextBox el) continue;
+                //    char si = el.Name.Last();
+                //    var name = $"Brak_percent{si}";
+                //    // вывод строки в формате 2 знака после запятой 
+                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
+                //}
+                //// коэф-т качества полотна
+                //foreach (Control control in cgbKfKach.Controls)
+                //{
+                //    if (control is not CustomTextBox el) continue;
+                //    char si = el.Name.Last();
+                //    var name = $"Kf_tkan_kach{si}";
+                //    // вывод строки в формате 2 знака после запятой 
+                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
+                //}
+                //// назначение полотна 
+                //foreach (Control control in cgbTkanPurpose.Controls)
+                //{
+                //    if (control is not CustomTextBox el) continue;
+                //    char si = el.Name.Last();
+                //    var name = $"Opis_t{si}";
+                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
+                //}
 
                 #endregion
 
