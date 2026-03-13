@@ -78,6 +78,7 @@ namespace SewingProduction.Features.Tabel.Models
         public string dd30 { get; set; }
         public string dd31 { get; set; }
         public double tItogD { get; set; }
+        public int dl_d { get; set; }
         public double tItogViewChas { get; set; }
         public decimal tsplPart { get; set; }
         public decimal tsplPartOf {  get; set; }
@@ -85,10 +86,36 @@ namespace SewingProduction.Features.Tabel.Models
         public int podrTableID { get; set; }
         public string tsp_naimen { get; set; }
         public string uin { get; set; }
-
-
-
-
-
+        public string dop01 { get; set; }
+        public string dop02 { get; set; }
+        public string dop03 { get; set; }
+        public string dop04 { get; set; }
+        public string dop05 { get; set; }
+        public string dop06 { get; set; }
+        public string dop07 { get; set; }
+        public string dop08 { get; set; }
+        public string dop09 { get; set; }
+        public string dop10 { get; set; }
+        public string dop11 { get; set; }
+        public string dop12 { get; set; }
+        public string dop13 { get; set; }
+        public string dop14 { get; set; }
+        public string dop15 { get; set; }
+        public string dop16 { get; set; }
+        public string dop17 { get; set; }
+        public string dop18 { get; set; }
+        public string dop19 { get; set; }
+        public string dop20 { get; set; }
+        public string dop21 { get; set; }
+        public string dop22 { get; set; }
+        public string dop23 { get; set; }
+        public string dop24 { get; set; }
+        public string dop25 { get; set; }
+        public string dop26 { get; set; }
+        public string dop27 { get; set; }
+        public string dop28 { get; set; }
+        public string dop29 { get; set; }
+        public string dop30 { get; set; }
+        public string dop31 { get; set; }
     }
 }

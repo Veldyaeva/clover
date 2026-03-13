@@ -38,8 +38,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список укороченной модели <see cref="KnitterPZVModel"/> для отображения.</returns>
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
-            // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
-            return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
+            // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 25 часов
+            return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 25m);
         }
 
         /// <summary>

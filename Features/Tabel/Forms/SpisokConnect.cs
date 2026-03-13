@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
 using static SewingProduction.Core.helpers.BindingSourceHelper;
 
 namespace SewingProduction.Features.Tabel.Forms
@@ -207,7 +208,7 @@ namespace SewingProduction.Features.Tabel.Forms
                 if (valueVerif1c == 1)
                 {
                     MessageBox.Show("Увязка с 1с не требуется!");
-                    return;
+                    //return;
                 }
                 using (var chooseForm = new ChooseUin(lastName, firstName, middleName, tabno, naimenPodr, nameGroup))
                 {

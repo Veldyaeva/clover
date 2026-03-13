@@ -17,6 +17,7 @@ using DevExpress.XtraLayout;
 using DevExpress.XtraSpreadsheet.Model;
 using Newtonsoft.Json.Serialization;
 using SewingProduction;
+using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Core.helpers;
 using SewingProduction.Core.interfaces;
@@ -38,6 +39,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
 using Label = System.Windows.Forms.Label;
 
 #nullable enable
@@ -46,6 +48,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
     public partial class KnitterWorkSpace : CustomForm, IServiceBrokerHost
     {
         private readonly ServiceBrokerController _sbController;
+        private readonly IAppServiceBrokerHub _sbHub;
+        private readonly string _sbHubOwnerId = $"KnitterWorkSpace:{Guid.NewGuid():N}";
         private readonly HashSet<string> _ignoredServiceBrokerTables = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         /// <summary>
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
@@ -172,6 +176,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _planFooterColor = Color.LightCoral;
                 _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
+                _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 dataLayoutControl1.DataSource = _planBindingSource;
 
                 ConfigureAdvBandedGridColumns();
@@ -203,6 +208,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
+                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
+                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
@@ -225,6 +232,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _planFooterColor = Color.LightCoral;
                 _factFooterColor = Color.LightSkyBlue;
                 _sbController = new ServiceBrokerController(this);
+                _sbHub = AppServices.Services.GetRequiredService<IAppServiceBrokerHub>();
                 _orchestrator = orchestrator ?? throw new ArgumentNullException(nameof(orchestrator));
                 dataLayoutControl1.DataSource = _planBindingSource;
                 ConfigureAdvBandedGridColumns();
@@ -252,6 +260,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 bandedGridView3.MasterRowExpanded += BandedGridView3_MasterRowExpanded;
                 bandedGridView3.ShowingEditor += GridView_PreventForeignEdit;
                 advBandedGridView1.ShowingEditor += GridView_PreventForeignEdit;
+                advBandedGridView1.CustomDrawGroupRow -= AdvBandedGridView1_CustomDrawGroupRow;
+                advBandedGridView1.CustomDrawGroupRow += AdvBandedGridView1_CustomDrawGroupRow;
                 bandedGridView3.CustomColumnDisplayText += BandedGridView3_CustomColumnDisplayText;
                 bandedGridView3.CustomDrawFooterCell += BandedGridView3_CustomDrawFooterCell;
             }
@@ -510,6 +520,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 // Если смена уже запущена — завершаем смену: запись в БД, остановка таймера и смена текста
                 if (_isShiftRunning)
                 {
+                    if (!ShowShiftEndConfirmationDialog())
+                        return;
                     // Перед завершением смены: обработать все операции; если есть незавершённые — не закрываем.
                     var canClose = await ProcessOperationsOnShiftEndAsync();
                     if (!canClose)
@@ -541,7 +553,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     ApplyShiftUi(false, null, null);
                     return;
                 }
-
+            
                 if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int selectedTab) || selectedTab <= 0)
                 {
                     XtraMessageBox.Show(this, "Выберите сотрудника для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -604,6 +616,55 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка при назначении табельного номера: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool ShowShiftEndConfirmationDialog()
+        {
+            using (var dialog = new Form())
+            using (var messageLabel = new Label())
+            using (var okButton = new Button())
+            using (var cancelButton = new Button())
+            using (var messageFont = new Font("Segoe UI", 25f, FontStyle.Regular, GraphicsUnit.Point))
+            using (var buttonFont = new Font("Segoe UI", 18f, FontStyle.Bold, GraphicsUnit.Point))
+            using (var cancelFont = new Font("Segoe UI", 20f, FontStyle.Bold, GraphicsUnit.Point))
+            {
+                dialog.Text = "Завершение смены";
+                dialog.FormBorderStyle = FormBorderStyle.FixedDialog;
+                dialog.StartPosition = FormStartPosition.CenterParent;
+                dialog.MinimizeBox = false;
+                dialog.MaximizeBox = false;
+                dialog.ShowInTaskbar = false;
+                dialog.ClientSize = new Size(980, 360);
+
+                messageLabel.AutoSize = false;
+                messageLabel.Text = "Завершить текущую смену?";
+                messageLabel.Font = messageFont;
+                messageLabel.TextAlign = ContentAlignment.MiddleCenter;
+                messageLabel.Location = new Point(20, 20);
+                messageLabel.Size = new Size(940, 150);
+
+                okButton.Text = "Завершить";
+                okButton.Font = buttonFont;
+                okButton.DialogResult = DialogResult.OK;
+                okButton.Size = new Size(320, 120);
+                okButton.Location = new Point(170, 205);
+
+                cancelButton.Text = "ОТМЕНА";
+                cancelButton.Font = cancelFont;
+                cancelButton.DialogResult = DialogResult.Cancel;
+                cancelButton.Size = new Size(320, 120);
+                cancelButton.Location = new Point(510, 205);
+
+                dialog.Controls.Add(messageLabel);
+                dialog.Controls.Add(okButton);
+                dialog.Controls.Add(cancelButton);
+
+                dialog.AcceptButton = cancelButton;
+                dialog.CancelButton = cancelButton;
+                dialog.Shown += (_, __) => cancelButton.Focus();
+
+                return dialog.ShowDialog(this) == DialogResult.OK;
             }
         }
 
@@ -1514,6 +1575,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 _idleTimer.Dispose();
                 _shiftTimer.Stop();
                 _shiftTimer.Dispose();
+                _blinkCheckTimer.Stop();
+                _blinkCheckTimer.Dispose();
+                _blinkTimer.Stop();
+                _blinkTimer.Dispose();
             };
         }
 
@@ -1599,6 +1664,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
             // 1) Сначала отменяем слушание/лупы
             try { _sbCts?.Cancel(); } catch { }
+            try { await _sbHub.UnsubscribeAsync(_sbHubOwnerId); } catch { }
 
             // 2) И гарантированно дожидаемся корректной отписки/END CONVERSATION
             try
@@ -1612,6 +1678,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             finally
             {
+                try
+                {
+                    if (_sbService != null)
+                        await _sbService.DisposeAsync();
+                }
+                catch { }
+                _sbService = null;
                 try { _sbCts?.Dispose(); } catch { }
                 _sbCts = null;
             }
@@ -1789,14 +1862,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private static bool IsHeaderEmphasisSegment(string segment)
+        private static bool TrySplitHeaderSegment(string segment, out string label, out string value)
         {
+            label = segment;
+            value = string.Empty;
             if (string.IsNullOrWhiteSpace(segment))
                 return false;
 
-            string trimmed = segment.TrimStart();
-            return trimmed.StartsWith("№пачки:", StringComparison.OrdinalIgnoreCase)
-                || trimmed.StartsWith("Размер:", StringComparison.OrdinalIgnoreCase);
+            int separatorIndex = segment.IndexOf(':');
+            if (separatorIndex < 0)
+                return false;
+
+            label = segment.Substring(0, separatorIndex + 1);
+            value = separatorIndex + 1 < segment.Length
+                ? segment.Substring(separatorIndex + 1).TrimStart()
+                : string.Empty;
+            return true;
         }
 
         private int GetGroupSummaryLeftEdge(AdvBandedGridView view, DevExpress.XtraGrid.Views.Grid.ViewInfo.GridGroupRowInfo info)
@@ -1829,11 +1910,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             AdvBandedGridView view,
             DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo viewInfo,
             int rowHandle,
-            GridGroupSummaryItem summaryItem,
             string fieldName,
             DevExpress.XtraGrid.Views.Base.RowObjectCustomDrawEventArgs e)
         {
-            if (summaryItem == null || viewInfo == null)
+            if (viewInfo == null)
                 return;
 
             var column = view.Columns.ColumnByFieldName(fieldName);
@@ -1844,14 +1924,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (colInfo == null)
                 return;
 
-            var value = view.GetGroupSummaryValue(rowHandle, summaryItem);
-            if (value == null || value == DBNull.Value)
-                return;
-
-            string displayFormat = summaryItem.DisplayFormat;
-            string text = string.IsNullOrWhiteSpace(displayFormat)
-                ? value.ToString()
-                : string.Format(System.Globalization.CultureInfo.CurrentCulture, displayFormat, value);
+            decimal value = GetGroupColumnSum(view, rowHandle, fieldName) ?? 0m;
+            string text = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:0.00}", value);
 
             using (var format = new StringFormat(StringFormatFlags.NoWrap))
             {
@@ -1861,6 +1935,44 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        private decimal? GetGroupColumnSum(AdvBandedGridView view, int groupRowHandle, string fieldName)
+        {
+            if (view == null || !view.IsGroupRow(groupRowHandle))
+                return null;
+
+            int childCount = view.GetChildRowCount(groupRowHandle);
+            if (childCount <= 0)
+                return 0m;
+
+            decimal sum = 0m;
+            for (int i = 0; i < childCount; i++)
+            {
+                int childHandle = view.GetChildRowHandle(groupRowHandle, i);
+                if (view.IsGroupRow(childHandle))
+                {
+                    var nested = GetGroupColumnSum(view, childHandle, fieldName);
+                    if (nested.HasValue)
+                        sum += nested.Value;
+                    continue;
+                }
+
+                object cellValue = view.GetRowCellValue(childHandle, fieldName);
+                if (cellValue == null || cellValue == DBNull.Value)
+                    continue;
+
+                try
+                {
+                    sum += Convert.ToDecimal(cellValue, System.Globalization.CultureInfo.CurrentCulture);
+                }
+                catch
+                {
+                    // Игнорируем значения, которые не удалось привести к decimal.
+                }
+            }
+
+            return sum;
+        }
+
         private void AdvBandedGridView1_CustomDrawGroupRow(object sender, RowObjectCustomDrawEventArgs e)
         {
             var view = sender as AdvBandedGridView;
@@ -1868,9 +1980,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (view == null || info == null)
                 return;
 
-            string groupText = info.GroupText;
-            if (string.IsNullOrWhiteSpace(groupText))
-                return;
+            string groupText = info.GroupText ?? string.Empty;
 
             string originalText = info.GroupText;
             info.GroupText = string.Empty;
@@ -1878,11 +1988,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             info.GroupText = originalText;
 
             Font baseFont = view.Appearance.GroupRow.Font ?? SystemFonts.DefaultFont;
-            float largeSize = baseFont.Size;// + 1f;
-            float smallSize = Math.Max(6f, baseFont.Size - 2f);
-
-            FontStyle largeStyle = baseFont.Style | FontStyle.Bold;
-            FontStyle smallStyle = baseFont.Style & ~FontStyle.Bold;
+            float valueSize = baseFont.Size + 1f;
+            float labelSize = baseFont.Size - 2f;
+            FontStyle valueStyle = baseFont.Style | FontStyle.Bold;
+            FontStyle labelStyle = baseFont.Style & ~FontStyle.Bold;
 
             Rectangle textBounds = info.Bounds;
             int left = info.ButtonBounds.Right;// + 3;
@@ -1896,40 +2005,48 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 textBounds = new Rectangle(textBounds.Left, textBounds.Top, width, textBounds.Height);
             }
 
-            using (var largeFont = new Font(baseFont.FontFamily, largeSize, largeStyle))
-            using (var smallFont = new Font(baseFont.FontFamily, smallSize, smallStyle))
-            using (var format = new StringFormat(StringFormatFlags.NoWrap))
+            using (var valueFont = new Font(baseFont.FontFamily, valueSize, valueStyle))
+            using (var labelFont = new Font(baseFont.FontFamily, labelSize, labelStyle))
+            using (var labelBrush = new SolidBrush(Color.DimGray))
             {
-                format.Alignment = StringAlignment.Near;
-                format.LineAlignment = StringAlignment.Center;
-
-                using (var shadeBrush = new SolidBrush(Color.FromArgb(24, Color.Red)))
-                {
-                    e.Graphics.FillRectangle(shadeBrush, textBounds);
-                }
-
                 float x = textBounds.Left;
                 string[] parts = groupText.Split(new[] { " | " }, StringSplitOptions.None);
-                var tokens = new List<(string Text, Font Font, float Width)>(parts.Length * 2);
+                const float blockPadding = 12f;
+                const float separatorPadding = 6f;
+                var tokens = new List<(string Text, Font Font, float Width, Brush Brush, float LeftInset)>(parts.Length * 3);
                 for (int i = 0; i < parts.Length; i++)
                 {
                     string part = parts[i];
-                    Font font = IsHeaderEmphasisSegment(part) ? largeFont : smallFont;
-                    float width = e.Cache.CalcTextSize(part, font).Width;
-                    tokens.Add((part, font, width));
+                    if (TrySplitHeaderSegment(part, out string label, out string value))
+                    {
+                        float labelWidth = (float)Math.Ceiling(e.Cache.CalcTextSize($"{label} ", labelFont).Width) + blockPadding;
+                        tokens.Add(($"{label} ", labelFont, labelWidth, labelBrush, blockPadding / 2f));
+
+                        if (!string.IsNullOrWhiteSpace(value))
+                        {
+                            float valueWidth = (float)Math.Ceiling(e.Cache.CalcTextSize(value, valueFont).Width) + blockPadding;
+                            tokens.Add((value, valueFont, valueWidth, e.Appearance.GetForeBrush(e.Cache), blockPadding / 2f));
+                        }
+                    }
+                    else
+                    {
+                        float partWidth = (float)Math.Ceiling(e.Cache.CalcTextSize(part, valueFont).Width) + blockPadding;
+                        tokens.Add((part, valueFont, partWidth, e.Appearance.GetForeBrush(e.Cache), blockPadding / 2f));
+                    }
 
                     if (i < parts.Length - 1)
                     {
                         const string separator = " | ";
-                        float sepWidth = e.Cache.CalcTextSize(separator, smallFont).Width;
-                        tokens.Add((separator, smallFont, sepWidth));
+                        float sepWidth = (float)Math.Ceiling(e.Cache.CalcTextSize(separator, labelFont).Width) + separatorPadding;
+                        tokens.Add((separator, labelFont, sepWidth, labelBrush, separatorPadding / 2f));
                     }
                 }
 
                 foreach (var token in tokens)
                 {
-                    var tokenBounds = new RectangleF(x, textBounds.Top, token.Width, textBounds.Height);
-                    e.Graphics.DrawString(token.Text, token.Font, e.Appearance.GetForeBrush(e.Cache), tokenBounds, format);
+                    SizeF tokenSize = e.Cache.CalcTextSize(token.Text, token.Font);
+                    float y = textBounds.Top + Math.Max(0f, (textBounds.Height - tokenSize.Height) / 2f);
+                    e.Graphics.DrawString(token.Text, token.Font, token.Brush, x + token.LeftInset, y);
                     x += token.Width;
                 }
             }
@@ -1937,8 +2054,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             var viewInfo = view.GetViewInfo() as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo;
             if (viewInfo != null)
             {
-                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _planChasGroupSummaryItem, "PlanChas_UI", e);
-                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, _factChasGroupSummaryItem, "FactChas_UI", e);
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, "PlanChas_UI", e);
+                DrawGroupSummaryValue(view, viewInfo, e.RowHandle, "FactChas_UI", e);
             }
 
             e.Handled = true;
@@ -2456,7 +2573,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             if (_sbService == null)
             {
-                var dbHelper = new DatabaseHelper();
+                var dbHelper = new DatabaseHelper("ace");
                 _sbService = new ServiceBrokerService(dbHelper);
             }
 
@@ -2471,9 +2588,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
             System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] InitServiceBrokerAsync start: objects={string.Join(", ", ServiceBrokerObjects)}");
-            await _sbController.InitAsync(ct);
+            await _sbController.InitAsync(ct, startBrokers: false);
 
-            var tables = _sbController.Helper?.GetListeningTables() ?? Array.Empty<string>();
+            var tableFields = _sbController.Helper?.GetUnionFieldsByTableSnapshot()
+                              ?? new Dictionary<string, IReadOnlyCollection<string>>();
+            await _sbHub.SubscribeAsync(
+                ownerId: _sbHubOwnerId,
+                ownerName: ServiceBrokerFormName,
+                tableFields: tableFields,
+                onTableChangedAsync: async (table, fields) =>
+                    await InvokeOnUiAsync(async () => await UpdateDataInFormAsync(table, fields)),
+                ct: ct);
+
+            var tables = tableFields.Keys;
             System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Listening tables: {string.Join(", ", tables)}");
         }
 
