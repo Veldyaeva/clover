@@ -63,9 +63,10 @@ namespace SewingProduction
             barSubKnitting = new BarSubItem();
             barBtnOperPlan = new BarButtonItem();
             barBtnMasterDesk1 = new BarButtonItem();
+            barButtonItemSteamMasterWorkTable = new BarButtonItem();
+            barButtonItemCutMasterWorkTable = new BarButtonItem();
             barBtnKnitterDesk = new BarButtonItem();
             barBtnAnalytics = new BarButtonItem();
-            barBtnTSDAdmin = new BarButtonItem();
             barSubSewing = new BarSubItem();
             barBtnMasterDesk = new BarButtonItem();
             barBtnCutShop = new BarButtonItem();
@@ -106,8 +107,8 @@ namespace SewingProduction
             barManager1.DockControls.Add(barDockControlRight);
             barManager1.Form = this;
             barManager1.HideIfNoRight = true;
-            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barBtnTSDAdmin });
-            barManager1.MaxItemId = 45;
+            barManager1.Items.AddRange(new BarItem[] { skinBarSubItem1, skinDropDownButtonItem1, skinPaletteDropDownButtonItem1, skinBarSubItem2, skinDropDownButtonItem2, skinPaletteDropDownButtonItem2, barSubMenu, barBtnProfile, barBtnSettings, barBtnAbout, barBtnHelp, barSubSpr, barSubEquipment, barBtnEqInTeams, barBtnEqDirectory, barBtnEqTypes, barBtnClassMatrix, barBtnOperationTypes, barSubTeamsShop, barBtnTeams, barBtnShops, barBtnProdTypes, barBtnCalcCard1, barBtnWorkers, barBtnTariffs, barBtnProducts, barBtnModelsMark, barSubDefects, barBtnSockDefects, barSubProduction, barSubKnitting, barBtnOperPlan, barBtnMasterDesk1, barBtnKnitterDesk, barBtnAnalytics, barSubSewing, barBtnMasterDesk, barBtnCutShop, barBtnTeamWork, barBtnArticle, barBtnCalcCard, barBtnTimesheet, barBtnQuestion, barBtnAt, barButtonItemSteamMasterWorkTable, barButtonItemCutMasterWorkTable });
+            barManager1.MaxItemId = 47;
             barManager1.SkipDevExpressSkinItems = true;
             // 
             // bar1
@@ -324,7 +325,7 @@ namespace SewingProduction
             // 
             barSubKnitting.Caption = "Вязальное производство";
             barSubKnitting.Id = 30;
-            barSubKnitting.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnOperPlan), new LinkPersistInfo(barBtnMasterDesk1), new LinkPersistInfo(barBtnKnitterDesk), new LinkPersistInfo(barBtnAnalytics), new LinkPersistInfo(barBtnTSDAdmin) });
+            barSubKnitting.LinksPersistInfo.AddRange(new LinkPersistInfo[] { new LinkPersistInfo(barBtnOperPlan), new LinkPersistInfo(barBtnMasterDesk1), new LinkPersistInfo(barButtonItemSteamMasterWorkTable), new LinkPersistInfo(barButtonItemCutMasterWorkTable), new LinkPersistInfo(barBtnKnitterDesk), new LinkPersistInfo(barBtnAnalytics) });
             barSubKnitting.Name = "barSubKnitting";
             barSubKnitting.Tag = "вязальноеПроизводствоToolStripMenuItem";
             // 
@@ -338,11 +339,27 @@ namespace SewingProduction
             // 
             // barBtnMasterDesk1
             // 
-            barBtnMasterDesk1.Caption = "Рабочий стол мастера";
+            barBtnMasterDesk1.Caption = "Рабочий стол мастера Вяз. цеха";
             barBtnMasterDesk1.Id = 32;
             barBtnMasterDesk1.Name = "barBtnMasterDesk1";
-            barBtnMasterDesk1.Tag = "рабочийСтолМастераToolStripMenuItem1";
-            barBtnMasterDesk1.ItemClick += рабочийСтолМастераToolStripMenuItem1_Click;
+            barBtnMasterDesk1.Tag = "рабочийСтолМастераВязЦехаToolStripMenuItem1";
+            barBtnMasterDesk1.ItemClick += рабочийСтолМастераВязЦехаToolStripMenuItem1_Click;
+            // 
+            // barButtonItem1
+            // 
+            barButtonItemSteamMasterWorkTable.Caption = "Рабочий стол мастера Отпарки";
+            barButtonItemSteamMasterWorkTable.Id = 45;
+            barButtonItemSteamMasterWorkTable.Name = "barButtonItemSteamMasterWorkTable";
+            barButtonItemSteamMasterWorkTable.Tag = "рабочийСтолМастераОтпаркиToolStripMenuItem1";
+            barButtonItemSteamMasterWorkTable.ItemClick += barButtonItemSteamMasterWorkTable_ItemClick;
+            // 
+            // barButtonItem2
+            // 
+            barButtonItemCutMasterWorkTable.Caption = "Рабочий стол мастера Раскр. цеха";
+            barButtonItemCutMasterWorkTable.Id = 46;
+            barButtonItemCutMasterWorkTable.Name = "barButtonItemCutMasterWorkTable";
+            barButtonItemCutMasterWorkTable.Tag = "рабочийСтолМастераРаскрЦехаToolStripMenuItem1";
+            barButtonItemCutMasterWorkTable.ItemClick += barButtonItemSteamMasterWorkTable_ItemClick;
             // 
             // barBtnKnitterDesk
             // 
@@ -359,13 +376,13 @@ namespace SewingProduction
             barBtnAnalytics.Name = "barBtnAnalytics";
             barBtnAnalytics.Tag = "аналитикаToolStripMenuItem";
             barBtnAnalytics.ItemClick += аналитикаToolStripMenuItem_Click;
-            // 
-            // barBtnTSDAdmin
-            // 
-            barBtnTSDAdmin.Caption = "Доступ ТСД";
-            barBtnTSDAdmin.Id = 44;
-            barBtnTSDAdmin.Name = "barBtnTSDAdmin";
-            barBtnTSDAdmin.ItemClick += barButtonTSDAdmin_ItemClick;
+            //// 
+            //// barBtnTSDAdmin
+            //// 
+            //barBtnTSDAdmin.Caption = "Доступ ТСД";
+            //barBtnTSDAdmin.Id = 44;
+            //barBtnTSDAdmin.Name = "barBtnTSDAdmin";
+            //barBtnTSDAdmin.ItemClick += barButtonTSDAdmin_ItemClick;
             // 
             // barSubSewing
             // 
@@ -642,7 +659,7 @@ namespace SewingProduction
 
         private DevExpress.XtraBars.BarButtonItem barBtnQuestion;
         private DevExpress.XtraBars.BarButtonItem barBtnAt;
-        private BarButtonItem barButtonItem1;
-        private BarButtonItem barBtnTSDAdmin;
+        private BarButtonItem barButtonItemSteamMasterWorkTable;
+        private BarButtonItem barButtonItemCutMasterWorkTable;
     }
 }

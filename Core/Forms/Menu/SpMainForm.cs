@@ -262,9 +262,9 @@ namespace SewingProduction
         {
             OpenForm(new CuttingForm(), e.Item);
         }
-        private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
+        private void рабочийСтолМастераВязЦехаToolStripMenuItem1_Click(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new PlanZagrVyaz(CurrentUser.User), e.Item);
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 1), e.Item);
         }
 
         private void рабочийСтолВязальщицыToolStripMenuItem_Click(object sender, ItemClickEventArgs e)
@@ -287,9 +287,19 @@ namespace SewingProduction
 
         }
 
-        private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
+        //private void barButtonTSDAdmin_ItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    OpenForm(new TSDAccessManagement(CurrentUser.User), e.Item);
+        //}
+
+        private void barButtonItemSteamMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
         {
-            OpenForm(new TSDAccessManagement (CurrentUser.User), e.Item);
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 2), e.Item);
+        }
+
+        private void barButtonItemCutMasterWorkTable_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(CurrentUser.User, 3), e.Item);
         }
     }
 }
