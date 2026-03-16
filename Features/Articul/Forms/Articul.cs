@@ -31,7 +31,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.Office.PInvoke.Win32;
@@ -214,12 +216,12 @@ namespace SewingProduction.Features.Articul
                 //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
                 // нормы/себестоимость/брак и назначение полотна
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "norm_t", "F2", true);
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "seb_t");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "brak_t");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "brak_percent", "F2");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "kf_tkan_kach", "F2");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "opis_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "Norm_t", "F2", true);
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "Seb_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "Brak_percent", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "Kf_tkan_kach", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "Opis_t");
 
                 #endregion
 
@@ -266,17 +268,38 @@ namespace SewingProduction.Features.Articul
             bool formatCurrentText = false)
         {
             var modelType = typeof(SpArticulPreviewModel);
+            var candidates = 0;
+            var bound = 0;
+            var skippedNoSuffix = 0;
+            var skippedMissingProperty = 0;
 
             foreach (Control control in GetAllControls(container))
             {
                 if (string.IsNullOrWhiteSpace(control.Name)) continue;
                 if (!control.Name.StartsWith(controlNamePrefix, StringComparison.Ordinal)) continue;
+                candidates++;
 
                 var suffix = GetNumericSuffix(control.Name);
-                if (suffix == null) continue;
+                if (suffix == null)
+                {
+                    skippedNoSuffix++;
+                    Debug.WriteLine($"[BindTextBoxesBySuffix] No numeric suffix for control: {control.Name}");
+                    continue;
+                }
 
-                var propertyName = propertyPrefix + suffix;
-                if (modelType.GetProperty(propertyName) == null) continue;
+                var expectedPropertyName = propertyPrefix + suffix;
+                var modelProperty = modelType.GetProperty(
+                    expectedPropertyName,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+
+                if (modelProperty == null)
+                {
+                    skippedMissingProperty++;
+                    Debug.WriteLine($"[BindTextBoxesBySuffix] Property not found: {expectedPropertyName} for control {control.Name}");
+                    continue;
+                }
+
+                var propertyName = modelProperty.Name;
 
                 var bindProperty = "Text";
                 if (control is DevExpress.XtraEditors.BaseEdit)
@@ -297,7 +320,13 @@ namespace SewingProduction.Features.Articul
                 {
                     tb.Text = value.ToString("F2");
                 }
+
+                bound++;
             }
+
+            Debug.WriteLine(
+                $"[BindTextBoxesBySuffix] Prefix={controlNamePrefix}; PropertyPrefix={propertyPrefix}; " +
+                $"Candidates={candidates}; Bound={bound}; NoSuffix={skippedNoSuffix}; MissingProperty={skippedMissingProperty}");
         }
 
         private static IEnumerable<Control> GetAllControls(Control root)
