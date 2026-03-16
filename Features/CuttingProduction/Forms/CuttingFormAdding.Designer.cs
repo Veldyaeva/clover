@@ -759,7 +759,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridView2.Name = "gridView2";
             gridView2.OptionsView.EnableAppearanceEvenRow = true;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "Код";
             gridColumn1.Name = "gridColumn1";
@@ -767,7 +767,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridColumn1.VisibleIndex = 0;
             gridColumn1.Width = 63;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "Артикул";
             gridColumn2.Name = "gridColumn2";
@@ -775,7 +775,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridColumn2.VisibleIndex = 1;
             gridColumn2.Width = 63;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Мод";
             gridColumn3.Name = "gridColumn3";
@@ -783,7 +783,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridColumn3.VisibleIndex = 2;
             gridColumn3.Width = 63;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "cle";
             gridColumn4.Name = "gridColumn4";
@@ -791,7 +791,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridColumn4.VisibleIndex = 3;
             gridColumn4.Width = 33;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "Размер";
             gridColumn5.Name = "gridColumn5";
@@ -799,7 +799,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridColumn5.VisibleIndex = 4;
             gridColumn5.Width = 71;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "Группа";
             gridColumn6.Name = "gridColumn6";
@@ -807,7 +807,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridColumn6.VisibleIndex = 5;
             gridColumn6.Width = 71;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Caption = "Комплект";
             gridColumn7.Name = "gridColumn7";
@@ -836,7 +836,7 @@ namespace SewingProduction.Features.CuttingProduction.Forms
             gridView1.Name = "gridView1";
             gridView1.OptionsView.EnableAppearanceEvenRow = true;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Caption = "п/п";
             gridColumn8.Name = "gridColumn8";

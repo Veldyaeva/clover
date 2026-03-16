@@ -1752,7 +1752,7 @@ namespace SewingProduction.form
             gridViewPzArticulList.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             gridViewPzArticulList.FocusedRowChanged += gcPzArticulList_FocusedRowChanged;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "V";
             gridColumn1.ColumnEdit = repositoryItemCheckEdit1;
@@ -1774,7 +1774,7 @@ namespace SewingProduction.form
             repositoryItemCheckEdit1.ValueUnchecked = 0;
             repositoryItemCheckEdit1.CheckedChanged += repositoryItemCheckEdit1_CheckedChanged;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "План. дата сдачи (MIN)";
             gridColumn2.FieldName = "alDataCdPl";
@@ -1789,7 +1789,7 @@ namespace SewingProduction.form
             gridColumn2.VisibleIndex = 5;
             gridColumn2.Width = 82;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Модель комплекта";
             gridColumn3.FieldName = "alModK";
@@ -1802,7 +1802,7 @@ namespace SewingProduction.form
             gridColumn3.VisibleIndex = 4;
             gridColumn3.Width = 140;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "Артикул комплекта";
             gridColumn4.FieldName = "alArticulK";
@@ -1816,7 +1816,7 @@ namespace SewingProduction.form
             gridColumn4.VisibleIndex = 3;
             gridColumn4.Width = 93;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "Кол-во шт";
             gridColumn5.FieldName = "alKol";
@@ -1830,7 +1830,7 @@ namespace SewingProduction.form
             gridColumn5.VisibleIndex = 2;
             gridColumn5.Width = 52;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Caption = "Артикул";
             gridColumn7.FieldName = "alArticul";
@@ -1844,7 +1844,7 @@ namespace SewingProduction.form
             gridColumn7.VisibleIndex = 0;
             gridColumn7.Width = 93;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "Модель";
             gridColumn6.FieldName = "alMod";
@@ -1890,7 +1890,7 @@ namespace SewingProduction.form
             gridViewPzNomList.FocusedRowChanged += gcPzNomList_FocusedRowChanged;
             gridViewPzNomList.CellValueChanged += gridView2_CellValueChanged;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Caption = "V";
             gridColumn8.ColumnEdit = repositoryItemCheckEdit3;
