@@ -214,12 +214,12 @@ namespace SewingProduction.Features.Articul
                 //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
                 // нормы/себестоимость/брак и назначение полотна
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "Norm_t", "F2", true);
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "norm_t", "F2", true);
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "seb_t");
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "brak_t");
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "brak_percent", "F2");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "Kf_tkan_kach", "F2");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "Opis_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "kf_tkan_kach", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "opis_t");
 
                 #endregion
 
@@ -265,20 +265,26 @@ namespace SewingProduction.Features.Articul
             string format = null,
             bool formatCurrentText = false)
         {
-            foreach (Control control in container.Controls)
-            {
-                if (control is not CustomTextBox tb) continue;
-                if (string.IsNullOrWhiteSpace(tb.Name)) continue;
-                if (!tb.Name.StartsWith(controlNamePrefix, StringComparison.Ordinal)) continue;
+            var modelType = typeof(SpArticulPreviewModel);
 
-                var suffix = tb.Name[tb.Name.Length - 1];
-                if (!char.IsDigit(suffix)) continue;
+            foreach (Control control in GetAllControls(container))
+            {
+                if (string.IsNullOrWhiteSpace(control.Name)) continue;
+                if (!control.Name.StartsWith(controlNamePrefix, StringComparison.Ordinal)) continue;
+
+                var suffix = GetNumericSuffix(control.Name);
+                if (suffix == null) continue;
 
                 var propertyName = propertyPrefix + suffix;
+                if (modelType.GetProperty(propertyName) == null) continue;
 
-                tb.DataBindings.Clear();
-                tb.DataBindings.Add(
-                    "Text",
+                var bindProperty = "Text";
+                if (control is DevExpress.XtraEditors.BaseEdit)
+                    bindProperty = "EditValue";
+
+                control.DataBindings.Clear();
+                control.DataBindings.Add(
+                    bindProperty,
                     source,
                     propertyName,
                     true,
@@ -286,9 +292,34 @@ namespace SewingProduction.Features.Articul
                     null,
                     format);
 
-                if (formatCurrentText && decimal.TryParse(tb.Text, out var value))
+                if (formatCurrentText && control is CustomTextBox tb &&
+                    decimal.TryParse(tb.Text, out var value))
+                {
                     tb.Text = value.ToString("F2");
+                }
             }
+        }
+
+        private static IEnumerable<Control> GetAllControls(Control root)
+        {
+            foreach (Control c in root.Controls)
+            {
+                yield return c;
+                foreach (var child in GetAllControls(c))
+                    yield return child;
+            }
+        }
+
+        private static string GetNumericSuffix(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+
+            var i = name.Length - 1;
+            while (i >= 0 && char.IsDigit(name[i])) i--;
+
+            var start = i + 1;
+            if (start >= name.Length) return null;
+            return name.Substring(start);
         }
 
 
