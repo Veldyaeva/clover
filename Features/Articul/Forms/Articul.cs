@@ -81,6 +81,7 @@ namespace SewingProduction.Features.Articul
             if (_previewList.Count == 0)
             {
                 ArticulControlBindingHelper.ClearDetails(bsDetails);
+                articulControl1.ClearImage();
                 bsArtDr.DataSource = null;
                 bsSostKompl.DataSource = null;
                 bsSostNabor.DataSource = null;
@@ -363,8 +364,9 @@ namespace SewingProduction.Features.Articul
                 var artDrTask = _articulDataService.GetArtDrByKodAsync(kod);
                 var komplTask = _articulDataService.GetSostavkomplForKod(kod);
                 var naborTask = _articulDataService.GetSostavNaborForKod(kod);
+                var imageTask = articulControl1.LoadImageAsync(kodd);
 
-                await Task.WhenAll(detailsTask, artDrTask, komplTask, naborTask);
+                await Task.WhenAll(detailsTask, artDrTask, komplTask, naborTask, imageTask);
 
                 if (version != _loadVersion) return;
 

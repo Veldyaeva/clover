@@ -2,6 +2,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -25,6 +26,7 @@ namespace SewingProduction.Features.Articul.Forms
         private bool _isInitialized;
         private readonly ILogger _logger = new FileLogger();
         private readonly DbService _dbService;
+        private readonly ArticulDataService _articulDataService = new ArticulDataService();
         private readonly Dictionary<Control, System.Reflection.PropertyInfo> _controlToArtNormProperty = new Dictionary<Control, System.Reflection.PropertyInfo>();
         //private readonly BindingSource _bs = new BindingSource();
         private readonly DXErrorProvider _dx = new DXErrorProvider();
@@ -79,6 +81,24 @@ namespace SewingProduction.Features.Articul.Forms
         {
             if (string.IsNullOrWhiteSpace(kod)) return;
             txbKod.Text = kod;
+        }
+
+        public async Task LoadImageAsync(string kodd)
+        {
+            if (string.IsNullOrWhiteSpace(kodd))
+            {
+                ClearImage();
+                return;
+            }
+
+            var imagePath = await _articulDataService.GetFileEskizForKod(kodd);
+            pictureBoxArticul.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;
+        }
+
+        public void ClearImage()
+        {
+            pictureBoxArticul.ImageLocation = null;
+            pictureBoxArticul.Image = null;
         }
 
         private async void ArticulControl_Load(object sender, EventArgs e)
