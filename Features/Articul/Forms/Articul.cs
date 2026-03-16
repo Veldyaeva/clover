@@ -16,6 +16,7 @@ using SewingProduction.Core.Models;
 using SewingProduction.Extensions;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.Sprav;
@@ -77,8 +78,11 @@ namespace SewingProduction.Features.Articul
 
             if (_previewList.Count == 0)
             {
-                bsDetails.DataSource = null;
-                bsDetails.ResetBindings(false);
+                ArticulControlBindingHelper.ClearDetails(bsDetails);
+                bsArtDr.DataSource = null;
+                bsSostKompl.DataSource = null;
+                bsSostNabor.DataSource = null;
+                UpdateTabsVisibility();
                 return;
             }
 
@@ -114,28 +118,19 @@ namespace SewingProduction.Features.Articul
             {
                 if (_isInitialized) return;
 
-                // Grid
-                //gridControl1.DataSource = bsPreview;
                 gridControl1.GridControl.DataSource = bsPreview;
-                bsPreview.DataSource = _previewList; // один раз, дальше обновляем _previewList
+                bsPreview.DataSource = _previewList;
 
-                // Card
+                // карточка артикула
                 articulControl1.BindTo(bsDetails);
                 articulControl1.IsReadOnly = true;
 
-                // Bind all right-side controls ONCE
+                //привязываем правую панель
                 InitializeBindings();
 
                 _isInitialized = true;
 
-                await ReloadPreviewAsync();
-
-                if (_previewList.Count > 0)
-                {
-                    bsPreview.Position = 0;
-                    var first = _previewList[0];
-                    await LoadArticulAsync(first.Kod, first.Kodd);
-                }
+                await RefreshArtPreviewAsync();
             }
             catch (Exception ex)
             {
@@ -148,7 +143,6 @@ namespace SewingProduction.Features.Articul
             try
             {
                 var list = await _articulDataService.GetArtPreviewAsyncBindingList();
-                // ВАЖНО: не меняем bsPreview.DataSource, а обновляем _previewList
                 bsPreview.RaiseListChangedEvents = false;
                 try
                 {
@@ -219,12 +213,13 @@ namespace SewingProduction.Features.Articul
                 // TODO: добавить расчет полной с\ст на изделие по коду 
                 //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
-                // нормы на полотно 
+                //// нормы на полотно 
                 //foreach (Control control in cgbTkanNorm.Controls)
                 //{
                 //    if (control is not CustomTextBox el) continue;
                 //    char si = el.Name.Last();
                 //    var name = $"Norm_t{si}";
+                //    el.DataBindings.Clear();
                 //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
                 //    el.Text = string.Format("{0:F2}", el.Text);
                 //}
@@ -234,6 +229,7 @@ namespace SewingProduction.Features.Articul
                 //    if (control is not CustomTextBox el) continue;
                 //    char si = el.Name.Last();
                 //    var name = $"Seb_t{si}";
+                //    el.DataBindings.Clear();
                 //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
                 //}
                 //// брак
@@ -242,6 +238,7 @@ namespace SewingProduction.Features.Articul
                 //    if (control is not CustomTextBox el) continue;
                 //    char si = el.Name.Last();
                 //    var name = $"Brak_t{si}";
+                //    el.DataBindings.Clear();
                 //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
                 //}
                 //// % брака 
@@ -250,6 +247,7 @@ namespace SewingProduction.Features.Articul
                 //    if (control is not CustomTextBox el) continue;
                 //    char si = el.Name.Last();
                 //    var name = $"Brak_percent{si}";
+                //    el.DataBindings.Clear();
                 //    // вывод строки в формате 2 знака после запятой 
                 //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
                 //}
@@ -259,6 +257,7 @@ namespace SewingProduction.Features.Articul
                 //    if (control is not CustomTextBox el) continue;
                 //    char si = el.Name.Last();
                 //    var name = $"Kf_tkan_kach{si}";
+                //    el.DataBindings.Clear();
                 //    // вывод строки в формате 2 знака после запятой 
                 //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
                 //}
@@ -268,6 +267,7 @@ namespace SewingProduction.Features.Articul
                 //    if (control is not CustomTextBox el) continue;
                 //    char si = el.Name.Last();
                 //    var name = $"Opis_t{si}";
+                //    el.DataBindings.Clear();
                 //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
                 //}
 
@@ -315,8 +315,6 @@ namespace SewingProduction.Features.Articul
             gridControl1.ShowLoadingPanel();
             try
             {
-                articulControl1.SetKod(kod);
-
                 var detailsTask = _articulDataService.GetByKodAsync(kod);
                 var artDrTask = _articulDataService.GetArtDrByKodAsync(kod);
                 var komplTask = _articulDataService.GetSostavkomplForKod(kod);
@@ -327,14 +325,12 @@ namespace SewingProduction.Features.Articul
                 if (version != _loadVersion) return;
 
                 var details = await detailsTask;
-                bsDetails.DataSource = details;
-                bsDetails.ResetBindings(false);
-                if (details != null)
-                    articulControl1.BindModel(details);
+                ArticulControlBindingHelper.SetDetails(bsDetails, details);
 
                 bsArtDr.DataSource = await artDrTask;
                 bsSostKompl.DataSource = await komplTask;
                 bsSostNabor.DataSource = await naborTask;
+                bsSostKompl.ResetBindings(false);
                 bsSostNabor.ResetBindings(false);
 
                 UpdateTabsVisibility();
@@ -350,10 +346,8 @@ namespace SewingProduction.Features.Articul
         }
         private void UpdateTabsVisibility()
         {
-            //cTabPage1.PageVisible = bsSostKompl.Current != null;
-            //cTabPage2.PageVisible = bsSostNabor.Current != null;
-
-            // сделаем проверку Count/Rows.
+            cTabPage1.PageVisible = bsSostKompl.Count > 0;
+            cTabPage2.PageVisible = bsSostNabor.Count > 0;
         }
         private async void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {

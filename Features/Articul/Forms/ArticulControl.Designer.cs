@@ -227,7 +227,7 @@
             txbKod.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKod.ErrorColor = System.Drawing.Color.Red;
             txbKod.ErrorMessage = null;
-            txbKod.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbKod.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             txbKod.Location = new System.Drawing.Point(344, 34);
             txbKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKod.Name = "txbKod";
@@ -267,7 +267,7 @@
             txbNDS.Enabled = false;
             txbNDS.ErrorColor = System.Drawing.Color.Red;
             txbNDS.ErrorMessage = null;
-            txbNDS.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbNDS.Font = new System.Drawing.Font("Arial", 9F);
             txbNDS.Location = new System.Drawing.Point(884, 286);
             txbNDS.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNDS.Name = "txbNDS";
@@ -279,7 +279,7 @@
             txbTM.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbTM.ErrorColor = System.Drawing.Color.Red;
             txbTM.ErrorMessage = null;
-            txbTM.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbTM.Font = new System.Drawing.Font("Arial", 9F);
             txbTM.Location = new System.Drawing.Point(344, 122);
             txbTM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTM.Name = "txbTM";
@@ -305,7 +305,7 @@
             txbKodTnved.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbKodTnved.ErrorColor = System.Drawing.Color.Red;
             txbKodTnved.ErrorMessage = null;
-            txbKodTnved.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbKodTnved.Font = new System.Drawing.Font("Arial", 9F);
             txbKodTnved.Location = new System.Drawing.Point(734, 286);
             txbKodTnved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKodTnved.Name = "txbKodTnved";
@@ -347,7 +347,7 @@
             txbScNomer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbScNomer.ErrorColor = System.Drawing.Color.Red;
             txbScNomer.ErrorMessage = null;
-            txbScNomer.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbScNomer.Font = new System.Drawing.Font("Arial", 9F);
             txbScNomer.Location = new System.Drawing.Point(584, 286);
             txbScNomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbScNomer.Name = "txbScNomer";
@@ -361,7 +361,7 @@
             txbMod.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbMod.ErrorColor = System.Drawing.Color.Red;
             txbMod.ErrorMessage = null;
-            txbMod.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbMod.Font = new System.Drawing.Font("Arial", 9F);
             txbMod.Location = new System.Drawing.Point(344, 77);
             txbMod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbMod.MinimumSize = new System.Drawing.Size(120, 15);
@@ -376,7 +376,7 @@
             txbSost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSost.ErrorColor = System.Drawing.Color.Red;
             txbSost.ErrorMessage = null;
-            txbSost.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbSost.Font = new System.Drawing.Font("Arial", 9F);
             txbSost.Location = new System.Drawing.Point(646, 146);
             txbSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost.Name = "txbSost";
@@ -387,7 +387,7 @@
             // mtbDateOpis
             // 
             mtbDateOpis.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            mtbDateOpis.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            mtbDateOpis.Font = new System.Drawing.Font("Arial", 9F);
             mtbDateOpis.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             mtbDateOpis.Location = new System.Drawing.Point(344, 286);
             mtbDateOpis.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -404,7 +404,7 @@
             txbIdGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbIdGost.ErrorColor = System.Drawing.Color.Red;
             txbIdGost.ErrorMessage = null;
-            txbIdGost.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbIdGost.Font = new System.Drawing.Font("Arial", 9F);
             txbIdGost.Location = new System.Drawing.Point(540, 110);
             txbIdGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbIdGost.Name = "txbIdGost";
@@ -417,7 +417,7 @@
             txbSeason.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSeason.ErrorColor = System.Drawing.Color.Red;
             txbSeason.ErrorMessage = null;
-            txbSeason.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbSeason.Font = new System.Drawing.Font("Arial", 9F);
             txbSeason.Location = new System.Drawing.Point(344, 146);
             txbSeason.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeason.Name = "txbSeason";
@@ -431,7 +431,7 @@
             txbNameGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNameGost.ErrorColor = System.Drawing.Color.Red;
             txbNameGost.ErrorMessage = null;
-            txbNameGost.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbNameGost.Font = new System.Drawing.Font("Arial", 9F);
             txbNameGost.Location = new System.Drawing.Point(664, 110);
             txbNameGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNameGost.Name = "txbNameGost";
@@ -445,7 +445,7 @@
             txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbOpiGost.ErrorColor = System.Drawing.Color.Red;
             txbOpiGost.ErrorMessage = null;
-            txbOpiGost.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbOpiGost.Font = new System.Drawing.Font("Arial", 9F);
             txbOpiGost.Location = new System.Drawing.Point(787, 110);
             txbOpiGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpiGost.Name = "txbOpiGost";
@@ -459,7 +459,7 @@
             txbSost2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSost2.ErrorColor = System.Drawing.Color.Red;
             txbSost2.ErrorMessage = null;
-            txbSost2.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbSost2.Font = new System.Drawing.Font("Arial", 9F);
             txbSost2.Location = new System.Drawing.Point(646, 170);
             txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost2.Name = "txbSost2";
@@ -473,7 +473,7 @@
             txbRazmPrint.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbRazmPrint.ErrorColor = System.Drawing.Color.Red;
             txbRazmPrint.ErrorMessage = null;
-            txbRazmPrint.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbRazmPrint.Font = new System.Drawing.Font("Arial", 9F);
             txbRazmPrint.Location = new System.Drawing.Point(855, 218);
             txbRazmPrint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazmPrint.Name = "txbRazmPrint";
@@ -486,7 +486,7 @@
             txbAssort.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbAssort.ErrorColor = System.Drawing.Color.Red;
             txbAssort.ErrorMessage = null;
-            txbAssort.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbAssort.Font = new System.Drawing.Font("Arial", 9F);
             txbAssort.Location = new System.Drawing.Point(344, 170);
             txbAssort.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbAssort.Name = "txbAssort";
@@ -500,7 +500,7 @@
             txbSost3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSost3.ErrorColor = System.Drawing.Color.Red;
             txbSost3.ErrorMessage = null;
-            txbSost3.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbSost3.Font = new System.Drawing.Font("Arial", 9F);
             txbSost3.Location = new System.Drawing.Point(646, 194);
             txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost3.Name = "txbSost3";
@@ -513,7 +513,7 @@
             txbCountry.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbCountry.ErrorColor = System.Drawing.Color.Red;
             txbCountry.ErrorMessage = null;
-            txbCountry.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbCountry.Font = new System.Drawing.Font("Arial", 9F);
             txbCountry.Location = new System.Drawing.Point(344, 194);
             txbCountry.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbCountry.Name = "txbCountry";
@@ -527,7 +527,7 @@
             txbGrupMenName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbGrupMenName.ErrorColor = System.Drawing.Color.Red;
             txbGrupMenName.ErrorMessage = null;
-            txbGrupMenName.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbGrupMenName.Font = new System.Drawing.Font("Arial", 9F);
             txbGrupMenName.Location = new System.Drawing.Point(344, 218);
             txbGrupMenName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGrupMenName.Name = "txbGrupMenName";
@@ -540,7 +540,7 @@
             txbRazm.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbRazm.ErrorColor = System.Drawing.Color.Red;
             txbRazm.ErrorMessage = null;
-            txbRazm.Font = new System.Drawing.Font("Arial Narrow", 9F);
+            txbRazm.Font = new System.Drawing.Font("Arial", 9F);
             txbRazm.Location = new System.Drawing.Point(646, 218);
             txbRazm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazm.Name = "txbRazm";
