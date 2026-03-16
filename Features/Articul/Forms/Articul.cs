@@ -213,63 +213,13 @@ namespace SewingProduction.Features.Articul
                 // TODO: добавить расчет полной с\ст на изделие по коду 
                 //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
-                //// нормы на полотно 
-                //foreach (Control control in cgbTkanNorm.Controls)
-                //{
-                //    if (control is not CustomTextBox el) continue;
-                //    char si = el.Name.Last();
-                //    var name = $"Norm_t{si}";
-                //    el.DataBindings.Clear();
-                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                //    el.Text = string.Format("{0:F2}", el.Text);
-                //}
-                ////себестоимость
-                //foreach (Control control in cgbTkanSeb.Controls)
-                //{
-                //    if (control is not CustomTextBox el) continue;
-                //    char si = el.Name.Last();
-                //    var name = $"Seb_t{si}";
-                //    el.DataBindings.Clear();
-                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                //}
-                //// брак
-                //foreach (Control control in cgbTkanBrak.Controls)
-                //{
-                //    if (control is not CustomTextBox el) continue;
-                //    char si = el.Name.Last();
-                //    var name = $"Brak_t{si}";
-                //    el.DataBindings.Clear();
-                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                //}
-                //// % брака 
-                //foreach (Control control in cgbBrakPercent.Controls)
-                //{
-                //    if (control is not CustomTextBox el) continue;
-                //    char si = el.Name.Last();
-                //    var name = $"Brak_percent{si}";
-                //    el.DataBindings.Clear();
-                //    // вывод строки в формате 2 знака после запятой 
-                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
-                //}
-                //// коэф-т качества полотна
-                //foreach (Control control in cgbKfKach.Controls)
-                //{
-                //    if (control is not CustomTextBox el) continue;
-                //    char si = el.Name.Last();
-                //    var name = $"Kf_tkan_kach{si}";
-                //    el.DataBindings.Clear();
-                //    // вывод строки в формате 2 знака после запятой 
-                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never, null, "F2");
-                //}
-                //// назначение полотна 
-                //foreach (Control control in cgbTkanPurpose.Controls)
-                //{
-                //    if (control is not CustomTextBox el) continue;
-                //    char si = el.Name.Last();
-                //    var name = $"Opis_t{si}";
-                //    el.DataBindings.Clear();
-                //    el.DataBindings.Add("Text", bsDetails, name, true, DataSourceUpdateMode.Never);
-                //}
+                // нормы/себестоимость/брак и назначение полотна
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "Norm_t", "F2", true);
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "seb_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "brak_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "brak_percent", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "Kf_tkan_kach", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "Opis_t");
 
                 #endregion
 
@@ -305,6 +255,40 @@ namespace SewingProduction.Features.Articul
                 throw;
             }
 
+        }
+
+        private static void BindTextBoxesBySuffix(
+            Control container,
+            BindingSource source,
+            string controlNamePrefix,
+            string propertyPrefix,
+            string format = null,
+            bool formatCurrentText = false)
+        {
+            foreach (Control control in container.Controls)
+            {
+                if (control is not CustomTextBox tb) continue;
+                if (string.IsNullOrWhiteSpace(tb.Name)) continue;
+                if (!tb.Name.StartsWith(controlNamePrefix, StringComparison.Ordinal)) continue;
+
+                var suffix = tb.Name[tb.Name.Length - 1];
+                if (!char.IsDigit(suffix)) continue;
+
+                var propertyName = propertyPrefix + suffix;
+
+                tb.DataBindings.Clear();
+                tb.DataBindings.Add(
+                    "Text",
+                    source,
+                    propertyName,
+                    true,
+                    DataSourceUpdateMode.Never,
+                    null,
+                    format);
+
+                if (formatCurrentText && decimal.TryParse(tb.Text, out var value))
+                    tb.Text = value.ToString("F2");
+            }
         }
 
 
