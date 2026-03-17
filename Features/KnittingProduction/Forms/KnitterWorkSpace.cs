@@ -580,10 +580,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     }
                     else if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
                     {
+                        int shiftID = _currentShiftId.Value;
                         await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
                         // Перезагрузим план, чтобы обновить статусы/проценты
                         await LoadPlanForTabAsync(tabEnd, forceReload: true);
-                        LogSuccess($"Смена успешно завершена. ShiftId={_currentShiftId.Value}, Tab={tabEnd}", "Shift.End");
+                        LogSuccess($"Смена успешно завершена. ShiftId={shiftID}, Tab={tabEnd}", "Shift.End");
                     }
 
                     await RefreshFioListAsync();
