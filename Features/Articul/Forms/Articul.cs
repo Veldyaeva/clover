@@ -3,9 +3,11 @@ using DevExpress.Office.Utils;
 using DevExpress.Utils.Extensions;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraRichEdit.Model;
 using DevExpress.XtraVerticalGrid;
@@ -70,6 +72,7 @@ namespace SewingProduction.Features.Articul
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
             _currentUser = user;
+            InitHeaderButtonTags();
         }
         private async Task RefreshArtPreviewAsync()
         {
@@ -700,9 +703,112 @@ namespace SewingProduction.Features.Articul
 
         }
 
-        private void layoutControlGroup1_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        #region headerButtons
+        /// <summary>
+        /// Инициализирует теги для кнопок в заголовке групп
+        /// </summary>
+        private void InitHeaderButtonTags()
         {
-            customButtonKart_Click(sender, EventArgs.Empty);
+            // layoutControlGroup1 — основная группа с гридом
+            TagByCaption(layoutControlGroup1, new (string caption, string tag)[] {
+                ("Карточка", "articulCard"),
+                ("Архив", "arch"),
+            });
+
         }
+
+        /// <summary>
+        /// Проставляет теги кнопкам по их подписям
+        /// </summary>
+        private void TagByCaption(LayoutControlGroup group, IEnumerable<(string caption, string tag)> map)
+        {
+            if (group == null || group.CustomHeaderButtons == null) return;
+
+            foreach (var (caption, tag) in map)
+            {
+                var btn = group.CustomHeaderButtons
+                               .OfType<GroupBoxButton>()
+                               .FirstOrDefault(b => string.Equals(b.Caption, caption, StringComparison.OrdinalIgnoreCase));
+                if (btn != null && (btn.Tag == null || string.IsNullOrWhiteSpace(btn.Tag.ToString())))
+                {
+                    btn.Tag = tag;
+                }
+            }
+        }
+        private void layoutControlGroup1_CustomButtonClick_1(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                string tag = button.Tag?.ToString() ?? string.Empty;
+
+                switch (tag)
+                {
+                    case "articulCard":
+                        customButtonKart_Click(sender, EventArgs.Empty);
+                        break;
+                    default:
+                        // Если тег не установлен, пытаемся определить по Caption
+                        string caption = button.Caption ?? string.Empty;
+                        if (caption.Contains("Карточка", StringComparison.OrdinalIgnoreCase))
+                        {
+                            customButtonKart_Click(sender, EventArgs.Empty);
+                        }
+                        break;
+                }
+            }
+
+        }
+
+        private void layoutControlGroup1_CustomButtonChecked(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                string tag = button.Tag?.ToString() ?? string.Empty;
+
+                switch (tag)
+                {
+                    case "arch":
+                        // архив
+                        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+                        break;
+                    default:
+                        // Если тег не установлен, пытаемся определить по Caption
+                        string caption = button.Caption ?? string.Empty;
+                        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
+                        {
+                            //архив
+                        }
+                        break;
+                }
+            }
+
+        }
+
+        private void layoutControlGroup1_CustomButtonUnchecked(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                string tag = button.Tag?.ToString() ?? string.Empty;
+
+                switch (tag)
+                {
+                    case "arch":
+                        // архив
+                        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+
+                        break;
+                    default:
+                        // Если тег не установлен, пытаемся определить по Caption
+                        string caption = button.Caption ?? string.Empty;
+                        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
+                        {
+                            //архив
+                        }
+                        break;
+                }
+            }
+
+        }
+        #endregion
     }
 }
