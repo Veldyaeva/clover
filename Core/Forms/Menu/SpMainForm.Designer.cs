@@ -345,7 +345,7 @@ namespace SewingProduction
             barBtnMasterDesk1.Tag = "рабочийСтолМастераВязЦехаToolStripMenuItem1";
             barBtnMasterDesk1.ItemClick += рабочийСтолМастераВязЦехаToolStripMenuItem1_Click;
             // 
-            // barButtonItem1
+            // barButtonItemSteamMasterWorkTable
             // 
             barButtonItemSteamMasterWorkTable.Caption = "Рабочий стол мастера Отпарки";
             barButtonItemSteamMasterWorkTable.Id = 45;
@@ -353,13 +353,13 @@ namespace SewingProduction
             barButtonItemSteamMasterWorkTable.Tag = "рабочийСтолМастераОтпаркиToolStripMenuItem1";
             barButtonItemSteamMasterWorkTable.ItemClick += barButtonItemSteamMasterWorkTable_ItemClick;
             // 
-            // barButtonItem2
+            // barButtonItemCutMasterWorkTable
             // 
             barButtonItemCutMasterWorkTable.Caption = "Рабочий стол мастера Раскр. цеха";
             barButtonItemCutMasterWorkTable.Id = 46;
             barButtonItemCutMasterWorkTable.Name = "barButtonItemCutMasterWorkTable";
             barButtonItemCutMasterWorkTable.Tag = "рабочийСтолМастераРаскрЦехаToolStripMenuItem1";
-            barButtonItemCutMasterWorkTable.ItemClick += barButtonItemSteamMasterWorkTable_ItemClick;
+            barButtonItemCutMasterWorkTable.ItemClick += barButtonItemCutMasterWorkTable_ItemClick;
             // 
             // barBtnKnitterDesk
             // 
@@ -376,13 +376,6 @@ namespace SewingProduction
             barBtnAnalytics.Name = "barBtnAnalytics";
             barBtnAnalytics.Tag = "аналитикаToolStripMenuItem";
             barBtnAnalytics.ItemClick += аналитикаToolStripMenuItem_Click;
-            //// 
-            //// barBtnTSDAdmin
-            //// 
-            //barBtnTSDAdmin.Caption = "Доступ ТСД";
-            //barBtnTSDAdmin.Id = 44;
-            //barBtnTSDAdmin.Name = "barBtnTSDAdmin";
-            //barBtnTSDAdmin.ItemClick += barButtonTSDAdmin_ItemClick;
             // 
             // barSubSewing
             // 

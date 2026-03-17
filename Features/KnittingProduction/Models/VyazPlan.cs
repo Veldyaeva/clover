@@ -8,6 +8,7 @@ using SewingProduction.Interfaces;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 using System.Security.Cryptography;
 
 namespace SewingProduction.Features.KnittingProduction.Models
@@ -161,7 +162,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int knitClass { get; set; }
     }
 
-    public class ZadanyListByMachine
+    public class PZVZadanyList
     {
         [NotMapped] public string pszNom { get; set; }
         [NotMapped] public int nom { get; set; }
@@ -176,6 +177,10 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int SyncSelection { get; set; } = 0;
         [NotMapped] public int Gradacia { get; set; }
         [NotMapped] public int yearPlan { get; set; }
+        [NotMapped] public string kod { get; set; }
+        [NotMapped] public int minNPach { get; set; }
+        [NotMapped] public int maxNPach { get; set; }
+        [NotMapped] public string brig { get; set; }
     }
     public class RzvPachListByNom
     {
@@ -648,4 +653,13 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped] public int problChas { get; set; }
         [NotMapped] public string problChasStr { get; set; }
     }
+
+    public class PlanTotalQuantityByArticul
+    {
+        [NotMapped] public string Kod { get; set; }
+        [NotMapped] public string Articul { get; set; }
+        [NotMapped] public int Kol { get; set; }
+        [NotMapped] public DateTime? DataPlan { get; set; }
+    }
+    
 }
