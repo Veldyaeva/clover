@@ -458,12 +458,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _planTotalHoursByKnitMachineBindingList = new BindingList<PlanTotalHoursByKnitMachine>();
                     _planTotalHoursByKnitMachineBindingSource = new BindingSource { DataSource = _planTotalHoursByKnitMachineBindingList };
                 });
-                var zadanyListByMachineTask = Task.Run(() =>
+                var zadanyListTask = Task.Run(() =>
                 {
                     _zadanyListBindingList = new BindingList<PZVZadanyList>();
                     _zadanyListBindingSource = new BindingSource { DataSource = _zadanyListBindingList };
                 });
-                var zadanyListByMachineNewTask = Task.Run(() =>
+                var zadanyListNewTask = Task.Run(() =>
                 {
                     _zadanyListNewBindingList = new BindingList<PZVZadanyList>();
                     _zadanyListNewBindingSource = new BindingSource { DataSource = _zadanyListNewBindingList };
@@ -508,7 +508,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _knitWorkingShiftSmenBindingList = new BindingList<KnitWorkingShiftSmen>();
                     _knitWorkingShiftSmenBindingSource = new BindingSource { DataSource = _knitWorkingShiftSmenBindingList };
                 });
-                await Task.WhenAll(planTotalHoursByKnitMachineTask, zadanyListByMachineTask, zadanyListByMachineNewTask
+                await Task.WhenAll(planTotalHoursByKnitMachineTask, zadanyListTask, zadanyListNewTask
                         , rzvPachListByNomTask, rzvPachListByNomNewTask
                         , pZVOperListByPachListTask, pZVOperListByPachListNewTask
                         , artNormNTask, normRaszTask
@@ -551,12 +551,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         gridPlanTotalQuantityByArticulColumnArticul.FieldName = "Articul";
                         gridPlanTotalQuantityByArticulColumnKol.FieldName = "Kol";
                         gridPlanTotalQuantityByArticulColumnDataPlan.FieldName = "DataPlan";
+                        _gridHelper.AutoRowFilterConfig(gridViewPlanTotalQuantityByArticul as GridView, 0);
                         break;
                 }
 
 
 
-                #region описание gridControlZadanyListByMachine "задания по номеру машины"
+                #region описание gridControlZadanyList "задания по номеру машины/артикулу"
                 gridControlZadanyList.DataSource = _zadanyListBindingSource;
                 gridZadanyListColumnPszNom.FieldName = "pszNom";
                 gridZadanyListColumnNom.FieldName = "nom";
@@ -624,22 +625,27 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridZadanyListColumnData_plan.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
                 gridZadanyListColumnData_plan.DisplayFormat.FormatString = "dd.MM.yy";
                 _gridHelper.AutoRowFilterConfig(gridViewZadanyList as GridView, 0);
-                switch (vyazPodrKod)
-                {
-                    case 1:
-                        gridViewZadanyList.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
-                        break;
-                    case 2: case 3:
-                        gridViewZadanyList.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.ShowAlways;
-                        break;
-                }
+                gridViewZadanyList.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
+                //switch (vyazPodrKod)
+                //{
+                //    case 1:
 
-                        //----------------------------------------
-                        gridViewZadanyList.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
+                //        break;
+                //    case 2: case 3:
+
+                //        break;
+                //}
+
+                //----------------------------------------
+                gridViewZadanyList.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
                 gridZadanyListColumnGradacia.OptionsColumn.AllowEdit = false;
                 gridZadanyListColumnGradacia.OptionsColumn.ReadOnly = false;
-                //gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit = true;
-                //gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly = false;
+
+                gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit = true;
+                gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly = false;
+                gridZadanyListColumnSyncSelection.ColumnEdit = repositoryItemCheckEdit1;
+                //MessageBox.Show($"gridZadanyListColumnSyncSelection.ColumnEdit = {gridZadanyListColumnSyncSelection.ColumnEdit}");
+                gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus = true;
                 //----------------------------------------
                 repositoryItemCheckEdit1.MouseUp += (s, e) =>
                 {
@@ -1614,137 +1620,138 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
-        private async Task LoadZadanyListByArticulKodDataAsync(string _kod)
-        {
-            await _loader.RunAsync(
-                async token =>
-                {
-                    try
-                    {
-                        gridViewZadanyList.ShowLoadingPanel();
+        //private async Task LoadZadanyListByArticulKodDataAsync(string _kod)
+        //{
+        //    await _loader.RunAsync(
+        //        async token =>
+        //        {
+        //            try
+        //            {
+        //                gridViewZadanyList.ShowLoadingPanel();
 
-                        await SetLoadingAsync(true);
-                        var bs = await _vyazService.GetZadanyListByArticulKod(_kod, token);
+        //                await SetLoadingAsync(true);
+        //                var bs = await _vyazService.GetZadanyListByArticulKod(_kod, token);
 
-                        await this.UI(() =>
-                        {
-                            gridControlZadanyList.BeginUpdate();
-                            _zadanyListBindingSource.DataSource = bs.DataSource;
-                            gridControlZadanyList.EndUpdate();
-                        });
+        //                await this.UI(() =>
+        //                {
+        //                    gridControlZadanyList.BeginUpdate();
+        //                    _zadanyListBindingSource.DataSource = bs.DataSource;
+        //                    gridControlZadanyList.EndUpdate();
+        //                });
 
-                        await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Ошибка LoadZadanyListByArticulKodDataAsync: {ex.Message}");
-                    }
-                },
-                onError: async ex =>
-                {
-                    await _logger.LogErrorAsync(ex, "Ошибка загрузки LoadZadanyListByArticulKodDataAsync");
-                    await SetStatusAsync("Ошибка загрузки");
-                    await SetLoadingAsync(false);
-                },
-                onCanceled: async byLifetime =>
-                {
-                    if (!byLifetime)
-                        await SetStatusAsync("Отменено");
+        //                await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show($"Ошибка LoadZadanyListByArticulKodDataAsync: {ex.Message}");
+        //            }
+        //        },
+        //        onError: async ex =>
+        //        {
+        //            await _logger.LogErrorAsync(ex, "Ошибка загрузки LoadZadanyListByArticulKodDataAsync");
+        //            await SetStatusAsync("Ошибка загрузки");
+        //            await SetLoadingAsync(false);
+        //        },
+        //        onCanceled: async byLifetime =>
+        //        {
+        //            if (!byLifetime)
+        //                await SetStatusAsync("Отменено");
 
-                    await SetLoadingAsync(false);
-                }
-            );
-            await SetLoadingAsync(false);
-            Debug.WriteLine($"LoadZadanyListByArticulKodDataAsync completed");
-        }
-        private async Task LoadZadanyListByArticulKodNewDataAsync(int _xKodProizv)
-        {
-            try
-            {
-                await _loader.RunAsync(
-                    async token =>
-                    {
-                        try
-                        {
-                            gridViewSmenZadany.ShowLoadingPanel();
+        //            await SetLoadingAsync(false);
+        //        }
+        //    );
+        //    await SetLoadingAsync(false);
+        //    Debug.WriteLine($"LoadZadanyListByArticulKodDataAsync completed");
+        //}
 
-                            await SetLoadingAsync(true);
-                            int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
-                                              //int _xKodProizv = 1; // код производства 1 - вязальное производство
-                            int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
-                            var bs = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, _xKodPodr, token);
+        //private async Task LoadZadanyListByArticulKodNewDataAsync(int _xKodProizv)
+        //{
+        //    try
+        //    {
+        //        await _loader.RunAsync(
+        //            async token =>
+        //            {
+        //                try
+        //                {
+        //                    gridViewSmenZadany.ShowLoadingPanel();
 
-                            await this.UI(() =>
-                            {
-                                gridControlSmenZadany.BeginUpdate();
-                                _smenZadanyVyazNewBindingSource.DataSource = bs.DataSource;
-                                Application.Idle -= ExpandGroupsOnIdle;
-                                Application.Idle += ExpandGroupsOnIdle;
-                                //----------------------
-                                var changes = BindingSourceHelper.GetChanges<SmenZadanyVyaz>(
-                                    _smenZadanyVyazBindingSource,
-                                    _smenZadanyVyazNewBindingSource,
-                                    HashMode.ExcludeOnly,
-                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
-                                    hashProperties: new[] { "IsNew", "IsModified", "IsDeleted" }
-                                );
+        //                    await SetLoadingAsync(true);
+        //                    int _xIDNazn = 6; // признак принаджелности зоны к Вязальному производству
+        //                                      //int _xKodProizv = 1; // код производства 1 - вязальное производство
+        //                    //int _xKodPodr = 1; // код подразделения 1 - вязальное подразделение
+        //                    var bs = await _vyazService.GetSmenZadanyVyaz(_xIDNazn, _xKodProizv, vyazPodrKod, token);
 
-                                BindingSourceHelper.ApplyChanges<SmenZadanyVyaz>(
-                                    _smenZadanyVyazBindingSource,
-                                    changes,
-                                    UpdateFieldsMode.ExcludeOnly,
-                                    keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
-                                    gridViewPZVOperList,
-                                    fields: new[] { "IsNew", "IsModified", "IsDeleted" }
-                                );
+        //                    await this.UI(() =>
+        //                    {
+        //                        gridControlSmenZadany.BeginUpdate();
+        //                        _smenZadanyVyazNewBindingSource.DataSource = bs.DataSource;
+        //                        Application.Idle -= ExpandGroupsOnIdle;
+        //                        Application.Idle += ExpandGroupsOnIdle;
+        //                        //----------------------
+        //                        var changes = BindingSourceHelper.GetChanges<SmenZadanyVyaz>(
+        //                            _smenZadanyVyazBindingSource,
+        //                            _smenZadanyVyazNewBindingSource,
+        //                            HashMode.ExcludeOnly,
+        //                            keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
+        //                            hashProperties: new[] { "IsNew", "IsModified", "IsDeleted" }
+        //                        );
 
-                                BindingSourceHelper.RemoveMissingSmart<SmenZadanyVyaz>(
-                                    _smenZadanyVyazBindingSource,
-                                    changes.Removed,
-                                    gridControlSmenZadany
-                                );
-                                if (changes != null)
-                                {
-                                    changes.Added?.Clear();
-                                    changes.Modified?.Clear();
-                                    changes.Removed?.Clear();
-                                    changes = null;
-                                }
-                                //----------------------
-                                Application.Idle -= ExpandGroupsOnIdle;
-                                Application.Idle += ExpandGroupsOnIdle;
-                                gridControlSmenZadany.EndUpdate();
+        //                        BindingSourceHelper.ApplyChanges<SmenZadanyVyaz>(
+        //                            _smenZadanyVyazBindingSource,
+        //                            changes,
+        //                            UpdateFieldsMode.ExcludeOnly,
+        //                            keyProperties: new[] { "kwsKmaID", "kwsmlKmlID", "typeID" },
+        //                            gridViewPZVOperList,
+        //                            fields: new[] { "IsNew", "IsModified", "IsDeleted" }
+        //                        );
 
-                                gridViewSmenZadany.TopRowIndex = TopRowIndexSmenZadany;
-                            });
+        //                        BindingSourceHelper.RemoveMissingSmart<SmenZadanyVyaz>(
+        //                            _smenZadanyVyazBindingSource,
+        //                            changes.Removed,
+        //                            gridControlSmenZadany
+        //                        );
+        //                        if (changes != null)
+        //                        {
+        //                            changes.Added?.Clear();
+        //                            changes.Modified?.Clear();
+        //                            changes.Removed?.Clear();
+        //                            changes = null;
+        //                        }
+        //                        //----------------------
+        //                        Application.Idle -= ExpandGroupsOnIdle;
+        //                        Application.Idle += ExpandGroupsOnIdle;
+        //                        gridControlSmenZadany.EndUpdate();
 
-                            await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Ошибка LoadSmenZadanyVyazNewDataAsync (GetSmenZadanyVyaz + _smenZadanyVyazBindingSource update): {ex.Message}");
-                        }
-                    },
-                    onError: async ex =>
-                    {
-                        await _logger.LogErrorAsync(ex, "Ошибка загрузки LoadSmenZadanyVyazNewDataAsync");
-                        await SetStatusAsync("Ошибка загрузки");
-                        await SetLoadingAsync(false);
-                    },
-                    onCanceled: async byLifetime =>
-                    {
-                        if (!byLifetime)
-                            await SetStatusAsync("Отменено");
+        //                        gridViewSmenZadany.TopRowIndex = TopRowIndexSmenZadany;
+        //                    });
 
-                        await SetLoadingAsync(false);
-                    }
-                );
-                await SetLoadingAsync(false);
+        //                    await SetStatusAsync(bs.Count == 0 ? "Нет данных" : "Готово");
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    MessageBox.Show($"Ошибка LoadSmenZadanyVyazNewDataAsync (GetSmenZadanyVyaz + _smenZadanyVyazBindingSource update): {ex.Message}");
+        //                }
+        //            },
+        //            onError: async ex =>
+        //            {
+        //                await _logger.LogErrorAsync(ex, "Ошибка загрузки LoadSmenZadanyVyazNewDataAsync");
+        //                await SetStatusAsync("Ошибка загрузки");
+        //                await SetLoadingAsync(false);
+        //            },
+        //            onCanceled: async byLifetime =>
+        //            {
+        //                if (!byLifetime)
+        //                    await SetStatusAsync("Отменено");
 
-                Debug.WriteLine($"LoadSmenZadanyVyazNewDataAsync completed");
-            }
-            catch (Exception ex) { Debug.WriteLine($"LoadSmenZadanyVyazNewDataAsync - {ex.ToString()}"); }
-        }
+        //                await SetLoadingAsync(false);
+        //            }
+        //        );
+        //        await SetLoadingAsync(false);
+
+        //        Debug.WriteLine($"LoadSmenZadanyVyazNewDataAsync completed");
+        //    }
+        //    catch (Exception ex) { Debug.WriteLine($"LoadSmenZadanyVyazNewDataAsync - {ex.ToString()}"); }
+        //}
         private void ExpandGroupsOnIdle(object sender, EventArgs e)
         {
             Application.Idle -= ExpandGroupsOnIdle;
@@ -5278,7 +5285,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             Debug.WriteLine($"gridViewPZVOperList_BeforeLeaveRow triggered for row handle {e.RowHandle}, TopRowIndex={gridViewPZVOperList.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
         }
 
-        private void gridViewZadanyListByMachine_DoubleClick(object sender, EventArgs e)
+        private void gridViewZadanyList_DoubleClick(object sender, EventArgs e)
         {
             //try
             //{
@@ -5460,6 +5467,142 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     gridControlZadanyList.EndUpdate();
                     gridViewZadanyList.ExpandAllGroups();
                 });
+            }
+        }
+
+        private void gridViewZadanyList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var view = sender as GridView;
+                if (view == null) return;
+
+                Point pt = view.GridControl.PointToClient(Control.MousePosition);
+                GridHitInfo hit = view.CalcHitInfo(pt);
+
+                //Debug.WriteLine($"Click started at row {hit.RowHandle}, column {hit.Column.FieldName}, pzvID={_xPzvID}, tab={tab}, OlPvDateNaznKm={_OlPvDateNaznKm}, OlPvDateNaznTab={_OlPvDateNaznTab}, OlPvDateStart={_OlPvDateStart}, OlPvDateEnd={_OlPvDateEnd}, OlPvDateMast={_OlPvDateMast}, olNpach={_olNpach}, olNomOper={_olNomOper}, olOperName={_olOperName}, TopRowIndex={view.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
+                //var view = (GridView)sender;
+                //// где именно кликнули
+                //var pt = view.GridControl.PointToClient(Control.MousePosition);
+                //var hit = view.CalcHitInfo(pt);
+
+                if (hit.InRowCell && hit.Column == gridZadanyListColumnSyncSelection && hit.RowHandle >= 0)
+                {
+                    MessageBox.Show($"gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit = {gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit}");
+                    MessageBox.Show($"gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly = {gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly}");
+                    //MessageBox.Show($"gridZadanyListColumnSyncSelection.ColumnEdit = {gridZadanyListColumnSyncSelection.ColumnEdit}");
+                    MessageBox.Show($"gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus = {gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus}");
+                   
+
+                    ////var pzvOperList = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+                    //var pzvOperList = view.GetRow(view.FocusedRowHandle) as PZVZadanyList;
+                    //if (pzvOperList == null) return;
+                    //pzvOperList.SyncSelection = 1;
+                    //if (pzvOperList.SyncSelection == null)
+                    //{
+                    //    KnittingMachineWorkAssignment();
+                    //}
+                    //else
+                    //{
+                    //    KnittingMachineCancelWorkAssignment();
+                    //}
+                }
+
+                //if (hit.InRowCell && (hit.Column == gridColumnPZVOperListOlPzvTab || hit.Column == gridColumnPZVOperListOlPzvDateNaznTab) && hit.RowHandle >= 0)
+                //{
+                //    var pzvOperList = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+                //    if (pzvOperList == null) return;
+                //    pzvOperList.SyncSelection = 1;
+                //    if (pzvOperList.olPzvDateNaznTab == null)
+                //    {
+                //        TabWorkAssignment();
+                //    }
+                //    else
+                //    {
+                //        TabCancelWorkAssignment();
+                //    }
+                //}
+
+                //if (hit.InRowCell && hit.Column == gridColumnPZVOperListOlPzvDateStart && hit.RowHandle >= 0)
+                //{
+                //    var pzvOperList = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+                //    if (pzvOperList == null) return;
+                //    pzvOperList.SyncSelection = 1;
+                //    if (pzvOperList.olPzvDateStart == null)
+                //    {
+                //        WorkStartExecution();
+                //    }
+                //    else
+                //    {
+                //        CancelWorkStartExecution();
+                //    }
+                //}
+
+                //if (hit.InRowCell && hit.Column == gridColumnPZVOperListOlPzvDateEnd && hit.RowHandle >= 0)
+                //{
+                //    var pzvOperList = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+                //    if (pzvOperList == null) return;
+                //    pzvOperList.SyncSelection = 1;
+                //    if (pzvOperList.olPzvDateEnd == null)
+                //    {
+                //        WorkStopExecution();
+                //    }
+                //    else
+                //    {
+                //        CancelWorkStopExecution();
+                //    }
+                //}
+
+                //if (hit.InRowCell && hit.Column == gridColumnPZVOperListOlPzvDateMast && hit.RowHandle >= 0)
+                //{
+                //    var pzvOperList = _pZVOperListByPachListBindingSource.Current as PZVOperList;
+                //    if (pzvOperList == null) return;
+                //    pzvOperList.SyncSelection = 1;
+                //    if (pzvOperList.olPzvDateMast == null)
+                //    {
+                //        MasterConfirmation();
+                //    }
+                //    else
+                //    {
+                //        MasterCancelConfirmation();
+                //    }
+                //}
+
+                //if (hit.InColumnPanel && hit.Column == gridColumnPZVOperListSyncSelection)
+                //{
+                //    int xSelected = Convert.ToInt32(gridViewPZVOperList.GetRowCellValue(0, gridColumnPZVOperListSyncSelection));
+                //    int newValue = (xSelected == 0) ? 1 : 0;
+
+                //    _gridHelper.SetValueForFilteredRecordsInGrid(gridViewPZVOperList, gridColumnPZVOperListSyncSelection, newValue);
+
+                //    //view.BeginUpdate();
+                //    //view.GridControl.BeginUpdate();
+                //    //try
+                //    //{
+                //    //    Enumerable.Range(0, view.RowCount)
+                //    //    .Where(view.IsDataRow) // отсекаем group rows и прочие
+                //    //    .ToList()
+                //    //    .ForEach(rh =>
+                //    //    {
+                //    //        view.SetRowCellValue(rh, gridColumnPZVOperListSyncSelection, newValue);
+                //    //        //view.PostEditor();
+                //    //    });
+                //    //    view.PostEditor();
+                //    //    view.UpdateCurrentRow();
+                //    //}
+                //    //finally
+                //    //{
+                //    //    view.GridControl.EndUpdate();
+                //    //    view.EndUpdate();
+                //    //}
+                //}
+
+                // значение берём у текущей строки
+                //Debug.WriteLine($"Click finished at row {hit.RowHandle}, column {hit.Column.FieldName}, pzvID={_xPzvID}, tab={tab}, OlPvDateNaznKm={_OlPvDateNaznKm}, OlPvDateNaznTab={_OlPvDateNaznTab}, OlPvDateStart={_OlPvDateStart}, OlPvDateEnd={_OlPvDateEnd}, OlPvDateMast={_OlPvDateMast}, olNpach={_olNpach}, olNomOper={_olNomOper}, olOperName={_olOperName}, TopRowIndex={view.TopRowIndex}, TopRowIndexPZV={TopRowIndexPZV}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка в gridViewZadanyList_Click: {ex.Message}");
             }
         }
     }

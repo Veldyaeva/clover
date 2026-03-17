@@ -364,6 +364,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridZadanyListColumnKod = new DevExpress.XtraGrid.Columns.GridColumn();
             gridZadanyListColumnMinNPach = new DevExpress.XtraGrid.Columns.GridColumn();
             gridZadanyListColumnMaxNPach = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridZadanyListColumnBrig = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControlPlanTotalHoursByKnitMachine = new CustomGridControl();
             gridViewPlanTotalHoursByKnitMachine = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnPlanTotalHoursByKnitMachineKmaNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -416,7 +417,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             customGridControl7 = new CustomGridControl();
             gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             layoutControlGroup13 = new DevExpress.XtraLayout.LayoutControlGroup();
-            gridZadanyListColumnBrig = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControlPlanTotalQuantityByArticul).BeginInit();
@@ -3212,7 +3212,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewZadanyList.OptionsView.EnableAppearanceEvenRow = true;
             gridViewZadanyList.OptionsView.ShowGroupPanel = false;
             gridViewZadanyList.FocusedRowChanged += gridViewZadanyList_FocusedRowChanged;
-            gridViewZadanyList.DoubleClick += gridViewZadanyListByMachine_DoubleClick;
+            gridViewZadanyList.Click += gridViewZadanyList_Click;
+            gridViewZadanyList.DoubleClick += gridViewZadanyList_DoubleClick;
             // 
             // gridZadanyListColumnPszNom
             // 
@@ -3309,7 +3310,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             // 
             gridZadanyListColumnSyncSelection.Caption = "V";
             gridZadanyListColumnSyncSelection.ColumnEdit = repositoryItemCheckEdit1;
-            gridZadanyListColumnSyncSelection.FieldName = "gridColumnZadanyListByMachineSyncSelection";
             gridZadanyListColumnSyncSelection.Name = "gridZadanyListColumnSyncSelection";
             gridZadanyListColumnSyncSelection.OptionsFilter.AllowFilter = false;
             gridZadanyListColumnSyncSelection.UnboundDataType = typeof(bool);
@@ -3372,6 +3372,13 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridZadanyListColumnMaxNPach.Name = "gridZadanyListColumnMaxNPach";
             gridZadanyListColumnMaxNPach.Visible = true;
             gridZadanyListColumnMaxNPach.VisibleIndex = 12;
+            // 
+            // gridZadanyListColumnBrig
+            // 
+            gridZadanyListColumnBrig.Caption = "Бригада";
+            gridZadanyListColumnBrig.Name = "gridZadanyListColumnBrig";
+            gridZadanyListColumnBrig.Visible = true;
+            gridZadanyListColumnBrig.VisibleIndex = 13;
             // 
             // gridControlPlanTotalHoursByKnitMachine
             // 
@@ -3823,13 +3830,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             layoutControlGroup13.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup13.Name = "layoutControlGroup13";
             layoutControlGroup13.Size = new System.Drawing.Size(678, 127);
-            // 
-            // gridZadanyListColumnBrig
-            // 
-            gridZadanyListColumnBrig.Caption = "Бригада";
-            gridZadanyListColumnBrig.Name = "gridZadanyListColumnBrig";
-            gridZadanyListColumnBrig.Visible = true;
-            gridZadanyListColumnBrig.VisibleIndex = 13;
             // 
             // PlanZagrVyaz
             // 
