@@ -55,6 +55,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// Оркестратор доменной логики: загрузка данных, сохранение дат и прочие операции.
         /// </summary>
         private readonly IKnitterOrchestrator _orchestrator;
+        private readonly ILogger _logger = new FileLogger();
+        private const string LoggerContext = "KnitterWorkSpace";
 
         /// <summary>
         /// Сервис для работы с ServiceBroker.
@@ -163,6 +165,33 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         private bool _isSplashShowing = false;
 
+        private void LogSuccess(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogEventAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogWarning(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogWarningAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogError(Exception ex, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.{scope}"));
+        }
+
+        private static async Task SafeLogAsync(Func<Task> writeLog)
+        {
+            try
+            {
+                await writeLog().ConfigureAwait(false);
+            }
+            catch
+            {
+                // Логгер не должен ломать бизнес-поток формы.
+            }
+        }
+
         /// <summary>
         /// Инициализирует форму рабочего места вязальщика.
         /// Настраивает источники данных, колонки гридов, оркестратор и подписки.
@@ -216,6 +245,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка инициализации формы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex, "Ctor.UserClass");
             }
         }
 
@@ -268,6 +298,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка инициализации формы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex, "Ctor.Orchestrator");
             }
         }
 
@@ -312,6 +343,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка загрузки списка сотрудников: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex, "InitializeAsync");
             }
         }
 
@@ -320,6 +352,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (fioList == null || fioList.Count == 0)
             {
                 XtraMessageBox.Show(this, "Список сотрудников пуст. Обратитесь к администратору.", "Нет данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LogWarning("Список сотрудников пуст при показе выбора табельного номера.", nameof(PresentFioSelectionSplash));
                 return;
             }
 
@@ -503,10 +536,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (SqlException ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка доступа к базе данных при загрузке плана: {ex.Message}", "Ошибка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex, "FioGridLookUpEdit_EditValueChanged.Sql");
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка загрузки плана: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex, "FioGridLookUpEdit_EditValueChanged");
             }
         }
 
@@ -541,12 +576,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tabEnd) || tabEnd <= 0)
                     {
                         XtraMessageBox.Show(this, "Не удалось определить табель при завершении смены.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LogWarning("Не удалось определить табель при завершении смены.", "Shift.End");
                     }
                     else if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
                     {
                         await _orchestrator.EndWorkingShiftAsync(_currentShiftId.Value, tabEnd);
                         // Перезагрузим план, чтобы обновить статусы/проценты
                         await LoadPlanForTabAsync(tabEnd, forceReload: true);
+                        LogSuccess($"Смена успешно завершена. ShiftId={_currentShiftId.Value}, Tab={tabEnd}", "Shift.End");
                     }
 
                     await RefreshFioListAsync();
@@ -557,6 +594,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (!int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int selectedTab) || selectedTab <= 0)
                 {
                     XtraMessageBox.Show(this, "Выберите сотрудника для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LogWarning("Попытка старта смены без выбранного сотрудника.", "Shift.Start");
                     return;
                 }
 
@@ -567,6 +605,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     if (openByZone.shiftId.HasValue)
                     {
                         XtraMessageBox.Show(this, $"В зоне {_currentKmaNum} уже открыта смена (таб. {openByZone.tabStart}), сначала завершите её.", "Смена уже открыта", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        LogWarning($"Попытка открыть смену в зоне {_currentKmaNum} при уже открытой смене (tab={openByZone.tabStart}).", "Shift.Start");
                         return;
                     }
                 }
@@ -576,6 +615,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (!rowsForUpdate.Any())
                 {
                     XtraMessageBox.Show(this, "Нет строк для назначения табельного номера.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LogWarning("Нет строк для назначения табельного номера при старте смены.", "Shift.Start");
                     return;
                 }
 
@@ -588,6 +628,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (pzvIds.Count == 0)
                 {
                     XtraMessageBox.Show(this, "Не удалось определить записи для обновления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    LogWarning("Список pzvID пуст при старте смены.", "Shift.Start");
                     return;
                 }
 
@@ -600,22 +641,31 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     if (_currentShiftId.HasValue && _currentShiftId.Value > 0)
                     {
                         await _orchestrator.UpdatePzvKwsIdAsync(pzvIds, _currentShiftId.Value);
+
+
+                        // Обновим план после проставления pzvKwsID
+                        await LoadPlanForTabAsync(selectedTab, forceReload: true);
+                        await RefreshFioListAsync();
+
+                        ApplyShiftUi(true, _currentShiftId, DateTime.Now);
+                        LogSuccess($"Смена успешно начата. ShiftId={_currentShiftId.Value}, Tab={selectedTab}, Rows={pzvIds.Count}", "Shift.Start");
                     }
-
-                    // Обновим план после проставления pzvKwsID
-                    await LoadPlanForTabAsync(selectedTab, forceReload: true);
-                    await RefreshFioListAsync();
-
-                    ApplyShiftUi(true, _currentShiftId, DateTime.Now);
+                    else
+                    {
+                        XtraMessageBox.Show(this, "Не удалось получить ID смены для обновления операций.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        LogWarning("StartWorkingShiftAsync вернул некорректный ID смены: " + _currentShiftId, "Shift.Start");
+                    }
                 }
                 catch (Exception exStart)
                 {
                     XtraMessageBox.Show(this, $"Не удалось записать начало смены: {exStart.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    LogError(exStart, "Shift.Start");
                 }
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка при назначении табельного номера: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex, "simpleButton2_Click");
             }
         }
 
@@ -911,6 +961,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 // Показываем сообщение после обновления отображения
                 MessageBox.Show("В смене есть начатые, но не завершённые операции. Завершите операции, прежде чем закончить смену.", "Завершение операций", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LogWarning($"Нельзя завершить смену: есть незавершенные операции ({inProgress.Count}).", nameof(ProcessOperationsOnShiftEndAsync));
                 return false;
             }
             // Неначатые (нет даты старта и окончания) → split mode=2
@@ -923,6 +974,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
                 catch
                 {
+                    LogWarning($"SplitPzvAsync завершился ошибкой для pzvID={row.pzvID} (mode=2, qtyFact=0).", nameof(ProcessOperationsOnShiftEndAsync));
                     // Игнорируем сбой split одной операции, продолжаем остальные
                 }
             }
@@ -1336,6 +1388,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         {
                             // При ошибке SQL (PZV_Split) не падаем, а принудительно перезагружаем текущую строку из БД
                             Debug.WriteLine($"[KnitterWorkSpace] SplitPzvByFactAsync SQL error {ex.Number}: {ex.Message}");
+                            LogError(ex, "SplitPzvByFactAsync");
                             forceRowRefresh = true;
                         }
                     }
@@ -1526,6 +1579,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception ex)
             {
                 XtraMessageBox.Show(this, $"Ошибка при обновлении даты {errorContext}: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LogError(ex, "PzvDateEndButtonEdit_DoubleClick");
             }
         }
         private sealed class ExpansionState
@@ -1674,6 +1728,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             catch
             {
+                LogWarning("Ошибка при завершении ServiceBroker в DisposeAsync контроллера.", nameof(ShutdownServiceBrokerAsync));
                 // лог/игнор — но НЕ даём крашить закрытие формы
             }
             finally
@@ -1774,7 +1829,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Ошибка при настройке подсветки строк: {ex.Message}");
+                LogError(ex, nameof(SetupRowStyling));
             }
         }
 
@@ -1848,7 +1903,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Ошибка при настройке шрифтов таблиц: {ex.Message}");
+                LogError(ex, nameof(SetupGridFonts));
             }
         }
 
@@ -2075,7 +2130,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Ошибка при обновлении списка незавершённых операций: {ex.Message}");
+                LogError(ex, nameof(UpdateUnfinishedOperationsList));
             }
         }
 
@@ -2188,6 +2243,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             if (int.TryParse(FioGridLookUpEdit.EditValue?.ToString(), out int tab) && tab > 0)
             {
                 await LoadPlanForTabAsync(tab, forceReload: true);
+                LogSuccess($"Выполнено ручное обновление текущего табеля {tab}.", nameof(ReloadCurrentTabAsync));
+            }
+            else
+            {
+                LogWarning("Попытка ручного обновления без выбранного табельного номера.", nameof(ReloadCurrentTabAsync));
             }
         }
 
@@ -2488,6 +2548,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception)
             {
                 textEdit1.Text = string.Empty;
+                LogWarning($"Не удалось загрузить зону по табельному номеру {tab}.", nameof(UpdateZoneAsync));
             }
         }
 
@@ -2508,6 +2569,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             catch (Exception)
             {
                 ApplyShiftUi(false, null, null);
+                LogWarning($"Не удалось определить состояние смены для табельного номера {tab}.", nameof(UpdateShiftStateAsync));
             }
         }
 
@@ -2524,7 +2586,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 await InvokeOnUiAsync(async () =>
                 {
-                    System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RestartDataByObjectNameAsync: {objectName}");
+                    LogSuccess($"Получен сигнал обновления для объекта {objectName}.", nameof(RestartDataByObjectNameAsync));
 
                     // Если это наша хранимая процедура плана - перезагружаем план
                     if (string.Equals(objectName, "GetPlanZagrVyazNorm_ByTab3", StringComparison.OrdinalIgnoreCase))
@@ -2533,18 +2595,18 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                         {
                             System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Reloading plan for tab {_currentLoadedTab.Value}");
                             await LoadPlanForTabAsync(_currentLoadedTab.Value, forceReload: true);
-                            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Plan reloaded successfully");
+                            LogSuccess($"План успешно перезагружен по уведомлению брокера для табеля {_currentLoadedTab.Value}.", nameof(RestartDataByObjectNameAsync));
                         }
                         else
                         {
-                            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] No current tab loaded, skipping reload");
+                            LogWarning("Пропущена перезагрузка плана: текущий табель не выбран.", nameof(RestartDataByObjectNameAsync));
                         }
                     }
                 });
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in RestartDataByObjectNameAsync for {objectName}: {ex}");
+                LogError(ex, $"{nameof(RestartDataByObjectNameAsync)}:{objectName}");
                 throw;
             }
         }
@@ -2578,7 +2640,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
 
             var list = await _sbService.GetObjectListForServiceBroker(objectName, ct);
-            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] LoadListenInfoByObjectNameAsync: object={objectName}, rows={list?.Count ?? 0}");
+            LogSuccess($"Загружена listen-информация: object={objectName}, rows={list?.Count ?? 0}.", nameof(LoadListenInfoByObjectNameAsync));
             return list;
         }
 
@@ -2587,7 +2649,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         /// </summary>
         public async Task InitServiceBrokerAsync(CancellationToken ct)
         {
-            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] InitServiceBrokerAsync start: objects={string.Join(", ", ServiceBrokerObjects)}");
+            LogSuccess($"Инициализация ServiceBroker: objects={string.Join(", ", ServiceBrokerObjects)}.", nameof(InitServiceBrokerAsync));
             await _sbController.InitAsync(ct, startBrokers: false);
 
             var tableFields = _sbController.Helper?.GetUnionFieldsByTableSnapshot()
@@ -2601,7 +2663,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 ct: ct);
 
             var tables = tableFields.Keys;
-            System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Listening tables: {string.Join(", ", tables)}");
+            LogSuccess($"ServiceBroker подписан на таблицы: {string.Join(", ", tables)}.", nameof(InitServiceBrokerAsync));
         }
 
         /// <summary>
@@ -2611,19 +2673,19 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         {
             try
             {
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] UpdateDataInFormAsync: table={tableName}, fields={fieldsChangedCsv}");
+                LogSuccess($"Обновление формы по уведомлению: table={tableName}, fields={fieldsChangedCsv}.", nameof(UpdateDataInFormAsync));
 
                 await _sbController.HandleUpdateAsync(tableName, fieldsChangedCsv ?? string.Empty);
 
                 if (_sbController.Coordinator != null)
                 {
                     var stats = _sbController.Coordinator.GetStatistics();
-                    System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] RefreshCoordinator stats: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}");
+                    LogSuccess($"Статистика координатора обновлений: Pending={stats.PendingCount}, InFlight={stats.InFlightCount}, TotalRequests={stats.TotalRequests}, TotalExecutions={stats.TotalExecutions}, CascadePreventions={stats.CascadePreventions}.", nameof(UpdateDataInFormAsync));
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"[KnitterWorkSpace] Error in UpdateDataInFormAsync: {ex.Message}");
+                LogError(ex, nameof(UpdateDataInFormAsync));
             }
         }
 

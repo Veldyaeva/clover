@@ -54,6 +54,7 @@ namespace SewingProduction.Features.Articul
         private readonly DbService _dbService;
         private UserClass _currentUser;
         private readonly ILogger _logger = new FileLogger();
+        private const string LoggerContext = "Articul";
         //все поля таблицы Артикул
         KomplDataService komplService = new KomplDataService();
 
@@ -66,6 +67,34 @@ namespace SewingProduction.Features.Articul
         private int _loadVersion = 0;
 
         ArticulDataService _articulDataService = new ArticulDataService();
+
+        private void LogSuccess(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogEventAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogWarning(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogWarningAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogError(Exception ex, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.{scope}"));
+        }
+
+        private static async Task SafeLogAsync(Func<Task> writeLog)
+        {
+            try
+            {
+                await writeLog().ConfigureAwait(false);
+            }
+            catch
+            {
+                // Логирование не должно мешать работе формы.
+            }
+        }
+
         public Articul(UserClass user) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
@@ -134,13 +163,16 @@ namespace SewingProduction.Features.Articul
                 //привязываем правую панель
                 InitializeBindings();
 
+                //обновляем состояние кнопки архива при загрузке
+                SyncArchiveButtonCaption();
                 _isInitialized = true;
 
                 await RefreshArtPreviewAsync();
+                LogSuccess("Форма инициализирована и превью загружено.", nameof(Articul_Load));
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы Articul");
+                LogError(ex, nameof(Articul_Load));
             }
         }
         private async Task ReloadPreviewAsync()
@@ -257,7 +289,7 @@ namespace SewingProduction.Features.Articul
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
+                LogError(ex, nameof(InitializeBindings));
                 throw;
             }
 
@@ -383,10 +415,11 @@ namespace SewingProduction.Features.Articul
                 bsSostNabor.ResetBindings(false);
 
                 UpdateTabsVisibility();
+                LogSuccess($"Детали артикула загружены: Kod={kod}, Kodd={kodd}.", nameof(LoadArticulAsync));
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка LoadArticulAsync для kod {kod}");
+                LogError(ex, $"{nameof(LoadArticulAsync)}:{kod}");
             }
             finally
             {
@@ -407,7 +440,7 @@ namespace SewingProduction.Features.Articul
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка gridControl1_FocusedRowChanged");
+                LogError(ex, nameof(gridControl1_FocusedRowChanged));
             }
         }
 
@@ -456,7 +489,7 @@ namespace SewingProduction.Features.Articul
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void customButtonKart_Click(object sender, EventArgs e)
+        private void customButtonKart_Click(object sender, EventArgs e)
         {
             string kod = "";
             try
@@ -496,7 +529,7 @@ namespace SewingProduction.Features.Articul
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка получения данных customButtonKart_Click для kod {kod} для отображенияк карточки");
+                LogError(ex, $"{nameof(customButtonKart_Click)}:{kod}");
                 kod = "";
             }
 
@@ -514,6 +547,7 @@ namespace SewingProduction.Features.Articul
             {
                 MessageBox.Show("Не выбран артикул для копирования.", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning("Не выбран артикул для копирования.", nameof(customButtonCopy_Click));
                 return;
             }
 
@@ -522,6 +556,7 @@ namespace SewingProduction.Features.Articul
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     await RefreshArtPreviewAsync();
+                    LogSuccess("Код успешно скопирован через форму EditArticul.", nameof(customButtonCopy_Click));
                 }
             }
         }
@@ -537,6 +572,7 @@ namespace SewingProduction.Features.Articul
             if (komplService.CheckNabor(kodObj))
             {
                 MessageBox.Show("Комплектовать НАБОРЫ нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning("Попытка комплектовать артикул, являющийся набором.", nameof(customButtonKompl_Click));
                 return;
             }
             if (this.MdiParent is SpMainForm mainForm)
@@ -552,6 +588,7 @@ namespace SewingProduction.Features.Articul
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     await RefreshArtPreviewAsync();
+                    LogSuccess("Создан новый артикул через форму EditArticul.", nameof(csButtonNew_Click));
                 }
             }
         }
@@ -576,6 +613,7 @@ namespace SewingProduction.Features.Articul
                     if (result.Rows[0].Field<int>("error") != 0)
                     {
                         MessageBox.Show("Ошибка удаления" + result.Rows[0].Field<string>("messageerror"));
+                        LogWarning("Удаление артикула отклонено БД: " + result.Rows[0].Field<string>("messageerror"), nameof(sButtodDeleteKod_Click));
                         return;
                     }
                     //удаление кода 
@@ -583,12 +621,13 @@ namespace SewingProduction.Features.Articul
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
                     bsPreview.RemoveCurrent();
+                    LogSuccess($"Артикул удален: Kod={cuRow?.Kod}", nameof(sButtodDeleteKod_Click));
                 }
                 result?.Dispose();
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
+                LogError(ex, nameof(sButtodDeleteKod_Click));
             }
         }
         /// <summary>
@@ -605,6 +644,7 @@ namespace SewingProduction.Features.Articul
             if (_ANSDataService.CheckOpis(Obj.Kod))
             {
                 MessageBox.Show("Набор уже описан, изменения применятся на весь размерный ряд!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning($"Набор уже описан: Kod={Obj.Kod}. Изменения применятся ко всему размерному ряду.", nameof(customButton3_Click));
             }
             if (this.MdiParent is SpMainForm mainForm)
             {
@@ -623,6 +663,7 @@ namespace SewingProduction.Features.Articul
             if (gridView == null || gridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning("Попытка редактирования без выбранного артикула.", nameof(EditArtciul));
                 return;
             }
             var kodd = (bsPreview.Current as SpArtPreviewModel).Kodd;
@@ -763,23 +804,24 @@ namespace SewingProduction.Features.Articul
         {
             if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
             {
-                string tag = button.Tag?.ToString() ?? string.Empty;
+                //string tag = button.Tag?.ToString() ?? string.Empty;
 
-                switch (tag)
-                {
-                    case "arch":
-                        // архив
-                        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
-                        break;
-                    default:
-                        // Если тег не установлен, пытаемся определить по Caption
-                        string caption = button.Caption ?? string.Empty;
-                        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
-                        {
-                            //архив
-                        }
-                        break;
-                }
+                //switch (tag)
+                //{
+                //    case "arch":
+                //        // архив
+                //        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+                //        break;
+                //    default:
+                //        // Если тег не установлен, пытаемся определить по Caption
+                //        string caption = button.Caption ?? string.Empty;
+                //        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
+                //        {
+                //            //архив
+                //        }
+                //        break;
+                //}
+                SyncArchiveButtonCaption();
             }
 
         }
@@ -788,26 +830,46 @@ namespace SewingProduction.Features.Articul
         {
             if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
             {
-                string tag = button.Tag?.ToString() ?? string.Empty;
+                //string tag = button.Tag?.ToString() ?? string.Empty;
 
-                switch (tag)
-                {
-                    case "arch":
-                        // архив
-                        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+                //switch (tag)
+                //{
+                //    case "arch":
+                //        // архив
+                //        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
 
-                        break;
-                    default:
-                        // Если тег не установлен, пытаемся определить по Caption
-                        string caption = button.Caption ?? string.Empty;
-                        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
-                        {
-                            //архив
-                        }
-                        break;
-                }
+                //        break;
+                //    default:
+                //        // Если тег не установлен, пытаемся определить по Caption
+                //        string caption = button.Caption ?? string.Empty;
+                //        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
+                //        {
+                //            //архив
+                //        }
+                //        break;
+                //}
+                SyncArchiveButtonCaption();
             }
 
+        }
+        private void SyncArchiveButtonCaption()
+        {
+            foreach (var btn in layoutControlGroup1.CustomHeaderButtons)
+            {
+                if (btn is not GroupBoxButton button) continue;
+
+                // Найти именно чек-кнопку "Архив"
+                var isArchiveButton =
+                    button.Style == DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton &&
+                    (button.Tag?.ToString() == "arch" ||
+                     (button.Caption?.Contains("Архив", StringComparison.OrdinalIgnoreCase) ?? false));
+
+                if (!isArchiveButton) continue;
+
+                button.Tag = "arch"; // зафиксировать идентификатор
+                button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+                break;
+            }
         }
         #endregion
     }
