@@ -3212,6 +3212,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewZadanyList.OptionsView.EnableAppearanceEvenRow = true;
             gridViewZadanyList.OptionsView.ShowGroupPanel = false;
             gridViewZadanyList.FocusedRowChanged += gridViewZadanyList_FocusedRowChanged;
+            gridViewZadanyList.CellValueChanged += gridViewZadanyList_CellValueChanged;
+            gridViewZadanyList.CellValueChanging += gridViewZadanyList_CellValueChanging;
             gridViewZadanyList.Click += gridViewZadanyList_Click;
             gridViewZadanyList.DoubleClick += gridViewZadanyList_DoubleClick;
             // 

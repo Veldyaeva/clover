@@ -643,9 +643,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit = true;
                 gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly = false;
-                gridZadanyListColumnSyncSelection.ColumnEdit = repositoryItemCheckEdit1;
+                //gridZadanyListColumnSyncSelection.ColumnEdit = repositoryItemCheckEdit1;
                 //MessageBox.Show($"gridZadanyListColumnSyncSelection.ColumnEdit = {gridZadanyListColumnSyncSelection.ColumnEdit}");
-                gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus = true;
+                //gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus = true;
+
+                //MessageBox.Show(
+                //    $"AllowEdit={gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit}\n" +
+                //    $"ReadOnly={gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly}\n" +
+                //    $"ColumnEdit={(gridZadanyListColumnSyncSelection.ColumnEdit == null ? "null" : gridZadanyListColumnSyncSelection.ColumnEdit.Name)}"
+                //);
                 //----------------------------------------
                 repositoryItemCheckEdit1.MouseUp += (s, e) =>
                 {
@@ -2173,9 +2179,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void gridViewZadanyList_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            if (_suppressZadanyFocusHandler)
+                return;
+
             try
             {
-                var viewTop = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+                var viewTop = (GridView)sender;
 
                 if (!viewTop.IsDataRow(e.FocusedRowHandle))
                     return;
@@ -2184,12 +2193,36 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 if (row == null) return;
 
                 await ReloadPachListForZadanyAsync(row.nom, row.pszNom, row.Gradacia);
-                Debug.WriteLine($"gridViewZadanyList_FocusedRowChanged completed for nom={row.nom}, pszNom={row.pszNom}, Gradacia={row.Gradacia}");
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка в gridViewZadanyList_FocusedRowChanged: {ex.Message}");
             }
+
+            //try
+            //{
+            //    var viewTop = (DevExpress.XtraGrid.Views.Grid.GridView)sender;
+
+            //    //if (viewTop?.FocusedColumn == gridZadanyListColumnSyncSelection)
+            //    //    return;
+
+            //    //MessageBox.Show(viewTop.FocusedColumn?.FieldName ?? "null");
+            //    //if (viewTop.FocusedColumn == gridZadanyListColumnSyncSelection)
+            //    //    return;
+
+            //    if (!viewTop.IsDataRow(e.FocusedRowHandle))
+            //        return;
+
+            //    var row = viewTop.GetRow(e.FocusedRowHandle) as PZVZadanyList;
+            //    if (row == null) return;
+
+            //    await ReloadPachListForZadanyAsync(row.nom, row.pszNom, row.Gradacia);
+            //    Debug.WriteLine($"gridViewZadanyList_FocusedRowChanged completed for nom={row.nom}, pszNom={row.pszNom}, Gradacia={row.Gradacia}");
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"Ошибка в gridViewZadanyList_FocusedRowChanged: {ex.Message}");
+            //}
         }
         private async Task ReloadPachListForZadanyAsync(int _nom, string _nomZad, int _gradacia)
         {
@@ -5488,11 +5521,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 if (hit.InRowCell && hit.Column == gridZadanyListColumnSyncSelection && hit.RowHandle >= 0)
                 {
-                    MessageBox.Show($"gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit = {gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit}");
-                    MessageBox.Show($"gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly = {gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly}");
-                    //MessageBox.Show($"gridZadanyListColumnSyncSelection.ColumnEdit = {gridZadanyListColumnSyncSelection.ColumnEdit}");
-                    MessageBox.Show($"gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus = {gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus}");
-                   
+                    //MessageBox.Show(
+                    //    $"AllowEdit={gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit}\n" +
+                    //    $"ReadOnly={gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly}\n" +
+                    //    $"ColumnEdit={(gridZadanyListColumnSyncSelection.ColumnEdit == null ? "null" : gridZadanyListColumnSyncSelection.ColumnEdit.Name)}"
+                    //);
+
 
                     ////var pzvOperList = _pZVOperListByPachListBindingSource.Current as PZVOperList;
                     //var pzvOperList = view.GetRow(view.FocusedRowHandle) as PZVZadanyList;
@@ -5604,6 +5638,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 MessageBox.Show($"Ошибка в gridViewZadanyList_Click: {ex.Message}");
             }
+        }
+
+        private void gridViewZadanyList_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        {
+            //if (e.Column == gridZadanyListColumnSyncSelection)
+            //{
+            //    BeginInvoke(new Action(() => SyncSelectionUpdate()));
+            //}
+        }
+
+        private void gridViewZadanyList_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            //if (e.Column == gridZadanyListColumnSyncSelection)
+            //{
+            //    SyncSelectionUpdate();
+            //}
         }
     }
 }
