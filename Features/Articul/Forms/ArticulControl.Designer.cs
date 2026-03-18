@@ -203,6 +203,7 @@
             // 
             // txbKod
             // 
+            txbKod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbKod.ErrorColor = System.Drawing.Color.Red;
             txbKod.ErrorMessage = null;
             txbKod.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
@@ -215,6 +216,7 @@
             // 
             // txbPo
             // 
+            txbPo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbPo.ErrorColor = System.Drawing.Color.Red;
             txbPo.ErrorMessage = null;
             txbPo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
@@ -240,6 +242,7 @@
             // 
             // txbNDS
             // 
+            txbNDS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbNDS.Enabled = false;
             txbNDS.ErrorColor = System.Drawing.Color.Red;
             txbNDS.ErrorMessage = null;
@@ -252,6 +255,7 @@
             // 
             // txbTM
             // 
+            txbTM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbTM.ErrorColor = System.Drawing.Color.Red;
             txbTM.ErrorMessage = null;
             txbTM.Font = new System.Drawing.Font("Arial", 9F);
@@ -277,6 +281,7 @@
             // 
             // txbKodTnved
             // 
+            txbKodTnved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbKodTnved.ErrorColor = System.Drawing.Color.Red;
             txbKodTnved.ErrorMessage = null;
             txbKodTnved.Font = new System.Drawing.Font("Arial", 9F);
@@ -290,6 +295,7 @@
             // txbArticul
             // 
             txbArticul.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbArticul.ErrorColor = System.Drawing.Color.Red;
             txbArticul.ErrorMessage = null;
             txbArticul.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
@@ -304,6 +310,7 @@
             // txbGrup
             // 
             txbGrup.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txbGrup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbGrup.ErrorColor = System.Drawing.Color.Red;
             txbGrup.ErrorMessage = null;
             txbGrup.Font = new System.Drawing.Font("Arial Narrow", 9F);
@@ -316,6 +323,7 @@
             // 
             // txbScNomer
             // 
+            txbScNomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbScNomer.ErrorColor = System.Drawing.Color.Red;
             txbScNomer.ErrorMessage = null;
             txbScNomer.Font = new System.Drawing.Font("Arial", 9F);
@@ -329,6 +337,7 @@
             // txbMod
             // 
             txbMod.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txbMod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbMod.ErrorColor = System.Drawing.Color.Red;
             txbMod.ErrorMessage = null;
             txbMod.Font = new System.Drawing.Font("Arial", 9F);
@@ -343,6 +352,7 @@
             // txbSost
             // 
             txbSost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txbSost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSost.ErrorColor = System.Drawing.Color.Red;
             txbSost.ErrorMessage = null;
             txbSost.Font = new System.Drawing.Font("Arial", 9F);
@@ -369,6 +379,7 @@
             // txbIdGost
             // 
             txbIdGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txbIdGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbIdGost.ErrorColor = System.Drawing.Color.Red;
             txbIdGost.ErrorMessage = null;
             txbIdGost.Font = new System.Drawing.Font("Arial", 9F);
@@ -381,6 +392,7 @@
             // 
             // txbSeason
             // 
+            txbSeason.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSeason.ErrorColor = System.Drawing.Color.Red;
             txbSeason.ErrorMessage = null;
             txbSeason.Font = new System.Drawing.Font("Arial", 9F);
@@ -394,6 +406,7 @@
             // txbNameGost
             // 
             txbNameGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txbNameGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbNameGost.ErrorColor = System.Drawing.Color.Red;
             txbNameGost.ErrorMessage = null;
             txbNameGost.Font = new System.Drawing.Font("Arial", 9F);
@@ -407,6 +420,7 @@
             // txbOpiGost
             // 
             txbOpiGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbOpiGost.ErrorColor = System.Drawing.Color.Red;
             txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new System.Drawing.Font("Arial", 9F);
@@ -420,6 +434,7 @@
             // txbSost2
             // 
             txbSost2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txbSost2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSost2.ErrorColor = System.Drawing.Color.Red;
             txbSost2.ErrorMessage = null;
             txbSost2.Font = new System.Drawing.Font("Arial", 9F);
@@ -433,6 +448,7 @@
             // txbRazmPrint
             // 
             txbRazmPrint.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txbRazmPrint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbRazmPrint.ErrorColor = System.Drawing.Color.Red;
             txbRazmPrint.ErrorMessage = null;
             txbRazmPrint.Font = new System.Drawing.Font("Arial", 9F);
@@ -445,6 +461,7 @@
             // 
             // txbAssort
             // 
+            txbAssort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbAssort.ErrorColor = System.Drawing.Color.Red;
             txbAssort.ErrorMessage = null;
             txbAssort.Font = new System.Drawing.Font("Arial", 9F);
@@ -458,6 +475,7 @@
             // txbSost3
             // 
             txbSost3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txbSost3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSost3.ErrorColor = System.Drawing.Color.Red;
             txbSost3.ErrorMessage = null;
             txbSost3.Font = new System.Drawing.Font("Arial", 9F);
@@ -470,6 +488,7 @@
             // 
             // txbCountry
             // 
+            txbCountry.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbCountry.ErrorColor = System.Drawing.Color.Red;
             txbCountry.ErrorMessage = null;
             txbCountry.Font = new System.Drawing.Font("Arial", 9F);
@@ -483,6 +502,7 @@
             // txbGrupMenName
             // 
             txbGrupMenName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            txbGrupMenName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbGrupMenName.ErrorColor = System.Drawing.Color.Red;
             txbGrupMenName.ErrorMessage = null;
             txbGrupMenName.Font = new System.Drawing.Font("Arial", 9F);
@@ -495,6 +515,7 @@
             // 
             // txbRazm
             // 
+            txbRazm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbRazm.ErrorColor = System.Drawing.Color.Red;
             txbRazm.ErrorMessage = null;
             txbRazm.Font = new System.Drawing.Font("Arial", 9F);

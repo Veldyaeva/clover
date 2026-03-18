@@ -63,7 +63,7 @@ namespace SewingProduction.Features.Articul
 
         private readonly BindingSource bsPreview = new(); // для грида
         private readonly BindingSource bsDetails = new(); // для карточки/деталей
-        private readonly BindingList<SpArtPreviewModel> _previewList = new(); // если хочешь BindingList
+        private readonly BindingList<SpArtPreviewModel> _previewList = new(); 
         private int _loadVersion = 0;
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -254,10 +254,11 @@ namespace SewingProduction.Features.Articul
                 // нормы/себестоимость/брак и назначение полотна
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "Norm_t", "F2", true);
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "Seb_t");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "Brak_percent", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t", "F2", true );
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "Brak_percent", "F2", true);
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "Kf_tkan_kach", "F2");
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "Opis_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkb", "Tkb", "F2");
 
                 #endregion
 
