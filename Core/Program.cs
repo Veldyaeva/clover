@@ -125,10 +125,10 @@ namespace SewingProduction.Core
 
                     if (!ValidateSystemDate(out var dateError))
                     {
-                        //MessageBox.Show(dateError,
-                        //    "SewingProduction — Ошибка",
-                        //    MessageBoxButtons.OK,
-                        //    MessageBoxIcon.Error);
+                        MessageBox.Show(dateError,
+                            "SewingProduction — Ошибка",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
                         try { splashScreen.Close(); } catch { }
                         return;
                     }

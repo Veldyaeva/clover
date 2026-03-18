@@ -191,7 +191,6 @@ namespace SewingProduction.Features.Articul
             layoutControlGroup10 = new LayoutControlGroup();
             layoutControlItem10 = new LayoutControlItem();
             layoutControlGroup11 = new LayoutControlGroup();
-            layoutControlItem80 = new LayoutControlItem();
             layoutControlItem81 = new LayoutControlItem();
             layoutControlItem83 = new LayoutControlItem();
             layoutControlItem84 = new LayoutControlItem();
@@ -255,22 +254,23 @@ namespace SewingProduction.Features.Articul
             layoutControlGroup18 = new LayoutControlGroup();
             layoutControlItem48 = new LayoutControlItem();
             layoutControlItem7 = new LayoutControlItem();
-            layoutControlItem79 = new LayoutControlItem();
             emptySpaceItem1 = new EmptySpaceItem();
             splitterItem4 = new SplitterItem();
             emptySpaceItem4 = new EmptySpaceItem();
             emptySpaceItem5 = new EmptySpaceItem();
             emptySpaceItem7 = new EmptySpaceItem();
             layoutControlGroup1 = new LayoutControlGroup();
-            splitterItem3 = new SplitterItem();
             layoutControlItem2 = new LayoutControlItem();
             layoutControlItem4 = new LayoutControlItem();
             layoutControlItem89 = new LayoutControlItem();
             layoutControlItem88 = new LayoutControlItem();
-            layoutControlItem90 = new LayoutControlItem();
             layoutControlItem93 = new LayoutControlItem();
             layoutControlItem91 = new LayoutControlItem();
             layoutControlItem92 = new LayoutControlItem();
+            splitterItem3 = new SplitterItem();
+            layoutControlItem79 = new LayoutControlItem();
+            layoutControlItem80 = new LayoutControlItem();
+            layoutControlItem90 = new LayoutControlItem();
             customTextBox1 = new CustomTextBox();
             labelControl1 = new DevExpress.XtraEditors.LabelControl();
             label8 = new System.Windows.Forms.Label();
@@ -370,7 +370,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem81).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem83).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem84).BeginInit();
@@ -434,22 +433,23 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem48).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)splitterItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem89).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem88).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem93).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem91).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem92).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).BeginInit();
@@ -490,10 +490,8 @@ namespace SewingProduction.Features.Articul
             // 
             customButtonCopy.Appearance.Font = new Font("Arial", 10F);
             customButtonCopy.Appearance.Options.UseFont = true;
-            customButtonCopy.Location = new Point(12, 429);
+            customButtonCopy.Location = new Point(12, 473);
             customButtonCopy.Margin = new System.Windows.Forms.Padding(1);
-            customButtonCopy.MaximumSize = new Size(285, 26);
-            customButtonCopy.MinimumSize = new Size(285, 26);
             customButtonCopy.Name = "customButtonCopy";
             customButtonCopy.Size = new Size(285, 26);
             customButtonCopy.StyleController = customLayoutControl1;
@@ -600,9 +598,9 @@ namespace SewingProduction.Features.Articul
             // 
             btnArticulEdit.Appearance.Font = new Font("Arial", 10F);
             btnArticulEdit.Appearance.Options.UseFont = true;
-            btnArticulEdit.Location = new Point(301, 459);
+            btnArticulEdit.Location = new Point(301, 503);
             btnArticulEdit.Name = "btnArticulEdit";
-            btnArticulEdit.Size = new Size(208, 26);
+            btnArticulEdit.Size = new Size(285, 26);
             btnArticulEdit.StyleController = customLayoutControl1;
             btnArticulEdit.TabIndex = 68;
             btnArticulEdit.Text = "Редактирование состава набора ";
@@ -611,7 +609,7 @@ namespace SewingProduction.Features.Articul
             // txbBrakAll
             // 
             txbBrakAll.EditValue = "";
-            txbBrakAll.Location = new Point(1102, 454);
+            txbBrakAll.Location = new Point(1155, 498);
             txbBrakAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrakAll.Name = "txbBrakAll";
             txbBrakAll.Properties.ReadOnly = true;
@@ -621,7 +619,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent4
             // 
-            txtBrakPercent4.Location = new Point(1102, 358);
+            txtBrakPercent4.Location = new Point(1155, 402);
             txtBrakPercent4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent4.Name = "txtBrakPercent4";
             txtBrakPercent4.Properties.ReadOnly = true;
@@ -631,7 +629,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent5
             // 
-            txtBrakPercent5.Location = new Point(1102, 382);
+            txtBrakPercent5.Location = new Point(1155, 426);
             txtBrakPercent5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent5.Name = "txtBrakPercent5";
             txtBrakPercent5.Properties.ReadOnly = true;
@@ -641,7 +639,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent6
             // 
-            txtBrakPercent6.Location = new Point(1102, 406);
+            txtBrakPercent6.Location = new Point(1155, 450);
             txtBrakPercent6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent6.Name = "txtBrakPercent6";
             txtBrakPercent6.Properties.ReadOnly = true;
@@ -655,16 +653,16 @@ namespace SewingProduction.Features.Articul
             txbKoefVedDG.ErrorColor = Color.Red;
             txbKoefVedDG.ErrorMessage = null;
             txbKoefVedDG.Font = new Font("Arial", 10F);
-            txbKoefVedDG.Location = new Point(1254, 681);
+            txbKoefVedDG.Location = new Point(1331, 725);
             txbKoefVedDG.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoefVedDG.Name = "txbKoefVedDG";
             txbKoefVedDG.ReadOnly = true;
-            txbKoefVedDG.Size = new Size(117, 20);
+            txbKoefVedDG.Size = new Size(93, 20);
             txbKoefVedDG.TabIndex = 76;
             // 
             // txtBrakPercent7
             // 
-            txtBrakPercent7.Location = new Point(1102, 430);
+            txtBrakPercent7.Location = new Point(1155, 474);
             txtBrakPercent7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent7.Name = "txtBrakPercent7";
             txtBrakPercent7.Properties.ReadOnly = true;
@@ -674,7 +672,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent3
             // 
-            txtBrakPercent3.Location = new Point(1102, 334);
+            txtBrakPercent3.Location = new Point(1155, 378);
             txtBrakPercent3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent3.Name = "txtBrakPercent3";
             txtBrakPercent3.Properties.ReadOnly = true;
@@ -684,7 +682,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txtBrakPercent2
             // 
-            txtBrakPercent2.Location = new Point(1102, 310);
+            txtBrakPercent2.Location = new Point(1155, 354);
             txtBrakPercent2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent2.Name = "txtBrakPercent2";
             txtBrakPercent2.Properties.ReadOnly = true;
@@ -698,24 +696,24 @@ namespace SewingProduction.Features.Articul
             txbKoefPr.ErrorColor = Color.Red;
             txbKoefPr.ErrorMessage = null;
             txbKoefPr.Font = new Font("Arial", 10F);
-            txbKoefPr.Location = new Point(1237, 609);
+            txbKoefPr.Location = new Point(1314, 653);
             txbKoefPr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoefPr.Name = "txbKoefPr";
             txbKoefPr.ReadOnly = true;
-            txbKoefPr.Size = new Size(134, 20);
+            txbKoefPr.Size = new Size(110, 20);
             txbKoefPr.TabIndex = 74;
             // 
             // label5
             // 
-            label5.Location = new Point(1172, 657);
+            label5.Location = new Point(1249, 701);
             label5.Name = "label5";
-            label5.Size = new Size(199, 20);
+            label5.Size = new Size(175, 20);
             label5.TabIndex = 1;
             label5.Text = "Коэф.затрат";
             // 
             // txtBrakPercent1
             // 
-            txtBrakPercent1.Location = new Point(1102, 286);
+            txtBrakPercent1.Location = new Point(1155, 330);
             txtBrakPercent1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txtBrakPercent1.Name = "txtBrakPercent1";
             txtBrakPercent1.Properties.ReadOnly = true;
@@ -727,7 +725,7 @@ namespace SewingProduction.Features.Articul
             // 
             chkPres.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkPres.Font = new Font("Arial", 10F);
-            chkPres.Location = new Point(1354, 496);
+            chkPres.Location = new Point(1407, 540);
             chkPres.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkPres.Name = "chkPres";
             chkPres.Size = new Size(20, 20);
@@ -741,18 +739,18 @@ namespace SewingProduction.Features.Articul
             txbSebDop.ErrorColor = Color.Red;
             txbSebDop.ErrorMessage = null;
             txbSebDop.Font = new Font("Arial", 10F);
-            txbSebDop.Location = new Point(1241, 633);
+            txbSebDop.Location = new Point(1318, 677);
             txbSebDop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebDop.Name = "txbSebDop";
             txbSebDop.ReadOnly = true;
-            txbSebDop.Size = new Size(130, 20);
+            txbSebDop.Size = new Size(106, 20);
             txbSebDop.TabIndex = 75;
             // 
             // chkStra
             // 
             chkStra.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkStra.Font = new Font("Arial", 10F);
-            chkStra.Location = new Point(1354, 472);
+            chkStra.Location = new Point(1407, 516);
             chkStra.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkStra.Name = "chkStra";
             chkStra.Size = new Size(20, 20);
@@ -766,7 +764,7 @@ namespace SewingProduction.Features.Articul
             txbSumKomplNum.ErrorColor = Color.Red;
             txbSumKomplNum.ErrorMessage = null;
             txbSumKomplNum.Font = new Font("Arial", 10F);
-            txbSumKomplNum.Location = new Point(1257, 472);
+            txbSumKomplNum.Location = new Point(1310, 516);
             txbSumKomplNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumKomplNum.Name = "txbSumKomplNum";
             txbSumKomplNum.ReadOnly = true;
@@ -777,7 +775,7 @@ namespace SewingProduction.Features.Articul
             // 
             customCheckBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBox1.Font = new Font("Arial", 10F);
-            customCheckBox1.Location = new Point(1172, 585);
+            customCheckBox1.Location = new Point(1249, 629);
             customCheckBox1.Name = "customCheckBox1";
             customCheckBox1.Size = new Size(0, 20);
             customCheckBox1.TabIndex = 73;
@@ -787,7 +785,7 @@ namespace SewingProduction.Features.Articul
             // 
             chkBus.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkBus.Font = new Font("Arial", 10F);
-            chkBus.Location = new Point(1354, 448);
+            chkBus.Location = new Point(1407, 492);
             chkBus.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkBus.Name = "chkBus";
             chkBus.Size = new Size(20, 20);
@@ -801,7 +799,7 @@ namespace SewingProduction.Features.Articul
             txbSumZarpl.ErrorColor = Color.Red;
             txbSumZarpl.ErrorMessage = null;
             txbSumZarpl.Font = new Font("Arial", 10F);
-            txbSumZarpl.Location = new Point(1257, 304);
+            txbSumZarpl.Location = new Point(1310, 348);
             txbSumZarpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumZarpl.Name = "txbSumZarpl";
             txbSumZarpl.ReadOnly = true;
@@ -812,7 +810,7 @@ namespace SewingProduction.Features.Articul
             // 
             chkV.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkV.Font = new Font("Arial", 10F);
-            chkV.Location = new Point(1354, 424);
+            chkV.Location = new Point(1407, 468);
             chkV.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkV.Name = "chkV";
             chkV.Size = new Size(20, 20);
@@ -826,7 +824,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t7.ErrorColor = Color.Red;
             txbNorm_t7.ErrorMessage = null;
             txbNorm_t7.Font = new Font("Arial", 9F);
-            txbNorm_t7.Location = new Point(738, 430);
+            txbNorm_t7.Location = new Point(815, 474);
             txbNorm_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t7.Name = "txbNorm_t7";
             txbNorm_t7.ReadOnly = true;
@@ -837,7 +835,7 @@ namespace SewingProduction.Features.Articul
             // 
             chkP.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chkP.Font = new Font("Arial", 10F);
-            chkP.Location = new Point(1354, 400);
+            chkP.Location = new Point(1407, 444);
             chkP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chkP.Name = "chkP";
             chkP.Size = new Size(20, 20);
@@ -851,7 +849,7 @@ namespace SewingProduction.Features.Articul
             txbSumSebRaskr.ErrorColor = Color.Red;
             txbSumSebRaskr.ErrorMessage = null;
             txbSumSebRaskr.Font = new Font("Arial", 10F);
-            txbSumSebRaskr.Location = new Point(1257, 430);
+            txbSumSebRaskr.Location = new Point(1310, 474);
             txbSumSebRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumSebRaskr.Name = "txbSumSebRaskr";
             txbSumSebRaskr.ReadOnly = true;
@@ -862,7 +860,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbIsFurnit.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsFurnit.Font = new Font("Arial", 10F);
-            chbIsFurnit.Location = new Point(1354, 310);
+            chbIsFurnit.Location = new Point(1407, 354);
             chbIsFurnit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsFurnit.Name = "chbIsFurnit";
             chbIsFurnit.Size = new Size(20, 20);
@@ -876,7 +874,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t6.ErrorColor = Color.Red;
             txbNorm_t6.ErrorMessage = null;
             txbNorm_t6.Font = new Font("Arial", 9F);
-            txbNorm_t6.Location = new Point(738, 406);
+            txbNorm_t6.Location = new Point(815, 450);
             txbNorm_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t6.Name = "txbNorm_t6";
             txbNorm_t6.ReadOnly = true;
@@ -887,7 +885,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbIsUpak.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbIsUpak.Font = new Font("Arial", 10F);
-            chbIsUpak.Location = new Point(1354, 286);
+            chbIsUpak.Location = new Point(1407, 330);
             chbIsUpak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbIsUpak.Name = "chbIsUpak";
             chbIsUpak.Size = new Size(20, 20);
@@ -901,7 +899,7 @@ namespace SewingProduction.Features.Articul
             txbSek.ErrorColor = Color.Red;
             txbSek.ErrorMessage = null;
             txbSek.Font = new Font("Arial", 10F);
-            txbSek.Location = new Point(1207, 286);
+            txbSek.Location = new Point(1260, 330);
             txbSek.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSek.Name = "txbSek";
             txbSek.Size = new Size(46, 20);
@@ -913,7 +911,7 @@ namespace SewingProduction.Features.Articul
             txbSumStrVznos.ErrorColor = Color.Red;
             txbSumStrVznos.ErrorMessage = null;
             txbSumStrVznos.Font = new Font("Arial", 10F);
-            txbSumStrVznos.Location = new Point(1257, 388);
+            txbSumStrVznos.Location = new Point(1310, 432);
             txbSumStrVznos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumStrVznos.Name = "txbSumStrVznos";
             txbSumStrVznos.ReadOnly = true;
@@ -926,7 +924,7 @@ namespace SewingProduction.Features.Articul
             txbSebz.ErrorColor = Color.Red;
             txbSebz.ErrorMessage = null;
             txbSebz.Font = new Font("Arial", 10F);
-            txbSebz.Location = new Point(1257, 514);
+            txbSebz.Location = new Point(1310, 558);
             txbSebz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebz.Name = "txbSebz";
             txbSebz.ReadOnly = true;
@@ -939,7 +937,7 @@ namespace SewingProduction.Features.Articul
             txbSekVyaz.ErrorColor = Color.Red;
             txbSekVyaz.ErrorMessage = null;
             txbSekVyaz.Font = new Font("Arial", 10F);
-            txbSekVyaz.Location = new Point(1233, 310);
+            txbSekVyaz.Location = new Point(1286, 354);
             txbSekVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekVyaz.Name = "txbSekVyaz";
             txbSekVyaz.ReadOnly = true;
@@ -952,7 +950,7 @@ namespace SewingProduction.Features.Articul
             txbSekShv.ErrorColor = Color.Red;
             txbSekShv.ErrorMessage = null;
             txbSekShv.Font = new Font("Arial", 10F);
-            txbSekShv.Location = new Point(1230, 334);
+            txbSekShv.Location = new Point(1283, 378);
             txbSekShv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekShv.Name = "txbSekShv";
             txbSekShv.ReadOnly = true;
@@ -965,7 +963,7 @@ namespace SewingProduction.Features.Articul
             txbSekKr.ErrorColor = Color.Red;
             txbSekKr.ErrorMessage = null;
             txbSekKr.Font = new Font("Arial", 10F);
-            txbSekKr.Location = new Point(1228, 358);
+            txbSekKr.Location = new Point(1281, 402);
             txbSekKr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekKr.Name = "txbSekKr";
             txbSekKr.ReadOnly = true;
@@ -978,11 +976,11 @@ namespace SewingProduction.Features.Articul
             txbOpis_t7.ErrorColor = Color.Red;
             txbOpis_t7.ErrorMessage = null;
             txbOpis_t7.Font = new Font("Arial", 9F);
-            txbOpis_t7.Location = new Point(957, 430);
+            txbOpis_t7.Location = new Point(1029, 474);
             txbOpis_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t7.Name = "txbOpis_t7";
             txbOpis_t7.ReadOnly = true;
-            txbOpis_t7.Size = new Size(39, 20);
+            txbOpis_t7.Size = new Size(20, 20);
             txbOpis_t7.TabIndex = 32;
             // 
             // txbSumDopOpl
@@ -991,7 +989,7 @@ namespace SewingProduction.Features.Articul
             txbSumDopOpl.ErrorColor = Color.Red;
             txbSumDopOpl.ErrorMessage = null;
             txbSumDopOpl.Font = new Font("Arial", 10F);
-            txbSumDopOpl.Location = new Point(1257, 346);
+            txbSumDopOpl.Location = new Point(1310, 390);
             txbSumDopOpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSumDopOpl.Name = "txbSumDopOpl";
             txbSumDopOpl.ReadOnly = true;
@@ -1004,7 +1002,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t5.ErrorColor = Color.Red;
             txbNorm_t5.ErrorMessage = null;
             txbNorm_t5.Font = new Font("Arial", 9F);
-            txbNorm_t5.Location = new Point(738, 382);
+            txbNorm_t5.Location = new Point(815, 426);
             txbNorm_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t5.Name = "txbNorm_t5";
             txbNorm_t5.ReadOnly = true;
@@ -1017,11 +1015,11 @@ namespace SewingProduction.Features.Articul
             txbOpis_t6.ErrorColor = Color.Red;
             txbOpis_t6.ErrorMessage = null;
             txbOpis_t6.Font = new Font("Arial", 9F);
-            txbOpis_t6.Location = new Point(957, 406);
+            txbOpis_t6.Location = new Point(1029, 450);
             txbOpis_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t6.Name = "txbOpis_t6";
             txbOpis_t6.ReadOnly = true;
-            txbOpis_t6.Size = new Size(39, 20);
+            txbOpis_t6.Size = new Size(20, 20);
             txbOpis_t6.TabIndex = 31;
             // 
             // txbNorm_t4
@@ -1030,7 +1028,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t4.ErrorColor = Color.Red;
             txbNorm_t4.ErrorMessage = null;
             txbNorm_t4.Font = new Font("Arial", 9F);
-            txbNorm_t4.Location = new Point(738, 358);
+            txbNorm_t4.Location = new Point(815, 402);
             txbNorm_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t4.Name = "txbNorm_t4";
             txbNorm_t4.ReadOnly = true;
@@ -1043,7 +1041,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t2.ErrorColor = Color.Red;
             txbNorm_t2.ErrorMessage = null;
             txbNorm_t2.Font = new Font("Arial", 9F);
-            txbNorm_t2.Location = new Point(738, 310);
+            txbNorm_t2.Location = new Point(815, 354);
             txbNorm_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t2.Name = "txbNorm_t2";
             txbNorm_t2.ReadOnly = true;
@@ -1056,7 +1054,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t3.ErrorColor = Color.Red;
             txbNorm_t3.ErrorMessage = null;
             txbNorm_t3.Font = new Font("Arial", 9F);
-            txbNorm_t3.Location = new Point(738, 334);
+            txbNorm_t3.Location = new Point(815, 378);
             txbNorm_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t3.Name = "txbNorm_t3";
             txbNorm_t3.ReadOnly = true;
@@ -1069,7 +1067,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t7.ErrorColor = Color.Red;
             txbTkanSeb_t7.ErrorMessage = null;
             txbTkanSeb_t7.Font = new Font("Arial", 9F);
-            txbTkanSeb_t7.Location = new Point(777, 430);
+            txbTkanSeb_t7.Location = new Point(854, 474);
             txbTkanSeb_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t7.Name = "txbTkanSeb_t7";
             txbTkanSeb_t7.ReadOnly = true;
@@ -1082,11 +1080,11 @@ namespace SewingProduction.Features.Articul
             txbOpis_t5.ErrorColor = Color.Red;
             txbOpis_t5.ErrorMessage = null;
             txbOpis_t5.Font = new Font("Arial", 9F);
-            txbOpis_t5.Location = new Point(957, 382);
+            txbOpis_t5.Location = new Point(1029, 426);
             txbOpis_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t5.Name = "txbOpis_t5";
             txbOpis_t5.ReadOnly = true;
-            txbOpis_t5.Size = new Size(39, 20);
+            txbOpis_t5.Size = new Size(20, 20);
             txbOpis_t5.TabIndex = 30;
             // 
             // txbOpis_t1
@@ -1095,11 +1093,11 @@ namespace SewingProduction.Features.Articul
             txbOpis_t1.ErrorColor = Color.Red;
             txbOpis_t1.ErrorMessage = null;
             txbOpis_t1.Font = new Font("Arial", 9F);
-            txbOpis_t1.Location = new Point(957, 286);
+            txbOpis_t1.Location = new Point(1029, 330);
             txbOpis_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t1.Name = "txbOpis_t1";
             txbOpis_t1.ReadOnly = true;
-            txbOpis_t1.Size = new Size(39, 20);
+            txbOpis_t1.Size = new Size(20, 20);
             txbOpis_t1.TabIndex = 26;
             // 
             // txbOpis_t4
@@ -1108,11 +1106,11 @@ namespace SewingProduction.Features.Articul
             txbOpis_t4.ErrorColor = Color.Red;
             txbOpis_t4.ErrorMessage = null;
             txbOpis_t4.Font = new Font("Arial", 9F);
-            txbOpis_t4.Location = new Point(957, 358);
+            txbOpis_t4.Location = new Point(1029, 402);
             txbOpis_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t4.Name = "txbOpis_t4";
             txbOpis_t4.ReadOnly = true;
-            txbOpis_t4.Size = new Size(39, 20);
+            txbOpis_t4.Size = new Size(20, 20);
             txbOpis_t4.TabIndex = 29;
             // 
             // txbOpis_t2
@@ -1121,11 +1119,11 @@ namespace SewingProduction.Features.Articul
             txbOpis_t2.ErrorColor = Color.Red;
             txbOpis_t2.ErrorMessage = null;
             txbOpis_t2.Font = new Font("Arial", 9F);
-            txbOpis_t2.Location = new Point(957, 310);
+            txbOpis_t2.Location = new Point(1029, 354);
             txbOpis_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t2.Name = "txbOpis_t2";
             txbOpis_t2.ReadOnly = true;
-            txbOpis_t2.Size = new Size(39, 20);
+            txbOpis_t2.Size = new Size(20, 20);
             txbOpis_t2.TabIndex = 27;
             // 
             // txbOpis_t3
@@ -1134,11 +1132,11 @@ namespace SewingProduction.Features.Articul
             txbOpis_t3.ErrorColor = Color.Red;
             txbOpis_t3.ErrorMessage = null;
             txbOpis_t3.Font = new Font("Arial", 9F);
-            txbOpis_t3.Location = new Point(957, 334);
+            txbOpis_t3.Location = new Point(1029, 378);
             txbOpis_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpis_t3.Name = "txbOpis_t3";
             txbOpis_t3.ReadOnly = true;
-            txbOpis_t3.Size = new Size(39, 20);
+            txbOpis_t3.Size = new Size(20, 20);
             txbOpis_t3.TabIndex = 28;
             // 
             // txbTkanSeb_t6
@@ -1147,7 +1145,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t6.ErrorColor = Color.Red;
             txbTkanSeb_t6.ErrorMessage = null;
             txbTkanSeb_t6.Font = new Font("Arial", 9F);
-            txbTkanSeb_t6.Location = new Point(777, 406);
+            txbTkanSeb_t6.Location = new Point(854, 450);
             txbTkanSeb_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t6.Name = "txbTkanSeb_t6";
             txbTkanSeb_t6.ReadOnly = true;
@@ -1160,7 +1158,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t5.ErrorColor = Color.Red;
             txbTkanSeb_t5.ErrorMessage = null;
             txbTkanSeb_t5.Font = new Font("Arial", 9F);
-            txbTkanSeb_t5.Location = new Point(777, 382);
+            txbTkanSeb_t5.Location = new Point(854, 426);
             txbTkanSeb_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t5.Name = "txbTkanSeb_t5";
             txbTkanSeb_t5.ReadOnly = true;
@@ -1173,7 +1171,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t1.ErrorColor = Color.Red;
             txbTkanSeb_t1.ErrorMessage = null;
             txbTkanSeb_t1.Font = new Font("Arial", 9F);
-            txbTkanSeb_t1.Location = new Point(777, 286);
+            txbTkanSeb_t1.Location = new Point(854, 330);
             txbTkanSeb_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t1.Name = "txbTkanSeb_t1";
             txbTkanSeb_t1.ReadOnly = true;
@@ -1186,7 +1184,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t4.ErrorColor = Color.Red;
             txbTkanSeb_t4.ErrorMessage = null;
             txbTkanSeb_t4.Font = new Font("Arial", 9F);
-            txbTkanSeb_t4.Location = new Point(777, 358);
+            txbTkanSeb_t4.Location = new Point(854, 402);
             txbTkanSeb_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t4.Name = "txbTkanSeb_t4";
             txbTkanSeb_t4.ReadOnly = true;
@@ -1199,7 +1197,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t2.ErrorColor = Color.Red;
             txbTkanSeb_t2.ErrorMessage = null;
             txbTkanSeb_t2.Font = new Font("Arial", 9F);
-            txbTkanSeb_t2.Location = new Point(777, 310);
+            txbTkanSeb_t2.Location = new Point(854, 354);
             txbTkanSeb_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t2.Name = "txbTkanSeb_t2";
             txbTkanSeb_t2.ReadOnly = true;
@@ -1212,7 +1210,7 @@ namespace SewingProduction.Features.Articul
             txbTkanSeb_t3.ErrorColor = Color.Red;
             txbTkanSeb_t3.ErrorMessage = null;
             txbTkanSeb_t3.Font = new Font("Arial", 9F);
-            txbTkanSeb_t3.Location = new Point(777, 334);
+            txbTkanSeb_t3.Location = new Point(854, 378);
             txbTkanSeb_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTkanSeb_t3.Name = "txbTkanSeb_t3";
             txbTkanSeb_t3.ReadOnly = true;
@@ -1225,7 +1223,7 @@ namespace SewingProduction.Features.Articul
             txbNorm_t1.ErrorColor = Color.Red;
             txbNorm_t1.ErrorMessage = null;
             txbNorm_t1.Font = new Font("Arial", 9F);
-            txbNorm_t1.Location = new Point(738, 286);
+            txbNorm_t1.Location = new Point(815, 330);
             txbNorm_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t1.Name = "txbNorm_t1";
             txbNorm_t1.ReadOnly = true;
@@ -1235,9 +1233,9 @@ namespace SewingProduction.Features.Articul
             // articulControl1
             // 
             articulControl1.IsReadOnly = true;
-            articulControl1.Location = new Point(539, -32);
+            articulControl1.Location = new Point(616, 12);
             articulControl1.Name = "articulControl1";
-            articulControl1.Size = new Size(847, 282);
+            articulControl1.Size = new Size(823, 282);
             articulControl1.TabIndex = 2;
             // 
             // gridArtDr
@@ -1245,7 +1243,7 @@ namespace SewingProduction.Features.Articul
             gridArtDr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             gridArtDr.DataSource = bsArtDr;
             gridArtDr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridArtDr.Location = new Point(542, 553);
+            gridArtDr.Location = new Point(619, 597);
             gridArtDr.MainView = gridView1;
             gridArtDr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArtDr.MinimumSize = new Size(614, 89);
@@ -1354,11 +1352,11 @@ namespace SewingProduction.Features.Articul
             gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
             gridArt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArt.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            gridArt.Location = new Point(15, -7);
+            gridArt.Location = new Point(15, 37);
             gridArt.MainView = gridControl1;
             gridArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArt.Name = "gridArt";
-            gridArt.Size = new Size(491, 423);
+            gridArt.Size = new Size(568, 423);
             gridArt.TabIndex = 0;
             gridArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridControl1, gridView3 });
             // 
@@ -1443,15 +1441,16 @@ namespace SewingProduction.Features.Articul
             // 
             gridView3.GridControl = gridArt;
             gridView3.Name = "gridView3";
+            gridView3.OptionsView.HeaderFilterButtonShowMode = DevExpress.XtraEditors.Controls.FilterButtonShowMode.Button;
             // 
             // customTabControlKomplNabor
             // 
             customTabControlKomplNabor.Appearance.Options.UseForeColor = true;
-            customTabControlKomplNabor.Location = new Point(12, 609);
+            customTabControlKomplNabor.Location = new Point(12, 623);
             customTabControlKomplNabor.Name = "customTabControlKomplNabor";
             customTabControlKomplNabor.ObjectName = null;
             customTabControlKomplNabor.SelectedTabPage = cTabPage1;
-            customTabControlKomplNabor.Size = new Size(497, 203);
+            customTabControlKomplNabor.Size = new Size(574, 233);
             customTabControlKomplNabor.TabIndex = 82;
             customTabControlKomplNabor.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { cTabPage1, cTabPage2 });
             // 
@@ -1459,7 +1458,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage1.Controls.Add(cGridKomplSost);
             cTabPage1.Name = "cTabPage1";
-            cTabPage1.Size = new Size(489, 173);
+            cTabPage1.Size = new Size(566, 203);
             cTabPage1.Text = "Состав комплекта";
             // 
             // cGridKomplSost
@@ -1470,7 +1469,7 @@ namespace SewingProduction.Features.Articul
             cGridKomplSost.Location = new Point(0, 0);
             cGridKomplSost.MainView = gridViewKomplSost;
             cGridKomplSost.Name = "cGridKomplSost";
-            cGridKomplSost.Size = new Size(489, 173);
+            cGridKomplSost.Size = new Size(566, 203);
             cGridKomplSost.TabIndex = 6;
             cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost, gridView2 });
             // 
@@ -1539,7 +1538,7 @@ namespace SewingProduction.Features.Articul
             // 
             cTabPage2.Controls.Add(cGridNaborSost);
             cTabPage2.Name = "cTabPage2";
-            cTabPage2.Size = new Size(301, 232);
+            cTabPage2.Size = new Size(572, 206);
             cTabPage2.Text = "Состав набора";
             // 
             // cGridNaborSost
@@ -1550,7 +1549,7 @@ namespace SewingProduction.Features.Articul
             cGridNaborSost.Location = new Point(0, 0);
             cGridNaborSost.MainView = gridViewNaborSost;
             cGridNaborSost.Name = "cGridNaborSost";
-            cGridNaborSost.Size = new Size(301, 232);
+            cGridNaborSost.Size = new Size(572, 206);
             cGridNaborSost.TabIndex = 1;
             cGridNaborSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNaborSost });
             // 
@@ -1628,7 +1627,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbSeb
             // 
-            txbSeb.Location = new Point(551, 346);
+            txbSeb.Location = new Point(628, 390);
             txbSeb.Name = "txbSeb";
             txbSeb.Size = new Size(149, 20);
             txbSeb.StyleController = customLayoutControl1;
@@ -1636,7 +1635,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbNormt
             // 
-            txbNormt.Location = new Point(551, 304);
+            txbNormt.Location = new Point(628, 348);
             txbNormt.Name = "txbNormt";
             txbNormt.Size = new Size(149, 20);
             txbNormt.StyleController = customLayoutControl1;
@@ -1644,77 +1643,77 @@ namespace SewingProduction.Features.Articul
             // 
             // txbKfKach1
             // 
-            txbKfKach1.Location = new Point(872, 286);
+            txbKfKach1.Location = new Point(949, 330);
             txbKfKach1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach1.Name = "txbKfKach1";
             txbKfKach1.Properties.ReadOnly = true;
-            txbKfKach1.Size = new Size(57, 20);
+            txbKfKach1.Size = new Size(52, 20);
             txbKfKach1.StyleController = customLayoutControl1;
             txbKfKach1.TabIndex = 19;
             // 
             // txbKfKach2
             // 
-            txbKfKach2.Location = new Point(872, 310);
+            txbKfKach2.Location = new Point(949, 354);
             txbKfKach2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach2.Name = "txbKfKach2";
             txbKfKach2.Properties.ReadOnly = true;
-            txbKfKach2.Size = new Size(57, 20);
+            txbKfKach2.Size = new Size(52, 20);
             txbKfKach2.StyleController = customLayoutControl1;
             txbKfKach2.TabIndex = 20;
             // 
             // txbKfKach3
             // 
-            txbKfKach3.Location = new Point(872, 334);
+            txbKfKach3.Location = new Point(949, 378);
             txbKfKach3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach3.Name = "txbKfKach3";
             txbKfKach3.Properties.ReadOnly = true;
-            txbKfKach3.Size = new Size(57, 20);
+            txbKfKach3.Size = new Size(52, 20);
             txbKfKach3.StyleController = customLayoutControl1;
             txbKfKach3.TabIndex = 21;
             // 
             // txbKfKach4
             // 
-            txbKfKach4.Location = new Point(872, 358);
+            txbKfKach4.Location = new Point(949, 402);
             txbKfKach4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach4.Name = "txbKfKach4";
             txbKfKach4.Properties.ReadOnly = true;
-            txbKfKach4.Size = new Size(57, 20);
+            txbKfKach4.Size = new Size(52, 20);
             txbKfKach4.StyleController = customLayoutControl1;
             txbKfKach4.TabIndex = 22;
             // 
             // txbKfKach5
             // 
-            txbKfKach5.Location = new Point(872, 382);
+            txbKfKach5.Location = new Point(949, 426);
             txbKfKach5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach5.Name = "txbKfKach5";
             txbKfKach5.Properties.ReadOnly = true;
-            txbKfKach5.Size = new Size(57, 20);
+            txbKfKach5.Size = new Size(52, 20);
             txbKfKach5.StyleController = customLayoutControl1;
             txbKfKach5.TabIndex = 23;
             // 
             // txbKfKach6
             // 
-            txbKfKach6.Location = new Point(872, 406);
+            txbKfKach6.Location = new Point(949, 450);
             txbKfKach6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach6.Name = "txbKfKach6";
             txbKfKach6.Properties.ReadOnly = true;
-            txbKfKach6.Size = new Size(57, 20);
+            txbKfKach6.Size = new Size(52, 20);
             txbKfKach6.StyleController = customLayoutControl1;
             txbKfKach6.TabIndex = 24;
             // 
             // txbKfKach7
             // 
-            txbKfKach7.Location = new Point(872, 430);
+            txbKfKach7.Location = new Point(949, 474);
             txbKfKach7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKfKach7.Name = "txbKfKach7";
             txbKfKach7.Properties.ReadOnly = true;
-            txbKfKach7.Size = new Size(57, 20);
+            txbKfKach7.Size = new Size(52, 20);
             txbKfKach7.StyleController = customLayoutControl1;
             txbKfKach7.TabIndex = 25;
             // 
             // txbBrak1
             // 
-            txbBrak1.Location = new Point(1024, 286);
+            txbBrak1.Location = new Point(1077, 330);
             txbBrak1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak1.Name = "txbBrak1";
             txbBrak1.Properties.ReadOnly = true;
@@ -1724,7 +1723,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak2
             // 
-            txbBrak2.Location = new Point(1024, 310);
+            txbBrak2.Location = new Point(1077, 354);
             txbBrak2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak2.Name = "txbBrak2";
             txbBrak2.Properties.ReadOnly = true;
@@ -1734,7 +1733,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak3
             // 
-            txbBrak3.Location = new Point(1024, 334);
+            txbBrak3.Location = new Point(1077, 378);
             txbBrak3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak3.Name = "txbBrak3";
             txbBrak3.Properties.ReadOnly = true;
@@ -1744,7 +1743,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak4
             // 
-            txbBrak4.Location = new Point(1024, 358);
+            txbBrak4.Location = new Point(1077, 402);
             txbBrak4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak4.Name = "txbBrak4";
             txbBrak4.Properties.ReadOnly = true;
@@ -1754,7 +1753,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak5
             // 
-            txbBrak5.Location = new Point(1024, 382);
+            txbBrak5.Location = new Point(1077, 426);
             txbBrak5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak5.Name = "txbBrak5";
             txbBrak5.Properties.ReadOnly = true;
@@ -1764,7 +1763,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak6
             // 
-            txbBrak6.Location = new Point(1024, 406);
+            txbBrak6.Location = new Point(1077, 450);
             txbBrak6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak6.Name = "txbBrak6";
             txbBrak6.Properties.ReadOnly = true;
@@ -1774,7 +1773,7 @@ namespace SewingProduction.Features.Articul
             // 
             // txbBrak7
             // 
-            txbBrak7.Location = new Point(1024, 430);
+            txbBrak7.Location = new Point(1077, 474);
             txbBrak7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrak7.Name = "txbBrak7";
             txbBrak7.Properties.ReadOnly = true;
@@ -1786,7 +1785,7 @@ namespace SewingProduction.Features.Articul
             // 
             sButtodDeleteKod.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             sButtodDeleteKod.Appearance.Options.UseFont = true;
-            sButtodDeleteKod.Location = new Point(12, 519);
+            sButtodDeleteKod.Location = new Point(12, 563);
             sButtodDeleteKod.Margin = new System.Windows.Forms.Padding(0);
             sButtodDeleteKod.MaximumSize = new Size(285, 26);
             sButtodDeleteKod.MinimumSize = new Size(285, 26);
@@ -1805,7 +1804,7 @@ namespace SewingProduction.Features.Articul
             customSimpleButton7.AppearanceDisabled.ForeColor = Color.GreenYellow;
             customSimpleButton7.AppearanceDisabled.Options.UseBackColor = true;
             customSimpleButton7.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton7.Location = new Point(12, 459);
+            customSimpleButton7.Location = new Point(12, 503);
             customSimpleButton7.MaximumSize = new Size(285, 26);
             customSimpleButton7.MinimumSize = new Size(285, 26);
             customSimpleButton7.Name = "customSimpleButton7";
@@ -1823,7 +1822,7 @@ namespace SewingProduction.Features.Articul
             customSimpleButton2.AppearanceDisabled.ForeColor = Color.GreenYellow;
             customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
             customSimpleButton2.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton2.Location = new Point(12, 579);
+            customSimpleButton2.Location = new Point(301, 533);
             customSimpleButton2.MaximumSize = new Size(285, 26);
             customSimpleButton2.MinimumSize = new Size(285, 26);
             customSimpleButton2.Name = "customSimpleButton2";
@@ -1836,7 +1835,7 @@ namespace SewingProduction.Features.Articul
             // 
             customButtonKompl.Appearance.Font = new Font("Arial", 10F);
             customButtonKompl.Appearance.Options.UseFont = true;
-            customButtonKompl.Location = new Point(12, 489);
+            customButtonKompl.Location = new Point(12, 533);
             customButtonKompl.Margin = new System.Windows.Forms.Padding(0);
             customButtonKompl.MaximumSize = new Size(285, 26);
             customButtonKompl.MinimumSize = new Size(285, 26);
@@ -1855,7 +1854,7 @@ namespace SewingProduction.Features.Articul
             csButtonNew.AppearanceDisabled.ForeColor = Color.GreenYellow;
             csButtonNew.AppearanceDisabled.Options.UseBackColor = true;
             csButtonNew.AppearanceDisabled.Options.UseForeColor = true;
-            csButtonNew.Location = new Point(12, 549);
+            csButtonNew.Location = new Point(12, 593);
             csButtonNew.MaximumSize = new Size(285, 26);
             csButtonNew.MinimumSize = new Size(285, 26);
             csButtonNew.Name = "csButtonNew";
@@ -1873,9 +1872,9 @@ namespace SewingProduction.Features.Articul
             csButtonEdit.AppearanceDisabled.ForeColor = Color.GreenYellow;
             csButtonEdit.AppearanceDisabled.Options.UseBackColor = true;
             csButtonEdit.AppearanceDisabled.Options.UseForeColor = true;
-            csButtonEdit.Location = new Point(301, 429);
+            csButtonEdit.Location = new Point(301, 473);
             csButtonEdit.Name = "csButtonEdit";
-            csButtonEdit.Size = new Size(208, 23);
+            csButtonEdit.Size = new Size(285, 23);
             csButtonEdit.StyleController = customLayoutControl1;
             csButtonEdit.TabIndex = 66;
             csButtonEdit.Text = "Редактировать изделие";
@@ -1887,11 +1886,11 @@ namespace SewingProduction.Features.Articul
             txbKoef.ErrorColor = Color.Red;
             txbKoef.ErrorMessage = null;
             txbKoef.Font = new Font("Arial", 10F);
-            txbKoef.Location = new Point(1260, 705);
+            txbKoef.Location = new Point(1337, 749);
             txbKoef.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKoef.Name = "txbKoef";
             txbKoef.ReadOnly = true;
-            txbKoef.Size = new Size(111, 20);
+            txbKoef.Size = new Size(87, 20);
             txbKoef.TabIndex = 77;
             // 
             // txbSebProizv
@@ -1900,11 +1899,11 @@ namespace SewingProduction.Features.Articul
             txbSebProizv.ErrorColor = Color.Red;
             txbSebProizv.ErrorMessage = null;
             txbSebProizv.Font = new Font("Arial", 10F);
-            txbSebProizv.Location = new Point(1240, 729);
+            txbSebProizv.Location = new Point(1317, 773);
             txbSebProizv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebProizv.Name = "txbSebProizv";
             txbSebProizv.ReadOnly = true;
-            txbSebProizv.Size = new Size(131, 20);
+            txbSebProizv.Size = new Size(107, 20);
             txbSebProizv.TabIndex = 78;
             // 
             // txbSebRecom
@@ -1913,21 +1912,21 @@ namespace SewingProduction.Features.Articul
             txbSebRecom.ErrorColor = Color.Red;
             txbSebRecom.ErrorMessage = null;
             txbSebRecom.Font = new Font("Arial", 10F);
-            txbSebRecom.Location = new Point(1243, 753);
+            txbSebRecom.Location = new Point(1320, 797);
             txbSebRecom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebRecom.Name = "txbSebRecom";
             txbSebRecom.ReadOnly = true;
-            txbSebRecom.Size = new Size(128, 20);
+            txbSebRecom.Size = new Size(104, 20);
             txbSebRecom.TabIndex = 79;
             // 
             // mtbDateOpis
             // 
             mtbDateOpis.Font = new Font("Arial", 10F);
-            mtbDateOpis.Location = new Point(1247, 777);
+            mtbDateOpis.Location = new Point(1324, 821);
             mtbDateOpis.Mask = "00/00/0000";
             mtbDateOpis.Name = "mtbDateOpis";
             mtbDateOpis.ReadOnly = true;
-            mtbDateOpis.Size = new Size(124, 20);
+            mtbDateOpis.Size = new Size(100, 20);
             mtbDateOpis.TabIndex = 80;
             mtbDateOpis.ValidatingType = typeof(System.DateTime);
             // 
@@ -1935,23 +1934,23 @@ namespace SewingProduction.Features.Articul
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new BaseLayoutItem[] { layoutControlItem5, layoutControlGroup8, layoutControlGroup9, layoutControlGroup10, layoutControlGroup13, layoutControlGroup14, layoutControlGroup6, layoutControlGroup7, layoutControlGroup16, layoutControlGroup18, splitterItem4, emptySpaceItem4, emptySpaceItem5, emptySpaceItem7, layoutControlGroup1, layoutControlItem4, layoutControlItem89, layoutControlItem88, layoutControlItem90, layoutControlItem93, layoutControlItem91, layoutControlItem92, splitterItem3, layoutControlItem79, layoutControlItem80 });
+            Root.Items.AddRange(new BaseLayoutItem[] { layoutControlItem5, layoutControlGroup8, layoutControlGroup9, layoutControlGroup10, layoutControlGroup13, layoutControlGroup14, layoutControlGroup6, layoutControlGroup7, layoutControlGroup16, layoutControlGroup18, splitterItem4, emptySpaceItem4, emptySpaceItem5, emptySpaceItem7, layoutControlGroup1, layoutControlItem4, layoutControlItem89, layoutControlItem88, layoutControlItem93, layoutControlItem91, layoutControlItem92, splitterItem3, layoutControlItem79, layoutControlItem80, layoutControlItem90 });
             Root.Name = "Root";
-            Root.Size = new Size(1398, 868);
+            Root.Size = new Size(1451, 868);
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = articulControl1;
-            layoutControlItem5.Location = new Point(527, 0);
+            layoutControlItem5.Location = new Point(604, 0);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(851, 286);
+            layoutControlItem5.Size = new Size(827, 286);
             layoutControlItem5.TextVisible = false;
             // 
             // layoutControlGroup8
             // 
             layoutControlGroup8.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup8.Items.AddRange(new BaseLayoutItem[] { layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, layoutControlItem37, layoutControlItem36, layoutControlItem38, layoutControlItem39, layoutControlItem40, layoutControlItem41 });
-            layoutControlGroup8.Location = new Point(1183, 286);
+            layoutControlGroup8.Location = new Point(1236, 286);
             layoutControlGroup8.Name = "layoutControlGroup8";
             layoutControlGroup8.Size = new Size(147, 296);
             layoutControlGroup8.Text = "Норма/сек";
@@ -2079,7 +2078,7 @@ namespace SewingProduction.Features.Articul
             // 
             layoutControlGroup9.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup9.Items.AddRange(new BaseLayoutItem[] { layoutControlItem6, layoutControlItem42, layoutControlItem43, layoutControlItem44, layoutControlItem45, layoutControlItem46, layoutControlItem47, emptySpaceItem6, emptySpaceItem9 });
-            layoutControlGroup9.Location = new Point(1330, 286);
+            layoutControlGroup9.Location = new Point(1383, 286);
             layoutControlGroup9.Name = "layoutControlGroup9";
             layoutControlGroup9.Size = new Size(48, 296);
             layoutControlGroup9.Text = "Отделка";
@@ -2155,10 +2154,10 @@ namespace SewingProduction.Features.Articul
             // layoutControlGroup10
             // 
             layoutControlGroup10.Items.AddRange(new BaseLayoutItem[] { layoutControlItem10, layoutControlGroup11 });
-            layoutControlGroup10.Location = new Point(527, 582);
+            layoutControlGroup10.Location = new Point(604, 582);
             layoutControlGroup10.Name = "layoutControlGroup10";
             layoutControlGroup10.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup10.Size = new Size(851, 266);
+            layoutControlGroup10.Size = new Size(827, 266);
             layoutControlGroup10.Text = " ";
             layoutControlGroup10.TextVisible = false;
             // 
@@ -2175,17 +2174,7 @@ namespace SewingProduction.Features.Articul
             layoutControlGroup11.Items.AddRange(new BaseLayoutItem[] { layoutControlItem81, layoutControlItem83, layoutControlItem84, layoutControlItem85, layoutControlItem87, layoutControlItem3, layoutControlItem94, layoutControlItem95, layoutControlItem82 });
             layoutControlGroup11.Location = new Point(618, 0);
             layoutControlGroup11.Name = "layoutControlGroup11";
-            layoutControlGroup11.Size = new Size(227, 260);
-            // 
-            // layoutControlItem80
-            // 
-            layoutControlItem80.Control = btnArticulEdit;
-            layoutControlItem80.Location = new Point(289, 491);
-            layoutControlItem80.MinSize = new Size(212, 27);
-            layoutControlItem80.Name = "layoutControlItem80";
-            layoutControlItem80.Size = new Size(212, 30);
-            layoutControlItem80.SizeConstraintsType = SizeConstraintsType.Custom;
-            layoutControlItem80.TextVisible = false;
+            layoutControlGroup11.Size = new Size(203, 260);
             // 
             // layoutControlItem81
             // 
@@ -2193,7 +2182,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem81.Location = new Point(0, 0);
             layoutControlItem81.MinSize = new Size(24, 24);
             layoutControlItem81.Name = "layoutControlItem81";
-            layoutControlItem81.Size = new Size(203, 24);
+            layoutControlItem81.Size = new Size(179, 24);
             layoutControlItem81.SizeConstraintsType = SizeConstraintsType.Custom;
             layoutControlItem81.Text = "Старая модель, на пересчете у экономистов";
             layoutControlItem81.TextLocation = DevExpress.Utils.Locations.Right;
@@ -2204,7 +2193,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem83.Control = txbSebDop;
             layoutControlItem83.Location = new Point(0, 48);
             layoutControlItem83.Name = "layoutControlItem83";
-            layoutControlItem83.Size = new Size(203, 24);
+            layoutControlItem83.Size = new Size(179, 24);
             layoutControlItem83.Text = "Произв. себ.";
             layoutControlItem83.TextAlignMode = TextAlignModeItem.AutoSize;
             layoutControlItem83.TextSize = new Size(64, 13);
@@ -2215,7 +2204,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem84.Control = label5;
             layoutControlItem84.Location = new Point(0, 72);
             layoutControlItem84.Name = "layoutControlItem84";
-            layoutControlItem84.Size = new Size(203, 24);
+            layoutControlItem84.Size = new Size(179, 24);
             layoutControlItem84.TextVisible = false;
             // 
             // layoutControlItem85
@@ -2223,7 +2212,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem85.Control = txbKoefPr;
             layoutControlItem85.Location = new Point(0, 24);
             layoutControlItem85.Name = "layoutControlItem85";
-            layoutControlItem85.Size = new Size(203, 24);
+            layoutControlItem85.Size = new Size(179, 24);
             layoutControlItem85.Text = "Пр.затраты";
             layoutControlItem85.TextAlignMode = TextAlignModeItem.AutoSize;
             layoutControlItem85.TextSize = new Size(60, 13);
@@ -2234,7 +2223,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem87.Control = txbKoefVedDG;
             layoutControlItem87.Location = new Point(0, 96);
             layoutControlItem87.Name = "layoutControlItem87";
-            layoutControlItem87.Size = new Size(203, 24);
+            layoutControlItem87.Size = new Size(179, 24);
             layoutControlItem87.Text = "Коэф.ВЭД и ДГ";
             layoutControlItem87.TextAlignMode = TextAlignModeItem.AutoSize;
             layoutControlItem87.TextSize = new Size(77, 13);
@@ -2245,7 +2234,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem3.Control = txbKoef;
             layoutControlItem3.Location = new Point(0, 120);
             layoutControlItem3.Name = "txbKoef";
-            layoutControlItem3.Size = new Size(203, 24);
+            layoutControlItem3.Size = new Size(179, 24);
             layoutControlItem3.Text = "Коэфф. наценки";
             layoutControlItem3.TextAlignMode = TextAlignModeItem.AutoSize;
             layoutControlItem3.TextSize = new Size(83, 13);
@@ -2256,7 +2245,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem94.Control = txbSebProizv;
             layoutControlItem94.Location = new Point(0, 144);
             layoutControlItem94.Name = "txbSebProizv";
-            layoutControlItem94.Size = new Size(203, 24);
+            layoutControlItem94.Size = new Size(179, 24);
             layoutControlItem94.TextAlignMode = TextAlignModeItem.AutoSize;
             layoutControlItem94.TextSize = new Size(63, 13);
             layoutControlItem94.TextToControlDistance = 5;
@@ -2266,7 +2255,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem95.Control = txbSebRecom;
             layoutControlItem95.Location = new Point(0, 168);
             layoutControlItem95.Name = "txbSebRecom";
-            layoutControlItem95.Size = new Size(203, 24);
+            layoutControlItem95.Size = new Size(179, 24);
             layoutControlItem95.TextAlignMode = TextAlignModeItem.AutoSize;
             layoutControlItem95.TextSize = new Size(66, 13);
             layoutControlItem95.TextToControlDistance = 5;
@@ -2276,7 +2265,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem82.Control = mtbDateOpis;
             layoutControlItem82.Location = new Point(0, 192);
             layoutControlItem82.Name = "layoutControlItem82";
-            layoutControlItem82.Size = new Size(203, 24);
+            layoutControlItem82.Size = new Size(179, 24);
             layoutControlItem82.Text = "Дата расчета";
             layoutControlItem82.TextAlignMode = TextAlignModeItem.AutoSize;
             layoutControlItem82.TextSize = new Size(70, 13);
@@ -2286,9 +2275,9 @@ namespace SewingProduction.Features.Articul
             // 
             layoutControlGroup13.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup13.Items.AddRange(new BaseLayoutItem[] { layoutControlItem8, layoutControlItem14, layoutControlItem23, layoutControlItem24, layoutControlItem25, layoutControlItem26, layoutControlItem27 });
-            layoutControlGroup13.Location = new Point(933, 286);
+            layoutControlGroup13.Location = new Point(1005, 286);
             layoutControlGroup13.Name = "layoutControlGroup13";
-            layoutControlGroup13.Size = new Size(67, 296);
+            layoutControlGroup13.Size = new Size(48, 296);
             layoutControlGroup13.Text = "назнач.";
             // 
             // layoutControlItem8
@@ -2296,7 +2285,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem8.Control = txbOpis_t1;
             layoutControlItem8.Location = new Point(0, 0);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new Size(43, 24);
+            layoutControlItem8.Size = new Size(24, 24);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlItem14
@@ -2304,7 +2293,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem14.Control = txbOpis_t2;
             layoutControlItem14.Location = new Point(0, 24);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new Size(43, 24);
+            layoutControlItem14.Size = new Size(24, 24);
             layoutControlItem14.TextVisible = false;
             // 
             // layoutControlItem23
@@ -2312,7 +2301,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem23.Control = txbOpis_t3;
             layoutControlItem23.Location = new Point(0, 48);
             layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new Size(43, 24);
+            layoutControlItem23.Size = new Size(24, 24);
             layoutControlItem23.TextVisible = false;
             // 
             // layoutControlItem24
@@ -2320,7 +2309,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem24.Control = txbOpis_t4;
             layoutControlItem24.Location = new Point(0, 72);
             layoutControlItem24.Name = "layoutControlItem24";
-            layoutControlItem24.Size = new Size(43, 24);
+            layoutControlItem24.Size = new Size(24, 24);
             layoutControlItem24.TextVisible = false;
             // 
             // layoutControlItem25
@@ -2328,7 +2317,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem25.Control = txbOpis_t5;
             layoutControlItem25.Location = new Point(0, 96);
             layoutControlItem25.Name = "layoutControlItem25";
-            layoutControlItem25.Size = new Size(43, 24);
+            layoutControlItem25.Size = new Size(24, 24);
             layoutControlItem25.TextVisible = false;
             // 
             // layoutControlItem26
@@ -2336,7 +2325,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem26.Control = txbOpis_t6;
             layoutControlItem26.Location = new Point(0, 120);
             layoutControlItem26.Name = "layoutControlItem26";
-            layoutControlItem26.Size = new Size(43, 24);
+            layoutControlItem26.Size = new Size(24, 24);
             layoutControlItem26.TextVisible = false;
             // 
             // layoutControlItem27
@@ -2344,16 +2333,16 @@ namespace SewingProduction.Features.Articul
             layoutControlItem27.Control = txbOpis_t7;
             layoutControlItem27.Location = new Point(0, 144);
             layoutControlItem27.Name = "layoutControlItem27";
-            layoutControlItem27.Size = new Size(43, 108);
+            layoutControlItem27.Size = new Size(24, 108);
             layoutControlItem27.TextVisible = false;
             // 
             // layoutControlGroup14
             // 
             layoutControlGroup14.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup14.Items.AddRange(new BaseLayoutItem[] { layoutControlItem49, layoutControlItem50, layoutControlItem51, layoutControlItem52, layoutControlItem53, layoutControlItem54, layoutControlItem55 });
-            layoutControlGroup14.Location = new Point(848, 286);
+            layoutControlGroup14.Location = new Point(925, 286);
             layoutControlGroup14.Name = "layoutControlGroup14";
-            layoutControlGroup14.Size = new Size(85, 296);
+            layoutControlGroup14.Size = new Size(80, 296);
             layoutControlGroup14.Text = "коэф.";
             // 
             // layoutControlItem49
@@ -2361,7 +2350,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem49.Control = txbKfKach1;
             layoutControlItem49.Location = new Point(0, 0);
             layoutControlItem49.Name = "layoutControlItem49";
-            layoutControlItem49.Size = new Size(61, 24);
+            layoutControlItem49.Size = new Size(56, 24);
             layoutControlItem49.TextVisible = false;
             // 
             // layoutControlItem50
@@ -2369,7 +2358,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem50.Control = txbKfKach2;
             layoutControlItem50.Location = new Point(0, 24);
             layoutControlItem50.Name = "layoutControlItem50";
-            layoutControlItem50.Size = new Size(61, 24);
+            layoutControlItem50.Size = new Size(56, 24);
             layoutControlItem50.TextVisible = false;
             // 
             // layoutControlItem51
@@ -2377,7 +2366,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem51.Control = txbKfKach3;
             layoutControlItem51.Location = new Point(0, 48);
             layoutControlItem51.Name = "layoutControlItem51";
-            layoutControlItem51.Size = new Size(61, 24);
+            layoutControlItem51.Size = new Size(56, 24);
             layoutControlItem51.TextVisible = false;
             // 
             // layoutControlItem52
@@ -2385,7 +2374,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem52.Control = txbKfKach4;
             layoutControlItem52.Location = new Point(0, 72);
             layoutControlItem52.Name = "layoutControlItem52";
-            layoutControlItem52.Size = new Size(61, 24);
+            layoutControlItem52.Size = new Size(56, 24);
             layoutControlItem52.TextVisible = false;
             // 
             // layoutControlItem53
@@ -2393,7 +2382,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem53.Control = txbKfKach5;
             layoutControlItem53.Location = new Point(0, 96);
             layoutControlItem53.Name = "layoutControlItem53";
-            layoutControlItem53.Size = new Size(61, 24);
+            layoutControlItem53.Size = new Size(56, 24);
             layoutControlItem53.TextVisible = false;
             // 
             // layoutControlItem54
@@ -2401,7 +2390,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem54.Control = txbKfKach6;
             layoutControlItem54.Location = new Point(0, 120);
             layoutControlItem54.Name = "layoutControlItem54";
-            layoutControlItem54.Size = new Size(61, 24);
+            layoutControlItem54.Size = new Size(56, 24);
             layoutControlItem54.TextVisible = false;
             // 
             // layoutControlItem55
@@ -2409,14 +2398,14 @@ namespace SewingProduction.Features.Articul
             layoutControlItem55.Control = txbKfKach7;
             layoutControlItem55.Location = new Point(0, 144);
             layoutControlItem55.Name = "layoutControlItem55";
-            layoutControlItem55.Size = new Size(61, 108);
+            layoutControlItem55.Size = new Size(56, 108);
             layoutControlItem55.TextVisible = false;
             // 
             // layoutControlGroup6
             // 
             layoutControlGroup6.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup6.Items.AddRange(new BaseLayoutItem[] { layoutControlItem63, layoutControlItem64, layoutControlItem65, layoutControlItem66, layoutControlItem67, layoutControlItem68, layoutControlItem69 });
-            layoutControlGroup6.Location = new Point(1000, 286);
+            layoutControlGroup6.Location = new Point(1053, 286);
             layoutControlGroup6.Name = "layoutControlGroup6";
             layoutControlGroup6.Size = new Size(78, 296);
             layoutControlGroup6.Text = "Брак";
@@ -2481,7 +2470,7 @@ namespace SewingProduction.Features.Articul
             // 
             layoutControlGroup7.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup7.Items.AddRange(new BaseLayoutItem[] { layoutControlItem70, layoutControlItem71, layoutControlItem72, layoutControlItem74, layoutControlItem76, layoutControlItem73, layoutControlItem75, emptySpaceItem2, layoutControlItem77 });
-            layoutControlGroup7.Location = new Point(1078, 286);
+            layoutControlGroup7.Location = new Point(1131, 286);
             layoutControlGroup7.Name = "layoutControlGroup7";
             layoutControlGroup7.Size = new Size(105, 296);
             layoutControlGroup7.Text = "%";
@@ -2575,7 +2564,7 @@ namespace SewingProduction.Features.Articul
             // 
             layoutControlGroup16.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup16.Items.AddRange(new BaseLayoutItem[] { layoutControlItem12, layoutControlItem13, layoutControlItem28, layoutControlItem29, layoutControlItem30, layoutControlItem31, layoutControlItem15, emptySpaceItem8, layoutControlItem16, emptySpaceItem3, layoutControlItem17, layoutControlItem18, layoutControlItem19, layoutControlItem20, layoutControlItem21, layoutControlItem22 });
-            layoutControlGroup16.Location = new Point(714, 286);
+            layoutControlGroup16.Location = new Point(791, 286);
             layoutControlGroup16.Name = "layoutControlGroup16";
             layoutControlGroup16.Size = new Size(134, 296);
             layoutControlGroup16.Text = "затраты на изготовление";
@@ -2764,7 +2753,7 @@ namespace SewingProduction.Features.Articul
             // 
             layoutControlGroup18.GroupStyle = DevExpress.Utils.GroupStyle.Light;
             layoutControlGroup18.Items.AddRange(new BaseLayoutItem[] { layoutControlItem48, layoutControlItem7, emptySpaceItem1 });
-            layoutControlGroup18.Location = new Point(527, 286);
+            layoutControlGroup18.Location = new Point(604, 286);
             layoutControlGroup18.Name = "layoutControlGroup18";
             layoutControlGroup18.Size = new Size(177, 296);
             layoutControlGroup18.Text = "ткань";
@@ -2793,18 +2782,6 @@ namespace SewingProduction.Features.Articul
             layoutControlItem7.TextSize = new Size(22, 13);
             layoutControlItem7.TextToControlDistance = 5;
             // 
-            // layoutControlItem79
-            // 
-            layoutControlItem79.Control = csButtonEdit;
-            layoutControlItem79.Location = new Point(289, 461);
-            layoutControlItem79.Name = "layoutControlItem79";
-            layoutControlItem79.Size = new Size(212, 30);
-            layoutControlItem79.Text = " ";
-            layoutControlItem79.TextAlignMode = TextAlignModeItem.AutoSize;
-            layoutControlItem79.TextLocation = DevExpress.Utils.Locations.Right;
-            layoutControlItem79.TextToControlDistance = 0;
-            layoutControlItem79.TextVisible = false;
-            // 
             // emptySpaceItem1
             // 
             emptySpaceItem1.Location = new Point(0, 84);
@@ -2813,25 +2790,25 @@ namespace SewingProduction.Features.Articul
             // 
             // splitterItem4
             // 
-            splitterItem4.Location = new Point(511, 0);
+            splitterItem4.Location = new Point(588, 0);
             splitterItem4.Name = "splitterItem4";
             splitterItem4.Size = new Size(6, 848);
             // 
             // emptySpaceItem4
             // 
-            emptySpaceItem4.Location = new Point(704, 286);
+            emptySpaceItem4.Location = new Point(781, 286);
             emptySpaceItem4.Name = "emptySpaceItem4";
             emptySpaceItem4.Size = new Size(10, 296);
             // 
             // emptySpaceItem5
             // 
-            emptySpaceItem5.Location = new Point(517, 0);
+            emptySpaceItem5.Location = new Point(594, 0);
             emptySpaceItem5.Name = "emptySpaceItem5";
             emptySpaceItem5.Size = new Size(10, 848);
             // 
             // emptySpaceItem7
             // 
-            emptySpaceItem7.Location = new Point(501, 0);
+            emptySpaceItem7.Location = new Point(578, 0);
             emptySpaceItem7.Name = "emptySpaceItem7";
             emptySpaceItem7.Size = new Size(10, 848);
             // 
@@ -2842,32 +2819,26 @@ namespace SewingProduction.Features.Articul
             layoutControlGroup1.Location = new Point(0, 0);
             layoutControlGroup1.Name = "layoutControlGroup1";
             layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup1.Size = new Size(501, 455);
+            layoutControlGroup1.Size = new Size(578, 455);
             layoutControlGroup1.Text = " ";
             layoutControlGroup1.CustomButtonClick += layoutControlGroup1_CustomButtonClick_1;
             layoutControlGroup1.CustomButtonUnchecked += layoutControlGroup1_CustomButtonUnchecked;
             layoutControlGroup1.CustomButtonChecked += layoutControlGroup1_CustomButtonChecked;
-            // 
-            // splitterItem3
-            // 
-            splitterItem3.Location = new Point(0, 455);
-            splitterItem3.Name = "splitterItem3";
-            splitterItem3.Size = new Size(501, 6);
             // 
             // layoutControlItem2
             // 
             layoutControlItem2.Control = gridArt;
             layoutControlItem2.Location = new Point(0, 0);
             layoutControlItem2.Name = "gridArt";
-            layoutControlItem2.Size = new Size(495, 427);
+            layoutControlItem2.Size = new Size(572, 427);
             layoutControlItem2.TextVisible = false;
             // 
             // layoutControlItem4
             // 
             layoutControlItem4.Control = customTabControlKomplNabor;
-            layoutControlItem4.Location = new Point(0, 641);
+            layoutControlItem4.Location = new Point(0, 611);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new Size(501, 207);
+            layoutControlItem4.Size = new Size(578, 237);
             layoutControlItem4.TextVisible = false;
             // 
             // layoutControlItem89
@@ -2889,22 +2860,10 @@ namespace SewingProduction.Features.Articul
             layoutControlItem88.Location = new Point(0, 551);
             layoutControlItem88.MinSize = new Size(289, 30);
             layoutControlItem88.Name = "layoutControlItem88";
-            layoutControlItem88.Size = new Size(501, 30);
+            layoutControlItem88.Size = new Size(578, 30);
             layoutControlItem88.SizeConstraintsType = SizeConstraintsType.Custom;
             layoutControlItem88.Text = " ";
             layoutControlItem88.TextVisible = false;
-            // 
-            // layoutControlItem90
-            // 
-            layoutControlItem90.Control = customSimpleButton2;
-            layoutControlItem90.Location = new Point(0, 611);
-            layoutControlItem90.MinSize = new Size(289, 30);
-            layoutControlItem90.Name = "layoutControlItem90";
-            layoutControlItem90.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem90.Size = new Size(501, 30);
-            layoutControlItem90.SizeConstraintsType = SizeConstraintsType.Custom;
-            layoutControlItem90.Text = " ";
-            layoutControlItem90.TextVisible = false;
             // 
             // layoutControlItem93
             // 
@@ -2914,7 +2873,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem93.Name = "layoutControlItem93";
             layoutControlItem93.OptionsTableLayoutItem.ColumnIndex = 1;
             layoutControlItem93.OptionsTableLayoutItem.RowIndex = 1;
-            layoutControlItem93.Size = new Size(501, 30);
+            layoutControlItem93.Size = new Size(578, 30);
             layoutControlItem93.SizeConstraintsType = SizeConstraintsType.Custom;
             layoutControlItem93.Text = " ";
             layoutControlItem93.TextVisible = false;
@@ -2936,9 +2895,49 @@ namespace SewingProduction.Features.Articul
             layoutControlItem92.Location = new Point(0, 521);
             layoutControlItem92.MinSize = new Size(289, 30);
             layoutControlItem92.Name = "layoutControlItem92";
-            layoutControlItem92.Size = new Size(501, 30);
+            layoutControlItem92.Size = new Size(289, 30);
             layoutControlItem92.SizeConstraintsType = SizeConstraintsType.Custom;
             layoutControlItem92.TextVisible = false;
+            // 
+            // splitterItem3
+            // 
+            splitterItem3.Location = new Point(0, 455);
+            splitterItem3.Name = "splitterItem3";
+            splitterItem3.Size = new Size(578, 6);
+            // 
+            // layoutControlItem79
+            // 
+            layoutControlItem79.Control = csButtonEdit;
+            layoutControlItem79.Location = new Point(289, 461);
+            layoutControlItem79.Name = "layoutControlItem79";
+            layoutControlItem79.Size = new Size(289, 30);
+            layoutControlItem79.Text = " ";
+            layoutControlItem79.TextAlignMode = TextAlignModeItem.AutoSize;
+            layoutControlItem79.TextLocation = DevExpress.Utils.Locations.Right;
+            layoutControlItem79.TextToControlDistance = 0;
+            layoutControlItem79.TextVisible = false;
+            // 
+            // layoutControlItem80
+            // 
+            layoutControlItem80.Control = btnArticulEdit;
+            layoutControlItem80.Location = new Point(289, 491);
+            layoutControlItem80.MinSize = new Size(212, 27);
+            layoutControlItem80.Name = "layoutControlItem80";
+            layoutControlItem80.Size = new Size(289, 30);
+            layoutControlItem80.SizeConstraintsType = SizeConstraintsType.Custom;
+            layoutControlItem80.TextVisible = false;
+            // 
+            // layoutControlItem90
+            // 
+            layoutControlItem90.Control = customSimpleButton2;
+            layoutControlItem90.Location = new Point(289, 521);
+            layoutControlItem90.MinSize = new Size(289, 30);
+            layoutControlItem90.Name = "layoutControlItem90";
+            layoutControlItem90.OptionsTableLayoutItem.RowIndex = 1;
+            layoutControlItem90.Size = new Size(289, 30);
+            layoutControlItem90.SizeConstraintsType = SizeConstraintsType.Custom;
+            layoutControlItem90.Text = " ";
+            layoutControlItem90.TextVisible = false;
             // 
             // customTextBox1
             // 
@@ -3231,7 +3230,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem81).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem83).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem84).EndInit();
@@ -3295,22 +3293,23 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup18).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem48).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)splitterItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem89).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem88).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem93).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem91).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem92).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitterItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem79).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem80).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem90).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup12).EndInit();
             ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).EndInit();

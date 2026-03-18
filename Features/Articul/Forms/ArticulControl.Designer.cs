@@ -159,7 +159,7 @@
             pictureBoxArticul.Location = new System.Drawing.Point(7, 7);
             pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxArticul.Name = "pictureBoxArticul";
-            pictureBoxArticul.Size = new System.Drawing.Size(238, 282);
+            pictureBoxArticul.Size = new System.Drawing.Size(202, 282);
             pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxArticul.TabIndex = 1;
             pictureBoxArticul.TabStop = false;
@@ -203,11 +203,10 @@
             // 
             // txbKod
             // 
-            txbKod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbKod.ErrorColor = System.Drawing.Color.Red;
             txbKod.ErrorMessage = null;
             txbKod.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbKod.Location = new System.Drawing.Point(316, 25);
+            txbKod.Location = new System.Drawing.Point(280, 25);
             txbKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKod.Name = "txbKod";
             txbKod.ReadOnly = true;
@@ -216,11 +215,10 @@
             // 
             // txbPo
             // 
-            txbPo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbPo.ErrorColor = System.Drawing.Color.Red;
             txbPo.ErrorMessage = null;
             txbPo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbPo.Location = new System.Drawing.Point(420, 25);
+            txbPo.Location = new System.Drawing.Point(384, 25);
             txbPo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbPo.Name = "txbPo";
             txbPo.ReadOnly = true;
@@ -232,7 +230,7 @@
             chbKombDet.Enabled = false;
             chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombDet.Font = new System.Drawing.Font("Arial", 10F);
-            chbKombDet.Location = new System.Drawing.Point(257, 221);
+            chbKombDet.Location = new System.Drawing.Point(221, 221);
             chbKombDet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombDet.Name = "chbKombDet";
             chbKombDet.Size = new System.Drawing.Size(100, 20);
@@ -242,24 +240,22 @@
             // 
             // txbNDS
             // 
-            txbNDS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbNDS.Enabled = false;
             txbNDS.ErrorColor = System.Drawing.Color.Red;
             txbNDS.ErrorMessage = null;
             txbNDS.Font = new System.Drawing.Font("Arial", 9F);
-            txbNDS.Location = new System.Drawing.Point(668, 271);
+            txbNDS.Location = new System.Drawing.Point(674, 271);
             txbNDS.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNDS.Name = "txbNDS";
-            txbNDS.Size = new System.Drawing.Size(26, 20);
+            txbNDS.Size = new System.Drawing.Size(20, 20);
             txbNDS.TabIndex = 24;
             // 
             // txbTM
             // 
-            txbTM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbTM.ErrorColor = System.Drawing.Color.Red;
             txbTM.ErrorMessage = null;
             txbTM.Font = new System.Drawing.Font("Arial", 9F);
-            txbTM.Location = new System.Drawing.Point(316, 101);
+            txbTM.Location = new System.Drawing.Point(280, 101);
             txbTM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbTM.Name = "txbTM";
             txbTM.ReadOnly = true;
@@ -271,7 +267,7 @@
             chbKombIzd.Enabled = false;
             chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombIzd.Font = new System.Drawing.Font("Arial", 10F);
-            chbKombIzd.Location = new System.Drawing.Point(361, 221);
+            chbKombIzd.Location = new System.Drawing.Point(325, 221);
             chbKombIzd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             chbKombIzd.Name = "chbKombIzd";
             chbKombIzd.Size = new System.Drawing.Size(101, 20);
@@ -281,11 +277,10 @@
             // 
             // txbKodTnved
             // 
-            txbKodTnved.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbKodTnved.ErrorColor = System.Drawing.Color.Red;
             txbKodTnved.ErrorMessage = null;
             txbKodTnved.Font = new System.Drawing.Font("Arial", 9F);
-            txbKodTnved.Location = new System.Drawing.Point(618, 271);
+            txbKodTnved.Location = new System.Drawing.Point(624, 271);
             txbKodTnved.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbKodTnved.Name = "txbKodTnved";
             txbKodTnved.ReadOnly = true;
@@ -295,11 +290,10 @@
             // txbArticul
             // 
             txbArticul.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbArticul.ErrorColor = System.Drawing.Color.Red;
             txbArticul.ErrorMessage = null;
             txbArticul.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            txbArticul.Location = new System.Drawing.Point(316, 49);
+            txbArticul.Location = new System.Drawing.Point(280, 49);
             txbArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbArticul.MinimumSize = new System.Drawing.Size(120, 15);
             txbArticul.Name = "txbArticul";
@@ -310,38 +304,35 @@
             // txbGrup
             // 
             txbGrup.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbGrup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbGrup.ErrorColor = System.Drawing.Color.Red;
             txbGrup.ErrorMessage = null;
             txbGrup.Font = new System.Drawing.Font("Arial Narrow", 9F);
-            txbGrup.Location = new System.Drawing.Point(551, 25);
+            txbGrup.Location = new System.Drawing.Point(515, 25);
             txbGrup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGrup.Name = "txbGrup";
             txbGrup.ReadOnly = true;
-            txbGrup.Size = new System.Drawing.Size(143, 20);
+            txbGrup.Size = new System.Drawing.Size(179, 20);
             txbGrup.TabIndex = 12;
             // 
             // txbScNomer
             // 
-            txbScNomer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbScNomer.ErrorColor = System.Drawing.Color.Red;
             txbScNomer.ErrorMessage = null;
             txbScNomer.Font = new System.Drawing.Font("Arial", 9F);
-            txbScNomer.Location = new System.Drawing.Point(513, 271);
+            txbScNomer.Location = new System.Drawing.Point(472, 271);
             txbScNomer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbScNomer.Name = "txbScNomer";
             txbScNomer.ReadOnly = true;
-            txbScNomer.Size = new System.Drawing.Size(43, 20);
+            txbScNomer.Size = new System.Drawing.Size(90, 20);
             txbScNomer.TabIndex = 22;
             // 
             // txbMod
             // 
             txbMod.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbMod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbMod.ErrorColor = System.Drawing.Color.Red;
             txbMod.ErrorMessage = null;
             txbMod.Font = new System.Drawing.Font("Arial", 9F);
-            txbMod.Location = new System.Drawing.Point(316, 73);
+            txbMod.Location = new System.Drawing.Point(280, 73);
             txbMod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbMod.MinimumSize = new System.Drawing.Size(120, 15);
             txbMod.Name = "txbMod";
@@ -352,39 +343,36 @@
             // txbSost
             // 
             txbSost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSost.ErrorColor = System.Drawing.Color.Red;
             txbSost.ErrorMessage = null;
             txbSost.Font = new System.Drawing.Font("Arial", 9F);
-            txbSost.Location = new System.Drawing.Point(555, 149);
+            txbSost.Location = new System.Drawing.Point(554, 149);
             txbSost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost.Name = "txbSost";
             txbSost.ReadOnly = true;
-            txbSost.Size = new System.Drawing.Size(139, 20);
+            txbSost.Size = new System.Drawing.Size(140, 20);
             txbSost.TabIndex = 16;
             // 
             // mtbDateOpis
             // 
-            mtbDateOpis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             mtbDateOpis.Font = new System.Drawing.Font("Arial", 9F);
             mtbDateOpis.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            mtbDateOpis.Location = new System.Drawing.Point(337, 271);
+            mtbDateOpis.Location = new System.Drawing.Point(301, 271);
             mtbDateOpis.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             mtbDateOpis.Mask = "00/00/0000";
             mtbDateOpis.Name = "mtbDateOpis";
             mtbDateOpis.ReadOnly = true;
-            mtbDateOpis.Size = new System.Drawing.Size(105, 20);
+            mtbDateOpis.Size = new System.Drawing.Size(100, 20);
             mtbDateOpis.TabIndex = 21;
             mtbDateOpis.ValidatingType = typeof(System.DateTime);
             // 
             // txbIdGost
             // 
             txbIdGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbIdGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbIdGost.ErrorColor = System.Drawing.Color.Red;
             txbIdGost.ErrorMessage = null;
             txbIdGost.Font = new System.Drawing.Font("Arial", 9F);
-            txbIdGost.Location = new System.Drawing.Point(501, 52);
+            txbIdGost.Location = new System.Drawing.Point(465, 52);
             txbIdGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbIdGost.Name = "txbIdGost";
             txbIdGost.ReadOnly = true;
@@ -393,11 +381,10 @@
             // 
             // txbSeason
             // 
-            txbSeason.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSeason.ErrorColor = System.Drawing.Color.Red;
             txbSeason.ErrorMessage = null;
             txbSeason.Font = new System.Drawing.Font("Arial", 9F);
-            txbSeason.Location = new System.Drawing.Point(316, 125);
+            txbSeason.Location = new System.Drawing.Point(280, 125);
             txbSeason.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeason.Name = "txbSeason";
             txbSeason.ReadOnly = true;
@@ -407,66 +394,61 @@
             // txbNameGost
             // 
             txbNameGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbNameGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbNameGost.ErrorColor = System.Drawing.Color.Red;
             txbNameGost.ErrorMessage = null;
             txbNameGost.Font = new System.Drawing.Font("Arial", 9F);
-            txbNameGost.Location = new System.Drawing.Point(582, 52);
+            txbNameGost.Location = new System.Drawing.Point(546, 52);
             txbNameGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNameGost.Name = "txbNameGost";
             txbNameGost.ReadOnly = true;
-            txbNameGost.Size = new System.Drawing.Size(109, 20);
+            txbNameGost.Size = new System.Drawing.Size(145, 20);
             txbNameGost.TabIndex = 14;
             // 
             // txbOpiGost
             // 
             txbOpiGost.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            txbOpiGost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbOpiGost.ErrorColor = System.Drawing.Color.Red;
             txbOpiGost.ErrorMessage = null;
             txbOpiGost.Font = new System.Drawing.Font("Arial", 9F);
-            txbOpiGost.Location = new System.Drawing.Point(475, 92);
+            txbOpiGost.Location = new System.Drawing.Point(439, 92);
             txbOpiGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbOpiGost.Name = "txbOpiGost";
             txbOpiGost.ReadOnly = true;
-            txbOpiGost.Size = new System.Drawing.Size(216, 50);
+            txbOpiGost.Size = new System.Drawing.Size(252, 50);
             txbOpiGost.TabIndex = 15;
             // 
             // txbSost2
             // 
             txbSost2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSost2.ErrorColor = System.Drawing.Color.Red;
             txbSost2.ErrorMessage = null;
             txbSost2.Font = new System.Drawing.Font("Arial", 9F);
-            txbSost2.Location = new System.Drawing.Point(520, 173);
+            txbSost2.Location = new System.Drawing.Point(554, 173);
             txbSost2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost2.Name = "txbSost2";
             txbSost2.ReadOnly = true;
-            txbSost2.Size = new System.Drawing.Size(174, 20);
+            txbSost2.Size = new System.Drawing.Size(140, 20);
             txbSost2.TabIndex = 17;
             // 
             // txbRazmPrint
             // 
             txbRazmPrint.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbRazmPrint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbRazmPrint.ErrorColor = System.Drawing.Color.Red;
             txbRazmPrint.ErrorMessage = null;
             txbRazmPrint.Font = new System.Drawing.Font("Arial", 9F);
-            txbRazmPrint.Location = new System.Drawing.Point(657, 221);
+            txbRazmPrint.Location = new System.Drawing.Point(621, 221);
             txbRazmPrint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazmPrint.Name = "txbRazmPrint";
             txbRazmPrint.ReadOnly = true;
-            txbRazmPrint.Size = new System.Drawing.Size(37, 20);
+            txbRazmPrint.Size = new System.Drawing.Size(73, 20);
             txbRazmPrint.TabIndex = 20;
             // 
             // txbAssort
             // 
-            txbAssort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbAssort.ErrorColor = System.Drawing.Color.Red;
             txbAssort.ErrorMessage = null;
             txbAssort.Font = new System.Drawing.Font("Arial", 9F);
-            txbAssort.Location = new System.Drawing.Point(316, 149);
+            txbAssort.Location = new System.Drawing.Point(280, 149);
             txbAssort.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbAssort.Name = "txbAssort";
             txbAssort.ReadOnly = true;
@@ -476,24 +458,22 @@
             // txbSost3
             // 
             txbSost3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbSost3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbSost3.ErrorColor = System.Drawing.Color.Red;
             txbSost3.ErrorMessage = null;
             txbSost3.Font = new System.Drawing.Font("Arial", 9F);
-            txbSost3.Location = new System.Drawing.Point(591, 197);
+            txbSost3.Location = new System.Drawing.Point(554, 197);
             txbSost3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSost3.Name = "txbSost3";
             txbSost3.ReadOnly = true;
-            txbSost3.Size = new System.Drawing.Size(103, 20);
+            txbSost3.Size = new System.Drawing.Size(140, 20);
             txbSost3.TabIndex = 18;
             // 
             // txbCountry
             // 
-            txbCountry.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbCountry.ErrorColor = System.Drawing.Color.Red;
             txbCountry.ErrorMessage = null;
             txbCountry.Font = new System.Drawing.Font("Arial", 9F);
-            txbCountry.Location = new System.Drawing.Point(316, 173);
+            txbCountry.Location = new System.Drawing.Point(280, 173);
             txbCountry.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbCountry.Name = "txbCountry";
             txbCountry.ReadOnly = true;
@@ -503,11 +483,10 @@
             // txbGrupMenName
             // 
             txbGrupMenName.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            txbGrupMenName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbGrupMenName.ErrorColor = System.Drawing.Color.Red;
             txbGrupMenName.ErrorMessage = null;
             txbGrupMenName.Font = new System.Drawing.Font("Arial", 9F);
-            txbGrupMenName.Location = new System.Drawing.Point(316, 197);
+            txbGrupMenName.Location = new System.Drawing.Point(280, 197);
             txbGrupMenName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbGrupMenName.Name = "txbGrupMenName";
             txbGrupMenName.ReadOnly = true;
@@ -516,11 +495,10 @@
             // 
             // txbRazm
             // 
-            txbRazm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txbRazm.ErrorColor = System.Drawing.Color.Red;
             txbRazm.ErrorMessage = null;
             txbRazm.Font = new System.Drawing.Font("Arial", 9F);
-            txbRazm.Location = new System.Drawing.Point(512, 221);
+            txbRazm.Location = new System.Drawing.Point(476, 221);
             txbRazm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbRazm.Name = "txbRazm";
             txbRazm.ReadOnly = true;
@@ -544,7 +522,7 @@
             layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup3.Name = "layoutControlGroup3";
             layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(2, 2, 2, 2);
-            layoutControlGroup3.Size = new System.Drawing.Size(252, 296);
+            layoutControlGroup3.Size = new System.Drawing.Size(216, 296);
             layoutControlGroup3.Text = " ";
             layoutControlGroup3.TextVisible = false;
             // 
@@ -555,18 +533,18 @@
             layoutControlItem26.MinSize = new System.Drawing.Size(104, 24);
             layoutControlItem26.Name = "layoutControlItem26";
             layoutControlItem26.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutControlItem26.Size = new System.Drawing.Size(242, 286);
+            layoutControlItem26.Size = new System.Drawing.Size(206, 286);
             layoutControlItem26.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem26.TextVisible = false;
             // 
             // layoutControlGroup6
             // 
             layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem22, layoutControlItem23, layoutControlItem24, layoutControlItem25 });
-            layoutControlGroup6.Location = new System.Drawing.Point(252, 246);
+            layoutControlGroup6.Location = new System.Drawing.Point(216, 246);
             layoutControlGroup6.Name = "layoutControlGroup6";
             layoutControlGroup6.OptionsItemText.TextAlignMode = DevExpress.XtraLayout.TextAlignModeGroup.AutoSize;
             layoutControlGroup6.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup6.Size = new System.Drawing.Size(447, 50);
+            layoutControlGroup6.Size = new System.Drawing.Size(483, 50);
             layoutControlGroup6.Text = "Сертификация";
             // 
             // layoutControlItem22
@@ -574,23 +552,23 @@
             layoutControlItem22.Control = mtbDateOpis;
             layoutControlItem22.Location = new System.Drawing.Point(0, 0);
             layoutControlItem22.Name = "layoutControlItem22";
-            layoutControlItem22.Size = new System.Drawing.Size(189, 24);
+            layoutControlItem22.Size = new System.Drawing.Size(184, 24);
             layoutControlItem22.Text = "Дата описания";
             layoutControlItem22.TextSize = new System.Drawing.Size(76, 13);
             // 
             // layoutControlItem23
             // 
             layoutControlItem23.Control = txbScNomer;
-            layoutControlItem23.Location = new System.Drawing.Point(189, 0);
+            layoutControlItem23.Location = new System.Drawing.Point(184, 0);
             layoutControlItem23.Name = "layoutControlItem23";
-            layoutControlItem23.Size = new System.Drawing.Size(114, 24);
+            layoutControlItem23.Size = new System.Drawing.Size(161, 24);
             layoutControlItem23.Text = "Сертификат";
             layoutControlItem23.TextSize = new System.Drawing.Size(63, 13);
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = txbKodTnved;
-            layoutControlItem24.Location = new System.Drawing.Point(303, 0);
+            layoutControlItem24.Location = new System.Drawing.Point(345, 0);
             layoutControlItem24.Name = "layoutControlItem24";
             layoutControlItem24.Size = new System.Drawing.Size(82, 24);
             layoutControlItem24.Text = "Код ТНВэд";
@@ -599,16 +577,16 @@
             // layoutControlItem25
             // 
             layoutControlItem25.Control = txbNDS;
-            layoutControlItem25.Location = new System.Drawing.Point(385, 0);
+            layoutControlItem25.Location = new System.Drawing.Point(427, 0);
             layoutControlItem25.Name = "layoutControlItem25";
-            layoutControlItem25.Size = new System.Drawing.Size(56, 24);
+            layoutControlItem25.Size = new System.Drawing.Size(50, 24);
             layoutControlItem25.Text = "НДС";
             layoutControlItem25.TextSize = new System.Drawing.Size(22, 13);
             // 
             // layoutControlGroup8
             // 
             layoutControlGroup8.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem3, layoutControlItem8, layoutControlItem9, layoutControlItem14, layoutControlItem16, layoutControlItem18, layoutControlItem21, layoutControlItem4, layoutControlItem5, layoutControlItem2 });
-            layoutControlGroup8.Location = new System.Drawing.Point(252, 0);
+            layoutControlGroup8.Location = new System.Drawing.Point(216, 0);
             layoutControlGroup8.Name = "layoutControlGroup8";
             layoutControlGroup8.OptionsItemText.TextAlignMode = DevExpress.XtraLayout.TextAlignModeGroup.AlignLocal;
             layoutControlGroup8.OptionsItemText.TextToControlDistance = 6;
@@ -726,11 +704,11 @@
             // layoutControlGroup5
             // 
             layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem7, layoutControlGroup7, layoutControlItem10, layoutControlItem15, layoutControlItem17, layoutControlItem19, layoutControlItem20 });
-            layoutControlGroup5.Location = new System.Drawing.Point(467, 0);
+            layoutControlGroup5.Location = new System.Drawing.Point(431, 0);
             layoutControlGroup5.Name = "layoutControlGroup5";
             layoutControlGroup5.OptionsItemText.TextAlignMode = DevExpress.XtraLayout.TextAlignModeGroup.AlignLocal;
             layoutControlGroup5.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup5.Size = new System.Drawing.Size(232, 246);
+            layoutControlGroup5.Size = new System.Drawing.Size(268, 246);
             layoutControlGroup5.Text = "ГОСТ и состав";
             // 
             // layoutControlItem7
@@ -738,7 +716,7 @@
             layoutControlItem7.Control = txbGrup;
             layoutControlItem7.Location = new System.Drawing.Point(0, 0);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new System.Drawing.Size(226, 24);
+            layoutControlItem7.Size = new System.Drawing.Size(262, 24);
             layoutControlItem7.Text = "Наим. по ГОСТ";
             layoutControlItem7.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem7.TextSize = new System.Drawing.Size(74, 13);
@@ -750,7 +728,7 @@
             layoutControlGroup7.Location = new System.Drawing.Point(0, 24);
             layoutControlGroup7.Name = "layoutControlGroup7";
             layoutControlGroup7.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            layoutControlGroup7.Size = new System.Drawing.Size(226, 100);
+            layoutControlGroup7.Size = new System.Drawing.Size(262, 100);
             layoutControlGroup7.Text = "ГОСТ";
             layoutControlGroup7.TextVisible = false;
             // 
@@ -771,9 +749,9 @@
             layoutControlItem12.Control = txbNameGost;
             layoutControlItem12.Location = new System.Drawing.Point(72, 0);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(148, 24);
+            layoutControlItem12.Size = new System.Drawing.Size(184, 24);
             layoutControlItem12.Text = "номер";
-            layoutControlItem12.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.CustomSize;
+            layoutControlItem12.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem12.TextLocation = DevExpress.Utils.Locations.Left;
             layoutControlItem12.TextSize = new System.Drawing.Size(30, 13);
             layoutControlItem12.TextToControlDistance = 5;
@@ -784,7 +762,7 @@
             layoutControlItem13.Location = new System.Drawing.Point(0, 24);
             layoutControlItem13.MinSize = new System.Drawing.Size(51, 40);
             layoutControlItem13.Name = "layoutControlItem13";
-            layoutControlItem13.Size = new System.Drawing.Size(220, 70);
+            layoutControlItem13.Size = new System.Drawing.Size(256, 70);
             layoutControlItem13.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem13.Text = "описание";
             layoutControlItem13.TextLocation = DevExpress.Utils.Locations.Top;
@@ -795,33 +773,27 @@
             layoutControlItem10.Control = txbSost;
             layoutControlItem10.Location = new System.Drawing.Point(0, 124);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new System.Drawing.Size(226, 24);
+            layoutControlItem10.Size = new System.Drawing.Size(262, 24);
             layoutControlItem10.Text = "Состав основн.";
-            layoutControlItem10.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            layoutControlItem10.TextSize = new System.Drawing.Size(78, 13);
-            layoutControlItem10.TextToControlDistance = 5;
+            layoutControlItem10.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem15
             // 
             layoutControlItem15.Control = txbSost2;
             layoutControlItem15.Location = new System.Drawing.Point(0, 148);
             layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new System.Drawing.Size(226, 24);
+            layoutControlItem15.Size = new System.Drawing.Size(262, 24);
             layoutControlItem15.Text = "отделка";
-            layoutControlItem15.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
-            layoutControlItem15.TextSize = new System.Drawing.Size(43, 13);
-            layoutControlItem15.TextToControlDistance = 5;
+            layoutControlItem15.TextSize = new System.Drawing.Size(114, 13);
             // 
             // layoutControlItem17
             // 
             layoutControlItem17.Control = txbSost3;
             layoutControlItem17.Location = new System.Drawing.Point(0, 172);
             layoutControlItem17.Name = "layoutControlItem17";
-            layoutControlItem17.Size = new System.Drawing.Size(226, 24);
+            layoutControlItem17.Size = new System.Drawing.Size(262, 24);
             layoutControlItem17.Text = "подклад\\наполнитель";
-            layoutControlItem17.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem17.TextSize = new System.Drawing.Size(114, 13);
-            layoutControlItem17.TextToControlDistance = 5;
             // 
             // layoutControlItem19
             // 
@@ -839,7 +811,7 @@
             layoutControlItem20.Control = txbRazmPrint;
             layoutControlItem20.Location = new System.Drawing.Point(123, 196);
             layoutControlItem20.Name = "layoutControlItem20";
-            layoutControlItem20.Size = new System.Drawing.Size(103, 24);
+            layoutControlItem20.Size = new System.Drawing.Size(139, 24);
             layoutControlItem20.Text = "при печати";
             layoutControlItem20.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             layoutControlItem20.TextSize = new System.Drawing.Size(57, 13);
