@@ -641,8 +641,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridZadanyListColumnGradacia.OptionsColumn.AllowEdit = false;
                 gridZadanyListColumnGradacia.OptionsColumn.ReadOnly = false;
 
-                gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit = true;
-                gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly = false;
+                //gridZadanyListColumnSyncSelection.OptionsColumn.AllowEdit = true;
+                //gridZadanyListColumnSyncSelection.OptionsColumn.ReadOnly = false;
                 //gridZadanyListColumnSyncSelection.ColumnEdit = repositoryItemCheckEdit1;
                 //MessageBox.Show($"gridZadanyListColumnSyncSelection.ColumnEdit = {gridZadanyListColumnSyncSelection.ColumnEdit}");
                 //gridZadanyListColumnSyncSelection.OptionsColumn.AllowFocus = true;
@@ -653,10 +653,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    $"ColumnEdit={(gridZadanyListColumnSyncSelection.ColumnEdit == null ? "null" : gridZadanyListColumnSyncSelection.ColumnEdit.Name)}"
                 //);
                 //----------------------------------------
-                repositoryItemCheckEdit1.MouseUp += (s, e) =>
-                {
-                    BeginInvoke(new Action(() => SyncSelectionUpdate()));
-                };
+                //repositoryItemCheckEdit1.MouseUp += (s, e) =>
+                //{
+                //    BeginInvoke(new Action(() => SyncSelectionUpdate()));
+                //};
                 //----------------------------------------
                 #endregion
 
@@ -2358,6 +2358,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void repositoryItemCheckEdit1_CheckedChanged(object sender, EventArgs e)
         {
+            BeginInvoke(new Action(() => SyncSelectionUpdate()));
         }
 
         private void ClearSelectedPachList()
@@ -4757,6 +4758,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void repositoryItemCheckEdit1_EditValueChanged(object sender, EventArgs e)
         {
+            BeginInvoke(new Action(() => SyncSelectionUpdate()));
         }
 
         private async void layoutControlGroup2_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
@@ -5654,6 +5656,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //{
             //    SyncSelectionUpdate();
             //}
+        }
+
+        private void repositoryItemCheckEdit1_MouseUp(object sender, MouseEventArgs e)
+        {
+            BeginInvoke(new Action(() => SyncSelectionUpdate()));
+        }
+
+        private void repositoryItemCheckEdit1_DoubleClick(object sender, EventArgs e)
+        {
+            BeginInvoke(new Action(() => SyncSelectionUpdate()));
+        }
+
+        private void PlanZagrVyaz_Click(object sender, EventArgs e)
+        {
+            BeginInvoke(new Action(() => SyncSelectionUpdate()));
         }
     }
 }

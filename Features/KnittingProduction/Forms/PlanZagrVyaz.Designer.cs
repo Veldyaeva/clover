@@ -3328,6 +3328,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             repositoryItemCheckEdit1.ValueUnchecked = 0;
             repositoryItemCheckEdit1.CheckedChanged += repositoryItemCheckEdit1_CheckedChanged;
             repositoryItemCheckEdit1.EditValueChanged += repositoryItemCheckEdit1_EditValueChanged;
+            repositoryItemCheckEdit1.DoubleClick += repositoryItemCheckEdit1_DoubleClick;
+            repositoryItemCheckEdit1.MouseUp += repositoryItemCheckEdit1_MouseUp;
             // 
             // gridZadanyListColumnKmlID
             // 
@@ -3844,6 +3846,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             Text = "Рабочий стол мастера вяз цеха";
             FormClosing += OnFormClosing;
             Load += PlanZagrVyaz_Load;
+            Click += PlanZagrVyaz_Click;
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridControlPlanTotalQuantityByArticul).EndInit();
