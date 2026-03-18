@@ -99,10 +99,21 @@
             gcSost3 = new DevExpress.XtraGrid.Columns.GridColumn();
             customSimpleButtonPermissions = new SewingProduction.Core.Class.CustomSimpleButton();
             customLayoutControl1 = new SewingProduction.Core.Class.CustomLayoutControl();
+            gridArtCompare = new SewingProduction.Core.Class.CustomGridControl();
+            gridViewArtCompare = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gcKoddCompare = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcGrupCompare = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcArticulCompare = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcModCompare = new DevExpress.XtraGrid.Columns.GridColumn();
+            gcTMCompare = new DevExpress.XtraGrid.Columns.GridColumn();
+            articulControl1 = new ArticulControl();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit10).BeginInit();
@@ -128,10 +139,15 @@
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).BeginInit();
             customLayoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridArtCompare).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewArtCompare).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             SuspendLayout();
             // 
             // repositoryItemCheckEdit8
@@ -198,7 +214,7 @@
             gridArtMatr.MainView = gridViewArtMatrEdit;
             gridArtMatr.Name = "gridArtMatr";
             gridArtMatr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemCheckEdit2, repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit5, repositoryItemCheckEdit6, repositoryItemCheckEdit7, repositoryItemLookUpEdit1, repositoryItemLookUpEdit2, repositoryItemSearchLookUpEdit1, repositoryItemSearchLookUpEdit2 });
-            gridArtMatr.Size = new System.Drawing.Size(1768, 427);
+            gridArtMatr.Size = new System.Drawing.Size(1768, 338);
             gridArtMatr.TabIndex = 0;
             gridArtMatr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtMatrEdit, gridViewArtMatr });
             // 
@@ -211,7 +227,7 @@
             gridViewArtMatrEdit.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcCertGrupmen_name, gcCertTsn_name, gcCertTb_id, gcCertArticul, gcCertMod, gcCertTm_name, gcCertGrup, gcCertText_mo, gcCertP, gcCertPrinter, gcCertStra, gcCertBus, gcCertPpres, gcCertV, gcCertKruj, gcCertTkan, gcCertSost, gcCertRazmNames, gcCertDatePublic, gcCertSost2, gcCertSost3, gcCertidGost, gcCertAgid, gcCertDateCertificationApproval });
             gridViewArtMatrEdit.GridControl = gridArtMatr;
             gridViewArtMatrEdit.Name = "gridViewArtMatrEdit";
-            gridViewArtMatrEdit.OptionsCustomization.AllowFilter = false;
+            gridViewArtMatrEdit.OptionsBehavior.Editable = false;
             gridViewArtMatrEdit.OptionsFind.AlwaysVisible = true;
             gridViewArtMatrEdit.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Search;
             gridViewArtMatrEdit.OptionsSelection.MultiSelect = true;
@@ -219,7 +235,9 @@
             gridViewArtMatrEdit.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatrEdit.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatrEdit.OptionsView.ShowAutoFilterRow = true;
+            gridViewArtMatrEdit.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridViewArtMatrEdit.OptionsView.ShowGroupPanel = false;
+            gridViewArtMatrEdit.FocusedRowChanged += gridArtMatr_FocusedRowChanged;
             gridViewArtMatrEdit.DoubleClick += gridViewArtMatrEdit_DoubleClick;
             // 
             // gcCertGrupmen_name
@@ -555,8 +573,8 @@
             gridViewArtMatr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcGrupmen_name, gcTsn_name, gcTb_id, gcArticul, gcMod, gcTm_name, gcGrup, gcText_mo, gcP, gcPrinter, gcStra, gcBus, gcPpres, gcV, gcKruj, gcTkan, gcSost, gcRazmNames, gcDatePublic, gcSost2, gcSost3 });
             gridViewArtMatr.GridControl = gridArtMatr;
             gridViewArtMatr.Name = "gridViewArtMatr";
+            gridViewArtMatr.OptionsBehavior.Editable = false;
             gridViewArtMatr.OptionsBehavior.ReadOnly = true;
-            gridViewArtMatr.OptionsCustomization.AllowFilter = false;
             gridViewArtMatr.OptionsFind.AlwaysVisible = true;
             gridViewArtMatr.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Search;
             gridViewArtMatr.OptionsSelection.MultiSelect = true;
@@ -564,6 +582,7 @@
             gridViewArtMatr.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatr.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             gridViewArtMatr.OptionsView.ShowAutoFilterRow = true;
+            gridViewArtMatr.FocusedRowChanged += gridArtMatr_FocusedRowChanged;
             // 
             // gcGrupmen_name
             // 
@@ -753,6 +772,8 @@
             // 
             // customLayoutControl1
             // 
+            customLayoutControl1.Controls.Add(gridArtCompare);
+            customLayoutControl1.Controls.Add(articulControl1);
             customLayoutControl1.Controls.Add(gridArtMatr);
             customLayoutControl1.Dock = System.Windows.Forms.DockStyle.Top;
             customLayoutControl1.Font = new System.Drawing.Font("Arial", 10F);
@@ -764,11 +785,78 @@
             customLayoutControl1.TabIndex = 3;
             customLayoutControl1.Text = "customLayoutControl1";
             // 
+            // gridArtCompare
+            // 
+            gridArtCompare.Font = new System.Drawing.Font("Arial", 10F);
+            gridArtCompare.Location = new System.Drawing.Point(72, 344);
+            gridArtCompare.MainView = gridViewArtCompare;
+            gridArtCompare.Name = "gridArtCompare";
+            gridArtCompare.Size = new System.Drawing.Size(390, 308);
+            gridArtCompare.TabIndex = 4;
+            gridArtCompare.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewArtCompare });
+            // 
+            // gridViewArtCompare
+            // 
+            gridViewArtCompare.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridViewArtCompare.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewArtCompare.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gcKoddCompare, gcGrupCompare, gcArticulCompare, gcModCompare, gcTMCompare });
+            gridViewArtCompare.GridControl = gridArtCompare;
+            gridViewArtCompare.Name = "gridViewArtCompare";
+            gridViewArtCompare.OptionsView.ShowGroupPanel = false;
+            gridViewArtCompare.FocusedRowChanged += gridViewArtCompare_FocusedRowChanged;
+            // 
+            // gcKoddCompare
+            // 
+            gcKoddCompare.Caption = "Код";
+            gcKoddCompare.Name = "gcKoddCompare";
+            gcKoddCompare.Visible = true;
+            gcKoddCompare.VisibleIndex = 0;
+            gcKoddCompare.Width = 78;
+            // 
+            // gcGrupCompare
+            // 
+            gcGrupCompare.Caption = "Группа";
+            gcGrupCompare.Name = "gcGrupCompare";
+            gcGrupCompare.Visible = true;
+            gcGrupCompare.VisibleIndex = 1;
+            gcGrupCompare.Width = 140;
+            // 
+            // gcArticulCompare
+            // 
+            gcArticulCompare.Caption = "Артикул";
+            gcArticulCompare.Name = "gcArticulCompare";
+            gcArticulCompare.Visible = true;
+            gcArticulCompare.VisibleIndex = 2;
+            gcArticulCompare.Width = 140;
+            // 
+            // gcModCompare
+            // 
+            gcModCompare.Caption = "Модель";
+            gcModCompare.Name = "gcModCompare";
+            gcModCompare.Visible = true;
+            gcModCompare.VisibleIndex = 3;
+            gcModCompare.Width = 143;
+            // 
+            // gcTMCompare
+            // 
+            gcTMCompare.Caption = "ТМ";
+            gcTMCompare.Name = "gcTMCompare";
+            gcTMCompare.Visible = true;
+            gcTMCompare.VisibleIndex = 4;
+            // 
+            // articulControl1
+            // 
+            articulControl1.IsReadOnly = true;
+            articulControl1.Location = new System.Drawing.Point(466, 345);
+            articulControl1.Name = "articulControl1";
+            articulControl1.Size = new System.Drawing.Size(1304, 258);
+            articulControl1.TabIndex = 2;
+            // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, simpleSeparator1, emptySpaceItem1 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, simpleSeparator1, emptySpaceItem1, layoutControlItem2, emptySpaceItem2, layoutControlItem3 });
             Root.Name = "Root";
             Root.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             Root.Size = new System.Drawing.Size(1772, 654);
@@ -779,20 +867,42 @@
             layoutControlItem1.Control = gridArtMatr;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(1772, 431);
+            layoutControlItem1.Size = new System.Drawing.Size(1772, 342);
             layoutControlItem1.TextVisible = false;
             // 
             // simpleSeparator1
             // 
-            simpleSeparator1.Location = new System.Drawing.Point(0, 431);
+            simpleSeparator1.Location = new System.Drawing.Point(464, 342);
             simpleSeparator1.Name = "simpleSeparator1";
-            simpleSeparator1.Size = new System.Drawing.Size(1772, 1);
+            simpleSeparator1.Size = new System.Drawing.Size(1308, 1);
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(0, 432);
+            emptySpaceItem1.Location = new System.Drawing.Point(464, 605);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(1772, 222);
+            emptySpaceItem1.Size = new System.Drawing.Size(1308, 49);
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = articulControl1;
+            layoutControlItem2.Location = new System.Drawing.Point(464, 343);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new System.Drawing.Size(1308, 262);
+            layoutControlItem2.TextVisible = false;
+            // 
+            // emptySpaceItem2
+            // 
+            emptySpaceItem2.Location = new System.Drawing.Point(0, 342);
+            emptySpaceItem2.Name = "emptySpaceItem2";
+            emptySpaceItem2.Size = new System.Drawing.Size(70, 312);
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = gridArtCompare;
+            layoutControlItem3.Location = new System.Drawing.Point(70, 342);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new System.Drawing.Size(394, 312);
+            layoutControlItem3.TextVisible = false;
             // 
             // CreateArticulMatrForm
             // 
@@ -830,10 +940,15 @@
             ((System.ComponentModel.ISupportInitialize)gridViewArtMatr).EndInit();
             ((System.ComponentModel.ISupportInitialize)customLayoutControl1).EndInit();
             customLayoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridArtCompare).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewArtCompare).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ResumeLayout(false);
         }
 
@@ -913,5 +1028,16 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private ArticulControl articulControl1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
+        private Core.Class.CustomGridControl gridArtCompare;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewArtCompare;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraGrid.Columns.GridColumn gcKoddCompare;
+        private DevExpress.XtraGrid.Columns.GridColumn gcGrupCompare;
+        private DevExpress.XtraGrid.Columns.GridColumn gcArticulCompare;
+        private DevExpress.XtraGrid.Columns.GridColumn gcModCompare;
+        private DevExpress.XtraGrid.Columns.GridColumn gcTMCompare;
     }
 }

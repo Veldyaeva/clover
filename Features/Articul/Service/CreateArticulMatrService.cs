@@ -1,6 +1,8 @@
 ﻿using Dapper;
+using DevExpress.CodeParser;
 using DevExpress.Utils.Gesture;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraScheduler.Native;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
@@ -12,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +45,11 @@ namespace SewingProduction.Features.Articul.Service
                     );
 
                 return new BindingList<CreateArticulMatrModel>(result.AsList());
+            }
+            catch (SqlException ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetMatrForArticulAsync");
+                return null;
             }
             catch (Exception ex)
             {
@@ -101,5 +109,35 @@ namespace SewingProduction.Features.Articul.Service
                 return null;
             }
         }
+
+        public async Task<BindingList<SpArtPreviewModel>> GetArticulsForCompareAsync(string articul)
+        {
+            try
+            {
+                articul = articul.Trim();
+                string substring = "-";
+                int indexOfSubstring = articul.IndexOf(substring);
+                if (indexOfSubstring > 0)
+                {
+                    articul = articul.Substring(0, indexOfSubstring);
+                }
+
+
+                string query = "select vsk.kod, vsk.kodd,vsk.articul,vsk.grup,vsk.mod,va.tmName "+
+                    "from dbo.view_spArticulKodd vsk "+
+                    "inner join view_art va on vsk.kod = va.kod "+
+                    "WHERE vsk.articul like @articul ";
+
+                return new BindingList<SpArtPreviewModel>(await _dbService.GetListAsync<SpArtPreviewModel>(query, new { articul = articul + "%" }));
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArticulsForCompareAsync");
+                return null;
+            }
+
+
+        }
+
     }
 }

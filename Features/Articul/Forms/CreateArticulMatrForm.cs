@@ -1,9 +1,11 @@
 ﻿using DevExpress.Mvvm.Native;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -24,14 +26,18 @@ namespace SewingProduction.Features.Articul.Forms
         private DatabaseHelper _dbHelper;
         private DbService _dbService;
         private CreateArticulMatrService _createArticulMatrService = new CreateArticulMatrService();
+        private ArticulDataService _articulDataService = new ArticulDataService();
         private readonly ILogger _logger = new FileLogger();
 
         private bool _isEditing = false; // флаг для отслеживания, находится ли грид в режиме редактирования
 
         private BindingSource _bindingSourceArtMatr;
+        private BindingSource _bindingSourceArticulCompare;
+
         //private BindingSource _bindingSourceGostGrupAll;
         private List<GostGrupIzdViewModel> _gostGroupAll;
 
+        private readonly BindingSource _bsDetails = new(); // источник для деталей
 
         public CreateArticulMatrForm(UserClass user) : base(user)
         {
@@ -42,10 +48,11 @@ namespace SewingProduction.Features.Articul.Forms
 
 
             _bindingSourceArtMatr = new BindingSource { };
+            _bindingSourceArticulCompare = new BindingSource { };
 
             //if (gridArtMatr != null) gridArtMatr.DataSource = _bindingSourceArtMatr;
             gridArtMatr.DataSource = _bindingSourceArtMatr;
-
+            gridArtCompare.DataSource = _bindingSourceArticulCompare;
 
         }
 
@@ -66,6 +73,8 @@ namespace SewingProduction.Features.Articul.Forms
             gridViewArtMatr.HideLoadingPanel();
             gridViewArtMatrEdit.HideLoadingPanel();
 
+            articulControl1.BindTo(_bsDetails);
+            articulControl1.IsReadOnly = true;
 
             InitializeBindings();
             BindGost();
@@ -82,7 +91,7 @@ namespace SewingProduction.Features.Articul.Forms
         private void SetPermisions()
         {
             gridArtMatr.MainView = _isEditing ? gridViewArtMatrEdit : gridViewArtMatr;
-
+            customSimpleButtonPermissions.Visible = false;
         }
         private void InitializeBindings()
         {
@@ -134,8 +143,14 @@ namespace SewingProduction.Features.Articul.Forms
             //запрет редактирования полей, которые не должны редактироваться напрямую пользователем, а заполняются через выбор из справочника и/или автоматически
             gcCertDateCertificationApproval.OptionsColumn.AllowEdit = false;
 
+            gcKoddCompare.FieldName = nameof(SpArtPreviewModel.Kodd);
+            gcGrupCompare.FieldName = nameof(SpArtPreviewModel.Grup);
+            gcArticulCompare.FieldName = nameof(SpArtPreviewModel.Articul);
+            gcModCompare.FieldName = nameof(SpArtPreviewModel.Mod);
+            gcTMCompare.FieldName = nameof(SpArtPreviewModel.tmName);
 
         }
+
         private async void BindGost()
         {
             try
@@ -293,8 +308,8 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                     else
                     {
-                        var res = await _createArticulMatrService.GetStatusForArticulAsync(_currentItem.Nn, _currentItem.Id_gost, _currentItem.Ag_id) ;
-                        if (res != null )
+                        var res = await _createArticulMatrService.GetStatusForArticulAsync(_currentItem.Nn, _currentItem.Id_gost, _currentItem.Ag_id);
+                        if (res != null)
                         {
                             _currentItem.DateCertificationApproval = res.DateCertificationApproval;
                             //обновляем только ячейку с датой утверждения, чтобы не сбрасывать фокус и не уходить из режима редактирования
@@ -311,6 +326,54 @@ namespace SewingProduction.Features.Articul.Forms
             catch (Exception ex)
             {
                 _logger.LogErrorAsync(ex, "Ошибка в gridViewArtMatrEdit_DoubleClick при утверждении госта");
+                throw;
+            }
+        }
+
+        private async void gridArtMatr_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                //var view = gridArtMatr.FocusedView as GridView;
+                //var currentRow = null as CreateArticulMatrModel ;
+
+                //if (view.SelectedRowsCount == 1)
+                //{
+                //    int rowHandle = view.GetSelectedRows()[0];
+                //    currentRow = view.GetRow(rowHandle) as CreateArticulMatrModel;
+                //}
+                // может отличаться от _bindingSourceArtMatr.Current, если включена мультивыделение и выделено несколько строк, тогда Current будет указывать на первую выделенную строку, а не на ту, на которую фактически кликнули.
+                // Поэтому лучше брать данные из самого грида по rowHandle, который точно соответствует строке, на которую кликнули.
+
+                var currentRow = _bindingSourceArtMatr.Current as CreateArticulMatrModel;
+                if (currentRow == null)
+                    return;
+
+                _bindingSourceArticulCompare.DataSource = await _createArticulMatrService.GetArticulsForCompareAsync(currentRow.Articul);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных для сравнения артикула");
+                throw;
+            }
+        }
+
+
+        private async void gridViewArtCompare_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                var currentRow = _bindingSourceArticulCompare.Current as SpArtPreviewModel;
+                string kod = currentRow?.Kod;
+                _bsDetails?.Clear();
+                if (string.IsNullOrEmpty(kod))
+                    return;
+
+                _bsDetails.DataSource = await _articulDataService.GetByKodAsync(kod);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных детализации артикула сравнения");
                 throw;
             }
         }
