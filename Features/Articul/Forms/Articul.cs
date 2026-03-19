@@ -1,10 +1,14 @@
-﻿using DevExpress.Data.Internal;
+using DevExpress.Data.Internal;
 using DevExpress.Office.Utils;
+using DevExpress.Utils.Extensions;
+using DevExpress.Xpf.Editors;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraEditors.ButtonsPanelControl;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraRichEdit.Model;
 using DevExpress.XtraVerticalGrid;
@@ -15,10 +19,10 @@ using SewingProduction.Core.Models;
 using SewingProduction.Extensions;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Articul.Helpers;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.Sprav;
-using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -30,7 +34,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.Office.PInvoke.Win32;
@@ -47,408 +53,457 @@ namespace SewingProduction.Features.Articul
         private readonly DatabaseHelper _dbHelperAce;
 
         private readonly DbService _dbService;
-        private UserClass _user;
+        private UserClass _currentUser;
         private readonly ILogger _logger = new FileLogger();
+        private const string LoggerContext = "Articul";
         //все поля таблицы Артикул
-        private SpArticulPreviewModel _articulByKod;
         KomplDataService komplService = new KomplDataService();
 
         private bool _isInitialized;
 
 
-        private BindingList<SpArticulPreviewModel> _articulBindingList;
+        private readonly BindingSource bsPreview = new(); // для грида
+        private readonly BindingSource bsDetails = new(); // для карточки/деталей
+        private readonly BindingList<SpArtPreviewModel> _previewList = new(); 
+        private int _loadVersion = 0;
 
         ArticulDataService _articulDataService = new ArticulDataService();
+
+        private void LogSuccess(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogEventAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogWarning(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogWarningAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogError(Exception ex, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.{scope}"));
+        }
+
+        private static async Task SafeLogAsync(Func<Task> writeLog)
+        {
+            try
+            {
+                await writeLog().ConfigureAwait(false);
+            }
+            catch
+            {
+                // Логирование не должно мешать работе формы.
+            }
+        }
+
         public Articul(UserClass user) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
             _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
-            _user = user;
-
-            //_artPreviewBindingList = new BindingList<SpArtPreviewModel>();
-
-            // ThemeManager.UpdateTheme(this);
+            _currentUser = user;
+            InitHeaderButtonTags();
         }
         private async Task RefreshArtPreviewAsync()
         {
+            var selectedKod = (bsPreview.Current as SpArtPreviewModel)?.Kod;
+            var selectedKodd = (bsPreview.Current as SpArtPreviewModel)?.Kodd;
 
-            bsArt?.Clear();
-            bsArt.DataSource = await _articulDataService.GetArtPreviewAsyncBindingList();
+            await ReloadPreviewAsync();
 
-        }
+            if (_previewList.Count == 0)
+            {
+                ArticulControlBindingHelper.ClearDetails(bsDetails);
+                articulControl1.ClearImage();
+                bsArtDr.DataSource = null;
+                bsSostKompl.DataSource = null;
+                bsSostNabor.DataSource = null;
+                UpdateTabsVisibility();
+                return;
+            }
 
+            var index = -1;
+            if (!string.IsNullOrWhiteSpace(selectedKod))
+            {
+                index = _previewList
+                    .ToList()
+                    .FindIndex(x => x.Kod == selectedKod && x.Kodd == selectedKodd);
 
-        private async void Articul_Load(object sender, EventArgs e)
-        {
+                if (index < 0)
+                    index = _previewList.ToList().FindIndex(x => x.Kod == selectedKod);
+            }
 
+            if (index < 0) index = 0;
+
+            gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
             try
             {
-                //загрузка перечня кодов из справочника, часть полей
+                bsPreview.Position = index;
+            }
+            finally
+            {
+                gridControl1.FocusedRowChanged += gridControl1_FocusedRowChanged;
+            }
+
+            if (bsPreview.Current is SpArtPreviewModel current)
+                await LoadArticulAsync(current.Kod, current.Kodd);
+        }
+        private async void Articul_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_isInitialized) return;
+
+                gridControl1.GridControl.DataSource = bsPreview;
+                bsPreview.DataSource = _previewList;
+
+                // карточка артикула
+                articulControl1.BindTo(bsDetails);
+                articulControl1.IsReadOnly = true;
+
+                //привязываем правую панель
+                InitializeBindings();
+
+                //обновляем состояние кнопки архива при загрузке
+                SyncArchiveButtonCaption();
+                _isInitialized = true;
+
                 await RefreshArtPreviewAsync();
-                if (!_isInitialized)
-                {
-                    await InitializeBindingsAsync();
-                    _isInitialized = true;
-                }
+                LogSuccess("Форма инициализирована и превью загружено.", nameof(Articul_Load));
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы Articul");
+                LogError(ex, nameof(Articul_Load));
             }
-
         }
-
-        private async Task InitializeBindingsAsync()
+        private async Task ReloadPreviewAsync()
+        {
+            gridControl1.ShowLoadingPanel();
+            try
+            {
+                var list = await _articulDataService.GetArtPreviewAsyncBindingList();
+                bsPreview.RaiseListChangedEvents = false;
+                try
+                {
+                    _previewList.Clear();
+                    foreach (var it in list)
+                        _previewList.Add(it);
+                }
+                finally
+                {
+                    bsPreview.RaiseListChangedEvents = true;
+                    bsPreview.ResetBindings(false);
+                }
+            }
+            finally
+            {
+                gridControl1.HideLoadingPanel();
+            }
+        }
+        private void InitializeBindings()
         {
             try
             {
-                //var artPreviewTask = Task.Run(() =>
-                //{
-                //загрузка перечня кодов из справочника, часть полей
+                // включить редактирование (если нужно)
+                // articulControl1.IsReadOnly = false;
 
-                _articulBindingList = new BindingList<SpArticulPreviewModel>();
-                bsArticul = new BindingSource { DataSource = _articulBindingList };
+             
+                // (желательно) чтобы при повторном вызове не плодились биндинги
+                chbIsUpak.DataBindings.Clear();
+                chbIsFurnit.DataBindings.Clear();
+                chkP.DataBindings.Clear();
+                chkV.DataBindings.Clear();
+                chkBus.DataBindings.Clear();
+                chkStra.DataBindings.Clear();
+                chkPres.DataBindings.Clear();
+                txbNormt.DataBindings.Clear();
+                txbSek.DataBindings.Clear();
+                txbSekVyaz.DataBindings.Clear();
+                txbSekShv.DataBindings.Clear();
+                txbSekKr.DataBindings.Clear();
+                txbSumZarpl.DataBindings.Clear();
+                txbSumDopOpl.DataBindings.Clear();
+                txbSumStrVznos.DataBindings.Clear();
+                txbSumSebRaskr.DataBindings.Clear();
+                txbSumKomplNum.DataBindings.Clear();
+                txbSebDop.DataBindings.Clear();
+                txbKoefPr.DataBindings.Clear();
+                txbKoefVedDG.DataBindings.Clear();
+                txbSebProizv.DataBindings.Clear();
+                txbKoef.DataBindings.Clear();
+                txbBrakAll.DataBindings.Clear();
 
-                //состав комплекта 
-                //_articulKomplSostList = new BindingList<SpArticulKomplSostModel>();
-                //bsSostKompl = new BindingSource { DataSource = _articulKomplSostList };
-
-                //});
-
-
-                #region заполнение блока основных данных артикула
-
-                txbKod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod), true, DataSourceUpdateMode.Never);
-                txbArticul.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Articul), true, DataSourceUpdateMode.Never);
-                txbMod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Mod), true);
-                txbTM.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.TmName), true);
-                txbSeason.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.SeasonName), true);
-                txbAssort.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.AssortName), true);
-                txbCountry.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.CountryName), true);
-                txbGrupMenName.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GrupMenName), true);
-                mtbDateOpis.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.DateOpis), true);
-                txbGrup.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Grup), true);
-                txbIdGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Id_gost), true);
-                txbNameGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GostName), true);
-                txbOpiGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GostOpi), true);
-                txbSost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost), true);
-                txbSost2.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost2), true);
-                txbSost3.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost3), true);
-                txbRazm.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Razm), true);
-                txbScNomer.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.ScNomer), true);
-                txbKodTnved.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod_tnved), true);
-                txbNDS.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Nds), true);
-
-                #endregion
-
-                #region галки с отделками
-                //chbArh.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Arh), true);
-                //chbKombDet.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_det), true);
-                //chbKombIzd.DataBindings.Add("Checked", _bindingSourceArtCommon, nameof(ArticulModel.Komb_izd), true);
-
+   #region галки с отделками
                 //галки вяз отделки
-                chbKombIzd.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_izd), true);
-                chbKombDet.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_det), true);
                 //архив
-                chbArh.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Arh), true);
-
                 //отделка
-                chbIsUpak.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Is_upak), true);
-                chbIsFurnit.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Is_furnit), true);
+                chbIsUpak.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.Is_upak), true);
+                //chbIsUpak.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.Is_upak), true, DataSourceUpdateMode.OnPropertyChanged);
+                chbIsFurnit.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.Is_furnit), true);
 
-                chkP.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.P), true);
-                chkV.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.V), true);
-                chkBus.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Bus), true);
-                chkStra.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Stra), true);
-                chkPres.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.P_pres), true);
+                chkP.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.P), true);
+                chkV.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.V), true);
+                chkBus.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.Bus), true);
+                chkStra.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.Stra), true);
+                chkPres.DataBindings.Add("Checked", bsDetails, nameof(SpArticulPreviewModel.P_pres), true);
                 #endregion
 
                 #region Затраты на изготовление
-                txbNormt.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Norm_t), true, DataSourceUpdateMode.Never);
+                txbNormt.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Norm_t), true, DataSourceUpdateMode.Never);
 
                 // TODO: добавить расчет полной с\ст на изделие по коду 
-                //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
+             //   txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
-                // нормы на полотно 
-                foreach (CustomTextBox el in cgbTkanNorm.Controls)
-                {
-                    char si = el.Name.Last();
-                    var name = $"Norm_t{si}";
-                    if (el.GetType() == typeof(CustomTextBox))
-                    {
-                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
-                        el.Text = string.Format("{0:F2}", el.Text);
-                    }
-                }
-                //себестоимость
-                foreach (CustomTextBox el in cgbTkanSeb.Controls)
-                {
-                    char si = el.Name.Last();
-                    var name = $"Seb_t{si}";
-                    if (el.GetType() == typeof(CustomTextBox))
-                    {
-                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
-                    }
-                }
-                // брак
-                foreach (CustomTextBox el in cgbTkanBrak.Controls)
-                {
-                    char si = el.Name.Last();
-                    //var name = $"nameof(SpArticulPreviewModel.Brak_t{si})";
-                    var name = $"Brak_t{si}";
-
-                    if (el.GetType() == typeof(CustomTextBox))
-                    {
-                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
-                        //el.Text = string.Format("{0:F2}", el.Text);
-                    }
-                }
-                // % брака 
-                foreach (CustomTextBox el in cgbBrakPercent.Controls)
-                {
-                    char si = el.Name.Last();
-                    var name = $"Brak_percent{si}";
-                    if (el.GetType() == typeof(CustomTextBox))
-                    {
-                        // вывод строки в формате 2 знака после запятой 
-                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never, null, "F2");
-
-                    }
-                }
-                // коэф-т качества полотна
-                foreach (CustomTextBox el in cgbKfKach.Controls)
-                {
-                    char si = el.Name.Last();
-                    var name = $"Kf_tkan_kach{si}";
-                    if (el.GetType() == typeof(CustomTextBox))
-                    {
-                        // вывод строки в формате 2 знака после запятой 
-                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never, null, "F2");
-                    }
-                }
-                // назначение полотна 
-                foreach (CustomTextBox el in cgbTkanPurpose.Controls)
-                {
-                    char si = el.Name.Last();
-                    var name = $"Opis_t{si}";
-                    if (el.GetType() == typeof(CustomTextBox))
-                    {
-                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
-                    }
-                }
+                // нормы/себестоимость/брак и назначение полотна
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "Norm_t", "F2", true);
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "Seb_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t", "F2", true );
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "Brak_percent");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "Kf_tkan_kach", "F2");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "Opis_t");
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "tkb", "Tkb");
 
                 #endregion
 
+                #region брак
+                txbBrakAll.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Brak_avg), true, DataSourceUpdateMode.Never);
+                txbSeb.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Cena_prdc),true, DataSourceUpdateMode.Never);
+
+                #endregion
                 #region Норма/сек + зарплата 
 
-                txbSek.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek), true, DataSourceUpdateMode.Never);
-                txbSekVyaz.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek_vyaz), true, DataSourceUpdateMode.Never);
-                txbSekShv.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek_shv), true, DataSourceUpdateMode.Never);
-                txbSekKr.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek_kr), true, DataSourceUpdateMode.Never);
+                txbSek.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sek), true, DataSourceUpdateMode.Never);
+                txbSekVyaz.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sek_vyaz), true, DataSourceUpdateMode.Never);
+                txbSekShv.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sek_shv), true, DataSourceUpdateMode.Never);
+                txbSekKr.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sek_kr), true, DataSourceUpdateMode.Never);
                 //зарплата
-                txbSumZarpl.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_zarpl), true, DataSourceUpdateMode.Never);
-                txbSumDopOpl.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_dopopl), true, DataSourceUpdateMode.Never);
-                txbSumStrVznos.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_strvznos), true, DataSourceUpdateMode.Never);
-                txbSumSebRaskr.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_sebraskr), true, DataSourceUpdateMode.Never);
-                txbSumKomplNum.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_komplnum), true, DataSourceUpdateMode.Never);
-
-
+                txbSumZarpl.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_zarpl), true, DataSourceUpdateMode.Never);
+                txbSumDopOpl.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_dopopl), true, DataSourceUpdateMode.Never);
+                txbSumStrVznos.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_strvznos), true, DataSourceUpdateMode.Never);
+                txbSumSebRaskr.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_sebraskr), true, DataSourceUpdateMode.Never);
+                txbSumKomplNum.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Sum_komplnum), true, DataSourceUpdateMode.Never);
+                txbSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_rekom), true, DataSourceUpdateMode.Never);
+                txbCalcSebRecom.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Calc_seb_rekom), true, DataSourceUpdateMode.Never);
                 #endregion
 
                 #region коэфициенты
 
-                txbSebDop.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb_dop), true, DataSourceUpdateMode.Never);
-                txbKoefPr.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Koef_pr), true, DataSourceUpdateMode.Never);
-                txbKoefVedDG.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Koef_d), true, DataSourceUpdateMode.Never);
-                txbSebProizv.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb_proizv), true, DataSourceUpdateMode.Never);
-                txbKoef.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Koef), true, DataSourceUpdateMode.Never);
+                txbSebDop.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_dop), true, DataSourceUpdateMode.Never);
+                txbKoefPr.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Koef_pr), true, DataSourceUpdateMode.Never);
+                txbKoefVedDG.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Koef_d), true, DataSourceUpdateMode.Never);
+                txbSebProizv.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Seb_proizv), true, DataSourceUpdateMode.Never);
+                txbKoef.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Koef), true, DataSourceUpdateMode.Never);
                 #endregion
 
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
+                LogError(ex, nameof(InitializeBindings));
                 throw;
             }
 
         }
 
-        /// <summary>
-        /// Получение фурнитуры по коду справочника
-        /// </summary>
-        /// <param name="kod"></param>
-        /// <returns></returns>
-        private async Task getArtDrForKodAsync(string kod)
+        private static void BindTextBoxesBySuffix(
+            Control container,
+            BindingSource source,
+            string controlNamePrefix,
+            string propertyPrefix,
+            string format = null,
+            bool formatCurrentText = false)
         {
-            try
+            var modelType = typeof(SpArticulPreviewModel);
+            var candidates = 0;
+            var bound = 0;
+            var skippedNoSuffix = 0;
+            var skippedMissingProperty = 0;
+
+            foreach (Control control in GetAllControls(container))
             {
-                bsArtDr?.Clear();
+                if (string.IsNullOrWhiteSpace(control.Name)) continue;
+                if (!control.Name.StartsWith(controlNamePrefix, StringComparison.Ordinal)) continue;
+                candidates++;
 
-                var _artDrForKod = await _articulDataService.GetArtDrByKodAsync(kod);
-
-                if (_artDrForKod != null)
+                var suffix = GetNumericSuffix(control.Name);
+                if (suffix == null)
                 {
-                    await this.InvokeAsync(() =>
-                    {
-
-                        bsArtDr.DataSource = _artDrForKod; // Привязываем данные к форме
-
-                    });
+                    skippedNoSuffix++;
+                    Debug.WriteLine($"[BindTextBoxesBySuffix] No numeric suffix for control: {control.Name}");
+                    continue;
                 }
+
+                var expectedPropertyName = propertyPrefix + suffix;
+                var modelProperty = modelType.GetProperty(
+                    expectedPropertyName,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase);
+
+                if (modelProperty == null)
+                {
+                    skippedMissingProperty++;
+                    Debug.WriteLine($"[BindTextBoxesBySuffix] Property not found: {expectedPropertyName} for control {control.Name}");
+                    continue;
+                }
+
+                var propertyName = modelProperty.Name;
+
+                var bindProperty = "Text";
+                if (control is DevExpress.XtraEditors.BaseEdit)
+                    bindProperty = "EditValue";
+
+                control.DataBindings.Clear();
+                control.DataBindings.Add(
+                    bindProperty,
+                    source,
+                    propertyName,
+                    true,
+                    DataSourceUpdateMode.Never,
+                    null,
+                    format);
+
+                //if (formatCurrentText && control is TextEdit tb &&// || ( formatCurrentText && control is TextEdit tb )&&
+                //    decimal.TryParse(tb.Text, out var value))
+                //{
+                //    tb.Text = value.ToString("F2");
+                //}
+                if (formatCurrentText && control is CustomTextBox tb &&// || ( formatCurrentText && control is TextEdit tb )&&
+                    decimal.TryParse(tb.Text, out var value))
+                {
+                    tb.Text = value.ToString("F2");
+                }
+
+                bound++;
             }
-            catch (Exception ex)
+
+            Debug.WriteLine(
+                $"[BindTextBoxesBySuffix] Prefix={controlNamePrefix}; PropertyPrefix={propertyPrefix}; " +
+                $"Candidates={candidates}; Bound={bound}; NoSuffix={skippedNoSuffix}; MissingProperty={skippedMissingProperty}");
+        }
+
+        private static IEnumerable<Control> GetAllControls(Control root)
+        {
+            foreach (Control c in root.Controls)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных GetArtDrByKod для kod {kod}");
+                yield return c;
+                foreach (var child in GetAllControls(c))
+                    yield return child;
             }
         }
-        private async Task getArticulFromSQlAsync(string kod)
+
+        private static string GetNumericSuffix(string name)
         {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+
+            var i = name.Length - 1;
+            while (i >= 0 && char.IsDigit(name[i])) i--;
+
+            var start = i + 1;
+            if (start >= name.Length) return null;
+            return name.Substring(start);
+        }
+
+
+        private async Task LoadArticulAsync(string kod, string kodd)
+        {
+            var version = ++_loadVersion;
+
+            gridControl1.ShowLoadingPanel();
             try
             {
-                // отображение панели загрузки
-                gridControl1.ShowLoadingPanel();
-                bsArticul?.Clear();
+                var detailsTask = _articulDataService.GetByKodAsync(kod);
+                var artDrTask = _articulDataService.GetArtDrByKodAsync(kod);
+                var komplTask = _articulDataService.GetSostavkomplForKod(kod);
+                var naborTask = _articulDataService.GetSostavNaborForKod(kod);
+                var imageTask = articulControl1.LoadImageAsync(kodd);
 
-                _articulByKod = await _articulDataService.GetByKodAsync(kod);
+                await Task.WhenAll(detailsTask, artDrTask, komplTask, naborTask, imageTask);
 
-                if (_articulByKod != null)
-                {
-                    await this.InvokeAsync(() =>
-                    {
-                        bsArticul.DataSource = _articulByKod; // Привязываем данные к форме
-                    });
-                }
+                if (version != _loadVersion) return;
+
+                var details = await detailsTask;
+                ArticulControlBindingHelper.SetDetails(bsDetails, details);
+
+                bsArtDr.DataSource = await artDrTask;
+                bsSostKompl.DataSource = await komplTask;
+                bsSostNabor.DataSource = await naborTask;
+                bsSostKompl.ResetBindings(false);
+                bsSostNabor.ResetBindings(false);
+
+                UpdateTabsVisibility();
+                LogSuccess($"Детали артикула загружены: Kod={kod}, Kodd={kodd}.", nameof(LoadArticulAsync));
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для kod {kod}");
+                LogError(ex, $"{nameof(LoadArticulAsync)}:{kod}");
             }
             finally
             {
-                // скрытие панели загрузки
                 gridControl1.HideLoadingPanel();
             }
         }
-        private async Task getSostKomplFromSQlAsync(string kod)
+        private void UpdateTabsVisibility()
         {
-            try
-            {
-                bsSostKompl?.Clear();
-
-                var articulByKodTemp = await _articulDataService.GetSostavkomplForKod(kod);
-
-                if (articulByKodTemp != null)
-                {
-
-                    await this.InvokeAsync(() =>
-                    {
-                        //_articulKomplSostList = articulByKodTemp;                // Обновляем текущую модель
-                        bsSostKompl.DataSource = articulByKodTemp; // Привязываем данные к форме
-
-                    });
-                }
-
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostKomplFromSQlAsync для kod {kod}");
-            }
+            cTabPage1.PageVisible = bsSostKompl.Count > 0;
+            cTabPage2.PageVisible = bsSostNabor.Count > 0;
         }
-        private async Task getSostNaborFromSQlAsync(string kod)
-        {
-            try
-            {
-                bsSostNabor?.Clear();
-
-                var articulByKodTemp = await _articulDataService.GetSostavNaborForKod(kod);
-
-                if (articulByKodTemp != null)
-                {
-
-                    await this.InvokeAsync(() =>
-                    {
-
-                        bsSostNabor.DataSource = articulByKodTemp; // Привязываем данные к форме
-
-                    });
-                    bsSostNabor.ResetBindings(false);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostNaborFromSQlAsync для kod {kod}");
-            }
-        }
-
-
-        /// <summary>
-        /// обновлениме данных на форме по коду при перемещении по таблице артикулов
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            string kod = "";
-            string kodd = "";
-
             try
             {
-                var currentRow = bsArt.Current as SpArtPreviewModel;
-
-                if (currentRow != null)
-                {
-                    kod = currentRow.Kod;
-                    kodd = currentRow.Kodd;
-
-
-                    Task getDataTask = getArticulFromSQlAsync(kod);
-                    Task getArtDrDataTask = getArtDrForKodAsync(kod);
-                    Task getKomplSostDataTask = getSostKomplFromSQlAsync(kod);
-                    Task getNaborSostDataTask = getSostNaborFromSQlAsync(kod);
-                    Task<string> getImagePathTask = _articulDataService.GetFileEskizForKod(kodd);
-
-                    await Task.WhenAll(getDataTask, getArtDrDataTask, getKomplSostDataTask, getNaborSostDataTask, getImagePathTask);
-
-                    cTabPage1.PageVisible = false;
-                    cTabPage2.PageVisible = false;
-
-                    switch (bsSostKompl.Current, bsSostNabor.Current)
-                    {
-
-                        case (not null, null):
-
-                            cTabPage1.PageVisible = true;
-                            break;
-                        case (null, not null):
-                            cTabPage2.PageVisible = true;
-                            break;
-                        default:
-                            cTabPage1.PageVisible = false;
-                            cTabPage2.PageVisible = false;
-                            break;
-                    }
-                    // получение изображения по пути
-                    string imagePath = getImagePathTask.Result;
-                    pictureBoxArticul.ImageLocation = !string.IsNullOrEmpty(imagePath) ? imagePath : null;
-
-                }
+                if (bsPreview.Current is not SpArtPreviewModel cur) return;
+                await LoadArticulAsync(cur.Kod, cur.Kodd);
             }
             catch (Exception ex)
             {
-
-                await _logger.LogErrorAsync(ex, $"Ошибка получения данных gridControl1_FocusedRowChanged для kod {kod}");
-
+                LogError(ex, nameof(gridControl1_FocusedRowChanged));
             }
         }
-        /// <summary>
+
+        ///// <summary>
+        ///// обновлениме данных на форме по коду при перемещении по таблице артикулов
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private async void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        //{
+        //    var current = bsPreview.Current as SpArtPreviewModel;
+        //    if (current == null) return;
+
+        //    var kod = current.Kod;
+        //    var kodd = current.Kodd;
+
+        //    gridControl1.ShowLoadingPanel();
+        //    try
+        //    {
+        //        var detailsTask = _articulDataService.GetByKodAsync(kod);
+        //        var artDrTask = _articulDataService.GetArtDrByKodAsync(kod);
+        //        var komplTask = _articulDataService.GetSostavkomplForKod(kod);
+        //        var naborTask = _articulDataService.GetSostavNaborForKod(kod);
+
+        //        await Task.WhenAll(detailsTask, artDrTask, komplTask, naborTask);
+
+        //        var details = await detailsTask;
+
+        //        // ВАЖНО: меняем DataSource у одного bsDetails, ничего не пересоздаём
+        //        bsDetails.DataSource = details;
+        //        bsDetails.ResetBindings(false);
+
+        //        bsArtDr.DataSource = await artDrTask;
+        //        bsSostKompl.DataSource = await komplTask;
+        //        bsSostNabor.DataSource = await naborTask;
+        //        bsSostNabor.ResetBindings(false);
+
+        //        UpdateTabsVisibility();
+        //    }
+        //    finally
+        //    {
+        //        gridControl1.HideLoadingPanel();
+        //    } }
+        ///// <summary>
         /// вызывает карточку по коду из справочника ШП
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void customButtonKart_Click(object sender, EventArgs e)
+        private void customButtonKart_Click(object sender, EventArgs e)
         {
             string kod = "";
             try
@@ -456,7 +511,7 @@ namespace SewingProduction.Features.Articul
                 GetItogVibKartReport report = new GetItogVibKartReport();
                 report.RequestParameters = false;
 
-                var currentRow = bsArt.Current as SpArtPreviewModel;
+                var currentRow = bsPreview.Current as SpArtPreviewModel;
                 if (currentRow != null)
                 {
                     kod = currentRow.Kod;
@@ -488,7 +543,7 @@ namespace SewingProduction.Features.Articul
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка получения данных customButtonKart_Click для kod {kod} для отображенияк карточки");
+                LogError(ex, $"{nameof(customButtonKart_Click)}:{kod}");
                 kod = "";
             }
 
@@ -501,19 +556,21 @@ namespace SewingProduction.Features.Articul
         private async void customButtonCopy_Click(object sender, EventArgs e)
         {
             //var current = bsArt.Current as SpArtPreviewModel;
-            var kodObj = (bsArt.Current as SpArtPreviewModel).Kod;
+            var kodObj = (bsPreview.Current as SpArtPreviewModel).Kod;
             if (kodObj == null)
             {
                 MessageBox.Show("Не выбран артикул для копирования.", "Внимание",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning("Не выбран артикул для копирования.", nameof(customButtonCopy_Click));
                 return;
             }
 
-            using (EditArticul f = new EditArticul(_user, kodObj.ToString()))
+            using (EditArticul f = new EditArticul(_currentUser, kodObj.ToString()))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     await RefreshArtPreviewAsync();
+                    LogSuccess("Код успешно скопирован через форму EditArticul.", nameof(customButtonCopy_Click));
                 }
             }
         }
@@ -525,10 +582,11 @@ namespace SewingProduction.Features.Articul
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
-            var kodObj = (bsArt.Current as SpArtPreviewModel).Kod;
+            var kodObj = (bsPreview.Current as SpArtPreviewModel).Kod;
             if (komplService.CheckNabor(kodObj))
             {
                 MessageBox.Show("Комплектовать НАБОРЫ нельзя", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning("Попытка комплектовать артикул, являющийся набором.", nameof(customButtonKompl_Click));
                 return;
             }
             if (this.MdiParent is SpMainForm mainForm)
@@ -539,11 +597,12 @@ namespace SewingProduction.Features.Articul
 
         private async void csButtonNew_Click(object sender, EventArgs e)
         {
-            using (EditArticul f = new EditArticul(_user))
+            using (EditArticul f = new EditArticul(_currentUser))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     await RefreshArtPreviewAsync();
+                    LogSuccess("Создан новый артикул через форму EditArticul.", nameof(csButtonNew_Click));
                 }
             }
         }
@@ -556,32 +615,33 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                var kod = (bsArt.Current as SpArtPreviewModel).Kod;
+                var kod = (bsPreview.Current as SpArtPreviewModel).Kod;
 
                 string query = "exec dbo.kodArticulisUsed @kod = @kod";
                 DataTable result = await _dbHelperAce.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
 
-                var cuRow = (SpArtPreviewModel)bsArt.Current;
+                var cuRow = (SpArtPreviewModel)bsPreview.Current;
 
                 if (result.Rows.Count > 0)
                 {
-                    //return result.Rows[0]["fio"].ToString(); 
                     if (result.Rows[0].Field<int>("error") != 0)
                     {
                         MessageBox.Show("Ошибка удаления" + result.Rows[0].Field<string>("messageerror"));
+                        LogWarning("Удаление артикула отклонено БД: " + result.Rows[0].Field<string>("messageerror"), nameof(sButtodDeleteKod_Click));
                         return;
                     }
                     //удаление кода 
 
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
-                    bsArt.RemoveCurrent();
+                    bsPreview.RemoveCurrent();
+                    LogSuccess($"Артикул удален: Kod={cuRow?.Kod}", nameof(sButtodDeleteKod_Click));
                 }
                 result?.Dispose();
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
+                LogError(ex, nameof(sButtodDeleteKod_Click));
             }
         }
         /// <summary>
@@ -591,14 +651,14 @@ namespace SewingProduction.Features.Articul
         /// <param name="e"></param>
         private void customButton3_Click(object sender, EventArgs e)
         {
-            var Obj = bsArt.Current as SpArtPreviewModel;
+            var Obj = bsPreview.Current as SpArtPreviewModel;
             //нужно добавить проверку на признак НАБОРА, чтобы можно было открыть только набор.
-            //Debug.WriteLine(Obj.Gost);
 
             ArticulNaborSostavDataService _ANSDataService = new ArticulNaborSostavDataService();
             if (_ANSDataService.CheckOpis(Obj.Kod))
             {
                 MessageBox.Show("Набор уже описан, изменения применятся на весь размерный ряд!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning($"Набор уже описан: Kod={Obj.Kod}. Изменения применятся ко всему размерному ряду.", nameof(customButton3_Click));
             }
             if (this.MdiParent is SpMainForm mainForm)
             {
@@ -617,10 +677,11 @@ namespace SewingProduction.Features.Articul
             if (gridView == null || gridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LogWarning("Попытка редактирования без выбранного артикула.", nameof(EditArtciul));
                 return;
             }
-            var kodd = (bsArt.Current as SpArtPreviewModel).Kodd;
-            var articul = (bsArt.Current as SpArtPreviewModel).Articul.Trim();
+            var kodd = (bsPreview.Current as SpArtPreviewModel).Kodd;
+            var articul = (bsPreview.Current as SpArtPreviewModel).Articul.Trim();
 
             if (this.MdiParent is SpMainForm mainForm)
             {
@@ -670,21 +731,19 @@ namespace SewingProduction.Features.Articul
         }
         #endregion
 
-        private async void csButtonEdit_Click(object sender, EventArgs e)
+        private void csButtonEdit_Click(object sender, EventArgs e)
         {
-            EditArtciul(gridControl1, bsArt);
+            EditArtciul(gridControl1, bsPreview);
 
         }
 
         private void Articul_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //освобождение ресурсов загруженных в статических полях для справочников при редактировании артикула
-            //CommonSpravArticulEditAdvance.Clear();
 
             gridControl1.FocusedRowChanged -= gridControl1_FocusedRowChanged;
 
             // Отвязать BindingSource
-            bsArt.DataSource = null;
+            bsPreview.DataSource = null;
 
             // Dispose DevExpress контролов
             gridControl1?.Dispose();
@@ -699,14 +758,133 @@ namespace SewingProduction.Features.Articul
 
         }
 
-        private void PublishedArticles_Click(object sender, EventArgs e)
+        #region headerButtons
+        /// <summary>
+        /// Инициализирует теги для кнопок в заголовке групп
+        /// </summary>
+        private void InitHeaderButtonTags()
         {
-            if (this.MdiParent is SpMainForm mainForm)
+            // layoutControlGroup1 — основная группа с гридом
+            TagByCaption(layoutControlGroup1, new (string caption, string tag)[] {
+                ("Карточка", "articulCard"),
+                ("Архив", "arch"),
+            });
+
+        }
+
+        /// <summary>
+        /// Проставляет теги кнопкам по их подписям
+        /// </summary>
+        private void TagByCaption(LayoutControlGroup group, IEnumerable<(string caption, string tag)> map)
+        {
+            if (group == null || group.CustomHeaderButtons == null) return;
+
+            foreach (var (caption, tag) in map)
             {
-                mainForm.OpenForm(new CreateArticulMatrForm(CurrentUser.User));
-                /*using (CreateArticulMatrForm f = new CreateArticulMatrForm(_user))
-                { }*/
+                var btn = group.CustomHeaderButtons
+                               .OfType<GroupBoxButton>()
+                               .FirstOrDefault(b => string.Equals(b.Caption, caption, StringComparison.OrdinalIgnoreCase));
+                if (btn != null && (btn.Tag == null || string.IsNullOrWhiteSpace(btn.Tag.ToString())))
+                {
+                    btn.Tag = tag;
+                }
             }
         }
+        private void layoutControlGroup1_CustomButtonClick_1(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                string tag = button.Tag?.ToString() ?? string.Empty;
+
+                switch (tag)
+                {
+                    case "articulCard":
+                        customButtonKart_Click(sender, EventArgs.Empty);
+                        break;
+                    default:
+                        // Если тег не установлен, пытаемся определить по Caption
+                        string caption = button.Caption ?? string.Empty;
+                        if (caption.Contains("Карточка", StringComparison.OrdinalIgnoreCase))
+                        {
+                            customButtonKart_Click(sender, EventArgs.Empty);
+                        }
+                        break;
+                }
+            }
+
+        }
+
+        private void layoutControlGroup1_CustomButtonChecked(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                //string tag = button.Tag?.ToString() ?? string.Empty;
+
+                //switch (tag)
+                //{
+                //    case "arch":
+                //        // архив
+                //        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+                //        break;
+                //    default:
+                //        // Если тег не установлен, пытаемся определить по Caption
+                //        string caption = button.Caption ?? string.Empty;
+                //        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
+                //        {
+                //            //архив
+                //        }
+                //        break;
+                //}
+                SyncArchiveButtonCaption();
+            }
+
+        }
+
+        private void layoutControlGroup1_CustomButtonUnchecked(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            if (sender is LayoutControlGroup group && e.Button is GroupBoxButton button)
+            {
+                //string tag = button.Tag?.ToString() ?? string.Empty;
+
+                //switch (tag)
+                //{
+                //    case "arch":
+                //        // архив
+                //        button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+
+                //        break;
+                //    default:
+                //        // Если тег не установлен, пытаемся определить по Caption
+                //        string caption = button.Caption ?? string.Empty;
+                //        if (caption.Contains("Архив", StringComparison.OrdinalIgnoreCase))
+                //        {
+                //            //архив
+                //        }
+                //        break;
+                //}
+                SyncArchiveButtonCaption();
+            }
+
+        }
+        private void SyncArchiveButtonCaption()
+        {
+            foreach (var btn in layoutControlGroup1.CustomHeaderButtons)
+            {
+                if (btn is not GroupBoxButton button) continue;
+
+                // Найти именно чек-кнопку "Архив"
+                var isArchiveButton =
+                    button.Style == DevExpress.XtraBars.Docking2010.ButtonStyle.CheckButton &&
+                    (button.Tag?.ToString() == "arch" ||
+                     (button.Caption?.Contains("Архив", StringComparison.OrdinalIgnoreCase) ?? false));
+
+                if (!isArchiveButton) continue;
+
+                button.Tag = "arch"; // зафиксировать идентификатор
+                button.Caption = button.Checked ? "✔ Архив" : "✖ Архив";
+                break;
+            }
+        }
+        #endregion
     }
 }

@@ -2,6 +2,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -24,12 +25,42 @@ namespace SewingProduction.Features.Articul.Forms
         private readonly DatabaseHelper _dbHelperAce;
         private bool _isInitialized;
         private readonly ILogger _logger = new FileLogger();
+        private const string LoggerContext = "ArticulControl";
         private readonly DbService _dbService;
+        private readonly ArticulDataService _articulDataService = new ArticulDataService();
         private readonly Dictionary<Control, System.Reflection.PropertyInfo> _controlToArtNormProperty = new Dictionary<Control, System.Reflection.PropertyInfo>();
         //private readonly BindingSource _bs = new BindingSource();
         private readonly DXErrorProvider _dx = new DXErrorProvider();
 
         private bool _isReadOnly = true;
+
+        private void LogSuccess(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogEventAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogWarning(string message, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogWarningAsync(message, $"{LoggerContext}.{scope}"));
+        }
+
+        private void LogError(Exception ex, string scope)
+        {
+            _ = SafeLogAsync(() => _logger.LogErrorAsync(ex, $"{LoggerContext}.{scope}"));
+        }
+
+        private static async Task SafeLogAsync(Func<Task> writeLog)
+        {
+            try
+            {
+                await writeLog().ConfigureAwait(false);
+            }
+            catch
+            {
+                // Логирование не должно ломать UI.
+            }
+        }
+
         public bool IsReadOnly
         {
             get => _isReadOnly;
@@ -66,6 +97,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             InitializeBindings();
             ApplyReadOnlyState();
+            LogSuccess("BindingSource успешно привязан к карточке артикула.", nameof(BindTo));
         }
 
         public void BindModel(SpArticulPreviewModel model)
@@ -81,6 +113,25 @@ namespace SewingProduction.Features.Articul.Forms
             txbKod.Text = kod;
         }
 
+        public async Task LoadImageAsync(string kodd)
+        {
+            if (string.IsNullOrWhiteSpace(kodd))
+            {
+                ClearImage();
+                LogWarning("Пустой Kodd при загрузке эскиза, изображение очищено.", nameof(LoadImageAsync));
+                return;
+            }
+
+            var imagePath = await _articulDataService.GetFileEskizForKod(kodd);
+            pictureBoxArticul.ImageLocation = string.IsNullOrWhiteSpace(imagePath) ? null : imagePath;
+        }
+
+        public void ClearImage()
+        {
+            pictureBoxArticul.ImageLocation = null;
+            pictureBoxArticul.Image = null;
+        }
+
         private async void ArticulControl_Load(object sender, EventArgs e)
         {
             try
@@ -94,10 +145,11 @@ namespace SewingProduction.Features.Articul.Forms
 
                 ApplyReadOnlyState();      // учитываем начальный режим
                 _isInitialized = true;
+                LogSuccess("Контрол артикула успешно инициализирован.", nameof(ArticulControl_Load));
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы Articul");
+                LogError(ex, nameof(ArticulControl_Load));
             }
         }
 
@@ -257,7 +309,7 @@ namespace SewingProduction.Features.Articul.Forms
             _controlToArtNormProperty[chbKombIzd] = artType.GetProperty(nameof(SpArticulPreviewModel.KombIzdFlag));
             _controlToArtNormProperty[chbKombDet] = artType.GetProperty(nameof(SpArticulPreviewModel.KombDetFlag));
             //архив
-            _controlToArtNormProperty[chbArh] = artType.GetProperty(nameof(SpArticulPreviewModel.ArhFlag));
+          //  _controlToArtNormProperty[chbArh] = artType.GetProperty(nameof(SpArticulPreviewModel.ArhFlag));
 
             #endregion
 

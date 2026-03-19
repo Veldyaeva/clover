@@ -38,8 +38,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service
         /// <returns>Список укороченной модели <see cref="KnitterPZVModel"/> для отображения.</returns>
         public async Task<List<KnitterPZVModel>> GetPlanByTabAsync(int tab)
         {
-            // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 14 часов
-            return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 14m);
+            // Базовый путь всегда через SP4: закрытая смена, только неназначенные, без завершённых, лимит 25 часов
+            return await GetPlanByTabAsync(tab, kwsId: 0, kmaId: null, onlyUnassigned: true, expandAssignedByNrId: false, maxHours: 25m);
         }
 
         /// <summary>
@@ -440,50 +440,50 @@ WHERE pzvID = @pzvId;
             }
         }
 
-		public async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact)
-		{
-			try
-			{
-				using (var connection = _dbHelper.GetConnection())
-				{
-					var parameters = new
-					{
-						pzvId,
-						mode,
-						qtyFact,
-						userName = (string)null
-					};
-					var ids = new List<PzvSplitResult>();
-					using (var grid = await connection.QueryMultipleAsync(
+        public async Task<IReadOnlyList<PzvSplitResult>> SplitPzvByModeAsync(int pzvId, int mode, int qtyFact)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var parameters = new
+                    {
+                        pzvId,
+                        mode,
+                        qtyFact,
+                        userName = (string)null
+                    };
+                    var ids = new List<PzvSplitResult>();
+                    using (var grid = await connection.QueryMultipleAsync(
                         "dbo.PZV_Split",
-						param: parameters,
-						commandTimeout: 60,
-						commandType: CommandType.StoredProcedure))
-					{
-                       if(mode==2)
-                        if (!grid.IsConsumed) //не нужно выкидывать первый набор, там данные
+                        param: parameters,
+                        commandTimeout: 60,
+                        commandType: CommandType.StoredProcedure))
+                    {
+                        if (mode == 2)
+                            if (!grid.IsConsumed) //не нужно выкидывать первый набор, там данные
+                            {
+                                try
                                 {
-                                    try
-                                        {
-                                            var head = await grid.ReadAsync();
-                                            // ignore head set if present
-                                        }
-                                    catch { }
+                                    var head = await grid.ReadAsync();
+                                    // ignore head set if present
                                 }
+                                catch { }
+                            }
                         if (!grid.IsConsumed)
-						    {
-							    var newIds = await grid.ReadAsync<PzvSplitResult>();
-							    ids.AddRange(newIds);
-						    }
-					}
-					return ids;
-				}
-			}
-			catch (Exception ex)
-			{
-				throw new Exception($"SplitPzvByModeAsync failed (pzvId={pzvId}, mode={mode}, qtyFact={qtyFact})", ex);
-			}
-		}
+                        {
+                            var newIds = await grid.ReadAsync<PzvSplitResult>();
+                            ids.AddRange(newIds);
+                        }
+                    }
+                    return ids;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"SplitPzvByModeAsync failed (pzvId={pzvId}, mode={mode}, qtyFact={qtyFact})", ex);
+            }
+        }
 
 
         public async Task<IEnumerable<MachineHoursStat>> AdjustNotStartedBeforeShiftEndAsync(
@@ -526,22 +526,30 @@ WHERE pzvID = @pzvId;
                 {
                     using (var tx = connection.BeginTransaction())
                     {
-                        const string sqlMain = @"
+                        var kwsId = 0;
+                        try
+                        {
+                            const string sqlMain = @"
 INSERT INTO ACE.dbo.knitWorkingShiftNew (kwsTabStart, kwsKmaID, kwsKmsID, kwsDateStart)
 VALUES (@tabStart, @kmaId, @kmsID, GETDATE());
 SELECT CAST(SCOPE_IDENTITY() AS int);";
-                        var kwsId = await connection.ExecuteScalarAsync<int>(sqlMain, new { tabStart, kmaId, kmsId, kmaNum }, transaction: tx);
+                            kwsId = await connection.ExecuteScalarAsync<int>(sqlMain, new { tabStart, kmaId, kmsId, kmaNum }, transaction: tx);
 
-                        // запись машин зоны в таблицу knitWorkingShiftMachineListNew
-                        const string sqlList = @"
+                            // запись машин зоны в таблицу knitWorkingShiftMachineListNew
+                            const string sqlList = @"
 INSERT INTO ACE.dbo.knitWorkingShiftMachineListNew (kwsmlKwsID, kwsmlKmlID, kwsmlKodOb, kiwsmlLongRep)
 SELECT @kwsId, mlv.kmlID, mlv.kmlKodOb, mlv.kmlLongRep
 FROM ACE.dbo.knitMachineList_view mlv
 WHERE mlv.kmlKmaID = @kmaId;";
-                        await connection.ExecuteAsync(sqlList, new { kwsId, kmaId }, transaction: tx);
-
-                        tx.Commit();
+                            await connection.ExecuteAsync(sqlList, new { kwsId, kmaId }, transaction: tx);
+                        }
+                        catch (Exception ex) { tx.Rollback(); return kwsId; }
+                        finally
+                        {
+                            tx.Commit();
+                        }
                         return kwsId;
+
                     }
                 }
             }
