@@ -15,10 +15,10 @@ namespace SewingProduction.Features.UserDistribution.Models
         private readonly DbService _dbService;
         private readonly DatabaseHelper _dbHelper;
 
-        public UserRoleDataService(DatabaseHelper dbHelper)
+        public UserRoleDataService()
         {
-            _dbHelper = dbHelper;
-            _dbService = new DbService(dbHelper);
+            _dbHelper = new DatabaseHelper();
+            _dbService = new DbService(_dbHelper);
         }
         public async Task<int> AssignRoleAsync(int userId, int roleId)
         {
@@ -36,7 +36,8 @@ namespace SewingProduction.Features.UserDistribution.Models
                    CASE WHEN ur.UserID IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS HasRole,
                    @UserID AS UserID
             FROM Roles r
-            LEFT JOIN UserRoles ur ON r.RoleID = ur.RoleID AND ur.UserID = @UserID";
+            LEFT JOIN UserRoles ur ON r.RoleID = ur.RoleID AND ur.UserID = @UserID
+            WHERE ur.UserID IS NOT NULL";
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@UserID", userId } });
         }
         public async Task<List<int>> GetRoleIdsByUser(int userId)

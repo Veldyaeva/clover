@@ -132,7 +132,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
             DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
             int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
-            UserRoleDataService userRoleDataService = new UserRoleDataService(_dbHelper);
+            UserRoleDataService userRoleDataService = new UserRoleDataService();
             await userRoleDataService.AssignRoleAsync(newId, roleId);
             Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
         }

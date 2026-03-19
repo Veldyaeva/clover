@@ -35,7 +35,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             InitializeComponent();
             dbService = new DbService(dbHelper);
             _userModelDataService = new UserModelDataService();
-            _userRoleDataService = new UserRoleDataService(dbHelper);
+            _userRoleDataService = new UserRoleDataService();
             _roleDataService = new RoleDataService();
             _allRoleDataService = new AllRoleDataService(dbHelper);
             _allProfileDataService = new AllProfileDataService(dbHelper);

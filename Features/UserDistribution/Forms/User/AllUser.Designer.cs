@@ -68,7 +68,11 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             // gridViewRoles
             // 
+            gridViewRoles.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewRoles.Appearance.HeaderPanel.Options.UseFont = true;
+            gridViewRoles.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewRoles.Appearance.Row.Options.UseBackColor = true;
+            gridViewRoles.Appearance.Row.Options.UseFont = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBackColor = true;
             gridViewRoles.AppearancePrint.EvenRow.Options.UseBorderColor = true;
             gridViewRoles.AppearancePrint.GroupRow.Options.UseBackColor = true;
@@ -88,7 +92,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             gridViewRoles.OptionsPrint.EnableAppearanceEvenRow = true;
             gridViewRoles.OptionsPrint.EnableAppearanceOddRow = true;
             gridViewRoles.OptionsPrint.MaxMergedCellHeight = 1080;
-            gridViewRoles.OptionsView.ShowGroupPanel = false;
             gridViewRoles.SelectionChanged += gridViewRoles_SelectionChanged;
             gridViewRoles.FocusedRowChanged += gridViewRoles_FocusedRowChanged;
             // 
@@ -148,7 +151,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGridControlUser.Name = "customGridControlUser";
             customGridControlUser.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEdit1, repositoryItemLookUpEditBrig, repositoryItemLookUpEditFio });
             tableLayoutPanel1.SetRowSpan(customGridControlUser, 10);
-            customGridControlUser.Size = new System.Drawing.Size(1124, 646);
+            customGridControlUser.Size = new System.Drawing.Size(1047, 646);
             customGridControlUser.TabIndex = 0;
             customGridControlUser.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewUsers, gridViewRoles });
             customGridControlUser.Load += customGridControlUsers_Load;
@@ -156,10 +159,16 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // gridViewUsers
             // 
             gridViewUsers.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewUsers.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            gridViewUsers.Appearance.HeaderPanel.Options.UseFont = true;
             gridViewUsers.Appearance.Row.BackColor = System.Drawing.Color.FromArgb(250, 250, 200);
+            gridViewUsers.Appearance.Row.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewUsers.Appearance.Row.Options.UseBackColor = true;
+            gridViewUsers.Appearance.Row.Options.UseFont = true;
             gridViewUsers.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 192, 255);
+            gridViewUsers.AppearancePrint.EvenRow.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             gridViewUsers.AppearancePrint.EvenRow.Options.UseBackColor = true;
+            gridViewUsers.AppearancePrint.EvenRow.Options.UseFont = true;
             gridViewUsers.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { UserID, UserNameUsers, BrigID, Brig, FioID, Fio, Password });
             gridViewUsers.DetailHeight = 4038;
             gridViewUsers.GridControl = customGridControlUser;
@@ -172,6 +181,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             gridViewUsers.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
             gridViewUsers.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.True;
             gridViewUsers.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.True;
+            gridViewUsers.OptionsFind.AlwaysVisible = true;
+            gridViewUsers.OptionsFind.FindNullPrompt = "Поиск...";
+            gridViewUsers.OptionsFind.FindPanelLocation = DevExpress.XtraGrid.Views.Grid.GridFindPanelLocation.Panel;
             gridViewUsers.OptionsPrint.EnableAppearanceEvenRow = true;
             gridViewUsers.OptionsView.EnableAppearanceEvenRow = true;
             gridViewUsers.OptionsView.ShowGroupPanel = false;
@@ -196,6 +208,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             UserNameUsers.Name = "UserNameUsers";
             UserNameUsers.Visible = true;
             UserNameUsers.VisibleIndex = 0;
+            UserNameUsers.Width = 335;
             // 
             // BrigID
             // 
@@ -215,7 +228,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Brig.Name = "Brig";
             Brig.Visible = true;
             Brig.VisibleIndex = 1;
-            Brig.Width = 87;
+            Brig.Width = 381;
             // 
             // repositoryItemLookUpEditBrig
             // 
@@ -246,7 +259,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             Fio.Name = "Fio";
             Fio.Visible = true;
             Fio.VisibleIndex = 2;
-            Fio.Width = 87;
+            Fio.Width = 383;
             // 
             // repositoryItemLookUpEditFio
             // 
@@ -278,8 +291,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.86327F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.1367245F));
             tableLayoutPanel1.Controls.Add(customButtonUserPodr, 1, 3);
             tableLayoutPanel1.Controls.Add(customButtonShareUser, 1, 2);
             tableLayoutPanel1.Controls.Add(customButtonCopyUser, 1, 1);
@@ -308,11 +321,11 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customButtonUserPodr.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonUserPodr.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonUserPodr.Location = new System.Drawing.Point(1136, 198);
+            customButtonUserPodr.Location = new System.Drawing.Point(1059, 198);
             customButtonUserPodr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonUserPodr.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonUserPodr.Name = "customButtonUserPodr";
-            customButtonUserPodr.Size = new System.Drawing.Size(160, 59);
+            customButtonUserPodr.Size = new System.Drawing.Size(195, 59);
             customButtonUserPodr.TabIndex = 14;
             customButtonUserPodr.Text = "Администрирование табеля";
             customButtonUserPodr.UseVisualStyleBackColor = false;
@@ -322,10 +335,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customButtonShareUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonShareUser.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonShareUser.Location = new System.Drawing.Point(1136, 133);
+            customButtonShareUser.Location = new System.Drawing.Point(1059, 133);
             customButtonShareUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonShareUser.Name = "customButtonShareUser";
-            customButtonShareUser.Size = new System.Drawing.Size(118, 59);
+            customButtonShareUser.Size = new System.Drawing.Size(195, 59);
             customButtonShareUser.TabIndex = 4;
             customButtonShareUser.Text = "Поделиться  пользователем";
             customButtonShareUser.UseVisualStyleBackColor = false;
@@ -335,10 +348,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customButtonCopyUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonCopyUser.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonCopyUser.Location = new System.Drawing.Point(1136, 68);
+            customButtonCopyUser.Location = new System.Drawing.Point(1059, 68);
             customButtonCopyUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonCopyUser.Name = "customButtonCopyUser";
-            customButtonCopyUser.Size = new System.Drawing.Size(118, 59);
+            customButtonCopyUser.Size = new System.Drawing.Size(195, 59);
             customButtonCopyUser.TabIndex = 3;
             customButtonCopyUser.Text = "Копировать  пользователя";
             customButtonCopyUser.UseVisualStyleBackColor = false;
@@ -348,10 +361,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customButtonAddUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddUser.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAddUser.Location = new System.Drawing.Point(1136, 3);
+            customButtonAddUser.Location = new System.Drawing.Point(1059, 3);
             customButtonAddUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAddUser.Name = "customButtonAddUser";
-            customButtonAddUser.Size = new System.Drawing.Size(118, 59);
+            customButtonAddUser.Size = new System.Drawing.Size(195, 59);
             customButtonAddUser.TabIndex = 1;
             customButtonAddUser.Text = "Добавить пользователя";
             customButtonAddUser.UseVisualStyleBackColor = false;
@@ -361,10 +374,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // 
             customButtonDeleteUser.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteUser.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonDeleteUser.Location = new System.Drawing.Point(1136, 588);
+            customButtonDeleteUser.Location = new System.Drawing.Point(1059, 588);
             customButtonDeleteUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonDeleteUser.Name = "customButtonDeleteUser";
-            customButtonDeleteUser.Size = new System.Drawing.Size(118, 61);
+            customButtonDeleteUser.Size = new System.Drawing.Size(195, 61);
             customButtonDeleteUser.TabIndex = 2;
             customButtonDeleteUser.Text = "Удалить пользователя";
             customButtonDeleteUser.UseVisualStyleBackColor = false;
