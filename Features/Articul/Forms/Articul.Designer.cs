@@ -155,7 +155,7 @@ namespace SewingProduction.Features.Articul
             txbBrak7 = new DevExpress.XtraEditors.TextEdit();
             sButtodDeleteKod = new DevExpress.XtraEditors.SimpleButton();
             customSimpleButton7 = new CustomSimpleButton();
-            customSimpleButton2 = new CustomSimpleButton();
+            btnPublishedArticles = new CustomSimpleButton();
             customButtonKompl = new CustomSimpleButton();
             csButtonNew = new CustomSimpleButton();
             csButtonEdit = new CustomSimpleButton();
@@ -652,7 +652,7 @@ namespace SewingProduction.Features.Articul
             customLayoutControl1.Controls.Add(txbBrak7);
             customLayoutControl1.Controls.Add(sButtodDeleteKod);
             customLayoutControl1.Controls.Add(customSimpleButton7);
-            customLayoutControl1.Controls.Add(customSimpleButton2);
+            customLayoutControl1.Controls.Add(btnPublishedArticles);
             customLayoutControl1.Controls.Add(customButtonCopy);
             customLayoutControl1.Controls.Add(customButtonKompl);
             customLayoutControl1.Controls.Add(csButtonNew);
@@ -2084,21 +2084,22 @@ namespace SewingProduction.Features.Articul
             customSimpleButton7.Text = "Вшивки";
             customSimpleButton7.Click += customSimpleButton7_Click;
             // 
-            // customSimpleButton2
+            // btnPublishedArticles
             // 
-            customSimpleButton2.Appearance.Font = new Font("Arial", 10F);
-            customSimpleButton2.Appearance.Options.UseFont = true;
-            customSimpleButton2.AppearanceDisabled.BackColor = Color.Green;
-            customSimpleButton2.AppearanceDisabled.ForeColor = Color.GreenYellow;
-            customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
-            customSimpleButton2.AppearanceDisabled.Options.UseForeColor = true;
-            customSimpleButton2.Location = new Point(190, 452);
-            customSimpleButton2.MaximumSize = new Size(285, 26);
-            customSimpleButton2.Name = "customSimpleButton2";
-            customSimpleButton2.Size = new Size(169, 26);
-            customSimpleButton2.StyleController = customLayoutControl1;
-            customSimpleButton2.TabIndex = 6;
-            customSimpleButton2.Text = "Опублик.артикулы";
+            btnPublishedArticles.Appearance.Font = new Font("Arial", 10F);
+            btnPublishedArticles.Appearance.Options.UseFont = true;
+            btnPublishedArticles.AppearanceDisabled.BackColor = Color.Green;
+            btnPublishedArticles.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            btnPublishedArticles.AppearanceDisabled.Options.UseBackColor = true;
+            btnPublishedArticles.AppearanceDisabled.Options.UseForeColor = true;
+            btnPublishedArticles.Location = new Point(241, 499);
+            btnPublishedArticles.MaximumSize = new Size(285, 26);
+            btnPublishedArticles.Name = "btnPublishedArticles";
+            btnPublishedArticles.Size = new Size(172, 26);
+            btnPublishedArticles.StyleController = customLayoutControl1;
+            btnPublishedArticles.TabIndex = 6;
+            btnPublishedArticles.Text = "Опублик.артикулы";
+            btnPublishedArticles.Click += btnPublishedArticles_Click;
             // 
             // customButtonKompl
             // 
@@ -3464,8 +3465,8 @@ namespace SewingProduction.Features.Articul
             // 
             // layoutControlItem90
             // 
-            layoutControlItem90.Control = customSimpleButton2;
-            layoutControlItem90.Location = new Point(173, 31);
+            layoutControlItem90.Control = btnPublishedArticles;
+            layoutControlItem90.Location = new Point(224, 30);
             layoutControlItem90.MinSize = new Size(121, 30);
             layoutControlItem90.Name = "layoutControlItem90";
             layoutControlItem90.OptionsTableLayoutItem.RowIndex = 1;
@@ -4064,7 +4065,7 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private CustomSimpleButton csButtonNew;
-        private CustomSimpleButton customSimpleButton2;
+        private CustomSimpleButton btnPublishedArticles;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
         private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
