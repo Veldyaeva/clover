@@ -43,7 +43,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             //_serviceBrokerForTable1.StartBroker();
             //_serviceBrokerForTable1.StartListening("TestID, TestName, TestFirst, TestSecond", "testTable1");
             //    _serviceBrokerForTable1.StartBroker();
-            _serviceBrokerForTable1.StartListening("TestID, TestName", "testTable1");
+           // _serviceBrokerForTable1.StartListening("TestID, TestName", "testTable1");
             //_serviceBrokerForTable2.StartBroker();
             //_serviceBrokerForTable2.StartListening("idZeh, nameZeh, address, idProizv", "ZehList");
             await LoadDataAsync();

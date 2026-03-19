@@ -77,35 +77,35 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)searchControl1.Properties).BeginInit();
             SuspendLayout();
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "gridColumn1";
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
             gridColumn1.VisibleIndex = 0;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "gridColumn2";
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
             gridColumn2.VisibleIndex = 1;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "gridColumn3";
             gridColumn3.Name = "gridColumn3";
             gridColumn3.Visible = true;
             gridColumn3.VisibleIndex = 2;
             // 
-            // gridColumn4
+            // gcCertArticul1
             // 
             gridColumn4.Caption = "gridColumn4";
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
             gridColumn4.VisibleIndex = 3;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "gridColumn5";
             gridColumn5.Name = "gridColumn5";
@@ -191,12 +191,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             colobor.Name = "colobor";
             colobor.Width = 48;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Caption = "gridColumn8";
             gridColumn8.Name = "gridColumn8";
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Caption = "gridColumn7";
             gridColumn7.Name = "gridColumn7";
@@ -252,7 +252,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             coltext_vyaz.VisibleIndex = 5;
             coltext_vyaz.Width = 77;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "Код";
             gridColumn6.FieldName = "kod";

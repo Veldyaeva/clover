@@ -335,7 +335,7 @@
             gridViewObject.OptionsEditForm.EditFormColumnCount = 1;
             gridViewObject.OptionsEditForm.PopupEditFormWidth = 933;
             // 
-            // gridColumn5
+            // gcCertMod1
             // 
             gridColumn5.Caption = "Ид обьекта";
             gridColumn5.FieldName = "ObjectID";
@@ -346,7 +346,7 @@
             gridColumn5.VisibleIndex = 0;
             gridColumn5.Width = 99;
             // 
-            // gridColumn6
+            // gcCertTm_name1
             // 
             gridColumn6.Caption = "Имя объекта";
             gridColumn6.FieldName = "ObjectName";
@@ -356,7 +356,7 @@
             gridColumn6.VisibleIndex = 1;
             gridColumn6.Width = 255;
             // 
-            // gridColumn7
+            // gcCertGrup1
             // 
             gridColumn7.Caption = "Русское имя";
             gridColumn7.FieldName = "ObjectNameRus";
@@ -431,7 +431,7 @@
             gridViewForms.OptionsEditForm.EditFormColumnCount = 1;
             gridViewForms.OptionsEditForm.PopupEditFormWidth = 933;
             // 
-            // gridColumn1
+            // gcCertGrupmen_name1
             // 
             gridColumn1.Caption = "Ид формы";
             gridColumn1.FieldName = "ProjectFormsID";
@@ -440,7 +440,7 @@
             gridColumn1.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn1.Width = 84;
             // 
-            // gridColumn2
+            // gcCertTsn_name1
             // 
             gridColumn2.Caption = "Имя формы";
             gridColumn2.FieldName = "NameForm";
@@ -450,7 +450,7 @@
             gridColumn2.VisibleIndex = 0;
             gridColumn2.Width = 250;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Caption = "Русское имя";
             gridColumn3.FieldName = "NameFormRus";
@@ -460,7 +460,7 @@
             gridColumn3.VisibleIndex = 1;
             gridColumn3.Width = 241;
             // 
-            // gridColumn8
+            // gcCertText_mo1
             // 
             gridColumn8.Caption = "Доступ";
             gridColumn8.ColumnEdit = repositoryItemComboBoxForms;

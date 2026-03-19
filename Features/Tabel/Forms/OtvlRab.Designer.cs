@@ -934,7 +934,7 @@ namespace SewingProduction.Features.Tabel.Forms
             layoutControlItem2.Size = new System.Drawing.Size(101, 34);
             layoutControlItem2.TextVisible = false;
             // 
-            // gridColumn3
+            // gcCertTb_id1
             // 
             gridColumn3.Name = "gridColumn3";
             // 

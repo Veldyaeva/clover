@@ -109,8 +109,6 @@ namespace SewingProduction.Features.Articul.Forms
             _nRub_k = nRub_kTask.Result;
             _bindingSourceArtKod.DataSource = edAdvTask.Result;
 
-
-
             //доступ на определенную колонку
             //gridEditAdRazm.InitializeAccess(_user, this.Name, new List<string> { "view_sp_articul" });
 
@@ -206,7 +204,6 @@ namespace SewingProduction.Features.Articul.Forms
                 #region заполнение блока основных данных артикула
 
                 txbArticul.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Articul), true);
-
                 txbMod.DataBindings.Add("Text", _bindingSourceArtCommon, nameof(ArticulModel.Mod), true);
 
                 //госты

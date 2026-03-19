@@ -600,7 +600,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         //        //------------------------------
         //        //gridViewKnitMachineLoadInfoCards.CustomDrawCell += (s, e) =>
         //        //{
-        //        //    if (e.Column == gridColumn1)
+        //        //    if (e.Column == gcCertGrupmen_name1)
         //        //    {
         //        //        string rtf = e.CellValue as string;
 

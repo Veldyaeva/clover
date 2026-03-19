@@ -10,6 +10,7 @@
     <ApplicationIcon>Resources\AppIcons\favicon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -17,7 +18,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Articul\Forms\Articul_lena.cs" />
     <Compile Remove="Features\KnittingProduction\Forms\KnitterWorkSpace.patched.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SplashImages\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 
@@ -169,6 +178,7 @@
     <PackageReference Include="DevExpress.Win.Design" Version="25.2.4" />
     <PackageReference Include="DevExpress.Win.Printing" Version="25.2.4" />
     <PackageReference Include="DevExpress.Win.Reporting" Version="25.2.4" />
+    <PackageReference Include="DevExpress.Wpf.Core" Version="25.2.4" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />

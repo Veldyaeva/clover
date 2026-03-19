@@ -60,16 +60,29 @@ namespace SewingProduction.Services
         /// <returns>Список объектов типа T</returns>
         public async Task<List<T>> GetListAsync<T>(string query, object parameters)
         {
+            //try
+            //{
+            //    using (var connection = _dbHelper.GetConnection())
+            //    {
+            //        var result = await connection.QueryAsync<T>(query, parameters);
+            //        return result.ToList();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{ return null; }
+
             try
             {
-                using (var connection = _dbHelper.GetConnection())
-                {
-                    var result = await connection.QueryAsync<T>(query, parameters);
-                    return result.ToList();
-                }
+                using var connection = _dbHelper.GetConnection();
+                var result = await connection.QueryAsync<T>(query, parameters);
+                return result.AsList();
             }
             catch (Exception ex)
-            { return null; }
+            {
+                _logger.LogErrorAsync(ex, "SQL Error");
+                throw; 
+            }
+
         }
 
         /// <summary>

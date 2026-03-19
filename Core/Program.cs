@@ -10,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using SewingProduction.Core;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Core.interfaces;
+using SewingProduction.Core.services;
 using SewingProduction.Features.KnittingProduction.Forms;
 using SewingProduction.Features.KnittingProduction.Forms.KnitterWS.Service;
 using SewingProduction.Helpers;
@@ -20,10 +22,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SewingProduction.ServiceBroker;
 
 
 namespace SewingProduction.Core
@@ -45,6 +49,7 @@ namespace SewingProduction.Core
         private static ILogger _logger = new HybridLogger();
 
         private const string DefaultSkin = "Office 2019 Colorful";
+        private const string SqlFirstChanceVerboseEnv = "SP_SQL_TRACE_ALL";
 
         /// <summary>
         /// Главная точка входа для приложения.
@@ -52,6 +57,7 @@ namespace SewingProduction.Core
         [STAThread]
         static void Main(string[] args)
         {
+            RegisterSqlFirstChanceTrace();
             //PrintDialogRunner.Instance = new DefaultPrintDialogRunner();
             //Debug.WriteLine(PrintDialogRunner.Instance.GetType().FullName);
             //PrintDialogRunner.Instance = new DefaultPrintDialogRunner();
@@ -84,6 +90,7 @@ namespace SewingProduction.Core
                 GridLocalizer.Active = new CustomLocalizer();
 
                 Application.EnableVisualStyles();
+                EnsureSeasonImagesInRoaming();
                 Application.SetCompatibleTextRenderingDefault(false);
                 DapperMappings.Configure();
 
@@ -92,28 +99,29 @@ namespace SewingProduction.Core
                 ConfigureServices(services);
                 var provider = services.BuildServiceProvider();
                 AppServices.Configure(provider);
-                //SqlDependency.Start(SettingsManager.GetCurrentConnectionString());
-                //Application.ApplicationExit += (_, __) =>
-                //    SqlDependency.Stop(SettingsManager.GetCurrentConnectionString());
-                var qnConn = SettingsManager.GetCurrentConnectionString();
-                SqlDependency.Start(qnConn);
-                
-                void StopQN()
+                ServiceBrokerSettings.Enabled = true;
+                var sqlDependencyConnection = SettingsManager.GetCurrentConnectionString();
+                var sqlDependencyStarted = false;
+                if (ServiceBrokerSettings.Enabled && !string.IsNullOrWhiteSpace(sqlDependencyConnection))
                 {
-                    try { SqlDependency.Stop(qnConn); } catch { }
+                    try
+                    {
+                        SqlDependency.Start(sqlDependencyConnection);
+                        sqlDependencyStarted = true;
+                        Debug.WriteLine("[Program] SqlDependency.Start initialized globally.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"[Program] SqlDependency.Start failed: {ex}");
+                    }
                 }
-                
-                Application.ApplicationExit += (_, __) => StopQN();
-                AppDomain.CurrentDomain.ProcessExit += (_, __) => StopQN();
-                AppDomain.CurrentDomain.DomainUnload += (_, __) => StopQN();
-
-                EnsureSeasonImagesInRoaming();
-
                 using (SplashScreen splashScreen = new SplashScreen())
                 {
-                    splashScreen.Show();
-                    splashScreen.Update();
-                    Application.DoEvents();
+                    try
+                    {
+                        splashScreen.Show();
+                        splashScreen.Update();
+                        Application.DoEvents();
 
                     if (!ValidateSystemDate(out var dateError))
                     {
@@ -160,14 +168,133 @@ namespace SewingProduction.Core
                     //PrintingSystemLocalizer.Active = new DxPrintingLocalizerRu(traceUnknown);
                     PreviewLocalizer.Active = new DxPreviewLocalizerRu();
                     
-                    splashScreen.Close();
+                        splashScreen.Close();
 
-                    Application.Run(mainForm);
+                        Application.Run(mainForm);
+                    }
+                    finally
+                    {
+                        if (sqlDependencyStarted && !string.IsNullOrWhiteSpace(sqlDependencyConnection))
+                        {
+                            try
+                            {
+                                SqlDependency.Stop(sqlDependencyConnection);
+                                Debug.WriteLine("[Program] SqlDependency.Stop completed.");
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine($"[Program] SqlDependency.Stop failed: {ex}");
+                            }
+                        }
+                    }
                 }
 
             }
         }
-        private static string PickExistingSkinOrDefault(string? skinName, string defaultSkin)
+        [Conditional("DEBUG")]
+        private static void RegisterSqlFirstChanceTrace()
+        {
+            var (traceTransient, rawEnvValue, envSource) = ResolveSqlFirstChanceVerbose();
+            Debug.WriteLine(
+                $"[SQL-FIRST-CHANCE] Trace enabled. IncludeTransient={traceTransient}, " +
+                $"{SqlFirstChanceVerboseEnv}='{rawEnvValue ?? "<null>"}', Source={envSource}");
+
+            AppDomain.CurrentDomain.FirstChanceException += (_, e) =>
+            {
+                if (e?.Exception is not SqlException sqlEx)
+                    return;
+
+                // Для SqlDependency Query Notifications SqlClient может бросать и сам
+                // перехватывать транзиентные first-chance (-2 timeout при регистрации,
+                // 2714 duplicate internal QN procedure). Не засоряем лог ими.
+                if (!traceTransient && (sqlEx.Number == -2 || sqlEx.Number == 2714))
+                    return;
+
+                var topStack = sqlEx.StackTrace;
+                if (!string.IsNullOrWhiteSpace(topStack))
+                {
+                    var nl = topStack.IndexOf('\n');
+                    if (nl > 0)
+                        topStack = topStack[..nl].Trim();
+                }
+
+                Debug.WriteLine(
+                    $"[SQL-FIRST-CHANCE] Number={sqlEx.Number}, State={sqlEx.State}, Class={sqlEx.Class}, " +
+                    $"Procedure={sqlEx.Procedure}, Line={sqlEx.LineNumber}, " +
+                    $"ClientConnectionId={sqlEx.ClientConnectionId}, ThreadId={Environment.CurrentManagedThreadId}, " +
+                    $"Message={sqlEx.Message}");
+                if (ServiceBroker.TryGetConnectionContext(sqlEx.ClientConnectionId, out var sbContext))
+                {
+                    Debug.WriteLine($"[SQL-FIRST-CHANCE] ServiceBrokerContext={sbContext}");
+                }
+                else if (traceTransient)
+                {
+                    var snapshot = ServiceBroker.GetActiveConnectionContextsSnapshot();
+                    Debug.WriteLine(
+                        $"[SQL-FIRST-CHANCE] ServiceBrokerContext=<not found>, ActiveContexts={snapshot}");
+                }
+                if (!string.IsNullOrWhiteSpace(topStack))
+                    Debug.WriteLine($"[SQL-FIRST-CHANCE] TopFrame={topStack}");
+
+                try
+                {
+                    var allErrors = sqlEx.Errors
+                        .Cast<SqlError>()
+                        .Select(err => $"#{err.Number}/S{err.State}/C{err.Class}/P:{err.Procedure}/L:{err.LineNumber} -> {err.Message}")
+                        .ToArray();
+
+                    if (allErrors.Length > 0)
+                        Debug.WriteLine("[SQL-FIRST-CHANCE] Errors=[" + string.Join(" | ", allErrors) + "]");
+                }
+                catch { }
+
+                try
+                {
+                    var st = new StackTrace(fNeedFileInfo: false);
+                    var appFrame = st.GetFrames()?
+                        .Select(f => f.GetMethod())
+                        .FirstOrDefault(m =>
+                            m?.DeclaringType?.FullName?.StartsWith("SewingProduction.", StringComparison.Ordinal) == true &&
+                            !string.Equals(m.DeclaringType?.FullName, typeof(Program).FullName, StringComparison.Ordinal) &&
+                            !string.Equals(m.Name, "RegisterSqlFirstChanceTrace", StringComparison.Ordinal));
+
+                    if (appFrame != null)
+                    {
+                        Debug.WriteLine(
+                            $"[SQL-FIRST-CHANCE] AppFrame={appFrame.DeclaringType!.FullName}.{appFrame.Name}");
+                    }
+                }
+                catch { }
+            };
+        }
+        private static (bool Enabled, string? RawValue, string Source) ResolveSqlFirstChanceVerbose()
+        {
+            string? value = Environment.GetEnvironmentVariable(SqlFirstChanceVerboseEnv);
+            string source = "process";
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                value = Environment.GetEnvironmentVariable(SqlFirstChanceVerboseEnv, EnvironmentVariableTarget.User);
+                source = "user";
+            }
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                value = Environment.GetEnvironmentVariable(SqlFirstChanceVerboseEnv, EnvironmentVariableTarget.Machine);
+                source = "machine";
+            }
+
+            if (string.IsNullOrWhiteSpace(value))
+                return (false, value, source);
+
+            bool enabled =
+                string.Equals(value.Trim(), "1", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(value.Trim(), "true", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(value.Trim(), "yes", StringComparison.OrdinalIgnoreCase);
+
+            return (enabled, value, source);
+        }
+        private static string PickExistingSkinOrDefault(string skinName, string defaultSkin)
         {
             if (!string.IsNullOrWhiteSpace(skinName) && SkinExists(skinName))
                 return skinName;
@@ -188,6 +315,7 @@ namespace SewingProduction.Core
         private static void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<DatabaseHelper>();
+            services.AddSingleton<IAppServiceBrokerHub, AppServiceBrokerHub>();
             services.AddTransient<ILogger, HybridLogger>();
             services.AddTransient<IKnitterRepository, KnitterRepository>();
             services.AddTransient<IKnitterOrchestrator, KnitterOrchestrator>();
@@ -258,24 +386,25 @@ namespace SewingProduction.Core
 
         private static void EnsureSeasonImagesInRoaming()
         {
+            string sourceRoot = Path.Combine(AppContext.BaseDirectory, "SplashImages");
+            string destinationRoot = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "SewingProduction",
+                "SplashImages");
+
             try
             {
-                string sourceRoot = Path.Combine(AppContext.BaseDirectory, "SplashImages");
                 if (!Directory.Exists(sourceRoot))
                 {
                     return;
                 }
 
-                string SplashImages = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                    "SewingProduction",
-                    "SplashImages");
-                Directory.CreateDirectory(SplashImages);
+                Directory.CreateDirectory(destinationRoot);
 
                 foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
                 {
                     string relativePath = Path.GetRelativePath(sourceRoot, sourceFile);
-                    string destinationFile = Path.Combine(SplashImages, relativePath);
+                    string destinationFile = Path.Combine(destinationRoot, relativePath);
                     string destinationDir = Path.GetDirectoryName(destinationFile);
                     if (!string.IsNullOrEmpty(destinationDir))
                     {
@@ -290,7 +419,13 @@ namespace SewingProduction.Core
             }
             catch (Exception ex)
             {
-                try { _ = _logger.LogErrorAsync(ex, "Failed to seed splash images to Roaming settings"); } catch { }
+                try
+                {
+                    _ = _logger.LogErrorAsync(
+                        ex,
+                        $"Failed to seed splash images. Source='{sourceRoot}', Destination='{destinationRoot}', Error='{ex.Message}'");
+                }
+                catch { }
             }
         }
 
