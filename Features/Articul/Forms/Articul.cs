@@ -64,7 +64,7 @@ namespace SewingProduction.Features.Articul
 
         private readonly BindingSource bsPreview = new(); // для грида
         private readonly BindingSource bsDetails = new(); // для карточки/деталей
-        private readonly BindingList<SpArtPreviewModel> _previewList = new(); 
+        private readonly BindingList<SpArtPreviewModel> _previewList = new();
         private int _loadVersion = 0;
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -207,7 +207,7 @@ namespace SewingProduction.Features.Articul
                 // включить редактирование (если нужно)
                 // articulControl1.IsReadOnly = false;
 
-             
+
                 // (желательно) чтобы при повторном вызове не плодились биндинги
                 chbIsUpak.DataBindings.Clear();
                 chbIsFurnit.DataBindings.Clear();
@@ -233,7 +233,7 @@ namespace SewingProduction.Features.Articul
                 txbKoef.DataBindings.Clear();
                 txbBrakAll.DataBindings.Clear();
 
-   #region галки с отделками
+                #region галки с отделками
                 //галки вяз отделки
                 //архив
                 //отделка
@@ -252,12 +252,12 @@ namespace SewingProduction.Features.Articul
                 txbNormt.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Norm_t), true, DataSourceUpdateMode.Never);
 
                 // TODO: добавить расчет полной с\ст на изделие по коду 
-             //   txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
+                //   txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
 
                 // нормы/себестоимость/брак и назначение полотна
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbNorm_t", "Norm_t", "F2", true);
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbTkanSeb_t", "Seb_t");
-                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t", "F2", true );
+                BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbBrak", "Brak_t", "F2", true);
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txtBrakPercent", "Brak_percent");
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbKfKach", "Kf_tkan_kach", "F2");
                 BindTextBoxesBySuffix(customLayoutControl1, bsDetails, "txbOpis_t", "Opis_t");
@@ -267,7 +267,7 @@ namespace SewingProduction.Features.Articul
 
                 #region брак
                 txbBrakAll.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Brak_avg), true, DataSourceUpdateMode.Never);
-                txbSeb.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Cena_prdc),true, DataSourceUpdateMode.Never);
+                txbSeb.DataBindings.Add("Text", bsDetails, nameof(SpArticulPreviewModel.Cena_prdc), true, DataSourceUpdateMode.Never);
 
                 #endregion
                 #region Норма/сек + зарплата 
@@ -886,5 +886,17 @@ namespace SewingProduction.Features.Articul
             }
         }
         #endregion
+
+        private void btnPublishedArticles_Click(object sender, EventArgs e)
+        {
+        
+        if (this.MdiParent is SpMainForm mainForm)
+        {
+            mainForm.OpenForm(new CreateArticulMatrForm(CurrentUser.User));
+            /*using (CreateArticulMatrForm f = new CreateArticulMatrForm(_user))
+            { }*/
+        }
+
+    }
     }
 }
